@@ -6,7 +6,8 @@
 //
 
 import XCTest
-@testable import GovUK
+
+@testable import govuk_ios
 
 final class GovUKTests: XCTestCase {
 

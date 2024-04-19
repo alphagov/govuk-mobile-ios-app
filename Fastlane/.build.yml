@@ -1,0 +1,17 @@
+---
+default:
+  app:
+    scheme: GovUK
+    display_name: GovUK - Dev
+    output_directory: .target
+  scan:
+    devices:
+      - iPhone 15 Pro
+unit:
+  app:
+    scheme: GovUK
+    display_name: GovUK - Dev
+    output_directory: .target
+  scan:
+    devices:
+      - iPhone 15 Pro

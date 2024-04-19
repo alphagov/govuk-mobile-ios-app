@@ -1,0 +1,44 @@
+require_relative 'Configuration'
+
+default_platform :ios
+
+platform :ios do
+ 
+  desc "Runs all the tests"
+  lane :unit do
+    unit_test
+  end
+
+  private_lane :unit_test do
+    scan(
+      scheme: configuration.app_scheme,
+      devices: ['iPhone 15 Pro'], # configuration.scan_devices,
+      clean: false,
+      prelaunch_simulator: true,
+      derived_data_path: './build_for_unit_testing'
+      )
+  end
+
+  # private_lane :build do |options|
+  #   gym(
+  #     scheme: configuration.app_scheme,
+  #     export_method: configuration.gym_export_method,
+  #     output_name: configuration.ipa_name,
+  #     output_directory: '.target',
+  #     clean: options[:clean].nil? ? true : options[:clean],
+  #     include_bitcode: true,
+  #     xcargs: configuration.gym_args,
+  #     export_options: configuration.export_options,
+  #     skip_profile_detection: true
+  #     )
+  # end
+
+
+end
+
+def configuration
+  @configuration ||= Configuration.new(
+    lane_context[SharedValues::LANE_NAME],
+    '.build.yml'
+    )
+end

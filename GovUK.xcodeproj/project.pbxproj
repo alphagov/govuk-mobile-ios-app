@@ -79,9 +79,8 @@
 		5DAD716B2BD250DA0075F648 = {
 			isa = PBXGroup;
 			children = (
-				5DAD71762BD250DB0075F648 /* GovUK */,
-				5DAD718D2BD250DF0075F648 /* GovUKTests */,
-				5DAD71972BD250DF0075F648 /* GovUKUITests */,
+				5DAD71B42BD286730075F648 /* Production */,
+				5DAD71B32BD286450075F648 /* Tests */,
 				5DAD71752BD250DB0075F648 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,6 +156,23 @@
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		5DAD71B32BD286450075F648 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5DAD718D2BD250DF0075F648 /* GovUKTests */,
+				5DAD71972BD250DF0075F648 /* GovUKUITests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		5DAD71B42BD286730075F648 /* Production */ = {
+			isa = PBXGroup;
+			children = (
+				5DAD71762BD250DB0075F648 /* GovUK */,
+			);
+			path = Production;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,7 +416,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -457,7 +473,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -476,7 +492,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GovUK/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = Production/GovUK/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -504,7 +520,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GovUK/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = Production/GovUK/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

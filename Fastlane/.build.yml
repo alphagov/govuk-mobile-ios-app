@@ -1,17 +1,17 @@
----
-default:
-  app:
+
+default: &DEFAULTS
+  app: &APP_DEFAULTS
     scheme: GovUK
     display_name: GovUK - Dev
-    output_directory: .target
+    output_directory: build_output
   scan:
     devices:
       - iPhone 15 Pro
+
 unit:
+  <<: *DEFAULTS
+
+alpha:
   app:
-    scheme: GovUK
-    display_name: GovUK - Dev
-    output_directory: .target
-  scan:
-    devices:
-      - iPhone 15 Pro
+    <<: *APP_DEFAULTS
+    display_name: GovUK - Alpha

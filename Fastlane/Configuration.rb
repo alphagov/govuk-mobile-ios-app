@@ -8,7 +8,7 @@ class Configuration
 
   def initialize(lane_name, yaml)
     @lane_name = lane_name
-    @yaml = YAML.load(yaml)[lane]
+    @yaml = YAML.load_file(yaml, aliases: true)[lane]
   end
 
   def build_number
@@ -33,11 +33,6 @@ class Configuration
 
   private
   def setting(prefix, key)
-    puts("------")
-    puts(prefix)
-    puts(lane)
-    puts(@yaml)
-    puts("------")
     @yaml[prefix.to_s][key.to_s]
   end
 

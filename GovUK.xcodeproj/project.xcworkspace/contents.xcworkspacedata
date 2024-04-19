@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/thomas.bates/Code/gds/govuk-mobile-ios-app/GovUK.xcodeproj">
    </FileRef>
 </Workspace>

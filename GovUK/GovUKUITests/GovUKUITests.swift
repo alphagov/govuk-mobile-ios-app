@@ -1,8 +1,8 @@
 //
-//  GovUKUITests.swift
-//  GovUKUITests
+// GOV.UK
 //
-//  Created by Thomas Bates on 19/04/2024.
+// Copyright © 2024 Government Digital Services.
+// All Rights Reserved.
 //
 
 import XCTest

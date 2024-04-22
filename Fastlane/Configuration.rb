@@ -1,11 +1,8 @@
+# frozen_string_literal: true
+
 require 'yaml'
 
 class Configuration
-
-  attr_reader :build_number
-  attr_reader :app_scheme, :app_output_directory, :app_display_name
-  attr_reader :scan_devices
-
   def initialize(lane_name, yaml)
     @lane_name = lane_name
     @yaml = YAML.load_file(yaml, aliases: true)[lane]
@@ -32,12 +29,14 @@ class Configuration
   end
 
   private
+
+  attr_reader :lane_name, :yaml
+
   def setting(prefix, key)
-    @yaml[prefix.to_s][key.to_s]
+    yaml[prefix.to_s][key.to_s]
   end
 
   def lane
-    @lane ||= @lane_name.split(' ').last
+    lane || @lane_name.split(' ').last
   end
-
 end

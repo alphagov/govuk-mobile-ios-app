@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-# Conficuration class to interface with .build.yml
+# Configuration class to interface with .build.yml
 class Configuration
   def initialize(lane_name, yaml)
     @lane_name = lane_name

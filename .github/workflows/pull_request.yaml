@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build and Test default scheme using any available iPhone simulator
+    name: Unit test
     runs-on: macos-14
 
     steps:
@@ -26,9 +26,6 @@ jobs:
 
       - name: Install Gems
         run: bundle install
-
-      - name: Rubocop
-        run: bundle exec rubocop
 
       - name: Unit tests
         env:

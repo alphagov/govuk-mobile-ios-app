@@ -7,6 +7,7 @@ default_platform :ios
 platform :ios do
   desc 'Runs all the tests'
   lane :unit do
+    lint
     unit_test
   end
 
@@ -22,6 +23,12 @@ platform :ios do
       clean: false,
       prelaunch_simulator: true,
       derived_data_path: './build_for_unit_testing'
+    )
+  end
+
+  private_lane :lint do
+    swiftlint(
+      strict: true
     )
   end
 

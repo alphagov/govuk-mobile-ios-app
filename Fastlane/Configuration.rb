@@ -37,6 +37,6 @@ class Configuration
   end
 
   def lane
-    lane || @lane_name.split(' ').last
+    @lane || lane_name.split(' ').last
   end
 end

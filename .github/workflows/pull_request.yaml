@@ -1,0 +1,39 @@
+name: iOS Pull Request
+
+on:
+  pull_request:
+    types: [ opened, reopened, synchronize, ready_for_review ]
+    branches: [ develop, release/*, main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and Test default scheme using any available iPhone simulator
+    runs-on: govuk-mobile-ios-dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: 'true'
+          fetch-depth: 0
+
+      - name: Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LC_ALL: "en_US.UTF-8"
+          LANG: "en_US.UTF-8"
+        run: |
+          pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+
+          export GEM_HOME=$HOME/.gem
+          export GEM_PATH=$HOME/.gem
+          
+          # Fixes issue with bundle install
+          eval "$(rbenv init - zsh)"
+          bundle install
+          
+          bundle exec fastlane unit_test

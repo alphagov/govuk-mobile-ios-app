@@ -21,8 +21,10 @@ jobs:
           lfs: 'true'
           fetch-depth: 0
 
-      - name: Build
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
+
+      - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LC_ALL: "en_US.UTF-8"

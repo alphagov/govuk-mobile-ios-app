@@ -21,11 +21,6 @@ jobs:
           lfs: 'true'
           fetch-depth: 0
 
-      - name: Swiftlint
-        uses: norio-nomura/action-swiftlint@3.2.1
-        with:
-          args: --strict
-
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
 

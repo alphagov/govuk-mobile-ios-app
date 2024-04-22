@@ -34,4 +34,4 @@ jobs:
 
           bundle install
           
-          bundle exec fastlane unit_test
+          bundle exec fastlane unit

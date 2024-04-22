@@ -2,6 +2,7 @@
 
 require 'yaml'
 
+# Conficuration class to interface with .build.yml
 class Configuration
   def initialize(lane_name, yaml)
     @lane_name = lane_name
@@ -37,6 +38,6 @@ class Configuration
   end
 
   def lane
-    @lane || lane_name.split(' ').last
+    @lane ||= lane_name.split(' ').last
   end
 end

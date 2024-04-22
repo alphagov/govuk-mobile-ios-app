@@ -24,12 +24,15 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
 
+      - name: Install Gems
+        run: bundle install
+
+      - name: Rubocop
+        run: bundle exec rubocop
+
       - name: Unit tests
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LC_ALL: "en_US.UTF-8"
           LANG: "en_US.UTF-8"
         run: |
-          bundle install
-          
           bundle exec fastlane unit

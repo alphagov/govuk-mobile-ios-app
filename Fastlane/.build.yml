@@ -2,7 +2,7 @@
 default: &DEFAULTS
   app: &APP_DEFAULTS
     scheme: GovUK
-    display_name: GovUK - Dev
+    display_name: Gov.UK - Dev
     output_directory: build_output
   scan:
     devices:
@@ -14,4 +14,4 @@ unit:
 alpha:
   app:
     <<: *APP_DEFAULTS
-    display_name: GovUK - Alpha
+    display_name: Gov.UK - Alpha

@@ -16,6 +16,7 @@ line_length:
   warning: 120
   ignores_urls: true
   ignores_interpolated_strings: true
+  ignores_comments: true
 large_tuple:
   warning: 3
   error: 4

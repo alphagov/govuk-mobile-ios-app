@@ -33,5 +33,6 @@ jobs:
 
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
+        if: always()
         with:
           args: --strict

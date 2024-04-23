@@ -26,6 +26,9 @@ jobs:
         with: 
           bundler-cache: true
 
+      - name: Select xcode
+        run: xcodes select
+
       - name: Unit tests
         env:
           LC_ALL: "en_US.UTF-8"

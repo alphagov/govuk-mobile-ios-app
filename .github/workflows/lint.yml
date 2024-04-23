@@ -9,8 +9,8 @@ on:
     branches: [ develop, release/*, main ]
 
 permissions:
-  checks: read
   contents: read
+  pull-requests: write
 
 jobs:
   run-linters:
@@ -26,6 +26,8 @@ jobs:
       
       - name: Rubocop
         uses: reviewdog/action-rubocop@v2
+        with:
+          use_bundler: true
 
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1

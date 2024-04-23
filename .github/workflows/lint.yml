@@ -27,7 +27,12 @@ jobs:
       - name: Install Gems
         run: bundle install
 
-      - name: Run linters
+      - name: Rubocop
         uses: wearerequired/lint-action@v2.3.0
         with:
           rubocop: true
+
+      - name: SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict

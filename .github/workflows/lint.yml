@@ -23,14 +23,9 @@ jobs:
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-
-      - name: Install Gems
-        run: bundle install
-
+      
       - name: Rubocop
-        uses: wearerequired/lint-action@v2.3.0
-        with:
-          rubocop: true
+        uses: reviewdog/action-rubocop@v2
 
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1

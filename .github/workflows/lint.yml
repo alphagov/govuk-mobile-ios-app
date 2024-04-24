@@ -7,10 +7,6 @@ on:
     types: [ opened, reopened, synchronize, ready_for_review ]
     branches: [ develop, release/*, main ]
 
-permissions:
-  contents: read
-  pull-requests: write
-
 jobs:
   run-linters:
     name: Run linters

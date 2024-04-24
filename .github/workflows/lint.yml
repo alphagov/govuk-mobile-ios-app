@@ -1,11 +1,7 @@
 name: Lint
 
 on:
-  push:
-    branches: [ develop, release/*, main ]
-  pull_request:
-    types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, release/*, main ]
+  workflow_call:
 
 jobs:
   run-linters:

@@ -1,9 +1,9 @@
-name: Pull Request
+name: Alpha
 
 on:
-  pull_request:
-    types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, release/*, main ]
+  push:
+    branches:
+      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

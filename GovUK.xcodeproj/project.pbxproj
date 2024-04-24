@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,6 @@
 		5DAD718F2BD250DF0075F648 /* GovUKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD718E2BD250DF0075F648 /* GovUKTests.swift */; };
 		5DAD71992BD250DF0075F648 /* GovUKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71982BD250DF0075F648 /* GovUKUITests.swift */; };
 		5DAD719B2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */; };
-		5DE25EF02BD7F106008F4D90 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5DE25EEF2BD7F106008F4D90 /* Onboarding */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DE25EF02BD7F106008F4D90 /* Onboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +201,6 @@
 			);
 			name = govuk_ios;
 			packageProductDependencies = (
-				5DE25EEF2BD7F106008F4D90 /* Onboarding */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -278,7 +275,6 @@
 			);
 			mainGroup = 5DAD716B2BD250DA0075F648;
 			packageReferences = (
-				5DE25EEE2BD7F106008F4D90 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -335,7 +331,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, please run brew install swiftlint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, please run brew install swiftlint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -695,20 +691,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		5DE25EEE2BD7F106008F4D90 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../govuk-mobile-ios-onboarding";
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5DE25EEF2BD7F106008F4D90 /* Onboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Onboarding;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5DAD716C2BD250DA0075F648 /* Project object */;
 }

@@ -1,0 +1,16 @@
+name: Alpha
+
+on:
+  push:
+    branches:
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+  unit-test:
+    uses: ./.github/workflows/unit_test.yml

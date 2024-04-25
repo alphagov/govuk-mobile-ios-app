@@ -93,3 +93,5 @@ fastlane/test_output
 iOSInjectionProject/
 .idea/
 secrets.xcconfig
+
+build_for_unit_testing/

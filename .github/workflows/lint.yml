@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-lint
+  cancel-in-progress: true
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      
+      - name: Rubocop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          use_bundler: true
+
+      - name: SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        if: always()
+        with:
+          args: --strict

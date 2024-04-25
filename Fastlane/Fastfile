@@ -1,0 +1,50 @@
+# frozen_string_literal: true
+
+require_relative 'configuration'
+
+default_platform :ios
+
+# rubocop:disable Metrics/BlockLength
+platform :ios do
+  desc 'Runs all the tests'
+  lane :unit do
+    unit_test
+  end
+
+  desc 'Builds alpha configuration'
+  lane :alpha do
+    update_build_number
+    build
+  end
+
+  private_lane :unit_test do
+    scan(
+      scheme: configuration.app_scheme,
+      devices: configuration.scan_devices,
+      clean: false,
+      prelaunch_simulator: true,
+      derived_data_path: './build_for_unit_testing'
+    )
+  end
+
+  private_lane :build do |options|
+    gym(
+      scheme: configuration.app_scheme,
+      output_directory: configuration.app_output_directory,
+      clean: options[:clean].nil? ? true : options[:clean],
+      skip_profile_detection: true
+    )
+  end
+
+  private_lane :update_build_number do
+    increment_build_number(build_number: configuration.build_number)
+  end
+end
+
+def configuration
+  @configuration ||= Configuration.new(
+    lane_context[SharedValues::LANE_NAME],
+    '.build.yml'
+  )
+end
+# rubocop:enable Metrics/BlockLength

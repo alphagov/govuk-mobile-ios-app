@@ -1,0 +1,24 @@
+included:
+  - Production
+
+analyzer_rules:
+- unused_import
+
+opt_in_rules:
+- private_action
+- private_outlet
+
+trailing_whitespace:
+  ignores_empty_lines: false
+vertical_whitespace:
+  max_empty_lines: 2
+line_length:
+  warning: 120
+  ignores_urls: true
+  ignores_interpolated_strings: true
+  ignores_comments: true
+large_tuple:
+  warning: 3
+  error: 4
+nesting:
+  type_level: 2

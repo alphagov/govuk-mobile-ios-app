@@ -190,6 +190,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DAD719E2BD250DF0075F648 /* Build configuration list for PBXNativeTarget "govuk_ios" */;
 			buildPhases = (
+				5D451E212BD69D6600673BC1 /* Lint */,
 				5DAD71702BD250DB0075F648 /* Sources */,
 				5DAD71712BD250DB0075F648 /* Frameworks */,
 				5DAD71722BD250DB0075F648 /* Resources */,
@@ -199,6 +200,8 @@
 			dependencies = (
 			);
 			name = govuk_ios;
+			packageProductDependencies = (
+			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
 			productType = "com.apple.product-type.application";
@@ -271,6 +274,8 @@
 				Base,
 			);
 			mainGroup = 5DAD716B2BD250DA0075F648;
+			packageReferences = (
+			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,6 +313,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5D451E212BD69D6600673BC1 /* Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Lint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, please run brew install swiftlint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5DAD71702BD250DB0075F648 /* Sources */ = {
@@ -499,6 +525,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -527,6 +554,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -5,8 +5,7 @@ class ViewController: UIViewController {
     private let color: UIColor
 
     init(color: UIColor,
-         tabTitle: String,
-         tag: Int) {
+         tabTitle: String) {
         self.color = color
         super.init(nibName: nil, bundle: nil)
         self.title = tabTitle

@@ -18,8 +18,7 @@ class ColorCoordinator {
     func start() {
         let viewController = ViewController(
             color: color,
-            tabTitle: title,
-            tag: 1
+            tabTitle: title
         )
         navigationController.setViewControllers(
             [viewController],

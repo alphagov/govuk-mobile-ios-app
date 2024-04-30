@@ -1,0 +1,33 @@
+{
+  "originHash" : "1309a87dfd80f254e0311a1afdcfa069aa98ef117e0feb9d0c7a5ffa1c31941a",
+  "pins" : [
+    {
+      "identity" : "govuk-mobile-ios-homepage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alphagov/govuk-mobile-ios-homepage",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "e43f0b37fd86a62cae3cd38ccae91831d2bf4f7c"
+      }
+    },
+    {
+      "identity" : "govuk-mobile-ios-onboarding",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alphagov/govuk-mobile-ios-onboarding",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "f13ff41e7aa3261151b3fb5bf5e11ebae0f5b8da"
+      }
+    },
+    {
+      "identity" : "govuk-mobile-ios-services",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alphagov/govuk-mobile-ios-services",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "80927f6fef6d3dc481be15c898613c9e72b8f901"
+      }
+    }
+  ],
+  "version" : 3
+}

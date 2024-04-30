@@ -8,15 +8,15 @@ class AppCoordinator {
         self.navigationController = navigationController
     }
 
-    func start(url: URL?) {
-        showTabs(url: url)
+    func start() {
+        showTabs()
     }
 
-    private func showTabs(url: URL?) {
+    private func showTabs() {
         let tabCoordinator = TabCoordinator(
             navigationController: navigationController
         )
-        tabCoordinator.start(url: url)
+        tabCoordinator.start()
     }
 
 }

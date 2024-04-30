@@ -15,13 +15,16 @@ class ColorCoordinator {
         self.navigationController = navigationController
     }
 
-    func start(url: URL?) {
+    func start() {
         let viewController = ViewController(
             color: color,
             tabTitle: title,
             tag: 1
         )
-        navigationController.setViewControllers([viewController], animated: false)
+        navigationController.setViewControllers(
+            [viewController],
+            animated: false
+        )
     }
 
 }

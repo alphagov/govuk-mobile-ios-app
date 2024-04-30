@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder,
         coordinator = AppCoordinator(
             navigationController: navigationController
         )
-        coordinator?.start(url: nil)
+        coordinator?.start()
     }
 
 }

@@ -46,9 +46,9 @@ class TabCoordinator {
         self.navigationController = navigationController
     }
 
-    func start(url: URL?) {
+    func start() {
         showTabs()
-        coordinators.forEach { $0.start(url: url) }
+        coordinators.forEach { $0.start() }
     }
 
     private func showTabs() {
@@ -57,7 +57,10 @@ class TabCoordinator {
             blueNavigationController,
             greenNavigationController
         ]
-        navigationController.setViewControllers([tabController], animated: false)
+        navigationController.setViewControllers(
+            [tabController],
+            animated: false
+        )
     }
 
 }

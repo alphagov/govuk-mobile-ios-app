@@ -1,7 +1,6 @@
 import UIKit
 
 class AppCoordinator {
-
     private let navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -18,5 +17,4 @@ class AppCoordinator {
         )
         tabCoordinator.start()
     }
-
 }

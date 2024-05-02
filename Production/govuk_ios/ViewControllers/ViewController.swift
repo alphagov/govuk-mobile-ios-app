@@ -1,7 +1,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     private let color: UIColor
 
     init(color: UIColor,
@@ -19,5 +18,4 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = color
     }
-
 }

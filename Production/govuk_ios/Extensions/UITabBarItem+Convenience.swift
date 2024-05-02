@@ -2,7 +2,6 @@ import UIKit
 import Foundation
 
 extension UITabBarItem {
-
     static var red: UITabBarItem {
         .init(
             title: "Red",
@@ -26,5 +25,4 @@ extension UITabBarItem {
             selectedImage: nil
         )
     }
-
 }

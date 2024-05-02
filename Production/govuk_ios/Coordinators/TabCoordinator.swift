@@ -2,7 +2,6 @@ import UIKit
 import Foundation
 
 class TabCoordinator {
-
     private let navigationController: UINavigationController
 
     private lazy var redNavigationController = UINavigationController.red
@@ -62,5 +61,4 @@ class TabCoordinator {
             animated: false
         )
     }
-
 }

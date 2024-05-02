@@ -2,7 +2,6 @@ import UIKit
 import Foundation
 
 class ColorCoordinator {
-
     private let navigationController: UINavigationController
     private let color: UIColor
     private let title: String
@@ -25,5 +24,4 @@ class ColorCoordinator {
             animated: false
         )
     }
-
 }

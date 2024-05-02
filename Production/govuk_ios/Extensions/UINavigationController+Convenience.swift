@@ -2,7 +2,6 @@ import UIKit
 import Foundation
 
 extension UINavigationController {
-
     static var red: UINavigationController {
         let navigationController = UINavigationController()
         navigationController.tabBarItem = .red
@@ -20,5 +19,4 @@ extension UINavigationController {
         navigationController.tabBarItem = .green
         return navigationController
     }
-
 }

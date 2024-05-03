@@ -95,3 +95,5 @@ iOSInjectionProject/
 secrets.xcconfig
 
 build_for_unit_testing/
+
+Package.resolved

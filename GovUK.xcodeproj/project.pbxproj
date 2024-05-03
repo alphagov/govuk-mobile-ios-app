@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
+		5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */; };
+		5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */; };
+		5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */; };
+		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
+		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
+		5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */; };
+		5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */; };
 		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* SceneDelegate.swift */; };
 		5DAD717C2BD250DB0075F648 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD717B2BD250DB0075F648 /* ViewController.swift */; };
-		5DAD717F2BD250DB0075F648 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD717E2BD250DB0075F648 /* Base */; };
 		5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD71802BD250DE0075F648 /* Assets.xcassets */; };
 		5DAD71842BD250DE0075F648 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD71832BD250DE0075F648 /* Base */; };
 		5DAD718F2BD250DF0075F648 /* GovUKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD718E2BD250DF0075F648 /* GovUKTests.swift */; };
@@ -36,11 +43,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
+		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
+		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
+		5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DAD71792BD250DB0075F648 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5DAD717B2BD250DB0075F648 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5DAD717E2BD250DB0075F648 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5DAD71802BD250DE0075F648 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DAD71832BD250DE0075F648 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DAD71852BD250DE0075F648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +67,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D2129E02BDF98E100142E46 /* Services in Frameworks */,
+				5D1353AB2BE0D75000414441 /* Homepage in Frameworks */,
+				5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,12 +90,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D1353A92BE0D75000414441 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5D1353AE2BE0D9A700414441 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */,
+				5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5D2129E92BDFA00E00142E46 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */,
+				5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */,
+				5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		5DAD716B2BD250DA0075F648 = {
 			isa = PBXGroup;
 			children = (
 				5DAD71B42BD286730075F648 /* Production */,
 				5DAD71B32BD286450075F648 /* Tests */,
 				5DAD71752BD250DB0075F648 /* Products */,
+				5D1353A92BE0D75000414441 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +139,8 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
+				5D2129E92BDFA00E00142E46 /* Coordinators */,
+				5D1353AE2BE0D9A700414441 /* Extensions */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
 				5DAD71A92BD2547F0075F648 /* Storyboards */,
 				5DAD71A72BD254460075F648 /* SupportingFiles */,
@@ -144,7 +187,6 @@
 		5DAD71A92BD2547F0075F648 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				5DAD717D2BD250DB0075F648 /* Main.storyboard */,
 				5DAD71822BD250DE0075F648 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -201,6 +243,9 @@
 			);
 			name = govuk_ios;
 			packageProductDependencies = (
+				5D2129DF2BDF98E100142E46 /* Services */,
+				5D2129E22BDF98EA00142E46 /* Onboarding */,
+				5D1353AA2BE0D75000414441 /* Homepage */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -275,6 +320,9 @@
 			);
 			mainGroup = 5DAD716B2BD250DA0075F648;
 			packageReferences = (
+				5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */,
+				5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -294,7 +342,6 @@
 			files = (
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 				5DAD71842BD250DE0075F648 /* Base in Resources */,
-				5DAD717F2BD250DB0075F648 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +387,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */,
+				5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */,
+				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
+				5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */,
+				5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* ViewController.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */,
@@ -379,14 +431,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5DAD717D2BD250DB0075F648 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5DAD717E2BD250DB0075F648 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5DAD71822BD250DE0075F648 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -530,7 +574,7 @@
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -559,7 +603,7 @@
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -691,6 +735,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-services";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-homepage";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5D1353AA2BE0D75000414441 /* Homepage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */;
+			productName = Homepage;
+		};
+		5D2129DF2BDF98E100142E46 /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */;
+			productName = Services;
+		};
+		5D2129E22BDF98EA00142E46 /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
+			productName = Onboarding;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5DAD716C2BD250DA0075F648 /* Project object */;
 }

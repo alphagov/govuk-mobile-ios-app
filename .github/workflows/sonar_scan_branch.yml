@@ -1,0 +1,51 @@
+name: Sonar scan - Branch
+
+on:
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        description: 'A token to be used to send sonar scan results'
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-sonar
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Sonar scan
+    runs-on: macos-14
+
+    steps:
+      - name: Add path globally
+        run: echo "/usr/local/bin" >> $GITHUB_PATH
+
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # pin@v4
+        with:
+          lfs: 'true'
+          fetch-depth: 0
+
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: build_output
+
+      - name: Run SonarCloud Scanning
+        run: |
+          brew install sonar-scanner
+
+          sonar-scanner \
+            -Dsonar.token=$SONAR_TOKEN \
+            -Dsonar.coverageReportPaths="build_output/sonarqube-generic-coverage.xml" \
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check SonarCloud Results
+        uses: sonarsource/sonarqube-quality-gate-action@d304d050d930b02a896b0f85935344f023928496 # pin@v1.1.0
+        # Force to fail step after specific time
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

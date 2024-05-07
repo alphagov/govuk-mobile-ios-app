@@ -25,6 +25,10 @@ class Configuration
     setting(:app, :display_name)
   end
 
+  def app_project
+    setting(:app, :project)
+  end
+
   def scan_devices
     setting(:scan, :devices)
   end

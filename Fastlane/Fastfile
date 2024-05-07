@@ -9,6 +9,7 @@ platform :ios do
   desc 'Runs all the tests'
   lane :unit do
     unit_test
+    convert_coverage
   end
 
   desc 'Builds alpha configuration'
@@ -23,7 +24,9 @@ platform :ios do
       devices: configuration.scan_devices,
       clean: false,
       prelaunch_simulator: true,
-      derived_data_path: './build_for_unit_testing'
+      derived_data_path: './build_for_unit_testing',
+      output_directory: configuration.app_output_directory,
+      code_coverage: true
     )
   end
 
@@ -33,6 +36,16 @@ platform :ios do
       output_directory: configuration.app_output_directory,
       clean: options[:clean].nil? ? true : options[:clean],
       skip_profile_detection: true
+    )
+  end
+
+  private_lane :convert_coverage do
+    slather(
+      build_directory: configuration.app_output_directory,
+      output_directory: configuration.app_output_directory,
+      sonarqube_xml: true,
+      scheme: configuration.app_scheme,
+      proj: configuration.app_project
     )
   end
 

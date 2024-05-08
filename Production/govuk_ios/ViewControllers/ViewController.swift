@@ -18,4 +18,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = color
     }
+
+    private func fakeMethodNotCalled() {
+        print("Here is some codez")
+    }
+
 }

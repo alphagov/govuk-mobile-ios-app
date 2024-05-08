@@ -8,6 +8,7 @@ class ViewController: UIViewController {
         self.color = color
         super.init(nibName: nil, bundle: nil)
         self.title = tabTitle
+        fakeMethodCovered()
     }
 
     required init?(coder: NSCoder) {
@@ -17,5 +18,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = color
+    }
+
+    private func fakeMethodCovered() {
+        print("Covered")
     }
 }

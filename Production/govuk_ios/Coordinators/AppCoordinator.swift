@@ -1,6 +1,6 @@
 import UIKit
 
-class AppCoordinator: Coordinator {
+class AppCoordinator: BaseCoordinator {
     override func start() {
         showTabs()
     }

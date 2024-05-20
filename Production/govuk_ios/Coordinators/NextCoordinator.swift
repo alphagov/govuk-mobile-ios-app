@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class NextCoordinator: Coordinator {
+class NextCoordinator: BaseCoordinator {
     private let title: String
 
     init(title: String,

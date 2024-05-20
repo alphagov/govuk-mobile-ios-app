@@ -2,12 +2,12 @@ import Coordination
 import Foundation
 import UIKit
 
-class Coordinator: NSObject,
-                   AnyCoordinator,
-                   ParentCoordinator,
-                   ChildCoordinator,
-                   NavigationCoordinator,
-                   UIAdaptivePresentationControllerDelegate {
+class BaseCoordinator: NSObject,
+                       AnyCoordinator,
+                       ParentCoordinator,
+                       ChildCoordinator,
+                       NavigationCoordinator,
+                       UIAdaptivePresentationControllerDelegate {
     var childCoordinators: [any ChildCoordinator] = []
     var parentCoordinator: (any ParentCoordinator)?
 
@@ -25,11 +25,11 @@ class Coordinator: NSObject,
         assertionFailure("This needs overriding")
     }
 
-    func open(_ coordinator: Coordinator) {
+    func open(_ coordinator: BaseCoordinator) {
         openChildInline(coordinator)
     }
 
-    func openModally(_ coordinator: Coordinator) {
+    func openModally(_ coordinator: BaseCoordinator) {
         coordinator.root.delegate = coordinator
         openChildModally(coordinator)
     }

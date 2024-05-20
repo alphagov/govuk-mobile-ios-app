@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class TabCoordinator: Coordinator {
+class TabCoordinator: BaseCoordinator {
     private lazy var redNavigationController = UINavigationController.red
     private lazy var redCoordinator = ColorCoordinator(
         navigationController: redNavigationController,

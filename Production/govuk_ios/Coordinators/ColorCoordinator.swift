@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class ColorCoordinator: Coordinator {
+class ColorCoordinator: BaseCoordinator {
     private let color: UIColor
     private let title: String
 

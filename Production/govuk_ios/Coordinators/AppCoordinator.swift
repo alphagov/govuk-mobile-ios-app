@@ -1,20 +1,18 @@
 import UIKit
 
-class AppCoordinator {
-    private let navigationController: UINavigationController
-
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-
-    func start() {
+class AppCoordinator: Coordinator {
+    override func start() {
         showTabs()
     }
 
     private func showTabs() {
         let tabCoordinator = TabCoordinator(
-            navigationController: navigationController
+            navigationController: root
         )
-        tabCoordinator.start()
+        open(tabCoordinator)
+    }
+
+    deinit {
+        print("Deinit app")
     }
 }

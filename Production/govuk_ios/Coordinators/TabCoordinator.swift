@@ -1,9 +1,7 @@
 import UIKit
 import Foundation
 
-class TabCoordinator {
-    private let navigationController: UINavigationController
-
+class TabCoordinator: Coordinator {
     private lazy var redNavigationController = UINavigationController.red
     private lazy var redCoordinator = ColorCoordinator(
         navigationController: redNavigationController,
@@ -41,13 +39,13 @@ class TabCoordinator {
         return controller
     }()
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-
-    func start() {
+    override func start() {
         showTabs()
-        coordinators.forEach { $0.start() }
+        coordinators.forEach {
+            $0.parentCoordinator = self
+            childCoordinators.append($0)
+            $0.start()
+        }
     }
 
     private func showTabs() {
@@ -56,9 +54,6 @@ class TabCoordinator {
             blueNavigationController,
             greenNavigationController
         ]
-        navigationController.setViewControllers(
-            [tabController],
-            animated: false
-        )
+        set([tabController], animated: false)
     }
 }

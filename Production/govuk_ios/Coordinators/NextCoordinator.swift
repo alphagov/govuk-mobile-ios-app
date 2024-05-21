@@ -21,7 +21,7 @@ class NextCoordinator: BaseCoordinator {
     }
 
     private func pushNext() {
-        let viewController = ViewController(
+        let viewController = TestViewController(
             color: .orange,
             tabTitle: "\(title) \(root.viewControllers.count)",
             nextAction: showNextAction,

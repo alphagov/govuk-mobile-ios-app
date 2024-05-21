@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class TestViewController: BaseViewController {
     private let color: UIColor
     private let nextAction: () -> Void
     private let modalAction: () -> Void
@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         self.modalAction = modalAction
         super.init(nibName: nil, bundle: nil)
         self.title = tabTitle
+        navigationItem.largeTitleDisplayMode = .always
     }
 
     required init?(coder: NSCoder) {

@@ -14,7 +14,7 @@ class ColorCoordinator: BaseCoordinator {
     }
 
     override func start() {
-        let viewController = ViewController(
+        let viewController = TestViewController(
             color: color,
             tabTitle: title,
             nextAction: showNextAction,

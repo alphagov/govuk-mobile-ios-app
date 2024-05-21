@@ -11,9 +11,9 @@ class LaunchCoordinator: BaseCoordinator {
     }
 
     override func start() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .systemPink
+        let viewController = LaunchViewController()
         set(viewController, animated: false)
+
         // Do launch things here
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.completion()

@@ -18,6 +18,11 @@
 		5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */; };
 		5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */; };
 		5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */; };
+		5D54A8322BFCBF50003D0C21 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8312BFCBF50003D0C21 /* main.swift */; };
+		5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
+		5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
+		5D54A83A2BFCE667003D0C21 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
+		5D54A83B2BFCE669003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D99312E2BF7642C0036C8FB /* Coordination in Frameworks */ = {isa = PBXBuildFile; productRef = 5D99312D2BF7642C0036C8FB /* Coordination */; };
 		5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */; };
 		5D9931322BF77AC70036C8FB /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9931312BF77AC70036C8FB /* NextCoordinator.swift */; };
@@ -57,6 +62,9 @@
 		5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5D54A8312BFCBF50003D0C21 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
+		5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSceneDelegate.swift; sourceTree = "<group>"; };
 		5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		5D9931312BF77AC70036C8FB /* NextCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +139,23 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		5D54A8392BFCD881003D0C21 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */,
+				5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		5D54A83C2BFCED7C003D0C21 /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				5D54A8392BFCD881003D0C21 /* SupportingFiles */,
+			);
+			path = shared;
+			sourceTree = "<group>";
+		};
 		5DAD716B2BD250DA0075F648 = {
 			isa = PBXGroup;
 			children = (
@@ -185,8 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				5DAD71772BD250DB0075F648 /* AppDelegate.swift */,
-				5DAD71792BD250DB0075F648 /* SceneDelegate.swift */,
 				5DAD71852BD250DE0075F648 /* Info.plist */,
+				5D54A8312BFCBF50003D0C21 /* main.swift */,
+				5DAD71792BD250DB0075F648 /* SceneDelegate.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -236,6 +262,7 @@
 		5DAD71B52BD288280075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
+				5D54A83C2BFCED7C003D0C21 /* shared */,
 				5DAD718D2BD250DF0075F648 /* govuk_ios_unit_tests */,
 				5DAD71972BD250DF0075F648 /* govuk_ios_ui_tests */,
 			);
@@ -414,6 +441,7 @@
 				5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */,
 				5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */,
 				5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */,
+				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
@@ -426,6 +454,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
+				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
 				5DAD718F2BD250DF0075F648 /* GovUKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +466,8 @@
 			files = (
 				5DAD71992BD250DF0075F648 /* GovUKUITests.swift in Sources */,
 				5DAD719B2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift in Sources */,
+				5D54A83A2BFCE667003D0C21 /* TestAppDelegate.swift in Sources */,
+				5D54A83B2BFCE669003D0C21 /* TestSceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,10 +726,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.ui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GovUK;
+				TEST_TARGET_NAME = govuk_ios;
 			};
 			name = Debug;
 		};
@@ -712,10 +745,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.ui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GovUK;
+				TEST_TARGET_NAME = govuk_ios;
 			};
 			name = Release;
 		};

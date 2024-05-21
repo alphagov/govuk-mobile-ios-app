@@ -25,11 +25,11 @@ class BaseCoordinator: NSObject,
         assertionFailure("This needs overriding")
     }
 
-    func open(_ coordinator: BaseCoordinator) {
+    func push(_ coordinator: BaseCoordinator) {
         openChildInline(coordinator)
     }
 
-    func openModally(_ coordinator: BaseCoordinator) {
+    func present(_ coordinator: BaseCoordinator) {
         coordinator.root.delegate = coordinator
         openChildModally(coordinator)
     }
@@ -38,6 +38,11 @@ class BaseCoordinator: NSObject,
               animated: Bool = true) {
         stackedViewControllers.add(viewController)
         root.pushViewController(viewController, animated: animated)
+    }
+
+    func set(_ viewController: UIViewController,
+             animated: Bool = true) {
+        set([viewController], animated: animated)
     }
 
     func set(_ viewControllers: [UIViewController],

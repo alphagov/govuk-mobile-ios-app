@@ -30,7 +30,7 @@ class ColorCoordinator: BaseCoordinator {
                 title: "Next",
                 navigationController: strongSelf.root
             )
-            strongSelf.open(coordinator)
+            strongSelf.push(coordinator)
         }
     }
 
@@ -42,7 +42,7 @@ class ColorCoordinator: BaseCoordinator {
                 title: "Modal",
                 navigationController: navigationController
             )
-            strongSelf.openModally(coordinator)
+            strongSelf.present(coordinator)
         }
     }
 

@@ -9,7 +9,7 @@ class AppCoordinator: BaseCoordinator {
         let tabCoordinator = TabCoordinator(
             navigationController: root
         )
-        open(tabCoordinator)
+        push(tabCoordinator)
     }
 
     deinit {

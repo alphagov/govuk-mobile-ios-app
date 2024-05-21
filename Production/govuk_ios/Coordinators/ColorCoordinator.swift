@@ -30,7 +30,7 @@ class ColorCoordinator: BaseCoordinator {
                 title: "Next",
                 navigationController: strongSelf.root
             )
-            strongSelf.push(coordinator)
+            strongSelf.start(coordinator)
         }
     }
 

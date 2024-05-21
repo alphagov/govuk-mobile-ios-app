@@ -25,7 +25,7 @@ class BaseCoordinator: NSObject,
         assertionFailure("This needs overriding")
     }
 
-    func push(_ coordinator: BaseCoordinator) {
+    func start(_ coordinator: BaseCoordinator) {
         openChildInline(coordinator)
     }
 

@@ -48,7 +48,6 @@ class BaseCoordinator: NSObject,
     func set(_ viewControllers: [UIViewController],
              animated: Bool = true) {
         viewControllers.forEach {
-            $0.presentationController?.delegate = self
             stackedViewControllers.add($0)
         }
         root.setViewControllers(viewControllers, animated: animated)

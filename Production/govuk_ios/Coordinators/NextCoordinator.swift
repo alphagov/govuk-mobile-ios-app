@@ -25,7 +25,9 @@ class NextCoordinator: BaseCoordinator {
             color: .orange,
             tabTitle: "\(title) \(root.viewControllers.count)",
             nextAction: showNextAction,
-            modalAction: { }
+            modalAction: { [weak self] in
+                self?.root.popViewController(animated: true)
+            }
         )
         push(viewController, animated: false)
     }

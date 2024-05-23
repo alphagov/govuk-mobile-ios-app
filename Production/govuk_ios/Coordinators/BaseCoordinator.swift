@@ -29,9 +29,10 @@ class BaseCoordinator: NSObject,
         openChildInline(coordinator)
     }
 
-    func present(_ coordinator: BaseCoordinator) {
+    func present(_ coordinator: BaseCoordinator,
+                 animated: Bool = true) {
         coordinator.root.delegate = coordinator
-        openChildModally(coordinator)
+        openChildModally(coordinator, animated: animated)
     }
 
     func push(_ viewController: UIViewController,

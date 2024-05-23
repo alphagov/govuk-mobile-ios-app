@@ -7,11 +7,14 @@ import Coordination
 
 class BaseCoordinatorTests: XCTestCase {
 
-    var subject: BaseCoordinator?
-
     override class func setUp() {
         super.setUp()
         UIView.setAnimationsEnabled(false)
+    }
+
+    override class func tearDown() {
+        super.tearDown()
+        UIView.setAnimationsEnabled(true)
     }
 
     @MainActor
@@ -146,7 +149,7 @@ class BaseCoordinatorTests: XCTestCase {
     @MainActor
     func test_startCoordinator_startsCoordinator() {
         let navigationController = UINavigationController()
-        let child = TestCoordinator(navigationController: navigationController)
+        let child = MockBaseCoordinator(navigationController: navigationController)
         let subject = TestCoordinator(navigationController: navigationController)
 
         subject.start(child)
@@ -157,7 +160,7 @@ class BaseCoordinatorTests: XCTestCase {
     @MainActor
     func test_presentCoordinator_startsCoordinator() {
         let childNavigationController = UINavigationController()
-        let child = TestCoordinator(navigationController: childNavigationController)
+        let child = MockBaseCoordinator(navigationController: childNavigationController)
 
         let navigationController = MockNavigationController()
         let subject = TestCoordinator(navigationController: navigationController)
@@ -175,10 +178,6 @@ class BaseCoordinatorTests: XCTestCase {
 
 private class TestCoordinator: BaseCoordinator {
 
-    var _startCalled: Bool = false
-
-    override func start() {
-        _startCalled = true
-    }
+    override func start() { }
 
 }

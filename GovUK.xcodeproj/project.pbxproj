@@ -17,6 +17,10 @@
 		5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */; };
 		5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */; };
 		5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */; };
+		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
+		5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */; };
+		5D4F97F12BFF7F04002CBDDE /* MockBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */; };
+		5D4F97F32BFF81D5002CBDDE /* TabCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */; };
 		5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */; };
 		5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */; };
 		5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */; };
@@ -61,6 +65,10 @@
 		5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
+		5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilder.swift; sourceTree = "<group>"; };
+		5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
+		5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBaseCoordinator.swift; sourceTree = "<group>"; };
+		5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +149,14 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		5D4F97E92BFF771A002CBDDE /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
 		5D54A8392BFCD881003D0C21 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +197,7 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
+				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D2129E92BDFA00E00142E46 /* Coordinators */,
 				5D1353AE2BE0D9A700414441 /* Extensions */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
@@ -267,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */,
+				5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -274,8 +292,10 @@
 		5DD6EFFB2BFF546000C2D79B /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */,
+				5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */,
+				5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */,
 				5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */,
+				5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -462,6 +482,7 @@
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
+				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */,
 				5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */,
@@ -474,8 +495,11 @@
 			files = (
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
+				5D4F97F32BFF81D5002CBDDE /* TabCoordinatorTests.swift in Sources */,
+				5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */,
 				5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */,
 				5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */,
+				5D4F97F12BFF7F04002CBDDE /* MockBaseCoordinator.swift in Sources */,
 				5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

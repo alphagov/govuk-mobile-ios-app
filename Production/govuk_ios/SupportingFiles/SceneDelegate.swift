@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder,
 
     private func loadAppCoordinator() {
         coordinator = AppCoordinator(
+            coordinatorBuilder: .init(),
             navigationController: navigationController
         )
         coordinator?.start()

@@ -30,8 +30,4 @@ class AppCoordinator: BaseCoordinator {
         )
         start(coordinator)
     }
-
-    deinit {
-        print("Deinit app")
-    }
 }

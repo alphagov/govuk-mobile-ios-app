@@ -45,8 +45,4 @@ class ColorCoordinator: BaseCoordinator {
             strongSelf.present(coordinator)
         }
     }
-
-    deinit {
-        print("Deinit \(title)")
-    }
 }

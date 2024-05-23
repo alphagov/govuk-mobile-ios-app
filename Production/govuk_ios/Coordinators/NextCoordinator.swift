@@ -31,8 +31,4 @@ class NextCoordinator: BaseCoordinator {
         )
         push(viewController, animated: false)
     }
-
-    deinit {
-        print("Deinit \(title)")
-    }
 }

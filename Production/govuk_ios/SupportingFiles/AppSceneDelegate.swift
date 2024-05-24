@@ -1,7 +1,7 @@
 import UIKit
 
-class SceneDelegate: UIResponder,
-                     UIWindowSceneDelegate {
+class AppSceneDelegate: UIResponder,
+                        UIWindowSceneDelegate {
     var window: UIWindow?
 
     private var coordinator: AppCoordinator?

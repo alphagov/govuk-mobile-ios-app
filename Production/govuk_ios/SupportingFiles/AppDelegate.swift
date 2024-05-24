@@ -9,7 +9,7 @@ class AppDelegate: UIResponder,
             name: "Default Configuration",
             sessionRole: connectingSceneSession.role
         )
-        sceneConfiguration.delegateClass = SceneDelegate.self
+        sceneConfiguration.delegateClass = AppSceneDelegate.self
         sceneConfiguration.storyboard = nil
         return sceneConfiguration
     }

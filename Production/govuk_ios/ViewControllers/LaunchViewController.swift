@@ -12,7 +12,7 @@ class LaunchViewController: BaseViewController {
     }
 
     private func configureUI() {
-        view.backgroundColor = .link
+        view.backgroundColor = .splashScreenBlue
         activityIndicator.color = .white
         view.addSubview(activityIndicator)
     }

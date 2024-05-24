@@ -67,5 +67,5 @@ class BaseCoordinator: NSObject,
         finish()
     }
 
-    final func didRegainFocus(fromChild child: (any ChildCoordinator)?) { }
+    final func didRegainFocus(fromChild child: (any ChildCoordinator)?) { /* Do nothing */ }
 }

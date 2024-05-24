@@ -169,11 +169,15 @@ class BaseCoordinatorTests: XCTestCase {
             child,
             animated: false
         )
-
         XCTAssertTrue(child._startCalled)
         XCTAssertEqual(navigationController._presentedViewController, childNavigationController)
     }
 
+    @MainActor
+    func test_didRegainFocus_doesNothing() {
+        let subject = TestCoordinator(navigationController: .init())
+        subject.didRegainFocus(fromChild: nil)
+    }
 }
 
 private class TestCoordinator: BaseCoordinator {

@@ -1,20 +1,33 @@
 import UIKit
+import Foundation
 
-class AppCoordinator {
-    private let navigationController: UINavigationController
+class AppCoordinator: BaseCoordinator {
+    private let coordinatorBuilder: CoordinatorBuilder
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(coordinatorBuilder: CoordinatorBuilder,
+         navigationController: UINavigationController) {
+        self.coordinatorBuilder = coordinatorBuilder
+        super.init(navigationController: navigationController)
     }
 
-    func start() {
-        showTabs()
+    override func start() {
+        startLaunch()
+    }
+
+    private func startLaunch() {
+        let coordinator = coordinatorBuilder.launch(
+            navigationController: root,
+            completion: { [weak self] in
+                self?.showTabs()
+            }
+        )
+        start(coordinator)
     }
 
     private func showTabs() {
-        let tabCoordinator = TabCoordinator(
-            navigationController: navigationController
+        let coordinator = coordinatorBuilder.tab(
+            navigationController: root
         )
-        tabCoordinator.start()
+        start(coordinator)
     }
 }

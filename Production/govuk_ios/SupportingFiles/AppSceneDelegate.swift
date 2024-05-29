@@ -1,7 +1,7 @@
 import UIKit
 
-class SceneDelegate: UIResponder,
-                     UIWindowSceneDelegate {
+class AppSceneDelegate: UIResponder,
+                        UIWindowSceneDelegate {
     var window: UIWindow?
 
     private var coordinator: AppCoordinator?
@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder,
 
     private func loadAppCoordinator() {
         coordinator = AppCoordinator(
+            coordinatorBuilder: .init(),
             navigationController: navigationController
         )
         coordinator?.start()

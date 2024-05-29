@@ -1,8 +1,7 @@
 import UIKit
 import Foundation
 
-class ColorCoordinator {
-    private let navigationController: UINavigationController
+class ColorCoordinator: BaseCoordinator {
     private let color: UIColor
     private let title: String
 
@@ -11,17 +10,39 @@ class ColorCoordinator {
          title: String) {
         self.color = color
         self.title = title
-        self.navigationController = navigationController
+        super.init(navigationController: navigationController)
     }
 
-    func start() {
-        let viewController = ViewController(
+    override func start() {
+        let viewController = TestViewController(
             color: color,
-            tabTitle: title
+            tabTitle: title,
+            nextAction: showNextAction,
+            modalAction: showModalAction
         )
-        navigationController.setViewControllers(
-            [viewController],
-            animated: false
-        )
+        set([viewController], animated: false)
+    }
+
+    private var showNextAction: () -> Void {
+        return { [weak self] in
+            guard let strongSelf = self else { return }
+            let coordinator = NextCoordinator(
+                title: "Next",
+                navigationController: strongSelf.root
+            )
+            strongSelf.start(coordinator)
+        }
+    }
+
+    private var showModalAction: () -> Void {
+        return { [weak self] in
+            guard let strongSelf = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = NextCoordinator(
+                title: "Modal",
+                navigationController: navigationController
+            )
+            strongSelf.present(coordinator)
+        }
     }
 }

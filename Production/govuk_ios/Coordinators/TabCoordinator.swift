@@ -1,31 +1,12 @@
 import UIKit
 import Foundation
 
-class TabCoordinator {
-    private let navigationController: UINavigationController
+class TabCoordinator: BaseCoordinator {
+    private lazy var redCoordinator = coordinatorBuilder.red
+    private lazy var blueCoordinator = coordinatorBuilder.blue
+    private lazy var greenCoordinator = coordinatorBuilder.green
 
-    private lazy var redNavigationController = UINavigationController.red
-    private lazy var redCoordinator = ColorCoordinator(
-        navigationController: redNavigationController,
-        color: .red,
-        title: "Red"
-    )
-
-    private lazy var blueNavigationController = UINavigationController.blue
-    private lazy var blueCoordinator = ColorCoordinator(
-        navigationController: blueNavigationController,
-        color: .blue,
-        title: "Blue"
-    )
-
-    private lazy var greenNavigationController = UINavigationController.green
-    private lazy var greenCoordinator = ColorCoordinator(
-        navigationController: greenNavigationController,
-        color: .green,
-        title: "Green"
-    )
-
-    private var coordinators: [ColorCoordinator] {
+    private var coordinators: [BaseCoordinator] {
         [
             redCoordinator,
             blueCoordinator,
@@ -41,24 +22,25 @@ class TabCoordinator {
         return controller
     }()
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    private let coordinatorBuilder: CoordinatorBuilder
+
+    init(coordinatorBuilder: CoordinatorBuilder,
+         navigationController: UINavigationController) {
+        self.coordinatorBuilder = coordinatorBuilder
+        super.init(navigationController: navigationController)
     }
 
-    func start() {
+    override func start() {
         showTabs()
-        coordinators.forEach { $0.start() }
+        coordinators.forEach {
+            $0.parentCoordinator = self
+            childCoordinators.append($0)
+            $0.start()
+        }
     }
 
     private func showTabs() {
-        tabController.viewControllers = [
-            redNavigationController,
-            blueNavigationController,
-            greenNavigationController
-        ]
-        navigationController.setViewControllers(
-            [tabController],
-            animated: false
-        )
+        tabController.viewControllers = coordinators.map { $0.root }
+        set([tabController], animated: false)
     }
 }

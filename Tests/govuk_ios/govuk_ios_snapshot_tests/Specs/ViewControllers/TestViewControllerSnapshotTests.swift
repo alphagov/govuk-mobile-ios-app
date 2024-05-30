@@ -5,7 +5,6 @@ import UIKit
 @testable import govuk_ios
 
 class TestViewControllerTests: SnapshotTestCase {
-
     func test_loadInNavigationController_rendersCorrectly() {
         let subject = TestViewController(
             color: .green,
@@ -15,5 +14,4 @@ class TestViewControllerTests: SnapshotTestCase {
         )
         VerifySnapshotInWindow(subject)
     }
-
 }

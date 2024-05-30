@@ -15,6 +15,7 @@
 		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
 		5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */; };
 		5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */; };
+		5D41DB552C0862840011E691 /* LaunchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */; };
 		5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */; };
 		5D4B9D3F2C074227005F126A /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5D4B9D422C074251005F126A /* TestViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */; };
@@ -93,6 +94,7 @@
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
 		5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewControllerTests.swift; sourceTree = "<group>"; };
 		5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_snapshot_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
 		5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilder.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */,
+				5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 			files = (
 				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
 				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
+				5D41DB552C0862840011E691 /* LaunchViewControllerTests.swift in Sources */,
 				5D4B9D422C074251005F126A /* TestViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,
 			);

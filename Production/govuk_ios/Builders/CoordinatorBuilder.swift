@@ -1,12 +1,29 @@
 import UIKit
 import Foundation
 
+import Resolver
+
 @MainActor
 class CoordinatorBuilder {
+    private let resolver: Resolver
+
+    init(resolver: Resolver) {
+        self.resolver = resolver
+    }
+
+    func app(navigationController: UINavigationController) -> BaseCoordinator {
+        AppCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            deeplinkService: resolver.resolve()
+        )
+    }
+
     func launch(navigationController: UINavigationController,
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
+            deeplinkService: resolver.resolve(),
             completion: completion
         )
     }

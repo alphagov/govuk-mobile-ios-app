@@ -1,4 +1,7 @@
 import Foundation
 
-class TestDataStore {
+protocol TestDataStoreInterface {
+}
+
+class TestDataStore: TestDataStoreInterface {
 }

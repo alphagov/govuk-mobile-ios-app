@@ -5,7 +5,7 @@ import Resolver
 extension Resolver {
     static func registerDataStores() {
         register(
-            TestDataStore.self,
+            TestDataStoreInterface.self,
             factory: {
                 TestDataStore()
             }

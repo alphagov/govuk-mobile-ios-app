@@ -3,10 +3,13 @@ import Foundation
 
 class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
+    private let deeplinkService: DeeplinkServiceInterface
 
     init(coordinatorBuilder: CoordinatorBuilder,
-         navigationController: UINavigationController) {
+         navigationController: UINavigationController,
+         deeplinkService: DeeplinkServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
+        self.deeplinkService = deeplinkService
         super.init(navigationController: navigationController)
     }
 

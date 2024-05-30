@@ -5,7 +5,7 @@ import Resolver
 extension Resolver {
     static func registerNetworkClients() {
         register(
-            TestNetworkClient.self,
+            TestNetworkClientInterface.self,
             factory: {
                 TestNetworkClient()
             }

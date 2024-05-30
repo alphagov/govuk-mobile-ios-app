@@ -1,4 +1,6 @@
 import Foundation
 
-class TestNetworkClient {
+protocol TestNetworkClientInterface {
+}
+class TestNetworkClient: TestNetworkClientInterface {
 }

@@ -10,5 +10,12 @@ extension Resolver {
                 TestService()
             }
         )
+
+        register(
+            DeeplinkServiceInterface.self,
+            factory: {
+                DeeplinkService()
+            }
+        )
     }
 }

@@ -36,6 +36,7 @@
 		5D41DB762C08AD640011E691 /* DeeplinkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB752C08AD640011E691 /* DeeplinkServiceTests.swift */; };
 		5D41DB782C08AE950011E691 /* MockDeeplinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB772C08AE950011E691 /* MockDeeplinkService.swift */; };
 		5D41DB7A2C08AFC00011E691 /* TestServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB792C08AFC00011E691 /* TestServiceTests.swift */; };
+		5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5D41DB7B2C09BF340011E691 /* Settings.bundle */; };
 		5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */; };
 		5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
@@ -123,6 +124,7 @@
 		5D41DB752C08AD640011E691 /* DeeplinkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkServiceTests.swift; sourceTree = "<group>"; };
 		5D41DB772C08AE950011E691 /* MockDeeplinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeeplinkService.swift; sourceTree = "<group>"; };
 		5D41DB792C08AFC00011E691 /* TestServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestServiceTests.swift; sourceTree = "<group>"; };
+		5D41DB7B2C09BF340011E691 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
 		5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilder.swift; sourceTree = "<group>"; };
 		5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
@@ -138,7 +140,7 @@
 		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
 		5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		5D9931312BF77AC70036C8FB /* NextCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
-		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DAD71742BD250DB0075F648 /* GOV.UK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GOV.UK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneDelegate.swift; sourceTree = "<group>"; };
 		5DAD717B2BD250DB0075F648 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -356,7 +358,7 @@
 		5DAD71752BD250DB0075F648 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5DAD71742BD250DB0075F648 /* govuk_ios.app */,
+				5DAD71742BD250DB0075F648 /* GOV.UK.app */,
 				5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */,
 				5DAD71942BD250DF0075F648 /* govuk_ios_ui_tests.xctest */,
 				5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */,
@@ -406,6 +408,7 @@
 				5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */,
 				5DAD71852BD250DE0075F648 /* Info.plist */,
 				5D54A8312BFCBF50003D0C21 /* main.swift */,
+				5D41DB7B2C09BF340011E691 /* Settings.bundle */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -536,7 +539,7 @@
 				5D41DB5A2C086DB20011E691 /* Resolver */,
 			);
 			productName = GovUK;
-			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
+			productReference = 5DAD71742BD250DB0075F648 /* GOV.UK.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5DAD71892BD250DF0075F648 /* govuk_ios_unit_tests */ = {
@@ -645,6 +648,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -962,7 +966,7 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GOV.UK;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -991,7 +995,7 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GOV.UK;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

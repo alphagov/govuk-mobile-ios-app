@@ -100,6 +100,7 @@ Package.resolved
 
 #Unit tests
 build_for_unit_testing/
+FailureDiffs/
 
 #Sonar
 .scannerwork/

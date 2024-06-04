@@ -43,7 +43,8 @@ jobs:
             -Dsonar.coverageReportPaths="build_output/sonarqube-generic-coverage.xml" \
             -Dsonar.pullrequest.key=$pull_number \
             -Dsonar.pullrequest.branch=${{github.head_ref}} \
-            -Dsonar.pullrequest.base=${{github.base_ref}}
+            -Dsonar.pullrequest.base=${{github.base_ref}} \
+            -Dsonar.projectVersion=$(./Scripts/app_version.sh)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

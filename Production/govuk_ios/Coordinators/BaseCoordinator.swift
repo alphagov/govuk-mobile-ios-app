@@ -24,16 +24,16 @@ class BaseCoordinator: NSObject,
     func start() {
         assertionFailure("This needs overriding")
     }
-    
-    func start(url:String) {
+
+    func start(url: String) {
         assertionFailure("This needs overriding")
     }
-    
+
     func canHandleLinks(path: String) -> Bool {
         return false
     }
-    
-    func handleDeepLink(url:String){
+
+    func handleDeepLink(url: String) {
         assertionFailure("This needs overriding")
     }
 

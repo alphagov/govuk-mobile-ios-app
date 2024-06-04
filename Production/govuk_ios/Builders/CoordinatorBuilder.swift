@@ -3,15 +3,15 @@ import Foundation
 
 @MainActor
 class CoordinatorBuilder {
-    func launch(navigationController: UINavigationController,url:String?,
+    func launch(navigationController: UINavigationController, url: String?,
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            url:url, completion: completion, paths: []
+            url: url, completion: completion, paths: []
         )
     }
 
-    func tab(navigationController: UINavigationController,url: String?) -> BaseCoordinator {
+    func tab(navigationController: UINavigationController, url: String?) -> BaseCoordinator {
         TabCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController, url: url
@@ -32,7 +32,7 @@ class CoordinatorBuilder {
             navigationController: .blue,
             color: .blue,
             title: "Blue",
-            deepLinkPaths:[]
+            deepLinkPaths: []
         )
     }
 
@@ -41,7 +41,7 @@ class CoordinatorBuilder {
             navigationController: .green,
             color: .green,
             title: "Green",
-            deepLinkPaths:[]
+            deepLinkPaths: []
         )
     }
 }

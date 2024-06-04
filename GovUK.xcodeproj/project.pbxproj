@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3367382C0DE3E3000CA45F /* DeepLink.swift */; };
+		4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */; };
+		4E41DEDA2C0F093500D8059C /* DeepLinkFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */; };
 		5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */; };
@@ -61,6 +64,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E3367382C0DE3E3000CA45F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkStore.swift; sourceTree = "<group>"; };
+		4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkFactory.swift; sourceTree = "<group>"; };
 		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
@@ -124,6 +130,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E3367332C0DCAD3000CA45F /* DeepLinking */ = {
+			isa = PBXGroup;
+			children = (
+				4E3367382C0DE3E3000CA45F /* DeepLink.swift */,
+				4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */,
+				4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */,
+			);
+			path = DeepLinking;
+			sourceTree = "<group>";
+		};
 		5D1353A92BE0D75000414441 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +217,7 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
+				4E3367332C0DCAD3000CA45F /* DeepLinking */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D2129E92BDFA00E00142E46 /* Coordinators */,
 				5D1353AE2BE0D9A700414441 /* Extensions */,
@@ -483,13 +500,16 @@
 				5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */,
 				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
 				5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */,
+				4E41DEDA2C0F093500D8059C /* DeepLinkFactory.swift in Sources */,
 				5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */,
 				5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
+				4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
+				4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */,
 			);

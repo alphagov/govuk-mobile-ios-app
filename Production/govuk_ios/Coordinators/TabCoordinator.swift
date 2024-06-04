@@ -23,10 +23,10 @@ class TabCoordinator: BaseCoordinator {
     }()
 
     private let coordinatorBuilder: CoordinatorBuilder
-    private let url:String?
+    private let url: String?
 
     init(coordinatorBuilder: CoordinatorBuilder,
-         navigationController: UINavigationController,url:String?) {
+         navigationController: UINavigationController, url: String?) {
         self.coordinatorBuilder = coordinatorBuilder
         self.url = url
         super.init(navigationController: navigationController)
@@ -48,10 +48,10 @@ class TabCoordinator: BaseCoordinator {
         tabController.viewControllers = coordinators.map { $0.root }
         set([tabController], animated: false)
     }
-    
-    override func handleDeepLink(url:String) {
+
+    override func handleDeepLink(url: String) {
         guard let path = URLComponents(string: String(describing: url))?.path
-                ,let coordinatorForPath = coordinators.first(where: {$0.canHandleLinks(path: path)}) else { return }
+                , let coordinatorForPath = coordinators.first(where: {$0.canHandleLinks(path: path)}) else { return }
         coordinatorForPath.handleDeepLink(url: path)
-    } 
+    }
 }

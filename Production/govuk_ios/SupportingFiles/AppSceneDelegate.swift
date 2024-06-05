@@ -1,7 +1,5 @@
 import UIKit
 
-import Factory
-
 class AppSceneDelegate: UIResponder,
                         UIWindowSceneDelegate {
     var window: UIWindow?

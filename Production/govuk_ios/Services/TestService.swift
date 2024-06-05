@@ -4,6 +4,12 @@ protocol TestServiceInterface {
 }
 
 class TestService: TestServiceInterface {
-    @Inject private var dataStore: TestDataStoreInterface
-    @Inject private var networkClient: TestNetworkClientInterface
+    private var dataStore: TestDataStoreInterface
+    private var networkClient: TestNetworkClientInterface
+
+    init(dataStore: TestDataStoreInterface,
+         networkClient: TestNetworkClientInterface) {
+        self.dataStore = dataStore
+        self.networkClient = networkClient
+    }
 }

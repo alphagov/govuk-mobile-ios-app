@@ -1,5 +1,6 @@
 import UIKit
-import Resolver
+
+import Factory
 
 class AppSceneDelegate: UIResponder,
                         UIWindowSceneDelegate {
@@ -11,7 +12,7 @@ class AppSceneDelegate: UIResponder,
         return controller
     }()
     private lazy var coordinatorBuilder = CoordinatorBuilder(
-        resolver: .main
+        container: .shared
     )
     private lazy var coordinator: BaseCoordinator? = coordinatorBuilder.app(
         navigationController: navigationController

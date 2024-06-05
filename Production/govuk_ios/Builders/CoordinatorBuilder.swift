@@ -1,21 +1,21 @@
 import UIKit
 import Foundation
 
-import Resolver
+import Factory
 
 @MainActor
 class CoordinatorBuilder {
-    private let resolver: Resolver
+    private let container: Container
 
-    init(resolver: Resolver) {
-        self.resolver = resolver
+    init(container: Container) {
+        self.container = container
     }
 
     func app(navigationController: UINavigationController) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,
-            deeplinkService: resolver.resolve()
+            deeplinkService: container.deeplinkService()
         )
     }
 
@@ -23,7 +23,7 @@ class CoordinatorBuilder {
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            deeplinkService: resolver.resolve(),
+            deeplinkService: container.deeplinkService(),
             completion: completion
         )
     }

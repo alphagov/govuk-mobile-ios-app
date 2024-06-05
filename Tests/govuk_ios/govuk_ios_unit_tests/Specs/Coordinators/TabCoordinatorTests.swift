@@ -13,7 +13,7 @@ class TabCoordinatorTests: XCTestCase {
     @MainActor 
     func test_start_showsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder(
-            resolver: .main
+            container: .init()
         )
 
         let mockRedCoordinator = MockBaseCoordinator()

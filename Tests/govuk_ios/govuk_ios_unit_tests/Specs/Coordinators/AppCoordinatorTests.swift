@@ -9,7 +9,7 @@ class AppCoordinatorTests: XCTestCase {
     @MainActor
     func test_start_startsLanuchCoordinator() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(
-            resolver: .init()
+            container: .init()
         )
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(

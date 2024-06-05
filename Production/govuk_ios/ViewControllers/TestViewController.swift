@@ -25,6 +25,15 @@ class TestViewController: BaseViewController {
         return localView
     }()
 
+    private lazy var testLabel: UILabel = {
+        let localView = Label()
+        localView.dynamicFont = UIFont.govuk.header1
+        localView.text = "Hello World"
+        localView.adjustsFontForContentSizeCategory = true
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
+    }()
+
     init(color: UIColor,
          tabTitle: String,
          nextAction: @escaping () -> Void,
@@ -52,6 +61,11 @@ class TestViewController: BaseViewController {
         modalButton.topAnchor.constraint(equalTo: nextButton.bottomAnchor,
                                         constant: 30).isActive = true
         modalButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        view.addSubview(testLabel)
+        testLabel.topAnchor.constraint(equalTo: modalButton.bottomAnchor,
+                                         constant: 30).isActive = true
+        testLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 
     @objc

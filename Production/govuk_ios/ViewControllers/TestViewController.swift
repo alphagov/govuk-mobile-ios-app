@@ -27,7 +27,7 @@ class TestViewController: BaseViewController {
 
     private lazy var testLabel: UILabel = {
         let localView = Label()
-        localView.dynamicFont = UIFont.govuk.header1
+        localView.dynamicFont = UIFont.govuk.body
         localView.text = "Hello World"
         localView.adjustsFontForContentSizeCategory = true
         localView.translatesAutoresizingMaskIntoConstraints = false

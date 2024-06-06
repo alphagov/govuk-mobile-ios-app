@@ -13,7 +13,7 @@ class NavigationController: UINavigationController {
 
     private var largeTitleTextAttributes: [NSAttributedString.Key: Any] {
         return [
-            .font: UIFont.govuk.header1.font
+            .font: UIFont.govuk.largeNavigation.font
         ]
     }
 

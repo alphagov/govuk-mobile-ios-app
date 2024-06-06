@@ -39,17 +39,25 @@ struct GovUKFont {
 
 extension GovUKFont {
     static var header1: GovUKFont {
-        .init(
-            family: "GDSTransportWebsite",
-            size: 70,
-            traits: .init(rawValue: 0)
-        )
+        .transport(size: 70)
     }
 
     static var body: GovUKFont {
+        .transport(size: 16)
+    }
+
+    static var largeNavigation: GovUKFont {
+        .transport(size: 50)
+    }
+
+    static var tab: GovUKFont {
+        .transport(size: 12)
+    }
+
+    private static func transport(size: CGFloat) -> GovUKFont {
         .init(
             family: "GDSTransportWebsite",
-            size: 16,
+            size: size,
             traits: .init(rawValue: 0)
         )
     }

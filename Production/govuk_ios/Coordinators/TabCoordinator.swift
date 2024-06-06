@@ -14,14 +14,7 @@ class TabCoordinator: BaseCoordinator {
         ]
     }
 
-    private lazy var tabController = {
-        let controller = UITabBarController()
-        var appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        controller.tabBar.standardAppearance = appearance
-        return controller
-    }()
-
+    private lazy var tabController = TabBarController()
     private let coordinatorBuilder: CoordinatorBuilder
 
     init(coordinatorBuilder: CoordinatorBuilder,

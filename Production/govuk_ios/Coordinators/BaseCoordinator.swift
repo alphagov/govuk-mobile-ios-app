@@ -3,17 +3,12 @@ import Foundation
 import UIKit
 
 class BaseCoordinator: NSObject,
-                       AnyCoordinator,
-                       ParentCoordinator,
-                       ChildCoordinator,
-                       NavigationCoordinator,
+                       UINavigationControllerDelegate,
                        UIAdaptivePresentationControllerDelegate {
-    var childCoordinators: [any ChildCoordinator] = []
-    var parentCoordinator: (any ParentCoordinator)?
-
+    private var childCoordinators: [BaseCoordinator] = []
+    private var parentCoordinator: BaseCoordinator?
     private var stackedViewControllers: NSHashTable<UIViewController> = .weakObjects()
-
-    private(set) var root: UINavigationController
+    private var root: UINavigationController
 
     init(navigationController: UINavigationController) {
         self.root = navigationController
@@ -38,13 +33,20 @@ class BaseCoordinator: NSObject,
     }
 
     func start(_ coordinator: BaseCoordinator) {
-        openChildInline(coordinator)
+        start(child: coordinator)
     }
 
     func present(_ coordinator: BaseCoordinator,
                  animated: Bool = true) {
-        coordinator.root.delegate = coordinator
-        openChildModally(coordinator, animated: animated)
+        start(child: coordinator)
+        root.present(coordinator.root, animated: animated)
+    }
+
+    private func start(child: BaseCoordinator) {
+        childCoordinators.append(child)
+        child.root.delegate = child
+        child.parentCoordinator = self
+        child.start()
     }
 
     func push(_ viewController: UIViewController,
@@ -79,5 +81,14 @@ class BaseCoordinator: NSObject,
         finish()
     }
 
-    final func didRegainFocus(fromChild child: (any ChildCoordinator)?) { /* Do nothing */ }
+    func finish() {
+        parentCoordinator?.childDidFinish(self)
+    }
+
+    func childDidFinish(_ child: BaseCoordinator) {
+        for (index, coordinator) in childCoordinators.enumerated() where coordinator === child {
+            childCoordinators.remove(at: index)
+            break
+        }
+    }
 }

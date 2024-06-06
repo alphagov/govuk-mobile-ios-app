@@ -38,7 +38,6 @@ class LaunchViewController: BaseViewController {
         let blue = LottieColor(r: (0/255), g: (0/255), b: (255/255), a: 1)
         let blueColorValueProvider = ColorValueProvider(blue)
 
-
         // Set color value provider to animation view
         let keyPath = AnimationKeypath(keypath: "**.Group 1.Fill 1.Color")
         print(keyPath)

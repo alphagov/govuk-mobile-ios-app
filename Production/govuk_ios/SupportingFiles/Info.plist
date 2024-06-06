@@ -4,10 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>F1-Bold.ttf</string>
-		<string>F1-Light.ttf</string>
-		<string>F1-Regular.ttf</string>
-		<string>F1-Thin.ttf</string>
+		<string>GDSTransportWebsite.ttf</string>
+		<string>GDSTransportWebsite-Bold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

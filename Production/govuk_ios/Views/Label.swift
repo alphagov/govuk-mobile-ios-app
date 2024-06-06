@@ -6,7 +6,7 @@ class Label: UILabel {
 
     var dynamicFont: GovUKFont? {
         didSet {
-            self.font = dynamicFont?.scaled ?? font
+            self.font = dynamicFont?.font ?? font
         }
     }
 
@@ -30,6 +30,6 @@ class Label: UILabel {
 
     @objc
     private func updateFont() {
-        self.font = self.dynamicFont?.scaled ?? self.font
+        self.font = self.dynamicFont?.font ?? self.font
     }
 }

@@ -12,7 +12,7 @@ struct GovUKFont {
     let size: CGFloat
     let traits: UIFontDescriptor.SymbolicTraits
 
-    var scaled: UIFont {
+    var font: UIFont {
         var mutableTraits = traits
         if UIAccessibility.isBoldTextEnabled {
             mutableTraits.insert(.traitBold)
@@ -40,40 +40,16 @@ struct GovUKFont {
 extension GovUKFont {
     static var header1: GovUKFont {
         .init(
-            family: "F1",
-            size: 30,
+            family: "GDSTransportWebsite",
+            size: 70,
             traits: .init(rawValue: 0)
         )
     }
 
     static var body: GovUKFont {
         .init(
-            family: "F1",
+            family: "GDSTransportWebsite",
             size: 16,
-            traits: .init(rawValue: 0)
-        )
-    }
-
-    static var small: GovUKFont {
-        .init(
-            family: "F1",
-            size: 14,
-            traits: .init(rawValue: 0)
-        )
-    }
-
-    static var micro: GovUKFont {
-        .init(
-            family: "F1",
-            size: 12,
-            traits: .init(rawValue: 0)
-        )
-    }
-
-    static var nano: GovUKFont {
-        .init(
-            family: "F1",
-            size: 8,
             traits: .init(rawValue: 0)
         )
     }

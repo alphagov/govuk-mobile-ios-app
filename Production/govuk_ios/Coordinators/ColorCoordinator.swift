@@ -21,9 +21,6 @@ class ColorCoordinator: BaseCoordinator {
             modalAction: showModalAction
         )
         set([viewController], animated: false)
-
-        guard let url = url else { return }
-        handleDeepLink(url: url)
     }
 
     private var showNextAction: () -> Void {
@@ -48,12 +45,4 @@ class ColorCoordinator: BaseCoordinator {
             strongSelf.present(coordinator)
         }
     }
-
-    private func handleDeepLink(url: String) {
-       let deeplinkFactory = DeepLinkFactory(
-        deepLinkStore: DeepLinkStore()
-       )
-       let deepLink = deeplinkFactory.fetchDeepLink(path: url)
-       deepLink?.action(parent: self)
-   }
 }

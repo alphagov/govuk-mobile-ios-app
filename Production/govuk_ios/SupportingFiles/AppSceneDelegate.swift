@@ -3,6 +3,7 @@ import UIKit
 class AppSceneDelegate: UIResponder,
                         UIWindowSceneDelegate {
     var window: UIWindow?
+    let userDefaults = UserDefaults()
 
     private var coordinator: AppCoordinator?
     private lazy var navigationController: UINavigationController = {
@@ -27,6 +28,8 @@ class AppSceneDelegate: UIResponder,
             coordinatorBuilder: .init(),
             navigationController: navigationController
         )
-        coordinator?.start(url: nil)
+        let defaults = UserDefaults.standard
+        defaults.saveDeepLinkPath(for: "deepLink")
+        coordinator?.start()
     }
 }

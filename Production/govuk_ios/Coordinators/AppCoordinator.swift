@@ -10,23 +10,23 @@ class AppCoordinator: BaseCoordinator {
         super.init(navigationController: navigationController)
     }
 
-    override func start(url: String?) {
-        startLaunch(url: url)
+    override func start() {
+        startLaunch()
     }
 
-    private func startLaunch(url: String?) {
+    private func startLaunch() {
         let coordinator = coordinatorBuilder.launch(
-            navigationController: root, url: url,
-            completion: { [weak self] in
-                self?.showTabs(url: url)
+            navigationController: root,
+            completion: {  [weak self] _ in
+                self?.showTabs()
             }
         )
         start(coordinator)
     }
 
-    private func showTabs(url: String?) {
+    private func showTabs() {
         let coordinator = coordinatorBuilder.tab(
-            navigationController: root, url: url
+            navigationController: root
         )
         start(coordinator)
     }

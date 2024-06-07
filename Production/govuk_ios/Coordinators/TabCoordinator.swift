@@ -23,18 +23,18 @@ class TabCoordinator: BaseCoordinator {
     }()
 
     private let coordinatorBuilder: CoordinatorBuilder
-    private let url: String?
 
     init(coordinatorBuilder: CoordinatorBuilder,
-         navigationController: UINavigationController, url: String?) {
+         navigationController: UINavigationController) {
         self.coordinatorBuilder = coordinatorBuilder
-        self.url = url
         super.init(navigationController: navigationController)
     }
 
     override func start() {
-        if let url = url {
-            handleDeepLink(url: url)
+        let defaults = UserDefaults()
+        let deepLinkpath = defaults.deepLinkPath
+        if let deepLinkpath = deepLinkpath {
+            handleDeepLink(url: deepLinkpath)
         }
         showTabs()
         coordinators.forEach {

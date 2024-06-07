@@ -3,18 +3,18 @@ import Foundation
 
 @MainActor
 class CoordinatorBuilder {
-    func launch(navigationController: UINavigationController, url: String?,
-                completion: @escaping () -> Void) -> BaseCoordinator {
+    func launch(navigationController: UINavigationController,
+                completion: @escaping (String?) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            url: url, completion: completion, paths: []
+             completion: completion, paths: []
         )
     }
 
-    func tab(navigationController: UINavigationController, url: String?) -> BaseCoordinator {
+    func tab(navigationController: UINavigationController) -> BaseCoordinator {
         TabCoordinator(
             coordinatorBuilder: self,
-            navigationController: navigationController, url: url
+            navigationController: navigationController
         )
     }
 

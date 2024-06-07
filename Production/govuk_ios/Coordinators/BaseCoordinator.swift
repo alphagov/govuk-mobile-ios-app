@@ -25,7 +25,7 @@ class BaseCoordinator: NSObject,
         assertionFailure("This needs overriding")
     }
 
-    func start(url: String) {
+    func start(url: String?) {
         assertionFailure("This needs overriding")
     }
 

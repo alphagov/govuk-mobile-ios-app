@@ -2,14 +2,12 @@ import UIKit
 import Foundation
 
 class LaunchCoordinator: BaseCoordinator {
-    private let completion: () -> Void
-    private let url: String?
+    private let completion: (String?) -> Void
     private let deepLinkPaths: [String]
 
-    init(navigationController: UINavigationController, url: String?,
-         completion: @escaping () -> Void, paths: [String]) {
+    init(navigationController: UINavigationController,
+         completion: @escaping (String?) -> Void, paths: [String]) {
         self.completion = completion
-        self.url = url
         self.deepLinkPaths = paths
         super.init(navigationController: navigationController)
     }
@@ -17,22 +15,17 @@ class LaunchCoordinator: BaseCoordinator {
     override func start() {
         let viewController = LaunchViewController()
         set(viewController, animated: false)
-
-        if canHandleLinks(path: url) {
-            handleDeepLink(url: url)
-        } else {
-            sendCompletion()
-        }
-    }
-
-    private func sendCompletion() {
+        let defaults = UserDefaults()
+        handleDeepLink(url: defaults.deepLinkPath)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.completion()
+            self?.completion(defaults.deepLinkPath)
         }
-    }
+        }
 
-    override func canHandleLinks(path: String?) -> Bool {
-        return deepLinkPaths.contains(where: {$0 == path}) ? true : false
+    private func canHandleLinks(path: String?) {
+        if deepLinkPaths.contains(where: {$0 == path}) {
+            handleDeepLink(url: path)
+        }
     }
 
     override func handleDeepLink(url: String?) { }

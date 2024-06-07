@@ -14,9 +14,9 @@ class LaunchCoordinatorTests: XCTestCase {
         let expectation = expectation(description: "completion expectation")
         let subject = LaunchCoordinator(
             navigationController: mockNavigationController,
-            completion: {
+            completion: {_ in 
                 expectation.fulfill()
-            }
+            }, paths: []
         )
 
         subject.start()

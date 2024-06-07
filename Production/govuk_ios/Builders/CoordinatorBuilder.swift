@@ -4,10 +4,10 @@ import Foundation
 @MainActor
 class CoordinatorBuilder {
     func launch(navigationController: UINavigationController,
-                completion: @escaping () -> Void) -> BaseCoordinator {
+                completion: @escaping (String?) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            completion: completion
+             completion: completion, paths: []
         )
     }
 
@@ -22,7 +22,8 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .red,
             color: .red,
-            title: "Red"
+            title: "Red",
+            deepLinkPaths: []
         )
     }
 
@@ -30,7 +31,8 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .blue,
             color: .blue,
-            title: "Blue"
+            title: "Blue",
+            deepLinkPaths: []
         )
     }
 
@@ -38,7 +40,8 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .green,
             color: .green,
-            title: "Green"
+            title: "Green",
+            deepLinkPaths: []
         )
     }
 }

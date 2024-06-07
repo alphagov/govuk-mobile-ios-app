@@ -25,6 +25,18 @@ class BaseCoordinator: NSObject,
         assertionFailure("This needs overriding")
     }
 
+    func start(url: String?) {
+        assertionFailure("This needs overriding")
+    }
+
+    func canHandleLinks(path: String) -> Bool {
+        return false
+    }
+
+    func handleDeepLink(url: String) {
+        assertionFailure("This needs overriding")
+    }
+
     func start(_ coordinator: BaseCoordinator) {
         openChildInline(coordinator)
     }

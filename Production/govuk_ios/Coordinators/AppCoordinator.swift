@@ -17,7 +17,7 @@ class AppCoordinator: BaseCoordinator {
     private func startLaunch() {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
-            completion: { [weak self] in
+            completion: {  [weak self] _ in
                 self?.showTabs()
             }
         )

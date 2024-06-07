@@ -31,6 +31,11 @@ class TabCoordinator: BaseCoordinator {
     }
 
     override func start() {
+        let defaults = UserDefaults()
+        let deepLinkpath = defaults.deepLinkPath
+        if let deepLinkpath = deepLinkpath {
+            handleDeepLink(url: deepLinkpath)
+        }
         showTabs()
         coordinators.forEach {
             $0.parentCoordinator = self
@@ -42,5 +47,11 @@ class TabCoordinator: BaseCoordinator {
     private func showTabs() {
         tabController.viewControllers = coordinators.map { $0.root }
         set([tabController], animated: false)
+    }
+
+    override func handleDeepLink(url: String) {
+        guard let path = URLComponents(string: String(describing: url))?.path
+                , let coordinatorForPath = coordinators.first(where: {$0.canHandleLinks(path: path)}) else { return }
+        coordinatorForPath.handleDeepLink(url: path)
     }
 }

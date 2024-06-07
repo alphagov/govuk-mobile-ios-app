@@ -14,11 +14,14 @@ class ColorCoordinator: BaseCoordinator {
     }
 
     override func start() {
-        let viewController = TestViewController(
+        let viewModel = TestViewModel(
             color: color,
             tabTitle: title,
             nextAction: showNextAction,
             modalAction: showModalAction
+        )
+        let viewController = TestViewController(
+            viewModel: viewModel
         )
         set([viewController], animated: false)
     }

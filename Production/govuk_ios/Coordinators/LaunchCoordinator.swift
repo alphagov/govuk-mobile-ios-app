@@ -2,10 +2,13 @@ import UIKit
 import Foundation
 
 class LaunchCoordinator: BaseCoordinator {
+    private let deeplinkService: DeeplinkServiceInterface
     private let completion: () -> Void
 
     init(navigationController: UINavigationController,
+         deeplinkService: DeeplinkServiceInterface,
          completion: @escaping () -> Void) {
+        self.deeplinkService = deeplinkService
         self.completion = completion
         super.init(navigationController: navigationController)
     }
@@ -14,9 +17,9 @@ class LaunchCoordinator: BaseCoordinator {
         let viewController = LaunchViewController()
         set(viewController, animated: false)
 
-        // Do launch things here
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.completion()
-        }
+        deeplinkService.handle(
+            url: nil,
+            completion: completion
+        )
     }
 }

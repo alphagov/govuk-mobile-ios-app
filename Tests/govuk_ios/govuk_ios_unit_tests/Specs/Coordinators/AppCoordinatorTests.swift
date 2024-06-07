@@ -8,7 +8,9 @@ class AppCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_startsLanuchCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(
+            container: .init()
+        )
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
             navigationController: mockNavigationController
@@ -17,7 +19,8 @@ class AppCoordinatorTests: XCTestCase {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoodinatorBuilder,
-            navigationController: mockNavigationController
+            navigationController: mockNavigationController,
+            deeplinkService: MockDeeplinkService()
         )
 
         subject.start()

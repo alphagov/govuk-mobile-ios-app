@@ -6,11 +6,14 @@ import UIKit
 
 class TestViewControllerTests: SnapshotTestCase {
     func test_loadInNavigationController_rendersCorrectly() {
-        let subject = TestViewController(
+        let viewModel = TestViewModel(
             color: .green,
             tabTitle: "Orange",
             nextAction: {},
             modalAction: {}
+        )
+        let subject = TestViewController(
+            viewModel: viewModel
         )
         VerifySnapshotInWindow(subject)
     }

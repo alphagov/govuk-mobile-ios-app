@@ -1,9 +1,7 @@
 import UIKit
 
 class TestViewController: BaseViewController {
-    private let color: UIColor
-    private let nextAction: () -> Void
-    private let modalAction: () -> Void
+    private let viewModel: TestViewModel
 
     private lazy var nextButton: UIButton = {
         let localView = UIButton(frame: .zero)
@@ -25,15 +23,10 @@ class TestViewController: BaseViewController {
         return localView
     }()
 
-    init(color: UIColor,
-         tabTitle: String,
-         nextAction: @escaping () -> Void,
-         modalAction: @escaping () -> Void) {
-        self.color = color
-        self.nextAction = nextAction
-        self.modalAction = modalAction
+    init(viewModel: TestViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.title = tabTitle
+        self.title = viewModel.tabTitle
         navigationItem.largeTitleDisplayMode = .always
     }
 
@@ -43,7 +36,7 @@ class TestViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = color
+        view.backgroundColor = viewModel.color
         view.addSubview(nextButton)
         nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -56,11 +49,11 @@ class TestViewController: BaseViewController {
 
     @objc
     private func buttonPressed() {
-        nextAction()
+        viewModel.nextAction()
     }
 
     @objc
     private func modalButtonPressed() {
-        modalAction()
+        viewModel.modalAction()
     }
 }

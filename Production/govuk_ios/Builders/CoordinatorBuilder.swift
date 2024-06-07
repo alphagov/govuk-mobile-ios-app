@@ -3,27 +3,24 @@ import Foundation
 
 @MainActor
 class CoordinatorBuilder {
-    func launch(navigationController: UINavigationController, url: String?,
-                completion: @escaping () -> Void) -> BaseCoordinator {
+    func launch(navigationController: UINavigationController,
+                completion: @escaping (String?) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            url: url, completion: completion, paths: []
+            completion: completion
         )
     }
 
-    func tab(navigationController: UINavigationController, url: String?) -> BaseCoordinator {
+    func tab(navigationController: UINavigationController) -> BaseCoordinator {
         TabCoordinator(
             coordinatorBuilder: self,
-            navigationController: navigationController, url: url
+            navigationController: navigationController
         )
     }
 
     var red: BaseCoordinator {
-        ColorCoordinator(
-            navigationController: .red,
-            color: .red,
-            title: "Red",
-            deepLinkPaths: []
+        RedCoordinator(
+            navigationController: .red
         )
     }
 
@@ -31,8 +28,7 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .blue,
             color: .blue,
-            title: "Blue",
-            deepLinkPaths: []
+            title: "Blue"
         )
     }
 
@@ -40,8 +36,7 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .green,
             color: .green,
-            title: "Green",
-            deepLinkPaths: []
+            title: "Green"
         )
     }
 }

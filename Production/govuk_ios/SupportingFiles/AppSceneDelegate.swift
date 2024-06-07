@@ -27,6 +27,6 @@ class AppSceneDelegate: UIResponder,
             coordinatorBuilder: .init(),
             navigationController: navigationController
         )
-        coordinator?.start(url: nil)
+        coordinator?.start(url: "/test")
     }
 }

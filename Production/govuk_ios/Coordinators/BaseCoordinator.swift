@@ -1,4 +1,3 @@
-import Coordination
 import Foundation
 import UIKit
 
@@ -8,7 +7,7 @@ class BaseCoordinator: NSObject,
     private var childCoordinators: [BaseCoordinator] = []
     private var parentCoordinator: BaseCoordinator?
     private var stackedViewControllers: NSHashTable<UIViewController> = .weakObjects()
-    private var root: UINavigationController
+    private(set) var root: UINavigationController
 
     init(navigationController: UINavigationController) {
         self.root = navigationController
@@ -16,37 +15,27 @@ class BaseCoordinator: NSObject,
         navigationController.presentationController?.delegate = self
     }
 
-    func start() {
+    func start(url: String?) {
         assertionFailure("This needs overriding")
     }
 
-    func start(url: String) {
-        assertionFailure("This needs overriding")
-    }
-
-    func canHandleLinks(path: String) -> Bool {
+    func canHandleLink(path: String) -> Bool {
         return false
     }
 
-    func handleDeepLink(url: String) {
-        assertionFailure("This needs overriding")
-    }
-
-    func start(_ coordinator: BaseCoordinator) {
-        start(child: coordinator)
+    func start(_ coordinator: BaseCoordinator,
+               url: String? = nil) {
+        childCoordinators.append(coordinator)
+        coordinator.root.delegate = coordinator
+        coordinator.parentCoordinator = self
+        coordinator.start(url: url)
     }
 
     func present(_ coordinator: BaseCoordinator,
+                 url: String? = nil,
                  animated: Bool = true) {
-        start(child: coordinator)
+        start(coordinator, url: url)
         root.present(coordinator.root, animated: animated)
-    }
-
-    private func start(child: BaseCoordinator) {
-        childCoordinators.append(child)
-        child.root.delegate = child
-        child.parentCoordinator = self
-        child.start()
     }
 
     func push(_ viewController: UIViewController,

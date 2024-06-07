@@ -1,22 +1,11 @@
 import UIKit
 import Foundation
 
-class ColorCoordinator: BaseCoordinator {
-    private let color: UIColor
-    private let title: String
-
-    init(navigationController: UINavigationController,
-         color: UIColor,
-         title: String) {
-        self.color = color
-        self.title = title
-        super.init(navigationController: navigationController)
-    }
-
+class RedCoordinator: BaseCoordinator {
     override func start(url: String?) {
         let viewController = TestViewController(
-            color: color,
-            tabTitle: title,
+            color: .red,
+            tabTitle: "Red",
             nextAction: showNextAction,
             modalAction: showModalAction
         )
@@ -50,10 +39,10 @@ class ColorCoordinator: BaseCoordinator {
     }
 
     private func handleDeepLink(url: String) {
-       let deeplinkFactory = DeepLinkFactory(
-        deepLinkStore: DeepLinkStore()
-       )
-       let deepLink = deeplinkFactory.fetchDeepLink(path: url)
-       deepLink?.action(parent: self)
-   }
+        let deeplinkFactory = DeepLinkFactory(
+            deepLinkStore: DeepLinkStore()
+        )
+        let deepLink = deeplinkFactory.fetchDeepLink(path: url)
+        deepLink?.action(parent: self)
+    }
 }

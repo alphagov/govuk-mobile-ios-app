@@ -16,18 +16,18 @@ class AppCoordinator: BaseCoordinator {
 
     private func startLaunch(url: String?) {
         let coordinator = coordinatorBuilder.launch(
-            navigationController: root, url: url,
-            completion: { [weak self] in
+            navigationController: root,
+            completion: { [weak self] url in
                 self?.showTabs(url: url)
             }
         )
-        start(coordinator)
+        start(coordinator, url: url)
     }
 
     private func showTabs(url: String?) {
         let coordinator = coordinatorBuilder.tab(
-            navigationController: root, url: url
+            navigationController: root
         )
-        start(coordinator)
+        start(coordinator, url: url)
     }
 }

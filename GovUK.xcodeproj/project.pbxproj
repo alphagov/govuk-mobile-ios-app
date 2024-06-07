@@ -32,9 +32,10 @@
 		5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D54A83A2BFCE667003D0C21 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
 		5D54A83B2BFCE669003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
-		5D99312E2BF7642C0036C8FB /* Coordination in Frameworks */ = {isa = PBXBuildFile; productRef = 5D99312D2BF7642C0036C8FB /* Coordination */; };
 		5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */; };
 		5D9931322BF77AC70036C8FB /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9931312BF77AC70036C8FB /* NextCoordinator.swift */; };
+		5DA6DE452C12F49F007F9937 /* DeeplinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6DE442C12F49F007F9937 /* DeeplinkCoordinator.swift */; };
+		5DA6DE472C12F877007F9937 /* RedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6DE462C12F877007F9937 /* RedCoordinator.swift */; };
 		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */; };
 		5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD717B2BD250DB0075F648 /* TestViewController.swift */; };
@@ -85,6 +86,8 @@
 		5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSceneDelegate.swift; sourceTree = "<group>"; };
 		5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		5D9931312BF77AC70036C8FB /* NextCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
+		5DA6DE442C12F49F007F9937 /* DeeplinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkCoordinator.swift; sourceTree = "<group>"; };
+		5DA6DE462C12F877007F9937 /* RedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedCoordinator.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +110,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D2129E02BDF98E100142E46 /* Services in Frameworks */,
-				5D99312E2BF7642C0036C8FB /* Coordination in Frameworks */,
 				5D1353AB2BE0D75000414441 /* Homepage in Frameworks */,
 				5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */,
 			);
@@ -162,8 +164,10 @@
 				5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */,
 				5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */,
 				5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */,
+				5DA6DE442C12F49F007F9937 /* DeeplinkCoordinator.swift */,
 				5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */,
 				5D9931312BF77AC70036C8FB /* NextCoordinator.swift */,
+				5DA6DE462C12F877007F9937 /* RedCoordinator.swift */,
 				5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -352,7 +356,6 @@
 				5D2129DF2BDF98E100142E46 /* Services */,
 				5D2129E22BDF98EA00142E46 /* Onboarding */,
 				5D1353AA2BE0D75000414441 /* Homepage */,
-				5D99312D2BF7642C0036C8FB /* Coordination */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -430,7 +433,6 @@
 				5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */,
 				5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
 				5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */,
-				5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -504,6 +506,7 @@
 				5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */,
 				5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
+				5DA6DE472C12F877007F9937 /* RedCoordinator.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
@@ -512,6 +515,7 @@
 				4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */,
+				5DA6DE452C12F49F007F9937 /* DeeplinkCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,14 +884,6 @@
 				kind = branch;
 			};
 		};
-		5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/govuk-one-login/mobile-ios-coordination";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -905,11 +901,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
 			productName = Onboarding;
-		};
-		5D99312D2BF7642C0036C8FB /* Coordination */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */;
-			productName = Coordination;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

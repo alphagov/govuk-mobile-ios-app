@@ -29,4 +29,24 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssertTrue(mockLaunchCoodinator._startCalled)
     }
 
+    @MainActor
+    func test_test3() {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(
+            container: .init()
+        )
+        let mockNavigationController = UINavigationController()
+        let mockLaunchCoodinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        mockCoodinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoodinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoodinatorBuilder,
+            navigationController: mockNavigationController,
+            deeplinkService: MockDeeplinkService()
+        )
+
+        subject.test3()
+    }
+
 }

@@ -33,4 +33,16 @@ class AppCoordinator: BaseCoordinator {
         )
         start(coordinator)
     }
+
+    func test() {
+        test2()
+    }
+
+    func test2() {
+        test3()
+    }
+
+    func test3() {
+        print("test")
+    }
 }

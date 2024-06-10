@@ -45,4 +45,32 @@ class AppCoordinator: BaseCoordinator {
     func test3() {
         print("test")
     }
+
+    func test4() {
+        print("test")
+    }
+
+    func test5() {
+        print("test")
+    }
+
+    func test6() {
+        print("test")
+    }
+
+    func test7() {
+        print("test")
+    }
+
+    func test8() {
+        print("test")
+    }
+
+    func test9() {
+        print("test")
+    }
+
+    func test10() {
+        print("test")
+    }
 }

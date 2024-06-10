@@ -1,5 +1,3 @@
-//
-
 import Foundation
 import UIKit
 
@@ -11,7 +9,8 @@ struct DeepLinkFactory {
     }
 
     func fetchDeepLink(path: String) -> DeepLink? {
-        deepLinkStore.returnDeepLinks()
+        deepLinkStore
+            .deeplinks
             .first { $0.path == path }
     }
 }

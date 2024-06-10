@@ -40,7 +40,7 @@ class RedCoordinator: BaseCoordinator {
 
     private func handleDeepLink(url: String) {
         let deeplinkFactory = DeepLinkFactory(
-            deepLinkStore: DeepLinkStore()
+            deepLinkStore: TestDeepLinkStore()
         )
         let deepLink = deeplinkFactory.fetchDeepLink(path: url)
         deepLink?.action(parent: self)

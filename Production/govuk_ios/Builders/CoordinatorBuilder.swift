@@ -24,11 +24,10 @@ class CoordinatorBuilder {
         )
     }
 
-    var blue: BaseCoordinator {
-        ColorCoordinator(
+    func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
+        BlueCoordinator(
             navigationController: .blue,
-            color: .blue,
-            title: "Blue"
+            requestFocus: requestFocus
         )
     }
 
@@ -37,6 +36,12 @@ class CoordinatorBuilder {
             navigationController: .green,
             color: .green,
             title: "Green"
+        )
+    }
+
+    var driving: BaseCoordinator {
+        DrivingCoordinator(
+            navigationController: .green
         )
     }
 }

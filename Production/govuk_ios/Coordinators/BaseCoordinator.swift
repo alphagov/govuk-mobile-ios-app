@@ -19,10 +19,6 @@ class BaseCoordinator: NSObject,
         assertionFailure("This needs overriding")
     }
 
-    func canHandleLink(path: String) -> Bool {
-        return false
-    }
-
     func start(_ coordinator: BaseCoordinator,
                url: String? = nil) {
         childCoordinators.append(coordinator)
@@ -78,6 +74,14 @@ class BaseCoordinator: NSObject,
         for (index, coordinator) in childCoordinators.enumerated() where coordinator === child {
             childCoordinators.remove(at: index)
             break
+        }
+    }
+
+    func dismiss(animated: Bool) {
+        if root.presentingViewController != nil {
+            root.dismiss(animated: animated)
+        } else {
+            root.popViewController(animated: animated)
         }
     }
 }

@@ -14,10 +14,14 @@
 		5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */; };
 		5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */; };
 		5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */; };
+		5D168ABA2C16E77C00E021BE /* BlueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */; };
 		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
 		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
 		5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */; };
 		5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */; };
+		5D40091A2C134AC2001A842C /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4009192C134AC2001A842C /* DrivingCoordinator.swift */; };
+		5D40091C2C134AD0001A842C /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D40091B2C134AD0001A842C /* PermitCoordinator.swift */; };
+		5D40091E2C134ADE001A842C /* PermitCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D40091D2C134ADE001A842C /* PermitCreateCoordinator.swift */; };
 		5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */; };
 		5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
@@ -71,8 +75,12 @@
 		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
+		5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueCoordinator.swift; sourceTree = "<group>"; };
 		5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		5D4009192C134AC2001A842C /* DrivingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
+		5D40091B2C134AD0001A842C /* PermitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitCoordinator.swift; sourceTree = "<group>"; };
+		5D40091D2C134ADE001A842C /* PermitCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitCreateCoordinator.swift; sourceTree = "<group>"; };
 		5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
 		5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilder.swift; sourceTree = "<group>"; };
 		5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
@@ -158,6 +166,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5D168ABB2C16F72500E021BE /* Driving */ = {
+			isa = PBXGroup;
+			children = (
+				5D4009192C134AC2001A842C /* DrivingCoordinator.swift */,
+				5D40091B2C134AD0001A842C /* PermitCoordinator.swift */,
+				5D40091D2C134ADE001A842C /* PermitCreateCoordinator.swift */,
+			);
+			path = Driving;
+			sourceTree = "<group>";
+		};
 		5D2129E92BDFA00E00142E46 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +186,9 @@
 				5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */,
 				5D9931312BF77AC70036C8FB /* NextCoordinator.swift */,
 				5DA6DE462C12F877007F9937 /* RedCoordinator.swift */,
+				5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */,
 				5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */,
+				5D168ABB2C16F72500E021BE /* Driving */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -506,16 +526,20 @@
 				5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */,
 				5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
+				5D40091E2C134ADE001A842C /* PermitCreateCoordinator.swift in Sources */,
 				5DA6DE472C12F877007F9937 /* RedCoordinator.swift in Sources */,
+				5D168ABA2C16E77C00E021BE /* BlueCoordinator.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
+				5D40091A2C134AC2001A842C /* DrivingCoordinator.swift in Sources */,
 				4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */,
 				5DA6DE452C12F49F007F9937 /* DeeplinkCoordinator.swift in Sources */,
+				5D40091C2C134AD0001A842C /* PermitCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

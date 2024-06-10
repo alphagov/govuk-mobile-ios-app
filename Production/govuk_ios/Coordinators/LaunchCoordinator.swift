@@ -13,12 +13,7 @@ class LaunchCoordinator: BaseCoordinator {
     override func start(url: String?) {
         let viewController = LaunchViewController()
         set(viewController, animated: false)
-
-        //        if canHandleLinks(path: url) {
-        //            handleDeepLink(url: url)
-        //        } else {
         sendCompletion(url: url)
-        //        }
     }
 
     private func sendCompletion(url: String?) {

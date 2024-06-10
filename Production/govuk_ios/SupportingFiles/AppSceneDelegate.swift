@@ -4,7 +4,10 @@ class AppSceneDelegate: UIResponder,
                         UIWindowSceneDelegate {
     var window: UIWindow?
 
-    private var coordinator: AppCoordinator?
+    private lazy var coordinator: AppCoordinator? = AppCoordinator(
+        coordinatorBuilder: .init(),
+        navigationController: navigationController
+    )
     private lazy var navigationController: UINavigationController = {
         let controller = UINavigationController()
         controller.setNavigationBarHidden(true, animated: false)
@@ -19,14 +22,8 @@ class AppSceneDelegate: UIResponder,
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        loadAppCoordinator()
-    }
-
-    private func loadAppCoordinator() {
-        coordinator = AppCoordinator(
-            coordinatorBuilder: .init(),
-            navigationController: navigationController
-        )
-        coordinator?.start(url: "/test")
+        coordinator?.start(url: "/driving")
+//        coordinator?.start(url: "/driving/permit/123")
+//        coordinator?.start(url: nil)
     }
 }

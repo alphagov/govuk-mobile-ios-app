@@ -11,9 +11,4 @@ class DeepLinkStoreTests: XCTestCase {
         XCTAssertEqual(subject.deeplinks.count, 2)
     }
 
-    func test_testDeeplinkStore_hasCorrectDeepLinks() {
-        let subject = TestDeepLinkStore()
-        XCTAssertEqual(subject.deeplinks.count, 1)
-    }
-
 }

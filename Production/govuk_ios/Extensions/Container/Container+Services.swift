@@ -4,15 +4,6 @@ import UIKit
 import Factory
 
 extension Container {
-    var coordinatorBuilder: Factory<CoordinatorBuilder> {
-        Factory(self) {
-            CoordinatorBuilder(
-                container: .shared
-            )
-        }
-        .scope(.singleton)
-    }
-
     var testService: Factory<TestServiceInterface> {
         Factory(self) {
             TestService(

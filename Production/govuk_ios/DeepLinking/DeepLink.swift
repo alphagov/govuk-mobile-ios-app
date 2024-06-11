@@ -6,17 +6,6 @@ protocol DeepLink {
     func action(parent: BaseCoordinator)
 }
 
-struct TestDeepLink: DeepLink {
-    var path: String { "/test" }
-
-    func action(parent: BaseCoordinator) {
-        let coordinator = DeeplinkCoordinator(
-            navigationController: parent.root
-        )
-        parent.start(coordinator)
-    }
-}
-
 struct DrivingDeepLink: DeepLink {
     var path: String { "/driving" }
 

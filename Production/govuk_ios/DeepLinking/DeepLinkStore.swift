@@ -12,11 +12,3 @@ struct DrivingDeepLinkStore: DeepLinkStore {
         ]
     }
 }
-
-struct TestDeepLinkStore: DeepLinkStore {
-    var deeplinks: [any DeepLink] {
-        return [
-            TestDeepLink()
-        ]
-    }
-}

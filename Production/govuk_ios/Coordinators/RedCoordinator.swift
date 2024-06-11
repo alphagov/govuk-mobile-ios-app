@@ -13,9 +13,6 @@ class RedCoordinator: BaseCoordinator {
             viewModel: viewModel
         )
         set([viewController], animated: false)
-
-        guard let url = url else { return }
-        handleDeepLink(url: url)
     }
 
     private var showNextAction: () -> Void {
@@ -39,13 +36,5 @@ class RedCoordinator: BaseCoordinator {
             )
             strongSelf.present(coordinator)
         }
-    }
-
-    private func handleDeepLink(url: String) {
-        let deeplinkFactory = DeepLinkFactory(
-            deepLinkStore: TestDeepLinkStore()
-        )
-        let deepLink = deeplinkFactory.fetchDeepLink(path: url)
-        deepLink?.action(parent: self)
     }
 }

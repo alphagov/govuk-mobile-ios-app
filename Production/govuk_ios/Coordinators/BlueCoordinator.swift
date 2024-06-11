@@ -43,7 +43,8 @@ class BlueCoordinator: BaseCoordinator {
         guard let deepLink = deeplinkFactory.fetchDeepLink(path: url)
         else { return }
         requestFocus(root)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [unowned self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
             deepLink.action(parent: self)
         }
     }

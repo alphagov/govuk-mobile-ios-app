@@ -31,12 +31,11 @@ class TabCoordinatorTests: XCTestCase {
             navigationController: navigationController
         )
 
-        subject.start()
+        subject.start(url: nil)
 
         XCTAssertEqual(navigationController.viewControllers.count, 1)
         let tabController = navigationController.viewControllers.first as? UITabBarController
         XCTAssertEqual(tabController?.viewControllers?.count, 3)
-        XCTAssertEqual(subject.childCoordinators.count, 3)
         let expectedCoordinators = [
             mockRedCoordinator,
             mockBlueCoordinator,
@@ -44,7 +43,6 @@ class TabCoordinatorTests: XCTestCase {
         ]
         expectedCoordinators.forEach {
             XCTAssertTrue($0._startCalled)
-            XCTAssert($0.parentCoordinator === subject)
         }
     }
 

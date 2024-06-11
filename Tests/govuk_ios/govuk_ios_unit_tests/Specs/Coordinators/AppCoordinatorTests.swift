@@ -23,7 +23,7 @@ class AppCoordinatorTests: XCTestCase {
             deeplinkService: MockDeeplinkService()
         )
 
-        subject.start()
+        subject.start(url: nil)
 
         XCTAssertEqual(mockCoodinatorBuilder._receivedLaunchNavigationController, mockNavigationController)
         XCTAssertTrue(mockLaunchCoodinator._startCalled)

@@ -1,8 +1,6 @@
 import Foundation
 import XCTest
 
-import Coordination
-
 @testable import govuk_ios
 
 class LaunchCoordinatorTests: XCTestCase {
@@ -16,13 +14,12 @@ class LaunchCoordinatorTests: XCTestCase {
         let subject = LaunchCoordinator(
             navigationController: mockNavigationController,
             deeplinkService: mockDeeplinkService,
-            completion: {
+            completion: { _ in
                 expectation.fulfill()
             }
         )
 
-        subject.start()
+        subject.start(url: nil)
         wait(for: [expectation], timeout: 2)
     }
-
 }

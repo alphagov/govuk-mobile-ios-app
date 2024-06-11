@@ -4,6 +4,7 @@ import Foundation
 class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let deeplinkService: DeeplinkServiceInterface
+    private var firstLaunch: Bool = true
 
     init(coordinatorBuilder: CoordinatorBuilder,
          navigationController: UINavigationController,
@@ -14,7 +15,11 @@ class AppCoordinator: BaseCoordinator {
     }
 
     override func start(url: String?) {
-        startLaunch(url: url)
+        if firstLaunch {
+            startLaunch(url: url)
+        } else {
+            showTabs(url: url)
+        }
     }
 
     private func startLaunch(url: String?) {
@@ -22,6 +27,7 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             completion: { [weak self] url in
                 self?.showTabs(url: url)
+                self?.firstLaunch = false
             }
         )
         start(coordinator, url: url)

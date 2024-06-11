@@ -17,7 +17,8 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedLaunchCoordinator: MockBaseCoordinator?
     var _receivedLaunchNavigationController: UINavigationController?
-    override func launch(navigationController: UINavigationController, completion: @escaping () -> Void) -> BaseCoordinator {
+    override func launch(navigationController: UINavigationController, 
+                         completion: @escaping (String?) -> Void) -> BaseCoordinator {
         _receivedLaunchNavigationController = navigationController
         return _stubbedLaunchCoordinator ??
         MockBaseCoordinator(
@@ -34,7 +35,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedBlueCoordinator: MockBaseCoordinator?
-    override var blue: BaseCoordinator {
+    override func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
         _stubbedBlueCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()

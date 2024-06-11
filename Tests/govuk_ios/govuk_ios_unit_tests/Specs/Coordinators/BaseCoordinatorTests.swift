@@ -1,8 +1,6 @@
 import Foundation
 import XCTest
 
-import Coordination
-
 @testable import govuk_ios
 
 class BaseCoordinatorTests: XCTestCase {
@@ -28,13 +26,13 @@ class BaseCoordinatorTests: XCTestCase {
     @MainActor
     func test_presentationControllerDidDismiss_callsFinish() {
         let navigationController = UINavigationController()
-        let subject = BaseCoordinator(navigationController: navigationController)
-        let parentCoordinator = MockParentCoordinator()
-        subject.parentCoordinator = parentCoordinator
+        let subject = TestCoordinator(navigationController: navigationController)
+        let parentCoordinator = MockBaseCoordinator()
+        parentCoordinator.start(subject)
 
         let expectation = expectation(description: "regain handler")
-        parentCoordinator.didRegainHandler = { child in
-            XCTAssertEqual(child as? BaseCoordinator, subject)
+        parentCoordinator._childDidFinishHandler = { child in
+            XCTAssertEqual(child, subject)
             expectation.fulfill()
         }
 
@@ -49,7 +47,7 @@ class BaseCoordinatorTests: XCTestCase {
     @MainActor
     func test_push_addsViewControllerToStack() {
         let navigationController = UINavigationController()
-        let subject = BaseCoordinator(navigationController: navigationController)
+        let subject = TestCoordinator(navigationController: navigationController)
 
         let viewController1 = UIViewController()
         navigationController.viewControllers = [viewController1]
@@ -65,7 +63,7 @@ class BaseCoordinatorTests: XCTestCase {
     @MainActor
     func test_setViewController_addsViewControllerToStack() {
         let navigationController = UINavigationController()
-        let subject = BaseCoordinator(navigationController: navigationController)
+        let subject = TestCoordinator(navigationController: navigationController)
 
         let viewController1 = UIViewController()
         navigationController.viewControllers = [viewController1]
@@ -80,7 +78,7 @@ class BaseCoordinatorTests: XCTestCase {
     @MainActor
     func test_setViewControllers_addsViewControllerToStack() {
         let navigationController = UINavigationController()
-        let subject = BaseCoordinator(navigationController: navigationController)
+        let subject = TestCoordinator(navigationController: navigationController)
 
         let viewController1 = UIViewController()
         navigationController.viewControllers = [viewController1]
@@ -101,17 +99,17 @@ class BaseCoordinatorTests: XCTestCase {
     @MainActor
     func test_viewControllerPopped_remainingViewControllers_doesNothing() {
         let navigationController = UINavigationController()
-        let subject = BaseCoordinator(navigationController: navigationController)
+        let subject = TestCoordinator(navigationController: navigationController)
 
-        let parentCoordinator = MockParentCoordinator()
-        subject.parentCoordinator = parentCoordinator
+        let parentCoordinator = MockBaseCoordinator()
+        parentCoordinator.start(subject)
 
         subject.push(UIViewController(), animated: false)
         subject.push(UIViewController(), animated: false)
 
         let expectation = expectation(description: "regain handler 2")
         expectation.isInverted = true
-        parentCoordinator.didRegainHandler = { child in
+        parentCoordinator._childDidFinishHandler = { child in
             expectation.fulfill()
         }
 
@@ -122,7 +120,7 @@ class BaseCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_viewControllerPopped_finalViewController_callsFinish() {
-        let parentCoordinator = MockParentCoordinator()
+        let parentCoordinator = MockBaseCoordinator()
         let navigationController = parentCoordinator.root
         let window = UIApplication.shared.windows.first!
         window.rootViewController = navigationController
@@ -130,14 +128,14 @@ class BaseCoordinatorTests: XCTestCase {
 
         //Requires TestCoordinator to prevent crash when calling start()
         let subject = TestCoordinator(navigationController: navigationController)
-        parentCoordinator.openChildInline(subject)
+        parentCoordinator.start(subject)
 
         navigationController.pushViewController(UIViewController(), animated: false)
 
         subject.push(UIViewController(), animated: false)
 
         let expectation = expectation(description: "regain handler 3")
-        parentCoordinator.didRegainHandler = { child in
+        parentCoordinator._childDidFinishHandler = { child in
             expectation.fulfill()
         }
 
@@ -172,16 +170,10 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssertTrue(child._startCalled)
         XCTAssertEqual(navigationController._presentedViewController, childNavigationController)
     }
-
-    @MainActor
-    func test_didRegainFocus_doesNothing() {
-        let subject = TestCoordinator(navigationController: .init())
-        subject.didRegainFocus(fromChild: nil)
-    }
 }
 
 private class TestCoordinator: BaseCoordinator {
 
-    override func start() { }
+    override func start(url: String?) { }
 
 }

@@ -3,7 +3,6 @@ import Foundation
 
 import Factory
 
-@MainActor
 class CoordinatorBuilder {
     private let container: Container
 

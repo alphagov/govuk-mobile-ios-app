@@ -3,7 +3,7 @@ import Foundation
 
 class PermitCoordinator: BaseCoordinator {
     override func start(url: String?) {
-        let viewController = TestViewController(
+        let viewModel = TestViewModel(
             color: .lightGray,
             tabTitle: "Permit",
             nextAction: {},
@@ -11,6 +11,9 @@ class PermitCoordinator: BaseCoordinator {
                 self?.dismiss(animated: true)
                 self?.finish()
             }
+        )
+        let viewController = TestViewController(
+            viewModel: viewModel
         )
         push(viewController, animated: true)
     }

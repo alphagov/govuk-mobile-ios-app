@@ -22,6 +22,27 @@
 		5D40091A2C134AC2001A842C /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4009192C134AC2001A842C /* DrivingCoordinator.swift */; };
 		5D40091C2C134AD0001A842C /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D40091B2C134AD0001A842C /* PermitCoordinator.swift */; };
 		5D40091E2C134ADE001A842C /* PermitCreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D40091D2C134ADE001A842C /* PermitCreateCoordinator.swift */; };
+		5D41DB552C0862840011E691 /* LaunchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */; };
+		5D41DB582C08651E0011E691 /* BaseViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB572C08651E0011E691 /* BaseViewControllerTests.swift */; };
+		5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB5C2C0870020011E691 /* Container+Aliases.swift */; };
+		5D41DB602C0875520011E691 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB5F2C0875520011E691 /* TestViewModel.swift */; };
+		5D41DB632C08755F0011E691 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB622C08755F0011E691 /* TestService.swift */; };
+		5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB642C087BCE0011E691 /* Container+Services.swift */; };
+		5D41DB692C088C580011E691 /* TestNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* TestNetworkClient.swift */; };
+		5D41DB6C2C088CD30011E691 /* TestDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6B2C088CD30011E691 /* TestDataStore.swift */; };
+		5D41DB6E2C088FE30011E691 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
+		5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6F2C088FEB0011E691 /* Container+NetworkClients.swift */; };
+		5D41DB732C08981A0011E691 /* DeeplinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB722C08981A0011E691 /* DeeplinkService.swift */; };
+		5D41DB762C08AD640011E691 /* DeeplinkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB752C08AD640011E691 /* DeeplinkServiceTests.swift */; };
+		5D41DB782C08AE950011E691 /* MockDeeplinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB772C08AE950011E691 /* MockDeeplinkService.swift */; };
+		5D41DB7A2C08AFC00011E691 /* TestServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB792C08AFC00011E691 /* TestServiceTests.swift */; };
+		5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5D41DB7B2C09BF340011E691 /* Settings.bundle */; };
+		5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */; };
+		5D4B9D3F2C074227005F126A /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5D4B9D422C074251005F126A /* TestViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */; };
+		5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */; };
+		5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
+		5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
 		5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */; };
 		5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
@@ -36,6 +57,8 @@
 		5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D54A83A2BFCE667003D0C21 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
 		5D54A83B2BFCE669003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
+		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
+		5D99312E2BF7642C0036C8FB /* Coordination in Frameworks */ = {isa = PBXBuildFile; productRef = 5D99312D2BF7642C0036C8FB /* Coordination */; };
 		5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */; };
 		5D9931322BF77AC70036C8FB /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9931312BF77AC70036C8FB /* NextCoordinator.swift */; };
 		5DA6DE452C12F49F007F9937 /* DeeplinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6DE442C12F49F007F9937 /* DeeplinkCoordinator.swift */; };
@@ -52,6 +75,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5D4B9D382C074207005F126A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DAD716C2BD250DA0075F648 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5DAD71732BD250DB0075F648;
+			remoteInfo = govuk_ios;
+		};
 		5DAD718B2BD250DF0075F648 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DAD716C2BD250DA0075F648 /* Project object */;
@@ -68,6 +98,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5D4B9D402C074227005F126A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5D4B9D3F2C074227005F126A /* iOSSnapshotTestCase in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4E3367382C0DE3E3000CA45F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkStore.swift; sourceTree = "<group>"; };
@@ -81,6 +125,22 @@
 		5D4009192C134AC2001A842C /* DrivingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
 		5D40091B2C134AD0001A842C /* PermitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitCoordinator.swift; sourceTree = "<group>"; };
 		5D40091D2C134ADE001A842C /* PermitCreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitCreateCoordinator.swift; sourceTree = "<group>"; };
+		5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewControllerTests.swift; sourceTree = "<group>"; };
+		5D41DB572C08651E0011E691 /* BaseViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerTests.swift; sourceTree = "<group>"; };
+		5D41DB5C2C0870020011E691 /* Container+Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Aliases.swift"; sourceTree = "<group>"; };
+		5D41DB5F2C0875520011E691 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		5D41DB622C08755F0011E691 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
+		5D41DB642C087BCE0011E691 /* Container+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Services.swift"; sourceTree = "<group>"; };
+		5D41DB682C088C580011E691 /* TestNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNetworkClient.swift; sourceTree = "<group>"; };
+		5D41DB6B2C088CD30011E691 /* TestDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataStore.swift; sourceTree = "<group>"; };
+		5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+DataStores.swift"; sourceTree = "<group>"; };
+		5D41DB6F2C088FEB0011E691 /* Container+NetworkClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+NetworkClients.swift"; sourceTree = "<group>"; };
+		5D41DB722C08981A0011E691 /* DeeplinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkService.swift; sourceTree = "<group>"; };
+		5D41DB752C08AD640011E691 /* DeeplinkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkServiceTests.swift; sourceTree = "<group>"; };
+		5D41DB772C08AE950011E691 /* MockDeeplinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeeplinkService.swift; sourceTree = "<group>"; };
+		5D41DB792C08AFC00011E691 /* TestServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestServiceTests.swift; sourceTree = "<group>"; };
+		5D41DB7B2C09BF340011E691 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_snapshot_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
 		5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilder.swift; sourceTree = "<group>"; };
 		5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
@@ -92,6 +152,8 @@
 		5D54A8312BFCBF50003D0C21 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSceneDelegate.swift; sourceTree = "<group>"; };
+		5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
 		5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		5D9931312BF77AC70036C8FB /* NextCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
 		5DA6DE442C12F49F007F9937 /* DeeplinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkCoordinator.swift; sourceTree = "<group>"; };
@@ -108,16 +170,27 @@
 		5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParentCoordinator.swift; sourceTree = "<group>"; };
+		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5D4B9D312C074207005F126A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DAD71712BD250DB0075F648 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5D2129E02BDF98E100142E46 /* Services in Frameworks */,
+				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
+				5D99312E2BF7642C0036C8FB /* Coordination in Frameworks */,
 				5D1353AB2BE0D75000414441 /* Homepage in Frameworks */,
 				5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */,
 			);
@@ -160,6 +233,7 @@
 		5D1353AE2BE0D9A700414441 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5D41DB662C087C520011E691 /* Container */,
 				5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */,
 				5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */,
 			);
@@ -181,16 +255,94 @@
 			children = (
 				5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */,
 				5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */,
+				5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */,
 				5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */,
 				5DA6DE442C12F49F007F9937 /* DeeplinkCoordinator.swift */,
+				5D168ABB2C16F72500E021BE /* Driving */,
 				5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */,
 				5D9931312BF77AC70036C8FB /* NextCoordinator.swift */,
 				5DA6DE462C12F877007F9937 /* RedCoordinator.swift */,
-				5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */,
 				5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */,
-				5D168ABB2C16F72500E021BE /* Driving */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		5D41DB562C0865120011E691 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D41DB572C08651E0011E691 /* BaseViewControllerTests.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5D41DB5E2C0875460011E691 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5D41DB5F2C0875520011E691 /* TestViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5D41DB612C0875560011E691 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5D41DB622C08755F0011E691 /* TestService.swift */,
+				5D41DB722C08981A0011E691 /* DeeplinkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5D41DB662C087C520011E691 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				5D41DB5C2C0870020011E691 /* Container+Aliases.swift */,
+				5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */,
+				5D41DB6F2C088FEB0011E691 /* Container+NetworkClients.swift */,
+				5D41DB642C087BCE0011E691 /* Container+Services.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		5D41DB672C087F850011E691 /* NetworkClients */ = {
+			isa = PBXGroup;
+			children = (
+				5D41DB682C088C580011E691 /* TestNetworkClient.swift */,
+			);
+			path = NetworkClients;
+			sourceTree = "<group>";
+		};
+		5D41DB6A2C088CA30011E691 /* DataStores */ = {
+			isa = PBXGroup;
+			children = (
+				5D41DB6B2C088CD30011E691 /* TestDataStore.swift */,
+			);
+			path = DataStores;
+			sourceTree = "<group>";
+		};
+		5D41DB742C08AD550011E691 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5D41DB752C08AD640011E691 /* DeeplinkServiceTests.swift */,
+				5D41DB792C08AFC00011E691 /* TestServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5D4B9D352C074207005F126A /* govuk_ios_snapshot_tests */ = {
+			isa = PBXGroup;
+			children = (
+				5D8922732C07207F0019FBD7 /* Helpers */,
+				5D4B9D412C074247005F126A /* Specs */,
+			);
+			path = govuk_ios_snapshot_tests;
+			sourceTree = "<group>";
+		};
+		5D4B9D412C074247005F126A /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				5D8922702C071FF60019FBD7 /* ViewControllers */,
+			);
+			path = Specs;
 			sourceTree = "<group>";
 		};
 		5D4F97E92BFF771A002CBDDE /* Builders */ = {
@@ -218,6 +370,23 @@
 			path = shared;
 			sourceTree = "<group>";
 		};
+		5D8922702C071FF60019FBD7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */,
+				5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5D8922732C07207F0019FBD7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		5DAD716B2BD250DA0075F648 = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +403,7 @@
 				5DAD71742BD250DB0075F648 /* govuk_ios.app */,
 				5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */,
 				5DAD71942BD250DF0075F648 /* govuk_ios_ui_tests.xctest */,
+				5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,10 +414,14 @@
 				4E3367332C0DCAD3000CA45F /* DeepLinking */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D2129E92BDFA00E00142E46 /* Coordinators */,
+				5D41DB6A2C088CA30011E691 /* DataStores */,
 				5D1353AE2BE0D9A700414441 /* Extensions */,
+				5D41DB672C087F850011E691 /* NetworkClients */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
+				5D41DB612C0875560011E691 /* Services */,
 				5DAD71A72BD254460075F648 /* SupportingFiles */,
 				5DAD71A82BD254730075F648 /* ViewControllers */,
+				5D41DB5E2C0875460011E691 /* ViewModels */,
 			);
 			path = govuk_ios;
 			sourceTree = "<group>";
@@ -277,6 +451,7 @@
 				5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */,
 				5DAD71852BD250DE0075F648 /* Info.plist */,
 				5D54A8312BFCBF50003D0C21 /* main.swift */,
+				5D41DB7B2C09BF340011E691 /* Settings.bundle */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -302,6 +477,7 @@
 		5DAD71B32BD286450075F648 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */,
 				5DAD71B52BD288280075F648 /* govuk_ios */,
 			);
 			path = Tests;
@@ -320,6 +496,7 @@
 			children = (
 				5D54A83C2BFCED7C003D0C21 /* shared */,
 				5DAD718D2BD250DF0075F648 /* govuk_ios_unit_tests */,
+				5D4B9D352C074207005F126A /* govuk_ios_snapshot_tests */,
 				5DAD71972BD250DF0075F648 /* govuk_ios_ui_tests */,
 			);
 			path = govuk_ios;
@@ -341,6 +518,7 @@
 			children = (
 				5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */,
 				5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */,
+				5D41DB772C08AE950011E691 /* MockDeeplinkService.swift */,
 				5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */,
 				5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */,
 			);
@@ -351,6 +529,8 @@
 			isa = PBXGroup;
 			children = (
 				5DC325602BFF251700CB590B /* Coordinators */,
+				5D41DB562C0865120011E691 /* ViewControllers */,
+				5D41DB742C08AD550011E691 /* Services */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -358,6 +538,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5D4B9D332C074207005F126A /* govuk_ios_snapshot_tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D4B9D3C2C074207005F126A /* Build configuration list for PBXNativeTarget "govuk_ios_snapshot_tests" */;
+			buildPhases = (
+				5D4B9D302C074207005F126A /* Sources */,
+				5D4B9D312C074207005F126A /* Frameworks */,
+				5D4B9D322C074207005F126A /* Resources */,
+				5D4B9D402C074227005F126A /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D4B9D392C074207005F126A /* PBXTargetDependency */,
+			);
+			name = govuk_ios_snapshot_tests;
+			packageProductDependencies = (
+				5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */,
+			);
+			productName = govuk_ios_snapshot_tests;
+			productReference = 5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5DAD71732BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DAD719E2BD250DF0075F648 /* Build configuration list for PBXNativeTarget "govuk_ios" */;
@@ -376,6 +578,8 @@
 				5D2129DF2BDF98E100142E46 /* Services */,
 				5D2129E22BDF98EA00142E46 /* Onboarding */,
 				5D1353AA2BE0D75000414441 /* Homepage */,
+				5D99312D2BF7642C0036C8FB /* Coordination */,
+				5D7F267D2C0F0EF000842090 /* Factory */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -395,6 +599,8 @@
 				5DAD718C2BD250DF0075F648 /* PBXTargetDependency */,
 			);
 			name = govuk_ios_unit_tests;
+			packageProductDependencies = (
+			);
 			productName = GovUKTests;
 			productReference = 5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -424,9 +630,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					5D4B9D332C074207005F126A = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 5DAD71732BD250DB0075F648;
+					};
 					5DAD71732BD250DB0075F648 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -453,6 +663,9 @@
 				5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */,
 				5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
 				5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */,
+				5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */,
+				5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
+				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -460,16 +673,25 @@
 			targets = (
 				5DAD71732BD250DB0075F648 /* govuk_ios */,
 				5DAD71892BD250DF0075F648 /* govuk_ios_unit_tests */,
+				5D4B9D332C074207005F126A /* govuk_ios_snapshot_tests */,
 				5DAD71932BD250DF0075F648 /* govuk_ios_ui_tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5D4B9D322C074207005F126A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DAD71722BD250DB0075F648 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,6 +715,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5D451E212BD69D6600673BC1 /* Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -512,19 +735,37 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5D4B9D302C074207005F126A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
+				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
+				5D41DB552C0862840011E691 /* LaunchViewControllerTests.swift in Sources */,
+				5D4B9D422C074251005F126A /* TestViewControllerSnapshotTests.swift in Sources */,
+				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DAD71702BD250DB0075F648 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */,
 				5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */,
+				5D41DB602C0875520011E691 /* TestViewModel.swift in Sources */,
+				5D41DB6E2C088FE30011E691 /* Container+DataStores.swift in Sources */,
+				5D41DB692C088C580011E691 /* TestNetworkClient.swift in Sources */,
 				5D9931322BF77AC70036C8FB /* NextCoordinator.swift in Sources */,
+				5D41DB6C2C088CD30011E691 /* TestDataStore.swift in Sources */,
 				5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */,
 				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
 				5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */,
 				4E41DEDA2C0F093500D8059C /* DeepLinkFactory.swift in Sources */,
 				5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */,
 				5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */,
+				5D41DB632C08755F0011E691 /* TestService.swift in Sources */,
+				5D41DB732C08981A0011E691 /* DeeplinkService.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
 				5D40091E2C134ADE001A842C /* PermitCreateCoordinator.swift in Sources */,
 				5DA6DE472C12F877007F9937 /* RedCoordinator.swift in Sources */,
@@ -536,6 +777,10 @@
 				4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */,
+				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
+				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
+				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
+				5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */,
 				5DA6DE452C12F49F007F9937 /* DeeplinkCoordinator.swift in Sources */,
@@ -553,10 +798,14 @@
 				5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */,
 				5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */,
 				5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */,
+				5D41DB762C08AD640011E691 /* DeeplinkServiceTests.swift in Sources */,
 				5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */,
 				5D4F97F12BFF7F04002CBDDE /* MockBaseCoordinator.swift in Sources */,
 				5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */,
+				5D41DB582C08651E0011E691 /* BaseViewControllerTests.swift in Sources */,
 				5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */,
+				5D41DB782C08AE950011E691 /* MockDeeplinkService.swift in Sources */,
+				5D41DB7A2C08AFC00011E691 /* TestServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +823,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5D4B9D392C074207005F126A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5DAD71732BD250DB0075F648 /* govuk_ios */;
+			targetProxy = 5D4B9D382C074207005F126A /* PBXContainerItemProxy */;
+		};
 		5DAD718C2BD250DF0075F648 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5DAD71732BD250DB0075F648 /* govuk_ios */;
@@ -587,6 +841,44 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		5D4B9D3A2C074207005F126A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8W395F695;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.snapshot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/govuk_ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/govuk_ios";
+			};
+			name = Debug;
+		};
+		5D4B9D3B2C074207005F126A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8W395F695;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.snapshot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/govuk_ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/govuk_ios";
+			};
+			name = Release;
+		};
 		5DAD719C2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -717,6 +1009,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GOV.UK;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -746,6 +1039,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GOV.UK;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -845,6 +1139,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5D4B9D3C2C074207005F126A /* Build configuration list for PBXNativeTarget "govuk_ios_snapshot_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D4B9D3A2C074207005F126A /* Debug */,
+				5D4B9D3B2C074207005F126A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5DAD716F2BD250DA0075F648 /* Build configuration list for PBXProject "GovUK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -908,6 +1211,30 @@
 				kind = branch;
 			};
 		};
+		5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
+		5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uber/ios-snapshot-test-case";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/govuk-one-login/mobile-ios-coordination";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -925,6 +1252,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
 			productName = Onboarding;
+		};
+		5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
+			productName = iOSSnapshotTestCase;
+		};
+		5D7F267D2C0F0EF000842090 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		5D99312D2BF7642C0036C8FB /* Coordination */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */;
+			productName = Coordination;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

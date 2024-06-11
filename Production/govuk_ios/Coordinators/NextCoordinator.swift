@@ -21,13 +21,16 @@ class NextCoordinator: BaseCoordinator {
     }
 
     private func pushNext() {
-        let viewController = TestViewController(
+        let viewModel = TestViewModel(
             color: .orange,
             tabTitle: "\(title) \(root.viewControllers.count)",
             nextAction: showNextAction,
             modalAction: { [weak self] in
                 self?.root.popViewController(animated: true)
             }
+        )
+        let viewController = TestViewController(
+            viewModel: viewModel
         )
         push(viewController, animated: false)
     }

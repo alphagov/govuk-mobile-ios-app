@@ -2,10 +2,13 @@ import UIKit
 import Foundation
 
 class LaunchCoordinator: BaseCoordinator {
+    private let deeplinkService: DeeplinkServiceInterface
     private let completion: (String?) -> Void
 
     init(navigationController: UINavigationController,
+         deeplinkService: DeeplinkServiceInterface,
          completion: @escaping (String?) -> Void) {
+        self.deeplinkService = deeplinkService
         self.completion = completion
         super.init(navigationController: navigationController)
     }

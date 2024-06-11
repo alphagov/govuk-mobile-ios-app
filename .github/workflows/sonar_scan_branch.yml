@@ -39,6 +39,7 @@ jobs:
           sonar-scanner \
             -Dsonar.token=$SONAR_TOKEN \
             -Dsonar.coverageReportPaths="build_output/sonarqube-generic-coverage.xml" \
+            -Dsonar.projectVersion=$(./Scripts/app_version.sh)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

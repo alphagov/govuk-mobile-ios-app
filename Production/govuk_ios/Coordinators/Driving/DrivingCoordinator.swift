@@ -3,7 +3,7 @@ import Foundation
 
 class DrivingCoordinator: BaseCoordinator {
     override func start(url: String?) {
-        let viewController = TestViewController(
+        let viewModel = TestViewModel(
             color: .cyan,
             tabTitle: "Driving",
             nextAction: { [weak self] in
@@ -12,6 +12,9 @@ class DrivingCoordinator: BaseCoordinator {
             modalAction: { [weak self] in
                 self?.presentPermit(permit: "123")
             }
+        )
+        let viewController = TestViewController(
+            viewModel: viewModel
         )
         push(viewController, animated: true)
     }

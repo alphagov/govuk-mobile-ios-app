@@ -8,11 +8,14 @@ class PermitCreateCoordinator: BaseCoordinator {
     }
 
     override func start(url: String?) {
-        let viewController = TestViewController(
+        let viewModel = TestViewModel(
             color: .lightGray,
             tabTitle: "Create Permit",
             nextAction: {},
             modalAction: {}
+        )
+        let viewController = TestViewController(
+            viewModel: viewModel
         )
         push(viewController, animated: true)
     }

@@ -1,12 +1,29 @@
 import UIKit
 import Foundation
 
+import Factory
+
 @MainActor
 class CoordinatorBuilder {
+    private let container: Container
+
+    init(container: Container) {
+        self.container = container
+    }
+
+    func app(navigationController: UINavigationController) -> BaseCoordinator {
+        AppCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            deeplinkService: container.deeplinkService()
+        )
+    }
+
     func launch(navigationController: UINavigationController,
                 completion: @escaping (String?) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
+            deeplinkService: container.deeplinkService(),
             completion: completion
         )
     }

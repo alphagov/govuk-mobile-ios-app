@@ -3,11 +3,14 @@ import Foundation
 
 class RedCoordinator: BaseCoordinator {
     override func start(url: String?) {
-        let viewController = TestViewController(
+        let viewModel = TestViewModel(
             color: .red,
             tabTitle: "Red",
             nextAction: showNextAction,
             modalAction: showModalAction
+        )
+        let viewController = TestViewController(
+            viewModel: viewModel
         )
         set([viewController], animated: false)
 

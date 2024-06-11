@@ -11,11 +11,14 @@ class BlueCoordinator: BaseCoordinator {
     }
 
     override func start(url: String?) {
-        let viewController = TestViewController(
+        let viewModel = TestViewModel(
             color: .blue,
             tabTitle: "Blue",
             nextAction: showNextAction,
             modalAction: { }
+        )
+        let viewController = TestViewController(
+            viewModel: viewModel
         )
         set([viewController], animated: false)
 

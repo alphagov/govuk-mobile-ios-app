@@ -170,6 +170,35 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssertTrue(child._startCalled)
         XCTAssertEqual(navigationController._presentedViewController, childNavigationController)
     }
+
+    @MainActor
+    func test_dismiss_modal_callsDismiss() {
+        let mockNavigationController = MockNavigationController()
+        let subject = TestCoordinator(navigationController: mockNavigationController)
+        
+        let parentNavigationController = UINavigationController()
+        let parent = MockBaseCoordinator(navigationController: parentNavigationController)
+        parent.present(subject, animated: false)
+        
+        mockNavigationController._stubbedPresentingViewController = parentNavigationController
+
+        subject.dismiss(animated: false)
+
+        XCTAssert(mockNavigationController._dismissCalled)
+    }
+
+    @MainActor
+    func test_dismiss_pushed_callsPop() {
+        let mockNavigationController = MockNavigationController()
+        let subject = TestCoordinator(navigationController: mockNavigationController)
+
+        let parent = MockBaseCoordinator(navigationController: mockNavigationController)
+        parent.start(subject, url: nil)
+
+        subject.dismiss(animated: false)
+
+        XCTAssert(mockNavigationController._popCalled)
+    }
 }
 
 private class TestCoordinator: BaseCoordinator {

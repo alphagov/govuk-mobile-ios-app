@@ -3,7 +3,6 @@ import Foundation
 
 import Factory
 
-@MainActor
 class CoordinatorBuilder {
     private let container: Container
 
@@ -20,7 +19,7 @@ class CoordinatorBuilder {
     }
 
     func launch(navigationController: UINavigationController,
-                completion: @escaping () -> Void) -> BaseCoordinator {
+                completion: @escaping (String?) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
             deeplinkService: container.deeplinkService(),
@@ -36,18 +35,16 @@ class CoordinatorBuilder {
     }
 
     var red: BaseCoordinator {
-        ColorCoordinator(
-            navigationController: .red,
-            color: .red,
-            title: "Red"
+        RedCoordinator(
+            navigationController: .red
         )
     }
 
-    var blue: BaseCoordinator {
-        ColorCoordinator(
+    func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
+        BlueCoordinator(
             navigationController: .blue,
-            color: .blue,
-            title: "Blue"
+            coordinatorBuilder: self,
+            requestFocus: requestFocus
         )
     }
 
@@ -56,6 +53,12 @@ class CoordinatorBuilder {
             navigationController: .green,
             color: .green,
             title: "Green"
+        )
+    }
+
+    func driving(navigationController: UINavigationController) -> BaseCoordinator {
+        DrivingCoordinator(
+            navigationController: navigationController
         )
     }
 }

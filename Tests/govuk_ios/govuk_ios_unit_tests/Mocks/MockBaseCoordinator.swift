@@ -10,8 +10,15 @@ class MockBaseCoordinator: BaseCoordinator {
     }
 
     var _startCalled: Bool = false
-    override func start() {
+    var _startReceivedURL: String?
+    override func start(url: String?) {
         _startCalled = true
+        _startReceivedURL = url
     }
 
+    var _childDidFinishHandler: ((BaseCoordinator) -> Void)?
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        _childDidFinishHandler?(child)
+    }
 }

@@ -1,18 +1,12 @@
-import Coordination
 import Foundation
 import UIKit
 
 class BaseCoordinator: NSObject,
-                       AnyCoordinator,
-                       ParentCoordinator,
-                       ChildCoordinator,
-                       NavigationCoordinator,
+                       UINavigationControllerDelegate,
                        UIAdaptivePresentationControllerDelegate {
-    var childCoordinators: [any ChildCoordinator] = []
-    var parentCoordinator: (any ParentCoordinator)?
-
+    private var childCoordinators: [BaseCoordinator] = []
+    private var parentCoordinator: BaseCoordinator?
     private var stackedViewControllers: NSHashTable<UIViewController> = .weakObjects()
-
     private(set) var root: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -21,18 +15,23 @@ class BaseCoordinator: NSObject,
         navigationController.presentationController?.delegate = self
     }
 
-    func start() {
+    func start(url: String?) {
         assertionFailure("This needs overriding")
     }
 
-    func start(_ coordinator: BaseCoordinator) {
-        openChildInline(coordinator)
+    func start(_ coordinator: BaseCoordinator,
+               url: String? = nil) {
+        childCoordinators.append(coordinator)
+        coordinator.root.delegate = coordinator
+        coordinator.parentCoordinator = self
+        coordinator.start(url: url)
     }
 
     func present(_ coordinator: BaseCoordinator,
+                 url: String? = nil,
                  animated: Bool = true) {
-        coordinator.root.delegate = coordinator
-        openChildModally(coordinator, animated: animated)
+        start(coordinator, url: url)
+        root.present(coordinator.root, animated: animated)
     }
 
     func push(_ viewController: UIViewController,
@@ -67,5 +66,22 @@ class BaseCoordinator: NSObject,
         finish()
     }
 
-    final func didRegainFocus(fromChild child: (any ChildCoordinator)?) { /* Do nothing */ }
+    func finish() {
+        parentCoordinator?.childDidFinish(self)
+    }
+
+    func childDidFinish(_ child: BaseCoordinator) {
+        for (index, coordinator) in childCoordinators.enumerated() where coordinator === child {
+            childCoordinators.remove(at: index)
+            break
+        }
+    }
+
+    func dismiss(animated: Bool) {
+        if root.presentingViewController != nil {
+            root.dismiss(animated: animated)
+        } else {
+            root.popViewController(animated: animated)
+        }
+    }
 }

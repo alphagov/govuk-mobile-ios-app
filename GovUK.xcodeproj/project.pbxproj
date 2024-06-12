@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3367382C0DE3E3000CA45F /* DeepLink.swift */; };
+		4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */; };
+		4E41DEDA2C0F093500D8059C /* DeepLinkFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */; };
 		5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */; };
 		5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */; };
+		5D168ABA2C16E77C00E021BE /* BlueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */; };
 		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
 		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
 		5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */; };
 		5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */; };
+		5D40091A2C134AC2001A842C /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4009192C134AC2001A842C /* DrivingCoordinator.swift */; };
+		5D40091C2C134AD0001A842C /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D40091B2C134AD0001A842C /* PermitCoordinator.swift */; };
 		5D41DB552C0862840011E691 /* LaunchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */; };
 		5D41DB582C08651E0011E691 /* BaseViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB572C08651E0011E691 /* BaseViewControllerTests.swift */; };
 		5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB5C2C0870020011E691 /* Container+Aliases.swift */; };
@@ -37,11 +43,18 @@
 		5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
 		5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */; };
-		5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
 		5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */; };
 		5D4F97F12BFF7F04002CBDDE /* MockBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */; };
 		5D4F97F32BFF81D5002CBDDE /* TabCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */; };
+		5D528D7A2C18886100AFBDF1 /* DeepLinkFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D528D792C18886100AFBDF1 /* DeepLinkFactoryTests.swift */; };
+		5D528D7C2C188AF700AFBDF1 /* MockDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D528D7B2C188AF700AFBDF1 /* MockDeepLink.swift */; };
+		5D528D7E2C188B0500AFBDF1 /* MockDeepLinkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D528D7D2C188B0500AFBDF1 /* MockDeepLinkStore.swift */; };
+		5D528D812C188C7500AFBDF1 /* DeepLinkStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D528D802C188C7500AFBDF1 /* DeepLinkStoreTests.swift */; };
+		5D528D832C188E9B00AFBDF1 /* DeepLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D528D822C188E9B00AFBDF1 /* DeepLinkTests.swift */; };
+		5D528D852C18907300AFBDF1 /* RedCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D528D842C18907300AFBDF1 /* RedCoordinatorTests.swift */; };
+		5D528D872C18907B00AFBDF1 /* BlueCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D528D862C18907B00AFBDF1 /* BlueCoordinatorTests.swift */; };
+		5D528D882C1893D100AFBDF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */; };
 		5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */; };
 		5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */; };
@@ -51,16 +64,17 @@
 		5D54A83A2BFCE667003D0C21 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
 		5D54A83B2BFCE669003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
-		5D99312E2BF7642C0036C8FB /* Coordination in Frameworks */ = {isa = PBXBuildFile; productRef = 5D99312D2BF7642C0036C8FB /* Coordination */; };
 		5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */; };
 		5D9931322BF77AC70036C8FB /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9931312BF77AC70036C8FB /* NextCoordinator.swift */; };
-		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
+		5DA6DE472C12F877007F9937 /* RedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6DE462C12F877007F9937 /* RedCoordinator.swift */; };
 		5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */; };
 		5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD717B2BD250DB0075F648 /* TestViewController.swift */; };
 		5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD71802BD250DE0075F648 /* Assets.xcassets */; };
 		5DAD71992BD250DF0075F648 /* GovUKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71982BD250DF0075F648 /* GovUKUITests.swift */; };
 		5DAD719B2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */; };
 		5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */; };
+		5DEF97802C18A64A00DAC732 /* DrivingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF977F2C18A64A00DAC732 /* DrivingCoordinatorTests.swift */; };
+		5DEF97822C18A6F000DAC732 /* PermitCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF97812C18A6F000DAC732 /* PermitCoordinatorTests.swift */; };
 		5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */; };
 		5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */; };
 /* End PBXBuildFile section */
@@ -104,11 +118,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E3367382C0DE3E3000CA45F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkStore.swift; sourceTree = "<group>"; };
+		4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkFactory.swift; sourceTree = "<group>"; };
 		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
+		5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueCoordinator.swift; sourceTree = "<group>"; };
 		5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		5D4009192C134AC2001A842C /* DrivingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
+		5D40091B2C134AD0001A842C /* PermitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitCoordinator.swift; sourceTree = "<group>"; };
 		5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewControllerTests.swift; sourceTree = "<group>"; };
 		5D41DB572C08651E0011E691 /* BaseViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerTests.swift; sourceTree = "<group>"; };
 		5D41DB5C2C0870020011E691 /* Container+Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Aliases.swift"; sourceTree = "<group>"; };
@@ -130,6 +150,13 @@
 		5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
 		5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBaseCoordinator.swift; sourceTree = "<group>"; };
 		5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinatorTests.swift; sourceTree = "<group>"; };
+		5D528D792C18886100AFBDF1 /* DeepLinkFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkFactoryTests.swift; sourceTree = "<group>"; };
+		5D528D7B2C188AF700AFBDF1 /* MockDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeepLink.swift; sourceTree = "<group>"; };
+		5D528D7D2C188B0500AFBDF1 /* MockDeepLinkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeepLinkStore.swift; sourceTree = "<group>"; };
+		5D528D802C188C7500AFBDF1 /* DeepLinkStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkStoreTests.swift; sourceTree = "<group>"; };
+		5D528D822C188E9B00AFBDF1 /* DeepLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkTests.swift; sourceTree = "<group>"; };
+		5D528D842C18907300AFBDF1 /* RedCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedCoordinatorTests.swift; sourceTree = "<group>"; };
+		5D528D862C18907B00AFBDF1 /* BlueCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +167,7 @@
 		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
 		5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		5D9931312BF77AC70036C8FB /* NextCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
+		5DA6DE462C12F877007F9937 /* RedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedCoordinator.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,8 +179,9 @@
 		5DAD71982BD250DF0075F648 /* GovUKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKUITests.swift; sourceTree = "<group>"; };
 		5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
-		5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParentCoordinator.swift; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
+		5DEF977F2C18A64A00DAC732 /* DrivingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingCoordinatorTests.swift; sourceTree = "<group>"; };
+		5DEF97812C18A6F000DAC732 /* PermitCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,7 +201,6 @@
 			files = (
 				5D2129E02BDF98E100142E46 /* Services in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
-				5D99312E2BF7642C0036C8FB /* Coordination in Frameworks */,
 				5D1353AB2BE0D75000414441 /* Homepage in Frameworks */,
 				5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */,
 			);
@@ -195,6 +223,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E3367332C0DCAD3000CA45F /* DeepLinking */ = {
+			isa = PBXGroup;
+			children = (
+				4E3367382C0DE3E3000CA45F /* DeepLink.swift */,
+				4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */,
+				4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */,
+			);
+			path = DeepLinking;
+			sourceTree = "<group>";
+		};
 		5D1353A92BE0D75000414441 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,14 +250,26 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5D168ABB2C16F72500E021BE /* Driving */ = {
+			isa = PBXGroup;
+			children = (
+				5D4009192C134AC2001A842C /* DrivingCoordinator.swift */,
+				5D40091B2C134AD0001A842C /* PermitCoordinator.swift */,
+			);
+			path = Driving;
+			sourceTree = "<group>";
+		};
 		5D2129E92BDFA00E00142E46 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
 				5D2129EA2BDFA01900142E46 /* AppCoordinator.swift */,
 				5D99312F2BF7644A0036C8FB /* BaseCoordinator.swift */,
+				5D168AB92C16E77C00E021BE /* BlueCoordinator.swift */,
 				5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */,
+				5D168ABB2C16F72500E021BE /* Driving */,
 				5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */,
 				5D9931312BF77AC70036C8FB /* NextCoordinator.swift */,
+				5DA6DE462C12F877007F9937 /* RedCoordinator.swift */,
 				5D2129EC2BDFA08E00142E46 /* TabCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -311,6 +361,16 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
+		5D528D7F2C188C4D00AFBDF1 /* DeepLinking */ = {
+			isa = PBXGroup;
+			children = (
+				5D528D792C18886100AFBDF1 /* DeepLinkFactoryTests.swift */,
+				5D528D802C188C7500AFBDF1 /* DeepLinkStoreTests.swift */,
+				5D528D822C188E9B00AFBDF1 /* DeepLinkTests.swift */,
+			);
+			path = DeepLinking;
+			sourceTree = "<group>";
+		};
 		5D54A8392BFCD881003D0C21 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +432,7 @@
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D2129E92BDFA00E00142E46 /* Coordinators */,
 				5D41DB6A2C088CA30011E691 /* DataStores */,
+				4E3367332C0DCAD3000CA45F /* DeepLinking */,
 				5D1353AE2BE0D9A700414441 /* Extensions */,
 				5D41DB672C087F850011E691 /* NetworkClients */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
@@ -464,7 +525,11 @@
 			children = (
 				5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */,
 				5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */,
+				5D528D862C18907B00AFBDF1 /* BlueCoordinatorTests.swift */,
+				5DEF977F2C18A64A00DAC732 /* DrivingCoordinatorTests.swift */,
 				5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */,
+				5DEF97812C18A6F000DAC732 /* PermitCoordinatorTests.swift */,
+				5D528D842C18907300AFBDF1 /* RedCoordinatorTests.swift */,
 				5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */,
 			);
 			path = Coordinators;
@@ -475,9 +540,10 @@
 			children = (
 				5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */,
 				5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */,
+				5D528D7B2C188AF700AFBDF1 /* MockDeepLink.swift */,
 				5D41DB772C08AE950011E691 /* MockDeeplinkService.swift */,
+				5D528D7D2C188B0500AFBDF1 /* MockDeepLinkStore.swift */,
 				5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */,
-				5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -486,8 +552,9 @@
 			isa = PBXGroup;
 			children = (
 				5DC325602BFF251700CB590B /* Coordinators */,
-				5D41DB562C0865120011E691 /* ViewControllers */,
+				5D528D7F2C188C4D00AFBDF1 /* DeepLinking */,
 				5D41DB742C08AD550011E691 /* Services */,
+				5D41DB562C0865120011E691 /* ViewControllers */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -535,7 +602,6 @@
 				5D2129DF2BDF98E100142E46 /* Services */,
 				5D2129E22BDF98EA00142E46 /* Onboarding */,
 				5D1353AA2BE0D75000414441 /* Homepage */,
-				5D99312D2BF7642C0036C8FB /* Coordination */,
 				5D7F267D2C0F0EF000842090 /* Factory */,
 			);
 			productName = GovUK;
@@ -620,7 +686,6 @@
 				5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */,
 				5D2129E12BDF98EA00142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
 				5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */,
-				5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */,
 				5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
 				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
@@ -708,6 +773,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D528D882C1893D100AFBDF1 /* AppDelegate.swift in Sources */,
 				5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */,
 				5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */,
 				5D41DB602C0875520011E691 /* TestViewModel.swift in Sources */,
@@ -718,20 +784,26 @@
 				5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */,
 				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
 				5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */,
+				4E41DEDA2C0F093500D8059C /* DeepLinkFactory.swift in Sources */,
 				5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */,
 				5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */,
 				5D41DB632C08755F0011E691 /* TestService.swift in Sources */,
 				5D41DB732C08981A0011E691 /* DeeplinkService.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
+				5DA6DE472C12F877007F9937 /* RedCoordinator.swift in Sources */,
+				5D168ABA2C16E77C00E021BE /* BlueCoordinator.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
+				5D40091A2C134AC2001A842C /* DrivingCoordinator.swift in Sources */,
+				4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */,
+				4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
-				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */,
+				5D40091C2C134AD0001A842C /* PermitCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,20 +811,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D528D872C18907B00AFBDF1 /* BlueCoordinatorTests.swift in Sources */,
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
+				5D528D812C188C7500AFBDF1 /* DeepLinkStoreTests.swift in Sources */,
 				5D4F97F32BFF81D5002CBDDE /* TabCoordinatorTests.swift in Sources */,
 				5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */,
+				5D528D832C188E9B00AFBDF1 /* DeepLinkTests.swift in Sources */,
+				5D528D7A2C18886100AFBDF1 /* DeepLinkFactoryTests.swift in Sources */,
+				5D528D7E2C188B0500AFBDF1 /* MockDeepLinkStore.swift in Sources */,
 				5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */,
 				5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */,
 				5D41DB762C08AD640011E691 /* DeeplinkServiceTests.swift in Sources */,
-				5D4F97E82BFF7229002CBDDE /* MockParentCoordinator.swift in Sources */,
+				5DEF97802C18A64A00DAC732 /* DrivingCoordinatorTests.swift in Sources */,
 				5D4F97F12BFF7F04002CBDDE /* MockBaseCoordinator.swift in Sources */,
 				5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */,
 				5D41DB582C08651E0011E691 /* BaseViewControllerTests.swift in Sources */,
 				5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */,
+				5D528D852C18907300AFBDF1 /* RedCoordinatorTests.swift in Sources */,
 				5D41DB782C08AE950011E691 /* MockDeeplinkService.swift in Sources */,
+				5DEF97822C18A6F000DAC732 /* PermitCoordinatorTests.swift in Sources */,
 				5D41DB7A2C08AFC00011E691 /* TestServiceTests.swift in Sources */,
+				5D528D7C2C188AF700AFBDF1 /* MockDeepLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1174,14 +1254,6 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/govuk-one-login/mobile-ios-coordination";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1209,11 +1281,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
-		};
-		5D99312D2BF7642C0036C8FB /* Coordination */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D99312C2BF7642C0036C8FB /* XCRemoteSwiftPackageReference "mobile-ios-coordination" */;
-			productName = Coordination;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -24,6 +24,15 @@ class AppSceneDelegate: UIResponder,
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        coordinator?.start()
+
+        let path = connectionOptions.urlContexts.first?.url.path
+        coordinator?.start(url: path)
+    }
+
+    func scene(_ scene: UIScene,
+               openURLContexts urlContexts: Set<UIOpenURLContext>) {
+        guard let path = urlContexts.first?.url.path
+        else { return }
+        coordinator?.start(url: path)
     }
 }

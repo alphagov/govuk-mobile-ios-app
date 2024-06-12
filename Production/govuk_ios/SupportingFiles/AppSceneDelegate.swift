@@ -30,8 +30,8 @@ class AppSceneDelegate: UIResponder,
     }
 
     func scene(_ scene: UIScene,
-               openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let path = URLContexts.first?.url.path
+               openURLContexts urlContexts: Set<UIOpenURLContext>) {
+        guard let path = urlContexts.first?.url.path
         else { return }
         coordinator?.start(url: path)
     }

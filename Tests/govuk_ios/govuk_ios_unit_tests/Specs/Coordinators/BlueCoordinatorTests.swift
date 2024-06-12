@@ -15,6 +15,7 @@ class BlueCoordinatorTests: XCTestCase {
         let navigationController = UINavigationController()
         let subject = BlueCoordinator(
             navigationController: navigationController,
+            coordinatorBuilder: .mock,
             requestFocus: { nav in
 
             }
@@ -31,6 +32,7 @@ class BlueCoordinatorTests: XCTestCase {
         let expectation = expectation(description: "focus handler")
         let subject = BlueCoordinator(
             navigationController: navigationController,
+            coordinatorBuilder: .mock,
             requestFocus: { nav in
                 XCTAssertEqual(nav, navigationController)
                 expectation.fulfill()

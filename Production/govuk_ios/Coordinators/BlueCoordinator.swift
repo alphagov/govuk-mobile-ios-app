@@ -2,11 +2,14 @@ import UIKit
 import Foundation
 
 class BlueCoordinator: BaseCoordinator {
+    private let coordinatorBuilder: CoordinatorBuilder
     private let requestFocus: (UINavigationController) -> Void
 
     init(navigationController: UINavigationController,
+         coordinatorBuilder: CoordinatorBuilder,
          requestFocus: @escaping (UINavigationController) -> Void) {
         self.requestFocus = requestFocus
+        self.coordinatorBuilder = coordinatorBuilder
         super.init(navigationController: navigationController)
     }
 
@@ -28,11 +31,11 @@ class BlueCoordinator: BaseCoordinator {
 
     private var showNextAction: () -> Void {
         return { [weak self] in
-            guard let strongSelf = self else { return }
-            let coordinator = DrivingCoordinator(
-                navigationController: strongSelf.root
+            guard let self = self else { return }
+            let coordinator = self.coordinatorBuilder.driving(
+                navigationController: self.root
             )
-            strongSelf.start(coordinator)
+            self.start(coordinator)
         }
     }
 

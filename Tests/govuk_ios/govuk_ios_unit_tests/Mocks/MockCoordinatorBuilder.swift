@@ -3,6 +3,14 @@ import Foundation
 
 @testable import govuk_ios
 
+extension CoordinatorBuilder {
+    static var mock: MockCoordinatorBuilder {
+        MockCoordinatorBuilder(
+            container: .init()
+        )
+    }
+}
+
 class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedTabCoordinator: MockBaseCoordinator?
@@ -35,8 +43,10 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedBlueCoordinator: MockBaseCoordinator?
+    var _receivedBlueCoordinatorRequestFocus: ((UINavigationController) -> Void)?
     override func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
-        _stubbedBlueCoordinator ??
+        _receivedBlueCoordinatorRequestFocus = requestFocus
+        return _stubbedBlueCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )

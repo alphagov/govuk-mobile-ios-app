@@ -43,6 +43,7 @@ class CoordinatorBuilder {
     func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
         BlueCoordinator(
             navigationController: .blue,
+            coordinatorBuilder: self,
             requestFocus: requestFocus
         )
     }
@@ -55,9 +56,9 @@ class CoordinatorBuilder {
         )
     }
 
-    var driving: BaseCoordinator {
+    func driving(navigationController: UINavigationController) -> BaseCoordinator {
         DrivingCoordinator(
-            navigationController: .green
+            navigationController: navigationController
         )
     }
 }

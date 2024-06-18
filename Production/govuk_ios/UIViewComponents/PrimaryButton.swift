@@ -7,14 +7,13 @@ struct PrimaryButton: UIViewRepresentable {
     let icon: String?
 
     func makeUIView(context: Context) -> RoundedButton {
-        let button = RoundedButton()
+        let button = RoundedButton(action: action)
 
         if let icon {
             button.icon = icon
         }
 
         button.setTitle(title, for: .normal)
-        button.addAction(action, for: .touchUpInside)
 
         return button
     }

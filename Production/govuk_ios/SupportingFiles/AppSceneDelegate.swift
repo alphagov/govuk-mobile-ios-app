@@ -1,4 +1,5 @@
 import UIKit
+import GAnalytics
 
 class AppSceneDelegate: UIResponder,
                         UIWindowSceneDelegate {
@@ -25,5 +26,8 @@ class AppSceneDelegate: UIResponder,
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         coordinator?.start()
+
+        // GAnalytics().configure()
+        GovukAnalyticsService().logDeviceInformation()
     }
 }

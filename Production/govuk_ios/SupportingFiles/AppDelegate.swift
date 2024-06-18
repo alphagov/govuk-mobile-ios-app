@@ -11,6 +11,7 @@ class AppDelegate: UIResponder,
         )
         sceneConfiguration.delegateClass = AppSceneDelegate.self
         sceneConfiguration.storyboard = nil
+
         return sceneConfiguration
     }
 }

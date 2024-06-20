@@ -12,6 +12,7 @@
 		160A02642C208B0B00FE01EB /* HTTPLogging in Frameworks */ = {isa = PBXBuildFile; productRef = 160A02632C208B0B00FE01EB /* HTTPLogging */; };
 		160A02662C208B0B00FE01EB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 160A02652C208B0B00FE01EB /* Logging */; };
 		160A02682C208B9800FE01EB /* GovukAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160A02672C208B9800FE01EB /* GovukAnalyticsService.swift */; };
+		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
 		16CA29F22C218966000B3B48 /* GovukAnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F12C218966000B3B48 /* GovukAnalyticsServiceTests.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
@@ -112,6 +113,7 @@
 
 /* Begin PBXFileReference section */
 		160A02672C208B9800FE01EB /* GovukAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovukAnalyticsService.swift; sourceTree = "<group>"; };
+		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		16CA29F12C218966000B3B48 /* GovukAnalyticsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovukAnalyticsServiceTests.swift; sourceTree = "<group>"; };
 		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
@@ -209,6 +211,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16EE0C982C2479E700F72E61 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				16EE0C992C247A1900F72E61 /* DevConfig */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		16EE0C992C247A1900F72E61 /* DevConfig */ = {
+			isa = PBXGroup;
+			children = (
+				162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */,
+			);
+			path = DevConfig;
+			sourceTree = "<group>";
+		};
 		5D1353A92BE0D75000414441 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +403,7 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
+				16EE0C982C2479E700F72E61 /* Firebase */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D2129E92BDFA00E00142E46 /* Coordinators */,
 				5D41DB6A2C088CA30011E691 /* DataStores */,
@@ -672,6 +691,7 @@
 			files = (
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
+				162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -992,7 +1012,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1022,7 +1042,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

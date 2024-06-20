@@ -1,5 +1,5 @@
 import Foundation
-
+import GAnalytics
 import Factory
 
 extension Container {
@@ -16,5 +16,12 @@ extension Container {
         Factory(self) {
             DeeplinkService()
         }
+    }
+
+    var analyticsService: Factory<GovukAnalyticsServiceInterface> {
+        Factory(self) {
+            GovukAnalyticsService(analytics: GAnalytics())
+        }
+        .scope(.singleton)
     }
 }

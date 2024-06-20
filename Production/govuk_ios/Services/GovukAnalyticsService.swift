@@ -4,6 +4,8 @@ import GAnalytics
 import UIKit
 
 protocol GovukAnalyticsServiceInterface {
+    func configure()
+    func logDeviceInformation()
 }
 
 enum AppEvents: String, LoggableEvent {
@@ -11,7 +13,11 @@ enum AppEvents: String, LoggableEvent {
 }
 
 struct GovukAnalyticsService: GovukAnalyticsServiceInterface {
-    var analytics: AnalyticsService = GAnalytics()
+    private let analytics: AnalyticsService
+
+    init(analytics: AnalyticsService) {
+        self.analytics = analytics
+    }
 
     func logDeviceInformation() {
         let device = UIDevice.current
@@ -25,5 +31,9 @@ struct GovukAnalyticsService: GovukAnalyticsServiceInterface {
                 "system_version": device.systemVersion
             ]
         )
+    }
+
+    func configure() {
+        (analytics as? GAnalytics)?.configure()
     }
 }

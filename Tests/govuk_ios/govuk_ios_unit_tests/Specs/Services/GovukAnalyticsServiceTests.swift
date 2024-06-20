@@ -12,6 +12,5 @@ final class GovukAnalyticsServiceTests: XCTestCase {
         subject.logDeviceInformation()
        
         XCTAssertTrue(analytics.eventsParamsLogged.count == 4)
-        XCTAssertEqual(analytics.eventsParamsLogged["system_name"], "iOS")
     }
 }

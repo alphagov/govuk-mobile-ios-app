@@ -50,6 +50,7 @@
 		5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */; };
 		5D4F97F12BFF7F04002CBDDE /* MockBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */; };
 		5D4F97F32BFF81D5002CBDDE /* TabCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */; };
+		5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5D51D15F2C245A1B008AC8E4 /* PrivacyInfo.xcprivacy */; };
 		5D54A82C2BFC8EF1003D0C21 /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */; };
 		5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */; };
 		5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */; };
@@ -145,6 +146,7 @@
 		5D4F97EC2BFF7CFA002CBDDE /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
 		5D4F97EF2BFF7ED1002CBDDE /* MockBaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBaseCoordinator.swift; sourceTree = "<group>"; };
 		5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinatorTests.swift; sourceTree = "<group>"; };
+		5D51D15F2C245A1B008AC8E4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		5D54A82B2BFC8EF1003D0C21 /* LaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */,
 				5DAD71852BD250DE0075F648 /* Info.plist */,
 				5D54A8312BFCBF50003D0C21 /* main.swift */,
+				5D51D15F2C245A1B008AC8E4 /* PrivacyInfo.xcprivacy */,
 				5D41DB7B2C09BF340011E691 /* Settings.bundle */,
 			);
 			path = SupportingFiles;
@@ -722,6 +725,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 				162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */,

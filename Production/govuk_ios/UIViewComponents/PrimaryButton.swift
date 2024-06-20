@@ -1,7 +1,9 @@
 import GDSCommon
 import SwiftUI
 
-protocol WrappableButton: SecondaryButton {
+protocol WrappableButton: UIButton {
+    var icon: String? { get set }
+
     init(action: UIAction)
 }
 

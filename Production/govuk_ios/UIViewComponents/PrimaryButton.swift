@@ -1,13 +1,20 @@
 import GDSCommon
 import SwiftUI
 
-struct PrimaryButton: UIViewRepresentable {
+protocol WrappableButton: SecondaryButton {
+    init(action: UIAction)
+}
+
+extension SecondaryButton: WrappableButton {}
+
+struct ButtonWrapper<WrappedButton: WrappableButton>: UIViewRepresentable {
     private let action: UIAction
+
     let title: String
     let icon: String?
 
-    func makeUIView(context: Context) -> RoundedButton {
-        let button = RoundedButton(action: action)
+    func makeUIView(context: Context) -> WrappedButton {
+        let button = WrappedButton(action: action)
 
         if let icon {
             button.icon = icon
@@ -18,7 +25,7 @@ struct PrimaryButton: UIViewRepresentable {
         return button
     }
 
-    func updateUIView(_ uiView: RoundedButton, context: Context) { }
+    func updateUIView(_ uiView: WrappedButton, context: Context) { }
 
     func makeCoordinator() -> Self.Coordinator { }
 

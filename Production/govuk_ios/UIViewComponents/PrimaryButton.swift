@@ -7,6 +7,10 @@ protocol WrappableButton: UIButton {
     init(action: UIAction)
 }
 
+extension WrappableButton {
+    var icon: String? { nil }
+}
+
 extension SecondaryButton: WrappableButton {}
 
 struct ButtonWrapper<WrappedButton: WrappableButton>: UIViewRepresentable {

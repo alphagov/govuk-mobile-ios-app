@@ -6,7 +6,14 @@ import UIKit
 
 class LaunchViewControllerTests: SnapshotTestCase {
     func test_loadInNavigationController_rendersCorrectly() {
-        let subject = LaunchViewController()
+        let viewModel = LaunchViewModel(
+            animationCompleted: {
+
+            }
+        )
+        let subject = LaunchViewController(
+            viewModel: viewModel
+        )
         VerifySnapshotInWindow(subject)
     }
 }

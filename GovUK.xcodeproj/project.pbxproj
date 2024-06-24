@@ -13,7 +13,8 @@
 		160A02662C208B0B00FE01EB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 160A02652C208B0B00FE01EB /* Logging */; };
 		160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160A02672C208B9800FE01EB /* AnalyticsService.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
-		16CA29F22C218966000B3B48 /* GovukAnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F12C218966000B3B48 /* GovukAnalyticsServiceTests.swift */; };
+		162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */; };
+		162DD75F2C29C42500FA482D /* AnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162DD75E2C29C42500FA482D /* AnalyticsServiceTests.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */; };
@@ -118,7 +119,8 @@
 /* Begin PBXFileReference section */
 		160A02672C208B9800FE01EB /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		16CA29F12C218966000B3B48 /* GovukAnalyticsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovukAnalyticsServiceTests.swift; sourceTree = "<group>"; };
+		162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsPreferenceStore.swift; sourceTree = "<group>"; };
+		162DD75E2C29C42500FA482D /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
 		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
@@ -324,7 +326,7 @@
 			children = (
 				5D41DB752C08AD640011E691 /* DeeplinkServiceTests.swift */,
 				5D41DB792C08AFC00011E691 /* TestServiceTests.swift */,
-				16CA29F12C218966000B3B48 /* GovukAnalyticsServiceTests.swift */,
+				162DD75E2C29C42500FA482D /* AnalyticsServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -525,6 +527,7 @@
 				5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */,
 				5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */,
 				16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */,
+				162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -823,9 +826,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
+				162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
-				16CA29F22C218966000B3B48 /* GovukAnalyticsServiceTests.swift in Sources */,
 				5D4F97F32BFF81D5002CBDDE /* TabCoordinatorTests.swift in Sources */,
+				162DD75F2C29C42500FA482D /* AnalyticsServiceTests.swift in Sources */,
 				5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */,
 				5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */,
 				5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */,

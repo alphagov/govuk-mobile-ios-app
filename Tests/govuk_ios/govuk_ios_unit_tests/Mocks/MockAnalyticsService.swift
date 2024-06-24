@@ -11,7 +11,7 @@ final class MockAnalyticsService: AnalyticsService {
     private(set) var eventsLogged = [String]()
     private(set) var eventsParamsLogged = [String: String]()
     private(set) var crashesLogged = [NSError]()
-    
+
     var hasAcceptedAnalytics: Bool?
     
     func trackScreen(_ screen: LoggableScreen, title: String?) {

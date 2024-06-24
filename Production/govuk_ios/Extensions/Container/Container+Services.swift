@@ -1,5 +1,6 @@
 import Foundation
 import GAnalytics
+import Logging
 import Factory
 
 extension Container {
@@ -18,9 +19,12 @@ extension Container {
         }
     }
 
-    var analyticsService: Factory<GovukAnalyticsServiceInterface> {
+    var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
-            GovukAnalyticsService(analytics: GAnalytics())
+            AnalyticsService(
+                analytics: GAnalytics(),
+                preferenceStore: self.analyticsPreferenceStore()
+            )
         }
         .scope(.singleton)
     }

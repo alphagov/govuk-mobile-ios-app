@@ -19,8 +19,7 @@ class AppCoordinatorTests: XCTestCase {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoodinatorBuilder,
-            navigationController: mockNavigationController,
-            deeplinkService: MockDeeplinkService()
+            navigationController: mockNavigationController
         )
 
         subject.start()

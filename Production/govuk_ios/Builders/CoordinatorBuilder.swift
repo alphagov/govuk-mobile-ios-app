@@ -14,8 +14,7 @@ class CoordinatorBuilder {
     func app(navigationController: UINavigationController) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
-            navigationController: navigationController,
-            deeplinkService: container.deeplinkService()
+            navigationController: navigationController
         )
     }
 
@@ -23,7 +22,6 @@ class CoordinatorBuilder {
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            deeplinkService: container.deeplinkService(),
             completion: completion
         )
     }
@@ -44,10 +42,9 @@ class CoordinatorBuilder {
     }
 
     var blue: BaseCoordinator {
-        ColorCoordinator(
+        BlueCoordinator(
             navigationController: .blue,
-            color: .blue,
-            title: "Blue"
+            coordinatorBuilder: self
         )
     }
 
@@ -56,6 +53,12 @@ class CoordinatorBuilder {
             navigationController: .green,
             color: .green,
             title: "Green"
+        )
+    }
+
+    func driving(navigationController: UINavigationController) -> BaseCoordinator {
+        DrivingCoordinator(
+            navigationController: navigationController
         )
     }
 }

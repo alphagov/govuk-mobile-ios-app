@@ -1,22 +1,11 @@
 import UIKit
 import Foundation
 
-class ColorCoordinator: BaseCoordinator {
-    private let color: UIColor
-    private let title: String
-
-    init(navigationController: UINavigationController,
-         color: UIColor,
-         title: String) {
-        self.color = color
-        self.title = title
-        super.init(navigationController: navigationController)
-    }
-
+class RedCoordinator: BaseCoordinator {
     override func start() {
         let viewModel = TestViewModel(
-            color: color,
-            tabTitle: title,
+            color: .red,
+            tabTitle: "Red",
             primaryTitle: "Next",
             primaryAction: showNextAction,
             secondaryTitle: "Modal",

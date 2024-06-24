@@ -11,10 +11,4 @@ extension Container {
             )
         }
     }
-
-    var deeplinkService: Factory<DeeplinkServiceInterface> {
-        Factory(self) {
-            DeeplinkService()
-        }
-    }
 }

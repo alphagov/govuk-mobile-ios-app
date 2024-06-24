@@ -1,8 +1,6 @@
 import Foundation
 import XCTest
 
-import Coordination
-
 @testable import govuk_ios
 
 class LaunchCoordinatorTests: XCTestCase {
@@ -12,10 +10,8 @@ class LaunchCoordinatorTests: XCTestCase {
         let mockNavigationController = UINavigationController()
 
         let expectation = expectation(description: #function)
-        let mockDeeplinkService = MockDeeplinkService()
         let subject = LaunchCoordinator(
             navigationController: mockNavigationController,
-            deeplinkService: mockDeeplinkService,
             completion: {
                 expectation.fulfill()
             }

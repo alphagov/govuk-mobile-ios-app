@@ -33,14 +33,19 @@ class TabCoordinator: BaseCoordinator {
     override func start() {
         showTabs()
         coordinators.forEach {
-            $0.parentCoordinator = self
-            childCoordinators.append($0)
-            $0.start()
+            start($0)
         }
     }
 
     private func showTabs() {
         tabController.viewControllers = coordinators.map { $0.root }
         set([tabController], animated: false)
+    }
+
+    private var tabRequestedFocus: (UINavigationController) -> Void {
+        return { [weak self] navigationController in
+            let viewControllers = self?.tabController.viewControllers
+            self?.tabController.selectedIndex = viewControllers?.firstIndex(of: navigationController) ?? 0
+        }
     }
 }

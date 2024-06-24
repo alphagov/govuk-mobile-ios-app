@@ -3,6 +3,14 @@ import Foundation
 
 @testable import govuk_ios
 
+extension CoordinatorBuilder {
+    static var mock: MockCoordinatorBuilder {
+        MockCoordinatorBuilder(
+            container: .init()
+        )
+    }
+}
+
 class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedTabCoordinator: MockBaseCoordinator?
@@ -17,8 +25,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedLaunchCoordinator: MockBaseCoordinator?
     var _receivedLaunchNavigationController: UINavigationController?
-    override func launch(navigationController: UINavigationController, completion: @escaping () -> Void) -> BaseCoordinator {
+    var _receivedLaunchCompletion: (() -> Void)?
+    override func launch(navigationController: UINavigationController,
+                         completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedLaunchNavigationController = navigationController
+        _receivedLaunchCompletion = completion
         return _stubbedLaunchCoordinator ??
         MockBaseCoordinator(
             navigationController: navigationController
@@ -35,7 +46,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedBlueCoordinator: MockBaseCoordinator?
     override var blue: BaseCoordinator {
-        _stubbedBlueCoordinator ??
+        return _stubbedBlueCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )
@@ -43,7 +54,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedGreenCoordinator: MockBaseCoordinator?
     override var green: BaseCoordinator {
-        _stubbedGreenCoordinator ?? 
+        _stubbedGreenCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )

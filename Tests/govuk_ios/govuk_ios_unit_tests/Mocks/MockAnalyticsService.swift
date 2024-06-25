@@ -1,17 +1,13 @@
-//
-
 import XCTest
 import Logging
 
 final class MockAnalyticsService: Logging.AnalyticsService {
     var additionalParameters = [String: Any]()
-    
     private(set) var screensVisited = [String]()
     private(set) var screenParamsLogged = [String: String]()
     private(set) var eventsLogged = [String]()
     private(set) var eventsParamsLogged = [String: String]()
     private(set) var crashesLogged = [NSError]()
-
     var hasAcceptedAnalytics: Bool?
     
     func trackScreen(_ screen: LoggableScreen, title: String?) {

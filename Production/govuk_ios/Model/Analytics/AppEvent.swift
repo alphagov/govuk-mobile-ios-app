@@ -2,11 +2,7 @@ import Foundation
 
 import Logging
 
-protocol TrackingEvent: LoggableEvent {
-    var params: [String: Any]? { get }
-}
-
-struct AppEvent: TrackingEvent {
+struct AppEvent: LoggableEvent {
     let name: String
     let params: [String: Any]?
 }

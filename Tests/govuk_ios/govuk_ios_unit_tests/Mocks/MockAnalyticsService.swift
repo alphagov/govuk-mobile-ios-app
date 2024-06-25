@@ -3,7 +3,7 @@
 import XCTest
 import Logging
 
-final class MockAnalyticsService: AnalyticsService {
+final class MockAnalyticsService: Logging.AnalyticsService {
     var additionalParameters = [String: Any]()
     
     private(set) var screensVisited = [String]()

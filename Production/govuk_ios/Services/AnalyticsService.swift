@@ -4,7 +4,7 @@ import UIKit
 
 protocol AnalyticsServiceInterface {
     func configure()
-    func track(event: TrackingEvent)
+    func track(event: AppEvent)
 
     func setAcceptedAnalytics(accepted: Bool)
     var permissionState: AnalyticsPermissionState { get }
@@ -25,7 +25,7 @@ class AnalyticsService: AnalyticsServiceInterface {
         mappedAnalytics?.configure()
     }
 
-    func track(event: TrackingEvent) {
+    func track(event: AppEvent) {
         analytics.logEvent(
             event,
             parameters: event.params ?? [:]

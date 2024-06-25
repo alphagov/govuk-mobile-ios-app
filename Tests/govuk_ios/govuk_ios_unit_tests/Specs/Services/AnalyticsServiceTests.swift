@@ -31,7 +31,27 @@ final class AnalyticsServiceTests: XCTestCase {
         XCTAssertTrue(analyticsPreferenceStore.hasAcceptedAnalytics == true)
     }
     
-    func test_permissionState_returnsStatus() {
+    func test_permissionState_notSet_returnsUnknown() {
+        let subject = AnalyticsService(
+            analytics: analyticsService,
+            preferenceStore: analyticsPreferenceStore
+        )
+
+        XCTAssertTrue(subject.permissionState == .unknown)
+    }
+    
+    func test_permissionState_granted_returnsAccepted() {
+        let subject = AnalyticsService(
+            analytics: analyticsService,
+            preferenceStore: analyticsPreferenceStore
+        )
+        
+        subject.setAcceptedAnalytics(accepted: true)
+
+        XCTAssertTrue(subject.permissionState == .accepted)
+    }
+
+    func test_permissionState_rejected_returnsDenied() {
         let subject = AnalyticsService(
             analytics: analyticsService,
             preferenceStore: analyticsPreferenceStore

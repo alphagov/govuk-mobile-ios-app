@@ -4,11 +4,12 @@ import Foundation
 extension AppEvent {
     static var appLoaded: AppEvent {
         let device = UIDevice.current
+        let deviceModel = DeviceModel()
+
         return .init(
             name: "app_loaded",
             params: [
-                "device_name": device.name,
-                "device_model": device.model,
+                "device_model": deviceModel.description,
                 "system_name": device.systemName,
                 "system_version": device.systemVersion
             ]

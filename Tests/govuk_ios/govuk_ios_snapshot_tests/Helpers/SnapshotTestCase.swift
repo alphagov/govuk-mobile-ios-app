@@ -114,8 +114,6 @@ class SnapshotTestCase: FBSnapshotTestCase {
     }
 
     func wrapInWindow(_ viewController: UIViewController) {
-        let window = UIWindow()
-        window.rootViewController = viewController
-        window.makeKeyAndVisible()
+        UIApplication.shared.windows.first?.rootViewController = viewController
     }
 }

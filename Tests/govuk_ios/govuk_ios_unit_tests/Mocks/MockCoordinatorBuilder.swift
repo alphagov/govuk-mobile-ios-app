@@ -5,9 +5,7 @@ import Foundation
 
 extension CoordinatorBuilder {
     static var mock: MockCoordinatorBuilder {
-        MockCoordinatorBuilder(
-            container: .init()
-        )
+        MockCoordinatorBuilder()
     }
 }
 

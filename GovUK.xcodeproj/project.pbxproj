@@ -63,6 +63,9 @@
 		5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD71802BD250DE0075F648 /* Assets.xcassets */; };
 		5DAD71992BD250DF0075F648 /* GovUKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71982BD250DF0075F648 /* GovUKUITests.swift */; };
 		5DAD719B2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */; };
+		5DC04B872C2D5DAA0036EF2B /* ColorCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B862C2D5DAA0036EF2B /* ColorCoordinatorTests.swift */; };
+		5DC04B8A2C2D633F0036EF2B /* NextCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B892C2D633F0036EF2B /* NextCoordinatorTests.swift */; };
+		5DC04B8D2C2D672A0036EF2B /* CoordinatorBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B8C2C2D672A0036EF2B /* CoordinatorBuilderTests.swift */; };
 		5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */; };
 		5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */; };
 		5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */; };
@@ -158,6 +161,9 @@
 		5DAD71942BD250DF0075F648 /* govuk_ios_ui_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_ui_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71982BD250DF0075F648 /* GovUKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKUITests.swift; sourceTree = "<group>"; };
 		5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5DC04B862C2D5DAA0036EF2B /* ColorCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinatorTests.swift; sourceTree = "<group>"; };
+		5DC04B892C2D633F0036EF2B /* NextCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCoordinatorTests.swift; sourceTree = "<group>"; };
+		5DC04B8C2C2D672A0036EF2B /* CoordinatorBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilderTests.swift; sourceTree = "<group>"; };
 		5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -348,11 +354,11 @@
 		5D962D5E2C29BD0B0038BC0A /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				5D962D542C29BD0B0038BC0A /* Driving */,
 				5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */,
 				5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */,
 				5D962D582C29BD0B0038BC0A /* BlueCoordinator.swift */,
 				5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */,
+				5D962D542C29BD0B0038BC0A /* Driving */,
 				5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */,
 				5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */,
 				5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */,
@@ -475,15 +481,33 @@
 			path = govuk_ios;
 			sourceTree = "<group>";
 		};
+		5DC04B882C2D62C60036EF2B /* Driving */ = {
+			isa = PBXGroup;
+			children = (
+				5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */,
+				5D5FEDB42C29C45E000B6220 /* PermitCoordinatorTests.swift */,
+			);
+			path = Driving;
+			sourceTree = "<group>";
+		};
+		5DC04B8B2C2D671A0036EF2B /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				5DC04B8C2C2D672A0036EF2B /* CoordinatorBuilderTests.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
 		5DC325602BFF251700CB590B /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
 				5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */,
 				5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */,
 				5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */,
-				5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */,
+				5DC04B862C2D5DAA0036EF2B /* ColorCoordinatorTests.swift */,
+				5DC04B882C2D62C60036EF2B /* Driving */,
 				5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */,
-				5D5FEDB42C29C45E000B6220 /* PermitCoordinatorTests.swift */,
+				5DC04B892C2D633F0036EF2B /* NextCoordinatorTests.swift */,
 				5D5FEDB52C29C45E000B6220 /* RedCoordinatorTests.swift */,
 				5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */,
 			);
@@ -503,6 +527,7 @@
 		5DD6EFFC2BFF546900C2D79B /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				5DC04B8B2C2D671A0036EF2B /* Builders */,
 				5DC325602BFF251700CB590B /* Coordinators */,
 				5D41DB562C0865120011E691 /* ViewControllers */,
 				5D41DB742C08AD550011E691 /* Services */,
@@ -763,13 +788,16 @@
 				5D5FEDBB2C29C45E000B6220 /* DrivingCoordinatorTests.swift in Sources */,
 				5D4F97F32BFF81D5002CBDDE /* TabCoordinatorTests.swift in Sources */,
 				5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */,
+				5DC04B8A2C2D633F0036EF2B /* NextCoordinatorTests.swift in Sources */,
 				5D4F97EE2BFF7D18002CBDDE /* MockCoordinatorBuilder.swift in Sources */,
 				5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */,
 				5D5FEDB82C29C45E000B6220 /* PermitCoordinatorTests.swift in Sources */,
 				5D4F97F12BFF7F04002CBDDE /* MockBaseCoordinator.swift in Sources */,
+				5DC04B8D2C2D672A0036EF2B /* CoordinatorBuilderTests.swift in Sources */,
 				5D4F97E72BFF7222002CBDDE /* MockNavigationController.swift in Sources */,
 				5D5FEDBA2C29C45E000B6220 /* BlueCoordinatorTests.swift in Sources */,
 				5D5FEDB92C29C45E000B6220 /* RedCoordinatorTests.swift in Sources */,
+				5DC04B872C2D5DAA0036EF2B /* ColorCoordinatorTests.swift in Sources */,
 				5D41DB582C08651E0011E691 /* BaseViewControllerTests.swift in Sources */,
 				5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */,
 				5D41DB7A2C08AFC00011E691 /* TestServiceTests.swift in Sources */,

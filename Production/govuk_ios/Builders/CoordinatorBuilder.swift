@@ -5,12 +5,6 @@ import Factory
 
 @MainActor
 class CoordinatorBuilder {
-    private let container: Container
-
-    init(container: Container) {
-        self.container = container
-    }
-
     func app(navigationController: UINavigationController) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
@@ -37,7 +31,8 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .red,
             color: .red,
-            title: "Red"
+            title: "Red",
+            coordinatorBuilder: self
         )
     }
 
@@ -52,12 +47,21 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .green,
             color: .green,
-            title: "Green"
+            title: "Green",
+            coordinatorBuilder: self
         )
     }
 
     func driving(navigationController: UINavigationController) -> BaseCoordinator {
         DrivingCoordinator(
+            navigationController: navigationController
+        )
+    }
+
+    func next(title: String,
+              navigationController: UINavigationController) -> BaseCoordinator {
+        NextCoordinator(
+            title: title,
             navigationController: navigationController
         )
     }

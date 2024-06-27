@@ -41,11 +41,4 @@ class TabCoordinator: BaseCoordinator {
         tabController.viewControllers = coordinators.map { $0.root }
         set([tabController], animated: false)
     }
-
-    private var tabRequestedFocus: (UINavigationController) -> Void {
-        return { [weak self] navigationController in
-            let viewControllers = self?.tabController.viewControllers
-            self?.tabController.selectedIndex = viewControllers?.firstIndex(of: navigationController) ?? 0
-        }
-    }
 }

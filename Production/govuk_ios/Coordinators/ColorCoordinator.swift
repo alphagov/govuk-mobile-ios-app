@@ -4,12 +4,15 @@ import Foundation
 class ColorCoordinator: BaseCoordinator {
     private let color: UIColor
     private let title: String
+    private let coordinatorBuilder: CoordinatorBuilder
 
     init(navigationController: UINavigationController,
          color: UIColor,
-         title: String) {
+         title: String,
+         coordinatorBuilder: CoordinatorBuilder) {
         self.color = color
         self.title = title
+        self.coordinatorBuilder = coordinatorBuilder
         super.init(navigationController: navigationController)
     }
 
@@ -31,7 +34,7 @@ class ColorCoordinator: BaseCoordinator {
     private var showNextAction: () -> Void {
         return { [weak self] in
             guard let strongSelf = self else { return }
-            let coordinator = NextCoordinator(
+            let coordinator = strongSelf.coordinatorBuilder.next(
                 title: "Next",
                 navigationController: strongSelf.root
             )
@@ -43,7 +46,7 @@ class ColorCoordinator: BaseCoordinator {
         return { [weak self] in
             guard let strongSelf = self else { return }
             let navigationController = UINavigationController()
-            let coordinator = NextCoordinator(
+            let coordinator = strongSelf.coordinatorBuilder.next(
                 title: "Modal",
                 navigationController: navigationController
             )

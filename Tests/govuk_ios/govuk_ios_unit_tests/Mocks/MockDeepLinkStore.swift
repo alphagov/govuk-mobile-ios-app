@@ -4,6 +4,6 @@ import Foundation
 
 struct MockDeepLinkStore: DeepLinkStore {
 
-    let deeplinks: [any DeepLink]
+    let deeplinks: [any DeepLinkRoute]
 
 }

@@ -25,14 +25,69 @@ class AppSceneDelegate: UIResponder,
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
-        let path = connectionOptions.urlContexts.first?.url.path
-        coordinator?.start(url: path)
+        let path = connectionOptions.urlContexts.first?.url
+//        print(path)
+
+        coordinator?.start(url: path?.absoluteString)
     }
 
     func scene(_ scene: UIScene,
                openURLContexts urlContexts: Set<UIOpenURLContext>) {
-        guard let path = urlContexts.first?.url.path
+        guard let path = urlContexts.first?.url
         else { return }
-        coordinator?.start(url: path)
+
+        var deeplink = DeepLink(url: path)
+
+        dump(deeplink)
+        print(deeplink.scheme)
+        print(deeplink.path)
+        print(deeplink.pathComponents)
+        print(deeplink.queryItems)
+
+        deeplink.queryItems.forEach {
+            print($0.value)
+        }
+        // inject Deeplink
+        coordinator?.start(url: path.absoluteString)
     }
+}
+
+struct DeepLink {
+    let url: URL
+    private var components: URLComponents?
+
+    var path: String? {
+        components?.path
+    }
+
+    var scheme: String? {
+        components?.scheme
+    }
+
+    var pathComponents: [String] {
+        NSURL(string: url.absoluteString)?.pathComponents
+            .map {
+            $0.filter { $0 != "/" }
+        }
+        ?? []
+    }
+
+    var queryItems: [URLQueryItem] {
+        components?.queryItems ?? []
+    }
+
+    init(url: URL) {
+        if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) {
+            components = urlComponents
+        }
+        self.url = url
+    }
+
+    func perform() throws -> Result<DeepLinkRoute, DeepLinkError> {
+        .success(DrivingDeepLink())
+    }
+}
+
+enum DeepLinkError: Error {
+    case noDeeplink
 }

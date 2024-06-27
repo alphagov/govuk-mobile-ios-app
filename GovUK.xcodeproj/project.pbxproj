@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3367382C0DE3E3000CA45F /* DeepLink.swift */; };
+		4E3367392C0DE3E3000CA45F /* DeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3367382C0DE3E3000CA45F /* DeepLinkRoute.swift */; };
 		4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */; };
 		4E41DEDA2C0F093500D8059C /* DeepLinkFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
@@ -118,7 +118,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4E3367382C0DE3E3000CA45F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		4E3367382C0DE3E3000CA45F /* DeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRoute.swift; sourceTree = "<group>"; };
 		4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkStore.swift; sourceTree = "<group>"; };
 		4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkFactory.swift; sourceTree = "<group>"; };
 		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 		4E3367332C0DCAD3000CA45F /* DeepLinking */ = {
 			isa = PBXGroup;
 			children = (
-				4E3367382C0DE3E3000CA45F /* DeepLink.swift */,
+				4E3367382C0DE3E3000CA45F /* DeepLinkRoute.swift */,
 				4E41DED92C0F093500D8059C /* DeepLinkFactory.swift */,
 				4E33673A2C0DE40A000CA45F /* DeepLinkStore.swift */,
 			);
@@ -797,7 +797,7 @@
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D40091A2C134AC2001A842C /* DrivingCoordinator.swift in Sources */,
 				4E33673B2C0DE40A000CA45F /* DeepLinkStore.swift in Sources */,
-				4E3367392C0DE3E3000CA45F /* DeepLink.swift in Sources */,
+				4E3367392C0DE3E3000CA45F /* DeepLinkRoute.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */,

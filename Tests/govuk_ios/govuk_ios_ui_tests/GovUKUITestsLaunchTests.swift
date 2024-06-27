@@ -22,4 +22,11 @@ final class GovUKUITestsLaunchTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
     }
+
+    @available(iOS 16.4, *)
+    func testLaunchWithURL() throws {
+        let app = XCUIApplication()
+
+        app.open(URL(string: "govuk://driving")!)
+    }
 }

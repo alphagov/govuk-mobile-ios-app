@@ -8,7 +8,7 @@ struct DeepLinkFactory {
         self.deepLinkStore = deepLinkStore
     }
 
-    func fetchDeepLink(path: String) -> DeepLink? {
+    func fetchDeepLink(path: String) -> DeepLinkRoute? {
         deepLinkStore
             .deeplinks
             .first { $0.path == path }

@@ -1,11 +1,11 @@
 import Foundation
 
 protocol DeepLinkStore {
-    var deeplinks: [DeepLink] { get }
+    var deeplinks: [DeepLinkRoute] { get }
 }
 
 struct DrivingDeepLinkStore: DeepLinkStore {
-    var deeplinks: [any DeepLink] {
+    var deeplinks: [any DeepLinkRoute] {
         return [
             DrivingDeepLink(),
             PermitDeepLink()

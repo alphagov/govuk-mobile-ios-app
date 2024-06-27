@@ -2,7 +2,7 @@ import Foundation
 
 @testable import govuk_ios
 
-struct MockDeepLink: DeepLink {
+struct MockDeepLink: DeepLinkRoute {
 
     let path: String
 

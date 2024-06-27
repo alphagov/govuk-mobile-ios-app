@@ -2,34 +2,38 @@ import UIKit
 import Foundation
 
 class DrivingCoordinator: BaseCoordinator {
+    private let coordinatorBuilder: CoordinatorBuilder
+    private let viewControllerBuilder: ViewControllerBuilder
+
+    init(navigationController: UINavigationController,
+         coordinatorBuilder: CoordinatorBuilder,
+         viewControllerBuilder: ViewControllerBuilder) {
+        self.viewControllerBuilder = viewControllerBuilder
+        self.coordinatorBuilder = coordinatorBuilder
+        super.init(navigationController: navigationController)
+    }
+
     override func start() {
-        let viewModel = TestViewModel(
-            color: .cyan,
-            tabTitle: "Driving",
-            primaryTitle: "Push Permit",
-            primaryAction: { [weak self] in
+        let viewController = viewControllerBuilder.driving(
+            showPermitAction: { [weak self] in
                 self?.showPermit(permit: "123")
             },
-            secondaryTitle: "Modal Permit",
-            secondaryAction: { [weak self] in
+            presentPermitAction: { [weak self] in
                 self?.presentPermit(permit: "123")
             }
-        )
-        let viewController = TestViewController(
-            viewModel: viewModel
         )
         push(viewController, animated: true)
     }
 
     private func showPermit(permit: String) {
-        let coordinator = PermitCoordinator(
+        let coordinator = coordinatorBuilder.permit(
             navigationController: root
         )
         start(coordinator)
     }
 
     private func presentPermit(permit: String) {
-        let coordinator = PermitCoordinator(
+        let coordinator = coordinatorBuilder.permit(
             navigationController: .init()
         )
         present(coordinator)

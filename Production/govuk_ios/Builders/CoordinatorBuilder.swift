@@ -54,6 +54,14 @@ class CoordinatorBuilder {
 
     func driving(navigationController: UINavigationController) -> BaseCoordinator {
         DrivingCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder()
+        )
+    }
+
+    func permit(navigationController: UINavigationController) -> BaseCoordinator {
+        PermitCoordinator(
             navigationController: navigationController
         )
     }

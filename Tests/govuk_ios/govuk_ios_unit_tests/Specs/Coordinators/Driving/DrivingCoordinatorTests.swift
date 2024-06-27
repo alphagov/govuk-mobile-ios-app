@@ -13,13 +13,43 @@ class DrivingCoordinatorTests: XCTestCase {
     @MainActor
     func test_start_showsViewController() {
         let navigationController = UINavigationController()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedDrivingViewController = expectedViewController
+        
         let subject = DrivingCoordinator(
-            navigationController: navigationController
+            navigationController: navigationController, 
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder
         )
 
         subject.start()
 
-        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        XCTAssertEqual(navigationController.viewControllers.first, expectedViewController)
+    }
+
+    @MainActor
+    func test_showPermit_startsPermitCoordinator() {
+        let navigationController = UINavigationController()
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedDrivingViewController = expectedViewController
+
+        let subject = DrivingCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder
+        )
+
+        subject.start()
+
+        let expectedPermitCoodinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedPermitCoordinator = expectedPermitCoodinator
+        mockViewControllerBuilder._receivedShowPermitAction?()
+
+        XCTAssertTrue(expectedPermitCoodinator._startCalled)
     }
 
 }

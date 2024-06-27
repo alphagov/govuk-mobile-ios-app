@@ -57,5 +57,13 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
             navigationController: .init()
         )
     }
+    
+    var _stubbedPermitCoordinator: MockBaseCoordinator?
+    override func permit(navigationController: UINavigationController) -> BaseCoordinator {
+        _stubbedPermitCoordinator ??
+        MockBaseCoordinator(
+            navigationController: navigationController
+        )
+    }
 
 }

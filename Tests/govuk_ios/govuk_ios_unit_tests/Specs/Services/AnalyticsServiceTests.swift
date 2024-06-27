@@ -17,7 +17,7 @@ final class AnalyticsServiceTests: XCTestCase {
 
         subject.track(event: AppEvent.appLoaded)
        
-        XCTAssertTrue(analyticsService.eventsParamsLogged.count == 3)
+        XCTAssertTrue(analyticsService.eventsParamsLogged.count == 1)
     }
     
     func test_setAcceptedAnalytics_setsPreference() {

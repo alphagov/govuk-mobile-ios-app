@@ -59,11 +59,30 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
     
     var _stubbedPermitCoordinator: MockBaseCoordinator?
+    var _receivedPermitNavigationController: UINavigationController?
     override func permit(navigationController: UINavigationController) -> BaseCoordinator {
-        _stubbedPermitCoordinator ??
+        _receivedPermitNavigationController = navigationController
+        return _stubbedPermitCoordinator ??
         MockBaseCoordinator(
             navigationController: navigationController
         )
+    }
+
+    var _stubbedDrivingCoordinator: MockBaseCoordinator?
+    var _receivedDrivingNavigationController: UINavigationController?
+    override func driving(navigationController: UINavigationController) -> BaseCoordinator {
+        _receivedDrivingNavigationController = navigationController
+        return _stubbedDrivingCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedNextCoordinator: MockBaseCoordinator?
+    var _receivedNextTitle: String?
+    var _receivedNextNavigationController: UINavigationController?
+    override func next(title: String,
+                       navigationController: UINavigationController) -> BaseCoordinator {
+        _receivedNextTitle = title
+        _receivedNextNavigationController = navigationController
+        return _stubbedNextCoordinator ?? MockBaseCoordinator()
     }
 
 }

@@ -2,6 +2,21 @@ import Foundation
 import UIKit
 
 class ViewControllerBuilder {
+    func red(showNextAction: @escaping () -> Void,
+             showModalAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TestViewModel(
+            color: .red,
+            tabTitle: "Red",
+            primaryTitle: "Next",
+            primaryAction: showNextAction,
+            secondaryTitle: "Modal",
+            secondaryAction: showModalAction
+        )
+        return TestViewController(
+            viewModel: viewModel
+        )
+    }
+
     func driving(showPermitAction: @escaping () -> Void,
                  presentPermitAction: @escaping () -> Void) -> UIViewController {
         let viewModel = TestViewModel(

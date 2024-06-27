@@ -12,13 +12,23 @@ extension ViewControllerBuilder {
 class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedDrivingViewController: UIViewController?
-    var _receivedShowPermitAction: (() -> Void)?
-    var _receivedPresentPermitAction: (() -> Void)?
+    var _receivedDrivingShowPermitAction: (() -> Void)?
+    var _receivedDrivingPresentPermitAction: (() -> Void)?
     override func driving(showPermitAction: @escaping () -> Void,
                           presentPermitAction: @escaping () -> Void) -> UIViewController {
-        _receivedShowPermitAction = showPermitAction
-        _receivedPresentPermitAction = presentPermitAction
+        _receivedDrivingShowPermitAction = showPermitAction
+        _receivedDrivingPresentPermitAction = presentPermitAction
         return _stubbedDrivingViewController ?? UIViewController()
+    }
+
+    var _stubbedRedViewController: UIViewController?
+    var _receivedRedShowNextAction: (() -> Void)?
+    var _receivedRedShowModalAction: (() -> Void)?
+    override func red(showNextAction: @escaping () -> Void,
+                      showModalAction: @escaping () -> Void) -> UIViewController {
+        _receivedRedShowNextAction = showNextAction
+        _receivedRedShowModalAction = showModalAction
+        return _stubbedRedViewController ?? UIViewController()
     }
 
 }

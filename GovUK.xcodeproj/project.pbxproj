@@ -77,6 +77,7 @@
 		5DEF97822C18A6F000DAC732 /* PermitCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF97812C18A6F000DAC732 /* PermitCoordinatorTests.swift */; };
 		5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */; };
 		5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */; };
+		96E1FC962C2DC2C100818A8B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 96E1FC952C2DC2C100818A8B /* Collections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,6 +202,7 @@
 			files = (
 				5D2129E02BDF98E100142E46 /* Services in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
+				96E1FC962C2DC2C100818A8B /* Collections in Frameworks */,
 				5D1353AB2BE0D75000414441 /* Homepage in Frameworks */,
 				5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */,
 			);
@@ -603,6 +605,7 @@
 				5D2129E22BDF98EA00142E46 /* Onboarding */,
 				5D1353AA2BE0D75000414441 /* Homepage */,
 				5D7F267D2C0F0EF000842090 /* Factory */,
+				96E1FC952C2DC2C100818A8B /* Collections */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -688,6 +691,7 @@
 				5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */,
 				5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
 				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
+				96E1FC942C2DC2C100818A8B /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -1254,6 +1258,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		96E1FC942C2DC2C100818A8B /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1281,6 +1293,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		96E1FC952C2DC2C100818A8B /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96E1FC942C2DC2C100818A8B /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

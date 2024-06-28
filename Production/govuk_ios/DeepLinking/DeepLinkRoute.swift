@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import OrderedCollections
 
 protocol DeepLinkRoute {
     var path: String { get }
@@ -29,10 +30,8 @@ struct PermitDeepLink: DeepLinkRoute {
 }
 
 
-struct PermitDeepLink_Complex: DeepLinkRoute {
+struct PermitDeepLinkComplex: DeepLinkRoute {
     var path: String { "/driving/permit/*/anotherPathComponent" }
-
-    var smartPath: [DeepLinkPathComponents] = [.string("driving"), .string("permit"), .wildcard, .string("anotherPathComponent")]
 
     func action(parent: BaseCoordinator) {
         let coordinator = PermitCoordinator(
@@ -49,15 +48,26 @@ enum DeepLinkPathComponents {
 
 
 struct DeeplinkKeyValue {
-    let previousPathComponent: [String]
-    let key: String
+    let previousPathComponents: [String]
 
-    func value(deepLink: DeepLink) -> String {
-        var deepLinkPaths = deepLink.pathComponents
+    var valueFormatter: ((String) -> String)?
 
-        if deepLinkPaths.contains(previousPathComponent) {
+    func value(deepLink: DeepLink) -> Result<String, Error> {
+        var deepLinkPaths: OrderedSet = OrderedSet(arrayLiteral: deepLink.pathComponents)
+
+        if deepLinkPaths.contains(previousPathComponents) {
+            guard let last = previousPathComponents.last,
+                  let index = deepLinkPaths.lastIndex(of: [last]) else { return
+                      .failure(DeepLinkError.pathComponent) }
+
+            guard deepLinkPaths.count > index else { return .failure(DeepLinkError.noValue) }
+
+            guard let result = deepLinkPaths[index + 1].first else {
+                return .failure(DeepLinkError.noValue)
+            }
+            return .success(result)
         }
 
-        ""
+        return .failure(DeepLinkError.noMatchingPaths)
     }
 }

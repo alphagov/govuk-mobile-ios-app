@@ -90,4 +90,7 @@ struct DeepLink {
 
 enum DeepLinkError: Error {
     case noDeeplink
+    case pathComponent
+    case noValue
+    case noMatchingPaths
 }

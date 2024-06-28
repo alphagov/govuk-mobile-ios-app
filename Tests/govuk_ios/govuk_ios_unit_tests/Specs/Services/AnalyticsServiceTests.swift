@@ -17,7 +17,7 @@ final class AnalyticsServiceTests: XCTestCase {
 
         subject.track(event: AppEvent.appLoaded)
        
-        XCTAssertTrue(analyticsService.eventsParamsLogged.count == 1)
+        XCTAssertEqual(analyticsService.eventsParamsLogged?.count, 1)
     }
     
     func test_setAcceptedAnalytics_setsPreference() {
@@ -28,7 +28,7 @@ final class AnalyticsServiceTests: XCTestCase {
 
         subject.setAcceptedAnalytics(accepted: true)
        
-        XCTAssertTrue(analyticsPreferenceStore.hasAcceptedAnalytics == true)
+        XCTAssertEqual(analyticsPreferenceStore.hasAcceptedAnalytics, true)
     }
     
     func test_permissionState_notSet_returnsUnknown() {
@@ -37,7 +37,7 @@ final class AnalyticsServiceTests: XCTestCase {
             preferenceStore: analyticsPreferenceStore
         )
 
-        XCTAssertTrue(subject.permissionState == .unknown)
+        XCTAssertEqual(subject.permissionState, .unknown)
     }
     
     func test_permissionState_granted_returnsAccepted() {
@@ -48,7 +48,7 @@ final class AnalyticsServiceTests: XCTestCase {
         
         subject.setAcceptedAnalytics(accepted: true)
 
-        XCTAssertTrue(subject.permissionState == .accepted)
+        XCTAssertEqual(subject.permissionState, .accepted)
     }
 
     func test_permissionState_rejected_returnsDenied() {
@@ -59,6 +59,6 @@ final class AnalyticsServiceTests: XCTestCase {
 
         subject.setAcceptedAnalytics(accepted: false)
        
-        XCTAssertTrue(subject.permissionState == .denied)
+        XCTAssertEqual(subject.permissionState, .denied)
     }
 }

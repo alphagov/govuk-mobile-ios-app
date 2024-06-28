@@ -4,9 +4,9 @@ import Logging
 final class MockAnalyticsService: Logging.AnalyticsService {
     var additionalParameters = [String: Any]()
     private(set) var screensVisited = [String]()
-    private(set) var screenParamsLogged = [String: String]()
+    private(set) var screenParamsLogged: [String: Any]?
     private(set) var eventsLogged = [String]()
-    private(set) var eventsParamsLogged = [String: String]()
+    private(set) var eventsParamsLogged: [String: Any]?
     private(set) var crashesLogged = [NSError]()
     var hasAcceptedAnalytics: Bool?
     
@@ -17,35 +17,23 @@ final class MockAnalyticsService: Logging.AnalyticsService {
     func trackScreen(_ screen: LoggableScreen, parameters: [String: Any] = [:]) {
         screensVisited.append(screen.name)
         
-        guard let parameters = parameters as? [String: String] else {
-            XCTFail("Non-string parameters were logged")
-            return
-        }
         screenParamsLogged = parameters
     }
     
     func trackScreen(_ screen: LoggableScreenV2, parameters: [String: Any]) {
         screensVisited.append(screen.name)
         
-        guard var parameters = parameters as? [String: String] else {
-            XCTFail("Non-string parameters were logged")
-            return
-        }
+        var screenParameters = parameters
+        screenParameters["AnalyticsParameterScreenClass"] = screen.type.name
+        screenParameters["AnalyticsParameterScreenName"] = screen.name
         
-        parameters["AnalyticsParameterScreenClass"] = screen.type.name
-        parameters["AnalyticsParameterScreenName"] = screen.name
-        
-        screenParamsLogged = parameters
+        screenParamsLogged = screenParameters
     }
     
     
     func logEvent(_ event: LoggableEvent, parameters: [String: Any]) {
         eventsLogged.append(event.name)
         
-        guard let parameters = parameters as? [String: String] else {
-            XCTFail("Non-string parameters were logged")
-            return
-        }
         eventsParamsLogged = parameters
     }
     

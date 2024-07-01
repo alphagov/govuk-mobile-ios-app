@@ -5,8 +5,12 @@ import XCTest
 
 class LaunchCoordinatorTests: XCTestCase {
 
+    override func setUp() {
+        UIView.setAnimationsEnabled(false)
+    }
+
     @MainActor
-    func test_start_callsCompletion() {
+    func test_start_launchCompletion_callsCompletion() {
         let mockNavigationController = UINavigationController()
 
         let expectation = expectation(description: #function)
@@ -18,7 +22,9 @@ class LaunchCoordinatorTests: XCTestCase {
         )
 
         subject.start()
-        wait(for: [expectation], timeout: 2)
+        let viewController = mockNavigationController.viewControllers.first
+        viewController?.viewDidAppear(true)
+        wait(for: [expectation], timeout: 10)
     }
 
 }

@@ -5,10 +5,17 @@ struct DeviceModel: CustomStringConvertible {
         var sysinfo = utsname()
         uname(&sysinfo)
 
-        guard let name = String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)?
-            .trimmingCharacters(in: .controlCharacters) else {
-            return "Unknown"
-        }
-        return name
+        let data = Data(
+            bytes: &sysinfo.machine,
+            count: Int(_SYS_NAMELEN)
+        )
+        let modelName = String(
+            bytes: data,
+            encoding: .ascii
+        )
+        let trimmedModelName = modelName?.trimmingCharacters(
+            in: .controlCharacters
+        )
+        return trimmedModelName ?? "Unknown"
     }
 }

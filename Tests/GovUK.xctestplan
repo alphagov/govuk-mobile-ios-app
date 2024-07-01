@@ -9,9 +9,6 @@
     }
   ],
   "defaultOptions" : {
-    "commandLineArgumentEntries" : [
-
-    ],
     "environmentVariableEntries" : [
       {
         "key" : "IMAGE_DIFF_DIR",

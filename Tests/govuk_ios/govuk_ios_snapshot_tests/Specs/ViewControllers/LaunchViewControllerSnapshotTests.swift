@@ -7,9 +7,7 @@ import UIKit
 class LaunchViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_rendersCorrectly() {
         let viewModel = LaunchViewModel(
-            animationCompleted: {
-
-            }
+            animationCompleted: { }
         )
         let subject = LaunchViewController(
             viewModel: viewModel

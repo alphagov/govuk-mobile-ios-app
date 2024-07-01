@@ -41,7 +41,10 @@ class LaunchViewController: BaseViewController {
             equalTo: view.layoutMarginsGuide.rightAnchor,
             constant: -20
         ).isActive = true
-        animationView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 20).isActive = true
+        animationView.leftAnchor.constraint(
+            equalTo: view.layoutMarginsGuide.leftAnchor,
+            constant: 20
+        ).isActive = true
         animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }

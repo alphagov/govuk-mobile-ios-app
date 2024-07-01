@@ -9,8 +9,9 @@ import Lottie
 
 class LaunchViewControllerTests: SnapshotTestCase {
     func test_loadInNavigationController_rendersCorrectly() {
-
-        Container.shared.lottieConfiguration.register { LottieConfiguration(renderingEngine: .mainThread) }
+        Container.shared.lottieConfiguration.register {
+            LottieConfiguration(renderingEngine: .mainThread)
+        }
 
         let viewModel = LaunchViewModel(
             animationCompleted: {
@@ -20,6 +21,8 @@ class LaunchViewControllerTests: SnapshotTestCase {
         let subject = LaunchViewController(
             viewModel: viewModel
         )
+        subject.overrideUserInterfaceStyle = .light
+
         VerifySnapshotInWindow(subject)
     }
 }

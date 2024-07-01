@@ -4,9 +4,11 @@ import UIKit
 import Lottie
 
 class AnimationView: UIView {
-    private lazy var animationView = LottieAnimationView(
+    @Inject(\.lottieConfiguration) private var config: LottieConfiguration
+
+    private lazy var animationView: LottieAnimationView = LottieAnimationView(
         name: resourceName,
-        configuration: .init(renderingEngine: .mainThread)
+        configuration: config
     )
 
     private let resourceName: String

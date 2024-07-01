@@ -1,10 +1,10 @@
 import UIKit
 import Foundation
 
-import Lottie
-
 class LaunchViewController: BaseViewController {
-    private lazy var animationView = LottieAnimationView(name: "app_splash")
+    private lazy var animationView = AnimationView(
+        resourceName: "app_splash"
+    )
 
     private let viewModel: LaunchViewModel
 
@@ -25,11 +25,8 @@ class LaunchViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard UIView.areAnimationsEnabled
-        else { return viewModel.animationCompleted() }
-        animationView.play(
-            completion: { [weak self] finished in
-                guard finished else { return }
+        animationView.animateIfAvailable(
+            completion: { [weak self] in
                 self?.viewModel.animationCompleted()
             }
         )

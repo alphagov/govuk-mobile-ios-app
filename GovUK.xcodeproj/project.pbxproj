@@ -54,6 +54,7 @@
 		5D5FEDB92C29C45E000B6220 /* RedCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB52C29C45E000B6220 /* RedCoordinatorTests.swift */; };
 		5D5FEDBA2C29C45E000B6220 /* BlueCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */; };
 		5D5FEDBB2C29C45E000B6220 /* DrivingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */; };
+		5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEBF2C32B9180061F344 /* AnimationView.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
 		5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */; };
 		5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */; };
@@ -166,6 +167,7 @@
 		5D5FEDB52C29C45E000B6220 /* RedCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinatorTests.swift; sourceTree = "<group>"; };
+		5D79AEBF2C32B9180061F344 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
 		5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
@@ -395,6 +397,14 @@
 			path = shared;
 			sourceTree = "<group>";
 		};
+		5D79AEBE2C32B8CB0061F344 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5D79AEBF2C32B9180061F344 /* AnimationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5D8922702C071FF60019FBD7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +500,7 @@
 				5DAD71A72BD254460075F648 /* SupportingFiles */,
 				5DAD71A82BD254730075F648 /* ViewControllers */,
 				5D41DB5E2C0875460011E691 /* ViewModels */,
+				5D79AEBE2C32B8CB0061F344 /* Views */,
 			);
 			path = govuk_ios;
 			sourceTree = "<group>";
@@ -910,6 +921,7 @@
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
+				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,

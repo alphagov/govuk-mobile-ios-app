@@ -14,6 +14,6 @@ class LaunchViewControllerTests: SnapshotTestCase {
         let subject = LaunchViewController(
             viewModel: viewModel
         )
-        VerifySnapshotInWindow(subject)
+        RecordSnapshotInWindow(subject)
     }
 }

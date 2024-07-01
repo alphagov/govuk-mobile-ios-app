@@ -1,32 +1,22 @@
 import UIKit
 import Foundation
 
-class ColorCoordinator: BaseCoordinator {
-    private let color: UIColor
-    private let title: String
-    private let coordinatorBuilder: CoordinatorBuilder
+class RedCoordinator: BaseCoordinator {
+    private let coodinatorBuilder: CoordinatorBuilder
+    private let viewControllerBuilder: ViewControllerBuilder
 
     init(navigationController: UINavigationController,
-         color: UIColor,
-         title: String,
-         coordinatorBuilder: CoordinatorBuilder) {
-        self.color = color
-        self.title = title
-        self.coordinatorBuilder = coordinatorBuilder
+         coodinatorBuilder: CoordinatorBuilder,
+         viewControllerBuilder: ViewControllerBuilder) {
+        self.coodinatorBuilder = coodinatorBuilder
+        self.viewControllerBuilder = viewControllerBuilder
         super.init(navigationController: navigationController)
     }
 
     override func start() {
-        let viewModel = TestViewModel(
-            color: color,
-            tabTitle: title,
-            primaryTitle: "Next",
-            primaryAction: showNextAction,
-            secondaryTitle: "Modal",
-            secondaryAction: showModalAction
-        )
-        let viewController = TestViewController(
-            viewModel: viewModel
+        let viewController = viewControllerBuilder.red(
+            showNextAction: showNextAction,
+            showModalAction: showModalAction
         )
         set([viewController], animated: false)
     }
@@ -34,7 +24,7 @@ class ColorCoordinator: BaseCoordinator {
     private var showNextAction: () -> Void {
         return { [weak self] in
             guard let strongSelf = self else { return }
-            let coordinator = strongSelf.coordinatorBuilder.next(
+            let coordinator = strongSelf.coodinatorBuilder.next(
                 title: "Next",
                 navigationController: strongSelf.root
             )
@@ -46,7 +36,7 @@ class ColorCoordinator: BaseCoordinator {
         return { [weak self] in
             guard let strongSelf = self else { return }
             let navigationController = UINavigationController()
-            let coordinator = strongSelf.coordinatorBuilder.next(
+            let coordinator = strongSelf.coodinatorBuilder.next(
                 title: "Modal",
                 navigationController: navigationController
             )

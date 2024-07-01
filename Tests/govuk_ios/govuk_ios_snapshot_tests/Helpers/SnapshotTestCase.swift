@@ -14,12 +14,11 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func VerifySnapshotInWindow(_ viewController: UIViewController,
                                 perPixelTolerance: CGFloat = 0,
                                 overallTolerance: CGFloat = 0,
-                                file: StaticString = #file, line: UInt = #line) {
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.prefersLargeTitles = true
-        wrapInWindow(navigationController)
+                                file: StaticString = #file, 
+                                line: UInt = #line) {
+        wrapInWindow(viewController)
         FBSnapshotVerifyViewController(
-            navigationController,
+            viewController,
             perPixelTolerance: perPixelTolerance,
             overallTolerance: overallTolerance,
             file: file,
@@ -63,11 +62,9 @@ class SnapshotTestCase: FBSnapshotTestCase {
                                 line: UInt = #line) {
         let initialRecordMode = recordMode
         recordMode = true
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.prefersLargeTitles = true
-        wrapInWindow(navigationController)
+        wrapInWindow(viewController)
         FBSnapshotVerifyViewController(
-            navigationController,
+            viewController,
             file: file,
             line: line
         )
@@ -114,8 +111,6 @@ class SnapshotTestCase: FBSnapshotTestCase {
     }
 
     func wrapInWindow(_ viewController: UIViewController) {
-        let window = UIWindow()
-        window.rootViewController = viewController
-        window.makeKeyAndVisible()
+        UIApplication.shared.windows.first?.rootViewController = viewController
     }
 }

@@ -33,9 +33,7 @@ class TabCoordinator: BaseCoordinator {
     override func start() {
         showTabs()
         coordinators.forEach {
-            $0.parentCoordinator = self
-            childCoordinators.append($0)
-            $0.start()
+            start($0)
         }
     }
 

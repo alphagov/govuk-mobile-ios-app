@@ -14,4 +14,9 @@ class MockBaseCoordinator: BaseCoordinator {
         _startCalled = true
     }
 
+    var _childDidFinishHandler: ((BaseCoordinator) -> Void)?
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        _childDidFinishHandler?(child)
+    }
 }

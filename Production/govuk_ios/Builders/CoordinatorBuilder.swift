@@ -5,17 +5,10 @@ import Factory
 
 @MainActor
 class CoordinatorBuilder {
-    private let container: Container
-
-    init(container: Container) {
-        self.container = container
-    }
-
     func app(navigationController: UINavigationController) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
-            navigationController: navigationController,
-            deeplinkService: container.deeplinkService()
+            navigationController: navigationController
         )
     }
 
@@ -23,7 +16,6 @@ class CoordinatorBuilder {
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            deeplinkService: container.deeplinkService(),
             completion: completion
         )
     }
@@ -39,15 +31,15 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .red,
             color: .red,
-            title: "Red"
+            title: "Red",
+            coordinatorBuilder: self
         )
     }
 
     var blue: BaseCoordinator {
-        ColorCoordinator(
+        BlueCoordinator(
             navigationController: .blue,
-            color: .blue,
-            title: "Blue"
+            coordinatorBuilder: self
         )
     }
 
@@ -55,7 +47,30 @@ class CoordinatorBuilder {
         ColorCoordinator(
             navigationController: .green,
             color: .green,
-            title: "Green"
+            title: "Green",
+            coordinatorBuilder: self
+        )
+    }
+
+    func driving(navigationController: UINavigationController) -> BaseCoordinator {
+        DrivingCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder()
+        )
+    }
+
+    func permit(navigationController: UINavigationController) -> BaseCoordinator {
+        PermitCoordinator(
+            navigationController: navigationController
+        )
+    }
+
+    func next(title: String,
+              navigationController: UINavigationController) -> BaseCoordinator {
+        NextCoordinator(
+            title: title,
+            navigationController: navigationController
         )
     }
 }

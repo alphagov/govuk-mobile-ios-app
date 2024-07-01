@@ -13,12 +13,6 @@ extension Container {
         }
     }
 
-    var deeplinkService: Factory<DeeplinkServiceInterface> {
-        Factory(self) {
-            DeeplinkService()
-        }
-    }
-
     var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             AnalyticsService(

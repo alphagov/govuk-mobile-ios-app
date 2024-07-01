@@ -78,6 +78,7 @@
 		5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */; };
 		5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */; };
 		96E1FC962C2DC2C100818A8B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 96E1FC952C2DC2C100818A8B /* Collections */; };
+		96E1FC9C2C2EEEA600818A8B /* DeeplinkKeyValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E1FC9B2C2EEEA600818A8B /* DeeplinkKeyValueTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +186,7 @@
 		5DEF97812C18A6F000DAC732 /* PermitCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorTests.swift; sourceTree = "<group>"; };
+		96E1FC9B2C2EEEA600818A8B /* DeeplinkKeyValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkKeyValueTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,6 +451,7 @@
 		5DAD718D2BD250DF0075F648 /* govuk_ios_unit_tests */ = {
 			isa = PBXGroup;
 			children = (
+				96E1FC9A2C2EE64F00818A8B /* Deeplinking */,
 				5DD6EFFB2BFF546000C2D79B /* Mocks */,
 				5DD6EFFC2BFF546900C2D79B /* Specs */,
 			);
@@ -559,6 +562,14 @@
 				5D41DB562C0865120011E691 /* ViewControllers */,
 			);
 			path = Specs;
+			sourceTree = "<group>";
+		};
+		96E1FC9A2C2EE64F00818A8B /* Deeplinking */ = {
+			isa = PBXGroup;
+			children = (
+				96E1FC9B2C2EEEA600818A8B /* DeeplinkKeyValueTests.swift */,
+			);
+			path = Deeplinking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -837,6 +848,7 @@
 				5DEF97822C18A6F000DAC732 /* PermitCoordinatorTests.swift in Sources */,
 				5D41DB7A2C08AFC00011E691 /* TestServiceTests.swift in Sources */,
 				5D528D7C2C188AF700AFBDF1 /* MockDeepLink.swift in Sources */,
+				96E1FC9C2C2EEEA600818A8B /* DeeplinkKeyValueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

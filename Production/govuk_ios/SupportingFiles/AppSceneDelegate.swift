@@ -84,7 +84,10 @@ struct DeepLink {
     }
 
     func perform() throws -> Result<DeepLinkRoute, DeepLinkError> {
-        .success(DrivingDeepLink())
+        // get matching deepling from factory
+        // deeplink or error
+        // inject in query params
+        .success(DrivingDeepLink(queryItems: queryItems))
     }
 }
 

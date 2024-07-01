@@ -6,7 +6,7 @@ import Lottie
 class AnimationView: UIView {
     @Inject(\.lottieConfiguration) private var config: LottieConfiguration
 
-    private lazy var animationView: LottieAnimationView = LottieAnimationView(
+    private lazy var internalAnimationView: LottieAnimationView = LottieAnimationView(
         name: resourceName,
         configuration: config
     )
@@ -25,21 +25,21 @@ class AnimationView: UIView {
     }
 
     private func configureUI() {
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(animationView)
+        internalAnimationView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(internalAnimationView)
     }
 
     private func configureConstraints() {
-        animationView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        animationView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        animationView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        animationView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        internalAnimationView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        internalAnimationView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        internalAnimationView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        internalAnimationView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     }
 
     func animateIfAvailable(completion: @escaping () -> Void) {
         guard UIView.areAnimationsEnabled
         else { return completion() }
-        animationView.play(
+        internalAnimationView.play(
             completion: { finished in
                 guard finished else { return }
                 completion()

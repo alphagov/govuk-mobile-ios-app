@@ -2,7 +2,6 @@ import Foundation
 import GAnalytics
 import Logging
 import Factory
-import Lottie
 
 extension Container {
     var testService: Factory<TestServiceInterface> {
@@ -22,11 +21,5 @@ extension Container {
             )
         }
         .scope(.singleton)
-    }
-
-    var lottieConfiguration: Factory<LottieConfiguration> {
-        Factory(self) {
-            LottieConfiguration.shared
-        }
     }
 }

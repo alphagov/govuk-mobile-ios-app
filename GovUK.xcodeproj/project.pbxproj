@@ -54,6 +54,7 @@
 		5D5FEDB92C29C45E000B6220 /* RedCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB52C29C45E000B6220 /* RedCoordinatorTests.swift */; };
 		5D5FEDBA2C29C45E000B6220 /* BlueCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */; };
 		5D5FEDBB2C29C45E000B6220 /* DrivingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */; };
+		5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */; };
 		5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEBF2C32B9180061F344 /* AnimationView.swift */; };
 		5D79AEC42C32D48D0061F344 /* AnimationView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEC32C32D48D0061F344 /* AnimationView+Convenience.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
@@ -167,6 +168,7 @@
 		5D5FEDB52C29C45E000B6220 /* RedCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinatorTests.swift; sourceTree = "<group>"; };
+		5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Configs.swift"; sourceTree = "<group>"; };
 		5D79AEBF2C32B9180061F344 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		5D79AEC32C32D48D0061F344 /* AnimationView+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Convenience.swift"; sourceTree = "<group>"; };
 		5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				5D41DB5C2C0870020011E691 /* Container+Aliases.swift */,
+				5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */,
 				5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */,
 				5D41DB6F2C088FEB0011E691 /* Container+NetworkClients.swift */,
 				5D41DB642C087BCE0011E691 /* Container+Services.swift */,
@@ -918,6 +921,7 @@
 			files = (
 				5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */,
 				5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */,
+				5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */,
 				5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */,
 				160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */,
 				5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */,

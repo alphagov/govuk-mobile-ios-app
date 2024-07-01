@@ -2,9 +2,7 @@ import UIKit
 import Foundation
 
 class LaunchViewController: BaseViewController {
-    private lazy var animationView = AnimationView(
-        resourceName: "app_splash"
-    )
+    private lazy var animationView = AnimationView.launch
 
     private let viewModel: LaunchViewModel
 

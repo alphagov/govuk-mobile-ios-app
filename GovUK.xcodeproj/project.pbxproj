@@ -55,6 +55,7 @@
 		5D5FEDBA2C29C45E000B6220 /* BlueCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */; };
 		5D5FEDBB2C29C45E000B6220 /* DrivingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */; };
 		5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEBF2C32B9180061F344 /* AnimationView.swift */; };
+		5D79AEC42C32D48D0061F344 /* AnimationView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEC32C32D48D0061F344 /* AnimationView+Convenience.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
 		5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */; };
 		5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */; };
@@ -139,7 +140,6 @@
 		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
-		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
 		5D41DB542C0862840011E691 /* LaunchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewControllerTests.swift; sourceTree = "<group>"; };
@@ -168,6 +168,7 @@
 		5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D79AEBF2C32B9180061F344 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		5D79AEC32C32D48D0061F344 /* AnimationView+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Convenience.swift"; sourceTree = "<group>"; };
 		5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
 		5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
@@ -286,6 +287,7 @@
 			children = (
 				5DE970552C297CF3009D66C4 /* Analytics */,
 				5D41DB662C087C520011E691 /* Container */,
+				5D79AEC12C32D47A0061F344 /* UIKit */,
 				5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */,
 				5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */,
 			);
@@ -401,6 +403,22 @@
 			isa = PBXGroup;
 			children = (
 				5D79AEBF2C32B9180061F344 /* AnimationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5D79AEC12C32D47A0061F344 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				5D79AEC22C32D4800061F344 /* Views */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		5D79AEC22C32D4800061F344 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5D79AEC32C32D48D0061F344 /* AnimationView+Convenience.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -902,12 +920,8 @@
 				5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */,
 				5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */,
 				160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */,
-				5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */,
-				5D41DB602C0875520011E691 /* TestViewModel.swift in Sources */,
 				5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */,
-				5D41DB6E2C088FE30011E691 /* Container+DataStores.swift in Sources */,
-				5D41DB692C088C580011E691 /* TestNetworkClient.swift in Sources */,
-				5D9931322BF77AC70036C8FB /* NextCoordinator.swift in Sources */,
+				5D79AEC42C32D48D0061F344 /* AnimationView+Convenience.swift in Sources */,
 				5D41DB6C2C088CD30011E691 /* TestDataStore.swift in Sources */,
 				5D962D672C29BD0B0038BC0A /* RedCoordinator.swift in Sources */,
 				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,

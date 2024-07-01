@@ -4,7 +4,7 @@ import UIKit
 
 @testable import govuk_ios
 
-class LaunchViewControllerTests: SnapshotTestCase {
+class LaunchViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_rendersCorrectly() {
         let viewModel = LaunchViewModel(
             animationCompleted: {

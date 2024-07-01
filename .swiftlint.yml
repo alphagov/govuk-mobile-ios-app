@@ -15,7 +15,7 @@ trailing_whitespace:
 vertical_whitespace:
   max_empty_lines: 2
 line_length:
-  warning: 120
+  warning: 100
   ignores_urls: true
   ignores_interpolated_strings: true
   ignores_comments: true

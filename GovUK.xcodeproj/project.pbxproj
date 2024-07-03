@@ -18,7 +18,6 @@
 		1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceModel.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
 		5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */; };
-		5D0CFAAA2C33E89200B3DEFD /* DeeplinkDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA92C33E89200B3DEFD /* DeeplinkDataStoreTests.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */; };
 		5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */; };
@@ -54,6 +53,10 @@
 		5D5FEDBA2C29C45E000B6220 /* BlueCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */; };
 		5D5FEDBB2C29C45E000B6220 /* DrivingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
+		5D8683922C340D150024F2D8 /* DeeplinkDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA92C33E89200B3DEFD /* DeeplinkDataStoreTests.swift */; };
+		5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */; };
+		5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */; };
+		5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */; };
 		5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */; };
 		5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */; };
 		5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */; };
@@ -164,6 +167,9 @@
 		5D5FEDB52C29C45E000B6220 /* RedCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D5FEDB62C29C45E000B6220 /* BlueCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D5FEDB72C29C45E000B6220 /* DrivingCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinatorTests.swift; sourceTree = "<group>"; };
+		5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRoute.swift; sourceTree = "<group>"; };
+		5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRoutingComponents.swift; sourceTree = "<group>"; };
+		5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedDeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
 		5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
@@ -335,7 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				5D41DB6B2C088CD30011E691 /* TestDataStore.swift */,
-				5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */,
 			);
 			path = DataStores;
 			sourceTree = "<group>";
@@ -390,6 +395,17 @@
 				5D54A8392BFCD881003D0C21 /* SupportingFiles */,
 			);
 			path = shared;
+			sourceTree = "<group>";
+		};
+		5D8683932C340F0A0024F2D8 /* Deeplinking */ = {
+			isa = PBXGroup;
+			children = (
+				5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */,
+				5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */,
+				5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */,
+				5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */,
+			);
+			path = Deeplinking;
 			sourceTree = "<group>";
 		};
 		5D8922702C071FF60019FBD7 /* ViewControllers */ = {
@@ -478,6 +494,7 @@
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D962D5E2C29BD0B0038BC0A /* Coordinators */,
 				5D41DB6A2C088CA30011E691 /* DataStores */,
+				5D8683932C340F0A0024F2D8 /* Deeplinking */,
 				5D1353AE2BE0D9A700414441 /* Extensions */,
 				16EE0C982C2479E700F72E61 /* Firebase */,
 				5DE970512C297637009D66C4 /* Model */,
@@ -625,11 +642,11 @@
 		5DD6EFFC2BFF546900C2D79B /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				5D0CFAA82C33E88800B3DEFD /* DataStores */,
 				5DC04B8B2C2D671A0036EF2B /* Builders */,
 				5DC325602BFF251700CB590B /* Coordinators */,
-				5D41DB562C0865120011E691 /* ViewControllers */,
+				5D0CFAA82C33E88800B3DEFD /* DataStores */,
 				5D41DB742C08AD550011E691 /* Services */,
+				5D41DB562C0865120011E691 /* ViewControllers */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -900,22 +917,24 @@
 				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
+				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5D962D632C29BD0B0038BC0A /* BlueCoordinator.swift in Sources */,
 				5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */,
+				5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
 				5D962D642C29BD0B0038BC0A /* ColorCoordinator.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */,
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
+				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,
 				5DE970542C297652009D66C4 /* AppEvent.swift in Sources */,
-				5D0CFAAA2C33E89200B3DEFD /* DeeplinkDataStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,6 +965,7 @@
 				5D41DB582C08651E0011E691 /* BaseViewControllerTests.swift in Sources */,
 				5DFFA9742BFF8D0F00B02042 /* AppCoordinatorTests.swift in Sources */,
 				5D41DB7A2C08AFC00011E691 /* TestServiceTests.swift in Sources */,
+				5D8683922C340D150024F2D8 /* DeeplinkDataStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

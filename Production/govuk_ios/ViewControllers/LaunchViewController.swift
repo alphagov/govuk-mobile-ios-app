@@ -38,14 +38,8 @@ class LaunchViewController: BaseViewController {
     private func configureConstraints() {
         animationView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            animationView.rightAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.rightAnchor,
-                constant: -20
-            ),
-            animationView.leftAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leftAnchor,
-                constant: 20
-            ),
+            animationView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            animationView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])

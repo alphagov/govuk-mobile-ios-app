@@ -54,7 +54,9 @@ class CoordinatorBuilderTests: XCTestCase {
     @MainActor
     func test_blue_returnsExpectedResult() {
         let subject = CoordinatorBuilder()
-        let coordinator = subject.blue
+        let coordinator = subject.blue(
+            requestFocus: { _ in }
+        )
 
         XCTAssertEqual(coordinator.root.tabBarItem.title, "Blue")
         XCTAssertFalse(coordinator.root.navigationBar.prefersLargeTitles)

@@ -36,10 +36,12 @@ class CoordinatorBuilder {
         )
     }
 
-    var blue: BaseCoordinator {
+    func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
         BlueCoordinator(
             navigationController: .blue,
-            coordinatorBuilder: self
+            coordinatorBuilder: self,
+            deeplinkStore: .driving(coordinatorBuilder: self),
+            requestFocus: requestFocus
         )
     }
 
@@ -60,8 +62,10 @@ class CoordinatorBuilder {
         )
     }
 
-    func permit(navigationController: UINavigationController) -> BaseCoordinator {
+    func permit(permitId: String,
+                navigationController: UINavigationController) -> BaseCoordinator {
         PermitCoordinator(
+            permitId: permitId,
             navigationController: navigationController
         )
     }

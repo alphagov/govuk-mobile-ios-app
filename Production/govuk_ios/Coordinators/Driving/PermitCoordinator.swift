@@ -2,10 +2,18 @@ import UIKit
 import Foundation
 
 class PermitCoordinator: BaseCoordinator {
-    override func start() {
+    private let permitId: String
+
+    init(permitId: String,
+         navigationController: UINavigationController) {
+        self.permitId = permitId
+        super.init(navigationController: navigationController)
+    }
+
+    override func start(url: URL?) {
         let viewModel = TestViewModel(
             color: .lightGray,
-            tabTitle: "Permit",
+            tabTitle: "Permit - \(permitId)",
             primaryTitle: nil,
             primaryAction: nil,
             secondaryTitle: "Dismiss",

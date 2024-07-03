@@ -14,6 +14,7 @@ class PermitCoordinatorTests: XCTestCase {
     func test_start_showsViewController() {
         let navigationController = UINavigationController()
         let subject = PermitCoordinator(
+            permitId: "test", 
             navigationController: navigationController
         )
 

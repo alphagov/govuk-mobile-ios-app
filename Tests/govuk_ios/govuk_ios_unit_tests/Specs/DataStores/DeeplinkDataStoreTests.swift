@@ -29,6 +29,18 @@ class DeeplinkDataStoreTests: XCTestCase {
         XCTAssertNil(result)
     }
 
+    func test_route_urlScheme_returnsRoute() {
+        let subject = DeeplinkDataStore(
+            routes: [
+                MockRoute(pattern: "/services")
+            ]
+        )
+        let url = URL(string: "govuk://services")!
+        let result = subject.route(for: url)
+
+        XCTAssertNil(result)
+    }
+
     func test_route_validURL_noneMatchingComponents_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [

@@ -15,7 +15,9 @@ class BlueCoordinatorTests: XCTestCase {
         let navigationController = UINavigationController()
         let subject = BlueCoordinator(
             navigationController: navigationController,
-            coordinatorBuilder: .mock
+            coordinatorBuilder: .mock,
+            deeplinkStore: .init(routes: []),
+            requestFocus: { _ in }
         )
 
         subject.start()

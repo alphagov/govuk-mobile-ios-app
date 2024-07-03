@@ -12,11 +12,7 @@ class BaseViewController: UIViewController {
     }
 
     private func configureUI() {
-        view.layoutMargins = .init(
-            top: 0,
-            left: 20,
-            bottom: 0,
-            right: 20
-        )
+        view.layoutMargins.right = 16
+        view.layoutMargins.left = 16
     }
 }

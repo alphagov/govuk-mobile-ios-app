@@ -13,7 +13,7 @@ class BaseViewControllerTests: XCTestCase {
 
     func test_layoutMargins_returnsExpectedValue() {
         let subject = BaseViewController()
-        let expectedInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let expectedInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         XCTAssertEqual(subject.view.layoutMargins, expectedInsets)
     }
 

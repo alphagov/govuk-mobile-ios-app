@@ -24,6 +24,7 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             completion: { [weak self] in
                 self?.showTabs(url: url)
+                self?.initialLaunch = false
             }
         )
         start(coordinator)

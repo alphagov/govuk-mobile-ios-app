@@ -83,6 +83,18 @@ class CoordinatorBuilderTests: XCTestCase {
     }
 
     @MainActor
+    func test_permit_returnsExpectedResult() {
+        let subject = CoordinatorBuilder()
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.permit(
+            permitId: "123",
+            navigationController: mockNavigationController
+        )
+
+        XCTAssert(coordinator is PermitCoordinator)
+    }
+
+    @MainActor
     func test_next_returnsExpectedResult() {
         let subject = CoordinatorBuilder()
         let mockNavigationController = MockNavigationController()

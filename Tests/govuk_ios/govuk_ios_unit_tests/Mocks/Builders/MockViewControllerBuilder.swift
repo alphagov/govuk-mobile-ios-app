@@ -38,4 +38,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedBlueViewController ?? UIViewController()
     }
 
+    var _stubbedPermitViewController: UIViewController?
+    var _receivedPermitFinishAction: (() -> Void)?
+    override func permit(permitId: String,
+                         finishAction: @escaping () -> Void) -> UIViewController {
+        _receivedPermitFinishAction = finishAction
+        return _stubbedPermitViewController ?? UIViewController()
+    }
+
 }

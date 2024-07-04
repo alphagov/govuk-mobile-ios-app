@@ -67,7 +67,8 @@ class CoordinatorBuilder {
                 navigationController: UINavigationController) -> BaseCoordinator {
         PermitCoordinator(
             permitId: permitId,
-            navigationController: navigationController
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder()
         )
     }
 

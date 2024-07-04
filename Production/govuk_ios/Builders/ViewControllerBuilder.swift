@@ -45,4 +45,19 @@ class ViewControllerBuilder {
             viewModel: viewModel
         )
     }
+
+    func permit(permitId: String,
+                finishAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TestViewModel(
+            color: .lightGray,
+            tabTitle: "Permit - \(permitId)",
+            primaryTitle: nil,
+            primaryAction: nil,
+            secondaryTitle: "Dismiss",
+            secondaryAction: finishAction
+        )
+        return TestViewController(
+            viewModel: viewModel
+        )
+    }
 }

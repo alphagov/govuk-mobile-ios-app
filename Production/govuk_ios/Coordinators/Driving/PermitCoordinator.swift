@@ -3,28 +3,28 @@ import Foundation
 
 class PermitCoordinator: BaseCoordinator {
     private let permitId: String
+    private let viewControllerBuilder: ViewControllerBuilder
 
     init(permitId: String,
-         navigationController: UINavigationController) {
+         navigationController: UINavigationController,
+         viewControllerBuilder: ViewControllerBuilder) {
         self.permitId = permitId
+        self.viewControllerBuilder = viewControllerBuilder
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        let viewModel = TestViewModel(
-            color: .lightGray,
-            tabTitle: "Permit - \(permitId)",
-            primaryTitle: nil,
-            primaryAction: nil,
-            secondaryTitle: "Dismiss",
-            secondaryAction: { [weak self] in
-                self?.dismiss(animated: true)
+        let viewController = viewControllerBuilder.permit(
+            permitId: permitId,
+            finishAction: { [weak self] in
                 self?.finish()
             }
         )
-        let viewController = TestViewController(
-            viewModel: viewModel
-        )
         push(viewController, animated: true)
+    }
+
+    override func finish() {
+        dismiss(animated: true)
+        super.finish()
     }
 }

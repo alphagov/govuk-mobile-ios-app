@@ -61,9 +61,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
     
     var _stubbedPermitCoordinator: MockBaseCoordinator?
+    var _receivedPermitPermitId: String?
     var _receivedPermitNavigationController: UINavigationController?
     override func permit(permitId: String,
                          navigationController: UINavigationController) -> BaseCoordinator {
+        _receivedPermitPermitId = permitId
         _receivedPermitNavigationController = navigationController
         return _stubbedPermitCoordinator ??
         MockBaseCoordinator(

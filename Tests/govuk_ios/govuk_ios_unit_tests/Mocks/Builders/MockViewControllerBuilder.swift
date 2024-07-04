@@ -31,4 +31,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedRedViewController ?? UIViewController()
     }
 
+    var _stubbedBlueViewController: UIViewController?
+    var _receivedBlueShowNextAction: (() -> Void)?
+    override func blue(showNextAction: @escaping () -> Void) -> UIViewController {
+        _receivedBlueShowNextAction = showNextAction
+        return _stubbedBlueViewController ?? UIViewController()
+    }
+
 }

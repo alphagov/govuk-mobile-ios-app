@@ -40,6 +40,7 @@ class CoordinatorBuilder {
         BlueCoordinator(
             navigationController: .blue,
             coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .driving(coordinatorBuilder: self),
             requestFocus: requestFocus
         )

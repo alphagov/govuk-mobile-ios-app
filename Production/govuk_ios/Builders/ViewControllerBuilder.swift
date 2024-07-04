@@ -17,6 +17,20 @@ class ViewControllerBuilder {
         )
     }
 
+    func blue(showNextAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TestViewModel(
+            color: .blue,
+            tabTitle: "Blue",
+            primaryTitle: "Next",
+            primaryAction: showNextAction,
+            secondaryTitle: nil,
+            secondaryAction: nil
+        )
+        return TestViewController(
+            viewModel: viewModel
+        )
+    }
+
     func driving(showPermitAction: @escaping () -> Void,
                  presentPermitAction: @escaping () -> Void) -> UIViewController {
         let viewModel = TestViewModel(

@@ -3,37 +3,32 @@ import Foundation
 
 class BlueCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
+    private let viewControllerBuilder: ViewControllerBuilder
     private let requestFocus: (UINavigationController) -> Void
     private let deeplinkStore: DeeplinkDataStore
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
+         viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
          requestFocus: @escaping (UINavigationController) -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
+        self.viewControllerBuilder = viewControllerBuilder
         self.requestFocus = requestFocus
         self.deeplinkStore = deeplinkStore
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        let viewModel = TestViewModel(
-            color: .blue,
-            tabTitle: "Blue",
-            primaryTitle: "Next",
-            primaryAction: showNextAction,
-            secondaryTitle: nil,
-            secondaryAction: nil
-        )
-        let viewController = TestViewController(
-            viewModel: viewModel
+        let viewController = viewControllerBuilder.blue(
+            showNextAction: startDriving
         )
         set([viewController], animated: false)
         guard let url = url else { return }
         handleDeepLink(url: url)
     }
 
-    private var showNextAction: () -> Void {
+    private var startDriving: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.driving(

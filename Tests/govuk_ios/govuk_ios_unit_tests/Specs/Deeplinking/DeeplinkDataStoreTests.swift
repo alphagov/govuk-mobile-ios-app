@@ -8,7 +8,7 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_fileURL_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/test")
+                MockDeeplinkRoute(pattern: "/test")
             ]
         )
         let url = URL(string: "file://services")!
@@ -20,7 +20,7 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_inValidURL_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/wrong")
+                MockDeeplinkRoute(pattern: "/wrong")
             ]
         )
         let url = URL(string: "https:app/services")!
@@ -32,7 +32,7 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_urlScheme_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/services")
+                MockDeeplinkRoute(pattern: "/services")
             ]
         )
         let url = URL(string: "govuk://services")!
@@ -44,7 +44,7 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_validURL_noneMatchingComponents_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/wrong")
+                MockDeeplinkRoute(pattern: "/wrong")
             ]
         )
         let url = URL(string: "https://app.gov.uk/services")!
@@ -55,7 +55,7 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_noPathComponents_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/test")
+                MockDeeplinkRoute(pattern: "/test")
             ]
         )
         let url = URL(string: "https://app.gov.uk")!
@@ -67,8 +67,8 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_incorrectComponentNumber_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/one"),
-                MockRoute(pattern: "/one/two")
+                MockDeeplinkRoute(pattern: "/one"),
+                MockDeeplinkRoute(pattern: "/one/two")
             ]
         )
         let url = URL(string: "https://app.gov.uk/one/two/three")!
@@ -80,9 +80,9 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_validURL_matchingComponents_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/one"),
-                MockRoute(pattern: "/services"),
-                MockRoute(pattern: "/one/two"),
+                MockDeeplinkRoute(pattern: "/one"),
+                MockDeeplinkRoute(pattern: "/services"),
+                MockDeeplinkRoute(pattern: "/one/two"),
             ]
         )
         let url = URL(string: "https://app.gov.uk/services")!
@@ -95,9 +95,9 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_validURL_matchingWildCardComponent_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/one"),
-                MockRoute(pattern: "/services/*/test"),
-                MockRoute(pattern: "/one/two"),
+                MockDeeplinkRoute(pattern: "/one"),
+                MockDeeplinkRoute(pattern: "/services/*/test"),
+                MockDeeplinkRoute(pattern: "/one/two"),
             ]
         )
         let url = URL(string: "https://app.gov.uk/services/hello/test")!
@@ -109,9 +109,9 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_validURL_withParams_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/one"),
-                MockRoute(pattern: "/services/:service_id/test"),
-                MockRoute(pattern: "/one/two"),
+                MockDeeplinkRoute(pattern: "/one"),
+                MockDeeplinkRoute(pattern: "/services/:service_id/test"),
+                MockDeeplinkRoute(pattern: "/one/two"),
             ]
         )
         let url = URL(string: "https://app.gov.uk/services/driving_service_id/test")!
@@ -125,9 +125,9 @@ class DeeplinkDataStoreTests: XCTestCase {
     func test_route_validURL_withParams_withConflictingQueryParam_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
-                MockRoute(pattern: "/one"),
-                MockRoute(pattern: "/services/:service_id/test"),
-                MockRoute(pattern: "/one/two"),
+                MockDeeplinkRoute(pattern: "/one"),
+                MockDeeplinkRoute(pattern: "/services/:service_id/test"),
+                MockDeeplinkRoute(pattern: "/one/two"),
             ]
         )
         let url = URL(string: "https://app.gov.uk/services/driving_service_id/test?service_id=override_service")!
@@ -137,12 +137,4 @@ class DeeplinkDataStoreTests: XCTestCase {
         XCTAssertEqual(result?.url, url)
         XCTAssertEqual(result?.parameters["service_id"], "override_service")
     }
-}
-
-struct MockRoute: DeeplinkRoute {
-
-    let pattern: URLPattern
-
-    func action(parent: BaseCoordinator, 
-                params: [String : String]) { }
 }

@@ -39,13 +39,13 @@ class ViewControllerBuilderTests: XCTestCase {
 
     func test_permit_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.driving(
-            showPermitAction: {},
-            presentPermitAction: {}
+        let result = subject.permit(
+            permitId: "123",
+            finishAction: {}
         )
 
         XCTAssert(result is TestViewController)
-        XCTAssertEqual(result.title, "Driving")
+        XCTAssertEqual(result.title, "Permit - 123")
     }
 
 }

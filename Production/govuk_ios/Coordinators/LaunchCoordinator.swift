@@ -11,14 +11,14 @@ class LaunchCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = LaunchViewController()
+        let viewModel = LaunchViewModel(
+            animationCompleted: { [weak self] in
+                self?.completion()
+            }
+        )
+        let viewController = LaunchViewController(
+            viewModel: viewModel
+        )
         set(viewController, animated: false)
-        sendCompletion()
-    }
-
-    private func sendCompletion() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.completion()
-        }
     }
 }

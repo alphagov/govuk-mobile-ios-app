@@ -1,6 +1,8 @@
 import UIKit
 
 import iOSSnapshotTestCase
+import Factory
+import Lottie
 
 @testable import govuk_ios
 
@@ -8,6 +10,9 @@ class SnapshotTestCase: FBSnapshotTestCase {
 
     override func setUp() {
         super.setUp()
+        Container.shared.lottieConfiguration.register {
+            LottieConfiguration(renderingEngine: .mainThread)
+        }
 //        self.recordMode = true
     }
 

@@ -17,14 +17,10 @@ class PermitCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.permit(
             permitId: permitId,
             finishAction: { [weak self] in
+                self?.dismiss(animated: true)
                 self?.finish()
             }
         )
         push(viewController, animated: true)
-    }
-
-    override func finish() {
-        dismiss(animated: true)
-        super.finish()
     }
 }

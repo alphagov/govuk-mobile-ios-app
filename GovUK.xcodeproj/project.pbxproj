@@ -73,6 +73,7 @@
 		5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */; };
 		5D962D672C29BD0B0038BC0A /* RedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */; };
 		5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */; };
+		5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9CF3972C38493B00317B70 /* DeeplinkDataStore+Convenience.swift */; };
 		5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C342C2EF1D400D8FE7C /* MockBaseCoordinator.swift */; };
 		5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */; };
 		5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C3B2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift */; };
@@ -194,6 +195,7 @@
 		5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		5D9CF3972C38493B00317B70 /* DeeplinkDataStore+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeeplinkDataStore+Convenience.swift"; sourceTree = "<group>"; };
 		5DA44C342C2EF1D400D8FE7C /* MockBaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockBaseCoordinator.swift; sourceTree = "<group>"; };
 		5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
 		5DA44C3B2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			children = (
 				5DE970552C297CF3009D66C4 /* Analytics */,
 				5D41DB662C087C520011E691 /* Container */,
+				5D9CF3962C38492500317B70 /* Deeplinking */,
 				5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */,
 				5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */,
 			);
@@ -496,6 +499,14 @@
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		5D9CF3962C38492500317B70 /* Deeplinking */ = {
+			isa = PBXGroup;
+			children = (
+				5D9CF3972C38493B00317B70 /* DeeplinkDataStore+Convenience.swift */,
+			);
+			path = Deeplinking;
 			sourceTree = "<group>";
 		};
 		5DA44C362C2EF1D400D8FE7C /* Coordinators */ = {
@@ -973,6 +984,7 @@
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5D962D632C29BD0B0038BC0A /* BlueCoordinator.swift in Sources */,
+				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
 				5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */,
 				5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,

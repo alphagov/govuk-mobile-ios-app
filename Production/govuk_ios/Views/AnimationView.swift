@@ -37,13 +37,31 @@ class AnimationView: UIView {
     }
 
     func animateIfAvailable(completion: @escaping () -> Void) {
-        guard UIView.areAnimationsEnabled
-        else { return completion() }
+        if shouldAnimate {
+            beginAnimation(completion: completion)
+        } else {
+            pauseTransition(completion: completion)
+        }
+    }
+
+    private func beginAnimation(completion: @escaping () -> Void) {
         internalAnimationView.play(
             completion: { finished in
                 guard finished else { return }
                 completion()
             }
         )
+    }
+
+    private func pauseTransition(completion: @escaping () -> Void) {
+        DispatchQueue.main
+            .asyncAfter(deadline: .now() + 2) {
+                completion()
+        }
+    }
+
+    private var shouldAnimate: Bool {
+        UIView.areAnimationsEnabled &&
+        !UIAccessibility.isReduceMotionEnabled
     }
 }

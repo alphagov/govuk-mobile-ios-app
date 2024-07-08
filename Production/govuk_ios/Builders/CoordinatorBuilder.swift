@@ -1,6 +1,5 @@
 import UIKit
 import Foundation
-
 import Factory
 
 @MainActor
@@ -15,7 +14,8 @@ class CoordinatorBuilder {
         AppCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,
-            deeplinkService: container.deeplinkService()
+            deeplinkService: container.deeplinkService(),
+            userDefaults: .standard
         )
     }
 
@@ -32,6 +32,14 @@ class CoordinatorBuilder {
         TabCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController
+        )
+    }
+
+    func onboarding(navigationController: UINavigationController,
+                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        OnboardingCoordinator(
+            navigationController: navigationController,
+            dismissAction: dismissAction
         )
     }
 

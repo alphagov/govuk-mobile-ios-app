@@ -4,12 +4,6 @@ import XCTest
 @testable import govuk_ios
 
 class TabCoordinatorTests: XCTestCase {
-
-    override class func setUp() {
-        super.setUp()
-        UIView.setAnimationsEnabled(false)
-    }
-
     @MainActor 
     func test_start_showsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder()

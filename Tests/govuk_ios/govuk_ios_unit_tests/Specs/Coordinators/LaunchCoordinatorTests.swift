@@ -4,11 +4,6 @@ import XCTest
 @testable import govuk_ios
 
 class LaunchCoordinatorTests: XCTestCase {
-
-    override func setUp() {
-        UIView.setAnimationsEnabled(false)
-    }
-
     @MainActor
     func test_start_launchCompletion_callsCompletion() {
         let mockNavigationController = UINavigationController()

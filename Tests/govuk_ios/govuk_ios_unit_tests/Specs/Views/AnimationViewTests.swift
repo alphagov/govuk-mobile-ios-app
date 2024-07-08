@@ -17,6 +17,22 @@ class AnimationViewTests: XCTestCase {
         )
     }
 
+    // This test isn't ideal, but there isn't much to assert against with Lottie
+    func test_animationsEnabled_callsPlay() {
+        let subject = AnimationView(resourceName: "app_splash")
+
+        mockAccessibilityManager.animationsEnabled = true
+
+        let expectation = expectation(description: "animation expectation")
+        expectation.isInverted = true
+        subject.animateIfAvailable(
+            completion: {
+                expectation.fulfill()
+            }
+        )
+        wait(for: [expectation], timeout: 2)
+    }
+
     func test_animationsDisabled_delaysCompletion() {
         let subject = AnimationView(resourceName: "app_splash")
 

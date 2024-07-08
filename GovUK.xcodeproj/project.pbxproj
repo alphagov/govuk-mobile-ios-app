@@ -86,7 +86,8 @@
 		5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B932C2D72E80036EF2B /* MockViewControllerBuilder.swift */; };
 		5DC069EA2C3BEFA400A81AAE /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069E92C3BEFA400A81AAE /* AnimationViewTests.swift */; };
 		5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */; };
-		5DC069EF2C3C004900A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069EE2C3C004900A81AAE /* MockAccessibilityManager.swift */; };
+		5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */; };
+		5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */; };
 		5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */; };
 		5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* TestNetworkClient.swift */; };
 		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
@@ -207,7 +208,7 @@
 		5DC04B932C2D72E80036EF2B /* MockViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewControllerBuilder.swift; sourceTree = "<group>"; };
 		5DC069E92C3BEFA400A81AAE /* AnimationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
 		5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
-		5DC069EE2C3C004900A81AAE /* MockAccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccessibilityManager.swift; sourceTree = "<group>"; };
+		5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccessibilityManager.swift; sourceTree = "<group>"; };
 		5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DE970532C297652009D66C4 /* AppEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
@@ -404,6 +405,7 @@
 		5D54A83C2BFCED7C003D0C21 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				5DC069F02C3C195700A81AAE /* Mocks */,
 				5D54A8392BFCD881003D0C21 /* SupportingFiles */,
 			);
 			path = shared;
@@ -646,6 +648,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		5DC069F02C3C195700A81AAE /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		5DC325602BFF251700CB590B /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,7 +677,6 @@
 			children = (
 				5DC04B952C2D72F20036EF2B /* Builders */,
 				5DA44C362C2EF1D400D8FE7C /* Coordinators */,
-				5DC069EE2C3C004900A81AAE /* MockAccessibilityManager.swift */,
 				162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */,
 				5DA44C392C2EF1DD00D8FE7C /* Services */,
 			);
@@ -926,6 +935,7 @@
 			files = (
 				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
 				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
+				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D422C074251005F126A /* TestViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,
@@ -982,7 +992,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
-				5DC069EF2C3C004900A81AAE /* MockAccessibilityManager.swift in Sources */,
+				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
 				5D5FEDBB2C29C45E000B6220 /* DrivingCoordinatorTests.swift in Sources */,

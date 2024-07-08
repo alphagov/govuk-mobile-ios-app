@@ -84,6 +84,9 @@
 		5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B8E2C2D71400036EF2B /* ViewControllerBuilder.swift */; };
 		5DC04B922C2D72DC0036EF2B /* ViewControllerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B912C2D72DC0036EF2B /* ViewControllerBuilderTests.swift */; };
 		5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B932C2D72E80036EF2B /* MockViewControllerBuilder.swift */; };
+		5DC069EA2C3BEFA400A81AAE /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069E92C3BEFA400A81AAE /* AnimationViewTests.swift */; };
+		5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */; };
+		5DC069EF2C3C004900A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069EE2C3C004900A81AAE /* MockAccessibilityManager.swift */; };
 		5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */; };
 		5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* TestNetworkClient.swift */; };
 		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
@@ -202,6 +205,9 @@
 		5DC04B8E2C2D71400036EF2B /* ViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerBuilder.swift; sourceTree = "<group>"; };
 		5DC04B912C2D72DC0036EF2B /* ViewControllerBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerBuilderTests.swift; sourceTree = "<group>"; };
 		5DC04B932C2D72E80036EF2B /* MockViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewControllerBuilder.swift; sourceTree = "<group>"; };
+		5DC069E92C3BEFA400A81AAE /* AnimationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
+		5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
+		5DC069EE2C3C004900A81AAE /* MockAccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccessibilityManager.swift; sourceTree = "<group>"; };
 		5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DE970532C297652009D66C4 /* AppEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
@@ -318,6 +324,7 @@
 			children = (
 				160A02672C208B9800FE01EB /* AnalyticsService.swift */,
 				5D41DB622C08755F0011E691 /* TestService.swift */,
+				5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -353,8 +360,8 @@
 		5D41DB742C08AD550011E691 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				5D41DB792C08AFC00011E691 /* TestServiceTests.swift */,
 				162DD75E2C29C42500FA482D /* AnalyticsServiceTests.swift */,
+				5D41DB792C08AFC00011E691 /* TestServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -631,6 +638,14 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
+		5DC069E82C3BEF4500A81AAE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5DC069E92C3BEFA400A81AAE /* AnimationViewTests.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5DC325602BFF251700CB590B /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -652,6 +667,7 @@
 			children = (
 				5DC04B952C2D72F20036EF2B /* Builders */,
 				5DA44C362C2EF1D400D8FE7C /* Coordinators */,
+				5DC069EE2C3C004900A81AAE /* MockAccessibilityManager.swift */,
 				162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */,
 				5DA44C392C2EF1DD00D8FE7C /* Services */,
 			);
@@ -663,8 +679,9 @@
 			children = (
 				5DC04B8B2C2D671A0036EF2B /* Builders */,
 				5DC325602BFF251700CB590B /* Coordinators */,
-				5D41DB562C0865120011E691 /* ViewControllers */,
 				5D41DB742C08AD550011E691 /* Services */,
+				5D41DB562C0865120011E691 /* ViewControllers */,
+				5DC069E82C3BEF4500A81AAE /* Views */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -927,6 +944,7 @@
 				5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */,
 				5D79AEC42C32D48D0061F344 /* AnimationView+Convenience.swift in Sources */,
 				5D41DB6C2C088CD30011E691 /* TestDataStore.swift in Sources */,
+				5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */,
 				5D962D672C29BD0B0038BC0A /* RedCoordinator.swift in Sources */,
 				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
@@ -964,6 +982,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
+				5DC069EF2C3C004900A81AAE /* MockAccessibilityManager.swift in Sources */,
 				162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
 				5D5FEDBB2C29C45E000B6220 /* DrivingCoordinatorTests.swift in Sources */,
@@ -972,6 +991,7 @@
 				162DD75F2C29C42500FA482D /* AnalyticsServiceTests.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
 				5DFFA9762BFF950A00B02042 /* LaunchCoordinatorTests.swift in Sources */,
+				5DC069EA2C3BEFA400A81AAE /* AnimationViewTests.swift in Sources */,
 				5DC04B8A2C2D633F0036EF2B /* NextCoordinatorTests.swift in Sources */,
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,
 				5DC325622BFF252900CB590B /* BaseCoordinatorTests.swift in Sources */,

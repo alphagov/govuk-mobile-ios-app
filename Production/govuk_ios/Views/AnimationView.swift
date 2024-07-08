@@ -5,6 +5,7 @@ import Lottie
 
 class AnimationView: UIView {
     @Inject(\.lottieConfiguration) private var config: LottieConfiguration
+    @Inject(\.accessibilityManager) private var accessibilityManager: AccessibilityManagerInterface
 
     private lazy var internalAnimationView: LottieAnimationView = LottieAnimationView(
         name: resourceName,
@@ -37,7 +38,7 @@ class AnimationView: UIView {
     }
 
     func animateIfAvailable(completion: @escaping () -> Void) {
-        if shouldAnimate {
+        if accessibilityManager.animationsEnabled {
             beginAnimation(completion: completion)
         } else {
             pauseTransition(completion: completion)
@@ -57,11 +58,6 @@ class AnimationView: UIView {
         DispatchQueue.main
             .asyncAfter(deadline: .now() + 2) {
                 completion()
-        }
-    }
-
-    private var shouldAnimate: Bool {
-        UIView.areAnimationsEnabled &&
-        !UIAccessibility.isReduceMotionEnabled
+            }
     }
 }

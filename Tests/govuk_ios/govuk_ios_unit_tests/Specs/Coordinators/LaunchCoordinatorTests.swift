@@ -7,19 +7,18 @@ class LaunchCoordinatorTests: XCTestCase {
     @MainActor
     func test_start_launchCompletion_callsCompletion() {
         let mockNavigationController = UINavigationController()
-
+        let mockViewControllerBuilder = ViewControllerBuilder.mock
         let expectation = expectation(description: #function)
         let subject = LaunchCoordinator(
             navigationController: mockNavigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
             completion: {
                 expectation.fulfill()
             }
         )
-
         subject.start()
-        let viewController = mockNavigationController.viewControllers.first
-        viewController?.viewDidAppear(true)
-        wait(for: [expectation], timeout: 10)
+        mockViewControllerBuilder._receivedLaunchCompletion?()
+        wait(for: [expectation])
     }
 
 }

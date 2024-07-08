@@ -16,6 +16,7 @@ class CoordinatorBuilder {
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
             completion: completion
         )
     }

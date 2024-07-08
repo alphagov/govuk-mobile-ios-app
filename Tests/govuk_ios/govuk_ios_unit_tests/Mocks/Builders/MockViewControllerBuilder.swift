@@ -31,4 +31,10 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedRedViewController ?? UIViewController()
     }
 
+    var _stubbedLaunchViewController: UIViewController?
+    var _receivedLaunchCompletion: (() -> Void)?
+    override func launch(completion: @escaping () -> Void) -> UIViewController {
+        _receivedLaunchCompletion = completion
+        return _stubbedLaunchViewController ?? UIViewController()
+    }
 }

@@ -31,4 +31,13 @@ class ViewControllerBuilder {
             viewModel: viewModel
         )
     }
+
+    func launch(completion: @escaping () -> Void) -> UIViewController {
+        let viewModel = LaunchViewModel(
+            animationCompleted: completion
+        )
+        return LaunchViewController(
+            viewModel: viewModel
+        )
+    }
 }

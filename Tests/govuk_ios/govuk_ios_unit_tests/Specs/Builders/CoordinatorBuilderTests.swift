@@ -54,7 +54,9 @@ class CoordinatorBuilderTests: XCTestCase {
     @MainActor
     func test_blue_returnsExpectedResult() {
         let subject = CoordinatorBuilder()
-        let coordinator = subject.blue
+        let coordinator = subject.blue(
+            requestFocus: { _ in }
+        )
 
         XCTAssertEqual(coordinator.root.tabBarItem.title, "Blue")
         XCTAssertFalse(coordinator.root.navigationBar.prefersLargeTitles)
@@ -78,6 +80,18 @@ class CoordinatorBuilderTests: XCTestCase {
         )
 
         XCTAssert(coordinator is DrivingCoordinator)
+    }
+
+    @MainActor
+    func test_permit_returnsExpectedResult() {
+        let subject = CoordinatorBuilder()
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.permit(
+            permitId: "123",
+            navigationController: mockNavigationController
+        )
+
+        XCTAssert(coordinator is PermitCoordinator)
     }
 
     @MainActor

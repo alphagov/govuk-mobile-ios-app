@@ -10,7 +10,7 @@ class MockBaseCoordinator: BaseCoordinator {
     }
 
     var _startCalled: Bool = false
-    override func start() {
+    override func start(url: URL?) {
         _startCalled = true
     }
 

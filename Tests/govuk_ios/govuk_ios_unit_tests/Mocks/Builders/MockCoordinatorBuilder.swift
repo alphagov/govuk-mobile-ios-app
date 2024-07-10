@@ -43,7 +43,9 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedBlueCoordinator: MockBaseCoordinator?
-    override var blue: BaseCoordinator {
+    var _receivedBlueRequestFocus: ((UINavigationController) -> Void)?
+    override func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
+        _receivedBlueRequestFocus = requestFocus
         return _stubbedBlueCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
@@ -59,8 +61,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
     
     var _stubbedPermitCoordinator: MockBaseCoordinator?
+    var _receivedPermitPermitId: String?
     var _receivedPermitNavigationController: UINavigationController?
-    override func permit(navigationController: UINavigationController) -> BaseCoordinator {
+    override func permit(permitId: String,
+                         navigationController: UINavigationController) -> BaseCoordinator {
+        _receivedPermitPermitId = permitId
         _receivedPermitNavigationController = navigationController
         return _stubbedPermitCoordinator ??
         MockBaseCoordinator(

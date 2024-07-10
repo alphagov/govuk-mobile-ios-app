@@ -10,6 +10,12 @@ extension ViewControllerBuilder {
 }
 
 class MockViewControllerBuilder: ViewControllerBuilder {
+    var _stubbedBlueViewController: UIViewController?
+    var _receivedBlueShowNextAction: (() -> Void)?
+    override func blue(showNextAction: @escaping () -> Void) -> UIViewController {
+        _receivedBlueShowNextAction = showNextAction
+        return _stubbedBlueViewController ?? UIViewController()
+    }
 
     var _stubbedDrivingViewController: UIViewController?
     var _receivedDrivingShowPermitAction: (() -> Void)?
@@ -21,6 +27,21 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedDrivingViewController ?? UIViewController()
     }
 
+    var _stubbedLaunchViewController: UIViewController?
+    var _receivedLaunchCompletion: (() -> Void)?
+    override func launch(completion: @escaping () -> Void) -> UIViewController {
+        _receivedLaunchCompletion = completion
+        return _stubbedLaunchViewController ?? UIViewController()
+    }
+
+    var _stubbedPermitViewController: UIViewController?
+    var _receivedPermitFinishAction: (() -> Void)?
+    override func permit(permitId: String,
+                         finishAction: @escaping () -> Void) -> UIViewController {
+        _receivedPermitFinishAction = finishAction
+        return _stubbedPermitViewController ?? UIViewController()
+    }
+
     var _stubbedRedViewController: UIViewController?
     var _receivedRedShowNextAction: (() -> Void)?
     var _receivedRedShowModalAction: (() -> Void)?
@@ -29,12 +50,5 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedRedShowNextAction = showNextAction
         _receivedRedShowModalAction = showModalAction
         return _stubbedRedViewController ?? UIViewController()
-    }
-
-    var _stubbedLaunchViewController: UIViewController?
-    var _receivedLaunchCompletion: (() -> Void)?
-    override func launch(completion: @escaping () -> Void) -> UIViewController {
-        _receivedLaunchCompletion = completion
-        return _stubbedLaunchViewController ?? UIViewController()
     }
 }

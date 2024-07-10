@@ -10,7 +10,7 @@ class NextCoordinator: BaseCoordinator {
         super.init(navigationController: navigationController)
     }
 
-    override func start() {
+    override func start(url: URL?) {
         pushNext()
     }
 

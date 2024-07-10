@@ -38,4 +38,33 @@ class TabCoordinatorTests: XCTestCase {
         }
     }
 
+    @MainActor
+    func test_requestFocus_selectsTabs() {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+
+        let mockRedCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedRedCoordinator = mockRedCoordinator
+
+        let mockBlueCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedBlueCoordinator = mockBlueCoordinator
+
+        let mockGreenCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedGreenCoordinator = mockGreenCoordinator
+
+        let navigationController = UINavigationController()
+        let subject = TabCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: navigationController
+        )
+
+        subject.start()
+
+        let tabController = navigationController.viewControllers.first as? UITabBarController
+        XCTAssertEqual(tabController?.selectedIndex, 0)
+
+        mockCoordinatorBuilder._receivedBlueRequestFocus?(mockBlueCoordinator.root)
+
+        XCTAssertEqual(tabController?.selectedIndex, 1)
+    }
+
 }

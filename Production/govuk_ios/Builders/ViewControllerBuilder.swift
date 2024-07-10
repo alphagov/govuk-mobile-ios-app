@@ -2,15 +2,14 @@ import Foundation
 import UIKit
 
 class ViewControllerBuilder {
-    func red(showNextAction: @escaping () -> Void,
-             showModalAction: @escaping () -> Void) -> UIViewController {
+    func blue(showNextAction: @escaping () -> Void) -> UIViewController {
         let viewModel = TestViewModel(
-            color: .red,
-            tabTitle: "Red",
+            color: .blue,
+            tabTitle: "Blue",
             primaryTitle: "Next",
             primaryAction: showNextAction,
-            secondaryTitle: "Modal",
-            secondaryAction: showModalAction
+            secondaryTitle: nil,
+            secondaryAction: nil
         )
         return TestViewController(
             viewModel: viewModel
@@ -37,6 +36,36 @@ class ViewControllerBuilder {
             animationCompleted: completion
         )
         return LaunchViewController(
+            viewModel: viewModel
+        )
+    }
+
+    func permit(permitId: String,
+                finishAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TestViewModel(
+            color: .lightGray,
+            tabTitle: "Permit - \(permitId)",
+            primaryTitle: nil,
+            primaryAction: nil,
+            secondaryTitle: "Dismiss",
+            secondaryAction: finishAction
+        )
+        return TestViewController(
+            viewModel: viewModel
+        )
+    }
+
+    func red(showNextAction: @escaping () -> Void,
+             showModalAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TestViewModel(
+            color: .red,
+            tabTitle: "Red",
+            primaryTitle: "Next",
+            primaryAction: showNextAction,
+            secondaryTitle: "Modal",
+            secondaryAction: showModalAction
+        )
+        return TestViewController(
             viewModel: viewModel
         )
     }

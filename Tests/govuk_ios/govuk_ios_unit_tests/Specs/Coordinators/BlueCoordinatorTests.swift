@@ -77,4 +77,34 @@ class BlueCoordinatorTests: XCTestCase {
         )
     }
 
+    @MainActor
+    func test_start_withMatchingURL_dismissesModals() {
+        let navigationController = MockNavigationController()
+        let mockRoute = MockDeeplinkRoute(pattern: "/test")
+        let mockDeeplinkDataStore = DeeplinkDataStore(routes: [
+            mockRoute
+        ])
+
+        let subject = BlueCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: .mock,
+            viewControllerBuilder: .mock,
+            deeplinkStore: mockDeeplinkDataStore,
+            requestFocus: { _ in }
+        )
+
+        let url = URL(string: "govuk://gov.uk/test")
+        subject.start(url: url)
+
+        let actionExpectation = expectation(description: "action expectation")
+        actionExpectation.fulfillAfter(0.2)
+        waitForExpectations(
+            timeout: 0.5,
+            handler: { _ in
+                Task { @MainActor in
+                    XCTAssertTrue(navigationController._dismissCalled)
+                }
+            }
+        )
+    }
 }

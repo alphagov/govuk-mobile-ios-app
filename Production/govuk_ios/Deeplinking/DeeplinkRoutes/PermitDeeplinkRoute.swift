@@ -15,6 +15,7 @@ struct PermitDeeplinkRoute: DeeplinkRoute {
     @MainActor
     func action(parent: BaseCoordinator,
                 params: [String: String]) {
+        parent.root.dismiss(animated: false)
         guard let permitId = params["permit_id"]
         else { return }
         let navigationController = UINavigationController()

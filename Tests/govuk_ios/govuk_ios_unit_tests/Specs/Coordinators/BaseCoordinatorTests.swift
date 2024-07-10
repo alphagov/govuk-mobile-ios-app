@@ -203,6 +203,6 @@ class BaseCoordinatorTests: XCTestCase {
 
 private class TestCoordinator: BaseCoordinator {
 
-    override func start() { }
+    override func start(url: URL?) { }
 
 }

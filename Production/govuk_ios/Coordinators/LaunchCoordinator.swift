@@ -10,7 +10,7 @@ class LaunchCoordinator: BaseCoordinator {
         super.init(navigationController: navigationController)
     }
 
-    override func start() {
+    override func start(url: URL?) {
         let viewModel = LaunchViewModel(
             animationCompleted: { [weak self] in
                 self?.completion()

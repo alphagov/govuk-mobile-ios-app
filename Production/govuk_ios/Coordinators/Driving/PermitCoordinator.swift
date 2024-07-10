@@ -2,20 +2,24 @@ import UIKit
 import Foundation
 
 class PermitCoordinator: BaseCoordinator {
-    override func start() {
-        let viewModel = TestViewModel(
-            color: .lightGray,
-            tabTitle: "Permit",
-            primaryTitle: nil,
-            primaryAction: nil,
-            secondaryTitle: "Dismiss",
-            secondaryAction: { [weak self] in
+    private let permitId: String
+    private let viewControllerBuilder: ViewControllerBuilder
+
+    init(permitId: String,
+         navigationController: UINavigationController,
+         viewControllerBuilder: ViewControllerBuilder) {
+        self.permitId = permitId
+        self.viewControllerBuilder = viewControllerBuilder
+        super.init(navigationController: navigationController)
+    }
+
+    override func start(url: URL?) {
+        let viewController = viewControllerBuilder.permit(
+            permitId: permitId,
+            finishAction: { [weak self] in
                 self?.dismiss(animated: true)
                 self?.finish()
             }
-        )
-        let viewController = TestViewController(
-            viewModel: viewModel
         )
         push(viewController, animated: true)
     }

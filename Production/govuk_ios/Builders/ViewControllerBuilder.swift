@@ -17,6 +17,20 @@ class ViewControllerBuilder {
         )
     }
 
+    func blue(showNextAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TestViewModel(
+            color: .blue,
+            tabTitle: "Blue",
+            primaryTitle: "Next",
+            primaryAction: showNextAction,
+            secondaryTitle: nil,
+            secondaryAction: nil
+        )
+        return TestViewController(
+            viewModel: viewModel
+        )
+    }
+
     func driving(showPermitAction: @escaping () -> Void,
                  presentPermitAction: @escaping () -> Void) -> UIViewController {
         let viewModel = TestViewModel(
@@ -26,6 +40,21 @@ class ViewControllerBuilder {
             primaryAction: showPermitAction,
             secondaryTitle: "Modal Permit",
             secondaryAction: presentPermitAction
+        )
+        return TestViewController(
+            viewModel: viewModel
+        )
+    }
+
+    func permit(permitId: String,
+                finishAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TestViewModel(
+            color: .lightGray,
+            tabTitle: "Permit - \(permitId)",
+            primaryTitle: nil,
+            primaryAction: nil,
+            secondaryTitle: "Dismiss",
+            secondaryAction: finishAction
         )
         return TestViewController(
             viewModel: viewModel

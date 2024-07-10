@@ -16,7 +16,7 @@ class ColorCoordinator: BaseCoordinator {
         super.init(navigationController: navigationController)
     }
 
-    override func start() {
+    override func start(url: URL?) {
         let viewModel = TestViewModel(
             color: color,
             tabTitle: title,

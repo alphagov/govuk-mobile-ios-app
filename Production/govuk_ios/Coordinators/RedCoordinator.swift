@@ -13,7 +13,7 @@ class RedCoordinator: BaseCoordinator {
         super.init(navigationController: navigationController)
     }
 
-    override func start() {
+    override func start(url: URL?) {
         let viewController = viewControllerBuilder.red(
             showNextAction: showNextAction,
             showModalAction: showModalAction

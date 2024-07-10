@@ -43,6 +43,7 @@ class BlueCoordinator: BaseCoordinator {
         else { return }
         requestFocus(root)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.root.dismiss(animated: true)
             guard let self = self else { return }
             deepLink.action(parent: self)
         }

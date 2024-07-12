@@ -9,7 +9,7 @@ class UIAlertController_ConvenienceTests: XCTestCase {
         let subject = UIAlertController.unhandledDeeplinkAlert
 
         XCTAssertEqual(subject.title, "Page not found")
-        XCTAssertEqual(subject.message, "Message test goes here")
+        XCTAssertEqual(subject.message, "The page you are trying to view can't be found, please check the link and try again")
         XCTAssertEqual(subject.actions.count, 1)
         XCTAssertEqual(subject.actions.first?.title, "OK")
     }

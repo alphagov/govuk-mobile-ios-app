@@ -5,7 +5,9 @@ extension UIAlertController {
     static var unhandledDeeplinkAlert: UIAlertController {
         .generalAlert(
             title: "Page not found",
-            message: "Message test goes here",
+            message: """
+            The page you are trying to view can't be found, please check the link and try again
+            """,
             handler: nil
         )
     }

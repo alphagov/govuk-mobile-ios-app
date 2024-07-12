@@ -28,26 +28,25 @@ class CoordinatorBuilder {
         )
     }
 
-    var red: BaseCoordinator {
-        ColorCoordinator(
+    var red: RedCoordinator {
+        RedCoordinator(
             navigationController: .red,
-            color: .red,
-            title: "Red",
-            coordinatorBuilder: self
+            coodinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            deeplinkStore: .red(coordinatorBuilder: self)
         )
     }
 
-    func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
+    var blue: BlueCoordinator {
         BlueCoordinator(
             navigationController: .blue,
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: .driving(coordinatorBuilder: self),
-            requestFocus: requestFocus
+            deeplinkStore: .driving(coordinatorBuilder: self)
         )
     }
 
-    var green: BaseCoordinator {
+    var green: ColorCoordinator {
         ColorCoordinator(
             navigationController: .green,
             color: .green,

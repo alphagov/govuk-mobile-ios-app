@@ -1,15 +1,19 @@
 import UIKit
 import Foundation
 
-class RedCoordinator: BaseCoordinator {
+class RedCoordinator: BaseCoordinator,
+                      DeeplinkRouteProvider {
     private let coodinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
+    private let deeplinkStore: DeeplinkDataStore
 
     init(navigationController: UINavigationController,
          coodinatorBuilder: CoordinatorBuilder,
-         viewControllerBuilder: ViewControllerBuilder) {
+         viewControllerBuilder: ViewControllerBuilder,
+         deeplinkStore: DeeplinkDataStore) {
         self.coodinatorBuilder = coodinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
+        self.deeplinkStore = deeplinkStore
         super.init(navigationController: navigationController)
     }
 
@@ -42,5 +46,12 @@ class RedCoordinator: BaseCoordinator {
             )
             strongSelf.present(coordinator)
         }
+    }
+
+    func route(for url: URL) -> ResolvedDeeplinkRoute? {
+        deeplinkStore.route(
+            for: url,
+            parent: self
+        )
     }
 }

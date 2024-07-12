@@ -23,6 +23,8 @@
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */; };
 		5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */; };
+		5D16E6A22C414E0B00776ABA /* UIAlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6A12C414E0B00776ABA /* UIAlertController+Convenience.swift */; };
+		5D16E6A42C41524200776ABA /* UIAlertAction+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6A32C41524200776ABA /* UIAlertAction+Convenience.swift */; };
 		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
 		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
 		5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */; };
@@ -159,6 +161,8 @@
 		5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStore.swift; sourceTree = "<group>"; };
 		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
+		5D16E6A12C414E0B00776ABA /* UIAlertController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Convenience.swift"; sourceTree = "<group>"; };
+		5D16E6A32C41524200776ABA /* UIAlertAction+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Convenience.swift"; sourceTree = "<group>"; };
 		5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestExpectation+Extensions.swift"; sourceTree = "<group>"; };
 		5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
 		5D37E9EF2C3E865F006B36CB /* TestServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestServiceTests.swift; sourceTree = "<group>"; };
@@ -322,8 +326,6 @@
 				5D41DB662C087C520011E691 /* Container */,
 				5D9CF3962C38492500317B70 /* Deeplinking */,
 				5D79AEC12C32D47A0061F344 /* UIKit */,
-				5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */,
-				5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -515,6 +517,10 @@
 		5D79AEC12C32D47A0061F344 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				5D16E6A32C41524200776ABA /* UIAlertAction+Convenience.swift */,
+				5D16E6A12C414E0B00776ABA /* UIAlertController+Convenience.swift */,
+				5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */,
+				5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */,
 				5D79AEC22C32D4800061F344 /* Views */,
 			);
 			path = UIKit;
@@ -1050,6 +1056,8 @@
 				5D8460B72C35A2630066095E /* DrivingDeeplinkRoute.swift in Sources */,
 				5D962D672C29BD0B0038BC0A /* RedCoordinator.swift in Sources */,
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
+				5D16E6A22C414E0B00776ABA /* UIAlertController+Convenience.swift in Sources */,
+				5D16E6A42C41524200776ABA /* UIAlertAction+Convenience.swift in Sources */,
 				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
 				5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */,

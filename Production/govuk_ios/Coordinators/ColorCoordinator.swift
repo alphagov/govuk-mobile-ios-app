@@ -1,7 +1,8 @@
 import UIKit
 import Foundation
 
-class ColorCoordinator: BaseCoordinator {
+class ColorCoordinator: BaseCoordinator,
+                        DeeplinkRouteProvider {
     private let color: UIColor
     private let title: String
     private let coordinatorBuilder: CoordinatorBuilder
@@ -52,5 +53,9 @@ class ColorCoordinator: BaseCoordinator {
             )
             strongSelf.present(coordinator)
         }
+    }
+
+    func route(for: URL) -> ResolvedDeeplinkRoute? {
+        nil
     }
 }

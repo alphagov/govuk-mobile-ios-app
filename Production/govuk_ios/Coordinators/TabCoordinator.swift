@@ -1,14 +1,14 @@
 import UIKit
 import Foundation
 
+typealias TabItemCoordinator = BaseCoordinator & DeeplinkRouteProvider
+
 class TabCoordinator: BaseCoordinator {
     private lazy var redCoordinator = coordinatorBuilder.red
-    private lazy var blueCoordinator = coordinatorBuilder.blue(
-        requestFocus: tabRequestedFocus
-    )
+    private lazy var blueCoordinator = coordinatorBuilder.blue
     private lazy var greenCoordinator = coordinatorBuilder.green
 
-    private var coordinators: [BaseCoordinator] {
+    private var coordinators: [TabItemCoordinator] {
         [
             redCoordinator,
             blueCoordinator,
@@ -37,6 +37,32 @@ class TabCoordinator: BaseCoordinator {
         coordinators.forEach {
             start($0, url: url)
         }
+        guard let url = url
+        else { return }
+        handleDeeplink(url: url)
+    }
+
+    private func handleDeeplink(url: URL) {
+        tabController.dismiss(animated: true)
+
+        let route = coordinators
+            .lazy
+            .compactMap { $0.route(for: url) }
+            .first
+
+        if let route = route {
+            selectTabIndex(for: route.parent.root)
+            route.action()
+        } else {
+            presentDeeplinkError()
+        }
+    }
+
+    private func presentDeeplinkError() {
+        tabController.present(
+            UIAlertController.unhandledDeeplinkAlert,
+            animated: true
+        )
     }
 
     private func showTabs() {
@@ -44,11 +70,8 @@ class TabCoordinator: BaseCoordinator {
         set([tabController], animated: false)
     }
 
-    private var tabRequestedFocus: (UINavigationController) -> Void {
-        return { [weak self] navigationController in
-            let viewControllers = self?.tabController.viewControllers
-            let index = viewControllers?.firstIndex(of: navigationController)
-            self?.tabController.selectedIndex = index ?? 0
-        }
+    private func selectTabIndex(for navigationController: UINavigationController) {
+        let index = tabController.viewControllers?.firstIndex(of: navigationController)
+        tabController.selectedIndex = index ?? 0
     }
 }

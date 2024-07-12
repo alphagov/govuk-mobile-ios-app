@@ -4,7 +4,7 @@ import UIKit
 extension UIAlertController {
     static var unhandledDeeplinkAlert: UIAlertController {
         .generalAlert(
-            title: "Unhandled deeplink",
+            title: "Page not found",
             message: "Message test goes here",
             handler: nil
         )

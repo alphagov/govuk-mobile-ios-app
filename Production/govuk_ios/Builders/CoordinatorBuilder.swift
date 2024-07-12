@@ -28,7 +28,7 @@ class CoordinatorBuilder {
         )
     }
 
-    var red: RedCoordinator {
+    var red: TabItemCoordinator {
         RedCoordinator(
             navigationController: .red,
             coodinatorBuilder: self,
@@ -37,7 +37,7 @@ class CoordinatorBuilder {
         )
     }
 
-    var blue: BlueCoordinator {
+    var blue: TabItemCoordinator {
         BlueCoordinator(
             navigationController: .blue,
             coordinatorBuilder: self,
@@ -46,7 +46,7 @@ class CoordinatorBuilder {
         )
     }
 
-    var green: ColorCoordinator {
+    var green: TabItemCoordinator {
         ColorCoordinator(
             navigationController: .green,
             color: .green,

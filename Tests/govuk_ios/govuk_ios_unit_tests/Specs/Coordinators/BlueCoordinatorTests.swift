@@ -11,8 +11,7 @@ class BlueCoordinatorTests: XCTestCase {
             navigationController: navigationController,
             coordinatorBuilder: .mock,
             viewControllerBuilder: .mock,
-            deeplinkStore: .init(routes: []),
-            requestFocus: { _ in }
+            deeplinkStore: .init(routes: [])
         )
 
         subject.start()
@@ -31,8 +30,7 @@ class BlueCoordinatorTests: XCTestCase {
             navigationController: navigationController,
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: .init(routes: []),
-            requestFocus: { _ in }
+            deeplinkStore: .init(routes: [])
         )
 
         subject.start()
@@ -43,38 +41,25 @@ class BlueCoordinatorTests: XCTestCase {
     }
 
     @MainActor
-    func test_start_withMatchingURL_showsViewController() {
+    func test_route_callsDeeplinkStore() {
         let navigationController = UINavigationController()
         let mockRoute = MockDeeplinkRoute(pattern: "/test")
         let mockDeeplinkDataStore = DeeplinkDataStore(routes: [
             mockRoute
         ])
 
-        let focusExpectation = expectation(description: "focus expectation")
         let subject = BlueCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: .mock,
             viewControllerBuilder: .mock,
-            deeplinkStore: mockDeeplinkDataStore,
-            requestFocus: { _ in
-                focusExpectation.fulfill()
-            }
+            deeplinkStore: mockDeeplinkDataStore
         )
 
-        let url = URL(string: "govuk://gov.uk/test")
-        subject.start(url: url)
-        wait(for: [focusExpectation])
+        let url = URL(string: "govuk://gov.uk/test")!
+        let result = subject.route(for: url)
 
-        XCTAssertEqual(navigationController.viewControllers.count, 1)
-
-        let actionExpectation = expectation(description: "action expectation")
-        actionExpectation.fulfillAfter(0.2)
-        waitForExpectations(
-            timeout: 0.5,
-            handler: { _ in
-                XCTAssert(mockRoute._actionCalled)
-            }
-        )
+        XCTAssertEqual(result?.url, url)
+        XCTAssertEqual(result?.route.pattern, mockRoute.pattern)
     }
 
     @MainActor
@@ -89,8 +74,7 @@ class BlueCoordinatorTests: XCTestCase {
             navigationController: navigationController,
             coordinatorBuilder: .mock,
             viewControllerBuilder: .mock,
-            deeplinkStore: mockDeeplinkDataStore,
-            requestFocus: { _ in }
+            deeplinkStore: mockDeeplinkDataStore
         )
 
         let url = URL(string: "govuk://gov.uk/test")

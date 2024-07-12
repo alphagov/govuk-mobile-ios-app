@@ -12,7 +12,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "file://services")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNil(result)
     }
@@ -24,7 +28,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https:app/services")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNil(result)
     }
@@ -36,7 +44,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "govuk://services")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNil(result)
     }
@@ -48,7 +60,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https://app.gov.uk/services")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
         XCTAssertNil(result)
     }
 
@@ -59,7 +75,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https://app.gov.uk")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNil(result)
     }
@@ -72,7 +92,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https://app.gov.uk/one/two/three")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNil(result)
     }
@@ -86,10 +110,15 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https://app.gov.uk/services")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.url, url)
+        XCTAssertEqual(result?.parent, mockParent)
     }
 
     func test_route_validURL_matchingWildCardComponent_returnsRoute() {
@@ -101,9 +130,14 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https://app.gov.uk/services/hello/test")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.url, url)
+        XCTAssertEqual(result?.parent, mockParent)
     }
 
     func test_route_validURL_withParams_returnsRoute() {
@@ -115,10 +149,15 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https://app.gov.uk/services/driving_service_id/test")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.url, url)
+        XCTAssertEqual(result?.parent, mockParent)
         XCTAssertEqual(result?.parameters["service_id"], "driving_service_id")
     }
 
@@ -131,10 +170,15 @@ class DeeplinkDataStoreTests: XCTestCase {
             ]
         )
         let url = URL(string: "https://app.gov.uk/services/driving_service_id/test?service_id=override_service")!
-        let result = subject.route(for: url)
+        let mockParent = MockBaseCoordinator()
+        let result = subject.route(
+            for: url,
+            parent: mockParent
+        )
 
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.url, url)
+        XCTAssertEqual(result?.parent, mockParent)
         XCTAssertEqual(result?.parameters["service_id"], "override_service")
     }
 }

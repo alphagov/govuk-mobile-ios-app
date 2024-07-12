@@ -25,6 +25,9 @@
 		5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */; };
 		5D16E6A22C414E0B00776ABA /* UIAlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6A12C414E0B00776ABA /* UIAlertController+Convenience.swift */; };
 		5D16E6A42C41524200776ABA /* UIAlertAction+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6A32C41524200776ABA /* UIAlertAction+Convenience.swift */; };
+		5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */; };
+		5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */; };
+		5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */; };
 		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
 		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
 		5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */; };
@@ -163,6 +166,9 @@
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
 		5D16E6A12C414E0B00776ABA /* UIAlertController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Convenience.swift"; sourceTree = "<group>"; };
 		5D16E6A32C41524200776ABA /* UIAlertAction+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Convenience.swift"; sourceTree = "<group>"; };
+		5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ConvenienceTests.swift"; sourceTree = "<group>"; };
+		5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+ConvenienceTests.swift"; sourceTree = "<group>"; };
+		5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResolvedDeeplinkRoute+Extensions.swift"; sourceTree = "<group>"; };
 		5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestExpectation+Extensions.swift"; sourceTree = "<group>"; };
 		5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
 		5D37E9EF2C3E865F006B36CB /* TestServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestServiceTests.swift; sourceTree = "<group>"; };
@@ -330,9 +336,27 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5D16E6A52C417C7700776ABA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5D16E6A62C417C7E00776ABA /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5D16E6A62C417C7E00776ABA /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */,
+				5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		5D349C962C36994400161317 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */,
 				5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */,
 			);
 			path = Extensions;
@@ -394,11 +418,11 @@
 		5D37EA062C3E865F006B36CB /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				5D37E9FD2C3E865F006B36CB /* Driving */,
 				5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */,
 				5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */,
 				5D37EA002C3E865F006B36CB /* BlueCoordinatorTests.swift */,
 				5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */,
+				5D37E9FD2C3E865F006B36CB /* Driving */,
 				5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */,
 				5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */,
 				5D37EA042C3E865F006B36CB /* RedCoordinatorTests.swift */,
@@ -786,6 +810,7 @@
 				5D37E9FA2C3E865F006B36CB /* Builders */,
 				5D37EA062C3E865F006B36CB /* Coordinators */,
 				5D37E9F52C3E865F006B36CB /* Deeplinking */,
+				5D16E6A52C417C7700776ABA /* Extensions */,
 				5D37E9F02C3E865F006B36CB /* Services */,
 				5D37E9F72C3E865F006B36CB /* ViewControllers */,
 				5D37EA082C3E865F006B36CB /* Views */,
@@ -1110,12 +1135,14 @@
 				5D37EA182C3E865F006B36CB /* NextCoordinatorTests.swift in Sources */,
 				5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */,
 				5D37EA192C3E865F006B36CB /* RedCoordinatorTests.swift in Sources */,
+				5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,
 				5D37EA0E2C3E865F006B36CB /* BaseViewControllerTests.swift in Sources */,
 				5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */,
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
+				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,
 				5D37EA122C3E865F006B36CB /* PermitCoordinatorTests.swift in Sources */,
 				16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */,
 				5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */,
@@ -1127,6 +1154,7 @@
 				5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */,
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
+				5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */,
 				5D37EA0A2C3E865F006B36CB /* TestServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

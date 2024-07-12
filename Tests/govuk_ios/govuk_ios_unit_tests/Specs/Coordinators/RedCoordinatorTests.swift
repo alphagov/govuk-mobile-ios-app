@@ -12,7 +12,8 @@ class RedCoordinatorTests: XCTestCase {
         let subject = RedCoordinator(
             navigationController: navigationController,
             coodinatorBuilder: mockCoodinatorBuilder,
-            viewControllerBuilder: mockViewControllerBuilder
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [])
         )
 
         let expectedViewController = UIViewController()
@@ -30,7 +31,8 @@ class RedCoordinatorTests: XCTestCase {
         let subject = RedCoordinator(
             navigationController: navigationController,
             coodinatorBuilder: mockCoodinatorBuilder,
-            viewControllerBuilder: mockViewControllerBuilder
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [])
         )
 
         subject.start()
@@ -52,7 +54,8 @@ class RedCoordinatorTests: XCTestCase {
         let subject = RedCoordinator(
             navigationController: navigationController,
             coodinatorBuilder: mockCoodinatorBuilder,
-            viewControllerBuilder: mockViewControllerBuilder
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [])
         )
 
         subject.start()

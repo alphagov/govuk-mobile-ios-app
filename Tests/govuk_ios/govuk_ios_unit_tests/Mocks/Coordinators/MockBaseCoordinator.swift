@@ -3,7 +3,8 @@ import Foundation
 
 @testable import govuk_ios
 
-class MockBaseCoordinator: BaseCoordinator {
+class MockBaseCoordinator: BaseCoordinator,
+                           DeeplinkRouteProvider {
 
     convenience init() {
         self.init(navigationController: .init())
@@ -19,4 +20,10 @@ class MockBaseCoordinator: BaseCoordinator {
         super.childDidFinish(child)
         _childDidFinishHandler?(child)
     }
+    
+    var _stubbedRoute: ResolvedDeeplinkRoute?
+    func route(for: URL) -> ResolvedDeeplinkRoute? {
+        _stubbedRoute
+    }
+
 }

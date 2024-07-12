@@ -1,8 +1,7 @@
 import UIKit
 import Foundation
 
-class RedCoordinator: BaseCoordinator,
-                      DeeplinkRouteProvider {
+class RedCoordinator: TabItemCoordinator {
     private let coodinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore

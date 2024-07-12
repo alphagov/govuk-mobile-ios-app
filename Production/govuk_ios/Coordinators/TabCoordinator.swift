@@ -34,9 +34,6 @@ class TabCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         showTabs()
-        coordinators.forEach {
-            start($0, url: url)
-        }
         guard let url = url
         else { return }
         handleDeeplink(url: url)
@@ -67,7 +64,10 @@ class TabCoordinator: BaseCoordinator {
 
     private func showTabs() {
         tabController.viewControllers = coordinators.map { $0.root }
+
         set([tabController], animated: false)
+
+        coordinators.forEach { start($0) }
     }
 
     private func selectTabIndex(for navigationController: UINavigationController) {

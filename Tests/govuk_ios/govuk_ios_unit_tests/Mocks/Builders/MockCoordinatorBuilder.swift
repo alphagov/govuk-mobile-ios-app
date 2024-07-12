@@ -34,26 +34,24 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         )
     }
 
-    var _stubbedRedCoordinator: MockBaseCoordinator?
-    override var red: BaseCoordinator {
+    var _stubbedRedCoordinator: TabItemCoordinator?
+    override var red: any TabItemCoordinator {
         _stubbedRedCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )
     }
 
-    var _stubbedBlueCoordinator: MockBaseCoordinator?
-    var _receivedBlueRequestFocus: ((UINavigationController) -> Void)?
-    override func blue(requestFocus: @escaping (UINavigationController) -> Void) -> BaseCoordinator {
-        _receivedBlueRequestFocus = requestFocus
+    var _stubbedBlueCoordinator: TabItemCoordinator?
+    override var blue: any TabItemCoordinator {
         return _stubbedBlueCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )
     }
 
-    var _stubbedGreenCoordinator: MockBaseCoordinator?
-    override var green: BaseCoordinator {
+    var _stubbedGreenCoordinator: TabItemCoordinator?
+    override var green: any TabItemCoordinator {
         _stubbedGreenCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()

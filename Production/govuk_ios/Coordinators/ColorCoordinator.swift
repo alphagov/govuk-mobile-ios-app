@@ -1,8 +1,7 @@
 import UIKit
 import Foundation
 
-class ColorCoordinator: BaseCoordinator,
-                        DeeplinkRouteProvider {
+class ColorCoordinator: TabItemCoordinator {
     private let color: UIColor
     private let title: String
     private let coordinatorBuilder: CoordinatorBuilder

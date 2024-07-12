@@ -4,17 +4,6 @@ import XCTest
 @testable import govuk_ios
 
 class BaseCoordinatorTests: XCTestCase {
-
-    override class func setUp() {
-        super.setUp()
-        UIView.setAnimationsEnabled(false)
-    }
-
-    override class func tearDown() {
-        super.tearDown()
-        UIView.setAnimationsEnabled(true)
-    }
-
     @MainActor
     func test_init_setsPresentationController() {
         let navigationController = UINavigationController()

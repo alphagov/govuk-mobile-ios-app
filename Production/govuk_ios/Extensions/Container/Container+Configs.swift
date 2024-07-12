@@ -9,4 +9,10 @@ extension Container {
             LottieConfiguration.shared
         }
     }
+
+    var accessibilityManager: Factory<AccessibilityManagerInterface> {
+        Factory(self) {
+            AccessibilityManager()
+        }
+    }
 }

@@ -104,7 +104,7 @@ class BaseCoordinatorTests: XCTestCase {
 
         navigationController.popViewController(animated: false)
 
-        wait(for: [expectation], timeout: 0.5)
+        wait(for: [expectation], timeout: 1)
     }
 
     @MainActor

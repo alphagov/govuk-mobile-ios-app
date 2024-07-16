@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4E67B2412C2C5DD000D41C59 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67B2402C2C5DD000D41C59 /* OnboardingCoordinator.swift */; };
+		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
+		4EECB5FF2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FE2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift */; };
+		4EECB6012C4147C800A49DC8 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB6002C4147C800A49DC8 /* MockUserDefaults.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D1353AD2BE0D8DA00414441 /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */; };
 		5D1353B02BE0D9B800414441 /* UINavigationController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */; };
@@ -106,6 +109,9 @@
 
 /* Begin PBXFileReference section */
 		4E67B2402C2C5DD000D41C59 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		4EECB5FE2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPersistanceInterface.swift; sourceTree = "<group>"; };
+		4EECB6002C4147C800A49DC8 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		5D1353AC2BE0D8DA00414441 /* ColorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Convenience.swift"; sourceTree = "<group>"; };
 		5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Convenience.swift"; sourceTree = "<group>"; };
@@ -197,6 +203,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EECB5FD2C413EBD00A49DC8 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
 		5D1353A92BE0D75000414441 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +223,7 @@
 				5D41DB662C087C520011E691 /* Container */,
 				5D1353AF2BE0D9B800414441 /* UINavigationController+Convenience.swift */,
 				5D1353B12BE0D9CE00414441 /* UITabBarItem+Convenience.swift */,
+				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -372,6 +386,7 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
+				4EECB5FD2C413EBD00A49DC8 /* New Group1 */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D2129E92BDFA00E00142E46 /* Coordinators */,
 				5D41DB6A2C088CA30011E691 /* DataStores */,
@@ -382,6 +397,7 @@
 				5DAD71A72BD254460075F648 /* SupportingFiles */,
 				5DAD71A82BD254730075F648 /* ViewControllers */,
 				5D41DB5E2C0875460011E691 /* ViewModels */,
+				4EECB5FE2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift */,
 			);
 			path = govuk_ios;
 			sourceTree = "<group>";
@@ -481,6 +497,7 @@
 				5D41DB772C08AE950011E691 /* MockDeeplinkService.swift */,
 				5D4F97E62BFF7222002CBDDE /* MockNavigationController.swift */,
 				5DD6EFFD2BFF547C00C2D79B /* MockParentCoordinator.swift */,
+				4EECB6002C4147C800A49DC8 /* MockUserDefaults.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -711,11 +728,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
 				5D54A8302BFCABFC003D0C21 /* BaseViewController.swift in Sources */,
 				5D2129ED2BDFA08E00142E46 /* TabCoordinator.swift in Sources */,
 				5D41DB602C0875520011E691 /* TestViewModel.swift in Sources */,
 				5D41DB6E2C088FE30011E691 /* Container+DataStores.swift in Sources */,
 				5D41DB692C088C580011E691 /* TestNetworkClient.swift in Sources */,
+				4EECB5FF2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift in Sources */,
 				5D9931322BF77AC70036C8FB /* NextCoordinator.swift in Sources */,
 				5D41DB6C2C088CD30011E691 /* TestDataStore.swift in Sources */,
 				5D2129EB2BDFA01900142E46 /* AppCoordinator.swift in Sources */,
@@ -735,6 +754,7 @@
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
+				4EECB6012C4147C800A49DC8 /* MockUserDefaults.swift in Sources */,
 				5D9931302BF7644A0036C8FB /* BaseCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

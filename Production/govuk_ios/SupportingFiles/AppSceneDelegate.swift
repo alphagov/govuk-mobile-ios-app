@@ -9,11 +9,16 @@ class AppSceneDelegate: UIResponder,
         controller.setNavigationBarHidden(true, animated: false)
         return controller
     }()
+
+    private lazy var userDefaults: UserDefaults = {
+        let userDefaults = UserDefaults.standard
+        return userDefaults
+    }()
     private lazy var coordinatorBuilder = CoordinatorBuilder(
         container: .shared
     )
     private lazy var coordinator: BaseCoordinator? = coordinatorBuilder.app(
-        navigationController: navigationController
+        navigationController: navigationController, userDefaults: userDefaults
     )
 
     func scene(_ scene: UIScene,

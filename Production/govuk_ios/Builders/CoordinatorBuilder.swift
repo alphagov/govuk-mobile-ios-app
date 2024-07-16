@@ -10,12 +10,12 @@ class CoordinatorBuilder {
         self.container = container
     }
 
-    func app(navigationController: UINavigationController) -> BaseCoordinator {
+    func app(navigationController: UINavigationController, userDefaults: UserDefaults) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,
             deeplinkService: container.deeplinkService(),
-            userDefaults: .standard
+            userDefaults: userDefaults
         )
     }
 

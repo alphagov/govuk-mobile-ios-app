@@ -4,6 +4,17 @@ import Foundation
 @testable import govuk_ios
 
 class MockCoordinatorBuilder: CoordinatorBuilder {
+    
+    var _stubbedOnboardingCoordinator: MockBaseCoordinator?
+    var _receivedOnboardingNavigationController: UINavigationController?
+    override func onboarding(navigationController: UINavigationController,
+                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedOnboardingNavigationController = navigationController
+        return _stubbedOnboardingCoordinator ??
+        MockBaseCoordinator(
+            navigationController: navigationController
+        )
+    }
 
     var _stubbedTabCoordinator: MockBaseCoordinator?
     var _receivedTabNavigationController: UINavigationController?
@@ -48,5 +59,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
             navigationController: .init()
         )
     }
+    
+  
 
 }

@@ -12,6 +12,8 @@ class OnboardingCoordinator: BaseCoordinator {
     }
 
     override func start() {
+//        print("started onboarding")
+//        dismissAction()
 //        let onboardingModule = Onboarding(dismissAction: { [weak self] in
 //            self?.dismiss(animated: true)
 //        }, onboardingSource: .json("OnboardingResponse"))

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E67B2412C2C5DD000D41C59 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67B2402C2C5DD000D41C59 /* OnboardingCoordinator.swift */; };
+		4E78113C2C46F2E5006C6507 /* OnboardingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E78113B2C46F2E5006C6507 /* OnboardingResponse.json */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		4EECB5FF2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FE2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift */; };
 		4EECB6012C4147C800A49DC8 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB6002C4147C800A49DC8 /* MockUserDefaults.swift */; };
@@ -109,6 +110,7 @@
 
 /* Begin PBXFileReference section */
 		4E67B2402C2C5DD000D41C59 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		4E78113B2C46F2E5006C6507 /* OnboardingResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OnboardingResponse.json; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		4EECB5FE2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPersistanceInterface.swift; sourceTree = "<group>"; };
 		4EECB6002C4147C800A49DC8 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
@@ -203,13 +205,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4EECB5FD2C413EBD00A49DC8 /* New Group1 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group1";
-			sourceTree = "<group>";
-		};
 		5D1353A92BE0D75000414441 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,7 +381,6 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
-				4EECB5FD2C413EBD00A49DC8 /* New Group1 */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D2129E92BDFA00E00142E46 /* Coordinators */,
 				5D41DB6A2C088CA30011E691 /* DataStores */,
@@ -398,6 +392,7 @@
 				5DAD71A82BD254730075F648 /* ViewControllers */,
 				5D41DB5E2C0875460011E691 /* ViewModels */,
 				4EECB5FE2C413F2900A49DC8 /* OnboardingPersistanceInterface.swift */,
+				4E78113B2C46F2E5006C6507 /* OnboardingResponse.json */,
 			);
 			path = govuk_ios;
 			sourceTree = "<group>";
@@ -482,8 +477,8 @@
 			isa = PBXGroup;
 			children = (
 				5DFFA9732BFF8D0F00B02042 /* AppCoordinatorTests.swift */,
-				5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */,
 				5DFFA9752BFF950A00B02042 /* LaunchCoordinatorTests.swift */,
+				5DC325612BFF252900CB590B /* BaseCoordinatorTests.swift */,
 				5D4F97F22BFF81D5002CBDDE /* TabCoordinatorTests.swift */,
 			);
 			path = Coordinators;
@@ -668,6 +663,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E78113C2C46F2E5006C6507 /* OnboardingResponse.json in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 			);

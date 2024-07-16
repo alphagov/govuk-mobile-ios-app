@@ -7,17 +7,15 @@ class OnboardingCoordinator: BaseCoordinator {
 
     init(navigationController: UINavigationController,
          dismissAction: @escaping () -> Void) {
-        self.dismissAction = dismissAction
-        super.init(navigationController: navigationController)
+         self.dismissAction = dismissAction
+         super.init(navigationController: navigationController)
     }
 
     override func start() {
-//        print("started onboarding")
-//        dismissAction()
-//        let onboardingModule = Onboarding(dismissAction: { [weak self] in
-//            self?.dismiss(animated: true)
-//        }, onboardingSource: .json("OnboardingResponse"))
-//        onboardingModule.viewController.modalPresentationStyle = .fullScreen
-//        present(onboardingModule.viewController, animated: true)
+        let onboardingModule = Onboarding(source: .json("OnboardingResponse")) { [weak self] in
+            self?.dismissAction()
+        }
+        onboardingModule.viewController.modalPresentationStyle = .fullScreen
+        set(onboardingModule.viewController)
     }
-    }
+}

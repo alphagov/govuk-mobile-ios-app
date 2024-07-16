@@ -1,9 +1,8 @@
 import Foundation
 
 extension UserDefaults: OnboardingPersistanceInterface {
-    func checkIfHasOnBoarded(forKey key: UserDefaultsKeys) -> Bool {
-        let flag =  self.bool(forKey: key.rawValue)
-        return flag
+    func hasOnboarded(forKey key: UserDefaultsKeys) -> Bool {
+        return self.bool(forKey: key.rawValue)
     }
 
     func setFlag(forkey key: UserDefaultsKeys, to value: Bool) {

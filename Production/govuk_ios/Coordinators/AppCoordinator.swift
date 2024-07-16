@@ -25,7 +25,7 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             completion: { [weak self] in
                 guard let self = self else { return }
-                if self.userDefaults.checkIfHasOnBoarded(forKey: .hasOnboarded) == false {
+                if self.userDefaults.hasOnboarded(forKey: .hasOnboarded) == false {
                     showOnboarding()
                 } else {
                     showTabs()
@@ -35,7 +35,7 @@ class AppCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
-     private func showOnboarding() {
+    private func showOnboarding() {
         let coordinator = coordinatorBuilder.onboarding(
             navigationController: root,
             dismissAction: {  [weak self] in

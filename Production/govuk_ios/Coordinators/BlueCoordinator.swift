@@ -1,20 +1,17 @@
 import UIKit
 import Foundation
 
-class BlueCoordinator: BaseCoordinator {
+class BlueCoordinator: TabItemCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
-    private let requestFocus: (UINavigationController) -> Void
     private let deeplinkStore: DeeplinkDataStore
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
-         deeplinkStore: DeeplinkDataStore,
-         requestFocus: @escaping (UINavigationController) -> Void) {
+         deeplinkStore: DeeplinkDataStore) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
-        self.requestFocus = requestFocus
         self.deeplinkStore = deeplinkStore
         super.init(navigationController: navigationController)
     }
@@ -24,8 +21,6 @@ class BlueCoordinator: BaseCoordinator {
             showNextAction: startDriving
         )
         set([viewController], animated: false)
-        guard let url = url else { return }
-        handleDeepLink(url: url)
     }
 
     private var startDriving: () -> Void {
@@ -38,13 +33,10 @@ class BlueCoordinator: BaseCoordinator {
         }
     }
 
-    private func handleDeepLink(url: URL) {
-        guard let deepLink = deeplinkStore.route(for: url)
-        else { return }
-        requestFocus(root)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            guard let self = self else { return }
-            deepLink.action(parent: self)
-        }
+    func route(for url: URL) -> ResolvedDeeplinkRoute? {
+        deeplinkStore.route(
+            for: url,
+            parent: self
+        )
     }
 }

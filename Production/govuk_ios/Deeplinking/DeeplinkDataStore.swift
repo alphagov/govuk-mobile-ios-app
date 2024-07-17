@@ -9,7 +9,8 @@ struct DeeplinkDataStore {
         self.routes = routes
     }
 
-    func route(for url: URL) -> ResolvedDeeplinkRoute? {
+    func route(for url: URL,
+               parent: BaseCoordinator) -> ResolvedDeeplinkRoute? {
         guard isValidDeeplink(url: url)
         else { return nil }
 
@@ -22,7 +23,12 @@ struct DeeplinkDataStore {
                 )
             }
             .first { $0.hasMatchingUrls() }
-            .map { .init(components: $0) }
+            .map {
+                .init(
+                    components: $0,
+                    parent: parent
+                )
+            }
     }
 
     private func isValidDeeplink(url: URL) -> Bool {

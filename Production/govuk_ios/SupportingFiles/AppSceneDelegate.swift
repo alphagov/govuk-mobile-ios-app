@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 
 class AppSceneDelegate: UIResponder,
@@ -22,7 +23,9 @@ class AppSceneDelegate: UIResponder,
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        coordinator?.start()
+
+        let url = connectionOptions.urlContexts.first?.url
+        coordinator?.start(url: url)
     }
 
     func scene(_ scene: UIScene,

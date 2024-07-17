@@ -40,7 +40,3 @@ class BlueCoordinator: TabItemCoordinator {
         )
     }
 }
-
-protocol DeeplinkRouteProvider {
-    func route(for: URL) -> ResolvedDeeplinkRoute?
-}

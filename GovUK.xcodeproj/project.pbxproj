@@ -97,6 +97,7 @@
 		5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */; };
 		5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C3B2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift */; };
 		5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB5F2C0875520011E691 /* TestViewModel.swift */; };
+		5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */; };
 		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */; };
 		5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD717B2BD250DB0075F648 /* TestViewController.swift */; };
@@ -232,6 +233,7 @@
 		5DA44C342C2EF1D400D8FE7C /* MockBaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockBaseCoordinator.swift; sourceTree = "<group>"; };
 		5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
 		5DA44C3B2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
+		5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRouteProvider.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneDelegate.swift; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */,
+				5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */,
 				5D8460B32C35A2490066095E /* DeeplinkRoutes */,
 				5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */,
 				5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */,
@@ -1113,6 +1116,7 @@
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */,
+				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,
 				5DE970542C297652009D66C4 /* AppEvent.swift in Sources */,

@@ -22,4 +22,12 @@ extension Container {
         }
         .scope(.singleton)
     }
+
+    var onboardingService: Factory<OnboardingServiceInterface> {
+        Factory(self) {
+            OnboardingService(
+                userDefaults: .standard
+            )
+        }
+    }
 }

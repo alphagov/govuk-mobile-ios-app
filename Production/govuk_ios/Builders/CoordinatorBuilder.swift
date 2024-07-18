@@ -4,6 +4,12 @@ import Factory
 
 @MainActor
 class CoordinatorBuilder {
+    private let container: Container
+
+    init(container: Container) {
+        self.container = container
+    }
+
     func app(navigationController: UINavigationController) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
@@ -31,7 +37,7 @@ class CoordinatorBuilder {
                     dismissAction: @escaping () -> Void) -> BaseCoordinator {
         OnboardingCoordinator(
             navigationController: navigationController,
-            userDefaults: UserDefaults.standard,
+            onboardingService: container.onboardingService.resolve(),
             dismissAction: dismissAction
         )
     }

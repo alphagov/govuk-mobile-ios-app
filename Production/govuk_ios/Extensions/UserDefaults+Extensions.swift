@@ -1,15 +1,19 @@
 import Foundation
 
-extension UserDefaults: OnboardingPersistanceInterface {
-    func hasOnboarded(forKey key: UserDefaultsKeys) -> Bool {
-        return self.bool(forKey: key.rawValue)
+extension UserDefaults {
+    func bool(forKey key: UserDefaultsKeys) -> Bool {
+        bool(forKey: key.rawValue)
     }
 
-    func setFlag(forkey key: UserDefaultsKeys, to value: Bool) {
-        self.set(value, forKey: key.rawValue)
+    func set(bool boolValue: Bool,
+             forkey key: UserDefaultsKeys) {
+        set(
+            boolValue,
+            forKey: key.rawValue
+        )
     }
 }
 
 enum UserDefaultsKeys: String {
-  case hasOnboarded
+  case appOnboardingSeen = "govuk_app_onboarding_seen"
 }

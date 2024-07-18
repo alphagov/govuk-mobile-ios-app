@@ -3,23 +3,23 @@ import UIKit
 class TestViewController: BaseViewController {
     private let viewModel: TestViewModel
 
-    private lazy var nextButton: UIButton = {
+    private lazy var primaryButton: UIButton = {
         let localView = UIButton(frame: .zero)
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.setTitle("Next", for: .normal)
-        localView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        localView.setTitle(viewModel.primaryTitle, for: .normal)
+        localView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         localView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        localView.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        localView.addTarget(self, action: #selector(primaryButtonPressed), for: .touchUpInside)
         return localView
     }()
 
-    private lazy var modalButton: UIButton = {
+    private lazy var secondaryButton: UIButton = {
         let localView = UIButton(frame: .zero)
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.setTitle("Modal", for: .normal)
-        localView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        localView.setTitle(viewModel.secondaryTitle, for: .normal)
+        localView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         localView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        localView.addTarget(self, action: #selector(modalButtonPressed), for: .touchUpInside)
+        localView.addTarget(self, action: #selector(secondaryButtonPressed), for: .touchUpInside)
         return localView
     }()
 
@@ -37,23 +37,28 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = viewModel.color
-        view.addSubview(nextButton)
-        nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(primaryButton)
+        primaryButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        primaryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-        view.addSubview(modalButton)
-        modalButton.topAnchor.constraint(equalTo: nextButton.bottomAnchor,
-                                        constant: 30).isActive = true
-        modalButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(secondaryButton)
+        secondaryButton.topAnchor.constraint(
+            equalTo: primaryButton.bottomAnchor,
+            constant: 30
+        ).isActive = true
+        secondaryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        primaryButton.isHidden = viewModel.primaryTitle ==  nil
+        secondaryButton.isHidden = viewModel.secondaryTitle ==  nil
     }
 
     @objc
-    private func buttonPressed() {
-        viewModel.nextAction()
+    private func primaryButtonPressed() {
+        viewModel.primaryAction?()
     }
 
     @objc
-    private func modalButtonPressed() {
-        viewModel.modalAction()
+    private func secondaryButtonPressed() {
+        viewModel.secondaryAction?()
     }
 }

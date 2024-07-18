@@ -1,5 +1,6 @@
 import Foundation
-
+import GAnalytics
+import Logging
 import Factory
 
 extension Container {
@@ -12,9 +13,13 @@ extension Container {
         }
     }
 
-    var deeplinkService: Factory<DeeplinkServiceInterface> {
+    var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
-            DeeplinkService()
+            AnalyticsService(
+                analytics: GAnalytics(),
+                preferenceStore: self.analyticsPreferenceStore()
+            )
         }
+        .scope(.singleton)
     }
 }

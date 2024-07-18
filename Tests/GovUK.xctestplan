@@ -36,6 +36,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
         "identifier" : "5D4B9D332C074207005F126A",

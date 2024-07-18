@@ -4,18 +4,10 @@ import Factory
 
 @MainActor
 class CoordinatorBuilder {
-    private let container: Container
-
-    init(container: Container) {
-        self.container = container
-    }
-
-    func app(navigationController: UINavigationController, userDefaults: UserDefaults) -> BaseCoordinator {
+    func app(navigationController: UINavigationController) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
-            navigationController: navigationController,
-            deeplinkService: container.deeplinkService(),
-            userDefaults: userDefaults
+            navigationController: navigationController
         )
     }
 
@@ -23,7 +15,7 @@ class CoordinatorBuilder {
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
-            deeplinkService: container.deeplinkService(),
+            viewControllerBuilder: ViewControllerBuilder(),
             completion: completion
         )
     }
@@ -39,31 +31,60 @@ class CoordinatorBuilder {
                     dismissAction: @escaping () -> Void) -> BaseCoordinator {
         OnboardingCoordinator(
             navigationController: navigationController,
+            userDefaults: UserDefaults.standard,
             dismissAction: dismissAction
         )
     }
 
-    var red: BaseCoordinator {
-        ColorCoordinator(
+    var red: TabItemCoordinator {
+        RedCoordinator(
             navigationController: .red,
-            color: .red,
-            title: "Red"
+            coodinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            deeplinkStore: .red(coordinatorBuilder: self)
         )
     }
 
-    var blue: BaseCoordinator {
-        ColorCoordinator(
+    var blue: TabItemCoordinator {
+        BlueCoordinator(
             navigationController: .blue,
-            color: .blue,
-            title: "Blue"
+            coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            deeplinkStore: .driving(coordinatorBuilder: self)
         )
     }
 
-    var green: BaseCoordinator {
+    var green: TabItemCoordinator {
         ColorCoordinator(
             navigationController: .green,
             color: .green,
-            title: "Green"
+            title: "Green",
+            coordinatorBuilder: self
+        )
+    }
+
+    func driving(navigationController: UINavigationController) -> BaseCoordinator {
+        DrivingCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder()
+        )
+    }
+
+    func permit(permitId: String,
+                navigationController: UINavigationController) -> BaseCoordinator {
+        PermitCoordinator(
+            permitId: permitId,
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder()
+        )
+    }
+
+    func next(title: String,
+              navigationController: UINavigationController) -> BaseCoordinator {
+        NextCoordinator(
+            title: title,
+            navigationController: navigationController
         )
     }
 }

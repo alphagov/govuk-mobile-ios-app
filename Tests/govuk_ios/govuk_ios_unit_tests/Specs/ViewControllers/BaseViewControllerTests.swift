@@ -11,4 +11,10 @@ class BaseViewControllerTests: XCTestCase {
         XCTAssertEqual(subject.preferredStatusBarStyle, .lightContent)
     }
 
+    func test_layoutMargins_returnsExpectedValue() {
+        let subject = BaseViewController()
+        let expectedInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        XCTAssertEqual(subject.view.layoutMargins, expectedInsets)
+    }
+
 }

@@ -2,24 +2,21 @@ import UIKit
 import Foundation
 
 class LaunchCoordinator: BaseCoordinator {
-    private let deeplinkService: DeeplinkServiceInterface
+    private let viewControllerBuilder: ViewControllerBuilder
     private let completion: () -> Void
 
     init(navigationController: UINavigationController,
-         deeplinkService: DeeplinkServiceInterface,
+         viewControllerBuilder: ViewControllerBuilder,
          completion: @escaping () -> Void) {
-        self.deeplinkService = deeplinkService
+        self.viewControllerBuilder = viewControllerBuilder
         self.completion = completion
         super.init(navigationController: navigationController)
     }
 
-    override func start() {
-        let viewController = LaunchViewController()
-        set(viewController, animated: false)
-
-        deeplinkService.handle(
-            url: nil,
+    override func start(url: URL?) {
+        let viewController = viewControllerBuilder.launch(
             completion: completion
         )
+        set(viewController, animated: false)
     }
 }

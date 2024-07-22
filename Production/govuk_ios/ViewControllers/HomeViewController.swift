@@ -2,22 +2,22 @@ import Foundation
 import UIKit
 
 class HomeViewController: BaseViewController, UIScrollViewDelegate {
-    lazy var sectionViews: [UIView] = []
-    lazy var originalScrollOffset = scrollView.contentOffset.y
-    lazy var logoImageView: UIImageView = {
+    private lazy var sectionViews: [UIView] = []
+    private lazy var originalScrollOffset = scrollView.contentOffset.y
+    private lazy var logoImageView: UIImageView = {
         let logo = UIImage(named: "logo")
         let uiImageView = UIImageView(image: logo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
         return uiImageView
     }()
-    lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 15
         return stackView
     }()
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
@@ -25,7 +25,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         scrollView.contentInset.top = logoImageView.frame.size.height
         return scrollView
     }()
-    lazy var borderView: UIView = {
+    private lazy var borderView: UIView = {
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
         border.layer.borderColor = UIColor.secondaryBorder.cgColor
@@ -49,7 +49,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         resizeLogo(scrollOffset: scrollOffset)
     }
 
-    func resizeLogo(scrollOffset: Double) {
+    private func resizeLogo(scrollOffset: Double) {
         let animationMaxBound = originalScrollOffset + 30
         let animationRange = originalScrollOffset...animationMaxBound
 
@@ -70,7 +70,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
 
-    func scaleLogo(scrollOffset: Double, animationMaxBound: Double) {
+    private func scaleLogo(scrollOffset: Double, animationMaxBound: Double) {
         let animationRangeArray = [Int](Int(originalScrollOffset)...Int(animationMaxBound))
         let scaleValue = animationRangeArray.firstIndex(of: Int(scrollOffset))
         let scaleMultiplier = 0.7
@@ -87,7 +87,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
 
-    func addElements() {
+    private func addElements() {
         view.addSubview(logoImageView)
         view.addSubview(borderView)
         view.addSubview(scrollView)
@@ -122,7 +122,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
 
-    func sectionTitleLabel() -> UILabel {
+    private func sectionTitleLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Scrollable content"
@@ -130,7 +130,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         return label
     }
 
-    func sectionView() -> UIView {
+    private func sectionView() -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
@@ -140,7 +140,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         return view
     }
 
-    func setupConstraints() {
+    private func setupConstraints() {
         let safeGuide = view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([

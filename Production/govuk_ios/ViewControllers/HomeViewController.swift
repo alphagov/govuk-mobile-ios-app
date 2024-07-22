@@ -92,23 +92,37 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         view.addSubview(borderView)
         view.addSubview(scrollView)
 
-        for _ in 1...6 {
+        for sectionNumber in 1...6 {
             let sectionView = sectionView()
-            let sectionLabel = sectionLabel()
+            let sectionTitleLabel = sectionTitleLabel()
 
-            sectionView.addSubview(sectionLabel)
+            sectionView.addSubview(sectionTitleLabel)
             stackView.addArrangedSubview(sectionView)
             sectionViews.append(sectionView)
 
             sectionView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
             sectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            sectionLabel.topAnchor.constraint(equalTo: sectionView.topAnchor,
+            sectionTitleLabel.topAnchor.constraint(equalTo: sectionView.topAnchor,
                                               constant: 15).isActive = true
-            sectionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            sectionTitleLabel.centerXAnchor.constraint(
+                equalTo: sectionView.centerXAnchor) .isActive = true
+
+            if sectionNumber == 1 {
+                let linkLabel = UILabel()
+                sectionView.addSubview(linkLabel)
+                linkLabel.translatesAutoresizingMaskIntoConstraints = false
+                linkLabel.text = "Link text same blue as logo"
+                linkLabel.textColor = UIColor.linkBlue
+                linkLabel.font = UIFont.systemFont(ofSize: 18)
+                linkLabel.topAnchor.constraint(equalTo: sectionTitleLabel.topAnchor,
+                                               constant: 30).isActive = true
+                linkLabel.centerXAnchor.constraint(
+                    equalTo: sectionView.centerXAnchor).isActive = true
+            }
         }
     }
 
-    func sectionLabel() -> UILabel {
+    func sectionTitleLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Scrollable content"

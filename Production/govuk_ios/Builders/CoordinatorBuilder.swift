@@ -12,6 +12,24 @@ class CoordinatorBuilder {
         )
     }
 
+    var home: TabItemCoordinator {
+        HomeCoordinator(
+            navigationController: .home,
+            coodinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            deeplinkStore: .home(coordinatorBuilder: self)
+        )
+    }
+
+    var settings: TabItemCoordinator {
+        SettingsCoordinator(
+            navigationController: .settings,
+            coodinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            deeplinkStore: .settings(coordinatorBuilder: self)
+        )
+    }
+
     func launch(navigationController: UINavigationController,
                 completion: @escaping () -> Void) -> BaseCoordinator {
         LaunchCoordinator(
@@ -25,33 +43,6 @@ class CoordinatorBuilder {
         TabCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController
-        )
-    }
-
-    var red: TabItemCoordinator {
-        RedCoordinator(
-            navigationController: .red,
-            coodinatorBuilder: self,
-            viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: .red(coordinatorBuilder: self)
-        )
-    }
-
-    var blue: TabItemCoordinator {
-        BlueCoordinator(
-            navigationController: .blue,
-            coordinatorBuilder: self,
-            viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: .driving(coordinatorBuilder: self)
-        )
-    }
-
-    var green: TabItemCoordinator {
-        ColorCoordinator(
-            navigationController: .green,
-            color: .green,
-            title: "Green",
-            coordinatorBuilder: self
         )
     }
 

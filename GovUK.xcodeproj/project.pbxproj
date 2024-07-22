@@ -15,6 +15,12 @@
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
 		162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */; };
 		1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceModel.swift */; };
+		166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166248232C4AC91E009F7E58 /* HomeCoordinator.swift */; };
+		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
+		1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */; };
+		1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */; };
+		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
+		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
@@ -159,6 +165,12 @@
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsPreferenceStore.swift; sourceTree = "<group>"; };
 		1631DE982C2B0D020050CB9D /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
+		166248232C4AC91E009F7E58 /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		166BDDB52C330D1C00437AE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
+		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
@@ -566,6 +578,8 @@
 				5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */,
 				5D8460B62C35A2630066095E /* DrivingDeeplinkRoute.swift */,
 				5D8460B42C35A2550066095E /* PermitDeeplinkRoute.swift */,
+				16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */,
+				16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */,
 			);
 			path = DeeplinkRoutes;
 			sourceTree = "<group>";
@@ -628,6 +642,8 @@
 				5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */,
 				5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */,
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
+				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
+				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -737,6 +753,8 @@
 				5D54A82F2BFCABFC003D0C21 /* BaseViewController.swift */,
 				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
 				5DAD717B2BD250DB0075F648 /* TestViewController.swift */,
+				166BDDB52C330D1C00437AE0 /* HomeViewController.swift */,
+				1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1086,6 +1104,7 @@
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
 				5D16E6A22C414E0B00776ABA /* UIAlertController+Convenience.swift in Sources */,
 				5D16E6A42C41524200776ABA /* UIAlertAction+Convenience.swift in Sources */,
+				16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */,
 				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
 				5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */,
@@ -1099,7 +1118,10 @@
 				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
+				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
+				1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */,
+				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
@@ -1112,10 +1134,12 @@
 				5D962D642C29BD0B0038BC0A /* ColorCoordinator.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */,
+				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */,
+				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,

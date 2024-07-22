@@ -69,4 +69,12 @@ class ViewControllerBuilder {
             viewModel: viewModel
         )
     }
+
+    func home() -> UIViewController {
+        return HomeViewController()
+    }
+
+    func settings() -> UIViewController {
+        return SettingsViewController()
+    }
 }

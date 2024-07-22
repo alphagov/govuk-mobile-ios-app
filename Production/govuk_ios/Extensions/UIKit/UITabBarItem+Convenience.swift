@@ -2,26 +2,18 @@ import UIKit
 import Foundation
 
 extension UITabBarItem {
-    static var red: UITabBarItem {
+    static var home: UITabBarItem {
         .init(
-            title: "Red",
-            image: nil,
+            title: "Home",
+            image: UIImage(systemName: "house"),
             selectedImage: nil
         )
     }
 
-    static var blue: UITabBarItem {
+    static var settings: UITabBarItem {
         .init(
-            title: "Blue",
-            image: nil,
-            selectedImage: nil
-        )
-    }
-
-    static var green: UITabBarItem {
-        .init(
-            title: "Green",
-            image: nil,
+            title: "Settings",
+            image: UIImage(systemName: "gearshape"),
             selectedImage: nil
         )
     }

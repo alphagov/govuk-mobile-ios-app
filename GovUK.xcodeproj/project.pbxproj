@@ -19,6 +19,8 @@
 		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
 		1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */; };
 		1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */; };
+		16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */; };
+		16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */; };
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
@@ -53,7 +55,6 @@
 		5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */; };
 		5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */; };
 		5D37EA182C3E865F006B36CB /* NextCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */; };
-		5D37EA192C3E865F006B36CB /* RedCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA042C3E865F006B36CB /* RedCoordinatorTests.swift */; };
 		5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */; };
 		5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */; };
 		5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */; };
@@ -169,6 +170,8 @@
 		166BDDB52C330D1C00437AE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorTests.swift; sourceTree = "<group>"; };
+		16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorTests.swift; sourceTree = "<group>"; };
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
@@ -199,7 +202,6 @@
 		5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextCoordinatorTests.swift; sourceTree = "<group>"; };
-		5D37EA042C3E865F006B36CB /* RedCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
 		5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -439,8 +441,9 @@
 				5D37E9FD2C3E865F006B36CB /* Driving */,
 				5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */,
 				5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */,
-				5D37EA042C3E865F006B36CB /* RedCoordinatorTests.swift */,
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
+				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
+				16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1162,10 +1165,11 @@
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,
 				5D37EA182C3E865F006B36CB /* NextCoordinatorTests.swift in Sources */,
 				5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */,
-				5D37EA192C3E865F006B36CB /* RedCoordinatorTests.swift in Sources */,
 				5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,
+				16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */,
+				16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */,
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,
 				5D37EA0E2C3E865F006B36CB /* BaseViewControllerTests.swift in Sources */,
 				5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */,

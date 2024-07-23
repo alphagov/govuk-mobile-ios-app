@@ -16,6 +16,22 @@ class CoordinatorBuilderTests: XCTestCase {
         XCTAssert(coordinator is AppCoordinator)
         XCTAssertEqual(coordinator.root, mockNavigationController)
     }
+    
+    @MainActor
+    func test_home_returnsExpectedResult() {
+        let subject = CoordinatorBuilder()
+        let coordinator = subject.home
+
+        XCTAssert(coordinator is HomeCoordinator)
+    }
+    
+    @MainActor
+    func test_settings_returnsExpectedResult() {
+        let subject = CoordinatorBuilder()
+        let coordinator = subject.settings
+
+        XCTAssert(coordinator is SettingsCoordinator)
+    }
 
     @MainActor
     func test_launch_returnsExpectedResult() {
@@ -40,33 +56,6 @@ class CoordinatorBuilderTests: XCTestCase {
 
         XCTAssert(coordinator is TabCoordinator)
         XCTAssertEqual(coordinator.root, mockNavigationController)
-    }
-
-    @MainActor
-    func test_red_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
-        let coordinator = subject.red
-
-        XCTAssertEqual(coordinator.root.tabBarItem.title, "Red")
-        XCTAssertTrue(coordinator.root.navigationBar.prefersLargeTitles)
-    }
-
-    @MainActor
-    func test_blue_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
-        let coordinator = subject.blue
-
-        XCTAssertEqual(coordinator.root.tabBarItem.title, "Blue")
-        XCTAssertFalse(coordinator.root.navigationBar.prefersLargeTitles)
-    }
-
-    @MainActor
-    func test_green_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
-        let coordinator = subject.green
-
-        XCTAssertEqual(coordinator.root.tabBarItem.title, "Green")
-        XCTAssertFalse(coordinator.root.navigationBar.prefersLargeTitles)
     }
 
     @MainActor

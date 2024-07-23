@@ -71,7 +71,14 @@ class ViewControllerBuilder {
     }
 
     func home() -> UIViewController {
-        return HomeViewController()
+        let viewModel = HomeViewModel(
+            headerLogo: UIImage(named: "logo")!,
+            headerBorderColor: UIColor.secondaryBorder.cgColor,
+            backgroundColor: UIColor.primaryBackground
+        )
+        return HomeViewController(
+            viewModel: viewModel
+        )
     }
 
     func settings() -> UIViewController {

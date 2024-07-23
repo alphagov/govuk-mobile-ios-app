@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 class HomeViewController: BaseViewController, UIScrollViewDelegate {
+    private let viewModel: HomeViewModel
     private lazy var sectionViews: [UIView] = []
     private lazy var originalScrollOffset = scrollView.contentOffset.y
-    private lazy var logoImageView: UIImageView = {
-        let logo = UIImage(named: "logo")
-        let uiImageView = UIImageView(image: logo)
+    lazy var logoImageView: UIImageView = {
+        let uiImageView = UIImageView(image: viewModel.headerLogo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
         return uiImageView
     }()
@@ -25,14 +25,23 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         scrollView.contentInset.top = logoImageView.frame.size.height
         return scrollView
     }()
-    private lazy var borderView: UIView = {
+    lazy var headerBorderView: UIView = {
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
-        border.layer.borderColor = UIColor.secondaryBorder.cgColor
+        border.layer.borderColor = viewModel.headerBorderColor
         border.layer.borderWidth = 1
         border.isHidden = true
         return border
     }()
+
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,22 +50,22 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         addElements()
         setupConstraints()
 
-        view.backgroundColor = UIColor.primaryBackground
+        view.backgroundColor = viewModel.backgroundColor
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollOffset = scrollView.contentOffset.y
-        resizeLogo(scrollOffset: scrollOffset)
+        animateLogo(scrollOffset: scrollOffset)
     }
 
-    private func resizeLogo(scrollOffset: Double) {
+    private func animateLogo(scrollOffset: Double) {
         let animationMaxBound = originalScrollOffset + 30
         let animationRange = originalScrollOffset...animationMaxBound
 
         if scrollOffset >= 0 {
-            borderView.isHidden = false
+            headerBorderView.isHidden = false
         } else {
-            borderView.isHidden = true
+            headerBorderView.isHidden = true
         }
 
         if animationRange.contains(scrollOffset) {
@@ -89,12 +98,17 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
 
     private func addElements() {
         view.addSubview(logoImageView)
-        view.addSubview(borderView)
+        view.addSubview(headerBorderView)
         view.addSubview(scrollView)
 
-        for sectionNumber in 1...6 {
-            let sectionView = sectionView()
-            let sectionTitleLabel = sectionTitleLabel()
+        for section in viewModel.sections {
+            let sectionView = sectionView(
+                borderColour: section.borderColour,
+                backgroundColour: section.backgroundColour
+            )
+            let sectionTitleLabel = sectionTitleLabel(
+                title: section.title
+            )
 
             sectionView.addSubview(sectionTitleLabel)
             stackView.addArrangedSubview(sectionView)
@@ -105,14 +119,15 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
             sectionTitleLabel.topAnchor.constraint(equalTo: sectionView.topAnchor,
                                               constant: 15).isActive = true
             sectionTitleLabel.centerXAnchor.constraint(
-                equalTo: sectionView.centerXAnchor) .isActive = true
+                equalTo: sectionView.centerXAnchor
+            ).isActive = true
 
-            if sectionNumber == 1 {
+            if section.link != nil {
                 let linkLabel = UILabel()
                 sectionView.addSubview(linkLabel)
                 linkLabel.translatesAutoresizingMaskIntoConstraints = false
-                linkLabel.text = "Link text same blue as logo"
-                linkLabel.textColor = UIColor.linkBlue
+                linkLabel.text = section.link!["text"]
+                linkLabel.textColor = section.linkColour
                 linkLabel.font = UIFont.systemFont(ofSize: 18)
                 linkLabel.topAnchor.constraint(equalTo: sectionTitleLabel.topAnchor,
                                                constant: 30).isActive = true
@@ -122,21 +137,21 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
 
-    private func sectionTitleLabel() -> UILabel {
+    private func sectionTitleLabel(title: String) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Scrollable content"
+        label.text = title
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }
 
-    private func sectionView() -> UIView {
+    private func sectionView(borderColour: CGColor, backgroundColour: UIColor) -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 10
-        view.layer.borderColor = UIColor.secondaryBorder.cgColor
-        view.backgroundColor = .secondaryBackground
+        view.layer.borderColor = borderColour
+        view.backgroundColor = backgroundColour
         return view
     }
 
@@ -147,12 +162,12 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
             logoImageView.topAnchor.constraint(equalTo: safeGuide.topAnchor, constant: 20),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            borderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
+            headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
                                             constant: 5),
-            borderView.heightAnchor.constraint(equalToConstant: 0.33),
-            borderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            headerBorderView.heightAnchor.constraint(equalToConstant: 0.33),
+            headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
 
-            scrollView.topAnchor.constraint(equalTo: borderView.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: headerBorderView.bottomAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

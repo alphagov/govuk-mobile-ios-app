@@ -3,6 +3,7 @@ import UIKit
 
 class HomeViewController: BaseViewController, UIScrollViewDelegate {
     private let viewModel: HomeViewModel
+    
     private lazy var sectionViews: [UIView] = []
     private lazy var originalScrollOffset = scrollView.contentOffset.y
     lazy var logoImageView: UIImageView = {
@@ -10,14 +11,14 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
         return uiImageView
     }()
-    private lazy var stackView: UIStackView = {
+    lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 15
         return stackView
     }()
-    private lazy var scrollView: UIScrollView = {
+    lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
@@ -34,7 +35,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         return border
     }()
 
-    init(viewModel: HomeViewModel) {
+    public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

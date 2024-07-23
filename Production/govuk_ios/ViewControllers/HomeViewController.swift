@@ -3,7 +3,7 @@ import UIKit
 
 class HomeViewController: BaseViewController, UIScrollViewDelegate {
     private let viewModel: HomeViewModel
-    
+
     private lazy var sectionViews: [UIView] = []
     private lazy var originalScrollOffset = scrollView.contentOffset.y
     lazy var logoImageView: UIImageView = {

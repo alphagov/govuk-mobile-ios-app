@@ -4,7 +4,6 @@ import XCTest
 @testable import govuk_ios
 
 class ViewControllerBuilderTests: XCTestCase {
-
     func test_red_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.red(
@@ -48,4 +47,17 @@ class ViewControllerBuilderTests: XCTestCase {
         XCTAssertEqual(result.title, "Permit - 123")
     }
 
+    func test_home_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.home()
+
+        XCTAssert(result is HomeViewController)
+    }
+
+    func test_settings_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.settings()
+
+        XCTAssert(result is SettingsViewController)
+    }
 }

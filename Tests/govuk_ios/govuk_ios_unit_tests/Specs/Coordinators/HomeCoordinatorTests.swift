@@ -4,7 +4,6 @@ import XCTest
 @testable import govuk_ios
 
 class HomeCoordinatorTests: XCTestCase {
-    
     override class func setUp() {
         super.setUp()
         UIView.setAnimationsEnabled(false)

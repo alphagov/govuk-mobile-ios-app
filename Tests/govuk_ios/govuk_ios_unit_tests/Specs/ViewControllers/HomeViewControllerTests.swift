@@ -8,7 +8,7 @@ class HomeViewControllerTests: XCTestCase {
     func test_logoImageView_containsLogoImage() {
         let viewModel = HomeViewModel()
         let subject = HomeViewController(viewModel: viewModel)
-        XCTAssertEqual(UIImage(named: "logo"), subject.logoImageView.image)
+        XCTAssertEqual(UIImage.homeLogo, subject.logoImageView.image)
     }
     
     func test_scrollView_isConfiguredCorrectly() {

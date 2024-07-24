@@ -17,7 +17,6 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedBlueViewController ?? UIViewController()
     }
 
-    
     var _stubbedDrivingViewController: UIViewController?
     var _receivedDrivingShowPermitAction: (() -> Void)?
     var _receivedDrivingPresentPermitAction: (() -> Void)?
@@ -34,7 +33,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedLaunchCompletion = completion
         return _stubbedLaunchViewController ?? UIViewController()
     }
-    
+
     var _stubbedPermitViewController: UIViewController?
     var _receivedPermitFinishAction: (() -> Void)?
     override func permit(permitId: String,
@@ -42,7 +41,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedPermitFinishAction = finishAction
         return _stubbedPermitViewController ?? UIViewController()
     }
-    
+
     var _stubbedHomeViewController: UIViewController?
     override func home() -> UIViewController {
         return _stubbedHomeViewController ?? UIViewController()

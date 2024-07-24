@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
-    let headerLogo: UIImage = UIImage(named: "logo")!
+    let headerLogo: UIImage = UIImage.homeLogo
     let headerBorderColor: CGColor = UIColor.secondaryBorder.cgColor
     let backgroundColor: UIColor = UIColor.primaryBackground
     var sections: [HomeSectionViewModel] {

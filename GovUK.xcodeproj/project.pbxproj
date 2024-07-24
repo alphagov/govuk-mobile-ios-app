@@ -19,8 +19,6 @@
 		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
 		1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */; };
 		1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */; };
-		168F6F9E2C4E71A300A0D7F7 /* HomeDeepLinkingRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6F9D2C4E71A300A0D7F7 /* HomeDeepLinkingRouteTests.swift */; };
-		168F6FA02C4E71C200A0D7F7 /* SettingsDeepLinkingRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6F9F2C4E71C200A0D7F7 /* SettingsDeepLinkingRouteTests.swift */; };
 		168F6FA22C4E9DB500A0D7F7 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA12C4E9DB500A0D7F7 /* HomeViewControllerTests.swift */; };
 		168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */; };
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
@@ -176,8 +174,6 @@
 		166BDDB52C330D1C00437AE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
-		168F6F9D2C4E71A300A0D7F7 /* HomeDeepLinkingRouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkingRouteTests.swift; sourceTree = "<group>"; };
-		168F6F9F2C4E71C200A0D7F7 /* SettingsDeepLinkingRouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkingRouteTests.swift; sourceTree = "<group>"; };
 		168F6FA12C4E9DB500A0D7F7 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTests.swift; sourceTree = "<group>"; };
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -404,8 +400,6 @@
 			children = (
 				5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */,
 				5D37E9F22C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift */,
-				168F6F9D2C4E71A300A0D7F7 /* HomeDeepLinkingRouteTests.swift */,
-				168F6F9F2C4E71C200A0D7F7 /* SettingsDeepLinkingRouteTests.swift */,
 			);
 			path = DeeplinkRoutes;
 			sourceTree = "<group>";
@@ -1193,7 +1187,6 @@
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,
 				5D37EA0E2C3E865F006B36CB /* BaseViewControllerTests.swift in Sources */,
 				5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */,
-				168F6F9E2C4E71A300A0D7F7 /* HomeDeepLinkingRouteTests.swift in Sources */,
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
 				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,
 				5D37EA122C3E865F006B36CB /* PermitCoordinatorTests.swift in Sources */,
@@ -1205,7 +1198,6 @@
 				5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */,
 				5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */,
 				5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */,
-				168F6FA02C4E71C200A0D7F7 /* SettingsDeepLinkingRouteTests.swift in Sources */,
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				168F6FA22C4E9DB500A0D7F7 /* HomeViewControllerTests.swift in Sources */,

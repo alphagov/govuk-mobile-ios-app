@@ -12,9 +12,5 @@ struct HomeDeeplinkRoute: DeeplinkRoute {
     }
 
     @MainActor
-    func action(parent: BaseCoordinator,
-                params: [String: String]) {
-        let coordinator = self.coordinatorBuilder.home
-        parent.start(coordinator)
-    }
+    func action(parent: BaseCoordinator, params: [String: String]) {}
 }

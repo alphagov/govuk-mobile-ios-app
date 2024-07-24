@@ -19,7 +19,7 @@ class BaseCoordinatorTests: XCTestCase {
         let parentCoordinator = MockBaseCoordinator()
         parentCoordinator.start(subject)
 
-        let expectation = expectation(description: "regain handler")
+        let expectation = expectation()
         parentCoordinator._childDidFinishHandler = { child in
             XCTAssertEqual(child, subject)
             expectation.fulfill()
@@ -85,27 +85,27 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssertEqual(navigationController.viewControllers.count, 2)
     }
 
-//    @MainActor
-//    func test_viewControllerPopped_remainingViewControllers_doesNothing() {
-//        let navigationController = UINavigationController()
-//        let subject = TestCoordinator(navigationController: navigationController)
-//
-//        let parentCoordinator = MockBaseCoordinator()
-//        parentCoordinator.start(subject)
-//
-//        subject.push(UIViewController(), animated: false)
-//        subject.push(UIViewController(), animated: false)
-//
-//        let expectation = expectation(description: "regain handler 2")
-//        expectation.isInverted = true
-//        parentCoordinator._childDidFinishHandler = { child in
-//            expectation.fulfill()
-//        }
-//
-//        navigationController.popViewController(animated: false)
-//
-//        wait(for: [expectation], timeout: 1)
-//    }
+    @MainActor
+    func test_viewControllerPopped_remainingViewControllers_doesNothing() {
+        let navigationController = UINavigationController()
+        let subject = TestCoordinator(navigationController: navigationController)
+
+        let parentCoordinator = MockBaseCoordinator()
+        parentCoordinator.start(subject)
+
+        subject.push(UIViewController(), animated: false)
+        subject.push(UIViewController(), animated: false)
+
+        let expectation = expectation()
+        expectation.isInverted = true
+        parentCoordinator._childDidFinishHandler = { child in
+            expectation.fulfill()
+        }
+
+        navigationController.popViewController(animated: false)
+
+        wait(for: [expectation], timeout: 1)
+    }
 
     @MainActor
     func test_viewControllerPopped_finalViewController_callsFinish() {
@@ -123,7 +123,7 @@ class BaseCoordinatorTests: XCTestCase {
 
         subject.push(UIViewController(), animated: false)
 
-        let expectation = expectation(description: "regain handler 3")
+        let expectation = expectation()
         parentCoordinator._childDidFinishHandler = { child in
             expectation.fulfill()
         }

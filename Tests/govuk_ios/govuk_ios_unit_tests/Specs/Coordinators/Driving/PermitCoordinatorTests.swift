@@ -37,7 +37,7 @@ class PermitCoordinatorTests: XCTestCase {
 
         mockParentCoordinator.present(subject, animated: false)
         mockNavigationController._stubbedPresentingViewController = mockParentCoordinator.root
-        let expectation = expectation(description: "did finish expecation")
+        let expectation = expectation()
         mockParentCoordinator._childDidFinishHandler = { coordinator in
             XCTAssertEqual(coordinator, subject)
             expectation.fulfill()

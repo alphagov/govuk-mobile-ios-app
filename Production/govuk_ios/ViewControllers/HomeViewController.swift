@@ -104,8 +104,8 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
 
         for section in viewModel.sections {
             let sectionView = sectionView(
-                borderColour: section.borderColour,
-                backgroundColour: section.backgroundColour
+                borderColor: section.borderColor,
+                backgroundColor: section.backgroundColor
             )
             let sectionTitleLabel = sectionTitleLabel(
                 title: section.title
@@ -128,7 +128,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
                 sectionView.addSubview(linkLabel)
                 linkLabel.translatesAutoresizingMaskIntoConstraints = false
                 linkLabel.text = section.link!["text"]
-                linkLabel.textColor = section.linkColour
+                linkLabel.textColor = section.linkColor
                 linkLabel.font = UIFont.systemFont(ofSize: 18)
                 linkLabel.topAnchor.constraint(equalTo: sectionTitleLabel.topAnchor,
                                                constant: 30).isActive = true
@@ -146,13 +146,13 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         return label
     }
 
-    private func sectionView(borderColour: CGColor, backgroundColour: UIColor) -> UIView {
+    private func sectionView(borderColor: CGColor, backgroundColor: UIColor) -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 10
-        view.layer.borderColor = borderColour
-        view.backgroundColor = backgroundColour
+        view.layer.borderColor = borderColor
+        view.backgroundColor = backgroundColor
         return view
     }
 

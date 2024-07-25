@@ -13,7 +13,6 @@ final class OnboardingCoordinatorTests: XCTestCase {
                   dismissAction: {
             expectation.fulfill()
         })
-        
         sut.start()
         wait(for: [expectation], timeout: 1)
     }

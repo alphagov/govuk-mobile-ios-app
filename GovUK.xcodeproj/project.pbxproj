@@ -388,8 +388,8 @@
 			isa = PBXGroup;
 			children = (
 				5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */,
-				5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */,
 				5D5B16F62C51480000EA118F /* XCTestCase+Extensions.swift */,
+				5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

@@ -97,14 +97,22 @@ class BaseCoordinatorTests: XCTestCase {
         subject.push(UIViewController(), animated: false)
 
         let expectation = expectation()
-        expectation.isInverted = true
+        var completionCalled = false
         parentCoordinator._childDidFinishHandler = { child in
-            expectation.fulfill()
+            completionCalled = true
         }
 
         navigationController.popViewController(animated: false)
 
-        wait(for: [expectation], timeout: 1)
+        expectation.fulfillAfter(0.2)
+        waitForExpectations(
+            timeout: 0.5,
+            handler: { _ in
+                Task { @MainActor in
+                    XCTAssertFalse(completionCalled)
+                }
+            }
+        )
     }
 
     @MainActor

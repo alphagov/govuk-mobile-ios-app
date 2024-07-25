@@ -1,12 +1,13 @@
 import Foundation
 import XCTest
+import Factory
 
 @testable import govuk_ios
 
 class TabCoordinatorTests: XCTestCase {
     @MainActor 
     func test_start_showsTabs() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
 
         let mockRedCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedRedCoordinator = mockRedCoordinator
@@ -40,7 +41,7 @@ class TabCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_withKnownURL_selectsTabs() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
 
         let mockRedCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedRedCoordinator = mockRedCoordinator
@@ -71,7 +72,7 @@ class TabCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_unknownURL_selectsTabs() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
 
         let mockRedCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedRedCoordinator = mockRedCoordinator

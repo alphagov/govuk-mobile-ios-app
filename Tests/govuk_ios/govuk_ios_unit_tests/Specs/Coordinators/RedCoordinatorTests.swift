@@ -1,12 +1,13 @@
 import Foundation
 import XCTest
+import Factory
 
 @testable import govuk_ios
 
 class RedCoordinatorTests: XCTestCase {
     @MainActor
     func test_start_showsRedViewController() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container:Container() )
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
         let subject = RedCoordinator(
@@ -25,7 +26,7 @@ class RedCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_showNextAction_startsNextCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: Container())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
         let subject = RedCoordinator(
@@ -48,7 +49,7 @@ class RedCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_showModalAction_startsNextCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container:Container())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
         let subject = RedCoordinator(

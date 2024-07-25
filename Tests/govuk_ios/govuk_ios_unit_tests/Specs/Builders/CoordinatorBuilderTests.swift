@@ -1,13 +1,13 @@
 import Foundation
 import XCTest
-
+import Factory
 @testable import govuk_ios
 
 class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_app_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.app(
             navigationController: mockNavigationController
@@ -19,7 +19,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_launch_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.launch(
             navigationController: mockNavigationController,
@@ -32,7 +32,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_tab_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.tab(
             navigationController: mockNavigationController
@@ -44,7 +44,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_red_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.red
 
         XCTAssertEqual(coordinator.root.tabBarItem.title, "Red")
@@ -53,7 +53,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_blue_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.blue
 
         XCTAssertEqual(coordinator.root.tabBarItem.title, "Blue")
@@ -62,7 +62,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_green_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.green
 
         XCTAssertEqual(coordinator.root.tabBarItem.title, "Green")
@@ -71,7 +71,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_driving_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.driving(
             navigationController: mockNavigationController
@@ -82,7 +82,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_permit_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.permit(
             permitId: "123",
@@ -94,7 +94,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_next_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.next(
             title: "Title",

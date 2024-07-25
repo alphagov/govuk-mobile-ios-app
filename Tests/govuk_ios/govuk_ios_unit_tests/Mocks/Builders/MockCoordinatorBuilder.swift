@@ -1,11 +1,12 @@
 import UIKit
 import Foundation
+import Factory
 
 @testable import govuk_ios
 
 extension CoordinatorBuilder {
     static var mock: MockCoordinatorBuilder {
-        MockCoordinatorBuilder()
+        MockCoordinatorBuilder(container: Container())
     }
 }
 

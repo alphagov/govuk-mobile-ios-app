@@ -1,6 +1,7 @@
 import UIKit
 import Foundation
 import XCTest
+import Factory
 
 @testable import govuk_ios
 
@@ -8,7 +9,7 @@ class AppCoordinatorTests: XCTestCase {
    
     @MainActor
     func test_start_firstLaunch_startsLaunchCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: Container())
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
             navigationController: mockNavigationController
@@ -17,12 +18,7 @@ class AppCoordinatorTests: XCTestCase {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoodinatorBuilder,
-<<<<<<< HEAD
-            navigationController: mockNavigationController,
-            deeplinkService: MockDeeplinkService(), userDefaults: UserDefaults()
-=======
             navigationController: mockNavigationController
->>>>>>> develop
         )
 
         subject.start()
@@ -30,65 +26,10 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockCoodinatorBuilder._receivedLaunchNavigationController, mockNavigationController)
         XCTAssertTrue(mockLaunchCoodinator._startCalled)
     }
-    
-    @MainActor 
-    func test_start_hasOnboardedIsFalse_launchesOnboardingCoordinator(){
-        //Given
-        let userDefaults = MockUserDefaults()
-        userDefaults.setFlag(forkey: .hasOnboarded, to: false)
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(
-            container: .init()
-        )
-        let mockNavigationController = UINavigationController()
-        let mockOnboardingCoodinator = MockBaseCoordinator(
-            navigationController: mockNavigationController
-        )
-        mockCoodinatorBuilder._stubbedOnboardingCoordinator = mockOnboardingCoodinator
 
-<<<<<<< HEAD
-        let subject = AppCoordinator(
-            coordinatorBuilder: mockCoodinatorBuilder,
-            navigationController: mockNavigationController,
-            deeplinkService: MockDeeplinkService(), userDefaults: userDefaults
-        )
-        //When
-        subject.start()
-        mockCoodinatorBuilder._receivedLaunchCompletion?()
-        //Then
-            XCTAssertEqual(mockCoodinatorBuilder._receivedOnboardingNavigationController, mockNavigationController)
-            XCTAssertTrue(mockOnboardingCoodinator._startCalled)
-    }
-     
-    @MainActor
-    func test_start_hasOnboardedIsTrue_doesNotLaunchOnboardingCoordinator(){
-        //Given
-        let userDefaults = MockUserDefaults()
-        userDefaults.setFlag(forkey: .hasOnboarded, to: true)
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(
-            container: .init()
-        )
-        let mockNavigationController = UINavigationController()
-        let mockOnboardingCoodinator = MockBaseCoordinator(
-            navigationController: mockNavigationController
-        )
-        mockCoodinatorBuilder._stubbedOnboardingCoordinator = mockOnboardingCoodinator
-
-        let subject = AppCoordinator(
-            coordinatorBuilder: mockCoodinatorBuilder,
-            navigationController: mockNavigationController,
-            deeplinkService: MockDeeplinkService(), userDefaults: userDefaults
-        )
-        //When
-        subject.start()
-        mockCoodinatorBuilder._receivedLaunchCompletion?()
-        //Then
-        XCTAssertEqual(mockCoodinatorBuilder._receivedOnboardingNavigationController, nil)
-        XCTAssertFalse(mockOnboardingCoodinator._startCalled)
-    }
-=======
     @MainActor
     func test_start_secondLaunch_startsTabCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: Container())
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
             navigationController: mockNavigationController
@@ -125,5 +66,4 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssertTrue(mockTabCoodinator._startCalled)
     }
 
->>>>>>> develop
 }

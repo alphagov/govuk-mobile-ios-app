@@ -8,14 +8,11 @@ class TabCoordinatorTests: XCTestCase {
     func test_start_showsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder()
 
-        let mockRedCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedRedCoordinator = mockRedCoordinator
+        let mockHomeCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
 
-        let mockBlueCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedBlueCoordinator = mockBlueCoordinator
-
-        let mockGreenCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedGreenCoordinator = mockGreenCoordinator
+        let mockSettingsCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSettingsCoordinator = mockSettingsCoordinator
 
         let navigationController = UINavigationController()
         let subject = TabCoordinator(
@@ -27,11 +24,10 @@ class TabCoordinatorTests: XCTestCase {
 
         XCTAssertEqual(navigationController.viewControllers.count, 1)
         let tabController = navigationController.viewControllers.first as? UITabBarController
-        XCTAssertEqual(tabController?.viewControllers?.count, 3)
+        XCTAssertEqual(tabController?.viewControllers?.count, 2)
         let expectedCoordinators = [
-            mockRedCoordinator,
-            mockBlueCoordinator,
-            mockGreenCoordinator
+            mockHomeCoordinator,
+            mockSettingsCoordinator
         ]
         expectedCoordinators.forEach {
             XCTAssertTrue($0._startCalled)
@@ -42,20 +38,17 @@ class TabCoordinatorTests: XCTestCase {
     func test_start_withKnownURL_selectsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder()
 
-        let mockRedCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedRedCoordinator = mockRedCoordinator
-
-        let mockBlueCoordinator = MockBaseCoordinator()
+        let mockHomeCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
+        
+        let mockSettingsCoordinator = MockBaseCoordinator()
         let mockRoute = MockDeeplinkRoute(pattern: "/test")
-        mockBlueCoordinator._stubbedRoute = .mock(
-            parent: mockBlueCoordinator,
+        mockSettingsCoordinator._stubbedRoute = .mock(
+            parent: mockSettingsCoordinator,
             route: mockRoute
         )
-        mockCoordinatorBuilder._stubbedBlueCoordinator = mockBlueCoordinator
-
-        let mockGreenCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedGreenCoordinator = mockGreenCoordinator
-
+        mockCoordinatorBuilder._stubbedSettingsCoordinator = mockSettingsCoordinator
+        
         let navigationController = UINavigationController()
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -65,6 +58,7 @@ class TabCoordinatorTests: XCTestCase {
         let url = URL(string: "govuk://gov.uk/test")
         subject.start(url: url)
         let tabController = navigationController.viewControllers.first as? UITabBarController
+        
         XCTAssertEqual(tabController?.selectedIndex, 1)
         XCTAssert(mockRoute._actionCalled)
     }
@@ -73,14 +67,11 @@ class TabCoordinatorTests: XCTestCase {
     func test_start_unknownURL_selectsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder()
 
-        let mockRedCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedRedCoordinator = mockRedCoordinator
+        let mockHomeCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
 
-        let mockBlueCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedBlueCoordinator = mockBlueCoordinator
-
-        let mockGreenCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedGreenCoordinator = mockGreenCoordinator
+        let mockSettingsCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSettingsCoordinator = mockSettingsCoordinator
 
         let navigationController = UINavigationController()
         let subject = TabCoordinator(
@@ -94,5 +85,4 @@ class TabCoordinatorTests: XCTestCase {
 
         XCTAssertEqual(tabController?.selectedIndex, 0)
     }
-
 }

@@ -17,7 +17,7 @@ final class OnboardingCoordinatorTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_start_hasNotSeenOnboarding_doesNotcallsDismiss() throws {
+    func test_start_hasNotSeenOnboarding_doesNotCallDismiss() throws {
         let onboardingService = MockOnBoardingService()
         let mockNavigationController = UINavigationController()
         let sut = OnboardingCoordinator(

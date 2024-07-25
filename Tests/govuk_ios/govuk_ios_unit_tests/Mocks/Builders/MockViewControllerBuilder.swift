@@ -42,13 +42,13 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedPermitViewController ?? UIViewController()
     }
 
-    var _stubbedRedViewController: UIViewController?
-    var _receivedRedShowNextAction: (() -> Void)?
-    var _receivedRedShowModalAction: (() -> Void)?
-    override func red(showNextAction: @escaping () -> Void,
-                      showModalAction: @escaping () -> Void) -> UIViewController {
-        _receivedRedShowNextAction = showNextAction
-        _receivedRedShowModalAction = showModalAction
-        return _stubbedRedViewController ?? UIViewController()
+    var _stubbedHomeViewController: UIViewController?
+    override func home() -> UIViewController {
+        return _stubbedHomeViewController ?? UIViewController()
+    }
+
+    var _stubbedSettingsViewController: UIViewController?
+    override func settings() -> UIViewController {
+        return _stubbedSettingsViewController ?? UIViewController()
     }
 }

@@ -34,30 +34,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
             navigationController: navigationController
         )
     }
-
-    var _stubbedRedCoordinator: TabItemCoordinator?
-    override var red: any TabItemCoordinator {
-        _stubbedRedCoordinator ??
-        MockBaseCoordinator(
-            navigationController: .init()
-        )
-    }
-
-    var _stubbedBlueCoordinator: TabItemCoordinator?
-    override var blue: any TabItemCoordinator {
-        return _stubbedBlueCoordinator ??
-        MockBaseCoordinator(
-            navigationController: .init()
-        )
-    }
-
-    var _stubbedGreenCoordinator: TabItemCoordinator?
-    override var green: any TabItemCoordinator {
-        _stubbedGreenCoordinator ??
-        MockBaseCoordinator(
-            navigationController: .init()
-        )
-    }
     
     var _stubbedPermitCoordinator: MockBaseCoordinator?
     var _receivedPermitPermitId: String?
@@ -88,5 +64,20 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _receivedNextNavigationController = navigationController
         return _stubbedNextCoordinator ?? MockBaseCoordinator()
     }
-
+    
+    var _stubbedHomeCoordinator: TabItemCoordinator?
+    override var home: any TabItemCoordinator {
+        _stubbedHomeCoordinator ??
+        MockBaseCoordinator(
+            navigationController: .init()
+        )
+    }
+    
+    var _stubbedSettingsCoordinator: TabItemCoordinator?
+    override var settings: any TabItemCoordinator {
+        _stubbedSettingsCoordinator ??
+        MockBaseCoordinator(
+            navigationController: .init()
+        )
+    }
 }

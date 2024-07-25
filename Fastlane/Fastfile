@@ -7,7 +7,7 @@ default_platform :ios
 # rubocop:disable Metrics/BlockLength
 platform :ios do
   before_all do
-    ENV['FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT'] = '120'
+    ENV['FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT'] = '600'
   end
 
   desc 'Runs all the tests'

@@ -15,7 +15,7 @@ final class GovUKUITestsLaunchTests: XCTestCase {
         app.launch()
 
 
-        let label = app.staticTexts["Red"]
+        let label = app.images["logo"]
         let exists = NSPredicate(format: "exists == 1")
         expectation(for: exists, evaluatedWith: label, handler: nil)
         waitForExpectations(timeout: 10, handler: nil)

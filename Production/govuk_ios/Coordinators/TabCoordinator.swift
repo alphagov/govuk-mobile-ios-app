@@ -4,21 +4,20 @@ import Foundation
 typealias TabItemCoordinator = BaseCoordinator & DeeplinkRouteProvider
 
 class TabCoordinator: BaseCoordinator {
-    private lazy var redCoordinator = coordinatorBuilder.red
-    private lazy var blueCoordinator = coordinatorBuilder.blue
-    private lazy var greenCoordinator = coordinatorBuilder.green
+    private lazy var homeCoordinator = coordinatorBuilder.home
+    private lazy var settingsCoordinator = coordinatorBuilder.settings
 
     private var coordinators: [TabItemCoordinator] {
         [
-            redCoordinator,
-            blueCoordinator,
-            greenCoordinator
+            homeCoordinator,
+            settingsCoordinator
         ]
     }
 
     private lazy var tabController = {
         let controller = UITabBarController()
         var appearance = UITabBarAppearance()
+        controller.tabBar.backgroundColor = .primaryBackground
         appearance.configureWithOpaqueBackground()
         controller.tabBar.standardAppearance = appearance
         return controller

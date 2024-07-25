@@ -77,6 +77,7 @@
 		5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */; };
 		5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */; };
 		5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */; };
+		5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */; };
 		5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93EE812C36848E00D90C0C /* MockDeeplinkRoute.swift */; };
 		5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */; };
 		5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */; };
@@ -220,6 +221,7 @@
 		5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedDeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D8922712C07205C0019FBD7 /* TestViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
+		5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingServiceTests.swift; sourceTree = "<group>"; };
 		5D93EE812C36848E00D90C0C /* MockDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
 		5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermitCoordinator.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */,
+				5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */,
 				5D37E9EF2C3E865F006B36CB /* TestServiceTests.swift */,
 			);
 			path = Services;
@@ -1151,6 +1154,7 @@
 				5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */,
 				162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */,
 				5D37EA152C3E865F006B36CB /* BlueCoordinatorTests.swift in Sources */,
+				5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */,
 				5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,

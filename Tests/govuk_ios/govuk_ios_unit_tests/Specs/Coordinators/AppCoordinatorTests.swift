@@ -5,7 +5,6 @@ import XCTest
 @testable import govuk_ios
 
 class AppCoordinatorTests: XCTestCase {
-
     @MainActor
     func test_start_firstLaunch_startsLaunchCoordinator() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
@@ -51,6 +50,7 @@ class AppCoordinatorTests: XCTestCase {
 
         //Finish launch loading
         mockCoodinatorBuilder._receivedLaunchCompletion?()
+        mockCoodinatorBuilder._receivedOnboardingDismissAction?()
 
         XCTAssertTrue(mockTabCoodinator._startCalled)
 

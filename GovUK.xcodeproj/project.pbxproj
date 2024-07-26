@@ -30,7 +30,7 @@
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
 		4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */; };
-		4EB05ED02C52A654008DAEA6 /* MockOnBoardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnBoardingService.swift */; };
+		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
@@ -55,7 +55,6 @@
 		5D37EA122C3E865F006B36CB /* PermitCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9FC2C3E865F006B36CB /* PermitCoordinatorTests.swift */; };
 		5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */; };
 		5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */; };
-		5D37EA152C3E865F006B36CB /* BlueCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA002C3E865F006B36CB /* BlueCoordinatorTests.swift */; };
 		5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */; };
 		5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */; };
 		5D37EA182C3E865F006B36CB /* NextCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */; };
@@ -95,12 +94,11 @@
 		5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */; };
 		5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */; };
 		5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */; };
-		5D962D632C29BD0B0038BC0A /* BlueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D582C29BD0B0038BC0A /* BlueCoordinator.swift */; };
 		5D962D642C29BD0B0038BC0A /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */; };
 		5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */; };
 		5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */; };
-		5D962D672C29BD0B0038BC0A /* RedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */; };
 		5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */; };
+		5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C8DF42C53BCF400961326 /* OnboardingSlide+Arrangers.swift */; };
 		5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9CF3972C38493B00317B70 /* DeeplinkDataStore+Convenience.swift */; };
 		5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C342C2EF1D400D8FE7C /* MockBaseCoordinator.swift */; };
 		5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */; };
@@ -191,7 +189,7 @@
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
-		4EB05ECF2C52A653008DAEA6 /* MockOnBoardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnBoardingService.swift; sourceTree = "<group>"; };
+		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 		5D37E9FC2C3E865F006B36CB /* PermitCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermitCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
-		5D37EA002C3E865F006B36CB /* BlueCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -249,12 +246,11 @@
 		5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermitCoordinator.swift; sourceTree = "<group>"; };
 		5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
-		5D962D582C29BD0B0038BC0A /* BlueCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueCoordinator.swift; sourceTree = "<group>"; };
 		5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
-		5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		5D9C8DF42C53BCF400961326 /* OnboardingSlide+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingSlide+Arrangers.swift"; sourceTree = "<group>"; };
 		5D9CF3972C38493B00317B70 /* DeeplinkDataStore+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeeplinkDataStore+Convenience.swift"; sourceTree = "<group>"; };
 		5DA44C342C2EF1D400D8FE7C /* MockBaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockBaseCoordinator.swift; sourceTree = "<group>"; };
 		5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
@@ -461,7 +457,6 @@
 				4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */,
 				5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */,
 				5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */,
-				5D37EA002C3E865F006B36CB /* BlueCoordinatorTests.swift */,
 				5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */,
 				5D37E9FD2C3E865F006B36CB /* Driving */,
 				5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */,
@@ -646,18 +641,32 @@
 			children = (
 				5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */,
 				5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */,
-				5D962D582C29BD0B0038BC0A /* BlueCoordinator.swift */,
 				5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */,
 				5D962D542C29BD0B0038BC0A /* Driving */,
 				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
 				5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */,
 				5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */,
 				5DBE08092C480D9200B58DBE /* OnboardingCoordinator.swift */,
-				5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */,
 				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		5D9C8DF22C53BCD900961326 /* Arrangers */ = {
+			isa = PBXGroup;
+			children = (
+				5D9C8DF32C53BCE000961326 /* Onboarding */,
+			);
+			path = Arrangers;
+			sourceTree = "<group>";
+		};
+		5D9C8DF32C53BCE000961326 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5D9C8DF42C53BCF400961326 /* OnboardingSlide+Arrangers.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		5D9CF3962C38492500317B70 /* Deeplinking */ = {
@@ -681,7 +690,7 @@
 			isa = PBXGroup;
 			children = (
 				16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */,
-				4EB05ECF2C52A653008DAEA6 /* MockOnBoardingService.swift */,
+				4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -731,6 +740,7 @@
 		5DAD718D2BD250DF0075F648 /* govuk_ios_unit_tests */ = {
 			isa = PBXGroup;
 			children = (
+				5D9C8DF22C53BCD900961326 /* Arrangers */,
 				5D349C962C36994400161317 /* Extensions */,
 				5DD6EFFB2BFF546000C2D79B /* Mocks */,
 				5DD6EFFC2BFF546900C2D79B /* Specs */,
@@ -1135,7 +1145,6 @@
 				5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */,
 				5D8460B72C35A2630066095E /* DrivingDeeplinkRoute.swift in Sources */,
 				168F6FAA2C4FC56B00A0D7F7 /* HomeSectionViewModel.swift in Sources */,
-				5D962D672C29BD0B0038BC0A /* RedCoordinator.swift in Sources */,
 				5DBE080C2C4812ED00B58DBE /* BaseViewController.swift in Sources */,
 				5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */,
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
@@ -1161,7 +1170,6 @@
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
-				5D962D632C29BD0B0038BC0A /* BlueCoordinator.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
 				5DBE08082C480CA700B58DBE /* UITabBarItem+Convenience.swift in Sources */,
 				5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */,
@@ -1189,13 +1197,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EB05ED02C52A654008DAEA6 /* MockOnBoardingService.swift in Sources */,
+				4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */,
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
 				5D37EA0B2C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */,
 				162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */,
-				5D37EA152C3E865F006B36CB /* BlueCoordinatorTests.swift in Sources */,
 				5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */,
 				5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
@@ -1206,6 +1213,7 @@
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
 				4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,
+				5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */,
 				16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */,
 				16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */,
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,

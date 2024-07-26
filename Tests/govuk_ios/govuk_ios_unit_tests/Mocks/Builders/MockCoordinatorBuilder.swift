@@ -80,4 +80,17 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
             navigationController: .init()
         )
     }
+
+    var _stubbedOnboardingCoordinator: BaseCoordinator?
+    var _receivedOnboardingNavigationController: UINavigationController?
+    var _receivedOnboardingDismissAction: (() -> Void)?
+    override func onboarding(navigationController: UINavigationController,
+                             dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedOnboardingNavigationController = navigationController
+        _receivedOnboardingDismissAction = dismissAction
+        return _stubbedOnboardingCoordinator ??
+        MockBaseCoordinator(
+            navigationController: .init()
+        )
+    }
 }

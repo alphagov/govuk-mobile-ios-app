@@ -10,13 +10,6 @@ extension ViewControllerBuilder {
 }
 
 class MockViewControllerBuilder: ViewControllerBuilder {
-    var _stubbedBlueViewController: UIViewController?
-    var _receivedBlueShowNextAction: (() -> Void)?
-    override func blue(showNextAction: @escaping () -> Void) -> UIViewController {
-        _receivedBlueShowNextAction = showNextAction
-        return _stubbedBlueViewController ?? UIViewController()
-    }
-
     var _stubbedDrivingViewController: UIViewController?
     var _receivedDrivingShowPermitAction: (() -> Void)?
     var _receivedDrivingPresentPermitAction: (() -> Void)?

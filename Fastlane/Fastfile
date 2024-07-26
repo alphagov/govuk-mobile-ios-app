@@ -26,7 +26,7 @@ platform :ios do
     scan(
       scheme: configuration.app_scheme,
       devices: configuration.scan_devices,
-      clean: false,
+      clean: true,
       prelaunch_simulator: true,
       derived_data_path: './build_for_unit_testing',
       output_directory: configuration.app_output_directory,

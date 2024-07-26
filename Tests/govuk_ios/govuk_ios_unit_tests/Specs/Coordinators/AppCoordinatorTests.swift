@@ -1,15 +1,14 @@
 import UIKit
 import Foundation
 import XCTest
-import Factory
 
 @testable import govuk_ios
 
 class AppCoordinatorTests: XCTestCase {
-   
+
     @MainActor
     func test_start_firstLaunch_startsLaunchCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
             navigationController: mockNavigationController
@@ -29,7 +28,7 @@ class AppCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_secondLaunch_startsTabCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
             navigationController: mockNavigationController

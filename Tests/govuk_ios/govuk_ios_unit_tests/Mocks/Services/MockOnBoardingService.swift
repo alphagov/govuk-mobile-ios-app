@@ -4,11 +4,15 @@ import Onboarding
 @testable import govuk_ios
 
 class MockOnBoardingService: OnboardingServiceInterface {
-    
-    var hasSeenOnboarding = false
-    
+
+    var _stubbedHasSeenOnboarding: Bool = false
+    var hasSeenOnboarding: Bool {
+        _stubbedHasSeenOnboarding
+    }
+
+    var _setHasSeenOnboardingCalled: Bool = false
     func setHasSeenOnboarding() {
-        self.hasSeenOnboarding = true
+        _setHasSeenOnboardingCalled = true
     }
     
     func fetchSlides() -> [OnboardingSlide] {

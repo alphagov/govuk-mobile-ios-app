@@ -1,6 +1,5 @@
 import Foundation
 import XCTest
-import Factory
 
 @testable import govuk_ios
 
@@ -17,7 +16,7 @@ class PermitDeeplinkRouteTests: XCTestCase {
 
     @MainActor
     func test_action_presentsPermitViewController() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let subject = PermitDeeplinkRoute(
             coordinatorBuilder: mockCoordinatorBuilder
         )
@@ -39,7 +38,7 @@ class PermitDeeplinkRouteTests: XCTestCase {
 
     @MainActor
     func test_action_passesCorrectParams() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let subject = PermitDeeplinkRoute(
             coordinatorBuilder: mockCoordinatorBuilder
         )
@@ -56,7 +55,7 @@ class PermitDeeplinkRouteTests: XCTestCase {
 
     @MainActor
     func test_action_noParams_doesNothing() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockPermitCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedPermitCoordinator = mockPermitCoordinator
         let subject = PermitDeeplinkRoute(

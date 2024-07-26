@@ -8,15 +8,16 @@ final class OnboardingCoordinatorTests: XCTestCase {
         let mockNavigationController = UINavigationController()
         let expectation = expectation(description: "did finish expecation")
         let sut = OnboardingCoordinator(
-                  navigationController: mockNavigationController,
-                  onboardingService: onboardingService,
-                  dismissAction: {
-            expectation.fulfill()
-        })
+            navigationController: mockNavigationController,
+            onboardingService: onboardingService,
+            dismissAction: {
+                expectation.fulfill()
+            }
+        )
         sut.start()
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func test_start_hasNotSeenOnboarding_doesNotCallDismiss() throws {
         let onboardingService = MockOnBoardingService()
         let mockNavigationController = UINavigationController()
@@ -25,7 +26,9 @@ final class OnboardingCoordinatorTests: XCTestCase {
             onboardingService: onboardingService,
             dismissAction: {
                 XCTFail()
-            })
+            }
+        )
         sut.start()
     }
 }
+

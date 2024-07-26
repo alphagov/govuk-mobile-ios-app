@@ -1,6 +1,5 @@
 import Foundation
 import XCTest
-import Factory
 
 @testable import govuk_ios
 
@@ -17,7 +16,7 @@ class DrivingDeeplinkRouteTests: XCTestCase {
 
     @MainActor
     func test_action_presentsPermitViewController() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let subject = DrivingDeeplinkRoute(
             coordinatorBuilder: mockCoordinatorBuilder
         )

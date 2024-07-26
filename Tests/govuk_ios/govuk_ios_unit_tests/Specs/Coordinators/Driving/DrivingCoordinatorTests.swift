@@ -1,6 +1,5 @@
 import Foundation
 import XCTest
-import Factory
 
 @testable import govuk_ios
 
@@ -8,7 +7,7 @@ class DrivingCoordinatorTests: XCTestCase {
     @MainActor
     func test_start_showsViewController() {
         let navigationController = UINavigationController()
-        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedDrivingViewController = expectedViewController
@@ -28,7 +27,7 @@ class DrivingCoordinatorTests: XCTestCase {
     func test_showPermit_startsPermitCoordinator() {
         let navigationController = UINavigationController()
         let mockViewControllerBuilder = MockViewControllerBuilder()
-        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedDrivingViewController = expectedViewController
 
@@ -52,7 +51,7 @@ class DrivingCoordinatorTests: XCTestCase {
     func test_presentPermit_startsPermitCoordinator() {
         let navigationController = UINavigationController()
         let mockViewControllerBuilder = MockViewControllerBuilder()
-        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: Container())
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedDrivingViewController = expectedViewController
 

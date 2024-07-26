@@ -486,10 +486,10 @@
 		5D41DB5E2C0875460011E691 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				168F6FA92C4FC56B00A0D7F7 /* HomeSectionViewModel.swift */,
+				168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */,
 				5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */,
 				5D41DB5F2C0875520011E691 /* TestViewModel.swift */,
-				168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */,
-				168F6FA92C4FC56B00A0D7F7 /* HomeSectionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -651,13 +651,13 @@
 				5D962D582C29BD0B0038BC0A /* BlueCoordinator.swift */,
 				5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */,
 				5D962D542C29BD0B0038BC0A /* Driving */,
+				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
 				5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */,
 				5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */,
 				5DBE08092C480D9200B58DBE /* OnboardingCoordinator.swift */,
 				5D962D5C2C29BD0B0038BC0A /* RedCoordinator.swift */,
-				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
-				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
+				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -766,10 +766,10 @@
 			isa = PBXGroup;
 			children = (
 				5DBE080B2C4812ED00B58DBE /* BaseViewController.swift */,
-				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
-				5DAD717B2BD250DB0075F648 /* TestViewController.swift */,
 				166BDDB52C330D1C00437AE0 /* HomeViewController.swift */,
+				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
 				1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */,
+				5DAD717B2BD250DB0075F648 /* TestViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1142,10 +1142,7 @@
 				5DBE080C2C4812ED00B58DBE /* BaseViewController.swift in Sources */,
 				5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */,
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
-				5D16E6A22C414E0B00776ABA /* UIAlertController+Convenience.swift in Sources */,
-				5D16E6A42C41524200776ABA /* UIAlertAction+Convenience.swift in Sources */,
 				16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */,
-				5D1353B22BE0D9CE00414441 /* UITabBarItem+Convenience.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
 				5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */,
 				5D8460B52C35A2550066095E /* PermitDeeplinkRoute.swift in Sources */,

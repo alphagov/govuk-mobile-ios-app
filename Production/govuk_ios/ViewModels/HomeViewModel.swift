@@ -17,7 +17,7 @@ struct HomeViewModel {
             HomeSectionViewModel(title: "Scrollable Content")
         ]
     }
-    
+
     func headerBorderColor() -> CGColor {
         UIColor.primaryDivider.cgColor
     }

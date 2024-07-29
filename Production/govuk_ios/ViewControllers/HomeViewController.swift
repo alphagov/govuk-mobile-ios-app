@@ -4,6 +4,13 @@ import UIKit
 class HomeViewController: BaseViewController, UIScrollViewDelegate {
     private let viewModel: HomeViewModel
 
+    private lazy var safeGuide = view.safeAreaLayoutGuide
+    private lazy var portraitWidthConstraint: NSLayoutConstraint = scrollView
+        .widthAnchor
+        .constraint(equalTo: safeGuide.widthAnchor, constant: -32)
+    private lazy var landscapeWidthConstraint: NSLayoutConstraint = scrollView
+        .widthAnchor
+        .constraint(equalTo: safeGuide.widthAnchor)
     private lazy var sectionViews: [UIView] = []
     private lazy var originalScrollOffset = scrollView.contentOffset.y
     lazy var logoImageView: UIImageView = {
@@ -98,6 +105,13 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
 
+    override func viewWillTransition(to size: CGSize,
+                                     with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        setWidthConstraintFromOrientation()
+    }
+
     private func addElements() {
         view.addSubview(logoImageView)
         view.addSubview(headerBorderView)
@@ -158,8 +172,6 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
     }
 
     private func setupConstraints() {
-        let safeGuide = view.safeAreaLayoutGuide
-
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: safeGuide.topAnchor, constant: 20),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -170,7 +182,6 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
             headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
 
             scrollView.topAnchor.constraint(equalTo: headerBorderView.bottomAnchor),
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
@@ -180,5 +191,17 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
+
+        setWidthConstraintFromOrientation()
+    }
+
+    private func setWidthConstraintFromOrientation() {
+        if UIDevice.current.orientation.isLandscape {
+            portraitWidthConstraint.isActive = false
+            landscapeWidthConstraint.isActive = true
+        } else {
+            landscapeWidthConstraint.isActive = false
+            portraitWidthConstraint.isActive = true
+        }
     }
 }

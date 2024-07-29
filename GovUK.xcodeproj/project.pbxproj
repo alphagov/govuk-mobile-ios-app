@@ -44,7 +44,6 @@
 		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
 		5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */; };
 		5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */; };
-		5D37EA0A2C3E865F006B36CB /* TestServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9EF2C3E865F006B36CB /* TestServiceTests.swift */; };
 		5D37EA0B2C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */; };
 		5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F22C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift */; };
 		5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F42C3E865F006B36CB /* DeeplinkDataStoreTests.swift */; };
@@ -62,7 +61,6 @@
 		5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */; };
 		5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */; };
 		5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB5C2C0870020011E691 /* Container+Aliases.swift */; };
-		5D41DB632C08755F0011E691 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB622C08755F0011E691 /* TestService.swift */; };
 		5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB642C087BCE0011E691 /* Container+Services.swift */; };
 		5D41DB6C2C088CD30011E691 /* TestDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6B2C088CD30011E691 /* TestDataStore.swift */; };
 		5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6F2C088FEB0011E691 /* Container+NetworkClients.swift */; };
@@ -199,7 +197,6 @@
 		5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResolvedDeeplinkRoute+Extensions.swift"; sourceTree = "<group>"; };
 		5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestExpectation+Extensions.swift"; sourceTree = "<group>"; };
 		5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
-		5D37E9EF2C3E865F006B36CB /* TestServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestServiceTests.swift; sourceTree = "<group>"; };
 		5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingDeeplinkRouteTests.swift; sourceTree = "<group>"; };
 		5D37E9F22C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermitDeeplinkingRouteTests.swift; sourceTree = "<group>"; };
 		5D37E9F42C3E865F006B36CB /* DeeplinkDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStoreTests.swift; sourceTree = "<group>"; };
@@ -218,7 +215,6 @@
 		5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		5D41DB5C2C0870020011E691 /* Container+Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Aliases.swift"; sourceTree = "<group>"; };
 		5D41DB5F2C0875520011E691 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
-		5D41DB622C08755F0011E691 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
 		5D41DB642C087BCE0011E691 /* Container+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Services.swift"; sourceTree = "<group>"; };
 		5D41DB682C088C580011E691 /* TestNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNetworkClient.swift; sourceTree = "<group>"; };
 		5D41DB6B2C088CD30011E691 /* TestDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataStore.swift; sourceTree = "<group>"; };
@@ -400,7 +396,6 @@
 			children = (
 				5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */,
 				5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */,
-				5D37E9EF2C3E865F006B36CB /* TestServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -493,7 +488,6 @@
 				5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */,
 				160A02672C208B9800FE01EB /* AnalyticsService.swift */,
 				5DBE080D2C49233200B58DBE /* OnboardingService.swift */,
-				5D41DB622C08755F0011E691 /* TestService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1153,7 +1147,6 @@
 				5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */,
 				5D8460B52C35A2550066095E /* PermitDeeplinkRoute.swift in Sources */,
 				5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */,
-				5D41DB632C08755F0011E691 /* TestService.swift in Sources */,
 				5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */,
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
@@ -1234,7 +1227,6 @@
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				168F6FA22C4E9DB500A0D7F7 /* HomeViewControllerTests.swift in Sources */,
 				5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */,
-				5D37EA0A2C3E865F006B36CB /* TestServiceTests.swift in Sources */,
 				168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

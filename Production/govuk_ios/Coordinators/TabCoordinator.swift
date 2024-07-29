@@ -24,6 +24,7 @@ class TabCoordinator: BaseCoordinator {
         controller.tabBar.layer.shadowOffset = .zero
         controller.tabBar.layer.shadowOpacity = 1
         controller.tabBar.layer.shadowColor = UIColor.primaryDivider.cgColor
+        controller.tabBar.tintColor = .linkBlue
         return controller
     }()
 

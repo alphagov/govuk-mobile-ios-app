@@ -3,7 +3,6 @@ import UIKit
 
 struct HomeViewModel {
     let headerLogo: UIImage = UIImage.homeLogo
-    let headerBorderColor: CGColor = UIColor.secondaryBorder.cgColor
     let backgroundColor: UIColor = UIColor.primaryBackground
     var sections: [HomeSectionViewModel] {
         [
@@ -17,5 +16,9 @@ struct HomeViewModel {
             HomeSectionViewModel(title: "Scrollable Content"),
             HomeSectionViewModel(title: "Scrollable Content")
         ]
+    }
+    
+    func headerBorderColor() -> CGColor {
+        UIColor.primaryDivider.cgColor
     }
 }

@@ -37,7 +37,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
     lazy var headerBorderView: UIView = {
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
-        border.layer.borderColor = viewModel.headerBorderColor
+        border.layer.borderColor = viewModel.headerBorderColor()
         border.layer.borderWidth = 1
         border.isHidden = true
         return border
@@ -103,6 +103,8 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         for view in sectionViews {
             view.layer.borderColor = UIColor.secondaryBorder.cgColor
         }
+
+        headerBorderView.layer.borderColor = viewModel.headerBorderColor()
     }
 
     override func viewWillTransition(to size: CGSize,

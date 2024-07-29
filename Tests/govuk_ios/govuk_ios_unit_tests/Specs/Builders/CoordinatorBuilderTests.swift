@@ -1,13 +1,13 @@
 import Foundation
 import XCTest
-
+import Factory
 @testable import govuk_ios
 
 class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_app_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.app(
             navigationController: mockNavigationController
@@ -16,18 +16,18 @@ class CoordinatorBuilderTests: XCTestCase {
         XCTAssert(coordinator is AppCoordinator)
         XCTAssertEqual(coordinator.root, mockNavigationController)
     }
-    
+
     @MainActor
     func test_home_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.home
 
         XCTAssert(coordinator is HomeCoordinator)
     }
-    
+
     @MainActor
     func test_settings_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.settings
 
         XCTAssert(coordinator is SettingsCoordinator)
@@ -35,7 +35,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_launch_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.launch(
             navigationController: mockNavigationController,
@@ -48,7 +48,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_tab_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.tab(
             navigationController: mockNavigationController
@@ -60,7 +60,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_driving_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.driving(
             navigationController: mockNavigationController
@@ -71,7 +71,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_permit_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.permit(
             permitId: "123",
@@ -83,7 +83,7 @@ class CoordinatorBuilderTests: XCTestCase {
 
     @MainActor
     func test_next_returnsExpectedResult() {
-        let subject = CoordinatorBuilder()
+        let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.next(
             title: "Title",
@@ -91,5 +91,17 @@ class CoordinatorBuilderTests: XCTestCase {
         )
 
         XCTAssert(coordinator is NextCoordinator)
+    }
+
+    @MainActor
+    func test_onboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.onboarding(
+            navigationController: mockNavigationController,
+            dismissAction: { }
+        )
+
+        XCTAssert(coordinator is OnboardingCoordinator)
     }
 }

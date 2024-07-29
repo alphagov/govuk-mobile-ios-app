@@ -6,7 +6,7 @@ import XCTest
 class TabCoordinatorTests: XCTestCase {
     @MainActor 
     func test_start_showsTabs() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
         let mockHomeCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
@@ -36,7 +36,7 @@ class TabCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_withKnownURL_selectsTabs() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
         let mockHomeCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
@@ -65,7 +65,7 @@ class TabCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_unknownURL_selectsTabs() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
         let mockHomeCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator

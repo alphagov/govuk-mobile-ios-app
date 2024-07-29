@@ -16,7 +16,7 @@ class DrivingDeeplinkRouteTests: XCTestCase {
 
     @MainActor
     func test_action_presentsPermitViewController() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let subject = DrivingDeeplinkRoute(
             coordinatorBuilder: mockCoordinatorBuilder
         )

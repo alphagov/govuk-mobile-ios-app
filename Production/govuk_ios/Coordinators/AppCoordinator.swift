@@ -15,7 +15,7 @@ class AppCoordinator: BaseCoordinator {
         if initialLaunch {
             startLaunch(url: url)
         } else {
-            showTabs(url: url)
+            startTabs(url: url)
         }
     }
 
@@ -23,14 +23,24 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
             completion: { [weak self] in
-                self?.showTabs(url: url)
+                self?.startOnboarding(url: url)
                 self?.initialLaunch = false
             }
         )
         start(coordinator)
     }
 
-    private func showTabs(url: URL?) {
+    private func startOnboarding(url: URL?) {
+        let coordinator = coordinatorBuilder.onboarding(
+            navigationController: root,
+            dismissAction: { [weak self] in
+                self?.startTabs(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startTabs(url: URL?) {
         let coordinator = coordinatorBuilder.tab(
             navigationController: root
         )

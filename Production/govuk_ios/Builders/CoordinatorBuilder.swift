@@ -1,10 +1,15 @@
 import UIKit
 import Foundation
-
 import Factory
 
 @MainActor
 class CoordinatorBuilder {
+    private let container: Container
+
+    init(container: Container) {
+        self.container = container
+    }
+
     func app(navigationController: UINavigationController) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
@@ -43,6 +48,15 @@ class CoordinatorBuilder {
         TabCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController
+        )
+    }
+
+    func onboarding(navigationController: UINavigationController,
+                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        OnboardingCoordinator(
+            navigationController: navigationController,
+            onboardingService: container.onboardingService.resolve(),
+            dismissAction: dismissAction
         )
     }
 

@@ -10,7 +10,9 @@ class AppSceneDelegate: UIResponder,
         controller.setNavigationBarHidden(true, animated: false)
         return controller
     }()
-    private lazy var coordinatorBuilder = CoordinatorBuilder()
+
+    private lazy var coordinatorBuilder = CoordinatorBuilder(container: .shared)
+
     private lazy var coordinator: BaseCoordinator? = coordinatorBuilder.app(
         navigationController: navigationController
     )

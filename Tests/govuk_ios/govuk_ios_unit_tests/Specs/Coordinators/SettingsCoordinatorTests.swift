@@ -12,7 +12,7 @@ class SettingsCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_setsSettingsViewController() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController

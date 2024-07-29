@@ -1,11 +1,12 @@
 import UIKit
 import Foundation
+import Factory
 
 @testable import govuk_ios
 
 extension CoordinatorBuilder {
     static var mock: MockCoordinatorBuilder {
-        MockCoordinatorBuilder()
+        MockCoordinatorBuilder(container: Container())
     }
 }
 
@@ -75,6 +76,19 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _stubbedSettingsCoordinator: TabItemCoordinator?
     override var settings: any TabItemCoordinator {
         _stubbedSettingsCoordinator ??
+        MockBaseCoordinator(
+            navigationController: .init()
+        )
+    }
+
+    var _stubbedOnboardingCoordinator: BaseCoordinator?
+    var _receivedOnboardingNavigationController: UINavigationController?
+    var _receivedOnboardingDismissAction: (() -> Void)?
+    override func onboarding(navigationController: UINavigationController,
+                             dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedOnboardingNavigationController = navigationController
+        _receivedOnboardingDismissAction = dismissAction
+        return _stubbedOnboardingCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )

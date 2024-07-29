@@ -4,15 +4,6 @@ import Logging
 import Factory
 
 extension Container {
-    var testService: Factory<TestServiceInterface> {
-        Factory(self) {
-            TestService(
-                dataStore: self.testDataStore(),
-                networkClient: self.testNetworkClient()
-            )
-        }
-    }
-
     var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             AnalyticsService(
@@ -21,5 +12,13 @@ extension Container {
             )
         }
         .scope(.singleton)
+    }
+
+    var onboardingService: Factory<OnboardingServiceInterface> {
+        Factory(self) {
+            OnboardingService(
+                userDefaults: .standard
+            )
+        }
     }
 }

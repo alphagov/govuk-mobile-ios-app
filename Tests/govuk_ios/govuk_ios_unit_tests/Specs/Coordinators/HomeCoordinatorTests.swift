@@ -11,7 +11,7 @@ class HomeCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_setsHomeViewController() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder()
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedHomeViewController = expectedViewController

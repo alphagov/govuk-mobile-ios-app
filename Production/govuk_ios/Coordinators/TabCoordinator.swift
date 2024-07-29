@@ -20,6 +20,10 @@ class TabCoordinator: BaseCoordinator {
         controller.tabBar.backgroundColor = .primaryBackground
         appearance.configureWithOpaqueBackground()
         controller.tabBar.standardAppearance = appearance
+        controller.tabBar.layer.shadowRadius = 0.8
+        controller.tabBar.layer.shadowOffset = .zero
+        controller.tabBar.layer.shadowOpacity = 1
+        controller.tabBar.layer.shadowColor = UIColor.primaryDivider.cgColor
         return controller
     }()
 

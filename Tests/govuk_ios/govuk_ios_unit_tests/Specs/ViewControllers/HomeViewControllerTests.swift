@@ -29,7 +29,7 @@ class HomeViewControllerTests: XCTestCase {
         let viewModel = HomeViewModel()
         let subject = HomeViewController(viewModel: viewModel)
         XCTAssertTrue(subject.headerBorderView.isHidden)
-        XCTAssertEqual(subject.headerBorderView.layer.borderColor, UIColor.secondaryBorder.cgColor)
+        XCTAssertEqual(subject.headerBorderView.layer.borderColor, UIColor.primaryDivider.cgColor)
         XCTAssertEqual(subject.headerBorderView.layer.borderWidth, 1)
     }
     

@@ -22,7 +22,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 15
+        stackView.spacing = 16
         return stackView
     }()
     lazy var scrollView: UIScrollView = {
@@ -31,6 +31,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         scrollView.addSubview(stackView)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInset.top = logoImageView.frame.size.height
+        scrollView.contentInset.bottom = 32
         return scrollView
     }()
     lazy var headerBorderView: UIView = {
@@ -70,7 +71,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
         let animationMaxBound = originalScrollOffset + 30
         let animationRange = originalScrollOffset...animationMaxBound
 
-        if scrollOffset >= 0 {
+        if scrollOffset >= -10 {
             headerBorderView.isHidden = false
         } else {
             headerBorderView.isHidden = true
@@ -134,7 +135,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
             sectionView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
             sectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
             sectionTitleLabel.topAnchor.constraint(equalTo: sectionView.topAnchor,
-                                              constant: 15).isActive = true
+                                                   constant: 15).isActive = true
             sectionTitleLabel.centerXAnchor.constraint(
                 equalTo: sectionView.centerXAnchor
             ).isActive = true
@@ -178,7 +179,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
-                                            constant: 5),
+                                                  constant: 5),
             headerBorderView.heightAnchor.constraint(equalToConstant: 0.33),
             headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
 
@@ -186,7 +187,7 @@ class HomeViewController: BaseViewController, UIScrollViewDelegate {
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10),
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),

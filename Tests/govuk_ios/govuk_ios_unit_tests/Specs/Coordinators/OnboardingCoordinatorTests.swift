@@ -9,7 +9,7 @@ final class OnboardingCoordinatorTests: XCTestCase {
         let onboardingService = MockOnboardingService()
         onboardingService._stubbedHasSeenOnboarding = true
         let mockNavigationController = UINavigationController()
-        let expectation = expectation(description: UUID().uuidString)
+        let expectation = expectation()
         let sut = OnboardingCoordinator(
             navigationController: mockNavigationController,
             onboardingService: onboardingService,
@@ -40,7 +40,7 @@ final class OnboardingCoordinatorTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         mockOnboardingService._stubbedHasSeenOnboarding = true
         let mockNavigationController = UINavigationController()
-        let expectation = expectation(description: UUID().uuidString)
+        let expectation = expectation()
         let sut = OnboardingCoordinator(
             navigationController: mockNavigationController,
             onboardingService: mockOnboardingService,

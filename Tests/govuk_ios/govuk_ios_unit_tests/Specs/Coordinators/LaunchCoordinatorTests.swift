@@ -8,7 +8,7 @@ class LaunchCoordinatorTests: XCTestCase {
     func test_start_launchCompletion_callsCompletion() {
         let mockNavigationController = UINavigationController()
         let mockViewControllerBuilder = ViewControllerBuilder.mock
-        let expectation = expectation(description: #function)
+        let expectation = expectation()
         let subject = LaunchCoordinator(
             navigationController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,

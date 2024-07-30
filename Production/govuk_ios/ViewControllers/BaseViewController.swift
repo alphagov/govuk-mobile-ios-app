@@ -16,9 +16,9 @@ class BaseViewController: UIViewController {
         view.layoutMargins.left = 16
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        self.tabBarController?.tabBar.layer.shadowColor = UIColor.primaryDivider.cgColor
-    }
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//
+//        self.tabBarController?.tabBar.layer.shadowColor = UIColor.primaryDivider.cgColor
+//    }
 }

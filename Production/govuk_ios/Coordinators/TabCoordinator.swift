@@ -17,13 +17,13 @@ class TabCoordinator: BaseCoordinator {
     private lazy var tabController = {
         let controller = UITabBarController()
         var appearance = UITabBarAppearance()
-        controller.tabBar.backgroundColor = .primaryBackground
-        appearance.configureWithOpaqueBackground()
+        appearance.configureWithTransparentBackground()
+        appearance.shadowColor = UIColor.primaryDivider
+        appearance.backgroundColor = UIColor.govUK.fills.surfaceFixedContainer
         controller.tabBar.standardAppearance = appearance
-        controller.tabBar.layer.shadowRadius = 0.8
-        controller.tabBar.layer.shadowOffset = .zero
-        controller.tabBar.layer.shadowOpacity = 1
-        controller.tabBar.layer.shadowColor = UIColor.primaryDivider.cgColor
+        if #available(iOS 15.0, *) {
+            controller.tabBar.scrollEdgeAppearance = appearance
+        }
         controller.tabBar.tintColor = .linkBlue
         return controller
     }()

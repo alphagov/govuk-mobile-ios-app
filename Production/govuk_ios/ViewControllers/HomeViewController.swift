@@ -5,7 +5,6 @@ class HomeViewController: BaseViewController,
                           UIScrollViewDelegate {
     private let viewModel: HomeViewModel
 
-    private lazy var safeGuide = view.safeAreaLayoutGuide
     private lazy var sectionViews: [UIView] = []
     private lazy var originalScrollOffset = scrollView.contentOffset.y
     lazy var logoImageView: UIImageView = {
@@ -27,6 +26,7 @@ class HomeViewController: BaseViewController,
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInset.top = logoImageView.frame.size.height
         scrollView.contentInset.bottom = 32
+        scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
     }()
     lazy var headerBorderView: UIView = {
@@ -162,7 +162,10 @@ class HomeViewController: BaseViewController,
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: safeGuide.topAnchor, constant: 20),
+            logoImageView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 20
+            ),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
@@ -171,7 +174,7 @@ class HomeViewController: BaseViewController,
             headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
 
             scrollView.topAnchor.constraint(equalTo: headerBorderView.bottomAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
 
@@ -181,6 +184,5 @@ class HomeViewController: BaseViewController,
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor)
         ])
-
     }
 }

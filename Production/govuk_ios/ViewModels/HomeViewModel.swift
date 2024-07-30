@@ -3,7 +3,7 @@ import UIKit
 
 struct HomeViewModel {
     let headerLogo: UIImage = UIImage.homeLogo
-    let backgroundColor: UIColor = UIColor.primaryBackground
+    let backgroundColor: UIColor = UIColor.govUK.fills.surfaceBackground
     var sections: [HomeSectionViewModel] {
         [
             HomeSectionViewModel(

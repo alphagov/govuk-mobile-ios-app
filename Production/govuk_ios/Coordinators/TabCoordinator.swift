@@ -14,15 +14,7 @@ class TabCoordinator: BaseCoordinator {
         ]
     }
 
-    private lazy var tabController = {
-        let controller = UITabBarController()
-        controller.tabBar.standardAppearance = .govUK
-        if #available(iOS 15.0, *) {
-            controller.tabBar.scrollEdgeAppearance = .govUK
-        }
-        return controller
-    }()
-
+    private lazy var tabController = UITabBarController.govUK
     private let coordinatorBuilder: CoordinatorBuilder
 
     init(coordinatorBuilder: CoordinatorBuilder,

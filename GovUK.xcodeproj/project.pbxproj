@@ -12,6 +12,8 @@
 		160A02642C208B0B00FE01EB /* HTTPLogging in Frameworks */ = {isa = PBXBuildFile; productRef = 160A02632C208B0B00FE01EB /* HTTPLogging */; };
 		160A02662C208B0B00FE01EB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 160A02652C208B0B00FE01EB /* Logging */; };
 		160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160A02672C208B9800FE01EB /* AnalyticsService.swift */; };
+		160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7542C5B0401008F97AF /* SettingsViewModel.swift */; };
+		160EA7572C5B0456008F97AF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7562C5B0456008F97AF /* SettingsScreen.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
 		162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */; };
 		1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceModel.swift */; };
@@ -178,6 +180,8 @@
 
 /* Begin PBXFileReference section */
 		160A02672C208B9800FE01EB /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		160EA7542C5B0401008F97AF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		160EA7562C5B0456008F97AF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsPreferenceStore.swift; sourceTree = "<group>"; };
 		1631DE982C2B0D020050CB9D /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -497,6 +501,7 @@
 				168F6FA92C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift */,
 				5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */,
 				5D41DB5F2C0875520011E691 /* TestViewModel.swift */,
+				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -925,6 +930,7 @@
 				1631DE982C2B0D020050CB9D /* DeviceModel.swift */,
 				16F15FB82C59A4430094E2D8 /* ScreenTypes.swift */,
 				16F15FBA2C59A4DB0094E2D8 /* HomeScreen.swift */,
+				160EA7562C5B0456008F97AF /* SettingsScreen.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1189,6 +1195,7 @@
 				5DD036852C5A577C00EEF11E /* HomeNavigationBar.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
+				160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */,
 				5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */,
 				5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */,
 				5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */,
@@ -1216,6 +1223,7 @@
 				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
+				160EA7572C5B0456008F97AF /* SettingsScreen.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
 				5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,

@@ -5,19 +5,22 @@ class SettingsCoordinator: TabItemCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
+    private let analyticsService: AnalyticsServiceInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
-         deeplinkStore: DeeplinkDataStore) {
+         deeplinkStore: DeeplinkDataStore,
+         analyticsService: AnalyticsServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
+        self.analyticsService = analyticsService
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.settings()
+        let viewController = viewControllerBuilder.settings(analyticsService: analyticsService)
         set([viewController], animated: false)
     }
 

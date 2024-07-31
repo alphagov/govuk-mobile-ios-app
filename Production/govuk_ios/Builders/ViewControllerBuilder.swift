@@ -48,7 +48,10 @@ class ViewControllerBuilder {
         )
     }
 
-    func settings() -> UIViewController {
-        return SettingsViewController()
+    func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+        let viewModel = SettingsViewModel(analyticsService: analyticsService)
+        return SettingsViewController(
+            viewModel: viewModel
+        )
     }
 }

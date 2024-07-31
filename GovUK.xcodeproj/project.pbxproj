@@ -127,6 +127,7 @@
 		5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */; };
 		5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */; };
 		5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */; };
+		5DD036852C5A577C00EEF11E /* HomeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD036842C5A577C00EEF11E /* HomeNavigationBar.swift */; };
 		5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* TestNetworkClient.swift */; };
 		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
 		5DE970542C297652009D66C4 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970532C297652009D66C4 /* AppEvent.swift */; };
@@ -284,6 +285,7 @@
 		5DC04B932C2D72E80036EF2B /* MockViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewControllerBuilder.swift; sourceTree = "<group>"; };
 		5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
 		5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccessibilityManager.swift; sourceTree = "<group>"; };
+		5DD036842C5A577C00EEF11E /* HomeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationBar.swift; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DE970532C297652009D66C4 /* AppEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
 		5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Convenience.swift"; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 			children = (
 				5D79AEBF2C32B9180061F344 /* AnimationView.swift */,
 				5D9E67C72C5A2E1700DB7877 /* DividerView.swift */,
+				5DD036842C5A577C00EEF11E /* HomeNavigationBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */,
+				5DD036852C5A577C00EEF11E /* HomeNavigationBar.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */,

@@ -5,10 +5,10 @@ class HomeViewController: BaseViewController,
                           UIScrollViewDelegate {
     private lazy var sectionViews: [UIView] = []
     private lazy var originalScrollOffset = scrollView.contentOffset.y
-    lazy var logoImageView: UIImageView = {
-        let uiImageView = UIImageView(image: .homeLogo)
-        uiImageView.translatesAutoresizingMaskIntoConstraints = false
-        return uiImageView
+    private lazy var navigationBar: HomeNavigationBar = {
+        let localView = HomeNavigationBar()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
     }()
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -22,15 +22,10 @@ class HomeViewController: BaseViewController,
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.contentInset.top = logoImageView.frame.size.height
+        scrollView.contentInset.top = 96
         scrollView.contentInset.bottom = 32
         scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
-    }()
-    lazy var headerBorderView: UIView = {
-        let border = DividerView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        return border
     }()
 
     private let viewModel: HomeViewModel
@@ -54,30 +49,39 @@ class HomeViewController: BaseViewController,
 
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
-        view.addSubview(logoImageView)
-        view.addSubview(headerBorderView)
         view.addSubview(scrollView)
+        view.addSubview(navigationBar)
+//        view.addSubview(logoImageView)
+//        view.addSubview(headerBorderView)
         addSections()
     }
 
     private func configureConstraints() {
+        let constant = navigationBar.heightAnchor.constraint(equalToConstant: 80)
+        constant.priority = .defaultLow
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 20
-            ),
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            logoImageView.topAnchor.constraint(
+//                equalTo: view.safeAreaLayoutGuide.topAnchor,
+//                constant: 20
+//            ),
+//            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//
+//            headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
+//                                                  constant: 5),
+//            headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor),
+            navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor),
+            navigationBar.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+            navigationBar.heightAnchor.constraint(lessThanOrEqualToConstant: 80),
+            constant,
 
-            headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
-                                                  constant: 5),
-            headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-
-            scrollView.topAnchor.constraint(equalTo: headerBorderView.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
 
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -85,40 +89,40 @@ class HomeViewController: BaseViewController,
         ])
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let scrollOffset = scrollView.contentOffset.y
-        animateLogo(scrollOffset: scrollOffset)
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let scrollOffset = scrollView.contentOffset.y
+//        animateLogo(scrollOffset: scrollOffset)
+//    }
+//
+//    private func animateLogo(scrollOffset: Double) {
+//        let animationMaxBound = originalScrollOffset + 30
+//        let animationRange = originalScrollOffset...animationMaxBound
+//
+//        if scrollOffset >= 0 {
+//            headerBorderView.isHidden = false
+//        } else {
+//            headerBorderView.isHidden = true
+//        }
+//
+//        if animationRange.contains(scrollOffset) {
+//            scaleLogo(scrollOffset: scrollOffset,
+//                      animationMaxBound: animationMaxBound)
+//        } else if scrollOffset <= originalScrollOffset {
+//            logoImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+//        } else {
+//            scaleLogo(scrollOffset: animationMaxBound,
+//                      animationMaxBound: animationMaxBound)
+//        }
+//    }
 
-    private func animateLogo(scrollOffset: Double) {
-        let animationMaxBound = originalScrollOffset + 30
-        let animationRange = originalScrollOffset...animationMaxBound
-
-        if scrollOffset >= -10 {
-            headerBorderView.isHidden = false
-        } else {
-            headerBorderView.isHidden = true
-        }
-
-        if animationRange.contains(scrollOffset) {
-            scaleLogo(scrollOffset: scrollOffset,
-                      animationMaxBound: animationMaxBound)
-        } else if scrollOffset <= originalScrollOffset {
-            logoImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-        } else {
-            scaleLogo(scrollOffset: animationMaxBound,
-                      animationMaxBound: animationMaxBound)
-        }
-    }
-
-    private func scaleLogo(scrollOffset: Double, animationMaxBound: Double) {
-        let animationRangeArray = [Int](Int(originalScrollOffset)...Int(animationMaxBound))
-        let scaleValue = animationRangeArray.firstIndex(of: Int(scrollOffset))
-        let scaleMultiplier = 0.7
-        let scaleBy = 1 - ((Double(scaleValue!) / 100.0) * scaleMultiplier)
-
-        logoImageView.transform = CGAffineTransform(scaleX: scaleBy, y: scaleBy)
-    }
+//    private func scaleLogo(scrollOffset: Double, animationMaxBound: Double) {
+//        let animationRangeArray = [Int](Int(originalScrollOffset)...Int(animationMaxBound))
+//        let scaleValue = animationRangeArray.firstIndex(of: Int(scrollOffset))
+//        let scaleMultiplier = 0.7
+//        let scaleBy = 1 - ((Double(scaleValue!) / 100.0) * scaleMultiplier)
+//
+//        logoImageView.transform = CGAffineTransform(scaleX: scaleBy, y: scaleBy)
+//    }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

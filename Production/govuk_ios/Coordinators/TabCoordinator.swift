@@ -16,15 +16,10 @@ class TabCoordinator: BaseCoordinator {
 
     private lazy var tabController = {
         let controller = UITabBarController()
-        var appearance = UITabBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.shadowColor = UIColor.primaryDivider
-        appearance.backgroundColor = UIColor.govUK.fills.surfaceFixedContainer
-        controller.tabBar.standardAppearance = appearance
+        controller.tabBar.standardAppearance = .govUK
         if #available(iOS 15.0, *) {
-            controller.tabBar.scrollEdgeAppearance = appearance
+            controller.tabBar.scrollEdgeAppearance = .govUK
         }
-        controller.tabBar.tintColor = .linkBlue
         return controller
     }()
 

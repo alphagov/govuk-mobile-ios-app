@@ -3,11 +3,12 @@ import Foundation
 
 extension UITabBarItem {
     static var home: UITabBarItem {
-        .init(
+        let item = UITabBarItem(
             title: "Home",
             image: UIImage(systemName: "house"),
             selectedImage: nil
         )
+        return item
     }
 
     static var settings: UITabBarItem {

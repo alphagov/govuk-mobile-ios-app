@@ -3,12 +3,10 @@ import UIKit
 
 class HomeViewController: BaseViewController,
                           UIScrollViewDelegate {
-    private let viewModel: HomeViewModel
-
     private lazy var sectionViews: [UIView] = []
     private lazy var originalScrollOffset = scrollView.contentOffset.y
     lazy var logoImageView: UIImageView = {
-        let uiImageView = UIImageView(image: viewModel.headerLogo)
+        let uiImageView = UIImageView(image: .homeLogo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
         return uiImageView
     }()
@@ -35,6 +33,8 @@ class HomeViewController: BaseViewController,
         return border
     }()
 
+    private let viewModel: HomeViewModel
+
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -48,10 +48,41 @@ class HomeViewController: BaseViewController,
         super.viewDidLoad()
         scrollView.delegate = self
 
-        addElements()
-        setupConstraints()
+        configureUI()
+        configureConstraints()
+    }
 
-        view.backgroundColor = viewModel.backgroundColor
+    private func configureUI() {
+        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        view.addSubview(logoImageView)
+        view.addSubview(headerBorderView)
+        view.addSubview(scrollView)
+        addSections()
+    }
+
+    private func configureConstraints() {
+        NSLayoutConstraint.activate([
+            logoImageView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 20
+            ),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
+                                                  constant: 5),
+            headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
+
+            scrollView.topAnchor.constraint(equalTo: headerBorderView.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor)
+        ])
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -97,11 +128,7 @@ class HomeViewController: BaseViewController,
         }
     }
 
-    private func addElements() {
-        view.addSubview(logoImageView)
-        view.addSubview(headerBorderView)
-        view.addSubview(scrollView)
-
+    private func addSections() {
         for section in viewModel.sections {
             let sectionView = sectionView(
                 borderColor: section.borderColor,
@@ -153,30 +180,5 @@ class HomeViewController: BaseViewController,
         view.layer.borderColor = borderColor
         view.backgroundColor = backgroundColor
         return view
-    }
-
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 20
-            ),
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
-                                                  constant: 5),
-            headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
-
-            scrollView.topAnchor.constraint(equalTo: headerBorderView.bottomAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
-
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor)
-        ])
     }
 }

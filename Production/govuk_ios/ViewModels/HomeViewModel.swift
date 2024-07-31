@@ -2,8 +2,6 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
-    let headerLogo: UIImage = UIImage.homeLogo
-    let backgroundColor: UIColor = UIColor.govUK.fills.surfaceBackground
     var sections: [HomeSectionViewModel] {
         [
             HomeSectionViewModel(
@@ -16,9 +14,5 @@ struct HomeViewModel {
             HomeSectionViewModel(title: "Scrollable Content"),
             HomeSectionViewModel(title: "Scrollable Content")
         ]
-    }
-
-    func headerBorderColor() -> CGColor {
-        UIColor.primaryDivider.cgColor
     }
 }

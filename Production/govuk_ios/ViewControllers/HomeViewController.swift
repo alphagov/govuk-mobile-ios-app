@@ -30,11 +30,8 @@ class HomeViewController: BaseViewController,
         return scrollView
     }()
     lazy var headerBorderView: UIView = {
-        let border = UIView()
+        let border = DividerView()
         border.translatesAutoresizingMaskIntoConstraints = false
-        border.layer.borderColor = viewModel.headerBorderColor()
-        border.layer.borderWidth = 1
-        border.isHidden = true
         return border
     }()
 
@@ -98,8 +95,6 @@ class HomeViewController: BaseViewController,
         for view in sectionViews {
             view.layer.borderColor = UIColor.secondaryBorder.cgColor
         }
-
-        headerBorderView.layer.borderColor = viewModel.headerBorderColor()
     }
 
     private func addElements() {
@@ -170,7 +165,6 @@ class HomeViewController: BaseViewController,
 
             headerBorderView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
                                                   constant: 5),
-            headerBorderView.heightAnchor.constraint(equalToConstant: 0.33),
             headerBorderView.widthAnchor.constraint(equalTo: view.widthAnchor),
 
             scrollView.topAnchor.constraint(equalTo: headerBorderView.bottomAnchor),

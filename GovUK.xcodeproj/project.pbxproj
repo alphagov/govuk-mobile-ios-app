@@ -28,6 +28,8 @@
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
+		16F15FB92C59A4430094E2D8 /* ScreenTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F15FB82C59A4430094E2D8 /* ScreenTypes.swift */; };
+		16F15FBB2C59A4DB0094E2D8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F15FBA2C59A4DB0094E2D8 /* HomeScreen.swift */; };
 		4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */; };
 		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
@@ -192,6 +194,8 @@
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
+		16F15FB82C59A4430094E2D8 /* ScreenTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTypes.swift; sourceTree = "<group>"; };
+		16F15FBA2C59A4DB0094E2D8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
@@ -919,6 +923,8 @@
 				5DE970532C297652009D66C4 /* AppEvent.swift */,
 				5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */,
 				1631DE982C2B0D020050CB9D /* DeviceModel.swift */,
+				16F15FB82C59A4430094E2D8 /* ScreenTypes.swift */,
+				16F15FBA2C59A4DB0094E2D8 /* HomeScreen.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1223,6 +1229,7 @@
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
 				5DBE08082C480CA700B58DBE /* UITabBarItem+Convenience.swift in Sources */,
+				16F15FBB2C59A4DB0094E2D8 /* HomeScreen.swift in Sources */,
 				5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */,
 				5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */,
 				5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */,
@@ -1241,6 +1248,7 @@
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,
+				16F15FB92C59A4430094E2D8 /* ScreenTypes.swift in Sources */,
 				5DE970542C297652009D66C4 /* AppEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -41,6 +41,7 @@ class HomeViewController: BaseViewController,
         super.viewDidLoad()
         configureUI()
         configureConstraints()
+        viewModel.logScreen()
         scrollView.delegate = self
     }
 

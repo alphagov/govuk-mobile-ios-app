@@ -2,9 +2,12 @@ import Logging
 import GAnalytics
 import UIKit
 
+typealias ScreenType = Logging.ScreenType
+
 protocol AnalyticsServiceInterface {
     func configure()
     func track(event: AppEvent)
+    func trackScreen(_ screen: LoggableScreenV2)
 
     func setAcceptedAnalytics(accepted: Bool)
     var permissionState: AnalyticsPermissionState { get }
@@ -30,6 +33,10 @@ class AnalyticsService: AnalyticsServiceInterface {
             event,
             parameters: event.params ?? [:]
         )
+    }
+
+    func trackScreen(_ screen: LoggableScreenV2) {
+        analytics.trackScreen(screen, parameters: [:])
     }
 
     func setAcceptedAnalytics(accepted: Bool) {

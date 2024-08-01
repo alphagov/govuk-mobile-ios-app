@@ -42,7 +42,6 @@ class HomeViewController: BaseViewController,
         configureUI()
         configureConstraints()
         scrollView.delegate = self
-        dump(scrollView)
     }
 
     private func configureUI() {

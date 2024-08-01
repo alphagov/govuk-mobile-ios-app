@@ -1,10 +1,10 @@
 import Foundation
 import UIKit
 
-struct HomeSectionViewModel {
+struct HomeWidgetViewModel {
     let title: String
     var link: [String: String]?
     let linkColor = UIColor.linkBlue
-    let borderColor = UIColor.secondaryBorder.cgColor
+    let borderColor = UIColor.secondaryBorder
     let backgroundColor = UIColor.secondaryBackground
 }

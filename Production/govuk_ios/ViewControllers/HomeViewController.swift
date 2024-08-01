@@ -3,7 +3,6 @@ import UIKit
 
 class HomeViewController: BaseViewController,
                           UIScrollViewDelegate {
-    private lazy var sectionViews: [UIView] = []
     private lazy var navigationBar: HomeNavigationBar = {
         let localView = HomeNavigationBar()
         localView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,71 +75,9 @@ class HomeViewController: BaseViewController,
         navigationBar.handleScroll(scrollView: scrollView)
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        sectionViews.forEach {
-            $0.layer.borderColor = UIColor.secondaryBorder.cgColor
-        }
-    }
-
     private func addSections() {
-        for section in viewModel.sections {
-            let sectionView = sectionView(
-                borderColor: section.borderColor,
-                backgroundColor: section.backgroundColor
-            )
-            let sectionTitleLabel = sectionTitleLabel(
-                title: section.title
-            )
-
-            sectionView.addSubview(sectionTitleLabel)
-            stackView.addArrangedSubview(sectionView)
-            sectionViews.append(sectionView)
-
-            sectionView.heightAnchor.constraint(
-                equalToConstant: 200
-            ).isActive = true
-            sectionTitleLabel.topAnchor.constraint(
-                equalTo: sectionView.topAnchor,
-                constant: 15
-            ).isActive = true
-            sectionTitleLabel.centerXAnchor.constraint(
-                equalTo: sectionView.centerXAnchor
-            ).isActive = true
-
-            if section.link != nil {
-                let linkLabel = UILabel()
-                sectionView.addSubview(linkLabel)
-                linkLabel.translatesAutoresizingMaskIntoConstraints = false
-                linkLabel.text = section.link!["text"]
-                linkLabel.textColor = section.linkColor
-                linkLabel.font = UIFont.systemFont(ofSize: 18)
-                linkLabel.topAnchor.constraint(
-                    equalTo: sectionTitleLabel.topAnchor,
-                    constant: 30
-                ).isActive = true
-                linkLabel.centerXAnchor.constraint(
-                    equalTo: sectionView.centerXAnchor
-                ).isActive = true
-            }
-        }
-    }
-
-    private func sectionTitleLabel(title: String) -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = title
-        label.font = UIFont.systemFont(ofSize: 18)
-        return label
-    }
-
-    private func sectionView(borderColor: CGColor, backgroundColor: UIColor) -> UIView {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 10
-        view.layer.borderColor = borderColor
-        view.backgroundColor = backgroundColor
-        return view
+        viewModel.sections.lazy
+            .map(HomeWidgetView.init)
+            .forEach(stackView.addArrangedSubview)
     }
 }

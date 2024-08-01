@@ -12,6 +12,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             viewModel: viewModel
         )
         let navigationController = UINavigationController(rootViewController: subject)
+        navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.overrideUserInterfaceStyle = .light
         VerifySnapshotInWindow(navigationController)
     }
@@ -22,6 +23,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             viewModel: viewModel
         )
         let navigationController = UINavigationController(rootViewController: subject)
+        navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.overrideUserInterfaceStyle = .dark
         VerifySnapshotInWindow(navigationController)
     }

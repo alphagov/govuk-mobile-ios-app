@@ -19,7 +19,6 @@
 		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
 		1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */; };
 		1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */; };
-		168F6FA22C4E9DB500A0D7F7 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA12C4E9DB500A0D7F7 /* HomeViewControllerTests.swift */; };
 		168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */; };
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
 		168F6FAA2C4FC56B00A0D7F7 /* HomeSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* HomeSectionViewModel.swift */; };
@@ -71,6 +70,7 @@
 		5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
+		5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */; };
 		5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5D51D15F2C245A1B008AC8E4 /* PrivacyInfo.xcprivacy */; };
 		5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */; };
 		5D54A8322BFCBF50003D0C21 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8312BFCBF50003D0C21 /* main.swift */; };
@@ -182,7 +182,6 @@
 		166BDDB52C330D1C00437AE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
-		168F6FA12C4E9DB500A0D7F7 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTests.swift; sourceTree = "<group>"; };
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		168F6FA92C4FC56B00A0D7F7 /* HomeSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionViewModel.swift; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		5D41DB7B2C09BF340011E691 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_snapshot_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilder.swift; sourceTree = "<group>"; };
+		5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		5D51D15F2C245A1B008AC8E4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5D54A8312BFCBF50003D0C21 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -371,8 +371,9 @@
 				5DE970552C297CF3009D66C4 /* Analytics */,
 				5D41DB662C087C520011E691 /* Container */,
 				5D9CF3962C38492500317B70 /* Deeplinking */,
+				5D51C8362C5BB9E80011ABE9 /* Foundation */,
 				5DBE08032C480CA700B58DBE /* UIKit */,
-				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
+				5DBE07FE2C480CA700B58DBE /* Views */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -435,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				5D37E9F62C3E865F006B36CB /* BaseViewControllerTests.swift */,
-				168F6FA12C4E9DB500A0D7F7 /* HomeViewControllerTests.swift */,
 				168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */,
 			);
 			path = ViewControllers;
@@ -557,6 +557,14 @@
 				5DC04B8E2C2D71400036EF2B /* ViewControllerBuilder.swift */,
 			);
 			path = Builders;
+			sourceTree = "<group>";
+		};
+		5D51C8362C5BB9E80011ABE9 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		5D54A8392BFCD881003D0C21 /* SupportingFiles */ = {
@@ -842,11 +850,11 @@
 				5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */,
 				5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */,
 				5DBE08012C480CA700B58DBE /* UINavigationController+Convenience.swift */,
+				5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */,
 				5D9E67C12C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift */,
 				5D9E67C92C5A3BA600DB7877 /* UITabBarController+GOVUK.swift */,
 				5DBE08022C480CA700B58DBE /* UITabBarItem+Convenience.swift */,
 				5D9E67C32C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift */,
-				5DBE07FE2C480CA700B58DBE /* Views */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1172,6 +1180,7 @@
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
+				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
 				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
@@ -1249,7 +1258,6 @@
 				5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */,
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
-				168F6FA22C4E9DB500A0D7F7 /* HomeViewControllerTests.swift in Sources */,
 				5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */,
 				168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */,
 			);

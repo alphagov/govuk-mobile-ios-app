@@ -43,6 +43,7 @@ class HomeViewController: BaseViewController,
         configureUI()
         configureConstraints()
         scrollView.delegate = self
+        dump(scrollView)
     }
 
     private func configureUI() {
@@ -141,11 +142,5 @@ class HomeViewController: BaseViewController,
         view.layer.borderColor = borderColor
         view.backgroundColor = backgroundColor
         return view
-    }
-}
-
-extension UIScrollView {
-    var verticalScroll: CGFloat {
-        adjustedContentInset.top + contentOffset.y
     }
 }

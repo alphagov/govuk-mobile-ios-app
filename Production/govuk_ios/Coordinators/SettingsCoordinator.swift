@@ -2,15 +2,15 @@ import UIKit
 import Foundation
 
 class SettingsCoordinator: TabItemCoordinator {
-    private let coodinatorBuilder: CoordinatorBuilder
+    private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
 
     init(navigationController: UINavigationController,
-         coodinatorBuilder: CoordinatorBuilder,
+         coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore) {
-        self.coodinatorBuilder = coodinatorBuilder
+        self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         super.init(navigationController: navigationController)

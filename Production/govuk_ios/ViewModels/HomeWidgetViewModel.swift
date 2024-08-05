@@ -6,5 +6,5 @@ struct HomeWidgetViewModel {
     var link: [String: String]?
     let linkColor = UIColor.govUK.text.link
     let borderColor = UIColor.secondaryBorder
-    let backgroundColor = UIColor.secondaryBackground
+    let backgroundColor = UIColor.govUK.fills.surfaceCard
 }

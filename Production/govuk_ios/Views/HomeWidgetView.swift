@@ -54,22 +54,16 @@ class HomeWidgetView: UIView {
     }
 
     private func configureConstraints() {
-        heightAnchor.constraint(
-            equalToConstant: 200
-        ).isActive = true
-        stackView.topAnchor.constraint(
-            equalTo: topAnchor,
-            constant: 15
-        ).isActive = true
-        stackView.rightAnchor.constraint(
-            equalTo: rightAnchor
-        ).isActive = true
-        stackView.bottomAnchor.constraint(
-            lessThanOrEqualTo: bottomAnchor
-        ).isActive = true
-        stackView.leftAnchor.constraint(
-            equalTo: leftAnchor
-        ).isActive = true
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 200),
+            stackView.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: 15
+            ),
+            stackView.rightAnchor.constraint(equalTo: rightAnchor),
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
+            stackView.leftAnchor.constraint(equalTo: leftAnchor)
+        ])
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -6,7 +6,7 @@ import Logging
 @testable import govuk_ios
 
 final class AnalyticsServiceTests: XCTestCase {
-    let analyticsService = MockAnalyticsService()
+    let analyticsService = MockLoggingAnalyticsService()
     let analyticsPreferenceStore = MockAnalyticsPreferenceStore()
     
     func test_track_logsEvents() {

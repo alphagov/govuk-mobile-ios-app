@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import UIComponents
 
 class HomeWidgetView: UIView {
     private lazy var stackView: UIStackView = {
@@ -12,14 +13,14 @@ class HomeWidgetView: UIView {
     }()
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
-        localView.font = UIFont.systemFont(ofSize: 18)
+        localView.font = UIFont.govUK.body
         return localView
     }()
     private lazy var linkLabel: UILabel = {
         let localView = UILabel()
         localView.text = viewModel.link?["text"]
-        localView.textColor = viewModel.linkColor
-        localView.font = UIFont.systemFont(ofSize: 18)
+        localView.textColor = UIColor.govUK.text.link
+        localView.font = UIFont.govUK.body
         return localView
     }()
 
@@ -29,7 +30,7 @@ class HomeWidgetView: UIView {
         self.viewModel = viewModel
         super.init(frame: .zero)
         self.titleLabel.text = viewModel.title
-        self.backgroundColor = viewModel.backgroundColor
+        self.backgroundColor = UIColor.govUK.fills.surfaceCard
         configureUI()
         configureConstraints()
     }
@@ -39,7 +40,7 @@ class HomeWidgetView: UIView {
     }
 
     private func updateBorderColor() {
-        layer.borderColor = viewModel.borderColor.cgColor
+        layer.borderColor = UIColor.secondaryBorder.cgColor
     }
 
     private func configureUI() {

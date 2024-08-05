@@ -625,8 +625,8 @@
 		5D8922702C071FF60019FBD7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
+				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

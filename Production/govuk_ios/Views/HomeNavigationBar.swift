@@ -12,7 +12,6 @@ class HomeNavigationBar: UIView {
     lazy var divider: UIView = {
         let border = DividerView()
         border.translatesAutoresizingMaskIntoConstraints = false
-        border.isHidden = true
         return border
     }()
 
@@ -70,7 +69,8 @@ class HomeNavigationBar: UIView {
     func handleScroll(scrollView: UIScrollView) {
         guard scrollView.frame != .zero else { return }
 
-        var offset = sittingHeight - scrollView.verticalScroll
+        let adjustedScroll = (scrollView.verticalScroll / 7)
+        var offset = sittingHeight - adjustedScroll
 
         if offset < scrolledHeight {
             offset = scrolledHeight
@@ -79,6 +79,7 @@ class HomeNavigationBar: UIView {
         }
 
         heightConstraint.constant = offset
-        divider.isHidden = offset >= sittingHeight
+        let diff = adjustedScroll / (sittingHeight - scrolledHeight)
+        divider.alpha = diff
     }
 }

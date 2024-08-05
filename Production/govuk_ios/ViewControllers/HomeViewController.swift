@@ -41,7 +41,6 @@ class HomeViewController: BaseViewController,
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        viewModel.logScreen()
         scrollView.delegate = self
     }
 
@@ -52,6 +51,11 @@ class HomeViewController: BaseViewController,
         addSections()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+
+        viewModel.logScreen()
+    }
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

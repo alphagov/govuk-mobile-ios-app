@@ -19,4 +19,10 @@ class SettingsViewController: BaseViewController {
 
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+
+        viewModel.logScreen()
+    }
 }

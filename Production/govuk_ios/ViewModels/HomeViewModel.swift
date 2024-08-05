@@ -18,7 +18,7 @@ struct HomeViewModel {
     }
 
     func logScreen() {
-        let screen = HomeScreen(name: "homepage")
+        let screen = HomeScreen(name: "homescreen")
         analyticsService.trackScreen(screen)
     }
 }

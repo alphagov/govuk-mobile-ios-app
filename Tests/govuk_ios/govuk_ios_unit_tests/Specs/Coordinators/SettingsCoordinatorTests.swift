@@ -19,7 +19,7 @@ class SettingsCoordinatorTests: XCTestCase {
         let navigationController = UINavigationController()
         let subject = SettingsCoordinator(
             navigationController: navigationController,
-            coodinatorBuilder: mockCoodinatorBuilder,
+            coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: [])
         )

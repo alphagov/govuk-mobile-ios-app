@@ -20,7 +20,7 @@ class CoordinatorBuilder {
     var home: TabItemCoordinator {
         HomeCoordinator(
             navigationController: .home,
-            coodinatorBuilder: self,
+            coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .home(coordinatorBuilder: self)
         )
@@ -29,7 +29,7 @@ class CoordinatorBuilder {
     var settings: TabItemCoordinator {
         SettingsCoordinator(
             navigationController: .settings,
-            coodinatorBuilder: self,
+            coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .settings(coordinatorBuilder: self)
         )

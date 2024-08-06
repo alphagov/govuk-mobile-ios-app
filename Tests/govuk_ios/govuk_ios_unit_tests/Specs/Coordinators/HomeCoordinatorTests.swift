@@ -18,7 +18,7 @@ class HomeCoordinatorTests: XCTestCase {
         let navigationController = UINavigationController()
         let subject = HomeCoordinator(
             navigationController: navigationController,
-            coodinatorBuilder: mockCoodinatorBuilder,
+            coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: [])
         )

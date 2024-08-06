@@ -8,6 +8,6 @@ class SettingsViewControllerTests: XCTestCase {
     func test_settings_hasCorrectBackgroundColor() {
         let subject = SettingsViewController()
         let view = subject.view
-        XCTAssertEqual(view?.backgroundColor, UIColor.primaryBackground)
+        XCTAssertEqual(view?.backgroundColor, UIColor.govUK.fills.surfaceBackground)
     }
 }

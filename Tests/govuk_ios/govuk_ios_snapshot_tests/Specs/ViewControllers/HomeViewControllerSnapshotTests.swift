@@ -3,7 +3,6 @@ import Foundation
 import XCTest
 import UIKit
 
-@testable import govuk_ios_unit_tests
 @testable import govuk_ios
 
 class HomeViewControllerSnapshotTests: SnapshotTestCase {

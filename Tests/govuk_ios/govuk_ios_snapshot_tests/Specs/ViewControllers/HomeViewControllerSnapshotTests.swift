@@ -3,11 +3,12 @@ import Foundation
 import XCTest
 import UIKit
 
+@testable import govuk_ios_unit_tests
 @testable import govuk_ios
 
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = HomeViewModel()
+        let viewModel = HomeViewModel(analyticsService: MockAnalyticsService())
         let subject = HomeViewController(
             viewModel: viewModel
         )
@@ -18,7 +19,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = HomeViewModel()
+        let viewModel = HomeViewModel(analyticsService: MockAnalyticsService())
         let subject = HomeViewController(
             viewModel: viewModel
         )

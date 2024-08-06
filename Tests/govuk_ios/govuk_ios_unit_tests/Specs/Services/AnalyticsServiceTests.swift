@@ -19,7 +19,18 @@ final class AnalyticsServiceTests: XCTestCase {
        
         XCTAssertEqual(analyticsService.eventsParamsLogged?.count, 1)
     }
-    
+
+    func test_trackScreen_logsScreen() {
+        let subject = AnalyticsService(
+            analytics: analyticsService,
+            preferenceStore: analyticsPreferenceStore
+        )
+
+        subject.trackScreen(HomeScreen(name: "homescreen"))
+
+        XCTAssertEqual(analyticsService.screensVisited.count, 1)
+    }
+
     func test_setAcceptedAnalytics_setsPreference() {
         let subject = AnalyticsService(
             analytics: analyticsService,

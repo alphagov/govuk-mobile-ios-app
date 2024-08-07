@@ -3,7 +3,7 @@ import UIKit
 
 struct HomeViewModel {
     var analyticsService: AnalyticsServiceInterface
-    var sections: [HomeWidgetViewModel] {
+    var widgets: [HomeWidgetViewModel] {
         [
             HomeWidgetViewModel(
                 title: "Scrollable Content",

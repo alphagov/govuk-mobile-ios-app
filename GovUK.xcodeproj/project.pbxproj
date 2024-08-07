@@ -28,6 +28,7 @@
 		168F6FAA2C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift */; };
 		168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */; };
 		16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */; };
+		16ACCF792C64365600017A11 /* SettingsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */; };
 		16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */; };
 		16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */; };
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
@@ -200,6 +201,7 @@
 		168F6FA92C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWidgetViewModel.swift; sourceTree = "<group>"; };
 		168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorTests.swift; sourceTree = "<group>"; };
 		16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorTests.swift; sourceTree = "<group>"; };
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 			children = (
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
+				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1203,6 +1206,7 @@
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
 				168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,
+				16ACCF792C64365600017A11 /* SettingsViewControllerSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

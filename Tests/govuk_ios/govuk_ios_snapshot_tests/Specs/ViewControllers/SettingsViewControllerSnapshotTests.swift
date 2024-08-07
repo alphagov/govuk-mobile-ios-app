@@ -4,10 +4,10 @@ import UIKit
 
 @testable import govuk_ios
 
-class HomeViewControllerSnapshotTests: SnapshotTestCase {
+class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = HomeViewModel(analyticsService: MockAnalyticsService())
-        let subject = HomeViewController(
+        let viewModel = SettingsViewModel(analyticsService: MockAnalyticsService())
+        let subject = SettingsViewController(
             viewModel: viewModel
         )
         let navigationController = UINavigationController(rootViewController: subject)
@@ -17,8 +17,8 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = HomeViewModel(analyticsService: MockAnalyticsService())
-        let subject = HomeViewController(
+        let viewModel = SettingsViewModel(analyticsService: MockAnalyticsService())
+        let subject = SettingsViewController(
             viewModel: viewModel
         )
         let navigationController = UINavigationController(rootViewController: subject)

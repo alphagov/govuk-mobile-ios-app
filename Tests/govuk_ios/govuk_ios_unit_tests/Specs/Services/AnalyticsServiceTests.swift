@@ -9,14 +9,14 @@ final class AnalyticsServiceTests: XCTestCase {
     let mockLoggingAnalyticsService = MockLoggingAnalyticsService()
     let mockAnalyticsPreferenceStore = MockAnalyticsPreferenceStore()
 
-    func test_track_logsEvents() {
+    func test_trackEvent_tracksEvents() {
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
             preferenceStore: mockAnalyticsPreferenceStore
         )
 
         subject.track(event: AppEvent.appLoaded)
-       
+
         XCTAssertEqual(mockLoggingAnalyticsService.eventsParamsLogged?.count, 1)
     }
 
@@ -46,10 +46,10 @@ final class AnalyticsServiceTests: XCTestCase {
         )
 
         subject.setAcceptedAnalytics(accepted: true)
-       
+
         XCTAssertEqual(mockAnalyticsPreferenceStore.hasAcceptedAnalytics, true)
     }
-    
+
     func test_permissionState_notSet_returnsUnknown() {
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
@@ -58,13 +58,13 @@ final class AnalyticsServiceTests: XCTestCase {
 
         XCTAssertEqual(subject.permissionState, .unknown)
     }
-    
+
     func test_permissionState_granted_returnsAccepted() {
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
             preferenceStore: mockAnalyticsPreferenceStore
         )
-        
+
         subject.setAcceptedAnalytics(accepted: true)
 
         XCTAssertEqual(subject.permissionState, .accepted)
@@ -77,7 +77,7 @@ final class AnalyticsServiceTests: XCTestCase {
         )
 
         subject.setAcceptedAnalytics(accepted: false)
-       
+
         XCTAssertEqual(subject.permissionState, .denied)
     }
 }

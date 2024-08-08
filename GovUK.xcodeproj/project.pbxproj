@@ -201,6 +201,7 @@
 		5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ConvenienceTests.swift"; sourceTree = "<group>"; };
 		5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+ConvenienceTests.swift"; sourceTree = "<group>"; };
 		5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResolvedDeeplinkRoute+Extensions.swift"; sourceTree = "<group>"; };
+		5D30CF972C64A64600361C97 /* WhatToTest.en-GB.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WhatToTest.en-GB.txt"; sourceTree = "<group>"; };
 		5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestExpectation+Extensions.swift"; sourceTree = "<group>"; };
 		5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
 		5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingDeeplinkRouteTests.swift; sourceTree = "<group>"; };
@@ -395,6 +396,14 @@
 				5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		5D30CF982C64A64600361C97 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				5D30CF972C64A64600361C97 /* WhatToTest.en-GB.txt */,
+			);
+			path = TestFlight;
 			sourceTree = "<group>";
 		};
 		5D349C962C36994400161317 /* Extensions */ = {
@@ -720,6 +729,7 @@
 			children = (
 				5DAD71B42BD286730075F648 /* Production */,
 				5DAD71B32BD286450075F648 /* Tests */,
+				5D30CF982C64A64600361C97 /* TestFlight */,
 				5DAD71752BD250DB0075F648 /* Products */,
 				5D1353A92BE0D75000414441 /* Frameworks */,
 			);

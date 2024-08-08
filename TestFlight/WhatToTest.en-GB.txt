@@ -1,0 +1,5 @@
+End-to-end app journey.
+- Splash screen animation
+- Onboarding (only visible on the first app launch, until the journey is completed or skipped)
+- Home screen (WIP)
+- Deep linking to home, settings, driving and permit screens

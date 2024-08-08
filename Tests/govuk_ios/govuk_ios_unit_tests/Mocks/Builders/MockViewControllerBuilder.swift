@@ -36,12 +36,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedHomeViewController: UIViewController?
-    override func home(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+    override func home() -> UIViewController {
         return _stubbedHomeViewController ?? UIViewController()
     }
 
     var _stubbedSettingsViewController: UIViewController?
-    override func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+    override func settings() -> UIViewController {
         return _stubbedSettingsViewController ?? UIViewController()
     }
 }

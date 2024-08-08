@@ -28,14 +28,14 @@ class ViewControllerBuilderTests: XCTestCase {
 
     func test_home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.home(analyticsService: MockAnalyticsService())
+        let result = subject.home()
 
         XCTAssert(result is HomeViewController)
     }
 
     func test_settings_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.settings(analyticsService: MockAnalyticsService())
+        let result = subject.settings()
 
         XCTAssert(result is SettingsViewController)
     }

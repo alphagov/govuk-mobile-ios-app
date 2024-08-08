@@ -20,7 +20,7 @@ class SettingsCoordinator: TabItemCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.settings(analyticsService: analyticsService)
+        let viewController = viewControllerBuilder.settings()
         set([viewController], animated: false)
     }
 

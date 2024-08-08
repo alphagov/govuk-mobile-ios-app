@@ -20,9 +20,7 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.home(
-            analyticsService: analyticsService
-        )
+        let viewController = viewControllerBuilder.home()
         set([viewController], animated: false)
     }
 

@@ -51,7 +51,7 @@ class HomeViewController: BaseViewController,
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         view.addSubview(navigationBar)
-        addSections()
+        addWidgets()
     }
 
     private func configureConstraints() {
@@ -77,8 +77,8 @@ class HomeViewController: BaseViewController,
         navigationBar.handleScroll(scrollView: scrollView)
     }
 
-    private func addSections() {
-        viewModel.sections.lazy
+    private func addWidgets() {
+        viewModel.widgets.lazy
             .map(HomeWidgetView.init)
             .forEach(stackView.addArrangedSubview)
     }

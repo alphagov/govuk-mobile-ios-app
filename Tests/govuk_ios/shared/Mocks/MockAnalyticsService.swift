@@ -15,9 +15,9 @@ class MockAnalyticsService: AnalyticsServiceInterface {
         _trackedEvents.append(event)
     }
 
-    var _trackScreensVisited: [Logging.LoggableScreenV2] = []
-    func trackScreen(_ screen: any Logging.LoggableScreenV2) {
-        _trackScreensVisited.append(screen)
+    var _trackScreenReceivedScreens: [TrackableScreen] = []
+    func track(screen: TrackableScreen) {
+        _trackScreenReceivedScreens.append(screen)
     }
 
     var _setAcceptedAnalyticsAccepted: Bool = true

@@ -20,14 +20,11 @@ final class MockLoggingAnalyticsService: Logging.AnalyticsService {
         screenParamsLogged = parameters
     }
 
+    var _trackScreenV2ReceivedScreens: [LoggableScreenV2] = []
+    var _trackScreenV2ReceivedParameters: [[String: Any]] = []
     func trackScreen(_ screen: LoggableScreenV2, parameters: [String: Any]) {
-        screensVisited.append(screen.name)
-
-        var screenParameters = parameters
-        screenParameters["AnalyticsParameterScreenClass"] = screen.type.name
-        screenParameters["AnalyticsParameterScreenName"] = screen.name
-
-        screenParamsLogged = screenParameters
+        _trackScreenV2ReceivedScreens.append(screen)
+        _trackScreenV2ReceivedParameters.append(parameters)
     }
 
 

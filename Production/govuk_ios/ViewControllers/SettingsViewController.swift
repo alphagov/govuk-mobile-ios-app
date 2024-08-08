@@ -2,7 +2,10 @@ import Foundation
 import UIKit
 import UIComponents
 
-class SettingsViewController: BaseViewController {
+class SettingsViewController: BaseViewController,
+                              TrackableScreen {
+    var trackingName: String { "settingsscreen" }
+
     private var viewModel: SettingsViewModel
 
     public init(viewModel: SettingsViewModel) {
@@ -18,11 +21,5 @@ class SettingsViewController: BaseViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
-
-        viewModel.logScreen()
     }
 }

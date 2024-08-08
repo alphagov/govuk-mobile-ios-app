@@ -7,7 +7,7 @@ import UIKit
 
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = HomeViewModel(analyticsService: MockAnalyticsService())
+        let viewModel = HomeViewModel()
         let subject = HomeViewController(
             viewModel: viewModel
         )
@@ -18,7 +18,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = HomeViewModel(analyticsService: MockAnalyticsService())
+        let viewModel = HomeViewModel()
         let subject = HomeViewController(
             viewModel: viewModel
         )

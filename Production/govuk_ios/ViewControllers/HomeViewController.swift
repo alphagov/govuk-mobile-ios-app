@@ -2,7 +2,8 @@ import Foundation
 import UIKit
 
 class HomeViewController: BaseViewController,
-                          UIScrollViewDelegate {
+                          UIScrollViewDelegate,
+                          TrackableScreen {
     private lazy var navigationBar: HomeNavigationBar = {
         let localView = HomeNavigationBar()
         localView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +26,8 @@ class HomeViewController: BaseViewController,
         scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
     }()
+
+    var trackingName: String { "homescreen" }
 
     private let viewModel: HomeViewModel
 
@@ -51,11 +54,6 @@ class HomeViewController: BaseViewController,
         addSections()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
-
-        viewModel.logScreen()
-    }
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

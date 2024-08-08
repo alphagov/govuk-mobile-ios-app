@@ -1,13 +1,11 @@
+import UIKit
 import Logging
 import GAnalytics
-import UIKit
-
-typealias ScreenType = Logging.ScreenType
 
 protocol AnalyticsServiceInterface {
     func configure()
     func track(event: AppEvent)
-    func trackScreen(_ screen: LoggableScreenV2)
+    func track(screen: TrackableScreen)
 
     func setAcceptedAnalytics(accepted: Bool)
     var permissionState: AnalyticsPermissionState { get }
@@ -35,8 +33,12 @@ class AnalyticsService: AnalyticsServiceInterface {
         )
     }
 
-    func trackScreen(_ screen: LoggableScreenV2) {
-        analytics.trackScreen(screen, parameters: [:])
+    func track(screen: TrackableScreen) {
+        let loggableScreen = screen.toLoggableScreen()
+        analytics.trackScreen(
+            loggableScreen,
+            parameters: [:]
+        )
     }
 
     func setAcceptedAnalytics(accepted: Bool) {
@@ -52,5 +54,23 @@ class AnalyticsService: AnalyticsServiceInterface {
         case .some(false):
             return .denied
         }
+    }
+}
+
+struct MappedLoggableScreen: LoggableScreenV2 {
+    let name: String
+    let type: any ScreenType
+}
+
+struct MappedScreenType: ScreenType {
+    var name: String
+}
+
+extension TrackableScreen {
+    func toLoggableScreen() -> LoggableScreenV2 {
+        MappedLoggableScreen(
+            name: trackingName,
+            type: MappedScreenType(name: trackingClass)
+        )
     }
 }

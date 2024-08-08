@@ -42,14 +42,14 @@ class ViewControllerBuilder {
     }
 
     func home(analyticsService: AnalyticsServiceInterface) -> UIViewController {
-        let viewModel = HomeViewModel(analyticsService: analyticsService)
+        let viewModel = HomeViewModel()
         return HomeViewController(
             viewModel: viewModel
         )
     }
 
     func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
-        let viewModel = SettingsViewModel(analyticsService: analyticsService)
+        let viewModel = SettingsViewModel()
         return SettingsViewController(
             viewModel: viewModel
         )

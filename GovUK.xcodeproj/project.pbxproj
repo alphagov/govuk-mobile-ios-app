@@ -12,9 +12,12 @@
 		160A02642C208B0B00FE01EB /* HTTPLogging in Frameworks */ = {isa = PBXBuildFile; productRef = 160A02632C208B0B00FE01EB /* HTTPLogging */; };
 		160A02662C208B0B00FE01EB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 160A02652C208B0B00FE01EB /* Logging */; };
 		160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160A02672C208B9800FE01EB /* AnalyticsService.swift */; };
+		160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7542C5B0401008F97AF /* SettingsViewModel.swift */; };
+		160EA7592C60D7AB008F97AF /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
 		162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */; };
 		1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceModel.swift */; };
+		1651C6E92C63D4D300864C5C /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */; };
 		166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166248232C4AC91E009F7E58 /* HomeCoordinator.swift */; };
 		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
 		1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */; };
@@ -23,11 +26,13 @@
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
 		168F6FAA2C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift */; };
 		168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */; };
+		16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */; };
+		16ACCF792C64365600017A11 /* SettingsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */; };
 		16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */; };
 		16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */; };
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
-		16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */; };
+		16CA29F42C2199FB000B3B48 /* MockLoggingAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */; };
 		4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */; };
 		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
@@ -41,6 +46,8 @@
 		5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */; };
 		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
 		5D2129E32BDF98EA00142E46 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129E22BDF98EA00142E46 /* Onboarding */; };
+		5D323F8F2C64E6E800C1DB97 /* MockBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */; };
+		5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D323F902C64EBE900C1DB97 /* HomeViewControllerTests.swift */; };
 		5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */; };
 		5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */; };
 		5D37EA0B2C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */; };
@@ -109,6 +116,7 @@
 		5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C3B2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift */; };
 		5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB5F2C0875520011E691 /* TestViewModel.swift */; };
 		5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */; };
+		5DAC6E5A2C64CDA20099406C /* TrackableScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC6E592C64CDA20099406C /* TrackableScreen.swift */; };
 		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */; };
 		5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD717B2BD250DB0075F648 /* TestViewController.swift */; };
@@ -129,6 +137,7 @@
 		5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */; };
 		5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */; };
 		5DD036852C5A577C00EEF11E /* HomeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD036842C5A577C00EEF11E /* HomeNavigationBar.swift */; };
+		5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */; };
 		5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* TestNetworkClient.swift */; };
 		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
 		5DE970542C297652009D66C4 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970532C297652009D66C4 /* AppEvent.swift */; };
@@ -176,9 +185,12 @@
 
 /* Begin PBXFileReference section */
 		160A02672C208B9800FE01EB /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		160EA7542C5B0401008F97AF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsPreferenceStore.swift; sourceTree = "<group>"; };
 		1631DE982C2B0D020050CB9D /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
+		1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		166248232C4AC91E009F7E58 /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		166BDDB52C330D1C00437AE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -187,11 +199,13 @@
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		168F6FA92C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWidgetViewModel.swift; sourceTree = "<group>"; };
 		168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorTests.swift; sourceTree = "<group>"; };
 		16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorTests.swift; sourceTree = "<group>"; };
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
-		16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
+		16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoggingAnalyticsService.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
@@ -201,6 +215,8 @@
 		5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ConvenienceTests.swift"; sourceTree = "<group>"; };
 		5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+ConvenienceTests.swift"; sourceTree = "<group>"; };
 		5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResolvedDeeplinkRoute+Extensions.swift"; sourceTree = "<group>"; };
+		5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBaseViewController.swift; sourceTree = "<group>"; };
+		5D323F902C64EBE900C1DB97 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		5D30CF972C64A64600361C97 /* WhatToTest.en-GB.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WhatToTest.en-GB.txt"; sourceTree = "<group>"; };
 		5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestExpectation+Extensions.swift"; sourceTree = "<group>"; };
 		5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
@@ -266,6 +282,7 @@
 		5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
 		5DA44C3B2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCoordinatorBuilder.swift; sourceTree = "<group>"; };
 		5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRouteProvider.swift; sourceTree = "<group>"; };
+		5DAC6E592C64CDA20099406C /* TrackableScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableScreen.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DAD71792BD250DB0075F648 /* AppSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneDelegate.swift; sourceTree = "<group>"; };
@@ -337,6 +354,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1651C6E62C63C57B00864C5C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */,
+				16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		16EE0C982C2479E700F72E61 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				5D37E9F62C3E865F006B36CB /* BaseViewControllerTests.swift */,
+				5D323F902C64EBE900C1DB97 /* HomeViewControllerTests.swift */,
 				168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */,
 			);
 			path = ViewControllers;
@@ -502,6 +529,7 @@
 				168F6FA92C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift */,
 				5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */,
 				5D41DB5F2C0875520011E691 /* TestViewModel.swift */,
+				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -636,6 +664,7 @@
 			children = (
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
+				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -718,7 +747,6 @@
 		5DA44C392C2EF1DD00D8FE7C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				16CA29F32C2199FB000B3B48 /* MockAnalyticsService.swift */,
 				4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */,
 			);
 			path = Services;
@@ -885,6 +913,7 @@
 			isa = PBXGroup;
 			children = (
 				5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */,
+				160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -896,6 +925,8 @@
 				5DA44C362C2EF1D400D8FE7C /* Coordinators */,
 				5D93EE802C36848400D90C0C /* Deeplinking */,
 				162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */,
+				5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */,
+				16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */,
 				5DA44C392C2EF1DD00D8FE7C /* Services */,
 			);
 			path = Mocks;
@@ -904,6 +935,7 @@
 		5DD6EFFC2BFF546900C2D79B /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				1651C6E62C63C57B00864C5C /* Models */,
 				5D37E9FA2C3E865F006B36CB /* Builders */,
 				5D37EA062C3E865F006B36CB /* Coordinators */,
 				5D37E9F52C3E865F006B36CB /* Deeplinking */,
@@ -926,9 +958,10 @@
 		5DE970522C297642009D66C4 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				5DE970532C297652009D66C4 /* AppEvent.swift */,
 				5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */,
+				5DE970532C297652009D66C4 /* AppEvent.swift */,
 				1631DE982C2B0D020050CB9D /* DeviceModel.swift */,
+				5DAC6E592C64CDA20099406C /* TrackableScreen.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1179,9 +1212,11 @@
 				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
 				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
+				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
 				168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,
+				16ACCF792C64365600017A11 /* SettingsViewControllerSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1190,9 +1225,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */,
+				5DAC6E5A2C64CDA20099406C /* TrackableScreen.swift in Sources */,
 				5DD036852C5A577C00EEF11E /* HomeNavigationBar.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
+				160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */,
 				5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */,
 				5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */,
 				5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */,
@@ -1262,12 +1299,14 @@
 				4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */,
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
 				5D37EA0B2C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift in Sources */,
+				5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */,
 				162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */,
 				5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */,
 				5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
+				16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */,
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,
 				5D37EA182C3E865F006B36CB /* NextCoordinatorTests.swift in Sources */,
 				5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */,
@@ -1278,6 +1317,7 @@
 				5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */,
 				16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */,
 				16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */,
+				5D323F8F2C64E6E800C1DB97 /* MockBaseViewController.swift in Sources */,
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,
 				5D5B16F72C51480000EA118F /* XCTestCase+Extensions.swift in Sources */,
 				5D37EA0E2C3E865F006B36CB /* BaseViewControllerTests.swift in Sources */,
@@ -1285,14 +1325,16 @@
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
 				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,
 				5D37EA122C3E865F006B36CB /* PermitCoordinatorTests.swift in Sources */,
-				16CA29F42C2199FB000B3B48 /* MockAnalyticsService.swift in Sources */,
+				16CA29F42C2199FB000B3B48 /* MockLoggingAnalyticsService.swift in Sources */,
 				5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */,
 				5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */,
 				5D37EA112C3E865F006B36CB /* DrivingCoordinatorTests.swift in Sources */,
 				5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */,
 				5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */,
+				160EA7592C60D7AB008F97AF /* MockAnalyticsService.swift in Sources */,
 				5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */,
 				5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */,
+				1651C6E92C63D4D300864C5C /* HomeViewModelTests.swift in Sources */,
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */,

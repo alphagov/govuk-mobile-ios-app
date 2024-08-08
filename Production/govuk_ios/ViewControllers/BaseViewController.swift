@@ -2,9 +2,16 @@ import UIKit
 import Foundation
 
 class BaseViewController: UIViewController {
+    @Inject(\.analyticsService) private(set) var analyticsService: AnalyticsServiceInterface
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        trackPageView()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -14,5 +21,11 @@ class BaseViewController: UIViewController {
     private func configureUI() {
         view.layoutMargins.right = 16
         view.layoutMargins.left = 16
+    }
+
+    func trackPageView() {
+        if let screen = self as? TrackableScreen {
+            analyticsService.track(screen: screen)
+        }
     }
 }

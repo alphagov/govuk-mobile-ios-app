@@ -6,7 +6,8 @@ import XCTest
 
 class SettingsViewControllerTests: XCTestCase {
     func test_settings_hasCorrectBackgroundColor() {
-        let subject = SettingsViewController()
+        let viewModel = SettingsViewModel()
+        let subject = SettingsViewController(viewModel: viewModel)
         let view = subject.view
         XCTAssertEqual(view?.backgroundColor, UIColor.govUK.fills.surfaceBackground)
     }

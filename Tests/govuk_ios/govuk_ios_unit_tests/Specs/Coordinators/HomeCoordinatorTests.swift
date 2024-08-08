@@ -20,7 +20,8 @@ class HomeCoordinatorTests: XCTestCase {
             navigationController: navigationController,
             coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: [])
+            deeplinkStore: DeeplinkDataStore(routes: []),
+            analyticsService: MockAnalyticsService()
         )
         subject.start()
 

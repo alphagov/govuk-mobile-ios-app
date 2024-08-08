@@ -22,7 +22,8 @@ class CoordinatorBuilder {
             navigationController: .home,
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: .home(coordinatorBuilder: self)
+            deeplinkStore: .home(coordinatorBuilder: self),
+            analyticsService: container.analyticsService.resolve()
         )
     }
 
@@ -31,7 +32,8 @@ class CoordinatorBuilder {
             navigationController: .settings,
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: .settings(coordinatorBuilder: self)
+            deeplinkStore: .settings(coordinatorBuilder: self),
+            analyticsService: container.analyticsService.resolve()
         )
     }
 

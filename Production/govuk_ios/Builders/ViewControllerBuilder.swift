@@ -49,6 +49,9 @@ class ViewControllerBuilder {
     }
 
     func settings() -> UIViewController {
-        return SettingsViewController()
+        let viewModel = SettingsViewModel()
+        return SettingsViewController(
+            viewModel: viewModel
+        )
     }
 }

@@ -1,6 +1,4 @@
 import UIKit
-import GAnalytics
-import Logging
 
 class AppDelegate: UIResponder,
                    UIApplicationDelegate {

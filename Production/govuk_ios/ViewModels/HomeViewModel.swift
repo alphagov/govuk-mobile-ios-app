@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
-    var sections: [HomeWidgetViewModel] {
+    var widgets: [HomeWidgetViewModel] {
         [
             HomeWidgetViewModel(
                 title: "Scrollable Content",

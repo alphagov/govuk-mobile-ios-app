@@ -3,9 +3,13 @@ import Foundation
 import Factory
 
 extension Container {
-    var testNetworkClient: Factory<TestNetworkClientInterface> {
+    var apiClient: Factory<APIServiceClient> {
         Factory(self) {
-            TestNetworkClient()
+            APIServiceClient(
+                baseUrl: URL(string: "dsgljksdfg")!,
+                session: URLSession(configuration: .default),
+                requestBuilder: RequestBuilder()
+            )
         }
     }
 }

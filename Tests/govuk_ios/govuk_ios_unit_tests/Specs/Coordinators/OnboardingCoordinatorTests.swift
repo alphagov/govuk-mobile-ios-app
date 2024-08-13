@@ -13,6 +13,7 @@ final class OnboardingCoordinatorTests: XCTestCase {
         let sut = OnboardingCoordinator(
             navigationController: mockNavigationController,
             onboardingService: onboardingService,
+            analyticsService: MockAnalyticsService(),
             dismissAction: {
                 expectation.fulfill()
             }
@@ -28,6 +29,7 @@ final class OnboardingCoordinatorTests: XCTestCase {
         let sut = OnboardingCoordinator(
             navigationController: mockNavigationController,
             onboardingService: mockOnboardingService,
+            analyticsService: MockAnalyticsService(),
             dismissAction: { }
         )
         mockOnboardingService._stubbedFetchSlidesSlides = [OnboardingSlide.arrange]
@@ -43,7 +45,8 @@ final class OnboardingCoordinatorTests: XCTestCase {
         let expectation = expectation()
         let sut = OnboardingCoordinator(
             navigationController: mockNavigationController,
-            onboardingService: mockOnboardingService,
+            onboardingService: mockOnboardingService, 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {
                 XCTAssertEqual(mockNavigationController.viewControllers.count, 0)
                 expectation.fulfill()
@@ -60,7 +63,8 @@ final class OnboardingCoordinatorTests: XCTestCase {
         let mockNavigationController = UINavigationController()
         let sut = OnboardingCoordinator(
             navigationController: mockNavigationController,
-            onboardingService: mockOnboardingService,
+            onboardingService: mockOnboardingService, 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {
                 XCTFail()
             }

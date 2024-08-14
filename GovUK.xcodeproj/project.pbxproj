@@ -1767,7 +1767,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
 			requirement = {
-				branch = feature/Analytics;
+				branch = develop;
 				kind = branch;
 			};
 		};

@@ -2,17 +2,24 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
-    var widgets: [HomeWidgetViewModel] {
+    var widgets: [HomeWidgetView] {
         [
-            HomeWidgetViewModel(
-                title: "Scrollable Content",
-                link: ["text": "Link text same blue as logo", "link": ""]
-            ),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content")
+            searchWidget
         ]
+    }
+
+    var searchWidget: HomeWidgetView {
+        let viewModel = HomeWidgetViewModel(
+            title: "Find government services and information",
+            widgetHeight: 106
+        )
+
+        let widget = HomeSearchWidgetStackView(
+            viewModel: viewModel
+        )
+
+        return HomeWidgetView(
+            widget: widget
+        )
     }
 }

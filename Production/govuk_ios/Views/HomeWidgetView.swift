@@ -2,34 +2,25 @@ import UIKit
 import Foundation
 import UIComponents
 
+protocol WidgetInterface {
+    var viewModel: HomeWidgetViewModel { get }
+}
+
 class HomeWidgetView: UIView {
     private lazy var stackView: UIStackView = {
-        let localView = UIStackView()
+        let localView = (widget as? UIStackView)!
         localView.axis = .vertical
         localView.alignment = .center
         localView.spacing = 8
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
-    private lazy var titleLabel: UILabel = {
-        let localView = UILabel()
-        localView.font = UIFont.govUK.body
-        return localView
-    }()
-    private lazy var linkLabel: UILabel = {
-        let localView = UILabel()
-        localView.text = viewModel.link?["text"]
-        localView.textColor = UIColor.govUK.text.link
-        localView.font = UIFont.govUK.body
-        return localView
-    }()
 
-    private let viewModel: HomeWidgetViewModel
+    private let widget: WidgetInterface
 
-    init(viewModel: HomeWidgetViewModel) {
-        self.viewModel = viewModel
+    init(widget: WidgetInterface) {
+        self.widget = widget
         super.init(frame: .zero)
-        self.titleLabel.text = viewModel.title
         self.backgroundColor = UIColor.govUK.fills.surfaceCard
         configureUI()
         configureConstraints()
@@ -48,15 +39,12 @@ class HomeWidgetView: UIView {
         layer.cornerRadius = 10
         layer.masksToBounds = true
         addSubview(stackView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(linkLabel)
         updateBorderColor()
-        linkLabel.isHidden = viewModel.link == nil
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 200),
+            heightAnchor.constraint(equalToConstant: widget.viewModel.widgetHeight),
             stackView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: 15

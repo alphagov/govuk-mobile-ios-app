@@ -78,8 +78,6 @@ class HomeViewController: BaseViewController,
     }
 
     private func addWidgets() {
-        viewModel.widgets.lazy
-            .map(HomeWidgetView.init)
-            .forEach(stackView.addArrangedSubview)
+        viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
     }
 }

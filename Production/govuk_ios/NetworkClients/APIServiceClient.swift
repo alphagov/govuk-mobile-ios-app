@@ -1,26 +1,15 @@
 import Foundation
 
-import Alamofire
-
 public typealias NetworkResult<T> = Result<T, Error>
-public typealias ResponseCompletion<T> = (NetworkResult<T>) -> Void
-
-protocol SessionInterface {
-    func dataTask(
-        with request: URLRequest,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void
-    ) -> URLSessionDataTask
-}
-
-extension URLSession: SessionInterface {}
+public typealias NetworkResultCompletion<T> = (NetworkResult<T>) -> Void
 
 struct APIServiceClient {
     private let baseUrl: URL
-    private let session: SessionInterface
+    private let session: URLSession
     private let requestBuilder: RequestBuilderInterface
 
     init(baseUrl: URL,
-         session: SessionInterface,
+         session: URLSession,
          requestBuilder: RequestBuilderInterface) {
         self.baseUrl = baseUrl
         self.session = session
@@ -30,7 +19,7 @@ struct APIServiceClient {
 
 extension APIServiceClient {
     func send(request: GOVRequest,
-              completion: @escaping ResponseCompletion<Data>) {
+              completion: @escaping NetworkResultCompletion<Data>) {
         let urlRequest = requestBuilder.data(
             from: request,
             with: baseUrl
@@ -42,7 +31,7 @@ extension APIServiceClient {
     }
 
     private func send(request: URLRequest,
-                      completion: @escaping ResponseCompletion<Data>) {
+                      completion: @escaping NetworkResultCompletion<Data>) {
         let task = session.dataTask(
             with: request,
             completionHandler: { data, _, error in

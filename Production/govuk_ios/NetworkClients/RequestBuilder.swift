@@ -21,7 +21,7 @@ extension RequestBuilderInterface {
         }
         return self.request(
             url: URL(base: url, request: request),
-            method: request.verb.rawValue,
+            method: request.method.rawValue,
             headers: request.additionalHeaders,
             body: data
         )
@@ -31,7 +31,7 @@ extension RequestBuilderInterface {
                 with url: URL) -> URLRequest {
         self.request(
             url: URL(base: url, request: request),
-            method: request.verb.rawValue,
+            method: request.method.rawValue,
             headers: request.additionalHeaders,
             body: request.data
         )

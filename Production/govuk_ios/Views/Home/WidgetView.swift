@@ -6,7 +6,7 @@ protocol WidgetInterface {
     var viewModel: HomeWidgetViewModel { get }
 }
 
-class HomeWidgetView: UIView {
+class WidgetView: UIView {
     private lazy var stackView: UIStackView = {
         let localView = (widget as? UIStackView)!
         localView.axis = .vertical

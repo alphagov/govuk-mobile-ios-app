@@ -1,7 +1,7 @@
 import UIKit
 import UIComponents
 
-class HomeSearchWidgetStackView: UIStackView, WidgetInterface {
+class SearchWidgetStackView: UIStackView, WidgetInterface {
     var viewModel: HomeWidgetViewModel
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()

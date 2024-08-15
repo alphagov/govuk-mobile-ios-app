@@ -2,23 +2,23 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
-    var widgets: [HomeWidgetView] {
+    var widgets: [WidgetView] {
         [
             searchWidget
         ]
     }
 
-    var searchWidget: HomeWidgetView {
+    var searchWidget: WidgetView {
         let viewModel = HomeWidgetViewModel(
             title: "Find government services and information",
             widgetHeight: 106
         )
 
-        let widget = HomeSearchWidgetStackView(
+        let widget = SearchWidgetStackView(
             viewModel: viewModel
         )
 
-        return HomeWidgetView(
+        return WidgetView(
             widget: widget
         )
     }

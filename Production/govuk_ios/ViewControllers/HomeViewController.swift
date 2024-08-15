@@ -4,8 +4,8 @@ import UIKit
 class HomeViewController: BaseViewController,
                           UIScrollViewDelegate,
                           TrackableScreen {
-    private lazy var navigationBar: HomeNavigationBar = {
-        let localView = HomeNavigationBar()
+    private lazy var navigationBar: NavigationBar = {
+        let localView = NavigationBar()
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()

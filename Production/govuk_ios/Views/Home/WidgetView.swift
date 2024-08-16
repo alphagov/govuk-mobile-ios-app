@@ -47,11 +47,11 @@ class WidgetView: UIView {
             heightAnchor.constraint(equalToConstant: widget.viewModel.widgetHeight),
             stackView.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: 15
+                constant: 16
             ),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
-            stackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
-            stackView.leftAnchor.constraint(equalTo: leftAnchor)
+            stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
         ])
     }
 

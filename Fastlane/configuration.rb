@@ -33,8 +33,28 @@ class Configuration
     setting(:app, :workspace)
   end
 
+  def app_bundle_identifier
+    setting(:app, :bundle_identifier)
+  end
+
   def scan_devices
     setting(:scan, :devices)
+  end
+
+  def deliver_username
+    ENV['APP_STORE_USERNAME']
+  end
+
+  def deliver_key_id
+    ENV['APP_STORE_KEY_ID']
+  end
+
+  def deliver_key_issuer_id
+    ENV['APP_STORE_KEY_ISSUER_ID']
+  end
+
+  def deliver_key_content
+    ENV['APP_STORE_KEY_CONTENT']
   end
 
   private

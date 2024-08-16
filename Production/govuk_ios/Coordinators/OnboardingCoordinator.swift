@@ -23,7 +23,7 @@ class OnboardingCoordinator: BaseCoordinator {
     private func setOnboarding() {
         let slides = onboardingService.fetchSlides()
         let onboardingModule = Onboarding(
-            source: .model(slides),
+            source: .model(slides), analyticsService: <#(any OnboardingAnalyticsService)?#>,
             dismissAction: { [weak self] in
                 self?.onboardingService.setHasSeenOnboarding()
                 self?.dismissAction()

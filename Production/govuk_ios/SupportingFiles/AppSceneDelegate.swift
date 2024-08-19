@@ -41,6 +41,6 @@ class AppSceneDelegate: UIResponder,
 
 private func loadlocalConfig() {
     FeatureFlagService.shared.fetchFeatureFlags(
-        localFeatureFlagProvider: LocalFeatureFlagProvider(
+        localFeatureFlagProvider: FeatureFlagProvider(
             pasingService: ParsingService()))
    }

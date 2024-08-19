@@ -35,8 +35,8 @@
 		16CA29F42C2199FB000B3B48 /* MockLoggingAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */; };
 		4E5ED1FF2C6DFBA300750BDA /* FeatureFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED1FE2C6DFBA300750BDA /* FeatureFlag.swift */; };
 		4E5ED2012C6E06FB00750BDA /* FeatureFlagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* FeatureFlagService.swift */; };
-		4E5ED2032C6E1E9400750BDA /* FeatureFlagProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2022C6E1E9300750BDA /* FeatureFlagProvider.swift */; };
-		4E5ED2052C6E1F8700750BDA /* LocalFeatureFlagProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2042C6E1F8700750BDA /* LocalFeatureFlagProvider.swift */; };
+		4E5ED2032C6E1E9400750BDA /* FeatureFlagProviderInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2022C6E1E9300750BDA /* FeatureFlagProviderInterface.swift */; };
+		4E5ED2052C6E1F8700750BDA /* FeatureFlagProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2042C6E1F8700750BDA /* FeatureFlagProvider.swift */; };
 		4E5ED2072C6E650D00750BDA /* ParsingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2062C6E650D00750BDA /* ParsingService.swift */; };
 		4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */; };
 		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
@@ -215,8 +215,8 @@
 		16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoggingAnalyticsService.swift; sourceTree = "<group>"; };
 		4E5ED1FE2C6DFBA300750BDA /* FeatureFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlag.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* FeatureFlagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagService.swift; sourceTree = "<group>"; };
-		4E5ED2022C6E1E9300750BDA /* FeatureFlagProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagProvider.swift; sourceTree = "<group>"; };
-		4E5ED2042C6E1F8700750BDA /* LocalFeatureFlagProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeatureFlagProvider.swift; sourceTree = "<group>"; };
+		4E5ED2022C6E1E9300750BDA /* FeatureFlagProviderInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagProviderInterface.swift; sourceTree = "<group>"; };
+		4E5ED2042C6E1F8700750BDA /* FeatureFlagProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagProvider.swift; sourceTree = "<group>"; };
 		4E5ED2062C6E650D00750BDA /* ParsingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingService.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
@@ -398,8 +398,8 @@
 			children = (
 				4E5ED1FE2C6DFBA300750BDA /* FeatureFlag.swift */,
 				4E5ED2002C6E06FB00750BDA /* FeatureFlagService.swift */,
-				4E5ED2022C6E1E9300750BDA /* FeatureFlagProvider.swift */,
-				4E5ED2042C6E1F8700750BDA /* LocalFeatureFlagProvider.swift */,
+				4E5ED2022C6E1E9300750BDA /* FeatureFlagProviderInterface.swift */,
+				4E5ED2042C6E1F8700750BDA /* FeatureFlagProvider.swift */,
 				4E5ED2062C6E650D00750BDA /* ParsingService.swift */,
 			);
 			path = LocalFeatureFlag;
@@ -1295,7 +1295,7 @@
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */,
 				5D9E67C42C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift in Sources */,
-				4E5ED2052C6E1F8700750BDA /* LocalFeatureFlagProvider.swift in Sources */,
+				4E5ED2052C6E1F8700750BDA /* FeatureFlagProvider.swift in Sources */,
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
@@ -1313,7 +1313,7 @@
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+NetworkClients.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
-				4E5ED2032C6E1E9400750BDA /* FeatureFlagProvider.swift in Sources */,
+				4E5ED2032C6E1E9400750BDA /* FeatureFlagProviderInterface.swift in Sources */,
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* TestNetworkClient.swift in Sources */,

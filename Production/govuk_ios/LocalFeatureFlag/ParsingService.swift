@@ -10,9 +10,9 @@ struct ParsingService: ParsingServiceInterface {
        var toggleData = data
        if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
            let jsonContainer = json as? [String: Any],
-           let featureToggles = jsonContainer[containerName],
-           let featureTogglesData = try? JSONSerialization.data(withJSONObject: featureToggles) {
-               toggleData = featureTogglesData
+           let featureFlags = jsonContainer[containerName],
+           let featureFlagData = try? JSONSerialization.data(withJSONObject: featureFlags) {
+               toggleData = featureFlagData
        }
        return try? JSONDecoder().decode([FeatureFlag].self, from: toggleData)
    }

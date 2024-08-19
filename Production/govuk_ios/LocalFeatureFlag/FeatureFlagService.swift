@@ -6,8 +6,8 @@ public final class FeatureFlagService {
     private var featureFlags: [FeatureFlag] = []
 
     func fetchFeatureFlags(
-        localFeatureFlagProvider: FeatureFlagProvider) {
-            localFeatureFlagProvider.fetchFeatureToggles { [weak self] flags in
+        localFeatureFlagProvider: FeatureFlagProviderInterface) {
+            localFeatureFlagProvider.fetchFeatureFlags { [weak self] flags in
                 guard let self = self else { return }
                 self.featureFlags = flags
             }
@@ -15,10 +15,10 @@ public final class FeatureFlagService {
                 let feature = featureFlags.first(where: { $0.feature == feature })
                 return feature?.enabled ?? false
             }
-            func fetchLocalFeatureToggles(_ localFeatureFlagProvider: FeatureFlagProvider) {
-                localFeatureFlagProvider.fetchFeatureToggles { [weak self] featureToggles in
+            func fetchLocalFeatureToggles( localFeatureFlagProvider: FeatureFlagProviderInterface) {
+                localFeatureFlagProvider.fetchFeatureFlags { [weak self] featureFlags in
                     if let self = self {
-                        self.featureFlags = featureToggles
+                        self.featureFlags = featureFlags
                     }
                 }
             }

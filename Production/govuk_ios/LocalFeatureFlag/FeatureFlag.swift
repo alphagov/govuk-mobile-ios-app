@@ -13,10 +13,14 @@ extension FeatureFlag: Decodable {
 }
 
  struct Feature: Equatable {
-    private let name: String
+    let name: String
 }
 extension Feature: Decodable {
     enum CodingKeys: String, CodingKey {
         case name
     }
+}
+
+extension Feature {
+    static let addCategory = Feature(name: "addCategory")
 }

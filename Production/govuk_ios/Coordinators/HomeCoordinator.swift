@@ -6,6 +6,16 @@ class HomeCoordinator: TabItemCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
+    var searchActionButtonPressed: () -> Void {
+        return { [weak self] in
+            guard let strongSelf = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = strongSelf.coordinatorBuilder.search(
+                navigationController: navigationController
+            )
+            strongSelf.present(coordinator)
+        }
+    }
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -20,7 +30,9 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.home()
+        let viewController = viewControllerBuilder.home(
+            searchButtonPrimaryAction: searchActionButtonPressed
+        )
         set([viewController], animated: false)
     }
 

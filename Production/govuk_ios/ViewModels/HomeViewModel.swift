@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
+    var searchButtonPrimaryAction: (() -> Void)?
     var widgets: [WidgetView] {
         [
             searchWidget
@@ -11,7 +12,8 @@ struct HomeViewModel {
     var searchWidget: WidgetView {
         let viewModel = HomeWidgetViewModel(
             title: "Find government services and information",
-            widgetHeight: 106
+            widgetHeight: 106,
+            primaryAction: searchButtonPrimaryAction
         )
 
         let widget = SearchWidgetStackView(

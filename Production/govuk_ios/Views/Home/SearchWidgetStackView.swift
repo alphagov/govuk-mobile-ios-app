@@ -23,6 +23,7 @@ class SearchWidgetStackView: UIStackView, WidgetInterface {
         button.titleEdgeInsets.left = 5
         button.titleEdgeInsets.right = 225
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
         return button
     }()
 
@@ -52,5 +53,10 @@ class SearchWidgetStackView: UIStackView, WidgetInterface {
             searchButton.leftAnchor.constraint(equalTo: leftAnchor),
             searchButton.rightAnchor.constraint(equalTo: rightAnchor)
         ])
+    }
+
+    @objc
+    private func searchButtonPressed() {
+        viewModel.primaryAction?()
     }
 }

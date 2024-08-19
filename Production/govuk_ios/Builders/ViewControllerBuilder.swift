@@ -41,8 +41,10 @@ class ViewControllerBuilder {
         )
     }
 
-    func home() -> UIViewController {
-        let viewModel = HomeViewModel()
+    func home(searchButtonPrimaryAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = HomeViewModel(
+            searchButtonPrimaryAction: searchButtonPrimaryAction
+        )
         return HomeViewController(
             viewModel: viewModel
         )
@@ -51,6 +53,13 @@ class ViewControllerBuilder {
     func settings() -> UIViewController {
         let viewModel = SettingsViewModel()
         return SettingsViewController(
+            viewModel: viewModel
+        )
+    }
+
+    func search() -> UIViewController {
+        let viewModel = SearchViewModel()
+        return SearchViewController(
             viewModel: viewModel
         )
     }

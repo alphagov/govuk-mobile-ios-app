@@ -87,4 +87,11 @@ class CoordinatorBuilder {
             navigationController: navigationController
         )
     }
+
+    func search(navigationController: UINavigationController) -> BaseCoordinator {
+        SearchCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder()
+        )
+    }
 }

@@ -58,6 +58,7 @@ class CoordinatorBuilder {
         OnboardingCoordinator(
             navigationController: navigationController,
             onboardingService: container.onboardingService.resolve(),
+            analyticsService: container.onboardingAnalyticsService.resolve(),
             dismissAction: dismissAction
         )
     }

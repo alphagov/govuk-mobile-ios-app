@@ -22,7 +22,6 @@ class AppSceneDelegate: UIResponder,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene)
         else { return }
-        loadlocalConfig()
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
@@ -38,9 +37,3 @@ class AppSceneDelegate: UIResponder,
         coordinator?.start(url: path)
     }
 }
-
-private func loadlocalConfig() {
-    FeatureFlagService.shared.fetchFeatureFlags(
-        localFeatureFlagProvider: FeatureFlagProvider(
-            pasingService: ParsingService()))
-   }

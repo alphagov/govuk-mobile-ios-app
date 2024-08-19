@@ -16,13 +16,13 @@ public final class AppConfigService {
     }
 
     private func getFeatureflags(result: Result<AppConfig, AppConfigServiceError>) throws {
-            switch result {
-            case .success(let appConfig):
-                self.featureFlags = appConfig.config.releaseFlags
-            case .failure(let error):
-                throw error
-            }
+        switch result {
+        case .success(let appConfig):
+            self.featureFlags = appConfig.config.releaseFlags
+        case .failure(let error):
+            throw error
         }
+    }
 
     func isEnabled(key: Feature) -> Bool {
         if let feature = featureFlags[key.rawValue] {

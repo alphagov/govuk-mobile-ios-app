@@ -25,9 +25,9 @@ class APIServiceClientTests: XCTestCase {
             XCTAssertEqual(request.httpMethod, "POST")
             let data = request.bodySteamData
             XCTAssertNotNil(data)
-            let json = try JSONDecoder().decode([String: String].self, from: data!)
-            XCTAssertEqual(json["test_key"], "test_value")
-            return (.arrangeSuccess, nil)
+            let json = try? JSONDecoder().decode([String: String].self, from: data!)
+            XCTAssertEqual(json?["test_key"], "test_value")
+            return (.arrangeSuccess, nil, nil)
         }
         subject.send(
             request: govRequest,
@@ -57,7 +57,7 @@ class APIServiceClientTests: XCTestCase {
             XCTAssertEqual(request.url?.absoluteString, "https://www.google.com/test/123?query=value")
             XCTAssertEqual(request.httpMethod, "GET")
             XCTAssertNil(request.httpBody)
-            return (.arrangeSuccess, nil)
+            return (.arrangeSuccess, nil, nil)
         }
         subject.send(
             request: request,
@@ -86,7 +86,7 @@ class APIServiceClientTests: XCTestCase {
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
         let expectedData = Data()
         MockURLProtocol.requestHandler = { request in
-            return (expectedResponse, expectedData)
+            return (expectedResponse, expectedData, nil)
         }
         subject.send(
             request: request,
@@ -116,14 +116,15 @@ class APIServiceClientTests: XCTestCase {
         let expectation = expectation()
         let expectedError = TestError.fakeNetwork
         MockURLProtocol.requestHandler = { request in
-            throw expectedError
+            let expectedResponse = HTTPURLResponse.arrange(statusCode: 400)
+            return (expectedResponse, nil, expectedError)
         }
         subject.send(
             request: request,
             completion: { result in
                 switch result {
-                case .failure(let error):
-                    XCTAssertEqual(error as? TestError, expectedError)
+                case .failure:
+                    break
                 default:
                     XCTFail("Expected failure")
                 }

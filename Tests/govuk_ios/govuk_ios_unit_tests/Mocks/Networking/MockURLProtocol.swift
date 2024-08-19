@@ -10,36 +10,39 @@ class MockURLProtocol: URLProtocol {
         request
     }
 
-    static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
+    static var requestHandler: ((URLRequest) -> (HTTPURLResponse, Data?, Error?)?)?
 
     override func startLoading() {
         guard let handler = MockURLProtocol.requestHandler else {
             fatalError("Handler is unavailable.")
         }
 
-        do {
-            let (response, data) = try handler(request)
+        guard let (response, data, error) = handler(request) else {
+            client?.urlProtocolDidFinishLoading(self)
+            return
+        }
 
+        if let error = error {
+            client?.urlProtocol(
+                self,
+                didFailWithError: error
+            )
+        } else {
             client?.urlProtocol(
                 self,
                 didReceive: response,
                 cacheStoragePolicy: .notAllowed
             )
+        }
 
-            if let data = data {
-                client?.urlProtocol(
-                    self,
-                    didLoad: data
-                )
-            }
-
-            client?.urlProtocolDidFinishLoading(self)
-        } catch {
+        if let data = data {
             client?.urlProtocol(
                 self,
-                didFailWithError: error
+                didLoad: data
             )
         }
+
+        client?.urlProtocolDidFinishLoading(self)
     }
 
     override func stopLoading() {

@@ -43,10 +43,11 @@ class SettingsViewController: BaseViewController,
         stack.alignment = .fill
         stack.distribution = .fill
 
-        for index in 1..<30 {
+        for index in 1..<100 {
             let label = UILabel()
+            label.numberOfLines = 0
             label.text = "temporary content \(index)"
-            label.font = UIFont.govUK.largeTitle
+            label.font = UIFont.govUK.body
             label.adjustsFontForContentSizeCategory = true
 
             stack.addArrangedSubview(label)

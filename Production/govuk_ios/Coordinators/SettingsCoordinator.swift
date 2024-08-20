@@ -6,6 +6,7 @@ class SettingsCoordinator: TabItemCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
+    private let navigationController: UINavigationController
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -16,6 +17,7 @@ class SettingsCoordinator: TabItemCoordinator {
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
+        self.navigationController = navigationController
         super.init(navigationController: navigationController)
     }
 

@@ -24,7 +24,7 @@ class SettingsViewController: BaseViewController,
 
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
 
-        title = "Settings"
+        title = viewModel.title
 
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.prefersLargeTitles = true

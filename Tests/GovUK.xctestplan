@@ -9,6 +9,11 @@
     }
   ],
   "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-UIPreferredContentSizeCategoryName UICTContentSizeCategoryL"
+      }
+    ],
     "environmentVariableEntries" : [
       {
         "key" : "IMAGE_DIFF_DIR",

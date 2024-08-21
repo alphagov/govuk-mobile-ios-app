@@ -29,18 +29,18 @@ final class AppConfigProviderTests: XCTestCase {
             switch result {
             case .success(_):
                 XCTFail()
-            case .failure(let error):
+            case .failure(_):
                 XCTAssertTrue(true)
             }
         }
     }
     
-    func test_testFetchAppConfig_inValidFileJson_returnsError() throws {
+    func test_testFetchAppConfig_invalidFileJson_returnsError() throws {
         sut.fetchAppConfig(filename: "MockAppConfigResponseInvalid") { result in
             switch result {
             case .success(_):
                 XCTFail()
-            case .failure(let error):
+            case .failure(_):
                 XCTAssertTrue(true)
             }
         }

@@ -1,0 +1,14 @@
+{
+  "platform": "iOS",
+  "config": {
+    "available": true,
+    "minimumVersion": "1.0.0",
+    "recommendedVersion": "1.2.0",
+    "releaseFlags": {
+      "search": true,
+      "onboarding": false
+    },
+    "lastUpdated": "2024-08-15T09:57:45.110Z"
+  },
+  "signature": "<not yet implemented>"
+}

@@ -4,12 +4,19 @@ public final class AppConfigService {
     private var featureFlags: [String: Bool] = [:]
     private let configProvider: AppConfigProviderInterface
 
-    init(configProvider: AppConfigProviderInterface) {
-        self.configProvider = configProvider
+    private enum ConfigStrings: String {
+        case filename = "RemoteConfigResponse"
+        case fileType = "json"
     }
 
-    func fetchAppConfig() {
-        configProvider.fetchAppConfig { [weak self] result in
+    init(configProvider: AppConfigProviderInterface) {
+        self.configProvider = configProvider
+        fetchAppConfig()
+    }
+
+    private func fetchAppConfig() {
+        configProvider.fetchAppConfig(
+            filename: ConfigStrings.filename.rawValue) { [weak self] result in
             guard let self = self else { return }
             try? self.getFeatureflags(result: result)
         }
@@ -24,7 +31,7 @@ public final class AppConfigService {
         }
     }
 
-    func isEnabled(key: Feature) -> Bool {
+    func isFeatureEnabled(key: Feature) -> Bool {
         if let feature = featureFlags[key.rawValue] {
             return feature
         }

@@ -74,3 +74,8 @@ extension TrackableScreen {
         )
     }
 }
+
+struct AnalyticsScreen: TrackableScreen {
+    let trackingName: String
+    let trackingClass: String
+}

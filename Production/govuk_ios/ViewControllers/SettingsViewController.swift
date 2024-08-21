@@ -37,6 +37,16 @@ class SettingsViewController: BaseViewController,
         constraints()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let screen = AnalyticsScreen(
+            trackingName: viewModel.title,
+            trackingClass: String(describing: type(of: self))
+        )
+        analyticsService.track(screen: screen)
+    }
+
     private func addContent() {
         let stack = UIStackView()
         stack.axis = .vertical

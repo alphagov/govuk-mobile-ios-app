@@ -22,7 +22,7 @@ public final class AppConfigService {
         }
     }
 
-    private func getFeatureflags(result: Result<AppConfig, AppConfigServiceError>) throws {
+    private func getFeatureflags(result: Result<AppConfig, AppConfigError>) throws {
         switch result {
         case .success(let appConfig):
             self.featureFlags = appConfig.config.releaseFlags

@@ -1,5 +1,5 @@
 import Foundation
 
-enum AppConfigServiceError: Error {
+enum AppConfigError: Error {
     case loadJsonError
 }

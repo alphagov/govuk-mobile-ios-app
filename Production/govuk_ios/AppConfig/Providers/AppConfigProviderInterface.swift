@@ -1,7 +1,6 @@
 import Foundation
 
 protocol AppConfigProviderInterface {
- func fetchAppConfig(filename: String,
-                     completionHandler:
-                     @escaping (Result<AppConfig, AppConfigServiceError>) -> Void)
+    func fetchAppConfig(filename: String,
+                        completion: @escaping(Result<AppConfig, AppConfigError>) -> Void)
 }

@@ -21,7 +21,7 @@ final class AppConfigServiceTests: XCTestCase {
         XCTAssertEqual(sut.isFeatureEnabled(key: .search), true)
     }
     
-    func test_isFeatureEnabled_whenFeatureFlagIsSetToUnavilable_returnsFlase() throws {
+    func test_isFeatureEnabled_whenFeatureFlagIsSetToUnavilable_returnsFalse() throws {
         //Given
         let mockAppConfigProvider = MockAppConfigProvider()
         let sut = AppConfigService(configProvider: mockAppConfigProvider)

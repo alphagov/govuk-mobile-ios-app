@@ -10,5 +10,6 @@ class SettingsViewControllerTests: XCTestCase {
         let subject = SettingsViewController(viewModel: viewModel)
         let view = subject.view
         XCTAssertEqual(view?.backgroundColor, UIColor.govUK.fills.surfaceBackground)
+        XCTAssertEqual(subject.title, "Settings")
     }
 }

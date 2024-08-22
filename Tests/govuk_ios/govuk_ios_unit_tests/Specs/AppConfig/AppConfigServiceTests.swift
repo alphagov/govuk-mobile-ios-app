@@ -6,8 +6,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_isFeatureEnabled_whenFeatureFlagIsSetToAvilable_returnsTrue() throws {
         //Given
         let mockAppConfigProvider = MockAppConfigProvider()
-        var sut = AppConfigService(configProvider: mockAppConfigProvider)
-        sut = AppConfigService(configProvider: mockAppConfigProvider)
+        let sut = AppConfigService(configProvider: mockAppConfigProvider)
         //When
         mockAppConfigProvider._receivedAppConfigCompletion?(.success(AppConfig(platform: "",
                                config: Config(available: true, 
@@ -25,8 +24,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_isFeatureEnabled_whenFeatureFlagIsSetToUnavilable_returnsFlase() throws {
         //Given
         let mockAppConfigProvider = MockAppConfigProvider()
-        var sut = AppConfigService(configProvider: mockAppConfigProvider)
-        sut = AppConfigService(configProvider: mockAppConfigProvider)
+        let sut = AppConfigService(configProvider: mockAppConfigProvider)
         //When
         mockAppConfigProvider._receivedAppConfigCompletion?(.success(AppConfig(platform: "",
                                config: Config(available: true, 
@@ -42,8 +40,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
         //Given
         let mockAppConfigProvider = MockAppConfigProvider()
-        var sut = AppConfigService(configProvider: mockAppConfigProvider)
-        sut = AppConfigService(configProvider: mockAppConfigProvider)
+        let sut = AppConfigService(configProvider: mockAppConfigProvider)
         //When
         mockAppConfigProvider._receivedAppConfigCompletion?(.success(AppConfig(platform: "",
                                config: Config(available: true, 

@@ -8,8 +8,7 @@ class SearchViewController: BaseViewController {
         let view = UIView()
         view.backgroundColor = GOVUKColors.fills.surfaceModal
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 10
-        view.clipsToBounds = true
+//        view.clipsToBounds = true
         return view
     }()
 
@@ -82,15 +81,23 @@ class SearchViewController: BaseViewController {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            modalView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            modalView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            modalView.widthAnchor.constraint(equalToConstant: view.bounds.width),
+//            modalView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            modalView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            modalView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            modalView.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor
+            ),
+            modalView.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor
+            ),
             modalView.heightAnchor.constraint(equalToConstant: view.bounds.height),
 
             searchBoxView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBoxView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            searchBoxView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+                equalTo: modalView.topAnchor),
+            searchBoxView.leftAnchor.constraint(equalTo: modalView.leftAnchor, constant: 16),
+            searchBoxView.rightAnchor.constraint(equalTo: modalView.rightAnchor, constant: -16),
             searchBoxView.heightAnchor.constraint(equalToConstant: 36),
 
             searchBoxTextField.topAnchor.constraint(equalTo: searchBoxView.topAnchor),
@@ -109,6 +116,7 @@ class SearchViewController: BaseViewController {
         ]
 //        appearence.titlePositionAdjustment.vertical = 8
         appearence.configureWithTransparentBackground()
+        appearence.backgroundColor = GOVUKColors.fills.surfaceModal
 
         let barButton = UIBarButtonItem(
             barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonPressed)

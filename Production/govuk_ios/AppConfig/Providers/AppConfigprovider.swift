@@ -3,9 +3,9 @@ import Foundation
 class AppConfigProvider: AppConfigProviderInterface {
     func fetchAppConfig(filename: String,
                         completion: @escaping(Result<AppConfig, AppConfigError>) -> Void) {
-                                let config = loadJSON(filename: filename, bundle: .main)
-                                completion(config)
-                            }
+        let config = loadJSON(filename: filename, bundle: .main)
+        completion(config)
+    }
 
     private func loadJSON(filename: String,
                           bundle: Bundle) -> Result<AppConfig, AppConfigError> {

@@ -6,7 +6,6 @@ public final class AppConfigService {
 
     private enum ConfigStrings: String {
         case filename = "RemoteConfigResponse"
-        case fileType = "json"
     }
 
     init(configProvider: AppConfigProviderInterface) {

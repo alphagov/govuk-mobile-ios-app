@@ -4,6 +4,20 @@ struct SettingsViewModel {
     var appVersion: String? {
         getVersionNumber()
     }
+
+    var listContent: [GroupedListSection] {
+        [
+            .init(
+                heading: "About the app",
+                rows: [
+                    InformationRow(
+                        title: "App version number",
+                        detail: appVersion ?? "-"
+                    )
+                ]
+            )
+        ]
+    }
 }
 
 extension SettingsViewModel {

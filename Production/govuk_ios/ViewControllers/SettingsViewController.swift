@@ -22,6 +22,8 @@ class SettingsViewController: BaseViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("app version: ", viewModel.appVersion)
+
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
 
         title = viewModel.title
@@ -73,5 +75,7 @@ class SettingsViewController: BaseViewController,
             scrollview.contentLayoutGuide
                 .trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+
+        print("app version: ", viewModel.appVersion)
     }
 }

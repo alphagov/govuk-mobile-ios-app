@@ -72,6 +72,12 @@ class SearchViewController: BaseViewController {
         configureConstraints()
     }
 
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        searchBoxTextField.becomeFirstResponder()
+    }
+
     private func configureUI() {
         configureNavBar()
         view.addSubview(modalView)

@@ -64,17 +64,6 @@ class SearchViewController: BaseViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Search"
-        let appearence = UINavigationBarAppearance()
-        appearence.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.govUK.bodySemibold
-        ]
-        appearence.titlePositionAdjustment.vertical = 8
-        appearence.configureWithTransparentBackground()
-        navigationItem.standardAppearance = appearence
-        navigationItem.compactAppearance = appearence
-        navigationItem.scrollEdgeAppearance = appearence
-
         if #available(iOS 15.0, *) {
             let sheet = self.sheetPresentationController
             sheet?.prefersGrabberVisible = true
@@ -85,6 +74,7 @@ class SearchViewController: BaseViewController {
     }
 
     private func configureUI() {
+        configureNavBar()
         view.addSubview(modalView)
         modalView.addSubview(searchBoxView)
         searchBoxView.addSubview(searchBoxTextField)
@@ -108,5 +98,41 @@ class SearchViewController: BaseViewController {
             searchBoxTextField.rightAnchor.constraint(equalTo: searchBoxView.rightAnchor),
             searchBoxTextField.heightAnchor.constraint(equalTo: searchBoxView.heightAnchor)
         ])
+    }
+
+    private func configureNavBar() {
+        self.title = "Search"
+        let navBarItem = self.navigationItem
+        let appearence = UINavigationBarAppearance()
+        appearence.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.govUK.bodySemibold
+        ]
+//        appearence.titlePositionAdjustment.vertical = 8
+        appearence.configureWithTransparentBackground()
+
+        let barButton = UIBarButtonItem(
+            barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonPressed)
+        )
+        let attributes = [NSAttributedString.Key.foregroundColor: GOVUKColors.text.link]
+        barButton.setTitleTextAttributes(attributes, for: .normal)
+//        let attributes = [NSAttributedString.Key.baselineOffset: NSNumber(value: -8)]
+
+//        barButton.setTitlePositionAdjustment(
+//            UIOffset(horizontal: 20, vertical: 0),
+//            for: UIBarMetrics.default
+//        )
+
+        navBarItem.setLeftBarButton(
+            barButton,
+            animated: true
+        )
+
+        navBarItem.standardAppearance = appearence
+        navBarItem.compactAppearance = appearence
+        navBarItem.scrollEdgeAppearance = appearence
+    }
+
+    @objc func cancelButtonPressed(_ sender: UIBarItem) {
+        self.navigationController?.dismiss(animated: true)
     }
 }

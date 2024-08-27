@@ -1,7 +1,8 @@
 import UIKit
 import UIComponents
 
-class SearchViewController: BaseViewController {
+class SearchViewController: BaseViewController,
+                            TrackableScreen {
     private let viewModel: SearchViewModel
 
     private lazy var modalView: UIView = {
@@ -57,6 +58,8 @@ class SearchViewController: BaseViewController {
         )
         return textField
     }()
+
+    var trackingName: String { "searchmodal" }
 
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel

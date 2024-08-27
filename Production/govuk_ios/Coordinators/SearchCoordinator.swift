@@ -12,8 +12,6 @@ class SearchCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.search()
-        viewController.modalPresentationStyle = .pageSheet
-
         set(viewController, animated: true)
     }
 }

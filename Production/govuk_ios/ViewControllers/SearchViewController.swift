@@ -41,6 +41,11 @@ class SearchViewController: BaseViewController {
         imageView.tintColor = GOVUKColors.text.secondary
 
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Search",
+            attributes: [NSAttributedString.Key.foregroundColor: GOVUKColors.text.secondary]
+        )
+        textField.textColor = GOVUKColors.text.primary
         textField.clearButtonMode = .always
         textField.leftViewMode = .always
         textField.leftView = imageContainerView

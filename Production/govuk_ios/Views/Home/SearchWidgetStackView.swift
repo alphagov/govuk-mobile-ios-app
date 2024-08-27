@@ -17,7 +17,7 @@ class SearchWidgetStackView: UIStackView, WidgetInterface {
         button.setTitle("Search", for: .normal)
         button.setTitleColor(GOVUKColors.text.secondary, for: .normal)
         button.imageView?.tintColor = GOVUKColors.text.secondary
-        button.backgroundColor = .black // GOVUKColors.fills.surfaceBackground
+        button.backgroundColor = GOVUKColors.fills.surfaceSearchBox
         button.imageEdgeInsets.left = 5
         button.imageEdgeInsets.right = 250
         button.titleEdgeInsets.left = 5

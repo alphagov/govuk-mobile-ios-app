@@ -11,20 +11,25 @@ struct GroupedListSectionView: View {
                 .padding(.horizontal, 16)
             ZStack {
                 Color(UIColor.govUK.fills.surfaceCard)
-                VStack {
-                    ForEach(section.rows, id: \.title) { row in
+                VStack(spacing: 0) {
+                    ForEach(Array(zip(section.rows, section.rows.indices)), id: \.0.title) { row, index in
                         GroupedListRowView(row: row)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 12)
+                        if index < section.rows.count - 1 {
+                            Divider()
+                                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                                .padding(.leading, 16)
+                        }
                     }
                 }
             }
-            .clipShape(RoundedRectangle(cornerRadius: 15))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(
-                RoundedRectangle(cornerRadius: 15)
+                RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(
                         Color(UIColor.govUK.strokes.listDivider),
-                        lineWidth: 1.0,
+                        lineWidth: SinglePixelLineHelper.pixelSize,
                         antialiased: true
                     )
             )

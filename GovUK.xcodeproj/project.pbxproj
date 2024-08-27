@@ -203,6 +203,7 @@
 		9685F82B2C78C04800C33614 /* GroupedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82A2C78C04800C33614 /* GroupedList.swift */; };
 		9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */; };
 		9685F82F2C78DF7000C33614 /* GroupedListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */; };
+		96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -429,6 +430,7 @@
 		9685F82A2C78C04800C33614 /* GroupedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedList.swift; sourceTree = "<group>"; };
 		9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSection.swift; sourceTree = "<group>"; };
 		9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSectionView.swift; sourceTree = "<group>"; };
+		96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePixelLineHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -844,6 +846,7 @@
 				5D6032182C81D68D00C46660 /* Locale+Analytics.swift */,
 				5D349F682C6B550000B7F747 /* URL+Extensions.swift */,
 				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
+				96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1560,6 +1563,7 @@
 				5DAC6E5A2C64CDA20099406C /* TrackableScreen.swift in Sources */,
 				5DD036852C5A577C00EEF11E /* NavigationBar.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
+				96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				4E18E0902C74A45500538CF0 /* MockAppConfigProvider.swift in Sources */,
 				5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */,

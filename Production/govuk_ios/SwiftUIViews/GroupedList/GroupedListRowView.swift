@@ -56,6 +56,7 @@ struct LinkRowView: View {
                 Spacer()
                 Image(systemName: "arrow.up.right")
             }
+            .foregroundColor(Color(UIColor.govUK.text.link))
         }
     }
 }
@@ -80,6 +81,7 @@ struct NavigationRowView: View {
                         UIColor.govUK.text.trailingIcon
                     )
                 )
+                .font(Font.govUK.bodySemibold)
         }
     }
 }

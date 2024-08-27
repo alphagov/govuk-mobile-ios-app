@@ -18,10 +18,9 @@ class SearchWidgetStackView: UIStackView, WidgetInterface {
         button.setTitleColor(GOVUKColors.text.secondary, for: .normal)
         button.imageView?.tintColor = GOVUKColors.text.secondary
         button.backgroundColor = GOVUKColors.fills.surfaceSearchBox
-        button.imageEdgeInsets.left = 5
-        button.imageEdgeInsets.right = 250
-        button.titleEdgeInsets.left = 5
-        button.titleEdgeInsets.right = 225
+        button.contentHorizontalAlignment = .left
+        button.imageEdgeInsets.left = 8
+        button.titleEdgeInsets.left = 13
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
         return button

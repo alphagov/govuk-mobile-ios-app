@@ -52,15 +52,15 @@ extension GroupedListSection {
                 rows: [
                     InformationRow(
                         title: "Information row",
-                        detail: "0.0.1"
+                        detail: "1.0"
                     ),
                     LinkRow(
-                        title: "Link row", action: {
+                        title: "External link row", action: {
                             print("link row tapped")
                         }
                     ),
                     NavigationRow(
-                        title: "Nav row", action: {
+                        title: "Navigation row", action: {
                             print("nav row tapped")
                         }
                     )

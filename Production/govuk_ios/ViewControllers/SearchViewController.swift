@@ -50,6 +50,11 @@ class SearchViewController: BaseViewController {
         textField.clearButtonMode = .always
         textField.leftViewMode = .always
         textField.leftView = imageContainerView
+        textField.addTarget(
+            self,
+            action: #selector(onSearchReturn),
+            for: UIControl.Event.editingDidEndOnExit
+        )
         return textField
     }()
 
@@ -150,5 +155,17 @@ class SearchViewController: BaseViewController {
 
     @objc func cancelButtonPressed(_ sender: UIBarItem) {
         self.navigationController?.dismiss(animated: true)
+    }
+
+    @objc func onSearchReturn() {
+        self.searchBoxTextField.resignFirstResponder()
+
+        let searchTerm = searchBoxTextField.text!
+
+        if let url = URL(
+            string: "https://www.gov.uk/search/all?keywords=\(searchTerm)&order=relevance"
+        ) {
+            UIApplication.shared.open(url)
+        }
     }
 }

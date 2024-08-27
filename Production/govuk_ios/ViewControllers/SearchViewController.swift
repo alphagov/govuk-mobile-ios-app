@@ -39,6 +39,8 @@ class SearchViewController: BaseViewController {
         imageView.contentMode = .center
         imageView.tintColor = GOVUKColors.text.secondary
 
+        textField.accessibilityLabel = "Text field"
+        textField.accessibilityHint = "Returns content on GOV.UK"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.attributedPlaceholder = NSAttributedString(
             string: "Search",

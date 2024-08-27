@@ -5,7 +5,7 @@ struct GroupedListSectionView: View {
     private let cornerRadius: CGFloat = 10
 
     var body: some View {
-        LazyVStack(alignment: .leading) {
+        LazyVStack(alignment: .leading, spacing: 8) {
             Text(section.heading)
                 .font(Font.govUK.title3.bold())
                 .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -18,14 +18,14 @@ struct GroupedListSectionView: View {
                                   section.rows.indices)),
                         id: \.0.title
                     ) { row, index in
-                        GroupedListRowView(row: row)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                        if index < section.rows.count - 1 {
+                        if index > 0 {
                             Divider()
                                 .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
                                 .padding(.leading, 16)
                         }
+                        GroupedListRowView(row: row)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
                     }
                 }
             }

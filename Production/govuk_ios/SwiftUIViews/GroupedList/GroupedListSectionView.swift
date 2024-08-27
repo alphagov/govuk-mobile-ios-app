@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GroupedListSectionView: View {
     let section: GroupedListSection
+    private let cornerRadius: CGFloat = 10
 
     var body: some View {
         LazyVStack(alignment: .leading) {
@@ -12,7 +13,11 @@ struct GroupedListSectionView: View {
             ZStack {
                 Color(UIColor.govUK.fills.surfaceCard)
                 VStack(spacing: 0) {
-                    ForEach(Array(zip(section.rows, section.rows.indices)), id: \.0.title) { row, index in
+                    ForEach(
+                        Array(zip(section.rows,
+                                  section.rows.indices)),
+                        id: \.0.title
+                    ) { row, index in
                         GroupedListRowView(row: row)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 12)
@@ -24,9 +29,9 @@ struct GroupedListSectionView: View {
                     }
                 }
             }
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .strokeBorder(
                         Color(UIColor.govUK.strokes.listDivider),
                         lineWidth: SinglePixelLineHelper.pixelSize,

@@ -35,12 +35,6 @@ class SettingsViewController: BaseViewController,
         configureConstraints()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        analyticsService.track(screen: self)
-    }
-
     private func configureUI() {
         // placeholder content - will be replaced
         let stack = UIStackView()

@@ -164,6 +164,7 @@ class SearchViewController: BaseViewController,
         self.searchBoxTextField.resignFirstResponder()
 
         let searchTerm = searchBoxTextField.text!
+        viewModel.trackSearchTerm(searchTerm: searchTerm)
 
         if let url = URL(
             string: "https://www.gov.uk/search/all?keywords=\(searchTerm)&order=relevance"

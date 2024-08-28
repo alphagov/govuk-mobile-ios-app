@@ -59,8 +59,10 @@ class ViewControllerBuilder {
         )
     }
 
-    func search() -> UIViewController {
-        let viewModel = SearchViewModel()
+    func search(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+        let viewModel = SearchViewModel(
+            analyticsService: analyticsService
+        )
         return SearchViewController(
             viewModel: viewModel
         )

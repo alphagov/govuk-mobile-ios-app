@@ -25,29 +25,24 @@ class SettingsViewController: BaseViewController,
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
 
         title = viewModel.title
-
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.prefersLargeTitles = true
 
         scrollview.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollview)
 
-        addContent()
-
-        constraints()
+        configureUI()
+        configureConstraints()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        let screen = AnalyticsScreen(
-            trackingName: viewModel.title,
-            trackingClass: String(describing: type(of: self))
-        )
-        analyticsService.track(screen: screen)
+        analyticsService.track(screen: self)
     }
 
-    private func addContent() {
+    private func configureUI() {
+        // placeholder content - will be replaced
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
@@ -73,7 +68,7 @@ class SettingsViewController: BaseViewController,
         ])
     }
 
-    private func constraints() {
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),

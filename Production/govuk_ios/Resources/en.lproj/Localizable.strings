@@ -1,2 +1,5 @@
 /* MARK: - Launch */
 "splashScreenAccessibilityTitle" = "Gov.Uk";
+
+/* MARK: - Home */
+"homeScreenLogoAccessibilityHint" = "Gov.Uk logo";

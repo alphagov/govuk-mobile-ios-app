@@ -14,7 +14,6 @@ class APIServiceClientTests: XCTestCase {
         let govRequest = GOVRequest(
             urlPath: "/test/test",
             method: .post,
-            data: nil,
             parameters: ["test_key": "test_value"],
             queryParameters: nil,
             additionalHeaders: nil
@@ -47,7 +46,6 @@ class APIServiceClientTests: XCTestCase {
         let request = GOVRequest(
             urlPath: "/test/123",
             method: .get,
-            data: nil,
             parameters: nil,
             queryParameters: ["query": "value"],
             additionalHeaders: nil
@@ -77,7 +75,6 @@ class APIServiceClientTests: XCTestCase {
         let request = GOVRequest(
             urlPath: "/test/123",
             method: .get,
-            data: nil,
             parameters: nil,
             queryParameters: nil,
             additionalHeaders: nil
@@ -108,7 +105,6 @@ class APIServiceClientTests: XCTestCase {
         let request = GOVRequest(
             urlPath: "/test/123",
             method: .get,
-            data: nil,
             parameters: nil,
             queryParameters: nil,
             additionalHeaders: nil

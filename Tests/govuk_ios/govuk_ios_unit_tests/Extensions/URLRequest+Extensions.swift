@@ -8,7 +8,6 @@ extension URLRequest {
 
         bodyStream.open()
 
-        // Will read 16 chars per iteration. Can use bigger buffer if needed
         let bufferSize: Int = 16
 
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)

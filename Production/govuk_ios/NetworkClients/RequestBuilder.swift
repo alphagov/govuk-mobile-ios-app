@@ -27,16 +27,6 @@ extension RequestBuilderInterface {
         )
     }
 
-    func upload(from request: GOVRequest,
-                with url: URL) -> URLRequest {
-        self.request(
-            url: URL(base: url, request: request),
-            method: request.method.rawValue,
-            headers: request.additionalHeaders,
-            body: request.data
-        )
-    }
-
     internal func request(url: URL,
                           method: String,
                           headers: [String: String]?,

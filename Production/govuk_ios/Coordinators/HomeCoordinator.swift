@@ -6,32 +6,26 @@ class HomeCoordinator: TabItemCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
-    var searchActionButtonPressed: () -> Void {
-        return { [weak self] in
-            guard let strongSelf = self else { return }
-            let navigationController = UINavigationController()
-            let coordinator = strongSelf.coordinatorBuilder.search(
-                navigationController: navigationController
-            )
-            strongSelf.present(coordinator)
-        }
-    }
+    private let configService: AppConfigService
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         configService: AppConfigService) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
+        self.configService = configService
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.home(
-            searchButtonPrimaryAction: searchActionButtonPressed
+            searchButtonPrimaryAction: searchActionButtonPressed,
+            configService: configService
         )
         set([viewController], animated: false)
     }
@@ -41,5 +35,16 @@ class HomeCoordinator: TabItemCoordinator {
             for: url,
             parent: self
         )
+    }
+
+    var searchActionButtonPressed: () -> Void {
+        return { [weak self] in
+            guard let strongSelf = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = strongSelf.coordinatorBuilder.search(
+                navigationController: navigationController
+            )
+            strongSelf.present(coordinator)
+        }
     }
 }

@@ -19,8 +19,8 @@ class HomeNavigationBar: UIView {
         let uiImageView = UIImageView(image: .homeLogo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
         uiImageView.isAccessibilityElement = true
-        uiImageView.accessibilityHint = NSLocalizedString(
-            "homeScreenLogoAccessibilityHint",
+        uiImageView.accessibilityLabel = NSLocalizedString(
+            "homeScreenLogoAccessibilityTitle",
             comment: ""
         )
         return uiImageView

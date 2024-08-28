@@ -2,4 +2,4 @@
 "splashScreenAccessibilityTitle" = "Gov.Uk";
 
 /* MARK: - Home */
-"homeScreenLogoAccessibilityHint" = "Gov.Uk logo";
+"homeScreenLogoAccessibilityTitle" = "Gov.Uk logo";

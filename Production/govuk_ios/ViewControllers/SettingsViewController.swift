@@ -7,8 +7,7 @@ class SettingsViewController: BaseViewController,
     var trackingName: String { "settingsscreen" }
 
     private var viewModel: SettingsViewModel
-
-    let scrollview = UIScrollView(frame: .zero)
+    private let scrollview = UIScrollView(frame: .zero)
 
     public init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel

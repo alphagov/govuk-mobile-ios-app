@@ -13,7 +13,7 @@ extension RequestBuilderInterface {
     func data(from request: GOVRequest,
               with url: URL) -> URLRequest {
         var data: Data?
-        if let params = request.parameters {
+        if let params = request.bodyParameters {
             data = try? JSONSerialization.data(
                 withJSONObject: params,
                 options: .prettyPrinted

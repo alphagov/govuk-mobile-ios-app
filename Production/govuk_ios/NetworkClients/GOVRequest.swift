@@ -3,7 +3,7 @@ import Foundation
 struct GOVRequest {
     let urlPath: String
     let method: Method
-    let parameters: [String: Any]?
+    let bodyParameters: [String: Any]?
     let queryParameters: [String: String?]?
     let additionalHeaders: [String: String]?
 }

@@ -33,6 +33,7 @@
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
 		16CA29F42C2199FB000B3B48 /* MockLoggingAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */; };
+		3D3EF74A2C7F151500981276 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D3EF7482C7F151500981276 /* Localizable.strings */; };
 		4E003E7A2C75EDEC008FCBF2 /* MockAppConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */; };
 		4E003E7C2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */; };
 		4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */; };
@@ -221,6 +222,7 @@
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoggingAnalyticsService.swift; sourceTree = "<group>"; };
+		3D3EF7492C7F151500981276 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponse.json; sourceTree = "<group>"; };
 		4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponseInvalid.json; sourceTree = "<group>"; };
 		4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceTests.swift; sourceTree = "<group>"; };
@@ -936,6 +938,7 @@
 				4E6663C22C7366CC0063E81C /* RemoteConfigResponse.json */,
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
+				3D3EF7482C7F151500981276 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1233,6 +1236,7 @@
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				4E003E7C2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json in Resources */,
+				3D3EF74A2C7F151500981276 /* Localizable.strings in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 				4E6663C32C7366CC0063E81C /* RemoteConfigResponse.json in Resources */,
 				162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */,
@@ -1481,6 +1485,17 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		3D3EF7482C7F151500981276 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D3EF7492C7F151500981276 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		5D4B9D3A2C074207005F126A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1525,6 +1540,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1588,6 +1604,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

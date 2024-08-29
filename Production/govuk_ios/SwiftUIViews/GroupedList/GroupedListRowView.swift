@@ -51,12 +51,16 @@ struct LinkRowView: View {
         Button {
             row.action()
         } label: {
-            HStack {
-                Text(row.title)
-                Spacer()
-                Image(systemName: "arrow.up.right")
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(row.title)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                }
+                .foregroundColor(Color(UIColor.govUK.text.link))
+
+                RowDetail(text: row.body)
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
         }
     }
 }
@@ -68,20 +72,41 @@ struct NavigationRowView: View {
         Button {
             row.action()
         } label: {
-            Text(row.title)
-                .foregroundColor(
-                    Color(
-                        UIColor.govUK.text.primary
-                    )
-                )
-            Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundColor(
-                    Color(
-                        UIColor.govUK.text.trailingIcon
-                    )
-                )
-                .font(Font.govUK.bodySemibold)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(row.title)
+                        .foregroundColor(
+                            Color(
+                                UIColor.govUK.text.primary
+                            )
+                        )
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(
+                            Color(
+                                UIColor.govUK.text.trailingIcon
+                            )
+                        )
+                        .font(Font.govUK.bodySemibold)
+                }
+            }
+        }
+    }
+}
+
+struct RowDetail: View {
+    let text: String?
+
+    var body: some View {
+        Group {
+            if let text {
+                Text(text)
+                    .font(Font.govUK.subheadline)
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    .multilineTextAlignment(.leading)
+            } else {
+                EmptyView()
+            }
         }
     }
 }

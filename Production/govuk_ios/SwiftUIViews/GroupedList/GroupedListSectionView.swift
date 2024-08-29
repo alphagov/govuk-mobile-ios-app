@@ -6,10 +6,12 @@ struct GroupedListSectionView: View {
 
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 8) {
-            Text(section.heading)
-                .font(Font.govUK.title3.bold())
-                .foregroundColor(Color(UIColor.govUK.text.primary))
-                .padding(.horizontal, 16)
+            if let heading = section.heading {
+                Text(heading)
+                    .font(Font.govUK.title3.bold())
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .padding(.horizontal, 16)
+            }
             ZStack {
                 Color(UIColor.govUK.fills.surfaceCard)
                 VStack(spacing: 0) {
@@ -38,8 +40,16 @@ struct GroupedListSectionView: View {
                         antialiased: true
                     )
             )
+
+            if let footer = section.footer {
+                Text(footer)
+                    .font(Font.govUK.footnote)
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    .padding(.horizontal, 16)
+            }
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.bottom)
     }
 }
 

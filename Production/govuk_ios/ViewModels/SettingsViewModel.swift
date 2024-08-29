@@ -13,9 +13,11 @@ struct SettingsViewModel {
                 rows: [
                     InformationRow(
                         title: "App version number",
+                        body: nil,
                         detail: appVersion ?? "-"
                     )
-                ]
+                ],
+                footer: nil
             )
         ]
     }

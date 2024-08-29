@@ -96,6 +96,35 @@ class APIServiceClientTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
+    func test_send_successResponse_noData_returnsExpectedResult() {
+        let subject = APIServiceClient(
+            baseUrl: URL(string: "https://www.google.com")!,
+            session: URLSession.mock,
+            requestBuilder: RequestBuilder()
+        )
+        let request = GOVRequest(
+            urlPath: "/test/123",
+            method: .get,
+            bodyParameters: nil,
+            queryParameters: nil,
+            additionalHeaders: nil
+        )
+        let expectation = expectation()
+        let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
+        MockURLProtocol.requestHandler = { request in
+            return (expectedResponse, nil, nil)
+        }
+        subject.send(
+            request: request,
+            completion: { result in
+                let resultData = try? result.get()
+                XCTAssertNotNil(resultData)
+                expectation.fulfill()
+            }
+        )
+        wait(for: [expectation], timeout: 1)
+    }
+
     func test_send_failureResponse_returnsExpectedResult() {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,

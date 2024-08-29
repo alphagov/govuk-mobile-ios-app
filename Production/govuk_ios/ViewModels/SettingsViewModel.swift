@@ -1,5 +1,5 @@
 import Foundation
 
 struct SettingsViewModel {
-    // Empty for now
+    let title = "Settings"
 }

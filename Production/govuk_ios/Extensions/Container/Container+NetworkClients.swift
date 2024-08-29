@@ -3,7 +3,7 @@ import Foundation
 import Factory
 
 extension Container {
-    var apiClient: Factory<APIServiceClient> {
+    var govukAPIClient: Factory<APIServiceClient> {
         Factory(self) {
             APIServiceClient(
                 baseUrl: URL(string: "https://www.gov.uk")!,

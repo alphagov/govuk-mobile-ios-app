@@ -66,7 +66,7 @@ class APIServiceClientTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func test_send_200_returnsExpectedResult() {
+    func test_send_successResponse_returnsExpectedResult() {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,
@@ -96,7 +96,7 @@ class APIServiceClientTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func test_send_failure_returnsExpectedResult() {
+    func test_send_failureResponse_returnsExpectedResult() {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,

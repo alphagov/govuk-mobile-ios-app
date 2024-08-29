@@ -13,4 +13,5 @@ enum Method: String {
     case post
     case delete
     case put
+    case patch
 }

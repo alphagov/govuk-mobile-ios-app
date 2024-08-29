@@ -18,6 +18,11 @@ class HomeNavigationBar: UIView {
     lazy var logoImageView: UIImageView = {
         let uiImageView = UIImageView(image: .homeLogo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
+        uiImageView.isAccessibilityElement = true
+        uiImageView.accessibilityLabel = NSLocalizedString(
+            "homeScreenLogoAccessibilityTitle",
+            comment: ""
+        )
         return uiImageView
     }()
 

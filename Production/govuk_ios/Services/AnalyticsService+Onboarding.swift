@@ -10,7 +10,7 @@ extension AnalyticsService: OnboardingAnalyticsService {
                 "type": event.type,
                 "text": event.text,
                 "language": Locale.current.analyticsLanguageCode
-            ],
+            ].compactMapValues({ $0 }),
             uniquingKeysWith: { lhs, _ in lhs }
         )
         let mappedEvent = AppEvent(

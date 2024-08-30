@@ -13,8 +13,12 @@ class SettingsViewController: BaseViewController,
 
     private var contentViewController: UIViewController {
         let settingsContentView = GroupedList(content: viewModel.listContent)
+        let viewController = UIHostingController(rootView: settingsContentView)
+        viewController.view.layer.backgroundColor = UIColor.clear.cgColor
 
-        return UIHostingController(rootView: settingsContentView)
+//        addChild(viewController)
+//        viewController.didMove(toParent: self)
+        return viewController
     }
 
     public init(viewModel: SettingsViewModel) {
@@ -46,28 +50,36 @@ class SettingsViewController: BaseViewController,
 
     private func configureUI() {
         // placeholder content - will be replaced
+
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.alignment = .fill
+        stack.alignment = .top
         stack.distribution = .fill
 
-        for index in 1..<100 {
-            let label = UILabel()
-            label.numberOfLines = 0
-            label.text = "temporary content \(index)"
-            label.font = UIFont.govUK.body
-            label.adjustsFontForContentSizeCategory = true
+        addChild(contentViewController)
+        contentViewController.didMove(toParent: self)
 
-            stack.addArrangedSubview(label)
-        }
+        stack.addArrangedSubview(contentViewController.view)
+
         scrollview.addSubview(stack)
+
+//        scrollview.addSubview(contentViewController.view)
+//
+//        view.addSubview(scrollview)
+//        contentViewController.view
+//            .translatesAutoresizingMaskIntoConstraints = false
+//
+//        scrollview.addSubview(stack)
 
         stack.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor, constant: 16),
-            stack.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor, constant: -16),
-            stack.heightAnchor.constraint(equalTo: scrollview.contentLayoutGuide.heightAnchor)
+            stack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            stack.topAnchor.constraint(equalTo: scrollview.contentLayoutGuide.topAnchor),
+
+            stack.heightAnchor
+                .constraint(lessThanOrEqualTo: scrollview.contentLayoutGuide.heightAnchor)
         ])
     }
 

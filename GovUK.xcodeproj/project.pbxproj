@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -96,6 +96,7 @@
 		5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */; };
 		5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
+		5D4E255B2C821BCE00FD9A28 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4E255A2C821BCE00FD9A28 /* Onboarding */; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
 		5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */; };
 		5D51C8382C5BBF600011ABE9 /* HomeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D51C8372C5BBF600011ABE9 /* HomeWidgetView.swift */; };
@@ -384,6 +385,7 @@
 				160A02642C208B0B00FE01EB /* HTTPLogging in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
 				160A02602C208B0B00FE01EB /* GAnalytics in Frameworks */,
+				5D4E255B2C821BCE00FD9A28 /* Onboarding in Frameworks */,
 				5D1353AB2BE0D75000414441 /* Homepage in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
 			);
@@ -1182,6 +1184,7 @@
 				160A02652C208B0B00FE01EB /* Logging */,
 				5D0278362C29CB5800F2A4EB /* Lottie */,
 				5D0B02022C81A7E90013A410 /* Onboarding */,
+				5D4E255A2C821BCE00FD9A28 /* Onboarding */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1268,7 +1271,7 @@
 				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
 				160A025E2C208B0B00FE01EB /* XCRemoteSwiftPackageReference "mobile-ios-logging" */,
 				5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				5D0B02012C81A7E90013A410 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */,
+				5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -1916,13 +1919,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		5D0B02012C81A7E90013A410 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../govuk-mobile-ios-onboarding";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		160A025E2C208B0B00FE01EB /* XCRemoteSwiftPackageReference "mobile-ios-logging" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1951,6 +1947,14 @@
 		5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-homepage";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
 			requirement = {
 				branch = develop;
 				kind = branch;
@@ -2018,6 +2022,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
 			productName = iOSSnapshotTestCase;
+		};
+		5D4E255A2C821BCE00FD9A28 /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
+			productName = Onboarding;
 		};
 		5D7F267D2C0F0EF000842090 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

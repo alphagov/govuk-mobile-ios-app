@@ -27,7 +27,8 @@ class HomeViewController: BaseViewController,
         return scrollView
     }()
 
-    var trackingName: String { "homescreen" }
+    var trackingName: String { "Homepage" }
+    var trackingTitle: String? { "Homepage" }
 
     private let viewModel: HomeViewModel
 

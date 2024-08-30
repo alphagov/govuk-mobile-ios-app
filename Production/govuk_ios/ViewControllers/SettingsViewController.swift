@@ -4,7 +4,8 @@ import UIComponents
 
 class SettingsViewController: BaseViewController,
                               TrackableScreen {
-    var trackingName: String { "settingsscreen" }
+    var trackingName: String { "Settings" }
+    var trackingTitle: String? { viewModel.title }
 
     private var viewModel: SettingsViewModel
     private let scrollview = UIScrollView(frame: .zero)

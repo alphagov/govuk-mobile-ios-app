@@ -34,7 +34,7 @@ struct OnboardingService: OnboardingServiceInterface {
                 body: """
                 Access government services and information on your phone using the GOV.UK app
                 """,
-                alias: "ONBOARDING_A"
+                name: "ONBOARDING_A"
             ),
             .init(
                 image: "onboarding_placeholder_screen_2",
@@ -42,7 +42,7 @@ struct OnboardingService: OnboardingServiceInterface {
                 body: """
                 Pages you’ve visited are saved so you can easily return to them
                 """,
-                alias: "ONBOARDING_B"
+                name: "ONBOARDING_B"
             ),
             .init(
                 image: "onboarding_placeholder_screen_3",
@@ -50,7 +50,7 @@ struct OnboardingService: OnboardingServiceInterface {
                 body: """
                 Choose topics that are relevant to you so you can find what you need faster
                 """,
-                alias: "ONBOARDING_C"
+                name: "ONBOARDING_C"
             )
         ]
     }

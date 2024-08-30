@@ -4,6 +4,14 @@ import UIKit
 protocol TrackableScreen {
     var trackingName: String { get }
     var trackingClass: String { get }
+    var trackingTitle: String? { get }
+    var trackingLanguage: String { get }
+}
+
+extension TrackableScreen {
+    var trackingLanguage: String {
+        Locale.current.analyticsLanguageCode
+    }
 }
 
 extension TrackableScreen where  Self: UIViewController {
@@ -11,5 +19,9 @@ extension TrackableScreen where  Self: UIViewController {
         String(
             describing: type(of: self)
         )
+    }
+
+    var trackingTitle: String? {
+        title
     }
 }

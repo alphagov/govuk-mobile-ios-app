@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -53,6 +53,7 @@
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
 		5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */; };
+		5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0B02022C81A7E90013A410 /* Onboarding */; };
 		5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */; };
 		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
@@ -60,7 +61,6 @@
 		5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */; };
 		5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */; };
 		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
-		5D2EEB5B2C6F54BD00EA2FFF /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2EEB5A2C6F54BD00EA2FFF /* Onboarding */; };
 		5D323F8F2C64E6E800C1DB97 /* MockBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */; };
 		5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D323F902C64EBE900C1DB97 /* HomeViewControllerTests.swift */; };
 		5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349C972C36995500161317 /* XCTestExpectation+Extensions.swift */; };
@@ -107,6 +107,7 @@
 		5D54A83A2BFCE667003D0C21 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
 		5D54A83B2BFCE669003D0C21 /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D5B16F72C51480000EA118F /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B16F62C51480000EA118F /* XCTestCase+Extensions.swift */; };
+		5D6032192C81D68D00C46660 /* Locale+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6032182C81D68D00C46660 /* Locale+Analytics.swift */; };
 		5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */; };
 		5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */; };
 		5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEBF2C32B9180061F344 /* AnimationView.swift */; };
@@ -299,6 +300,7 @@
 		5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSceneDelegate.swift; sourceTree = "<group>"; };
 		5D5B16F62C51480000EA118F /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
+		5D6032182C81D68D00C46660 /* Locale+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Analytics.swift"; sourceTree = "<group>"; };
 		5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Configs.swift"; sourceTree = "<group>"; };
 		5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsService+Onboarding.swift"; sourceTree = "<group>"; };
 		5D79AEBF2C32B9180061F344 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
@@ -377,7 +379,7 @@
 			files = (
 				160A02662C208B0B00FE01EB /* Logging in Frameworks */,
 				5D2129E02BDF98E100142E46 /* Services in Frameworks */,
-				5D2EEB5B2C6F54BD00EA2FFF /* Onboarding in Frameworks */,
+				5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */,
 				160A02622C208B0B00FE01EB /* GDSAnalytics in Frameworks */,
 				160A02642C208B0B00FE01EB /* HTTPLogging in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
@@ -737,6 +739,7 @@
 		5D51C8362C5BB9E80011ABE9 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				5D6032182C81D68D00C46660 /* Locale+Analytics.swift */,
 				5D349F682C6B550000B7F747 /* URL+Extensions.swift */,
 				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
 			);
@@ -1178,7 +1181,7 @@
 				160A02632C208B0B00FE01EB /* HTTPLogging */,
 				160A02652C208B0B00FE01EB /* Logging */,
 				5D0278362C29CB5800F2A4EB /* Lottie */,
-				5D2EEB5A2C6F54BD00EA2FFF /* Onboarding */,
+				5D0B02022C81A7E90013A410 /* Onboarding */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1265,7 +1268,7 @@
 				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
 				160A025E2C208B0B00FE01EB /* XCRemoteSwiftPackageReference "mobile-ios-logging" */,
 				5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				5D7E1C402C6BAC84008EA0F5 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				5D0B02012C81A7E90013A410 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -1403,6 +1406,7 @@
 				168F6FAA2C4FC56B00A0D7F7 /* HomeWidgetViewModel.swift in Sources */,
 				5DBE080C2C4812ED00B58DBE /* BaseViewController.swift in Sources */,
 				5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */,
+				5D6032192C81D68D00C46660 /* Locale+Analytics.swift in Sources */,
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
 				16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
@@ -1912,6 +1916,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		5D0B02012C81A7E90013A410 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../govuk-mobile-ios-onboarding";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		160A025E2C208B0B00FE01EB /* XCRemoteSwiftPackageReference "mobile-ios-logging" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1940,14 +1951,6 @@
 		5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-homepage";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-		5D7E1C402C6BAC84008EA0F5 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
 			requirement = {
 				branch = develop;
 				kind = branch;
@@ -1997,6 +2000,10 @@
 			package = 5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
+		5D0B02022C81A7E90013A410 /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Onboarding;
+		};
 		5D1353AA2BE0D75000414441 /* Homepage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */;
@@ -2006,11 +2013,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */;
 			productName = Services;
-		};
-		5D2EEB5A2C6F54BD00EA2FFF /* Onboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D7E1C402C6BAC84008EA0F5 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
-			productName = Onboarding;
 		};
 		5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */ = {
 			isa = XCSwiftPackageProductDependency;

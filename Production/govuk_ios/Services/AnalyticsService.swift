@@ -35,9 +35,15 @@ class AnalyticsService: AnalyticsServiceInterface {
 
     func track(screen: TrackableScreen) {
         let loggableScreen = screen.toLoggableScreen()
+        let params: [String: Any] = [
+            "screen_name": screen.trackingName,
+            "screen_class": screen.trackingClass,
+            "screen_title": screen.trackingTitle,
+            "language": screen.trackingLanguage
+        ].compactMapValues({ $0 })
         analytics.trackScreen(
             loggableScreen,
-            parameters: [:]
+            parameters: params
         )
     }
 

@@ -1,6 +1,7 @@
 import UIKit
 
 struct SettingsViewModel {
+    var title: String = "Settings"
     var appVersion: String? {
         getVersionNumber()
     }

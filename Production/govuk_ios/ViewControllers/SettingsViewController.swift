@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import UIKit
 import UIComponents
 
@@ -9,6 +10,12 @@ class SettingsViewController: BaseViewController,
 
     private var viewModel: SettingsViewModel
     private let scrollview = UIScrollView(frame: .zero)
+
+    private var contentViewController: UIViewController {
+        let settingsContentView = GroupedList(content: viewModel.listContent)
+
+        return UIHostingController(rootView: settingsContentView)
+    }
 
     public init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel

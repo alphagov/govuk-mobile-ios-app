@@ -3,9 +3,13 @@ import Foundation
 import Factory
 
 extension Container {
-    var testNetworkClient: Factory<TestNetworkClientInterface> {
+    var govukAPIClient: Factory<APIServiceClient> {
         Factory(self) {
-            TestNetworkClient()
+            APIServiceClient(
+                baseUrl: URL(string: "https://www.gov.uk")!,
+                session: URLSession(configuration: .default),
+                requestBuilder: RequestBuilder()
+            )
         }
     }
 }

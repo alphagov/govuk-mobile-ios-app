@@ -1,5 +1,6 @@
-@testable import govuk_ios
 import XCTest
+
+@testable import govuk_ios
 
 final class AppConfigServiceTests: XCTestCase {
     
@@ -8,17 +9,14 @@ final class AppConfigServiceTests: XCTestCase {
         let mockAppConfigProvider = MockAppConfigProvider()
         let sut = AppConfigService(configProvider: mockAppConfigProvider)
         //When
-        mockAppConfigProvider._receivedAppConfigCompletion?(.success(AppConfig(platform: "",
-                               config: Config(available: true, 
-                               minimumVersion: "",
-                               recommendedVersion: "",
-                               releaseFlags: ["search": true],
-                               lastUpdated: ""),
-                               signature: "")
+        let config = Config.arrange(releaseFlags: ["search": true])
+        let appConfig = AppConfig.arrange(
+            config: config
         )
-        )
+        let result: Result<AppConfig, AppConfigError> = .success(appConfig)
+        mockAppConfigProvider._receivedAppConfigCompletion?(result)
         //Then
-        XCTAssertEqual(sut.isFeatureEnabled(key: .search), true)
+        XCTAssertTrue(sut.isFeatureEnabled(key: .search))
     }
     
     func test_isFeatureEnabled_whenFeatureFlagIsSetToUnavilable_returnsFalse() throws {
@@ -26,15 +24,14 @@ final class AppConfigServiceTests: XCTestCase {
         let mockAppConfigProvider = MockAppConfigProvider()
         let sut = AppConfigService(configProvider: mockAppConfigProvider)
         //When
-        mockAppConfigProvider._receivedAppConfigCompletion?(.success(AppConfig(platform: "",
-                               config: Config(available: true, 
-                               minimumVersion: "",
-                               recommendedVersion: "",
-                               releaseFlags: ["search": false],
-                               lastUpdated: ""),
-                               signature: "")))
+        let config = Config.arrange(releaseFlags: ["search": false])
+        let appConfig = AppConfig.arrange(
+            config: config
+        )
+        let result: Result<AppConfig, AppConfigError> = .success(appConfig)
+        mockAppConfigProvider._receivedAppConfigCompletion?(result)
         //Then
-        XCTAssertEqual(sut.isFeatureEnabled(key: .search), false)
+        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
     
     func test_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
@@ -42,14 +39,13 @@ final class AppConfigServiceTests: XCTestCase {
         let mockAppConfigProvider = MockAppConfigProvider()
         let sut = AppConfigService(configProvider: mockAppConfigProvider)
         //When
-        mockAppConfigProvider._receivedAppConfigCompletion?(.success(AppConfig(platform: "",
-                               config: Config(available: true, 
-                               minimumVersion: "",
-                               recommendedVersion: "",
-                               releaseFlags: ["test": false],
-                               lastUpdated: ""),
-                               signature: "")))
+        let config = Config.arrange(releaseFlags: ["test": false])
+        let appConfig = AppConfig.arrange(
+            config: config
+        )
+        let result: Result<AppConfig, AppConfigError> = .success(appConfig)
+        mockAppConfigProvider._receivedAppConfigCompletion?(result)
         //Then
-        XCTAssertEqual(sut.isFeatureEnabled(key: .search), false)
+        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
 }

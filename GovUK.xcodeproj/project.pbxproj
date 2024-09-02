@@ -128,6 +128,7 @@
 		5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */; };
 		5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */; };
 		5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */; };
+		5D96C9DA2C860AD90003527A /* AppEvent+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D96C9D92C860AD90003527A /* AppEvent+ConvenienceTests.swift */; };
 		5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C8DF42C53BCF400961326 /* OnboardingSlide+Arrangers.swift */; };
 		5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9CF3972C38493B00317B70 /* DeeplinkDataStore+Convenience.swift */; };
 		5D9E67C22C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E67C12C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift */; };
@@ -321,6 +322,7 @@
 		5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		5D96C9D92C860AD90003527A /* AppEvent+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+ConvenienceTests.swift"; sourceTree = "<group>"; };
 		5D9C8DF42C53BCF400961326 /* OnboardingSlide+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingSlide+Arrangers.swift"; sourceTree = "<group>"; };
 		5D9CF3972C38493B00317B70 /* DeeplinkDataStore+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeeplinkDataStore+Convenience.swift"; sourceTree = "<group>"; };
 		5D9E67C12C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarAppearance+GOVUK.swift"; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 		5D349C962C36994400161317 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5D96C9D82C860AC20003527A /* Analytics */,
 				5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */,
 				5DA97B642C6CC9060030AF2B /* URLRequest+Extensions.swift */,
 				5D5B16F62C51480000EA118F /* XCTestCase+Extensions.swift */,
@@ -851,6 +854,14 @@
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		5D96C9D82C860AC20003527A /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				5D96C9D92C860AD90003527A /* AppEvent+ConvenienceTests.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		5D9C8DF22C53BCD900961326 /* Arrangers */ = {
@@ -1493,6 +1504,7 @@
 				5D40433B2C7DBF710004CCFE /* Config+Arrangers.swift in Sources */,
 				5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
+				5D96C9DA2C860AD90003527A /* AppEvent+ConvenienceTests.swift in Sources */,
 				4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,
 				5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */,

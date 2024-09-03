@@ -8,7 +8,7 @@ extension OnboardingSlide {
             image: "1231",
             title: "312",
             body: "123",
-            alias: "tracking"
+            name: "tracking"
         )
     }
 

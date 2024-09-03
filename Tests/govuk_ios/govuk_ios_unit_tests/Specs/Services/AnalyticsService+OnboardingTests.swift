@@ -18,7 +18,8 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
 
         let event = OnboardingEvent(
             name: "test_name",
-            params: nil
+            type: "test_type",
+            text: "test_text"
         )
         subject.trackOnboardingEvent(event)
 
@@ -33,7 +34,8 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
         )
         let onboardingScreen = OnboardingScreen(
             trackingName: "test_name",
-            trackingClass: "test_class"
+            trackingClass: "test_class",
+            trackingTitle: "test_title"
         )
         subject.trackOnboardingScreen(onboardingScreen)
 

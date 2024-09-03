@@ -29,9 +29,12 @@ final class AnalyticsServiceTests: XCTestCase {
         let mockViewController = MockBaseViewController()
         subject.track(screen: mockViewController)
 
-        let params = mockLoggingAnalyticsService._trackScreenV2ReceivedParameters
-        XCTAssertEqual(params.count, 1)
-        XCTAssert(params.first?.isEmpty == true)
+        let receivedParams = mockLoggingAnalyticsService._trackScreenV2ReceivedParameters
+        XCTAssertEqual(receivedParams.count, 1)
+        let params = receivedParams.first
+        XCTAssertEqual(params?["screen_name"] as? String, "test_mock_tracking_name")
+        XCTAssertEqual(params?["language"] as? String, Locale.current.languageCode)
+        XCTAssertEqual(params?["screen_class"] as? String, "MockBaseViewController")
 
         let screens = mockLoggingAnalyticsService._trackScreenV2ReceivedScreens
         XCTAssertEqual(screens.count, 1)

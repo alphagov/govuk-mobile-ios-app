@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-@objc(Apiary)
+@objc(ActivityItem)
 class ActivityItem: NSManagedObject {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ActivityItem> {
         .init(entityName: "ActivityItem")

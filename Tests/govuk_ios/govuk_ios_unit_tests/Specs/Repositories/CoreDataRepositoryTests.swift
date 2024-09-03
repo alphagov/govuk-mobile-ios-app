@@ -40,4 +40,39 @@ class CoreDataRepositoryTests: XCTestCase {
         )
         XCTAssertTrue(containsContext)
     }
+
+    func test_save_viewContext_mergesChanges() throws {
+        let mockNotificationCenter = MockNotificationCenter()
+        let sut = CoreDataRepository.arrange(
+            notificationCenter: mockNotificationCenter
+        ).load()
+
+        let item = ActivityItem(context: sut.viewContext)
+        item.id = UUID().uuidString
+
+        try sut.viewContext.save()
+
+        let request = ActivityItem.fetchRequest()
+        let items = try sut.backgroundContext.fetch(request)
+
+        XCTAssertEqual(items.count, 1)
+    }
+
+
+    func test_save_backgroundContext_mergesChanges() throws {
+        let mockNotificationCenter = MockNotificationCenter()
+        let sut = CoreDataRepository.arrange(
+            notificationCenter: mockNotificationCenter
+        ).load()
+
+        let item = ActivityItem(context: sut.backgroundContext)
+        item.id = UUID().uuidString
+
+        try sut.backgroundContext.save()
+
+        let request = ActivityItem.fetchRequest()
+        let items = try sut.viewContext.fetch(request)
+
+        XCTAssertEqual(items.count, 1)
+    }
 }

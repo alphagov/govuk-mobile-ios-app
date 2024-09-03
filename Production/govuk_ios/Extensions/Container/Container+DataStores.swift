@@ -5,8 +5,10 @@ import Factory
 extension Container {
     var coreDataRepository: Factory<CoreDataRepositoryInterface> {
         Factory(self) {
-            CoreDataRepository()
-                .load()
+            CoreDataRepository(
+                persistentContainer: .init(name: "GOV"),
+                notificationCenter: .default
+            ).load()
         }
     }
 

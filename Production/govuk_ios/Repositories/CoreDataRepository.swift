@@ -8,8 +8,14 @@ protocol CoreDataRepositoryInterface {
 }
 
 class CoreDataRepository: CoreDataRepositoryInterface {
-    private lazy var persistentContainer = NSPersistentContainer(name: "GOV")
-    private lazy var notificationCenter: NotificationCenter = .default
+    private let persistentContainer: NSPersistentContainer
+    private let notificationCenter: NotificationCenter
+
+    init(persistentContainer: NSPersistentContainer,
+         notificationCenter: NotificationCenter) {
+        self.persistentContainer = persistentContainer
+        self.notificationCenter = notificationCenter
+    }
 
     func load() -> Self {
         persistentContainer.loadPersistentStores(

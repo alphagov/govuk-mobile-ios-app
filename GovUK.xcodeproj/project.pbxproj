@@ -115,6 +115,7 @@
 		5D6032192C81D68D00C46660 /* Locale+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6032182C81D68D00C46660 /* Locale+Analytics.swift */; };
 		5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */; };
 		5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */; };
+		5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D76A4422C875EA10019DF73 /* Container+NetworkClientsTests.swift */; };
 		5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEBF2C32B9180061F344 /* AnimationView.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
 		5D8460B52C35A2550066095E /* PermitDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8460B42C35A2550066095E /* PermitDeeplinkRoute.swift */; };
@@ -318,6 +319,7 @@
 		5D62952A2C87429000BBB394 /* GOV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV.xcdatamodel; sourceTree = "<group>"; };
 		5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Configs.swift"; sourceTree = "<group>"; };
 		5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsService+Onboarding.swift"; sourceTree = "<group>"; };
+		5D76A4422C875EA10019DF73 /* Container+NetworkClientsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+NetworkClientsTests.swift"; sourceTree = "<group>"; };
 		5D79AEBF2C32B9180061F344 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		5D8460B42C35A2550066095E /* PermitDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitDeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D8460B62C35A2630066095E /* DrivingDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingDeeplinkRoute.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 		5D16E6A52C417C7700776ABA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5D76A4412C875E890019DF73 /* Container */,
 				5D16E6A62C417C7E00776ABA /* UIKit */,
 			);
 			path = Extensions;
@@ -787,6 +790,14 @@
 				5D54A8392BFCD881003D0C21 /* SupportingFiles */,
 			);
 			path = shared;
+			sourceTree = "<group>";
+		};
+		5D76A4412C875E890019DF73 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				5D76A4422C875EA10019DF73 /* Container+NetworkClientsTests.swift */,
+			);
+			path = Container;
 			sourceTree = "<group>";
 		};
 		5D79AEBE2C32B8CB0061F344 /* Views */ = {
@@ -1575,6 +1586,7 @@
 				5D349F632C6A5A9C00B7F747 /* APIServiceClientTests.swift in Sources */,
 				5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */,
 				5D37EA112C3E865F006B36CB /* DrivingCoordinatorTests.swift in Sources */,
+				5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */,
 				5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */,
 				5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */,
 				160EA7592C60D7AB008F97AF /* MockAnalyticsService.swift in Sources */,
@@ -1798,7 +1810,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = N8W395F695;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1828,7 +1840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = N8W395F695;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;

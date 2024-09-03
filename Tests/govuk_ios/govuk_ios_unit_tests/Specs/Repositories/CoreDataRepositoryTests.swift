@@ -42,9 +42,8 @@ class CoreDataRepositoryTests: XCTestCase {
     }
 
     func test_save_viewContext_mergesChanges() throws {
-        let mockNotificationCenter = MockNotificationCenter()
         let sut = CoreDataRepository.arrange(
-            notificationCenter: mockNotificationCenter
+            notificationCenter: .default
         ).load()
 
         let item = ActivityItem(context: sut.viewContext)
@@ -52,17 +51,20 @@ class CoreDataRepositoryTests: XCTestCase {
 
         try sut.viewContext.save()
 
+        let expectedId = UUID().uuidString
+        item.id = expectedId
+
+        try sut.viewContext.save()
+
         let request = ActivityItem.fetchRequest()
         let items = try sut.backgroundContext.fetch(request)
 
-        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items.first?.id, expectedId)
     }
 
-
     func test_save_backgroundContext_mergesChanges() throws {
-        let mockNotificationCenter = MockNotificationCenter()
         let sut = CoreDataRepository.arrange(
-            notificationCenter: mockNotificationCenter
+            notificationCenter: .default
         ).load()
 
         let item = ActivityItem(context: sut.backgroundContext)
@@ -70,9 +72,14 @@ class CoreDataRepositoryTests: XCTestCase {
 
         try sut.backgroundContext.save()
 
+        let expectedId = UUID().uuidString
+        item.id = expectedId
+
+        try sut.backgroundContext.save()
+
         let request = ActivityItem.fetchRequest()
         let items = try sut.viewContext.fetch(request)
 
-        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items.first?.id, expectedId)
     }
 }

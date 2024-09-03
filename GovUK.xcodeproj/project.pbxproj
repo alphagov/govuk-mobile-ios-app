@@ -887,10 +887,10 @@
 		5D9C8DF22C53BCD900961326 /* Arrangers */ = {
 			isa = PBXGroup;
 			children = (
-				5DC527BA2C8736CF005E3158 /* Repositories */,
 				5D4043372C7DBEFD0004CCFE /* Models */,
 				5DA97B662C6CE61C0030AF2B /* Networking */,
 				5D9C8DF32C53BCE000961326 /* Onboarding */,
+				5DC527BA2C8736CF005E3158 /* Repositories */,
 			);
 			path = Arrangers;
 			sourceTree = "<group>";

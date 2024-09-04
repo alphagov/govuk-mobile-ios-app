@@ -36,9 +36,7 @@ extension AppEvent {
     }
 
     static func searchTerm(term: String) -> AppEvent {
-        let deviceModel = DeviceModel()
-
-        return .init(
+        .init(
             name: "Search",
             params: [
                 "text": term

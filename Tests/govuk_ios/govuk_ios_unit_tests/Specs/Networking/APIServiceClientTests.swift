@@ -19,7 +19,7 @@ class APIServiceClientTests: XCTestCase {
             additionalHeaders: nil
         )
         let expectation = expectation()
-        MockURLProtocol.requestHandler = { request in
+        MockURLProtocol.requestHandlers["https://www.google.com/test/test"] = { request in
             XCTAssertEqual(request.url?.absoluteString, "https://www.google.com/test/test")
             XCTAssertEqual(request.httpMethod, "POST")
             let data = request.bodySteamData
@@ -44,15 +44,15 @@ class APIServiceClientTests: XCTestCase {
             requestBuilder: RequestBuilder()
         )
         let request = GOVRequest(
-            urlPath: "/test/123",
+            urlPath: "/test/111",
             method: .get,
             bodyParameters: nil,
             queryParameters: ["query": "value"],
             additionalHeaders: nil
         )
         let expectation = expectation()
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.url?.absoluteString, "https://www.google.com/test/123?query=value")
+        MockURLProtocol.requestHandlers["https://www.google.com/test/111?query=value"] = { request in
+            XCTAssertEqual(request.url?.absoluteString, "https://www.google.com/test/111?query=value")
             XCTAssertEqual(request.httpMethod, "GET")
             XCTAssertNil(request.httpBody)
             return (.arrangeSuccess, nil, nil)
@@ -73,7 +73,7 @@ class APIServiceClientTests: XCTestCase {
             requestBuilder: RequestBuilder()
         )
         let request = GOVRequest(
-            urlPath: "/test/123",
+            urlPath: "/test/222",
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
@@ -82,7 +82,7 @@ class APIServiceClientTests: XCTestCase {
         let expectation = expectation()
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
         let expectedData = Data()
-        MockURLProtocol.requestHandler = { request in
+        MockURLProtocol.requestHandlers["https://www.google.com/test/222"] = { request in
             return (expectedResponse, expectedData, nil)
         }
         subject.send(
@@ -103,7 +103,7 @@ class APIServiceClientTests: XCTestCase {
             requestBuilder: RequestBuilder()
         )
         let request = GOVRequest(
-            urlPath: "/test/123",
+            urlPath: "/test/333",
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
@@ -111,7 +111,7 @@ class APIServiceClientTests: XCTestCase {
         )
         let expectation = expectation()
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
-        MockURLProtocol.requestHandler = { request in
+        MockURLProtocol.requestHandlers["https://www.google.com/test/333"] = { request in
             return (expectedResponse, nil, nil)
         }
         subject.send(
@@ -132,7 +132,7 @@ class APIServiceClientTests: XCTestCase {
             requestBuilder: RequestBuilder()
         )
         let request = GOVRequest(
-            urlPath: "/test/123",
+            urlPath: "/test/444",
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
@@ -140,7 +140,7 @@ class APIServiceClientTests: XCTestCase {
         )
         let expectation = expectation()
         let expectedError = TestError.fakeNetwork
-        MockURLProtocol.requestHandler = { request in
+        MockURLProtocol.requestHandlers["https://www.google.com/test/444"] = { request in
             let expectedResponse = HTTPURLResponse.arrange(statusCode: 400)
             return (expectedResponse, nil, expectedError)
         }

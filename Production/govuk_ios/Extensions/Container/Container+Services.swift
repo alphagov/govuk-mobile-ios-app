@@ -5,6 +5,14 @@ import Factory
 import Onboarding
 
 extension Container {
+    var activityService: Factory<ActivityServiceInterface> {
+        Factory(self) {
+            ActivityService(
+                repository: self.activityRepository()
+            )
+        }
+    }
+
     var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             self.baseAnalyticsService()

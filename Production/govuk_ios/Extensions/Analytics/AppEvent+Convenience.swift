@@ -10,4 +10,15 @@ extension AppEvent {
             params: ["device_model": deviceModel.description]
         )
     }
+
+    static func searchTerm(term: String) -> AppEvent {
+        let deviceModel = DeviceModel()
+
+        return .init(
+            name: "Search",
+            params: [
+                "text": term
+            ]
+        )
+    }
 }

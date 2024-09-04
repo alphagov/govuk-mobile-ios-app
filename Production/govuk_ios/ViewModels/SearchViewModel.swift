@@ -5,7 +5,7 @@ struct SearchViewModel {
 
     func trackSearchTerm(searchTerm: String) {
         analyticsService.track(
-            event: AppEvent.init(name: "search", params: ["text": searchTerm])
+            event: AppEvent.searchTerm(term: searchTerm)
         )
     }
 }

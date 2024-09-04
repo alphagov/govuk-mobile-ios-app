@@ -49,7 +49,8 @@ class CoordinatorBuilder {
     func tab(navigationController: UINavigationController) -> BaseCoordinator {
         TabCoordinator(
             coordinatorBuilder: self,
-            navigationController: navigationController
+            navigationController: navigationController,
+            analyticsService: container.analyticsService()
         )
     }
 

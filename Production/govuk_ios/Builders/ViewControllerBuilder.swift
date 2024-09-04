@@ -42,7 +42,7 @@ class ViewControllerBuilder {
     }
 
     func home(searchButtonPrimaryAction: @escaping () -> Void,
-              configService: AppConfigService) -> UIViewController {
+              configService: AppConfigServiceInterface) -> UIViewController {
         let viewModel = HomeViewModel(
             configService: configService,
             searchButtonPrimaryAction: searchButtonPrimaryAction

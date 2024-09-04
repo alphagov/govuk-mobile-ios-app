@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
-    let configService: AppConfigService
+    let configService: AppConfigServiceInterface
     let searchButtonPrimaryAction: (() -> Void)?
     var widgets: [WidgetView] {
         [
@@ -10,7 +10,7 @@ struct HomeViewModel {
         ].compactMap { $0 }
     }
 
-    var searchWidget: WidgetView? {
+    private var searchWidget: WidgetView? {
         if widgetEnabled(feature: .search) {
             let viewModel = HomeWidgetViewModel(
                 title: "Find government services and information",

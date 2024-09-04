@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 
 class SearchCoordinator: BaseCoordinator {
-    let analyticsService: AnalyticsServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
 
     init(navigationController: UINavigationController,

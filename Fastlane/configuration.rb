@@ -25,6 +25,10 @@ class Configuration
     setting(:app, :display_name)
   end
 
+  def app_project
+    setting(:app, :project)
+  end
+
   def app_workspace
     setting(:app, :workspace)
   end

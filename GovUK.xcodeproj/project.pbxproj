@@ -42,6 +42,7 @@
 		16F961972C8881C8005CFB04 /* SearchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961962C8881C8005CFB04 /* SearchViewControllerTests.swift */; };
 		16F961992C8882B6005CFB04 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961982C8882B6005CFB04 /* SearchViewModelTests.swift */; };
 		16F9619D2C8899D4005CFB04 /* SearchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */; };
+		16F9619F2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */; };
 		4E003E7A2C75EDEC008FCBF2 /* MockAppConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */; };
 		4E003E7C2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */; };
 		4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */; };
@@ -239,6 +240,7 @@
 		16F961962C8881C8005CFB04 /* SearchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerTests.swift; sourceTree = "<group>"; };
 		16F961982C8882B6005CFB04 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
 		16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinatorTests.swift; sourceTree = "<group>"; };
+		16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponse.json; sourceTree = "<group>"; };
 		4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponseInvalid.json; sourceTree = "<group>"; };
 		4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceTests.swift; sourceTree = "<group>"; };
@@ -786,6 +788,7 @@
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
 				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
+				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1342,6 +1345,7 @@
 			files = (
 				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
 				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
+				16F9619F2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,

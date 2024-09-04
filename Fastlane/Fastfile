@@ -49,7 +49,7 @@ platform :ios do
       output_directory: configuration.app_output_directory,
       sonarqube_xml: true,
       scheme: configuration.app_scheme,
-      proj: configuration.app_project
+      workspace: configuration.app_workspace
     )
   end
 

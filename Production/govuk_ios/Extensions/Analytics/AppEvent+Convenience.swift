@@ -13,6 +13,14 @@ extension AppEvent {
         )
     }
 
+    static func tabNavigation(text: String) -> AppEvent {
+        navigation(
+            text: text,
+            type: "Tab",
+            external: false
+        )
+    }
+
     static func navigation(text: String,
                            type: String,
                            external: Bool) -> AppEvent {

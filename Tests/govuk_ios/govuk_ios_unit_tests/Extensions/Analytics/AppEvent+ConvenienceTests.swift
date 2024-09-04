@@ -30,4 +30,18 @@ class AppEvent_ConvenienceTests: XCTestCase {
         XCTAssertEqual(result.params?["external"] as? Bool, expectedExternal)
         XCTAssertEqual(result.params?["language"] as? String, "en")
     }
+
+    func test_tabNavigation_returnsExpectedResult() {
+        let expectedText = UUID().uuidString
+        let result = AppEvent.tabNavigation(
+            text: expectedText
+        )
+
+        XCTAssertEqual(result.name, "Navigation")
+        XCTAssertEqual(result.params?.count, 4)
+        XCTAssertEqual(result.params?["text"] as? String, expectedText)
+        XCTAssertEqual(result.params?["type"] as? String, "Tab")
+        XCTAssertEqual(result.params?["external"] as? Bool, false)
+        XCTAssertEqual(result.params?["language"] as? String, "en")
+    }
 }

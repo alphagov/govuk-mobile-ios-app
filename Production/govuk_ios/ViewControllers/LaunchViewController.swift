@@ -31,6 +31,11 @@ class LaunchViewController: BaseViewController {
     }
 
     private func configureUI() {
+        view.isAccessibilityElement = true
+        view.accessibilityLabel = NSLocalizedString(
+            "splashScreenAccessibilityTitle",
+            comment: ""
+        )
         view.backgroundColor = .splashScreenBlue
         view.addSubview(animationView)
     }

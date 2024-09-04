@@ -36,6 +36,7 @@ platform :ios do
 
   private_lane :build do |options|
     gym(
+      workspace: configuration.app_workspace,
       scheme: configuration.app_scheme,
       output_directory: configuration.app_output_directory,
       clean: options[:clean].nil? ? true : options[:clean],

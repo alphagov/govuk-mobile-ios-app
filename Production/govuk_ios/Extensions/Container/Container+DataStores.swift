@@ -3,9 +3,12 @@ import Logging
 import Factory
 
 extension Container {
-    var testDataStore: Factory<TestDataStoreInterface> {
+    var coreDataRepository: Factory<CoreDataRepositoryInterface> {
         Factory(self) {
-            TestDataStore()
+            CoreDataRepository(
+                persistentContainer: .init(name: "GOV"),
+                notificationCenter: .default
+            ).load()
         }
     }
 

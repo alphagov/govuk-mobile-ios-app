@@ -5,6 +5,7 @@ default: &DEFAULTS
     display_name: Gov.UK - Dev
     output_directory: build_output
     project: GovUK.xcodeproj
+    workspace: GovUK.xcworkspace
   scan:
     devices:
       - iPhone 15 Pro

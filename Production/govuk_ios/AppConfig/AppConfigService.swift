@@ -19,10 +19,12 @@ public final class AppConfigService: AppConfigServiceInterface {
 
     private func fetchAppConfig() {
         configProvider.fetchAppConfig(
-            filename: ConfigStrings.filename.rawValue) { [weak self] result in
-            guard let self = self else { return }
-            try? self.getFeatureflags(result: result)
-        }
+            filename: ConfigStrings.filename.rawValue,
+            completion: { [weak self] result in
+                guard let self = self else { return }
+                try? self.getFeatureflags(result: result)
+            }
+        )
     }
 
     private func getFeatureflags(result: Result<AppConfig, AppConfigError>) throws {
@@ -35,9 +37,6 @@ public final class AppConfigService: AppConfigServiceInterface {
     }
 
     func isFeatureEnabled(key: Feature) -> Bool {
-        if let feature = featureFlags[key.rawValue] {
-            return feature
-        }
-        return false
+        featureFlags[key.rawValue] ?? false
     }
 }

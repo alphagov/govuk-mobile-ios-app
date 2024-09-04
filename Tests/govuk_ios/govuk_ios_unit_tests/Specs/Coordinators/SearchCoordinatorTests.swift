@@ -3,27 +3,27 @@ import XCTest
 
 @testable import govuk_ios
 
-class HomeCoordinatorTests: XCTestCase {
+class SearchCoordinatorTests: XCTestCase {
     override class func setUp() {
         super.setUp()
         UIView.setAnimationsEnabled(false)
     }
 
     @MainActor
-    func test_start_setsHomeViewController() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+    func test_start_setsSearchViewController() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockAnalyticsService = MockAnalyticsService()
         let expectedViewController = UIViewController()
-        mockViewControllerBuilder._stubbedHomeViewController = expectedViewController
         let navigationController = UINavigationController()
-        let subject = HomeCoordinator(
+
+        mockViewControllerBuilder._stubbedSearchViewController = expectedViewController
+
+        let subject = SearchCoordinator(
             navigationController: navigationController,
-            coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: MockAnalyticsService(),
-            configService: MockAppConfigService()
+            analyticsService: mockAnalyticsService
         )
+        
         subject.start()
 
         XCTAssertEqual(navigationController.viewControllers.first, expectedViewController)

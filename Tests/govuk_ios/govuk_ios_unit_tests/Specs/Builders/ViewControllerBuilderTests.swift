@@ -28,7 +28,10 @@ class ViewControllerBuilderTests: XCTestCase {
 
     func test_home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.home()
+        let result = subject.home(
+            searchButtonPrimaryAction: { () -> Void in },
+            configService: MockAppConfigService()
+        )
 
         XCTAssert(result is HomeViewController)
     }

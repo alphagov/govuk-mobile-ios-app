@@ -6,7 +6,10 @@ import UIKit
 
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = HomeViewModel()
+        let viewModel = HomeViewModel(
+            configService: MockAppConfigService(),
+            searchButtonPrimaryAction: { () -> Void in }
+        )
         let subject = HomeViewController(
             viewModel: viewModel
         )
@@ -17,7 +20,10 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = HomeViewModel()
+        let viewModel = HomeViewModel(
+            configService: MockAppConfigService(),
+            searchButtonPrimaryAction: { () -> Void in }
+        )
         let subject = HomeViewController(
             viewModel: viewModel
         )

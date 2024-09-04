@@ -11,7 +11,7 @@ class WidgetView: UIView {
         let localView = (widget as? UIStackView)!
         localView.axis = .vertical
         localView.alignment = .center
-        localView.spacing = 8
+        localView.spacing = 15
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
@@ -44,7 +44,6 @@ class WidgetView: UIView {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: widget.viewModel.widgetHeight),
             stackView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: 16

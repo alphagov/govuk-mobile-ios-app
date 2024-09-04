@@ -37,7 +37,7 @@ class HomeCoordinator: TabItemCoordinator {
         )
     }
 
-    var searchActionButtonPressed: () -> Void {
+    private var searchActionButtonPressed: () -> Void {
         return { [weak self] in
             guard let strongSelf = self else { return }
             let navigationController = UINavigationController()

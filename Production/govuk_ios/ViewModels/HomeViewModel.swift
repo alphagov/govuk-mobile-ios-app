@@ -30,7 +30,7 @@ struct HomeViewModel {
         }
     }
 
-    func widgetEnabled(feature: Feature) -> Bool {
+    private func widgetEnabled(feature: Feature) -> Bool {
         let featureEnabled = configService.isFeatureEnabled(key: feature)
         return featureEnabled
     }

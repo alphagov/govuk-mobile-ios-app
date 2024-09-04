@@ -9,14 +9,14 @@ class HomeViewController: BaseViewController,
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
-    lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 16
         return stackView
     }()
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)

@@ -3,7 +3,8 @@ import Foundation
 
 typealias TabItemCoordinator = BaseCoordinator & DeeplinkRouteProvider
 
-class TabCoordinator: BaseCoordinator {
+class TabCoordinator: BaseCoordinator,
+                      UITabBarControllerDelegate {
     private lazy var homeCoordinator = coordinatorBuilder.home
     private lazy var settingsCoordinator = coordinatorBuilder.settings
 
@@ -16,11 +17,15 @@ class TabCoordinator: BaseCoordinator {
 
     private lazy var tabController = UITabBarController.govUK
     private let coordinatorBuilder: CoordinatorBuilder
+    private let analyticsService: AnalyticsServiceInterface
 
     init(coordinatorBuilder: CoordinatorBuilder,
-         navigationController: UINavigationController) {
+         navigationController: UINavigationController,
+         analyticsService: AnalyticsServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
+        self.analyticsService = analyticsService
         super.init(navigationController: navigationController)
+        tabController.delegate = self
     }
 
     override func start(url: URL?) {
@@ -55,14 +60,19 @@ class TabCoordinator: BaseCoordinator {
 
     private func showTabs() {
         tabController.viewControllers = coordinators.map { $0.root }
-
         set([tabController], animated: false)
-
         coordinators.forEach { start($0) }
     }
 
     private func selectTabIndex(for navigationController: UINavigationController) {
         let index = tabController.viewControllers?.firstIndex(of: navigationController)
         tabController.selectedIndex = index ?? 0
+    }
+
+    func tabBarController(_ tabBarController: UITabBarController,
+                          didSelect viewController: UIViewController) {
+        guard let title = viewController.tabBarItem.title else { return }
+        let event = AppEvent.tabNavigation(text: title)
+        analyticsService.track(event: event)
     }
 }

@@ -48,6 +48,7 @@ class SearchViewController: BaseViewController,
     }()
 
     var trackingName: String { "Search_Modal" }
+    var trackingTitle: String? { "Search" }
 
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel

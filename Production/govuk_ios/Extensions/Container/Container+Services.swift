@@ -42,4 +42,12 @@ extension Container {
             )
         }
     }
+
+    var analyticsConsentService: Factory<AnalyticsConsentServiceInterface> {
+        Factory(self) {
+            AnalyticsConsentService(
+                userDefaults: .standard
+            )
+        }
+    }
 }

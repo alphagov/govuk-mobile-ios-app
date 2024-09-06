@@ -1,8 +1,7 @@
 import Foundation
 import UIKit
 
-struct HomeWidgetViewModel {
+struct WidgetViewModel {
     let title: String
-    var widgetHeight: CGFloat
     var primaryAction: (() -> Void)?
 }

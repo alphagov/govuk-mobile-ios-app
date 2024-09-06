@@ -2,24 +2,10 @@ import UIKit
 import Foundation
 import UIComponents
 
-protocol WidgetInterface {
-    var viewModel: HomeWidgetViewModel { get }
-}
-
 class WidgetView: UIView {
-    private lazy var stackView: UIStackView = {
-        let localView = (widget as? UIStackView)!
-        localView.axis = .vertical
-        localView.alignment = .center
-        localView.spacing = 15
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        return localView
-    }()
+    private lazy var contentView: UIView = UIView(frame: .zero)
 
-    private let widget: WidgetInterface
-
-    init(widget: WidgetInterface) {
-        self.widget = widget
+    init() {
         super.init(frame: .zero)
         self.backgroundColor = UIColor.govUK.fills.surfaceCard
         configureUI()
@@ -35,27 +21,41 @@ class WidgetView: UIView {
     }
 
     private func configureUI() {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         layer.borderWidth = 1
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        addSubview(stackView)
+        addSubview(contentView)
         updateBorderColor()
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(
+            contentView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: 16
             ),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
+            contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
         ])
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateBorderColor()
+    }
+
+    func addContent(_ content: UIView) {
+        content.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(content)
+        NSLayoutConstraint.activate(
+            [
+                content.topAnchor.constraint(equalTo: contentView.topAnchor),
+                content.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+                content.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                content.leftAnchor.constraint(equalTo: contentView.leftAnchor)
+            ]
+        )
     }
 }

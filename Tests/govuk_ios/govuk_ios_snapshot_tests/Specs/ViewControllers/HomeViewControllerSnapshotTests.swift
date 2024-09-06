@@ -8,7 +8,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
-            searchButtonPrimaryAction: { () -> Void in }
+            searchButtonPrimaryAction: { }
         )
         let subject = HomeViewController(
             viewModel: viewModel
@@ -22,7 +22,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
-            searchButtonPrimaryAction: { () -> Void in }
+            searchButtonPrimaryAction: { }
         )
         let subject = HomeViewController(
             viewModel: viewModel

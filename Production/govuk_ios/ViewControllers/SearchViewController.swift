@@ -31,7 +31,6 @@ class SearchViewController: BaseViewController,
     }()
 
     var trackingName: String { "Search_Modal" }
-    var trackingTitle: String? { "Search" }
 
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
@@ -54,6 +53,10 @@ class SearchViewController: BaseViewController,
         configureConstraints()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavBar(animated: animated)
+    }
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -61,8 +64,11 @@ class SearchViewController: BaseViewController,
     }
 
     private func configureUI() {
+        title = NSLocalizedString(
+            "searchButtonTitle",
+            comment: ""
+        )
         view.backgroundColor = GOVUKColors.fills.surfaceModal
-        configureNavBar()
         view.addSubview(searchBar)
     }
 
@@ -84,33 +90,23 @@ class SearchViewController: BaseViewController,
         ])
     }
 
-    private func configureNavBar() {
-        self.title = "Search"
-        let navBarItem = self.navigationItem
-        let appearence = UINavigationBarAppearance()
-        appearence.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.govUK.bodySemibold
-        ]
-        appearence.configureWithTransparentBackground()
-        appearence.backgroundColor = GOVUKColors.fills.surfaceModal
-
+    private func configureNavBar(animated: Bool) {
         let barButton = UIBarButtonItem(
-            barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonPressed)
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(cancelButtonPressed)
         )
-        let attributes = [NSAttributedString.Key.foregroundColor: GOVUKColors.text.link]
-        barButton.setTitleTextAttributes(attributes, for: .normal)
-
-        navBarItem.setLeftBarButton(
+        navigationItem.setLeftBarButton(
             barButton,
-            animated: true
+            animated: animated
         )
-
-        navBarItem.standardAppearance = appearence
-        navBarItem.compactAppearance = appearence
-        navBarItem.scrollEdgeAppearance = appearence
+        navigationItem.standardAppearance = .govUK
+        navigationItem.compactAppearance = .govUK
+        navigationItem.scrollEdgeAppearance = .govUK
     }
 
-    @objc func cancelButtonPressed(_ sender: UIBarItem) {
+    @objc
+    private func cancelButtonPressed(_ sender: UIBarItem) {
         self.navigationController?.dismiss(animated: true)
     }
 

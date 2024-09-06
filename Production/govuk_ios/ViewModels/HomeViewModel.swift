@@ -13,27 +13,23 @@ struct HomeViewModel {
     }
 
     private var searchWidget: WidgetView? {
-        if widgetEnabled(feature: .search) {
-            let viewModel = HomeWidgetViewModel(
-                title: "Find government services and information",
-                widgetHeight: 106,
-                primaryAction: searchButtonPrimaryAction
-            )
+        guard widgetEnabled(feature: .search)
+        else { return nil }
 
-            let widget = SearchWidgetStackView(
-                viewModel: viewModel
-            )
+        let viewModel = WidgetViewModel(
+            title: "Find government services and information",
+            primaryAction: searchButtonPrimaryAction
+        )
 
-            return WidgetView(
-                widget: widget
-            )
-        } else {
-            return nil
-        }
+        let content = SearchWidgetStackView(
+            viewModel: viewModel
+        )
+        let widget = WidgetView()
+        widget.addContent(content)
+        return widget
     }
 
     private func widgetEnabled(feature: Feature) -> Bool {
-        let featureEnabled = configService.isFeatureEnabled(key: feature)
-        return featureEnabled
+        configService.isFeatureEnabled(key: feature)
     }
 }

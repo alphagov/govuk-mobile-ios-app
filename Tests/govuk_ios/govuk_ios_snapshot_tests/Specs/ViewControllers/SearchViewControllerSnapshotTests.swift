@@ -6,28 +6,16 @@ import UIKit
 
 class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = SearchViewModel(
-            analyticsService: MockAnalyticsService()
-        )
-        let subject = SearchViewController(
-            viewModel: viewModel
-        )
-        let navigationController = UINavigationController(rootViewController: subject)
-        navigationController.setNavigationBarHidden(false, animated: false)
-        navigationController.overrideUserInterfaceStyle = .light
-        VerifySnapshotInWindow(navigationController)
+        loadInNavigationControllerTest(viewController: viewController)
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = SearchViewModel(
-            analyticsService: MockAnalyticsService()
-        )
-        let subject = SearchViewController(
-            viewModel: viewModel
-        )
-        let navigationController = UINavigationController(rootViewController: subject)
-        navigationController.setNavigationBarHidden(false, animated: false)
-        navigationController.overrideUserInterfaceStyle = .dark
-        VerifySnapshotInWindow(navigationController)
+        loadInNavigationControllerTest(viewController: viewController,
+                                       mode: .dark)
+    }
+
+    private var viewController: SearchViewController {
+        let viewModel = SearchViewModel(analyticsService: MockAnalyticsService())
+        return SearchViewController(viewModel: viewModel)
     }
 }

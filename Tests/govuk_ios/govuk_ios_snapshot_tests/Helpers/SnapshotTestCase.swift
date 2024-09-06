@@ -118,4 +118,14 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func wrapInWindow(_ viewController: UIViewController) {
         UIApplication.shared.windows.first?.rootViewController = viewController
     }
+
+    func loadInNavigationControllerTest(viewController: UIViewController,
+                                        mode: UIUserInterfaceStyle = .light,
+                                        navBarHidden: Bool = false) {
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
+        navigationController.overrideUserInterfaceStyle = mode
+        VerifySnapshotInWindow(navigationController)
+    }
+
 }

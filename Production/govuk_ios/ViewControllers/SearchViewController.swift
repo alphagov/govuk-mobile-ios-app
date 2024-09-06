@@ -18,14 +18,6 @@ class SearchViewController: BaseViewController,
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
 
-        let clearButton = localSearchBar
-            .searchTextField
-            .value(forKey: "clearButton") as? UIButton
-        let image = clearButton?
-            .currentImage?
-            .withTintColor(UIColor.govUK.text.trailingIcon)
-        clearButton?.setImage(image, for: .normal)
-
         localSearchBar.enablesReturnKeyAutomatically = false
         localSearchBar.translatesAutoresizingMaskIntoConstraints = false
         localSearchBar.placeholder = "Search"

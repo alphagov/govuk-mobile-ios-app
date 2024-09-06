@@ -37,10 +37,14 @@ final public class SearchModalButton: UIButton {
 
         adjustsImageSizeForAccessibilityContentSizeCategory = true
 
+        let buttonTitle = NSLocalizedString(
+            "homeSearchButtonTitle",
+            comment: ""
+        )
         titleLabel?.numberOfLines = 0
         titleLabel?.lineBreakMode = .byWordWrapping
         titleLabel?.adjustsFontForContentSizeCategory = true
-        setTitle("Search", for: .normal)
+        setTitle(buttonTitle, for: .normal)
         setTitleColor(GOVUKColors.text.secondary, for: .normal)
         titleLabel?.font = UIFont.govUK.body
         titleEdgeInsets.left = 13

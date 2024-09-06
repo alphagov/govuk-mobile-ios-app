@@ -16,8 +16,13 @@ struct HomeViewModel {
         guard widgetEnabled(feature: .search)
         else { return nil }
 
+
+        let title = NSLocalizedString(
+            "homeSearchWidgetTitle",
+            comment: ""
+        )
         let viewModel = WidgetViewModel(
-            title: "Find government services and information",
+            title: title,
             primaryAction: searchButtonPrimaryAction
         )
 

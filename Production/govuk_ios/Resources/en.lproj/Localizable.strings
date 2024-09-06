@@ -3,4 +3,9 @@
 
 /* MARK: - Home */
 "homeScreenLogoAccessibilityTitle" = "Gov.Uk logo";
-"searchButtonTitle" = "Search";
+"homeSearchWidgetTitle" = "Find government services and information";
+"homeSearchButtonTitle" = "Search";
+
+/* MARK: - Search */
+"searchModalTitle" = "Search";
+"searchBarPlaceholder" = "Search";

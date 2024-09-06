@@ -10,7 +10,7 @@ struct ItemsVisitedThisMonthView: View {
                 .fontWeight(.semibold)
                 .textCase(nil)
                 .foregroundColor(Color(UIColor.govUK.text.primary))) {
-                ForEach(items) {item in
+                ForEach(items) { item in
                     RecentItemCell(model: item)
                 }
             }

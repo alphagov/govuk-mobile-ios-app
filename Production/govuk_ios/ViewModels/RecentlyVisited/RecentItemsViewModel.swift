@@ -1,9 +1,12 @@
 import Foundation
+import CoreData
+import SwiftUI
 
 class RecentItemsViewModel: ObservableObject {
     @Published var state = State.loading
     private let service: RecentItemsServiceInterface
     private let activityRepository: ActivityRepository
+    @FetchRequest(fetchRequest: ActivityItem.fetchRequest()) var recentItems
 
     init(service: RecentItemsServiceInterface,
          activityRepository: ActivityRepository) {
@@ -28,7 +31,7 @@ class RecentItemsViewModel: ObservableObject {
         comment: ""
     )
 
-    private func sortItems(visitedItems: [[RecentItem]]) -> ([RecentItem],
+   func sortItems(visitedItems: [[RecentItem]]) -> ([RecentItem],
          [RecentItem],
         [[RecentItem]]) {
         let todaysDate = Date()

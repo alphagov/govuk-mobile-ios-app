@@ -53,7 +53,7 @@ struct AnalyticsConsentContainerView: View {
                     }
             }.padding([.top, .horizontal], 16)
             Spacer()
-            AdaptiveStack(spacing: 0) {
+            AdaptiveStack {
                 SwiftUIButton(
                     .primary,
                     viewModel: viewModel.allowButtonViewModel

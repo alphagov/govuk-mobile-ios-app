@@ -42,4 +42,13 @@ class ViewControllerBuilderTests: XCTestCase {
 
         XCTAssert(result is SettingsViewController)
     }
+    
+    func test_search_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.search(
+            analyticsService: MockAnalyticsService()
+        )
+
+        XCTAssert(result is SearchViewController)
+    }
 }

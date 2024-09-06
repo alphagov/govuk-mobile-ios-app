@@ -3,3 +3,9 @@
 
 /* MARK: - Home */
 "homeScreenLogoAccessibilityTitle" = "Gov.Uk logo";
+
+/* MARK: - Recently Visited Items */
+"editButtonTitle" = "Edit";
+"navigationTitleLabel" = "Pages You've visited";
+"errorViewTitle" = "No pages yet";
+"errorViewDescription" = "You havent used the app to visit any GOV.uk pages yet";

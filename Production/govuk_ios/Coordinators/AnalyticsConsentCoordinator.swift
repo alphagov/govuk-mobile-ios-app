@@ -4,7 +4,6 @@ import UIKit
 class AnalyticsConsentCoordinator: BaseCoordinator {
     private let analyticsConsentService: AnalyticsConsentServiceInterface
     private let analyticsService: AnalyticsServiceInterface
-
     private let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,
@@ -20,10 +19,10 @@ class AnalyticsConsentCoordinator: BaseCoordinator {
     override func start(url: URL?) {
         guard !analyticsConsentService.hasSeenAnalyticsConsent
         else { return dismissAction() }
-        startAnalyticsConsent()
+        setAnalyticsConsent()
     }
 
-    private func startAnalyticsConsent() {
+    private func setAnalyticsConsent() {
         let analyticsConsentModule = AnalyticsConsent(
             analyticsService: analyticsService,
             dismissAction: { [weak self] in

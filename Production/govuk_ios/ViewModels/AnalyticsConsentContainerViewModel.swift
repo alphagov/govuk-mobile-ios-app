@@ -4,65 +4,39 @@ import UIKit
 
 class AnalyticsConsentContainerViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface?
-
+    private let urlOpener: URLOpening
     private let dismissAction: () -> Void
 
-    private let urlOpener: URLOpening
-
-    init(urlOpener: URLOpening = UIApplication.shared,
-         analyticsService: AnalyticsServiceInterface?,
+    init(analyticsService: AnalyticsServiceInterface?,
+         urlOpener: URLOpening = UIApplication.shared,
          dismissAction: @escaping () -> Void) {
-        self.urlOpener = urlOpener
         self.analyticsService = analyticsService
+        self.urlOpener = urlOpener
         self.dismissAction = dismissAction
     }
 
-    let title = NSLocalizedString(
-        "analyticsConsentTitle",
-        comment: ""
-    )
+    let title = NSLocalizedString("analyticsConsentTitle", comment: "")
 
-    let descriptionTop = NSLocalizedString(
-        "analyticsConsentDescriptionTop",
-        comment: ""
-    )
+    let descriptionTop = NSLocalizedString("analyticsConsentDescriptionTop", comment: "")
 
-    let descriptionBullets = NSLocalizedString(
-        "analyticsConsentDescriptionBullets",
-        comment: ""
-    )
+    let descriptionBullets = NSLocalizedString("analyticsConsentDescriptionBullets", comment: "")
 
-    let descriptionBottom = NSLocalizedString(
-        "analyticsConsentDescriptionBottom",
-        comment: ""
-    )
+    let descriptionBottom = NSLocalizedString("analyticsConsentDescriptionBottom", comment: "")
 
-    let privacyPolicyLinkTitle = NSLocalizedString(
-        "privacyPolicyLinkTitle",
-        comment: ""
-    )
+    let privacyPolicyLinkTitle = NSLocalizedString("privacyPolicyLinkTitle", comment: "")
 
-    let privacyPolicyLinkHint = NSLocalizedString(
-        "privacyPolicyLinkHint",
-        comment: ""
-    )
+    let privacyPolicyLinkHint = NSLocalizedString("privacyPolicyLinkHint", comment: "")
 
-    let privacyPolicyLinkUrl = NSLocalizedString(
-        "privacyPolicyLinkUrl",
-        comment: ""
-    )
+    let privacyPolicyLinkUrl = NSLocalizedString("privacyPolicyLinkUrl", comment: "")
 
-    func onPrivacyPolicyClicked() {
+    func onPrivacyPolicyLinkClicked() {
         guard let url = URL(string: privacyPolicyLinkUrl) else { return }
         if urlOpener.canOpenURL(url) {
             urlOpener.open(url, options: [:], completionHandler: nil)
         }
     }
 
-    let allowButtonTitle = NSLocalizedString(
-        "allowAnalyticsButtonTitle",
-        comment: ""
-    )
+    let allowButtonTitle = NSLocalizedString("allowAnalyticsButtonTitle", comment: "")
 
     var allowButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
@@ -74,10 +48,7 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
         )
     }
 
-    let dontAllowButtonTitle = NSLocalizedString(
-        "dontAllowAnalyticsButtonTitle",
-        comment: ""
-    )
+    let dontAllowButtonTitle = NSLocalizedString("dontAllowAnalyticsButtonTitle", comment: "")
 
     var dontAllowButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(

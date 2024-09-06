@@ -9,7 +9,7 @@
 "analyticsConsentTitle" = "Share statistics about how you use the GOV.UK app";
 "dontAllowAnalyticsButtonTitle" = "Don't allow statistics sharing";
 "privacyPolicyLinkHint" = "Open privacy policy page in external browser";
-"privacyPolicyLinkTitle" = "Read more about this in the privacy policy \U2197";
+"privacyPolicyLinkTitle" = "Read more about this in the privacy policy ↗";
 "privacyPolicyLinkUrl" = "https://www.gov.uk/";
 
 /* MARK: - Home */

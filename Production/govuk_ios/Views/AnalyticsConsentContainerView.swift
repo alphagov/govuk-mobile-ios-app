@@ -49,7 +49,7 @@ struct AnalyticsConsentContainerView: View {
                     .accessibilityHint(Text(viewModel.privacyPolicyLinkHint))
                     .padding(.top, 16)
                     .onTapGesture {
-                        viewModel.onPrivacyPolicyClicked()
+                        viewModel.onPrivacyPolicyLinkClicked()
                     }
             }.padding([.top, .horizontal], 16)
             Spacer()
@@ -58,20 +58,16 @@ struct AnalyticsConsentContainerView: View {
                     .primary,
                     viewModel: viewModel.allowButtonViewModel
                 ).accessibility(sortPriority: 1)
-                    .frame(
-                        minHeight: 44,
-                        idealHeight: 44
-                    ).padding(.horizontal, 15)
+                .frame(minHeight: 44, idealHeight: 44)
+                .padding(.horizontal, 15)
                 SwiftUIButton(
                     .secondary,
                     viewModel: viewModel.dontAllowButtonViewModel
                 ).accessibility(sortPriority: 1)
-                    .frame(
-                        minHeight: 44,
-                        idealHeight: 44
-                    ).padding(.horizontal, 15)
+                .frame(minHeight: 44, idealHeight: 44)
+                .padding(.horizontal, 15)
             }.padding(.top, 16)
-                .padding(.bottom, verticalSizeClass == .compact ? 32 : 11)
+            .padding(.bottom, verticalSizeClass == .compact ? 32 : 11)
         }
     }
 }

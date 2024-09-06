@@ -3,7 +3,7 @@ import XCTest
 
 @testable import govuk_ios
 
-class AnalyticsConsentContainerViewModelTests: XCTestCase {
+final class AnalyticsConsentContainerViewModelTests: XCTestCase {
     func test_init_hasCorrectInitialState() throws {
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
@@ -64,11 +64,11 @@ class AnalyticsConsentContainerViewModelTests: XCTestCase {
         let urlOpener = MockURLOpening()
         urlOpener._stubbedCanOpenUrl = true
         let sut = AnalyticsConsentContainerViewModel(
-            urlOpener: urlOpener,
             analyticsService: nil,
+            urlOpener: urlOpener,
             dismissAction: {}
         )
-        sut.onPrivacyPolicyClicked()
+        sut.onPrivacyPolicyLinkClicked()
         XCTAssertTrue(urlOpener._receivedOpenCompletion)
     }
 
@@ -76,11 +76,11 @@ class AnalyticsConsentContainerViewModelTests: XCTestCase {
         let urlOpener = MockURLOpening()
         urlOpener._stubbedCanOpenUrl = false
         let sut = AnalyticsConsentContainerViewModel(
-            urlOpener: urlOpener,
             analyticsService: nil,
+            urlOpener: urlOpener,
             dismissAction: {}
         )
-        sut.onPrivacyPolicyClicked()
+        sut.onPrivacyPolicyLinkClicked()
         XCTAssertFalse(urlOpener._receivedOpenCompletion)
     }
 }

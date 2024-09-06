@@ -3,13 +3,13 @@ import SwiftUI
 import UIKit
 
 public final class AnalyticsConsent {
-    private let dismissAction: () -> Void
     private let analyticsService: AnalyticsServiceInterface
+    private let dismissAction: () -> Void
 
     init(analyticsService: AnalyticsServiceInterface,
          dismissAction: @escaping () -> Void) {
-        self.dismissAction = dismissAction
         self.analyticsService = analyticsService
+        self.dismissAction = dismissAction
     }
 
     public lazy var viewController: UIViewController = {

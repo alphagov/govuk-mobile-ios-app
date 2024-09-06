@@ -5,19 +5,10 @@ class SearchViewController: BaseViewController,
                             TrackableScreen {
     private let viewModel: SearchViewModel
 
-    private lazy var searchBoxView: UIView = {
-        let localView = UIView()
-
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.backgroundColor = GOVUKColors.fills.surfaceSearchBox
-        localView.layer.cornerRadius = 10
-
-        return localView
-    }()
-
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
 
+        localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceSearchBox
         localSearchBar.enablesReturnKeyAutomatically = false
         localSearchBar.translatesAutoresizingMaskIntoConstraints = false
         localSearchBar.placeholder = "Search"

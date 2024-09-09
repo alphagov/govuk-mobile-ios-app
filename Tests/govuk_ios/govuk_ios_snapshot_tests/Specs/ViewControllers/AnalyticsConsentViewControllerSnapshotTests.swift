@@ -1,34 +1,25 @@
 import Foundation
 import XCTest
-import UIKit
 import SwiftUI
 
 @testable import govuk_ios
 
 final class AnalyticsConsentViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let navigationController = getNavigationController()
-        navigationController.overrideUserInterfaceStyle = .light
-        VerifySnapshotInWindow(navigationController)
+        loadInNavigationControllerTest(view: view, navBarHidden: true)
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let navigationController = getNavigationController()
-        navigationController.overrideUserInterfaceStyle = .dark
-        VerifySnapshotInWindow(navigationController)
+        loadInNavigationControllerTest(view: view, mode: .dark, navBarHidden: true)
     }
 
-    private func getNavigationController() -> UINavigationController {
+    private var view: some View {
         let viewModel = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
             dismissAction: {}
         )
-        let containerView = AnalyticsConsentContainerView(
+        return AnalyticsConsentContainerView(
             viewModel: viewModel
         )
-        let subject = UIHostingController(rootView: containerView)
-        let navigationController = UINavigationController(rootViewController: subject)
-        navigationController.setNavigationBarHidden(true, animated: false)
-        return navigationController
     }
 }

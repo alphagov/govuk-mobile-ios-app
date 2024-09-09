@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 import iOSSnapshotTestCase
 import Factory
@@ -128,4 +129,13 @@ class SnapshotTestCase: FBSnapshotTestCase {
         VerifySnapshotInWindow(navigationController)
     }
 
+    func loadInNavigationControllerTest(view: some View,
+                                        mode: UIUserInterfaceStyle = .light,
+                                        navBarHidden: Bool = false) {
+        let sut = UIHostingController(rootView: view)
+        let navigationController = UINavigationController(rootViewController: sut)
+        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
+        navigationController.overrideUserInterfaceStyle = mode
+        VerifySnapshotInWindow(navigationController)
+    }
 }

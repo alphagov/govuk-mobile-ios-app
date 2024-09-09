@@ -16,21 +16,23 @@ struct AnalyticsConsentContainerView: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(.title)
+                .font(Font.govUK.title1)
                 .multilineTextAlignment(.leading)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityLabel(Text(viewModel.title))
-                .padding(.top, verticalSizeClass == .compact ? 32 : 41)
+                .padding(.top, verticalSizeClass == .compact ? 32 : 46)
                 .padding(.horizontal, 16)
             ScrollView {
                 Text(viewModel.descriptionTop)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .font(Font.govUK.subheadline)
                     .multilineTextAlignment(.leading)
                     .accessibilityLabel(Text(viewModel.descriptionTop))
                 Text(viewModel.descriptionBullets)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .font(Font.govUK.body)
                     .multilineTextAlignment(.leading)
                     .lineSpacing(8)
                     .accessibilityLabel(Text(viewModel.descriptionBullets))
@@ -38,12 +40,14 @@ struct AnalyticsConsentContainerView: View {
                 Text(viewModel.descriptionBottom)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .font(Font.govUK.subheadline)
                     .multilineTextAlignment(.leading)
                     .accessibilityLabel(Text(viewModel.descriptionBottom))
                     .padding(.top, 16)
                 Text(viewModel.privacyPolicyLinkTitle)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.link))
+                    .font(Font.govUK.subheadline)
                     .multilineTextAlignment(.leading)
                     .accessibilityLabel(Text(viewModel.privacyPolicyLinkTitle))
                     .accessibilityHint(Text(viewModel.privacyPolicyLinkHint))
@@ -51,7 +55,8 @@ struct AnalyticsConsentContainerView: View {
                     .onTapGesture {
                         viewModel.onPrivacyPolicyLinkClicked()
                     }
-            }.padding([.top, .horizontal], 16)
+            }.padding(.top, verticalSizeClass == .compact ? 16 : 24)
+            .padding(.horizontal, 16)
             Spacer()
             AdaptiveStack {
                 SwiftUIButton(
@@ -67,7 +72,7 @@ struct AnalyticsConsentContainerView: View {
                 .frame(minHeight: 44, idealHeight: 44)
                 .padding(.horizontal, 15)
             }.padding(.top, 16)
-            .padding(.bottom, verticalSizeClass == .compact ? 32 : 11)
+            .padding(.bottom, 32)
         }
     }
 }

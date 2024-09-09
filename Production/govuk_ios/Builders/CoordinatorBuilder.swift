@@ -51,7 +51,6 @@ class CoordinatorBuilder {
                           dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AnalyticsConsentCoordinator(
             navigationController: navigationController,
-            analyticsConsentService: container.analyticsConsentService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             dismissAction: dismissAction
         )

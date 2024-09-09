@@ -17,7 +17,11 @@ platform :ios do
   end
 
   desc 'Builds alpha configuration'
-  lane :deploy do
+  lane :alpha do
+    deploy
+  end
+
+  private_lane :deploy do
     update_build_number
     build
     app_store

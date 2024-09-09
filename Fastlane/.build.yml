@@ -7,6 +7,8 @@ default: &DEFAULTS
     project: GovUK.xcodeproj
     workspace: GovUK.xcworkspace
     bundle_identifier: uk.gov.govuk
+    profile_specifiers:
+      uk.gov.govuk: "match AppStore uk.gov.govuk"
   scan:
     devices:
       - iPhone 15 Pro

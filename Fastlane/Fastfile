@@ -58,7 +58,7 @@ platform :ios do
   lane :sign do
     match(
       type: configuration.match_method,
-      app_identifier: configuration.sign_identifiers,
+      app_identifier: configuration.match_identifiers,
       readonly: true,
       git_branch: 'main',
       api_key: app_store_connect_api_key

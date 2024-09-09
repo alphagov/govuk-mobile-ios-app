@@ -81,12 +81,16 @@ class Configuration
     setting(:match, :method)
   end
 
+  def match_identifiers
+    app_bundle_identifier
+  end
+
   private
 
   attr_reader :lane_name, :yaml
 
   def app_profile_specifiers
-    setting(:gym, :profile_specifiers)
+    setting(:app, :profile_specifiers)
   end
 
   def setting(prefix, key)

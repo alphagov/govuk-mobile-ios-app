@@ -46,7 +46,7 @@ platform :ios do
       configuration: 'Release',
       output_directory: configuration.app_output_directory,
       clean: options[:clean].nil? ? true : options[:clean],
-      skip_profile_detection: true,
+      skip_profile_detection: false,
       export_method: 'app-store',
       xcargs: '-allowProvisioningUpdates'
     )

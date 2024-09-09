@@ -86,7 +86,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _receivedAnalyticsConsentDismissAction: (() -> Void)?
 
     override func analyticsConsent(navigationController: UINavigationController,
-                             dismissAction: @escaping () -> Void) -> BaseCoordinator {
+                                   dismissAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedAnalyticsConsentNavigationController = navigationController
         _receivedAnalyticsConsentDismissAction = dismissAction
         return _stubbedAnalyticsConsentCoordinator ??

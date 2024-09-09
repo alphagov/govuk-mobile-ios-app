@@ -33,7 +33,7 @@ class SearchViewController: BaseViewController,
         return localSearchBar
     }()
 
-    var trackingName: String { "Search_Modal" }
+    var trackingName: String { "Search" }
 
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel

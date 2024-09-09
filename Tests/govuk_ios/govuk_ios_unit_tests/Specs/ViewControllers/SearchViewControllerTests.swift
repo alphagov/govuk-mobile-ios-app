@@ -6,19 +6,15 @@ import Factory
 
 @testable import govuk_ios
 
-class HomeViewControllerTests: XCTestCase {
+class SearchViewControllerTests: XCTestCase {
     
-    @MainActor
     func test_viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register {
             mockAnalyticsService
         }
-        let viewModel = HomeViewModel(
-            configService: MockAppConfigService(), 
-            searchButtonPrimaryAction: { () -> Void in _ = true }
-        )
-        let subject = HomeViewController(viewModel: viewModel)
+        let viewModel = SearchViewModel(analyticsService: MockAnalyticsService())
+        let subject = SearchViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
 
         let screens = mockAnalyticsService._trackScreenReceivedScreens

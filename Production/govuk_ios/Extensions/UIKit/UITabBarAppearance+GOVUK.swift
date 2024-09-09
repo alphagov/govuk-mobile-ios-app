@@ -1,15 +1,26 @@
 import Foundation
 import UIKit
+import UIComponents
 
-extension UITabBarAppearance {
-    static var govUK: UITabBarAppearance {
-        let appearance = UITabBarAppearance()
+extension UINavigationBarAppearance {
+    static var govUK: UINavigationBarAppearance {
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.govUK.bodySemibold
+        ]
         appearance.configureWithTransparentBackground()
-        appearance.shadowColor = UIColor.govUK.strokes.listDivider
-        appearance.backgroundColor = UIColor.govUK.fills.surfaceFixedContainer
-        appearance.inlineLayoutAppearance = .govUK
-        appearance.stackedLayoutAppearance = .govUK
-        appearance.compactInlineLayoutAppearance = .govUK
+        appearance.backgroundColor = GOVUKColors.fills.surfaceModal
+        appearance.buttonAppearance = .govUK
+        return appearance
+    }
+}
+
+extension UIBarButtonItemAppearance {
+    static var govUK: UIBarButtonItemAppearance {
+        let appearance = UIBarButtonItemAppearance()
+        appearance.normal.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: GOVUKColors.text.link
+        ]
         return appearance
     }
 }

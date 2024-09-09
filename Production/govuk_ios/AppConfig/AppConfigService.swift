@@ -1,6 +1,10 @@
 import Foundation
 
-public final class AppConfigService {
+protocol AppConfigServiceInterface {
+    func isFeatureEnabled(key: Feature) -> Bool
+}
+
+public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
     private let configProvider: AppConfigProviderInterface
 

@@ -41,8 +41,12 @@ class ViewControllerBuilder {
         )
     }
 
-    func home() -> UIViewController {
-        let viewModel = HomeViewModel()
+    func home(searchButtonPrimaryAction: @escaping () -> Void,
+              configService: AppConfigServiceInterface) -> UIViewController {
+        let viewModel = HomeViewModel(
+            configService: configService,
+            searchButtonPrimaryAction: searchButtonPrimaryAction
+        )
         return HomeViewController(
             viewModel: viewModel
         )
@@ -51,6 +55,15 @@ class ViewControllerBuilder {
     func settings() -> UIViewController {
         let viewModel = SettingsViewModel()
         return SettingsViewController(
+            viewModel: viewModel
+        )
+    }
+
+    func search(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+        let viewModel = SearchViewModel(
+            analyticsService: analyticsService
+        )
+        return SearchViewController(
             viewModel: viewModel
         )
     }

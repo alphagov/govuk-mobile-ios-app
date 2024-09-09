@@ -14,3 +14,9 @@
 
 /* MARK: - Home */
 "homeScreenLogoAccessibilityTitle" = "Gov.Uk logo";
+"homeSearchWidgetTitle" = "Find government services and information";
+"homeSearchButtonTitle" = "Search";
+
+/* MARK: - Search */
+"searchModalTitle" = "Search";
+"searchBarPlaceholder" = "Search";

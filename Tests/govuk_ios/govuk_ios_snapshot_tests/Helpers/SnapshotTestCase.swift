@@ -13,7 +13,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
         Container.shared.lottieConfiguration.register {
             LottieConfiguration(renderingEngine: .mainThread)
         }
-        // self.recordMode = true
+//        self.recordMode = true
     }
 
     func VerifySnapshotInWindow(_ viewController: UIViewController,
@@ -118,4 +118,14 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func wrapInWindow(_ viewController: UIViewController) {
         UIApplication.shared.windows.first?.rootViewController = viewController
     }
+
+    func loadInNavigationControllerTest(viewController: UIViewController,
+                                        mode: UIUserInterfaceStyle = .light,
+                                        navBarHidden: Bool = false) {
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
+        navigationController.overrideUserInterfaceStyle = mode
+        VerifySnapshotInWindow(navigationController)
+    }
+
 }

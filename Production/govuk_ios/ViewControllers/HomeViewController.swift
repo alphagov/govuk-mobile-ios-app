@@ -4,19 +4,19 @@ import UIKit
 class HomeViewController: BaseViewController,
                           UIScrollViewDelegate,
                           TrackableScreen {
-    private lazy var navigationBar: HomeNavigationBar = {
-        let localView = HomeNavigationBar()
+    private lazy var navigationBar: NavigationBar = {
+        let localView = NavigationBar()
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
-    lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 16
         return stackView
     }()
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
@@ -79,8 +79,6 @@ class HomeViewController: BaseViewController,
     }
 
     private func addWidgets() {
-        viewModel.widgets.lazy
-            .map(HomeWidgetView.init)
-            .forEach(stackView.addArrangedSubview)
+        viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
     }
 }

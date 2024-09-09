@@ -39,8 +39,8 @@ class Configuration
 
   def app_args
     [
-      "-allowProvisioningUpdates"
-    ].join(" ")
+      '-allowProvisioningUpdates'
+    ].join(' ')
   end
 
   def app_configuration

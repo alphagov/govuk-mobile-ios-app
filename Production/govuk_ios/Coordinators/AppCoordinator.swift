@@ -23,6 +23,16 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
             completion: { [weak self] in
+                self?.startAnalyticsConsent(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startAnalyticsConsent(url: URL?) {
+        let coordinator = coordinatorBuilder.analyticsConsent(
+            navigationController: root,
+            dismissAction: { [weak self] in
                 self?.startOnboarding(url: url)
                 self?.initialLaunch = false
             }

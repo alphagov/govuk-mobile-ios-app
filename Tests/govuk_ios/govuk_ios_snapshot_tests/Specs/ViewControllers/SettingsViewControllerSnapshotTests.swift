@@ -6,24 +6,18 @@ import UIKit
 
 class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = SettingsViewModel()
-        let subject = SettingsViewController(
-            viewModel: viewModel
-        )
-        let navigationController = UINavigationController(rootViewController: subject)
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.overrideUserInterfaceStyle = .light
-        VerifySnapshotInWindow(navigationController)
+        loadInNavigationControllerTest(viewController: viewController(),
+                                       navBarHidden: true)
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
+        loadInNavigationControllerTest(viewController: viewController(),
+                                       mode: .dark,
+                                       navBarHidden: true)
+    }
+
+    private func viewController() -> SettingsViewController {
         let viewModel = SettingsViewModel()
-        let subject = SettingsViewController(
-            viewModel: viewModel
-        )
-        let navigationController = UINavigationController(rootViewController: subject)
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.overrideUserInterfaceStyle = .dark
-        VerifySnapshotInWindow(navigationController)
+        return SettingsViewController(viewModel: viewModel)
     }
 }

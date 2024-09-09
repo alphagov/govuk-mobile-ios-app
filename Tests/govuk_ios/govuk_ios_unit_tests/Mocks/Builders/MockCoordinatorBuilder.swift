@@ -93,4 +93,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
             navigationController: .init()
         )
     }
+
+    var _stubbedSearchCoordinator: MockBaseCoordinator?
+    var _receivedSearchNavigationController: UINavigationController?
+    override func search(navigationController: UINavigationController) -> BaseCoordinator {
+        _receivedSearchNavigationController = navigationController
+        return _stubbedSearchCoordinator ?? MockBaseCoordinator()
+    }
 }

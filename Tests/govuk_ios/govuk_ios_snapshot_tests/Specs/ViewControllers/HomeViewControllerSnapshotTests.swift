@@ -6,24 +6,19 @@ import UIKit
 
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = HomeViewModel()
-        let subject = HomeViewController(
-            viewModel: viewModel
-        )
-        let navigationController = UINavigationController(rootViewController: subject)
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.overrideUserInterfaceStyle = .light
-        VerifySnapshotInWindow(navigationController)
+        loadInNavigationControllerTest(viewController: viewController,
+                                       navBarHidden: true)
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = HomeViewModel()
-        let subject = HomeViewController(
-            viewModel: viewModel
-        )
-        let navigationController = UINavigationController(rootViewController: subject)
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.overrideUserInterfaceStyle = .dark
-        VerifySnapshotInWindow(navigationController)
+        loadInNavigationControllerTest(viewController: viewController,
+                                       mode: .dark,
+                                       navBarHidden: true)
+    }
+
+    private var viewController: HomeViewController {
+        let viewModel = HomeViewModel(configService: MockAppConfigService(),
+                                      searchButtonPrimaryAction: { })
+        return HomeViewController(viewModel: viewModel)
     }
 }

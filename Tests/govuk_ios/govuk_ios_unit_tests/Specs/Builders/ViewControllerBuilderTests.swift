@@ -28,7 +28,10 @@ class ViewControllerBuilderTests: XCTestCase {
 
     func test_home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.home()
+        let result = subject.home(
+            searchButtonPrimaryAction: { () -> Void in },
+            configService: MockAppConfigService()
+        )
 
         XCTAssert(result is HomeViewController)
     }
@@ -38,5 +41,14 @@ class ViewControllerBuilderTests: XCTestCase {
         let result = subject.settings()
 
         XCTAssert(result is SettingsViewController)
+    }
+    
+    func test_search_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.search(
+            analyticsService: MockAnalyticsService()
+        )
+
+        XCTAssert(result is SearchViewController)
     }
 }

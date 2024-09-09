@@ -23,7 +23,8 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .home(coordinatorBuilder: self),
-            analyticsService: container.analyticsService.resolve()
+            analyticsService: container.analyticsService.resolve(),
+            configService: AppConfigService(configProvider: AppConfigProvider())
         )
     }
 
@@ -86,6 +87,14 @@ class CoordinatorBuilder {
         NextCoordinator(
             title: title,
             navigationController: navigationController
+        )
+    }
+
+    func search(navigationController: UINavigationController) -> BaseCoordinator {
+        SearchCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve()
         )
     }
 }

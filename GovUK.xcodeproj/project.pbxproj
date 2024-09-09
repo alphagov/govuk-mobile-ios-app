@@ -40,7 +40,6 @@
 		3D7E2D162C81DB810016BEEC /* AnalyticsConsentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D152C81DB810016BEEC /* AnalyticsConsentContainerView.swift */; };
 		3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D172C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift */; };
 		3D7E2D1A2C81FBD50016BEEC /* AnalyticsConsentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D192C81FBD50016BEEC /* AnalyticsConsentService.swift */; };
-		3D7E2D1F2C8203FF0016BEEC /* AnalyticsConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D1E2C8203FF0016BEEC /* AnalyticsConsent.swift */; };
 		3DEC85A42C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */; };
 		3DEC85A62C89C3390044D5F9 /* AnalyticsConsentServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A52C89C3390044D5F9 /* AnalyticsConsentServiceTests.swift */; };
 		3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */; };
@@ -262,7 +261,6 @@
 		3D7E2D152C81DB810016BEEC /* AnalyticsConsentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerView.swift; sourceTree = "<group>"; };
 		3D7E2D172C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentCoordinator.swift; sourceTree = "<group>"; };
 		3D7E2D192C81FBD50016BEEC /* AnalyticsConsentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentService.swift; sourceTree = "<group>"; };
-		3D7E2D1E2C8203FF0016BEEC /* AnalyticsConsent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsent.swift; sourceTree = "<group>"; };
 		3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		3DEC85A52C89C3390044D5F9 /* AnalyticsConsentServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentServiceTests.swift; sourceTree = "<group>"; };
 		3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -476,14 +474,6 @@
 				162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */,
 			);
 			path = DevConfig;
-			sourceTree = "<group>";
-		};
-		3D7E2D102C81DABD0016BEEC /* AnalyticsConsent */ = {
-			isa = PBXGroup;
-			children = (
-				3D7E2D1E2C8203FF0016BEEC /* AnalyticsConsent.swift */,
-			);
-			path = AnalyticsConsent;
 			sourceTree = "<group>";
 		};
 		3DEC85AB2C89DB740044D5F9 /* Extensions */ = {
@@ -1021,7 +1011,6 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
-				3D7E2D102C81DABD0016BEEC /* AnalyticsConsent */,
 				4E5ED1FD2C6DF97B00750BDA /* AppConfig */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D962D5E2C29BD0B0038BC0A /* Coordinators */,
@@ -1570,7 +1559,6 @@
 				5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */,
 				5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */,
 				5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */,
-				3D7E2D1F2C8203FF0016BEEC /* AnalyticsConsent.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
 				5D962D642C29BD0B0038BC0A /* ColorCoordinator.swift in Sources */,

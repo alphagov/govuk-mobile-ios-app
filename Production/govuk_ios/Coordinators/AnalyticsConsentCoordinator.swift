@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SwiftUI
 
 class AnalyticsConsentCoordinator: BaseCoordinator {
     private let analyticsConsentService: AnalyticsConsentServiceInterface
@@ -23,13 +24,12 @@ class AnalyticsConsentCoordinator: BaseCoordinator {
     }
 
     private func setAnalyticsConsent() {
-        let analyticsConsentModule = AnalyticsConsent(
+        let viewModel = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
-            dismissAction: { [weak self] in
-                self?.analyticsConsentService.setHasSeenAnalyticsConsent()
-                self?.dismissAction()
-            }
+            dismissAction: dismissAction
         )
-        set(analyticsConsentModule.viewController)
+        let containerView = AnalyticsConsentContainerView(viewModel: viewModel)
+        let viewController = UIHostingController(rootView: containerView)
+        set(viewController)
     }
 }

@@ -24,14 +24,17 @@ final class AnalyticsConsentCoordinatorTests: XCTestCase {
         let analyticsConsentService = MockAnalyticsConsentService()
         analyticsConsentService._stubbedHasSeenAnalyticsConsent = false
         let mockNavigationController = UINavigationController()
+        let expectation = expectation()
+        expectation.isInverted = true
         let sut = AnalyticsConsentCoordinator(
             navigationController: mockNavigationController,
             analyticsConsentService: analyticsConsentService,
             analyticsService: MockAnalyticsService(),
             dismissAction: {
-                XCTFail()
+                expectation.fulfill()
             }
         )
         sut.start()
+        wait(for: [expectation], timeout: 1)
     }
 }

@@ -41,3 +41,8 @@ jobs:
 
       - name: Deploy
         run: bundle exec fastlane alpha
+        env:
+          APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+          APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
+          APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}

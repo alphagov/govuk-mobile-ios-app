@@ -23,10 +23,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Runs all the tests
 
-### ios deploy
+### ios alpha
 
 ```sh
-[bundle exec] fastlane ios deploy
+[bundle exec] fastlane ios alpha
 ```
 
 Builds alpha configuration

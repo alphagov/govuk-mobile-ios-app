@@ -95,7 +95,7 @@ end
 
 def app_store_key
   app_store_connect_api_key(
-    key_id: configuration.deliver_key_id,
+    key_id: '123',
     issuer_id: configuration.deliver_key_issuer_id,
     key_content: configuration.deliver_key_content,
     is_key_content_base64: true,

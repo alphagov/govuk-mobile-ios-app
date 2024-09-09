@@ -37,6 +37,26 @@ class Configuration
     setting(:app, :bundle_identifier)
   end
 
+  def app_args
+    [
+      "-allowProvisioningUpdates"
+    ].join(" ")
+  end
+
+  def app_configuration
+    'Release'
+  end
+
+  def app_export_method
+    'app-store'
+  end
+
+  def app_export_options
+    {
+      provisioningProfiles: app_profile_specifiers
+    }
+  end
+
   def scan_devices
     setting(:scan, :devices)
   end
@@ -57,9 +77,17 @@ class Configuration
     ENV['APP_STORE_KEY_CONTENT']
   end
 
+  def match_method
+    setting(:match, :method)
+  end
+
   private
 
   attr_reader :lane_name, :yaml
+
+  def app_profile_specifiers
+    setting(:gym, :profile_specifiers)
+  end
 
   def setting(prefix, key)
     yaml[prefix.to_s][key.to_s]

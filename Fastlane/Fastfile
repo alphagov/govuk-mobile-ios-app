@@ -22,6 +22,7 @@ platform :ios do
   end
 
   private_lane :deploy do
+    sign
     update_build_number
     build
     app_store
@@ -43,12 +44,24 @@ platform :ios do
     gym(
       workspace: configuration.app_workspace,
       scheme: configuration.app_scheme,
-      configuration: 'Release',
+      configuration: configuration.app_configuration,
       output_directory: configuration.app_output_directory,
       clean: options[:clean].nil? ? true : options[:clean],
-      skip_profile_detection: false,
-      export_method: 'app-store',
-      xcargs: '-allowProvisioningUpdates'
+      skip_profile_detection: true,
+      export_method: configuration.app_export_method,
+      export_options: configuration.app_export_options,
+      xcargs: configuration.app_args
+    )
+  end
+
+  desc 'Download profiles'
+  lane :sign do
+    match(
+      type: configuration.match_method,
+      app_identifier: configuration.sign_identifiers,
+      readonly: true,
+      git_branch: 'main',
+      api_key: app_store_connect_api_key
     )
   end
 

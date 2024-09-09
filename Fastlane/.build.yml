@@ -10,6 +10,8 @@ default: &DEFAULTS
   scan:
     devices:
       - iPhone 15 Pro
+  match: &MATCH_DEFAULTS
+    method: "adhoc"
 
 unit:
   <<: *DEFAULTS
@@ -18,3 +20,6 @@ alpha:
   app:
     <<: *APP_DEFAULTS
     display_name: Gov.UK - Alpha
+  match:
+    <<: *MATCH_DEFAULTS
+    method: "appstore"

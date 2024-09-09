@@ -53,7 +53,7 @@ struct AnalyticsConsentContainerView: View {
                     .accessibilityHint(Text(viewModel.privacyPolicyLinkHint))
                     .padding(.top, 16)
                     .onTapGesture {
-                        viewModel.onPrivacyPolicyLinkClicked()
+                        viewModel.openPrivacyPolicy()
                     }
             }.padding(.top, verticalSizeClass == .compact ? 16 : 24)
             .padding(.horizontal, 16)

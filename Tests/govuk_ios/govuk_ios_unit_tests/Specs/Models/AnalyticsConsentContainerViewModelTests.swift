@@ -60,7 +60,7 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func test_onPrivacyPolicyLinkClicked_canOpenUrl() throws {
+    func test_openPrivacyPolicy_canOpenUrl() throws {
         let urlOpener = MockURLOpening()
         urlOpener._stubbedCanOpenUrl = true
         let sut = AnalyticsConsentContainerViewModel(
@@ -68,11 +68,11 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
             urlOpener: urlOpener,
             dismissAction: {}
         )
-        sut.onPrivacyPolicyLinkClicked()
+        sut.openPrivacyPolicy()
         XCTAssertTrue(urlOpener._receivedOpenCompletion)
     }
 
-    func test_onPrivacyPolicyLinkClicked_cantOpenUrl() throws {
+    func test_openPrivacyPolicy_cantOpenUrl() throws {
         let urlOpener = MockURLOpening()
         urlOpener._stubbedCanOpenUrl = false
         let sut = AnalyticsConsentContainerViewModel(
@@ -80,7 +80,7 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
             urlOpener: urlOpener,
             dismissAction: {}
         )
-        sut.onPrivacyPolicyLinkClicked()
+        sut.openPrivacyPolicy()
         XCTAssertFalse(urlOpener._receivedOpenCompletion)
     }
 }

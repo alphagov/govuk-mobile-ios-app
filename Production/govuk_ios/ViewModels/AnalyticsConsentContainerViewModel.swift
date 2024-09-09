@@ -45,7 +45,7 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
         self.dismissAction = dismissAction
     }
 
-    func onPrivacyPolicyLinkClicked() {
+    func openPrivacyPolicy() {
         guard let url = URL(string: privacyPolicyLinkUrl) else { return }
         if urlOpener.canOpenURL(url) {
             urlOpener.open(url, options: [:], completionHandler: nil)

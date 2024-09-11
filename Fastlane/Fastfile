@@ -61,7 +61,8 @@ platform :ios do
       app_identifier: configuration.match_identifiers,
       readonly: true,
       git_branch: 'main',
-      api_key: app_store_key
+      api_key: app_store_key,
+      git_basic_authorization: configuration.match_certificate_token
     )
   end
 

@@ -85,6 +85,10 @@ class Configuration
     app_bundle_identifier
   end
 
+  def match_certificate_token
+    ENV['MATCH_CERTIFICATE_TOKEN']
+  end
+
   private
 
   attr_reader :lane_name, :yaml

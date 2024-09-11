@@ -47,3 +47,4 @@ jobs:
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
           APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
           APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
+          MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}

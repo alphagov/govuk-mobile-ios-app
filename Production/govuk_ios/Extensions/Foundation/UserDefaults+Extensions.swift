@@ -15,6 +15,7 @@ extension UserDefaults {
             boolValue,
             forKey: key.rawValue
         )
+        synchronize()
     }
 }
 

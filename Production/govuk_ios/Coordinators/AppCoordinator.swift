@@ -23,6 +23,7 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
             completion: { [weak self] in
+                self?.initialLaunch = false
                 self?.startAnalyticsConsent(url: url)
             }
         )
@@ -34,7 +35,6 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             dismissAction: { [weak self] in
                 self?.startOnboarding(url: url)
-                self?.initialLaunch = false
             }
         )
         start(coordinator)

@@ -1,6 +1,4 @@
 import Foundation
-import GAnalytics
-import Logging
 import Factory
 import Onboarding
 
@@ -28,8 +26,11 @@ extension Container {
     var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
         Factory(self) {
             AnalyticsService(
-                analytics: GAnalytics(),
-                preferenceStore: .standard
+                clients: [
+                    FirebaseClient(),
+                    CrashlyticsClient()
+                ],
+                userDefaults: .standard
             )
         }
         .scope(.singleton)

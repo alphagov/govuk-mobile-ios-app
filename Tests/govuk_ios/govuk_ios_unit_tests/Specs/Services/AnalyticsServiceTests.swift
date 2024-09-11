@@ -42,7 +42,7 @@ final class AnalyticsServiceTests: XCTestCase {
         XCTAssertEqual(screens.first?.type.name, mockViewController.trackingClass)
     }
 
-    func test_setAcceptedAnalytics_setsPreference() {
+    func test_setAcceptedAnalytics_true_grantsPermissions() {
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
@@ -52,6 +52,22 @@ final class AnalyticsServiceTests: XCTestCase {
         subject.setAcceptedAnalytics(accepted: true)
 
         XCTAssertEqual(mockLoggingAnalyticsService.hasAcceptedAnalytics, true)
+        XCTAssertTrue(mockLoggingAnalyticsService._receivedGrantAnalyticsPermission)
+        XCTAssertFalse(mockLoggingAnalyticsService._receivedDenyAnalyticsPermission)
+    }
+
+    func test_setAcceptedAnalytics_false_denysPermission() {
+        let mockUserDefaults = UserDefaults()
+        let subject = AnalyticsService(
+            analytics: mockLoggingAnalyticsService,
+            preferenceStore: mockUserDefaults
+        )
+
+        subject.setAcceptedAnalytics(accepted: false)
+
+        XCTAssertEqual(mockLoggingAnalyticsService.hasAcceptedAnalytics, false)
+        XCTAssertFalse(mockLoggingAnalyticsService._receivedGrantAnalyticsPermission)
+        XCTAssertTrue(mockLoggingAnalyticsService._receivedDenyAnalyticsPermission)
     }
 
     func test_permissionState_notSet_returnsUnknown() {

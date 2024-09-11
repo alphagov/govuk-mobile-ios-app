@@ -42,11 +42,15 @@ final class MockLoggingAnalyticsService: Logging.AnalyticsService {
         crashesLogged.append(crash as NSError)
     }
 
+    var _receivedGrantAnalyticsPermission: Bool = false
     func grantAnalyticsPermission() {
+        _receivedGrantAnalyticsPermission = true
         hasAcceptedAnalytics = true
     }
 
+    var _receivedDenyAnalyticsPermission: Bool = false
     func denyAnalyticsPermission() {
+        _receivedDenyAnalyticsPermission = true
         hasAcceptedAnalytics = false
     }
 }

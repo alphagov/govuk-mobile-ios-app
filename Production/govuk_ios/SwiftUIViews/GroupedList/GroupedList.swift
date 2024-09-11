@@ -2,11 +2,18 @@ import SwiftUI
 
 struct GroupedList: View {
     var content: [GroupedListSection] = GroupedListSection.previewContent
+    var backgroundColor: UIColor?
 
     var body: some View {
-            ForEach(content, id: \.heading) { section in
-                GroupedListSectionView(section: section)
+        ZStack {
+            Color(backgroundColor ?? .clear)
+            VStack {
+                ForEach(content, id: \.heading) { section in
+                    GroupedListSectionView(section: section)
+                }
             }
+            .frame(idealWidth: UIScreen.main.bounds.width)
+        }
     }
 }
 

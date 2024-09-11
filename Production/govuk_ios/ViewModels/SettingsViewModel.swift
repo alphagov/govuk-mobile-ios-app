@@ -1,6 +1,11 @@
 import UIKit
 
-struct SettingsViewModel {
+protocol SettingsViewModelProtocol {
+    var title: String { get }
+    var listContent: [GroupedListSection] { get }
+}
+
+struct SettingsViewModel: SettingsViewModelProtocol {
     var title: String = "Settings"
     var appVersion: String? {
         getVersionNumber()

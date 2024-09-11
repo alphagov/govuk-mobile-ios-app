@@ -8,7 +8,7 @@ class SettingsViewController: BaseViewController,
     var trackingName: String { "Settings" }
     var trackingTitle: String? { viewModel.title }
 
-    private var viewModel: SettingsViewModel
+    private var viewModel: SettingsViewModelProtocol
     private let scrollview = UIScrollView(frame: .zero)
     private let backgroundColor = UIColor.govUK.fills.surfaceBackground
 
@@ -20,7 +20,7 @@ class SettingsViewController: BaseViewController,
         return viewController
     }()
 
-    public init(viewModel: SettingsViewModel) {
+    public init(viewModel: SettingsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

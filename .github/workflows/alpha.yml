@@ -20,7 +20,7 @@ jobs:
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
-    # needs: sonar-scan
+    needs: sonar-scan
     name: Build Alpha
     runs-on: macos-14
 
@@ -40,6 +40,7 @@ jobs:
         run: xcodes select
 
       - name: Deploy
+        run: bundle exec fastlane alpha
         env:
           BUILD_NUMBER: ${{ github.run_number }}
           APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
@@ -47,4 +48,4 @@ jobs:
           APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
           APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
           MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
-        run: bundle exec fastlane alpha
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}

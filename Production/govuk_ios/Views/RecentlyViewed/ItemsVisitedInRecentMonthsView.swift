@@ -1,17 +1,18 @@
 import SwiftUI
 
 struct ItemsVisitedInRecentMonthsView: View {
-    let visitedItems: [[RecentItem]]
+    let visitedItems: [ActivityItem]
+    let monthAndYears: [String]
     var body: some View {
-        ForEach(visitedItems, id: \.self) { listOfRecentlyVisitedItems in
-            Section(header: Text(DateHelper.getMonthAndYear(
-                date: DateHelper.convertDateStringToDate(
-                    dateString: listOfRecentlyVisitedItems[0].date)))
+        ForEach(monthAndYears, id: \.self) { date in
+            Section(header: Text(date)
                 .font(.title3)
                 .fontWeight(.semibold)
                 .textCase(nil)
                 .foregroundColor(Color(UIColor.govUK.text.primary))) {
-                    ForEach(listOfRecentlyVisitedItems, id: \.self) { item in
+                    ForEach(visitedItems.filter({ DateHelper.getMonthAndYear(
+                        date: DateHelper.convertDateStringToDate(dateString: $0.date )) == date
+                    }), id: \.self) { item in
                         RecentItemCell(model: item)
                     }
                 }

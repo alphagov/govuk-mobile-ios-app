@@ -2,10 +2,13 @@ import SwiftUI
 import Foundation
 
 struct ItemsVisitedThisMonthView: View {
-    let items: [RecentItem]
+    let items: [ActivityItem]
     var body: some View {
         if items.count >= 1 {
-            Section(header: Text("This Month")
+            Section(header: Text(NSLocalizedString(
+                "thisMonthsItemsSectionHeader",
+                bundle: .main,
+                comment: ""))
                 .font(.title3)
                 .fontWeight(.semibold)
                 .textCase(nil)

@@ -1,12 +1,21 @@
 import SwiftUI
 
 struct RecentItemsErrorView: View {
-    var model: RecentItemsErrorStructure
     var body: some View {
         VStack {
-            Text(model.errorTitle).bold()
-            Text(model.errrorDesc)
+            Text(NSLocalizedString(
+                "errorViewTitle",
+                bundle: .main,
+                comment: "")).bold()
+                .multilineTextAlignment(.center)
+                .accessibilityLabel("").padding(.top)
+            Text(NSLocalizedString(
+                "errorViewDescription",
+                bundle: .main,
+                comment: ""))
+            .multilineTextAlignment(.center)
+            .accessibilityLabel("")
             Spacer()
-        }.padding()
+        }.padding(.top)
     }
 }

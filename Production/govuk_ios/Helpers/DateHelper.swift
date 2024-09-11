@@ -38,9 +38,10 @@ class DateHelper {
         return Calendar.current.dateComponents([ .day, .month, .year], from: date)
     }
 
-    static func sortDate(dates: [Date]) -> [Date] {
-        return dates.sorted(by: { dateOne, dateTwo in
-            dateOne > dateTwo
+    static func sortDate(dates: inout [ActivityItem]) {
+        dates = dates.sorted(by: { dateOne, dateTwo in
+            convertDateStringToDate(
+                dateString: dateOne.date) > convertDateStringToDate(dateString: dateTwo.date)
         })
     }
 

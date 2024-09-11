@@ -2,7 +2,9 @@ import SwiftUI
 import UIComponents
 
 struct RecentItemCell: View {
-    let model: RecentItem
+    @Environment(\.managedObjectContext) private var context
+    @ObservedObject var model: ActivityItem
+
     var body: some View {
         VStack(alignment: .leading, content: {
             HStack(content: {
@@ -19,10 +21,16 @@ struct RecentItemCell: View {
                     .accessibilityHint("")
             })
         }).accessibility(addTraits: .isLink)
-          .accessibilityHint("")
-        .onTapGesture {
-            if let url = URL(string: model.url) {
-                UIApplication.shared.open(url)
+            .accessibilityHint("")
+            .onTapGesture {
+                if let url = URL(string: model.url) {
+                    UIApplication.shared.open(url)
+                    model.date = Date().description
+                    do {
+                        if context.hasChanges {
+                           try context.save()
+                        }
+                    } catch { }
             }
         }
     }

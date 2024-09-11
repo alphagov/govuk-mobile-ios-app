@@ -13,10 +13,10 @@ protocol AnalyticsServiceInterface {
 
 class AnalyticsService: AnalyticsServiceInterface {
     private let analytics: Logging.AnalyticsService
-    private var preferenceStore: AnalyticsPreferenceStore
+    private var preferenceStore: UserDefaults
 
     init(analytics: Logging.AnalyticsService,
-         preferenceStore: AnalyticsPreferenceStore) {
+         preferenceStore: UserDefaults) {
         self.analytics = analytics
         self.preferenceStore = preferenceStore
     }
@@ -48,7 +48,11 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func setAcceptedAnalytics(accepted: Bool) {
-        preferenceStore.hasAcceptedAnalytics = accepted
+        if accepted {
+            analytics.grantAnalyticsPermission()
+        } else {
+            analytics.denyAnalyticsPermission()
+        }
     }
 
     var permissionState: AnalyticsPermissionState {

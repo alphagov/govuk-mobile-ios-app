@@ -15,7 +15,6 @@
 		160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7542C5B0401008F97AF /* SettingsViewModel.swift */; };
 		160EA7592C60D7AB008F97AF /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
-		162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */; };
 		1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceModel.swift */; };
 		1651C6E92C63D4D300864C5C /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */; };
 		166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166248232C4AC91E009F7E58 /* HomeCoordinator.swift */; };
@@ -244,7 +243,6 @@
 		160EA7542C5B0401008F97AF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsPreferenceStore.swift; sourceTree = "<group>"; };
 		1631DE982C2B0D020050CB9D /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		166248232C4AC91E009F7E58 /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -1214,7 +1212,6 @@
 				5D93EE802C36848400D90C0C /* Deeplinking */,
 				3DEC85AB2C89DB740044D5F9 /* Extensions */,
 				5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */,
-				162DD75C2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift */,
 				16CA29F32C2199FB000B3B48 /* MockLoggingAnalyticsService.swift */,
 				5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */,
 				5D349F5E2C6A5A5700B7F747 /* Networking */,
@@ -1637,7 +1634,6 @@
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */,
 				3D55B22E2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift in Sources */,
-				162DD75D2C29BF6500FA482D /* MockAnalyticsPreferenceStore.swift in Sources */,
 				5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */,
 				5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */,
 				5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */,

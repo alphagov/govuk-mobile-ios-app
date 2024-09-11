@@ -7,12 +7,12 @@ import Logging
 
 final class AnalyticsServiceTests: XCTestCase {
     let mockLoggingAnalyticsService = MockLoggingAnalyticsService()
-    let mockAnalyticsPreferenceStore = MockAnalyticsPreferenceStore()
 
     func test_trackEvent_tracksEvents() {
+        let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: mockUserDefaults
         )
 
         subject.track(event: AppEvent.appLoaded)
@@ -23,7 +23,7 @@ final class AnalyticsServiceTests: XCTestCase {
     func test_trackScreen_tracksScreen() {
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: .standard
         )
 
         let mockViewController = MockBaseViewController()
@@ -43,43 +43,55 @@ final class AnalyticsServiceTests: XCTestCase {
     }
 
     func test_setAcceptedAnalytics_setsPreference() {
+        let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: mockUserDefaults
         )
 
         subject.setAcceptedAnalytics(accepted: true)
 
-        XCTAssertEqual(mockAnalyticsPreferenceStore.hasAcceptedAnalytics, true)
+        XCTAssertEqual(mockLoggingAnalyticsService.hasAcceptedAnalytics, true)
     }
 
     func test_permissionState_notSet_returnsUnknown() {
+        let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: mockUserDefaults
         )
+
+        mockUserDefaults.set(nil, forKey: "hasAskedForAnalyticsPermissions")
+        mockUserDefaults.set(nil, forKey: "hasAcceptedAnalytics")
+        mockUserDefaults.synchronize()
 
         XCTAssertEqual(subject.permissionState, .unknown)
     }
 
     func test_permissionState_granted_returnsAccepted() {
+        let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: mockUserDefaults
         )
 
-        subject.setAcceptedAnalytics(accepted: true)
+        mockUserDefaults.set(true, forKey: "hasAskedForAnalyticsPermissions")
+        mockUserDefaults.set(true, forKey: "hasAcceptedAnalytics")
+        mockUserDefaults.synchronize()
 
         XCTAssertEqual(subject.permissionState, .accepted)
     }
 
     func test_permissionState_rejected_returnsDenied() {
+        let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: mockUserDefaults
         )
 
-        subject.setAcceptedAnalytics(accepted: false)
+        mockUserDefaults.set(true, forKey: "hasAskedForAnalyticsPermissions")
+        mockUserDefaults.set(false, forKey: "hasAcceptedAnalytics")
+        mockUserDefaults.synchronize()
 
         XCTAssertEqual(subject.permissionState, .denied)
     }

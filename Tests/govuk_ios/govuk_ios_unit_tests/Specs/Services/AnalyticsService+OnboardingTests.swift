@@ -7,13 +7,16 @@ import Logging
 @testable import govuk_ios
 
 final class AnalyticsService_OnboardingTests: XCTestCase {
-    let mockLoggingAnalyticsService = MockLoggingAnalyticsService()
-    let mockAnalyticsPreferenceStore = MockAnalyticsPreferenceStore()
+    var mockLoggingAnalyticsService: MockLoggingAnalyticsService!
+
+    override func setUp() {
+        mockLoggingAnalyticsService = MockLoggingAnalyticsService()
+    }
 
     func test_trackOnboardingEvent_tracksEvents() {
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: .standard
         )
 
         let event = OnboardingEvent(
@@ -30,7 +33,7 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
     func test_trackOnboardingScreen_tracksEvents() {
         let subject = AnalyticsService(
             analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            preferenceStore: .standard
         )
         let onboardingScreen = OnboardingScreen(
             trackingName: "test_name",

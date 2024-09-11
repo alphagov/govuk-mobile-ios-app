@@ -29,7 +29,7 @@ extension Container {
         Factory(self) {
             AnalyticsService(
                 analytics: GAnalytics(),
-                preferenceStore: self.analyticsPreferenceStore()
+                preferenceStore: .standard
             )
         }
         .scope(.singleton)

@@ -18,6 +18,7 @@ platform :ios do
 
   desc 'Builds alpha configuration'
   lane :alpha do
+    setup_ci
     deploy
   end
 

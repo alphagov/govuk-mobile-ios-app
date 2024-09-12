@@ -9,8 +9,9 @@ class MockAnalyticsClient: AnalyticsClient {
         _launchCalled = true
     }
 
+    var _enabledReceived: Bool?
     func setEnabled(enabled: Bool) {
-
+        _enabledReceived = enabled
     }
 
     var _trackScreenReceivedScreens: [TrackableScreen] = []

@@ -112,6 +112,7 @@ final class AnalyticsServiceTests: XCTestCase {
         subject.setAcceptedAnalytics(accepted: true)
 
         XCTAssertTrue(mockUserDefaults.bool(forKey: .acceptedAnalytics))
+        XCTAssertEqual(mockAnalyticsClient._enabledReceived, true)
     }
 
     func test_setAcceptedAnalytics_false_denysPermission() {
@@ -124,5 +125,6 @@ final class AnalyticsServiceTests: XCTestCase {
         subject.setAcceptedAnalytics(accepted: false)
 
         XCTAssertFalse(mockUserDefaults.bool(forKey: .acceptedAnalytics))
+        XCTAssertEqual(mockAnalyticsClient._enabledReceived, false)
     }
 }

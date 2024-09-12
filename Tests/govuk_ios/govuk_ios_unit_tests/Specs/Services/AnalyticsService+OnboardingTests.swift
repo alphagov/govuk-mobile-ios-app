@@ -44,6 +44,7 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
 
         XCTAssertEqual(mockAnalyticsClient._trackScreenReceivedScreens.count, 1)
         XCTAssertEqual(mockAnalyticsClient._trackScreenReceivedScreens.first?.trackingName, "test_name")
+        XCTAssertEqual(onboardingScreen.trackingLanguage, Locale.current.languageCode)
     }
 
 }

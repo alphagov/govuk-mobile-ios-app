@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct GroupedListSection {
     let heading: String?
@@ -35,8 +36,11 @@ struct InformationRow: GroupedListRow {
     let detail: String
 }
 
-#if DEBUG
-extension GroupedListSection {
+struct GroupedListSection_Previews: PreviewProvider {
+    static var previews: some View {
+        Text("preview")
+    }
+
     static var previewContent: [GroupedListSection] {
         [
             .init(
@@ -103,4 +107,3 @@ extension GroupedListSection {
         ]
     }
 }
-#endif

@@ -182,7 +182,6 @@
 		5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */; };
 		5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 5DC2505F2C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5DC250612C91D395009E9E7F /* FirebaseCrashlytics */; };
-		5DC250642C91D5F0009E9E7F /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC250632C91D5F0009E9E7F /* AppScreen.swift */; };
 		5DC250662C91D802009E9E7F /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC250652C91D802009E9E7F /* FirebaseClient.swift */; };
 		5DC250682C91D80F009E9E7F /* CrashlyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC250672C91D80F009E9E7F /* CrashlyticsClient.swift */; };
 		5DC2506A2C91D832009E9E7F /* AnalyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC250692C91D832009E9E7F /* AnalyticsClient.swift */; };
@@ -410,7 +409,6 @@
 		5DC04B932C2D72E80036EF2B /* MockViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewControllerBuilder.swift; sourceTree = "<group>"; };
 		5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
 		5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccessibilityManager.swift; sourceTree = "<group>"; };
-		5DC250632C91D5F0009E9E7F /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
 		5DC250652C91D802009E9E7F /* FirebaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		5DC250672C91D80F009E9E7F /* CrashlyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsClient.swift; sourceTree = "<group>"; };
 		5DC250692C91D832009E9E7F /* AnalyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClient.swift; sourceTree = "<group>"; };
@@ -1247,7 +1245,6 @@
 			children = (
 				5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */,
 				5DE970532C297652009D66C4 /* AppEvent.swift */,
-				5DC250632C91D5F0009E9E7F /* AppScreen.swift */,
 				1631DE982C2B0D020050CB9D /* DeviceModel.swift */,
 				5DAC6E592C64CDA20099406C /* TrackableScreen.swift */,
 			);
@@ -1574,7 +1571,6 @@
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */,
 				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
-				5DC250642C91D5F0009E9E7F /* AppScreen.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,

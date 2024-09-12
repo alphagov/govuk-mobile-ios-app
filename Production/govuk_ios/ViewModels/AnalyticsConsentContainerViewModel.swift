@@ -12,6 +12,8 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     let descriptionBullets = NSLocalizedString("analyticsConsentDescriptionBullets", comment: "")
     let descriptionBottom = NSLocalizedString("analyticsConsentDescriptionBottom", comment: "")
     let privacyPolicyLinkTitle = NSLocalizedString("privacyPolicyLinkTitle", comment: "")
+    let privacyPolicyLinkAccessibilityTitle =
+    NSLocalizedString("privacyPolicyLinkAccessibilityTitle", comment: "")
     let privacyPolicyLinkHint = NSLocalizedString("privacyPolicyLinkHint", comment: "")
     let privacyPolicyLinkUrl = NSLocalizedString("privacyPolicyLinkUrl", comment: "")
     let allowButtonTitle = NSLocalizedString("allowAnalyticsButtonTitle", comment: "")

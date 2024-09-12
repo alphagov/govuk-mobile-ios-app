@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import UIKit
 import UIComponents
 
@@ -7,10 +8,19 @@ class SettingsViewController: BaseViewController,
     var trackingName: String { "Settings" }
     var trackingTitle: String? { viewModel.title }
 
-    private var viewModel: SettingsViewModel
+    private var viewModel: SettingsViewModelProtocol
     private let scrollview = UIScrollView(frame: .zero)
+    private let backgroundColor = UIColor.govUK.fills.surfaceBackground
 
-    public init(viewModel: SettingsViewModel) {
+    private lazy var contentViewController: UIViewController = {
+        let settingsContentView = GroupedList(content: viewModel.listContent,
+                                              backgroundColor: backgroundColor)
+        let viewController = UIHostingController(rootView: settingsContentView)
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        return viewController
+    }()
+
+    public init(viewModel: SettingsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,52 +32,45 @@ class SettingsViewController: BaseViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
-
+        view.backgroundColor = backgroundColor
         title = viewModel.title
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.prefersLargeTitles = true
-
-        scrollview.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollview)
 
         configureUI()
         configureConstraints()
     }
 
     private func configureUI() {
-        // placeholder content - will be replaced
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
+        scrollview.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollview)
 
-        for index in 1..<100 {
-            let label = UILabel()
-            label.numberOfLines = 0
-            label.text = "temporary content \(index)"
-            label.font = UIFont.govUK.body
-            label.adjustsFontForContentSizeCategory = true
+        addChild(contentViewController)
 
-            stack.addArrangedSubview(label)
-        }
-        scrollview.addSubview(stack)
+        scrollview.addSubview(contentViewController.view)
 
-        stack.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor, constant: 16),
-            stack.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor, constant: -16),
-            stack.heightAnchor.constraint(equalTo: scrollview.contentLayoutGuide.heightAnchor)
-        ])
+        contentViewController.didMove(toParent: self)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: scrollview.leadingAnchor),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: scrollview.trailingAnchor),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: scrollview.topAnchor),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
+            contentViewController.view.leadingAnchor.constraint(equalTo:
+                                                scrollview.leadingAnchor),
+            contentViewController.view.trailingAnchor.constraint(equalTo:
+                                                scrollview.trailingAnchor),
+            contentViewController.view.topAnchor.constraint(equalTo:
+                                                scrollview.contentLayoutGuide.topAnchor,
+                                                constant: 10),
+            contentViewController.view.heightAnchor.constraint(lessThanOrEqualTo:
+                                                scrollview.contentLayoutGuide.heightAnchor),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo:
+                                                scrollview.leadingAnchor),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo:
+                                                scrollview.trailingAnchor),
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo:
+                                                scrollview.topAnchor),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo:
+                                                scrollview.bottomAnchor),
             scrollview.contentLayoutGuide
                 .leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollview.contentLayoutGuide

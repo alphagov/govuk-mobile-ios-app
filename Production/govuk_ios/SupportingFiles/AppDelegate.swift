@@ -7,8 +7,7 @@ class AppDelegate: UIResponder,
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions
                      launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        analyticsService.configure()
-        analyticsService.setAcceptedAnalytics(accepted: true)
+        analyticsService.launch()
         analyticsService.track(event: AppEvent.appLoaded)
 
         return true

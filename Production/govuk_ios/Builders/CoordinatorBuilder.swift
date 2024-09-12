@@ -47,6 +47,15 @@ class CoordinatorBuilder {
         )
     }
 
+    func analyticsConsent(navigationController: UINavigationController,
+                          dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        AnalyticsConsentCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            dismissAction: dismissAction
+        )
+    }
+
     func tab(navigationController: UINavigationController) -> BaseCoordinator {
         TabCoordinator(
             coordinatorBuilder: self,

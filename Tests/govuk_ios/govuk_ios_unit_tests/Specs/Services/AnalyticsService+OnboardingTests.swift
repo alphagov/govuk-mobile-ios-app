@@ -1,21 +1,23 @@
 import UIKit
 import Foundation
 import XCTest
-import Logging
 
 @testable import Onboarding
 @testable import govuk_ios
 
 final class AnalyticsService_OnboardingTests: XCTestCase {
-    let mockLoggingAnalyticsService = MockLoggingAnalyticsService()
-    let mockAnalyticsPreferenceStore = MockAnalyticsPreferenceStore()
+    var mockAnalyticsClient: MockAnalyticsClient!
+
+    override func setUp() {
+        mockAnalyticsClient = MockAnalyticsClient()
+    }
 
     func test_trackOnboardingEvent_tracksEvents() {
         let subject = AnalyticsService(
-            analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            clients: [mockAnalyticsClient],
+            userDefaults: UserDefaults()
         )
-
+        subject.setAcceptedAnalytics(accepted: true)
         let event = OnboardingEvent(
             name: "test_name",
             type: "test_type",
@@ -23,15 +25,16 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
         )
         subject.trackOnboardingEvent(event)
 
-        XCTAssertEqual(mockLoggingAnalyticsService.eventsLogged.count, 1)
-        XCTAssertEqual(mockLoggingAnalyticsService.eventsLogged.first, "test_name")
+        XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.count, 1)
+        XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.first?.name, "test_name")
     }
 
     func test_trackOnboardingScreen_tracksEvents() {
         let subject = AnalyticsService(
-            analytics: mockLoggingAnalyticsService,
-            preferenceStore: mockAnalyticsPreferenceStore
+            clients: [mockAnalyticsClient],
+            userDefaults: UserDefaults()
         )
+        subject.setAcceptedAnalytics(accepted: true)
         let onboardingScreen = OnboardingScreen(
             trackingName: "test_name",
             trackingClass: "test_class",
@@ -39,8 +42,9 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
         )
         subject.trackOnboardingScreen(onboardingScreen)
 
-        XCTAssertEqual(mockLoggingAnalyticsService._trackScreenV2ReceivedScreens.count, 1)
-        XCTAssertEqual(mockLoggingAnalyticsService._trackScreenV2ReceivedScreens.first?.name, "test_name")
+        XCTAssertEqual(mockAnalyticsClient._trackScreenReceivedScreens.count, 1)
+        XCTAssertEqual(mockAnalyticsClient._trackScreenReceivedScreens.first?.trackingName, "test_name")
+        XCTAssertEqual(onboardingScreen.trackingLanguage, Locale.current.languageCode)
     }
 
 }

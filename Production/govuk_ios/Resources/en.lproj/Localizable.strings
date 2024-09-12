@@ -1,6 +1,17 @@
 /* MARK: - Launch */
 "splashScreenAccessibilityTitle" = "Gov.Uk";
 
+/* MARK: - AnalyticsConsent */
+"allowAnalyticsButtonTitle" = "Allow statistics sharing";
+"analyticsConsentDescriptionBottom" = "These statistics are anonymous.\n\nYou can stop sharing these statistics any time by changing your app settings.";
+"analyticsConsentDescriptionBullets" = "  •  the pages you visit within the app\n  •  how long you spend on each page\n  •  what you tap on while you're on each page\n  •  errors that happen";
+"analyticsConsentDescriptionTop" = "You can help us improve this app by agreeing to share statistics about:";
+"analyticsConsentTitle" = "Share statistics about how you use the GOV.UK app";
+"dontAllowAnalyticsButtonTitle" = "Don't allow statistics sharing";
+"privacyPolicyLinkHint" = "Open privacy policy page in external browser";
+"privacyPolicyLinkTitle" = "Read more about this in the privacy policy ↗";
+"privacyPolicyLinkUrl" = "https://www.gov.uk/";
+
 /* MARK: - Home */
 "homeScreenLogoAccessibilityTitle" = "Gov.Uk logo";
 "homeSearchWidgetTitle" = "Find government services and information";

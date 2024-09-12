@@ -73,6 +73,8 @@
 		5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */; };
 		5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */; };
 		5D26A75E2C92CCA8009902DD /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4E255A2C821BCE00FD9A28 /* Onboarding */; };
+		5D26A7632C92E0A5009902DD /* CrashlyticsClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26A7622C92E0A5009902DD /* CrashlyticsClientTests.swift */; };
+		5D26A7652C92E18F009902DD /* FirebaseClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26A7642C92E18F009902DD /* FirebaseClientTests.swift */; };
 		5D3123802C85A6B70088B931 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D31237F2C85A6B70088B931 /* ActivityService.swift */; };
 		5D3123822C85AB8E0088B931 /* ActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123812C85AB8E0088B931 /* ActivityItem.swift */; };
 		5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123832C85ADDF0088B931 /* ActivityRepository.swift */; };
@@ -301,6 +303,8 @@
 		5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+ConvenienceTests.swift"; sourceTree = "<group>"; };
 		5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResolvedDeeplinkRoute+Extensions.swift"; sourceTree = "<group>"; };
 		5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBarAppearance+GOVUK.swift"; sourceTree = "<group>"; };
+		5D26A7622C92E0A5009902DD /* CrashlyticsClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsClientTests.swift; sourceTree = "<group>"; };
+		5D26A7642C92E18F009902DD /* FirebaseClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseClientTests.swift; sourceTree = "<group>"; };
 		5D30CF972C64A64600361C97 /* WhatToTest.en-GB.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WhatToTest.en-GB.txt"; sourceTree = "<group>"; };
 		5D31237F2C85A6B70088B931 /* ActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		5D3123812C85AB8E0088B931 /* ActivityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItem.swift; sourceTree = "<group>"; };
@@ -593,6 +597,33 @@
 				5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		5D26A75F2C92E054009902DD /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				5D26A7602C92E069009902DD /* Analytics */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		5D26A7602C92E069009902DD /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				5DC250692C91D832009E9E7F /* AnalyticsClient.swift */,
+				5DC250672C91D80F009E9E7F /* CrashlyticsClient.swift */,
+				5DC250652C91D802009E9E7F /* FirebaseClient.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		5D26A7612C92E07E009902DD /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				5D26A7622C92E0A5009902DD /* CrashlyticsClientTests.swift */,
+				5D26A7642C92E18F009902DD /* FirebaseClientTests.swift */,
+			);
+			path = Clients;
 			sourceTree = "<group>";
 		};
 		5D30CF982C64A64600361C97 /* TestFlight */ = {
@@ -1022,12 +1053,13 @@
 			children = (
 				4E5ED1FD2C6DF97B00750BDA /* AppConfig */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
+				5D26A75F2C92E054009902DD /* Clients */,
 				5D962D5E2C29BD0B0038BC0A /* Coordinators */,
-				5D41DB6A2C088CA30011E691 /* Repositories */,
 				5D8683932C340F0A0024F2D8 /* Deeplinking */,
 				5D1353AE2BE0D9A700414441 /* Extensions */,
 				5DE970512C297637009D66C4 /* Model */,
 				5D41DB672C087F850011E691 /* NetworkClients */,
+				5D41DB6A2C088CA30011E691 /* Repositories */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
 				5D41DB612C0875560011E691 /* Services */,
 				5DAD71A72BD254460075F648 /* SupportingFiles */,
@@ -1171,11 +1203,8 @@
 		5DC2506B2C91DB13009E9E7F /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				5DC250692C91D832009E9E7F /* AnalyticsClient.swift */,
 				160A02672C208B9800FE01EB /* AnalyticsService.swift */,
 				5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */,
-				5DC250672C91D80F009E9E7F /* CrashlyticsClient.swift */,
-				5DC250652C91D802009E9E7F /* FirebaseClient.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1218,6 +1247,7 @@
 			children = (
 				4E18E08B2C7492E900538CF0 /* AppConfig */,
 				5D37E9FA2C3E865F006B36CB /* Builders */,
+				5D26A7612C92E07E009902DD /* Clients */,
 				5D37EA062C3E865F006B36CB /* Coordinators */,
 				5D37E9F52C3E865F006B36CB /* Deeplinking */,
 				5D16E6A52C417C7700776ABA /* Extensions */,
@@ -1622,6 +1652,7 @@
 				5D37EA0B2C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift in Sources */,
 				5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
+				5D26A7652C92E18F009902DD /* FirebaseClientTests.swift in Sources */,
 				5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */,
 				3D55B22E2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift in Sources */,
 				5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */,
@@ -1665,6 +1696,7 @@
 				5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */,
 				16F9619D2C8899D4005CFB04 /* SearchCoordinatorTests.swift in Sources */,
 				5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */,
+				5D26A7632C92E0A5009902DD /* CrashlyticsClientTests.swift in Sources */,
 				3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */,
 				160EA7592C60D7AB008F97AF /* MockAnalyticsService.swift in Sources */,
 				5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */,

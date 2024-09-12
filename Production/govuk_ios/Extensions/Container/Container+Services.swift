@@ -2,6 +2,7 @@ import Foundation
 import Factory
 import Onboarding
 
+import Firebase
 import FirebaseCrashlytics
 
 extension Container {
@@ -29,7 +30,10 @@ extension Container {
         Factory(self) {
             AnalyticsService(
                 clients: [
-                    FirebaseClient(),
+                    FirebaseClient(
+                        firebaseApp: FirebaseApp.self,
+                        firebaseAnalytics: Analytics.self
+                    ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
                 userDefaults: .standard

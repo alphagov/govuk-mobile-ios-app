@@ -197,6 +197,11 @@
 		5DE970542C297652009D66C4 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970532C297652009D66C4 /* AppEvent.swift */; };
 		5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */; };
 		5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */; };
+		966ABE222C78E0B900099DF9 /* GroupedListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ABE212C78E0B900099DF9 /* GroupedListRowView.swift */; };
+		9685F82B2C78C04800C33614 /* GroupedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82A2C78C04800C33614 /* GroupedList.swift */; };
+		9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */; };
+		9685F82F2C78DF7000C33614 /* GroupedListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */; };
+		96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -419,6 +424,11 @@
 		5DE970532C297652009D66C4 /* AppEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
 		5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Convenience.swift"; sourceTree = "<group>"; };
 		5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPermissionState.swift; sourceTree = "<group>"; };
+		966ABE212C78E0B900099DF9 /* GroupedListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListRowView.swift; sourceTree = "<group>"; };
+		9685F82A2C78C04800C33614 /* GroupedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedList.swift; sourceTree = "<group>"; };
+		9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSection.swift; sourceTree = "<group>"; };
+		9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSectionView.swift; sourceTree = "<group>"; };
+		96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePixelLineHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -750,6 +760,7 @@
 				5D41DB5F2C0875520011E691 /* TestViewModel.swift */,
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 				16EE1A422C6F89D9005E820F /* SearchViewModel.swift */,
+				9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -831,6 +842,7 @@
 				5D6032182C81D68D00C46660 /* Locale+Analytics.swift */,
 				5D349F682C6B550000B7F747 /* URL+Extensions.swift */,
 				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
+				96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1049,6 +1061,7 @@
 				5DAD71AA2BD2548B0075F648 /* Resources */,
 				5D41DB612C0875560011E691 /* Services */,
 				5DAD71A72BD254460075F648 /* SupportingFiles */,
+				9685F8292C78C01600C33614 /* SwiftUIViews */,
 				5DAD71A82BD254730075F648 /* ViewControllers */,
 				5D41DB5E2C0875460011E691 /* ViewModels */,
 				5D79AEBE2C32B8CB0061F344 /* Views */,
@@ -1263,6 +1276,24 @@
 				5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		966ABE202C78E06F00099DF9 /* GroupedList */ = {
+			isa = PBXGroup;
+			children = (
+				9685F82A2C78C04800C33614 /* GroupedList.swift */,
+				9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */,
+				966ABE212C78E0B900099DF9 /* GroupedListRowView.swift */,
+			);
+			path = GroupedList;
+			sourceTree = "<group>";
+		};
+		9685F8292C78C01600C33614 /* SwiftUIViews */ = {
+			isa = PBXGroup;
+			children = (
+				966ABE202C78E06F00099DF9 /* GroupedList */,
+			);
+			path = SwiftUIViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1524,6 +1555,7 @@
 				5DAC6E5A2C64CDA20099406C /* TrackableScreen.swift in Sources */,
 				5DD036852C5A577C00EEF11E /* NavigationBar.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
+				96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				4E18E0902C74A45500538CF0 /* MockAppConfigProvider.swift in Sources */,
 				5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */,
@@ -1531,6 +1563,7 @@
 				5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */,
 				5D3123862C85AEE20088B931 /* Container+Repositories.swift in Sources */,
 				5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */,
+				9685F82F2C78DF7000C33614 /* GroupedListSectionView.swift in Sources */,
 				5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */,
 				160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */,
 				5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */,
@@ -1547,6 +1580,7 @@
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
 				5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */,
 				5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */,
+				9685F82B2C78C04800C33614 /* GroupedList.swift in Sources */,
 				5D8460B52C35A2550066095E /* PermitDeeplinkRoute.swift in Sources */,
 				3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */,
 				5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */,
@@ -1555,6 +1589,7 @@
 				5D4E255D2C821C8E00FD9A28 /* CoreDataRepository.swift in Sources */,
 				5D9E67C22C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift in Sources */,
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
+				966ABE222C78E0B900099DF9 /* GroupedListRowView.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				3DEC85AA2C89D9200044D5F9 /* URLOpening.swift in Sources */,
@@ -1581,6 +1616,7 @@
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
+				9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
 				4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */,
 				16E5AD432C6D5719000B8B3A /* SearchWidgetStackView.swift in Sources */,

@@ -21,9 +21,9 @@ struct GroupedListRowView: View {
 
 #Preview {
     VStack {
-        GroupedListRowView(row: GroupedListSection.previewContent.first!.rows[0])
-        GroupedListRowView(row: GroupedListSection.previewContent.first!.rows[1])
-        GroupedListRowView(row: GroupedListSection.previewContent.first!.rows[2])
+        GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[0])
+        GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[1])
+        GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[2])
     }
 }
 

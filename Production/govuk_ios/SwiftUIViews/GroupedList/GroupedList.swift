@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GroupedList: View {
-    var content: [GroupedListSection] = GroupedListSection.previewContent
+    var content: [GroupedListSection] = []
     var backgroundColor: UIColor?
 
     var body: some View {

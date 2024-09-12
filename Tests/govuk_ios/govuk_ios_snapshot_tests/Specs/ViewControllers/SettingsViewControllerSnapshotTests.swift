@@ -17,7 +17,6 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     }
     
     func test_loadInNavigationController_preview_rendersCorrectly() {
-        let viewModel = GroupedListViewModel()
         let viewController = SettingsViewController(viewModel: GroupedListViewModel())
         loadInNavigationControllerTest(viewController: viewController,
                                        navBarHidden: true)
@@ -31,5 +30,5 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 
 struct GroupedListViewModel: SettingsViewModelProtocol {
     var title: String = "Settings"
-    var listContent: [GroupedListSection] = GroupedListSection.previewContent
+    var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent
 }

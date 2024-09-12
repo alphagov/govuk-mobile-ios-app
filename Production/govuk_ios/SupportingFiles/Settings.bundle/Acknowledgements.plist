@@ -12,9 +12,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/abseil</string>
+			<string>Packages/abseil-cpp-binary</string>
 			<key>Title</key>
-			<string>abseil</string>
+			<string>abseil-cpp-binary</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -68,14 +68,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/govuk-mobile-ios-homepage</string>
-			<key>Title</key>
-			<string>govuk-mobile-ios-homepage</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>Packages/govuk-mobile-ios-onboarding</string>
 			<key>Title</key>
 			<string>govuk-mobile-ios-onboarding</string>
@@ -84,9 +76,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/govuk-mobile-ios-services</string>
+			<string>Packages/UIComponents</string>
 			<key>Title</key>
-			<string>govuk-mobile-ios-services</string>
+			<string>UIComponents</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -100,17 +92,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/GTMSessionFetcher</string>
+			<string>Packages/gtm-session-fetcher</string>
 			<key>Title</key>
-			<string>GTMSessionFetcher</string>
+			<string>gtm-session-fetcher</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/InteropForGoogle</string>
+			<string>Packages/interop-ios-for-google-sdks</string>
 			<key>Title</key>
-			<string>InteropForGoogle</string>
+			<string>interop-ios-for-google-sdks</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -132,9 +124,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/Lottie</string>
+			<string>Packages/lottie-ios</string>
 			<key>Title</key>
-			<string>Lottie</string>
+			<string>lottie-ios</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -164,17 +156,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/Promises</string>
+			<string>Packages/promises</string>
 			<key>Title</key>
-			<string>Promises</string>
+			<string>promises</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/SwiftProtobuf</string>
+			<string>Packages/swift-protobuf</string>
 			<key>Title</key>
-			<string>SwiftProtobuf</string>
+			<string>swift-protobuf</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

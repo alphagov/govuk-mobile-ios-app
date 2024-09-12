@@ -6,23 +6,42 @@ protocol SettingsViewModelProtocol {
 }
 
 struct SettingsViewModel: SettingsViewModelProtocol {
-    var title: String = "Settings"
+    var title: String = "settingsTitle".localized
+    var analyticsService: AnalyticsServiceInterface
     var appVersion: String? {
         getVersionNumber()
+    }
+
+    private var hasAcceptedAnalytics: Bool {
+        switch analyticsService.permissionState {
+        case .denied, .unknown:
+            return false
+        case .accepted:
+            return true
+        }
     }
 
     var listContent: [GroupedListSection] {
         [
             .init(
-                heading: "About the app",
+                heading: "aboutTheAppHeading".localized,
                 rows: [
                     InformationRow(
-                        title: "App version number",
+                        title: "appVersionTitle".localized,
                         body: nil,
                         detail: appVersion ?? "-"
                     )
                 ],
                 footer: nil
+            ),
+            .init(heading: "privacyAndLegalHeading".localized,
+                  rows: [
+                    ToggleRow(title: "appUsageTitle".localized,
+                            isOn: hasAcceptedAnalytics,
+                            action: { isOn in
+                                analyticsService.setAcceptedAnalytics(accepted: isOn)
+                            })],
+                  footer: nil
             )
         ]
     }

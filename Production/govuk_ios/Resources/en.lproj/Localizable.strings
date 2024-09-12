@@ -21,3 +21,10 @@
 /* MARK: - Search */
 "searchModalTitle" = "Search";
 "searchBarPlaceholder" = "Search";
+
+/* MARK: Settings */
+"settingsTitle" = "Settings";
+"aboutTheAppHeading" = "About the app";
+"privacyAndLegalHeading" = "Privacy and legal";
+"appVersionTitle" = "App version number";
+"appUsageTitle" = "Share app usage statistics";

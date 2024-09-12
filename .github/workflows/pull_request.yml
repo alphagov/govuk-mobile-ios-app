@@ -21,7 +21,7 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
     # needs: sonar-scan
-    name: Build Alpha
+    name: Deploy
     runs-on: macos-14
 
     steps:

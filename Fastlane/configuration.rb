@@ -9,10 +9,6 @@ class Configuration
     @yaml = YAML.load_file(yaml, aliases: true)[lane]
   end
 
-  def build_number
-    ENV['BUILD_NUMBER'] || '1'
-  end
-
   def app_scheme
     setting(:app, :scheme)
   end

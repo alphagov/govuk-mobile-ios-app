@@ -68,13 +68,12 @@
 		5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */; };
 		5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0B02022C81A7E90013A410 /* Onboarding */; };
 		5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */; };
-		5D1353AB2BE0D75000414441 /* Homepage in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1353AA2BE0D75000414441 /* Homepage */; };
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
 		5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */; };
 		5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */; };
 		5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6AC2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift */; };
 		5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */; };
-		5D2129E02BDF98E100142E46 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 5D2129DF2BDF98E100142E46 /* Services */; };
+		5D26A75E2C92CCA8009902DD /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4E255A2C821BCE00FD9A28 /* Onboarding */; };
 		5D3123802C85A6B70088B931 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D31237F2C85A6B70088B931 /* ActivityService.swift */; };
 		5D3123822C85AB8E0088B931 /* ActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123812C85AB8E0088B931 /* ActivityItem.swift */; };
 		5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123832C85ADDF0088B931 /* ActivityRepository.swift */; };
@@ -113,7 +112,6 @@
 		5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */; };
 		5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8362BFCBFAD003D0C21 /* TestSceneDelegate.swift */; };
 		5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A8332BFCBF87003D0C21 /* TestAppDelegate.swift */; };
-		5D4E255B2C821BCE00FD9A28 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4E255A2C821BCE00FD9A28 /* Onboarding */; };
 		5D4E255D2C821C8E00FD9A28 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4E255C2C821C8E00FD9A28 /* CoreDataRepository.swift */; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
 		5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */; };
@@ -442,13 +440,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D2129E02BDF98E100142E46 /* Services in Frameworks */,
+				5D26A75E2C92CCA8009902DD /* Onboarding in Frameworks */,
 				5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
-				5D4E255B2C821BCE00FD9A28 /* Onboarding in Frameworks */,
 				5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
-				5D1353AB2BE0D75000414441 /* Homepage in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1310,8 +1306,6 @@
 			);
 			name = govuk_ios;
 			packageProductDependencies = (
-				5D2129DF2BDF98E100142E46 /* Services */,
-				5D1353AA2BE0D75000414441 /* Homepage */,
 				5D7F267D2C0F0EF000842090 /* Factory */,
 				5D0278362C29CB5800F2A4EB /* Lottie */,
 				5D0B02022C81A7E90013A410 /* Onboarding */,
@@ -1398,8 +1392,6 @@
 			);
 			mainGroup = 5DAD716B2BD250DA0075F648;
 			packageReferences = (
-				5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */,
-				5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */,
 				5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
 				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
 				5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */,
@@ -2095,22 +2087,6 @@
 				minimumVersion = 4.4.3;
 			};
 		};
-		5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-services";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-		5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-homepage";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
 		5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
@@ -2154,16 +2130,6 @@
 		5D0B02022C81A7E90013A410 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
-		};
-		5D1353AA2BE0D75000414441 /* Homepage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D2129E42BDF98F400142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-homepage" */;
-			productName = Homepage;
-		};
-		5D2129DF2BDF98E100142E46 /* Services */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D2129DE2BDF98E100142E46 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-services" */;
-			productName = Services;
 		};
 		5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -22,7 +22,7 @@ struct OnboardingService: OnboardingServiceInterface {
     func setHasSeenOnboarding() {
         userDefaults.set(
             bool: true,
-            forkey: .appOnboardingSeen
+            forKey: .appOnboardingSeen
         )
     }
 

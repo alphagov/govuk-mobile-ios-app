@@ -1,8 +1,6 @@
 import Foundation
 
-import Logging
-
-struct AppEvent: LoggableEvent {
+struct AppEvent {
     let name: String
     let params: [String: Any]?
 }

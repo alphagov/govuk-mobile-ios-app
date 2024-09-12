@@ -3,13 +3,25 @@ import Foundation
 import FirebaseCrashlytics
 
 struct CrashlyticsClient: AnalyticsClient {
-    func launch() {}
+    private let crashlytics: Crashlytics
 
-    func setEnabled(enabled: Bool) {
-        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(enabled)
+    init(crashlytics: Crashlytics) {
+        self.crashlytics = crashlytics
     }
 
-    func track(screen: any TrackableScreen) {}
+    func launch() {
+        /*Do nothing*/
+    }
 
-    func track(event: AppEvent) {}
+    func setEnabled(enabled: Bool) {
+        crashlytics.setCrashlyticsCollectionEnabled(enabled)
+    }
+
+    func track(screen: any TrackableScreen) {
+        /*Do nothing*/
+    }
+
+    func track(event: AppEvent) {
+        /*Do nothing*/
+    }
 }

@@ -40,8 +40,7 @@ class DateHelper {
 
     static func sortDate(dates: inout [ActivityItem]) {
         dates = dates.sorted(by: { dateOne, dateTwo in
-            convertDateStringToDate(
-                dateString: dateOne.date) > convertDateStringToDate(dateString: dateTwo.date)
+                dateOne.date > dateTwo.date
         })
     }
 

@@ -50,6 +50,7 @@ class AppCoordinatorTests: XCTestCase {
 
         //Finish launch loading
         mockCoodinatorBuilder._receivedLaunchCompletion?()
+        mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()
 
         XCTAssertTrue(mockTabCoodinator._startCalled)

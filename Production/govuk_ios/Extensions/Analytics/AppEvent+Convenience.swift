@@ -34,4 +34,13 @@ extension AppEvent {
             ].compactMapValues({ $0 })
         )
     }
+
+    static func searchTerm(term: String) -> AppEvent {
+        .init(
+            name: "Search",
+            params: [
+                "text": term
+            ]
+        )
+    }
 }

@@ -11,7 +11,7 @@ struct ItemsVisitedInRecentMonthsView: View {
                 .textCase(nil)
                 .foregroundColor(Color(UIColor.govUK.text.primary))) {
                     ForEach(visitedItems.filter({ DateHelper.getMonthAndYear(
-                        date: DateHelper.convertDateStringToDate(dateString: $0.date )) == date
+                        date: $0.date) == date
                     }), id: \.self) { item in
                         RecentItemCell(model: item)
                     }

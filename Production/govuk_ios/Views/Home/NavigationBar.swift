@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class HomeNavigationBar: UIView {
+class NavigationBar: UIView {
     let sittingHeight: CGFloat = 56
     let scrolledHeight: CGFloat = 50
 

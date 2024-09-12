@@ -22,18 +22,17 @@ class RecentItemsViewModel: ObservableObject {
         let todaysDate = Date()
         var itemsToBeSorted: [ActivityItem] = visitedItems.map { $0 }
         DateHelper.sortDate(dates: &itemsToBeSorted)
-        for vistiedItem in itemsToBeSorted {
-            let itemDate = DateHelper.convertDateStringToDate(dateString: vistiedItem.date)
-            if DateHelper.checkDatesAreTheSame(dateOne: itemDate, dateTwo: todaysDate) {
-                todaysItems.append(vistiedItem)
+        for visitedItem in itemsToBeSorted {
+//            let itemDate = DateHelper.convertDateStringToDate(dateString: vistiedItem.date)
+            if DateHelper.checkDatesAreTheSame(dateOne: visitedItem.date, dateTwo: todaysDate) {
+                todaysItems.append(visitedItem)
             } else if DateHelper.checkEqualityOfMonthAndYear(
-                dateOne: DateHelper.convertDateStringToDate(
-                    dateString: vistiedItem.date),
+                dateOne: visitedItem.date,
                 dateTwo: todaysDate) {
-                currentMonthItems.append(vistiedItem)
+                currentMonthItems.append(visitedItem)
             } else {
-                listOfMonthAndYears.append(DateHelper.getMonthAndYear(date: itemDate))
-                itemsBelongToOtherMonths.append(vistiedItem)
+                listOfMonthAndYears.append(DateHelper.getMonthAndYear(date: visitedItem.date))
+                itemsBelongToOtherMonths.append(visitedItem)
             }
         }
             return RecentItemsViewStructure(

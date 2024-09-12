@@ -104,4 +104,15 @@ class CoordinatorBuilderTests: XCTestCase {
 
         XCTAssert(coordinator is OnboardingCoordinator)
     }
+
+    @MainActor
+    func test_search_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.search(
+            navigationController: mockNavigationController
+        )
+
+        XCTAssert(coordinator is SearchCoordinator)
+    }
 }

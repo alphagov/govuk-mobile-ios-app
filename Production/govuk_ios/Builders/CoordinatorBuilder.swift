@@ -23,7 +23,8 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .home(coordinatorBuilder: self),
-            analyticsService: container.analyticsService.resolve()
+            analyticsService: container.analyticsService.resolve(),
+            configService: AppConfigService(configProvider: AppConfigProvider())
         )
     }
 
@@ -43,6 +44,15 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             completion: completion
+        )
+    }
+
+    func analyticsConsent(navigationController: UINavigationController,
+                          dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        AnalyticsConsentCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            dismissAction: dismissAction
         )
     }
 
@@ -87,5 +97,19 @@ class CoordinatorBuilder {
             title: title,
             navigationController: navigationController
         )
+    }
+
+    func search(navigationController: UINavigationController) -> BaseCoordinator {
+        SearchCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve()
+        )
+    }
+
+    func recentActivity(navigationContoller: UINavigationController) -> BaseCoordinator {
+        RecentActivtyCoordinator(navigationController: navigationContoller,
+                                 viewControllerBuilder: ViewControllerBuilder(),
+                                 analyticsService: container.analyticsService.resolve())
     }
 }

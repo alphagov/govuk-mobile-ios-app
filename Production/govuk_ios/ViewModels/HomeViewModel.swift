@@ -4,17 +4,49 @@ import UIKit
 struct HomeViewModel {
     @Inject(\.activityService) private var activityService: ActivityServiceInterface
 
-    var widgets: [HomeWidgetViewModel] {
+    let configService: AppConfigServiceInterface
+    let searchButtonPrimaryAction: (() -> Void)?
+    let recentActivityPrimaryAction: (() -> Void)?
+    var widgets: [WidgetView] {
         [
-            HomeWidgetViewModel(
-                title: "Scrollable Content",
-                link: ["text": "Link text same blue as logo", "link": ""]
-            ),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content"),
-            HomeWidgetViewModel(title: "Scrollable Content")
-        ]
+            searchWidget,
+            recentlyViewedWidget
+        ].compactMap { $0 }
+    }
+    private var recentlyViewedWidget: WidgetView? {
+        let title = "Pages youve visited"
+        let viewModel = WidgetViewModel(title: title,
+                                        primaryAction: recentActivityPrimaryAction)
+        let content = RecentActivtyWidgetStackView(
+            viewModel: viewModel)
+        let widget = WidgetView()
+        widget.addContent(content)
+        return widget
+    }
+
+    private var searchWidget: WidgetView? {
+        guard widgetEnabled(feature: .search)
+        else { return nil }
+
+
+        let title = NSLocalizedString(
+            "homeSearchWidgetTitle",
+            comment: ""
+        )
+        let viewModel = WidgetViewModel(
+            title: title,
+            primaryAction: searchButtonPrimaryAction
+        )
+
+        let content = SearchWidgetStackView(
+            viewModel: viewModel
+        )
+        let widget = WidgetView()
+        widget.addContent(content)
+        return widget
+    }
+
+    private func widgetEnabled(feature: Feature) -> Bool {
+        configService.isFeatureEnabled(key: feature)
     }
 }

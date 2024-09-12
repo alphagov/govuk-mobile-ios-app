@@ -21,7 +21,8 @@ class HomeCoordinatorTests: XCTestCase {
             coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            configService: MockAppConfigService()
         )
         subject.start()
 

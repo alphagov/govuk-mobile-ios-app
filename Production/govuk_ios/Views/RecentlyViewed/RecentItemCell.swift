@@ -25,7 +25,7 @@ struct RecentItemCell: View {
             .onTapGesture {
                 if let url = URL(string: model.url) {
                     UIApplication.shared.open(url)
-                    model.date = Date().description
+                    model.date = Date()
                     do {
                         if context.hasChanges {
                            try context.save()

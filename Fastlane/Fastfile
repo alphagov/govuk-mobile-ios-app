@@ -18,6 +18,10 @@ platform :ios do
 
   desc 'Builds alpha configuration'
   lane :alpha do
+    deploy
+  end
+
+  private_lane :deploy do
     update_build_number
     build
     app_store
@@ -61,7 +65,7 @@ platform :ios do
 
   private_lane :app_store do
     deliver(
-      username: configuration.apple_username,
+      username: configuration.deliver_username,
       app_identifier: configuration.app_bundle_identifier,
       skip_screenshots: true,
       skip_metadata: true,

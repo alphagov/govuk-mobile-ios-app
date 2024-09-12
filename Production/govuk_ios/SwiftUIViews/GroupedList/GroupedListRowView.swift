@@ -12,6 +12,8 @@ struct GroupedListRowView: View {
                 LinkRowView(row: row)
             case let row as InformationRow:
                 InformationRowView(row: row)
+            case let row as ToggleRow:
+                ToggleRowView(row: row)
             default:
                 EmptyView()
             }
@@ -90,6 +92,25 @@ struct NavigationRowView: View {
                         .font(Font.govUK.bodySemibold)
                 }
             }
+        }
+    }
+}
+
+struct ToggleRowView: View {
+    @StateObject var row: ToggleRow
+    var body: some View {
+        HStack {
+            Spacer()
+            Toggle(isOn: $row.isOn) {
+                Text(row.title)
+                    .foregroundColor(
+                        Color(
+                            UIColor.govUK.text.primary
+                        )
+                    )
+                    .padding(.horizontal, -8)
+            }
+            .toggleStyle(SwitchToggleStyle(tint: (Color(UIColor.govUK.fills.surfaceButtonPrimary))))
         }
     }
 }

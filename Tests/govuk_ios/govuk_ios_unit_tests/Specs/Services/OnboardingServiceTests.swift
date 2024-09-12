@@ -7,7 +7,7 @@ import XCTest
 final class OnboardingServiceTests: XCTestCase {
     func test_hasSeenOnboarding_hasSeen_returnsTrue() {
         let userDefaults = UserDefaults()
-        userDefaults.set(bool: true, forkey: .appOnboardingSeen)
+        userDefaults.set(bool: true, forKey: .appOnboardingSeen)
         let subject = OnboardingService(userDefaults: userDefaults)
 
         XCTAssertTrue(subject.hasSeenOnboarding)
@@ -15,7 +15,7 @@ final class OnboardingServiceTests: XCTestCase {
 
     func test_hasSeenOnboarding_hasntSeen_returnsTrue() {
         let userDefaults = UserDefaults()
-        userDefaults.set(bool: false, forkey: .appOnboardingSeen)
+        userDefaults.set(bool: false, forKey: .appOnboardingSeen)
         let subject = OnboardingService(userDefaults: userDefaults)
 
         XCTAssertFalse(subject.hasSeenOnboarding)

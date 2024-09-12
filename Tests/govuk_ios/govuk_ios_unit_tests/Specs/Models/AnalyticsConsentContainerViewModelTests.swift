@@ -16,7 +16,8 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.allowButtonTitle, "Allow statistics sharing")
         XCTAssertEqual(sut.dontAllowButtonTitle, "Don't allow statistics sharing")
         XCTAssertEqual(sut.privacyPolicyLinkTitle, "Read more about this in the privacy policy ↗")
-        XCTAssertEqual(sut.privacyPolicyLinkHint, "Open privacy policy page in external browser")
+        XCTAssertEqual(sut.privacyPolicyLinkAccessibilityTitle, "Read more about this in the privacy policy")
+        XCTAssertEqual(sut.privacyPolicyLinkHint, "Opens in web browser")
         XCTAssertEqual(sut.privacyPolicyLinkUrl, "https://www.gov.uk/")
     }
 

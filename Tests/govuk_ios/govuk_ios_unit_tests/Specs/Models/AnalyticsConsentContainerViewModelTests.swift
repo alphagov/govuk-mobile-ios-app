@@ -12,7 +12,7 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.title, "Share statistics about how you use the GOV.UK app")
         XCTAssertEqual(sut.descriptionTop, "You can help us improve this app by agreeing to share statistics about:")
         XCTAssertEqual(sut.descriptionBullets, "  •  the pages you visit within the app\n  •  how long you spend on each page\n  •  what you tap on while you're on each page\n  •  errors that happen")
-        XCTAssertEqual(sut.descriptionBottom, "These statistics are anonymous.\n\nYou can stop sharing these statistics any time by changing your app settings.")
+        XCTAssertEqual(sut.descriptionBottom, "These statistics are anonymous.\n\nYou can stop sharing these statistics at any time by changing your app settings.")
         XCTAssertEqual(sut.allowButtonTitle, "Allow statistics sharing")
         XCTAssertEqual(sut.dontAllowButtonTitle, "Don't allow statistics sharing")
         XCTAssertEqual(sut.privacyPolicyLinkTitle, "Read more about this in the privacy policy ↗")

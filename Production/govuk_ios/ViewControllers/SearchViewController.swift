@@ -33,6 +33,19 @@ class SearchViewController: BaseViewController,
         return localSearchBar
     }()
 
+
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(
+            SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.identifier
+        )
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
+
+        return tableView
+    }()
+
     var trackingName: String { "Search" }
 
     init(viewModel: SearchViewModel) {
@@ -46,6 +59,9 @@ class SearchViewController: BaseViewController,
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
 
         if #available(iOS 15.0, *) {
             let sheet = self.sheetPresentationController
@@ -73,6 +89,7 @@ class SearchViewController: BaseViewController,
         )
         view.backgroundColor = GOVUKColors.fills.surfaceModal
         view.addSubview(searchBar)
+        view.addSubview(tableView)
     }
 
     private func configureConstraints() {
@@ -81,15 +98,29 @@ class SearchViewController: BaseViewController,
                 equalTo: view.safeAreaLayoutGuide.topAnchor,
                 constant: -10
             ),
-            searchBar.leftAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leftAnchor,
-                constant: 10
-            ),
             searchBar.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,
                 constant: -10
             ),
-            searchBar.heightAnchor.constraint(greaterThanOrEqualToConstant: 36)
+            searchBar.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                constant: 10
+            ),
+            searchBar.heightAnchor.constraint(
+                greaterThanOrEqualToConstant: 36
+            ),
+
+            tableView.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor,
+                constant: 16
+            ),
+            tableView.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor
+            ),
+            tableView.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor
+            ),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -126,5 +157,23 @@ class SearchViewController: BaseViewController,
             let searchTermURL = "https://www.gov.uk/search/all?keywords=\(searchTerm)&order=relevance"
             UIApplication.shared.open(URL(string: searchTermURL)!)
         }
+    }
+}
+
+extension SearchViewController: UITableViewDelegate,
+                                UITableViewDataSource {
+    func tableView(_ tableView: UITableView, 
+                   numberOfRowsInSection section: Int) -> Int {
+        
+        return 5
+    }
+
+    func tableView(_ tableView: UITableView, 
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: SearchResultCell.identifier, for: indexPath
+        )
+
+        return cell
     }
 }

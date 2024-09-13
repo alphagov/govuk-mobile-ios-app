@@ -18,5 +18,5 @@ struct GroupedList: View {
 }
 
 #Preview {
-    GroupedList()
+    GroupedList(content: GroupedListSection_Previews.previewContent)
 }

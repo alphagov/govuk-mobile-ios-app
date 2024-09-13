@@ -38,7 +38,7 @@ struct InformationRow: GroupedListRow {
 
 class ToggleRow: GroupedListRow, ObservableObject {
     let title: String
-    var isOn: Bool {
+    @Published var isOn: Bool {
         didSet {
             self.action(isOn)
         }
@@ -52,8 +52,11 @@ class ToggleRow: GroupedListRow, ObservableObject {
     }
 }
 
-#if DEBUG
-extension GroupedListSection {
+struct GroupedListSection_Previews: PreviewProvider {
+    static var previews: some View {
+        Text("preview")
+    }
+
     static var previewContent: [GroupedListSection] {
         [
             .init(

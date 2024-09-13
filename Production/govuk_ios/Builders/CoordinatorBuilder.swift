@@ -99,11 +99,13 @@ class CoordinatorBuilder {
         )
     }
 
-    func search(navigationController: UINavigationController) -> BaseCoordinator {
+    func search(navigationController: UINavigationController,
+                didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         SearchCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
-            analyticsService: container.analyticsService.resolve()
+            analyticsService: container.analyticsService.resolve(),
+            dismissed: didDismissAction
         )
     }
 }

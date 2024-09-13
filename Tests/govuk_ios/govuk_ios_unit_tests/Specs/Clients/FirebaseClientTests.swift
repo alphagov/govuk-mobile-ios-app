@@ -100,7 +100,6 @@ class FirebaseClientTests: XCTestCase {
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics
         )
-        let expectedValue = UUID().uuidString
         let expectedScreen = MockBaseViewController()
         let expectedTitle = UUID().uuidString
         expectedScreen.title = expectedTitle

@@ -121,8 +121,10 @@ class SnapshotTestCase: FBSnapshotTestCase {
     }
 
     func loadInNavigationControllerTest(viewController: UIViewController,
-                                        mode: UIUserInterfaceStyle = .light,
-                                        navBarHidden: Bool = false) {
+                                        mode: UIUserInterfaceStyle,
+                                        navBarHidden: Bool = false,
+                                        file: StaticString = #file,
+                                        line: UInt = #line) {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.setNavigationBarHidden(navBarHidden, animated: false)
         navigationController.overrideUserInterfaceStyle = mode
@@ -130,8 +132,10 @@ class SnapshotTestCase: FBSnapshotTestCase {
     }
 
     func loadInNavigationControllerTest(view: some View,
-                                        mode: UIUserInterfaceStyle = .light,
-                                        navBarHidden: Bool = false) {
+                                        mode: UIUserInterfaceStyle,
+                                        navBarHidden: Bool = false,
+                                        file: StaticString = #file,
+                                        line: UInt = #line) {
         let sut = UIHostingController(rootView: view)
         let navigationController = UINavigationController(rootViewController: sut)
         navigationController.setNavigationBarHidden(navBarHidden, animated: false)

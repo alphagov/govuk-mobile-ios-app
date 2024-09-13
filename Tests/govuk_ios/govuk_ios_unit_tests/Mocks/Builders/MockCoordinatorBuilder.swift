@@ -110,8 +110,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedSearchCoordinator: MockBaseCoordinator?
     var _receivedSearchNavigationController: UINavigationController?
-    override func search(navigationController: UINavigationController) -> BaseCoordinator {
+    var _receivedSearchDidDismissAction: (() -> Void)?
+    override func search(navigationController: UINavigationController,
+                         didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedSearchNavigationController = navigationController
+        _receivedSearchDidDismissAction = didDismissAction
         return _stubbedSearchCoordinator ?? MockBaseCoordinator()
     }
 }

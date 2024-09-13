@@ -6,7 +6,7 @@ import UIKit
 
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        loadInNavigationControllerTest(
+        VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .light,
             navBarHidden: true
@@ -14,7 +14,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        loadInNavigationControllerTest(
+        VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .dark,
             navBarHidden: true

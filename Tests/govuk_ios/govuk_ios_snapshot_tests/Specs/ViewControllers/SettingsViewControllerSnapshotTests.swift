@@ -6,7 +6,7 @@ import UIKit
 
 class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        loadInNavigationControllerTest(
+        VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .light,
             navBarHidden: true
@@ -14,7 +14,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        loadInNavigationControllerTest(
+        VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .dark,
             navBarHidden: true
@@ -23,7 +23,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     
     func test_loadInNavigationController_preview_rendersCorrectly() {
         let viewController = SettingsViewController(viewModel: GroupedListViewModel())
-        loadInNavigationControllerTest(
+        VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .light,
             navBarHidden: true

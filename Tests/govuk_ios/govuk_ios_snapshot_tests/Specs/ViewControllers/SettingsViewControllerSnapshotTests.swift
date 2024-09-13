@@ -23,7 +23,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController() -> SettingsViewController {
-        let viewModel = SettingsViewModel()
+        let viewModel = SettingsViewModel(analyticsService: MockAnalyticsService())
         return SettingsViewController(viewModel: viewModel)
     }
 }

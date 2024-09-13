@@ -138,6 +138,7 @@
 		5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */; };
 		5D899A202C946F540074C0AD /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D899A1F2C946F540074C0AD /* UIViewController+Extensions.swift */; };
 		5D899A222C946F8A0074C0AD /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D899A212C946F8A0074C0AD /* UIBarButtonItem+Extensions.swift */; };
+		5D899A242C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */; };
 		5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */; };
 		5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93EE812C36848E00D90C0C /* MockDeeplinkRoute.swift */; };
 		5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */; };
@@ -375,6 +376,7 @@
 		5D8922742C0720910019FBD7 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
 		5D899A1F2C946F540074C0AD /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		5D899A212C946F8A0074C0AD /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
+		5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingServiceTests.swift; sourceTree = "<group>"; };
 		5D93EE812C36848E00D90C0C /* MockDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 			children = (
 				5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */,
 				5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */,
+				5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1704,6 +1707,7 @@
 				5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */,
 				3D55B22E2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift in Sources */,
 				5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */,
+				5D899A242C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift in Sources */,
 				5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */,
 				5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,

@@ -27,7 +27,7 @@ class SearchViewController: BaseViewController,
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
         localSearchBar.searchTextField.addTarget(
             self,
-            action: #selector(searchReturn),
+            action: #selector(searchReturnTapped),
             for: UIControl.Event.editingDidEndOnExit
         )
 
@@ -115,7 +115,8 @@ class SearchViewController: BaseViewController,
         dismissAction()
     }
 
-    @objc func searchReturn() {
+    @objc
+    private func searchReturnTapped() {
         self.searchBar.resignFirstResponder()
 
         let searchTerm = searchBar.text!

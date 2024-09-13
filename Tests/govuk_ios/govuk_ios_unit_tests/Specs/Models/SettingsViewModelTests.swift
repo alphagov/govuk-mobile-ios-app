@@ -40,15 +40,26 @@ class SettingsViewModelTests: XCTestCase {
         XCTAssertEqual(toggleRow.title, "Share app usage statistics")
     }
     
-    func test_analytics_isToggled() throws {
+    func test_analytics_isToggledOnThenOff() throws {
         continueAfterFailure = false
         XCTAssertEqual(sut.listContent.count, 2)
         continueAfterFailure = true
+        sut.analyticsService.setAcceptedAnalytics(accepted: true)
         let privacySection = sut.listContent[1]
         let toggleRow = try XCTUnwrap(privacySection.rows.first as? ToggleRow)
-        XCTAssertEqual(sut.analyticsService.permissionState, .accepted)
+        XCTAssertTrue(toggleRow.isOn)
         toggleRow.isOn = false
         XCTAssertEqual(sut.analyticsService.permissionState, .denied)
+    }
+    
+    func test_analytics_isToggledOffThenOm() throws {
+        continueAfterFailure = false
+        XCTAssertEqual(sut.listContent.count, 2)
+        continueAfterFailure = true
+        sut.analyticsService.setAcceptedAnalytics(accepted: false)
+        let privacySection = sut.listContent[1]
+        let toggleRow = try XCTUnwrap(privacySection.rows.first as? ToggleRow)
+        XCTAssertFalse(toggleRow.isOn)
         toggleRow.isOn = true
         XCTAssertEqual(sut.analyticsService.permissionState, .accepted)
     }

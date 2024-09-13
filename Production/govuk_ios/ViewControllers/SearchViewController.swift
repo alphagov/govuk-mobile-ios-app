@@ -144,36 +144,51 @@ class SearchViewController: BaseViewController,
         self.navigationController?.dismiss(animated: true)
     }
 
-    @objc func searchReturn() {
+    @objc
+    private func searchReturn() {
         self.searchBar.resignFirstResponder()
 
         let searchTerm = searchBar.text!
         viewModel.trackSearchTerm(searchTerm: searchTerm)
 
-        if searchTerm.isEmpty {
-            let blankSearchURL = "https://www.gov.uk/search?q="
-            UIApplication.shared.open(URL(string: blankSearchURL)!)
-        } else {
-            let searchTermURL = "https://www.gov.uk/search/all?keywords=\(searchTerm)&order=relevance"
-            UIApplication.shared.open(URL(string: searchTermURL)!)
-        }
+        viewModel.fetchSearchResults(searchText: searchTerm, tableView: tableView)
     }
 }
 
 extension SearchViewController: UITableViewDelegate,
                                 UITableViewDataSource {
-    func tableView(_ tableView: UITableView, 
+    func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        
-        return 5
+        return viewModel.searchResults?.count ?? 0
     }
 
-    func tableView(_ tableView: UITableView, 
+    func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: SearchResultCell.identifier, for: indexPath
+        ) as? SearchResultCell else {
+            fatalError("Unable to dequeue")
+        }
+
+        guard let searchResults = viewModel.searchResults
+        else { return cell }
+
+        cell.configure(
+            title: searchResults[indexPath.row].title,
+            description: searchResults[indexPath.row].description
         )
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        guard let searchResults = viewModel.searchResults
+        else { return }
+
+        let item = searchResults[indexPath.row]
+        let resultURL = "https://www.gov.uk\(item.link)"
+
+        UIApplication.shared.open(URL(string: resultURL)!)
     }
 }

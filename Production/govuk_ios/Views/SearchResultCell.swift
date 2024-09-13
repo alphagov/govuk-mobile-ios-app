@@ -27,7 +27,7 @@ class SearchResultCell: UITableViewCell {
         return localView
     }()
 
-    private let title: UILabel = {
+    private var title: UILabel = {
         let localLabel = UILabel()
         localLabel.translatesAutoresizingMaskIntoConstraints = false
         localLabel.textColor = UIColor.govUK.text.link
@@ -41,7 +41,7 @@ class SearchResultCell: UITableViewCell {
         return localLabel
     }()
 
-    private let resultDescription: UILabel = {
+    private var resultDescription: UILabel = {
         let localLabel = UILabel()
         localLabel.translatesAutoresizingMaskIntoConstraints = false
         localLabel.textColor = .label
@@ -65,6 +65,11 @@ class SearchResultCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(title: String, description: String) {
+        self.title.text = title
+        self.resultDescription.text = description
     }
 
     private func setupUI() {

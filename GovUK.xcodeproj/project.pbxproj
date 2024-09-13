@@ -892,7 +892,6 @@
 		5D79AEBE2C32B8CB0061F344 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3D7E2D152C81DB810016BEEC /* AnalyticsConsentContainerView.swift */,
 				5D79AEBF2C32B9180061F344 /* AnimationView.swift */,
 				5D9E67C72C5A2E1700DB7877 /* DividerView.swift */,
 				16E5AD442C6E499B000B8B3A /* Home */,
@@ -1318,6 +1317,7 @@
 		9685F8292C78C01600C33614 /* SwiftUIViews */ = {
 			isa = PBXGroup;
 			children = (
+				3D7E2D152C81DB810016BEEC /* AnalyticsConsentContainerView.swift */,
 				966ABE202C78E06F00099DF9 /* GroupedList */,
 			);
 			path = SwiftUIViews;

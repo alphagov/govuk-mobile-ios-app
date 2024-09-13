@@ -24,6 +24,7 @@ class MockAnalyticsService: AnalyticsServiceInterface,
     var _setAcceptedAnalyticsAccepted: Bool = true
     func setAcceptedAnalytics(accepted: Bool) {
         _setAcceptedAnalyticsAccepted = accepted
+        _stubbedPermissionState = accepted ? .accepted : .denied
     }
 
     var _stubbedPermissionState: AnalyticsPermissionState = .accepted

@@ -38,7 +38,9 @@ class ViewControllerBuilderTests: XCTestCase {
 
     func test_settings_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.settings()
+        let result = subject.settings(
+            analyticsService: MockAnalyticsService()
+        )
 
         XCTAssert(result is SettingsViewController)
     }

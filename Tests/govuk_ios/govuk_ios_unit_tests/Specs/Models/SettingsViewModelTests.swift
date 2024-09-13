@@ -52,7 +52,7 @@ class SettingsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.analyticsService.permissionState, .denied)
     }
     
-    func test_analytics_isToggledOffThenOm() throws {
+    func test_analytics_isToggledOffThenOn() throws {
         continueAfterFailure = false
         XCTAssertEqual(sut.listContent.count, 2)
         continueAfterFailure = true

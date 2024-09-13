@@ -7,7 +7,9 @@ import XCTest
 
 class SettingsViewControllerTests: XCTestCase {
     func test_settings_hasCorrectBackgroundColor() {
-        let viewModel = SettingsViewModel()
+        let viewModel = SettingsViewModel(
+            analyticsService: MockAnalyticsService()
+        )
         let subject = SettingsViewController(viewModel: viewModel)
         let view = subject.view
         XCTAssertEqual(view?.backgroundColor, UIColor.govUK.fills.surfaceBackground)
@@ -15,7 +17,9 @@ class SettingsViewControllerTests: XCTestCase {
     }
     
     func test_groupedList_hasCorrectBackgroundColor() throws {
-        let viewModel = SettingsViewModel()
+        let viewModel = SettingsViewModel(
+            analyticsService: MockAnalyticsService()
+        )
         let subject = SettingsViewController(viewModel: viewModel)
         subject.beginAppearanceTransition(true, animated: false)
         subject.endAppearanceTransition()

@@ -36,6 +36,22 @@ struct InformationRow: GroupedListRow {
     let detail: String
 }
 
+class ToggleRow: GroupedListRow, ObservableObject {
+    let title: String
+    @Published var isOn: Bool {
+        didSet {
+            self.action(isOn)
+        }
+    }
+    let action: ((Bool) -> Void)
+
+    init(title: String, isOn: Bool, action: @escaping (Bool) -> Void) {
+        self.title = title
+        self.isOn = isOn
+        self.action = action
+    }
+}
+
 struct GroupedListSection_Previews: PreviewProvider {
     static var previews: some View {
         Text("preview")
@@ -63,6 +79,13 @@ struct GroupedListSection_Previews: PreviewProvider {
                         body: "Description",
                         action: {
                             print("nav row tapped")
+                        }
+                    ),
+                    ToggleRow(
+                        title: "Toggle",
+                        isOn: false,
+                        action: { isOn in
+                            print("Toggled: \(isOn)")
                         }
                     )
                 ],

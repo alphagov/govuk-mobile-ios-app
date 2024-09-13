@@ -8,15 +8,15 @@ struct RecentItemsViewContainer: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {
-       // NavigationView {
             switch recentItems.count {
             case 0:
                 RecentItemsErrorView()
                     .navigationTitle(viewModel.navigationTitle)
             case (let count) where count >= 1:
-                RecentItemsView(model: viewModel.sortItems(visitedItems: recentItems))
+                RecentItemsView(
+                    model: viewModel.sortItems(visitedItems: recentItems),
+                    selected: { item in self.viewModel.itemSelected(item: item) })
                     .navigationTitle(viewModel.navigationTitle)
-                 // .navigationBarHidden(false)
                     .toolbar {
                         ToolbarItem(placement: .primaryAction) {
                             Text(viewModel.toolbarTitle) .foregroundColor(Color(UIColor.govUK.text.link))
@@ -25,6 +25,5 @@ struct RecentItemsViewContainer: View {
             default:
                 ProgressView()
             }
-        // }
     }
 }

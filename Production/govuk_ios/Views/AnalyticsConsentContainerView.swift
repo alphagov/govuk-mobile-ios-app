@@ -3,7 +3,6 @@ import UIComponents
 
 struct AnalyticsConsentContainerView: View {
     @StateObject var viewModel: AnalyticsConsentContainerViewModel
-
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     init(viewModel: AnalyticsConsentContainerViewModel) {

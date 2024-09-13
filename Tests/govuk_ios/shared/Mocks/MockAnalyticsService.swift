@@ -1,5 +1,4 @@
 import XCTest
-import Logging
 import Onboarding
 
 @testable import govuk_ios
@@ -7,9 +6,9 @@ import Onboarding
 class MockAnalyticsService: AnalyticsServiceInterface,
                             OnboardingAnalyticsService {
 
-    var _configureCalled: Bool = false
-    func configure() {
-        _configureCalled = true
+    var _launchCalled: Bool = false
+    func launch() {
+        _launchCalled = true
     }
 
     var _trackedEvents: [AppEvent] = []

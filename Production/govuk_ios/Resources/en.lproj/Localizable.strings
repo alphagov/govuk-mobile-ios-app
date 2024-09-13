@@ -11,7 +11,6 @@
 "privacyPolicyLinkHint" = "Opens in web browser";
 "privacyPolicyLinkTitle" = "Read more about this in the privacy policy ↗";
 "privacyPolicyLinkAccessibilityTitle" = "Read more about this in the privacy policy";
-"privacyPolicyLinkUrl" = "https://www.gov.uk/";
 
 /* MARK: - Home */
 "homeScreenLogoAccessibilityTitle" = "Gov.Uk logo";

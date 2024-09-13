@@ -42,6 +42,7 @@
 		3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */; };
 		3D7E2D162C81DB810016BEEC /* AnalyticsConsentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D152C81DB810016BEEC /* AnalyticsConsentContainerView.swift */; };
 		3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D172C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift */; };
+		3D887CB82C944861001B1BA2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D887CB72C944861001B1BA2 /* Constants.swift */; };
 		3DEC85A42C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */; };
 		3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */; };
 		3DEC85AA2C89D9200044D5F9 /* URLOpening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A92C89D9200044D5F9 /* URLOpening.swift */; };
@@ -280,6 +281,7 @@
 		3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerViewModel.swift; sourceTree = "<group>"; };
 		3D7E2D152C81DB810016BEEC /* AnalyticsConsentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerView.swift; sourceTree = "<group>"; };
 		3D7E2D172C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentCoordinator.swift; sourceTree = "<group>"; };
+		3D887CB72C944861001B1BA2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentCoordinatorTests.swift; sourceTree = "<group>"; };
 		3DEC85A92C89D9200044D5F9 /* URLOpening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpening.swift; sourceTree = "<group>"; };
@@ -1138,6 +1140,7 @@
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
 				3D3EF7482C7F151500981276 /* Localizable.strings */,
+				3D887CB72C944861001B1BA2 /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1670,6 +1673,7 @@
 				3D7E2D162C81DB810016BEEC /* AnalyticsConsentContainerView.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
+				3D887CB82C944861001B1BA2 /* Constants.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* AppSceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,
 				4E6663CF2C73F3220063E81C /* AppConfigServiceError.swift in Sources */,

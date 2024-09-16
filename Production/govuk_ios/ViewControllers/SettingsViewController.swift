@@ -6,21 +6,22 @@ import UIComponents
 class SettingsViewController: BaseViewController,
                               TrackableScreen {
     var trackingName: String { "Settings" }
-    var trackingTitle: String? { viewModel.title }
 
-    private var viewModel: SettingsViewModelProtocol
+    private var viewModel: SettingsViewModelInterface
     private let scrollview = UIScrollView(frame: .zero)
     private let backgroundColor = UIColor.govUK.fills.surfaceBackground
 
     private lazy var contentViewController: UIViewController = {
-        let settingsContentView = GroupedList(content: viewModel.listContent,
-                                              backgroundColor: backgroundColor)
+        let settingsContentView = GroupedList(
+            content: viewModel.listContent,
+            backgroundColor: backgroundColor
+        )
         let viewController = UIHostingController(rootView: settingsContentView)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         return viewController
     }()
 
-    public init(viewModel: SettingsViewModelProtocol) {
+    public init(viewModel: SettingsViewModelInterface) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,7 +32,6 @@ class SettingsViewController: BaseViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = backgroundColor
         title = viewModel.title
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -54,27 +54,37 @@ class SettingsViewController: BaseViewController,
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            contentViewController.view.leadingAnchor.constraint(equalTo:
-                                                scrollview.leadingAnchor),
-            contentViewController.view.trailingAnchor.constraint(equalTo:
-                                                scrollview.trailingAnchor),
-            contentViewController.view.topAnchor.constraint(equalTo:
-                                                scrollview.contentLayoutGuide.topAnchor,
-                                                constant: 10),
-            contentViewController.view.heightAnchor.constraint(lessThanOrEqualTo:
-                                                scrollview.contentLayoutGuide.heightAnchor),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo:
-                                                scrollview.leadingAnchor),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo:
-                                                scrollview.trailingAnchor),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo:
-                                                scrollview.topAnchor),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo:
-                                                scrollview.bottomAnchor),
-            scrollview.contentLayoutGuide
-                .leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollview.contentLayoutGuide
-                .trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            contentViewController.view.leadingAnchor.constraint(
+                equalTo: scrollview.leadingAnchor
+            ),
+            contentViewController.view.trailingAnchor.constraint(
+                equalTo: scrollview.trailingAnchor
+            ),
+            contentViewController.view.topAnchor.constraint(
+                equalTo: scrollview.contentLayoutGuide.topAnchor,
+                constant: 10
+            ),
+            contentViewController.view.heightAnchor.constraint(
+                lessThanOrEqualTo: scrollview.contentLayoutGuide.heightAnchor
+            ),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(
+                equalTo: scrollview.leadingAnchor
+            ),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(
+                equalTo: scrollview.trailingAnchor
+            ),
+            view.safeAreaLayoutGuide.topAnchor.constraint(
+                equalTo: scrollview.topAnchor
+            ),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(
+                equalTo: scrollview.bottomAnchor
+            ),
+            scrollview.contentLayoutGuide.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor
+            ),
+            scrollview.contentLayoutGuide.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor
+            )
         ])
     }
 }

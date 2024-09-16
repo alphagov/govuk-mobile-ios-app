@@ -61,27 +61,14 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func test_openPrivacyPolicy_canOpenUrl() throws {
-        let urlOpener = MockURLOpening()
-        urlOpener._stubbedCanOpenUrl = true
+    func test_openPrivacyPolicy_opensURL() throws {
+        let urlOpener = MockURLOpener()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
             urlOpener: urlOpener,
             dismissAction: {}
         )
         sut.openPrivacyPolicy()
-        XCTAssertTrue(urlOpener._receivedOpenCompletion)
-    }
-
-    func test_openPrivacyPolicy_cantOpenUrl() throws {
-        let urlOpener = MockURLOpening()
-        urlOpener._stubbedCanOpenUrl = false
-        let sut = AnalyticsConsentContainerViewModel(
-            analyticsService: nil,
-            urlOpener: urlOpener,
-            dismissAction: {}
-        )
-        sut.openPrivacyPolicy()
-        XCTAssertFalse(urlOpener._receivedOpenCompletion)
+        XCTAssertEqual(urlOpener._receivedOpenIfPossibleUrlString, Constants.API.privacyPolicyUrl)
     }
 }

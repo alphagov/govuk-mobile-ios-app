@@ -22,7 +22,9 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     }
     
     func test_loadInNavigationController_preview_rendersCorrectly() {
-        let viewController = SettingsViewController(viewModel: GroupedListViewModel())
+        let viewController = SettingsViewController(
+            viewModel: GroupedListViewModel()
+        )
         VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .light,
@@ -31,12 +33,16 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController() -> SettingsViewController {
-        let viewModel = SettingsViewModel(analyticsService: MockAnalyticsService())
+        let viewModel = SettingsViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener(),
+            bundle: .main
+        )
         return SettingsViewController(viewModel: viewModel)
     }
 }
 
-struct GroupedListViewModel: SettingsViewModelProtocol {
+struct GroupedListViewModel: SettingsViewModelInterface {
     var title: String = "Settings"
     var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent
 }

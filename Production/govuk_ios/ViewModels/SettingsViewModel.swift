@@ -1,16 +1,15 @@
 import UIKit
 
-protocol SettingsViewModelProtocol {
+protocol SettingsViewModelInterface {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
 }
 
-struct SettingsViewModel: SettingsViewModelProtocol {
-    var title: String = "settingsTitle".localized
-    var analyticsService: AnalyticsServiceInterface
-    var appVersion: String? {
-        getVersionNumber()
-    }
+struct SettingsViewModel: SettingsViewModelInterface {
+    let title: String = "settingsTitle".localized
+    let analyticsService: AnalyticsServiceInterface
+    let urlOpener: URLOpener
+    let bundle: Bundle
 
     private var hasAcceptedAnalytics: Bool {
         switch analyticsService.permissionState {
@@ -29,28 +28,48 @@ struct SettingsViewModel: SettingsViewModelProtocol {
                     InformationRow(
                         title: "appVersionTitle".localized,
                         body: nil,
-                        detail: appVersion ?? "-"
+                        detail: bundle.versionNumber ?? "-"
                     )
                 ],
                 footer: nil
             ),
-            .init(heading: "privacyAndLegalHeading".localized,
-                  rows: [
-                    ToggleRow(title: "appUsageTitle".localized,
-                            isOn: hasAcceptedAnalytics,
-                            action: { isOn in
-                                analyticsService.setAcceptedAnalytics(accepted: isOn)
-                            })],
-                  footer: nil
+            .init(
+                heading: "privacyAndLegalHeading".localized,
+                rows: [
+                    ToggleRow(
+                        title: "appUsageTitle".localized,
+                        isOn: hasAcceptedAnalytics,
+                        action: { isOn in
+                            analyticsService.setAcceptedAnalytics(accepted: isOn)
+                        }
+                    )
+                ],
+                footer: nil
+            ),
+            .init(
+                heading: nil,
+                rows: [
+                    openSourceLicenseRow()
+                ],
+                footer: nil
             )
         ]
     }
-}
 
-extension SettingsViewModel {
-    private func getVersionNumber() -> String? {
-        let dict = Bundle.main.infoDictionary
-        let versionString = dict?["CFBundleShortVersionString"] as? String
-        return versionString
+    private func openSourceLicenseRow() -> GroupedListRow {
+        let rowTitle = "settingsOpenSourceLicenseTitle".localized
+        return LinkRow(
+            title: rowTitle,
+            body: nil,
+            action: {
+                if urlOpener.openSettings() {
+                    let event = AppEvent.buttonNavigation(
+                        text: rowTitle,
+                        external: true
+                    )
+                    analyticsService.track(event: event)
+                }
+            }
+        )
     }
 }

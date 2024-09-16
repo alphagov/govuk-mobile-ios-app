@@ -44,4 +44,43 @@ class AppEvent_ConvenienceTests: XCTestCase {
         XCTAssertEqual(result.params?["external"] as? Bool, false)
         XCTAssertEqual(result.params?["language"] as? String, "en")
     }
+
+    func test_buttonNavigation_external_returnsExpectedResult() {
+        let expectedText = UUID().uuidString
+        let result = AppEvent.buttonNavigation(
+            text: expectedText,
+            external: true
+        )
+
+        XCTAssertEqual(result.name, "Navigation")
+        XCTAssertEqual(result.params?.count, 4)
+        XCTAssertEqual(result.params?["text"] as? String, expectedText)
+        XCTAssertEqual(result.params?["type"] as? String, "Button")
+        XCTAssertEqual(result.params?["external"] as? Bool, true)
+        XCTAssertEqual(result.params?["language"] as? String, "en")
+    }
+
+    func test_buttonNavigation_internal_returnsExpectedResult() {
+        let expectedText = UUID().uuidString
+        let result = AppEvent.buttonNavigation(
+            text: expectedText,
+            external: false
+        )
+
+        XCTAssertEqual(result.name, "Navigation")
+        XCTAssertEqual(result.params?.count, 4)
+        XCTAssertEqual(result.params?["text"] as? String, expectedText)
+        XCTAssertEqual(result.params?["type"] as? String, "Button")
+        XCTAssertEqual(result.params?["external"] as? Bool, false)
+        XCTAssertEqual(result.params?["language"] as? String, "en")
+    }
+
+    func test_searchTerm_returnsExpectedResult() {
+        let expectedTerm = UUID().uuidString
+        let result = AppEvent.searchTerm(term: expectedTerm)
+
+        XCTAssertEqual(result.name, "Search")
+        XCTAssertEqual(result.params?.count, 1)
+        XCTAssertEqual(result.params?["text"] as? String, expectedTerm)
+    }
 }

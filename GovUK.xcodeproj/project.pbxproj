@@ -38,6 +38,8 @@
 		16F9619D2C8899D4005CFB04 /* SearchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */; };
 		16F9619F2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */; };
 		16F961A32C92FD15005CFB04 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961A22C92FD15005CFB04 /* SearchResultCell.swift */; };
+		16F961A52C989129005CFB04 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961A42C989129005CFB04 /* SearchItem.swift */; };
+		16F961A72C989165005CFB04 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961A62C989165005CFB04 /* SearchResult.swift */; };
 		3D3EF74A2C7F151500981276 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D3EF7482C7F151500981276 /* Localizable.strings */; };
 		3D55B22E2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55B22D2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift */; };
 		3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */; };
@@ -277,6 +279,8 @@
 		16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinatorTests.swift; sourceTree = "<group>"; };
 		16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		16F961A22C92FD15005CFB04 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		16F961A42C989129005CFB04 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
+		16F961A62C989165005CFB04 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		3D3EF7492C7F151500981276 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3D55B22D2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerViewModelTests.swift; sourceTree = "<group>"; };
 		3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerViewModel.swift; sourceTree = "<group>"; };
@@ -1282,6 +1286,8 @@
 			children = (
 				5D3123812C85AB8E0088B931 /* ActivityItem.swift */,
 				5DE970522C297642009D66C4 /* Analytics */,
+				16F961A42C989129005CFB04 /* SearchItem.swift */,
+				16F961A62C989165005CFB04 /* SearchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1597,6 +1603,7 @@
 				16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */,
 				5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */,
 				168F6FAA2C4FC56B00A0D7F7 /* WidgetViewModel.swift in Sources */,
+				16F961A72C989165005CFB04 /* SearchResult.swift in Sources */,
 				5DBE080C2C4812ED00B58DBE /* BaseViewController.swift in Sources */,
 				5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */,
 				5D6032192C81D68D00C46660 /* Locale+Analytics.swift in Sources */,
@@ -1655,6 +1662,7 @@
 				5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
+				16F961A52C989129005CFB04 /* SearchItem.swift in Sources */,
 				5D962D642C29BD0B0038BC0A /* ColorCoordinator.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D349F692C6B550000B7F747 /* URL+Extensions.swift in Sources */,

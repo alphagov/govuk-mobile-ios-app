@@ -41,13 +41,3 @@ class SearchViewModel {
         )
     }
 }
-
-struct SearchResult: Decodable {
-    var results: [SearchItem]
-}
-
-struct SearchItem: Decodable {
-    var title: String
-    var description: String
-    var link: String
-}

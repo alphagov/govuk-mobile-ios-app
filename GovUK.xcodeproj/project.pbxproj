@@ -511,13 +511,6 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		3DEC85AB2C89DB740044D5F9 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		4E003E782C75EDB4008FCBF2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,18 +738,18 @@
 		5D37EA062C3E865F006B36CB /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */,
+				3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */,
 				5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */,
 				5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */,
 				5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */,
 				5D37E9FD2C3E865F006B36CB /* Driving */,
+				16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */,
 				5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */,
 				5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */,
-				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
-				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
-				16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */,
+				4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */,
 				16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */,
-				3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */,
+				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
+				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -939,11 +932,11 @@
 		5D8922702C071FF60019FBD7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */,
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
-				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
 				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
-				3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */,
+				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1263,7 +1256,6 @@
 				5DC04B952C2D72F20036EF2B /* Builders */,
 				5DA44C362C2EF1D400D8FE7C /* Coordinators */,
 				5D93EE802C36848400D90C0C /* Deeplinking */,
-				3DEC85AB2C89DB740044D5F9 /* Extensions */,
 				5DC2506C2C91E790009E9E7F /* MockAnalyticsClient.swift */,
 				5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */,
 				5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */,

@@ -6,11 +6,13 @@ import XCTest
 class SettingsViewModelTests: XCTestCase {
     
     var sut: SettingsViewModel!
+    var mockAnalyticsService: MockAnalyticsService!
     
     override func setUp() {
         super.setUp()
+        mockAnalyticsService = MockAnalyticsService()
         sut = SettingsViewModel(
-            analyticsService: MockAnalyticsService(),
+            analyticsService: mockAnalyticsService,
             urlOpener: MockURLOpener(),
             bundle: .main
         )
@@ -18,6 +20,7 @@ class SettingsViewModelTests: XCTestCase {
     
     override func tearDown() {
         sut = nil
+        mockAnalyticsService = nil
         super.tearDown()
     }
     
@@ -70,5 +73,29 @@ class SettingsViewModelTests: XCTestCase {
         XCTAssertFalse(toggleRow.isOn)
         toggleRow.isOn = true
         XCTAssertEqual(sut.analyticsService.permissionState, .accepted)
+    }
+    
+    func test_privacyPolicy_action() throws {
+        continueAfterFailure = false
+        XCTAssertEqual(sut.listContent.count, 3)
+        continueAfterFailure = true
+        
+        let linkSection = sut.listContent[2]
+        let privacyPolicyRow = try XCTUnwrap(linkSection.rows.first as? LinkRow)
+        privacyPolicyRow.action()
+        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        XCTAssertEqual(receivedTitle, privacyPolicyRow.title)
+    }
+    
+    func test_openSettings_action() throws {
+        continueAfterFailure = false
+        XCTAssertEqual(sut.listContent.count, 3)
+        continueAfterFailure = true
+        
+        let linkSection = sut.listContent[2]
+        let settingsRow = try XCTUnwrap(linkSection.rows.last as? LinkRow)
+        settingsRow.action()
+        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        XCTAssertEqual(receivedTitle, settingsRow.title)
     }
 }

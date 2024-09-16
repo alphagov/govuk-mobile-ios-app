@@ -44,11 +44,12 @@ struct SettingsViewModel: SettingsViewModelInterface {
                         }
                     )
                 ],
-                footer: nil
+                footer: "appUsageFooter".localized
             ),
             .init(
                 heading: nil,
                 rows: [
+                    privacyPolicyRow(),
                     openSourceLicenseRow()
                 ],
                 footer: nil
@@ -56,20 +57,38 @@ struct SettingsViewModel: SettingsViewModelInterface {
         ]
     }
 
+    private func privacyPolicyRow() -> GroupedListRow {
+        let rowTitle = "privacyPolicyTitle".localized
+        return LinkRow(
+            title: rowTitle,
+            body: nil,
+            action: {
+                if urlOpener.openIfPossible(Constants.API.privacyPolicyUrl) {
+                    trackLinkEvent(rowTitle)
+                }
+            }
+        )
+    }
+
     private func openSourceLicenseRow() -> GroupedListRow {
         let rowTitle = "settingsOpenSourceLicenseTitle".localized
         return LinkRow(
             title: rowTitle,
             body: nil,
+            isWebLink: false,
             action: {
                 if urlOpener.openSettings() {
-                    let event = AppEvent.buttonNavigation(
-                        text: rowTitle,
-                        external: true
-                    )
-                    analyticsService.track(event: event)
+                    trackLinkEvent(rowTitle)
                 }
             }
         )
+    }
+
+    private func trackLinkEvent(_ title: String) {
+        let event = AppEvent.buttonNavigation(
+            text: title,
+            external: true
+        )
+        analyticsService.track(event: event)
     }
 }

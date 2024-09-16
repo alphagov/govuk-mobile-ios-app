@@ -16,7 +16,8 @@ class HomeViewControllerTests: XCTestCase {
         }
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(), 
-            searchButtonPrimaryAction: { () -> Void in _ = true }
+            searchButtonPrimaryAction: { () -> Void in _ = true }, 
+            recentActivityPrimaryAction: {}
         )
         let subject = HomeViewController(viewModel: viewModel)
         subject.viewDidAppear(false)

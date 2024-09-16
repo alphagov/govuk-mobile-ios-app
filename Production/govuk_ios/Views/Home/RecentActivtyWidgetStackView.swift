@@ -8,7 +8,7 @@ class RecentActivtyWidgetStackView: UIStackView {
 
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
-        localView.font = UIFont.govUK.title3
+        localView.font = UIFont.govUK.bodySemibold
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.lineBreakMode = .byWordWrapping

@@ -51,4 +51,12 @@ class DateHelper {
         guard let date = dateFormatter.date(from: dateString) else { return Date()}
         return date
     }
+
+    static func removeDuplicates(array: [String]) -> [String] {
+        var uniqueElements: [String] = []
+        for item in array where !uniqueElements.contains(item) {
+            uniqueElements.append(item)
+        }
+        return uniqueElements
+    }
 }

@@ -9,7 +9,8 @@ class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
 
     static func all() -> NSFetchRequest<ActivityItem> {
         let request: NSFetchRequest<ActivityItem> = fetchRequest
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \ActivityItem.title, ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \ActivityItem.title,
+                                                    ascending: false)]
         return request
     }
 
@@ -23,7 +24,13 @@ class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
         guard let day = day else { return ""}
         let components = DateHelper.returnCalanderComponent(date: date)
         let month = DateHelper.getMonthName(components: components)
-        let dateString = ("Last visited on \(day) \(month)")
+        let dateString = ("\(formattedString) \(day) \(month)")
         return dateString
     }
-}
+
+    private var formattedString: String {
+        NSLocalizedString(
+            "formattedDateStringComponent",
+            bundle: .main,
+            comment: "")
+    }}

@@ -1,31 +1,41 @@
 import SwiftUI
 import CoreData
 
-struct RecentItemsView: View {
-    let model: RecentItemsViewStructure
+struct RecentActivityView: View {
+    let model: RecentActivitiesViewStructure
     let selected: (ActivityItem) -> Void
     @Environment(\.managedObjectContext) private var context
 
-    init(model: RecentItemsViewStructure,
+    init(model: RecentActivitiesViewStructure,
          selected: @escaping (ActivityItem) -> Void) {
         self.model = model
         self.selected = selected
     }
     var body: some View {
         ScrollView {
-            if model.todaysItems.count >= 1 {
-                let rows = model.todaysItems.map({ activityRow(activityItem: $0) })
-
+            if model.todaysActivites.count >= 1 {
+                let rows = model.todaysActivites.map({ activityRow(activityItem: $0) })
                 GroupedList(content: [GroupedListSection(
-                    heading: "Today", rows: rows, footer: nil)])
+                    heading: NSLocalizedString(
+                        "todaysActivitiesListTitle",
+                        bundle: .main,
+                        comment: ""),
+                    rows: rows,
+                    footer: nil)]
+                )
             }
-            if model.thisMonthsItems.count >= 1 {
-                let rows = model.thisMonthsItems.map({ activityRow(activityItem: $0) })
-                GroupedList(content: [GroupedListSection(heading: "This Month",
-                                                         rows: rows,
-                                                         footer: nil)])
+            if model.currentMonthActivities.count >= 1 {
+                let rows = model.currentMonthActivities.map({ activityRow(activityItem: $0) })
+                GroupedList(content: [GroupedListSection(
+                    heading: NSLocalizedString(
+                    "currentMonthsItems",
+                    bundle: .main,
+                    comment: ""),
+                    rows: rows,
+                    footer: nil)]
+                )
             }
-            if model.otherMonthItems.count >= 1 {
+            if model.recentMonthActivities.count >= 1 {
                 GroupedList(content: buildSectionsView())
             }
         }
@@ -43,11 +53,9 @@ struct RecentItemsView: View {
     }
 
     private func buildSectionsView() -> [GroupedListSection] {
-        print(model.listOfOtherItemDateStrings)
         var groupedSections: [GroupedListSection] = []
-
-        for dateString in model.listOfOtherItemDateStrings {
-            let filteredArray = model.otherMonthItems.filter { item in
+        for dateString in model.recentMonthsActivityDates {
+            let filteredArray = model.recentMonthActivities.filter { item in
                 DateHelper.getMonthAndYear(date: item.date) == dateString }
             let rows = filteredArray.map({ activityRow(activityItem: $0) })
             groupedSections.append(GroupedListSection(

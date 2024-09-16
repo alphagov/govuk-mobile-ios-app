@@ -43,4 +43,13 @@ extension AppEvent {
             ]
         )
     }
+
+    static func recentActivity(activity: String) -> AppEvent {
+        .init(
+            name: "RecentActivity",
+            params: [
+                "text": activity
+            ]
+        )
+    }
 }

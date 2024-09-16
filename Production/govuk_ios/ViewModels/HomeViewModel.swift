@@ -14,7 +14,10 @@ struct HomeViewModel {
         ].compactMap { $0 }
     }
     private var recentlyViewedWidget: WidgetView? {
-        let title = "Pages youve visited"
+        let title = NSLocalizedString(
+            "recentActivityWidgetLabel",
+            bundle: .main,
+            comment: "")
         let viewModel = WidgetViewModel(title: title,
                                         primaryAction: recentActivityPrimaryAction)
         let content = RecentActivtyWidgetStackView(

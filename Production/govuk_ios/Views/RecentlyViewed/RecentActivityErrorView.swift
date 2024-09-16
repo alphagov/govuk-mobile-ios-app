@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RecentItemsErrorView: View {
+struct RecentActivityErrorView: View {
     var body: some View {
         VStack {
             Text(NSLocalizedString(
@@ -8,13 +8,12 @@ struct RecentItemsErrorView: View {
                 bundle: .main,
                 comment: "")).bold()
                 .multilineTextAlignment(.center)
-                .accessibilityLabel("").padding(.top)
+                .padding(.top)
             Text(NSLocalizedString(
                 "errorViewDescription",
                 bundle: .main,
                 comment: ""))
             .multilineTextAlignment(.center)
-            .accessibilityLabel("")
             Spacer()
         }.padding(.top)
     }

@@ -21,6 +21,7 @@ extension GroupedListRow {
 struct LinkRow: GroupedListRow {
     let title: String
     let body: String?
+    var isWebLink: Bool = true
     let action: () -> Void
 }
 
@@ -89,7 +90,7 @@ struct GroupedListSection_Previews: PreviewProvider {
                         }
                     )
                 ],
-                footer: nil
+                footer: "some really important text about this section that is long enough to wrap"
             ),
             .init(
                 heading: "Section 2",

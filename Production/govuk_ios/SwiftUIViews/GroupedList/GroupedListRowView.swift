@@ -65,6 +65,9 @@ struct LinkRowView: View {
                 RowDetail(text: row.body)
             }
         }
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
+        .accessibilityHint(row.isWebLink ? "openWebLinkHint".localized: "")
     }
 }
 

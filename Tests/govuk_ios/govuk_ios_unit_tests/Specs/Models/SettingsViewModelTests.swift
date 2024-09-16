@@ -10,7 +10,9 @@ class SettingsViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sut = SettingsViewModel(
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener(),
+            bundle: .main
         )
     }
     
@@ -25,7 +27,7 @@ class SettingsViewModelTests: XCTestCase {
     
     func test_listContent_isCorrect() throws {
         continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 2)
+        XCTAssertEqual(sut.listContent.count, 3)
         continueAfterFailure = true
         
         let aboutTheAppSection = sut.listContent[0]
@@ -42,7 +44,7 @@ class SettingsViewModelTests: XCTestCase {
     
     func test_analytics_isToggledOnThenOff() throws {
         continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 2)
+        XCTAssertEqual(sut.listContent.count, 3)
         continueAfterFailure = true
         sut.analyticsService.setAcceptedAnalytics(accepted: true)
         let privacySection = sut.listContent[1]
@@ -54,7 +56,7 @@ class SettingsViewModelTests: XCTestCase {
     
     func test_analytics_isToggledOffThenOn() throws {
         continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 2)
+        XCTAssertEqual(sut.listContent.count, 3)
         continueAfterFailure = true
         sut.analyticsService.setAcceptedAnalytics(accepted: false)
         let privacySection = sut.listContent[1]

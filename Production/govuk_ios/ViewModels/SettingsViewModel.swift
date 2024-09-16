@@ -9,9 +9,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
     let title: String = "settingsTitle".localized
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
-    var appVersion: String? {
-        getVersionNumber()
-    }
+    let bundle: Bundle
 
     private var hasAcceptedAnalytics: Bool {
         switch analyticsService.permissionState {
@@ -30,7 +28,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
                     InformationRow(
                         title: "appVersionTitle".localized,
                         body: nil,
-                        detail: appVersion ?? "-"
+                        detail: bundle.versionNumber ?? "-"
                     )
                 ],
                 footer: nil
@@ -62,13 +60,5 @@ struct SettingsViewModel: SettingsViewModelInterface {
                 footer: nil
             )
         ]
-    }
-}
-
-extension SettingsViewModel {
-    private func getVersionNumber() -> String? {
-        let dict = Bundle.main.infoDictionary
-        let versionString = dict?["CFBundleShortVersionString"] as? String
-        return versionString
     }
 }

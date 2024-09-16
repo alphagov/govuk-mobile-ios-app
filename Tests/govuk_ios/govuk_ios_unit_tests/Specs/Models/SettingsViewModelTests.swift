@@ -28,6 +28,7 @@ class SettingsViewModelTests: XCTestCase {
     func test_listContent_isCorrect() throws {
         continueAfterFailure = false
         XCTAssertEqual(sut.listContent.count, 3)
+        XCTAssertEqual(sut.listContent[2].rows.count, 2)
         continueAfterFailure = true
         
         let aboutTheAppSection = sut.listContent[0]
@@ -40,6 +41,11 @@ class SettingsViewModelTests: XCTestCase {
         XCTAssertEqual(privacySection.heading, "Privacy and legal")
         let toggleRow = try XCTUnwrap(privacySection.rows.first as? ToggleRow)
         XCTAssertEqual(toggleRow.title, "Share app usage statistics")
+        
+        let linkSection = sut.listContent[2]
+        XCTAssertEqual(linkSection.rows[0].title, "Privacy policy")
+        XCTAssertEqual(linkSection.rows[1].title, "Open source licenses")
+        
     }
     
     func test_analytics_isToggledOnThenOff() throws {

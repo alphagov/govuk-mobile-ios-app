@@ -10,14 +10,6 @@ protocol URLOpener {
 
 extension UIApplication: URLOpener {
     @discardableResult
-    func openIfPossible(_ urlString: String) -> Bool {
-        guard let url = URL(string: urlString)
-        else { return false }
-
-        return openIfPossible(url)
-    }
-
-    @discardableResult
     func openIfPossible(_ url: URL) -> Bool {
         guard canOpenURL(url)
         else { return false }
@@ -30,5 +22,13 @@ extension URLOpener {
     @discardableResult
     func openSettings() -> Bool {
         openIfPossible(UIApplication.openSettingsURLString)
+    }
+
+    @discardableResult
+    func openIfPossible(_ urlString: String) -> Bool {
+        guard let url = URL(string: urlString)
+        else { return false }
+
+        return openIfPossible(url)
     }
 }

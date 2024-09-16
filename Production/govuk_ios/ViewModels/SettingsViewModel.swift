@@ -57,14 +57,14 @@ struct SettingsViewModel: SettingsViewModelInterface {
     }
 
     private func openSourceLicenseRow() -> GroupedListRow {
-        let title = "settingsOpenSourceLicenseTitle".localized
+        let rowTitle = "settingsOpenSourceLicenseTitle".localized
         return LinkRow(
-            title: title,
+            title: rowTitle,
             body: nil,
             action: {
                 if urlOpener.openSettings() {
                     let event = AppEvent.buttonNavigation(
-                        text: title,
+                        text: rowTitle,
                         external: true
                     )
                     analyticsService.track(event: event)

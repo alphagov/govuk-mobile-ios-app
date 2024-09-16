@@ -3,7 +3,13 @@ import Foundation
 public typealias NetworkResult<T> = Result<T, Error>
 public typealias NetworkResultCompletion<T> = (NetworkResult<T>) -> Void
 
-struct APIServiceClient {
+protocol APIServiceClientInterface {
+    func send(
+        request: GOVRequest, completion: @escaping NetworkResultCompletion<Data>
+    )
+}
+
+struct APIServiceClient: APIServiceClientInterface {
     private let baseUrl: URL
     private let session: URLSession
     private let requestBuilder: RequestBuilderInterface

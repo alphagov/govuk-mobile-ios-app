@@ -1,7 +1,7 @@
 import UIKit
 
 class SearchViewModel {
-    @Inject(\.govukAPIClient) private var govukAPIClient: APIServiceClient
+    @Inject(\.govukAPIClient) var govukAPIClient: APIServiceClientInterface
 
     let analyticsService: AnalyticsServiceInterface
     var searchResults: [SearchItem]?

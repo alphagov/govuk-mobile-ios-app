@@ -49,16 +49,27 @@ struct SettingsViewModel: SettingsViewModelInterface {
             .init(
                 heading: nil,
                 rows: [
-                    LinkRow(
-                        title: "settingsOpenSourceLicenseTitle".localized,
-                        body: nil,
-                        action: {
-                            urlOpener.openSettings()
-                        }
-                    )
+                    openSourceLicenseRow()
                 ],
                 footer: nil
             )
         ]
+    }
+
+    private func openSourceLicenseRow() -> GroupedListRow {
+        let title = "settingsOpenSourceLicenseTitle".localized
+        return LinkRow(
+            title: title,
+            body: nil,
+            action: {
+                if urlOpener.openSettings() {
+                    let event = AppEvent.buttonNavigation(
+                        text: title,
+                        external: true
+                    )
+                    analyticsService.track(event: event)
+                }
+            }
+        )
     }
 }

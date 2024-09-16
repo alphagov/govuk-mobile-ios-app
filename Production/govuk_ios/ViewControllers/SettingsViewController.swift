@@ -7,7 +7,7 @@ class SettingsViewController: BaseViewController,
                               TrackableScreen {
     var trackingName: String { "Settings" }
 
-    private var viewModel: SettingsViewModelProtocol
+    private var viewModel: SettingsViewModelInterface
     private let scrollview = UIScrollView(frame: .zero)
     private let backgroundColor = UIColor.govUK.fills.surfaceBackground
 
@@ -21,7 +21,7 @@ class SettingsViewController: BaseViewController,
         return viewController
     }()
 
-    public init(viewModel: SettingsViewModelProtocol) {
+    public init(viewModel: SettingsViewModelInterface) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

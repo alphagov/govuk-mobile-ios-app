@@ -54,7 +54,8 @@ class ViewControllerBuilder {
 
     func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
         let viewModel = SettingsViewModel(
-            analyticsService: analyticsService
+            analyticsService: analyticsService,
+            urlOpener: UIApplication.shared
         )
         return SettingsViewController(
             viewModel: viewModel

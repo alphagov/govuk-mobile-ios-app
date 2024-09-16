@@ -45,7 +45,7 @@
 		3D887CB82C944861001B1BA2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D887CB72C944861001B1BA2 /* Constants.swift */; };
 		3DEC85A42C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */; };
 		3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */; };
-		3DEC85AA2C89D9200044D5F9 /* URLOpening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A92C89D9200044D5F9 /* URLOpening.swift */; };
+		3DEC85AA2C89D9200044D5F9 /* URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A92C89D9200044D5F9 /* URLOpener.swift */; };
 		3DEC85AD2C89DBED0044D5F9 /* MockURLOpening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85AC2C89DBED0044D5F9 /* MockURLOpening.swift */; };
 		4E003E7A2C75EDEC008FCBF2 /* MockAppConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */; };
 		4E003E7C2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */; };
@@ -288,7 +288,7 @@
 		3D887CB72C944861001B1BA2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentCoordinatorTests.swift; sourceTree = "<group>"; };
-		3DEC85A92C89D9200044D5F9 /* URLOpening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpening.swift; sourceTree = "<group>"; };
+		3DEC85A92C89D9200044D5F9 /* URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpener.swift; sourceTree = "<group>"; };
 		3DEC85AC2C89DBED0044D5F9 /* MockURLOpening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLOpening.swift; sourceTree = "<group>"; };
 		4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponse.json; sourceTree = "<group>"; };
 		4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponseInvalid.json; sourceTree = "<group>"; };
@@ -1204,7 +1204,7 @@
 				5DBE08022C480CA700B58DBE /* UITabBarItem+Convenience.swift */,
 				5D9E67C32C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift */,
 				5D899A1F2C946F540074C0AD /* UIViewController+Extensions.swift */,
-				3DEC85A92C89D9200044D5F9 /* URLOpening.swift */,
+				3DEC85A92C89D9200044D5F9 /* URLOpener.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1630,7 +1630,7 @@
 				966ABE222C78E0B900099DF9 /* GroupedListRowView.swift in Sources */,
 				5D54A8322BFCBF50003D0C21 /* main.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
-				3DEC85AA2C89D9200044D5F9 /* URLOpening.swift in Sources */,
+				3DEC85AA2C89D9200044D5F9 /* URLOpener.swift in Sources */,
 				3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */,
 				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
 				16EE1A452C6F8ED3005E820F /* SearchCoordinator.swift in Sources */,

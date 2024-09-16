@@ -1,13 +1,14 @@
 import UIKit
 
-protocol SettingsViewModelProtocol {
+protocol SettingsViewModelInterface {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
 }
 
-struct SettingsViewModel: SettingsViewModelProtocol {
-    var title: String = "settingsTitle".localized
-    var analyticsService: AnalyticsServiceInterface
+struct SettingsViewModel: SettingsViewModelInterface {
+    let title: String = "settingsTitle".localized
+    let analyticsService: AnalyticsServiceInterface
+    let urlOpener: URLOpener
     var appVersion: String? {
         getVersionNumber()
     }
@@ -34,14 +35,31 @@ struct SettingsViewModel: SettingsViewModelProtocol {
                 ],
                 footer: nil
             ),
-            .init(heading: "privacyAndLegalHeading".localized,
-                  rows: [
-                    ToggleRow(title: "appUsageTitle".localized,
-                            isOn: hasAcceptedAnalytics,
-                            action: { isOn in
-                                analyticsService.setAcceptedAnalytics(accepted: isOn)
-                            })],
-                  footer: nil
+            .init(
+                heading: "privacyAndLegalHeading".localized,
+                rows: [
+                    ToggleRow(
+                        title: "appUsageTitle".localized,
+                        isOn: hasAcceptedAnalytics,
+                        action: { isOn in
+                            analyticsService.setAcceptedAnalytics(accepted: isOn)
+                        }
+                    )
+                ],
+                footer: nil
+            ),
+            .init(
+                heading: nil,
+                rows: [
+                    LinkRow(
+                        title: "settingsOpenSourceLicenseTitle".localized,
+                        body: nil,
+                        action: {
+                            urlOpener.openSettings()
+                        }
+                    )
+                ],
+                footer: nil
             )
         ]
     }

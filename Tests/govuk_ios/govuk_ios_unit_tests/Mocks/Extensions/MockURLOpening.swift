@@ -2,7 +2,7 @@ import UIKit
 
 @testable import govuk_ios
 
-class MockURLOpening: URLOpening {
+class MockURLOpening: URLOpener {
     var _stubbedCanOpenUrl: Bool = false
 
     func canOpenURL(_ url: URL) -> Bool {

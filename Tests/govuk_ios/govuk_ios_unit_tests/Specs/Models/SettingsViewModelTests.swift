@@ -34,8 +34,8 @@ class SettingsViewModelTests: XCTestCase {
         XCTAssertEqual(aboutTheAppSection.heading, "About the app")
         let appVersionRow = try XCTUnwrap(aboutTheAppSection.rows.first as? InformationRow)
         XCTAssertEqual(appVersionRow.title, "App version number")
-        XCTAssertEqual(appVersionRow.detail, getVersionNumber())
-        
+        XCTAssertEqual(appVersionRow.detail, Bundle.main.versionNumber)
+
         let privacySection = sut.listContent[1]
         XCTAssertEqual(privacySection.heading, "Privacy and legal")
         let toggleRow = try XCTUnwrap(privacySection.rows.first as? ToggleRow)
@@ -64,13 +64,5 @@ class SettingsViewModelTests: XCTestCase {
         XCTAssertFalse(toggleRow.isOn)
         toggleRow.isOn = true
         XCTAssertEqual(sut.analyticsService.permissionState, .accepted)
-    }
-}
-
-extension SettingsViewModelTests {
-    func getVersionNumber() -> String? {
-        let dict = Bundle.main.infoDictionary
-        let versionString = dict?["CFBundleShortVersionString"] as? String
-        return versionString
     }
 }

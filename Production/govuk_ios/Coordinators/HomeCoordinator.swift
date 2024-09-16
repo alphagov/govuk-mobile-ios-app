@@ -42,7 +42,10 @@ class HomeCoordinator: TabItemCoordinator {
             guard let strongSelf = self else { return }
             let navigationController = UINavigationController()
             let coordinator = strongSelf.coordinatorBuilder.search(
-                navigationController: navigationController
+                navigationController: navigationController,
+                didDismissAction: {
+                    self?.root.viewWillReAppear()
+                }
             )
             strongSelf.present(coordinator)
         }

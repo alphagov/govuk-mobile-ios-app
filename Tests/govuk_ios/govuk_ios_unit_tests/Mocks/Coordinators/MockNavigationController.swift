@@ -18,9 +18,13 @@ class MockNavigationController: UINavigationController {
     }
 
     var _dismissCalled: Bool = false
+    var _receivedDismissAnimated: Bool?
+    var _receivedDismissCompletion: (() -> Void)?
     override func dismiss(animated flag: Bool,
                           completion: (() -> Void)? = nil) {
         super.dismiss(animated: flag, completion: completion)
+        _receivedDismissAnimated = flag
+        _receivedDismissCompletion = completion
         _dismissCalled = true
     }
 

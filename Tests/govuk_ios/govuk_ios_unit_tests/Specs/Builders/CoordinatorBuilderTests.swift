@@ -110,7 +110,8 @@ class CoordinatorBuilderTests: XCTestCase {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.search(
-            navigationController: mockNavigationController
+            navigationController: mockNavigationController,
+            didDismissAction: { }
         )
 
         XCTAssert(coordinator is SearchCoordinator)

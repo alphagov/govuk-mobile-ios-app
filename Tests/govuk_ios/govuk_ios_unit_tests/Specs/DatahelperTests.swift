@@ -16,7 +16,7 @@ final class DateHelperTests: XCTestCase {
         XCTAssertEqual(date, 14)
     }
 
-    func test_getMonthName_returnsCorrectMonth() throws {
+    func test_getMonthName_returnsCorrectDateString() throws {
         //Given
         let isoDate = "2016-04-14T10:44:00+0000"
         let dateFormatter = DateFormatter()
@@ -30,7 +30,7 @@ final class DateHelperTests: XCTestCase {
         //Then
         XCTAssertEqual(month, "April")
     }
-    func test_checkDatesAreTheSame_returnsTrueWhenDatesAreTheSame() throws {
+    func test_checkDatesAreTheSame_whenDatesAreTheSame_returnsTrue() throws {
         //Given
         let dateOne = Date()
         let dateTwo = Date()
@@ -40,7 +40,7 @@ final class DateHelperTests: XCTestCase {
         XCTAssertTrue(dateEquality)
     }
 
-    func test_checkEqualityOfMonthAndYear_returnsCorrectMonth() throws {
+    func test_checkEqualityOfMonthAndYear_whenMonthAndYearAreEqual_returnsTrue() throws {
         //Given
         let dateOne = Date()
         let dateTwo = Date()
@@ -50,7 +50,7 @@ final class DateHelperTests: XCTestCase {
         //Then
         XCTAssertTrue(dateEquality)
     }
-    
+
     func test_getMonthAndYear_returnsCorrectString() throws {
         //Given
         let isoDate = "2016-04-14T10:44:00+0000"
@@ -58,6 +58,7 @@ final class DateHelperTests: XCTestCase {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let mockDate = dateFormatter.date(from:isoDate)!
+        //When
         var dateString = DateHelper.getMonthAndYear(date: mockDate)
         //Then
         XCTAssertEqual(dateString, "April 2016")

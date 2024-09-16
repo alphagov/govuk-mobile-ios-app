@@ -15,7 +15,7 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     let privacyPolicyLinkAccessibilityTitle =
     NSLocalizedString("privacyPolicyLinkAccessibilityTitle", comment: "")
     let privacyPolicyLinkHint = NSLocalizedString("privacyPolicyLinkHint", comment: "")
-    let privacyPolicyLinkUrl = NSLocalizedString("privacyPolicyLinkUrl", comment: "")
+    let privacyPolicyLinkUrl = Constants.API.privacyPolicyUrl
     let allowButtonTitle = NSLocalizedString("allowAnalyticsButtonTitle", comment: "")
     let dontAllowButtonTitle = NSLocalizedString("dontAllowAnalyticsButtonTitle", comment: "")
 

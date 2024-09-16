@@ -1,6 +1,9 @@
 /* MARK: - Launch */
 "splashScreenAccessibilityTitle" = "Gov.Uk";
 
+/* MARK: - Common */
+"openWebLinkHint" = "Opens in web browser";
+
 /* MARK: - AnalyticsConsent */
 "allowAnalyticsButtonTitle" = "Allow statistics sharing";
 "analyticsConsentDescriptionBottom" = "These statistics are anonymous.\n\nYou can stop sharing these statistics at any time by changing your app settings.";
@@ -8,7 +11,6 @@
 "analyticsConsentDescriptionTop" = "You can help us improve this app by agreeing to share statistics about:";
 "analyticsConsentTitle" = "Share statistics about how you use the GOV.UK app";
 "dontAllowAnalyticsButtonTitle" = "Don't allow statistics sharing";
-"privacyPolicyLinkHint" = "Opens in web browser";
 "privacyPolicyLinkTitle" = "Read more about this in the privacy policy ↗";
 "privacyPolicyLinkAccessibilityTitle" = "Read more about this in the privacy policy";
 
@@ -27,4 +29,6 @@
 "privacyAndLegalHeading" = "Privacy and legal";
 "appVersionTitle" = "App version number";
 "appUsageTitle" = "Share app usage statistics";
+"appUsageFooter" = "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. These statistics are anonymous and do not contain any of your personal information. Read more about this in the privacy policy.";
 "settingsOpenSourceLicenseTitle" = "Open source licenses";
+"privacyPolicyTitle" = "Privacy policy";

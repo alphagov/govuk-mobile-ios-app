@@ -7,17 +7,17 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     private let urlOpener: URLOpener
     private let dismissAction: () -> Void
 
-    let title = NSLocalizedString("analyticsConsentTitle", comment: "")
-    let descriptionTop = NSLocalizedString("analyticsConsentDescriptionTop", comment: "")
-    let descriptionBullets = NSLocalizedString("analyticsConsentDescriptionBullets", comment: "")
-    let descriptionBottom = NSLocalizedString("analyticsConsentDescriptionBottom", comment: "")
-    let privacyPolicyLinkTitle = NSLocalizedString("privacyPolicyLinkTitle", comment: "")
+    let title = "analyticsConsentTitle".localized
+    let descriptionTop = "analyticsConsentDescriptionTop".localized
+    let descriptionBullets = "analyticsConsentDescriptionBullets".localized
+    let descriptionBottom = "analyticsConsentDescriptionBottom".localized
+    let privacyPolicyLinkTitle = "privacyPolicyLinkTitle".localized
     let privacyPolicyLinkAccessibilityTitle =
-    NSLocalizedString("privacyPolicyLinkAccessibilityTitle", comment: "")
-    let privacyPolicyLinkHint = NSLocalizedString("privacyPolicyLinkHint", comment: "")
+        "privacyPolicyLinkAccessibilityTitle".localized
+    let privacyPolicyLinkHint = "openWebLinkHint".localized
     let privacyPolicyLinkUrl = Constants.API.privacyPolicyUrl
-    let allowButtonTitle = NSLocalizedString("allowAnalyticsButtonTitle", comment: "")
-    let dontAllowButtonTitle = NSLocalizedString("dontAllowAnalyticsButtonTitle", comment: "")
+    let dontAllowButtonTitle = "dontAllowAnalyticsButtonTitle".localized
+    let allowButtonTitle = "allowAnalyticsButtonTitle".localized
 
     var allowButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(

@@ -1,0 +1,28 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "openWebLinkHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens in web browser"
+          }
+        }
+      }
+    },
+    "splashScreenAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gov.UK"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

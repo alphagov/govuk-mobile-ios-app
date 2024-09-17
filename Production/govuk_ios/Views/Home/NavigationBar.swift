@@ -19,10 +19,7 @@ class NavigationBar: UIView {
         let uiImageView = UIImageView(image: .homeLogo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
         uiImageView.isAccessibilityElement = true
-        uiImageView.accessibilityLabel = NSLocalizedString(
-            "homeScreenLogoAccessibilityTitle",
-            comment: ""
-        )
+        uiImageView.accessibilityLabel = String.home.localized("logoAccessibilityTitle")
         return uiImageView
     }()
 

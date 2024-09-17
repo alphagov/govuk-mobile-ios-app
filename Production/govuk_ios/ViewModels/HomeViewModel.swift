@@ -17,10 +17,7 @@ struct HomeViewModel {
         else { return nil }
 
 
-        let title = NSLocalizedString(
-            "homeSearchWidgetTitle",
-            comment: ""
-        )
+        let title = String.home.localized("searchWidgetTitle")
         let viewModel = WidgetViewModel(
             title: title,
             primaryAction: searchButtonPrimaryAction

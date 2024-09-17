@@ -1,0 +1,105 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "allowAnalyticsButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow statistics sharing"
+          }
+        }
+      }
+    },
+    "analyticsConsentDescriptionBottom" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These statistics are anonymous.\n\nYou can stop sharing these statistics at any time by changing your app settings."
+          }
+        }
+      }
+    },
+    "analyticsConsentDescriptionBullets" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  •  the pages you visit within the app\n  •  how long you spend on each page\n  •  what you tap on while you're on each page\n  •  errors that happen"
+          }
+        }
+      }
+    },
+    "analyticsConsentDescriptionTop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can help us improve this app by agreeing to share statistics about:"
+          }
+        }
+      }
+    },
+    "analyticsConsentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share statistics about how you use the GOV.UK app"
+          }
+        }
+      }
+    },
+    "dontAllowAnalyticsButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't allow statistics sharing"
+          }
+        }
+      }
+    },
+    "privacyPolicyLinkAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more about this in the privacy policy"
+          }
+        }
+      }
+    },
+    "privacyPolicyLinkHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens in web browser"
+          }
+        }
+      }
+    },
+    "privacyPolicyLinkTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more about this in the privacy policy ↗"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

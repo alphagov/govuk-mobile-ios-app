@@ -190,8 +190,13 @@ extension SearchViewController: UITableViewDelegate,
         else { return }
 
         let item = searchResults[indexPath.row]
-        let resultURL = "https://www.gov.uk\(item.link)"
+        let url = URLComponents(string: item.link)
+        guard url?.host != nil
+        else {
+            let govukURL = "https://www.gov.uk\(item.link)"
+            return UIApplication.shared.open(URL(string: govukURL)!)
+        }
 
-        UIApplication.shared.open(URL(string: resultURL)!)
+        UIApplication.shared.open(URL(string: item.link)!)
     }
 }

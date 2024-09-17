@@ -16,7 +16,7 @@ class SearchViewModel {
         )
     }
 
-    public func fetchSearchResults(searchText: String, tableView: UITableView) {
+    func fetchSearchResults(searchText: String, tableView: UITableView) {
         guard !searchText.isEmpty else { return }
 
         let searchRequest = GOVRequest(
@@ -39,5 +39,17 @@ class SearchViewModel {
                 tableView.reloadData()
             }
         )
+    }
+
+    func itemTitle(_ index: Int) -> String {
+        (searchResults?[index]
+            .title
+            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
+    }
+
+    func itemDescription(_ index: Int) -> String {
+        (searchResults?[index]
+            .description
+            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
     }
 }

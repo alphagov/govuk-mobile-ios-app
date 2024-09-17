@@ -74,6 +74,7 @@ class SearchViewController: BaseViewController,
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         configureNavBar(animated: animated)
     }
     public override func viewDidAppear(_ animated: Bool) {
@@ -174,8 +175,8 @@ extension SearchViewController: UITableViewDelegate,
         else { return cell }
 
         cell.configure(
-            title: searchResults[indexPath.row].title,
-            description: searchResults[indexPath.row].description
+            title: viewModel.itemTitle(indexPath.row),
+            description: viewModel.itemDescription(indexPath.row)
         )
 
         return cell

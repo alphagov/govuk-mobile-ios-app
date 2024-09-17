@@ -44,7 +44,7 @@ class SearchViewModelTests: XCTestCase {
             analyticsService: mockAnalyticsService
         )
         let searchText = ""
-        
+
         let sendExpectation = expectation()
         sendExpectation.isInverted = true
         mockAPIServiceClient.sendExpectation = sendExpectation
@@ -75,11 +75,50 @@ class SearchViewModelTests: XCTestCase {
         XCTAssertEqual(subject.searchResults?.count, 0)
     }
 
+    func test_itemTitle_returnsTrimmedTitle() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockAPIServiceClient = MockAPIServiceClient()
+        mockAPIServiceClient._setNetworkRequestResponse = .success(JSONResponseData)
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService
+        )
+        let searchText = "Test"
+
+        subject.govukAPIClient = mockAPIServiceClient
+
+        subject.fetchSearchResults(
+            searchText: searchText, tableView: UITableView()
+        )
+
+        XCTAssertEqual(subject.itemTitle(0), "Something about passports")
+    }
+
+    func test_itemDescription_returnsTrimmedDescription() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockAPIServiceClient = MockAPIServiceClient()
+        mockAPIServiceClient._setNetworkRequestResponse = .success(JSONResponseData)
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService
+        )
+        let searchText = "Test"
+
+        subject.govukAPIClient = mockAPIServiceClient
+
+        subject.fetchSearchResults(
+            searchText: searchText, tableView: UITableView()
+        )
+
+        XCTAssertEqual(
+            subject.itemDescription(0), 
+            "Something passporty must be taking place here"
+        )
+    }
+
     private let JSONResponseData = """
     {"results": [
         {
-            "title": "Something about passports",
-            "description": "Something passporty must be taking place here",
+            "title": " Something about passports ",
+            "description": " Something passporty must be taking place here ",
             "link": "/apply-renew-passport"
         },
         {

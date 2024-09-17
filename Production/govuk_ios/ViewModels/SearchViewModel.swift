@@ -21,6 +21,12 @@ class SearchViewModel {
         )
     }
 
+    func trackSearchItemPress(_ item: SearchItem) {
+        analyticsService.track(
+            event: AppEvent.searchItem(item: item)
+        )
+    }
+
     func fetchSearchResults(searchText: String, completion: @escaping () -> Void) {
         guard !searchText.isEmpty else { return }
 

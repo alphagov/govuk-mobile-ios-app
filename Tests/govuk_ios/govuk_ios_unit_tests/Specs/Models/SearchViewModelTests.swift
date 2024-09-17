@@ -19,6 +19,31 @@ class SearchViewModelTests: XCTestCase {
         XCTAssertEqual(events.first?.params?["text"] as! String, searchText)
     }
 
+    func test_trackSearchItem_tracksItem() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockAPIServiceClient = MockAPIServiceClient()
+        mockAPIServiceClient._setNetworkRequestResponse = .success(JSONResponseData)
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService
+        )
+        let searchText = "Passport for dogs"
+
+        subject.govukAPIClient = mockAPIServiceClient
+        subject.fetchSearchResults(
+            searchText: searchText, completion: { }
+        )
+
+        let item = subject.searchResults?.last
+
+        subject.trackSearchItemPress(item!)
+
+        let events = mockAnalyticsService._trackedEvents
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(events.last?.name, "Search")
+        XCTAssertEqual(events.last?.params?["title"] as! String, "Driving abroad")
+        XCTAssertEqual(events.last?.params?["link"] as! String, "/driving-abroad")
+    }
+
     func test_fetchSearchResults_returnsSearchItems() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockAPIServiceClient = MockAPIServiceClient()

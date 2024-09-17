@@ -246,6 +246,9 @@ extension SearchViewController: UITableViewDelegate,
         else { return }
 
         let item = searchResults[indexPath.row]
+
+        viewModel.trackSearchItemPress(item)
+
         let url = URLComponents(string: item.link)
         guard url?.host != nil
         else {

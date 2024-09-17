@@ -107,11 +107,11 @@ class SearchResultCell: UITableViewCell {
                 equalTo: card.layoutMarginsGuide.leadingAnchor
             ),
 
+            linkImage.topAnchor.constraint(
+                equalTo: title.topAnchor
+            ),
             linkImage.trailingAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.trailingAnchor
-            ),
-            linkImage.centerYAnchor.constraint(
-                equalTo: title.centerYAnchor
             ),
 
             resultDescription.topAnchor.constraint(

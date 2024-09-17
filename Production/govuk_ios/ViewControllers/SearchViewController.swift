@@ -4,6 +4,7 @@ import UIComponents
 class SearchViewController: BaseViewController,
                             TrackableScreen {
     private let viewModel: SearchViewModel
+    private let dismissAction: () -> Void
 
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
@@ -26,7 +27,7 @@ class SearchViewController: BaseViewController,
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
         localSearchBar.searchTextField.addTarget(
             self,
-            action: #selector(searchReturn),
+            action: #selector(searchReturnTapped),
             for: UIControl.Event.editingDidEndOnExit
         )
 
@@ -48,8 +49,10 @@ class SearchViewController: BaseViewController,
 
     var trackingName: String { "Search" }
 
-    init(viewModel: SearchViewModel) {
+    init(viewModel: SearchViewModel,
+         dismissAction: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.dismissAction = dismissAction
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -126,8 +129,7 @@ class SearchViewController: BaseViewController,
     }
 
     private func configureNavBar(animated: Bool) {
-        let barButton = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
+        let barButton = UIBarButtonItem.cancel(
             target: self,
             action: #selector(cancelButtonPressed)
         )
@@ -142,11 +144,11 @@ class SearchViewController: BaseViewController,
 
     @objc
     private func cancelButtonPressed(_ sender: UIBarItem) {
-        self.navigationController?.dismiss(animated: true)
+        dismissAction()
     }
 
     @objc
-    private func searchReturn() {
+    private func searchReturnTapped() {
         self.searchBar.resignFirstResponder()
 
         let searchTerm = searchBar.text!

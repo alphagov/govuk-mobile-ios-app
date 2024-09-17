@@ -21,6 +21,15 @@ extension AppEvent {
         )
     }
 
+    static func buttonNavigation(text: String,
+                                 external: Bool) -> AppEvent {
+        navigation(
+            text: text,
+            type: "Button",
+            external: external
+        )
+    }
+
     static func navigation(text: String,
                            type: String,
                            external: Bool) -> AppEvent {

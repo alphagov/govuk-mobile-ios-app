@@ -52,19 +52,25 @@ class ViewControllerBuilder {
         )
     }
 
-    func settings() -> UIViewController {
-        let viewModel = SettingsViewModel()
+    func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+        let viewModel = SettingsViewModel(
+            analyticsService: analyticsService,
+            urlOpener: UIApplication.shared,
+            bundle: .main
+        )
         return SettingsViewController(
             viewModel: viewModel
         )
     }
 
-    func search(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+    func search(analyticsService: AnalyticsServiceInterface,
+                dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = SearchViewModel(
             analyticsService: analyticsService
         )
         return SearchViewController(
-            viewModel: viewModel
+            viewModel: viewModel,
+            dismissAction: dismissAction
         )
     }
 }

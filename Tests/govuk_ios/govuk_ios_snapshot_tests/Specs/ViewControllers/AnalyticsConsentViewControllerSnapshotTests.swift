@@ -6,11 +6,19 @@ import SwiftUI
 
 final class AnalyticsConsentViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        loadInNavigationControllerTest(view: view, navBarHidden: true)
+        VerifySnapshotInNavigationController(
+            view: view, 
+            mode: .light,
+            navBarHidden: true
+        )
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        loadInNavigationControllerTest(view: view, mode: .dark, navBarHidden: true)
+        VerifySnapshotInNavigationController(
+            view: view,
+            mode: .dark,
+            navBarHidden: true
+        )
     }
 
     private var view: some View {

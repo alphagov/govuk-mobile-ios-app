@@ -4,20 +4,20 @@ import UIKit
 
 class AnalyticsConsentContainerViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface?
-    private let urlOpener: URLOpening
+    private let urlOpener: URLOpener
     private let dismissAction: () -> Void
 
-    let title = NSLocalizedString("analyticsConsentTitle", comment: "")
-    let descriptionTop = NSLocalizedString("analyticsConsentDescriptionTop", comment: "")
-    let descriptionBullets = NSLocalizedString("analyticsConsentDescriptionBullets", comment: "")
-    let descriptionBottom = NSLocalizedString("analyticsConsentDescriptionBottom", comment: "")
-    let privacyPolicyLinkTitle = NSLocalizedString("privacyPolicyLinkTitle", comment: "")
+    let title = "analyticsConsentTitle".localized
+    let descriptionTop = "analyticsConsentDescriptionTop".localized
+    let descriptionBullets = "analyticsConsentDescriptionBullets".localized
+    let descriptionBottom = "analyticsConsentDescriptionBottom".localized
+    let privacyPolicyLinkTitle = "privacyPolicyLinkTitle".localized
     let privacyPolicyLinkAccessibilityTitle =
-    NSLocalizedString("privacyPolicyLinkAccessibilityTitle", comment: "")
-    let privacyPolicyLinkHint = NSLocalizedString("privacyPolicyLinkHint", comment: "")
-    let privacyPolicyLinkUrl = NSLocalizedString("privacyPolicyLinkUrl", comment: "")
-    let allowButtonTitle = NSLocalizedString("allowAnalyticsButtonTitle", comment: "")
-    let dontAllowButtonTitle = NSLocalizedString("dontAllowAnalyticsButtonTitle", comment: "")
+        "privacyPolicyLinkAccessibilityTitle".localized
+    let privacyPolicyLinkHint = "openWebLinkHint".localized
+    let privacyPolicyLinkUrl = Constants.API.privacyPolicyUrl
+    let dontAllowButtonTitle = "dontAllowAnalyticsButtonTitle".localized
+    let allowButtonTitle = "allowAnalyticsButtonTitle".localized
 
     var allowButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
@@ -40,7 +40,7 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     }
 
     init(analyticsService: AnalyticsServiceInterface?,
-         urlOpener: URLOpening = UIApplication.shared,
+         urlOpener: URLOpener = UIApplication.shared,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
@@ -48,10 +48,7 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     }
 
     func openPrivacyPolicy() {
-        guard let url = URL(string: privacyPolicyLinkUrl) else { return }
-        if urlOpener.canOpenURL(url) {
-            urlOpener.open(url, options: [:], completionHandler: nil)
-        }
+        urlOpener.openIfPossible(privacyPolicyLinkUrl)
     }
 
     private func finishAnalyticsConsent() {

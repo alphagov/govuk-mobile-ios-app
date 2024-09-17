@@ -13,12 +13,12 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.descriptionTop, "You can help us improve this app by agreeing to share statistics about:")
         XCTAssertEqual(sut.descriptionBullets, "  •  the pages you visit within the app\n  •  how long you spend on each page\n  •  what you tap on while you're on each page\n  •  errors that happen")
         XCTAssertEqual(sut.descriptionBottom, "These statistics are anonymous.\n\nYou can stop sharing these statistics at any time by changing your app settings.")
-        XCTAssertEqual(sut.allowButtonTitle, "Allow statistics sharing")
-        XCTAssertEqual(sut.dontAllowButtonTitle, "Don't allow statistics sharing")
         XCTAssertEqual(sut.privacyPolicyLinkTitle, "Read more about this in the privacy policy ↗")
         XCTAssertEqual(sut.privacyPolicyLinkAccessibilityTitle, "Read more about this in the privacy policy")
         XCTAssertEqual(sut.privacyPolicyLinkHint, "Opens in web browser")
-        XCTAssertEqual(sut.privacyPolicyLinkUrl, "https://www.gov.uk/")
+        XCTAssertEqual(sut.privacyPolicyLinkUrl, "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data")
+        XCTAssertEqual(sut.allowButtonTitle, "Allow statistics sharing")
+        XCTAssertEqual(sut.dontAllowButtonTitle, "Don't allow statistics sharing")
     }
 
     func test_allowButtonAction_setsAcceptedAnalyticsToTrue() throws {
@@ -61,27 +61,14 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func test_openPrivacyPolicy_canOpenUrl() throws {
-        let urlOpener = MockURLOpening()
-        urlOpener._stubbedCanOpenUrl = true
+    func test_openPrivacyPolicy_opensURL() throws {
+        let urlOpener = MockURLOpener()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
             urlOpener: urlOpener,
             dismissAction: {}
         )
         sut.openPrivacyPolicy()
-        XCTAssertTrue(urlOpener._receivedOpenCompletion)
-    }
-
-    func test_openPrivacyPolicy_cantOpenUrl() throws {
-        let urlOpener = MockURLOpening()
-        urlOpener._stubbedCanOpenUrl = false
-        let sut = AnalyticsConsentContainerViewModel(
-            analyticsService: nil,
-            urlOpener: urlOpener,
-            dismissAction: {}
-        )
-        sut.openPrivacyPolicy()
-        XCTAssertFalse(urlOpener._receivedOpenCompletion)
+        XCTAssertEqual(urlOpener._receivedOpenIfPossibleUrlString, Constants.API.privacyPolicyUrl)
     }
 }

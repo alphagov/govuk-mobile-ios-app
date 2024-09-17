@@ -17,6 +17,36 @@ class SnapshotTestCase: FBSnapshotTestCase {
 //        self.recordMode = true
     }
 
+    func VerifySnapshotInNavigationController(view: some View,
+                                              mode: UIUserInterfaceStyle,
+                                              navBarHidden: Bool = false,
+                                              file: StaticString = #file,
+                                              line: UInt = #line) {
+        let wrappedView = UIHostingController(rootView: view)
+        VerifySnapshotInNavigationController(
+            viewController: wrappedView,
+            mode: mode,
+            navBarHidden: navBarHidden,
+            file: file,
+            line: line
+        )
+    }
+
+    func VerifySnapshotInNavigationController(viewController: UIViewController,
+                                              mode: UIUserInterfaceStyle,
+                                              navBarHidden: Bool = false,
+                                              file: StaticString = #file,
+                                              line: UInt = #line) {
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
+        navigationController.overrideUserInterfaceStyle = mode
+        VerifySnapshotInWindow(
+            navigationController,
+            file: file,
+            line: line
+        )
+    }
+
     func VerifySnapshotInWindow(_ viewController: UIViewController,
                                 perPixelTolerance: CGFloat = 0,
                                 overallTolerance: CGFloat = 0,
@@ -63,7 +93,37 @@ class SnapshotTestCase: FBSnapshotTestCase {
         )
     }
 
-    func RecordSnapshotInWindow(_ viewController: UIViewController, 
+    func RecordSnapshotInNavigationController(view: some View,
+                                              mode: UIUserInterfaceStyle,
+                                              navBarHidden: Bool = false,
+                                              file: StaticString = #file,
+                                              line: UInt = #line) {
+        let wrappedView = UIHostingController(rootView: view)
+        RecordSnapshotInNavigationController(
+            viewController: wrappedView,
+            mode: mode,
+            navBarHidden: navBarHidden,
+            file: file,
+            line: line
+        )
+    }
+
+    func RecordSnapshotInNavigationController(viewController: UIViewController,
+                                              mode: UIUserInterfaceStyle,
+                                              navBarHidden: Bool = false,
+                                              file: StaticString = #file,
+                                              line: UInt = #line) {
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
+        navigationController.overrideUserInterfaceStyle = mode
+        RecordSnapshotInWindow(
+            navigationController,
+            file: file,
+            line: line
+        )
+    }
+
+    func RecordSnapshotInWindow(_ viewController: UIViewController,
                                 file: StaticString = #file,
                                 line: UInt = #line) {
         let initialRecordMode = recordMode
@@ -118,24 +178,5 @@ class SnapshotTestCase: FBSnapshotTestCase {
 
     func wrapInWindow(_ viewController: UIViewController) {
         UIApplication.shared.windows.first?.rootViewController = viewController
-    }
-
-    func loadInNavigationControllerTest(viewController: UIViewController,
-                                        mode: UIUserInterfaceStyle = .light,
-                                        navBarHidden: Bool = false) {
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
-        navigationController.overrideUserInterfaceStyle = mode
-        VerifySnapshotInWindow(navigationController)
-    }
-
-    func loadInNavigationControllerTest(view: some View,
-                                        mode: UIUserInterfaceStyle = .light,
-                                        navBarHidden: Bool = false) {
-        let sut = UIHostingController(rootView: view)
-        let navigationController = UINavigationController(rootViewController: sut)
-        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
-        navigationController.overrideUserInterfaceStyle = mode
-        VerifySnapshotInWindow(navigationController)
     }
 }

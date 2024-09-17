@@ -14,7 +14,10 @@ class SearchViewControllerTests: XCTestCase {
             mockAnalyticsService
         }
         let viewModel = SearchViewModel(analyticsService: MockAnalyticsService())
-        let subject = SearchViewController(viewModel: viewModel)
+        let subject = SearchViewController(
+            viewModel: viewModel,
+            dismissAction: { }
+        )
         subject.viewDidAppear(false)
 
         let screens = mockAnalyticsService._trackScreenReceivedScreens

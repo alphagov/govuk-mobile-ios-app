@@ -12,6 +12,8 @@ struct GroupedListRowView: View {
                 LinkRowView(row: row)
             case let row as InformationRow:
                 InformationRowView(row: row)
+            case let row as ToggleRow:
+                ToggleRowView(row: row)
             default:
                 EmptyView()
             }
@@ -24,6 +26,7 @@ struct GroupedListRowView: View {
         GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[0])
         GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[1])
         GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[2])
+        GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[3])
     }
 }
 
@@ -62,6 +65,9 @@ struct LinkRowView: View {
                 RowDetail(text: row.body)
             }
         }
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
+        .accessibilityHint(row.isWebLink ? "openWebLinkHint".localized: "")
     }
 }
 
@@ -90,6 +96,25 @@ struct NavigationRowView: View {
                         .font(Font.govUK.bodySemibold)
                 }
             }
+        }
+    }
+}
+
+struct ToggleRowView: View {
+    @StateObject var row: ToggleRow
+    var body: some View {
+        HStack {
+            Spacer()
+            Toggle(isOn: $row.isOn) {
+                Text(row.title)
+                    .foregroundColor(
+                        Color(
+                            UIColor.govUK.text.primary
+                        )
+                    )
+                    .padding(.horizontal, -8)
+            }
+            .toggleStyle(SwitchToggleStyle(tint: (Color(UIColor.govUK.fills.surfaceButtonPrimary))))
         }
     }
 }

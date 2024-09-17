@@ -21,6 +21,7 @@ extension GroupedListRow {
 struct LinkRow: GroupedListRow {
     let title: String
     let body: String?
+    var isWebLink: Bool = true
     let action: () -> Void
 }
 
@@ -34,6 +35,22 @@ struct InformationRow: GroupedListRow {
     let title: String
     let body: String?
     let detail: String
+}
+
+class ToggleRow: GroupedListRow, ObservableObject {
+    let title: String
+    @Published var isOn: Bool {
+        didSet {
+            self.action(isOn)
+        }
+    }
+    let action: ((Bool) -> Void)
+
+    init(title: String, isOn: Bool, action: @escaping (Bool) -> Void) {
+        self.title = title
+        self.isOn = isOn
+        self.action = action
+    }
 }
 
 struct GroupedListSection_Previews: PreviewProvider {
@@ -64,9 +81,16 @@ struct GroupedListSection_Previews: PreviewProvider {
                         action: {
                             print("nav row tapped")
                         }
+                    ),
+                    ToggleRow(
+                        title: "Toggle",
+                        isOn: false,
+                        action: { isOn in
+                            print("Toggled: \(isOn)")
+                        }
                     )
                 ],
-                footer: nil
+                footer: "some really important text about this section that is long enough to wrap"
             ),
             .init(
                 heading: "Section 2",

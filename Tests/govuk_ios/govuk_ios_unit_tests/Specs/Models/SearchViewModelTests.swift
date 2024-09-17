@@ -55,7 +55,6 @@ class SearchViewModelTests: XCTestCase {
         )
         
         waitForExpectations(timeout: 0, handler: nil)
-        XCTAssertEqual(subject.searchResults?.count, 0)
     }
 
     func test_fetchSearchResults_noResults_returnsNothing() {

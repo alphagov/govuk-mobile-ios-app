@@ -198,7 +198,7 @@ class SearchViewController: BaseViewController,
                         Search is not working. Try again later, or search on the GOV.UK website.
                         """,
                         linkText: "Go to the GOV.UK website",
-                        link: "https://www.gov.uk/search/all"
+                        link: "https://www.gov.uk"
                     )
 
                     self.errorView.isHidden = false

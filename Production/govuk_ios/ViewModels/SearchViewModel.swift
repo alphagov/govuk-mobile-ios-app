@@ -1,10 +1,15 @@
 import UIKit
 
+enum SearchErrorState {
+    case apiUnavailable, noResults, networkUnavailable
+}
+
 class SearchViewModel {
     @Inject(\.govukAPIClient) var govukAPIClient: APIServiceClientInterface
 
     let analyticsService: AnalyticsServiceInterface
     var searchResults: [SearchItem]?
+    var searchErrorState: SearchErrorState?
 
     init(analyticsService: AnalyticsServiceInterface) {
         self.analyticsService = analyticsService
@@ -16,7 +21,7 @@ class SearchViewModel {
         )
     }
 
-    func fetchSearchResults(searchText: String, tableView: UITableView) {
+    func fetchSearchResults(searchText: String, completion: @escaping () -> Void) {
         guard !searchText.isEmpty else { return }
 
         let searchRequest = GOVRequest(
@@ -29,14 +34,28 @@ class SearchViewModel {
         govukAPIClient.send(
             request: searchRequest,
             completion: { result in
-                guard let data = try? result.get()
-                else { return }
+                switch result {
+                case .failure:
+                    self.searchResults = []
+                    self.searchErrorState = .apiUnavailable
 
-                self.searchResults = try? JSONDecoder().decode(
-                    SearchResult.self, from: data
-                ).results
+                    return completion()
+                case .success:
+                    let data = try? result.get()
+                    if data == nil {
+                        self.searchErrorState = .apiUnavailable
+                    }
 
-                tableView.reloadData()
+                    self.searchResults = try? JSONDecoder().decode(
+                        SearchResult.self, from: data ?? Data()
+                    ).results
+
+                    if self.searchResults?.count == 0 {
+                        self.searchErrorState = .noResults
+                    }
+
+                    return completion()
+                }
             }
         )
     }

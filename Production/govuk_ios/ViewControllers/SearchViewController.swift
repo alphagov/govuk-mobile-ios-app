@@ -6,6 +6,14 @@ class SearchViewController: BaseViewController,
     private let viewModel: SearchViewModel
     private let dismissAction: () -> Void
 
+    private lazy var errorView = {
+        let localView = SearchErrorView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.isHidden = true
+
+        return localView
+    }()
+
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
 
@@ -93,7 +101,10 @@ class SearchViewController: BaseViewController,
         )
         view.backgroundColor = GOVUKColors.fills.surfaceModal
         view.addSubview(searchBar)
+        view.addSubview(errorView)
         view.addSubview(tableView)
+
+        view.bringSubviewToFront(errorView)
     }
 
     private func configureConstraints() {
@@ -112,6 +123,18 @@ class SearchViewController: BaseViewController,
             ),
             searchBar.heightAnchor.constraint(
                 greaterThanOrEqualToConstant: 36
+            ),
+
+            errorView.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor, constant: 40
+            ),
+            errorView.leftAnchor.constraint(
+                equalTo: searchBar.leftAnchor,
+                constant: 10
+            ),
+            errorView.rightAnchor.constraint(
+                equalTo: searchBar.rightAnchor,
+                constant: -10
             ),
 
             tableView.topAnchor.constraint(
@@ -151,10 +174,43 @@ class SearchViewController: BaseViewController,
     private func searchReturnTapped() {
         self.searchBar.resignFirstResponder()
 
-        let searchTerm = searchBar.text!
-        viewModel.trackSearchTerm(searchTerm: searchTerm)
+        let searchText = searchBar.text!
+        viewModel.trackSearchTerm(searchTerm: searchText)
 
-        viewModel.fetchSearchResults(searchText: searchTerm, tableView: tableView)
+        viewModel.searchErrorState = .none
+        viewModel.fetchSearchResults(
+            searchText: searchText,
+            completion: {
+                self.tableView.reloadData()
+
+                switch self.viewModel.searchErrorState {
+                case .networkUnavailable:
+                    self.errorView.configure(
+                        title: "You’re offline",
+                        errorDesc: "Check your internet connection and try again"
+                    )
+
+                    self.errorView.isHidden = false
+                case .apiUnavailable:
+                    self.errorView.configure(
+                        title: "There’s a problem",
+                        errorDesc: """
+                        Search is not working. Try again later, or search on the GOV.UK website.
+                        """,
+                        linkText: "Go to the GOV.UK website",
+                        link: "https://www.gov.uk/search/all"
+                    )
+
+                    self.errorView.isHidden = false
+                case .noResults:
+                    self.errorView.configure(errorDesc: "No results for ’\(searchText)’")
+
+                    self.errorView.isHidden = false
+                case .none:
+                    self.errorView.isHidden = true
+                }
+            }
+        )
     }
 }
 
@@ -173,7 +229,7 @@ extension SearchViewController: UITableViewDelegate,
             fatalError("Unable to dequeue")
         }
 
-        guard let searchResults = viewModel.searchResults
+        guard viewModel.searchResults != nil
         else { return cell }
 
         cell.configure(

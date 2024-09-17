@@ -31,7 +31,7 @@ class SearchViewModelTests: XCTestCase {
         subject.govukAPIClient = mockAPIServiceClient
 
         subject.fetchSearchResults(
-            searchText: searchText, tableView: UITableView()
+            searchText: searchText, completion: { }
         )
 
         XCTAssertEqual(subject.searchResults?.count, 2)
@@ -51,13 +51,13 @@ class SearchViewModelTests: XCTestCase {
         subject.govukAPIClient = mockAPIServiceClient
 
         subject.fetchSearchResults(
-            searchText: searchText, tableView: UITableView()
+            searchText: searchText, completion: { }
         )
         
         waitForExpectations(timeout: 0, handler: nil)
     }
 
-    func test_fetchSearchResults_noResults_returnsNothing() {
+    func test_fetchSearchResults_noResults_updatesErrorState() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockAPIServiceClient = MockAPIServiceClient()
         mockAPIServiceClient._setNetworkRequestResponse = .success(emptyJSONResponseData)
@@ -69,10 +69,32 @@ class SearchViewModelTests: XCTestCase {
         subject.govukAPIClient = mockAPIServiceClient
 
         subject.fetchSearchResults(
-            searchText: searchText, tableView: UITableView()
+            searchText: searchText, completion: { }
         )
 
         XCTAssertEqual(subject.searchResults?.count, 0)
+        XCTAssertEqual(subject.searchErrorState, .noResults)
+    }
+
+    func test_fetchSearchResults_apiUnavailable_updatesErrorState() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockAPIServiceClient = MockAPIServiceClient()
+        mockAPIServiceClient._setNetworkRequestResponse = .failure(
+            MockNetworkError.tooManyRequests
+        )
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService
+        )
+        let searchText = "ASDLALSD"
+
+        subject.govukAPIClient = mockAPIServiceClient
+
+        subject.fetchSearchResults(
+            searchText: searchText, completion: { }
+        )
+
+        XCTAssertEqual(subject.searchResults?.count, 0)
+        XCTAssertEqual(subject.searchErrorState, .apiUnavailable)
     }
 
     func test_itemTitle_returnsTrimmedTitle() {
@@ -87,7 +109,7 @@ class SearchViewModelTests: XCTestCase {
         subject.govukAPIClient = mockAPIServiceClient
 
         subject.fetchSearchResults(
-            searchText: searchText, tableView: UITableView()
+            searchText: searchText, completion: { }
         )
 
         XCTAssertEqual(subject.itemTitle(0), "Something about passports")
@@ -105,7 +127,7 @@ class SearchViewModelTests: XCTestCase {
         subject.govukAPIClient = mockAPIServiceClient
 
         subject.fetchSearchResults(
-            searchText: searchText, tableView: UITableView()
+            searchText: searchText, completion: { }
         )
 
         XCTAssertEqual(
@@ -132,4 +154,8 @@ class SearchViewModelTests: XCTestCase {
     private let emptyJSONResponseData = """
     {"results": []}
     """.data(using: .utf8)!
+}
+
+enum MockNetworkError: Error {
+    case tooManyRequests
 }

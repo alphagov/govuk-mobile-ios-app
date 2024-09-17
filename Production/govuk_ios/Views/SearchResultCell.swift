@@ -21,7 +21,7 @@ class SearchResultCell: UITableViewCell {
     private let linkImage: UIImageView = {
         let localView = UIImageView()
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.image = UIImage(systemName: "arrow.up.forward")
+        localView.image = UIImage(systemName: "arrow.up.right")
         localView.tintColor = UIColor.govUK.text.link
 
         return localView
@@ -35,8 +35,6 @@ class SearchResultCell: UITableViewCell {
         localLabel.lineBreakMode = .byWordWrapping
         localLabel.font = UIFont.govUK.body
         localLabel.textAlignment = .left
-        localLabel.text = "The long title concerning coins andss" +
-            " plastic teapots spanning multiple lines"
 
         return localLabel
     }()
@@ -49,9 +47,6 @@ class SearchResultCell: UITableViewCell {
         localLabel.textAlignment = .left
         localLabel.numberOfLines = 0
         localLabel.lineBreakMode = .byWordWrapping
-        localLabel.text = "This a lonnnnnnnng description" +
-        " about top things to do with crisp packets and tig welding fingers"
-
 
         return localLabel
     }()

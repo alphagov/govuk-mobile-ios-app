@@ -7,17 +7,17 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     private let urlOpener: URLOpener
     private let dismissAction: () -> Void
 
-    let title = NSLocalizedString("analyticsConsentTitle", comment: "")
-    let descriptionTop = NSLocalizedString("analyticsConsentDescriptionTop", comment: "")
-    let descriptionBullets = NSLocalizedString("analyticsConsentDescriptionBullets", comment: "")
-    let descriptionBottom = NSLocalizedString("analyticsConsentDescriptionBottom", comment: "")
-    let privacyPolicyLinkTitle = NSLocalizedString("privacyPolicyLinkTitle", comment: "")
+    let title = String.onboarding.localized("analyticsConsentTitle")
+    let descriptionTop = String.onboarding.localized("analyticsConsentDescriptionTop")
+    let descriptionBullets = String.onboarding.localized("analyticsConsentDescriptionBullets")
+    let descriptionBottom = String.onboarding.localized("analyticsConsentDescriptionBottom")
+    let privacyPolicyLinkTitle = String.onboarding.localized("privacyPolicyLinkTitle")
     let privacyPolicyLinkAccessibilityTitle =
-    NSLocalizedString("privacyPolicyLinkAccessibilityTitle", comment: "")
-    let privacyPolicyLinkHint = NSLocalizedString("privacyPolicyLinkHint", comment: "")
+    String.onboarding.localized("privacyPolicyLinkAccessibilityTitle")
+    let privacyPolicyLinkHint = String.common.localized("openWebLinkHint")
     let privacyPolicyLinkUrl = Constants.API.privacyPolicyUrl
-    let allowButtonTitle = NSLocalizedString("allowAnalyticsButtonTitle", comment: "")
-    let dontAllowButtonTitle = NSLocalizedString("dontAllowAnalyticsButtonTitle", comment: "")
+    let allowButtonTitle = String.onboarding.localized("allowAnalyticsButtonTitle")
+    let dontAllowButtonTitle = String.onboarding.localized("dontAllowAnalyticsButtonTitle")
 
     var allowButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(

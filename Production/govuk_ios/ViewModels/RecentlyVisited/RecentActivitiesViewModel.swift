@@ -12,8 +12,12 @@ class RecentActivitiesViewModel: ObservableObject {
         self.analyticsService = analyticsService
     }
 
-    let navigationTitle = "recentActivityNavigationTitleLabel".localized
-    let toolbarTitle = "editButtonTitle".localized
+    let toolbarTitle = String.recentActivities.localized(
+        "editButtonTitle"
+    )
+    let navigationTitle = String.recentActivities.localized(
+        "recentActivityNavigationTitleLabel"
+    )
 
     func itemSelected(item: ActivityItem) {
         item.date = Date()

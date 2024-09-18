@@ -14,7 +14,9 @@ struct HomeViewModel {
         ].compactMap { $0 }
     }
     private var recentlyViewedWidget: WidgetView? {
-        let title = "recentActivityWidgetLabel".localized
+        let title = String.recentActivities.localized(
+            "recentActivityWidgetLabel"
+        )
 
         let viewModel = WidgetViewModel(
             title: title,
@@ -32,9 +34,7 @@ struct HomeViewModel {
         guard widgetEnabled(feature: .search)
         else { return nil }
 
-
-        let title = "homeSearchWidgetTitle".localized
-
+        let title = String.home.localized("searchWidgetTitle")
         let viewModel = WidgetViewModel(
             title: title,
             primaryAction: searchButtonPrimaryAction

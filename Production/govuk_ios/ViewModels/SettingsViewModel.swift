@@ -6,7 +6,7 @@ protocol SettingsViewModelInterface {
 }
 
 struct SettingsViewModel: SettingsViewModelInterface {
-    let title: String = "settingsTitle".localized
+    let title: String = String.settings.localized("pageTitle")
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let bundle: Bundle
@@ -23,10 +23,10 @@ struct SettingsViewModel: SettingsViewModelInterface {
     var listContent: [GroupedListSection] {
         [
             .init(
-                heading: "aboutTheAppHeading".localized,
+                heading: String.settings.localized("aboutTheAppHeading"),
                 rows: [
                     InformationRow(
-                        title: "appVersionTitle".localized,
+                        title: String.settings.localized("appVersionTitle"),
                         body: nil,
                         detail: bundle.versionNumber ?? "-"
                     )
@@ -34,23 +34,23 @@ struct SettingsViewModel: SettingsViewModelInterface {
                 footer: nil
             ),
             .init(
-                heading: "privacyAndLegalHeading".localized,
+                heading: String.settings.localized("privacyAndLegalHeading"),
                 rows: [
                     ToggleRow(
-                        title: "appUsageTitle".localized,
+                        title: String.settings.localized("appUsageTitle"),
                         isOn: hasAcceptedAnalytics,
                         action: { isOn in
                             analyticsService.setAcceptedAnalytics(accepted: isOn)
                         }
                     )
                 ],
-                footer: "appUsageFooter".localized
+                footer: String.settings.localized("appUsageFooter")
             ),
             .init(
                 heading: nil,
                 rows: [
                     privacyPolicyRow(),
-                    openSourceLicenseRow()
+                    openSourceLicenceRow()
                 ],
                 footer: nil
             )
@@ -58,7 +58,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
     }
 
     private func privacyPolicyRow() -> GroupedListRow {
-        let rowTitle = "privacyPolicyTitle".localized
+        let rowTitle = String.settings.localized("privacyPolicyRowTitle")
         return LinkRow(
             title: rowTitle,
             body: nil,
@@ -70,8 +70,8 @@ struct SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    private func openSourceLicenseRow() -> GroupedListRow {
-        let rowTitle = "settingsOpenSourceLicenseTitle".localized
+    private func openSourceLicenceRow() -> GroupedListRow {
+        let rowTitle = String.settings.localized("openSourceLicenceRowTitle")
         return LinkRow(
             title: rowTitle,
             body: nil,

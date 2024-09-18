@@ -37,10 +37,7 @@ final public class SearchModalButton: UIButton {
 
         adjustsImageSizeForAccessibilityContentSizeCategory = true
 
-        let buttonTitle = NSLocalizedString(
-            "homeSearchButtonTitle",
-            comment: ""
-        )
+        let buttonTitle = String.home.localized("searchButtonTitle")
         titleLabel?.numberOfLines = 0
         titleLabel?.lineBreakMode = .byWordWrapping
         titleLabel?.adjustsFontForContentSizeCategory = true

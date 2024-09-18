@@ -1,0 +1,39 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "logoAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gov.UK logo"
+          }
+        }
+      }
+    },
+    "searchButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
+    },
+    "searchWidgetTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find government services and information"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -45,13 +45,13 @@
         }
       }
     },
-    "openSourceLicenseRowTitle" : {
+    "openSourceLicenceRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open source licenses"
+            "value" : "Open source licences"
           }
         }
       }

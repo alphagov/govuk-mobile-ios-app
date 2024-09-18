@@ -50,7 +50,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
                 heading: nil,
                 rows: [
                     privacyPolicyRow(),
-                    openSourceLicenseRow()
+                    openSourceLicenceRow()
                 ],
                 footer: nil
             )
@@ -70,8 +70,8 @@ struct SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    private func openSourceLicenseRow() -> GroupedListRow {
-        let rowTitle = String.settings.localized("openSourceLicenseRowTitle")
+    private func openSourceLicenceRow() -> GroupedListRow {
+        let rowTitle = String.settings.localized("openSourceLicenceRowTitle")
         return LinkRow(
             title: rowTitle,
             body: nil,

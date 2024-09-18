@@ -51,6 +51,7 @@ class SearchViewController: BaseViewController,
         )
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.govUK.fills.surfaceModal
 
         return tableView
     }()

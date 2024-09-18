@@ -83,6 +83,8 @@ class SearchErrorView: UIView {
     }
 
     private func configureUI() {
+        backgroundColor = UIColor.govUK.fills.surfaceModal
+
         addSubview(errorTitle)
         addSubview(errorDescription)
         addSubview(errorLinkButton)

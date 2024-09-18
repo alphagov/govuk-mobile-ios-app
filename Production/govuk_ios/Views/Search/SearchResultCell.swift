@@ -69,6 +69,7 @@ class SearchResultCell: UITableViewCell {
 
     private func setupUI() {
         selectionStyle = .none
+        contentView.backgroundColor = UIColor.govUK.fills.surfaceModal
 
         contentView.addSubview(card)
         card.addSubview(title)

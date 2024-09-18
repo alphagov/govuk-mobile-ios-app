@@ -13,7 +13,7 @@ class HomeViewModelTests: XCTestCase {
         let widgets = subject.widgets
 
         XCTAssert((widgets as Any) is [WidgetView])
-        XCTAssertEqual(widgets.count, 1)
+        XCTAssertEqual(widgets.count, 2)
     }
 
     func test_widgets_featureDisabled_doesntReturnWidget() {
@@ -27,6 +27,6 @@ class HomeViewModelTests: XCTestCase {
         )
         let widgets = subject.widgets
 
-        XCTAssertEqual(widgets.count, 0)
+        XCTAssertEqual(widgets.count, 1)
     }
 }

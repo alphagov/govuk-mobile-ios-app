@@ -15,11 +15,12 @@ struct RecentActivityContainerView: View, TrackableScreen {
             switch recentItems.count {
             case 0:
                 RecentActivityErrorView()
-                .navigationTitle(viewModel.navigationTitle)
+                    .navigationTitle(viewModel.navigationTitle)
             case (let count) where count >= 1:
                 RecentActivityView(
                     model: viewModel.sortActivites(
-                        activities: recentItems),
+                        activities: Array(recentItems)
+                    ),
                     selected: { item in self.viewModel.itemSelected(item: item) }
                 )
                 .navigationTitle(viewModel.navigationTitle)
@@ -35,8 +36,7 @@ struct RecentActivityContainerView: View, TrackableScreen {
         }.onAppear {
             viewModel.trackScreen(screen: self)
         }
-    }
-}
+    }}
 
 extension RecentActivityContainerView {
     var trackingTitle: String? { "Pages you've visited" }

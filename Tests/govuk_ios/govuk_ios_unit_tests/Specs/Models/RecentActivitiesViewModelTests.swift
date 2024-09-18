@@ -4,16 +4,16 @@ import CoreData
 import XCTest
 
 final class RecentActivitiesViewModelTests: XCTestCase {
-    var sut: RecentActivitiesViewModel?
-
-    override func tearDownWithError() throws {
-        sut = nil
-    }
 
     func test_sortActivities_whenActivitiesDateEqualsToday_populatesTodaysActivitesList() throws {
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
+        let sut = RecentActivitiesViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: UIApplication.shared
+        )
 
         var activitiesArray: [ActivityItem] = []
         let activity = ActivityItem(context: coreData.backgroundContext)
@@ -31,44 +31,50 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         activityThree.title = "dvla2"
         activityThree.url = "https://www.youtube.com/"
         activityThree.date = Date()
+
         try? coreData.backgroundContext.save()
 
         activitiesArray.append(activity)
         activitiesArray.append(activityTwo)
         activitiesArray.append(activityThree)
 
-        let structure = sut?.sortActivites(activities: activitiesArray)
+        let structure = sut.sortActivites(activities: activitiesArray)
 
-        XCTAssertEqual(structure?.todaysActivites.count, 3)
-        XCTAssertEqual(structure?.recentMonthActivities.count, 0)
-        XCTAssertEqual(structure?.currentMonthActivities.count, 0)
+        XCTAssertEqual(structure.todaysActivites.count, 3)
+        XCTAssertEqual(structure.recentMonthActivities.count, 0)
+        XCTAssertEqual(structure.currentMonthActivities.count, 0)
     }
 
     func test_sortItems_whenActivitesDateEqualsCurrentMomth_currentMonthsListIsPopulated() throws {
+        let sut = RecentActivitiesViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: UIApplication.shared
+        )
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
         var activitiesArray: [ActivityItem] = []
-        guard let randomDateOfCurrentMonthOne = generateRandomDateofCurrentMonth() else { return }
-        guard let randomDateOfCurrentMonthTwo = generateRandomDateofCurrentMonth() else { return }
-        guard let randomDateOfCurrentMonthThree = generateRandomDateofCurrentMonth() else { return }
+        guard let randomDateOne = getRandomDateFromCurrentMonth() else { return }
+        guard let randomDateTwo = getRandomDateFromCurrentMonth() else { return }
+        guard let randomDateThree = getRandomDateFromCurrentMonth() else { return }
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefit3"
         activity.url = "https://www.youtube.com/"
-        activity.date = randomDateOfCurrentMonthOne
+        activity.date = randomDateOne
         let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit2"
         activityTwo.url = "https://www.youtube.com/"
-        activityTwo.date = randomDateOfCurrentMonthTwo
+        activityTwo.date = randomDateTwo
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
         activityThree.url = "https://www.youtube.com/"
-        activityThree.date = randomDateOfCurrentMonthThree
+        activityThree.date = randomDateThree
 
         try? coreData.backgroundContext.save()
 
@@ -76,13 +82,19 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         activitiesArray.append(activityTwo)
         activitiesArray.append(activityThree)
 
-        let structure = sut?.sortActivites(activities: activitiesArray)
-        XCTAssertEqual(structure?.currentMonthActivities.count, 3)
-        XCTAssertEqual(structure?.todaysActivites.count, 0)
-        XCTAssertEqual(structure?.recentMonthActivities.count, 0)
+        let structure = sut.sortActivites(activities: activitiesArray)
+        XCTAssertEqual(structure.currentMonthActivities.count, 3)
+        XCTAssertEqual(structure.todaysActivites.count, 0)
+        XCTAssertEqual(structure.recentMonthActivities.count, 0)
     }
 
     func test_sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
+
+        let sut = RecentActivitiesViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: UIApplication.shared
+        )
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -114,14 +126,14 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         activitiesArray.append(activityTwo)
         activitiesArray.append(activityThree)
 
-        let structure = sut?.sortActivites(activities: activitiesArray)
-        
-        XCTAssertEqual(structure?.recentMonthActivities.count, 3)
-        XCTAssertEqual(structure?.todaysActivites.count, 0)
-        XCTAssertEqual(structure?.currentMonthActivities.count, 0)
+        let structure = sut.sortActivites(activities: activitiesArray)
+
+        XCTAssertEqual(structure.recentMonthActivities.count, 3)
+        XCTAssertEqual(structure.todaysActivites.count, 0)
+        XCTAssertEqual(structure.currentMonthActivities.count, 0)
     }
 
-    private func generateRandomDateofCurrentMonth() -> Date? {
+    private func getRandomDateFromCurrentMonth() -> Date? {
         let date = Date()
         let calendar = Calendar.current
         var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
@@ -134,5 +146,26 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         dateComponents.setValue(randomDay, for: .day)
         return calendar.date(from: dateComponents)
     }
+
+     func test_trackRecentActivity_tracksEvent() {
+
+        let coreData = CoreDataRepository.arrange(
+            notificationCenter: .default
+        ).load()
+
+        let analyticsService = MockAnalyticsService()
+        let sut = RecentActivitiesViewModel(
+            analyticsService: analyticsService,
+            urlOpener: UIApplication.shared
+        )
+        let activity = ActivityItem(context: coreData.backgroundContext)
+        activity.title = "Benefits"
+        try? coreData.backgroundContext.save()
+        sut.trackRecentActivity(activity: activity)
+
+        XCTAssertEqual(analyticsService._trackedEvents.count, 1)
+        XCTAssertEqual(analyticsService._trackedEvents.first?.name, "RecentActivity")
+    }
 }
+
 

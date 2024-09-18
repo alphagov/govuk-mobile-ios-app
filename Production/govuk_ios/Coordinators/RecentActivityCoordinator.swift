@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class RecentActivtyCoordinator: BaseCoordinator {
+class RecentActivityCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
 

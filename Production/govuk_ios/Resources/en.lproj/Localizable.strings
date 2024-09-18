@@ -20,14 +20,12 @@
 "recentActivityNavigationTitleLabel" = "Pages You've visited";
 "recentActivityErrorViewTitle" = "No pages";
 "recentActivityErrorViewDescription" = "You havent used the app to visit any GOV.uk pages yet";
-"todayItemsSectionHeader" = "Today";
-"thisMonthsItemsSectionHeader" = "This Month";
 "homeSearchWidgetTitle" = "Find government services and information";
 "homeSearchButtonTitle" = "Search";
-"todaysActivitiesListTitle" = "Today";
-"currentMonthsItems" = "This Month";
-"formattedDateStringComponent" = "Last visited on";
-"activityItemrecentActivityWidgetLabel" = "Pages you've visited";
+"recentActivitiesTodaysListTitle" = "Today";
+"recentActivityCurrentMonthItems" = "This Month";
+"recentActivityFormattedDateStringComponent" = "Last visited on";
+"recentActivityWidgetLabel" = "Pages you've visited";
 /* MARK: - Search */
 "searchModalTitle" = "Search";
 "searchBarPlaceholder" = "Search";

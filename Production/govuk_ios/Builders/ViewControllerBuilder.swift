@@ -81,7 +81,7 @@ class ViewControllerBuilder {
     func recentActivty(analyticsService: AnalyticsServiceInterface) -> UIViewController {
         let viewModel = RecentActivitiesViewModel(
             analyticsService: analyticsService,
-            URLOpener: UIApplication.shared
+            urlOpener: UIApplication.shared
         )
         let context = Container.shared.coreDataRepository.resolve()
             .viewContext

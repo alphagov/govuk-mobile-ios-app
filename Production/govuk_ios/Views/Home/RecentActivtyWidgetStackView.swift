@@ -4,6 +4,13 @@ import UIKit
 class RecentActivtyWidgetStackView: UIStackView {
     private let viewModel: WidgetViewModel
 
+    init(viewModel: WidgetViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
+        configureUI()
+        configureConstraints()
+    }
+
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
         localView.font = UIFont.govUK.bodySemibold
@@ -14,7 +21,7 @@ class RecentActivtyWidgetStackView: UIStackView {
     }()
 
     private lazy var icon: UIImageView = {
-        let image = UIImage(named: "card-icon-set")
+        let image = UIImage(named: "recent_activity_widget_icon")
         let imageView = UIImageView(image: image)
         return imageView
     }()
@@ -22,7 +29,7 @@ class RecentActivtyWidgetStackView: UIStackView {
     private lazy var recentActivityButton: UIButton = {
         let button = UIButton()
         button.tintColor = .blue
-        let image = UIImage(named: "chevron")
+        let image = UIImage(named: "recent_activity_cell_chevron")
         button.setImage(image, for: .normal)
         button.addTarget(
             self,
@@ -31,20 +38,6 @@ class RecentActivtyWidgetStackView: UIStackView {
         )
         return button
     }()
-
-    private lazy var buttonStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        return stackView
-    }()
-
-    init(viewModel: WidgetViewModel) {
-        self.viewModel = viewModel
-        super.init(frame: .zero)
-        configureUI()
-        configureConstraints()
-    }
 
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -17,7 +17,7 @@ struct RecentActivityView: View {
             if model.todaysActivites.count >= 1 {
                 let rows = model.todaysActivites.map({ activityRow(activityItem: $0) })
                 GroupedList(content: [GroupedListSection(
-                    heading: "todaysActivitiesListTitle".localized,
+                    heading: "recentActivitiesTodaysListTitle".localized,
                     rows: rows,
                     footer: nil
                 )]
@@ -26,7 +26,7 @@ struct RecentActivityView: View {
             if model.currentMonthActivities.count >= 1 {
                 let rows = model.currentMonthActivities.map({ activityRow(activityItem: $0) })
                 GroupedList(content: [GroupedListSection(
-                    heading: "currentMonthsItems".localized,
+                    heading: "recentActivityCurrentMonthItems".localized,
                     rows: rows,
                     footer: nil
                 )]

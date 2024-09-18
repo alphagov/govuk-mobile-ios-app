@@ -30,6 +30,6 @@ class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
     }
 
     private var formattedString: String {
-        "activityItemformattedDateStringComponent".localized
+        "recentActivityFormattedDateStringComponent".localized
     }
 }

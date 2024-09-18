@@ -26,7 +26,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
                 heading: "aboutTheAppHeading".localized,
                 rows: [
                     InformationRow(
-                        id: UUID().uuidString,
+                        id: "1",
                         title: "App version number",
                         body: nil,
                         detail: bundle.versionNumber ?? "-"
@@ -38,7 +38,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
                 heading: "privacyAndLegalHeading".localized,
                 rows: [
                     ToggleRow(
-                        id: UUID().uuidString,
+                        id: "2",
                         title: "appUsageTitle".localized,
                         isOn: hasAcceptedAnalytics,
                         action: { isOn in

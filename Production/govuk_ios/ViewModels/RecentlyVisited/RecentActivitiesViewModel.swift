@@ -7,8 +7,8 @@ class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
 
-    init(analyticsService: AnalyticsServiceInterface, URLOpener: URLOpener) {
-        self.URLOpener = URLOpener
+    init(analyticsService: AnalyticsServiceInterface, urlOpener: URLOpener) {
+        self.urlOpener = urlOpener
         self.analyticsService = analyticsService
     }
 
@@ -19,17 +19,17 @@ class RecentActivitiesViewModel: ObservableObject {
         item.date = Date()
         try? item.managedObjectContext?.save()
         guard let url = URL(string: item.url) else { return }
-        URLOpener.openIfPossible(url)
+        urlOpener.openIfPossible(url)
         trackRecentActivity(activity: item)
     }
 
-    func sortActivites(activities: any RandomAccessCollection) -> RecentActivitiesViewStructure {
+    func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
         var todaysActivities: [ActivityItem]  = []
         var currentMonthActivities: [ActivityItem]  = []
         var recentMonthsActivities: [ActivityItem] = []
         var recentMonthActivityDates: [String] = []
         let todaysDate = Date()
-        var recentActivities = Array(activities)
+        let recentActivities = Array(activities)
         for recentActivity in recentActivities {
             if DateHelper.checkDatesAreTheSame(dateOne: recentActivity.date,
                                                dateTwo: todaysDate) {
@@ -45,11 +45,12 @@ class RecentActivitiesViewModel: ObservableObject {
                 recentMonthsActivities.append(recentActivity)
             }
         }
+
         return RecentActivitiesViewStructure(
             todaysActivites: todaysActivities,
             currentMonthActivities: currentMonthActivities,
             recentMonthActivities: recentMonthsActivities,
-            recentMonthsActivityDates: DateHelper.removeDuplicates(
+            recentMonthsActivityDates: removeDuplicateRecentMonthStrings(
                 array: recentMonthActivityDates
             )
         )
@@ -63,5 +64,13 @@ class RecentActivitiesViewModel: ObservableObject {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
+    }
+
+    private func removeDuplicateRecentMonthStrings(array: [String]) -> [String] {
+        var uniqueElements: [String] = []
+        for item in array where !uniqueElements.contains(item) {
+            uniqueElements.append(item)
+        }
+        return uniqueElements
     }
 }

@@ -2,45 +2,23 @@ import Foundation
 
 protocol SearchServiceInterface {
     func search(_ term: String,
-                completion: @escaping (NetworkResult<SearchResult>) -> Void)
+                completion: @escaping (Result<SearchResult, SearchError>) -> Void)
 }
 
 class SearchService: SearchServiceInterface {
-    private let serviceClient: APIServiceClientInterface
+    private let serviceClient: SearchServiceClientInterface
 
-    init(serviceClient: APIServiceClientInterface) {
+    init(serviceClient: SearchServiceClientInterface) {
         self.serviceClient = serviceClient
     }
 
     func search(_ term: String,
-                completion: @escaping (NetworkResult<SearchResult>) -> Void) {
-        let searchRequest = GOVRequest(
-            urlPath: "/api/search.json",
-            method: .get,
-            bodyParameters: nil,
-            queryParameters: ["q": term, "count": "10"],
-            additionalHeaders: nil
-        )
-        serviceClient.send(
-            request: searchRequest,
+                completion: @escaping (Result<SearchResult, SearchError>) -> Void) {
+        serviceClient.search(
+            term: term,
             completion: { result in
-                let mappedResult: NetworkResult<SearchResult>
-                switch result {
-                case .failure:
-                    mappedResult = .failure(SearchError.apiUnavailable)
-                case .success(let data):
-                    do {
-                        let searchResult = try JSONDecoder().decode(
-                            SearchResult.self,
-                            from: data
-                        )
-                        mappedResult = .success(searchResult)
-                    } catch {
-                        mappedResult = .failure(SearchError.apiUnavailable)
-                    }
-                    DispatchQueue.main.async {
-                        completion(mappedResult)
-                    }
+                DispatchQueue.main.async {
+                    completion(result)
                 }
             }
         )

@@ -55,7 +55,7 @@ class SearchViewModel {
             text,
             completion: { [weak self] result in
                 self?.results = try? result.get().results
-                self?.error = result.getError() as? SearchError
+                self?.error = result.getError()
                 completion()
             }
         )

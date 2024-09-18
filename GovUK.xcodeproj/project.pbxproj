@@ -72,6 +72,10 @@
 		5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */; };
 		5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D08A8FF2C9AFABB0049D798 /* Result+Extensions.swift */; };
 		5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0B02022C81A7E90013A410 /* Onboarding */; };
+		5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */; };
+		5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */; };
+		5D0BD45E2C9B23EE00220625 /* MockSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD45C2C9B23DE00220625 /* MockSearchService.swift */; };
+		5D0BD45F2C9B244A00220625 /* MockSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD45C2C9B23DE00220625 /* MockSearchService.swift */; };
 		5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */; };
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
 		5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */; };
@@ -329,6 +333,9 @@
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		5D08A8FF2C9AFABB0049D798 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
+		5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClient.swift; sourceTree = "<group>"; };
+		5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
+		5D0BD45C2C9B23DE00220625 /* MockSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchService.swift; sourceTree = "<group>"; };
 		5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStore.swift; sourceTree = "<group>"; };
 		5D15A8E72C6A47770050C780 /* GOVRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GOVRequest.swift; sourceTree = "<group>"; };
 		5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ConvenienceTests.swift"; sourceTree = "<group>"; };
@@ -622,6 +629,14 @@
 			path = Swift;
 			sourceTree = "<group>";
 		};
+		5D0BD4572C9B1BA800220625 /* ServiceClients */ = {
+			isa = PBXGroup;
+			children = (
+				5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */,
+			);
+			path = ServiceClients;
+			sourceTree = "<group>";
+		};
 		5D1353A92BE0D75000414441 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -911,6 +926,7 @@
 			isa = PBXGroup;
 			children = (
 				5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */,
+				5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */,
 				5D6032182C81D68D00C46660 /* Locale+Analytics.swift */,
 				96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */,
 				D046511C2C933FE600F47C66 /* String+Extensions.swift */,
@@ -1144,6 +1160,7 @@
 				5D41DB672C087F850011E691 /* NetworkClients */,
 				5D41DB6A2C088CA30011E691 /* Repositories */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
+				5D0BD4572C9B1BA800220625 /* ServiceClients */,
 				5D41DB612C0875560011E691 /* Services */,
 				5DAD71A72BD254460075F648 /* SupportingFiles */,
 				9685F8292C78C01600C33614 /* SwiftUIViews */,
@@ -1283,6 +1300,7 @@
 			children = (
 				5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */,
 				160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */,
+				5D0BD45C2C9B23DE00220625 /* MockSearchService.swift */,
 				3DEC85AC2C89DBED0044D5F9 /* MockURLOpener.swift */,
 			);
 			path = Mocks;
@@ -1656,6 +1674,7 @@
 				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
 				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
 				16F9619F2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift in Sources */,
+				5D0BD45F2C9B244A00220625 /* MockSearchService.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
@@ -1735,12 +1754,14 @@
 				5DAD717C2BD250DB0075F648 /* TestViewController.swift in Sources */,
 				1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */,
 				5D9E67C42C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift in Sources */,
+				5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
 				4E6663CA2C737EF50063E81C /* Config.swift in Sources */,
 				4E5ED2052C6E1F8700750BDA /* AppConfigprovider.swift in Sources */,
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */,
 				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
+				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
@@ -1842,6 +1863,7 @@
 				5D349F632C6A5A9C00B7F747 /* APIServiceClientTests.swift in Sources */,
 				5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */,
 				5D37EA112C3E865F006B36CB /* DrivingCoordinatorTests.swift in Sources */,
+				5D0BD45E2C9B23EE00220625 /* MockSearchService.swift in Sources */,
 				5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */,
 				5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */,
 				16F9619D2C8899D4005CFB04 /* SearchCoordinatorTests.swift in Sources */,

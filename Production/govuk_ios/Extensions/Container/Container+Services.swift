@@ -29,7 +29,7 @@ extension Container {
     var searchService: Factory<SearchServiceInterface> {
         Factory(self) {
             SearchService(
-                serviceClient: self.govukAPIClient()
+                serviceClient: self.searchServiceClient()
             )
         }
     }

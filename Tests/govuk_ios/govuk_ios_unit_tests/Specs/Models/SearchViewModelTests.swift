@@ -4,14 +4,56 @@ import XCTest
 @testable import govuk_ios
 
 class SearchViewModelTests: XCTestCase {
-    func test_trackSearchTerm_tracksTerm() {
+    func test_selected_tracksItem() {
         let mockAnalyticsService = MockAnalyticsService()
-        let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
-        )
-        let searchText = "What is the meaning of life?"
 
-        subject.trackSearchTerm(searchTerm: searchText)
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService,
+            searchService: MockSearchService()
+        )
+        let searchText = "Passport for dogs"
+
+        let expectedTitle = UUID().uuidString
+        let expectedDescription = UUID().uuidString
+        let expectedLink = UUID().uuidString
+        let item = SearchItem(
+            title: expectedTitle,
+            description: expectedDescription,
+            link: expectedLink
+        )
+
+        subject.selected(
+            item: item
+        )
+
+        let events = mockAnalyticsService._trackedEvents
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(events.last?.name, "Search")
+        XCTAssertEqual(events.last?.params?["title"] as! String, expectedTitle)
+        XCTAssertEqual(events.last?.params?["link"] as! String, expectedLink)
+    }
+
+    func test_search_success_setsResults() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockService = MockSearchService()
+        let subject = SearchViewModel(
+            analyticsService: mockAnalyticsService,
+            searchService: mockService
+        )
+        let searchText = "Passport for dogs"
+        subject.search(
+            text: searchText,
+            completion: { }
+        )
+        let stubbedResponse = SearchResult(
+            results: [
+                .init(title: "", description: "", link: ""),
+                .init(title: "", description: "", link: "")
+            ]
+        )
+        mockService._searchReceivedCompletion?(.success(stubbedResponse))
+
+        XCTAssertEqual(subject.results?.count, stubbedResponse.results.count)
 
         let events = mockAnalyticsService._trackedEvents
         XCTAssertEqual(events.count, 1)
@@ -19,149 +61,67 @@ class SearchViewModelTests: XCTestCase {
         XCTAssertEqual(events.first?.params?["text"] as! String, searchText)
     }
 
-    func test_trackSearchItem_tracksItem() {
+    func test_search_blankSearch_returnsEarly() {
         let mockAnalyticsService = MockAnalyticsService()
-        let mockAPIServiceClient = MockAPIServiceClient()
-        mockAPIServiceClient._setNetworkRequestResponse = .success(JSONResponseData)
+        let mockServiceClient = MockSearchService()
         let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
-        )
-        let searchText = "Passport for dogs"
-
-        subject.govukAPIClient = mockAPIServiceClient
-        subject.fetchSearchResults(
-            searchText: searchText, completion: { }
-        )
-
-        let item = subject.searchResults?.last
-
-        subject.trackSearchItemPress(item!)
-
-        let events = mockAnalyticsService._trackedEvents
-        XCTAssertEqual(events.count, 1)
-        XCTAssertEqual(events.last?.name, "Search")
-        XCTAssertEqual(events.last?.params?["title"] as! String, "Driving abroad")
-        XCTAssertEqual(events.last?.params?["link"] as! String, "/driving-abroad")
-    }
-
-    func test_fetchSearchResults_returnsSearchItems() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let mockAPIServiceClient = MockAPIServiceClient()
-        mockAPIServiceClient._setNetworkRequestResponse = .success(JSONResponseData)
-        let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
-        )
-        let searchText = "Passport for dogs"
-
-        subject.govukAPIClient = mockAPIServiceClient
-
-        subject.fetchSearchResults(
-            searchText: searchText, completion: { }
-        )
-
-        XCTAssertEqual(subject.searchResults?.count, 2)
-    }
-
-    func test_fetchSearchResults_blankSearch_returnsEarly() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let mockAPIServiceClient = MockAPIServiceClient()
-        let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            searchService: mockServiceClient
         )
         let searchText = ""
 
         let sendExpectation = expectation()
         sendExpectation.isInverted = true
-        mockAPIServiceClient.sendExpectation = sendExpectation
-        subject.govukAPIClient = mockAPIServiceClient
 
-        subject.fetchSearchResults(
-            searchText: searchText, completion: { }
+        subject.search(
+            text: searchText,
+            completion: { }
         )
-        
+
         waitForExpectations(timeout: 0, handler: nil)
     }
 
-    func test_fetchSearchResults_noResults_updatesErrorState() {
+    func test_search_noResults_setsError() {
         let mockAnalyticsService = MockAnalyticsService()
-        let mockAPIServiceClient = MockAPIServiceClient()
-        mockAPIServiceClient._setNetworkRequestResponse = .success(emptyJSONResponseData)
+        let mockService = MockSearchService()
+
         let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            searchService: mockService
         )
         let searchText = "ASDLALSD"
 
-        subject.govukAPIClient = mockAPIServiceClient
-
-        subject.fetchSearchResults(
-            searchText: searchText, completion: { }
+        subject.search(
+            text: searchText,
+            completion: { }
         )
+        mockService._searchReceivedCompletion?(.failure(.noResults))
 
-        XCTAssertEqual(subject.searchResults?.count, 0)
-        XCTAssertEqual(subject.searchErrorState, .noResults)
+        XCTAssertNil(subject.results)
+        XCTAssertEqual(subject.error, .noResults)
     }
 
-    func test_fetchSearchResults_apiUnavailable_updatesErrorState() {
+    func test_search_apiUnavailable_updatesErrorState() {
         let mockAnalyticsService = MockAnalyticsService()
-        let mockAPIServiceClient = MockAPIServiceClient()
-        mockAPIServiceClient._setNetworkRequestResponse = .failure(
-            MockNetworkError.tooManyRequests
-        )
+        let mockService = MockSearchService()
+
         let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            searchService: mockService
         )
         let searchText = "ASDLALSD"
 
-        subject.govukAPIClient = mockAPIServiceClient
-
-        subject.fetchSearchResults(
-            searchText: searchText, completion: { }
+        subject.search(
+            text: searchText,
+            completion: { }
         )
+        mockService._searchReceivedCompletion?(.failure(.apiUnavailable))
 
-        XCTAssertEqual(subject.searchResults?.count, 0)
-        XCTAssertEqual(subject.searchErrorState, .apiUnavailable)
+        XCTAssertNil(subject.results)
+        XCTAssertEqual(subject.error, .apiUnavailable)
     }
 
-    func test_itemTitle_returnsTrimmedTitle() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let mockAPIServiceClient = MockAPIServiceClient()
-        mockAPIServiceClient._setNetworkRequestResponse = .success(JSONResponseData)
-        let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
-        )
-        let searchText = "Test"
-
-        subject.govukAPIClient = mockAPIServiceClient
-
-        subject.fetchSearchResults(
-            searchText: searchText, completion: { }
-        )
-
-        XCTAssertEqual(subject.itemTitle(0), "Something about passports")
-    }
-
-    func test_itemDescription_returnsTrimmedDescription() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let mockAPIServiceClient = MockAPIServiceClient()
-        mockAPIServiceClient._setNetworkRequestResponse = .success(JSONResponseData)
-        let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService
-        )
-        let searchText = "Test"
-
-        subject.govukAPIClient = mockAPIServiceClient
-
-        subject.fetchSearchResults(
-            searchText: searchText, completion: { }
-        )
-
-        XCTAssertEqual(
-            subject.itemDescription(0), 
-            "Something passporty must be taking place here"
-        )
-    }
-
-    private let JSONResponseData = """
+    private let successResponseData = """
     {"results": [
         {
             "title": " Something about passports ",

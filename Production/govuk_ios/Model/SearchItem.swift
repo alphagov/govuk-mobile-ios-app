@@ -1,5 +1,6 @@
-struct SearchItem: Decodable {
-    var title: String
-    var description: String
-    var link: String
+struct SearchItem: Decodable,
+                   Hashable {
+    let title: String
+    let description: String
+    let link: String
 }

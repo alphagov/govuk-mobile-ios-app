@@ -1,8 +1,12 @@
 import UIKit
 import UIComponents
 
+private typealias DataSource = UITableViewDiffableDataSource<SearchSection, SearchItem>
+private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
+
 class SearchViewController: BaseViewController,
-                            TrackableScreen {
+                            TrackableScreen,
+                            UITableViewDelegate {
     private let viewModel: SearchViewModel
     private let dismissAction: () -> Void
 
@@ -10,7 +14,6 @@ class SearchViewController: BaseViewController,
         let localView = SearchErrorView()
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.isHidden = true
-
         return localView
     }()
 
@@ -49,8 +52,25 @@ class SearchViewController: BaseViewController,
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.govUK.fills.surfaceModal
-
         return tableView
+    }()
+
+    private lazy var dataSource: DataSource = {
+        let localDataSource = DataSource(
+            tableView: tableView,
+            cellProvider: { tableView, indexPath, item in
+                // swiftlint:disable force_cast
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: SearchResultCell.identifier,
+                    for: indexPath
+                ) as! SearchResultCell
+                // swiftlint:enable force_cast
+                cell.configure(item: item)
+                return cell
+            }
+        )
+        localDataSource.defaultRowAnimation = .fade
+        return localDataSource
     }()
 
     var trackingName: String { "Search" }
@@ -69,12 +89,11 @@ class SearchViewController: BaseViewController,
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+        tableView.dataSource = dataSource
+        tableView.delegate = self
 
         if #available(iOS 15.0, *) {
-            let sheet = self.sheetPresentationController
-            sheet?.prefersGrabberVisible = true
+            sheetPresentationController?.prefersGrabberVisible = true
         }
 
         configureUI()
@@ -173,16 +192,15 @@ class SearchViewController: BaseViewController,
         viewModel.search(
             text: searchText,
             completion: { [weak self] in
-                self?.reloadSearchResults(
+                self?.reloadSnapshot()
+                self?.updateErrorView(
                     searchText: searchText
                 )
             }
         )
     }
 
-    private func reloadSearchResults(searchText: String?) {
-        tableView.reloadData()
-
+    private func updateErrorView(searchText: String?) {
         switch viewModel.error {
         case .networkUnavailable:
             errorView.configure(
@@ -209,35 +227,25 @@ class SearchViewController: BaseViewController,
             errorView.isHidden = true
         }
     }
-}
 
-extension SearchViewController: UITableViewDelegate,
-                                UITableViewDataSource {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
-        viewModel.results?.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: SearchResultCell.identifier, for: indexPath
-        ) as? SearchResultCell else {
-            fatalError("Unable to dequeue")
+    private func reloadSnapshot() {
+        var snapshot = Snapshot()
+        snapshot.deleteAllItems()
+        if let results = viewModel.results {
+            snapshot.appendSections([.results])
+            snapshot.appendItems(results, toSection: .results)
         }
-        let item = viewModel.results?[indexPath.row]
-
-        cell.configure(
-            item: item
-        )
-
-        return cell
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        guard let item = viewModel.results?[indexPath.row]
+        guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         viewModel.selected(item: item)
     }
+}
+
+enum SearchSection {
+    case results
 }

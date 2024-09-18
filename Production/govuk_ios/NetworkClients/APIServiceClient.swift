@@ -5,7 +5,8 @@ public typealias NetworkResultCompletion<T> = (NetworkResult<T>) -> Void
 
 protocol APIServiceClientInterface {
     func send(
-        request: GOVRequest, completion: @escaping NetworkResultCompletion<Data>
+        request: GOVRequest,
+        completion: @escaping NetworkResultCompletion<Data>
     )
 }
 

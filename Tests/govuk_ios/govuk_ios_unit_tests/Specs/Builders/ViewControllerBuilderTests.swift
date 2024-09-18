@@ -49,6 +49,7 @@ class ViewControllerBuilderTests: XCTestCase {
         let subject = ViewControllerBuilder()
         let result = subject.search(
             analyticsService: MockAnalyticsService(),
+            searchService: MockSearchService(),
             dismissAction: { }
         )
 

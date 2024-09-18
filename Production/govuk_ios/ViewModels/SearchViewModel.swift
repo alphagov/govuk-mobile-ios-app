@@ -1,24 +1,22 @@
 import UIKit
 
-enum SearchErrorState {
-    case apiUnavailable, noResults, networkUnavailable
+enum SearchError: Error {
+    case apiUnavailable
+    case noResults
+    case networkUnavailable
 }
 
 class SearchViewModel {
-    @Inject(\.govukAPIClient) var govukAPIClient: APIServiceClientInterface
+    private let searchService: SearchServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
 
-    let analyticsService: AnalyticsServiceInterface
-    var searchResults: [SearchItem]?
-    var searchErrorState: SearchErrorState?
+    private(set) var results: [SearchItem]?
+    private(set) var error: SearchError?
 
-    init(analyticsService: AnalyticsServiceInterface) {
+    init(analyticsService: AnalyticsServiceInterface,
+         searchService: SearchServiceInterface) {
         self.analyticsService = analyticsService
-    }
-
-    func trackSearchTerm(searchTerm: String) {
-        analyticsService.track(
-            event: AppEvent.searchTerm(term: searchTerm)
-        )
+        self.searchService = searchService
     }
 
     func trackSearchItemPress(_ item: SearchItem) {
@@ -27,54 +25,50 @@ class SearchViewModel {
         )
     }
 
-    func fetchSearchResults(searchText: String, completion: @escaping () -> Void) {
-        guard !searchText.isEmpty else { return }
+    func search(text: String?,
+                completion: @escaping () -> Void) {
+        error = nil
+        guard let text = text,
+              !text.isEmpty
+        else { return }
 
-        let searchRequest = GOVRequest(
-            urlPath: "/api/search.json",
-            method: .get,
-            bodyParameters: nil,
-            queryParameters: ["q": searchText, "count": "10"],
-            additionalHeaders: nil
-        )
-        govukAPIClient.send(
-            request: searchRequest,
+        trackSearchTerm(searchTerm: text)
+        searchService.search(
+            text,
             completion: { result in
-                switch result {
-                case .failure:
-                    self.searchResults = []
-                    self.searchErrorState = .apiUnavailable
-
-                    return completion()
-                case .success:
-                    let data = try? result.get()
-                    if data == nil {
-                        self.searchErrorState = .apiUnavailable
-                    }
-
-                    self.searchResults = try? JSONDecoder().decode(
-                        SearchResult.self, from: data ?? Data()
-                    ).results
-
-                    if self.searchResults?.count == 0 {
-                        self.searchErrorState = .noResults
-                    }
-
-                    return completion()
-                }
+                self.results = try? result.get().results
+                self.error = result.getError() as? SearchError
+                completion()
             }
         )
     }
 
+    private func trackSearchTerm(searchTerm: String) {
+        analyticsService.track(
+            event: AppEvent.searchTerm(term: searchTerm)
+        )
+    }
+
     func itemTitle(_ index: Int) -> String {
-        (searchResults?[index]
-            .title
-            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
+        ""
+//        (results?[index]
+//            .title
+//            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
     }
 
     func itemDescription(_ index: Int) -> String {
-        (searchResults?[index]
-            .description
-            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
+        ""
+//        (results?[index]
+//            .description
+//            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
+    }
+}
+
+extension Result {
+    func getError() -> Failure? {
+        if case .failure(let failure) = self {
+            return failure
+        }
+        return nil
     }
 }

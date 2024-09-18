@@ -201,6 +201,7 @@
 		5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */; };
 		5DC527BC2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */; };
 		5DD036852C5A577C00EEF11E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD036842C5A577C00EEF11E /* NavigationBar.swift */; };
+		5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD09EC72C9ADB8500494550 /* SearchService.swift */; };
 		5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */; };
 		5DD57A5B2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */; };
 		5DDCF62F2C874AB400A24947 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D6295292C87429000BBB394 /* GOV.xcdatamodeld */; };
@@ -448,6 +449,7 @@
 		5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationCenter.swift; sourceTree = "<group>"; };
 		5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataRepository+Arrangers.swift"; sourceTree = "<group>"; };
 		5DD036842C5A577C00EEF11E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		5DD09EC72C9ADB8500494550 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLOpenerTests.swift"; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -816,6 +818,7 @@
 				5D31237F2C85A6B70088B931 /* ActivityService.swift */,
 				5DC2506B2C91DB13009E9E7F /* Analytics */,
 				5DBE080D2C49233200B58DBE /* OnboardingService.swift */,
+				5DD09EC72C9ADB8500494550 /* SearchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1663,6 +1666,7 @@
 				16EE1A452C6F8ED3005E820F /* SearchCoordinator.swift in Sources */,
 				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
+				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
 				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
 				5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */,

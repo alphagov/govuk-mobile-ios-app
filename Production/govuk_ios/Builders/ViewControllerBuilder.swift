@@ -64,9 +64,11 @@ class ViewControllerBuilder {
     }
 
     func search(analyticsService: AnalyticsServiceInterface,
+                searchService: SearchServiceInterface,
                 dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = SearchViewModel(
-            analyticsService: analyticsService
+            analyticsService: analyticsService,
+            searchService: searchService
         )
         return SearchViewController(
             viewModel: viewModel,

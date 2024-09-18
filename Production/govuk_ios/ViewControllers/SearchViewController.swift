@@ -35,7 +35,7 @@ class SearchViewController: BaseViewController,
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
         localSearchBar.searchTextField.addTarget(
             self,
-            action: #selector(searchReturnTapped),
+            action: #selector(searchReturnPressed),
             for: UIControl.Event.editingDidEndOnExit
         )
 
@@ -172,46 +172,48 @@ class SearchViewController: BaseViewController,
     }
 
     @objc
-    private func searchReturnTapped() {
+    private func searchReturnPressed() {
         self.searchBar.resignFirstResponder()
 
-        let searchText = searchBar.text!
-        viewModel.trackSearchTerm(searchTerm: searchText)
-
-        viewModel.searchErrorState = .none
-        viewModel.fetchSearchResults(
-            searchText: searchText,
-            completion: {
-                self.tableView.reloadData()
-
-                switch self.viewModel.searchErrorState {
-                case .networkUnavailable:
-                    self.errorView.configure(
-                        title: "You’re offline",
-                        errorDesc: "Check your internet connection and try again"
-                    )
-
-                    self.errorView.isHidden = false
-                case .apiUnavailable:
-                    self.errorView.configure(
-                        title: "There’s a problem",
-                        errorDesc: """
-                        Search is not working. Try again later, or search on the GOV.UK website.
-                        """,
-                        linkText: "Go to the GOV.UK website",
-                        link: "https://www.gov.uk"
-                    )
-
-                    self.errorView.isHidden = false
-                case .noResults:
-                    self.errorView.configure(errorDesc: "No results for ’\(searchText)’")
-
-                    self.errorView.isHidden = false
-                case .none:
-                    self.errorView.isHidden = true
-                }
+        let searchText = searchBar.text
+        viewModel.search(
+            text: searchText,
+            completion: { [weak self] in
+                self?.reloadSearchResults(
+                    searchText: searchText
+                )
             }
         )
+    }
+
+    private func reloadSearchResults(searchText: String?) {
+        tableView.reloadData()
+
+        switch viewModel.error {
+        case .networkUnavailable:
+            errorView.configure(
+                title: "You’re offline",
+                errorDesc: "Check your internet connection and try again"
+            )
+
+            errorView.isHidden = false
+        case .apiUnavailable:
+            errorView.configure(
+                title: "There’s a problem",
+                errorDesc: """
+                        Search is not working. Try again later, or search on the GOV.UK website.
+                        """,
+                linkText: "Go to the GOV.UK website",
+                link: "https://www.gov.uk"
+            )
+            errorView.isHidden = false
+        case .noResults:
+            errorView.configure(errorDesc: "No results for ’\(searchText ?? "")’")
+
+            errorView.isHidden = false
+        case .none:
+            errorView.isHidden = true
+        }
     }
 }
 
@@ -219,7 +221,7 @@ extension SearchViewController: UITableViewDelegate,
                                 UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return viewModel.searchResults?.count ?? 0
+        viewModel.results?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView,
@@ -229,13 +231,11 @@ extension SearchViewController: UITableViewDelegate,
         ) as? SearchResultCell else {
             fatalError("Unable to dequeue")
         }
-
-        guard viewModel.searchResults != nil
-        else { return cell }
+        let item = viewModel.results?[indexPath.row]
 
         cell.configure(
-            title: viewModel.itemTitle(indexPath.row),
-            description: viewModel.itemDescription(indexPath.row)
+            title: item?.title ?? "",
+            description: item?.description ?? ""
         )
 
         return cell
@@ -243,10 +243,8 @@ extension SearchViewController: UITableViewDelegate,
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        guard let searchResults = viewModel.searchResults
+        guard let item = viewModel.results?[indexPath.row]
         else { return }
-
-        let item = searchResults[indexPath.row]
 
         viewModel.trackSearchItemPress(item)
 

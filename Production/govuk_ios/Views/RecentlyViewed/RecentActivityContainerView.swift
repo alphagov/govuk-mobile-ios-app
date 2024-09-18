@@ -2,20 +2,14 @@ import SwiftUI
 import UIComponents
 
 struct RecentActivityContainerView: View, TrackableScreen {
-    var trackingTitle: String? { "Pages you've visited" }
-    var trackingName: String { "Pages you've visited" }
-    var trackingClass: String {
-        String(
-            describing: type(of: self)
-        )
-    }
-
     @StateObject private var viewModel: RecentActivitiesViewModel
     @FetchRequest(fetchRequest: ActivityItem.all()) private var recentItems
+
     init(viewModel: RecentActivitiesViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
         viewModel.trackScreen(screen: self)
     }
+
     var body: some View {
         VStack {
             switch recentItems.count {
@@ -41,5 +35,15 @@ struct RecentActivityContainerView: View, TrackableScreen {
         }.onAppear {
             viewModel.trackScreen(screen: self)
         }
+    }
+}
+
+extension RecentActivityContainerView {
+    var trackingTitle: String? { "Pages you've visited" }
+    var trackingName: String { "Pages you've visited" }
+    var trackingClass: String {
+        String(
+            describing: type(of: self)
+        )
     }
 }

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct GroupedListSection {
     let heading: String?
@@ -39,8 +40,29 @@ struct InformationRow: GroupedListRow, Identifiable {
     let detail: String
 }
 
-#if DEBUG
-extension GroupedListSection {
+class ToggleRow: GroupedListRow, ObservableObject {
+    var id: String
+    let title: String
+    @Published var isOn: Bool {
+        didSet {
+            self.action(isOn)
+        }
+    }
+    let action: ((Bool) -> Void)
+
+    init(id: String, title: String, isOn: Bool, action: @escaping (Bool) -> Void) {
+        self.title = title
+        self.isOn = isOn
+        self.action = action
+        self.id = id
+    }
+}
+
+struct GroupedListSection_Previews: PreviewProvider {
+    static var previews: some View {
+        Text("preview")
+    }
+
     static var previewContent: [GroupedListSection] {
         [
             .init(
@@ -66,6 +88,14 @@ extension GroupedListSection {
                         body: "Description",
                         action: {
                             print("nav row tapped")
+                        }
+                    ),
+                    ToggleRow(
+                        id: UUID().uuidString,
+                        title: "Toggle",
+                        isOn: false,
+                        action: { isOn in
+                            print("Toggled: \(isOn)")
                         }
                     )
                 ],
@@ -114,4 +144,3 @@ extension GroupedListSection {
         ]
     }
 }
-#endif

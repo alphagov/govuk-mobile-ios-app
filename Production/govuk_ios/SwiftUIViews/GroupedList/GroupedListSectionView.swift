@@ -56,6 +56,6 @@ struct GroupedListSectionView: View {
 #Preview {
     ZStack {
         Color(UIColor.govUK.Fills.surfaceBackground)
-        GroupedListSectionView(section: GroupedListSection.previewContent.first!)
+        GroupedListSectionView(section: GroupedListSection_Previews.previewContent.first!)
     }
 }

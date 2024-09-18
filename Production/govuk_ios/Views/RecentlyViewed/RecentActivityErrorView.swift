@@ -3,17 +3,12 @@ import SwiftUI
 struct RecentActivityErrorView: View {
     var body: some View {
         VStack {
-            Text(NSLocalizedString(
-                "errorViewTitle",
-                bundle: .main,
-                comment: "")).bold()
+            Text("recentActivityErrorViewTitle".localized)
+                .bold()
                 .multilineTextAlignment(.center)
                 .padding(.top)
-            Text(NSLocalizedString(
-                "errorViewDescription",
-                bundle: .main,
-                comment: ""))
-            .multilineTextAlignment(.center)
+            Text("recentActivityErrorViewDescription".localized)
+                .multilineTextAlignment(.center)
             Spacer()
         }.padding(.top)
     }

@@ -6,7 +6,7 @@ struct HomeViewModel {
 
     let configService: AppConfigServiceInterface
     let searchButtonPrimaryAction: (() -> Void)?
-    let recentActivityPrimaryAction: (() -> Void)?
+    let recentActivityAction: (() -> Void)?
     var widgets: [WidgetView] {
         [
             searchWidget,
@@ -14,14 +14,15 @@ struct HomeViewModel {
         ].compactMap { $0 }
     }
     private var recentlyViewedWidget: WidgetView? {
-        let title = NSLocalizedString(
-            "recentActivityWidgetLabel",
-            bundle: .main,
-            comment: "")
-        let viewModel = WidgetViewModel(title: title,
-                                        primaryAction: recentActivityPrimaryAction)
+        let title = "recentActivityWidgetLabel".localized
+
+        let viewModel = WidgetViewModel(
+            title: title,
+            primaryAction: recentActivityAction
+        )
         let content = RecentActivtyWidgetStackView(
-            viewModel: viewModel)
+            viewModel: viewModel
+        )
         let widget = WidgetView()
         widget.addContent(content)
         return widget
@@ -32,10 +33,8 @@ struct HomeViewModel {
         else { return nil }
 
 
-        let title = NSLocalizedString(
-            "homeSearchWidgetTitle",
-            comment: ""
-        )
+        let title = "homeSearchWidgetTitle".localized
+
         let viewModel = WidgetViewModel(
             title: title,
             primaryAction: searchButtonPrimaryAction

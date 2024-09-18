@@ -9,10 +9,6 @@ class Configuration
     @yaml = YAML.load_file(yaml, aliases: true)[lane]
   end
 
-  def build_number
-    ENV['BUILD_NUMBER'] || '1'
-  end
-
   def app_scheme
     setting(:app, :scheme)
   end
@@ -37,6 +33,26 @@ class Configuration
     setting(:app, :bundle_identifier)
   end
 
+  def app_args
+    [
+      '-allowProvisioningUpdates'
+    ].join(' ')
+  end
+
+  def app_configuration
+    'Release'
+  end
+
+  def app_export_method
+    'app-store'
+  end
+
+  def app_export_options
+    {
+      provisioningProfiles: app_profile_specifiers
+    }
+  end
+
   def scan_devices
     setting(:scan, :devices)
   end
@@ -57,9 +73,25 @@ class Configuration
     ENV['APP_STORE_KEY_CONTENT']
   end
 
+  def match_method
+    setting(:match, :method)
+  end
+
+  def match_identifiers
+    app_bundle_identifier
+  end
+
+  def match_certificate_token
+    ENV['MATCH_CERTIFICATE_TOKEN']
+  end
+
   private
 
   attr_reader :lane_name, :yaml
+
+  def app_profile_specifiers
+    setting(:app, :profile_specifiers)
+  end
 
   def setting(prefix, key)
     yaml[prefix.to_s][key.to_s]

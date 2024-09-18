@@ -1,5 +1,3 @@
-//
-
 import Foundation
 import UIKit
 
@@ -16,7 +14,7 @@ class RecentActivtyWidgetStackView: UIStackView {
     }()
 
     private lazy var icon: UIImageView = {
-        let image = UIKit.UIImage(named: "card-icon-set")
+        let image = UIImage(named: "card-icon-set")
         let imageView = UIImageView(image: image)
         return imageView
     }()
@@ -24,7 +22,7 @@ class RecentActivtyWidgetStackView: UIStackView {
     private lazy var recentActivityButton: UIButton = {
         let button = UIButton()
         button.tintColor = .blue
-        let image = UIKit.UIImage(named: "chevron")
+        let image = UIImage(named: "chevron")
         button.setImage(image, for: .normal)
         button.addTarget(
             self,
@@ -35,11 +33,11 @@ class RecentActivtyWidgetStackView: UIStackView {
     }()
 
     private lazy var buttonStackView = {
-         var stackView = UIStackView()
-         stackView.translatesAutoresizingMaskIntoConstraints = false
-         stackView.axis = .horizontal
-         return stackView
-     }()
+        var stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
 
     init(viewModel: WidgetViewModel) {
         self.viewModel = viewModel
@@ -71,4 +69,5 @@ class RecentActivtyWidgetStackView: UIStackView {
     @objc
     private func recentActivityButtonPressed() {
         viewModel.primaryAction?()
-    }}
+    }
+}

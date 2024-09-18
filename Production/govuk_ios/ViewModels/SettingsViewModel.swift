@@ -1,38 +1,78 @@
 import UIKit
 
-protocol SettingsViewModelProtocol {
+protocol SettingsViewModelInterface {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
 }
 
-struct SettingsViewModel: SettingsViewModelProtocol {
-    var title: String = "Settings"
-    var appVersion: String? {
-        getVersionNumber()
+struct SettingsViewModel: SettingsViewModelInterface {
+    let title: String = "settingsTitle".localized
+    let analyticsService: AnalyticsServiceInterface
+    let urlOpener: URLOpener
+    let bundle: Bundle
+
+    private var hasAcceptedAnalytics: Bool {
+        switch analyticsService.permissionState {
+        case .denied, .unknown:
+            return false
+        case .accepted:
+            return true
+        }
     }
 
     var listContent: [GroupedListSection] {
         [
             .init(
-                heading: "About the app",
+                heading: "aboutTheAppHeading".localized,
                 rows: [
                     InformationRow(
                         id: UUID().uuidString,
                         title: "App version number",
                         body: nil,
-                        detail: appVersion ?? "-"
+                        detail: bundle.versionNumber ?? "-"
                     )
+                ],
+                footer: nil
+            ),
+            .init(
+                heading: "privacyAndLegalHeading".localized,
+                rows: [
+                    ToggleRow(
+                        id: UUID().uuidString,
+                        title: "appUsageTitle".localized,
+                        isOn: hasAcceptedAnalytics,
+                        action: { isOn in
+                            analyticsService.setAcceptedAnalytics(accepted: isOn)
+                        }
+                    )
+                ],
+                footer: nil
+            ),
+            .init(
+                heading: nil,
+                rows: [
+                    openSourceLicenseRow()
                 ],
                 footer: nil
             )
         ]
     }
-}
 
-extension SettingsViewModel {
-    private func getVersionNumber() -> String? {
-        let dict = Bundle.main.infoDictionary
-        let versionString = dict?["CFBundleShortVersionString"] as? String
-        return versionString
+    private func openSourceLicenseRow() -> GroupedListRow {
+        let rowTitle = "settingsOpenSourceLicenseTitle".localized
+        return LinkRow(
+            id: UUID().uuidString,
+            title: rowTitle,
+            body: nil,
+            action: {
+                if urlOpener.openSettings() {
+                    let event = AppEvent.buttonNavigation(
+                        text: rowTitle,
+                        external: true
+                    )
+                    analyticsService.track(event: event)
+                }
+            }
+        )
     }
 }

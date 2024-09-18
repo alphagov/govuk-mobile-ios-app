@@ -7,7 +7,8 @@ class HomeViewModelTests: XCTestCase {
     func test_widgets_returnsArrayOfWidgets() {
         let subject = HomeViewModel(
             configService: MockAppConfigService(), 
-            searchButtonPrimaryAction: { }
+            searchButtonPrimaryAction: { },
+            recentActivityAction: {}
         )
         let widgets = subject.widgets
 
@@ -21,7 +22,8 @@ class HomeViewModelTests: XCTestCase {
 
         let subject = HomeViewModel(
             configService: configService,
-            searchButtonPrimaryAction: { }
+            searchButtonPrimaryAction: { },
+            recentActivityAction: {}
         )
         let widgets = subject.widgets
 

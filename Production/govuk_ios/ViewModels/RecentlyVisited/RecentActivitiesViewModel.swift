@@ -5,40 +5,31 @@ import UIKit
 
 class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
+    private let urlOpener: URLOpener
 
-    init(analyticsService: AnalyticsServiceInterface) {
+    init(analyticsService: AnalyticsServiceInterface, URLOpener: URLOpener) {
+        self.URLOpener = URLOpener
         self.analyticsService = analyticsService
     }
 
-    let navigationTitle = NSLocalizedString(
-        "recentActivityNavigationTitleLabel",
-        bundle: .main,
-        comment: ""
-    )
-    let toolbarTitle = NSLocalizedString(
-        "editButtonTitle",
-        bundle: .main,
-        comment: ""
-    )
+    let navigationTitle = "recentActivityNavigationTitleLabel".localized
+    let toolbarTitle = "editButtonTitle".localized
 
     func itemSelected(item: ActivityItem) {
         item.date = Date()
-        do {
-            try item.managedObjectContext?.save()
-        } catch { }
+        try? item.managedObjectContext?.save()
         guard let url = URL(string: item.url) else { return }
-        UIApplication.shared.open(url)
+        URLOpener.openIfPossible(url)
         trackRecentActivity(activity: item)
     }
 
-    func sortActivites(activities: FetchedResults<ActivityItem>) -> RecentActivitiesViewStructure {
+    func sortActivites(activities: any RandomAccessCollection) -> RecentActivitiesViewStructure {
         var todaysActivities: [ActivityItem]  = []
         var currentMonthActivities: [ActivityItem]  = []
         var recentMonthsActivities: [ActivityItem] = []
         var recentMonthActivityDates: [String] = []
         let todaysDate = Date()
-        var recentActivities: [ActivityItem] = activities.map { $0 }
-        DateHelper.sortDate(dates: &recentActivities)
+        var recentActivities = Array(activities)
         for recentActivity in recentActivities {
             if DateHelper.checkDatesAreTheSame(dateOne: recentActivity.date,
                                                dateTwo: todaysDate) {
@@ -59,7 +50,9 @@ class RecentActivitiesViewModel: ObservableObject {
             currentMonthActivities: currentMonthActivities,
             recentMonthActivities: recentMonthsActivities,
             recentMonthsActivityDates: DateHelper.removeDuplicates(
-                array: recentMonthActivityDates))
+                array: recentMonthActivityDates
+            )
+        )
     }
 
     func trackRecentActivity(activity: ActivityItem) {

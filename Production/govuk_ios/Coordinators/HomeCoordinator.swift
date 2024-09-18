@@ -28,7 +28,7 @@ class HomeCoordinator: TabItemCoordinator {
         let viewController = viewControllerBuilder.home(
             searchButtonPrimaryAction: searchActionButtonPressed,
             configService: configService,
-            recentActivityPrimaryAction: recentActivityActionButtonPressed
+            recentActivityAction: recentActivityCoordinator
         )
         set([viewController], animated: false)
     }
@@ -45,12 +45,15 @@ class HomeCoordinator: TabItemCoordinator {
             guard let strongSelf = self else { return }
             let navigationController = UINavigationController()
             let coordinator = strongSelf.coordinatorBuilder.search(
-                navigationController: navigationController
+                navigationController: navigationController,
+                didDismissAction: {
+                    self?.root.viewWillReAppear()
+                }
             )
             strongSelf.present(coordinator)
         }
     }
-    private var recentActivityActionButtonPressed: () -> Void {
+    private var recentActivityCoordinator: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
             navigationController.setNavigationBarHidden(false, animated: false)

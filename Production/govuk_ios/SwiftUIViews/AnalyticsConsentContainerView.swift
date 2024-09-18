@@ -11,23 +11,22 @@ struct AnalyticsConsentContainerView: View {
 
     var body: some View {
         VStack {
-            Text(viewModel.title)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(Font.govUK.title1)
-                .multilineTextAlignment(.leading)
-                .accessibilityAddTraits(.isHeader)
-                .accessibilityLabel(Text(viewModel.title))
-                .padding(.top, verticalSizeClass == .compact ? 32 : 46)
-                .padding(.horizontal, 16)
             ScrollView {
+                Text(viewModel.title)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .font(Font.govUK.title1)
+                    .multilineTextAlignment(.leading)
+                    .accessibilityAddTraits(.isHeader)
+                    .accessibilityLabel(Text(viewModel.title))
                 Text(viewModel.descriptionTop)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                     .font(Font.govUK.subheadline)
                     .multilineTextAlignment(.leading)
                     .accessibilityLabel(Text(viewModel.descriptionTop))
+                    .padding(.top, verticalSizeClass == .compact ? 16 : 24)
                 Text(viewModel.descriptionBullets)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -48,26 +47,28 @@ struct AnalyticsConsentContainerView: View {
                     .foregroundColor(Color(UIColor.govUK.text.link))
                     .font(Font.govUK.subheadline)
                     .multilineTextAlignment(.leading)
-                    .accessibilityLabel(Text(viewModel.privacyPolicyLinkTitle))
+                    .accessibilityLabel(Text(viewModel.privacyPolicyLinkAccessibilityTitle))
                     .accessibilityHint(Text(viewModel.privacyPolicyLinkHint))
+                    .accessibilityAddTraits(.isLink)
                     .padding(.top, 16)
                     .onTapGesture {
                         viewModel.openPrivacyPolicy()
                     }
-            }.padding(.top, verticalSizeClass == .compact ? 16 : 24)
+            }.padding(.top, verticalSizeClass == .compact ? 32 : 46)
             .padding(.horizontal, 16)
+            .accessibilityValue(" ")
             Spacer()
             AdaptiveStack {
                 SwiftUIButton(
                     .primary,
                     viewModel: viewModel.allowButtonViewModel
-                ).accessibility(sortPriority: 1)
+                )
                 .frame(minHeight: 44, idealHeight: 44)
                 .padding(.horizontal, 15)
                 SwiftUIButton(
                     .secondary,
                     viewModel: viewModel.dontAllowButtonViewModel
-                ).accessibility(sortPriority: 1)
+                )
                 .frame(minHeight: 44, idealHeight: 44)
                 .padding(.horizontal, 15)
             }.padding(.top, 16)

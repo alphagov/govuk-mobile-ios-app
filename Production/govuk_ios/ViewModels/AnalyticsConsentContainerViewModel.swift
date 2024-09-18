@@ -4,7 +4,7 @@ import UIKit
 
 class AnalyticsConsentContainerViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface?
-    private let urlOpener: URLOpening
+    private let urlOpener: URLOpener
     private let dismissAction: () -> Void
 
     let title = NSLocalizedString("analyticsConsentTitle", comment: "")
@@ -12,8 +12,10 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     let descriptionBullets = NSLocalizedString("analyticsConsentDescriptionBullets", comment: "")
     let descriptionBottom = NSLocalizedString("analyticsConsentDescriptionBottom", comment: "")
     let privacyPolicyLinkTitle = NSLocalizedString("privacyPolicyLinkTitle", comment: "")
+    let privacyPolicyLinkAccessibilityTitle =
+    NSLocalizedString("privacyPolicyLinkAccessibilityTitle", comment: "")
     let privacyPolicyLinkHint = NSLocalizedString("privacyPolicyLinkHint", comment: "")
-    let privacyPolicyLinkUrl = NSLocalizedString("privacyPolicyLinkUrl", comment: "")
+    let privacyPolicyLinkUrl = Constants.API.privacyPolicyUrl
     let allowButtonTitle = NSLocalizedString("allowAnalyticsButtonTitle", comment: "")
     let dontAllowButtonTitle = NSLocalizedString("dontAllowAnalyticsButtonTitle", comment: "")
 
@@ -38,7 +40,7 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     }
 
     init(analyticsService: AnalyticsServiceInterface?,
-         urlOpener: URLOpening = UIApplication.shared,
+         urlOpener: URLOpener = UIApplication.shared,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
@@ -46,10 +48,7 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     }
 
     func openPrivacyPolicy() {
-        guard let url = URL(string: privacyPolicyLinkUrl) else { return }
-        if urlOpener.canOpenURL(url) {
-            urlOpener.open(url, options: [:], completionHandler: nil)
-        }
+        urlOpener.openIfPossible(privacyPolicyLinkUrl)
     }
 
     private func finishAnalyticsConsent() {

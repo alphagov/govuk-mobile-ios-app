@@ -21,9 +21,8 @@ class DateHelper {
     }
 
     static func checkDatesAreTheSame(dateOne: Date, dateTwo: Date) -> Bool {
-        let date1 = returnCalanderComponent(date: dateOne)
-        let date2 = returnCalanderComponent(date: dateTwo)
-        return date1 == date2
+       return Calendar.current.isDate(dateOne, equalTo: dateTwo,
+                                      toGranularity: Calendar.Component.day)
     }
 
     static func checkEqualityOfMonthAndYear(dateOne: Date, dateTwo: Date) -> Bool {
@@ -39,9 +38,7 @@ class DateHelper {
     }
 
     static func sortDate(dates: inout [ActivityItem]) {
-        dates = dates.sorted(by: { dateOne, dateTwo in
-                dateOne.date > dateTwo.date
-        })
+         dates.sort {$0.date > $1.date}
     }
 
     static func convertDateStringToDate(dateString: String) -> Date {

@@ -11,28 +11,25 @@ struct RecentActivityView: View {
         self.model = model
         self.selected = selected
     }
+
     var body: some View {
         ScrollView {
             if model.todaysActivites.count >= 1 {
                 let rows = model.todaysActivites.map({ activityRow(activityItem: $0) })
                 GroupedList(content: [GroupedListSection(
-                    heading: NSLocalizedString(
-                        "todaysActivitiesListTitle",
-                        bundle: .main,
-                        comment: ""),
+                    heading: "todaysActivitiesListTitle".localized,
                     rows: rows,
-                    footer: nil)]
+                    footer: nil
+                )]
                 )
             }
             if model.currentMonthActivities.count >= 1 {
                 let rows = model.currentMonthActivities.map({ activityRow(activityItem: $0) })
                 GroupedList(content: [GroupedListSection(
-                    heading: NSLocalizedString(
-                    "currentMonthsItems",
-                    bundle: .main,
-                    comment: ""),
+                    heading: "currentMonthsItems".localized,
                     rows: rows,
-                    footer: nil)]
+                    footer: nil
+                )]
                 )
             }
             if model.recentMonthActivities.count >= 1 {
@@ -56,12 +53,17 @@ struct RecentActivityView: View {
         var groupedSections: [GroupedListSection] = []
         for dateString in model.recentMonthsActivityDates {
             let filteredArray = model.recentMonthActivities.filter { item in
-                DateHelper.getMonthAndYear(date: item.date) == dateString }
-            let rows = filteredArray.map({ activityRow(activityItem: $0) })
-            groupedSections.append(GroupedListSection(
-                heading: dateString,
-                rows: rows,
-                footer: nil))
+                DateHelper.getMonthAndYear(
+                    date: item.date) == dateString
+            }
+            let rows = filteredArray.map(
+                { activityRow(activityItem: $0) }
+            )
+            let groupSection = GroupedListSection(heading: dateString,
+                                                  rows: rows,
+                                                  footer: nil
+            )
+            groupedSections.append(groupSection)
         }
         return groupedSections
     }

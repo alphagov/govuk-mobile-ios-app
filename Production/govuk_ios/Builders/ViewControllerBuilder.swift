@@ -45,36 +45,44 @@ class ViewControllerBuilder {
 
     func home(searchButtonPrimaryAction: @escaping () -> Void,
               configService: AppConfigServiceInterface,
-              recentActivityPrimaryAction: @escaping () -> Void) -> UIViewController {
+              recentActivityAction: @escaping () -> Void) -> UIViewController {
         let viewModel = HomeViewModel(
             configService: configService,
             searchButtonPrimaryAction: searchButtonPrimaryAction,
-            recentActivityPrimaryAction: recentActivityPrimaryAction
+            recentActivityAction: recentActivityAction
         )
         return HomeViewController(
             viewModel: viewModel
         )
     }
 
-    func settings() -> UIViewController {
-        let viewModel = SettingsViewModel()
+    func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+        let viewModel = SettingsViewModel(
+            analyticsService: analyticsService,
+            urlOpener: UIApplication.shared,
+            bundle: .main
+        )
         return SettingsViewController(
             viewModel: viewModel
         )
     }
 
-    func search(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+    func search(analyticsService: AnalyticsServiceInterface,
+                dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = SearchViewModel(
             analyticsService: analyticsService
         )
         return SearchViewController(
-            viewModel: viewModel
+            viewModel: viewModel,
+            dismissAction: dismissAction
         )
     }
 
-    func  recentActivty(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+    func recentActivty(analyticsService: AnalyticsServiceInterface) -> UIViewController {
         let viewModel = RecentActivitiesViewModel(
-            analyticsService: analyticsService)
+            analyticsService: analyticsService,
+            URLOpener: UIApplication.shared
+        )
         let context = Container.shared.coreDataRepository.resolve()
             .viewContext
         let view = RecentActivityContainerView(viewModel: viewModel)

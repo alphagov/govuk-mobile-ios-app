@@ -9,8 +9,9 @@ class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
 
     static func all() -> NSFetchRequest<ActivityItem> {
         let request: NSFetchRequest<ActivityItem> = fetchRequest
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \ActivityItem.title,
-                                                    ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(
+            keyPath: \ActivityItem.date,
+            ascending: false)]
         return request
     }
 
@@ -29,8 +30,6 @@ class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
     }
 
     private var formattedString: String {
-        NSLocalizedString(
-            "formattedDateStringComponent",
-            bundle: .main,
-            comment: "")
-    }}
+        "activityItemformattedDateStringComponent".localized
+    }
+}

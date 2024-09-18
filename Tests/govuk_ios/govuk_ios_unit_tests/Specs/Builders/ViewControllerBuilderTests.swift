@@ -38,7 +38,9 @@ class ViewControllerBuilderTests: XCTestCase {
 
     func test_settings_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.settings()
+        let result = subject.settings(
+            analyticsService: MockAnalyticsService()
+        )
 
         XCTAssert(result is SettingsViewController)
     }
@@ -46,7 +48,8 @@ class ViewControllerBuilderTests: XCTestCase {
     func test_search_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.search(
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            dismissAction: { }
         )
 
         XCTAssert(result is SearchViewController)

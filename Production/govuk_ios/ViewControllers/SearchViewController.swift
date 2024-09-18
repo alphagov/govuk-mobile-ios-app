@@ -17,10 +17,7 @@ class SearchViewController: BaseViewController,
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
 
-        let placeholderText = NSLocalizedString(
-            "searchBarPlaceholder",
-            comment: ""
-        )
+        let placeholderText = String.search.localized("searchBarPlaceholder")
         localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceSearchBox
         localSearchBar.enablesReturnKeyAutomatically = false
         localSearchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -96,10 +93,7 @@ class SearchViewController: BaseViewController,
     }
 
     private func configureUI() {
-        title = NSLocalizedString(
-            "searchModalTitle",
-            comment: ""
-        )
+        title = String.search.localized("pageTitle")
         view.backgroundColor = GOVUKColors.fills.surfaceModal
         view.addSubview(searchBar)
         view.addSubview(errorView)

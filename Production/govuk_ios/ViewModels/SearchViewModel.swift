@@ -19,7 +19,25 @@ class SearchViewModel {
         self.searchService = searchService
     }
 
-    func trackSearchItemPress(_ item: SearchItem) {
+    func selected(item: SearchItem) {
+        trackSearchItemSelection(item)
+        openLink(item: item)
+    }
+
+    private func openLink(item: SearchItem) {
+        var components = URLComponents(string: item.link)
+        let scheme = components?.scheme
+        components?.scheme = scheme ?? "https"
+        let host = components?.host
+        components?.host = host ?? "www.gov.uk"
+
+        guard let url = components?.url
+        else { return }
+
+        UIApplication.shared.open(url)
+    }
+
+    private func trackSearchItemSelection(_ item: SearchItem) {
         analyticsService.track(
             event: AppEvent.searchItem(item: item)
         )
@@ -35,9 +53,9 @@ class SearchViewModel {
         trackSearchTerm(searchTerm: text)
         searchService.search(
             text,
-            completion: { result in
-                self.results = try? result.get().results
-                self.error = result.getError() as? SearchError
+            completion: { [weak self] result in
+                self?.results = try? result.get().results
+                self?.error = result.getError() as? SearchError
                 completion()
             }
         )
@@ -47,28 +65,5 @@ class SearchViewModel {
         analyticsService.track(
             event: AppEvent.searchTerm(term: searchTerm)
         )
-    }
-
-    func itemTitle(_ index: Int) -> String {
-        ""
-//        (results?[index]
-//            .title
-//            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
-    }
-
-    func itemDescription(_ index: Int) -> String {
-        ""
-//        (results?[index]
-//            .description
-//            .trimmingCharacters(in: .whitespacesAndNewlines)) ?? ""
-    }
-}
-
-extension Result {
-    func getError() -> Failure? {
-        if case .failure(let failure) = self {
-            return failure
-        }
-        return nil
     }
 }

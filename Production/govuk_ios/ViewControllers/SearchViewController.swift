@@ -234,8 +234,7 @@ extension SearchViewController: UITableViewDelegate,
         let item = viewModel.results?[indexPath.row]
 
         cell.configure(
-            title: item?.title ?? "",
-            description: item?.description ?? ""
+            item: item
         )
 
         return cell
@@ -245,16 +244,6 @@ extension SearchViewController: UITableViewDelegate,
                    didSelectRowAt indexPath: IndexPath) {
         guard let item = viewModel.results?[indexPath.row]
         else { return }
-
-        viewModel.trackSearchItemPress(item)
-
-        let url = URLComponents(string: item.link)
-        guard url?.host != nil
-        else {
-            let govukURL = "https://www.gov.uk\(item.link)"
-            return UIApplication.shared.open(URL(string: govukURL)!)
-        }
-
-        UIApplication.shared.open(URL(string: item.link)!)
+        viewModel.selected(item: item)
     }
 }

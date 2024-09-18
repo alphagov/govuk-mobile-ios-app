@@ -62,9 +62,10 @@ class SearchResultCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(title: String, description: String) {
-        self.title.text = title
-        self.resultDescription.text = description
+    func configure(item: SearchItem?) {
+        self.title.text = item?.title
+        let trimmedDescription = item?.description.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.resultDescription.text = trimmedDescription
     }
 
     private func setupUI() {

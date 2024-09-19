@@ -6,7 +6,6 @@ import XCTest
 final class RecentActivitiesViewModelTests: XCTestCase {
 
     func test_sortActivities_whenActivitiesDateEqualsToday_populatesTodaysActivitesList() throws {
-
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -45,7 +44,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         XCTAssertEqual(structure.currentMonthActivities.count, 0)
     }
 
-    func test_sortItems_whenActivitesDateEqualsCurrentMomth_currentMonthsListIsPopulated() throws {
+    func test_sortItems_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
         let sut = RecentActivitiesViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
@@ -89,7 +88,6 @@ final class RecentActivitiesViewModelTests: XCTestCase {
     }
 
     func test_sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
-
         let sut = RecentActivitiesViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
@@ -133,20 +131,6 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         XCTAssertEqual(structure.currentMonthActivities.count, 0)
     }
 
-    private func getRandomDateFromCurrentMonth() -> Date? {
-        let date = Date()
-        let calendar = Calendar.current
-        var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-        guard
-            let days = calendar.range(of: .day, in: .month, for: date),
-            let randomDay = days.randomElement()
-        else {
-            return nil
-        }
-        dateComponents.setValue(randomDay, for: .day)
-        return calendar.date(from: dateComponents)
-    }
-
      func test_trackRecentActivity_tracksEvent() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
@@ -164,6 +148,20 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
         XCTAssertEqual(analyticsService._trackedEvents.count, 1)
         XCTAssertEqual(analyticsService._trackedEvents.first?.name, "RecentActivity")
+    }
+
+    private func getRandomDateFromCurrentMonth() -> Date? {
+        let date = Date()
+        let calendar = Calendar.current
+        var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        guard
+            let days = calendar.range(of: .day, in: .month, for: date),
+            let randomDay = days.randomElement()
+        else {
+            return nil
+        }
+        dateComponents.setValue(randomDay, for: .day)
+        return calendar.date(from: dateComponents)
     }
 }
 

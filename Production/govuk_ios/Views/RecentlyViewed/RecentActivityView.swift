@@ -11,7 +11,6 @@ struct RecentActivityView: View {
         self.model = model
         self.selected = selected
     }
-
     var body: some View {
         ScrollView {
             if model.todaysActivites.count >= 1 {

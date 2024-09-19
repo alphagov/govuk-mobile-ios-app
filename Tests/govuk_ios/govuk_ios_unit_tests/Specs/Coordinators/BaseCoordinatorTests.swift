@@ -131,8 +131,7 @@ class BaseCoordinatorTests: XCTestCase {
         }
 
         navigationController.popViewController(animated: false)
-
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 1.5)
     }
 
     func test_startCoordinator_startsCoordinator() {

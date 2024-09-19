@@ -12,6 +12,7 @@ class LaunchCoordinatorTests: XCTestCase {
         let subject = LaunchCoordinator(
             navigationController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,
+            appConfigService: MockAppConfigService(),
             completion: {
                 expectation.fulfill()
             }

@@ -7,6 +7,7 @@ class LaunchCoordinator: BaseCoordinator {
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
+         appConfigService: AppConfigServiceInterface,
          completion: @escaping () -> Void) {
         self.viewControllerBuilder = viewControllerBuilder
         self.completion = completion

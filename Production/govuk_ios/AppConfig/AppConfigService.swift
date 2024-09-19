@@ -14,17 +14,24 @@ public final class AppConfigService: AppConfigServiceInterface {
 
     init(configProvider: AppConfigProviderInterface) {
         self.configProvider = configProvider
-        fetchAppConfig()
+        fetchLocalAppConfig()
     }
 
-    private func fetchAppConfig() {
-        configProvider.fetchAppConfig(
+    private func fetchLocalAppConfig() {
+        configProvider.fetchLocalAppConfig(
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
                 try? self.getFeatureflags(result: result)
             }
         )
+    }
+
+    private func fetchRemoteAppConfig() {
+        configProvider.fetchRemoteAppConfig(completion: { [weak self] result in
+            guard let self = self else { return }
+            try? self.getFeatureflags(result: result)
+        })
     }
 
     private func getFeatureflags(result: Result<AppConfig, AppConfigError>) throws {

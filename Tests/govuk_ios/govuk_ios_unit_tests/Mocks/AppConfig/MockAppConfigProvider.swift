@@ -2,10 +2,16 @@ import Foundation
 
 class MockAppConfigProvider: AppConfigProviderInterface {
 
-    var _receivedAppConfigCompletion: ((Result<AppConfig, AppConfigError>) -> Void)?
+    var _receivedLocalAppConfigCompletion: ((Result<AppConfig, AppConfigError>) -> Void)?
 
-    func fetchAppConfig(filename: String,
+    func fetchLocalAppConfig(filename: String,
                         completion: @escaping (Result<AppConfig, AppConfigError>) -> Void) {
-        _receivedAppConfigCompletion = completion
+        _receivedLocalAppConfigCompletion = completion
+    }
+
+    var _receivedRemoteAppConfigCompletion: ((Result<AppConfig, AppConfigError>) -> Void)?
+
+    func fetchRemoteAppConfig(completion: @escaping (Result<AppConfig, AppConfigError>) -> Void) {
+        _receivedRemoteAppConfigCompletion = completion
     }
 }

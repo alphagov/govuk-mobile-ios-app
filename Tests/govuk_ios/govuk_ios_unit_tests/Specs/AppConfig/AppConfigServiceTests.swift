@@ -14,7 +14,7 @@ final class AppConfigServiceTests: XCTestCase {
             config: config
         )
         let result: Result<AppConfig, AppConfigError> = .success(appConfig)
-        mockAppConfigProvider._receivedAppConfigCompletion?(result)
+        mockAppConfigProvider._receivedLocalAppConfigCompletion?(result)
         //Then
         XCTAssertTrue(sut.isFeatureEnabled(key: .search))
     }
@@ -29,7 +29,7 @@ final class AppConfigServiceTests: XCTestCase {
             config: config
         )
         let result: Result<AppConfig, AppConfigError> = .success(appConfig)
-        mockAppConfigProvider._receivedAppConfigCompletion?(result)
+        mockAppConfigProvider._receivedLocalAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
@@ -44,7 +44,7 @@ final class AppConfigServiceTests: XCTestCase {
             config: config
         )
         let result: Result<AppConfig, AppConfigError> = .success(appConfig)
-        mockAppConfigProvider._receivedAppConfigCompletion?(result)
+        mockAppConfigProvider._receivedLocalAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }

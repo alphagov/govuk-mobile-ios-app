@@ -42,6 +42,21 @@ extension Container {
         .scope(.singleton)
     }
 
+    var appConfigService: Factory<AppConfigServiceInterface> {
+        Factory(self) {
+            AppConfigService(
+                configProvider:
+                    AppConfigProvider(
+                        apiService: APIServiceClient(
+                            baseUrl: URL(string: Constants.API.appConfigUrl)!,
+                            session: URLSession(configuration: .default),
+                            requestBuilder: RequestBuilder()
+                        )
+                    )
+            )
+        }.scope(.singleton)
+    }
+
     var onboardingService: Factory<OnboardingServiceInterface> {
         Factory(self) {
             OnboardingService(

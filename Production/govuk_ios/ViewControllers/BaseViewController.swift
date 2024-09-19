@@ -1,6 +1,7 @@
 import UIKit
 import Foundation
 
+@MainActor
 class BaseViewController: UIViewController {
     @Inject(\.analyticsService) private(set) var analyticsService: AnalyticsServiceInterface
 

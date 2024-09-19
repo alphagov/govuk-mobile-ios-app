@@ -4,6 +4,7 @@ import UIKit
 
 @testable import govuk_ios
 
+@MainActor
 class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(

@@ -3,8 +3,8 @@ import XCTest
 
 @testable import govuk_ios
 
+@MainActor
 class BaseCoordinatorTests: XCTestCase {
-    @MainActor
     func test_init_setsPresentationController() {
         let navigationController = UINavigationController()
         let subject = BaseCoordinator(navigationController: navigationController)
@@ -12,7 +12,6 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssert(navigationController.presentationController?.delegate === subject)
     }
 
-    @MainActor
     func test_presentationControllerDidDismiss_callsFinish() {
         let navigationController = UINavigationController()
         let subject = TestCoordinator(navigationController: navigationController)
@@ -33,7 +32,6 @@ class BaseCoordinatorTests: XCTestCase {
         wait(for: [expectation])
     }
 
-    @MainActor
     func test_push_addsViewControllerToStack() {
         let navigationController = UINavigationController()
         let subject = TestCoordinator(navigationController: navigationController)
@@ -49,7 +47,6 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssert(navigationController.viewControllers.contains(viewController2))
     }
 
-    @MainActor
     func test_setViewController_addsViewControllerToStack() {
         let navigationController = UINavigationController()
         let subject = TestCoordinator(navigationController: navigationController)
@@ -64,7 +61,6 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssert(navigationController.viewControllers.contains(viewController2))
     }
 
-    @MainActor
     func test_setViewControllers_addsViewControllerToStack() {
         let navigationController = UINavigationController()
         let subject = TestCoordinator(navigationController: navigationController)
@@ -85,7 +81,6 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssertEqual(navigationController.viewControllers.count, 2)
     }
 
-    @MainActor
     func test_viewControllerPopped_remainingViewControllers_doesNothing() {
         let navigationController = UINavigationController()
         let subject = TestCoordinator(navigationController: navigationController)
@@ -115,7 +110,6 @@ class BaseCoordinatorTests: XCTestCase {
         )
     }
 
-    @MainActor
     func test_viewControllerPopped_finalViewController_callsFinish() {
         let parentCoordinator = MockBaseCoordinator()
         let navigationController = parentCoordinator.root
@@ -141,7 +135,6 @@ class BaseCoordinatorTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    @MainActor
     func test_startCoordinator_startsCoordinator() {
         let navigationController = UINavigationController()
         let child = MockBaseCoordinator(navigationController: navigationController)
@@ -152,7 +145,6 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssertTrue(child._startCalled)
     }
 
-    @MainActor
     func test_presentCoordinator_startsCoordinator() {
         let childNavigationController = UINavigationController()
         let child = MockBaseCoordinator(navigationController: childNavigationController)
@@ -168,7 +160,6 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssertEqual(navigationController._presentedViewController, childNavigationController)
     }
 
-    @MainActor
     func test_dismiss_modal_callsDismiss() {
         let mockNavigationController = MockNavigationController()
         let subject = TestCoordinator(navigationController: mockNavigationController)
@@ -184,7 +175,6 @@ class BaseCoordinatorTests: XCTestCase {
         XCTAssert(mockNavigationController._dismissCalled)
     }
 
-    @MainActor
     func test_dismiss_pushed_callsPop() {
         let mockNavigationController = MockNavigationController()
         let subject = TestCoordinator(navigationController: mockNavigationController)

@@ -2,10 +2,10 @@ import Foundation
 import UIKit
 
 protocol TrackableScreen {
-    var trackingName: String { get }
-    var trackingClass: String { get }
-    var trackingTitle: String? { get }
-    var trackingLanguage: String { get }
+    nonisolated var trackingName: String { get }
+    nonisolated var trackingClass: String { get }
+    nonisolated var trackingTitle: String? { get }
+    nonisolated var trackingLanguage: String { get }
 }
 
 extension TrackableScreen {

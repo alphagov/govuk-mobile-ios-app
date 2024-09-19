@@ -6,11 +6,12 @@ import Factory
 
 @testable import govuk_ios
 
+@MainActor
 class LaunchViewControllerSnapshotTests: SnapshotTestCase {
     private var mockAccessibilityManager: MockAccessibilityManager!
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         mockAccessibilityManager = MockAccessibilityManager()
         Container.shared.accessibilityManager.register(
             factory: {

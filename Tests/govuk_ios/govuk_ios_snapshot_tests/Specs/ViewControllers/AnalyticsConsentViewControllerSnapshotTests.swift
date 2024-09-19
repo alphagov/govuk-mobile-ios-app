@@ -4,6 +4,7 @@ import SwiftUI
 
 @testable import govuk_ios
 
+@MainActor
 final class AnalyticsConsentViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(

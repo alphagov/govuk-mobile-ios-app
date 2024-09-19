@@ -3,7 +3,7 @@ import UIComponents
 
 struct RecentActivityContainerView: View, TrackableScreen {
     @StateObject private var viewModel: RecentActivitiesViewModel
-    @FetchRequest(fetchRequest: ActivityItem.all()) private var recentItems
+    @FetchRequest(fetchRequest: ActivityItem.fetchRequest()) private var recentItems
 
     init(viewModel: RecentActivitiesViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)

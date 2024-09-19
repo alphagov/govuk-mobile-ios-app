@@ -3,15 +3,13 @@ import CoreData
 
 @objc(ActivityItem)
 class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
-    private static var fetchRequest: NSFetchRequest<ActivityItem> {
-        NSFetchRequest(entityName: "ActivityItem")
-    }
-
-    static func all() -> NSFetchRequest<ActivityItem> {
-        let request: NSFetchRequest<ActivityItem> = fetchRequest
-        request.sortDescriptors = [NSSortDescriptor(
-            keyPath: \ActivityItem.date,
-            ascending: false)]
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<ActivityItem> {
+        let request: NSFetchRequest<ActivityItem> = .init(entityName: "ActivityItem")
+        request.sortDescriptors = [
+            NSSortDescriptor(
+                keyPath: \ActivityItem.date,
+                ascending: false)
+        ]
         return request
     }
 

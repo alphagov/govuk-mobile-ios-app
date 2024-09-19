@@ -14,7 +14,7 @@ struct HomeViewModel {
         ].compactMap { $0 }
     }
     private var recentlyViewedWidget: WidgetView? {
-        let title = String.recentActivities.localized(
+        let title = String.home.localized(
             "recentActivityWidgetLabel"
         )
 

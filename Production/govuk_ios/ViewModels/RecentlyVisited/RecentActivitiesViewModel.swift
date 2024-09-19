@@ -12,10 +12,10 @@ class RecentActivitiesViewModel: ObservableObject {
         self.analyticsService = analyticsService
     }
 
-    let toolbarTitle = String.recentActivities.localized(
+    let toolbarTitle = String.recentActivity.localized(
         "editButtonTitle"
     )
-    let navigationTitle = String.recentActivities.localized(
+    let navigationTitle = String.recentActivity.localized(
         "recentActivityNavigationTitleLabel"
     )
 

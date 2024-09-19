@@ -148,7 +148,6 @@ final class RecentActivitiesViewModelTests: XCTestCase {
     }
 
      func test_trackRecentActivity_tracksEvent() {
-
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()

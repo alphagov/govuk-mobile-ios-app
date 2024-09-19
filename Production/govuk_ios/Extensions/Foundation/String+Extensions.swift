@@ -15,9 +15,9 @@ extension String {
         )
     }
 
-    static var recentActivities: LocalStringBuilder {
+    static var recentActivity: LocalStringBuilder {
         .init(
-            tableName: "RecentActivities",
+            tableName: "RecentActivity",
             bundle: .main
         )
     }

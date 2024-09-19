@@ -51,6 +51,7 @@
 		4E18E0902C74A45500538CF0 /* MockAppConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E08F2C74A45500538CF0 /* MockAppConfigProvider.swift */; };
 		4E18E0922C74DD5D00538CF0 /* AppConfigProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E0912C74DD5D00538CF0 /* AppConfigProviderTests.swift */; };
 		4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift */; };
+		4E4FF25A2C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */; };
 		4E562E432C988F580074A483 /* RecentActivitiesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
 		4E5ED2032C6E1E9400750BDA /* AppConfigProviderInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2022C6E1E9300750BDA /* AppConfigProviderInterface.swift */; };
@@ -72,6 +73,8 @@
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */; };
 		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
+		4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */; };
+		4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
@@ -314,6 +317,8 @@
 		4E18E08F2C74A45500538CF0 /* MockAppConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppConfigProvider.swift; sourceTree = "<group>"; };
 		4E18E0912C74DD5D00538CF0 /* AppConfigProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigProviderTests.swift; sourceTree = "<group>"; };
 		4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinatortests.swift; sourceTree = "<group>"; };
+		4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActvityControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = RecentActivity.xcstrings; sourceTree = "<group>"; };
 		4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesViewModelTests.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		4E5ED2022C6E1E9300750BDA /* AppConfigProviderInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigProviderInterface.swift; sourceTree = "<group>"; };
@@ -642,6 +647,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		4EDBBEAE2C9C0D4800F31577 /* Arrangers */ = {
+			isa = PBXGroup;
+			children = (
+				5DC527BA2C8736CF005E3158 /* Repositories */,
+			);
+			path = Arrangers;
+			sourceTree = "<group>";
+		};
 		5D0278382C29CBB600F2A4EB /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +972,7 @@
 		5D54A83C2BFCED7C003D0C21 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				4EDBBEAE2C9C0D4800F31577 /* Arrangers */,
 				5DC069F02C3C195700A81AAE /* Mocks */,
 				5D54A8392BFCD881003D0C21 /* SupportingFiles */,
 			);
@@ -973,6 +987,7 @@
 				5D742BDD2C997ABB00E7B87A /* Onboarding.xcstrings */,
 				5D742BDB2C99799000E7B87A /* Search.xcstrings */,
 				5D742BD92C99791A00E7B87A /* Settings.xcstrings */,
+				4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -1028,6 +1043,7 @@
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
 				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
 				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
+				4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1091,7 +1107,6 @@
 				5D4043372C7DBEFD0004CCFE /* Models */,
 				5DA97B662C6CE61C0030AF2B /* Networking */,
 				5D9C8DF32C53BCE000961326 /* Onboarding */,
-				5DC527BA2C8736CF005E3158 /* Repositories */,
 			);
 			path = Arrangers;
 			sourceTree = "<group>";
@@ -1605,6 +1620,7 @@
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				4E003E7C2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json in Resources */,
 				5D742BDA2C99791A00E7B87A /* Settings.xcstrings in Resources */,
+				4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 				5D742BD62C99784900E7B87A /* Common.xcstrings in Resources */,
 				4E6663C32C7366CC0063E81C /* RemoteConfigResponse.json in Resources */,
@@ -1684,6 +1700,8 @@
 				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
 				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
 				16F9619F2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift in Sources */,
+				4E4FF25A2C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift in Sources */,
+				4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,

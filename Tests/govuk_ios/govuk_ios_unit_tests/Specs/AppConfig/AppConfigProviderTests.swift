@@ -18,7 +18,7 @@ final class AppConfigProviderTests: XCTestCase {
         sut = nil
     }
 
-    func test_fetchLocalAppConfig_vaidFileName_returnsCorrectConfig() throws {
+    func test_fetchLocalAppConfig_validFileName_returnsCorrectConfig() throws {
         sut.fetchLocalAppConfig(
             filename: "MockAppConfigResponse",
             completion: { result in

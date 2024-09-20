@@ -1,6 +1,7 @@
 import Foundation
 
-class MockNotificationCenter: NotificationCenter {
+class MockNotificationCenter: NotificationCenter,
+                              @unchecked Sendable {
 
     var _receivedObservers: [(name: NSNotification.Name, object: Any)] = []
     override func addObserver(

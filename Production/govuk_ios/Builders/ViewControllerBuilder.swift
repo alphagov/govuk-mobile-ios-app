@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 class ViewControllerBuilder {
+    @MainActor
     func driving(showPermitAction: @escaping () -> Void,
                  presentPermitAction: @escaping () -> Void) -> UIViewController {
         let viewModel = TestViewModel(
@@ -17,6 +18,7 @@ class ViewControllerBuilder {
         )
     }
 
+    @MainActor
     func launch(completion: @escaping () -> Void) -> UIViewController {
         let viewModel = LaunchViewModel(
             animationCompleted: completion
@@ -26,6 +28,7 @@ class ViewControllerBuilder {
         )
     }
 
+    @MainActor
     func permit(permitId: String,
                 finishAction: @escaping () -> Void) -> UIViewController {
         let viewModel = TestViewModel(
@@ -41,6 +44,7 @@ class ViewControllerBuilder {
         )
     }
 
+    @MainActor
     func home(searchButtonPrimaryAction: @escaping () -> Void,
               configService: AppConfigServiceInterface) -> UIViewController {
         let viewModel = HomeViewModel(
@@ -52,6 +56,7 @@ class ViewControllerBuilder {
         )
     }
 
+    @MainActor
     func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
         let viewModel = SettingsViewModel(
             analyticsService: analyticsService,
@@ -63,6 +68,7 @@ class ViewControllerBuilder {
         )
     }
 
+    @MainActor
     func search(analyticsService: AnalyticsServiceInterface,
                 searchService: SearchServiceInterface,
                 dismissAction: @escaping () -> Void) -> UIViewController {

@@ -11,7 +11,6 @@ class SearchViewModelTests: XCTestCase {
             analyticsService: mockAnalyticsService,
             searchService: MockSearchService()
         )
-        let searchText = "Passport for dogs"
 
         let expectedTitle = UUID().uuidString
         let expectedDescription = UUID().uuidString

@@ -6,6 +6,7 @@ import Factory
 
 @testable import govuk_ios
 
+@MainActor
 class BaseViewControllerTests: XCTestCase {
 
     func test_preferredStatusBarStyle_returnsExpectedValue() {

@@ -14,6 +14,7 @@ struct ResolvedDeeplinkRoute {
         self.parent = parent
     }
 
+    @MainActor
     func action() {
         route.action(
             parent: parent,

@@ -6,6 +6,7 @@ import Factory
 
 @testable import govuk_ios
 
+@MainActor
 class AnimationViewTests: XCTestCase {
     private var mockAccessibilityManager: MockAccessibilityManager!
 

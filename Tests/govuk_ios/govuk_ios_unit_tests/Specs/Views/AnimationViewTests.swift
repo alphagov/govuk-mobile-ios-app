@@ -1,15 +1,17 @@
 import Foundation
 import XCTest
 import Lottie
+import Testing
 
 import Factory
 
 @testable import govuk_ios
 
-class AnimationViewTests: XCTestCase {
+@Suite(.serialized)
+class AnimationViewTests {
     private var mockAccessibilityManager: MockAccessibilityManager!
 
-    override func setUp() {
+    init() {
         mockAccessibilityManager = MockAccessibilityManager()
         Container.shared.lottieConfiguration.register {
             LottieConfiguration(renderingEngine: .mainThread)
@@ -22,32 +24,38 @@ class AnimationViewTests: XCTestCase {
     }
 
     // This test isn't ideal, but there isn't much to assert against with Lottie
-    func test_animationsEnabled_callsPlay() {
+    @Test
+    @MainActor
+    func animationsEnabled_callsPlay() async {
         let subject = AnimationView(resourceName: "app_splash")
 
         mockAccessibilityManager.animationsEnabled = true
 
         let expectation = XCTestExpectation.new()
+
+        var called = false
         subject.animateIfAvailable(
             completion: {
-                XCTFail("Unexpected completion call")
+                called = true
             }
         )
-        expectation.fulfillAfter(1)
+        #expect(!called)
     }
 
-    func test_animationsDisabled_delaysCompletion() {
+    @Test
+    @MainActor
+    func animationsDisabled_delaysCompletion() async {
         let subject = AnimationView(resourceName: "app_splash")
 
         mockAccessibilityManager.animationsEnabled = false
 
-        let expectation = expectation()
-        subject.animateIfAvailable(
-            completion: {
-                expectation.fulfill()
-            }
-        )
-        wait(for: [expectation], timeout: 2.2)
+        let called = await withCheckedContinuation { continuation in
+            subject.animateIfAvailable(
+                completion: {
+                    continuation.resume(returning: true)
+                }
+            )
+        }
+        #expect(called == true)
     }
-
 }

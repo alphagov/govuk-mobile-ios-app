@@ -1,14 +1,17 @@
 import UIKit
 import Foundation
-import XCTest
+import Testing
 
 import Factory
 
 @testable import govuk_ios
 
-class SearchViewControllerTests: XCTestCase {
-    
-    func test_viewDidAppear_tracksScreen() {
+@MainActor
+@Suite
+struct SearchViewControllerTests {
+
+    @Test
+    func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register {
             mockAnalyticsService
@@ -21,8 +24,8 @@ class SearchViewControllerTests: XCTestCase {
         subject.viewDidAppear(false)
 
         let screens = mockAnalyticsService._trackScreenReceivedScreens
-        XCTAssertEqual(screens.count, 1)
-        XCTAssertEqual(screens.first?.trackingName, subject.trackingName)
-        XCTAssertEqual(screens.first?.trackingClass, subject.trackingClass)
+        #expect(screens.count == 1)
+        #expect(screens.first?.trackingName == subject.trackingName)
+        #expect(screens.first?.trackingClass == subject.trackingClass)
     }
 }

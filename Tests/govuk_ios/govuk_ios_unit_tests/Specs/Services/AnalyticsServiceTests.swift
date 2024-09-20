@@ -84,6 +84,7 @@ final class AnalyticsServiceTests: XCTestCase {
         XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.count, 1)
     }
 
+    @MainActor
     func test_trackScreen_tracksScreen() {
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],

@@ -5,6 +5,7 @@ import XCTest
 
 @testable import govuk_ios
 
+@MainActor
 class SettingsViewControllerTests: XCTestCase {
     func test_settings_hasCorrectBackgroundColor() {
         let viewModel = SettingsViewModel(

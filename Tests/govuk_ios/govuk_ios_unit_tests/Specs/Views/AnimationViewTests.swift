@@ -31,8 +31,6 @@ class AnimationViewTests {
 
         mockAccessibilityManager.animationsEnabled = true
 
-        let expectation = XCTestExpectation.new()
-
         var called = false
         subject.animateIfAvailable(
             completion: {

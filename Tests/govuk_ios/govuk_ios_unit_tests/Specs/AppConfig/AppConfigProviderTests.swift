@@ -5,13 +5,12 @@ import XCTest
 final class AppConfigProviderTests: XCTestCase {
     var sut: AppConfigProvider!
 
-    private let apiService = APIServiceClient(
-        baseUrl: URL(string: Constants.API.appConfigUrl)!,
-        session: URLSession.mock,
-        requestBuilder: RequestBuilder()
-    )
-
     override func setUpWithError() throws {
+        let apiService = APIServiceClient(
+            baseUrl: URL(string: Constants.API.appConfigUrl)!,
+            session: URLSession.mock,
+            requestBuilder: RequestBuilder()
+        )
         sut = AppConfigProvider(apiService: apiService)
     }
 

@@ -1,12 +1,14 @@
 import Foundation
-import XCTest
+import Testing
 
 import FirebaseAnalytics
 
 @testable import govuk_ios
 
-class FirebaseClientTests: XCTestCase {
+@Suite(.serialized)
+struct FirebaseClientTests {
 
+    @Test
     func test_launch_configuresFirebaseApp() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
@@ -18,9 +20,10 @@ class FirebaseClientTests: XCTestCase {
         MockFirebaseApp._configureCalled = false
         sut.launch()
 
-        XCTAssertTrue(mockApp._configureCalled)
+        #expect(mockApp._configureCalled)
     }
 
+    @Test
     func test_setEnabled_true_enablesAnalytics() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
@@ -32,9 +35,10 @@ class FirebaseClientTests: XCTestCase {
         mockAnalytics.clearValues()
         sut.setEnabled(enabled: true)
 
-        XCTAssertEqual(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled, true)
+        #expect(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled == true)
     }
 
+    @Test
     func test_setEnabled_false_disablesAnalytics() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
@@ -46,9 +50,10 @@ class FirebaseClientTests: XCTestCase {
         mockAnalytics.clearValues()
         sut.setEnabled(enabled: false)
 
-        XCTAssertEqual(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled, false)
+        #expect(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled == false)
     }
 
+    @Test
     func test_trackEvent_noParams_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
@@ -63,10 +68,11 @@ class FirebaseClientTests: XCTestCase {
         )
         sut.track(event: expectedEvent)
 
-        XCTAssertEqual(mockAnalytics._logEventReceivedEventName, expectedName)
-        XCTAssertEqual(mockAnalytics._logEventReceivedEventParameters?.isEmpty, true)
+        #expect(mockAnalytics._logEventReceivedEventName == expectedName)
+        #expect(mockAnalytics._logEventReceivedEventParameters?.isEmpty == true)
     }
 
+    @Test
     func test_trackEvent_withParams_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
@@ -87,12 +93,14 @@ class FirebaseClientTests: XCTestCase {
         mockAnalytics.clearValues()
         sut.track(event: expectedEvent)
 
-        XCTAssertEqual(mockAnalytics._logEventReceivedEventName, expectedName)
+        #expect(mockAnalytics._logEventReceivedEventName == expectedName)
         let receivedParams = mockAnalytics._logEventReceivedEventParameters
-        XCTAssertEqual(receivedParams?.count, 1)
-        XCTAssertEqual(receivedParams?["test_param"] as? String, expectedValue)
+        #expect(receivedParams?.count == 1)
+        #expect(receivedParams?["test_param"] as? String == expectedValue)
     }
 
+    @Test
+    @MainActor
     func test_trackScreen_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
@@ -106,13 +114,13 @@ class FirebaseClientTests: XCTestCase {
         mockAnalytics.clearValues()
         sut.track(screen: expectedScreen)
 
-        XCTAssertEqual(mockAnalytics._logEventReceivedEventName, AnalyticsEventScreenView)
+        #expect(mockAnalytics._logEventReceivedEventName == AnalyticsEventScreenView)
         let receivedParams = mockAnalytics._logEventReceivedEventParameters
-        XCTAssertEqual(receivedParams?.count, 4)
-        XCTAssertEqual(receivedParams?[AnalyticsParameterScreenName] as? String, expectedScreen.trackingName)
-        XCTAssertEqual(receivedParams?[AnalyticsParameterScreenClass] as? String, expectedScreen.trackingClass)
-        XCTAssertEqual(receivedParams?["screen_title"] as? String, expectedTitle)
-        XCTAssertEqual(receivedParams?["language"] as? String, expectedScreen.trackingLanguage)
+        #expect(receivedParams?.count == 4)
+        #expect(receivedParams?[AnalyticsParameterScreenName] as? String == expectedScreen.trackingName)
+        #expect(receivedParams?[AnalyticsParameterScreenClass] as? String == expectedScreen.trackingClass)
+        #expect(receivedParams?["screen_title"] as? String == expectedTitle)
+        #expect(receivedParams?["language"] as? String == expectedScreen.trackingLanguage)
     }
 }
 

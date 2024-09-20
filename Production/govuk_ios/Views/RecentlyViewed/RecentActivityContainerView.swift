@@ -24,10 +24,16 @@ struct RecentActivityContainerView: View, TrackableScreen {
                     selected: { item in self.viewModel.itemSelected(item: item) }
                 )
                 .navigationTitle(viewModel.navigationTitle)
+                .accessibilityLabel(
+                    Text(viewModel.navigationTitle)
+                )
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
-                        Text(viewModel.toolbarTitle) .foregroundColor(
-                            Color(UIColor.govUK.text.link))
+                        Text(viewModel.toolbarTitle).foregroundColor(
+                            Color(UIColor.govUK.text.link)
+                        ).accessibilityLabel(
+                            Text(viewModel.toolbarTitle)
+                        ).accessibilityAddTraits(.isButton)
                     }
                 }
             default:

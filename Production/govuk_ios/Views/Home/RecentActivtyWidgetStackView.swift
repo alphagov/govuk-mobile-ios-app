@@ -16,6 +16,9 @@ class RecentActivtyWidgetStackView: UIStackView {
         localView.font = UIFont.govUK.bodySemibold
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
+        localView.accessibilityLabel = String.home.localized(
+            "recentActivityWidgetAccessibilityLabel"
+        )
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()

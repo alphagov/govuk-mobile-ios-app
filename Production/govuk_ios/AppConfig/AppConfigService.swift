@@ -22,7 +22,7 @@ public final class AppConfigService: AppConfigServiceInterface {
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.getFeatureflags(result: result)
+                try? self.setFeatureflags(result: result)
             }
         )
     }
@@ -30,11 +30,11 @@ public final class AppConfigService: AppConfigServiceInterface {
     private func fetchRemoteAppConfig() {
         configProvider.fetchRemoteAppConfig(completion: { [weak self] result in
             guard let self = self else { return }
-            try? self.getFeatureflags(result: result)
+            try? self.setFeatureflags(result: result)
         })
     }
 
-    private func getFeatureflags(result: Result<AppConfig, AppConfigError>) throws {
+    private func setFeatureflags(result: Result<AppConfig, AppConfigError>) throws {
         switch result {
         case .success(let appConfig):
             self.featureFlags = appConfig.config.releaseFlags

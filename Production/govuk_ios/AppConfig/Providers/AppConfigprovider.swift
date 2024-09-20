@@ -1,9 +1,9 @@
 import Foundation
 
 class AppConfigProvider: AppConfigProviderInterface {
-    private let apiService: APIServiceClient
+    private let apiService: APIServiceClientInterface
 
-    init(apiService: APIServiceClient) {
+    init(apiService: APIServiceClientInterface) {
         self.apiService = apiService
     }
 

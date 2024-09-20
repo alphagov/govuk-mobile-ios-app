@@ -15,6 +15,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     init(configProvider: AppConfigProviderInterface) {
         self.configProvider = configProvider
         fetchLocalAppConfig()
+        fetchRemoteAppConfig()
     }
 
     private func fetchLocalAppConfig() {
@@ -28,9 +29,9 @@ public final class AppConfigService: AppConfigServiceInterface {
     }
 
     private func fetchRemoteAppConfig() {
-        configProvider.fetchRemoteAppConfig(completion: { [weak self] result in
-            guard let self = self else { return }
-            try? self.setFeatureflags(result: result)
+        configProvider.fetchRemoteAppConfig(completion: { [weak self] _ in
+            // Don't handle response for now as documented
+            // https://govukverify.atlassian.net/browse/GOVUKAPP-581
         })
     }
 

@@ -3,6 +3,7 @@ import XCTest
 
 @testable import govuk_ios
 
+@MainActor
 class ViewControllerBuilderTests: XCTestCase {
     func test_driving_returnsExpectedResult() {
         let subject = ViewControllerBuilder()

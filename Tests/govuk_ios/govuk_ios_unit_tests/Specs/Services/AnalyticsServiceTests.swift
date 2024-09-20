@@ -101,7 +101,9 @@ final class AnalyticsServiceTests: XCTestCase {
         XCTAssertEqual(screen?.trackingName, mockViewController.trackingName)
         XCTAssertEqual(screen?.trackingClass, mockViewController.trackingClass)
         XCTAssertEqual(screen?.trackingTitle, mockViewController.trackingTitle)
-        XCTAssertEqual(screen?.trackingLanguage, Locale.current.languageCode)
+        if #available(iOS 16, *) {
+            XCTAssertEqual(screen?.trackingLanguage, Locale.current.language.languageCode?.identifier)
+        }
     }
 
     func test_setAcceptedAnalytics_true_grantsPermissions() {

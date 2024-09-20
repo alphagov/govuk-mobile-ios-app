@@ -57,29 +57,33 @@ final class AppConfigProviderTests: XCTestCase {
         )
     }
 
-    func test_fetchRemoteAppConfig__validJson_returnsCorrectConfig() throws {
+    func test_fetchRemoteAppConfig_validJson_returnsCorrectConfig() throws {
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
         let mockJsonData = getJsonData(filename: "MockAppConfigResponse", bundle: .main)
+        let expectation = expectation()
         MockURLProtocol.requestHandlers["https://app.integration.publishing.service.gov.uk/appinfo/ios"] = { request in
             return (expectedResponse, mockJsonData, nil)
         }
         sut.fetchRemoteAppConfig(
             completion: { result in
                 switch result {
-                case .success(let value):
-                    let config = try? result.get()
-                    XCTAssertEqual(config?.config.releaseFlags.count, 2)
-                    XCTAssertEqual(config?.config.releaseFlags["search"], true)
+                case .success:
+                    let resultData = try? result.get()
+                    XCTAssertEqual(resultData?.config.releaseFlags.count, 2)
+                    XCTAssertEqual(resultData?.config.releaseFlags["search"], true)
                 case .failure(_):
                     XCTAssertTrue(false)
                 }
+                expectation.fulfill()
             }
         )
+        wait(for: [expectation], timeout: 1)
     }
 
     func test_fetchRemoteAppConfig_invalidJson_returnsError() throws {
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
         let mockJsonData = getJsonData(filename: "MockAppConfigResponseInvalid", bundle: .main)
+        let expectation = expectation()
         MockURLProtocol.requestHandlers["https://app.integration.publishing.service.gov.uk/appinfo/ios"] = { request in
             return (expectedResponse, mockJsonData, nil)
         }
@@ -91,12 +95,15 @@ final class AppConfigProviderTests: XCTestCase {
                 case .failure(_):
                     XCTAssertTrue(true)
                 }
+                expectation.fulfill()
             }
         )
+        wait(for: [expectation], timeout: 1)
     }
 
     func test_fetchRemoteAppConfig_nilData_returnsError() throws {
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
+        let expectation = expectation()
         MockURLProtocol.requestHandlers["https://app.integration.publishing.service.gov.uk/appinfo/ios"] = { request in
             return (expectedResponse, nil, nil)
         }
@@ -108,8 +115,10 @@ final class AppConfigProviderTests: XCTestCase {
                 case .failure(_):
                     XCTAssertTrue(true)
                 }
+                expectation.fulfill()
             }
         )
+        wait(for: [expectation], timeout: 1)
     }
 
     private func getJsonData(filename: String, bundle: Bundle) -> Data {

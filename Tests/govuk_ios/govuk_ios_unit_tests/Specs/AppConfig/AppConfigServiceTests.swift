@@ -4,7 +4,7 @@ import XCTest
 
 final class AppConfigServiceTests: XCTestCase {
     
-    func test_isFeatureEnabled_whenFeatureFlagIsSetToAvilable_returnsTrue() throws {
+    func test_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
         //Given
         let mockAppConfigProvider = MockAppConfigProvider()
         let sut = AppConfigService(configProvider: mockAppConfigProvider)
@@ -19,7 +19,7 @@ final class AppConfigServiceTests: XCTestCase {
         XCTAssertTrue(sut.isFeatureEnabled(key: .search))
     }
     
-    func test_isFeatureEnabled_whenFeatureFlagIsSetToUnavilable_returnsFalse() throws {
+    func test_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
         //Given
         let mockAppConfigProvider = MockAppConfigProvider()
         let sut = AppConfigService(configProvider: mockAppConfigProvider)

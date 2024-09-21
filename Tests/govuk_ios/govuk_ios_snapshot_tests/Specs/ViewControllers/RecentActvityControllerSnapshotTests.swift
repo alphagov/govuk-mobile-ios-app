@@ -31,7 +31,8 @@ class RecentActvitySnapshots: SnapshotTestCase {
         activity.title = "benefits"
         activity.url = "https://www.youtube.com/"
         activity.date = DateHelper.convertDateStringToDate(
-            dateString: "2016-04-14T10:44:00+0000")
+            dateString: "2016-04-14T10:44:00+0000"
+        )
 
         try? coreData.backgroundContext.save()
 
@@ -63,7 +64,8 @@ class RecentActvitySnapshots: SnapshotTestCase {
         activity.title = "benefits"
         activity.url = "https://www.youtube.com/"
         activity.date = DateHelper.convertDateStringToDate(
-            dateString: "2016-04-14T10:44:00+0000")
+            dateString: "2016-04-14T10:44:00+0000"
+        )
 
         try? coreData.backgroundContext.save()
 

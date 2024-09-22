@@ -55,9 +55,10 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         ).load()
 
         var activitiesArray: [ActivityItem] = []
-        guard let randomDateOne = getRandomDateFromCurrentMonth() else { return }
-        guard let randomDateTwo = getRandomDateFromCurrentMonth() else { return }
-        guard let randomDateThree = getRandomDateFromCurrentMonth() else { return }
+        
+        guard let randomDateOne = fetchRandomDateWithinMonth() else { return }
+        guard let randomDateTwo = fetchRandomDateWithinMonth() else { return }
+        guard let randomDateThree = fetchRandomDateWithinMonth() else { return }
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
@@ -131,7 +132,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         XCTAssertEqual(structure.currentMonthActivities.count, 0)
     }
 
-     func test_trackRecentActivity_tracksEvent() {
+    func test_trackRecentActivity_tracksEvent() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -150,7 +151,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         XCTAssertEqual(analyticsService._trackedEvents.first?.name, "RecentActivity")
     }
 
-    private func getRandomDateFromCurrentMonth() -> Date? {
+    private func generateRandomDateFromMonth() -> Date? {
         let date = Date()
         let calendar = Calendar.current
         var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
@@ -162,6 +163,20 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         }
         dateComponents.setValue(randomDay, for: .day)
         return calendar.date(from: dateComponents)
+    }
+
+    func fetchRandomDateWithinMonth() -> Date? {
+        guard let date = generateRandomDateFromMonth()
+        else { return nil}
+
+        if !DateHelper.checkDatesAreTheSame(
+            dateOne: Date(),
+            dateTwo: date
+        ) {
+            return date
+        } else {
+            return fetchRandomDateWithinMonth()
+        }
     }
 }
 

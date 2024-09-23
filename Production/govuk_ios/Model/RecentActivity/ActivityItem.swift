@@ -20,7 +20,7 @@ class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
 
     var formattedDate: String {
         let day = DateHelper.getDay(date: date)
-        guard let day = day else { return ""}
+        guard let day = day else { return "" }
         let components = DateHelper.returnCalanderComponent(date: date)
         let month = DateHelper.getMonthName(components: components)
         let dateString = ("\(formattedString) \(day) \(month)")

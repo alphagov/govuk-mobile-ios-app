@@ -33,7 +33,10 @@ final class DateHelperTests: XCTestCase {
         let dateOne = Date()
         let dateTwo = Date()
 
-        let dateEquality = DateHelper.checkDatesAreTheSame(dateOne: dateOne, dateTwo: dateTwo)
+        let dateEquality = DateHelper.checkDatesAreTheSame(
+            dateOne: dateOne,
+            dateTwo: dateTwo
+        )
 
         XCTAssertTrue(dateEquality)
     }
@@ -42,8 +45,10 @@ final class DateHelperTests: XCTestCase {
         let dateOne = Date()
         let dateTwo = Date()
 
-        let dateEquality = DateHelper.checkEqualityOfMonthAndYear(dateOne: dateOne,
-                                                                  dateTwo: dateTwo)
+        let dateEquality = DateHelper.checkEqualityOfMonthAndYear(
+            dateOne: dateOne,
+            dateTwo: dateTwo
+        )
 
         XCTAssertTrue(dateEquality)
     }

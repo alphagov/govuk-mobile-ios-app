@@ -34,7 +34,9 @@ class DateHelper {
     }
 
     static func returnCalanderComponent(date: Date) -> DateComponents {
-        return Calendar.current.dateComponents([ .day, .month, .year], from: date)
+        return Calendar.current.dateComponents([ .day, .month, .year],
+                                               from: date
+        )
     }
 
     static func sortDate(dates: inout [ActivityItem]) {
@@ -45,7 +47,8 @@ class DateHelper {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        guard let date = dateFormatter.date(from: dateString) else { return Date()}
+        guard let date = dateFormatter.date(from: dateString)
+        else { return Date() }
         return date
     }
 }

@@ -1,3 +1,3 @@
-struct SearchResult: Decodable {
+struct SearchResult: Codable {
     var results: [SearchItem]
 }

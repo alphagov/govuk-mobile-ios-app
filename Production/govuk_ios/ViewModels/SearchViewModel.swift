@@ -4,6 +4,7 @@ enum SearchError: Error {
     case apiUnavailable
     case noResults
     case networkUnavailable
+    case parsingError
 }
 
 class SearchViewModel {

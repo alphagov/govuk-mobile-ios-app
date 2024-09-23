@@ -32,7 +32,7 @@ class SearchServiceClient: SearchServiceClientInterface {
                             let searchResult: SearchResult = try JSONDecoder().decode(from: $0)
                             return .success(searchResult)
                         } catch {
-                            return .failure(SearchError.apiUnavailable)
+                            return .failure(SearchError.parsingError)
                         }
                     }
                 completion(mappedResult)

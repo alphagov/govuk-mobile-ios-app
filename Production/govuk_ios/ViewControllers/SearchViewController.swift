@@ -209,7 +209,7 @@ class SearchViewController: BaseViewController,
             )
 
             errorView.isHidden = false
-        case .apiUnavailable:
+        case .apiUnavailable, .parsingError:
             errorView.configure(
                 title: "There’s a problem",
                 errorDesc: """

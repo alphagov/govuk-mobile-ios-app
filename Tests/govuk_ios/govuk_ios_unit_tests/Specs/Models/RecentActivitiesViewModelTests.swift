@@ -56,9 +56,9 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
         var activitiesArray: [ActivityItem] = []
 
-        guard let randomDateOne = fetchRandomDateWithinMonth() else { return }
-        guard let randomDateTwo = fetchRandomDateWithinMonth() else { return }
-        guard let randomDateThree = fetchRandomDateWithinMonth() else { return }
+        guard let randomDateOne = fetchRandomDateFromMonth() else { return }
+        guard let randomDateTwo = fetchRandomDateFromMonth() else { return }
+        guard let randomDateThree = fetchRandomDateFromMonth() else { return }
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString

@@ -1,11 +1,13 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class APIServiceClientTests: XCTestCase {
+@Suite(.serialized)
+struct APIServiceClientTests {
 
-    func test_send_post_withParameters_passesExpectedValues() throws {
+    @Test()
+    func send_post_withParameters_passesExpectedValues() async throws {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,
@@ -18,26 +20,27 @@ class APIServiceClientTests: XCTestCase {
             queryParameters: nil,
             additionalHeaders: nil
         )
-        let expectation = expectation()
         MockURLProtocol.requestHandlers["https://www.google.com/test/test"] = { request in
-            XCTAssertEqual(request.url?.absoluteString, "https://www.google.com/test/test")
-            XCTAssertEqual(request.httpMethod, "POST")
+            #expect(request.url?.absoluteString == "https://www.google.com/test/test")
+            #expect(request.httpMethod == "POST")
             let data = request.bodySteamData
-            XCTAssertNotNil(data)
+            #expect(data != nil)
             let json = try? JSONDecoder().decode([String: String].self, from: data!)
-            XCTAssertEqual(json?["test_key"], "test_value")
+            #expect(json?["test_key"] == "test_value")
             return (.arrangeSuccess, nil, nil)
         }
-        subject.send(
-            request: govRequest,
-            completion: { result in
-                expectation.fulfill()
-            }
-        )
-        wait(for: [expectation], timeout: 1)
+        return await withCheckedContinuation { continuation in
+            subject.send(
+                request: govRequest,
+                completion: { result in
+                    continuation.resume(returning: Void())
+                }
+            )
+        }
     }
 
-    func test_send_get_passesExpectedValues() {
+    @Test()
+    func send_get_passesExpectedValues() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,
@@ -50,23 +53,24 @@ class APIServiceClientTests: XCTestCase {
             queryParameters: ["query": "value"],
             additionalHeaders: nil
         )
-        let expectation = expectation()
         MockURLProtocol.requestHandlers["https://www.google.com/test/111?query=value"] = { request in
-            XCTAssertEqual(request.url?.absoluteString, "https://www.google.com/test/111?query=value")
-            XCTAssertEqual(request.httpMethod, "GET")
-            XCTAssertNil(request.httpBody)
+            #expect(request.url?.absoluteString == "https://www.google.com/test/111?query=value")
+            #expect(request.httpMethod == "GET")
+            #expect(request.httpBody == nil)
             return (.arrangeSuccess, nil, nil)
         }
-        subject.send(
-            request: request,
-            completion: { result in
-                expectation.fulfill()
-            }
-        )
-        wait(for: [expectation], timeout: 1)
+        return await withCheckedContinuation { continuation in
+            subject.send(
+                request: request,
+                completion: { result in
+                    continuation.resume(returning: Void())
+                }
+            )
+        }
     }
 
-    func test_send_successResponse_returnsExpectedResult() {
+    @Test()
+    func send_successResponse_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,
@@ -79,24 +83,25 @@ class APIServiceClientTests: XCTestCase {
             queryParameters: nil,
             additionalHeaders: nil
         )
-        let expectation = expectation()
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
         let expectedData = Data()
         MockURLProtocol.requestHandlers["https://www.google.com/test/222"] = { request in
             return (expectedResponse, expectedData, nil)
         }
-        subject.send(
-            request: request,
-            completion: { result in
-                let resultData = try? result.get()
-                XCTAssertEqual(resultData, expectedData)
-                expectation.fulfill()
-            }
-        )
-        wait(for: [expectation], timeout: 1)
+        return await withCheckedContinuation { continuation in
+            subject.send(
+                request: request,
+                completion: { result in
+                    let resultData = try? result.get()
+                    #expect(resultData == expectedData)
+                    continuation.resume(returning: Void())
+                }
+            )
+        }
     }
 
-    func test_send_successResponse_noData_returnsExpectedResult() {
+    @Test()
+    func send_successResponse_noData_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,
@@ -109,23 +114,25 @@ class APIServiceClientTests: XCTestCase {
             queryParameters: nil,
             additionalHeaders: nil
         )
-        let expectation = expectation()
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
         MockURLProtocol.requestHandlers["https://www.google.com/test/333"] = { request in
             return (expectedResponse, nil, nil)
         }
-        subject.send(
-            request: request,
-            completion: { result in
-                let resultData = try? result.get()
-                XCTAssertNotNil(resultData)
-                expectation.fulfill()
-            }
-        )
-        wait(for: [expectation], timeout: 1)
+
+        return await withCheckedContinuation { continuation in
+            subject.send(
+                request: request,
+                completion: { result in
+                    let resultData = try? result.get()
+                    #expect(resultData != nil)
+                    continuation.resume(returning: Void())
+                }
+            )
+        }
     }
 
-    func test_send_failureResponse_returnsExpectedResult() {
+    @Test()
+    func send_failureResponse_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,
@@ -138,25 +145,20 @@ class APIServiceClientTests: XCTestCase {
             queryParameters: nil,
             additionalHeaders: nil
         )
-        let expectation = expectation()
         let expectedError = TestError.fakeNetwork
         MockURLProtocol.requestHandlers["https://www.google.com/test/444"] = { request in
             let expectedResponse = HTTPURLResponse.arrange(statusCode: 400)
             return (expectedResponse, nil, expectedError)
         }
-        subject.send(
-            request: request,
-            completion: { result in
-                switch result {
-                case .failure:
-                    break
-                default:
-                    XCTFail("Expected failure")
-                }
-                expectation.fulfill()
-            }
-        )
-        wait(for: [expectation], timeout: 1)
+        let result = await withCheckedContinuation { continuation in
+            subject.send(
+                request: request,
+                completion: { continuation.resume(returning: $0) }
+            )
+        }
+        if case .success = result {
+            Issue.record("Expected failure, got: \(result)")
+        }
     }
 }
 

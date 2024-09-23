@@ -1,12 +1,6 @@
 import Foundation
 
 class DateHelper {
-    static func getDay(date: Date) -> Int? {
-        let component = returnCalanderComponent(date: date)
-        guard let day = component.day else { return nil }
-        return day
-    }
-
     static func getMonthName(components: DateComponents) -> String {
         guard let componentMonth = components.month else { return "" }
         return  DateFormatter().monthSymbols[componentMonth - 1]

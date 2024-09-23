@@ -191,6 +191,7 @@
 		5DAD71992BD250DF0075F648 /* GovUKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71982BD250DF0075F648 /* GovUKUITests.swift */; };
 		5DAD719B2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */; };
 		5DB2BB402C6BAA1D0039AD93 /* AnalyticsService+OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2BB3F2C6BAA1D0039AD93 /* AnalyticsService+OnboardingTests.swift */; };
+		5DB6AD312CA1B94400E92F4C /* DateFormatter+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB6AD302CA1B94400E92F4C /* DateFormatter+Convenience.swift */; };
 		5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */; };
 		5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */; };
 		5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */; };
@@ -455,6 +456,7 @@
 		5DAD71982BD250DF0075F648 /* GovUKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKUITests.swift; sourceTree = "<group>"; };
 		5DAD719A2BD250DF0075F648 /* GovUKUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5DB2BB3F2C6BAA1D0039AD93 /* AnalyticsService+OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsService+OnboardingTests.swift"; sourceTree = "<group>"; };
+		5DB6AD302CA1B94400E92F4C /* DateFormatter+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimationView+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Convenience.swift"; sourceTree = "<group>"; };
@@ -956,6 +958,7 @@
 				D046511C2C933FE600F47C66 /* String+Extensions.swift */,
 				5D349F682C6B550000B7F747 /* URL+Extensions.swift */,
 				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
+				5DB6AD302CA1B94400E92F4C /* DateFormatter+Convenience.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1041,9 +1044,9 @@
 				3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */,
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
+				4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */,
 				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
 				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
-				4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1813,6 +1816,7 @@
 				5D41DB702C088FEB0011E691 /* Container+ServiceClients.swift in Sources */,
 				5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
+				5DB6AD312CA1B94400E92F4C /* DateFormatter+Convenience.swift in Sources */,
 				1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
 				4E5ED2032C6E1E9400750BDA /* AppConfigProviderInterface.swift in Sources */,

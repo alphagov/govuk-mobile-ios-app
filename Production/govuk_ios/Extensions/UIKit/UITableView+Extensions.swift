@@ -2,9 +2,8 @@ import Foundation
 import UIKit
 
 extension UITableView {
-
-    func register<T: UITableViewCell.Type>(_ klass: T) {
-        register(T.self, forCellReuseIdentifier: T.identifierString)
+    func register(_ klass: UITableViewCell.Type) {
+        register(klass, forCellReuseIdentifier: klass.identifierString)
     }
 
     func dequeue<T: UITableViewCell>(indexPath: IndexPath) -> T {
@@ -15,5 +14,4 @@ extension UITableView {
         ) as! T
         // swiftlint:enable force_cast
     }
-
 }

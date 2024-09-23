@@ -197,18 +197,16 @@ class SearchViewController: BaseViewController,
         switch viewModel.error {
         case .networkUnavailable:
             errorView.configure(
-                title: "You’re offline",
-                errorDesc: "Check your internet connection and try again"
+                title: String.search.localized("networkUnavailableErrorTitle"),
+                errorDesc: String.search.localized("networkUnavailableErrorBody")
             )
 
             errorView.isHidden = false
         case .apiUnavailable, .parsingError:
             errorView.configure(
-                title: "There’s a problem",
-                errorDesc: """
-                        Search is not working. Try again later, or search on the GOV.UK website.
-                        """,
-                linkText: "Go to the GOV.UK website",
+                title: String.search.localized("genericErrorTitle"),
+                errorDesc: String.search.localized("genericErrorBody"),
+                linkText: String.search.localized("genericErrorLinkTitle"),
                 link: "https://www.gov.uk"
             )
             errorView.isHidden = false

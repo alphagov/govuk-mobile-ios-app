@@ -16,7 +16,7 @@ class DateHelper {
         let components = returnCalanderComponent(date: date)
         let monthName = getMonthName(components: components)
         let year = components.year
-        guard let year = year else { return ""}
+        guard let year = year else { return "" }
         return "\(monthName) \(year)"
     }
 

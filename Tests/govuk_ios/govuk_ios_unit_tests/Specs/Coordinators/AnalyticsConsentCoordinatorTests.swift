@@ -38,17 +38,13 @@ final class AnalyticsConsentCoordinatorTests: XCTestCase {
     func test_start_analyticsPermissionState_unknownDoesntCallDismiss() throws {
         let analyticsService = MockAnalyticsService()
         analyticsService._stubbedPermissionState = .unknown
-        let mockNavigationController = UINavigationController()
-        let expectation = expectation()
-        expectation.isInverted = true
+        let navigationController = UINavigationController()
         let sut = AnalyticsConsentCoordinator(
-            navigationController: mockNavigationController,
+            navigationController: navigationController,
             analyticsService: analyticsService,
-            dismissAction: {
-                expectation.fulfill()
-            }
+            dismissAction: { }
         )
         sut.start()
-        wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
     }
 }

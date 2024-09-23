@@ -10,7 +10,7 @@ concurrency:
 jobs:
   build:
     name: Unit test
-    runs-on: macos-14
+    runs-on: macos-14-large
 
     steps:
       - name: Checkout

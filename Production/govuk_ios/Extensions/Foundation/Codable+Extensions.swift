@@ -7,7 +7,7 @@ extension Decodable {
         guard let jsonString = String(data: jsonData, encoding: .utf8) else {
             return nil
         }
-        
+
         if let sliceRange = jsonString.range(of: "\"\(key.stringValue)\":") {
             let start = sliceRange.upperBound
             var braceCount = 0

@@ -1,17 +1,6 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
-    "editButtonTitle" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit"
-          }
-        }
-      }
-    },
     "recentActivitiesTodaysListTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -67,7 +56,7 @@
         }
       }
     },
-    "recentActivityNavigationTitleLabel" : {
+    "recentActivityNavigationTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

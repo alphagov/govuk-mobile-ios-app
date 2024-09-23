@@ -14,12 +14,8 @@ class RecentActivitiesViewModel: ObservableObject {
         self.analyticsService = analyticsService
     }
 
-    let toolbarTitle = String.recentActivity.localized(
-        "editButtonTitle"
-    )
-
     let navigationTitle = String.recentActivity.localized(
-        "recentActivityNavigationTitleLabel"
+        "recentActivityNavigationTitle"
     )
 
     func itemSelected(item: ActivityItem) {
@@ -31,10 +27,9 @@ class RecentActivitiesViewModel: ObservableObject {
     }
 
     func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
-        var todaysActivities: [ActivityItem]  = []
-        var currentMonthActivities: [ActivityItem]  = []
+        var todaysActivities: [ActivityItem] = []
+        var currentMonthActivities: [ActivityItem] = []
         var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]
-        let todaysDate = Date()
         for recentActivity in activities {
             if recentActivity.date.isToday() {
                 todaysActivities.append(recentActivity)
@@ -48,7 +43,7 @@ class RecentActivitiesViewModel: ObservableObject {
             }
         }
 
-        return RecentActivitiesViewStructure(
+        return .init(
             todaysActivites: todaysActivities,
             currentMonthActivities: currentMonthActivities,
             recentMonthActivities: recentMonthsActivities
@@ -63,13 +58,5 @@ class RecentActivitiesViewModel: ObservableObject {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
-    }
-
-    private func removeDuplicateRecentMonthStrings(array: [String]) -> [String] {
-        var uniqueElements: [String] = []
-        for item in array where !uniqueElements.contains(item) {
-            uniqueElements.append(item)
-        }
-        return uniqueElements
     }
 }

@@ -43,7 +43,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
         VerifySnapshotInWindow(
             navigationController,
             perPixelTolerance: 0.1,
-            overallTolerance: 0.2,
+//            overallTolerance: 0.01,
             file: file,
             line: line
         )

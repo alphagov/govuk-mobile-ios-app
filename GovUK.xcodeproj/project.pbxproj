@@ -542,12 +542,12 @@
 		1651C6E62C63C57B00864C5C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */,
-				16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */,
-				16F961982C8882B6005CFB04 /* SearchViewModelTests.swift */,
 				3D55B22D2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift */,
-				4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */,
+				1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */,
 				5DCDA1002CA20C7D00A6DF90 /* MonthGroupKeyTests.swift */,
+				4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */,
+				16F961982C8882B6005CFB04 /* SearchViewModelTests.swift */,
+				16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

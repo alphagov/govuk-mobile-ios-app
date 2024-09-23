@@ -29,16 +29,17 @@ struct RecentActivityView: View {
                 )
             }
             if model.currentMonthActivities.count >= 1 {
-                let rows = model.currentMonthActivities.map({ activityRow(activityItem: $0) })
-                GroupedList(content: [
-                    GroupedListSection(
-                        heading: String.recentActivity.localized(
-                            "recentActivityCurrentMonthItems"
-                        ),
-                        rows: rows,
-                        footer: nil
-                    )
-                ]
+                let rows = model.currentMonthActivities.map { activityRow(activityItem: $0) }
+                GroupedList(
+                    content: [
+                        GroupedListSection(
+                            heading: String.recentActivity.localized(
+                                "recentActivityCurrentMonthItems"
+                            ),
+                            rows: rows,
+                            footer: nil
+                        )
+                    ]
                 )
             }
             if model.recentMonthActivities.count >= 1 {
@@ -59,8 +60,7 @@ struct RecentActivityView: View {
     }
 
     private func buildSectionsView() -> [GroupedListSection] {
-        let keys = model.recentMonthActivities.keys
-        return keys
+        model.recentMonthActivities.keys
             .sorted { $0 > $1 }
             .map {
                 let items = model.recentMonthActivities[$0]

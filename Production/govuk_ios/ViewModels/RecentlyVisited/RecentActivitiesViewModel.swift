@@ -6,6 +6,7 @@ import UIKit
 class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
+    private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
 
     init(analyticsService: AnalyticsServiceInterface, urlOpener: URLOpener) {
         self.urlOpener = urlOpener
@@ -31,33 +32,25 @@ class RecentActivitiesViewModel: ObservableObject {
     func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
         var todaysActivities: [ActivityItem]  = []
         var currentMonthActivities: [ActivityItem]  = []
-        var recentMonthsActivities: [ActivityItem] = []
-        var recentMonthActivityDates: [String] = []
+        var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]
         let todaysDate = Date()
-        let recentActivities = Array(activities)
-        for recentActivity in recentActivities {
-            if DateHelper.checkDatesAreTheSameDay(dateOne: recentActivity.date,
-                                               dateTwo: todaysDate) {
+        for recentActivity in activities {
+            if recentActivity.date.isToday() {
                 todaysActivities.append(recentActivity)
-            } else if DateHelper.checkEqualityOfMonthAndYear(
-                dateOne: recentActivity.date,
-                dateTwo: todaysDate) {
+            } else if recentActivity.date.isThisMonth() {
                 currentMonthActivities.append(recentActivity)
             } else {
-                recentMonthActivityDates.append(
-                    DateHelper.getMonthAndYear(date: recentActivity.date)
-                )
-                recentMonthsActivities.append(recentActivity)
+                let key = MonthGroupKey(date: recentActivity.date)
+                var items = recentMonthsActivities[key] ?? []
+                items.append(recentActivity)
+                recentMonthsActivities[key] = items
             }
         }
 
         return RecentActivitiesViewStructure(
             todaysActivites: todaysActivities,
             currentMonthActivities: currentMonthActivities,
-            recentMonthActivities: recentMonthsActivities,
-            recentMonthsActivityDates: removeDuplicateRecentMonthStrings(
-                array: recentMonthActivityDates
-            )
+            recentMonthActivities: recentMonthsActivities
         )
     }
 
@@ -77,5 +70,18 @@ class RecentActivitiesViewModel: ObservableObject {
             uniqueElements.append(item)
         }
         return uniqueElements
+    }
+}
+
+struct MonthGroupKey: Hashable,
+                      Equatable {
+    let title: String
+    let month: Int
+    let year: Int
+
+    init(date: Date) {
+        self.month = Calendar.current.component(.month, from: date)
+        self.year = Calendar.current.component(.year, from: date)
+        self.title = DateFormatter.recentActivityHeader.string(from: date)
     }
 }

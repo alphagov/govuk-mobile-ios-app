@@ -30,13 +30,15 @@ struct RecentActivityView: View {
             }
             if model.currentMonthActivities.count >= 1 {
                 let rows = model.currentMonthActivities.map({ activityRow(activityItem: $0) })
-                GroupedList(content: [GroupedListSection(
-                    heading: String.recentActivity.localized(
-                        "recentActivityCurrentMonthItems"
-                    ),
-                    rows: rows,
-                    footer: nil
-                )]
+                GroupedList(content: [
+                    GroupedListSection(
+                        heading: String.recentActivity.localized(
+                            "recentActivityCurrentMonthItems"
+                        ),
+                        rows: rows,
+                        footer: nil
+                    )
+                ]
                 )
             }
             if model.recentMonthActivities.count >= 1 {
@@ -57,24 +59,17 @@ struct RecentActivityView: View {
     }
 
     private func buildSectionsView() -> [GroupedListSection] {
-        var groupedSections: [GroupedListSection] = []
-        for dateString in model.recentMonthsActivityDates {
-            let filteredArray = model.recentMonthActivities.filter { item in
-                DateHelper.getMonthAndYear(
-                    date: item.date
-                ) == dateString
+        let keys = model.recentMonthActivities.keys
+        return keys
+            .sorted { $0.year > $1.year && $0.month > $1.month }
+            .map {
+                let items = model.recentMonthActivities[$0]
+                return GroupedListSection(
+                    heading: $0.title,
+                    rows: items?.map(activityRow) ?? [],
+                    footer: nil
+                )
             }
-            let rows = filteredArray.map(
-                { activityRow(activityItem: $0) }
-            )
-            let groupSection = GroupedListSection(
-                heading: dateString,
-                rows: rows,
-                footer: nil
-            )
-            groupedSections.append(groupSection)
-        }
-        return groupedSections
     }
 
     private func lastVisitedString(activity: ActivityItem) -> String {

@@ -14,16 +14,8 @@ class SearchServiceClient: SearchServiceClientInterface {
 
     func search(term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void) {
-        let searchRequest = GOVRequest(
-            urlPath: "/api/search.json",
-            method: .get,
-            bodyParameters: nil,
-            queryParameters: ["q": term, "count": "10"],
-            additionalHeaders: nil
-        )
-
         serviceClient.send(
-            request: searchRequest,
+            request: .search(term: term),
             completion: { result in
                 let mappedResult = result
                     .mapError { _ in SearchError.apiUnavailable }

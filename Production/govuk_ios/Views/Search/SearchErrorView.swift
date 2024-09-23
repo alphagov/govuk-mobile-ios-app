@@ -59,7 +59,7 @@ class SearchErrorView: UIView {
         super.init(frame: .zero)
 
         configureUI()
-        configureConstrains()
+        configureConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -90,7 +90,7 @@ class SearchErrorView: UIView {
         addSubview(errorLinkButton)
     }
 
-    private func configureConstrains() {
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
             errorTitle.topAnchor.constraint(equalTo: topAnchor),
             errorTitle.leftAnchor.constraint(equalTo: leftAnchor),

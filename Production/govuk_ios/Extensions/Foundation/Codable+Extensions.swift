@@ -4,7 +4,10 @@ extension Decodable {
     func extractDataSliceForKey(_ key: CodingKey,
                                 from jsonData: Data,
                                 removePrettyPrint: Bool = true) -> Data? {
-        let jsonString = String(decoding: jsonData, as: UTF8.self)
+        guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+            return nil
+        }
+        
         if let sliceRange = jsonString.range(of: "\"\(key.stringValue)\":") {
             let start = sliceRange.upperBound
             var braceCount = 0

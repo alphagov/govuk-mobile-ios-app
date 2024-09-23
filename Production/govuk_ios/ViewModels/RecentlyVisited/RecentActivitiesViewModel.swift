@@ -15,6 +15,7 @@ class RecentActivitiesViewModel: ObservableObject {
     let toolbarTitle = String.recentActivity.localized(
         "editButtonTitle"
     )
+
     let navigationTitle = String.recentActivity.localized(
         "recentActivityNavigationTitleLabel"
     )
@@ -35,7 +36,7 @@ class RecentActivitiesViewModel: ObservableObject {
         let todaysDate = Date()
         let recentActivities = Array(activities)
         for recentActivity in recentActivities {
-            if DateHelper.checkDatesAreTheSame(dateOne: recentActivity.date,
+            if DateHelper.checkDatesAreTheSameDay(dateOne: recentActivity.date,
                                                dateTwo: todaysDate) {
                 todaysActivities.append(recentActivity)
             } else if DateHelper.checkEqualityOfMonthAndYear(

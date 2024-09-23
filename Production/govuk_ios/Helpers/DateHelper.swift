@@ -1,9 +1,9 @@
 import Foundation
 
 class DateHelper {
-    static func getMonthName(components: DateComponents) -> String {
+    private static func getMonthName(components: DateComponents) -> String {
         guard let componentMonth = components.month else { return "" }
-        return  DateFormatter().monthSymbols[componentMonth - 1]
+        return DateFormatter().monthSymbols[componentMonth - 1]
     }
 
     static func getMonthAndYear(date: Date) -> String {
@@ -14,12 +14,16 @@ class DateHelper {
         return "\(monthName) \(year)"
     }
 
-    static func checkDatesAreTheSame(dateOne: Date, dateTwo: Date) -> Bool {
-       return Calendar.current.isDate(dateOne, equalTo: dateTwo,
-                                      toGranularity: Calendar.Component.day)
+    static func checkDatesAreTheSameDay(dateOne: Date,
+                                        dateTwo: Date) -> Bool {
+        Calendar.current.isDate(
+            dateOne,
+            inSameDayAs: dateTwo
+        )
     }
 
-    static func checkEqualityOfMonthAndYear(dateOne: Date, dateTwo: Date) -> Bool {
+    static func checkEqualityOfMonthAndYear(dateOne: Date,
+                                            dateTwo: Date) -> Bool {
         let dateOneMonth = returnCalanderComponent(date: dateOne).month
         let dateTwoMonth = returnCalanderComponent(date: dateTwo).month
         let dateOneYear = returnCalanderComponent(date: dateOne).year
@@ -28,7 +32,7 @@ class DateHelper {
     }
 
     static func returnCalanderComponent(date: Date) -> DateComponents {
-        return Calendar.current.dateComponents([ .day, .month, .year], from: date)
+        Calendar.current.dateComponents([ .day, .month, .year], from: date)
     }
 
     static func sortDate(dates: inout [ActivityItem]) {

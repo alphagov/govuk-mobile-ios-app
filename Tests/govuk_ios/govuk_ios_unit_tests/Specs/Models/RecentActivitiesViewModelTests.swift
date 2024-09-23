@@ -165,7 +165,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
     private func fetchRandomDateFromMonth() -> Date? {
         guard let date = generateRandomDateFromMonth() else { return nil }
-        if !DateHelper.checkDatesAreTheSame(
+        if !DateHelper.checkDatesAreTheSameDay(
             dateOne: Date(), dateTwo: date
         ) {
             return date

@@ -891,7 +891,7 @@
 			path = Container;
 			sourceTree = "<group>";
 		};
-		5D41DB672C087F850011E691 /* NetworkClients */ = {
+		5D41DB672C087F850011E691 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				5D41DB682C088C580011E691 /* APIServiceClient.swift */,
@@ -899,7 +899,7 @@
 				5D15A8E72C6A47770050C780 /* GOVRequest.swift */,
 				5D349F662C6B548200B7F747 /* RequestBuilder.swift */,
 			);
-			path = NetworkClients;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		5D41DB6A2C088CA30011E691 /* Repositories */ = {
@@ -1173,7 +1173,7 @@
 				5D8683932C340F0A0024F2D8 /* Deeplinking */,
 				5D1353AE2BE0D9A700414441 /* Extensions */,
 				5DE970512C297637009D66C4 /* Model */,
-				5D41DB672C087F850011E691 /* NetworkClients */,
+				5D41DB672C087F850011E691 /* Networking */,
 				5D41DB6A2C088CA30011E691 /* Repositories */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
 				5D0BD4572C9B1BA800220625 /* ServiceClients */,

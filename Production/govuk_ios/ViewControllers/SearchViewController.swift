@@ -46,10 +46,7 @@ class SearchViewController: BaseViewController,
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(
-            SearchResultCell.self,
-            forCellReuseIdentifier: SearchResultCell.identifier
-        )
+        tableView.register(SearchResultCell.self)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.govUK.fills.surfaceModal
@@ -60,12 +57,7 @@ class SearchViewController: BaseViewController,
         let localDataSource = DataSource(
             tableView: tableView,
             cellProvider: { tableView, indexPath, item in
-                // swiftlint:disable force_cast
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: SearchResultCell.identifier,
-                    for: indexPath
-                ) as! SearchResultCell
-                // swiftlint:enable force_cast
+                let cell: SearchResultCell = tableView.dequeue(indexPath: indexPath)
                 cell.configure(item: item)
                 return cell
             }

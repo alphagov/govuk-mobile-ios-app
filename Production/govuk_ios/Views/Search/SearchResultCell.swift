@@ -2,8 +2,6 @@ import UIKit
 import UIComponents
 
 class SearchResultCell: UITableViewCell {
-    static let identifier = "SearchResult"
-
     private lazy var card: UIView = {
         let localView = UIView()
         localView.translatesAutoresizingMaskIntoConstraints = false

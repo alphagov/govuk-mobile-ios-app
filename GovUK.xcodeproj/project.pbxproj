@@ -212,6 +212,7 @@
 		5DC79FA52CA15CE800014446 /* SearchServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA42CA15CE800014446 /* SearchServiceClientTests.swift */; };
 		5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA62CA170D600014446 /* SearchServiceTests.swift */; };
 		5DC79FAA2CA1744C00014446 /* MockSearchServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */; };
+		5DC79FAC2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FAB2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift */; };
 		5DD036852C5A577C00EEF11E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD036842C5A577C00EEF11E /* NavigationBar.swift */; };
 		5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD09EC72C9ADB8500494550 /* SearchService.swift */; };
 		5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */; };
@@ -473,6 +474,7 @@
 		5DC79FA42CA15CE800014446 /* SearchServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClientTests.swift; sourceTree = "<group>"; };
 		5DC79FA62CA170D600014446 /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
 		5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchServiceClient.swift; sourceTree = "<group>"; };
+		5DC79FAB2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		5DD036842C5A577C00EEF11E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		5DD09EC72C9ADB8500494550 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLOpenerTests.swift"; sourceTree = "<group>"; };
@@ -1358,6 +1360,7 @@
 			isa = PBXGroup;
 			children = (
 				5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */,
+				5DC79FAB2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1373,7 +1376,6 @@
 		5DD6EFFB2BFF546000C2D79B /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				5DC79FA82CA1744500014446 /* ServiceClients */,
 				4E18E08E2C74A43A00538CF0 /* AppConfig */,
 				5DC04B952C2D72F20036EF2B /* Builders */,
 				5DA44C362C2EF1D400D8FE7C /* Coordinators */,
@@ -1382,6 +1384,7 @@
 				5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */,
 				5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */,
 				5D349F5E2C6A5A5700B7F747 /* Networking */,
+				5DC79FA82CA1744500014446 /* ServiceClients */,
 				5DA44C392C2EF1DD00D8FE7C /* Services */,
 			);
 			path = Mocks;
@@ -1889,6 +1892,7 @@
 				5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */,
 				5D349F632C6A5A9C00B7F747 /* APIServiceClientTests.swift in Sources */,
 				5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */,
+				5DC79FAC2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift in Sources */,
 				5D37EA112C3E865F006B36CB /* DrivingCoordinatorTests.swift in Sources */,
 				5D0BD45E2C9B23EE00220625 /* MockSearchService.swift in Sources */,
 				5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */,

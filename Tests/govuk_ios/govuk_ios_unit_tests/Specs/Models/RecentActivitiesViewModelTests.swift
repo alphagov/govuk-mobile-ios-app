@@ -158,26 +158,20 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         guard
             let days = calendar.range(of: .day, in: .month, for: date),
             let randomDay = days.randomElement()
-        else {
-            return nil
-        }
+        else { return nil }
         dateComponents.setValue(randomDay, for: .day)
         return calendar.date(from: dateComponents)
     }
 
-    private func fetchRandomDateWithinMonth() -> Date? {
+    private func fetchRandomDateFromMonth() -> Date? {
         guard let date = generateRandomDateFromMonth()
-        else { return nil}
+        else { return nil }
 
-        if !DateHelper.checkDatesAreTheSame(
-            dateOne: Date(),
-            dateTwo: date
-        ) {
+        if !DateHelper.checkDatesAreTheSame(dateOne: Date(), dateTwo: date) {
             return date
         } else {
-            return fetchRandomDateWithinMonth()
+            return generateRandomDateFromMonth()
         }
-    }
-}
+    }}
 
 

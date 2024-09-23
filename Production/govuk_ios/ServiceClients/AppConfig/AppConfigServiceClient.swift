@@ -9,7 +9,7 @@ class AppConfigServiceClient: AppConfigServiceClientInterface {
 
     func fetchAppConfig(completion: @escaping FetchAppConfigResult) {
         let fetchRequest = GOVRequest(
-            urlPath: Constants.API.appConfigPath,
+            urlPath: "/appinfo/ios",
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
@@ -17,7 +17,8 @@ class AppConfigServiceClient: AppConfigServiceClientInterface {
         )
 
         serviceClient.send(
-            request: fetchRequest) { result in
+            request: fetchRequest,
+            completion: { result in
                 switch result {
                 case .failure:
                     completion(.failure(.remoteJsonError))
@@ -34,5 +35,7 @@ class AppConfigServiceClient: AppConfigServiceClientInterface {
                     }
                 }
             }
+        )
     }
 }
+

@@ -12,4 +12,14 @@ extension Container {
             )
         }
     }
+
+    var appAPIClient: Factory<APIServiceClientInterface> {
+        Factory(self) {
+            APIServiceClient(
+                baseUrl: URL(string: Constants.API.appBaseUrl)!,
+                session: URLSession(configuration: .default),
+                requestBuilder: RequestBuilder()
+            )
+        }
+    }
 }

@@ -7,7 +7,7 @@ final class AppConfigServiceClientTests: XCTestCase {
 
     override func setUpWithError() throws {
         let serviceClient = APIServiceClient(
-            baseUrl: URL(string: Constants.API.appConfigUrl)!,
+            baseUrl: URL(string: Constants.API.appBaseUrl)!,
             session: URLSession.mock,
             requestBuilder: RequestBuilder()
         )

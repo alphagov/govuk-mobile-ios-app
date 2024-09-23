@@ -55,7 +55,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         ).load()
 
         var activitiesArray: [ActivityItem] = []
-        
+
         guard let randomDateOne = fetchRandomDateWithinMonth() else { return }
         guard let randomDateTwo = fetchRandomDateWithinMonth() else { return }
         guard let randomDateThree = fetchRandomDateWithinMonth() else { return }
@@ -164,14 +164,11 @@ final class RecentActivitiesViewModelTests: XCTestCase {
     }
 
     private func fetchRandomDateFromMonth() -> Date? {
-        guard let date = generateRandomDateFromMonth()
-        else { return nil }
-
+        guard let date = generateRandomDateFromMonth() else { return nil }
         if !DateHelper.checkDatesAreTheSame(dateOne: Date(), dateTwo: date) {
             return date
         } else {
             return generateRandomDateFromMonth()
         }
-    }}
-
-
+    }
+}

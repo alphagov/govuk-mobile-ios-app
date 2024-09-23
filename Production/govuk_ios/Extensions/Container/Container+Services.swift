@@ -44,15 +44,17 @@ extension Container {
 
     var appConfigService: Factory<AppConfigServiceInterface> {
         Factory(self) {
-            AppConfigService(
-                configProvider:
-                    AppConfigProvider(
-                        apiService: APIServiceClient(
-                            baseUrl: URL(string: Constants.API.appConfigUrl)!,
-                            session: URLSession(configuration: .default),
-                            requestBuilder: RequestBuilder()
-                        )
-                    )
+            let appConfigRepository = AppConfigRepository()
+            let serviceClient = APIServiceClient(
+                baseUrl: URL(string: Constants.API.appConfigUrl)!,
+                session: URLSession(configuration: .default),
+                requestBuilder: RequestBuilder()
+            )
+            let appConfigServiceClient = AppConfigServiceClient(serviceClient: serviceClient)
+
+            return AppConfigService(
+                appConfigRepository: appConfigRepository,
+                appConfigServiceClient: appConfigServiceClient
             )
         }.scope(.singleton)
     }

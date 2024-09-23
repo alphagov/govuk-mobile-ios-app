@@ -6,33 +6,36 @@ protocol AppConfigServiceInterface {
 
 public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
-    private let configProvider: AppConfigProviderInterface
+    private let appConfigRepository: AppConfigRepositoryInterface
+    private let appConfigServiceClient: AppConfigServiceClientInterface
 
     private enum ConfigStrings: String {
         case filename = "RemoteConfigResponse"
     }
 
-    init(configProvider: AppConfigProviderInterface) {
-        self.configProvider = configProvider
-        fetchLocalAppConfig()
-        fetchRemoteAppConfig()
+    init(appConfigRepository: AppConfigRepositoryInterface,
+         appConfigServiceClient: AppConfigServiceClientInterface) {
+        self.appConfigRepository = appConfigRepository
+        self.appConfigServiceClient = appConfigServiceClient
+
+        fetchAppConfig()
     }
 
-    private func fetchLocalAppConfig() {
-        configProvider.fetchLocalAppConfig(
+    private func fetchAppConfig() {
+        appConfigRepository.fetchAppConfig(
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
                 try? self.setFeatureflags(result: result)
             }
         )
-    }
 
-    private func fetchRemoteAppConfig() {
-        configProvider.fetchRemoteAppConfig(completion: { [weak self] _ in
-            // Don't handle response for now as documented
-            // https://govukverify.atlassian.net/browse/GOVUKAPP-581
-        })
+        appConfigServiceClient.fetchAppConfig(
+            completion: { [weak self] result in
+                guard let self = self else { return }
+                try? self.setFeatureflags(result: result)
+            }
+        )
     }
 
     private func setFeatureflags(result: Result<AppConfig, AppConfigError>) throws {

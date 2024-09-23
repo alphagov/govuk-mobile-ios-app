@@ -165,7 +165,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         return calendar.date(from: dateComponents)
     }
 
-    func fetchRandomDateWithinMonth() -> Date? {
+    private func fetchRandomDateWithinMonth() -> Date? {
         guard let date = generateRandomDateFromMonth()
         else { return nil}
 

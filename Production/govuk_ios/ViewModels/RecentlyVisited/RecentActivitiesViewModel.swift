@@ -8,7 +8,8 @@ class RecentActivitiesViewModel: ObservableObject {
     private let urlOpener: URLOpener
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
 
-    init(analyticsService: AnalyticsServiceInterface, urlOpener: URLOpener) {
+    init(analyticsService: AnalyticsServiceInterface,
+         urlOpener: URLOpener) {
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
     }
@@ -70,18 +71,5 @@ class RecentActivitiesViewModel: ObservableObject {
             uniqueElements.append(item)
         }
         return uniqueElements
-    }
-}
-
-struct MonthGroupKey: Hashable,
-                      Equatable {
-    let title: String
-    let month: Int
-    let year: Int
-
-    init(date: Date) {
-        self.month = Calendar.current.component(.month, from: date)
-        self.year = Calendar.current.component(.year, from: date)
-        self.title = DateFormatter.recentActivityHeader.string(from: date)
     }
 }

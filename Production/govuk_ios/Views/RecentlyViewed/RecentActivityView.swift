@@ -61,7 +61,7 @@ struct RecentActivityView: View {
     private func buildSectionsView() -> [GroupedListSection] {
         let keys = model.recentMonthActivities.keys
         return keys
-            .sorted { $0.year > $1.year && $0.month > $1.month }
+            .sorted { $0 > $1 }
             .map {
                 let items = model.recentMonthActivities[$0]
                 return GroupedListSection(

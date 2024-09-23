@@ -9,7 +9,8 @@ class SearchViewModelTests: XCTestCase {
 
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
-            searchService: MockSearchService()
+            searchService: MockSearchService(),
+            urlOpener: MockURLOpener()
         )
 
         let expectedTitle = UUID().uuidString
@@ -37,7 +38,8 @@ class SearchViewModelTests: XCTestCase {
         let mockService = MockSearchService()
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
-            searchService: mockService
+            searchService: mockService,
+            urlOpener: MockURLOpener()
         )
         let searchText = "Passport for dogs"
         subject.search(
@@ -65,7 +67,8 @@ class SearchViewModelTests: XCTestCase {
         let mockServiceClient = MockSearchService()
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
-            searchService: mockServiceClient
+            searchService: mockServiceClient,
+            urlOpener: MockURLOpener()
         )
         let searchText = ""
 
@@ -86,7 +89,8 @@ class SearchViewModelTests: XCTestCase {
 
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
-            searchService: mockService
+            searchService: mockService,
+            urlOpener: MockURLOpener()
         )
         let searchText = "ASDLALSD"
 
@@ -106,7 +110,8 @@ class SearchViewModelTests: XCTestCase {
 
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
-            searchService: mockService
+            searchService: mockService,
+            urlOpener: MockURLOpener()
         )
         let searchText = "ASDLALSD"
 

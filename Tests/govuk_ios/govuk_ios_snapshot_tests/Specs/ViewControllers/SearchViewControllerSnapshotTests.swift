@@ -23,7 +23,8 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     private var viewController: SearchViewController {
         let viewModel = SearchViewModel(
             analyticsService: MockAnalyticsService(),
-            searchService: MockSearchService()
+            searchService: MockSearchService(),
+            urlOpener: MockURLOpener()
         )
         return SearchViewController(
             viewModel: viewModel,

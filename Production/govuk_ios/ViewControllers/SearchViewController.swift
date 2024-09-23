@@ -47,7 +47,8 @@ class SearchViewController: BaseViewController,
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(
-            SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.identifier
+            SearchResultCell.self,
+            forCellReuseIdentifier: SearchResultCell.identifier
         )
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none

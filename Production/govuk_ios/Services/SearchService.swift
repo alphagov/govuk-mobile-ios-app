@@ -17,8 +17,12 @@ class SearchService: SearchServiceInterface {
         serviceClient.search(
             term: term,
             completion: { result in
+                let mappedResult: Result<SearchResult, SearchError> = result.flatMap {
+                    $0.results.isEmpty ? .failure(.noResults) : .success($0)
+                }
+
                 DispatchQueue.main.async {
-                    completion(result)
+                    completion(mappedResult)
                 }
             }
         )

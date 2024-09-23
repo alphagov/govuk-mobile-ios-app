@@ -210,6 +210,8 @@
 		5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */; };
 		5DC527BC2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */; };
 		5DC79FA52CA15CE800014446 /* SearchServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA42CA15CE800014446 /* SearchServiceClientTests.swift */; };
+		5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA62CA170D600014446 /* SearchServiceTests.swift */; };
+		5DC79FAA2CA1744C00014446 /* MockSearchServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */; };
 		5DD036852C5A577C00EEF11E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD036842C5A577C00EEF11E /* NavigationBar.swift */; };
 		5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD09EC72C9ADB8500494550 /* SearchService.swift */; };
 		5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */; };
@@ -469,6 +471,8 @@
 		5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationCenter.swift; sourceTree = "<group>"; };
 		5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataRepository+Arrangers.swift"; sourceTree = "<group>"; };
 		5DC79FA42CA15CE800014446 /* SearchServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClientTests.swift; sourceTree = "<group>"; };
+		5DC79FA62CA170D600014446 /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
+		5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchServiceClient.swift; sourceTree = "<group>"; };
 		5DD036842C5A577C00EEF11E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		5DD09EC72C9ADB8500494550 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLOpenerTests.swift"; sourceTree = "<group>"; };
@@ -751,6 +755,7 @@
 				5DB2BB3F2C6BAA1D0039AD93 /* AnalyticsService+OnboardingTests.swift */,
 				5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */,
 				5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */,
+				5DC79FA62CA170D600014446 /* SearchServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1341,6 +1346,14 @@
 			path = ServiceClients;
 			sourceTree = "<group>";
 		};
+		5DC79FA82CA1744500014446 /* ServiceClients */ = {
+			isa = PBXGroup;
+			children = (
+				5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */,
+			);
+			path = ServiceClients;
+			sourceTree = "<group>";
+		};
 		5DD5F0BC2C99D56B009F5388 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1360,6 +1373,7 @@
 		5DD6EFFB2BFF546000C2D79B /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				5DC79FA82CA1744500014446 /* ServiceClients */,
 				4E18E08E2C74A43A00538CF0 /* AppConfig */,
 				5DC04B952C2D72F20036EF2B /* Builders */,
 				5DA44C362C2EF1D400D8FE7C /* Coordinators */,
@@ -1839,6 +1853,7 @@
 				5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */,
 				5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
+				5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */,
 				16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */,
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,
 				5DD57A5B2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift in Sources */,
@@ -1846,6 +1861,7 @@
 				5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */,
 				5D40433B2C7DBF710004CCFE /* Config+Arrangers.swift in Sources */,
 				5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */,
+				5DC79FAA2CA1744C00014446 /* MockSearchServiceClient.swift in Sources */,
 				5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
 				5D96C9DA2C860AD90003527A /* AppEvent+ConvenienceTests.swift in Sources */,

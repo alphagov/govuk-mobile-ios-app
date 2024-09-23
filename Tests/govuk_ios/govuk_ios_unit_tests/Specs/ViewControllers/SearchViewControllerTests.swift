@@ -18,7 +18,8 @@ struct SearchViewControllerTests {
         }
         let viewModel = SearchViewModel(
             analyticsService: MockAnalyticsService(),
-            searchService: MockSearchService()
+            searchService: MockSearchService(),
+            urlOpener: MockURLOpener()
         )
         let subject = SearchViewController(
             viewModel: viewModel,

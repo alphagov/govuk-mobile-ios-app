@@ -8,7 +8,8 @@ class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
         request.sortDescriptors = [
             NSSortDescriptor(
                 keyPath: \ActivityItem.date,
-                ascending: false)
+                ascending: false
+            )
         ]
         return request
     }

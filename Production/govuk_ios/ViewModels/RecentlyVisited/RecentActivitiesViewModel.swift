@@ -7,7 +7,9 @@ class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
 
-    init(analyticsService: AnalyticsServiceInterface, urlOpener: URLOpener) {
+    init(analyticsService: AnalyticsServiceInterface,
+         urlOpener: URLOpener
+    ) {
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
     }
@@ -35,8 +37,10 @@ class RecentActivitiesViewModel: ObservableObject {
         let todaysDate = Date()
         let recentActivities = Array(activities)
         for recentActivity in recentActivities {
-            if DateHelper.checkDatesAreTheSame(dateOne: recentActivity.date,
-                                               dateTwo: todaysDate) {
+            if DateHelper.isSameDayAs(
+                dateOne: recentActivity.date,
+                dateTwo: todaysDate
+            ) {
                 todaysActivities.append(recentActivity)
             } else if DateHelper.checkEqualityOfMonthAndYear(
                 dateOne: recentActivity.date,

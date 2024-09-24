@@ -154,7 +154,10 @@ final class RecentActivitiesViewModelTests: XCTestCase {
     private func generateRandomDateFromMonth() -> Date? {
         let date = Date()
         let calendar = Calendar.current
-        var dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        var dateComponents = calendar.dateComponents(
+            [.year, .month, .day],
+            from: date
+        )
         guard
             let days = calendar.range(of: .day, in: .month, for: date),
             let randomDay = days.randomElement()
@@ -165,7 +168,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
     private func fetchRandomDateFromMonth() -> Date? {
         guard let date = generateRandomDateFromMonth() else { return nil }
-        if !DateHelper.checkDatesAreTheSame(dateOne: Date(), dateTwo: date) {
+        if !DateHelper.isSameDayAs(dateOne: Date(), dateTwo: date) {
             return date
         } else {
             return generateRandomDateFromMonth()

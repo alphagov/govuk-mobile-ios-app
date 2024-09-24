@@ -50,8 +50,8 @@
 		4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */; };
 		4E18E0902C74A45500538CF0 /* MockAppConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E08F2C74A45500538CF0 /* MockAppConfigProvider.swift */; };
 		4E18E0922C74DD5D00538CF0 /* AppConfigProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E0912C74DD5D00538CF0 /* AppConfigProviderTests.swift */; };
-		4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift */; };
-		4E4FF25A2C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */; };
+		4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */; };
+		4E4FF25A2C9B5DB000310AEC /* RecentActivityControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FF2592C9B5DB000310AEC /* RecentActivityControllerSnapshotTests.swift */; };
 		4E562E432C988F580074A483 /* RecentActivitiesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
 		4E5ED2032C6E1E9400750BDA /* AppConfigProviderInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2022C6E1E9300750BDA /* AppConfigProviderInterface.swift */; };
@@ -316,8 +316,8 @@
 		4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceTests.swift; sourceTree = "<group>"; };
 		4E18E08F2C74A45500538CF0 /* MockAppConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppConfigProvider.swift; sourceTree = "<group>"; };
 		4E18E0912C74DD5D00538CF0 /* AppConfigProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigProviderTests.swift; sourceTree = "<group>"; };
-		4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinatortests.swift; sourceTree = "<group>"; };
-		4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActvityControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinatorTests.swift; sourceTree = "<group>"; };
+		4E4FF2592C9B5DB000310AEC /* RecentActivityControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = RecentActivity.xcstrings; sourceTree = "<group>"; };
 		4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesViewModelTests.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
@@ -839,7 +839,7 @@
 				16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */,
 				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
-				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift */,
+				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1043,7 +1043,7 @@
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
 				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
 				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
-				4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */,
+				4E4FF2592C9B5DB000310AEC /* RecentActivityControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1700,7 +1700,7 @@
 				5D4B9D442C07427C005F126A /* TestSceneDelegate.swift in Sources */,
 				5D4B9D452C07427C005F126A /* TestAppDelegate.swift in Sources */,
 				16F9619F2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift in Sources */,
-				4E4FF25A2C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift in Sources */,
+				4E4FF25A2C9B5DB000310AEC /* RecentActivityControllerSnapshotTests.swift in Sources */,
 				4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
@@ -1867,7 +1867,7 @@
 				4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,
 				5DC527BC2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift in Sources */,
-				4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatortests.swift in Sources */,
+				4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift in Sources */,
 				5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */,
 				16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */,
 				16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */,

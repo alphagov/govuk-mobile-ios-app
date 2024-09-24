@@ -10,7 +10,7 @@ final class DateHelperTests: XCTestCase {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let mockDate = dateFormatter.date(from:isoDate)!
 
-        var date = DateHelper.getDay(date: mockDate)
+        let date = DateHelper.getDay(date: mockDate)
 
         XCTAssertEqual(date, 14)
     }
@@ -21,7 +21,6 @@ final class DateHelperTests: XCTestCase {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let mockDate = dateFormatter.date(from:isoDate)!
-        var date = DateHelper.getDay(date: mockDate)
         let components = DateHelper.returnCalanderComponent(date: mockDate)
 
         let month = DateHelper.getMonthName(components: components)
@@ -33,12 +32,26 @@ final class DateHelperTests: XCTestCase {
         let dateOne = Date()
         let dateTwo = Date()
 
-        let dateEquality = DateHelper.checkDatesAreTheSame(
+        let dateEquality = DateHelper.isSameDayAs(
             dateOne: dateOne,
             dateTwo: dateTwo
         )
 
         XCTAssertTrue(dateEquality)
+    }
+
+    func test_inSameDayAs_whenDaysAreNotTheSame_returnsFalse() throws {
+        let dateOne = Date()
+        let dateTwo = DateHelper.convertDateStringToDate(
+            dateString: "2016-04-14T10:44:00+0000"
+        )
+
+        let dateEquality = DateHelper.isSameDayAs(
+            dateOne: dateOne,
+            dateTwo: dateTwo
+        )
+
+        XCTAssertFalse(dateEquality)
     }
 
     func test_checkEqualityOfMonthAndYear_whenMonthAndYearAreEqual_returnsTrue() throws {
@@ -60,7 +73,7 @@ final class DateHelperTests: XCTestCase {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let mockDate = dateFormatter.date(from: isoDate)!
 
-        var dateString = DateHelper.getMonthAndYear(date: mockDate)
+        let dateString = DateHelper.getMonthAndYear(date: mockDate)
 
         XCTAssertEqual(dateString, "April 2016")
     }

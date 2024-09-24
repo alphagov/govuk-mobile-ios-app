@@ -1,17 +1,6 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
-    "editButtonTitle" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit"
-          }
-        }
-      }
-    },
     "recentActivitiesTodaysListTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -40,7 +29,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You haven't used the app to visit GOV.UK pages yet"
+            "value" : "You haven't used the app to visit GOV.UK \\npages yet"
           }
         }
       }

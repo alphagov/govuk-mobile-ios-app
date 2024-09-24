@@ -84,6 +84,7 @@ class ViewControllerBuilder {
         )
     }
 
+    @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
         let viewModel = RecentActivitiesViewModel(
             analyticsService: analyticsService,

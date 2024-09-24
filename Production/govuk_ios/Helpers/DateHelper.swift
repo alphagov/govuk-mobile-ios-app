@@ -9,7 +9,7 @@ class DateHelper {
 
     static func getMonthName(components: DateComponents) -> String {
         guard let componentMonth = components.month else { return "" }
-        return  DateFormatter().monthSymbols[componentMonth - 1]
+        return DateFormatter().monthSymbols[componentMonth - 1]
     }
 
     static func getMonthAndYear(date: Date) -> String {
@@ -20,9 +20,13 @@ class DateHelper {
         return "\(monthName) \(year)"
     }
 
-    static func checkDatesAreTheSame(dateOne: Date, dateTwo: Date) -> Bool {
-       return Calendar.current.isDate(dateOne, equalTo: dateTwo,
-                                      toGranularity: Calendar.Component.day)
+    static func isSameDayAs(dateOne: Date, dateTwo: Date) -> Bool {
+        let dayEquality = Calendar.current.isDate(
+            dateOne,
+            equalTo: dateTwo,
+            toGranularity: Calendar.Component.day
+        )
+        return dayEquality
     }
 
     static func checkEqualityOfMonthAndYear(dateOne: Date, dateTwo: Date) -> Bool {

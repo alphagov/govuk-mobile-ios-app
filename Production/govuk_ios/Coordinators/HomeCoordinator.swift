@@ -53,13 +53,15 @@ class HomeCoordinator: TabItemCoordinator {
             strongSelf.present(coordinator)
         }
     }
+
     private var recentActivityCoordinator: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
             navigationController.setNavigationBarHidden(false, animated: false)
             navigationController.navigationBar.prefersLargeTitles = true
             let coordinator = self.coordinatorBuilder.recentActivity(
-                navigationContoller: navigationController)
+                navigationContoller: navigationController
+            )
             start(coordinator)
         }
     }

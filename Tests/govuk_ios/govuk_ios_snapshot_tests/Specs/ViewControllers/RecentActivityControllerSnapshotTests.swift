@@ -7,16 +7,48 @@ import CoreData
 
 class RecentActvitySnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_errorView_rendersCorrectly() {
+        let coreData = CoreDataRepository.arrange(
+            notificationCenter: .default
+        ).load()
+
+        let viewModel = RecentActivitiesViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: UIApplication.shared
+        )
+
+        let view = RecentActivityContainerView(viewModel: viewModel)
+            .environment(
+                \.managedObjectContext,
+                 coreData.viewContext
+            )
+        let viewController = UIHostingController(rootView: view)
+
         VerifySnapshotInNavigationController(
-            viewController: returnViewController(),
+            viewController: viewController,
             mode: .light,
             navBarHidden: true
         )
     }
 
     func test_loadInNavigationController_dark_errorView_rendersCorrectly() {
+        let coreData = CoreDataRepository.arrange(
+            notificationCenter: .default
+        ).load()
+
+        let viewModel = RecentActivitiesViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: UIApplication.shared
+        )
+
+        let view = RecentActivityContainerView(viewModel: viewModel)
+            .environment(
+                \.managedObjectContext,
+                 coreData.viewContext
+            )
+        let viewController = UIHostingController(rootView: view)
+
         VerifySnapshotInNavigationController(
-            viewController: returnViewController(),
+            viewController: viewController,
             mode: .dark
         )
     }
@@ -44,7 +76,7 @@ class RecentActvitySnapshotTests: SnapshotTestCase {
             \.managedObjectContext,
              coreData.viewContext
         )
-       let viewController =  UIHostingController(rootView: view)
+       let viewController = UIHostingController(rootView: view)
 
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -75,22 +107,12 @@ class RecentActvitySnapshotTests: SnapshotTestCase {
                 \.managedObjectContext,
                  coreData.viewContext
             )
-        let viewController =  UIHostingController(rootView: view)
+        let viewController = UIHostingController(rootView: view)
 
         VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .light
         )
-    }
-
-    private func returnViewController() -> UIViewController {
-        let viewModel = RecentActivitiesViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener()
-        )
-
-        let view = RecentActivityContainerView(viewModel: viewModel)
-        return UIHostingController(rootView: view)
     }
 }
 

@@ -17,6 +17,6 @@ class RecentActivityCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.recentActivity(
             analyticsService: analyticsService
         )
-        push(viewController, animated: false)
+        push(viewController, animated: true)
     }
 }

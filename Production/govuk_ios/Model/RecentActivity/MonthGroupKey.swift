@@ -7,10 +7,11 @@ struct MonthGroupKey: Hashable,
     let year: Int
 
     init(date: Date,
-         calendar: Calendar = .current) {
+         calendar: Calendar = .current,
+         formatter: DateFormatter = .recentActivityHeader) {
         self.month = calendar.component(.month, from: date)
         self.year = calendar.component(.year, from: date)
-        self.title = DateFormatter.recentActivityHeader.string(from: date)
+        self.title = formatter.string(from: date)
     }
 }
 

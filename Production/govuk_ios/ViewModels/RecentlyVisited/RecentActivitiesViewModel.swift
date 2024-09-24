@@ -36,7 +36,10 @@ class RecentActivitiesViewModel: ObservableObject {
             } else if recentActivity.date.isThisMonth() {
                 currentMonthActivities.append(recentActivity)
             } else {
-                let key = MonthGroupKey(date: recentActivity.date)
+                let key = MonthGroupKey(
+                    date: recentActivity.date,
+                    formatter: recentActivityHeaderFormatter
+                )
                 var items = recentMonthsActivities[key] ?? []
                 items.append(recentActivity)
                 recentMonthsActivities[key] = items

@@ -42,10 +42,6 @@ class DateHelper {
         )
     }
 
-    static func sortDate(dates: inout [ActivityItem]) {
-         dates.sort {$0.date > $1.date}
-    }
-
     static func convertDateStringToDate(dateString: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")

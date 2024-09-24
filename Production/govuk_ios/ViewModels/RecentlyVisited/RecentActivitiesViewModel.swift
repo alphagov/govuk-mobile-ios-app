@@ -6,17 +6,16 @@ import UIKit
 class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
+    private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
 
-    init(analyticsService: AnalyticsServiceInterface, urlOpener: URLOpener) {
+    init(analyticsService: AnalyticsServiceInterface,
+         urlOpener: URLOpener) {
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
     }
 
-    let toolbarTitle = String.recentActivity.localized(
-        "editButtonTitle"
-    )
     let navigationTitle = String.recentActivity.localized(
-        "recentActivityNavigationTitleLabel"
+        "recentActivityNavigationTitle"
     )
 
     func itemSelected(item: ActivityItem) {
@@ -28,37 +27,29 @@ class RecentActivitiesViewModel: ObservableObject {
     }
 
     func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
-        var todaysActivities: [ActivityItem]  = []
-        var currentMonthActivities: [ActivityItem]  = []
-        var recentMonthsActivities: [ActivityItem] = []
-        var recentMonthActivityDates: [String] = []
-        let todaysDate = Date()
-        let recentActivities = Array(activities)
-        for recentActivity in recentActivities {
-            if DateHelper.isSameDayAs(
-                dateOne: recentActivity.date,
-                dateTwo: todaysDate
-            ) {
+        var todaysActivities: [ActivityItem] = []
+        var currentMonthActivities: [ActivityItem] = []
+        var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]
+        for recentActivity in activities {
+            if recentActivity.date.isToday() {
                 todaysActivities.append(recentActivity)
-            } else if DateHelper.checkEqualityOfMonthAndYear(
-                dateOne: recentActivity.date,
-                dateTwo: todaysDate) {
+            } else if recentActivity.date.isThisMonth() {
                 currentMonthActivities.append(recentActivity)
             } else {
-                recentMonthActivityDates.append(
-                    DateHelper.getMonthAndYear(date: recentActivity.date)
+                let key = MonthGroupKey(
+                    date: recentActivity.date,
+                    formatter: recentActivityHeaderFormatter
                 )
-                recentMonthsActivities.append(recentActivity)
+                var items = recentMonthsActivities[key] ?? []
+                items.append(recentActivity)
+                recentMonthsActivities[key] = items
             }
         }
 
-        return RecentActivitiesViewStructure(
+        return .init(
             todaysActivites: todaysActivities,
             currentMonthActivities: currentMonthActivities,
-            recentMonthActivities: recentMonthsActivities,
-            recentMonthsActivityDates: removeDuplicateRecentMonthStrings(
-                array: recentMonthActivityDates
-            )
+            recentMonthActivities: recentMonthsActivities
         )
     }
 
@@ -70,13 +61,5 @@ class RecentActivitiesViewModel: ObservableObject {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
-    }
-
-    private func removeDuplicateRecentMonthStrings(array: [String]) -> [String] {
-        var uniqueElements: [String] = []
-        for item in array where !uniqueElements.contains(item) {
-            uniqueElements.append(item)
-        }
-        return uniqueElements
     }
 }

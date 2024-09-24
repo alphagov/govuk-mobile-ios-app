@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import CoreData
+
 @testable import govuk_ios
 
 class RecentActvitySnapshotTests: SnapshotTestCase {
@@ -29,9 +30,7 @@ class RecentActvitySnapshotTests: SnapshotTestCase {
         activity.id = UUID().uuidString
         activity.title = "benefits"
         activity.url = "https://www.youtube.com/"
-        activity.date = DateHelper.convertDateStringToDate(
-            dateString: "2016-04-14T10:44:00+0000"
-        )
+        activity.date = Date.arrange("14/04/2016")
 
         try? coreData.backgroundContext.save()
 
@@ -62,9 +61,7 @@ class RecentActvitySnapshotTests: SnapshotTestCase {
         activity.id = UUID().uuidString
         activity.title = "benefits"
         activity.url = "https://www.youtube.com/"
-        activity.date = DateHelper.convertDateStringToDate(
-            dateString: "2016-04-14T10:44:00+0000"
-        )
+        activity.date = Date.arrange("14/04/2016")
 
         try? coreData.backgroundContext.save()
 

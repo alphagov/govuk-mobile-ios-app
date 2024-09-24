@@ -16,11 +16,16 @@ struct Date_ExtensionsTests {
             "01/01/2001",
             "02/12/2004",
             "02/12/2024",
-            "02/10/2025"
         ]
     )
     func isToday_notToday_returnsFalse(dateString: String) {
         let sut = Date.arrange(dateString)
+        #expect(!sut.isToday())
+    }
+
+    @Test
+    func isToday_notToday_inFuture_returnsFalse() {
+        let sut = Date(timeIntervalSinceNow: 100000000)
         #expect(!sut.isToday())
     }
 

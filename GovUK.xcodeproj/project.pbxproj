@@ -1009,10 +1009,10 @@
 		5D79AEBE2C32B8CB0061F344 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4E94E8E02C8B19B300906803 /* RecentlyViewed */,
 				5D79AEBF2C32B9180061F344 /* AnimationView.swift */,
 				5D9E67C72C5A2E1700DB7877 /* DividerView.swift */,
 				16E5AD442C6E499B000B8B3A /* Home */,
+				4E94E8E02C8B19B300906803 /* RecentlyViewed */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1047,7 +1047,7 @@
 				3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */,
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
-				4E4FF2592C9B5DB000310AEC /* RecentActvityControllerSnapshotTests.swift */,
+				4E4FF2592C9B5DB000310AEC /* RecentActivityControllerSnapshotTests.swift */,
 				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
 				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
 			);

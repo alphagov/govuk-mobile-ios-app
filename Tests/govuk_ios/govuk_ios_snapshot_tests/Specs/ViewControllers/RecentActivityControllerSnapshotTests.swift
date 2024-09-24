@@ -5,8 +5,7 @@ import CoreData
 
 @testable import govuk_ios
 
-class RecentActvitySnapshots: SnapshotTestCase {
-
+class RecentActvitySnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_errorView_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: returnViewController(),

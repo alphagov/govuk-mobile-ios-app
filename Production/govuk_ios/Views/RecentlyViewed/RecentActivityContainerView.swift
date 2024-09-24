@@ -7,7 +7,6 @@ struct RecentActivityContainerView: View, TrackableScreen {
 
     init(viewModel: RecentActivitiesViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        viewModel.trackScreen(screen: self)
     }
 
     var body: some View {

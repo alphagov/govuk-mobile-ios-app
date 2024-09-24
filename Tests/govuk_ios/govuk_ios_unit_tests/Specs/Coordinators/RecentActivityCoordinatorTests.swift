@@ -1,7 +1,7 @@
 import XCTest
 @testable import govuk_ios
 
-final class RecentActivityCoordinatortests: XCTestCase {
+final class RecentActivityCoordinatorTests: XCTestCase {
 
     @MainActor
     func test_start_setsRecentActivityViewController() throws {

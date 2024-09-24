@@ -14,7 +14,7 @@ class RecentActivityCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.recentActivty(
+        let viewController = viewControllerBuilder.recentActivity(
             analyticsService: analyticsService
         )
         push(viewController, animated: false)

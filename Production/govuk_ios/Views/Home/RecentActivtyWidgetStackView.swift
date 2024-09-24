@@ -9,7 +9,7 @@ class RecentActivtyWidgetStackView: UIStackView {
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
-        self.addGestureRecognizer(returnGesture())
+        self.addGestureRecognizer(gesture)
     }
 
     private lazy var titleLabel: UILabel = {
@@ -42,13 +42,13 @@ class RecentActivtyWidgetStackView: UIStackView {
         return button
     }()
 
-    private func returnGesture() -> UIGestureRecognizer {
+    private lazy var gesture: UIGestureRecognizer = {
         let recognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(recentActivityButtonPressed)
         )
         return recognizer
-    }
+    }()
 
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

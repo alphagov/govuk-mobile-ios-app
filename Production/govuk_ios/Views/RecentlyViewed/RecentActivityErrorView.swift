@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 
 struct RecentActivityErrorView: View {
     let errorTitle = String.recentActivity.localized(

@@ -2,18 +2,20 @@ import SwiftUI
 
 struct RecentActivityErrorView: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             Text(String.recentActivity.localized(
                 "recentActivityErrorViewTitle")
             )
-                .bold()
-                .multilineTextAlignment(.center)
-                .padding(.top)
+            .bold()
+            .multilineTextAlignment(.center)
+            .padding([.leading, .trailing])
             Text(String.recentActivity.localized(
                 "recentActivityErrorViewDescription")
             )
-                .multilineTextAlignment(.center)
+            .multilineTextAlignment(.center)
+            .padding([.leading, .trailing])
             Spacer()
-        }.padding(.top)
+        }
+        .padding()
     }
 }

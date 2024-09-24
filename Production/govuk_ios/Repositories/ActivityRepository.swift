@@ -21,14 +21,12 @@ class ActivityRepository: ActivityRepositoryInterface {
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit2"
         activityTwo.url = "https://www.gov.uk/"
-        activityTwo.date = DateHelper.convertDateStringToDate(
-            dateString: "2016-04-14T10:44:00+0000")
+        activityTwo.date = Date(timeIntervalSince1970: 1718050294)
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
         activityThree.url = "https://www.gov.uk/"
-        activityThree.date = DateHelper.convertDateStringToDate(
-            dateString: "2017-04-14T10:44:00+0000")
-       try? coreData.backgroundContext.save()
+        activityThree.date = Date(timeIntervalSince1970: 1720642294)
+        try? coreData.backgroundContext.save()
     }
 }

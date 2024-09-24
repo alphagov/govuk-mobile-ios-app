@@ -24,15 +24,6 @@ struct RecentActivityContainerView: View, TrackableScreen {
                 .accessibilityLabel(
                     Text(viewModel.navigationTitle)
                 )
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Text(viewModel.toolbarTitle).foregroundColor(
-                            Color(UIColor.govUK.text.link)
-                        ).accessibilityLabel(
-                            Text(viewModel.toolbarTitle)
-                        ).accessibilityAddTraits(.isButton)
-                    }
-                }
             default:
                 ProgressView()
             }

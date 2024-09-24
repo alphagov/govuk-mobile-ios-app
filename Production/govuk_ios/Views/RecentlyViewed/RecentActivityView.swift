@@ -4,6 +4,7 @@ import CoreData
 struct RecentActivityView: View {
     let model: RecentActivitiesViewStructure
     let selected: (ActivityItem) -> Void
+    let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     @Environment(\.managedObjectContext) private var context
 
     init(model: RecentActivitiesViewStructure,
@@ -16,24 +17,30 @@ struct RecentActivityView: View {
         ScrollView {
             if model.todaysActivites.count >= 1 {
                 let rows = model.todaysActivites.map({ activityRow(activityItem: $0) })
-                GroupedList(content: [GroupedListSection(
-                    heading: String.recentActivity.localized(
-                        "recentActivitiesTodaysListTitle"
-                    ),
-                    rows: rows,
-                    footer: nil
-                )]
+                GroupedList(
+                    content: [
+                        GroupedListSection(
+                            heading: String.recentActivity.localized(
+                                "recentActivitiesTodaysListTitle"
+                            ),
+                            rows: rows,
+                            footer: nil
+                        )
+                    ]
                 )
             }
             if model.currentMonthActivities.count >= 1 {
-                let rows = model.currentMonthActivities.map({ activityRow(activityItem: $0) })
-                GroupedList(content: [GroupedListSection(
-                    heading: String.recentActivity.localized(
-                        "recentActivityCurrentMonthItems"
-                    ),
-                    rows: rows,
-                    footer: nil
-                )]
+                let rows = model.currentMonthActivities.map { activityRow(activityItem: $0) }
+                GroupedList(
+                    content: [
+                        GroupedListSection(
+                            heading: String.recentActivity.localized(
+                                "recentActivityCurrentMonthItems"
+                            ),
+                            rows: rows,
+                            footer: nil
+                        )
+                    ]
                 )
             }
             if model.recentMonthActivities.count >= 1 {
@@ -46,7 +53,7 @@ struct RecentActivityView: View {
         LinkRow(
             id: activityItem.id,
             title: activityItem.title,
-            body: activityItem.formattedDate,
+            body: lastVisitedString(activity: activityItem),
             action: {
                 self.selected(activityItem)
             }
@@ -54,21 +61,23 @@ struct RecentActivityView: View {
     }
 
     private func buildSectionsView() -> [GroupedListSection] {
-        var groupedSections: [GroupedListSection] = []
-        for dateString in model.recentMonthsActivityDates {
-            let filteredArray = model.recentMonthActivities.filter { item in
-                DateHelper.getMonthAndYear(
-                    date: item.date) == dateString
+        model.recentMonthActivities.keys
+            .sorted { $0 > $1 }
+            .map {
+                let items = model.recentMonthActivities[$0]
+                return GroupedListSection(
+                    heading: $0.title,
+                    rows: items?.map(activityRow) ?? [],
+                    footer: nil
+                )
             }
-            let rows = filteredArray.map(
-                { activityRow(activityItem: $0) }
-            )
-            let groupSection = GroupedListSection(heading: dateString,
-                                                  rows: rows,
-                                                  footer: nil
-            )
-            groupedSections.append(groupSection)
-        }
-        return groupedSections
+    }
+
+    private func lastVisitedString(activity: ActivityItem) -> String {
+        let copy = String.recentActivity.localized(
+            "recentActivityFormattedDateStringComponent"
+        )
+        let formattedDateString = lastVisitedFormatter.string(from: activity.date)
+        return "\(copy) \(formattedDateString)"
     }
 }

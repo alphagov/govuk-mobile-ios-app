@@ -67,7 +67,7 @@
         }
       }
     },
-    "recentActivityNavigationTitleLabel" : {
+    "recentActivityNavigationTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

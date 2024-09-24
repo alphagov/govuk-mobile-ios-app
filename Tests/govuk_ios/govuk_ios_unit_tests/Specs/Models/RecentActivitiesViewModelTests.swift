@@ -56,9 +56,9 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
         var activitiesArray: [ActivityItem] = []
 
-        guard let randomDateOne = fetchRandomDateFromMonth() else { return }
-        guard let randomDateTwo = fetchRandomDateFromMonth() else { return }
-        guard let randomDateThree = fetchRandomDateFromMonth() else { return }
+        let randomDateOne = Date.arrangeRandomDateFromThisMonthNotToday
+        let randomDateTwo = Date.arrangeRandomDateFromThisMonthNotToday
+        let randomDateThree = Date.arrangeRandomDateFromThisMonthNotToday
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
@@ -104,20 +104,17 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         activity.id = UUID().uuidString
         activity.title = "benefit3"
         activity.url = "https://www.youtube.com/"
-        activity.date = DateHelper.convertDateStringToDate(
-            dateString: "2004-04-14T10:44:00+0000")
+        activity.date = .arrange("14/04/2004")
         let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit2"
         activityTwo.url = "https://www.youtube.com/"
-        activityTwo.date = DateHelper.convertDateStringToDate(
-            dateString: "2016-04-14T10:44:00+0000")
+        activityTwo.date = .arrange("14/04/2016")
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
         activityThree.url = "https://www.youtube.com/"
-        activityThree.date = DateHelper.convertDateStringToDate(
-            dateString: "2017-04-14T10:44:00+0000")
+        activityThree.date = .arrange("14/04/2017")
 
         try? coreData.backgroundContext.save()
 
@@ -149,29 +146,5 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
         XCTAssertEqual(analyticsService._trackedEvents.count, 1)
         XCTAssertEqual(analyticsService._trackedEvents.first?.name, "RecentActivity")
-    }
-
-    private func generateRandomDateFromMonth() -> Date? {
-        let date = Date()
-        let calendar = Calendar.current
-        var dateComponents = calendar.dateComponents(
-            [.year, .month, .day],
-            from: date
-        )
-        guard
-            let days = calendar.range(of: .day, in: .month, for: date),
-            let randomDay = days.randomElement()
-        else { return nil }
-        dateComponents.setValue(randomDay, for: .day)
-        return calendar.date(from: dateComponents)
-    }
-
-    private func fetchRandomDateFromMonth() -> Date? {
-        guard let date = generateRandomDateFromMonth() else { return nil }
-        if !DateHelper.isSameDayAs(dateOne: Date(), dateTwo: date) {
-            return date
-        } else {
-            return generateRandomDateFromMonth()
-        }
     }
 }

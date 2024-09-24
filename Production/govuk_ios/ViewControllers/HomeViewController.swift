@@ -38,7 +38,8 @@ class HomeViewController: BaseViewController,
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.navigationController?.setNavigationBarHidden(true, animated: false)
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     required init?(coder: NSCoder) {

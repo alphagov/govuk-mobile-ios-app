@@ -6,28 +6,39 @@ protocol AppConfigServiceInterface {
 
 public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
-    private let configProvider: AppConfigProviderInterface
+    private let appConfigRepository: AppConfigRepositoryInterface
+    private let appConfigServiceClient: AppConfigServiceClientInterface
 
     private enum ConfigStrings: String {
         case filename = "RemoteConfigResponse"
     }
 
-    init(configProvider: AppConfigProviderInterface) {
-        self.configProvider = configProvider
+    init(appConfigRepository: AppConfigRepositoryInterface,
+         appConfigServiceClient: AppConfigServiceClientInterface) {
+        self.appConfigRepository = appConfigRepository
+        self.appConfigServiceClient = appConfigServiceClient
+
         fetchAppConfig()
     }
 
     private func fetchAppConfig() {
-        configProvider.fetchAppConfig(
+        appConfigRepository.fetchAppConfig(
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.getFeatureflags(result: result)
+                try? self.setFeatureflags(result: result)
+            }
+        )
+
+        appConfigServiceClient.fetchAppConfig(
+            completion: { [weak self] result in
+                guard let self = self else { return }
+                try? self.setFeatureflags(result: result)
             }
         )
     }
 
-    private func getFeatureflags(result: Result<AppConfig, AppConfigError>) throws {
+    private func setFeatureflags(result: Result<AppConfig, AppConfigError>) throws {
         switch result {
         case .success(let appConfig):
             self.featureFlags = appConfig.config.releaseFlags

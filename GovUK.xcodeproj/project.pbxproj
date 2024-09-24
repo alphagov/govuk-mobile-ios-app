@@ -222,6 +222,12 @@
 		9685F82F2C78DF7000C33614 /* GroupedListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */; };
 		96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */; };
 		D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046511C2C933FE600F47C66 /* String+Extensions.swift */; };
+		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
+		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
+		D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */; };
+		D0A8B3C82CA18C2D00849304 /* MockAppConfigResponseInvalidSig.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */; };
+		D0A8B3CA2CA1A38400849304 /* SignableDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C92CA1A38400849304 /* SignableDecoder.swift */; };
+		D0A8B3CD2CA1A68200849304 /* Signable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3CC2CA1A68200849304 /* Signable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -470,6 +476,12 @@
 		9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSectionView.swift; sourceTree = "<group>"; };
 		96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePixelLineHelper.swift; sourceTree = "<group>"; };
 		D046511C2C933FE600F47C66 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = integration_pubkey.der; sourceTree = "<group>"; };
+		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
+		D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoderTests.swift; sourceTree = "<group>"; };
+		D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponseInvalidSig.json; sourceTree = "<group>"; };
+		D0A8B3C92CA1A38400849304 /* SignableDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoder.swift; sourceTree = "<group>"; };
+		D0A8B3CC2CA1A68200849304 /* Signable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -562,6 +574,7 @@
 		4E003E782C75EDB4008FCBF2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */,
 				4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */,
 				4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */,
 				5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */,
@@ -727,6 +740,7 @@
 				5DB2BB3F2C6BAA1D0039AD93 /* AnalyticsService+OnboardingTests.swift */,
 				5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */,
 				5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */,
+				D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -832,6 +846,7 @@
 		5D41DB612C0875560011E691 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D0A8B3CB2CA1A65A00849304 /* Signing */,
 				5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */,
 				5D31237F2C85A6B70088B931 /* ActivityService.swift */,
 				5DC2506B2C91DB13009E9E7F /* Analytics */,
@@ -909,6 +924,7 @@
 				D046511C2C933FE600F47C66 /* String+Extensions.swift */,
 				5D349F682C6B550000B7F747 /* URL+Extensions.swift */,
 				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
+				D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1198,6 +1214,7 @@
 		5DAD71AA2BD2548B0075F648 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
 				3D887CB72C944861001B1BA2 /* Constants.swift */,
@@ -1404,6 +1421,15 @@
 			path = SwiftUIViews;
 			sourceTree = "<group>";
 		};
+		D0A8B3CB2CA1A65A00849304 /* Signing */ = {
+			isa = PBXGroup;
+			children = (
+				D0A8B3C92CA1A38400849304 /* SignableDecoder.swift */,
+				D0A8B3CC2CA1A68200849304 /* Signable.swift */,
+			);
+			path = Signing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1565,6 +1591,8 @@
 				4E003E7A2C75EDEC008FCBF2 /* MockAppConfigResponse.json in Resources */,
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
 				5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */,
+				D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */,
+				D0A8B3C82CA18C2D00849304 /* MockAppConfigResponseInvalidSig.json in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				4E003E7C2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json in Resources */,
 				5D742BDA2C99791A00E7B87A /* Settings.xcstrings in Resources */,
@@ -1672,6 +1700,7 @@
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				4E18E0902C74A45500538CF0 /* MockAppConfigRepository.swift in Sources */,
 				5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */,
+				D0A8B3CD2CA1A68200849304 /* Signable.swift in Sources */,
 				160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */,
 				5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */,
 				5D3123862C85AEE20088B931 /* Container+Repositories.swift in Sources */,
@@ -1730,6 +1759,7 @@
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */,
 				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
+				D0A8B3CA2CA1A38400849304 /* SignableDecoder.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
@@ -1759,6 +1789,7 @@
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */,
+				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
@@ -1803,6 +1834,7 @@
 				5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */,
 				5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
+				D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */,
 				5D96C9DA2C860AD90003527A /* AppEvent+ConvenienceTests.swift in Sources */,
 				4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,

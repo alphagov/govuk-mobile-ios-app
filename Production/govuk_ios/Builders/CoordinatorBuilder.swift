@@ -24,7 +24,7 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .home(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
-            configService: AppConfigService(configProvider: AppConfigProvider())
+            configService: container.appConfigService.resolve()
         )
     }
 
@@ -43,6 +43,7 @@ class CoordinatorBuilder {
         LaunchCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
+            appConfigService: container.appConfigService.resolve(),
             completion: completion
         )
     }

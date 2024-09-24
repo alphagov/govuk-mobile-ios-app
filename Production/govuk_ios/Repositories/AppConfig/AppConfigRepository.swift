@@ -1,6 +1,6 @@
 import Foundation
 
-class AppConfigProvider: AppConfigProviderInterface {
+class AppConfigRepository: AppConfigRepositoryInterface {
     func fetchAppConfig(filename: String,
                         completion: @escaping (Result<AppConfig, AppConfigError>) -> Void) {
         let config = loadJSON(filename: filename, bundle: .main)

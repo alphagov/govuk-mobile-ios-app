@@ -1,7 +1,6 @@
 import Foundation
 
-class MockAppConfigProvider: AppConfigProviderInterface {
-
+class MockAppConfigRepository: AppConfigRepositoryInterface {
     var _receivedAppConfigCompletion: ((Result<AppConfig, AppConfigError>) -> Void)?
 
     func fetchAppConfig(filename: String,

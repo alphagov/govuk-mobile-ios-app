@@ -15,8 +15,7 @@ class DateHelper {
     static func getMonthAndYear(date: Date) -> String {
         let components = returnCalanderComponent(date: date)
         let monthName = getMonthName(components: components)
-        let year = components.year
-        guard let year = year else { return "" }
+        guard let year = components.year else { return "" }
         return "\(monthName) \(year)"
     }
 

@@ -71,6 +71,7 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             onboardingService: container.onboardingService.resolve(),
             analyticsService: container.onboardingAnalyticsService.resolve(),
+            appConfigService: container.appConfigService.resolve(),
             dismissAction: dismissAction
         )
     }

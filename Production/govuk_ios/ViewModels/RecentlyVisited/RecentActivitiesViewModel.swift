@@ -7,9 +7,7 @@ class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
 
-    init(analyticsService: AnalyticsServiceInterface,
-         urlOpener: URLOpener
-    ) {
+    init(analyticsService: AnalyticsServiceInterface, urlOpener: URLOpener) {
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
     }

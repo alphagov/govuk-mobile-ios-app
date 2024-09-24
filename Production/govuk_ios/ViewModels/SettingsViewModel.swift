@@ -62,7 +62,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
     private func privacyPolicyRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("privacyPolicyRowTitle")
         return LinkRow(
-            id: UUID().uuidString,
+            id: "settings.policy.row",
             title: rowTitle,
             body: nil,
             action: {
@@ -76,7 +76,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
     private func openSourceLicenceRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("openSourceLicenceRowTitle")
         return LinkRow(
-            id: UUID().uuidString,
+            id: "settings.licence.row",
             title: rowTitle,
             body: nil,
             action: {

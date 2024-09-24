@@ -44,10 +44,12 @@ class RecentActivtyWidgetStackView: UIStackView {
 
     private func returnGesture() -> UIGestureRecognizer {
         let recognizer = UITapGestureRecognizer(
-            target: self, action: #selector(recentActivityButtonPressed)
+            target: self,
+            action: #selector(recentActivityButtonPressed)
         )
         return recognizer
     }
+
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

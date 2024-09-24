@@ -6,14 +6,14 @@ import Testing
 struct SignableDecoderTests {
 
     @Test
-    func verifyValidSignature() async throws {
+    func verifySignature_signatureIsValid_isDecoded() async throws {
         let appConfigData = try #require(getMockConfigData(fileName: "MockAppConfigResponse"), "Unable to read mock data")
         let appConfig = try #require(try? SignableDecoder().decode(AppConfig.self, from: appConfigData), "Unable to decode AppConfig")
         #expect(appConfig != nil)
     }
     
     @Test
-    func verifyInValidSignature() async throws {
+    func verifySignature_signatureMalformed_throwsError() async throws {
         let appConfigData = try #require(getMockConfigData(fileName: "MockAppConfigResponseInvalidSig"), "Unable to read mock data")
         do {
             _ = try SignableDecoder().decode(AppConfig.self, from: appConfigData)

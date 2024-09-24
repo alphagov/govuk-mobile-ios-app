@@ -33,6 +33,9 @@ platform :ios do
     scan(
       scheme: configuration.app_scheme,
       devices: configuration.scan_devices,
+      ensure_devices_found: true,
+      force_quit_simulator: true,
+      reset_simulator: true,
       clean: true,
       prelaunch_simulator: true,
       derived_data_path: './build_for_unit_testing',

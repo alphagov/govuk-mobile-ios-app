@@ -11,7 +11,7 @@ default: &DEFAULTS
       uk.gov.govuk: "match AppStore uk.gov.govuk"
   scan:
     devices:
-      - iPhone 16 Pro
+      - iPhone 16 Pro (18.0)
   match: &MATCH_DEFAULTS
     method: "adhoc"
 

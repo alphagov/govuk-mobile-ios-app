@@ -22,7 +22,7 @@ struct HomeViewModel {
             title: title,
             primaryAction: recentActivityAction
         )
-        let content = RecentActivtyWidgetStackView(
+        let content = RecentActivtyWidget(
             viewModel: viewModel
         )
         let widget = WidgetView()

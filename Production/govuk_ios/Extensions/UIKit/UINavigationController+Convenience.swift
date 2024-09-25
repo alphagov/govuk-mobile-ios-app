@@ -6,6 +6,7 @@ extension UINavigationController {
         let navigationController = UINavigationController()
         navigationController.tabBarItem = .home
         navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.navigationBar.prefersLargeTitles = true
         return navigationController
     }
 

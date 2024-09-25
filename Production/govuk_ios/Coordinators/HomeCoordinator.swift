@@ -7,7 +7,6 @@ class HomeCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
     private let configService: AppConfigServiceInterface
-    private let navigationController: UINavigationController
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -20,7 +19,6 @@ class HomeCoordinator: TabItemCoordinator {
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
         self.configService = configService
-        self.navigationController = navigationController
         super.init(navigationController: navigationController)
     }
 
@@ -57,10 +55,8 @@ class HomeCoordinator: TabItemCoordinator {
     private var recentActivityCoordinator: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
-            navigationController.setNavigationBarHidden(false, animated: false)
-            navigationController.navigationBar.prefersLargeTitles = true
             let coordinator = self.coordinatorBuilder.recentActivity(
-                navigationContoller: navigationController
+                navigationContoller: self.root
             )
             start(coordinator)
         }

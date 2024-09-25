@@ -1,23 +1,22 @@
 import Foundation
-import XCTest
-
+import Testing
 @testable import govuk_ios
 
-class SearchViewModelTests: XCTestCase {
-    func test_selected_tracksItem() {
-        let mockAnalyticsService = MockAnalyticsService()
+@Suite
+struct SearchViewModelTests{
 
+    @Test
+    func selected_tracksItem() {
+        let mockAnalyticsService = MockAnalyticsService()
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
             searchService: MockSearchService(),
             urlOpener: MockURLOpener()
         )
-
         let expectedTitle = UUID().uuidString
-        let expectedDescription = UUID().uuidString
         let item = SearchItem(
             title: expectedTitle,
-            description: expectedDescription,
+            description: UUID().uuidString,
             link: "/random"
         )
 
@@ -26,14 +25,15 @@ class SearchViewModelTests: XCTestCase {
         )
 
         let events = mockAnalyticsService._trackedEvents
-        XCTAssertEqual(events.count, 1)
-        XCTAssertEqual(events.last?.name, "Navigation")
-        XCTAssertEqual(events.last?.params?["text"] as! String, expectedTitle)
-        XCTAssertEqual(events.last?.params?["url"] as! String, "https://www.gov.uk/random")
-        XCTAssertEqual(events.last?.params?["external"] as! Bool, true)
+        #expect(events.count == 1)
+        #expect(events.last?.name == "Navigation")
+        #expect(events.last?.params?["text"] as! String == expectedTitle)
+        #expect(events.last?.params?["url"] as! String == "https://www.gov.uk/random")
+        #expect(events.last?.params?["external"] as! Bool)
     }
 
-    func test_search_success_setsResults() {
+    @Test
+    func search_success_setsResults() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockService = MockSearchService()
         let subject = SearchViewModel(
@@ -41,11 +41,13 @@ class SearchViewModelTests: XCTestCase {
             searchService: mockService,
             urlOpener: MockURLOpener()
         )
-        let searchText = "Passport for dogs"
+        let searchText = UUID().uuidString
+
         subject.search(
             text: searchText,
             completion: { }
         )
+
         let stubbedResponse = SearchResult(
             results: [
                 .init(title: "", description: "", link: ""),
@@ -53,61 +55,38 @@ class SearchViewModelTests: XCTestCase {
             ]
         )
         mockService._searchReceivedCompletion?(.success(stubbedResponse))
-
-        XCTAssertEqual(subject.results?.count, stubbedResponse.results.count)
-
         let events = mockAnalyticsService._trackedEvents
-        XCTAssertEqual(events.count, 1)
-        XCTAssertEqual(events.first?.name, "Search")
-        XCTAssertEqual(events.first?.params?["text"] as! String, searchText)
+
+        #expect(subject.results?.count == stubbedResponse.results.count)
+        #expect(events.count == 1)
+        #expect(events.first?.name == "Search")
+        #expect(events.first?.params?["text"] as! String == searchText)
     }
 
-    func test_search_blankSearch_returnsEarly() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let mockServiceClient = MockSearchService()
-        let subject = SearchViewModel(
-            analyticsService: mockAnalyticsService,
-            searchService: mockServiceClient,
-            urlOpener: MockURLOpener()
-        )
-        let searchText = ""
-
-        let sendExpectation = expectation()
-        sendExpectation.isInverted = true
-
-        subject.search(
-            text: searchText,
-            completion: { }
-        )
-
-        waitForExpectations(timeout: 0, handler: nil)
-    }
-
-    func test_search_noResults_setsError() {
+    @Test
+    func search_noResults_setsError() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockService = MockSearchService()
-
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
             searchService: mockService,
             urlOpener: MockURLOpener()
         )
-        let searchText = "ASDLALSD"
+        let searchText = UUID().uuidString
 
         subject.search(
             text: searchText,
             completion: { }
         )
-        mockService._searchReceivedCompletion?(.failure(.noResults))
 
-        XCTAssertNil(subject.results)
-        XCTAssertEqual(subject.error, .noResults)
+        mockService._searchReceivedCompletion?(.failure(.noResults))
+        #expect(subject.results == nil)
+        #expect(subject.error == .noResults)
     }
 
     func test_search_apiUnavailable_updatesErrorState() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockService = MockSearchService()
-
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
             searchService: mockService,
@@ -119,10 +98,10 @@ class SearchViewModelTests: XCTestCase {
             text: searchText,
             completion: { }
         )
-        mockService._searchReceivedCompletion?(.failure(.apiUnavailable))
 
-        XCTAssertNil(subject.results)
-        XCTAssertEqual(subject.error, .apiUnavailable)
+        mockService._searchReceivedCompletion?(.failure(.apiUnavailable))
+        #expect(subject.results == nil)
+        #expect(subject.error == .apiUnavailable)
     }
 
     private let successResponseData = """

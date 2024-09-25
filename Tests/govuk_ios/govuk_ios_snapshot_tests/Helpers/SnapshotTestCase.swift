@@ -42,8 +42,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
         navigationController.overrideUserInterfaceStyle = mode
         VerifySnapshotInWindow(
             navigationController,
-            perPixelTolerance: 0.1,
-            overallTolerance: 0.2,
+            overallTolerance: 0.05,
             file: file,
             line: line
         )

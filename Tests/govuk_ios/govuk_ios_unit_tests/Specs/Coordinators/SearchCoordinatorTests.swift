@@ -22,6 +22,7 @@ class SearchCoordinatorTests: XCTestCase {
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: mockAnalyticsService,
+            searchService: MockSearchService(),
             dismissed: { }
         )
 
@@ -44,6 +45,7 @@ class SearchCoordinatorTests: XCTestCase {
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: mockAnalyticsService,
+            searchService: MockSearchService(),
             dismissed: {
                 expectation.fulfill()
             }
@@ -69,6 +71,7 @@ class SearchCoordinatorTests: XCTestCase {
             navigationController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: mockAnalyticsService,
+            searchService: MockSearchService(),
             dismissed: {
                 expectation.fulfill()
             }

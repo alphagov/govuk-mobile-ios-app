@@ -8,6 +8,7 @@ import Factory
 @testable import govuk_ios
 
 @Suite(.serialized)
+@MainActor
 class AnimationViewTests {
     private var mockAccessibilityManager: MockAccessibilityManager!
 

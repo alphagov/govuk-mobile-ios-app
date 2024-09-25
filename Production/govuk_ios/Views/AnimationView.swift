@@ -3,6 +3,7 @@ import UIKit
 
 import Lottie
 
+@MainActor
 class AnimationView: UIView {
     @Inject(\.lottieConfiguration) private var config: LottieConfiguration
     @Inject(\.accessibilityManager) private var accessibilityManager: AccessibilityManagerInterface

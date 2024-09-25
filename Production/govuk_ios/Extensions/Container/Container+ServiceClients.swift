@@ -3,6 +3,16 @@ import Foundation
 import Factory
 
 extension Container {
+    var appAPIClient: Factory<APIServiceClientInterface> {
+        Factory(self) {
+            APIServiceClient(
+                baseUrl: URL(string: Constants.API.appBaseUrl)!,
+                session: URLSession(configuration: .default),
+                requestBuilder: RequestBuilder()
+            )
+        }
+    }
+
     var govukAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
             APIServiceClient(
@@ -13,12 +23,10 @@ extension Container {
         }
     }
 
-    var appAPIClient: Factory<APIServiceClientInterface> {
+    var searchServiceClient: Factory<SearchServiceClientInterface> {
         Factory(self) {
-            APIServiceClient(
-                baseUrl: URL(string: Constants.API.appBaseUrl)!,
-                session: URLSession(configuration: .default),
-                requestBuilder: RequestBuilder()
+            SearchServiceClient(
+                serviceClient: self.govukAPIClient()
             )
         }
     }

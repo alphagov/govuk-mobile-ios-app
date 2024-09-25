@@ -26,6 +26,14 @@ extension Container {
         }
     }
 
+    var searchService: Factory<SearchServiceInterface> {
+        Factory(self) {
+            SearchService(
+                serviceClient: self.searchServiceClient()
+            )
+        }
+    }
+
     var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
         Factory(self) {
             AnalyticsService(

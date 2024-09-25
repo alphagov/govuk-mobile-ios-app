@@ -84,7 +84,8 @@ struct SearchViewModelTests{
         #expect(subject.error == .noResults)
     }
 
-    func test_search_apiUnavailable_updatesErrorState() {
+    @Test
+    func search_apiUnavailable_updatesErrorState() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockService = MockSearchService()
         let subject = SearchViewModel(

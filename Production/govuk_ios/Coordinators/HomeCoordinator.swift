@@ -56,7 +56,7 @@ class HomeCoordinator: TabItemCoordinator {
         return { [weak self] in
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.recentActivity(
-                navigationContoller: self.root
+                navigationController: self.root
             )
             start(coordinator)
         }

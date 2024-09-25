@@ -116,4 +116,15 @@ class CoordinatorBuilderTests: XCTestCase {
 
         XCTAssert(coordinator is SearchCoordinator)
     }
+
+    @MainActor
+    func test_recentActivity_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.recentActivity(
+            navigationController: mockNavigationController
+        )
+
+        XCTAssert(coordinator is RecentActivityCoordinator)
+    }
 }

@@ -111,9 +111,9 @@ class CoordinatorBuilder {
         )
     }
 
-    func recentActivity(navigationContoller: UINavigationController) -> BaseCoordinator {
+    func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
         RecentActivityCoordinator(
-            navigationController: navigationContoller,
+            navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve()
         )

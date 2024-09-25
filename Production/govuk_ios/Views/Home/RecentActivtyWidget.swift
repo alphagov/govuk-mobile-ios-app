@@ -33,10 +33,7 @@ class RecentActivtyWidget: UIControl {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 16
-        stackView.addArrangedSubview(recentActivitesIcon)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.setCustomSpacing(70.0, after: titleLabel)
-        stackView.addArrangedSubview(chevronImage)
+        stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -47,6 +44,7 @@ class RecentActivtyWidget: UIControl {
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.title
+        localView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
@@ -54,12 +52,14 @@ class RecentActivtyWidget: UIControl {
     private lazy var recentActivitesIcon: UIImageView = {
         let image = UIImage(named: "recent_activity_widget_icon")
         let imageView = UIImageView(image: image)
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return imageView
     }()
 
     private lazy var chevronImage: UIImageView = {
         let image = UIImage(named: "recent_activity_cell_chevron")
         let imageView = UIImageView(image: image)
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return imageView
     }()
 
@@ -68,15 +68,18 @@ class RecentActivtyWidget: UIControl {
     }
 
     private func configureUI() {
-        self.addSubview(stackView)
+        addSubview(stackView)
+        stackView.addArrangedSubview(recentActivitesIcon)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(chevronImage)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            stackView.leftAnchor.constraint(equalTo: self.layoutMarginsGuide.leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: self.layoutMarginsGuide.rightAnchor)
+            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            stackView.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor)
         ])
     }
 

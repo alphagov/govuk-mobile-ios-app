@@ -83,4 +83,22 @@ class AppEvent_ConvenienceTests: XCTestCase {
         XCTAssertEqual(result.params?.count, 1)
         XCTAssertEqual(result.params?["text"] as? String, expectedTerm)
     }
+
+    func test_searchItemNavigation_returnsExpectedResuls() {
+        let expectedTitle = UUID().uuidString
+        let expectedURL = URL(string: "https://www.gov.uk/random")!
+        let result = AppEvent.searchItemNavigation(
+            title: expectedTitle,
+            url: expectedURL,
+            external: false
+        )
+
+        XCTAssertEqual(result.name, "Navigation")
+        XCTAssertEqual(result.params?.count, 5)
+        XCTAssertEqual(result.params?["text"] as? String, expectedTitle)
+        XCTAssertEqual(result.params?["url"] as? String, "https://www.gov.uk/random")
+        XCTAssertEqual(result.params?["type"] as? String, "SearchResult")
+        XCTAssertEqual(result.params?["external"] as? Bool, false)
+        XCTAssertEqual(result.params?["language"] as? String, "en")
+    }
 }

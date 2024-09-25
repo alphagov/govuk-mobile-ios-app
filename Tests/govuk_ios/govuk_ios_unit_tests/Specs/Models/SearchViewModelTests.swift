@@ -15,11 +15,10 @@ class SearchViewModelTests: XCTestCase {
 
         let expectedTitle = UUID().uuidString
         let expectedDescription = UUID().uuidString
-        let expectedLink = UUID().uuidString
         let item = SearchItem(
             title: expectedTitle,
             description: expectedDescription,
-            link: expectedLink
+            link: "/random"
         )
 
         subject.selected(
@@ -28,9 +27,10 @@ class SearchViewModelTests: XCTestCase {
 
         let events = mockAnalyticsService._trackedEvents
         XCTAssertEqual(events.count, 1)
-        XCTAssertEqual(events.last?.name, "Search")
-        XCTAssertEqual(events.last?.params?["title"] as! String, expectedTitle)
-        XCTAssertEqual(events.last?.params?["link"] as! String, expectedLink)
+        XCTAssertEqual(events.last?.name, "Navigation")
+        XCTAssertEqual(events.last?.params?["text"] as! String, expectedTitle)
+        XCTAssertEqual(events.last?.params?["url"] as! String, "https://www.gov.uk/random")
+        XCTAssertEqual(events.last?.params?["external"] as! Bool, true)
     }
 
     func test_search_success_setsResults() {

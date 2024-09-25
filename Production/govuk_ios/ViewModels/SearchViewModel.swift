@@ -23,29 +23,6 @@ class SearchViewModel {
         self.urlOpener = urlOpener
     }
 
-    func selected(item: SearchItem) {
-        trackSearchItemSelection(item)
-        openLink(item: item)
-    }
-
-    private func openLink(item: SearchItem) {
-        var components = URLComponents(string: item.link)
-        let scheme = components?.scheme
-        components?.scheme = scheme ?? "https"
-        let host = components?.host
-        components?.host = host ?? "www.gov.uk"
-
-        guard let url = components?.url
-        else { return }
-        urlOpener.openIfPossible(url)
-    }
-
-    private func trackSearchItemSelection(_ item: SearchItem) {
-        analyticsService.track(
-            event: AppEvent.searchItem(item: item)
-        )
-    }
-
     func search(text: String?,
                 completion: @escaping () -> Void) {
         error = nil
@@ -62,6 +39,34 @@ class SearchViewModel {
                 completion()
             }
         )
+    }
+
+    func selected(item: SearchItem) {
+        guard let url = urlFromLink(item.link)
+        else { return }
+
+        trackSearchItemSelection(item, url: url)
+        urlOpener.openIfPossible(url)
+    }
+
+    private func trackSearchItemSelection(_ item: SearchItem, url: URL) {
+        analyticsService.track(
+            event: AppEvent.searchItemNavigation(
+                title: item.title,
+                url: url,
+                external: true
+            )
+        )
+    }
+
+    private func urlFromLink(_ link: String) -> URL? {
+        var components = URLComponents(string: link)
+        let scheme = components?.scheme
+        components?.scheme = scheme ?? "https"
+        let host = components?.host
+        components?.host = host ?? "www.gov.uk"
+
+        return components?.url
     }
 
     private func trackSearchTerm(searchTerm: String) {

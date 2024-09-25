@@ -11,6 +11,14 @@ class RecentActivtyWidget: UIControl {
         configureConstraints()
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(gesture)
+        configureAccessibility()
+    }
+
+    private func configureAccessibility() {
+        self.accessibilityLabel = String.home.localized(
+            "recentActivityWidgetAccessibilityLabel"
+        )
+        self.accessibilityTraits = .button
     }
 
     private lazy var gesture: UIGestureRecognizer = {
@@ -39,9 +47,6 @@ class RecentActivtyWidget: UIControl {
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.title
-        localView.accessibilityLabel = String.home.localized(
-            "recentActivityWidgetAccessibilityLabel"
-        )
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()

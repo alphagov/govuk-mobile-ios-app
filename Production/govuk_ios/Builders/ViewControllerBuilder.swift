@@ -74,9 +74,12 @@ class ViewControllerBuilder {
 
     @MainActor
     func search(analyticsService: AnalyticsServiceInterface,
+                searchService: SearchServiceInterface,
                 dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = SearchViewModel(
-            analyticsService: analyticsService
+            analyticsService: analyticsService,
+            searchService: searchService,
+            urlOpener: UIApplication.shared
         )
         return SearchViewController(
             viewModel: viewModel,

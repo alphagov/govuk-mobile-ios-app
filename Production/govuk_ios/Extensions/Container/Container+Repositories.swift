@@ -12,4 +12,9 @@ extension Container {
             return repository
         }
     }
+    var appConfigRepository: Factory<AppConfigRepositoryInterface> {
+        Factory(self) {
+            AppConfigRepository()
+        }
+    }
 }

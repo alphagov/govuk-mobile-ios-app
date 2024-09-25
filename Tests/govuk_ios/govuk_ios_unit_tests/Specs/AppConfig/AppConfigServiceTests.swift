@@ -3,49 +3,80 @@ import XCTest
 @testable import govuk_ios
 
 final class AppConfigServiceTests: XCTestCase {
-    
-    func test_isFeatureEnabled_whenFeatureFlagIsSetToAvilable_returnsTrue() throws {
-        //Given
-        let mockAppConfigProvider = MockAppConfigProvider()
-        let sut = AppConfigService(configProvider: mockAppConfigProvider)
-        //When
-        let config = Config.arrange(releaseFlags: ["search": true])
-        let appConfig = AppConfig.arrange(
-            config: config
+    private var sut: AppConfigService!
+    private var mockAppConfigRepository: MockAppConfigRepository!
+    private var mockAppConfigServiceClient: MockAppConfigServiceClient!
+
+    override func setUpWithError() throws {
+        mockAppConfigRepository = MockAppConfigRepository()
+        mockAppConfigServiceClient = MockAppConfigServiceClient()
+        sut = AppConfigService(
+            appConfigRepository: mockAppConfigRepository,
+            appConfigServiceClient: mockAppConfigServiceClient
         )
-        let result: Result<AppConfig, AppConfigError> = .success(appConfig)
-        mockAppConfigProvider._receivedAppConfigCompletion?(result)
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+        mockAppConfigRepository = nil
+        mockAppConfigServiceClient = nil
+    }
+
+    func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
+        //When
+        let result = ["search": true].toResult()
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertTrue(sut.isFeatureEnabled(key: .search))
     }
-    
-    func test_isFeatureEnabled_whenFeatureFlagIsSetToUnavilable_returnsFalse() throws {
-        //Given
-        let mockAppConfigProvider = MockAppConfigProvider()
-        let sut = AppConfigService(configProvider: mockAppConfigProvider)
+
+    func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
         //When
-        let config = Config.arrange(releaseFlags: ["search": false])
-        let appConfig = AppConfig.arrange(
-            config: config
-        )
-        let result: Result<AppConfig, AppConfigError> = .success(appConfig)
-        mockAppConfigProvider._receivedAppConfigCompletion?(result)
+        let result = ["search": false].toResult()
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
-    
-    func test_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
-        //Given
-        let mockAppConfigProvider = MockAppConfigProvider()
-        let sut = AppConfigService(configProvider: mockAppConfigProvider)
+
+    func test_repository_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
         //When
-        let config = Config.arrange(releaseFlags: ["test": false])
+        let result = ["test": false].toResult()
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+    }
+
+    func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
+        //When
+        let result = ["search": true].toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertTrue(sut.isFeatureEnabled(key: .search))
+    }
+
+    func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
+        //When
+        let result = ["search": false].toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+    }
+
+    func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
+        //When
+        let result = ["test": false].toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+    }
+}
+
+private extension [String:Bool] {
+    func toResult() -> Result<AppConfig, AppConfigError> {
+        let config = Config.arrange(releaseFlags: self)
         let appConfig = AppConfig.arrange(
             config: config
         )
-        let result: Result<AppConfig, AppConfigError> = .success(appConfig)
-        mockAppConfigProvider._receivedAppConfigCompletion?(result)
-        //Then
-        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+        return .success(appConfig)
     }
 }

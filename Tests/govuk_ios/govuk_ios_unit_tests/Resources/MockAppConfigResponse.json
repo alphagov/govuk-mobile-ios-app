@@ -2,14 +2,15 @@
   "platform": "iOS",
   "config": {
     "available": true,
-    "minimumVersion": "1.0.0",
-    "recommendedVersion": "1.2.0",
+    "minimumVersion": "0.0.1",
+    "recommendedVersion": "0.0.1",
     "releaseFlags": {
-      "search": true,
-      "onboarding": false
+      "onboarding": true,
+      "search": true
     },
-    "lastUpdated": "2024-08-15T09:57:45.110Z"
+    "version": "0.0.1",
+    "lastUpdated": "2024-09-10T08:01:25.878Z"
   },
-  "signature": "<not yet implemented>"
+  "signature": "MEUCIFQ/F8gi4XdGdmh/J7pEP9jz6a4+9ztFEaKqM5MGGF3UAiEA/JyzbvDYd4BezGchRt1R6Ba4jppjokiCHKqsthh5F7Q="
 }
 

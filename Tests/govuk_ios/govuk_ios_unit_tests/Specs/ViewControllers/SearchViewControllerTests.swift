@@ -16,7 +16,11 @@ struct SearchViewControllerTests {
         Container.shared.analyticsService.register {
             mockAnalyticsService
         }
-        let viewModel = SearchViewModel(analyticsService: MockAnalyticsService())
+        let viewModel = SearchViewModel(
+            analyticsService: MockAnalyticsService(),
+            searchService: MockSearchService(),
+            urlOpener: MockURLOpener()
+        )
         let subject = SearchViewController(
             viewModel: viewModel,
             dismissAction: { }

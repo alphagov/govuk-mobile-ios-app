@@ -61,4 +61,14 @@ extension AppEvent {
             ]
         )
     }
+
+    static func searchItem(item: SearchItem) -> AppEvent {
+        .init(
+            name: "Search",
+            params: [
+                "title": item.title,
+                "link": item.link
+            ]
+        )
+    }
 }

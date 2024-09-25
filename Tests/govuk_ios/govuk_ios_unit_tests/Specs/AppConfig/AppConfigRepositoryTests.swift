@@ -2,18 +2,18 @@ import XCTest
 
 @testable import govuk_ios
 
-final class AppConfigProviderTests: XCTestCase {
-    var sut: AppConfigProvider!
+final class AppConfigRepositoryTests: XCTestCase {
+    var sut: AppConfigRepository!
 
     override func setUpWithError() throws {
-        sut = AppConfigProvider()
+        sut = AppConfigRepository()
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
 
-    func test_fetchAppConfig_vaidFileName_returnsCorrectConfig() throws {
+    func test_fetchAppConfig_validFileName_returnsCorrectConfig() throws {
         sut.fetchAppConfig(
             filename: "MockAppConfigResponse",
             completion: { result in
@@ -52,5 +52,6 @@ final class AppConfigProviderTests: XCTestCase {
         )
     }
 }
+
 
 

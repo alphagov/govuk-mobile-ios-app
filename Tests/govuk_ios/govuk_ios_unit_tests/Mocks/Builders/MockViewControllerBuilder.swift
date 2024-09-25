@@ -48,7 +48,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedSearchViewController: UIViewController?
     var _receivedSearchDismissAction: (() -> Void)?
-    override func search(analyticsService: AnalyticsServiceInterface,
+    override func search(analyticsService: any AnalyticsServiceInterface,
+                         searchService: any SearchServiceInterface,
                          dismissAction: @escaping () -> Void) -> UIViewController {
         _receivedSearchDismissAction = dismissAction
         return _stubbedSearchViewController ?? UIViewController()

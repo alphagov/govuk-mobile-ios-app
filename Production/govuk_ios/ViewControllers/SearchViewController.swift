@@ -108,10 +108,8 @@ class SearchViewController: BaseViewController,
         title = String.search.localized("pageTitle")
         view.backgroundColor = GOVUKColors.fills.surfaceModal
         view.addSubview(searchBar)
-        view.addSubview(errorView)
         view.addSubview(tableView)
-
-        view.bringSubviewToFront(errorView)
+        view.addSubview(errorView)
     }
 
     private func configureConstraints() {

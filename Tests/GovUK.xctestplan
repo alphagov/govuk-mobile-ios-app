@@ -4,7 +4,7 @@
       "id" : "B5802D24-611B-4AB7-9C83-5F5728D5DC82",
       "name" : "Test Scheme Action",
       "options" : {
-
+        "defaultTestExecutionTimeAllowance" : 60
       }
     }
   ],
@@ -29,7 +29,8 @@
       "identifier" : "5DAD71732BD250DB0075F648",
       "name" : "govuk_ios"
     },
-    "testExecutionOrdering" : "random"
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true
   },
   "testTargets" : [
     {
@@ -41,7 +42,7 @@
       }
     },
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
         "identifier" : "5D4B9D332C074207005F126A",

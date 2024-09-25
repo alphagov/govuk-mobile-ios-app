@@ -66,12 +66,10 @@ class SearchErrorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(
-        title: String? = nil,
-        errorDesc: String? = nil,
-        linkText: String? = nil,
-        link: String? = nil
-    ) {
+    func configure(title: String? = nil,
+                   errorDesc: String? = nil,
+                   linkText: String? = nil,
+                   link: String? = nil) {
         errorTitle.text = title
         errorDescription.text = errorDesc
         errorLinkButton.setTitle(linkText, for: .normal)

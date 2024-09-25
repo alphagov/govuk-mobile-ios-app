@@ -1,7 +1,7 @@
 import SwiftUI
 import UIComponents
 
-struct RecentActivityContainerView: View, TrackableScreen {
+struct RecentActivityContainerView: View {
     @StateObject private var viewModel: RecentActivitiesViewModel
     @FetchRequest(fetchRequest: ActivityItem.fetchRequest()) private var recentItems
 
@@ -34,7 +34,7 @@ struct RecentActivityContainerView: View, TrackableScreen {
     }
 }
 
-extension RecentActivityContainerView {
+extension RecentActivityContainerView: TrackableScreen {
     var trackingTitle: String? { "Pages you've visited" }
     var trackingName: String { "Pages you've visited" }
     var trackingClass: String {

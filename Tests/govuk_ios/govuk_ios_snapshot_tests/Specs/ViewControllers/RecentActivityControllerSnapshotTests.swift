@@ -39,7 +39,6 @@ class RecentActvitySnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
         )
-
         let view = RecentActivityContainerView(viewModel: viewModel)
             .environment(
                 \.managedObjectContext,
@@ -70,7 +69,6 @@ class RecentActvitySnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
         )
-
         let view = RecentActivityContainerView(viewModel: viewModel)
             .environment(
             \.managedObjectContext,
@@ -101,12 +99,12 @@ class RecentActvitySnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
         )
-
         let view = RecentActivityContainerView(viewModel: viewModel)
             .environment(
                 \.managedObjectContext,
                  coreData.viewContext
             )
+
         let viewController = UIHostingController(rootView: view)
 
         VerifySnapshotInNavigationController(

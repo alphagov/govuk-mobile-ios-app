@@ -19,7 +19,8 @@ extension GroupedListRow {
     }
 }
 
-struct LinkRow: GroupedListRow, Identifiable {
+struct LinkRow: GroupedListRow,
+                Identifiable {
     let id: String
     let title: String
     let body: String?
@@ -27,21 +28,24 @@ struct LinkRow: GroupedListRow, Identifiable {
     let action: () -> Void
 }
 
-struct NavigationRow: GroupedListRow, Identifiable {
+struct NavigationRow: GroupedListRow,
+                      Identifiable {
     let id: String
     let title: String
     let body: String?
     let action: () -> Void
 }
 
-struct InformationRow: GroupedListRow, Identifiable {
+struct InformationRow: GroupedListRow,
+                       Identifiable {
     let id: String
     let title: String
     let body: String?
     let detail: String
 }
 
-class ToggleRow: GroupedListRow, ObservableObject {
+class ToggleRow: GroupedListRow,
+                 ObservableObject {
     var id: String
     let title: String
     @Published var isOn: Bool {
@@ -51,7 +55,10 @@ class ToggleRow: GroupedListRow, ObservableObject {
     }
     let action: ((Bool) -> Void)
 
-    init(id: String, title: String, isOn: Bool, action: @escaping (Bool) -> Void) {
+    init(id: String,
+         title: String,
+         isOn: Bool,
+         action: @escaping (Bool) -> Void) {
         self.title = title
         self.isOn = isOn
         self.action = action

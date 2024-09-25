@@ -2,7 +2,9 @@ import Foundation
 import CoreData
 
 @objc(ActivityItem)
-class ActivityItem: NSManagedObject, Identifiable, GroupedListRow {
+class ActivityItem: NSManagedObject,
+                    Identifiable,
+                    GroupedListRow {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ActivityItem> {
         let request: NSFetchRequest<ActivityItem> = .init(
             entityName: "ActivityItem"

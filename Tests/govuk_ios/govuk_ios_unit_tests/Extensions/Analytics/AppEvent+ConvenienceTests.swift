@@ -1,19 +1,21 @@
 import Foundation
-
+import Testing
 @testable import govuk_ios
 
-import XCTest
+@Suite
+struct AppEvent_ConvenienceTests {
 
-class AppEvent_ConvenienceTests: XCTestCase {
-    func test_appLoaded_returnsExpectedResult() {
+    @Test
+    func appLoaded_returnsExpectedResult() {
         let result = AppEvent.appLoaded
 
-        XCTAssertEqual(result.name, "app_loaded")
-        XCTAssertEqual(result.params?.count, 1)
-        XCTAssertEqual(result.params?["device_model"] as? String, DeviceModel().description)
+        #expect(result.name == "app_loaded")
+        #expect(result.params?.count == 1)
+        #expect(result.params?["device_model"] as? String == DeviceModel().description)
     }
 
-    func test_navigation_returnsExpectedResult() {
+    @Test
+    func navigation_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let expectedType = UUID().uuidString
         let expectedExternal = Int.random(in: 1...100) % 2 == 0
@@ -23,64 +25,87 @@ class AppEvent_ConvenienceTests: XCTestCase {
             external: expectedExternal
         )
 
-        XCTAssertEqual(result.name, "Navigation")
-        XCTAssertEqual(result.params?.count, 4)
-        XCTAssertEqual(result.params?["text"] as? String, expectedText)
-        XCTAssertEqual(result.params?["type"] as? String, expectedType)
-        XCTAssertEqual(result.params?["external"] as? Bool, expectedExternal)
-        XCTAssertEqual(result.params?["language"] as? String, "en")
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 4)
+        #expect(result.params?["text"] as? String == expectedText)
+        #expect(result.params?["type"] as? String == expectedType)
+        #expect(result.params?["external"] as? Bool == expectedExternal)
+        #expect(result.params?["language"] as? String == "en")
     }
 
-    func test_tabNavigation_returnsExpectedResult() {
+    @Test
+    func tabNavigation_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let result = AppEvent.tabNavigation(
             text: expectedText
         )
 
-        XCTAssertEqual(result.name, "Navigation")
-        XCTAssertEqual(result.params?.count, 4)
-        XCTAssertEqual(result.params?["text"] as? String, expectedText)
-        XCTAssertEqual(result.params?["type"] as? String, "Tab")
-        XCTAssertEqual(result.params?["external"] as? Bool, false)
-        XCTAssertEqual(result.params?["language"] as? String, "en")
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 4)
+        #expect(result.params?["text"] as? String == expectedText)
+        #expect(result.params?["type"] as? String == "Tab")
+        #expect(result.params?["external"] as? Bool == false)
+        #expect(result.params?["language"] as? String == "en")
     }
 
-    func test_buttonNavigation_external_returnsExpectedResult() {
+    @Test
+    func buttonNavigation_external_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let result = AppEvent.buttonNavigation(
             text: expectedText,
             external: true
         )
 
-        XCTAssertEqual(result.name, "Navigation")
-        XCTAssertEqual(result.params?.count, 4)
-        XCTAssertEqual(result.params?["text"] as? String, expectedText)
-        XCTAssertEqual(result.params?["type"] as? String, "Button")
-        XCTAssertEqual(result.params?["external"] as? Bool, true)
-        XCTAssertEqual(result.params?["language"] as? String, "en")
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 4)
+        #expect(result.params?["text"] as? String == expectedText)
+        #expect(result.params?["type"] as? String == "Button")
+        #expect(result.params?["external"] as? Bool == true)
+        #expect(result.params?["language"] as? String == "en")
     }
 
-    func test_buttonNavigation_internal_returnsExpectedResult() {
+    @Test
+    func buttonNavigation_internal_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let result = AppEvent.buttonNavigation(
             text: expectedText,
             external: false
         )
 
-        XCTAssertEqual(result.name, "Navigation")
-        XCTAssertEqual(result.params?.count, 4)
-        XCTAssertEqual(result.params?["text"] as? String, expectedText)
-        XCTAssertEqual(result.params?["type"] as? String, "Button")
-        XCTAssertEqual(result.params?["external"] as? Bool, false)
-        XCTAssertEqual(result.params?["language"] as? String, "en")
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 4)
+        #expect(result.params?["text"] as? String == expectedText)
+        #expect(result.params?["type"] as? String == "Button")
+        #expect(result.params?["external"] as? Bool == false)
+        #expect(result.params?["language"] as? String == "en")
     }
 
-    func test_searchTerm_returnsExpectedResult() {
+    @Test
+    func searchTerm_returnsExpectedResult() {
         let expectedTerm = UUID().uuidString
         let result = AppEvent.searchTerm(term: expectedTerm)
 
-        XCTAssertEqual(result.name, "Search")
-        XCTAssertEqual(result.params?.count, 1)
-        XCTAssertEqual(result.params?["text"] as? String, expectedTerm)
+        #expect(result.name == "Search")
+        #expect(result.params?.count == 1)
+        #expect(result.params?["text"] as? String == expectedTerm)
+    }
+
+    @Test
+    func searchItemNavigation_returnsExpectedResuls() {
+        let expectedTitle = UUID().uuidString
+        let expectedURL = URL(string: "https://www.gov.uk/random")!
+        let result = AppEvent.searchItemNavigation(
+            title: expectedTitle,
+            url: expectedURL,
+            external: true
+        )
+
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 5)
+        #expect(result.params?["text"] as? String == expectedTitle)
+        #expect(result.params?["url"] as? String == "https://www.gov.uk/random")
+        #expect(result.params?["type"] as? String == "SearchResult")
+        #expect(result.params?["external"] as? Bool == true)
+        #expect(result.params?["language"] as? String == "en")
     }
 }

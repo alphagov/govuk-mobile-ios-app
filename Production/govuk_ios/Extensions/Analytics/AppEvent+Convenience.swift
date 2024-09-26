@@ -37,25 +37,24 @@ extension AppEvent {
             text: title,
             type: "SearchResult",
             external: external,
-            extraParams: ["url": url.absoluteString]
+            additionalParams: ["url": url.absoluteString]
         )
     }
 
     static func navigation(text: String,
                            type: String,
                            external: Bool,
-                           extraParams: [String: Any?] = [:]) -> AppEvent {
-        let defaultParams: [String: Any?] = [
+                           additionalParams: [String: Any?] = [:]) -> AppEvent {
+        let params: [String: Any?] = [
             "text": text,
             "type": type,
             "external": external,
             "language": Locale.current.analyticsLanguageCode
-        ]
-        let params = defaultParams.merging(extraParams) { (current, _) in current }
+        ].merging(additionalParams) { (current, _) in current }
 
         return .init(
             name: "Navigation",
-            params: params.compactMapValues({ $0 })
+            params: params.compactMapValues { $0 }
         )
     }
 

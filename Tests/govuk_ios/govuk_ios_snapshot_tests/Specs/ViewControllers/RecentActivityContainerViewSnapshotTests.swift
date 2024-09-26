@@ -21,7 +21,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
                 \.managedObjectContext,
                  coreData.viewContext
             )
-        let viewController = UIHostingController(
+        let viewController = HostingViewController(
             rootView: view
         )
 
@@ -46,7 +46,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
                 \.managedObjectContext,
                  coreData.viewContext
             )
-        let viewController = UIHostingController(
+        let viewController = HostingViewController(
             rootView: view
         )
 
@@ -78,7 +78,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
             \.managedObjectContext,
              coreData.viewContext
         )
-        let viewController = UIHostingController(
+        let viewController = HostingViewController(
             rootView: view
         )
 
@@ -111,7 +111,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
                  coreData.viewContext
             )
 
-        let viewController = UIHostingController(
+        let viewController = HostingViewController(
             rootView: view
         )
 

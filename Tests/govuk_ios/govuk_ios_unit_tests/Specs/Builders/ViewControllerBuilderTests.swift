@@ -31,7 +31,7 @@ class ViewControllerBuilderTests: XCTestCase {
         let subject = ViewControllerBuilder()
         let result = subject.home(
             searchButtonPrimaryAction: { () -> Void in },
-            configService: MockAppConfigService(), 
+            configService: MockAppConfigService(),
             recentActivityAction: {}
         )
 
@@ -46,7 +46,7 @@ class ViewControllerBuilderTests: XCTestCase {
 
         XCTAssert(result is SettingsViewController)
     }
-    
+
     func test_search_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.search(
@@ -56,5 +56,14 @@ class ViewControllerBuilderTests: XCTestCase {
         )
 
         XCTAssert(result is SearchViewController)
+    }
+
+    func test_recentActivity_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.recentActivity(
+            analyticsService: MockAnalyticsService()
+        )
+
+        XCTAssert(result is HostingViewController<RecentActivityContainerView>)
     }
 }

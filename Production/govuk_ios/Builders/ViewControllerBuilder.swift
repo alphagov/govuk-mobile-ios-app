@@ -97,6 +97,6 @@ class ViewControllerBuilder {
             .viewContext
         let view = RecentActivityContainerView(viewModel: viewModel)
             .environment(\.managedObjectContext, context)
-        return UIHostingController(rootView: view)
+        return HostingViewController(rootView: view)
     }
 }

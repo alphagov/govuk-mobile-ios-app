@@ -34,7 +34,6 @@ class SettingsViewController: BaseViewController,
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
         title = viewModel.title
-        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.prefersLargeTitles = true
 
         configureUI()

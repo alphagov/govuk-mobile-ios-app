@@ -7,13 +7,14 @@ extension UINavigationController {
         navigationController.tabBarItem = .home
         navigationController.setNavigationBarHidden(true, animated: false)
         navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.tintColor = UIColor.govUK.text.link
         return navigationController
     }
 
     static var settings: UINavigationController {
         let navigationController = UINavigationController()
         navigationController.tabBarItem = .settings
-        navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.setNavigationBarHidden(false, animated: false)
         return navigationController
     }
 }

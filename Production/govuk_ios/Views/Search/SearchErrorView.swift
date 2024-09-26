@@ -9,6 +9,7 @@ class SearchErrorView: UIView {
         localLabel.font = UIFont.govUK.bodySemibold
         localLabel.textColor = UIColor.govUK.text.primary
         localLabel.textAlignment = .center
+        localLabel.adjustsFontForContentSizeCategory = true
 
         return localLabel
     }()
@@ -21,6 +22,7 @@ class SearchErrorView: UIView {
         localLabel.font = UIFont.govUK.body
         localLabel.textColor = UIColor.govUK.text.primary
         localLabel.textAlignment = .center
+        localLabel.adjustsFontForContentSizeCategory = true
 
         return localLabel
     }()
@@ -30,11 +32,11 @@ class SearchErrorView: UIView {
         let image = UIImage(systemName: "arrow.up.right")
 
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.adjustsImageSizeForAccessibilityContentSizeCategory = true
 
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.textAlignment = .center
         button.setTitleColor(UIColor.govUK.text.link, for: .normal)
         button.titleLabel?.font = UIFont.govUK.body
 

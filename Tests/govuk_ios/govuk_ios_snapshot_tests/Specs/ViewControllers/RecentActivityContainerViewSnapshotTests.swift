@@ -21,9 +21,8 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
                 \.managedObjectContext,
                  coreData.viewContext
             )
-        let viewController = HostingViewController(
-            rootView: view,
-            navigationBarHidden: false
+        let viewController = UIHostingController(
+            rootView: view
         )
 
         VerifySnapshotInNavigationController(
@@ -47,9 +46,8 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
                 \.managedObjectContext,
                  coreData.viewContext
             )
-        let viewController = HostingViewController(
-            rootView: view,
-            navigationBarHidden: false
+        let viewController = UIHostingController(
+            rootView: view
         )
 
         VerifySnapshotInNavigationController(
@@ -80,9 +78,8 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
             \.managedObjectContext,
              coreData.viewContext
         )
-        let viewController = HostingViewController(
-            rootView: view,
-            navigationBarHidden: false
+        let viewController = UIHostingController(
+            rootView: view
         )
 
         VerifySnapshotInNavigationController(
@@ -114,9 +111,8 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
                  coreData.viewContext
             )
 
-        let viewController = HostingViewController(
-            rootView: view,
-            navigationBarHidden: false
+        let viewController = UIHostingController(
+            rootView: view
         )
 
         VerifySnapshotInNavigationController(

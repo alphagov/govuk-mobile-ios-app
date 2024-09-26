@@ -1,5 +1,7 @@
 import Foundation
 import Testing
+import SwiftUI
+import CoreData
 
 @testable import govuk_ios
 
@@ -67,13 +69,14 @@ struct ViewControllerBuilderTests {
     @Test
     func recentActivity_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let _ = subject.recentActivity(
+        let result = subject.recentActivity(
             analyticsService: MockAnalyticsService()
         )
 
-//        let rootView = (result as? HostingViewController<RecentActivityContainerView>)?.rootView
-//        #expect(rootView?.trackingClass == "RecentActivityContainerView")
-//        #expect(rootView?.trackingName == "Pages you've visited")
-//        #expect(rootView?.trackingTitle == "Pages you've visited")
+        let rootView = (result as? HostingViewController<ModifiedContent<RecentActivityContainerView, _EnvironmentKeyWritingModifier<NSManagedObjectContext>>>)?.rootView
+        let containerView = rootView?.content as? RecentActivityContainerView
+        #expect(containerView?.trackingClass == "RecentActivityContainerView")
+        #expect(containerView?.trackingName == "Pages you've visited")
+        #expect(containerView?.trackingTitle == "Pages you've visited")
     }
 }

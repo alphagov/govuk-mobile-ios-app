@@ -135,7 +135,28 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func selected_tracksEvent() {
+    func selected_withLink_tracksEvent() {
+        let coreData = CoreDataRepository.arrange(
+            notificationCenter: .default
+        ).load()
+
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = RecentActivitiesViewModel(
+            analyticsService: mockAnalyticsService,
+            urlOpener: MockURLOpener()
+        )
+        let activity = ActivityItem(context: coreData.backgroundContext)
+        activity.title = "Benefits"
+        activity.url = "https://www.youtube.com"
+        try? coreData.backgroundContext.save()
+        sut.selected(item: activity)
+
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == "RecentActivity")
+    }
+
+    @Test
+    func selected_noLink_doesntTracksEvent() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -150,8 +171,7 @@ struct RecentActivitiesViewModelTests {
         try? coreData.backgroundContext.save()
         sut.selected(item: activity)
 
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.name == "RecentActivity")
+        #expect(mockAnalyticsService._trackedEvents.count == 0)
     }
 
     @Test

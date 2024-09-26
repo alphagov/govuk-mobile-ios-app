@@ -1,11 +1,14 @@
-@testable import govuk_ios
 import SwiftUI
 import CoreData
-import XCTest
+import Testing
 
-final class RecentActivitiesViewModelTests: XCTestCase {
+@testable import govuk_ios
 
-    func test_sortActivities_whenActivitiesDateEqualsToday_populatesTodaysActivitesList() throws {
+@Suite
+struct RecentActivitiesViewModelTests {
+
+    @Test
+    func sortActivities_whenActivitiesDateEqualsToday_populatesTodaysActivitesList() throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -39,12 +42,13 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
         let structure = sut.sortActivites(activities: activitiesArray)
 
-        XCTAssertEqual(structure.todaysActivites.count, 3)
-        XCTAssertEqual(structure.recentMonthActivities.count, 0)
-        XCTAssertEqual(structure.currentMonthActivities.count, 0)
+        #expect(structure.todaysActivites.count == 3)
+        #expect(structure.recentMonthActivities.count == 0)
+        #expect(structure.currentMonthActivities.count == 0)
     }
 
-    func test_sortItems_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
+    @Test
+    func sortItems_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
         let sut = RecentActivitiesViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
@@ -83,12 +87,13 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         activitiesArray.append(activityThree)
 
         let structure = sut.sortActivites(activities: activitiesArray)
-        XCTAssertEqual(structure.currentMonthActivities.count, 3)
-        XCTAssertEqual(structure.todaysActivites.count, 0)
-        XCTAssertEqual(structure.recentMonthActivities.count, 0)
+        #expect(structure.todaysActivites.count == 0)
+        #expect(structure.recentMonthActivities.count == 0)
+        #expect(structure.currentMonthActivities.count == 3)
     }
 
-    func test_sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
+    @Test
+    func sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
         let sut = RecentActivitiesViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
@@ -124,12 +129,13 @@ final class RecentActivitiesViewModelTests: XCTestCase {
 
         let structure = sut.sortActivites(activities: activitiesArray)
 
-        XCTAssertEqual(structure.recentMonthActivities.count, 3)
-        XCTAssertEqual(structure.todaysActivites.count, 0)
-        XCTAssertEqual(structure.currentMonthActivities.count, 0)
+        #expect(structure.todaysActivites.count == 0)
+        #expect(structure.recentMonthActivities.count == 3)
+        #expect(structure.currentMonthActivities.count == 0)
     }
 
-    func test_trackRecentActivity_tracksEvent() {
+    @Test
+    func trackRecentActivity_tracksEvent() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -144,7 +150,7 @@ final class RecentActivitiesViewModelTests: XCTestCase {
         try? coreData.backgroundContext.save()
         sut.trackRecentActivity(activity: activity)
 
-        XCTAssertEqual(analyticsService._trackedEvents.count, 1)
-        XCTAssertEqual(analyticsService._trackedEvents.first?.name, "RecentActivity")
+        #expect(analyticsService._trackedEvents.count == 1)
+        #expect(analyticsService._trackedEvents.first?.name == "RecentActivity")
     }
 }

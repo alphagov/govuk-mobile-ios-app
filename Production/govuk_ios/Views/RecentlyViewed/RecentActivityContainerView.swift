@@ -19,7 +19,7 @@ struct RecentActivityContainerView: View {
                     model: viewModel.sortActivites(
                         activities: Array(recentItems)
                     ),
-                    selected: { item in self.viewModel.itemSelected(item: item) }
+                    selected: { self.viewModel.selected(item: $0) }
                 )
                 .accessibilityLabel(
                     Text(viewModel.navigationTitle)
@@ -37,9 +37,4 @@ struct RecentActivityContainerView: View {
 extension RecentActivityContainerView: TrackableScreen {
     var trackingTitle: String? { "Pages you've visited" }
     var trackingName: String { "Pages you've visited" }
-    var trackingClass: String {
-        String(
-            describing: type(of: self)
-        )
-    }
 }

@@ -14,24 +14,24 @@ struct RecentActivitiesViewModelTests {
         ).load()
         let sut = RecentActivitiesViewModel(
             analyticsService: MockAnalyticsService(),
-            urlOpener: UIApplication.shared
+            urlOpener: MockURLOpener()
         )
 
         var activitiesArray: [ActivityItem] = []
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefits"
-        activity.url = "https://www.youtube.com/"
+        activity.url = "https://www.youtube.com"
         activity.date = Date()
         let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit"
-        activityTwo.url = "https://www.youtube.com/"
+        activityTwo.url = "https://www.youtube.com"
         activityTwo.date = Date()
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
-        activityThree.url = "https://www.youtube.com/"
+        activityThree.url = "https://www.youtube.com"
         activityThree.date = Date()
 
         try? coreData.backgroundContext.save()
@@ -51,7 +51,7 @@ struct RecentActivitiesViewModelTests {
     func sortItems_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
         let sut = RecentActivitiesViewModel(
             analyticsService: MockAnalyticsService(),
-            urlOpener: UIApplication.shared
+            urlOpener: MockURLOpener()
         )
 
         let coreData = CoreDataRepository.arrange(
@@ -67,17 +67,17 @@ struct RecentActivitiesViewModelTests {
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefit3"
-        activity.url = "https://www.youtube.com/"
+        activity.url = "https://www.youtube.com"
         activity.date = randomDateOne
         let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit2"
-        activityTwo.url = "https://www.youtube.com/"
+        activityTwo.url = "https://www.youtube.com"
         activityTwo.date = randomDateTwo
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
-        activityThree.url = "https://www.youtube.com/"
+        activityThree.url = "https://www.youtube.com"
         activityThree.date = randomDateThree
 
         try? coreData.backgroundContext.save()
@@ -96,7 +96,7 @@ struct RecentActivitiesViewModelTests {
     func sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
         let sut = RecentActivitiesViewModel(
             analyticsService: MockAnalyticsService(),
-            urlOpener: UIApplication.shared
+            urlOpener: MockURLOpener()
         )
 
         let coreData = CoreDataRepository.arrange(
@@ -108,17 +108,17 @@ struct RecentActivitiesViewModelTests {
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefit3"
-        activity.url = "https://www.youtube.com/"
+        activity.url = "https://www.youtube.com"
         activity.date = .arrange("14/04/2004")
         let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit2"
-        activityTwo.url = "https://www.youtube.com/"
+        activityTwo.url = "https://www.youtube.com"
         activityTwo.date = .arrange("14/04/2016")
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
-        activityThree.url = "https://www.youtube.com/"
+        activityThree.url = "https://www.youtube.com"
         activityThree.date = .arrange("14/04/2017")
 
         try? coreData.backgroundContext.save()
@@ -135,22 +135,80 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func trackRecentActivity_tracksEvent() {
+    func selected_tracksEvent() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        let analyticsService = MockAnalyticsService()
+        let mockAnalyticsService = MockAnalyticsService()
         let sut = RecentActivitiesViewModel(
-            analyticsService: analyticsService,
-            urlOpener: UIApplication.shared
+            analyticsService: mockAnalyticsService,
+            urlOpener: MockURLOpener()
         )
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.title = "Benefits"
         try? coreData.backgroundContext.save()
-        sut.trackRecentActivity(activity: activity)
+        sut.selected(item: activity)
 
-        #expect(analyticsService._trackedEvents.count == 1)
-        #expect(analyticsService._trackedEvents.first?.name == "RecentActivity")
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == "RecentActivity")
+    }
+
+    @Test
+    func selected_updatesItemDate() {
+        let coreData = CoreDataRepository.arrange(
+            notificationCenter: .default
+        ).load()
+
+        let sut = RecentActivitiesViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener()
+        )
+
+        let activity = ActivityItem(context: coreData.backgroundContext)
+        activity.id = UUID().uuidString
+        activity.title = "benefit3"
+        activity.url = "https://www.youtube.com"
+        let oldDate = Date.arrange("14/04/2004")
+        activity.date = oldDate
+
+        try? coreData.backgroundContext.save()
+
+        sut.selected(item: activity)
+
+        let equal = Calendar.current.isDate(
+            activity.date,
+            equalTo: Date(),
+            toGranularity: .second
+        )
+        #expect(equal)
+        #expect(activity.date != oldDate)
+    }
+
+    @Test
+    func selected_withURL_opensURL() {
+        let coreData = CoreDataRepository.arrange(
+            notificationCenter: .default
+        ).load()
+
+        let mockURLOpener = MockURLOpener()
+        let sut = RecentActivitiesViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: mockURLOpener
+        )
+
+        let activity = ActivityItem(context: coreData.backgroundContext)
+        activity.id = UUID().uuidString
+        activity.title = "benefit3"
+        let expectedURL = "https://www.youtube.com"
+        activity.url = expectedURL
+        let oldDate = Date.arrange("14/04/2004")
+        activity.date = oldDate
+
+        try? coreData.backgroundContext.save()
+
+        sut.selected(item: activity)
+
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedURL)
     }
 }

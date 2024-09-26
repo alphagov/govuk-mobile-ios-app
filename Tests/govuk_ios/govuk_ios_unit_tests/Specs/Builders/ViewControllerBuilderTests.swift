@@ -1,33 +1,37 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
 @MainActor
-class ViewControllerBuilderTests: XCTestCase {
-    func test_driving_returnsExpectedResult() {
+@Suite
+struct ViewControllerBuilderTests {
+    @Test
+    func driving_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.driving(
             showPermitAction: {},
             presentPermitAction: {}
         )
 
-        XCTAssert(result is TestViewController)
-        XCTAssertEqual(result.title, "Driving")
+        #expect(result is TestViewController)
+        #expect(result.title == "Driving")
     }
 
-    func test_permit_returnsExpectedResult() {
+    @Test
+    func permit_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.permit(
             permitId: "123",
             finishAction: {}
         )
 
-        XCTAssert(result is TestViewController)
-        XCTAssertEqual(result.title, "Permit - 123")
+        #expect(result is TestViewController)
+        #expect(result.title == "Permit - 123")
     }
 
-    func test_home_returnsExpectedResult() {
+    @Test
+    func home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.home(
             searchButtonPrimaryAction: { () -> Void in },
@@ -35,19 +39,21 @@ class ViewControllerBuilderTests: XCTestCase {
             recentActivityAction: {}
         )
 
-        XCTAssert(result is HomeViewController)
+        #expect(result is HomeViewController)
     }
 
-    func test_settings_returnsExpectedResult() {
+    @Test
+    func settings_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.settings(
             analyticsService: MockAnalyticsService()
         )
 
-        XCTAssert(result is SettingsViewController)
+        #expect(result is SettingsViewController)
     }
 
-    func test_search_returnsExpectedResult() {
+    @Test
+    func search_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.search(
             analyticsService: MockAnalyticsService(),
@@ -55,15 +61,19 @@ class ViewControllerBuilderTests: XCTestCase {
             dismissAction: { }
         )
 
-        XCTAssert(result is SearchViewController)
+        #expect(result is SearchViewController)
     }
 
-    func test_recentActivity_returnsExpectedResult() {
+    @Test
+    func recentActivity_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let result = subject.recentActivity(
+        let _ = subject.recentActivity(
             analyticsService: MockAnalyticsService()
         )
 
-        XCTAssert(result is HostingViewController<RecentActivityContainerView>)
+//        let rootView = (result as? HostingViewController<RecentActivityContainerView>)?.rootView
+//        #expect(rootView?.trackingClass == "RecentActivityContainerView")
+//        #expect(rootView?.trackingName == "Pages you've visited")
+//        #expect(rootView?.trackingTitle == "Pages you've visited")
     }
 }

@@ -18,12 +18,12 @@ class RecentActivitiesViewModel: ObservableObject {
         "recentActivityNavigationTitle"
     )
 
-    func itemSelected(item: ActivityItem) {
+    func selected(item: ActivityItem) {
         item.date = Date()
         try? item.managedObjectContext?.save()
         guard let url = URL(string: item.url) else { return }
         urlOpener.openIfPossible(url)
-        trackRecentActivity(activity: item)
+        trackSelection(activity: item)
     }
 
     func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
@@ -53,9 +53,12 @@ class RecentActivitiesViewModel: ObservableObject {
         )
     }
 
-    func trackRecentActivity(activity: ActivityItem) {
+    private func trackSelection(activity: ActivityItem) {
+        let event = AppEvent.recentActivity(
+            activity: activity.title
+        )
         analyticsService.track(
-            event: AppEvent.recentActivity(activity: activity.title)
+            event: event
         )
     }
 

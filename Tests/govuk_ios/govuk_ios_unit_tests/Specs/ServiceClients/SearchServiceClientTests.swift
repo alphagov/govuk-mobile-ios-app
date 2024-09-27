@@ -54,7 +54,7 @@ struct SearchServiceClientTests {
     }
 
     @Test
-    func search_failure_returnsExpectedResult() async {
+    func search_failure_apiUnavailable_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = SearchServiceClient(
             serviceClient: mockAPI
@@ -71,6 +71,28 @@ struct SearchServiceClientTests {
         let searchResult = try? result.get()
         #expect(searchResult == nil)
         #expect(result.getError() == .apiUnavailable)
+    }
+
+    @Test
+    func search_failure_networkUnavailable_returnsExpectedResult() async {
+        let mockAPI = MockAPIServiceClient()
+        let sut = SearchServiceClient(
+            serviceClient: mockAPI
+        )
+        mockAPI._stubbedSendResponse = .failure(
+            NSError(domain: "TestError", code: NSURLErrorNotConnectedToInternet)
+        )
+        let result = await withCheckedContinuation { continuation in
+            sut.search(
+                term: "test",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+        let searchResult = try? result.get()
+        #expect(searchResult == nil)
+        #expect(result.getError() == .networkUnavailable)
     }
 
     @Test

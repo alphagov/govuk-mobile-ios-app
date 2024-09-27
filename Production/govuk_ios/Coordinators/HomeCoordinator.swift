@@ -25,7 +25,8 @@ class HomeCoordinator: TabItemCoordinator {
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.home(
             searchButtonPrimaryAction: searchActionButtonPressed,
-            configService: configService
+            configService: configService,
+            recentActivityAction: recentActivityCoordinator
         )
         set([viewController], animated: false)
     }
@@ -48,6 +49,16 @@ class HomeCoordinator: TabItemCoordinator {
                 }
             )
             strongSelf.present(coordinator)
+        }
+    }
+
+    private var recentActivityCoordinator: () -> Void {
+        return { [weak self] in
+            guard let self = self else { return }
+            let coordinator = self.coordinatorBuilder.recentActivity(
+                navigationController: self.root
+            )
+            start(coordinator)
         }
     }
 }

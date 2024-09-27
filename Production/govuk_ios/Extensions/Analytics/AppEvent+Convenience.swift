@@ -66,4 +66,23 @@ extension AppEvent {
             ]
         )
     }
+
+    static func recentActivity(activity: String) -> AppEvent {
+        .init(
+            name: "RecentActivity",
+            params: [
+                "text": activity
+            ]
+        )
+    }
+
+    static func searchItem(item: SearchItem) -> AppEvent {
+        .init(
+            name: "Search",
+            params: [
+                "title": item.title,
+                "link": item.link
+            ]
+        )
+    }
 }

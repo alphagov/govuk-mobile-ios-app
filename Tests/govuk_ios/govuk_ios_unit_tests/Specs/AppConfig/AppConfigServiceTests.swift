@@ -10,8 +10,10 @@ final class AppConfigServiceTests: XCTestCase {
     override func setUpWithError() throws {
         mockAppConfigRepository = MockAppConfigRepository()
         mockAppConfigServiceClient = MockAppConfigServiceClient()
-        sut = AppConfigService(appConfigRepository: mockAppConfigRepository,
-                               appConfigServiceClient: mockAppConfigServiceClient)
+        sut = AppConfigService(
+            appConfigRepository: mockAppConfigRepository,
+            appConfigServiceClient: mockAppConfigServiceClient
+        )
     }
 
     override func tearDownWithError() throws {
@@ -23,7 +25,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
         //When
         let result = ["search": true].toResult()
-        mockAppConfigRepository._receivedAppConfigCompletion?(result)
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertTrue(sut.isFeatureEnabled(key: .search))
     }
@@ -31,7 +33,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
         //When
         let result = ["search": false].toResult()
-        mockAppConfigRepository._receivedAppConfigCompletion?(result)
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
@@ -39,7 +41,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_repository_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
         //When
         let result = ["test": false].toResult()
-        mockAppConfigRepository._receivedAppConfigCompletion?(result)
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
@@ -47,7 +49,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
         //When
         let result = ["search": true].toResult()
-        mockAppConfigServiceClient._receivedAppConfigCompletion?(result)
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertTrue(sut.isFeatureEnabled(key: .search))
     }
@@ -55,7 +57,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
         //When
         let result = ["search": false].toResult()
-        mockAppConfigServiceClient._receivedAppConfigCompletion?(result)
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
@@ -63,7 +65,7 @@ final class AppConfigServiceTests: XCTestCase {
     func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
         //When
         let result = ["test": false].toResult()
-        mockAppConfigServiceClient._receivedAppConfigCompletion?(result)
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }

@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SwiftUI
 
 protocol TrackableScreen {
     nonisolated var trackingName: String { get }
@@ -23,5 +24,13 @@ extension TrackableScreen where  Self: UIViewController {
 
     var trackingTitle: String? {
         title
+    }
+}
+
+extension TrackableScreen where  Self: View {
+    var trackingClass: String {
+        String(
+            describing: type(of: self)
+        )
     }
 }

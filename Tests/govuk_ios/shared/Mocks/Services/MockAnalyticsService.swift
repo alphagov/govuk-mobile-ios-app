@@ -5,7 +5,6 @@ import Onboarding
 
 class MockAnalyticsService: AnalyticsServiceInterface,
                             OnboardingAnalyticsService {
-
     var _launchCalled: Bool = false
     func launch() {
         _launchCalled = true

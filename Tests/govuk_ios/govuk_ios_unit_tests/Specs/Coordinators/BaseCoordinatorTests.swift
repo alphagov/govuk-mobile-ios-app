@@ -125,8 +125,8 @@ class BaseCoordinatorTests: XCTestCase {
 
         subject.push(UIViewController(), animated: false)
 
-        await withCheckedContinuation { continuation in
-            parentCoordinator._childDidFinishHandler = { child in
+        await withCheckedContinuation { @MainActor continuation in
+            parentCoordinator._childDidFinishHandler = { @MainActor child in
                 continuation.resume()
             }
             navigationController.popViewController(animated: false)

@@ -9,7 +9,6 @@ class AppDelegate: UIResponder,
                      launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         analyticsService.launch()
         analyticsService.track(event: AppEvent.appLoaded)
-
         return true
     }
 

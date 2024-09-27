@@ -12,6 +12,28 @@
         }
       }
     },
+    "recentActivityWidgetAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pages you've visited"
+          }
+        }
+      }
+    },
+    "recentActivityWidgetLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pages you've visited"
+          }
+        }
+      }
+    },
     "searchButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -35,6 +35,7 @@ platform :ios do
       devices: configuration.scan_devices,
       ensure_devices_found: true,
       force_quit_simulator: true,
+      max_concurrent_simulators: 3,
       reset_simulator: true,
       clean: true,
       prelaunch_simulator: true,

@@ -18,7 +18,7 @@ struct GroupedListSectionView: View {
                     ForEach(
                         Array(zip(section.rows,
                                   section.rows.indices)),
-                        id: \.0.title
+                        id: \.0.id
                     ) { row, index in
                         if index > 0 {
                             Divider()

@@ -111,4 +111,12 @@ class CoordinatorBuilder {
             dismissed: didDismissAction
         )
     }
+
+    func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
+        RecentActivityCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve()
+        )
+    }
 }

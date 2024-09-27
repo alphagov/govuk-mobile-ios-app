@@ -16,7 +16,7 @@ extension Container {
     var govukAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
             APIServiceClient(
-                baseUrl: URL(string: "https://www.gov.uk")!,
+                baseUrl: URL(string: Constants.API.govukUrlString)!,
                 session: URLSession(configuration: .default),
                 requestBuilder: RequestBuilder()
             )

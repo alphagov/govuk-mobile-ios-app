@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "recent_activity_widget_icon.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

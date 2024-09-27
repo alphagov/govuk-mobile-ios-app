@@ -37,7 +37,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedHomeViewController: UIViewController?
     override func home(searchButtonPrimaryAction: @escaping () -> Void,
-                       configService: AppConfigServiceInterface) -> UIViewController {
+                       configService: AppConfigServiceInterface,
+                       recentActivityAction: @escaping () -> Void) -> UIViewController {
         return _stubbedHomeViewController ?? UIViewController()
     }
 
@@ -53,5 +54,10 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                          dismissAction: @escaping () -> Void) -> UIViewController {
         _receivedSearchDismissAction = dismissAction
         return _stubbedSearchViewController ?? UIViewController()
+    }
+
+    var _stubbedRecentActivityViewController: UIViewController?
+    override func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+        return _stubbedRecentActivityViewController ?? UIViewController()
     }
 }

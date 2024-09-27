@@ -1,5 +1,7 @@
 import Foundation
 import UIKit
+import SwiftUI
+import Factory
 
 class ViewControllerBuilder {
     @MainActor
@@ -46,10 +48,12 @@ class ViewControllerBuilder {
 
     @MainActor
     func home(searchButtonPrimaryAction: @escaping () -> Void,
-              configService: AppConfigServiceInterface) -> UIViewController {
+              configService: AppConfigServiceInterface,
+              recentActivityAction: @escaping () -> Void) -> UIViewController {
         let viewModel = HomeViewModel(
             configService: configService,
-            searchButtonPrimaryAction: searchButtonPrimaryAction
+            searchButtonPrimaryAction: searchButtonPrimaryAction,
+            recentActivityAction: recentActivityAction
         )
         return HomeViewController(
             viewModel: viewModel
@@ -81,5 +85,18 @@ class ViewControllerBuilder {
             viewModel: viewModel,
             dismissAction: dismissAction
         )
+    }
+
+    @MainActor
+    func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
+        let viewModel = RecentActivitiesViewModel(
+            analyticsService: analyticsService,
+            urlOpener: UIApplication.shared
+        )
+        let context = Container.shared.coreDataRepository.resolve()
+            .viewContext
+        let view = RecentActivityContainerView(viewModel: viewModel)
+            .environment(\.managedObjectContext, context)
+        return HostingViewController(rootView: view)
     }
 }

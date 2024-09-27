@@ -9,16 +9,14 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
-            mode: .light,
-            navBarHidden: true
+            mode: .light
         )
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
-            mode: .dark,
-            navBarHidden: true
+            mode: .dark
         )
     }
     
@@ -28,8 +26,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         )
         VerifySnapshotInNavigationController(
             viewController: viewController,
-            mode: .light,
-            navBarHidden: true
+            mode: .light
         )
     }
 

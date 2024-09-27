@@ -30,17 +30,31 @@ extension AppEvent {
         )
     }
 
+    static func searchItemNavigation(title: String,
+                                     url: URL,
+                                     external: Bool) -> AppEvent {
+        navigation(
+            text: title,
+            type: "SearchResult",
+            external: external,
+            additionalParams: ["url": url.absoluteString]
+        )
+    }
+
     static func navigation(text: String,
                            type: String,
-                           external: Bool) -> AppEvent {
-        .init(
+                           external: Bool,
+                           additionalParams: [String: Any?] = [:]) -> AppEvent {
+        let params: [String: Any?] = [
+            "text": text,
+            "type": type,
+            "external": external,
+            "language": Locale.current.analyticsLanguageCode
+        ].merging(additionalParams) { (current, _) in current }
+
+        return .init(
             name: "Navigation",
-            params: [
-                "text": text,
-                "type": type,
-                "external": external,
-                "language": Locale.current.analyticsLanguageCode
-            ].compactMapValues({ $0 })
+            params: params.compactMapValues { $0 }
         )
     }
 
@@ -49,6 +63,15 @@ extension AppEvent {
             name: "Search",
             params: [
                 "text": term
+            ]
+        )
+    }
+
+    static func recentActivity(activity: String) -> AppEvent {
+        .init(
+            name: "RecentActivity",
+            params: [
+                "text": activity
             ]
         )
     }

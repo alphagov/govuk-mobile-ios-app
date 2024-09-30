@@ -24,6 +24,16 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             completion: { [weak self] in
                 self?.initialLaunch = false
+                self?.startAppUnavailable(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startAppUnavailable(url: URL?) {
+        let coordinator = coordinatorBuilder.appUnavailable(
+            navigationController: root,
+            dismissAction: { [weak self] in
                 self?.startAnalyticsConsent(url: url)
             }
         )

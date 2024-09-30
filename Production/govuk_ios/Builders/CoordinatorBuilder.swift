@@ -48,6 +48,15 @@ class CoordinatorBuilder {
         )
     }
 
+    func appUnavailable(navigationController: UINavigationController,
+                        dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        AppUnavailableCoordinator(
+            navigationController: navigationController,
+            appConfigService: container.appConfigService.resolve(),
+            dismissAction: dismissAction
+        )
+    }
+
     func analyticsConsent(navigationController: UINavigationController,
                           dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AnalyticsConsentCoordinator(

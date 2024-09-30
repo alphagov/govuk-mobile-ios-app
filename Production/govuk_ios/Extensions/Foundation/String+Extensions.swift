@@ -8,6 +8,13 @@ extension String {
         )
     }
 
+    static var appAvailability: LocalStringBuilder {
+        .init(
+            tableName: "AppAvailability",
+            bundle: .main
+        )
+    }
+
     static var home: LocalStringBuilder {
         .init(
             tableName: "Home",

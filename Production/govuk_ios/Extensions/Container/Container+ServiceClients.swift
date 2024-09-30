@@ -30,4 +30,12 @@ extension Container {
             )
         }
     }
+
+    var topicsServiceClient: Factory<TopicsServiceClientInterface> {
+        Factory(self) {
+            TopicsServiceClient(
+                serviceClient: self.appAPIClient()
+            )
+        }
+    }
 }

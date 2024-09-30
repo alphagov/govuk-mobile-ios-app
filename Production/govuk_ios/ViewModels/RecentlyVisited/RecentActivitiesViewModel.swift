@@ -62,10 +62,10 @@ class RecentActivitiesViewModel: ObservableObject {
         }
     }
 
-    private func deleteActivities() {
-        for (id, activity) in selectedActivities {
-            guard let context = activity.managedObjectContext else { return }
-            context.delete(activity)
+    func deleteActivities() {
+        for activity in selectedActivities {
+            guard let context = activity.value.managedObjectContext else { return }
+            context.delete(activity.value)
         }
     }
 

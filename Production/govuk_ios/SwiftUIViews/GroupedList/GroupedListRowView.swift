@@ -14,6 +14,8 @@ struct GroupedListRowView: View {
                 InformationRowView(row: row)
             case let row as ToggleRow:
                 ToggleRowView(row: row)
+            case let row as EditLinkRow:
+                EditLinkRowView(row: row)
             default:
                 EmptyView()
             }
@@ -73,109 +75,126 @@ struct LinkRowView: View {
 
 struct EditLinkRowView: View {
     let row: EditLinkRow
-    @State var editMode: Bool
+    @State var isSelected: Bool = false
+
+    init(row: EditLinkRow) {
+        self.row = row
+    }
 
     var body: some View {
         Button {
             row.action()
         } label: {
-            if editMode {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Rectangle()
-                            .fill(Color.white)
-                            .frame(width: 20, height: 20, alignment: .center)
-                            .cornerRadius(5)
+            HStack {
+                if row.editMode {
+                    VStack {
+                        Button {
+                            withAnimation {
+                                isSelected.toggle()
+                                row.selectAction()
+                            }
+                        } label: {
+                            if isSelected {
+                                Image(systemName: "checkmark.circle.fill")
+                            } else {
+                                Image(systemName: "circle").foregroundColor(Color.gray)
+                            }
+                        }
                     }
-                    Text(row.title)
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
                 }
-                .foregroundColor(Color(UIColor.govUK.text.link))
-
-                RowDetail(text: row.body)
-            }
+                VStack {
+                    HStack {
+                        Text(row.title)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                    }
+                    HStack {
+                        RowDetail(text: row.body)
+                        Spacer()
+                    }
+                }
+            }.foregroundColor(
+                Color(UIColor.govUK.text.link)
+            )
         }
         .accessibilityRemoveTraits(.isButton)
         .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
         .accessibilityHint(row.isWebLink ? String.common.localized("openWebLinkHint") : "")
     }
+
+    private func returnIcon(isSelected: Bool) -> Image {
+        if isSelected {
+            return Image(systemName: "checkmark.circle.fill")
+        } else {
+            return Image(systemName: "circle")
+                .foregroundColor(Color.gray) as? Image ?? Image(systemName: "")
+        }
+    }
 }
 
+    struct NavigationRowView: View {
+        let row: NavigationRow
 
-struct NavigationRowView: View {
-    let row: NavigationRow
+        var body: some View {
+            Button {
+                row.action()
+            } label: {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(row.title)
+                            .foregroundColor(
+                                Color(
+                                    UIColor.govUK.text.primary
+                                )
+                            )
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(
+                                Color(
+                                    UIColor.govUK.text.trailingIcon
+                                )
+                            )
+                            .font(Font.govUK.bodySemibold)
+                    }
+                }
+            }
+        }
+    }
 
-    var body: some View {
-        Button {
-            row.action()
-        } label: {
-            VStack(alignment: .leading) {
-                HStack {
+    struct ToggleRowView: View {
+        @StateObject var row: ToggleRow
+        var body: some View {
+            HStack {
+                Spacer()
+                Toggle(isOn: $row.isOn) {
                     Text(row.title)
                         .foregroundColor(
                             Color(
                                 UIColor.govUK.text.primary
                             )
                         )
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(
-                            Color(
-                                UIColor.govUK.text.trailingIcon
-                            )
-                        )
-                        .font(Font.govUK.bodySemibold)
+                        .padding(.horizontal, -8)
+                }
+                .toggleStyle(
+                    SwitchToggleStyle(tint: (Color(UIColor.govUK.fills.surfaceButtonPrimary)))
+                )
+            }
+        }
+    }
+
+    struct RowDetail: View {
+        let text: String?
+
+        var body: some View {
+            Group {
+                if let text {
+                    Text(text)
+                        .font(Font.govUK.subheadline)
+                        .foregroundColor(Color(UIColor.govUK.text.secondary))
+                        .multilineTextAlignment(.leading)
+                } else {
+                    EmptyView()
                 }
             }
         }
     }
-}
-
-struct ToggleRowView: View {
-    @StateObject var row: ToggleRow
-    var body: some View {
-        HStack {
-            Spacer()
-            Toggle(isOn: $row.isOn) {
-                Text(row.title)
-                    .foregroundColor(
-                        Color(
-                            UIColor.govUK.text.primary
-                        )
-                    )
-                    .padding(.horizontal, -8)
-            }
-            .toggleStyle(SwitchToggleStyle(tint: (Color(UIColor.govUK.fills.surfaceButtonPrimary))))
-        }
-    }
-}
-
-struct RowDetail: View {
-    let text: String?
-
-    var body: some View {
-        Group {
-            if let text {
-                Text(text)
-                    .font(Font.govUK.subheadline)
-                    .foregroundColor(Color(UIColor.govUK.text.secondary))
-                    .multilineTextAlignment(.leading)
-            } else {
-                EmptyView()
-            }
-        }
-    }
-}
-
-
-struct toggleCheckMark: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        if #available(iOS 15.0, *) {
-            Image(systemName: "checkmark.cirle")
-                .symbolVariant(configuration.isOn ? .fill : .none)
-        } else {
-            // Fallback on earlier versions
-        }
-    }
-}

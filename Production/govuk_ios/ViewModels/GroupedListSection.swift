@@ -35,6 +35,7 @@ struct EditLinkRow: GroupedListRow, Identifiable {
     let body: String?
     var isWebLink: Bool = true
     let action: () -> Void
+    let selectAction: () -> Void
 }
 
 struct NavigationRow: GroupedListRow,

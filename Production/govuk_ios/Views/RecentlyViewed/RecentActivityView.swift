@@ -3,24 +3,27 @@ import CoreData
 
 struct RecentActivityView: View {
     let model: RecentActivitiesViewStructure
-    let selected: (ActivityItem) -> Void
-    let saveForEdit: (ActivityItem) -> Void
+    let goToLinkAction: (ActivityItem) -> Void
+    let selectActivityAction: (ActivityItem) -> Void
+    let deleteSelectedActivitiesAction: () -> Void
     let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     @Environment(\.managedObjectContext) private var context
     @State var editMode: Bool = false
 
     init(model: RecentActivitiesViewStructure,
-         selected: @escaping (ActivityItem) -> Void,
-         saveForEdit: @escaping (ActivityItem) -> Void) {
+         goToLinkAction: @escaping (ActivityItem) -> Void,
+         selectActivityAction: @escaping (ActivityItem) -> Void,
+         deletedSelectedActivities: @escaping() -> Void) {
         self.model = model
-        self.selected = selected
-        self.saveForEdit = saveForEdit
+        self.goToLinkAction = goToLinkAction
+        self.selectActivityAction = goToLinkAction
+        self.deleteSelectedActivitiesAction = deletedSelectedActivities
     }
 
     var body: some View {
         ScrollView {
             if model.todaysActivites.count >= 1 {
-                let rows = model.todaysActivites.map({ activityRow(activityItem: $0) })
+                let rows = model.todaysActivites.map({ editActivityRow(activityItem: $0) })
                 GroupedList(
                     content: [
                         GroupedListSection(
@@ -34,7 +37,7 @@ struct RecentActivityView: View {
                 )
             }
             if model.currentMonthActivities.count >= 1 {
-                let rows = model.currentMonthActivities.map { activityRow(activityItem: $0) }
+                let rows = model.currentMonthActivities.map { editActivityRow(activityItem: $0) }
                 GroupedList(
                     content: [
                         GroupedListSection(
@@ -50,28 +53,31 @@ struct RecentActivityView: View {
             if model.recentMonthActivities.count >= 1 {
                 GroupedList(content: buildSectionsView())
             }
+        }.toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(editMode ? "Done" : "Edit") {
+                    withAnimation {
+                        editMode.toggle()
+                    }
+                    if editMode {
+                        deleteSelectedActivitiesAction()
+                    }
+                }
+            }
         }
     }
 
-    private func activityRow(activityItem: ActivityItem) -> LinkRow {
-        LinkRow(
-            id: activityItem.id,
-            title: activityItem.title,
-            body: lastVisitedString(activity: activityItem),
-            action: {
-                self.selected(activityItem)
-            }
-        )
-    }
-
-    private func editactivityRow(activityItem: ActivityItem) -> EditLinkRow {
+    private func editActivityRow(activityItem: ActivityItem) -> EditLinkRow {
         EditLinkRow(
             id: activityItem.id,
-            editMode: $editMode,
+            editMode: editMode,
             title: activityItem.title,
             body: lastVisitedString(activity: activityItem),
             action: {
-                self.saveForEdit(activityItem)
+                self.goToLinkAction(activityItem)
+            },
+            selectAction: {
+                self.selectActivityAction(activityItem)
             }
         )
     }
@@ -83,7 +89,7 @@ struct RecentActivityView: View {
                 let items = model.recentMonthActivities[$0]
                 return GroupedListSection(
                     heading: $0.title,
-                    rows: items?.map(activityRow) ?? [],
+                    rows: items?.map(editActivityRow) ?? [],
                     footer: nil
                 )
             }

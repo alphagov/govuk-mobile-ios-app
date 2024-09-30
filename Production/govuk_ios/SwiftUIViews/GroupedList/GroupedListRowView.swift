@@ -71,6 +71,38 @@ struct LinkRowView: View {
     }
 }
 
+struct EditLinkRowView: View {
+    let row: EditLinkRow
+    @State var editMode: Bool
+
+    var body: some View {
+        Button {
+            row.action()
+        } label: {
+            if editMode {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Rectangle()
+                            .fill(Color.white)
+                            .frame(width: 20, height: 20, alignment: .center)
+                            .cornerRadius(5)
+                    }
+                    Text(row.title)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                }
+                .foregroundColor(Color(UIColor.govUK.text.link))
+
+                RowDetail(text: row.body)
+            }
+        }
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
+        .accessibilityHint(row.isWebLink ? String.common.localized("openWebLinkHint") : "")
+    }
+}
+
+
 struct NavigationRowView: View {
     let row: NavigationRow
 
@@ -132,6 +164,18 @@ struct RowDetail: View {
             } else {
                 EmptyView()
             }
+        }
+    }
+}
+
+
+struct toggleCheckMark: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        if #available(iOS 15.0, *) {
+            Image(systemName: "checkmark.cirle")
+                .symbolVariant(configuration.isOn ? .fill : .none)
+        } else {
+            // Fallback on earlier versions
         }
     }
 }

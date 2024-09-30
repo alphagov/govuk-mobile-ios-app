@@ -4,13 +4,17 @@ import CoreData
 struct RecentActivityView: View {
     let model: RecentActivitiesViewStructure
     let selected: (ActivityItem) -> Void
+    let saveForEdit: (ActivityItem) -> Void
     let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     @Environment(\.managedObjectContext) private var context
+    @State var editMode: Bool = false
 
     init(model: RecentActivitiesViewStructure,
-         selected: @escaping (ActivityItem) -> Void) {
+         selected: @escaping (ActivityItem) -> Void,
+         saveForEdit: @escaping (ActivityItem) -> Void) {
         self.model = model
         self.selected = selected
+        self.saveForEdit = saveForEdit
     }
 
     var body: some View {
@@ -56,6 +60,18 @@ struct RecentActivityView: View {
             body: lastVisitedString(activity: activityItem),
             action: {
                 self.selected(activityItem)
+            }
+        )
+    }
+
+    private func editactivityRow(activityItem: ActivityItem) -> EditLinkRow {
+        EditLinkRow(
+            id: activityItem.id,
+            editMode: $editMode,
+            title: activityItem.title,
+            body: lastVisitedString(activity: activityItem),
+            action: {
+                self.saveForEdit(activityItem)
             }
         )
     }

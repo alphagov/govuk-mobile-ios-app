@@ -28,6 +28,15 @@ struct LinkRow: GroupedListRow,
     let action: () -> Void
 }
 
+struct EditLinkRow: GroupedListRow, Identifiable {
+    let id: String
+    let editMode: Bool
+    let title: String
+    let body: String?
+    var isWebLink: Bool = true
+    let action: () -> Void
+}
+
 struct NavigationRow: GroupedListRow,
                       Identifiable {
     let id: String

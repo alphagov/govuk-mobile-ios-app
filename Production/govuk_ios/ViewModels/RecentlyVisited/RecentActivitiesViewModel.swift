@@ -7,6 +7,7 @@ class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
+    private var selectedActivities = [String: ActivityItem]()
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener) {
@@ -51,6 +52,21 @@ class RecentActivitiesViewModel: ObservableObject {
             currentMonthActivities: currentMonthActivities,
             recentMonthActivities: recentMonthsActivities
         )
+    }
+
+    func selectItem(activity: ActivityItem) {
+        if let savedActivities = selectedActivities[activity.id] {
+            selectedActivities.removeValue(forKey: savedActivities.id)
+        } else {
+            selectedActivities[activity.id] = activity
+        }
+    }
+
+    private func deleteActivities() {
+        for (id, activity) in selectedActivities {
+            guard let context = activity.managedObjectContext else { return }
+            context.delete(activity)
+        }
     }
 
     private func trackSelection(activity: ActivityItem) {

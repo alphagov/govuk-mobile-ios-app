@@ -19,7 +19,8 @@ struct RecentActivityContainerView: View {
                     model: viewModel.sortActivites(
                         activities: Array(recentItems)
                     ),
-                    selected: { self.viewModel.selected(item: $0) }
+                    selected: { self.viewModel.selected(item: $0) },
+                    saveForEdit: { self.viewModel.selectItem(activity: $0) }
                 )
                 .accessibilityLabel(
                     Text(viewModel.navigationTitle)

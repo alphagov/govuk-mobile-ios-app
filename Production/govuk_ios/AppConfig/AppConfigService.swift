@@ -9,7 +9,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     private let appConfigRepository: AppConfigRepositoryInterface
     private let appConfigServiceClient: AppConfigServiceClientInterface
 
-    public var isAppAvailable: Bool = false
+    var isAppAvailable: Bool = false
     private var featureFlags: [String: Bool] = [:]
 
     private enum ConfigStrings: String {

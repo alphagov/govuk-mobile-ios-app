@@ -6,15 +6,11 @@ protocol AppConfigServiceInterface {
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
+    var isAppAvailable: Bool = false
+
     private let appConfigRepository: AppConfigRepositoryInterface
     private let appConfigServiceClient: AppConfigServiceClientInterface
-
-    var isAppAvailable: Bool = false
     private var featureFlags: [String: Bool] = [:]
-
-    private enum ConfigStrings: String {
-        case filename = "RemoteConfigResponse"
-    }
 
     init(appConfigRepository: AppConfigRepositoryInterface,
          appConfigServiceClient: AppConfigServiceClientInterface) {
@@ -53,5 +49,9 @@ public final class AppConfigService: AppConfigServiceInterface {
 
     func isFeatureEnabled(key: Feature) -> Bool {
         featureFlags[key.rawValue] ?? false
+    }
+
+    private enum ConfigStrings: String {
+        case filename = "RemoteConfigResponse"
     }
 }

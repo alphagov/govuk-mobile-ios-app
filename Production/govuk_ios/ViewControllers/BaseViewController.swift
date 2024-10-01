@@ -15,10 +15,6 @@ class BaseViewController: UIViewController {
         trackPageView()
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
-
     private func configureUI() {
         view.layoutMargins.right = 16
         view.layoutMargins.left = 16

@@ -18,7 +18,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Go to the GOV.UK website"
+            "value" : "Go to the GOV.UK website ↗"
           }
         }
       }
@@ -30,6 +30,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "There’s a problem"
+          }
+        }
+      }
+    },
+    "genericErrorTitleAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to the GOV.UK website"
           }
         }
       }

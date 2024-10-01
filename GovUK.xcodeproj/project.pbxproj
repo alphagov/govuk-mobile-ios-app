@@ -262,7 +262,6 @@
 		96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */; };
 		D04191782CA57A6F0034722A /* TopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191772CA57A6F0034722A /* TopicsService.swift */; };
 		D04191802CA595400034722A /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D041917F2CA595400034722A /* Topic.swift */; };
-		D04191822CA596FA0034722A /* TopicsListResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = D04191812CA596F10034722A /* TopicsListResponse.json */; };
 		D04191842CA5B06D0034722A /* TopicsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191832CA5B0650034722A /* TopicsServiceTests.swift */; };
 		D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191852CA6A5910034722A /* TopicsServiceClient.swift */; };
 		D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046511C2C933FE600F47C66 /* String+Extensions.swift */; };
@@ -565,7 +564,6 @@
 		96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePixelLineHelper.swift; sourceTree = "<group>"; };
 		D04191772CA57A6F0034722A /* TopicsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsService.swift; sourceTree = "<group>"; };
 		D041917F2CA595400034722A /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
-		D04191812CA596F10034722A /* TopicsListResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TopicsListResponse.json; sourceTree = "<group>"; };
 		D04191832CA5B0650034722A /* TopicsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceTests.swift; sourceTree = "<group>"; };
 		D04191852CA6A5910034722A /* TopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClient.swift; sourceTree = "<group>"; };
 		D046511C2C933FE600F47C66 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -1359,7 +1357,6 @@
 		5DAD71AA2BD2548B0075F648 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D04191812CA596F10034722A /* TopicsListResponse.json */,
 				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
@@ -1818,7 +1815,6 @@
 				5D742BDE2C997ABB00E7B87A /* Onboarding.xcstrings in Resources */,
 				4E003E7A2C75EDEC008FCBF2 /* MockAppConfigResponse.json in Resources */,
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
-				D04191822CA596FA0034722A /* TopicsListResponse.json in Resources */,
 				5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */,
 				D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */,
 				D0A8B3C82CA18C2D00849304 /* MockAppConfigResponseInvalidSig.json in Resources */,

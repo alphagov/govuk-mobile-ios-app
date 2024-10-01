@@ -19,7 +19,9 @@ struct TopicsServiceTests {
             sut.fetchTopics { result in
                 continuation.resume(returning: result)
             }
-            topicsServiceClient._receivedFetchTopicsCompletion?(testTopicsResult)
+            topicsServiceClient._receivedFetchTopicsCompletion?(
+                MockTopicsService.testTopicsResult
+            )
         }
         let topicsList = try? result.get()
         #expect(topicsList?.count == 3)
@@ -35,25 +37,13 @@ struct TopicsServiceTests {
             sut.fetchTopics { result in
                 continuation.resume(returning: result)
             }
-            topicsServiceClient._receivedFetchTopicsCompletion?(testTopicsFailure)
+            topicsServiceClient._receivedFetchTopicsCompletion?(
+                MockTopicsService.testTopicsFailure
+            )
         }
 
         #expect((try? result.get()) == nil)
         #expect(result.getError() == .apiUnavailable)
-    }
-}
-
-private extension TopicsServiceTests {
-    var testTopicsResult: Result<[Topic], TopicsListError> {
-        let topics = [Topic(ref: "driving-transport", title: "Driving & Transport"),
-                      Topic(ref: "care", title: "Care"),
-                      Topic(ref: "business", title: "Business")
-                      ]
-        return .success(topics)
-    }
-    
-    var testTopicsFailure: Result<[Topic], TopicsListError> {
-        return .failure(.apiUnavailable)
     }
 }
 

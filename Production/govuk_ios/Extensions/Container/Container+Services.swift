@@ -69,4 +69,12 @@ extension Container {
             )
         }
     }
+
+    var topicsService: Factory<TopicsServiceInterface> {
+        Factory(self) {
+            TopicsService(
+                topicsServiceClient: self.topicsServiceClient()
+            )
+        }
+    }
 }

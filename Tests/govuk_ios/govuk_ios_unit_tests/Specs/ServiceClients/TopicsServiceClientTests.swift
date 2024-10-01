@@ -59,7 +59,7 @@ struct TopicsServiceClientTests {
     }
 }
 
-extension TopicsServiceClientTests {
+private extension TopicsServiceClientTests {
     static let topicsListData =
     """
     [

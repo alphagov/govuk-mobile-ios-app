@@ -276,6 +276,7 @@
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
 		D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */; };
+		D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -575,6 +576,7 @@
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
 		D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClientTests.swift; sourceTree = "<group>"; };
+		D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsServiceClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1493,6 +1495,7 @@
 		5DC79FA82CA1744500014446 /* ServiceClients */ = {
 			isa = PBXGroup;
 			children = (
+				D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */,
 				3D97E97E2CA17086001D3131 /* MockAppConfigServiceClient.swift */,
 				5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */,
 			);
@@ -2060,6 +2063,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */,
 				5DA97B682C6CE6250030AF2B /* HTTPURLResponse+Arrangers.swift in Sources */,
 				4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */,
 				5DA97B652C6CC9060030AF2B /* URLRequest+Extensions.swift in Sources */,

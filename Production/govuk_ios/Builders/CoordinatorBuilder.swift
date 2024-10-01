@@ -71,6 +71,7 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             onboardingService: container.onboardingService.resolve(),
             analyticsService: container.onboardingAnalyticsService.resolve(),
+            appConfigService: container.appConfigService.resolve(),
             dismissAction: dismissAction
         )
     }
@@ -108,6 +109,14 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             searchService: container.searchService.resolve(),
             dismissed: didDismissAction
+        )
+    }
+
+    func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
+        RecentActivityCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve()
         )
     }
 }

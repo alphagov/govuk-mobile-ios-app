@@ -5,20 +5,24 @@ import Onboarding
 class OnboardingCoordinator: BaseCoordinator {
     private let onboardingService: OnboardingServiceInterface
     private let analyticsService: OnboardingAnalyticsService
+    private let appConfigService: AppConfigServiceInterface
     private let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,
          onboardingService: OnboardingServiceInterface,
          analyticsService: OnboardingAnalyticsService,
+         appConfigService: AppConfigServiceInterface,
          dismissAction: @escaping () -> Void) {
-        self.dismissAction = dismissAction
         self.onboardingService = onboardingService
         self.analyticsService = analyticsService
+        self.appConfigService = appConfigService
+        self.dismissAction = dismissAction
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        guard !onboardingService.hasSeenOnboarding
+        guard appConfigService.isFeatureEnabled(key: .onboarding) &&
+                !onboardingService.hasSeenOnboarding
         else { return dismissAction() }
         setOnboarding()
     }

@@ -8,6 +8,7 @@ struct GroupedListSection {
 }
 
 protocol GroupedListRow {
+    var id: String { get }
     var title: String { get }
     var body: String? { get }
 }
@@ -18,26 +19,34 @@ extension GroupedListRow {
     }
 }
 
-struct LinkRow: GroupedListRow {
+struct LinkRow: GroupedListRow,
+                Identifiable {
+    let id: String
     let title: String
     let body: String?
     var isWebLink: Bool = true
     let action: () -> Void
 }
 
-struct NavigationRow: GroupedListRow {
+struct NavigationRow: GroupedListRow,
+                      Identifiable {
+    let id: String
     let title: String
     let body: String?
     let action: () -> Void
 }
 
-struct InformationRow: GroupedListRow {
+struct InformationRow: GroupedListRow,
+                       Identifiable {
+    let id: String
     let title: String
     let body: String?
     let detail: String
 }
 
-class ToggleRow: GroupedListRow, ObservableObject {
+class ToggleRow: GroupedListRow,
+                 ObservableObject {
+    var id: String
     let title: String
     @Published var isOn: Bool {
         didSet {
@@ -46,10 +55,14 @@ class ToggleRow: GroupedListRow, ObservableObject {
     }
     let action: ((Bool) -> Void)
 
-    init(title: String, isOn: Bool, action: @escaping (Bool) -> Void) {
+    init(id: String,
+         title: String,
+         isOn: Bool,
+         action: @escaping (Bool) -> Void) {
         self.title = title
         self.isOn = isOn
         self.action = action
+        self.id = id
     }
 }
 
@@ -64,11 +77,13 @@ struct GroupedListSection_Previews: PreviewProvider {
                 heading: "Section 1",
                 rows: [
                     InformationRow(
+                        id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
                         detail: "0.0.1"
                     ),
                     LinkRow(
+                        id: UUID().uuidString,
                         title: "Link row",
                         body: "A really long description to test how multiline text wrapping works",
                         action: {
@@ -76,6 +91,7 @@ struct GroupedListSection_Previews: PreviewProvider {
                         }
                     ),
                     NavigationRow(
+                        id: UUID().uuidString,
                         title: "Nav row",
                         body: "Description",
                         action: {
@@ -83,6 +99,7 @@ struct GroupedListSection_Previews: PreviewProvider {
                         }
                     ),
                     ToggleRow(
+                        id: UUID().uuidString,
                         title: "Toggle",
                         isOn: false,
                         action: { isOn in
@@ -96,6 +113,7 @@ struct GroupedListSection_Previews: PreviewProvider {
                 heading: "Section 2",
                 rows: [
                     InformationRow(
+                        id: UUID().uuidString,
                         title: "A really important piece of info",
                         body: nil,
                         detail: "1.0"
@@ -107,11 +125,13 @@ struct GroupedListSection_Previews: PreviewProvider {
                 heading: nil,
                 rows: [
                     InformationRow(
+                        id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
                         detail: "1.0"
                     ),
                     LinkRow(
+                        id: UUID().uuidString,
                         title: "External link row",
                         body: nil,
                         action: {
@@ -119,6 +139,7 @@ struct GroupedListSection_Previews: PreviewProvider {
                         }
                     ),
                     NavigationRow(
+                        id: UUID().uuidString,
                         title: "Navigation row",
                         body: "Description",
                         action: {

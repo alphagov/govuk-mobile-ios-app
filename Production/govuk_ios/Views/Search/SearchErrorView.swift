@@ -1,4 +1,5 @@
 import UIKit
+import UIComponents
 
 class SearchErrorView: UIView {
     var errorLink: String?
@@ -10,6 +11,8 @@ class SearchErrorView: UIView {
         localLabel.textColor = UIColor.govUK.text.primary
         localLabel.textAlignment = .center
         localLabel.adjustsFontForContentSizeCategory = true
+        localLabel.lineBreakMode = .byWordWrapping
+        localLabel.numberOfLines = 0
 
         return localLabel
     }()
@@ -27,37 +30,14 @@ class SearchErrorView: UIView {
         return localLabel
     }()
 
-    lazy var errorLinkButton: UIButton = {
-        var button = UIButton()
-        let image = UIImage(systemName: "arrow.up.right")
+    lazy var errorLinkButton: GOVUKButton = {
+        let localButton = GOVUKButton(.secondary)
+        localButton.translatesAutoresizingMaskIntoConstraints = false
 
-        button.translatesAutoresizingMaskIntoConstraints = false
+        localButton.accessibilityTraits = .link
+        localButton.accessibilityHint = String.common.localized("openWebLinkHint")
 
-        button.titleLabel?.numberOfLines = 0
-        button.titleLabel?.lineBreakMode = .byWordWrapping
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.textAlignment = .center
-        button.setTitleColor(UIColor.govUK.text.link, for: .normal)
-        button.titleLabel?.font = UIFont.govUK.body
-
-        button.setImage(image, for: .normal)
-        button.imageView?.clipsToBounds = true
-        button.imageView?.tintColor = UIColor.govUK.text.link
-        button.imageEdgeInsets.left = 8
-
-        button.contentHorizontalAlignment = .center
-        button.semanticContentAttribute = .forceRightToLeft
-
-        button.accessibilityTraits = .link
-        button.accessibilityHint = String.common.localized("openWebLinkHint")
-
-        button.addTarget(
-            self,
-            action: #selector(errorButtonPressed),
-            for: .touchUpInside
-        )
-
-        return button
+        return localButton
     }()
 
     init() {
@@ -74,15 +54,25 @@ class SearchErrorView: UIView {
     func configure(title: String? = nil,
                    errorDesc: String? = nil,
                    linkText: String? = nil,
+                   accessibilityLinkText: String? = nil,
                    link: String? = nil) {
         errorTitle.text = title
         errorDescription.text = errorDesc
-        errorLinkButton.setTitle(linkText, for: .normal)
         errorLink = link
 
-        if link == nil {
-            errorLinkButton.isHidden = true
+        guard link != nil
+        else { return errorLinkButton.isHidden = true }
+
+        var errorLinkButtonButtonViewModel: GOVUKButton.ButtonViewModel {
+            .init(
+                localisedTitle: linkText ?? "",
+                action: { [weak self] in
+                    self?.errorButtonPressed()
+                }
+            )
         }
+        errorLinkButton.viewModel = errorLinkButtonButtonViewModel
+        errorLinkButton.accessibilityLabel = accessibilityLinkText
     }
 
     private func configureUI() {
@@ -106,10 +96,7 @@ class SearchErrorView: UIView {
             errorDescription.leftAnchor.constraint(equalTo: leftAnchor),
             errorDescription.rightAnchor.constraint(equalTo: rightAnchor),
 
-            errorLinkButton.topAnchor.constraint(
-                equalTo: errorDescription.bottomAnchor,
-                constant: 16
-            ),
+            errorLinkButton.topAnchor.constraint(equalTo: errorDescription.bottomAnchor),
             errorLinkButton.leftAnchor.constraint(equalTo: leftAnchor),
             errorLinkButton.rightAnchor.constraint(equalTo: rightAnchor),
             errorLinkButton.bottomAnchor.constraint(equalTo: bottomAnchor)

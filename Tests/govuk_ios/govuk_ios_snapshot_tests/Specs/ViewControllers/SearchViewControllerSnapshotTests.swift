@@ -29,7 +29,7 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
         ])
         let viewController = createViewController(result: .success(result))
         viewController.viewDidLoad()
-        let searchBar = viewController.view.subviews.compactMap { $0 as? UISearchBar  }.first
+        let searchBar = viewController.view.subviews.compactMap { $0 as? UISearchBar }.first
         searchBar?.searchTextField.text = "Test with results"
         searchBar?.searchTextField.sendActions(for: .editingDidEndOnExit)
         VerifySnapshotInNavigationController(
@@ -41,8 +41,34 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_search_successResponse_noResults_rendersCorrectly() {
         let viewController = createViewController(result: .failure(.noResults))
         viewController.viewDidLoad()
-        let searchBar = viewController.view.subviews.compactMap { $0 as? UISearchBar  }.first
+        let searchBar = viewController.view.subviews.compactMap { $0 as? UISearchBar }.first
         searchBar?.searchTextField.text = "Empty results"
+        searchBar?.searchTextField.sendActions(for: .editingDidEndOnExit)
+        viewController.view.layoutSubviews()
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light
+        )
+    }
+
+    func test_search_failureResponse_genericError_rendersCorrectly() {
+        let viewController = createViewController(result: .failure(.apiUnavailable))
+        viewController.viewDidLoad()
+        let searchBar = viewController.view.subviews.compactMap { $0 as? UISearchBar }.first
+        searchBar?.searchTextField.text = "Generic error"
+        searchBar?.searchTextField.sendActions(for: .editingDidEndOnExit)
+        viewController.view.layoutSubviews()
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light
+        )
+    }
+
+    func test_search_failureResponse_networkUnavailable_rendersCorrectly() {
+        let viewController = createViewController(result: .failure(.networkUnavailable))
+        viewController.viewDidLoad()
+        let searchBar = viewController.view.subviews.compactMap { $0 as? UISearchBar }.first
+        searchBar?.searchTextField.text = "Network unavailable"
         searchBar?.searchTextField.sendActions(for: .editingDidEndOnExit)
         viewController.view.layoutSubviews()
         VerifySnapshotInNavigationController(

@@ -14,7 +14,7 @@ class ActivityRepository: ActivityRepositoryInterface {
 
     func save(params: ActivityItemCreateParams) {
         let localContext = coreData.backgroundContext
-        let local = get(id: params.url, context: localContext) ??
+        let local = get(id: params.id, context: localContext) ??
         ActivityItem(context: localContext)
         local.update(params)
         try? localContext.save()
@@ -23,7 +23,7 @@ class ActivityRepository: ActivityRepositoryInterface {
     private func get(id: String,
                      context: NSManagedObjectContext?) -> ActivityItem? {
         fetch(
-            predicate: .init(format: "url = %@", id),
+            predicate: .init(format: "id = %@", id),
             context: context
         ).fetchedObjects?.first
     }

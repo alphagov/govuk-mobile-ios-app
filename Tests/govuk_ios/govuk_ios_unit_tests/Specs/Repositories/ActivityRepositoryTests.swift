@@ -24,10 +24,10 @@ struct ActivityRepositoryTests {
         var newParams = params
         let expectedDate = Date()
         newParams.date = expectedDate
-        sut.save(params: params)
+        sut.save(params: newParams)
 
         let request = ActivityItem.fetchRequest()
-        let results = try coreData.viewContext.fetch(request)
+        let results = try coreData.backgroundContext.fetch(request)
         #expect(results.count == 1)
 
         let item = try #require(results.first)
@@ -57,10 +57,10 @@ struct ActivityRepositoryTests {
 
         let expectedDate = Date()
         newParams.date = expectedDate
-        sut.save(params: params)
+        sut.save(params: newParams)
 
         let request = ActivityItem.fetchRequest()
-        let results = try coreData.viewContext.fetch(request)
+        let results = try coreData.backgroundContext.fetch(request)
         #expect(results.count == 2)
 
         let containsOriginalItem = results.contains { $0.id == originalId }

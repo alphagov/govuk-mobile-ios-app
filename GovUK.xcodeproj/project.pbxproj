@@ -60,7 +60,6 @@
 		4E4FF25A2C9B5DB000310AEC /* RecentActivityContainerViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FF2592C9B5DB000310AEC /* RecentActivityContainerViewSnapshotTests.swift */; };
 		4E562E432C988F580074A483 /* RecentActivitiesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
-		4E5ED2032C6E1E9400750BDA /* AppConfigRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2022C6E1E9300750BDA /* AppConfigRepositoryInterface.swift */; };
 		4E5ED2052C6E1F8700750BDA /* AppConfigRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2042C6E1F8700750BDA /* AppConfigRepository.swift */; };
 		4E6663C32C7366CC0063E81C /* RemoteConfigResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E6663C22C7366CC0063E81C /* RemoteConfigResponse.json */; };
 		4E6663C52C736ABD0063E81C /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C42C736ABD0063E81C /* Feature.swift */; };
@@ -256,6 +255,7 @@
 		5DE970542C297652009D66C4 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970532C297652009D66C4 /* AppEvent.swift */; };
 		5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */; };
 		5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */; };
+		5DF8854B2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8854A2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift */; };
 		966ABE222C78E0B900099DF9 /* GroupedListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ABE212C78E0B900099DF9 /* GroupedListRowView.swift */; };
 		9685F82B2C78C04800C33614 /* GroupedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82A2C78C04800C33614 /* GroupedList.swift */; };
 		9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */; };
@@ -366,7 +366,6 @@
 		4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = RecentActivity.xcstrings; sourceTree = "<group>"; };
 		4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesViewModelTests.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
-		4E5ED2022C6E1E9300750BDA /* AppConfigRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigRepositoryInterface.swift; sourceTree = "<group>"; };
 		4E5ED2042C6E1F8700750BDA /* AppConfigRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigRepository.swift; sourceTree = "<group>"; };
 		4E6663C22C7366CC0063E81C /* RemoteConfigResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RemoteConfigResponse.json; sourceTree = "<group>"; };
 		4E6663C42C736ABD0063E81C /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
@@ -546,6 +545,7 @@
 		5DE970532C297652009D66C4 /* AppEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
 		5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Convenience.swift"; sourceTree = "<group>"; };
 		5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPermissionState.swift; sourceTree = "<group>"; };
+		5DF8854A2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFetchedResultsController+Extensions.swift"; sourceTree = "<group>"; };
 		966ABE212C78E0B900099DF9 /* GroupedListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListRowView.swift; sourceTree = "<group>"; };
 		9685F82A2C78C04800C33614 /* GroupedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedList.swift; sourceTree = "<group>"; };
 		9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSection.swift; sourceTree = "<group>"; };
@@ -647,15 +647,6 @@
 			children = (
 				3D97E97A2CA16C8B001D3131 /* AppConfigServiceClientInterface.swift */,
 				3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */,
-			);
-			path = AppConfig;
-			sourceTree = "<group>";
-		};
-		3D97E97D2CA16DE1001D3131 /* AppConfig */ = {
-			isa = PBXGroup;
-			children = (
-				4E5ED2042C6E1F8700750BDA /* AppConfigRepository.swift */,
-				4E5ED2022C6E1E9300750BDA /* AppConfigRepositoryInterface.swift */,
 			);
 			path = AppConfig;
 			sourceTree = "<group>";
@@ -773,6 +764,7 @@
 			children = (
 				5DE970552C297CF3009D66C4 /* Analytics */,
 				5D41DB662C087C520011E691 /* Container */,
+				5DF885492CAC18100060A40D /* CoreData */,
 				5D9CF3962C38492500317B70 /* Deeplinking */,
 				5D51C8362C5BB9E80011ABE9 /* Foundation */,
 				5D08A8FE2C9AFAAD0049D798 /* Swift */,
@@ -1019,8 +1011,8 @@
 		5D41DB6A2C088CA30011E691 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				3D97E97D2CA16DE1001D3131 /* AppConfig */,
 				5D3123832C85ADDF0088B931 /* ActivityRepository.swift */,
+				4E5ED2042C6E1F8700750BDA /* AppConfigRepository.swift */,
 				5D4E255C2C821C8E00FD9A28 /* CoreDataRepository.swift */,
 				5D6295292C87429000BBB394 /* GOV.xcdatamodeld */,
 			);
@@ -1602,6 +1594,14 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
+		5DF885492CAC18100060A40D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5DF8854A2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		966ABE202C78E06F00099DF9 /* GroupedList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1955,6 +1955,7 @@
 				16EE1A452C6F8ED3005E820F /* SearchCoordinator.swift in Sources */,
 				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5DC79FB22CA18A9A00014446 /* GovRequest+Search.swift in Sources */,
+				5DF8854B2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
 				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
@@ -2010,7 +2011,6 @@
 				5DB6AD312CA1B94400E92F4C /* DateFormatter+Convenience.swift in Sources */,
 				1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
-				4E5ED2032C6E1E9400750BDA /* AppConfigRepositoryInterface.swift in Sources */,
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */,

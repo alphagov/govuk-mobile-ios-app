@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 
 protocol ActivityRepositoryInterface {
-    func create(params: ActivityItemCreateParams)
+    func save(params: ActivityItemCreateParams)
 }
 
 class ActivityRepository: ActivityRepositoryInterface {
@@ -12,7 +12,7 @@ class ActivityRepository: ActivityRepositoryInterface {
         self.coreData = coreData
     }
 
-    func create(params: ActivityItemCreateParams) {
+    func save(params: ActivityItemCreateParams) {
         let localContext = coreData.backgroundContext
         let local = get(id: params.url, context: localContext) ??
         ActivityItem(context: localContext)

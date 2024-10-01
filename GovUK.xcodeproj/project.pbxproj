@@ -279,6 +279,7 @@
 		D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */; };
 		D0F86E172CAC068B00FF2D9E /* MockTopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */; };
 		D0F86E182CAC068B00FF2D9E /* MockTopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */; };
+		D0F86E1A2CAC241400FF2D9E /* TopicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E192CAC241400FF2D9E /* TopicTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -580,6 +581,7 @@
 		D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClientTests.swift; sourceTree = "<group>"; };
 		D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsServiceClient.swift; sourceTree = "<group>"; };
 		D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsService.swift; sourceTree = "<group>"; };
+		D0F86E192CAC241400FF2D9E /* TopicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -636,6 +638,7 @@
 				5DCDA1002CA20C7D00A6DF90 /* MonthGroupKeyTests.swift */,
 				5D5A25E62CAD44800013704A /* SearchItemTests.swift */,
 				3D33781B2CAAC30A004BF83F /* AppUnavailableViewModelTests.swift */,
+				D0F86E192CAC241400FF2D9E /* TopicTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2155,6 +2158,7 @@
 				5D4043392C7DBF1B0004CCFE /* AppConfig+Arrangers.swift in Sources */,
 				3DEC85AD2C89DBED0044D5F9 /* MockURLOpener.swift in Sources */,
 				5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */,
+				D0F86E1A2CAC241400FF2D9E /* TopicTests.swift in Sources */,
 				168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */,
 				5DA599FE2C6C9A3D00AEA8D7 /* MockURLProtocol.swift in Sources */,
 			);

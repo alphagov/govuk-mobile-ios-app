@@ -10,7 +10,8 @@ struct SearchViewModelTests{
         let mockAnalyticsService = MockAnalyticsService()
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
-            searchService: MockSearchService(),
+            searchService: MockSearchService(), 
+            activityService: MockActivityService(),
             urlOpener: MockURLOpener()
         )
         let expectedTitle = UUID().uuidString
@@ -39,6 +40,7 @@ struct SearchViewModelTests{
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
             searchService: mockService,
+            activityService: MockActivityService(),
             urlOpener: MockURLOpener()
         )
         let searchText = UUID().uuidString
@@ -70,6 +72,7 @@ struct SearchViewModelTests{
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
             searchService: mockService,
+            activityService: MockActivityService(),
             urlOpener: MockURLOpener()
         )
         let searchText = UUID().uuidString
@@ -91,6 +94,7 @@ struct SearchViewModelTests{
         let subject = SearchViewModel(
             analyticsService: mockAnalyticsService,
             searchService: mockService,
+            activityService: MockActivityService(),
             urlOpener: MockURLOpener()
         )
         let searchText = "ASDLALSD"

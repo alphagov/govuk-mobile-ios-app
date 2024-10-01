@@ -48,6 +48,9 @@ class SearchErrorView: UIView {
         button.contentHorizontalAlignment = .center
         button.semanticContentAttribute = .forceRightToLeft
 
+        button.accessibilityTraits = .link
+        button.accessibilityHint = String.common.localized("openWebLinkHint")
+
         button.addTarget(
             self,
             action: #selector(errorButtonPressed),

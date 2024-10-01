@@ -34,6 +34,29 @@ struct SearchViewModelTests{
     }
 
     @Test
+    func selected_savesRecentActivity() {
+        let mockActivityService = MockActivityService()
+        let subject = SearchViewModel(
+            analyticsService: MockAnalyticsService(),
+            searchService: MockSearchService(),
+            activityService: mockActivityService,
+            urlOpener: MockURLOpener()
+        )
+        let expectedTitle = UUID().uuidString
+        let item = SearchItem(
+            title: expectedTitle,
+            description: UUID().uuidString,
+            link: "/random"
+        )
+
+        subject.selected(
+            item: item
+        )
+
+        #expect(mockActivityService._receivedSaveSearchItem == item)
+    }
+
+    @Test
     func search_success_setsResults() {
         let mockAnalyticsService = MockAnalyticsService()
         let mockService = MockSearchService()

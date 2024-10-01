@@ -205,6 +205,9 @@ class SearchViewController: BaseViewController,
                 title: String.search.localized("genericErrorTitle"),
                 errorDesc: String.search.localized("genericErrorBody"),
                 linkText: String.search.localized("genericErrorLinkTitle"),
+                accessibilityLinkText: String.search.localized(
+                    "genericErrorTitleAccessibilityLabel"
+                ),
                 link: "https://www.gov.uk"
             )
             errorView.isHidden = false

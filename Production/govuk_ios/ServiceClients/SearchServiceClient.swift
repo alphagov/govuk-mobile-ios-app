@@ -17,16 +17,22 @@ class SearchServiceClient: SearchServiceClientInterface {
         serviceClient.send(
             request: .search(term: term),
             completion: { result in
-                let mappedResult = result
-                    .mapError { _ in SearchError.apiUnavailable }
-                    .flatMap {
-                        do {
-                            let searchResult: SearchResult = try JSONDecoder().decode(from: $0)
-                            return .success(searchResult)
-                        } catch {
-                            return .failure(SearchError.parsingError)
-                        }
+                let mappedResult = result.mapError { error in
+                    let nsError = (error as NSError)
+                    if nsError.code == NSURLErrorNotConnectedToInternet {
+                        return SearchError.networkUnavailable
+                    } else {
+                        return SearchError.apiUnavailable
                     }
+                }.flatMap {
+                    do {
+                        let searchResult: SearchResult = try JSONDecoder().decode(from: $0)
+                        return .success(searchResult)
+                    } catch {
+                        return .failure(SearchError.parsingError)
+                    }
+                }
+
                 completion(mappedResult)
             }
         )

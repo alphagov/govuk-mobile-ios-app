@@ -3,12 +3,15 @@ import UIKit
 
 struct HomeViewModel {
     let configService: AppConfigServiceInterface
+    let topicsService: TopicsServiceInterface
     let searchButtonPrimaryAction: (() -> Void)?
     let recentActivityAction: (() -> Void)?
+    let topicsWidgetView = TopicsWidgetView()
     var widgets: [WidgetView] {
         [
             searchWidget,
-            recentlyViewedWidget
+            recentlyViewedWidget,
+            topicsWidget
         ].compactMap { $0 }
     }
     private var recentlyViewedWidget: WidgetView? {
@@ -42,6 +45,21 @@ struct HomeViewModel {
             viewModel: viewModel
         )
         let widget = WidgetView()
+        widget.addContent(content)
+        return widget
+    }
+
+    private var topicsWidget: WidgetView? {
+        let content = TopicsWidgetView()
+        topicsService.fetchTopics { result in
+            switch result {
+            case .success(let topics):
+                content.topics = topics
+            case .failure(let error):
+                print(error)
+            }
+        }
+        let widget = WidgetView(decorateView: false)
         widget.addContent(content)
         return widget
     }

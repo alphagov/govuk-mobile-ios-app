@@ -4,9 +4,6 @@ class TopicsWidgetView: UIView {
     var topicCards = [TopicCard]()
     var topics = [Topic]() {
         didSet {
-            topics.append(topics[1])
-            topics.append(topics[0])
-            topics.append(topics[0])
             updateTopics()
         }
     }

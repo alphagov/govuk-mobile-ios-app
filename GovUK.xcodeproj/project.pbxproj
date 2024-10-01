@@ -277,6 +277,8 @@
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
 		D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */; };
 		D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */; };
+		D0F86E172CAC068B00FF2D9E /* MockTopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */; };
+		D0F86E182CAC068B00FF2D9E /* MockTopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -577,6 +579,7 @@
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
 		D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClientTests.swift; sourceTree = "<group>"; };
 		D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsServiceClient.swift; sourceTree = "<group>"; };
+		D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1024,6 +1027,7 @@
 				160EA7582C60D7AB008F97AF /* MockAnalyticsService.swift */,
 				16A220842C7F6FFC007D1AB9 /* MockAppConfigService.swift */,
 				5D0BD45C2C9B23DE00220625 /* MockSearchService.swift */,
+				D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1900,6 +1904,7 @@
 				4E4FF25A2C9B5DB000310AEC /* RecentActivityContainerViewSnapshotTests.swift in Sources */,
 				5D00E9752CA5583400775D2B /* HostingViewControllerSnapshotTests.swift in Sources */,
 				5DBE71B12CAE8371004ABB5E /* Bundle+Tests.swift in Sources */,
+				D0F86E182CAC068B00FF2D9E /* MockTopicsService.swift in Sources */,
 				4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */,
 				5D0BD45F2C9B244A00220625 /* MockSearchService.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
@@ -2082,6 +2087,7 @@
 				16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */,
 				5DB6AD342CA1C0EA00E92F4C /* Date+Arrangers.swift in Sources */,
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,
+				D0F86E172CAC068B00FF2D9E /* MockTopicsService.swift in Sources */,
 				5DD57A5B2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift in Sources */,
 				5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */,
 				5D40433B2C7DBF710004CCFE /* Config+Arrangers.swift in Sources */,

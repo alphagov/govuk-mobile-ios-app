@@ -7,18 +7,21 @@ class HomeCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
     private let configService: AppConfigServiceInterface
+    private let topicsService: TopicsServiceInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
-         configService: AppConfigServiceInterface) {
+         configService: AppConfigServiceInterface,
+         topicsService: TopicsServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
         self.configService = configService
+        self.topicsService = topicsService
         super.init(navigationController: navigationController)
     }
 
@@ -26,6 +29,7 @@ class HomeCoordinator: TabItemCoordinator {
         let viewController = viewControllerBuilder.home(
             searchButtonPrimaryAction: searchActionButtonPressed,
             configService: configService,
+            topicsService: topicsService,
             recentActivityAction: recentActivityCoordinator
         )
         set([viewController], animated: false)

@@ -55,6 +55,17 @@
           }
         }
       }
+    },
+    "topicsWidgetTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topics"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

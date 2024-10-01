@@ -23,8 +23,10 @@ struct TopicsServiceTests {
         }
         let topicsList = try? result.get()
         #expect(topicsList?.count == 3)
-        #expect(topicsList?[0].title == "Driving & Transport")
-        #expect(topicsList?[1].ref == "care")
+        // Topics should be sorted
+        #expect(topicsList?[0].title == "Business")
+        #expect(topicsList?[1].title == "Care")
+        #expect(topicsList?[2].title == "Driving & Transport")
     }
     
     @Test

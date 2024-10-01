@@ -9,7 +9,8 @@ struct HomeViewModelTests {
     @Test
     func widgets_returnsArrayOfWidgets() {
         let subject = HomeViewModel(
-            configService: MockAppConfigService(), 
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
             recentActivityAction: {}
         )
@@ -26,6 +27,7 @@ struct HomeViewModelTests {
 
         let subject = HomeViewModel(
             configService: configService,
+            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
             recentActivityAction: {}
         )

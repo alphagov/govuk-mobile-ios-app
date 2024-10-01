@@ -25,6 +25,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     private var viewController: HomeViewController {
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
             recentActivityAction: { }
         )

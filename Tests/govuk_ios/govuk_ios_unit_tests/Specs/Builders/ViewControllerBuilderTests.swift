@@ -39,6 +39,7 @@ struct ViewControllerBuilderTests {
         let result = subject.home(
             searchButtonPrimaryAction: { () -> Void in },
             configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
             recentActivityAction: {}
         )
 

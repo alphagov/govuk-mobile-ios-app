@@ -23,3 +23,14 @@ class ActivityItem: NSManagedObject,
     @NSManaged var date: Date
     @NSManaged var url: String
 }
+
+extension ActivityItem {
+    @discardableResult
+    func update(_ params: ActivityItemCreateParams) -> Self {
+        self.id = params.id
+        self.title = params.title
+        self.date = params.date
+        self.url = params.url
+        return self
+    }
+}

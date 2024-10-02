@@ -4,6 +4,10 @@ import CoreData
 @testable import govuk_ios
 
 extension CoreDataRepository {
+    static var arrangeAndLoad: CoreDataRepository {
+        arrange().load()
+    }
+
     static var arrange: CoreDataRepository {
         arrange()
     }

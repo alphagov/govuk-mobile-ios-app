@@ -1,85 +1,94 @@
 import Foundation
 import CoreData
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class CoreDataRepositoryTests: XCTestCase {
-    func test_load_returnsExpectedResult() {
+@Suite
+struct CoreDataRepositoryTests {
+    @Test
+    func load_returnsExpectedResult() {
         let sut = CoreDataRepository.arrange
         let result = sut.load()
-        XCTAssert(sut === result)
+
+        #expect(sut === result)
     }
 
-    func test_load_addsViewContextObserver() {
+    @Test
+    func load_addsViewContextObserver() {
         let mockNotificationCenter = MockNotificationCenter()
         let sut = CoreDataRepository.arrange(
             notificationCenter: mockNotificationCenter
-        )
-        _ = sut.load()
-        XCTAssertEqual(mockNotificationCenter._receivedObservers.count, 2)
+        ).load()
+
+        #expect(mockNotificationCenter._receivedObservers.count == 2)
+
         let containsContext = mockNotificationCenter._receivedObservers.contains(
             where: { tuple in
                 (tuple.object as? NSObject) == sut.viewContext
             }
         )
-        XCTAssertTrue(containsContext)
+
+        #expect(containsContext)
     }
 
-    func test_load_addsBackgroundContextObserver() {
+    @Test
+    func load_addsBackgroundContextObserver() {
         let mockNotificationCenter = MockNotificationCenter()
         let sut = CoreDataRepository.arrange(
             notificationCenter: mockNotificationCenter
-        )
-        _ = sut.load()
-        XCTAssertEqual(mockNotificationCenter._receivedObservers.count, 2)
+        ).load()
+
+        #expect(mockNotificationCenter._receivedObservers.count == 2)
+
         let containsContext = mockNotificationCenter._receivedObservers.contains(
             where: { tuple in
                 (tuple.object as? NSObject) == sut.backgroundContext
             }
         )
-        XCTAssertTrue(containsContext)
+
+        #expect(containsContext)
     }
 
-    func test_save_viewContext_mergesChanges() throws {
-        let sut = CoreDataRepository.arrange(
-            notificationCenter: .default
-        ).load()
+    @Test
+    func save_viewContext_mergesChanges() throws {
+        let sut = CoreDataRepository.arrangeAndLoad
 
-        let item = ActivityItem(context: sut.viewContext)
-        item.id = UUID().uuidString
+        let item = ActivityItem.arrange(
+            context: sut.viewContext
+        )
 
         try sut.viewContext.save()
 
-        let expectedId = UUID().uuidString
-        item.id = expectedId
+        let expectedNewTitle = UUID().uuidString
+        item.title = expectedNewTitle
 
         try sut.viewContext.save()
 
         let request = ActivityItem.fetchRequest()
         let items = try sut.backgroundContext.fetch(request)
 
-        XCTAssertEqual(items.first?.id, expectedId)
+        #expect(items.first?.title == expectedNewTitle)
     }
 
-    func test_save_backgroundContext_mergesChanges() throws {
-        let sut = CoreDataRepository.arrange(
-            notificationCenter: .default
-        ).load()
+    @Test
+    func save_backgroundContext_mergesChanges() throws {
+        let sut = CoreDataRepository.arrangeAndLoad
 
-        let item = ActivityItem(context: sut.backgroundContext)
-        item.id = UUID().uuidString
+        let item = ActivityItem.arrange(
+            context: sut.backgroundContext
+        )
 
         try sut.backgroundContext.save()
 
-        let expectedId = UUID().uuidString
-        item.id = expectedId
+        let expectedTitle = UUID().uuidString
+        item.title = expectedTitle
 
         try sut.backgroundContext.save()
 
         let request = ActivityItem.fetchRequest()
         let items = try sut.viewContext.fetch(request)
 
-        XCTAssertEqual(items.first?.id, expectedId)
+        #expect(items.first?.title == expectedTitle)
     }
 }

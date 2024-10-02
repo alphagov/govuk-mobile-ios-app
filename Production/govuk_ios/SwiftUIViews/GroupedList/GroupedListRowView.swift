@@ -57,6 +57,7 @@ struct LinkRowView: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text(row.title)
+                        .multilineTextAlignment(.leading)
                     Spacer()
                     Image(systemName: "arrow.up.right")
                 }

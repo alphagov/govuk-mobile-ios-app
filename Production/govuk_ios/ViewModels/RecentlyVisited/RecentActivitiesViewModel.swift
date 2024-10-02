@@ -19,11 +19,22 @@ class RecentActivitiesViewModel: ObservableObject {
     )
 
     func selected(item: ActivityItem) {
+        guard let url = URL(string: item.url)
+        else { return }
         item.date = Date()
         try? item.managedObjectContext?.save()
-        guard let url = URL(string: item.url) else { return }
         urlOpener.openIfPossible(url)
         trackSelection(activity: item)
+    }
+
+    private func urlFromLink(_ link: String) -> URL? {
+        var components = URLComponents(string: link)
+        let scheme = components?.scheme
+        components?.scheme = scheme ?? "https"
+        let host = components?.host
+        components?.host = host ?? "www.gov.uk"
+
+        return components?.url
     }
 
     func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {

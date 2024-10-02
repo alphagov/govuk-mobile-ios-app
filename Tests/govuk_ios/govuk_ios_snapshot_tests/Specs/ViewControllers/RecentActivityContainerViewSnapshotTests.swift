@@ -95,7 +95,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
-        activity.title = "benefits"
+        activity.title = "Bringing your pet dog, cat or ferret to Great Britain, long title end"
         activity.url = "https://www.youtube.com/"
         activity.date = Date.arrange("14/04/2016")
 

@@ -79,6 +79,7 @@ class ViewControllerBuilder {
         let viewModel = SearchViewModel(
             analyticsService: analyticsService,
             searchService: searchService,
+            activityService: Container.shared.activityService.resolve(),
             urlOpener: UIApplication.shared
         )
         return SearchViewController(
@@ -93,10 +94,9 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared
         )
-        let context = Container.shared.coreDataRepository.resolve()
-            .viewContext
+        let repository = Container.shared.coreDataRepository.resolve()
         let view = RecentActivityContainerView(viewModel: viewModel)
-            .environment(\.managedObjectContext, context)
+            .environment(\.managedObjectContext, repository.viewContext)
         return HostingViewController(rootView: view)
     }
 }

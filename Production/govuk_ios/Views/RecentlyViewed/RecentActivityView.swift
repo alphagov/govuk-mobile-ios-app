@@ -16,7 +16,9 @@ struct RecentActivityView: View {
     var body: some View {
         ScrollView {
             if model.todaysActivites.count >= 1 {
-                let rows = model.todaysActivites.map({ activityRow(activityItem: $0) })
+                let rows = model.todaysActivites.map({
+                    activityRow(activityItem: $0)
+                })
                 GroupedList(
                     content: [
                         GroupedListSection(

@@ -1,6 +1,7 @@
 import Foundation
 
 protocol ActivityServiceInterface {
+    func save(searchItem: SearchItem)
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -8,5 +9,12 @@ struct ActivityService: ActivityServiceInterface {
 
     init(repository: ActivityRepositoryInterface) {
         self.repository = repository
+    }
+
+    func save(searchItem: SearchItem) {
+        let params = ActivityItemCreateParams(
+            searchItem: searchItem
+        )
+        repository.save(params: params)
     }
 }

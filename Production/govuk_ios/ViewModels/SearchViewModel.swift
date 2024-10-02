@@ -10,6 +10,7 @@ enum SearchError: Error {
 class SearchViewModel {
     private let searchService: SearchServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let activityService: ActivityServiceInterface
     private let urlOpener: URLOpener
 
     private(set) var results: [SearchItem]?
@@ -17,9 +18,11 @@ class SearchViewModel {
 
     init(analyticsService: AnalyticsServiceInterface,
          searchService: SearchServiceInterface,
+         activityService: ActivityServiceInterface,
          urlOpener: URLOpener) {
         self.analyticsService = analyticsService
         self.searchService = searchService
+        self.activityService = activityService
         self.urlOpener = urlOpener
     }
 
@@ -44,7 +47,7 @@ class SearchViewModel {
     func selected(item: SearchItem) {
         guard let url = urlFromLink(item.link)
         else { return }
-
+        activityService.save(searchItem: item)
         trackSearchItemSelection(item, url: url)
         urlOpener.openIfPossible(url)
     }

@@ -27,16 +27,6 @@ class RecentActivitiesViewModel: ObservableObject {
         trackSelection(activity: item)
     }
 
-    private func urlFromLink(_ link: String) -> URL? {
-        var components = URLComponents(string: link)
-        let scheme = components?.scheme
-        components?.scheme = scheme ?? "https"
-        let host = components?.host
-        components?.host = host ?? "www.gov.uk"
-
-        return components?.url
-    }
-
     func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
         var todaysActivities: [ActivityItem] = []
         var currentMonthActivities: [ActivityItem] = []

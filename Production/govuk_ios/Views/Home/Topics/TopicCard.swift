@@ -51,7 +51,7 @@ class TopicCard: UIView {
         stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
         return stackView
     }()
-    
+
     init(viewModel: TopicCardModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -104,7 +104,7 @@ class TopicCard: UIView {
         )
         self.addGestureRecognizer(tapGestureRecognizer)
     }
-    
+
     private func configureAccessibility() {
         self.isAccessibilityElement = true
         self.accessibilityTraits = .button

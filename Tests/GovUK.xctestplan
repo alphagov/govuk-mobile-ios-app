@@ -4,7 +4,7 @@
       "id" : "B5802D24-611B-4AB7-9C83-5F5728D5DC82",
       "name" : "Test Scheme Action",
       "options" : {
-        "defaultTestExecutionTimeAllowance" : 60
+
       }
     }
   ],
@@ -14,6 +14,7 @@
         "argument" : "-UIPreferredContentSizeCategoryName UICTContentSizeCategoryL"
       }
     ],
+    "defaultTestExecutionTimeAllowance" : 60,
     "environmentVariableEntries" : [
       {
         "key" : "IMAGE_DIFF_DIR",
@@ -34,19 +35,19 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : false,
-      "target" : {
-        "containerPath" : "container:GovUK.xcodeproj",
-        "identifier" : "5D4B9D332C074207005F126A",
-        "name" : "govuk_ios_snapshot_tests"
-      }
-    },
-    {
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
         "identifier" : "5DAD71892BD250DF0075F648",
         "name" : "govuk_ios_unit_tests"
+      }
+    },
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:GovUK.xcodeproj",
+        "identifier" : "5D4B9D332C074207005F126A",
+        "name" : "govuk_ios_snapshot_tests"
       }
     }
   ],

@@ -1,3 +1,5 @@
+import Foundation
+
 struct SearchItem: Codable,
                    Hashable {
     let title: String

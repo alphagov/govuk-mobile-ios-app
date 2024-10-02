@@ -5,7 +5,7 @@ protocol ActivityRepositoryInterface {
     func save(params: ActivityItemCreateParams)
 }
 
-class ActivityRepository: ActivityRepositoryInterface {
+struct ActivityRepository: ActivityRepositoryInterface {
     private let coreData: CoreDataRepositoryInterface
 
     init(coreData: CoreDataRepositoryInterface) {

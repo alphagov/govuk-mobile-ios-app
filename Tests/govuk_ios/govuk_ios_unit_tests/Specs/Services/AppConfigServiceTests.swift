@@ -24,7 +24,7 @@ final class AppConfigServiceTests: XCTestCase {
 
     func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
         //When
-        let result = ["search": true].toResult()
+        let result = Config.arrange(releaseFlags: ["search": true]).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertTrue(sut.isFeatureEnabled(key: .search))
@@ -32,7 +32,7 @@ final class AppConfigServiceTests: XCTestCase {
 
     func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
         //When
-        let result = ["search": false].toResult()
+        let result = Config.arrange(releaseFlags: ["search": false]).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
@@ -40,15 +40,31 @@ final class AppConfigServiceTests: XCTestCase {
 
     func test_repository_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
         //When
-        let result = ["test": false].toResult()
+        let result = Config.arrange(releaseFlags: ["test": false]).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
 
+    func test_repository_isAppAvailable_whenAvailableIsTrueInConfig_returnsTrue() throws {
+        //When
+        let result = Config.arrange(available: true).toResult()
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertTrue(sut.isAppAvailable)
+    }
+
+    func test_repository_isAppAvailable_whenAvailableIsFalseInConfig_returnsFalse() throws {
+        //When
+        let result = Config.arrange(available: false).toResult()
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertFalse(sut.isAppAvailable)
+    }
+
     func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
         //When
-        let result = ["search": true].toResult()
+        let result = Config.arrange(releaseFlags: ["search": true]).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertTrue(sut.isFeatureEnabled(key: .search))
@@ -56,7 +72,7 @@ final class AppConfigServiceTests: XCTestCase {
 
     func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
         //When
-        let result = ["search": false].toResult()
+        let result = Config.arrange(releaseFlags: ["search": false]).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
@@ -64,18 +80,33 @@ final class AppConfigServiceTests: XCTestCase {
 
     func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
         //When
-        let result = ["test": false].toResult()
+        let result = Config.arrange(releaseFlags: ["test": false]).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         //Then
         XCTAssertFalse(sut.isFeatureEnabled(key: .search))
     }
+
+    func test_serviceClient_isAppAvailable_whenAvailableIsTrueInConfig_returnsTrue() throws {
+        //When
+        let result = Config.arrange(available: true).toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertTrue(sut.isAppAvailable)
+    }
+
+    func test_serviceClient_isAppAvailable_whenAvailableIsFalseInConfig_returnsFalse() throws {
+        //When
+        let result = Config.arrange(available: false).toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+        //Then
+        XCTAssertFalse(sut.isAppAvailable)
+    }
 }
 
-private extension [String:Bool] {
+private extension Config {
     func toResult() -> Result<AppConfig, AppConfigError> {
-        let config = Config.arrange(releaseFlags: self)
         let appConfig = AppConfig.arrange(
-            config: config
+            config: self
         )
         return .success(appConfig)
     }

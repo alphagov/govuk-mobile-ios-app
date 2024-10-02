@@ -1,17 +1,16 @@
 import Foundation
 
 protocol AppConfigServiceInterface {
+    var isAppAvailable: Bool { get }
     func isFeatureEnabled(key: Feature) -> Bool
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
-    private var featureFlags: [String: Bool] = [:]
+    var isAppAvailable: Bool = false
+
     private let appConfigRepository: AppConfigRepositoryInterface
     private let appConfigServiceClient: AppConfigServiceClientInterface
-
-    private enum ConfigStrings: String {
-        case filename = "RemoteConfigResponse"
-    }
+    private var featureFlags: [String: Bool] = [:]
 
     init(appConfigRepository: AppConfigRepositoryInterface,
          appConfigServiceClient: AppConfigServiceClientInterface) {
@@ -26,21 +25,22 @@ public final class AppConfigService: AppConfigServiceInterface {
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.setFeatureflags(result: result)
+                try? self.setConfig(result: result)
             }
         )
 
         appConfigServiceClient.fetchAppConfig(
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.setFeatureflags(result: result)
+                try? self.setConfig(result: result)
             }
         )
     }
 
-    private func setFeatureflags(result: Result<AppConfig, AppConfigError>) throws {
+    private func setConfig(result: Result<AppConfig, AppConfigError>) throws {
         switch result {
         case .success(let appConfig):
+            self.isAppAvailable = appConfig.config.available
             self.featureFlags = appConfig.config.releaseFlags
         case .failure(let error):
             throw error
@@ -49,5 +49,9 @@ public final class AppConfigService: AppConfigServiceInterface {
 
     func isFeatureEnabled(key: Feature) -> Bool {
         featureFlags[key.rawValue] ?? false
+    }
+
+    private enum ConfigStrings: String {
+        case filename = "RemoteConfigResponse"
     }
 }

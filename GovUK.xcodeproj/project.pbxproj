@@ -118,19 +118,13 @@
 		5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349F662C6B548200B7F747 /* RequestBuilder.swift */; };
 		5D349F692C6B550000B7F747 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349F682C6B550000B7F747 /* URL+Extensions.swift */; };
 		5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */; };
-		5D37EA0B2C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */; };
-		5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F22C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift */; };
 		5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F42C3E865F006B36CB /* DeeplinkDataStoreTests.swift */; };
 		5D37EA0E2C3E865F006B36CB /* BaseViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F62C3E865F006B36CB /* BaseViewControllerTests.swift */; };
 		5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F82C3E865F006B36CB /* CoordinatorBuilderTests.swift */; };
 		5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9F92C3E865F006B36CB /* ViewControllerBuilderTests.swift */; };
-		5D37EA112C3E865F006B36CB /* DrivingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9FB2C3E865F006B36CB /* DrivingCoordinatorTests.swift */; };
-		5D37EA122C3E865F006B36CB /* PermitCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9FC2C3E865F006B36CB /* PermitCoordinatorTests.swift */; };
 		5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */; };
 		5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */; };
-		5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */; };
 		5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */; };
-		5D37EA182C3E865F006B36CB /* NextCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */; };
 		5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */; };
 		5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */; };
 		5D4043392C7DBF1B0004CCFE /* AppConfig+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4043382C7DBF1B0004CCFE /* AppConfig+Arrangers.swift */; };
@@ -171,8 +165,6 @@
 		5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D76A4422C875EA10019DF73 /* Container+NetworkClientsTests.swift */; };
 		5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEBF2C32B9180061F344 /* AnimationView.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
-		5D8460B52C35A2550066095E /* PermitDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8460B42C35A2550066095E /* PermitDeeplinkRoute.swift */; };
-		5D8460B72C35A2630066095E /* DrivingDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8460B62C35A2630066095E /* DrivingDeeplinkRoute.swift */; };
 		5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */; };
 		5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */; };
 		5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */; };
@@ -181,13 +173,9 @@
 		5D899A242C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */; };
 		5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */; };
 		5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D93EE812C36848E00D90C0C /* MockDeeplinkRoute.swift */; };
-		5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */; };
-		5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */; };
 		5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */; };
 		5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */; };
-		5D962D642C29BD0B0038BC0A /* ColorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */; };
 		5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */; };
-		5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */; };
 		5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */; };
 		5D96C9DA2C860AD90003527A /* AppEvent+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D96C9D92C860AD90003527A /* AppEvent+ConvenienceTests.swift */; };
 		5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C8DF42C53BCF400961326 /* OnboardingSlide+Arrangers.swift */; };
@@ -433,19 +421,13 @@
 		5D349F662C6B548200B7F747 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		5D349F682C6B550000B7F747 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
-		5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingDeeplinkRouteTests.swift; sourceTree = "<group>"; };
-		5D37E9F22C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermitDeeplinkingRouteTests.swift; sourceTree = "<group>"; };
 		5D37E9F42C3E865F006B36CB /* DeeplinkDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStoreTests.swift; sourceTree = "<group>"; };
 		5D37E9F62C3E865F006B36CB /* BaseViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewControllerTests.swift; sourceTree = "<group>"; };
 		5D37E9F82C3E865F006B36CB /* CoordinatorBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilderTests.swift; sourceTree = "<group>"; };
 		5D37E9F92C3E865F006B36CB /* ViewControllerBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerBuilderTests.swift; sourceTree = "<group>"; };
-		5D37E9FB2C3E865F006B36CB /* DrivingCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinatorTests.swift; sourceTree = "<group>"; };
-		5D37E9FC2C3E865F006B36CB /* PermitCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermitCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
-		5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorTests.swift; sourceTree = "<group>"; };
-		5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
 		5D4043382C7DBF1B0004CCFE /* AppConfig+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfig+Arrangers.swift"; sourceTree = "<group>"; };
@@ -480,8 +462,6 @@
 		5D742BDD2C997ABB00E7B87A /* Onboarding.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Onboarding.xcstrings; sourceTree = "<group>"; };
 		5D76A4422C875EA10019DF73 /* Container+NetworkClientsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+NetworkClientsTests.swift"; sourceTree = "<group>"; };
 		5D79AEBF2C32B9180061F344 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
-		5D8460B42C35A2550066095E /* PermitDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermitDeeplinkRoute.swift; sourceTree = "<group>"; };
-		5D8460B62C35A2630066095E /* DrivingDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingDeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRoutingComponents.swift; sourceTree = "<group>"; };
 		5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedDeeplinkRoute.swift; sourceTree = "<group>"; };
@@ -491,13 +471,9 @@
 		5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingServiceTests.swift; sourceTree = "<group>"; };
 		5D93EE812C36848E00D90C0C /* MockDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeeplinkRoute.swift; sourceTree = "<group>"; };
-		5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingCoordinator.swift; sourceTree = "<group>"; };
-		5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermitCoordinator.swift; sourceTree = "<group>"; };
 		5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
-		5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
-		5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextCoordinator.swift; sourceTree = "<group>"; };
 		5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		5D96C9D92C860AD90003527A /* AppEvent+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+ConvenienceTests.swift"; sourceTree = "<group>"; };
 		5D9C8DF42C53BCF400961326 /* OnboardingSlide+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingSlide+Arrangers.swift"; sourceTree = "<group>"; };
@@ -885,19 +861,9 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		5D37E9F32C3E865F006B36CB /* DeeplinkRoutes */ = {
-			isa = PBXGroup;
-			children = (
-				5D37E9F12C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift */,
-				5D37E9F22C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift */,
-			);
-			path = DeeplinkRoutes;
-			sourceTree = "<group>";
-		};
 		5D37E9F52C3E865F006B36CB /* Deeplinking */ = {
 			isa = PBXGroup;
 			children = (
-				5D37E9F32C3E865F006B36CB /* DeeplinkRoutes */,
 				5D37E9F42C3E865F006B36CB /* DeeplinkDataStoreTests.swift */,
 			);
 			path = Deeplinking;
@@ -923,27 +889,16 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
-		5D37E9FD2C3E865F006B36CB /* Driving */ = {
-			isa = PBXGroup;
-			children = (
-				5D37E9FB2C3E865F006B36CB /* DrivingCoordinatorTests.swift */,
-				5D37E9FC2C3E865F006B36CB /* PermitCoordinatorTests.swift */,
-			);
-			path = Driving;
-			sourceTree = "<group>";
-		};
 		5D37EA062C3E865F006B36CB /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
 				3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */,
 				5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */,
 				5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */,
-				5D37EA012C3E865F006B36CB /* ColorCoordinatorTests.swift */,
-				5D37E9FD2C3E865F006B36CB /* Driving */,
 				16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */,
 				5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */,
-				5D37EA032C3E865F006B36CB /* NextCoordinatorTests.swift */,
 				4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */,
+				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 				16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */,
 				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
@@ -1148,8 +1103,6 @@
 			isa = PBXGroup;
 			children = (
 				5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */,
-				5D8460B62C35A2630066095E /* DrivingDeeplinkRoute.swift */,
-				5D8460B42C35A2550066095E /* PermitDeeplinkRoute.swift */,
 				16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */,
 				16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */,
 			);
@@ -1199,15 +1152,6 @@
 			path = Deeplinking;
 			sourceTree = "<group>";
 		};
-		5D962D542C29BD0B0038BC0A /* Driving */ = {
-			isa = PBXGroup;
-			children = (
-				5D962D522C29BD0B0038BC0A /* DrivingCoordinator.swift */,
-				5D962D532C29BD0B0038BC0A /* PermitCoordinator.swift */,
-			);
-			path = Driving;
-			sourceTree = "<group>";
-		};
 		5D962D5E2C29BD0B0038BC0A /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -1215,11 +1159,8 @@
 				5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */,
 				3D33780F2CAAC015004BF83F /* AppUnavailableCoordinator.swift */,
 				5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */,
-				5D962D592C29BD0B0038BC0A /* ColorCoordinator.swift */,
-				5D962D542C29BD0B0038BC0A /* Driving */,
 				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
 				5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */,
-				5D962D5B2C29BD0B0038BC0A /* NextCoordinator.swift */,
 				5DBE08092C480D9200B58DBE /* OnboardingCoordinator.swift */,
 				4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */,
 				16EE1A442C6F8ED3005E820F /* SearchCoordinator.swift */,
@@ -1946,7 +1887,6 @@
 				160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */,
 				5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */,
 				5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */,
-				5D8460B72C35A2630066095E /* DrivingDeeplinkRoute.swift in Sources */,
 				16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */,
 				163800FF2C99DAF900C3DDD1 /* SearchErrorView.swift in Sources */,
 				5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */,
@@ -1962,7 +1902,6 @@
 				3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */,
 				5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */,
 				9685F82B2C78C04800C33614 /* GroupedList.swift in Sources */,
-				5D8460B52C35A2550066095E /* PermitDeeplinkRoute.swift in Sources */,
 				16F961A32C92FD15005CFB04 /* SearchResultCell.swift in Sources */,
 				3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */,
 				5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */,
@@ -1980,12 +1919,10 @@
 				3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */,
 				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
 				16EE1A452C6F8ED3005E820F /* SearchCoordinator.swift in Sources */,
-				5D962D662C29BD0B0038BC0A /* NextCoordinator.swift in Sources */,
 				5DC79FB22CA18A9A00014446 /* GovRequest+Search.swift in Sources */,
 				5DF8854B2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
-				5D962D5F2C29BD0B0038BC0A /* DrivingCoordinator.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
 				5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */,
 				5DC79FB02CA1862000014446 /* UIView+Extensions.swift in Sources */,
@@ -2024,7 +1961,6 @@
 				5DBE08082C480CA700B58DBE /* UITabBarItem+Convenience.swift in Sources */,
 				5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */,
 				3D3378102CAAC015004BF83F /* AppUnavailableCoordinator.swift in Sources */,
-				5D962D602C29BD0B0038BC0A /* PermitCoordinator.swift in Sources */,
 				5DC250682C91D80F009E9E7F /* CrashlyticsClient.swift in Sources */,
 				5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
@@ -2032,7 +1968,6 @@
 				5D899A202C946F540074C0AD /* UIViewController+Extensions.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
 				16F961A52C989129005CFB04 /* SearchItem.swift in Sources */,
-				5D962D642C29BD0B0038BC0A /* ColorCoordinator.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				5D349F692C6B550000B7F747 /* URL+Extensions.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+ServiceClients.swift in Sources */,
@@ -2071,24 +2006,20 @@
 				4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */,
 				5DA97B652C6CC9060030AF2B /* URLRequest+Extensions.swift in Sources */,
 				5D54A8352BFCBF98003D0C21 /* TestAppDelegate.swift in Sources */,
-				5D37EA0B2C3E865F006B36CB /* DrivingDeeplinkRouteTests.swift in Sources */,
 				5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */,
 				16F961A92C989651005CFB04 /* MockAPIServiceClient.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D26A7652C92E18F009902DD /* FirebaseClientTests.swift in Sources */,
-				5D37EA162C3E865F006B36CB /* ColorCoordinatorTests.swift in Sources */,
 				3D55B22E2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift in Sources */,
 				5D8CE6942C52A330004C2552 /* OnboardingServiceTests.swift in Sources */,
 				5D899A242C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift in Sources */,
 				5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */,
-				5D37EA0C2C3E865F006B36CB /* PermitDeeplinkingRouteTests.swift in Sources */,
 				5D54A8382BFCBFDB003D0C21 /* TestSceneDelegate.swift in Sources */,
 				5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */,
 				16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */,
 				5DB6AD342CA1C0EA00E92F4C /* Date+Arrangers.swift in Sources */,
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,
 				5DD57A5B2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift in Sources */,
-				5D37EA182C3E865F006B36CB /* NextCoordinatorTests.swift in Sources */,
 				5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */,
 				5D40433B2C7DBF710004CCFE /* Config+Arrangers.swift in Sources */,
 				5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */,
@@ -2121,14 +2052,12 @@
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
 				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,
 				4E18E0922C74DD5D00538CF0 /* AppConfigRepositoryTests.swift in Sources */,
-				5D37EA122C3E865F006B36CB /* PermitCoordinatorTests.swift in Sources */,
 				4E94E8FB2C9054CD00906803 /* Date+ExtensionsTests.swift in Sources */,
 				5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */,
 				5D349F632C6A5A9C00B7F747 /* APIServiceClientTests.swift in Sources */,
 				5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */,
 				5DC79FAC2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift in Sources */,
 				5DAA394D2CAC862B002A7E18 /* ActivityItem+Arrange.swift in Sources */,
-				5D37EA112C3E865F006B36CB /* DrivingCoordinatorTests.swift in Sources */,
 				5D0BD45E2C9B23EE00220625 /* MockSearchService.swift in Sources */,
 				5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */,
 				5D4F6D3E2CA4175A006D0B5B /* MockAppConfigServiceClient.swift in Sources */,

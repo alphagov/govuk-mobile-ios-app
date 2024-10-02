@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "goToGovUkAccessibilityButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to GOV.UK"
+          }
+        }
+      }
+    },
+    "goToGovUkButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to GOV.UK ↗"
+          }
+        }
+      }
+    },
+    "unavailableSubheading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You cannot use the GOV.UK app at the moment. Try again later."
+          }
+        }
+      }
+    },
+    "unavailableTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorry, the app is unavailable"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

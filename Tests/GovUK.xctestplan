@@ -34,14 +34,6 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:GovUK.xcodeproj",
-        "identifier" : "5DAD71892BD250DF0075F648",
-        "name" : "govuk_ios_unit_tests"
-      }
-    },
-    {
       "parallelizable" : false,
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
@@ -50,12 +42,11 @@
       }
     },
     {
-      "enabled" : false,
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
-        "identifier" : "5DAD71932BD250DF0075F648",
-        "name" : "govuk_ios_ui_tests"
+        "identifier" : "5DAD71892BD250DF0075F648",
+        "name" : "govuk_ios_unit_tests"
       }
     }
   ],

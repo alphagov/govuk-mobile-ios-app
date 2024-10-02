@@ -1,4 +1,5 @@
 import Testing
+import Factory
 
 @testable import govuk_ios
 
@@ -45,6 +46,37 @@ struct TopicsWidgetViewModelTests {
         #expect(topics == nil)
         #expect(error == .apiUnavailable)
         
+    }
+    
+    @Test
+    func didTapTopic_invokesExpectedAction() async throws {
+        let topicService = MockTopicsService()
+        Container.shared.analyticsService.register { MockAnalyticsService() }
+        var expectedValue = false
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            topicAction: { _ in
+                expectedValue = true
+            }
+        )
+        
+        sut.didTapTopic(Topic(ref: "test", title: "Title"))
+        #expect(expectedValue == true)
+    }
+    
+    @Test
+    func didTapTopic_sendsEvent() async throws {
+        let topicService = MockTopicsService()
+        let mockAnalyticsService = MockAnalyticsService()
+        Container.shared.analyticsService.register { mockAnalyticsService }
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            topicAction: { _ in }
+        )
+        
+        sut.didTapTopic(Topic(ref: "test", title: "Title"))
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "test")
     }
 
 }

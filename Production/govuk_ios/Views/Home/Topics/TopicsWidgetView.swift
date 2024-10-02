@@ -2,11 +2,6 @@ import UIKit
 
 class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
-//    var topics = [Topic]() {
-//        didSet {
-//            updateTopics()
-//        }
-//    }
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -93,7 +88,7 @@ class TopicsWidgetView: UIView {
 
     private func createTopicCard(for topic: Topic) -> TopicCard {
         let topicCardModel = TopicCardModel(topic: topic) {
-            self.viewModel.topicAction?(topic)
+            self.viewModel.didTapTopic(topic)
         }
         let topicCard = TopicCard(viewModel: topicCardModel)
         topicCard.translatesAutoresizingMaskIntoConstraints = false

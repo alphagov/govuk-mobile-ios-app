@@ -76,31 +76,6 @@ class CoordinatorBuilder {
         )
     }
 
-    func driving(navigationController: UINavigationController) -> BaseCoordinator {
-        DrivingCoordinator(
-            navigationController: navigationController,
-            coordinatorBuilder: self,
-            viewControllerBuilder: ViewControllerBuilder()
-        )
-    }
-
-    func permit(permitId: String,
-                navigationController: UINavigationController) -> BaseCoordinator {
-        PermitCoordinator(
-            permitId: permitId,
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder()
-        )
-    }
-
-    func next(title: String,
-              navigationController: UINavigationController) -> BaseCoordinator {
-        NextCoordinator(
-            title: title,
-            navigationController: navigationController
-        )
-    }
-
     func search(navigationController: UINavigationController,
                 didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         SearchCoordinator(

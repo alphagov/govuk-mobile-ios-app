@@ -8,18 +8,30 @@ struct TopicTests {
     @Test(arguments: zip(
         [
             "driving-transport",
+            "employment",
             "benefits",
             "care",
-            "parenting",
             "business",
+            "health-disability",
+            "money-tax",
+            "parenting-guardianship",
+            "retirement",
+            "studying-training",
+            "travel",
             "unknown"
         ],
         [
             "car.fill",
+            "list.clipboard.fill",
             "sterlingsign",
             "heart.fill",
-            "figure.and.child.holdinghands",
             "briefcase.fill",
+            "cross.fill",
+            "chart.pie.fill",
+            "figure.and.child.holdinghands",
+            "chair.lounge.fill",
+            "book.fill",
+            "airplane",
             "star.fill"
         ]
     ))

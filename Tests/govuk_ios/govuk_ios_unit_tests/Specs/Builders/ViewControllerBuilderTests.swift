@@ -40,7 +40,8 @@ struct ViewControllerBuilderTests {
             searchButtonPrimaryAction: { () -> Void in },
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            recentActivityAction: {}
+            recentActivityAction: {},
+            topicAction: { _ in }
         )
 
         #expect(result is HomeViewController)

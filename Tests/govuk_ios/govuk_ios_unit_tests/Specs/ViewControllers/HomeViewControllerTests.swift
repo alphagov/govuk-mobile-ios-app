@@ -19,7 +19,8 @@ struct HomeViewControllerTests {
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            topicAction: { _ in }
         )
         let subject = HomeViewController(viewModel: viewModel)
         subject.viewDidAppear(false)

@@ -12,7 +12,8 @@ struct HomeViewModelTests {
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
-            recentActivityAction: {}
+            recentActivityAction: {},
+            topicAction: { _ in }
         )
         let widgets = subject.widgets
 
@@ -29,7 +30,8 @@ struct HomeViewModelTests {
             configService: configService,
             topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
-            recentActivityAction: {}
+            recentActivityAction: {},
+            topicAction: { _ in }
         )
         let widgets = subject.widgets
 

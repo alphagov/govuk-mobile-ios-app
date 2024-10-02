@@ -275,6 +275,8 @@
 		D0A8B3C82CA18C2D00849304 /* MockAppConfigResponseInvalidSig.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */; };
 		D0A8B3CA2CA1A38400849304 /* SignableDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C92CA1A38400849304 /* SignableDecoder.swift */; };
 		D0A8B3CD2CA1A68200849304 /* Signable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3CC2CA1A68200849304 /* Signable.swift */; };
+		D0B89D9D2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B89D9C2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift */; };
+		D0B89D9F2CAD60B700AD93ED /* TopicsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B89D9E2CAD60B700AD93ED /* TopicsCoordinatorTests.swift */; };
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
 		D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */; };
@@ -580,6 +582,8 @@
 		D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponseInvalidSig.json; sourceTree = "<group>"; };
 		D0A8B3C92CA1A38400849304 /* SignableDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoder.swift; sourceTree = "<group>"; };
 		D0A8B3CC2CA1A68200849304 /* Signable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signable.swift; sourceTree = "<group>"; };
+		D0B89D9C2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModelTests.swift; sourceTree = "<group>"; };
+		D0B89D9E2CAD60B700AD93ED /* TopicsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCoordinatorTests.swift; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
 		D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClientTests.swift; sourceTree = "<group>"; };
@@ -643,6 +647,7 @@
 				5D5A25E62CAD44800013704A /* SearchItemTests.swift */,
 				3D33781B2CAAC30A004BF83F /* AppUnavailableViewModelTests.swift */,
 				D0F86E192CAC241400FF2D9E /* TopicTests.swift */,
+				D0B89D9C2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -920,6 +925,7 @@
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
 				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 				3D3378192CAAC2E0004BF83F /* AppUnavailableCoordinatorTests.swift */,
+				D0B89D9E2CAD60B700AD93ED /* TopicsCoordinatorTests.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -2099,6 +2105,7 @@
 				5DA97B682C6CE6250030AF2B /* HTTPURLResponse+Arrangers.swift in Sources */,
 				4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */,
 				5DA97B652C6CC9060030AF2B /* URLRequest+Extensions.swift in Sources */,
+				D0B89D9F2CAD60B700AD93ED /* TopicsCoordinatorTests.swift in Sources */,
 				5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */,
 				16F961A92C989651005CFB04 /* MockAPIServiceClient.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
@@ -2145,6 +2152,7 @@
 				5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */,
 				16F961972C8881C8005CFB04 /* SearchViewControllerTests.swift in Sources */,
 				4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */,
+				D0B89D9D2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift in Sources */,
 				5DC2506E2C91E795009E9E7F /* MockAnalyticsClient.swift in Sources */,
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
 				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,

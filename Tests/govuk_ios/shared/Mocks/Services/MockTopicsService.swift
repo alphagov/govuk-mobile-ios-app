@@ -7,6 +7,8 @@ class MockTopicsService: TopicsServiceInterface {
     func fetchTopics(completion: @escaping FetchTopicsListResult) {
         if let result = _receivedFetchTopicsResult {
             completion(result)
+        } else {
+            completion(.failure(.apiUnavailable))
         }
     }
 }

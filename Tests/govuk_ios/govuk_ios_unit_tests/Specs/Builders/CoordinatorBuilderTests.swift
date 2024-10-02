@@ -59,41 +59,6 @@ class CoordinatorBuilderTests: XCTestCase {
     }
 
     @MainActor
-    func test_driving_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.driving(
-            navigationController: mockNavigationController
-        )
-
-        XCTAssert(coordinator is DrivingCoordinator)
-    }
-
-    @MainActor
-    func test_permit_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.permit(
-            permitId: "123",
-            navigationController: mockNavigationController
-        )
-
-        XCTAssert(coordinator is PermitCoordinator)
-    }
-
-    @MainActor
-    func test_next_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.next(
-            title: "Title",
-            navigationController: mockNavigationController
-        )
-
-        XCTAssert(coordinator is NextCoordinator)
-    }
-
-    @MainActor
     func test_onboarding_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()

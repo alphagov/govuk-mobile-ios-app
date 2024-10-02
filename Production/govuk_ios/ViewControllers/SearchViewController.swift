@@ -84,6 +84,7 @@ class SearchViewController: BaseViewController,
 
         tableView.dataSource = dataSource
         tableView.delegate = self
+        searchBar.searchTextField.delegate = self
 
         if #available(iOS 15.0, *) {
             sheetPresentationController?.prefersGrabberVisible = true
@@ -235,6 +236,15 @@ class SearchViewController: BaseViewController,
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         viewModel.selected(item: item)
+    }
+}
+
+extension SearchViewController: UITextFieldDelegate {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        viewModel.clearResults()
+        reloadSnapshot()
+
+        return true
     }
 }
 

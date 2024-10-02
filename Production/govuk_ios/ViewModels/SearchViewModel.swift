@@ -52,6 +52,10 @@ class SearchViewModel {
         urlOpener.openIfPossible(url)
     }
 
+    func clearResults() {
+        results = []
+    }
+
     private func trackSearchItemSelection(_ item: SearchItem, url: URL) {
         analyticsService.track(
             event: AppEvent.searchItemNavigation(

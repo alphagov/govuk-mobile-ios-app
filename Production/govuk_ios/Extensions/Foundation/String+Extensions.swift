@@ -67,3 +67,24 @@ extension String {
         }
     }
 }
+
+ extension String {
+    func redactPii() -> String {
+        let postcodePattern = "([A-Za-z]{1,2}[0-9]{1,2}[A-Za-z]? *[0-9][A-Za-z]{2})"
+        var redactedOutput = self.replacingOccurrences(
+            of: postcodePattern, with: "[postcode]", options: .regularExpression, range: nil
+        )
+
+        let emailPattern = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        redactedOutput = redactedOutput.replacingOccurrences(
+            of: emailPattern, with: "[email]", options: .regularExpression, range: nil
+        )
+
+        let niPattern = "[A-Za-z]{2} *[0-9]{2} *[0-9]{2} *[0-9]{2} *[A-Za-z]"
+        redactedOutput = redactedOutput.replacingOccurrences(
+            of: niPattern, with: "[NI number]", options: .regularExpression, range: nil
+        )
+
+        return redactedOutput
+    }
+ }

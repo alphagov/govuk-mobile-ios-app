@@ -9,6 +9,5 @@ struct TopicDetailView: View {
 }
 
 #Preview {
-    let topic = Topic(ref: "topic", title: "Topic")
     TopicDetailView()
 }

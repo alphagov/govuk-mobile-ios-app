@@ -57,6 +57,7 @@ class TopicCard: UIView {
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
+        configureGestures()
     }
 
     private func configureUI() {
@@ -93,6 +94,19 @@ class TopicCard: UIView {
                 equalTo: cardStackView.trailingAnchor,
                 constant: 0)
         ])
+    }
+
+    private func configureGestures() {
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(cardTapped)
+        )
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc
+    private func cardTapped() {
+        viewModel.tapAction()
     }
 
     required init(coder: NSCoder) {

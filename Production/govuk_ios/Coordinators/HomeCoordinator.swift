@@ -30,7 +30,8 @@ class HomeCoordinator: TabItemCoordinator {
             searchButtonPrimaryAction: searchActionButtonPressed,
             configService: configService,
             topicsService: topicsService,
-            recentActivityAction: recentActivityCoordinator
+            recentActivityAction: recentActivityCoordinator,
+            topicAction: topicAction
         )
         set([viewController], animated: false)
     }
@@ -60,6 +61,17 @@ class HomeCoordinator: TabItemCoordinator {
         return { [weak self] in
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.recentActivity(
+                navigationController: self.root
+            )
+            start(coordinator)
+        }
+    }
+
+    private var topicAction: (Topic) -> Void {
+        return { [weak self] topic in
+            guard let self = self else { return }
+            let coordinator = self.coordinatorBuilder.topicDetail(
+                topic,
                 navigationController: self.root
             )
             start(coordinator)

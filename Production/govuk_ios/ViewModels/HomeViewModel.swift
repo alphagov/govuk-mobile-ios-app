@@ -6,7 +6,7 @@ struct HomeViewModel {
     let topicsService: TopicsServiceInterface
     let searchButtonPrimaryAction: (() -> Void)?
     let recentActivityAction: (() -> Void)?
-    let topicsWidgetView = TopicsWidgetView()
+    let topicAction: ((Topic) -> Void)?
     var widgets: [WidgetView] {
         [
             searchWidget,
@@ -50,15 +50,13 @@ struct HomeViewModel {
     }
 
     private var topicsWidget: WidgetView? {
-        let content = TopicsWidgetView()
-        topicsService.fetchTopics { result in
-            switch result {
-            case .success(let topics):
-                content.topics = topics
-            case .failure(let error):
-                print(error)
-            }
-        }
+        let viewModel = TopicsWidgetViewModel(
+            topicsService: topicsService,
+            topicAction: topicAction
+        )
+        let content = TopicsWidgetView(
+            viewModel: viewModel
+        )
         let widget = WidgetView(decorateView: false)
         widget.addContent(content)
         return widget

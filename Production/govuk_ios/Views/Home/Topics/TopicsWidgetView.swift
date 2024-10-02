@@ -1,12 +1,12 @@
 import UIKit
 
 class TopicsWidgetView: UIView {
-    var topicCards = [TopicCard]()
-    var topics = [Topic]() {
-        didSet {
-            updateTopics()
-        }
-    }
+    let viewModel: TopicsWidgetViewModel
+//    var topics = [Topic]() {
+//        didSet {
+//            updateTopics()
+//        }
+//    }
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -27,10 +27,19 @@ class TopicsWidgetView: UIView {
         return stackView
     }()
 
-    init() {
+    init(viewModel: TopicsWidgetViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
+        viewModel.fetchTopics { result in
+            switch result {
+            case .success:
+                self.updateTopics(viewModel.topics)
+            case .failure:
+                break
+            }
+        }
     }
 
     private func configureUI() {
@@ -47,9 +56,9 @@ class TopicsWidgetView: UIView {
         ])
     }
 
-    private func updateTopics() {
+    private func updateTopics(_ topics: [Topic]) {
         for index in 0..<topics.count where index % 2 == 0 {
-            let rowStack = createNewRow(startingAt: index)
+            let rowStack = createNewRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(rowStack)
             rowStack.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
@@ -57,7 +66,7 @@ class TopicsWidgetView: UIView {
         }
     }
 
-    private func createNewRow(startingAt index: Int) -> UIStackView {
+    private func createNewRow(startingAt index: Int, of topics: [Topic]) -> UIStackView {
         let rowStack = createRowStack()
         let firstCard = createTopicCard(for: topics[index])
         rowStack.addArrangedSubview(firstCard)
@@ -83,8 +92,10 @@ class TopicsWidgetView: UIView {
     }
 
     private func createTopicCard(for topic: Topic) -> TopicCard {
-        let viewModel = TopicCardModel(topic: topic)
-        let topicCard = TopicCard(viewModel: viewModel)
+        let topicCardModel = TopicCardModel(topic: topic) {
+            self.viewModel.topicAction?(topic)
+        }
+        let topicCard = TopicCard(viewModel: topicCardModel)
         topicCard.translatesAutoresizingMaskIntoConstraints = false
         return topicCard
     }

@@ -104,4 +104,14 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve()
         )
     }
+
+    func topicDetail(_ topic: Topic,
+                     navigationController: UINavigationController) -> BaseCoordinator {
+        TopicsCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            topic: topic
+        )
+    }
 }

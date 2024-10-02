@@ -1,5 +1,11 @@
 import Foundation
 
+typealias FetchAppConfigResult = (Result<AppConfig, AppConfigError>) -> Void
+
+protocol AppConfigServiceClientInterface {
+    func fetchAppConfig(completion: @escaping FetchAppConfigResult)
+}
+
 class AppConfigServiceClient: AppConfigServiceClientInterface {
     private let serviceClient: APIServiceClientInterface
 

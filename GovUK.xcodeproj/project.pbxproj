@@ -53,7 +53,6 @@
 		3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */; };
 		3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D172C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift */; };
 		3D887CB82C944861001B1BA2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D887CB72C944861001B1BA2 /* Constants.swift */; };
-		3D97E97B2CA16C8E001D3131 /* AppConfigServiceClientInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97E97A2CA16C8B001D3131 /* AppConfigServiceClientInterface.swift */; };
 		3D97E9812CA171D2001D3131 /* AppConfigServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97E9802CA171D0001D3131 /* AppConfigServiceClientTests.swift */; };
 		3DEC85A42C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */; };
 		3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */; };
@@ -361,7 +360,6 @@
 		3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerViewModel.swift; sourceTree = "<group>"; };
 		3D7E2D172C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentCoordinator.swift; sourceTree = "<group>"; };
 		3D887CB72C944861001B1BA2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3D97E97A2CA16C8B001D3131 /* AppConfigServiceClientInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceClientInterface.swift; sourceTree = "<group>"; };
 		3D97E97E2CA17086001D3131 /* MockAppConfigServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppConfigServiceClient.swift; sourceTree = "<group>"; };
 		3D97E9802CA171D0001D3131 /* AppConfigServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceClientTests.swift; sourceTree = "<group>"; };
 		3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -621,9 +619,6 @@
 			children = (
 				5DCDA1002CA20C7D00A6DF90 /* MonthGroupKeyTests.swift */,
 				5D5A25E62CAD44800013704A /* SearchItemTests.swift */,
-				4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */,
-				16F961982C8882B6005CFB04 /* SearchViewModelTests.swift */,
-				16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */,
 				3D33781B2CAAC30A004BF83F /* AppUnavailableViewModelTests.swift */,
 			);
 			path = Models;
@@ -644,19 +639,10 @@
 		3D09A6D92C9DC78A005858D0 /* ServiceClients */ = {
 			isa = PBXGroup;
 			children = (
+				3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */,
 				5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */,
-				3D97E97C2CA16D77001D3131 /* AppConfig */,
 			);
 			path = ServiceClients;
-			sourceTree = "<group>";
-		};
-		3D97E97C2CA16D77001D3131 /* AppConfig */ = {
-			isa = PBXGroup;
-			children = (
-				3D97E97A2CA16C8B001D3131 /* AppConfigServiceClientInterface.swift */,
-				3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */,
-			);
-			path = AppConfig;
 			sourceTree = "<group>";
 		};
 		4E003E782C75EDB4008FCBF2 /* Resources */ = {
@@ -903,7 +889,6 @@
 				16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */,
 				5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */,
 				4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */,
-				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 				16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */,
 				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
@@ -1955,7 +1940,6 @@
 				5DC79FB02CA1862000014446 /* UIView+Extensions.swift in Sources */,
 				5DC250662C91D802009E9E7F /* FirebaseClient.swift in Sources */,
 				3D3378162CAAC113004BF83F /* AppUnavailableContainerViewModel.swift in Sources */,
-				3D97E97B2CA16C8E001D3131 /* AppConfigServiceClientInterface.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				4E94E8ED2C8B1AF000906803 /* RecentActivityView.swift in Sources */,
 				5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */,

@@ -12,10 +12,9 @@ extension CoreDataRepository {
         arrange()
     }
 
-    static func arrange(notificationCenter: NotificationCenter = .default) -> CoreDataRepository {
-        let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType
-        let url = Bundle.main.url(
+    static func arrange(notificationCenter: NotificationCenter = .default,
+                        bundle: Bundle = .main) -> CoreDataRepository {
+        let url = bundle.url(
             forResource: "GOV",
             withExtension: "momd"
         )!
@@ -24,6 +23,8 @@ extension CoreDataRepository {
             name: "GOV",
             managedObjectModel: model
         )
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
         container.persistentStoreDescriptions = [description]
 
         return .init(

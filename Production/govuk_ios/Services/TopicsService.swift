@@ -14,14 +14,16 @@ struct TopicsService: TopicsServiceInterface {
 
     func fetchTopics(completion: @escaping FetchTopicsListResult) {
         topicsServiceClient.fetchTopicsList { result in
-            switch result {
-            case .success(let topics):
-                let sortedTopics = topics.sorted(by: {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let topics):
+                    let sortedTopics = topics.sorted(by: {
                         $0.title < $1.title
                     })
-                completion(.success(sortedTopics))
-            case .failure(let error):
-                completion(.failure(error))
+                    completion(.success(sortedTopics))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }

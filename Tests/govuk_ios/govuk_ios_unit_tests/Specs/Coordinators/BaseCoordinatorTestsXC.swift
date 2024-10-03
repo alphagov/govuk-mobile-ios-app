@@ -124,13 +124,18 @@ class BaseCoordinatorTestsXC: XCTestCase {
         navigationController.pushViewController(UIViewController(), animated: false)
 
         subject.push(UIViewController(), animated: false)
-
-        await withCheckedContinuation { @MainActor continuation in
+        
+        let result = await withCheckedContinuation { @MainActor continuation in
+            let expectation = expectation()
             parentCoordinator._childDidFinishHandler = { @MainActor child in
-                continuation.resume()
+                expectation.fulfill()
+                continuation.resume(returning: true)
             }
             navigationController.popViewController(animated: false)
+            wait(for: [expectation])
         }
+        
+        XCTAssertTrue(result)
     }
 
     func test_startCoordinator_startsCoordinator() {

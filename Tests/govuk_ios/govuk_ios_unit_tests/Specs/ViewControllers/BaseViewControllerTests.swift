@@ -9,11 +9,11 @@ import Factory
 @Suite
 @MainActor
 struct BaseViewControllerTests {
-
     @Test
     func layoutMargins_returnsExpectedValue() {
         let subject = BaseViewController()
         let expectedInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+
         #expect(subject.view.layoutMargins == expectedInsets)
     }
 
@@ -25,7 +25,8 @@ struct BaseViewControllerTests {
         }
         let subject = BaseViewController()
 
-        subject.viewDidAppear(false)
+        subject.beginAppearanceTransition(true, animated: true)
+        subject.endAppearanceTransition()
 
         #expect(mockAnalyticsService._trackScreenReceivedScreens.count == 0)
     }
@@ -37,8 +38,8 @@ struct BaseViewControllerTests {
             mockAnalyticsService
         }
         let subject = MockBaseViewController()
-
-        subject.viewDidAppear(false)
+        subject.beginAppearanceTransition(true, animated: true)
+        subject.endAppearanceTransition()
 
         let screens = mockAnalyticsService._trackScreenReceivedScreens
         #expect(screens.count == 1)

@@ -39,9 +39,6 @@
         "suites" : [
           {
             "name" : "DeeplinkDataStoreTests"
-          },
-          {
-            "name" : "RecentActivitiesViewModelTests"
           }
         ]
       },

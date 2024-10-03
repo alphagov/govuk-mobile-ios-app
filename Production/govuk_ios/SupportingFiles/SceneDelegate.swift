@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
-class AppSceneDelegate: UIResponder,
-                        UIWindowSceneDelegate {
+class SceneDelegate: UIResponder,
+                     UIWindowSceneDelegate {
     var window: UIWindow?
 
     private lazy var navigationController: UINavigationController = {

@@ -1,16 +1,18 @@
 import Foundation
-import XCTest
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-class SearchCoordinatorTests: XCTestCase {
-    override class func setUp() {
-        super.setUp()
+@Suite
+@MainActor
+struct SearchCoordinatorTests {
+    init() {
         UIView.setAnimationsEnabled(false)
     }
 
-    @MainActor
-    func test_start_setsSearchViewController() {
+    @Test
+    func start_setsSearchViewController() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let expectedViewController = UIViewController()
@@ -28,11 +30,11 @@ class SearchCoordinatorTests: XCTestCase {
 
         subject.start()
 
-        XCTAssertEqual(navigationController.viewControllers.first, expectedViewController)
+        #expect(navigationController.viewControllers.first == expectedViewController)
     }
 
-    @MainActor
-    func test_dragToDismiss_callsDismissed() {
+    @Test
+    func dragToDismiss_callsDismissed() async {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let expectedViewController = UIViewController()
@@ -40,25 +42,26 @@ class SearchCoordinatorTests: XCTestCase {
 
         mockViewControllerBuilder._stubbedSearchViewController = expectedViewController
 
-        let expectation = expectation()
-        let subject = SearchCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: mockViewControllerBuilder,
-            analyticsService: mockAnalyticsService,
-            searchService: MockSearchService(),
-            dismissed: {
-                expectation.fulfill()
-            }
-        )
-        subject.start()
+        let dismissed = await withCheckedContinuation { continuation in
+            let subject = SearchCoordinator(
+                navigationController: navigationController,
+                viewControllerBuilder: mockViewControllerBuilder,
+                analyticsService: mockAnalyticsService,
+                searchService: MockSearchService(),
+                dismissed: {
+                    continuation.resume(returning: true)
+                }
+            )
+            subject.start()
 
-        subject.presentationControllerDidDismiss(subject.root.presentationController!)
+            subject.presentationControllerDidDismiss(subject.root.presentationController!)
+        }
 
-        wait(for: [expectation], timeout: 0.5)
+        #expect(dismissed)
     }
 
-    @MainActor
-    func test_dismissModal_callsDismissed() {
+    @Test
+    func dismissModal_callsDismissed() async {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let expectedViewController = UIViewController()
@@ -66,24 +69,22 @@ class SearchCoordinatorTests: XCTestCase {
 
         mockViewControllerBuilder._stubbedSearchViewController = expectedViewController
 
-        let expectation = expectation()
-        let subject = SearchCoordinator(
-            navigationController: mockNavigationController,
-            viewControllerBuilder: mockViewControllerBuilder,
-            analyticsService: mockAnalyticsService,
-            searchService: MockSearchService(),
-            dismissed: {
-                expectation.fulfill()
-            }
-        )
-        subject.start()
+        _ = await withCheckedContinuation { continuation in
+            let subject = SearchCoordinator(
+                navigationController: mockNavigationController,
+                viewControllerBuilder: mockViewControllerBuilder,
+                analyticsService: mockAnalyticsService,
+                searchService: MockSearchService(),
+                dismissed: {
+                    continuation.resume(returning: true)
+                }
+            )
+            subject.start()
 
-        //Simulate view controller calling close
-        mockViewControllerBuilder._receivedSearchDismissAction?()
-
-        XCTAssertEqual(mockNavigationController._dismissCalled, true)
-        XCTAssertEqual(mockNavigationController._receivedDismissAnimated, true)
-
-        wait(for: [expectation], timeout: 0.5)
+            //Simulate view controller calling close
+            mockViewControllerBuilder._receivedSearchDismissAction?()
+        }
+        #expect(mockNavigationController._dismissCalled)
+        #expect(mockNavigationController._receivedDismissAnimated == true)
     }
 }

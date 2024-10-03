@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+
 @testable import govuk_ios
 
 @Suite
@@ -18,7 +19,7 @@ struct SearchViewModelTests{
         let item = SearchItem(
             title: expectedTitle,
             description: UUID().uuidString,
-            link: "/random"
+            link: URL(string: "https://www.gov.uk/random")!
         )
 
         subject.selected(
@@ -46,7 +47,7 @@ struct SearchViewModelTests{
         let item = SearchItem(
             title: expectedTitle,
             description: UUID().uuidString,
-            link: "/random"
+            link: URL(string: "https://www.google.com/random")!
         )
 
         subject.selected(
@@ -75,8 +76,8 @@ struct SearchViewModelTests{
 
         let stubbedResponse = SearchResult(
             results: [
-                .init(title: "", description: "", link: ""),
-                .init(title: "", description: "", link: "")
+                .arrange,
+                .arrange,
             ]
         )
         mockService._searchReceivedCompletion?(.success(stubbedResponse))

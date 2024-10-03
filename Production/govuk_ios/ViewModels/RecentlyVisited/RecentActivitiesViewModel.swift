@@ -19,9 +19,10 @@ class RecentActivitiesViewModel: ObservableObject {
     )
 
     func selected(item: ActivityItem) {
+        guard let url = URL(string: item.url)
+        else { return }
         item.date = Date()
         try? item.managedObjectContext?.save()
-        guard let url = URL(string: item.url) else { return }
         urlOpener.openIfPossible(url)
         trackSelection(activity: item)
     }

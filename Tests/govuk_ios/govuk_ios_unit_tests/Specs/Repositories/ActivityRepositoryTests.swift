@@ -4,6 +4,7 @@ import Testing
 @testable import govuk_ios
 
 @Suite
+@MainActor
 struct ActivityRepositoryTests {
     @Test
     func save_existingObject_overwritesObject() throws {
@@ -27,7 +28,7 @@ struct ActivityRepositoryTests {
         sut.save(params: newParams)
 
         let request = ActivityItem.fetchRequest()
-        let results = try coreData.backgroundContext.fetch(request)
+        let results = try coreData.viewContext.fetch(request)
         #expect(results.count == 1)
 
         let item = try #require(results.first)
@@ -60,7 +61,7 @@ struct ActivityRepositoryTests {
         sut.save(params: newParams)
 
         let request = ActivityItem.fetchRequest()
-        let results = try coreData.backgroundContext.fetch(request)
+        let results = try coreData.viewContext.fetch(request)
         #expect(results.count == 2)
 
         let containsOriginalItem = results.contains { $0.id == originalId }

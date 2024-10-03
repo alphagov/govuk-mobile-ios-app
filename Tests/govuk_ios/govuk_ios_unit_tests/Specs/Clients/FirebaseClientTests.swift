@@ -9,7 +9,7 @@ import FirebaseAnalytics
 struct FirebaseClientTests {
 
     @Test
-    func test_launch_configuresFirebaseApp() {
+    func launch_configuresFirebaseApp() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -24,7 +24,7 @@ struct FirebaseClientTests {
     }
 
     @Test
-    func test_setEnabled_true_enablesAnalytics() {
+    func setEnabled_true_enablesAnalytics() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -39,7 +39,7 @@ struct FirebaseClientTests {
     }
 
     @Test
-    func test_setEnabled_false_disablesAnalytics() {
+    func setEnabled_false_disablesAnalytics() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -54,7 +54,7 @@ struct FirebaseClientTests {
     }
 
     @Test
-    func test_trackEvent_noParams_tracksExpectedEvent() {
+    func trackEvent_noParams_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -73,7 +73,7 @@ struct FirebaseClientTests {
     }
 
     @Test
-    func test_trackEvent_withParams_tracksExpectedEvent() {
+    func trackEvent_withParams_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -101,7 +101,7 @@ struct FirebaseClientTests {
 
     @Test
     @MainActor
-    func test_trackScreen_tracksExpectedEvent() {
+    func trackScreen_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(

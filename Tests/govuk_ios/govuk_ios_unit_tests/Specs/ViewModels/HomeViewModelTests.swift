@@ -1,10 +1,13 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class HomeViewModelTests: XCTestCase {
-    func test_widgets_returnsArrayOfWidgets() {
+@Suite
+@MainActor
+struct HomeViewModelTests {
+    @Test
+    func widgets_returnsArrayOfWidgets() {
         let subject = HomeViewModel(
             configService: MockAppConfigService(), 
             searchButtonPrimaryAction: { },
@@ -12,11 +15,12 @@ class HomeViewModelTests: XCTestCase {
         )
         let widgets = subject.widgets
 
-        XCTAssert((widgets as Any) is [WidgetView])
-        XCTAssertEqual(widgets.count, 2)
+        #expect((widgets as Any) is [WidgetView])
+        #expect(widgets.count == 2)
     }
 
-    func test_widgets_featureDisabled_doesntReturnWidget() {
+    @Test
+    func widgets_featureDisabled_doesntReturnWidget() {
         let configService = MockAppConfigService()
         configService.features = []
 
@@ -27,6 +31,6 @@ class HomeViewModelTests: XCTestCase {
         )
         let widgets = subject.widgets
 
-        XCTAssertEqual(widgets.count, 1)
+        #expect(widgets.count == 1)
     }
 }

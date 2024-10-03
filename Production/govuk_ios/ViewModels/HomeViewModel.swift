@@ -2,8 +2,6 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
-    @Inject(\.activityService) private var activityService: ActivityServiceInterface
-
     let configService: AppConfigServiceInterface
     let searchButtonPrimaryAction: (() -> Void)?
     let recentActivityAction: (() -> Void)?

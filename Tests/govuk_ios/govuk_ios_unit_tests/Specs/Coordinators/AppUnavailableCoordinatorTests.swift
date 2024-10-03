@@ -1,36 +1,43 @@
-import XCTest
+import Foundation
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-final class AppUnavailableCoordinatorTests: XCTestCase {
-    func test_start_isAppAvailable_trueCallsDismiss() throws {
+@Suite
+@MainActor
+struct AppUnavailableCoordinatorTests {
+    @Test
+    func start_isAppAvailable_trueCallsDismiss() async {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppAvailable = true
-        let expectation = expectation()
-        let sut = AppUnavailableCoordinator(
-            navigationController: UINavigationController(),
-            appConfigService: mockAppConfigService,
-            dismissAction: {
-                expectation.fulfill()
-            }
-        )
-        sut.start()
-        wait(for: [expectation], timeout: 1)
+        await withCheckedContinuation { continuation in
+            let sut = AppUnavailableCoordinator(
+                navigationController: UINavigationController(),
+                appConfigService: mockAppConfigService,
+                dismissAction: {
+                    continuation.resume()
+                }
+            )
+            sut.start()
+        }
     }
 
-    func test_start_isAppAvailable_falseDoesntCallDismiss() throws {
+    @Test
+    func start_isAppAvailable_falseDoesntCallDismiss() async throws {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppAvailable = false
-        let expectation = expectation()
-        expectation.isInverted = true
-        let sut = AppUnavailableCoordinator(
-            navigationController: UINavigationController(),
-            appConfigService: mockAppConfigService,
-            dismissAction: {
-                expectation.fulfill()
-            }
-        )
-        sut.start()
-        wait(for: [expectation], timeout: 1)
+        let started: Bool = try await withCheckedThrowingContinuation { continuation in
+            let sut = AppUnavailableCoordinator(
+                navigationController: UINavigationController(),
+                appConfigService: mockAppConfigService,
+                dismissAction: {
+                    continuation.resume(throwing: TestError.unexpectedMethodCalled)
+                }
+            )
+            sut.start()
+            continuation.resume(returning: true)
+        }
+        #expect(started)
     }
 }

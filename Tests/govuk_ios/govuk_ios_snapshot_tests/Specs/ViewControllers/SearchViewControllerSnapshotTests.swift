@@ -23,10 +23,12 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_search_successResponse_withResults_rendersCorrectly() {
-        let result = SearchResult(results: [
-            .init(title: "Test 1", description: "Description 1", link: ""),
-            .init(title: "Test 2", description: "Description 2", link: ""),
-        ])
+        let result = SearchResult(
+            results: [
+                .arrange(title: "Test 1", description: "Description 1"),
+                .arrange(title: "Test 2", description: "Description 2"),
+            ]
+        )
         let viewController = createViewController(result: .success(result))
         viewController.viewDidLoad()
         let searchBar = viewController.view.subviews.compactMap { $0 as? UISearchBar }.first

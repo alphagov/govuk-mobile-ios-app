@@ -1,39 +1,45 @@
-import UIKit
 import Foundation
-import XCTest
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-final class OnboardingServiceTests: XCTestCase {
-    func test_hasSeenOnboarding_hasSeen_returnsTrue() {
+@Suite
+@MainActor
+struct OnboardingServiceTests {
+    @Test
+    func hasSeenOnboarding_hasSeen_returnsTrue() {
         let userDefaults = UserDefaults()
         userDefaults.set(bool: true, forKey: .appOnboardingSeen)
         let subject = OnboardingService(userDefaults: userDefaults)
 
-        XCTAssertTrue(subject.hasSeenOnboarding)
+        #expect(subject.hasSeenOnboarding)
     }
 
-    func test_hasSeenOnboarding_hasntSeen_returnsTrue() {
+    @Test
+    func hasSeenOnboarding_hasntSeen_returnsTrue() {
         let userDefaults = UserDefaults()
         userDefaults.set(bool: false, forKey: .appOnboardingSeen)
         let subject = OnboardingService(userDefaults: userDefaults)
 
-        XCTAssertFalse(subject.hasSeenOnboarding)
+        #expect(subject.hasSeenOnboarding == false)
     }
 
-    func test_setHasSeenOnboarding_setsTrue() {
+    @Test
+    func setHasSeenOnboarding_setsTrue() {
         let userDefaults = UserDefaults()
         let subject = OnboardingService(userDefaults: userDefaults)
         subject.setHasSeenOnboarding()
 
-        XCTAssertTrue(userDefaults.bool(forKey: .appOnboardingSeen))
+        #expect(userDefaults.bool(forKey: .appOnboardingSeen) == true)
     }
 
-    func test_fetchSlides_returnsExpectedResult() {
+    @Test
+    func fetchSlides_returnsExpectedResult() {
         let subject = OnboardingService(userDefaults: .init())
         let result = subject.fetchSlides()
 
-        XCTAssertEqual(result.count, 3)
+        #expect(result.count == 3)
     }
 
 }

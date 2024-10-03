@@ -1,18 +1,15 @@
 import UIKit
 import Foundation
-import XCTest
+import Testing
 
 @testable import Onboarding
 @testable import govuk_ios
 
-final class AnalyticsService_OnboardingTests: XCTestCase {
-    var mockAnalyticsClient: MockAnalyticsClient!
-
-    override func setUp() {
-        mockAnalyticsClient = MockAnalyticsClient()
-    }
-
-    func test_trackOnboardingEvent_tracksEvents() {
+@Suite
+struct AnalyticsService_OnboardingTests {
+    @Test
+    func trackOnboardingEvent_tracksEvents() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: UserDefaults()
@@ -25,11 +22,13 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
         )
         subject.trackOnboardingEvent(event)
 
-        XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.count, 1)
-        XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.first?.name, "test_name")
+        #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 1)
+        #expect(mockAnalyticsClient._trackEventReceivedEvents.first?.name == "test_name")
     }
 
-    func test_trackOnboardingScreen_tracksEvents() {
+    @Test
+    func trackOnboardingScreen_tracksEvents() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: UserDefaults()
@@ -42,9 +41,9 @@ final class AnalyticsService_OnboardingTests: XCTestCase {
         )
         subject.trackOnboardingScreen(onboardingScreen)
 
-        XCTAssertEqual(mockAnalyticsClient._trackScreenReceivedScreens.count, 1)
-        XCTAssertEqual(mockAnalyticsClient._trackScreenReceivedScreens.first?.trackingName, "test_name")
-        XCTAssertEqual(onboardingScreen.trackingLanguage, Locale.current.languageCode)
+        #expect(mockAnalyticsClient._trackScreenReceivedScreens.count == 1)
+        #expect(mockAnalyticsClient._trackScreenReceivedScreens.first?.trackingName == "test_name")
+        #expect(onboardingScreen.trackingLanguage == Locale.current.languageCode)
     }
 
 }

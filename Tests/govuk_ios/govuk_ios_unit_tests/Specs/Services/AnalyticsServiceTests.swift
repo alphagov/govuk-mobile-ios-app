@@ -1,17 +1,15 @@
 import UIKit
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-final class AnalyticsServiceTests: XCTestCase {
-    var mockAnalyticsClient: MockAnalyticsClient!
-
-    override func setUp() {
-        mockAnalyticsClient = MockAnalyticsClient()
-    }
-
-    func test_permissionState_notSet_returnsUnknown() {
+@Suite
+@MainActor
+struct AnalyticsServiceTests {
+    @Test
+    func permissionState_notSet_returnsUnknown() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -19,10 +17,12 @@ final class AnalyticsServiceTests: XCTestCase {
         )
         mockUserDefaults.setValue(nil, forKey: UserDefaultsKeys.acceptedAnalytics.rawValue)
 
-        XCTAssertEqual(subject.permissionState, .unknown)
+        #expect(subject.permissionState == .unknown)
     }
 
-    func test_permissionState_accepted_returnsAccepted() {
+    @Test
+    func permissionState_accepted_returnsAccepted() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -30,10 +30,12 @@ final class AnalyticsServiceTests: XCTestCase {
         )
         mockUserDefaults.set(bool: true, forKey: .acceptedAnalytics)
 
-        XCTAssertEqual(subject.permissionState, .accepted)
+        #expect(subject.permissionState == .accepted)
     }
 
-    func test_permissionState_rejected_returnsDenied() {
+    @Test
+    func permissionState_rejected_returnsDenied() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -41,10 +43,12 @@ final class AnalyticsServiceTests: XCTestCase {
         )
         mockUserDefaults.set(bool: false, forKey: .acceptedAnalytics)
 
-        XCTAssertEqual(subject.permissionState, .denied)
+        #expect(subject.permissionState == .denied)
     }
 
-    func test_trackEvent_rejectedPermissions_doesNothing() {
+    @Test
+    func trackEvent_rejectedPermissions_doesNothing() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -54,10 +58,12 @@ final class AnalyticsServiceTests: XCTestCase {
 
         subject.track(event: AppEvent.appLoaded)
 
-        XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.count, 0)
+        #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 0)
     }
 
-    func test_trackScreen_rejectedPermissions_doesNothing() {
+    @Test
+    func trackScreen_rejectedPermissions_doesNothing() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -68,10 +74,12 @@ final class AnalyticsServiceTests: XCTestCase {
         let mockViewController = MockBaseViewController()
         subject.track(screen: mockViewController)
 
-        XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.count, 0)
+        #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 0)
     }
 
-    func test_trackEvent_tracksEvents() {
+    @Test
+    func trackEvent_tracksEvents() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -81,11 +89,12 @@ final class AnalyticsServiceTests: XCTestCase {
 
         subject.track(event: AppEvent.appLoaded)
 
-        XCTAssertEqual(mockAnalyticsClient._trackEventReceivedEvents.count, 1)
+        #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 1)
     }
 
-    @MainActor
-    func test_trackScreen_tracksScreen() {
+    @Test
+    func trackScreen_tracksScreen() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: .standard
@@ -96,17 +105,19 @@ final class AnalyticsServiceTests: XCTestCase {
         subject.track(screen: mockViewController)
 
         let screens = mockAnalyticsClient._trackScreenReceivedScreens
-        XCTAssertEqual(screens.count, 1)
+        #expect(screens.count == 1)
         let screen = screens.first
-        XCTAssertEqual(screen?.trackingName, mockViewController.trackingName)
-        XCTAssertEqual(screen?.trackingClass, mockViewController.trackingClass)
-        XCTAssertEqual(screen?.trackingTitle, mockViewController.trackingTitle)
+        #expect(screen?.trackingName == mockViewController.trackingName)
+        #expect(screen?.trackingClass == mockViewController.trackingClass)
+        #expect(screen?.trackingTitle == mockViewController.trackingTitle)
         if #available(iOS 16, *) {
-            XCTAssertEqual(screen?.trackingLanguage, Locale.current.language.languageCode?.identifier)
+            #expect(screen?.trackingLanguage == Locale.current.language.languageCode?.identifier)
         }
     }
 
-    func test_setAcceptedAnalytics_true_grantsPermissions() {
+    @Test
+    func setAcceptedAnalytics_true_grantsPermissions() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -114,11 +125,13 @@ final class AnalyticsServiceTests: XCTestCase {
         )
         subject.setAcceptedAnalytics(accepted: true)
 
-        XCTAssertTrue(mockUserDefaults.bool(forKey: .acceptedAnalytics))
-        XCTAssertEqual(mockAnalyticsClient._enabledReceived, true)
+        #expect(mockUserDefaults.bool(forKey: .acceptedAnalytics) == true)
+        #expect(mockAnalyticsClient._enabledReceived == true)
     }
 
-    func test_setAcceptedAnalytics_false_denysPermission() {
+    @Test
+    func setAcceptedAnalytics_false_denysPermission() {
+        let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = UserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -127,7 +140,7 @@ final class AnalyticsServiceTests: XCTestCase {
 
         subject.setAcceptedAnalytics(accepted: false)
 
-        XCTAssertFalse(mockUserDefaults.bool(forKey: .acceptedAnalytics))
-        XCTAssertEqual(mockAnalyticsClient._enabledReceived, false)
+        #expect(mockUserDefaults.bool(forKey: .acceptedAnalytics) == false)
+        #expect(mockAnalyticsClient._enabledReceived == false)
     }
 }

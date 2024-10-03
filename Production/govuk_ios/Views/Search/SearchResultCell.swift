@@ -12,7 +12,6 @@ class SearchResultCell: UITableViewCell {
         localView.directionalLayoutMargins = NSDirectionalEdgeInsets(
             top: 16, leading: 16, bottom: 16, trailing: 16
         )
-        localView.isAccessibilityElement = true
 
         return localView
     }()
@@ -34,6 +33,8 @@ class SearchResultCell: UITableViewCell {
         localLabel.lineBreakMode = .byWordWrapping
         localLabel.font = UIFont.govUK.body
         localLabel.textAlignment = .left
+        localLabel.isAccessibilityElement = true
+        localLabel.accessibilityHint = String.common.localized("openWebLinkHint")
 
         return localLabel
     }()
@@ -46,6 +47,7 @@ class SearchResultCell: UITableViewCell {
         localLabel.textAlignment = .left
         localLabel.numberOfLines = 0
         localLabel.lineBreakMode = .byWordWrapping
+        localLabel.isAccessibilityElement = true
 
         return localLabel
     }()
@@ -65,9 +67,6 @@ class SearchResultCell: UITableViewCell {
         self.title.text = item?.title
         let trimmedDescription = item?.description.trimmingCharacters(in: .whitespacesAndNewlines)
         self.resultDescription.text = trimmedDescription
-        self.card.accessibilityLabel = (title.text ?? "") +
-                                       (resultDescription.text ?? "") +
-                                       " \(String.common.localized("openWebLinkHint"))"
     }
 
     private func setupUI() {

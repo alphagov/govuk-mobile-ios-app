@@ -30,7 +30,7 @@ struct ActivityServiceTests {
         let equalDates = calendar.isDate(
             receivedDate,
             equalTo: .init(),
-            toGranularity: .minute
+            toGranularity: .second
         )
         #expect(equalDates)
     }

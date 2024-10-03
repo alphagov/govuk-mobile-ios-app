@@ -42,7 +42,6 @@ struct SettingsViewModelTests {
         let linkSection = sut.listContent[2]
         #expect(linkSection.rows[0].title == "Privacy policy")
         #expect(linkSection.rows[1].title == "Open source licences")
-
     }
     
     @Test

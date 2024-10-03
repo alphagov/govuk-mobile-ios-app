@@ -38,9 +38,6 @@
       "skippedTests" : {
         "suites" : [
           {
-            "name" : "CoreDataRepositoryTests"
-          },
-          {
             "name" : "DeeplinkDataStoreTests"
           },
           {

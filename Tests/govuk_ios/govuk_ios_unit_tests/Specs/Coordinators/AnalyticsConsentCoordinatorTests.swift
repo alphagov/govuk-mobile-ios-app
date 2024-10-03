@@ -1,50 +1,61 @@
-import XCTest
+import Foundation
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-final class AnalyticsConsentCoordinatorTests: XCTestCase {
-    func test_start_analyticsPermissionState_acceptedCallsDismiss() throws {
-        let analyticsService = MockAnalyticsService()
-        analyticsService._stubbedPermissionState = .accepted
+@Suite
+@MainActor
+struct AnalyticsConsentCoordinatorTests {
+    @Test
+    func start_analyticsPermissionState_acceptedCallsDismiss() async {
+        let mockAnalyticsService = MockAnalyticsService()
+        mockAnalyticsService._stubbedPermissionState = .accepted
         let mockNavigationController = UINavigationController()
-        let expectation = expectation()
-        let sut = AnalyticsConsentCoordinator(
-            navigationController: mockNavigationController,
-            analyticsService: analyticsService,
-            dismissAction: {
-                expectation.fulfill()
-            }
-        )
-        sut.start()
-        wait(for: [expectation], timeout: 1)
+
+        let dismissed = await withCheckedContinuation { continuation in
+            let sut = AnalyticsConsentCoordinator(
+                navigationController: mockNavigationController,
+                analyticsService: mockAnalyticsService,
+                dismissAction: {
+                    continuation.resume(returning: true)
+                }
+            )
+            sut.start()
+        }
+        #expect(dismissed)
     }
 
-    func test_start_analyticsPermissionState_deniedCallsDismiss() throws {
-        let analyticsService = MockAnalyticsService()
-        analyticsService._stubbedPermissionState = .denied
+    @Test
+    func start_analyticsPermissionState_deniedCallsDismiss() async {
+        let mockAnalyticsService = MockAnalyticsService()
+        mockAnalyticsService._stubbedPermissionState = .denied
         let mockNavigationController = UINavigationController()
-        let expectation = expectation()
-        let sut = AnalyticsConsentCoordinator(
-            navigationController: mockNavigationController,
-            analyticsService: analyticsService,
-            dismissAction: {
-                expectation.fulfill()
-            }
-        )
-        sut.start()
-        wait(for: [expectation], timeout: 1)
+        let dismissed = await withCheckedContinuation { continuation in
+            let sut = AnalyticsConsentCoordinator(
+                navigationController: mockNavigationController,
+                analyticsService: mockAnalyticsService,
+                dismissAction: {
+                    continuation.resume(returning: true)
+                }
+            )
+            sut.start()
+        }
+        #expect(dismissed)
     }
 
-    func test_start_analyticsPermissionState_unknownDoesntCallDismiss() throws {
-        let analyticsService = MockAnalyticsService()
-        analyticsService._stubbedPermissionState = .unknown
-        let navigationController = UINavigationController()
+    @Test
+    func start_analyticsPermissionState_unknownDoesntCallDismiss() async {
+        let mockAnalyticsService = MockAnalyticsService()
+        mockAnalyticsService._stubbedPermissionState = .unknown
+        let mockNavigationController = UINavigationController()
         let sut = AnalyticsConsentCoordinator(
-            navigationController: navigationController,
-            analyticsService: analyticsService,
+            navigationController: mockNavigationController,
+            analyticsService: mockAnalyticsService,
             dismissAction: { }
         )
         sut.start()
-        XCTAssertEqual(navigationController.viewControllers.count, 1)
+
+        #expect(mockNavigationController.viewControllers.count == 1)
     }
 }

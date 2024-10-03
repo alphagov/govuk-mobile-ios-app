@@ -1,11 +1,14 @@
 import Foundation
-import XCTest
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-class TabCoordinatorTests: XCTestCase {
-    @MainActor
-    func test_start_showsTabs() {
+@Suite
+@MainActor
+struct TabCoordinatorTests {
+    @Test
+    func start_showsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
         let mockHomeCoordinator = MockBaseCoordinator()
@@ -23,20 +26,20 @@ class TabCoordinatorTests: XCTestCase {
 
         subject.start()
 
-        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        #expect(navigationController.viewControllers.count == 1)
         let tabController = navigationController.viewControllers.first as? UITabBarController
-        XCTAssertEqual(tabController?.viewControllers?.count, 2)
+        #expect(tabController?.viewControllers?.count == 2)
         let expectedCoordinators = [
             mockHomeCoordinator,
             mockSettingsCoordinator
         ]
         expectedCoordinators.forEach {
-            XCTAssertTrue($0._startCalled)
+            #expect($0._startCalled)
         }
     }
 
-    @MainActor
-    func test_start_withKnownURL_selectsTabs() {
+    @Test
+    func start_withKnownURL_selectsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
         let mockHomeCoordinator = MockBaseCoordinator()
@@ -61,12 +64,12 @@ class TabCoordinatorTests: XCTestCase {
         subject.start(url: url)
         let tabController = navigationController.viewControllers.first as? UITabBarController
 
-        XCTAssertEqual(tabController?.selectedIndex, 1)
-        XCTAssert(mockRoute._actionCalled)
+        #expect(tabController?.selectedIndex == 1)
+        #expect(mockRoute._actionCalled)
     }
 
-    @MainActor
-    func test_start_unknownURL_selectsTabs() {
+    @Test
+    func start_unknownURL_selectsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
         let mockHomeCoordinator = MockBaseCoordinator()
@@ -86,11 +89,11 @@ class TabCoordinatorTests: XCTestCase {
         subject.start(url: url)
         let tabController = navigationController.viewControllers.first as? UITabBarController
 
-        XCTAssertEqual(tabController?.selectedIndex, 0)
+        #expect(tabController?.selectedIndex == 0)
     }
 
-    @MainActor
-    func test_didSelectViewController_tracksTabEvent() {
+    @Test
+    func didSelectViewController_tracksTabEvent() throws {
         let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
@@ -110,8 +113,7 @@ class TabCoordinatorTests: XCTestCase {
         let url = URL(string: "govuk://gov.uk/unknown")
         subject.start(url: url)
 
-        guard let tabController = navigationController.viewControllers.first as? UITabBarController
-        else { return XCTFail("Unable to unpack tab controller") }
+        let tabController = try #require(navigationController.viewControllers.first as? UITabBarController)
 
         let viewController = UIViewController()
         let expectedTitle = UUID().uuidString
@@ -124,14 +126,14 @@ class TabCoordinatorTests: XCTestCase {
 
         let expectedEvent = AppEvent.tabNavigation(text: expectedTitle)
 
-        XCTAssertEqual(mockAnalyticsService._trackedEvents.count, 1)
-        XCTAssertEqual(mockAnalyticsService._trackedEvents.first?.name, expectedEvent.name)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == expectedEvent.name)
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        XCTAssertEqual(receivedTitle, expectedTitle)
+        #expect(receivedTitle == expectedTitle)
     }
 
-    @MainActor
-    func test_didSelectViewController_noTitle_doesNothing() {
+    @Test
+    func didSelectViewController_noTitle_doesNothing() throws {
         let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
@@ -151,8 +153,7 @@ class TabCoordinatorTests: XCTestCase {
         let url = URL(string: "govuk://gov.uk/unknown")
         subject.start(url: url)
 
-        guard let tabController = navigationController.viewControllers.first as? UITabBarController
-        else { return XCTFail("Unable to unpack tab controller") }
+        let tabController = try #require(navigationController.viewControllers.first as? UITabBarController)
 
         let viewController = UIViewController()
         viewController.tabBarItem = .init(
@@ -162,6 +163,6 @@ class TabCoordinatorTests: XCTestCase {
         )
         subject.tabBarController(tabController, didSelect: viewController)
 
-        XCTAssertEqual(mockAnalyticsService._trackedEvents.count, 0)
+        #expect(mockAnalyticsService._trackedEvents.count == 0)
     }
 }

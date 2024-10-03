@@ -1,13 +1,16 @@
-import XCTest
+import Foundation
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-final class AppConfigServiceTests: XCTestCase {
+@Suite
+struct AppConfigServiceTests {
     private var sut: AppConfigService!
     private var mockAppConfigRepository: MockAppConfigRepository!
     private var mockAppConfigServiceClient: MockAppConfigServiceClient!
 
-    override func setUpWithError() throws {
+    init() {
         mockAppConfigRepository = MockAppConfigRepository()
         mockAppConfigServiceClient = MockAppConfigServiceClient()
         sut = AppConfigService(
@@ -16,90 +19,84 @@ final class AppConfigServiceTests: XCTestCase {
         )
     }
 
-    override func tearDownWithError() throws {
-        sut = nil
-        mockAppConfigRepository = nil
-        mockAppConfigServiceClient = nil
-    }
-
-    func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
-        //When
+    @Test
+    func repository_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() {
         let result = Config.arrange(releaseFlags: ["search": true]).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertTrue(sut.isFeatureEnabled(key: .search))
+
+        #expect(sut.isFeatureEnabled(key: .search))
     }
 
-    func test_repository_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
-        //When
+    @Test
+    func repository_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() {
         let result = Config.arrange(releaseFlags: ["search": false]).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+
+        #expect(sut.isFeatureEnabled(key: .search) == false)
     }
 
-    func test_repository_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
-        //When
+    @Test
+    func repository_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() {
         let result = Config.arrange(releaseFlags: ["test": false]).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+
+        #expect(sut.isFeatureEnabled(key: .search) == false)
     }
 
-    func test_repository_isAppAvailable_whenAvailableIsTrueInConfig_returnsTrue() throws {
-        //When
+    @Test
+    func repository_isAppAvailable_whenAvailableIsTrueInConfig_returnsTrue() {
         let result = Config.arrange(available: true).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertTrue(sut.isAppAvailable)
+
+        #expect(sut.isAppAvailable)
     }
 
-    func test_repository_isAppAvailable_whenAvailableIsFalseInConfig_returnsFalse() throws {
-        //When
+    @Test
+    func repository_isAppAvailable_whenAvailableIsFalseInConfig_returnsFalse() {
         let result = Config.arrange(available: false).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertFalse(sut.isAppAvailable)
+
+        #expect(sut.isAppAvailable == false)
     }
 
-    func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() throws {
-        //When
+    @Test
+    func serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() {
         let result = Config.arrange(releaseFlags: ["search": true]).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertTrue(sut.isFeatureEnabled(key: .search))
+
+        #expect(sut.isFeatureEnabled(key: .search))
     }
 
-    func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() throws {
-        //When
+    @Test
+    func serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToUnavailable_returnsFalse() {
         let result = Config.arrange(releaseFlags: ["search": false]).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+
+        #expect(sut.isFeatureEnabled(key: .search) == false)
     }
 
-    func test_serviceClient_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() throws {
-        //When
+    @Test
+    func serviceClient_isFeatureEnabled_whenFeatureFlagIsNotInConfig_returnsFalse() {
         let result = Config.arrange(releaseFlags: ["test": false]).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertFalse(sut.isFeatureEnabled(key: .search))
+
+        #expect(sut.isFeatureEnabled(key: .search) == false)
     }
 
-    func test_serviceClient_isAppAvailable_whenAvailableIsTrueInConfig_returnsTrue() throws {
-        //When
+    @Test
+    func serviceClient_isAppAvailable_whenAvailableIsTrueInConfig_returnsTrue() {
         let result = Config.arrange(available: true).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertTrue(sut.isAppAvailable)
+
+        #expect(sut.isAppAvailable)
     }
 
-    func test_serviceClient_isAppAvailable_whenAvailableIsFalseInConfig_returnsFalse() throws {
-        //When
+    @Test
+    func serviceClient_isAppAvailable_whenAvailableIsFalseInConfig_returnsFalse() {
         let result = Config.arrange(available: false).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
-        //Then
-        XCTAssertFalse(sut.isAppAvailable)
+
+        #expect(sut.isAppAvailable == false)
     }
 }
 

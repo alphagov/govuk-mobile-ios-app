@@ -1,16 +1,18 @@
 import Foundation
-import XCTest
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-class HomeCoordinatorTests: XCTestCase {
-    override class func setUp() {
-        super.setUp()
+@Suite
+struct HomeCoordinatorTests {
+    init() {
         UIView.setAnimationsEnabled(false)
     }
 
+    @Test
     @MainActor
-    func test_start_setsHomeViewController() {
+    func start_setsHomeViewController() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
@@ -26,6 +28,6 @@ class HomeCoordinatorTests: XCTestCase {
         )
         subject.start()
 
-        XCTAssertEqual(navigationController.viewControllers.first, expectedViewController)
+        #expect(navigationController.viewControllers.first == expectedViewController)
     }
 }

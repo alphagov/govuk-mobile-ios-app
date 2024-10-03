@@ -32,9 +32,9 @@ struct SearchServiceClientTests {
         )
         let expectedResult = SearchResult(
             results: [
-                .init(title: "test", description: "test", link: "123"),
-                .init(title: "test2", description: "test", link: "123"),
-                .init(title: "test3", description: "test", link: "123")
+                .arrange(title: "test", description: "test"),
+                .arrange(title: "test2", description: "test"),
+                .arrange(title: "test3", description: "test"),
             ]
         )
 

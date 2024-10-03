@@ -1,15 +1,16 @@
-import UIKit
 import Foundation
-import XCTest
+import UIKit
+import Testing
 
 import Factory
 
 @testable import govuk_ios
 
-class HomeViewControllerTests: XCTestCase {
-    
-    @MainActor
-    func test_viewDidAppear_tracksScreen() {
+@MainActor
+struct HomeViewControllerTests {
+
+    @Test
+    func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register {
             mockAnalyticsService
@@ -23,8 +24,8 @@ class HomeViewControllerTests: XCTestCase {
         subject.viewDidAppear(false)
 
         let screens = mockAnalyticsService._trackScreenReceivedScreens
-        XCTAssertEqual(screens.count, 1)
-        XCTAssertEqual(screens.first?.trackingName, subject.trackingName)
-        XCTAssertEqual(screens.first?.trackingClass, subject.trackingClass)
+        #expect(screens.count == 1)
+        #expect(screens.first?.trackingName == subject.trackingName)
+        #expect(screens.first?.trackingClass == subject.trackingClass)
     }
 }

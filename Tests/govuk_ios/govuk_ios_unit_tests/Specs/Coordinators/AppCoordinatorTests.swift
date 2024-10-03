@@ -1,12 +1,14 @@
 import UIKit
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class AppCoordinatorTests: XCTestCase {
+@Suite
+struct AppCoordinatorTests {
+    @Test
     @MainActor
-    func test_start_firstLaunch_startsLaunchCoordinator() {
+    func start_firstLaunch_startsLaunchCoordinator() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
@@ -21,12 +23,13 @@ class AppCoordinatorTests: XCTestCase {
 
         subject.start()
 
-        XCTAssertEqual(mockCoodinatorBuilder._receivedLaunchNavigationController, mockNavigationController)
-        XCTAssertTrue(mockLaunchCoodinator._startCalled)
+        #expect(mockCoodinatorBuilder._receivedLaunchNavigationController == mockNavigationController)
+        #expect(mockLaunchCoodinator._startCalled)
     }
 
+    @Test
     @MainActor
-    func test_start_secondLaunch_startsTabCoordinator() {
+    func start_secondLaunch_startsTabCoordinator() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
@@ -46,14 +49,14 @@ class AppCoordinatorTests: XCTestCase {
         //First launch
         subject.start()
 
-        XCTAssertTrue(mockLaunchCoodinator._startCalled)
+        #expect(mockLaunchCoodinator._startCalled)
 
         //Finish launch loading
         mockCoodinatorBuilder._receivedLaunchCompletion?()
         mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()
 
-        XCTAssertTrue(mockTabCoodinator._startCalled)
+        #expect(mockTabCoodinator._startCalled)
 
         //Reset values for second launch
         mockLaunchCoodinator._startCalled = false
@@ -62,8 +65,8 @@ class AppCoordinatorTests: XCTestCase {
         //Second launch
         subject.start()
 
-        XCTAssertFalse(mockLaunchCoodinator._startCalled)
-        XCTAssertTrue(mockTabCoodinator._startCalled)
+        #expect(!mockLaunchCoodinator._startCalled)
+        #expect(mockTabCoodinator._startCalled)
     }
 
 }

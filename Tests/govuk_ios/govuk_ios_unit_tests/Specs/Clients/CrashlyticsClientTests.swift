@@ -1,10 +1,12 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class CrashlyticsClientTests: XCTestCase {
-    func test_setEnabled_true_passesThroughValue() {
+@Suite
+struct CrashlyticsClientTests {
+    @Test
+    func setEnabled_true_passesThroughValue() {
         let mockCrashlytics = MockCrashlytics()
         let sut = CrashlyticsClient(
             crashlytics: mockCrashlytics
@@ -12,10 +14,11 @@ class CrashlyticsClientTests: XCTestCase {
 
         sut.setEnabled(enabled: true)
 
-        XCTAssertEqual(mockCrashlytics._setCrashlyticsCollectionEnabledReceivedEnabled, true)
+        #expect(mockCrashlytics._setCrashlyticsCollectionEnabledReceivedEnabled == true)
     }
 
-    func test_setEnabled_false_passesThroughValue() {
+    @Test
+    func setEnabled_false_passesThroughValue() {
         let mockCrashlytics = MockCrashlytics()
         let sut = CrashlyticsClient(
             crashlytics: mockCrashlytics
@@ -23,7 +26,7 @@ class CrashlyticsClientTests: XCTestCase {
 
         sut.setEnabled(enabled: false)
 
-        XCTAssertEqual(mockCrashlytics._setCrashlyticsCollectionEnabledReceivedEnabled, false)
+        #expect(mockCrashlytics._setCrashlyticsCollectionEnabledReceivedEnabled == false)
     }
 }
 

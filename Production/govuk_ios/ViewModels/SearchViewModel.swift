@@ -45,11 +45,9 @@ class SearchViewModel {
     }
 
     func selected(item: SearchItem) {
-        guard let url = urlFromLink(item.link)
-        else { return }
         activityService.save(searchItem: item)
-        trackSearchItemSelection(item, url: url)
-        urlOpener.openIfPossible(url)
+        trackSearchItemSelection(item, url: item.link)
+        urlOpener.openIfPossible(item.link)
     }
 
     func clearResults() {
@@ -64,16 +62,6 @@ class SearchViewModel {
                 external: true
             )
         )
-    }
-
-    private func urlFromLink(_ link: String) -> URL? {
-        var components = URLComponents(string: link)
-        let scheme = components?.scheme
-        components?.scheme = scheme ?? "https"
-        let host = components?.host
-        components?.host = host ?? "www.gov.uk"
-
-        return components?.url
     }
 
     private func trackSearchTerm(searchTerm: String) {

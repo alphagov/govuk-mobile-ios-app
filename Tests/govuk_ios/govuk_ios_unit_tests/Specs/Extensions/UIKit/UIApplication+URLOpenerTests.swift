@@ -1,37 +1,43 @@
 import Foundation
 import UIKit
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class UIApplication_URLOpenerTests: XCTestCase {
-    func test_openSettings_opensExpectedURL() {
+@Suite
+@MainActor
+struct UIApplication_URLOpenerTests {
+    @Test
+    func openSettings_opensExpectedURL() {
         let sut = MockURLOpener()
         sut.openSettings()
 
-        XCTAssertEqual(sut._receivedOpenIfPossibleUrlString, UIApplication.openSettingsURLString)
+        #expect(sut._receivedOpenIfPossibleUrlString == UIApplication.openSettingsURLString)
     }
 
-    func test_openIfPossible_string_invalidURL_returnsFalse() {
+    @Test
+    func openIfPossible_string_invalidURL_returnsFalse() {
         let sut = UIApplication.shared
         let result = sut.openIfPossible("")
 
-        XCTAssertFalse(result)
+        #expect(result == false)
     }
 
-    func test_openIfPossible_string_valueURL_returnsTrue() {
+    @Test
+    func openIfPossible_string_valueURL_returnsTrue() {
         let sut = UIApplication.shared
         let result = sut.openIfPossible("https://www.gov.uk")
 
-        XCTAssertTrue(result)
+        #expect(result == true)
     }
 
-    func test_openIfPossible_url_unableToOpen_returnsFalse() {
+    @Test
+    func openIfPossible_url_unableToOpen_returnsFalse() throws {
         let sut = UIApplication.shared
-        guard let url = URL(string: "test")
-        else { return XCTFail("Test requires url") }
+
+        let url = try #require(URL(string: "test"))
         let result = sut.openIfPossible(url)
 
-        XCTAssertFalse(result)
+        #expect(result == false)
     }
 }

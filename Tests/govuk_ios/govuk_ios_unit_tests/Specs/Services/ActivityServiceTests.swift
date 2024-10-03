@@ -12,17 +12,19 @@ struct ActivityServiceTests {
         let sut = ActivityService(
             repository: mockRepository
         )
+        let expectedTitle = UUID().uuidString
+        let expectedURLString = "https://www.govuk.com/test"
         let expectedItem = SearchItem(
-            title: "test_title",
+            title: expectedTitle,
             description: "test_description",
-            link: "test_link"
+            link: URL(string: "https://www.govuk.com/test")!
         )
         sut.save(searchItem: expectedItem)
 
         let receivedParams = mockRepository._receivedSaveParams
-        #expect(receivedParams?.id == "test_link")
-        #expect(receivedParams?.title == "test_title")
-        #expect(receivedParams?.url == "test_link")
+        #expect(receivedParams?.id == expectedURLString)
+        #expect(receivedParams?.title == expectedTitle)
+        #expect(receivedParams?.url == expectedURLString)
         let receivedDate = try #require(receivedParams?.date)
         let calendar = Calendar.current
         let equalDates = calendar.isDate(

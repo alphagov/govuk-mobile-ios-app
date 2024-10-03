@@ -28,9 +28,9 @@ struct SearchServiceTests {
         )
         let expectedSearchResult = SearchResult(
             results: [
-                .init(title: "test", description: "test", link: "test"),
-                .init(title: "test2", description: "test", link: "test"),
-                .init(title: "test3", description: "test", link: "test")
+                .arrange(title: "test", description: "test"),
+                .arrange(title: "test2", description: "test"),
+                .arrange(title: "test3", description: "test"),
             ]
         )
         mockServiceClient._stubbedSearchResult = .success(expectedSearchResult)

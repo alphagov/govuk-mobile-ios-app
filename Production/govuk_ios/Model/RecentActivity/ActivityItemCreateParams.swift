@@ -9,9 +9,9 @@ struct ActivityItemCreateParams {
 
 extension ActivityItemCreateParams {
     init(searchItem: SearchItem) {
-        self.id = searchItem.link
+        self.id = searchItem.link.absoluteString
         self.title = searchItem.title
         self.date = Date()
-        self.url = searchItem.link
+        self.url = searchItem.link.absoluteString
     }
 }

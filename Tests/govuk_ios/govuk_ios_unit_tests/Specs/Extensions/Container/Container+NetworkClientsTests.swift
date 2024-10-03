@@ -1,12 +1,15 @@
 import Foundation
-import XCTest
+import Testing
 
 import Factory
 
 @testable import govuk_ios
 
-class Container_NetworkClientTests: XCTestCase {
-    func test_govukAPIClient_returnsExpectedResult() {
-        _ = Container.shared.govukAPIClient()
+@Suite
+struct Container_NetworkClientTests {
+    @Test
+    func govukAPIClient_returnsExpectedResult() {
+        let result = Container.shared.govukAPIClient()
+        #expect(result != nil)
     }
 }

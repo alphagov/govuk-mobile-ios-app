@@ -1,13 +1,11 @@
-import Testing
-import UIKit
+import XCTest
+
 @testable import govuk_ios
 
-@Suite
-struct TopicsCoordinatorTests {
+@MainActor
+final class TopicsCoordinatorTestsXC: XCTestCase {
 
-    @MainActor
-    @Test
-    func start_setsTopicDetailView() throws {
+    func test_start_setsTopicDetailView() throws {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let expectedViewController = UIViewController()
@@ -24,7 +22,7 @@ struct TopicsCoordinatorTests {
         
         subject.start()
         
-        #expect(navigationController.viewControllers.first == expectedViewController)
+        XCTAssertEqual(navigationController.viewControllers.first, expectedViewController)
     }
 
 }

@@ -1,15 +1,13 @@
 import Foundation
-import Testing
+import XCTest
 
 import FirebaseAnalytics
 
 @testable import govuk_ios
 
-@Suite(.serialized)
-struct FirebaseClientTests {
+class FirebaseClientTestsXC: XCTestCase {
 
-    @Test
-    func launch_configuresFirebaseApp() {
+    func test_launch_configuresFirebaseApp() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -20,11 +18,10 @@ struct FirebaseClientTests {
         MockFirebaseApp._configureCalled = false
         sut.launch()
 
-        #expect(mockApp._configureCalled)
+        XCTAssertTrue(mockApp._configureCalled)
     }
 
-    @Test
-    func setEnabled_true_enablesAnalytics() {
+    func test_setEnabled_true_enablesAnalytics() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -35,11 +32,10 @@ struct FirebaseClientTests {
         mockAnalytics.clearValues()
         sut.setEnabled(enabled: true)
 
-        #expect(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled == true)
+        XCTAssertEqual(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled, true)
     }
 
-    @Test
-    func setEnabled_false_disablesAnalytics() {
+    func test_setEnabled_false_disablesAnalytics() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -50,11 +46,10 @@ struct FirebaseClientTests {
         mockAnalytics.clearValues()
         sut.setEnabled(enabled: false)
 
-        #expect(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled == false)
+        XCTAssertEqual(mockAnalytics._setAnalyticsCollectionEnabledReveivedEnabled, false)
     }
 
-    @Test
-    func trackEvent_noParams_tracksExpectedEvent() {
+    func test_trackEvent_noParams_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -68,12 +63,11 @@ struct FirebaseClientTests {
         )
         sut.track(event: expectedEvent)
 
-        #expect(mockAnalytics._logEventReceivedEventName == expectedName)
-        #expect(mockAnalytics._logEventReceivedEventParameters?.isEmpty == true)
+        XCTAssertEqual(mockAnalytics._logEventReceivedEventName, expectedName)
+        XCTAssertEqual(mockAnalytics._logEventReceivedEventParameters?.isEmpty, true)
     }
 
-    @Test
-    func trackEvent_withParams_tracksExpectedEvent() {
+    func test_trackEvent_withParams_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -93,15 +87,13 @@ struct FirebaseClientTests {
         mockAnalytics.clearValues()
         sut.track(event: expectedEvent)
 
-        #expect(mockAnalytics._logEventReceivedEventName == expectedName)
+        XCTAssertEqual(mockAnalytics._logEventReceivedEventName, expectedName)
         let receivedParams = mockAnalytics._logEventReceivedEventParameters
-        #expect(receivedParams?.count == 1)
-        #expect(receivedParams?["test_param"] as? String == expectedValue)
+        XCTAssertEqual(receivedParams?.count, 1)
+        XCTAssertEqual(receivedParams?["test_param"] as? String, expectedValue)
     }
 
-    @Test
-    @MainActor
-    func trackScreen_tracksExpectedEvent() {
+    func test_trackScreen_tracksExpectedEvent() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
         let sut = FirebaseClient(
@@ -114,12 +106,41 @@ struct FirebaseClientTests {
         mockAnalytics.clearValues()
         sut.track(screen: expectedScreen)
 
-        #expect(mockAnalytics._logEventReceivedEventName == AnalyticsEventScreenView)
+        XCTAssertEqual(mockAnalytics._logEventReceivedEventName, AnalyticsEventScreenView)
         let receivedParams = mockAnalytics._logEventReceivedEventParameters
-        #expect(receivedParams?.count == 4)
-        #expect(receivedParams?[AnalyticsParameterScreenName] as? String == expectedScreen.trackingName)
-        #expect(receivedParams?[AnalyticsParameterScreenClass] as? String == expectedScreen.trackingClass)
-        #expect(receivedParams?["screen_title"] as? String == expectedTitle)
-        #expect(receivedParams?["language"] as? String == expectedScreen.trackingLanguage)
+        XCTAssertEqual(receivedParams?.count, 4)
+        XCTAssertEqual(receivedParams?[AnalyticsParameterScreenName] as? String, expectedScreen.trackingName)
+        XCTAssertEqual(receivedParams?[AnalyticsParameterScreenClass] as? String, expectedScreen.trackingClass)
+        XCTAssertEqual(receivedParams?["screen_title"] as? String, expectedTitle)
+        XCTAssertEqual(receivedParams?["language"] as? String, expectedScreen.trackingLanguage)
+    }
+}
+
+class MockFirebaseApp: FirebaseAppInterface {
+    static var _configureCalled: Bool = false
+    static func configure() {
+        _configureCalled = true
+    }
+}
+
+class MockFirebaseAnalytics: FirebaseAnalyticsInterface {
+
+    static func clearValues() {
+        _setAnalyticsCollectionEnabledReveivedEnabled = nil
+        _logEventReceivedEventName = nil
+        _logEventReceivedEventParameters = nil
+    }
+
+    static var _setAnalyticsCollectionEnabledReveivedEnabled: Bool?
+    static func setAnalyticsCollectionEnabled(_ newValue: Bool) {
+        _setAnalyticsCollectionEnabledReveivedEnabled = newValue
+    }
+    
+    static var _logEventReceivedEventName: String?
+    static var _logEventReceivedEventParameters: [String : Any]?
+    static func logEvent(_ eventName: String,
+                         parameters: [String : Any]?) {
+        _logEventReceivedEventName = eventName
+        _logEventReceivedEventParameters = parameters
     }
 }

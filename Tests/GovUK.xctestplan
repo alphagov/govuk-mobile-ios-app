@@ -35,13 +35,6 @@
   },
   "testTargets" : [
     {
-      "skippedTests" : {
-        "suites" : [
-          {
-            "name" : "DeeplinkDataStoreTests"
-          }
-        ]
-      },
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
         "identifier" : "5DAD71892BD250DF0075F648",

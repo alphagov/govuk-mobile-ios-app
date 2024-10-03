@@ -1,40 +1,43 @@
 import Foundation
-import XCTest
+import Testing
 import Factory
+
 @testable import govuk_ios
 
-class CoordinatorBuilderTests: XCTestCase {
+@Suite
+@MainActor
+struct CoordinatorBuilderTests {
 
-    @MainActor
-    func test_app_returnsExpectedResult() {
+    @Test
+    func app_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.app(
             navigationController: mockNavigationController
         )
 
-        XCTAssert(coordinator is AppCoordinator)
-        XCTAssertEqual(coordinator.root, mockNavigationController)
+        #expect(coordinator is AppCoordinator)
+        #expect(coordinator.root == mockNavigationController)
     }
 
-    @MainActor
-    func test_home_returnsExpectedResult() {
+    @Test
+    func home_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.home
 
-        XCTAssert(coordinator is HomeCoordinator)
+        #expect(coordinator is HomeCoordinator)
     }
 
-    @MainActor
-    func test_settings_returnsExpectedResult() {
+    @Test
+    func settings_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.settings
 
-        XCTAssert(coordinator is SettingsCoordinator)
+        #expect(coordinator is SettingsCoordinator)
     }
 
-    @MainActor
-    func test_launch_returnsExpectedResult() {
+    @Test
+    func launch_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.launch(
@@ -42,24 +45,24 @@ class CoordinatorBuilderTests: XCTestCase {
             completion: { }
         )
 
-        XCTAssert(coordinator is LaunchCoordinator)
-        XCTAssertEqual(coordinator.root, mockNavigationController)
+        #expect(coordinator is LaunchCoordinator)
+        #expect(coordinator.root == mockNavigationController)
     }
 
-    @MainActor
-    func test_tab_returnsExpectedResult() {
+    @Test
+    func tab_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.tab(
             navigationController: mockNavigationController
         )
 
-        XCTAssert(coordinator is TabCoordinator)
-        XCTAssertEqual(coordinator.root, mockNavigationController)
+        #expect(coordinator is TabCoordinator)
+        #expect(coordinator.root == mockNavigationController)
     }
 
-    @MainActor
-    func test_onboarding_returnsExpectedResult() {
+    @Test
+    func onboarding_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.onboarding(
@@ -67,11 +70,11 @@ class CoordinatorBuilderTests: XCTestCase {
             dismissAction: { }
         )
 
-        XCTAssert(coordinator is OnboardingCoordinator)
+        #expect(coordinator is OnboardingCoordinator)
     }
 
-    @MainActor
-    func test_search_returnsExpectedResult() {
+    @Test
+    func search_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.search(
@@ -79,17 +82,17 @@ class CoordinatorBuilderTests: XCTestCase {
             didDismissAction: { }
         )
 
-        XCTAssert(coordinator is SearchCoordinator)
+        #expect(coordinator is SearchCoordinator)
     }
 
-    @MainActor
-    func test_recentActivity_returnsExpectedResult() {
+    @Test
+    func recentActivity_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.recentActivity(
             navigationController: mockNavigationController
         )
 
-        XCTAssert(coordinator is RecentActivityCoordinator)
+        #expect(coordinator is RecentActivityCoordinator)
     }
 }

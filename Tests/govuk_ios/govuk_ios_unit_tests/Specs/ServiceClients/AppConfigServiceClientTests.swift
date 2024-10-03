@@ -1,57 +1,50 @@
-import XCTest
+import Foundation
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-final class AppConfigServiceClientTests: XCTestCase {
-    var sut: AppConfigServiceClient!
-    var mockServiceClient: MockAPIServiceClient!
+@Suite
+struct AppConfigServiceClientTests {
+    let sut: AppConfigServiceClient
+    let mockServiceClient: MockAPIServiceClient
 
-    override func setUpWithError() throws {
+    init() {
         mockServiceClient = MockAPIServiceClient()
         sut = AppConfigServiceClient(
             serviceClient: mockServiceClient
         )
     }
 
-    override func tearDownWithError() throws {
-        sut = nil
-    }
-
-    func test_fetchAppConfig_validJson_returnsCorrectConfig() throws {
+    @Test
+    func fetchAppConfig_validJson_returnsCorrectConfig() async throws {
         let mockJsonData = getJsonData(filename: "MockAppConfigResponse", bundle: .main)
-        let expectation = expectation()
-        sut.fetchAppConfig(
-            completion: { result in
-                switch result {
-                case .success:
-                    let resultData = try? result.get()
-                    XCTAssertEqual(resultData?.config.releaseFlags.count, 2)
-                    XCTAssertEqual(resultData?.config.releaseFlags["search"], true)
-                case .failure:
-                    XCTAssertTrue(false)
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(
+                completion: { result in
+                    continuation.resume(returning: result)
                 }
-                expectation.fulfill()
-            }
-        )
-        mockServiceClient._receivedSendCompletion?(.success(mockJsonData))
-        wait(for: [expectation], timeout: 1)
+            )
+            mockServiceClient._receivedSendCompletion?(.success(mockJsonData))
+        }
+        let unwrappedResult = try result.get()
+        #expect(unwrappedResult.config.releaseFlags.count == 2)
+        #expect(unwrappedResult.config.releaseFlags["search"] == true)
     }
 
-    func test_fetchAppConfig_invalidJson_returnsError() throws {
-        let expectation = expectation()
-        sut.fetchAppConfig(
-            completion: { result in
-                switch result {
-                case .success(let value):
-                    XCTFail("Expected failure, got \(value)")
-                case .failure(_):
-                    XCTAssertTrue(true)
+    @Test
+    func fetchAppConfig_invalidJson_returnsError() async throws {
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(
+                completion: { result in
+                    continuation.resume(returning: result)
                 }
-                expectation.fulfill()
-            }
-        )
-        mockServiceClient._receivedSendCompletion?(.failure(TestError.fakeNetwork))
-        wait(for: [expectation], timeout: 1)
+            )
+            mockServiceClient._receivedSendCompletion?(.failure(TestError.fakeNetwork))
+        }
+
+        let error = result.getError()
+        #expect(error == AppConfigError.remoteJsonError)
     }
 
     private func getJsonData(filename: String, bundle: Bundle) -> Data {

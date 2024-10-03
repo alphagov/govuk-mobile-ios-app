@@ -1,18 +1,20 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-final class AnalyticsConsentContainerViewModelTests: XCTestCase {
-    func test_init_hasCorrectInitialState() throws {
+@Suite
+struct AnalyticsConsentContainerViewModelTests {
+    @Test
+    func init_hasCorrectInitialState() throws {
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
             dismissAction: {}
         )
-        XCTAssertEqual(sut.title, "Share statistics about how you use the GOV.UK app")
-        XCTAssertEqual(sut.descriptionTop, "You can help us improve this app by agreeing to share statistics about:")
-        XCTAssertEqual(
-            sut.descriptionBullets,
+        #expect(sut.title == "Share statistics about how you use the GOV.UK app")
+        #expect(sut.descriptionTop == "You can help us improve this app by agreeing to share statistics about:")
+        #expect(
+            sut.descriptionBullets ==
         """
           •  the pages you visit within the app
           •  how long you spend on each page
@@ -20,56 +22,67 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
           •  errors that happen
         """
         )
-        XCTAssertEqual(sut.descriptionBottom, "These statistics are anonymous.\n\nYou can stop sharing these statistics at any time by changing your app settings.")
-        XCTAssertEqual(sut.privacyPolicyLinkTitle, "Read more about this in the privacy policy ↗")
-        XCTAssertEqual(sut.privacyPolicyLinkAccessibilityTitle, "Read more about this in the privacy policy")
-        XCTAssertEqual(sut.privacyPolicyLinkHint, "Opens in web browser")
-        XCTAssertEqual(sut.privacyPolicyLinkUrl, "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data")
-        XCTAssertEqual(sut.allowButtonTitle, "Allow statistics sharing")
-        XCTAssertEqual(sut.dontAllowButtonTitle, "Don't allow statistics sharing")
+        #expect(sut.descriptionBottom == "These statistics are anonymous.\n\nYou can stop sharing these statistics at any time by changing your app settings.")
+        #expect(sut.privacyPolicyLinkTitle == "Read more about this in the privacy policy ↗")
+        #expect(sut.privacyPolicyLinkAccessibilityTitle == "Read more about this in the privacy policy")
+        #expect(sut.privacyPolicyLinkHint == "Opens in web browser")
+        #expect(sut.privacyPolicyLinkUrl == "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data")
+        #expect(sut.allowButtonTitle == "Allow statistics sharing")
+        #expect(sut.dontAllowButtonTitle == "Don't allow statistics sharing")
     }
 
-    func test_allowButtonAction_setsAcceptedAnalyticsToTrue() throws {
+    @Test
+    func allowButtonAction_setsAcceptedAnalyticsToTrue() throws {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
             dismissAction: {}
         )
         sut.allowButtonViewModel.action()
-        XCTAssertEqual(analyticsService._setAcceptedAnalyticsAccepted, true)
+        #expect(analyticsService._setAcceptedAnalyticsAccepted == true)
     }
 
-    func test_allowButtonAction_callsDismiss() throws {
-        let expectation = expectation()
-        let sut = AnalyticsConsentContainerViewModel(
-            analyticsService: nil,
-            dismissAction: { expectation.fulfill() }
-        )
-        sut.dontAllowButtonViewModel.action()
-        wait(for: [expectation], timeout: 1)
+    @Test
+    func allowButtonAction_callsDismiss() async throws {
+        let dismissCalled = await withCheckedContinuation { continuation in
+            let sut = AnalyticsConsentContainerViewModel(
+                analyticsService: nil,
+                dismissAction: {
+                    continuation.resume(returning: true)
+                }
+            )
+            sut.dontAllowButtonViewModel.action()
+        }
+        #expect(dismissCalled)
     }
 
-    func test_dontAllowButtonAction_setsAcceptedAnalyticsToFalse() throws {
+    @Test
+    func dontAllowButtonAction_setsAcceptedAnalyticsToFalse() throws {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
             dismissAction: {}
         )
         sut.dontAllowButtonViewModel.action()
-        XCTAssertEqual(analyticsService._setAcceptedAnalyticsAccepted, false)
+        #expect(analyticsService._setAcceptedAnalyticsAccepted == false)
     }
 
-    func test_dontAllowButtonAction_callsDismiss() throws {
-        let expectation = expectation()
-        let sut = AnalyticsConsentContainerViewModel(
-            analyticsService: nil,
-            dismissAction: { expectation.fulfill() }
-        )
-        sut.dontAllowButtonViewModel.action()
-        wait(for: [expectation], timeout: 1)
+    @Test
+    func dontAllowButtonAction_callsDismiss() async throws {
+        let dismissCalled = await withCheckedContinuation { continuation in
+            let sut = AnalyticsConsentContainerViewModel(
+                analyticsService: nil,
+                dismissAction: {
+                    continuation.resume(returning: true)
+                }
+            )
+            sut.dontAllowButtonViewModel.action()
+        }
+        #expect(dismissCalled)
     }
 
-    func test_openPrivacyPolicy_opensURL() throws {
+    @Test
+    func openPrivacyPolicy_opensURL() throws {
         let urlOpener = MockURLOpener()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
@@ -77,6 +90,6 @@ final class AnalyticsConsentContainerViewModelTests: XCTestCase {
             dismissAction: {}
         )
         sut.openPrivacyPolicy()
-        XCTAssertEqual(urlOpener._receivedOpenIfPossibleUrlString, Constants.API.privacyPolicyUrl)
+        #expect(urlOpener._receivedOpenIfPossibleUrlString == Constants.API.privacyPolicyUrl)
     }
 }

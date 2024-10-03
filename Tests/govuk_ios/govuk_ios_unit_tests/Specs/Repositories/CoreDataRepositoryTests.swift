@@ -5,6 +5,7 @@ import Testing
 @testable import govuk_ios
 
 @Suite
+@MainActor
 struct CoreDataRepositoryTests {
     @Test
     func load_returnsExpectedResult() {

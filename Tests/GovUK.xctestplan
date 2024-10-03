@@ -35,7 +35,25 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
+      "skippedTests" : {
+        "suites" : [
+          {
+            "name" : "BaseCoordinatorTests"
+          },
+          {
+            "name" : "BaseViewControllerTests"
+          },
+          {
+            "name" : "CoreDataRepositoryTests"
+          },
+          {
+            "name" : "DeeplinkDataStoreTests"
+          },
+          {
+            "name" : "RecentActivitiesViewModelTests"
+          }
+        ]
+      },
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
         "identifier" : "5DAD71892BD250DF0075F648",

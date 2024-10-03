@@ -1,13 +1,15 @@
 import Foundation
 import UIKit
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class UIAlertAction_ConvenienceTests: XCTestCase {
-    func test_ok_returnsExpectedResult() {
+@Suite
+struct UIAlertAction_ConvenienceTests {
+    @Test
+    func ok_returnsExpectedResult() {
         let subject = UIAlertAction.ok(handler: nil)
 
-        XCTAssertEqual(subject.title, "OK")
+        #expect(subject.title == "OK")
     }
 }

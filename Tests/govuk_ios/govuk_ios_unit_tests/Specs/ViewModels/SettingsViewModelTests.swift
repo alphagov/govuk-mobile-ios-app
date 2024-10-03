@@ -1,15 +1,15 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class SettingsViewModelTests: XCTestCase {
-    
-    var sut: SettingsViewModel!
-    var mockAnalyticsService: MockAnalyticsService!
-    
-    override func setUp() {
-        super.setUp()
+@Suite
+struct SettingsViewModelTests {
+
+    let sut: SettingsViewModel
+    let mockAnalyticsService: MockAnalyticsService
+
+    init() {
         mockAnalyticsService = MockAnalyticsService()
         sut = SettingsViewModel(
             analyticsService: mockAnalyticsService,
@@ -17,85 +17,76 @@ class SettingsViewModelTests: XCTestCase {
             bundle: .main
         )
     }
-    
-    override func tearDown() {
-        sut = nil
-        mockAnalyticsService = nil
-        super.tearDown()
+
+    @Test
+    func title_isCorrect() {
+        #expect(sut.title == "Settings")
     }
     
-    func test_title_isCorrect() {
-        XCTAssertEqual(sut.title, "Settings")
-    }
-    
+    @Test
     func test_listContent_isCorrect() throws {
-        continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 3)
-        XCTAssertEqual(sut.listContent[2].rows.count, 2)
-        continueAfterFailure = true
-        
+        try #require(sut.listContent.count == 3)
+        try #require(sut.listContent[2].rows.count == 2)
+
         let aboutTheAppSection = sut.listContent[0]
-        XCTAssertEqual(aboutTheAppSection.heading, "About the app")
-        let appVersionRow = try XCTUnwrap(aboutTheAppSection.rows.first as? InformationRow)
-        XCTAssertEqual(appVersionRow.title, "App version number")
-        XCTAssertEqual(appVersionRow.detail, Bundle.main.versionNumber)
+        #expect(aboutTheAppSection.heading == "About the app")
+        let appVersionRow = try #require(aboutTheAppSection.rows.first as? InformationRow)
+        #expect(appVersionRow.title == "App version number")
+        #expect(appVersionRow.detail == Bundle.main.versionNumber)
 
         let privacySection = sut.listContent[1]
-        XCTAssertEqual(privacySection.heading, "Privacy and legal")
-        let toggleRow = try XCTUnwrap(privacySection.rows.first as? ToggleRow)
-        XCTAssertEqual(toggleRow.title, "Share app usage statistics")
-        
+        #expect(privacySection.heading == "Privacy and legal")
+        let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
+        #expect(toggleRow.title == "Share app usage statistics")
+
         let linkSection = sut.listContent[2]
-        XCTAssertEqual(linkSection.rows[0].title, "Privacy policy")
-        XCTAssertEqual(linkSection.rows[1].title, "Open source licences")
-        
+        #expect(linkSection.rows[0].title == "Privacy policy")
+        #expect(linkSection.rows[1].title == "Open source licences")
+
     }
     
+    @Test
     func test_analytics_isToggledOnThenOff() throws {
-        continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 3)
-        continueAfterFailure = true
+        #expect(sut.listContent.count == 3)
+
         sut.analyticsService.setAcceptedAnalytics(accepted: true)
         let privacySection = sut.listContent[1]
-        let toggleRow = try XCTUnwrap(privacySection.rows.first as? ToggleRow)
-        XCTAssertTrue(toggleRow.isOn)
+        let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
+        #expect(toggleRow.isOn)
         toggleRow.isOn = false
-        XCTAssertEqual(sut.analyticsService.permissionState, .denied)
+        #expect(sut.analyticsService.permissionState == .denied)
     }
     
+    @Test
     func test_analytics_isToggledOffThenOn() throws {
-        continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 3)
-        continueAfterFailure = true
+        try #require(sut.listContent.count == 3)
         sut.analyticsService.setAcceptedAnalytics(accepted: false)
         let privacySection = sut.listContent[1]
-        let toggleRow = try XCTUnwrap(privacySection.rows.first as? ToggleRow)
-        XCTAssertFalse(toggleRow.isOn)
+        let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
+        #expect(toggleRow.isOn == false)
         toggleRow.isOn = true
-        XCTAssertEqual(sut.analyticsService.permissionState, .accepted)
+        #expect(sut.analyticsService.permissionState == .accepted)
     }
     
+    @Test
     func test_privacyPolicy_action() throws {
-        continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 3)
-        continueAfterFailure = true
-        
+        try #require(sut.listContent.count == 3)
+
         let linkSection = sut.listContent[2]
-        let privacyPolicyRow = try XCTUnwrap(linkSection.rows.first as? LinkRow)
+        let privacyPolicyRow = try #require(linkSection.rows.first as? LinkRow)
         privacyPolicyRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        XCTAssertEqual(receivedTitle, privacyPolicyRow.title)
+        #expect(receivedTitle == privacyPolicyRow.title)
     }
     
+    @Test
     func test_openSettings_action() throws {
-        continueAfterFailure = false
-        XCTAssertEqual(sut.listContent.count, 3)
-        continueAfterFailure = true
-        
+        try #require(sut.listContent.count == 3)
+
         let linkSection = sut.listContent[2]
-        let settingsRow = try XCTUnwrap(linkSection.rows.last as? LinkRow)
+        let settingsRow = try #require(linkSection.rows.last as? LinkRow)
         settingsRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        XCTAssertEqual(receivedTitle, settingsRow.title)
+        #expect(receivedTitle == settingsRow.title)
     }
 }

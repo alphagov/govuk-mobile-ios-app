@@ -1,10 +1,14 @@
-import XCTest
+import Foundation
+import UIKit
+import Testing
+
 @testable import govuk_ios
 
-final class RecentActivityCoordinatorTests: XCTestCase {
-
-    @MainActor
-    func test_start_setsRecentActivityViewController() throws {
+@Suite
+@MainActor
+struct RecentActivityCoordinatorTests {
+    @Test
+    func test_start_setsRecentActivityViewController() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let expectedViewController = UIViewController()
@@ -20,6 +24,6 @@ final class RecentActivityCoordinatorTests: XCTestCase {
 
         subject.start()
 
-        XCTAssertEqual(navigationController.viewControllers.first, expectedViewController)
+        #expect(navigationController.viewControllers.first == expectedViewController)
     }
 }

@@ -25,8 +25,12 @@ class AnalyticsConsentCoordinator: BaseCoordinator {
             analyticsService: analyticsService,
             dismissAction: dismissAction
         )
-        let containerView = AnalyticsConsentContainerView(viewModel: viewModel)
-        let viewController = UIHostingController(rootView: containerView)
+        let containerView = AnalyticsConsentContainerView(
+            viewModel: viewModel
+        )
+        let viewController = UIHostingController(
+            rootView: containerView
+        )
         set(viewController)
     }
 }

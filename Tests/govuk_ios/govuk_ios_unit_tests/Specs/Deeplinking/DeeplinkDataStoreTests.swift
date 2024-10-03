@@ -1,11 +1,13 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class DeeplinkDataStoreTests: XCTestCase {
+@Suite
+struct DeeplinkDataStoreTests {
 
-    func test_route_fileURL_returnsNil() {
+    @Test
+    func route_fileURL_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/test")
@@ -18,10 +20,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func test_route_inValidURL_returnsNil() {
+    @Test
+    func route_inValidURL_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/wrong")
@@ -34,10 +37,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func test_route_urlScheme_returnsRoute() {
+    @Test
+    func route_urlScheme_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/services")
@@ -50,10 +54,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func test_route_validURL_noneMatchingComponents_returnsNil() {
+    @Test
+    func route_validURL_noneMatchingComponents_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/wrong")
@@ -65,10 +70,12 @@ class DeeplinkDataStoreTests: XCTestCase {
             for: url,
             parent: mockParent
         )
-        XCTAssertNil(result)
+
+        #expect(result == nil)
     }
 
-    func test_route_noPathComponents_returnsNil() {
+    @Test
+    func route_noPathComponents_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/test")
@@ -81,10 +88,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func test_route_incorrectComponentNumber_returnsNil() {
+    @Test
+    func route_incorrectComponentNumber_returnsNil() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/one"),
@@ -98,10 +106,11 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func test_route_validURL_matchingComponents_returnsRoute() {
+    @Test
+    func route_validURL_matchingComponents_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/one"),
@@ -116,12 +125,12 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNotNil(result)
-        XCTAssertEqual(result?.url, url)
-        XCTAssertEqual(result?.parent, mockParent)
+        #expect(result?.url == url)
+        #expect(result?.parent == mockParent)
     }
 
-    func test_route_validURL_matchingWildCardComponent_returnsRoute() {
+    @Test
+    func route_validURL_matchingWildCardComponent_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/one"),
@@ -135,12 +144,13 @@ class DeeplinkDataStoreTests: XCTestCase {
             for: url,
             parent: mockParent
         )
-        XCTAssertNotNil(result)
-        XCTAssertEqual(result?.url, url)
-        XCTAssertEqual(result?.parent, mockParent)
+
+        #expect(result?.url == url)
+        #expect(result?.parent == mockParent)
     }
 
-    func test_route_validURL_withParams_returnsRoute() {
+    @Test
+    func route_validURL_withParams_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/one"),
@@ -155,13 +165,13 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNotNil(result)
-        XCTAssertEqual(result?.url, url)
-        XCTAssertEqual(result?.parent, mockParent)
-        XCTAssertEqual(result?.parameters["service_id"], "driving_service_id")
+        #expect(result?.url == url)
+        #expect(result?.parent == mockParent)
+        #expect(result?.parameters["service_id"] == "driving_service_id")
     }
 
-    func test_route_validURL_withParams_withConflictingQueryParam_returnsRoute() {
+    @Test
+    func route_validURL_withParams_withConflictingQueryParam_returnsRoute() {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/one"),
@@ -176,9 +186,8 @@ class DeeplinkDataStoreTests: XCTestCase {
             parent: mockParent
         )
 
-        XCTAssertNotNil(result)
-        XCTAssertEqual(result?.url, url)
-        XCTAssertEqual(result?.parent, mockParent)
-        XCTAssertEqual(result?.parameters["service_id"], "override_service")
+        #expect(result?.url == url)
+        #expect(result?.parent == mockParent)
+        #expect(result?.parameters["service_id"] == "override_service")
     }
 }

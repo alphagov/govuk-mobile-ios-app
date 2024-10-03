@@ -1,25 +1,30 @@
 import Foundation
-import XCTest
+import UIKit
+import Testing
 
 @testable import govuk_ios
 
-class LaunchCoordinatorTests: XCTestCase {
+@Suite
+struct LaunchCoordinatorTests {
+    @Test
     @MainActor
-    func test_start_launchCompletion_callsCompletion() {
+    func start_launchCompletion_callsCompletion() async {
         let mockNavigationController = UINavigationController()
         let mockViewControllerBuilder = ViewControllerBuilder.mock
-        let expectation = expectation()
-        let subject = LaunchCoordinator(
-            navigationController: mockNavigationController,
-            viewControllerBuilder: mockViewControllerBuilder,
-            appConfigService: MockAppConfigService(),
-            completion: {
-                expectation.fulfill()
-            }
-        )
-        subject.start()
-        mockViewControllerBuilder._receivedLaunchCompletion?()
-        wait(for: [expectation])
+
+        let completed = await withCheckedContinuation { @MainActor continuation in
+            let subject = LaunchCoordinator(
+                navigationController: mockNavigationController,
+                viewControllerBuilder: mockViewControllerBuilder,
+                appConfigService: MockAppConfigService(),
+                completion: {
+                    continuation.resume(returning: true)
+                }
+            )
+            subject.start()
+            mockViewControllerBuilder._receivedLaunchCompletion?()
+        }
+        #expect(completed)
     }
 
 }

@@ -1,21 +1,24 @@
-import UIKit
 import Foundation
-import XCTest
+import UIKit
+import Testing
 
 import Factory
 
 @testable import govuk_ios
 
+@Suite
 @MainActor
-class BaseViewControllerTests: XCTestCase {
+struct BaseViewControllerTests {
 
-    func test_layoutMargins_returnsExpectedValue() {
+    @Test
+    func layoutMargins_returnsExpectedValue() {
         let subject = BaseViewController()
         let expectedInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        XCTAssertEqual(subject.view.layoutMargins, expectedInsets)
+        #expect(subject.view.layoutMargins == expectedInsets)
     }
 
-    func test_viewDidAppear_notTrackable_doesntTrackScreen() {
+    @Test
+    func viewDidAppear_notTrackable_doesntTrackScreen() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register {
             mockAnalyticsService
@@ -24,10 +27,11 @@ class BaseViewControllerTests: XCTestCase {
 
         subject.viewDidAppear(false)
 
-        XCTAssertEqual(mockAnalyticsService._trackScreenReceivedScreens.count, 0)
+        #expect(mockAnalyticsService._trackScreenReceivedScreens.count == 0)
     }
 
-    func test_viewDidAppear_trackableScreen_tracksScreen() {
+    @Test
+    func viewDidAppear_trackableScreen_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register {
             mockAnalyticsService
@@ -37,7 +41,7 @@ class BaseViewControllerTests: XCTestCase {
         subject.viewDidAppear(false)
 
         let screens = mockAnalyticsService._trackScreenReceivedScreens
-        XCTAssertEqual(screens.count, 1)
-        XCTAssertEqual(screens.first?.trackingName, subject.trackingName)
+        #expect(screens.count == 1)
+        #expect(screens.first?.trackingName == subject.trackingName)
     }
 }

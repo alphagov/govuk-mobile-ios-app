@@ -37,7 +37,12 @@ platform :ios do
       force_quit_simulator: true,
       reset_simulator: true,
       clean: true,
+      xcodebuild_formatter: 'xcbeautify',
       prelaunch_simulator: true,
+      testplan: 'GovUK',
+      output_types: 'junit',
+      max_concurrent_simulators: 4,
+      reset_simulator: true,
       derived_data_path: './build_for_unit_testing',
       output_directory: configuration.app_output_directory,
       code_coverage: true

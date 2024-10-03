@@ -1,20 +1,24 @@
 import Foundation
 import UIKit
-import XCTest
+import Testing
 
 @testable import govuk_ios
 
-class UIAlertController_ConvenienceTests: XCTestCase {
-    func test_unhandledDeeplinkAlert_returnsExpectedResult() {
+@Suite
+@MainActor
+struct UIAlertController_ConvenienceTests {
+    @Test
+    func unhandledDeeplinkAlert_returnsExpectedResult() {
         let subject = UIAlertController.unhandledDeeplinkAlert
 
-        XCTAssertEqual(subject.title, "Page not found")
-        XCTAssertEqual(subject.message, "Try again later.")
-        XCTAssertEqual(subject.actions.count, 1)
-        XCTAssertEqual(subject.actions.first?.title, "OK")
+        #expect(subject.title == "Page not found")
+        #expect(subject.message == "Try again later.")
+        #expect(subject.actions.count == 1)
+        #expect(subject.actions.first?.title == "OK")
     }
 
-    func test_generalAlert_returnsExpectedResult() {
+    @Test
+    func generalAlert_returnsExpectedResult() {
         let expectedTitle = UUID().uuidString
         let expectedMessage = UUID().uuidString
         let subject = UIAlertController.generalAlert(
@@ -23,10 +27,9 @@ class UIAlertController_ConvenienceTests: XCTestCase {
             handler: nil
         )
 
-        XCTAssertEqual(subject.title, expectedTitle)
-        XCTAssertEqual(subject.message, expectedMessage)
-        XCTAssertEqual(subject.actions.count, 1)
-        XCTAssertEqual(subject.actions.first?.title, "OK")
+        #expect(subject.title == expectedTitle)
+        #expect(subject.message == expectedMessage)
+        #expect(subject.actions.count == 1)
+        #expect(subject.actions.first?.title == "OK")
     }
-
 }

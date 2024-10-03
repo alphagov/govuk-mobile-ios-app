@@ -53,13 +53,6 @@
     },
     {
       "parallelizable" : false,
-      "skippedTests" : [
-        "RecentActivityContainerViewSnapshotTests",
-        "RecentActivityContainerViewSnapshotTests\/test_loadInNavigationController_dark_errorView_rendersCorrectly()",
-        "RecentActivityContainerViewSnapshotTests\/test_loadInNavigationController_dark_rendersCorrectly()",
-        "RecentActivityContainerViewSnapshotTests\/test_loadInNavigationController_light_errorView_rendersCorrectly()",
-        "RecentActivityContainerViewSnapshotTests\/test_loadInNavigationController_light_rendersCorrectly()"
-      ],
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
         "identifier" : "5D4B9D332C074207005F126A",

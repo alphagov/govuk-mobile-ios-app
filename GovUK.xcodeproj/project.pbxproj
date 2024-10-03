@@ -268,6 +268,7 @@
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
+		D093BA612CAF02D4004F489B /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE71AF2CAE8371004ABB5E /* Bundle+Tests.swift */; };
 		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
 		D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */; };
@@ -2157,6 +2158,7 @@
 				4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */,
 				D0B89D9D2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift in Sources */,
 				5DC2506E2C91E795009E9E7F /* MockAnalyticsClient.swift in Sources */,
+				D093BA612CAF02D4004F489B /* Bundle+Tests.swift in Sources */,
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
 				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,
 				4E18E0922C74DD5D00538CF0 /* AppConfigRepositoryTests.swift in Sources */,

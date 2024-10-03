@@ -44,7 +44,6 @@ struct ActivityRepositoryTests {
         )
 
         let originalId = UUID().uuidString
-        print(originalId)
         let params = ActivityItemCreateParams(
             id: originalId,
             title: "title",
@@ -56,7 +55,6 @@ struct ActivityRepositoryTests {
         var newParams = params
         let newId = UUID().uuidString
         newParams.id = newId
-        print(newId)
 
         let expectedDate = Date()
         newParams.date = expectedDate
@@ -64,9 +62,6 @@ struct ActivityRepositoryTests {
 
         let request = ActivityItem.fetchRequest()
         let results = try coreData.viewContext.fetch(request)
-        results.forEach {
-            print($0.id)
-        }
         #expect(results.count == 2)
 
         let containsOriginalItem = results.contains { $0.id == originalId }

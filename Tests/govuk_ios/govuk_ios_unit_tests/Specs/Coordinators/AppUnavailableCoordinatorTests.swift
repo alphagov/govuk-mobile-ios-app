@@ -8,7 +8,7 @@ import Testing
 @MainActor
 struct AppUnavailableCoordinatorTests {
     @Test
-    func test_start_isAppAvailable_trueCallsDismiss() async {
+    func start_isAppAvailable_trueCallsDismiss() async {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppAvailable = true
         await withCheckedContinuation { continuation in
@@ -24,7 +24,7 @@ struct AppUnavailableCoordinatorTests {
     }
 
     @Test
-    func test_start_isAppAvailable_falseDoesntCallDismiss() async throws {
+    func start_isAppAvailable_falseDoesntCallDismiss() async throws {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppAvailable = false
         let started: Bool = try await withCheckedThrowingContinuation { continuation in

@@ -24,7 +24,7 @@ struct SettingsViewModelTests {
     }
     
     @Test
-    func test_listContent_isCorrect() throws {
+    func listContent_isCorrect() throws {
         try #require(sut.listContent.count == 3)
         try #require(sut.listContent[2].rows.count == 2)
 
@@ -45,7 +45,7 @@ struct SettingsViewModelTests {
     }
     
     @Test
-    func test_analytics_isToggledOnThenOff() throws {
+    func analytics_isToggledOnThenOff() throws {
         #expect(sut.listContent.count == 3)
 
         sut.analyticsService.setAcceptedAnalytics(accepted: true)
@@ -57,7 +57,7 @@ struct SettingsViewModelTests {
     }
     
     @Test
-    func test_analytics_isToggledOffThenOn() throws {
+    func analytics_isToggledOffThenOn() throws {
         try #require(sut.listContent.count == 3)
         sut.analyticsService.setAcceptedAnalytics(accepted: false)
         let privacySection = sut.listContent[1]
@@ -68,7 +68,7 @@ struct SettingsViewModelTests {
     }
     
     @Test
-    func test_privacyPolicy_action() throws {
+    func privacyPolicy_action() throws {
         try #require(sut.listContent.count == 3)
 
         let linkSection = sut.listContent[2]
@@ -79,7 +79,7 @@ struct SettingsViewModelTests {
     }
     
     @Test
-    func test_openSettings_action() throws {
+    func openSettings_action() throws {
         try #require(sut.listContent.count == 3)
 
         let linkSection = sut.listContent[2]

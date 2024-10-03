@@ -8,7 +8,7 @@ import Testing
 @MainActor
 struct RecentActivityCoordinatorTests {
     @Test
-    func test_start_setsRecentActivityViewController() {
+    func start_setsRecentActivityViewController() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let expectedViewController = UIViewController()

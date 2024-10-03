@@ -105,6 +105,6 @@ struct CoordinatorBuilderTests {
             navigationController: mockNavigationController
         )
 
-        XCTAssert(coordinator is TopicsCoordinator)
+        #expect(coordinator is TopicsCoordinator)
     }
 }

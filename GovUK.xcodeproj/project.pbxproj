@@ -208,7 +208,6 @@
 		5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE08092C480D9200B58DBE /* OnboardingCoordinator.swift */; };
 		5DBE080C2C4812ED00B58DBE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE080B2C4812ED00B58DBE /* BaseViewController.swift */; };
 		5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE080D2C49233200B58DBE /* OnboardingService.swift */; };
-		5DBE71B02CAE8371004ABB5E /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE71AF2CAE8371004ABB5E /* Bundle+Tests.swift */; };
 		5DBE71B12CAE8371004ABB5E /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE71AF2CAE8371004ABB5E /* Bundle+Tests.swift */; };
 		5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B8E2C2D71400036EF2B /* ViewControllerBuilder.swift */; };
 		5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B932C2D72E80036EF2B /* MockViewControllerBuilder.swift */; };
@@ -269,7 +268,6 @@
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
-		D09655332CAEBB3F006F5F36 /* UIViewController+ExtensionsTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09655322CAEBB2F006F5F36 /* UIViewController+ExtensionsTestsXC.swift */; };
 		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
 		D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */; };
@@ -280,29 +278,7 @@
 		D0B89D9F2CAD60B700AD93ED /* TopicsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B89D9E2CAD60B700AD93ED /* TopicsCoordinatorTests.swift */; };
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
-		D0CAC0F72CAE879200E5BFE4 /* ActivityRepositoryTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC0F62CAE879200E5BFE4 /* ActivityRepositoryTestsXC.swift */; };
-		D0CAC0F92CAE8AB200E5BFE4 /* CoreDataRepositoryTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC0F82CAE8AB200E5BFE4 /* CoreDataRepositoryTestsXC.swift */; };
-		D0CAC0FB2CAE8E5E00E5BFE4 /* ViewControllerBuilderTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC0FA2CAE8E5E00E5BFE4 /* ViewControllerBuilderTestsXC.swift */; };
-		D0CAC0FD2CAE910A00E5BFE4 /* FirebaseClientTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC0FC2CAE910A00E5BFE4 /* FirebaseClientTestsXC.swift */; };
-		D0CAC0FF2CAE95D300E5BFE4 /* TopicsCoordinatorTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC0FE2CAE95D300E5BFE4 /* TopicsCoordinatorTestsXC.swift */; };
-		D0CAC1012CAE968A00E5BFE4 /* Date+ExtesnisonsTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1002CAE968A00E5BFE4 /* Date+ExtesnisonsTestsXC.swift */; };
-		D0CAC1032CAE984B00E5BFE4 /* JSONDecoder+ExtesnisonsTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1022CAE984B00E5BFE4 /* JSONDecoder+ExtesnisonsTestsXC.swift */; };
-		D0CAC1052CAE996400E5BFE4 /* MonthGroupKeyTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1042CAE996400E5BFE4 /* MonthGroupKeyTestsXC.swift */; };
-		D0CAC1072CAE9AA600E5BFE4 /* RecentActivitiesViewModelTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1062CAE9A9F00E5BFE4 /* RecentActivitiesViewModelTestsXC.swift */; };
-		D0CAC1092CAE9FA500E5BFE4 /* SearchViewModelTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1082CAE9FA500E5BFE4 /* SearchViewModelTestsXC.swift */; };
-		D0CAC10B2CAEA24B00E5BFE4 /* TopicsTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC10A2CAEA24B00E5BFE4 /* TopicsTestsXC.swift */; };
-		D0CAC10D2CAEA34600E5BFE4 /* TopicsWidgetViewModelTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC10C2CAEA34600E5BFE4 /* TopicsWidgetViewModelTestsXC.swift */; };
-		D0CAC10F2CAEA5C700E5BFE4 /* APIServiceClientTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC10E2CAEA5C700E5BFE4 /* APIServiceClientTestsXC.swift */; };
-		D0CAC1112CAEAB2300E5BFE4 /* SearchServiceClientTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1102CAEAB1400E5BFE4 /* SearchServiceClientTestsXC.swift */; };
-		D0CAC1132CAEACF700E5BFE4 /* TopicsServiceClientTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1122CAEACF700E5BFE4 /* TopicsServiceClientTestsXC.swift */; };
 		D0CAC1152CAEAEBD00E5BFE4 /* BaseCoordinatorTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1142CAEAEBD00E5BFE4 /* BaseCoordinatorTestsXC.swift */; };
-		D0CAC1172CAEAF0600E5BFE4 /* ActivityServiceTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1162CAEAF0200E5BFE4 /* ActivityServiceTestsXC.swift */; };
-		D0CAC1192CAEAFA100E5BFE4 /* TopicsServiceTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1182CAEAF9900E5BFE4 /* TopicsServiceTestsXC.swift */; };
-		D0CAC11B2CAEB07600E5BFE4 /* SearchServiceTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC11A2CAEB06B00E5BFE4 /* SearchServiceTestsXC.swift */; };
-		D0CAC11D2CAEB19100E5BFE4 /* SignableDecoderTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC11C2CAEB18D00E5BFE4 /* SignableDecoderTestsXC.swift */; };
-		D0CAC11F2CAEB2A400E5BFE4 /* SearchViewControllerTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC11E2CAEB2A400E5BFE4 /* SearchViewControllerTestsXC.swift */; };
-		D0CAC1212CAEB34F00E5BFE4 /* AnimationViewTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1202CAEB34500E5BFE4 /* AnimationViewTestsXC.swift */; };
-		D0CAC1232CAEB69300E5BFE4 /* AppEvent+ConvenienceTestsXC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CAC1222CAEB69300E5BFE4 /* AppEvent+ConvenienceTestsXC.swift */; };
 		D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */; };
 		D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */; };
 		D0F86E172CAC068B00FF2D9E /* MockTopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */; };
@@ -600,7 +576,6 @@
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
 		D06EB96B2CA6F71E007EA081 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
-		D09655322CAEBB2F006F5F36 /* UIViewController+ExtensionsTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ExtensionsTestsXC.swift"; sourceTree = "<group>"; };
 		D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = integration_pubkey.der; sourceTree = "<group>"; };
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoderTests.swift; sourceTree = "<group>"; };
@@ -611,29 +586,7 @@
 		D0B89D9E2CAD60B700AD93ED /* TopicsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCoordinatorTests.swift; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
-		D0CAC0F62CAE879200E5BFE4 /* ActivityRepositoryTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRepositoryTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC0F82CAE8AB200E5BFE4 /* CoreDataRepositoryTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepositoryTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC0FA2CAE8E5E00E5BFE4 /* ViewControllerBuilderTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerBuilderTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC0FC2CAE910A00E5BFE4 /* FirebaseClientTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseClientTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC0FE2CAE95D300E5BFE4 /* TopicsCoordinatorTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsCoordinatorTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1002CAE968A00E5BFE4 /* Date+ExtesnisonsTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ExtesnisonsTestsXC.swift"; sourceTree = "<group>"; };
-		D0CAC1022CAE984B00E5BFE4 /* JSONDecoder+ExtesnisonsTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+ExtesnisonsTestsXC.swift"; sourceTree = "<group>"; };
-		D0CAC1042CAE996400E5BFE4 /* MonthGroupKeyTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGroupKeyTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1062CAE9A9F00E5BFE4 /* RecentActivitiesViewModelTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitiesViewModelTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1082CAE9FA500E5BFE4 /* SearchViewModelTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC10A2CAEA24B00E5BFE4 /* TopicsTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC10C2CAEA34600E5BFE4 /* TopicsWidgetViewModelTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModelTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC10E2CAEA5C700E5BFE4 /* APIServiceClientTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceClientTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1102CAEAB1400E5BFE4 /* SearchServiceClientTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClientTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1122CAEACF700E5BFE4 /* TopicsServiceClientTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClientTestsXC.swift; sourceTree = "<group>"; };
 		D0CAC1142CAEAEBD00E5BFE4 /* BaseCoordinatorTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1162CAEAF0200E5BFE4 /* ActivityServiceTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityServiceTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1182CAEAF9900E5BFE4 /* TopicsServiceTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC11A2CAEB06B00E5BFE4 /* SearchServiceTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC11C2CAEB18D00E5BFE4 /* SignableDecoderTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoderTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC11E2CAEB2A400E5BFE4 /* SearchViewControllerTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1202CAEB34500E5BFE4 /* AnimationViewTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewTestsXC.swift; sourceTree = "<group>"; };
-		D0CAC1222CAEB69300E5BFE4 /* AppEvent+ConvenienceTestsXC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+ConvenienceTestsXC.swift"; sourceTree = "<group>"; };
 		D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClientTests.swift; sourceTree = "<group>"; };
 		D0F86E142CAB0AB400FF2D9E /* MockTopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsServiceClient.swift; sourceTree = "<group>"; };
 		D0F86E162CAC068B00FF2D9E /* MockTopicsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsService.swift; sourceTree = "<group>"; };
@@ -694,13 +647,8 @@
 				5DCDA1002CA20C7D00A6DF90 /* MonthGroupKeyTests.swift */,
 				5D5A25E62CAD44800013704A /* SearchItemTests.swift */,
 				3D33781B2CAAC30A004BF83F /* AppUnavailableViewModelTests.swift */,
-				D0CAC1042CAE996400E5BFE4 /* MonthGroupKeyTestsXC.swift */,
-				D0CAC1062CAE9A9F00E5BFE4 /* RecentActivitiesViewModelTestsXC.swift */,
-				D0CAC1082CAE9FA500E5BFE4 /* SearchViewModelTestsXC.swift */,
 				D0F86E192CAC241400FF2D9E /* TopicTests.swift */,
-				D0CAC10A2CAEA24B00E5BFE4 /* TopicsTestsXC.swift */,
 				D0B89D9C2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift */,
-				D0CAC10C2CAEA34600E5BFE4 /* TopicsWidgetViewModelTestsXC.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -723,7 +671,7 @@
 			children = (
 				3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */,
 				5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */,
-                D04191852CA6A5910034722A /* TopicsServiceClient.swift */,
+				D04191852CA6A5910034722A /* TopicsServiceClient.swift */,
 			);
 			path = ServiceClients;
 			sourceTree = "<group>";
@@ -852,7 +800,6 @@
 				5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */,
 				5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */,
 				5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */,
-				D09655322CAEBB2F006F5F36 /* UIViewController+ExtensionsTestsXC.swift */,
 				5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */,
 			);
 			path = UIKit;
@@ -881,7 +828,6 @@
 			children = (
 				5D26A7622C92E0A5009902DD /* CrashlyticsClientTests.swift */,
 				5D26A7642C92E18F009902DD /* FirebaseClientTests.swift */,
-				D0CAC0FC2CAE910A00E5BFE4 /* FirebaseClientTestsXC.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -919,7 +865,6 @@
 			isa = PBXGroup;
 			children = (
 				5D349F622C6A5A9C00B7F747 /* APIServiceClientTests.swift */,
-				D0CAC10E2CAEA5C700E5BFE4 /* APIServiceClientTestsXC.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -928,17 +873,13 @@
 			isa = PBXGroup;
 			children = (
 				5DE2834B2CAC484000E95800 /* ActivityServiceTests.swift */,
-				D0CAC1162CAEAF0200E5BFE4 /* ActivityServiceTestsXC.swift */,
 				D04191832CA5B0650034722A /* TopicsServiceTests.swift */,
-				D0CAC1182CAEAF9900E5BFE4 /* TopicsServiceTestsXC.swift */,
 				5DB2BB3F2C6BAA1D0039AD93 /* AnalyticsService+OnboardingTests.swift */,
 				5D37E9EE2C3E865F006B36CB /* AnalyticsServiceTests.swift */,
 				4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */,
 				5D8CE6932C52A330004C2552 /* OnboardingServiceTests.swift */,
 				5DC79FA62CA170D600014446 /* SearchServiceTests.swift */,
-				D0CAC11A2CAEB06B00E5BFE4 /* SearchServiceTestsXC.swift */,
 				D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */,
-				D0CAC11C2CAEB18D00E5BFE4 /* SignableDecoderTestsXC.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -957,7 +898,6 @@
 				5D37E9F62C3E865F006B36CB /* BaseViewControllerTests.swift */,
 				5D323F902C64EBE900C1DB97 /* HomeViewControllerTests.swift */,
 				16F961962C8881C8005CFB04 /* SearchViewControllerTests.swift */,
-				D0CAC11E2CAEB2A400E5BFE4 /* SearchViewControllerTestsXC.swift */,
 				168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */,
 			);
 			path = ViewControllers;
@@ -968,7 +908,6 @@
 			children = (
 				5D37E9F82C3E865F006B36CB /* CoordinatorBuilderTests.swift */,
 				5D37E9F92C3E865F006B36CB /* ViewControllerBuilderTests.swift */,
-				D0CAC0FA2CAE8E5E00E5BFE4 /* ViewControllerBuilderTestsXC.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -986,7 +925,6 @@
 				16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */,
 				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
-				D0CAC0FE2CAE95D300E5BFE4 /* TopicsCoordinatorTestsXC.swift */,
 				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 				3D3378192CAAC2E0004BF83F /* AppUnavailableCoordinatorTests.swift */,
 				D0B89D9E2CAD60B700AD93ED /* TopicsCoordinatorTests.swift */,
@@ -997,7 +935,6 @@
 		5D37EA082C3E865F006B36CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D0CAC1202CAEB34500E5BFE4 /* AnimationViewTestsXC.swift */,
 				5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */,
 			);
 			path = Views;
@@ -1285,7 +1222,6 @@
 			isa = PBXGroup;
 			children = (
 				5D96C9D92C860AD90003527A /* AppEvent+ConvenienceTests.swift */,
-				D0CAC1222CAEB69300E5BFE4 /* AppEvent+ConvenienceTestsXC.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1552,10 +1488,8 @@
 			isa = PBXGroup;
 			children = (
 				5DE283522CAC4EBA00E95800 /* ActivityRepositoryTests.swift */,
-				D0CAC0F62CAE879200E5BFE4 /* ActivityRepositoryTestsXC.swift */,
 				4E18E0912C74DD5D00538CF0 /* AppConfigRepositoryTests.swift */,
 				5DC527B62C86FACA005E3158 /* CoreDataRepositoryTests.swift */,
-				D0CAC0F82CAE8AB200E5BFE4 /* CoreDataRepositoryTestsXC.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1573,9 +1507,7 @@
 			children = (
 				3D97E9802CA171D0001D3131 /* AppConfigServiceClientTests.swift */,
 				5DC79FA42CA15CE800014446 /* SearchServiceClientTests.swift */,
-				D0CAC1102CAEAB1400E5BFE4 /* SearchServiceClientTestsXC.swift */,
 				D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */,
-				D0CAC1122CAEACF700E5BFE4 /* TopicsServiceClientTestsXC.swift */,
 			);
 			path = ServiceClients;
 			sourceTree = "<group>";
@@ -1602,9 +1534,7 @@
 			isa = PBXGroup;
 			children = (
 				4E94E8FA2C9054CD00906803 /* Date+ExtensionsTests.swift */,
-				D0CAC1002CAE968A00E5BFE4 /* Date+ExtesnisonsTestsXC.swift */,
 				5DC79FAB2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift */,
-				D0CAC1022CAE984B00E5BFE4 /* JSONDecoder+ExtesnisonsTestsXC.swift */,
 				5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */,
 			);
 			path = Foundation;
@@ -2173,18 +2103,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0CAC10F2CAEA5C700E5BFE4 /* APIServiceClientTestsXC.swift in Sources */,
 				D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */,
 				5DA97B682C6CE6250030AF2B /* HTTPURLResponse+Arrangers.swift in Sources */,
 				4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */,
 				5DA97B652C6CC9060030AF2B /* URLRequest+Extensions.swift in Sources */,
 				D0B89D9F2CAD60B700AD93ED /* TopicsCoordinatorTests.swift in Sources */,
-				D0CAC0F72CAE879200E5BFE4 /* ActivityRepositoryTestsXC.swift in Sources */,
-				D0CAC1072CAE9AA600E5BFE4 /* RecentActivitiesViewModelTestsXC.swift in Sources */,
 				5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */,
-				D0CAC10D2CAEA34600E5BFE4 /* TopicsWidgetViewModelTestsXC.swift in Sources */,
 				16F961A92C989651005CFB04 /* MockAPIServiceClient.swift in Sources */,
-				D0CAC1012CAE968A00E5BFE4 /* Date+ExtesnisonsTestsXC.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D26A7652C92E18F009902DD /* FirebaseClientTests.swift in Sources */,
 				5D5A25E72CAD44800013704A /* SearchItemTests.swift in Sources */,
@@ -2195,7 +2120,6 @@
 				5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */,
 				D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */,
 				5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */,
-				D0CAC1112CAEAB2300E5BFE4 /* SearchServiceClientTestsXC.swift in Sources */,
 				16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */,
 				5DB6AD342CA1C0EA00E92F4C /* Date+Arrangers.swift in Sources */,
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,
@@ -2207,15 +2131,12 @@
 				5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */,
 				5DC79FAA2CA1744C00014446 /* MockSearchServiceClient.swift in Sources */,
 				5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */,
-				D0CAC0FF2CAE95D300E5BFE4 /* TopicsCoordinatorTestsXC.swift in Sources */,
-				D0CAC0FD2CAE910A00E5BFE4 /* FirebaseClientTestsXC.swift in Sources */,
 				5DE283532CAC4EBA00E95800 /* ActivityRepositoryTests.swift in Sources */,
 				5D5A25E22CAD422B0013704A /* SearchItem+Arrangers.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
 				D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */,
 				5D96C9DA2C860AD90003527A /* AppEvent+ConvenienceTests.swift in Sources */,
 				4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */,
-				D0CAC11D2CAEB19100E5BFE4 /* SignableDecoderTestsXC.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,
 				5D4F6D3F2CA41772006D0B5B /* MockAppConfigService.swift in Sources */,
 				5DC527BC2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift in Sources */,
@@ -2223,9 +2144,7 @@
 				5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */,
 				5DF8854D2CAC1A120060A40D /* MockActivityService.swift in Sources */,
 				16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */,
-				D0CAC1132CAEACF700E5BFE4 /* TopicsServiceClientTestsXC.swift in Sources */,
 				16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */,
-				D09655332CAEBB3F006F5F36 /* UIViewController+ExtensionsTestsXC.swift in Sources */,
 				5D323F8F2C64E6E800C1DB97 /* MockBaseViewController.swift in Sources */,
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,
 				5DD5F0BB2C99D563009F5388 /* String+ExtensionsTests.swift in Sources */,
@@ -2233,26 +2152,18 @@
 				5D5B16F72C51480000EA118F /* XCTestCase+Extensions.swift in Sources */,
 				5D37EA0E2C3E865F006B36CB /* BaseViewControllerTests.swift in Sources */,
 				16F961992C8882B6005CFB04 /* SearchViewModelTests.swift in Sources */,
-				D0CAC0FB2CAE8E5E00E5BFE4 /* ViewControllerBuilderTestsXC.swift in Sources */,
 				5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */,
 				16F961972C8881C8005CFB04 /* SearchViewControllerTests.swift in Sources */,
 				4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */,
 				D0B89D9D2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift in Sources */,
 				5DC2506E2C91E795009E9E7F /* MockAnalyticsClient.swift in Sources */,
-				D0CAC1212CAEB34F00E5BFE4 /* AnimationViewTestsXC.swift in Sources */,
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
 				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,
-				D0CAC1052CAE996400E5BFE4 /* MonthGroupKeyTestsXC.swift in Sources */,
-				D0CAC1192CAEAFA100E5BFE4 /* TopicsServiceTestsXC.swift in Sources */,
 				4E18E0922C74DD5D00538CF0 /* AppConfigRepositoryTests.swift in Sources */,
-				D0CAC1172CAEAF0600E5BFE4 /* ActivityServiceTestsXC.swift in Sources */,
 				4E94E8FB2C9054CD00906803 /* Date+ExtensionsTests.swift in Sources */,
-				D0CAC1092CAE9FA500E5BFE4 /* SearchViewModelTestsXC.swift in Sources */,
 				5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */,
 				5D349F632C6A5A9C00B7F747 /* APIServiceClientTests.swift in Sources */,
 				5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */,
-				D0CAC10B2CAEA24B00E5BFE4 /* TopicsTestsXC.swift in Sources */,
-				D0CAC0F92CAE8AB200E5BFE4 /* CoreDataRepositoryTestsXC.swift in Sources */,
 				5DC79FAC2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift in Sources */,
 				5DAA394D2CAC862B002A7E18 /* ActivityItem+Arrangers.swift in Sources */,
 				5D0BD45E2C9B23EE00220625 /* MockSearchService.swift in Sources */,
@@ -2265,11 +2176,8 @@
 				5DE2834C2CAC484000E95800 /* ActivityServiceTests.swift in Sources */,
 				5D26A7632C92E0A5009902DD /* CrashlyticsClientTests.swift in Sources */,
 				3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */,
-				D0CAC1232CAEB69300E5BFE4 /* AppEvent+ConvenienceTestsXC.swift in Sources */,
 				4E562E432C988F580074A483 /* RecentActivitiesViewModelTests.swift in Sources */,
-				D0CAC11B2CAEB07600E5BFE4 /* SearchServiceTestsXC.swift in Sources */,
 				5DC79FA52CA15CE800014446 /* SearchServiceClientTests.swift in Sources */,
-				D0CAC11F2CAEB2A400E5BFE4 /* SearchViewControllerTestsXC.swift in Sources */,
 				160EA7592C60D7AB008F97AF /* MockAnalyticsService.swift in Sources */,
 				3D33781A2CAAC2E0004BF83F /* AppUnavailableCoordinatorTests.swift in Sources */,
 				5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */,
@@ -2277,7 +2185,6 @@
 				5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */,
 				1651C6E92C63D4D300864C5C /* HomeViewModelTests.swift in Sources */,
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
-				D0CAC1032CAE984B00E5BFE4 /* JSONDecoder+ExtesnisonsTestsXC.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				5DCDA1012CA20C7D00A6DF90 /* MonthGroupKeyTests.swift in Sources */,
 				3D33781C2CAAC30A004BF83F /* AppUnavailableViewModelTests.swift in Sources */,

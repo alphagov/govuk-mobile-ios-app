@@ -123,3 +123,32 @@ struct FirebaseClientTests {
         #expect(receivedParams?["language"] as? String == expectedScreen.trackingLanguage)
     }
 }
+
+class MockFirebaseApp: FirebaseAppInterface {
+    static var _configureCalled: Bool = false
+    static func configure() {
+        _configureCalled = true
+    }
+}
+
+class MockFirebaseAnalytics: FirebaseAnalyticsInterface {
+
+    static func clearValues() {
+        _setAnalyticsCollectionEnabledReveivedEnabled = nil
+        _logEventReceivedEventName = nil
+        _logEventReceivedEventParameters = nil
+    }
+
+    static var _setAnalyticsCollectionEnabledReveivedEnabled: Bool?
+    static func setAnalyticsCollectionEnabled(_ newValue: Bool) {
+        _setAnalyticsCollectionEnabledReveivedEnabled = newValue
+    }
+    
+    static var _logEventReceivedEventName: String?
+    static var _logEventReceivedEventParameters: [String : Any]?
+    static func logEvent(_ eventName: String,
+                         parameters: [String : Any]?) {
+        _logEventReceivedEventName = eventName
+        _logEventReceivedEventParameters = parameters
+    }
+}

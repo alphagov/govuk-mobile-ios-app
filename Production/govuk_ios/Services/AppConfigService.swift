@@ -41,7 +41,12 @@ public final class AppConfigService: AppConfigServiceInterface {
         switch result {
         case .success(let appConfig):
             self.isAppAvailable = appConfig.config.available
-            self.featureFlags = appConfig.config.releaseFlags
+            self.featureFlags = self.featureFlags.merging(
+                appConfig.config.releaseFlags,
+                uniquingKeysWith: { _, new in
+                    new
+                }
+            )
         case .failure(let error):
             throw error
         }

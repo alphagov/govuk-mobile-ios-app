@@ -14,12 +14,7 @@ final class TopicsWidgetViewModel {
 
     func fetchTopics(completion: FetchTopicsListResult?) {
         topicsService.fetchTopics { result in
-            switch result {
-            case .success(let topics):
-                self.topics = topics
-            case .failure(let error):
-                print(error)
-            }
+            self.topics = (try? result.get()) ?? []
             completion?(result)
         }
     }
@@ -28,7 +23,8 @@ final class TopicsWidgetViewModel {
         guard let action = topicAction else { return }
         let event = AppEvent.buttonNavigation(
             text: topic.ref,
-            external: false)
+            external: false
+        )
         analyticsService.track(event: event)
         action(topic)
     }

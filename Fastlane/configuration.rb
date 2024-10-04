@@ -69,6 +69,10 @@ class Configuration
     ENV['APP_STORE_KEY_CONTENT']
   end
 
+  def deliver_groups
+    setting(:deliver, :groups)
+  end
+
   def match_method
     setting(:match, :method)
   end

@@ -98,7 +98,7 @@ platform :ios do
       distribute_external: true,
       notify_external_testers: true,
       expire_previous_builds: false,
-      groups: ['GOV.UK APP', 'GOV.UK OTHER'],
+      groups: configuration.deliver_groups,
       changelog: 'Automated internal build',
       api_key: app_store_key
     )

@@ -23,6 +23,7 @@ unit:
   <<: *DEFAULTS
 
 alpha:
+  <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
     display_name: Gov.UK - Alpha

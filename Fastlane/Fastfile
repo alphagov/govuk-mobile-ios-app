@@ -96,16 +96,12 @@ platform :ios do
     pilot(
       username: configuration.deliver_username,
       app_identifier: configuration.app_bundle_identifier,
-      skip_screenshots: true,
-      skip_metadata: true,
-      skip_binary_upload: false,
       distribute_external: true,
       notify_external_testers: false,
       expire_previous_builds: true,
       groups: ['ea1ce2a9-df32-462b-a2fe-3cb262968f89'],
       changelog: 'Automated internal build',
-      api_key: app_store_key,
-      force: true
+      api_key: app_store_key
     )
   end
 end

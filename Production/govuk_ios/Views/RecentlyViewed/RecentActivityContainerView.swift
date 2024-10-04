@@ -21,9 +21,6 @@ struct RecentActivityContainerView: View {
                     ),
                     selected: { self.viewModel.selected(item: $0) }
                 )
-                .accessibilityLabel(
-                    Text(viewModel.navigationTitle)
-                )
             default:
                 ProgressView()
             }

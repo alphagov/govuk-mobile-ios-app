@@ -57,10 +57,6 @@ class Configuration
     setting(:scan, :devices)
   end
 
-  def deliver_username
-    ENV['APP_STORE_USERNAME']
-  end
-
   def deliver_key_id
     ENV['APP_STORE_KEY_ID']
   end

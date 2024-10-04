@@ -96,7 +96,7 @@ platform :ios do
     pilot(
       app_identifier: configuration.app_bundle_identifier,
       distribute_external: true,
-      notify_external_testers: false,
+      notify_external_testers: true,
       expire_previous_builds: true,
       groups: ['ea1ce2a9-df32-462b-a2fe-3cb262968f89'],
       changelog: 'Automated internal build',

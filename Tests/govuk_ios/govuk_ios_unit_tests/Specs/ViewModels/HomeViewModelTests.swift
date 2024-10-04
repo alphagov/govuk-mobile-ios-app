@@ -9,14 +9,16 @@ struct HomeViewModelTests {
     @Test
     func widgets_returnsArrayOfWidgets() {
         let subject = HomeViewModel(
-            configService: MockAppConfigService(), 
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
-            recentActivityAction: {}
+            recentActivityAction: {},
+            topicAction: { _ in }
         )
         let widgets = subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 2)
+        #expect(widgets.count == 3)
     }
 
     @Test
@@ -26,11 +28,13 @@ struct HomeViewModelTests {
 
         let subject = HomeViewModel(
             configService: configService,
+            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
-            recentActivityAction: {}
+            recentActivityAction: {},
+            topicAction: { _ in }
         )
         let widgets = subject.widgets
 
-        #expect(widgets.count == 1)
+        #expect(widgets.count == 2)
     }
 }

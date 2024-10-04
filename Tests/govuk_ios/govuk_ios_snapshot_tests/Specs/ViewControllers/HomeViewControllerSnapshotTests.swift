@@ -23,10 +23,14 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private var viewController: HomeViewController {
+        let topicService = MockTopicsService()
+        topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsResult
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
+            topicsService: topicService,
             searchButtonPrimaryAction: { },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            topicAction: { _ in }
         )
         return HomeViewController(viewModel: viewModel)
     }

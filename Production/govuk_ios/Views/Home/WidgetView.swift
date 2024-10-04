@@ -4,10 +4,17 @@ import UIComponents
 
 class WidgetView: UIView {
     private lazy var contentView: UIView = UIView(frame: .zero)
+    private let decorateView: Bool
+    private lazy var padding: CGFloat = {
+        decorateView ? 16 : 0
+    }()
 
-    init() {
+    init(decorateView: Bool = true) {
+        self.decorateView = decorateView
         super.init(frame: .zero)
-        self.backgroundColor = UIColor.govUK.fills.surfaceCard
+        self.backgroundColor = decorateView ?
+            UIColor.govUK.fills.surfaceCard :
+            UIColor.govUK.fills.surfaceBackground
         configureUI()
         configureConstraints()
     }
@@ -17,27 +24,28 @@ class WidgetView: UIView {
     }
 
     private func updateBorderColor() {
-        layer.borderColor = UIColor.secondaryBorder.cgColor
+        if decorateView {
+            layer.borderColor = UIColor.secondaryBorder.cgColor
+        }
     }
 
     private func configureUI() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        layer.borderWidth = 1
-        layer.cornerRadius = 10
-        layer.masksToBounds = true
+        if decorateView {
+            layer.borderWidth = 1
+            layer.cornerRadius = 10
+            layer.masksToBounds = true
+        }
         addSubview(contentView)
         updateBorderColor()
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: 16
-            ),
-            contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16)
+            contentView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding),
+            contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
+            contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: padding)
         ])
     }
 

@@ -24,7 +24,8 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .home(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
-            configService: container.appConfigService.resolve()
+            configService: container.appConfigService.resolve(),
+            topicsService: container.topicsService.resolve()
         )
     }
 
@@ -101,6 +102,16 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve()
+        )
+    }
+
+    func topicDetail(_ topic: Topic,
+                     navigationController: UINavigationController) -> BaseCoordinator {
+        TopicsCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            topic: topic
         )
     }
 }

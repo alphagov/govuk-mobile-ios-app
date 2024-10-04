@@ -24,7 +24,8 @@ struct HomeCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: MockAnalyticsService(),
-            configService: MockAppConfigService()
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService()
         )
         subject.start()
 

@@ -39,7 +39,9 @@ struct ViewControllerBuilderTests {
         let result = subject.home(
             searchButtonPrimaryAction: { () -> Void in },
             configService: MockAppConfigService(),
-            recentActivityAction: {}
+            topicsService: MockTopicsService(),
+            recentActivityAction: {},
+            topicAction: { _ in }
         )
 
         #expect(result is HomeViewController)
@@ -83,5 +85,17 @@ struct ViewControllerBuilderTests {
         #expect(containerView?.trackingClass == "RecentActivityContainerView")
         #expect(containerView?.trackingName == "Pages you've visited")
         #expect(containerView?.trackingTitle == "Pages you've visited")
+    }
+    
+    @Test
+    func topicDetail_returnsExpectedResult() async throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.topicDetail(
+            topic: Topic(ref: "ref", title: "Title"),
+            analyticsService: MockAnalyticsService()
+        )
+        
+        let rootView = (result as? HostingViewController<TopicDetailView>)?.rootView
+        #expect(rootView != nil) 
     }
 }

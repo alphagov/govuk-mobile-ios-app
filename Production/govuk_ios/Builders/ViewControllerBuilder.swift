@@ -49,11 +49,15 @@ class ViewControllerBuilder {
     @MainActor
     func home(searchButtonPrimaryAction: @escaping () -> Void,
               configService: AppConfigServiceInterface,
-              recentActivityAction: @escaping () -> Void) -> UIViewController {
+              topicsService: TopicsServiceInterface,
+              recentActivityAction: @escaping () -> Void,
+              topicAction: @escaping (Topic) -> Void) -> UIViewController {
         let viewModel = HomeViewModel(
             configService: configService,
+            topicsService: topicsService,
             searchButtonPrimaryAction: searchButtonPrimaryAction,
-            recentActivityAction: recentActivityAction
+            recentActivityAction: recentActivityAction,
+            topicAction: topicAction
         )
         return HomeViewController(
             viewModel: viewModel
@@ -97,6 +101,15 @@ class ViewControllerBuilder {
         let repository = Container.shared.coreDataRepository.resolve()
         let view = RecentActivityContainerView(viewModel: viewModel)
             .environment(\.managedObjectContext, repository.viewContext)
+        return HostingViewController(rootView: view)
+    }
+
+    @MainActor
+    func topicDetail(topic: Topic,
+                     analyticsService: AnalyticsServiceInterface
+    ) -> UIViewController {
+        var view = TopicDetailView()
+        view.topic = topic
         return HostingViewController(rootView: view)
     }
 }

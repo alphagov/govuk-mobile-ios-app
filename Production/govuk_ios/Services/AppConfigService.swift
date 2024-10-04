@@ -55,7 +55,12 @@ public final class AppConfigService: AppConfigServiceInterface {
         self.isAppAvailable = config.available
         let appVersionNumber = appVersionProvider.versionNumber ?? ""
         self.isAppForcedUpdate = appVersionNumber.isVersion(lessThan: config.minimumVersion)
-        self.featureFlags = config.releaseFlags
+        self.featureFlags = self.featureFlags.merging(
+            appConfig.config.releaseFlags,
+            uniquingKeysWith: { _, new in
+                new
+            }
+        )
     }
 
     func isFeatureEnabled(key: Feature) -> Bool {

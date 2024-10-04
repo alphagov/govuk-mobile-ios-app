@@ -1,5 +1,4 @@
 import Foundation
-import Factory
 
 protocol TopicsServiceInterface {
     func fetchTopics(completion: @escaping FetchTopicsListResult)

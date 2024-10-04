@@ -3,6 +3,7 @@ import UIKit
 class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
 
+    private var rowCount = 2
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.govUK.title3Semibold
@@ -52,7 +53,7 @@ class TopicsWidgetView: UIView {
     }
 
     private func updateTopics(_ topics: [Topic]) {
-        for index in 0..<topics.count where index % 2 == 0 {
+        for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createNewRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(rowStack)
@@ -61,19 +62,20 @@ class TopicsWidgetView: UIView {
         }
     }
 
-    private func createNewRow(startingAt index: Int, of topics: [Topic]) -> UIStackView {
+    private func createNewRow(startingAt startIndex: Int, of topics: [Topic]) -> UIStackView {
         let rowStack = createRowStack()
-        let firstCard = createTopicCard(for: topics[index])
+        let firstCard = createTopicCard(for: topics[startIndex])
         rowStack.addArrangedSubview(firstCard)
 
-        if index + 1 <= topics.count - 1 {
-            let secondCard = createTopicCard(for: topics[index + 1])
-            rowStack.addArrangedSubview(secondCard)
-            firstCard.heightAnchor.constraint(equalTo: secondCard.heightAnchor).isActive = true
-        } else {
-            rowStack.addArrangedSubview(UIView())
+        for index in (startIndex + 1)..<(startIndex + rowCount) {
+            if index <= topics.count - 1 {
+                let card = createTopicCard(for: topics[index])
+                rowStack.addArrangedSubview(card)
+                firstCard.heightAnchor.constraint(equalTo: card.heightAnchor).isActive = true
+            } else {
+                rowStack.addArrangedSubview(UIView())
+            }
         }
-
         return rowStack
     }
 
@@ -95,7 +97,23 @@ class TopicsWidgetView: UIView {
         return topicCard
     }
 
+    private func resetRows() {
+        stackView.arrangedSubviews.forEach { view in
+            if view is UIStackView {
+                view.removeFromSuperview()
+            }
+        }
+    }
+
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let sizeClass = UITraitCollection.current.verticalSizeClass
+        rowCount = sizeClass == .regular ? 2 : 4
+        resetRows()
+        updateTopics(viewModel.topics)
     }
 }

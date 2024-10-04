@@ -93,15 +93,14 @@ platform :ios do
   end
 
   private_lane :app_store do
-    deliver(
-      username: configuration.deliver_username,
+    pilot(
       app_identifier: configuration.app_bundle_identifier,
-      skip_screenshots: true,
-      skip_metadata: true,
-      skip_binary_upload: false,
-      precheck_include_in_app_purchases: false,
-      api_key: app_store_key,
-      force: true
+      distribute_external: true,
+      notify_external_testers: true,
+      expire_previous_builds: false,
+      groups: configuration.deliver_groups,
+      changelog: 'Automated internal build',
+      api_key: app_store_key
     )
   end
 end

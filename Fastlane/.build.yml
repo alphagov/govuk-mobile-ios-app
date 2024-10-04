@@ -14,11 +14,16 @@ default: &DEFAULTS
       - iPhone 15 Pro (17.5)
   match: &MATCH_DEFAULTS
     method: "adhoc"
+  deliver: &DELIVER_DEFAULTS
+    groups: 
+      - GOV.UK APP
+      - GOV.UK OTHER
 
 unit:
   <<: *DEFAULTS
 
 alpha:
+  <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
     display_name: Gov.UK - Alpha

@@ -57,10 +57,6 @@ class Configuration
     setting(:scan, :devices)
   end
 
-  def deliver_username
-    ENV['APP_STORE_USERNAME']
-  end
-
   def deliver_key_id
     ENV['APP_STORE_KEY_ID']
   end
@@ -71,6 +67,10 @@ class Configuration
 
   def deliver_key_content
     ENV['APP_STORE_KEY_CONTENT']
+  end
+
+  def deliver_groups
+    setting(:deliver, :groups)
   end
 
   def match_method

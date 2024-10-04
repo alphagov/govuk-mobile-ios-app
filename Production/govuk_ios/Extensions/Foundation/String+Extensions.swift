@@ -88,3 +88,28 @@ extension String {
         return redactedOutput
     }
  }
+
+extension String {
+    public func isVersion(lessThan targetVersion: String) -> Bool {
+        return compare(toVersion: targetVersion) == .orderedAscending
+    }
+
+    private func compare(toVersion targetVersion: String) -> ComparisonResult {
+        let versionDelimiter = "."
+        var versionArray = self.components(separatedBy: versionDelimiter)
+        var targetVersionArray = targetVersion.components(separatedBy: versionDelimiter)
+        let spareCount = versionArray.count - targetVersionArray.count
+        if spareCount == 0 {
+            return self.compare(targetVersion, options: .numeric)
+        } else {
+            let spareZeros = repeatElement("0", count: abs(spareCount))
+            if spareCount > 0 {
+                targetVersionArray.append(contentsOf: spareZeros)
+            } else {
+                versionArray.append(contentsOf: spareZeros)
+            }
+            return versionArray.joined(separator: versionDelimiter)
+                .compare(targetVersionArray.joined(separator: versionDelimiter), options: .numeric)
+        }
+    }
+}

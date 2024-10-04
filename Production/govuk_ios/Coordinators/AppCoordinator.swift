@@ -34,6 +34,16 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.appUnavailable(
             navigationController: root,
             dismissAction: { [weak self] in
+                self?.startAppForcedUpdate(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startAppForcedUpdate(url: URL?) {
+        let coordinator = coordinatorBuilder.appForcedUpdate(
+            navigationController: root,
+            dismissAction: { [weak self] in
                 self?.startAnalyticsConsent(url: url)
             }
         )

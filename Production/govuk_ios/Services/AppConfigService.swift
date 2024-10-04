@@ -2,20 +2,25 @@ import Foundation
 
 protocol AppConfigServiceInterface {
     var isAppAvailable: Bool { get }
+    var isAppForcedUpdate: Bool { get }
     func isFeatureEnabled(key: Feature) -> Bool
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
     var isAppAvailable: Bool = false
+    var isAppForcedUpdate: Bool = false
+    private var featureFlags: [String: Bool] = [:]
 
     private let appConfigRepository: AppConfigRepositoryInterface
     private let appConfigServiceClient: AppConfigServiceClientInterface
-    private var featureFlags: [String: Bool] = [:]
+    private let appVersionProvider: AppVersionProvider
 
     init(appConfigRepository: AppConfigRepositoryInterface,
-         appConfigServiceClient: AppConfigServiceClientInterface) {
+         appConfigServiceClient: AppConfigServiceClientInterface,
+         appVersionProvider: AppVersionProvider = Bundle.main) {
         self.appConfigRepository = appConfigRepository
         self.appConfigServiceClient = appConfigServiceClient
+        self.appVersionProvider = appVersionProvider
 
         fetchAppConfig()
     }
@@ -25,26 +30,32 @@ public final class AppConfigService: AppConfigServiceInterface {
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.setConfig(result: result)
+                try? self.handleResult(result)
             }
         )
 
         appConfigServiceClient.fetchAppConfig(
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.setConfig(result: result)
+                try? self.handleResult(result)
             }
         )
     }
 
-    private func setConfig(result: Result<AppConfig, AppConfigError>) throws {
+    private func handleResult(_ result: Result<AppConfig, AppConfigError>) throws {
         switch result {
         case .success(let appConfig):
-            self.isAppAvailable = appConfig.config.available
-            self.featureFlags = appConfig.config.releaseFlags
+            setConfig(appConfig.config)
         case .failure(let error):
             throw error
         }
+    }
+
+    private func setConfig(_ config: Config) {
+        self.isAppAvailable = config.available
+        let appVersionNumber = appVersionProvider.versionNumber ?? ""
+        self.isAppForcedUpdate = appVersionNumber.isVersion(lessThan: config.minimumVersion)
+        self.featureFlags = config.releaseFlags
     }
 
     func isFeatureEnabled(key: Feature) -> Bool {

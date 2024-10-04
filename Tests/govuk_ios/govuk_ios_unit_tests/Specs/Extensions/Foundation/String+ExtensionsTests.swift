@@ -129,4 +129,23 @@ struct String_ExtensionsTests {
         #expect(expected == "Child benefit CD 98 76 54 A allowance".redactPii())
         #expect(expected == "Child benefit CD  98  76  54  A allowance".redactPii())
     }
+
+    @Test
+    func isVersion_returnsExpectedResult() {
+        #expect("1.0.0".isVersion(lessThan: "1.0.0") == false)
+        #expect("1.0.0".isVersion(lessThan: "1.0.1") == true)
+        #expect("1.0.1".isVersion(lessThan: "1.0.0") == false)
+
+        #expect("1".isVersion(lessThan: "2.0.0") == true)
+        #expect("1.0".isVersion(lessThan: "2.0") == true)
+        #expect("1.0.0".isVersion(lessThan: "2") == true)
+
+        #expect("2.0.0".isVersion(lessThan: "1") == false)
+        #expect("2.0".isVersion(lessThan: "1.0") == false)
+        #expect("2".isVersion(lessThan: "1.0.0") == false)
+
+        #expect("100.0.0".isVersion(lessThan: "0.0.100") == false)
+        #expect("0.100.0".isVersion(lessThan: "0.100.0") == false)
+        #expect("0.0.100".isVersion(lessThan: "100.0.0") == true)
+    }
 }

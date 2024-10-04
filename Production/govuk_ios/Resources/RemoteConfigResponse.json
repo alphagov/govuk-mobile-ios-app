@@ -2,8 +2,8 @@
   "platform": "iOS",
   "config": {
     "available": true,
-    "minimumVersion": "1.0.0",
-    "recommendedVersion": "1.2.0",
+    "minimumVersion": "0.0.1",
+    "recommendedVersion": "0.0.1",
     "releaseFlags": {
       "search": true,
       "onboarding": false

@@ -5,7 +5,7 @@ import Foundation
 class MockAppConfigService: AppConfigServiceInterface {
     var isAppAvailable: Bool = false
 
-    var features: [Feature] = [.onboarding, .search]
+    var features: [Feature] = [.onboarding, .search, .topics]
     
     func isFeatureEnabled(key: Feature) -> Bool {
         features.contains(key)

@@ -56,7 +56,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         let appVersionNumber = appVersionProvider.versionNumber ?? ""
         self.isAppForcedUpdate = appVersionNumber.isVersion(lessThan: config.minimumVersion)
         self.featureFlags = self.featureFlags.merging(
-            appConfig.config.releaseFlags,
+            config.releaseFlags,
             uniquingKeysWith: { _, new in
                 new
             }

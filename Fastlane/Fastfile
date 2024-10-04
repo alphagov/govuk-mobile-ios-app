@@ -97,7 +97,7 @@ platform :ios do
       app_identifier: configuration.app_bundle_identifier,
       distribute_external: true,
       notify_external_testers: true,
-      expire_previous_builds: true,
+      expire_previous_builds: false,
       groups: ['ea1ce2a9-df32-462b-a2fe-3cb262968f89'],
       changelog: 'Automated internal build',
       api_key: app_store_key

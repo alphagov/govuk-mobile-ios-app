@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - develop
+      - deploy-testflight-builds
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

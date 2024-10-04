@@ -67,7 +67,7 @@ struct SearchViewModelTests{
             activityService: MockActivityService(),
             urlOpener: MockURLOpener()
         )
-        let searchText = UUID().uuidString
+        let searchText = "E3 6SY bin collection"
 
         subject.search(
             text: searchText,
@@ -82,11 +82,12 @@ struct SearchViewModelTests{
         )
         mockService._searchReceivedCompletion?(.success(stubbedResponse))
         let events = mockAnalyticsService._trackedEvents
+        let redactedSearchText = "[postcode] bin collection"
 
         #expect(subject.results?.count == stubbedResponse.results.count)
         #expect(events.count == 1)
         #expect(events.first?.name == "Search")
-        #expect(events.first?.params?["text"] as! String == searchText)
+        #expect(events.first?.params?["text"] as! String == redactedSearchText)
     }
 
     @Test

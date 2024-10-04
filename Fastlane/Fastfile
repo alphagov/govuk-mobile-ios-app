@@ -70,13 +70,18 @@ platform :ios do
   end
 
   private_lane :convert_coverage do
-    slather(
-      build_directory: configuration.app_output_directory,
-      output_directory: configuration.app_output_directory,
-      sonarqube_xml: true,
-      scheme: configuration.app_scheme,
-      proj: configuration.app_project
+    puts lane_context[SharedValues::SCAN_GENERATED_XCRESULT_PATH]
+    sh(
+      "../Scripts/xccov-to-sonarqube-generic.sh #{lane_context[SharedValues::SCAN_GENERATED_XCRESULT_PATH]} >../#{configuration.app_output_directory}/sonarqube-generic-coverage.xml"
     )
+    # slather(
+    #   build_directory: configuration.app_output_directory,
+    #   output_directory: configuration.app_output_directory,
+    #   sonarqube_xml: true,
+    #   scheme: configuration.app_scheme,
+    #   proj: configuration.app_project,
+    #   workspace: configuration.app_workspace
+    # )
   end
 
   private_lane :update_build_number do

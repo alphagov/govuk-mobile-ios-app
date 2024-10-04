@@ -19,6 +19,8 @@ extension GroupedListRow {
     }
 }
 
+protocol EditableListRow: GroupedListRow { }
+
 struct LinkRow: GroupedListRow,
                 Identifiable {
     let id: String
@@ -28,14 +30,33 @@ struct LinkRow: GroupedListRow,
     let action: () -> Void
 }
 
-struct EditLinkRow: GroupedListRow, Identifiable {
+class EditLinkRow: EditableListRow, Identifiable, ObservableObject {
     let id: String
     let editMode: Bool
     let title: String
     let body: String?
+    @Published var isSelected: Bool
     var isWebLink: Bool = true
     let action: () -> Void
     let selectAction: () -> Void
+
+    init(id: String,
+         editMode: Bool,
+         title: String,
+         body: String?,
+         isSelected: Bool,
+         isWebLink: Bool,
+         action: @escaping () -> Void,
+         selectAction: @escaping () -> Void) {
+        self.id = id
+        self.editMode = editMode
+        self.title = title
+        self.body = body
+        self.isSelected = isSelected
+        self.isWebLink = isWebLink
+        self.action = action
+        self.selectAction = selectAction
+    }
 }
 
 struct NavigationRow: GroupedListRow,

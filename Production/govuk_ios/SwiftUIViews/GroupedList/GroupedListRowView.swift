@@ -74,11 +74,12 @@ struct LinkRowView: View {
 }
 
 struct EditLinkRowView: View {
-    let row: EditLinkRow
-    @State var isSelected: Bool = false
+    @ObservedObject var row: EditLinkRow
+   // @State var isSelected: Bool
 
     init(row: EditLinkRow) {
         self.row = row
+        // _isSelected = State(wrappedValue: row.isSelected)
     }
 
     var body: some View {
@@ -90,11 +91,11 @@ struct EditLinkRowView: View {
                     VStack {
                         Button {
                             withAnimation {
-                                isSelected.toggle()
+                                row.isSelected.toggle()
                                 row.selectAction()
                             }
                         } label: {
-                            if isSelected {
+                            if row.isSelected {
                                 Image(systemName: "checkmark.circle.fill")
                             } else {
                                 Image(systemName: "circle").foregroundColor(Color.gray)
@@ -198,3 +199,4 @@ struct EditLinkRowView: View {
             }
         }
     }
+// }

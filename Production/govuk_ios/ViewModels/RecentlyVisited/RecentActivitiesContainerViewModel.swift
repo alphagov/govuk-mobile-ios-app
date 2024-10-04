@@ -3,7 +3,7 @@ import CoreData
 import SwiftUI
 import UIKit
 
-class RecentActivitiesViewModel: ObservableObject {
+class RecentActivitiesContainerViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
@@ -19,13 +19,13 @@ class RecentActivitiesViewModel: ObservableObject {
         "recentActivityNavigationTitle"
     )
 
-    func selected(item: ActivityItem) {
-        item.date = Date()
-        try? item.managedObjectContext?.save()
-        guard let url = URL(string: item.url) else { return }
-        urlOpener.openIfPossible(url)
-        trackSelection(activity: item)
-    }
+//    func selected(item: ActivityItem) {
+//        item.date = Date()
+//        try? item.managedObjectContext?.save()
+//        guard let url = URL(string: item.url) else { return }
+//        urlOpener.openIfPossible(url)
+//        trackSelection(activity: item)
+//    }
 
     func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
         var todaysActivities: [ActivityItem] = []
@@ -54,20 +54,20 @@ class RecentActivitiesViewModel: ObservableObject {
         )
     }
 
-    func selectItem(activity: ActivityItem) {
-        if let savedActivities = selectedActivities[activity.id] {
-            selectedActivities.removeValue(forKey: savedActivities.id)
-        } else {
-            selectedActivities[activity.id] = activity
-        }
-    }
+//    func selectItem(activity: ActivityItem) {
+//        if let savedActivities = selectedActivities[activity.id] {
+//            selectedActivities.removeValue(forKey: savedActivities.id)
+//        } else {
+//            selectedActivities[activity.id] = activity
+//        }
+//    }
 
-    func deleteActivities() {
-        for activity in selectedActivities {
-            guard let context = activity.value.managedObjectContext else { return }
-            context.delete(activity.value)
-        }
-    }
+//    func deleteActivities() {
+//        for activity in selectedActivities {
+//            guard let context = activity.value.managedObjectContext else { return }
+//            context.delete(activity.value)
+//        }
+//    }
 
     private func trackSelection(activity: ActivityItem) {
         let event = AppEvent.recentActivity(

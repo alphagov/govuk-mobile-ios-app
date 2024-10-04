@@ -2,10 +2,10 @@ import SwiftUI
 import UIComponents
 
 struct RecentActivityContainerView: View {
-    @StateObject private var viewModel: RecentActivitiesViewModel
+    @StateObject private var viewModel: RecentActivitiesContainerViewModel
     @FetchRequest(fetchRequest: ActivityItem.fetchRequest()) private var recentItems
 
-    init(viewModel: RecentActivitiesViewModel) {
+    init(viewModel: RecentActivitiesContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -16,12 +16,11 @@ struct RecentActivityContainerView: View {
                 RecentActivityErrorView()
             case (let count) where count >= 1:
                 RecentActivityView(
-                    model: viewModel.sortActivites(
-                        activities: Array(recentItems)
-                    ),
-                    goToLinkAction: { self.viewModel.selected(item: $0) },
-                    selectActivityAction: { self.viewModel.selectItem(activity: $0) },
-                    deletedSelectedActivities: { self.viewModel.deleteActivities() }
+                    viewModel: RecentActivityViewModel(
+                        model: viewModel.sortActivites(
+                            activities: Array(recentItems)
+                        )
+                    )
                 )
                 .accessibilityLabel(
                     Text(viewModel.navigationTitle)

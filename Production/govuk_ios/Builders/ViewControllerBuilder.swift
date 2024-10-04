@@ -89,7 +89,7 @@ class ViewControllerBuilder {
 
     @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
-        let viewModel = RecentActivitiesViewModel(
+        let viewModel = RecentActivitiesContainerViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared
         )

@@ -2,28 +2,24 @@ import SwiftUI
 import CoreData
 
 struct RecentActivityView: View {
-    let model: RecentActivitiesViewStructure
-    let goToLinkAction: (ActivityItem) -> Void
-    let selectActivityAction: (ActivityItem) -> Void
-    let deleteSelectedActivitiesAction: () -> Void
+    @StateObject var viewModel: RecentActivityViewModel
+//    let goToLinkAction: (ActivityItem) -> Void
+//    let selectActivityAction: (ActivityItem) -> Void
+//    let deleteSelectedActivitiesAction: () -> Void
     let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     @Environment(\.managedObjectContext) private var context
     @State var editMode: Bool = false
+    @State var arrAllSelected = false
 
-    init(model: RecentActivitiesViewStructure,
-         goToLinkAction: @escaping (ActivityItem) -> Void,
-         selectActivityAction: @escaping (ActivityItem) -> Void,
-         deletedSelectedActivities: @escaping() -> Void) {
-        self.model = model
-        self.goToLinkAction = goToLinkAction
-        self.selectActivityAction = goToLinkAction
-        self.deleteSelectedActivitiesAction = deletedSelectedActivities
+    init(viewModel: RecentActivityViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
         ScrollView {
-            if model.todaysActivites.count >= 1 {
-                let rows = model.todaysActivites.map({ editActivityRow(activityItem: $0) })
+            if viewModel.model.todaysActivites.count >= 1 {
+                let rows = viewModel.model.todaysActivites
+                    .map({ editActivityRow(activityItem: $0) })
                 GroupedList(
                     content: [
                         GroupedListSection(
@@ -36,8 +32,9 @@ struct RecentActivityView: View {
                     ]
                 )
             }
-            if model.currentMonthActivities.count >= 1 {
-                let rows = model.currentMonthActivities.map { editActivityRow(activityItem: $0) }
+            if viewModel.model.currentMonthActivities.count >= 1 {
+                let rows = viewModel.model.currentMonthActivities
+                    .map { editActivityRow(activityItem: $0) }
                 GroupedList(
                     content: [
                         GroupedListSection(
@@ -50,7 +47,7 @@ struct RecentActivityView: View {
                     ]
                 )
             }
-            if model.recentMonthActivities.count >= 1 {
+            if viewModel.model.recentMonthActivities.count >= 1 {
                 GroupedList(content: buildSectionsView())
             }
         }.toolbar {
@@ -60,7 +57,7 @@ struct RecentActivityView: View {
                         editMode.toggle()
                     }
                     if editMode {
-                        deleteSelectedActivitiesAction()
+                        viewModel.deleteActivities()
                     }
                 }
             }
@@ -73,20 +70,25 @@ struct RecentActivityView: View {
             editMode: editMode,
             title: activityItem.title,
             body: lastVisitedString(activity: activityItem),
+            isSelected: viewModel.selectedActivities
+                .contains(where: { (key: String, _: ActivityItem) in
+                key == activityItem.id
+                }),
+            isWebLink: false,
             action: {
-                self.goToLinkAction(activityItem)
+                viewModel.navigateToBrowser(item: activityItem)
             },
             selectAction: {
-                self.selectActivityAction(activityItem)
+                viewModel.selectAllActivties()
             }
         )
     }
 
     private func buildSectionsView() -> [GroupedListSection] {
-        model.recentMonthActivities.keys
+        viewModel.model.recentMonthActivities.keys
             .sorted { $0 > $1 }
             .map {
-                let items = model.recentMonthActivities[$0]
+                let items = viewModel.model.recentMonthActivities[$0]
                 return GroupedListSection(
                     heading: $0.title,
                     rows: items?.map(editActivityRow) ?? [],

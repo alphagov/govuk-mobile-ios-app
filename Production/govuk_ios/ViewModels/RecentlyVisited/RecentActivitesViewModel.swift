@@ -8,18 +8,20 @@ class RecentActivityViewModel: ObservableObject {
     private let urlOpener: URLOpener
 
     init(model: RecentActivitiesViewStructure,
-         urlOpener: URLOpener,
-         analyticsService: AnalyticsServiceInterface) {
+         urlOpener: URLOpener) {
         self.model = model
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
     }
 
     func deleteActivities() {
+        guard let context = selectedActivities.first?.value.managedObjectContext
+        else { return }
         for activity in selectedActivities {
-            guard let context = activity.value.managedObjectContext else { return }
             context.delete(activity.value)
         }
+        try? context.save()
+        selectedActivities.removeAll()
     }
 
     func navigateToBrowser(item: ActivityItem) {
@@ -31,7 +33,16 @@ class RecentActivityViewModel: ObservableObject {
     }
 
     func isActivitySelected(id: String) -> Bool {
-        return selectedActivities[id] != nil ? true : false
+        return selectedActivities[id] != nil
+    }
+
+    private func trackSelection(activity: ActivityItem) {
+        let event = AppEvent.recentActivity(
+            activity: activity.title
+        )
+        analyticsService.track(
+            event: event
+        )
     }
 
     func selectAcvtivity(activity: ActivityItem) {
@@ -46,11 +57,9 @@ class RecentActivityViewModel: ObservableObject {
         for item in model.todaysActivites {
             selectedActivities[item.id] = item
         }
-
         for item in model.currentMonthActivities {
             selectedActivities[item.id] = item
         }
-
         for (_, value) in model.recentMonthActivities {
             for activity in value {
                 selectedActivities[activity.id] = activity

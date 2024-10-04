@@ -19,11 +19,9 @@ struct RecentActivityContainerView: View {
                     viewModel: RecentActivityViewModel(
                         model: viewModel.sortActivites(
                             activities: Array(recentItems)
-                        )
+                        ),
+                        urlOpener: UIApplication.shared
                     )
-                )
-                .accessibilityLabel(
-                    Text(viewModel.navigationTitle)
                 )
             default:
                 ProgressView()

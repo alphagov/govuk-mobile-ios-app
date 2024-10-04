@@ -69,14 +69,14 @@ class RecentActivitiesContainerViewModel: ObservableObject {
 //        }
 //    }
 
-    private func trackSelection(activity: ActivityItem) {
-        let event = AppEvent.recentActivity(
-            activity: activity.title
-        )
-        analyticsService.track(
-            event: event
-        )
-    }
+//    private func trackSelection(activity: ActivityItem) {
+//        let event = AppEvent.recentActivity(
+//            activity: activity.title
+//        )
+//        analyticsService.track(
+//            event: event
+//        )
+//    }
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)

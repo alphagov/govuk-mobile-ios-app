@@ -75,11 +75,9 @@ struct LinkRowView: View {
 
 struct EditLinkRowView: View {
     @ObservedObject var row: EditLinkRow
-   // @State var isSelected: Bool
 
     init(row: EditLinkRow) {
         self.row = row
-        // _isSelected = State(wrappedValue: row.isSelected)
     }
 
     var body: some View {

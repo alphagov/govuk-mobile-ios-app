@@ -2,21 +2,22 @@ import SwiftUI
 import CoreData
 
 struct RecentActivityView: View {
-    @StateObject var viewModel: RecentActivityViewModel
-//    let goToLinkAction: (ActivityItem) -> Void
-//    let selectActivityAction: (ActivityItem) -> Void
-//    let deleteSelectedActivitiesAction: () -> Void
+    @ObservedObject var viewModel: RecentActivityViewModel
     let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     @Environment(\.managedObjectContext) private var context
-    @State var editMode: Bool = false
-    @State var arrAllSelected = false
+    @State private var editMode: Bool = false
+
 
     init(viewModel: RecentActivityViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        // _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
 
     var body: some View {
         ScrollView {
+            Text("Delete").onTapGesture {
+                viewModel.deleteActivities()
+            }
             if viewModel.model.todaysActivites.count >= 1 {
                 let rows = viewModel.model.todaysActivites
                     .map({ editActivityRow(activityItem: $0) })
@@ -56,9 +57,9 @@ struct RecentActivityView: View {
                     withAnimation {
                         editMode.toggle()
                     }
-                    if editMode {
-                        viewModel.deleteActivities()
-                    }
+//                    if editMode {
+//                        viewModel.deleteActivities()
+//                    }
                 }
             }
         }
@@ -79,7 +80,7 @@ struct RecentActivityView: View {
                 viewModel.navigateToBrowser(item: activityItem)
             },
             selectAction: {
-                viewModel.selectAllActivties()
+                viewModel.selectAcvtivity(activity: activityItem)
             }
         )
     }

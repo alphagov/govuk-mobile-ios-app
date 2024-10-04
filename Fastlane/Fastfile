@@ -94,7 +94,6 @@ platform :ios do
 
   private_lane :app_store do
     pilot(
-      username: configuration.deliver_username,
       app_identifier: configuration.app_bundle_identifier,
       distribute_external: true,
       notify_external_testers: false,

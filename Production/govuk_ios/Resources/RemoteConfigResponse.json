@@ -6,7 +6,8 @@
     "recommendedVersion": "1.2.0",
     "releaseFlags": {
       "search": true,
-      "onboarding": false
+      "onboarding": false,
+      "topics": true
     },
     "lastUpdated": "2024-08-15T09:57:45.110Z"
   },

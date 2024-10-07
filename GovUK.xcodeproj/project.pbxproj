@@ -288,6 +288,9 @@
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
 		D093BA612CAF02D4004F489B /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE71AF2CAE8371004ABB5E /* Bundle+Tests.swift */; };
+		D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA622CB0499A004F489B /* EditTopicsView.swift */; };
+		D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */; };
+		D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */; };
 		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
 		D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */; };
@@ -612,6 +615,9 @@
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
 		D06EB96B2CA6F71E007EA081 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
+		D093BA622CB0499A004F489B /* EditTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsView.swift; sourceTree = "<group>"; };
+		D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsViewModel.swift; sourceTree = "<group>"; };
+		D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsCoordinator.swift; sourceTree = "<group>"; };
 		D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = integration_pubkey.der; sourceTree = "<group>"; };
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoderTests.swift; sourceTree = "<group>"; };
@@ -1242,6 +1248,7 @@
 				16EE1A442C6F8ED3005E820F /* SearchCoordinator.swift */,
 				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
+				D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1693,6 +1700,7 @@
 			children = (
 				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
 				D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */,
+				D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -1719,6 +1727,7 @@
 			isa = PBXGroup;
 			children = (
 				D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */,
+				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -2028,6 +2037,7 @@
 				D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */,
 				16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */,
 				163800FF2C99DAF900C3DDD1 /* ListInformationView.swift in Sources */,
+				D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */,
 				5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */,
 				168F6FAA2C4FC56B00A0D7F7 /* WidgetViewModel.swift in Sources */,
 				16F961A72C989165005CFB04 /* SearchResult.swift in Sources */,
@@ -2063,6 +2073,7 @@
 				5DF8854B2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
+				D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */,
 				D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
 				5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */,
@@ -2127,6 +2138,7 @@
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */,
+				D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				5DE74DE32CB538E9000B43B5 /* RecentActivityListViewController.swift in Sources */,
 				5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */,

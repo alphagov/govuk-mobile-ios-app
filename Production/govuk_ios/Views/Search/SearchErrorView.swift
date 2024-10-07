@@ -60,8 +60,7 @@ class SearchErrorView: UIView {
         errorDescription.text = errorDesc
         errorLink = link
 
-        guard link != nil
-        else { return errorLinkButton.isHidden = true }
+        errorLinkButton.isHidden = (link == nil)
 
         var errorLinkButtonButtonViewModel: GOVUKButton.ButtonViewModel {
             .init(

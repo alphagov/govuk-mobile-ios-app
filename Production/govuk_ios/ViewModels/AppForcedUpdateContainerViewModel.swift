@@ -8,7 +8,6 @@ class AppForcedUpdateContainerViewModel: ObservableObject {
     let title = String.appAvailability.localized("forcedUpdateTitle")
     let subheading = String.appAvailability.localized("forcedUpdateSubheading")
     let updateButtonTitle = String.appAvailability.localized("updateButtonTitle")
-    let appStoreAppUrl = Constants.API.appStoreAppUrl
 
     var updateButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
@@ -24,6 +23,6 @@ class AppForcedUpdateContainerViewModel: ObservableObject {
     }
 
     func openAppInAppStore() {
-        urlOpener.openIfPossible(appStoreAppUrl)
+        urlOpener.openIfPossible(Constants.API.appStoreAppUrl)
     }
 }

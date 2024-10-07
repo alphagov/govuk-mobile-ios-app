@@ -8,7 +8,7 @@ import Testing
 @MainActor
 struct AppForcedUpdateCoordinatorTests {
     @Test
-    func start_isAppForcedUpdate_falseCallsDismiss() async {
+    func start_noUpdateRequired_callsDismiss() async {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppForcedUpdate = false
         await withCheckedContinuation { continuation in
@@ -24,7 +24,7 @@ struct AppForcedUpdateCoordinatorTests {
     }
 
     @Test
-    func start_isAppForcedUpdate_trueDoesntCallDismiss() async throws {
+    func start_updateRequired_doesntCallDismiss() async throws {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppForcedUpdate = true
         let started: Bool = try await withCheckedThrowingContinuation { continuation in

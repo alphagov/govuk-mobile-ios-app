@@ -5,11 +5,14 @@ final class TopicsWidgetViewModel {
     var topics = [Topic]()
     let topicsService: TopicsServiceInterface
     let topicAction: ((Topic) -> Void)?
+    let editAction: (([Topic]) -> Void)?
 
     init(topicsService: TopicsServiceInterface,
-         topicAction: ((Topic) -> Void)?) {
+         topicAction: ((Topic) -> Void)?,
+         editAction: (([Topic]) -> Void)?) {
         self.topicsService = topicsService
         self.topicAction = topicAction
+        self.editAction = editAction
     }
 
     func fetchTopics(completion: FetchTopicsListResult?) {
@@ -27,5 +30,10 @@ final class TopicsWidgetViewModel {
         )
         analyticsService.track(event: event)
         action(topic)
+    }
+
+    @objc
+    func didTapEdit() {
+        editAction?(self.topics)
     }
 }

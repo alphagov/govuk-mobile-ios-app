@@ -4,6 +4,7 @@ class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
 
     private var rowCount = 2
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.govUK.title3Semibold
@@ -11,6 +12,37 @@ class TopicsWidgetView: UIView {
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
         label.text = String.home.localized("topicsWidgetTitle")
         return label
+    }()
+
+    private lazy var editButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(String.common.localized("editButtonTitle"), for: .normal)
+        button.titleLabel?.font = UIFont.govUK.bodySemibold
+        button.addTarget(viewModel,
+                         action: #selector(viewModel.didTapEdit),
+                         for: .touchUpInside
+        )
+        return button
+    }()
+
+    private lazy var headerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.alignment = .bottom
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private lazy var cardStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
 
     private lazy var stackView: UIStackView = {
@@ -39,7 +71,10 @@ class TopicsWidgetView: UIView {
     }
 
     private func configureUI() {
-        stackView.addArrangedSubview(titleLabel)
+        headerStackView.addArrangedSubview(titleLabel)
+        headerStackView.addArrangedSubview(editButton)
+        stackView.addArrangedSubview(headerStackView)
+        stackView.addArrangedSubview(cardStackView)
         addSubview(stackView)
     }
 
@@ -50,15 +85,30 @@ class TopicsWidgetView: UIView {
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
+
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: headerStackView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: headerStackView.trailingAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: cardStackView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: cardStackView.trailingAnchor)
+        ])
     }
 
     private func updateTopics(_ topics: [Topic]) {
+        cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createNewRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false
-            stackView.addArrangedSubview(rowStack)
-            rowStack.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-            rowStack.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+            cardStackView.addArrangedSubview(rowStack)
+            rowStack.leadingAnchor.constraint(
+                equalTo: cardStackView.leadingAnchor
+            ).isActive = true
+            rowStack.trailingAnchor.constraint(
+                equalTo: cardStackView.trailingAnchor
+            ).isActive = true
         }
     }
 
@@ -97,14 +147,6 @@ class TopicsWidgetView: UIView {
         return topicCard
     }
 
-    private func resetRows() {
-        stackView.arrangedSubviews.forEach { view in
-            if view is UIStackView {
-                view.removeFromSuperview()
-            }
-        }
-    }
-
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -113,7 +155,6 @@ class TopicsWidgetView: UIView {
         super.traitCollectionDidChange(previousTraitCollection)
         let sizeClass = UITraitCollection.current.verticalSizeClass
         rowCount = sizeClass == .regular ? 2 : 4
-        resetRows()
         updateTopics(viewModel.topics)
     }
 }

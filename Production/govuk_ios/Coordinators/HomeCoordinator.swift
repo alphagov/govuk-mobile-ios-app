@@ -29,9 +29,8 @@ class HomeCoordinator: TabItemCoordinator {
         let viewController = viewControllerBuilder.home(
             searchButtonPrimaryAction: searchActionButtonPressed,
             configService: configService,
-            topicsService: topicsService,
             recentActivityAction: recentActivityCoordinator,
-            topicAction: topicAction
+            topicWidgetViewModel: topicWidgetViewModel
         )
         set([viewController], animated: false)
     }
@@ -67,6 +66,13 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
+    private var topicWidgetViewModel: TopicsWidgetViewModel {
+        let viewModel = TopicsWidgetViewModel(topicsService: topicsService,
+                                              topicAction: topicAction,
+                                              editAction: editTopicsAction)
+        return viewModel
+    }
+
     private var topicAction: (Topic) -> Void {
         return { [weak self] topic in
             guard let self = self else { return }
@@ -75,6 +81,21 @@ class HomeCoordinator: TabItemCoordinator {
                 navigationController: self.root
             )
             start(coordinator)
+        }
+    }
+
+    private var editTopicsAction: ([Topic]) -> Void {
+        return { [weak self] topics in
+            guard let self = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = self.coordinatorBuilder.editTopics(
+                topics,
+                navigationControlloer: navigationController,
+                didDismissAction: {
+                    self.root.viewWillReAppear()
+                }
+            )
+            self.present(coordinator)
         }
     }
 }

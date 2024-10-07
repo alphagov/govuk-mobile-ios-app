@@ -49,15 +49,13 @@ class ViewControllerBuilder {
     @MainActor
     func home(searchButtonPrimaryAction: @escaping () -> Void,
               configService: AppConfigServiceInterface,
-              topicsService: TopicsServiceInterface,
               recentActivityAction: @escaping () -> Void,
-              topicAction: @escaping (Topic) -> Void) -> UIViewController {
+              topicWidgetViewModel: TopicsWidgetViewModel) -> UIViewController {
         let viewModel = HomeViewModel(
             configService: configService,
-            topicsService: topicsService,
             searchButtonPrimaryAction: searchButtonPrimaryAction,
             recentActivityAction: recentActivityAction,
-            topicAction: topicAction
+            topicWidgetViewModel: topicWidgetViewModel
         )
         return HomeViewController(
             viewModel: viewModel
@@ -106,11 +104,23 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func topicDetail(topic: Topic,
+    func topicDetail(topic: Topic?,
                      analyticsService: AnalyticsServiceInterface
     ) -> UIViewController {
         var view = TopicDetailView()
         view.topic = topic
+        return HostingViewController(rootView: view)
+    }
+
+    @MainActor
+    func editTopics(_ topics: [Topic],
+                    analyicsService: AnalyticsServiceInterface,
+                    dismissAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = EditTopicsViewModel(topics: topics,
+                                            dismissAction: dismissAction)
+        let view = EditTopicsView(
+            viewModel: viewModel
+        )
         return HostingViewController(rootView: view)
     }
 }

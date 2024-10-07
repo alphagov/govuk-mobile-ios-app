@@ -20,7 +20,9 @@ class RecentActivityViewModel: ObservableObject {
         for activity in selectedActivities {
             context.delete(activity.value)
         }
-        try? context.save()
+        Task(priority: .background) {
+            try? context.save()
+        }
         selectedActivities.removeAll()
     }
 
@@ -60,8 +62,8 @@ class RecentActivityViewModel: ObservableObject {
         for item in model.currentMonthActivities {
             selectedActivities[item.id] = item
         }
-        for (_, value) in model.recentMonthActivities {
-            for activity in value {
+        for (_, activities) in model.recentMonthActivities {
+            for activity in activities {
                 selectedActivities[activity.id] = activity
             }
         }

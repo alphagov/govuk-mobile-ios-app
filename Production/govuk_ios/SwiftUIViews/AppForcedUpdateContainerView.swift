@@ -41,7 +41,7 @@ struct AppForcedUpdateContainerView: View {
             .frame(minHeight: 44, idealHeight: 44)
             .padding([.top, .horizontal], 16)
             .padding(.bottom, 32)
-        }.edgesIgnoringSafeArea(.bottom)
+        }.edgesIgnoringSafeArea([.bottom, .horizontal])
     }
 }
 

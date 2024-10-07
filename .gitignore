@@ -96,7 +96,6 @@ secrets.xcconfig
 
 #Build
 build_output/
-Package.resolved
 
 #Unit tests
 build_for_unit_testing/

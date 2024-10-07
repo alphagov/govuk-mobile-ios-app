@@ -2,6 +2,8 @@
 
 require_relative 'configuration'
 
+opt_out_usage
+
 default_platform :ios
 
 # rubocop:disable Metrics/BlockLength

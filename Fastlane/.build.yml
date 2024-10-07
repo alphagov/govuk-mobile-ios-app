@@ -5,7 +5,6 @@ default: &DEFAULTS
     display_name: Gov.UK - Dev
     output_directory: build_output
     project: GovUK.xcodeproj
-    workspace: GovUK.xcworkspace
     bundle_identifier: uk.gov.govuk
     profile_specifiers:
       uk.gov.govuk: "match AppStore uk.gov.govuk"

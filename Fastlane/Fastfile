@@ -45,7 +45,7 @@ platform :ios do
 
   private_lane :build do |options|
     gym(
-      workspace: configuration.app_workspace,
+      project: configuration.app_project,
       scheme: configuration.app_scheme,
       configuration: configuration.app_configuration,
       output_directory: configuration.app_output_directory,
@@ -75,14 +75,6 @@ platform :ios do
       #{lane_context[SharedValues::SCAN_GENERATED_XCRESULT_PATH]} \
       >../#{configuration.app_output_directory}/sonarqube-generic-coverage.xml"
     )
-    # slather(
-    #   build_directory: configuration.app_output_directory,
-    #   output_directory: configuration.app_output_directory,
-    #   sonarqube_xml: true,
-    #   scheme: configuration.app_scheme,
-    #   proj: configuration.app_project,
-    #   workspace: configuration.app_workspace
-    # )
   end
 
   private_lane :update_build_number do

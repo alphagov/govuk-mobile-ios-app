@@ -3,12 +3,14 @@ import Foundation
 protocol AppConfigServiceInterface {
     var isAppAvailable: Bool { get }
     var isAppForcedUpdate: Bool { get }
+    var isAppRecommendUpdate: Bool { get }
     func isFeatureEnabled(key: Feature) -> Bool
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
     var isAppAvailable: Bool = false
     var isAppForcedUpdate: Bool = false
+    var isAppRecommendUpdate: Bool = false
     private var featureFlags: [String: Bool] = [:]
 
     private let appConfigRepository: AppConfigRepositoryInterface
@@ -55,6 +57,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         self.isAppAvailable = config.available
         let appVersionNumber = appVersionProvider.versionNumber ?? ""
         self.isAppForcedUpdate = appVersionNumber.isVersion(lessThan: config.minimumVersion)
+        self.isAppRecommendUpdate = appVersionNumber.isVersion(lessThan: config.recommendedVersion)
         self.featureFlags = self.featureFlags.merging(
             config.releaseFlags,
             uniquingKeysWith: { _, new in

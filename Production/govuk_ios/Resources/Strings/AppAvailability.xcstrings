@@ -1,28 +1,28 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
-      "forcedUpdateSubheading" : {
-        "extractionState" : "manual",
-        "localizations" : {
-          "en-GB" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "You're using an old version of the app. Update your app to continue."
-            }
+    "forcedUpdateSubheading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're using an old version of the app. Update your app to continue."
           }
         }
-      },
-      "forcedUpdateTitle" : {
-        "extractionState" : "manual",
-        "localizations" : {
-          "en-GB" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "You need to update your app"
-            }
+      }
+    },
+    "forcedUpdateTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need to update your app"
           }
         }
-      },
+      }
+    },
     "goToGovUkAccessibilityButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -45,6 +45,28 @@
         }
       }
     },
+    "recommendUpdateSubheading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can update your app if you want to get the latest features and improvements."
+          }
+        }
+      }
+    },
+    "recommendUpdateTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’re using an old version of the app"
+          }
+        }
+      }
+    },
     "unavailableSubheading" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -57,15 +79,15 @@
       }
     },
     "unavailableTitle" : {
-        "extractionState" : "manual",
-        "localizations" : {
-            "en-GB" : {
-                "stringUnit" : {
-                    "state" : "translated",
-                    "value" : "Sorry, the app is unavailable"
-                }
-            }
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorry, the app is unavailable"
+          }
         }
+      }
     },
     "updateButtonTitle" : {
       "extractionState" : "manual",

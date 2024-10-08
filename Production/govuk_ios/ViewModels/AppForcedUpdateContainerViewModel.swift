@@ -22,7 +22,7 @@ class AppForcedUpdateContainerViewModel: ObservableObject {
         self.urlOpener = urlOpener
     }
 
-    func openAppInAppStore() {
+    private func openAppInAppStore() {
         urlOpener.openIfPossible(Constants.API.appStoreAppUrl)
     }
 }

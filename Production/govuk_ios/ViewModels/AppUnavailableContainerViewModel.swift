@@ -26,7 +26,7 @@ class AppUnavailableContainerViewModel: ObservableObject {
         self.urlOpener = urlOpener
     }
 
-    func openGovUk() {
+    private func openGovUk() {
         urlOpener.openIfPossible(govUkUrl)
     }
 }

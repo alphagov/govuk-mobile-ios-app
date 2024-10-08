@@ -18,12 +18,12 @@ struct AppUnavailableViewModelTests {
     }
 
     @Test
-    func openGovUk_opensURL() {
+    func goToGovUkButtonAction_opensURL() {
         let urlOpener = MockURLOpener()
         let sut = AppUnavailableContainerViewModel(
             urlOpener: urlOpener
         )
-        sut.openGovUk()
+        sut.goToGovUkButtonViewModel.action()
         #expect(urlOpener._receivedOpenIfPossibleUrlString == "https://www.gov.uk")
     }
 }

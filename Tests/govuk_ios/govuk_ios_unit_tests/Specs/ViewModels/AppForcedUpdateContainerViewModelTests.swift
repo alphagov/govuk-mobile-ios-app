@@ -15,12 +15,12 @@ struct AppForcedUpdateContainerViewModelTests {
     }
 
     @Test
-    func openAppStoreAppUrl_opensURL() throws {
+    func updateButtonAction_opensURL() throws {
         let urlOpener = MockURLOpener()
         let sut = AppForcedUpdateContainerViewModel(
             urlOpener: urlOpener
         )
-        sut.openAppInAppStore()
+        sut.updateButtonViewModel.action()
         #expect(urlOpener._receivedOpenIfPossibleUrlString ==
                        "https://beta.itunes.apple.com/v1/app/6572293285")
     }

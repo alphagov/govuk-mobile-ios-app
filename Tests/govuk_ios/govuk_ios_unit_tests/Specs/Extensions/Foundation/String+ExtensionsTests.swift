@@ -129,4 +129,63 @@ struct String_ExtensionsTests {
         #expect(expected == "Child benefit CD 98 76 54 A allowance".redactPii())
         #expect(expected == "Child benefit CD  98  76  54  A allowance".redactPii())
     }
+
+    @Test(arguments: zip(
+        [
+            "1.0.0",
+            "1",
+            "1.0",
+            "1.0.0",
+            "0.0.100"
+        ],
+        [
+            "1.0.1",
+            "2.0.0",
+            "2.0",
+            "2",
+            "100.0.0"
+        ]
+    ))
+    func isVersion_lessThanTarget_returnsTrue(version: String, targetVersion: String) {
+        let result = version.isVersion(lessThan: targetVersion)
+        #expect(result == true)
+    }
+
+    @Test(arguments: zip(
+        [
+            "1.0.1",
+            "2.0.0",
+            "2.0",
+            "2",
+            "100.0.0"
+        ],
+        [
+            "1.0.0",
+            "1",
+            "1.0",
+            "1.0.0",
+            "0.0.100"
+        ]
+    ))
+    func isVersion_notLessThanTarget_returnsFalse(version: String, targetVersion: String) {
+        let result = version.isVersion(lessThan: targetVersion)
+        #expect(result == false)
+    }
+
+    @Test(arguments: zip(
+        [
+            "100.0.0",
+            "0.100.0",
+            "0.0.100"
+        ],
+        [
+            "100.0.0",
+            "0.100.0",
+            "0.0.100"
+        ]
+    ))
+    func isVersion_equalToTarget_returnsFalse(version: String, targetVersion: String) {
+        let result = version.isVersion(lessThan: targetVersion)
+        #expect(result == false)
+    }
 }

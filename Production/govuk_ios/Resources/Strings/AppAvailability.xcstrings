@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+      "forcedUpdateSubheading" : {
+        "extractionState" : "manual",
+        "localizations" : {
+          "en-GB" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "You're using an old version of the app. Update your app to continue."
+            }
+          }
+        }
+      },
+      "forcedUpdateTitle" : {
+        "extractionState" : "manual",
+        "localizations" : {
+          "en-GB" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "You need to update your app"
+            }
+          }
+        }
+      },
     "goToGovUkAccessibilityButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -35,12 +57,23 @@
       }
     },
     "unavailableTitle" : {
+        "extractionState" : "manual",
+        "localizations" : {
+            "en-GB" : {
+                "stringUnit" : {
+                    "state" : "translated",
+                    "value" : "Sorry, the app is unavailable"
+                }
+            }
+        }
+    },
+    "updateButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sorry, the app is unavailable"
+            "value" : "Update"
           }
         }
       }

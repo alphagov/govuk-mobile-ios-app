@@ -2,11 +2,11 @@ import SwiftUI
 import UIComponents
 
 struct RecentActivityContainerView: View {
-    @StateObject private var viewModel: RecentActivitiesViewModel
+    @ObservedObject private var viewModel: RecentActivitiesViewModel
     @FetchRequest(fetchRequest: ActivityItem.fetchRequest()) private var recentItems
 
     init(viewModel: RecentActivitiesViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -16,10 +16,12 @@ struct RecentActivityContainerView: View {
                 RecentActivityErrorView()
             case (let count) where count >= 1:
                 RecentActivityView(
-                    model: viewModel.sortActivites(
-                        activities: Array(recentItems)
-                    ),
-                    selected: { self.viewModel.selected(item: $0) }
+                    viewModel: RecentActivityViewModel(
+                        model: viewModel.sortActivites(
+                            activities: Array(recentItems)
+                        ),
+                        urlOpener: UIApplication.shared
+                    )
                 )
             default:
                 ProgressView()

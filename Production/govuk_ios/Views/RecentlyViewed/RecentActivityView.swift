@@ -2,21 +2,18 @@ import SwiftUI
 import CoreData
 
 struct RecentActivityView: View {
-    let model: RecentActivitiesViewStructure
-    let selected: (ActivityItem) -> Void
+    @ObservedObject var viewModel: RecentActivityViewModel
     let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
-    @Environment(\.managedObjectContext) private var context
+    @State private var showingAlert: Bool = false
 
-    init(model: RecentActivitiesViewStructure,
-         selected: @escaping (ActivityItem) -> Void) {
-        self.model = model
-        self.selected = selected
+    init(viewModel: RecentActivityViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
         ScrollView {
-            if model.todaysActivites.count >= 1 {
-                let rows = model.todaysActivites.map({
+            if viewModel.model.todaysActivites.count >= 1 {
+                let rows = viewModel.model.todaysActivites.map({
                     activityRow(activityItem: $0)
                 })
                 GroupedList(
@@ -31,8 +28,9 @@ struct RecentActivityView: View {
                     ]
                 )
             }
-            if model.currentMonthActivities.count >= 1 {
-                let rows = model.currentMonthActivities.map { activityRow(activityItem: $0) }
+            if viewModel.model.currentMonthActivities.count >= 1 {
+                let rows = viewModel.model.currentMonthActivities
+                    .map { activityRow(activityItem: $0) }
                 GroupedList(
                     content: [
                         GroupedListSection(
@@ -45,8 +43,27 @@ struct RecentActivityView: View {
                     ]
                 )
             }
-            if model.recentMonthActivities.count >= 1 {
+            if viewModel.model.recentMonthActivities.count >= 1 {
                 GroupedList(content: buildSectionsView())
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    showingAlert.toggle()
+                } label: {
+                    Text("Clear")
+                }.alert(isPresented: $showingAlert, content: {
+                    Alert(title: Text("Are you sure you want to clear history"),
+                          dismissButton: Alert.Button.cancel(
+                            Text("Clear"), action: {
+                                withAnimation {
+                                    viewModel.deleteActivities()
+                                }
+                            }
+                          )
+                    )
+                })
             }
         }
     }
@@ -57,16 +74,16 @@ struct RecentActivityView: View {
             title: activityItem.title,
             body: lastVisitedString(activity: activityItem),
             action: {
-                self.selected(activityItem)
+                viewModel.navigateToBrowser(item: activityItem)
             }
         )
     }
 
     private func buildSectionsView() -> [GroupedListSection] {
-        model.recentMonthActivities.keys
+        viewModel.model.recentMonthActivities.keys
             .sorted { $0 > $1 }
             .map {
-                let items = model.recentMonthActivities[$0]
+                let items = viewModel.model.recentMonthActivities[$0]
                 return GroupedListSection(
                     heading: $0.title,
                     rows: items?.map(activityRow) ?? [],

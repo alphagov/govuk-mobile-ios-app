@@ -264,6 +264,7 @@
 		5DE2BBBD2C982824003116B6 /* MockURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEC85AC2C89DBED0044D5F9 /* MockURLOpener.swift */; };
 		5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* APIServiceClient.swift */; };
 		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
+		5DE74DE32CB538E9000B43B5 /* GroupedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE74DE22CB538E9000B43B5 /* GroupedListViewController.swift */; };
 		5DE970542C297652009D66C4 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970532C297652009D66C4 /* AppEvent.swift */; };
 		5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */; };
 		5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */; };
@@ -588,6 +589,7 @@
 		5DE283502CAC492B00E95800 /* MockActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActivityRepository.swift; sourceTree = "<group>"; };
 		5DE283522CAC4EBA00E95800 /* ActivityRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRepositoryTests.swift; sourceTree = "<group>"; };
 		5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
+		5DE74DE22CB538E9000B43B5 /* GroupedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListViewController.swift; sourceTree = "<group>"; };
 		5DE970532C297652009D66C4 /* AppEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
 		5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Convenience.swift"; sourceTree = "<group>"; };
 		5DE9705B2C2987C4009D66C4 /* AnalyticsPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPermissionState.swift; sourceTree = "<group>"; };
@@ -1400,6 +1402,7 @@
 			isa = PBXGroup;
 			children = (
 				5DBE080B2C4812ED00B58DBE /* BaseViewController.swift */,
+				5DE74DE22CB538E9000B43B5 /* GroupedListViewController.swift */,
 				166BDDB52C330D1C00437AE0 /* HomeViewController.swift */,
 				5D00E9542CA544F200775D2B /* HostingViewController.swift */,
 				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
@@ -2135,6 +2138,7 @@
 				5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
+				5DE74DE32CB538E9000B43B5 /* GroupedListViewController.swift in Sources */,
 				5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,

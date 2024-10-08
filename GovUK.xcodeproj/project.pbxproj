@@ -1610,12 +1610,12 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D041917C2CA57B3D0034722A /* Topics */,
 				5DE970522C297642009D66C4 /* Analytics */,
 				4E003E7D2C75F497008FCBF2 /* AppConfig */,
 				4E94E8D32C8B188700906803 /* RecentActivity */,
 				16F961A42C989129005CFB04 /* SearchItem.swift */,
 				16F961A62C989165005CFB04 /* SearchResult.swift */,
+				D041917C2CA57B3D0034722A /* Topics */,
 			);
 			path = Model;
 			sourceTree = "<group>";

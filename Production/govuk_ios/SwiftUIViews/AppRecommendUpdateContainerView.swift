@@ -39,14 +39,14 @@ struct AppRecommendUpdateContainerView: View {
                     viewModel: viewModel.updateButtonViewModel
                 )
                 .frame(minHeight: 44, idealHeight: 44)
-                .padding(.horizontal, 15)
+                .padding(.horizontal, 16)
                 .accessibilityLabel(Text(viewModel.updateButtonTitle))
                 SwiftUIButton(
                     .secondary,
                     viewModel: viewModel.skipButtonViewModel
                 )
                 .frame(minHeight: 44, idealHeight: 44)
-                .padding(.horizontal, 15)
+                .padding(.horizontal, 16)
                 .accessibilityLabel(Text(viewModel.skipButtonTitle))
             }
             .padding(.top, 16)

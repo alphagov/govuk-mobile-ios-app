@@ -8,7 +8,7 @@ import Testing
 @MainActor
 struct AppRecommendUpdateCoordinatorTests {
     @Test
-    func start_noRecommendUpdateRequired_callsDismiss() async {
+    func start_dontRecommendUpdate_callsDismiss() async {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppRecommendUpdate = false
         await withCheckedContinuation { continuation in
@@ -24,7 +24,7 @@ struct AppRecommendUpdateCoordinatorTests {
     }
 
     @Test
-    func start_recommendUpdateRequired_doesntCallDismiss() async throws {
+    func start_recommendUpdate_doesntCallDismiss() async throws {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppRecommendUpdate = true
         let started: Bool = try await withCheckedThrowingContinuation { continuation in

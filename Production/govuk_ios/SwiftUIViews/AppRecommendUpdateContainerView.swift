@@ -47,6 +47,7 @@ struct AppRecommendUpdateContainerView: View {
                 )
                 .frame(minHeight: 44, idealHeight: 44)
                 .padding(.horizontal, 15)
+                .accessibilityLabel(Text(viewModel.skipButtonTitle))
             }
             .padding(.top, 16)
             .padding(.bottom, 32)

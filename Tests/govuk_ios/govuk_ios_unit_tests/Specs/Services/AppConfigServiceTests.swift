@@ -90,7 +90,7 @@ struct AppConfigServiceTests {
     }
 
     @Test
-    func repository_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendVersionInConfig_returnsTrue() {
+    func repository_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsTrue() {
         let mockAppVersionProvider = MockAppVersionProvider()
         mockAppVersionProvider.versionNumber = "0.0.1"
         let sut = AppConfigService(
@@ -105,7 +105,7 @@ struct AppConfigServiceTests {
     }
 
     @Test
-    func repository_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendVersionInConfig_returnsFalse() {
+    func repository_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsFalse() {
         let mockAppVersionProvider = MockAppVersionProvider()
         mockAppVersionProvider.versionNumber = "1.0.0"
         let sut = AppConfigService(
@@ -190,7 +190,7 @@ struct AppConfigServiceTests {
     }
 
     @Test
-    func serviceClient_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendVersionInConfig_returnsTrue() {
+    func serviceClient_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsTrue() {
         let mockAppVersionProvider = MockAppVersionProvider()
         mockAppVersionProvider.versionNumber = "0.0.1"
         let sut = AppConfigService(
@@ -205,7 +205,7 @@ struct AppConfigServiceTests {
     }
 
     @Test
-    func serviceClient_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendVersionInConfig_returnsFalse() {
+    func serviceClient_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsFalse() {
         let mockAppVersionProvider = MockAppVersionProvider()
         mockAppVersionProvider.versionNumber = "1.0.0"
         let sut = AppConfigService(

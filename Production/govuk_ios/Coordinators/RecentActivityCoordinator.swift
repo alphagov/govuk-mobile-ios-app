@@ -14,9 +14,10 @@ class RecentActivityCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.recentActivity(
-            analyticsService: analyticsService
-        )
+//        let viewController = viewControllerBuilder.recentActivity(
+//            analyticsService: analyticsService
+//        )
+        let viewController = GroupedListViewController(viewModel: .init())
         push(viewController, animated: true)
     }
 }

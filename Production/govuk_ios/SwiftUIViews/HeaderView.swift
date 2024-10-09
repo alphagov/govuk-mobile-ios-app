@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct HeaderView: View {
-    @Environment(\.verticalSizeClass) var verticalSizeClass
-
     private let title: String
     private let subheading: String
 

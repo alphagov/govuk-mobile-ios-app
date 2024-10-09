@@ -20,7 +20,7 @@ class GroupedListViewController: UIViewController,
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 60
         tableView.separatorStyle = .none
-        //        tableView.backgroundColor = UIColor.govUK.fills.surfaceModal
+        tableView.backgroundColor = .clear
         return tableView
     }()
 
@@ -53,10 +53,10 @@ class GroupedListViewController: UIViewController,
         fatalError("init(coder:) has not been implemented")
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        tableView.setEditing(true, animated: animated)
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.setEditing(true, animated: animated)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +68,14 @@ class GroupedListViewController: UIViewController,
     }
 
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(tableView)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(
-                equalTo: view.topAnchor,
-                constant: 16
+                equalTo: view.topAnchor
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,
@@ -116,7 +115,7 @@ class GroupedListViewController: UIViewController,
 class GroupedListTableViewCell: UITableViewCell {
     private lazy var borderLayer: CAShapeLayer = {
         let borderLayer = CAShapeLayer()
-        borderLayer.lineWidth = 1
+        borderLayer.lineWidth = 0.5
         borderLayer.strokeColor = UIColor.govUK.strokes.listDivider.cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
         return borderLayer
@@ -125,7 +124,7 @@ class GroupedListTableViewCell: UITableViewCell {
     private lazy var separatorView: UIView = {
         let localView = UIView()
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        localView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         localView.backgroundColor = UIColor.govUK.strokes.listDivider
         return localView
     }()
@@ -138,11 +137,13 @@ class GroupedListTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layer.addSublayer(borderLayer)
         layer.masksToBounds = true
-        addSubview(separatorView)
+        contentView.addSubview(separatorView)
         separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        separatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-//        contentView.backgroundColor = .red
+        separatorView.leftAnchor.constraint(
+            equalTo: contentView.leftAnchor,
+            constant: 16
+        ).isActive = true
         clipsToBounds = true
     }
 
@@ -157,7 +158,7 @@ class GroupedListTableViewCell: UITableViewCell {
         self.isTop = top
         self.isBottom = bottom
         updateMask()
-//        separatorView.isHidden = bottom
+        separatorView.isHidden = bottom
     }
 
     override func layoutSubviews() {

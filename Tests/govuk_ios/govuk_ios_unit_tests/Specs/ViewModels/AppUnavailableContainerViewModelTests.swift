@@ -11,7 +11,7 @@ struct AppUnavailableViewModelTests {
 
         #expect(sut.title == "Sorry, the app is unavailable")
         #expect(sut.subheading == "You cannot use the GOV.UK app at the moment. Try again later.")
-        #expect(sut.goToGovUkButtonTitle == "Go to GOV.UK ↗")
+        #expect(sut.goToGovUkButtonTitle == "Go to the GOV.UK website ↗")
         #expect(sut.goToGovUkAccessibilityButtonTitle == "Go to the GOV.UK website")
         #expect(sut.goToGovUkAccessibilityButtonHint == "Opens in web browser")
         #expect(sut.govUkUrl == "https://www.gov.uk")

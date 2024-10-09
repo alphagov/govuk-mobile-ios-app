@@ -7,6 +7,8 @@ class MockAppConfigService: AppConfigServiceInterface {
 
     var isAppForcedUpdate: Bool = false
 
+    var isAppRecommendUpdate: Bool = false
+
     var features: [Feature] = [.onboarding, .search, .topics]
     
     func isFeatureEnabled(key: Feature) -> Bool {

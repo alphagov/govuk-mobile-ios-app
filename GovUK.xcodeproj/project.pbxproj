@@ -42,6 +42,12 @@
 		16F961A72C989165005CFB04 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961A62C989165005CFB04 /* SearchResult.swift */; };
 		16F961A92C989651005CFB04 /* MockAPIServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961A82C989651005CFB04 /* MockAPIServiceClient.swift */; };
 		3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */; };
+		3D15E7B02CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7AF2CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift */; };
+		3D15E7B22CB562E40046CE64 /* AppRecommendUpdateContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */; };
+		3D15E7B42CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B32CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift */; };
+		3D15E7B62CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B52CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift */; };
+		3D15E7B82CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B72CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift */; };
+		3D15E7BA2CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */; };
 		3D3378102CAAC015004BF83F /* AppUnavailableCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D33780F2CAAC015004BF83F /* AppUnavailableCoordinator.swift */; };
 		3D3378122CAAC0A0004BF83F /* AppAvailability.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3D3378112CAAC0A0004BF83F /* AppAvailability.xcstrings */; };
 		3D3378142CAAC0E0004BF83F /* AppUnavailableContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */; };
@@ -370,6 +376,12 @@
 		16F961A62C989165005CFB04 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		16F961A82C989651005CFB04 /* MockAPIServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIServiceClient.swift; sourceTree = "<group>"; };
 		3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceClient.swift; sourceTree = "<group>"; };
+		3D15E7AF2CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateCoordinator.swift; sourceTree = "<group>"; };
+		3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateContainerView.swift; sourceTree = "<group>"; };
+		3D15E7B32CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateContainerViewModel.swift; sourceTree = "<group>"; };
+		3D15E7B52CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateContainerViewModelTests.swift; sourceTree = "<group>"; };
+		3D15E7B72CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateCoordinatorTests.swift; sourceTree = "<group>"; };
+		3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		3D33780F2CAAC015004BF83F /* AppUnavailableCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUnavailableCoordinator.swift; sourceTree = "<group>"; };
 		3D3378112CAAC0A0004BF83F /* AppAvailability.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppAvailability.xcstrings; sourceTree = "<group>"; };
 		3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUnavailableContainerView.swift; sourceTree = "<group>"; };
@@ -933,6 +945,7 @@
 				3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */,
 				5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */,
 				3D9C93482CB0230500EFA337 /* AppForcedUpdateCoordinatorTests.swift */,
+				3D15E7B72CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift */,
 				3D3378192CAAC2E0004BF83F /* AppUnavailableCoordinatorTests.swift */,
 				5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */,
 				16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */,
@@ -972,6 +985,7 @@
 				4E94E8DA2C8B193600906803 /* RecentlyVisited */,
 				3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */,
 				3D9C933F2CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift */,
+				3D15E7B32CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift */,
 				3D3378152CAAC113004BF83F /* AppUnavailableContainerViewModel.swift */,
 				9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */,
 				168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */,
@@ -1121,6 +1135,7 @@
 			children = (
 				3D55B22D2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift */,
 				3D9C93432CB01A2E00EFA337 /* AppForcedUpdateContainerViewModelTests.swift */,
+				3D15E7B52CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift */,
 				3D33781B2CAAC30A004BF83F /* AppUnavailableContainerViewModelTests.swift */,
 				1651C6E72C63C59100864C5C /* HomeViewModelTests.swift */,
 				4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */,
@@ -1192,6 +1207,7 @@
 			children = (
 				3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */,
 				3D9C93412CB017E900EFA337 /* AppForcedUpdateViewControllerSnapshotTests.swift */,
+				3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */,
 				3D3378172CAAC179004BF83F /* AppUnavailableViewControllerSnapshotTests.swift */,
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */,
@@ -1226,6 +1242,7 @@
 				3D7E2D172C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift */,
 				5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */,
 				3D9C93392CB014D800EFA337 /* AppForcedUpdateCoordinator.swift */,
+				3D15E7AF2CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift */,
 				3D33780F2CAAC015004BF83F /* AppUnavailableCoordinator.swift */,
 				5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */,
 				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
@@ -1662,6 +1679,7 @@
 			children = (
 				4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */,
 				3D9C933D2CB0172400EFA337 /* AppForcedUpdateContainerView.swift */,
+				3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */,
 				3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */,
 				966ABE202C78E06F00099DF9 /* GroupedList */,
 			);
@@ -1965,6 +1983,7 @@
 				5D0BD45F2C9B244A00220625 /* MockSearchService.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D4F6D402CA4181D006D0B5B /* MockAppConfigService.swift in Sources */,
+				3D15E7BA2CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift in Sources */,
 				3D3378182CAAC179004BF83F /* AppUnavailableViewControllerSnapshotTests.swift in Sources */,
 				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
@@ -1992,6 +2011,7 @@
 				96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */,
 				D04191782CA57A6F0034722A /* TopicsService.swift in Sources */,
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,
+				3D15E7B02CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift in Sources */,
 				5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				4E94E8D92C8B18ED00906803 /* RecentActivitiesViewStructure.swift in Sources */,
@@ -2078,6 +2098,7 @@
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
+				3D15E7B22CB562E40046CE64 /* AppRecommendUpdateContainerView.swift in Sources */,
 				4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */,
 				16E5AD432C6D5719000B8B3A /* SearchWidgetStackView.swift in Sources */,
 				4E9AFCE32C99D43B00DBF66F /* AnalyticsConsentContainerView.swift in Sources */,
@@ -2096,6 +2117,7 @@
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
 				16F961A52C989129005CFB04 /* SearchItem.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
+				3D15E7B42CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift in Sources */,
 				5D349F692C6B550000B7F747 /* URL+Extensions.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+ServiceClients.swift in Sources */,
 				5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */,
@@ -2174,6 +2196,7 @@
 				16C34B3F2C47D9590031AD32 /* SettingsCoordinatorTests.swift in Sources */,
 				16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */,
 				5D323F8F2C64E6E800C1DB97 /* MockBaseViewController.swift in Sources */,
+				3D15E7B62CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift in Sources */,
 				5DC04B942C2D72E80036EF2B /* MockViewControllerBuilder.swift in Sources */,
 				5DD5F0BB2C99D563009F5388 /* String+ExtensionsTests.swift in Sources */,
 				5DB2BB402C6BAA1D0039AD93 /* AnalyticsService+OnboardingTests.swift in Sources */,
@@ -2185,6 +2208,7 @@
 				4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */,
 				D0B89D9D2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift in Sources */,
 				5DC2506E2C91E795009E9E7F /* MockAnalyticsClient.swift in Sources */,
+				3D15E7B82CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift in Sources */,
 				D093BA612CAF02D4004F489B /* Bundle+Tests.swift in Sources */,
 				5D37EA0F2C3E865F006B36CB /* CoordinatorBuilderTests.swift in Sources */,
 				5D16E6AD2C41848E00776ABA /* ResolvedDeeplinkRoute+Extensions.swift in Sources */,

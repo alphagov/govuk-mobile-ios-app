@@ -90,6 +90,36 @@ struct AppConfigServiceTests {
     }
 
     @Test
+    func repository_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsTrue() {
+        let mockAppVersionProvider = MockAppVersionProvider()
+        mockAppVersionProvider.versionNumber = "0.0.1"
+        let sut = AppConfigService(
+            appConfigRepository: mockAppConfigRepository,
+            appConfigServiceClient: mockAppConfigServiceClient,
+            appVersionProvider: mockAppVersionProvider
+        )
+        let result = Config.arrange(recommendedVersion: "1.0.0").toResult()
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
+
+        #expect(sut.isAppRecommendUpdate == true)
+    }
+
+    @Test
+    func repository_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsFalse() {
+        let mockAppVersionProvider = MockAppVersionProvider()
+        mockAppVersionProvider.versionNumber = "1.0.0"
+        let sut = AppConfigService(
+            appConfigRepository: mockAppConfigRepository,
+            appConfigServiceClient: mockAppConfigServiceClient,
+            appVersionProvider: mockAppVersionProvider
+        )
+        let result = Config.arrange(recommendedVersion: "0.0.1").toResult()
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
+
+        #expect(sut.isAppRecommendUpdate == false)
+    }
+
+    @Test
     func serviceClient_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() {
         let result = Config.arrange(releaseFlags: ["search": true]).toResult()
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
@@ -157,6 +187,36 @@ struct AppConfigServiceTests {
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
 
         #expect(sut.isAppForcedUpdate == false)
+    }
+
+    @Test
+    func serviceClient_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsTrue() {
+        let mockAppVersionProvider = MockAppVersionProvider()
+        mockAppVersionProvider.versionNumber = "0.0.1"
+        let sut = AppConfigService(
+            appConfigRepository: mockAppConfigRepository,
+            appConfigServiceClient: mockAppConfigServiceClient,
+            appVersionProvider: mockAppVersionProvider
+        )
+        let result = Config.arrange(recommendedVersion: "1.0.0").toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+
+        #expect(sut.isAppRecommendUpdate == true)
+    }
+
+    @Test
+    func serviceClient_isAppRecommendUpdate_whenAppVersionIsLessThanRecommendedVersionInConfig_returnsFalse() {
+        let mockAppVersionProvider = MockAppVersionProvider()
+        mockAppVersionProvider.versionNumber = "1.0.0"
+        let sut = AppConfigService(
+            appConfigRepository: mockAppConfigRepository,
+            appConfigServiceClient: mockAppConfigServiceClient,
+            appVersionProvider: mockAppVersionProvider
+        )
+        let result = Config.arrange(recommendedVersion: "0.0.1").toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+
+        #expect(sut.isAppRecommendUpdate == false)
     }
 }
 

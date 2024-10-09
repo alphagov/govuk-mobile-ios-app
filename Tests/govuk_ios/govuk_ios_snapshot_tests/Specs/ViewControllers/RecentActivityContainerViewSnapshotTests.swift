@@ -11,7 +11,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
             notificationCenter: .default
         ).load()
 
-        let viewModel = RecentActivitiesViewModel(
+        let viewModel = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
         )
@@ -37,7 +37,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
             notificationCenter: .default
         ).load()
 
-        let viewModel = RecentActivitiesViewModel(
+        let viewModel = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
         )
@@ -69,7 +69,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
 
         try? coreData.backgroundContext.save()
 
-        let viewModel = RecentActivitiesViewModel(
+        let viewModel = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
         )
@@ -101,7 +101,7 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
 
         try? coreData.backgroundContext.save()
 
-        let viewModel = RecentActivitiesViewModel(
+        let viewModel = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: UIApplication.shared
         )

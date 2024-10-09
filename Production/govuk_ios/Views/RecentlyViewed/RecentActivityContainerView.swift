@@ -2,10 +2,10 @@ import SwiftUI
 import UIComponents
 
 struct RecentActivityContainerView: View {
-    @ObservedObject private var viewModel: RecentActivitiesViewModel
+    @ObservedObject private var viewModel: RecentActivitiesContainerViewModel
     @FetchRequest(fetchRequest: ActivityItem.fetchRequest()) private var recentItems
 
-    init(viewModel: RecentActivitiesViewModel) {
+    init(viewModel: RecentActivitiesContainerViewModel) {
         self.viewModel = viewModel
     }
 
@@ -16,7 +16,7 @@ struct RecentActivityContainerView: View {
                 RecentActivityErrorView()
             case (let count) where count >= 1:
                 RecentActivityView(
-                    viewModel: RecentActivityViewModel(
+                    viewModel: RecentActivitiesViewModel(
                         model: viewModel.sortActivites(
                             activities: Array(recentItems)
                         ),

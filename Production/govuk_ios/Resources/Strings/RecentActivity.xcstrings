@@ -12,6 +12,17 @@
         }
       }
     },
+    "recentActivitiesAlertDismissText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
     "recentActivitiesTodaysListTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,6 +30,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Today"
+          }
+        }
+      }
+    },
+    "recentActivityAlertWarningConfirmation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear all"
+          }
+        }
+      }
+    },
+    "recentActivityClearAllAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear pages you've visited?"
+          }
+        }
+      }
+    },
+    "recentActivityClearAllAlertWarningDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permanently clear the list of all pages you've visited"
+          }
+        }
+      }
+    },
+    "recentActivityClearButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear all"
           }
         }
       }
@@ -74,6 +129,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pages you've visited"
+          }
+        }
+      }
+    },
+    "recentActivityToolBarTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear all"
           }
         }
       }

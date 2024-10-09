@@ -1,57 +1,82 @@
-import Foundation
-import CoreData
-import SwiftUI
 import UIKit
+import CoreData
+import SwiftUICore
+import Foundation
 
 class RecentActivitiesViewModel: ObservableObject {
-    private let analyticsService: AnalyticsServiceInterface
+    @Inject(\.analyticsService) private(set) var analyticsService: AnalyticsServiceInterface
+    var model: RecentActivitiesViewStructure
+    private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private let urlOpener: URLOpener
-    private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
 
-    init(analyticsService: AnalyticsServiceInterface,
+    init(model: RecentActivitiesViewStructure,
          urlOpener: URLOpener) {
+        self.model = model
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
     }
 
-    let navigationTitle = String.recentActivity.localized(
-        "recentActivityNavigationTitle"
-    )
+    func deleteActivities() {
+        for item in model.todaysActivites {
+            let context = item.managedObjectContext
+            context?.delete(item)
+            try? context?.save()
+        }
+        for item in model.currentMonthActivities {
+            let context = item.managedObjectContext
+            context?.delete(item)
+            try? context?.save()
+        }
+        for (_, activities) in model.recentMonthActivities {
+            for activity in activities {
+                let context = activity.managedObjectContext
+                context?.delete(activity)
+                try? context?.save()
+            }
+        }
+        model.todaysActivites.removeAll()
+        model.currentMonthActivities.removeAll()
+        model.todaysActivites.removeAll()
+    }
 
-    func selected(item: ActivityItem) {
-        guard let url = URL(string: item.url)
-        else { return }
+    func buildSectionsView() -> [GroupedListSection] {
+        model.recentMonthActivities.keys
+            .sorted { $0 > $1 }
+            .map {
+                let items = model.recentMonthActivities[$0]
+                return GroupedListSection(
+                    heading: $0.title,
+                    rows: items?.map(activityRow) ?? [],
+                    footer: nil
+                )
+            }
+    }
+
+    private func navigateToBrowser(item: ActivityItem) {
         item.date = Date()
         try? item.managedObjectContext?.save()
+        guard let url = URL(string: item.url) else { return }
         urlOpener.openIfPossible(url)
         trackSelection(activity: item)
     }
 
-    func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
-        var todaysActivities: [ActivityItem] = []
-        var currentMonthActivities: [ActivityItem] = []
-        var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]
-        for recentActivity in activities {
-            if recentActivity.date.isToday() {
-                todaysActivities.append(recentActivity)
-            } else if recentActivity.date.isThisMonth() {
-                currentMonthActivities.append(recentActivity)
-            } else {
-                let key = MonthGroupKey(
-                    date: recentActivity.date,
-                    formatter: recentActivityHeaderFormatter
-                )
-                var items = recentMonthsActivities[key] ?? []
-                items.append(recentActivity)
-                recentMonthsActivities[key] = items
+    func activityRow(activityItem: ActivityItem) -> LinkRow {
+        LinkRow(
+            id: activityItem.id,
+            title: activityItem.title,
+            body: lastVisitedString(activity: activityItem),
+            action: {
+                self.navigateToBrowser(item: activityItem)
             }
-        }
-
-        return .init(
-            todaysActivites: todaysActivities,
-            currentMonthActivities: currentMonthActivities,
-            recentMonthActivities: recentMonthsActivities
         )
+    }
+
+    private func lastVisitedString(activity: ActivityItem) -> String {
+        let copy = String.recentActivity.localized(
+            "recentActivityFormattedDateStringComponent"
+        )
+        let formattedDateString = lastVisitedFormatter.string(from: activity.date)
+        return "\(copy) \(formattedDateString)"
     }
 
     private func trackSelection(activity: ActivityItem) {
@@ -61,9 +86,5 @@ class RecentActivitiesViewModel: ObservableObject {
         analyticsService.track(
             event: event
         )
-    }
-
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
     }
 }

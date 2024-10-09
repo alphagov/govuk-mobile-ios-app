@@ -14,7 +14,7 @@ struct RecentActivitiesViewModelTests {
             notificationCenter: .default
         ).load()
 
-        let sut = RecentActivitiesViewModel(
+        let sut = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener()
         )
@@ -49,7 +49,7 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func sortItems_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
-        let sut = RecentActivitiesViewModel(
+        let sut = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener()
         )
@@ -92,7 +92,7 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
-        let sut = RecentActivitiesViewModel(
+        let sut = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener()
         )
@@ -137,7 +137,7 @@ struct RecentActivitiesViewModelTests {
         ).load()
 
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = RecentActivitiesViewModel(
+        let sut = RecentActivitiesContainerViewModel(
             analyticsService: mockAnalyticsService,
             urlOpener: MockURLOpener()
         )
@@ -158,7 +158,7 @@ struct RecentActivitiesViewModelTests {
         ).load()
 
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = RecentActivitiesViewModel(
+        let sut = RecentActivitiesContainerViewModel(
             analyticsService: mockAnalyticsService,
             urlOpener: MockURLOpener()
         )
@@ -176,7 +176,7 @@ struct RecentActivitiesViewModelTests {
             notificationCenter: .default
         ).load()
 
-        let sut = RecentActivitiesViewModel(
+        let sut = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener()
         )
@@ -206,7 +206,7 @@ struct RecentActivitiesViewModelTests {
         ).load()
 
         let mockURLOpener = MockURLOpener()
-        let sut = RecentActivitiesViewModel(
+        let sut = RecentActivitiesContainerViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: mockURLOpener
         )

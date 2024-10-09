@@ -4,7 +4,7 @@ import SwiftUI
 import UIKit
 
 class RecentActivitiesContainerViewModel: ObservableObject {
-    private let analyticsService: AnalyticsServiceInterface
+    let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
 
@@ -45,14 +45,14 @@ class RecentActivitiesContainerViewModel: ObservableObject {
         )
     }
 
-//    private func trackSelection(activity: ActivityItem) {
-//        let event = AppEvent.recentActivity(
-//            activity: activity.title
-//        )
-//        analyticsService.track(
-//            event: event
-//        )
-//    }
+    private func trackSelection(activity: ActivityItem) {
+        let event = AppEvent.recentActivity(
+            activity: activity.title
+        )
+        analyticsService.track(
+            event: event
+        )
+    }
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)

@@ -20,7 +20,8 @@ struct RecentActivityContainerView: View {
                         model: viewModel.sortActivites(
                             activities: Array(recentItems)
                         ),
-                        urlOpener: UIApplication.shared
+                        urlOpener: UIApplication.shared,
+                        analyticsService: viewModel.analyticsService
                     )
                 )
             default:

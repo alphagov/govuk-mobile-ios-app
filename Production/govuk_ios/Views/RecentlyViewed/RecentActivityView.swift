@@ -29,7 +29,7 @@ struct RecentActivityView: View {
         ScrollView {
             if viewModel.model.todaysActivites.count >= 1 {
                 let rows = viewModel.model.todaysActivites.map({
-                    viewModel.activityRow(activityItem: $0)
+                    viewModel.returnActivityRow(activityItem: $0)
                 })
                 GroupedList(
                     content: [
@@ -45,7 +45,7 @@ struct RecentActivityView: View {
             }
             if viewModel.model.currentMonthActivities.count >= 1 {
                 let rows = viewModel.model.currentMonthActivities
-                    .map { viewModel.activityRow(activityItem: $0) }
+                    .map { viewModel.returnActivityRow(activityItem: $0) }
                 GroupedList(
                     content: [
                         GroupedListSection(
@@ -59,7 +59,7 @@ struct RecentActivityView: View {
                 )
             }
             if viewModel.model.recentMonthActivities.count >= 1 {
-                GroupedList(content: viewModel.buildSectionsView())
+                GroupedList(content: viewModel.buildSections())
             }
         }
         .toolbar {

@@ -1,184 +1,229 @@
-import SwiftUI
-import CoreData
 import Testing
-
+import Foundation
 @testable import govuk_ios
 
-@Suite
-@MainActor
 struct RecentActivitiesViewModelTests {
 
     @Test
-    func sortActivities_whenActivitiesDateEqualsToday_populatesTodaysActivitesList() throws {
+    func test_deleteActivities_deletesAllActivities() async throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        let sut = RecentActivitiesContainerViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener()
+        let activityOne = ActivityItem(context: coreData.backgroundContext)
+        activityOne.id = UUID().uuidString
+        activityOne.title = "benefits"
+        activityOne.url = "https://www.youtube.com/"
+        activityOne.date = Date.arrange("14/04/2016")
+
+        let activityTwo = ActivityItem(context: coreData.backgroundContext)
+        activityOne.id = UUID().uuidString
+        activityOne.title = "benefits"
+        activityOne.url = "https://www.youtube.com/"
+        activityOne.date = Date.arrange("14/10/2024")
+
+        let activityThree = ActivityItem(context: coreData.backgroundContext)
+        activityThree.id = UUID().uuidString
+        activityThree.title = "benefits"
+        activityThree.url = "https://www.youtube.com/"
+        activityThree.date = Date.arrange("14/10/2024")
+
+        try? coreData.backgroundContext.save()
+
+        let viewStructure = RecentActivitiesViewStructure(
+            todaysActivites: [activityOne],
+            currentMonthActivities: [activityTwo],
+            recentMonthActivities: [MonthGroupKey(date: Date()): [activityThree]]
+        )
+        let sut = RecentActivitiesViewModel(
+            model: viewStructure,
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
         )
 
-        var activitiesArray: [ActivityItem] = []
-        let activity = ActivityItem(context: coreData.viewContext)
-        activity.id = UUID().uuidString
-        activity.title = "benefits"
-        activity.url = "https://www.youtube.com"
-        activity.date = Date()
-        let activityTwo = ActivityItem(context: coreData.viewContext)
-        activityTwo.id = UUID().uuidString
-        activityTwo.title = "universal credit"
-        activityTwo.url = "https://www.youtube.com"
-        activityTwo.date = Date()
-        let activityThree = ActivityItem(context: coreData.viewContext)
-        activityThree.id = UUID().uuidString
-        activityThree.title = "dvla2"
-        activityThree.url = "https://www.youtube.com"
-        activityThree.date = Date()
+        sut.deleteActivities()
 
-        activitiesArray.append(activity)
-        activitiesArray.append(activityTwo)
-        activitiesArray.append(activityThree)
+        #expect(sut.model.todaysActivites == [])
+        #expect(sut.model.currentMonthActivities == [])
+        #expect(sut.model.recentMonthActivities == [:])
 
-        let structure = sut.sortActivites(activities: activitiesArray)
-
-        #expect(structure.todaysActivites.count == 3)
-        #expect(structure.recentMonthActivities.count == 0)
-        #expect(structure.currentMonthActivities.count == 0)
+        for activity in sut.model.todaysActivites {
+            #expect(activity.managedObjectContext == nil)
+        }
+        for activity in sut.model.currentMonthActivities {
+            #expect(activity.managedObjectContext == nil)
+        }
+        for (_, activities) in sut.model.recentMonthActivities {
+            for activity in activities {
+                #expect(activity.managedObjectContext == nil)
+            }
+        }
     }
 
     @Test
-    func sortItems_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
-        let sut = RecentActivitiesContainerViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener()
-        )
-
+    func test_buildSections_returnsCorrectSection() async throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        var activitiesArray: [ActivityItem] = []
+        let activityOne = ActivityItem(context: coreData.backgroundContext)
+        activityOne.id = UUID().uuidString
+        activityOne.title = "benefits"
+        activityOne.url = "https://www.youtube.com/"
+        activityOne.date = Date.arrange("14/04/2016")
 
-        let randomDateOne = Date.arrangeRandomDateFromThisMonthNotToday
-        let randomDateTwo = Date.arrangeRandomDateFromThisMonthNotToday
-        let randomDateThree = Date.arrangeRandomDateFromThisMonthNotToday
+        let activityTwo = ActivityItem(context: coreData.backgroundContext)
+        activityOne.id = UUID().uuidString
+        activityOne.title = "benefits"
+        activityOne.url = "https://www.youtube.com/"
+        activityOne.date = Date.arrange("14/10/2024")
 
-        let activity = ActivityItem(context: coreData.viewContext)
-        activity.id = UUID().uuidString
-        activity.title = "benefit3"
-        activity.url = "https://www.youtube.com"
-        activity.date = randomDateOne
-        let activityTwo = ActivityItem(context: coreData.viewContext)
-        activityTwo.id = UUID().uuidString
-        activityTwo.title = "universal credit2"
-        activityTwo.url = "https://www.youtube.com"
-        activityTwo.date = randomDateTwo
-        let activityThree = ActivityItem(context: coreData.viewContext)
+        let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
-        activityThree.title = "dvla2"
-        activityThree.url = "https://www.youtube.com"
-        activityThree.date = randomDateThree
+        activityThree.title = "benefits"
+        activityThree.url = "https://www.youtube.com/"
+        activityThree.date = Date.arrange("14/10/2024")
 
-        activitiesArray.append(activity)
-        activitiesArray.append(activityTwo)
-        activitiesArray.append(activityThree)
+        try? coreData.backgroundContext.save()
 
-        let structure = sut.sortActivites(activities: activitiesArray)
-        #expect(structure.todaysActivites.count == 0)
-        #expect(structure.recentMonthActivities.count == 0)
-        #expect(structure.currentMonthActivities.count == 3)
+        let viewStructure = RecentActivitiesViewStructure(
+            todaysActivites: [activityOne],
+            currentMonthActivities: [activityTwo],
+            recentMonthActivities: [MonthGroupKey(date: Date()): [activityThree]]
+        )
+        let sut = RecentActivitiesViewModel(
+            model: viewStructure,
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
+        )
+
+        let groupSections = sut.buildSections()
+
+        guard let sectionHeader: String = groupSections.first?.heading
+        else { return }
+        guard let sectionRowTitle: String = groupSections.first?.rows.first?.body
+        else { return }
+
+        #expect(sut.buildSections().count == 1)
+        #expect(sectionHeader == "October 2024")
+        #expect(sectionRowTitle == "Last visited on 14 October")
     }
 
     @Test
-    func sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
-        let sut = RecentActivitiesContainerViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener()
-        )
-
+    func test_returnsActivityRow_returnsCorrectLinkRow() async throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        var activitiesArray:[ActivityItem] = []
+        let activityOne = ActivityItem(context: coreData.backgroundContext)
+        activityOne.id = UUID().uuidString
+        activityOne.title = "benefits"
+        activityOne.url = "https://www.youtube.com/"
+        activityOne.date = Date.arrange("14/04/2016")
 
-        let activity = ActivityItem(context: coreData.viewContext)
-        activity.id = UUID().uuidString
-        activity.title = "benefit3"
-        activity.url = "https://www.youtube.com"
-        activity.date = .arrange("14/04/2004")
-        let activityTwo = ActivityItem(context: coreData.viewContext)
-        activityTwo.id = UUID().uuidString
-        activityTwo.title = "universal credit2"
-        activityTwo.url = "https://www.youtube.com"
-        activityTwo.date = .arrange("14/04/2016")
-        let activityThree = ActivityItem(context: coreData.viewContext)
-        activityThree.id = UUID().uuidString
-        activityThree.title = "dvla2"
-        activityThree.url = "https://www.youtube.com"
-        activityThree.date = .arrange("14/04/2017")
+        try? coreData.backgroundContext.save()
 
-        activitiesArray.append(activity)
-        activitiesArray.append(activityTwo)
-        activitiesArray.append(activityThree)
+        let viewStructure = RecentActivitiesViewStructure(
+            todaysActivites: [],
+            currentMonthActivities: [activityOne],
+            recentMonthActivities: [:]
+        )
+        let sut = RecentActivitiesViewModel(
+            model: viewStructure,
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
+        )
 
-        let structure = sut.sortActivites(activities: activitiesArray)
+        let activityRow = sut.returnActivityRow(activityItem: activityOne)
 
-        #expect(structure.todaysActivites.count == 0)
-        #expect(structure.recentMonthActivities.count == 3)
-        #expect(structure.currentMonthActivities.count == 0)
+        #expect(activityRow.title == "benefits")
+        #expect(activityRow.body == "Last visited on 14 April")
+        #expect(activityRow.isWebLink == true)
     }
 
     @Test
-    func selected_withLink_tracksEvent() {
+    func returnActivityRow_withLink_tracksEvent() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = RecentActivitiesContainerViewModel(
-            analyticsService: mockAnalyticsService,
-            urlOpener: MockURLOpener()
-        )
-        let activity = ActivityItem(context: coreData.viewContext)
-        activity.title = "Benefits"
-        activity.url = "https://www.youtube.com"
 
-        sut.selected(item: activity)
+        let activityOne = ActivityItem(context: coreData.backgroundContext)
+        activityOne.id = UUID().uuidString
+        activityOne.title = "benefits"
+        activityOne.url = "https://www.youtube.com/"
+        activityOne.date = Date.arrange("14/04/2016")
+
+        let activityTwo = ActivityItem(context: coreData.viewContext)
+        activityTwo.title = "Benefits"
+        activityTwo.url = "https://www.youtube.com"
+        activityTwo.date = Date.arrange("15/04/2016")
+
+        try? coreData.backgroundContext.save()
+
+        let viewStructure = RecentActivitiesViewStructure(
+            todaysActivites: [],
+            currentMonthActivities: [activityOne],
+            recentMonthActivities: [:]
+        )
+        let sut = RecentActivitiesViewModel(
+            model: viewStructure,
+            urlOpener: MockURLOpener(),
+            analyticsService: mockAnalyticsService
+        )
+
+        let activityRow = sut.returnActivityRow(activityItem: activityTwo)
+        activityRow.action()
 
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.name == "RecentActivity")
     }
 
     @Test
-    func selected_noLink_doesntTracksEvent() {
+    func returnActivityRow_action_noLink_doesntTracksEvent() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = RecentActivitiesContainerViewModel(
-            analyticsService: mockAnalyticsService,
-            urlOpener: MockURLOpener()
+
+        let viewStructure = RecentActivitiesViewStructure(
+            todaysActivites: [],
+            currentMonthActivities: [],
+            recentMonthActivities: [:]
         )
+        let sut = RecentActivitiesViewModel(
+            model: viewStructure,
+            urlOpener: MockURLOpener(),
+            analyticsService: mockAnalyticsService
+        )
+
         let activity = ActivityItem(context: coreData.viewContext)
         activity.title = "Benefits"
+        activity.date = Date.arrange("15/04/2016")
 
-        sut.selected(item: activity)
+        let activityRow = sut.returnActivityRow(activityItem: activity)
+        activityRow.action()
 
         #expect(mockAnalyticsService._trackedEvents.count == 0)
     }
 
     @Test
-    func selected_updatesItemDate() {
+    func returnActivityRow_action_updatesItemDate() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        let sut = RecentActivitiesContainerViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener()
+        let viewStructure = RecentActivitiesViewStructure(
+            todaysActivites: [],
+            currentMonthActivities: [],
+            recentMonthActivities: [:]
+        )
+        let sut = RecentActivitiesViewModel(
+            model: viewStructure,
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
         )
 
         let activity = ActivityItem(context: coreData.viewContext)
@@ -188,7 +233,8 @@ struct RecentActivitiesViewModelTests {
         let oldDate = Date.arrange("14/04/2004")
         activity.date = oldDate
 
-        sut.selected(item: activity)
+        let activityRow = sut.returnActivityRow(activityItem: activity)
+        activityRow.action()
 
         let equal = Calendar.current.isDate(
             activity.date,
@@ -200,15 +246,22 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func selected_withURL_opensURL() {
+    func returnActivityRow_action_withURL_opensURL() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
         let mockURLOpener = MockURLOpener()
-        let sut = RecentActivitiesContainerViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: mockURLOpener
+
+        let viewStructure = RecentActivitiesViewStructure(
+            todaysActivites: [],
+            currentMonthActivities: [],
+            recentMonthActivities: [:]
+        )
+        let sut = RecentActivitiesViewModel(
+            model: viewStructure,
+            urlOpener: mockURLOpener,
+            analyticsService: MockAnalyticsService()
         )
 
         let activity = ActivityItem(context: coreData.viewContext)
@@ -219,8 +272,10 @@ struct RecentActivitiesViewModelTests {
         let oldDate = Date.arrange("14/04/2004")
         activity.date = oldDate
 
-        sut.selected(item: activity)
+        let activityRow = sut.returnActivityRow(activityItem: activity)
+        activityRow.action()
 
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedURL)
     }
+
 }

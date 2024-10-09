@@ -4,13 +4,14 @@ import SwiftUICore
 import Foundation
 
 class RecentActivitiesViewModel: ObservableObject {
-    @Inject(\.analyticsService) private(set) var analyticsService: AnalyticsServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     var model: RecentActivitiesViewStructure
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private let urlOpener: URLOpener
 
     init(model: RecentActivitiesViewStructure,
-         urlOpener: URLOpener) {
+         urlOpener: URLOpener,
+         analyticsService: AnalyticsServiceInterface) {
         self.model = model
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
@@ -36,23 +37,26 @@ class RecentActivitiesViewModel: ObservableObject {
         }
         model.todaysActivites.removeAll()
         model.currentMonthActivities.removeAll()
-        model.todaysActivites.removeAll()
+        model.recentMonthActivities.removeAll()
+        analyticsService.track(
+            event: .clearRecentActivity()
+        )
     }
 
-    func buildSectionsView() -> [GroupedListSection] {
+    func buildSections() -> [GroupedListSection] {
         model.recentMonthActivities.keys
             .sorted { $0 > $1 }
             .map {
                 let items = model.recentMonthActivities[$0]
                 return GroupedListSection(
                     heading: $0.title,
-                    rows: items?.map(activityRow) ?? [],
+                    rows: items?.map(returnActivityRow) ?? [],
                     footer: nil
                 )
             }
     }
 
-    private func navigateToBrowser(item: ActivityItem) {
+    private func selectActivity(item: ActivityItem) {
         item.date = Date()
         try? item.managedObjectContext?.save()
         guard let url = URL(string: item.url) else { return }
@@ -60,13 +64,13 @@ class RecentActivitiesViewModel: ObservableObject {
         trackSelection(activity: item)
     }
 
-    func activityRow(activityItem: ActivityItem) -> LinkRow {
+    func returnActivityRow(activityItem: ActivityItem) -> LinkRow {
         LinkRow(
             id: activityItem.id,
             title: activityItem.title,
             body: lastVisitedString(activity: activityItem),
             action: {
-                self.navigateToBrowser(item: activityItem)
+                self.selectActivity(item: activityItem)
             }
         )
     }

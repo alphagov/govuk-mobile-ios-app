@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import Factory
 
 class RecentActivityCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
@@ -17,7 +18,12 @@ class RecentActivityCoordinator: BaseCoordinator {
 //        let viewController = viewControllerBuilder.recentActivity(
 //            analyticsService: analyticsService
 //        )
-        let viewController = GroupedListViewController(viewModel: .init())
+        let viewModel = GroupedListViewModel(
+            activityService: Container.shared.activityService()
+        )
+        let viewController = GroupedListViewController(
+            viewModel: viewModel
+        )
         push(viewController, animated: true)
     }
 }

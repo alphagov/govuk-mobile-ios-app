@@ -1,12 +1,12 @@
 import SwiftUI
 import UIComponents
 
-struct AppUnavailableContainerView: View {
-    @StateObject var viewModel: AppUnavailableContainerViewModel
+struct AppRecommendUpdateContainerView: View {
+    @StateObject var viewModel: AppRecommendUpdateContainerViewModel
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    init(viewModel: AppUnavailableContainerViewModel) {
+    init(viewModel: AppRecommendUpdateContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -33,20 +33,29 @@ struct AppUnavailableContainerView: View {
             Spacer()
             Divider()
                 .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
-            SwiftUIButton(
-                .secondary,
-                viewModel: viewModel.goToGovUkButtonViewModel
-            )
-            .accessibilityLabel(viewModel.goToGovUkAccessibilityButtonTitle)
-            .accessibilityHint(viewModel.goToGovUkAccessibilityButtonHint)
-            .frame(minHeight: 44, idealHeight: 44)
-            .padding([.top, .horizontal], 16)
+            AdaptiveStack {
+                SwiftUIButton(
+                    .primary,
+                    viewModel: viewModel.updateButtonViewModel
+                )
+                .frame(minHeight: 44, idealHeight: 44)
+                .padding(.horizontal, 16)
+                .accessibilityLabel(Text(viewModel.updateButtonTitle))
+                SwiftUIButton(
+                    .secondary,
+                    viewModel: viewModel.skipButtonViewModel
+                )
+                .frame(minHeight: 44, idealHeight: 44)
+                .padding(.horizontal, 16)
+                .accessibilityLabel(Text(viewModel.skipButtonTitle))
+            }
+            .padding(.top, 16)
             .padding(.bottom, 32)
         }.edgesIgnoringSafeArea([.bottom, .horizontal])
     }
 }
 
 #Preview {
-    let viewModel = AppUnavailableContainerViewModel()
-    return AppUnavailableContainerView(viewModel: viewModel)
+    let viewModel = AppRecommendUpdateContainerViewModel(dismissAction: {})
+    return AppRecommendUpdateContainerView(viewModel: viewModel)
 }

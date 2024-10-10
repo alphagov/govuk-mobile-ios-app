@@ -12,6 +12,17 @@
         }
       }
     },
+    "skip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        }
+      }
+    },
     "splashScreenAccessibilityTitle" : {
       "extractionState" : "manual",
       "localizations" : {

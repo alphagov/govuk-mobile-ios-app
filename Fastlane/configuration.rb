@@ -25,10 +25,6 @@ class Configuration
     setting(:app, :project)
   end
 
-  def app_workspace
-    setting(:app, :workspace)
-  end
-
   def app_bundle_identifier
     setting(:app, :bundle_identifier)
   end

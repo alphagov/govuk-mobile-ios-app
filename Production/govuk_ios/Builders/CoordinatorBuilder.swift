@@ -58,6 +58,24 @@ class CoordinatorBuilder {
         )
     }
 
+    func appRecommendUpdate(navigationController: UINavigationController,
+                            dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        AppRecommendUpdateCoordinator(
+            navigationController: navigationController,
+            appConfigService: container.appConfigService.resolve(),
+            dismissAction: dismissAction
+        )
+    }
+
+    func appForcedUpdate(navigationController: UINavigationController,
+                         dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        AppForcedUpdateCoordinator(
+            navigationController: navigationController,
+            appConfigService: container.appConfigService.resolve(),
+            dismissAction: dismissAction
+        )
+    }
+
     func analyticsConsent(navigationController: UINavigationController,
                           dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AnalyticsConsentCoordinator(

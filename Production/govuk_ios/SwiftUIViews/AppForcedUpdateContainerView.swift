@@ -1,12 +1,12 @@
 import SwiftUI
 import UIComponents
 
-struct AppUnavailableContainerView: View {
-    @StateObject var viewModel: AppUnavailableContainerViewModel
+struct AppForcedUpdateContainerView: View {
+    @StateObject var viewModel: AppForcedUpdateContainerViewModel
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    init(viewModel: AppUnavailableContainerViewModel) {
+    init(viewModel: AppForcedUpdateContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -34,11 +34,10 @@ struct AppUnavailableContainerView: View {
             Divider()
                 .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
             SwiftUIButton(
-                .secondary,
-                viewModel: viewModel.goToGovUkButtonViewModel
+                .primary,
+                viewModel: viewModel.updateButtonViewModel
             )
-            .accessibilityLabel(viewModel.goToGovUkAccessibilityButtonTitle)
-            .accessibilityHint(viewModel.goToGovUkAccessibilityButtonHint)
+            .accessibilityLabel(Text(viewModel.updateButtonTitle))
             .frame(minHeight: 44, idealHeight: 44)
             .padding([.top, .horizontal], 16)
             .padding(.bottom, 32)
@@ -47,6 +46,6 @@ struct AppUnavailableContainerView: View {
 }
 
 #Preview {
-    let viewModel = AppUnavailableContainerViewModel()
-    return AppUnavailableContainerView(viewModel: viewModel)
+    let viewModel = AppForcedUpdateContainerViewModel()
+    return AppForcedUpdateContainerView(viewModel: viewModel)
 }

@@ -5,28 +5,28 @@ import Foundation
      let currentMonthActivities: [ActivityItem]
      let recentMonthActivities: [MonthGroupKey: [ActivityItem]]
 
-     var sections: [ActivitySection] {
+     var sections: [GroupListSection] {
          let localSections = [
-            ActivitySection(
+            GroupListSection(
                 title: "Today",
-                items: todaysActivites
+                items: todaysActivites.map { .init(activity: $0) }
             ),
-            ActivitySection(
+            GroupListSection(
                 title: "This month",
-                items: currentMonthActivities
+                items: currentMonthActivities.map { .init(activity: $0) }
             )
          ] + orderedRecents()
          return localSections.filter { !$0.items.isEmpty }
      }
 
-     private func orderedRecents() -> [ActivitySection] {
+     private func orderedRecents() -> [GroupListSection] {
          recentMonthActivities.keys
              .sorted { $0 > $1 }
              .map {
                  let items = recentMonthActivities[$0]
-                 return ActivitySection(
+                 return GroupListSection(
                     title: $0.title,
-                    items: items ?? []
+                    items: (items?.map { item in .init(activity: item) }) ?? []
                  )
              }
      }

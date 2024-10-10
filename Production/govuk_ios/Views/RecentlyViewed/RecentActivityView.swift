@@ -15,7 +15,7 @@ struct RecentActivityView: View {
         "recentActivityAlertWarningConfirmation"
     )
     let alertSecondaryButtonTitle = String.recentActivity.localized(
-        "recentActivitiesAlertDismissText"
+        "recentActivityAlertDismissText"
     )
     let toolbarButtonTitle = String.recentActivity.localized(
         "recentActivityToolBarTitle"

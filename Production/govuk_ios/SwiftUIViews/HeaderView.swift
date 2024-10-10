@@ -4,12 +4,12 @@ struct HeaderView: View {
     private let title: String
     private let subheading: String
 
-    public init(title: String, subheading: String) {
+    init(title: String, subheading: String) {
         self.title = title
         self.subheading = subheading
     }
 
-    public var body: some View {
+    var body: some View {
         VStack {
             Text(title)
                 .fontWeight(.bold)

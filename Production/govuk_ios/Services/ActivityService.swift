@@ -1,6 +1,8 @@
 import Foundation
+import CoreData
 
 protocol ActivityServiceInterface {
+    func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(searchItem: SearchItem)
 }
 
@@ -9,6 +11,10 @@ struct ActivityService: ActivityServiceInterface {
 
     init(repository: ActivityRepositoryInterface) {
         self.repository = repository
+    }
+
+    func fetch() -> NSFetchedResultsController<ActivityItem> {
+        repository.fetch()
     }
 
     func save(searchItem: SearchItem) {

@@ -2,6 +2,7 @@ import Foundation
 import CoreData
 
 protocol ActivityRepositoryInterface {
+    func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(params: ActivityItemCreateParams)
 }
 
@@ -10,6 +11,13 @@ struct ActivityRepository: ActivityRepositoryInterface {
 
     init(coreData: CoreDataRepositoryInterface) {
         self.coreData = coreData
+    }
+
+    func fetch() -> NSFetchedResultsController<ActivityItem> {
+        fetch(
+            predicate: nil,
+            context: coreData.viewContext
+        )
     }
 
     func save(params: ActivityItemCreateParams) {

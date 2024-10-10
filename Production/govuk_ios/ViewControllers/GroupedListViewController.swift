@@ -1,37 +1,70 @@
 import Foundation
 import UIKit
 
-private typealias DataSource = UITableViewDiffableDataSource<ActivitySection, String>
-private typealias Snapshot = NSDiffableDataSourceSnapshot<ActivitySection, String>
+private typealias DataSource = UITableViewDiffableDataSource<ActivitySection, ActivityItem>
+private typealias Snapshot = NSDiffableDataSourceSnapshot<ActivitySection, ActivityItem>
 
 class GroupedListViewModel {
-    var sections: [ActivitySection] = [
-        .today,
-        .thisMonth
-    ]
+    private let activityService: ActivityServiceInterface
+    private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
+    private(set) var structure: RecentActivitiesViewStructure = .init(
+        todaysActivites: [],
+        currentMonthActivities: [],
+        recentMonthActivities: [:]
+    )
+
+    init(activityService: ActivityServiceInterface) {
+        self.activityService = activityService
+    }
+
+    @discardableResult
+    func fetchActivities() -> RecentActivitiesViewStructure {
+        let items = activityService.fetch().fetchedObjects ?? []
+        let localStructure = sortActivites(activities: items)
+        structure = localStructure
+        return localStructure
+    }
+
+    private func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
+        var todaysActivities: [ActivityItem] = []
+        var currentMonthActivities: [ActivityItem] = []
+        var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]
+        for recentActivity in activities {
+            if recentActivity.date.isToday() {
+                todaysActivities.append(recentActivity)
+            } else if recentActivity.date.isThisMonth() {
+                currentMonthActivities.append(recentActivity)
+            } else {
+                let key = MonthGroupKey(
+                    date: recentActivity.date,
+                    formatter: recentActivityHeaderFormatter
+                )
+                var items = recentMonthsActivities[key] ?? []
+                items.append(recentActivity)
+                recentMonthsActivities[key] = items
+            }
+        }
+
+        return .init(
+            todaysActivites: todaysActivities,
+            currentMonthActivities: currentMonthActivities,
+            recentMonthActivities: recentMonthsActivities
+        )
+    }
 }
 
 class GroupedListViewController: UIViewController,
                                  UITableViewDelegate {
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(GroupedListTableViewCell.self)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 60
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-        return tableView
-    }()
-
+    private lazy var tableView: UITableView = UITableView.groupedList
     private lazy var dataSource: DataSource = {
         let localDataSource = DataSource(
             tableView: tableView,
             cellProvider: { tableView, indexPath, item in
                 let cell: GroupedListTableViewCell = tableView.dequeue(indexPath: indexPath)
-                let section = self.viewModel.sections[indexPath.section]
-                cell.set(
-                    title: item,
+                let section = self.viewModel.structure.sections[indexPath.section]
+                cell.configure(
+                    title: item.title,
+                    description: item.body,
                     top: indexPath.row == 0,
                     bottom: item == section.items.last
                 )
@@ -53,17 +86,13 @@ class GroupedListViewController: UIViewController,
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.setEditing(true, animated: animated)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
         tableView.delegate = self
         tableView.dataSource = dataSource
+        viewModel.fetchActivities()
         reloadSnapshot()
     }
 
@@ -94,7 +123,7 @@ class GroupedListViewController: UIViewController,
     private func reloadSnapshot() {
         var snapshot = Snapshot()
         snapshot.deleteAllItems()
-        viewModel.sections.forEach {
+        viewModel.structure.sections.forEach {
             snapshot.appendSections([$0])
             snapshot.appendItems($0.items, toSection: $0)
         }
@@ -103,122 +132,37 @@ class GroupedListViewController: UIViewController,
 
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
-        UIView()
+        let localLabel = GroupedListSectionHeaderView()
+        localLabel.text = viewModel.structure.sections[section].title
+        return localLabel
     }
 
-    func tableView(_ tableView: UITableView,
-                   heightForHeaderInSection section: Int) -> CGFloat {
-        10
-    }
-}
-
-class GroupedListTableViewCell: UITableViewCell {
-    private lazy var borderLayer: CAShapeLayer = {
-        let borderLayer = CAShapeLayer()
-        borderLayer.lineWidth = 0.5
-        borderLayer.strokeColor = UIColor.govUK.strokes.listDivider.cgColor
-        borderLayer.fillColor = UIColor.clear.cgColor
-        return borderLayer
-    }()
-
-    private lazy var separatorView: UIView = {
-        let localView = UIView()
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        localView.backgroundColor = UIColor.govUK.strokes.listDivider
-        return localView
-    }()
-
-    var isTop = false
-    var isBottom = false
-
-    override init(style: UITableViewCell.CellStyle,
-                  reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        layer.addSublayer(borderLayer)
-        layer.masksToBounds = true
-        contentView.addSubview(separatorView)
-        separatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        separatorView.leftAnchor.constraint(
-            equalTo: contentView.leftAnchor,
-            constant: 16
-        ).isActive = true
-        clipsToBounds = true
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func set(title: String,
-             top: Bool,
-             bottom: Bool) {
-        textLabel?.text = title
-        self.isTop = top
-        self.isBottom = bottom
-        updateMask()
-        separatorView.isHidden = bottom
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        updateMask()
-    }
-
-    private func updateMask() {
-        var corners: UIRectCorner = isTop ? [.topLeft, .topRight] : []
-        if isBottom {
-            corners =  [corners, .bottomLeft, .bottomRight]
-        }
-        var newFrame = bounds
-        newFrame.size.height += 4
-        let widthDelta: CGFloat = 1
-        newFrame.size.width -= widthDelta
-        if isTop {
-            newFrame.origin = .init(x: widthDelta / 2, y: 0.5)
-        } else if isBottom {
-            newFrame.origin = .init(x: widthDelta / 2, y: -4.5)
-        } else {
-            newFrame.origin = .init(x: widthDelta / 2, y: -2)
-        }
-
-        let path = UIBezierPath(
-            roundedRect: newFrame,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: 10, height: 10)
-        )
-        borderLayer.path = path.cgPath
-//        borderLayer.frame = newFrame
-    }
+//    func tableView(_ tableView: UITableView,
+//                   heightForHeaderInSection
+//                   section: Int) -> CGFloat {
+//        24
+//    }
+//
+//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+//        <#code#>
+//    }
 }
 
 struct ActivitySection: Hashable {
-    let items: [String]
+    let title: String
+    let items: [ActivityItem]
 }
 
-extension ActivitySection {
-    static var today: ActivitySection {
-        .init(
-            items: [
-                "0 - 0",
-                "0 - 1",
-                "0 - 2",
-                "0 - 3",
-                "0 - 4"
-            ]
-        )
-    }
-
-    static var thisMonth: ActivitySection {
-        .init(
-            items: [
-                "1 - 0",
-                "1 - 1",
-                "1 - 2",
-                "1 - 3",
-                "1 - 4"
-            ]
-        )
+extension UITableView {
+    static var groupedList: UITableView {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(GroupedListTableViewCell.self)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 60
+        tableView.estimatedSectionHeaderHeight = 24
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        return tableView
     }
 }

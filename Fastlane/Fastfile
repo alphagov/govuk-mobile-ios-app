@@ -2,6 +2,8 @@
 
 require_relative 'configuration'
 
+opt_out_usage
+
 default_platform :ios
 
 # rubocop:disable Metrics/BlockLength
@@ -45,7 +47,7 @@ platform :ios do
 
   private_lane :build do |options|
     gym(
-      workspace: configuration.app_workspace,
+      project: configuration.app_project,
       scheme: configuration.app_scheme,
       configuration: configuration.app_configuration,
       output_directory: configuration.app_output_directory,

@@ -60,6 +60,14 @@ struct AppConfigServiceTests {
     }
 
     @Test
+    func repository_isAppAvailable_whenSignatureInvalid_returnsFalse() {
+        let result: Result<AppConfig, AppConfigError> = .failure(.invalidSignatureError)
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
+
+        #expect(sut.isAppAvailable == false)
+    }
+
+    @Test
     func repository_isAppForcedUpdate_whenAppVersionIsLessThanMinimumVersionInConfig_returnsTrue() {
         let mockAppVersionProvider = MockAppVersionProvider()
         mockAppVersionProvider.versionNumber = "0.0.1"
@@ -154,6 +162,14 @@ struct AppConfigServiceTests {
     @Test
     func serviceClient_isAppAvailable_whenAvailableIsFalseInConfig_returnsFalse() {
         let result = Config.arrange(available: false).toResult()
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+
+        #expect(sut.isAppAvailable == false)
+    }
+
+    @Test
+    func serviceClient_isAppAvailable_whenSignatureInvalid_returnsFalse() {
+        let result: Result<AppConfig, AppConfigError> = .failure(.invalidSignatureError)
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
 
         #expect(sut.isAppAvailable == false)

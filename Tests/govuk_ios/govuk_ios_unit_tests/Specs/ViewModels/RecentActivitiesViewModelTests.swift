@@ -1,8 +1,11 @@
 import Testing
 import Foundation
+
 @testable import govuk_ios
 
+@Suite
 struct RecentActivitiesViewModelTests {
+    
     @Test
     func deleteActivities_deletesAllActivities() async throws {
         let coreData = CoreDataRepository.arrange(
@@ -14,13 +17,11 @@ struct RecentActivitiesViewModelTests {
         activityOne.title = "benefits"
         activityOne.url = "https://www.youtube.com/"
         activityOne.date = Date.arrange("14/04/2016")
-
         let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityOne.id = UUID().uuidString
         activityOne.title = "benefits"
         activityOne.url = "https://www.youtube.com/"
         activityOne.date = Date.arrange("14/10/2024")
-
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "benefits"
@@ -70,13 +71,11 @@ struct RecentActivitiesViewModelTests {
         activityOne.title = "benefits"
         activityOne.url = "https://www.youtube.com/"
         activityOne.date = Date.arrange("14/04/2016")
-
         let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityOne.id = UUID().uuidString
         activityOne.title = "benefits"
         activityOne.url = "https://www.youtube.com/"
         activityOne.date = Date.arrange("14/10/2024")
-
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "benefits"
@@ -95,7 +94,6 @@ struct RecentActivitiesViewModelTests {
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
         )
-
         let groupSections = sut.buildSections()
 
         guard let sectionHeader: String = groupSections.first?.heading

@@ -38,8 +38,6 @@ class AppConfigServiceClient: AppConfigServiceClientInterface {
                             from: resultData
                         )
                         completion(.success(decodedObject))
-                    } catch SigningError.invalidSignature {
-                        completion(.failure(.invalidSignatureError))
                     } catch {
                         completion(.failure(.remoteJsonError))
                     }

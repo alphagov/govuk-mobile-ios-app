@@ -61,7 +61,7 @@ struct AppConfigServiceTests {
 
     @Test
     func repository_isAppAvailable_whenSignatureInvalid_returnsFalse() {
-        let result: Result<AppConfig, AppConfigError> = .failure(.invalidSignatureError)
+        let result: Result<AppConfig, AppConfigError> = .failure(.remoteJsonError)
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)
 
         #expect(sut.isAppAvailable == false)
@@ -169,7 +169,7 @@ struct AppConfigServiceTests {
 
     @Test
     func serviceClient_isAppAvailable_whenSignatureInvalid_returnsFalse() {
-        let result: Result<AppConfig, AppConfigError> = .failure(.invalidSignatureError)
+        let result: Result<AppConfig, AppConfigError> = .failure(.remoteJsonError)
         mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
 
         #expect(sut.isAppAvailable == false)

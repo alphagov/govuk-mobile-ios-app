@@ -48,10 +48,8 @@ public final class AppConfigService: AppConfigServiceInterface {
         switch result {
         case .success(let appConfig):
             setConfig(appConfig.config)
-        case .failure(let error):
-            if error == .invalidSignatureError {
-                self.isAppAvailable = false
-            }
+        case .failure:
+            self.isAppAvailable = false
         }
     }
 

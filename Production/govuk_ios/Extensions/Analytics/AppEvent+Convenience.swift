@@ -78,7 +78,7 @@ extension AppEvent {
 
     static func clearRecentActivity() -> AppEvent {
         .init(
-            name: "Cleared_RecentActivity",
+            name: "Cleared_recent_activity",
             params: nil
         )
     }

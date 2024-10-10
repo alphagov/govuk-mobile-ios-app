@@ -40,7 +40,7 @@ platform :ios do
       xcodebuild_formatter: 'xcbeautify',
       output_types: 'junit',
       derived_data_path: './build_for_unit_testing',
-      output_directory: configuration.app_output_directory,
+      output_directory: configuration.scan_output_directory,
       code_coverage: true
     )
   end
@@ -73,8 +73,8 @@ platform :ios do
 
   private_lane :convert_coverage do
     slather(
-      build_directory: configuration.app_output_directory,
-      output_directory: configuration.app_output_directory,
+      build_directory: configuration.scan_output_directory,
+      output_directory: configuration.scan_output_directory,
       sonarqube_xml: true,
       scheme: configuration.app_scheme,
       proj: configuration.app_project

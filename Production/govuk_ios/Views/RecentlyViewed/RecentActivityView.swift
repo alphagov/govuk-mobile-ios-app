@@ -61,8 +61,7 @@ struct RecentActivityView: View {
             if viewModel.model.recentMonthActivities.count >= 1 {
                 GroupedList(content: viewModel.buildSections())
             }
-        }
-        .toolbar {
+        }.toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     showingAlert.toggle()

@@ -3,9 +3,8 @@ import Foundation
 @testable import govuk_ios
 
 struct RecentActivitiesViewModelTests {
-
     @Test
-    func test_deleteActivities_deletesAllActivities() async throws {
+    func deleteActivities_deletesAllActivities() async throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -61,7 +60,7 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func test_buildSections_returnsCorrectSection() async throws {
+    func buildSections_returnsCorrectSection() async throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
@@ -110,7 +109,7 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func test_returnsActivityRow_returnsCorrectLinkRow() async throws {
+    func returnsActivityRow_returnsCorrectLinkRow() async throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()

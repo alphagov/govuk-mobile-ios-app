@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
-import SwiftUICore
 import Foundation
+import SwiftUI
 
 class RecentActivitiesViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
@@ -38,6 +38,7 @@ class RecentActivitiesViewModel: ObservableObject {
         model.todaysActivites.removeAll()
         model.currentMonthActivities.removeAll()
         model.recentMonthActivities.removeAll()
+
         analyticsService.track(
             event: .clearRecentActivity()
         )

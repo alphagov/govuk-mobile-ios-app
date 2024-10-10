@@ -11,25 +11,24 @@ struct AppUnavailableContainerView: View {
     }
 
     var body: some View {
-        GeometryReader { geo in
-            VStack {
-                HeaderView(title: viewModel.title,
-                           subheading: viewModel.subheading)
-                .padding(.top, verticalSizeClass == .compact ? 30 : 46)
-                .padding(.horizontal, 16 + geo.safeAreaInsets.leading)
-                Spacer()
-                Divider()
-                    .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.goToGovUkButtonViewModel
-                )
-                .accessibilityLabel(viewModel.goToGovUkAccessibilityButtonTitle)
-                .accessibilityHint(viewModel.goToGovUkAccessibilityButtonHint)
-                .frame(minHeight: 44, idealHeight: 44)
-                .padding([.top, .horizontal], 16)
-                .padding(.bottom, 32)
-            }.edgesIgnoringSafeArea([.bottom, .horizontal])
+        VStack {
+            HeaderView(title: viewModel.title,
+                       subheading: viewModel.subheading)
+            .padding(.top, verticalSizeClass == .compact ? 30 : 46)
+            .padding(.horizontal, 16)
+            Spacer()
+            Divider()
+                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                .ignoresSafeArea()
+            SwiftUIButton(
+                .secondary,
+                viewModel: viewModel.goToGovUkButtonViewModel
+            )
+            .accessibilityLabel(viewModel.goToGovUkAccessibilityButtonTitle)
+            .accessibilityHint(viewModel.goToGovUkAccessibilityButtonHint)
+            .frame(minHeight: 44, idealHeight: 44)
+            .padding([.top, .horizontal], 16)
+            .ignoresSafeArea()
         }
     }
 }

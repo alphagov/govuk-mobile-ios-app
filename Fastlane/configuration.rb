@@ -53,6 +53,10 @@ class Configuration
     setting(:scan, :devices)
   end
 
+  def scan_output_directory
+    setting(:scan, :output_directory)
+  end
+
   def deliver_key_id
     ENV['APP_STORE_KEY_ID']
   end

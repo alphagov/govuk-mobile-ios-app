@@ -29,8 +29,8 @@ jobs:
       - name: Download build output
         uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # pin@v4.1.7
         with:
-          name: build-output
-          path: build_output
+          name: test-output
+          path: test_output
 
       - name: Run SonarCloud Scanning
         run: |
@@ -38,7 +38,7 @@ jobs:
 
           sonar-scanner \
             -Dsonar.token=$SONAR_TOKEN \
-            -Dsonar.coverageReportPaths="build_output/sonarqube-generic-coverage.xml" \
+            -Dsonar.coverageReportPaths="test_output/sonarqube-generic-coverage.xml" \
             -Dsonar.projectVersion=$(./Scripts/app_version.sh) \
             -Dsonar.qualitygate.wait=true
         env:

@@ -4,10 +4,14 @@ import UIKit
 private typealias DataSource = UITableViewDiffableDataSource<GroupListSection, GroupListItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<GroupListSection, GroupListItem>
 
-class GroupedListViewController: UIViewController,
+class GroupedListViewController: BaseViewController,
                                  UITableViewDelegate {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
+    private lazy var barButtonItem = UIBarButtonItem.clearAll(
+        target: self,
+        action: #selector(barButtonPressed)
+    )
     private lazy var dataSource: DataSource = {
         let localDataSource = DataSource(
             tableView: tableView,
@@ -17,11 +21,34 @@ class GroupedListViewController: UIViewController,
         return localDataSource
     }()
 
+    private lazy var noItemsView = {
+        let localView = SearchErrorView()
+        localView.backgroundColor = .clear
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.isHidden = true
+        localView.configure(
+            title: String.recentActivity.localized("recentActivityErrorViewTitle"),
+            errorDesc: String.recentActivity.localized("recentActivityErrorViewDescription")
+        )
+        return localView
+    }()
+
     private let viewModel: GroupedListViewModel
 
     init(viewModel: GroupedListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+    }
+
+    @objc
+    private func barButtonPressed() {
+        let alert = UIAlertController.clearAllRecentItems(
+            confirmAction: { [weak self] in
+                self?.viewModel.deleteAllItems()
+                self?.reloadSnapshot()
+            }
+        )
+        present(alert, animated: true)
     }
 
     required init?(coder: NSCoder) {
@@ -30,7 +57,7 @@ class GroupedListViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Pages you've visited"
+        title = viewModel.pageTitle
         configureUI()
         configureConstraints()
         tableView.delegate = self
@@ -41,29 +68,40 @@ class GroupedListViewController: UIViewController,
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.setRightBarButton(barButtonItem, animated: animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(tableView)
+        view.addSubview(noItemsView)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(
-                equalTo: view.topAnchor
+                equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
             tableView.rightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.rightAnchor,
-                constant: -16
+                equalTo: view.layoutMarginsGuide.rightAnchor
             ),
             tableView.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
             ),
             tableView.leftAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leftAnchor,
-                constant: 16
+                equalTo: view.layoutMarginsGuide.leftAnchor
+            ),
+
+            noItemsView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 40
+            ),
+            noItemsView.rightAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.rightAnchor
+            ),
+            noItemsView.leftAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leftAnchor
             )
         ])
     }
@@ -76,6 +114,8 @@ class GroupedListViewController: UIViewController,
             snapshot.appendItems($0.items, toSection: $0)
         }
         dataSource.apply(snapshot, animatingDifferences: true)
+        tableView.isHidden = viewModel.structure.isEmpty
+        noItemsView.isHidden = !viewModel.structure.isEmpty
     }
 
     func tableView(_ tableView: UITableView,
@@ -108,11 +148,13 @@ class GroupedListViewController: UIViewController,
         return "\(copy) \(formattedDateString)"
     }
 
-//    private var selected: (ActivityItem) -> Void {
-//        return { item in
-//
-//        }
-//    }
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath)
+        else { return }
+        viewModel.selected(item: item.activity)
+        reloadSnapshot()
+    }
 }
 
 struct GroupListSection: Hashable {

@@ -4,6 +4,7 @@ import CoreData
 protocol ActivityServiceInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(searchItem: SearchItem)
+    func deleteAll()
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -22,5 +23,9 @@ struct ActivityService: ActivityServiceInterface {
             searchItem: searchItem
         )
         repository.save(params: params)
+    }
+
+    func deleteAll() {
+        repository.deleteAll()
     }
 }

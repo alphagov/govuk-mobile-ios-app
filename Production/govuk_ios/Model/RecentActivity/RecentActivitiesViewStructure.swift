@@ -8,11 +8,11 @@ import Foundation
      var sections: [GroupListSection] {
          let localSections = [
             GroupListSection(
-                title: "Today",
+                title: String.recentActivity.localized("recentActivitiesTodaysListTitle"),
                 items: todaysActivites.map { .init(activity: $0) }
             ),
             GroupListSection(
-                title: "This month",
+                title: String.recentActivity.localized("recentActivityCurrentMonthItems"),
                 items: currentMonthActivities.map { .init(activity: $0) }
             )
          ] + orderedRecents()
@@ -29,5 +29,11 @@ import Foundation
                     items: (items?.map { item in .init(activity: item) }) ?? []
                  )
              }
+     }
+
+    var isEmpty: Bool {
+        todaysActivites.isEmpty &&
+        currentMonthActivities.isEmpty &&
+        recentMonthActivities.isEmpty
      }
  }

@@ -142,27 +142,39 @@ class GroupedListTableViewCell: UITableViewCell {
     }
 
     private func updateMask() {
+        layer.maskedCorners = maskedCorners()
         borderLayer.path = UIBezierPath(
             roundedRect: borderFrame(),
             byRoundingCorners: roundedCorners(),
             cornerRadii: CGSize(width: 10, height: 10)
         ).cgPath
-        layer.maskedCorners = maskedCorners()
     }
 
     private func borderFrame() -> CGRect {
         var newFrame = bounds
-        newFrame.size.height += 4
-        let widthDelta: CGFloat = borderWidth * 2
-        newFrame.size.width -= widthDelta
-        if isTop {
-            newFrame.origin = .init(x: widthDelta / 2, y: 0.5)
-        } else if isBottom {
-            newFrame.origin = .init(x: widthDelta / 2, y: -4.5)
-        } else {
-            newFrame.origin = .init(x: widthDelta / 2, y: -2)
+        newFrame.size.height -= borderWidth
+        newFrame.size.width -= borderWidth
+
+        let originDelta: CGFloat = borderWidth / 2
+        newFrame.origin = .init(x: originDelta, y: originDelta)
+
+        guard !isOnlyCell else { return newFrame }
+        newFrame.size.height = bounds.height + borderWidth
+
+        if isBottom {
+            newFrame.origin.y = -borderWidth
+        } else if isMiddleCell {
+            newFrame.origin.y = -originDelta
         }
         return newFrame
+    }
+
+    private var isOnlyCell: Bool {
+        isTop && isBottom
+    }
+
+    private var isMiddleCell: Bool {
+        !isTop && !isBottom
     }
 
     private func roundedCorners() -> UIRectCorner {

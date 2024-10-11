@@ -38,6 +38,11 @@ class GroupedListViewController: UIViewController,
         reloadSnapshot()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(tableView)

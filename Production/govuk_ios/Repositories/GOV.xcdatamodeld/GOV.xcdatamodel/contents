@@ -11,4 +11,9 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Topic" representedClassName="Topic" syncable="YES">
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="ref" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
 </model>

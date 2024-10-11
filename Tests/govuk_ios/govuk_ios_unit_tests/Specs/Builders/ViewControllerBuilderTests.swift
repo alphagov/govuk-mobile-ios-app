@@ -36,12 +36,16 @@ struct ViewControllerBuilderTests {
     @Test
     func home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
+        let viewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            topicAction: { _ in },
+            editAction: { _ in }
+        )
         let result = subject.home(
             searchButtonPrimaryAction: { () -> Void in },
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService(),
             recentActivityAction: {},
-            topicAction: { _ in }
+            topicWidgetViewModel: viewModel
         )
 
         #expect(result is HomeViewController)
@@ -90,7 +94,7 @@ struct ViewControllerBuilderTests {
     func topicDetail_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
-            topic: Topic(ref: "ref", title: "Title"),
+            topic: Topic(),
             analyticsService: MockAnalyticsService()
         )
         

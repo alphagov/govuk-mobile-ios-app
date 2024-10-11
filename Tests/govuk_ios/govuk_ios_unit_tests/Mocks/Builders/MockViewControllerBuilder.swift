@@ -38,9 +38,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _stubbedHomeViewController: UIViewController?
     override func home(searchButtonPrimaryAction: @escaping () -> Void,
                        configService: AppConfigServiceInterface,
-                       topicsService: TopicsServiceInterface,
                        recentActivityAction: @escaping () -> Void,
-                       topicAction: @escaping ((Topic) -> Void)) -> UIViewController {
+                       topicWidgetViewModel: TopicsWidgetViewModel) -> UIViewController {
         return _stubbedHomeViewController ?? UIViewController()
     }
 

@@ -32,24 +32,24 @@ public final class AppConfigService: AppConfigServiceInterface {
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.handleResult(result)
+                self.handleResult(result)
             }
         )
 
         appConfigServiceClient.fetchAppConfig(
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.handleResult(result)
+                self.handleResult(result)
             }
         )
     }
 
-    private func handleResult(_ result: Result<AppConfig, AppConfigError>) throws {
+    private func handleResult(_ result: Result<AppConfig, AppConfigError>) {
         switch result {
         case .success(let appConfig):
             setConfig(appConfig.config)
-        case .failure(let error):
-            throw error
+        case .failure:
+            self.isAppAvailable = false
         }
     }
 

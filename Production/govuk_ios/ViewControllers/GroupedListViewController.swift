@@ -30,6 +30,7 @@ class GroupedListViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Pages you've visited"
         configureUI()
         configureConstraints()
         tableView.delegate = self
@@ -55,14 +56,14 @@ class GroupedListViewController: UIViewController,
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,
-                constant: -10
+                constant: -16
             ),
             tableView.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
             ),
             tableView.leftAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leftAnchor,
-                constant: 10
+                constant: 16
             )
         ])
     }

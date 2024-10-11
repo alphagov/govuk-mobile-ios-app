@@ -104,6 +104,8 @@
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		5D00E9552CA544F200775D2B /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9542CA544F200775D2B /* HostingViewController.swift */; };
 		5D00E9752CA5583400775D2B /* HostingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */; };
+		5D014FEB2CB96ABB005D32C8 /* GroupedListViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D014FEA2CB96ABB005D32C8 /* GroupedListViewControllerSnapshotTests.swift */; };
+		5D014FEC2CB96CC7005D32C8 /* ActivityItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA394C2CAC862B002A7E18 /* ActivityItem+Arrangers.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
 		5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */; };
@@ -444,6 +446,7 @@
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		5D00E9542CA544F200775D2B /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		5D014FEA2CB96ABB005D32C8 /* GroupedListViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		5D08A8FF2C9AFABB0049D798 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
@@ -982,7 +985,6 @@
 		5D4043372C7DBEFD0004CCFE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5DAA394C2CAC862B002A7E18 /* ActivityItem+Arrangers.swift */,
 				5D4043382C7DBF1B0004CCFE /* AppConfig+Arrangers.swift */,
 				5D40433A2C7DBF710004CCFE /* Config+Arrangers.swift */,
 			);
@@ -1116,20 +1118,12 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
-		5D54A8392BFCD881003D0C21 /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
 		5D54A83C2BFCED7C003D0C21 /* shared */ = {
 			isa = PBXGroup;
 			children = (
 				4EDBBEAE2C9C0D4800F31577 /* Arrangers */,
 				5DBE71AE2CAE8362004ABB5E /* Extensions */,
 				5DC069F02C3C195700A81AAE /* Mocks */,
-				5D54A8392BFCD881003D0C21 /* SupportingFiles */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -1137,6 +1131,7 @@
 		5D5A25E32CAD43470013704A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5DAA394C2CAC862B002A7E18 /* ActivityItem+Arrangers.swift */,
 				5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */,
 			);
 			path = Model;
@@ -1220,6 +1215,7 @@
 				3D9C93412CB017E900EFA337 /* AppForcedUpdateViewControllerSnapshotTests.swift */,
 				3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */,
 				3D3378172CAAC179004BF83F /* AppUnavailableViewControllerSnapshotTests.swift */,
+				5D014FEA2CB96ABB005D32C8 /* GroupedListViewControllerSnapshotTests.swift */,
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
@@ -2010,12 +2006,14 @@
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				5D4F6D402CA4181D006D0B5B /* MockAppConfigService.swift in Sources */,
 				3D15E7BA2CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift in Sources */,
+				5D014FEB2CB96ABB005D32C8 /* GroupedListViewControllerSnapshotTests.swift in Sources */,
 				3D3378182CAAC179004BF83F /* AppUnavailableViewControllerSnapshotTests.swift in Sources */,
 				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
 				3D9C93462CB01CDA00EFA337 /* MockAppVersionProvider.swift in Sources */,
 				5DE2BBBD2C982824003116B6 /* MockURLOpener.swift in Sources */,
 				5DF8854E2CAC1A120060A40D /* MockActivityService.swift in Sources */,
+				5D014FEC2CB96CC7005D32C8 /* ActivityItem+Arrangers.swift in Sources */,
 				168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */,
 				3DEC85A42C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,

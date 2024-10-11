@@ -43,11 +43,9 @@ class GroupedListTableViewCell: UITableViewCell {
         return localLayer
     }()
 
-    private lazy var separatorView: UIView = {
-        let localView = UIView()
+    private lazy var separatorView: DividerView = {
+        let localView = DividerView()
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        localView.backgroundColor = UIColor.govUK.strokes.listDivider
         return localView
     }()
 

@@ -2,16 +2,19 @@ import UIKit
 
 final class EditTopicsCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
+    private let topicsService: TopicsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
     private let topics: [Topic]
     private let dismissed: () -> Void
 
     init(navigationController: UINavigationController,
          analyticsService: AnalyticsServiceInterface,
+         topicsService: TopicsServiceInterface,
          viewControllerBuilder: ViewControllerBuilder,
          topics: [Topic],
          dismissed: @escaping () -> Void) {
         self.analyticsService = analyticsService
+        self.topicsService = topicsService
         self.viewControllerBuilder = viewControllerBuilder
         self.topics = topics
         self.dismissed = dismissed
@@ -22,6 +25,7 @@ final class EditTopicsCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.editTopics(
             topics,
             analyicsService: analyticsService,
+            topicsService: topicsService,
             dismissAction: { [weak self] in
                 self?.dismissModal()
             }

@@ -115,8 +115,10 @@ class ViewControllerBuilder {
     @MainActor
     func editTopics(_ topics: [Topic],
                     analyicsService: AnalyticsServiceInterface,
+                    topicsService: TopicsServiceInterface,
                     dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = EditTopicsViewModel(topics: topics,
+                                            topicsService: topicsService,
                                             dismissAction: dismissAction)
         let view = EditTopicsView(
             viewModel: viewModel

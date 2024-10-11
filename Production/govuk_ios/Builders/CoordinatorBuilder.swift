@@ -139,6 +139,7 @@ class CoordinatorBuilder {
                     didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         EditTopicsCoordinator(navigationController: navigationControlloer,
                               analyticsService: container.analyticsService.resolve(),
+                              topicsService: container.topicsService.resolve(),
                               viewControllerBuilder: ViewControllerBuilder(),
                               topics: topics,
                               dismissed: didDismissAction

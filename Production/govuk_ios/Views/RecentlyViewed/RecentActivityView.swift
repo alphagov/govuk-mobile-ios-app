@@ -21,58 +21,73 @@ struct RecentActivityView: View {
         "recentActivityToolBarTitle"
     )
 
+    let navigationTitle = String.recentActivity.localized(
+        "recentActivityNavigationTitle"
+    )
+
     init(viewModel: RecentActivitiesViewModel) {
         self.viewModel = viewModel
     }
 
     var body: some View {
         ScrollView {
-            if viewModel.model.todaysActivites.count >= 1 {
-                let rows = viewModel.model.todaysActivites.map({
-                    viewModel.returnActivityRow(activityItem: $0)
-                })
-                GroupedList(
-                    content: [
-                        GroupedListSection(
-                            heading: String.recentActivity.localized(
-                                "recentActivitiesTodaysListTitle"
-                            ),
-                            rows: rows,
-                            footer: nil
-                        )
-                    ]
-                )
+            if viewModel.isModelEmpty() {
+                RecentActivityErrorView()
+            } else {
+                if viewModel.model.todaysActivites.count >= 1 {
+                    let rows = viewModel.model.todaysActivites.map({
+                        viewModel.returnActivityRow(activityItem: $0)
+                    })
+                    GroupedList(
+                        content: [
+                            GroupedListSection(
+                                heading: String.recentActivity.localized(
+                                    "recentActivitiesTodaysListTitle"
+                                ),
+                                rows: rows,
+                                footer: nil
+                            )
+                        ]
+                    )
+                }
+                if viewModel.model.currentMonthActivities.count >= 1 {
+                    let rows = viewModel.model.currentMonthActivities
+                        .map { viewModel.returnActivityRow(activityItem: $0) }
+                    GroupedList(
+                        content: [
+                            GroupedListSection(
+                                heading: String.recentActivity.localized(
+                                    "recentActivityCurrentMonthItems"
+                                ),
+                                rows: rows,
+                                footer: nil
+                            )
+                        ]
+                    )
+                }
+                if viewModel.model.recentMonthActivities.count >= 1 {
+                    GroupedList(content: viewModel.buildSections())
+                }
             }
-            if viewModel.model.currentMonthActivities.count >= 1 {
-                let rows = viewModel.model.currentMonthActivities
-                    .map { viewModel.returnActivityRow(activityItem: $0) }
-                GroupedList(
-                    content: [
-                        GroupedListSection(
-                            heading: String.recentActivity.localized(
-                                "recentActivityCurrentMonthItems"
-                            ),
-                            rows: rows,
-                            footer: nil
-                        )
-                    ]
-                )
-            }
-            if viewModel.model.recentMonthActivities.count >= 1 {
-                GroupedList(content: viewModel.buildSections())
-            }
-        }.toolbar {
+        }
+        .onAppear {
+            try? viewModel.fetchActivities.performFetch()
+        }
+        .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     showingAlert.toggle()
                 } label: {
                     Text(toolbarButtonTitle)
-                }.alert(isPresented: $showingAlert, content: {
+                }.opacity(viewModel.isModelEmpty() ? 0 : 1)
+                .alert(isPresented: $showingAlert, content: {
                     Alert(
                         title: Text(alertTitle),
                         message: Text(alertDescription),
                         primaryButton: .destructive(Text(alertPrimaryButtonTitle)) {
-                            viewModel.deleteActivities()
+                            withAnimation {
+                                viewModel.deleteActivities()
+                            }
                         },
                         secondaryButton: .cancel()
                     )
@@ -81,3 +96,8 @@ struct RecentActivityView: View {
         }
     }
 }
+
+ extension RecentActivityView: TrackableScreen {
+    var trackingTitle: String? { "Pages you've visited" }
+    var trackingName: String { "Pages you've visited" }
+ }

@@ -19,7 +19,9 @@ class RecentActivityCoordinator: BaseCoordinator {
 //            analyticsService: analyticsService
 //        )
         let viewModel = GroupedListViewModel(
-            activityService: Container.shared.activityService()
+            activityService: Container.shared.activityService(),
+            analyticsService: Container.shared.analyticsService(),
+            urlopener: UIApplication.shared
         )
         let viewController = GroupedListViewController(
             viewModel: viewModel

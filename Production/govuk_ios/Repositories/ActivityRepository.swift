@@ -4,6 +4,7 @@ import CoreData
 protocol ActivityRepositoryInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(params: ActivityItemCreateParams)
+    func deleteAll()
 }
 
 struct ActivityRepository: ActivityRepositoryInterface {
@@ -48,5 +49,16 @@ struct ActivityRepository: ActivityRepositoryInterface {
             sectionNameKeyPath: nil,
             cacheName: nil
         ).fetch()
+    }
+
+    func deleteAll() {
+        let result = fetch(
+            predicate: nil,
+            context: coreData.backgroundContext
+        )
+        for item in result.fetchedObjects ?? [] {
+            coreData.backgroundContext.delete(item)
+        }
+        try? coreData.backgroundContext.save()
     }
 }

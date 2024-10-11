@@ -36,7 +36,7 @@ class GroupedListTableViewCell: UITableViewCell {
 
     private lazy var borderLayer: CAShapeLayer = {
         let localLayer = CAShapeLayer()
-        localLayer.lineWidth = 0.5
+        localLayer.lineWidth = borderWidth
         localLayer.strokeColor = UIColor.govUK.strokes.listDivider.cgColor
         localLayer.fillColor = UIColor.clear.cgColor
         return localLayer
@@ -50,6 +50,7 @@ class GroupedListTableViewCell: UITableViewCell {
         return localView
     }()
 
+    private let borderWidth: CGFloat = 0.5
     private var isTop = false
     private var isBottom = false
 
@@ -141,19 +142,18 @@ class GroupedListTableViewCell: UITableViewCell {
     }
 
     private func updateMask() {
-        var corners: UIRectCorner = isTop ? [.topLeft, .topRight] : []
-        var mainCorners: CACornerMask = []
-        if isTop {
-            mainCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        }
-        if isBottom {
-            corners =  [corners, .bottomLeft, .bottomRight]
-            mainCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        }
-        layer.maskedCorners = mainCorners
+        borderLayer.path = UIBezierPath(
+            roundedRect: borderFrame(),
+            byRoundingCorners: roundedCorners(),
+            cornerRadii: CGSize(width: 10, height: 10)
+        ).cgPath
+        layer.maskedCorners = maskedCorners()
+    }
+
+    private func borderFrame() -> CGRect {
         var newFrame = bounds
         newFrame.size.height += 4
-        let widthDelta: CGFloat = 1
+        let widthDelta: CGFloat = borderWidth * 2
         newFrame.size.width -= widthDelta
         if isTop {
             newFrame.origin = .init(x: widthDelta / 2, y: 0.5)
@@ -162,12 +162,28 @@ class GroupedListTableViewCell: UITableViewCell {
         } else {
             newFrame.origin = .init(x: widthDelta / 2, y: -2)
         }
+        return newFrame
+    }
 
-        let path = UIBezierPath(
-            roundedRect: newFrame,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: 10, height: 10)
-        )
-        borderLayer.path = path.cgPath
+    private func roundedCorners() -> UIRectCorner {
+        var corners: UIRectCorner = []
+        if isTop {
+            corners.insert([.topLeft, .topRight])
+        }
+        if isBottom {
+            corners.insert([.bottomLeft, .bottomRight])
+        }
+        return corners
+    }
+
+    private func maskedCorners() -> CACornerMask {
+        var corners: CACornerMask = []
+        if isTop {
+            corners.insert([.layerMinXMinYCorner, .layerMaxXMinYCorner])
+        }
+        if isBottom {
+            corners.insert([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+        }
+        return corners
     }
 }

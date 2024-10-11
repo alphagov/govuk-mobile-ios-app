@@ -13,6 +13,7 @@ class GroupedListTableViewCell: UITableViewCell {
         let localView = UILabel()
         localView.numberOfLines = 0
         localView.lineBreakMode = .byWordWrapping
+        localView.font = UIFont.govUK.body
         localView.textColor = UIColor.govUK.text.link
         return localView
     }()

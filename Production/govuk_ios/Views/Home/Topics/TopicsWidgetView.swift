@@ -60,14 +60,17 @@ class TopicsWidgetView: UIView {
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
-        viewModel.fetchTopics { result in
-            switch result {
-            case .success:
-                self.updateTopics(viewModel.topics)
-            case .failure:
-                break
-            }
-        }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(topicsDidUpdate),
+            name: .NSManagedObjectContextDidSave,
+            object: nil
+        )
+    }
+
+    @objc
+    private func topicsDidUpdate(notification: Notification) {
+        updateTopics(viewModel.favoriteTopics)
     }
 
     private func configureUI() {
@@ -154,7 +157,9 @@ class TopicsWidgetView: UIView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         let sizeClass = UITraitCollection.current.verticalSizeClass
-        rowCount = sizeClass == .regular ? 2 : 4
-        updateTopics(viewModel.topics)
+        if sizeClass != previousTraitCollection?.verticalSizeClass {
+            rowCount = sizeClass == .regular ? 2 : 4
+            updateTopics(viewModel.favoriteTopics)
+        }
     }
 }

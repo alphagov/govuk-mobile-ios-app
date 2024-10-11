@@ -48,6 +48,7 @@
 		3D15E7B62CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B52CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift */; };
 		3D15E7B82CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B72CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift */; };
 		3D15E7BA2CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */; };
+		3D211B8F2CB6B4FE005D1472 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D211B8E2CB6B4FE005D1472 /* HeaderView.swift */; };
 		3D3378102CAAC015004BF83F /* AppUnavailableCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D33780F2CAAC015004BF83F /* AppUnavailableCoordinator.swift */; };
 		3D3378122CAAC0A0004BF83F /* AppAvailability.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3D3378112CAAC0A0004BF83F /* AppAvailability.xcstrings */; };
 		3D3378142CAAC0E0004BF83F /* AppUnavailableContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */; };
@@ -382,6 +383,7 @@
 		3D15E7B52CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateContainerViewModelTests.swift; sourceTree = "<group>"; };
 		3D15E7B72CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateCoordinatorTests.swift; sourceTree = "<group>"; };
 		3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		3D211B8E2CB6B4FE005D1472 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		3D33780F2CAAC015004BF83F /* AppUnavailableCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUnavailableCoordinator.swift; sourceTree = "<group>"; };
 		3D3378112CAAC0A0004BF83F /* AppAvailability.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppAvailability.xcstrings; sourceTree = "<group>"; };
 		3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUnavailableContainerView.swift; sourceTree = "<group>"; };
@@ -1682,6 +1684,7 @@
 				3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */,
 				3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */,
 				966ABE202C78E06F00099DF9 /* GroupedList */,
+				3D211B8E2CB6B4FE005D1472 /* HeaderView.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -2049,6 +2052,7 @@
 				3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */,
 				5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */,
 				4E94E8EB2C8B1AC700906803 /* RecentActivityErrorView.swift in Sources */,
+				3D211B8F2CB6B4FE005D1472 /* HeaderView.swift in Sources */,
 				5D3123802C85A6B70088B931 /* ActivityService.swift in Sources */,
 				5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */,
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,

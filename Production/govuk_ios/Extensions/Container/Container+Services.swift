@@ -73,7 +73,8 @@ extension Container {
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(
-                topicsServiceClient: self.topicsServiceClient()
+                topicsServiceClient: self.topicsServiceClient(),
+                topicsRepository: self.topicsRespository()
             )
         }
     }

@@ -9,5 +9,6 @@ extension Container {
                 notificationCenter: .default
             ).load()
         }
+        .scope(.singleton)
     }
 }

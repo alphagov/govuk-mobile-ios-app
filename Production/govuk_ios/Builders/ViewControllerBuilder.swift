@@ -104,7 +104,7 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func topicDetail(topic: Topic?,
+    func topicDetail(topic: Topic,
                      analyticsService: AnalyticsServiceInterface
     ) -> UIViewController {
         var view = TopicDetailView()

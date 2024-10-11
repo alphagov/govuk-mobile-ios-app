@@ -8,7 +8,7 @@ class GroupedListViewController: BaseViewController,
                                  UITableViewDelegate {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
-    private lazy var barButtonItem = UIBarButtonItem.clearAll(
+    private lazy var barButtonItem = UIBarButtonItem.recentActivitEdit(
         target: self,
         action: #selector(barButtonPressed)
     )
@@ -22,13 +22,13 @@ class GroupedListViewController: BaseViewController,
     }()
 
     private lazy var noItemsView = {
-        let localView = SearchErrorView()
+        let localView = ListInformationView()
         localView.backgroundColor = .clear
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.isHidden = true
         localView.configure(
             title: String.recentActivity.localized("recentActivityErrorViewTitle"),
-            errorDesc: String.recentActivity.localized("recentActivityErrorViewDescription")
+            description: String.recentActivity.localized("recentActivityErrorViewDescription")
         )
         return localView
     }()

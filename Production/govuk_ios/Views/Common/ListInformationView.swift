@@ -1,10 +1,10 @@
 import UIKit
 import UIComponents
 
-class SearchErrorView: UIView {
-    var errorLink: String?
+class ListInformationView: UIView {
+    private(set) var link: String?
 
-    lazy var errorTitle: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let localLabel = UILabel()
         localLabel.translatesAutoresizingMaskIntoConstraints = false
         localLabel.font = UIFont.govUK.bodySemibold
@@ -17,7 +17,7 @@ class SearchErrorView: UIView {
         return localLabel
     }()
 
-    lazy var errorDescription: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let localLabel = UILabel()
         localLabel.translatesAutoresizingMaskIntoConstraints = false
         localLabel.lineBreakMode = .byWordWrapping
@@ -30,7 +30,7 @@ class SearchErrorView: UIView {
         return localLabel
     }()
 
-    lazy var errorLinkButton: GOVUKButton = {
+    private lazy var linkButton: GOVUKButton = {
         let localButton = GOVUKButton(.secondary)
         localButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -52,59 +52,56 @@ class SearchErrorView: UIView {
     }
 
     func configure(title: String? = nil,
-                   errorDesc: String? = nil,
+                   description: String? = nil,
                    linkText: String? = nil,
                    accessibilityLinkText: String? = nil,
                    link: String? = nil) {
-        errorTitle.text = title
-        errorDescription.text = errorDesc
-        errorLink = link
+        titleLabel.text = title
+        descriptionLabel.text = description
+        self.link = link
 
-        errorLinkButton.isHidden = (link == nil)
+        linkButton.isHidden = link == nil
 
-        var errorLinkButtonButtonViewModel: GOVUKButton.ButtonViewModel {
-            .init(
-                localisedTitle: linkText ?? "",
-                action: { [weak self] in
-                    self?.errorButtonPressed()
-                }
-            )
-        }
-        errorLinkButton.viewModel = errorLinkButtonButtonViewModel
-        errorLinkButton.accessibilityLabel = accessibilityLinkText
+        linkButton.viewModel = .init(
+            localisedTitle: linkText ?? "",
+            action: { [weak self] in
+                self?.linkButtonPressed()
+            }
+        )
+        linkButton.accessibilityLabel = accessibilityLinkText
     }
 
     private func configureUI() {
         backgroundColor = UIColor.govUK.fills.surfaceModal
 
-        addSubview(errorTitle)
-        addSubview(errorDescription)
-        addSubview(errorLinkButton)
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
+        addSubview(linkButton)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            errorTitle.topAnchor.constraint(equalTo: topAnchor),
-            errorTitle.leftAnchor.constraint(equalTo: leftAnchor),
-            errorTitle.rightAnchor.constraint(equalTo: rightAnchor),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor),
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor),
 
-            errorDescription.topAnchor.constraint(
-                equalTo: errorTitle.bottomAnchor,
+            descriptionLabel.topAnchor.constraint(
+                equalTo: titleLabel.bottomAnchor,
                 constant: 8
             ),
-            errorDescription.leftAnchor.constraint(equalTo: leftAnchor),
-            errorDescription.rightAnchor.constraint(equalTo: rightAnchor),
+            descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor),
+            descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor),
 
-            errorLinkButton.topAnchor.constraint(equalTo: errorDescription.bottomAnchor),
-            errorLinkButton.leftAnchor.constraint(equalTo: leftAnchor),
-            errorLinkButton.rightAnchor.constraint(equalTo: rightAnchor),
-            errorLinkButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+            linkButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
+            linkButton.leftAnchor.constraint(equalTo: leftAnchor),
+            linkButton.rightAnchor.constraint(equalTo: rightAnchor),
+            linkButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 
     @objc
-    private func errorButtonPressed() {
-        guard let errorLink = errorLink
+    private func linkButtonPressed() {
+        guard let errorLink = link
         else { return }
 
         UIApplication.shared.open(URL(string: errorLink)!)

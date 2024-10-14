@@ -112,15 +112,6 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
         activity2.url = "https://www.youtube.com/"
         activity2.date = Date()
 
-        let activity2 = ActivityItem(
-            context: coreData.backgroundContext
-        )
-        activity2.id = UUID().uuidString
-        activity2.title = "benefits"
-        activity2.url = "https://www.youtube.com/"
-        activity2.date = Date.arrange.
-
-
         try? coreData.backgroundContext.save()
         activityArray.append(activity)
         activityArray.append(activity2)

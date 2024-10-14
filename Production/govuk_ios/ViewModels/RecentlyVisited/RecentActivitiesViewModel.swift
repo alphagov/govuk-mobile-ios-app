@@ -9,6 +9,7 @@ class RecentActivitiesViewModel: NSObject,
                                  NSFetchedResultsControllerDelegate {
     @Inject(\.activityService) private(set) var activityService: ActivityServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private var retainedReultsController: NSFetchedResultsController<ActivityItem>?
     @Published var model: RecentActivitiesViewStructure = RecentActivitiesViewStructure(
         todaysActivites: [],
         currentMonthActivities: [],
@@ -100,11 +101,28 @@ class RecentActivitiesViewModel: NSObject,
     }
 
     private func setupFetchResultsController() {
-        fetchActivities.delegate = self
-        try? fetchActivities.performFetch()
-        let activities = fetchActivities.fetchedObjects ?? []
-        sortActivites(activities: activities)
+        retainedReultsController = activityService.fetch()
+        retainedReultsController?.delegate = self
+        let activities = retainedReultsController?.fetchedObjects ?? []
+        let localStructure = sortActivites(activities: activities)
+        self.model = localStructure
+        return localStructure
+
+
+//        fetchActivities.delegate = self
+//        try? fetchActivities.performFetch()
+//        let activities = fetchActivities.fetchedObjects ?? []
+//        sortActivites(activities: activities)
     }
+
+    func controller(
+        _ controller: NSFetchedResultsController<any NSFetchRequestResult>,
+        didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+            let activities = retainedReultsController?.fetchedObjects ?? []
+            model = sortActivites(activities: activities)
+        }
+
+    )
 
     func controllerDidChangeContent(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>) {

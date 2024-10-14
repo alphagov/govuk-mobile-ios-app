@@ -101,4 +101,18 @@ struct ViewControllerBuilderTests {
         let rootView = (result as? HostingViewController<TopicDetailView>)?.rootView
         #expect(rootView != nil) 
     }
+    
+    @Test
+    func editTopics_returnsExpectedResult() async throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.editTopics(
+            [],
+            analyticsService: MockAnalyticsService(),
+            topicsService: MockTopicsService(),
+            dismissAction: { }
+        )
+        
+        let rootView = (result as? HostingViewController<EditTopicsView>)?.rootView
+        #expect(rootView != nil)
+    }
 }

@@ -97,14 +97,27 @@ struct CoordinatorBuilderTests {
     }
     
     @MainActor
-    func test_topicDetail_returnsExpectedResult() {
+    func topicDetail_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.topicDetail(
-            Topic(ref: "ref", title: "title"),
+            Topic(),
             navigationController: mockNavigationController
         )
 
         #expect(coordinator is TopicsCoordinator)
+    }
+    
+    @MainActor
+    func editTopics_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.editTopics(
+            [Topic](),
+            navigationControlloer: mockNavigationController,
+            didDismissAction: { }
+        )
+
+        #expect(coordinator is EditTopicsCoordinator)
     }
 }

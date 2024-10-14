@@ -7,7 +7,7 @@ extension ActivityItem {
     static func arrange(id: String = UUID().uuidString,
                         title: String = UUID().uuidString,
                         date: Date = .init(),
-                        url: String = UUID().uuidString,
+                        url: String = "https://www.gov.uk",
                         context: NSManagedObjectContext) -> ActivityItem {
         let item = ActivityItem(context: context)
         item.id = id

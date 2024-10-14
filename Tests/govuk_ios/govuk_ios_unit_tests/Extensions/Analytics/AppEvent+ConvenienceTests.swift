@@ -113,6 +113,6 @@ struct AppEvent_ConvenienceTests {
     func clearRecentActivity_returnsExpectedResuls() {
         let result = AppEvent.clearRecentActivity()
 
-        #expect(result.name == "Cleared_recent_activity")
+        #expect(result.name == "ClearRecentActivity")
     }
 }

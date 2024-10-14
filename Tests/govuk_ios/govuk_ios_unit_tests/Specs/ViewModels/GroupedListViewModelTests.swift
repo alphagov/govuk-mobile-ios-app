@@ -44,13 +44,19 @@ struct GroupedListViewModelTests {
             urlopener: mockURLOpener
         )
         let coreData = CoreDataRepository.arrangeAndLoad
-        let item = ActivityItem.arrange(context: coreData.viewContext)
+        let item = ActivityItem.arrange(
+            date: .arrange("01/01/2001"),
+            context: coreData.viewContext
+        )
 
         sut.selected(item: item)
 
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == item.url)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == item.url)
         let expectedEvent = AppEvent.recentActivity(activity: item)
         #expect(mockAnalyticsService._trackedEvents.first?.name == expectedEvent.name)
+        #expect(
+            Calendar.current.isDate(item.date, equalTo: Date(), toGranularity: .minute)
+        )
     }
 
     @Test

@@ -21,7 +21,7 @@ class LaunchCoordinator: BaseCoordinator {
     override func start(url: URL?) {
         fetchAppConfig()
 
-        setViewController()
+        setLaunchViewController()
 
         dispatchGroup.notify(queue: .main) {
             self.completion()
@@ -35,7 +35,7 @@ class LaunchCoordinator: BaseCoordinator {
         }
     }
 
-    private func setViewController() {
+    private func setLaunchViewController() {
         dispatchGroup.enter()
         let viewController = viewControllerBuilder.launch(
             completion: { self.dispatchGroup.leave() }

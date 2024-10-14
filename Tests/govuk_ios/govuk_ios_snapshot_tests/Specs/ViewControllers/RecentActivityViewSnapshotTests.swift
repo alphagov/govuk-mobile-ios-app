@@ -48,20 +48,34 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
             notificationCenter: .default
         ).load()
 
-        let activity = ActivityItem(context: coreData.backgroundContext)
+        var activityArray:[ActivityItem] = []
+
+        let activity = ActivityItem(
+            context: coreData.backgroundContext
+        )
         activity.id = UUID().uuidString
         activity.title = "benefits"
         activity.url = "https://www.youtube.com/"
         activity.date = Date.arrange("14/04/2016")
 
+        let activity2 = ActivityItem(
+            context: coreData.backgroundContext
+        )
+        activity2.id = UUID().uuidString
+        activity2.title = "benefits"
+        activity2.url = "https://www.youtube.com/"
+        activity2.date = Date()
+
         try? coreData.backgroundContext.save()
+        activityArray.append(activity)
+        activityArray.append(activity2)
 
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
         )
 
-        viewModel.sortActivites(activities: [activity])
+        viewModel.sortActivites(activities: activityArray)
 
         let view = RecentActivityView(viewModel: viewModel)
 
@@ -80,13 +94,36 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
             notificationCenter: .default
         ).load()
 
-        let activity = ActivityItem(context: coreData.backgroundContext)
+        var activityArray:[ActivityItem] = []
+
+        let activity = ActivityItem(
+            context: coreData.backgroundContext
+        )
         activity.id = UUID().uuidString
         activity.title = "Bringing your pet dog, cat or ferret to Great Britain, long title end"
         activity.url = "https://www.youtube.com/"
         activity.date = Date.arrange("14/04/2016")
 
+        let activity2 = ActivityItem(
+            context: coreData.backgroundContext
+        )
+        activity2.id = UUID().uuidString
+        activity2.title = "benefits"
+        activity2.url = "https://www.youtube.com/"
+        activity2.date = Date()
+
+        let activity2 = ActivityItem(
+            context: coreData.backgroundContext
+        )
+        activity2.id = UUID().uuidString
+        activity2.title = "benefits"
+        activity2.url = "https://www.youtube.com/"
+        activity2.date = Date.arrange.
+
+
         try? coreData.backgroundContext.save()
+        activityArray.append(activity)
+        activityArray.append(activity2)
 
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),

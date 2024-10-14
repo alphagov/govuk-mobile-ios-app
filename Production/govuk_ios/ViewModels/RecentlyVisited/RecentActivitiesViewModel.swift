@@ -56,7 +56,7 @@ class RecentActivitiesViewModel: ObservableObject {
 
     private func trackSelection(activity: ActivityItem) {
         let event = AppEvent.recentActivity(
-            activity: activity.title
+            activity: activity
         )
         analyticsService.track(
             event: event

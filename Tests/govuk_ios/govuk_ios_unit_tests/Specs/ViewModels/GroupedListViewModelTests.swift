@@ -33,4 +33,45 @@ struct GroupedListViewModelTests {
         #expect(mockService._receivedDeleteAll)
     }
 
+    @Test
+    func selectItem_validURL_performsExpectedActions() {
+        let mockService = MockActivityService()
+        let mockURLOpener = MockURLOpener()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = GroupedListViewModel(
+            activityService: mockService,
+            analyticsService: mockAnalyticsService,
+            urlopener: mockURLOpener
+        )
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let item = ActivityItem.arrange(context: coreData.viewContext)
+
+        sut.selected(item: item)
+
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == item.url)
+        let expectedEvent = AppEvent.recentActivity(activity: item)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == expectedEvent.name)
+    }
+
+    @Test
+    func selectItem_invalidURL_callsService() {
+        let mockService = MockActivityService()
+        let mockURLOpener = MockURLOpener()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = GroupedListViewModel(
+            activityService: mockService,
+            analyticsService: mockAnalyticsService,
+            urlopener: mockURLOpener
+        )
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let item = ActivityItem.arrange(
+            url: "",
+            context: coreData.viewContext
+        )
+
+        sut.selected(item: item)
+
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == nil)
+        #expect(mockAnalyticsService._trackedEvents.isEmpty)
+    }
 }

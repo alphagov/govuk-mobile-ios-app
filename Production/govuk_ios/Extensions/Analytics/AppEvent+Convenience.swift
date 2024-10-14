@@ -74,11 +74,11 @@ extension AppEvent {
         )
     }
 
-    static func recentActivity(activity: String) -> AppEvent {
+    static func recentActivity(activity: ActivityItem) -> AppEvent {
         .init(
             name: "RecentActivity",
             params: [
-                "text": activity
+                "text": activity.title
             ]
         )
     }

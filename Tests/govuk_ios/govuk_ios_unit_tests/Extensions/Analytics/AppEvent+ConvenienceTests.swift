@@ -108,4 +108,11 @@ struct AppEvent_ConvenienceTests {
         #expect(result.params?["external"] as? Bool == true)
         #expect(result.params?["language"] as? String == "en")
     }
+
+    @Test
+    func clearRecentActivity_returnsExpectedResuls() {
+        let result = AppEvent.clearRecentActivity()
+
+        #expect(result.name == "Cleared_recent_activity")
+    }
 }

@@ -83,6 +83,9 @@ class GroupedListViewModel: NSObject,
 
     func deleteAllItems() {
         activityService.deleteAll()
+        analyticsService.track(
+            event: .clearRecentActivity()
+        )
     }
 
     func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>,

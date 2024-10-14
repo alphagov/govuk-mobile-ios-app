@@ -5,6 +5,7 @@ private typealias DataSource = UITableViewDiffableDataSource<GroupListSection, G
 private typealias Snapshot = NSDiffableDataSourceSnapshot<GroupListSection, GroupListItem>
 
 class GroupedListViewController: BaseViewController,
+                                 TrackableScreen,
                                  UITableViewDelegate {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
@@ -32,6 +33,9 @@ class GroupedListViewController: BaseViewController,
         )
         return localView
     }()
+
+    var trackingName: String { "Pages you've visited" }
+    var trackingTitle: String? { "Pages you've visited" }
 
     private let viewModel: GroupedListViewModel
 
@@ -135,6 +139,7 @@ class GroupedListViewController: BaseViewController,
                     top: indexPath.row == 0,
                     bottom: item == section.items.last
                 )
+                cell.selectionStyle = .none
             }
             return cell
         }

@@ -52,13 +52,8 @@ struct ActivityRepository: ActivityRepositoryInterface {
     }
 
     func deleteAll() {
-        let result = fetch(
-            predicate: nil,
-            context: coreData.backgroundContext
+        coreData.deleteAll(
+            fetchRequest: ActivityItem.clearRequest()
         )
-        for item in result.fetchedObjects ?? [] {
-            coreData.backgroundContext.delete(item)
-        }
-        try? coreData.backgroundContext.save()
     }
 }

@@ -13,7 +13,6 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
         )
 
         let view = RecentActivityView(viewModel: viewModel)
-
         let viewController = HostingViewController(
             rootView: view
         )
@@ -32,7 +31,6 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
         )
 
         let view = RecentActivityView(viewModel: viewModel)
-
         let viewController = HostingViewController(
             rootView: view
         )
@@ -50,23 +48,20 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
 
         var activityArray:[ActivityItem] = []
 
-        let activity = ActivityItem(
-            context: coreData.backgroundContext
-        )
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefits"
         activity.url = "https://www.youtube.com/"
         activity.date = Date.arrange("14/04/2016")
 
-        let activity2 = ActivityItem(
-            context: coreData.backgroundContext
-        )
+        let activity2 = ActivityItem(context: coreData.backgroundContext)
         activity2.id = UUID().uuidString
         activity2.title = "benefits"
         activity2.url = "https://www.youtube.com/"
         activity2.date = Date()
 
         try? coreData.backgroundContext.save()
+
         activityArray.append(activity)
         activityArray.append(activity2)
 
@@ -78,7 +73,6 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
         viewModel.sortActivites(activities: activityArray)
 
         let view = RecentActivityView(viewModel: viewModel)
-
         let viewController = HostingViewController(
             rootView: view
         )
@@ -96,23 +90,20 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
 
         var activityArray:[ActivityItem] = []
 
-        let activity = ActivityItem(
-            context: coreData.backgroundContext
-        )
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "Bringing your pet dog, cat or ferret to Great Britain, long title end"
         activity.url = "https://www.youtube.com/"
         activity.date = Date.arrange("14/04/2016")
 
-        let activity2 = ActivityItem(
-            context: coreData.backgroundContext
-        )
+        let activity2 = ActivityItem(context: coreData.backgroundContext)
         activity2.id = UUID().uuidString
         activity2.title = "benefits"
         activity2.url = "https://www.youtube.com/"
         activity2.date = Date()
 
         try? coreData.backgroundContext.save()
+        
         activityArray.append(activity)
         activityArray.append(activity2)
 
@@ -124,7 +115,6 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
         viewModel.sortActivites(activities: [activity])
 
         let view = RecentActivityView(viewModel: viewModel)
-
         let viewController = HostingViewController(
             rootView: view
         )

@@ -96,7 +96,7 @@ struct CoordinatorBuilderTests {
         #expect(coordinator is RecentActivityCoordinator)
     }
     
-    @MainActor
+    @Test
     func topicDetail_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
@@ -108,7 +108,7 @@ struct CoordinatorBuilderTests {
         #expect(coordinator is TopicsCoordinator)
     }
     
-    @MainActor
+    @Test
     func editTopics_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()

@@ -77,25 +77,22 @@ class CoreDataRepository: CoreDataRepositoryInterface {
             fetchRequest: fetchRequest
         )
         batchDeleteRequest.resultType = .resultTypeObjectIDs
-        do {
-            let result = try self.persistentContainer.persistentStoreCoordinator.execute(
-                batchDeleteRequest,
-                with: backgroundContext
-            )
-            guard let deletResult = result as? NSBatchDeleteResult
-            else { return }
-            let changes: [AnyHashable: Any] = [
-                NSDeletedObjectsKey: deletResult.result as? [NSManagedObjectID]
-            ].compactMapValues({ $0 })
-            NSManagedObjectContext.mergeChanges(
-                fromRemoteContextSave: changes,
-                into: [
-                    backgroundContext,
-                    viewContext
-                ]
-            )
-        } catch {
-            print(error)
-        }
+
+        guard let deleteResult = try? self.persistentContainer.persistentStoreCoordinator.execute(
+            batchDeleteRequest,
+            with: backgroundContext
+        ) as? NSBatchDeleteResult
+        else { return }
+
+        let changes: [AnyHashable: Any] = [
+            NSDeletedObjectsKey: deleteResult.result as? [NSManagedObjectID]
+        ].compactMapValues { $0 }
+        NSManagedObjectContext.mergeChanges(
+            fromRemoteContextSave: changes,
+            into: [
+                backgroundContext,
+                viewContext
+            ]
+        )
     }
 }

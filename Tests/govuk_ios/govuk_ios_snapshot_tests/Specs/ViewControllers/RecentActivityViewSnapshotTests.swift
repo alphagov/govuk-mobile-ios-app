@@ -7,20 +7,13 @@ import CoreData
 
 class RecentActivityViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_errorView_rendersCorrectly() {
-        let coreData = CoreDataRepository.arrange(
-            notificationCenter: .default
-        ).load()
-
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
         )
 
         let view = RecentActivityView(viewModel: viewModel)
-            .environment(
-                \.managedObjectContext,
-                 coreData.viewContext
-            )
+
         let viewController = HostingViewController(
             rootView: view
         )
@@ -33,20 +26,13 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_errorView_rendersCorrectly() {
-        let coreData = CoreDataRepository.arrange(
-            notificationCenter: .default
-        ).load()
-
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
         )
 
         let view = RecentActivityView(viewModel: viewModel)
-            .environment(
-                \.managedObjectContext,
-                 coreData.viewContext
-            )
+
         let viewController = HostingViewController(
             rootView: view
         )
@@ -75,11 +61,10 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService()
         )
 
+        viewModel.sortActivites(activities: [activity])
+
         let view = RecentActivityView(viewModel: viewModel)
-            .environment(
-                \.managedObjectContext,
-                 coreData.viewContext
-            )
+
         let viewController = HostingViewController(
             rootView: view
         )
@@ -108,11 +93,9 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService()
         )
 
+        viewModel.sortActivites(activities: [activity])
+
         let view = RecentActivityView(viewModel: viewModel)
-            .environment(
-                \.managedObjectContext,
-                 coreData.viewContext
-            )
 
         let viewController = HostingViewController(
             rootView: view

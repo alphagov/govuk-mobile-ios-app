@@ -92,7 +92,6 @@ class GroupedListViewModel: NSObject,
                     didChangeContentWith
                     snapshot: NSDiffableDataSourceSnapshotReference) {
         let items = retainedResultsController?.fetchedObjects ?? []
-        let localStructure = sortActivites(activities: items)
-        structure = localStructure
+        structure = sortActivites(activities: items)
     }
 }

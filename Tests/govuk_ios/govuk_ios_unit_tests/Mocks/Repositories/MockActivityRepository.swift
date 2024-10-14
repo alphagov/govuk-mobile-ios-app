@@ -3,7 +3,7 @@ import CoreData
 
 @testable import govuk_ios
 
-class MockActivityRepository: ActivityRepositoryInterface {    
+class MockActivityRepository: ActivityRepositoryInterface {
 
     var _receivedSaveParams: ActivityItemCreateParams?
     func save(params: ActivityItemCreateParams) {
@@ -19,5 +19,4 @@ class MockActivityRepository: ActivityRepositoryInterface {
     func deleteAll() {
         _receivedDeleteAll = true
     }
-
 }

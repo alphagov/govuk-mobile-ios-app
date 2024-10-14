@@ -20,21 +20,23 @@ struct RecentActivitiesViewModelTests {
         )
 
         var activitiesArray: [ActivityItem] = []
-        let activity = ActivityItem(context: coreData.viewContext)
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefits"
         activity.url = "https://www.youtube.com"
         activity.date = Date()
-        let activityTwo = ActivityItem(context: coreData.viewContext)
+        let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit"
         activityTwo.url = "https://www.youtube.com"
         activityTwo.date = Date()
-        let activityThree = ActivityItem(context: coreData.viewContext)
+        let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
         activityThree.url = "https://www.youtube.com"
         activityThree.date = Date()
+
+        try? coreData.backgroundContext.save()
 
         activitiesArray.append(activity)
         activitiesArray.append(activityTwo)
@@ -65,21 +67,23 @@ struct RecentActivitiesViewModelTests {
         let randomDateTwo = Date.arrangeRandomDateFromThisMonthNotToday
         let randomDateThree = Date.arrangeRandomDateFromThisMonthNotToday
 
-        let activity = ActivityItem(context: coreData.viewContext)
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefit3"
         activity.url = "https://www.youtube.com"
         activity.date = randomDateOne
-        let activityTwo = ActivityItem(context: coreData.viewContext)
+        let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit2"
         activityTwo.url = "https://www.youtube.com"
         activityTwo.date = randomDateTwo
-        let activityThree = ActivityItem(context: coreData.viewContext)
+        let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
         activityThree.url = "https://www.youtube.com"
         activityThree.date = randomDateThree
+
+        try? coreData.backgroundContext.save()
 
         activitiesArray.append(activity)
         activitiesArray.append(activityTwo)
@@ -105,21 +109,23 @@ struct RecentActivitiesViewModelTests {
 
         var activitiesArray:[ActivityItem] = []
 
-        let activity = ActivityItem(context: coreData.viewContext)
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefit3"
         activity.url = "https://www.youtube.com"
         activity.date = .arrange("14/04/2004")
-        let activityTwo = ActivityItem(context: coreData.viewContext)
+        let activityTwo = ActivityItem(context: coreData.backgroundContext)
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit2"
         activityTwo.url = "https://www.youtube.com"
         activityTwo.date = .arrange("14/04/2016")
-        let activityThree = ActivityItem(context: coreData.viewContext)
+        let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
         activityThree.url = "https://www.youtube.com"
         activityThree.date = .arrange("14/04/2017")
+
+        try? coreData.backgroundContext.save()
 
         activitiesArray.append(activity)
         activitiesArray.append(activityTwo)
@@ -213,7 +219,7 @@ struct RecentActivitiesViewModelTests {
 
         let mockAnalyticsService = MockAnalyticsService()
 
-        let activity = ActivityItem(context: coreData.viewContext)
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.title = "Benefits"
         activity.url = "https://www.youtube.com"
         activity.date = Date.arrange("15/04/2016")
@@ -244,9 +250,11 @@ struct RecentActivitiesViewModelTests {
             analyticsService: mockAnalyticsService
         )
 
-        let activity = ActivityItem(context: coreData.viewContext)
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.title = "Benefits"
         activity.date = Date.arrange("15/04/2016")
+
+        try? coreData.backgroundContext.save()
 
         let activityRow = sut.returnActivityRow(activityItem: activity)
         activityRow.action()
@@ -265,12 +273,15 @@ struct RecentActivitiesViewModelTests {
             analyticsService: MockAnalyticsService()
         )
 
-        let activity = ActivityItem(context: coreData.viewContext)
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefit3"
         activity.url = "https://www.youtube.com"
+         
         let oldDate = Date.arrange("14/04/2004")
         activity.date = oldDate
+
+        try? coreData.backgroundContext.save()
 
         let activityRow = sut.returnActivityRow(activityItem: activity)
         activityRow.action()
@@ -297,13 +308,15 @@ struct RecentActivitiesViewModelTests {
             analyticsService: MockAnalyticsService()
         )
 
-        let activity = ActivityItem(context: coreData.viewContext)
+        let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefit3"
         let expectedURL = "https://www.youtube.com"
         activity.url = expectedURL
         let oldDate = Date.arrange("14/04/2004")
         activity.date = oldDate
+
+        try? coreData.backgroundContext.save()
 
         let activityRow = sut.returnActivityRow(activityItem: activity)
         activityRow.action()

@@ -34,7 +34,7 @@ struct RecentActivityView: View {
             if viewModel.isModelEmpty() {
                 RecentActivityErrorView()
             } else {
-                if viewModel.model.todaysActivites.count >= 1 {
+                if !viewModel.model.todaysActivites.isEmpty {
                     let rows = viewModel.model.todaysActivites.map({
                         viewModel.returnActivityRow(activityItem: $0)
                     })
@@ -50,7 +50,7 @@ struct RecentActivityView: View {
                         ]
                     )
                 }
-                if viewModel.model.currentMonthActivities.count >= 1 {
+                if !viewModel.model.currentMonthActivities.isEmpty {
                     let rows = viewModel.model.currentMonthActivities
                         .map { viewModel.returnActivityRow(activityItem: $0) }
                     GroupedList(
@@ -65,7 +65,7 @@ struct RecentActivityView: View {
                         ]
                     )
                 }
-                if viewModel.model.recentMonthActivities.count >= 1 {
+                if !viewModel.model.recentMonthActivities.isEmpty {
                     GroupedList(content: viewModel.buildSections())
                 }
             }

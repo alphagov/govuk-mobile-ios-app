@@ -79,7 +79,12 @@ extension AppEvent {
     static func clearRecentActivity() -> AppEvent {
         .init(
             name: "ClearRecentActivity",
-            params: nil
+            params: [
+                "text": "Clear All",
+                "type": "Button",
+                "section": "Pages you've visited",
+                "action": "Clear all"
+            ]
         )
     }
 

@@ -3,7 +3,6 @@ import CoreData
 
 struct RecentActivityView: View {
     @ObservedObject var viewModel: RecentActivitiesViewModel
-
     let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     @State private var showingAlert: Bool = false
     let alertTitle = String.recentActivity.localized(

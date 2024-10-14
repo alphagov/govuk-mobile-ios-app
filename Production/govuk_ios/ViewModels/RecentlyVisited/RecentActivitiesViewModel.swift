@@ -78,7 +78,6 @@ class RecentActivitiesViewModel: NSObject,
         sortActivites(activities: activities)
     }
 
-
     func controllerDidChangeContent(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             self.model = RecentActivitiesViewStructure(

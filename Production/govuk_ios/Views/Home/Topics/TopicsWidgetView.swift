@@ -66,6 +66,7 @@ class TopicsWidgetView: UIView {
             name: .NSManagedObjectContextDidSave,
             object: nil
         )
+        updateTopics(viewModel.favoriteTopics)
     }
 
     @objc

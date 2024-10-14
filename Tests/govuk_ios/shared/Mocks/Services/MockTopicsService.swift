@@ -4,12 +4,14 @@ import Foundation
 
 class MockTopicsService: TopicsServiceInterface {
     
+    let coreData = CoreDataRepository.arrangeAndLoad
+    
     func fetchAllTopics() -> [Topic] {
-        []
+        mockTopics
     }
     
     func fetchFavoriteTopics() -> [Topic] {
-        []
+        mockTopics
     }
     
     var _didUpdateFavoritesCalled = false
@@ -40,5 +42,21 @@ extension MockTopicsService {
     
     static var testTopicsFailure: Result<[TopicResponseItem], TopicsListError> {
         return .failure(.decodingError)
+    }
+    
+    var mockTopics: [Topic] {
+        let result = Self.testTopicsResult
+        var topics = [Topic]()
+        guard let topicResponses = try? result.get() else {
+            return topics
+        }
+        for response in topicResponses {
+            let topic = Topic(context: coreData.viewContext)
+            topic.title = response.title
+            topic.ref = response.ref
+            topic.isFavorite = true
+            topics.append(topic)
+        }
+        return topics
     }
 }

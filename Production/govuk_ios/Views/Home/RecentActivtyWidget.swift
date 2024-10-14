@@ -15,10 +15,10 @@ class RecentActivtyWidget: UIControl {
     }
 
     private func configureAccessibility() {
-        self.accessibilityLabel = String.home.localized(
+        accessibilityLabel = String.home.localized(
             "recentActivityWidgetAccessibilityLabel"
         )
-        self.accessibilityTraits = .button
+        accessibilityTraits = .button
     }
 
     private lazy var gesture: UIGestureRecognizer = {

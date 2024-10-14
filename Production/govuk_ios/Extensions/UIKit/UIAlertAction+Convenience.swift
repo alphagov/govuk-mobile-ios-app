@@ -4,7 +4,7 @@ import UIKit
 extension UIAlertAction {
     static func ok(handler: (() -> Void)?) -> UIAlertAction {
         .init(
-            title: "OK",
+            title: String.common.localized("ok"),
             style: .default,
             handler: { _ in
                 handler?()
@@ -14,7 +14,7 @@ extension UIAlertAction {
 
     static func cancel(handler: (() -> Void)? = nil) -> UIAlertAction {
         .init(
-            title: "Cancel",
+            title: String.common.localized("cancel"),
             style: .default,
             handler: { _ in
                 handler?()
@@ -24,7 +24,7 @@ extension UIAlertAction {
 
     static func clearAll(handler: (() -> Void)? = nil) -> UIAlertAction {
         .init(
-            title: "Clear all",
+            title: String.recentActivity.localized("editButtonTitle"),
             style: .destructive,
             handler: { _ in
                 handler?()

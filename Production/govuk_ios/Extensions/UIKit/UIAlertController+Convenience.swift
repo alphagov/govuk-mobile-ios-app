@@ -24,8 +24,8 @@ extension UIAlertController {
 
     static func clearAllRecentItems(confirmAction: @escaping () -> Void) -> UIAlertController {
         let alert = UIAlertController(
-            title: "Clear pages you’ve visited?",
-            message: "Permanently clear the list of all pages you’ve visited",
+            title: String.recentActivity.localized("recentActivityClearAllAlertTitle"),
+            message: String.recentActivity.localized("recentActivityClearAllAlertWarningDesc"),
             preferredStyle: .alert
         )
         alert.addAction(.clearAll(handler: confirmAction))

@@ -16,7 +16,7 @@ extension Container {
         }
     }
 
-    var topicsRespository: Factory<TopicsRepositoryInterface> {
+    var topicsRepository: Factory<TopicsRepositoryInterface> {
         Factory(self) {
             TopicsRepository(coreData: self.coreDataRepository())
         }

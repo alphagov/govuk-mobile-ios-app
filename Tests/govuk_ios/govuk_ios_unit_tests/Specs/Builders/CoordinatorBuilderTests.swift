@@ -114,7 +114,7 @@ struct CoordinatorBuilderTests {
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.editTopics(
             [Topic](),
-            navigationControlloer: mockNavigationController,
+            navigationController: mockNavigationController,
             didDismissAction: { }
         )
 

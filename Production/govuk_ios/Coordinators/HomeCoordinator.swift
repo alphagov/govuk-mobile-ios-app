@@ -90,7 +90,7 @@ class HomeCoordinator: TabItemCoordinator {
             let navigationController = UINavigationController()
             let coordinator = self.coordinatorBuilder.editTopics(
                 topics,
-                navigationControlloer: navigationController,
+                navigationController: navigationController,
                 didDismissAction: {
                     self.root.viewWillReAppear()
                 }

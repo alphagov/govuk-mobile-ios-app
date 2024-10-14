@@ -24,7 +24,7 @@ struct TopicsRepositoryTests {
     }
     
     @Test func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
-        // Given I have starte the app once and gotten topics
+        // Given I have started the app the first time, and gotten topics
         var topicResponseItems = try #require(try? MockTopicsService.testTopicsResult.get())
         sut.saveTopicsList(topicResponseItems)
 

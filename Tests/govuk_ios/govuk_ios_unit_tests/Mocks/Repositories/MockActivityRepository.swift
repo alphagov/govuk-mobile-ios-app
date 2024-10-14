@@ -5,6 +5,10 @@ import CoreData
 
 class MockActivityRepository: ActivityRepositoryInterface {
 
+    func fetch() -> NSFetchedResultsController<ActivityItem> {
+        return NSFetchedResultsController<ActivityItem>()
+    }
+
     func deleteAllActivities() { }
 
     func returnContext() -> NSManagedObjectContext {

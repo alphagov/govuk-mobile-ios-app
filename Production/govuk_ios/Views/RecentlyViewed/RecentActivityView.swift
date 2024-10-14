@@ -46,10 +46,8 @@ struct RecentActivityView: View {
                     GroupedList(content: viewModel.buildSections())
                 }
             }
-        }.navigationTitle(viewModel.navigationTitle)
-        .onAppear {
-            try? viewModel.fetchActivities.performFetch()
         }
+        .navigationTitle(viewModel.navigationTitle)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {

@@ -77,14 +77,13 @@ struct ViewControllerBuilderTests {
         }
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
-            analyticsService: MockAnalyticsService()
-        )
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService()
+        ) as? TrackableScreen
 
-        let rootView = (result as? HostingViewController<ModifiedContent<RecentActivityContainerView, _EnvironmentKeyWritingModifier<NSManagedObjectContext>>>)?.rootView
-        let containerView = rootView?.content as? RecentActivityContainerView
-        #expect(containerView?.trackingClass == "RecentActivityContainerView")
-        #expect(containerView?.trackingName == "Pages you've visited")
-        #expect(containerView?.trackingTitle == "Pages you've visited")
+        #expect(result?.trackingClass == "GroupedListViewController")
+        #expect(result?.trackingName == "Pages you've visited")
+        #expect(result?.trackingTitle == "Pages you've visited")
     }
     
     @Test

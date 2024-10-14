@@ -3,28 +3,24 @@ import Foundation
 import Factory
 
 class RecentActivityCoordinator: BaseCoordinator {
-    private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
+    private let analyticsService: AnalyticsServiceInterface
+    private let activityService: ActivityServiceInterface
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         activityService: ActivityServiceInterface) {
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
+        self.activityService = activityService
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-//        let viewController = viewControllerBuilder.recentActivity(
-//            analyticsService: analyticsService
-//        )
-        let viewModel = GroupedListViewModel(
-            activityService: Container.shared.activityService(),
-            analyticsService: Container.shared.analyticsService(),
-            urlopener: UIApplication.shared
-        )
-        let viewController = GroupedListViewController(
-            viewModel: viewModel
+        let viewController = viewControllerBuilder.recentActivity(
+            analyticsService: analyticsService,
+            activityService: activityService
         )
         push(viewController, animated: true)
     }

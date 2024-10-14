@@ -1,13 +1,24 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "clearAllActionTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear all"
+          }
+        }
+      }
+    },
     "editButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear All"
+            "value" : "Clear all"
           }
         }
       }

@@ -6,6 +6,8 @@ class LaunchCoordinator: BaseCoordinator {
     private let appConfigService: AppConfigServiceInterface
     private let completion: () -> Void
 
+    private let dispatchGroup = DispatchGroup()
+
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          appConfigService: AppConfigServiceInterface,
@@ -17,21 +19,27 @@ class LaunchCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let dispatchGroup = DispatchGroup()
+        fetchAppConfig()
 
-        dispatchGroup.enter()
-        appConfigService.fetchAppConfig {
-            dispatchGroup.leave()
-        }
-
-        dispatchGroup.enter()
-        let viewController = viewControllerBuilder.launch(
-            completion: { dispatchGroup.leave() }
-        )
-        set(viewController, animated: false)
+        setViewController()
 
         dispatchGroup.notify(queue: .main) {
             self.completion()
         }
+    }
+
+    private func fetchAppConfig() {
+        dispatchGroup.enter()
+        appConfigService.fetchAppConfig {
+            self.dispatchGroup.leave()
+        }
+    }
+
+    private func setViewController() {
+        dispatchGroup.enter()
+        let viewController = viewControllerBuilder.launch(
+            completion: { self.dispatchGroup.leave() }
+        )
+        set(viewController, animated: false)
     }
 }

@@ -11,10 +11,10 @@ class MockAppConfigService: AppConfigServiceInterface {
 
     var features: [Feature] = [.onboarding, .search, .topics]
 
-    var _fetchAppConfigCompletion: (() -> Void)?
+    var _receivedFetchAppConfigCompletion: (() -> Void)?
 
     func fetchAppConfig(completion: @escaping () -> Void) {
-        _fetchAppConfigCompletion = completion
+        _receivedFetchAppConfigCompletion = completion
     }
 
     func isFeatureEnabled(key: Feature) -> Bool {

@@ -23,7 +23,7 @@ struct LaunchCoordinatorTests {
                 }
             )
             subject.start()
-            mockAppConfigService._fetchAppConfigCompletion?()
+            mockAppConfigService._receivedFetchAppConfigCompletion?()
             mockViewControllerBuilder._receivedLaunchCompletion?()
         }
         #expect(completed)

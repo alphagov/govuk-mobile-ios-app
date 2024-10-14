@@ -93,15 +93,24 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
-        let viewModel = RecentActivitiesViewModel(
+    func recentActivity(analyticsService: AnalyticsServiceInterface,
+                        activityService: ActivityServiceInterface) -> UIViewController {
+//        let viewModel = RecentActivitiesViewModel(
+//            analyticsService: analyticsService,
+//            urlOpener: UIApplication.shared
+//        )
+//        let repository = Container.shared.coreDataRepository.resolve()
+//        let view = RecentActivityContainerView(viewModel: viewModel)
+//            .environment(\.managedObjectContext, repository.viewContext)
+//        return HostingViewController(rootView: view)
+        let viewModel = GroupedListViewModel(
+            activityService: activityService,
             analyticsService: analyticsService,
-            urlOpener: UIApplication.shared
+            urlopener: UIApplication.shared
         )
-        let repository = Container.shared.coreDataRepository.resolve()
-        let view = RecentActivityContainerView(viewModel: viewModel)
-            .environment(\.managedObjectContext, repository.viewContext)
-        return HostingViewController(rootView: view)
+        return GroupedListViewController(
+            viewModel: viewModel
+        )
     }
 
     @MainActor

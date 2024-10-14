@@ -178,6 +178,7 @@
 		5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D76A4422C875EA10019DF73 /* Container+NetworkClientsTests.swift */; };
 		5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79AEBF2C32B9180061F344 /* AnimationView.swift */; };
 		5D7F267E2C0F0EF000842090 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D7F267D2C0F0EF000842090 /* Factory */; };
+		5D809E202CBD2525005D4CDD /* MockFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D809E1F2CBD2525005D4CDD /* MockFetchedResultsDelegate.swift */; };
 		5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */; };
 		5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */; };
 		5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */; };
@@ -513,6 +514,7 @@
 		5D742BDD2C997ABB00E7B87A /* Onboarding.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Onboarding.xcstrings; sourceTree = "<group>"; };
 		5D76A4422C875EA10019DF73 /* Container+NetworkClientsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+NetworkClientsTests.swift"; sourceTree = "<group>"; };
 		5D79AEBF2C32B9180061F344 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		5D809E1F2CBD2525005D4CDD /* MockFetchedResultsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		5D8683942C340F1B0024F2D8 /* DeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRoute.swift; sourceTree = "<group>"; };
 		5D8683962C3430C90024F2D8 /* DeeplinkRoutingComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRoutingComponents.swift; sourceTree = "<group>"; };
 		5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolvedDeeplinkRoute.swift; sourceTree = "<group>"; };
@@ -1616,6 +1618,7 @@
 				5D93EE802C36848400D90C0C /* Deeplinking */,
 				5DC2506C2C91E790009E9E7F /* MockAnalyticsClient.swift */,
 				5D323F8E2C64E6E800C1DB97 /* MockBaseViewController.swift */,
+				5D809E1F2CBD2525005D4CDD /* MockFetchedResultsDelegate.swift */,
 				5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */,
 				5D349F5E2C6A5A5700B7F747 /* Networking */,
 				4E18E08E2C74A43A00538CF0 /* Repositories */,
@@ -2246,6 +2249,7 @@
 				4E94E8FB2C9054CD00906803 /* Date+ExtensionsTests.swift in Sources */,
 				5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */,
 				5D349F632C6A5A9C00B7F747 /* APIServiceClientTests.swift in Sources */,
+				5D809E202CBD2525005D4CDD /* MockFetchedResultsDelegate.swift in Sources */,
 				5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */,
 				5DC79FAC2CA1805D00014446 /* JSONDecoder+ExtensionsTests.swift in Sources */,
 				5DAA394D2CAC862B002A7E18 /* ActivityItem+Arrangers.swift in Sources */,

@@ -92,4 +92,34 @@ struct CoreDataRepositoryTests {
 
         #expect(items.first?.title == expectedTitle)
     }
+
+    @Test
+    func save_deleteAll_updatesContexts() throws {
+        let sut = CoreDataRepository.arrangeAndLoad
+
+        let item = ActivityItem.arrange(
+            context: sut.backgroundContext
+        )
+
+        try sut.backgroundContext.save()
+
+        let expectedTitle = UUID().uuidString
+        item.title = expectedTitle
+
+        try sut.backgroundContext.save()
+
+        let request = ActivityItem.fetchRequest()
+        let initialResults = try sut.viewContext.fetch(request)
+
+        try #require(initialResults.count == 1)
+
+        let deleteRequest = ActivityItem.clearRequest()
+        sut.deleteAll(fetchRequest: deleteRequest)
+
+        let viewContextResults = try sut.viewContext.fetch(request)
+        #expect(viewContextResults.count == 0)
+
+        let backgroundResults = try sut.viewContext.fetch(request)
+        #expect(backgroundResults.count == 0)
+    }
 }

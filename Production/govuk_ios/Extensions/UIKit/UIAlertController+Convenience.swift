@@ -31,9 +31,5 @@ extension UIAlertController {
         alert.addAction(.clearAll(handler: confirmAction))
         alert.addAction(.cancel())
         return alert
-//        alert.addAction(.init(title: "OK", style: .default, handler: { [weak self] _ in
-//            self?.viewModel.deleteAllItems()
-//            self?.reloadSnapshot()
-//        }))
     }
 }

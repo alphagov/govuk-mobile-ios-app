@@ -11,5 +11,22 @@ struct UIAlertAction_ConvenienceTests {
         let subject = UIAlertAction.ok(handler: nil)
 
         #expect(subject.title == "OK")
+        #expect(subject.style == .default)
+    }
+
+    @Test
+    func cancel_returnsExpectedResult() {
+        let subject = UIAlertAction.cancel(handler: nil)
+
+        #expect(subject.title == "Cancel")
+        #expect(subject.style == .default)
+    }
+
+    @Test
+    func clearAll_returnsExpectedResult() {
+        let subject = UIAlertAction.clearAll(handler: nil)
+
+        #expect(subject.title == "Clear all")
+        #expect(subject.style == .destructive)
     }
 }

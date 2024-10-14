@@ -24,7 +24,7 @@ final class EditTopicsCoordinator: BaseCoordinator {
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.editTopics(
             topics,
-            analyicsService: analyticsService,
+            analyticsService: analyticsService,
             topicsService: topicsService,
             dismissAction: { [weak self] in
                 self?.dismissModal()

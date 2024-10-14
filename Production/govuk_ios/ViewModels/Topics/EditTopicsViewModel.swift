@@ -2,16 +2,20 @@ import Foundation
 
 final class EditTopicsViewModel: ObservableObject {
     @Published var topics: [Topic]
-    let topicsService: TopicsServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
+    private let topicsService: TopicsServiceInterface
     let sections: [GroupedListSection]
-    var dismissAction: () -> Void
+    private let dismissAction: () -> Void
 
     init(topics: [Topic],
          topicsService: TopicsServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          dismissAction: @escaping () -> Void) {
         self.topics = topics
         self.dismissAction = dismissAction
         self.topicsService = topicsService
+        self.analyticsService = analyticsService
+
         var rows = [GroupedListRow]()
         topics.forEach { topic in
             rows.append(ToggleRow(id: topic.ref,
@@ -27,8 +31,12 @@ final class EditTopicsViewModel: ObservableObject {
                                       footer: nil)]
     }
 
-    func updateFovoriteTopics() {
+    func updateFavoriteTopics() {
         topicsService.updateFavoriteTopics()
         dismissAction()
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
     }
 }

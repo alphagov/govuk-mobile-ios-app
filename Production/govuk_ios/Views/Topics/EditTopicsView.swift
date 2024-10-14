@@ -16,9 +16,17 @@ struct EditTopicsView: View {
             HStack {
                 Spacer()
                 Button("Done") {
-                    viewModel.updateFovoriteTopics()
+                    viewModel.updateFavoriteTopics()
                 }
             }
         }
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
+}
+
+extension EditTopicsView: TrackableScreen {
+    var trackingTitle: String? { "Edit your topics" }
+    var trackingName: String { "Edit your topics" }
 }

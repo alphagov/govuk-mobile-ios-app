@@ -71,22 +71,18 @@ struct ViewControllerBuilderTests {
 
     @Test
     func recentActivity_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        Container.shared.coreDataRepository.register {
-            coreData
-        }
+
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
             analyticsService: MockAnalyticsService()
         )
 
-        let rootView = (result as? HostingViewController<ModifiedContent<RecentActivityContainerView, _EnvironmentKeyWritingModifier<NSManagedObjectContext>>>)?.rootView
-        let containerView = rootView?.content as? RecentActivityContainerView
-        #expect(containerView?.trackingClass == "RecentActivityContainerView")
-        #expect(containerView?.trackingName == "Pages you've visited")
-        #expect(containerView?.trackingTitle == "Pages you've visited")
+        let rootView = (result as? HostingViewController<RecentActivityView>)?.rootView
+        #expect(rootView?.trackingClass == "RecentActivityView")
+        #expect(rootView?.trackingName == "Pages you've visited")
+        #expect(rootView?.trackingTitle == "Pages you've visited")
     }
-    
+
     @Test
     func topicDetail_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()

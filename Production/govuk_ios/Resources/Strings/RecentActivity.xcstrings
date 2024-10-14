@@ -23,6 +23,61 @@
         }
       }
     },
+    "recentActivityAlertDismissText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "recentActivityAlertWarningConfirmation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear all"
+          }
+        }
+      }
+    },
+    "recentActivityClearAllAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear pages you've visited?"
+          }
+        }
+      }
+    },
+    "recentActivityClearAllAlertWarningDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permanently clear the list of all pages you've visited"
+          }
+        }
+      }
+    },
+    "recentActivityClearButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear all"
+          }
+        }
+      }
+    },
     "recentActivityCurrentMonthItems" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -74,6 +129,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pages you've visited"
+          }
+        }
+      }
+    },
+    "recentActivityToolBarTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear all"
           }
         }
       }

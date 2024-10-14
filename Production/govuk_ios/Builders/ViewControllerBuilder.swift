@@ -95,12 +95,10 @@ class ViewControllerBuilder {
     @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
         let viewModel = RecentActivitiesViewModel(
-            analyticsService: analyticsService,
-            urlOpener: UIApplication.shared
+            urlOpener: UIApplication.shared,
+            analyticsService: analyticsService
         )
-        let repository = Container.shared.coreDataRepository.resolve()
-        let view = RecentActivityContainerView(viewModel: viewModel)
-            .environment(\.managedObjectContext, repository.viewContext)
+        let view = RecentActivityView(viewModel: viewModel)
         return HostingViewController(rootView: view)
     }
 

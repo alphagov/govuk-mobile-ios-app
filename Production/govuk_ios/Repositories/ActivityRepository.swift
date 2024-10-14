@@ -3,6 +3,8 @@ import CoreData
 
 protocol ActivityRepositoryInterface {
     func save(params: ActivityItemCreateParams)
+    func deleteAllActivities()
+    func returnContext() -> NSManagedObjectContext
 }
 
 struct ActivityRepository: ActivityRepositoryInterface {
@@ -19,6 +21,9 @@ struct ActivityRepository: ActivityRepositoryInterface {
         local.update(params)
         try? localContext.save()
     }
+    func returnContext() -> NSManagedObjectContext {
+        return coreData.backgroundContext
+    }
 
     private func get(id: String,
                      context: NSManagedObjectContext?) -> ActivityItem? {
@@ -26,6 +31,18 @@ struct ActivityRepository: ActivityRepositoryInterface {
             predicate: .init(format: "id = %@", id),
             context: context
         ).fetchedObjects?.first
+    }
+
+    func deleteAllActivities() {
+        guard let fetchRequest = fetch(
+            predicate: nil,
+            context: coreData.backgroundContext
+        ).fetchedObjects else { return }
+
+        for activity in fetchRequest {
+            coreData.backgroundContext.delete(activity)
+        }
+        try? coreData.backgroundContext.save()
     }
 
     private func fetch(predicate: NSPredicate?,

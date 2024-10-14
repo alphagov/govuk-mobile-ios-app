@@ -76,6 +76,13 @@ extension AppEvent {
         )
     }
 
+    static func clearRecentActivity() -> AppEvent {
+        .init(
+            name: "ClearRecentActivity",
+            params: nil
+        )
+    }
+
     static func searchItem(item: SearchItem) -> AppEvent {
         .init(
             name: "Search",

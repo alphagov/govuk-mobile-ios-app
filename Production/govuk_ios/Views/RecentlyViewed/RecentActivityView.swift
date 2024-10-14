@@ -2,84 +2,107 @@ import SwiftUI
 import CoreData
 
 struct RecentActivityView: View {
-    let model: RecentActivitiesViewStructure
-    let selected: (ActivityItem) -> Void
-    let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
-    @Environment(\.managedObjectContext) private var context
+    @ObservedObject var viewModel: RecentActivitiesViewModel
 
-    init(model: RecentActivitiesViewStructure,
-         selected: @escaping (ActivityItem) -> Void) {
-        self.model = model
-        self.selected = selected
+    let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
+    @State private var showingAlert: Bool = false
+    let alertTitle = String.recentActivity.localized(
+        "recentActivityClearAllAlertTitle"
+    )
+    let alertDescription = String.recentActivity.localized(
+        "recentActivityClearAllAlertWarningDesc"
+    )
+    let alertPrimaryButtonTitle = String.recentActivity.localized(
+        "recentActivityAlertWarningConfirmation"
+    )
+    let alertSecondaryButtonTitle = String.recentActivity.localized(
+        "recentActivityAlertDismissText"
+    )
+    let toolbarButtonTitle = String.recentActivity.localized(
+        "recentActivityToolBarTitle"
+    )
+
+    let navigationTitle = String.recentActivity.localized(
+        "recentActivityNavigationTitle"
+    )
+
+    init(viewModel: RecentActivitiesViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
         ScrollView {
-            if model.todaysActivites.count >= 1 {
-                let rows = model.todaysActivites.map({
-                    activityRow(activityItem: $0)
-                })
-                GroupedList(
-                    content: [
-                        GroupedListSection(
-                            heading: String.recentActivity.localized(
-                                "recentActivitiesTodaysListTitle"
-                            ),
-                            rows: rows,
-                            footer: nil
-                        )
-                    ]
-                )
+            if viewModel.isModelEmpty() {
+                RecentActivityErrorView()
+            } else {
+                if viewModel.model.todaysActivites.count >= 1 {
+                    let rows = viewModel.model.todaysActivites.map({
+                        viewModel.returnActivityRow(activityItem: $0)
+                    })
+                    GroupedList(
+                        content: [
+                            GroupedListSection(
+                                heading: String.recentActivity.localized(
+                                    "recentActivitiesTodaysListTitle"
+                                ),
+                                rows: rows,
+                                footer: nil
+                            )
+                        ]
+                    )
+                }
+                if viewModel.model.currentMonthActivities.count >= 1 {
+                    let rows = viewModel.model.currentMonthActivities
+                        .map { viewModel.returnActivityRow(activityItem: $0) }
+                    GroupedList(
+                        content: [
+                            GroupedListSection(
+                                heading: String.recentActivity.localized(
+                                    "recentActivityCurrentMonthItems"
+                                ),
+                                rows: rows,
+                                footer: nil
+                            )
+                        ]
+                    )
+                }
+                if viewModel.model.recentMonthActivities.count >= 1 {
+                    GroupedList(content: viewModel.buildSections())
+                }
             }
-            if model.currentMonthActivities.count >= 1 {
-                let rows = model.currentMonthActivities.map { activityRow(activityItem: $0) }
-                GroupedList(
-                    content: [
-                        GroupedListSection(
-                            heading: String.recentActivity.localized(
-                                "recentActivityCurrentMonthItems"
-                            ),
-                            rows: rows,
-                            footer: nil
+        }.navigationTitle(
+            String.recentActivity.localized(
+                "recentActivityNavigationTitle"
+            )
+        )
+        .onAppear {
+            try? viewModel.fetchActivities.performFetch()
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    showingAlert.toggle()
+                } label: {
+                    Text(toolbarButtonTitle)
+                }.opacity(viewModel.isModelEmpty() ? 0 : 1)
+                    .alert(isPresented: $showingAlert, content: {
+                        Alert(
+                            title: Text(alertTitle),
+                            message: Text(alertDescription),
+                            primaryButton: .destructive(Text(alertPrimaryButtonTitle)) {
+                                withAnimation {
+                                    viewModel.deleteActivities()
+                                }
+                            },
+                            secondaryButton: .cancel()
                         )
-                    ]
-                )
-            }
-            if model.recentMonthActivities.count >= 1 {
-                GroupedList(content: buildSectionsView())
+                    })
             }
         }
     }
+}
 
-    private func activityRow(activityItem: ActivityItem) -> LinkRow {
-        LinkRow(
-            id: activityItem.id,
-            title: activityItem.title,
-            body: lastVisitedString(activity: activityItem),
-            action: {
-                self.selected(activityItem)
-            }
-        )
-    }
-
-    private func buildSectionsView() -> [GroupedListSection] {
-        model.recentMonthActivities.keys
-            .sorted { $0 > $1 }
-            .map {
-                let items = model.recentMonthActivities[$0]
-                return GroupedListSection(
-                    heading: $0.title,
-                    rows: items?.map(activityRow) ?? [],
-                    footer: nil
-                )
-            }
-    }
-
-    private func lastVisitedString(activity: ActivityItem) -> String {
-        let copy = String.recentActivity.localized(
-            "recentActivityFormattedDateStringComponent"
-        )
-        let formattedDateString = lastVisitedFormatter.string(from: activity.date)
-        return "\(copy) \(formattedDateString)"
-    }
+extension RecentActivityView: TrackableScreen {
+    var trackingTitle: String? { "Pages you've visited" }
+    var trackingName: String { "Pages you've visited" }
 }

@@ -5,18 +5,18 @@ import CoreData
 
 @testable import govuk_ios
 
-class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
+class RecentActivityViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_errorView_rendersCorrectly() {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
         let viewModel = RecentActivitiesViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: UIApplication.shared
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
         )
 
-        let view = RecentActivityContainerView(viewModel: viewModel)
+        let view = RecentActivityView(viewModel: viewModel)
             .environment(
                 \.managedObjectContext,
                  coreData.viewContext
@@ -38,10 +38,11 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
         ).load()
 
         let viewModel = RecentActivitiesViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: UIApplication.shared
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
         )
-        let view = RecentActivityContainerView(viewModel: viewModel)
+
+        let view = RecentActivityView(viewModel: viewModel)
             .environment(
                 \.managedObjectContext,
                  coreData.viewContext
@@ -70,14 +71,15 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
         try? coreData.backgroundContext.save()
 
         let viewModel = RecentActivitiesViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: UIApplication.shared
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
         )
-        let view = RecentActivityContainerView(viewModel: viewModel)
+
+        let view = RecentActivityView(viewModel: viewModel)
             .environment(
-            \.managedObjectContext,
-             coreData.viewContext
-        )
+                \.managedObjectContext,
+                 coreData.viewContext
+            )
         let viewController = HostingViewController(
             rootView: view
         )
@@ -102,10 +104,11 @@ class RecentActivityContainerViewSnapshotTests: SnapshotTestCase {
         try? coreData.backgroundContext.save()
 
         let viewModel = RecentActivitiesViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: UIApplication.shared
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService()
         )
-        let view = RecentActivityContainerView(viewModel: viewModel)
+
+        let view = RecentActivityView(viewModel: viewModel)
             .environment(
                 \.managedObjectContext,
                  coreData.viewContext

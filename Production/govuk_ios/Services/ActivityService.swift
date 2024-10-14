@@ -1,7 +1,10 @@
 import Foundation
+import CoreData
 
 protocol ActivityServiceInterface {
     func save(searchItem: SearchItem)
+    func deleteAll()
+    func returnContext() -> NSManagedObjectContext
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -9,6 +12,14 @@ struct ActivityService: ActivityServiceInterface {
 
     init(repository: ActivityRepositoryInterface) {
         self.repository = repository
+    }
+
+    func deleteAll() {
+        repository.deleteAllActivities()
+    }
+
+    func returnContext() -> NSManagedObjectContext {
+        repository.returnContext()
     }
 
     func save(searchItem: SearchItem) {

@@ -4,7 +4,8 @@ import CoreData
 protocol ActivityServiceInterface {
     func save(searchItem: SearchItem)
     func deleteAll()
-    func returnContext() -> NSManagedObjectContext
+//    func returnContext() -> NSManagedObjectContext
+    func fetch() -> NSFetchedResultsController<ActivityItem>
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -17,9 +18,13 @@ struct ActivityService: ActivityServiceInterface {
     func deleteAll() {
         repository.deleteAllActivities()
     }
+//
+//    func returnContext() -> NSManagedObjectContext {
+//        repository.returnContext()
+//    }
 
-    func returnContext() -> NSManagedObjectContext {
-        repository.returnContext()
+    func fetch() -> NSFetchedResultsController<ActivityItem> {
+        repository.fetch()
     }
 
     func save(searchItem: SearchItem) {

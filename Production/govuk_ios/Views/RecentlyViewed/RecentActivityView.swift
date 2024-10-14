@@ -5,25 +5,6 @@ struct RecentActivityView: View {
     @ObservedObject var viewModel: RecentActivitiesViewModel
     let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     @State private var showingAlert: Bool = false
-    let alertTitle = String.recentActivity.localized(
-        "recentActivityClearAllAlertTitle"
-    )
-    let alertDescription = String.recentActivity.localized(
-        "recentActivityClearAllAlertWarningDesc"
-    )
-    let alertPrimaryButtonTitle = String.recentActivity.localized(
-        "recentActivityAlertWarningConfirmation"
-    )
-    let alertSecondaryButtonTitle = String.recentActivity.localized(
-        "recentActivityAlertDismissText"
-    )
-    let toolbarButtonTitle = String.recentActivity.localized(
-        "recentActivityToolBarTitle"
-    )
-
-    let navigationTitle = String.recentActivity.localized(
-        "recentActivityNavigationTitle"
-    )
 
     init(viewModel: RecentActivitiesViewModel) {
         self.viewModel = viewModel
@@ -69,11 +50,7 @@ struct RecentActivityView: View {
                     GroupedList(content: viewModel.buildSections())
                 }
             }
-        }.navigationTitle(
-            String.recentActivity.localized(
-                "recentActivityNavigationTitle"
-            )
-        )
+        }.navigationTitle(viewModel.navigationTitle)
         .onAppear {
             try? viewModel.fetchActivities.performFetch()
         }
@@ -82,13 +59,14 @@ struct RecentActivityView: View {
                 Button {
                     showingAlert.toggle()
                 } label: {
-                    Text(toolbarButtonTitle)
+                    Text(viewModel.toolbarButtonTitle)
                 }.opacity(viewModel.isModelEmpty() ? 0 : 1)
                     .alert(isPresented: $showingAlert, content: {
                         Alert(
-                            title: Text(alertTitle),
-                            message: Text(alertDescription),
-                            primaryButton: .destructive(Text(alertPrimaryButtonTitle)) {
+                            title: Text(viewModel.alertTitle),
+                            message: Text(viewModel.alertDescription),
+                            primaryButton: .destructive(
+                                Text(viewModel.alertPrimaryButtonTitle)) {
                                 withAnimation {
                                     viewModel.deleteActivities()
                                 }

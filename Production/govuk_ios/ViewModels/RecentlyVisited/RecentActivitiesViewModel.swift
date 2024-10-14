@@ -19,6 +19,26 @@ class RecentActivitiesViewModel: NSObject,
     private let urlOpener: URLOpener
     @Published var activities: [ActivityItem] = []
 
+    let alertTitle = String.recentActivity.localized(
+        "recentActivityClearAllAlertTitle"
+    )
+    let alertDescription = String.recentActivity.localized(
+        "recentActivityClearAllAlertWarningDesc"
+    )
+    let alertPrimaryButtonTitle = String.recentActivity.localized(
+        "recentActivityAlertWarningConfirmation"
+    )
+    let alertSecondaryButtonTitle = String.recentActivity.localized(
+        "recentActivityAlertDismissText"
+    )
+    let toolbarButtonTitle = String.recentActivity.localized(
+        "recentActivityToolBarTitle"
+    )
+
+    let navigationTitle = String.recentActivity.localized(
+        "recentActivityNavigationTitle"
+    )
+
     init(urlOpener: URLOpener,
          analyticsService: AnalyticsServiceInterface) {
         self.urlOpener = urlOpener

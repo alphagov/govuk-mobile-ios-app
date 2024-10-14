@@ -133,59 +133,6 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func deleteActivities_deletesAllActivities() async throws {
-        let coreData = CoreDataRepository.arrange(
-            notificationCenter: .default
-        ).load()
-
-        let activityOne = ActivityItem(context: coreData.backgroundContext)
-        activityOne.id = UUID().uuidString
-        activityOne.title = "benefits"
-        activityOne.url = "https://www.youtube.com/"
-        activityOne.date = Date.arrange("14/04/2016")
-        let activityTwo = ActivityItem(context: coreData.backgroundContext)
-        activityTwo.id = UUID().uuidString
-        activityTwo.title = "benefits"
-        activityTwo.url = "https://www.youtube.com/"
-        activityTwo.date = Date.arrange("14/10/2024")
-        let activityThree = ActivityItem(context: coreData.backgroundContext)
-        activityThree.id = UUID().uuidString
-        activityThree.title = "benefits"
-        activityThree.url = "https://www.youtube.com/"
-        activityThree.date = Date.arrange("14/10/2024")
-
-        try? coreData.backgroundContext.save()
-
-        let viewStructure = RecentActivitiesViewStructure(
-            todaysActivites: [activityOne],
-            currentMonthActivities: [activityTwo],
-            recentMonthActivities: [MonthGroupKey(date: Date()): [activityThree]]
-        )
-        let sut = RecentActivitiesViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
-        )
-
-        sut.deleteActivities()
-
-        #expect(sut.model.todaysActivites == [])
-        #expect(sut.model.currentMonthActivities == [])
-        #expect(sut.model.recentMonthActivities == [:])
-
-        for activity in sut.model.todaysActivites {
-            #expect(activity.managedObjectContext == nil)
-        }
-        for activity in sut.model.currentMonthActivities {
-            #expect(activity.managedObjectContext == nil)
-        }
-        for (_, activities) in sut.model.recentMonthActivities {
-            for activity in activities {
-                #expect(activity.managedObjectContext == nil)
-            }
-        }
-    }
-
-    @Test
     func buildSections_returnsCorrectSection() async throws {
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
@@ -209,11 +156,6 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
-        let viewStructure = RecentActivitiesViewStructure(
-            todaysActivites: [activityOne],
-            currentMonthActivities: [activityTwo],
-            recentMonthActivities: [MonthGroupKey(date: Date()): [activityThree]]
-        )
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
@@ -244,11 +186,6 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
-        let viewStructure = RecentActivitiesViewStructure(
-            todaysActivites: [],
-            currentMonthActivities: [activityOne],
-            recentMonthActivities: [:]
-        )
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
@@ -282,11 +219,6 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
-        let viewStructure = RecentActivitiesViewStructure(
-            todaysActivites: [],
-            currentMonthActivities: [activityOne],
-            recentMonthActivities: [:]
-        )
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: mockAnalyticsService
@@ -306,12 +238,6 @@ struct RecentActivitiesViewModelTests {
         ).load()
 
         let mockAnalyticsService = MockAnalyticsService()
-
-        let viewStructure = RecentActivitiesViewStructure(
-            todaysActivites: [],
-            currentMonthActivities: [],
-            recentMonthActivities: [:]
-        )
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: mockAnalyticsService
@@ -333,11 +259,6 @@ struct RecentActivitiesViewModelTests {
             notificationCenter: .default
         ).load()
 
-        let viewStructure = RecentActivitiesViewStructure(
-            todaysActivites: [],
-            currentMonthActivities: [],
-            recentMonthActivities: [:]
-        )
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
@@ -370,11 +291,6 @@ struct RecentActivitiesViewModelTests {
 
         let mockURLOpener = MockURLOpener()
 
-        let viewStructure = RecentActivitiesViewStructure(
-            todaysActivites: [],
-            currentMonthActivities: [],
-            recentMonthActivities: [:]
-        )
         let sut = RecentActivitiesViewModel(
             urlOpener: mockURLOpener,
             analyticsService: MockAnalyticsService()

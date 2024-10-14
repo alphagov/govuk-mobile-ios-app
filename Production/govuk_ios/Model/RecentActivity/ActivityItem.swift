@@ -18,6 +18,10 @@ class ActivityItem: NSManagedObject,
         return request
     }
 
+    @nonobjc public class func clearRequest() -> NSFetchRequest<NSFetchRequestResult> {
+        .init(entityName: "ActivityItem")
+    }
+
     @NSManaged var id: String
     @NSManaged var title: String
     @NSManaged var date: Date

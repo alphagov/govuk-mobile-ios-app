@@ -19,6 +19,14 @@ class RecentActivitiesViewModel: NSObject,
     private let urlOpener: URLOpener
     @Published var activities: [ActivityItem] = []
 
+    let currentMonthActivitiesListTitle = String.recentActivity.localized(
+        "recentActivityCurrentMonthItems"
+    )
+
+    let todaysActivitieslistTitle = String.recentActivity.localized(
+        "recentActivitiesTodaysListTitle"
+    )
+
     let alertTitle = String.recentActivity.localized(
         "recentActivityClearAllAlertTitle"
     )

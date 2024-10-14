@@ -22,9 +22,7 @@ struct RecentActivityView: View {
                     GroupedList(
                         content: [
                             GroupedListSection(
-                                heading: String.recentActivity.localized(
-                                    "recentActivitiesTodaysListTitle"
-                                ),
+                                heading: viewModel.todaysActivitieslistTitle,
                                 rows: rows,
                                 footer: nil
                             )
@@ -37,9 +35,7 @@ struct RecentActivityView: View {
                     GroupedList(
                         content: [
                             GroupedListSection(
-                                heading: String.recentActivity.localized(
-                                    "recentActivityCurrentMonthItems"
-                                ),
+                                heading: viewModel.currentMonthActivitiesListTitle,
                                 rows: rows,
                                 footer: nil
                             )

@@ -48,7 +48,7 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func sortItems_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
+    func sortActivities_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
 
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
@@ -93,7 +93,7 @@ struct RecentActivitiesViewModelTests {
     }
 
     @Test
-    func sortItems_whenActivitesDateEqualsRecentMonths_currentMonthsListIsPopulated() throws {
+    func sortActivities_whenActivitesDateEqualsRecentMonths_recentMonthsListIsPopulated() throws {
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
@@ -138,6 +138,8 @@ struct RecentActivitiesViewModelTests {
             notificationCenter: .default
         ).load()
 
+        var activitiesArray:[ActivityItem] = []
+
         let activityOne = ActivityItem(context: coreData.backgroundContext)
         activityOne.id = UUID().uuidString
         activityOne.title = "benefits"
@@ -160,6 +162,11 @@ struct RecentActivitiesViewModelTests {
             urlOpener: MockURLOpener(),
             analyticsService: MockAnalyticsService()
         )
+        activitiesArray.append(activityOne)
+        activitiesArray.append(activityTwo)
+        activitiesArray.append(activityThree)
+
+        sut.sortActivites(activities: activitiesArray)
         let groupSections = sut.buildSections()
 
         guard let sectionHeader: String = groupSections.first?.heading
@@ -168,8 +175,8 @@ struct RecentActivitiesViewModelTests {
         else { return }
 
         #expect(sut.buildSections().count == 1)
-        #expect(sectionHeader == "October 2024")
-        #expect(sectionRowTitle == "Last visited on 14 October")
+        #expect(sectionHeader == "April 2016")
+        #expect(sectionRowTitle == "Last visited on 14 April")
     }
 
     @Test
@@ -206,16 +213,10 @@ struct RecentActivitiesViewModelTests {
 
         let mockAnalyticsService = MockAnalyticsService()
 
-        let activityOne = ActivityItem(context: coreData.backgroundContext)
-        activityOne.id = UUID().uuidString
-        activityOne.title = "benefits"
-        activityOne.url = "https://www.youtube.com/"
-        activityOne.date = Date.arrange("14/04/2016")
-
-        let activityTwo = ActivityItem(context: coreData.viewContext)
-        activityTwo.title = "Benefits"
-        activityTwo.url = "https://www.youtube.com"
-        activityTwo.date = Date.arrange("15/04/2016")
+        let activity = ActivityItem(context: coreData.viewContext)
+        activity.title = "Benefits"
+        activity.url = "https://www.youtube.com"
+        activity.date = Date.arrange("15/04/2016")
 
         try? coreData.backgroundContext.save()
 
@@ -224,7 +225,7 @@ struct RecentActivitiesViewModelTests {
             analyticsService: mockAnalyticsService
         )
 
-        let activityRow = sut.returnActivityRow(activityItem: activityTwo)
+        let activityRow = sut.returnActivityRow(activityItem: activity)
         activityRow.action()
 
         #expect(mockAnalyticsService._trackedEvents.count == 1)

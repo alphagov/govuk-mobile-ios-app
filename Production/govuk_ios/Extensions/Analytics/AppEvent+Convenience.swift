@@ -111,4 +111,16 @@ extension AppEvent {
             ]
         )
     }
+
+    static func toggleTopic(title: String,
+                            isFavorite: Bool) -> AppEvent {
+        .init(name: "Function",
+              params: [
+                "text": title,
+                "type": "toggle",
+                "section": "Topics",
+                "action": isFavorite ? "On" : "Off"
+              ]
+        )
+    }
 }

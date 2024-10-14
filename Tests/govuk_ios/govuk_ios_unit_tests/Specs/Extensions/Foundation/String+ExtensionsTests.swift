@@ -35,6 +35,12 @@ struct String_ExtensionsTests {
         let sut = String.onboarding
         #expect(sut.tableName == "Onboarding")
     }
+    
+    @Test
+    func topics_hasCorrectValues() {
+        let sut = String.topics
+        #expect(sut.tableName == "Topics")
+    }
 
     @Test
     func localized_returnsExpectedResult() {

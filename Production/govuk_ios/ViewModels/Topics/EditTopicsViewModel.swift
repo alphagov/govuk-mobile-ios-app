@@ -18,12 +18,20 @@ final class EditTopicsViewModel: ObservableObject {
 
         var rows = [GroupedListRow]()
         topics.forEach { topic in
-            rows.append(ToggleRow(id: topic.ref,
-                                  title: topic.title,
-                                  isOn: topic.isFavorite,
-                                  action: { value in
-                topic.isFavorite = value
-            }))
+            let row = ToggleRow(
+                id: topic.ref,
+                title: topic.title,
+                isOn: topic.isFavorite,
+                action: { value in
+                    topic.isFavorite = value
+                    let event = AppEvent.toggleTopic(
+                        title: topic.title,
+                        isFavorite: topic.isFavorite
+                    )
+                    analyticsService.track(event: event)
+                }
+            )
+            rows.append(row)
         }
 
         sections = [GroupedListSection(heading: "",

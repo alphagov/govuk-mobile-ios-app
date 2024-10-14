@@ -1,0 +1,39 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "doneButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "editTopicsSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topics you select will be shown on the app home page so you can find them more easily"
+          }
+        }
+      }
+    },
+    "editTopicsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit your topics"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

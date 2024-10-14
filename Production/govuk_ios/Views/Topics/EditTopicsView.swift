@@ -5,17 +5,19 @@ struct EditTopicsView: View {
 
     var body: some View {
         VStack {
-            Text("Topics you select will be shown on ")
+            Text(String.topics.localized("editTopicsSubtitle"))
                 .multilineTextAlignment(.leading)
+                .padding(.horizontal, 12)
+                .padding(.top, 10)
             ScrollView {
                 GroupedList(content: viewModel.sections)
             }
         }
-        .navigationTitle("Edit your topics")
+        .navigationTitle(String.topics.localized("editTopicsTitle"))
         .toolbar {
             HStack {
                 Spacer()
-                Button("Done") {
+                Button(String.topics.localized("doneButtonTitle")) {
                     viewModel.updateFavoriteTopics()
                 }
             }

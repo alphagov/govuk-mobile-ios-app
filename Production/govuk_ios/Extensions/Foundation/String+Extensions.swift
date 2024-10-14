@@ -49,6 +49,13 @@ extension String {
             bundle: .main
         )
     }
+
+    static var topics: LocalStringBuilder {
+        .init(
+            tableName: "Topics",
+            bundle: .main
+        )
+    }
 }
 
 extension String {

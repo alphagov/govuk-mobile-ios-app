@@ -10,6 +10,20 @@ import Factory
 struct HomeViewControllerTests {
 
     @Test
+    func init_hasExpectedValues() {
+        let viewModel = HomeViewModel(
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
+            searchButtonPrimaryAction: { () -> Void in _ = true },
+            recentActivityAction: { },
+            topicAction: { _ in }
+        )
+        let subject = HomeViewController(viewModel: viewModel)
+
+        #expect(subject.title == "Home")
+    }
+
+    @Test
     func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register {

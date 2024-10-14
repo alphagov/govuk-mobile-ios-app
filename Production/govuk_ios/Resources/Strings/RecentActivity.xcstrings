@@ -23,6 +23,28 @@
         }
       }
     },
+    "recentActivityClearAllAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear pages you’ve visited?"
+          }
+        }
+      }
+    },
+    "recentActivityClearAllAlertWarningDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permanently clear the list of all pages you’ve visited"
+          }
+        }
+      }
+    },
     "recentActivityCurrentMonthItems" : {
       "extractionState" : "manual",
       "localizations" : {

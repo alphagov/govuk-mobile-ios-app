@@ -24,7 +24,7 @@ extension UIAlertAction {
 
     static func clearAll(handler: (() -> Void)? = nil) -> UIAlertAction {
         .init(
-            title: String.recentActivity.localized("editButtonTitle"),
+            title: String.recentActivity.localized("clearAllActionTitle"),
             style: .destructive,
             handler: { _ in
                 handler?()

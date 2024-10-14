@@ -17,13 +17,17 @@ struct EditTopicsView: View {
         .toolbar {
             HStack {
                 Spacer()
-                Button(String.topics.localized("doneButtonTitle")) {
-                    viewModel.updateFavoriteTopics()
-                }
+                doneButton
             }
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
+        }
+    }
+
+    private var doneButton: some View {
+        Button(String.topics.localized("doneButtonTitle")) {
+            viewModel.updateFavoriteTopics()
         }
     }
 }

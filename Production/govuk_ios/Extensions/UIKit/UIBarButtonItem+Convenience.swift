@@ -14,10 +14,31 @@ extension UIBarButtonItem {
     static func recentActivitEdit(target: Any,
                                   action: Selector) -> UIBarButtonItem {
         UIBarButtonItem(
-            title: String.recentActivity.localized("editButtonTitle"),
+            barButtonSystemItem: .edit,
+            target: target,
+            action: action
+        )
+    }
+
+    static func selectAll(target: Any,
+                          action: Selector) -> UIBarButtonItem {
+        UIBarButtonItem(
+            title: "Select all",
             style: .plain,
             target: target,
             action: action
         )
+    }
+
+    static func remove(target: Any,
+                       action: Selector) -> UIBarButtonItem {
+        let item = UIBarButtonItem(
+            title: "Remove",
+            style: .plain,
+            target: target,
+            action: action
+        )
+        item.tintColor = .red
+        return item
     }
 }

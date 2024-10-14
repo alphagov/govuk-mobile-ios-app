@@ -12,6 +12,7 @@ class GroupedListViewModel: NSObject,
     private let urlOpener: URLOpener
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
     private var retainedResultsController: NSFetchedResultsController<ActivityItem>?
+    private var selectedEditingItems: Set<NSManagedObjectID> = []
     private(set) var structure: RecentActivitiesViewStructure = .init(
         todaysActivites: [],
         currentMonthActivities: [],
@@ -70,6 +71,23 @@ class GroupedListViewModel: NSObject,
         try? item.managedObjectContext?.save()
         urlOpener.openIfPossible(url)
         trackSelection(activity: item)
+    }
+
+    func edit(item: ActivityItem) {
+        selectedEditingItems.insert(item.objectID)
+    }
+
+    func removeEdit(item: ActivityItem) {
+        selectedEditingItems.remove(item.objectID)
+    }
+
+    func confirmDeletionOfEditingItems() {
+        guard !selectedEditingItems.isEmpty else { return }
+        activityService.delete(objects: Array(selectedEditingItems))
+    }
+
+    func endEditing() {
+        selectedEditingItems.removeAll()
     }
 
     private func trackSelection(activity: ActivityItem) {

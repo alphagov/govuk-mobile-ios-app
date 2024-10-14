@@ -11,6 +11,7 @@ extension UITableView {
         tableView.estimatedSectionHeaderHeight = 24
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
+        tableView.allowsMultipleSelectionDuringEditing = true
         return tableView
     }
 }

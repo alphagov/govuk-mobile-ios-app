@@ -9,10 +9,6 @@ class GroupedListViewController: BaseViewController,
                                  UITableViewDelegate {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
-    private lazy var barButtonItem = UIBarButtonItem.recentActivitEdit(
-        target: self,
-        action: #selector(barButtonPressed)
-    )
     private lazy var dataSource: DataSource = {
         let localDataSource = DataSource(
             tableView: tableView,
@@ -20,6 +16,21 @@ class GroupedListViewController: BaseViewController,
         )
         localDataSource.defaultRowAnimation = .fade
         return localDataSource
+    }()
+    private lazy var editingToolbar: UIToolbar = {
+        let localToolbar = UIToolbar(
+            // This is to prevent a constraint error when loading
+            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)
+        )
+        localToolbar.translatesAutoresizingMaskIntoConstraints = false
+        localToolbar.insetsLayoutMarginsFromSafeArea = true
+        localToolbar.items = [
+            .selectAll(target: self, action: #selector(selectAllButtonPressed)),
+            .flexibleSpace(),
+            .remove(target: self, action: #selector(removeButtonPressed))
+        ]
+        localToolbar.isHidden = true
+        return localToolbar
     }()
 
     private lazy var noItemsView = {
@@ -42,17 +53,7 @@ class GroupedListViewController: BaseViewController,
     init(viewModel: GroupedListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-    }
-
-    @objc
-    private func barButtonPressed() {
-        let alert = UIAlertController.clearAllRecentItems(
-            confirmAction: { [weak self] in
-                self?.viewModel.deleteAllItems()
-                self?.reloadSnapshot()
-            }
-        )
-        present(alert, animated: true)
+        hidesBottomBarWhenPushed = true
     }
 
     required init?(coder: NSCoder) {
@@ -72,7 +73,7 @@ class GroupedListViewController: BaseViewController,
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.setRightBarButton(barButtonItem, animated: animated)
+        navigationItem.setRightBarButton(editButtonItem, animated: animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
@@ -80,6 +81,7 @@ class GroupedListViewController: BaseViewController,
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(tableView)
         view.addSubview(noItemsView)
+        view.addSubview(editingToolbar)
     }
 
     private func configureConstraints() {
@@ -106,8 +108,36 @@ class GroupedListViewController: BaseViewController,
             ),
             noItemsView.leftAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leftAnchor
+            ),
+            editingToolbar.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor
+            ),
+            editingToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            editingToolbar.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor
             )
         ])
+    }
+
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+        editingToolbar.isHidden = !editing
+        if !editing {
+            viewModel.endEditing()
+        }
+    }
+
+    @objc
+    private func selectAllButtonPressed() {
+        tableView.selectAllRows(animated: true)
+    }
+
+    @objc
+    private func removeButtonPressed() {
+        viewModel.confirmDeletionOfEditingItems()
+        reloadSnapshot()
+        setEditing(false, animated: true)
     }
 
     private func reloadSnapshot() {
@@ -139,7 +169,6 @@ class GroupedListViewController: BaseViewController,
                     top: indexPath.row == 0,
                     bottom: item == section.items.last
                 )
-                cell.selectionStyle = .none
             }
             return cell
         }
@@ -157,8 +186,19 @@ class GroupedListViewController: BaseViewController,
                    didSelectRowAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
-        viewModel.selected(item: item.activity)
-        reloadSnapshot()
+        if tableView.isEditing {
+            viewModel.edit(item: item.activity)
+        } else {
+            viewModel.selected(item: item.activity)
+            reloadSnapshot()
+        }
+    }
+
+    func tableView(_ tableView: UITableView,
+                   didDeselectRowAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath)
+        else { return }
+        viewModel.removeEdit(item: item.activity)
     }
 }
 

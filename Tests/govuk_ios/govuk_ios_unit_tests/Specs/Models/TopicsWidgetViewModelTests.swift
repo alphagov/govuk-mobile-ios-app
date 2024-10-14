@@ -71,7 +71,7 @@ struct TopicsWidgetViewModelTests {
     }
     
     @Test
-    func didTapTopic_sendsEvent() async throws {
+    func didTapTopic_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register { mockAnalyticsService }
         let sut = TopicsWidgetViewModel(
@@ -89,7 +89,7 @@ struct TopicsWidgetViewModelTests {
     }
     
     @Test
-    func didTapEdit_sendsEvent() async throws {
+    func didTapEdit_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register { mockAnalyticsService }
         let sut = TopicsWidgetViewModel(

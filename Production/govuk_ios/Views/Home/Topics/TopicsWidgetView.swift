@@ -71,7 +71,9 @@ class TopicsWidgetView: UIView {
 
     @objc
     private func topicsDidUpdate(notification: Notification) {
-        updateTopics(viewModel.favoriteTopics)
+        DispatchQueue.main.async {
+            self.updateTopics(self.viewModel.favoriteTopics)
+        }
     }
 
     private func configureUI() {

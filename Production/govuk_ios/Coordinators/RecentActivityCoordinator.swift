@@ -1,6 +1,5 @@
 import UIKit
 import Foundation
-import Factory
 
 class RecentActivityCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder

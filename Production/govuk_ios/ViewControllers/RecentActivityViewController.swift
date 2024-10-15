@@ -37,9 +37,9 @@ class RecentActivityViewController: BaseViewController,
     var trackingName: String { "Pages you've visited" }
     var trackingTitle: String? { "Pages you've visited" }
 
-    private let viewModel: GroupedListViewModel
+    private let viewModel: RecentActivitiesViewModel
 
-    init(viewModel: GroupedListViewModel) {
+    init(viewModel: RecentActivitiesViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,7 +61,7 @@ class RecentActivityViewController: BaseViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.pageTitle
+        title = viewModel.navigationTitle
         configureUI()
         configureConstraints()
         tableView.delegate = self

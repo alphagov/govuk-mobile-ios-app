@@ -10,16 +10,17 @@ class RecentActivitiesViewModel: NSObject,
     private var activityService: ActivityServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private var retainedReultsController: NSFetchedResultsController<ActivityItem>?
-    @Published var model: RecentActivitiesViewStructure = .init(
-        todaysActivites: [],
-        currentMonthActivities: [],
-        recentMonthActivities: [:]
-    )
 
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
     private let urlOpener: URLOpener
     @Published var activities: [ActivityItem] = []
+
+    private(set) var structure: RecentActivitiesViewStructure = .init(
+        todaysActivites: [],
+        currentMonthActivities: [],
+        recentMonthActivities: [:]
+    )
 
     let currentMonthActivitiesListTitle = String.recentActivity.localized(
         "recentActivityCurrentMonthItems"
@@ -56,18 +57,19 @@ class RecentActivitiesViewModel: NSObject,
         self.analyticsService = analyticsService
         self.activityService = activityService
         super.init()
-        setupFetchResultsController()
     }
 
-    func isModelEmpty() -> Bool {
-        return model == RecentActivitiesViewStructure(
-            todaysActivites: [],
-            currentMonthActivities: [],
-            recentMonthActivities: [:]
-        )
+    @discardableResult
+    func fetchActivities() -> RecentActivitiesViewStructure {
+        retainedReultsController? = activityService.fetch()
+        retainedReultsController?.delegate = self
+        let items = retainedReultsController?.fetchedObjects ?? []
+        let localStructure = sortActivites(activities: items)
+        structure = localStructure
+        return localStructure
     }
 
-    private func sortActivites(activities: [ActivityItem]) {
+    private func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
         var todaysActivities: [ActivityItem] = []
         var currentMonthActivities: [ActivityItem] = []
         var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]
@@ -86,26 +88,20 @@ class RecentActivitiesViewModel: NSObject,
                 recentMonthsActivities[key] = items
             }
         }
-        self.model =  .init(
+
+        return .init(
             todaysActivites: todaysActivities,
             currentMonthActivities: currentMonthActivities,
             recentMonthActivities: recentMonthsActivities
         )
     }
 
-    private func setupFetchResultsController() {
-        retainedReultsController = activityService.fetch()
-        retainedReultsController?.delegate = self
-        let activities = retainedReultsController?.fetchedObjects ?? []
-        sortActivites(activities: activities)
+    func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>,
+                    didChangeContentWith
+                    snapshot: NSDiffableDataSourceSnapshotReference) {
+        let items = retainedReultsController?.fetchedObjects ?? []
+        structure = sortActivites(activities: items)
     }
-
-    func controller(
-        _ controller: NSFetchedResultsController<any NSFetchRequestResult>,
-        didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-            let activities = retainedReultsController?.fetchedObjects ?? []
-            sortActivites(activities: activities)
-        }
 
     @MainActor
     func deleteActivities() {
@@ -113,19 +109,6 @@ class RecentActivitiesViewModel: NSObject,
         analyticsService.track(
             event: .clearRecentActivity()
         )
-    }
-
-    func buildSections() -> [GroupedListSection] {
-        model.recentMonthActivities.keys
-            .sorted { $0 > $1 }
-            .map {
-                let items = model.recentMonthActivities[$0]
-                return GroupedListSection(
-                    heading: $0.title,
-                    rows: items?.map(returnActivityRow) ?? [],
-                    footer: nil
-                )
-            }
     }
 
     private func selectActivity(item: ActivityItem) {

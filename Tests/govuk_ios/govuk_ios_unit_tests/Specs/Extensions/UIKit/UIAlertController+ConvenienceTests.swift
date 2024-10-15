@@ -32,16 +32,4 @@ struct UIAlertController_ConvenienceTests {
         #expect(subject.actions.count == 1)
         #expect(subject.actions.first?.title == "OK")
     }
-
-    @Test
-    func clearAllRecentItems_returnsExpectedResult() {
-        let subject = UIAlertController.clearAllRecentItems(
-            confirmAction: { }
-        )
-
-        #expect(subject.title == "Clear pages you’ve visited?")
-        #expect(subject.message == "Permanently clear the list of all pages you’ve visited")
-        #expect(subject.preferredStyle == .alert)
-        #expect(subject.actions.count == 2)
-    }
 }

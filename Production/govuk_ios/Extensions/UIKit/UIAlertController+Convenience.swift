@@ -21,15 +21,4 @@ extension UIAlertController {
         alert.addAction(.ok(handler: handler))
         return alert
     }
-
-    static func clearAllRecentItems(confirmAction: @escaping () -> Void) -> UIAlertController {
-        let alert = UIAlertController(
-            title: String.recentActivity.localized("recentActivityClearAllAlertTitle"),
-            message: String.recentActivity.localized("recentActivityClearAllAlertWarningDesc"),
-            preferredStyle: .alert
-        )
-        alert.addAction(.clearAll(handler: confirmAction))
-        alert.addAction(.cancel())
-        return alert
-    }
 }

@@ -1,28 +1,6 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
-    "clearAllActionTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear all"
-          }
-        }
-      }
-    },
-    "editButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear all"
-          }
-        }
-      }
-    },
     "recentActivitiesTodaysListTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -30,28 +8,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Today"
-          }
-        }
-      }
-    },
-    "recentActivityClearAllAlertTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear pages you’ve visited?"
-          }
-        }
-      }
-    },
-    "recentActivityClearAllAlertWarningDesc" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permanently clear the list of all pages you’ve visited"
           }
         }
       }

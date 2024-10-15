@@ -17,6 +17,7 @@ class GroupedListViewController: BaseViewController,
         localDataSource.defaultRowAnimation = .fade
         return localDataSource
     }()
+
     private lazy var removeBarButtonItem: UIBarButtonItem = .remove(
         target: self,
         action: #selector(removeButtonPressed)

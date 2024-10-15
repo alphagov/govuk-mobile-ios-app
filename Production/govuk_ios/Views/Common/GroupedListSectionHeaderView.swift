@@ -26,7 +26,6 @@ class GroupedListSectionHeaderView: UIView {
     }
 
     private func configureUI() {
-//        accessibilityTraits = .header
         addSubview(titleLabel)
     }
 

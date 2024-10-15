@@ -119,7 +119,8 @@ class CoordinatorBuilder {
         RecentActivityCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
-            analyticsService: container.analyticsService.resolve()
+            analyticsService: container.analyticsService.resolve(),
+            activityService: container.activityService.resolve()
         )
     }
 

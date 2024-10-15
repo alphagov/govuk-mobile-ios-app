@@ -27,6 +27,9 @@ struct HomeViewModel {
             viewModel: viewModel
         )
         let widget = WidgetView()
+        widget.isAccessibilityElement = true
+        widget.accessibilityLabel = content.accessibilityLabel
+        widget.accessibilityTraits = content.accessibilityTraits
         widget.addContent(content)
         return widget
     }

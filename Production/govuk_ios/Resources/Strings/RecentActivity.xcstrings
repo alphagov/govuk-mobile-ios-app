@@ -1,17 +1,6 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
-    "editButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit"
-          }
-        }
-      }
-    },
     "recentActivitiesTodaysListTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -74,6 +63,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pages you've visited"
+          }
+        }
+      }
+    },
+    "removeActivitiesButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
+          }
+        }
+      }
+    },
+    "selectAllButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select all"
           }
         }
       }

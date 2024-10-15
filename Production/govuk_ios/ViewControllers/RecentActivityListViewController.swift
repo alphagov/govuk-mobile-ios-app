@@ -1,0 +1,237 @@
+import Foundation
+import UIKit
+
+private typealias DataSource = UITableViewDiffableDataSource<RecentActivitySection, ActivityItem>
+private typealias Snapshot = NSDiffableDataSourceSnapshot<RecentActivitySection, ActivityItem>
+
+class RecentActivityListViewController: BaseViewController,
+                                        TrackableScreen,
+                                        UITableViewDelegate {
+    private lazy var tableView: UITableView = UITableView.groupedList
+    private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
+    private lazy var dataSource: DataSource = {
+        let localDataSource = DataSource(
+            tableView: tableView,
+            cellProvider: loadCell
+        )
+        localDataSource.defaultRowAnimation = .fade
+        return localDataSource
+    }()
+
+    private lazy var removeBarButtonItem: UIBarButtonItem = .remove(
+        action: { [unowned self] action in
+            self.removeButtonPressed()
+            self.trackActionPress(title: action.title, action: "Remove")
+        }
+    )
+
+    private lazy var selectAllBarButtonItem: UIBarButtonItem = .selectAll(
+        action: { [unowned self] action in
+            self.selectAllButtonPressed()
+            self.trackActionPress(title: action.title, action: "Select all")
+        }
+    )
+
+    private lazy var editingToolbar: UIToolbar = {
+        let localToolbar = UIToolbar(
+            // This is to prevent a constraint error when loading
+            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)
+        )
+        localToolbar.translatesAutoresizingMaskIntoConstraints = false
+        localToolbar.insetsLayoutMarginsFromSafeArea = true
+        localToolbar.items = [
+            selectAllBarButtonItem,
+            .flexibleSpace(),
+            removeBarButtonItem
+        ]
+        localToolbar.isHidden = true
+        return localToolbar
+    }()
+
+    private lazy var noItemsView = {
+        let localView = ListInformationView()
+        localView.backgroundColor = .clear
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.isHidden = true
+        localView.configure(
+            title: String.recentActivity.localized("recentActivityErrorViewTitle"),
+            description: String.recentActivity.localized("recentActivityErrorViewDescription")
+        )
+        return localView
+    }()
+
+    var trackingName: String { "Pages you've visited" }
+
+    private let viewModel: RecentActivityListViewModel
+
+    init(viewModel: RecentActivityListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        title = viewModel.pageTitle
+        hidesBottomBarWhenPushed = true
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+        configureConstraints()
+        tableView.delegate = self
+        tableView.dataSource = dataSource
+        viewModel.fetchActivities()
+        reloadSnapshot()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.setRightBarButton(editButtonItem, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
+    private func configureUI() {
+        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        view.addSubview(tableView)
+        view.addSubview(noItemsView)
+        view.addSubview(editingToolbar)
+        removeBarButtonItem.isEnabled = false
+    }
+
+    private func configureConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            tableView.rightAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.rightAnchor
+            ),
+            tableView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            ),
+            tableView.leftAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leftAnchor
+            ),
+
+            noItemsView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 40
+            ),
+            noItemsView.rightAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.rightAnchor
+            ),
+            noItemsView.leftAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leftAnchor
+            ),
+            editingToolbar.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor
+            ),
+            editingToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            editingToolbar.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor
+            )
+        ])
+    }
+
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+        editingToolbar.isHidden = !editing
+        if !editing {
+            viewModel.endEditing()
+        }
+    }
+
+    @objc
+    private func selectAllButtonPressed() {
+        tableView.selectAllRows(animated: true)
+    }
+
+    @objc
+    private func removeButtonPressed() {
+        viewModel.confirmDeletionOfEditingItems()
+        reloadSnapshot()
+        setEditing(false, animated: true)
+    }
+
+    private func trackActionPress(title: String,
+                                  action: String) {
+        guard !title.isEmpty
+        else { return }
+        let event = AppEvent.buttonFunction(
+            text: title,
+            section: "Pages you've visited",
+            action: action
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func reloadSnapshot() {
+        var snapshot = Snapshot()
+        snapshot.deleteAllItems()
+        viewModel.structure.sections.forEach {
+            snapshot.appendSections([$0])
+            snapshot.appendItems($0.items, toSection: $0)
+        }
+        dataSource.apply(snapshot, animatingDifferences: true)
+        tableView.isHidden = viewModel.structure.isEmpty
+        noItemsView.isHidden = !viewModel.structure.isEmpty
+    }
+
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        let localLabel = GroupedListSectionHeaderView()
+        localLabel.text = viewModel.structure.sections[section].title
+        return localLabel
+    }
+
+    private var loadCell: (UITableView, IndexPath, ActivityItem) -> GroupedListTableViewCell {
+        return { [weak self] tableView, indexPath, item in
+            let cell: GroupedListTableViewCell = tableView.dequeue(indexPath: indexPath)
+            if let section = self?.viewModel.structure.sections[indexPath.section] {
+                cell.configure(
+                    title: item.title,
+                    description: self?.lastVisitedString(activity: item),
+                    top: indexPath.row == 0,
+                    bottom: item == section.items.last
+                )
+            }
+            return cell
+        }
+    }
+
+    private func lastVisitedString(activity: ActivityItem) -> String {
+        let copy = String.recentActivity.localized(
+            "recentActivityFormattedDateStringComponent"
+        )
+        let formattedDateString = lastVisitedFormatter.string(from: activity.date)
+        return "\(copy) \(formattedDateString)"
+    }
+
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
+        guard let item = dataSource.itemIdentifier(for: indexPath)
+        else { return }
+        if tableView.isEditing {
+            viewModel.edit(item: item)
+        } else {
+            viewModel.selected(item: item)
+            reloadSnapshot()
+        }
+    }
+
+    func tableView(_ tableView: UITableView,
+                   didDeselectRowAt indexPath: IndexPath) {
+        removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
+        guard let item = dataSource.itemIdentifier(for: indexPath)
+        else { return }
+        viewModel.removeEdit(item: item)
+    }
+}
+
+struct RecentActivitySection: Hashable {
+    let title: String
+    let items: [ActivityItem]
+}

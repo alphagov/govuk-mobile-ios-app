@@ -11,6 +11,7 @@ struct RecentActivityCoordinatorTests {
     func start_setsRecentActivityViewController() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
+        let mockActivityService = MockActivityService()
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
 
@@ -19,7 +20,8 @@ struct RecentActivityCoordinatorTests {
         let subject = RecentActivityCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            activityService: mockActivityService
         )
 
         subject.start()

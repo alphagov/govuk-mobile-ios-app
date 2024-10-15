@@ -2,9 +2,10 @@ import CoreData
 import Foundation
 
 protocol CoreDataRepositoryInterface {
-    func load() -> Self
     var viewContext: NSManagedObjectContext { get }
     var backgroundContext: NSManagedObjectContext { get }
+
+    func load() -> Self
 }
 
 class CoreDataRepository: CoreDataRepositoryInterface {

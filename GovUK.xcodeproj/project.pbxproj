@@ -82,6 +82,8 @@
 		4E3EAA072CBE13BF00354EC8 /* GroupListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3EAA062CBE13BF00354EC8 /* GroupListTableViewCell.swift */; };
 		4E3EAA092CBE141B00354EC8 /* ListInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3EAA082CBE141B00354EC8 /* ListInformationView.swift */; };
 		4E3EAA0B2CBE14D600354EC8 /* GroupListSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3EAA0A2CBE14D600354EC8 /* GroupListSectionHeaderView.swift */; };
+		4E3EAA0D2CBE2E4C00354EC8 /* UIBarButtonItem+Convinience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3EAA0C2CBE2E4C00354EC8 /* UIBarButtonItem+Convinience.swift */; };
+		4E3EAA0F2CBE2FA000354EC8 /* UITableView+Convinence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3EAA0E2CBE2FA000354EC8 /* UITableView+Convinence.swift */; };
 		4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */; };
 		4E4FF25A2C9B5DB000310AEC /* RecentActivityViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FF2592C9B5DB000310AEC /* RecentActivityViewSnapshotTests.swift */; };
 		4E562E432C988F580074A483 /* RecentActivitiesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E562E422C988F580074A483 /* RecentActivitiesViewModelTests.swift */; };
@@ -421,6 +423,8 @@
 		4E3EAA062CBE13BF00354EC8 /* GroupListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListTableViewCell.swift; sourceTree = "<group>"; };
 		4E3EAA082CBE141B00354EC8 /* ListInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInformationView.swift; sourceTree = "<group>"; };
 		4E3EAA0A2CBE14D600354EC8 /* GroupListSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListSectionHeaderView.swift; sourceTree = "<group>"; };
+		4E3EAA0C2CBE2E4C00354EC8 /* UIBarButtonItem+Convinience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Convinience.swift"; sourceTree = "<group>"; };
+		4E3EAA0E2CBE2FA000354EC8 /* UITableView+Convinence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Convinence.swift"; sourceTree = "<group>"; };
 		4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinatorTests.swift; sourceTree = "<group>"; };
 		4E4FF2592C9B5DB000310AEC /* RecentActivityViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityViewSnapshotTests.swift; sourceTree = "<group>"; };
 		4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = RecentActivity.xcstrings; sourceTree = "<group>"; };
@@ -1501,6 +1505,8 @@
 				5DC79FAD2CA185A000014446 /* UITableView+Extensions.swift */,
 				5DC79FAF2CA1862000014446 /* UIView+Extensions.swift */,
 				5D899A1F2C946F540074C0AD /* UIViewController+Extensions.swift */,
+				4E3EAA0C2CBE2E4C00354EC8 /* UIBarButtonItem+Convinience.swift */,
+				4E3EAA0E2CBE2FA000354EC8 /* UITableView+Convinence.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2072,6 +2078,7 @@
 				3D211B8F2CB6B4FE005D1472 /* HeaderView.swift in Sources */,
 				5D3123802C85A6B70088B931 /* ActivityService.swift in Sources */,
 				5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */,
+				4E3EAA0F2CBE2FA000354EC8 /* UITableView+Convinence.swift in Sources */,
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,
 				5D4E255D2C821C8E00FD9A28 /* CoreDataRepository.swift in Sources */,
 				5D9E67C22C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift in Sources */,
@@ -2121,6 +2128,7 @@
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */,
+				4E3EAA0D2CBE2E4C00354EC8 /* UIBarButtonItem+Convinience.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
 				3D15E7B22CB562E40046CE64 /* AppRecommendUpdateContainerView.swift in Sources */,
 				4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */,

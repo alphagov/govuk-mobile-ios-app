@@ -2,17 +2,9 @@ import Foundation
 import UIKit
 
 class GroupedListTableViewCell: UITableViewCell {
-    private lazy var horizonatalStackView: UIStackView = {
-        let localView = UIStackView()
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.axis = .horizontal
-        localView.alignment = .center
-        localView.spacing = 16
-        return localView
-    }()
-
     private lazy var verticalStackView: UIStackView = {
         let localView = UIStackView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
         localView.axis = .vertical
         return localView
     }()
@@ -57,13 +49,6 @@ class GroupedListTableViewCell: UITableViewCell {
         return localView
     }()
 
-    private lazy var selectedImageView: UIImageView = {
-        let localView = UIImageView(image: .commonCheckUnselected24)
-        localView.highlightedImage = .commonCheckSelected24
-        localView.isHidden = true
-        return localView
-    }()
-
     private let borderWidth: CGFloat = 0.5
     private var isTop = false
     private var isBottom = false
@@ -85,12 +70,9 @@ class GroupedListTableViewCell: UITableViewCell {
         layer.cornerRadius = 10
         clipsToBounds = true
 
-        contentView.addSubview(horizonatalStackView)
+        contentView.addSubview(verticalStackView)
         contentView.addSubview(iconImageView)
         contentView.addSubview(separatorView)
-
-        horizonatalStackView.addArrangedSubview(selectedImageView)
-        horizonatalStackView.addArrangedSubview(verticalStackView)
 
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(bodyLabel)
@@ -105,24 +87,22 @@ class GroupedListTableViewCell: UITableViewCell {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            horizonatalStackView.topAnchor.constraint(
+            verticalStackView.topAnchor.constraint(
                 equalTo: contentView.topAnchor,
                 constant: 11
             ),
-            horizonatalStackView.rightAnchor.constraint(
+            verticalStackView.rightAnchor.constraint(
                 equalTo: iconImageView.leftAnchor,
                 constant: -10
             ),
-            horizonatalStackView.bottomAnchor.constraint(
+            verticalStackView.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
                 constant: -11
             ),
-            horizonatalStackView.leftAnchor.constraint(
+            verticalStackView.leftAnchor.constraint(
                 equalTo: contentView.leftAnchor,
                 constant: 16
             ),
-            selectedImageView.heightAnchor.constraint(equalToConstant: 24),
-            selectedImageView.widthAnchor.constraint(equalToConstant: 24),
             iconImageView.topAnchor.constraint(
                 equalTo: contentView.topAnchor,
                 constant: 11
@@ -224,23 +204,4 @@ class GroupedListTableViewCell: UITableViewCell {
         }
         return corners
     }
-
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        self.selectedImageView.isHighlighted = selected
-//    }
-
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//        UIView.animate(
-//            withDuration: 0.32,
-//            animations: { [weak self] in
-//                self?.selectedImageView.alpha = editing ? 1 : 0
-//                self?.selectedImageView.isHidden = !editing
-//            }
-//            completion: { [weak self] _ in
-//                self?.selectedImageView.isHidden = !editing
-//            }
-//        )
-//    }
 }

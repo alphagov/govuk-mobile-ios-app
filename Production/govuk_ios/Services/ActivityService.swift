@@ -4,7 +4,7 @@ import CoreData
 protocol ActivityServiceInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(searchItem: SearchItem)
-    func delete(objects: [NSManagedObjectID])
+    func delete(objectIds: [NSManagedObjectID])
     func deleteAll()
 }
 
@@ -26,8 +26,8 @@ struct ActivityService: ActivityServiceInterface {
         repository.save(params: params)
     }
 
-    func delete(objects: [NSManagedObjectID]) {
-        repository.delete(objects: objects)
+    func delete(objectIds: [NSManagedObjectID]) {
+        repository.delete(objectIds: objectIds)
     }
 
     func deleteAll() {

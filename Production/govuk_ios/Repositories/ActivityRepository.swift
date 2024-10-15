@@ -4,7 +4,7 @@ import CoreData
 protocol ActivityRepositoryInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(params: ActivityItemCreateParams)
-    func delete(objects: [NSManagedObjectID])
+    func delete(objectIds: [NSManagedObjectID])
     func deleteAll()
 }
 
@@ -52,8 +52,8 @@ struct ActivityRepository: ActivityRepositoryInterface {
         ).fetch()
     }
 
-    func delete(objects: [NSManagedObjectID]) {
-        for objectId in objects {
+    func delete(objectIds: [NSManagedObjectID]) {
+        for objectId in objectIds {
             let object = coreData.backgroundContext.object(with: objectId)
             coreData.backgroundContext.delete(object)
         }

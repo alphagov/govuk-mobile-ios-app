@@ -20,20 +20,6 @@ struct GroupedListViewModelTests {
     }
 
     @Test
-    func deleteAll_callsService() {
-        let mockService = MockActivityService()
-        let sut = GroupedListViewModel(
-            activityService: mockService,
-            analyticsService: MockAnalyticsService(),
-            urlopener: MockURLOpener()
-        )
-
-        sut.deleteAllItems()
-
-        #expect(mockService._receivedDeleteAll)
-    }
-
-    @Test
     func selectItem_validURL_performsExpectedActions() {
         let mockService = MockActivityService()
         let mockURLOpener = MockURLOpener()
@@ -79,5 +65,66 @@ struct GroupedListViewModelTests {
 
         #expect(mockURLOpener._receivedOpenIfPossibleUrlString == nil)
         #expect(mockAnalyticsService._trackedEvents.isEmpty)
+    }
+
+    @Test
+    func editItem_confirmDelete_removesExpectedItems() {
+        let mockActivityService = MockActivityService()
+        let mockURLOpener = MockURLOpener()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = GroupedListViewModel(
+            activityService: mockActivityService,
+            analyticsService: mockAnalyticsService,
+            urlopener: mockURLOpener
+        )
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let item1 = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        let item2 = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        sut.edit(item: item1)
+        // Simulate somehow selecting same object twice should only pass the id once
+        sut.edit(item: item1)
+        sut.edit(item: item2)
+
+        sut.removeEdit(item: item2)
+
+        sut.confirmDeletionOfEditingItems()
+
+        #expect(mockActivityService._receivedDeleteObjectIds?.count == 1)
+        #expect(mockActivityService._receivedDeleteObjectIds?.first == item1.objectID)
+    }
+
+    @Test
+    func editItem_endEditing_removesSelectedItems() {
+        let mockActivityService = MockActivityService()
+        let mockURLOpener = MockURLOpener()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = GroupedListViewModel(
+            activityService: mockActivityService,
+            analyticsService: mockAnalyticsService,
+            urlopener: mockURLOpener
+        )
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let item1 = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        let item2 = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        sut.edit(item: item1)
+        sut.edit(item: item2)
+
+        sut.endEditing()
+
+        sut.confirmDeletionOfEditingItems()
+
+        #expect(mockActivityService._receivedDeleteObjectIds == nil)
     }
 }

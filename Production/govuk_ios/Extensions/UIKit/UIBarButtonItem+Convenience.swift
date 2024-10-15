@@ -11,23 +11,16 @@ extension UIBarButtonItem {
         )
     }
 
-    static func recentActivitEdit(target: Any,
-                                  action: Selector) -> UIBarButtonItem {
-        UIBarButtonItem(
-            barButtonSystemItem: .edit,
-            target: target,
-            action: action
-        )
-    }
-
     static func selectAll(target: Any,
                           action: Selector) -> UIBarButtonItem {
-        UIBarButtonItem(
+        let item = UIBarButtonItem(
             title: "Select all",
             style: .plain,
             target: target,
             action: action
         )
+        item.tintColor = UIColor.govUK.text.link
+        return item
     }
 
     static func remove(target: Any,

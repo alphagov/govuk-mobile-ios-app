@@ -83,7 +83,7 @@ class GroupedListViewModel: NSObject,
 
     func confirmDeletionOfEditingItems() {
         guard !selectedEditingItems.isEmpty else { return }
-        activityService.delete(objects: Array(selectedEditingItems))
+        activityService.delete(objectIds: Array(selectedEditingItems))
     }
 
     func endEditing() {
@@ -96,13 +96,6 @@ class GroupedListViewModel: NSObject,
         )
         analyticsService.track(
             event: event
-        )
-    }
-
-    func deleteAllItems() {
-        activityService.deleteAll()
-        analyticsService.track(
-            event: .clearRecentActivity()
         )
     }
 

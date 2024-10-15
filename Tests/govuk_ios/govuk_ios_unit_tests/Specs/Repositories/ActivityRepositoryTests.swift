@@ -104,8 +104,37 @@ struct ActivityRepositoryTests {
         let viewContextResults = try coreData.viewContext.fetch(request)
         #expect(viewContextResults.isEmpty)
 
-        let backgroundContextResults = try coreData.viewContext.fetch(request)
+        let backgroundContextResults = try coreData.backgroundContext.fetch(request)
         #expect(backgroundContextResults.isEmpty)
+    }
+
+    @Test
+    func deleteObjectIds_removesExpectedObject() throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = ActivityRepository(
+            coreData: coreData
+        )
+
+        let item = ActivityItem.arrange(context: coreData.viewContext)
+        let item2 = ActivityItem.arrange(context: coreData.viewContext),
+        _ = [
+            ActivityItem.arrange(context: coreData.viewContext),
+            ActivityItem.arrange(context: coreData.viewContext)
+        ]
+
+        try coreData.viewContext.save()
+
+        let request = ActivityItem.fetchRequest()
+        let results = try coreData.viewContext.fetch(request)
+        try #require(results.count == 4)
+
+        sut.delete(objectIds: [item.objectID, item2.objectID])
+
+        let viewContextResults = try coreData.viewContext.fetch(request)
+        #expect(viewContextResults.count == 2)
+
+        let backgroundContextResults = try coreData.backgroundContext.fetch(request)
+        #expect(backgroundContextResults.count == 2)
     }
 
     @Test

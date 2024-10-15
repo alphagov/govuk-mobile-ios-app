@@ -17,6 +17,11 @@ class GroupedListViewController: BaseViewController,
         localDataSource.defaultRowAnimation = .fade
         return localDataSource
     }()
+    private lazy var removeBarButtonItem: UIBarButtonItem = .remove(
+        target: self,
+        action: #selector(removeButtonPressed)
+    )
+
     private lazy var editingToolbar: UIToolbar = {
         let localToolbar = UIToolbar(
             // This is to prevent a constraint error when loading
@@ -27,7 +32,7 @@ class GroupedListViewController: BaseViewController,
         localToolbar.items = [
             .selectAll(target: self, action: #selector(selectAllButtonPressed)),
             .flexibleSpace(),
-            .remove(target: self, action: #selector(removeButtonPressed))
+            removeBarButtonItem
         ]
         localToolbar.isHidden = true
         return localToolbar
@@ -82,6 +87,7 @@ class GroupedListViewController: BaseViewController,
         view.addSubview(tableView)
         view.addSubview(noItemsView)
         view.addSubview(editingToolbar)
+        removeBarButtonItem.isEnabled = false
     }
 
     private func configureConstraints() {
@@ -184,6 +190,7 @@ class GroupedListViewController: BaseViewController,
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
+        removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         if tableView.isEditing {
@@ -196,6 +203,7 @@ class GroupedListViewController: BaseViewController,
 
     func tableView(_ tableView: UITableView,
                    didDeselectRowAt indexPath: IndexPath) {
+        removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         viewModel.removeEdit(item: item.activity)

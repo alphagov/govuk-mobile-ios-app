@@ -61,4 +61,18 @@ struct ActivityServiceTests {
 
         #expect(mockRepository._receivedDeleteAll)
     }
+
+    @Test
+    func deleteObjectIds_callsRepository() throws {
+        let mockRepository = MockActivityRepository()
+        let sut = ActivityService(
+            repository: mockRepository
+        )
+
+        let expectedId = NSManagedObjectID()
+        sut.delete(objectIds: [expectedId])
+
+        #expect(mockRepository._receivedDeleteObjectIds?.count == 1)
+        #expect(mockRepository._receivedDeleteObjectIds?.first == expectedId)
+    }
 }

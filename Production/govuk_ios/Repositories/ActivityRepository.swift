@@ -5,7 +5,6 @@ protocol ActivityRepositoryInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(params: ActivityItemCreateParams)
     func delete(objectIds: [NSManagedObjectID])
-    func deleteAll()
 }
 
 struct ActivityRepository: ActivityRepositoryInterface {
@@ -58,11 +57,5 @@ struct ActivityRepository: ActivityRepositoryInterface {
             coreData.backgroundContext.delete(object)
         }
         try? coreData.backgroundContext.save()
-    }
-
-    func deleteAll() {
-        coreData.deleteAll(
-            fetchRequest: ActivityItem.clearRequest()
-        )
     }
 }

@@ -5,7 +5,6 @@ protocol ActivityServiceInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(searchItem: SearchItem)
     func delete(objectIds: [NSManagedObjectID])
-    func deleteAll()
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -28,9 +27,5 @@ struct ActivityService: ActivityServiceInterface {
 
     func delete(objectIds: [NSManagedObjectID]) {
         repository.delete(objectIds: objectIds)
-    }
-
-    func deleteAll() {
-        repository.deleteAll()
     }
 }

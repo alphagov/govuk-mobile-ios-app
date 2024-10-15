@@ -72,43 +72,6 @@ struct ActivityRepositoryTests {
     }
 
     @Test
-    func deleteAll_withData_removesData() throws {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        let sut = ActivityRepository(
-            coreData: coreData
-        )
-
-        let originalId = UUID().uuidString
-        let params = ActivityItemCreateParams(
-            id: originalId,
-            title: "title",
-            date: .init(timeIntervalSince1970: 0),
-            url: "test"
-        )
-        sut.save(params: params)
-
-        var newParams = params
-        let newId = UUID().uuidString
-        newParams.id = newId
-
-        let expectedDate = Date()
-        newParams.date = expectedDate
-        sut.save(params: newParams)
-
-        let request = ActivityItem.fetchRequest()
-        let results = try coreData.viewContext.fetch(request)
-        try #require(results.count == 2)
-
-        sut.deleteAll()
-
-        let viewContextResults = try coreData.viewContext.fetch(request)
-        #expect(viewContextResults.isEmpty)
-
-        let backgroundContextResults = try coreData.backgroundContext.fetch(request)
-        #expect(backgroundContextResults.isEmpty)
-    }
-
-    @Test
     func deleteObjectIds_removesExpectedObject() throws {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = ActivityRepository(

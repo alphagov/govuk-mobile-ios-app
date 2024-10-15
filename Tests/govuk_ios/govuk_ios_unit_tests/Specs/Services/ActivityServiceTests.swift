@@ -51,18 +51,6 @@ struct ActivityServiceTests {
     }
 
     @Test
-    func deleteAll_callsRepository() throws {
-        let mockRepository = MockActivityRepository()
-        let sut = ActivityService(
-            repository: mockRepository
-        )
-
-        sut.deleteAll()
-
-        #expect(mockRepository._receivedDeleteAll)
-    }
-
-    @Test
     func deleteObjectIds_callsRepository() throws {
         let mockRepository = MockActivityRepository()
         let sut = ActivityService(

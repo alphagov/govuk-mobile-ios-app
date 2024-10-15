@@ -2,11 +2,10 @@ import CoreData
 import Foundation
 
 protocol CoreDataRepositoryInterface {
-    func load() -> Self
     var viewContext: NSManagedObjectContext { get }
     var backgroundContext: NSManagedObjectContext { get }
 
-    func deleteAll(fetchRequest: NSFetchRequest<NSFetchRequestResult>)
+    func load() -> Self
 }
 
 class CoreDataRepository: CoreDataRepositoryInterface {
@@ -69,30 +68,6 @@ class CoreDataRepository: CoreDataRepositoryInterface {
             using: { [weak self] notification in
                 self?.viewContext.mergeChanges(fromContextDidSave: notification)
             }
-        )
-    }
-
-    func deleteAll(fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-        let batchDeleteRequest = NSBatchDeleteRequest(
-            fetchRequest: fetchRequest
-        )
-        batchDeleteRequest.resultType = .resultTypeObjectIDs
-
-        guard let deleteResult = try? self.persistentContainer.persistentStoreCoordinator.execute(
-            batchDeleteRequest,
-            with: backgroundContext
-        ) as? NSBatchDeleteResult
-        else { return }
-
-        let changes: [AnyHashable: Any] = [
-            NSDeletedObjectsKey: deleteResult.result as? [NSManagedObjectID]
-        ].compactMapValues { $0 }
-        NSManagedObjectContext.mergeChanges(
-            fromRemoteContextSave: changes,
-            into: [
-                backgroundContext,
-                viewContext
-            ]
         )
     }
 }

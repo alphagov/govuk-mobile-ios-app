@@ -46,7 +46,10 @@ struct RecentActivityView: View {
                     GroupedList(content: viewModel.buildSections())
                 }
             }
-        }.navigationTitle(viewModel.navigationTitle)
+        }.onAppear {
+            viewModel.trackScreen(screen: self)
+        }
+        .navigationTitle(viewModel.navigationTitle)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {

@@ -61,7 +61,7 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit"
         activityTwo.url = "https://www.youtube.com"
-        activityTwo.date = Date()
+        activityTwo.date = Date.arrangeRandomDateFromThisMonth
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"
@@ -113,7 +113,7 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
         activityTwo.id = UUID().uuidString
         activityTwo.title = "universal credit"
         activityTwo.url = "https://www.youtube.com"
-        activityTwo.date = Date()
+        activityTwo.date = Date.arrangeRandomDateFromThisMonth
         let activityThree = ActivityItem(context: coreData.backgroundContext)
         activityThree.id = UUID().uuidString
         activityThree.title = "dvla2"

@@ -345,7 +345,7 @@ struct RecentActivitiesViewModelTests {
         activity.id = UUID().uuidString
         activity.title = "benefit3"
         activity.url = "https://www.youtube.com"
-         
+
         let oldDate = Date.arrange("14/04/2004")
         activity.date = oldDate
 
@@ -421,3 +421,4 @@ struct RecentActivitiesViewModelTests {
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedURL)
     }
 }
+

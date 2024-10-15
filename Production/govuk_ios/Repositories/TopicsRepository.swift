@@ -19,12 +19,9 @@ struct TopicsRepository: TopicsRepositoryInterface {
         let context = coreData.backgroundContext
         let isFirstLaunch = fetchAllTopics().count == 0
         topicResponses.forEach { topicResponse in
-            if !topicExists(for: topicResponse,
-                            in: context) {
-                createTopic(for: topicResponse,
-                            in: context,
-                            isFavorite: isFirstLaunch)
-            }
+            createOrUpdateTopic(for: topicResponse,
+                                in: context,
+                                isFavorite: isFirstLaunch)
         }
         try? context.save()
     }
@@ -48,20 +45,24 @@ struct TopicsRepository: TopicsRepositoryInterface {
     }
 
     private func fetchTopic(ref: String,
-                            context: NSManagedObjectContext
-    ) -> Topic? {
+                            context: NSManagedObjectContext) -> Topic? {
         fetch(
             predicate: .init(format: "ref = %@", ref),
-            context: coreData.backgroundContext
+            context: context
         ).fetchedObjects?.first
     }
 
-    private func topicExists(for topicResponse: TopicResponseItem,
-                             in context: NSManagedObjectContext) -> Bool {
-        fetchTopic(
-            ref: topicResponse.ref,
-            context: context
-        ) != nil
+    private func createOrUpdateTopic(for topicResponse: TopicResponseItem,
+                                     in context: NSManagedObjectContext,
+                                     isFavorite: Bool) {
+        guard let topic = fetchTopic(ref: topicResponse.ref,
+                                     context: context) else {
+            createTopic(for: topicResponse,
+                        in: context,
+                        isFavorite: isFavorite)
+            return
+        }
+        topic.title = topicResponse.title
     }
 
     private func createTopic(for topicResponse: TopicResponseItem,

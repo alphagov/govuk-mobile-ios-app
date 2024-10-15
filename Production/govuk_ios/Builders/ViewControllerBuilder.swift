@@ -117,10 +117,13 @@ class ViewControllerBuilder {
                     analyticsService: AnalyticsServiceInterface,
                     topicsService: TopicsServiceInterface,
                     dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = EditTopicsViewModel(topics: topics,
-                                            topicsService: topicsService,
-                                            analyticsService: analyticsService,
-                                            dismissAction: dismissAction)
+        let viewModel = EditTopicsViewModel(
+            topics: topics,
+            topicsService: topicsService,
+            analyticsService: analyticsService,
+            dismissAction: dismissAction
+        )
+
         let view = EditTopicsView(
             viewModel: viewModel
         )

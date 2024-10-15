@@ -96,7 +96,8 @@ class ViewControllerBuilder {
     func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
         let viewModel = RecentActivitiesViewModel(
             urlOpener: UIApplication.shared,
-            analyticsService: analyticsService
+            analyticsService: analyticsService,
+            activityService: Container.shared.activityService.resolve()
         )
         let view = RecentActivityView(viewModel: viewModel)
         return HostingViewController(rootView: view)

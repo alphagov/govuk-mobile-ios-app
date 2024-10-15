@@ -46,8 +46,7 @@ struct RecentActivityView: View {
                     GroupedList(content: viewModel.buildSections())
                 }
             }
-        }
-        .navigationTitle(viewModel.navigationTitle)
+        }.navigationTitle(viewModel.navigationTitle)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {

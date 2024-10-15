@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreData
 import Testing
+import Factory
 
 @testable import govuk_ios
 
@@ -14,12 +15,9 @@ struct RecentActivitiesViewModelTests {
             notificationCenter: .default
         ).load()
 
-        let sut = RecentActivitiesViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
-        )
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
-        var activitiesArray: [ActivityItem] = []
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefits"
@@ -38,11 +36,20 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
-        activitiesArray.append(activity)
-        activitiesArray.append(activityTwo)
-        activitiesArray.append(activityThree)
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
 
-        sut.sortActivites(activities: activitiesArray)
+        activityService._stubbedResultsController = controller
+
+        let sut = RecentActivitiesViewModel(
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
+        )
 
         #expect(sut.model.todaysActivites.count == 3)
         #expect(sut.model.recentMonthActivities.count == 0)
@@ -52,16 +59,12 @@ struct RecentActivitiesViewModelTests {
     @Test
     func sortActivities_whenActivitesDateEqualsCurrentMonth_currentMonthsListIsPopulated() throws {
 
-        let sut = RecentActivitiesViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
-        )
-
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        var activitiesArray: [ActivityItem] = []
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let randomDateOne = Date.arrangeRandomDateFromThisMonthNotToday
         let randomDateTwo = Date.arrangeRandomDateFromThisMonthNotToday
@@ -85,11 +88,20 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
-        activitiesArray.append(activity)
-        activitiesArray.append(activityTwo)
-        activitiesArray.append(activityThree)
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
 
-        sut.sortActivites(activities: activitiesArray)
+        activityService._stubbedResultsController = controller
+
+        let sut = RecentActivitiesViewModel(
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
+        )
 
         #expect(sut.model.todaysActivites.count == 0)
         #expect(sut.model.recentMonthActivities.count == 0)
@@ -98,16 +110,13 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func sortActivities_whenActivitesDateEqualsRecentMonths_recentMonthsListIsPopulated() throws {
-        let sut = RecentActivitiesViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
-        )
 
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        var activitiesArray:[ActivityItem] = []
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
@@ -127,11 +136,20 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
-        activitiesArray.append(activity)
-        activitiesArray.append(activityTwo)
-        activitiesArray.append(activityThree)
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
 
-        sut.sortActivites(activities: activitiesArray)
+        activityService._stubbedResultsController = controller
+
+        let sut = RecentActivitiesViewModel(
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
+        )
 
         #expect(sut.model.todaysActivites.count == 0)
         #expect(sut.model.recentMonthActivities.count == 3)
@@ -140,11 +158,13 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func buildSections_returnsCorrectSection() async throws {
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        var activitiesArray:[ActivityItem] = []
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let activityOne = ActivityItem(context: coreData.backgroundContext)
         activityOne.id = UUID().uuidString
@@ -164,15 +184,21 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
+
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
         )
-        activitiesArray.append(activityOne)
-        activitiesArray.append(activityTwo)
-        activitiesArray.append(activityThree)
 
-        sut.sortActivites(activities: activitiesArray)
         let groupSections = sut.buildSections()
 
         guard let sectionHeader: String = groupSections.first?.heading
@@ -187,9 +213,13 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func returnsActivityRow_returnsCorrectLinkRow() async throws {
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
+
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let activityOne = ActivityItem(context: coreData.backgroundContext)
         activityOne.id = UUID().uuidString
@@ -199,9 +229,19 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
+
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
         )
 
         let activityRow = sut.returnActivityRow(activityItem: activityOne)
@@ -213,9 +253,13 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func returnActivityRow_withLink_tracksEvent() {
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
+
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let mockAnalyticsService = MockAnalyticsService()
 
@@ -226,9 +270,19 @@ struct RecentActivitiesViewModelTests {
 
         try? coreData.backgroundContext.save()
 
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
+
         let sut = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            activityService: activityService
         )
 
         let activityRow = sut.returnActivityRow(activityItem: activity)
@@ -240,21 +294,36 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func returnActivityRow_action_noLink_doesntTracksEvent() {
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
+
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = RecentActivitiesViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: mockAnalyticsService
-        )
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.title = "Benefits"
         activity.date = Date.arrange("15/04/2016")
 
         try? coreData.backgroundContext.save()
+
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
+
+        let sut = RecentActivitiesViewModel(
+            urlOpener: MockURLOpener(),
+            analyticsService: mockAnalyticsService,
+            activityService: activityService
+        )
 
         let activityRow = sut.returnActivityRow(activityItem: activity)
         activityRow.action()
@@ -264,14 +333,13 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func returnActivityRow_action_updatesItemDate() {
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        let sut = RecentActivitiesViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
-        )
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
@@ -282,6 +350,21 @@ struct RecentActivitiesViewModelTests {
         activity.date = oldDate
 
         try? coreData.backgroundContext.save()
+
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
+
+        let sut = RecentActivitiesViewModel(
+            urlOpener: MockURLOpener(),
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
+        )
 
         let activityRow = sut.returnActivityRow(activityItem: activity)
         activityRow.action()
@@ -297,16 +380,15 @@ struct RecentActivitiesViewModelTests {
 
     @Test
     func returnActivityRow_action_withURL_opensURL() {
+
         let coreData = CoreDataRepository.arrange(
             notificationCenter: .default
         ).load()
 
-        let mockURLOpener = MockURLOpener()
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
-        let sut = RecentActivitiesViewModel(
-            urlOpener: mockURLOpener,
-            analyticsService: MockAnalyticsService()
-        )
+        let mockURLOpener = MockURLOpener()
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
@@ -317,6 +399,21 @@ struct RecentActivitiesViewModelTests {
         activity.date = oldDate
 
         try? coreData.backgroundContext.save()
+
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
+
+        let sut = RecentActivitiesViewModel(
+            urlOpener: mockURLOpener,
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
+        )
 
         let activityRow = sut.returnActivityRow(activityItem: activity)
         activityRow.action()

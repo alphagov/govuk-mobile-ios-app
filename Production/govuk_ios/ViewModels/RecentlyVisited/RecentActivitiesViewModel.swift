@@ -7,7 +7,7 @@ import Factory
 class RecentActivitiesViewModel: NSObject,
                                  ObservableObject,
                                  NSFetchedResultsControllerDelegate {
-    @Inject(\.activityService) private(set) var activityService: ActivityServiceInterface
+    private var activityService: ActivityServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private var retainedReultsController: NSFetchedResultsController<ActivityItem>?
     @Published var model: RecentActivitiesViewStructure = .init(
@@ -50,9 +50,11 @@ class RecentActivitiesViewModel: NSObject,
     )
 
     init(urlOpener: URLOpener,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         activityService: ActivityServiceInterface) {
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
+        self.activityService = activityService
         super.init()
         setupFetchResultsController()
     }
@@ -65,7 +67,7 @@ class RecentActivitiesViewModel: NSObject,
         )
     }
 
-    func sortActivites(activities: [ActivityItem]) {
+    private func sortActivites(activities: [ActivityItem]) {
         var todaysActivities: [ActivityItem] = []
         var currentMonthActivities: [ActivityItem] = []
         var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]

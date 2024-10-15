@@ -4,8 +4,10 @@ import CoreData
 @testable import govuk_ios
 
 class MockActivityService: ActivityServiceInterface {
+
+    var _stubbedResultsController: NSFetchedResultsController<ActivityItem>?
     func fetch() -> NSFetchedResultsController<ActivityItem> {
-        return NSFetchedResultsController<ActivityItem>()
+        return _stubbedResultsController ?? NSFetchedResultsController<ActivityItem>()
     }
 
     func deleteAll() { }

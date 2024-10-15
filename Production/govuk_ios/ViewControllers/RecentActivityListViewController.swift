@@ -19,8 +19,17 @@ class RecentActivityListViewController: BaseViewController,
     }()
 
     private lazy var removeBarButtonItem: UIBarButtonItem = .remove(
-        target: self,
-        action: #selector(removeButtonPressed)
+        action: { [unowned self] action in
+            self.removeButtonPressed()
+            self.trackActionPress(title: action.title, action: "Remove")
+        }
+    )
+
+    private lazy var selectAllBarButtonItem: UIBarButtonItem = .selectAll(
+        action: { [unowned self] action in
+            self.selectAllButtonPressed()
+            self.trackActionPress(title: action.title, action: "Select all")
+        }
     )
 
     private lazy var editingToolbar: UIToolbar = {
@@ -31,7 +40,7 @@ class RecentActivityListViewController: BaseViewController,
         localToolbar.translatesAutoresizingMaskIntoConstraints = false
         localToolbar.insetsLayoutMarginsFromSafeArea = true
         localToolbar.items = [
-            .selectAll(target: self, action: #selector(selectAllButtonPressed)),
+            selectAllBarButtonItem,
             .flexibleSpace(),
             removeBarButtonItem
         ]
@@ -52,7 +61,6 @@ class RecentActivityListViewController: BaseViewController,
     }()
 
     var trackingName: String { "Pages you've visited" }
-    var trackingTitle: String? { "Pages you've visited" }
 
     private let viewModel: RecentActivityListViewModel
 
@@ -145,6 +153,18 @@ class RecentActivityListViewController: BaseViewController,
         viewModel.confirmDeletionOfEditingItems()
         reloadSnapshot()
         setEditing(false, animated: true)
+    }
+
+    private func trackActionPress(title: String,
+                                  action: String) {
+        guard !title.isEmpty
+        else { return }
+        let event = AppEvent.buttonFunction(
+            text: title,
+            section: "Pages you've visited",
+            action: action
+        )
+        analyticsService.track(event: event)
     }
 
     private func reloadSnapshot() {

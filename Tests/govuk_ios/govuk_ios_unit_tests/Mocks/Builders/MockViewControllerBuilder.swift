@@ -38,9 +38,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _stubbedHomeViewController: UIViewController?
     override func home(searchButtonPrimaryAction: @escaping () -> Void,
                        configService: AppConfigServiceInterface,
-                       topicsService: TopicsServiceInterface,
                        recentActivityAction: @escaping () -> Void,
-                       topicAction: @escaping ((Topic) -> Void)) -> UIViewController {
+                       topicWidgetViewModel: TopicsWidgetViewModel) -> UIViewController {
         return _stubbedHomeViewController ?? UIViewController()
     }
 
@@ -68,4 +67,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     override func topicDetail(topic: Topic, analyticsService: any AnalyticsServiceInterface) -> UIViewController {
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
+    
+    var _stubbedEditTopicsViewController: UIViewController?
+    var _receivedDoneButtonAction: (() -> Void)?
+    override func editTopics(
+        _ topics: [Topic],
+        analyticsService: any AnalyticsServiceInterface,
+        topicsService: any TopicsServiceInterface,
+        dismissAction: @escaping () -> Void) -> UIViewController {
+            _receivedDoneButtonAction = dismissAction
+            return _stubbedEditTopicsViewController ?? UIViewController()
+        }
 }

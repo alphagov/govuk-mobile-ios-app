@@ -133,4 +133,17 @@ class CoordinatorBuilder {
             topic: topic
         )
     }
+
+    func editTopics(_ topics: [Topic],
+                    navigationController: UINavigationController,
+                    didDismissAction: @escaping () -> Void) -> BaseCoordinator {
+        EditTopicsCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            topicsService: container.topicsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            topics: topics,
+            dismissed: didDismissAction
+        )
+    }
 }

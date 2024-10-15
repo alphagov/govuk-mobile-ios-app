@@ -278,8 +278,17 @@
 		9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */; };
 		9685F82F2C78DF7000C33614 /* GroupedListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */; };
 		96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */; };
+		D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF32CB4247100742620 /* TopicsRepository.swift */; };
+		D028CCF62CB9619B00742620 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF52CB9619B00742620 /* Topic.swift */; };
+		D028CCF82CB96ADB00742620 /* MockTopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF72CB96AD100742620 /* MockTopicsRepository.swift */; };
+		D028CCFA2CB9854F00742620 /* EditTopicsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF92CB9854F00742620 /* EditTopicsViewModelTests.swift */; };
+		D028CCFC2CB989E600742620 /* TopicsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCFB2CB989E600742620 /* TopicsRepositoryTests.swift */; };
+		D028CCFE2CBD24B300742620 /* Topics.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D028CCFD2CBD24B300742620 /* Topics.xcstrings */; };
+		D028CD002CBD598E00742620 /* EditTopicsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCFF2CBD597700742620 /* EditTopicsViewControllerSnapshotTests.swift */; };
+		D028CD012CBD5A2300742620 /* MockTopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF72CB96AD100742620 /* MockTopicsRepository.swift */; };
+		D028CD032CBD775000742620 /* EditTopicsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD022CBD775000742620 /* EditTopicsCoordinatorTests.swift */; };
 		D04191782CA57A6F0034722A /* TopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191772CA57A6F0034722A /* TopicsService.swift */; };
-		D04191802CA595400034722A /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D041917F2CA595400034722A /* Topic.swift */; };
+		D04191802CA595400034722A /* TopicResponseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D041917F2CA595400034722A /* TopicResponseItem.swift */; };
 		D04191842CA5B06D0034722A /* TopicsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191832CA5B0650034722A /* TopicsServiceTests.swift */; };
 		D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191852CA6A5910034722A /* TopicsServiceClient.swift */; };
 		D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046511C2C933FE600F47C66 /* String+Extensions.swift */; };
@@ -288,6 +297,9 @@
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
 		D093BA612CAF02D4004F489B /* Bundle+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE71AF2CAE8371004ABB5E /* Bundle+Tests.swift */; };
+		D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA622CB0499A004F489B /* EditTopicsView.swift */; };
+		D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */; };
+		D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */; };
 		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
 		D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */; };
@@ -603,8 +615,16 @@
 		9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSection.swift; sourceTree = "<group>"; };
 		9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSectionView.swift; sourceTree = "<group>"; };
 		96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePixelLineHelper.swift; sourceTree = "<group>"; };
+		D028CCF32CB4247100742620 /* TopicsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRepository.swift; sourceTree = "<group>"; };
+		D028CCF52CB9619B00742620 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		D028CCF72CB96AD100742620 /* MockTopicsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopicsRepository.swift; sourceTree = "<group>"; };
+		D028CCF92CB9854F00742620 /* EditTopicsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsViewModelTests.swift; sourceTree = "<group>"; };
+		D028CCFB2CB989E600742620 /* TopicsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRepositoryTests.swift; sourceTree = "<group>"; };
+		D028CCFD2CBD24B300742620 /* Topics.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Topics.xcstrings; sourceTree = "<group>"; };
+		D028CCFF2CBD597700742620 /* EditTopicsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		D028CD022CBD775000742620 /* EditTopicsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsCoordinatorTests.swift; sourceTree = "<group>"; };
 		D04191772CA57A6F0034722A /* TopicsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsService.swift; sourceTree = "<group>"; };
-		D041917F2CA595400034722A /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		D041917F2CA595400034722A /* TopicResponseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicResponseItem.swift; sourceTree = "<group>"; };
 		D04191832CA5B0650034722A /* TopicsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceTests.swift; sourceTree = "<group>"; };
 		D04191852CA6A5910034722A /* TopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClient.swift; sourceTree = "<group>"; };
 		D046511C2C933FE600F47C66 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -612,6 +632,9 @@
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
 		D06EB96B2CA6F71E007EA081 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
+		D093BA622CB0499A004F489B /* EditTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsView.swift; sourceTree = "<group>"; };
+		D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsViewModel.swift; sourceTree = "<group>"; };
+		D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsCoordinator.swift; sourceTree = "<group>"; };
 		D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = integration_pubkey.der; sourceTree = "<group>"; };
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		D0A8B3C52CA16D8C00849304 /* SignableDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoderTests.swift; sourceTree = "<group>"; };
@@ -682,6 +705,7 @@
 				5D5A25E62CAD44800013704A /* SearchItemTests.swift */,
 				D0F86E192CAC241400FF2D9E /* TopicTests.swift */,
 				D0B89D9C2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift */,
+				D028CCF92CB9854F00742620 /* EditTopicsViewModelTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -734,6 +758,7 @@
 		4E18E08E2C74A43A00538CF0 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				D028CCF72CB96AD100742620 /* MockTopicsRepository.swift */,
 				4E18E08F2C74A45500538CF0 /* MockAppConfigRepository.swift */,
 				5DE283502CAC492B00E95800 /* MockActivityRepository.swift */,
 			);
@@ -944,6 +969,7 @@
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
 				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 				D0B89D9E2CAD60B700AD93ED /* TopicsCoordinatorTests.swift */,
+				D028CD022CBD775000742620 /* EditTopicsCoordinatorTests.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1030,6 +1056,7 @@
 				5D3123832C85ADDF0088B931 /* ActivityRepository.swift */,
 				4E5ED2042C6E1F8700750BDA /* AppConfigRepository.swift */,
 				5D4E255C2C821C8E00FD9A28 /* CoreDataRepository.swift */,
+				D028CCF32CB4247100742620 /* TopicsRepository.swift */,
 				5D6295292C87429000BBB394 /* GOV.xcdatamodeld */,
 			);
 			path = Repositories;
@@ -1135,6 +1162,7 @@
 				5D742BDB2C99799000E7B87A /* Search.xcstrings */,
 				5D742BD92C99791A00E7B87A /* Settings.xcstrings */,
 				4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */,
+				D028CCFD2CBD24B300742620 /* Topics.xcstrings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -1183,6 +1211,7 @@
 		5D8922702C071FF60019FBD7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D028CCFF2CBD597700742620 /* EditTopicsViewControllerSnapshotTests.swift */,
 				3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */,
 				3D9C93412CB017E900EFA337 /* AppForcedUpdateViewControllerSnapshotTests.swift */,
 				3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */,
@@ -1242,6 +1271,7 @@
 				16EE1A442C6F8ED3005E820F /* SearchCoordinator.swift */,
 				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
+				D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1521,6 +1551,7 @@
 				5DE283522CAC4EBA00E95800 /* ActivityRepositoryTests.swift */,
 				4E18E0912C74DD5D00538CF0 /* AppConfigRepositoryTests.swift */,
 				5DC527B62C86FACA005E3158 /* CoreDataRepositoryTests.swift */,
+				D028CCFB2CB989E600742620 /* TopicsRepositoryTests.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1683,7 +1714,8 @@
 		D041917C2CA57B3D0034722A /* Topics */ = {
 			isa = PBXGroup;
 			children = (
-				D041917F2CA595400034722A /* Topic.swift */,
+				D028CCF52CB9619B00742620 /* Topic.swift */,
+				D041917F2CA595400034722A /* TopicResponseItem.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -1693,6 +1725,7 @@
 			children = (
 				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
 				D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */,
+				D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -1719,6 +1752,7 @@
 			isa = PBXGroup;
 			children = (
 				D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */,
+				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -1885,6 +1919,7 @@
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
 				5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */,
 				D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */,
+				D028CCFE2CBD24B300742620 /* Topics.xcstrings in Resources */,
 				D0A8B3C82CA18C2D00849304 /* MockAppConfigResponseInvalidSig.json in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				4E003E7C2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json in Resources */,
@@ -1975,6 +2010,7 @@
 				4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */,
 				5D0BD45F2C9B244A00220625 /* MockSearchService.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
+				D028CD012CBD5A2300742620 /* MockTopicsRepository.swift in Sources */,
 				5D4F6D402CA4181D006D0B5B /* MockAppConfigService.swift in Sources */,
 				3D15E7BA2CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift in Sources */,
 				5D014FEB2CB96ABB005D32C8 /* RecentActivityListViewControllerSnapshotTests.swift in Sources */,
@@ -1983,6 +2019,7 @@
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
 				3D9C93462CB01CDA00EFA337 /* MockAppVersionProvider.swift in Sources */,
 				5DE2BBBD2C982824003116B6 /* MockURLOpener.swift in Sources */,
+				D028CD002CBD598E00742620 /* EditTopicsViewControllerSnapshotTests.swift in Sources */,
 				5DF8854E2CAC1A120060A40D /* MockActivityService.swift in Sources */,
 				5D014FEC2CB96CC7005D32C8 /* ActivityItem+Arrangers.swift in Sources */,
 				168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */,
@@ -2028,8 +2065,10 @@
 				D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */,
 				16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */,
 				163800FF2C99DAF900C3DDD1 /* ListInformationView.swift in Sources */,
+				D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */,
 				5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */,
 				168F6FAA2C4FC56B00A0D7F7 /* WidgetViewModel.swift in Sources */,
+				D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */,
 				16F961A72C989165005CFB04 /* SearchResult.swift in Sources */,
 				5DBE080C2C4812ED00B58DBE /* BaseViewController.swift in Sources */,
 				5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */,
@@ -2063,6 +2102,7 @@
 				5DF8854B2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
+				D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */,
 				D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
 				5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */,
@@ -2089,6 +2129,7 @@
 				D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */,
 				5D925B212CB7FACA00A1E241 /* UITableView+Convenience.swift in Sources */,
 				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
+				D028CCF62CB9619B00742620 /* Topic.swift in Sources */,
 				D0A8B3CA2CA1A38400849304 /* SignableDecoder.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
@@ -2122,11 +2163,12 @@
 				5DB6AD312CA1B94400E92F4C /* DateFormatter+Convenience.swift in Sources */,
 				1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
-				D04191802CA595400034722A /* Topic.swift in Sources */,
+				D04191802CA595400034722A /* TopicResponseItem.swift in Sources */,
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */,
 				5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */,
+				D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				5DE74DE32CB538E9000B43B5 /* RecentActivityListViewController.swift in Sources */,
 				5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */,
@@ -2169,7 +2211,9 @@
 				5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */,
 				D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */,
 				5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */,
+				D028CCF82CB96ADB00742620 /* MockTopicsRepository.swift in Sources */,
 				16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */,
+				D028CCFC2CB989E600742620 /* TopicsRepositoryTests.swift in Sources */,
 				5DB6AD342CA1C0EA00E92F4C /* Date+Arrangers.swift in Sources */,
 				5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */,
 				D0F86E172CAC068B00FF2D9E /* MockTopicsService.swift in Sources */,
@@ -2227,6 +2271,7 @@
 				16F9619D2C8899D4005CFB04 /* SearchCoordinatorTests.swift in Sources */,
 				5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */,
 				5DE2834C2CAC484000E95800 /* ActivityServiceTests.swift in Sources */,
+				D028CCFA2CB9854F00742620 /* EditTopicsViewModelTests.swift in Sources */,
 				5D26A7632C92E0A5009902DD /* CrashlyticsClientTests.swift in Sources */,
 				3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */,
 				3D9C93472CB01CDA00EFA337 /* MockAppVersionProvider.swift in Sources */,
@@ -2238,6 +2283,7 @@
 				5DE283512CAC492B00E95800 /* MockActivityRepository.swift in Sources */,
 				5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */,
 				1651C6E92C63D4D300864C5C /* HomeViewModelTests.swift in Sources */,
+				D028CD032CBD775000742620 /* EditTopicsCoordinatorTests.swift in Sources */,
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				5DCDA1012CA20C7D00A6DF90 /* MonthGroupKeyTests.swift in Sources */,

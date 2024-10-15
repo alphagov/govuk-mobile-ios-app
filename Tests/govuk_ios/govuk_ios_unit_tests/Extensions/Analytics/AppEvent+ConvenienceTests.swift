@@ -91,7 +91,7 @@ struct AppEvent_ConvenienceTests {
     }
 
     @Test
-    func searchItemNavigation_returnsExpectedResuls() {
+    func searchItemNavigation_returnsExpectedResult() {
         let expectedTitle = UUID().uuidString
         let expectedURL = URL(string: "https://www.gov.uk/random")!
         let result = AppEvent.searchItemNavigation(
@@ -108,9 +108,25 @@ struct AppEvent_ConvenienceTests {
         #expect(result.params?["external"] as? Bool == true)
         #expect(result.params?["language"] as? String == "en")
     }
+    
+    @Test(arguments:[true, false])
+    func toggleTopic_returnsExpectedResult(isFavorite: Bool) {
+        let expectedTitle = UUID().uuidString
+        let expectedValue = isFavorite ? "On" : "Off"
+        let result = AppEvent.toggleTopic(
+            title: expectedTitle,
+            isFavorite: isFavorite
+        )
+        #expect(result.name == "Function")
+        #expect(result.params?.count == 4)
+        #expect(result.params?["text"] as? String == expectedTitle)
+        #expect(result.params?["type"] as? String == "toggle")
+        #expect(result.params?["section"] as? String == "Topics")
+        #expect(result.params?["action"] as? String == expectedValue)
+    }
 
     @Test
-    func function_returnsExpectedResuls() {
+    func function_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let expectedType = UUID().uuidString
         let expectedSection = UUID().uuidString
@@ -130,7 +146,7 @@ struct AppEvent_ConvenienceTests {
     }
 
     @Test
-    func buttonFunction_returnsExpectedResuls() {
+    func buttonFunction_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let expectedSection = UUID().uuidString
         let expectedAction = UUID().uuidString

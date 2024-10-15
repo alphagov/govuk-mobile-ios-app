@@ -12,6 +12,17 @@
         }
       }
     },
+    "editButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
     "openWebLinkHint" : {
       "extractionState" : "manual",
       "localizations" : {

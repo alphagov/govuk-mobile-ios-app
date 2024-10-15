@@ -1,21 +1,33 @@
 import Foundation
+import CoreData
 
 final class TopicsWidgetViewModel {
     @Inject(\.analyticsService) private(set) var analyticsService: AnalyticsServiceInterface
-    var topics = [Topic]()
     let topicsService: TopicsServiceInterface
     let topicAction: ((Topic) -> Void)?
+    let editAction: (([Topic]) -> Void)?
 
-    init(topicsService: TopicsServiceInterface,
-         topicAction: ((Topic) -> Void)?) {
-        self.topicsService = topicsService
-        self.topicAction = topicAction
+    var downloadError: TopicsListError?
+
+    var favoriteTopics: [Topic] {
+        topicsService.fetchFavoriteTopics()
     }
 
-    func fetchTopics(completion: FetchTopicsListResult?) {
-        topicsService.fetchTopics { result in
-            self.topics = (try? result.get()) ?? []
-            completion?(result)
+    init(topicsService: TopicsServiceInterface,
+         topicAction: ((Topic) -> Void)?,
+         editAction: (([Topic]) -> Void)?) {
+        self.topicsService = topicsService
+        self.topicAction = topicAction
+        self.editAction = editAction
+
+        self.fetchTopics()
+    }
+
+    func fetchTopics() {
+        topicsService.downloadTopicsList { result in
+            if case .failure(let error) = result {
+                self.downloadError = error
+            }
         }
     }
 
@@ -27,5 +39,17 @@ final class TopicsWidgetViewModel {
         )
         analyticsService.track(event: event)
         action(topic)
+    }
+
+    @objc
+    func didTapEdit() {
+        guard let action = editAction else { return }
+        let topics = topicsService.fetchAllTopics()
+        let event = AppEvent.buttonNavigation(
+            text: "EditTopics",
+            external: false
+        )
+        analyticsService.track(event: event)
+        action(topics)
     }
 }

@@ -15,4 +15,10 @@ extension Container {
             AppConfigRepository()
         }
     }
+
+    var topicsRepository: Factory<TopicsRepositoryInterface> {
+        Factory(self) {
+            TopicsRepository(coreData: self.coreDataRepository())
+        }
+    }
 }

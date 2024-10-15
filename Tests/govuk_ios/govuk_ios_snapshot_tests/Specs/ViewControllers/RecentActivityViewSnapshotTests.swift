@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import CoreData
+import Factory
 
 @testable import govuk_ios
 
@@ -9,7 +10,8 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_errorView_rendersCorrectly() {
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService()
         )
 
         let view = RecentActivityView(viewModel: viewModel)
@@ -27,7 +29,8 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_dark_errorView_rendersCorrectly() {
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService()
         )
 
         let view = RecentActivityView(viewModel: viewModel)
@@ -46,31 +49,41 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
             notificationCenter: .default
         ).load()
 
-        var activityArray:[ActivityItem] = []
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
         activity.title = "benefits"
-        activity.url = "https://www.youtube.com/"
-        activity.date = Date.arrange("14/04/2016")
-
-        let activity2 = ActivityItem(context: coreData.backgroundContext)
-        activity2.id = UUID().uuidString
-        activity2.title = "benefits"
-        activity2.url = "https://www.youtube.com/"
-        activity2.date = Date()
+        activity.url = "https://www.youtube.com"
+        activity.date = Date()
+        let activityTwo = ActivityItem(context: coreData.backgroundContext)
+        activityTwo.id = UUID().uuidString
+        activityTwo.title = "universal credit"
+        activityTwo.url = "https://www.youtube.com"
+        activityTwo.date = Date()
+        let activityThree = ActivityItem(context: coreData.backgroundContext)
+        activityThree.id = UUID().uuidString
+        activityThree.title = "dvla2"
+        activityThree.url = "https://www.youtube.com"
+        activityThree.date = Date()
 
         try? coreData.backgroundContext.save()
 
-        activityArray.append(activity)
-        activityArray.append(activity2)
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
 
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
         )
-
-        viewModel.sortActivites(activities: activityArray)
 
         let view = RecentActivityView(viewModel: viewModel)
         let viewController = HostingViewController(
@@ -88,31 +101,42 @@ class RecentActivityViewSnapshotTests: SnapshotTestCase {
             notificationCenter: .default
         ).load()
 
-        var activityArray:[ActivityItem] = []
+        let activityService = MockActivityService()
+        Container.shared.activityService.register { MockActivityService() }
 
         let activity = ActivityItem(context: coreData.backgroundContext)
         activity.id = UUID().uuidString
-        activity.title = "Bringing your pet dog, cat or ferret to Great Britain, long title end"
-        activity.url = "https://www.youtube.com/"
-        activity.date = Date.arrange("14/04/2016")
-
-        let activity2 = ActivityItem(context: coreData.backgroundContext)
-        activity2.id = UUID().uuidString
-        activity2.title = "benefits"
-        activity2.url = "https://www.youtube.com/"
-        activity2.date = Date()
+        activity.title = "benefits"
+        activity.url = "https://www.youtube.com"
+        activity.date = Date()
+        let activityTwo = ActivityItem(context: coreData.backgroundContext)
+        activityTwo.id = UUID().uuidString
+        activityTwo.title = "universal credit"
+        activityTwo.url = "https://www.youtube.com"
+        activityTwo.date = Date()
+        let activityThree = ActivityItem(context: coreData.backgroundContext)
+        activityThree.id = UUID().uuidString
+        activityThree.title = "dvla2"
+        activityThree.url = "https://www.youtube.com"
+        activityThree.date = Date()
 
         try? coreData.backgroundContext.save()
-        
-        activityArray.append(activity)
-        activityArray.append(activity2)
+
+        let controller = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: ActivityItem.fetchRequest(),
+            managedObjectContext: coreData.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        ).fetch()
+
+        activityService._stubbedResultsController = controller
+
 
         let viewModel = RecentActivitiesViewModel(
             urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            activityService: activityService
         )
-
-        viewModel.sortActivites(activities: [activity])
 
         let view = RecentActivityView(viewModel: viewModel)
         let viewController = HostingViewController(

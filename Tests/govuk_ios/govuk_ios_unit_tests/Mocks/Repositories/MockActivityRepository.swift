@@ -5,19 +5,12 @@ import CoreData
 
 class MockActivityRepository: ActivityRepositoryInterface {
 
+    var _stubbedResultsController: NSFetchedResultsController<ActivityItem>?
     func fetch() -> NSFetchedResultsController<ActivityItem> {
-        return NSFetchedResultsController<ActivityItem>()
+        return _stubbedResultsController ?? NSFetchedResultsController<ActivityItem>()
     }
 
     func deleteAllActivities() { }
-
-    func returnContext() -> NSManagedObjectContext {
-        let coreData = CoreDataRepository.arrange(
-            notificationCenter: .default
-        ).load()
-        return coreData.backgroundContext
-    }
-
 
     var _receivedSaveParams: ActivityItemCreateParams?
     func save(params: ActivityItemCreateParams) {

@@ -2,8 +2,8 @@ import Foundation
 import UIKit
 import CoreData
 
-class GroupedListViewModel: NSObject,
-                            NSFetchedResultsControllerDelegate {
+class RecentActivityListViewModel: NSObject,
+                                   NSFetchedResultsControllerDelegate {
     let pageTitle: String = String.recentActivity.localized(
         "recentActivityNavigationTitle"
     )

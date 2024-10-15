@@ -1,12 +1,12 @@
 import Foundation
 import UIKit
 
-private typealias DataSource = UITableViewDiffableDataSource<GroupListSection, GroupListItem>
-private typealias Snapshot = NSDiffableDataSourceSnapshot<GroupListSection, GroupListItem>
+private typealias DataSource = UITableViewDiffableDataSource<RecentActivitySection, ActivityItem>
+private typealias Snapshot = NSDiffableDataSourceSnapshot<RecentActivitySection, ActivityItem>
 
-class GroupedListViewController: BaseViewController,
-                                 TrackableScreen,
-                                 UITableViewDelegate {
+class RecentActivityListViewController: BaseViewController,
+                                        TrackableScreen,
+                                        UITableViewDelegate {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private lazy var dataSource: DataSource = {
@@ -54,9 +54,9 @@ class GroupedListViewController: BaseViewController,
     var trackingName: String { "Pages you've visited" }
     var trackingTitle: String? { "Pages you've visited" }
 
-    private let viewModel: GroupedListViewModel
+    private let viewModel: RecentActivityListViewModel
 
-    init(viewModel: GroupedListViewModel) {
+    init(viewModel: RecentActivityListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
@@ -166,13 +166,13 @@ class GroupedListViewController: BaseViewController,
         return localLabel
     }
 
-    private var loadCell: (UITableView, IndexPath, GroupListItem) -> GroupedListTableViewCell {
+    private var loadCell: (UITableView, IndexPath, ActivityItem) -> GroupedListTableViewCell {
         return { [weak self] tableView, indexPath, item in
             let cell: GroupedListTableViewCell = tableView.dequeue(indexPath: indexPath)
             if let section = self?.viewModel.structure.sections[indexPath.section] {
                 cell.configure(
-                    title: item.activity.title,
-                    description: self?.lastVisitedString(activity: item.activity),
+                    title: item.title,
+                    description: self?.lastVisitedString(activity: item),
                     top: indexPath.row == 0,
                     bottom: item == section.items.last
                 )
@@ -195,9 +195,9 @@ class GroupedListViewController: BaseViewController,
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         if tableView.isEditing {
-            viewModel.edit(item: item.activity)
+            viewModel.edit(item: item)
         } else {
-            viewModel.selected(item: item.activity)
+            viewModel.selected(item: item)
             reloadSnapshot()
         }
     }
@@ -207,15 +207,11 @@ class GroupedListViewController: BaseViewController,
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
-        viewModel.removeEdit(item: item.activity)
+        viewModel.removeEdit(item: item)
     }
 }
 
-struct GroupListSection: Hashable {
+struct RecentActivitySection: Hashable {
     let title: String
-    let items: [GroupListItem]
-}
-
-struct GroupListItem: Hashable {
-    let activity: ActivityItem
+    let items: [ActivityItem]
 }

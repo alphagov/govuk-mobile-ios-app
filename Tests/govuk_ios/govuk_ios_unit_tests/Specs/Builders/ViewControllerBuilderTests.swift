@@ -81,7 +81,7 @@ struct ViewControllerBuilderTests {
             activityService: MockActivityService()
         ) as? TrackableScreen
 
-        #expect(result?.trackingClass == "GroupedListViewController")
+        #expect(result?.trackingClass == String(describing: RecentActivityListViewController.self))
         #expect(result?.trackingName == "Pages you've visited")
         #expect(result?.trackingTitle == "Pages you've visited")
     }

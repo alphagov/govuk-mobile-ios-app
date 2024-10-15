@@ -103,12 +103,12 @@ class ViewControllerBuilder {
 //        let view = RecentActivityContainerView(viewModel: viewModel)
 //            .environment(\.managedObjectContext, repository.viewContext)
 //        return HostingViewController(rootView: view)
-        let viewModel = GroupedListViewModel(
+        let viewModel = RecentActivityListViewModel(
             activityService: activityService,
             analyticsService: analyticsService,
             urlopener: UIApplication.shared
         )
-        return GroupedListViewController(
+        return RecentActivityListViewController(
             viewModel: viewModel
         )
     }

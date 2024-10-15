@@ -5,7 +5,7 @@ import CoreData
 @testable import govuk_ios
 
 @MainActor
-final class GroupedListViewControllerSnapshotTests: SnapshotTestCase {
+final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let mockActivityService = MockActivityService()
         let coreData = CoreDataRepository.arrangeAndLoad
@@ -39,7 +39,7 @@ final class GroupedListViewControllerSnapshotTests: SnapshotTestCase {
         resultsController.fetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
-        let viewController = GroupedListViewController(
+        let viewController = RecentActivityListViewController(
             viewModel: .init(
                 activityService: mockActivityService,
                 analyticsService: MockAnalyticsService(),
@@ -92,7 +92,7 @@ final class GroupedListViewControllerSnapshotTests: SnapshotTestCase {
         resultsController.fetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
-        let viewController = GroupedListViewController(
+        let viewController = RecentActivityListViewController(
             viewModel: .init(
                 activityService: mockActivityService,
                 analyticsService: MockAnalyticsService(),
@@ -145,7 +145,7 @@ final class GroupedListViewControllerSnapshotTests: SnapshotTestCase {
         resultsController.fetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
-        let viewController = GroupedListViewController(
+        let viewController = RecentActivityListViewController(
             viewModel: .init(
                 activityService: mockActivityService,
                 analyticsService: MockAnalyticsService(),

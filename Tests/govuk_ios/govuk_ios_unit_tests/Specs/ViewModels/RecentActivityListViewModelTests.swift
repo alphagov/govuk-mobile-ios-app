@@ -4,11 +4,11 @@ import Testing
 @testable import govuk_ios
 
 @Suite
-struct GroupedListViewModelTests {
+struct RecentActivityListViewModelTests {
 
     @Test
     func pageTitle_returnsExpectedResult() {
-        let sut = GroupedListViewModel(
+        let sut = RecentActivityListViewModel(
             activityService: MockActivityService(),
             analyticsService: MockAnalyticsService(),
             urlopener: MockURLOpener()
@@ -24,7 +24,7 @@ struct GroupedListViewModelTests {
         let mockService = MockActivityService()
         let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = GroupedListViewModel(
+        let sut = RecentActivityListViewModel(
             activityService: mockService,
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener
@@ -50,7 +50,7 @@ struct GroupedListViewModelTests {
         let mockService = MockActivityService()
         let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = GroupedListViewModel(
+        let sut = RecentActivityListViewModel(
             activityService: mockService,
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener
@@ -72,7 +72,7 @@ struct GroupedListViewModelTests {
         let mockActivityService = MockActivityService()
         let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = GroupedListViewModel(
+        let sut = RecentActivityListViewModel(
             activityService: mockActivityService,
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener
@@ -100,11 +100,12 @@ struct GroupedListViewModelTests {
     }
 
     @Test
+    @MainActor
     func editItem_endEditing_removesSelectedItems() {
         let mockActivityService = MockActivityService()
         let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = GroupedListViewModel(
+        let sut = RecentActivityListViewModel(
             activityService: mockActivityService,
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener

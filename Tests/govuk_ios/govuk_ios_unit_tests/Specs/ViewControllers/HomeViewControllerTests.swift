@@ -11,12 +11,16 @@ struct HomeViewControllerTests {
 
     @Test
     func init_hasExpectedValues() {
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            topicAction: { _ in },
+            editAction: { _ in }
+        )
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { () -> Void in _ = true },
             recentActivityAction: { },
-            topicAction: { _ in }
+            topicWidgetViewModel: topicsViewModel
         )
         let subject = HomeViewController(viewModel: viewModel)
 

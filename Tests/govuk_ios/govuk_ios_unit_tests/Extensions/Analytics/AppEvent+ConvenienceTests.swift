@@ -110,7 +110,7 @@ struct AppEvent_ConvenienceTests {
     }
     
     @Test(arguments:[true, false])
-    func toggleTopicOn_returnsExpectedResult(isFavorite: Bool) {
+    func toggleTopic_returnsExpectedResult(isFavorite: Bool) {
         let expectedTitle = UUID().uuidString
         let expectedValue = isFavorite ? "On" : "Off"
         let result = AppEvent.toggleTopic(
@@ -126,7 +126,7 @@ struct AppEvent_ConvenienceTests {
     }
 
     @Test
-    func function_returnsExpectedResuls() {
+    func function_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let expectedType = UUID().uuidString
         let expectedSection = UUID().uuidString
@@ -146,7 +146,7 @@ struct AppEvent_ConvenienceTests {
     }
 
     @Test
-    func buttonFunction_returnsExpectedResuls() {
+    func buttonFunction_returnsExpectedResult() {
         let expectedText = UUID().uuidString
         let expectedSection = UUID().uuidString
         let expectedAction = UUID().uuidString

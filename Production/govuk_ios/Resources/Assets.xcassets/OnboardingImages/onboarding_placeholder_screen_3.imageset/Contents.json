@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Tailored to you - light mode.svg",
+      "filename" : "onboarding_placeholder_screen_3.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Tailored to you - dark mode.svg",
+      "filename" : "onboarding_placeholder_screen_3_dark.svg",
       "idiom" : "universal"
     }
   ],

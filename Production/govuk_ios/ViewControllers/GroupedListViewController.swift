@@ -117,11 +117,11 @@ class GroupedListViewController: BaseViewController,
                 equalTo: view.layoutMarginsGuide.leftAnchor
             ),
             editingToolbar.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor
+                equalTo: view.trailingAnchor
             ),
             editingToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             editingToolbar.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor
+                equalTo: view.leadingAnchor
             )
         ])
     }

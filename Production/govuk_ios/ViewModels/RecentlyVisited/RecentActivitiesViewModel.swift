@@ -111,7 +111,7 @@ class RecentActivitiesViewModel: NSObject,
         )
     }
 
-    private func selectActivity(item: ActivityItem) {
+    func selectActivity(item: ActivityItem) {
         item.date = Date()
         try? item.managedObjectContext?.save()
         guard let url = URL(string: item.url) else { return }

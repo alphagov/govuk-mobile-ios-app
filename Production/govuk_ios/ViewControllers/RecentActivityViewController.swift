@@ -48,7 +48,7 @@ class RecentActivityViewController: BaseViewController,
     private func barButtonPressed() {
         let alert = UIAlertController.clearAllRecentItems(
             confirmAction: { [weak self] in
-                self?.viewModel.deleteAllItems()
+                self?.viewModel.deleteActivities()
                 self?.reloadSnapshot()
             }
         )
@@ -157,7 +157,7 @@ class RecentActivityViewController: BaseViewController,
                    didSelectRowAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
-        viewModel.selected(item: item.activity)
+        viewModel.selectActivity(item: item.activity)
         reloadSnapshot()
     }
 }

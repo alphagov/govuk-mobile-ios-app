@@ -67,6 +67,7 @@ class RecentActivityListViewController: BaseViewController,
     init(viewModel: RecentActivityListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        title = viewModel.pageTitle
         hidesBottomBarWhenPushed = true
     }
 
@@ -76,7 +77,6 @@ class RecentActivityListViewController: BaseViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.pageTitle
         configureUI()
         configureConstraints()
         tableView.delegate = self

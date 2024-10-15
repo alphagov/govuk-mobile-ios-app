@@ -14,7 +14,7 @@ extension UIBarButtonItem {
     static func selectAll(target: Any,
                           action: Selector) -> UIBarButtonItem {
         let item = UIBarButtonItem(
-            title: "Select all",
+            title: String.recentActivity.localized("selectAllButtonTitle"),
             style: .plain,
             target: target,
             action: action
@@ -26,7 +26,7 @@ extension UIBarButtonItem {
     static func remove(target: Any,
                        action: Selector) -> UIBarButtonItem {
         let item = UIBarButtonItem(
-            title: "Remove",
+            title: String.recentActivity.localized("removeActivitiesButtonTitle"),
             style: .plain,
             target: target,
             action: action

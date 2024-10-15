@@ -14,36 +14,11 @@ class RecentActivitiesViewModel: NSObject,
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
     private let urlOpener: URLOpener
-    @Published var activities: [ActivityItem] = []
 
     private(set) var structure: RecentActivitiesViewStructure = .init(
         todaysActivites: [],
         currentMonthActivities: [],
         recentMonthActivities: [:]
-    )
-
-    let currentMonthActivitiesListTitle = String.recentActivity.localized(
-        "recentActivityCurrentMonthItems"
-    )
-
-    let todaysActivitieslistTitle = String.recentActivity.localized(
-        "recentActivitiesTodaysListTitle"
-    )
-
-    let alertTitle = String.recentActivity.localized(
-        "recentActivityClearAllAlertTitle"
-    )
-    let alertDescription = String.recentActivity.localized(
-        "recentActivityClearAllAlertWarningDesc"
-    )
-    let alertPrimaryButtonTitle = String.recentActivity.localized(
-        "recentActivityAlertWarningConfirmation"
-    )
-    let alertSecondaryButtonTitle = String.recentActivity.localized(
-        "recentActivityAlertDismissText"
-    )
-    let toolbarButtonTitle = String.recentActivity.localized(
-        "recentActivityToolBarTitle"
     )
 
     let navigationTitle = String.recentActivity.localized(
@@ -103,7 +78,6 @@ class RecentActivitiesViewModel: NSObject,
         structure = sortActivites(activities: items)
     }
 
-    @MainActor
     func deleteActivities() {
         activityService.deleteAll()
         analyticsService.track(
@@ -117,17 +91,6 @@ class RecentActivitiesViewModel: NSObject,
         guard let url = URL(string: item.url) else { return }
         urlOpener.openIfPossible(url)
         trackSelection(activity: item)
-    }
-
-    func returnActivityRow(activityItem: ActivityItem) -> LinkRow {
-        LinkRow(
-            id: activityItem.id,
-            title: activityItem.title,
-            body: lastVisitedString(activity: activityItem),
-            action: {
-                self.selectActivity(item: activityItem)
-            }
-        )
     }
 
     private func lastVisitedString(activity: ActivityItem) -> String {

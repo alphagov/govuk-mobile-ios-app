@@ -99,8 +99,7 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             activityService: Container.shared.activityService.resolve()
         )
-        let view = RecentActivityView(viewModel: viewModel)
-        return HostingViewController(rootView: view)
+        return RecentActivityViewController(viewModel: viewModel)
     }
 
     @MainActor

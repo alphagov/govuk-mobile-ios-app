@@ -5,8 +5,8 @@ private typealias DataSource = UITableViewDiffableDataSource<GroupListSection, G
 private typealias Snapshot = NSDiffableDataSourceSnapshot<GroupListSection, GroupListItem>
 
 class RecentActivityViewController: BaseViewController,
-                                 TrackableScreen,
-                                 UITableViewDelegate {
+                                    TrackableScreen,
+                                    UITableViewDelegate {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private lazy var barButtonItem = UIBarButtonItem.recentActivitEdit(

@@ -21,9 +21,6 @@ struct ActivityRepository: ActivityRepositoryInterface {
         local.update(params)
         try? localContext.save()
     }
-    func returnContext() -> NSManagedObjectContext {
-        return coreData.backgroundContext
-    }
 
     private func get(id: String,
                      context: NSManagedObjectContext?) -> ActivityItem? {
@@ -38,7 +35,6 @@ struct ActivityRepository: ActivityRepositoryInterface {
             predicate: nil,
             context: coreData.backgroundContext
         ).fetchedObjects else { return }
-
         for activity in fetchRequest {
             coreData.backgroundContext.delete(activity)
         }

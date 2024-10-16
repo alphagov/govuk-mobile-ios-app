@@ -1,19 +1,6 @@
 import Foundation
 
 extension AppEvent {
-    static func searchResultNavigation(title: String,
-                                       url: URL,
-                                       external: Bool) -> AppEvent {
-        navigation(
-            text: title,
-            type: "SearchResult",
-            external: external,
-            additionalParams: [
-                "url": url.absoluteString
-            ]
-        )
-    }
-
     static func tabNavigation(text: String) -> AppEvent {
         navigation(
             text: text,

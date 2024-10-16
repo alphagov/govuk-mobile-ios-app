@@ -135,12 +135,21 @@ class RecentActivityListViewController: BaseViewController,
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
+        // Needs to be before super to get correct values
+        trackEditingEvent()
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
         editingToolbar.isHidden = !editing
         if !editing {
             viewModel.endEditing()
         }
+    }
+
+    private func trackEditingEvent() {
+        trackActionPress(
+            title: editButtonItem.title,
+            action: isEditing ? "Done" : "Edit"
+        )
     }
 
     @objc
@@ -155,13 +164,13 @@ class RecentActivityListViewController: BaseViewController,
         setEditing(false, animated: true)
     }
 
-    private func trackActionPress(title: String,
+    private func trackActionPress(title: String?,
                                   action: String) {
-        guard !title.isEmpty
+        guard let localTitle = title,
+              !localTitle.isEmpty
         else { return }
-        let event = AppEvent.buttonFunction(
-            text: title,
-            section: "Pages you've visited",
+        let event = AppEvent.recentActivityButtonFunction(
+            title: localTitle,
             action: action
         )
         analyticsService.track(event: event)

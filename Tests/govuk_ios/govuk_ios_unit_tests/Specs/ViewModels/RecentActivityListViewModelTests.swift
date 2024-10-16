@@ -38,7 +38,7 @@ struct RecentActivityListViewModelTests {
         sut.selected(item: item)
 
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == item.url)
-        let expectedEvent = AppEvent.recentActivity(activity: item)
+        let expectedEvent = AppEvent.recentActivityNavigation(activity: item)
         #expect(mockAnalyticsService._trackedEvents.first?.name == expectedEvent.name)
         #expect(
             Calendar.current.isDate(item.date, equalTo: Date(), toGranularity: .minute)

@@ -1,31 +1,26 @@
 import Foundation
 
 extension AppEvent {
+    static func searchResultNavigation(item: SearchItem) -> AppEvent {
+        navigation(
+            text: item.title,
+            type: "SearchResult",
+            external: true,
+            additionalParams: [
+                "url": item.link.absoluteString
+            ]
+        )
+    }
+
     static func searchTerm(term: String) -> AppEvent {
         search(
-            text: term
-        )
-    }
-
-    static func search(text: String) -> AppEvent {
-        search(
             params: [
-                "text": text
+                "text": term
             ]
         )
     }
 
-    static func search(title: String,
-                       link: URL) -> AppEvent {
-        search(
-            params: [
-                "title": title,
-                "link": link
-            ]
-        )
-    }
-
-    static func search(params: [String: Any]) -> AppEvent {
+    private static func search(params: [String: Any]) -> AppEvent {
         .init(
             name: "Search",
             params: params

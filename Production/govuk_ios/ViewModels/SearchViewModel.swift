@@ -46,7 +46,7 @@ class SearchViewModel {
 
     func selected(item: SearchItem) {
         activityService.save(searchItem: item)
-        trackSearchItemSelection(item, url: item.link)
+        trackSearchItemSelection(item)
         urlOpener.openIfPossible(item.link)
     }
 
@@ -54,13 +54,12 @@ class SearchViewModel {
         results = []
     }
 
-    private func trackSearchItemSelection(_ item: SearchItem, url: URL) {
+    private func trackSearchItemSelection(_ item: SearchItem) {
+        let event = AppEvent.searchResultNavigation(
+            item: item
+        )
         analyticsService.track(
-            event: AppEvent.searchResultNavigation(
-                title: item.title,
-                url: url,
-                external: true
-            )
+            event: event
         )
     }
 

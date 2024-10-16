@@ -1,15 +1,6 @@
 import Foundation
 
 extension AppEvent {
-    static func toggleTopic(title: String,
-                            isFavorite: Bool) -> AppEvent {
-        toggle(
-            text: title,
-            section: "Topics",
-            isOn: isFavorite
-        )
-    }
-
     static func toggle(text: String,
                        section: String,
                        isOn: Bool) -> AppEvent {

@@ -18,6 +18,14 @@ extension AppEvent {
         )
     }
 
+    static func widgetNavigation(text: String) -> AppEvent {
+        navigation(
+            text: text,
+            type: "Widget",
+            external: false
+        )
+    }
+
     static func navigation(text: String,
                            type: String,
                            external: Bool,

@@ -29,7 +29,7 @@ class HomeCoordinator: TabItemCoordinator {
         let viewController = viewControllerBuilder.home(
             searchButtonPrimaryAction: searchActionButtonPressed,
             configService: configService,
-            recentActivityAction: recentActivityCoordinator,
+            recentActivityAction: startRecentActivityCoordinator,
             topicWidgetViewModel: topicWidgetViewModel
         )
         set([viewController], animated: false)
@@ -56,9 +56,11 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var recentActivityCoordinator: () -> Void {
+    private var startRecentActivityCoordinator: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
+            let navigationEvent = AppEvent.widgetNavigation(text: "Pages you’ve visited widget")
+            analyticsService.track(event: navigationEvent)
             let coordinator = self.coordinatorBuilder.recentActivity(
                 navigationController: self.root
             )

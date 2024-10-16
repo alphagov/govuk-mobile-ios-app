@@ -81,6 +81,21 @@ struct AppEvent_ConvenienceTests {
     }
 
     @Test
+    func widgetNavigation_internal_returnsExpectedResult() {
+        let expectedText = UUID().uuidString
+        let result = AppEvent.widgetNavigation(
+            text: expectedText
+        )
+
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 4)
+        #expect(result.params?["text"] as? String == expectedText)
+        #expect(result.params?["type"] as? String == "Widget")
+        #expect(result.params?["external"] as? Bool == false)
+        #expect(result.params?["language"] as? String == "en")
+    }
+
+    @Test
     func searchTerm_returnsExpectedResult() {
         let expectedTerm = UUID().uuidString
         let result = AppEvent.searchTerm(term: expectedTerm)

@@ -36,11 +36,13 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedHomeViewController: UIViewController?
+    var _receivedHomeRecentActivityAction: (() -> Void)?
     override func home(searchButtonPrimaryAction: @escaping () -> Void,
                        configService: AppConfigServiceInterface,
                        topicsService: TopicsServiceInterface,
                        recentActivityAction: @escaping () -> Void,
                        topicAction: @escaping ((Topic) -> Void)) -> UIViewController {
+        _receivedHomeRecentActivityAction = recentActivityAction
         return _stubbedHomeViewController ?? UIViewController()
     }
 

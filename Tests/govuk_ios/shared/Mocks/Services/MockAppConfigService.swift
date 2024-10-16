@@ -9,7 +9,7 @@ class MockAppConfigService: AppConfigServiceInterface {
 
     var isAppRecommendUpdate: Bool = false
 
-    var features: [Feature] = [.onboarding, .search, .topics]
+    var features: [Feature] = [.onboarding, .search, .topics, .pagesYouveVisited]
 
     var _receivedFetchAppConfigCompletion: (() -> Void)?
 

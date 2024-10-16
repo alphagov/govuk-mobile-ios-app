@@ -5,11 +5,11 @@ struct EditTopicsView: View {
 
     var body: some View {
         VStack {
-            Text(String.topics.localized("editTopicsSubtitle"))
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 12)
-                .padding(.top, 10)
             ScrollView {
+                Text(String.topics.localized("editTopicsSubtitle"))
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 12)
+                    .padding(.top, 10)
                 GroupedList(content: viewModel.sections)
             }
         }

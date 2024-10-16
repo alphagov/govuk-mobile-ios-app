@@ -22,6 +22,7 @@ class TopicsWidgetView: UIView {
                          action: #selector(viewModel.didTapEdit),
                          for: .touchUpInside
         )
+        button.accessibilityLabel = String.topics.localized("editTopicsTitle")
         return button
     }()
 
@@ -79,6 +80,7 @@ class TopicsWidgetView: UIView {
     private func configureUI() {
         headerStackView.addArrangedSubview(titleLabel)
         headerStackView.addArrangedSubview(editButton)
+        headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)
         stackView.addArrangedSubview(cardStackView)
         addSubview(stackView)

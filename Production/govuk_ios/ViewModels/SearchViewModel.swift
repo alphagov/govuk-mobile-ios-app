@@ -56,7 +56,7 @@ class SearchViewModel {
 
     private func trackSearchItemSelection(_ item: SearchItem, url: URL) {
         analyticsService.track(
-            event: AppEvent.searchItemNavigation(
+            event: AppEvent.searchResultNavigation(
                 title: item.title,
                 url: url,
                 external: true

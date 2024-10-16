@@ -94,7 +94,7 @@ struct AppEvent_ConvenienceTests {
     func searchItemNavigation_returnsExpectedResult() {
         let expectedTitle = UUID().uuidString
         let expectedURL = URL(string: "https://www.gov.uk/random")!
-        let result = AppEvent.searchItemNavigation(
+        let result = AppEvent.searchResultNavigation(
             title: expectedTitle,
             url: expectedURL,
             external: true

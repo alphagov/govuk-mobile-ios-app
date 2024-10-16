@@ -21,15 +21,6 @@ extension AppEvent {
         )
     }
 
-    static func buttonNavigation(text: String,
-                                 external: Bool) -> AppEvent {
-        navigation(
-            text: text,
-            type: "Button",
-            external: external
-        )
-    }
-
     static func searchItemNavigation(title: String,
                                      url: URL,
                                      external: Bool) -> AppEvent {
@@ -38,6 +29,77 @@ extension AppEvent {
             type: "SearchResult",
             external: external,
             additionalParams: ["url": url.absoluteString]
+        )
+    }
+
+    static func searchTerm(term: String) -> AppEvent {
+        search(
+            text: term
+        )
+    }
+
+    static func recentActivity(activity: ActivityItem) -> AppEvent {
+        .init(
+            name: "RecentActivity",
+            params: [
+                "text": activity.title
+            ]
+        )
+    }
+
+    static func searchItem(item: SearchItem) -> AppEvent {
+        search(
+            title: item.title,
+            link: item.link
+        )
+    }
+
+    static func toggleTopic(title: String,
+                            isFavorite: Bool) -> AppEvent {
+        function(
+            text: title,
+            type: "toggle",
+            section: "Topics",
+            action: isFavorite ? "On" : "Off"
+        )
+    }
+}
+
+extension AppEvent {
+    static func search(text: String) -> AppEvent {
+        search(
+            params: [
+                "text": text,
+                "link": link
+            ]
+        )
+    }
+
+    static func search(title: String,
+                       link: URL) -> AppEvent {
+        search(
+            params: [
+                "title": title,
+                "link": link
+            ]
+        )
+    }
+
+    static func search(params: [String: Any]) -> AppEvent {
+        .init(
+            name: "Search",
+            params: params
+        )
+    }
+}
+
+extension AppEvent {
+    static func buttonNavigation(text: String,
+                                 external: Bool) -> AppEvent {
+        navigation(
+            text: text,
+            type: "Button",
+            external: external
         )
     }
 
@@ -57,7 +119,9 @@ extension AppEvent {
             params: params.compactMapValues { $0 }
         )
     }
+}
 
+extension AppEvent {
     static func buttonFunction(text: String,
                                section: String,
                                action: String) -> AppEvent {
@@ -81,46 +145,6 @@ extension AppEvent {
                 "section": section,
                 "action": action
             ]
-        )
-    }
-
-    static func searchTerm(term: String) -> AppEvent {
-        .init(
-            name: "Search",
-            params: [
-                "text": term
-            ]
-        )
-    }
-
-    static func recentActivity(activity: ActivityItem) -> AppEvent {
-        .init(
-            name: "RecentActivity",
-            params: [
-                "text": activity.title
-            ]
-        )
-    }
-
-    static func searchItem(item: SearchItem) -> AppEvent {
-        .init(
-            name: "Search",
-            params: [
-                "title": item.title,
-                "link": item.link
-            ]
-        )
-    }
-
-    static func toggleTopic(title: String,
-                            isFavorite: Bool) -> AppEvent {
-        .init(name: "Function",
-              params: [
-                "text": title,
-                "type": "toggle",
-                "section": "Topics",
-                "action": isFavorite ? "On" : "Off"
-              ]
         )
     }
 }

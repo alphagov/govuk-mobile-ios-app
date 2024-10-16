@@ -47,17 +47,20 @@ class ViewControllerBuilder {
     }
 
     @MainActor
+    // swiftlint:disable:next function_parameter_count
     func home(searchButtonPrimaryAction: @escaping () -> Void,
               configService: AppConfigServiceInterface,
               topicsService: TopicsServiceInterface,
               recentActivityAction: @escaping () -> Void,
-              topicAction: @escaping (Topic) -> Void) -> UIViewController {
+              topicAction: @escaping (Topic) -> Void,
+              allTopicsAction: @escaping () -> Void) -> UIViewController {
         let viewModel = HomeViewModel(
             configService: configService,
             topicsService: topicsService,
             searchButtonPrimaryAction: searchButtonPrimaryAction,
             recentActivityAction: recentActivityAction,
-            topicAction: topicAction
+            topicAction: topicAction,
+            allTopicsAction: allTopicsAction
         )
         return HomeViewController(
             viewModel: viewModel
@@ -111,5 +114,19 @@ class ViewControllerBuilder {
         var view = TopicDetailView()
         view.topic = topic
         return HostingViewController(rootView: view)
+    }
+
+    @MainActor
+    func allTopics(topicsService: TopicsServiceInterface,
+                   analyticsService: AnalyticsServiceInterface,
+                   topicAction: @escaping (Topic) -> Void) -> UIViewController {
+        let viewModel = AllTopicsViewModel(
+            topicsService: topicsService,
+            analyticsService: analyticsService,
+            topicAction: topicAction
+        )
+        return AllTopicsViewController(
+            viewModel: viewModel
+        )
     }
 }

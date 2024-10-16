@@ -1,18 +1,18 @@
+import UIKit
 import Foundation
 
-final class TopicsWidgetViewModel {
-    @Inject(\.analyticsService) private(set) var analyticsService: AnalyticsServiceInterface
-    var topics = [Topic]()
+class AllTopicsViewModel {
     let topicsService: TopicsServiceInterface
+    let analyticsService: AnalyticsServiceInterface
     let topicAction: ((Topic) -> Void)?
-    let allTopicsAction: (() -> Void)?
+    var topics = [Topic]()
 
     init(topicsService: TopicsServiceInterface,
-         topicAction: ((Topic) -> Void)?,
-         allTopicsAction: (() -> Void)?) {
+         analyticsService: AnalyticsServiceInterface,
+         topicAction: @escaping (Topic) -> Void) {
         self.topicsService = topicsService
+        self.analyticsService = analyticsService
         self.topicAction = topicAction
-        self.allTopicsAction = allTopicsAction
     }
 
     func fetchTopics(completion: FetchTopicsListResult?) {

@@ -7,6 +7,7 @@ struct HomeViewModel {
     let searchButtonPrimaryAction: (() -> Void)?
     let recentActivityAction: (() -> Void)?
     let topicAction: ((Topic) -> Void)?
+    let allTopicsAction: (() -> Void)?
     var widgets: [WidgetView] {
         [
             searchWidget,
@@ -54,7 +55,8 @@ struct HomeViewModel {
         else { return nil }
         let viewModel = TopicsWidgetViewModel(
             topicsService: topicsService,
-            topicAction: topicAction
+            topicAction: topicAction,
+            allTopicsAction: allTopicsAction
         )
         let content = TopicsWidgetView(
             viewModel: viewModel

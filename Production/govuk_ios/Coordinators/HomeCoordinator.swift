@@ -31,7 +31,8 @@ class HomeCoordinator: TabItemCoordinator {
             configService: configService,
             topicsService: topicsService,
             recentActivityAction: recentActivityCoordinator,
-            topicAction: topicAction
+            topicAction: topicAction,
+            allTopicsAction: allTopicsAction
         )
         set([viewController], animated: false)
     }
@@ -72,6 +73,16 @@ class HomeCoordinator: TabItemCoordinator {
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.topicDetail(
                 topic,
+                navigationController: self.root
+            )
+            start(coordinator)
+        }
+    }
+
+    private var allTopicsAction: () -> Void {
+        return { [weak self] in
+            guard let self = self else { return }
+            let coordinator = self.coordinatorBuilder.allTopics(
                 navigationController: self.root
             )
             start(coordinator)

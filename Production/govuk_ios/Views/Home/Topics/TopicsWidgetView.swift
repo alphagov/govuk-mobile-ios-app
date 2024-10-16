@@ -1,9 +1,39 @@
 import UIKit
+import UIComponents
 
 class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
 
     private var rowCount = 2
+    private lazy var allTopicsButton: GOVUKButton = {
+        let buttonConfig = GOVUKButton.ButtonConfiguration(
+            titleColorNormal: UIColor.govUK.text.buttonSecondary,
+            titleColorHighlighted: UIColor.govUK.text.buttonSecondaryHighlight,
+            titleColorFocused: UIColor.govUK.text.buttonSecondaryFocussed,
+            titleFont: UIFont.govUK.body,
+            backgroundColorNormal: UIColor.govUK.fills.surfaceCard,
+            backgroundColorHighlighted: UIColor.govUK.fills.surfaceButtonSecondaryHighlight,
+            backgroundColorFocused: UIColor.govUK.fills.surfaceButtonSecondaryFocussed,
+            cornerRadius: 24,
+            accessibilityButtonShapesColor: UIColor.govUK.fills.surfaceCard
+        )
+        var buttonViewModel: GOVUKButton.ButtonViewModel {
+            .init(
+                localisedTitle: String.topics.localized("seeAllTopicsButtonText"),
+                action: { [weak self] in
+                    self?.allTopicsButtonPressed()
+                }
+            )
+        }
+        let button = GOVUKButton(buttonConfig, viewModel: buttonViewModel)
+
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        return button
+    }()
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.govUK.title3Semibold
@@ -17,7 +47,7 @@ class TopicsWidgetView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
-        stackView.alignment = .leading
+        stackView.alignment = .center
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -32,6 +62,7 @@ class TopicsWidgetView: UIView {
             switch result {
             case .success:
                 self.updateTopics(viewModel.topics)
+                self.addAllTopicsButton()
             case .failure:
                 break
             }
@@ -40,6 +71,7 @@ class TopicsWidgetView: UIView {
 
     private func configureUI() {
         stackView.addArrangedSubview(titleLabel)
+        titleLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor).isActive = true
         addSubview(stackView)
     }
 
@@ -115,5 +147,15 @@ class TopicsWidgetView: UIView {
         rowCount = sizeClass == .regular ? 2 : 4
         resetRows()
         updateTopics(viewModel.topics)
+        addAllTopicsButton()
+    }
+
+    private func addAllTopicsButton() {
+        stackView.addArrangedSubview(allTopicsButton)
+    }
+
+    @objc
+    private func allTopicsButtonPressed() {
+        viewModel.allTopicsAction?()
     }
 }

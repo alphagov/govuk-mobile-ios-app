@@ -132,4 +132,14 @@ class CoordinatorBuilder {
             topic: topic
         )
     }
+
+    func allTopics(navigationController: UINavigationController) -> AllTopicsCoordinator {
+        AllTopicsCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            topicsService: container.topicsService.resolve(),
+            coordinatorBuilder: self
+        )
+    }
 }

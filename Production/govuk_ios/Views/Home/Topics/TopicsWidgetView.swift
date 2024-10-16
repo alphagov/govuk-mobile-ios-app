@@ -18,10 +18,12 @@ class TopicsWidgetView: UIView {
         let button = UIButton(type: .system)
         button.setTitle(String.common.localized("editButtonTitle"), for: .normal)
         button.titleLabel?.font = UIFont.govUK.bodySemibold
-        button.addTarget(viewModel,
-                         action: #selector(viewModel.didTapEdit),
-                         for: .touchUpInside
+        button.addTarget(
+            viewModel,
+            action: #selector(viewModel.didTapEdit),
+            for: .touchUpInside
         )
+        button.tintColor = UIColor.govUK.text.link
         button.accessibilityLabel = String.topics.localized("editTopicsTitle")
         return button
     }()

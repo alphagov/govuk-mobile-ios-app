@@ -51,7 +51,7 @@ struct TopicsServiceTests {
     @Test
     func fetchAllTopics_fetchesFromRepository() async {
         _ = sut.fetchAllTopics()
-        #expect(topicsRepository._didCallFetchAll ?? false)
+        #expect(topicsRepository._didCallFetchAll)
     }
     
     @Test

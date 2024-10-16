@@ -14,9 +14,9 @@ class MockTopicsService: TopicsServiceInterface {
         mockTopics
     }
     
-    var _didUpdateFavoritesCalled = false
+    var _updateFavoriteTopicsCalled = false
     func updateFavoriteTopics() {
-        _didUpdateFavoritesCalled = true
+        _updateFavoriteTopicsCalled = true
     }
     
     var _receivedFetchTopicsResult: Result<[TopicResponseItem], TopicsListError>?

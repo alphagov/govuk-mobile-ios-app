@@ -13,6 +13,7 @@ struct HomeViewControllerTests {
     func init_hasExpectedValues() {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { _ in }
         )
@@ -35,6 +36,7 @@ struct HomeViewControllerTests {
         }
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { _ in }
         )

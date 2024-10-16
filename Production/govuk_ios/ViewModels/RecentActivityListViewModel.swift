@@ -91,7 +91,7 @@ class RecentActivityListViewModel: NSObject,
     }
 
     private func trackSelection(activity: ActivityItem) {
-        let event = AppEvent.recentActivity(
+        let event = AppEvent.recentActivityNavigation(
             activity: activity
         )
         analyticsService.track(

@@ -164,6 +164,16 @@
 		5D6032192C81D68D00C46660 /* Locale+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6032182C81D68D00C46660 /* Locale+Analytics.swift */; };
 		5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */; };
 		5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */; };
+		5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1832CBFC12400006723 /* AppEvent+Function.swift */; };
+		5D66D1862CBFC13100006723 /* AppEvent+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1852CBFC13100006723 /* AppEvent+Navigation.swift */; };
+		5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1872CBFC15000006723 /* AppEvent+Search.swift */; };
+		5D66D18A2CBFD01B00006723 /* AppEvent+RecentActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1892CBFD01B00006723 /* AppEvent+RecentActivity.swift */; };
+		5D66D18C2CBFE3DD00006723 /* AppEvent+FunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D18B2CBFE3DD00006723 /* AppEvent+FunctionTests.swift */; };
+		5D66D1902CBFE3ED00006723 /* AppEvent+NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D18E2CBFE3ED00006723 /* AppEvent+NavigationTests.swift */; };
+		5D66D1922CBFE41700006723 /* AppEvent+RecentActivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1912CBFE41700006723 /* AppEvent+RecentActivityTests.swift */; };
+		5D66D1942CBFE42200006723 /* AppEvent+SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1932CBFE42200006723 /* AppEvent+SearchTests.swift */; };
+		5D66D1992CBFF47800006723 /* AppEvent+TopicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1982CBFF47800006723 /* AppEvent+TopicsTests.swift */; };
+		5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1952CBFF3D600006723 /* AppEvent+Topics.swift */; };
 		5D742BD62C99784900E7B87A /* Common.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D742BD52C99784900E7B87A /* Common.xcstrings */; };
 		5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D742BD72C9978B800E7B87A /* Home.xcstrings */; };
 		5D742BDA2C99791A00E7B87A /* Settings.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D742BD92C99791A00E7B87A /* Settings.xcstrings */; };
@@ -508,6 +518,16 @@
 		5D62952A2C87429000BBB394 /* GOV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV.xcdatamodel; sourceTree = "<group>"; };
 		5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Configs.swift"; sourceTree = "<group>"; };
 		5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsService+Onboarding.swift"; sourceTree = "<group>"; };
+		5D66D1832CBFC12400006723 /* AppEvent+Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Function.swift"; sourceTree = "<group>"; };
+		5D66D1852CBFC13100006723 /* AppEvent+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Navigation.swift"; sourceTree = "<group>"; };
+		5D66D1872CBFC15000006723 /* AppEvent+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Search.swift"; sourceTree = "<group>"; };
+		5D66D1892CBFD01B00006723 /* AppEvent+RecentActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+RecentActivity.swift"; sourceTree = "<group>"; };
+		5D66D18B2CBFE3DD00006723 /* AppEvent+FunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+FunctionTests.swift"; sourceTree = "<group>"; };
+		5D66D18E2CBFE3ED00006723 /* AppEvent+NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+NavigationTests.swift"; sourceTree = "<group>"; };
+		5D66D1912CBFE41700006723 /* AppEvent+RecentActivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+RecentActivityTests.swift"; sourceTree = "<group>"; };
+		5D66D1932CBFE42200006723 /* AppEvent+SearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+SearchTests.swift"; sourceTree = "<group>"; };
+		5D66D1952CBFF3D600006723 /* AppEvent+Topics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Topics.swift"; sourceTree = "<group>"; };
+		5D66D1982CBFF47800006723 /* AppEvent+TopicsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+TopicsTests.swift"; sourceTree = "<group>"; };
 		5D742BD52C99784900E7B87A /* Common.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Common.xcstrings; sourceTree = "<group>"; };
 		5D742BD72C9978B800E7B87A /* Home.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Home.xcstrings; sourceTree = "<group>"; };
 		5D742BD92C99791A00E7B87A /* Settings.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Settings.xcstrings; sourceTree = "<group>"; };
@@ -1280,6 +1300,11 @@
 			isa = PBXGroup;
 			children = (
 				5D96C9D92C860AD90003527A /* AppEvent+ConvenienceTests.swift */,
+				5D66D18B2CBFE3DD00006723 /* AppEvent+FunctionTests.swift */,
+				5D66D18E2CBFE3ED00006723 /* AppEvent+NavigationTests.swift */,
+				5D66D1912CBFE41700006723 /* AppEvent+RecentActivityTests.swift */,
+				5D66D1932CBFE42200006723 /* AppEvent+SearchTests.swift */,
+				5D66D1982CBFF47800006723 /* AppEvent+TopicsTests.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1676,6 +1701,11 @@
 			isa = PBXGroup;
 			children = (
 				5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */,
+				5D66D1832CBFC12400006723 /* AppEvent+Function.swift */,
+				5D66D1852CBFC13100006723 /* AppEvent+Navigation.swift */,
+				5D66D1892CBFD01B00006723 /* AppEvent+RecentActivity.swift */,
+				5D66D1872CBFC15000006723 /* AppEvent+Search.swift */,
+				5D66D1952CBFF3D600006723 /* AppEvent+Topics.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -2045,6 +2075,7 @@
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,
 				5D925B1B2CB7CE6300A1E241 /* GroupedListTableViewCell.swift in Sources */,
 				3D15E7B02CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift in Sources */,
+				5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */,
 				5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				4E94E8D92C8B18ED00906803 /* RecentActivitiesViewStructure.swift in Sources */,
@@ -2105,7 +2136,9 @@
 				D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */,
 				D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
+				5D66D18A2CBFD01B00006723 /* AppEvent+RecentActivity.swift in Sources */,
 				5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */,
+				5D66D1862CBFC13100006723 /* AppEvent+Navigation.swift in Sources */,
 				5DC79FB02CA1862000014446 /* UIView+Extensions.swift in Sources */,
 				5DC250662C91D802009E9E7F /* FirebaseClient.swift in Sources */,
 				3D3378162CAAC113004BF83F /* AppUnavailableContainerViewModel.swift in Sources */,
@@ -2116,6 +2149,7 @@
 				1679D5732C3F5E3100AA2EB0 /* SettingsViewController.swift in Sources */,
 				5D9E67C42C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift in Sources */,
 				5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */,
+				5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
 				4E6663CA2C737EF50063E81C /* Config.swift in Sources */,
 				4E5ED2052C6E1F8700750BDA /* AppConfigRepository.swift in Sources */,
@@ -2177,6 +2211,7 @@
 				5DC79FAE2CA185A000014446 /* UITableView+Extensions.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
+				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				3D887CB82C944861001B1BA2 /* Constants.swift in Sources */,
@@ -2193,7 +2228,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D66D1992CBFF47800006723 /* AppEvent+TopicsTests.swift in Sources */,
 				D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */,
+				5D66D1922CBFE41700006723 /* AppEvent+RecentActivityTests.swift in Sources */,
 				5DA97B682C6CE6250030AF2B /* HTTPURLResponse+Arrangers.swift in Sources */,
 				4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */,
 				5DA97B652C6CC9060030AF2B /* URLRequest+Extensions.swift in Sources */,
@@ -2248,6 +2285,7 @@
 				5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */,
 				16F961972C8881C8005CFB04 /* SearchViewControllerTests.swift in Sources */,
 				4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */,
+				5D66D1942CBFE42200006723 /* AppEvent+SearchTests.swift in Sources */,
 				D0B89D9D2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift in Sources */,
 				5DC2506E2C91E795009E9E7F /* MockAnalyticsClient.swift in Sources */,
 				3D15E7B82CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift in Sources */,
@@ -2267,11 +2305,13 @@
 				5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */,
 				5D4F6D3E2CA4175A006D0B5B /* MockAppConfigServiceClient.swift in Sources */,
 				5DBAA1AF2CA416C400D06C7E /* MockAppConfigRepository.swift in Sources */,
+				5D66D1902CBFE3ED00006723 /* AppEvent+NavigationTests.swift in Sources */,
 				5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */,
 				16F9619D2C8899D4005CFB04 /* SearchCoordinatorTests.swift in Sources */,
 				5D93EE832C36849B00D90C0C /* MockDeeplinkRoute.swift in Sources */,
 				5DE2834C2CAC484000E95800 /* ActivityServiceTests.swift in Sources */,
 				D028CCFA2CB9854F00742620 /* EditTopicsViewModelTests.swift in Sources */,
+				5D66D18C2CBFE3DD00006723 /* AppEvent+FunctionTests.swift in Sources */,
 				5D26A7632C92E0A5009902DD /* CrashlyticsClientTests.swift in Sources */,
 				3DEC85A82C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift in Sources */,
 				3D9C93472CB01CDA00EFA337 /* MockAppVersionProvider.swift in Sources */,

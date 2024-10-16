@@ -27,6 +27,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsResult
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: topicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { _ in })
         let viewModel = HomeViewModel(

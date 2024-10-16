@@ -5,7 +5,7 @@ final class EditTopicsViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     let sections: [GroupedListSection]
-    private let dismissAction: () -> Void
+    let dismissAction: () -> Void
 
     init(topics: [Topic],
          topicsService: TopicsServiceInterface,
@@ -29,19 +29,19 @@ final class EditTopicsViewModel: ObservableObject {
                         isFavorite: topic.isFavorite
                     )
                     analyticsService.track(event: event)
+                    topicsService.updateFavoriteTopics()
                 }
             )
             rows.append(row)
         }
 
-        sections = [GroupedListSection(heading: "",
-                                      rows: rows,
-                                      footer: nil)]
-    }
-
-    func updateFavoriteTopics() {
-        topicsService.updateFavoriteTopics()
-        dismissAction()
+        sections = [
+            GroupedListSection(
+                heading: "",
+                rows: rows,
+                footer: nil
+            )
+        ]
     }
 
     func trackScreen(screen: TrackableScreen) {

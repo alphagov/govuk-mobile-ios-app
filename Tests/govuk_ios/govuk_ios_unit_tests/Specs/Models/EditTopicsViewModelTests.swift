@@ -3,42 +3,43 @@ import Testing
 @testable import govuk_ios
 
 struct EditTopicsViewModelTests {
-    
+
     let coreData = CoreDataRepository.arrangeAndLoad
-    let topicService = MockTopicsService()
-    let analyticsService = MockAnalyticsService()
-    
+    let mockTopicService = MockTopicsService()
+    let mockAnalyticsService = MockAnalyticsService()
+
     @Test
-    func updateFavorites_doesSaveAndDismiss() async throws {
+    func dismissAction_callsDismiss() throws {
         var dismissActionCalled = false
         let sut = EditTopicsViewModel(
             topics: [],
-            topicsService: topicService,
-            analyticsService: analyticsService,
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
             dismissAction: {
                 dismissActionCalled = true
             }
         )
-        
-        sut.updateFavoriteTopics()
-        #expect(topicService._didUpdateFavoritesCalled)
+
+        sut.dismissAction()
         #expect(dismissActionCalled)
     }
-    
-    @Test func initViewModel_doesCreateSectionsCorrectly() async throws {
+
+    @Test
+    func initViewModel_doesCreateSectionsCorrectly() throws {
         let sut = EditTopicsViewModel(
             topics: createTopics(),
-            topicsService: topicService,
-            analyticsService: analyticsService,
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
             dismissAction: { }
         )
-        
+
         try #require(sut.sections.count == 1)
         try #require(sut.sections[0].rows.count == 3)
         let row = try #require(sut.sections[0].rows[0] as? ToggleRow)
         #expect(row.title == "title0")
         row.action(true)
         #expect(sut.topics[0].isFavorite)
+        #expect(mockTopicService._updateFavoriteTopicsCalled)
     }
 }
 

@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "allTopicsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Topics"
+          }
+        }
+      }
+    },
     "seeAllTopicsButtonText" : {
       "extractionState" : "manual",
       "localizations" : {

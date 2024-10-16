@@ -19,7 +19,7 @@ class MockTopicsService: TopicsServiceInterface {
         _updateFavoriteTopicsCalled = true
     }
     
-    var _receivedFetchTopicsResult: Result<[TopicResponseItem], TopicsListError>?
+    var _receivedFetchTopicsResult: Result<[TopicResponseItem], TopicsServiceError>?
     var _dataReceived = false
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
         if let result = _receivedFetchTopicsResult {
@@ -32,7 +32,7 @@ class MockTopicsService: TopicsServiceInterface {
 }
 
 extension MockTopicsService {
-    static var testTopicsResult: Result<[TopicResponseItem], TopicsListError> {
+    static var testTopicsResult: Result<[TopicResponseItem], TopicsServiceError> {
         let topics = [TopicResponseItem(ref: "driving-transport", title: "Driving & Transport"),
                       TopicResponseItem(ref: "care", title: "Care"),
                       TopicResponseItem(ref: "business", title: "Business")
@@ -40,7 +40,7 @@ extension MockTopicsService {
         return .success(topics)
     }
     
-    static var testTopicsFailure: Result<[TopicResponseItem], TopicsListError> {
+    static var testTopicsFailure: Result<[TopicResponseItem], TopicsServiceError> {
         return .failure(.decodingError)
     }
     

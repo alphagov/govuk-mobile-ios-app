@@ -7,7 +7,7 @@ final class TopicsWidgetViewModel {
     private let topicAction: ((Topic) -> Void)?
     private let editAction: (([Topic]) -> Void)?
 
-    var downloadError: TopicsListError?
+    var downloadError: TopicsServiceError?
 
     var favoriteTopics: [Topic] {
         topicsService.fetchFavoriteTopics()

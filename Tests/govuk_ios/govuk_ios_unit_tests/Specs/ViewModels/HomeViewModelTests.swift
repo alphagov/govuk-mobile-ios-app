@@ -10,6 +10,7 @@ struct HomeViewModelTests {
     func widgets_returnsArrayOfWidgets() {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { _ in }
         )
@@ -32,6 +33,7 @@ struct HomeViewModelTests {
 
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { _ in }
         )

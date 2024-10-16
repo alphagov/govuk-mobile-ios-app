@@ -67,10 +67,12 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     private var topicWidgetViewModel: TopicsWidgetViewModel {
-        let viewModel = TopicsWidgetViewModel(topicsService: topicsService,
-                                              topicAction: topicAction,
-                                              editAction: editTopicsAction)
-        return viewModel
+        TopicsWidgetViewModel(
+            topicsService: topicsService,
+            analyticsService: analyticsService,
+            topicAction: topicAction,
+            editAction: editTopicsAction
+        )
     }
 
     private var topicAction: (Topic) -> Void {

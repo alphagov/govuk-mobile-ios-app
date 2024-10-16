@@ -2,10 +2,10 @@ import Foundation
 import CoreData
 
 final class TopicsWidgetViewModel {
-    @Inject(\.analyticsService) private(set) var analyticsService: AnalyticsServiceInterface
-    let topicsService: TopicsServiceInterface
-    let topicAction: ((Topic) -> Void)?
-    let editAction: (([Topic]) -> Void)?
+    private let analyticsService: AnalyticsServiceInterface
+    private let topicsService: TopicsServiceInterface
+    private let topicAction: ((Topic) -> Void)?
+    private let editAction: (([Topic]) -> Void)?
 
     var downloadError: TopicsListError?
 
@@ -14,12 +14,13 @@ final class TopicsWidgetViewModel {
     }
 
     init(topicsService: TopicsServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          topicAction: ((Topic) -> Void)?,
          editAction: (([Topic]) -> Void)?) {
         self.topicsService = topicsService
         self.topicAction = topicAction
         self.editAction = editAction
-
+        self.analyticsService = analyticsService
         self.fetchTopics()
     }
 

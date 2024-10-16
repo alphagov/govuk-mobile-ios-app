@@ -11,5 +11,6 @@ struct UIAlertAction_ConvenienceTests {
         let subject = UIAlertAction.ok(handler: nil)
 
         #expect(subject.title == "OK")
+        #expect(subject.style == .default)
     }
 }

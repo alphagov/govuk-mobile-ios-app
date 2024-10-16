@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "ok" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "editButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
     "openWebLinkHint" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -36,7 +36,11 @@ struct TopicTests {
         ]
     ))
     func topic_iconName_returnsCorrectValue(ref: String, iconName: String) {
-        let topic = Topic(ref: ref, title: "Title")
+        let coreData = CoreDataRepository.arrange
+        
+        let topic = Topic(context: coreData.viewContext)
+        topic.ref = ref
+        topic.title = "Title"
         #expect(topic.iconName == iconName)
     }
 

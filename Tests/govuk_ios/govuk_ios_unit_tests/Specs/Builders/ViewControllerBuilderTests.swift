@@ -36,12 +36,17 @@ struct ViewControllerBuilderTests {
     @Test
     func home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
+        let viewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            editAction: { _ in }
+        )
         let result = subject.home(
             searchButtonPrimaryAction: { () -> Void in },
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService(),
             recentActivityAction: {},
-            topicAction: { _ in }
+            topicWidgetViewModel: viewModel
         )
 
         #expect(result is HomeViewController)
@@ -77,25 +82,38 @@ struct ViewControllerBuilderTests {
         }
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
-            analyticsService: MockAnalyticsService()
-        )
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService()
+        ) as? TrackableScreen
 
-        let rootView = (result as? HostingViewController<ModifiedContent<RecentActivityContainerView, _EnvironmentKeyWritingModifier<NSManagedObjectContext>>>)?.rootView
-        let containerView = rootView?.content as? RecentActivityContainerView
-        #expect(containerView?.trackingClass == "RecentActivityContainerView")
-        #expect(containerView?.trackingName == "Pages you've visited")
-        #expect(containerView?.trackingTitle == "Pages you've visited")
+        #expect(result?.trackingClass == String(describing: RecentActivityListViewController.self))
+        #expect(result?.trackingName == "Pages you've visited")
+        #expect(result?.trackingTitle == "Pages you've visited")
     }
     
     @Test
     func topicDetail_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
-            topic: Topic(ref: "ref", title: "Title"),
+            topic: Topic(),
             analyticsService: MockAnalyticsService()
         )
         
         let rootView = (result as? HostingViewController<TopicDetailView>)?.rootView
         #expect(rootView != nil) 
+    }
+    
+    @Test
+    func editTopics_returnsExpectedResult() async throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.editTopics(
+            [],
+            analyticsService: MockAnalyticsService(),
+            topicsService: MockTopicsService(),
+            dismissAction: { }
+        )
+        
+        let rootView = (result as? HostingViewController<EditTopicsView>)?.rootView
+        #expect(rootView != nil)
     }
 }

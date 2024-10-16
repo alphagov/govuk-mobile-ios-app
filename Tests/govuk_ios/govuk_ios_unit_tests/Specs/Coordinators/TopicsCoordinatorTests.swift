@@ -19,7 +19,7 @@ struct TopicsCoordinatorTests {
             navigationController: navigationController,
             analyticsService: mockAnalyticsService,
             viewControllerBuilder: mockViewControllerBuilder,
-            topic: Topic(ref: "ref", title: "Title")
+            topic: Topic()
         )
         
         subject.start()

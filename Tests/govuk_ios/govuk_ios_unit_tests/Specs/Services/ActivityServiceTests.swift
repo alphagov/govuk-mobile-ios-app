@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import CoreData
 
 @testable import govuk_ios
 
@@ -35,4 +36,31 @@ struct ActivityServiceTests {
         #expect(equalDates)
     }
 
+    @Test
+    func fetch_callsRepository() throws {
+        let mockRepository = MockActivityRepository()
+        let sut = ActivityService(
+            repository: mockRepository
+        )
+        let expectedController = NSFetchedResultsController<ActivityItem>()
+        mockRepository._stubbedFetchResultsController = expectedController
+
+        let result = sut.fetch()
+
+        #expect(result == expectedController)
+    }
+
+    @Test
+    func deleteObjectIds_callsRepository() throws {
+        let mockRepository = MockActivityRepository()
+        let sut = ActivityService(
+            repository: mockRepository
+        )
+
+        let expectedId = NSManagedObjectID()
+        sut.delete(objectIds: [expectedId])
+
+        #expect(mockRepository._receivedDeleteObjectIds?.count == 1)
+        #expect(mockRepository._receivedDeleteObjectIds?.first == expectedId)
+    }
 }

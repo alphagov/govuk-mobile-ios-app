@@ -11,7 +11,7 @@ class SearchViewController: BaseViewController,
     private let dismissAction: () -> Void
 
     private lazy var errorView = {
-        let localView = SearchErrorView()
+        let localView = ListInformationView()
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.isHidden = true
         return localView
@@ -197,14 +197,14 @@ class SearchViewController: BaseViewController,
         case .networkUnavailable:
             errorView.configure(
                 title: String.search.localized("networkUnavailableErrorTitle"),
-                errorDesc: String.search.localized("networkUnavailableErrorBody")
+                description: String.search.localized("networkUnavailableErrorBody")
             )
 
             errorView.isHidden = false
         case .apiUnavailable, .parsingError:
             errorView.configure(
                 title: String.search.localized("genericErrorTitle"),
-                errorDesc: String.search.localized("genericErrorBody"),
+                description: String.search.localized("genericErrorBody"),
                 linkText: String.search.localized("genericErrorLinkTitle"),
                 accessibilityLinkText: String.search.localized(
                     "genericErrorTitleAccessibilityLabel"
@@ -213,8 +213,9 @@ class SearchViewController: BaseViewController,
             )
             errorView.isHidden = false
         case .noResults:
-            errorView.configure(errorDesc: "No results for ’\(searchText ?? "")’")
-
+            errorView.configure(
+                description: "No results for ’\(searchText ?? "")’"
+            )
             errorView.isHidden = false
         case .none:
             errorView.isHidden = true

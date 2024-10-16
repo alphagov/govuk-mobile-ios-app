@@ -8,12 +8,17 @@ import Testing
 struct HomeViewModelTests {
     @Test
     func widgets_returnsArrayOfWidgets() {
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            editAction: { _ in }
+        )
         let subject = HomeViewModel(
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService(),
-            searchButtonPrimaryAction: { },
-            recentActivityAction: {},
-            topicAction: { _ in }
+            searchButtonPrimaryAction: { () -> Void in _ = true },
+            recentActivityAction: { },
+            topicWidgetViewModel: topicsViewModel
         )
         let widgets = subject.widgets
 
@@ -26,12 +31,17 @@ struct HomeViewModelTests {
         let configService = MockAppConfigService()
         configService.features = []
 
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            editAction: { _ in }
+        )
         let subject = HomeViewModel(
             configService: configService,
-            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { },
-            recentActivityAction: {},
-            topicAction: { _ in }
+            recentActivityAction: { },
+            topicWidgetViewModel: topicsViewModel
         )
         let widgets = subject.widgets
 

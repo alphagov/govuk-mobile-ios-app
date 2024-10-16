@@ -35,6 +35,7 @@ class HomeViewController: BaseViewController,
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        title = String.home.localized("pageTitle")
     }
 
     override func viewWillAppear(_ animated: Bool) {

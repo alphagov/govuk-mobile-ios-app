@@ -3,10 +3,9 @@ import UIKit
 
 struct HomeViewModel {
     let configService: AppConfigServiceInterface
-    let topicsService: TopicsServiceInterface
     let searchButtonPrimaryAction: (() -> Void)?
     let recentActivityAction: (() -> Void)?
-    let topicAction: ((Topic) -> Void)?
+    let topicWidgetViewModel: TopicsWidgetViewModel
     var widgets: [WidgetView] {
         [
             searchWidget,
@@ -27,6 +26,9 @@ struct HomeViewModel {
             viewModel: viewModel
         )
         let widget = WidgetView()
+        widget.isAccessibilityElement = true
+        widget.accessibilityLabel = content.accessibilityLabel
+        widget.accessibilityTraits = content.accessibilityTraits
         widget.addContent(content)
         return widget
     }
@@ -52,12 +54,9 @@ struct HomeViewModel {
     private var topicsWidget: WidgetView? {
         guard widgetEnabled(feature: .topics)
         else { return nil }
-        let viewModel = TopicsWidgetViewModel(
-            topicsService: topicsService,
-            topicAction: topicAction
-        )
+
         let content = TopicsWidgetView(
-            viewModel: viewModel
+            viewModel: topicWidgetViewModel
         )
         let widget = WidgetView(decorateView: false)
         widget.addContent(content)

@@ -1,8 +1,23 @@
 import Foundation
+import CoreData
 
-struct Topic: Decodable {
-    let ref: String
-    let title: String
+@objc(Topic)
+class Topic: NSManagedObject,
+             Identifiable {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Topic> {
+        let request = NSFetchRequest<Topic>(entityName: "Topic")
+        request.sortDescriptors = [
+            NSSortDescriptor(
+                keyPath: \Topic.title,
+                ascending: true
+            )
+        ]
+        return request
+    }
+
+    @NSManaged public var ref: String
+    @NSManaged public var title: String
+    @NSManaged public var isFavorite: Bool
 
     var iconName: String {
         switch self.ref {

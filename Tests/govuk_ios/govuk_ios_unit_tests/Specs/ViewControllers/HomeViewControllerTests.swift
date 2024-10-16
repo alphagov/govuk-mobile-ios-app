@@ -10,17 +10,41 @@ import Factory
 struct HomeViewControllerTests {
 
     @Test
+    func init_hasExpectedValues() {
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            editAction: { _ in }
+        )
+        let viewModel = HomeViewModel(
+            configService: MockAppConfigService(),
+            searchButtonPrimaryAction: { () -> Void in _ = true },
+            recentActivityAction: { },
+            topicWidgetViewModel: topicsViewModel
+        )
+        let subject = HomeViewController(viewModel: viewModel)
+
+        #expect(subject.title == "Home")
+    }
+
+    @Test
     func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
         Container.shared.analyticsService.register {
             mockAnalyticsService
         }
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            editAction: { _ in }
+        )
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService(),
             searchButtonPrimaryAction: { () -> Void in _ = true },
             recentActivityAction: { },
-            topicAction: { _ in }
+            topicWidgetViewModel: topicsViewModel
         )
         let subject = HomeViewController(viewModel: viewModel)
         subject.viewDidAppear(false)

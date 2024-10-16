@@ -4,6 +4,7 @@ protocol AppConfigServiceInterface {
     var isAppAvailable: Bool { get }
     var isAppForcedUpdate: Bool { get }
     var isAppRecommendUpdate: Bool { get }
+    func fetchAppConfig(completion: @escaping () -> Void)
     func isFeatureEnabled(key: Feature) -> Bool
 }
 
@@ -23,11 +24,9 @@ public final class AppConfigService: AppConfigServiceInterface {
         self.appConfigRepository = appConfigRepository
         self.appConfigServiceClient = appConfigServiceClient
         self.appVersionProvider = appVersionProvider
-
-        fetchAppConfig()
     }
 
-    private func fetchAppConfig() {
+    func fetchAppConfig(completion: @escaping () -> Void) {
         appConfigRepository.fetchAppConfig(
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
@@ -40,6 +39,7 @@ public final class AppConfigService: AppConfigServiceInterface {
             completion: { [weak self] result in
                 guard let self = self else { return }
                 self.handleResult(result)
+                completion()
             }
         )
     }

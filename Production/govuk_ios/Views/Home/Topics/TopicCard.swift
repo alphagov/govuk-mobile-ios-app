@@ -46,7 +46,7 @@ class TopicCard: UIView {
     private lazy var titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 16
+        stackView.spacing = 0
         stackView.alignment = .bottom
         stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
         return stackView

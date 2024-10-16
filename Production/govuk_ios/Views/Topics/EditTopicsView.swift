@@ -28,7 +28,7 @@ struct EditTopicsView: View {
     private var doneButton: some View {
         Button(String.topics.localized("doneButtonTitle")) {
             viewModel.updateFavoriteTopics()
-        }
+        }.foregroundColor(Color(UIColor.govUK.text.link))
     }
 }
 

@@ -33,6 +33,50 @@
           }
         }
       }
+    },
+    "topicDetailPopularPagesHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Popular pages in this topic"
+          }
+        }
+      }
+    },
+    "topicDetailSeeAllRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See all"
+          }
+        }
+      }
+    },
+    "topicDetailStepByStepHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step by step guides"
+          }
+        }
+      }
+    },
+    "topicDetailSubtopicsHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

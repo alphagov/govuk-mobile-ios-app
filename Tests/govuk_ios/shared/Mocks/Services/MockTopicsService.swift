@@ -3,6 +3,10 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {
+    func downloadTopicDetails(for topicRef: String, completion: @escaping govuk_ios.FetchTopicDetailsResult) {
+        
+    }
+    
     
     let coreData = CoreDataRepository.arrangeAndLoad
     

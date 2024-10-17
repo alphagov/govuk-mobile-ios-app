@@ -6,17 +6,6 @@ class TopicsWidgetView: UIView {
 
     private var rowCount = 2
     private lazy var allTopicsButton: GOVUKButton = {
-        let buttonConfig = GOVUKButton.ButtonConfiguration(
-            titleColorNormal: UIColor.govUK.text.buttonSecondary,
-            titleColorHighlighted: UIColor.govUK.text.buttonSecondaryHighlight,
-            titleColorFocused: UIColor.govUK.text.buttonSecondaryFocussed,
-            titleFont: UIFont.govUK.body,
-            backgroundColorNormal: UIColor.govUK.fills.surfaceCard,
-            backgroundColorHighlighted: UIColor.govUK.fills.surfaceButtonSecondaryHighlight,
-            backgroundColorFocused: UIColor.govUK.fills.surfaceButtonSecondaryFocussed,
-            cornerRadius: 24,
-            accessibilityButtonShapesColor: UIColor.govUK.fills.surfaceCard
-        )
         var buttonViewModel: GOVUKButton.ButtonViewModel {
             .init(
                 localisedTitle: String.topics.localized("seeAllTopicsButtonText"),
@@ -25,11 +14,8 @@ class TopicsWidgetView: UIView {
                 }
             )
         }
-        let button = GOVUKButton(buttonConfig, viewModel: buttonViewModel)
-
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
-        button.translatesAutoresizingMaskIntoConstraints = false
+        let button = GOVUKButton(.compact, viewModel: buttonViewModel)
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
 
         return button
     }()
@@ -63,7 +49,6 @@ class TopicsWidgetView: UIView {
         stackView.spacing = 16
         stackView.alignment = .bottom
         stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
@@ -73,7 +58,6 @@ class TopicsWidgetView: UIView {
         stackView.spacing = 16
         stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
@@ -99,24 +83,24 @@ class TopicsWidgetView: UIView {
             object: nil
         )
         updateTopics(viewModel.favoriteTopics)
-        addAllTopicsButton()
+        showAllTopicsButton()
     }
 
     @objc
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.favoriteTopics)
-            self.addAllTopicsButton()
+            self.showAllTopicsButton()
         }
     }
 
     private func configureUI() {
-        //        titleLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor).isActive = true
         headerStackView.addArrangedSubview(titleLabel)
         headerStackView.addArrangedSubview(editButton)
         headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)
         stackView.addArrangedSubview(cardStackView)
+        stackView.addArrangedSubview(allTopicsButton)
         addSubview(stackView)
     }
 
@@ -129,13 +113,13 @@ class TopicsWidgetView: UIView {
         ])
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: headerStackView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: headerStackView.trailingAnchor)
+            headerStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            headerStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: cardStackView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: cardStackView.trailingAnchor)
+            cardStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            cardStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
         ])
     }
 
@@ -202,10 +186,7 @@ class TopicsWidgetView: UIView {
         }
     }
 
-    private func addAllTopicsButton() {
-        guard viewModel.allTopicsDisplayed
-        else { return stackView.addArrangedSubview(allTopicsButton) }
-        stackView.removeArrangedSubview(allTopicsButton)
-        allTopicsButton.removeFromSuperview()
+    private func showAllTopicsButton() {
+        allTopicsButton.isHidden = viewModel.allTopicsButtonHidden
     }
 }

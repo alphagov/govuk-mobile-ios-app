@@ -10,14 +10,16 @@ struct TopicsCoordinatorTests {
     func start_setsTopicDetailView() throws {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
+        let mockTopicsService = MockTopicsService()
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
         
         mockViewControllerBuilder._stubbedTopicDetailViewController = expectedViewController
         
-        let subject = TopicsCoordinator(
+        let subject = TopicDetailsCoordinator(
             navigationController: navigationController,
             analyticsService: mockAnalyticsService,
+            topicsService: mockTopicsService,
             viewControllerBuilder: mockViewControllerBuilder,
             topic: Topic()
         )

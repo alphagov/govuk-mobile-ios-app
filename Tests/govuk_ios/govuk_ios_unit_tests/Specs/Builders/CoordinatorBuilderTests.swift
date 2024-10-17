@@ -105,7 +105,7 @@ struct CoordinatorBuilderTests {
             navigationController: mockNavigationController
         )
 
-        #expect(coordinator is TopicsCoordinator)
+        #expect(coordinator is TopicDetailsCoordinator)
     }
     
     @Test

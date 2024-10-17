@@ -34,6 +34,10 @@ struct SettingsViewModelTests {
         #expect(helpAndFeedbackRow.title == "Help and feedback")
         #expect(helpAndFeedbackRow.isWebLink == true)
 
+        let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
+        #expect(appBundleInformation.title == "App version number")
+        #expect(appBundleInformation.detail == Bundle.main.versionNumber)
+
         let privacySection = sut.listContent[1]
         #expect(privacySection.heading == "Privacy and legal")
         let toggleRow = try #require(privacySection.rows.first as? ToggleRow)

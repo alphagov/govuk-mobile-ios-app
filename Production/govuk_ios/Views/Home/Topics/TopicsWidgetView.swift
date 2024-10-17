@@ -99,6 +99,7 @@ class TopicsWidgetView: UIView {
             object: nil
         )
         updateTopics(viewModel.favoriteTopics)
+        addAllTopicsButton()
     }
 
     @objc
@@ -202,7 +203,10 @@ class TopicsWidgetView: UIView {
     }
 
     private func addAllTopicsButton() {
-        stackView.addArrangedSubview(allTopicsButton)
+        guard viewModel.allTopicsDisplayed
+        else { return stackView.addArrangedSubview(allTopicsButton) }
+        stackView.removeArrangedSubview(allTopicsButton)
+        allTopicsButton.removeFromSuperview()
     }
 
     @objc

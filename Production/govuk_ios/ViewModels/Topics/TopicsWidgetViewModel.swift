@@ -13,6 +13,9 @@ final class TopicsWidgetViewModel {
     var favoriteTopics: [Topic] {
         topicsService.fetchFavoriteTopics()
     }
+    var allTopicsDisplayed: Bool {
+        topicsService.fetchAllTopics().count == favoriteTopics.count
+    }
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,

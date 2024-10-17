@@ -134,18 +134,6 @@ class CoordinatorBuilder {
         )
     }
 
-    func allTopics(navigationController: UINavigationController,
-                   topics: [Topic]) -> AllTopicsCoordinator {
-        AllTopicsCoordinator(
-            navigationController: navigationController,
-            analyticsService: container.analyticsService.resolve(),
-            viewControllerBuilder: ViewControllerBuilder(),
-            topicsService: container.topicsService.resolve(),
-            coordinatorBuilder: self,
-            topics: topics
-        )
-    }
-
     func editTopics(_ topics: [Topic],
                     navigationController: UINavigationController,
                     didDismissAction: @escaping () -> Void) -> BaseCoordinator {
@@ -156,6 +144,17 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             topics: topics,
             dismissed: didDismissAction
+        )
+    }
+
+    func allTopics(navigationController: UINavigationController,
+                   topics: [Topic]) -> BaseCoordinator {
+        AllTopicsCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            coordinatorBuilder: self,
+            topics: topics
         )
     }
 }

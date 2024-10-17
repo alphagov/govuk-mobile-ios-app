@@ -3,20 +3,17 @@ import UIKit
 final class AllTopicsCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
-    private let topicsService: TopicsServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
     private let topics: [Topic]
 
     init(navigationController: UINavigationController,
          analyticsService: AnalyticsServiceInterface,
          viewControllerBuilder: ViewControllerBuilder,
-         topicsService: TopicsServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
          topics: [Topic]) {
         self.topics = topics
         self.analyticsService = analyticsService
         self.viewControllerBuilder = viewControllerBuilder
-        self.topicsService = topicsService
         self.coordinatorBuilder = coordinatorBuilder
         super.init(navigationController: navigationController)
     }

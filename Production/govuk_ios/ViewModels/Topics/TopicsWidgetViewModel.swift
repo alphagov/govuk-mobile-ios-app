@@ -64,7 +64,7 @@ final class TopicsWidgetViewModel {
         guard let action = allTopicsAction else { return }
         let topics = topicsService.fetchAllTopics()
         let event = AppEvent.buttonNavigation(
-            text: "See all Topics",
+            text: "See all topics",
             external: false
         )
         analyticsService.track(event: event)

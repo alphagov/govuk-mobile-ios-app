@@ -58,7 +58,7 @@ class TopicDetailViewModel: ObservableObject {
     }
 
     private func fetchTopicDetails(for topicRef: String) {
-        topicsService.downloadTopicDetails(for: topicRef) { result in
+        topicsService.fetchTopicDetails(for: topicRef) { result in
             switch result {
             case .success(let topicDetail):
                 self.topicDetail = topicDetail
@@ -95,6 +95,8 @@ class TopicDetailViewModel: ObservableObject {
                 title: String.topics.localized("topicDetailSeeAllRowTitle"),
                 body: nil,
                 action: {
+                    self.navigationAction(TopicsService.stepByStepRef)
+                    self.trackNavigationEvent(TopicsService.stepByStepRef)
                 }
             )
             rows.append(seeAllRow)

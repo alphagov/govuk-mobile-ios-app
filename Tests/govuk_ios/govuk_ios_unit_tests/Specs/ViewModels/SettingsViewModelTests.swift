@@ -30,9 +30,9 @@ struct SettingsViewModelTests {
 
         let aboutTheAppSection = sut.listContent[0]
         #expect(aboutTheAppSection.heading == "About the app")
-        let appVersionRow = try #require(aboutTheAppSection.rows.first as? InformationRow)
-        #expect(appVersionRow.title == "App version number")
-        #expect(appVersionRow.detail == Bundle.main.versionNumber)
+        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
+        #expect(helpAndFeedbackRow.title == "Help and feedback")
+        #expect(helpAndFeedbackRow.isWebLink == true)
 
         let privacySection = sut.listContent[1]
         #expect(privacySection.heading == "Privacy and legal")

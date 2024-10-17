@@ -70,4 +70,64 @@ struct ActivityRepositoryTests {
         let containsNewItem = results.contains { $0.id == newId }
         #expect(containsNewItem)
     }
+
+    @Test
+    func deleteObjectIds_removesExpectedObject() throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = ActivityRepository(
+            coreData: coreData
+        )
+
+        let item = ActivityItem.arrange(context: coreData.viewContext)
+        let item2 = ActivityItem.arrange(context: coreData.viewContext),
+        _ = [
+            ActivityItem.arrange(context: coreData.viewContext),
+            ActivityItem.arrange(context: coreData.viewContext)
+        ]
+
+        try coreData.viewContext.save()
+
+        let request = ActivityItem.fetchRequest()
+        let results = try coreData.viewContext.fetch(request)
+        try #require(results.count == 4)
+
+        sut.delete(objectIds: [item.objectID, item2.objectID])
+
+        let viewContextResults = try coreData.viewContext.fetch(request)
+        #expect(viewContextResults.count == 2)
+
+        let backgroundContextResults = try coreData.backgroundContext.fetch(request)
+        #expect(backgroundContextResults.count == 2)
+    }
+
+    @Test
+    func fetch_returnsControllerWithExpectedObjects() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = ActivityRepository(
+            coreData: coreData
+        )
+
+        let controller = sut.fetch()
+        #expect(controller.fetchedObjects?.isEmpty == true)
+        let mockDelegate = MockFetchedResultsDelegate(
+            controller: controller
+        )
+        let count = await withCheckedContinuation { continuation in
+
+            mockDelegate.firedAction = {
+                continuation.resume(returning: controller.fetchedObjects?.count)
+            }
+
+            let originalId = UUID().uuidString
+            let params = ActivityItemCreateParams(
+                id: originalId,
+                title: "title",
+                date: .init(timeIntervalSince1970: 0),
+                url: "test"
+            )
+            sut.save(params: params)
+        }
+        #expect(count == 1)
+        mockDelegate.retainerMethod()
+    }
 }

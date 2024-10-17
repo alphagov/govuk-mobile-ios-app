@@ -1,6 +1,6 @@
 import Foundation
 
-typealias FetchTopicsListResult = (Result<[Topic], TopicsListError>) -> Void
+typealias FetchTopicsListResult = (Result<[TopicResponseItem], TopicsListError>) -> Void
 
 protocol TopicsServiceClientInterface {
     func fetchTopicsList(completion: @escaping FetchTopicsListResult)
@@ -33,7 +33,7 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
                 switch result {
                 case .success(let data):
                     do {
-                        let topics = try JSONDecoder().decode([Topic].self, from: data)
+                        let topics = try JSONDecoder().decode([TopicResponseItem].self, from: data)
                         completion(.success(topics))
                     } catch {
                         completion(.failure(.decodingError))

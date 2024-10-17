@@ -47,20 +47,15 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    // swiftlint:disable:next function_parameter_count
     func home(searchButtonPrimaryAction: @escaping () -> Void,
               configService: AppConfigServiceInterface,
-              topicsService: TopicsServiceInterface,
               recentActivityAction: @escaping () -> Void,
-              topicAction: @escaping (Topic) -> Void,
-              allTopicsAction: @escaping () -> Void) -> UIViewController {
+              topicWidgetViewModel: TopicsWidgetViewModel) -> UIViewController {
         let viewModel = HomeViewModel(
             configService: configService,
-            topicsService: topicsService,
             searchButtonPrimaryAction: searchButtonPrimaryAction,
             recentActivityAction: recentActivityAction,
-            topicAction: topicAction,
-            allTopicsAction: allTopicsAction
+            topicWidgetViewModel: topicWidgetViewModel
         )
         return HomeViewController(
             viewModel: viewModel
@@ -96,15 +91,16 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func recentActivity(analyticsService: AnalyticsServiceInterface) -> UIViewController {
-        let viewModel = RecentActivitiesViewModel(
+    func recentActivity(analyticsService: AnalyticsServiceInterface,
+                        activityService: ActivityServiceInterface) -> UIViewController {
+        let viewModel = RecentActivityListViewModel(
+            activityService: activityService,
             analyticsService: analyticsService,
-            urlOpener: UIApplication.shared
+            urlopener: UIApplication.shared
         )
-        let repository = Container.shared.coreDataRepository.resolve()
-        let view = RecentActivityContainerView(viewModel: viewModel)
-            .environment(\.managedObjectContext, repository.viewContext)
-        return HostingViewController(rootView: view)
+        return RecentActivityListViewController(
+            viewModel: viewModel
+        )
     }
 
     @MainActor
@@ -128,5 +124,22 @@ class ViewControllerBuilder {
         return AllTopicsViewController(
             viewModel: viewModel
         )
+    }
+
+    func editTopics(_ topics: [Topic],
+                    analyticsService: AnalyticsServiceInterface,
+                    topicsService: TopicsServiceInterface,
+                    dismissAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = EditTopicsViewModel(
+            topics: topics,
+            topicsService: topicsService,
+            analyticsService: analyticsService,
+            dismissAction: dismissAction
+        )
+
+        let view = EditTopicsView(
+            viewModel: viewModel
+        )
+        return HostingViewController(rootView: view)
     }
 }

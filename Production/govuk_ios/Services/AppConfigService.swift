@@ -4,6 +4,7 @@ protocol AppConfigServiceInterface {
     var isAppAvailable: Bool { get }
     var isAppForcedUpdate: Bool { get }
     var isAppRecommendUpdate: Bool { get }
+    func fetchAppConfig(completion: @escaping () -> Void)
     func isFeatureEnabled(key: Feature) -> Bool
 }
 
@@ -23,33 +24,32 @@ public final class AppConfigService: AppConfigServiceInterface {
         self.appConfigRepository = appConfigRepository
         self.appConfigServiceClient = appConfigServiceClient
         self.appVersionProvider = appVersionProvider
-
-        fetchAppConfig()
     }
 
-    private func fetchAppConfig() {
+    func fetchAppConfig(completion: @escaping () -> Void) {
         appConfigRepository.fetchAppConfig(
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.handleResult(result)
+                self.handleResult(result)
             }
         )
 
         appConfigServiceClient.fetchAppConfig(
             completion: { [weak self] result in
                 guard let self = self else { return }
-                try? self.handleResult(result)
+                self.handleResult(result)
+                completion()
             }
         )
     }
 
-    private func handleResult(_ result: Result<AppConfig, AppConfigError>) throws {
+    private func handleResult(_ result: Result<AppConfig, AppConfigError>) {
         switch result {
         case .success(let appConfig):
             setConfig(appConfig.config)
-        case .failure(let error):
-            throw error
+        case .failure:
+            self.isAppAvailable = false
         }
     }
 

@@ -48,3 +48,9 @@ jobs:
           APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
           MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+      - name: Save Artifacts
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3
+        with:
+          name: build-output
+          path: build_output

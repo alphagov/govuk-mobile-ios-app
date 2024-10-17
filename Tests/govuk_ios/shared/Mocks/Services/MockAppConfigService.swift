@@ -10,7 +10,13 @@ class MockAppConfigService: AppConfigServiceInterface {
     var isAppRecommendUpdate: Bool = false
 
     var features: [Feature] = [.onboarding, .search, .topics]
-    
+
+    var _receivedFetchAppConfigCompletion: (() -> Void)?
+
+    func fetchAppConfig(completion: @escaping () -> Void) {
+        _receivedFetchAppConfigCompletion = completion
+    }
+
     func isFeatureEnabled(key: Feature) -> Bool {
         features.contains(key)
     }

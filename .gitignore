@@ -96,6 +96,7 @@ secrets.xcconfig
 
 #Build
 build_output/
+test_output/
 
 #Unit tests
 build_for_unit_testing/

@@ -9,6 +9,7 @@ default: &DEFAULTS
     profile_specifiers:
       uk.gov.govuk: "match AppStore uk.gov.govuk"
   scan:
+    output_directory: test_output
     devices:
       - iPhone 15 Pro (17.5)
   match: &MATCH_DEFAULTS

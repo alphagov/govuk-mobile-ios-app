@@ -1,7 +1,10 @@
 import Foundation
+import CoreData
 
 protocol ActivityServiceInterface {
+    func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(searchItem: SearchItem)
+    func delete(objectIds: [NSManagedObjectID])
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -11,10 +14,18 @@ struct ActivityService: ActivityServiceInterface {
         self.repository = repository
     }
 
+    func fetch() -> NSFetchedResultsController<ActivityItem> {
+        repository.fetch()
+    }
+
     func save(searchItem: SearchItem) {
         let params = ActivityItemCreateParams(
             searchItem: searchItem
         )
         repository.save(params: params)
+    }
+
+    func delete(objectIds: [NSManagedObjectID]) {
+        repository.delete(objectIds: objectIds)
     }
 }

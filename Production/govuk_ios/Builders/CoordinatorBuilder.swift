@@ -119,7 +119,8 @@ class CoordinatorBuilder {
         RecentActivityCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
-            analyticsService: container.analyticsService.resolve()
+            analyticsService: container.analyticsService.resolve(),
+            activityService: container.activityService.resolve()
         )
     }
 
@@ -140,6 +141,19 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             topicsService: container.topicsService.resolve(),
             coordinatorBuilder: self
+        )
+    }
+
+    func editTopics(_ topics: [Topic],
+                    navigationController: UINavigationController,
+                    didDismissAction: @escaping () -> Void) -> BaseCoordinator {
+        EditTopicsCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            topicsService: container.topicsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            topics: topics,
+            dismissed: didDismissAction
         )
     }
 }

@@ -12,6 +12,17 @@
         }
       }
     },
+    "pageTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        }
+      }
+    },
     "recentActivityWidgetAccessibilityLabel" : {
       "extractionState" : "manual",
       "localizations" : {

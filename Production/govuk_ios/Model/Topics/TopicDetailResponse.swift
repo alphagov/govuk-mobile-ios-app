@@ -19,3 +19,6 @@ struct TopicDetailResponse: Decodable {
         let url: URL
     }
 }
+
+extension TopicDetailResponse: DisplayableTopic {}
+extension TopicDetailResponse.Subtopic: DisplayableTopic {}

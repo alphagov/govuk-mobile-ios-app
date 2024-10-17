@@ -104,13 +104,13 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func topicDetail(topicRef: String,
+    func topicDetail(topic: DisplayableTopic,
                      topicsService: TopicsServiceInterface,
                      analyticsService: AnalyticsServiceInterface,
-                     navigationAction: @escaping (String) -> Void
+                     navigationAction: @escaping (DisplayableTopic) -> Void
     ) -> UIViewController {
         let viewModel = TopicDetailViewModel(
-            topicRef: topicRef,
+            topic: topic,
             topicsService: topicsService,
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,

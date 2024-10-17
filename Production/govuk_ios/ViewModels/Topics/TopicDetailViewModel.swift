@@ -3,10 +3,11 @@ import Foundation
 class TopicDetailViewModel: ObservableObject {
     @Published var topicDetail: TopicDetailResponse?
     @Published var error: TopicsServiceError?
+    var topic: DisplayableTopic
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
-    private let navigationAction: (String) -> Void
+    private let navigationAction: (DisplayableTopic) -> Void
 
     var sections = [GroupedListSection]()
 
@@ -44,17 +45,18 @@ class TopicDetailViewModel: ObservableObject {
         return subs
     }
 
-    init(topicRef: String,
+    init(topic: DisplayableTopic,
          topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
-         navigationAction: @escaping (String) -> Void) {
+         navigationAction: @escaping (DisplayableTopic) -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.navigationAction = navigationAction
+        self.topic = topic
 
-        self.fetchTopicDetails(for: topicRef)
+        self.fetchTopicDetails(for: topic.ref)
     }
 
     private func fetchTopicDetails(for topicRef: String) {
@@ -72,7 +74,8 @@ class TopicDetailViewModel: ObservableObject {
     private func configureSections() {
         sections = [createPopularContentSection(),
                     createStepByStepSection(),
-                    createSubtopicsSection()
+                    createSubtopicsSection(),
+                    createOtherContentSection()
         ].compactMap { $0 }
     }
 
@@ -95,8 +98,8 @@ class TopicDetailViewModel: ObservableObject {
                 title: String.topics.localized("topicDetailSeeAllRowTitle"),
                 body: nil,
                 action: {
-                    self.navigationAction(TopicsService.stepByStepRef)
-                    self.trackNavigationEvent(TopicsService.stepByStepRef)
+                    self.navigationAction(TopicsService.stepByStepSubTopic)
+                    self.trackNavigationEvent(TopicsService.stepByStepSubTopic.title)
                 }
             )
             rows.append(seeAllRow)
@@ -120,6 +123,15 @@ class TopicDetailViewModel: ObservableObject {
         )
     }
 
+    private func createOtherContentSection() -> GroupedListSection? {
+        guard let otherContent else { return nil }
+        return GroupedListSection(
+            heading: String.topics.localized("topicDetailOtherContentHeader"),
+            rows: otherContent.map { createContentRow($0) },
+            footer: nil
+        )
+    }
+
     private func createContentRow(_ content: TopicDetailResponse.Content) -> LinkRow {
         LinkRow(
             id: content.title,
@@ -139,7 +151,7 @@ class TopicDetailViewModel: ObservableObject {
             title: content.title,
             body: nil,
             action: {
-                self.navigationAction(content.ref)
+                self.navigationAction(content)
                 self.trackNavigationEvent(content.title)
             }
         )

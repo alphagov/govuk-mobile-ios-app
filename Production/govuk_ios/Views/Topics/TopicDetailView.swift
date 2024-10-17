@@ -10,17 +10,16 @@ struct TopicDetailView: View {
     var body: some View {
         VStack {
             ScrollView {
-                Text(viewModel.topicDetail?.title
-                     ?? viewModel.error?.localizedDescription
-                     ?? "should be something")
+                HStack {
+                    Text(viewModel.topic.title)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 16)
+                    Spacer()
+                }
                 GroupedList(content: viewModel.sections)
             }
         }
-        .navigationTitle(viewModel.topicDetail?.title ?? "")
-        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle(viewModel.topic.title)
     }
 }
-
-// #Preview {
-//    TopicDetailView()
-// }

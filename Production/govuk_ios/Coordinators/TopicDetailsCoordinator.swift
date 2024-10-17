@@ -20,7 +20,7 @@ final class TopicDetailsCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.topicDetail(
-            topicRef: topic.ref,
+            topic: topic,
             topicsService: topicsService,
             analyticsService: analyticsService,
             navigationAction: goToSubtopic
@@ -28,9 +28,9 @@ final class TopicDetailsCoordinator: BaseCoordinator {
         push(viewController, animated: true)
     }
 
-    func goToSubtopic(_ topicRef: String) {
+    func goToSubtopic(_ topic: DisplayableTopic) {
         let viewController = viewControllerBuilder.topicDetail(
-            topicRef: topicRef,
+            topic: topic,
             topicsService: topicsService,
             analyticsService: analyticsService,
             navigationAction: goToSubtopic

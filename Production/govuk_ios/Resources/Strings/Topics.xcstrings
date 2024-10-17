@@ -34,6 +34,17 @@
         }
       }
     },
+    "topicDetailOtherContentHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content"
+          }
+        }
+      }
+    },
     "topicDetailPopularPagesHeader" : {
       "extractionState" : "manual",
       "localizations" : {

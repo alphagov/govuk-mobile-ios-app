@@ -10,8 +10,9 @@ protocol TopicsServiceInterface {
 }
 
 extension TopicsServiceInterface {
-    static var stepByStepRef: String {
-        "stepByStep"
+    static var stepByStepSubTopic: DisplayableTopic {
+        TopicDetailResponse.Subtopic(ref: "stepByStepRef",
+                                     title: String.topics.localized("topicDetailStepByStepHeader"))
     }
 }
 
@@ -42,7 +43,7 @@ class TopicsService: TopicsServiceInterface {
 
     func fetchTopicDetails(for topicRef: String,
                            completion: @escaping FetchTopicDetailsResult) {
-        if topicRef == Self.stepByStepRef {
+        if topicRef == Self.stepByStepSubTopic.ref {
             if let response = stepByStepDetails() {
                 completion(.success(response))
             } else {

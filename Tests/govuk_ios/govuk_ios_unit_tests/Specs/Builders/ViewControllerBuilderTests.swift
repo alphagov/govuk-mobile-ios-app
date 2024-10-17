@@ -95,9 +95,10 @@ struct ViewControllerBuilderTests {
     func topicDetail_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
-            topicRef: "topicRef",
+            topic: MockTopicsService.stepByStepSubTopic,
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService(),
             navigationAction: { _ in }
         )
         

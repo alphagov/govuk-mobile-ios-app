@@ -66,10 +66,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedTopicDetailViewController: UIViewController?
-    override func topicDetail(topicRef: String,
+    override func topicDetail(topic: DisplayableTopic,
                               topicsService: any TopicsServiceInterface,
                               analyticsService: any AnalyticsServiceInterface,
-                              navigationAction: @escaping (String) -> Void) -> UIViewController {
+                              activityService: any ActivityServiceInterface,
+                              navigationAction: @escaping (DisplayableTopic) -> Void) -> UIViewController {
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
     

@@ -11,6 +11,7 @@ struct TopicsCoordinatorTests {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
         let mockTopicsService = MockTopicsService()
+        let mockActivityService = MockActivityService()
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
         
@@ -20,6 +21,7 @@ struct TopicsCoordinatorTests {
             navigationController: navigationController,
             analyticsService: mockAnalyticsService,
             topicsService: mockTopicsService,
+            activityService: mockActivityService,
             viewControllerBuilder: mockViewControllerBuilder,
             topic: Topic()
         )

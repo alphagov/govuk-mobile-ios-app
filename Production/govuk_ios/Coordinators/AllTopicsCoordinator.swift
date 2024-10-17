@@ -23,7 +23,6 @@ final class AllTopicsCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.allTopics(
-            topicsService: topicsService,
             analyticsService: analyticsService,
             topicAction: topicAction,
             topics: topics

@@ -2,17 +2,14 @@ import UIKit
 import Foundation
 
 class AllTopicsViewModel {
-    let topicsService: TopicsServiceInterface
     let analyticsService: AnalyticsServiceInterface
     let topicAction: ((Topic) -> Void)?
     let topics: [Topic]
     var downloadError: TopicsListError?
 
-    init(topicsService: TopicsServiceInterface,
-         analyticsService: AnalyticsServiceInterface,
+    init(analyticsService: AnalyticsServiceInterface,
          topicAction: @escaping (Topic) -> Void,
          topics: [Topic]) {
-        self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.topicAction = topicAction
         self.topics = topics

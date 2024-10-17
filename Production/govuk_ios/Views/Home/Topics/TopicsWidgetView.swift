@@ -21,7 +21,7 @@ class TopicsWidgetView: UIView {
             .init(
                 localisedTitle: String.topics.localized("seeAllTopicsButtonText"),
                 action: { [weak self] in
-                    self?.allTopicsButtonPressed()
+                    self?.viewModel.didTapSeeAllTopics()
                 }
             )
         }
@@ -207,10 +207,5 @@ class TopicsWidgetView: UIView {
         else { return stackView.addArrangedSubview(allTopicsButton) }
         stackView.removeArrangedSubview(allTopicsButton)
         allTopicsButton.removeFromSuperview()
-    }
-
-    @objc
-    private func allTopicsButtonPressed() {
-        viewModel.didTapSeeAllTopics()
     }
 }

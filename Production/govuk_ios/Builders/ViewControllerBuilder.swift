@@ -113,12 +113,10 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func allTopics(topicsService: TopicsServiceInterface,
-                   analyticsService: AnalyticsServiceInterface,
+    func allTopics(analyticsService: AnalyticsServiceInterface,
                    topicAction: @escaping (Topic) -> Void,
                    topics: [Topic]) -> UIViewController {
         let viewModel = AllTopicsViewModel(
-            topicsService: topicsService,
             analyticsService: analyticsService,
             topicAction: topicAction,
             topics: topics

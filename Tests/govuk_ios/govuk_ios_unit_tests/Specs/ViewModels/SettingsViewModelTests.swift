@@ -92,4 +92,18 @@ struct SettingsViewModelTests {
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(receivedTitle == settingsRow.title)
     }
+
+    @Test
+    func helpAndFeedback_action_tracksEvent() throws {
+        try #require(sut.listContent.count == 3)
+
+        let aboutTheAppSection = sut.listContent[0]
+        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
+
+        helpAndFeedbackRow.action()
+
+        let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
+
+    }
 }

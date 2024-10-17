@@ -6,7 +6,7 @@ final class TopicsWidgetViewModel {
     private let topicsService: TopicsServiceInterface
     private let topicAction: ((Topic) -> Void)?
     private let editAction: (([Topic]) -> Void)?
-    private let allTopicsAction: (() -> Void)?
+    private let allTopicsAction: (([Topic]) -> Void)?
 
     var downloadError: TopicsListError?
 
@@ -18,7 +18,7 @@ final class TopicsWidgetViewModel {
          analyticsService: AnalyticsServiceInterface,
          topicAction: ((Topic) -> Void)?,
          editAction: (([Topic]) -> Void)?,
-         allTopicsAction: (() -> Void)?) {
+         allTopicsAction: (([Topic]) -> Void)?) {
         self.topicsService = topicsService
         self.topicAction = topicAction
         self.editAction = editAction
@@ -58,11 +58,13 @@ final class TopicsWidgetViewModel {
     }
 
     func didTapSeeAllTopics() {
+        guard let action = allTopicsAction else { return }
+        let topics = topicsService.fetchAllTopics()
         let event = AppEvent.buttonNavigation(
             text: "See all Topics",
             external: false
         )
         analyticsService.track(event: event)
-        allTopicsAction?()
+        action(topics)
     }
 }

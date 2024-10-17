@@ -5,12 +5,15 @@ final class AllTopicsCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let topicsService: TopicsServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
+    private let topics: [Topic]
 
     init(navigationController: UINavigationController,
          analyticsService: AnalyticsServiceInterface,
          viewControllerBuilder: ViewControllerBuilder,
          topicsService: TopicsServiceInterface,
-         coordinatorBuilder: CoordinatorBuilder) {
+         coordinatorBuilder: CoordinatorBuilder,
+         topics: [Topic]) {
+        self.topics = topics
         self.analyticsService = analyticsService
         self.viewControllerBuilder = viewControllerBuilder
         self.topicsService = topicsService
@@ -22,7 +25,8 @@ final class AllTopicsCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.allTopics(
             topicsService: topicsService,
             analyticsService: analyticsService,
-            topicAction: topicAction
+            topicAction: topicAction,
+            topics: topics
         )
         push(viewController, animated: true)
     }

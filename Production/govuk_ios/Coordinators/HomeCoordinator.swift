@@ -89,11 +89,12 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var allTopicsAction: () -> Void {
-        return { [weak self] in
+    private var allTopicsAction: ([Topic]) -> Void {
+        return { [weak self] topics in
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.allTopics(
-                navigationController: self.root
+                navigationController: self.root,
+                topics: topics
             )
             start(coordinator)
         }

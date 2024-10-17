@@ -49,13 +49,9 @@ class AllTopicsViewController: BaseViewController, TrackableScreen {
 
     private func setupUI() {
         title = String.topics.localized("allTopicsTitle")
-
-        viewModel.fetchAllTopics {
-            self.tableView.reloadData()
-        }
         view.addSubview(tableView)
     }
-    
+
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(

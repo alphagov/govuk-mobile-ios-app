@@ -5,27 +5,17 @@ class AllTopicsViewModel {
     let topicsService: TopicsServiceInterface
     let analyticsService: AnalyticsServiceInterface
     let topicAction: ((Topic) -> Void)?
-    var topics = [Topic]()
+    let topics: [Topic]
     var downloadError: TopicsListError?
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         topicAction: @escaping (Topic) -> Void) {
+         topicAction: @escaping (Topic) -> Void,
+         topics: [Topic]) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.topicAction = topicAction
-        fetchAllTopics {}
-    }
-
-    func fetchAllTopics(completion: @escaping () -> Void) {
-        topicsService.downloadTopicsList { result in
-            if case .failure(let error) = result {
-                self.downloadError = error
-            } else {
-                self.topics = self.topicsService.fetchAllTopics()
-                completion()
-            }
-        }
+        self.topics = topics
     }
 
     func didTapTopic(_ topic: Topic) {

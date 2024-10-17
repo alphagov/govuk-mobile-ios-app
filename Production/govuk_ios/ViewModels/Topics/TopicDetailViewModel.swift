@@ -6,6 +6,7 @@ class TopicDetailViewModel: ObservableObject {
     var topic: DisplayableTopic
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let activityService: ActivityServiceInterface
     private let urlOpener: URLOpener
     private let navigationAction: (DisplayableTopic) -> Void
 
@@ -48,10 +49,12 @@ class TopicDetailViewModel: ObservableObject {
     init(topic: DisplayableTopic,
          topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         activityService: ActivityServiceInterface,
          urlOpener: URLOpener,
          navigationAction: @escaping (DisplayableTopic) -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
+        self.activityService = activityService
         self.urlOpener = urlOpener
         self.navigationAction = navigationAction
         self.topic = topic
@@ -139,6 +142,7 @@ class TopicDetailViewModel: ObservableObject {
             body: nil,
             action: {
                 if self.urlOpener.openIfPossible(content.url) {
+                    self.activityService.save(topicContent: content)
                     self.trackLinkEvent(content.title)
                 }
             }
@@ -151,8 +155,8 @@ class TopicDetailViewModel: ObservableObject {
             title: content.title,
             body: nil,
             action: {
-                self.navigationAction(content)
                 self.trackNavigationEvent(content.title)
+                self.navigationAction(content)
             }
         )
     }

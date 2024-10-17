@@ -1,13 +1,26 @@
 import SwiftUI
 
 struct TopicDetailView: View {
-    var topic: Topic?
+    @StateObject var viewModel: TopicDetailViewModel
+
+    init(viewModel: TopicDetailViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
-        Text(topic?.title ?? "No topic set")
+        VStack {
+            ScrollView {
+                Text(viewModel.topicDetail?.title
+                     ?? viewModel.error?.localizedDescription
+                     ?? "should be something")
+                GroupedList(content: viewModel.sections)
+            }
+        }
+        .navigationTitle(viewModel.topicDetail?.title ?? "")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
-#Preview {
-    TopicDetailView()
-}
+// #Preview {
+//    TopicDetailView()
+// }

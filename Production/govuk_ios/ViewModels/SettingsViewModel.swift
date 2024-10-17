@@ -25,6 +25,7 @@ struct SettingsViewModel: SettingsViewModelInterface {
             .init(
                 heading: String.settings.localized("aboutTheAppHeading"),
                 rows: [
+                    helpAndFeedbackRow(),
                     InformationRow(
                         id: "settings.version.row",
                         title: String.settings.localized("appVersionTitle"),
@@ -67,6 +68,22 @@ struct SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: {
                 if urlOpener.openIfPossible(Constants.API.privacyPolicyUrl) {
+                    trackLinkEvent(rowTitle)
+                }
+            }
+        )
+    }
+
+    private func helpAndFeedbackRow() -> GroupedListRow {
+        let rowTitle = String.settings.localized(
+            "helpAndFeedbackSettingsTitle"
+        )
+        return LinkRow(
+            id: "settings.helpAndfeedback.row",
+            title: rowTitle,
+            body: nil,
+            action: {
+                if urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl) {
                     trackLinkEvent(rowTitle)
                 }
             }

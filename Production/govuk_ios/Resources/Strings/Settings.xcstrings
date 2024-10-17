@@ -45,6 +45,17 @@
         }
       }
     },
+    "helpAndFeedbackSettingsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help and feedback"
+          }
+        }
+      }
+    },
     "openSourceLicenceRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {

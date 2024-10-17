@@ -8,7 +8,7 @@ import UIKit
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController,
+            viewController: viewController(allTopicsFavourited: false),
             mode: .light,
             navBarHidden: true
         )
@@ -16,15 +16,16 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController,
+            viewController: viewController(allTopicsFavourited: true),
             mode: .dark,
             navBarHidden: true
         )
     }
 
-    private var viewController: HomeViewController {
+    func viewController(allTopicsFavourited: Bool) -> HomeViewController {
         let topicService = MockTopicsService()
         topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsResult
+        topicService._allTopicsFavourited = allTopicsFavourited
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),

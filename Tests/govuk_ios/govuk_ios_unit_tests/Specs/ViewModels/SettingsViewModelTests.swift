@@ -104,6 +104,5 @@ struct SettingsViewModelTests {
 
         let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
-
     }
 }

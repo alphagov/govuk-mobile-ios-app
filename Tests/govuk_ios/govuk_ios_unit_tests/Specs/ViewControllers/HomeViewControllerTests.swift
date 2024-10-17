@@ -15,7 +15,8 @@ struct HomeViewControllerTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { _ in },
+            allTopicsAction: { _ in }
         )
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
@@ -38,7 +39,8 @@ struct HomeViewControllerTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { _ in },
+            allTopicsAction: { _ in }
         )
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),

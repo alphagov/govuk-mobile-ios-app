@@ -33,6 +33,8 @@
 		16C34B412C47D9720031AD32 /* HomeCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */; };
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
+		16D0D03C2CC1790400944D79 /* AllTopicsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D03B2CC178F300944D79 /* AllTopicsCoordinatorTests.swift */; };
+		16D0D03F2CC1944000944D79 /* AllTopicsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D03E2CC1943200944D79 /* AllTopicsViewModelTests.swift */; };
 		16D17D422CC01C7600E99794 /* TopicRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D17D412CC01C6A00E99794 /* TopicRowView.swift */; };
 		16E5AD432C6D5719000B8B3A /* SearchWidgetStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */; };
 		16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A402C6F8968005E820F /* SearchViewController.swift */; };
@@ -398,6 +400,8 @@
 		16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorTests.swift; sourceTree = "<group>"; };
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
+		16D0D03B2CC178F300944D79 /* AllTopicsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsCoordinatorTests.swift; sourceTree = "<group>"; };
+		16D0D03E2CC1943200944D79 /* AllTopicsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewModelTests.swift; sourceTree = "<group>"; };
 		16D17D412CC01C6A00E99794 /* TopicRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRowView.swift; sourceTree = "<group>"; };
 		16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWidgetStackView.swift; sourceTree = "<group>"; };
 		16EE1A402C6F8968005E820F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -734,10 +738,18 @@
 				5DCDA1002CA20C7D00A6DF90 /* MonthGroupKeyTests.swift */,
 				5D5A25E62CAD44800013704A /* SearchItemTests.swift */,
 				D0F86E192CAC241400FF2D9E /* TopicTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		16D0D03D2CC1941800944D79 /* Topics */ = {
+			isa = PBXGroup;
+			children = (
+				16D0D03E2CC1943200944D79 /* AllTopicsViewModelTests.swift */,
 				D0B89D9C2CAD57B300AD93ED /* TopicsWidgetViewModelTests.swift */,
 				D028CCF92CB9854F00742620 /* EditTopicsViewModelTests.swift */,
 			);
-			path = Models;
+			path = Topics;
 			sourceTree = "<group>";
 		};
 		16E5AD442C6E499B000B8B3A /* Home */ = {
@@ -985,6 +997,7 @@
 		5D37EA062C3E865F006B36CB /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				16D0D03B2CC178F300944D79 /* AllTopicsCoordinatorTests.swift */,
 				3DEC85A72C89C5A40044D5F9 /* AnalyticsConsentCoordinatorTests.swift */,
 				5D37E9FE2C3E865F006B36CB /* AppCoordinatorTests.swift */,
 				3D9C93482CB0230500EFA337 /* AppForcedUpdateCoordinatorTests.swift */,
@@ -1024,7 +1037,6 @@
 		5D41DB5E2C0875460011E691 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */,
 				3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */,
 				3D9C933F2CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift */,
 				3D15E7B32CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift */,
@@ -1171,6 +1183,7 @@
 		5D5A25E52CAD44590013704A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				16D0D03D2CC1941800944D79 /* Topics */,
 				3D55B22D2C889AA30029194C /* AnalyticsConsentContainerViewModelTests.swift */,
 				3D9C93432CB01A2E00EFA337 /* AppForcedUpdateContainerViewModelTests.swift */,
 				3D15E7B52CB56F450046CE64 /* AppRecommendUpdateContainerViewModelTests.swift */,
@@ -1767,6 +1780,7 @@
 		D05AF4DD2CAD3C5500F86DD0 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */,
 				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
 				D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */,
 				D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */,
@@ -2267,6 +2281,7 @@
 				5D899A242C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift in Sources */,
 				5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */,
 				D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */,
+				16D0D03F2CC1944000944D79 /* AllTopicsViewModelTests.swift in Sources */,
 				5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */,
 				D028CCF82CB96ADB00742620 /* MockTopicsRepository.swift in Sources */,
 				16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */,
@@ -2348,6 +2363,7 @@
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				5DCDA1012CA20C7D00A6DF90 /* MonthGroupKeyTests.swift in Sources */,
 				3D33781C2CAAC30A004BF83F /* AppUnavailableContainerViewModelTests.swift in Sources */,
+				16D0D03C2CC1790400944D79 /* AllTopicsCoordinatorTests.swift in Sources */,
 				3D97E9812CA171D2001D3131 /* AppConfigServiceClientTests.swift in Sources */,
 				5D4043392C7DBF1B0004CCFE /* AppConfig+Arrangers.swift in Sources */,
 				3DEC85AD2C89DBED0044D5F9 /* MockURLOpener.swift in Sources */,

@@ -29,7 +29,8 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in })
+            editAction: { _ in },
+            allTopicsAction: { _ in })
         let viewModel = HomeViewModel(
             configService: MockAppConfigService(),
             searchButtonPrimaryAction: { },

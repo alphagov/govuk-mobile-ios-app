@@ -126,6 +126,7 @@ class ViewControllerBuilder {
         )
     }
 
+    @MainActor
     func editTopics(_ topics: [Topic],
                     analyticsService: AnalyticsServiceInterface,
                     topicsService: TopicsServiceInterface,

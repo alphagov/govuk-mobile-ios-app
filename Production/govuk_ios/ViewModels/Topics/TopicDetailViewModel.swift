@@ -13,7 +13,8 @@ class TopicDetailViewModel: ObservableObject {
     var sections = [GroupedListSection]()
 
     var popularContent: [TopicDetailResponse.Content]? {
-        guard let popularContent = (topicDetail?.content.filter { $0.popular == true }),
+        guard let popularContent = (topicDetail?.content.filter { $0.popular == true
+            && $0.isStepByStep == false }),
               popularContent.count > 0
         else { return nil }
         return popularContent
@@ -35,15 +36,36 @@ class TopicDetailViewModel: ObservableObject {
         return otherContent
     }
 
-    var shouldShowSeeAll: Bool {
-        (stepByStepContent?.count ?? 0) > 4
-    }
-
     var subtopics: [TopicDetailResponse.Subtopic]? {
         guard let subs = topicDetail?.subtopics,
               subs.count > 0
         else { return nil }
         return subs
+    }
+
+    var shouldShowSeeAll: Bool {
+        (stepByStepContent?.count ?? 0) > 0 && !isStepByStepSubtopic
+    }
+
+    var isStepByStepSubtopic: Bool {
+        topic.ref == TopicsService.stepByStepSubTopic.ref
+    }
+
+    var subtopicsHeading: String? {
+        if shouldHideHeading {
+            return nil
+        }
+        if topic is TopicDetailResponse.Subtopic {
+            return String.topics.localized("subtopicDetailSubtopicsHeader")
+        }
+        return String.topics.localized("topicDetailSubtopicsHeader")
+    }
+
+    var shouldHideHeading: Bool {
+        isStepByStepSubtopic || [popularContent,
+                                 stepByStepContent,
+                                 otherContent]
+            .compactMap { $0 }.isEmpty
     }
 
     init(topic: DisplayableTopic,
@@ -62,6 +84,10 @@ class TopicDetailViewModel: ObservableObject {
         self.fetchTopicDetails(for: topic.ref)
     }
 
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
     private func fetchTopicDetails(for topicRef: String) {
         topicsService.fetchTopicDetails(for: topicRef) { result in
             switch result {
@@ -77,8 +103,8 @@ class TopicDetailViewModel: ObservableObject {
     private func configureSections() {
         sections = [createPopularContentSection(),
                     createStepByStepSection(),
-                    createSubtopicsSection(),
-                    createOtherContentSection()
+                    createOtherContentSection(),
+                    createSubtopicsSection()
         ].compactMap { $0 }
     }
 
@@ -102,7 +128,7 @@ class TopicDetailViewModel: ObservableObject {
                 body: nil,
                 action: {
                     self.navigationAction(TopicsService.stepByStepSubTopic)
-                    self.trackNavigationEvent(TopicsService.stepByStepSubTopic.title)
+                    self.trackSubtopicNavigationEvent(TopicsService.stepByStepSubTopic)
                 }
             )
             rows.append(seeAllRow)
@@ -111,7 +137,8 @@ class TopicDetailViewModel: ObservableObject {
         }
 
         return GroupedListSection(
-            heading: String.topics.localized("topicDetailStepByStepHeader"),
+            heading:
+                (shouldHideHeading ? nil : String.topics.localized("topicDetailStepByStepHeader")),
             rows: rows,
             footer: nil
         )
@@ -120,7 +147,7 @@ class TopicDetailViewModel: ObservableObject {
     private func createSubtopicsSection() -> GroupedListSection? {
         guard let subtopics else { return nil }
         return GroupedListSection(
-            heading: String.topics.localized("topicDetailSubtopicsHeader"),
+            heading: subtopicsHeading,
             rows: subtopics.map { createSubtopicRow($0) },
             footer: nil
         )
@@ -143,7 +170,7 @@ class TopicDetailViewModel: ObservableObject {
             action: {
                 if self.urlOpener.openIfPossible(content.url) {
                     self.activityService.save(topicContent: content)
-                    self.trackLinkEvent(content.title)
+                    self.trackLinkEvent(content)
                 }
             }
         )
@@ -155,25 +182,20 @@ class TopicDetailViewModel: ObservableObject {
             title: content.title,
             body: nil,
             action: {
-                self.trackNavigationEvent(content.title)
+                self.trackSubtopicNavigationEvent(content)
                 self.navigationAction(content)
             }
         )
     }
 
-    private func trackLinkEvent(_ title: String) {
-        let event = AppEvent.buttonNavigation(
-            text: title,
-            external: true
-        )
+    private func trackLinkEvent(_ content: TopicDetailResponse.Content) {
+        let event = AppEvent.topicLinkNavigation(content: content)
         analyticsService.track(event: event)
     }
 
-    private func trackNavigationEvent(_ title: String) {
-        let event = AppEvent.buttonNavigation(
-            text: title,
-            external: false
-        )
+    private func trackSubtopicNavigationEvent(_ subtopic: DisplayableTopic) {
+        guard let subtopic = subtopic as? TopicDetailResponse.Subtopic else { return }
+        let event = AppEvent.subtopicNavigation(subtopic: subtopic)
         analyticsService.track(event: event)
     }
 }

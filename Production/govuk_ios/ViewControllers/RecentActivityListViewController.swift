@@ -87,7 +87,6 @@ class RecentActivityListViewController: BaseViewController,
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.setRightBarButton(editButtonItem, animated: animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
@@ -184,8 +183,11 @@ class RecentActivityListViewController: BaseViewController,
             snapshot.appendItems($0.items, toSection: $0)
         }
         dataSource.apply(snapshot, animatingDifferences: true)
-        tableView.isHidden = viewModel.structure.isEmpty
-        noItemsView.isHidden = !viewModel.structure.isEmpty
+        let hasRecentActivity = !viewModel.structure.isEmpty
+        tableView.isHidden = !hasRecentActivity
+        noItemsView.isHidden = hasRecentActivity
+        let rightNavBarButton = hasRecentActivity ? editButtonItem : nil
+        navigationItem.setRightBarButton(rightNavBarButton, animated: true)
     }
 
     func tableView(_ tableView: UITableView,

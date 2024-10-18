@@ -24,7 +24,10 @@ final class AllTopicsViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController() -> UIViewController {
-        let topics = MockTopicsService().fetchAllTopics()
+        let topicsService = MockTopicsService()
+        let topics = topicsService.fetchAllTopics()
+        try? topicsService.coreData.viewContext.save()
+
         let viewModel = AllTopicsViewModel(
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },

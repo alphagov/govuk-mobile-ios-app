@@ -95,6 +95,8 @@
 		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
 		4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */; };
 		4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */; };
+		4EE920642CC1624B001DD165 /* TopicOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE920632CC1624B001DD165 /* TopicOnboardingViewController.swift */; };
+		4EE920662CC162AC001DD165 /* TopicOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE920652CC162AC001DD165 /* TopicOnboardingViewModel.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		5D00E9552CA544F200775D2B /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9542CA544F200775D2B /* HostingViewController.swift */; };
 		5D00E9752CA5583400775D2B /* HostingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */; };
@@ -455,6 +457,8 @@
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
+		4EE920632CC1624B001DD165 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
+		4EE920652CC162AC001DD165 /* TopicOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewModel.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		5D00E9542CA544F200775D2B /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -1027,6 +1031,7 @@
 				5D41DB5F2C0875520011E691 /* TestViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
 				168F6FA92C4FC56B00A0D7F7 /* WidgetViewModel.swift */,
+				4EE920652CC162AC001DD165 /* TopicOnboardingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1450,6 +1455,7 @@
 				16EE1A402C6F8968005E820F /* SearchViewController.swift */,
 				1679D5722C3F5E3100AA2EB0 /* SettingsViewController.swift */,
 				5DAD717B2BD250DB0075F648 /* TestViewController.swift */,
+				4EE920632CC1624B001DD165 /* TopicOnboardingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2160,6 +2166,7 @@
 				4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */,
 				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
 				D05AF4D82CAD3C0800F86DD0 /* TopicsCoordinator.swift in Sources */,
+				4EE920662CC162AC001DD165 /* TopicOnboardingViewModel.swift in Sources */,
 				D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */,
 				5D925B212CB7FACA00A1E241 /* UITableView+Convenience.swift in Sources */,
 				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
@@ -2205,6 +2212,7 @@
 				D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				5DE74DE32CB538E9000B43B5 /* RecentActivityListViewController.swift in Sources */,
+				4EE920642CC1624B001DD165 /* TopicOnboardingViewController.swift in Sources */,
 				5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,

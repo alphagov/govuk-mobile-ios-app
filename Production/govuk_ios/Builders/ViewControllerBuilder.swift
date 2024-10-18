@@ -90,6 +90,18 @@ class ViewControllerBuilder {
         )
     }
 
+     @MainActor
+    func topicOnboarding(analyticsService: AnalyticsService,
+                         topicsViewmodel: TopicsWidgetViewModel) -> UIViewController {
+        let viewModel = TopicOnboardingViewModel(
+            topicWidgetViewModel: topicsViewmodel,
+            analyticsService: analyticsService
+        )
+        return TopicOnboardingViewController(
+            viewModel: viewModel
+        )
+    }
+
     @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface,
                         activityService: ActivityServiceInterface) -> UIViewController {

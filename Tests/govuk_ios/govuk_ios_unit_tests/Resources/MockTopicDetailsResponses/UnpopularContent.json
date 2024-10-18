@@ -1,0 +1,72 @@
+{
+  "ref": "driving-transport",
+  "title": "Driving & Transport",
+  "subtopics": [
+    {
+      "ref": "driving",
+      "title": "Driving"
+    },
+    {
+      "ref": "driving-abroad",
+      "title": "Driving abroad"
+    },
+    {
+      "ref": "learn-to-drive-car",
+      "title": "Learning to drive a car, motorbike or mini-bus"
+    },
+    {
+      "ref": "owning-a-vehicle",
+      "title": "Owning a vehicle"
+    },
+    {
+      "ref": "losing-the-right-to-drive",
+      "title": "Losing the right to drive"
+    },
+    {
+      "ref": "driving-as-a-profession",
+      "title": "Driving as a profession or business"
+    },
+    {
+      "ref": "public-transport",
+      "title": "Using public transport"
+    }
+  ],
+  "content": [
+    {
+      "url": "https://www.gov.uk/learn-to-drive-a-car",
+      "title": "Learn to drive a car: step by step",
+      "description": "Learn to drive a car in the UK - get a provisional licence, take driving lessons, prepare for your theory test, book your practical test",
+      "isStepByStep": true,
+      "popular": false
+    },
+    {
+      "url": "https://www.gov.uk/view-driving-licence",
+      "title": "View or share your driving licence information",
+      "description": "Find out what information DVLA holds about your driving licence or create a check code to share your driving record, for example to hire a car ",
+      "isStepByStep": false,
+      "popular": true
+    },
+    {
+      "url": "https://www.gov.uk/view-driving-licence2",
+      "title": "View or share your driving licence information",
+      "description": "Find out what information DVLA holds about your driving licence or create a check code to share your driving record, for example to hire a car ",
+      "isStepByStep": false,
+      "popular": false
+    },
+    {
+      "url": "https://www.gov.uk/view-driving-licence3",
+      "title": "View or share your driving licence information",
+      "description": "Find out what information DVLA holds about your driving licence or create a check code to share your driving record, for example to hire a car ",
+      "isStepByStep": false,
+      "popular": false
+    },
+    {
+      "url": "https://www.gov.uk/view-driving-licenc4",
+      "title": "View or share your driving licence information",
+      "description": "Find out what information DVLA holds about your driving licence or create a check code to share your driving record, for example to hire a car ",
+      "isStepByStep": false,
+      "popular": false
+    }
+    
+  ]
+}

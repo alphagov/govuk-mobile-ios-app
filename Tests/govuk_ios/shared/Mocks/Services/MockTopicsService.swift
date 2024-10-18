@@ -30,9 +30,14 @@ class MockTopicsService: TopicsServiceInterface {
         }
     }
     
+    var _receivedTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
     func fetchTopicDetails(for topicRef: String,
                            completion: @escaping FetchTopicDetailsResult) {
-        
+        if let result = _receivedTopicDetailsResult {
+            completion(result)
+        } else {
+            completion(.failure(.apiUnavailable))
+        }
     }
 }
 
@@ -63,5 +68,29 @@ extension MockTopicsService {
             topics.append(topic)
         }
         return topics
+    }
+    
+    static func createTopicDetails(fileName: String) -> Result<TopicDetailResponse, TopicsServiceError> {
+        let data = getJsonData(filename: fileName, bundle: .main)
+        guard let details = try? JSONDecoder().decode(TopicDetailResponse.self, from: data)
+        else {
+            return .failure(TopicsServiceError.decodingError)
+        }
+        return .success(details)
+    }
+    
+    private static  func getJsonData(filename: String, bundle: Bundle) -> Data {
+        let resourceURL = bundle.url(
+            forResource: filename,
+            withExtension: "json"
+        )
+        guard let resourceURL = resourceURL else {
+            return Data()
+        }
+        do {
+            return try Data(contentsOf: resourceURL)
+        } catch {
+            return Data()
+        }
     }
 }

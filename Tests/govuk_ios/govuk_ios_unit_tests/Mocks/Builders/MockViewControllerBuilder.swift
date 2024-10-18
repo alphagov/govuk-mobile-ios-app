@@ -80,4 +80,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
             _receivedDoneButtonAction = dismissAction
             return _stubbedEditTopicsViewController ?? UIViewController()
         }
+
+    var _stubbedAllTopicsViewController: UIViewController?
+    override func allTopics(analyticsService: AnalyticsServiceInterface,
+                   topicAction: @escaping (Topic) -> Void,
+                   topics: [Topic]) -> UIViewController {
+        return _stubbedAllTopicsViewController ?? UIViewController()
+    }
 }

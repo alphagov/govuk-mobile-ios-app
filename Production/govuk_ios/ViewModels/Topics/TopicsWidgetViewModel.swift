@@ -6,20 +6,26 @@ final class TopicsWidgetViewModel {
     private let topicsService: TopicsServiceInterface
     private let topicAction: ((Topic) -> Void)?
     private let editAction: (([Topic]) -> Void)?
+    private let allTopicsAction: (([Topic]) -> Void)?
 
     var downloadError: TopicsListError?
 
     var favoriteTopics: [Topic] {
         topicsService.fetchFavoriteTopics()
     }
+    var allTopicsButtonHidden: Bool {
+        topicsService.fetchAllTopics().count == favoriteTopics.count
+    }
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          topicAction: ((Topic) -> Void)?,
-         editAction: (([Topic]) -> Void)?) {
+         editAction: (([Topic]) -> Void)?,
+         allTopicsAction: (([Topic]) -> Void)?) {
         self.topicsService = topicsService
         self.topicAction = topicAction
         self.editAction = editAction
+        self.allTopicsAction = allTopicsAction
         self.analyticsService = analyticsService
         self.fetchTopics()
     }
@@ -50,6 +56,14 @@ final class TopicsWidgetViewModel {
             text: "EditTopics",
             external: false
         )
+        analyticsService.track(event: event)
+        action(topics)
+    }
+
+    func didTapSeeAllTopics() {
+        guard let action = allTopicsAction else { return }
+        let topics = topicsService.fetchAllTopics()
+        let event = AppEvent.widgetNavigation(text: "See all topics")
         analyticsService.track(event: event)
         action(topics)
     }

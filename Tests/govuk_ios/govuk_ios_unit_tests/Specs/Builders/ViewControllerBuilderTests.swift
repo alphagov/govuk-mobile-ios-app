@@ -40,7 +40,8 @@ struct ViewControllerBuilderTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { _ in },
+            allTopicsAction: { _ in }
         )
         let result = subject.home(
             searchButtonPrimaryAction: { () -> Void in },
@@ -115,5 +116,17 @@ struct ViewControllerBuilderTests {
         
         let rootView = (result as? HostingViewController<EditTopicsView>)?.rootView
         #expect(rootView != nil)
+    }
+
+    @Test
+    func allTopics_returnsExpectedResult() async throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.allTopics(
+            analyticsService: MockAnalyticsService(),
+            topicAction: {_ in},
+            topics: [Topic()]
+        )
+
+        #expect(result is AllTopicsViewController)
     }
 }

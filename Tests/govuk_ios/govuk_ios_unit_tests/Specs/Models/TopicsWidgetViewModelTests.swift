@@ -16,9 +16,8 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { }
         )
         
         #expect(topicService._dataReceived == true)
@@ -31,9 +30,8 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { }
         )
         
         #expect(topicService._dataReceived == false)
@@ -45,14 +43,13 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in
                 expectedValue = true
             },
-            editAction: { _ in }
+            editAction: { }
         )
         
-        sut.didTapTopic(Topic(context: coreData.viewContext))
+        sut.topicAction(Topic(context: coreData.viewContext))
         #expect(expectedValue == true)
     }
     
@@ -61,48 +58,13 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in
+            editAction: {
                 expectedValue = true
             }
         )
         
-        sut.didTapEdit()
+        sut.editAction()
         #expect(expectedValue == true)
     }
-    
-    @Test
-    func didTapTopic_sendsEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let sut = TopicsWidgetViewModel(
-            topicsService: topicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { _ in }
-        )
-        
-        let testTopic = Topic(context: coreData.viewContext)
-        testTopic.ref = "test"
-        testTopic.title = "Title"
-        sut.didTapTopic(testTopic)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "test")
-    }
-    
-    @Test
-    func didTapEdit_sendsEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let sut = TopicsWidgetViewModel(
-            topicsService: topicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: { _ in }
-        )
-
-        sut.didTapEdit()
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "EditTopics")
-    }
-
 }

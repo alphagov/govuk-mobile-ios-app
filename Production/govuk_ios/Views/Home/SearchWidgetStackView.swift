@@ -2,7 +2,7 @@ import UIKit
 import UIComponents
 
 class SearchWidgetStackView: UIStackView {
-    private let viewModel: WidgetViewModel
+    private let viewModel: SearchWidgetViewModel
 
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
@@ -23,7 +23,7 @@ class SearchWidgetStackView: UIStackView {
         return button
     }()
 
-    init(viewModel: WidgetViewModel) {
+    init(viewModel: SearchWidgetViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureUI()
@@ -50,6 +50,6 @@ class SearchWidgetStackView: UIStackView {
 
     @objc
     private func searchButtonPressed() {
-        viewModel.primaryAction?()
+        viewModel.action()
     }
 }

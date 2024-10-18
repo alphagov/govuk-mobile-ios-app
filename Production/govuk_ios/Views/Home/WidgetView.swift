@@ -3,7 +3,7 @@ import Foundation
 import UIComponents
 
 class WidgetView: UIView {
-    private lazy var contentView: UIView = UIView(frame: .zero)
+    private(set) lazy var contentView = UIView()
     private let decorateView: Bool
     private lazy var padding: CGFloat = {
         decorateView ? 16 : 0

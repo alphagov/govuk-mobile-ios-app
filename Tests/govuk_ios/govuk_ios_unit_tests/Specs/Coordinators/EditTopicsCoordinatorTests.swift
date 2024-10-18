@@ -21,7 +21,6 @@ struct EditTopicsCoordinatorTests {
             analyticsService: mockAnalyticsService,
             topicsService: mockTopicsService,
             viewControllerBuilder: mockViewControllerBuilder,
-            topics: [],
             dismissed: { }
         )
         
@@ -46,7 +45,6 @@ struct EditTopicsCoordinatorTests {
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
                 viewControllerBuilder: mockViewControllerBuilder,
-                topics: [],
                 dismissed: {
                     continuation.resume(returning: true)
                 }
@@ -75,7 +73,6 @@ struct EditTopicsCoordinatorTests {
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
                 viewControllerBuilder: mockViewControllerBuilder,
-                topics: [],
                 dismissed: {
                     continuation.resume(returning: true)
                 }

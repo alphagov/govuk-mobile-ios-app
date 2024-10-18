@@ -34,7 +34,7 @@
         }
       }
     },
-    "recentActivityWidgetLabel" : {
+    "recentActivityWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

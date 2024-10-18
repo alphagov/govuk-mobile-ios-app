@@ -46,7 +46,7 @@ struct HomeViewModelTests {
         )
         let widgets = subject.widgets
 
-        #expect(widgets.count == 1)
+        #expect(widgets.count == 0)
     }
 
 }

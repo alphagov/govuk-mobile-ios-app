@@ -11,7 +11,7 @@ struct HomeViewModel {
     var widgets: [WidgetView] {
         [
             searchWidget,
-            recentlyActivityWidget,
+            recentActivityWidget,
             topicsWidget
         ].compactMap { $0 }
     }
@@ -25,7 +25,6 @@ struct HomeViewModel {
             title: title,
             action: searchAction
         )
-
         let content = SearchWidgetStackView(
             viewModel: viewModel
         )
@@ -34,7 +33,9 @@ struct HomeViewModel {
         return widget
     }
 
-    private var recentlyActivityWidget: WidgetView? {
+    private var recentActivityWidget: WidgetView? {
+        guard widgetEnabled(feature: .recentActivity)
+        else { return nil }
         let title = String.home.localized(
             "recentActivityWidgetTitle"
         )

@@ -40,6 +40,21 @@ class SettingsViewController: BaseViewController,
         configureConstraints()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.scrollview.setContentOffset(CGPoint(x: 0, y: -16), animated: true)
+    }
+
+    override func viewWillTransition(to size: CGSize,
+                                     with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        navigationItem.largeTitleDisplayMode = .always
+        coordinator.animate(alongsideTransition: { (_) in
+            self.navigationController?.navigationBar.sizeToFit()
+            self.scrollview.setContentOffset(CGPoint(x: 0, y: -16), animated: true)
+        }, completion: nil)
+    }
+
     private func configureUI() {
         scrollview.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollview)

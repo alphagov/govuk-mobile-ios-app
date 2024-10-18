@@ -48,10 +48,12 @@ class ViewControllerBuilder {
 
     @MainActor
     func home(searchButtonPrimaryAction: @escaping () -> Void,
+              analyticsService: AnalyticsServiceInterface,
               configService: AppConfigServiceInterface,
               recentActivityAction: @escaping () -> Void,
               topicWidgetViewModel: TopicsWidgetViewModel) -> UIViewController {
         let viewModel = HomeViewModel(
+            analyticsService: analyticsService,
             configService: configService,
             searchButtonPrimaryAction: searchButtonPrimaryAction,
             recentActivityAction: recentActivityAction,

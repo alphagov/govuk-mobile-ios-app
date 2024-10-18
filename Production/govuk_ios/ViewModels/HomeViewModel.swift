@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 struct HomeViewModel {
+    let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let searchButtonPrimaryAction: (() -> Void)?
     let recentActivityAction: (() -> Void)?
@@ -40,7 +41,13 @@ struct HomeViewModel {
         let title = String.home.localized("searchWidgetTitle")
         let viewModel = WidgetViewModel(
             title: title,
-            primaryAction: searchButtonPrimaryAction
+            primaryAction: {
+                let event = AppEvent.widgetNavigation(
+                    text: "Search"
+                )
+                self.analyticsService.track(event: event)
+                self.searchButtonPrimaryAction?()
+            }
         )
 
         let content = SearchWidgetStackView(

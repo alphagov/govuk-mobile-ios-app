@@ -31,6 +31,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             topicAction: { _ in },
             editAction: { _ in })
         let viewModel = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             searchButtonPrimaryAction: { },
             recentActivityAction: { },

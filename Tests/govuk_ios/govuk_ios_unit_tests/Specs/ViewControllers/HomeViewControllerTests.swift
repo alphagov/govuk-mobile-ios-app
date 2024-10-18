@@ -8,7 +8,6 @@ import Factory
 
 @MainActor
 struct HomeViewControllerTests {
-
     @Test
     func init_hasExpectedValues() {
         let topicsViewModel = TopicsWidgetViewModel(
@@ -18,6 +17,7 @@ struct HomeViewControllerTests {
             editAction: { _ in }
         )
         let viewModel = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             searchButtonPrimaryAction: { () -> Void in _ = true },
             recentActivityAction: { },
@@ -41,6 +41,7 @@ struct HomeViewControllerTests {
             editAction: { _ in }
         )
         let viewModel = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             searchButtonPrimaryAction: { () -> Void in _ = true },
             recentActivityAction: { },

@@ -3,5 +3,5 @@ import UIKit
 
 struct WidgetViewModel {
     let title: String
-    var primaryAction: (() -> Void)?
+    let primaryAction: (() -> Void)?
 }

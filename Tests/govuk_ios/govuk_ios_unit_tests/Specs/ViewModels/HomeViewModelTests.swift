@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import Testing
 
 @testable import govuk_ios
@@ -15,6 +16,7 @@ struct HomeViewModelTests {
             editAction: { _ in }
         )
         let subject = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             searchButtonPrimaryAction: { () -> Void in _ = true },
             recentActivityAction: { },
@@ -38,6 +40,7 @@ struct HomeViewModelTests {
             editAction: { _ in }
         )
         let subject = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: configService,
             searchButtonPrimaryAction: { },
             recentActivityAction: { },
@@ -47,4 +50,5 @@ struct HomeViewModelTests {
 
         #expect(widgets.count == 1)
     }
+
 }

@@ -28,6 +28,7 @@ class HomeCoordinator: TabItemCoordinator {
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.home(
             searchButtonPrimaryAction: searchActionButtonPressed,
+            analyticsService: analyticsService,
             configService: configService,
             recentActivityAction: startRecentActivityCoordinator,
             topicWidgetViewModel: topicWidgetViewModel

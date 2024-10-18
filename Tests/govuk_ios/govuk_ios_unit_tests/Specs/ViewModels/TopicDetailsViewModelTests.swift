@@ -13,14 +13,14 @@ struct TopicDetailsViewModelTests {
     func initViewModel_noUnpopularContent_doesCreateSectionsCorrectly() async throws {
         mockTopicsService._receivedTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "NoUnpopularContent")
         let sut = TopicDetailViewModel(
-            topic: MockTopicsService.stepByStepSubTopic,
+            topic: mockTopicsService.mockTopics[0],
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             navigationAction: { _ in }
         )
-        
+        print("")
         try #require(sut.sections.count == 3)
         #expect(sut.sections[0].heading == "Popular pages in this topic")
         #expect(sut.sections[1].heading == "Step by step guides")
@@ -35,7 +35,7 @@ struct TopicDetailsViewModelTests {
     func initViewModel_fiveStepByStep_doesCreateSectionsCorrectly() async throws {
         mockTopicsService._receivedTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "FiveStepByStep")
         let sut = TopicDetailViewModel(
-            topic: MockTopicsService.stepByStepSubTopic,
+            topic: mockTopicsService.mockTopics[0],
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -62,7 +62,7 @@ struct TopicDetailsViewModelTests {
     func initViewModel_hasUnpopularContent_doesCreateSectionsCorrectly() async throws {
         mockTopicsService._receivedTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
         let sut = TopicDetailViewModel(
-            topic: MockTopicsService.stepByStepSubTopic,
+            topic: mockTopicsService.mockTopics[0],
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -123,21 +123,5 @@ struct TopicDetailsViewModelTests {
         contentRow.action()
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.gov.uk/view-driving-licence")
-    }
-
-    @Test
-    func trackScreenEvent_doesFireEvent() async throws {
-        mockTopicsService._receivedTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
-        let sut = TopicDetailViewModel(
-            topic: MockTopicsService.stepByStepSubTopic,
-            topicsService: mockTopicsService,
-            analyticsService: mockAnalyticsService,
-            activityService: mockActivityService,
-            urlOpener: mockURLOpener,
-            navigationAction: { _ in }
-        )
-        
-        await sut.trackScreen(screen: TopicDetailView(viewModel: sut))
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
     }
 }

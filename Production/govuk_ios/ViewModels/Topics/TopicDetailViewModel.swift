@@ -44,7 +44,7 @@ class TopicDetailViewModel: ObservableObject {
     }
 
     var shouldShowSeeAll: Bool {
-        (stepByStepContent?.count ?? 0) > 0 && !isStepByStepSubtopic
+        (stepByStepContent?.count ?? 0) > 4 && !isStepByStepSubtopic
     }
 
     var isStepByStepSubtopic: Bool {

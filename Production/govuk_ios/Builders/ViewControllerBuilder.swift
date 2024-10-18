@@ -104,11 +104,23 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func topicDetail(topic: Topic,
-                     analyticsService: AnalyticsServiceInterface
+    func topicDetail(topic: DisplayableTopic,
+                     topicsService: TopicsServiceInterface,
+                     analyticsService: AnalyticsServiceInterface,
+                     activityService: ActivityServiceInterface,
+                     navigationAction: @escaping (DisplayableTopic) -> Void
     ) -> UIViewController {
-        var view = TopicDetailView()
-        view.topic = topic
+        let viewModel = TopicDetailViewModel(
+            topic: topic,
+            topicsService: topicsService,
+            analyticsService: analyticsService,
+            activityService: activityService,
+            urlOpener: UIApplication.shared,
+            navigationAction: navigationAction
+        )
+
+        let view = TopicDetailView(viewModel: viewModel)
+
         return HostingViewController(rootView: view)
     }
 

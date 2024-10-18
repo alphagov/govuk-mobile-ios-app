@@ -48,3 +48,5 @@ class Topic: NSManagedObject,
         }
     }
 }
+
+extension Topic: DisplayableTopic {}

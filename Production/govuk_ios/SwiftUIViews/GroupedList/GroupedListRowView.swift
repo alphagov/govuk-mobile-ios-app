@@ -82,6 +82,7 @@ struct NavigationRowView: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text(row.title)
+                        .multilineTextAlignment(.leading)
                         .foregroundColor(
                             Color(
                                 UIColor.govUK.text.primary

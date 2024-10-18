@@ -4,6 +4,12 @@ import  CoreData
 @testable import govuk_ios
 
 class MockActivityService: ActivityServiceInterface {
+    
+    var _receivedSaveTopicContent: TopicDetailResponse.Content?
+    func save(topicContent: TopicDetailResponse.Content) {
+        _receivedSaveTopicContent = topicContent
+    }
+    
     var _receivedSaveSearchItem: SearchItem?
     func save(searchItem: SearchItem) {
         _receivedSaveSearchItem = searchItem

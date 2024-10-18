@@ -2,14 +2,24 @@ import Foundation
 
 protocol TopicsServiceInterface {
     func downloadTopicsList(completion: @escaping FetchTopicsListResult)
+    func fetchTopicDetails(for topicRef: String,
+                           completion: @escaping FetchTopicDetailsResult)
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
     func updateFavoriteTopics()
 }
 
-struct TopicsService: TopicsServiceInterface {
+extension TopicsServiceInterface {
+    static var stepByStepSubTopic: DisplayableTopic {
+        TopicDetailResponse.Subtopic(ref: "stepByStepRef",
+                                     title: String.topics.localized("topicDetailStepByStepHeader"))
+    }
+}
+
+class TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
+    private var currentTopicDetails: TopicDetailResponse?
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          topicsRepository: TopicsRepositoryInterface) {
@@ -18,12 +28,41 @@ struct TopicsService: TopicsServiceInterface {
     }
 
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
-        topicsServiceClient.fetchTopicsList { result in
+        topicsServiceClient.fetchTopicsList { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let topics):
-                    topicsRepository.saveTopicsList(topics)
+                    self?.topicsRepository.saveTopicsList(topics)
                     completion(.success(topics))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+    func fetchTopicDetails(for topicRef: String,
+                           completion: @escaping FetchTopicDetailsResult) {
+        if topicRef == Self.stepByStepSubTopic.ref {
+            if let response = stepByStepDetails() {
+                completion(.success(response))
+            } else {
+                completion(.failure(.missingData))
+            }
+        } else {
+            downloadTopicDetails(for: topicRef,
+                                 completion: completion)
+        }
+    }
+
+    private func downloadTopicDetails(for topicRef: String,
+                                      completion: @escaping FetchTopicDetailsResult) {
+        topicsServiceClient.fetchTopicDetails(for: topicRef) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let topicDetail):
+                    self?.currentTopicDetails = topicDetail
+                    completion(.success(topicDetail))
                 case .failure(let error):
                     completion(.failure(error))
                 }
@@ -41,5 +80,17 @@ struct TopicsService: TopicsServiceInterface {
 
     func updateFavoriteTopics() {
         topicsRepository.saveChanges()
+    }
+
+    private func stepByStepDetails() -> TopicDetailResponse? {
+        guard let currentDetails = currentTopicDetails else { return nil }
+        let stepContent = currentDetails.content.filter { $0.isStepByStep }
+        let stepDetails = TopicDetailResponse(
+            content: stepContent,
+            ref: currentDetails.ref,
+            subtopics: [],
+            title: String.topics.localized("topicDetailStepByStepHeader")
+        )
+        return stepDetails
     }
 }

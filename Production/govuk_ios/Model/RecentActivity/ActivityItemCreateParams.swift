@@ -14,4 +14,11 @@ extension ActivityItemCreateParams {
         self.date = Date()
         self.url = searchItem.link.absoluteString
     }
+
+    init(topicContent: TopicDetailResponse.Content) {
+        self.id = topicContent.url.absoluteString
+        self.title = topicContent.title
+        self.date = Date()
+        self.url = topicContent.url.absoluteString
+    }
 }

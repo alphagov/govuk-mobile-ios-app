@@ -7,4 +7,9 @@ class MockTopicsServiceClient: TopicsServiceClientInterface {
     func fetchTopicsList(completion: @escaping FetchTopicsListResult) {
         _receivedFetchTopicsCompletion = completion
     }
+    var _receivedFetchTopicsDetailsCompletion: FetchTopicDetailsResult?
+    func fetchTopicDetails(for topicRef: String,
+                           completion: @escaping FetchTopicDetailsResult) {
+        _receivedFetchTopicsDetailsCompletion = completion
+    }
 }

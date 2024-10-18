@@ -87,9 +87,10 @@ struct TopicsWidgetViewModelTests {
         testTopic.title = "Title"
         sut.didTapTopic(testTopic)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["type"] as? String == "Widget")
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "test")
     }
-    
+
     @Test
     func didTapEdit_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
@@ -102,6 +103,7 @@ struct TopicsWidgetViewModelTests {
 
         sut.didTapEdit()
         #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["type"] as? String == "Widget")
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "EditTopics")
     }
 

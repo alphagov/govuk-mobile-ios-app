@@ -34,9 +34,8 @@ final class TopicsWidgetViewModel {
 
     func didTapTopic(_ topic: Topic) {
         guard let action = topicAction else { return }
-        let event = AppEvent.buttonNavigation(
-            text: topic.ref,
-            external: false
+        let event = AppEvent.widgetNavigation(
+            text: topic.ref
         )
         analyticsService.track(event: event)
         action(topic)
@@ -46,9 +45,8 @@ final class TopicsWidgetViewModel {
     func didTapEdit() {
         guard let action = editAction else { return }
         let topics = topicsService.fetchAllTopics()
-        let event = AppEvent.buttonNavigation(
-            text: "EditTopics",
-            external: false
+        let event = AppEvent.widgetNavigation(
+            text: "EditTopics"
         )
         analyticsService.track(event: event)
         action(topics)

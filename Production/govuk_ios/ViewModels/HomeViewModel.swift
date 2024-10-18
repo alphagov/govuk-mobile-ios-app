@@ -4,24 +4,44 @@ import UIKit
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
-    let searchButtonPrimaryAction: (() -> Void)?
-    let recentActivityAction: (() -> Void)?
     let topicWidgetViewModel: TopicsWidgetViewModel
+    let searchAction: () -> Void
+    let recentActivityAction: () -> Void
+
     var widgets: [WidgetView] {
         [
             searchWidget,
-            recentlyViewedWidget,
+            recentlyActivityWidget,
             topicsWidget
         ].compactMap { $0 }
     }
-    private var recentlyViewedWidget: WidgetView? {
-        let title = String.home.localized(
-            "recentActivityWidgetLabel"
+
+    private var searchWidget: WidgetView? {
+        guard widgetEnabled(feature: .search)
+        else { return nil }
+
+        let title = String.home.localized("searchWidgetTitle")
+        let viewModel = SearchWidgetViewModel(
+            title: title,
+            action: searchAction
         )
 
-        let viewModel = WidgetViewModel(
+        let content = SearchWidgetStackView(
+            viewModel: viewModel
+        )
+        let widget = WidgetView()
+        widget.addContent(content)
+        return widget
+    }
+
+    private var recentlyActivityWidget: WidgetView? {
+        let title = String.home.localized(
+            "recentActivityWidgetTitle"
+        )
+
+        let viewModel = RecentActivityWidgetViewModel(
             title: title,
-            primaryAction: recentActivityAction
+            action: recentActivityAction
         )
         let content = RecentActivtyWidget(
             viewModel: viewModel
@@ -30,30 +50,6 @@ struct HomeViewModel {
         widget.isAccessibilityElement = true
         widget.accessibilityLabel = content.accessibilityLabel
         widget.accessibilityTraits = content.accessibilityTraits
-        widget.addContent(content)
-        return widget
-    }
-
-    private var searchWidget: WidgetView? {
-        guard widgetEnabled(feature: .search)
-        else { return nil }
-
-        let title = String.home.localized("searchWidgetTitle")
-        let viewModel = WidgetViewModel(
-            title: title,
-            primaryAction: {
-                let event = AppEvent.widgetNavigation(
-                    text: "Search"
-                )
-                self.analyticsService.track(event: event)
-                self.searchButtonPrimaryAction?()
-            }
-        )
-
-        let content = SearchWidgetStackView(
-            viewModel: viewModel
-        )
-        let widget = WidgetView()
         widget.addContent(content)
         return widget
     }

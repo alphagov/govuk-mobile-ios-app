@@ -11,16 +11,15 @@ struct HomeViewModelTests {
     func widgets_returnsArrayOfWidgets() {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            searchButtonPrimaryAction: { () -> Void in _ = true },
-            recentActivityAction: { },
-            topicWidgetViewModel: topicsViewModel
+            topicWidgetViewModel: topicsViewModel,
+            searchAction: { () -> Void in _ = true },
+            recentActivityAction: { }
         )
         let widgets = subject.widgets
 
@@ -35,16 +34,15 @@ struct HomeViewModelTests {
 
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: configService,
-            searchButtonPrimaryAction: { },
-            recentActivityAction: { },
-            topicWidgetViewModel: topicsViewModel
+            topicWidgetViewModel: topicsViewModel,
+            searchAction: { },
+            recentActivityAction: { }
         )
         let widgets = subject.widgets
 

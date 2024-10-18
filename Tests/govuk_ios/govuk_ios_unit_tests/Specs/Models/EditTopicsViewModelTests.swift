@@ -12,7 +12,6 @@ struct EditTopicsViewModelTests {
     func dismissAction_callsDismiss() throws {
         var dismissActionCalled = false
         let sut = EditTopicsViewModel(
-            topics: [],
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             dismissAction: {
@@ -25,9 +24,9 @@ struct EditTopicsViewModelTests {
     }
 
     @Test
-    func initViewModel_doesCreateSectionsCorrectly() throws {
+    func init_withTopics_createsSectionsCorrectly() throws {
+        mockTopicService._stubbedFetchAllTopics = createTopics()
         let sut = EditTopicsViewModel(
-            topics: createTopics(),
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             dismissAction: { }

@@ -36,6 +36,7 @@
 		16D0D03C2CC1790400944D79 /* AllTopicsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D03B2CC178F300944D79 /* AllTopicsCoordinatorTests.swift */; };
 		16D0D03F2CC1944000944D79 /* AllTopicsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D03E2CC1943200944D79 /* AllTopicsViewModelTests.swift */; };
 		16D0D0412CC19ACF00944D79 /* AllTopicsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D0402CC19AC100944D79 /* AllTopicsViewControllerSnapshotTests.swift */; };
+		16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */; };
 		16D17D422CC01C7600E99794 /* TopicRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D17D412CC01C6A00E99794 /* TopicRowView.swift */; };
 		16E5AD432C6D5719000B8B3A /* SearchWidgetStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */; };
 		16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A402C6F8968005E820F /* SearchViewController.swift */; };
@@ -405,6 +406,7 @@
 		16D0D03B2CC178F300944D79 /* AllTopicsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsCoordinatorTests.swift; sourceTree = "<group>"; };
 		16D0D03E2CC1943200944D79 /* AllTopicsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewModelTests.swift; sourceTree = "<group>"; };
 		16D0D0402CC19AC100944D79 /* AllTopicsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		16D17D412CC01C6A00E99794 /* TopicRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRowView.swift; sourceTree = "<group>"; };
 		16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWidgetStackView.swift; sourceTree = "<group>"; };
 		16EE1A402C6F8968005E820F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -1815,6 +1817,7 @@
 		D0F86E1F2CAC3BE000FF2D9E /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */,
 				16D17D412CC01C6A00E99794 /* TopicRowView.swift */,
 				D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */,
 				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
@@ -2253,6 +2256,7 @@
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
+				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				3D887CB82C944861001B1BA2 /* Constants.swift in Sources */,

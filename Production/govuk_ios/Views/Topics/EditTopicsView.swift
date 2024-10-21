@@ -22,11 +22,13 @@ struct EditTopicsView: View {
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
+            viewModel.enableEditMode()
         }
     }
 
     private var doneButton: some View {
         Button(String.topics.localized("doneButtonTitle")) {
+           // viewModel.enableEditMode()
             viewModel.dismissAction()
         }.foregroundColor(Color(UIColor.govUK.text.link))
     }

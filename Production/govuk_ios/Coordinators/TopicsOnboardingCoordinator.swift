@@ -1,0 +1,31 @@
+import UIKit
+import Foundation
+import Factory
+
+class TopicsOnboardingCoordinator: BaseCoordinator {
+    private let viewControllerBuilder: ViewControllerBuilder
+    private let analyticsService: AnalyticsServiceInterface
+    private let topicsService: TopicsServiceInterface
+    private let dismissAction: () -> Void
+
+    init(navigationController: UINavigationController,
+         viewControllerBuilder: ViewControllerBuilder,
+         analyticsService: AnalyticsServiceInterface,
+         topicsService: TopicsServiceInterface,
+         dismissAction: @escaping () -> Void) {
+        self.viewControllerBuilder = viewControllerBuilder
+        self.analyticsService = analyticsService
+        self.topicsService = topicsService
+        self.dismissAction = dismissAction
+        super.init(navigationController: navigationController)
+    }
+
+    override func start(url: URL?) {
+        let viewController = viewControllerBuilder.topicOnboarding(
+            analyticsService: analyticsService,
+            topicsService: topicsService,
+            dismissAction: dismissAction
+        )
+        set(viewController, animated: true)
+    }
+}

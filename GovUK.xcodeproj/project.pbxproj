@@ -93,10 +93,14 @@
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */; };
 		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
+		4ECB0FF62CC296D20021468C /* TopicsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB0FF52CC296D20021468C /* TopicsButtonView.swift */; };
+		4ECB0FFA2CC2D7790021468C /* TopicOnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB0FF92CC2D7790021468C /* TopicOnboardingCard.swift */; };
+		4ECB0FFC2CC589E90021468C /* TopicOnboardingWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB0FFB2CC589E90021468C /* TopicOnboardingWidgetView.swift */; };
 		4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */; };
 		4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */; };
 		4EE920642CC1624B001DD165 /* TopicOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE920632CC1624B001DD165 /* TopicOnboardingViewController.swift */; };
 		4EE920662CC162AC001DD165 /* TopicOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE920652CC162AC001DD165 /* TopicOnboardingViewModel.swift */; };
+		4EE9206C2CC276C7001DD165 /* TopicsOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9206B2CC276C7001DD165 /* TopicsOnboardingCoordinator.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		5D00E9552CA544F200775D2B /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9542CA544F200775D2B /* HostingViewController.swift */; };
 		5D00E9752CA5583400775D2B /* HostingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */; };
@@ -457,8 +461,12 @@
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
+		4ECB0FF52CC296D20021468C /* TopicsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsButtonView.swift; sourceTree = "<group>"; };
+		4ECB0FF92CC2D7790021468C /* TopicOnboardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCard.swift; sourceTree = "<group>"; };
+		4ECB0FFB2CC589E90021468C /* TopicOnboardingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingWidgetView.swift; sourceTree = "<group>"; };
 		4EE920632CC1624B001DD165 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
 		4EE920652CC162AC001DD165 /* TopicOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewModel.swift; sourceTree = "<group>"; };
+		4EE9206B2CC276C7001DD165 /* TopicsOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		5D00E9542CA544F200775D2B /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -1297,6 +1305,7 @@
 				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 				D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */,
+				4EE9206B2CC276C7001DD165 /* TopicsOnboardingCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1789,6 +1798,9 @@
 			children = (
 				D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */,
 				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
+				4ECB0FF52CC296D20021468C /* TopicsButtonView.swift */,
+				4ECB0FF92CC2D7790021468C /* TopicOnboardingCard.swift */,
+				4ECB0FFB2CC589E90021468C /* TopicOnboardingWidgetView.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -2137,6 +2149,7 @@
 				16EE1A452C6F8ED3005E820F /* SearchCoordinator.swift in Sources */,
 				5DC79FB22CA18A9A00014446 /* GovRequest+Search.swift in Sources */,
 				5DF8854B2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift in Sources */,
+				4EE9206C2CC276C7001DD165 /* TopicsOnboardingCoordinator.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
 				D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */,
@@ -2191,6 +2204,7 @@
 				D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */,
 				5DC250682C91D80F009E9E7F /* CrashlyticsClient.swift in Sources */,
 				5D8683972C3430C90024F2D8 /* DeeplinkRoutingComponents.swift in Sources */,
+				4ECB0FFA2CC2D7790021468C /* TopicOnboardingCard.swift in Sources */,
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5D899A202C946F540074C0AD /* UIViewController+Extensions.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
@@ -2224,11 +2238,13 @@
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				3D887CB82C944861001B1BA2 /* Constants.swift in Sources */,
 				5DE2834E2CAC48DC00E95800 /* ActivityItemCreateParams.swift in Sources */,
+				4ECB0FF62CC296D20021468C /* TopicsButtonView.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,
 				4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */,
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
 				5DE970542C297652009D66C4 /* AppEvent.swift in Sources */,
+				4ECB0FFC2CC589E90021468C /* TopicOnboardingWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

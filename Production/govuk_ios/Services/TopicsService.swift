@@ -5,11 +5,13 @@ protocol TopicsServiceInterface {
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
     func updateFavoriteTopics()
+    var editMode: Bool { get set }
 }
 
 struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
+    var editMode: Bool = false
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          topicsRepository: TopicsRepositoryInterface) {

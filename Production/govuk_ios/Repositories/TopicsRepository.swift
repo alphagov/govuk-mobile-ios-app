@@ -71,7 +71,6 @@ struct TopicsRepository: TopicsRepositoryInterface {
         let topic = Topic(context: context)
         topic.ref = topicResponse.ref
         topic.title = topicResponse.title
-        topic.isFavorite = isFavorite
     }
 
     private func fetch(predicate: NSPredicate?,

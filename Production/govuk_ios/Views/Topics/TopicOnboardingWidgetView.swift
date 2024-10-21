@@ -1,32 +1,9 @@
 import UIKit
 
-class TopicsWidgetView: UIView {
+class TopicsOnboardingWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
 
     private var rowCount = 2
-
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.govUK.title3Semibold
-        label.adjustsFontForContentSizeCategory = true
-        label.setContentHuggingPriority(.defaultLow, for: .vertical)
-        label.text = String.home.localized("topicsWidgetTitle")
-        return label
-    }()
-
-    private lazy var editButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(String.common.localized("editButtonTitle"), for: .normal)
-        button.titleLabel?.font = UIFont.govUK.bodySemibold
-        button.addTarget(
-            viewModel,
-            action: #selector(viewModel.didTapEdit),
-            for: .touchUpInside
-        )
-        button.tintColor = UIColor.govUK.text.link
-        button.accessibilityLabel = String.topics.localized("editTopicsTitle")
-        return button
-    }()
 
     private lazy var headerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -69,21 +46,21 @@ class TopicsWidgetView: UIView {
             name: .NSManagedObjectContextDidSave,
             object: nil
         )
-        updateTopics(viewModel.getTopics)
+        updateTopics(viewModel.allTopics)
     }
 
     @objc
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
-            self.updateTopics(self.viewModel.getTopics)
+            self.updateTopics(self.viewModel.allTopics)
         }
     }
 
     private func configureUI() {
-        headerStackView.addArrangedSubview(titleLabel)
-        headerStackView.addArrangedSubview(editButton)
-        headerStackView.accessibilityElements = [titleLabel, editButton]
-        stackView.addArrangedSubview(headerStackView)
+//        headerStackView.addArrangedSubview(titleLabel)
+//        headerStackView.addArrangedSubview(editButton)
+        // headerStackView.accessibilityElements = [titleLabel, editButton]
+       // stackView.addArrangedSubview(headerStackView)
         stackView.addArrangedSubview(cardStackView)
         addSubview(stackView)
     }
@@ -94,11 +71,6 @@ class TopicsWidgetView: UIView {
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: headerStackView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: headerStackView.trailingAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -148,11 +120,11 @@ class TopicsWidgetView: UIView {
         return rowStack
     }
 
-    private func createTopicCard(for topic: Topic) -> TopicCard {
+    private func createTopicCard(for topic: Topic) -> TopicOnboardingCard {
         let topicCardModel = TopicCardModel(topic: topic) {
             self.viewModel.didTapTopic(topic)
         }
-        let topicCard = TopicCard(viewModel: topicCardModel)
+        let topicCard = TopicOnboardingCard(viewModel: topicCardModel)
         topicCard.translatesAutoresizingMaskIntoConstraints = false
         return topicCard
     }
@@ -166,7 +138,7 @@ class TopicsWidgetView: UIView {
         let sizeClass = UITraitCollection.current.verticalSizeClass
         if sizeClass != previousTraitCollection?.verticalSizeClass {
             rowCount = sizeClass == .regular ? 2 : 4
-            updateTopics(viewModel.getTopics)
+            updateTopics(viewModel.allTopics)
         }
     }
 }

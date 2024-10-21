@@ -33,6 +33,17 @@
           }
         }
       }
+    },
+    "topicsOnboardingTitlelabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topics you select will be shown on the app home pages so you can find them more easily"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

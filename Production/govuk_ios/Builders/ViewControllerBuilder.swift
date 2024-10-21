@@ -90,18 +90,6 @@ class ViewControllerBuilder {
         )
     }
 
-     @MainActor
-    func topicOnboarding(analyticsService: AnalyticsService,
-                         topicsViewmodel: TopicsWidgetViewModel) -> UIViewController {
-        let viewModel = TopicOnboardingViewModel(
-            topicWidgetViewModel: topicsViewmodel,
-            analyticsService: analyticsService
-        )
-        return TopicOnboardingViewController(
-            viewModel: viewModel
-        )
-    }
-
     @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface,
                         activityService: ActivityServiceInterface) -> UIViewController {
@@ -140,5 +128,18 @@ class ViewControllerBuilder {
             viewModel: viewModel
         )
         return HostingViewController(rootView: view)
+    }
+
+    @MainActor
+    func topicOnboarding(analyticsService: AnalyticsServiceInterface,
+                         topicsService: TopicsServiceInterface,
+                         dismissAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TopicOnboardingViewModel(
+            analyticsService: analyticsService,
+            topicsService: topicsService,
+            dismissAction: dismissAction
+        )
+
+        return TopicOnboardingViewController(viewModel: viewModel)
     }
 }

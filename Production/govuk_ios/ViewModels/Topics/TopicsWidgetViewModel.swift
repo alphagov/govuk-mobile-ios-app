@@ -13,6 +13,10 @@ final class TopicsWidgetViewModel {
         topicsService.fetchFavoriteTopics()
     }
 
+    var allTopics: [Topic] {
+        topicsService.fetchAllTopics()
+    }
+
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          topicAction: ((Topic) -> Void)?,
@@ -29,6 +33,19 @@ final class TopicsWidgetViewModel {
             if case .failure(let error) = result {
                 self.downloadError = error
             }
+        }
+    }
+
+    var getTopics: [Topic] {
+        if topicsService.fetchFavoriteTopics() == [] {
+            switch topicsService.editMode {
+            case true:
+                return topicsService.fetchFavoriteTopics()
+            default:
+                return topicsService.fetchAllTopics()
+            }
+        } else {
+            return topicsService.fetchFavoriteTopics()
         }
     }
 

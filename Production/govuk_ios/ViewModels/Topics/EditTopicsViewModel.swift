@@ -3,7 +3,7 @@ import Foundation
 final class EditTopicsViewModel: ObservableObject {
     @Published var topics: [Topic]
     private let analyticsService: AnalyticsServiceInterface
-    private let topicsService: TopicsServiceInterface
+    private var topicsService: TopicsServiceInterface
     let sections: [GroupedListSection]
     let dismissAction: () -> Void
 
@@ -46,5 +46,10 @@ final class EditTopicsViewModel: ObservableObject {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
+    }
+
+    func enableEditMode() {
+        // toggle it
+        topicsService.editMode.toggle()
     }
 }

@@ -33,11 +33,14 @@ class AppConfigServiceClient: AppConfigServiceClientInterface {
                         guard let resultData = try? result.get() else {
                             return completion(.failure(.remoteJsonError))
                         }
+
                         let decodedObject = try SignableDecoder().decode(
                             AppConfig.self,
                             from: resultData
                         )
                         completion(.success(decodedObject))
+                    } catch SigningError.invalidSignature {
+                        completion(.failure(.invalidSignatureError))
                     } catch {
                         completion(.failure(.remoteJsonError))
                     }

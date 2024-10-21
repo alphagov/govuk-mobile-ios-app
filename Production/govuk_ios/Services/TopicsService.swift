@@ -5,18 +5,21 @@ protocol TopicsServiceInterface {
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
     func updateFavoriteTopics()
-    var editMode: Bool { get set }
+    func hasEditedTopics() -> Bool
+    func setHasEditedTopics()
 }
 
-struct TopicsService: TopicsServiceInterface {
+class TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
-    var editMode: Bool = false
+    private let userDefaults: UserDefaults
 
     init(topicsServiceClient: TopicsServiceClientInterface,
-         topicsRepository: TopicsRepositoryInterface) {
+         topicsRepository: TopicsRepositoryInterface,
+         userDefaults: UserDefaults) {
         self.topicsServiceClient = topicsServiceClient
         self.topicsRepository = topicsRepository
+        self.userDefaults = userDefaults
     }
 
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
@@ -24,7 +27,7 @@ struct TopicsService: TopicsServiceInterface {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let topics):
-                    topicsRepository.saveTopicsList(topics)
+                    self.topicsRepository.saveTopicsList(topics)
                     completion(.success(topics))
                 case .failure(let error):
                     completion(.failure(error))
@@ -39,6 +42,17 @@ struct TopicsService: TopicsServiceInterface {
 
     func fetchFavoriteTopics() -> [Topic] {
         topicsRepository.fetchFavoriteTopics()
+    }
+
+    func hasEditedTopics() -> Bool {
+        userDefaults.bool(forKey: .hasEditedTopics)
+    }
+
+    func setHasEditedTopics() {
+        userDefaults.set(
+            bool: true,
+            forKey: .hasEditedTopics
+        )
     }
 
     func updateFavoriteTopics() {

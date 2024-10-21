@@ -42,6 +42,7 @@ class TopicOnboardingViewModel: ObservableObject {
         let topicWidgetViewModel = TopicsWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
+            userDefaults: .standard,
             topicAction: { [weak self] topic in
                 self?.selectTopic(topic: topic)
             },
@@ -80,6 +81,7 @@ class TopicOnboardingViewModel: ObservableObject {
         let topicWidgetviewModel = TopicsWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
+            userDefaults: .standard,
             topicAction: { [weak self] topic in
                 self?.selectTopic(topic: topic)
                 // topic.isFavorite = true

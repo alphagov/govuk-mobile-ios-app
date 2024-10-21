@@ -6,6 +6,7 @@ final class TopicsWidgetViewModel {
     private let topicsService: TopicsServiceInterface
     private let topicAction: ((Topic) -> Void)?
     private let editAction: (([Topic]) -> Void)?
+    private let userDefaults: UserDefaults
 
     var downloadError: TopicsListError?
 
@@ -19,9 +20,11 @@ final class TopicsWidgetViewModel {
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         userDefaults: UserDefaults,
          topicAction: ((Topic) -> Void)?,
          editAction: (([Topic]) -> Void)?) {
         self.topicsService = topicsService
+        self.userDefaults = userDefaults
         self.topicAction = topicAction
         self.editAction = editAction
         self.analyticsService = analyticsService
@@ -38,15 +41,19 @@ final class TopicsWidgetViewModel {
 
     var getTopics: [Topic] {
         if topicsService.fetchFavoriteTopics() == [] {
-            switch topicsService.editMode {
+            switch hasEditedTopics {
             case true:
                 return topicsService.fetchFavoriteTopics()
-            default:
+            case false:
                 return topicsService.fetchAllTopics()
             }
         } else {
             return topicsService.fetchFavoriteTopics()
         }
+    }
+
+    var hasEditedTopics: Bool {
+        userDefaults.bool(forKey: .hasEditedTopics)
     }
 
     func didTapTopic(_ topic: Topic) {

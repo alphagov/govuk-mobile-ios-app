@@ -72,6 +72,7 @@ class HomeCoordinator: TabItemCoordinator {
         TopicsWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
+            userDefaults: .standard,
             topicAction: topicAction,
             editAction: editTopicsAction
         )

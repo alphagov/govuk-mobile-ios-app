@@ -15,6 +15,20 @@ class TopicOnboardingCard: UIView {
         return label
     }()
 
+    private lazy var selectedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "select"
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private lazy var selectIcon: UIImageView = {
+        let icon = UIImage(systemName: "plus")
+        let imageView = UIImageView(image: icon)
+        return imageView
+    }()
+
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontForContentSizeCategory = true

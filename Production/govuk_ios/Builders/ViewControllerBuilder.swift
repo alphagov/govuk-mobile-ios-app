@@ -121,6 +121,7 @@ class ViewControllerBuilder {
             topics: topics,
             topicsService: topicsService,
             analyticsService: analyticsService,
+            userDefaults: .standard,
             dismissAction: dismissAction
         )
 

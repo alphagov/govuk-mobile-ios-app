@@ -16,12 +16,18 @@ struct TopicsButtonView: View {
         AdaptiveStack {
             SwiftUIButton(
                 .init(
-                    titleColorNormal: UIColor.govUK.text.buttonPrimary,
-                    titleColorHighlighted: nil,
-                    titleColorFocused: UIColor.govUK.text.buttonPrimaryFocussed,
+                    titleColorNormal: viewModel.isTopicSelected ?
+                    .white : UIColor.govUK.text.secondary,
+                    titleColorHighlighted: .white,
+                    titleColorFocused: .white,
                     titleFont: UIFont.govUK.bodySemibold,
                     backgroundColorNormal: viewModel.isTopicSelected ?
-                    UIColor.govUK.fills.surfaceButtonPrimary : .gray,
+                    UIColor.govUK.fills.surfaceButtonPrimary : UIColor(
+                        resource: ColorResource(
+                            name: "topicOnboardingPrimaryUnselectedBtn",
+                            bundle: .main
+                        )
+                    ),
                     backgroundColorHighlighted: UIColor.govUK.fills.surfaceButtonPrimaryHighlight,
                     backgroundColorFocused: UIColor.govUK.fills.surfaceButtonPrimaryFocussed,
                     cornerRadius: 22,
@@ -45,7 +51,6 @@ struct TopicsButtonView: View {
                     minHeight: 44,
                     idealHeight: 44
                 )
-                // .opacity(viewModel.isLastSlide ? 0 : 1)
         }.padding(.top)
         .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
     }

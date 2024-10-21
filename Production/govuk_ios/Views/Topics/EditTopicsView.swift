@@ -22,7 +22,6 @@ struct EditTopicsView: View {
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
-            viewModel.enableEditMode()
         }
     }
 

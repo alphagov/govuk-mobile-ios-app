@@ -21,6 +21,14 @@ class TopicsOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
+//        guard !topicsService.hasEditedTopics()
+//        else {
+//            return dismissAction()
+//        }
+        setViewController()
+    }
+
+    private func setViewController() {
         let viewController = viewControllerBuilder.topicOnboarding(
             analyticsService: analyticsService,
             topicsService: topicsService,

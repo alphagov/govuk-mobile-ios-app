@@ -10,8 +10,6 @@ class TopicOnboardingViewController: BaseViewController,
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .white
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.sizeToFit()
     }
 
     override func viewWillAppear(_ animated: Bool) {

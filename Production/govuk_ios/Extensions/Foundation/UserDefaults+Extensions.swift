@@ -22,4 +22,5 @@ extension UserDefaults {
 enum UserDefaultsKeys: String {
     case appOnboardingSeen = "govuk_app_onboarding_seen"
     case acceptedAnalytics = "govuk_app_analytics_accepted"
+    case hasEditedTopics = "govuk_app_hasEdited_topics"
 }

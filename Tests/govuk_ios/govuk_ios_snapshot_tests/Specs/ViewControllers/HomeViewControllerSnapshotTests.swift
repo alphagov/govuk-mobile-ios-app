@@ -28,15 +28,15 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         topicService._allTopicsFavourited = allTopicsFavourited
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in },
-            allTopicsAction: { _ in })
+            editAction: { },
+            allTopicsAction: { })
         let viewModel = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            searchButtonPrimaryAction: { },
-            recentActivityAction: { },
-            topicWidgetViewModel: topicsViewModel
+            topicWidgetViewModel: topicsViewModel,
+            searchAction: { },
+            recentActivityAction: { }
         )
         return HomeViewController(viewModel: viewModel)
     }

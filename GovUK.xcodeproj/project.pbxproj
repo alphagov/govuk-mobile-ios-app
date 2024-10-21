@@ -25,7 +25,7 @@
 		1687F3172CB4110D005E1473 /* AllTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */; };
 		168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */; };
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
-		168F6FAA2C4FC56B00A0D7F7 /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* WidgetViewModel.swift */; };
+		168F6FAA2C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */; };
 		168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */; };
 		16ACCF762C6431B300017A11 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */; };
 		16ACCF792C64365600017A11 /* SettingsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */; };
@@ -274,6 +274,7 @@
 		5DD57A5B2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */; };
 		5DD5F0BB2C99D563009F5388 /* String+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */; };
 		5DD5F0BF2C99D74F009F5388 /* TestStrings.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */; };
+		5DD6F3302CC2B937005BC5D3 /* SearchWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F32F2CC2B937005BC5D3 /* SearchWidgetViewModel.swift */; };
 		5DDCF62F2C874AB400A24947 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D6295292C87429000BBB394 /* GOV.xcdatamodeld */; };
 		5DE2834C2CAC484000E95800 /* ActivityServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2834B2CAC484000E95800 /* ActivityServiceTests.swift */; };
 		5DE2834E2CAC48DC00E95800 /* ActivityItemCreateParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */; };
@@ -392,7 +393,7 @@
 		1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewModel.swift; sourceTree = "<group>"; };
 		168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTests.swift; sourceTree = "<group>"; };
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		168F6FA92C4FC56B00A0D7F7 /* WidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewModel.swift; sourceTree = "<group>"; };
+		168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidgetViewModel.swift; sourceTree = "<group>"; };
 		168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		16A220842C7F6FFC007D1AB9 /* MockAppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppConfigService.swift; sourceTree = "<group>"; };
 		16ACCF752C6431B300017A11 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
@@ -633,6 +634,7 @@
 		5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLOpenerTests.swift"; sourceTree = "<group>"; };
 		5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = TestStrings.xcstrings; sourceTree = "<group>"; };
+		5DD6F32F2CC2B937005BC5D3 /* SearchWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWidgetViewModel.swift; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DE2834B2CAC484000E95800 /* ActivityServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityServiceTests.swift; sourceTree = "<group>"; };
 		5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItemCreateParams.swift; sourceTree = "<group>"; };
@@ -1047,11 +1049,12 @@
 				168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */,
 				5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */,
 				5D925B1E2CB7F10700A1E241 /* RecentActivityListViewModel.swift */,
+				168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */,
 				16EE1A422C6F89D9005E820F /* SearchViewModel.swift */,
+				5DD6F32F2CC2B937005BC5D3 /* SearchWidgetViewModel.swift */,
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 				5D41DB5F2C0875520011E691 /* TestViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
-				168F6FA92C4FC56B00A0D7F7 /* WidgetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1259,11 +1262,11 @@
 			isa = PBXGroup;
 			children = (
 				16D0D0402CC19AC100944D79 /* AllTopicsViewControllerSnapshotTests.swift */,
-				D028CCFF2CBD597700742620 /* EditTopicsViewControllerSnapshotTests.swift */,
 				3DEC85A32C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift */,
 				3D9C93412CB017E900EFA337 /* AppForcedUpdateViewControllerSnapshotTests.swift */,
 				3D15E7B92CB576330046CE64 /* AppRecommendUpdateViewControllerSnapshotTests.swift */,
 				3D3378172CAAC179004BF83F /* AppUnavailableViewControllerSnapshotTests.swift */,
+				D028CCFF2CBD597700742620 /* EditTopicsViewControllerSnapshotTests.swift */,
 				168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */,
 				5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */,
 				5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */,
@@ -2104,6 +2107,7 @@
 				5DAC6E5A2C64CDA20099406C /* TrackableScreen.swift in Sources */,
 				5DD036852C5A577C00EEF11E /* NavigationBar.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
+				5DD6F3302CC2B937005BC5D3 /* SearchWidgetViewModel.swift in Sources */,
 				96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */,
 				D04191782CA57A6F0034722A /* TopicsService.swift in Sources */,
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,
@@ -2132,7 +2136,7 @@
 				163800FF2C99DAF900C3DDD1 /* ListInformationView.swift in Sources */,
 				D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */,
 				5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */,
-				168F6FAA2C4FC56B00A0D7F7 /* WidgetViewModel.swift in Sources */,
+				168F6FAA2C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift in Sources */,
 				D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */,
 				16F961A72C989165005CFB04 /* SearchResult.swift in Sources */,
 				5DBE080C2C4812ED00B58DBE /* BaseViewController.swift in Sources */,

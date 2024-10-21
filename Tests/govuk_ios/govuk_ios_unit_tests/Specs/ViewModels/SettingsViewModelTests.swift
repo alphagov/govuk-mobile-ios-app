@@ -30,9 +30,13 @@ struct SettingsViewModelTests {
 
         let aboutTheAppSection = sut.listContent[0]
         #expect(aboutTheAppSection.heading == "About the app")
-        let appVersionRow = try #require(aboutTheAppSection.rows.first as? InformationRow)
-        #expect(appVersionRow.title == "App version number")
-        #expect(appVersionRow.detail == Bundle.main.versionNumber)
+        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
+        #expect(helpAndFeedbackRow.title == "Help and feedback")
+        #expect(helpAndFeedbackRow.isWebLink == true)
+
+        let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
+        #expect(appBundleInformation.title == "App version number")
+        #expect(appBundleInformation.detail == Bundle.main.versionNumber)
 
         let privacySection = sut.listContent[1]
         #expect(privacySection.heading == "Privacy and legal")
@@ -87,5 +91,18 @@ struct SettingsViewModelTests {
         settingsRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(receivedTitle == settingsRow.title)
+    }
+
+    @Test
+    func helpAndFeedback_action_tracksEvent() throws {
+        try #require(sut.listContent.count == 3)
+
+        let aboutTheAppSection = sut.listContent[0]
+        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
+
+        helpAndFeedbackRow.action()
+
+        let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
     }
 }

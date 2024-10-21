@@ -113,7 +113,6 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.editTopics(
-            [Topic](),
             navigationController: mockNavigationController,
             didDismissAction: { }
         )
@@ -126,8 +125,7 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.allTopics(
-            navigationController: mockNavigationController,
-            topics: [Topic()]
+            navigationController: mockNavigationController
         )
 
         #expect(coordinator is AllTopicsCoordinator)

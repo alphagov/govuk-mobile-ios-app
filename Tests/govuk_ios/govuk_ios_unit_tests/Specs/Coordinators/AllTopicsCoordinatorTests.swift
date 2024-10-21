@@ -18,6 +18,7 @@ struct AllTopicsCoordinatorTests {
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockTopicsService = MockTopicsService()
 
         mockViewControllerBuilder._stubbedAllTopicsViewController = expectedViewController
 
@@ -26,7 +27,7 @@ struct AllTopicsCoordinatorTests {
             analyticsService: mockAnalyticsService,
             viewControllerBuilder: mockViewControllerBuilder,
             coordinatorBuilder: mockCoordinatorBuilder,
-            topics: [Topic()]
+            topicsService: mockTopicsService
         )
 
         subject.start()

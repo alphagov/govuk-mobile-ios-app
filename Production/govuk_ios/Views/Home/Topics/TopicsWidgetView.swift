@@ -10,7 +10,7 @@ class TopicsWidgetView: UIView {
             .init(
                 localisedTitle: String.topics.localized("seeAllTopicsButtonText"),
                 action: { [weak self] in
-                    self?.viewModel.didTapSeeAllTopics()
+                    self?.viewModel.allTopicsAction()
                 }
             )
         }
@@ -34,8 +34,8 @@ class TopicsWidgetView: UIView {
         button.setTitle(String.common.localized("editButtonTitle"), for: .normal)
         button.titleLabel?.font = UIFont.govUK.bodySemibold
         button.addTarget(
-            viewModel,
-            action: #selector(viewModel.didTapEdit),
+            self,
+            action: #selector(editButtonPressed),
             for: .touchUpInside
         )
         button.tintColor = UIColor.govUK.text.link
@@ -165,12 +165,20 @@ class TopicsWidgetView: UIView {
     }
 
     private func createTopicCard(for topic: Topic) -> TopicCard {
-        let topicCardModel = TopicCardModel(topic: topic) {
-            self.viewModel.didTapTopic(topic)
-        }
+        let topicCardModel = TopicCardModel(
+            topic: topic,
+            tapAction: { [weak self] in
+                self?.viewModel.topicAction(topic)
+            }
+        )
         let topicCard = TopicCard(viewModel: topicCardModel)
         topicCard.translatesAutoresizingMaskIntoConstraints = false
         return topicCard
+    }
+
+    @objc
+    private func editButtonPressed() {
+        viewModel.editAction()
     }
 
     required init(coder: NSCoder) {

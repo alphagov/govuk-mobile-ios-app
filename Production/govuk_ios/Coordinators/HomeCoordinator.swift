@@ -1,5 +1,5 @@
-import UIKit
 import Foundation
+import UIKit
 
 class HomeCoordinator: TabItemCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
@@ -27,10 +27,11 @@ class HomeCoordinator: TabItemCoordinator {
 
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.home(
-            searchButtonPrimaryAction: searchActionButtonPressed,
+            analyticsService: analyticsService,
             configService: configService,
-            recentActivityAction: startRecentActivityCoordinator,
-            topicWidgetViewModel: topicWidgetViewModel
+            topicWidgetViewModel: topicWidgetViewModel,
+            searchAction: presentSearchCoordinator,
+            recentActivityAction: startRecentActivityCoordinator
         )
         set([viewController], animated: false)
     }
@@ -42,8 +43,9 @@ class HomeCoordinator: TabItemCoordinator {
         )
     }
 
-    private var searchActionButtonPressed: () -> Void {
+    private var presentSearchCoordinator: () -> Void {
         return { [weak self] in
+            self?.trackWidgetNavigation(text: "Search")
             guard let strongSelf = self else { return }
             let navigationController = UINavigationController()
             let coordinator = strongSelf.coordinatorBuilder.search(
@@ -58,9 +60,8 @@ class HomeCoordinator: TabItemCoordinator {
 
     private var startRecentActivityCoordinator: () -> Void {
         return { [weak self] in
+            self?.trackWidgetNavigation(text: "Pages you’ve visited")
             guard let self = self else { return }
-            let navigationEvent = AppEvent.widgetNavigation(text: "Pages you’ve visited widget")
-            analyticsService.track(event: navigationEvent)
             let coordinator = self.coordinatorBuilder.recentActivity(
                 navigationController: self.root
             )
@@ -68,18 +69,9 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var topicWidgetViewModel: TopicsWidgetViewModel {
-        TopicsWidgetViewModel(
-            topicsService: topicsService,
-            analyticsService: analyticsService,
-            topicAction: topicAction,
-            editAction: editTopicsAction,
-            allTopicsAction: allTopicsAction
-        )
-    }
-
-    private var topicAction: (Topic) -> Void {
+    private var startTopicDetailCoordinator: (Topic) -> Void {
         return { [weak self] topic in
+            self?.trackWidgetNavigation(text: topic.ref)
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.topicDetail(
                 topic,
@@ -89,23 +81,23 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var allTopicsAction: ([Topic]) -> Void {
-        return { [weak self] topics in
+    private var startAllTopicsCoordinator: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "See all topics")
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.allTopics(
-                navigationController: self.root,
-                topics: topics
+                navigationController: self.root
             )
             start(coordinator)
         }
     }
 
-    private var editTopicsAction: ([Topic]) -> Void {
-        return { [weak self] topics in
+    private var presentEditTopicsCoordinator: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "EditTopics")
             guard let self = self else { return }
             let navigationController = UINavigationController()
             let coordinator = self.coordinatorBuilder.editTopics(
-                topics,
                 navigationController: navigationController,
                 didDismissAction: {
                     self.root.viewWillReAppear()
@@ -113,5 +105,21 @@ class HomeCoordinator: TabItemCoordinator {
             )
             self.present(coordinator)
         }
+    }
+
+    private var topicWidgetViewModel: TopicsWidgetViewModel {
+        TopicsWidgetViewModel(
+            topicsService: topicsService,
+            topicAction: startTopicDetailCoordinator,
+            editAction: presentEditTopicsCoordinator,
+            allTopicsAction: startAllTopicsCoordinator
+        )
+    }
+
+    private func trackWidgetNavigation(text: String) {
+        let event = AppEvent.widgetNavigation(
+            text: text
+        )
+        analyticsService.track(event: event)
     }
 }

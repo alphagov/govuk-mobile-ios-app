@@ -86,7 +86,8 @@ extension AllTopicsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let topic = viewModel.topics[indexPath.row]
-        viewModel.didTapTopic(topic)
+        viewModel.topicAction(topic)
+        viewModel.trackTopicAction(topic)
     }
 }
 

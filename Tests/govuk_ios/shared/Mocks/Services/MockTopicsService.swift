@@ -6,8 +6,9 @@ class MockTopicsService: TopicsServiceInterface {
     
     let coreData = CoreDataRepository.arrangeAndLoad
     
+    var _stubbedFetchAllTopics: [Topic]?
     func fetchAllTopics() -> [Topic] {
-        mockTopics
+        _stubbedFetchAllTopics ?? mockTopics
     }
 
     var _allTopicsFavourited = true

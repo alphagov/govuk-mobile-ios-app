@@ -2,26 +2,23 @@ import UIKit
 import Foundation
 
 class AllTopicsViewModel {
-    let analyticsService: AnalyticsServiceInterface
-    let topicAction: ((Topic) -> Void)?
-    let topics: [Topic]
-    var downloadError: TopicsListError?
+    private let analyticsService: AnalyticsServiceInterface
+    let topicAction: (Topic) -> Void
+    var topics: [Topic] = []
 
     init(analyticsService: AnalyticsServiceInterface,
          topicAction: @escaping (Topic) -> Void,
-         topics: [Topic]) {
+         topicsService: TopicsServiceInterface) {
         self.analyticsService = analyticsService
         self.topicAction = topicAction
-        self.topics = topics
+        self.topics = topicsService.fetchAllTopics()
     }
 
-    func didTapTopic(_ topic: Topic) {
-        guard let action = topicAction else { return }
+    func trackTopicAction(_ topic: Topic) {
         let event = AppEvent.buttonNavigation(
             text: topic.ref,
             external: false
         )
         analyticsService.track(event: event)
-        action(topic)
     }
 }

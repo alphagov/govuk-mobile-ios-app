@@ -7,7 +7,8 @@
     "releaseFlags": {
       "search": true,
       "onboarding": false,
-      "topics": true
+      "topics": true,
+      "recentActivity" : true
     },
     "lastUpdated": "2024-08-15T09:57:45.110Z"
   },

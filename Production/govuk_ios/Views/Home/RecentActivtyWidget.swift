@@ -2,9 +2,9 @@ import Foundation
 import UIKit
 
 class RecentActivtyWidget: UIControl {
-    private let viewModel: WidgetViewModel
+    private let viewModel: RecentActivityWidgetViewModel
 
-    init(viewModel: WidgetViewModel) {
+    init(viewModel: RecentActivityWidgetViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureUI()
@@ -85,6 +85,6 @@ class RecentActivtyWidget: UIControl {
 
     @objc
     private func recentActivityButtonPressed() {
-        viewModel.primaryAction?()
+        viewModel.action()
     }
 }

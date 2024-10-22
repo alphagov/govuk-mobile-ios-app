@@ -33,9 +33,7 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
                 case .failure:
                     mappedResult = .failure(.remoteJson)
                 case .success(let data):
-                    mappedResult = self.decode(
-                        data: data
-                    )
+                    mappedResult = self.decode(data: data)
                 }
                 completion(mappedResult)
             }

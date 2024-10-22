@@ -169,6 +169,8 @@
 		5D54F4712CC8468D00A3B6A7 /* TopicsWidgetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4702CC8468D00A3B6A7 /* TopicsWidgetViewModelTests.swift */; };
 		5D54F4732CC8473900A3B6A7 /* Topics.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D54F4722CC8473900A3B6A7 /* Topics.xcstrings */; };
 		5D54F4752CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */; };
+		5D54F4772CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4762CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift */; };
+		5D54F4792CC853C800A3B6A7 /* TopicDetailResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4782CC853C800A3B6A7 /* TopicDetailResponseTests.swift */; };
 		5D5A25E22CAD422B0013704A /* SearchItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */; };
 		5D5A25E42CAD435A0013704A /* SearchItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */; };
 		5D5A25E72CAD44800013704A /* SearchItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E62CAD44800013704A /* SearchItemTests.swift */; };
@@ -541,6 +543,8 @@
 		5D54F4702CC8468D00A3B6A7 /* TopicsWidgetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModelTests.swift; sourceTree = "<group>"; };
 		5D54F4722CC8473900A3B6A7 /* Topics.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Topics.xcstrings; sourceTree = "<group>"; };
 		5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailsCoordinator.swift; sourceTree = "<group>"; };
+		5D54F4762CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItemCreateParamsTests.swift; sourceTree = "<group>"; };
+		5D54F4782CC853C800A3B6A7 /* TopicDetailResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailResponseTests.swift; sourceTree = "<group>"; };
 		5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchItem+Arrangers.swift"; sourceTree = "<group>"; };
 		5D5A25E62CAD44800013704A /* SearchItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTests.swift; sourceTree = "<group>"; };
 		5D5B16F62C51480000EA118F /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
@@ -757,8 +761,10 @@
 		1651C6E62C63C57B00864C5C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5D54F4762CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift */,
 				5DCDA1002CA20C7D00A6DF90 /* MonthGroupKeyTests.swift */,
 				5D5A25E62CAD44800013704A /* SearchItemTests.swift */,
+				5D54F4782CC853C800A3B6A7 /* TopicDetailResponseTests.swift */,
 				D0F86E192CAC241400FF2D9E /* TopicTests.swift */,
 			);
 			path = Models;
@@ -2391,6 +2397,7 @@
 				5D0BD45E2C9B23EE00220625 /* MockSearchService.swift in Sources */,
 				5D76A4432C875EA10019DF73 /* Container+NetworkClientsTests.swift in Sources */,
 				5D4F6D3E2CA4175A006D0B5B /* MockAppConfigServiceClient.swift in Sources */,
+				5D54F4792CC853C800A3B6A7 /* TopicDetailResponseTests.swift in Sources */,
 				5DBAA1AF2CA416C400D06C7E /* MockAppConfigRepository.swift in Sources */,
 				5D66D1902CBFE3ED00006723 /* AppEvent+NavigationTests.swift in Sources */,
 				5D37EA132C3E865F006B36CB /* AppCoordinatorTests.swift in Sources */,
@@ -2405,6 +2412,7 @@
 				160EA7592C60D7AB008F97AF /* MockAnalyticsService.swift in Sources */,
 				3D33781A2CAAC2E0004BF83F /* AppUnavailableCoordinatorTests.swift in Sources */,
 				3D9C93442CB01A2E00EFA337 /* AppForcedUpdateContainerViewModelTests.swift in Sources */,
+				5D54F4772CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift in Sources */,
 				5D37EA092C3E865F006B36CB /* AnalyticsServiceTests.swift in Sources */,
 				5DE283512CAC492B00E95800 /* MockActivityRepository.swift in Sources */,
 				5D37EA0D2C3E865F006B36CB /* DeeplinkDataStoreTests.swift in Sources */,

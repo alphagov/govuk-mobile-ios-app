@@ -26,7 +26,7 @@ extension TopicDetailResponse.Subtopic: DisplayableTopic {}
 extension TopicDetailResponse {
     var popularContent: [TopicDetailResponse.Content]? {
         let localContent = content.filter {
-            $0.popular == true && $0.isStepByStep == false
+            $0.popular && !$0.isStepByStep
         }
 
         guard localContent.count > 0
@@ -36,7 +36,7 @@ extension TopicDetailResponse {
     }
 
     var stepByStepContent: [TopicDetailResponse.Content]? {
-        let localContent = content.filter { $0.isStepByStep == true }
+        let localContent = content.filter { $0.isStepByStep }
         guard localContent.count > 0
         else { return nil }
         return localContent
@@ -44,7 +44,7 @@ extension TopicDetailResponse {
 
     var otherContent: [TopicDetailResponse.Content]? {
         let otherContent = content.filter {
-            $0.isStepByStep == false && $0.popular == false
+            !$0.isStepByStep && !$0.popular
         }
         guard otherContent.count > 0
         else { return nil }

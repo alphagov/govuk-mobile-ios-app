@@ -24,6 +24,27 @@ struct AppConfigServiceTests {
     }
 
     @Test
+    func fetchAppConfig_invalidSignatureError_setsForUpdate() {
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(.failure(.invalidSignatureError))
+
+        #expect(sut.isAppForcedUpdate)
+    }
+
+    @Test
+    func fetchAppConfig_loadJsonError_setsAppUnavailable() {
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(.failure(.loadJsonError))
+
+        #expect(!sut.isAppAvailable)
+    }
+
+    @Test
+    func fetchAppConfig_remoteJsonError_returnsError() {
+        mockAppConfigRepository._receivedFetchAppConfigCompletion?(.failure(.remoteJsonError))
+
+        #expect(!sut.isAppAvailable)
+    }
+
+    @Test
     func repository_isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() {
         let result = Config.arrange(releaseFlags: ["search": true]).toResult()
         mockAppConfigRepository._receivedFetchAppConfigCompletion?(result)

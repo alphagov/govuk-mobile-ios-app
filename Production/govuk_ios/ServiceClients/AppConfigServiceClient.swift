@@ -6,11 +6,14 @@ protocol AppConfigServiceClientInterface {
     func fetchAppConfig(completion: @escaping FetchAppConfigResult)
 }
 
-class AppConfigServiceClient: AppConfigServiceClientInterface {
+struct AppConfigServiceClient: AppConfigServiceClientInterface {
     private let serviceClient: APIServiceClientInterface
+    private let decoder: SignableDecoder
 
-    init(serviceClient: APIServiceClientInterface) {
+    init(serviceClient: APIServiceClientInterface,
+         decoder: SignableDecoder) {
         self.serviceClient = serviceClient
+        self.decoder = decoder
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigResult) {
@@ -25,27 +28,31 @@ class AppConfigServiceClient: AppConfigServiceClientInterface {
         serviceClient.send(
             request: fetchRequest,
             completion: { result in
+                let mappedResult: Result<AppConfig, AppConfigError>
                 switch result {
                 case .failure:
-                    completion(.failure(.remoteJsonError))
-                case .success:
-                    do {
-                        guard let resultData = try? result.get() else {
-                            return completion(.failure(.remoteJsonError))
-                        }
-
-                        let decodedObject = try SignableDecoder().decode(
-                            AppConfig.self,
-                            from: resultData
-                        )
-                        completion(.success(decodedObject))
-                    } catch SigningError.invalidSignature {
-                        completion(.failure(.invalidSignatureError))
-                    } catch {
-                        completion(.failure(.remoteJsonError))
-                    }
+                    mappedResult = .failure(.remoteJsonError)
+                case .success(let data):
+                    mappedResult = self.decode(
+                        data: data
+                    )
                 }
+                completion(mappedResult)
             }
         )
+    }
+
+    private func decode(data: Data) -> Result<AppConfig, AppConfigError> {
+        do {
+            let result = try self.decoder.decode(
+                AppConfig.self,
+                from: data
+            )
+            return .success(result)
+        } catch SigningError.invalidSignature {
+            return .failure(.invalidSignatureError)
+        } catch {
+            return .failure(.remoteJsonError)
+        }
     }
 }

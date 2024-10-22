@@ -30,15 +30,13 @@ public final class AppConfigService: AppConfigServiceInterface {
         appConfigRepository.fetchAppConfig(
             filename: ConfigStrings.filename.rawValue,
             completion: { [weak self] result in
-                guard let self = self else { return }
-                self.handleResult(result)
+                self?.handleResult(result)
             }
         )
 
         appConfigServiceClient.fetchAppConfig(
             completion: { [weak self] result in
-                guard let self = self else { return }
-                self.handleResult(result)
+                self?.handleResult(result)
                 completion()
             }
         )

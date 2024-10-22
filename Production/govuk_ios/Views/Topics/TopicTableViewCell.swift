@@ -15,7 +15,6 @@ class TopicTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-
         self.topicCard.subviews.forEach({ $0.removeFromSuperview() })
     }
 

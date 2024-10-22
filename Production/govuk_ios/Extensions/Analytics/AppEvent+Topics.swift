@@ -28,9 +28,9 @@ extension AppEvent {
             type: "Button",
             external: false,
             additionalParams: [
-                "section": subtopic.title ==
-                    TopicsService.stepByStepSubTopic.title ? "Step by steps" : "Sub topics"
-            ])
+                "section": "Sub topics"
+            ]
+        )
     }
 
     private static func sectionNameForContent(_ content: TopicDetailResponse.Content) -> String {
@@ -41,9 +41,5 @@ extension AppEvent {
             return "Popular"
         }
         return "Services and information"
-    }
-
-    private static func sectionNameForSubtopic(_ subtopic: TopicDetailResponse.Subtopic) -> String {
-        subtopic.title == TopicsService.stepByStepSubTopic.title ? "Step by Steps" : "Sub topics"
     }
 }

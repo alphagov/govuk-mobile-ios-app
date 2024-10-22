@@ -68,7 +68,7 @@ struct TopicsServiceTests {
 
     @Test
     func fetchTopicDetails_success_returnsExpectedData() async {
-        let result = await withCheckedContinuation { continuation in
+        _ = await withCheckedContinuation { continuation in
             sut.fetchTopicDetails(
                 topicRef: "test_ref",
                 completion: { result in
@@ -84,20 +84,4 @@ struct TopicsServiceTests {
         //        #expect(topicsRepository._didCallSaveTopicsList == true)
     }
 
-    @Test
-    func fetchTopicDetails_stepByStepSubTopicRef_returnsExpectedData() async {
-        let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(
-                topicRef: TopicsService.stepByStepSubTopic.ref,
-                completion: { result in
-                    continuation.resume(returning: result)
-                }
-            )
-            mockTopicsServiceClient._receivedFetchTopicsDetailsCompletion?(
-                .success(.init(content: [], ref: "", subtopics: [], title: ""))
-            )
-        }
-        #expect(mockTopicsServiceClient._receivedFetchTopicsDetailsTopicRef == nil)
-    }
 }
-

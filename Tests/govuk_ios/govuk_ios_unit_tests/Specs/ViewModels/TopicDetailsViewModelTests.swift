@@ -18,7 +18,8 @@ struct TopicDetailsViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            navigationAction: { _ in }
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
         )
         print("")
         try #require(sut.sections.count == 3)
@@ -40,7 +41,8 @@ struct TopicDetailsViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            navigationAction: { _ in }
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
         )
         
         try #require(sut.sections.count == 3)
@@ -67,7 +69,8 @@ struct TopicDetailsViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            navigationAction: { _ in }
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
         )
         
         try #require(sut.sections.count == 4)
@@ -88,14 +91,15 @@ struct TopicDetailsViewModelTests {
         var didNavigate = false
         mockTopicsService._receivedTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
         let sut = TopicDetailViewModel(
-            topic: MockTopicsService.stepByStepSubTopic,
+            topic: MockDisplayableTopic(),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            navigationAction: { _ in
+            subtopicAction: { _ in
                 didNavigate = true
-            }
+            },
+            stepByStepAction: { _ in }
         )
         
         try #require(sut.sections.count == 4)
@@ -110,12 +114,13 @@ struct TopicDetailsViewModelTests {
     func tappingContent_doesFireLinkEvent() async throws {
         mockTopicsService._receivedTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
         let sut = TopicDetailViewModel(
-            topic: MockTopicsService.stepByStepSubTopic,
+            topic: MockDisplayableTopic(),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            navigationAction: { _ in }
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
         )
         
         try #require(sut.sections.count == 4)

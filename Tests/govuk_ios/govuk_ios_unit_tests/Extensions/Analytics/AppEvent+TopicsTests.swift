@@ -63,10 +63,9 @@ struct AppEvent_TopicsTests {
         #expect(result.params?["url"] as? String == expectedURL.absoluteString)
     }
     
-    @Test(arguments:[TopicsService.stepByStepSubTopic.title, "Driving"])
+    @Test(arguments: ["Test", "Driving"])
     func subtopicNavigation_returnsExpectedResult(title: String) {
         let expectedTitle = title
-        let isStepByStep = (title == TopicsService.stepByStepSubTopic.title)
         let content = TopicDetailResponse.Subtopic(ref: "testRef", title: title)
         let result = AppEvent.subtopicNavigation(subtopic: content)
         print("")
@@ -75,7 +74,7 @@ struct AppEvent_TopicsTests {
         #expect(result.params?["language"] as? String == "en")
         #expect(result.params?["text"] as? String == expectedTitle)
         #expect(result.params?["type"] as? String == "Button")
-        #expect(result.params?["section"] as? String == (isStepByStep ? "Step by steps" : "Sub topics"))
+        #expect(result.params?["section"] as? String == "Sub topics")
     }
 }
 

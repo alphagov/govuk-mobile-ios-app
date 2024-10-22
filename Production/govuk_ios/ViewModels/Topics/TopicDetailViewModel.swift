@@ -8,8 +8,12 @@ protocol TopicDetailViewModelInterface: ObservableObject {
 }
 
 class TopicDetailViewModel: TopicDetailViewModelInterface {
-    @Published var topicDetail: TopicDetailResponse?
-    @Published var error: TopicsServiceError?
+    private var topicDetail: TopicDetailResponse?
+    private var error: TopicsServiceError?
+
+    @Published private(set) var sections = [GroupedListSection]()
+
+    private var topic: DisplayableTopic
 
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
@@ -18,103 +22,19 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private let subtopicAction: (DisplayableTopic) -> Void
     private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
 
-    var topic: DisplayableTopic
-    var sections = [GroupedListSection]()
-
     var title: String {
         topic.title
     }
+    var shouldHideHeading: Bool { false }
 
-    var popularContent: [TopicDetailResponse.Content]? {
-        guard let popularContent = (topicDetail?.content.filter { $0.popular == true
-            && $0.isStepByStep == false }),
-              popularContent.count > 0
-        else { return nil }
-        return popularContent
+    private var shouldShowSeeAll: Bool {
+        (topicDetail?.stepByStepContent?.count ?? 0) > 4
     }
 
-    var stepByStepContent: [TopicDetailResponse.Content]? {
-        guard let stepByStepContent = (topicDetail?.content.filter { $0.isStepByStep == true }),
-              stepByStepContent.count > 0
-        else { return nil }
-        return stepByStepContent + [
-            .init(
-                description: "test1",
-                isStepByStep: true,
-                popular: false,
-                title: "test1",
-                url: URL(string: "www.test.com")!
-            ),
-            .init(
-                description: "test2",
-                isStepByStep: true,
-                popular: false,
-                title: "test2",
-                url: URL(string: "www.test.com")!
-            ),
-            .init(
-                description: "test3",
-                isStepByStep: true,
-                popular: false,
-                title: "test3",
-                url: URL(string: "www.test.com")!
-            ),
-            .init(
-                description: "test4",
-                isStepByStep: true,
-                popular: false,
-                title: "test4",
-                url: URL(string: "www.test.com")!
-            ),
-            .init(
-                description: "test5",
-                isStepByStep: true,
-                popular: false,
-                title: "test5",
-                url: URL(string: "www.test.com")!
-            )
-        ]
-    }
-
-    var otherContent: [TopicDetailResponse.Content]? {
-        guard let otherContent = (topicDetail?.content.filter {
-            $0.isStepByStep == false && $0.popular == false
-        }),
-              otherContent.count > 0
-        else { return nil }
-        return otherContent
-    }
-
-    var subtopics: [TopicDetailResponse.Subtopic]? {
-        guard let subs = topicDetail?.subtopics,
-              subs.count > 0
-        else { return nil }
-        return subs
-    }
-
-    var shouldShowSeeAll: Bool {
-        (stepByStepContent?.count ?? 0) > 4 && !isStepByStepSubtopic
-    }
-
-    private var isStepByStepSubtopic: Bool {
-        topic.ref == TopicsService.stepByStepSubTopic.ref
-    }
-
-    var subtopicsHeading: String? {
-        if shouldHideHeading {
-            return nil
-        }
-        if topic is TopicDetailResponse.Subtopic {
-            return String.topics.localized("subtopicDetailSubtopicsHeader")
-        }
-        return String.topics.localized("topicDetailSubtopicsHeader")
-    }
-
-    var shouldHideHeading: Bool {
-        isStepByStepSubtopic || [popularContent,
-                                 stepByStepContent,
-                                 otherContent]
-            .compactMap { $0 }.isEmpty
+    private var subtopicsHeading: String? {
+        topic is TopicDetailResponse.Subtopic ?
+        String.topics.localized("subtopicDetailSubtopicsHeader") :
+        String.topics.localized("topicDetailSubtopicsHeader")
     }
 
     init(topic: DisplayableTopic,
@@ -132,11 +52,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         self.stepByStepAction = stepByStepAction
         self.topic = topic
 
-        self.fetchTopicDetails(topicRef: topic.ref)
-    }
-
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
+        fetchTopicDetails(topicRef: topic.ref)
     }
 
     private func fetchTopicDetails(topicRef: String) {
@@ -152,52 +68,53 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func configureSections() {
-        sections = [createPopularContentSection(),
-                    createStepByStepSection(),
-                    createOtherContentSection(),
-                    createSubtopicsSection()
+        sections = [
+            createPopularContentSection(),
+            createStepByStepSection(),
+            createOtherContentSection(),
+            createSubtopicsSection()
         ].compactMap { $0 }
     }
 
     private func createPopularContentSection() -> GroupedListSection? {
-        guard let popularContent else { return nil }
+        guard let content = topicDetail?.popularContent else { return nil }
         return GroupedListSection(
             heading: String.topics.localized("topicDetailPopularPagesHeader"),
-            rows: popularContent.map { createContentRow($0) },
+            rows: content.map { createContentRow($0) },
             footer: nil
         )
     }
 
     private func createStepByStepSection() -> GroupedListSection? {
-        guard let stepByStepContent else { return nil }
+        guard let stepBySteps = topicDetail?.stepByStepContent
+        else { return nil }
         var rows = [GroupedListRow]()
         if shouldShowSeeAll {
-            rows = Array(stepByStepContent.map { createContentRow($0) }.prefix(3))
+            rows = Array(stepBySteps.map { createContentRow($0) }.prefix(3))
             let seeAllRow = NavigationRow(
-                id: "seeAllRow",
+                id: "topic.stepbystep.showall",
                 title: String.topics.localized("topicDetailSeeAllRowTitle"),
                 body: nil,
                 action: { [weak self] in
-                    let localStepBySteps = self?.stepByStepContent ?? []
-                    self?.stepByStepAction(localStepBySteps)
-                    self?.trackSubtopicNavigationEvent(TopicsService.stepByStepSubTopic)
+                    self?.stepByStepAction(stepBySteps)
                 }
             )
             rows.append(seeAllRow)
         } else {
-            rows = stepByStepContent.map { createContentRow($0) }
+            rows = stepBySteps.map { createContentRow($0) }
         }
 
         return GroupedListSection(
-            heading:
-                (shouldHideHeading ? nil : String.topics.localized("topicDetailStepByStepHeader")),
+            heading: String.topics.localized("topicDetailStepByStepHeader"),
             rows: rows,
             footer: nil
         )
     }
 
     private func createSubtopicsSection() -> GroupedListSection? {
-        guard let subtopics else { return nil }
+        guard let subtopics = topicDetail?.subtopics,
+              subtopics.count > 0
+        else { return nil }
         return GroupedListSection(
             heading: subtopicsHeading,
             rows: subtopics.map { createSubtopicRow($0) },
@@ -206,10 +123,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func createOtherContentSection() -> GroupedListSection? {
-        guard let otherContent else { return nil }
+        guard let content = topicDetail?.otherContent
+        else { return nil }
         return GroupedListSection(
             heading: String.topics.localized("topicDetailOtherContentHeader"),
-            rows: otherContent.map { createContentRow($0) },
+            rows: content.map { createContentRow($0) },
             footer: nil
         )
     }
@@ -233,11 +151,15 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             id: content.ref,
             title: content.title,
             body: nil,
-            action: {
-                self.trackSubtopicNavigationEvent(content)
-                self.subtopicAction(content)
+            action: { [weak self] in
+                self?.trackSubtopicNavigationEvent(content)
+                self?.subtopicAction(content)
             }
         )
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
     }
 
     private func trackLinkEvent(_ content: TopicDetailResponse.Content) {
@@ -245,8 +167,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         analyticsService.track(event: event)
     }
 
-    private func trackSubtopicNavigationEvent(_ subtopic: DisplayableTopic) {
-        guard let subtopic = subtopic as? TopicDetailResponse.Subtopic else { return }
+    private func trackSubtopicNavigationEvent(_ subtopic: TopicDetailResponse.Subtopic) {
         let event = AppEvent.subtopicNavigation(subtopic: subtopic)
         analyticsService.track(event: event)
     }

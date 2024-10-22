@@ -20,8 +20,8 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         String.topics.localized("topicDetailStepByStepHeader")
     }
 
-    var shouldHideHeading: Bool {
-        true
+    var shouldShowDescription: Bool {
+        false
     }
 
     var sections: [GroupedListSection] {
@@ -50,7 +50,7 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
     }
 
     private func openContent(content: TopicDetailResponse.Content) {
-        if urlOpener.openIfPossible(content.url) == true {
+        if urlOpener.openIfPossible(content.url) {
             activityService.save(topicContent: content)
             trackLinkEvent(content)
         }

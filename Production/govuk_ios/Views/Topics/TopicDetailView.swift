@@ -14,7 +14,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 .ignoresSafeArea()
             VStack {
                 ScrollView {
-                    if !viewModel.shouldHideHeading {
+                    if viewModel.shouldShowDescription {
                         descripitonView
                     }
                     GroupedList(

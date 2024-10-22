@@ -9,7 +9,7 @@ protocol TopicsServiceInterface {
     func updateFavoriteTopics()
 }
 
-class TopicsService: TopicsServiceInterface {
+struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
 
@@ -21,10 +21,10 @@ class TopicsService: TopicsServiceInterface {
 
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
         topicsServiceClient.fetchTopicsList(
-            completion: { [weak self] result in
+            completion: { result in
                 switch result {
                 case .success(let topics):
-                    self?.topicsRepository.saveTopicsList(topics)
+                    topicsRepository.saveTopicsList(topics)
                     completion(.success(topics))
                 case .failure(let error):
                     completion(.failure(error))

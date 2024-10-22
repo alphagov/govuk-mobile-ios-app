@@ -2,17 +2,15 @@ import Foundation
 
 protocol TopicDetailViewModelInterface: ObservableObject {
     var title: String { get }
-    var shouldHideHeading: Bool { get }
+    var shouldShowDescription: Bool { get }
     var sections: [GroupedListSection] { get }
     func trackScreen(screen: TrackableScreen)
 }
 
 class TopicDetailViewModel: TopicDetailViewModelInterface {
+    @Published private(set) var sections = [GroupedListSection]()
     private var topicDetail: TopicDetailResponse?
     private var error: TopicsServiceError?
-
-    @Published private(set) var sections = [GroupedListSection]()
-
     private var topic: DisplayableTopic
 
     private let topicsService: TopicsServiceInterface
@@ -25,11 +23,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     var title: String {
         topic.title
     }
-    var shouldHideHeading: Bool { false }
-
-    private var shouldShowSeeAll: Bool {
-        (topicDetail?.stepByStepContent?.count ?? 0) > 4
-    }
+    var shouldShowDescription: Bool { true }
 
     private var subtopicsHeading: String? {
         topic is TopicDetailResponse.Subtopic ?
@@ -89,8 +83,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         guard let stepBySteps = topicDetail?.stepByStepContent
         else { return nil }
         var rows = [GroupedListRow]()
-        if shouldShowSeeAll {
-            rows = Array(stepBySteps.map { createContentRow($0) }.prefix(3))
+        if stepBySteps.count > 3 {
+            rows = Array(stepBySteps.prefix(3)).map { createContentRow($0) }
             let seeAllRow = NavigationRow(
                 id: "topic.stepbystep.showall",
                 title: String.topics.localized("topicDetailSeeAllRowTitle"),

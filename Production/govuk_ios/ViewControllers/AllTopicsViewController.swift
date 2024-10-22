@@ -71,7 +71,8 @@ class AllTopicsViewController: BaseViewController, TrackableScreen {
     }
 }
 
-extension AllTopicsViewController: UITableViewDelegate, UITableViewDataSource {
+extension AllTopicsViewController: UITableViewDelegate,
+                                   UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TopicTableViewCell = tableView.dequeue(indexPath: indexPath)
         cell.configure(topic: viewModel.topics[indexPath.row], viewModel: viewModel)

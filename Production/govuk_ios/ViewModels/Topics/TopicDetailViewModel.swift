@@ -1,6 +1,13 @@
 import Foundation
 
-class TopicDetailViewModel: ObservableObject {
+protocol TopicDetailViewModelInterface: ObservableObject {
+    var title: String { get }
+    var shouldHideHeading: Bool { get }
+    var sections: [GroupedListSection] { get }
+    func trackScreen(screen: TrackableScreen)
+}
+
+class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published var topicDetail: TopicDetailResponse?
     @Published var error: TopicsServiceError?
 
@@ -8,10 +15,15 @@ class TopicDetailViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let activityService: ActivityServiceInterface
     private let urlOpener: URLOpener
-    private let navigationAction: (DisplayableTopic) -> Void
+    private let subtopicAction: (DisplayableTopic) -> Void
+    private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
 
     var topic: DisplayableTopic
     var sections = [GroupedListSection]()
+
+    var title: String {
+        topic.title
+    }
 
     var popularContent: [TopicDetailResponse.Content]? {
         guard let popularContent = (topicDetail?.content.filter { $0.popular == true
@@ -25,7 +37,43 @@ class TopicDetailViewModel: ObservableObject {
         guard let stepByStepContent = (topicDetail?.content.filter { $0.isStepByStep == true }),
               stepByStepContent.count > 0
         else { return nil }
-        return stepByStepContent
+        return stepByStepContent + [
+            .init(
+                description: "test1",
+                isStepByStep: true,
+                popular: false,
+                title: "test1",
+                url: URL(string: "www.test.com")!
+            ),
+            .init(
+                description: "test2",
+                isStepByStep: true,
+                popular: false,
+                title: "test2",
+                url: URL(string: "www.test.com")!
+            ),
+            .init(
+                description: "test3",
+                isStepByStep: true,
+                popular: false,
+                title: "test3",
+                url: URL(string: "www.test.com")!
+            ),
+            .init(
+                description: "test4",
+                isStepByStep: true,
+                popular: false,
+                title: "test4",
+                url: URL(string: "www.test.com")!
+            ),
+            .init(
+                description: "test5",
+                isStepByStep: true,
+                popular: false,
+                title: "test5",
+                url: URL(string: "www.test.com")!
+            )
+        ]
     }
 
     var otherContent: [TopicDetailResponse.Content]? {
@@ -48,7 +96,7 @@ class TopicDetailViewModel: ObservableObject {
         (stepByStepContent?.count ?? 0) > 4 && !isStepByStepSubtopic
     }
 
-    var isStepByStepSubtopic: Bool {
+    private var isStepByStepSubtopic: Bool {
         topic.ref == TopicsService.stepByStepSubTopic.ref
     }
 
@@ -74,12 +122,14 @@ class TopicDetailViewModel: ObservableObject {
          analyticsService: AnalyticsServiceInterface,
          activityService: ActivityServiceInterface,
          urlOpener: URLOpener,
-         navigationAction: @escaping (DisplayableTopic) -> Void) {
+         subtopicAction: @escaping (DisplayableTopic) -> Void,
+         stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.activityService = activityService
         self.urlOpener = urlOpener
-        self.navigationAction = navigationAction
+        self.subtopicAction = subtopicAction
+        self.stepByStepAction = stepByStepAction
         self.topic = topic
 
         self.fetchTopicDetails(topicRef: topic.ref)
@@ -127,9 +177,10 @@ class TopicDetailViewModel: ObservableObject {
                 id: "seeAllRow",
                 title: String.topics.localized("topicDetailSeeAllRowTitle"),
                 body: nil,
-                action: {
-                    self.navigationAction(TopicsService.stepByStepSubTopic)
-                    self.trackSubtopicNavigationEvent(TopicsService.stepByStepSubTopic)
+                action: { [weak self] in
+                    let localStepBySteps = self?.stepByStepContent ?? []
+                    self?.stepByStepAction(localStepBySteps)
+                    self?.trackSubtopicNavigationEvent(TopicsService.stepByStepSubTopic)
                 }
             )
             rows.append(seeAllRow)
@@ -184,7 +235,7 @@ class TopicDetailViewModel: ObservableObject {
             body: nil,
             action: {
                 self.trackSubtopicNavigationEvent(content)
-                self.navigationAction(content)
+                self.subtopicAction(content)
             }
         )
     }

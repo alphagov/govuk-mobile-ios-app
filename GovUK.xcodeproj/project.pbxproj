@@ -266,6 +266,7 @@
 		5DD57A5B2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */; };
 		5DD5F0BB2C99D563009F5388 /* String+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */; };
 		5DD5F0BF2C99D74F009F5388 /* TestStrings.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */; };
+		5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */; };
 		5DDCF62F2C874AB400A24947 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D6295292C87429000BBB394 /* GOV.xcdatamodeld */; };
 		5DE2834C2CAC484000E95800 /* ActivityServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2834B2CAC484000E95800 /* ActivityServiceTests.swift */; };
 		5DE2834E2CAC48DC00E95800 /* ActivityItemCreateParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */; };
@@ -624,6 +625,7 @@
 		5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLOpenerTests.swift"; sourceTree = "<group>"; };
 		5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = TestStrings.xcstrings; sourceTree = "<group>"; };
+		5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepByStepsViewModel.swift; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DE2834B2CAC484000E95800 /* ActivityServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityServiceTests.swift; sourceTree = "<group>"; };
 		5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItemCreateParams.swift; sourceTree = "<group>"; };
@@ -1781,10 +1783,11 @@
 		D05AF4DD2CAD3C5500F86DD0 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
-				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
-				D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */,
 				D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */,
+				5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */,
+				D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */,
 				D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */,
+				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -2232,6 +2235,7 @@
 				5DB6AD312CA1B94400E92F4C /* DateFormatter+Convenience.swift in Sources */,
 				1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
+				5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */,
 				D04191802CA595400034722A /* TopicResponseItem.swift in Sources */,
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,

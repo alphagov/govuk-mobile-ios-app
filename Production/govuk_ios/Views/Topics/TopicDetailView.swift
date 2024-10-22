@@ -1,10 +1,10 @@
 import SwiftUI
 import UIComponents
 
-struct TopicDetailView: View {
-    @StateObject var viewModel: TopicDetailViewModel
+struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
+    @StateObject var viewModel: T
 
-    init(viewModel: TopicDetailViewModel) {
+    init(viewModel: T) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -25,8 +25,6 @@ struct TopicDetailView: View {
                 }
             }
         }
-        .navigationTitle(viewModel.topic.title)
-        .navigationBarTitleDisplayMode(viewModel.isStepByStepSubtopic ? .inline : .large)
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
@@ -34,7 +32,7 @@ struct TopicDetailView: View {
 
     private var descripitonView: some View {
         HStack {
-            Text(viewModel.topic.title)
+            Text(viewModel.title)
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, 16)
             Spacer()
@@ -43,6 +41,6 @@ struct TopicDetailView: View {
 }
 
 extension TopicDetailView: TrackableScreen {
-    var trackingTitle: String? { viewModel.topic.title }
-    var trackingName: String { viewModel.topic.title }
+    var trackingTitle: String? { viewModel.title }
+    var trackingName: String { viewModel.title }
 }

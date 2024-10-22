@@ -22,24 +22,35 @@ final class TopicDetailsCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.topicDetail(
-            topic: topic,
-            topicsService: topicsService,
-            analyticsService: analyticsService,
-            activityService: activityService,
-            navigationAction: goToSubtopic
-        )
-        push(viewController, animated: true)
+        pushTopic(topic)
     }
 
-    func goToSubtopic(_ topic: DisplayableTopic) {
-        let viewController = viewControllerBuilder.topicDetail(
-            topic: topic,
-            topicsService: topicsService,
-            analyticsService: analyticsService,
-            activityService: activityService,
-            navigationAction: goToSubtopic
-        )
-        push(viewController, animated: true)
+    private var pushTopic: (DisplayableTopic) -> Void {
+        return { [weak self] localTopic in
+            guard let self = self
+            else { return }
+            let viewController = self.viewControllerBuilder.topicDetail(
+                topic: localTopic,
+                topicsService: self.topicsService,
+                analyticsService: self.analyticsService,
+                activityService: self.activityService,
+                subtopicAction: self.pushTopic,
+                stepByStepAction: self.pushStepBySteps
+            )
+            self.push(viewController, animated: true)
+        }
+    }
+
+    private var pushStepBySteps: ([TopicDetailResponse.Content]) -> Void {
+        return { [weak self] localContent in
+            guard let self = self
+            else { return }
+            let viewController = self.viewControllerBuilder.stepByStep(
+                content: localContent,
+                analyticsService: self.analyticsService,
+                activityService: self.activityService
+            )
+            self.push(viewController, animated: true)
+        }
     }
 }

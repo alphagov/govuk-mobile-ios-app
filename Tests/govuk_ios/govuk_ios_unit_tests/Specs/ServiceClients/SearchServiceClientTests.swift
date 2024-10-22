@@ -18,7 +18,7 @@ struct SearchServiceClientTests {
             completion: { _ in }
         )
 
-        #expect(mockAPI._receivedSendRequest?.urlPath == "/api/search.json")
+        #expect(mockAPI._receivedSendRequest?.urlPath == "/v0_1/search.json")
         #expect(mockAPI._receivedSendRequest?.method == .get)
         #expect(mockAPI._receivedSendRequest?.queryParameters?["q"] as? String == expectedTerm)
         #expect(mockAPI._receivedSendRequest?.queryParameters?["count"] as? String == "10")

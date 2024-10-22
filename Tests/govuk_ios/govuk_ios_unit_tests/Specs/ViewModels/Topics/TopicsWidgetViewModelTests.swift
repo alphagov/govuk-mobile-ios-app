@@ -16,9 +16,9 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { },
+            allTopicsAction: { }
         )
         
         #expect(topicService._dataReceived == true)
@@ -31,9 +31,9 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { },
+            allTopicsAction: { }
         )
         
         #expect(topicService._dataReceived == false)
@@ -45,14 +45,14 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in
                 expectedValue = true
             },
-            editAction: { _ in }
+            editAction: { },
+            allTopicsAction: { }
         )
         
-        sut.didTapTopic(Topic(context: coreData.viewContext))
+        sut.topicAction(Topic(context: coreData.viewContext))
         #expect(expectedValue == true)
     }
     
@@ -61,48 +61,60 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in
+            editAction: {
+                expectedValue = true
+            },
+            allTopicsAction: { }
+        )
+        
+        sut.editAction()
+        #expect(expectedValue == true)
+    }
+
+    @Test
+    func didTapSeeAllTopics_invokesExpectedAction() async throws {
+        var expectedValue = false
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: {
                 expectedValue = true
             }
         )
-        
-        sut.didTapEdit()
+
+        sut.allTopicsAction()
         #expect(expectedValue == true)
     }
-    
+
     @Test
-    func didTapTopic_sendsEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
+    func allTopicsButtonHidden_allFavourited_returnsTrue() {
+        topicService._allTopicsFavourited = true
+
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { },
+            allTopicsAction: { }
         )
-        
-        let testTopic = Topic(context: coreData.viewContext)
-        testTopic.ref = "test"
-        testTopic.title = "Title"
-        sut.didTapTopic(testTopic)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "test")
+
+        let result = sut.allTopicsButtonHidden
+        #expect(result == true)
     }
-    
+
     @Test
-    func didTapEdit_sendsEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
+    func allTopicsButtonHidden_notAllFavourited_returnsFalse() {
+        topicService._allTopicsFavourited = false
+
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
-            analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { },
+            allTopicsAction: { }
         )
 
-        sut.didTapEdit()
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "EditTopics")
+        let result = sut.allTopicsButtonHidden
+        #expect(result == false)
     }
-
 }

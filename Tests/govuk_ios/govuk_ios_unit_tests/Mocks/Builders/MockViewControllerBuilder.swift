@@ -36,12 +36,17 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedHomeViewController: UIViewController?
+    var _receivedHomeSearchAction: (() -> Void)?
     var _receivedHomeRecentActivityAction: (() -> Void)?
-    override func home(searchButtonPrimaryAction: @escaping () -> Void,
+    var _receivedTopicWidgetViewModel: TopicsWidgetViewModel?
+    override func home(analyticsService: any AnalyticsServiceInterface,
                        configService: any AppConfigServiceInterface,
-                       recentActivityAction: @escaping () -> Void,
-                       topicWidgetViewModel: TopicsWidgetViewModel) -> UIViewController {
+                       topicWidgetViewModel: TopicsWidgetViewModel,
+                       searchAction: @escaping () -> Void,
+                       recentActivityAction: @escaping () -> Void) -> UIViewController {
+        _receivedHomeSearchAction = searchAction
         _receivedHomeRecentActivityAction = recentActivityAction
+        _receivedTopicWidgetViewModel = topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
     }
 
@@ -78,11 +83,19 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _stubbedEditTopicsViewController: UIViewController?
     var _receivedDoneButtonAction: (() -> Void)?
     override func editTopics(
-        _ topics: [Topic],
         analyticsService: any AnalyticsServiceInterface,
         topicsService: any TopicsServiceInterface,
         dismissAction: @escaping () -> Void) -> UIViewController {
             _receivedDoneButtonAction = dismissAction
             return _stubbedEditTopicsViewController ?? UIViewController()
         }
+
+    var _stubbedAllTopicsViewController: UIViewController?
+    var _receivedTopicAction: ((Topic) -> Void)?
+    override func allTopics(analyticsService: AnalyticsServiceInterface,
+                            topicAction: @escaping (Topic) -> Void,
+                            topicsService topicService: TopicsServiceInterface) -> UIViewController {
+        _receivedTopicAction = topicAction
+        return _stubbedAllTopicsViewController ?? UIViewController()
+    }
 }

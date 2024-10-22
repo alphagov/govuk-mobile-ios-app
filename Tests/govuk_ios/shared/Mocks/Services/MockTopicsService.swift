@@ -31,7 +31,7 @@ class MockTopicsService: TopicsServiceInterface {
     }
     
     var _receivedTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
-    func fetchTopicDetails(for topicRef: String,
+    func fetchTopicDetails(topicRef: String,
                            completion: @escaping FetchTopicDetailsResult) {
         if let result = _receivedTopicDetailsResult {
             completion(result)

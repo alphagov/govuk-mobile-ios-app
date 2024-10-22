@@ -5,7 +5,8 @@ typealias FetchTopicDetailsResult = (Result<TopicDetailResponse, TopicsServiceEr
 
 protocol TopicsServiceClientInterface {
     func fetchTopicsList(completion: @escaping FetchTopicsListResult)
-    func fetchTopicDetails(for topicRef: String, completion: @escaping FetchTopicDetailsResult)
+    func fetchTopicDetails(topicRef: String,
+                           completion: @escaping FetchTopicDetailsResult)
 }
 
 enum TopicsServiceError: Error {
@@ -48,7 +49,8 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
         )
     }
 
-    func fetchTopicDetails(for topicRef: String, completion: @escaping FetchTopicDetailsResult) {
+    func fetchTopicDetails(topicRef: String,
+                           completion: @escaping FetchTopicDetailsResult) {
         let topicsRequest = GOVRequest(
             urlPath: "/static/topics/" + topicRef,
             method: .get,

@@ -68,7 +68,7 @@ struct TopicsServiceClientTests {
     @Test
     func fetchTopicDetails_sendsExpectedRequest() async {
         let expectedTopicRef = UUID().uuidString
-        sut.fetchTopicDetails(for: expectedTopicRef, completion: { _ in })
+        sut.fetchTopicDetails(topicRef: expectedTopicRef, completion: { _ in })
         #expect(mockAPI._receivedSendRequest?.urlPath == "/static/topics/" + expectedTopicRef)
         #expect(mockAPI._receivedSendRequest?.method == .get)
     }
@@ -77,7 +77,7 @@ struct TopicsServiceClientTests {
     func fetchTopicDetails_success_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success(Self.topicDetailsData)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(for: "driving-transport") { result in
+            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
                 continuation.resume(returning:  result)
             }
         }
@@ -93,7 +93,7 @@ struct TopicsServiceClientTests {
     func fetchTopicDetails_failure_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .failure(TopicsServiceError.apiUnavailable)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(for: "driving-transport") { result in
+            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
                 continuation.resume(returning: result)
             }
         }
@@ -106,7 +106,7 @@ struct TopicsServiceClientTests {
     func fetchTopicDetails_invalidJson_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success("bad json".data(using: .utf8)!)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(for: "driving-transport") { result in
+            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
                 continuation.resume(returning: result)
             }
         }

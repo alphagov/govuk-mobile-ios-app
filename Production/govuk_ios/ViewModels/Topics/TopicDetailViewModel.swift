@@ -3,13 +3,14 @@ import Foundation
 class TopicDetailViewModel: ObservableObject {
     @Published var topicDetail: TopicDetailResponse?
     @Published var error: TopicsServiceError?
-    var topic: DisplayableTopic
+
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let activityService: ActivityServiceInterface
     private let urlOpener: URLOpener
     private let navigationAction: (DisplayableTopic) -> Void
 
+    var topic: DisplayableTopic
     var sections = [GroupedListSection]()
 
     var popularContent: [TopicDetailResponse.Content]? {
@@ -81,15 +82,15 @@ class TopicDetailViewModel: ObservableObject {
         self.navigationAction = navigationAction
         self.topic = topic
 
-        self.fetchTopicDetails(for: topic.ref)
+        self.fetchTopicDetails(topicRef: topic.ref)
     }
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }
 
-    private func fetchTopicDetails(for topicRef: String) {
-        topicsService.fetchTopicDetails(for: topicRef) { result in
+    private func fetchTopicDetails(topicRef: String) {
+        topicsService.fetchTopicDetails(topicRef: topicRef) { result in
             switch result {
             case .success(let topicDetail):
                 self.topicDetail = topicDetail

@@ -2,7 +2,7 @@ import Foundation
 
 protocol TopicsServiceInterface {
     func downloadTopicsList(completion: @escaping FetchTopicsListResult)
-    func fetchTopicDetails(for topicRef: String,
+    func fetchTopicDetails(topicRef: String,
                            completion: @escaping FetchTopicDetailsResult)
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
@@ -11,8 +11,10 @@ protocol TopicsServiceInterface {
 
 extension TopicsServiceInterface {
     static var stepByStepSubTopic: DisplayableTopic {
-        TopicDetailResponse.Subtopic(ref: "stepByStepRef",
-                                     title: String.topics.localized("topicDetailStepByStepHeader"))
+        TopicDetailResponse.Subtopic(
+            ref: "stepByStepRef",
+            title: String.topics.localized("topicDetailStepByStepHeader")
+        )
     }
 }
 
@@ -28,8 +30,8 @@ class TopicsService: TopicsServiceInterface {
     }
 
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
-        topicsServiceClient.fetchTopicsList { [weak self] result in
-            DispatchQueue.main.async {
+        topicsServiceClient.fetchTopicsList(
+            completion: { [weak self] result in
                 switch result {
                 case .success(let topics):
                     self?.topicsRepository.saveTopicsList(topics)
@@ -38,10 +40,10 @@ class TopicsService: TopicsServiceInterface {
                     completion(.failure(error))
                 }
             }
-        }
+        )
     }
 
-    func fetchTopicDetails(for topicRef: String,
+    func fetchTopicDetails(topicRef: String,
                            completion: @escaping FetchTopicDetailsResult) {
         if topicRef == Self.stepByStepSubTopic.ref {
             if let response = stepByStepDetails() {
@@ -50,15 +52,18 @@ class TopicsService: TopicsServiceInterface {
                 completion(.failure(.missingData))
             }
         } else {
-            downloadTopicDetails(for: topicRef,
-                                 completion: completion)
+            downloadTopicDetails(
+                topicRef: topicRef,
+                completion: completion
+            )
         }
     }
 
-    private func downloadTopicDetails(for topicRef: String,
+    private func downloadTopicDetails(topicRef: String,
                                       completion: @escaping FetchTopicDetailsResult) {
-        topicsServiceClient.fetchTopicDetails(for: topicRef) { [weak self] result in
-            DispatchQueue.main.async {
+        topicsServiceClient.fetchTopicDetails(
+            topicRef: topicRef,
+            completion: { [weak self] result in
                 switch result {
                 case .success(let topicDetail):
                     self?.currentTopicDetails = topicDetail
@@ -67,7 +72,7 @@ class TopicsService: TopicsServiceInterface {
                     completion(.failure(error))
                 }
             }
-        }
+        )
     }
 
     func fetchAllTopics() -> [Topic] {

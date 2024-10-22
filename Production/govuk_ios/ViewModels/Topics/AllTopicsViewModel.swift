@@ -4,7 +4,7 @@ import Foundation
 class AllTopicsViewModel {
     private let analyticsService: AnalyticsServiceInterface
     let topicAction: (Topic) -> Void
-    var topics: [Topic] = []
+    private(set) var topics: [Topic] = []
 
     init(analyticsService: AnalyticsServiceInterface,
          topicAction: @escaping (Topic) -> Void,

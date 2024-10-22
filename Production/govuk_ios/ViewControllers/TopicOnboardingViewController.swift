@@ -6,7 +6,7 @@ class TopicOnboardingViewController: BaseViewController,
                                      UIScrollViewDelegate {
     let viewModel: TopicOnboardingViewModel
 
-    public init(viewModel: TopicOnboardingViewModel) {
+    init(viewModel: TopicOnboardingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .white
@@ -19,7 +19,9 @@ class TopicOnboardingViewController: BaseViewController,
 
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
-        localView.text = String.topics.localized("topicsOnboardingTitlelabel")
+        localView.text = String.topics.localized(
+            "topicsOnboardingTitlelabel"
+        )
         localView.textAlignment = .left
         localView.numberOfLines = 0
         localView.lineBreakMode = .byWordWrapping
@@ -46,6 +48,7 @@ class TopicOnboardingViewController: BaseViewController,
         scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
     }()
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -55,15 +58,12 @@ class TopicOnboardingViewController: BaseViewController,
         configureUI()
         configureConstraints()
         scrollView.delegate = self
-        title = "Select the topics that are relevant to you"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.sizeToFit()
+        title = viewModel.navigationTitle
     }
 
     private func configureUI() {
         view.addSubview(scrollView)
         view.addSubview(buttonView)
-
         addWidgets()
     }
 
@@ -73,10 +73,9 @@ class TopicOnboardingViewController: BaseViewController,
 
     private lazy var buttonView: UIView =  {
         let buttonView = UIHostingController(
-            rootView: TopicsButtonView(
-                viewModel: self.viewModel
-            )
+            rootView: TopicsButtonView(viewModel: self.viewModel)
         ).view
+
         guard let buttonView = buttonView else {
             return UIView()
         }

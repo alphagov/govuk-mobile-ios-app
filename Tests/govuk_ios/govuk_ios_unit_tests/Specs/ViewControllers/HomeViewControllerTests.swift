@@ -11,9 +11,11 @@ struct HomeViewControllerTests {
 
     @Test
     func init_hasExpectedValues() {
+        let mockUserDefaults = UserDefaults()
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )
@@ -31,12 +33,14 @@ struct HomeViewControllerTests {
     @Test
     func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
+        let mockUserDefaults = UserDefaults()
         Container.shared.analyticsService.register {
             mockAnalyticsService
         }
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )

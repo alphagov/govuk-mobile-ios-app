@@ -8,9 +8,11 @@ import Testing
 struct HomeViewModelTests {
     @Test
     func widgets_returnsArrayOfWidgets() {
+        let mockUserDefaults = UserDefaults()
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )
@@ -30,10 +32,11 @@ struct HomeViewModelTests {
     func widgets_featureDisabled_doesntReturnWidget() {
         let configService = MockAppConfigService()
         configService.features = []
-
+        let mockUserDefaults = UserDefaults()
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )

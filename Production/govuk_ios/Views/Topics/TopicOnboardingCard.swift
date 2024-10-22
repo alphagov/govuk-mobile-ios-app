@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class TopicOnboardingCard: UIView {
-    private let viewModel: TopicCardModel
+    private let viewModel: TopicOnboardingCardModel
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -17,16 +17,30 @@ class TopicOnboardingCard: UIView {
 
     private lazy var selectedLabel: UILabel = {
         let label = UILabel()
-        label.text = "select"
+        label.text = String.topics.localized(
+            "topicOnboardingCardUnselected"
+        )
+        label.textAlignment = .center
+        label.textColor = UIColor.govUK.fills.surfaceButtonPrimary
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         return label
     }()
 
-    private lazy var selectIcon: UIImageView = {
+    private lazy var selectedIcon: UIImageView = {
         let icon = UIImage(systemName: "plus")
         let imageView = UIImageView(image: icon)
         return imageView
+    }()
+
+    private lazy var selectedStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 0
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        return stackView
     }()
 
     private lazy var descriptionLabel: UILabel = {
@@ -50,16 +64,6 @@ class TopicOnboardingCard: UIView {
         return imageView
     }()
 
-    private lazy var chevronImage: UIImageView = {
-        let image = UIImage(systemName: "chevron.forward")
-        let config = UIImage.SymbolConfiguration(pointSize: 12)
-        let imageView = UIImageView(image: image)
-        imageView.preferredSymbolConfiguration = config
-        imageView.tintColor = UIColor.govUK.strokes.listDivider
-        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        return imageView
-    }()
-
     private lazy var cardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -69,7 +73,7 @@ class TopicOnboardingCard: UIView {
         return stackView
     }()
 
-    init(viewModel: TopicCardModel) {
+    init(viewModel: TopicOnboardingCardModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureUI()
@@ -85,9 +89,12 @@ class TopicOnboardingCard: UIView {
         layer.masksToBounds = true
         layer.borderColor = UIColor.secondaryBorder.cgColor
         addSubview(cardStackView)
+        selectedStackView.addArrangedSubview(selectedIcon)
+        selectedStackView.addArrangedSubview(selectedLabel)
         cardStackView.addArrangedSubview(icon)
         cardStackView.addArrangedSubview(titleLabel)
         cardStackView.addArrangedSubview(descriptionLabel)
+        cardStackView.addArrangedSubview(selectedStackView)
     }
 
     private func configureConstraints() {
@@ -123,12 +130,36 @@ class TopicOnboardingCard: UIView {
 
     @objc
     private func cardTapped() {
-        viewModel.tapAction()
         viewModel.isSelected.toggle()
-        toggleTintColout()
+        toggleTintColourOfCard()
+        toggleSelectedIconAndTextViews()
+        guard let labelText = selectedLabel.text else { return }
+        viewModel.tapAction(
+            labelText,
+            viewModel.isSelected
+        )
     }
 
-    private func toggleTintColout() {
+    private func toggleSelectedIconAndTextViews() {
+        let selectedColourTint = ColorResource(
+            name: "topicOnboardingSelectedTint",
+            bundle: .main
+        )
+        selectedLabel.text = viewModel.isSelected ? String.topics.localized(
+            "topicOnboardingCardSelected"
+        ) : String.topics.localized(
+            "topicOnboardingCardUnselected"
+        )
+        selectedLabel.textColor = viewModel.isSelected ? UIColor(
+            resource: selectedColourTint
+        ) : UIColor.govUK.fills.surfaceButtonPrimary
+
+        selectedIcon.tintColor = viewModel.isSelected ? UIColor(
+            resource: selectedColourTint
+        ) : UIColor.govUK.fills.surfaceButtonPrimary
+    }
+
+    private func toggleTintColourOfCard() {
         if viewModel.isSelected {
             self.backgroundColor = UIColor(
                 resource: ColorResource(

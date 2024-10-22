@@ -36,9 +36,11 @@ struct ViewControllerBuilderTests {
     @Test
     func home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
+        let mockUserDefaults = UserDefaults()
         let viewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )

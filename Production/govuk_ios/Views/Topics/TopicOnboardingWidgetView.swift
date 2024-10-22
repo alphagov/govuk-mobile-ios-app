@@ -57,10 +57,6 @@ class TopicsOnboardingWidgetView: UIView {
     }
 
     private func configureUI() {
-//        headerStackView.addArrangedSubview(titleLabel)
-//        headerStackView.addArrangedSubview(editButton)
-        // headerStackView.accessibilityElements = [titleLabel, editButton]
-       // stackView.addArrangedSubview(headerStackView)
         stackView.addArrangedSubview(cardStackView)
         addSubview(stackView)
     }
@@ -70,10 +66,7 @@ class TopicsOnboardingWidgetView: UIView {
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
+            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             stackView.leadingAnchor.constraint(equalTo: cardStackView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: cardStackView.trailingAnchor)
         ])
@@ -121,10 +114,14 @@ class TopicsOnboardingWidgetView: UIView {
     }
 
     private func createTopicCard(for topic: Topic) -> TopicOnboardingCard {
-        let topicCardModel = TopicCardModel(topic: topic) {
-            self.viewModel.didTapTopic(topic)
+        let model = TopicOnboardingCardModel(topic: topic) { buttonLabelText, isSelected  in
+            self.viewModel.didSelectOnboardingTopic(
+                title: buttonLabelText,
+                topic: topic,
+                isTopicSelected: isSelected
+            )
         }
-        let topicCard = TopicOnboardingCard(viewModel: topicCardModel)
+        let topicCard = TopicOnboardingCard(viewModel: model)
         topicCard.translatesAutoresizingMaskIntoConstraints = false
         return topicCard
     }

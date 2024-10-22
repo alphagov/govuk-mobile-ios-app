@@ -5,7 +5,7 @@ protocol TopicsServiceInterface {
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
     func updateFavoriteTopics()
-    func hasEditedTopics() -> Bool
+    func hasTopicsBeenEdited() -> Bool
     func setHasEditedTopics()
 }
 
@@ -44,7 +44,7 @@ class TopicsService: TopicsServiceInterface {
         topicsRepository.fetchFavoriteTopics()
     }
 
-    func hasEditedTopics() -> Bool {
+    func hasTopicsBeenEdited() -> Bool {
         userDefaults.bool(forKey: .hasEditedTopics)
     }
 

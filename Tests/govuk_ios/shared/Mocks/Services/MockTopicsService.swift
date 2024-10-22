@@ -3,6 +3,15 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {
+    func hasTopicsBeenEdited() -> Bool {
+        _setHasEditedTopicsCalled
+    }
+
+    var _setHasEditedTopicsCalled = false
+    func setHasEditedTopics() {
+        _setHasEditedTopicsCalled = true
+    }
+    
     
     let coreData = CoreDataRepository.arrangeAndLoad
     

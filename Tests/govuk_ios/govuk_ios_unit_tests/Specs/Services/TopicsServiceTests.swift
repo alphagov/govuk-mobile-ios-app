@@ -1,4 +1,5 @@
 import Testing
+import Foundation
 @testable import govuk_ios
 
 @Suite
@@ -10,9 +11,11 @@ struct TopicsServiceTests {
     init() {
         topicsServiceClient = MockTopicsServiceClient()
         topicsRepository = MockTopicsRepository()
+        let mockUserDefaults = UserDefaults()
         sut = TopicsService(
             topicsServiceClient: topicsServiceClient,
-            topicsRepository: topicsRepository
+            topicsRepository: topicsRepository,
+            userDefaults: mockUserDefaults
         )
     }
     

@@ -16,12 +16,12 @@ struct TopicsButtonView: View {
         AdaptiveStack {
             SwiftUIButton(
                 .init(
-                    titleColorNormal: viewModel.isTopicSelected ?
+                    titleColorNormal: viewModel.isTopicsSelected ?
                     .white : UIColor.govUK.text.secondary,
                     titleColorHighlighted: .white,
                     titleColorFocused: .white,
                     titleFont: UIFont.govUK.bodySemibold,
-                    backgroundColorNormal: viewModel.isTopicSelected ?
+                    backgroundColorNormal: viewModel.isTopicsSelected ?
                     UIColor.govUK.fills.surfaceButtonPrimary : UIColor(
                         resource: ColorResource(
                             name: "topicOnboardingPrimaryUnselectedBtn",

@@ -93,6 +93,8 @@
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */; };
 		4EB05ED02C52A654008DAEA6 /* MockOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */; };
+		4EC071AD2CC7CE8B0026D0A3 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC071AC2CC7CE8B0026D0A3 /* BaseTabBarController.swift */; };
+		4EC071AF2CC80E9E0026D0A3 /* TopicOnboardingCardmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC071AE2CC80E9E0026D0A3 /* TopicOnboardingCardmodel.swift */; };
 		4ECB0FF62CC296D20021468C /* TopicsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB0FF52CC296D20021468C /* TopicsButtonView.swift */; };
 		4ECB0FFA2CC2D7790021468C /* TopicOnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB0FF92CC2D7790021468C /* TopicOnboardingCard.swift */; };
 		4ECB0FFC2CC589E90021468C /* TopicOnboardingWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB0FFB2CC589E90021468C /* TopicOnboardingWidgetView.swift */; };
@@ -461,6 +463,8 @@
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
+		4EC071AC2CC7CE8B0026D0A3 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		4EC071AE2CC80E9E0026D0A3 /* TopicOnboardingCardmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCardmodel.swift; sourceTree = "<group>"; };
 		4ECB0FF52CC296D20021468C /* TopicsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsButtonView.swift; sourceTree = "<group>"; };
 		4ECB0FF92CC2D7790021468C /* TopicOnboardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCard.swift; sourceTree = "<group>"; };
 		4ECB0FFB2CC589E90021468C /* TopicOnboardingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingWidgetView.swift; sourceTree = "<group>"; };
@@ -1275,6 +1279,7 @@
 				5D925B172CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift */,
 				5D925B1A2CB7CE6300A1E241 /* GroupedListTableViewCell.swift */,
 				163800FE2C99DAF900C3DDD1 /* ListInformationView.swift */,
+				4EC071AC2CC7CE8B0026D0A3 /* BaseTabBarController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1771,6 +1776,7 @@
 				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
 				D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */,
 				D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */,
+				4EC071AE2CC80E9E0026D0A3 /* TopicOnboardingCardmodel.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -2186,6 +2192,7 @@
 				D028CCF62CB9619B00742620 /* Topic.swift in Sources */,
 				D0A8B3CA2CA1A38400849304 /* SignableDecoder.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
+				4EC071AD2CC7CE8B0026D0A3 /* BaseTabBarController.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				5D925B182CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift in Sources */,
@@ -2228,6 +2235,7 @@
 				5DE74DE32CB538E9000B43B5 /* RecentActivityListViewController.swift in Sources */,
 				4EE920642CC1624B001DD165 /* TopicOnboardingViewController.swift in Sources */,
 				5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */,
+				4EC071AF2CC80E9E0026D0A3 /* TopicOnboardingCardmodel.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
 				5DC79FAE2CA185A000014446 /* UITableView+Extensions.swift in Sources */,

@@ -1,4 +1,5 @@
 import Testing
+import Foundation
 
 @testable import govuk_ios
 
@@ -11,10 +12,12 @@ struct EditTopicsViewModelTests {
     @Test
     func dismissAction_callsDismiss() throws {
         var dismissActionCalled = false
+        let mockUserDefaults = UserDefaults()
         let sut = EditTopicsViewModel(
             topics: [],
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
+            userDefaults: mockUserDefaults,
             dismissAction: {
                 dismissActionCalled = true
             }
@@ -26,10 +29,12 @@ struct EditTopicsViewModelTests {
 
     @Test
     func initViewModel_doesCreateSectionsCorrectly() throws {
+        let mockUserDefaults = UserDefaults()
         let sut = EditTopicsViewModel(
             topics: createTopics(),
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
+            userDefaults: mockUserDefaults,
             dismissAction: { }
         )
 

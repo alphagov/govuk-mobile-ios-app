@@ -5,8 +5,18 @@ class TopicOnboardingViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     let topicsService: TopicsServiceInterface
     let dismissAction: () -> Void
-    @Published var isTopicSelected: Bool = false
+    @Published var isTopicsSelected: Bool = false
     var selectedTopics: [String: Topic] = [:]
+    let navigationTitle = String.topics.localized(
+        "topicOnboardingNavigationTitle"
+    )
+
+    private let primaryButtonTitle = String.topics.localized(
+        "topicsOnboardingPrimaryBtnTitle"
+    )
+    private let secondaryButtonTitle = String.topics.localized(
+        "topicsOnboardingSecondaryBtnTitle"
+    )
 
     var widgets: [WidgetView] {
         [topicsWidget]
@@ -18,16 +28,11 @@ class TopicOnboardingViewModel: ObservableObject {
         } else {
             selectedTopics[topic.title] = topic
         }
-        determineIfThereAreSelectedItems()
+        hasTopicsBeenSelected()
     }
 
-    private func determineIfThereAreSelectedItems() {
-        // change name of this method
-        if !selectedTopics.isEmpty {
-            isTopicSelected = true
-        } else {
-            isTopicSelected = false
-        }
+    private func hasTopicsBeenSelected() {
+        isTopicsSelected = selectedTopics.isEmpty ? false : true
     }
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -44,7 +49,8 @@ class TopicOnboardingViewModel: ObservableObject {
             analyticsService: analyticsService,
             userDefaults: .standard,
             topicAction: { [weak self] topic in
-                self?.selectTopic(topic: topic)
+                guard let self = self else { return }
+                self.selectTopic(topic: topic)
             },
             editAction: nil
         )
@@ -59,7 +65,7 @@ class TopicOnboardingViewModel: ObservableObject {
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
-            localisedTitle: "Skip",
+            localisedTitle: secondaryButtonTitle,
             action: { [weak self] in
                 self?.skipAction()
             }
@@ -68,7 +74,7 @@ class TopicOnboardingViewModel: ObservableObject {
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
-            localisedTitle: "Done",
+            localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 guard let self = self else { return }
                 self.saveFavouriteTopics()
@@ -84,10 +90,8 @@ class TopicOnboardingViewModel: ObservableObject {
             userDefaults: .standard,
             topicAction: { [weak self] topic in
                 self?.selectTopic(topic: topic)
-                // topic.isFavorite = true
             },
             editAction: nil)
-
 
         let content = TopicsOnboardingWidgetView(
             viewModel: topicWidgetviewModel

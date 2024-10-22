@@ -1,4 +1,5 @@
 import Testing
+import Foundation
 import Factory
 
 @testable import govuk_ios
@@ -13,10 +14,11 @@ struct TopicsWidgetViewModelTests {
     func initializeModel_downloadSuccess_returnsExpectedData() async throws {
         
         topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsResult
-
+        let mockUserDefaults = UserDefaults()
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )
@@ -28,10 +30,11 @@ struct TopicsWidgetViewModelTests {
     @Test
     func initializeModel_downloadFailure_returnsExpectedResult() async throws {
         topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsFailure
-
+        let mockUserDefaults = UserDefaults()
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )
@@ -43,9 +46,11 @@ struct TopicsWidgetViewModelTests {
     @Test
     func didTapTopic_invokesExpectedAction() async throws {
         var expectedValue = false
+        let mockUserDefaults = UserDefaults()
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in
                 expectedValue = true
             },
@@ -59,9 +64,11 @@ struct TopicsWidgetViewModelTests {
     @Test
     func didTapEdit_invokesExpectedAction() async throws {
         var expectedValue = false
+        let mockUserDefaults = UserDefaults()
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in
                 expectedValue = true
@@ -75,9 +82,11 @@ struct TopicsWidgetViewModelTests {
     @Test
     func didTapTopic_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
+        let mockUserDefaults = UserDefaults()
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: mockAnalyticsService,
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )
@@ -93,9 +102,11 @@ struct TopicsWidgetViewModelTests {
     @Test
     func didTapEdit_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
+        let mockUserDefaults = UserDefaults()
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: mockAnalyticsService,
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in }
         )

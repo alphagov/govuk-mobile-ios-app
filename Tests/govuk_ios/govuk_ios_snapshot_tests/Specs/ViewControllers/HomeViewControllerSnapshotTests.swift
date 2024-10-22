@@ -24,10 +24,12 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
 
     private var viewController: HomeViewController {
         let topicService = MockTopicsService()
+        let mockUserDefaults = UserDefaults()
         topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsResult
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
             topicAction: { _ in },
             editAction: { _ in })
         let viewModel = HomeViewModel(

@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 
 class TopicTableViewCell: UITableViewCell {
-    var topicCard: UIView = UIView()
+    private var topicCard: UIView = UIView()
 
     func configure(topic: Topic, viewModel: AllTopicsViewModel) {
         selectionStyle = .none

@@ -6,6 +6,13 @@ struct SearchItem: Codable,
     let description: String
     let link: URL
 
+    enum CodingKeys: String,
+                     CodingKey {
+        case title
+        case description = "description_with_highlighting"
+        case link
+    }
+
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let linkString = try container.decode(String.self, forKey: .link)

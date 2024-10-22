@@ -13,10 +13,10 @@ extension Container {
         }
     }
 
-    var govukAPIClient: Factory<APIServiceClientInterface> {
+    var searchAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
             APIServiceClient(
-                baseUrl: URL(string: Constants.API.govukUrlString)!,
+                baseUrl: URL(string: Constants.API.searchApiUrlString)!,
                 session: URLSession(configuration: .default),
                 requestBuilder: RequestBuilder()
             )
@@ -26,7 +26,7 @@ extension Container {
     var searchServiceClient: Factory<SearchServiceClientInterface> {
         Factory(self) {
             SearchServiceClient(
-                serviceClient: self.govukAPIClient()
+                serviceClient: self.searchAPIClient()
             )
         }
     }

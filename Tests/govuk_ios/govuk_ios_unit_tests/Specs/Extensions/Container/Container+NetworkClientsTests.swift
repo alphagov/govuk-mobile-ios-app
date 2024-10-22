@@ -8,8 +8,8 @@ import Factory
 @Suite
 struct Container_NetworkClientTests {
     @Test
-    func govukAPIClient_returnsExpectedResult() {
-        let result = Container.shared.govukAPIClient()
+    func searchAPIClient_returnsExpectedResult() {
+        let result = Container.shared.searchAPIClient()
         #expect(result != nil)
     }
 }

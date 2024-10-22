@@ -13,7 +13,8 @@ struct HomeViewControllerTests {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             topicAction: { _ in },
-            editAction: { }
+            editAction: { },
+            allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
@@ -36,7 +37,8 @@ struct HomeViewControllerTests {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             topicAction: { _ in },
-            editAction: { }
+            editAction: { },
+            allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),

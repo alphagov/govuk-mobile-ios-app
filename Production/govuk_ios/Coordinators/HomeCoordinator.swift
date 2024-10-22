@@ -69,20 +69,23 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var topicWidgetViewModel: TopicsWidgetViewModel {
-        TopicsWidgetViewModel(
-            topicsService: topicsService,
-            topicAction: startTopicDetailCoordinator,
-            editAction: presentEditTopicsCoordinator
-        )
-    }
-
     private var startTopicDetailCoordinator: (Topic) -> Void {
         return { [weak self] topic in
             self?.trackWidgetNavigation(text: topic.ref)
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.topicDetail(
                 topic,
+                navigationController: self.root
+            )
+            start(coordinator)
+        }
+    }
+
+    private var startAllTopicsCoordinator: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "See all topics")
+            guard let self = self else { return }
+            let coordinator = self.coordinatorBuilder.allTopics(
                 navigationController: self.root
             )
             start(coordinator)
@@ -102,6 +105,15 @@ class HomeCoordinator: TabItemCoordinator {
             )
             self.present(coordinator)
         }
+    }
+
+    private var topicWidgetViewModel: TopicsWidgetViewModel {
+        TopicsWidgetViewModel(
+            topicsService: topicsService,
+            topicAction: startTopicDetailCoordinator,
+            editAction: presentEditTopicsCoordinator,
+            allTopicsAction: startAllTopicsCoordinator
+        )
     }
 
     private func trackWidgetNavigation(text: String) {

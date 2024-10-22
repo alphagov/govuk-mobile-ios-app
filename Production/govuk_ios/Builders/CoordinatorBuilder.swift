@@ -144,4 +144,14 @@ class CoordinatorBuilder {
             dismissed: didDismissAction
         )
     }
+
+    func allTopics(navigationController: UINavigationController) -> BaseCoordinator {
+        AllTopicsCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            coordinatorBuilder: self,
+            topicsService: container.topicsService.resolve()
+        )
+    }
 }

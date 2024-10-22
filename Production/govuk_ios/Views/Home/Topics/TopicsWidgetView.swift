@@ -1,9 +1,24 @@
 import UIKit
+import UIComponents
 
 class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
 
     private var rowCount = 2
+    private lazy var allTopicsButton: GOVUKButton = {
+        var buttonViewModel: GOVUKButton.ButtonViewModel {
+            .init(
+                localisedTitle: String.topics.localized("seeAllTopicsButtonText"),
+                action: { [weak self] in
+                    self?.viewModel.allTopicsAction()
+                }
+            )
+        }
+        let button = GOVUKButton(.compact, viewModel: buttonViewModel)
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
+
+        return button
+    }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -34,7 +49,6 @@ class TopicsWidgetView: UIView {
         stackView.spacing = 16
         stackView.alignment = .bottom
         stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
@@ -44,7 +58,6 @@ class TopicsWidgetView: UIView {
         stackView.spacing = 16
         stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
@@ -52,7 +65,7 @@ class TopicsWidgetView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
-        stackView.alignment = .leading
+        stackView.alignment = .center
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -70,12 +83,14 @@ class TopicsWidgetView: UIView {
             object: nil
         )
         updateTopics(viewModel.favoriteTopics)
+        showAllTopicsButton()
     }
 
     @objc
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.favoriteTopics)
+            self.showAllTopicsButton()
         }
     }
 
@@ -85,6 +100,7 @@ class TopicsWidgetView: UIView {
         headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)
         stackView.addArrangedSubview(cardStackView)
+        stackView.addArrangedSubview(allTopicsButton)
         addSubview(stackView)
     }
 
@@ -97,13 +113,13 @@ class TopicsWidgetView: UIView {
         ])
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: headerStackView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: headerStackView.trailingAnchor)
+            headerStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            headerStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: cardStackView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: cardStackView.trailingAnchor)
+            cardStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            cardStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
         ])
     }
 
@@ -176,5 +192,9 @@ class TopicsWidgetView: UIView {
             rowCount = sizeClass == .regular ? 2 : 4
             updateTopics(viewModel.favoriteTopics)
         }
+    }
+
+    private func showAllTopicsButton() {
+        allTopicsButton.isHidden = viewModel.allTopicsButtonHidden
     }
 }

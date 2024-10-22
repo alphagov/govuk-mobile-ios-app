@@ -39,7 +39,8 @@ struct ViewControllerBuilderTests {
         let viewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             topicAction: { _ in },
-            editAction: { }
+            editAction: { },
+            allTopicsAction: { }
         )
         let result = subject.home(
             analyticsService: MockAnalyticsService(),
@@ -114,5 +115,17 @@ struct ViewControllerBuilderTests {
         
         let rootView = (result as? HostingViewController<EditTopicsView>)?.rootView
         #expect(rootView != nil)
+    }
+
+    @Test
+    func allTopics_returnsExpectedResult() async throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.allTopics(
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            topicsService: MockTopicsService()
+        )
+
+        #expect(result is AllTopicsViewController)
     }
 }

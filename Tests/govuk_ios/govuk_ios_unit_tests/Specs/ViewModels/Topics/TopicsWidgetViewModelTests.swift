@@ -17,7 +17,8 @@ struct TopicsWidgetViewModelTests {
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             topicAction: { _ in },
-            editAction: { }
+            editAction: { },
+            allTopicsAction: { }
         )
         
         #expect(topicService._dataReceived == true)
@@ -31,7 +32,8 @@ struct TopicsWidgetViewModelTests {
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             topicAction: { _ in },
-            editAction: { }
+            editAction: { },
+            allTopicsAction: { }
         )
         
         #expect(topicService._dataReceived == false)
@@ -46,7 +48,8 @@ struct TopicsWidgetViewModelTests {
             topicAction: { _ in
                 expectedValue = true
             },
-            editAction: { }
+            editAction: { },
+            allTopicsAction: { }
         )
         
         sut.topicAction(Topic(context: coreData.viewContext))
@@ -61,10 +64,57 @@ struct TopicsWidgetViewModelTests {
             topicAction: { _ in },
             editAction: {
                 expectedValue = true
-            }
+            },
+            allTopicsAction: { }
         )
         
         sut.editAction()
         #expect(expectedValue == true)
+    }
+
+    @Test
+    func didTapSeeAllTopics_invokesExpectedAction() async throws {
+        var expectedValue = false
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: {
+                expectedValue = true
+            }
+        )
+
+        sut.allTopicsAction()
+        #expect(expectedValue == true)
+    }
+
+    @Test
+    func allTopicsButtonHidden_allFavourited_returnsTrue() {
+        topicService._allTopicsFavourited = true
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        let result = sut.allTopicsButtonHidden
+        #expect(result == true)
+    }
+
+    @Test
+    func allTopicsButtonHidden_notAllFavourited_returnsFalse() {
+        topicService._allTopicsFavourited = false
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        let result = sut.allTopicsButtonHidden
+        #expect(result == false)
     }
 }

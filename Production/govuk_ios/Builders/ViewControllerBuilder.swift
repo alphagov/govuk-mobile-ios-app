@@ -115,6 +115,20 @@ class ViewControllerBuilder {
     }
 
     @MainActor
+    func allTopics(analyticsService: AnalyticsServiceInterface,
+                   topicAction: @escaping (Topic) -> Void,
+                   topicsService: TopicsServiceInterface) -> UIViewController {
+        let viewModel = AllTopicsViewModel(
+            analyticsService: analyticsService,
+            topicAction: topicAction,
+            topicsService: topicsService
+        )
+        return AllTopicsViewController(
+            viewModel: viewModel
+        )
+    }
+
+    @MainActor
     func editTopics(analyticsService: AnalyticsServiceInterface,
                     topicsService: TopicsServiceInterface,
                     dismissAction: @escaping () -> Void) -> UIViewController {

@@ -58,7 +58,6 @@ struct HomeViewModel {
     private var topicsWidget: WidgetView? {
         guard widgetEnabled(feature: .topics)
         else { return nil }
-
         let content = TopicsWidgetView(
             viewModel: topicWidgetViewModel
         )

@@ -3,6 +3,7 @@ import CoreData
 
 final class TopicsWidgetViewModel {
     private let topicsService: TopicsServiceInterface
+    let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
     let editAction: () -> Void
 
@@ -11,13 +12,18 @@ final class TopicsWidgetViewModel {
     var favoriteTopics: [Topic] {
         topicsService.fetchFavoriteTopics()
     }
+    var allTopicsButtonHidden: Bool {
+        topicsService.fetchAllTopics().count == favoriteTopics.count
+    }
 
     init(topicsService: TopicsServiceInterface,
          topicAction: @escaping (Topic) -> Void,
-         editAction: @escaping () -> Void) {
+         editAction: @escaping () -> Void,
+         allTopicsAction: @escaping () -> Void) {
         self.topicsService = topicsService
         self.topicAction = topicAction
         self.editAction = editAction
+        self.allTopicsAction = allTopicsAction
         self.fetchTopics()
     }
 

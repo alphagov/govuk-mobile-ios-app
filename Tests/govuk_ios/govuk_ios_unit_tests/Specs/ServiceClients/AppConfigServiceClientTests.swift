@@ -45,7 +45,7 @@ struct AppConfigServiceClientTests {
         }
 
         let error = result.getError()
-        #expect(error == AppConfigError.remoteJsonError)
+        #expect(error == AppConfigError.remoteJson)
     }
 
     @Test
@@ -60,7 +60,7 @@ struct AppConfigServiceClientTests {
             mockServiceClient._receivedSendCompletion?(.success(mockJsonData))
         }
         let unwrappedResult = result.getError()
-        #expect(unwrappedResult == AppConfigError.remoteJsonError)
+        #expect(unwrappedResult == AppConfigError.remoteJson)
     }
 
     @Test
@@ -75,7 +75,7 @@ struct AppConfigServiceClientTests {
             mockServiceClient._receivedSendCompletion?(.success(mockJsonData))
         }
         let unwrappedResult = result.getError()
-        #expect(unwrappedResult == AppConfigError.invalidSignatureError)
+        #expect(unwrappedResult == AppConfigError.invalidSignature)
     }
 
     private func getJsonData(filename: String, bundle: Bundle) -> Data {

@@ -46,7 +46,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         switch result {
         case .success(let appConfig):
             setConfig(appConfig.config)
-        case .failure(.invalidSignatureError):
+        case .failure(.invalidSignature):
             self.isAppForcedUpdate = true
         case .failure:
             self.isAppAvailable = false

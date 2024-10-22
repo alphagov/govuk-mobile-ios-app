@@ -39,7 +39,7 @@ struct AppConfigRepositoryTests {
         }
 
         let error = result.getError()
-        #expect(error == .loadJsonError)
+        #expect(error == .loadJson)
     }
 
     @Test
@@ -54,7 +54,7 @@ struct AppConfigRepositoryTests {
         }
 
         let error = result.getError()
-        #expect(error == .loadJsonError)
+        #expect(error == .loadJson)
     }
 }
 

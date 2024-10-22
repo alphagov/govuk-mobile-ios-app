@@ -267,6 +267,7 @@
 		5DD5F0BB2C99D563009F5388 /* String+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */; };
 		5DD5F0BF2C99D74F009F5388 /* TestStrings.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */; };
 		5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */; };
+		5DD6F3362CC844D0005BC5D3 /* Topic+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F3352CC844D0005BC5D3 /* Topic+Arrangers.swift */; };
 		5DDCF62F2C874AB400A24947 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D6295292C87429000BBB394 /* GOV.xcdatamodeld */; };
 		5DE2834C2CAC484000E95800 /* ActivityServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2834B2CAC484000E95800 /* ActivityServiceTests.swift */; };
 		5DE2834E2CAC48DC00E95800 /* ActivityItemCreateParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */; };
@@ -626,6 +627,7 @@
 		5DD5F0BA2C99D563009F5388 /* String+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = TestStrings.xcstrings; sourceTree = "<group>"; };
 		5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepByStepsViewModel.swift; sourceTree = "<group>"; };
+		5DD6F3352CC844D0005BC5D3 /* Topic+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Topic+Arrangers.swift"; sourceTree = "<group>"; };
 		5DDBCA942C073ECB00A6ADBF /* GovUK.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = GovUK.xctestplan; sourceTree = "<group>"; };
 		5DE2834B2CAC484000E95800 /* ActivityServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityServiceTests.swift; sourceTree = "<group>"; };
 		5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItemCreateParams.swift; sourceTree = "<group>"; };
@@ -1022,6 +1024,7 @@
 			children = (
 				5D4043382C7DBF1B0004CCFE /* AppConfig+Arrangers.swift */,
 				5D40433A2C7DBF710004CCFE /* Config+Arrangers.swift */,
+				5DD6F3352CC844D0005BC5D3 /* Topic+Arrangers.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2374,6 +2377,7 @@
 				5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */,
 				D0F86E1A2CAC241400FF2D9E /* TopicTests.swift in Sources */,
 				168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */,
+				5DD6F3362CC844D0005BC5D3 /* Topic+Arrangers.swift in Sources */,
 				5DA599FE2C6C9A3D00AEA8D7 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -42,7 +42,7 @@ struct TopicsRepositoryTests {
 
     @Test
     func fetchFavoriteTopics_onlyReturnsFavorites() async throws {
-        createTopics(context: coreData.viewContext)
+        Topic.arrange(context: coreData.viewContext)
         let favorites = sut.fetchFavoriteTopics()
         #expect(favorites.count == 1)
         #expect(favorites.first?.title == "title3")
@@ -50,7 +50,7 @@ struct TopicsRepositoryTests {
     
     @Test func saveChanges_persistsDataAsExpected() async throws {
         // Given I save on the view context
-        createTopics(context: coreData.viewContext)
+        Topic.arrange(context: coreData.viewContext)
         // After I save them
         sut.saveChanges()
         // I should be able to fetch on another context
@@ -60,21 +60,4 @@ struct TopicsRepositoryTests {
         #expect(topics.count == 4)
     }
     
-}
-
-private extension TopicsRepositoryTests {
-    @discardableResult
-    func createTopics(context: NSManagedObjectContext) -> [Topic] {
-        var topics = [Topic]()
-        for index in 0..<4 {
-            let topic = Topic(context: context)
-            topic.ref = "ref\(index)"
-            topic.title = "title\(index)"
-            topic.isFavorite = index == 3 ? true : false
-            topics.append(topic)
-        }
-        
-        return topics
-    }
-
 }

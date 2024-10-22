@@ -140,6 +140,7 @@ class GroupedListTableViewCell: UITableViewCell {
         bodyLabel.text = description
         separatorView.isHidden = bottom
         updateMask()
+        accessibilityHint = String.common.localized("openWebLinkHint")
     }
 
     override func layoutSubviews() {

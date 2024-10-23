@@ -8,20 +8,20 @@ import Factory
 
 @MainActor
 struct HomeViewControllerTests {
-
     @Test
     func init_hasExpectedValues() {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { },
+            allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            searchButtonPrimaryAction: { () -> Void in _ = true },
-            recentActivityAction: { },
-            topicWidgetViewModel: topicsViewModel
+            topicWidgetViewModel: topicsViewModel,
+            searchAction: { () -> Void in _ = true },
+            recentActivityAction: { }
         )
         let subject = HomeViewController(viewModel: viewModel)
 
@@ -36,15 +36,16 @@ struct HomeViewControllerTests {
         }
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
-            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { _ in }
+            editAction: { },
+            allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
+            analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            searchButtonPrimaryAction: { () -> Void in _ = true },
-            recentActivityAction: { },
-            topicWidgetViewModel: topicsViewModel
+            topicWidgetViewModel: topicsViewModel,
+            searchAction: { () -> Void in _ = true },
+            recentActivityAction: { }
         )
         let subject = HomeViewController(viewModel: viewModel)
         subject.viewDidAppear(false)

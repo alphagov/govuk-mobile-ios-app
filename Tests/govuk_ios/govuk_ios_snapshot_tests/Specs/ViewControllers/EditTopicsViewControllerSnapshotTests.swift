@@ -25,7 +25,6 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
     
     private func viewController() -> UIViewController {
         let viewModel = EditTopicsViewModel(
-            topics: mockTopicsService.fetchAllTopics(),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             dismissAction: { }

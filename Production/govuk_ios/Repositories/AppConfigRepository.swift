@@ -19,14 +19,14 @@ class AppConfigRepository: AppConfigRepositoryInterface {
             withExtension: "json"
         )
         guard let resourceURL = resourceURL else {
-            return .failure(.loadJsonError)
+            return .failure(.loadJson)
         }
         do {
             let data = try Data(contentsOf: resourceURL)
             let decodedObject = try JSONDecoder().decode(AppConfig.self, from: data)
             return .success(decodedObject)
         } catch {
-            return .failure(.loadJsonError)
+            return .failure(.loadJson)
         }
     }
 }

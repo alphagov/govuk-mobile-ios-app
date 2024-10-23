@@ -1,6 +1,7 @@
 import Foundation
 
 enum AppConfigError: Error {
-    case loadJsonError
-    case remoteJsonError
+    case loadJson
+    case remoteJson
+    case invalidSignature
 }

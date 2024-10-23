@@ -1,23 +1,22 @@
 import Foundation
 
 final class EditTopicsViewModel: ObservableObject {
-    @Published var topics: [Topic]
+    @Published private(set) var topics: [Topic] = []
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     let sections: [GroupedListSection]
     let dismissAction: () -> Void
 
-    init(topics: [Topic],
-         topicsService: TopicsServiceInterface,
+    init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          dismissAction: @escaping () -> Void) {
-        self.topics = topics
         self.dismissAction = dismissAction
         self.topicsService = topicsService
         self.analyticsService = analyticsService
-
+        let localTopics = topicsService.fetchAllTopics()
+        self.topics = localTopics
         var rows = [GroupedListRow]()
-        topics.forEach { topic in
+        localTopics.forEach { topic in
             let row = ToggleRow(
                 id: topic.ref,
                 title: topic.title,

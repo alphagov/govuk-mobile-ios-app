@@ -50,15 +50,18 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func fetchTopicDetails(topicRef: String) {
-        topicsService.fetchTopicDetails(topicRef: topicRef) { result in
-            switch result {
-            case .success(let topicDetail):
-                self.topicDetail = topicDetail
-                self.configureSections()
-            case .failure(let error):
-                self.error = error
+        topicsService.fetchTopicDetails(
+            topicRef: topicRef,
+            completion: { result in
+                switch result {
+                case .success(let topicDetail):
+                    self.topicDetail = topicDetail
+                    self.configureSections()
+                case .failure(let error):
+                    self.error = error
+                }
             }
-        }
+        )
     }
 
     private func configureSections() {

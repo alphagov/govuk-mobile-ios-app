@@ -96,7 +96,7 @@ struct ViewControllerBuilderTests {
     func topicDetail_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
-            topic: MockDisplayableTopic(),
+            topic: MockDisplayableTopic(ref: "", title: ""),
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -132,9 +132,4 @@ struct ViewControllerBuilderTests {
 
         #expect(result is AllTopicsViewController)
     }
-}
-
-class MockDisplayableTopic: DisplayableTopic {
-    var ref: String = ""
-    var title: String = ""
 }

@@ -172,6 +172,13 @@
 		5D54F4772CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4762CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift */; };
 		5D54F4792CC853C800A3B6A7 /* TopicDetailResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4782CC853C800A3B6A7 /* TopicDetailResponseTests.swift */; };
 		5D54F47B2CC8CB3400A3B6A7 /* StepByStepsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F47A2CC8CB3400A3B6A7 /* StepByStepsViewModelTests.swift */; };
+		5D54F47D2CC8DBAB00A3B6A7 /* TopicDetailViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F47C2CC8DBAB00A3B6A7 /* TopicDetailViewSnapshotTests.swift */; };
+		5D54F47F2CC8DC0800A3B6A7 /* MockDisplayableTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F47E2CC8DC0800A3B6A7 /* MockDisplayableTopic.swift */; };
+		5D54F4802CC8DC0800A3B6A7 /* MockDisplayableTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F47E2CC8DC0800A3B6A7 /* MockDisplayableTopic.swift */; };
+		5D54F4822CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4812CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift */; };
+		5D54F4832CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4812CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift */; };
+		5D54F4852CC8E1C200A3B6A7 /* URL+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4842CC8E1C200A3B6A7 /* URL+Arrangers.swift */; };
+		5D54F4862CC8E1C200A3B6A7 /* URL+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4842CC8E1C200A3B6A7 /* URL+Arrangers.swift */; };
 		5D5A25E22CAD422B0013704A /* SearchItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */; };
 		5D5A25E42CAD435A0013704A /* SearchItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */; };
 		5D5A25E72CAD44800013704A /* SearchItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E62CAD44800013704A /* SearchItemTests.swift */; };
@@ -547,6 +554,10 @@
 		5D54F4762CC851FF00A3B6A7 /* ActivityItemCreateParamsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItemCreateParamsTests.swift; sourceTree = "<group>"; };
 		5D54F4782CC853C800A3B6A7 /* TopicDetailResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailResponseTests.swift; sourceTree = "<group>"; };
 		5D54F47A2CC8CB3400A3B6A7 /* StepByStepsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepByStepsViewModelTests.swift; sourceTree = "<group>"; };
+		5D54F47C2CC8DBAB00A3B6A7 /* TopicDetailViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailViewSnapshotTests.swift; sourceTree = "<group>"; };
+		5D54F47E2CC8DC0800A3B6A7 /* MockDisplayableTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDisplayableTopic.swift; sourceTree = "<group>"; };
+		5D54F4812CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopicDetailResponse+Arrangers.swift"; sourceTree = "<group>"; };
+		5D54F4842CC8E1C200A3B6A7 /* URL+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Arrangers.swift"; sourceTree = "<group>"; };
 		5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchItem+Arrangers.swift"; sourceTree = "<group>"; };
 		5D5A25E62CAD44800013704A /* SearchItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTests.swift; sourceTree = "<group>"; };
 		5D5B16F62C51480000EA118F /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
@@ -1211,6 +1222,7 @@
 			children = (
 				5DAA394C2CAC862B002A7E18 /* ActivityItem+Arrangers.swift */,
 				5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */,
+				5D54F4812CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1302,6 +1314,7 @@
 				5D014FEA2CB96ABB005D32C8 /* RecentActivityListViewControllerSnapshotTests.swift */,
 				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
 				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
+				5D54F47C2CC8DBAB00A3B6A7 /* TopicDetailViewSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1561,6 +1574,7 @@
 			isa = PBXGroup;
 			children = (
 				5DB6AD332CA1C0EA00E92F4C /* Date+Arrangers.swift */,
+				5D54F4842CC8E1C200A3B6A7 /* URL+Arrangers.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1617,6 +1631,7 @@
 			children = (
 				5DC069F12C3C195B00A81AAE /* MockAccessibilityManager.swift */,
 				3D9C93452CB01CDA00EFA337 /* MockAppVersionProvider.swift */,
+				5D54F47E2CC8DC0800A3B6A7 /* MockDisplayableTopic.swift */,
 				3DEC85AC2C89DBED0044D5F9 /* MockURLOpener.swift */,
 				5D4F6D412CA41830006D0B5B /* Services */,
 			);
@@ -2115,6 +2130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16F9619F2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift in Sources */,
+				5D54F47D2CC8DBAB00A3B6A7 /* TopicDetailViewSnapshotTests.swift in Sources */,
 				5D00E9752CA5583400775D2B /* HostingViewControllerSnapshotTests.swift in Sources */,
 				3D9C93422CB017E900EFA337 /* AppForcedUpdateViewControllerSnapshotTests.swift in Sources */,
 				5DBE71B12CAE8371004ABB5E /* Bundle+Tests.swift in Sources */,
@@ -2122,6 +2138,7 @@
 				4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */,
 				5D0BD45F2C9B244A00220625 /* MockSearchService.swift in Sources */,
 				16D0D0412CC19ACF00944D79 /* AllTopicsViewControllerSnapshotTests.swift in Sources */,
+				5D54F4862CC8E1C200A3B6A7 /* URL+Arrangers.swift in Sources */,
 				5DC069F22C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
 				D028CD012CBD5A2300742620 /* MockTopicsRepository.swift in Sources */,
 				5D4F6D402CA4181D006D0B5B /* MockAppConfigService.swift in Sources */,
@@ -2130,6 +2147,7 @@
 				3D3378182CAAC179004BF83F /* AppUnavailableViewControllerSnapshotTests.swift in Sources */,
 				5DD507B82C627913006DE73D /* MockAnalyticsService.swift in Sources */,
 				5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */,
+				5D54F4832CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift in Sources */,
 				3D9C93462CB01CDA00EFA337 /* MockAppVersionProvider.swift in Sources */,
 				5DE2BBBD2C982824003116B6 /* MockURLOpener.swift in Sources */,
 				D028CD002CBD598E00742620 /* EditTopicsViewControllerSnapshotTests.swift in Sources */,
@@ -2138,6 +2156,7 @@
 				168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */,
 				3DEC85A42C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,
+				5D54F4802CC8DC0800A3B6A7 /* MockDisplayableTopic.swift in Sources */,
 				16ACCF792C64365600017A11 /* SettingsViewControllerSnapshotTests.swift in Sources */,
 				5DCDA0FD2CA1F57F00A6DF90 /* Date+Arrangers.swift in Sources */,
 				5D5A25E42CAD435A0013704A /* SearchItem+Arrangers.swift in Sources */,
@@ -2353,8 +2372,10 @@
 				5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */,
 				5D40433B2C7DBF710004CCFE /* Config+Arrangers.swift in Sources */,
 				5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */,
+				5D54F47F2CC8DC0800A3B6A7 /* MockDisplayableTopic.swift in Sources */,
 				5DC79FAA2CA1744C00014446 /* MockSearchServiceClient.swift in Sources */,
 				5D16E6A92C417DED00776ABA /* UIAlertController+ConvenienceTests.swift in Sources */,
+				5D54F4822CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift in Sources */,
 				5DE283532CAC4EBA00E95800 /* ActivityRepositoryTests.swift in Sources */,
 				5D5A25E22CAD422B0013704A /* SearchItem+Arrangers.swift in Sources */,
 				D049D4F62CC16C3D008B70A5 /* TopicDetailsViewModelTests.swift in Sources */,
@@ -2424,6 +2445,7 @@
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				5DCDA1012CA20C7D00A6DF90 /* MonthGroupKeyTests.swift in Sources */,
+				5D54F4852CC8E1C200A3B6A7 /* URL+Arrangers.swift in Sources */,
 				3D33781C2CAAC30A004BF83F /* AppUnavailableContainerViewModelTests.swift in Sources */,
 				16D0D03C2CC1790400944D79 /* AllTopicsCoordinatorTests.swift in Sources */,
 				3D97E9812CA171D2001D3131 /* AppConfigServiceClientTests.swift in Sources */,

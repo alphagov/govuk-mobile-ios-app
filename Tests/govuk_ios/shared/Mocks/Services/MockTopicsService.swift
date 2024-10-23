@@ -35,10 +35,10 @@ class MockTopicsService: TopicsServiceInterface {
         }
     }
     
-    var _receivedTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
+    var _stubbedFetchTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
     func fetchTopicDetails(topicRef: String,
                            completion: @escaping FetchTopicDetailsResult) {
-        if let result = _receivedTopicDetailsResult {
+        if let result = _stubbedFetchTopicDetailsResult {
             completion(result)
         } else {
             completion(.failure(.apiUnavailable))

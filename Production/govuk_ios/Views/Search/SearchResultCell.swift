@@ -65,7 +65,7 @@ class SearchResultCell: UITableViewCell {
 
     func configure(item: SearchItem?) {
         self.title.text = item?.title
-        let trimmedDescription = item?.description.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedDescription = item?.description?.trimmingCharacters(in: .whitespacesAndNewlines)
         self.resultDescription.text = trimmedDescription
     }
 

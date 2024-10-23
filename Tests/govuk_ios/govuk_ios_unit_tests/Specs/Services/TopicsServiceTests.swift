@@ -39,7 +39,7 @@ struct TopicsServiceTests {
                 continuation.resume(returning: result)
             }
             mockTopicsServiceClient._receivedFetchTopicsCompletion?(
-                MockTopicsService.testTopicsFailure
+                .failure(.decodingError)
             )
         }
 

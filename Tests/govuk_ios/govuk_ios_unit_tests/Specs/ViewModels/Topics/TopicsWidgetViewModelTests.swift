@@ -27,7 +27,7 @@ struct TopicsWidgetViewModelTests {
     
     @Test
     func initializeModel_downloadFailure_returnsExpectedResult() async throws {
-        topicService._stubbedDownloadTopicsListResult = MockTopicsService.testTopicsFailure
+        topicService._stubbedDownloadTopicsListResult = .failure(.decodingError)
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,

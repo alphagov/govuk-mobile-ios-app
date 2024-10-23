@@ -44,10 +44,6 @@ class MockTopicsService: TopicsServiceInterface {
 }
 
 extension MockTopicsService {
-    static var testTopicsFailure: Result<[TopicResponseItem], TopicsServiceError> {
-        return .failure(.decodingError)
-    }
-
     static func createTopicDetails(fileName: String) -> Result<TopicDetailResponse, TopicsServiceError> {
         let data = getJsonData(filename: fileName, bundle: .main)
         guard let details = try? JSONDecoder().decode(TopicDetailResponse.self, from: data)

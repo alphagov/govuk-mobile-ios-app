@@ -29,9 +29,13 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private var subtopicsHeading: String? {
-        topicDetail?.content.isEmpty == true ?
-        String.topics.localized("subtopicDetailSubtopicsHeader") :
-        String.topics.localized("topicDetailSubtopicsHeader")
+        if topic is TopicDetailResponse.Subtopic && topicDetail?.content.isEmpty == true {
+            return String.topics.localized("topicDetailSubtopicsHeader")
+        } else if topic is TopicDetailResponse.Subtopic {
+            return String.topics.localized("subtopicDetailSubtopicsHeader")
+        } else {
+            return String.topics.localized("topicDetailSubtopicsHeader")
+        }
     }
 
     init(topic: DisplayableTopic,

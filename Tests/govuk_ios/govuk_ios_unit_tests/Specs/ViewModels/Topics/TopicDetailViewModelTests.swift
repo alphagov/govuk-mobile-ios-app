@@ -89,7 +89,25 @@ struct TopicDetailViewModelTests {
         #expect(sut.sections[2].rows.count == 3)
         #expect(sut.sections[3].rows.first is NavigationRow)
     }
-    
+
+    @Test
+    func init_subtopic_noOtherContent_returnsCorrectHeader() async throws {
+        let expectedContent = TopicDetailResponse.arrange()
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(expectedContent)
+        let sut = TopicDetailViewModel(
+            topic: TopicDetailResponse.Subtopic(ref: "test", title: "test"),
+            topicsService: mockTopicsService,
+            analyticsService: mockAnalyticsService,
+            activityService: mockActivityService,
+            urlOpener: mockURLOpener,
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
+        )
+
+        #expect(sut.sections[3].heading == "Related")
+        #expect(sut.sections[3].rows.count == expectedContent.subtopics.count)
+    }
+
     @Test
     func tappingSubtopic_doesFireNavigationEvent() async throws {
         var didNavigate = false

@@ -3,7 +3,7 @@ import Foundation
 struct SearchItem: Codable,
                    Hashable {
     let title: String
-    let description: String
+    let description: String?
     let link: URL
 
     enum CodingKeys: String,
@@ -26,13 +26,13 @@ struct SearchItem: Codable,
         }
         self.init(
             title: try container.decode(String.self, forKey: .title),
-            description: try container.decode(String.self, forKey: .description),
+            description: try container.decodeIfPresent(String.self, forKey: .description),
             link: url
         )
     }
 
     init(title: String,
-         description: String,
+         description: String?,
          link: URL) {
         self.title = title
         self.description = description

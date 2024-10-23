@@ -65,7 +65,7 @@ class SearchResultCell: UITableViewCell {
 
     func configure(item: SearchItem?) {
         titleLabel.text = item?.title
-        let trimmedDescription = item?.description.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedDescription = item?.description?.trimmingCharacters(in: .whitespacesAndNewlines)
         bodyLabel.text = trimmedDescription
         card.accessibilityLabel = [
             titleLabel.text,

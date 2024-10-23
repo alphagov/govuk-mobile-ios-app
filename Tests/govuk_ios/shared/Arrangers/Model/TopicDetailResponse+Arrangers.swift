@@ -15,7 +15,9 @@ extension TopicDetailResponse {
             ],
             ref: "test_ref",
             subtopics: [
-
+                .init(ref: "test_1", title: "test_1"),
+                .init(ref: "test_2", title: "test_2"),
+                .init(ref: "test_3", title: "test_3")
             ],
             title: "test_title"
         )
@@ -36,7 +38,24 @@ extension TopicDetailResponse {
             ],
             ref: "test_ref",
             subtopics: [
+                .init(ref: "test_1", title: "test_1"),
+                .init(ref: "test_2", title: "test_2"),
+                .init(ref: "test_3", title: "test_3")
+            ],
+            title: "test_title"
+        )
+    }
 
+    static func arrangeOnlySubTopics() -> TopicDetailResponse {
+        .init(
+            content: [],
+            ref: "test_ref",
+            subtopics: [
+                .init(ref: "test_1", title: "test_1"),
+                .init(ref: "test_2", title: "test_2"),
+                .init(ref: "test_3", title: "test_3"),
+                .init(ref: "test_4", title: "test_4"),
+                .init(ref: "test_5", title: "test_5"),
             ],
             title: "test_title"
         )

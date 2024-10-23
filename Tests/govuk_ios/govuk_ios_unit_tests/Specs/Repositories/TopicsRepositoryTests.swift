@@ -4,11 +4,14 @@ import CoreData
 
 @testable import govuk_ios
 
+@Suite
 struct TopicsRepositoryTests {
     
     let coreData = CoreDataRepository.arrangeAndLoad
-    var sut: TopicsRepository {
-        TopicsRepository(coreData: coreData)
+    let sut: TopicsRepository
+
+    init() {
+        self.sut = TopicsRepository(coreData: coreData)
     }
 
     @Test
@@ -23,7 +26,8 @@ struct TopicsRepositoryTests {
         
     }
     
-    @Test func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
+    @Test
+    func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
         // Given I have started the app the first time, and gotten topics
         var topicResponseItems = try #require(try? MockTopicsService.testTopicsResult.get())
         sut.saveTopicsList(topicResponseItems)
@@ -42,22 +46,23 @@ struct TopicsRepositoryTests {
 
     @Test
     func fetchFavoriteTopics_onlyReturnsFavorites() async throws {
-        Topic.arrange(context: coreData.viewContext)
+        let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
+        Topic.arrange(context: coreData.viewContext, isFavourite: false)
+
         let favorites = sut.fetchFavoriteTopics()
         #expect(favorites.count == 1)
-        #expect(favorites.first?.title == "title3")
+        #expect(favorites.first?.title == expectedResult.title)
     }
     
-    @Test func saveChanges_persistsDataAsExpected() async throws {
-        // Given I save on the view context
-        Topic.arrange(context: coreData.viewContext)
-        // After I save them
+    @Test
+    func saveChanges_persistsDataAsExpected() async throws {
+        Topic.arrangeMultiple(context: coreData.viewContext)
+
         sut.saveChanges()
-        // I should be able to fetch on another context
+
         let request = Topic.fetchRequest()
         let context = coreData.backgroundContext
         let topics = try #require(try? context.fetch(request))
         #expect(topics.count == 4)
     }
-    
 }

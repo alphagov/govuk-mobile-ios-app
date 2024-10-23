@@ -43,11 +43,11 @@ extension TopicDetailResponse {
     }
 
     var otherContent: [TopicDetailResponse.Content]? {
-        let otherContent = content.filter {
+        let localContent = content.filter {
             !$0.isStepByStep && !$0.popular
         }
-        guard otherContent.count > 0
+        guard localContent.count > 0
         else { return nil }
-        return otherContent
+        return localContent
     }
 }

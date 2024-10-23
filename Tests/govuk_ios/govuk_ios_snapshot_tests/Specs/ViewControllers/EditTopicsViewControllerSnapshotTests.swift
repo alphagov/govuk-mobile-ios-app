@@ -24,6 +24,10 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
     }
     
     private func viewController() -> UIViewController {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        mockTopicsService._stubbedFetchAllTopics = Topic.arrangeMultipleFavourites(
+            context: coreData.viewContext
+        )
         let viewModel = EditTopicsViewModel(
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),

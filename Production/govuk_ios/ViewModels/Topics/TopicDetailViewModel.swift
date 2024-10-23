@@ -23,10 +23,13 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     var title: String {
         topic.title
     }
-    var shouldShowDescription: Bool { true }
+
+    var shouldShowDescription: Bool {
+        !(topic is TopicDetailResponse.Subtopic)
+    }
 
     private var subtopicsHeading: String? {
-        topic is TopicDetailResponse.Subtopic ?
+        topicDetail?.content.isEmpty == true ?
         String.topics.localized("subtopicDetailSubtopicsHeader") :
         String.topics.localized("topicDetailSubtopicsHeader")
     }

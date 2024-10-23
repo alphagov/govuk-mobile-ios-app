@@ -179,6 +179,9 @@
 		5D54F4832CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4812CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift */; };
 		5D54F4852CC8E1C200A3B6A7 /* URL+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4842CC8E1C200A3B6A7 /* URL+Arrangers.swift */; };
 		5D54F4862CC8E1C200A3B6A7 /* URL+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4842CC8E1C200A3B6A7 /* URL+Arrangers.swift */; };
+		5D54F4882CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4872CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift */; };
+		5D54F4892CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4872CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift */; };
+		5D54F48A2CC9447A00A3B6A7 /* Topic+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F3352CC844D0005BC5D3 /* Topic+Arrangers.swift */; };
 		5D5A25E22CAD422B0013704A /* SearchItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */; };
 		5D5A25E42CAD435A0013704A /* SearchItem+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */; };
 		5D5A25E72CAD44800013704A /* SearchItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A25E62CAD44800013704A /* SearchItemTests.swift */; };
@@ -328,7 +331,7 @@
 		D04191842CA5B06D0034722A /* TopicsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191832CA5B0650034722A /* TopicsServiceTests.swift */; };
 		D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191852CA6A5910034722A /* TopicsServiceClient.swift */; };
 		D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046511C2C933FE600F47C66 /* String+Extensions.swift */; };
-		D049D4F62CC16C3D008B70A5 /* TopicDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049D4F52CC16C3D008B70A5 /* TopicDetailsViewModelTests.swift */; };
+		D049D4F62CC16C3D008B70A5 /* TopicDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049D4F52CC16C3D008B70A5 /* TopicDetailViewModelTests.swift */; };
 		D049D4F82CC176D7008B70A5 /* NoUnpopularContent.json in Resources */ = {isa = PBXBuildFile; fileRef = D049D4F72CC176CA008B70A5 /* NoUnpopularContent.json */; };
 		D049D4FD2CC26DE9008B70A5 /* FiveStepByStep.json in Resources */ = {isa = PBXBuildFile; fileRef = D049D4FC2CC26DE9008B70A5 /* FiveStepByStep.json */; };
 		D049D5012CC27032008B70A5 /* UnpopularContent.json in Resources */ = {isa = PBXBuildFile; fileRef = D049D5002CC27032008B70A5 /* UnpopularContent.json */; };
@@ -558,6 +561,7 @@
 		5D54F47E2CC8DC0800A3B6A7 /* MockDisplayableTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDisplayableTopic.swift; sourceTree = "<group>"; };
 		5D54F4812CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopicDetailResponse+Arrangers.swift"; sourceTree = "<group>"; };
 		5D54F4842CC8E1C200A3B6A7 /* URL+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Arrangers.swift"; sourceTree = "<group>"; };
+		5D54F4872CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopicResponseItem+Arrangers.swift"; sourceTree = "<group>"; };
 		5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchItem+Arrangers.swift"; sourceTree = "<group>"; };
 		5D5A25E62CAD44800013704A /* SearchItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTests.swift; sourceTree = "<group>"; };
 		5D5B16F62C51480000EA118F /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
@@ -699,7 +703,7 @@
 		D04191832CA5B0650034722A /* TopicsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceTests.swift; sourceTree = "<group>"; };
 		D04191852CA6A5910034722A /* TopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClient.swift; sourceTree = "<group>"; };
 		D046511C2C933FE600F47C66 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		D049D4F52CC16C3D008B70A5 /* TopicDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		D049D4F52CC16C3D008B70A5 /* TopicDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailViewModelTests.swift; sourceTree = "<group>"; };
 		D049D4F72CC176CA008B70A5 /* NoUnpopularContent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NoUnpopularContent.json; sourceTree = "<group>"; };
 		D049D4FC2CC26DE9008B70A5 /* FiveStepByStep.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FiveStepByStep.json; sourceTree = "<group>"; };
 		D049D5002CC27032008B70A5 /* UnpopularContent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UnpopularContent.json; sourceTree = "<group>"; };
@@ -789,7 +793,7 @@
 				16D0D03E2CC1943200944D79 /* AllTopicsViewModelTests.swift */,
 				5D54F46E2CC8465C00A3B6A7 /* EditTopicsViewModelTests.swift */,
 				5D54F47A2CC8CB3400A3B6A7 /* StepByStepsViewModelTests.swift */,
-				D049D4F52CC16C3D008B70A5 /* TopicDetailsViewModelTests.swift */,
+				D049D4F52CC16C3D008B70A5 /* TopicDetailViewModelTests.swift */,
 				5D54F4702CC8468D00A3B6A7 /* TopicsWidgetViewModelTests.swift */,
 			);
 			path = Topics;
@@ -1074,7 +1078,7 @@
 			children = (
 				5D4043382C7DBF1B0004CCFE /* AppConfig+Arrangers.swift */,
 				5D40433A2C7DBF710004CCFE /* Config+Arrangers.swift */,
-				5DD6F3352CC844D0005BC5D3 /* Topic+Arrangers.swift */,
+				5D54F4872CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1222,6 +1226,7 @@
 			children = (
 				5DAA394C2CAC862B002A7E18 /* ActivityItem+Arrangers.swift */,
 				5D5A25E12CAD422B0013704A /* SearchItem+Arrangers.swift */,
+				5DD6F3352CC844D0005BC5D3 /* Topic+Arrangers.swift */,
 				5D54F4812CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift */,
 			);
 			path = Model;
@@ -2151,11 +2156,13 @@
 				3D9C93462CB01CDA00EFA337 /* MockAppVersionProvider.swift in Sources */,
 				5DE2BBBD2C982824003116B6 /* MockURLOpener.swift in Sources */,
 				D028CD002CBD598E00742620 /* EditTopicsViewControllerSnapshotTests.swift in Sources */,
+				5D54F48A2CC9447A00A3B6A7 /* Topic+Arrangers.swift in Sources */,
 				5DF8854E2CAC1A120060A40D /* MockActivityService.swift in Sources */,
 				5D014FEC2CB96CC7005D32C8 /* ActivityItem+Arrangers.swift in Sources */,
 				168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */,
 				3DEC85A42C89BCE90044D5F9 /* AnalyticsConsentViewControllerSnapshotTests.swift in Sources */,
 				5D4B9D432C074259005F126A /* SnapshotTestCase.swift in Sources */,
+				5D54F4892CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift in Sources */,
 				5D54F4802CC8DC0800A3B6A7 /* MockDisplayableTopic.swift in Sources */,
 				16ACCF792C64365600017A11 /* SettingsViewControllerSnapshotTests.swift in Sources */,
 				5DCDA0FD2CA1F57F00A6DF90 /* Date+Arrangers.swift in Sources */,
@@ -2378,7 +2385,7 @@
 				5D54F4822CC8E1A500A3B6A7 /* TopicDetailResponse+Arrangers.swift in Sources */,
 				5DE283532CAC4EBA00E95800 /* ActivityRepositoryTests.swift in Sources */,
 				5D5A25E22CAD422B0013704A /* SearchItem+Arrangers.swift in Sources */,
-				D049D4F62CC16C3D008B70A5 /* TopicDetailsViewModelTests.swift in Sources */,
+				D049D4F62CC16C3D008B70A5 /* TopicDetailViewModelTests.swift in Sources */,
 				5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */,
 				D0A8B3C62CA16D8C00849304 /* SignableDecoderTests.swift in Sources */,
 				5D96C9DA2C860AD90003527A /* AppEvent+ConvenienceTests.swift in Sources */,
@@ -2443,6 +2450,7 @@
 				1651C6E92C63D4D300864C5C /* HomeViewModelTests.swift in Sources */,
 				D028CD032CBD775000742620 /* EditTopicsCoordinatorTests.swift in Sources */,
 				5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */,
+				5D54F4882CC93F7B00A3B6A7 /* TopicResponseItem+Arrangers.swift in Sources */,
 				5D349C982C36995500161317 /* XCTestExpectation+Extensions.swift in Sources */,
 				5DCDA1012CA20C7D00A6DF90 /* MonthGroupKeyTests.swift in Sources */,
 				5D54F4852CC8E1C200A3B6A7 /* URL+Arrangers.swift in Sources */,

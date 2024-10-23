@@ -35,8 +35,6 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             subtopicAction: { _ in },
             stepByStepAction: { _ in }
         )
-        sut.beginAppearanceTransition(true, animated: false)
-        sut.endAppearanceTransition()
         VerifySnapshotInNavigationController(
             viewController: sut,
             mode: .light,
@@ -56,8 +54,6 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             subtopicAction: { _ in },
             stepByStepAction: { _ in }
         )
-        sut.beginAppearanceTransition(true, animated: false)
-        sut.endAppearanceTransition()
         VerifySnapshotInNavigationController(
             viewController: sut,
             mode: .light,
@@ -71,6 +67,25 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(.arrangeLotsOfStepBySteps())
         let sut = viewControllerBuilder.topicDetail(
             topic: MockDisplayableTopic(ref: "test_ref", title: "test_title"),
+            topicsService: mockTopicsService,
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService(),
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
+        )
+        VerifySnapshotInNavigationController(
+            viewController: sut,
+            mode: .dark,
+            prefersLargeTitles: true
+        )
+    }
+
+    func test_topicDetail_onlySubTopics_rendersCorrectly() {
+        let viewControllerBuilder = ViewControllerBuilder()
+        let mockTopicsService = MockTopicsService()
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(.arrangeOnlySubTopics())
+        let sut = viewControllerBuilder.topicDetail(
+            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title"),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),

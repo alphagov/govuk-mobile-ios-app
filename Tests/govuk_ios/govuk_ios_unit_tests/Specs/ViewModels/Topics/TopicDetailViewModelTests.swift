@@ -2,7 +2,7 @@ import Testing
 
 @testable import govuk_ios
 
-struct TopicDetailsViewModelTests {
+struct TopicDetailViewModelTests {
 
     let mockTopicsService = MockTopicsService()
     let mockAnalyticsService = MockAnalyticsService()
@@ -12,8 +12,9 @@ struct TopicDetailsViewModelTests {
     @Test
     func initViewModel_noUnpopularContent_doesCreateSectionsCorrectly() async throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "NoUnpopularContent")
+        let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicDetailViewModel(
-            topic: mockTopicsService.mockTopics[0],
+            topic: Topic.arrange(context: coreData.viewContext),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -21,7 +22,7 @@ struct TopicDetailsViewModelTests {
             subtopicAction: { _ in },
             stepByStepAction: { _ in }
         )
-        print("")
+
         try #require(sut.sections.count == 3)
         #expect(sut.sections[0].heading == "Popular pages in this topic")
         #expect(sut.sections[1].heading == "Step by step guides")
@@ -30,13 +31,15 @@ struct TopicDetailsViewModelTests {
         #expect(sut.sections[0].rows.first is LinkRow)
         #expect(sut.sections[1].rows.last is LinkRow)
         #expect(sut.sections[2].rows.first is NavigationRow)
+        #expect(sut.shouldShowDescription)
     }
     
     @Test
     func initViewModel_fiveStepByStep_doesCreateSectionsCorrectly() async throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "FiveStepByStep")
+        let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicDetailViewModel(
-            topic: mockTopicsService.mockTopics[0],
+            topic: Topic.arrange(context: coreData.viewContext),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -63,8 +66,9 @@ struct TopicDetailsViewModelTests {
     @Test
     func initViewModel_hasUnpopularContent_doesCreateSectionsCorrectly() async throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
+        let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicDetailViewModel(
-            topic: mockTopicsService.mockTopics[0],
+            topic: Topic.arrange(context: coreData.viewContext),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,

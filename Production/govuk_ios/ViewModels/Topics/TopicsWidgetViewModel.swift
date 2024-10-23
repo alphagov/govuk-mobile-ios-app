@@ -12,6 +12,7 @@ final class TopicsWidgetViewModel {
     var favoriteTopics: [Topic] {
         topicsService.fetchFavoriteTopics()
     }
+
     var allTopicsButtonHidden: Bool {
         topicsService.fetchAllTopics().count == favoriteTopics.count
     }

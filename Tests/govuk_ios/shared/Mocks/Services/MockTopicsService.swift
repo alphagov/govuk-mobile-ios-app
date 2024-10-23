@@ -8,15 +8,12 @@ class MockTopicsService: TopicsServiceInterface {
     
     var _stubbedFetchAllTopics: [Topic]?
     func fetchAllTopics() -> [Topic] {
-        _stubbedFetchAllTopics ?? mockTopics
+        _stubbedFetchAllTopics ?? []
     }
 
-    var _allTopicsFavourited = true
+    var _stubbedFetchFavoriteTopics: [Topic]?
     func fetchFavoriteTopics() -> [Topic] {
-        var topics = mockTopics
-        guard (_allTopicsFavourited == false) else { return topics }
-        topics.removeLast()
-        return topics
+        _stubbedFetchFavoriteTopics ?? []
     }
 
     var _updateFavoriteTopicsCalled = false
@@ -24,10 +21,10 @@ class MockTopicsService: TopicsServiceInterface {
         _updateFavoriteTopicsCalled = true
     }
     
-    var _receivedFetchTopicsResult: Result<[TopicResponseItem], TopicsServiceError>?
+    var _stubbedDownloadTopicsListResult: Result<[TopicResponseItem], TopicsServiceError>?
     var _dataReceived = false
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
-        if let result = _receivedFetchTopicsResult {
+        if let result = _stubbedDownloadTopicsListResult {
             _dataReceived = (try? result.get()) != nil
             completion(result)
         } else {
@@ -58,23 +55,7 @@ extension MockTopicsService {
     static var testTopicsFailure: Result<[TopicResponseItem], TopicsServiceError> {
         return .failure(.decodingError)
     }
-    
-    var mockTopics: [Topic] {
-        let result = Self.testTopicsResult
-        var topics = [Topic]()
-        guard let topicResponses = try? result.get() else {
-            return topics
-        }
-        for response in topicResponses {
-            let topic = Topic(context: coreData.viewContext)
-            topic.title = response.title
-            topic.ref = response.ref
-            topic.isFavorite = true
-            topics.append(topic)
-        }
-        return topics
-    }
-    
+
     static func createTopicDetails(fileName: String) -> Result<TopicDetailResponse, TopicsServiceError> {
         let data = getJsonData(filename: fileName, bundle: .main)
         guard let details = try? JSONDecoder().decode(TopicDetailResponse.self, from: data)

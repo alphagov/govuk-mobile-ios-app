@@ -42,29 +42,3 @@ class MockTopicsService: TopicsServiceInterface {
         }
     }
 }
-
-extension MockTopicsService {
-    static func createTopicDetails(fileName: String) -> Result<TopicDetailResponse, TopicsServiceError> {
-        let data = getJsonData(filename: fileName, bundle: .main)
-        guard let details = try? JSONDecoder().decode(TopicDetailResponse.self, from: data)
-        else {
-            return .failure(TopicsServiceError.decodingError)
-        }
-        return .success(details)
-    }
-    
-    private static  func getJsonData(filename: String, bundle: Bundle) -> Data {
-        let resourceURL = bundle.url(
-            forResource: filename,
-            withExtension: "json"
-        )
-        guard let resourceURL = resourceURL else {
-            return Data()
-        }
-        do {
-            return try Data(contentsOf: resourceURL)
-        } catch {
-            return Data()
-        }
-    }
-}

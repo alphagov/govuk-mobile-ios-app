@@ -10,8 +10,12 @@ struct TopicDetailViewModelTests {
     let mockURLOpener = MockURLOpener()
     
     @Test
-    func initViewModel_noUnpopularContent_doesCreateSectionsCorrectly() async throws {
-        mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "NoUnpopularContent")
+    func init_noUnpopularContent_doesCreateSectionsCorrectly() async throws {
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(
+            .arrange(
+                fileName: "NoUnpopularContent"
+            )
+        )
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicDetailViewModel(
             topic: Topic.arrange(context: coreData.viewContext),
@@ -35,8 +39,12 @@ struct TopicDetailViewModelTests {
     }
     
     @Test
-    func initViewModel_fiveStepByStep_doesCreateSectionsCorrectly() async throws {
-        mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "FiveStepByStep")
+    func init_fiveStepByStep_doesCreateSectionsCorrectly() async throws {
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(
+            .arrange(
+                fileName: "FiveStepByStep"
+            )
+        )
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicDetailViewModel(
             topic: Topic.arrange(context: coreData.viewContext),
@@ -64,8 +72,12 @@ struct TopicDetailViewModelTests {
     }
     
     @Test
-    func initViewModel_hasUnpopularContent_doesCreateSectionsCorrectly() async throws {
-        mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
+    func init_hasUnpopularContent_doesCreateSectionsCorrectly() async throws {
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(
+            .arrange(
+                fileName: "UnpopularContent"
+            )
+        )
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicDetailViewModel(
             topic: Topic.arrange(context: coreData.viewContext),
@@ -111,7 +123,11 @@ struct TopicDetailViewModelTests {
     @Test
     func tappingSubtopic_doesFireNavigationEvent() async throws {
         var didNavigate = false
-        mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(
+            .arrange(
+                fileName: "UnpopularContent"
+            )
+        )
         let sut = TopicDetailViewModel(
             topic: MockDisplayableTopic(ref: "", title: ""),
             topicsService: mockTopicsService,
@@ -134,7 +150,11 @@ struct TopicDetailViewModelTests {
     
     @Test
     func tappingContent_doesFireLinkEvent() async throws {
-        mockTopicsService._stubbedFetchTopicDetailsResult = MockTopicsService.createTopicDetails(fileName: "UnpopularContent")
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(
+            .arrange(
+                fileName: "UnpopularContent"
+            )
+        )
         let sut = TopicDetailViewModel(
             topic: MockDisplayableTopic(ref: "", title: ""),
             topicsService: mockTopicsService,

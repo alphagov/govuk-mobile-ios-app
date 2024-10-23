@@ -16,8 +16,7 @@ struct TopicsRepositoryTests {
 
     @Test
     func saveTopicsList_doesSaveResponseItems() async throws {
-        let topicResponseItems = try #require(try? MockTopicsService.testTopicsResult.get())
-        sut.saveTopicsList(topicResponseItems)
+        sut.saveTopicsList(TopicResponseItem.arrangeMultiple)
         let topics = sut.fetchAllTopics()
         #expect(topics.count == 3)
         #expect(topics.first?.title == "Business")
@@ -29,7 +28,7 @@ struct TopicsRepositoryTests {
     @Test
     func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
         // Given I have started the app the first time, and gotten topics
-        var topicResponseItems = try #require(try? MockTopicsService.testTopicsResult.get())
+        var topicResponseItems = TopicResponseItem.arrangeMultiple
         sut.saveTopicsList(topicResponseItems)
 
         // When I start the app again and new topics are available to save

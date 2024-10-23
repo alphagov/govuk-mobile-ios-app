@@ -12,7 +12,7 @@ struct TopicsWidgetViewModelTests {
     @Test
     func initializeModel_downloadSuccess_returnsExpectedData() async throws {
         
-        topicService._stubbedDownloadTopicsListResult = MockTopicsService.testTopicsResult
+        topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,

@@ -44,14 +44,6 @@ class MockTopicsService: TopicsServiceInterface {
 }
 
 extension MockTopicsService {
-    static var testTopicsResult: Result<[TopicResponseItem], TopicsServiceError> {
-        let topics = [TopicResponseItem(ref: "driving-transport", title: "Driving & Transport"),
-                      TopicResponseItem(ref: "care", title: "Care"),
-                      TopicResponseItem(ref: "business", title: "Business")
-                      ]
-        return .success(topics)
-    }
-    
     static var testTopicsFailure: Result<[TopicResponseItem], TopicsServiceError> {
         return .failure(.decodingError)
     }

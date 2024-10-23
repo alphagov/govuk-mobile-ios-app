@@ -23,7 +23,7 @@ struct TopicsServiceTests {
                 continuation.resume(returning: result)
             }
             mockTopicsServiceClient._receivedFetchTopicsCompletion?(
-                MockTopicsService.testTopicsResult
+                .success(TopicResponseItem.arrangeMultiple)
             )
 
         }

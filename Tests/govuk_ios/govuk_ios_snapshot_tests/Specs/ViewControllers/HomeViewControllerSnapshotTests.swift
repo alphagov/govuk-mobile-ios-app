@@ -11,7 +11,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
 
-        topicService._stubbedDownloadTopicsListResult = MockTopicsService.testTopicsResult
+        topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
 
         var topics = Topic.arrangeMultipleFavourites(
             context: coreData.viewContext
@@ -30,7 +30,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        topicService._stubbedDownloadTopicsListResult = MockTopicsService.testTopicsResult
+        topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
         let topics = Topic.arrangeMultipleFavourites(
             context: coreData.viewContext
         )

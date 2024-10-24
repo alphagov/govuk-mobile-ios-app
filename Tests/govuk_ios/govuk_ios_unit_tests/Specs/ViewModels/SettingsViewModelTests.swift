@@ -26,7 +26,7 @@ struct SettingsViewModelTests {
     @Test
     func listContent_isCorrect() throws {
         try #require(sut.listContent.count == 3)
-        try #require(sut.listContent[2].rows.count == 2)
+        try #require(sut.listContent[2].rows.count == 4)
 
         let aboutTheAppSection = sut.listContent[0]
         #expect(aboutTheAppSection.heading == "About the app")
@@ -45,13 +45,13 @@ struct SettingsViewModelTests {
 
         let linkSection = sut.listContent[2]
         #expect(linkSection.rows[0].title == "Privacy policy")
-        #expect(linkSection.rows[1].title == "Open source licences")
+        #expect(linkSection.rows[1].title == "Accessibility statement")
+        #expect(linkSection.rows[2].title == "Open source licences")
+        #expect(linkSection.rows[3].title == "Terms and conditions")
     }
     
     @Test
     func analytics_toggledOnThenOff_deniesPermissions() throws {
-        #expect(sut.listContent.count == 3)
-
         sut.analyticsService.setAcceptedAnalytics(accepted: true)
         let privacySection = sut.listContent[1]
         let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
@@ -62,7 +62,6 @@ struct SettingsViewModelTests {
     
     @Test
     func analytics_toggledOffThenOn_acceptsPermissions() throws {
-        try #require(sut.listContent.count == 3)
         sut.analyticsService.setAcceptedAnalytics(accepted: false)
         let privacySection = sut.listContent[1]
         let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
@@ -73,30 +72,42 @@ struct SettingsViewModelTests {
     
     @Test
     func privacyPolicy_action_tracksEvent() throws {
-        try #require(sut.listContent.count == 3)
-
         let linkSection = sut.listContent[2]
-        let privacyPolicyRow = try #require(linkSection.rows.first as? LinkRow)
+        let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
         privacyPolicyRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(receivedTitle == privacyPolicyRow.title)
     }
-    
-    @Test
-    func openSettings_action_tracksEvent() throws {
-        try #require(sut.listContent.count == 3)
 
+    @Test
+    func accessibilityStatement_action_tracksEvent() throws {
         let linkSection = sut.listContent[2]
-        let settingsRow = try #require(linkSection.rows.last as? LinkRow)
-        settingsRow.action()
+        let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
+        accessibilityStatementRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(receivedTitle == settingsRow.title)
+        #expect(receivedTitle == accessibilityStatementRow.title)
+    }
+
+    @Test
+    func openSourceLicences_action_tracksEvent() throws {
+        let linkSection = sut.listContent[2]
+        let openSourceLicencesRow = try #require(linkSection.rows[2] as? LinkRow)
+        openSourceLicencesRow.action()
+        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(receivedTitle == openSourceLicencesRow.title)
+    }
+
+    @Test
+    func termsAndConditions_action_tracksEvent() throws {
+        let linkSection = sut.listContent[2]
+        let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
+        termsAndConditionsRow.action()
+        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(receivedTitle == termsAndConditionsRow.title)
     }
 
     @Test
     func helpAndFeedback_action_tracksEvent() throws {
-        try #require(sut.listContent.count == 3)
-
         let aboutTheAppSection = sut.listContent[0]
         let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
 

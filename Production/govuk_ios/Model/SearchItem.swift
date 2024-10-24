@@ -3,13 +3,15 @@ import Foundation
 struct SearchItem: Codable,
                    Hashable {
     let title: String
-    let description: String?
+    var description: String?
+    var descriptionWithHighlighting: String?
     let link: URL
 
     enum CodingKeys: String,
                      CodingKey {
         case title
-        case description = "description_with_highlighting"
+        case description
+        case descriptionWithHighlighting = "description_with_highlighting"
         case link
     }
 
@@ -24,9 +26,14 @@ struct SearchItem: Codable,
             )
             throw DecodingError.dataCorrupted(context)
         }
+        let descWithHighlighting = try container.decodeIfPresent(
+            String.self, forKey: .descriptionWithHighlighting
+        )
+        let desc = try container.decodeIfPresent(String.self, forKey: .description)
+
         self.init(
             title: try container.decode(String.self, forKey: .title),
-            description: try container.decodeIfPresent(String.self, forKey: .description),
+            description: descWithHighlighting ?? desc,
             link: url
         )
     }

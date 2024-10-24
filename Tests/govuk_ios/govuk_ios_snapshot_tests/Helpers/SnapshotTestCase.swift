@@ -35,14 +35,16 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func VerifySnapshotInNavigationController(viewController: UIViewController,
                                               mode: UIUserInterfaceStyle,
                                               navBarHidden: Bool = false,
+                                              prefersLargeTitles: Bool = false,
                                               file: StaticString = #file,
                                               line: UInt = #line) {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.setNavigationBarHidden(navBarHidden, animated: false)
         navigationController.overrideUserInterfaceStyle = mode
+        navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
         VerifySnapshotInWindow(
             navigationController,
-            overallTolerance: 0.01,
+            overallTolerance: 0.001,
             file: file,
             line: line
         )
@@ -97,6 +99,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func RecordSnapshotInNavigationController(view: some View,
                                               mode: UIUserInterfaceStyle,
                                               navBarHidden: Bool = false,
+                                              prefersLargeTitles: Bool = false,
                                               file: StaticString = #file,
                                               line: UInt = #line) {
         let wrappedView = UIHostingController(rootView: view)
@@ -104,6 +107,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
             viewController: wrappedView,
             mode: mode,
             navBarHidden: navBarHidden,
+            prefersLargeTitles: prefersLargeTitles,
             file: file,
             line: line
         )
@@ -112,11 +116,13 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func RecordSnapshotInNavigationController(viewController: UIViewController,
                                               mode: UIUserInterfaceStyle,
                                               navBarHidden: Bool = false,
+                                              prefersLargeTitles: Bool = false,
                                               file: StaticString = #file,
                                               line: UInt = #line) {
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.setNavigationBarHidden(navBarHidden, animated: false)
         navigationController.overrideUserInterfaceStyle = mode
+        navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
         RecordSnapshotInWindow(
             navigationController,
             file: file,

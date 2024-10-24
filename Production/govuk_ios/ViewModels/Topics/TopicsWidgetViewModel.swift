@@ -7,11 +7,12 @@ final class TopicsWidgetViewModel {
     let topicAction: (Topic) -> Void
     let editAction: () -> Void
 
-    private(set) var downloadError: TopicsListError?
+    private(set) var downloadError: TopicsServiceError?
 
     var favoriteTopics: [Topic] {
         topicsService.fetchFavoriteTopics()
     }
+
     var allTopicsButtonHidden: Bool {
         topicsService.fetchAllTopics().count == favoriteTopics.count
     }

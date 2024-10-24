@@ -4,17 +4,19 @@ import CoreData
 
 @testable import govuk_ios
 
+@Suite
 struct TopicsRepositoryTests {
     
     let coreData = CoreDataRepository.arrangeAndLoad
-    var sut: TopicsRepository {
-        TopicsRepository(coreData: coreData)
+    let sut: TopicsRepository
+
+    init() {
+        self.sut = TopicsRepository(coreData: coreData)
     }
 
     @Test
     func saveTopicsList_doesSaveResponseItems() async throws {
-        let topicResponseItems = try #require(try? MockTopicsService.testTopicsResult.get())
-        sut.saveTopicsList(topicResponseItems)
+        sut.saveTopicsList(TopicResponseItem.arrangeMultiple)
         let topics = sut.fetchAllTopics()
         #expect(topics.count == 3)
         #expect(topics.first?.title == "Business")
@@ -23,13 +25,18 @@ struct TopicsRepositoryTests {
         
     }
     
-    @Test func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
+    @Test
+    func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
         // Given I have started the app the first time, and gotten topics
-        var topicResponseItems = try #require(try? MockTopicsService.testTopicsResult.get())
+        var topicResponseItems = TopicResponseItem.arrangeMultiple
         sut.saveTopicsList(topicResponseItems)
 
         // When I start the app again and new topics are available to save
-        let newItem = TopicResponseItem(ref: "new-item", title: "New Item")
+        let newItem = TopicResponseItem(
+            ref: "new-item",
+            title: "New Item",
+            description: "Description"
+        )
         topicResponseItems.append(newItem)
         sut.saveTopicsList(topicResponseItems)
         
@@ -42,39 +49,23 @@ struct TopicsRepositoryTests {
 
     @Test
     func fetchFavoriteTopics_onlyReturnsFavorites() async throws {
-        createTopics(context: coreData.viewContext)
+        let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
+        Topic.arrange(context: coreData.viewContext, isFavourite: false)
+
         let favorites = sut.fetchFavoriteTopics()
         #expect(favorites.count == 1)
-        #expect(favorites.first?.title == "title3")
+        #expect(favorites.first?.title == expectedResult.title)
     }
     
-    @Test func saveChanges_persistsDataAsExpected() async throws {
-        // Given I save on the view context
-        createTopics(context: coreData.viewContext)
-        // After I save them
+    @Test
+    func saveChanges_persistsDataAsExpected() async throws {
+        Topic.arrangeMultiple(context: coreData.viewContext)
+
         sut.saveChanges()
-        // I should be able to fetch on another context
+
         let request = Topic.fetchRequest()
         let context = coreData.backgroundContext
         let topics = try #require(try? context.fetch(request))
         #expect(topics.count == 4)
     }
-    
-}
-
-private extension TopicsRepositoryTests {
-    @discardableResult
-    func createTopics(context: NSManagedObjectContext) -> [Topic] {
-        var topics = [Topic]()
-        for index in 0..<4 {
-            let topic = Topic(context: context)
-            topic.ref = "ref\(index)"
-            topic.title = "title\(index)"
-            topic.isFavorite = index == 3 ? true : false
-            topics.append(topic)
-        }
-        
-        return topics
-    }
-
 }

@@ -1,69 +1,87 @@
+import Foundation
 import Testing
+
 @testable import govuk_ios
 
 @Suite
 struct TopicsServiceTests {
     var sut: TopicsService!
-    var topicsServiceClient: MockTopicsServiceClient!
-    var topicsRepository: MockTopicsRepository!
-    
+    var mockTopicsServiceClient: MockTopicsServiceClient!
+    var mockTopicsRepository: MockTopicsRepository!
+
     init() {
-        topicsServiceClient = MockTopicsServiceClient()
-        topicsRepository = MockTopicsRepository()
+        mockTopicsServiceClient = MockTopicsServiceClient()
+        mockTopicsRepository = MockTopicsRepository()
         sut = TopicsService(
-            topicsServiceClient: topicsServiceClient,
-            topicsRepository: topicsRepository
+            topicsServiceClient: mockTopicsServiceClient,
+            topicsRepository: mockTopicsRepository
         )
     }
-    
+
     @Test
-    func topicsService_success_returnsExpectedData() async {
+    func downloadTopicsList_success_returnsExpectedData() async {
         let result = await withCheckedContinuation { continuation in
             sut.downloadTopicsList { result in
                 continuation.resume(returning: result)
             }
-            topicsServiceClient._receivedFetchTopicsCompletion?(
-                MockTopicsService.testTopicsResult
+            mockTopicsServiceClient._receivedFetchTopicsCompletion?(
+                .success(TopicResponseItem.arrangeMultiple)
             )
-            
+
         }
         let topicsList = try? result.get()
         #expect(topicsList?.count == 3)
-        #expect(topicsRepository._didCallSaveTopicsList == true)
+        #expect(mockTopicsRepository._didCallSaveTopicsList == true)
     }
-    
+
     @Test
-    func topicsService_failure_returnsExpectedResult() async {
+    func downloadTopicsList_failure_returnsExpectedResult() async {
         let result = await withCheckedContinuation { continuation in
             sut.downloadTopicsList { result in
                 continuation.resume(returning: result)
             }
-            topicsServiceClient._receivedFetchTopicsCompletion?(
-                MockTopicsService.testTopicsFailure
+            mockTopicsServiceClient._receivedFetchTopicsCompletion?(
+                .failure(.decodingError)
             )
         }
 
         #expect((try? result.get()) == nil)
         #expect(result.getError() == .decodingError)
-        #expect(topicsRepository._didCallSaveTopicsList == false)
+        #expect(mockTopicsRepository._didCallSaveTopicsList == false)
     }
-    
+
     @Test
     func fetchAllTopics_fetchesFromRepository() async {
         _ = sut.fetchAllTopics()
-        #expect(topicsRepository._didCallFetchAll)
+        #expect(mockTopicsRepository._didCallFetchAll)
     }
-    
+
     @Test
     func fetchFavoriteTopics_fetchesFromRepository() async {
         _ = sut.fetchFavoriteTopics()
-        #expect(topicsRepository._didCallFetchFavorites)
+        #expect(mockTopicsRepository._didCallFetchFavorites)
     }
-    
+
     @Test
     func updateFavorites_savesChangesToRepository() async {
         sut.updateFavoriteTopics()
-        #expect(topicsRepository._didCallSaveChanges)
+        #expect(mockTopicsRepository._didCallSaveChanges)
     }
-}
 
+    @Test
+    func fetchTopicDetails_success_returnsExpectedData() async {
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchTopicDetails(
+                topicRef: "test_ref",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+            mockTopicsServiceClient._receivedFetchTopicsDetailsCompletion?(
+                .success(.arrange())
+            )
+        }
+        #expect(mockTopicsServiceClient._receivedFetchTopicsDetailsTopicRef == "test_ref")
+    }
+
+}

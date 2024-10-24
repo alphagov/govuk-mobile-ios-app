@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 
 @testable import govuk_ios
@@ -16,13 +17,16 @@ struct TopicsServiceClientTests {
         )
     }
 
-    @Test func fetchTopicsList_sendsExpectedRequest() async {
+    //MARK: - Fetch Topics List
+    @Test
+    func fetchTopicsList_sendsExpectedRequest() async {
         sut.fetchTopicsList { _ in }
         #expect(mockAPI._receivedSendRequest?.urlPath == "/static/topics/list")
         #expect(mockAPI._receivedSendRequest?.method == .get)
     }
     
-    @Test func fetchTopicsList_success_returnsExpectedResult() async {
+    @Test
+    func fetchTopicsList_success_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success(Self.topicsListData)
         let result = await withCheckedContinuation { continuation in
             sut.fetchTopicsList { result in
@@ -34,8 +38,9 @@ struct TopicsServiceClientTests {
         #expect(topicsList?.first?.ref == "driving-transport")
     }
     
-    @Test func fetchTopicsList_failure_returnsExpectedResult() async {
-        mockAPI._stubbedSendResponse = .failure(TopicsListError.apiUnavailable)
+    @Test
+    func fetchTopicsList_failure_returnsExpectedResult() async {
+        mockAPI._stubbedSendResponse = .failure(TopicsServiceError.apiUnavailable)
         let result = await withCheckedContinuation { continuation in
             sut.fetchTopicsList { result in
                 continuation.resume(returning: result)
@@ -46,7 +51,8 @@ struct TopicsServiceClientTests {
         #expect(result.getError() == .apiUnavailable)
     }
     
-    @Test func fetchTopicsList_invalidJson_returnsExpectedResult() async {
+    @Test
+    func fetchTopicsList_invalidJson_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success("bad json".data(using: .utf8)!)
         let result = await withCheckedContinuation { continuation in
             sut.fetchTopicsList { result in
@@ -55,6 +61,57 @@ struct TopicsServiceClientTests {
         }
         let topicsList = try? result.get()
         #expect(topicsList == nil)
+        #expect(result.getError() == .decodingError)
+    }
+    
+    //MARK: - Fetch Topic Details
+    @Test
+    func fetchTopicDetails_sendsExpectedRequest() async {
+        let expectedTopicRef = UUID().uuidString
+        sut.fetchTopicDetails(topicRef: expectedTopicRef, completion: { _ in })
+        #expect(mockAPI._receivedSendRequest?.urlPath == "/static/topics/" + expectedTopicRef)
+        #expect(mockAPI._receivedSendRequest?.method == .get)
+    }
+    
+    @Test
+    func fetchTopicDetails_success_returnsExpectedResult() async {
+        mockAPI._stubbedSendResponse = .success(Self.topicDetailsData)
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
+                continuation.resume(returning:  result)
+            }
+        }
+        let topicDetails = try? result.get()
+        #expect(topicDetails?.ref == "driving-transport")
+        #expect(topicDetails?.subtopics.count == 7)
+        #expect(topicDetails?.content.count == 2)
+        #expect(topicDetails?.content.filter { $0.isStepByStep }.count == 1)
+        #expect(topicDetails?.content.first?.url.absoluteString == "https://www.gov.uk/learn-to-drive-a-car")
+    }
+    
+    @Test
+    func fetchTopicDetails_failure_returnsExpectedResult() async {
+        mockAPI._stubbedSendResponse = .failure(TopicsServiceError.apiUnavailable)
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let topicDetails = try? result.get()
+        #expect(topicDetails == nil)
+        #expect(result.getError() == .apiUnavailable)
+    }
+    
+    @Test
+    func fetchTopicDetails_invalidJson_returnsExpectedResult() async {
+        mockAPI._stubbedSendResponse = .success("bad json".data(using: .utf8)!)
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let topicDetails = try? result.get()
+        #expect(topicDetails == nil)
         #expect(result.getError() == .decodingError)
     }
 }
@@ -84,5 +141,59 @@ private extension TopicsServiceClientTests {
             "title": "Business"
         }
     ]
+    """.data(using: .utf8)!
+    
+    static let topicDetailsData =
+    """
+    {
+      "ref": "driving-transport",
+      "title": "Driving & Transport",
+      "subtopics": [
+        {
+          "ref": "driving",
+          "title": "Driving"
+        },
+        {
+          "ref": "driving-abroad",
+          "title": "Driving abroad"
+        },
+        {
+          "ref": "learn-to-drive-car",
+          "title": "Learning to drive a car, motorbike or mini-bus"
+        },
+        {
+          "ref": "owning-a-vehicle",
+          "title": "Owning a vehicle"
+        },
+        {
+          "ref": "losing-the-right-to-drive",
+          "title": "Losing the right to drive"
+        },
+        {
+          "ref": "driving-as-a-profession",
+          "title": "Driving as a profession or business"
+        },
+        {
+          "ref": "public-transport",
+          "title": "Using public transport"
+        }
+      ],
+      "content": [
+        {
+          "url": "https://www.gov.uk/learn-to-drive-a-car",
+          "title": "Learn to drive a car: step by step",
+          "description": "Learn to drive a car in the UK - get a provisional licence, take driving lessons, prepare for your theory test, book your practical test",
+          "isStepByStep": true,
+          "popular": true
+        },
+        {
+          "url": "https://www.gov.uk/view-driving-licence",
+          "title": "View or share your driving licence information",
+          "description": "Find out what information DVLA holds about your driving licence or create a check code to share your driving record, for example to hire a car ",
+          "isStepByStep": false,
+          "popular": true
+        }
+      ]
+    }
     """.data(using: .utf8)!
 }

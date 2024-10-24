@@ -19,9 +19,11 @@ struct TopicsRepository: TopicsRepositoryInterface {
         let context = coreData.backgroundContext
         let isFirstLaunch = fetchAllTopics().count == 0
         topicResponses.forEach { topicResponse in
-            createOrUpdateTopic(for: topicResponse,
-                                in: context,
-                                isFavorite: isFirstLaunch)
+            createOrUpdateTopic(
+                for: topicResponse,
+                in: context,
+                isFavorite: isFirstLaunch
+            )
         }
         try? context.save()
     }
@@ -57,9 +59,11 @@ struct TopicsRepository: TopicsRepositoryInterface {
                                      isFavorite: Bool) {
         guard let topic = fetchTopic(ref: topicResponse.ref,
                                      context: context) else {
-            createTopic(for: topicResponse,
-                        in: context,
-                        isFavorite: isFavorite)
+            createTopic(
+                for: topicResponse,
+                in: context,
+                isFavorite: isFavorite
+            )
             return
         }
         topic.title = topicResponse.title
@@ -72,6 +76,7 @@ struct TopicsRepository: TopicsRepositoryInterface {
         topic.ref = topicResponse.ref
         topic.title = topicResponse.title
         topic.isFavorite = isFavorite
+        topic.topicDescription = topicResponse.description
     }
 
     private func fetch(predicate: NSPredicate?,

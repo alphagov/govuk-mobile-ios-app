@@ -96,14 +96,18 @@ struct ViewControllerBuilderTests {
     func topicDetail_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
-            topic: Topic(),
-            analyticsService: MockAnalyticsService()
+            topic: MockDisplayableTopic(ref: "", title: ""),
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService(),
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
         )
         
-        let rootView = (result as? HostingViewController<TopicDetailView>)?.rootView
-        #expect(rootView != nil) 
+        let rootView = (result as? HostingViewController<TopicDetailView<TopicDetailViewModel>>)?.rootView
+        #expect(rootView != nil)
     }
-    
+
     @Test
     func editTopics_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()

@@ -106,12 +106,47 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func topicDetail(topic: Topic,
-                     analyticsService: AnalyticsServiceInterface
+    // swiftlint:disable:next function_parameter_count
+    func topicDetail(topic: DisplayableTopic,
+                     topicsService: TopicsServiceInterface,
+                     analyticsService: AnalyticsServiceInterface,
+                     activityService: ActivityServiceInterface,
+                     subtopicAction: @escaping (DisplayableTopic) -> Void,
+                     stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void
     ) -> UIViewController {
-        var view = TopicDetailView()
-        view.topic = topic
-        return HostingViewController(rootView: view)
+        let viewModel = TopicDetailViewModel(
+            topic: topic,
+            topicsService: topicsService,
+            analyticsService: analyticsService,
+            activityService: activityService,
+            urlOpener: UIApplication.shared,
+            subtopicAction: subtopicAction,
+            stepByStepAction: stepByStepAction
+        )
+
+        let view = TopicDetailView(viewModel: viewModel)
+        let viewController = HostingViewController(rootView: view)
+        viewController.title = viewModel.title
+        viewController.navigationItem.largeTitleDisplayMode = .always
+        viewController.navigationItem.backButtonTitle = viewModel.title
+        return viewController
+    }
+
+    @MainActor
+    func stepByStep(content: [TopicDetailResponse.Content],
+                    analyticsService: AnalyticsServiceInterface,
+                    activityService: ActivityServiceInterface) -> UIViewController {
+        let viewModel = StepByStepsViewModel(
+            content: content,
+            analyticsService: analyticsService,
+            activityService: activityService,
+            urlOpener: UIApplication.shared
+        )
+        let view = TopicDetailView(viewModel: viewModel)
+        let viewController = HostingViewController(rootView: view)
+        viewController.title = viewModel.title
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        return viewController
     }
 
     @MainActor

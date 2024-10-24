@@ -1,23 +1,27 @@
 import Testing
 import UIKit
+
 @testable import govuk_ios
 
 @Suite
-struct TopicsCoordinatorTests {
-
+struct TopicsDetailCoordinatorTests {
     @MainActor
     @Test
     func start_setsTopicDetailView() throws {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockAnalyticsService = MockAnalyticsService()
+        let mockTopicsService = MockTopicsService()
+        let mockActivityService = MockActivityService()
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
         
         mockViewControllerBuilder._stubbedTopicDetailViewController = expectedViewController
         
-        let subject = TopicsCoordinator(
+        let subject = TopicDetailsCoordinator(
             navigationController: navigationController,
             analyticsService: mockAnalyticsService,
+            topicsService: mockTopicsService,
+            activityService: mockActivityService,
             viewControllerBuilder: mockViewControllerBuilder,
             topic: Topic()
         )
@@ -26,5 +30,4 @@ struct TopicsCoordinatorTests {
         
         #expect(navigationController.viewControllers.first == expectedViewController)
     }
-
 }

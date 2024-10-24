@@ -12,7 +12,7 @@ struct TopicsWidgetViewModelTests {
     @Test
     func initializeModel_downloadSuccess_returnsExpectedData() async throws {
         
-        topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsResult
+        topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
@@ -27,7 +27,7 @@ struct TopicsWidgetViewModelTests {
     
     @Test
     func initializeModel_downloadFailure_returnsExpectedResult() async throws {
-        topicService._receivedFetchTopicsResult = MockTopicsService.testTopicsFailure
+        topicService._stubbedDownloadTopicsListResult = .failure(.decodingError)
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
@@ -90,7 +90,12 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func allTopicsButtonHidden_allFavourited_returnsTrue() {
-        topicService._allTopicsFavourited = true
+        topicService._stubbedFetchFavoriteTopics = [
+            .arrange(context: coreData.viewContext, isFavourite: true)
+        ]
+        topicService._stubbedFetchAllTopics = [
+            .arrange(context: coreData.viewContext, isFavourite: true)
+        ]
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
@@ -105,7 +110,11 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func allTopicsButtonHidden_notAllFavourited_returnsFalse() {
-        topicService._allTopicsFavourited = false
+        topicService._stubbedFetchFavoriteTopics = []
+        topicService._stubbedFetchAllTopics = [
+            .arrange(context: coreData.viewContext, isFavourite: false),
+            .arrange(context: coreData.viewContext, isFavourite: false)
+        ]
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,

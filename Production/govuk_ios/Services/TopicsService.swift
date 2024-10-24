@@ -2,6 +2,8 @@ import Foundation
 
 protocol TopicsServiceInterface {
     func downloadTopicsList(completion: @escaping FetchTopicsListResult)
+    func fetchTopicDetails(topicRef: String,
+                           completion: @escaping FetchTopicDetailsResult)
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
     func updateFavoriteTopics()
@@ -18,8 +20,8 @@ struct TopicsService: TopicsServiceInterface {
     }
 
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
-        topicsServiceClient.fetchTopicsList { result in
-            DispatchQueue.main.async {
+        topicsServiceClient.fetchTopicsList(
+            completion: { result in
                 switch result {
                 case .success(let topics):
                     topicsRepository.saveTopicsList(topics)
@@ -28,7 +30,15 @@ struct TopicsService: TopicsServiceInterface {
                     completion(.failure(error))
                 }
             }
-        }
+        )
+    }
+
+    func fetchTopicDetails(topicRef: String,
+                           completion: @escaping FetchTopicDetailsResult) {
+        topicsServiceClient.fetchTopicDetails(
+            topicRef: topicRef,
+            completion: completion
+        )
     }
 
     func fetchAllTopics() -> [Topic] {

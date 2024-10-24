@@ -1,15 +1,17 @@
 import Foundation
 import UIKit
 import SwiftUI
+import UIComponents
 
 class TopicOnboardingViewController: BaseViewController,
                                      UIScrollViewDelegate {
     let viewModel: TopicOnboardingViewModel
+    private let backgroundColor = UIColor.govUK.fills.surfaceBackground
 
     init(viewModel: TopicOnboardingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .white
+        view.backgroundColor = backgroundColor
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -101,5 +103,11 @@ class TopicOnboardingViewController: BaseViewController,
             scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor)
         ])
+    }
+}
+
+extension TopicOnboardingViewController: TrackableScreen {
+    var trackingName: String {
+        "Select relevant topics"
     }
 }

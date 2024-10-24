@@ -71,6 +71,7 @@ struct TopicsRepository: TopicsRepositoryInterface {
         let topic = Topic(context: context)
         topic.ref = topicResponse.ref
         topic.title = topicResponse.title
+        topic.topicDescription = topicResponse.description
     }
 
     private func fetch(predicate: NSPredicate?,

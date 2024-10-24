@@ -44,7 +44,7 @@ final class TopicsWidgetViewModel {
             switch hasTopicsBeenEdited {
             case true:
                 return topicsService.fetchFavoriteTopics()
-            case false:
+            default:
                 return topicsService.fetchAllTopics()
             }
         } else {
@@ -66,15 +66,14 @@ final class TopicsWidgetViewModel {
         action(topic)
     }
 
-    // Verify this with andrew
-    func didSelectOnboardingTopic(title: String,
-                                  topic: Topic,
-                                  isTopicSelected: Bool) {
+    func selectOnboardingTopic(topic: Topic,
+                               isTopicSelected: Bool) {
         guard let action = topicAction else { return }
-        let event = AppEvent.buttonFunction(
-            text: title,
-            section: "onboarding",
-            action: isTopicSelected == true ? "select" : "deselect"
+        let event = AppEvent.function(
+            text: topic.title,
+            type: "buttons",
+            section: "topic selection",
+            action: isTopicSelected == true ? "add" : "remove"
         )
         analyticsService.track(event: event)
         action(topic)

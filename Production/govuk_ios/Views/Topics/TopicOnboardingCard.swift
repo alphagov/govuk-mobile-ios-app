@@ -10,6 +10,7 @@ class TopicOnboardingCard: UIView {
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         label.text = viewModel.title
+        label.textAlignment = .center
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.lineBreakMode = .byWordWrapping
         return label
@@ -82,6 +83,11 @@ class TopicOnboardingCard: UIView {
         configureAccessibility()
     }
 
+
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     private func configureUI() {
         backgroundColor = UIColor.govUK.fills.surfaceCard
         layer.borderWidth = 1
@@ -135,7 +141,6 @@ class TopicOnboardingCard: UIView {
         toggleSelectedIconAndTextViews()
         guard let labelText = selectedLabel.text else { return }
         viewModel.tapAction(
-            labelText,
             viewModel.isSelected
         )
     }
@@ -160,19 +165,38 @@ class TopicOnboardingCard: UIView {
     }
 
     private func toggleTintColourOfCard() {
-        if viewModel.isSelected {
+        if self.traitCollection.userInterfaceStyle == .dark {
+            configureColoursForDarkMode()
+        } else {
+            configureColoursForLightMode()
+        }
+    }
+
+    private func configureColoursForLightMode() {
+        switch viewModel.isSelected {
+        case true:
             self.backgroundColor = UIColor(
                 resource: ColorResource(
                     name: "topicOnboardingTint",
                     bundle: .main
                 )
             )
-        } else {
-            self.backgroundColor = .white
+        case false:
+            self.backgroundColor = UIColor.govUK.fills.surfaceCard
         }
     }
 
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func configureColoursForDarkMode() {
+        switch viewModel.isSelected {
+        case true:
+            self.backgroundColor = UIColor(
+                resource: ColorResource(
+                    name: "topicOnboardingTintDarkMode",
+                    bundle: .main
+                )
+            )
+        case false:
+            self.backgroundColor = UIColor.govUK.fills.surfaceCard
+        }
     }
 }

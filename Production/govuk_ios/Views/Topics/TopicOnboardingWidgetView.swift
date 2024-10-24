@@ -5,16 +5,6 @@ class TopicsOnboardingWidgetView: UIView {
 
     private var rowCount = 2
 
-    private lazy var headerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 16
-        stackView.alignment = .bottom
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-
     private lazy var cardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -75,7 +65,7 @@ class TopicsOnboardingWidgetView: UIView {
     private func updateTopics(_ topics: [Topic]) {
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for index in 0..<topics.count where index % rowCount == 0 {
-            let rowStack = createNewRow(startingAt: index, of: topics)
+            let rowStack = createRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false
             cardStackView.addArrangedSubview(rowStack)
             rowStack.leadingAnchor.constraint(
@@ -87,14 +77,14 @@ class TopicsOnboardingWidgetView: UIView {
         }
     }
 
-    private func createNewRow(startingAt startIndex: Int, of topics: [Topic]) -> UIStackView {
+    private func createRow(startingAt startIndex: Int, of topics: [Topic]) -> UIStackView {
         let rowStack = createRowStack()
-        let firstCard = createTopicCard(for: topics[startIndex])
+        let firstCard = createOnboardingTopicCard(for: topics[startIndex])
         rowStack.addArrangedSubview(firstCard)
 
         for index in (startIndex + 1)..<(startIndex + rowCount) {
             if index <= topics.count - 1 {
-                let card = createTopicCard(for: topics[index])
+                let card = createOnboardingTopicCard(for: topics[index])
                 rowStack.addArrangedSubview(card)
                 firstCard.heightAnchor.constraint(equalTo: card.heightAnchor).isActive = true
             } else {
@@ -113,10 +103,9 @@ class TopicsOnboardingWidgetView: UIView {
         return rowStack
     }
 
-    private func createTopicCard(for topic: Topic) -> TopicOnboardingCard {
-        let model = TopicOnboardingCardModel(topic: topic) { buttonLabelText, isSelected  in
-            self.viewModel.didSelectOnboardingTopic(
-                title: buttonLabelText,
+    private func createOnboardingTopicCard(for topic: Topic) -> TopicOnboardingCard {
+        let model = TopicOnboardingCardModel(topic: topic) { isSelected  in
+            self.viewModel.selectOnboardingTopic(
                 topic: topic,
                 isTopicSelected: isSelected
             )

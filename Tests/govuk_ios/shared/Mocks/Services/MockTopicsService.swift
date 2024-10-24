@@ -3,9 +3,6 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {
-    func hasTopicsBeenEdited() -> Bool {
-        _setHasEditedTopicsCalled
-    }
 
     var _setHasEditedTopicsCalled = false
     func setHasEditedTopics() {
@@ -18,9 +15,12 @@ class MockTopicsService: TopicsServiceInterface {
     func fetchAllTopics() -> [Topic] {
         mockTopics
     }
-    
+    var _stubbedFavouriteTopics: [Topic]?
     func fetchFavoriteTopics() -> [Topic] {
-        mockTopics
+        guard let favouriteTopics = _stubbedFavouriteTopics else {
+            return mockTopics
+        }
+        return favouriteTopics
     }
     
     var _updateFavoriteTopicsCalled = false
@@ -42,10 +42,19 @@ class MockTopicsService: TopicsServiceInterface {
 
 extension MockTopicsService {
     static var testTopicsResult: Result<[TopicResponseItem], TopicsListError> {
-        let topics = [TopicResponseItem(ref: "driving-transport", title: "Driving & Transport"),
-                      TopicResponseItem(ref: "care", title: "Care"),
-                      TopicResponseItem(ref: "business", title: "Business")
-                      ]
+        let topics = [TopicResponseItem(
+            ref: "driving-transport",
+            title: "Driving & Transport",
+            description: "Learning to drive, owning a vehiicle"
+        ), TopicResponseItem(
+            ref: "care",
+            title: "Care",
+            description: "Learning to drive, owning a vehiicle"
+        ),TopicResponseItem(
+            ref: "business",
+            title: "Business",
+            description: "Learning to drive, owning a vehiicle"
+        )]
         return .success(topics)
     }
     

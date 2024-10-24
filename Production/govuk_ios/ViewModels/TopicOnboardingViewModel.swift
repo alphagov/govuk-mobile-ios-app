@@ -10,13 +10,20 @@ class TopicOnboardingViewModel: ObservableObject {
     let navigationTitle = String.topics.localized(
         "topicOnboardingNavigationTitle"
     )
-
     private let primaryButtonTitle = String.topics.localized(
         "topicsOnboardingPrimaryBtnTitle"
     )
     private let secondaryButtonTitle = String.topics.localized(
         "topicsOnboardingSecondaryBtnTitle"
     )
+
+    init(analyticsService: AnalyticsServiceInterface,
+         topicsService: TopicsServiceInterface,
+         dismissAction: @escaping () -> Void) {
+        self.analyticsService = analyticsService
+        self.topicsService = topicsService
+        self.dismissAction = dismissAction
+    }
 
     var widgets: [WidgetView] {
         [topicsWidget]
@@ -28,19 +35,11 @@ class TopicOnboardingViewModel: ObservableObject {
         } else {
             selectedTopics[topic.title] = topic
         }
-        hasTopicsBeenSelected()
+        setHasTopicsBeenSelected()
     }
 
-    private func hasTopicsBeenSelected() {
+    private func setHasTopicsBeenSelected() {
         isTopicsSelected = selectedTopics.isEmpty ? false : true
-    }
-
-    init(analyticsService: AnalyticsServiceInterface,
-         topicsService: TopicsServiceInterface,
-         dismissAction: @escaping () -> Void) {
-        self.analyticsService = analyticsService
-        self.topicsService = topicsService
-        self.dismissAction = dismissAction
     }
 
     private var topicsWidget: WidgetView {
@@ -78,30 +77,14 @@ class TopicOnboardingViewModel: ObservableObject {
             action: { [weak self] in
                 guard let self = self else { return }
                 self.saveFavouriteTopics()
+                self.trackPrimaryEvent()
                 self.finishSelectionAction()
             }
         )
     }
 
-    private var selectableTopicsWidget: WidgetView? {
-        let topicWidgetviewModel = TopicsWidgetViewModel(
-            topicsService: topicsService,
-            analyticsService: analyticsService,
-            userDefaults: .standard,
-            topicAction: { [weak self] topic in
-                self?.selectTopic(topic: topic)
-            },
-            editAction: nil)
-
-        let content = TopicsOnboardingWidgetView(
-            viewModel: topicWidgetviewModel
-        )
-        let widget = WidgetView(decorateView: false)
-        widget.addContent(content)
-        return widget
-    }
-
     private func skipAction() {
+        self.trackSecondaryEvent()
         self.dismissAction()
     }
 
@@ -118,5 +101,21 @@ class TopicOnboardingViewModel: ObservableObject {
     private func saveFavouriteTopics() {
         saveTopicsToFavourite()
         topicsService.updateFavoriteTopics()
+    }
+
+    private func trackPrimaryEvent() {
+        let event = AppEvent.buttonNavigation(
+            text: "Done",
+            external: false
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackSecondaryEvent() {
+        let event = AppEvent.buttonNavigation(
+            text: "Skip",
+            external: false
+        )
+        analyticsService.track(event: event)
     }
 }

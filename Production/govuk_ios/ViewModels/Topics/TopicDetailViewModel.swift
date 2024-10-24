@@ -88,9 +88,10 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     private func createPopularContentSection() -> GroupedListSection? {
         guard let content = topicDetail?.popularContent else { return nil }
+        let sectionTitle = String.topics.localized("topicDetailPopularPagesHeader")
         return GroupedListSection(
-            heading: String.topics.localized("topicDetailPopularPagesHeader"),
-            rows: content.map { createContentRow($0) },
+            heading: sectionTitle,
+            rows: content.map { createContentRow($0, sectionTitle: sectionTitle) },
             footer: nil
         )
     }
@@ -99,8 +100,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         guard let stepBySteps = topicDetail?.stepByStepContent
         else { return nil }
         var rows = [GroupedListRow]()
+        let sectionTitle = String.topics.localized("topicDetailStepByStepHeader")
         if stepBySteps.count > 3 {
-            rows = Array(stepBySteps.prefix(3)).map { createContentRow($0) }
+            rows = Array(stepBySteps.prefix(3)).map {
+                createContentRow($0, sectionTitle: sectionTitle)
+            }
             let seeAllRow = NavigationRow(
                 id: "topic.stepbystep.showall",
                 title: String.topics.localized("topicDetailSeeAllRowTitle"),
@@ -111,11 +115,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             )
             rows.append(seeAllRow)
         } else {
-            rows = stepBySteps.map { createContentRow($0) }
+            rows = stepBySteps.map { createContentRow($0, sectionTitle: sectionTitle) }
         }
 
         return GroupedListSection(
-            heading: String.topics.localized("topicDetailStepByStepHeader"),
+            heading: sectionTitle,
             rows: rows,
             footer: nil
         )
@@ -135,14 +139,16 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private func createOtherContentSection() -> GroupedListSection? {
         guard let content = topicDetail?.otherContent
         else { return nil }
+        let sectionTitle = String.topics.localized("topicDetailOtherContentHeader")
         return GroupedListSection(
-            heading: String.topics.localized("topicDetailOtherContentHeader"),
-            rows: content.map { createContentRow($0) },
+            heading: sectionTitle,
+            rows: content.map { createContentRow($0, sectionTitle: sectionTitle) },
             footer: nil
         )
     }
 
-    private func createContentRow(_ content: TopicDetailResponse.Content) -> LinkRow {
+    private func createContentRow(_ content: TopicDetailResponse.Content,
+                                  sectionTitle: String) -> LinkRow {
         LinkRow(
             id: content.title,
             title: content.title,
@@ -150,7 +156,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             action: {
                 if self.urlOpener.openIfPossible(content.url) {
                     self.activityService.save(topicContent: content)
-                    self.trackLinkEvent(content)
+                    self.trackLinkEvent(content, sectionTitle: sectionTitle)
                 }
             }
         )
@@ -172,8 +178,12 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         analyticsService.track(screen: screen)
     }
 
-    private func trackLinkEvent(_ content: TopicDetailResponse.Content) {
-        let event = AppEvent.topicLinkNavigation(content: content)
+    private func trackLinkEvent(_ content: TopicDetailResponse.Content,
+                                sectionTitle: String) {
+        let event = AppEvent.topicLinkNavigation(
+            content: content,
+            sectionTitle: sectionTitle
+        )
         analyticsService.track(event: event)
     }
 

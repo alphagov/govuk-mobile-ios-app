@@ -10,14 +10,15 @@ extension AppEvent {
         )
     }
 
-    static func topicLinkNavigation(content: TopicDetailResponse.Content) -> AppEvent {
+    static func topicLinkNavigation(content: TopicDetailResponse.Content,
+                                    sectionTitle: String) -> AppEvent {
         navigation(
             text: content.title,
             type: "Button",
             external: true,
             additionalParams: [
                 "url": content.url.absoluteString,
-                "section": sectionNameForContent(content)
+                "section": sectionTitle
             ]
         )
     }
@@ -31,15 +32,5 @@ extension AppEvent {
                 "section": "Sub topics"
             ]
         )
-    }
-
-    private static func sectionNameForContent(_ content: TopicDetailResponse.Content) -> String {
-        if content.isStepByStep {
-            return "Step by steps"
-        }
-        if content.popular {
-            return "Popular"
-        }
-        return "Services and information"
     }
 }

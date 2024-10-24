@@ -21,26 +21,26 @@ struct AppEvent_TopicsTests {
         #expect(result.params?["action"] as? String == expectedValue)
     }
     
-    @Test(arguments: [true, false])
-    func topicLinkNavigation_returnsExpectedResult(isPopular: Bool) {
+    @Test
+    func topicLinkNavigation_returnsExpectedResult() {
         let expectedTitle = UUID().uuidString
         let expectedURL = URL(string: "https://www.google.com")!
 
-        let content = TopicDetailResponse.Content(
+        let content = TopicDetailResponse.Content.arrange(
             title: expectedTitle,
-            description: "",
-            isStepByStep: false,
-            popular: isPopular,
             url: expectedURL
         )
-        let result = AppEvent.topicLinkNavigation(content: content)
+        let result = AppEvent.topicLinkNavigation(
+            content: content,
+            sectionTitle: "test_section"
+        )
         #expect(result.name == "Navigation")
         #expect(result.params?.count == 6)
         #expect(result.params?["external"] as? Bool == true)
         #expect(result.params?["language"] as? String == "en")
         #expect(result.params?["text"] as? String == expectedTitle)
         #expect(result.params?["type"] as? String == "Button")
-        #expect(result.params?["section"] as? String == (isPopular ? "Popular" : "Services and information"))
+        #expect(result.params?["section"] as? String == "test_section")
         #expect(result.params?["url"] as? String == expectedURL.absoluteString)
     }
     
@@ -49,31 +49,29 @@ struct AppEvent_TopicsTests {
         let expectedTitle = UUID().uuidString
         let expectedURL = URL(string: "https://www.google.com")!
 
-        let content = TopicDetailResponse.Content(
+        let content = TopicDetailResponse.Content.arrange(
             title: expectedTitle,
-            description: "",
-            isStepByStep: true,
-            popular: false,
             url: expectedURL
         )
-        let result = AppEvent.topicLinkNavigation(content: content)
+        let result = AppEvent.topicLinkNavigation(
+            content: content,
+            sectionTitle: "test_section"
+        )
         #expect(result.name == "Navigation")
         #expect(result.params?.count == 6)
         #expect(result.params?["external"] as? Bool == true)
         #expect(result.params?["language"] as? String == "en")
         #expect(result.params?["text"] as? String == expectedTitle)
         #expect(result.params?["type"] as? String == "Button")
-        #expect(result.params?["section"] as? String == "Step by steps")
+        #expect(result.params?["section"] as? String == "test_section")
         #expect(result.params?["url"] as? String == expectedURL.absoluteString)
     }
     
     @Test(arguments: ["Test", "Driving"])
     func subtopicNavigation_returnsExpectedResult(title: String) {
         let expectedTitle = title
-        let content = TopicDetailResponse.Subtopic(
-            ref: "testRef",
-            title: title,
-            description: "description"
+        let content = TopicDetailResponse.Subtopic.arrange(
+            title: title
         )
         let result = AppEvent.subtopicNavigation(subtopic: content)
 

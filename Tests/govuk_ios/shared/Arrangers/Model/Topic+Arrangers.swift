@@ -7,7 +7,7 @@ extension Topic {
 
     static func arrangeMultipleFavourites(context: NSManagedObjectContext) -> [Topic] {
         let values: [(ref: String, title: String)] = [
-            ("driving-transport", title: "Driving & Transport"),
+            (ref: "driving-transport", title: "Driving & Transport"),
             (ref: "care", title: "Care"),
             (ref: "business", title: "Business")
         ]
@@ -15,8 +15,8 @@ extension Topic {
         var topics = [Topic]()
         for response in values {
             let topic = Topic(context: context)
-            topic.title = response.title
             topic.ref = response.ref
+            topic.title = response.title
             topic.isFavorite = true
             topics.append(topic)
         }

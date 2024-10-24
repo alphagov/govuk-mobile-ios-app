@@ -57,7 +57,10 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
     }
 
     private func trackLinkEvent(_ content: TopicDetailResponse.Content) {
-        let event = AppEvent.topicLinkNavigation(content: content)
+        let event = AppEvent.topicLinkNavigation(
+            content: content,
+            sectionTitle: String.topics.localized("topicDetailStepByStepHeader")
+        )
         analyticsService.track(event: event)
     }
 }

@@ -9,5 +9,7 @@ struct Constants {
         static let govukUrlString = "https://www.gov.uk"
         static let privacyPolicyUrl = "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data"
         static let helpAndFeedbackUrl = "https://www.gov.uk/contact/govuk"
+        static let termsAndConditionsURL = "https://www.gov.uk/government/publications/govuk-app-terms-and-conditions"
+        static let accessibilityStatementURL = "https://www.gov.uk/government/publications/accessibility-statement-for-the-govuk-app"
     }
 }

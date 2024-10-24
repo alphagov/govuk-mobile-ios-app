@@ -15,8 +15,12 @@ extension Container {
 
     var searchAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
-            APIServiceClient(
-                baseUrl: URL(string: Constants.API.searchApiUrlString)!,
+            let searchApiUrl = self.appConfigService().searchApiUrl
+            let components = URLComponents(string: searchApiUrl)!
+            let baseUrl = components.scheme! + "://" + components.host!
+
+            return APIServiceClient(
+                baseUrl: URL(string: baseUrl)!,
                 session: URLSession(configuration: .default),
                 requestBuilder: RequestBuilder()
             )

@@ -2,6 +2,7 @@ import Foundation
 
 protocol SearchServiceClientInterface {
     func search(term: String,
+                searchApiUrlPath: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
 }
 
@@ -13,9 +14,10 @@ class SearchServiceClient: SearchServiceClientInterface {
     }
 
     func search(term: String,
+                searchApiUrlPath: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void) {
         serviceClient.send(
-            request: .search(term: term),
+            request: .search(term: term, searchApiUrlPath: searchApiUrlPath),
             completion: { result in
                 let mappedResult = result.mapError { error in
                     let nsError = (error as NSError)

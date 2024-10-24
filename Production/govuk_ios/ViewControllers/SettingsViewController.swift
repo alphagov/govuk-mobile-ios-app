@@ -40,23 +40,20 @@ class SettingsViewController: BaseViewController,
         configureConstraints()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.scrollview.setContentOffset(CGPoint(x: 0, y: -16), animated: true)
-    }
-
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         navigationItem.largeTitleDisplayMode = .always
         coordinator.animate(alongsideTransition: { (_) in
             self.navigationController?.navigationBar.sizeToFit()
-            self.scrollview.setContentOffset(CGPoint(x: 0, y: -16), animated: true)
         }, completion: nil)
     }
 
     private func configureUI() {
         scrollview.translatesAutoresizingMaskIntoConstraints = false
+        let contentInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
+        self.scrollview.contentInset = contentInsets
+        scrollview.contentInsetAdjustmentBehavior = .never
         view.addSubview(scrollview)
 
         addChild(contentViewController)
@@ -75,8 +72,7 @@ class SettingsViewController: BaseViewController,
                 equalTo: scrollview.trailingAnchor
             ),
             contentViewController.view.topAnchor.constraint(
-                equalTo: scrollview.contentLayoutGuide.topAnchor,
-                constant: 10
+                equalTo: scrollview.contentLayoutGuide.topAnchor
             ),
             contentViewController.view.heightAnchor.constraint(
                 lessThanOrEqualTo: scrollview.contentLayoutGuide.heightAnchor

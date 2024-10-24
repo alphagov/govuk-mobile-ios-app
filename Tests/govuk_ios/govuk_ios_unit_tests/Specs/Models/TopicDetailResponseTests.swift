@@ -9,18 +9,19 @@ struct TopicDetailResponseTests {
     @Test
     func popularContent_empty_returnsNil() {
         let sut = TopicDetailResponse(
+            ref: "1234",
+            title: "title",
+            description: "description",
             content: [
                 .init(
+                    title: "test_title",
                     description: "",
                     isStepByStep: true,
                     popular: false,
-                    title: "test_title",
                     url: .init(string: "www.test.com")!
                 )
             ],
-            ref: "1234",
-            subtopics: [],
-            title: "title"
+            subtopics: []
         )
         #expect(sut.popularContent == nil)
     }
@@ -28,10 +29,11 @@ struct TopicDetailResponseTests {
     @Test
     func stepByStepContent_empty_returnsNil() {
         let sut = TopicDetailResponse(
-            content: [],
             ref: "1234",
-            subtopics: [],
-            title: "title"
+            title: "title",
+            description: "description",
+            content: [],
+            subtopics: []
         )
         #expect(sut.stepByStepContent == nil)
     }
@@ -39,10 +41,11 @@ struct TopicDetailResponseTests {
     @Test
     func otherContent_empty_returnsNil() {
         let sut = TopicDetailResponse(
-            content: [],
             ref: "1234",
-            subtopics: [],
-            title: "title"
+            title: "title",
+            description: "description",
+            content: [],
+            subtopics: []
         )
         #expect(sut.otherContent == nil)
     }
@@ -50,18 +53,19 @@ struct TopicDetailResponseTests {
     @Test
     func popularContent_some_returnsNil() {
         let sut = TopicDetailResponse(
+            ref: "1234",
+            title: "title",
+            description: "description",
             content: [
                 .init(
+                    title: "test_title",
                     description: "",
                     isStepByStep: false,
                     popular: true,
-                    title: "test_title",
                     url: .init(string: "www.test.com")!
                 )
             ],
-            ref: "1234",
-            subtopics: [],
-            title: "title"
+            subtopics: []
         )
         #expect(sut.popularContent?.count == 1)
         #expect(sut.popularContent?.first?.title == "test_title")
@@ -70,18 +74,19 @@ struct TopicDetailResponseTests {
     @Test
     func stepByStepContent_some_returnsNil() {
         let sut = TopicDetailResponse(
+            ref: "1234",
+            title: "title",
+            description: "description",
             content: [
                 .init(
+                    title: "test_title",
                     description: "",
                     isStepByStep: true,
                     popular: false,
-                    title: "test_title",
                     url: .init(string: "www.test.com")!
                 )
             ],
-            ref: "1234",
-            subtopics: [],
-            title: "title"
+            subtopics: []
         )
         #expect(sut.stepByStepContent?.count == 1)
         #expect(sut.stepByStepContent?.first?.title == "test_title")
@@ -90,18 +95,19 @@ struct TopicDetailResponseTests {
     @Test
     func otherContent_some_returnsNil() {
         let sut = TopicDetailResponse(
+            ref: "1234",
+            title: "title",
+            description: "description",
             content: [
                 .init(
+                    title: "test_title",
                     description: "",
                     isStepByStep: false,
                     popular: false,
-                    title: "test_title",
                     url: .init(string: "www.test.com")!
                 )
             ],
-            ref: "1234",
-            subtopics: [],
-            title: "title"
+            subtopics: []
         )
         #expect(sut.otherContent?.count == 1)
         #expect(sut.otherContent?.first?.title == "test_title")

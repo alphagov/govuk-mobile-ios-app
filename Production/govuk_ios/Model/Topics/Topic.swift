@@ -17,6 +17,7 @@ class Topic: NSManagedObject,
 
     @NSManaged public var ref: String
     @NSManaged public var title: String
+    @NSManaged public var topicDescription: String?
     @NSManaged public var isFavorite: Bool
 
     var iconName: String {

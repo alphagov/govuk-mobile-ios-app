@@ -2,7 +2,7 @@ import Foundation
 
 protocol TopicDetailViewModelInterface: ObservableObject {
     var title: String { get }
-    var shouldShowDescription: Bool { get }
+    var description: String? { get }
     var sections: [GroupedListSection] { get }
     func trackScreen(screen: TrackableScreen)
 }
@@ -22,6 +22,12 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     var title: String {
         topic.title
+    }
+
+    var description: String? {
+        guard shouldShowDescription
+        else { return nil }
+        return topicDetail?.description
     }
 
     var shouldShowDescription: Bool {

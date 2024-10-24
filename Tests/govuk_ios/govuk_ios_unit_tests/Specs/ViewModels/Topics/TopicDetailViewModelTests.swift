@@ -107,7 +107,7 @@ struct TopicDetailViewModelTests {
         let expectedContent = TopicDetailResponse.arrange()
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(expectedContent)
         let sut = TopicDetailViewModel(
-            topic: TopicDetailResponse.Subtopic(ref: "test", title: "test"),
+            topic: TopicDetailResponse.Subtopic(ref: "test", title: "test", description: "description"),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,

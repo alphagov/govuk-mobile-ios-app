@@ -5,9 +5,21 @@ import Foundation
 extension TopicResponseItem {
     static var arrangeMultiple: [TopicResponseItem] {
         return [
-            TopicResponseItem(ref: "driving-transport", title: "Driving & Transport"),
-            TopicResponseItem(ref: "care", title: "Care"),
-            TopicResponseItem(ref: "business", title: "Business")
+            TopicResponseItem(
+                ref: "driving-transport",
+                title: "Driving & Transport",
+                description: "Driving description"
+            ),
+            TopicResponseItem(
+                ref: "care",
+                title: "Care",
+                description: "Care description"
+            ),
+            TopicResponseItem(
+                ref: "business",
+                title: "Business",
+                description: "Business description"
+            )
         ]
     }
 }

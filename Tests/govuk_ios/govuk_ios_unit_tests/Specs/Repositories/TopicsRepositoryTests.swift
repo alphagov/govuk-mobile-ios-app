@@ -32,7 +32,11 @@ struct TopicsRepositoryTests {
         sut.saveTopicsList(topicResponseItems)
 
         // When I start the app again and new topics are available to save
-        let newItem = TopicResponseItem(ref: "new-item", title: "New Item")
+        let newItem = TopicResponseItem(
+            ref: "new-item",
+            title: "New Item",
+            description: "Description"
+        )
         topicResponseItems.append(newItem)
         sut.saveTopicsList(topicResponseItems)
         

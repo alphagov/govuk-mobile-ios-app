@@ -26,11 +26,13 @@ struct AppEvent_TopicsTests {
         let expectedTitle = UUID().uuidString
         let expectedURL = URL(string: "https://www.google.com")!
 
-        let content = TopicDetailResponse.Content(description: "",
-                                                  isStepByStep: false,
-                                                  popular: isPopular,
-                                                  title: expectedTitle,
-                                                  url: expectedURL)
+        let content = TopicDetailResponse.Content(
+            title: expectedTitle,
+            description: "",
+            isStepByStep: false,
+            popular: isPopular,
+            url: expectedURL
+        )
         let result = AppEvent.topicLinkNavigation(content: content)
         #expect(result.name == "Navigation")
         #expect(result.params?.count == 6)
@@ -47,11 +49,13 @@ struct AppEvent_TopicsTests {
         let expectedTitle = UUID().uuidString
         let expectedURL = URL(string: "https://www.google.com")!
 
-        let content = TopicDetailResponse.Content(description: "",
-                                                  isStepByStep: true,
-                                                  popular: false,
-                                                  title: expectedTitle,
-                                                  url: expectedURL)
+        let content = TopicDetailResponse.Content(
+            title: expectedTitle,
+            description: "",
+            isStepByStep: true,
+            popular: false,
+            url: expectedURL
+        )
         let result = AppEvent.topicLinkNavigation(content: content)
         #expect(result.name == "Navigation")
         #expect(result.params?.count == 6)
@@ -66,9 +70,13 @@ struct AppEvent_TopicsTests {
     @Test(arguments: ["Test", "Driving"])
     func subtopicNavigation_returnsExpectedResult(title: String) {
         let expectedTitle = title
-        let content = TopicDetailResponse.Subtopic(ref: "testRef", title: title)
+        let content = TopicDetailResponse.Subtopic(
+            ref: "testRef",
+            title: title,
+            description: "description"
+        )
         let result = AppEvent.subtopicNavigation(subtopic: content)
-        print("")
+
         #expect(result.name == "Navigation")
         #expect(result.params?.count == 5)
         #expect(result.params?["language"] as? String == "en")

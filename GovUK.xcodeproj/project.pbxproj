@@ -1832,8 +1832,8 @@
 			children = (
 				D028CD112CC149FA00742620 /* DisplayableTopic.swift */,
 				D028CCF52CB9619B00742620 /* Topic.swift */,
-				D041917F2CA595400034722A /* TopicResponseItem.swift */,
 				D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */,
+				D041917F2CA595400034722A /* TopicResponseItem.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";

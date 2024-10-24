@@ -1,21 +1,23 @@
 import Foundation
 
 struct TopicDetailResponse: Decodable {
-    let content: [Content]
     let ref: String
-    let subtopics: [Subtopic]
     let title: String
+    let description: String?
+    let content: [Content]
+    let subtopics: [Subtopic]
 
     struct Subtopic: Decodable {
         let ref: String
         let title: String
+        let description: String?
     }
 
     struct Content: Decodable {
+        let title: String
         let description: String
         let isStepByStep: Bool
         let popular: Bool
-        let title: String
         let url: URL
     }
 }

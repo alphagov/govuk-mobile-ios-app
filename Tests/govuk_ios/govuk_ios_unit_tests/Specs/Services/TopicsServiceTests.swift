@@ -1,4 +1,6 @@
+import Foundation
 import Testing
+
 @testable import govuk_ios
 
 @Suite
@@ -76,12 +78,10 @@ struct TopicsServiceTests {
                 }
             )
             mockTopicsServiceClient._receivedFetchTopicsDetailsCompletion?(
-                .success(.init(content: [], ref: "", subtopics: [], title: ""))
+                .success(.arrange())
             )
         }
         #expect(mockTopicsServiceClient._receivedFetchTopicsDetailsTopicRef == "test_ref")
-        //        let topicsList = try? result.get()
-        //        #expect(topicsRepository._didCallSaveTopicsList == true)
     }
 
 }

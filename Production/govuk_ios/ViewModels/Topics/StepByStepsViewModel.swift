@@ -20,8 +20,8 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         String.topics.localized("topicDetailStepByStepHeader")
     }
 
-    var shouldShowDescription: Bool {
-        false
+    var description: String? {
+        nil
     }
 
     var sections: [GroupedListSection] {

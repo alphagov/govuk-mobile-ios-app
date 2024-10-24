@@ -45,10 +45,10 @@ struct ActivityServiceTests {
         let expectedTitle = UUID().uuidString
         let expectedURLString = "https://www.govuk.com/test"
         let expectedItem = TopicDetailResponse.Content(
+            title: expectedTitle,
             description: "test_description",
             isStepByStep: false,
             popular: false,
-            title: expectedTitle,
             url: URL(string: "https://www.govuk.com/test")!
         )
         sut.save(topicContent: expectedItem)

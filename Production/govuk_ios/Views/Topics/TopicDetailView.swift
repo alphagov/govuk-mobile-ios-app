@@ -14,8 +14,8 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 .ignoresSafeArea()
             VStack {
                 ScrollView {
-                    if viewModel.shouldShowDescription {
-                        descripitonView
+                    if let description = viewModel.description {
+                        descripitonView(description: description)
                     }
                     GroupedList(
                         content: viewModel.sections,
@@ -30,9 +30,9 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
     }
 
-    private var descripitonView: some View {
+    private func descripitonView(description: String) -> some View {
         HStack {
-            Text(viewModel.title)
+            Text(description)
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, 16)
             Spacer()

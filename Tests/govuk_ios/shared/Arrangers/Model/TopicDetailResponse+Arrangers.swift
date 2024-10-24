@@ -12,58 +12,79 @@ extension TopicDetailResponse {
 
     static func arrange() -> TopicDetailResponse {
         .init(
+            ref: "response_ref",
+            title: "response_title",
+            description: "response_description",
             content: [
-                .init(description: "content_1_popular", isStepByStep: false, popular: true, title: "content_1", url: .arrange),
-                .init(description: "content_2_sbs", isStepByStep: true, popular: false, title: "content_2", url: .arrange),
-                .init(description: "content_3", isStepByStep: false, popular: false, title: "content_3", url: .arrange),
-                .init(description: "content_4", isStepByStep: false, popular: false, title: "content_4", url: .arrange),
-                .init(description: "content_5", isStepByStep: false, popular: false, title: "content_5", url: .arrange),
+                .init(title: "content_1", description: "content_1_popular", isStepByStep: false, popular: true, url: .arrange),
+                .init(title: "content_2", description: "content_2_sbs", isStepByStep: true, popular: false, url: .arrange),
+                .init(title: "content_3", description: "content_3", isStepByStep: false, popular: false, url: .arrange),
+                .init(title: "content_4", description: "content_4", isStepByStep: false, popular: false, url: .arrange),
+                .init(title: "content_5", description: "content_5", isStepByStep: false, popular: false, url: .arrange),
             ],
-            ref: "test_ref",
             subtopics: [
-                .init(ref: "test_1", title: "test_1"),
-                .init(ref: "test_2", title: "test_2"),
-                .init(ref: "test_3", title: "test_3")
-            ],
-            title: "test_title"
+                .init(ref: "subtopic_ref_1", title: "subtopic_title_1", description: "subtopic_desciption_1"),
+                .init(ref: "subtopic_ref_2", title: "subtopic_title_2", description: "subtopic_desciption_2"),
+                .init(ref: "subtopic_ref_3", title: "subtopic_title_3", description: "subtopic_desciption_3")
+            ]
         )
     }
 
     static func arrangeLotsOfStepBySteps() -> TopicDetailResponse {
         .init(
+            ref: "response_ref",
+            title: "response_title",
+            description: "response_description",
             content: [
-                .init(description: "content_1_popular", isStepByStep: false, popular: true, title: "content_1", url: .arrange),
-                .init(description: "content_2_sbs", isStepByStep: true, popular: false, title: "content_2", url: .arrange),
-                .init(description: "content_3", isStepByStep: false, popular: false, title: "content_3", url: .arrange),
-                .init(description: "content_4", isStepByStep: false, popular: false, title: "content_4", url: .arrange),
-                .init(description: "content_5", isStepByStep: false, popular: false, title: "content_5", url: .arrange),
-                .init(description: "content_6", isStepByStep: true, popular: false, title: "content_6", url: .arrange),
-                .init(description: "content_7", isStepByStep: true, popular: false, title: "content_7", url: .arrange),
-                .init(description: "content_8", isStepByStep: true, popular: false, title: "content_8", url: .arrange),
-                .init(description: "content_9", isStepByStep: true, popular: false, title: "content_9", url: .arrange),
+                .init(title: "content_1", description: "content_1_popular", isStepByStep: false, popular: true, url: .arrange),
+                .init(title: "content_2", description: "content_2_sbs", isStepByStep: true, popular: false, url: .arrange),
+                .init(title: "content_3", description: "content_3", isStepByStep: false, popular: false, url: .arrange),
+                .init(title: "content_4", description: "content_4", isStepByStep: false, popular: false, url: .arrange),
+                .init(title: "content_5", description: "content_5", isStepByStep: false, popular: false, url: .arrange),
+                .init(title: "content_6", description: "content_6", isStepByStep: true, popular: false, url: .arrange),
+                .init(title: "content_7", description: "content_7", isStepByStep: true, popular: false, url: .arrange),
+                .init(title: "content_8", description: "content_8", isStepByStep: true, popular: false, url: .arrange),
+                .init(title: "content_9", description: "content_9", isStepByStep: true, popular: false, url: .arrange),
             ],
-            ref: "test_ref",
             subtopics: [
-                .init(ref: "test_1", title: "test_1"),
-                .init(ref: "test_2", title: "test_2"),
-                .init(ref: "test_3", title: "test_3")
-            ],
-            title: "test_title"
+                .init(ref: "subtopic_ref_1", title: "subtopic_title_1", description: "subtopic_desciption_1"),
+                .init(ref: "subtopic_ref_2", title: "subtopic_title_2", description: "subtopic_desciption_2"),
+                .init(ref: "subtopic_ref_3", title: "subtopic_title_3", description: "subtopic_desciption_3"),
+            ]
         )
     }
 
     static func arrangeOnlySubTopics() -> TopicDetailResponse {
         .init(
+            ref: "response_ref",
+            title: "response_title",
+            description: "response_description",
             content: [],
-            ref: "test_ref",
             subtopics: [
-                .init(ref: "test_1", title: "test_1"),
-                .init(ref: "test_2", title: "test_2"),
-                .init(ref: "test_3", title: "test_3"),
-                .init(ref: "test_4", title: "test_4"),
-                .init(ref: "test_5", title: "test_5"),
-            ],
-            title: "test_title"
+                .init(ref: "subtopic_ref_1", title: "subtopic_title_1", description: "subtopic_desciption_1"),
+                .init(ref: "subtopic_ref_2", title: "subtopic_title_2", description: "subtopic_desciption_2"),
+                .init(ref: "subtopic_ref_3", title: "subtopic_title_3", description: "subtopic_desciption_3"),
+                .init(ref: "subtopic_ref_4", title: "subtopic_title_4", description: "subtopic_desciption_4"),
+                .init(ref: "subtopic_ref_5", title: "subtopic_title_5", description: "subtopic_desciption_5"),
+            ]
+        )
+    }
+
+}
+
+extension TopicDetailResponse.Subtopic {
+
+    static var arrange: TopicDetailResponse.Subtopic {
+        arrange()
+    }
+
+    static func arrange(ref: String = "",
+                        title: String = "",
+                        description: String? = "") -> TopicDetailResponse.Subtopic {
+        .init(
+            ref: ref,
+            title: title,
+            description: description
         )
     }
 

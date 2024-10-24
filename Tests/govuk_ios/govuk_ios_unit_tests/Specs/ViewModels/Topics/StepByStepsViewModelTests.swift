@@ -18,7 +18,7 @@ struct StepByStepsViewModelTests {
             urlOpener: mockURLOpener
         )
         #expect(sut.title == "Step by step guides")
-        #expect(!sut.shouldShowDescription)
+        #expect(sut.description == nil)
         #expect(sut.sections.count == 1)
     }
 }

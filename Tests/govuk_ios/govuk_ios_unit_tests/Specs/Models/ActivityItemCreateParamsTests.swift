@@ -23,10 +23,10 @@ struct ActivityItemCreateParamsTests {
     func init_topicContent_setsExpectedProperties() {
         let result = ActivityItemCreateParams(
             topicContent: .init(
+                title: "test_test",
                 description: "",
                 isStepByStep: false,
                 popular: true,
-                title: "test_test",
                 url: URL(string: "www.test.com")!
             )
         )

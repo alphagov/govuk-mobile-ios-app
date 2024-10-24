@@ -105,11 +105,17 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             rows = Array(stepBySteps.prefix(3)).map {
                 createContentRow($0, sectionTitle: sectionTitle)
             }
+            let rowTitle = String.topics.localized("topicDetailSeeAllRowTitle")
             let seeAllRow = NavigationRow(
                 id: "topic.stepbystep.showall",
-                title: String.topics.localized("topicDetailSeeAllRowTitle"),
+                title:  rowTitle,
                 body: nil,
                 action: { [weak self] in
+                    self?.trackLinkEvent(
+                        contentTitle: rowTitle,
+                        sectionTitle: sectionTitle,
+                        external: false
+                    )
                     self?.stepByStepAction(stepBySteps)
                 }
             )
@@ -156,7 +162,10 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             action: {
                 if self.urlOpener.openIfPossible(content.url) {
                     self.activityService.save(topicContent: content)
-                    self.trackLinkEvent(content, sectionTitle: sectionTitle)
+                    self.trackLinkEvent(
+                        content: content,
+                        sectionTitle: sectionTitle
+                    )
                 }
             }
         )
@@ -178,11 +187,23 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         analyticsService.track(screen: screen)
     }
 
-    private func trackLinkEvent(_ content: TopicDetailResponse.Content,
+    private func trackLinkEvent(content: TopicDetailResponse.Content,
                                 sectionTitle: String) {
         let event = AppEvent.topicLinkNavigation(
             content: content,
             sectionTitle: sectionTitle
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackLinkEvent(contentTitle: String,
+                                sectionTitle: String,
+                                external: Bool = false) {
+        let event = AppEvent.topicLinkNavigation(
+            title: contentTitle,
+            sectionTitle: sectionTitle,
+            url: nil,
+            external: external
         )
         analyticsService.track(event: event)
     }

@@ -20,7 +20,7 @@ struct AppEvent_TopicsTests {
         #expect(result.params?["section"] as? String == "Topics")
         #expect(result.params?["action"] as? String == expectedValue)
     }
-    
+
     @Test
     func topicLinkNavigation_returnsExpectedResult() {
         let expectedTitle = UUID().uuidString
@@ -43,7 +43,27 @@ struct AppEvent_TopicsTests {
         #expect(result.params?["section"] as? String == "test_section")
         #expect(result.params?["url"] as? String == expectedURL.absoluteString)
     }
-    
+
+    @Test
+    func topicLinkNavigation_noUrl_returnsExpectedResult() {
+        let expectedTitle = UUID().uuidString
+
+        let result = AppEvent.topicLinkNavigation(
+            title: expectedTitle,
+            sectionTitle: "test_section",
+            url: nil,
+            external: false
+        )
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 5)
+        #expect(result.params?["external"] as? Bool == false)
+        #expect(result.params?["language"] as? String == "en")
+        #expect(result.params?["text"] as? String == expectedTitle)
+        #expect(result.params?["type"] as? String == "Button")
+        #expect(result.params?["section"] as? String == "test_section")
+        #expect(result.params?["url"] as? String == nil)
+    }
+
     @Test
     func stepByStepLinkNavigation_returnsExpectedResult() {
         let expectedTitle = UUID().uuidString
@@ -66,7 +86,7 @@ struct AppEvent_TopicsTests {
         #expect(result.params?["section"] as? String == "test_section")
         #expect(result.params?["url"] as? String == expectedURL.absoluteString)
     }
-    
+
     @Test(arguments: ["Test", "Driving"])
     func subtopicNavigation_returnsExpectedResult(title: String) {
         let expectedTitle = title

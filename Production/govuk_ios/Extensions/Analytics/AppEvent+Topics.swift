@@ -12,14 +12,26 @@ extension AppEvent {
 
     static func topicLinkNavigation(content: TopicDetailResponse.Content,
                                     sectionTitle: String) -> AppEvent {
+        topicLinkNavigation(
+            title: content.title,
+            sectionTitle: sectionTitle,
+            url: content.url.absoluteString,
+            external: true
+        )
+    }
+
+    static func topicLinkNavigation(title: String,
+                                    sectionTitle: String,
+                                    url: String?,
+                                    external: Bool) -> AppEvent {
         navigation(
-            text: content.title,
+            text: title,
             type: "Button",
-            external: true,
+            external: external,
             additionalParams: [
-                "url": content.url.absoluteString,
+                "url": url,
                 "section": sectionTitle
-            ]
+            ].mapValues { $0 }
         )
     }
 

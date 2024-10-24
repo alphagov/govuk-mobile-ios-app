@@ -22,18 +22,11 @@ struct TopicDetailResponse: Decodable {
     }
 }
 
-extension TopicDetailResponse: DisplayableTopic {}
-extension TopicDetailResponse.Subtopic: DisplayableTopic {}
-
 extension TopicDetailResponse {
     var popularContent: [TopicDetailResponse.Content]? {
-        let localContent = content.filter {
-            $0.popular && !$0.isStepByStep
-        }
-
+        let localContent = content.filter { $0.popular && !$0.isStepByStep }
         guard localContent.count > 0
         else { return nil }
-
         return localContent
     }
 
@@ -53,3 +46,6 @@ extension TopicDetailResponse {
         return localContent
     }
 }
+
+extension TopicDetailResponse: DisplayableTopic {}
+extension TopicDetailResponse.Subtopic: DisplayableTopic {}

@@ -108,7 +108,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             let rowTitle = String.topics.localized("topicDetailSeeAllRowTitle")
             let seeAllRow = NavigationRow(
                 id: "topic.stepbystep.showall",
-                title:  rowTitle,
+                title: rowTitle,
                 body: nil,
                 action: { [weak self] in
                     self?.trackLinkEvent(

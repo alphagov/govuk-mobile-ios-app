@@ -8,21 +8,24 @@ enum SearchError: Error {
 }
 
 class SearchViewModel {
-    private let searchService: SearchServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let activityService: ActivityServiceInterface
+    private let appConfigService: AppConfigServiceInterface
+    private let searchService: SearchServiceInterface
     private let urlOpener: URLOpener
 
     private(set) var results: [SearchItem]?
     private(set) var error: SearchError?
 
     init(analyticsService: AnalyticsServiceInterface,
-         searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface,
+         appConfigService: AppConfigServiceInterface,
+         searchService: SearchServiceInterface,
          urlOpener: URLOpener) {
         self.analyticsService = analyticsService
-        self.searchService = searchService
         self.activityService = activityService
+        self.appConfigService = appConfigService
+        self.searchService = searchService
         self.urlOpener = urlOpener
     }
 
@@ -36,6 +39,7 @@ class SearchViewModel {
         trackSearchTerm(searchTerm: text)
         searchService.search(
             text,
+            searchApiUrlPath: searchApiUrlPath,
             completion: { [weak self] result in
                 self?.results = try? result.get().results
                 self?.error = result.getError()
@@ -67,5 +71,10 @@ class SearchViewModel {
         analyticsService.track(
             event: AppEvent.searchTerm(term: searchTerm.redactPii())
         )
+    }
+
+    private var searchApiUrlPath: String {
+        let url = URLComponents(string: appConfigService.searchApiUrl)!
+        return url.path
     }
 }

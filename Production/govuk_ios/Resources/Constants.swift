@@ -7,7 +7,8 @@ struct Constants {
         static let govukUrlHost = "www.gov.uk"
         static let govukUrlScheme = "https"
         static let govukUrlString = "https://www.gov.uk"
-        static let privacyPolicyUrl = "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data"
         static let helpAndFeedbackUrl = "https://www.gov.uk/contact/govuk"
+        static let privacyPolicyUrl = "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data"
+        static let defaultSearchApiUrlString = "https://search.publishing.service.gov.uk/v0_1/search.json"
     }
 }

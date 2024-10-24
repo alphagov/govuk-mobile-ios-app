@@ -5,6 +5,7 @@ import Testing
 @testable import govuk_ios
 
 @Suite
+@MainActor
 struct HomeCoordinatorTests {
     init() {
         UIView.setAnimationsEnabled(false)

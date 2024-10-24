@@ -44,7 +44,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
         navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
         VerifySnapshotInWindow(
             navigationController,
-            overallTolerance: 0.01,
+            overallTolerance: 0.001,
             file: file,
             line: line
         )

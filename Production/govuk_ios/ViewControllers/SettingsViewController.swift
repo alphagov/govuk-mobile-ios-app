@@ -51,8 +51,7 @@ class SettingsViewController: BaseViewController,
 
     private func configureUI() {
         scrollview.translatesAutoresizingMaskIntoConstraints = false
-        let contentInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
-        self.scrollview.contentInset = contentInsets
+        self.scrollview.contentInset = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0)
         scrollview.contentInsetAdjustmentBehavior = .never
         view.addSubview(scrollview)
 

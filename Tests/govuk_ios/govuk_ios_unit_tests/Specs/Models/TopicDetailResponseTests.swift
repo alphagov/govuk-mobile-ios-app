@@ -51,7 +51,7 @@ struct TopicDetailResponseTests {
     }
 
     @Test
-    func popularContent_some_returnsNil() {
+    func popularContent_some_returnsExpectedContent() {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
@@ -72,7 +72,7 @@ struct TopicDetailResponseTests {
     }
 
     @Test
-    func stepByStepContent_some_returnsNil() {
+    func stepByStepContent_some_returnsExpectedContent() {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
@@ -93,7 +93,7 @@ struct TopicDetailResponseTests {
     }
 
     @Test
-    func otherContent_some_returnsNil() {
+    func otherContent_some_returnsExpectedContent() {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",

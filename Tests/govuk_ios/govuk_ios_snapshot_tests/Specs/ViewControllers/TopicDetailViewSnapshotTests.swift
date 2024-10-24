@@ -103,14 +103,14 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let viewControllerBuilder = ViewControllerBuilder()
         let sut = viewControllerBuilder.stepByStep(
             content: [
-                .init(title: "content_1", description: "content_1", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_2", description: "content_2", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_3", description: "content_3", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_4", description: "content_4", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_5", description: "content_5", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_6", description: "content_6", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_7", description: "content_7", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_8", description: "content_8", isStepByStep: true, popular: false, url: .arrange),
+                .arrange(title: "content_1", description: "content_1", isStepByStep: true),
+                .arrange(title: "content_2", description: "content_2", isStepByStep: true),
+                .arrange(title: "content_3", description: "content_3", isStepByStep: true),
+                .arrange(title: "content_4", description: "content_4", isStepByStep: true),
+                .arrange(title: "content_5", description: "content_5", isStepByStep: true),
+                .arrange(title: "content_6", description: "content_6", isStepByStep: true),
+                .arrange(title: "content_7", description: "content_7", isStepByStep: true),
+                .arrange(title: "content_8", description: "content_8", isStepByStep: true),
             ],
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService()
@@ -125,14 +125,14 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let viewControllerBuilder = ViewControllerBuilder()
         let sut = viewControllerBuilder.stepByStep(
             content: [
-                .init(title: "content_1", description: "content_1", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_2", description: "content_2", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_3", description: "content_3", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_4", description: "content_4", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_5", description: "content_5", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_6", description: "content_6", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_7", description: "content_7", isStepByStep: true, popular: false, url: .arrange),
-                .init(title: "content_8", description: "content_8", isStepByStep: true, popular: false, url: .arrange),
+                .arrange(title: "content_1", description: "content_1", isStepByStep: true),
+                .arrange(title: "content_2", description: "content_2", isStepByStep: true),
+                .arrange(title: "content_3", description: "content_3", isStepByStep: true),
+                .arrange(title: "content_4", description: "content_4", isStepByStep: true),
+                .arrange(title: "content_5", description: "content_5", isStepByStep: true),
+                .arrange(title: "content_6", description: "content_6", isStepByStep: true),
+                .arrange(title: "content_7", description: "content_7", isStepByStep: true),
+                .arrange(title: "content_8", description: "content_8", isStepByStep: true),
             ],
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService()

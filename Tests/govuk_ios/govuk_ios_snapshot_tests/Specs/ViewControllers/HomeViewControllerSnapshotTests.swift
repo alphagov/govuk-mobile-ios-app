@@ -10,7 +10,6 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     let topicService = MockTopicsService()
 
     func test_loadInNavigationController_light_rendersCorrectly() {
-
         topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
 
         var topics = Topic.arrangeMultipleFavourites(

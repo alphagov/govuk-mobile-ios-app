@@ -123,9 +123,9 @@ class SettingsViewModel: SettingsViewModelInterface {
             id: "settings.terms.row",
             title: rowTitle,
             body: nil,
-            action: {
-                if urlOpener.openIfPossible(Constants.API.termsAndConditionsURL) {
-                    trackLinkEvent(rowTitle)
+            action: { [weak self] in
+                if self?.urlOpener.openIfPossible(Constants.API.termsAndConditionsUrl) == true {
+                    self?.trackLinkEvent(rowTitle)
                 }
             }
         )
@@ -137,9 +137,9 @@ class SettingsViewModel: SettingsViewModelInterface {
             id: "settings.accessibility.row",
             title: rowTitle,
             body: nil,
-            action: {
-                if urlOpener.openIfPossible(Constants.API.accessibilityStatementURL) {
-                    trackLinkEvent(rowTitle)
+            action: { [weak self] in
+                if self?.urlOpener.openIfPossible(Constants.API.accessibilityStatementUrl) == true {
+                    self?.trackLinkEvent(rowTitle)
                 }
             }
         )

@@ -9,38 +9,45 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
-            mode: .light
+            mode: .light,
+            prefersLargeTitles: true
         )
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
-            mode: .dark
+            mode: .dark,
+            prefersLargeTitles: true
         )
     }
     
     func test_loadInNavigationController_preview_rendersCorrectly() {
-        let viewController = SettingsViewController(
+        let settingsContentView = SettingsView(
             viewModel: GroupedListViewModel()
         )
+        let viewController = HostingViewController(rootView: settingsContentView)
+        viewController.title = "Settings"
+        viewController.navigationItem.largeTitleDisplayMode = .always
         VerifySnapshotInNavigationController(
             viewController: viewController,
-            mode: .light
+            mode: .light,
+            prefersLargeTitles: true
         )
     }
 
-    private func viewController() -> SettingsViewController {
-        let viewModel = SettingsViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener(),
-            bundle: .main
+    private func viewController() -> UIViewController {
+        ViewControllerBuilder().settings(
+            analyticsService: MockAnalyticsService()
         )
-        return SettingsViewController(viewModel: viewModel)
     }
 }
 
-struct GroupedListViewModel: SettingsViewModelInterface {
+class GroupedListViewModel: SettingsViewModelInterface {
     var title: String = "Settings"
     var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent
+
+    func trackScreen(screen: any govuk_ios.TrackableScreen) {
+        // Do Nothing
+    }
 }

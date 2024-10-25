@@ -71,9 +71,14 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared,
             bundle: .main
         )
-        return SettingsViewController(
+        let settingsContentView = SettingsView(
             viewModel: viewModel
         )
+
+        let viewController = HostingViewController(rootView: settingsContentView)
+        viewController.title = viewModel.title
+        viewController.navigationItem.largeTitleDisplayMode = .always
+        return viewController
     }
 
     @MainActor

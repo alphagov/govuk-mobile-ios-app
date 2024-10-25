@@ -76,7 +76,7 @@ class ViewControllerBuilder {
         )
 
         let viewController = HostingViewController(rootView: settingsContentView)
-        viewController.title = "Settings"
+        viewController.title = viewModel.title
         viewController.navigationItem.largeTitleDisplayMode = .always
         return viewController
     }

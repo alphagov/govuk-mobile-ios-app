@@ -3,8 +3,7 @@ import UIKit
 import SwiftUI
 import UIComponents
 
-class TopicOnboardingViewController: BaseViewController,
-                                     UIScrollViewDelegate {
+class TopicOnboardingViewController: BaseViewController {
     let viewModel: TopicOnboardingViewModel
     private let backgroundColor = UIColor.govUK.fills.surfaceBackground
 
@@ -59,7 +58,6 @@ class TopicOnboardingViewController: BaseViewController,
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        scrollView.delegate = self
         title = viewModel.navigationTitle
     }
 

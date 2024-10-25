@@ -96,7 +96,7 @@ class TopicOnboardingViewController: BaseViewController {
             buttonView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             buttonView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
 
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: buttonView.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor)

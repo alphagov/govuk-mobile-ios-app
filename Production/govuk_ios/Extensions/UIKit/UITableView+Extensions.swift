@@ -25,4 +25,22 @@ extension UITableView {
             }
         }
     }
+
+    func deselectAllRows(animated: Bool) {
+        for section in 0..<numberOfSections {
+            for row in 0..<numberOfRows(inSection: section) {
+                let indexPath = IndexPath(row: row, section: section)
+                _ = delegate?.tableView?(self, willDeselectRowAt: indexPath)
+                deselectRow(at: indexPath, animated: animated)
+                delegate?.tableView?(self, didDeselectRowAt: indexPath)
+            }
+        }
+    }
+
+    func isEveryRowSelected() -> Bool {
+        let numVisibleRows = indexPathsForVisibleRows?.count ?? 0
+        guard numVisibleRows > 0 else { return false }
+        let numSelectedRows = indexPathsForSelectedRows?.count ?? 0
+        return numVisibleRows == numSelectedRows
+    }
 }

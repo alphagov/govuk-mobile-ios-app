@@ -32,6 +32,13 @@ class RecentActivityListViewController: BaseViewController,
         }
     )
 
+    private lazy var deselectAllBarButtonItem: UIBarButtonItem = .deselectAll(
+        action: { [unowned self] action in
+            self.deselectAllButtonPressed()
+            self.trackActionPress(title: action.title, action: "Deselect all")
+        }
+    )
+
     private lazy var editingToolbar: UIToolbar = {
         let localToolbar = UIToolbar(
             // This is to prevent a constraint error when loading
@@ -39,11 +46,6 @@ class RecentActivityListViewController: BaseViewController,
         )
         localToolbar.translatesAutoresizingMaskIntoConstraints = false
         localToolbar.insetsLayoutMarginsFromSafeArea = true
-        localToolbar.items = [
-            selectAllBarButtonItem,
-            .flexibleSpace(),
-            removeBarButtonItem
-        ]
         localToolbar.isHidden = true
         return localToolbar
     }()
@@ -96,6 +98,7 @@ class RecentActivityListViewController: BaseViewController,
         view.addSubview(noItemsView)
         view.addSubview(editingToolbar)
         removeBarButtonItem.isEnabled = false
+        showSelectAllToolbarButton()
     }
 
     private func configureConstraints() {
@@ -154,6 +157,11 @@ class RecentActivityListViewController: BaseViewController,
     @objc
     private func selectAllButtonPressed() {
         tableView.selectAllRows(animated: true)
+    }
+
+    @objc
+    private func deselectAllButtonPressed() {
+        tableView.deselectAllRows(animated: true)
     }
 
     @objc
@@ -223,6 +231,9 @@ class RecentActivityListViewController: BaseViewController,
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
+        if tableView.isEveryRowSelected() {
+            showDeselectAllToolbarButton()
+        }
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         if tableView.isEditing {
@@ -236,9 +247,26 @@ class RecentActivityListViewController: BaseViewController,
     func tableView(_ tableView: UITableView,
                    didDeselectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
+        showSelectAllToolbarButton()
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         viewModel.removeEdit(item: item)
+    }
+
+    private func showSelectAllToolbarButton() {
+        updateFirstToolbarItem(selectAllBarButtonItem)
+    }
+
+    private func showDeselectAllToolbarButton() {
+        updateFirstToolbarItem(deselectAllBarButtonItem)
+    }
+
+    private func updateFirstToolbarItem(_ buttonItem: UIBarButtonItem) {
+        editingToolbar.items = [
+            buttonItem,
+            .flexibleSpace(),
+            removeBarButtonItem
+        ]
     }
 }
 

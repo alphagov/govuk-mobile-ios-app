@@ -21,6 +21,16 @@ extension UIBarButtonItem {
         return item
     }
 
+    static func deselectAll(action: @escaping (UIAction) -> Void) -> UIBarButtonItem {
+        let title = String.recentActivity.localized("deselectAllButtonTitle")
+        let item = UIBarButtonItem(
+            title: title,
+            primaryAction: .init(title: title, handler: action)
+        )
+        item.tintColor = UIColor.govUK.text.link
+        return item
+    }
+
     static func remove(action: @escaping (UIAction) -> Void) -> UIBarButtonItem {
         let title = String.recentActivity.localized("removeActivitiesButtonTitle")
         let item = UIBarButtonItem(

@@ -157,7 +157,6 @@ class TopicOnboardingCard: UIView {
         selectedLabel.textColor = viewModel.isSelected ? UIColor(
             resource: selectedColourTint
         ) : UIColor.govUK.fills.surfaceButtonPrimary
-
         selectedIcon.tintColor = viewModel.isSelected ? UIColor(
             resource: selectedColourTint
         ) : UIColor.govUK.fills.surfaceButtonPrimary

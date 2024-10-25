@@ -21,7 +21,6 @@ struct TopicsOnboardingWidgetViewModelTests {
             userDefaults: UserDefaults(),
             topicAction: { _ in }
         )
-
         #expect(topicService._dataReceived == true)
         #expect(sut.downloadError == nil)
     }
@@ -36,7 +35,7 @@ struct TopicsOnboardingWidgetViewModelTests {
             userDefaults: UserDefaults(),
             topicAction: { _ in }
         )
-
+        
         #expect(topicService._dataReceived == false)
         #expect(sut.downloadError == .decodingError)
     }

@@ -33,14 +33,14 @@ struct TopicOnboardingViewModelTests {
         let sut = TopicOnboardingViewModel(
             analyticsService: MockAnalyticsService(),
             topicsService: MockTopicsService(),
-            dismissAction: {}
+            dismissAction: { }
         )
         #expect(sut.selectedTopics == [:])
         sut.selectTopic(topic: topic)
         #expect(sut.selectedTopics[topic.title] != nil)
 
         sut.selectTopic(topic: topic)
-        #expect(sut.selectedTopics == [:])
+        #expect(sut.selectedTopics[topic.title] == nil)
     }
 
     @Test

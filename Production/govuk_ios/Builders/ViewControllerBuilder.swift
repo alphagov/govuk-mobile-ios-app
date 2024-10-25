@@ -188,7 +188,6 @@ class ViewControllerBuilder {
             topicsService: topicsService,
             dismissAction: dismissAction
         )
-
         return TopicOnboardingViewController(viewModel: viewModel)
     }
 }

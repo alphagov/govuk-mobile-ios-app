@@ -99,7 +99,6 @@ class RecentActivityListViewController: BaseViewController,
         view.addSubview(editingToolbar)
         removeBarButtonItem.isEnabled = false
         configureToolbarItems()
-//        showSelectAllToolbarButton()
     }
 
     private func configureConstraints() {

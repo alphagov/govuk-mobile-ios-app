@@ -95,9 +95,8 @@
 		4E00EF032CCB10DC007B61E8 /* TopicOnboardingWidgetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF022CCB10DC007B61E8 /* TopicOnboardingWidgetViewModelTests.swift */; };
 		4E00EF052CCB11D6007B61E8 /* TopicOnboardingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF042CCB11D6007B61E8 /* TopicOnboardingViewModelTests.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
-		4E00EF092CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF082CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */; };
-		4E00EF0A2CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF082CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */; };
 		4E00EF0C2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF0B2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift */; };
+		4E00EF112CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF102CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */; };
 		4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */; };
 		4E18E0922C74DD5D00538CF0 /* AppConfigRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E0912C74DD5D00538CF0 /* AppConfigRepositoryTests.swift */; };
 		4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */; };
@@ -502,8 +501,8 @@
 		4E00EF022CCB10DC007B61E8 /* TopicOnboardingWidgetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingWidgetViewModelTests.swift; sourceTree = "<group>"; };
 		4E00EF042CCB11D6007B61E8 /* TopicOnboardingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewModelTests.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		4E00EF082CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		4E00EF0B2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
+		4E00EF102CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceTests.swift; sourceTree = "<group>"; };
 		4E18E08F2C74A45500538CF0 /* MockAppConfigRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppConfigRepository.swift; sourceTree = "<group>"; };
 		4E18E0912C74DD5D00538CF0 /* AppConfigRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigRepositoryTests.swift; sourceTree = "<group>"; };
@@ -1353,7 +1352,7 @@
 				16F9619E2C88A69A005CFB04 /* SearchViewControllerSnapshotTests.swift */,
 				16ACCF772C64361700017A11 /* SettingsViewControllerSnapshotTests.swift */,
 				5D54F47C2CC8DBAB00A3B6A7 /* TopicDetailViewSnapshotTests.swift */,
-				4E00EF082CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */,
+				4E00EF102CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2184,7 +2183,7 @@
 				3D9C93422CB017E900EFA337 /* AppForcedUpdateViewControllerSnapshotTests.swift in Sources */,
 				5DBE71B12CAE8371004ABB5E /* Bundle+Tests.swift in Sources */,
 				D0F86E182CAC068B00FF2D9E /* MockTopicsService.swift in Sources */,
-				4E00EF092CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift in Sources */,
+				4E00EF112CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift in Sources */,
 				4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */,
 				5D0BD45F2C9B244A00220625 /* MockSearchService.swift in Sources */,
 				16D0D0412CC19ACF00944D79 /* AllTopicsViewControllerSnapshotTests.swift in Sources */,
@@ -2411,7 +2410,6 @@
 				5DA97B652C6CC9060030AF2B /* URLRequest+Extensions.swift in Sources */,
 				D0B89D9F2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift in Sources */,
 				5DFF72632CBD291800F05B79 /* RecentActivityListViewModelTests.swift in Sources */,
-				4E00EF0A2CCBA00C007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift in Sources */,
 				5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */,
 				16F961A92C989651005CFB04 /* MockAPIServiceClient.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,

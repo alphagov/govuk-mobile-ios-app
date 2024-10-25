@@ -178,4 +178,17 @@ class ViewControllerBuilder {
         )
         return HostingViewController(rootView: view)
     }
+
+    @MainActor
+    func topicOnboarding(analyticsService: AnalyticsServiceInterface,
+                         topicsService: TopicsServiceInterface,
+                         dismissAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = TopicOnboardingViewModel(
+            analyticsService: analyticsService,
+            topicsService: topicsService,
+            dismissAction: dismissAction
+        )
+
+        return TopicOnboardingViewController(viewModel: viewModel)
+    }
 }

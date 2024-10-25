@@ -75,7 +75,8 @@ extension Container {
         Factory(self) {
             TopicsService(
                 topicsServiceClient: self.topicsServiceClient(),
-                topicsRepository: self.topicsRepository()
+                topicsRepository: self.topicsRepository(),
+                userDefaults: .standard
             )
         }
     }

@@ -7,16 +7,22 @@ protocol TopicsServiceInterface {
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
     func updateFavoriteTopics()
+    func setHasEditedTopics()
+    var hasOnboardedTopics: Bool { get }
+    func setHasOnboardedTopics()
 }
 
 struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
+    private let userDefaults: UserDefaults
 
     init(topicsServiceClient: TopicsServiceClientInterface,
-         topicsRepository: TopicsRepositoryInterface) {
+         topicsRepository: TopicsRepositoryInterface,
+         userDefaults: UserDefaults) {
         self.topicsServiceClient = topicsServiceClient
         self.topicsRepository = topicsRepository
+        self.userDefaults = userDefaults
     }
 
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
@@ -45,11 +51,29 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.fetchAllTopics()
     }
 
+    func setHasEditedTopics() {
+        userDefaults.set(
+            bool: true,
+            forKey: .hasEditedTopics
+        )
+    }
+
     func fetchFavoriteTopics() -> [Topic] {
         topicsRepository.fetchFavoriteTopics()
     }
 
     func updateFavoriteTopics() {
         topicsRepository.saveChanges()
+    }
+
+    var hasOnboardedTopics: Bool {
+        userDefaults.bool(forKey: .hasOnboardedTopics)
+    }
+
+    func setHasOnboardedTopics() {
+        userDefaults.set(
+            bool: true,
+            forKey: .hasOnboardedTopics
+        )
     }
 }

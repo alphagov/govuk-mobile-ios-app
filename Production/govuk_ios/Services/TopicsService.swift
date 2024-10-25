@@ -2,11 +2,11 @@ import Foundation
 
 protocol TopicsServiceInterface {
     func downloadTopicsList(completion: @escaping FetchTopicsListResult)
-    func fetchTopicDetails(topicRef: String,
-                           completion: @escaping FetchTopicDetailsResult)
-    func fetchAllTopics() -> [Topic]
-    func fetchFavoriteTopics() -> [Topic]
-    func updateFavoriteTopics()
+    func fetchDetails(ref: String,
+                      completion: @escaping FetchTopicDetailsResult)
+    func fetchAll() -> [Topic]
+    func fetchFavorites() -> [Topic]
+    func save()
 }
 
 struct TopicsService: TopicsServiceInterface {
@@ -20,11 +20,11 @@ struct TopicsService: TopicsServiceInterface {
     }
 
     func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
-        topicsServiceClient.fetchTopicsList(
+        topicsServiceClient.fetchList(
             completion: { result in
                 switch result {
                 case .success(let topics):
-                    topicsRepository.saveTopicsList(topics)
+                    topicsRepository.save(topics: topics)
                     completion(.success(topics))
                 case .failure(let error):
                     completion(.failure(error))
@@ -33,23 +33,23 @@ struct TopicsService: TopicsServiceInterface {
         )
     }
 
-    func fetchTopicDetails(topicRef: String,
-                           completion: @escaping FetchTopicDetailsResult) {
-        topicsServiceClient.fetchTopicDetails(
-            topicRef: topicRef,
+    func fetchDetails(ref: String,
+                      completion: @escaping FetchTopicDetailsResult) {
+        topicsServiceClient.fetchDetails(
+            ref: ref,
             completion: completion
         )
     }
 
-    func fetchAllTopics() -> [Topic] {
-        topicsRepository.fetchAllTopics()
+    func fetchAll() -> [Topic] {
+        topicsRepository.fetchAll()
     }
 
-    func fetchFavoriteTopics() -> [Topic] {
-        topicsRepository.fetchFavoriteTopics()
+    func fetchFavorites() -> [Topic] {
+        topicsRepository.fetchFavorites()
     }
 
-    func updateFavoriteTopics() {
-        topicsRepository.saveChanges()
+    func save() {
+        topicsRepository.save()
     }
 }

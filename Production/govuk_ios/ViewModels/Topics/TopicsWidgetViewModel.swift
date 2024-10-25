@@ -10,11 +10,11 @@ final class TopicsWidgetViewModel {
     private(set) var downloadError: TopicsServiceError?
 
     var favoriteTopics: [Topic] {
-        topicsService.fetchFavoriteTopics()
+        topicsService.fetchFavorites()
     }
 
     var allTopicsButtonHidden: Bool {
-        topicsService.fetchAllTopics().count == favoriteTopics.count
+        topicsService.fetchAll().count == favoriteTopics.count
     }
 
     init(topicsService: TopicsServiceInterface,

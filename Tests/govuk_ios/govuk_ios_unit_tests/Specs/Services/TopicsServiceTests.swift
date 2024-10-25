@@ -51,28 +51,28 @@ struct TopicsServiceTests {
     }
 
     @Test
-    func fetchAllTopics_fetchesFromRepository() async {
-        _ = sut.fetchAllTopics()
+    func fetchAll_fetchesFromRepository() async {
+        _ = sut.fetchAll()
         #expect(mockTopicsRepository._didCallFetchAll)
     }
 
     @Test
-    func fetchFavoriteTopics_fetchesFromRepository() async {
-        _ = sut.fetchFavoriteTopics()
+    func fetchFavorites_fetchesFromRepository() async {
+        _ = sut.fetchFavorites()
         #expect(mockTopicsRepository._didCallFetchFavorites)
     }
 
     @Test
-    func updateFavorites_savesChangesToRepository() async {
-        sut.updateFavoriteTopics()
+    func save_savesChangesToRepository() async {
+        sut.save()
         #expect(mockTopicsRepository._didCallSaveChanges)
     }
 
     @Test
-    func fetchTopicDetails_success_returnsExpectedData() async {
+    func fetchDetails_success_returnsExpectedData() async {
         _ = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(
-                topicRef: "test_ref",
+            sut.fetchDetails(
+                ref: "test_ref",
                 completion: { result in
                     continuation.resume(returning: result)
                 }

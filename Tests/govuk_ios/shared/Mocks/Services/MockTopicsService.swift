@@ -7,17 +7,17 @@ class MockTopicsService: TopicsServiceInterface {
     let coreData = CoreDataRepository.arrangeAndLoad
     
     var _stubbedFetchAllTopics: [Topic]?
-    func fetchAllTopics() -> [Topic] {
+    func fetchAll() -> [Topic] {
         _stubbedFetchAllTopics ?? []
     }
 
     var _stubbedFetchFavoriteTopics: [Topic]?
-    func fetchFavoriteTopics() -> [Topic] {
+    func fetchFavorites() -> [Topic] {
         _stubbedFetchFavoriteTopics ?? []
     }
 
     var _updateFavoriteTopicsCalled = false
-    func updateFavoriteTopics() {
+    func save() {
         _updateFavoriteTopicsCalled = true
     }
     
@@ -33,8 +33,8 @@ class MockTopicsService: TopicsServiceInterface {
     }
     
     var _stubbedFetchTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
-    func fetchTopicDetails(topicRef: String,
-                           completion: @escaping FetchTopicDetailsResult) {
+    func fetchDetails(ref: String,
+                      completion: @escaping FetchTopicDetailsResult) {
         if let result = _stubbedFetchTopicDetailsResult {
             completion(result)
         } else {

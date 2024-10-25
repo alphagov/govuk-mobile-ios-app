@@ -4,15 +4,15 @@ import Foundation
 
 class MockTopicsServiceClient: TopicsServiceClientInterface {
     var _receivedFetchTopicsCompletion: FetchTopicsListResult?
-    func fetchTopicsList(completion: @escaping FetchTopicsListResult) {
+    func fetchList(completion: @escaping FetchTopicsListResult) {
         _receivedFetchTopicsCompletion = completion
     }
 
     var _receivedFetchTopicsDetailsTopicRef: String?
     var _receivedFetchTopicsDetailsCompletion: FetchTopicDetailsResult?
-    func fetchTopicDetails(topicRef: String,
-                           completion: @escaping FetchTopicDetailsResult) {
-        _receivedFetchTopicsDetailsTopicRef = topicRef
+    func fetchDetails(ref: String,
+                      completion: @escaping FetchTopicDetailsResult) {
+        _receivedFetchTopicsDetailsTopicRef = ref
         _receivedFetchTopicsDetailsCompletion = completion
     }
 }

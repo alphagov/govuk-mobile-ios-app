@@ -63,8 +63,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func fetchTopicDetails(topicRef: String) {
-        topicsService.fetchTopicDetails(
-            topicRef: topicRef,
+        topicsService.fetchDetails(
+            ref: topicRef,
             completion: { result in
                 switch result {
                 case .success(let topicDetail):

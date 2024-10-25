@@ -19,17 +19,17 @@ struct TopicsServiceClientTests {
 
     //MARK: - Fetch Topics List
     @Test
-    func fetchTopicsList_sendsExpectedRequest() async {
-        sut.fetchTopicsList { _ in }
+    func fetchList_sendsExpectedRequest() async {
+        sut.fetchList() { _ in }
         #expect(mockAPI._receivedSendRequest?.urlPath == "/static/topics/list")
         #expect(mockAPI._receivedSendRequest?.method == .get)
     }
     
     @Test
-    func fetchTopicsList_success_returnsExpectedResult() async {
+    func fetchList_success_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success(Self.topicsListData)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicsList { result in
+            sut.fetchList { result in
                 continuation.resume(returning: result)
             }
         }
@@ -39,10 +39,10 @@ struct TopicsServiceClientTests {
     }
     
     @Test
-    func fetchTopicsList_failure_returnsExpectedResult() async {
+    func fetchList_failure_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .failure(TopicsServiceError.apiUnavailable)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicsList { result in
+            sut.fetchList { result in
                 continuation.resume(returning: result)
             }
         }
@@ -52,10 +52,10 @@ struct TopicsServiceClientTests {
     }
     
     @Test
-    func fetchTopicsList_invalidJson_returnsExpectedResult() async {
+    func fetchList_invalidJson_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success("bad json".data(using: .utf8)!)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicsList { result in
+            sut.fetchList { result in
                 continuation.resume(returning: result)
             }
         }
@@ -66,18 +66,18 @@ struct TopicsServiceClientTests {
     
     //MARK: - Fetch Topic Details
     @Test
-    func fetchTopicDetails_sendsExpectedRequest() async {
+    func fetchDetails_sendsExpectedRequest() async {
         let expectedTopicRef = UUID().uuidString
-        sut.fetchTopicDetails(topicRef: expectedTopicRef, completion: { _ in })
+        sut.fetchDetails(ref: expectedTopicRef, completion: { _ in })
         #expect(mockAPI._receivedSendRequest?.urlPath == "/static/topics/" + expectedTopicRef)
         #expect(mockAPI._receivedSendRequest?.method == .get)
     }
     
     @Test
-    func fetchTopicDetails_success_returnsExpectedResult() async {
+    func fetchDetails_success_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success(Self.topicDetailsData)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
+            sut.fetchDetails(ref: "driving-transport") { result in
                 continuation.resume(returning:  result)
             }
         }
@@ -90,10 +90,10 @@ struct TopicsServiceClientTests {
     }
     
     @Test
-    func fetchTopicDetails_failure_returnsExpectedResult() async {
+    func fetchDetails_failure_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .failure(TopicsServiceError.apiUnavailable)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
+            sut.fetchDetails(ref: "driving-transport") { result in
                 continuation.resume(returning: result)
             }
         }
@@ -103,10 +103,10 @@ struct TopicsServiceClientTests {
     }
     
     @Test
-    func fetchTopicDetails_invalidJson_returnsExpectedResult() async {
+    func fetchDetails_invalidJson_returnsExpectedResult() async {
         mockAPI._stubbedSendResponse = .success("bad json".data(using: .utf8)!)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(topicRef: "driving-transport") { result in
+            sut.fetchDetails(ref: "driving-transport") { result in
                 continuation.resume(returning: result)
             }
         }

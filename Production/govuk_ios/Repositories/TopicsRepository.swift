@@ -2,10 +2,10 @@ import Foundation
 import CoreData
 
 protocol TopicsRepositoryInterface {
-    func saveTopicsList(_ topicResponses: [TopicResponseItem])
-    func fetchFavoriteTopics() -> [Topic]
-    func fetchAllTopics() -> [Topic]
-    func saveChanges()
+    func save(topics: [TopicResponseItem])
+    func fetchFavorites() -> [Topic]
+    func fetchAll() -> [Topic]
+    func save()
 }
 
 struct TopicsRepository: TopicsRepositoryInterface {
@@ -15,10 +15,10 @@ struct TopicsRepository: TopicsRepositoryInterface {
         self.coreData = coreData
     }
 
-    func saveTopicsList(_ topicResponses: [TopicResponseItem]) {
+    func save(topics: [TopicResponseItem]) {
         let context = coreData.backgroundContext
-        let isFirstLaunch = fetchAllTopics().count == 0
-        topicResponses.forEach { topicResponse in
+        let isFirstLaunch = fetchAll().count == 0
+        topics.forEach { topicResponse in
             createOrUpdateTopic(
                 for: topicResponse,
                 in: context,
@@ -28,18 +28,18 @@ struct TopicsRepository: TopicsRepositoryInterface {
         try? context.save()
     }
 
-    func saveChanges() {
+    func save() {
         try? coreData.viewContext.save()
     }
 
-    func fetchFavoriteTopics() -> [Topic] {
+    func fetchFavorites() -> [Topic] {
         fetch(
             predicate: .init(format: "isFavorite = true"),
             context: coreData.viewContext
         ).fetchedObjects ?? []
     }
 
-    func fetchAllTopics() -> [Topic] {
+    func fetchAll() -> [Topic] {
         fetch(
             predicate: nil,
             context: coreData.viewContext

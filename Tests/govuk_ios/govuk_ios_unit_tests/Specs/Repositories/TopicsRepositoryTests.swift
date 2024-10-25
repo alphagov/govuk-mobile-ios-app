@@ -15,9 +15,9 @@ struct TopicsRepositoryTests {
     }
 
     @Test
-    func saveTopicsList_doesSaveResponseItems() async throws {
-        sut.saveTopicsList(TopicResponseItem.arrangeMultiple)
-        let topics = sut.fetchAllTopics()
+    func saveTopics_doesSaveResponseItems() async throws {
+        sut.save(topics: TopicResponseItem.arrangeMultiple)
+        let topics = sut.fetchAll()
         #expect(topics.count == 3)
         #expect(topics.first?.title == "Business")
         #expect(topics.first?.ref == "business")
@@ -26,10 +26,10 @@ struct TopicsRepositoryTests {
     }
     
     @Test
-    func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
+    func saveTopics_newTopicsNotFavoritedAfterInitialLaunch() async throws {
         // Given I have started the app the first time, and gotten topics
         var topicResponseItems = TopicResponseItem.arrangeMultiple
-        sut.saveTopicsList(topicResponseItems)
+        sut.save(topics: topicResponseItems)
 
         // When I start the app again and new topics are available to save
         let newItem = TopicResponseItem(
@@ -38,30 +38,30 @@ struct TopicsRepositoryTests {
             description: "Description"
         )
         topicResponseItems.append(newItem)
-        sut.saveTopicsList(topicResponseItems)
-        
+        sut.save(topics: topicResponseItems)
+
         // Then the new item will not be favorited
-        let topics = sut.fetchAllTopics()
+        let topics = sut.fetchAll()
         #expect(topics.count == 4)
         let newTopic = try #require(topics.first(where: { $0.ref == "new-item" }))
         #expect(newTopic.isFavorite == false)
     }
 
     @Test
-    func fetchFavoriteTopics_onlyReturnsFavorites() async throws {
+    func fetchFavorites_onlyReturnsFavorites() async throws {
         let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
         Topic.arrange(context: coreData.viewContext, isFavourite: false)
 
-        let favorites = sut.fetchFavoriteTopics()
+        let favorites = sut.fetchFavorites()
         #expect(favorites.count == 1)
         #expect(favorites.first?.title == expectedResult.title)
     }
     
     @Test
-    func saveChanges_persistsDataAsExpected() async throws {
+    func save_persistsDataAsExpected() async throws {
         Topic.arrangeMultiple(context: coreData.viewContext)
 
-        sut.saveChanges()
+        sut.save()
 
         let request = Topic.fetchRequest()
         let context = coreData.backgroundContext

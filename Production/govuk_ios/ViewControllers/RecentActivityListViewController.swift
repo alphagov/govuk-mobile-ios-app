@@ -98,7 +98,8 @@ class RecentActivityListViewController: BaseViewController,
         view.addSubview(noItemsView)
         view.addSubview(editingToolbar)
         removeBarButtonItem.isEnabled = false
-        showSelectAllToolbarButton()
+        configureToolbarItems()
+//        showSelectAllToolbarButton()
     }
 
     private func configureConstraints() {
@@ -141,6 +142,7 @@ class RecentActivityListViewController: BaseViewController,
         trackEditingEvent()
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
+        configureToolbarItems(animated: false)
         editingToolbar.isHidden = !editing
         if !editing {
             viewModel.endEditing()
@@ -239,9 +241,7 @@ class RecentActivityListViewController: BaseViewController,
             viewModel.selected(item: item)
             reloadSnapshot()
         }
-        if viewModel.isEveryItemSelected() {
-            showDeselectAllToolbarButton()
-        }
+        configureToolbarItems()
     }
 
     func tableView(_ tableView: UITableView,
@@ -250,23 +250,17 @@ class RecentActivityListViewController: BaseViewController,
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         viewModel.removeEdit(item: item)
-        showSelectAllToolbarButton()
+        configureToolbarItems()
     }
 
-    private func showSelectAllToolbarButton() {
-        updateFirstToolbarItem(selectAllBarButtonItem)
-    }
-
-    private func showDeselectAllToolbarButton() {
-        updateFirstToolbarItem(deselectAllBarButtonItem)
-    }
-
-    private func updateFirstToolbarItem(_ buttonItem: UIBarButtonItem) {
-        editingToolbar.items = [
-            buttonItem,
+    private func configureToolbarItems(animated: Bool = true) {
+        removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
+        let items = [
+            viewModel.isEveryItemSelected() ? deselectAllBarButtonItem : selectAllBarButtonItem,
             .flexibleSpace(),
             removeBarButtonItem
         ]
+        editingToolbar.setItems(items, animated: animated)
     }
 }
 

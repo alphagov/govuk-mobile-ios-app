@@ -1,7 +1,7 @@
 import SwiftUI
 import UIComponents
 
-struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
+struct SettingsView<T: SettingsViewModelInterface>: View {
     @StateObject var viewModel: T
 
     init(viewModel: T) {
@@ -14,14 +14,11 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 .ignoresSafeArea()
             VStack {
                 ScrollView {
-                    if let description = viewModel.description {
-                        descripitonView(description: description)
-                    }
                     GroupedList(
-                        content: viewModel.sections,
+                        content: viewModel.listContent,
                         backgroundColor: UIColor.govUK.fills.surfaceBackground
                     )
-                    .padding(.top, 16)
+                    .padding(.top, 8)
                 }
             }
         }
@@ -29,18 +26,9 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             viewModel.trackScreen(screen: self)
         }
     }
-
-    private func descripitonView(description: String) -> some View {
-        HStack {
-            Text(description)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 18)
-            Spacer()
-        }
-    }
 }
 
-extension TopicDetailView: TrackableScreen {
+extension SettingsView: TrackableScreen {
     var trackingTitle: String? { viewModel.title }
-    var trackingName: String { viewModel.title }
+    var trackingName: String { "Settings" }
 }

@@ -188,8 +188,14 @@ class SearchViewController: BaseViewController,
                 self?.updateErrorView(
                     searchText: searchText
                 )
+                self?.updateFocus()
             }
         )
+    }
+
+    private func updateFocus() {
+        let view = errorView.isHidden ? tableView : errorView
+        accessibilityLayoutChanged(focusView: view)
     }
 
     private func updateErrorView(searchText: String?) {
@@ -230,6 +236,8 @@ class SearchViewController: BaseViewController,
             snapshot.appendItems(results, toSection: .results)
         }
         dataSource.apply(snapshot, animatingDifferences: true)
+
+        tableView.isHidden = viewModel.results?.isEmpty == true || viewModel.results == nil
     }
 
     func tableView(_ tableView: UITableView,

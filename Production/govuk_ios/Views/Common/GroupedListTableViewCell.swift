@@ -83,6 +83,8 @@ class GroupedListTableViewCell: UITableViewCell {
 
         // Tints the checkmark
         tintColor = UIColor.govUK.text.link
+
+        accessibilityTraits.insert(.link)
     }
 
     private func configureConstraints() {

@@ -237,11 +237,7 @@ class SearchViewController: BaseViewController,
         }
         dataSource.apply(snapshot, animatingDifferences: true)
 
-        if viewModel.results?.isEmpty == true || viewModel.results == nil {
-            tableView.isHidden = true
-        } else {
-            tableView.isHidden = false
-        }
+        tableView.isHidden = viewModel.results?.isEmpty == true || viewModel.results == nil
     }
 
     func tableView(_ tableView: UITableView,

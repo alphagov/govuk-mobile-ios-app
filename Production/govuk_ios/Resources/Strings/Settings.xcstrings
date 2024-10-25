@@ -12,6 +12,17 @@
         }
       }
     },
+    "accessibilityStatementRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibility statement"
+          }
+        }
+      }
+    },
     "appUsageFooter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -96,6 +107,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy policy"
+          }
+        }
+      }
+    },
+    "termsAndConditionsRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms and conditions"
           }
         }
       }

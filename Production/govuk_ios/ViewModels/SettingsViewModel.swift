@@ -64,7 +64,9 @@ class SettingsViewModel: SettingsViewModelInterface {
                 heading: nil,
                 rows: [
                     privacyPolicyRow(),
-                    openSourceLicenceRow()
+                    accessibilityStatementRow(),
+                    openSourceLicenceRow(),
+                    termsAndConditionsRow()
                 ],
                 footer: nil
             )
@@ -94,9 +96,10 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                if self?.urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl) == true {
-                    self?.trackLinkEvent(rowTitle)
-                }
+                self?.openURLIfPossible(
+                    urlString: Constants.API.helpAndFeedbackUrl,
+                    eventTitle: rowTitle
+                )
             }
         )
     }
@@ -113,6 +116,43 @@ class SettingsViewModel: SettingsViewModelInterface {
                 }
             }
         )
+    }
+
+    private func termsAndConditionsRow() -> GroupedListRow {
+        let rowTitle = String.settings.localized("termsAndConditionsRowTitle")
+        return LinkRow(
+            id: "settings.terms.row",
+            title: rowTitle,
+            body: nil,
+            action: { [weak self] in
+                self?.openURLIfPossible(
+                    urlString: Constants.API.termsAndConditionsUrl,
+                    eventTitle: rowTitle
+                )
+            }
+        )
+    }
+
+    private func accessibilityStatementRow() -> GroupedListRow {
+        let rowTitle = String.settings.localized("accessibilityStatementRowTitle")
+        return LinkRow(
+            id: "settings.accessibility.row",
+            title: rowTitle,
+            body: nil,
+            action: { [weak self] in
+                self?.openURLIfPossible(
+                    urlString: Constants.API.accessibilityStatementUrl,
+                    eventTitle: rowTitle
+                )
+            }
+        )
+    }
+
+    private func openURLIfPossible(urlString: String,
+                                   eventTitle: String) {
+        if urlOpener.openIfPossible(Constants.API.accessibilityStatementUrl) {
+            trackLinkEvent(eventTitle)
+        }
     }
 
     private func trackLinkEvent(_ title: String) {

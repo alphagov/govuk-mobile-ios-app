@@ -18,7 +18,7 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                         content: viewModel.listContent,
                         backgroundColor: UIColor.govUK.fills.surfaceBackground
                     )
-                    .padding(.top, 16)
+                    .padding(.top, 8)
                 }
             }
         }

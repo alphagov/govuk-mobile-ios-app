@@ -21,7 +21,6 @@
 		1687F05D2CB035E3005E1473 /* AllTopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */; };
 		1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */; };
 		1687F3172CB4110D005E1473 /* AllTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */; };
-		168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */; };
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
 		168F6FAA2C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */; };
 		168F6FAC2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */; };
@@ -413,7 +412,6 @@
 		1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewController.swift; sourceTree = "<group>"; };
 		1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsCoordinator.swift; sourceTree = "<group>"; };
 		1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewModel.swift; sourceTree = "<group>"; };
-		168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTests.swift; sourceTree = "<group>"; };
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidgetViewModel.swift; sourceTree = "<group>"; };
 		168F6FAB2C4FFF9500A0D7F7 /* HomeViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -1031,7 +1029,6 @@
 				5D37E9F62C3E865F006B36CB /* BaseViewControllerTests.swift */,
 				5D323F902C64EBE900C1DB97 /* HomeViewControllerTests.swift */,
 				16F961962C8881C8005CFB04 /* SearchViewControllerTests.swift */,
-				168F6FA32C4F245600A0D7F7 /* SettingsViewControllerTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2475,7 +2472,6 @@
 				3DEC85AD2C89DBED0044D5F9 /* MockURLOpener.swift in Sources */,
 				5D16E6AB2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift in Sources */,
 				D0F86E1A2CAC241400FF2D9E /* TopicTests.swift in Sources */,
-				168F6FA42C4F245600A0D7F7 /* SettingsViewControllerTests.swift in Sources */,
 				5D54F47B2CC8CB3400A3B6A7 /* StepByStepsViewModelTests.swift in Sources */,
 				5DD6F3362CC844D0005BC5D3 /* Topic+Arrangers.swift in Sources */,
 				5DA599FE2C6C9A3D00AEA8D7 /* MockURLProtocol.swift in Sources */,

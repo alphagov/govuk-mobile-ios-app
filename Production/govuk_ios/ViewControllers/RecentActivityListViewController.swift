@@ -231,9 +231,6 @@ class RecentActivityListViewController: BaseViewController,
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
-        if tableView.isEveryRowSelected() {
-            showDeselectAllToolbarButton()
-        }
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         if tableView.isEditing {
@@ -242,15 +239,18 @@ class RecentActivityListViewController: BaseViewController,
             viewModel.selected(item: item)
             reloadSnapshot()
         }
+        if viewModel.isEveryItemSelected() {
+            showDeselectAllToolbarButton()
+        }
     }
 
     func tableView(_ tableView: UITableView,
                    didDeselectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
-        showSelectAllToolbarButton()
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         viewModel.removeEdit(item: item)
+        showSelectAllToolbarButton()
     }
 
     private func showSelectAllToolbarButton() {

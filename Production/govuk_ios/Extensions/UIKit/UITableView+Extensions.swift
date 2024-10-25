@@ -36,11 +36,4 @@ extension UITableView {
             }
         }
     }
-
-    func isEveryRowSelected() -> Bool {
-        let numVisibleRows = indexPathsForVisibleRows?.count ?? 0
-        guard numVisibleRows > 0 else { return false }
-        let numSelectedRows = indexPathsForSelectedRows?.count ?? 0
-        return numVisibleRows == numSelectedRows
-    }
 }

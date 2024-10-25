@@ -90,6 +90,12 @@ class RecentActivityListViewModel: NSObject,
         selectedEditingItems.removeAll()
     }
 
+    func isEveryItemSelected() -> Bool {
+        let items = retainedResultsController?.fetchedObjects ?? []
+        guard items.count > 0 else { return false }
+        return items.count == selectedEditingItems.count
+    }
+
     private func trackSelection(activity: ActivityItem) {
         let event = AppEvent.recentActivityNavigation(
             activity: activity

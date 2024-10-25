@@ -96,9 +96,10 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                if self?.urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl) == true {
-                    self?.trackLinkEvent(rowTitle)
-                }
+                self?.openURLIfPossible(
+                    urlString: Constants.API.helpAndFeedbackUrl,
+                    eventTitle: rowTitle
+                )
             }
         )
     }
@@ -124,9 +125,10 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                if self?.urlOpener.openIfPossible(Constants.API.termsAndConditionsUrl) == true {
-                    self?.trackLinkEvent(rowTitle)
-                }
+                self?.openURLIfPossible(
+                    urlString: Constants.API.termsAndConditionsUrl,
+                    eventTitle: rowTitle
+                )
             }
         )
     }
@@ -138,11 +140,19 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                if self?.urlOpener.openIfPossible(Constants.API.accessibilityStatementUrl) == true {
-                    self?.trackLinkEvent(rowTitle)
-                }
+                self?.openURLIfPossible(
+                    urlString: Constants.API.accessibilityStatementUrl,
+                    eventTitle: rowTitle
+                )
             }
         )
+    }
+
+    private func openURLIfPossible(urlString: String,
+                                   eventTitle: String) {
+        if urlOpener.openIfPossible(Constants.API.accessibilityStatementUrl) {
+            trackLinkEvent(eventTitle)
+        }
     }
 
     private func trackLinkEvent(_ title: String) {

@@ -71,7 +71,7 @@ class HomeCoordinator: TabItemCoordinator {
 
     private var startTopicDetailCoordinator: (Topic) -> Void {
         return { [weak self] topic in
-            self?.trackWidgetNavigation(text: topic.ref)
+            self?.trackWidgetNavigation(text: topic.title)
             guard let self = self else { return }
             let coordinator = self.coordinatorBuilder.topicDetail(
                 topic,

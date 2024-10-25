@@ -25,7 +25,7 @@ class SearchResultCell: UITableViewCell {
         return localView
     }()
 
-    private var title: UILabel = {
+    private var titleLabel: UILabel = {
         let localLabel = UILabel()
         localLabel.translatesAutoresizingMaskIntoConstraints = false
         localLabel.textColor = UIColor.govUK.text.link
@@ -33,13 +33,12 @@ class SearchResultCell: UITableViewCell {
         localLabel.lineBreakMode = .byWordWrapping
         localLabel.font = UIFont.govUK.body
         localLabel.textAlignment = .left
-        localLabel.isAccessibilityElement = true
         localLabel.accessibilityHint = String.common.localized("openWebLinkHint")
 
         return localLabel
     }()
 
-    private var resultDescription: UILabel = {
+    private var bodyLabel: UILabel = {
         let localLabel = UILabel()
         localLabel.translatesAutoresizingMaskIntoConstraints = false
         localLabel.textColor = .label
@@ -47,7 +46,6 @@ class SearchResultCell: UITableViewCell {
         localLabel.textAlignment = .left
         localLabel.numberOfLines = 0
         localLabel.lineBreakMode = .byWordWrapping
-        localLabel.isAccessibilityElement = true
 
         return localLabel
     }()
@@ -57,6 +55,8 @@ class SearchResultCell: UITableViewCell {
 
         setupUI()
         setupConstrains()
+        card.isAccessibilityElement = true
+        card.accessibilityTraits.insert(.link)
     }
 
     required init?(coder: NSCoder) {
@@ -64,9 +64,14 @@ class SearchResultCell: UITableViewCell {
     }
 
     func configure(item: SearchItem?) {
-        self.title.text = item?.title
+        titleLabel.text = item?.title
         let trimmedDescription = item?.description.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.resultDescription.text = trimmedDescription
+        bodyLabel.text = trimmedDescription
+        card.accessibilityLabel = [
+            titleLabel.text,
+            bodyLabel.text
+        ].compactMap { $0 }.joined(separator: ", ")
+        card.accessibilityHint = String.common.localized("openWebLinkHint")
     }
 
     private func setupUI() {
@@ -74,9 +79,9 @@ class SearchResultCell: UITableViewCell {
         contentView.backgroundColor = UIColor.govUK.fills.surfaceModal
 
         contentView.addSubview(card)
-        card.addSubview(title)
+        card.addSubview(titleLabel)
         card.addSubview(linkImage)
-        card.addSubview(resultDescription)
+        card.addSubview(bodyLabel)
     }
 
     private func setupConstrains() {
@@ -94,34 +99,34 @@ class SearchResultCell: UITableViewCell {
                 equalTo: contentView.bottomAnchor, constant: -16
             ),
 
-            title.topAnchor.constraint(
+            titleLabel.topAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.topAnchor
             ),
-            title.trailingAnchor.constraint(
+            titleLabel.trailingAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.trailingAnchor,
                 constant: -32
             ),
-            title.leadingAnchor.constraint(
+            titleLabel.leadingAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.leadingAnchor
             ),
 
             linkImage.topAnchor.constraint(
-                equalTo: title.topAnchor
+                equalTo: titleLabel.topAnchor
             ),
             linkImage.trailingAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.trailingAnchor
             ),
 
-            resultDescription.topAnchor.constraint(
-                equalTo: title.bottomAnchor, constant: 8
+            bodyLabel.topAnchor.constraint(
+                equalTo: titleLabel.bottomAnchor, constant: 8
             ),
-            resultDescription.trailingAnchor.constraint(
+            bodyLabel.trailingAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.trailingAnchor
             ),
-            resultDescription.leadingAnchor.constraint(
+            bodyLabel.leadingAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.leadingAnchor
             ),
-            resultDescription.bottomAnchor.constraint(
+            bodyLabel.bottomAnchor.constraint(
                 equalTo: card.layoutMarginsGuide.bottomAnchor
             )
         ])

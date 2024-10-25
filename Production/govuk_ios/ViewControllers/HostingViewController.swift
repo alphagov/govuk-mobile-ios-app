@@ -22,4 +22,16 @@ class HostingViewController<T>: UIHostingController<T> where T: View {
             animated: animated
         )
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setVoiceoverFocus()
+    }
+
+    private func setVoiceoverFocus() {
+        UIAccessibility.post(
+            notification: .screenChanged,
+            argument: view
+        )
+    }
 }

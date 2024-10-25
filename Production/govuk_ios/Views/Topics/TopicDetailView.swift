@@ -34,7 +34,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         HStack {
             Text(description)
                 .multilineTextAlignment(.leading)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 18)
             Spacer()
         }
     }

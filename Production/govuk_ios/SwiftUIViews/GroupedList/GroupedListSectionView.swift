@@ -11,6 +11,7 @@ struct GroupedListSectionView: View {
                     .font(Font.govUK.title3.bold())
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                     .padding(.horizontal, 16)
+                    .accessibilityAddTraits(.isHeader)
             }
             ZStack {
                 Color(UIColor.govUK.fills.surfaceCard)

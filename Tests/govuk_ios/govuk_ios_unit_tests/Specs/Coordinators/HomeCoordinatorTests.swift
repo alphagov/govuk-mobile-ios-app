@@ -111,11 +111,12 @@ struct HomeCoordinatorTests {
         let coreData = CoreDataRepository.arrange
         let topic = Topic(context: coreData.viewContext)
         topic.ref = "123"
+        topic.title = "test_title"
         mockViewControllerBuilder._receivedTopicWidgetViewModel?.topicAction(topic)
 
         let navigationEvent = mockAnalyticsService._trackedEvents.first
 
-        #expect(navigationEvent?.params?["text"] as? String == "123")
+        #expect(navigationEvent?.params?["text"] as? String == "test_title")
         #expect(navigationEvent?.params?["type"] as? String == "Widget")
         #expect(navigationEvent?.name == "Navigation")
     }

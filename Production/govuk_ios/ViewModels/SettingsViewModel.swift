@@ -1,15 +1,24 @@
 import UIKit
 
-protocol SettingsViewModelInterface {
+protocol SettingsViewModelInterface: ObservableObject {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
+    func trackScreen(screen: TrackableScreen)
 }
 
-struct SettingsViewModel: SettingsViewModelInterface {
+class SettingsViewModel: SettingsViewModelInterface {
     let title: String = String.settings.localized("pageTitle")
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let bundle: Bundle
+
+    init(analyticsService: AnalyticsServiceInterface,
+         urlOpener: URLOpener,
+         bundle: Bundle) {
+        self.analyticsService = analyticsService
+        self.urlOpener = urlOpener
+        self.bundle = bundle
+    }
 
     private var hasAcceptedAnalytics: Bool {
         switch analyticsService.permissionState {
@@ -42,8 +51,10 @@ struct SettingsViewModel: SettingsViewModelInterface {
                         id: "settings.privacy.row",
                         title: String.settings.localized("appUsageTitle"),
                         isOn: hasAcceptedAnalytics,
-                        action: { isOn in
-                            analyticsService.setAcceptedAnalytics(accepted: isOn)
+                        action: { [weak self] isOn in
+                            self?.analyticsService.setAcceptedAnalytics(
+                                accepted: isOn
+                            )
                         }
                     )
                 ],
@@ -66,9 +77,9 @@ struct SettingsViewModel: SettingsViewModelInterface {
             id: "settings.policy.row",
             title: rowTitle,
             body: nil,
-            action: {
-                if urlOpener.openIfPossible(Constants.API.privacyPolicyUrl) {
-                    trackLinkEvent(rowTitle)
+            action: { [weak self] in
+                if self?.urlOpener.openIfPossible(Constants.API.privacyPolicyUrl) == true {
+                    self?.trackLinkEvent(rowTitle)
                 }
             }
         )
@@ -82,9 +93,9 @@ struct SettingsViewModel: SettingsViewModelInterface {
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
             body: nil,
-            action: {
-                if urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl) {
-                    trackLinkEvent(rowTitle)
+            action: { [weak self] in
+                if self?.urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl) == true {
+                    self?.trackLinkEvent(rowTitle)
                 }
             }
         )
@@ -96,9 +107,9 @@ struct SettingsViewModel: SettingsViewModelInterface {
             id: "settings.licence.row",
             title: rowTitle,
             body: nil,
-            action: {
-                if urlOpener.openSettings() {
-                    trackLinkEvent(rowTitle)
+            action: { [weak self] in
+                if self?.urlOpener.openSettings() == true {
+                    self?.trackLinkEvent(rowTitle)
                 }
             }
         )
@@ -110,5 +121,9 @@ struct SettingsViewModel: SettingsViewModelInterface {
             external: true
         )
         analyticsService.track(event: event)
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
     }
 }

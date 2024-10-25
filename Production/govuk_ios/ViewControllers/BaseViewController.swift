@@ -13,6 +13,21 @@ class BaseViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         trackPageView()
+        setVoiceoverFocus()
+    }
+
+    private func setVoiceoverFocus() {
+        UIAccessibility.post(
+            notification: .screenChanged,
+            argument: view
+        )
+    }
+
+    func accessibilityLayoutChanged(focusView: UIView) {
+        UIAccessibility.post(
+            notification: .layoutChanged,
+            argument: focusView
+        )
     }
 
     private func configureUI() {

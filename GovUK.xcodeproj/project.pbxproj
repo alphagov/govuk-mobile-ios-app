@@ -144,6 +144,8 @@
 		5D37EA172C3E865F006B36CB /* LaunchCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */; };
 		5D37EA1A2C3E865F006B36CB /* TabCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */; };
 		5D37EA1B2C3E865F006B36CB /* AnimationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */; };
+		5D3A992D2CCC1C2A00C0DDC2 /* UIBarButtonItem+ConvenienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A992C2CCC1C2A00C0DDC2 /* UIBarButtonItem+ConvenienceTests.swift */; };
+		5D3A992F2CCC1E7B00C0DDC2 /* UITableView+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3A992E2CCC1E7B00C0DDC2 /* UITableView+ExtensionsTests.swift */; };
 		5D4043392C7DBF1B0004CCFE /* AppConfig+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4043382C7DBF1B0004CCFE /* AppConfig+Arrangers.swift */; };
 		5D40433B2C7DBF710004CCFE /* Config+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D40433A2C7DBF710004CCFE /* Config+Arrangers.swift */; };
 		5D41DB552C0862840011E691 /* LaunchViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */; };
@@ -532,6 +534,8 @@
 		5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCoordinatorTests.swift; sourceTree = "<group>"; };
 		5D37EA072C3E865F006B36CB /* AnimationViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationViewTests.swift; sourceTree = "<group>"; };
+		5D3A992C2CCC1C2A00C0DDC2 /* UIBarButtonItem+ConvenienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+ConvenienceTests.swift"; sourceTree = "<group>"; };
+		5D3A992E2CCC1E7B00C0DDC2 /* UITableView+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		5D4043382C7DBF1B0004CCFE /* AppConfig+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfig+Arrangers.swift"; sourceTree = "<group>"; };
 		5D40433A2C7DBF710004CCFE /* Config+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Arrangers.swift"; sourceTree = "<group>"; };
 		5D41DB542C0862840011E691 /* LaunchViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -930,8 +934,10 @@
 			children = (
 				5D16E6AA2C41847900776ABA /* UIAlertAction+ConvenienceTests.swift */,
 				5D16E6A72C417CD500776ABA /* UIAlertController+ConvenienceTests.swift */,
-				5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */,
 				5DD57A5A2C9835B800EC2617 /* UIApplication+URLOpenerTests.swift */,
+				5D3A992C2CCC1C2A00C0DDC2 /* UIBarButtonItem+ConvenienceTests.swift */,
+				5D3A992E2CCC1E7B00C0DDC2 /* UITableView+ExtensionsTests.swift */,
+				5D899A232C9487AE0074C0AD /* UIViewController+ExtensionsTests.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2358,6 +2364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D54F46F2CC8465C00A3B6A7 /* EditTopicsViewModelTests.swift in Sources */,
+				5D3A992F2CCC1E7B00C0DDC2 /* UITableView+ExtensionsTests.swift in Sources */,
 				5D66D1992CBFF47800006723 /* AppEvent+TopicsTests.swift in Sources */,
 				D0F86E152CAB0AC300FF2D9E /* MockTopicsServiceClient.swift in Sources */,
 				5D66D1922CBFE41700006723 /* AppEvent+RecentActivityTests.swift in Sources */,
@@ -2369,6 +2376,7 @@
 				5D323F912C64EBE900C1DB97 /* HomeViewControllerTests.swift in Sources */,
 				16F961A92C989651005CFB04 /* MockAPIServiceClient.swift in Sources */,
 				5DC069F32C3C196B00A81AAE /* MockAccessibilityManager.swift in Sources */,
+				5D3A992D2CCC1C2A00C0DDC2 /* UIBarButtonItem+ConvenienceTests.swift in Sources */,
 				5D26A7652C92E18F009902DD /* FirebaseClientTests.swift in Sources */,
 				5D5A25E72CAD44800013704A /* SearchItemTests.swift in Sources */,
 				D04191842CA5B06D0034722A /* TopicsServiceTests.swift in Sources */,

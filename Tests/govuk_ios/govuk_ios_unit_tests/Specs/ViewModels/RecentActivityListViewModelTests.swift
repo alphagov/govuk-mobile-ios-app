@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import CoreData
 
 @testable import govuk_ios
 
@@ -127,5 +128,80 @@ struct RecentActivityListViewModelTests {
         sut.confirmDeletionOfEditingItems()
 
         #expect(mockActivityService._receivedDeleteObjectIds == nil)
+    }
+
+    @Test
+    @MainActor
+    func isEveryItemSelected_everyItemSelected_returnsTrue() {
+        let mockActivityService = MockActivityService()
+        let mockURLOpener = MockURLOpener()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = RecentActivityListViewModel(
+            activityService: mockActivityService,
+            analyticsService: mockAnalyticsService,
+            urlopener: mockURLOpener
+        )
+
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let item1 = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        let item2 = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        let request = ActivityItem.fetchRequest()
+        let resultsController = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: request,
+            managedObjectContext: coreData.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        resultsController.fetch()
+        mockActivityService._stubbedFetchResultsController = resultsController
+
+        sut.fetchActivities()
+
+        sut.edit(item: item1)
+        sut.edit(item: item2)
+
+        #expect(sut.isEveryItemSelected() == true)
+    }
+
+    @Test
+    @MainActor
+    func isEveryItemSelected_noItemsSelected_returnsFalse() {
+        let mockActivityService = MockActivityService()
+        let mockURLOpener = MockURLOpener()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = RecentActivityListViewModel(
+            activityService: mockActivityService,
+            analyticsService: mockAnalyticsService,
+            urlopener: mockURLOpener
+        )
+
+        let coreData = CoreDataRepository.arrangeAndLoad
+        _ = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        _ = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+
+        let request = ActivityItem.fetchRequest()
+        let resultsController = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: request,
+            managedObjectContext: coreData.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        resultsController.fetch()
+        mockActivityService._stubbedFetchResultsController = resultsController
+
+        sut.fetchActivities()
+
+        #expect(sut.isEveryItemSelected() == false)
     }
 }

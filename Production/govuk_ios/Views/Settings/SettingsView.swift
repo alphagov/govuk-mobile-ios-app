@@ -26,15 +26,6 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
             viewModel.trackScreen(screen: self)
         }
     }
-
-    private func descripitonView(description: String) -> some View {
-        HStack {
-            Text(description)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 18)
-            Spacer()
-        }
-    }
 }
 
 extension SettingsView: TrackableScreen {

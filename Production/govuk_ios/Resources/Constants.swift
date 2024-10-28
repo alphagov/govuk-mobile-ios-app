@@ -8,9 +8,12 @@ struct Constants {
         static let govukUrlScheme = "https"
         static let govukUrlString = "https://www.gov.uk"
         static let helpAndFeedbackUrl = "https://www.gov.uk/contact/govuk"
+
         static let termsAndConditionsUrl = "https://www.gov.uk/government/publications/govuk-app-terms-and-conditions"
         static let accessibilityStatementUrl = "https://www.gov.uk/government/publications/accessibility-statement-for-the-govuk-app"
         static let privacyPolicyUrl = "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data"
-        static let defaultSearchApiUrlString = "https://search.publishing.service.gov.uk/v0_1/search.json"
+
+        static let defaultSearchUrl: URL = URL(string: "https://search.service.gov.uk")!
+        static var defaultSearchPath: String = "/v0_1/search.json"
     }
 }

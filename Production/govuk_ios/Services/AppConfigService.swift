@@ -1,4 +1,5 @@
 import Foundation
+import Factory
 
 protocol AppConfigServiceInterface {
     var isAppAvailable: Bool { get }
@@ -57,7 +58,6 @@ public final class AppConfigService: AppConfigServiceInterface {
     }
 
     private func setConfig(_ config: Config) {
-        self.searchApiUrl = config.searchApiUrl ?? Constants.API.defaultSearchApiUrlString
         self.isAppAvailable = config.available
         let appVersionNumber = appVersionProvider.versionNumber ?? ""
         self.isAppForcedUpdate = appVersionNumber.isVersion(lessThan: config.minimumVersion)
@@ -68,6 +68,16 @@ public final class AppConfigService: AppConfigServiceInterface {
                 new
             }
         )
+        updateSearch(urlString: config.searchApiUrl)
+    }
+
+    private func updateSearch(urlString: String?) {
+        guard let urlString = urlString,
+              let url = URL(string: urlString),
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        else { return }
+        Constants.API.defaultSearchPath = components.path
+        Container.shared.reregisterSearch(url: url)
     }
 
     func isFeatureEnabled(key: Feature) -> Bool {

@@ -2,7 +2,6 @@ import Foundation
 
 protocol SearchServiceClientInterface {
     func search(term: String,
-                searchApiUrlPath: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
 }
 
@@ -14,10 +13,13 @@ class SearchServiceClient: SearchServiceClientInterface {
     }
 
     func search(term: String,
-                searchApiUrlPath: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void) {
+        let request = GOVRequest.search(
+            term: term,
+            searchApiUrlPath: Constants.API.defaultSearchPath
+        )
         serviceClient.send(
-            request: .search(term: term, searchApiUrlPath: searchApiUrlPath),
+            request: request,
             completion: { result in
                 let mappedResult = result.mapError { error in
                     let nsError = (error as NSError)

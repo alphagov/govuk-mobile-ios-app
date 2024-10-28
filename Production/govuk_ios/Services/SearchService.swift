@@ -2,7 +2,6 @@ import Foundation
 
 protocol SearchServiceInterface {
     func search(_ term: String,
-                searchApiUrlPath: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
 }
 
@@ -14,11 +13,9 @@ class SearchService: SearchServiceInterface {
     }
 
     func search(_ term: String,
-                searchApiUrlPath: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void) {
         serviceClient.search(
             term: term,
-            searchApiUrlPath: searchApiUrlPath,
             completion: { result in
                 let mappedResult: Result<SearchResult, SearchError> = result.flatMap {
                     $0.results.isEmpty ? .failure(.noResults) : .success($0)

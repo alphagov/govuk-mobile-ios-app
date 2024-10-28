@@ -13,18 +13,28 @@ extension Container {
         }
     }
 
+    func reregisterSearch(url: URL) {
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        components?.path = ""
+        components?.queryItems = nil
+        let newClient = newSearchClient(
+            url: components?.url ?? Constants.API.defaultSearchUrl
+        )
+        searchAPIClient.register { newClient }
+    }
+
     var searchAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
-            let searchApiUrl = self.appConfigService().searchApiUrl
-            let components = URLComponents(string: searchApiUrl)!
-            let baseUrl = components.scheme! + "://" + components.host!
-
-            return APIServiceClient(
-                baseUrl: URL(string: baseUrl)!,
-                session: URLSession(configuration: .default),
-                requestBuilder: RequestBuilder()
-            )
+            self.newSearchClient(url: Constants.API.defaultSearchUrl)
         }
+    }
+
+    private func newSearchClient(url: URL) -> APIServiceClient {
+        APIServiceClient(
+            baseUrl: url,
+            session: URLSession(configuration: .default),
+            requestBuilder: RequestBuilder()
+        )
     }
 
     var searchServiceClient: Factory<SearchServiceClientInterface> {

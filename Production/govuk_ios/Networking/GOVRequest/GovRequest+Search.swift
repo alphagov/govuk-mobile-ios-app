@@ -1,7 +1,8 @@
 import Foundation
 
 extension GOVRequest {
-    static func search(term: String, searchApiUrlPath: String) -> GOVRequest {
+    static func search(term: String,
+                       searchApiUrlPath: String) -> GOVRequest {
         GOVRequest(
             urlPath: searchApiUrlPath,
             method: .get,

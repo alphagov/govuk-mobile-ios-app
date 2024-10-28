@@ -39,7 +39,6 @@ class SearchViewModel {
         trackSearchTerm(searchTerm: text)
         searchService.search(
             text,
-            searchApiUrlPath: searchApiUrlPath,
             completion: { [weak self] result in
                 self?.results = try? result.get().results
                 self?.error = result.getError()
@@ -71,10 +70,5 @@ class SearchViewModel {
         analyticsService.track(
             event: AppEvent.searchTerm(term: searchTerm.redactPii())
         )
-    }
-
-    private var searchApiUrlPath: String {
-        let url = URLComponents(string: appConfigService.searchApiUrl)!
-        return url.path
     }
 }

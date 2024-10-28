@@ -17,7 +17,6 @@ struct TopicsRepository: TopicsRepositoryInterface {
 
     func saveTopicsList(_ topicResponses: [TopicResponseItem]) {
         let context = coreData.backgroundContext
-        let isFirstLaunch = fetchAllTopics().count == 0
         topicResponses.forEach { topicResponse in
             createOrUpdateTopic(
                 for: topicResponse,

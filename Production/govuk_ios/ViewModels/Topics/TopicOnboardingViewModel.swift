@@ -39,7 +39,7 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func setHasTopicsBeenSelected() {
-        isTopicsSelected = selectedTopics.isEmpty ? false : true
+        isTopicsSelected = !selectedTopics.isEmpty
     }
 
     private var topicsWidget: WidgetView {

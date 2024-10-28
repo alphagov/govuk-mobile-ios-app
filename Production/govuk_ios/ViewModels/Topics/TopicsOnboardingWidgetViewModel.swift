@@ -33,10 +33,9 @@ final class TopicsOnboardingWidgetViewModel {
 
     var getTopics: [Topic] {
         if topicsService.fetchFavoriteTopics() == [] {
-            switch hasTopicsBeenEdited {
-            case true:
+            if hasTopicsBeenEdited {
                 return topicsService.fetchFavoriteTopics()
-            default:
+            } else {
                 return topicsService.fetchAllTopics()
             }
         } else {
@@ -55,7 +54,7 @@ final class TopicsOnboardingWidgetViewModel {
             text: topic.title,
             type: "buttons",
             section: "topic selection",
-            action: isTopicSelected == true ? "add" : "remove"
+            action: isTopicSelected ? "add" : "remove"
         )
         analyticsService.track(event: event)
         action(topic)

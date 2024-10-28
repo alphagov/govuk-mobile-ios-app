@@ -18,7 +18,7 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
 
     func fetchAppConfig(completion: @escaping FetchAppConfigResult) {
         let fetchRequest = GOVRequest(
-            urlPath: "/appinfo/ios",
+            urlPath: "/config/appinfo/ios",
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,

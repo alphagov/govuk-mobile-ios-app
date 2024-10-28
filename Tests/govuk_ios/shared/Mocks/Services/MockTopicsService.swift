@@ -3,7 +3,21 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {
-    
+
+    var _stubbedHasOnboardedTopics: Bool = false
+    var hasOnboardedTopics: Bool {
+        return _stubbedHasOnboardedTopics
+    }
+
+    func setHasOnboardedTopics() {
+        _stubbedHasOnboardedTopics = true
+    }
+
+    var _stubbedHasEditedTopicsCalled = false
+    func setHasEditedTopics() {
+        _stubbedHasEditedTopicsCalled = true
+    }
+
     let coreData = CoreDataRepository.arrangeAndLoad
     
     var _stubbedFetchAllTopics: [Topic]?

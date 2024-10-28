@@ -14,7 +14,8 @@ struct TopicsServiceTests {
         mockTopicsRepository = MockTopicsRepository()
         sut = TopicsService(
             topicsServiceClient: mockTopicsServiceClient,
-            topicsRepository: mockTopicsRepository
+            topicsRepository: mockTopicsRepository,
+            userDefaults: UserDefaults()
         )
     }
 

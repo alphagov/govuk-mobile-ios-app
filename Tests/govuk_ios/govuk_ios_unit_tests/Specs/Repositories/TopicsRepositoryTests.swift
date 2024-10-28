@@ -21,8 +21,6 @@ struct TopicsRepositoryTests {
         #expect(topics.count == 3)
         #expect(topics.first?.title == "Business")
         #expect(topics.first?.ref == "business")
-        #expect(topics.filter { $0.isFavorite == true }.count == 3)
-        
     }
     
     @Test

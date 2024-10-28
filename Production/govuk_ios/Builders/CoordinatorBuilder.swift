@@ -156,4 +156,15 @@ class CoordinatorBuilder {
             topicsService: container.topicsService.resolve()
         )
     }
+
+    func topicsOnboarding(navigationController: UINavigationController,
+                          didDismissAction: @escaping () -> Void) -> BaseCoordinator {
+        TopicsOnboardingCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            topicsService: container.topicsService.resolve(),
+            dismissAction: didDismissAction
+        )
+    }
 }

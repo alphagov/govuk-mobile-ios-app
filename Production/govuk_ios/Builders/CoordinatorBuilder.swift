@@ -110,7 +110,6 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
-            appConfigService: container.appConfigService.resolve(),
             searchService: container.searchService.resolve(),
             dismissed: didDismissAction
         )

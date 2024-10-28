@@ -14,8 +14,14 @@ class MockURLProtocol: URLProtocol {
     static var requestHandlers: [String: ((URLRequest) -> (HTTPURLResponse, Data?, Error?)?)] = [:]
 
     override func startLoading() {
-        guard let url = request.url?.absoluteString,
-              let handler = MockURLProtocol.requestHandlers[url] 
+        guard let requestUrl = request.url,
+              var components = URLComponents(url: requestUrl, resolvingAgainstBaseURL: true)
+        else { fatalError("URL is unavailable.") }
+
+        components.queryItems = nil
+        
+        guard let url = components.url?.absoluteString,
+              let handler = MockURLProtocol.requestHandlers[url]
         else { fatalError("Handler is unavailable.") }
 
         guard let (response, data, error) = handler(request) else {

@@ -15,8 +15,7 @@ class SearchServiceClient: SearchServiceClientInterface {
     func search(term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void) {
         let request = GOVRequest.search(
-            term: term,
-            searchApiUrlPath: Constants.API.defaultSearchPath
+            term: term
         )
         serviceClient.send(
             request: request,

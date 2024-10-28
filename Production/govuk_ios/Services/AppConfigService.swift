@@ -5,7 +5,6 @@ protocol AppConfigServiceInterface {
     var isAppAvailable: Bool { get }
     var isAppForcedUpdate: Bool { get }
     var isAppRecommendUpdate: Bool { get }
-    var searchApiUrl: String { get }
     func fetchAppConfig(completion: @escaping () -> Void)
     func isFeatureEnabled(key: Feature) -> Bool
 }
@@ -14,7 +13,6 @@ public final class AppConfigService: AppConfigServiceInterface {
     var isAppAvailable: Bool = false
     var isAppForcedUpdate: Bool = false
     var isAppRecommendUpdate: Bool = false
-    var searchApiUrl: String = ""
     private var featureFlags: [String: Bool] = [:]
 
     private let appConfigRepository: AppConfigRepositoryInterface
@@ -37,13 +35,13 @@ public final class AppConfigService: AppConfigServiceInterface {
                 completion()
             }
         )
-//
-//        appConfigServiceClient.fetchAppConfig(
-//            completion: { [weak self] result in
-//                self?.handleResult(result)
-//                completion()
-//            }
-//        )
+
+        appConfigServiceClient.fetchAppConfig(
+            completion: { [weak self] result in
+                self?.handleResult(result)
+                completion()
+            }
+        )
     }
 
     private func handleResult(_ result: Result<AppConfig, AppConfigError>) {
@@ -77,7 +75,7 @@ public final class AppConfigService: AppConfigServiceInterface {
               let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         else { return }
         Constants.API.defaultSearchPath = components.path
-        Container.shared.reregisterSearch(url: url)
+        Container.shared.reregisterSearchAPIClient(url: url)
     }
 
     func isFeatureEnabled(key: Feature) -> Bool {

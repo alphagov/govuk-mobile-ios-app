@@ -1,10 +1,9 @@
 import Foundation
 
 extension GOVRequest {
-    static func search(term: String,
-                       searchApiUrlPath: String) -> GOVRequest {
+    static func search(term: String) -> GOVRequest {
         GOVRequest(
-            urlPath: searchApiUrlPath,
+            urlPath: Constants.API.defaultSearchPath,
             method: .get,
             bodyParameters: nil,
             queryParameters: ["q": term, "count": "10"],

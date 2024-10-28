@@ -9,22 +9,19 @@ enum SearchError: Error {
 
 class SearchViewModel {
     private let analyticsService: AnalyticsServiceInterface
-    private let activityService: ActivityServiceInterface
-    private let appConfigService: AppConfigServiceInterface
     private let searchService: SearchServiceInterface
+    private let activityService: ActivityServiceInterface
     private let urlOpener: URLOpener
 
     private(set) var results: [SearchItem]?
     private(set) var error: SearchError?
 
     init(analyticsService: AnalyticsServiceInterface,
-         activityService: ActivityServiceInterface,
-         appConfigService: AppConfigServiceInterface,
          searchService: SearchServiceInterface,
+         activityService: ActivityServiceInterface,
          urlOpener: URLOpener) {
         self.analyticsService = analyticsService
         self.activityService = activityService
-        self.appConfigService = appConfigService
         self.searchService = searchService
         self.urlOpener = urlOpener
     }

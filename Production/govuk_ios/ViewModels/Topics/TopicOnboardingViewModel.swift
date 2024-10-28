@@ -98,9 +98,7 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func saveTopicsToFavourite() {
-        for (_, value) in selectedTopics {
-            value.isFavorite = true
-        }
+        selectedTopics.values.forEach { $0.isFavorite = true }
     }
 
     private func saveFavouriteTopics() {

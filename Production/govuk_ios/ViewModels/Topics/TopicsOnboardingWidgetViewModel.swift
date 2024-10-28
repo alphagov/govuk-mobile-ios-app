@@ -31,18 +31,6 @@ final class TopicsOnboardingWidgetViewModel {
         }
     }
 
-    var getTopics: [Topic] {
-        if topicsService.fetchFavoriteTopics() == [] {
-            if hasTopicsBeenEdited {
-                return topicsService.fetchFavoriteTopics()
-            } else {
-                return topicsService.fetchAllTopics()
-            }
-        } else {
-            return topicsService.fetchFavoriteTopics()
-        }
-    }
-
     private var hasTopicsBeenEdited: Bool {
         userDefaults.bool(forKey: .hasEditedTopics)
     }

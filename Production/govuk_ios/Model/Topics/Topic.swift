@@ -42,7 +42,7 @@ class Topic: NSManagedObject,
             return "chair.lounge.fill"
         case "studying-training":
             return "book.fill"
-        case "travel":
+        case "travel-abroad":
             return "airplane"
         default:
             return "star.fill"

@@ -63,7 +63,6 @@ struct TopicsRepository: TopicsRepositoryInterface {
         }
         topic.title = topicResponse.title
         topic.topicDescription = topicResponse.description
-        topic.ref = topicResponse.ref
     }
 
     private func createTopic(for topicResponse: TopicResponseItem,

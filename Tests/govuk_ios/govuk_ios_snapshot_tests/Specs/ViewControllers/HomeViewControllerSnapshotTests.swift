@@ -46,6 +46,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func viewController() -> HomeViewController {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }

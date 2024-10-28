@@ -24,11 +24,12 @@ struct TopicsButtonView: View {
                     backgroundColorNormal: configurePrimaryButtonColour(),
                     backgroundColorHighlighted: configurePrimaryButtonColour(),
                     backgroundColorFocused: UIColor.govUK.fills.surfaceButtonPrimaryFocussed,
-                    backgroundColorDisabled: .gray, cornerRadius: 22,
+                    backgroundColorDisabled: configurePrimaryButtonColour(),
+                    cornerRadius: 22,
                     accessibilityButtonShapesColor: .blue
                 ),
                 viewModel: viewModel.primaryButtonViewModel
-            )
+            ).disabled(!viewModel.isTopicsSelected)
             .accessibilityHint("hint placeholder")
             .accessibility(sortPriority: 1)
             .frame(

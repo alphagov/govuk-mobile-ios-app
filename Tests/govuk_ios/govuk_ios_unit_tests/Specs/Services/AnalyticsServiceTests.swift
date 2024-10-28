@@ -97,7 +97,7 @@ struct AnalyticsServiceTests {
         let mockAnalyticsClient = MockAnalyticsClient()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: .standard
+            userDefaults: UserDefaults()
         )
         subject.setAcceptedAnalytics(accepted: true)
 

@@ -1,4 +1,5 @@
 import Testing
+import Foundation
 import Factory
 
 @testable import govuk_ios
@@ -16,6 +17,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -31,6 +33,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -45,6 +48,7 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in
                 expectedValue = true
             },
@@ -61,6 +65,7 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: {
                 expectedValue = true
@@ -77,6 +82,7 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: {
@@ -99,6 +105,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -118,6 +125,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
+            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -125,5 +133,55 @@ struct TopicsWidgetViewModelTests {
 
         let result = sut.allTopicsButtonHidden
         #expect(result == false)
+    }
+
+
+    @Test
+    func getTopics_whenFavouriteTopicsExist_returnsOnlyFavouritedTopics() {
+        let topicService = MockTopicsService()
+
+        let topicOne = Topic(context: coreData.backgroundContext)
+        topicOne.isFavorite = true
+        let topicTwo = Topic(context: coreData.backgroundContext)
+        topicTwo.isFavorite = true
+
+        topicService._stubbedFetchAllTopics = [topicOne, topicTwo]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            userDefaults: UserDefaults(),
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        for topic in sut.getTopics {
+            #expect(topic.isFavorite == true)
+        }
+    }
+
+    @Test
+    func getTopics_whenFavouriteTopicsDoNotExist_noFavouritedTopicsAreReturned() {
+
+        let topicService = MockTopicsService()
+
+        let topicOne = Topic(context: coreData.backgroundContext)
+        topicOne.isFavorite = false
+        let topicTwo = Topic(context: coreData.backgroundContext)
+        topicTwo.isFavorite = false
+
+        topicService._stubbedFetchAllTopics = [topicOne, topicTwo]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            userDefaults: UserDefaults(),
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+        
+        for topic in sut.getTopics {
+            #expect(topic.isFavorite == false)
+        }
     }
 }

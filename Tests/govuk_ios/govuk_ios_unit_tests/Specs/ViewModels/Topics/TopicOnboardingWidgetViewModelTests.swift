@@ -41,52 +41,6 @@ struct TopicsOnboardingWidgetViewModelTests {
     }
 
     @Test
-    func getTopics_whenFavouriteTopicsExist_returnsOnlyFavouritedTopics() {
-        let topicService = MockTopicsService()
-
-        let topicOne = Topic(context: coreData.backgroundContext)
-        topicOne.isFavorite = true
-        let topicTwo = Topic(context: coreData.backgroundContext)
-        topicTwo.isFavorite = true
-
-        topicService._stubbedFetchAllTopics = [topicOne, topicTwo]
-
-        let sut = TopicsOnboardingWidgetViewModel(
-            topicsService: topicService ,
-            analyticsService: MockAnalyticsService(),
-            userDefaults: UserDefaults(),
-            topicAction: { _ in }
-        )
-
-        for topic in sut.getTopics {
-            #expect(topic.isFavorite == true)
-        }
-    }
-
-    @Test
-    func getTopics_whenFavouriteTopicsDoNotExist_noFavouritedTopicsAreReturned() {
-
-        let topicService = MockTopicsService()
-
-        let topicOne = Topic(context: coreData.backgroundContext)
-        topicOne.isFavorite = false
-        let topicTwo = Topic(context: coreData.backgroundContext)
-        topicTwo.isFavorite = false
-
-        topicService._stubbedFetchAllTopics = [topicOne, topicTwo]
-
-        let sut = TopicsOnboardingWidgetViewModel(
-            topicsService: topicService,
-            analyticsService: MockAnalyticsService(),
-            userDefaults: UserDefaults(),
-            topicAction: { _ in }
-        )
-        for topic in sut.getTopics {
-            #expect(topic.isFavorite == false)
-        }
-    }
-
-    @Test
     func selectOnboardingTopic_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
 

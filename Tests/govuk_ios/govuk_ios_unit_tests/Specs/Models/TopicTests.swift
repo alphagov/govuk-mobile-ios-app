@@ -17,7 +17,7 @@ struct TopicTests {
             "parenting-guardianship",
             "retirement",
             "studying-training",
-            "travel",
+            "travel-abroad",
             "unknown"
         ],
         [

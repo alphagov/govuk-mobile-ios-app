@@ -18,6 +18,14 @@ struct AppConfigServiceClientTests {
     }
 
     @Test
+    func fetchAppConfig_sendsRequest() async throws {
+            sut.fetchAppConfig(
+                completion: { _ in }
+            )
+        #expect(mockServiceClient._receivedSendRequest?.urlPath == "/config/appinfo/ios")
+    }
+
+    @Test
     func fetchAppConfig_validJson_returnsCorrectConfig() async throws {
         let mockJsonData = getJsonData(filename: "MockAppConfigResponse", bundle: .main)
         let result = await withCheckedContinuation { continuation in

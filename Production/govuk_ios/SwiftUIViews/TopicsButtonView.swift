@@ -31,7 +31,6 @@ struct TopicsButtonView: View {
                 ),
                 viewModel: viewModel.primaryButtonViewModel
             ).disabled(!viewModel.isTopicsSelected)
-            .accessibilityHint("hint placeholder")
             .accessibility(sortPriority: 1)
             .frame(
                 minHeight: 44,
@@ -41,7 +40,6 @@ struct TopicsButtonView: View {
                 .secondary,
                 viewModel: viewModel.secondaryButtonViewModel
             )
-            .accessibilityHint("hint placeholder")
             .accessibility(sortPriority: 0)
             .frame(
                 minHeight: 44,

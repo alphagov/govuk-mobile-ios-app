@@ -28,7 +28,7 @@ class TopicOnboardingCard: UIView {
         return label
     }()
 
-    private lazy var selectedIcon: UIImageView = {
+    private lazy var selectedIconImageView: UIImageView = {
         let icon = UIImage(systemName: "plus")
         let imageView = UIImageView(image: icon)
         return imageView
@@ -55,7 +55,7 @@ class TopicOnboardingCard: UIView {
         return label
     }()
 
-    private lazy var icon: UIImageView = {
+    private lazy var iconImageView: UIImageView = {
         let image = UIImage(systemName: viewModel.iconName)
         let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
         let imageView = UIImageView(image: image)
@@ -94,9 +94,9 @@ class TopicOnboardingCard: UIView {
         layer.masksToBounds = true
         layer.borderColor = UIColor.secondaryBorder.cgColor
         addSubview(cardStackView)
-        selectedStackView.addArrangedSubview(selectedIcon)
+        selectedStackView.addArrangedSubview(selectedIconImageView)
         selectedStackView.addArrangedSubview(selectedLabel)
-        cardStackView.addArrangedSubview(icon)
+        cardStackView.addArrangedSubview(iconImageView)
         cardStackView.addArrangedSubview(titleLabel)
         cardStackView.addArrangedSubview(descriptionLabel)
         cardStackView.addArrangedSubview(selectedStackView)
@@ -106,16 +106,20 @@ class TopicOnboardingCard: UIView {
         NSLayoutConstraint.activate([
             cardStackView.topAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 16),
+                constant: 16
+            ),
             cardStackView.bottomAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.bottomAnchor,
-                constant: -16),
+                constant: -16
+            ),
             cardStackView.leadingAnchor.constraint(
                 equalTo: layoutMarginsGuide.leadingAnchor,
-                constant: 8),
+                constant: 8
+            ),
             cardStackView.trailingAnchor.constraint(
                 equalTo: layoutMarginsGuide.trailingAnchor,
-                constant: -8)
+                constant: -8
+            )
         ])
     }
 
@@ -136,7 +140,7 @@ class TopicOnboardingCard: UIView {
     @objc
     private func cardTapped() {
         viewModel.isSelected.toggle()
-        toggleTintColourOfCard()
+        toggleTintColorOfCard()
         toggleSelectedIconAndTextViews()
         viewModel.tapAction(
             viewModel.isSelected
@@ -144,28 +148,28 @@ class TopicOnboardingCard: UIView {
     }
 
     private func toggleSelectedIconAndTextViews() {
-        let selectedColourTint = ColorResource(
+        let selectedColorTint = ColorResource(
             name: "topicOnboardingSelectedTint",
             bundle: .main
         )
-        selectedLabel.text = viewModel.isSelected ? String.topics.localized(
-            "topicOnboardingCardSelected"
-        ) : String.topics.localized(
-            "topicOnboardingCardUnselected"
-        )
-        selectedLabel.textColor = viewModel.isSelected ? UIColor(
-            resource: selectedColourTint
-        ) : UIColor.govUK.fills.surfaceButtonPrimary
-        selectedIcon.tintColor = viewModel.isSelected ? UIColor(
-            resource: selectedColourTint
-        ) : UIColor.govUK.fills.surfaceButtonPrimary
+        selectedLabel.text = viewModel.isSelected ?
+        String.topics.localized("topicOnboardingCardSelected") :
+        String.topics.localized("topicOnboardingCardUnselected")
+
+        selectedLabel.textColor = viewModel.isSelected ?
+        UIColor(resource: selectedColorTint) :
+        UIColor.govUK.fills.surfaceButtonPrimary
+
+        selectedIconImageView.tintColor = viewModel.isSelected ?
+        UIColor(resource: selectedColorTint) :
+        UIColor.govUK.fills.surfaceButtonPrimary
     }
 
-    private func toggleTintColourOfCard() {
-        configureColour()
+    private func toggleTintColorOfCard() {
+        configureColor()
     }
 
-    private func configureColour() {
+    private func configureColor() {
         switch viewModel.isSelected {
         case true:
             self.backgroundColor = UIColor(

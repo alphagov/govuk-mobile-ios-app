@@ -9,6 +9,7 @@ struct TopicsButtonView: View {
     init(viewModel: TopicOnboardingViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
+
     var body: some View {
         Divider()
             .background(Color(UIColor.govUK.strokes.listDivider))
@@ -17,7 +18,7 @@ struct TopicsButtonView: View {
         AdaptiveStack {
             SwiftUIButton(
                 .init(
-                    titleColorNormal: configureTitleColour(),
+                    titleColorNormal: configureTitleColor(),
                     titleColorHighlighted: UIColor.govUK.text.buttonPrimary,
                     titleColorFocused: .white,
                     titleFont: UIFont.govUK.bodySemibold,
@@ -68,7 +69,7 @@ struct TopicsButtonView: View {
         }
     }
 
-    private func configureTitleColour() -> UIColor {
+    private func configureTitleColor() -> UIColor {
         if colorScheme == .dark {
             return UIColor.govUK.text.buttonPrimary
         } else {

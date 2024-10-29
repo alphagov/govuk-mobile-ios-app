@@ -31,9 +31,6 @@ final class TopicsOnboardingWidgetViewModel {
         }
     }
 
-    private var hasTopicsBeenEdited: Bool {
-        userDefaults.bool(forKey: .hasEditedTopics)
-    }
 
     func selectOnboardingTopic(topic: Topic,
                                isTopicSelected: Bool) {

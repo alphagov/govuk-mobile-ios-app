@@ -155,7 +155,7 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
 
-        for topic in sut.getTopics {
+        for topic in sut.topics {
             #expect(topic.isFavorite == true)
         }
     }
@@ -180,7 +180,7 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
         
-        for topic in sut.getTopics {
+        for topic in sut.topics {
             #expect(topic.isFavorite == false)
         }
     }

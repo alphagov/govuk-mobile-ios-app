@@ -25,10 +25,6 @@ class TopicOnboardingViewModel: ObservableObject {
         self.dismissAction = dismissAction
     }
 
-    var widgets: [WidgetView] {
-        [topicsWidget]
-    }
-
     func selectTopic(topic: Topic) {
         if let topic = selectedTopics[topic.title] {
             selectedTopics.removeValue(forKey: topic.title)
@@ -42,14 +38,13 @@ class TopicOnboardingViewModel: ObservableObject {
         isTopicsSelected = !selectedTopics.isEmpty
     }
 
-    private var topicsWidget: WidgetView {
+     var topicsWidget: WidgetView {
         let topicWidgetViewModel = TopicsOnboardingWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
             userDefaults: .standard,
             topicAction: { [weak self] topic in
-                guard let self = self else { return }
-                self.selectTopic(topic: topic)
+                self?.selectTopic(topic: topic)
             }
         )
 
@@ -74,27 +69,22 @@ class TopicOnboardingViewModel: ObservableObject {
         .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
-                guard let self = self else { return }
-                primaryAction()
+                self?.primaryAction()
             }
         )
     }
 
     private func primaryAction() {
-        self.saveFavouriteTopics()
-        self.trackPrimaryEvent()
-        self.topicsService.setHasOnboardedTopics()
-        self.finishSelectionAction()
+        saveFavouriteTopics()
+        trackPrimaryEvent()
+        topicsService.setHasOnboardedTopics()
+        dismissAction()
     }
 
     private func secondaryAction() {
-        self.trackSecondaryEvent()
-        self.topicsService.setHasOnboardedTopics()
-        self.dismissAction()
-    }
-
-    private func finishSelectionAction() {
-        self.dismissAction()
+        trackSecondaryEvent()
+        topicsService.setHasOnboardedTopics()
+        dismissAction()
     }
 
     private func saveTopicsToFavourite() {

@@ -6,23 +6,13 @@ class TopicsOnboardingWidgetView: UIView {
     private var rowCount = 2
 
     private lazy var cardStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+        let localView = UIStackView()
+        localView.axis = .vertical
+        localView.spacing = 16
+        localView.alignment = .leading
+        localView.distribution = .fill
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
     }()
 
     init(viewModel: TopicsOnboardingWidgetViewModel) {
@@ -47,18 +37,23 @@ class TopicsOnboardingWidgetView: UIView {
     }
 
     private func configureUI() {
-        stackView.addArrangedSubview(cardStackView)
-        addSubview(stackView)
+        addSubview(cardStackView)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            stackView.leadingAnchor.constraint(equalTo: cardStackView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: cardStackView.trailingAnchor)
+            cardStackView.topAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.topAnchor
+            ),
+            cardStackView.bottomAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.bottomAnchor
+            ),
+            cardStackView.leadingAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.leadingAnchor
+            ),
+            cardStackView.trailingAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.trailingAnchor
+            )
         ])
     }
 
@@ -98,14 +93,13 @@ class TopicsOnboardingWidgetView: UIView {
         let rowStack = UIStackView()
         rowStack.axis = .horizontal
         rowStack.spacing = 16
-        rowStack.alignment = .top
         rowStack.distribution = .fillEqually
         return rowStack
     }
 
     private func createOnboardingTopicCard(for topic: Topic) -> TopicOnboardingCard {
-        let model = TopicOnboardingCardModel(topic: topic) { isSelected  in
-            self.viewModel.selectOnboardingTopic(
+        let model = TopicOnboardingCardModel(topic: topic) { [weak self] isSelected in
+            self?.viewModel.selectOnboardingTopic(
                 topic: topic,
                 isTopicSelected: isSelected
             )

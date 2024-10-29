@@ -42,9 +42,11 @@ class AppCoordinator: BaseCoordinator {
 
     private func startTopicsOnboardingCoordinator(url: URL?) {
         let coordinator = coordinatorBuilder.topicsOnboarding(
-            navigationController: root) {
-                self.startTabs(url: url)
+            navigationController: root,
+            didDismissAction: { [weak self] in
+                self?.startTabs(url: url)
             }
+        )
         start(coordinator)
     }
 

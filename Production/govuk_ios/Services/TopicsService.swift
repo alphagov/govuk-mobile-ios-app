@@ -8,6 +8,7 @@ protocol TopicsServiceInterface {
     func fetchFavoriteTopics() -> [Topic]
     func updateFavoriteTopics()
     func setHasEditedTopics()
+    var hasTopicsBeenEdited: Bool { get }
     var hasOnboardedTopics: Bool { get }
     func setHasOnboardedTopics()
 }
@@ -75,5 +76,9 @@ struct TopicsService: TopicsServiceInterface {
             bool: true,
             forKey: .hasOnboardedTopics
         )
+    }
+
+    var hasTopicsBeenEdited: Bool {
+        userDefaults.bool(forKey: .hasEditedTopics)
     }
 }

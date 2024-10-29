@@ -4,13 +4,11 @@ import SwiftUI
 import UIComponents
 
 class TopicOnboardingViewController: BaseViewController {
-    let viewModel: TopicOnboardingViewModel
-    private let backgroundColor = UIColor.govUK.fills.surfaceBackground
+    private let viewModel: TopicOnboardingViewModel
 
     init(viewModel: TopicOnboardingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = backgroundColor
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +57,7 @@ class TopicOnboardingViewController: BaseViewController {
         configureUI()
         configureConstraints()
         title = viewModel.navigationTitle
+        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
     }
 
     private func configureUI() {
@@ -68,7 +67,7 @@ class TopicOnboardingViewController: BaseViewController {
     }
 
     private func addWidgets() {
-        viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
+        stackView.addArrangedSubview(viewModel.topicsWidget)
     }
 
     private lazy var buttonView: UIView =  {
@@ -85,21 +84,45 @@ class TopicOnboardingViewController: BaseViewController {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor),
-
-            buttonView.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            buttonView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            buttonView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            buttonView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
-
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: buttonView.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor)
+            stackView.topAnchor.constraint(
+                equalTo: scrollView.topAnchor
+            ),
+            stackView.leadingAnchor.constraint(
+                equalTo: scrollView.leadingAnchor
+            ),
+            stackView.trailingAnchor.constraint(
+                equalTo: scrollView.trailingAnchor
+            ),
+            stackView.bottomAnchor.constraint(
+                equalTo: scrollView.bottomAnchor
+            ),
+            stackView.widthAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.widthAnchor
+            ),
+            buttonView.topAnchor.constraint(
+                equalTo: scrollView.bottomAnchor
+            ),
+            buttonView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor
+            ),
+            buttonView.leftAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leftAnchor
+            ),
+            buttonView.rightAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.rightAnchor
+            ),
+            scrollView.topAnchor.constraint(
+                equalTo: view.topAnchor
+            ),
+            scrollView.bottomAnchor.constraint(
+                equalTo: buttonView.topAnchor
+            ),
+            scrollView.leftAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leftAnchor
+            ),
+            scrollView.rightAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.rightAnchor
+            )
         ])
     }
 }

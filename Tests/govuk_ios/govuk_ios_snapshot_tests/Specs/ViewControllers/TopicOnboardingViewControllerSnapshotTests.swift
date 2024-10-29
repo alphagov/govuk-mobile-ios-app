@@ -27,16 +27,8 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
     private func viewController() -> UIViewController {
         let analyticsService = MockAnalyticsService()
         let topicService = MockTopicsService()
-
-        let topicOne = Topic(context: coreData.backgroundContext)
-        topicOne.isFavorite = true
-        topicOne.ref = "benefits"
-        topicOne.title = "benefits"
-        let topicTwo = Topic(context: coreData.backgroundContext)
-        topicTwo.isFavorite = true
-        topicTwo.ref = "benefits"
-        topicTwo.title = "benefits"
-        topicService._stubbedFetchAllTopics = [topicOne, topicTwo]
+        let topics = Topic.arrangeMultiple(context: coreData.backgroundContext)
+        topicService._stubbedFetchAllTopics = topics
 
         let viewModel = TopicOnboardingViewModel(
             analyticsService: analyticsService,

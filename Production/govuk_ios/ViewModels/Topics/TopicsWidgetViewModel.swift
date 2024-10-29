@@ -7,8 +7,6 @@ final class TopicsWidgetViewModel {
     let topicAction: (Topic) -> Void
     let editAction: () -> Void
     private let userDefaults: UserDefaults
-
-
     private(set) var downloadError: TopicsServiceError?
 
     var favoriteTopics: [Topic] {
@@ -20,9 +18,9 @@ final class TopicsWidgetViewModel {
     }
 
 
-    var getTopics: [Topic] {
+    var topics: [Topic] {
         if topicsService.fetchFavoriteTopics() == [] {
-            if hasTopicsBeenEdited {
+            if topicsService.hasTopicsBeenEdited {
                 return topicsService.fetchFavoriteTopics()
             } else {
                 return topicsService.fetchAllTopics()
@@ -51,9 +49,5 @@ final class TopicsWidgetViewModel {
                 self.downloadError = error
             }
         }
-    }
-
-    private var hasTopicsBeenEdited: Bool {
-        userDefaults.bool(forKey: .hasEditedTopics)
     }
 }

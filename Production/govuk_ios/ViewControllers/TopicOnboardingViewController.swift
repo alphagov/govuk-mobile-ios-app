@@ -103,13 +103,13 @@ class TopicOnboardingViewController: BaseViewController {
                 equalTo: scrollView.bottomAnchor
             ),
             buttonView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor
+                equalTo: view.bottomAnchor
             ),
             buttonView.leftAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leftAnchor
+                equalTo: view.leftAnchor
             ),
             buttonView.rightAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.rightAnchor
+                equalTo: view.rightAnchor
             ),
             scrollView.topAnchor.constraint(
                 equalTo: view.topAnchor

@@ -2983,8 +2983,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.2;
+				kind = exactVersion;
+				version = 2.3.2;
 			};
 		};
 		5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */ = {

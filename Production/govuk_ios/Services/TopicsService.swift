@@ -1,7 +1,7 @@
 import Foundation
 
 protocol TopicsServiceInterface {
-    func downloadTopicsList(completion: @escaping FetchTopicsListResult)
+    func fetchRemoteList(completion: @escaping FetchTopicsListResult)
     func fetchDetails(ref: String,
                       completion: @escaping FetchTopicDetailsResult)
     func fetchAll() -> [Topic]
@@ -19,7 +19,7 @@ struct TopicsService: TopicsServiceInterface {
         self.topicsRepository = topicsRepository
     }
 
-    func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
+    func fetchRemoteList(completion: @escaping FetchTopicsListResult) {
         topicsServiceClient.fetchList(
             completion: { result in
                 switch result {

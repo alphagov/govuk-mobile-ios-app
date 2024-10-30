@@ -21,7 +21,7 @@ struct TopicsServiceTests {
     @Test
     func downloadTopicsList_success_returnsExpectedData() async {
         let result = await withCheckedContinuation { continuation in
-            sut.downloadTopicsList { result in
+            sut.fetchRemoteList { result in
                 continuation.resume(returning: result)
             }
             mockTopicsServiceClient._receivedFetchListCompletion?(
@@ -37,7 +37,7 @@ struct TopicsServiceTests {
     @Test
     func downloadTopicsList_failure_returnsExpectedResult() async {
         let result = await withCheckedContinuation { continuation in
-            sut.downloadTopicsList { result in
+            sut.fetchRemoteList { result in
                 continuation.resume(returning: result)
             }
             mockTopicsServiceClient._receivedFetchListCompletion?(

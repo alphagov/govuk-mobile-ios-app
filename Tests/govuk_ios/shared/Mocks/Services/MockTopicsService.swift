@@ -21,11 +21,9 @@ class MockTopicsService: TopicsServiceInterface {
         _updateFavoriteTopicsCalled = true
     }
     
-    var _stubbedDownloadTopicsListResult: Result<[TopicResponseItem], TopicsServiceError>?
-    var _dataReceived = false
-    func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
-        if let result = _stubbedDownloadTopicsListResult {
-            _dataReceived = (try? result.get()) != nil
+    var _stubbedFetchRemoteListResult: Result<[TopicResponseItem], TopicsServiceError>?
+    func fetchRemoteList(completion: @escaping FetchTopicsListResult) {
+        if let result = _stubbedFetchRemoteListResult {
             completion(result)
         } else {
             completion(.failure(.apiUnavailable))

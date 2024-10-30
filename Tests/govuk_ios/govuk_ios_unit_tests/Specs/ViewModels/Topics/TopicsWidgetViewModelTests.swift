@@ -12,7 +12,7 @@ struct TopicsWidgetViewModelTests {
     @Test
     func initializeModel_downloadSuccess_returnsExpectedData() async throws {
         
-        topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
+        topicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
@@ -21,13 +21,12 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
         
-        #expect(topicService._dataReceived == true)
         #expect(sut.downloadError == nil)
     }
     
     @Test
     func initializeModel_downloadFailure_returnsExpectedResult() async throws {
-        topicService._stubbedDownloadTopicsListResult = .failure(.decodingError)
+        topicService._stubbedFetchRemoteListResult = .failure(.decodingError)
 
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
@@ -36,7 +35,6 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
         
-        #expect(topicService._dataReceived == false)
         #expect(sut.downloadError == .decodingError)
     }
     

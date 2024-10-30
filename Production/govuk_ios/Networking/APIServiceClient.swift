@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 
 public typealias NetworkResult<T> = Result<T, Error>
 public typealias NetworkResultCompletion<T> = (NetworkResult<T>) -> Void
@@ -33,21 +34,31 @@ extension APIServiceClient {
         )
         send(
             request: urlRequest,
+            requiresSignature: request.requiresSignature,
             completion: completion
         )
     }
 
     private func send(request: URLRequest,
+                      requiresSignature: Bool,
                       completion: @escaping NetworkResultCompletion<Data>) {
         let task = session.dataTask(
             with: request,
-            completionHandler: { data, _, error in
+            completionHandler: { data, response, error in
                 let result: NetworkResult<Data>
                 switch (data, error) {
                 case (_, .some(let error)):
                     result = .failure(error)
                 case (.some(let data), _):
-                    result = .success(data)
+                    if !requiresSignature ||
+                        verifySignature(
+                            signatureBase64: response?.signature,
+                            data: data
+                        ) {
+                        result = .success(data)
+                    } else {
+                        result = .failure(SigningError.invalidSignature)
+                    }
                 case (.none, _):
                     result = .success(Data())
                 }
@@ -57,5 +68,33 @@ extension APIServiceClient {
             }
         )
         task.resume()
+    }
+
+    private func verifySignature(signatureBase64: String?, data: Data) -> Bool {
+        guard let signatureBase64,
+              let signatureData = Data(base64Encoded: signatureBase64)
+        else {
+            return false
+        }
+
+        guard let publicKeyFile = Bundle.main.publicKey,
+              let publicKey = try? P256.Signing.PublicKey(derRepresentation: publicKeyFile)
+        else {
+            return false
+        }
+
+        guard let signatureKey = try? P256.Signing.ECDSASignature(derRepresentation: signatureData)
+        else {
+            return false
+        }
+
+        return publicKey.isValidSignature(signatureKey, for: data)
+    }
+}
+
+extension URLResponse {
+    var signature: String? {
+        (self as? HTTPURLResponse)?
+            .allHeaderFields["x-amz-meta-govuk-sig"] as? String
     }
 }

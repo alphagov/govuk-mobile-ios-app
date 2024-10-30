@@ -22,7 +22,8 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
-            additionalHeaders: nil
+            additionalHeaders: nil,
+            requiresSignature: true
         )
 
         serviceClient.send(

@@ -148,20 +148,16 @@ class TopicOnboardingCard: UIView {
     }
 
     private func toggleSelectedIconAndTextViews() {
-        let selectedColorTint = ColorResource(
-            name: "topicOnboardingSelectedTint",
-            bundle: .main
-        )
         selectedLabel.text = viewModel.isSelected ?
         String.topics.localized("topicOnboardingCardSelected") :
         String.topics.localized("topicOnboardingCardUnselected")
 
         selectedLabel.textColor = viewModel.isSelected ?
-        UIColor(resource: selectedColorTint) :
+        UIColor.govUK.text.buttonSuccess :
         UIColor.govUK.fills.surfaceButtonPrimary
 
         selectedIconImageView.tintColor = viewModel.isSelected ?
-        UIColor(resource: selectedColorTint) :
+        UIColor.govUK.text.buttonSuccess :
         UIColor.govUK.fills.surfaceButtonPrimary
     }
 
@@ -171,12 +167,7 @@ class TopicOnboardingCard: UIView {
 
     private func configureColor() {
         backgroundColor = viewModel.isSelected ?
-        UIColor(
-            resource: ColorResource(
-                name: "topicOnboardingTint",
-                bundle: .main
-            )
-        ) :
+        UIColor.govUK.fills.surfaceCardSelected :
         UIColor.govUK.fills.surfaceCard
     }
 }

@@ -17,12 +17,10 @@ struct TopicsRepository: TopicsRepositoryInterface {
 
     func save(topics: [TopicResponseItem]) {
         let context = coreData.backgroundContext
-        let isFirstLaunch = fetchAll().count == 0
         topics.forEach { topicResponse in
             createOrUpdateTopic(
                 responseItem: topicResponse,
-                context: context,
-                isFavourite: isFirstLaunch
+                context: context
             )
         }
         try? context.save()
@@ -55,18 +53,13 @@ struct TopicsRepository: TopicsRepositoryInterface {
     }
 
     private func createOrUpdateTopic(responseItem: TopicResponseItem,
-                                     context: NSManagedObjectContext,
-                                     isFavourite: Bool) {
+                                     context: NSManagedObjectContext) {
         let topic = fetch(
             ref: responseItem.ref,
             context: context
         ) ??
         create(context: context)
-        let params = TopicCreateParams(
-            responseItem: responseItem,
-            isFavourite: isFavourite
-        )
-        topic.update(params: params)
+        topic.update(item: responseItem)
     }
 
     private func create(context: NSManagedObjectContext) -> Topic {

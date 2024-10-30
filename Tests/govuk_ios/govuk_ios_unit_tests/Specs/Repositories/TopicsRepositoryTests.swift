@@ -21,8 +21,7 @@ struct TopicsRepositoryTests {
         #expect(topics.count == 3)
         #expect(topics.first?.title == "Business")
         #expect(topics.first?.ref == "business")
-        #expect(topics.filter { $0.isFavorite == true }.count == 3)
-        
+        #expect(topics.filter { $0.isFavorite == false }.count == 3)
     }
     
     @Test
@@ -60,6 +59,9 @@ struct TopicsRepositoryTests {
         let firstSave = sut.fetchAll()
         try #require(firstSave.count == 3)
 
+        let favourite = try #require(firstSave.first(where: { $0.ref == "test_1" }))
+        favourite.isFavorite = true
+        try favourite.managedObjectContext?.save()
 
         let updatedItems: [TopicResponseItem] = [
             .init(ref: "test_1", title: "first titlez", description: nil),
@@ -72,17 +74,22 @@ struct TopicsRepositoryTests {
         let topics = sut.fetchAll()
         #expect(topics.count == 3)
 
+
+
         let first = try #require(topics.first(where: { $0.ref == "test_1" }))
         #expect(first.title == "first titlez")
         #expect(first.topicDescription == nil)
+        #expect(first.isFavorite == true)
 
         let second = try #require(topics.first(where: { $0.ref == "test_2" }))
         #expect(second.title == "second titlez")
         #expect(second.topicDescription == "second descrtiption")
+        #expect(second.isFavorite == false)
 
         let third = try #require(topics.first(where: { $0.ref == "test_3" }))
         #expect(third.title == "third titlez")
         #expect(third.topicDescription == "third description")
+        #expect(third.isFavorite == false)
     }
 
     @Test

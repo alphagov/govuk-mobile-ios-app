@@ -49,11 +49,10 @@ class Topic: NSManagedObject,
         }
     }
 
-    func update(params: TopicCreateParams) {
-        self.ref = params.ref
-        self.title = params.title
-        self.topicDescription = params.description
-        self.isFavorite = params.isFavourite
+    func update(item: TopicResponseItem) {
+        self.ref = item.ref
+        self.title = item.title
+        self.topicDescription = item.description
     }
 }
 

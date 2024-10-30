@@ -233,6 +233,7 @@
 		5D9E67C42C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E67C32C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift */; };
 		5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E67C72C5A2E1700DB7877 /* DividerView.swift */; };
 		5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E67C92C5A3BA600DB7877 /* UITabBarController+GOVUK.swift */; };
+		5DA2B69F2CD234CB006CFADD /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 5DA2B69E2CD234CB006CFADD /* UIComponents */; };
 		5DA44C372C2EF1D400D8FE7C /* MockBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C342C2EF1D400D8FE7C /* MockBaseCoordinator.swift */; };
 		5DA44C382C2EF1D400D8FE7C /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C352C2EF1D400D8FE7C /* MockNavigationController.swift */; };
 		5DA44C3C2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA44C3B2C2EF21700D8FE7C /* MockCoordinatorBuilder.swift */; };
@@ -749,6 +750,7 @@
 				5D26A75E2C92CCA8009902DD /* Onboarding in Frameworks */,
 				5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
+				5DA2B69F2CD234CB006CFADD /* UIComponents in Frameworks */,
 				5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
@@ -1948,6 +1950,7 @@
 				5D4E255A2C821BCE00FD9A28 /* Onboarding */,
 				5DC2505F2C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport */,
 				5DC250612C91D395009E9E7F /* FirebaseCrashlytics */,
+				5DA2B69E2CD234CB006CFADD /* UIComponents */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -2033,6 +2036,7 @@
 				5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
 				5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5DA2B69D2CD234CB006CFADD /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -2931,6 +2935,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		5DA2B69D2CD234CB006CFADD /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-ui-components";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
 		5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -2965,6 +2977,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		5DA2B69E2CD234CB006CFADD /* UIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DA2B69D2CD234CB006CFADD /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */;
+			productName = UIComponents;
 		};
 		5DC2505F2C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;

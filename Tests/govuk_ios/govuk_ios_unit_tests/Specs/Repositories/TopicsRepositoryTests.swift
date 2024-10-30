@@ -26,7 +26,7 @@ struct TopicsRepositoryTests {
     }
     
     @Test
-    func saveTopics_newTopicsNotFavoritedAfterInitialLaunch() async throws {
+    func saveTopics_newTopics_savesNewTopics() async throws {
         // Given I have started the app the first time, and gotten topics
         var topicResponseItems = TopicResponseItem.arrangeMultiple
         sut.save(topics: topicResponseItems)
@@ -45,6 +45,44 @@ struct TopicsRepositoryTests {
         #expect(topics.count == 4)
         let newTopic = try #require(topics.first(where: { $0.ref == "new-item" }))
         #expect(newTopic.isFavorite == false)
+    }
+
+    @Test
+    func saveTopics_updatedTopics_updatesTopics() async throws {
+        // Given I have started the app the first time, and gotten topics
+        let topicResponseItems: [TopicResponseItem] = [
+            .init(ref: "test_1", title: "first title", description: "first description"),
+            .init(ref: "test_2", title: "second title", description: nil),
+            .init(ref: "test_3", title: "third title", description: "third description"),
+        ]
+        sut.save(topics: topicResponseItems)
+
+        let firstSave = sut.fetchAll()
+        try #require(firstSave.count == 3)
+
+
+        let updatedItems: [TopicResponseItem] = [
+            .init(ref: "test_1", title: "first titlez", description: nil),
+            .init(ref: "test_2", title: "second titlez", description: "second descrtiption"),
+            .init(ref: "test_3", title: "third titlez", description: "third description"),
+        ]
+        sut.save(topics: updatedItems)
+
+        // Then the new item will not be favorited
+        let topics = sut.fetchAll()
+        #expect(topics.count == 3)
+
+        let first = try #require(topics.first(where: { $0.ref == "test_1" }))
+        #expect(first.title == "first titlez")
+        #expect(first.topicDescription == nil)
+
+        let second = try #require(topics.first(where: { $0.ref == "test_2" }))
+        #expect(second.title == "second titlez")
+        #expect(second.topicDescription == "second descrtiption")
+
+        let third = try #require(topics.first(where: { $0.ref == "test_3" }))
+        #expect(third.title == "third titlez")
+        #expect(third.topicDescription == "third description")
     }
 
     @Test

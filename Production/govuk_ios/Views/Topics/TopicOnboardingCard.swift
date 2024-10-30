@@ -170,16 +170,13 @@ class TopicOnboardingCard: UIView {
     }
 
     private func configureColor() {
-        switch viewModel.isSelected {
-        case true:
-            self.backgroundColor = UIColor(
-                resource: ColorResource(
-                    name: "topicOnboardingTint",
-                    bundle: .main
-                )
+        backgroundColor = viewModel.isSelected ?
+        UIColor(
+            resource: ColorResource(
+                name: "topicOnboardingTint",
+                bundle: .main
             )
-        case false:
-            self.backgroundColor = UIColor.govUK.fills.surfaceCard
-        }
+        ) :
+        UIColor.govUK.fills.surfaceCard
     }
 }

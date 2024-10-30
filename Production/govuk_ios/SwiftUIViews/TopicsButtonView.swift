@@ -16,21 +16,10 @@ struct TopicsButtonView: View {
             .ignoresSafeArea(edges: [.leading, .trailing])
             .padding([.top], 0)
         AdaptiveStack {
-            SwiftUIButton(
-                .init(
-                    titleColorNormal: configureTitleColor(),
-                    titleColorHighlighted: UIColor.govUK.text.buttonPrimary,
-                    titleColorFocused: .white,
-                    titleFont: UIFont.govUK.bodySemibold,
-                    backgroundColorNormal: configurePrimaryButtonColour(),
-                    backgroundColorHighlighted: configurePrimaryButtonColour(),
-                    backgroundColorFocused: UIColor.govUK.fills.surfaceButtonPrimaryFocussed,
-                    backgroundColorDisabled: configurePrimaryButtonColour(),
-                    cornerRadius: 22,
-                    accessibilityButtonShapesColor: .blue
-                ),
-                viewModel: viewModel.primaryButtonViewModel
-            ).disabled(!viewModel.isTopicsSelected)
+            SwiftUIButton(.primary,
+                          viewModel: viewModel.primaryButtonViewModel
+            )
+            .disabled(!viewModel.isTopicsSelected)
             .accessibility(sortPriority: 1)
             .frame(
                 minHeight: 44,
@@ -46,37 +35,8 @@ struct TopicsButtonView: View {
                 idealHeight: 44
             )
         }.padding(.top)
-            .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
-    }
-
-    private func configurePrimaryButtonColour() -> UIColor {
-        if colorScheme == .dark {
-            return UIColor.govUK.fills.surfaceButtonPrimary
-        } else {
-            switch viewModel.isTopicsSelected {
-            case true:
-                return UIColor.govUK.fills.surfaceButtonPrimary
-            case false:
-                return UIColor(
-                    resource: ColorResource(
-                        name: "topicOnboardingPrimaryUnselectedBtn",
-                        bundle: .main
-                    )
-                )
-            }
-        }
-    }
-
-    private func configureTitleColor() -> UIColor {
-        if colorScheme == .dark {
-            return UIColor.govUK.text.buttonPrimary
-        } else {
-            switch viewModel.isTopicsSelected {
-            case true:
-                return UIColor.govUK.text.buttonPrimary
-            case false:
-                return UIColor.govUK.text.secondary
-            }
-        }
+            .padding([.leading, .trailing],
+                     verticalSizeClass == .regular ? 16 : 0
+            )
     }
 }

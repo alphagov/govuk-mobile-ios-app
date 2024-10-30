@@ -31,7 +31,6 @@ final class TopicsOnboardingWidgetViewModel {
         }
     }
 
-
     func selectOnboardingTopic(topic: Topic,
                                isTopicSelected: Bool) {
         guard let action = topicAction else { return }

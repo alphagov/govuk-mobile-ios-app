@@ -41,4 +41,3 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         return viewController
     }
 }
-

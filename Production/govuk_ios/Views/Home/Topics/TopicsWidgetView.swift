@@ -29,19 +29,11 @@ class TopicsWidgetView: UIView {
         return label
     }()
 
-    private lazy var editButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(String.common.localized("editButtonTitle"), for: .normal)
-        button.titleLabel?.font = UIFont.govUK.bodySemibold
-        button.addTarget(
-            self,
-            action: #selector(editButtonPressed),
-            for: .touchUpInside
-        )
-        button.tintColor = UIColor.govUK.text.link
-        button.accessibilityLabel = String.topics.localized("editTopicsTitle")
-        return button
-    }()
+    private lazy var editButton: UIButton = .body(
+        title: String.common.localized("editButtonTitle"),
+        accessibilityLabel: String.topics.localized("editTopicsTitle"),
+        action: viewModel.editAction
+    )
 
     private lazy var headerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -174,11 +166,6 @@ class TopicsWidgetView: UIView {
         let topicCard = TopicCard(viewModel: topicCardModel)
         topicCard.translatesAutoresizingMaskIntoConstraints = false
         return topicCard
-    }
-
-    @objc
-    private func editButtonPressed() {
-        viewModel.editAction()
     }
 
     required init(coder: NSCoder) {

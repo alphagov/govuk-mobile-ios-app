@@ -93,6 +93,40 @@ struct TopicsRepositoryTests {
     }
 
     @Test
+    func saveTopics_deleteTopics_updatesTopics() async throws {
+        // Given I have started the app the first time, and gotten topics
+        let topicResponseItems: [TopicResponseItem] = [
+            .init(ref: "test_1", title: "first title", description: "first description"),
+            .init(ref: "test_2", title: "second title", description: nil),
+            .init(ref: "test_3", title: "third title", description: "third description"),
+        ]
+        sut.save(topics: topicResponseItems)
+
+        let firstSave = sut.fetchAll()
+        try #require(firstSave.count == 3)
+
+        let favourite = try #require(firstSave.first(where: { $0.ref == "test_1" }))
+        favourite.isFavorite = true
+        try favourite.managedObjectContext?.save()
+
+        let updatedItems: [TopicResponseItem] = [
+            .init(ref: "test_1", title: "first titlez", description: "description 123"),
+        ]
+        sut.save(topics: updatedItems)
+
+        // Then the new item will not be favorited
+        let topics = sut.fetchAll()
+        #expect(topics.count == 1)
+
+
+
+        let first = try #require(topics.first(where: { $0.ref == "test_1" }))
+        #expect(first.title == "first titlez")
+        #expect(first.topicDescription == "description 123")
+        #expect(first.isFavorite == true)
+    }
+
+    @Test
     func fetchFavorites_onlyReturnsFavorites() async throws {
         let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
         Topic.arrange(context: coreData.viewContext, isFavourite: false)

@@ -87,6 +87,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
+    @MainActor
     func allTopicsButtonHidden_allFavourited_returnsTrue() {
         topicService._stubbedFetchFavoriteTopics = [
             .arrange(context: coreData.viewContext, isFavourite: true)

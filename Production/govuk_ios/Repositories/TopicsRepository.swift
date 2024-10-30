@@ -17,13 +17,29 @@ struct TopicsRepository: TopicsRepositoryInterface {
 
     func save(topics: [TopicResponseItem]) {
         let context = coreData.backgroundContext
+        deleteOldObjects(topics: topics, context: context)
+        createOrUpdateTopics(topics: topics, context: context)
+        try? context.save()
+    }
+
+    private func deleteOldObjects(topics: [TopicResponseItem],
+                                  context: NSManagedObjectContext) {
+        let refs = topics.map(\.ref)
+        let request = Topic.fetchRequest()
+        let predicate = NSPredicate(format: "NOT ref IN %@", refs)
+        request.predicate = predicate
+        let deletedObjects = try? context.fetch(request)
+        deletedObjects?.forEach(context.delete)
+    }
+
+    private func createOrUpdateTopics(topics: [TopicResponseItem],
+                                      context: NSManagedObjectContext) {
         topics.forEach { topicResponse in
             createOrUpdateTopic(
                 responseItem: topicResponse,
                 context: context
             )
         }
-        try? context.save()
     }
 
     func save() {
@@ -62,8 +78,8 @@ struct TopicsRepository: TopicsRepositoryInterface {
         topic.update(item: responseItem)
     }
 
-    private func create(context: NSManagedObjectContext) -> Topic {
-        Topic(context: context)
+    private func create(context: NSManagedObjectContext? = nil) -> Topic {
+        Topic(context: context ?? coreData.viewContext)
     }
 
     private func fetch(predicate: NSPredicate?,

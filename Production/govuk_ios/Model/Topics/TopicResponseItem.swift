@@ -6,12 +6,17 @@ struct TopicResponseItem: Decodable {
     let description: String?
 }
 
-protocol TopicCreateParams {
-    var ref: String { get }
-    var title: String { get }
-    var description: String? { get }
-}
+struct TopicCreateParams {
+    let ref: String
+    let title: String
+    let description: String?
+    let isFavourite: Bool
 
-protocol TopicUpdateParams: TopicCreateParams {
-    var isFavourite: Bool { get }
+    init(responseItem: TopicResponseItem,
+         isFavourite: Bool) {
+        self.ref = responseItem.ref
+        self.title = responseItem.title
+        self.description = responseItem.description
+        self.isFavourite = isFavourite
+    }
 }

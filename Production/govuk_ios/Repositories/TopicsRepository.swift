@@ -21,8 +21,8 @@ struct TopicsRepository: TopicsRepositoryInterface {
         topics.forEach { topicResponse in
             createOrUpdateTopic(
                 responseItem: topicResponse,
-                in: context,
-                isFavorite: isFirstLaunch
+                context: context,
+                isFavourite: isFirstLaunch
             )
         }
         try? context.save()
@@ -46,8 +46,8 @@ struct TopicsRepository: TopicsRepositoryInterface {
         ).fetchedObjects ?? []
     }
 
-    private func fetchTopic(ref: String,
-                            context: NSManagedObjectContext) -> Topic? {
+    private func fetch(ref: String,
+                       context: NSManagedObjectContext) -> Topic? {
         fetch(
             predicate: .init(format: "ref = %@", ref),
             context: context
@@ -55,28 +55,22 @@ struct TopicsRepository: TopicsRepositoryInterface {
     }
 
     private func createOrUpdateTopic(responseItem: TopicResponseItem,
-                                     in context: NSManagedObjectContext,
-                                     isFavorite: Bool) {
-        guard let topic = fetchTopic(ref: responseItem.ref,
-                                     context: context) else {
-            createTopic(
-                for: responseItem,
-                in: context,
-                isFavorite: isFavorite
-            )
-            return
-        }
-        topic.title = responseItem.title
+                                     context: NSManagedObjectContext,
+                                     isFavourite: Bool) {
+        let topic = fetch(
+            ref: responseItem.ref,
+            context: context
+        ) ??
+        create(context: context)
+        let params = TopicCreateParams(
+            responseItem: responseItem,
+            isFavourite: isFavourite
+        )
+        topic.update(params: params)
     }
 
-    private func createTopic(for topicResponse: TopicResponseItem,
-                             in context: NSManagedObjectContext,
-                             isFavorite: Bool) {
-        let topic = Topic(context: context)
-        topic.ref = topicResponse.ref
-        topic.title = topicResponse.title
-        topic.isFavorite = isFavorite
-        topic.topicDescription = topicResponse.description
+    private func create(context: NSManagedObjectContext) -> Topic {
+        Topic(context: context)
     }
 
     private func fetch(predicate: NSPredicate?,

@@ -48,6 +48,13 @@ class Topic: NSManagedObject,
             return "star.fill"
         }
     }
+
+    func update(params: TopicCreateParams) {
+        self.ref = params.ref
+        self.title = params.title
+        self.topicDescription = params.description
+        self.isFavorite = params.isFavourite
+    }
 }
 
 extension Topic: DisplayableTopic {}

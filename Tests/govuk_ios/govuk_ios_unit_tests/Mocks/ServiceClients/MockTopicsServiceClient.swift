@@ -3,16 +3,16 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsServiceClient: TopicsServiceClientInterface {
-    var _receivedFetchTopicsCompletion: FetchTopicsListResult?
+    var _receivedFetchListCompletion: FetchTopicsListResult?
     func fetchList(completion: @escaping FetchTopicsListResult) {
-        _receivedFetchTopicsCompletion = completion
+        _receivedFetchListCompletion = completion
     }
 
-    var _receivedFetchTopicsDetailsTopicRef: String?
-    var _receivedFetchTopicsDetailsCompletion: FetchTopicDetailsResult?
+    var _receivedFetchDetailsRef: String?
+    var _receivedFetchDetailsCompletion: FetchTopicDetailsResult?
     func fetchDetails(ref: String,
                       completion: @escaping FetchTopicDetailsResult) {
-        _receivedFetchTopicsDetailsTopicRef = ref
-        _receivedFetchTopicsDetailsCompletion = completion
+        _receivedFetchDetailsRef = ref
+        _receivedFetchDetailsCompletion = completion
     }
 }

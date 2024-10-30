@@ -24,7 +24,7 @@ struct TopicsServiceTests {
             sut.downloadTopicsList { result in
                 continuation.resume(returning: result)
             }
-            mockTopicsServiceClient._receivedFetchTopicsCompletion?(
+            mockTopicsServiceClient._receivedFetchListCompletion?(
                 .success(TopicResponseItem.arrangeMultiple)
             )
 
@@ -40,7 +40,7 @@ struct TopicsServiceTests {
             sut.downloadTopicsList { result in
                 continuation.resume(returning: result)
             }
-            mockTopicsServiceClient._receivedFetchTopicsCompletion?(
+            mockTopicsServiceClient._receivedFetchListCompletion?(
                 .failure(.decodingError)
             )
         }
@@ -77,11 +77,11 @@ struct TopicsServiceTests {
                     continuation.resume(returning: result)
                 }
             )
-            mockTopicsServiceClient._receivedFetchTopicsDetailsCompletion?(
+            mockTopicsServiceClient._receivedFetchDetailsCompletion?(
                 .success(.arrange())
             )
         }
-        #expect(mockTopicsServiceClient._receivedFetchTopicsDetailsTopicRef == "test_ref")
+        #expect(mockTopicsServiceClient._receivedFetchDetailsRef == "test_ref")
     }
 
 }

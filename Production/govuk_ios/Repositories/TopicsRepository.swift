@@ -20,7 +20,7 @@ struct TopicsRepository: TopicsRepositoryInterface {
         let isFirstLaunch = fetchAll().count == 0
         topics.forEach { topicResponse in
             createOrUpdateTopic(
-                for: topicResponse,
+                responseItem: topicResponse,
                 in: context,
                 isFavorite: isFirstLaunch
             )
@@ -54,19 +54,19 @@ struct TopicsRepository: TopicsRepositoryInterface {
         ).fetchedObjects?.first
     }
 
-    private func createOrUpdateTopic(for topicResponse: TopicResponseItem,
+    private func createOrUpdateTopic(responseItem: TopicResponseItem,
                                      in context: NSManagedObjectContext,
                                      isFavorite: Bool) {
-        guard let topic = fetchTopic(ref: topicResponse.ref,
+        guard let topic = fetchTopic(ref: responseItem.ref,
                                      context: context) else {
             createTopic(
-                for: topicResponse,
+                for: responseItem,
                 in: context,
                 isFavorite: isFavorite
             )
             return
         }
-        topic.title = topicResponse.title
+        topic.title = responseItem.title
     }
 
     private func createTopic(for topicResponse: TopicResponseItem,

@@ -12,7 +12,6 @@ struct HomeViewControllerTests {
     func init_hasExpectedValues() {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
-            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -37,7 +36,6 @@ struct HomeViewControllerTests {
         }
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
-            userDefaults: UserDefaults(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }

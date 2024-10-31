@@ -30,7 +30,10 @@ class TopicsOnboardingCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.topicOnboarding(
             analyticsService: analyticsService,
             topicsService: topicsService,
-            dismissAction: dismissAction
+            dismissAction: { [weak self] in
+                self?.topicsService.setHasOnboardedTopics()
+                self?.dismissAction()
+            }
         )
         set(viewController, animated: true)
     }

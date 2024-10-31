@@ -96,11 +96,11 @@ struct TopicsServiceTests {
             userDefaults: mockUserDefaults
         )
 
-        #expect(sut.hasOnboardedTopics == false)
+        #expect(mockUserDefaults.bool(forKey: .hasOnboardedTopics) == false)
 
         sut.setHasOnboardedTopics()
 
-        #expect(sut.hasOnboardedTopics == true)
+        #expect(mockUserDefaults.bool(forKey: .hasOnboardedTopics))
     }
 
 
@@ -115,12 +115,41 @@ struct TopicsServiceTests {
             userDefaults: mockUserDefaults
         )
 
-        #expect(sut.hasTopicsBeenEdited == false)
+        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics) == false)
 
         sut.setHasEditedTopics()
 
-        #expect(sut.hasTopicsBeenEdited == true)
-        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics) == true)
+        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics))
     }
 
+    @Test(.serialized, arguments: [true, false])
+    func hasOnboardedTopics_returnsExaptedResult(expectedValue: Bool) {
+
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults.set(bool: expectedValue, forKey: .hasOnboardedTopics)
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(sut.hasOnboardedTopics == expectedValue)
+    }
+
+    @Test(.serialized, arguments: [true, false])
+    func hasTopicsBeenEdited_returnsExaptedResult(expectedValue: Bool) {
+
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.hasEditedTopics.rawValue)
+        mockUserDefaults.synchronize()
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(sut.hasTopicsBeenEdited == expectedValue)
+    }
 }

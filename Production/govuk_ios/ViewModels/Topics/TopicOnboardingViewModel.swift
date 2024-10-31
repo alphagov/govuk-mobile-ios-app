@@ -77,13 +77,12 @@ class TopicOnboardingViewModel: ObservableObject {
     private func primaryAction() {
         saveFavouriteTopics()
         trackPrimaryEvent()
-        topicsService.setHasOnboardedTopics()
+        topicsService.setHasEditedTopics()
         dismissAction()
     }
 
     private func secondaryAction() {
         trackSecondaryEvent()
-        topicsService.setHasOnboardedTopics()
         dismissAction()
     }
 

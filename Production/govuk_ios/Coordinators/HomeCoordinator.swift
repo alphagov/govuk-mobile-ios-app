@@ -110,7 +110,6 @@ class HomeCoordinator: TabItemCoordinator {
     private var topicWidgetViewModel: TopicsWidgetViewModel {
         TopicsWidgetViewModel(
             topicsService: topicsService,
-            userDefaults: .standard,
             topicAction: startTopicDetailCoordinator,
             editAction: presentEditTopicsCoordinator,
             allTopicsAction: startAllTopicsCoordinator

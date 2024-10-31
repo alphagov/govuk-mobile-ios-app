@@ -18,7 +18,6 @@ struct TopicsOnboardingWidgetViewModelTests {
         let sut = TopicsOnboardingWidgetViewModel(
             topicsService: topicService ,
             analyticsService: MockAnalyticsService(),
-            userDefaults: UserDefaults(),
             topicAction: { _ in }
         )
         #expect(topicService._dataReceived == true)
@@ -32,7 +31,6 @@ struct TopicsOnboardingWidgetViewModelTests {
         let sut = TopicsOnboardingWidgetViewModel(
             topicsService: topicService ,
             analyticsService: MockAnalyticsService(),
-            userDefaults: UserDefaults(),
             topicAction: { _ in }
         )
         
@@ -48,7 +46,6 @@ struct TopicsOnboardingWidgetViewModelTests {
         let sut = TopicsOnboardingWidgetViewModel(
             topicsService: topicService,
             analyticsService: mockAnalyticsService,
-            userDefaults: mockUserDefaults,
             topicAction: { _ in }
         )
 
@@ -68,7 +65,6 @@ struct TopicsOnboardingWidgetViewModelTests {
         let sut = TopicsOnboardingWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
-            userDefaults: mockUserDefaults,
             topicAction: { _ in
                 expectedValue = true
             }

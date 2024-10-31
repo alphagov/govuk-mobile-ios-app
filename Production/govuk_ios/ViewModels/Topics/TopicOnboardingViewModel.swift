@@ -49,7 +49,6 @@ class TopicOnboardingViewModel: ObservableObject {
         let topicWidgetViewModel = TopicsOnboardingWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
-            userDefaults: .standard,
             topicAction: { [weak self] topic in
                 self?.selectTopic(topic: topic)
             }

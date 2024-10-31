@@ -5,7 +5,6 @@ final class TopicsOnboardingWidgetViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let topicAction: ((Topic) -> Void)?
-    private let userDefaults: UserDefaults
     private(set) var downloadError: TopicsServiceError?
 
     var allTopics: [Topic] {
@@ -14,10 +13,8 @@ final class TopicsOnboardingWidgetViewModel {
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         userDefaults: UserDefaults,
          topicAction: ((Topic) -> Void)?) {
         self.topicsService = topicsService
-        self.userDefaults = userDefaults
         self.topicAction = topicAction
         self.analyticsService = analyticsService
         self.fetchTopics()

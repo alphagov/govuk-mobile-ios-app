@@ -15,8 +15,9 @@ struct TopicsButtonView: View {
             .ignoresSafeArea(edges: [.leading, .trailing])
             .padding([.top], 0)
         AdaptiveStack {
-            SwiftUIButton(.primary,
-                          viewModel: viewModel.primaryButtonViewModel
+            SwiftUIButton(
+                .primary,
+                viewModel: viewModel.primaryButtonViewModel
             )
             .disabled(!viewModel.isTopicsSelected)
             .accessibility(sortPriority: 1)
@@ -34,8 +35,10 @@ struct TopicsButtonView: View {
                 idealHeight: 44
             )
         }.padding(.top)
-            .padding([.leading, .trailing],
-                     verticalSizeClass == .regular ? 16 : 0
+            .padding(
+                [.leading, .trailing],
+                verticalSizeClass == .regular ? 16 : 0
             )
     }
 }
+

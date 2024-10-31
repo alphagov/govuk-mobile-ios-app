@@ -192,4 +192,55 @@ struct TopicsWidgetViewModelTests {
             #expect(topic.isFavorite == false)
         }
     }
+
+    @Test
+    func allTopicsButtonHidden_topicsCountIsNotGreaterOrEqualToFetchAllTopicsCount_returnsFalse() {
+
+        let topicService = MockTopicsService()
+
+        topicService._stubbedFetchFavoriteTopics = [
+            .arrange(context: coreData.viewContext, isFavourite: true)
+        ]
+        topicService._stubbedFetchAllTopics = [
+            .arrange(context: coreData.viewContext, isFavourite: false),
+            .arrange(context: coreData.viewContext, isFavourite: false),
+            .arrange(context: coreData.viewContext, isFavourite: false)
+        ]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            userDefaults: UserDefaults(),
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+        #expect(sut.allTopicsButtonHidden == false)
+    }
+
+    @Test
+    func allTopicsButtonHidden_topicsCountIsGreaterOrEqualToFetchAllTopicsCount_returnsTrue() {
+
+        let topicService = MockTopicsService()
+
+        topicService._stubbedFetchFavoriteTopics = [
+            .arrange(context: coreData.viewContext, isFavourite: true),
+            .arrange(context: coreData.viewContext, isFavourite: true),
+            .arrange(context: coreData.viewContext, isFavourite: true)
+        ]
+        topicService._stubbedFetchAllTopics = [
+            .arrange(context: coreData.viewContext, isFavourite: false),
+            .arrange(context: coreData.viewContext, isFavourite: false),
+            .arrange(context: coreData.viewContext, isFavourite: false)
+        ]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: topicService,
+            userDefaults: UserDefaults(),
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+        #expect(sut.allTopicsButtonHidden == true)
+    }
 }
+

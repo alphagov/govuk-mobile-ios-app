@@ -115,6 +115,7 @@
 		4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */; };
 		4EDBBEAD2C9C0CAF00F31577 /* CoreDataRepository+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */; };
 		4EDC73AA2CD2349B00C84FB7 /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 4EDC73A92CD2349B00C84FB7 /* UIComponents */; };
+		4EDC73C62CD391E800C84FB7 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDC73C52CD391E800C84FB7 /* MockUserDefaults.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		5D00E9552CA544F200775D2B /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9542CA544F200775D2B /* HostingViewController.swift */; };
 		5D00E9752CA5583400775D2B /* HostingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */; };
@@ -522,6 +523,7 @@
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
 		4EB05ECF2C52A653008DAEA6 /* MockOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOnboardingService.swift; sourceTree = "<group>"; };
+		4EDC73C52CD391E800C84FB7 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		5D00E9542CA544F200775D2B /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		5D00E9742CA5583400775D2B /* HostingViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -909,6 +911,14 @@
 				5DC527BA2C8736CF005E3158 /* Repositories */,
 			);
 			path = Arrangers;
+			sourceTree = "<group>";
+		};
+		4EDC73C72CD3930100C84FB7 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				4EDC73C52CD391E800C84FB7 /* MockUserDefaults.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		5D0278382C29CBB600F2A4EB /* Animations */ = {
@@ -1770,6 +1780,7 @@
 		5DD6EFFB2BFF546000C2D79B /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				4EDC73C72CD3930100C84FB7 /* Foundation */,
 				5DC04B952C2D72F20036EF2B /* Builders */,
 				5DA44C362C2EF1D400D8FE7C /* Coordinators */,
 				5D93EE802C36848400D90C0C /* Deeplinking */,
@@ -2482,6 +2493,7 @@
 				5D37EA142C3E865F006B36CB /* BaseCoordinatorTests.swift in Sources */,
 				16F961972C8881C8005CFB04 /* SearchViewControllerTests.swift in Sources */,
 				4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */,
+				4EDC73C62CD391E800C84FB7 /* MockUserDefaults.swift in Sources */,
 				5D66D1942CBFE42200006723 /* AppEvent+SearchTests.swift in Sources */,
 				5DC2506E2C91E795009E9E7F /* MockAnalyticsClient.swift in Sources */,
 				3D15E7B82CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift in Sources */,

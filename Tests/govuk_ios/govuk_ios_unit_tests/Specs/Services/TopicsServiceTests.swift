@@ -85,4 +85,42 @@ struct TopicsServiceTests {
         #expect(mockTopicsServiceClient._receivedFetchTopicsDetailsTopicRef == "test_ref")
     }
 
+    @Test
+    func setHasOnboardedTopics_setsOnboardingToTrue() {
+
+        let mockUserDefaults = MockUserDefaults()
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(sut.hasOnboardedTopics == false)
+
+        sut.setHasOnboardedTopics()
+
+        #expect(sut.hasOnboardedTopics == true)
+    }
+
+
+    @Test
+    func setHasEditedTopics_setsHasEditedTopicsToTrue() {
+
+        let mockUserDefaults = MockUserDefaults()
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(sut.hasTopicsBeenEdited == false)
+
+        sut.setHasEditedTopics()
+
+        #expect(sut.hasTopicsBeenEdited == true)
+        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics) == true)
+    }
+
 }

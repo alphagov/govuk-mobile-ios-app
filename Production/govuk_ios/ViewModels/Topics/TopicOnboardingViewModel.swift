@@ -2,11 +2,11 @@ import Foundation
 import UIComponents
 
 class TopicOnboardingViewModel: ObservableObject {
-    let analyticsService: AnalyticsServiceInterface
-    let topicsService: TopicsServiceInterface
-    let dismissAction: () -> Void
+    private let analyticsService: AnalyticsServiceInterface
+    private let topicsService: TopicsServiceInterface
+    private let dismissAction: () -> Void
     @Published var isTopicsSelected: Bool = false
-    var selectedTopics: [String: Topic] = [:]
+    private var selectedTopics: [String: Topic] = [:]
 
     let title = String.topics.localized(
         "topicOnboardingPageTitle"
@@ -45,7 +45,7 @@ class TopicOnboardingViewModel: ObservableObject {
         isTopicsSelected = !selectedTopics.isEmpty
     }
 
-     var topicsWidget: WidgetView {
+    var topicsWidget: WidgetView {
         let topicWidgetViewModel = TopicsOnboardingWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,

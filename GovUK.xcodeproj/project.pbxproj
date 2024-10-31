@@ -93,7 +93,7 @@
 		4E00EF032CCB10DC007B61E8 /* TopicOnboardingWidgetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF022CCB10DC007B61E8 /* TopicOnboardingWidgetViewModelTests.swift */; };
 		4E00EF052CCB11D6007B61E8 /* TopicOnboardingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF042CCB11D6007B61E8 /* TopicOnboardingViewModelTests.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
-		4E00EF0C2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF0B2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift */; };
+		4E00EF0C2CCBAAF4007B61E8 /* TopicsOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF0B2CCBAAF4007B61E8 /* TopicsOnboardingCoordinator.swift */; };
 		4E00EF112CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF102CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */; };
 		4E18E08D2C74931500538CF0 /* AppConfigServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */; };
 		4E18E0922C74DD5D00538CF0 /* AppConfigRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18E0912C74DD5D00538CF0 /* AppConfigRepositoryTests.swift */; };
@@ -502,7 +502,7 @@
 		4E00EF022CCB10DC007B61E8 /* TopicOnboardingWidgetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingWidgetViewModelTests.swift; sourceTree = "<group>"; };
 		4E00EF042CCB11D6007B61E8 /* TopicOnboardingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewModelTests.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		4E00EF0B2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCoordinatorTests.swift; sourceTree = "<group>"; };
+		4E00EF0B2CCBAAF4007B61E8 /* TopicsOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		4E00EF102CCBC018007B61E8 /* TopicOnboardingViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		4E18E08C2C74931500538CF0 /* AppConfigServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceTests.swift; sourceTree = "<group>"; };
 		4E18E08F2C74A45500538CF0 /* MockAppConfigRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppConfigRepository.swift; sourceTree = "<group>"; };
@@ -1098,16 +1098,16 @@
 				3D15E7B72CB572600046CE64 /* AppRecommendUpdateCoordinatorTests.swift */,
 				3D3378192CAAC2E0004BF83F /* AppUnavailableCoordinatorTests.swift */,
 				5D37E9FF2C3E865F006B36CB /* BaseCoordinatorTests.swift */,
+				D028CD022CBD775000742620 /* EditTopicsCoordinatorTests.swift */,
 				16C34B402C47D9720031AD32 /* HomeCoordinatorTests.swift */,
 				5D37EA022C3E865F006B36CB /* LaunchCoordinatorTests.swift */,
 				4EB05ECD2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift */,
+				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 				16F9619C2C8899D4005CFB04 /* SearchCoordinatorTests.swift */,
 				16C34B3E2C47D9590031AD32 /* SettingsCoordinatorTests.swift */,
 				5D37EA052C3E865F006B36CB /* TabCoordinatorTests.swift */,
-				4E46704A2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift */,
 				D0B89D9E2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift */,
-				D028CD022CBD775000742620 /* EditTopicsCoordinatorTests.swift */,
-				4E00EF0B2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift */,
+				4E00EF0B2CCBAAF4007B61E8 /* TopicsOnboardingCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -2475,7 +2475,7 @@
 				4EB05ECE2C526B3E008DAEA6 /* OnboardingCoordinatorTests.swift in Sources */,
 				5D37EA102C3E865F006B36CB /* ViewControllerBuilderTests.swift in Sources */,
 				5D4F6D3F2CA41772006D0B5B /* MockAppConfigService.swift in Sources */,
-				4E00EF0C2CCBAAF4007B61E8 /* TopicOnboardingCoordinatorTests.swift in Sources */,
+				4E00EF0C2CCBAAF4007B61E8 /* TopicsOnboardingCoordinator.swift in Sources */,
 				5DC527BC2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift in Sources */,
 				4E46704B2C9B19FB0017DA2E /* RecentActivityCoordinatorTests.swift in Sources */,
 				5D9C8DF52C53BCF400961326 /* OnboardingSlide+Arrangers.swift in Sources */,

@@ -6,7 +6,7 @@ import Testing
 
 @Suite
 @MainActor
-struct TopicOnboardingCoordinatorTests {
+struct TopicsOnboardingCoordinatorTests {
 
     init() {
         UIView.setAnimationsEnabled(false)

@@ -29,8 +29,12 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
             completion: { result in
                 let mappedResult: Result<AppConfig, AppConfigError>
                 switch result {
-                case .failure:
-                    mappedResult = .failure(.remoteJson)
+                case .failure(let error):
+                    if error is SigningError {
+                        mappedResult = .failure(.invalidSignature)
+                    } else {
+                        mappedResult = .failure(.remoteJson)
+                    }
                 case .success(let data):
                     mappedResult = self.decode(data: data)
                 }
@@ -46,8 +50,6 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
                 from: data
             )
             return .success(result)
-        } catch SigningError.invalidSignature {
-            return .failure(.invalidSignature)
         } catch {
             return .failure(.remoteJson)
         }

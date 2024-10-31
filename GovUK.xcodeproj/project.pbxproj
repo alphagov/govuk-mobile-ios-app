@@ -349,7 +349,6 @@
 		D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */; };
 		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
-		D0A8B3C82CA18C2D00849304 /* MockAppConfigResponseInvalidSig.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */; };
 		D0B89D9F2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B89D9E2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift */; };
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
@@ -721,7 +720,6 @@
 		D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsCoordinator.swift; sourceTree = "<group>"; };
 		D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = integration_pubkey.der; sourceTree = "<group>"; };
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
-		D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockAppConfigResponseInvalidSig.json; sourceTree = "<group>"; };
 		D0B89D9E2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsDetailCoordinatorTests.swift; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
@@ -829,7 +827,6 @@
 			isa = PBXGroup;
 			children = (
 				D049D4F92CC24E3E008B70A5 /* MockTopicDetailsResponses */,
-				D0A8B3C72CA18C1100849304 /* MockAppConfigResponseInvalidSig.json */,
 				4E003E792C75EDEC008FCBF2 /* MockAppConfigResponse.json */,
 				4E003E7B2C75EE97008FCBF2 /* MockAppConfigResponseInvalid.json */,
 				5DD5F0BE2C99D74F009F5388 /* TestStrings.xcstrings */,
@@ -2053,7 +2050,6 @@
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
 				5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */,
 				D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */,
-				D0A8B3C82CA18C2D00849304 /* MockAppConfigResponseInvalidSig.json in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				D049D4FD2CC26DE9008B70A5 /* FiveStepByStep.json in Resources */,
 				D049D4F82CC176D7008B70A5 /* NoUnpopularContent.json in Resources */,

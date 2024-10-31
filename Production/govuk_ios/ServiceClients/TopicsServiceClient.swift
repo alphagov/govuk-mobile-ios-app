@@ -29,7 +29,7 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
             bodyParameters: nil,
             queryParameters: nil,
             additionalHeaders: nil,
-            requiresSignature: true
+            signingKey: Constants.SigningKey.govUK
         )
 
         serviceClient.send(
@@ -58,7 +58,7 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
             bodyParameters: nil,
             queryParameters: nil,
             additionalHeaders: nil,
-            requiresSignature: true
+            signingKey: Constants.SigningKey.govUK
         )
 
         serviceClient.send(

@@ -6,7 +6,7 @@ struct GOVRequest {
     let bodyParameters: [String: Any]?
     let queryParameters: [String: String?]?
     let additionalHeaders: [String: String]?
-    var requiresSignature: Bool = false
+    var signingKey: String?
 }
 
 enum Method: String {

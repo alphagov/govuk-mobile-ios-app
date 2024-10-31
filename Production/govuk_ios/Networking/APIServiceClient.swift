@@ -11,6 +11,10 @@ protocol APIServiceClientInterface {
     )
 }
 
+enum SigningError: Error {
+    case invalidSignature
+}
+
 struct APIServiceClient: APIServiceClientInterface {
     private let baseUrl: URL
     private let session: URLSession
@@ -34,13 +38,13 @@ extension APIServiceClient {
         )
         send(
             request: urlRequest,
-            requiresSignature: request.requiresSignature,
+            signingKey: request.signingKey,
             completion: completion
         )
     }
 
     private func send(request: URLRequest,
-                      requiresSignature: Bool,
+                      signingKey: String?,
                       completion: @escaping NetworkResultCompletion<Data>) {
         let task = session.dataTask(
             with: request,
@@ -50,10 +54,10 @@ extension APIServiceClient {
                 case (_, .some(let error)):
                     result = .failure(error)
                 case (.some(let data), _):
-                    if !requiresSignature ||
-                        verifySignature(
+                       if verifySignatureIfNecessary(
                             signatureBase64: response?.signature,
-                            data: data
+                            data: data,
+                            signingKey: signingKey
                         ) {
                         result = .success(data)
                     } else {
@@ -70,14 +74,22 @@ extension APIServiceClient {
         task.resume()
     }
 
-    private func verifySignature(signatureBase64: String?, data: Data) -> Bool {
+    private func verifySignatureIfNecessary(signatureBase64: String?,
+                                            data: Data,
+                                            signingKey: String?) -> Bool {
+        // If no key provided, request doesn't need signing
+        guard let signingKey
+        else {
+            return true
+        }
+
         guard let signatureBase64,
               let signatureData = Data(base64Encoded: signatureBase64)
         else {
             return false
         }
 
-        guard let publicKeyFile = Bundle.main.publicKey,
+        guard let publicKeyFile = Bundle.main.publicKey(name: signingKey),
               let publicKey = try? P256.Signing.PublicKey(derRepresentation: publicKeyFile)
         else {
             return false
@@ -89,12 +101,5 @@ extension APIServiceClient {
         }
 
         return publicKey.isValidSignature(signatureKey, for: data)
-    }
-}
-
-extension URLResponse {
-    var signature: String? {
-        (self as? HTTPURLResponse)?
-            .allHeaderFields["x-amz-meta-govuk-sig"] as? String
     }
 }

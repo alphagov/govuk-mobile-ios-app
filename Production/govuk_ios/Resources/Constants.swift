@@ -12,4 +12,8 @@ struct Constants {
         static let termsAndConditionsUrl = "https://www.gov.uk/government/publications/govuk-app-terms-and-conditions"
         static let accessibilityStatementUrl = "https://www.gov.uk/government/publications/accessibility-statement-for-the-govuk-app"
     }
+
+    struct SigningKey {
+        static let govUK = "integration_pubkey"
+    }
 }

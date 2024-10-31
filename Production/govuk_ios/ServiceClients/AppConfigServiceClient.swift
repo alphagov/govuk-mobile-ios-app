@@ -8,12 +8,10 @@ protocol AppConfigServiceClientInterface {
 
 struct AppConfigServiceClient: AppConfigServiceClientInterface {
     private let serviceClient: APIServiceClientInterface
-    private let decoder: SignableDecoder
+    private let decoder = JSONDecoder()
 
-    init(serviceClient: APIServiceClientInterface,
-         decoder: SignableDecoder) {
+    init(serviceClient: APIServiceClientInterface) {
         self.serviceClient = serviceClient
-        self.decoder = decoder
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigResult) {
@@ -23,7 +21,7 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
             bodyParameters: nil,
             queryParameters: nil,
             additionalHeaders: nil,
-            requiresSignature: true
+            signingKey: Constants.SigningKey.govUK
         )
 
         serviceClient.send(

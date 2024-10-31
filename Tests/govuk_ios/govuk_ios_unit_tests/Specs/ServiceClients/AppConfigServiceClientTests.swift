@@ -12,8 +12,7 @@ struct AppConfigServiceClientTests {
     init() {
         mockServiceClient = MockAPIServiceClient()
         sut = AppConfigServiceClient(
-            serviceClient: mockServiceClient,
-            decoder: SignableDecoder()
+            serviceClient: mockServiceClient
         )
     }
 

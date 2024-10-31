@@ -30,22 +30,22 @@ class TopicOnboardingViewController: BaseViewController {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.addArrangedSubview(titleLabel)
-        return stackView
+        let localView = UIStackView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.axis = .vertical
+        localView.spacing = 16
+        localView.addArrangedSubview(titleLabel)
+        return localView
     }()
 
     private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(stackView)
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.contentInset.bottom = 32
-        scrollView.contentInsetAdjustmentBehavior = .always
-        return scrollView
+        let localView = UIScrollView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.addSubview(stackView)
+        localView.showsVerticalScrollIndicator = false
+        localView.contentInset.bottom = 32
+        localView.contentInsetAdjustmentBehavior = .always
+        return localView
     }()
 
     required init?(coder: NSCoder) {
@@ -71,15 +71,11 @@ class TopicOnboardingViewController: BaseViewController {
     }
 
     private lazy var buttonView: UIView =  {
-        let buttonView = UIHostingController(
-            rootView: TopicsButtonView(viewModel: self.viewModel)
-        ).view
-
-        guard let buttonView = buttonView else {
-            return UIView()
-        }
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
-        return buttonView
+        let controller = UIHostingController(
+            rootView: TopicsButtonView(viewModel: viewModel)
+        )
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        return controller.view
     }()
 
     private func configureConstraints() {

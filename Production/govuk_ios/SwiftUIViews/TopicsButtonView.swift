@@ -4,7 +4,6 @@ import UIComponents
 struct TopicsButtonView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @StateObject var viewModel: TopicOnboardingViewModel
-    @Environment(\.colorScheme) var colorScheme
 
     init(viewModel: TopicOnboardingViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)

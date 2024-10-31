@@ -11,10 +11,10 @@ class TopicOnboardingViewModel: ObservableObject {
         "topicOnboardingNavigationTitle"
     )
     private let primaryButtonTitle = String.topics.localized(
-        "topicsOnboardingPrimaryBtnTitle"
+        "topicsOnboardingPrimaryButtonTitle"
     )
     private let secondaryButtonTitle = String.topics.localized(
-        "topicsOnboardingSecondaryBtnTitle"
+        "topicsOnboardingSecondaryButtonTitle"
     )
 
     init(analyticsService: AnalyticsServiceInterface,

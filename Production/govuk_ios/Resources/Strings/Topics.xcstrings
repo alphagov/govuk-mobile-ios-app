@@ -23,17 +23,6 @@
         }
       }
     },
-    "seeAllTopicsButtonText" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "See all topics"
-          }
-        }
-      }
-    },
     "editTopicsSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -52,6 +41,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit your topics"
+          }
+        }
+      }
+    },
+    "seeAllTopicsButtonText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See all topics"
           }
         }
       }
@@ -155,7 +155,18 @@
         }
       }
     },
-    "topicsOnboardingPrimaryBtnTitle" : {
+    "topicsOnboardingPageTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topics you select will be shown on the app home pages so you can find them more easily"
+          }
+        }
+      }
+    },
+    "topicsOnboardingPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -166,24 +177,13 @@
         }
       }
     },
-    "topicsOnboardingSecondaryBtnTitle" : {
+    "topicsOnboardingSecondaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skip"
-          }
-        }
-      }
-    },
-    "topicsOnboardingTitlelabel" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Topics you select will be shown on the app home pages so you can find them more easily"
           }
         }
       }

@@ -19,7 +19,7 @@ class TopicOnboardingViewController: BaseViewController {
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
         localView.text = String.topics.localized(
-            "topicsOnboardingTitlelabel"
+            "topicsOnboardingPageTitle"
         )
         localView.textAlignment = .left
         localView.numberOfLines = 0

@@ -4,7 +4,7 @@ import CoreData
 final class TopicsOnboardingWidgetViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
-    private let topicAction: ((Topic) -> Void)?
+    private let topicAction: (Topic) -> Void
     private(set) var downloadError: TopicsServiceError?
 
     var allTopics: [Topic] {
@@ -13,7 +13,7 @@ final class TopicsOnboardingWidgetViewModel {
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         topicAction: ((Topic) -> Void)?) {
+         topicAction: @escaping (Topic) -> Void) {
         self.topicsService = topicsService
         self.topicAction = topicAction
         self.analyticsService = analyticsService
@@ -30,7 +30,6 @@ final class TopicsOnboardingWidgetViewModel {
 
     func selectOnboardingTopic(topic: Topic,
                                isTopicSelected: Bool) {
-        guard let action = topicAction else { return }
         let event = AppEvent.function(
             text: topic.title,
             type: "buttons",
@@ -38,6 +37,6 @@ final class TopicsOnboardingWidgetViewModel {
             action: isTopicSelected ? "add" : "remove"
         )
         analyticsService.track(event: event)
-        action(topic)
+        topicAction(topic)
     }
 }

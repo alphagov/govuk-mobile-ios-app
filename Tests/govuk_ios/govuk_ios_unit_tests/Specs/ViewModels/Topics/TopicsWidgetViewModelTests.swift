@@ -117,12 +117,22 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func allTopicsButtonHidden_notAllFavourited_returnsFalse() {
-        topicService._stubbedFetchFavoriteTopics = []
-        topicService._stubbedFetchAllTopics = [
-            .arrange(context: coreData.viewContext, isFavourite: false),
-            .arrange(context: coreData.viewContext, isFavourite: false)
+        topicService._stubbedFetchFavoriteTopics = [
+            .arrange(
+                context:coreData.viewContext,
+                     isFavourite: true
+            )
         ]
-
+        topicService._stubbedFetchAllTopics = [
+            .arrange(
+                context: coreData.viewContext,
+                isFavourite: false
+            ),
+            .arrange(
+                context: coreData.viewContext,
+                isFavourite: false
+            )
+        ]
         let sut = TopicsWidgetViewModel(
             topicsService: topicService,
             userDefaults: UserDefaults(),
@@ -130,11 +140,9 @@ struct TopicsWidgetViewModelTests {
             editAction: { },
             allTopicsAction: { }
         )
-
         let result = sut.allTopicsButtonHidden
         #expect(result == false)
     }
-
 
     @Test
     func getTopics_whenFavouriteTopicsExist_returnsOnlyFavouritedTopics() {

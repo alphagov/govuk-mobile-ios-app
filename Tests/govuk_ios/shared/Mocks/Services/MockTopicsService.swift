@@ -4,9 +4,9 @@ import Foundation
 
 class MockTopicsService: TopicsServiceInterface {
 
-    var _setHasEditedTopics: Bool = false
+    var _setHasEditedTopicsCalled: Bool = false
     func setHasEditedTopics() {
-        return _setHasEditedTopics = true
+        return _setHasEditedTopicsCalled = true
     }
     
     var _stubbedHasTopicsBeenEdited: Bool = false
@@ -19,9 +19,9 @@ class MockTopicsService: TopicsServiceInterface {
         return _stubbedHasOnboardedTopics
     }
 
-    var _setHasOnboardedTopics: Bool = false
+    var _setHasOnboardedTopicsCalled: Bool = false
     func setHasOnboardedTopics() {
-        _setHasOnboardedTopics = true
+        _setHasOnboardedTopicsCalled = true
     }
 
     let coreData = CoreDataRepository.arrangeAndLoad

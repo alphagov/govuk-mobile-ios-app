@@ -144,7 +144,7 @@
         }
       }
     },
-    "topicOnboardingNavigationTitle" : {
+    "topicOnboardingPageTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -155,7 +155,7 @@
         }
       }
     },
-    "topicsOnboardingPageTitle" : {
+    "topicsOnboardingPageSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

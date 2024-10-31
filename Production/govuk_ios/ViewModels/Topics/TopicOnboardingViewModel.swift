@@ -7,12 +7,19 @@ class TopicOnboardingViewModel: ObservableObject {
     let dismissAction: () -> Void
     @Published var isTopicsSelected: Bool = false
     var selectedTopics: [String: Topic] = [:]
-    let navigationTitle = String.topics.localized(
-        "topicOnboardingNavigationTitle"
+
+    let title = String.topics.localized(
+        "topicOnboardingPageTitle"
     )
+
+    let subtitle = String.topics.localized(
+        "topicsOnboardingPageSubtitle"
+    )
+
     private let primaryButtonTitle = String.topics.localized(
         "topicsOnboardingPrimaryButtonTitle"
     )
+
     private let secondaryButtonTitle = String.topics.localized(
         "topicsOnboardingSecondaryButtonTitle"
     )

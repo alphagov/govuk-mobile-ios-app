@@ -16,11 +16,9 @@ class TopicOnboardingViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    private lazy var titleLabel: UILabel = {
+    private lazy var subtitleLabel: UILabel = {
         let localView = UILabel()
-        localView.text = String.topics.localized(
-            "topicsOnboardingPageTitle"
-        )
+        localView.text = viewModel.subtitle
         localView.textAlignment = .left
         localView.numberOfLines = 0
         localView.lineBreakMode = .byWordWrapping
@@ -34,14 +32,12 @@ class TopicOnboardingViewController: BaseViewController {
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.axis = .vertical
         localView.spacing = 16
-        localView.addArrangedSubview(titleLabel)
         return localView
     }()
 
     private lazy var scrollView: UIScrollView = {
         let localView = UIScrollView()
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.addSubview(stackView)
         localView.showsVerticalScrollIndicator = false
         localView.contentInset.bottom = 32
         localView.contentInsetAdjustmentBehavior = .always
@@ -56,13 +52,15 @@ class TopicOnboardingViewController: BaseViewController {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        title = viewModel.navigationTitle
+        title = viewModel.title
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
     }
 
     private func configureUI() {
         view.addSubview(scrollView)
+        scrollView.addSubview(stackView)
         view.addSubview(buttonView)
+        stackView.addArrangedSubview(subtitleLabel)
         addWidgets()
     }
 

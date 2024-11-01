@@ -1,8 +1,6 @@
 import UIKit
 
 class TopicsOnboardingListView: UIView {
-    private let viewModel: TopicsOnboardingListViewModel
-
     private var rowCount = 2
 
     private lazy var cardStackView: UIStackView = {
@@ -15,25 +13,17 @@ class TopicsOnboardingListView: UIView {
         return localView
     }()
 
-    init(viewModel: TopicsOnboardingListViewModel) {
-        self.viewModel = viewModel
+    private var selectedAction: (Topic, Bool) -> Void
+
+    init(selectedAction: @escaping (Topic, Bool) -> Void) {
+        self.selectedAction = selectedAction
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(topicsDidUpdate),
-            name: .NSManagedObjectContextDidSave,
-            object: nil
-        )
-        updateTopics(viewModel.allTopics)
     }
 
-    @objc
-    private func topicsDidUpdate(notification: Notification) {
-        DispatchQueue.main.async {
-            self.updateTopics(self.viewModel.allTopics)
-        }
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private func configureUI() {
@@ -57,7 +47,9 @@ class TopicsOnboardingListView: UIView {
         ])
     }
 
-    private func updateTopics(_ topics: [Topic]) {
+    func updateTopics(_ topics: [Topic]) {
+        let sizeClass = UITraitCollection.current.verticalSizeClass
+        rowCount = sizeClass == .regular ? 2 : 4
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createRow(startingAt: index, of: topics)
@@ -102,27 +94,11 @@ class TopicsOnboardingListView: UIView {
         let model = TopicOnboardingCardModel(
             topic: topic,
             tapAction: { [weak self] isSelected in
-                self?.viewModel.selectOnboardingTopic(
-                    topic: topic,
-                    isTopicSelected: isSelected
-                )
+                self?.selectedAction(topic, isSelected)
             }
         )
         let topicCard = TopicOnboardingCard(viewModel: model)
         topicCard.translatesAutoresizingMaskIntoConstraints = false
         return topicCard
-    }
-
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        let sizeClass = UITraitCollection.current.verticalSizeClass
-        if sizeClass != previousTraitCollection?.verticalSizeClass {
-            rowCount = sizeClass == .regular ? 2 : 4
-            updateTopics(viewModel.allTopics)
-        }
     }
 }

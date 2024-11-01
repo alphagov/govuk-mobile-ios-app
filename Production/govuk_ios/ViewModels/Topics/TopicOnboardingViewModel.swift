@@ -31,33 +31,47 @@ class TopicOnboardingViewModel: ObservableObject {
         self.analyticsService = analyticsService
         self.topicsService = topicsService
         self.dismissAction = dismissAction
+        self.fetchTopics()
     }
 
-    private func selectTopic(topic: Topic) {
-        if let topic = selectedTopics[topic.title] {
-            selectedTopics.removeValue(forKey: topic.title)
-        } else {
+    var topics: [Topic] {
+        topicsService.fetchAllTopics()
+    }
+
+    private func fetchTopics() {
+        topicsService.downloadTopicsList { _ in }
+    }
+
+    func topicSelected(topic: Topic,
+                       selected: Bool) {
+        let action: String
+        if selected {
+            action = "add"
             selectedTopics[topic.title] = topic
+        } else {
+            action = "remove"
+            selectedTopics.removeValue(forKey: topic.title)
         }
+        trackTopicSelection(
+            title: topic.title,
+            action: action
+        )
         setIsTopicSelected()
+    }
+
+    private func trackTopicSelection(title: String,
+                                     action: String) {
+        let event = AppEvent.function(
+            text: title,
+            type: "buttons",
+            section: "topic selection",
+            action: action
+        )
+        analyticsService.track(event: event)
     }
 
     private func setIsTopicSelected() {
         isTopicSelected = !selectedTopics.isEmpty
-    }
-
-    var topicsWidget: UIView {
-        let topicWidgetViewModel = TopicsOnboardingListViewModel(
-            topicsService: topicsService,
-            analyticsService: analyticsService,
-            topicAction: { [weak self] topic in
-                self?.selectTopic(topic: topic)
-            }
-        )
-
-        return TopicsOnboardingListView(
-            viewModel: topicWidgetViewModel
-        )
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -90,13 +104,13 @@ class TopicOnboardingViewModel: ObservableObject {
         dismissAction()
     }
 
-    private func saveTopicsToFavourite() {
-        selectedTopics.values.forEach { $0.isFavorite = true }
-    }
-
     private func saveFavouriteTopics() {
         saveTopicsToFavourite()
         topicsService.updateFavoriteTopics()
+    }
+
+    private func saveTopicsToFavourite() {
+        selectedTopics.values.forEach { $0.isFavorite = true }
     }
 
     private func trackPrimaryEvent() {

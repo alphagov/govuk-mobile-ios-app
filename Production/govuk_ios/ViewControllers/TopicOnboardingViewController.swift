@@ -44,6 +44,12 @@ class TopicOnboardingViewController: BaseViewController {
         return localView
     }()
 
+    private lazy var topicsListView = TopicsOnboardingListView(
+        selectedAction: { [weak self] topic, selected in
+            self?.viewModel.topicSelected(topic: topic, selected: selected)
+        }
+    )
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,6 +60,23 @@ class TopicOnboardingViewController: BaseViewController {
         configureConstraints()
         title = viewModel.title
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        registerObservers()
+    }
+
+    private func registerObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(topicsDidUpdate),
+            name: .NSManagedObjectContextDidSave,
+            object: nil
+        )
+    }
+
+    @objc
+    private func topicsDidUpdate() {
+        DispatchQueue.main.async {
+            self.topicsListView.updateTopics(self.viewModel.topics)
+        }
     }
 
     private func configureUI() {
@@ -61,11 +84,8 @@ class TopicOnboardingViewController: BaseViewController {
         scrollView.addSubview(stackView)
         view.addSubview(buttonView)
         stackView.addArrangedSubview(subtitleLabel)
-        addWidgets()
-    }
-
-    private func addWidgets() {
-        stackView.addArrangedSubview(viewModel.topicsWidget)
+        stackView.addArrangedSubview(topicsListView)
+        topicsListView.updateTopics(viewModel.topics)
     }
 
     private lazy var buttonView: UIView =  {
@@ -118,6 +138,11 @@ class TopicOnboardingViewController: BaseViewController {
                 equalTo: view.layoutMarginsGuide.rightAnchor
             )
         ])
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        topicsListView.updateTopics(viewModel.topics)
     }
 }
 

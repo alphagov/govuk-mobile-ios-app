@@ -1,6 +1,5 @@
 import Foundation
 import UIComponents
-import UIKit
 
 class TopicOnboardingViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
@@ -64,7 +63,7 @@ class TopicOnboardingViewModel: ObservableObject {
         let event = AppEvent.function(
             text: title,
             type: "buttons",
-            section: "topic selection",
+            section: "Topic selection",
             action: action
         )
         analyticsService.track(event: event)

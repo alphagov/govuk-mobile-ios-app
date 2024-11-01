@@ -13,31 +13,23 @@ extension UIBarButtonItem {
 
     static func selectAll(action: @escaping (UIAction) -> Void) -> UIBarButtonItem {
         let title = String.recentActivity.localized("selectAllButtonTitle")
-        let item = UIBarButtonItem(
-            title: title,
-            primaryAction: .init(title: title, handler: action)
-        )
-        item.tintColor = UIColor.govUK.text.link
-        return item
+
+        return TopAlignedBarButtonItem(title: title,
+                                       tint: UIColor.govUK.text.link,
+                                       action: action)
     }
 
     static func deselectAll(action: @escaping (UIAction) -> Void) -> UIBarButtonItem {
         let title = String.recentActivity.localized("deselectAllButtonTitle")
-        let item = UIBarButtonItem(
-            title: title,
-            primaryAction: .init(title: title, handler: action)
-        )
-        item.tintColor = UIColor.govUK.text.link
-        return item
+        return TopAlignedBarButtonItem(title: title,
+                                       tint: UIColor.govUK.text.link,
+                                       action: action)
     }
 
     static func remove(action: @escaping (UIAction) -> Void) -> UIBarButtonItem {
         let title = String.recentActivity.localized("removeActivitiesButtonTitle")
-        let item = UIBarButtonItem(
-            title: title,
-            primaryAction: .init(title: title, handler: action)
-        )
-        item.tintColor = .red
-        return item
+        return TopAlignedBarButtonItem(title: title,
+                                       tint: .red,
+                                       action: action)
     }
 }

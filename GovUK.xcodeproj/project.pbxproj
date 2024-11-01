@@ -367,6 +367,7 @@
 		D0A8B3CA2CA1A38400849304 /* SignableDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C92CA1A38400849304 /* SignableDecoder.swift */; };
 		D0A8B3CD2CA1A68200849304 /* Signable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3CC2CA1A68200849304 /* Signable.swift */; };
 		D0B89D9F2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B89D9E2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift */; };
+		D0C1B7D92CD51F6E0065B455 /* TopAlignedBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1B7D82CD51F6E0065B455 /* TopAlignedBarButtonItem.swift */; };
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
 		D0F86E132CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */; };
@@ -754,6 +755,7 @@
 		D0A8B3C92CA1A38400849304 /* SignableDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignableDecoder.swift; sourceTree = "<group>"; };
 		D0A8B3CC2CA1A68200849304 /* Signable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signable.swift; sourceTree = "<group>"; };
 		D0B89D9E2CAD60B700AD93ED /* TopicsDetailCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsDetailCoordinatorTests.swift; sourceTree = "<group>"; };
+		D0C1B7D82CD51F6E0065B455 /* TopAlignedBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlignedBarButtonItem.swift; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
 		D0F86E122CAAFF0C00FF2D9E /* TopicsServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClientTests.swift; sourceTree = "<group>"; };
@@ -1389,6 +1391,7 @@
 				5D925B1A2CB7CE6300A1E241 /* GroupedListTableViewCell.swift */,
 				163800FE2C99DAF900C3DDD1 /* ListInformationView.swift */,
 				4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */,
+				D0C1B7D82CD51F6E0065B455 /* TopAlignedBarButtonItem.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2252,6 +2255,7 @@
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
 				5DD6F3302CC2B937005BC5D3 /* SearchWidgetViewModel.swift in Sources */,
 				96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */,
+				D0C1B7D92CD51F6E0065B455 /* TopAlignedBarButtonItem.swift in Sources */,
 				D04191782CA57A6F0034722A /* TopicsService.swift in Sources */,
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,
 				5D925B1B2CB7CE6300A1E241 /* GroupedListTableViewCell.swift in Sources */,

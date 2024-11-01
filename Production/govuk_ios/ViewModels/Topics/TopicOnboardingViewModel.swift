@@ -38,7 +38,7 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func fetchTopics() {
-        topicsService.downloadTopicsList { _ in }
+        topicsService.downloadTopicsList { _ in /*Do nothing*/ }
     }
 
     func topicSelected(topic: Topic,

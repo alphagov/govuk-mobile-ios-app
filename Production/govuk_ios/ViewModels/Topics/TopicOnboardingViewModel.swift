@@ -6,7 +6,7 @@ class TopicOnboardingViewModel: ObservableObject {
     private let topicsService: TopicsServiceInterface
     private let dismissAction: () -> Void
     @Published var isTopicSelected: Bool = false
-    private var selectedTopics: [String: Topic] = [:]
+    private var selectedTopics: Set<Topic> = []
 
     let title = String.topics.localized(
         "topicOnboardingPageTitle"
@@ -46,10 +46,10 @@ class TopicOnboardingViewModel: ObservableObject {
         let action: String
         if selected {
             action = "add"
-            selectedTopics[topic.title] = topic
+            selectedTopics.insert(topic)
         } else {
             action = "remove"
-            selectedTopics.removeValue(forKey: topic.title)
+            selectedTopics.remove(topic)
         }
         trackTopicSelection(
             title: topic.title,
@@ -104,7 +104,7 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func saveFavouriteTopics() {
-        selectedTopics.values.forEach { $0.isFavorite = true }
+        selectedTopics.forEach { $0.isFavorite = true }
         topicsService.save()
     }
 

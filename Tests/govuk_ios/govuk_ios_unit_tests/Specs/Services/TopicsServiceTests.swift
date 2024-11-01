@@ -3,7 +3,7 @@ import Testing
 
 @testable import govuk_ios
 
-@Suite
+@Suite(.serialized)
 struct TopicsServiceTests {
     var sut: TopicsService!
     var mockTopicsServiceClient: MockTopicsServiceClient!

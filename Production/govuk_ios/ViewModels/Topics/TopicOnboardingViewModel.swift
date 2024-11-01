@@ -104,12 +104,8 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func saveFavouriteTopics() {
-        saveTopicsToFavourite()
-        topicsService.updateFavoriteTopics()
-    }
-
-    private func saveTopicsToFavourite() {
         selectedTopics.values.forEach { $0.isFavorite = true }
+        topicsService.save()
     }
 
     private func trackPrimaryEvent() {

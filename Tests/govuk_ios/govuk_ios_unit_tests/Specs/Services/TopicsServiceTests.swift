@@ -64,8 +64,8 @@ struct TopicsServiceTests {
     }
 
     @Test
-    func updateFavorites_savesChangesToRepository() async {
-        sut.updateFavoriteTopics()
+    func save_savesChangesToRepository() async {
+        sut.save()
         #expect(mockTopicsRepository._didCallSaveChanges)
     }
 

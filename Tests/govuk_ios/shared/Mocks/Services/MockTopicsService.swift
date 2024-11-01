@@ -36,9 +36,9 @@ class MockTopicsService: TopicsServiceInterface {
         _stubbedFetchFavoriteTopics ?? []
     }
 
-    var _updateFavoriteTopicsCalled = false
-    func updateFavoriteTopics() {
-        _updateFavoriteTopicsCalled = true
+    var _saveCalled = false
+    func save() {
+        _saveCalled = true
     }
     
     var _stubbedDownloadTopicsListResult: Result<[TopicResponseItem], TopicsServiceError>?

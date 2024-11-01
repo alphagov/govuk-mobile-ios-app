@@ -6,7 +6,7 @@ protocol TopicsServiceInterface {
                            completion: @escaping FetchTopicDetailsResult)
     func fetchAllTopics() -> [Topic]
     func fetchFavoriteTopics() -> [Topic]
-    func updateFavoriteTopics()
+    func save()
     func setHasEditedTopics()
     var hasTopicsBeenEdited: Bool { get }
     var hasOnboardedTopics: Bool { get }
@@ -63,7 +63,7 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.fetchFavoriteTopics()
     }
 
-    func updateFavoriteTopics() {
+    func save() {
         topicsRepository.saveChanges()
     }
 

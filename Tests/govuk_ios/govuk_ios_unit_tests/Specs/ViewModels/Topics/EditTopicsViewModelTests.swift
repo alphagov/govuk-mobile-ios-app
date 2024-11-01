@@ -38,7 +38,7 @@ struct EditTopicsViewModelTests {
         #expect(row.title == "title0")
         row.action(true)
         #expect(sut.topics[0].isFavorite)
-        #expect(mockTopicService._updateFavoriteTopicsCalled)
+        #expect(mockTopicService._saveCalled)
     }
 }
 

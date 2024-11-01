@@ -25,7 +25,7 @@ class WidgetView: UIView {
 
     private func updateBorderColor() {
         if decorateView {
-            layer.borderColor = UIColor.secondaryBorder.cgColor
+            layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
         }
     }
 

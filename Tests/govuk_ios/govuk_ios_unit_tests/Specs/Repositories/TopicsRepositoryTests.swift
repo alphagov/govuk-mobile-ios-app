@@ -6,16 +6,10 @@ import CoreData
 
 @Suite
 struct TopicsRepositoryTests {
-    
-    let coreData = CoreDataRepository.arrangeAndLoad
-    let sut: TopicsRepository
-
-    init() {
-        self.sut = TopicsRepository(coreData: coreData)
-    }
-
     @Test
     func saveTopicsList_doesSaveResponseItems() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         sut.saveTopicsList(TopicResponseItem.arrangeMultiple)
         let topics = sut.fetchAllTopics()
         #expect(topics.count == 3)
@@ -25,6 +19,8 @@ struct TopicsRepositoryTests {
     
     @Test
     func saveTopicsList_newTopicsNotFavoritedAfterInitialLaunch() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         // Given I have started the app the first time, and gotten topics
         var topicResponseItems = TopicResponseItem.arrangeMultiple
         sut.saveTopicsList(topicResponseItems)
@@ -47,6 +43,8 @@ struct TopicsRepositoryTests {
 
     @Test
     func fetchFavoriteTopics_onlyReturnsFavorites() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
         Topic.arrange(context: coreData.viewContext, isFavourite: false)
 
@@ -57,6 +55,8 @@ struct TopicsRepositoryTests {
     
     @Test
     func saveChanges_persistsDataAsExpected() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         Topic.arrangeMultiple(context: coreData.viewContext)
 
         sut.saveChanges()

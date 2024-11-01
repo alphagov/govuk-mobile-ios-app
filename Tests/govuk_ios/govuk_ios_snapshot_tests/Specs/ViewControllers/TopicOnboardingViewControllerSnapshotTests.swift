@@ -38,6 +38,8 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         let viewController = TopicOnboardingViewController(
             viewModel: viewModel
         )
+        viewController.beginAppearanceTransition(true, animated: false)
+        viewController.endAppearanceTransition()
         return viewController
     }
 }

@@ -1,7 +1,7 @@
 import UIKit
 
 class TopicsOnboardingWidgetView: UIView {
-    let viewModel: TopicsOnboardingWidgetViewModel
+    private let viewModel: TopicsOnboardingWidgetViewModel
 
     private var rowCount = 2
 
@@ -98,12 +98,15 @@ class TopicsOnboardingWidgetView: UIView {
     }
 
     private func createOnboardingTopicCard(for topic: Topic) -> TopicOnboardingCard {
-        let model = TopicOnboardingCardModel(topic: topic) { [weak self] isSelected in
-            self?.viewModel.selectOnboardingTopic(
-                topic: topic,
-                isTopicSelected: isSelected
-            )
-        }
+        let model = TopicOnboardingCardModel(
+            topic: topic,
+            tapAction: { [weak self] isSelected in
+                self?.viewModel.selectOnboardingTopic(
+                    topic: topic,
+                    isTopicSelected: isSelected
+                )
+            }
+        )
         let topicCard = TopicOnboardingCard(viewModel: model)
         topicCard.translatesAutoresizingMaskIntoConstraints = false
         return topicCard

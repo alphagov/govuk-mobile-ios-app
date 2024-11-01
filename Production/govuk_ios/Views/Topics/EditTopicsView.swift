@@ -15,20 +15,20 @@ struct EditTopicsView: View {
         }
         .navigationTitle(String.topics.localized("editTopicsTitle"))
         .toolbar {
-            HStack {
-                Spacer()
-                doneButton
-            }
+            doneButton
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
     }
 
-    private var doneButton: some View {
-        Button(String.topics.localized("doneButtonTitle")) {
-            viewModel.dismissAction()
-        }.foregroundColor(Color(UIColor.govUK.text.link))
+    private var doneButton: some ToolbarContent {
+        ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
+            Button(String.topics.localized("doneButtonTitle")) {
+                viewModel.dismissAction()
+            }
+            .foregroundColor(Color(UIColor.govUK.text.link))
+        }
     }
 }
 

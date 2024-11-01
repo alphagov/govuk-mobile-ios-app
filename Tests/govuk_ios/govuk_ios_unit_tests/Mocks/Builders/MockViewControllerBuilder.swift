@@ -82,13 +82,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     
     var _stubbedEditTopicsViewController: UIViewController?
     var _receivedDoneButtonAction: (() -> Void)?
-    override func editTopics(
-        analyticsService: any AnalyticsServiceInterface,
-        topicsService: any TopicsServiceInterface,
-        dismissAction: @escaping () -> Void) -> UIViewController {
-            _receivedDoneButtonAction = dismissAction
-            return _stubbedEditTopicsViewController ?? UIViewController()
-        }
+    override func editTopics(analyticsService: any AnalyticsServiceInterface,
+                             topicsService: any TopicsServiceInterface,
+                             dismissAction: @escaping () -> Void) -> UIViewController {
+        _receivedDoneButtonAction = dismissAction
+        return _stubbedEditTopicsViewController ?? UIViewController()
+    }
 
     var _stubbedAllTopicsViewController: UIViewController?
     var _receivedTopicAction: ((Topic) -> Void)?
@@ -97,5 +96,14 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                             topicsService topicService: TopicsServiceInterface) -> UIViewController {
         _receivedTopicAction = topicAction
         return _stubbedAllTopicsViewController ?? UIViewController()
+    }
+
+    var _receivedTopicOnboardingDismissAction: (() -> Void)?
+    var _stubbedTopicOnboardingViewController: UIViewController?
+    override func topicOnboarding(analyticsService: AnalyticsServiceInterface,
+                                  topicsService: TopicsServiceInterface,
+                                  dismissAction: @escaping () -> Void) -> UIViewController {
+        _receivedTopicOnboardingDismissAction = dismissAction
+        return _stubbedTopicOnboardingViewController ?? UIViewController()
     }
 }

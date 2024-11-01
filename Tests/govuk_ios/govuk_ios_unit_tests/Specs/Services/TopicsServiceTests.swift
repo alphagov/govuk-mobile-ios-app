@@ -3,7 +3,7 @@ import Testing
 
 @testable import govuk_ios
 
-@Suite
+@Suite(.serialized)
 struct TopicsServiceTests {
     var sut: TopicsService!
     var mockTopicsServiceClient: MockTopicsServiceClient!
@@ -14,7 +14,8 @@ struct TopicsServiceTests {
         mockTopicsRepository = MockTopicsRepository()
         sut = TopicsService(
             topicsServiceClient: mockTopicsServiceClient,
-            topicsRepository: mockTopicsRepository
+            topicsRepository: mockTopicsRepository,
+            userDefaults: MockUserDefaults()
         )
     }
 
@@ -63,8 +64,8 @@ struct TopicsServiceTests {
     }
 
     @Test
-    func updateFavorites_savesChangesToRepository() async {
-        sut.updateFavoriteTopics()
+    func save_savesChangesToRepository() async {
+        sut.save()
         #expect(mockTopicsRepository._didCallSaveChanges)
     }
 
@@ -84,4 +85,70 @@ struct TopicsServiceTests {
         #expect(mockTopicsServiceClient._receivedFetchTopicsDetailsTopicRef == "test_ref")
     }
 
+    @Test
+    func setHasOnboardedTopics_setsOnboardingToTrue() {
+
+        let mockUserDefaults = MockUserDefaults()
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(mockUserDefaults.bool(forKey: .hasOnboardedTopics) == false)
+
+        sut.setHasOnboardedTopics()
+
+        #expect(mockUserDefaults.bool(forKey: .hasOnboardedTopics))
+    }
+
+
+    @Test
+    func setHasEditedTopics_setsHasEditedTopicsToTrue() {
+
+        let mockUserDefaults = MockUserDefaults()
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics) == false)
+
+        sut.setHasEditedTopics()
+
+        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics))
+    }
+
+    @Test(.serialized, arguments: [true, false])
+    func hasOnboardedTopics_returnsExpectedResult(expectedValue: Bool) {
+
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults.set(bool: expectedValue, forKey: .hasOnboardedTopics)
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(sut.hasOnboardedTopics == expectedValue)
+    }
+
+    @Test(.serialized, arguments: [true, false])
+    func hasTopicsBeenEdited_returnsExpectedResult(expectedValue: Bool) {
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.hasEditedTopics.rawValue)
+        mockUserDefaults.synchronize()
+
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(sut.hasTopicsBeenEdited == expectedValue)
+    }
 }

@@ -7,19 +7,19 @@ import UIKit
 @MainActor
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     let coreData = CoreDataRepository.arrangeAndLoad
-    let topicService = MockTopicsService()
+    let mockTopicService = MockTopicsService()
 
     func test_loadInNavigationController_light_rendersCorrectly() {
-        topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
-
+        mockTopicService._stubbedHasTopicsBeenEdited = true
+        mockTopicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
         var topics = Topic.arrangeMultipleFavourites(
             context: coreData.viewContext
         )
 
-        topicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedFetchAllTopics = topics
 
         topics.removeLast()
-        topicService._stubbedFetchFavoriteTopics = topics
+        mockTopicService._stubbedFetchFavoriteTopics = topics
 
         VerifySnapshotInNavigationController(
             viewController: viewController(),
@@ -29,12 +29,12 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
+        mockTopicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
         let topics = Topic.arrangeMultipleFavourites(
             context: coreData.viewContext
         )
-        topicService._stubbedFetchAllTopics = topics
-        topicService._stubbedFetchFavoriteTopics = topics
+        mockTopicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedFetchFavoriteTopics = topics
 
         VerifySnapshotInNavigationController(
             viewController: viewController(),
@@ -45,7 +45,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
 
     func viewController() -> HomeViewController {
         let topicsViewModel = TopicsWidgetViewModel(
-            topicsService: topicService,
+            topicsService: mockTopicService,
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }

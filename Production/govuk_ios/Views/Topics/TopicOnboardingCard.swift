@@ -22,7 +22,6 @@ class TopicOnboardingCard: UIView {
             "topicOnboardingCardUnselected"
         )
         label.textAlignment = .center
-        label.textColor = UIColor.govUK.fills.surfaceButtonPrimary
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         return label
@@ -59,7 +58,7 @@ class TopicOnboardingCard: UIView {
         let image = UIImage(systemName: viewModel.iconName)
         let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
         let imageView = UIImageView(image: image)
-        imageView.tintColor = UIColor.govUK.fills.surfaceButtonPrimary
+        imageView.tintColor = UIColor.govUK.text.link
         imageView.preferredSymbolConfiguration = config
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return imageView
@@ -92,7 +91,7 @@ class TopicOnboardingCard: UIView {
         layer.borderWidth = 1
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        layer.borderColor = UIColor.secondaryBorder.cgColor
+        layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
         addSubview(cardStackView)
         selectedStackView.addArrangedSubview(selectedIconImageView)
         selectedStackView.addArrangedSubview(selectedLabel)
@@ -100,6 +99,7 @@ class TopicOnboardingCard: UIView {
         cardStackView.addArrangedSubview(titleLabel)
         cardStackView.addArrangedSubview(descriptionLabel)
         cardStackView.addArrangedSubview(selectedStackView)
+        toggleSelectedIconAndTextViews()
     }
 
     private func configureConstraints() {
@@ -128,13 +128,13 @@ class TopicOnboardingCard: UIView {
             target: self,
             action: #selector(cardTapped)
         )
-        self.addGestureRecognizer(tapGestureRecognizer)
+        addGestureRecognizer(tapGestureRecognizer)
     }
 
     private func configureAccessibility() {
-        self.isAccessibilityElement = true
-        self.accessibilityTraits = .button
-        self.accessibilityLabel = viewModel.title
+        isAccessibilityElement = true
+        accessibilityTraits = .button
+        accessibilityLabel = viewModel.title
     }
 
     @objc
@@ -154,7 +154,7 @@ class TopicOnboardingCard: UIView {
 
         selectedLabel.textColor = viewModel.isSelected ?
         UIColor.govUK.text.buttonSuccess :
-        UIColor.govUK.fills.surfaceButtonPrimary
+        UIColor.govUK.text.link
 
         selectedIconImageView.tintColor = viewModel.isSelected ?
         UIColor.govUK.text.buttonSuccess :

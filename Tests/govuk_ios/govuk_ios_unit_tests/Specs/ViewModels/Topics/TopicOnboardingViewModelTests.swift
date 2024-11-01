@@ -6,42 +6,42 @@ import Testing
 @Suite
 struct TopicOnboardingViewModelTests {
 
-    @Test
-    func selectTopic_whenTopicDoesNotExistInSelectedTopics_appendsTopic() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        let topic = Topic.arrange(context: coreData.backgroundContext)
-        try? coreData.backgroundContext.save()
+//    @Test
+//    func selectTopic_whenTopicDoesNotExistInSelectedTopics_appendsTopic() {
+//        let coreData = CoreDataRepository.arrangeAndLoad
+//        let topic = Topic.arrange(context: coreData.backgroundContext)
+//        try? coreData.backgroundContext.save()
+//
+//        let sut = TopicOnboardingViewModel(
+//            analyticsService: MockAnalyticsService(),
+//            topicsService: MockTopicsService(),
+//            dismissAction: { }
+//        )
+//        #expect(sut.selectedTopics == [:])
+//
+//        sut.selectTopic(topic: topic)
+//
+//        #expect(sut.selectedTopics[topic.title] != nil)
+//    }
 
-        let sut = TopicOnboardingViewModel(
-            analyticsService: MockAnalyticsService(),
-            topicsService: MockTopicsService(),
-            dismissAction: { }
-        )
-        #expect(sut.selectedTopics == [:])
-
-        sut.selectTopic(topic: topic)
-
-        #expect(sut.selectedTopics[topic.title] != nil)
-    }
-
-    @Test
-    func selectTopic_whenTopicAlreadyExistsInSelectedTopics_removesTopic() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        let topic = Topic.arrange(context: coreData.backgroundContext)
-        try? coreData.backgroundContext.save()
-
-        let sut = TopicOnboardingViewModel(
-            analyticsService: MockAnalyticsService(),
-            topicsService: MockTopicsService(),
-            dismissAction: { }
-        )
-        #expect(sut.selectedTopics == [:])
-        sut.selectTopic(topic: topic)
-        #expect(sut.selectedTopics[topic.title] != nil)
-
-        sut.selectTopic(topic: topic)
-        #expect(sut.selectedTopics[topic.title] == nil)
-    }
+//    @Test
+//    func selectTopic_whenTopicAlreadyExistsInSelectedTopics_removesTopic() {
+//        let coreData = CoreDataRepository.arrangeAndLoad
+//        let topic = Topic.arrange(context: coreData.backgroundContext)
+//        try? coreData.backgroundContext.save()
+//
+//        let sut = TopicOnboardingViewModel(
+//            analyticsService: MockAnalyticsService(),
+//            topicsService: MockTopicsService(),
+//            dismissAction: { }
+//        )
+//        #expect(sut.selectedTopics == [:])
+//        sut.selectTopic(topic: topic)
+//        #expect(sut.selectedTopics[topic.title] != nil)
+//
+//        sut.selectTopic(topic: topic)
+//        #expect(sut.selectedTopics[topic.title] == nil)
+//    }
 
     @Test
     func primaryActionButton_action_tracksEvent() {

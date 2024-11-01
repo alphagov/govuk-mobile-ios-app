@@ -1,11 +1,12 @@
 import Foundation
 import UIComponents
+import UIKit
 
 class TopicOnboardingViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let dismissAction: () -> Void
-    @Published var isTopicsSelected: Bool = false
+    @Published var isTopicSelected: Bool = false
     private var selectedTopics: [String: Topic] = [:]
 
     let title = String.topics.localized(
@@ -38,14 +39,14 @@ class TopicOnboardingViewModel: ObservableObject {
         } else {
             selectedTopics[topic.title] = topic
         }
-        setHasTopicsBeenSelected()
+        setIsTopicSelected()
     }
 
-    private func setHasTopicsBeenSelected() {
-        isTopicsSelected = !selectedTopics.isEmpty
+    private func setIsTopicSelected() {
+        isTopicSelected = !selectedTopics.isEmpty
     }
 
-    var topicsWidget: WidgetView {
+    var topicsWidget: UIView {
         let topicWidgetViewModel = TopicsOnboardingWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
@@ -54,12 +55,9 @@ class TopicOnboardingViewModel: ObservableObject {
             }
         )
 
-        let content = TopicsOnboardingWidgetView(
+        return TopicsOnboardingWidgetView(
             viewModel: topicWidgetViewModel
         )
-        let widget = WidgetView(decorateView: false)
-        widget.addContent(content)
-        return widget
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {

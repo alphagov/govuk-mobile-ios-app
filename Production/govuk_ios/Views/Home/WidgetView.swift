@@ -42,10 +42,22 @@ class WidgetView: UIView {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: padding)
+            contentView.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: padding
+            ),
+            contentView.rightAnchor.constraint(
+                equalTo: rightAnchor,
+                constant: -padding
+            ),
+            contentView.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: -padding
+            ),
+            contentView.leftAnchor.constraint(
+                equalTo: leftAnchor,
+                constant: padding
+            )
         ])
     }
 

@@ -123,7 +123,7 @@ struct TopicsServiceTests {
     }
 
     @Test(.serialized, arguments: [true, false])
-    func hasOnboardedTopics_returnsExaptedResult(expectedValue: Bool) {
+    func hasOnboardedTopics_returnsExpectedResult(expectedValue: Bool) {
 
         let mockUserDefaults = MockUserDefaults()
         mockUserDefaults.set(bool: expectedValue, forKey: .hasOnboardedTopics)
@@ -138,8 +138,7 @@ struct TopicsServiceTests {
     }
 
     @Test(.serialized, arguments: [true, false])
-    func hasTopicsBeenEdited_returnsExaptedResult(expectedValue: Bool) {
-
+    func hasTopicsBeenEdited_returnsExpectedResult(expectedValue: Bool) {
         let mockUserDefaults = MockUserDefaults()
         mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.hasEditedTopics.rawValue)
         mockUserDefaults.synchronize()

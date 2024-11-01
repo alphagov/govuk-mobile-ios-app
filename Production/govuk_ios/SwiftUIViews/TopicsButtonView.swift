@@ -19,7 +19,7 @@ struct TopicsButtonView: View {
                 .primary,
                 viewModel: viewModel.primaryButtonViewModel
             )
-            .disabled(!viewModel.isTopicsSelected)
+            .disabled(!viewModel.isTopicSelected)
             .accessibility(sortPriority: 1)
             .frame(
                 minHeight: 44,

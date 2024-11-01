@@ -42,7 +42,6 @@ struct TopicsOnboardingWidgetViewModelTests {
     func selectOnboardingTopic_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
 
-        let mockUserDefaults = UserDefaults()
         let sut = TopicsOnboardingWidgetViewModel(
             topicsService: topicService,
             analyticsService: mockAnalyticsService,
@@ -61,7 +60,6 @@ struct TopicsOnboardingWidgetViewModelTests {
     @Test
     func selectOnboardingTopic_invokesExpectedAction() async throws {
         var expectedValue = false
-        let mockUserDefaults = UserDefaults()
         let sut = TopicsOnboardingWidgetViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),

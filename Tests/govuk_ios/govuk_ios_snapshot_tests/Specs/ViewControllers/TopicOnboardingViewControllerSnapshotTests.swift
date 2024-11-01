@@ -13,14 +13,16 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
-            mode: .light
+            mode: .light,
+            prefersLargeTitles: true
         )
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
-            mode: .dark
+            mode: .dark,
+            prefersLargeTitles: true
         )
     }
 

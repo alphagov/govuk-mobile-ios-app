@@ -10,7 +10,7 @@ struct AnalyticsServiceTests {
     @Test
     func permissionState_notSet_returnsUnknown() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
@@ -23,7 +23,7 @@ struct AnalyticsServiceTests {
     @Test
     func permissionState_accepted_returnsAccepted() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
@@ -36,7 +36,7 @@ struct AnalyticsServiceTests {
     @Test
     func permissionState_rejected_returnsDenied() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
@@ -49,7 +49,7 @@ struct AnalyticsServiceTests {
     @Test
     func trackEvent_rejectedPermissions_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
@@ -64,7 +64,7 @@ struct AnalyticsServiceTests {
     @Test
     func trackScreen_rejectedPermissions_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
@@ -80,7 +80,7 @@ struct AnalyticsServiceTests {
     @Test
     func trackEvent_tracksEvents() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
@@ -97,7 +97,7 @@ struct AnalyticsServiceTests {
         let mockAnalyticsClient = MockAnalyticsClient()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: UserDefaults()
+            userDefaults: MockUserDefaults()
         )
         subject.setAcceptedAnalytics(accepted: true)
 
@@ -118,7 +118,7 @@ struct AnalyticsServiceTests {
     @Test
     func setAcceptedAnalytics_true_grantsPermissions() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
@@ -132,7 +132,7 @@ struct AnalyticsServiceTests {
     @Test
     func setAcceptedAnalytics_false_denysPermission() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = UserDefaults()
+        let mockUserDefaults = MockUserDefaults()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults

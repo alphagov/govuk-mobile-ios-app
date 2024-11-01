@@ -21,12 +21,14 @@ class TopicOnboardingViewController: BaseViewController,
 
     private lazy var subtitleLabel: UILabel = {
         let localView = UILabel()
+        localView.adjustsFontForContentSizeCategory = true
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.font = .govUK.body
         localView.text = viewModel.subtitle
         localView.textAlignment = .left
         localView.numberOfLines = 0
         localView.lineBreakMode = .byWordWrapping
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.textColor = UIColor.govUK.text.primary
+        localView.textColor = .govUK.text.primary
         return localView
     }()
 

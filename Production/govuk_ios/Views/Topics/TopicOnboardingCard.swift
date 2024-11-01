@@ -5,26 +5,27 @@ class TopicOnboardingCard: UIView {
     private let viewModel: TopicOnboardingCardModel
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.govUK.bodySemibold
-        label.adjustsFontForContentSizeCategory = true
-        label.numberOfLines = 0
-        label.text = viewModel.title
-        label.textAlignment = .center
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.lineBreakMode = .byWordWrapping
-        return label
+        let localView = UILabel()
+        localView.font = .govUK.bodySemibold
+        localView.adjustsFontForContentSizeCategory = true
+        localView.numberOfLines = 0
+        localView.text = viewModel.title
+        localView.textAlignment = .center
+        localView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        localView.lineBreakMode = .byWordWrapping
+        return localView
     }()
 
     private lazy var selectedLabel: UILabel = {
-        let label = UILabel()
-        label.text = String.topics.localized(
+        let localView = UILabel()
+        localView.font = .govUK.body
+        localView.text = String.topics.localized(
             "topicOnboardingCardUnselected"
         )
-        label.textAlignment = .center
-        label.adjustsFontForContentSizeCategory = true
-        label.numberOfLines = 0
-        return label
+        localView.textAlignment = .center
+        localView.adjustsFontForContentSizeCategory = true
+        localView.numberOfLines = 0
+        return localView
     }()
 
     private lazy var selectedIconImageView: UIImageView = {
@@ -44,14 +45,15 @@ class TopicOnboardingCard: UIView {
     }()
 
     private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.adjustsFontForContentSizeCategory = true
-        label.numberOfLines = 0
-        label.text = viewModel.description
-        label.textAlignment = .center
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.lineBreakMode = .byWordWrapping
-        return label
+        let localView = UILabel()
+        localView.font = .govUK.body
+        localView.adjustsFontForContentSizeCategory = true
+        localView.numberOfLines = 0
+        localView.text = viewModel.description
+        localView.textAlignment = .center
+        localView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        localView.lineBreakMode = .byWordWrapping
+        return localView
     }()
 
     private lazy var iconImageView: UIImageView = {

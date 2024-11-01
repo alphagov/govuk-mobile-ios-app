@@ -93,12 +93,12 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
                               navigationController: UINavigationController) -> BaseCoordinator {
         return _stubbedTopicCoordinator ?? MockBaseCoordinator()
     }
-    var _receivedTopicOnboardingDidDismissAction: (() -> Void)?
-    var _stubbedTopicOnboardingCoordinator: MockBaseCoordinator?
-    override func topicsOnboarding(
-        navigationController: UINavigationController,
-        didDismissAction: @escaping () -> Void) -> BaseCoordinator {
-            _receivedTopicOnboardingDidDismissAction = didDismissAction
-            return _stubbedTopicOnboardingCoordinator ?? MockBaseCoordinator()
+
+    var _receivedTopicsOnboardingDidDismissAction: (() -> Void)?
+    var _stubbedTopicsOnboardingCoordinator: MockBaseCoordinator?
+    override func topicsOnboarding(navigationController: UINavigationController,
+                                   didDismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedTopicsOnboardingDidDismissAction = didDismissAction
+        return _stubbedTopicsOnboardingCoordinator ?? MockBaseCoordinator()
     }
 }

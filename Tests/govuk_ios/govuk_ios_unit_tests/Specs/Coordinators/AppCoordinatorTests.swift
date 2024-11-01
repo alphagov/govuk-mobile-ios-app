@@ -55,7 +55,7 @@ struct AppCoordinatorTests {
         mockCoodinatorBuilder._receivedLaunchCompletion?()
         mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()
-        mockCoodinatorBuilder._receivedTopicOnboardingDidDismissAction?()
+        mockCoodinatorBuilder._receivedTopicsOnboardingDidDismissAction?()
 
         #expect(mockTabCoodinator._startCalled)
 

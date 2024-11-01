@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-final class TopicsOnboardingWidgetViewModel {
+final class TopicsOnboardingListViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let topicAction: (Topic) -> Void

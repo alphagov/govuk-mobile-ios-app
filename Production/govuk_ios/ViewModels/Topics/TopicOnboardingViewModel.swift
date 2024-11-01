@@ -47,7 +47,7 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     var topicsWidget: UIView {
-        let topicWidgetViewModel = TopicsOnboardingWidgetViewModel(
+        let topicWidgetViewModel = TopicsOnboardingListViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
             topicAction: { [weak self] topic in
@@ -55,7 +55,7 @@ class TopicOnboardingViewModel: ObservableObject {
             }
         )
 
-        return TopicsOnboardingWidgetView(
+        return TopicsOnboardingListView(
             viewModel: topicWidgetViewModel
         )
     }

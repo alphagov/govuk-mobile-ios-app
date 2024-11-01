@@ -1,7 +1,7 @@
 import UIKit
 
-class TopicsOnboardingWidgetView: UIView {
-    private let viewModel: TopicsOnboardingWidgetViewModel
+class TopicsOnboardingListView: UIView {
+    private let viewModel: TopicsOnboardingListViewModel
 
     private var rowCount = 2
 
@@ -15,7 +15,7 @@ class TopicsOnboardingWidgetView: UIView {
         return localView
     }()
 
-    init(viewModel: TopicsOnboardingWidgetViewModel) {
+    init(viewModel: TopicsOnboardingListViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureUI()

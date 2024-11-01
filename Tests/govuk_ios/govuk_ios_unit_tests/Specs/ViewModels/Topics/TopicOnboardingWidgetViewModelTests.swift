@@ -15,7 +15,7 @@ struct TopicsOnboardingWidgetViewModelTests {
 
         topicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
 
-        let sut = TopicsOnboardingWidgetViewModel(
+        let sut = TopicsOnboardingListViewModel(
             topicsService: topicService ,
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in }
@@ -28,7 +28,7 @@ struct TopicsOnboardingWidgetViewModelTests {
     func initializeModel_downloadFailure_returnsExpectedResult() async throws {
         topicService._stubbedDownloadTopicsListResult = .failure(.decodingError)
 
-        let sut = TopicsOnboardingWidgetViewModel(
+        let sut = TopicsOnboardingListViewModel(
             topicsService: topicService ,
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in }
@@ -42,7 +42,7 @@ struct TopicsOnboardingWidgetViewModelTests {
     func selectOnboardingTopic_sendsEvent() {
         let mockAnalyticsService = MockAnalyticsService()
 
-        let sut = TopicsOnboardingWidgetViewModel(
+        let sut = TopicsOnboardingListViewModel(
             topicsService: topicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in }
@@ -60,7 +60,7 @@ struct TopicsOnboardingWidgetViewModelTests {
     @Test
     func selectOnboardingTopic_invokesExpectedAction() async throws {
         var expectedValue = false
-        let sut = TopicsOnboardingWidgetViewModel(
+        let sut = TopicsOnboardingListViewModel(
             topicsService: topicService,
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in

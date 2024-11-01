@@ -291,6 +291,7 @@
 		5DC527B72C86FACA005E3158 /* CoreDataRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527B62C86FACA005E3158 /* CoreDataRepositoryTests.swift */; };
 		5DC527B92C8734A8005E3158 /* MockNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */; };
 		5DC527BC2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */; };
+		5DC70CBD2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70CBC2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift */; };
 		5DC79FA52CA15CE800014446 /* SearchServiceClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA42CA15CE800014446 /* SearchServiceClientTests.swift */; };
 		5DC79FA72CA170D600014446 /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA62CA170D600014446 /* SearchServiceTests.swift */; };
 		5DC79FAA2CA1744C00014446 /* MockSearchServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */; };
@@ -684,6 +685,7 @@
 		5DC527B62C86FACA005E3158 /* CoreDataRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepositoryTests.swift; sourceTree = "<group>"; };
 		5DC527B82C8734A8005E3158 /* MockNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationCenter.swift; sourceTree = "<group>"; };
 		5DC527BB2C8736D9005E3158 /* CoreDataRepository+Arrangers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataRepository+Arrangers.swift"; sourceTree = "<group>"; };
+		5DC70CBC2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Convenience.swift"; sourceTree = "<group>"; };
 		5DC79FA42CA15CE800014446 /* SearchServiceClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClientTests.swift; sourceTree = "<group>"; };
 		5DC79FA62CA170D600014446 /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
 		5DC79FA92CA1744C00014446 /* MockSearchServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchServiceClient.swift; sourceTree = "<group>"; };
@@ -1653,6 +1655,7 @@
 				5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */,
 				3DEC85A92C89D9200044D5F9 /* UIApplication+URLOpener.swift */,
 				5D899A212C946F8A0074C0AD /* UIBarButtonItem+Convenience.swift */,
+				5DC70CBC2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift */,
 				5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */,
 				5DBE08012C480CA700B58DBE /* UINavigationController+Convenience.swift */,
 				5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */,
@@ -2284,6 +2287,7 @@
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
 				16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
+				5DC70CBD2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift in Sources */,
 				5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */,
 				3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */,
 				5DA44C3F2C2EF33600D8FE7C /* TestViewModel.swift in Sources */,

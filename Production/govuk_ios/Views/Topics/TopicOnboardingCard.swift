@@ -89,6 +89,7 @@ class TopicOnboardingCard: UIView {
     }
 
     private func configureUI() {
+        layoutMargins = .init(all: 16)
         backgroundColor = UIColor.govUK.fills.surfaceCard
         layer.borderWidth = 1
         layer.cornerRadius = 10
@@ -107,20 +108,16 @@ class TopicOnboardingCard: UIView {
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             cardStackView.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 16
+                equalTo: layoutMarginsGuide.topAnchor
             ),
             cardStackView.bottomAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.bottomAnchor,
-                constant: -16
+                equalTo: layoutMarginsGuide.bottomAnchor
             ),
             cardStackView.leadingAnchor.constraint(
-                equalTo: layoutMarginsGuide.leadingAnchor,
-                constant: 8
+                equalTo: layoutMarginsGuide.leadingAnchor
             ),
             cardStackView.trailingAnchor.constraint(
-                equalTo: layoutMarginsGuide.trailingAnchor,
-                constant: -8
+                equalTo: layoutMarginsGuide.trailingAnchor
             )
         ])
     }

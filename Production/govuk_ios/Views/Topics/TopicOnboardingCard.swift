@@ -133,7 +133,10 @@ class TopicOnboardingCard: UIView {
     private func configureAccessibility() {
         isAccessibilityElement = true
         accessibilityTraits = .button
-        accessibilityLabel = viewModel.title
+        if viewModel.isSelected {
+            accessibilityTraits.insert(.selected)
+        }
+        accessibilityLabel = viewModel.title + ", " + (viewModel.description ?? "")
     }
 
     @objc
@@ -144,6 +147,7 @@ class TopicOnboardingCard: UIView {
         viewModel.tapAction(
             viewModel.isSelected
         )
+        configureAccessibility()
     }
 
     private func toggleSelectedIconAndTextViews() {

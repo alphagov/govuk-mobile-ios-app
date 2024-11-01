@@ -3,7 +3,10 @@ import UIKit
 import SwiftUI
 import UIComponents
 
-class TopicOnboardingViewController: BaseViewController {
+class TopicOnboardingViewController: BaseViewController,
+                                     TrackableScreen {
+    var trackingName: String { "Select relevant topics" }
+
     private let viewModel: TopicOnboardingViewModel
 
     init(viewModel: TopicOnboardingViewModel) {
@@ -61,8 +64,6 @@ class TopicOnboardingViewController: BaseViewController {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        title = viewModel.title
-        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         registerObservers()
     }
 
@@ -77,12 +78,15 @@ class TopicOnboardingViewController: BaseViewController {
 
     @objc
     private func topicsDidUpdate() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             self.topicsListView.updateTopics(self.viewModel.topics)
         }
     }
 
     private func configureUI() {
+        title = viewModel.title
+        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         view.addSubview(buttonView)
@@ -146,11 +150,5 @@ class TopicOnboardingViewController: BaseViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         topicsListView.updateTopics(viewModel.topics)
-    }
-}
-
-extension TopicOnboardingViewController: TrackableScreen {
-    var trackingName: String {
-        "Select relevant topics"
     }
 }

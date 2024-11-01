@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class TopicsOnboardingListView: UIView {
+class TopicOnboardingListView: UIView {
     private var rowCount = 2
 
     private lazy var cardStackView: UIStackView = {

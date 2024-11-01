@@ -6,7 +6,7 @@ import Testing
 
 @Suite
 @MainActor
-struct TopicsOnboardingCoordinatorTests {
+struct TopicOnboardingCoordinatorTests {
 
     init() {
         UIView.setAnimationsEnabled(false)
@@ -16,10 +16,10 @@ struct TopicsOnboardingCoordinatorTests {
     func start_setsTopicOnboardingViewController() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
-        mockViewControllerBuilder._stubbedTopicsOnboardingViewController = expectedViewController
+        mockViewControllerBuilder._stubbedTopicOnboardingViewController = expectedViewController
         let navigationController = UINavigationController()
 
-        let sut = TopicsOnboardingCoordinator(
+        let sut = TopicOnboardingCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
@@ -38,7 +38,7 @@ struct TopicsOnboardingCoordinatorTests {
         mockTopicService._stubbedHasOnboardedTopics = true
 
         let dismissed = await withCheckedContinuation { continuation in
-            let sut = TopicsOnboardingCoordinator(
+            let sut = TopicOnboardingCoordinator(
                 navigationController: UINavigationController(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 analyticsService: MockAnalyticsService(),
@@ -58,7 +58,7 @@ struct TopicsOnboardingCoordinatorTests {
         mockTopicService._stubbedHasOnboardedTopics = false
 
         let complete: Bool = try await withCheckedThrowingContinuation { continuation in
-            let sut = TopicsOnboardingCoordinator(
+            let sut = TopicOnboardingCoordinator(
                 navigationController: UINavigationController(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 analyticsService: MockAnalyticsService(),
@@ -80,9 +80,9 @@ struct TopicsOnboardingCoordinatorTests {
         mockTopicService._stubbedHasOnboardedTopics = false
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
-        mockViewControllerBuilder._stubbedTopicsOnboardingViewController = expectedViewController
+        mockViewControllerBuilder._stubbedTopicOnboardingViewController = expectedViewController
         let dismissed: Bool = try await withCheckedThrowingContinuation { continuation in
-            let sut = TopicsOnboardingCoordinator(
+            let sut = TopicOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 viewControllerBuilder: mockViewControllerBuilder,
                 analyticsService: MockAnalyticsService(),

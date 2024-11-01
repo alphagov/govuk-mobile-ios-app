@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 import Factory
 
-class TopicsOnboardingCoordinator: BaseCoordinator {
+class TopicOnboardingCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface

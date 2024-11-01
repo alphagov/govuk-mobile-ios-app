@@ -144,6 +144,17 @@
         }
       }
     },
+    "topicOnboardingPageSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topics you select will be shown on the app home pages so you can find them more easily"
+          }
+        }
+      }
+    },
     "topicOnboardingPageTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -155,18 +166,7 @@
         }
       }
     },
-    "topicsOnboardingPageSubtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Topics you select will be shown on the app home pages so you can find them more easily"
-          }
-        }
-      }
-    },
-    "topicsOnboardingPrimaryButtonTitle" : {
+    "topicOnboardingPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -177,7 +177,7 @@
         }
       }
     },
-    "topicsOnboardingSecondaryButtonTitle" : {
+    "topicOnboardingSecondaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

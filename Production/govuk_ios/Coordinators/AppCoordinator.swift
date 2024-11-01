@@ -40,8 +40,8 @@ class AppCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
-    private func startTopicsOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.topicsOnboarding(
+    private func startTopicOnboardingCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.topicOnboarding(
             navigationController: root,
             didDismissAction: { [weak self] in
                 self?.startTabs(url: url)
@@ -84,7 +84,7 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.onboarding(
             navigationController: root,
             dismissAction: { [weak self] in
-                self?.startTopicsOnboardingCoordinator(url: url)
+                self?.startTopicOnboardingCoordinator(url: url)
             }
         )
         start(coordinator)

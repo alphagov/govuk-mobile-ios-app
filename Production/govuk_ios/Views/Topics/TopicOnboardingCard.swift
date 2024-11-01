@@ -162,10 +162,6 @@ class TopicOnboardingCard: UIView {
     }
 
     private func toggleTintColorOfCard() {
-        configureColor()
-    }
-
-    private func configureColor() {
         backgroundColor = viewModel.isSelected ?
         UIColor.govUK.fills.surfaceCardSelected :
         UIColor.govUK.fills.surfaceCard

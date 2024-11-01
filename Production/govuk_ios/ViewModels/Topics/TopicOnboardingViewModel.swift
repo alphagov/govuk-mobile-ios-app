@@ -33,7 +33,7 @@ class TopicOnboardingViewModel: ObservableObject {
         self.dismissAction = dismissAction
     }
 
-    func selectTopic(topic: Topic) {
+    private func selectTopic(topic: Topic) {
         if let topic = selectedTopics[topic.title] {
             selectedTopics.removeValue(forKey: topic.title)
         } else {

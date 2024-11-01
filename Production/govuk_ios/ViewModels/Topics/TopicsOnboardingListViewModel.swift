@@ -5,7 +5,6 @@ final class TopicsOnboardingListViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let topicAction: (Topic) -> Void
-    private(set) var downloadError: TopicsServiceError?
 
     var allTopics: [Topic] {
         topicsService.fetchAllTopics()
@@ -21,11 +20,7 @@ final class TopicsOnboardingListViewModel {
     }
 
     private func fetchTopics() {
-        topicsService.downloadTopicsList { result in
-            if case .failure(let error) = result {
-                self.downloadError = error
-            }
-        }
+        topicsService.downloadTopicsList { _ in }
     }
 
     func selectOnboardingTopic(topic: Topic,

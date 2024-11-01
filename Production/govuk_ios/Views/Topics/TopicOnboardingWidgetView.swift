@@ -72,7 +72,8 @@ class TopicsOnboardingListView: UIView {
         }
     }
 
-    private func createRow(startingAt startIndex: Int, of topics: [Topic]) -> UIStackView {
+    private func createRow(startingAt startIndex: Int,
+                           of topics: [Topic]) -> UIStackView {
         let rowStack = createRowStack()
         let firstCard = createOnboardingTopicCard(for: topics[startIndex])
         rowStack.addArrangedSubview(firstCard)

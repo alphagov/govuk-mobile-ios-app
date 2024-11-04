@@ -131,8 +131,7 @@ class ViewControllerBuilder {
 
         let view = TopicDetailView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
-        viewController.title = viewModel.title
-        viewController.navigationItem.largeTitleDisplayMode = .always
+        viewController.navigationItem.largeTitleDisplayMode = .never
         viewController.navigationItem.backButtonTitle = viewModel.title
         return viewController
     }

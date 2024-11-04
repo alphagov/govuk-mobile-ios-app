@@ -65,12 +65,15 @@ class RecentActivityListViewController: BaseViewController,
     var trackingName: String { "Pages you've visited" }
 
     private let viewModel: RecentActivityListViewModel
+    private var tabBarHeight: CGFloat {
+        tabBarController?.tabBar.frame.height ?? 83.0
+    }
+    private var toolbarHeightConstraint: NSLayoutConstraint?
 
     init(viewModel: RecentActivityListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         title = viewModel.pageTitle
-        hidesBottomBarWhenPushed = true
     }
 
     required init?(coder: NSCoder) {
@@ -92,6 +95,11 @@ class RecentActivityListViewController: BaseViewController,
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        setEditing(false, animated: false)
+    }
+
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(tableView)
@@ -102,6 +110,9 @@ class RecentActivityListViewController: BaseViewController,
     }
 
     private func configureConstraints() {
+        toolbarHeightConstraint = editingToolbar.heightAnchor.constraint(
+            equalToConstant: tabBarHeight)
+        toolbarHeightConstraint?.isActive = true
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor
@@ -129,7 +140,7 @@ class RecentActivityListViewController: BaseViewController,
             editingToolbar.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor
             ),
-            editingToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            editingToolbar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             editingToolbar.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor
             )
@@ -142,9 +153,18 @@ class RecentActivityListViewController: BaseViewController,
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
         configureToolbarItems(animated: false)
+        self.tabBarController?.tabBar.isHidden = editing
         editingToolbar.isHidden = !editing
         if !editing {
             viewModel.endEditing()
+        }
+    }
+
+    override func viewDidLayoutSubviews() {
+        guard let items = editingToolbar.items else { return }
+        for item in items {
+            guard let item = item as? TopAlignedBarButtonItem else { continue }
+            item.updateLayout()
         }
     }
 
@@ -260,6 +280,11 @@ class RecentActivityListViewController: BaseViewController,
             removeBarButtonItem
         ]
         editingToolbar.setItems(items, animated: animated)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        toolbarHeightConstraint?.constant = tabBarHeight
     }
 }
 

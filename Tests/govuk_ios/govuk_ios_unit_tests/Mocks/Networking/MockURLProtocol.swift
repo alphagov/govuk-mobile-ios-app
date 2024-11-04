@@ -10,7 +10,6 @@ class MockURLProtocol: URLProtocol {
         request
     }
 
-//    static var requestHandler: ((URLRequest) -> (HTTPURLResponse, Data?, Error?)?)?
     static var requestHandlers: [String: ((URLRequest) -> (HTTPURLResponse, Data?, Error?)?)] = [:]
 
     override func startLoading() {

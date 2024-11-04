@@ -1,42 +1,42 @@
 import UIKit
 
 class TopAlignedBarButtonItem: UIBarButtonItem {
-    let customButton: UIButton
+    let actionButton: UIButton
 
     init(title: String,
          tint: UIColor,
          action: @escaping (UIAction) -> Void) {
-        customButton = UIButton(
+        actionButton = UIButton(
             type: .system,
             primaryAction: .init(title: title, handler: action)
         )
-        customButton.translatesAutoresizingMaskIntoConstraints = false
-        customButton.titleLabel?.font = UIFont.govUK.body
-        customButton.tintColor = tint
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.titleLabel?.font = UIFont.govUK.body
+        actionButton.tintColor = tint
 
         super.init()
-        self.customView = createContainer()
+        self.customView = createCustomView()
         self.customView?.isUserInteractionEnabled = true
     }
 
-    private func createContainer() -> UIView {
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(customButton)
+    private func createCustomView() -> UIView {
+        let localView = UIView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.addSubview(actionButton)
         NSLayoutConstraint.activate([
-            customButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            customButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 5),
-            containerView.widthAnchor.constraint(equalTo: customButton.widthAnchor)
+            actionButton.centerXAnchor.constraint(equalTo: localView.centerXAnchor),
+            actionButton.topAnchor.constraint(equalTo: localView.topAnchor, constant: 5),
+            localView.widthAnchor.constraint(equalTo: actionButton.widthAnchor)
         ])
-        return containerView
+        return localView
     }
 
     override var isEnabled: Bool {
         get {
-            customButton.isEnabled
+            actionButton.isEnabled
         }
         set {
-            customButton.isEnabled = newValue
+            actionButton.isEnabled = newValue
         }
     }
 

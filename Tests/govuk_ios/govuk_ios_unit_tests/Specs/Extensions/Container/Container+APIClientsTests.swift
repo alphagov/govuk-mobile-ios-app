@@ -26,7 +26,7 @@ struct Container_APIClientTests {
                 #expect(components?.host   == "search.service.gov.uk")
                 #expect(components?.path == "/v0_1/search.json")
                 #expect(request.httpMethod == "GET")
-                let data = request.bodySteamData
+                let data = request.bodyStreamData
                 #expect(data == nil)
                 return (.arrangeSuccess, nil, nil)
             }

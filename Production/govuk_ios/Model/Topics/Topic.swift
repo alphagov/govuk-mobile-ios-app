@@ -48,6 +48,12 @@ class Topic: NSManagedObject,
             return "star.fill"
         }
     }
+
+    func update(item: TopicResponseItem) {
+        self.ref = item.ref
+        self.title = item.title
+        self.topicDescription = item.description
+    }
 }
 
 extension Topic: DisplayableTopic {}

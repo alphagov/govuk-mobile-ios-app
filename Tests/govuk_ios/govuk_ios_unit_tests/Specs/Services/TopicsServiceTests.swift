@@ -22,10 +22,10 @@ struct TopicsServiceTests {
     @Test
     func downloadTopicsList_success_returnsExpectedData() async {
         let result = await withCheckedContinuation { continuation in
-            sut.downloadTopicsList { result in
+            sut.fetchRemoteList { result in
                 continuation.resume(returning: result)
             }
-            mockTopicsServiceClient._receivedFetchTopicsCompletion?(
+            mockTopicsServiceClient._receivedFetchListCompletion?(
                 .success(TopicResponseItem.arrangeMultiple)
             )
 
@@ -38,10 +38,10 @@ struct TopicsServiceTests {
     @Test
     func downloadTopicsList_failure_returnsExpectedResult() async {
         let result = await withCheckedContinuation { continuation in
-            sut.downloadTopicsList { result in
+            sut.fetchRemoteList { result in
                 continuation.resume(returning: result)
             }
-            mockTopicsServiceClient._receivedFetchTopicsCompletion?(
+            mockTopicsServiceClient._receivedFetchListCompletion?(
                 .failure(.decodingError)
             )
         }
@@ -52,14 +52,14 @@ struct TopicsServiceTests {
     }
 
     @Test
-    func fetchAllTopics_fetchesFromRepository() async {
-        _ = sut.fetchAllTopics()
+    func fetchAll_fetchesFromRepository() async {
+        _ = sut.fetchAll()
         #expect(mockTopicsRepository._didCallFetchAll)
     }
 
     @Test
-    func fetchFavoriteTopics_fetchesFromRepository() async {
-        _ = sut.fetchFavoriteTopics()
+    func fetchFavorites_fetchesFromRepository() async {
+        _ = sut.fetchFavorites()
         #expect(mockTopicsRepository._didCallFetchFavorites)
     }
 
@@ -70,19 +70,19 @@ struct TopicsServiceTests {
     }
 
     @Test
-    func fetchTopicDetails_success_returnsExpectedData() async {
+    func fetchDetails_success_returnsExpectedData() async {
         _ = await withCheckedContinuation { continuation in
-            sut.fetchTopicDetails(
-                topicRef: "test_ref",
+            sut.fetchDetails(
+                ref: "test_ref",
                 completion: { result in
                     continuation.resume(returning: result)
                 }
             )
-            mockTopicsServiceClient._receivedFetchTopicsDetailsCompletion?(
+            mockTopicsServiceClient._receivedFetchDetailsCompletion?(
                 .success(.arrange())
             )
         }
-        #expect(mockTopicsServiceClient._receivedFetchTopicsDetailsTopicRef == "test_ref")
+        #expect(mockTopicsServiceClient._receivedFetchDetailsRef == "test_ref")
     }
 
     @Test

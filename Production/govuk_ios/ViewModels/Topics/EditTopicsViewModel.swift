@@ -13,7 +13,7 @@ final class EditTopicsViewModel: ObservableObject {
         self.dismissAction = dismissAction
         self.topicsService = topicsService
         self.analyticsService = analyticsService
-        let localTopics = topicsService.fetchAllTopics()
+        let localTopics = topicsService.fetchAll()
         self.topics = localTopics
         var rows = [GroupedListRow]()
         localTopics.forEach { topic in
@@ -23,13 +23,13 @@ final class EditTopicsViewModel: ObservableObject {
                 isOn: topic.isFavorite,
                 action: { value in
                     topic.isFavorite = value
+                    topicsService.save()
                     let event = AppEvent.toggleTopic(
                         title: topic.title,
                         isFavorite: topic.isFavorite
                     )
                     analyticsService.track(event: event)
                     topicsService.setHasEditedTopics()
-                    topicsService.save()
                 }
             )
             rows.append(row)

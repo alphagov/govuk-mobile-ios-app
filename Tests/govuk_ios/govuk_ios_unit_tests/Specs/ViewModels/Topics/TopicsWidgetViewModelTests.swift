@@ -12,7 +12,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func initializeModel_downloadSuccess_returnsExpectedData() async throws {
-        mockTopicService._stubbedDownloadTopicsListResult = .success(TopicResponseItem.arrangeMultiple)
+        mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
@@ -21,13 +21,12 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
 
-        #expect(mockTopicService._dataReceived == true)
         #expect(sut.downloadError == nil)
     }
 
     @Test
     func initializeModel_downloadFailure_returnsExpectedResult() async throws {
-        mockTopicService._stubbedDownloadTopicsListResult = .failure(.decodingError)
+        mockTopicService._stubbedFetchRemoteListResult = .failure(.decodingError)
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
@@ -36,11 +35,11 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
 
-        #expect(mockTopicService._dataReceived == false)
         #expect(sut.downloadError == .decodingError)
     }
 
     @Test
+    @MainActor
     func didTapTopic_invokesExpectedAction() async throws {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
@@ -142,11 +141,12 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
+    @MainActor
     func allTopicsButtonHidden_isDisplayingAllTopics_returnsTrue() {
         mockTopicService._stubbedHasTopicsBeenEdited = false
 
-        let allOne = Topic.arrange(context: coreData.backgroundContext)
-        let allTwo = Topic.arrange(context: coreData.backgroundContext)
+        let allOne = Topic.arrange(context: coreData.viewContext)
+        let allTwo = Topic.arrange(context: coreData.viewContext)
 
         mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
 
@@ -161,11 +161,12 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
+    @MainActor
     func allTopicsButtonHidden_isDisplayingFavourites_allTopicsFavourited_returnsTrue() {
         mockTopicService._stubbedHasTopicsBeenEdited = true
 
-        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
-        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
+        let favouriteOne = Topic.arrange(context: coreData.viewContext)
+        let favouriteTwo = Topic.arrange(context: coreData.viewContext)
 
         mockTopicService._stubbedFetchFavoriteTopics = [favouriteOne, favouriteTwo]
         mockTopicService._stubbedFetchAllTopics = [favouriteOne, favouriteTwo]

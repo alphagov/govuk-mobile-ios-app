@@ -2,10 +2,10 @@ import Foundation
 import CoreData
 
 protocol TopicsRepositoryInterface {
-    func saveTopicsList(_ topicResponses: [TopicResponseItem])
-    func fetchFavoriteTopics() -> [Topic]
-    func fetchAllTopics() -> [Topic]
-    func saveChanges()
+    func save(topics: [TopicResponseItem])
+    func fetchFavorites() -> [Topic]
+    func fetchAll() -> [Topic]
+    func save()
 }
 
 struct TopicsRepository: TopicsRepositoryInterface {
@@ -15,62 +15,71 @@ struct TopicsRepository: TopicsRepositoryInterface {
         self.coreData = coreData
     }
 
-    func saveTopicsList(_ topicResponses: [TopicResponseItem]) {
+    func save(topics: [TopicResponseItem]) {
         let context = coreData.backgroundContext
-        topicResponses.forEach { topicResponse in
-            createOrUpdateTopic(
-                for: topicResponse,
-                in: context
-            )
-        }
+        deleteOldObjects(topics: topics, context: context)
+        createOrUpdateTopics(topics: topics, context: context)
         try? context.save()
     }
 
-    func saveChanges() {
+    private func deleteOldObjects(topics: [TopicResponseItem],
+                                  context: NSManagedObjectContext) {
+        let refs = topics.map(\.ref)
+        let request = Topic.fetchRequest()
+        let predicate = NSPredicate(format: "NOT ref IN %@", refs)
+        request.predicate = predicate
+        let deletedObjects = try? context.fetch(request)
+        deletedObjects?.forEach(context.delete)
+    }
+
+    private func createOrUpdateTopics(topics: [TopicResponseItem],
+                                      context: NSManagedObjectContext) {
+        topics.forEach { topicResponse in
+            createOrUpdateTopic(
+                responseItem: topicResponse,
+                context: context
+            )
+        }
+    }
+
+    func save() {
         try? coreData.viewContext.save()
     }
 
-    func fetchFavoriteTopics() -> [Topic] {
+    func fetchFavorites() -> [Topic] {
         fetch(
             predicate: .init(format: "isFavorite = true"),
             context: coreData.viewContext
         ).fetchedObjects ?? []
     }
 
-    func fetchAllTopics() -> [Topic] {
+    func fetchAll() -> [Topic] {
         fetch(
             predicate: nil,
             context: coreData.viewContext
         ).fetchedObjects ?? []
     }
 
-    private func fetchTopic(ref: String,
-                            context: NSManagedObjectContext) -> Topic? {
+    private func fetch(ref: String,
+                       context: NSManagedObjectContext) -> Topic? {
         fetch(
             predicate: .init(format: "ref = %@", ref),
             context: context
         ).fetchedObjects?.first
     }
 
-    private func createOrUpdateTopic(for topicResponse: TopicResponseItem,
-                                     in context: NSManagedObjectContext) {
-        guard let topic = fetchTopic(ref: topicResponse.ref,
-                                     context: context) else {
-            createTopic(
-                for: topicResponse,
-                in: context)
-            return
-        }
-        topic.title = topicResponse.title
-        topic.topicDescription = topicResponse.description
+    private func createOrUpdateTopic(responseItem: TopicResponseItem,
+                                     context: NSManagedObjectContext) {
+        let topic = fetch(
+            ref: responseItem.ref,
+            context: context
+        ) ??
+        create(context: context)
+        topic.update(item: responseItem)
     }
 
-    private func createTopic(for topicResponse: TopicResponseItem,
-                             in context: NSManagedObjectContext) {
-        let topic = Topic(context: context)
-        topic.ref = topicResponse.ref
-        topic.title = topicResponse.title
-        topic.topicDescription = topicResponse.description
+    private func create(context: NSManagedObjectContext? = nil) -> Topic {
+        Topic(context: context ?? coreData.viewContext)
     }
 
     private func fetch(predicate: NSPredicate?,

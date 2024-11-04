@@ -4,9 +4,9 @@ typealias FetchTopicsListResult = (Result<[TopicResponseItem], TopicsServiceErro
 typealias FetchTopicDetailsResult = (Result<TopicDetailResponse, TopicsServiceError>) -> Void
 
 protocol TopicsServiceClientInterface {
-    func fetchTopicsList(completion: @escaping FetchTopicsListResult)
-    func fetchTopicDetails(topicRef: String,
-                           completion: @escaping FetchTopicDetailsResult)
+    func fetchList(completion: @escaping FetchTopicsListResult)
+    func fetchDetails(ref: String,
+                      completion: @escaping FetchTopicDetailsResult)
 }
 
 enum TopicsServiceError: Error {
@@ -22,7 +22,7 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
         self.serviceClient = serviceClient
     }
 
-    func fetchTopicsList(completion: @escaping FetchTopicsListResult) {
+    func fetchList(completion: @escaping FetchTopicsListResult) {
         let topicsRequest = GOVRequest(
             urlPath: "/static/topics/list",
             method: .get,
@@ -50,10 +50,10 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
         )
     }
 
-    func fetchTopicDetails(topicRef: String,
-                           completion: @escaping FetchTopicDetailsResult) {
+    func fetchDetails(ref: String,
+                      completion: @escaping FetchTopicDetailsResult) {
         let topicsRequest = GOVRequest(
-            urlPath: "/static/topics/" + topicRef,
+            urlPath: "/static/topics/" + ref,
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,

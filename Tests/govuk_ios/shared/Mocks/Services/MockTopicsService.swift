@@ -27,12 +27,12 @@ class MockTopicsService: TopicsServiceInterface {
     let coreData = CoreDataRepository.arrangeAndLoad
     
     var _stubbedFetchAllTopics: [Topic]?
-    func fetchAllTopics() -> [Topic] {
+    func fetchAll() -> [Topic] {
         _stubbedFetchAllTopics ?? []
     }
 
     var _stubbedFetchFavoriteTopics: [Topic]?
-    func fetchFavoriteTopics() -> [Topic] {
+    func fetchFavorites() -> [Topic] {
         _stubbedFetchFavoriteTopics ?? []
     }
 
@@ -41,11 +41,9 @@ class MockTopicsService: TopicsServiceInterface {
         _saveCalled = true
     }
     
-    var _stubbedDownloadTopicsListResult: Result<[TopicResponseItem], TopicsServiceError>?
-    var _dataReceived = false
-    func downloadTopicsList(completion: @escaping FetchTopicsListResult) {
-        if let result = _stubbedDownloadTopicsListResult {
-            _dataReceived = (try? result.get()) != nil
+    var _stubbedFetchRemoteListResult: Result<[TopicResponseItem], TopicsServiceError>?
+    func fetchRemoteList(completion: @escaping FetchTopicsListResult) {
+        if let result = _stubbedFetchRemoteListResult {
             completion(result)
         } else {
             completion(.failure(.apiUnavailable))
@@ -53,8 +51,8 @@ class MockTopicsService: TopicsServiceInterface {
     }
     
     var _stubbedFetchTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
-    func fetchTopicDetails(topicRef: String,
-                           completion: @escaping FetchTopicDetailsResult) {
+    func fetchDetails(ref: String,
+                      completion: @escaping FetchTopicDetailsResult) {
         if let result = _stubbedFetchTopicDetailsResult {
             completion(result)
         } else {

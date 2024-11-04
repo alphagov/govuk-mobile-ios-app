@@ -5,24 +5,24 @@ import Foundation
 class MockTopicsRepository: TopicsRepositoryInterface {
     
     var _didCallSaveTopicsList = false
-    func saveTopicsList(_ topicResponses: [TopicResponseItem]) {
+    func save(topics: [TopicResponseItem]) {
         _didCallSaveTopicsList = true
     }
     
     var _didCallFetchFavorites = false
-    func fetchFavoriteTopics() -> [Topic] {
+    func fetchFavorites() -> [Topic] {
         _didCallFetchFavorites = true
         return []
     }
     
     var _didCallFetchAll = false
-    func fetchAllTopics() -> [Topic] {
+    func fetchAll() -> [Topic] {
         _didCallFetchAll = true
         return []
     }
     
     var _didCallSaveChanges = false
-    func saveChanges() {
+    func save() {
         _didCallSaveChanges = true
     }
 }

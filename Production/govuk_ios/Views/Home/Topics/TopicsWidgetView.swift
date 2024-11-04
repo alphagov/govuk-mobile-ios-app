@@ -29,19 +29,11 @@ class TopicsWidgetView: UIView {
         return label
     }()
 
-    private lazy var editButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(String.common.localized("editButtonTitle"), for: .normal)
-        button.titleLabel?.font = UIFont.govUK.bodySemibold
-        button.addTarget(
-            self,
-            action: #selector(editButtonPressed),
-            for: .touchUpInside
-        )
-        button.tintColor = UIColor.govUK.text.link
-        button.accessibilityLabel = String.topics.localized("editTopicsTitle")
-        return button
-    }()
+    private lazy var editButton: UIButton = .body(
+        title: String.common.localized("editButtonTitle"),
+        accessibilityLabel: String.topics.localized("editTopicsTitle"),
+        action: viewModel.editAction
+    )
 
     private lazy var headerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -82,14 +74,14 @@ class TopicsWidgetView: UIView {
             name: .NSManagedObjectContextDidSave,
             object: nil
         )
-        updateTopics(viewModel.favoriteTopics)
+        updateTopics(viewModel.displayedTopics)
         showAllTopicsButton()
     }
 
     @objc
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
-            self.updateTopics(self.viewModel.favoriteTopics)
+            self.updateTopics(self.viewModel.displayedTopics)
             self.showAllTopicsButton()
         }
     }
@@ -176,11 +168,6 @@ class TopicsWidgetView: UIView {
         return topicCard
     }
 
-    @objc
-    private func editButtonPressed() {
-        viewModel.editAction()
-    }
-
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -190,7 +177,7 @@ class TopicsWidgetView: UIView {
         let sizeClass = UITraitCollection.current.verticalSizeClass
         if sizeClass != previousTraitCollection?.verticalSizeClass {
             rowCount = sizeClass == .regular ? 2 : 4
-            updateTopics(viewModel.favoriteTopics)
+            updateTopics(viewModel.displayedTopics)
         }
     }
 

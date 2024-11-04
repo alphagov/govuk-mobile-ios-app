@@ -92,7 +92,7 @@ struct ViewControllerBuilderTests {
         #expect(result?.trackingName == "Pages you've visited")
         #expect(result?.trackingTitle == "Pages you've visited")
     }
-    
+
     @Test
     func topicDetail_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()
@@ -104,7 +104,7 @@ struct ViewControllerBuilderTests {
             subtopicAction: { _ in },
             stepByStepAction: { _ in }
         )
-        
+
         let rootView = (result as? HostingViewController<TopicDetailView<TopicDetailViewModel>>)?.rootView
         #expect(rootView != nil)
     }
@@ -117,7 +117,7 @@ struct ViewControllerBuilderTests {
             topicsService: MockTopicsService(),
             dismissAction: { }
         )
-        
+
         let rootView = (result as? HostingViewController<EditTopicsView>)?.rootView
         #expect(rootView != nil)
     }
@@ -132,5 +132,17 @@ struct ViewControllerBuilderTests {
         )
 
         #expect(result is AllTopicsViewController)
+    }
+
+    @Test
+    func topicOnboarding_returnsExpectedResult() async throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.topicOnboarding(
+            analyticsService: MockAnalyticsService(),
+            topicsService: MockTopicsService(),
+            dismissAction: { }
+        )
+
+        #expect(result is TopicOnboardingViewController)
     }
 }

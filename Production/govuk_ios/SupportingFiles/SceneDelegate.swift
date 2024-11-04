@@ -8,6 +8,7 @@ class SceneDelegate: UIResponder,
     private lazy var navigationController: UINavigationController = {
         let controller = UINavigationController()
         controller.setNavigationBarHidden(true, animated: false)
+        controller.navigationBar.prefersLargeTitles = true
         return controller
     }()
 

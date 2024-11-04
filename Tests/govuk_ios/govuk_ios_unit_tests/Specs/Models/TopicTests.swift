@@ -3,6 +3,7 @@ import Testing
 @testable import govuk_ios
 
 @Suite
+@MainActor
 struct TopicTests {
 
     @Test(arguments: zip(
@@ -17,7 +18,7 @@ struct TopicTests {
             "parenting-guardianship",
             "retirement",
             "studying-training",
-            "travel",
+            "travel-abroad",
             "unknown"
         ],
         [
@@ -35,7 +36,8 @@ struct TopicTests {
             "star.fill"
         ]
     ))
-    func topic_iconName_returnsCorrectValue(ref: String, iconName: String) {
+    func topic_iconName_returnsCorrectValue(ref: String,
+                                            iconName: String) {
         let coreData = CoreDataRepository.arrange
         
         let topic = Topic(context: coreData.viewContext)

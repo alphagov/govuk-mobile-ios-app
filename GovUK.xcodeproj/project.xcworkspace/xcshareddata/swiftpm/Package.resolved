@@ -1,5 +1,5 @@
 {
-  "originHash" : "347b8c1340f44faa249ee93c7d26d464efbc1047cf116f6ce122d5e83dee511a",
+  "originHash" : "4df348441b7e5e6e7f7e94f4c377e287e6bd45426ab48052aab7396241e412a5",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/app-check.git",
       "state" : {
-        "revision" : "21fe1af9be463a359aaf8d96789ef73fc3760d09",
-        "version" : "11.0.1"
+        "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
+        "version" : "11.2.0"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
-        "revision" : "f909f901bfba9e27e4e9da83242a4915d6dd64bb",
-        "version" : "11.3.0"
+        "revision" : "8328630971a8fdd8072b36bb22bef732eb15e1f0",
+        "version" : "11.4.0"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "93406fd21b85e66e2d6dbf50b472161fd75c3f1f",
-        "version" : "11.3.0"
+        "revision" : "4f234bcbdae841d7015258fbbf8e7743a39b8200",
+        "version" : "11.4.0"
       }
     },
     {
@@ -70,16 +70,16 @@
       "location" : "https://github.com/alphagov/govuk-mobile-ios-onboarding",
       "state" : {
         "branch" : "develop",
-        "revision" : "ce3758e18f2d8e621cb68bf5f0185a05b3c996dc"
+        "revision" : "44d1c9f3c0a26706c5cc8dd29c3267fd2efc4fd7"
       }
     },
     {
       "identity" : "govuk-mobile-ios-ui-components",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
+      "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components/",
       "state" : {
         "branch" : "develop",
-        "revision" : "7d5f235bb02b601260610daf3e47e31b75a33a26"
+        "revision" : "6692db4a0cb75b7bb25c5da300cae3dbba12097e"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
-        "version" : "3.5.0"
+        "revision" : "5cfe5f090c982de9c58605d2a82a4fc77b774fbd",
+        "version" : "4.1.0"
       }
     },
     {

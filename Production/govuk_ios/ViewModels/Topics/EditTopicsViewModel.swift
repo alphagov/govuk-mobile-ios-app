@@ -28,7 +28,8 @@ final class EditTopicsViewModel: ObservableObject {
                         isFavorite: topic.isFavorite
                     )
                     analyticsService.track(event: event)
-                    topicsService.updateFavoriteTopics()
+                    topicsService.setHasEditedTopics()
+                    topicsService.save()
                 }
             )
             rows.append(row)

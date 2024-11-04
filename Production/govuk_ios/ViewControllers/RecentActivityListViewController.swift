@@ -278,6 +278,7 @@ class RecentActivityListViewController: BaseViewController,
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         toolbarHeightConstraint?.constant = tabBarHeight
     }
 }

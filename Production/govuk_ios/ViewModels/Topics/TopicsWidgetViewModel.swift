@@ -6,16 +6,7 @@ final class TopicsWidgetViewModel {
     let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
     let editAction: () -> Void
-
     private(set) var downloadError: TopicsServiceError?
-
-    var favoriteTopics: [Topic] {
-        topicsService.fetchFavorites()
-    }
-
-    var allTopicsButtonHidden: Bool {
-        topicsService.fetchAll().count == favoriteTopics.count
-    }
 
     init(topicsService: TopicsServiceInterface,
          topicAction: @escaping (Topic) -> Void,
@@ -26,6 +17,16 @@ final class TopicsWidgetViewModel {
         self.editAction = editAction
         self.allTopicsAction = allTopicsAction
         self.fetchTopics()
+    }
+
+    var allTopicsButtonHidden: Bool {
+        displayedTopics.count >= topicsService.fetchAll().count
+    }
+
+    var displayedTopics: [Topic] {
+        topicsService.hasTopicsBeenEdited ?
+        topicsService.fetchFavorites() :
+        topicsService.fetchAll()
     }
 
     private func fetchTopics() {

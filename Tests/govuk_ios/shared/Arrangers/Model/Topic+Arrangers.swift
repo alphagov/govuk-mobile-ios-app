@@ -31,7 +31,7 @@ extension Topic {
                 context: context,
                 ref: "ref\(index)",
                 title: "title\(index)",
-                isFavourite: index == 3 ? true : false
+                isFavourite: index == 3
             )
             topics.append(topic)
         }

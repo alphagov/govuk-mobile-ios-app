@@ -66,7 +66,7 @@ class TopicCard: UIView {
         layer.borderWidth = 1
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        layer.borderColor = UIColor.secondaryBorder.cgColor
+        layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
         addSubview(cardStackView)
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(chevronImage)

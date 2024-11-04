@@ -74,14 +74,14 @@ class TopicsWidgetView: UIView {
             name: .NSManagedObjectContextDidSave,
             object: nil
         )
-        updateTopics(viewModel.favoriteTopics)
+        updateTopics(viewModel.displayedTopics)
         showAllTopicsButton()
     }
 
     @objc
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
-            self.updateTopics(self.viewModel.favoriteTopics)
+            self.updateTopics(self.viewModel.displayedTopics)
             self.showAllTopicsButton()
         }
     }
@@ -177,7 +177,7 @@ class TopicsWidgetView: UIView {
         let sizeClass = UITraitCollection.current.verticalSizeClass
         if sizeClass != previousTraitCollection?.verticalSizeClass {
             rowCount = sizeClass == .regular ? 2 : 4
-            updateTopics(viewModel.favoriteTopics)
+            updateTopics(viewModel.displayedTopics)
         }
     }
 

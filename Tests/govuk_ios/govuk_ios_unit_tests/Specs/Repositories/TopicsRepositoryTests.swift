@@ -6,16 +6,10 @@ import CoreData
 
 @Suite
 struct TopicsRepositoryTests {
-    
-    let coreData = CoreDataRepository.arrangeAndLoad
-    let sut: TopicsRepository
-
-    init() {
-        self.sut = TopicsRepository(coreData: coreData)
-    }
-
     @Test
     func saveTopics_doesSaveResponseItems() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         sut.save(topics: TopicResponseItem.arrangeMultiple)
         let topics = sut.fetchAll()
         #expect(topics.count == 3)
@@ -27,6 +21,8 @@ struct TopicsRepositoryTests {
     @Test
     func saveTopics_newTopics_savesNewTopics() async throws {
         // Given I have started the app the first time, and gotten topics
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         var topicResponseItems = TopicResponseItem.arrangeMultiple
         sut.save(topics: topicResponseItems)
 
@@ -49,6 +45,8 @@ struct TopicsRepositoryTests {
     @Test
     func saveTopics_updatedTopics_updatesTopics() async throws {
         // Given I have started the app the first time, and gotten topics
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         let topicResponseItems: [TopicResponseItem] = [
             .init(ref: "test_1", title: "first title", description: "first description"),
             .init(ref: "test_2", title: "second title", description: nil),
@@ -95,6 +93,8 @@ struct TopicsRepositoryTests {
     @Test
     func saveTopics_deleteTopics_updatesTopics() async throws {
         // Given I have started the app the first time, and gotten topics
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         let topicResponseItems: [TopicResponseItem] = [
             .init(ref: "test_1", title: "first title", description: "first description"),
             .init(ref: "test_2", title: "second title", description: nil),
@@ -128,6 +128,8 @@ struct TopicsRepositoryTests {
 
     @Test
     func fetchFavorites_onlyReturnsFavorites() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
         Topic.arrange(context: coreData.viewContext, isFavourite: false)
 
@@ -138,6 +140,8 @@ struct TopicsRepositoryTests {
     
     @Test
     func save_persistsDataAsExpected() async throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = TopicsRepository(coreData: coreData)
         Topic.arrangeMultiple(context: coreData.viewContext)
 
         sut.save()

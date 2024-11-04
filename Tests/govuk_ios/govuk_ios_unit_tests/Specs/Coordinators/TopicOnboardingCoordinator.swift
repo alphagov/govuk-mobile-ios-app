@@ -1,0 +1,101 @@
+import Foundation
+import UIKit
+import Testing
+
+@testable import govuk_ios
+
+@Suite
+@MainActor
+struct TopicOnboardingCoordinatorTests {
+
+    init() {
+        UIView.setAnimationsEnabled(false)
+    }
+
+    @Test
+    func start_setsTopicOnboardingViewController() {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedTopicOnboardingViewController = expectedViewController
+        let navigationController = UINavigationController()
+
+        let sut = TopicOnboardingCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            analyticsService: MockAnalyticsService(),
+            topicsService: MockTopicsService(),
+            dismissAction: { }
+        )
+        sut.start()
+
+        #expect(navigationController.viewControllers.first == expectedViewController)
+    }
+
+
+    @Test
+    func start_hasOnboardedTopics_callsDismiss() async {
+        let mockTopicService = MockTopicsService()
+        mockTopicService._stubbedHasOnboardedTopics = true
+
+        let dismissed = await withCheckedContinuation { continuation in
+            let sut = TopicOnboardingCoordinator(
+                navigationController: UINavigationController(),
+                viewControllerBuilder: MockViewControllerBuilder(),
+                analyticsService: MockAnalyticsService(),
+                topicsService: mockTopicService,
+                dismissAction: {
+                    continuation.resume(returning: true)
+                }
+            )
+            sut.start()
+        }
+        #expect(dismissed)
+    }
+
+    @Test
+    func start_hasNotOnboardedTopics_setsTopicOnboarding() async throws {
+        let mockTopicService = MockTopicsService()
+        mockTopicService._stubbedHasOnboardedTopics = false
+
+        let complete: Bool = try await withCheckedThrowingContinuation { continuation in
+            let sut = TopicOnboardingCoordinator(
+                navigationController: UINavigationController(),
+                viewControllerBuilder: MockViewControllerBuilder(),
+                analyticsService: MockAnalyticsService(),
+                topicsService: mockTopicService,
+                dismissAction: {
+                    continuation.resume(with: .failure(TestError.unexpectedMethodCalled))
+                }
+            )
+            sut.start()
+            continuation.resume(returning: true)
+        }
+        #expect(complete)
+    }
+
+    @Test
+    func start_topicOnboardingDismiss_setsHasOnboardedTopics() async throws {
+        let mockNavigationController = MockNavigationController()
+        let mockTopicService = MockTopicsService()
+        mockTopicService._stubbedHasOnboardedTopics = false
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedTopicOnboardingViewController = expectedViewController
+        let dismissed: Bool = try await withCheckedThrowingContinuation { continuation in
+            let sut = TopicOnboardingCoordinator(
+                navigationController: mockNavigationController,
+                viewControllerBuilder: mockViewControllerBuilder,
+                analyticsService: MockAnalyticsService(),
+                topicsService: mockTopicService,
+                dismissAction: {
+                    continuation.resume(returning: true)
+                }
+            )
+            sut.start()
+            mockViewControllerBuilder._receivedTopicOnboardingDismissAction?()
+        }
+        #expect(dismissed)
+        #expect(mockNavigationController._setViewControllers == [expectedViewController])
+        #expect(mockTopicService._setHasOnboardedTopicsCalled)
+    }
+}

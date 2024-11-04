@@ -1,5 +1,5 @@
 {
-  "originHash" : "0b3a7685b6f49f68b42733453031286dc1320275355fc35f0572d294e191726a",
+  "originHash" : "4df348441b7e5e6e7f7e94f4c377e287e6bd45426ab48052aab7396241e412a5",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -79,7 +79,7 @@
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
         "branch" : "develop",
-        "revision" : "7d5f235bb02b601260610daf3e47e31b75a33a26"
+        "revision" : "6692db4a0cb75b7bb25c5da300cae3dbba12097e"
       }
     },
     {

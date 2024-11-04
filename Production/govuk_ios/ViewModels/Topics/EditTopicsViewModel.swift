@@ -23,12 +23,13 @@ final class EditTopicsViewModel: ObservableObject {
                 isOn: topic.isFavorite,
                 action: { value in
                     topic.isFavorite = value
+                    topicsService.save()
                     let event = AppEvent.toggleTopic(
                         title: topic.title,
                         isFavorite: topic.isFavorite
                     )
                     analyticsService.track(event: event)
-                    topicsService.save()
+                    topicsService.setHasEditedTopics()
                 }
             )
             rows.append(row)

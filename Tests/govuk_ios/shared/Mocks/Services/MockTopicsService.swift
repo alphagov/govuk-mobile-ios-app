@@ -3,7 +3,27 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {
+
+    var _setHasEditedTopicsCalled: Bool = false
+    func setHasEditedTopics() {
+        return _setHasEditedTopicsCalled = true
+    }
     
+    var _stubbedHasTopicsBeenEdited: Bool = false
+    var hasTopicsBeenEdited: Bool {
+        return _stubbedHasTopicsBeenEdited
+    }
+
+    var _stubbedHasOnboardedTopics: Bool = false
+    var hasOnboardedTopics: Bool {
+        return _stubbedHasOnboardedTopics
+    }
+
+    var _setHasOnboardedTopicsCalled: Bool = false
+    func setHasOnboardedTopics() {
+        _setHasOnboardedTopicsCalled = true
+    }
+
     let coreData = CoreDataRepository.arrangeAndLoad
     
     var _stubbedFetchAllTopics: [Topic]?
@@ -16,9 +36,9 @@ class MockTopicsService: TopicsServiceInterface {
         _stubbedFetchFavoriteTopics ?? []
     }
 
-    var _updateFavoriteTopicsCalled = false
+    var _saveCalled = false
     func save() {
-        _updateFavoriteTopicsCalled = true
+        _saveCalled = true
     }
     
     var _stubbedFetchRemoteListResult: Result<[TopicResponseItem], TopicsServiceError>?

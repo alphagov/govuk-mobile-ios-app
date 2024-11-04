@@ -23,17 +23,6 @@
         }
       }
     },
-    "seeAllTopicsButtonText" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "See all topics"
-          }
-        }
-      }
-    },
     "editTopicsSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -52,6 +41,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit your topics"
+          }
+        }
+      }
+    },
+    "seeAllTopicsButtonText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See all topics"
           }
         }
       }
@@ -118,6 +118,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Browse"
+          }
+        }
+      }
+    },
+    "topicOnboardingCardSelected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected"
+          }
+        }
+      }
+    },
+    "topicOnboardingCardUnselected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select"
+          }
+        }
+      }
+    },
+    "topicOnboardingPageSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topics you select will be shown on the app home pages so you can find them more easily"
+          }
+        }
+      }
+    },
+    "topicOnboardingPageTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select relevant topics"
+          }
+        }
+      }
+    },
+    "topicOnboardingPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "topicOnboardingSecondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
           }
         }
       }

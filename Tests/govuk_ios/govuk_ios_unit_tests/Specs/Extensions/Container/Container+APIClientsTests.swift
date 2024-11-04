@@ -11,24 +11,29 @@ struct Container_APIClientTests {
     func searchAPIClient_returnsExpectedResult() async {
         Container.shared.reset()
         Container.shared.urlSession.register { URLSession.mock }
-        let result = Container.shared.searchAPIClient()
+        let sut = Container.shared.searchAPIClient()
 
-        #expect(result != nil)
-
-        MockURLProtocol.requestHandlers["https://search.service.gov.uk/v0_1/search.json"] = { request in
-            #expect(request.url?.absoluteString == "https://www.google.com/test/test")
-            #expect(request.httpMethod == "POST")
-            let data = request.bodySteamData
-            #expect(data != nil)
-            let json = try? JSONDecoder().decode([String: String].self, from: data!)
-            #expect(json?["test_key"] == "test_value")
-            return (.arrangeSuccess, nil, nil)
-        }
-        let searchRequest = GOVRequest.search(
-            term: "test"
-        )
+        #expect(sut != nil)
         return await withCheckedContinuation { continuation in
-            result.send(
+
+            MockURLProtocol.requestHandlers["https://search.service.gov.uk/v0_1/search.json"] = { request in
+                let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)
+                let countQuery = components?.queryItems?.first(where: { $0.name == "count" })
+                #expect(countQuery?.value == "10")
+                let termQuery = components?.queryItems?.first(where: { $0.name == "q" })
+                #expect(termQuery?.value == "test")
+                #expect(components?.scheme == "https")
+                #expect(components?.host   == "search.service.gov.uk")
+                #expect(components?.path == "/v0_1/search.json")
+                #expect(request.httpMethod == "GET")
+                let data = request.bodySteamData
+                #expect(data == nil)
+                return (.arrangeSuccess, nil, nil)
+            }
+            let searchRequest = GOVRequest.search(
+                term: "test"
+            )
+            sut.send(
                 request: searchRequest,
                 completion: { _ in
                     continuation.resume(returning: Void())
@@ -36,10 +41,5 @@ struct Container_APIClientTests {
             )
         }
     }
-
-    @Test
-    func searchAPIClient_withConfig_returnsExpectedResult() {
-        let result = Container.shared.searchAPIClient()
-        #expect(result != nil)
-    }
 }
+

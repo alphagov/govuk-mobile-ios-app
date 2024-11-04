@@ -8,12 +8,10 @@ protocol AppConfigServiceClientInterface {
 
 struct AppConfigServiceClient: AppConfigServiceClientInterface {
     private let serviceClient: APIServiceClientInterface
-    private let decoder: SignableDecoder
+    private let decoder = JSONDecoder()
 
-    init(serviceClient: APIServiceClientInterface,
-         decoder: SignableDecoder) {
+    init(serviceClient: APIServiceClientInterface) {
         self.serviceClient = serviceClient
-        self.decoder = decoder
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigResult) {
@@ -22,7 +20,8 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
-            additionalHeaders: nil
+            additionalHeaders: nil,
+            signingKey: Constants.SigningKey.govUK
         )
 
         serviceClient.send(
@@ -30,8 +29,12 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
             completion: { result in
                 let mappedResult: Result<AppConfig, AppConfigError>
                 switch result {
-                case .failure:
-                    mappedResult = .failure(.remoteJson)
+                case .failure(let error):
+                    if error is SigningError {
+                        mappedResult = .failure(.invalidSignature)
+                    } else {
+                        mappedResult = .failure(.remoteJson)
+                    }
                 case .success(let data):
                     mappedResult = self.decode(data: data)
                 }
@@ -47,8 +50,6 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
                 from: data
             )
             return .success(result)
-        } catch SigningError.invalidSignature {
-            return .failure(.invalidSignature)
         } catch {
             return .failure(.remoteJson)
         }

@@ -1,8 +1,8 @@
 import Foundation
 
 extension Bundle {
-    var publicKey: Data? {
-        guard let filePath: String = path(forResource: "integration_pubkey", ofType: "der"),
+    func publicKey(name: String) -> Data? {
+        guard let filePath: String = path(forResource: name, ofType: "der"),
             let data: Data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) else {
             return nil
         }

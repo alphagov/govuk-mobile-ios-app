@@ -28,7 +28,8 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
-            additionalHeaders: nil
+            additionalHeaders: nil,
+            signingKey: Constants.SigningKey.govUK
         )
 
         serviceClient.send(
@@ -56,7 +57,8 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
-            additionalHeaders: nil
+            additionalHeaders: nil,
+            signingKey: Constants.SigningKey.govUK
         )
 
         serviceClient.send(

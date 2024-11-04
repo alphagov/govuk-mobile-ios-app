@@ -2,7 +2,7 @@ import Foundation
 
 extension URLRequest {
 
-    var bodySteamData: Data? {
+    var bodyStreamData: Data? {
 
         guard let bodyStream = self.httpBodyStream else { return nil }
 

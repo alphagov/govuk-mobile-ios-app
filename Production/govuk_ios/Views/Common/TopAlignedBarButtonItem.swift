@@ -40,13 +40,16 @@ class TopAlignedBarButtonItem: UIBarButtonItem {
         }
     }
 
-    func updateConstraints() {
+    func updateLayout() {
         guard let view = customView,
         let superview = view.superview else { return }
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: superview.topAnchor),
             view.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
         ])
+        // Bar button items don't automatically respond to dynamic type changes,
+        // so need to set the font again to reflect updates
+        actionButton.titleLabel?.font = .govUK.body
     }
 
     required init?(coder: NSCoder) {

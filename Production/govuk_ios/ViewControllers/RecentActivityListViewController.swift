@@ -95,6 +95,11 @@ class RecentActivityListViewController: BaseViewController,
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        setEditing(false, animated: false)
+    }
+
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(tableView)
@@ -159,7 +164,7 @@ class RecentActivityListViewController: BaseViewController,
         guard let items = editingToolbar.items else { return }
         for item in items {
             guard let item = item as? TopAlignedBarButtonItem else { continue }
-            item.updateConstraints()
+            item.updateLayout()
         }
     }
 

@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 
 public typealias NetworkResult<T> = Result<T, Error>
 public typealias NetworkResultCompletion<T> = (NetworkResult<T>) -> Void
@@ -8,6 +9,10 @@ protocol APIServiceClientInterface {
         request: GOVRequest,
         completion: @escaping NetworkResultCompletion<Data>
     )
+}
+
+enum SigningError: Error {
+    case invalidSignature
 }
 
 struct APIServiceClient: APIServiceClientInterface {
@@ -33,21 +38,31 @@ extension APIServiceClient {
         )
         send(
             request: urlRequest,
+            signingKey: request.signingKey,
             completion: completion
         )
     }
 
     private func send(request: URLRequest,
+                      signingKey: String?,
                       completion: @escaping NetworkResultCompletion<Data>) {
         let task = session.dataTask(
             with: request,
-            completionHandler: { data, _, error in
+            completionHandler: { data, response, error in
                 let result: NetworkResult<Data>
                 switch (data, error) {
                 case (_, .some(let error)):
                     result = .failure(error)
                 case (.some(let data), _):
-                    result = .success(data)
+                       if verifySignatureIfNecessary(
+                            signatureBase64: response?.signature,
+                            data: data,
+                            signingKey: signingKey
+                        ) {
+                        result = .success(data)
+                    } else {
+                        result = .failure(SigningError.invalidSignature)
+                    }
                 case (.none, _):
                     result = .success(Data())
                 }
@@ -57,5 +72,34 @@ extension APIServiceClient {
             }
         )
         task.resume()
+    }
+
+    private func verifySignatureIfNecessary(signatureBase64: String?,
+                                            data: Data,
+                                            signingKey: String?) -> Bool {
+        // If no key provided, request doesn't need signing
+        guard let signingKey
+        else {
+            return true
+        }
+
+        guard let signatureBase64,
+              let signatureData = Data(base64Encoded: signatureBase64)
+        else {
+            return false
+        }
+
+        guard let publicKeyFile = Bundle.main.publicKey(name: signingKey),
+              let publicKey = try? P256.Signing.PublicKey(derRepresentation: publicKeyFile)
+        else {
+            return false
+        }
+
+        guard let signatureKey = try? P256.Signing.ECDSASignature(derRepresentation: signatureData)
+        else {
+            return false
+        }
+
+        return publicKey.isValidSignature(signatureKey, for: data)
     }
 }

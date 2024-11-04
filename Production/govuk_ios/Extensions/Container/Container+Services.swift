@@ -53,8 +53,7 @@ extension Container {
     var appConfigService: Factory<AppConfigServiceInterface> {
         Factory(self) {
             let appConfigServiceClient = AppConfigServiceClient(
-                serviceClient: self.appAPIClient(),
-                decoder: .init()
+                serviceClient: self.appAPIClient()
             )
             return AppConfigService(
                 appConfigRepository: self.appConfigRepository(),

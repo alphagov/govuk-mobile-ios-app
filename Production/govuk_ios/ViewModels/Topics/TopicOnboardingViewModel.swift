@@ -34,11 +34,11 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     var topics: [Topic] {
-        topicsService.fetchAllTopics()
+        topicsService.fetchAll()
     }
 
     private func fetchTopics() {
-        topicsService.downloadTopicsList { _ in /*Do nothing*/ }
+        topicsService.fetchRemoteList(completion: { _ in /*Do nothing*/ })
     }
 
     func topicSelected(topic: Topic,

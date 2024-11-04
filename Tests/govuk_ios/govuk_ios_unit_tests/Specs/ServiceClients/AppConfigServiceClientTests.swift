@@ -12,8 +12,7 @@ struct AppConfigServiceClientTests {
     init() {
         mockServiceClient = MockAPIServiceClient()
         sut = AppConfigServiceClient(
-            serviceClient: mockServiceClient,
-            decoder: SignableDecoder()
+            serviceClient: mockServiceClient
         )
     }
 
@@ -73,14 +72,13 @@ struct AppConfigServiceClientTests {
 
     @Test
     func fetchAppConfig_invalidSignature_returnsError() async throws {
-        let mockJsonData = getJsonData(filename: "MockAppConfigResponseInvalidSig", bundle: .main)
         let result = await withCheckedContinuation { continuation in
             sut.fetchAppConfig(
                 completion: { result in
                     continuation.resume(returning: result)
                 }
             )
-            mockServiceClient._receivedSendCompletion?(.success(mockJsonData))
+            mockServiceClient._receivedSendCompletion?(.failure(SigningError.invalidSignature))
         }
         let unwrappedResult = result.getError()
         #expect(unwrappedResult == AppConfigError.invalidSignature)

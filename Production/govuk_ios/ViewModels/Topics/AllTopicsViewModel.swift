@@ -11,7 +11,7 @@ class AllTopicsViewModel {
          topicsService: TopicsServiceInterface) {
         self.analyticsService = analyticsService
         self.topicAction = topicAction
-        self.topics = topicsService.fetchAllTopics()
+        self.topics = topicsService.fetchAll()
     }
 
     func trackTopicAction(_ topic: Topic) {

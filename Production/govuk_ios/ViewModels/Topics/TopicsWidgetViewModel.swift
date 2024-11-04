@@ -20,17 +20,17 @@ final class TopicsWidgetViewModel {
     }
 
     var allTopicsButtonHidden: Bool {
-        displayedTopics.count >= topicsService.fetchAllTopics().count
+        displayedTopics.count >= topicsService.fetchAll().count
     }
 
     var displayedTopics: [Topic] {
         topicsService.hasTopicsBeenEdited ?
-        topicsService.fetchFavoriteTopics() :
-        topicsService.fetchAllTopics()
+        topicsService.fetchFavorites() :
+        topicsService.fetchAll()
     }
 
     private func fetchTopics() {
-        topicsService.downloadTopicsList { result in
+        topicsService.fetchRemoteList { result in
             if case .failure(let error) = result {
                 self.downloadError = error
             }

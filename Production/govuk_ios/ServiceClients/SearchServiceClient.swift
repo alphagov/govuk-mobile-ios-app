@@ -14,8 +14,11 @@ class SearchServiceClient: SearchServiceClientInterface {
 
     func search(term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void) {
+        let request = GOVRequest.search(
+            term: term
+        )
         serviceClient.send(
-            request: .search(term: term),
+            request: request,
             completion: { result in
                 let mappedResult = result.mapError { error in
                     let nsError = (error as NSError)

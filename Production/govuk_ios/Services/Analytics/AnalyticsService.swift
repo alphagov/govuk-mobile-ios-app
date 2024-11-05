@@ -58,6 +58,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     private var hasAcceptedAnalytics: Bool? {
+        // Do not use bool for key here because we need to have an unknown state (nil)
         userDefaults.value(forKey: .acceptedAnalytics) as? Bool
     }
 }

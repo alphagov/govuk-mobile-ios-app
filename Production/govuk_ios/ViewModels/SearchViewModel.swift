@@ -8,8 +8,8 @@ enum SearchError: Error {
 }
 
 class SearchViewModel {
-    private let searchService: SearchServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
     private let urlOpener: URLOpener
 
@@ -21,8 +21,8 @@ class SearchViewModel {
          activityService: ActivityServiceInterface,
          urlOpener: URLOpener) {
         self.analyticsService = analyticsService
-        self.searchService = searchService
         self.activityService = activityService
+        self.searchService = searchService
         self.urlOpener = urlOpener
     }
 

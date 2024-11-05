@@ -53,7 +53,7 @@ struct APIServiceClientTests {
             queryParameters: ["query": "value"],
             additionalHeaders: nil
         )
-        MockURLProtocol.requestHandlers["https://www.google.com/test/111?query=value"] = { request in
+        MockURLProtocol.requestHandlers["https://www.google.com/test/111"] = { request in
             #expect(request.url?.absoluteString == "https://www.google.com/test/111?query=value")
             #expect(request.httpMethod == "GET")
             #expect(request.httpBody == nil)

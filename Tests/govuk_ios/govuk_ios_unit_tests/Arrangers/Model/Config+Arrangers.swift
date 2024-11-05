@@ -11,13 +11,15 @@ extension Config {
                         minimumVersion: String = "0.0.1",
                         recommendedVersion: String = "0.0.1",
                         releaseFlags: [String: Bool] = [:],
-                        lastUpdated: String = "test") -> Config {
+                        lastUpdated: String = "test",
+                        searchApiUrl: String? = nil) -> Config {
         .init(
             available: available,
             minimumVersion: minimumVersion,
             recommendedVersion: recommendedVersion,
             releaseFlags: releaseFlags,
-            lastUpdated: lastUpdated
+            lastUpdated: lastUpdated,
+            searchApiUrl: searchApiUrl
         )
     }
 }

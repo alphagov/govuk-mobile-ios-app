@@ -8,7 +8,7 @@ import Factory
 @Suite
 struct Container_APIClientTests {
     @Test
-    func searchAPIClient_returnsExpectedResult() async {
+    func searchAPIClient_createsExpectedRequest() async {
         Container.shared.reset()
         Container.shared.urlSession.register { URLSession.mock }
         let sut = Container.shared.searchAPIClient()

@@ -145,6 +145,17 @@ class GroupedListTableViewCell: UITableViewCell {
         accessibilityHint = String.common.localized("openWebLinkHint")
     }
 
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if editing {
+            accessibilityHint = nil
+            accessibilityTraits.remove(.link)
+        } else {
+            accessibilityHint = String.common.localized("openWebLinkHint")
+            accessibilityTraits.insert(.link)
+        }
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         updateMask()

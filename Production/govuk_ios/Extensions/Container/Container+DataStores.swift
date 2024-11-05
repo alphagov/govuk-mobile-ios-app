@@ -5,7 +5,9 @@ extension Container {
     var coreDataRepository: Factory<CoreDataRepositoryInterface> {
         Factory(self) {
             CoreDataRepository(
-                persistentContainer: .init(name: "GOV"),
+                persistentContainer: CachePersistentContainer(
+                    name: "GOV"
+                ),
                 notificationCenter: .default
             ).load()
         }

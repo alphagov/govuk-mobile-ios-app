@@ -148,7 +148,6 @@ class ViewControllerBuilder {
         )
         let view = TopicDetailView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
-        viewController.title = viewModel.title
         viewController.navigationItem.largeTitleDisplayMode = .never
         return viewController
     }

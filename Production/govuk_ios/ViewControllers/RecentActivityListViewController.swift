@@ -5,8 +5,7 @@ private typealias DataSource = UITableViewDiffableDataSource<RecentActivitySecti
 private typealias Snapshot = NSDiffableDataSourceSnapshot<RecentActivitySection, ActivityItem>
 
 // swiftlint:disable:next type_body_length
-class RecentActivityListViewController: BaseViewController,
-                                        TrackableScreen {
+class RecentActivityListViewController: BaseViewController {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private lazy var dataSource: DataSource = {
@@ -351,6 +350,13 @@ extension RecentActivityListViewController: UITableViewDelegate {
 extension RecentActivityListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         dividerView.isHidden = scrollView.contentOffset.y < 1.0
+    }
+}
+
+extension RecentActivityListViewController: TrackableScreen {
+    @MainActor
+    var trackingTitle: String? {
+        viewModel.pageTitle
     }
 }
 

@@ -158,7 +158,6 @@ class RecentActivityListViewController: BaseViewController,
         if !editing {
             viewModel.endEditing()
         }
-        reloadSnapshot()
     }
 
     override func viewDidLayoutSubviews() {

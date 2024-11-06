@@ -154,6 +154,7 @@ class GroupedListTableViewCell: UITableViewCell {
             accessibilityHint = String.common.localized("openWebLinkHint")
             accessibilityTraits.insert(.link)
         }
+        invalidateIntrinsicContentSize()
     }
 
     override func layoutSubviews() {

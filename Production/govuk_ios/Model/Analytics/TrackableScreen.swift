@@ -7,11 +7,16 @@ protocol TrackableScreen {
     nonisolated var trackingClass: String { get }
     nonisolated var trackingTitle: String? { get }
     nonisolated var trackingLanguage: String { get }
+    nonisolated var additionalParameters: [String: Any] { get }
 }
 
 extension TrackableScreen {
     var trackingLanguage: String {
         Locale.current.analyticsLanguageCode
+    }
+
+    var additionalParameters: [String: Any] {
+        [:]
     }
 }
 

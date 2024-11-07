@@ -100,7 +100,7 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
     private func viewController(topics: [Topic],
                                 personalised: Bool) -> UIViewController {
         mockTopicsService._stubbedFetchAllTopics = topics
-        mockTopicsService._stubbedHasTopicsBeenEdited = personalised
+        mockTopicsService._stubbedHasPersonalisedTopics = personalised
         let viewModel = EditTopicsViewModel(
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),

@@ -10,7 +10,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     let mockTopicService = MockTopicsService()
 
     func test_loadInNavigationController_light_rendersCorrectly() {
-        mockTopicService._stubbedHasTopicsBeenEdited = true
+        mockTopicService._stubbedHasPersonalisedTopics = true
         mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
         var topics = Topic.arrangeMultipleFavourites(
             context: coreData.viewContext

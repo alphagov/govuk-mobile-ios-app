@@ -11,6 +11,7 @@ struct EditTopicsView: View {
                     .padding(.horizontal, 12)
                     .padding(.top, 10)
                 GroupedList(content: viewModel.sections)
+                    .padding(.top, 16)
             }
         }
         .navigationTitle(String.topics.localized("editTopicsTitle"))

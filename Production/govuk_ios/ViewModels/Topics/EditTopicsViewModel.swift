@@ -24,7 +24,7 @@ final class EditTopicsViewModel: ObservableObject {
         }
         self.sections = [
             GroupedListSection(
-                heading: "",
+                heading: nil,
                 rows: rows,
                 footer: nil
             )

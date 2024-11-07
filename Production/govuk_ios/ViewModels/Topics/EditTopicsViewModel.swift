@@ -1,11 +1,10 @@
 import Foundation
 
 final class EditTopicsViewModel: ObservableObject {
-    @Published private(set) var topics: [Topic] = []
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
-    let sections: [GroupedListSection]
     let dismissAction: () -> Void
+    @Published private(set) var sections: [GroupedListSection] = []
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -13,35 +12,45 @@ final class EditTopicsViewModel: ObservableObject {
         self.dismissAction = dismissAction
         self.topicsService = topicsService
         self.analyticsService = analyticsService
-        let localTopics = topicsService.fetchAll()
-        self.topics = localTopics
-        var rows = [GroupedListRow]()
-        localTopics.forEach { topic in
-            let row = ToggleRow(
-                id: topic.ref,
-                title: topic.title,
-                isOn: topic.isFavorite,
-                action: { value in
-                    topic.isFavorite = value
-                    topicsService.save()
-                    let event = AppEvent.toggleTopic(
-                        title: topic.title,
-                        isFavorite: topic.isFavorite
-                    )
-                    analyticsService.track(event: event)
-                    topicsService.setHasEditedTopics()
-                }
-            )
-            rows.append(row)
-        }
+        loadSections(
+            topics: topicsService.fetchAll()
+        )
+    }
 
-        sections = [
+    private func loadSections(topics: [Topic]) {
+        let rows = topics.compactMap { [weak self, topicsService] topic in
+            topic.isFavorite = topicsService.hasTopicsBeenEdited ? topic.isFavorite : true
+            return self?.topicRow(topic: topic)
+        }
+        self.sections = [
             GroupedListSection(
                 heading: "",
                 rows: rows,
                 footer: nil
             )
         ]
+    }
+
+    private func topicRow(topic: Topic) -> ToggleRow {
+        ToggleRow(
+            id: topic.ref,
+            title: topic.title,
+            isOn: topic.isFavorite,
+            action: { [weak self] value in
+                topic.isFavorite = value
+                self?.topicsService.save()
+                self?.topicsService.setHasEditedTopics()
+                self?.trackSelection(topic: topic)
+            }
+        )
+    }
+
+    private func trackSelection(topic: Topic) {
+        let event = AppEvent.toggleTopic(
+            title: topic.title,
+            isFavorite: topic.isFavorite
+        )
+        analyticsService.track(event: event)
     }
 
     func trackScreen(screen: TrackableScreen) {

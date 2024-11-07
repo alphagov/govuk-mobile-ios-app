@@ -110,6 +110,7 @@ struct AnalyticsServiceTests {
         #expect(screen?.trackingName == mockViewController.trackingName)
         #expect(screen?.trackingClass == mockViewController.trackingClass)
         #expect(screen?.trackingTitle == mockViewController.trackingTitle)
+        #expect(screen?.additionalParameters.count == mockViewController.additionalParameters.count)
         if #available(iOS 16, *) {
             #expect(screen?.trackingLanguage == Locale.current.language.languageCode?.identifier)
         }

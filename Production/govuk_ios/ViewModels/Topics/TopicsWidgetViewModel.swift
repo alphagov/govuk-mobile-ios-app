@@ -29,6 +29,10 @@ final class TopicsWidgetViewModel {
         topicsService.fetchAll()
     }
 
+    var topicCount: Int {
+        topicsService.fetchAll().count
+    }
+
     private func fetchTopics() {
         topicsService.fetchRemoteList { result in
             if case .failure(let error) = result {

@@ -116,11 +116,13 @@ struct FirebaseClientTests {
 
         #expect(mockAnalytics._logEventReceivedEventName == AnalyticsEventScreenView)
         let receivedParams = mockAnalytics._logEventReceivedEventParameters
-        #expect(receivedParams?.count == 4)
+        #expect(receivedParams?.count == 5)
         #expect(receivedParams?[AnalyticsParameterScreenName] as? String == expectedScreen.trackingName)
         #expect(receivedParams?[AnalyticsParameterScreenClass] as? String == expectedScreen.trackingClass)
         #expect(receivedParams?["screen_title"] as? String == expectedTitle)
         #expect(receivedParams?["language"] as? String == expectedScreen.trackingLanguage)
+        #expect(receivedParams?["test_param"] as? String
+                == expectedScreen.additionalParameters["test_param"] as? String)
     }
 }
 

@@ -33,7 +33,12 @@ struct FirebaseClient: AnalyticsClient {
             AnalyticsParameterScreenClass: screen.trackingClass,
             "screen_title": screen.trackingTitle,
             "language": screen.trackingLanguage
-        ].compactMapValues({ $0 })
+        ]
+        .merging(
+            screen.additionalParameters,
+            uniquingKeysWith: { param, _ in param }
+        )
+        .compactMapValues({ $0 })
         firebaseAnalytics.logEvent(
             AnalyticsEventScreenView,
             parameters: params

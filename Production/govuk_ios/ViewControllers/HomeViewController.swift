@@ -2,8 +2,7 @@ import Foundation
 import UIKit
 
 class HomeViewController: BaseViewController,
-                          UIScrollViewDelegate,
-                          TrackableScreen {
+                          UIScrollViewDelegate {
     private lazy var navigationBar: NavigationBar = {
         let localView = NavigationBar()
         localView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,9 +25,6 @@ class HomeViewController: BaseViewController,
         scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
     }()
-
-    var trackingName: String { "Homepage" }
-    var trackingTitle: String? { "Homepage" }
 
     private let viewModel: HomeViewModel
 
@@ -86,5 +82,16 @@ class HomeViewController: BaseViewController,
 
     private func addWidgets() {
         viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
+    }
+}
+
+extension HomeViewController: TrackableScreen {
+    var trackingName: String { "Homepage" }
+    var trackingTitle: String? { "Homepage" }
+
+    @MainActor
+    var additionalParameters: [String: Any] {
+        ["item_number": viewModel.topicCount,
+         "item_shown": viewModel.displayedTopicCount]
     }
 }

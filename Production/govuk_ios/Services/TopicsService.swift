@@ -8,8 +8,9 @@ protocol TopicsServiceInterface {
     func fetchFavorites() -> [Topic]
     func save()
 
-    func setHasEditedTopics()
-    var hasTopicsBeenEdited: Bool { get }
+    func setHasPersonalisedTopics()
+    var hasPersonalisedTopics: Bool { get }
+
     var hasOnboardedTopics: Bool { get }
     func setHasOnboardedTopics()
 }
@@ -61,25 +62,25 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.save()
     }
 
-    func setHasEditedTopics() {
+    func setHasPersonalisedTopics() {
         userDefaults.set(
             bool: true,
-            forKey: .hasEditedTopics
+            forKey: .personalisedTopics
         )
     }
 
     var hasOnboardedTopics: Bool {
-        userDefaults.bool(forKey: .hasOnboardedTopics)
+        userDefaults.bool(forKey: .topicsOnboardingSeen)
     }
 
     func setHasOnboardedTopics() {
         userDefaults.set(
             bool: true,
-            forKey: .hasOnboardedTopics
+            forKey: .topicsOnboardingSeen
         )
     }
 
-    var hasTopicsBeenEdited: Bool {
-        userDefaults.bool(forKey: .hasEditedTopics)
+    var hasPersonalisedTopics: Bool {
+        userDefaults.bool(forKey: .personalisedTopics)
     }
 }

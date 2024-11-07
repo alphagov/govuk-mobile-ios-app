@@ -37,7 +37,6 @@ struct EditTopicsViewModelTests {
         let row = try #require(sut.sections[0].rows[0] as? ToggleRow)
         #expect(row.title == "title0")
         row.action(true)
-//        #expect(sut.topics[0].isFavorite)
         #expect(mockTopicService._saveCalled)
     }
 }
@@ -46,7 +45,7 @@ private extension EditTopicsViewModelTests {
     func createTopics() -> [Topic] {
         var topics = [Topic]()
         for index in 0..<3 {
-            let topic = Topic(context: coreData.viewContext)
+            let topic = Topic(context: coreData.backgroundContext)
             topic.ref = "ref\(index)"
             topic.title = "title\(index)"
             topic.isFavorite = false

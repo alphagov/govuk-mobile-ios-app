@@ -1,10 +1,10 @@
 import Foundation
 
 final class EditTopicsViewModel: ObservableObject {
+    @Published private(set) var sections: [GroupedListSection] = []
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     let dismissAction: () -> Void
-    @Published private(set) var sections: [GroupedListSection] = []
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -19,7 +19,7 @@ final class EditTopicsViewModel: ObservableObject {
 
     private func loadSections(topics: [Topic]) {
         let rows = topics.compactMap { [weak self, topicsService] topic in
-            topic.isFavorite = topicsService.hasTopicsBeenEdited ? topic.isFavorite : true
+            topic.isFavorite = topicsService.hasPersonalisedTopics ? topic.isFavorite : true
             return self?.topicRow(topic: topic)
         }
         self.sections = [
@@ -39,7 +39,7 @@ final class EditTopicsViewModel: ObservableObject {
             action: { [weak self] value in
                 topic.isFavorite = value
                 self?.topicsService.save()
-                self?.topicsService.setHasEditedTopics()
+                self?.topicsService.setHasPersonalisedTopics()
                 self?.trackSelection(topic: topic)
             }
         )

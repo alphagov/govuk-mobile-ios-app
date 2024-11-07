@@ -96,11 +96,11 @@ struct TopicsServiceTests {
             userDefaults: mockUserDefaults
         )
 
-        #expect(mockUserDefaults.bool(forKey: .hasOnboardedTopics) == false)
+        #expect(mockUserDefaults.bool(forKey: .topicsOnboardingSeen) == false)
 
         sut.setHasOnboardedTopics()
 
-        #expect(mockUserDefaults.bool(forKey: .hasOnboardedTopics))
+        #expect(mockUserDefaults.bool(forKey: .topicsOnboardingSeen))
     }
 
 
@@ -115,18 +115,18 @@ struct TopicsServiceTests {
             userDefaults: mockUserDefaults
         )
 
-        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics) == false)
+        #expect(mockUserDefaults.bool(forKey: .personalisedTopics) == false)
 
-        sut.setHasEditedTopics()
+        sut.setHasPersonalisedTopics()
 
-        #expect(mockUserDefaults.bool(forKey: .hasEditedTopics))
+        #expect(mockUserDefaults.bool(forKey: .personalisedTopics))
     }
 
     @Test(.serialized, arguments: [true, false])
     func hasOnboardedTopics_returnsExpectedResult(expectedValue: Bool) {
 
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.set(bool: expectedValue, forKey: .hasOnboardedTopics)
+        mockUserDefaults.set(bool: expectedValue, forKey: .topicsOnboardingSeen)
 
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
@@ -140,7 +140,7 @@ struct TopicsServiceTests {
     @Test(.serialized, arguments: [true, false])
     func hasTopicsBeenEdited_returnsExpectedResult(expectedValue: Bool) {
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.hasEditedTopics.rawValue)
+        mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.personalisedTopics.rawValue)
         mockUserDefaults.synchronize()
 
         let sut = TopicsService(
@@ -149,6 +149,6 @@ struct TopicsServiceTests {
             userDefaults: mockUserDefaults
         )
 
-        #expect(sut.hasTopicsBeenEdited == expectedValue)
+        #expect(sut.hasPersonalisedTopics == expectedValue)
     }
 }

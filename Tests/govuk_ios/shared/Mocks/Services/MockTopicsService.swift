@@ -5,12 +5,12 @@ import Foundation
 class MockTopicsService: TopicsServiceInterface {
 
     var _setHasEditedTopicsCalled: Bool = false
-    func setHasEditedTopics() {
+    func setHasPersonalisedTopics() {
         return _setHasEditedTopicsCalled = true
     }
     
     var _stubbedHasTopicsBeenEdited: Bool = false
-    var hasTopicsBeenEdited: Bool {
+    var hasPersonalisedTopics: Bool {
         return _stubbedHasTopicsBeenEdited
     }
 

@@ -1,7 +1,9 @@
 import Foundation
+import CoreData
 
 final class EditTopicsViewModel: ObservableObject {
     @Published private(set) var sections: [GroupedListSection] = []
+    private var managedObjectContext: NSManagedObjectContext?
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     let dismissAction: () -> Void
@@ -12,9 +14,15 @@ final class EditTopicsViewModel: ObservableObject {
         self.dismissAction = dismissAction
         self.topicsService = topicsService
         self.analyticsService = analyticsService
+        let topics = topicsService.fetchAll()
+        self.managedObjectContext = topics.first?.managedObjectContext
         loadSections(
-            topics: topicsService.fetchAll()
+            topics: topics
         )
+    }
+
+    func undoChanges() {
+        managedObjectContext?.rollback()
     }
 
     private func loadSections(topics: [Topic]) {
@@ -55,5 +63,9 @@ final class EditTopicsViewModel: ObservableObject {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
+    }
+
+    deinit {
+        undoChanges()
     }
 }

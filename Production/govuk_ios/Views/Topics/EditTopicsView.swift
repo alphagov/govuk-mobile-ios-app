@@ -21,6 +21,9 @@ struct EditTopicsView: View {
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
+        .onDisappear {
+            viewModel.undoChanges()
+        }
     }
 
     private var doneButton: some ToolbarContent {

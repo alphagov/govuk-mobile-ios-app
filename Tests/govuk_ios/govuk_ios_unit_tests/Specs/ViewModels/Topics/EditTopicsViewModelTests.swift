@@ -39,6 +39,54 @@ struct EditTopicsViewModelTests {
         row.action(true)
         #expect(mockTopicService._saveCalled)
     }
+
+    @Test
+    @MainActor
+    func undoChanges_removesTemporaryFavourites() throws {
+        let context = coreData.viewContext
+        let topics = [
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false)
+        ]
+        mockTopicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedHasPersonalisedTopics = false
+        let sut = EditTopicsViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            dismissAction: { }
+        )
+        try #require(topics.first?.isFavorite == true)
+
+        sut.undoChanges()
+
+        #expect(topics.first?.isFavorite == false)
+    }
+
+    @Test
+    @MainActor
+    func dealloc_removesTemporaryFavourites() throws {
+        let context = coreData.viewContext
+        let topics = [
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false)
+        ]
+        mockTopicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedHasPersonalisedTopics = false
+        var sut: EditTopicsViewModel? = EditTopicsViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            dismissAction: { }
+        )
+
+        try #require(topics.first?.isFavorite == true)
+        try #require(sut?.sections.count == 1)
+
+        sut = nil
+
+        #expect(topics.first?.isFavorite == false)
+    }
 }
 
 private extension EditTopicsViewModelTests {

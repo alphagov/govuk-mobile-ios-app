@@ -29,7 +29,6 @@ extension CoreDataRepository {
         description.url = URL(fileURLWithPath: "/dev/null")
         container.persistentStoreDescriptions = [description]
         return .init(
-            persistentContainer: container,
             notificationCenter: notificationCenter
         )
     }

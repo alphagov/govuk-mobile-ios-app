@@ -37,8 +37,55 @@ struct EditTopicsViewModelTests {
         let row = try #require(sut.sections[0].rows[0] as? ToggleRow)
         #expect(row.title == "title0")
         row.action(true)
-        #expect(sut.topics[0].isFavorite)
         #expect(mockTopicService._saveCalled)
+    }
+
+    @Test
+    @MainActor
+    func undoChanges_removesTemporaryFavourites() throws {
+        let context = coreData.viewContext
+        let topics = [
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false)
+        ]
+        mockTopicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedHasPersonalisedTopics = false
+        let sut = EditTopicsViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            dismissAction: { }
+        )
+        try #require(topics.first?.isFavorite == true)
+
+        sut.undoChanges()
+
+        #expect(topics.first?.isFavorite == false)
+    }
+
+    @Test
+    @MainActor
+    func dealloc_removesTemporaryFavourites() throws {
+        let context = coreData.viewContext
+        let topics = [
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false),
+            Topic.arrange(context: context, isFavourite: false)
+        ]
+        mockTopicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedHasPersonalisedTopics = false
+        var sut: EditTopicsViewModel? = EditTopicsViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            dismissAction: { }
+        )
+
+        try #require(topics.first?.isFavorite == true)
+        try #require(sut?.sections.count == 1)
+
+        sut = nil
+
+        #expect(topics.first?.isFavorite == false)
     }
 }
 
@@ -46,7 +93,7 @@ private extension EditTopicsViewModelTests {
     func createTopics() -> [Topic] {
         var topics = [Topic]()
         for index in 0..<3 {
-            let topic = Topic(context: coreData.viewContext)
+            let topic = Topic(context: coreData.backgroundContext)
             topic.ref = "ref\(index)"
             topic.title = "title\(index)"
             topic.isFavorite = false

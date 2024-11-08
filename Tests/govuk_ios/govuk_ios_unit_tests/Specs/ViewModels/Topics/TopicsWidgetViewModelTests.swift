@@ -89,7 +89,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func displayedTopics_topicsHaveBeenEdited_returnsFavourites() {
-        mockTopicService._stubbedHasTopicsBeenEdited = true
+        mockTopicService._stubbedHasPersonalisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -115,7 +115,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func displayedTopics_topicsHaveNotBeenEdited_returnsAllTopcis() {
-        mockTopicService._stubbedHasTopicsBeenEdited = false
+        mockTopicService._stubbedHasPersonalisedTopics = false
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -143,7 +143,7 @@ struct TopicsWidgetViewModelTests {
     @Test
     @MainActor
     func allTopicsButtonHidden_isDisplayingAllTopics_returnsTrue() {
-        mockTopicService._stubbedHasTopicsBeenEdited = false
+        mockTopicService._stubbedHasPersonalisedTopics = false
 
         let allOne = Topic.arrange(context: coreData.viewContext)
         let allTwo = Topic.arrange(context: coreData.viewContext)
@@ -163,7 +163,7 @@ struct TopicsWidgetViewModelTests {
     @Test
     @MainActor
     func allTopicsButtonHidden_isDisplayingFavourites_allTopicsFavourited_returnsTrue() {
-        mockTopicService._stubbedHasTopicsBeenEdited = true
+        mockTopicService._stubbedHasPersonalisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.viewContext)
         let favouriteTwo = Topic.arrange(context: coreData.viewContext)
@@ -183,7 +183,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func allTopicsButtonHidden_isDisplayingFavourites_someTopicsFavourited_returnsFalse() {
-        mockTopicService._stubbedHasTopicsBeenEdited = true
+        mockTopicService._stubbedHasPersonalisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)

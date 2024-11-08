@@ -24,7 +24,7 @@ final class TopicsWidgetViewModel {
     }
 
     var displayedTopics: [Topic] {
-        topicsService.hasTopicsBeenEdited ?
+        topicsService.hasPersonalisedTopics ?
         topicsService.fetchFavorites() :
         topicsService.fetchAll()
     }

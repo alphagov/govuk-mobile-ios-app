@@ -23,7 +23,7 @@ struct TopicOnboardingViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["action"] as? String == "add")
-        #expect(event?.params?["type"] as? String == "buttons")
+        #expect(event?.params?["type"] as? String == "Button")
         #expect(event?.params?["section"] as? String == "Topic selection")
         #expect(event?.params?["text"] as? String == topic.title)
     }
@@ -45,7 +45,7 @@ struct TopicOnboardingViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["action"] as? String == "remove")
-        #expect(event?.params?["type"] as? String == "buttons")
+        #expect(event?.params?["type"] as? String == "Button")
         #expect(event?.params?["section"] as? String == "Topic selection")
         #expect(event?.params?["text"] as? String == topic.title)
     }

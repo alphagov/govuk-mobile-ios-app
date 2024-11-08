@@ -6,7 +6,7 @@ extension AppEvent {
                        isOn: Bool) -> AppEvent {
         function(
             text: text,
-            type: "toggle",
+            type: "Toggle",
             section: section,
             action: isOn ? "On" : "Off"
         )

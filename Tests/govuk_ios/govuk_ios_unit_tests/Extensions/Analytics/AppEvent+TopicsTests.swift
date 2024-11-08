@@ -16,7 +16,7 @@ struct AppEvent_TopicsTests {
         #expect(result.name == "Function")
         #expect(result.params?.count == 4)
         #expect(result.params?["text"] as? String == expectedTitle)
-        #expect(result.params?["type"] as? String == "toggle")
+        #expect(result.params?["type"] as? String == "Toggle")
         #expect(result.params?["section"] as? String == "Topics")
         #expect(result.params?["action"] as? String == expectedValue)
     }

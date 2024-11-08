@@ -60,9 +60,8 @@ class TopicOnboardingViewModel: ObservableObject {
 
     private func trackTopicSelection(title: String,
                                      action: String) {
-        let event = AppEvent.function(
+        let event = AppEvent.buttonFunction(
             text: title,
-            type: "buttons",
             section: "Topic selection",
             action: action
         )

@@ -4,9 +4,8 @@ import UIKit
 private typealias DataSource = UITableViewDiffableDataSource<RecentActivitySection, ActivityItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<RecentActivitySection, ActivityItem>
 
-class RecentActivityListViewController: BaseViewController,
-                                        TrackableScreen,
-                                        UITableViewDelegate {
+// swiftlint:disable:next type_body_length
+class RecentActivityListViewController: BaseViewController {
     private lazy var tableView: UITableView = UITableView.groupedList
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private lazy var dataSource: DataSource = {
@@ -16,6 +15,25 @@ class RecentActivityListViewController: BaseViewController,
         )
         localDataSource.defaultRowAnimation = .fade
         return localDataSource
+    }()
+
+    private lazy var titleView: UILabel = {
+        let localLabel = UILabel()
+        localLabel.translatesAutoresizingMaskIntoConstraints = false
+        localLabel.adjustsFontForContentSizeCategory = true
+        localLabel.font = .govUK.largeTitleBold
+        localLabel.numberOfLines = 0
+        localLabel.textAlignment = .left
+        localLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        localLabel.text = viewModel.pageTitle
+        return localLabel
+    }()
+
+    private lazy var dividerView: DividerView = {
+        let localView = DividerView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.isHidden = true
+        return localView
     }()
 
     private lazy var removeBarButtonItem: UIBarButtonItem = .remove(
@@ -50,7 +68,7 @@ class RecentActivityListViewController: BaseViewController,
         return localToolbar
     }()
 
-    private lazy var noItemsView = {
+    private lazy var informationView = {
         let localView = ListInformationView()
         localView.backgroundColor = .clear
         localView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,11 +87,12 @@ class RecentActivityListViewController: BaseViewController,
         tabBarController?.tabBar.frame.height ?? 83.0
     }
     private var toolbarHeightConstraint: NSLayoutConstraint?
+    private var isScrolled = false
 
     init(viewModel: RecentActivityListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        title = viewModel.pageTitle
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     required init?(coder: NSCoder) {
@@ -102,20 +121,50 @@ class RecentActivityListViewController: BaseViewController,
 
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        view.addSubview(titleView)
+        view.addSubview(dividerView)
         view.addSubview(tableView)
-        view.addSubview(noItemsView)
+        view.addSubview(informationView)
         view.addSubview(editingToolbar)
         removeBarButtonItem.isEnabled = false
         configureToolbarItems()
     }
 
     private func configureConstraints() {
-        toolbarHeightConstraint = editingToolbar.heightAnchor.constraint(
-            equalToConstant: tabBarHeight)
-        toolbarHeightConstraint?.isActive = true
+        configureTitleConstraints()
+        configureTableConstraints()
+        configureToolbarConstraints()
+    }
+
+    private func configureTitleConstraints() {
+        NSLayoutConstraint.activate([
+            titleView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 4
+            ),
+            titleView.leadingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leadingAnchor
+            ),
+            titleView.trailingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.trailingAnchor
+            ),
+            dividerView.topAnchor.constraint(
+                equalTo: titleView.bottomAnchor,
+                constant: 8
+            ),
+            dividerView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor
+            ),
+            dividerView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor
+            )
+        ])
+    }
+
+    private func configureTableConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor
+                equalTo: dividerView.bottomAnchor
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.rightAnchor
@@ -127,16 +176,24 @@ class RecentActivityListViewController: BaseViewController,
                 equalTo: view.layoutMarginsGuide.leftAnchor
             ),
 
-            noItemsView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
+            informationView.topAnchor.constraint(
+                equalTo: titleView.bottomAnchor,
                 constant: 40
             ),
-            noItemsView.rightAnchor.constraint(
+            informationView.rightAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.rightAnchor
             ),
-            noItemsView.leftAnchor.constraint(
+            informationView.leftAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leftAnchor
-            ),
+            )
+        ])
+    }
+
+    private func configureToolbarConstraints() {
+        toolbarHeightConstraint = editingToolbar.heightAnchor.constraint(
+            equalToConstant: tabBarHeight)
+        toolbarHeightConstraint?.isActive = true
+        NSLayoutConstraint.activate([
             editingToolbar.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor
             ),
@@ -214,16 +271,9 @@ class RecentActivityListViewController: BaseViewController,
         dataSource.apply(snapshot, animatingDifferences: true)
         let hasRecentActivity = !viewModel.structure.isEmpty
         tableView.isHidden = !hasRecentActivity
-        noItemsView.isHidden = hasRecentActivity
+        informationView.isHidden = hasRecentActivity
         let rightNavBarButton = hasRecentActivity ? editButtonItem : nil
         navigationItem.setRightBarButton(rightNavBarButton, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView,
-                   viewForHeaderInSection section: Int) -> UIView? {
-        let localLabel = GroupedListSectionHeaderView()
-        localLabel.text = viewModel.structure.sections[section].title
-        return localLabel
     }
 
     private var loadCell: (UITableView, IndexPath, ActivityItem) -> GroupedListTableViewCell {
@@ -249,6 +299,30 @@ class RecentActivityListViewController: BaseViewController,
         return "\(copy) \(formattedDateString)"
     }
 
+    private func configureToolbarItems(animated: Bool = true) {
+        removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
+        let items = [
+            viewModel.isEveryItemSelected() ? deselectAllBarButtonItem : selectAllBarButtonItem,
+            .flexibleSpace(),
+            removeBarButtonItem
+        ]
+        editingToolbar.setItems(items, animated: animated)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        toolbarHeightConstraint?.constant = tabBarHeight
+    }
+}
+
+extension RecentActivityListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        let localLabel = GroupedListSectionHeaderView()
+        localLabel.text = viewModel.structure.sections[section].title
+        return localLabel
+    }
+
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
@@ -271,20 +345,18 @@ class RecentActivityListViewController: BaseViewController,
         viewModel.removeEdit(item: item)
         configureToolbarItems()
     }
+}
 
-    private func configureToolbarItems(animated: Bool = true) {
-        removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
-        let items = [
-            viewModel.isEveryItemSelected() ? deselectAllBarButtonItem : selectAllBarButtonItem,
-            .flexibleSpace(),
-            removeBarButtonItem
-        ]
-        editingToolbar.setItems(items, animated: animated)
+extension RecentActivityListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        dividerView.isHidden = scrollView.contentOffset.y < 1.0
     }
+}
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        toolbarHeightConstraint?.constant = tabBarHeight
+extension RecentActivityListViewController: TrackableScreen {
+    @MainActor
+    var trackingTitle: String? {
+        viewModel.pageTitle
     }
 }
 

@@ -75,7 +75,10 @@ class ViewControllerBuilder {
             viewModel: viewModel
         )
 
-        let viewController = HostingViewController(rootView: settingsContentView)
+        let viewController = HostingViewController(
+            rootView: settingsContentView,
+            statusBarStyle: .darkContent
+        )
         viewController.title = viewModel.title
         viewController.navigationItem.largeTitleDisplayMode = .always
         return viewController

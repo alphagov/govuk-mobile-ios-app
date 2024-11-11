@@ -3,10 +3,13 @@ import SwiftUI
 
 class HostingViewController<T>: UIHostingController<T> where T: View {
     private let navigationBarHidden: Bool
+    private let statusBarStyle: UIStatusBarStyle
 
     init(rootView: T,
-         navigationBarHidden: Bool = false) {
+         navigationBarHidden: Bool = false,
+         statusBarStyle: UIStatusBarStyle = .default) {
         self.navigationBarHidden = navigationBarHidden
+        self.statusBarStyle = statusBarStyle
         super.init(rootView: rootView)
     }
 
@@ -33,5 +36,9 @@ class HostingViewController<T>: UIHostingController<T> where T: View {
             notification: .screenChanged,
             argument: view
         )
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        statusBarStyle
     }
 }

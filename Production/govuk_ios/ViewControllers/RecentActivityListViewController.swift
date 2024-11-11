@@ -68,7 +68,7 @@ class RecentActivityListViewController: BaseViewController {
         return localToolbar
     }()
 
-    private lazy var noItemsView = {
+    private lazy var informationView = {
         let localView = ListInformationView()
         localView.backgroundColor = .clear
         localView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +124,7 @@ class RecentActivityListViewController: BaseViewController {
         view.addSubview(titleView)
         view.addSubview(dividerView)
         view.addSubview(tableView)
-        view.addSubview(noItemsView)
+        view.addSubview(informationView)
         view.addSubview(editingToolbar)
         removeBarButtonItem.isEnabled = false
         configureToolbarItems()
@@ -176,14 +176,14 @@ class RecentActivityListViewController: BaseViewController {
                 equalTo: view.layoutMarginsGuide.leftAnchor
             ),
 
-            noItemsView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
+            informationView.topAnchor.constraint(
+                equalTo: titleView.bottomAnchor,
                 constant: 40
             ),
-            noItemsView.rightAnchor.constraint(
+            informationView.rightAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.rightAnchor
             ),
-            noItemsView.leftAnchor.constraint(
+            informationView.leftAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leftAnchor
             )
         ])
@@ -271,7 +271,7 @@ class RecentActivityListViewController: BaseViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
         let hasRecentActivity = !viewModel.structure.isEmpty
         tableView.isHidden = !hasRecentActivity
-        noItemsView.isHidden = hasRecentActivity
+        informationView.isHidden = hasRecentActivity
         let rightNavBarButton = hasRecentActivity ? editButtonItem : nil
         navigationItem.setRightBarButton(rightNavBarButton, animated: true)
     }

@@ -99,7 +99,6 @@ class TopicOnboardingViewController: BaseViewController,
         topicsListView.updateTopics(viewModel.topics)
     }
 
-
     private lazy var footerView: UIView = {
         let localView = StickyFooterView()
         localView.translatesAutoresizingMaskIntoConstraints = false

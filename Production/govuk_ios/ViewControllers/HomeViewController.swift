@@ -83,6 +83,10 @@ class HomeViewController: BaseViewController,
     private func addWidgets() {
         viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
     }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
 }
 
 extension HomeViewController: TrackableScreen {

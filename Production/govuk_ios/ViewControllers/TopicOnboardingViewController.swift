@@ -2,11 +2,12 @@ import Foundation
 import UIKit
 import SwiftUI
 import UIComponents
+import Combine
 
 class TopicOnboardingViewController: BaseViewController,
                                      TrackableScreen {
     var trackingName: String { "Select relevant topics" }
-
+    private var cancellables = Set<AnyCancellable>()
     private let viewModel: TopicOnboardingViewModel
 
     init(viewModel: TopicOnboardingViewModel) {
@@ -67,6 +68,7 @@ class TopicOnboardingViewController: BaseViewController,
         configureUI()
         configureConstraints()
         registerObservers()
+        addSubscriptions()
     }
 
     private func registerObservers() {
@@ -91,19 +93,45 @@ class TopicOnboardingViewController: BaseViewController,
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        view.addSubview(buttonView)
+        view.addSubview(footerView)
         stackView.addArrangedSubview(subtitleLabel)
         stackView.addArrangedSubview(topicsListView)
         topicsListView.updateTopics(viewModel.topics)
     }
 
-    private lazy var buttonView: UIView =  {
-        let controller = UIHostingController(
-            rootView: TopicsButtonView(viewModel: viewModel)
-        )
-        controller.view.translatesAutoresizingMaskIntoConstraints = false
-        return controller.view
+    private lazy var footerView: UIView = {
+        let localView = StickyFooterView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.addView(view: primaryButton)
+        localView.addView(view: secondaryButton)
+        return localView
     }()
+
+    private lazy var primaryButton: UIButton = {
+        let localView = GOVUKButton(
+            .primary,
+            viewModel: viewModel.primaryButtonViewModel
+        )
+        localView.isEnabled = viewModel.isTopicSelected
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
+    }()
+
+    private func addSubscriptions() {
+        viewModel.$isTopicSelected.sink(
+            receiveValue: primaryButton.setEnabled
+        ).store(in: &cancellables)
+    }
+
+    private lazy var secondaryButton: UIView = {
+        let localView = GOVUKButton(
+            .secondary,
+            viewModel: viewModel.secondaryButtonViewModel
+        )
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
+    }()
+
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
@@ -122,23 +150,23 @@ class TopicOnboardingViewController: BaseViewController,
             stackView.widthAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.widthAnchor
             ),
-            buttonView.topAnchor.constraint(
+            footerView.topAnchor.constraint(
                 equalTo: scrollView.bottomAnchor
             ),
-            buttonView.bottomAnchor.constraint(
+            footerView.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
             ),
-            buttonView.leftAnchor.constraint(
+            footerView.leftAnchor.constraint(
                 equalTo: view.leftAnchor
             ),
-            buttonView.rightAnchor.constraint(
+            footerView.rightAnchor.constraint(
                 equalTo: view.rightAnchor
             ),
             scrollView.topAnchor.constraint(
                 equalTo: view.topAnchor
             ),
             scrollView.bottomAnchor.constraint(
-                equalTo: buttonView.topAnchor
+                equalTo: footerView.topAnchor
             ),
             scrollView.leftAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leftAnchor

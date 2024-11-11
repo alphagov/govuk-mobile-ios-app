@@ -182,11 +182,3 @@ class TopicOnboardingViewController: BaseViewController,
         topicsListView.updateTopics(viewModel.topics)
     }
 }
-
-extension UIButton {
-    var setEnabled: (Bool) -> Void {
-        return { [weak self] enabled in
-            self?.isEnabled = enabled
-        }
-    }
-}

@@ -1,6 +1,6 @@
 import Foundation
 
- extension Decodable {
+extension Decodable {
     func extractDataSliceForKey(_ key: CodingKey,
                                 from jsonData: Data,
                                 removePrettyPrint: Bool = true) -> Data? {

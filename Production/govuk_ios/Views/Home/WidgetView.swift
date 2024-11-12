@@ -5,9 +5,6 @@ import UIComponents
 class WidgetView: UIView {
     private(set) lazy var contentView = UIView()
     private let decorateView: Bool
-    private lazy var padding: CGFloat = {
-        decorateView ? 16 : 0
-    }()
 
     init(decorateView: Bool = true) {
         self.decorateView = decorateView
@@ -35,6 +32,7 @@ class WidgetView: UIView {
             layer.borderWidth = 1
             layer.cornerRadius = 10
             layer.masksToBounds = true
+            layoutMargins = .init(all: 16)
         }
         addSubview(contentView)
         updateBorderColor()
@@ -43,20 +41,16 @@ class WidgetView: UIView {
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: padding
+                equalTo: layoutMarginsGuide.topAnchor
             ),
             contentView.rightAnchor.constraint(
-                equalTo: rightAnchor,
-                constant: -padding
+                equalTo: layoutMarginsGuide.rightAnchor
             ),
             contentView.bottomAnchor.constraint(
-                equalTo: bottomAnchor,
-                constant: -padding
+                equalTo: layoutMarginsGuide.bottomAnchor
             ),
             contentView.leftAnchor.constraint(
-                equalTo: leftAnchor,
-                constant: padding
+                equalTo: layoutMarginsGuide.leftAnchor
             )
         ])
     }

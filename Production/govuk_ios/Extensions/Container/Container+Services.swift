@@ -84,4 +84,15 @@ extension Container {
             )
         }
     }
+
+    var appEnvironmentService: Factory<AppEnvironmentServiceInterface> {
+        Factory(self) {
+            guard let config = Bundle.main.infoDictionary else {
+                fatalError("Info.plist not found")
+            }
+            return AppEnvironmentService(
+                config: config
+            )
+        }.scope(.singleton)
+    }
 }

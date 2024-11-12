@@ -209,9 +209,12 @@
 		D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */; };
 		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
+		D0B3EC022CE227D900A8F321 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D0B3EC012CE227D900A8F321 /* Release.xcconfig */; };
 		D0C1B7D92CD51F6E0065B455 /* TopAlignedBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1B7D82CD51F6E0065B455 /* TopAlignedBarButtonItem.swift */; };
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
+		D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */; };
+		D0EAB5032CDE65CF007ACBCD /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -452,9 +455,14 @@
 		D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsCoordinator.swift; sourceTree = "<group>"; };
 		D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = integration_pubkey.der; sourceTree = "<group>"; };
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
+		D0B3EBFD2CE226AC00A8F321 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
+		D0B3EBFE2CE226AC00A8F321 /* GoogleService-Info-Live.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Live.plist"; sourceTree = "<group>"; };
+		D0B3EC012CE227D900A8F321 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D0C1B7D82CD51F6E0065B455 /* TopAlignedBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlignedBarButtonItem.swift; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
+		D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentService.swift; sourceTree = "<group>"; };
+		D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -783,6 +791,7 @@
 				5DBE080D2C49233200B58DBE /* OnboardingService.swift */,
 				5DD09EC72C9ADB8500494550 /* SearchService.swift */,
 				D04191772CA57A6F0034722A /* TopicsService.swift */,
+				D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1002,6 +1011,8 @@
 		5DAD71A72BD254460075F648 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				D0B3EBFD2CE226AC00A8F321 /* GoogleService-Info-Dev.plist */,
+				D0B3EBFE2CE226AC00A8F321 /* GoogleService-Info-Live.plist */,
 				5DAD71772BD250DB0075F648 /* AppDelegate.swift */,
 				5DAD71792BD250DB0075F648 /* SceneDelegate.swift */,
 				162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */,
@@ -1031,6 +1042,7 @@
 		5DAD71AA2BD2548B0075F648 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D0EAB5002CDE6513007ACBCD /* Config */,
 				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
@@ -1213,6 +1225,15 @@
 			path = Topics;
 			sourceTree = "<group>";
 		};
+		D0EAB5002CDE6513007ACBCD /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */,
+				D0B3EC012CE227D900A8F321 /* Release.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		D0F86E1F2CAC3BE000FF2D9E /* Topics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1260,7 +1281,8 @@
 				5DAD71702BD250DB0075F648 /* Sources */,
 				5DAD71712BD250DB0075F648 /* Frameworks */,
 				5DAD71722BD250DB0075F648 /* Resources */,
-				160EA7532C5A99CF008F97AF /* ShellScript */,
+				D0B3EC032CE2629F00A8F321 /* Firebase Configuration */,
+				160EA7532C5A99CF008F97AF /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1389,9 +1411,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B3EC022CE227D900A8F321 /* Release.xcconfig in Resources */,
 				5D742BDE2C997ABB00E7B87A /* Onboarding.xcstrings in Resources */,
 				5D54F4732CC8473900A3B6A7 /* Topics.xcstrings in Resources */,
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
+				D0EAB5032CDE65CF007ACBCD /* Debug.xcconfig in Resources */,
 				5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */,
 				D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
@@ -1423,7 +1447,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		160EA7532C5A99CF008F97AF /* ShellScript */ = {
+		160EA7532C5A99CF008F97AF /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1438,6 +1462,7 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
 				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
 			);
+			name = Crashlytics;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1464,6 +1489,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nfi\n";
+		};
+		D0B3EC032CE2629F00A8F321 /* Firebase Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase Configuration";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CONFIGURATION\" == \"Debug\" ]; then\n  cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/GoogleService-Info-Dev.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nelse\n  cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/GoogleService-Info-Live.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1626,6 +1669,7 @@
 				D028CD122CC14A0100742620 /* DisplayableTopic.swift in Sources */,
 				5D349F692C6B550000B7F747 /* URL+Extensions.swift in Sources */,
 				5D41DB702C088FEB0011E691 /* Container+ServiceClients.swift in Sources */,
+				D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */,
 				5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
 				5DB6AD312CA1B94400E92F4C /* DateFormatter+Convenience.swift in Sources */,
@@ -1701,6 +1745,7 @@
 /* Begin XCBuildConfiguration section */
 		5D4B9D3A2C074207005F126A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1724,6 +1769,7 @@
 		};
 		5D4B9D3B2C074207005F126A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1747,6 +1793,7 @@
 		};
 		5DAD719C2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1813,6 +1860,7 @@
 		};
 		5DAD719D2BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1873,6 +1921,7 @@
 		};
 		5DAD719F2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1882,7 +1931,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = GOV.UK;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1893,7 +1941,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1907,6 +1955,7 @@
 		};
 		5DAD71A02BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1917,7 +1966,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = GOV.UK;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1943,6 +1991,7 @@
 		};
 		5DAD71A22BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1966,6 +2015,7 @@
 		};
 		5DAD71A32BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1989,6 +2039,7 @@
 		};
 		5DAD71A52BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2011,6 +2062,7 @@
 		};
 		5DAD71A62BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

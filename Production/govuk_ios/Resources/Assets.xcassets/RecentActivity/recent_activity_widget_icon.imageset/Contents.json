@@ -3,6 +3,16 @@
     {
       "filename" : "recent_activity_widget_icon.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "recent_activity_widget_icon_dark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -102,8 +102,8 @@ class TopicOnboardingViewController: BaseViewController,
     private lazy var footerView: UIView = {
         let localView = StickyFooterView()
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.addView(view: primaryButton)
-        localView.addView(view: secondaryButton)
+        localView.addView(primaryButton)
+        localView.addView(secondaryButton)
         return localView
     }()
 
@@ -112,7 +112,6 @@ class TopicOnboardingViewController: BaseViewController,
             .primary,
             viewModel: viewModel.primaryButtonViewModel
         )
-        localView.isEnabled = viewModel.isTopicSelected
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
@@ -131,7 +130,6 @@ class TopicOnboardingViewController: BaseViewController,
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
-
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([

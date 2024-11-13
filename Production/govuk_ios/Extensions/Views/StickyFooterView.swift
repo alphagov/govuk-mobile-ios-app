@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 
 class StickyFooterView: UIView {
@@ -49,7 +50,7 @@ class StickyFooterView: UIView {
             ),
             stackView.topAnchor.constraint(
                 equalTo: divider.bottomAnchor,
-                constant: 10
+                constant: 16
             ),
             stackView.leadingAnchor.constraint(
                 equalTo: layoutMarginsGuide.leadingAnchor
@@ -63,15 +64,11 @@ class StickyFooterView: UIView {
         ])
     }
 
-    func addView(view: UIView) {
-        self.stackView.addArrangedSubview(view)
+    func addView(_ view: UIView) {
+        stackView.addArrangedSubview(view)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if self.traitCollection.verticalSizeClass == .compact {
-            stackView.axis = .horizontal
-        } else {
-            stackView.axis = .vertical
-        }
+        stackView.axis = traitCollection.verticalSizeClass == .compact ? .horizontal : .vertical
     }
 }

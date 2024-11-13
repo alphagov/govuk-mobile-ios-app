@@ -70,6 +70,8 @@
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
+		4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407532CE278F900D654FC /* StickyFooterView.swift */; };
+		4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407552CE2796900D654FC /* UIButton+Extensions.swift */; };
 		5D00E9552CA544F200775D2B /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9542CA544F200775D2B /* HostingViewController.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
@@ -313,6 +315,8 @@
 		4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerView.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		4EF407532CE278F900D654FC /* StickyFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyFooterView.swift; sourceTree = "<group>"; };
+		4EF407552CE2796900D654FC /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		5D00E9542CA544F200775D2B /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
@@ -484,10 +488,6 @@
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.HostingViewControllerSnapshotTests/test_loadInNavigationController_hiddenNavbar_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.HostingViewControllerSnapshotTests/test_loadInNavigationController_showNavbar_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.LaunchViewControllerSnapshotTests/test_loadInNavigationController_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_editing_allSelected_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_editing_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SearchViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SearchViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SearchViewControllerSnapshotTests/test_search_failureResponse_genericError_rendersCorrectly@3x.png",
@@ -497,13 +497,6 @@
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SettingsViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SettingsViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SettingsViewControllerSnapshotTests/test_loadInNavigationController_preview_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_stepBySteps_dark_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_stepBySteps_light_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_dark_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_fetched_manyStepBySteps_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_fetched_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_light_fetching_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_onlySubTopics_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicOnboardingViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicOnboardingViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AllTopicsViewControllerSnapshotTests.swift,
@@ -1047,6 +1040,7 @@
 			isa = PBXGroup;
 			children = (
 				5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */,
+				4EF407532CE278F900D654FC /* StickyFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1071,6 +1065,7 @@
 				5DC79FAD2CA185A000014446 /* UITableView+Extensions.swift */,
 				5DC79FAF2CA1862000014446 /* UIView+Extensions.swift */,
 				5D899A1F2C946F540074C0AD /* UIViewController+Extensions.swift */,
+				4EF407552CE2796900D654FC /* UIButton+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1484,6 +1479,7 @@
 				5D925B1B2CB7CE6300A1E241 /* GroupedListTableViewCell.swift in Sources */,
 				3D15E7B02CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift in Sources */,
 				5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */,
+				4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */,
 				5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				4E94E8D92C8B18ED00906803 /* RecentActivitiesViewStructure.swift in Sources */,
@@ -1526,6 +1522,7 @@
 				5DE9705C2C2987C4009D66C4 /* AnalyticsPermissionState.swift in Sources */,
 				3D211B8F2CB6B4FE005D1472 /* HeaderView.swift in Sources */,
 				D04A8F4B2CD3949800685FD3 /* URLResponse+Extensions.swift in Sources */,
+				4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */,
 				5D3123802C85A6B70088B931 /* ActivityService.swift in Sources */,
 				5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */,
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,

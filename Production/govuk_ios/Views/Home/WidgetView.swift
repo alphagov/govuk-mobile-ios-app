@@ -36,6 +36,7 @@ class WidgetView: UIView {
             layer.cornerRadius = 10
             layer.masksToBounds = true
         }
+        layoutMargins = .init(all: padding)
         addSubview(contentView)
         updateBorderColor()
     }
@@ -43,20 +44,16 @@ class WidgetView: UIView {
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: padding
+                equalTo: layoutMarginsGuide.topAnchor
             ),
             contentView.rightAnchor.constraint(
-                equalTo: rightAnchor,
-                constant: -padding
+                equalTo: layoutMarginsGuide.rightAnchor
             ),
             contentView.bottomAnchor.constraint(
-                equalTo: bottomAnchor,
-                constant: -padding
+                equalTo: layoutMarginsGuide.bottomAnchor
             ),
             contentView.leftAnchor.constraint(
-                equalTo: leftAnchor,
-                constant: padding
+                equalTo: layoutMarginsGuide.leftAnchor
             )
         ])
     }

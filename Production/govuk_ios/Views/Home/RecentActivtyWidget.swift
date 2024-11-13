@@ -69,6 +69,7 @@ class RecentActivtyWidget: UIControl {
 
     private func configureUI() {
         addSubview(stackView)
+
         stackView.addArrangedSubview(recentActivitesIcon)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(chevronImage)
@@ -76,10 +77,10 @@ class RecentActivtyWidget: UIControl {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            stackView.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor)
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackView.leftAnchor.constraint(equalTo: leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: rightAnchor)
         ])
     }
 

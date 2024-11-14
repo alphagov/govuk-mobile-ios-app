@@ -61,12 +61,9 @@ class TopicOnboardingListView: UIView {
                            of topics: [Topic]) -> UIStackView {
         let rowStack = createRowStack()
         for index in startIndex..<(startIndex + rowCount) {
-            let view: UIView
-            if index <= topics.count - 1 {
-                view = createOnboardingTopicCard(for: topics[index])
-            } else {
-                view = UIView()
-            }
+            let view = index <= topics.count - 1 ?
+            createOnboardingTopicCard(for: topics[index]) :
+            UIView()
             rowStack.addArrangedSubview(view)
         }
         return rowStack

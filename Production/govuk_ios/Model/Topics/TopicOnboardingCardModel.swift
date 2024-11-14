@@ -1,11 +1,11 @@
 import Foundation
 
-class TopicOnboardingCardModel: ObservableObject {
+class TopicOnboardingCardModel {
     let title: String
     let description: String?
     let iconName: String
     let tapAction: (Bool) -> Void
-    @Published var isSelected: Bool = false
+    var isSelected: Bool = false
 
     init(topic: Topic,
          tapAction: @escaping (Bool) -> Void) {

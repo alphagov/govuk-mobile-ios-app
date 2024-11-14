@@ -8,6 +8,7 @@ default: &DEFAULTS
     bundle_identifier: uk.gov.govuk
     profile_specifiers:
       uk.gov.govuk: "match AppStore uk.gov.govuk"
+    export_method: app-store
   scan:
     output_directory: test_output
     devices:
@@ -26,7 +27,21 @@ alpha:
   <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
+    scheme: GovUKAlpha
     display_name: Gov.UK - Alpha
+    bundle_identifier: uk.gov.govuk.dev
+    profile_specifiers:
+      uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
+    firebase_app_id: 1:299196369979:ios:d118523927e181c1e3e01e
+    export_method: ad-hoc
+  match:
+    <<: *MATCH_DEFAULTS
+
+beta:
+  <<: *DEFAULTS
+  app:
+    <<: *APP_DEFAULTS
+    display_name: Gov.UK - Beta
   match:
     <<: *MATCH_DEFAULTS
     method: "appstore"

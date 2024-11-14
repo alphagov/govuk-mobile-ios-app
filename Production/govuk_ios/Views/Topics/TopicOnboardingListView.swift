@@ -75,7 +75,6 @@ class TopicOnboardingListView: UIView {
             if index <= topics.count - 1 {
                 let card = createOnboardingTopicCard(for: topics[index])
                 rowStack.addArrangedSubview(card)
-                firstCard.heightAnchor.constraint(equalTo: card.heightAnchor).isActive = true
             } else {
                 rowStack.addArrangedSubview(UIView())
             }

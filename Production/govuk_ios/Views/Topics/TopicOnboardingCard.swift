@@ -11,7 +11,6 @@ class TopicOnboardingCard: UIView {
         localView.numberOfLines = 0
         localView.text = viewModel.title
         localView.textAlignment = .center
-        localView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
@@ -39,8 +38,6 @@ class TopicOnboardingCard: UIView {
         stackView.axis = .horizontal
         stackView.spacing = 0
         stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
         return stackView
     }()
 
@@ -51,7 +48,6 @@ class TopicOnboardingCard: UIView {
         localView.numberOfLines = 0
         localView.text = viewModel.description
         localView.textAlignment = .center
-        localView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
@@ -62,7 +58,6 @@ class TopicOnboardingCard: UIView {
         let imageView = UIImageView(image: image)
         imageView.tintColor = UIColor.govUK.text.link
         imageView.preferredSymbolConfiguration = config
-        imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return imageView
     }()
 
@@ -101,6 +96,9 @@ class TopicOnboardingCard: UIView {
         cardStackView.addArrangedSubview(iconImageView)
         cardStackView.addArrangedSubview(titleLabel)
         cardStackView.addArrangedSubview(descriptionLabel)
+        let spacer = UIView()
+        cardStackView.addArrangedSubview(spacer)
+        cardStackView.setCustomSpacing(0, after: spacer)
         cardStackView.addArrangedSubview(selectedStackView)
         toggleSelectedIconAndTextViews()
     }

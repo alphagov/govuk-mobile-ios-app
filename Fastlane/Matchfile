@@ -1,3 +1,4 @@
 git_url('https://github.com/alphagov/govuk-mobile-ios-certificates.git')
 
 storage_mode('git')
+git_branch('main')

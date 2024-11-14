@@ -29,7 +29,15 @@ Runs all the tests
 [bundle exec] fastlane ios alpha
 ```
 
-Builds alpha configuration
+Builds alpha configuration and deploys to Firebase
+
+### ios beta
+
+```sh
+[bundle exec] fastlane ios beta
+```
+
+Builds beta configuration and deploys to Testflight
 
 ### ios sign
 

@@ -14,9 +14,9 @@ class TopicOnboardingListView: UIView {
         return localView
     }()
 
-    private var selectedAction: (Topic, Bool) -> Void
+    private var selectedAction: (Topic) -> Void
 
-    init(selectedAction: @escaping (Topic, Bool) -> Void) {
+    init(selectedAction: @escaping (Topic) -> Void) {
         self.selectedAction = selectedAction
         super.init(frame: .zero)
         configureUI()
@@ -93,12 +93,8 @@ class TopicOnboardingListView: UIView {
     private func createOnboardingTopicCard(for topic: Topic) -> TopicOnboardingCard {
         let model = TopicOnboardingCardModel(
             topic: topic,
-            tapAction: { [weak self] isSelected in
-                self?.selectedAction(topic, isSelected)
-            }
+            selectedAction: selectedAction
         )
-        let topicCard = TopicOnboardingCard(viewModel: model)
-        topicCard.translatesAutoresizingMaskIntoConstraints = false
-        return topicCard
+        return TopicOnboardingCard(viewModel: model)
     }
 }

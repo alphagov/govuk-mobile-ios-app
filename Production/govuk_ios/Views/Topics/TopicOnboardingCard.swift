@@ -108,6 +108,14 @@ class TopicOnboardingCard: UIControl {
         )
     }
 
+    @objc
+    private func cardTapped() {
+        viewModel.selected()
+        toggleTintColorOfCard()
+        selectedStackView.isSelected = viewModel.isSelected
+        configureAccessibility()
+    }
+
     private func configureAccessibility() {
         isAccessibilityElement = true
         accessibilityTraits = .button
@@ -115,15 +123,6 @@ class TopicOnboardingCard: UIControl {
             accessibilityTraits.insert(.selected)
         }
         accessibilityLabel = viewModel.title + ", " + (viewModel.description ?? "")
-    }
-
-    @objc
-    private func cardTapped() {
-        viewModel.isSelected.toggle()
-        toggleTintColorOfCard()
-        viewModel.tapAction(viewModel.isSelected)
-        selectedStackView.isSelected = viewModel.isSelected
-        configureAccessibility()
     }
 
     private func toggleTintColorOfCard() {

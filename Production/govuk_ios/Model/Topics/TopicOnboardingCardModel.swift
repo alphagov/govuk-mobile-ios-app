@@ -1,17 +1,32 @@
 import Foundation
 
-class TopicOnboardingCardModel {
-    let title: String
-    let description: String?
-    let iconName: String
-    let tapAction: (Bool) -> Void
-    var isSelected: Bool = false
+struct TopicOnboardingCardModel {
+    private let topic: Topic
+    private let selectedAction: (Topic) -> Void
 
     init(topic: Topic,
-         tapAction: @escaping (Bool) -> Void) {
-        self.title = topic.title
-        self.description = topic.topicDescription
-        self.iconName = topic.iconName
-        self.tapAction = tapAction
+         selectedAction: @escaping (Topic) -> Void) {
+        self.topic = topic
+        self.selectedAction = selectedAction
+    }
+
+    var title: String {
+        topic.title
+    }
+
+    var description: String? {
+        topic.topicDescription
+    }
+
+    var iconName: String {
+        topic.iconName
+    }
+
+    var isSelected: Bool {
+        topic.isFavorite
+    }
+
+    func selected() {
+        selectedAction(topic)
     }
 }

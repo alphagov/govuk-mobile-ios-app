@@ -5,7 +5,7 @@ class TopicOnboardingViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let dismissAction: () -> Void
-    @Published var isTopicSelected: Bool = false
+    @Published private(set) var isTopicSelected: Bool = false
     private var selectedTopics: Set<Topic> = []
 
     let title = String.topics.localized(
@@ -38,13 +38,15 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func fetchTopics() {
-        topicsService.fetchRemoteList(completion: { _ in /*Do nothing*/ })
+        topicsService.fetchRemoteList(
+            completion: { _ in /*Do nothing*/ }
+        )
     }
 
-    func topicSelected(topic: Topic,
-                       selected: Bool) {
+    func topicSelected(topic: Topic) {
+        topic.isFavorite.toggle()
         let action: String
-        if selected {
+        if topic.isFavorite {
             action = "add"
             selectedTopics.insert(topic)
         } else {

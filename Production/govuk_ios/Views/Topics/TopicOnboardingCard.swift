@@ -56,8 +56,9 @@ class TopicOnboardingCard: UIControl {
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
-        addActions()
         configureAccessibility()
+        configureSelectedState()
+        addActions()
     }
 
     required init(coder: NSCoder) {
@@ -81,6 +82,12 @@ class TopicOnboardingCard: UIControl {
         cardStackView.setCustomSpacing(0, after: spacer)
 
         cardStackView.addArrangedSubview(selectedStackView)
+    }
+
+    private func configureSelectedState() {
+        toggleTintColorOfCard()
+        selectedStackView.isSelected = viewModel.isSelected
+        configureAccessibility()
     }
 
     private func configureConstraints() {
@@ -111,9 +118,7 @@ class TopicOnboardingCard: UIControl {
     @objc
     private func cardTapped() {
         viewModel.selected()
-        toggleTintColorOfCard()
-        selectedStackView.isSelected = viewModel.isSelected
-        configureAccessibility()
+        configureSelectedState()
     }
 
     private func configureAccessibility() {

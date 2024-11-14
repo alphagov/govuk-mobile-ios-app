@@ -2,13 +2,14 @@ import Foundation
 import UIKit
 
 class TopicOnboardingListView: UIView {
-    private var rowCount = 2
+    private var rowCount: Int {
+        UITraitCollection.current.verticalSizeClass == .regular ? 2 : 4
+    }
 
     private lazy var cardStackView: UIStackView = {
         let localView = UIStackView()
         localView.axis = .vertical
         localView.spacing = 16
-        localView.alignment = .leading
         localView.distribution = .fill
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
@@ -49,35 +50,24 @@ class TopicOnboardingListView: UIView {
     }
 
     func updateTopics(_ topics: [Topic]) {
-        let sizeClass = UITraitCollection.current.verticalSizeClass
-        rowCount = sizeClass == .regular ? 2 : 4
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createRow(startingAt: index, of: topics)
-            rowStack.translatesAutoresizingMaskIntoConstraints = false
             cardStackView.addArrangedSubview(rowStack)
-            rowStack.leadingAnchor.constraint(
-                equalTo: cardStackView.leadingAnchor
-            ).isActive = true
-            rowStack.trailingAnchor.constraint(
-                equalTo: cardStackView.trailingAnchor
-            ).isActive = true
         }
     }
 
     private func createRow(startingAt startIndex: Int,
                            of topics: [Topic]) -> UIStackView {
         let rowStack = createRowStack()
-        let firstCard = createOnboardingTopicCard(for: topics[startIndex])
-        rowStack.addArrangedSubview(firstCard)
-
-        for index in (startIndex + 1)..<(startIndex + rowCount) {
+        for index in startIndex..<(startIndex + rowCount) {
+            let view: UIView
             if index <= topics.count - 1 {
-                let card = createOnboardingTopicCard(for: topics[index])
-                rowStack.addArrangedSubview(card)
+                view = createOnboardingTopicCard(for: topics[index])
             } else {
-                rowStack.addArrangedSubview(UIView())
+                view = UIView()
             }
+            rowStack.addArrangedSubview(view)
         }
         return rowStack
     }

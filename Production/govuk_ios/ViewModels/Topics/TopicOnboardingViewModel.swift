@@ -100,6 +100,7 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func secondaryAction() {
+        topics.first?.managedObjectContext?.rollback()
         trackSecondaryEvent()
         dismissAction()
     }

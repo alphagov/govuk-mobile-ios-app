@@ -483,11 +483,17 @@
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.AppUnavailableViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.EditTopicsViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.EditTopicsViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.EditTopicsViewControllerSnapshotTests/test_loadInNavigationController_noFavourites_notPersonalised_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.EditTopicsViewControllerSnapshotTests/test_loadInNavigationController_noFavourites_personalised_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.HomeViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.HomeViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.HostingViewControllerSnapshotTests/test_loadInNavigationController_hiddenNavbar_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.HostingViewControllerSnapshotTests/test_loadInNavigationController_showNavbar_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.LaunchViewControllerSnapshotTests/test_loadInNavigationController_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_editing_allSelected_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_editing_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.RecentActivityListViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SearchViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SearchViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SearchViewControllerSnapshotTests/test_search_failureResponse_genericError_rendersCorrectly@3x.png",
@@ -497,6 +503,13 @@
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SettingsViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SettingsViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.SettingsViewControllerSnapshotTests/test_loadInNavigationController_preview_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_stepBySteps_dark_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_stepBySteps_light_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_dark_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_fetched_manyStepBySteps_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_fetched_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_light_fetching_rendersCorrectly@3x.png",
+				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicDetailViewSnapshotTests/test_topicDetail_onlySubTopics_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicOnboardingViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
 				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicOnboardingViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AllTopicsViewControllerSnapshotTests.swift,
@@ -528,8 +541,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				govuk_ios/govuk_ios_snapshot_tests/Helpers/SnapshotTestCase.swift,
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicOnboardingViewControllerSnapshotTests/test_loadInNavigationController_dark_rendersCorrectly@3x.png",
-				"govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64/govuk_ios_snapshot_tests.TopicOnboardingViewControllerSnapshotTests/test_loadInNavigationController_light_rendersCorrectly@3x.png",
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AllTopicsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AnalyticsConsentViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AppForcedUpdateViewControllerSnapshotTests.swift,
@@ -1203,12 +1214,12 @@
 		D0F86E1F2CAC3BE000FF2D9E /* Topics */ = {
 			isa = PBXGroup;
 			children = (
-				16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */,
-				16D17D412CC01C6A00E99794 /* TopicRowView.swift */,
-				D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */,
 				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
+				D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */,
 				4E00EEF02CCB04FF007B61E8 /* TopicOnboardingCard.swift */,
 				4E00EEF22CCB0523007B61E8 /* TopicOnboardingListView.swift */,
+				16D17D412CC01C6A00E99794 /* TopicRowView.swift */,
+				16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";

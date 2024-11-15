@@ -6,5 +6,7 @@ gem 'fastlane'
 gem 'rubocop'
 gem 'slather'
 
-plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
-eval_gemfile(plugins_path) if File.exist?(plugins_path)
+install_if -> { RUBY_PLATFORM =~ /darwin/ } do
+  plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+  eval_gemfile(plugins_path) if File.exist?(plugins_path)
+end

@@ -10,7 +10,7 @@ concurrency:
 jobs:
   build:
     name: Unit test
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 45
 
     steps:
@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@82dd21cb955e5633e70976c289b2e3b01c0f18db # pin@v1.176.0
+        uses: ruby/setup-ruby@a2bbe5b1b236842c1cb7dd11e8e3b51e0a616acc # pin@v1.202.0
         with:
           bundler-cache: true
 

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - feature/govukapp-912-build-config
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

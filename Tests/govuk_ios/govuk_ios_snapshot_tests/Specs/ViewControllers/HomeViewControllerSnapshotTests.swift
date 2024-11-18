@@ -19,7 +19,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         mockTopicService._stubbedFetchAllTopics = topics
 
         topics.removeLast()
-        mockTopicService._stubbedFetchFavoriteTopics = topics
+        mockTopicService._stubbedFetchFavouriteTopics = topics
 
         VerifySnapshotInNavigationController(
             viewController: viewController(),
@@ -34,7 +34,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             context: coreData.viewContext
         )
         mockTopicService._stubbedFetchAllTopics = topics
-        mockTopicService._stubbedFetchFavoriteTopics = topics
+        mockTopicService._stubbedFetchFavouriteTopics = topics
 
         VerifySnapshotInNavigationController(
             viewController: viewController(),

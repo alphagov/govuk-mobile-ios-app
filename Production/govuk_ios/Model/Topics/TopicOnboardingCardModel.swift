@@ -23,7 +23,7 @@ struct TopicOnboardingCardModel {
     }
 
     var isSelected: Bool {
-        topic.isFavorite
+        topic.isFavourite
     }
 
     func selected() {

@@ -15,7 +15,8 @@ struct LaunchCoordinatorTests {
         let expectedTopics = TopicResponseItem.arrangeMultiple
         let expectedResponse = AppLaunchResponse(
             configResult: .success(.arrange),
-            topicResult: .success(expectedTopics)
+            topicResult: .success(expectedTopics),
+            appVersionProvider: MockAppVersionProvider()
         )
         var sut: LaunchCoordinator?
         let response = await withCheckedContinuation { @MainActor continuation in
@@ -33,6 +34,8 @@ struct LaunchCoordinatorTests {
         let topics = try #require(try response.topicResult.get())
 
         #expect(topics.count == expectedTopics.count)
+
+        // Retain the subject until test is complete
         sut = nil
     }
 }

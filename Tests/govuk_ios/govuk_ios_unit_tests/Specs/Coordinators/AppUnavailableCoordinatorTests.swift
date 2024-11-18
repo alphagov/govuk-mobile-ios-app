@@ -43,21 +43,3 @@ struct AppUnavailableCoordinatorTests {
         #expect(started)
     }
 }
-
-import CoreData
-
-extension AppLaunchResponse {
-    static var arrangeAvailable: AppLaunchResponse {
-        .init(
-            configResult: .success(.arrange),
-            topicResult: .success(TopicResponseItem.arrangeMultiple)
-        )
-    }
-
-    static var arrangeUnavailable: AppLaunchResponse {
-        .init(
-            configResult: .success(.arrange(config: .arrange(available: false))),
-            topicResult: .success(TopicResponseItem.arrangeMultiple)
-        )
-    }
-}

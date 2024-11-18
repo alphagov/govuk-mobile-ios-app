@@ -54,9 +54,13 @@ struct AppCoordinatorTests {
         //Finish launch loading
         let launchResult = AppLaunchResponse(
             configResult: .success(.arrange),
-            topicResult: .success([])
+            topicResult: .success(TopicResponseItem.arrangeMultiple),
+            appVersionProvider: MockAppVersionProvider()
         )
         mockCoodinatorBuilder._receivedLaunchCompletion?(launchResult)
+        mockCoodinatorBuilder._receivedAppUnavailableDismissAction?()
+        mockCoodinatorBuilder._receivedAppForcedUpdateDismissAction?()
+        mockCoodinatorBuilder._receivedAppRecommendUpdateDismissAction?()
         mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()
         mockCoodinatorBuilder._receivedTopicOnboardingDidDismissAction?()

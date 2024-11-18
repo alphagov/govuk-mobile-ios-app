@@ -18,8 +18,7 @@ class AppUnavailableCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard launchResponse.hasErrors ||
-              !launchResponse.isAppAvailable
+        guard !launchResponse.isAppAvailable
         else { return dismissAction() }
         setAppUnavailable()
     }

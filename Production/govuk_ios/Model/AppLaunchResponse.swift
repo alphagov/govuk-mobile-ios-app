@@ -3,6 +3,7 @@ import Foundation
 struct AppLaunchResponse {
     let configResult: FetchAppConfigResult
     let topicResult: FetchTopicsListResult
+    let appVersionProvider: AppVersionProvider
 
     var isAppAvailable: Bool {
         guard let result = try? configResult.get()
@@ -10,19 +11,31 @@ struct AppLaunchResponse {
         return result.config.available
     }
 
-    var hasErrors: Bool {
-        let errors: [Error?] = [
-            configResult.getError(),
-            topicResult.getError()
-        ]
-        return errors
-            .compactMap { $0 }
-            .isEmpty == false
+    var isUpdateRequired: Bool {
+        switch configResult {
+        case .failure(.invalidSignature):
+            return true
+        case .success(let response):
+            return appVersionNumber.isVersion(
+                lessThan: response.config.minimumVersion
+            )
+        default:
+            return false
+        }
     }
 
-    var isAppForcedUpdate: Bool {
-        guard case .failure(.invalidSignature) = configResult
-        else { return false }
-        return true
+    var isUpdateRecommended: Bool {
+        switch configResult {
+        case .success(let response):
+            return appVersionNumber.isVersion(
+                lessThan: response.config.recommendedVersion
+            )
+        default:
+            return false
+        }
+    }
+
+    private var appVersionNumber: String {
+        appVersionProvider.versionNumber ?? ""
     }
 }

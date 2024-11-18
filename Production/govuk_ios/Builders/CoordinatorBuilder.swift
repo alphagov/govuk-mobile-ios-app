@@ -61,19 +61,21 @@ class CoordinatorBuilder {
     }
 
     func appRecommendUpdate(navigationController: UINavigationController,
+                            launchResponse: AppLaunchResponse,
                             dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AppRecommendUpdateCoordinator(
             navigationController: navigationController,
-            appConfigService: container.appConfigService.resolve(),
+            launchResponse: launchResponse,
             dismissAction: dismissAction
         )
     }
 
     func appForcedUpdate(navigationController: UINavigationController,
+                         launchResponse: AppLaunchResponse,
                          dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AppForcedUpdateCoordinator(
             navigationController: navigationController,
-            appConfigService: container.appConfigService.resolve(),
+            launchResponse: launchResponse,
             dismissAction: dismissAction
         )
     }

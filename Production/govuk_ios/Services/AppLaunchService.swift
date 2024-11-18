@@ -20,7 +20,8 @@ struct AppLaunchService: AppLaunchServiceInterface {
             async let topicResult = await fetchTopics()
             let response = await AppLaunchResponse(
                 configResult: configResult,
-                topicResult: topicResult
+                topicResult: topicResult,
+                appVersionProvider: Bundle.main
             )
             DispatchQueue.main.async {
                 completion(response)

@@ -9,12 +9,15 @@ import Testing
 struct AppForcedUpdateCoordinatorTests {
     @Test
     func start_noUpdateRequired_callsDismiss() async {
-        let mockAppConfigService = MockAppConfigService()
-        mockAppConfigService.isAppForcedUpdate = false
         await withCheckedContinuation { continuation in
+            let response = AppLaunchResponse.arrange(
+                minVersion: "1.0.0",
+                recommendedVersion: "1.2.0",
+                currentVersion: "1.1.0"
+            )
             let sut = AppForcedUpdateCoordinator(
                 navigationController: UINavigationController(),
-                appConfigService: mockAppConfigService,
+                launchResponse: response,
                 dismissAction: {
                     continuation.resume()
                 }
@@ -25,12 +28,15 @@ struct AppForcedUpdateCoordinatorTests {
 
     @Test
     func start_updateRequired_doesntCallDismiss() async throws {
-        let mockAppConfigService = MockAppConfigService()
-        mockAppConfigService.isAppForcedUpdate = true
+        let response = AppLaunchResponse.arrange(
+            minVersion: "1.0.0",
+            recommendedVersion: "1.2.0",
+            currentVersion: "0.1.0"
+        )
         let started: Bool = try await withCheckedThrowingContinuation { continuation in
             let sut = AppForcedUpdateCoordinator(
                 navigationController: UINavigationController(),
-                appConfigService: mockAppConfigService,
+                launchResponse: response,
                 dismissAction: {
                     continuation.resume(throwing: TestError.unexpectedMethodCalled)
                 }

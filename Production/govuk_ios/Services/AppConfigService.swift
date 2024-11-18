@@ -5,7 +5,7 @@ protocol AppConfigServiceInterface {
     var isAppAvailable: Bool { get }
     var isAppForcedUpdate: Bool { get }
     var isAppRecommendUpdate: Bool { get }
-    func fetchAppConfig(completion: @escaping () -> Void)
+    func fetchAppConfig(completion: @escaping FetchAppConfigCompletion)
     func isFeatureEnabled(key: Feature) -> Bool
 }
 
@@ -15,36 +15,25 @@ public final class AppConfigService: AppConfigServiceInterface {
     var isAppRecommendUpdate: Bool = false
     private var featureFlags: [String: Bool] = [:]
 
-    private let appConfigRepository: AppConfigRepositoryInterface
     private let appConfigServiceClient: AppConfigServiceClientInterface
     private let appVersionProvider: AppVersionProvider
 
-    init(appConfigRepository: AppConfigRepositoryInterface,
-         appConfigServiceClient: AppConfigServiceClientInterface,
+    init(appConfigServiceClient: AppConfigServiceClientInterface,
          appVersionProvider: AppVersionProvider = Bundle.main) {
-        self.appConfigRepository = appConfigRepository
         self.appConfigServiceClient = appConfigServiceClient
         self.appVersionProvider = appVersionProvider
     }
 
-    func fetchAppConfig(completion: @escaping () -> Void) {
-        appConfigRepository.fetchAppConfig(
-            filename: ConfigStrings.filename.rawValue,
-            completion: { [weak self] result in
-                self?.handleResult(result)
-                completion()
-            }
-        )
-
+    func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {
         appConfigServiceClient.fetchAppConfig(
             completion: { [weak self] result in
                 self?.handleResult(result)
-                completion()
+                completion(result)
             }
         )
     }
 
-    private func handleResult(_ result: Result<AppConfig, AppConfigError>) {
+    private func handleResult(_ result: FetchAppConfigResult) {
         switch result {
         case .success(let appConfig):
             setConfig(appConfig.config)
@@ -80,9 +69,5 @@ public final class AppConfigService: AppConfigServiceInterface {
 
     func isFeatureEnabled(key: Feature) -> Bool {
         featureFlags[key.rawValue] ?? false
-    }
-
-    private enum ConfigStrings: String {
-        case filename = "RemoteConfigResponse"
     }
 }

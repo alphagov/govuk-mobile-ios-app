@@ -1,12 +1,15 @@
 import Foundation
 
-typealias FetchTopicsListResult = (Result<[TopicResponseItem], TopicsServiceError>) -> Void
-typealias FetchTopicDetailsResult = (Result<TopicDetailResponse, TopicsServiceError>) -> Void
+typealias FetchTopicsListCompletion = (sending FetchTopicsListResult) -> Void
+typealias FetchTopicsListResult = Result<[TopicResponseItem], TopicsServiceError>
+
+typealias FetchTopicDetailsCompletion = (FetchTopicDetailsResult) -> Void
+typealias FetchTopicDetailsResult = Result<TopicDetailResponse, TopicsServiceError>
 
 protocol TopicsServiceClientInterface {
-    func fetchList(completion: @escaping FetchTopicsListResult)
+    func fetchList(completion: @escaping FetchTopicsListCompletion)
     func fetchDetails(ref: String,
-                      completion: @escaping FetchTopicDetailsResult)
+                      completion: @escaping FetchTopicDetailsCompletion)
 }
 
 enum TopicsServiceError: Error {
@@ -22,7 +25,7 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
         self.serviceClient = serviceClient
     }
 
-    func fetchList(completion: @escaping FetchTopicsListResult) {
+    func fetchList(completion: @escaping FetchTopicsListCompletion) {
         let topicsRequest = GOVRequest(
             urlPath: "/static/topics/list",
             method: .get,
@@ -51,7 +54,7 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
     }
 
     func fetchDetails(ref: String,
-                      completion: @escaping FetchTopicDetailsResult) {
+                      completion: @escaping FetchTopicDetailsCompletion) {
         let topicsRequest = GOVRequest(
             urlPath: "/static/topics/" + ref,
             method: .get,

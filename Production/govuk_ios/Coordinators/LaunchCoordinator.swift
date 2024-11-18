@@ -1,44 +1,59 @@
 import UIKit
 import Foundation
 
+typealias LaunchCoordinatorCompletion = (sending AppLaunchResponse) -> Void
 class LaunchCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
-    private let appConfigService: AppConfigServiceInterface
-    private let completion: () -> Void
+    private let appLaunchService: AppLaunchServiceInterface
+    private let completion: LaunchCoordinatorCompletion
+    private var launchResponse: AppLaunchResponse?
 
-    private let dispatchGroup = DispatchGroup()
+    private var dispatchGroup = DispatchGroup()
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
-         appConfigService: AppConfigServiceInterface,
-         completion: @escaping () -> Void) {
+         appLaunchService: AppLaunchServiceInterface,
+         completion: @escaping LaunchCoordinatorCompletion) {
         self.viewControllerBuilder = viewControllerBuilder
-        self.appConfigService = appConfigService
+        self.appLaunchService = appLaunchService
         self.completion = completion
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        fetchAppConfig()
-
+        fetchLaunchResponse()
         setLaunchViewController()
 
-        dispatchGroup.notify(queue: .main) {
-            self.completion()
-        }
+        dispatchGroup.notify(
+            queue: .main,
+            execute: { [weak self] in
+                self?.handleResponse()
+            }
+        )
     }
 
-    private func fetchAppConfig() {
+    private func handleResponse() {
+        guard let launchResponse
+        else { return }
+        completion(launchResponse)
+    }
+
+    private func fetchLaunchResponse() {
         dispatchGroup.enter()
-        appConfigService.fetchAppConfig {
-            self.dispatchGroup.leave()
-        }
+        appLaunchService.fetch(
+            completion: { [weak self] response in
+                self?.launchResponse = response
+                self?.dispatchGroup.leave()
+            }
+        )
     }
 
     private func setLaunchViewController() {
         dispatchGroup.enter()
         let viewController = viewControllerBuilder.launch(
-            completion: { self.dispatchGroup.leave() }
+            completion: { [weak self] in
+                self?.dispatchGroup.leave()
+            }
         )
         set(viewController, animated: false)
     }

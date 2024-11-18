@@ -99,10 +99,13 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _receivedTopicOnboardingDismissAction: (() -> Void)?
+    var _receivedTopicOnboardingTopics: [Topic]?
     var _stubbedTopicOnboardingViewController: UIViewController?
-    override func topicOnboarding(analyticsService: AnalyticsServiceInterface,
-                                  topicsService: TopicsServiceInterface,
+    override func topicOnboarding(topics: [Topic],
+                                  analyticsService: any AnalyticsServiceInterface,
+                                  topicsService: any TopicsServiceInterface,
                                   dismissAction: @escaping () -> Void) -> UIViewController {
+        _receivedTopicOnboardingTopics = topics
         _receivedTopicOnboardingDismissAction = dismissAction
         return _stubbedTopicOnboardingViewController ?? UIViewController()
     }

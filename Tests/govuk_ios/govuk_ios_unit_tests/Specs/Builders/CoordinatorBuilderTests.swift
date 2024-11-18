@@ -42,7 +42,7 @@ struct CoordinatorBuilderTests {
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.launch(
             navigationController: mockNavigationController,
-            completion: { }
+            completion: { _ in }
         )
 
         #expect(coordinator is LaunchCoordinator)

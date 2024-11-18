@@ -52,7 +52,11 @@ struct AppCoordinatorTests {
         #expect(mockLaunchCoodinator._startCalled)
 
         //Finish launch loading
-        mockCoodinatorBuilder._receivedLaunchCompletion?()
+        let launchResult = AppLaunchResponse(
+            configResult: .success(.arrange),
+            topicResult: .success([])
+        )
+        mockCoodinatorBuilder._receivedLaunchCompletion?(launchResult)
         mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()
         mockCoodinatorBuilder._receivedTopicOnboardingDidDismissAction?()

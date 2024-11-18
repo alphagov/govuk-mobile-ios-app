@@ -40,20 +40,22 @@ class CoordinatorBuilder {
     }
 
     func launch(navigationController: UINavigationController,
-                completion: @escaping () -> Void) -> BaseCoordinator {
+                completion: @escaping (AppLaunchResponse) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
-            appConfigService: container.appConfigService.resolve(),
+            appLaunchService: container.appLaunchService.resolve(),
             completion: completion
         )
     }
 
     func appUnavailable(navigationController: UINavigationController,
+                        launchResponse: AppLaunchResponse,
                         dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AppUnavailableCoordinator(
             navigationController: navigationController,
             appConfigService: container.appConfigService.resolve(),
+            launchResponse: launchResponse,
             dismissAction: dismissAction
         )
     }

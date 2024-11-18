@@ -22,17 +22,22 @@ class AppCoordinator: BaseCoordinator {
     private func startLaunch(url: URL?) {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
-            completion: { [weak self] in
+            completion: { [weak self] response in
                 self?.initialLaunch = false
-                self?.startAppUnavailable(url: url)
+                self?.startAppUnavailable(
+                    url: url,
+                    launchResponse: response
+                )
             }
         )
         start(coordinator)
     }
 
-    private func startAppUnavailable(url: URL?) {
+    private func startAppUnavailable(url: URL?,
+                                     launchResponse: AppLaunchResponse) {
         let coordinator = coordinatorBuilder.appUnavailable(
             navigationController: root,
+            launchResponse: launchResponse,
             dismissAction: { [weak self] in
                 self?.startAppForcedUpdate(url: url)
             }

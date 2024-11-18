@@ -51,10 +51,9 @@ class TopicOnboardingViewController: BaseViewController,
     }()
 
     private lazy var topicsListView = TopicOnboardingListView(
-        selectedAction: { [weak self] topic, selected in
+        selectedAction: { [weak self] topic in
             self?.viewModel.topicSelected(
-                topic: topic,
-                selected: selected
+                topic: topic
             )
         }
     )

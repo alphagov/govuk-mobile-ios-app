@@ -1,8 +1,27 @@
 import Foundation
 import UIKit
 
-class TopicOnboardingCard: UIView {
+class TopicOnboardingCard: UIControl {
     private let viewModel: TopicOnboardingCardModel
+
+    private lazy var cardStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isUserInteractionEnabled = false
+        return stackView
+    }()
+
+    private lazy var iconImageView: UIImageView = {
+        let image = UIImage(systemName: viewModel.iconName)
+        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
+        let imageView = UIImageView(image: image)
+        imageView.tintColor = UIColor.govUK.text.link
+        imageView.preferredSymbolConfiguration = config
+        return imageView
+    }()
 
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
@@ -11,37 +30,8 @@ class TopicOnboardingCard: UIView {
         localView.numberOfLines = 0
         localView.text = viewModel.title
         localView.textAlignment = .center
-        localView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         localView.lineBreakMode = .byWordWrapping
         return localView
-    }()
-
-    private lazy var selectedLabel: UILabel = {
-        let localView = UILabel()
-        localView.font = .govUK.body
-        localView.text = String.topics.localized(
-            "topicOnboardingCardUnselected"
-        )
-        localView.textAlignment = .center
-        localView.adjustsFontForContentSizeCategory = true
-        localView.numberOfLines = 0
-        return localView
-    }()
-
-    private lazy var selectedIconImageView: UIImageView = {
-        let icon = UIImage(systemName: "plus")
-        let imageView = UIImageView(image: icon)
-        return imageView
-    }()
-
-    private lazy var selectedStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 0
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
-        return stackView
     }()
 
     private lazy var descriptionLabel: UILabel = {
@@ -51,28 +41,14 @@ class TopicOnboardingCard: UIView {
         localView.numberOfLines = 0
         localView.text = viewModel.description
         localView.textAlignment = .center
-        localView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
 
-    private lazy var iconImageView: UIImageView = {
-        let image = UIImage(systemName: viewModel.iconName)
-        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
-        let imageView = UIImageView(image: image)
-        imageView.tintColor = UIColor.govUK.text.link
-        imageView.preferredSymbolConfiguration = config
-        imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        return imageView
-    }()
-
-    private lazy var cardStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var selectedStackView: TopicSelectedView = {
+        let localView = TopicSelectedView()
+        localView.isSelected = viewModel.isSelected
+        return localView
     }()
 
     init(viewModel: TopicOnboardingCardModel) {
@@ -80,8 +56,9 @@ class TopicOnboardingCard: UIView {
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
-        configureGestures()
         configureAccessibility()
+        configureSelectedState()
+        addActions()
     }
 
     required init(coder: NSCoder) {
@@ -96,13 +73,21 @@ class TopicOnboardingCard: UIView {
         layer.masksToBounds = true
         layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
         addSubview(cardStackView)
-        selectedStackView.addArrangedSubview(selectedIconImageView)
-        selectedStackView.addArrangedSubview(selectedLabel)
         cardStackView.addArrangedSubview(iconImageView)
         cardStackView.addArrangedSubview(titleLabel)
         cardStackView.addArrangedSubview(descriptionLabel)
+
+        let spacer = UIView()
+        cardStackView.addArrangedSubview(spacer)
+        cardStackView.setCustomSpacing(0, after: spacer)
+
         cardStackView.addArrangedSubview(selectedStackView)
-        toggleSelectedIconAndTextViews()
+    }
+
+    private func configureSelectedState() {
+        toggleTintColorOfCard()
+        selectedStackView.isSelected = viewModel.isSelected
+        configureAccessibility()
     }
 
     private func configureConstraints() {
@@ -122,12 +107,18 @@ class TopicOnboardingCard: UIView {
         ])
     }
 
-    private func configureGestures() {
-        let tapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(cardTapped)
+    private func addActions() {
+        addTarget(
+            self,
+            action: #selector(cardTapped),
+            for: .touchUpInside
         )
-        addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc
+    private func cardTapped() {
+        viewModel.selected()
+        configureSelectedState()
     }
 
     private func configureAccessibility() {
@@ -137,31 +128,6 @@ class TopicOnboardingCard: UIView {
             accessibilityTraits.insert(.selected)
         }
         accessibilityLabel = viewModel.title + ", " + (viewModel.description ?? "")
-    }
-
-    @objc
-    private func cardTapped() {
-        viewModel.isSelected.toggle()
-        toggleTintColorOfCard()
-        toggleSelectedIconAndTextViews()
-        viewModel.tapAction(
-            viewModel.isSelected
-        )
-        configureAccessibility()
-    }
-
-    private func toggleSelectedIconAndTextViews() {
-        selectedLabel.text = viewModel.isSelected ?
-        String.topics.localized("topicOnboardingCardSelected") :
-        String.topics.localized("topicOnboardingCardUnselected")
-
-        selectedLabel.textColor = viewModel.isSelected ?
-        UIColor.govUK.text.buttonSuccess :
-        UIColor.govUK.text.link
-
-        selectedIconImageView.tintColor = viewModel.isSelected ?
-        UIColor.govUK.text.buttonSuccess :
-        UIColor.govUK.fills.surfaceButtonPrimary
     }
 
     private func toggleTintColorOfCard() {

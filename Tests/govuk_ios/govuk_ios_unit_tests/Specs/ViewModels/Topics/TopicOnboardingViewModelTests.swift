@@ -19,7 +19,7 @@ struct TopicOnboardingViewModelTests {
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topic, selected: true)
+        sut.topicSelected(topic: topic)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["action"] as? String == "add")
@@ -29,9 +29,10 @@ struct TopicOnboardingViewModelTests {
     }
 
     @Test
-    func selectTopic_isNotSelected_tracksPress() {
+    func selectTopic_isFavourite_tracksPress() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topic = Topic.arrange(context: coreData.backgroundContext)
+        topic.isFavorite = true
         try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
 
@@ -41,7 +42,7 @@ struct TopicOnboardingViewModelTests {
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topic, selected: false)
+        sut.topicSelected(topic: topic)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["action"] as? String == "remove")
@@ -70,8 +71,11 @@ struct TopicOnboardingViewModelTests {
     func selectTopics_thenSave_savedSelectedFavourites() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topicOne = Topic.arrange(context: coreData.backgroundContext)
+        topicOne.isFavorite = true
         let topicTwo = Topic.arrange(context: coreData.backgroundContext)
+        topicTwo.isFavorite = false
         let topicThree = Topic.arrange(context: coreData.backgroundContext)
+        topicThree.isFavorite = true
         _ = Topic.arrange(context: coreData.backgroundContext)
         try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
@@ -82,10 +86,10 @@ struct TopicOnboardingViewModelTests {
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topicOne, selected: true)
-        sut.topicSelected(topic: topicOne, selected: true)
-        sut.topicSelected(topic: topicTwo, selected: true)
-        sut.topicSelected(topic: topicThree, selected: false)
+        sut.topicSelected(topic: topicOne)
+        sut.topicSelected(topic: topicOne)
+        sut.topicSelected(topic: topicTwo)
+        sut.topicSelected(topic: topicThree)
 
         sut.primaryButtonViewModel.action()
         let request = Topic.fetchRequest()
@@ -114,19 +118,24 @@ struct TopicOnboardingViewModelTests {
     }
 
     @Test
+    @MainActor
     func secondaryAction_doenstSaveSelectedFavourites() {
         let coreData = CoreDataRepository.arrangeAndLoad
-        let topicOne = Topic.arrange(context: coreData.backgroundContext)
+        let topicOne = Topic.arrange(
+            context: coreData.viewContext,
+            isFavourite: false
+        )
         try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
-
+        let mockTopicsService = MockTopicsService()
+        mockTopicsService._stubbedFetchAllTopics = [topicOne]
         let sut = TopicOnboardingViewModel(
             analyticsService: mockAnalyticsService,
-            topicsService: MockTopicsService(),
+            topicsService: mockTopicsService,
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topicOne, selected: true)
+        sut.topicSelected(topic: topicOne)
 
         sut.secondaryButtonViewModel.action()
         let request = Topic.fetchRequest()

@@ -2,21 +2,22 @@ import Foundation
 import UIKit
 
 class TopicOnboardingListView: UIView {
-    private var rowCount = 2
+    private var rowCount: Int {
+        UITraitCollection.current.verticalSizeClass == .regular ? 2 : 4
+    }
 
     private lazy var cardStackView: UIStackView = {
         let localView = UIStackView()
         localView.axis = .vertical
         localView.spacing = 16
-        localView.alignment = .leading
         localView.distribution = .fill
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
 
-    private var selectedAction: (Topic, Bool) -> Void
+    private var selectedAction: (Topic) -> Void
 
-    init(selectedAction: @escaping (Topic, Bool) -> Void) {
+    init(selectedAction: @escaping (Topic) -> Void) {
         self.selectedAction = selectedAction
         super.init(frame: .zero)
         configureUI()
@@ -49,36 +50,21 @@ class TopicOnboardingListView: UIView {
     }
 
     func updateTopics(_ topics: [Topic]) {
-        let sizeClass = UITraitCollection.current.verticalSizeClass
-        rowCount = sizeClass == .regular ? 2 : 4
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createRow(startingAt: index, of: topics)
-            rowStack.translatesAutoresizingMaskIntoConstraints = false
             cardStackView.addArrangedSubview(rowStack)
-            rowStack.leadingAnchor.constraint(
-                equalTo: cardStackView.leadingAnchor
-            ).isActive = true
-            rowStack.trailingAnchor.constraint(
-                equalTo: cardStackView.trailingAnchor
-            ).isActive = true
         }
     }
 
     private func createRow(startingAt startIndex: Int,
                            of topics: [Topic]) -> UIStackView {
         let rowStack = createRowStack()
-        let firstCard = createOnboardingTopicCard(for: topics[startIndex])
-        rowStack.addArrangedSubview(firstCard)
-
-        for index in (startIndex + 1)..<(startIndex + rowCount) {
-            if index <= topics.count - 1 {
-                let card = createOnboardingTopicCard(for: topics[index])
-                rowStack.addArrangedSubview(card)
-                firstCard.heightAnchor.constraint(equalTo: card.heightAnchor).isActive = true
-            } else {
-                rowStack.addArrangedSubview(UIView())
-            }
+        for index in startIndex..<(startIndex + rowCount) {
+            let view = index <= topics.count - 1 ?
+            createOnboardingTopicCard(for: topics[index]) :
+            UIView()
+            rowStack.addArrangedSubview(view)
         }
         return rowStack
     }
@@ -94,12 +80,8 @@ class TopicOnboardingListView: UIView {
     private func createOnboardingTopicCard(for topic: Topic) -> TopicOnboardingCard {
         let model = TopicOnboardingCardModel(
             topic: topic,
-            tapAction: { [weak self] isSelected in
-                self?.selectedAction(topic, isSelected)
-            }
+            selectedAction: selectedAction
         )
-        let topicCard = TopicOnboardingCard(viewModel: model)
-        topicCard.translatesAutoresizingMaskIntoConstraints = false
-        return topicCard
+        return TopicOnboardingCard(viewModel: model)
     }
 }

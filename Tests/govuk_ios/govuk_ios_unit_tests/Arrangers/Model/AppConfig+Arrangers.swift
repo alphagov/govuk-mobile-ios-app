@@ -8,12 +8,10 @@ extension AppConfig {
     }
 
     static func arrange(platform: String = "iOS",
-                        config: Config = .arrange,
-                        signature: String = "") -> AppConfig {
+                        config: Config = .arrange) -> AppConfig {
         .init(
             platform: platform,
-            config: config,
-            signature: signature
+            config: config
         )
     }
 }

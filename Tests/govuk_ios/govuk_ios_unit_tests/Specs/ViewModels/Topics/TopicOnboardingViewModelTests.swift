@@ -33,7 +33,7 @@ struct TopicOnboardingViewModelTests {
     func selectTopic_isFavourite_tracksPress() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topic = Topic.arrange(context: coreData.backgroundContext)
-        topic.isFavorite = true
+        topic.isFavourite = true
         try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
 
@@ -74,11 +74,11 @@ struct TopicOnboardingViewModelTests {
     func selectTopics_thenSave_savedSelectedFavourites() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topicOne = Topic.arrange(context: coreData.backgroundContext)
-        topicOne.isFavorite = true
+        topicOne.isFavourite = true
         let topicTwo = Topic.arrange(context: coreData.backgroundContext)
-        topicTwo.isFavorite = false
+        topicTwo.isFavourite = false
         let topicThree = Topic.arrange(context: coreData.backgroundContext)
-        topicThree.isFavorite = true
+        topicThree.isFavourite = true
         _ = Topic.arrange(context: coreData.backgroundContext)
         try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
@@ -97,7 +97,7 @@ struct TopicOnboardingViewModelTests {
 
         sut.primaryButtonViewModel.action()
         let request = Topic.fetchRequest()
-        request.predicate = NSPredicate(format: "isFavorite == true")
+        request.predicate = NSPredicate(format: "isFavourite == true")
         let favourites = try? coreData.backgroundContext.fetch(request)
 
         #expect(favourites?.count == 2)
@@ -145,7 +145,7 @@ struct TopicOnboardingViewModelTests {
 
         sut.secondaryButtonViewModel.action()
         let request = Topic.fetchRequest()
-        request.predicate = NSPredicate(format: "isFavorite == true")
+        request.predicate = NSPredicate(format: "isFavourite == true")
         let favourites = try? coreData.backgroundContext.fetch(request)
 
         #expect(favourites?.count == 0)

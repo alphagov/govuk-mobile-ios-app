@@ -6,12 +6,12 @@ import Testing
 @Suite
 struct AppEvent_TopicsTests {
     @Test(arguments:[true, false])
-    func toggleTopic_returnsExpectedResult(isFavorite: Bool) {
+    func toggleTopic_returnsExpectedResult(isFavourite: Bool) {
         let expectedTitle = UUID().uuidString
-        let expectedValue = isFavorite ? "On" : "Off"
+        let expectedValue = isFavourite ? "On" : "Off"
         let result = AppEvent.toggleTopic(
             title: expectedTitle,
-            isFavorite: isFavorite
+            isFavourite: isFavourite
         )
         #expect(result.name == "Function")
         #expect(result.params?.count == 4)

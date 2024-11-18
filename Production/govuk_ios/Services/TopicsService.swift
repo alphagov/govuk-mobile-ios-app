@@ -5,7 +5,7 @@ protocol TopicsServiceInterface {
     func fetchDetails(ref: String,
                       completion: @escaping FetchTopicDetailsCompletion)
     func fetchAll() -> [Topic]
-    func fetchFavorites() -> [Topic]
+    func fetchFavourites() -> [Topic]
     func save()
 
     func setHasPersonalisedTopics()
@@ -54,8 +54,8 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.fetchAll()
     }
 
-    func fetchFavorites() -> [Topic] {
-        topicsRepository.fetchFavorites()
+    func fetchFavourites() -> [Topic] {
+        topicsRepository.fetchFavourites()
     }
 
     func save() {

@@ -56,11 +56,11 @@ struct EditTopicsViewModelTests {
             analyticsService: mockAnalyticsService,
             dismissAction: { }
         )
-        try #require(topics.first?.isFavorite == true)
+        try #require(topics.first?.isFavourite == true)
 
         sut.undoChanges()
 
-        #expect(topics.first?.isFavorite == false)
+        #expect(topics.first?.isFavourite == false)
     }
 
     @Test
@@ -80,12 +80,12 @@ struct EditTopicsViewModelTests {
             dismissAction: { }
         )
 
-        try #require(topics.first?.isFavorite == true)
+        try #require(topics.first?.isFavourite == true)
         try #require(sut?.sections.count == 1)
 
         sut = nil
 
-        #expect(topics.first?.isFavorite == false)
+        #expect(topics.first?.isFavourite == false)
     }
 }
 
@@ -96,7 +96,7 @@ private extension EditTopicsViewModelTests {
             let topic = Topic(context: coreData.backgroundContext)
             topic.ref = "ref\(index)"
             topic.title = "title\(index)"
-            topic.isFavorite = false
+            topic.isFavourite = false
             topics.append(topic)
         }
         return topics

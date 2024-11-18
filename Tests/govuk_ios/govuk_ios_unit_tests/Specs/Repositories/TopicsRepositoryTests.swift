@@ -15,7 +15,7 @@ struct TopicsRepositoryTests {
         #expect(topics.count == 3)
         #expect(topics.first?.title == "Business")
         #expect(topics.first?.ref == "business")
-        #expect(topics.filter { $0.isFavorite == false }.count == 3)
+        #expect(topics.filter { $0.isFavourite == false }.count == 3)
     }
     
     @Test
@@ -35,11 +35,11 @@ struct TopicsRepositoryTests {
         topicResponseItems.append(newItem)
         sut.save(topics: topicResponseItems)
 
-        // Then the new item will not be favorited
+        // Then the new item will not be Favourited
         let topics = sut.fetchAll()
         #expect(topics.count == 4)
         let newTopic = try #require(topics.first(where: { $0.ref == "new-item" }))
-        #expect(newTopic.isFavorite == false)
+        #expect(newTopic.isFavourite == false)
     }
 
     @Test
@@ -58,7 +58,7 @@ struct TopicsRepositoryTests {
         try #require(firstSave.count == 3)
 
         let favourite = try #require(firstSave.first(where: { $0.ref == "test_1" }))
-        favourite.isFavorite = true
+        favourite.isFavourite = true
         try favourite.managedObjectContext?.save()
 
         let updatedItems: [TopicResponseItem] = [
@@ -68,7 +68,7 @@ struct TopicsRepositoryTests {
         ]
         sut.save(topics: updatedItems)
 
-        // Then the new item will not be favorited
+        // Then the new item will not be Favourited
         let topics = sut.fetchAll()
         #expect(topics.count == 3)
 
@@ -77,17 +77,17 @@ struct TopicsRepositoryTests {
         let first = try #require(topics.first(where: { $0.ref == "test_1" }))
         #expect(first.title == "first titlez")
         #expect(first.topicDescription == nil)
-        #expect(first.isFavorite == true)
+        #expect(first.isFavourite == true)
 
         let second = try #require(topics.first(where: { $0.ref == "test_2" }))
         #expect(second.title == "second titlez")
         #expect(second.topicDescription == "second descrtiption")
-        #expect(second.isFavorite == false)
+        #expect(second.isFavourite == false)
 
         let third = try #require(topics.first(where: { $0.ref == "test_3" }))
         #expect(third.title == "third titlez")
         #expect(third.topicDescription == "third description")
-        #expect(third.isFavorite == false)
+        #expect(third.isFavourite == false)
     }
 
     @Test
@@ -106,7 +106,7 @@ struct TopicsRepositoryTests {
         try #require(firstSave.count == 3)
 
         let favourite = try #require(firstSave.first(where: { $0.ref == "test_1" }))
-        favourite.isFavorite = true
+        favourite.isFavourite = true
         try favourite.managedObjectContext?.save()
 
         let updatedItems: [TopicResponseItem] = [
@@ -114,7 +114,7 @@ struct TopicsRepositoryTests {
         ]
         sut.save(topics: updatedItems)
 
-        // Then the new item will not be favorited
+        // Then the new item will not be Favourited
         let topics = sut.fetchAll()
         #expect(topics.count == 1)
 
@@ -123,19 +123,19 @@ struct TopicsRepositoryTests {
         let first = try #require(topics.first(where: { $0.ref == "test_1" }))
         #expect(first.title == "first titlez")
         #expect(first.topicDescription == "description 123")
-        #expect(first.isFavorite == true)
+        #expect(first.isFavourite == true)
     }
 
     @Test
-    func fetchFavorites_onlyReturnsFavorites() async throws {
+    func fetchFavourites_onlyReturnsFavourites() async throws {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
         let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
         Topic.arrange(context: coreData.viewContext, isFavourite: false)
 
-        let favorites = sut.fetchFavorites()
-        #expect(favorites.count == 1)
-        #expect(favorites.first?.title == expectedResult.title)
+        let Favourites = sut.fetchFavourites()
+        #expect(Favourites.count == 1)
+        #expect(Favourites.first?.title == expectedResult.title)
     }
     
     @Test

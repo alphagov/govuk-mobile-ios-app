@@ -3,7 +3,7 @@ import CoreData
 
 protocol TopicsRepositoryInterface {
     func save(topics: [TopicResponseItem])
-    func fetchFavorites() -> [Topic]
+    func fetchFavourites() -> [Topic]
     func fetchAll() -> [Topic]
     func save()
 }
@@ -46,9 +46,9 @@ struct TopicsRepository: TopicsRepositoryInterface {
         try? coreData.viewContext.save()
     }
 
-    func fetchFavorites() -> [Topic] {
+    func fetchFavourites() -> [Topic] {
         fetch(
-            predicate: .init(format: "isFavorite = true"),
+            predicate: .init(format: "isFavourite = true"),
             context: coreData.viewContext
         ).fetchedObjects ?? []
     }

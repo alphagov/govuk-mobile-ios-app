@@ -58,9 +58,9 @@ struct TopicsServiceTests {
     }
 
     @Test
-    func fetchFavorites_fetchesFromRepository() async {
-        _ = sut.fetchFavorites()
-        #expect(mockTopicsRepository._didCallFetchFavorites)
+    func fetchFavourites_fetchesFromRepository() async {
+        _ = sut.fetchFavourites()
+        #expect(mockTopicsRepository._didCallFetchFavourites)
     }
 
     @Test

@@ -9,6 +9,7 @@ default: &DEFAULTS
     profile_specifiers:
       uk.gov.govuk: "match AppStore uk.gov.govuk"
     export_method: app-store
+    build_configuration: Release
   scan:
     output_directory: test_output
     devices:
@@ -34,6 +35,7 @@ alpha:
       uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
     firebase_app_id: 1:299196369979:ios:d118523927e181c1e3e01e
     export_method: ad-hoc
+    build_configuration: Debug
   match:
     <<: *MATCH_DEFAULTS
 

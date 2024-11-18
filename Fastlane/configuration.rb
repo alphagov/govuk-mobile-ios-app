@@ -36,7 +36,7 @@ class Configuration
   end
 
   def app_configuration
-    'Release'
+    setting(:app, :build_configuration)
   end
 
   def app_export_method

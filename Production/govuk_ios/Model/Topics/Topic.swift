@@ -18,7 +18,7 @@ class Topic: NSManagedObject,
     @NSManaged public var ref: String
     @NSManaged public var title: String
     @NSManaged public var topicDescription: String?
-    @NSManaged public var isFavorite: Bool
+    @NSManaged public var isFavourite: Bool
 
     var iconName: String {
         switch self.ref {

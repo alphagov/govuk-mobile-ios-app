@@ -17,7 +17,7 @@ extension Topic {
             let topic = Topic(context: context)
             topic.ref = response.ref
             topic.title = response.title
-            topic.isFavorite = true
+            topic.isFavourite = true
             topics.append(topic)
         }
         return topics
@@ -46,7 +46,7 @@ extension Topic {
         let topic = Topic(context: context)
         topic.ref = ref
         topic.title = title
-        topic.isFavorite = isFavourite
+        topic.isFavourite = isFavourite
         return topic
     }
 }

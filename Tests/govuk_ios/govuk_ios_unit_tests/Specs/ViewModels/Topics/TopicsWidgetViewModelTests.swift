@@ -97,7 +97,7 @@ struct TopicsWidgetViewModelTests {
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
-        mockTopicService._stubbedFetchFavoriteTopics = [favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
         mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
 
         let sut = TopicsWidgetViewModel(
@@ -123,7 +123,7 @@ struct TopicsWidgetViewModelTests {
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
-        mockTopicService._stubbedFetchFavoriteTopics = [favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
         mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
 
         let sut = TopicsWidgetViewModel(
@@ -168,7 +168,7 @@ struct TopicsWidgetViewModelTests {
         let favouriteOne = Topic.arrange(context: coreData.viewContext)
         let favouriteTwo = Topic.arrange(context: coreData.viewContext)
 
-        mockTopicService._stubbedFetchFavoriteTopics = [favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
         mockTopicService._stubbedFetchAllTopics = [favouriteOne, favouriteTwo]
 
         let sut = TopicsWidgetViewModel(
@@ -191,7 +191,7 @@ struct TopicsWidgetViewModelTests {
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)
 
-        mockTopicService._stubbedFetchFavoriteTopics = [favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
         mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
 
         let sut = TopicsWidgetViewModel(

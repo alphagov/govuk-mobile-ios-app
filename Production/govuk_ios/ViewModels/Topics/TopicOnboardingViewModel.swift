@@ -44,9 +44,9 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     func topicSelected(topic: Topic) {
-        topic.isFavorite.toggle()
+        topic.isFavourite.toggle()
         let action: String
-        if topic.isFavorite {
+        if topic.isFavourite {
             action = "add"
             selectedTopics.insert(topic)
         } else {
@@ -106,7 +106,7 @@ class TopicOnboardingViewModel: ObservableObject {
     }
 
     private func saveFavouriteTopics() {
-        selectedTopics.forEach { $0.isFavorite = true }
+        selectedTopics.forEach { $0.isFavourite = true }
         topicsService.save()
     }
 

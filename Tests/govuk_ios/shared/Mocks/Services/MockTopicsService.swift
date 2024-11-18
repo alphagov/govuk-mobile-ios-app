@@ -31,9 +31,9 @@ class MockTopicsService: TopicsServiceInterface {
         _stubbedFetchAllTopics ?? []
     }
 
-    var _stubbedFetchFavoriteTopics: [Topic]?
-    func fetchFavorites() -> [Topic] {
-        _stubbedFetchFavoriteTopics ?? []
+    var _stubbedFetchFavouriteTopics: [Topic]?
+    func fetchFavourites() -> [Topic] {
+        _stubbedFetchFavouriteTopics ?? []
     }
 
     var _saveCalled = false

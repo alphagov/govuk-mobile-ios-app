@@ -27,7 +27,7 @@ final class EditTopicsViewModel: ObservableObject {
 
     private func loadSections(topics: [Topic]) {
         let rows = topics.compactMap { [weak self, topicsService] topic in
-            topic.isFavorite = topicsService.hasPersonalisedTopics ? topic.isFavorite : true
+            topic.isFavourite = topicsService.hasPersonalisedTopics ? topic.isFavourite : true
             return self?.topicRow(topic: topic)
         }
         self.sections = [
@@ -43,9 +43,9 @@ final class EditTopicsViewModel: ObservableObject {
         ToggleRow(
             id: topic.ref,
             title: topic.title,
-            isOn: topic.isFavorite,
+            isOn: topic.isFavourite,
             action: { [weak self] value in
-                topic.isFavorite = value
+                topic.isFavourite = value
                 self?.topicsService.save()
                 self?.topicsService.setHasPersonalisedTopics()
                 self?.trackSelection(topic: topic)
@@ -56,7 +56,7 @@ final class EditTopicsViewModel: ObservableObject {
     private func trackSelection(topic: Topic) {
         let event = AppEvent.toggleTopic(
             title: topic.title,
-            isFavorite: topic.isFavorite
+            isFavourite: topic.isFavourite
         )
         analyticsService.track(event: event)
     }

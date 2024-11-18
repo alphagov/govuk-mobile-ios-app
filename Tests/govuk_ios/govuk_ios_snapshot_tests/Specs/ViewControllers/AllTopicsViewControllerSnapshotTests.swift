@@ -47,7 +47,7 @@ final class AllTopicsViewControllerSnapshotTests: SnapshotTestCase {
             let topic = Topic(context: coreData.viewContext)
             topic.ref = "ref\(index)"
             topic.title = "title\(index)"
-            topic.isFavorite = false
+            topic.isFavourite = false
             topics.append(topic)
         }
         return topics

@@ -9,9 +9,9 @@ class MockTopicsRepository: TopicsRepositoryInterface {
         _didCallSaveTopicsList = true
     }
     
-    var _didCallFetchFavorites = false
-    func fetchFavorites() -> [Topic] {
-        _didCallFetchFavorites = true
+    var _didCallFetchFavourites = false
+    func fetchFavourites() -> [Topic] {
+        _didCallFetchFavourites = true
         return []
     }
     

@@ -18,13 +18,16 @@ protocol TopicsServiceInterface {
 struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let userDefaults: UserDefaults
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          topicsRepository: TopicsRepositoryInterface,
+         analyticsService: AnalyticsServiceInterface,
          userDefaults: UserDefaults) {
         self.topicsServiceClient = topicsServiceClient
         self.topicsRepository = topicsRepository
+        self.analyticsService = analyticsService
         self.userDefaults = userDefaults
     }
 
@@ -62,13 +65,6 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.save()
     }
 
-    func setHasPersonalisedTopics() {
-        userDefaults.set(
-            bool: true,
-            forKey: .personalisedTopics
-        )
-    }
-
     var hasOnboardedTopics: Bool {
         userDefaults.bool(forKey: .topicsOnboardingSeen)
     }
@@ -77,6 +73,17 @@ struct TopicsService: TopicsServiceInterface {
         userDefaults.set(
             bool: true,
             forKey: .topicsOnboardingSeen
+        )
+    }
+
+    func setHasPersonalisedTopics() {
+        userDefaults.set(
+            bool: true,
+            forKey: .personalisedTopics
+        )
+        analyticsService.setUserProperty(
+            key: "topics_personalised",
+            value: "true"
         )
     }
 

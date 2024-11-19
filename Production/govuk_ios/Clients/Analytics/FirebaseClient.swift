@@ -34,14 +34,22 @@ struct FirebaseClient: AnalyticsClient {
             "screen_title": screen.trackingTitle,
             "language": screen.trackingLanguage
         ]
-        .compactMapValues({ $0 })
-        .merging(
-            screen.additionalParameters,
-            uniquingKeysWith: { param, _ in param }
-        )
+            .compactMapValues({ $0 })
+            .merging(
+                screen.additionalParameters,
+                uniquingKeysWith: { param, _ in param }
+            )
         firebaseAnalytics.logEvent(
             AnalyticsEventScreenView,
             parameters: params
+        )
+    }
+
+    func setUserProperty(key: String,
+                         value: String) {
+        firebaseAnalytics.setUserProperty(
+            value,
+            forName: key
         )
     }
 }
@@ -53,6 +61,7 @@ protocol FirebaseAppInterface {
 protocol FirebaseAnalyticsInterface {
     static func setAnalyticsCollectionEnabled(_ newValue: Bool)
     static func logEvent(_ eventName: String, parameters: [String: Any]?)
+    static func setUserProperty(_ value: String?, forName: String)
 }
 
 extension FirebaseApp: FirebaseAppInterface {}

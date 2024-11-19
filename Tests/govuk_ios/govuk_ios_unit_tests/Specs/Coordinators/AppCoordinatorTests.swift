@@ -58,8 +58,9 @@ struct AppCoordinatorTests {
             appVersionProvider: MockAppVersionProvider()
         )
         mockCoodinatorBuilder._receivedLaunchCompletion?(launchResult)
-        mockCoodinatorBuilder._receivedAppUnavailableDismissAction?()
+        // This is in order of launch
         mockCoodinatorBuilder._receivedAppForcedUpdateDismissAction?()
+        mockCoodinatorBuilder._receivedAppUnavailableDismissAction?()
         mockCoodinatorBuilder._receivedAppRecommendUpdateDismissAction?()
         mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()

@@ -25,12 +25,9 @@ public final class AppConfigService: AppConfigServiceInterface {
     }
 
     private func handleResult(_ result: FetchAppConfigResult) {
-        switch result {
-        case .success(let appConfig):
-            setConfig(appConfig.config)
-        default:
-            break
-        }
+        guard case .success(let appConfig) = result
+        else { return }
+        setConfig(appConfig.config)
     }
 
     private func setConfig(_ config: Config) {

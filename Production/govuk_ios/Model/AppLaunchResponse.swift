@@ -25,14 +25,11 @@ struct AppLaunchResponse {
     }
 
     var isUpdateRecommended: Bool {
-        switch configResult {
-        case .success(let response):
-            return appVersionNumber.isVersion(
-                lessThan: response.config.recommendedVersion
-            )
-        default:
-            return false
-        }
+        guard case .success(let response) = configResult
+        else { return false }
+        return appVersionNumber.isVersion(
+            lessThan: response.config.recommendedVersion
+        )
     }
 
     private var appVersionNumber: String {

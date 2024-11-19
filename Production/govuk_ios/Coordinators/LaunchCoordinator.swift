@@ -8,7 +8,7 @@ class LaunchCoordinator: BaseCoordinator {
     private let completion: LaunchCoordinatorCompletion
     private var launchResponse: AppLaunchResponse?
 
-    private var dispatchGroup = DispatchGroup()
+    private let dispatchGroup = DispatchGroup()
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,

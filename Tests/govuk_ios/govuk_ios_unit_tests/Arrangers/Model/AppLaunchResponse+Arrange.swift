@@ -15,6 +15,7 @@ extension AppLaunchResponse {
             configResult: .success(.arrange(config: .arrange(available: false)))
         )
     }
+
     static func arrange(minVersion: String,
                         recommendedVersion: String,
                         currentVersion: String) -> AppLaunchResponse {
@@ -31,12 +32,14 @@ extension AppLaunchResponse {
     }
 
     static func arrange(configResult: FetchAppConfigResult = .success(.arrange),
-                        topicResult: FetchTopicsListResult = .success(TopicResponseItem.arrangeMultiple),
-                        appVersionProvider: AppVersionProvider = MockAppVersionProvider()) -> AppLaunchResponse {
-        .init(
+                        topicResult: FetchTopicsListResult? = nil,
+                        appVersionProvider: AppVersionProvider? = nil) -> AppLaunchResponse {
+        let topic = topicResult ?? .success(TopicResponseItem.arrangeMultiple)
+        let provider = appVersionProvider ?? MockAppVersionProvider()
+        return .init(
             configResult: configResult,
-            topicResult: topicResult,
-            appVersionProvider: appVersionProvider
+            topicResult: topic,
+            appVersionProvider: provider
         )
     }
 }

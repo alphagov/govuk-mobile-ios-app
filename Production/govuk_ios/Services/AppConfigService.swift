@@ -10,12 +10,9 @@ public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
 
     private let appConfigServiceClient: AppConfigServiceClientInterface
-    private let appVersionProvider: AppVersionProvider
 
-    init(appConfigServiceClient: AppConfigServiceClientInterface,
-         appVersionProvider: AppVersionProvider = Bundle.main) {
+    init(appConfigServiceClient: AppConfigServiceClientInterface) {
         self.appConfigServiceClient = appConfigServiceClient
-        self.appVersionProvider = appVersionProvider
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {

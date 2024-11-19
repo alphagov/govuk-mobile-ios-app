@@ -8,14 +8,11 @@ import Testing
 struct AppConfigServiceTests {
     private var sut: AppConfigService!
     private var mockAppConfigServiceClient: MockAppConfigServiceClient!
-    private var mockAppVersionProvider: MockAppVersionProvider!
 
     init() {
         mockAppConfigServiceClient = MockAppConfigServiceClient()
-        mockAppVersionProvider = MockAppVersionProvider()
         sut = AppConfigService(
-            appConfigServiceClient: mockAppConfigServiceClient,
-            appVersionProvider: mockAppVersionProvider
+            appConfigServiceClient: mockAppConfigServiceClient
         )
     }
 

@@ -35,7 +35,7 @@ alpha:
       uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
     firebase_app_id: 1:299196369979:ios:d118523927e181c1e3e01e
     export_method: ad-hoc
-    build_configuration: Debug
+    build_configuration: Alpha
   match:
     <<: *MATCH_DEFAULTS
 

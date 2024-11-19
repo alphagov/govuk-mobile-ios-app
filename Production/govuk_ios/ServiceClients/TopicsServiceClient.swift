@@ -15,7 +15,6 @@ protocol TopicsServiceClientInterface {
 enum TopicsServiceError: Error {
     case apiUnavailable
     case decodingError
-    case missingData
 }
 
 struct TopicsServiceClient: TopicsServiceClientInterface {

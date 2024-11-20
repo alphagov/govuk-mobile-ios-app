@@ -8,25 +8,34 @@ import Testing
 struct LaunchCoordinatorTests {
     @Test
     @MainActor
-    func start_launchCompletion_callsCompletion() async {
+    func start_launchCompletion_callsCompletion() async throws {
         let mockNavigationController = UINavigationController()
         let mockViewControllerBuilder = ViewControllerBuilder.mock
-        let mockAppConfigService = MockAppConfigService()
-        
-        let completed = await withCheckedContinuation { @MainActor continuation in
-            let subject = LaunchCoordinator(
+        let mockAppLaunchService = MockAppLaunchService()
+        let expectedTopics = TopicResponseItem.arrangeMultiple
+        let expectedResponse = AppLaunchResponse(
+            configResult: .success(.arrange),
+            topicResult: .success(expectedTopics),
+            appVersionProvider: MockAppVersionProvider()
+        )
+        var sut: LaunchCoordinator?
+        let response = await withCheckedContinuation { @MainActor continuation in
+            sut = LaunchCoordinator(
                 navigationController: mockNavigationController,
                 viewControllerBuilder: mockViewControllerBuilder,
-                appConfigService: mockAppConfigService,
-                completion: {
-                    continuation.resume(returning: true)
-                }
+                appLaunchService: mockAppLaunchService,
+                completion: continuation.resume
             )
-            subject.start()
-            mockAppConfigService._receivedFetchAppConfigCompletion?()
+
+            sut?.start()
+            mockAppLaunchService._receivedFetchCompletion?(expectedResponse)
             mockViewControllerBuilder._receivedLaunchCompletion?()
         }
-        #expect(completed)
-    }
+        let topics = try #require(try response.topicResult.get())
 
+        #expect(topics.count == expectedTopics.count)
+
+        // Retain the subject until test is complete
+        sut = nil
+    }
 }

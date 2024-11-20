@@ -9,12 +9,15 @@ import Testing
 struct AppRecommendUpdateCoordinatorTests {
     @Test
     func start_dontRecommendUpdate_callsDismiss() async {
-        let mockAppConfigService = MockAppConfigService()
-        mockAppConfigService.isAppRecommendUpdate = false
+        let response = AppLaunchResponse.arrange(
+            minVersion: "1.0.0",
+            recommendedVersion: "1.2.0",
+            currentVersion: "1.4.0"
+        )
         await withCheckedContinuation { continuation in
             let sut = AppRecommendUpdateCoordinator(
                 navigationController: UINavigationController(),
-                appConfigService: mockAppConfigService,
+                launchResponse: response,
                 dismissAction: {
                     continuation.resume()
                 }
@@ -25,12 +28,15 @@ struct AppRecommendUpdateCoordinatorTests {
 
     @Test
     func start_recommendUpdate_doesntCallDismiss() async throws {
-        let mockAppConfigService = MockAppConfigService()
-        mockAppConfigService.isAppRecommendUpdate = true
+        let response = AppLaunchResponse.arrange(
+            minVersion: "1.0.0",
+            recommendedVersion: "1.2.0",
+            currentVersion: "1.1.0"
+        )
         let started: Bool = try await withCheckedThrowingContinuation { continuation in
             let sut = AppRecommendUpdateCoordinator(
                 navigationController: UINavigationController(),
-                appConfigService: mockAppConfigService,
+                launchResponse: response,
                 dismissAction: {
                     continuation.resume(throwing: TestError.unexpectedMethodCalled)
                 }

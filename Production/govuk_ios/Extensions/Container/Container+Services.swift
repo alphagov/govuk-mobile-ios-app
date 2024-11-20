@@ -50,14 +50,19 @@ extension Container {
         .scope(.singleton)
     }
 
+    var appLaunchService: Factory<AppLaunchServiceInterface> {
+        Factory(self) {
+            AppLaunchService(
+                configService: self.appConfigService.resolve(),
+                topicService: self.topicsService.resolve()
+            )
+        }.scope(.singleton)
+    }
+
     var appConfigService: Factory<AppConfigServiceInterface> {
         Factory(self) {
-            let appConfigServiceClient = AppConfigServiceClient(
-                serviceClient: self.appAPIClient()
-            )
-            return AppConfigService(
-                appConfigRepository: self.appConfigRepository(),
-                appConfigServiceClient: appConfigServiceClient
+            AppConfigService(
+                appConfigServiceClient: self.appConfigServiceClient.resolve()
             )
         }.scope(.singleton)
     }

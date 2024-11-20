@@ -138,6 +138,7 @@ struct ViewControllerBuilderTests {
     func topicOnboarding_returnsExpectedResult() async throws {
         let subject = ViewControllerBuilder()
         let result = subject.topicOnboarding(
+            topics: [],
             analyticsService: MockAnalyticsService(),
             topicsService: MockTopicsService(),
             dismissAction: { }

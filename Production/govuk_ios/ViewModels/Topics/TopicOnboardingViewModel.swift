@@ -2,6 +2,7 @@ import Foundation
 import UIComponents
 
 class TopicOnboardingViewModel: ObservableObject {
+    let topics: [Topic]
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let dismissAction: () -> Void
@@ -24,23 +25,14 @@ class TopicOnboardingViewModel: ObservableObject {
         "topicOnboardingSecondaryButtonTitle"
     )
 
-    init(analyticsService: AnalyticsServiceInterface,
+    init(topics: [Topic],
+         analyticsService: AnalyticsServiceInterface,
          topicsService: TopicsServiceInterface,
          dismissAction: @escaping () -> Void) {
+        self.topics = topics
         self.analyticsService = analyticsService
         self.topicsService = topicsService
         self.dismissAction = dismissAction
-        self.fetchTopics()
-    }
-
-    var topics: [Topic] {
-        topicsService.fetchAll()
-    }
-
-    private func fetchTopics() {
-        topicsService.fetchRemoteList(
-            completion: { _ in /*Do nothing*/ }
-        )
     }
 
     func topicSelected(topic: Topic) {

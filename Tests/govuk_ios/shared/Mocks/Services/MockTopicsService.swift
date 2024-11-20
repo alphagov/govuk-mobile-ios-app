@@ -41,8 +41,8 @@ class MockTopicsService: TopicsServiceInterface {
         _saveCalled = true
     }
     
-    var _stubbedFetchRemoteListResult: Result<[TopicResponseItem], TopicsServiceError>?
-    func fetchRemoteList(completion: @escaping FetchTopicsListResult) {
+    var _stubbedFetchRemoteListResult: FetchTopicsListResult?
+    func fetchRemoteList(completion: @escaping FetchTopicsListCompletion) {
         if let result = _stubbedFetchRemoteListResult {
             completion(result)
         } else {
@@ -52,7 +52,7 @@ class MockTopicsService: TopicsServiceInterface {
     
     var _stubbedFetchTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
     func fetchDetails(ref: String,
-                      completion: @escaping FetchTopicDetailsResult) {
+                      completion: @escaping FetchTopicDetailsCompletion) {
         if let result = _stubbedFetchTopicDetailsResult {
             completion(result)
         } else {

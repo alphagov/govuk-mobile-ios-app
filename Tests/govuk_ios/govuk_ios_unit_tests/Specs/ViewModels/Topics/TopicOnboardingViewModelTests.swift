@@ -14,6 +14,7 @@ struct TopicOnboardingViewModelTests {
         let mockAnalyticsService = MockAnalyticsService()
 
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: mockAnalyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
@@ -37,6 +38,7 @@ struct TopicOnboardingViewModelTests {
         let mockAnalyticsService = MockAnalyticsService()
 
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: mockAnalyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
@@ -56,6 +58,7 @@ struct TopicOnboardingViewModelTests {
         let mockAnalyticsService = MockAnalyticsService()
 
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: mockAnalyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
@@ -81,6 +84,7 @@ struct TopicOnboardingViewModelTests {
         let mockAnalyticsService = MockAnalyticsService()
 
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: mockAnalyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
@@ -106,6 +110,7 @@ struct TopicOnboardingViewModelTests {
         let mockAnalyticsService = MockAnalyticsService()
 
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: mockAnalyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
@@ -130,6 +135,7 @@ struct TopicOnboardingViewModelTests {
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchAllTopics = [topicOne]
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: mockAnalyticsService,
             topicsService: mockTopicsService,
             dismissAction: { }
@@ -149,6 +155,7 @@ struct TopicOnboardingViewModelTests {
     func primaryActionButton_action_tracksEvent() {
         let analyticsService = MockAnalyticsService()
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: analyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
@@ -166,6 +173,7 @@ struct TopicOnboardingViewModelTests {
 
         let analyticsService = MockAnalyticsService()
         let sut = TopicOnboardingViewModel(
+            topics: [],
             analyticsService: analyticsService,
             topicsService: MockTopicsService(),
             dismissAction: {}
@@ -182,15 +190,14 @@ struct TopicOnboardingViewModelTests {
         let coreData = CoreDataRepository.arrangeAndLoad
 
         let mockTopicsService = MockTopicsService()
+        let expectedTopics = Topic.arrangeMultiple(context: coreData.viewContext)
         let sut = TopicOnboardingViewModel(
+            topics: expectedTopics,
             analyticsService: MockAnalyticsService(),
             topicsService: mockTopicsService,
             dismissAction: {}
         )
 
-        let expectedTopcics = Topic.arrangeMultiple(context: coreData.viewContext)
-        mockTopicsService._stubbedFetchAllTopics = expectedTopcics
-
-        #expect(sut.topics.count == expectedTopcics.count)
+        #expect(sut.topics.count == expectedTopics.count)
     }
 }

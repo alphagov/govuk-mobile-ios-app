@@ -83,6 +83,9 @@ class TopicsWidgetView: UIView {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
             self.showAllTopicsButton()
+            self.titleLabel.text = String.home.localized(
+                self.viewModel.allTopicsButtonHidden ? "topicsWidgetTitle" : "Your topics"
+            )
         }
     }
 

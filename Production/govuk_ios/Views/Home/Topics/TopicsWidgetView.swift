@@ -25,7 +25,7 @@ class TopicsWidgetView: UIView {
         label.font = UIFont.govUK.title3Semibold
         label.adjustsFontForContentSizeCategory = true
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
-        label.text = String.home.localized("topicsWidgetTitle")
+        label.text = viewModel.widgetTitle
         return label
     }()
 
@@ -83,6 +83,8 @@ class TopicsWidgetView: UIView {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
             self.showAllTopicsButton()
+
+            self.titleLabel.text = self.viewModel.widgetTitle
         }
     }
 

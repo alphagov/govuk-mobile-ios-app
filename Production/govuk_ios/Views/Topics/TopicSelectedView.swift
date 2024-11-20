@@ -2,11 +2,7 @@ import Foundation
 import UIKit
 
 class TopicSelectedView: UIStackView {
-    private lazy var selectedIconImageView: UIImageView = {
-        let icon = UIImage(systemName: "plus")
-        let imageView = UIImageView(image: icon)
-        return imageView
-    }()
+    private lazy var selectedIconImageView = UIImageView(image: nil)
 
     private lazy var selectedLabel: UILabel = {
         let localView = UILabel()
@@ -37,7 +33,7 @@ class TopicSelectedView: UIStackView {
 
     private func configureUI() {
         axis = .horizontal
-        spacing = 0
+        spacing = 4
         alignment = .center
         addArrangedSubview(selectedIconImageView)
         addArrangedSubview(selectedLabel)
@@ -51,6 +47,10 @@ class TopicSelectedView: UIStackView {
         selectedLabel.textColor = isSelected ?
         UIColor.govUK.text.buttonSuccess :
         UIColor.govUK.text.link
+
+        selectedIconImageView.image = isSelected ?
+        UIImage(systemName: "checkmark") :
+        UIImage(systemName: "plus")
 
         selectedIconImageView.tintColor = isSelected ?
         UIColor.govUK.text.buttonSuccess :

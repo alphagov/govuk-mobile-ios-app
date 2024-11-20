@@ -42,6 +42,7 @@ struct CrashlyticsClientTests {
     }
 
     @Test
+    @MainActor
     func trackScreen_exists_doesNothing() {
         let mockCrashlytics = MockCrashlytics()
         let sut = CrashlyticsClient(

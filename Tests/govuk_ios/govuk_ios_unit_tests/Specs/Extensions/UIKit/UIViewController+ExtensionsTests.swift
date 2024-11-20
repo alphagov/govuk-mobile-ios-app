@@ -4,11 +4,12 @@ import Testing
 
 @testable import govuk_ios
 
-@MainActor
 @Suite
+@MainActor
 struct UIViewController_ExtensionsTests {
 
     @Test
+    @MainActor
     func viewWillReAppear_animated_callsTransitions() {
         let subject = MockBaseViewController()
         subject.viewWillReAppear(

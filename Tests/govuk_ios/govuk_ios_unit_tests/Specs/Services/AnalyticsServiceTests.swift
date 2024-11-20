@@ -62,6 +62,7 @@ struct AnalyticsServiceTests {
     }
 
     @Test
+    @MainActor
     func trackScreen_rejectedPermissions_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = MockUserDefaults()
@@ -93,6 +94,7 @@ struct AnalyticsServiceTests {
     }
 
     @Test
+    @MainActor
     func trackScreen_tracksScreen() {
         let mockAnalyticsClient = MockAnalyticsClient()
         let subject = AnalyticsService(

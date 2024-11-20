@@ -83,7 +83,6 @@ class TopicsWidgetView: UIView {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
             self.showAllTopicsButton()
-
             self.titleLabel.text = self.viewModel.widgetTitle
         }
     }

@@ -8,13 +8,16 @@ struct TopicsServiceTests {
     var sut: TopicsService!
     var mockTopicsServiceClient: MockTopicsServiceClient!
     var mockTopicsRepository: MockTopicsRepository!
+    var mockAnalyticsService: MockAnalyticsService!
 
     init() {
         mockTopicsServiceClient = MockTopicsServiceClient()
         mockTopicsRepository = MockTopicsRepository()
+        mockAnalyticsService = MockAnalyticsService()
         sut = TopicsService(
             topicsServiceClient: mockTopicsServiceClient,
             topicsRepository: mockTopicsRepository,
+            analyticsService: mockAnalyticsService,
             userDefaults: MockUserDefaults()
         )
     }
@@ -93,6 +96,7 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: MockAnalyticsService(),
             userDefaults: mockUserDefaults
         )
 
@@ -105,21 +109,26 @@ struct TopicsServiceTests {
 
 
     @Test
-    func setHasEditedTopics_setsHasEditedTopicsToTrue() {
+    func setHasCustomisedTopics_setsHasEditedTopicsToTrue() {
 
         let mockUserDefaults = MockUserDefaults()
-
+        let mockAnalyticsService = MockAnalyticsService()
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: mockAnalyticsService,
             userDefaults: mockUserDefaults
         )
 
-        #expect(mockUserDefaults.bool(forKey: .personalisedTopics) == false)
+        #expect(mockUserDefaults.bool(forKey: .customisedTopics) == false)
+        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty == nil)
 
-        sut.setHasPersonalisedTopics()
+        sut.setHasCustomisedTopics()
 
-        #expect(mockUserDefaults.bool(forKey: .personalisedTopics))
+        #expect(mockUserDefaults.bool(forKey: .customisedTopics))
+        #expect(mockUserDefaults.bool(forKey: .customisedTopics))
+        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.key == UserProperty.topicsCustomised.key)
+        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.value == UserProperty.topicsCustomised.value)
     }
 
     @Test(.serialized, arguments: [true, false])
@@ -131,6 +140,7 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: MockAnalyticsService(),
             userDefaults: mockUserDefaults
         )
 
@@ -142,15 +152,16 @@ struct TopicsServiceTests {
         let mockUserDefaults = MockUserDefaults()
         mockUserDefaults._stub(
             value: expectedValue,
-            key: UserDefaultsKeys.personalisedTopics.rawValue
+            key: UserDefaultsKeys.customisedTopics.rawValue
         )
 
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: MockAnalyticsService(),
             userDefaults: mockUserDefaults
         )
 
-        #expect(sut.hasPersonalisedTopics == expectedValue)
+        #expect(sut.hasCustomisedTopics == expectedValue)
     }
 }

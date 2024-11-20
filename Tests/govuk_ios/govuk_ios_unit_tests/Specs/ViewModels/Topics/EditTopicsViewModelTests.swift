@@ -50,7 +50,7 @@ struct EditTopicsViewModelTests {
             Topic.arrange(context: context, isFavourite: false)
         ]
         mockTopicService._stubbedFetchAllTopics = topics
-        mockTopicService._stubbedHasPersonalisedTopics = false
+        mockTopicService._stubbedHasCustomisedTopics = false
         let sut = EditTopicsViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
@@ -73,7 +73,7 @@ struct EditTopicsViewModelTests {
             Topic.arrange(context: context, isFavourite: false)
         ]
         mockTopicService._stubbedFetchAllTopics = topics
-        mockTopicService._stubbedHasPersonalisedTopics = false
+        mockTopicService._stubbedHasCustomisedTopics = false
         var sut: EditTopicsViewModel? = EditTopicsViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,

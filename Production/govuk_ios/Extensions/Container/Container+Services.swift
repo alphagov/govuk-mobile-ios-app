@@ -80,6 +80,7 @@ extension Container {
             TopicsService(
                 topicsServiceClient: self.topicsServiceClient(),
                 topicsRepository: self.topicsRepository(),
+                analyticsService: self.analyticsService(),
                 userDefaults: UserDefaults.standard
             )
         }

@@ -8,8 +8,8 @@ protocol TopicsServiceInterface {
     func fetchFavourites() -> [Topic]
     func save()
 
-    func setHasPersonalisedTopics()
-    var hasPersonalisedTopics: Bool { get }
+    func setHasCustomisedTopics()
+    var hasCustomisedTopics: Bool { get }
 
     var hasOnboardedTopics: Bool { get }
     func setHasOnboardedTopics()
@@ -18,13 +18,16 @@ protocol TopicsServiceInterface {
 struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let userDefaults: UserDefaultsInterface
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          topicsRepository: TopicsRepositoryInterface,
+         analyticsService: AnalyticsServiceInterface,
          userDefaults: UserDefaultsInterface) {
         self.topicsServiceClient = topicsServiceClient
         self.topicsRepository = topicsRepository
+        self.analyticsService = analyticsService
         self.userDefaults = userDefaults
     }
 
@@ -62,13 +65,6 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.save()
     }
 
-    func setHasPersonalisedTopics() {
-        userDefaults.set(
-            bool: true,
-            forKey: .personalisedTopics
-        )
-    }
-
     var hasOnboardedTopics: Bool {
         userDefaults.bool(forKey: .topicsOnboardingSeen)
     }
@@ -80,7 +76,17 @@ struct TopicsService: TopicsServiceInterface {
         )
     }
 
-    var hasPersonalisedTopics: Bool {
-        userDefaults.bool(forKey: .personalisedTopics)
+    func setHasCustomisedTopics() {
+        userDefaults.set(
+            bool: true,
+            forKey: .customisedTopics
+        )
+        analyticsService.set(
+            userProperty: .topicsCustomised
+        )
+    }
+
+    var hasCustomisedTopics: Bool {
+        userDefaults.bool(forKey: .customisedTopics)
     }
 }

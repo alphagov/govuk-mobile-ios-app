@@ -89,7 +89,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func displayedTopics_topicsHaveBeenEdited_returnsFavourites() {
-        mockTopicService._stubbedHasPersonalisedTopics = true
+        mockTopicService._stubbedHasCustomisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -115,7 +115,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func displayedTopics_topicsHaveNotBeenEdited_returnsAllTopcis() {
-        mockTopicService._stubbedHasPersonalisedTopics = false
+        mockTopicService._stubbedHasCustomisedTopics = false
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -143,7 +143,7 @@ struct TopicsWidgetViewModelTests {
     @Test
     @MainActor
     func allTopicsButtonHidden_isDisplayingAllTopics_returnsTrue() {
-        mockTopicService._stubbedHasPersonalisedTopics = false
+        mockTopicService._stubbedHasCustomisedTopics = false
 
         let allOne = Topic.arrange(context: coreData.viewContext)
         let allTwo = Topic.arrange(context: coreData.viewContext)
@@ -163,7 +163,7 @@ struct TopicsWidgetViewModelTests {
     @Test
     @MainActor
     func allTopicsButtonHidden_isDisplayingFavourites_allTopicsFavourited_returnsTrue() {
-        mockTopicService._stubbedHasPersonalisedTopics = true
+        mockTopicService._stubbedHasCustomisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.viewContext)
         let favouriteTwo = Topic.arrange(context: coreData.viewContext)
@@ -183,7 +183,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     func allTopicsButtonHidden_isDisplayingFavourites_someTopicsFavourited_returnsFalse() {
-        mockTopicService._stubbedHasPersonalisedTopics = true
+        mockTopicService._stubbedHasCustomisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -202,6 +202,32 @@ struct TopicsWidgetViewModelTests {
         )
 
         #expect(sut.allTopicsButtonHidden == false)
+    }
+
+    @Test
+    func widgetTitle_customisedTopics_returnsExpectedResult() {
+        mockTopicService._stubbedHasCustomisedTopics = true
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        #expect(sut.widgetTitle == "Your topics")
+    }
+
+    @Test
+    func widgetTitle_notCustomisedTopics_returnsExpectedResult() {
+        mockTopicService._stubbedHasCustomisedTopics = false
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        #expect(sut.widgetTitle == "Topics")
     }
 
 }

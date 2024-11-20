@@ -71,6 +71,7 @@ struct AnalyticsServiceTests {
     }
 
     @Test
+    @MainActor
     func trackScreen_rejectedPermissions_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = MockUserDefaults()
@@ -102,6 +103,7 @@ struct AnalyticsServiceTests {
     }
 
     @Test
+    @MainActor
     func trackScreen_tracksScreen() {
         let mockAnalyticsClient = MockAnalyticsClient()
         let subject = AnalyticsService(
@@ -152,5 +154,24 @@ struct AnalyticsServiceTests {
 
         #expect(mockUserDefaults.bool(forKey: .acceptedAnalytics) == false)
         #expect(mockAnalyticsClient._enabledReceived == false)
+    }
+
+    @Test
+    func setUserProperty_tracksProperty() {
+        let mockAnalyticsClient = MockAnalyticsClient()
+        let mockUserDefaults = MockUserDefaults()
+        let subject = AnalyticsService(
+            clients: [mockAnalyticsClient],
+            userDefaults: mockUserDefaults
+        )
+
+        let expectedKey = UUID().uuidString
+        let expectedValue = UUID().uuidString
+        subject.set(
+            userProperty: .init(key: expectedKey, value: expectedValue)
+        )
+
+        #expect(mockAnalyticsClient._trackSetUserPropertyReceivedProperty?.key == expectedKey)
+        #expect(mockAnalyticsClient._trackSetUserPropertyReceivedProperty?.value == expectedValue)
     }
 }

@@ -24,14 +24,14 @@ final class TopicsWidgetViewModel {
     }
 
     var widgetTitle: String {
-        let key = self.topicsService.hasPersonalisedTopics ?
+        let key = self.topicsService.hasCustomisedTopics ?
         "topicsWidgetTitleCustomised" :
         "topicsWidgetTitle"
         return String.home.localized(key)
     }
 
     var displayedTopics: [Topic] {
-        topicsService.hasPersonalisedTopics ?
+        topicsService.hasCustomisedTopics ?
         topicsService.fetchFavourites() :
         topicsService.fetchAll()
     }

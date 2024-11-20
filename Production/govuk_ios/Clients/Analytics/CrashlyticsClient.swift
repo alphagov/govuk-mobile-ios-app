@@ -18,6 +18,8 @@ struct CrashlyticsClient: AnalyticsClient {
     func track(screen: any TrackableScreen) { /*Do nothing*/ }
 
     func track(event: AppEvent) { /*Do nothing*/ }
+
+    func set(userProperty: UserProperty) { /*Do nothing*/ }
 }
 
 protocol CrashlyticsInterface {

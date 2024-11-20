@@ -10,7 +10,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     let mockTopicService = MockTopicsService()
 
     func test_loadInNavigationController_light_rendersCorrectly() {
-        mockTopicService._stubbedHasPersonalisedTopics = true
+        mockTopicService._stubbedHasCustomisedTopics = true
         mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
         var topics = Topic.arrangeMultipleFavourites(
             context: coreData.viewContext
@@ -39,6 +39,25 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .dark,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_notCusomised_rendersCorrectly() {
+        mockTopicService._stubbedHasCustomisedTopics = false
+        mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
+        var topics = Topic.arrangeMultipleFavourites(
+            context: coreData.viewContext
+        )
+
+        mockTopicService._stubbedFetchAllTopics = topics
+
+        topics.removeLast()
+        mockTopicService._stubbedFetchFavouriteTopics = topics
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController(),
+            mode: .light,
             navBarHidden: true
         )
     }

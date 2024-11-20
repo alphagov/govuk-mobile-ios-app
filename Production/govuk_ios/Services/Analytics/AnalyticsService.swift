@@ -4,6 +4,7 @@ protocol AnalyticsServiceInterface {
     func launch()
     func track(event: AppEvent)
     func track(screen: TrackableScreen)
+    func set(userProperty: UserProperty)
 
     func setAcceptedAnalytics(accepted: Bool)
     var permissionState: AnalyticsPermissionState { get }
@@ -50,6 +51,10 @@ class AnalyticsService: AnalyticsServiceInterface {
         case .some(false):
             return .denied
         }
+    }
+
+    func set(userProperty: UserProperty) {
+        clients.forEach { $0.set(userProperty: userProperty) }
     }
 
     private func configureEnabled() {

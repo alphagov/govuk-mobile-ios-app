@@ -36,7 +36,9 @@ struct OnboardingServiceTests {
 
     @Test
     func fetchSlides_returnsExpectedResult() {
-        let subject = OnboardingService(userDefaults: .init())
+        let subject = OnboardingService(
+            userDefaults: MockUserDefaults()
+        )
         let result = subject.fetchSlides()
 
         #expect(result.count == 3)

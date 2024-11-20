@@ -11,10 +11,10 @@ protocol AnalyticsServiceInterface {
 
 class AnalyticsService: AnalyticsServiceInterface {
     private let clients: [AnalyticsClient]
-    private var userDefaults: UserDefaults
+    private var userDefaults: UserDefaultsInterface
 
     init(clients: [AnalyticsClient],
-         userDefaults: UserDefaults) {
+         userDefaults: UserDefaultsInterface) {
         self.clients = clients
         self.userDefaults = userDefaults
         configureEnabled()

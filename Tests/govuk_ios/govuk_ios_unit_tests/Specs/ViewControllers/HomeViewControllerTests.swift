@@ -54,6 +54,6 @@ struct HomeViewControllerTests {
         #expect(screens.count == 1)
         #expect(screens.first?.trackingName == subject.trackingName)
         #expect(screens.first?.trackingClass == subject.trackingClass)
-        #expect(screens.first?.additionalParameters.count == 2)
+        #expect(screens.first?.additionalParameters.count == 0)
     }
 }

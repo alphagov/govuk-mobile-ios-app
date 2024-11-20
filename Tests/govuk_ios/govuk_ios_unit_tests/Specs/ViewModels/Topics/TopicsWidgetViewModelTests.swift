@@ -204,4 +204,30 @@ struct TopicsWidgetViewModelTests {
         #expect(sut.allTopicsButtonHidden == false)
     }
 
+    @Test
+    func widgetTitle_customisedTopics_returnsExpectedResult() {
+        mockTopicService._stubbedHasCustomisedTopics = true
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        #expect(sut.widgetTitle == "Your topics")
+    }
+
+    @Test
+    func widgetTitle_notCustomisedTopics_returnsExpectedResult() {
+        mockTopicService._stubbedHasCustomisedTopics = false
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        #expect(sut.widgetTitle == "Topics")
+    }
+
 }

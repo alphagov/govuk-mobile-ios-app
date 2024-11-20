@@ -92,10 +92,4 @@ class HomeViewController: BaseViewController,
 extension HomeViewController: TrackableScreen {
     var trackingName: String { "Homepage" }
     var trackingTitle: String? { "Homepage" }
-
-    @MainActor
-    var additionalParameters: [String: Any] {
-        ["item_number": viewModel.topicCount,
-         "item_shown": viewModel.displayedTopicCount]
-    }
 }

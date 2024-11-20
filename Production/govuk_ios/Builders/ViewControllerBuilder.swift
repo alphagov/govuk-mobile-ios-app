@@ -186,10 +186,12 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func topicOnboarding(analyticsService: AnalyticsServiceInterface,
+    func topicOnboarding(topics: [Topic],
+                         analyticsService: AnalyticsServiceInterface,
                          topicsService: TopicsServiceInterface,
                          dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = TopicOnboardingViewModel(
+            topics: topics,
             analyticsService: analyticsService,
             topicsService: topicsService,
             dismissAction: dismissAction

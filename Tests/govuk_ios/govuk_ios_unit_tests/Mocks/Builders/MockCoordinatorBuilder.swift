@@ -24,9 +24,9 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedLaunchCoordinator: MockBaseCoordinator?
     var _receivedLaunchNavigationController: UINavigationController?
-    var _receivedLaunchCompletion: (() -> Void)?
+    var _receivedLaunchCompletion: LaunchCoordinatorCompletion?
     override func launch(navigationController: UINavigationController,
-                         completion: @escaping () -> Void) -> BaseCoordinator {
+                         completion: @escaping LaunchCoordinatorCompletion) -> BaseCoordinator {
         _receivedLaunchNavigationController = navigationController
         _receivedLaunchCompletion = completion
         return _stubbedLaunchCoordinator ??
@@ -100,5 +100,32 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
                                   didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedTopicOnboardingDidDismissAction = didDismissAction
         return _stubbedTopicOnboardingCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedAppUnavailableDismissAction: (() -> Void)?
+    var _stubbedAppUnavailableCoordinator: MockBaseCoordinator?
+    override func appUnavailable(navigationController: UINavigationController,
+                                 launchResponse: AppLaunchResponse,
+                                 dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppUnavailableDismissAction = dismissAction
+        return _stubbedAppUnavailableCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedAppForcedUpdateDismissAction: (() -> Void)?
+    var _stubbedAppForcedUpdateCoordinator: MockBaseCoordinator?
+    override func appForcedUpdate(navigationController: UINavigationController,
+                                  launchResponse: AppLaunchResponse,
+                                  dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppForcedUpdateDismissAction = dismissAction
+        return _stubbedAppForcedUpdateCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedAppRecommendUpdateDismissAction: (() -> Void)?
+    var _stubbedAppRecommendUpdateCoordinator: MockBaseCoordinator?
+    override func appRecommendUpdate(navigationController: UINavigationController,
+                                     launchResponse: AppLaunchResponse,
+                                     dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppRecommendUpdateDismissAction = dismissAction
+        return _stubbedAppRecommendUpdateCoordinator ?? MockBaseCoordinator()
     }
 }

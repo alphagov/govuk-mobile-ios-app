@@ -44,20 +44,25 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaults: .standard
+                userDefaults: UserDefaults.standard
             )
         }
         .scope(.singleton)
     }
 
+    var appLaunchService: Factory<AppLaunchServiceInterface> {
+        Factory(self) {
+            AppLaunchService(
+                configService: self.appConfigService.resolve(),
+                topicService: self.topicsService.resolve()
+            )
+        }.scope(.singleton)
+    }
+
     var appConfigService: Factory<AppConfigServiceInterface> {
         Factory(self) {
-            let appConfigServiceClient = AppConfigServiceClient(
-                serviceClient: self.appAPIClient()
-            )
-            return AppConfigService(
-                appConfigRepository: self.appConfigRepository(),
-                appConfigServiceClient: appConfigServiceClient
+            AppConfigService(
+                appConfigServiceClient: self.appConfigServiceClient.resolve()
             )
         }.scope(.singleton)
     }
@@ -65,7 +70,7 @@ extension Container {
     var onboardingService: Factory<OnboardingServiceInterface> {
         Factory(self) {
             OnboardingService(
-                userDefaults: .standard
+                userDefaults: UserDefaults.standard
             )
         }
     }
@@ -76,7 +81,7 @@ extension Container {
                 topicsServiceClient: self.topicsServiceClient(),
                 topicsRepository: self.topicsRepository(),
                 analyticsService: self.analyticsService(),
-                userDefaults: .standard
+                userDefaults: UserDefaults.standard
             )
         }
     }

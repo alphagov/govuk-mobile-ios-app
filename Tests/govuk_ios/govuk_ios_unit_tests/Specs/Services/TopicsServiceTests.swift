@@ -150,8 +150,10 @@ struct TopicsServiceTests {
     @Test(.serialized, arguments: [true, false])
     func hasTopicsBeenEdited_returnsExpectedResult(expectedValue: Bool) {
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.customisedTopics.rawValue)
-        mockUserDefaults.synchronize()
+        mockUserDefaults._stub(
+            value: expectedValue,
+            key: UserDefaultsKeys.customisedTopics.rawValue
+        )
 
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),

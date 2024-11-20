@@ -23,11 +23,18 @@ class TopicOnboardingCoordinator: BaseCoordinator {
     override func start(url: URL?) {
         guard !topicsService.hasOnboardedTopics
         else { return dismissAction() }
-        setViewController()
+
+        let topics = topicsService.fetchAll()
+
+        guard !topics.isEmpty
+        else { return dismissAction() }
+
+        setViewController(topics: topics)
     }
 
-    private func setViewController() {
+    private func setViewController(topics: [Topic]) {
         let viewController = viewControllerBuilder.topicOnboarding(
+            topics: topics,
             analyticsService: analyticsService,
             topicsService: topicsService,
             dismissAction: { [weak self] in

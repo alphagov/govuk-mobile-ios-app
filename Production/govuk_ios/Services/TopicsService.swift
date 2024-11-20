@@ -1,9 +1,9 @@
 import Foundation
 
 protocol TopicsServiceInterface {
-    func fetchRemoteList(completion: @escaping FetchTopicsListResult)
+    func fetchRemoteList(completion: @escaping FetchTopicsListCompletion)
     func fetchDetails(ref: String,
-                      completion: @escaping FetchTopicDetailsResult)
+                      completion: @escaping FetchTopicDetailsCompletion)
     func fetchAll() -> [Topic]
     func fetchFavourites() -> [Topic]
     func save()
@@ -19,19 +19,19 @@ struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
     private let analyticsService: AnalyticsServiceInterface
-    private let userDefaults: UserDefaults
+    private let userDefaults: UserDefaultsInterface
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          topicsRepository: TopicsRepositoryInterface,
          analyticsService: AnalyticsServiceInterface,
-         userDefaults: UserDefaults) {
+         userDefaults: UserDefaultsInterface) {
         self.topicsServiceClient = topicsServiceClient
         self.topicsRepository = topicsRepository
         self.analyticsService = analyticsService
         self.userDefaults = userDefaults
     }
 
-    func fetchRemoteList(completion: @escaping FetchTopicsListResult) {
+    func fetchRemoteList(completion: @escaping FetchTopicsListCompletion) {
         topicsServiceClient.fetchList(
             completion: { result in
                 switch result {
@@ -46,7 +46,7 @@ struct TopicsService: TopicsServiceInterface {
     }
 
     func fetchDetails(ref: String,
-                      completion: @escaping FetchTopicDetailsResult) {
+                      completion: @escaping FetchTopicDetailsCompletion) {
         topicsServiceClient.fetchDetails(
             ref: ref,
             completion: completion

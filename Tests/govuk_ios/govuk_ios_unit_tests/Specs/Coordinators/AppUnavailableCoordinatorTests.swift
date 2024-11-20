@@ -8,13 +8,14 @@ import Testing
 @MainActor
 struct AppUnavailableCoordinatorTests {
     @Test
-    func start_isAppAvailable_trueCallsDismiss() async {
+    func start_isAppAvailable_true_callsDismiss() async {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppAvailable = true
         await withCheckedContinuation { continuation in
             let sut = AppUnavailableCoordinator(
                 navigationController: UINavigationController(),
                 appConfigService: mockAppConfigService,
+                launchResponse: .arrangeAvailable,
                 dismissAction: {
                     continuation.resume()
                 }
@@ -24,13 +25,14 @@ struct AppUnavailableCoordinatorTests {
     }
 
     @Test
-    func start_isAppAvailable_falseDoesntCallDismiss() async throws {
+    func start_isAppAvailable_false_doesntCallDismiss() async throws {
         let mockAppConfigService = MockAppConfigService()
         mockAppConfigService.isAppAvailable = false
         let started: Bool = try await withCheckedThrowingContinuation { continuation in
             let sut = AppUnavailableCoordinator(
                 navigationController: UINavigationController(),
                 appConfigService: mockAppConfigService,
+                launchResponse: .arrangeUnavailable,
                 dismissAction: {
                     continuation.resume(throwing: TestError.unexpectedMethodCalled)
                 }

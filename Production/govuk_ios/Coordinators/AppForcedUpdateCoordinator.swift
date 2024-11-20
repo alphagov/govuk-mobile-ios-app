@@ -3,19 +3,19 @@ import UIKit
 import SwiftUI
 
 class AppForcedUpdateCoordinator: BaseCoordinator {
-    private let appConfigService: AppConfigServiceInterface
+    private let launchResponse: AppLaunchResponse
     private let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,
-         appConfigService: AppConfigServiceInterface,
+         launchResponse: AppLaunchResponse,
          dismissAction: @escaping () -> Void) {
-        self.appConfigService = appConfigService
         self.dismissAction = dismissAction
+        self.launchResponse = launchResponse
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        guard appConfigService.isAppForcedUpdate
+        guard launchResponse.isUpdateRequired
         else { return dismissAction() }
         setAppForcedUpdate()
     }

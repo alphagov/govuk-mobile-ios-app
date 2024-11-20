@@ -22,47 +22,52 @@ class AppCoordinator: BaseCoordinator {
     private func startLaunch(url: URL?) {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
-            completion: { [weak self] in
+            completion: { [weak self] response in
                 self?.initialLaunch = false
-                self?.startAppUnavailable(url: url)
+                self?.startAppForcedUpdate(
+                    url: url,
+                    launchResponse: response
+                )
             }
         )
         start(coordinator)
     }
 
-    private func startAppUnavailable(url: URL?) {
-        let coordinator = coordinatorBuilder.appUnavailable(
-            navigationController: root,
-            dismissAction: { [weak self] in
-                self?.startAppForcedUpdate(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startTopicOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.topicOnboarding(
-            navigationController: root,
-            didDismissAction: { [weak self] in
-                self?.startTabs(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startAppForcedUpdate(url: URL?) {
+    private func startAppForcedUpdate(url: URL?,
+                                      launchResponse: AppLaunchResponse) {
         let coordinator = coordinatorBuilder.appForcedUpdate(
             navigationController: root,
+            launchResponse: launchResponse,
             dismissAction: { [weak self] in
-                self?.startAppRecommendUpdate(url: url)
+                self?.startAppUnavailable(
+                    url: url,
+                    launchResponse: launchResponse
+                )
             }
         )
         start(coordinator)
     }
 
-    private func startAppRecommendUpdate(url: URL?) {
+    private func startAppUnavailable(url: URL?,
+                                     launchResponse: AppLaunchResponse) {
+        let coordinator = coordinatorBuilder.appUnavailable(
+            navigationController: root,
+            launchResponse: launchResponse,
+            dismissAction: { [weak self] in
+                self?.startAppRecommendUpdate(
+                    url: url,
+                    launchResponse: launchResponse
+                )
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startAppRecommendUpdate(url: URL?,
+                                         launchResponse: AppLaunchResponse) {
         let coordinator = coordinatorBuilder.appRecommendUpdate(
             navigationController: root,
+            launchResponse: launchResponse,
             dismissAction: { [weak self] in
                 self?.startAnalyticsConsent(url: url)
             }
@@ -85,6 +90,16 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             dismissAction: { [weak self] in
                 self?.startTopicOnboardingCoordinator(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startTopicOnboardingCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.topicOnboarding(
+            navigationController: root,
+            didDismissAction: { [weak self] in
+                self?.startTabs(url: url)
             }
         )
         start(coordinator)

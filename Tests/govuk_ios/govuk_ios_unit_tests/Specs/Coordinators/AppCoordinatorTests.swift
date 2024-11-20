@@ -52,7 +52,16 @@ struct AppCoordinatorTests {
         #expect(mockLaunchCoodinator._startCalled)
 
         //Finish launch loading
-        mockCoodinatorBuilder._receivedLaunchCompletion?()
+        let launchResult = AppLaunchResponse(
+            configResult: .success(.arrange),
+            topicResult: .success(TopicResponseItem.arrangeMultiple),
+            appVersionProvider: MockAppVersionProvider()
+        )
+        mockCoodinatorBuilder._receivedLaunchCompletion?(launchResult)
+        // This is in order of launch
+        mockCoodinatorBuilder._receivedAppForcedUpdateDismissAction?()
+        mockCoodinatorBuilder._receivedAppUnavailableDismissAction?()
+        mockCoodinatorBuilder._receivedAppRecommendUpdateDismissAction?()
         mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()
         mockCoodinatorBuilder._receivedTopicOnboardingDidDismissAction?()

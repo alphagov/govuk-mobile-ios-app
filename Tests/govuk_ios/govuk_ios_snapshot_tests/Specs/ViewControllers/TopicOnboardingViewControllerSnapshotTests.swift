@@ -33,6 +33,7 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         mockTopicService._stubbedFetchAllTopics = topics
 
         let viewModel = TopicOnboardingViewModel(
+            topics: topics,
             analyticsService: analyticsService,
             topicsService: mockTopicService,
             dismissAction: {}

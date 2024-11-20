@@ -15,7 +15,10 @@ struct AnalyticsServiceTests {
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
         )
-        mockUserDefaults.setValue(nil, forKey: UserDefaultsKeys.acceptedAnalytics.rawValue)
+        mockUserDefaults._stub(
+            value: nil,
+            key: UserDefaultsKeys.acceptedAnalytics.rawValue
+        )
 
         #expect(subject.permissionState == .unknown)
     }
@@ -28,7 +31,10 @@ struct AnalyticsServiceTests {
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
         )
-        mockUserDefaults.set(bool: true, forKey: .acceptedAnalytics)
+        mockUserDefaults._stub(
+            value: true,
+            key: UserDefaultsKeys.acceptedAnalytics.rawValue
+        )
 
         #expect(subject.permissionState == .accepted)
     }
@@ -41,7 +47,10 @@ struct AnalyticsServiceTests {
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults
         )
-        mockUserDefaults.set(bool: false, forKey: .acceptedAnalytics)
+        mockUserDefaults._stub(
+            value: false,
+            key: UserDefaultsKeys.acceptedAnalytics.rawValue
+        )
 
         #expect(subject.permissionState == .denied)
     }

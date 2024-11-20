@@ -1,9 +1,11 @@
 import Foundation
 
-typealias FetchAppConfigResult = (Result<AppConfig, AppConfigError>) -> Void
+
+typealias FetchAppConfigCompletion = (sending FetchAppConfigResult) -> Void
+typealias FetchAppConfigResult = Result<AppConfig, AppConfigError>
 
 protocol AppConfigServiceClientInterface {
-    func fetchAppConfig(completion: @escaping FetchAppConfigResult)
+    func fetchAppConfig(completion: @escaping FetchAppConfigCompletion)
 }
 
 struct AppConfigServiceClient: AppConfigServiceClientInterface {
@@ -14,7 +16,7 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
         self.serviceClient = serviceClient
     }
 
-    func fetchAppConfig(completion: @escaping FetchAppConfigResult) {
+    func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {
         let fetchRequest = GOVRequest(
             urlPath: "/config/appinfo/ios",
             method: .get,

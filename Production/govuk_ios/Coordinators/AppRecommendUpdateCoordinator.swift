@@ -3,19 +3,19 @@ import UIKit
 import SwiftUI
 
 class AppRecommendUpdateCoordinator: BaseCoordinator {
-    private let appConfigService: AppConfigServiceInterface
+    private let launchResponse: AppLaunchResponse
     private let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,
-         appConfigService: AppConfigServiceInterface,
+         launchResponse: AppLaunchResponse,
          dismissAction: @escaping () -> Void) {
-        self.appConfigService = appConfigService
+        self.launchResponse = launchResponse
         self.dismissAction = dismissAction
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        guard appConfigService.isAppRecommendUpdate
+        guard launchResponse.isUpdateRecommended
         else { return dismissAction() }
         setAppRecommendUpdate()
     }

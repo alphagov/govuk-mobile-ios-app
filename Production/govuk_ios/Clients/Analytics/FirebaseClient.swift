@@ -45,11 +45,10 @@ struct FirebaseClient: AnalyticsClient {
         )
     }
 
-    func setUserProperty(key: String,
-                         value: String) {
+    func set(userProperty: UserProperty) {
         firebaseAnalytics.setUserProperty(
-            value,
-            forName: key
+            userProperty.value,
+            forName: userProperty.key
         )
     }
 }
@@ -61,7 +60,7 @@ protocol FirebaseAppInterface {
 protocol FirebaseAnalyticsInterface {
     static func setAnalyticsCollectionEnabled(_ newValue: Bool)
     static func logEvent(_ eventName: String, parameters: [String: Any]?)
-    static func setUserProperty(_ value: String?, forName: String)
+    static func setUserProperty(_ value: String?, forName name: String)
 }
 
 extension FirebaseApp: FirebaseAppInterface {}

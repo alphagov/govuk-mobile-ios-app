@@ -124,6 +124,25 @@ struct FirebaseClientTests {
         #expect(receivedParams?["test_param"] as? String
                 == expectedScreen.additionalParameters["test_param"] as? String)
     }
+
+    @Test
+    @MainActor
+    func setUserProperty_setsProperty() {
+        let mockApp = MockFirebaseApp.self
+        let mockAnalytics = MockFirebaseAnalytics.self
+        let sut = FirebaseClient(
+            firebaseApp: mockApp,
+            firebaseAnalytics: mockAnalytics
+        )
+        let expectedName = UUID().uuidString
+        let expectedValue = UUID().uuidString
+        sut.set(
+            userProperty: .init(key: expectedName, value: expectedValue)
+        )
+
+        #expect(mockAnalytics._setUserPropertyReveivedName == expectedName)
+        #expect(mockAnalytics._setUserPropertyReveivedValue == expectedValue)
+    }
 }
 
 class MockFirebaseApp: FirebaseAppInterface {
@@ -134,7 +153,6 @@ class MockFirebaseApp: FirebaseAppInterface {
 }
 
 class MockFirebaseAnalytics: FirebaseAnalyticsInterface {
-
     static func clearValues() {
         _setAnalyticsCollectionEnabledReveivedEnabled = nil
         _logEventReceivedEventName = nil
@@ -152,5 +170,13 @@ class MockFirebaseAnalytics: FirebaseAnalyticsInterface {
                          parameters: [String : Any]?) {
         _logEventReceivedEventName = eventName
         _logEventReceivedEventParameters = parameters
+    }
+
+    static var _setUserPropertyReveivedValue: String?
+    static var _setUserPropertyReveivedName: String?
+    static func setUserProperty(_ value: String?,
+                                forName name: String) {
+        _setUserPropertyReveivedValue = value
+        _setUserPropertyReveivedName = name
     }
 }

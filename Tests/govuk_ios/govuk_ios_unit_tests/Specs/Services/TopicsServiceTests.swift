@@ -8,13 +8,16 @@ struct TopicsServiceTests {
     var sut: TopicsService!
     var mockTopicsServiceClient: MockTopicsServiceClient!
     var mockTopicsRepository: MockTopicsRepository!
+    var mockAnalyticsService: MockAnalyticsService!
 
     init() {
         mockTopicsServiceClient = MockTopicsServiceClient()
         mockTopicsRepository = MockTopicsRepository()
+        mockAnalyticsService = MockAnalyticsService()
         sut = TopicsService(
             topicsServiceClient: mockTopicsServiceClient,
             topicsRepository: mockTopicsRepository,
+            analyticsService: mockAnalyticsService,
             userDefaults: MockUserDefaults()
         )
     }
@@ -93,6 +96,7 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: MockAnalyticsService(),
             userDefaults: mockUserDefaults
         )
 
@@ -105,21 +109,25 @@ struct TopicsServiceTests {
 
 
     @Test
-    func setHasEditedTopics_setsHasEditedTopicsToTrue() {
+    func setHasPersonalisedTopics_setsHasEditedTopicsToTrue() {
 
         let mockUserDefaults = MockUserDefaults()
-
+        let mockAnalyticsService = MockAnalyticsService()
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: mockAnalyticsService,
             userDefaults: mockUserDefaults
         )
 
         #expect(mockUserDefaults.bool(forKey: .personalisedTopics) == false)
+        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty == nil)
 
         sut.setHasPersonalisedTopics()
 
         #expect(mockUserDefaults.bool(forKey: .personalisedTopics))
+        #expect(mockUserDefaults.bool(forKey: .personalisedTopics))
+        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.key == "topics_personalised")
     }
 
     @Test(.serialized, arguments: [true, false])
@@ -131,6 +139,7 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: MockAnalyticsService(),
             userDefaults: mockUserDefaults
         )
 
@@ -146,6 +155,7 @@ struct TopicsServiceTests {
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
+            analyticsService: MockAnalyticsService(),
             userDefaults: mockUserDefaults
         )
 

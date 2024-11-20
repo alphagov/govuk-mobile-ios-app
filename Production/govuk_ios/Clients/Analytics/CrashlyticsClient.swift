@@ -19,7 +19,7 @@ struct CrashlyticsClient: AnalyticsClient {
 
     func track(event: AppEvent) { /*Do nothing*/ }
 
-    func setUserProperty(key: String, value: String) { /*Do nothing*/ }
+    func set(userProperty: UserProperty) { /*Do nothing*/ }
 }
 
 protocol CrashlyticsInterface {

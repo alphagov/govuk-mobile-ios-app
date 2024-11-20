@@ -81,9 +81,8 @@ struct TopicsService: TopicsServiceInterface {
             bool: true,
             forKey: .personalisedTopics
         )
-        analyticsService.setUserProperty(
-            key: "topics_personalised",
-            value: "true"
+        analyticsService.set(
+            userProperty: .init(key: "topics_personalised", value: "true")
         )
     }
 

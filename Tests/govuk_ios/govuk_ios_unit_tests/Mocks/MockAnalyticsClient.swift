@@ -3,7 +3,6 @@ import Foundation
 @testable import govuk_ios
 
 class MockAnalyticsClient: AnalyticsClient {
-
     var _launchCalled: Bool = false
     func launch() {
         _launchCalled = true
@@ -22,5 +21,10 @@ class MockAnalyticsClient: AnalyticsClient {
     var _trackEventReceivedEvents: [AppEvent] = []
     func track(event: AppEvent) {
         _trackEventReceivedEvents.append(event)
+    }
+
+    var _trackSetUserPropertyReceivedProperty: UserProperty?
+    func set(userProperty: UserProperty) {
+        _trackSetUserPropertyReceivedProperty = userProperty
     }
 }

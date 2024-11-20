@@ -20,6 +20,11 @@ class MockAnalyticsService: AnalyticsServiceInterface,
         _trackScreenReceivedScreens.append(screen)
     }
 
+    var _trackSetUserPropertyReceivedProperty: UserProperty?
+    func set(userProperty: UserProperty) {
+        _trackSetUserPropertyReceivedProperty = userProperty
+    }
+
     var _setAcceptedAnalyticsAccepted: Bool = true
     func setAcceptedAnalytics(accepted: Bool) {
         _setAcceptedAnalyticsAccepted = accepted

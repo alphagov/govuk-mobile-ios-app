@@ -1,6 +1,6 @@
 import Foundation
 
-extension UserDefaults {
+extension UserDefaults: UserDefaultsInterface {
     func value(forKey key: UserDefaultsKeys) -> Any? {
         value(forKey: key.rawValue)
     }
@@ -24,4 +24,11 @@ enum UserDefaultsKeys: String {
     case acceptedAnalytics = "govuk_app_analytics_accepted"
     case personalisedTopics = "govuk_topics_personalised"
     case topicsOnboardingSeen = "govuk_topics_onboarding_seen"
+}
+
+protocol UserDefaultsInterface {
+    func value(forKey key: UserDefaultsKeys) -> Any?
+    func bool(forKey key: UserDefaultsKeys) -> Bool
+    func set(bool boolValue: Bool,
+             forKey key: UserDefaultsKeys)
 }

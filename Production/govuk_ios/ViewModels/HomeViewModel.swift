@@ -16,14 +16,6 @@ struct HomeViewModel {
         ].compactMap { $0 }
     }
 
-    var topicCount: Int {
-        topicWidgetViewModel.topicCount
-    }
-
-    var displayedTopicCount: Int {
-        topicWidgetViewModel.displayedTopics.count
-    }
-
     private var searchWidget: WidgetView? {
         guard widgetEnabled(feature: .search)
         else { return nil }

@@ -44,7 +44,7 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaults: .standard
+                userDefaults: UserDefaults.standard
             )
         }
         .scope(.singleton)
@@ -65,7 +65,7 @@ extension Container {
     var onboardingService: Factory<OnboardingServiceInterface> {
         Factory(self) {
             OnboardingService(
-                userDefaults: .standard
+                userDefaults: UserDefaults.standard
             )
         }
     }
@@ -75,7 +75,7 @@ extension Container {
             TopicsService(
                 topicsServiceClient: self.topicsServiceClient(),
                 topicsRepository: self.topicsRepository(),
-                userDefaults: .standard
+                userDefaults: UserDefaults.standard
             )
         }
     }

@@ -9,9 +9,9 @@ protocol OnboardingServiceInterface {
 }
 
 struct OnboardingService: OnboardingServiceInterface {
-    private let userDefaults: UserDefaults
+    private let userDefaults: UserDefaultsInterface
 
-    init(userDefaults: UserDefaults) {
+    init(userDefaults: UserDefaultsInterface) {
         self.userDefaults = userDefaults
     }
 

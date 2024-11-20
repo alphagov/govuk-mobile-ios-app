@@ -62,7 +62,6 @@ struct CrashlyticsClientTests {
             crashlytics: mockCrashlytics
         )
 
-        let expectedScreen = MockBaseViewController()
         sut.track(event: .init(name: "test", params: nil))
 
         #expect(mockCrashlytics._setCrashlyticsCollectionEnabledReceivedEnabled == nil)

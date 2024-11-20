@@ -2,7 +2,6 @@ import Foundation
 
 struct Constants {
     struct API {
-        static let appBaseUrl = "https://app.integration.publishing.service.gov.uk"
         static let appStoreAppUrl = "https://beta.itunes.apple.com/v1/app/6572293285"
         static let govukUrlHost = "www.gov.uk"
         static let govukUrlScheme = "https"

@@ -5,7 +5,7 @@ protocol AppEnvironmentServiceInterface {
 }
 
 enum AppEnvironment: String {
-    case baseURL = "Base URL"
+    case baseURL = "BaseURL"
 }
 
 struct AppEnvironmentService: AppEnvironmentServiceInterface {

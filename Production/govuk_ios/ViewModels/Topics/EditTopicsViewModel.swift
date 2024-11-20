@@ -27,7 +27,7 @@ final class EditTopicsViewModel: ObservableObject {
 
     private func loadSections(topics: [Topic]) {
         let rows = topics.compactMap { [weak self, topicsService] topic in
-            topic.isFavourite = topicsService.hasPersonalisedTopics ? topic.isFavourite : true
+            topic.isFavourite = topicsService.hasCustomisedTopics ? topic.isFavourite : true
             return self?.topicRow(topic: topic)
         }
         self.sections = [
@@ -47,7 +47,7 @@ final class EditTopicsViewModel: ObservableObject {
             action: { [weak self] value in
                 topic.isFavourite = value
                 self?.topicsService.save()
-                self?.topicsService.setHasPersonalisedTopics()
+                self?.topicsService.setHasCustomisedTopics()
                 self?.trackSelection(topic: topic)
             }
         )

@@ -4,14 +4,14 @@ import Foundation
 
 class MockTopicsService: TopicsServiceInterface {
 
-    var _setHasPersonalisedTopicsCalled: Bool = false
-    func setHasPersonalisedTopics() {
-        _setHasPersonalisedTopicsCalled = true
+    var _setHasCustomisedTopicsCalled: Bool = false
+    func setHasCustomisedTopics() {
+        _setHasCustomisedTopicsCalled = true
     }
     
-    var _stubbedHasPersonalisedTopics: Bool = false
-    var hasPersonalisedTopics: Bool {
-        _stubbedHasPersonalisedTopics
+    var _stubbedHasCustomisedTopics: Bool = false
+    var hasCustomisedTopics: Bool {
+        _stubbedHasCustomisedTopics
     }
 
     var _stubbedHasOnboardedTopics: Bool = false

@@ -109,7 +109,7 @@ struct TopicsServiceTests {
 
 
     @Test
-    func setHasPersonalisedTopics_setsHasEditedTopicsToTrue() {
+    func setHasCustomisedTopics_setsHasEditedTopicsToTrue() {
 
         let mockUserDefaults = MockUserDefaults()
         let mockAnalyticsService = MockAnalyticsService()
@@ -120,14 +120,15 @@ struct TopicsServiceTests {
             userDefaults: mockUserDefaults
         )
 
-        #expect(mockUserDefaults.bool(forKey: .personalisedTopics) == false)
+        #expect(mockUserDefaults.bool(forKey: .customisedTopics) == false)
         #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty == nil)
 
-        sut.setHasPersonalisedTopics()
+        sut.setHasCustomisedTopics()
 
-        #expect(mockUserDefaults.bool(forKey: .personalisedTopics))
-        #expect(mockUserDefaults.bool(forKey: .personalisedTopics))
-        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.key == "topics_personalised")
+        #expect(mockUserDefaults.bool(forKey: .customisedTopics))
+        #expect(mockUserDefaults.bool(forKey: .customisedTopics))
+        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.key == UserProperty.topicsCustomised.key)
+        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.value == UserProperty.topicsCustomised.value)
     }
 
     @Test(.serialized, arguments: [true, false])
@@ -149,7 +150,7 @@ struct TopicsServiceTests {
     @Test(.serialized, arguments: [true, false])
     func hasTopicsBeenEdited_returnsExpectedResult(expectedValue: Bool) {
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.personalisedTopics.rawValue)
+        mockUserDefaults.setValue(expectedValue, forKey: UserDefaultsKeys.customisedTopics.rawValue)
         mockUserDefaults.synchronize()
 
         let sut = TopicsService(
@@ -159,6 +160,6 @@ struct TopicsServiceTests {
             userDefaults: mockUserDefaults
         )
 
-        #expect(sut.hasPersonalisedTopics == expectedValue)
+        #expect(sut.hasCustomisedTopics == expectedValue)
     }
 }

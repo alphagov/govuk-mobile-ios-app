@@ -16,7 +16,7 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
         )
         let viewController = viewController(
             topics: topics,
-            personalised: true
+            customised: true
         )
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -31,7 +31,7 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
         )
         let viewController = viewController(
             topics: topics,
-            personalised: true
+            customised: true
         )
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -39,7 +39,7 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func test_loadInNavigationController_noFavourites_notPersonalised_rendersCorrectly() {
+    func test_loadInNavigationController_noFavourites_notCustomised_rendersCorrectly() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topics = [
             Topic.arrange(
@@ -60,7 +60,7 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
         ]
         let viewController = viewController(
             topics: topics,
-            personalised: false
+            customised: false
         )
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -68,7 +68,7 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func test_loadInNavigationController_noFavourites_personalised_rendersCorrectly() {
+    func test_loadInNavigationController_noFavourites_customised_rendersCorrectly() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topics = [
             Topic.arrange(
@@ -89,7 +89,7 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
         ]
         let viewController = viewController(
             topics: topics,
-            personalised: true
+            customised: true
         )
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -98,9 +98,9 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController(topics: [Topic],
-                                personalised: Bool) -> UIViewController {
+                                customised: Bool) -> UIViewController {
         mockTopicsService._stubbedFetchAllTopics = topics
-        mockTopicsService._stubbedHasPersonalisedTopics = personalised
+        mockTopicsService._stubbedHasCustomisedTopics = customised
         let viewModel = EditTopicsViewModel(
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),

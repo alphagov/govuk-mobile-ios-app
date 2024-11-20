@@ -8,8 +8,8 @@ protocol TopicsServiceInterface {
     func fetchFavourites() -> [Topic]
     func save()
 
-    func setHasPersonalisedTopics()
-    var hasPersonalisedTopics: Bool { get }
+    func setHasCustomisedTopics()
+    var hasCustomisedTopics: Bool { get }
 
     var hasOnboardedTopics: Bool { get }
     func setHasOnboardedTopics()
@@ -76,17 +76,17 @@ struct TopicsService: TopicsServiceInterface {
         )
     }
 
-    func setHasPersonalisedTopics() {
+    func setHasCustomisedTopics() {
         userDefaults.set(
             bool: true,
-            forKey: .personalisedTopics
+            forKey: .customisedTopics
         )
         analyticsService.set(
-            userProperty: .init(key: "topics_personalised", value: "true")
+            userProperty: .topicsCustomised
         )
     }
 
-    var hasPersonalisedTopics: Bool {
-        userDefaults.bool(forKey: .personalisedTopics)
+    var hasCustomisedTopics: Bool {
+        userDefaults.bool(forKey: .customisedTopics)
     }
 }

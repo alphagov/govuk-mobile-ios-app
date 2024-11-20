@@ -77,6 +77,17 @@
           }
         }
       }
+    },
+    "topicsWidgetTitleCustomised" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your topics"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

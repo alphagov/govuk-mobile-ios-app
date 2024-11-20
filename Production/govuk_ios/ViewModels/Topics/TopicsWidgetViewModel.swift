@@ -23,6 +23,13 @@ final class TopicsWidgetViewModel {
         displayedTopics.count >= topicsService.fetchAll().count
     }
 
+    var widgetTitle: String {
+        let key = self.topicsService.hasCustomisedTopics ?
+        "topicsWidgetTitleCustomised" :
+        "topicsWidgetTitle"
+        return String.home.localized(key)
+    }
+
     var displayedTopics: [Topic] {
         topicsService.hasCustomisedTopics ?
         topicsService.fetchFavourites() :

@@ -83,7 +83,6 @@
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
 		5D18E83E2CCFB68900F20419 /* Container+APIClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */; };
 		5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */; };
-		5D26A75E2C92CCA8009902DD /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4E255A2C821BCE00FD9A28 /* Onboarding */; };
 		5D3123802C85A6B70088B931 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D31237F2C85A6B70088B931 /* ActivityService.swift */; };
 		5D3123822C85AB8E0088B931 /* ActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123812C85AB8E0088B931 /* ActivityItem.swift */; };
 		5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123832C85ADDF0088B931 /* ActivityRepository.swift */; };
@@ -176,6 +175,7 @@
 		5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD09EC72C9ADB8500494550 /* SearchService.swift */; };
 		5DD6F3302CC2B937005BC5D3 /* SearchWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F32F2CC2B937005BC5D3 /* SearchWidgetViewModel.swift */; };
 		5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */; };
+		5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5DDB31CB2CEF84D100E49259 /* Onboarding */; };
 		5DDCF62F2C874AB400A24947 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D6295292C87429000BBB394 /* GOV.xcdatamodeld */; };
 		5DE2834E2CAC48DC00E95800 /* ActivityItemCreateParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */; };
 		5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */; };
@@ -610,10 +610,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DBD28C42CD8C6EE00DEDFFF /* UIComponents in Frameworks */,
-				5D26A75E2C92CCA8009902DD /* Onboarding in Frameworks */,
 				5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
 				5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
 			);
@@ -1275,10 +1275,10 @@
 				5D7F267D2C0F0EF000842090 /* Factory */,
 				5D0278362C29CB5800F2A4EB /* Lottie */,
 				5D0B02022C81A7E90013A410 /* Onboarding */,
-				5D4E255A2C821BCE00FD9A28 /* Onboarding */,
 				5DC2505F2C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport */,
 				5DC250612C91D395009E9E7F /* FirebaseCrashlytics */,
 				4EDC73A92CD2349B00C84FB7 /* UIComponents */,
+				5DDB31CB2CEF84D100E49259 /* Onboarding */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1365,9 +1365,9 @@
 				5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
 				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
 				5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
 				5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				4EDC73A82CD2347E00C84FB7 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
+				5DDB31CA2CEF84D100E49259 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -2087,6 +2087,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		5DDB31CA2CEF84D100E49259 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-onboarding" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../govuk-mobile-ios-onboarding";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		4EDC73A82CD2347E00C84FB7 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2102,14 +2109,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.4.3;
-			};
-		};
-		5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
-			requirement = {
-				branch = develop;
-				kind = branch;
 			};
 		};
 		5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */ = {
@@ -2158,11 +2157,6 @@
 			package = 5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
 			productName = iOSSnapshotTestCase;
 		};
-		5D4E255A2C821BCE00FD9A28 /* Onboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D4E25592C821BCE00FD9A28 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
-			productName = Onboarding;
-		};
 		5D7F267D2C0F0EF000842090 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */;
@@ -2177,6 +2171,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		5DDB31CB2CEF84D100E49259 /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Onboarding;
 		};
 /* End XCSwiftPackageProductDependency section */
 

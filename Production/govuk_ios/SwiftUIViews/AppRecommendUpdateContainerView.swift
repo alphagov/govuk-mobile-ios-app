@@ -39,6 +39,7 @@ struct AppRecommendUpdateContainerView: View {
             .padding(.top, 16)
             .ignoresSafeArea()
         }
+        .navigationBarHidden(true)
     }
 }
 

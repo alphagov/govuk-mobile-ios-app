@@ -63,6 +63,7 @@ struct AnalyticsConsentContainerView: View {
                 .padding(.horizontal, 15)
             }.padding(.top, 16)
             .ignoresSafeArea()
+            .navigationBarHidden(true)
         }
     }
 }

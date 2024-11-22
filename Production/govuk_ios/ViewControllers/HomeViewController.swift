@@ -18,7 +18,6 @@ class HomeViewController: BaseViewController,
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(stackView)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInset.top = navigationBar.sittingHeight + 16
         scrollView.contentInset.bottom = 32
@@ -51,9 +50,11 @@ class HomeViewController: BaseViewController,
     }
 
     private func configureUI() {
+        navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         view.addSubview(navigationBar)
+        scrollView.addSubview(stackView)
         addWidgets()
     }
 

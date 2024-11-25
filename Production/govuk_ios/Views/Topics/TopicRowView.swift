@@ -15,11 +15,8 @@ class TopicRowView: UIView {
     }()
 
     private lazy var icon: UIImageView = {
-        let image = UIImage(systemName: topic.iconName)
-        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: topic.icon)
         imageView.tintColor = UIColor.govUK.fills.surfaceButtonPrimary
-        imageView.preferredSymbolConfiguration = config
         imageView.contentMode = .center
         return imageView
     }()

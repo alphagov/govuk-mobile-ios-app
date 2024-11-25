@@ -1,8 +1,10 @@
 import Foundation
+import UIKit
 
 class TopicCardModel: ObservableObject {
     let title: String
     let iconName: String
+    let icon: UIImage
     let tapAction: () -> Void
 
     init(topic: Topic,
@@ -10,5 +12,6 @@ class TopicCardModel: ObservableObject {
         self.title = topic.title
         self.iconName = topic.iconName
         self.tapAction = tapAction
+        self.icon = topic.icon
     }
 }

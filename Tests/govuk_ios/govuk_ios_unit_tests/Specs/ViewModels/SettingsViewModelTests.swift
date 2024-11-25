@@ -9,15 +9,19 @@ struct SettingsViewModelTests {
     let sut: SettingsViewModel
     let mockAnalyticsService: MockAnalyticsService
     let mockVersionProvider: MockAppVersionProvider
+    let mockURLOpener: MockURLOpener
 
     init() {
         mockAnalyticsService = MockAnalyticsService()
         mockVersionProvider = MockAppVersionProvider()
+        mockURLOpener = MockURLOpener()
+
         mockVersionProvider.versionNumber = "123"
         mockVersionProvider.buildNumber = "456"
+
         sut = SettingsViewModel(
             analyticsService: mockAnalyticsService,
-            urlOpener: MockURLOpener(),
+            urlOpener: mockURLOpener,
             versionProvider: mockVersionProvider
         )
     }
@@ -80,6 +84,7 @@ struct SettingsViewModelTests {
         let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
         privacyPolicyRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.privacyPolicyUrl)
         #expect(receivedTitle == privacyPolicyRow.title)
     }
 
@@ -89,6 +94,7 @@ struct SettingsViewModelTests {
         let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
         accessibilityStatementRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.accessibilityStatementUrl)
         #expect(receivedTitle == accessibilityStatementRow.title)
     }
 
@@ -107,6 +113,7 @@ struct SettingsViewModelTests {
         let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
         termsAndConditionsRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.termsAndConditionsUrl)
         #expect(receivedTitle == termsAndConditionsRow.title)
     }
 
@@ -118,6 +125,7 @@ struct SettingsViewModelTests {
         helpAndFeedbackRow.action()
 
         let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.helpAndFeedbackUrl)
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
     }
 }

@@ -21,7 +21,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             prefersLargeTitles: true
         )
     }
-    
+
     func test_loadInNavigationController_preview_rendersCorrectly() {
         let settingsContentView = SettingsView(
             viewModel: GroupedListViewModel()
@@ -37,8 +37,20 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController() -> UIViewController {
-        ViewControllerBuilder().settings(
-            analyticsService: MockAnalyticsService()
+        let mockVersionProvider = MockAppVersionProvider()
+        mockVersionProvider.versionNumber = "1.2.3"
+        mockVersionProvider.buildNumber = "123"
+        let viewModel = SettingsViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener(),
+            versionProvider: mockVersionProvider
+        )
+        let settingsContentView = SettingsView(
+            viewModel: viewModel
+        )
+        return HostingViewController(
+            rootView: settingsContentView,
+            statusBarStyle: .darkContent
         )
     }
 }

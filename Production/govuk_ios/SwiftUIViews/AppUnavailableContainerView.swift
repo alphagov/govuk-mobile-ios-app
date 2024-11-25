@@ -30,6 +30,7 @@ struct AppUnavailableContainerView: View {
             .padding([.top, .horizontal], 16)
             .ignoresSafeArea()
         }
+        .navigationBarHidden(true)
     }
 }
 

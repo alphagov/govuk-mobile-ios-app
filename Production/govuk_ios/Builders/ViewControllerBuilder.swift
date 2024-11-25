@@ -69,7 +69,7 @@ class ViewControllerBuilder {
         let viewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,
-            bundle: .main
+            versionProvider: Bundle.main
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel

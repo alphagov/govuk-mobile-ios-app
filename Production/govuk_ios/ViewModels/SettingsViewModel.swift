@@ -150,7 +150,7 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func openURLIfPossible(urlString: String,
                                    eventTitle: String) {
-        if urlOpener.openIfPossible(Constants.API.accessibilityStatementUrl) {
+        if urlOpener.openIfPossible(urlString) {
             trackLinkEvent(eventTitle)
         }
     }

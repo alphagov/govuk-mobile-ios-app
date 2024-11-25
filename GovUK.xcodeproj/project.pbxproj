@@ -839,6 +839,7 @@
 			children = (
 				3D9C933B2CB0155300EFA337 /* Bundle+AppVersionProvider.swift */,
 				5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */,
+				D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */,
 				4E94E8E22C8B19D900906803 /* Date+Extensions.swift */,
 				5DB6AD302CA1B94400E92F4C /* DateFormatter+Convenience.swift */,
 				5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */,
@@ -848,7 +849,6 @@
 				5D349F682C6B550000B7F747 /* URL+Extensions.swift */,
 				D04A8F4A2CD3948B00685FD3 /* URLResponse+Extensions.swift */,
 				4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */,
-				D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";

@@ -8,13 +8,17 @@ struct SettingsViewModelTests {
 
     let sut: SettingsViewModel
     let mockAnalyticsService: MockAnalyticsService
+    let mockVersionProvider: MockAppVersionProvider
 
     init() {
         mockAnalyticsService = MockAnalyticsService()
+        mockVersionProvider = MockAppVersionProvider()
+        mockVersionProvider.versionNumber = "123"
+        mockVersionProvider.buildNumber = "456"
         sut = SettingsViewModel(
             analyticsService: mockAnalyticsService,
             urlOpener: MockURLOpener(),
-            bundle: .main
+            versionProvider: mockVersionProvider
         )
     }
 
@@ -36,7 +40,7 @@ struct SettingsViewModelTests {
 
         let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
         #expect(appBundleInformation.title == "App version number")
-        #expect(appBundleInformation.detail == Bundle.main.versionNumber)
+        #expect(appBundleInformation.detail == "123 (456)")
 
         let privacySection = sut.listContent[1]
         #expect(privacySection.heading == "Privacy and legal")

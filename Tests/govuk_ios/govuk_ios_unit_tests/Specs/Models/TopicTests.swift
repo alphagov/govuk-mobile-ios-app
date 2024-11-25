@@ -1,4 +1,5 @@
 import Testing
+import UIKit
 
 @testable import govuk_ios
 
@@ -22,28 +23,28 @@ struct TopicTests {
             "unknown"
         ],
         [
-            "car.fill",
-            "list.clipboard.fill",
-            "sterlingsign",
-            "heart.fill",
-            "briefcase.fill",
-            "cross.fill",
-            "chart.pie.fill",
-            "figure.and.child.holdinghands",
-            "chair.lounge.fill",
-            "book.fill",
-            "airplane",
-            "star.fill"
+            UIImage.topicDrivingIcon,
+            UIImage.topicEmploymentIcon,
+            UIImage.topicBenefitsIcon,
+            UIImage.topicCareIcon,
+            UIImage.topicBusinessIcon,
+            UIImage.topicHealthIcon,
+            UIImage.topicMoneyIcon,
+            UIImage.topicParentingIcon,
+            UIImage.topicRetirementIcon,
+            UIImage.topicStudyIcon,
+            UIImage.topicTravelIcon,
+            UIImage.topicDefaultIcon,
         ]
     ))
     func topic_iconName_returnsCorrectValue(ref: String,
-                                            iconName: String) {
+                                            icon: UIImage) {
         let coreData = CoreDataRepository.arrange
         
         let topic = Topic(context: coreData.viewContext)
         topic.ref = ref
         topic.title = "Title"
-        #expect(topic.iconName == iconName)
-    }
 
+        #expect(topic.icon.pngData() == icon.pngData())
+    }
 }

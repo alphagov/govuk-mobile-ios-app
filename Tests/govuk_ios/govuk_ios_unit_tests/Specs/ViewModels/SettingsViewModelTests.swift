@@ -8,13 +8,21 @@ struct SettingsViewModelTests {
 
     let sut: SettingsViewModel
     let mockAnalyticsService: MockAnalyticsService
+    let mockVersionProvider: MockAppVersionProvider
+    let mockURLOpener: MockURLOpener
 
     init() {
         mockAnalyticsService = MockAnalyticsService()
+        mockVersionProvider = MockAppVersionProvider()
+        mockURLOpener = MockURLOpener()
+
+        mockVersionProvider.versionNumber = "123"
+        mockVersionProvider.buildNumber = "456"
+
         sut = SettingsViewModel(
             analyticsService: mockAnalyticsService,
-            urlOpener: MockURLOpener(),
-            bundle: .main
+            urlOpener: mockURLOpener,
+            versionProvider: mockVersionProvider
         )
     }
 
@@ -36,7 +44,7 @@ struct SettingsViewModelTests {
 
         let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
         #expect(appBundleInformation.title == "App version number")
-        #expect(appBundleInformation.detail == Bundle.main.versionNumber)
+        #expect(appBundleInformation.detail == "123 (456)")
 
         let privacySection = sut.listContent[1]
         #expect(privacySection.heading == "Privacy and legal")
@@ -76,6 +84,7 @@ struct SettingsViewModelTests {
         let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
         privacyPolicyRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.privacyPolicyUrl)
         #expect(receivedTitle == privacyPolicyRow.title)
     }
 
@@ -85,6 +94,7 @@ struct SettingsViewModelTests {
         let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
         accessibilityStatementRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.accessibilityStatementUrl)
         #expect(receivedTitle == accessibilityStatementRow.title)
     }
 
@@ -103,6 +113,7 @@ struct SettingsViewModelTests {
         let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
         termsAndConditionsRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.termsAndConditionsUrl)
         #expect(receivedTitle == termsAndConditionsRow.title)
     }
 
@@ -114,6 +125,7 @@ struct SettingsViewModelTests {
         helpAndFeedbackRow.action()
 
         let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.helpAndFeedbackUrl)
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
     }
 }

@@ -10,14 +10,14 @@ class SettingsViewModel: SettingsViewModelInterface {
     let title: String = String.settings.localized("pageTitle")
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
-    let bundle: Bundle
+    let versionProvider: AppVersionProvider
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
-         bundle: Bundle) {
+         versionProvider: AppVersionProvider) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
-        self.bundle = bundle
+        self.versionProvider = versionProvider
     }
 
     private var hasAcceptedAnalytics: Bool {
@@ -39,7 +39,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                         id: "settings.version.row",
                         title: String.settings.localized("appVersionTitle"),
                         body: nil,
-                        detail: bundle.versionNumber ?? "-"
+                        detail: versionProvider.fullBuildNumber ?? "-"
                     )
                 ],
                 footer: nil

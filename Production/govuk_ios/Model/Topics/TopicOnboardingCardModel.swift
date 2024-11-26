@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 struct TopicOnboardingCardModel {
     private let topic: Topic
@@ -18,8 +19,8 @@ struct TopicOnboardingCardModel {
         topic.topicDescription
     }
 
-    var iconName: String {
-        topic.iconName
+    var icon: UIImage {
+        topic.icon
     }
 
     var isSelected: Bool {

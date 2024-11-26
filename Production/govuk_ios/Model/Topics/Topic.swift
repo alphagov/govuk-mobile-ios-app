@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import UIKit
 
 @objc(Topic)
 class Topic: NSManagedObject,
@@ -20,32 +21,32 @@ class Topic: NSManagedObject,
     @NSManaged public var topicDescription: String?
     @NSManaged public var isFavourite: Bool
 
-    var iconName: String {
+    var icon: UIImage {
         switch self.ref {
         case "benefits":
-            return "sterlingsign"
+            return .topicBenefitsIcon
         case "business":
-            return "briefcase.fill"
+            return .topicBusinessIcon
         case "care":
-            return "heart.fill"
+            return .topicCareIcon
         case "driving-transport":
-            return "car.fill"
+            return .topicDrivingIcon
         case "employment":
-            return "list.clipboard.fill"
+            return .topicEmploymentIcon
         case "health-disability":
-            return "cross.fill"
+            return .topicHealthIcon
         case "money-tax":
-            return "chart.pie.fill"
+            return .topicMoneyIcon
         case "parenting-guardianship":
-            return "figure.and.child.holdinghands"
+            return .topicParentingIcon
         case "retirement":
-            return "chair.lounge.fill"
+            return .topicRetirementIcon
         case "studying-training":
-            return "book.fill"
+            return .topicStudyIcon
         case "travel-abroad":
-            return "airplane"
+            return .topicTravelIcon
         default:
-            return "star.fill"
+            return .topicDefaultIcon
         }
     }
 

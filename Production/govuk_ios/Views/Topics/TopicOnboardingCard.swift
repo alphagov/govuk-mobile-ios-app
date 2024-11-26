@@ -15,11 +15,9 @@ class TopicOnboardingCard: UIControl {
     }()
 
     private lazy var iconImageView: UIImageView = {
-        let image = UIImage(systemName: viewModel.iconName)
-        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
-        let imageView = UIImageView(image: image)
-        imageView.tintColor = UIColor.govUK.text.link
-        imageView.preferredSymbolConfiguration = config
+        let imageView = UIImageView(image: viewModel.icon)
+        imageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor.govUK.fills.surfaceButtonPrimary
         return imageView
     }()
 

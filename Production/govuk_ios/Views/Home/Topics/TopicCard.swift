@@ -15,11 +15,9 @@ class TopicCard: UIView {
     }()
 
     private lazy var icon: UIImageView = {
-        let image = UIImage(systemName: viewModel.iconName)
-        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .semibold)
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: viewModel.icon)
+        imageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor.govUK.fills.surfaceButtonPrimary
-        imageView.preferredSymbolConfiguration = config
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return imageView
     }()

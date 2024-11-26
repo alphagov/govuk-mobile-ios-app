@@ -21,9 +21,6 @@ class Topic: NSManagedObject,
     @NSManaged public var topicDescription: String?
     @NSManaged public var isFavourite: Bool
 
-    var iconName: String {""
-    }
-
     var icon: UIImage {
         switch self.ref {
         case "benefits":
@@ -52,7 +49,6 @@ class Topic: NSManagedObject,
             return .topicDefaultIcon
         }
     }
-
 
     func update(item: TopicResponseItem) {
         self.ref = item.ref

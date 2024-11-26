@@ -15,7 +15,7 @@ class TopicRowView: UIView {
     }()
 
     private lazy var icon: UIImageView = {
-        let imageView = UIImageView(image: topic.icon)
+        let imageView = UIImageView(image: topic.icon.withRenderingMode(.alwaysTemplate))
         imageView.tintColor = UIColor.govUK.fills.surfaceButtonPrimary
         imageView.contentMode = .center
         return imageView

@@ -19,10 +19,6 @@ struct TopicOnboardingCardModel {
         topic.topicDescription
     }
 
-    var iconName: String {
-        topic.iconName
-    }
-
     var icon: UIImage {
         topic.icon
     }

@@ -51,9 +51,11 @@ class MockTopicsService: TopicsServiceInterface {
     }
     
     var _stubbedFetchTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
+    var _fetchDetailsCalled = false
     func fetchDetails(ref: String,
                       completion: @escaping FetchTopicDetailsCompletion) {
         if let result = _stubbedFetchTopicDetailsResult {
+            _fetchDetailsCalled = true
             completion(result)
         }
     }

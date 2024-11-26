@@ -171,4 +171,51 @@ struct TopicDetailViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.gov.uk/view-driving-licence")
     }
+    
+    @Test
+    func init_apiUnavailable_doesCreateCorrectErrorViewModel() async throws {
+        mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.apiUnavailable)
+        let sut = TopicDetailViewModel(
+            topic: MockDisplayableTopic(ref: "", title: ""),
+            topicsService: mockTopicsService,
+            analyticsService: mockAnalyticsService,
+            activityService: mockActivityService,
+            urlOpener: mockURLOpener,
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
+        )
+        let errorViewModel = try #require(sut.errorViewModel)
+        #expect(errorViewModel.title == String.common.localized("genericErrorTitle"))
+        #expect(errorViewModel.body == String.common.localized("genericErrorBody"))
+        #expect(errorViewModel.buttonTitle == String.common.localized("genericErrorButtonTitle"))
+        #expect(errorViewModel.buttonAccessibilityLabel
+                == String.common.localized("genericErrorTitleAccessibilityLabel")
+        )
+        #expect(errorViewModel.isWebLink)
+        errorViewModel.action?()
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.govukUrlString)
+    }
+    
+    @Test
+    func init_networkUnavailable_doesCreateCorrectErrorViewModel() async throws {
+        mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.networkUnavailable)
+        let sut = TopicDetailViewModel(
+            topic: MockDisplayableTopic(ref: "", title: ""),
+            topicsService: mockTopicsService,
+            analyticsService: mockAnalyticsService,
+            activityService: mockActivityService,
+            urlOpener: mockURLOpener,
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
+        )
+        let errorViewModel = try #require(sut.errorViewModel)
+        #expect(errorViewModel.title == String.common.localized("networkUnavailableErrorTitle"))
+        #expect(errorViewModel.body == String.common.localized("networkUnavailableErrorBody"))
+        #expect(errorViewModel.buttonTitle == String.common.localized("networkUnavailableButtonTitle"))
+        #expect(errorViewModel.buttonAccessibilityLabel == nil)
+        #expect(errorViewModel.isWebLink == false)
+        mockTopicsService._fetchDetailsCalled = false
+        errorViewModel.action?()
+        #expect(mockTopicsService._fetchDetailsCalled)
+    }
 }

@@ -55,8 +55,6 @@ class MockTopicsService: TopicsServiceInterface {
                       completion: @escaping FetchTopicDetailsCompletion) {
         if let result = _stubbedFetchTopicDetailsResult {
             completion(result)
-        } else {
-            completion(.failure(.apiUnavailable))
         }
     }
 }

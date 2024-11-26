@@ -36,11 +36,11 @@ class Configuration
   end
 
   def app_configuration
-    'Release'
+    setting(:app, :build_configuration)
   end
 
   def app_export_method
-    'app-store'
+    setting(:app, :export_method)
   end
 
   def app_export_options
@@ -83,6 +83,14 @@ class Configuration
 
   def match_certificate_token
     ENV['MATCH_CERTIFICATE_TOKEN']
+  end
+
+  def firebase_app_id
+    setting(:app, :firebase_app_id)
+  end
+
+  def firebase_token
+    ENV['FIREBASE_TOKEN']
   end
 
   private

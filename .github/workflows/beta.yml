@@ -1,9 +1,9 @@
-name: Alpha
+name: Beta
 
 on:
   push:
     branches:
-      - develop
+      - 'release/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@a2bbe5b1b236842c1cb7dd11e8e3b51e0a616acc # pin@v1.202.0
+        uses: ruby/setup-ruby@82dd21cb955e5633e70976c289b2e3b01c0f18db # pin@v1.176.0
         with:
           bundler-cache: true
 
@@ -40,7 +40,7 @@ jobs:
         run: xcodes select
 
       - name: Deploy
-        run: bundle exec fastlane alpha
+        run: bundle exec fastlane beta
         env:
           APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
@@ -48,7 +48,6 @@ jobs:
           APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
           MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Save Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3

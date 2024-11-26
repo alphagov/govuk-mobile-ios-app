@@ -6,7 +6,7 @@ extension Container {
     var appAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
             APIServiceClient(
-                baseUrl: URL(string: Constants.API.appBaseUrl)!,
+                baseUrl: self.appEnvironmentService().baseURL,
                 session: URLSession(configuration: .default),
                 requestBuilder: RequestBuilder()
             )

@@ -180,6 +180,15 @@ class TopicsWidgetView: UIView {
             rowCount = sizeClass == .regular ? 2 : 4
             updateTopics(viewModel.displayedTopics)
         }
+
+        // At largest size, will truncate titleLabel text so edit button remains visible
+        // At smaller sizes, ensures edit button remains right-aligned
+        if UITraitCollection.current.preferredContentSizeCategory
+            == .accessibilityExtraExtraExtraLarge {
+            titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        } else {
+            titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        }
     }
 
     private func showAllTopicsButton() {

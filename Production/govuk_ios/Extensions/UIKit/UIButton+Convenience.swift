@@ -8,6 +8,7 @@ extension UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.govUK.body
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.addAction(
             .init(handler: { _ in action() }),
             for: .touchUpInside

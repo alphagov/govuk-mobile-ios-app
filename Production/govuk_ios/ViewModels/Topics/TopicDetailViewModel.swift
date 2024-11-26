@@ -1,16 +1,18 @@
-import Foundation
+import SwiftUI
 
 protocol TopicDetailViewModelInterface: ObservableObject {
     var title: String { get }
     var description: String? { get }
     var sections: [GroupedListSection] { get }
+    var errorViewModel: AppErrorViewModel? { get }
     func trackScreen(screen: TrackableScreen)
 }
 
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
+    @Published private(set) var errorViewModel: AppErrorViewModel?
+
     private var topicDetail: TopicDetailResponse?
-    private var error: TopicsServiceError?
     private var topic: DisplayableTopic
 
     private let topicsService: TopicsServiceInterface
@@ -66,13 +68,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         topicsService.fetchDetails(
             ref: topicRef,
             completion: { result in
-                switch result {
-                case .success(let topicDetail):
-                    self.topicDetail = topicDetail
+                if case let .success(detail) = result {
+                    self.topicDetail = detail
                     self.configureSections()
-                case .failure(let error):
-                    self.error = error
                 }
+                self.handleError(result.getError())
             }
         )
     }
@@ -84,6 +84,21 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             createOtherContentSection(),
             createSubtopicsSection()
         ].compactMap { $0 }
+    }
+
+    private func handleError(_ error: TopicsServiceError?) {
+        guard let error else {
+            errorViewModel = nil
+            return
+        }
+        switch error {
+        case .networkUnavailable:
+            errorViewModel = AppErrorViewModel.networkUnavailable {
+                self.fetchTopicDetails(topicRef: self.topic.ref)
+            }
+        default:
+            errorViewModel = AppErrorViewModel.genericError(urlOpener: urlOpener)
+        }
     }
 
     private func createPopularContentSection() -> GroupedListSection? {

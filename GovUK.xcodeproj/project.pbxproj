@@ -192,7 +192,6 @@
 		9685F82D2C78DE7E00C33614 /* GroupedListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82C2C78DE7E00C33614 /* GroupedListSection.swift */; };
 		9685F82F2C78DF7000C33614 /* GroupedListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685F82E2C78DF7000C33614 /* GroupedListSectionView.swift */; };
 		96DE82882C7E25ED0071D792 /* SinglePixelLineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE82872C7E25ED0071D792 /* SinglePixelLineHelper.swift */; };
-		D01005362CECA6420013CBD0 /* Alpha.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D01005352CECA6420013CBD0 /* Alpha.xcconfig */; };
 		D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF32CB4247100742620 /* TopicsRepository.swift */; };
 		D028CCF62CB9619B00742620 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF52CB9619B00742620 /* Topic.swift */; };
 		D028CD0C2CBEC8F400742620 /* TopicDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */; };
@@ -212,12 +211,10 @@
 		D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */; };
 		D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */ = {isa = PBXBuildFile; fileRef = D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */; };
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
-		D0B3EC022CE227D900A8F321 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D0B3EC012CE227D900A8F321 /* Release.xcconfig */; };
 		D0C1B7D92CD51F6E0065B455 /* TopAlignedBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1B7D82CD51F6E0065B455 /* TopAlignedBarButtonItem.swift */; };
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
 		D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */; };
-		D0EAB5032CDE65CF007ACBCD /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1358,7 +1355,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					5D4B9D332C074207005F126A = {
 						CreatedOnToolsVersion = 15.4;
@@ -1418,11 +1415,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0B3EC022CE227D900A8F321 /* Release.xcconfig in Resources */,
 				5D742BDE2C997ABB00E7B87A /* Onboarding.xcstrings in Resources */,
 				5D54F4732CC8473900A3B6A7 /* Topics.xcstrings in Resources */,
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
-				D0EAB5032CDE65CF007ACBCD /* Debug.xcconfig in Resources */,
 				5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */,
 				D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
@@ -1430,7 +1425,6 @@
 				4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 				5D742BD62C99784900E7B87A /* Common.xcstrings in Resources */,
-				D01005362CECA6420013CBD0 /* Alpha.xcconfig in Resources */,
 				162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */,
 				3D3378122CAAC0A0004BF83F /* AppAvailability.xcstrings in Resources */,
 				5D742BDC2C99799000E7B87A /* Search.xcstrings in Resources */,
@@ -1500,6 +1494,7 @@
 		};
 		D0B3EC032CE2629F00A8F321 /* Firebase Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

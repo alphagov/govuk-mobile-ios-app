@@ -27,7 +27,7 @@ If you wish to run the full suite of tests successfully, the current device requ
 
 ### SwiftLint
 
-The application uses SwiftLint for lining swift code. Rules can be found [here](.swiftlint.yml)
+The application uses SwiftLint for linting swift code. Rules can be found [here](.swiftlint.yml)
 If you want swiftlint to highlight issues in Xcode, make sure you have it installed. You can do this using [Homebrew](https://brew.sh/)
 
 `brew install swiftlint`
@@ -35,6 +35,6 @@ If you want swiftlint to highlight issues in Xcode, make sure you have it instal
 ### Rubocop
 
 The application uses Rubocop for lining Ruby code used in CI builds.
-To run this before pushing, make sure you have rubocop installed. This can be done with `gem install rubocop` although the prefered method is to use [Bundler](https://bundler.io/) and running `bundle install`
+To run this before pushing, make sure you have rubocop installed. This can be done with `gem install rubocop` although the prefered method is to install all Gems using [Bundler](https://bundler.io/) by running `bundle install`
 
-Once you have Rubocop installed, you can check the app with `rubocop -A`
+Once you have Rubocop installed, you can check the app with `bundle exec rubocop` or `rubocop` if you aren't using Bundler

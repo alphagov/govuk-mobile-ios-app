@@ -81,6 +81,15 @@ class HomeViewController: BaseViewController,
         navigationBar.handleScroll(scrollView: scrollView)
     }
 
+    func scrollToTop() {
+        scrollView.setContentOffset(
+            CGPoint(
+                x: 0,
+                y: -(navigationBar.sittingHeight + 16)
+            ),
+            animated: true)
+    }
+
     private func addWidgets() {
         viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
     }

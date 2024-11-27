@@ -165,4 +165,43 @@ struct TabCoordinatorTests {
 
         #expect(mockAnalyticsService._trackedEvents.count == 0)
     }
+
+    @Test(arguments: zip(
+        [0,1],
+        [true, false]
+    ))
+    func selectingTab_doesCall_didReselectTab_asNeeded(selectedIndex: Int,
+                                                       didReselectTab: Bool) async throws {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+
+        let mockHomeCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
+
+        let mockSettingsCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSettingsCoordinator = mockSettingsCoordinator
+
+        let navigationController = UINavigationController()
+        let subject = TabCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: navigationController,
+            analyticsService: mockAnalyticsService
+        )
+
+        let url = URL(string: "govuk://gov.uk/unknown")
+        subject.start(url: url)
+
+        let tabController = try #require(navigationController.viewControllers.first as? UITabBarController)
+        tabController.selectedIndex = selectedIndex
+
+        let viewController = UIViewController()
+        viewController.tabBarItem = .init(
+            title: "test_title",
+            image: nil,
+            tag: 0
+        )
+        subject.tabBarController(tabController, didSelect: viewController)
+
+        #expect(mockHomeCoordinator._didReselectTab == didReselectTab)
+    }
 }

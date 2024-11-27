@@ -4,8 +4,8 @@ import Foundation
 @testable import govuk_ios
 
 class MockBaseCoordinator: BaseCoordinator,
-                           DeeplinkRouteProvider {
-
+                           DeeplinkRouteProvider,
+                           TabItemCoordinatorInterface {
     convenience init() {
         self.init(navigationController: .init())
     }
@@ -25,5 +25,9 @@ class MockBaseCoordinator: BaseCoordinator,
     func route(for: URL) -> ResolvedDeeplinkRoute? {
         _stubbedRoute
     }
-
+    
+    var _didReselectTab = false
+    func didReselectTab() {
+        _didReselectTab = true
+    }
 }

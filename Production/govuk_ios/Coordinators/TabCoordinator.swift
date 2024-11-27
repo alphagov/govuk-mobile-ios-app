@@ -1,12 +1,19 @@
 import UIKit
 import Foundation
 
-typealias TabItemCoordinator = BaseCoordinator & DeeplinkRouteProvider
+typealias TabItemCoordinator = BaseCoordinator
+& DeeplinkRouteProvider
+& TabItemCoordinatorInterface
+
+protocol TabItemCoordinatorInterface {
+    func didReselectTab()
+}
 
 class TabCoordinator: BaseCoordinator,
                       UITabBarControllerDelegate {
     private lazy var homeCoordinator = coordinatorBuilder.home
     private lazy var settingsCoordinator = coordinatorBuilder.settings
+    private var currentTabIndex = 0
 
     private var coordinators: [TabItemCoordinator] {
         [
@@ -74,5 +81,9 @@ class TabCoordinator: BaseCoordinator,
         guard let title = viewController.tabBarItem.title else { return }
         let event = AppEvent.tabNavigation(text: title)
         analyticsService.track(event: event)
+        if currentTabIndex == tabBarController.selectedIndex {
+            coordinators[currentTabIndex].didReselectTab()
+        }
+        currentTabIndex = tabBarController.selectedIndex
     }
 }

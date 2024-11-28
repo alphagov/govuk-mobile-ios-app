@@ -176,4 +176,57 @@ struct HomeCoordinatorTests {
         #expect(navigationEvent?.params?["type"] as? String == "Widget")
         #expect(navigationEvent?.name == "Navigation")
     }
+    
+    @Test
+    @MainActor
+    func didReselectTab_scrollsToTop_whenOnHomeScreen() {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let navigationController = UINavigationController()
+        
+        let homeViewController = MockHomeViewController()
+        mockViewControllerBuilder._stubbedHomeViewController = homeViewController
+        
+        let subject = HomeCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoodinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: []),
+            analyticsService: MockAnalyticsService(),
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService()
+        )
+        
+        subject.start()
+        subject.didReselectTab()
+        
+        #expect(homeViewController._didScrollToTop)
+    }
+    
+    @Test
+    @MainActor
+    func didReselectTab_doesNotScrollsToTop_whenOnChildScreen() {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let navigationController = UINavigationController()
+        
+        let homeViewController = MockHomeViewController()
+        mockViewControllerBuilder._stubbedHomeViewController = homeViewController
+        
+        let subject = HomeCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoodinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: []),
+            analyticsService: MockAnalyticsService(),
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService()
+        )
+        
+        subject.start()
+        subject.start(MockBaseCoordinator())
+        subject.didReselectTab()
+        
+        #expect(homeViewController._didScrollToTop == false)
+    }
 }

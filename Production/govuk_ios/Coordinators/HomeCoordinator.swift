@@ -44,11 +44,13 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     func didReselectTab() {
-        guard let homeViewController = root.viewControllers.first as? HomeViewController
+        guard let homeViewController = root.viewControllers.first as? ContentScrollable
         else {
             return
         }
-        homeViewController.scrollToTop()
+        if childCoordinators.isEmpty {
+            homeViewController.scrollToTop()
+        }
     }
 
     private var presentSearchCoordinator: () -> Void {

@@ -4,7 +4,7 @@ import UIKit
 class BaseCoordinator: NSObject,
                        UINavigationControllerDelegate,
                        UIAdaptivePresentationControllerDelegate {
-    private var childCoordinators: [BaseCoordinator] = []
+    private(set) var childCoordinators: [BaseCoordinator] = []
     private var parentCoordinator: BaseCoordinator?
     private var stackedViewControllers: NSHashTable<UIViewController> = .weakObjects()
     private(set) var root: UINavigationController

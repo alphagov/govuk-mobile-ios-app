@@ -20,15 +20,23 @@ class CoreDataRepository: CoreDataRepositoryInterface {
 
     func load() -> Self {
         persistentContainer.loadPersistentStores(
-            completionHandler: { _, error in
+            completionHandler: { [weak self] description, error in
                 if let error = error {
                     fatalError("Unable to load persistent stores: \(error)")
                 }
+                self?.excludeStoreFromiTunesBackup(url: description.url)
             }
         )
         addBackgroundObserver()
         addViewObserver()
         return self
+    }
+
+    private func excludeStoreFromiTunesBackup(url: URL?) {
+        guard var url = url else { return }
+        var resourceValues = URLResourceValues()
+        resourceValues.isExcludedFromBackup = true
+        try? url.setResourceValues(resourceValues)
     }
 
     private(set) lazy var viewContext: NSManagedObjectContext = {

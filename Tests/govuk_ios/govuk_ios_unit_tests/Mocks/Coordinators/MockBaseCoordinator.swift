@@ -16,9 +16,11 @@ class MockBaseCoordinator: BaseCoordinator,
     }
 
     var _childDidFinishHandler: ((BaseCoordinator) -> Void)?
+    var _childDidFinishReceivedChild: BaseCoordinator??
     override func childDidFinish(_ child: BaseCoordinator) {
         super.childDidFinish(child)
         _childDidFinishHandler?(child)
+        _childDidFinishReceivedChild = child
     }
     
     var _stubbedRoute: ResolvedDeeplinkRoute?

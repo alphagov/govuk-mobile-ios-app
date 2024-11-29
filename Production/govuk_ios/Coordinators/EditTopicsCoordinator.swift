@@ -33,7 +33,7 @@ final class EditTopicsCoordinator: BaseCoordinator {
         root.dismiss(
             animated: true,
             completion: { [weak self] in
-                self?.dismissed()
+                self?.finish()
             }
         )
     }

@@ -36,6 +36,7 @@ struct EditTopicsCoordinatorTests {
         let mockTopicsService = MockTopicsService()
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
+        let mockCoordinator = MockBaseCoordinator()
 
         mockViewControllerBuilder._stubbedEditTopicsViewController = expectedViewController
 
@@ -49,7 +50,7 @@ struct EditTopicsCoordinatorTests {
                     continuation.resume(returning: true)
                 }
             )
-            subject.start()
+            mockCoordinator.start(subject)
 
             subject.presentationControllerDidDismiss(subject.root.presentationController!)
         }
@@ -64,11 +65,12 @@ struct EditTopicsCoordinatorTests {
         let mockTopicsService = MockTopicsService()
         let expectedViewController = UIViewController()
         let mockNavigationController = MockNavigationController()
+        let mockCoordinator = MockBaseCoordinator()
 
         mockViewControllerBuilder._stubbedEditTopicsViewController = expectedViewController
-
-        _ = await withCheckedContinuation { continuation in
-            let subject = EditTopicsCoordinator(
+        var subject: EditTopicsCoordinator!
+        let dismissed = await withCheckedContinuation { continuation in
+            subject = EditTopicsCoordinator(
                 navigationController: mockNavigationController,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
@@ -77,12 +79,15 @@ struct EditTopicsCoordinatorTests {
                     continuation.resume(returning: true)
                 }
             )
-            subject.start()
-            
+            mockCoordinator.start(subject)
+
             //Simulate view controller calling close
-            mockViewControllerBuilder._receivedDoneButtonAction?()
+            mockViewControllerBuilder._receivedDismissAction?()
         }
 
+        #expect(dismissed)
+        #expect(mockCoordinator._childDidFinishReceivedChild == subject)
+        #expect(subject != nil)
         #expect(mockNavigationController._dismissCalled)
         #expect(mockNavigationController._receivedDismissAnimated == true)
     }

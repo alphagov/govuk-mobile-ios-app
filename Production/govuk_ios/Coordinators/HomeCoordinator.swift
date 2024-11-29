@@ -43,6 +43,16 @@ class HomeCoordinator: TabItemCoordinator {
         )
     }
 
+    func didReselectTab() {
+        guard let homeViewController = root.viewControllers.first as? ContentScrollable
+        else {
+            return
+        }
+        if childCoordinators.isEmpty {
+            homeViewController.scrollToTop()
+        }
+    }
+
     private var presentSearchCoordinator: () -> Void {
         return { [weak self] in
             self?.trackWidgetNavigation(text: "Search")

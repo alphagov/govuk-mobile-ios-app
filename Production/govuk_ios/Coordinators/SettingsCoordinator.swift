@@ -32,4 +32,6 @@ class SettingsCoordinator: TabItemCoordinator {
             parent: self
         )
     }
+
+    func didReselectTab() { /*protocol conformance*/ }
 }

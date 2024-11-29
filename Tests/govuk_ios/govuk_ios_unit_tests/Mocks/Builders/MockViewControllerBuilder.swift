@@ -81,11 +81,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
     
     var _stubbedEditTopicsViewController: UIViewController?
-    var _receivedDoneButtonAction: (() -> Void)?
+    var _receivedDismissAction: (() -> Void)?
     override func editTopics(analyticsService: any AnalyticsServiceInterface,
                              topicsService: any TopicsServiceInterface,
                              dismissAction: @escaping () -> Void) -> UIViewController {
-        _receivedDoneButtonAction = dismissAction
+        _receivedDismissAction = dismissAction
         return _stubbedEditTopicsViewController ?? UIViewController()
     }
 

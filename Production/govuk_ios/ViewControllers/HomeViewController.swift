@@ -94,3 +94,14 @@ extension HomeViewController: TrackableScreen {
     var trackingName: String { "Homepage" }
     var trackingTitle: String? { "Homepage" }
 }
+
+extension HomeViewController: ContentScrollable {
+    func scrollToTop() {
+        scrollView.setContentOffset(
+            CGPoint(
+                x: 0,
+                y: -(navigationBar.sittingHeight + 16)
+            ),
+            animated: true)
+    }
+}

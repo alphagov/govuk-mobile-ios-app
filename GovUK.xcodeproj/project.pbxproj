@@ -11,7 +11,6 @@
 		160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7542C5B0401008F97AF /* SettingsViewModel.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
 		1631DE992C2B0D020050CB9D /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceModel.swift */; };
-		163800FF2C99DAF900C3DDD1 /* ListInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163800FE2C99DAF900C3DDD1 /* ListInformationView.swift */; };
 		166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166248232C4AC91E009F7E58 /* HomeCoordinator.swift */; };
 		1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666F49F2C86124900DBD064 /* SearchModalButton.swift */; };
 		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
@@ -262,7 +261,6 @@
 		160EA7542C5B0401008F97AF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1631DE982C2B0D020050CB9D /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
-		163800FE2C99DAF900C3DDD1 /* ListInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInformationView.swift; sourceTree = "<group>"; };
 		166248232C4AC91E009F7E58 /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		1666F49F2C86124900DBD064 /* SearchModalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModalButton.swift; sourceTree = "<group>"; };
 		166BDDB52C330D1C00437AE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -922,7 +920,6 @@
 				5D9E67C72C5A2E1700DB7877 /* DividerView.swift */,
 				5D925B172CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift */,
 				5D925B1A2CB7CE6300A1E241 /* GroupedListTableViewCell.swift */,
-				163800FE2C99DAF900C3DDD1 /* ListInformationView.swift */,
 				4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */,
 				D0C1B7D82CD51F6E0065B455 /* TopAlignedBarButtonItem.swift */,
 			);
@@ -1564,7 +1561,6 @@
 				5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */,
 				D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */,
 				16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */,
-				163800FF2C99DAF900C3DDD1 /* ListInformationView.swift in Sources */,
 				D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */,
 				D028CD0C2CBEC8F400742620 /* TopicDetailResponse.swift in Sources */,
 				5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */,

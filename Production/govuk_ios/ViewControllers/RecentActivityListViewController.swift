@@ -68,16 +68,19 @@ class RecentActivityListViewController: BaseViewController {
         return localToolbar
     }()
 
-    private lazy var informationView = {
-        let localView = ListInformationView()
-        localView.backgroundColor = .clear
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.isHidden = true
-        localView.configure(
-            title: String.recentActivity.localized("recentActivityErrorViewTitle"),
-            description: String.recentActivity.localized("recentActivityErrorViewDescription")
+    private lazy var informationView: UIView = {
+        let localController = HostingViewController(
+            rootView: AppErrorView()
         )
-        return localView
+        localController.view.translatesAutoresizingMaskIntoConstraints = false
+        localController.view.backgroundColor = .clear
+        localController.view.isHidden = true
+        let localModel = AppErrorViewModel(
+            title: String.recentActivity.localized("recentActivityErrorViewTitle"),
+            body: String.recentActivity.localized("recentActivityErrorViewDescription")
+        )
+        localController.rootView.viewModel = localModel
+        return localController.view
     }()
 
     var trackingName: String { "Pages you've visited" }

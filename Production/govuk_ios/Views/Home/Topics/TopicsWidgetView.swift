@@ -39,7 +39,7 @@ class TopicsWidgetView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 16
-        stackView.alignment = .bottom
+        stackView.alignment = .firstBaseline
         stackView.distribution = .fill
         return stackView
     }()
@@ -89,6 +89,7 @@ class TopicsWidgetView: UIView {
 
     private func configureUI() {
         headerStackView.addArrangedSubview(titleLabel)
+        headerStackView.addArrangedSubview(UIView())
         headerStackView.addArrangedSubview(editButton)
         headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)

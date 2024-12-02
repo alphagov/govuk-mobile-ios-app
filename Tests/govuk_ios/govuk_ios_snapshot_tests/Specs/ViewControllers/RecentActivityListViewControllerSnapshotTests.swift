@@ -59,7 +59,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
         let coreData = CoreDataRepository.arrangeAndLoad
         _ = ActivityItem.arrange(
             title: "Test 5",
-            date: .arrange("21/12/2024"),
+            date: .arrange("21/11/2024"),
             context: coreData.viewContext
         )
         _ = ActivityItem.arrange(
@@ -112,7 +112,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
         let coreData = CoreDataRepository.arrangeAndLoad
         _ = ActivityItem.arrange(
             title: "Test 5",
-            date: .arrange("21/12/2024"),
+            date: .arrange("21/11/2024"),
             context: coreData.viewContext
         )
         _ = ActivityItem.arrange(
@@ -176,7 +176,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
         let coreData = CoreDataRepository.arrangeAndLoad
         _ = ActivityItem.arrange(
             title: "Test 1",
-            date: .arrange("21/12/2024"),
+            date: .arrange("21/11/2024"),
             context: coreData.viewContext
         )
 

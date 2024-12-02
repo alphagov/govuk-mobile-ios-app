@@ -13,8 +13,8 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Color(UIColor.govUK.fills.surfaceBackground)
                 .ignoresSafeArea()
                 ScrollView {
-                    titleView
                     VStack {
+                        titleView
                         if let description = viewModel.description {
                             descripitonView(description: description)
                                 .padding(.top, 8)
@@ -34,7 +34,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
 
     private var titleView: some View {
         HStack {
-            Text("topic detail title")
+            Text(viewModel.title)
                 .font(.govUK.largeTitleBold)
                 .multilineTextAlignment(.leading)
                 .accessibility(addTraits: .isHeader)

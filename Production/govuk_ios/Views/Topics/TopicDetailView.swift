@@ -16,28 +16,14 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             VStack(spacing: 0) {
                 titleView
                 Divider().opacity(isScrolled ? 1.0 : 0.0)
-                ScrollView {
+                if let errorViewModel = viewModel.errorViewModel {
                     VStack {
-                        if let description = viewModel.description {
-                            descripitonView(description: description)
-                                .padding(.top, 8)
-                        }
-                        GroupedList(
-                            content: viewModel.sections,
-                            backgroundColor: UIColor.govUK.fills.surfaceBackground
-                        )
-                        .padding(.top, 16)
+                        AppErrorView(viewModel: errorViewModel)
+                        Spacer()
                     }
-                    .background(GeometryReader { geometry in
-                        Color.clear.preference(key: ScrollOffsetPreferenceKey.self,
-                                               value: geometry
-                            .frame(in: .named("ScrollView")).origin.y)
-                    })
-                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                        isScrolled = value < 0.0
-                    }
+                } else {
+                    scrollView
                 }
-                .coordinateSpace(name: "ScrollView")
             }
         }
         .onAppear {
@@ -54,6 +40,31 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
         .padding(.leading, 16)
         .padding(.bottom, 8)
+    }
+
+    private var scrollView: some View {
+        ScrollView {
+            VStack {
+                if let description = viewModel.description {
+                    descripitonView(description: description)
+                        .padding(.top, 8)
+                }
+                GroupedList(
+                    content: viewModel.sections,
+                    backgroundColor: UIColor.govUK.fills.surfaceBackground
+                )
+                .padding(.top, 16)
+            }
+            .background(GeometryReader { geometry in
+                Color.clear.preference(key: ScrollOffsetPreferenceKey.self,
+                                       value: geometry
+                    .frame(in: .named("ScrollView")).origin.y)
+            })
+            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                isScrolled = value < 0.0
+            }
+        }
+        .coordinateSpace(name: "ScrollView")
     }
 
     private func descripitonView(description: String) -> some View {

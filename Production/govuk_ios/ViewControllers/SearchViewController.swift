@@ -10,11 +10,18 @@ class SearchViewController: BaseViewController,
     private let viewModel: SearchViewModel
     private let dismissAction: () -> Void
 
-    private lazy var errorView = {
-        let localView = ListInformationView()
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.isHidden = true
-        return localView
+    private lazy var errorView: UIView = {
+        self.appErrorViewController.view
+    }()
+
+    private lazy var appErrorViewController: HostingViewController = {
+        let localController = HostingViewController(
+            rootView: AppErrorView()
+        )
+        localController.view.translatesAutoresizingMaskIntoConstraints = false
+        localController.view.backgroundColor = .govUK.fills.surfaceModal
+        localController.view.isHidden = true
+        return localController
     }()
 
     private lazy var searchBar: UISearchBar = {
@@ -132,7 +139,7 @@ class SearchViewController: BaseViewController,
             ),
 
             errorView.topAnchor.constraint(
-                equalTo: searchBar.bottomAnchor, constant: 40
+                equalTo: searchBar.bottomAnchor, constant: 24
             ),
             errorView.leftAnchor.constraint(
                 equalTo: searchBar.leftAnchor,
@@ -141,6 +148,9 @@ class SearchViewController: BaseViewController,
             errorView.rightAnchor.constraint(
                 equalTo: searchBar.rightAnchor,
                 constant: -10
+            ),
+            errorView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
             ),
 
             tableView.topAnchor.constraint(
@@ -199,33 +209,27 @@ class SearchViewController: BaseViewController,
     }
 
     private func updateErrorView(searchText: String?) {
+        var errorModel: AppErrorViewModel?
         switch viewModel.error {
         case .networkUnavailable:
-            errorView.configure(
-                title: String.search.localized("networkUnavailableErrorTitle"),
-                description: String.search.localized("networkUnavailableErrorBody")
-            )
-
+            errorModel = AppErrorViewModel.networkUnavailable {
+                self.searchReturnPressed()
+            }
             errorView.isHidden = false
         case .apiUnavailable, .parsingError:
-            errorView.configure(
-                title: String.search.localized("genericErrorTitle"),
-                description: String.search.localized("genericErrorBody"),
-                linkText: String.search.localized("genericErrorLinkTitle"),
-                accessibilityLinkText: String.search.localized(
-                    "genericErrorTitleAccessibilityLabel"
-                ),
-                link: "https://www.gov.uk"
+            errorModel = AppErrorViewModel.genericError(
+                urlOpener: viewModel.urlOpener
             )
             errorView.isHidden = false
         case .noResults:
-            errorView.configure(
-                description: "No results for ’\(searchText ?? "")’"
+            errorModel = AppErrorViewModel(
+                body: "No results for ’\(searchText ?? "")’"
             )
             errorView.isHidden = false
         case .none:
             errorView.isHidden = true
         }
+        appErrorViewController.rootView.viewModel = errorModel
     }
 
     private func reloadSnapshot() {

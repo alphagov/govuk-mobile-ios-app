@@ -15,6 +15,7 @@ protocol TopicsServiceClientInterface {
 enum TopicsServiceError: Error {
     case apiUnavailable
     case decodingError
+    case networkUnavailable
 }
 
 struct TopicsServiceClient: TopicsServiceClientInterface {
@@ -37,17 +38,7 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
         serviceClient.send(
             request: topicsRequest,
             completion: { result in
-                switch result {
-                case .success(let data):
-                    do {
-                        let topics = try JSONDecoder().decode([TopicResponseItem].self, from: data)
-                        completion(.success(topics))
-                    } catch {
-                        completion(.failure(.decodingError))
-                    }
-                case .failure:
-                    completion(.failure(.apiUnavailable))
-                }
+                completion(handleResponse(result))
             }
         )
     }
@@ -66,18 +57,29 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
         serviceClient.send(
             request: topicsRequest,
             completion: { result in
-                switch result {
-                case .success(let data):
-                    do {
-                        let topics = try JSONDecoder().decode(TopicDetailResponse.self, from: data)
-                        completion(.success(topics))
-                    } catch {
-                        completion(.failure(.decodingError))
-                    }
-                case .failure:
-                    completion(.failure(.apiUnavailable))
-                }
+                completion(handleResponse(result))
             }
         )
+    }
+
+    private func handleResponse<T: Decodable>(
+        _ result: NetworkResult<Data>
+    ) -> Result<T, TopicsServiceError> {
+        let mappedResult = result.mapError { error in
+            let nsError = error as NSError
+            if nsError.code == NSURLErrorNotConnectedToInternet {
+                return TopicsServiceError.networkUnavailable
+            } else {
+                return TopicsServiceError.apiUnavailable
+            }
+        }.flatMap {
+            do {
+                let topics = try JSONDecoder().decode(T.self, from: $0)
+                return .success(topics)
+            } catch {
+                return .failure(TopicsServiceError.decodingError)
+            }
+        }
+        return mappedResult
     }
 }

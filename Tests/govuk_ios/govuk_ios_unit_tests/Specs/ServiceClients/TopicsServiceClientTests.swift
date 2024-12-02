@@ -64,6 +64,21 @@ struct TopicsServiceClientTests {
         #expect(result.getError() == .decodingError)
     }
     
+    @Test
+    func fetchList_networkUnavailable_returnsExpectedResult() async {
+        mockAPI._stubbedSendResponse = .failure(
+            NSError(domain: "TestError", code: NSURLErrorNotConnectedToInternet)
+        )
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchList { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let topicsList = try? result.get()
+        #expect(topicsList == nil)
+        #expect(result.getError() == .networkUnavailable)
+    }
+    
     //MARK: - Fetch Topic Details
     @Test
     func fetchDetails_sendsExpectedRequest() async {
@@ -113,6 +128,21 @@ struct TopicsServiceClientTests {
         let topicDetails = try? result.get()
         #expect(topicDetails == nil)
         #expect(result.getError() == .decodingError)
+    }
+    
+    @Test
+    func fetchDetails_networkUnavailable_returnsExpectedResult() async {
+        mockAPI._stubbedSendResponse = .failure(
+            NSError(domain: "TestError", code: NSURLErrorNotConnectedToInternet)
+        )
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchList { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let topicsList = try? result.get()
+        #expect(topicsList == nil)
+        #expect(result.getError() == .networkUnavailable)
     }
 }
 

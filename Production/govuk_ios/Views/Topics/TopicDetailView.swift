@@ -3,7 +3,6 @@ import UIComponents
 
 struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     @StateObject var viewModel: T
-    @State private var isScrolled = false
 
     init(viewModel: T) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -13,10 +12,8 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         ZStack {
             Color(UIColor.govUK.fills.surfaceBackground)
                 .ignoresSafeArea()
-            VStack(spacing: 0) {
-                titleView
-                Divider().opacity(isScrolled ? 1.0 : 0.0)
                 ScrollView {
+                    titleView
                     VStack {
                         if let description = viewModel.description {
                             descripitonView(description: description)
@@ -28,17 +25,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                         )
                         .padding(.top, 16)
                     }
-                    .background(GeometryReader { geometry in
-                        Color.clear.preference(key: ScrollOffsetPreferenceKey.self,
-                                               value: geometry
-                            .frame(in: .named("ScrollView")).origin.y)
-                    })
-                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                        isScrolled = value < 0.0
-                    }
                 }
-                .coordinateSpace(name: "ScrollView")
-            }
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
@@ -47,9 +34,10 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
 
     private var titleView: some View {
         HStack {
-            Text(viewModel.title)
+            Text("topic detail title")
                 .font(.govUK.largeTitleBold)
                 .multilineTextAlignment(.leading)
+                .accessibility(addTraits: .isHeader)
             Spacer()
         }
         .padding(.leading, 16)

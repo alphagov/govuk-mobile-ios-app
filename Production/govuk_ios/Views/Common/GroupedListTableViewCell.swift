@@ -171,6 +171,10 @@ class GroupedListTableViewCell: UITableViewCell {
         ).cgPath
     }
 
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        // This is overridden without super to prevent the checkmark flickering when scrolling
+    }
+
     private func borderFrame() -> CGRect {
         var newFrame = bounds
         newFrame.size.height -= borderWidth

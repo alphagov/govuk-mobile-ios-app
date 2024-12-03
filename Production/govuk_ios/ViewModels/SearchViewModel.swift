@@ -11,7 +11,7 @@ class SearchViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
-    private let urlOpener: URLOpener
+    let urlOpener: URLOpener
 
     private(set) var results: [SearchItem]?
     private(set) var error: SearchError?

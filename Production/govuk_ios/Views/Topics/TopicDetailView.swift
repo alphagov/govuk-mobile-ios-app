@@ -12,20 +12,14 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         ZStack {
             Color(UIColor.govUK.fills.surfaceBackground)
                 .ignoresSafeArea()
-                ScrollView {
-                    VStack {
-                        titleView
-                        if let description = viewModel.description {
-                            descripitonView(description: description)
-                                .padding(.top, 8)
-                        }
-                        GroupedList(
-                            content: viewModel.sections,
-                            backgroundColor: UIColor.govUK.fills.surfaceBackground
-                        )
-                        .padding(.top, 16)
-                    }
+            if let errorViewModel = viewModel.errorViewModel {
+                VStack {
+                    AppErrorView(viewModel: errorViewModel)
+                    Spacer()
                 }
+            } else {
+                scrollView
+            }
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
@@ -42,6 +36,23 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
         .padding(.leading, 16)
         .padding(.bottom, 8)
+    }
+
+    private var scrollView: some View {
+        ScrollView {
+            VStack {
+                titleView
+                if let description = viewModel.description {
+                    descripitonView(description: description)
+                        .padding(.top, 8)
+                }
+                GroupedList(
+                    content: viewModel.sections,
+                    backgroundColor: UIColor.govUK.fills.surfaceBackground
+                )
+                .padding(.top, 16)
+            }
+        }
     }
 
     private func descripitonView(description: String) -> some View {

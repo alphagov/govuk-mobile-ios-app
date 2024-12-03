@@ -1,6 +1,8 @@
 import Foundation
 
 class StepByStepsViewModel: TopicDetailViewModelInterface {
+    var errorViewModel: AppErrorViewModel?
+
     private let content: [TopicDetailResponse.Content]
     private let analyticsService: AnalyticsServiceInterface
     private let activityService: ActivityServiceInterface

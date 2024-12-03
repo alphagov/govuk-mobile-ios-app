@@ -23,7 +23,10 @@ class TopicsWidgetView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.govUK.title3Semibold
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.adjustsFontForContentSizeCategory = true
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
         label.text = viewModel.widgetTitle
         return label
@@ -39,7 +42,7 @@ class TopicsWidgetView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 16
-        stackView.alignment = .bottom
+        stackView.alignment = .firstBaseline
         stackView.distribution = .fill
         return stackView
     }()
@@ -56,7 +59,7 @@ class TopicsWidgetView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = 12
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +92,7 @@ class TopicsWidgetView: UIView {
 
     private func configureUI() {
         headerStackView.addArrangedSubview(titleLabel)
+        headerStackView.addArrangedSubview(UIView())
         headerStackView.addArrangedSubview(editButton)
         headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)
@@ -98,7 +102,11 @@ class TopicsWidgetView: UIView {
     }
 
     private func configureConstraints() {
+        editButton.setContentHuggingPriority(.required, for: .horizontal)
+        editButton.setContentHuggingPriority(.required, for: .vertical)
+
         NSLayoutConstraint.activate([
+            editButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 44),
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -179,15 +187,6 @@ class TopicsWidgetView: UIView {
         if sizeClass != previousTraitCollection?.verticalSizeClass {
             rowCount = sizeClass == .regular ? 2 : 4
             updateTopics(viewModel.displayedTopics)
-        }
-
-        // At largest size, will truncate titleLabel text so edit button remains visible
-        // At smaller sizes, ensures edit button remains right-aligned
-        if UITraitCollection.current.preferredContentSizeCategory
-            == .accessibilityExtraExtraExtraLarge {
-            titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        } else {
-            titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         }
     }
 

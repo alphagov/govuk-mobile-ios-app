@@ -15,7 +15,7 @@ struct Date_ExtensionsTests {
         arguments: [
             "01/01/2001",
             "02/12/2004",
-            "02/12/2024",
+            "02/12/2025",
         ]
     )
     func isToday_notToday_returnsFalse(dateString: String) {

@@ -98,6 +98,42 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             prefersLargeTitles: true
         )
     }
+    
+    func test_topicDetail_networkUnavailable_rendersCorrectly() {
+        let viewControllerBuilder = ViewControllerBuilder()
+        let mockTopicsService = MockTopicsService()
+        mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.networkUnavailable)
+        let sut = viewControllerBuilder.topicDetail(
+            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", description: "test_description"),
+            topicsService: mockTopicsService,
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService(),
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
+        )
+        VerifySnapshotInNavigationController(
+            viewController: sut,
+            mode: .light
+        )
+    }
+    
+    func test_topicDetail_genericError_rendersCorrectly() {
+        let viewControllerBuilder = ViewControllerBuilder()
+        let mockTopicsService = MockTopicsService()
+        mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.apiUnavailable)
+        let sut = viewControllerBuilder.topicDetail(
+            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", description: "test_description"),
+            topicsService: mockTopicsService,
+            analyticsService: MockAnalyticsService(),
+            activityService: MockActivityService(),
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in }
+        )
+        VerifySnapshotInNavigationController(
+            viewController: sut,
+            mode: .light
+        )
+    }
 
     func test_stepBySteps_light_rendersCorrectly() {
         let viewControllerBuilder = ViewControllerBuilder()

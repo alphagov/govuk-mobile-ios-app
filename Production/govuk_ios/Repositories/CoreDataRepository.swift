@@ -19,6 +19,9 @@ class CoreDataRepository: CoreDataRepositoryInterface {
     }
 
     func load() -> Self {
+        persistentContainer.persistentStoreDescriptions.forEach { [weak self] in
+            self?.setDescriptionProtection(description: $0)
+        }
         persistentContainer.loadPersistentStores(
             completionHandler: { [weak self] description, error in
                 if let error = error {
@@ -30,6 +33,13 @@ class CoreDataRepository: CoreDataRepositoryInterface {
         addBackgroundObserver()
         addViewObserver()
         return self
+    }
+
+    private func setDescriptionProtection(description: NSPersistentStoreDescription) {
+        description.setOption(
+            FileProtectionType.complete as NSObject,
+            forKey: NSPersistentStoreFileProtectionKey
+        )
     }
 
     private func excludeStoreFromiTunesBackup(url: URL?) {

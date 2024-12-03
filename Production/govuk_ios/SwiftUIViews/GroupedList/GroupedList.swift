@@ -9,8 +9,20 @@ struct GroupedList: View {
             ZStack {
                 Color(backgroundColor ?? .clear)
                 VStack {
-                    ForEach(content, id: \.heading) { section in
-                        GroupedListSectionView(section: section)
+                    ForEach(content, id: \.heading?.title) { section in
+                        if section.heading?.icon != nil {
+                            GroupedListSectionIconView(
+                                heading: section.heading!,
+                                rows: section.rows,
+                                footer: section.footer
+                            )
+                        } else {
+                            GroupedListSectionView(
+                                heading: section.heading,
+                                rows: section.rows,
+                                footer: section.footer
+                            )
+                        }
                     }
                 }
                 .frame(idealWidth: UIScreen.main.bounds.width)

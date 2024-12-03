@@ -57,7 +57,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 
 class GroupedListViewModel: SettingsViewModelInterface {
     var title: String = "Settings"
-    var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent
+    var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent.dropLast()
 
     func trackScreen(screen: any govuk_ios.TrackableScreen) {
         // Do Nothing

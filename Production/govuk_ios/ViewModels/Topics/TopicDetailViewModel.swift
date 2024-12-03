@@ -36,13 +36,22 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         !(topic is TopicDetailResponse.Subtopic)
     }
 
-    private var subtopicsHeading: String? {
+    private var subtopicsHeading: GroupedListHeader {
         if topic is TopicDetailResponse.Subtopic && topicDetail?.content.isEmpty == true {
-            return String.topics.localized("topicDetailSubtopicsHeader")
+            return GroupedListHeader(
+                title: String.topics.localized("topicDetailSubtopicsHeader"),
+                icon: UIImage.topicBrowseIcon
+            )
         } else if topic is TopicDetailResponse.Subtopic {
-            return String.topics.localized("subtopicDetailSubtopicsHeader")
+            return GroupedListHeader(
+                title: String.topics.localized("subtopicDetailSubtopicsHeader"),
+                icon: UIImage.topicRelatedIcon
+            )
         } else {
-            return String.topics.localized("topicDetailSubtopicsHeader")
+            return GroupedListHeader(
+                title: String.topics.localized("topicDetailSubtopicsHeader"),
+                icon: UIImage.topicBrowseIcon
+            )
         }
     }
 
@@ -105,7 +114,10 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         guard let content = topicDetail?.popularContent else { return nil }
         let sectionTitle = String.topics.localized("topicDetailPopularPagesHeader")
         return GroupedListSection(
-            heading: sectionTitle,
+            heading: GroupedListHeader(
+                title: sectionTitle,
+                icon: UIImage.topicPopularPagesIcon
+            ),
             rows: content.map { createContentRow($0, sectionTitle: sectionTitle) },
             footer: nil
         )
@@ -140,7 +152,10 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         }
 
         return GroupedListSection(
-            heading: sectionTitle,
+            heading: GroupedListHeader(
+                title: sectionTitle,
+                icon: UIImage.topicStepByStepIcon
+            ),
             rows: rows,
             footer: nil
         )
@@ -162,7 +177,10 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         else { return nil }
         let sectionTitle = String.topics.localized("topicDetailOtherContentHeader")
         return GroupedListSection(
-            heading: sectionTitle,
+            heading: GroupedListHeader(
+                title: sectionTitle,
+                icon: UIImage.topicServicesIcon
+            ),
             rows: content.map { createContentRow($0, sectionTitle: sectionTitle) },
             footer: nil
         )

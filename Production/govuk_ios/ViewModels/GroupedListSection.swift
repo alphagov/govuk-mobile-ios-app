@@ -2,9 +2,14 @@ import Foundation
 import SwiftUI
 
 struct GroupedListSection {
-    let heading: String?
+    let heading: GroupedListHeader?
     let rows: [GroupedListRow]
     let footer: String?
+}
+
+struct GroupedListHeader {
+    let title: String
+    let icon: UIImage?
 }
 
 protocol GroupedListRow {
@@ -74,7 +79,7 @@ struct GroupedListSection_Previews: PreviewProvider {
     static var previewContent: [GroupedListSection] {
         [
             .init(
-                heading: "Section 1",
+                heading: GroupedListHeader(title: "Section 1", icon: nil),
                 rows: [
                     InformationRow(
                         id: UUID().uuidString,
@@ -110,18 +115,6 @@ struct GroupedListSection_Previews: PreviewProvider {
                 footer: "some really important text about this section that is long enough to wrap"
             ),
             .init(
-                heading: "Section 2",
-                rows: [
-                    InformationRow(
-                        id: UUID().uuidString,
-                        title: "A really important piece of info",
-                        body: nil,
-                        detail: "1.0"
-                    )
-                ],
-                footer: "some really important text about this section"
-            ),
-            .init(
                 heading: nil,
                 rows: [
                     InformationRow(
@@ -148,6 +141,21 @@ struct GroupedListSection_Previews: PreviewProvider {
                     )
                 ],
                 footer: nil
+            ),
+            .init(
+                heading: GroupedListHeader(
+                    title: "Section 2",
+                    icon: UIImage()
+                ),
+                rows: [
+                    InformationRow(
+                        id: UUID().uuidString,
+                        title: "A really important piece of info",
+                        body: nil,
+                        detail: "1.0"
+                    )
+                ],
+                footer: "some really important text about this section"
             )
         ]
     }

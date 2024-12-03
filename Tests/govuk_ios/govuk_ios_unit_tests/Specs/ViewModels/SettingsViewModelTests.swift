@@ -37,7 +37,7 @@ struct SettingsViewModelTests {
         try #require(sut.listContent[2].rows.count == 4)
 
         let aboutTheAppSection = sut.listContent[0]
-        #expect(aboutTheAppSection.heading == "About the app")
+        #expect(aboutTheAppSection.heading?.title == "About the app")
         let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
         #expect(helpAndFeedbackRow.title == "Help and feedback")
         #expect(helpAndFeedbackRow.isWebLink == true)
@@ -47,7 +47,7 @@ struct SettingsViewModelTests {
         #expect(appBundleInformation.detail == "123 (456)")
 
         let privacySection = sut.listContent[1]
-        #expect(privacySection.heading == "Privacy and legal")
+        #expect(privacySection.heading?.title == "Privacy and legal")
         let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
         #expect(toggleRow.title == "Share app usage statistics")
 

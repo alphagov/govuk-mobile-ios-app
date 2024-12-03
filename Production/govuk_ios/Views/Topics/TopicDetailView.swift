@@ -44,7 +44,6 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 titleView
                 if let description = viewModel.description {
                     descripitonView(description: description)
-                        .padding(.top, 8)
                 }
                 GroupedList(
                     content: viewModel.sections,

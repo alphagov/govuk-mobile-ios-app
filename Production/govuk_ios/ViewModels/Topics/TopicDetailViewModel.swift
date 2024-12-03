@@ -37,12 +37,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private var subtopicsHeading: GroupedListHeader {
-        if topic is TopicDetailResponse.Subtopic && topicDetail?.content.isEmpty == true {
-            return GroupedListHeader(
-                title: String.topics.localized("topicDetailSubtopicsHeader"),
-                icon: UIImage.topicBrowseIcon
-            )
-        } else if topic is TopicDetailResponse.Subtopic {
+        if topic is TopicDetailResponse.Subtopic && topicDetail?.content.isEmpty == false {
             return GroupedListHeader(
                 title: String.topics.localized("subtopicDetailSubtopicsHeader"),
                 icon: UIImage.topicRelatedIcon

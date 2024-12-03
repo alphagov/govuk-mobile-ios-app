@@ -2,9 +2,17 @@ import Foundation
 import UIKit
 
 class GroupedListTableViewCell: UITableViewCell {
-    private lazy var verticalStackView: UIStackView = {
+    private lazy var horizontalStackView: UIStackView = {
         let localView = UIStackView()
         localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.axis = .horizontal
+        localView.alignment = .firstBaseline
+        localView.spacing = 10
+        return localView
+    }()
+
+    private lazy var verticalStackView: UIStackView = {
+        let localView = UIStackView()
         localView.axis = .vertical
         return localView
     }()
@@ -29,7 +37,6 @@ class GroupedListTableViewCell: UITableViewCell {
 
     private lazy var iconImageView: UIImageView = {
         let localView = UIImageView()
-        localView.translatesAutoresizingMaskIntoConstraints = false
         localView.image = UIImage(systemName: "arrow.up.right")
         localView.tintColor = UIColor.govUK.text.link
         return localView
@@ -70,9 +77,11 @@ class GroupedListTableViewCell: UITableViewCell {
         layer.cornerRadius = 10
         clipsToBounds = true
 
-        contentView.addSubview(verticalStackView)
-        contentView.addSubview(iconImageView)
+        contentView.addSubview(horizontalStackView)
         contentView.addSubview(separatorView)
+
+        horizontalStackView.addArrangedSubview(verticalStackView)
+        horizontalStackView.addArrangedSubview(iconImageView)
 
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(bodyLabel)
@@ -89,29 +98,21 @@ class GroupedListTableViewCell: UITableViewCell {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            verticalStackView.topAnchor.constraint(
+            horizontalStackView.topAnchor.constraint(
                 equalTo: contentView.topAnchor,
                 constant: 11
             ),
-            verticalStackView.rightAnchor.constraint(
-                equalTo: iconImageView.leftAnchor,
-                constant: -10
+            horizontalStackView.rightAnchor.constraint(
+                equalTo: contentView.rightAnchor,
+                constant: -16
             ),
-            verticalStackView.bottomAnchor.constraint(
+            horizontalStackView.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
                 constant: -11
             ),
-            verticalStackView.leftAnchor.constraint(
+            horizontalStackView.leftAnchor.constraint(
                 equalTo: contentView.leftAnchor,
                 constant: 16
-            ),
-            iconImageView.topAnchor.constraint(
-                equalTo: contentView.topAnchor,
-                constant: 11
-            ),
-            iconImageView.rightAnchor.constraint(
-                equalTo: contentView.rightAnchor,
-                constant: -16
             ),
             iconImageView.heightAnchor.constraint(
                 equalToConstant: 22
@@ -119,7 +120,6 @@ class GroupedListTableViewCell: UITableViewCell {
             iconImageView.widthAnchor.constraint(
                 equalToConstant: 17
             ),
-
             separatorView.rightAnchor.constraint(
                 equalTo: contentView.rightAnchor
             ),
@@ -154,6 +154,16 @@ class GroupedListTableViewCell: UITableViewCell {
             accessibilityHint = String.common.localized("openWebLinkHint")
             accessibilityTraits.insert(.link)
         }
+        UIView.animate(
+            withDuration: 0.32,
+            animations: {
+                self.iconImageView.alpha = editing ? 0 : 1
+            }
+        )
+    }
+
+    override func willTransition(to state: UITableViewCell.StateMask) {
+        super.willTransition(to: state)
         invalidateIntrinsicContentSize()
     }
 

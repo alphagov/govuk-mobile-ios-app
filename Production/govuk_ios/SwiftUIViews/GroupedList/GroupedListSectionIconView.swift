@@ -20,6 +20,8 @@ struct GroupedListSectionIconView: View {
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .accessibilityAddTraits(.isHeader)
                             .padding(.leading, 8)
+                            .padding(.vertical, 16)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     Divider()
                         .foregroundColor(Color(UIColor.govUK.strokes.listDivider))

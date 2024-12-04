@@ -58,6 +58,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 class GroupedListViewModel: SettingsViewModelInterface {
     var title: String = "Settings"
     var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent
+    var scrollToTop: Bool = false
 
     func trackScreen(screen: any govuk_ios.TrackableScreen) {
         // Do Nothing

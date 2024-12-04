@@ -56,8 +56,13 @@ struct ViewControllerBuilderTests {
     @Test
     func settings_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
+        let viewModel = SettingsViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener(),
+            versionProvider: MockAppVersionProvider()
+        )
         let result = subject.settings(
-            analyticsService: MockAnalyticsService()
+            viewModel: viewModel
         )
         #expect(result.title == "Settings")
         #expect(result.navigationItem.largeTitleDisplayMode == .always)

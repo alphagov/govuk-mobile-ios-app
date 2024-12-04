@@ -6,6 +6,7 @@ class SettingsCoordinator: TabItemCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
+    private let settingsViewModel: any SettingsViewModelInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -16,12 +17,18 @@ class SettingsCoordinator: TabItemCoordinator {
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
+        self.settingsViewModel = SettingsViewModel(
+            analyticsService: analyticsService,
+            urlOpener: UIApplication.shared,
+            versionProvider: Bundle.main
+        )
+
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.settings(
-            analyticsService: analyticsService
+            viewModel: settingsViewModel
         )
         set([viewController], animated: false)
     }
@@ -33,5 +40,7 @@ class SettingsCoordinator: TabItemCoordinator {
         )
     }
 
-    func didReselectTab() { /*protocol conformance*/ }
+    func didReselectTab() {
+        settingsViewModel.scrollToTop = true
+    }
 }

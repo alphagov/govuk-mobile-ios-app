@@ -1170,7 +1170,6 @@
 		9685F8292C78C01600C33614 /* SwiftUIViews */ = {
 			isa = PBXGroup;
 			children = (
-				D061C5202CD9110200DE7982 /* Helpers */,
 				4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */,
 				3D9C933D2CB0172400EFA337 /* AppForcedUpdateContainerView.swift */,
 				3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */,
@@ -1207,13 +1206,6 @@
 				4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */,
 			);
 			path = Topics;
-			sourceTree = "<group>";
-		};
-		D061C5202CD9110200DE7982 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		D06EB96A2CA6F6FA007EA081 /* Topics */ = {

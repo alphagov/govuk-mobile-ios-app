@@ -35,7 +35,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Spacer()
         }
         .padding(.leading, 16)
-        .padding(.bottom, 8)
+        .padding(.bottom, 10)
     }
 
     private var scrollView: some View {

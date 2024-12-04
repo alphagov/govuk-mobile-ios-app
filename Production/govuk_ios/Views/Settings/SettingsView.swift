@@ -3,6 +3,7 @@ import UIComponents
 
 struct SettingsView<T: SettingsViewModelInterface>: View {
     @StateObject var viewModel: T
+    @Namespace var topID
 
     init(viewModel: T) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -13,12 +14,24 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
             Color(UIColor.govUK.fills.surfaceBackground)
                 .ignoresSafeArea()
             VStack {
-                ScrollView {
-                    GroupedList(
-                        content: viewModel.listContent,
-                        backgroundColor: UIColor.govUK.fills.surfaceBackground
-                    )
-                    .padding(.top, 8)
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        EmptyView()
+                            .id(topID)
+                        GroupedList(
+                            content: viewModel.listContent,
+                            backgroundColor: UIColor.govUK.fills.surfaceBackground
+                        )
+                        .padding(.top, 8)
+                    }
+                    .onChange(of: viewModel.scrollToTop) { shouldScroll in
+                        if shouldScroll {
+                            withAnimation {
+                                proxy.scrollTo(topID, anchor: .top)
+                            }
+                            viewModel.scrollToTop = false
+                        }
+                    }
                 }
             }
         }

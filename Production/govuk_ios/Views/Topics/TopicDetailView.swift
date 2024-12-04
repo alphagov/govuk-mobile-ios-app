@@ -35,7 +35,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Spacer()
         }
         .padding(.leading, 16)
-        .padding(.bottom, 10)
+        .padding(.bottom, 4)
     }
 
     private var scrollView: some View {
@@ -44,6 +44,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 titleView
                 if let description = viewModel.description {
                     descripitonView(description: description)
+                        .padding(.top, 2)
                 }
                 GroupedList(
                     content: viewModel.sections,

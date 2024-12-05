@@ -145,7 +145,7 @@ struct GroupedListSection_Previews: PreviewProvider {
             .init(
                 heading: GroupedListHeader(
                     title: "Section 2",
-                    icon: UIImage()
+                    icon: UIImage(systemName: "house")
                 ),
                 rows: [
                     InformationRow(

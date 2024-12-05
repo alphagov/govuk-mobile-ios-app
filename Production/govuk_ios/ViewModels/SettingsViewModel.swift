@@ -4,6 +4,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
     func trackScreen(screen: TrackableScreen)
+    var scrollToTop: Bool { get set }
 }
 
 class SettingsViewModel: SettingsViewModelInterface {
@@ -11,6 +12,8 @@ class SettingsViewModel: SettingsViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let versionProvider: AppVersionProvider
+
+    @Published var scrollToTop: Bool = false
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,

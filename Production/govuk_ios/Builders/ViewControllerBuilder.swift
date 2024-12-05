@@ -65,12 +65,7 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func settings(analyticsService: AnalyticsServiceInterface) -> UIViewController {
-        let viewModel = SettingsViewModel(
-            analyticsService: analyticsService,
-            urlOpener: UIApplication.shared,
-            versionProvider: Bundle.main
-        )
+    func settings<T: SettingsViewModelInterface>(viewModel: T) -> UIViewController {
         let settingsContentView = SettingsView(
             viewModel: viewModel
         )

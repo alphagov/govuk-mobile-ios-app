@@ -30,4 +30,25 @@ struct SettingsCoordinatorTests {
 
         #expect(navigationController.viewControllers.first == expectedViewController)
     }
+    
+    @Test
+    func didReselectTab_updatesViewModel() throws {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let viewControllerBuilder = ViewControllerBuilder()
+        let navigationController = UINavigationController()
+        let subject = SettingsCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoodinatorBuilder,
+            viewControllerBuilder: viewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: []),
+            analyticsService: MockAnalyticsService()
+        )
+        subject.start()
+
+        let settingsViewController = try #require(subject.root.viewControllers.first as?
+        HostingViewController<SettingsView<SettingsViewModel>>)
+        #expect(settingsViewController.rootView.viewModel.scrollToTop == false)
+        subject.didReselectTab()
+        #expect(settingsViewController.rootView.viewModel.scrollToTop == true)
+    }
 }

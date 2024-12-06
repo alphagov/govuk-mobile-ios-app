@@ -35,7 +35,10 @@ class SettingsViewModel: SettingsViewModelInterface {
     var listContent: [GroupedListSection] {
         [
             .init(
-                heading: String.settings.localized("aboutTheAppHeading"),
+                heading: GroupedListHeader(
+                    title: String.settings.localized("aboutTheAppHeading"),
+                    icon: nil
+                ),
                 rows: [
                     helpAndFeedbackRow(),
                     InformationRow(
@@ -48,7 +51,10 @@ class SettingsViewModel: SettingsViewModelInterface {
                 footer: nil
             ),
             .init(
-                heading: String.settings.localized("privacyAndLegalHeading"),
+                heading: GroupedListHeader(
+                    title: String.settings.localized("privacyAndLegalHeading"),
+                    icon: nil
+                ),
                 rows: [
                     ToggleRow(
                         id: "settings.privacy.row",

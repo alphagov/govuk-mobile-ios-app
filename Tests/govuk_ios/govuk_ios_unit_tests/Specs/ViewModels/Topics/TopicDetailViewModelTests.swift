@@ -1,4 +1,5 @@
 import Testing
+import UIKit
 
 @testable import govuk_ios
 
@@ -28,10 +29,15 @@ struct TopicDetailViewModelTests {
         )
 
         try #require(sut.sections.count == 3)
-        #expect(sut.sections[0].heading == "Popular pages in this topic")
-        #expect(sut.sections[1].heading == "Step by step guides")
-        #expect(sut.sections[2].heading == "Browse")
-        
+        #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
+        #expect(sut.sections[0].heading?.icon == UIImage.topicPopularPagesIcon)
+
+        #expect(sut.sections[1].heading?.title == "Step by step guides")
+        #expect(sut.sections[1].heading?.icon == UIImage.topicStepByStepIcon)
+
+        #expect(sut.sections[2].heading?.title == "Browse")
+        #expect(sut.sections[2].heading?.icon == UIImage.topicBrowseIcon)
+
         #expect(sut.sections[0].rows.first is LinkRow)
         #expect(sut.sections[1].rows.last is LinkRow)
         #expect(sut.sections[2].rows.first is NavigationRow)
@@ -57,10 +63,15 @@ struct TopicDetailViewModelTests {
         )
         
         try #require(sut.sections.count == 3)
-        #expect(sut.sections[0].heading == "Popular pages in this topic")
-        #expect(sut.sections[1].heading == "Step by step guides")
-        #expect(sut.sections[2].heading == "Browse")
-        
+        #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
+        #expect(sut.sections[0].heading?.icon == UIImage.topicPopularPagesIcon)
+
+        #expect(sut.sections[1].heading?.title == "Step by step guides")
+        #expect(sut.sections[1].heading?.icon == UIImage.topicStepByStepIcon)
+
+        #expect(sut.sections[2].heading?.title == "Browse")
+        #expect(sut.sections[2].heading?.icon == UIImage.topicBrowseIcon)
+
         #expect(sut.sections[0].rows.first is LinkRow)
         
         #expect(sut.sections[1].rows.count == 4)
@@ -90,11 +101,18 @@ struct TopicDetailViewModelTests {
         )
         
         try #require(sut.sections.count == 4)
-        #expect(sut.sections[0].heading == "Popular pages in this topic")
-        #expect(sut.sections[1].heading == "Step by step guides")
-        #expect(sut.sections[2].heading == "Services and information")
-        #expect(sut.sections[3].heading == "Browse")
-        
+        #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
+        #expect(sut.sections[0].heading?.icon == UIImage.topicPopularPagesIcon)
+
+        #expect(sut.sections[1].heading?.title == "Step by step guides")
+        #expect(sut.sections[1].heading?.icon == UIImage.topicStepByStepIcon)
+
+        #expect(sut.sections[2].heading?.title == "Services and information")
+        #expect(sut.sections[2].heading?.icon == UIImage.topicServicesIcon)
+
+        #expect(sut.sections[3].heading?.title == "Browse")
+        #expect(sut.sections[3].heading?.icon == UIImage.topicBrowseIcon)
+
         #expect(sut.sections[0].rows.first is LinkRow)
         #expect(sut.sections[1].rows.first is LinkRow)
         #expect(sut.sections[2].rows.last is LinkRow)
@@ -116,7 +134,8 @@ struct TopicDetailViewModelTests {
             stepByStepAction: { _ in }
         )
 
-        #expect(sut.sections[3].heading == "Related")
+        #expect(sut.sections[3].heading?.title == "Related")
+        #expect(sut.sections[3].heading?.icon == UIImage.topicRelatedIcon)
         #expect(sut.sections[3].rows.count == expectedContent.subtopics.count)
     }
 

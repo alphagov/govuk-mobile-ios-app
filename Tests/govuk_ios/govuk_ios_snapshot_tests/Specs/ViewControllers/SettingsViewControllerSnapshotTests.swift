@@ -37,7 +37,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             prefersLargeTitles: true
         )
     }
-    
+
     private lazy var viewModel: SettingsViewModel = {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
@@ -62,7 +62,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 
 class GroupedListViewModel: SettingsViewModelInterface {
     var title: String = "Settings"
-    var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent
+    var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent.dropLast()
     var scrollToTop: Bool = false
 
     func trackScreen(screen: any govuk_ios.TrackableScreen) {

@@ -12,15 +12,18 @@ class SettingsViewModel: SettingsViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let versionProvider: AppVersionProvider
+    let deviceInformation: DeviceInformationInterface
 
     @Published var scrollToTop: Bool = false
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
-         versionProvider: AppVersionProvider) {
+         versionProvider: AppVersionProvider,
+         deviceInformation: DeviceInformationInterface) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
+        self.deviceInformation = deviceInformation
     }
 
     private var hasAcceptedAnalytics: Bool {
@@ -100,17 +103,34 @@ class SettingsViewModel: SettingsViewModelInterface {
         let rowTitle = String.settings.localized(
             "helpAndFeedbackSettingsTitle"
         )
+        let feedbackUrl = helpAndFeedbackUrl?.absoluteString ?? Constants.API.helpAndFeedbackUrl
+
         return LinkRow(
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
             body: nil,
             action: { [weak self] in
                 self?.openURLIfPossible(
-                    urlString: Constants.API.helpAndFeedbackUrl,
+                    urlString: feedbackUrl,
                     eventTitle: rowTitle
                 )
             }
         )
+    }
+
+    private var helpAndFeedbackUrl: URL? {
+        let model = deviceInformation.model
+        let systemVersion = deviceInformation.systemVersion
+        let device = "Apple \(model) \(systemVersion)"
+        let appVersion = versionProvider.fullBuildNumber ?? "-"
+
+        var feedbackUrl = URLComponents(string: Constants.API.helpAndFeedbackUrl)
+        feedbackUrl?.queryItems = [
+            .init(name: "app_version", value: appVersion),
+            .init(name: "phone", value: device)
+        ]
+
+        return feedbackUrl?.url
     }
 
     private func openSourceLicenceRow() -> GroupedListRow {

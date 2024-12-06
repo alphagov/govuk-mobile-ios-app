@@ -7,14 +7,12 @@ import Testing
 struct SettingsViewModelTests {
 
     let sut: SettingsViewModel
-    let mockAnalyticsService: MockAnalyticsService
-    let mockVersionProvider: MockAppVersionProvider
-    let mockURLOpener: MockURLOpener
+    let mockAnalyticsService: MockAnalyticsService = MockAnalyticsService()
+    let mockURLOpener: MockURLOpener = MockURLOpener()
 
     init() {
-        mockAnalyticsService = MockAnalyticsService()
-        mockVersionProvider = MockAppVersionProvider()
-        mockURLOpener = MockURLOpener()
+        let mockVersionProvider = MockAppVersionProvider()
+        let mockDeviceInformation = MockDeviceInformation()
 
         mockVersionProvider.versionNumber = "123"
         mockVersionProvider.buildNumber = "456"
@@ -22,7 +20,8 @@ struct SettingsViewModelTests {
         sut = SettingsViewModel(
             analyticsService: mockAnalyticsService,
             urlOpener: mockURLOpener,
-            versionProvider: mockVersionProvider
+            versionProvider: mockVersionProvider,
+            deviceInformation: mockDeviceInformation
         )
     }
 
@@ -38,9 +37,13 @@ struct SettingsViewModelTests {
 
         let aboutTheAppSection = sut.listContent[0]
         #expect(aboutTheAppSection.heading?.title == "About the app")
+
         let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
+        let url = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
+        helpAndFeedbackRow.action()
         #expect(helpAndFeedbackRow.title == "Help and feedback")
         #expect(helpAndFeedbackRow.isWebLink == true)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == url)
 
         let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
         #expect(appBundleInformation.title == "App version number")
@@ -125,7 +128,8 @@ struct SettingsViewModelTests {
         helpAndFeedbackRow.action()
 
         let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.helpAndFeedbackUrl)
+        let url = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
+        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == url)
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
     }
 }

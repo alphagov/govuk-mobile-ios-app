@@ -6,21 +6,25 @@ class SettingsCoordinator: TabItemCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
+    private let deviceInformation: DeviceInformationInterface
     private let settingsViewModel: any SettingsViewModelInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         deviceInformation: DeviceInformationInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
+        self.deviceInformation = deviceInformation
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,
-            versionProvider: Bundle.main
+            versionProvider: Bundle.main,
+            deviceInformation: deviceInformation
         )
 
         super.init(navigationController: navigationController)

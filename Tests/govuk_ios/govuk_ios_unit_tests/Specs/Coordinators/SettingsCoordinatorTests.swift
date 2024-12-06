@@ -21,10 +21,10 @@ struct SettingsCoordinatorTests {
         let navigationController = UINavigationController()
         let subject = SettingsCoordinator(
             navigationController: navigationController,
-            coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            deviceInformation: MockDeviceInformation()
         )
         subject.start()
 
@@ -38,10 +38,10 @@ struct SettingsCoordinatorTests {
         let navigationController = UINavigationController()
         let subject = SettingsCoordinator(
             navigationController: navigationController,
-            coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: viewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            deviceInformation: MockDeviceInformation()
         )
         subject.start()
 

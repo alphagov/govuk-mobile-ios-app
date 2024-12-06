@@ -35,7 +35,8 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .settings(coordinatorBuilder: self),
-            analyticsService: container.analyticsService.resolve()
+            analyticsService: container.analyticsService.resolve(),
+            deviceInformation: DeviceInformation()
         )
     }
 

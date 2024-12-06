@@ -12,7 +12,7 @@ struct AppEvent_ConvenienceTests {
 
         #expect(result.name == "app_loaded")
         #expect(result.params?.count == 1)
-        #expect(result.params?["device_model"] as? String == DeviceModel().description)
+        #expect(result.params?["device_model"] as? String == DeviceInformation().model)
     }
 
 }

@@ -45,7 +45,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         return SettingsViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
-            versionProvider: mockVersionProvider
+            versionProvider: mockVersionProvider,
+            deviceInformation: MockDeviceInformation()
         )
     }()
 

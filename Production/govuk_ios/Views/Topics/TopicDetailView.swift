@@ -13,12 +13,16 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Color(UIColor.govUK.fills.surfaceBackground)
                 .ignoresSafeArea()
             if let errorViewModel = viewModel.errorViewModel {
-                VStack {
-                    AppErrorView(viewModel: errorViewModel)
-                    Spacer()
+                ScrollView {
+                    VStack {
+                        titleView
+                            .padding(.bottom, 12)
+                        AppErrorView(viewModel: errorViewModel)
+                        Spacer()
+                    }
                 }
             } else {
-                scrollView
+                topicDetails
             }
         }
         .onAppear {
@@ -38,7 +42,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         .padding(.bottom, 4)
     }
 
-    private var scrollView: some View {
+    private var topicDetails: some View {
         ScrollView {
             VStack {
                 titleView

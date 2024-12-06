@@ -4,13 +4,11 @@ import UIComponents
 struct AppErrorView: View {
     var viewModel: AppErrorViewModel?
     var body: some View {
-        ScrollView {
             VStack(spacing: 8) {
                 errorTitle
                 errorBody
                 actionButton
             }
-        }
         .padding()
     }
 

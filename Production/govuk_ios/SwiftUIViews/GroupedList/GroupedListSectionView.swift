@@ -1,14 +1,12 @@
 import SwiftUI
 
 struct GroupedListSectionView: View {
-    let heading: GroupedListHeader?
-    let rows: [GroupedListRow]
-    let footer: String?
+    let section: GroupedListSection
     private let cornerRadius: CGFloat = 10
 
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 8) {
-            if let title = heading?.title {
+            if let title = section.heading?.title {
                 Text(title)
                     .font(Font.govUK.title3.bold())
                     .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -19,7 +17,7 @@ struct GroupedListSectionView: View {
                 Color(UIColor.govUK.fills.surfaceCard)
                 VStack(spacing: 0) {
                     ForEach(
-                        Array(zip(rows, rows.indices)),
+                        Array(zip(section.rows, section.rows.indices)),
                         id: \.0.id
                     ) { row, index in
                         if index > 0 {
@@ -43,7 +41,7 @@ struct GroupedListSectionView: View {
                     )
             )
 
-            if let footer = footer {
+            if let footer = section.footer {
                 Text(footer)
                     .font(Font.govUK.footnote)
                     .foregroundColor(Color(UIColor.govUK.text.secondary))
@@ -60,9 +58,7 @@ struct GroupedListSectionView: View {
         Color(UIColor.govUK.Fills.surfaceBackground)
         let section = GroupedListSection_Previews.previewContent.first!
         GroupedListSectionView(
-            heading: section.heading,
-            rows: section.rows,
-            footer: section.footer
+            section: section
         )
     }
 }

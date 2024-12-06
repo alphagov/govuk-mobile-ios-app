@@ -12,15 +12,11 @@ struct GroupedList: View {
                     ForEach(content, id: \.heading?.title) { section in
                         if section.heading?.icon != nil {
                             GroupedListSectionIconView(
-                                heading: section.heading!,
-                                rows: section.rows,
-                                footer: section.footer
+                                section: section
                             )
                         } else {
                             GroupedListSectionView(
-                                heading: section.heading,
-                                rows: section.rows,
-                                footer: section.footer
+                                section: section
                             )
                         }
                     }

@@ -3,7 +3,6 @@ import UIComponents
 
 struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     @StateObject var viewModel: T
-    @State private var isScrolled = false
 
     init(viewModel: T) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -13,17 +12,13 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         ZStack {
             Color(UIColor.govUK.fills.surfaceBackground)
                 .ignoresSafeArea()
-            VStack(spacing: 0) {
-                titleView
-                Divider().opacity(isScrolled ? 1.0 : 0.0)
-                if let errorViewModel = viewModel.errorViewModel {
-                    VStack {
-                        AppErrorView(viewModel: errorViewModel)
-                        Spacer()
-                    }
-                } else {
-                    scrollView
+            if let errorViewModel = viewModel.errorViewModel {
+                VStack {
+                    AppErrorView(viewModel: errorViewModel)
+                    Spacer()
                 }
+            } else {
+                scrollView
             }
         }
         .onAppear {
@@ -36,18 +31,20 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Text(viewModel.title)
                 .font(.govUK.largeTitleBold)
                 .multilineTextAlignment(.leading)
+                .accessibility(addTraits: .isHeader)
             Spacer()
         }
         .padding(.leading, 16)
-        .padding(.bottom, 8)
+        .padding(.bottom, 4)
     }
 
     private var scrollView: some View {
         ScrollView {
             VStack {
+                titleView
                 if let description = viewModel.description {
                     descripitonView(description: description)
-                        .padding(.top, 8)
+                        .padding(.top, 2)
                 }
                 GroupedList(
                     content: viewModel.sections,
@@ -55,16 +52,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 )
                 .padding(.top, 16)
             }
-            .background(GeometryReader { geometry in
-                Color.clear.preference(key: ScrollOffsetPreferenceKey.self,
-                                       value: geometry
-                    .frame(in: .named("ScrollView")).origin.y)
-            })
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                isScrolled = value < 0.0
-            }
         }
-        .coordinateSpace(name: "ScrollView")
     }
 
     private func descripitonView(description: String) -> some View {

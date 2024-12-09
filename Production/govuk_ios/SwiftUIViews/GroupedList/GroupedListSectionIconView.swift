@@ -18,6 +18,7 @@ struct GroupedListSectionIconView: View {
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .accessibilityAddTraits(.isHeader)
                             .padding(.leading, 8)
+                            .padding(.trailing, 16)
                             .padding(.vertical, 16)
                             .fixedSize(horizontal: false, vertical: true)
                     }

@@ -68,13 +68,21 @@ class RecentActivityListViewController: BaseViewController {
         return localToolbar
     }()
 
+    private lazy var informationScrollView: UIScrollView = {
+        let localView = UIScrollView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.showsVerticalScrollIndicator = false
+        localView.contentInsetAdjustmentBehavior = .always
+        localView.isHidden = true
+        return localView
+    }()
+
     private lazy var informationView: UIView = {
         let localController = HostingViewController(
             rootView: AppErrorView()
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .clear
-        localController.view.isHidden = true
         let localModel = AppErrorViewModel(
             title: String.recentActivity.localized("recentActivityErrorViewTitle"),
             body: String.recentActivity.localized("recentActivityErrorViewDescription")
@@ -127,8 +135,9 @@ class RecentActivityListViewController: BaseViewController {
         view.addSubview(titleView)
         view.addSubview(dividerView)
         view.addSubview(tableView)
-        view.addSubview(informationView)
+        view.addSubview(informationScrollView)
         view.addSubview(editingToolbar)
+        informationScrollView.addSubview(informationView)
         removeBarButtonItem.isEnabled = false
         configureToolbarItems()
     }
@@ -178,16 +187,33 @@ class RecentActivityListViewController: BaseViewController {
             tableView.leftAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leftAnchor
             ),
-
-            informationView.topAnchor.constraint(
+            informationScrollView.topAnchor.constraint(
                 equalTo: titleView.bottomAnchor,
                 constant: 40
             ),
-            informationView.rightAnchor.constraint(
+            informationScrollView.rightAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.rightAnchor
             ),
-            informationView.leftAnchor.constraint(
+            informationScrollView.leftAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leftAnchor
+            ),
+            informationScrollView.bottomAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.bottomAnchor
+            ),
+            informationView.topAnchor.constraint(
+                equalTo: informationScrollView.topAnchor
+            ),
+            informationView.rightAnchor.constraint(
+                equalTo: informationScrollView.rightAnchor
+            ),
+            informationView.leftAnchor.constraint(
+                equalTo: informationScrollView.leftAnchor
+            ),
+            informationView.bottomAnchor.constraint(
+                equalTo: informationScrollView.bottomAnchor
+            ),
+            informationView.widthAnchor.constraint(
+                equalTo: informationScrollView.layoutMarginsGuide.widthAnchor
             )
         ])
     }
@@ -274,7 +300,7 @@ class RecentActivityListViewController: BaseViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
         let hasRecentActivity = !viewModel.structure.isEmpty
         tableView.isHidden = !hasRecentActivity
-        informationView.isHidden = hasRecentActivity
+        informationScrollView.isHidden = hasRecentActivity
         let rightNavBarButton = hasRecentActivity ? editButtonItem : nil
         navigationItem.setRightBarButton(rightNavBarButton, animated: true)
     }
@@ -315,6 +341,7 @@ class RecentActivityListViewController: BaseViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         toolbarHeightConstraint?.constant = tabBarHeight
+        informationView.invalidateIntrinsicContentSize()
     }
 }
 

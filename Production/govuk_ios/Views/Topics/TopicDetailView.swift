@@ -12,13 +12,17 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         ZStack {
             Color(UIColor.govUK.fills.surfaceBackground)
                 .ignoresSafeArea()
-            if let errorViewModel = viewModel.errorViewModel {
+            ScrollView {
                 VStack {
-                    AppErrorView(viewModel: errorViewModel)
-                    Spacer()
+                    titleView
+                    if let errorViewModel = viewModel.errorViewModel {
+                        AppErrorView(viewModel: errorViewModel)
+                            .padding(.top, 12)
+                        Spacer()
+                    } else {
+                        topicDetails
+                    }
                 }
-            } else {
-                scrollView
             }
         }
         .onAppear {
@@ -38,20 +42,17 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         .padding(.bottom, 4)
     }
 
-    private var scrollView: some View {
-        ScrollView {
-            VStack {
-                titleView
-                if let description = viewModel.description {
-                    descripitonView(description: description)
-                        .padding(.top, 2)
-                }
-                GroupedList(
-                    content: viewModel.sections,
-                    backgroundColor: UIColor.govUK.fills.surfaceBackground
-                )
-                .padding(.top, 16)
+    private var topicDetails: some View {
+        VStack {
+            if let description = viewModel.description {
+                descripitonView(description: description)
+                    .padding(.top, 2)
             }
+            GroupedList(
+                content: viewModel.sections,
+                backgroundColor: UIColor.govUK.fills.surfaceBackground
+            )
+            .padding(.top, 16)
         }
     }
 

@@ -14,13 +14,21 @@ class SearchViewController: BaseViewController,
         self.appErrorViewController.view
     }()
 
+    private lazy var errorScrollView: UIScrollView = {
+        let localView = UIScrollView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.showsVerticalScrollIndicator = false
+        localView.contentInsetAdjustmentBehavior = .always
+        localView.backgroundColor = .govUK.fills.surfaceModal
+        return localView
+    }()
+
     private lazy var appErrorViewController: HostingViewController = {
         let localController = HostingViewController(
             rootView: AppErrorView()
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .govUK.fills.surfaceModal
-        localController.view.isHidden = true
         return localController
     }()
 
@@ -99,6 +107,7 @@ class SearchViewController: BaseViewController,
 
         configureUI()
         configureConstraints()
+        configureErrorConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +126,8 @@ class SearchViewController: BaseViewController,
         view.backgroundColor = GOVUKColors.fills.surfaceModal
         view.addSubview(searchBar)
         view.addSubview(tableView)
-        view.addSubview(errorView)
+        view.addSubview(errorScrollView)
+        errorScrollView.addSubview(errorView)
     }
 
     private func configureConstraints() {
@@ -138,21 +148,6 @@ class SearchViewController: BaseViewController,
                 greaterThanOrEqualToConstant: 36
             ),
 
-            errorView.topAnchor.constraint(
-                equalTo: searchBar.bottomAnchor, constant: 24
-            ),
-            errorView.leftAnchor.constraint(
-                equalTo: searchBar.leftAnchor,
-                constant: 10
-            ),
-            errorView.rightAnchor.constraint(
-                equalTo: searchBar.rightAnchor,
-                constant: -10
-            ),
-            errorView.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor
-            ),
-
             tableView.topAnchor.constraint(
                 equalTo: searchBar.bottomAnchor,
                 constant: 16
@@ -164,6 +159,39 @@ class SearchViewController: BaseViewController,
                 equalTo: view.safeAreaLayoutGuide.leftAnchor
             ),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    private func configureErrorConstraints() {
+        NSLayoutConstraint.activate([
+            errorScrollView.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor, constant: 24
+            ),
+            errorScrollView.leftAnchor.constraint(
+                equalTo: searchBar.leftAnchor
+            ),
+            errorScrollView.rightAnchor.constraint(
+                equalTo: searchBar.rightAnchor
+            ),
+            errorScrollView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            ),
+
+            errorView.topAnchor.constraint(
+                equalTo: errorScrollView.topAnchor
+            ),
+            errorView.rightAnchor.constraint(
+                equalTo: errorScrollView.rightAnchor
+            ),
+            errorView.leftAnchor.constraint(
+                equalTo: errorScrollView.leftAnchor
+            ),
+            errorView.bottomAnchor.constraint(
+                equalTo: errorScrollView.bottomAnchor
+            ),
+            errorView.widthAnchor.constraint(
+                equalTo: errorScrollView.layoutMarginsGuide.widthAnchor
+            )
         ])
     }
 
@@ -204,7 +232,7 @@ class SearchViewController: BaseViewController,
     }
 
     private func updateFocus() {
-        let view = errorView.isHidden ? tableView : errorView
+        let view = errorScrollView.isHidden ? tableView : errorScrollView
         accessibilityLayoutChanged(focusView: view)
     }
 
@@ -215,21 +243,22 @@ class SearchViewController: BaseViewController,
             errorModel = AppErrorViewModel.networkUnavailable {
                 self.searchReturnPressed()
             }
-            errorView.isHidden = false
+            errorScrollView.isHidden = false
         case .apiUnavailable, .parsingError:
             errorModel = AppErrorViewModel.genericError(
                 urlOpener: viewModel.urlOpener
             )
-            errorView.isHidden = false
+            errorScrollView.isHidden = false
         case .noResults:
             errorModel = AppErrorViewModel(
                 body: "No results for ’\(searchText ?? "")’"
             )
-            errorView.isHidden = false
+            errorScrollView.isHidden = false
         case .none:
-            errorView.isHidden = true
+            errorScrollView.isHidden = true
         }
         appErrorViewController.rootView.viewModel = errorModel
+        errorView.invalidateIntrinsicContentSize()
     }
 
     private func reloadSnapshot() {
@@ -249,6 +278,11 @@ class SearchViewController: BaseViewController,
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
         viewModel.selected(item: item)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        errorView.invalidateIntrinsicContentSize()
     }
 }
 

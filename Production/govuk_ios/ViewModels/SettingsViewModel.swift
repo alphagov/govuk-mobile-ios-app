@@ -103,22 +103,21 @@ class SettingsViewModel: SettingsViewModelInterface {
         let rowTitle = String.settings.localized(
             "helpAndFeedbackSettingsTitle"
         )
-        let feedbackUrl = helpAndFeedbackUrl?.absoluteString ?? Constants.API.helpAndFeedbackUrl
 
         return LinkRow(
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
             body: nil,
-            action: { [weak self] in
+            action: { [weak self, helpAndFeedbackUrl] in
                 self?.openURLIfPossible(
-                    urlString: feedbackUrl,
+                    urlString: helpAndFeedbackUrl,
                     eventTitle: rowTitle
                 )
             }
         )
     }
 
-    private var helpAndFeedbackUrl: URL? {
+    private var helpAndFeedbackUrl: String {
         let model = deviceInformationProvider.model
         let systemVersion = deviceInformationProvider.systemVersion
         let device = "Apple \(model) \(systemVersion)"
@@ -130,7 +129,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             .init(name: "phone", value: device)
         ]
 
-        return feedbackUrl?.url
+        return feedbackUrl?.url?.absoluteString ?? Constants.API.helpAndFeedbackUrl
     }
 
     private func openSourceLicenceRow() -> GroupedListRow {

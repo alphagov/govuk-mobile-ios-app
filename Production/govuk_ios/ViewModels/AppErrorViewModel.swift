@@ -25,7 +25,7 @@ struct AppErrorViewModel {
             body: String.common.localized("genericErrorBody"),
             buttonTitle: String.common.localized("genericErrorButtonTitle"),
             buttonAccessibilityLabel: String.common.localized(
-                "genericErrorTitleAccessibilityLabel"
+                "genericErrorButtonTitleAccessibilityLabel"
             ),
             isWebLink: true,
             action: {

@@ -34,28 +34,6 @@
         }
       }
     },
-    "recentActivityErrorViewDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You haven't used the app to visit any GOV.UK pages yet"
-          }
-        }
-      }
-    },
-    "recentActivityErrorViewTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No pages"
-          }
-        }
-      }
-    },
     "recentActivityFormattedDateStringComponent" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -74,6 +52,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pages you've visited"
+          }
+        }
+      }
+    },
+    "recentActivityNoPagesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You haven't used the app to visit any GOV.UK pages yet"
+          }
+        }
+      }
+    },
+    "recentActivityNoPagesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No pages"
           }
         }
       }

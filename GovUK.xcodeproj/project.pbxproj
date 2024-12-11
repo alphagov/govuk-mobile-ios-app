@@ -1052,11 +1052,11 @@
 		5DAD71AA2BD2548B0075F648 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D0EAB5002CDE6513007ACBCD /* Config */,
-				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
+				D0EAB5002CDE6513007ACBCD /* Config */,
 				3D887CB72C944861001B1BA2 /* Constants.swift */,
+				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D742BD32C99781300E7B87A /* Strings */,
 			);
 			path = Resources;

@@ -26,7 +26,7 @@ struct AnalyticsConsentContainerViewModelTests {
         #expect(sut.privacyPolicyLinkTitle == "Read more about this in the privacy policy ↗")
         #expect(sut.privacyPolicyLinkAccessibilityTitle == "Read more about this in the privacy policy")
         #expect(sut.privacyPolicyLinkHint == "Opens in web browser")
-        #expect(sut.privacyPolicyLinkUrl == "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data")
+        #expect(sut.privacyPolicyLinkUrl.absoluteString == "https://www.gov.uk/government/publications/govuk-app-privacy-notice-how-we-use-your-data")
         #expect(sut.allowButtonTitle == "Allow statistics sharing")
         #expect(sut.dontAllowButtonTitle == "Don't allow statistics sharing")
     }
@@ -90,6 +90,6 @@ struct AnalyticsConsentContainerViewModelTests {
             dismissAction: {}
         )
         sut.openPrivacyPolicy()
-        #expect(urlOpener._receivedOpenIfPossibleUrlString == Constants.API.privacyPolicyUrl)
+        #expect(urlOpener._receivedOpenIfPossibleUrl == Constants.API.privacyPolicyUrl)
     }
 }

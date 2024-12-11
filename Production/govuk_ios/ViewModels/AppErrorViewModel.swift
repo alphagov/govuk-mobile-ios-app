@@ -29,7 +29,7 @@ struct AppErrorViewModel {
             ),
             isWebLink: true,
             action: {
-                urlOpener.openIfPossible(Constants.API.govukUrlString)
+                urlOpener.openIfPossible(Constants.API.govukBaseUrl)
             }
         )
     }

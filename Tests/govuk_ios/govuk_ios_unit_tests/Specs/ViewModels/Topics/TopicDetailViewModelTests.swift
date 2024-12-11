@@ -212,7 +212,7 @@ struct TopicDetailViewModelTests {
         )
         #expect(errorViewModel.isWebLink)
         errorViewModel.action?()
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.govukUrlString)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.govukBaseUrl)
     }
     
     @Test

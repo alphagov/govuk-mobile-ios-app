@@ -9,10 +9,10 @@ protocol SettingsViewModelInterface: ObservableObject {
 
 class SettingsViewModel: SettingsViewModelInterface {
     let title: String = String.settings.localized("pageTitle")
-    let analyticsService: AnalyticsServiceInterface
-    let urlOpener: URLOpener
-    let versionProvider: AppVersionProvider
-    let deviceInformationProvider: DeviceInformationProviderInterface
+    private let analyticsService: AnalyticsServiceInterface
+    private let urlOpener: URLOpener
+    private let versionProvider: AppVersionProvider
+    private let deviceInformationProvider: DeviceInformationProviderInterface
 
     @Published var scrollToTop: Bool = false
 
@@ -110,26 +110,29 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self, helpAndFeedbackUrl] in
                 self?.openURLIfPossible(
-                    urlString: helpAndFeedbackUrl,
+                    url: helpAndFeedbackUrl,
                     eventTitle: rowTitle
                 )
             }
         )
     }
 
-    private var helpAndFeedbackUrl: String {
+    private var helpAndFeedbackUrl: URL {
         let model = deviceInformationProvider.model
         let systemVersion = deviceInformationProvider.systemVersion
         let device = "Apple \(model) \(systemVersion)"
         let appVersion = versionProvider.fullBuildNumber ?? "-"
 
-        var feedbackUrl = URLComponents(string: Constants.API.helpAndFeedbackUrl)
+        var feedbackUrl = URLComponents(
+            url: Constants.API.helpAndFeedbackUrl,
+            resolvingAgainstBaseURL: true
+        )
         feedbackUrl?.queryItems = [
             .init(name: "app_version", value: appVersion),
             .init(name: "phone", value: device)
         ]
 
-        return feedbackUrl?.url?.absoluteString ?? Constants.API.helpAndFeedbackUrl
+        return feedbackUrl?.url ?? Constants.API.helpAndFeedbackUrl
     }
 
     private func openSourceLicenceRow() -> GroupedListRow {
@@ -154,7 +157,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 self?.openURLIfPossible(
-                    urlString: Constants.API.termsAndConditionsUrl,
+                    url: Constants.API.termsAndConditionsUrl,
                     eventTitle: rowTitle
                 )
             }
@@ -169,16 +172,16 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 self?.openURLIfPossible(
-                    urlString: Constants.API.accessibilityStatementUrl,
+                    url: Constants.API.accessibilityStatementUrl,
                     eventTitle: rowTitle
                 )
             }
         )
     }
 
-    private func openURLIfPossible(urlString: String,
+    private func openURLIfPossible(url: URL,
                                    eventTitle: String) {
-        if urlOpener.openIfPossible(urlString) {
+        if urlOpener.openIfPossible(url) {
             trackLinkEvent(eventTitle)
         }
     }

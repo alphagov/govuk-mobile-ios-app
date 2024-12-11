@@ -43,7 +43,7 @@ struct SettingsViewModelTests {
         helpAndFeedbackRow.action()
         #expect(helpAndFeedbackRow.title == "Help and feedback")
         #expect(helpAndFeedbackRow.isWebLink == true)
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == expectedUrl)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
 
         let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
         #expect(appBundleInformation.title == "App version number")
@@ -63,22 +63,22 @@ struct SettingsViewModelTests {
     
     @Test
     func analytics_toggledOnThenOff_deniesPermissions() throws {
-        sut.analyticsService.setAcceptedAnalytics(accepted: true)
+        mockAnalyticsService.setAcceptedAnalytics(accepted: true)
         let privacySection = sut.listContent[1]
         let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
         #expect(toggleRow.isOn)
         toggleRow.isOn = false
-        #expect(sut.analyticsService.permissionState == .denied)
+        #expect(mockAnalyticsService.permissionState == .denied)
     }
     
     @Test
     func analytics_toggledOffThenOn_acceptsPermissions() throws {
-        sut.analyticsService.setAcceptedAnalytics(accepted: false)
+        mockAnalyticsService.setAcceptedAnalytics(accepted: false)
         let privacySection = sut.listContent[1]
         let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
         #expect(toggleRow.isOn == false)
         toggleRow.isOn = true
-        #expect(sut.analyticsService.permissionState == .accepted)
+        #expect(mockAnalyticsService.permissionState == .accepted)
     }
     
     @Test
@@ -87,7 +87,7 @@ struct SettingsViewModelTests {
         let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
         privacyPolicyRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.privacyPolicyUrl)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.privacyPolicyUrl)
         #expect(receivedTitle == privacyPolicyRow.title)
     }
 
@@ -97,7 +97,7 @@ struct SettingsViewModelTests {
         let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
         accessibilityStatementRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.accessibilityStatementUrl)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.accessibilityStatementUrl)
         #expect(receivedTitle == accessibilityStatementRow.title)
     }
 
@@ -116,7 +116,7 @@ struct SettingsViewModelTests {
         let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
         termsAndConditionsRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == Constants.API.termsAndConditionsUrl)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.termsAndConditionsUrl)
         #expect(receivedTitle == termsAndConditionsRow.title)
     }
 
@@ -129,7 +129,7 @@ struct SettingsViewModelTests {
 
         let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == expectedUrl)
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
     }
 }

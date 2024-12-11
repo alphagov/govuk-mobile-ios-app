@@ -2,24 +2,17 @@ import UIKit
 import Foundation
 
 class SettingsCoordinator: TabItemCoordinator {
-    private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
-    private let analyticsService: AnalyticsServiceInterface
-    private let deviceInformation: DeviceInformationInterface
     private let settingsViewModel: any SettingsViewModelInterface
 
     init(navigationController: UINavigationController,
-         coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
          deviceInformation: DeviceInformationInterface) {
-        self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
-        self.analyticsService = analyticsService
-        self.deviceInformation = deviceInformation
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,

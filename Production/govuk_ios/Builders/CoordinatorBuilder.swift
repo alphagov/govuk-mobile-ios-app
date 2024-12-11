@@ -32,7 +32,6 @@ class CoordinatorBuilder {
     var settings: TabItemCoordinator {
         SettingsCoordinator(
             navigationController: .settings,
-            coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: .settings(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),

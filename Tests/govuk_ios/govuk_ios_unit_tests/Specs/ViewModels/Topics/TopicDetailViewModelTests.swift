@@ -208,7 +208,7 @@ struct TopicDetailViewModelTests {
         #expect(errorViewModel.body == String.common.localized("genericErrorBody"))
         #expect(errorViewModel.buttonTitle == String.common.localized("genericErrorButtonTitle"))
         #expect(errorViewModel.buttonAccessibilityLabel
-                == String.common.localized("genericErrorTitleAccessibilityLabel")
+                == String.common.localized("genericErrorButtonTitleAccessibilityLabel")
         )
         #expect(errorViewModel.isWebLink)
         errorViewModel.action?()

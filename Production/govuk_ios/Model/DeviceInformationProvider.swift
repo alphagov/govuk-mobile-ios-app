@@ -1,12 +1,12 @@
 import Foundation
 import UIKit
 
-protocol DeviceInformationInterface {
+protocol DeviceInformationProviderInterface {
     var systemVersion: String { get }
     var model: String { get }
 }
 
-struct DeviceInformation: DeviceInformationInterface {
+struct DeviceInformationProvider: DeviceInformationProviderInterface {
     var systemVersion: String {
         UIDevice.current.systemVersion
     }

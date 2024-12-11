@@ -12,18 +12,18 @@ class SettingsViewModel: SettingsViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let versionProvider: AppVersionProvider
-    let deviceInformation: DeviceInformationInterface
+    let deviceInformationProvider: DeviceInformationProviderInterface
 
     @Published var scrollToTop: Bool = false
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
          versionProvider: AppVersionProvider,
-         deviceInformation: DeviceInformationInterface) {
+         deviceInformationProvider: DeviceInformationProviderInterface) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
-        self.deviceInformation = deviceInformation
+        self.deviceInformationProvider = deviceInformationProvider
     }
 
     private var hasAcceptedAnalytics: Bool {
@@ -119,8 +119,8 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     private var helpAndFeedbackUrl: URL? {
-        let model = deviceInformation.model
-        let systemVersion = deviceInformation.systemVersion
+        let model = deviceInformationProvider.model
+        let systemVersion = deviceInformationProvider.systemVersion
         let device = "Apple \(model) \(systemVersion)"
         let appVersion = versionProvider.fullBuildNumber ?? "-"
 

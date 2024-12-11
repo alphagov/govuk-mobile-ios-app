@@ -1,6 +1,6 @@
 @testable import govuk_ios
 
-struct MockDeviceInformation: DeviceInformationInterface {
+struct MockDeviceInformationProvider: DeviceInformationProviderInterface {
     var systemVersion: String = "18.1"
     var model: String = "iPhone16,2"
 }

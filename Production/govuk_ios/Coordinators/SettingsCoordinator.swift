@@ -10,14 +10,14 @@ class SettingsCoordinator: TabItemCoordinator {
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
-         deviceInformation: DeviceInformationInterface) {
+         deviceInformationProvider: DeviceInformationProviderInterface) {
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,
             versionProvider: Bundle.main,
-            deviceInformation: deviceInformation
+            deviceInformationProvider: deviceInformationProvider
         )
 
         super.init(navigationController: navigationController)

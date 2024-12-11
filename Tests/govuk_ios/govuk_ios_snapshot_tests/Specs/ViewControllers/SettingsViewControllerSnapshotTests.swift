@@ -46,7 +46,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
-            deviceInformation: MockDeviceInformation()
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
     }()
 

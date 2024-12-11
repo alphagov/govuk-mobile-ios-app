@@ -10,7 +10,7 @@
 		160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160A02672C208B9800FE01EB /* AnalyticsService.swift */; };
 		160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7542C5B0401008F97AF /* SettingsViewModel.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
-		1631DE992C2B0D020050CB9D /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceInformation.swift */; };
+		1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */; };
 		166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166248232C4AC91E009F7E58 /* HomeCoordinator.swift */; };
 		1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666F49F2C86124900DBD064 /* SearchModalButton.swift */; };
 		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
@@ -260,7 +260,7 @@
 		160A02672C208B9800FE01EB /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		160EA7542C5B0401008F97AF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		1631DE982C2B0D020050CB9D /* DeviceInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
+		1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInformationProvider.swift; sourceTree = "<group>"; };
 		166248232C4AC91E009F7E58 /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		1666F49F2C86124900DBD064 /* SearchModalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModalButton.swift; sourceTree = "<group>"; };
 		166BDDB52C330D1C00437AE0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -578,7 +578,7 @@
 				"govuk_ios/shared/Extensions/Data+Load.swift",
 				govuk_ios/shared/Mocks/MockAccessibilityManager.swift,
 				govuk_ios/shared/Mocks/MockAppVersionProvider.swift,
-				govuk_ios/shared/Mocks/MockDeviceInformation.swift,
+				govuk_ios/shared/Mocks/MockDeviceInformationProvider.swift,
 				govuk_ios/shared/Mocks/MockDisplayableTopic.swift,
 				govuk_ios/shared/Mocks/MockURLOpener.swift,
 				govuk_ios/shared/Mocks/Services/MockActivityService.swift,
@@ -1118,7 +1118,7 @@
 				5DE970522C297642009D66C4 /* Analytics */,
 				4E003E7D2C75F497008FCBF2 /* AppConfig */,
 				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
-				1631DE982C2B0D020050CB9D /* DeviceInformation.swift */,
+				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
 				4E94E8D32C8B188700906803 /* RecentActivity */,
 				16F961A42C989129005CFB04 /* SearchItem.swift */,
 				16F961A62C989165005CFB04 /* SearchResult.swift */,
@@ -1684,7 +1684,7 @@
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				5DE74DE32CB538E9000B43B5 /* RecentActivityListViewController.swift in Sources */,
 				5D3123842C85ADDF0088B931 /* ActivityRepository.swift in Sources */,
-				1631DE992C2B0D020050CB9D /* DeviceInformation.swift in Sources */,
+				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
 				5DC79FAE2CA185A000014446 /* UITableView+Extensions.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,

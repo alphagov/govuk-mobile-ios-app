@@ -12,15 +12,18 @@ class SettingsViewModel: SettingsViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let versionProvider: AppVersionProvider
+    let deviceInformationProvider: DeviceInformationProviderInterface
 
     @Published var scrollToTop: Bool = false
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
-         versionProvider: AppVersionProvider) {
+         versionProvider: AppVersionProvider,
+         deviceInformationProvider: DeviceInformationProviderInterface) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
+        self.deviceInformationProvider = deviceInformationProvider
     }
 
     private var hasAcceptedAnalytics: Bool {
@@ -100,17 +103,33 @@ class SettingsViewModel: SettingsViewModelInterface {
         let rowTitle = String.settings.localized(
             "helpAndFeedbackSettingsTitle"
         )
+
         return LinkRow(
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
             body: nil,
-            action: { [weak self] in
+            action: { [weak self, helpAndFeedbackUrl] in
                 self?.openURLIfPossible(
-                    urlString: Constants.API.helpAndFeedbackUrl,
+                    urlString: helpAndFeedbackUrl,
                     eventTitle: rowTitle
                 )
             }
         )
+    }
+
+    private var helpAndFeedbackUrl: String {
+        let model = deviceInformationProvider.model
+        let systemVersion = deviceInformationProvider.systemVersion
+        let device = "Apple \(model) \(systemVersion)"
+        let appVersion = versionProvider.fullBuildNumber ?? "-"
+
+        var feedbackUrl = URLComponents(string: Constants.API.helpAndFeedbackUrl)
+        feedbackUrl?.queryItems = [
+            .init(name: "app_version", value: appVersion),
+            .init(name: "phone", value: device)
+        ]
+
+        return feedbackUrl?.url?.absoluteString ?? Constants.API.helpAndFeedbackUrl
     }
 
     private func openSourceLicenceRow() -> GroupedListRow {

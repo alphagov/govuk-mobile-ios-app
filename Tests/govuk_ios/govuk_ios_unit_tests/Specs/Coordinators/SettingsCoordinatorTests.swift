@@ -14,17 +14,16 @@ struct SettingsCoordinatorTests {
 
     @Test
     func start_setsSettingsViewController() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
         let navigationController = UINavigationController()
         let subject = SettingsCoordinator(
             navigationController: navigationController,
-            coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 
@@ -33,15 +32,14 @@ struct SettingsCoordinatorTests {
     
     @Test
     func didReselectTab_updatesViewModel() throws {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let viewControllerBuilder = ViewControllerBuilder()
         let navigationController = UINavigationController()
         let subject = SettingsCoordinator(
             navigationController: navigationController,
-            coordinatorBuilder: mockCoodinatorBuilder,
             viewControllerBuilder: viewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 

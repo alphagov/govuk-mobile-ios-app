@@ -1,7 +1,17 @@
 import Foundation
+import UIKit
 
-struct DeviceModel: CustomStringConvertible {
-    var description: String {
+protocol DeviceInformationProviderInterface {
+    var systemVersion: String { get }
+    var model: String { get }
+}
+
+struct DeviceInformationProvider: DeviceInformationProviderInterface {
+    var systemVersion: String {
+        UIDevice.current.systemVersion
+    }
+
+    var model: String {
         var sysinfo = utsname()
         uname(&sysinfo)
 

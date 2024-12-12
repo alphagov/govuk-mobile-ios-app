@@ -84,8 +84,8 @@ class RecentActivityListViewController: BaseViewController {
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .clear
         let localModel = AppErrorViewModel(
-            title: String.recentActivity.localized("recentActivityErrorViewTitle"),
-            body: String.recentActivity.localized("recentActivityErrorViewDescription")
+            title: String.recentActivity.localized("recentActivityNoPagesTitle"),
+            body: String.recentActivity.localized("recentActivityNoPagesDescription")
         )
         localController.rootView.viewModel = localModel
         return localController.view

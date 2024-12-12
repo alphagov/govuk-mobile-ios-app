@@ -11,13 +11,12 @@ class AppUnavailableContainerViewModel: ObservableObject {
     let goToGovUkAccessibilityButtonTitle =
     String.appAvailability.localized("goToGovUkAccessibilityButtonTitle")
     let goToGovUkAccessibilityButtonHint = String.common.localized("openWebLinkHint")
-    let govUkUrl = Constants.API.govukUrlString
 
     var goToGovUkButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
             localisedTitle: goToGovUkButtonTitle,
             action: { [weak self] in
-                self?.openGovUk()
+                self?.openGovUK()
             }
         )
     }
@@ -26,7 +25,7 @@ class AppUnavailableContainerViewModel: ObservableObject {
         self.urlOpener = urlOpener
     }
 
-    private func openGovUk() {
-        urlOpener.openIfPossible(govUkUrl)
+    private func openGovUK() {
+        urlOpener.openIfPossible(Constants.API.govukBaseUrl)
     }
 }

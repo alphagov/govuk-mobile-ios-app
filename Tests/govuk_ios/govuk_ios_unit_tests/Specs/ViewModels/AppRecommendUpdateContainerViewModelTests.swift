@@ -22,8 +22,7 @@ struct AppRecommendUpdateContainerViewModelTests {
             urlOpener: urlOpener
         )
         sut.updateButtonViewModel.action()
-        #expect(urlOpener._receivedOpenIfPossibleUrlString ==
-                       "https://beta.itunes.apple.com/v1/app/6572293285")
+        #expect(urlOpener._receivedOpenIfPossibleUrl == Constants.API.appStoreAppUrl)
     }
 
     @Test

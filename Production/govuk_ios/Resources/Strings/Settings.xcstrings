@@ -29,7 +29,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. These statistics are anonymous and do not contain any of your personal information. Read more about this in the privacy policy."
+            "value" : "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. These statistics are anonymous and do not contain any of your personal information. Read more about this in the privacy notice."
           }
         }
       }
@@ -106,7 +106,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy policy"
+            "value" : "Privacy notice"
           }
         }
       }

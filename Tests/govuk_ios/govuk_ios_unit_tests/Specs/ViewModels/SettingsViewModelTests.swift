@@ -55,7 +55,7 @@ struct SettingsViewModelTests {
         #expect(toggleRow.title == "Share app usage statistics")
 
         let linkSection = sut.listContent[2]
-        #expect(linkSection.rows[0].title == "Privacy policy")
+        #expect(linkSection.rows[0].title == "Privacy notice")
         #expect(linkSection.rows[1].title == "Accessibility statement")
         #expect(linkSection.rows[2].title == "Open source licences")
         #expect(linkSection.rows[3].title == "Terms and conditions")

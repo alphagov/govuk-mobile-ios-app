@@ -101,9 +101,7 @@ class SearchViewController: BaseViewController,
         tableView.delegate = self
         searchBar.searchTextField.delegate = self
 
-        if #available(iOS 15.0, *) {
-            sheetPresentationController?.prefersGrabberVisible = true
-        }
+        sheetPresentationController?.prefersGrabberVisible = true
 
         configureUI()
         configureConstraints()

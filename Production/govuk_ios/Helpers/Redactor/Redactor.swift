@@ -7,7 +7,7 @@ struct Redactor {
         self.redactables = redactables
     }
 
-    func redact(inputText: String) -> String {
+    func redacted(inputText: String) -> String {
         var text = inputText
         redactables.forEach { redactable in
             text = redactable.redactableType.redacted(text: text)

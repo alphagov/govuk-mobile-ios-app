@@ -13,15 +13,15 @@ struct RedactorTests {
 
         let testStringOne = "Hi my postcode is FL52HP and my email is tom@gmail.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testStringOne) == expectedString)
+        #expect(sut.redacted(inputText: testStringOne) == expectedString)
 
         let testStringTwo = "Hi my postcode is FL52HP and my email is user+mailbox@subdomain.example.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testStringTwo) == expectedString)
+        #expect(sut.redacted(inputText: testStringTwo) == expectedString)
 
         let testStringThree = "Hi my postcode is FL52HP and my email is jane_doe123@company.co.uk. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testStringThree) == expectedString)
+        #expect(sut.redacted(inputText: testStringThree) == expectedString)
     }
 
     @Test
@@ -31,15 +31,15 @@ struct RedactorTests {
 
         let testStringOne = "Hi my postcode is FL52HP and my email is tom@gmail.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testStringOne) == expectedString)
+        #expect(sut.redacted(inputText: testStringOne) == expectedString)
 
         let testStringTwo = "Hi my postcode is FL52HP and my email is tom@gmail.com. I have an insurance number: CD 98 76 54 A"
 
-        #expect(sut.redact(inputText: testStringTwo) == expectedString)
+        #expect(sut.redacted(inputText: testStringTwo) == expectedString)
 
         let testStringThree = "Hi my postcode is FL52HP and my email is tom@gmail.com. I have an insurance number: CD  98  76  54  A"
 
-        #expect(sut.redact(inputText: testStringThree) == expectedString)
+        #expect(sut.redacted(inputText: testStringThree) == expectedString)
     }
 
     @Test
@@ -49,15 +49,15 @@ struct RedactorTests {
 
         let testStringOne = "Hi my postcode is FL52HP and my email is tom@gmail.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testStringOne) == expectedString)
+        #expect(sut.redacted(inputText: testStringOne) == expectedString)
 
         let testStringTwo = "Hi my postcode is L1 8JQ and my email is tom@gmail.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testStringTwo) == expectedString)
+        #expect(sut.redacted(inputText: testStringTwo) == expectedString)
 
         let testStringThree = "Hi my postcode is EC1A  1BB and my email is tom@gmail.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testStringThree) == expectedString)
+        #expect(sut.redacted(inputText: testStringThree) == expectedString)
     }
 
     @Test
@@ -67,7 +67,7 @@ struct RedactorTests {
 
         let testString = "Hi my postcode is FL52HP and my email is tom@gmail.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testString) == expectedString)
+        #expect(sut.redacted(inputText: testString) == expectedString)
     }
 
     @Test
@@ -77,6 +77,6 @@ struct RedactorTests {
 
         let testString = "Hi my emails are tom@gmail.com and tommy@gmail.com. I have an insurance number: QQ123456B"
 
-        #expect(sut.redact(inputText: testString) == expectedString)
+        #expect(sut.redacted(inputText: testString) == expectedString)
     }
 }

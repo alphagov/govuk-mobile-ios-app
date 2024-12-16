@@ -71,8 +71,8 @@
 		4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407532CE278F900D654FC /* StickyFooterView.swift */; };
 		4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407552CE2796900D654FC /* UIButton+Extensions.swift */; };
 		4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A02D0CD08900136D56 /* Redactor.swift */; };
-		4EFE22A32D0CD0B100136D56 /* Redactables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A22D0CD0B100136D56 /* Redactables.swift */; };
-		4EFE22A52D0CD0D500136D56 /* Redactable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A42D0CD0D500136D56 /* Redactable.swift */; };
+		4EFE22A32D0CD0B100136D56 /* Redactable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A22D0CD0B100136D56 /* Redactable.swift */; };
+		4EFE22A52D0CD0D500136D56 /* RedactableProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A42D0CD0D500136D56 /* RedactableProviding.swift */; };
 		4EFE22B02D0CEC8300136D56 /* Redactable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22AF2D0CEC8300136D56 /* Redactable+Extensions.swift */; };
 		5D00E9552CA544F200775D2B /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9542CA544F200775D2B /* HostingViewController.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
@@ -325,8 +325,8 @@
 		4EF407532CE278F900D654FC /* StickyFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyFooterView.swift; sourceTree = "<group>"; };
 		4EF407552CE2796900D654FC /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		4EFE22A02D0CD08900136D56 /* Redactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redactor.swift; sourceTree = "<group>"; };
-		4EFE22A22D0CD0B100136D56 /* Redactables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redactables.swift; sourceTree = "<group>"; };
-		4EFE22A42D0CD0D500136D56 /* Redactable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redactable.swift; sourceTree = "<group>"; };
+		4EFE22A22D0CD0B100136D56 /* Redactable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redactable.swift; sourceTree = "<group>"; };
+		4EFE22A42D0CD0D500136D56 /* RedactableProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactableProviding.swift; sourceTree = "<group>"; };
 		4EFE22AF2D0CEC8300136D56 /* Redactable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Redactable+Extensions.swift"; sourceTree = "<group>"; };
 		5D00E9542CA544F200775D2B /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
@@ -725,8 +725,8 @@
 			isa = PBXGroup;
 			children = (
 				4EFE22A02D0CD08900136D56 /* Redactor.swift */,
-				4EFE22A22D0CD0B100136D56 /* Redactables.swift */,
-				4EFE22A42D0CD0D500136D56 /* Redactable.swift */,
+				4EFE22A22D0CD0B100136D56 /* Redactable.swift */,
+				4EFE22A42D0CD0D500136D56 /* RedactableProviding.swift */,
 			);
 			path = Redactor;
 			sourceTree = "<group>";
@@ -1651,7 +1651,7 @@
 				5DC79FB22CA18A9A00014446 /* GovRequest+Search.swift in Sources */,
 				5DF8854B2CAC181D0060A40D /* NSFetchedResultsController+Extensions.swift in Sources */,
 				4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */,
-				4EFE22A32D0CD0B100136D56 /* Redactables.swift in Sources */,
+				4EFE22A32D0CD0B100136D56 /* Redactable.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
 				D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */,
@@ -1688,7 +1688,7 @@
 				D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */,
 				5D925B212CB7FACA00A1E241 /* UITableView+Convenience.swift in Sources */,
 				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
-				4EFE22A52D0CD0D500136D56 /* Redactable.swift in Sources */,
+				4EFE22A52D0CD0D500136D56 /* RedactableProviding.swift in Sources */,
 				D028CCF62CB9619B00742620 /* Topic.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D18E83E2CCFB68900F20419 /* Container+APIClients.swift in Sources */,

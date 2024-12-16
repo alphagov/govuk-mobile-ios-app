@@ -1,16 +1,16 @@
 import Foundation
 
 struct Redactor {
-    private let redactables: [Redactables]
+    private let redactables: [Redactable]
 
-    init(redactables: [Redactables]) {
+    init(redactables: [Redactable]) {
         self.redactables = redactables
     }
 
     func redact(inputText: String) -> String {
         var text = inputText
         redactables.forEach { redactable in
-            text = redactable.fetchRedactable.redact(text: text)
+            text = redactable.redactableType.redacted(text: text)
         }
         return text
     }

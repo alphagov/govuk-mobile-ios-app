@@ -1,16 +1,16 @@
 import Foundation
 
-protocol ValidatorProvidor {
+protocol ValidatorProvider {
     func validate(input: String) -> Bool
 }
 
-struct NonNilValidator: ValidatorProvidor {
+struct NonNilValidator: ValidatorProvider {
     func validate(input: String) -> Bool {
         return !input.isEmpty
     }
 }
 
-struct LengthValidator: ValidatorProvidor {
+struct LengthValidator: ValidatorProvider {
     private let requiredStringLength: Int
 
     init(requiredStringLength: Int) {

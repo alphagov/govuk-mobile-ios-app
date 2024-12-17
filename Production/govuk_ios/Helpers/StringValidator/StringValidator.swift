@@ -1,9 +1,9 @@
 import Foundation
 
 struct StringValidator {
-    private let validators: [ValidatorProvidor]
+    private let validators: [ValidatorProvider]
 
-    init(validators: [ValidatorProvidor]) {
+    init(validators: [ValidatorProvider]) {
         self.validators = validators
     }
 

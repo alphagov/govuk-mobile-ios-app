@@ -5,9 +5,8 @@ import Testing
 
 @Suite
 struct RedactorTests {
-
     @Test
-    func redact_whenRedactorContainsEmailRedactable_redactsEmail() async throws {
+    func redacted_whenRedactorContainsEmail_redactsEmail() async throws {
         let sut = Redactor(redactables: [.email])
         let expectedString = "Hi my postcode is FL52HP and my email is [email]. I have an insurance number: QQ123456B"
 
@@ -25,7 +24,7 @@ struct RedactorTests {
     }
 
     @Test
-    func redact_whenRedactorContainsNINumberRedactable_redactsNINumber() async throws {
+    func redacted_whenRedactorContainsNINumber_redactsNINumber() async throws {
         let sut = Redactor(redactables: [.niNumber])
         let expectedString = "Hi my postcode is FL52HP and my email is tom@gmail.com. I have an insurance number: [NI number]"
 
@@ -43,7 +42,7 @@ struct RedactorTests {
     }
 
     @Test
-    func redact_whenRedactorContainsPostCodeRedactable_redactsPostCode() async throws {
+    func redacted_whenRedactorContainsPostCode_redactsPostCode() async throws {
         let sut = Redactor(redactables: [.postCode])
         let expectedString = "Hi my postcode is [postcode] and my email is tom@gmail.com. I have an insurance number: QQ123456B"
 
@@ -61,7 +60,7 @@ struct RedactorTests {
     }
 
     @Test
-    func redact_whenRedactorContainsBothPostCodeAndEmailRedactables_redactsPostCodeAndEmail() async throws {
+    func redacted_whenRedactorContainsBothPostCodeAndEmail_redactsPostCodeAndEmail() async throws {
         let sut = Redactor(redactables: [.postCode, .email])
         let expectedString = "Hi my postcode is [postcode] and my email is [email]. I have an insurance number: QQ123456B"
 
@@ -71,7 +70,7 @@ struct RedactorTests {
     }
 
     @Test
-    func redact_whenTextContainsMultipleInstancesOfTheSameRedactable_allInstancesAreRedacted() async throws {
+    func redacted_whenTextContainsMultipleInstancesOfTheSameType_allInstancesAreRedacted() async throws {
         let sut = Redactor(redactables: [.email])
         let expectedString = "Hi my emails are [email] and [email]. I have an insurance number: QQ123456B"
 

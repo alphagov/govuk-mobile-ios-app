@@ -5,6 +5,7 @@ import Foundation
 
 @Suite
 struct StringValidatorTests {
+
     @Test
     func validate_whenStringValidatorContainsNonNillValidator_returnsCorrectValue() async throws {
         let sut = StringValidator(validators: [NonNilValidator()])

@@ -5,7 +5,7 @@ enum Redactable {
     case niNumber
     case postCode
 
-    var redactableType: RedactableProviding {
+    var redactor: Redactor {
         switch self {
         case .email:
             return Email()

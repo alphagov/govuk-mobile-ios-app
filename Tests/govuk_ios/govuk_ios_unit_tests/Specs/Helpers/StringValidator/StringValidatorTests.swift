@@ -21,7 +21,7 @@ struct StringValidatorTests {
 
     @Test
     func validate_whenStringValidatorContainsLengthValidator_returnsCorrectValue() async throws {
-        let sut = StringValidator(validators: [LengthValidator(requiredStringLength: 5)])
+        let sut = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5)])
 
         let testStringOne = "Seven"
 
@@ -34,7 +34,7 @@ struct StringValidatorTests {
 
     @Test
     func validate_whenStringValidatorContainsLengthValidatorAndNonNilVlidator_returnsCorrectValue() async throws {
-        let sut = StringValidator(validators: [LengthValidator(requiredStringLength: 5), NonNilValidator()])
+        let sut = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5), NonNilValidator()])
 
         let testString = "Six"
 

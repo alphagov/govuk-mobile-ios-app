@@ -35,11 +35,6 @@ struct MinimumLengthValidator: ValidatorProvider {
 }
 
 struct CharValidator: ValidatorProvider {
-    private let requiredStringLength: Int
-
-    init(requiredStringLength: Int) {
-        self.requiredStringLength = requiredStringLength
-    }
 
     func validate(input: String) -> Bool {
         let text = input.trimmingCharacters(in: .whitespacesAndNewlines)

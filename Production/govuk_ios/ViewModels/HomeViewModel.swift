@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import GOVKit
 
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface

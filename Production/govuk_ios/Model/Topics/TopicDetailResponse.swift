@@ -1,4 +1,5 @@
 import Foundation
+import RecentActivity
 
 struct TopicDetailResponse: Decodable {
     let ref: String
@@ -19,6 +20,15 @@ struct TopicDetailResponse: Decodable {
         let isStepByStep: Bool
         let popular: Bool
         let url: URL
+
+//        var activityItem: ActivityItemCreateParams {
+//            ActivityItemCreateParams(
+//                id: url.absoluteString,
+//                title: title,
+//                date: Date(),
+//                url: url.absoluteString
+//            )
+//        }
     }
 }
 

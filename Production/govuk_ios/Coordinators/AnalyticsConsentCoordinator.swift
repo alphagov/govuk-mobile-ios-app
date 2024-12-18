@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import GOVKit
 
 class AnalyticsConsentCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface

@@ -1,4 +1,5 @@
 import UIKit
+import GOVKit
 
 class TestViewController: BaseViewController {
     private let viewModel: TestViewModel
@@ -23,9 +24,10 @@ class TestViewController: BaseViewController {
         return localView
     }()
 
-    init(viewModel: TestViewModel) {
+    init(viewModel: TestViewModel,
+         analyticsService: AnalyticsServiceInterface) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: analyticsService)
         self.title = viewModel.tabTitle
         navigationItem.largeTitleDisplayMode = .always
     }

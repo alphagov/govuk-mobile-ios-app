@@ -1,4 +1,5 @@
 import SwiftUI
+import GOVKit
 
 struct AppErrorViewModel {
     var title: String?

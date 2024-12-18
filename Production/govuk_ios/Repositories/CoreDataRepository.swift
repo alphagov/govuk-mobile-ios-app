@@ -1,12 +1,6 @@
 import CoreData
 import Foundation
-
-protocol CoreDataRepositoryInterface {
-    var viewContext: NSManagedObjectContext { get }
-    var backgroundContext: NSManagedObjectContext { get }
-
-    func load() -> Self
-}
+import GOVKit
 
 class CoreDataRepository: CoreDataRepositoryInterface {
     private let persistentContainer: NSPersistentContainer

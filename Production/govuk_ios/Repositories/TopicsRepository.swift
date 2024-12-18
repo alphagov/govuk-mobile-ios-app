@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import GOVKit
 
 protocol TopicsRepositoryInterface {
     func save(topics: [TopicResponseItem])

@@ -9,7 +9,7 @@ struct StringValidatorTests {
     @Test
     func validate_whenStringValidatorContainsNonNillValidator_returnsCorrectValue() async throws {
         let sut = StringValidator(validators: [NonNilValidator()])
-
+        let sut = StringValidator.name
         let testStringOne = "Seven"
 
         #expect(sut.validate(input: testStringOne) == true)

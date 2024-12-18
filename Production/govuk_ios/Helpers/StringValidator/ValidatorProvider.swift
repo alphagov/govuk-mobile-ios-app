@@ -35,11 +35,11 @@ struct MinimumLengthValidator: ValidatorProvider {
 }
 
 struct CharValidator: ValidatorProvider {
-
     func validate(input: String) -> Bool {
-        let text = input.trimmingCharacters(in: .whitespacesAndNewlines)
-        let regex = ".*[^A-Za-z0-9].*"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
-        return predicate.evaluate(with: input)
+        if let hasSpecialCharacters = input.range(
+            of: ".*[^A-Za-z0-9].*",
+            options: .regularExpression) {
+            return false
+        } else { return true }
     }
 }

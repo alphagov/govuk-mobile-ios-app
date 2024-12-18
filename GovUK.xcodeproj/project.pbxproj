@@ -73,7 +73,6 @@
 		4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A02D0CD08900136D56 /* Redactor.swift */; };
 		4EFE22A32D0CD0B100136D56 /* Redactable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A22D0CD0B100136D56 /* Redactable.swift */; };
 		4EFE22A52D0CD0D500136D56 /* RedactableProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A42D0CD0D500136D56 /* RedactableProviding.swift */; };
-		4EFE22B02D0CEC8300136D56 /* Redactable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22AF2D0CEC8300136D56 /* Redactable+Extensions.swift */; };
 		5D00E9552CA544F200775D2B /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D00E9542CA544F200775D2B /* HostingViewController.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
@@ -327,7 +326,6 @@
 		4EFE22A02D0CD08900136D56 /* Redactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redactor.swift; sourceTree = "<group>"; };
 		4EFE22A22D0CD0B100136D56 /* Redactable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redactable.swift; sourceTree = "<group>"; };
 		4EFE22A42D0CD0D500136D56 /* RedactableProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactableProviding.swift; sourceTree = "<group>"; };
-		4EFE22AF2D0CEC8300136D56 /* Redactable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Redactable+Extensions.swift"; sourceTree = "<group>"; };
 		5D00E9542CA544F200775D2B /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
@@ -731,22 +729,6 @@
 			path = Redactor;
 			sourceTree = "<group>";
 		};
-		4EFE22AD2D0CEC5A00136D56 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				4EFE22AE2D0CEC6500136D56 /* Redactor */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
-		4EFE22AE2D0CEC6500136D56 /* Redactor */ = {
-			isa = PBXGroup;
-			children = (
-				4EFE22AF2D0CEC8300136D56 /* Redactable+Extensions.swift */,
-			);
-			path = Redactor;
-			sourceTree = "<group>";
-		};
 		5D0278382C29CBB600F2A4EB /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,7 +755,6 @@
 		5D1353AE2BE0D9A700414441 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4EFE22AD2D0CEC5A00136D56 /* Helper */,
 				5DE970552C297CF3009D66C4 /* Analytics */,
 				5D41DB662C087C520011E691 /* Container */,
 				5DF885492CAC18100060A40D /* CoreData */,
@@ -1574,7 +1555,6 @@
 			files = (
 				5DDCF62F2C874AB400A24947 /* GOV.xcdatamodeld in Sources */,
 				5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */,
-				4EFE22B02D0CEC8300136D56 /* Redactable+Extensions.swift in Sources */,
 				5DAC6E5A2C64CDA20099406C /* TrackableScreen.swift in Sources */,
 				5DD036852C5A577C00EEF11E /* NavigationBar.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,

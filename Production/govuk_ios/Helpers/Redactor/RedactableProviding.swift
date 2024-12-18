@@ -19,3 +19,14 @@ struct NINumber: RedactableProviding {
     var replacementText: String = "[NI number]"
     var pattern: String = "[A-Za-z]{2} *[0-9]{2} *[0-9]{2} *[0-9]{2} *[A-Za-z]"
 }
+
+extension RedactableProviding {
+    func redacted(text: String) -> String {
+        return text.replacingOccurrences(
+            of: pattern,
+            with: replacementText,
+            options: .regularExpression,
+            range: nil
+        )
+    }
+}

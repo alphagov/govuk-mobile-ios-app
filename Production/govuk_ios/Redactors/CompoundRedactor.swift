@@ -9,10 +9,6 @@ final class CompoundRedactor: Redactor {
     }
 
     override func redact(_ text: String) -> String {
-        var text = text
-        redactors.forEach { redactor in
-            text = redactor.redact(text)
-        }
-        return text
+        redactors.reduce(text) { $1.redact($0) }
     }
 }

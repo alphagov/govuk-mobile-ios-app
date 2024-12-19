@@ -4,14 +4,14 @@ extension Redactor {
     static var pii: Redactor {
         CompoundRedactor(
             redactors: [
-                .postCode,
+                .postcode,
                 .email,
                 .nino
             ]
         )
     }
 
-    static var postCode: Redactor {
+    static var postcode: Redactor {
         RegexRedactor(
             pattern: "([A-Za-z]{1,2}[0-9]{1,2}[A-Za-z]? *[0-9][A-Za-z]{2})",
             replacementText: "[postcode]"

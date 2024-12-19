@@ -713,7 +713,7 @@
 			path = RecentActivity;
 			sourceTree = "<group>";
 		};
-		4EFE229F2D0CD07400136D56 /* Redactor */ = {
+		4EFE229F2D0CD07400136D56 /* Redactors */ = {
 			isa = PBXGroup;
 			children = (
 				4EFE22A02D0CD08900136D56 /* Redactor.swift */,
@@ -721,7 +721,7 @@
 				5D7D255E2D141CEC00BDC217 /* Redactor+Convenience.swift */,
 				4EFE22A42D0CD0D500136D56 /* RegexRedactor.swift */,
 			);
-			path = Redactor;
+			path = Redactors;
 			sourceTree = "<group>";
 		};
 		5D0278382C29CBB600F2A4EB /* Animations */ = {
@@ -1017,7 +1017,6 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
-				4EFE229F2D0CD07400136D56 /* Redactor */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D26A75F2C92E054009902DD /* Clients */,
 				5D962D5E2C29BD0B0038BC0A /* Coordinators */,
@@ -1025,6 +1024,7 @@
 				5D1353AE2BE0D9A700414441 /* Extensions */,
 				5DE970512C297637009D66C4 /* Model */,
 				5D41DB672C087F850011E691 /* Networking */,
+				4EFE229F2D0CD07400136D56 /* Redactors */,
 				5D41DB6A2C088CA30011E691 /* Repositories */,
 				5DAD71AA2BD2548B0075F648 /* Resources */,
 				3D09A6D92C9DC78A005858D0 /* ServiceClients */,

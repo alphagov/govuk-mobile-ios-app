@@ -5,7 +5,7 @@ class RegexRedactor: Redactor {
     private let replacementText: String
 
     init(pattern: String,
-         replacementText: String) {
+         replacementText: String = "[redacted]") {
         self.pattern = pattern
         self.replacementText = replacementText
     }

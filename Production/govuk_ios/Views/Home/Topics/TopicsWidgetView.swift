@@ -29,6 +29,7 @@ class TopicsWidgetView: UIView {
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
         label.text = viewModel.widgetTitle
+        label.accessibilityTraits = .header
         return label
     }()
 

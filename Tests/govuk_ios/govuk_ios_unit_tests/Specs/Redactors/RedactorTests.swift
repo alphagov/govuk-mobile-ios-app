@@ -38,12 +38,3 @@ struct RedactorTests {
         #expect(result == expected)
     }
 }
-
-class MockRedactor: Redactor {
-    var _receivedInputText: String?
-    var _stubbedRedactedString: String?
-    override func redact(_ text: String) -> String {
-        _receivedInputText = text
-        return _stubbedRedactedString!
-    }
-}

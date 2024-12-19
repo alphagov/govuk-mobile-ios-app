@@ -1,58 +1,104 @@
 import Foundation
 import SwiftUI
 
-struct GroupedListSection {
+public struct GroupedListSection {
     let heading: GroupedListHeader?
     let rows: [GroupedListRow]
     let footer: String?
+    
+    public init(heading: GroupedListHeader?,
+                rows: [GroupedListRow],
+                footer: String?) {
+        self.heading = heading
+        self.rows = rows
+        self.footer = footer
+    }
 }
 
-struct GroupedListHeader {
+public struct GroupedListHeader {
     let title: String
     let icon: UIImage?
+    
+    public init(title: String,
+                icon: UIImage?) {
+        self.title = title
+        self.icon = icon
+    }
 }
 
-protocol GroupedListRow {
+public protocol GroupedListRow {
     var id: String { get }
     var title: String { get }
     var body: String? { get }
 }
 
-extension GroupedListRow {
+public extension GroupedListRow {
     var body: String? {
         nil
     }
 }
 
-struct LinkRow: GroupedListRow,
+public struct LinkRow: GroupedListRow,
                 Identifiable {
-    let id: String
-    let title: String
-    let body: String?
-    var isWebLink: Bool = true
-    let action: () -> Void
+    public let id: String
+    public let title: String
+    public let body: String?
+    public var isWebLink: Bool = true
+    public let action: () -> Void
+    
+    public init(id: String,
+                title: String,
+                body: String? = nil,
+                isWebLink: Bool = true,
+                action: @escaping () -> Void) {
+        self.id = id
+        self.title = title
+        self.body = body
+        self.isWebLink = isWebLink
+        self.action = action
+    }
 }
 
-struct NavigationRow: GroupedListRow,
+public struct NavigationRow: GroupedListRow,
                       Identifiable {
-    let id: String
-    let title: String
-    let body: String?
+    public let id: String
+    public let title: String
+    public let body: String?
     let action: () -> Void
+    
+    public init(id: String,
+                title: String,
+                body: String?,
+                action: @escaping () -> Void) {
+        self.id = id
+        self.title = title
+        self.body = body
+        self.action = action
+    }
 }
 
-struct InformationRow: GroupedListRow,
+public struct InformationRow: GroupedListRow,
                        Identifiable {
-    let id: String
-    let title: String
-    let body: String?
+    public let id: String
+    public let title: String
+    public let body: String?
     let detail: String
+    
+    public init(id: String,
+                title: String,
+                body: String?,
+                detail: String) {
+        self.id = id
+        self.title = title
+        self.body = body
+        self.detail = detail
+    }
 }
 
-class ToggleRow: GroupedListRow,
+public class ToggleRow: GroupedListRow,
                  ObservableObject {
-    var id: String
-    let title: String
+    public var id: String
+    public let title: String
     @Published var isOn: Bool {
         didSet {
             self.action(isOn)
@@ -60,7 +106,7 @@ class ToggleRow: GroupedListRow,
     }
     let action: ((Bool) -> Void)
 
-    init(id: String,
+    public init(id: String,
          title: String,
          isOn: Bool,
          action: @escaping (Bool) -> Void) {

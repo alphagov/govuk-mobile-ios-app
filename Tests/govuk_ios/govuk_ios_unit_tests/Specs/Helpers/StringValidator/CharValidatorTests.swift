@@ -25,4 +25,11 @@ struct CharValidatorTests {
         let sut = CharValidator()
         #expect(sut.validate(input: "test string") == true)
     }
+
+    @Test
+    func validate_whenStringIsNil_returnsFalse() {
+        let sut = CharValidator()
+        
+        #expect(sut.validate(input: nil) == false)
+    }
 }

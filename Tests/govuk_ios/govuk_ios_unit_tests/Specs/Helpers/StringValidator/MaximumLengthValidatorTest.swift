@@ -28,4 +28,11 @@ struct MaximumLengthValidatorTest {
         #expect(sut.validate(input: testString) == false)
     }
 
+    @Test
+    func validate_whenStringIsNil_returnsFalse() {
+        let sut = MaximumLengthValidator(requiredStringLength: 5)
+
+        #expect(sut.validate(input: nil) == false)
+    }
+
 }

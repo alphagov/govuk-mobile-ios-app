@@ -32,4 +32,12 @@ struct StringValidatorTests {
         #expect(sut.validate(input: testStringTwo) == false)
     }
 
+    @Test
+    func validate_whenStringIsNil_returnsFalse() {
+        let sutOne = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5)])
+        #expect(sutOne.validate(input: nil) == false)
+
+        let sutTwo = StringValidator(validators: [MinimumLengthValidator(requiredStringLength: 5)])
+        #expect(sutTwo.validate(input: nil) == false)
+    }
 }

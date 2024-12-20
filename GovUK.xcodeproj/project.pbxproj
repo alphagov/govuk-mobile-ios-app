@@ -733,6 +733,8 @@
 				4EBE646C2D15AB05007A6E97 /* CharValidator.swift */,
 			);
 			path = Validators;
+                        sourceTree = "<group>";
+                };
 		4EFE229F2D0CD07400136D56 /* Redactors */ = {
 			isa = PBXGroup;
 			children = (

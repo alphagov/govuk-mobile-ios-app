@@ -9,7 +9,8 @@ struct CharValidatorTests {
     @Test(arguments: [
         "*",
         "-",
-        "{}"
+        "}",
+        "{"
     ])
     func validate_whenInputContainsSpecialCharacters_returnsFalse(input: String) {
         let sut = CharValidator()

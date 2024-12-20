@@ -21,7 +21,7 @@ struct StringValidatorTests {
 
     @Test
     func validate_whenStringValidatorContainsMaximumLengthValidator_returnsCorrectValue() {
-        let sut = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5)])
+        let sut = StringValidator(validators: [MaximumLengthValidator(length: 5)])
 
         let testStringOne = "Seven"
 
@@ -34,7 +34,7 @@ struct StringValidatorTests {
 
     @Test
     func validate_whenStringIsNil_returnsFalse() {
-        let sutOne = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5)])
+        let sutOne = StringValidator(validators: [MaximumLengthValidator(length: 5)])
         #expect(sutOne.validate(input: nil) == false)
 
         let sutTwo = StringValidator(validators: [MinimumLengthValidator(requiredStringLength: 5)])

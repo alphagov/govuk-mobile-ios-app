@@ -8,7 +8,7 @@ struct MaximumLengthValidatorTest {
 
     @Test
     func validate_whenTextInputIsLessOrEqualThanRequiredStringLength_returnsTrue() async throws {
-        let sut = MaximumLengthValidator(requiredStringLength: 5)
+        let sut = MaximumLengthValidator(length: 5)
         
         let testStringOne = "Seven"
 
@@ -21,7 +21,7 @@ struct MaximumLengthValidatorTest {
 
     @Test
     func validate_whenTextInputIsGreaterThanRequiredStringLength_returnsFalse() async throws {
-        let sut = MaximumLengthValidator(requiredStringLength: 5)
+        let sut = MaximumLengthValidator(length: 5)
 
         let testString = "sentence"
 
@@ -30,7 +30,7 @@ struct MaximumLengthValidatorTest {
 
     @Test
     func validate_whenStringIsNil_returnsFalse() {
-        let sut = MaximumLengthValidator(requiredStringLength: 5)
+        let sut = MaximumLengthValidator(length: 5)
 
         #expect(sut.validate(input: nil) == false)
     }

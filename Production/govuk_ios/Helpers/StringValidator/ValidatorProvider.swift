@@ -5,15 +5,15 @@ protocol ValidatorProvider {
 }
 
 struct MaximumLengthValidator: ValidatorProvider {
-    private let requiredStringLength: Int
+    private let length: Int
 
-    init(requiredStringLength: Int) {
-        self.requiredStringLength = requiredStringLength
+    init(length: Int) {
+        self.length = length
     }
 
     func validate(input: String?) -> Bool {
         guard let input = input else { return false }
-        return input.count <= requiredStringLength
+        return input.count <= length
     }
 }
 
@@ -35,6 +35,7 @@ struct CharValidator: ValidatorProvider {
         guard let input = input else { return false }
         return input.range(
             of: ".*[^A-Za-z0-9].*",
-            options: .regularExpression) == nil
+            options: .regularExpression
+        ) == nil
     }
 }

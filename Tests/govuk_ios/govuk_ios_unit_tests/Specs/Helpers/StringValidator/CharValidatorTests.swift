@@ -20,7 +20,8 @@ struct CharValidatorTests {
         let sut = CharValidator()
         #expect(sut.validate(input: "test string \(input)") == false)
     }
-
+    
+    @Test
     func validate_whenInputContainsNoSpecialCharacters_returnsTrue() {
         let sut = CharValidator()
         #expect(sut.validate(input: "test string") == true)

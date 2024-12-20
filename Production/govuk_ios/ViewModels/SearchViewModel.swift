@@ -64,8 +64,10 @@ class SearchViewModel {
     }
 
     private func trackSearchTerm(searchTerm: String) {
+        let redactor = Redactor.pii
+        let redactedSearchTerm = redactor.redact(searchTerm)
         analyticsService.track(
-            event: AppEvent.searchTerm(term: searchTerm.redactPii())
+            event: AppEvent.searchTerm(term: redactedSearchTerm)
         )
     }
 }

@@ -20,6 +20,7 @@ class NavigationBar: UIView {
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
         uiImageView.isAccessibilityElement = true
         uiImageView.accessibilityLabel = String.home.localized("logoAccessibilityTitle")
+        uiImageView.accessibilityTraits = .header
         return uiImageView
     }()
 

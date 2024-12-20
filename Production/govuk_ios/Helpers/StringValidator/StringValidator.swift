@@ -7,7 +7,7 @@ struct StringValidator {
         self.validators = validators
     }
 
-    func validate(input: String) -> Bool {
+    func validate(input: String?) -> Bool {
         return !validators.map { $0.validate(input: input) }.contains(false)
     }
 }

@@ -5,15 +5,20 @@ import Foundation
 
 struct MinimumLengthValidatorTests {
     @Test
-    func validate_whenTextInputIsGreaterOrEqualThanRequiredStringLength_returnsTrue() async throws {
+    func validate_whenTextInputIsGreaterOrEqualThanRequiredStringLength_returnsTrue() {
         let sut = MinimumLengthValidator(requiredStringLength: 5)
-        let testString = "Seven"
 
-        #expect(sut.validate(input: testString) == true)
+        let testStringOne = "Seven"
+
+        #expect(sut.validate(input: testStringOne) == true)
+
+        let testStringTwo = "Chromatic"
+
+        #expect(sut.validate(input: testStringTwo) == true)
     }
 
     @Test
-    func validate_whenTextInputIsLessThanRequiredStringLength_returnsFalse() async throws {
+    func validate_whenTextInputIsLessThanRequiredStringLength_returnsFalse() {
         let sut = MinimumLengthValidator(requiredStringLength: 5)
         let testString = "Four"
 

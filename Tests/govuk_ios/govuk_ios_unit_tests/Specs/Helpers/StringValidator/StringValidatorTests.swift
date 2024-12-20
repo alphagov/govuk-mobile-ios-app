@@ -7,21 +7,8 @@ import Foundation
 struct StringValidatorTests {
 
     @Test
-    func validate_whenStringValidatorContainsNonNillValidator_returnsCorrectValue() async throws {
-        let sut = StringValidator(validators: [NonNilValidator()])
-        let sut = StringValidator.name
-        let testStringOne = "Seven"
-
-        #expect(sut.validate(input: testStringOne) == true)
-
-        let testStringTwo = ""
-
-        #expect(sut.validate(input: testStringTwo) == false)
-    }
-
-    @Test
-    func validate_whenStringValidatorContainsLengthValidator_returnsCorrectValue() async throws {
-        let sut = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5)])
+    func validate_whenStringValidatorContainsMinimumLengthValidator_returnsCorrectValue() {
+        let sut = StringValidator(validators: [MinimumLengthValidator(requiredStringLength: 5)])
 
         let testStringOne = "Seven"
 
@@ -33,11 +20,16 @@ struct StringValidatorTests {
     }
 
     @Test
-    func validate_whenStringValidatorContainsLengthValidatorAndNonNilVlidator_returnsCorrectValue() async throws {
-        let sut = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5), NonNilValidator()])
+    func validate_whenStringValidatorContainsMaximumLengthValidator_returnsCorrectValue() {
+        let sut = StringValidator(validators: [MaximumLengthValidator(requiredStringLength: 5)])
 
-        let testString = "Six"
+        let testStringOne = "Seven"
 
-        #expect(sut.validate(input: testString) == false)
+        #expect(sut.validate(input: testStringOne) == true)
+
+        let testStringTwo = "Chromatic"
+
+        #expect(sut.validate(input: testStringTwo) == false)
     }
+
 }

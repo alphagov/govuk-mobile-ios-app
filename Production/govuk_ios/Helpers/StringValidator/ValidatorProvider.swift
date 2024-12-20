@@ -1,13 +1,7 @@
 import Foundation
 
 protocol ValidatorProvider {
-    func validate(input: String) -> Bool
-}
-
-struct NonNilValidator: ValidatorProvider {
-    func validate(input: String) -> Bool {
-        return !input.isEmpty
-    }
+    func validate(input: String?) -> Bool
 }
 
 struct MaximumLengthValidator: ValidatorProvider {
@@ -17,7 +11,8 @@ struct MaximumLengthValidator: ValidatorProvider {
         self.requiredStringLength = requiredStringLength
     }
 
-    func validate(input: String) -> Bool {
+    func validate(input: String?) -> Bool {
+        guard let input = input else { return false }
         return input.count <= requiredStringLength
     }
 }
@@ -29,17 +24,17 @@ struct MinimumLengthValidator: ValidatorProvider {
         self.requiredStringLength = requiredStringLength
     }
 
-    func validate(input: String) -> Bool {
+    func validate(input: String?) -> Bool {
+        guard let input = input else { return false }
         return input.count >= requiredStringLength
     }
 }
 
 struct CharValidator: ValidatorProvider {
-    func validate(input: String) -> Bool {
-        if let hasSpecialCharacters = input.range(
+    func validate(input: String?) -> Bool {
+        guard let input = input else { return false }
+        return input.range(
             of: ".*[^A-Za-z0-9].*",
-            options: .regularExpression) {
-            return false
-        } else { return true }
+            options: .regularExpression) == nil
     }
 }

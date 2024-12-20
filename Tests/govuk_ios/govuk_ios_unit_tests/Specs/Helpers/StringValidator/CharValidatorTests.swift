@@ -6,12 +6,23 @@ import Foundation
 @Suite
 struct CharValidatorTests {
 
-    @Test
-    func validate_whenInputContainsSpecialCharactersReturnsFalse() async throws {
+    @Test(arguments: [
+        "*",
+         ":",
+         "//",
+         "^&",
+         "{}",
+         "+",
+         ">",
+         "#$"
+    ])
+    func validate_whenInputContainsSpecialCharacters_returnsFalse(input: String) {
         let sut = CharValidator()
-        let testString = "hello:!*u"
-
-        #expect(sut.validate(input: testString) == false)
+        #expect(sut.validate(input: "test string \(input)") == false)
     }
 
+    func validate_whenInputContainsNoSpecialCharacters_returnsTrue() {
+        let sut = CharValidator()
+        #expect(sut.validate(input: "test string") == true)
+    }
 }

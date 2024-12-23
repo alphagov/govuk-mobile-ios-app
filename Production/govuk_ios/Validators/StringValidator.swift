@@ -1,6 +1,6 @@
 import Foundation
 
-struct StringValidator {
+struct StringValidator: ValidatorProvider {
     private let validators: [ValidatorProvider]
 
     init(validators: [ValidatorProvider]) {

@@ -5,9 +5,9 @@ import Foundation
 
 struct MinimumLengthValidatorTests {
     @Test(arguments: [
-        "ABC",
-        "ABCD",
-        "ABCDE",
+        "123",
+        "1234",
+        "12345",
     ])
     func validate_whenTextInputIsGreaterOrEqualThanRequiredStringLength_returnsTrue(input: String) {
         let sut = MinimumLengthValidator(length: 3)
@@ -15,10 +15,10 @@ struct MinimumLengthValidatorTests {
     }
 
     @Test(arguments: [
-        "A",
-        "AB",
-        "ABC",
-        "ABCD"
+        "1",
+        "12",
+        "123",
+        "1234"
     ])
     func validate_whenTextInputIsLessThanRequiredStringLength_returnsFalse(input: String) {
         let sut = MinimumLengthValidator(length: 5)

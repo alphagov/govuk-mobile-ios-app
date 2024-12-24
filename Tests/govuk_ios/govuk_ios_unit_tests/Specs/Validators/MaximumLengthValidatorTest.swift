@@ -6,11 +6,11 @@ import Foundation
 @Suite
 struct MaximumLengthValidatorTest {
     @Test(arguments: [
-        "A",
-        "AB",
-        "ABC",
-        "ABCD",
-        "ABCDE",
+        "1",
+        "12",
+        "123",
+        "1234",
+        "12345",
     ])
     func validate_whenTextInputIsLessOrEqualThanRequiredStringLength_returnsTrue(input: String) async {
         let sut = MaximumLengthValidator(length: 5)
@@ -19,8 +19,8 @@ struct MaximumLengthValidatorTest {
     }
 
     @Test(arguments: [
-        "ABC",
-        "ABCD"
+        "123",
+        "1234"
     ])
     func validate_whenTextInputIsGreaterThanRequiredStringLength_returnsFalse(input: String) async {
         let sut = MaximumLengthValidator(length: 2)

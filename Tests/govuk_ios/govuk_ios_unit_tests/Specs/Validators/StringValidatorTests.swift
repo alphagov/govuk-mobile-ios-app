@@ -5,39 +5,38 @@ import Foundation
 
 @Suite
 struct StringValidatorTests {
-
     @Test
-    func validate_whenStringValidatorContainsMinimumLengthValidator_returnsCorrectValue() {
-        let sut = StringValidator(validators: [MinimumLengthValidator(requiredStringLength: 5)])
-
-        let testStringOne = "Seven"
-
-        #expect(sut.validate(input: testStringOne) == true)
-
-        let testStringTwo = "Six"
-
-        #expect(sut.validate(input: testStringTwo) == false)
+    func validate_valid_callsInternalValidators_returnsCorrectValue() {
+        let mockOne = MockValidator()
+        let mockTwo = MockValidator()
+        let sut = StringValidator(
+            validators: [
+                mockOne,
+                mockTwo
+            ]
+        )
+        let input = "Test"
+        let result = sut.validate(input: input)
+        #expect(result == true)
+        #expect(mockOne._validateReceivedInput == input)
+        #expect(mockTwo._validateReceivedInput == input)
     }
 
     @Test
-    func validate_whenStringValidatorContainsMaximumLengthValidator_returnsCorrectValue() {
-        let sut = StringValidator(validators: [MaximumLengthValidator(length: 5)])
-
-        let testStringOne = "Seven"
-
-        #expect(sut.validate(input: testStringOne) == true)
-
-        let testStringTwo = "Chromatic"
-
-        #expect(sut.validate(input: testStringTwo) == false)
-    }
-
-    @Test
-    func validate_whenStringIsNil_returnsFalse() {
-        let sutOne = StringValidator(validators: [MaximumLengthValidator(length: 5)])
-        #expect(sutOne.validate(input: nil) == false)
-
-        let sutTwo = StringValidator(validators: [MinimumLengthValidator(requiredStringLength: 5)])
-        #expect(sutTwo.validate(input: nil) == false)
+    func validate_invalid_returnsExpectedValue_doesntCallOtherValidators() {
+        let mockOne = MockValidator()
+        mockOne._stubbedValidateReturnValue = false
+        let mockTwo = MockValidator()
+        let sut = StringValidator(
+            validators: [
+                mockOne,
+                mockTwo
+            ]
+        )
+        let input = "Test"
+        let result = sut.validate(input: input)
+        #expect(result == false)
+        #expect(mockOne._validateReceivedInput == input)
+        #expect(mockTwo._validateReceivedInput == nil)
     }
 }

@@ -8,6 +8,6 @@ struct StringValidator: ValidatorProvider {
     }
 
     func validate(input: String?) -> Bool {
-        return !validators.map { $0.validate(input: input) }.contains(where: { $0 == false })
+        !validators.contains(where: { !$0.validate(input: input) })
     }
 }

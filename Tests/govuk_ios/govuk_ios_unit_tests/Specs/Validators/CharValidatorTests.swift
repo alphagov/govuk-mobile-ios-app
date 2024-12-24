@@ -5,7 +5,6 @@ import Foundation
 
 @Suite
 struct CharValidatorTests {
-
     @Test(arguments: [
         "*",
         "-",

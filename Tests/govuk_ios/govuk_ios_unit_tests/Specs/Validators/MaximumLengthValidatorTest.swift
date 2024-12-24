@@ -5,27 +5,27 @@ import Foundation
 
 @Suite
 struct MaximumLengthValidatorTest {
-
-    @Test
-    func validate_whenTextInputIsLessOrEqualThanRequiredStringLength_returnsTrue() async throws {
+    @Test(arguments: [
+        "A",
+        "AB",
+        "ABC",
+        "ABCD",
+        "ABCDE",
+    ])
+    func validate_whenTextInputIsLessOrEqualThanRequiredStringLength_returnsTrue(input: String) async {
         let sut = MaximumLengthValidator(length: 5)
         
-        let testStringOne = "Seven"
-
-        #expect(sut.validate(input: testStringOne) == true)
-
-        let testStringTwo = "Six"
-
-        #expect(sut.validate(input: testStringTwo) == true)
+        #expect(sut.validate(input: input) == true)
     }
 
-    @Test
-    func validate_whenTextInputIsGreaterThanRequiredStringLength_returnsFalse() async throws {
-        let sut = MaximumLengthValidator(length: 5)
+    @Test(arguments: [
+        "ABC",
+        "ABCD"
+    ])
+    func validate_whenTextInputIsGreaterThanRequiredStringLength_returnsFalse(input: String) async {
+        let sut = MaximumLengthValidator(length: 2)
 
-        let testString = "sentence"
-
-        #expect(sut.validate(input: testString) == false)
+        #expect(sut.validate(input: input) == false)
     }
 
     @Test
@@ -34,5 +34,4 @@ struct MaximumLengthValidatorTest {
 
         #expect(sut.validate(input: nil) == false)
     }
-
 }

@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 public protocol URLOpener {
     @discardableResult
@@ -8,22 +8,7 @@ public protocol URLOpener {
     func openIfPossible(_ urlString: String) -> Bool
 }
 
-extension UIApplication: URLOpener {
-    @discardableResult
-    public func openIfPossible(_ url: URL) -> Bool {
-        guard canOpenURL(url)
-        else { return false }
-        open(url, options: [:], completionHandler: nil)
-        return true
-    }
-}
-
 extension URLOpener {
-    @discardableResult
-    public func openSettings() -> Bool {
-        openIfPossible(UIApplication.openSettingsURLString)
-    }
-
     @discardableResult
     public func openIfPossible(_ urlString: String) -> Bool {
         guard let url = URL(string: urlString)

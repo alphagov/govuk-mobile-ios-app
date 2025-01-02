@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import govuk_ios
+@testable import GOVKit
 
 @Suite
 struct Date_ExtensionsTests {

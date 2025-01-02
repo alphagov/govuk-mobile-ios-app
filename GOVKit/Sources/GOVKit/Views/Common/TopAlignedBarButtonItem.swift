@@ -2,7 +2,7 @@ import UIKit
 import UIComponents
 
 public final class TopAlignedBarButtonItem: UIBarButtonItem {
-    let actionButton: UIButton
+    public let actionButton: UIButton
 
     public init(title: String,
          tint: UIColor,

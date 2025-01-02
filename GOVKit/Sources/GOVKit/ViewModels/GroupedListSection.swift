@@ -117,12 +117,12 @@ public class ToggleRow: GroupedListRow,
     }
 }
 
-struct GroupedListSection_Previews: PreviewProvider {
-    static var previews: some View {
+public struct GroupedListSection_Previews: PreviewProvider {
+    public static var previews: some View {
         Text("preview")
     }
 
-    static var previewContent: [GroupedListSection] {
+    public static var previewContent: [GroupedListSection] {
         [
             .init(
                 heading: GroupedListHeader(title: "Section 1", icon: nil),

@@ -12,6 +12,7 @@ struct LaunchCoordinatorTests {
         let mockNavigationController = UINavigationController()
         let mockViewControllerBuilder = ViewControllerBuilder.mock
         let mockAppLaunchService = MockAppLaunchService()
+        let mockAnalytics = MockAnalyticsService()
         let expectedTopics = TopicResponseItem.arrangeMultiple
         let expectedResponse = AppLaunchResponse(
             configResult: .success(.arrange),
@@ -24,6 +25,7 @@ struct LaunchCoordinatorTests {
                 navigationController: mockNavigationController,
                 viewControllerBuilder: mockViewControllerBuilder,
                 appLaunchService: mockAppLaunchService,
+                anayticsService: mockAnalytics,
                 completion: continuation.resume
             )
 

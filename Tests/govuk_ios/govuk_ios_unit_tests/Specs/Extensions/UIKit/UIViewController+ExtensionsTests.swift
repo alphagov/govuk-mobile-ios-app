@@ -11,7 +11,9 @@ struct UIViewController_ExtensionsTests {
     @Test
     @MainActor
     func viewWillReAppear_animated_callsTransitions() {
-        let subject = MockBaseViewController()
+        let subject = MockBaseViewController(
+            analyticsService: MockAnalyticsService()
+        )
         subject.viewWillReAppear(
             isAppearing: true,
             animated: false

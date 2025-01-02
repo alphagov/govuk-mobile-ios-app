@@ -1,6 +1,7 @@
 import UIKit
 import Foundation
 import Testing
+import GOVKit
 
 @testable import govuk_ios
 
@@ -81,7 +82,9 @@ struct AnalyticsServiceTests {
         )
         subject.setAcceptedAnalytics(accepted: false)
 
-        let mockViewController = MockBaseViewController()
+        let mockViewController = MockBaseViewController(
+            analyticsService: subject
+        )
         subject.track(screen: mockViewController)
 
         #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 0)
@@ -112,7 +115,9 @@ struct AnalyticsServiceTests {
         )
         subject.setAcceptedAnalytics(accepted: true)
 
-        let mockViewController = MockBaseViewController()
+        let mockViewController = MockBaseViewController(
+            analyticsService: subject
+        )
         subject.track(screen: mockViewController)
 
         let screens = mockAnalyticsClient._trackScreenReceivedScreens

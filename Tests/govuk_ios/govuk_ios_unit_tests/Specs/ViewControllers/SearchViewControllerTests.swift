@@ -13,11 +13,8 @@ struct SearchViewControllerTests {
     @Test
     func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
-        Container.shared.analyticsService.register {
-            mockAnalyticsService
-        }
         let viewModel = SearchViewModel(
-            analyticsService: MockAnalyticsService(),
+            analyticsService: mockAnalyticsService,
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             urlOpener: MockURLOpener()

@@ -45,11 +45,14 @@ struct CrashlyticsClientTests {
     @MainActor
     func trackScreen_exists_doesNothing() {
         let mockCrashlytics = MockCrashlytics()
+        let mockAnalytics = MockAnalyticsService()
         let sut = CrashlyticsClient(
             crashlytics: mockCrashlytics
         )
 
-        let expectedScreen = MockBaseViewController()
+        let expectedScreen = MockBaseViewController(
+            analyticsService: mockAnalytics
+        )
         sut.track(screen: expectedScreen)
 
         #expect(mockCrashlytics._setCrashlyticsCollectionEnabledReceivedEnabled == nil)

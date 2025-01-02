@@ -1,10 +1,10 @@
 import Foundation
 import UIKit
 import Testing
-
-@testable import govuk_ios
+@testable import GOVKit
 
 @Suite
+@MainActor
 struct ConstantsTests {
     @Test
     func govukBaseUrl_returnsExpectedResult() {

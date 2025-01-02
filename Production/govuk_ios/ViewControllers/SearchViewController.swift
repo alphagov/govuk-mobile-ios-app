@@ -4,10 +4,8 @@ import UIComponents
 private typealias DataSource = UITableViewDiffableDataSource<SearchSection, SearchItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
 
-// swiftlint:disable:next type_body_length
 class SearchViewController: BaseViewController,
-                            TrackableScreen,
-                            UITableViewDelegate {
+                            TrackableScreen {
     private let viewModel: SearchViewModel
     private let dismissAction: () -> Void
 
@@ -117,8 +115,8 @@ class SearchViewController: BaseViewController,
         super.viewDidLoad()
 
         tableView.dataSource = dataSource
-        tableView.delegate = self
         searchBar.searchTextField.delegate = self
+        setupTableViewDelegate()
 
         sheetPresentationController?.prefersGrabberVisible = true
 
@@ -291,17 +289,6 @@ class SearchViewController: BaseViewController,
         tableView.isHidden = viewModel.results?.isEmpty == true || viewModel.results == nil
     }
 
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-        guard let item = dataSource.itemIdentifier(for: indexPath)
-        else { return }
-        viewModel.selected(item: item)
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableViewHeader
-    }
-
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         errorView.invalidateIntrinsicContentSize()
@@ -314,6 +301,23 @@ extension SearchViewController: UITextFieldDelegate {
         reloadSnapshot()
 
         return true
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    func setupTableViewDelegate() {
+        tableView.delegate = self
+    }
+
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath)
+        else { return }
+        viewModel.selected(item: item)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableViewHeader
     }
 }
 

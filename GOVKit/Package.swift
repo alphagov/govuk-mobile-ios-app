@@ -13,8 +13,6 @@ let package = Package(
             targets: ["GOVKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/hmlongco/Factory",from: "2.3.2"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "11.2.0"),
         .package(url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", branch: "develop")
     ],
     targets: [
@@ -23,10 +21,6 @@ let package = Package(
         .target(
             name: "GOVKit",
             dependencies: [
-                .product(name: "Factory",
-                         package: "Factory"),
-                .product(name: "FirebaseAnalyticsWithoutAdIdSupport", package: "firebase-ios-sdk"),
-                .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
                 .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components")
             ],
             resources: [
@@ -35,7 +29,10 @@ let package = Package(
         ),
         .testTarget(
             name: "GOVKitTests",
-            dependencies: ["GOVKit"]
+            dependencies: ["GOVKit"],
+            resources: [
+                .process("Resources")
+            ]
         ),
     ]
 )

@@ -141,6 +141,7 @@ class RecentActivityListViewController: BaseViewController {
         informationScrollView.addSubview(informationView)
         removeBarButtonItem.isEnabled = false
         configureToolbarItems()
+        setEditButtonAccessibilityLabel()
     }
 
     private func configureConstraints() {
@@ -234,6 +235,12 @@ class RecentActivityListViewController: BaseViewController {
         ])
     }
 
+    private func setEditButtonAccessibilityLabel() {
+        editButtonItem.accessibilityLabel = String.recentActivity.localized(
+            "editButtonAccessibilityTitle"
+        )
+    }
+
     override func setEditing(_ editing: Bool, animated: Bool) {
         // Needs to be before super to get correct values
         trackEditingEvent()
@@ -242,8 +249,16 @@ class RecentActivityListViewController: BaseViewController {
         configureToolbarItems(animated: false)
         self.tabBarController?.tabBar.isHidden = editing
         editingToolbar.isHidden = !editing
+
         if !editing {
+            editButtonItem.accessibilityLabel = String.recentActivity.localized(
+                "editButtonAccessibilityTitle"
+            )
             viewModel.endEditing()
+        } else {
+            editButtonItem.accessibilityLabel = String.recentActivity.localized(
+                "doneButtonAccessibilityTitle"
+            )
         }
     }
 

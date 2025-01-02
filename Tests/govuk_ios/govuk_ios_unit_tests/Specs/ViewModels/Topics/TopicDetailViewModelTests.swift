@@ -2,6 +2,7 @@ import Testing
 import UIKit
 
 @testable import govuk_ios
+@testable import GOVKit
 
 struct TopicDetailViewModelTests {
 

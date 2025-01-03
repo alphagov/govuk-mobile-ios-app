@@ -168,7 +168,6 @@
 		D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046511C2C933FE600F47C66 /* String+Extensions.swift */; };
 		D0496A722D15CD6700C63623 /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0496A712D15CD6700C63623 /* GOVKit */; };
 		D04A8F4B2CD3949800685FD3 /* URLResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04A8F4A2CD3948B00685FD3 /* URLResponse+Extensions.swift */; };
-		D05182512D14947E0038923B /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D05182502D14947E0038923B /* GOVKit */; };
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
@@ -180,6 +179,7 @@
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
 		D0D655E82D26A79000571841 /* UIApplication+URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */; };
+		D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D661A22D285D1B00571841 /* GOVKitTestUtilities */; };
 		D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */; };
 		D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCD2D109B51000A3151 /* GOVKit */; };
 		D0EBFBD02D109B51000A3151 /* RecentActivity in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCF2D109B51000A3151 /* RecentActivity */; };
@@ -581,7 +581,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D05182512D14947E0038923B /* GOVKit in Frameworks */,
+				D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,7 +1213,7 @@
 			);
 			name = govuk_ios_unit_tests;
 			packageProductDependencies = (
-				D05182502D14947E0038923B /* GOVKit */,
+				D0D661A22D285D1B00571841 /* GOVKitTestUtilities */,
 			);
 			productName = GovUKTests;
 			productReference = 5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */;
@@ -2285,9 +2285,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = GOVKit;
 		};
-		D05182502D14947E0038923B /* GOVKit */ = {
+		D0D661A22D285D1B00571841 /* GOVKitTestUtilities */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = GOVKit;
+			productName = GOVKitTestUtilities;
 		};
 		D0EBFBCD2D109B51000A3151 /* GOVKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,6 +1,5 @@
 import UIKit
 import Foundation
-import Factory
 
 @MainActor
 open class BaseViewController: UIViewController {

@@ -10,7 +10,12 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "GOVKit",
-            targets: ["GOVKit"]),
+            targets: ["GOVKit"]
+        ),
+        .library(
+            name: "GOVKitTestUtilities",
+            targets: ["GOVKitTestUtilities"]
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", branch: "develop")
@@ -27,9 +32,13 @@ let package = Package(
                 .process("Resources")
             ]
         ),
+        .target(
+            name: "GOVKitTestUtilities",
+            dependencies: ["GOVKit"]
+        ),
         .testTarget(
             name: "GOVKitTests",
-            dependencies: ["GOVKit"],
+            dependencies: ["GOVKit", "GOVKitTestUtilities"],
             resources: [
                 .process("Resources")
             ]

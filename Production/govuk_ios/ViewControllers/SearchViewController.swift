@@ -5,8 +5,7 @@ private typealias DataSource = UITableViewDiffableDataSource<SearchSection, Sear
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
 
 class SearchViewController: BaseViewController,
-                            TrackableScreen,
-                            UITableViewDelegate {
+                            TrackableScreen {
     private let viewModel: SearchViewModel
     private let dismissAction: () -> Void
 
@@ -57,9 +56,27 @@ class SearchViewController: BaseViewController,
         return localSearchBar
     }()
 
+    private let tableViewHeader: UIView = {
+        let headerView = UIView()
+        let label = UILabel()
+
+        headerView.addSubview(label)
+
+        label.font = UIFont.govUK.title3Semibold
+        label.text = String.search.localized("searchResultsTitle")
+        label.accessibilityTraits = .header
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: headerView.topAnchor),
+            label.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 32),
+            label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0)
+        ])
+        return headerView
+    }()
 
     private let tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(SearchResultCell.self)
         tableView.rowHeight = UITableView.automaticDimension
@@ -98,8 +115,8 @@ class SearchViewController: BaseViewController,
         super.viewDidLoad()
 
         tableView.dataSource = dataSource
-        tableView.delegate = self
         searchBar.searchTextField.delegate = self
+        setupTableViewDelegate()
 
         sheetPresentationController?.prefersGrabberVisible = true
 
@@ -122,6 +139,7 @@ class SearchViewController: BaseViewController,
     private func configureUI() {
         title = String.search.localized("pageTitle")
         view.backgroundColor = GOVUKColors.fills.surfaceModal
+
         view.addSubview(searchBar)
         view.addSubview(tableView)
         view.addSubview(errorScrollView)
@@ -148,7 +166,7 @@ class SearchViewController: BaseViewController,
 
             tableView.topAnchor.constraint(
                 equalTo: searchBar.bottomAnchor,
-                constant: 16
+                constant: 6
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor
@@ -230,7 +248,7 @@ class SearchViewController: BaseViewController,
     }
 
     private func updateFocus() {
-        let view = errorScrollView.isHidden ? tableView : errorScrollView
+        let view = errorScrollView.isHidden ? tableViewHeader : errorScrollView
         accessibilityLayoutChanged(focusView: view)
     }
 
@@ -271,13 +289,6 @@ class SearchViewController: BaseViewController,
         tableView.isHidden = viewModel.results?.isEmpty == true || viewModel.results == nil
     }
 
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-        guard let item = dataSource.itemIdentifier(for: indexPath)
-        else { return }
-        viewModel.selected(item: item)
-    }
-
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         errorView.invalidateIntrinsicContentSize()
@@ -290,6 +301,23 @@ extension SearchViewController: UITextFieldDelegate {
         reloadSnapshot()
 
         return true
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    func setupTableViewDelegate() {
+        tableView.delegate = self
+    }
+
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath)
+        else { return }
+        viewModel.selected(item: item)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableViewHeader
     }
 }
 

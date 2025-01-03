@@ -22,6 +22,17 @@
           }
         }
       }
+    },
+    "searchResultsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search results"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

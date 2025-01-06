@@ -3,15 +3,6 @@ import UIKit
 import GOVKit
 
 extension UIBarButtonItem {
-    public static func cancel(target: Any,
-                       action: Selector) -> UIBarButtonItem {
-        UIBarButtonItem(
-            barButtonSystemItem: .cancel,
-            target: target,
-            action: action
-        )
-    }
-
     public static func selectAll(action: @escaping (UIAction) -> Void) -> UIBarButtonItem {
         let title = String.recentActivity.localized("selectAllButtonTitle")
 

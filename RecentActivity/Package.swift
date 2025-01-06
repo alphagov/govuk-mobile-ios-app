@@ -29,7 +29,12 @@ let package = Package(
         ),
         .testTarget(
             name: "RecentActivityTests",
-            dependencies: ["RecentActivity"]
+            dependencies: [
+                "RecentActivity",
+                .product(
+                    name: "GOVKitTestUtilities",
+                    package: "GOVKit")
+            ]
         ),
     ]
 )

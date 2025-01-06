@@ -26,6 +26,7 @@
 		16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */; };
 		16D17D422CC01C7600E99794 /* TopicRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D17D412CC01C6A00E99794 /* TopicRowView.swift */; };
 		16E5AD432C6D5719000B8B3A /* SearchWidgetStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */; };
+		16E8794C2D2D875D00BCC0FC /* RecentActivitySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8794B2D2D875C00BCC0FC /* RecentActivitySection.swift */; };
 		16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A402C6F8968005E820F /* SearchViewController.swift */; };
 		16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A422C6F89D9005E820F /* SearchViewModel.swift */; };
 		16EE1A452C6F8ED3005E820F /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A442C6F8ED3005E820F /* SearchCoordinator.swift */; };
@@ -285,6 +286,7 @@
 		16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		16D17D412CC01C6A00E99794 /* TopicRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRowView.swift; sourceTree = "<group>"; };
 		16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWidgetStackView.swift; sourceTree = "<group>"; };
+		16E8794B2D2D875C00BCC0FC /* RecentActivitySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivitySection.swift; sourceTree = "<group>"; };
 		16EE1A402C6F8968005E820F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		16EE1A422C6F89D9005E820F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		16EE1A442C6F8ED3005E820F /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 				5DE2834D2CAC48DC00E95800 /* ActivityItemCreateParams.swift */,
 				5DCDA0FE2CA20C2C00A6DF90 /* MonthGroupKey.swift */,
 				4E94E8D82C8B18ED00906803 /* RecentActivitiesViewStructure.swift */,
+				16E8794B2D2D875C00BCC0FC /* RecentActivitySection.swift */,
 			);
 			path = RecentActivity;
 			sourceTree = "<group>";
@@ -1601,6 +1604,7 @@
 				5DCDA0FF2CA20C2C00A6DF90 /* MonthGroupKey.swift in Sources */,
 				5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */,
 				5D0A81292CEDCD0300446F63 /* UserProperty.swift in Sources */,
+				16E8794C2D2D875D00BCC0FC /* RecentActivitySection.swift in Sources */,
 				160A02682C208B9800FE01EB /* AnalyticsService.swift in Sources */,
 				5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */,
 				5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */,

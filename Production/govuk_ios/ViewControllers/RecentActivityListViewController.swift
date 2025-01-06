@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import Foundation
 import UIKit
 
@@ -405,8 +406,4 @@ extension RecentActivityListViewController: TrackableScreen {
         viewModel.pageTitle
     }
 }
-
-struct RecentActivitySection: Hashable {
-    let title: String
-    let items: [ActivityItem]
-}
+// swiftlint:enable file_length

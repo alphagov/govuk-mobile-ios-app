@@ -1,6 +1,7 @@
 import Foundation
 import Testing
-
+import RecentActivity
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
@@ -49,12 +50,14 @@ struct SearchViewModelTests{
             description: UUID().uuidString,
             link: URL(string: "https://www.google.com/random")!
         )
-
+        
+        let expectedItem = ActivityItemCreateParams(searchItem: item)
+        
         subject.selected(
             item: item
         )
 
-        #expect(mockActivityService._receivedSaveSearchItem == item)
+        #expect(mockActivityService._receivedSaveActivity == expectedItem)
     }
 
     @Test
@@ -152,6 +155,17 @@ struct SearchViewModelTests{
     private let emptyJSONResponseData = """
     {"results": []}
     """.data(using: .utf8)!
+}
+
+// The synthesized conformance to Equatable fails for tests because Swift Testing seems to think
+// the 'id' parameter is a generic parameter for identifying views, not a String.  So need to
+// add an explicit implementation.  Declaring it here as we only require it for testing at the moment.
+extension ActivityItemCreateParams: @retroactive Equatable {
+    public static func == (lhs: ActivityItemCreateParams, rhs: ActivityItemCreateParams) -> Bool {
+        lhs.id == rhs.id &&
+        lhs.title == rhs.title &&
+        lhs.url == rhs.url
+    }
 }
 
 enum MockNetworkError: Error {

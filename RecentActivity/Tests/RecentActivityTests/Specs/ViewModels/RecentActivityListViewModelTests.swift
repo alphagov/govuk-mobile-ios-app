@@ -1,8 +1,10 @@
 import Foundation
 import Testing
 import CoreData
+import GOVKit
 
-@testable import govuk_ios
+@testable import GOVKitTestUtilities
+@testable import RecentActivity
 
 @Suite
 struct RecentActivityListViewModelTests {
@@ -30,7 +32,7 @@ struct RecentActivityListViewModelTests {
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener
         )
-        let coreData = CoreDataRepository.arrangeAndLoad
+        let coreData = TestRepository().load()
         let item = ActivityItem.arrange(
             date: .arrange("01/01/2001"),
             context: coreData.viewContext
@@ -56,7 +58,7 @@ struct RecentActivityListViewModelTests {
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener
         )
-        let coreData = CoreDataRepository.arrangeAndLoad
+        let coreData = TestRepository()
         let item = ActivityItem.arrange(
             url: "",
             context: coreData.viewContext
@@ -78,7 +80,7 @@ struct RecentActivityListViewModelTests {
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener
         )
-        let coreData = CoreDataRepository.arrangeAndLoad
+        let coreData = TestRepository()
         let item1 = ActivityItem.arrange(
             context: coreData.viewContext
         )
@@ -111,7 +113,7 @@ struct RecentActivityListViewModelTests {
             analyticsService: mockAnalyticsService,
             urlopener: mockURLOpener
         )
-        let coreData = CoreDataRepository.arrangeAndLoad
+        let coreData = TestRepository()
         let item1 = ActivityItem.arrange(
             context: coreData.viewContext
         )
@@ -142,7 +144,7 @@ struct RecentActivityListViewModelTests {
             urlopener: mockURLOpener
         )
 
-        let coreData = CoreDataRepository.arrangeAndLoad
+        let coreData = TestRepository()
         let item1 = ActivityItem.arrange(
             context: coreData.viewContext
         )
@@ -181,7 +183,7 @@ struct RecentActivityListViewModelTests {
             urlopener: mockURLOpener
         )
 
-        let coreData = CoreDataRepository.arrangeAndLoad
+        let coreData = TestRepository()
         _ = ActivityItem.arrange(
             context: coreData.viewContext
         )

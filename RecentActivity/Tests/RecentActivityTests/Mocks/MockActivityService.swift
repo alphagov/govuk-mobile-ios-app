@@ -1,14 +1,13 @@
 import Foundation
-import CoreData
+import  CoreData
+import GOVKit
 import RecentActivity
 
-@testable import govuk_ios
-
-class MockActivityRepository: ActivityRepositoryInterface {
-
-    var _receivedSaveParams: ActivityItemCreateParams?
-    func save(params: ActivityItemCreateParams) {
-        _receivedSaveParams = params
+class MockActivityService: ActivityServiceInterface {
+    
+    var _receivedSaveActivity: ActivityItemCreateParams?
+    func save(activity: ActivityItemCreateParams) {
+        _receivedSaveActivity = activity
     }
 
     var _stubbedFetchResultsController: NSFetchedResultsController<ActivityItem>!
@@ -25,4 +24,5 @@ class MockActivityRepository: ActivityRepositoryInterface {
     func deleteAll() {
         _receivedDeleteAll = true
     }
+
 }

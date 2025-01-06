@@ -2,6 +2,7 @@ import UIKit
 import Foundation
 import Testing
 import GOVKit
+import GOVKitTestUtilities
 
 @testable import govuk_ios
 

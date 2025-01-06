@@ -166,7 +166,6 @@
 		D04191802CA595400034722A /* TopicResponseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D041917F2CA595400034722A /* TopicResponseItem.swift */; };
 		D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191852CA6A5910034722A /* TopicsServiceClient.swift */; };
 		D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046511C2C933FE600F47C66 /* String+Extensions.swift */; };
-		D0496A722D15CD6700C63623 /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0496A712D15CD6700C63623 /* GOVKit */; };
 		D04A8F4B2CD3949800685FD3 /* URLResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04A8F4A2CD3948B00685FD3 /* URLResponse+Extensions.swift */; };
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
@@ -180,6 +179,7 @@
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
 		D0D655E82D26A79000571841 /* UIApplication+URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */; };
 		D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D661A22D285D1B00571841 /* GOVKitTestUtilities */; };
+		D0D9B0942D2C240E0051EDDD /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */; };
 		D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */; };
 		D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCD2D109B51000A3151 /* GOVKit */; };
 		D0EBFBD02D109B51000A3151 /* RecentActivity in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCF2D109B51000A3151 /* RecentActivity */; };
@@ -514,7 +514,6 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicOnboardingViewControllerSnapshotTests.swift,
 				"govuk_ios/govuk_ios_unit_tests/Arrangers/Model/TopicResponseItem+Arrangers.swift",
 				govuk_ios/govuk_ios_unit_tests/Mocks/Repositories/MockTopicsRepository.swift,
-				"govuk_ios/shared/Arrangers/Foundation/Date+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Foundation/URL+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Model/ActivityItem+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Model/SearchItem+Arrangers.swift",
@@ -527,7 +526,6 @@
 				govuk_ios/shared/Mocks/MockAppVersionProvider.swift,
 				govuk_ios/shared/Mocks/MockDeviceInformationProvider.swift,
 				govuk_ios/shared/Mocks/MockDisplayableTopic.swift,
-				govuk_ios/shared/Mocks/MockURLOpener.swift,
 				govuk_ios/shared/Mocks/Services/MockActivityService.swift,
 				govuk_ios/shared/Mocks/Services/MockAnalyticsService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppConfigService.swift,
@@ -556,8 +554,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0496A722D15CD6700C63623 /* GOVKit in Frameworks */,
 				5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */,
+				D0D9B0942D2C240E0051EDDD /* GOVKitTestUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,7 +1153,7 @@
 			name = govuk_ios_snapshot_tests;
 			packageProductDependencies = (
 				5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */,
-				D0496A712D15CD6700C63623 /* GOVKit */,
+				D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */,
 			);
 			productName = govuk_ios_snapshot_tests;
 			productReference = 5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */;
@@ -2281,11 +2279,11 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
 		};
-		D0496A712D15CD6700C63623 /* GOVKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GOVKit;
-		};
 		D0D661A22D285D1B00571841 /* GOVKitTestUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GOVKitTestUtilities;
+		};
+		D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GOVKitTestUtilities;
 		};

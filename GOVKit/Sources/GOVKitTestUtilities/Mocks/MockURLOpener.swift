@@ -2,15 +2,19 @@ import UIKit
 
 @testable import GOVKit
 
-public class MockURLOpener: URLOpener {
+class MockURLOpener: URLOpener {
 
     var _stubbedOpenResult: Bool = true
     
     var _receivedOpenIfPossibleUrl: URL?
-    
-    public init() {}
-    public func openIfPossible(_ url: URL) -> Bool {
+    func openIfPossible(_ url: URL) -> Bool {
         _receivedOpenIfPossibleUrl = url
+        return _stubbedOpenResult
+    }
+    
+    var _receivedOpenIfPossibleUrlString: String?
+    func openIfPossible(_ urlString: String) -> Bool {
+        _receivedOpenIfPossibleUrlString = urlString
         return _stubbedOpenResult
     }
 }

@@ -34,14 +34,4 @@ class MockAnalyticsService: AnalyticsServiceInterface
     var permissionState: AnalyticsPermissionState {
         _stubbedPermissionState
     }
-
-//    var _trackOnboardingEventEvent: OnboardingEvent?
-//    func trackOnboardingEvent(_ event: OnboardingEvent) {
-//        _trackOnboardingEventEvent = event
-//    }
-//
-//    var _trackOnboardingScreenScreen: OnboardingScreen?
-//    func trackOnboardingScreen(_ screen: OnboardingScreen) {
-//        _trackOnboardingScreenScreen = screen
-//    }
 }

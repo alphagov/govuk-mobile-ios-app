@@ -3,6 +3,7 @@ import Testing
 
 import FirebaseAnalytics
 import GOVKit
+import GOVKitTestUtilities
 
 @testable import govuk_ios
 

@@ -6,13 +6,12 @@ import GOVKit
 class TestRepository: CoreDataRepositoryInterface {
     
     private let persistentContainer: NSPersistentContainer
+    private let notificationCenter: NotificationCenter = .default
     lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
     lazy var backgroundContext: NSManagedObjectContext = persistentContainer.newBackgroundContext()
     
     init() {
         persistentContainer = Self.arrange()
-        viewContext = persistentContainer.viewContext
-        backgroundContext = persistentContainer.newBackgroundContext()
     }
     
     static func arrange() -> NSPersistentContainer {
@@ -62,6 +61,31 @@ class TestRepository: CoreDataRepositoryInterface {
                 fatalError("Unable to load persistent stores: \(error)")
             }
         })
+        addBackgroundObserver()
+        addViewObserver()
         return self
     }
+    
+    private func addViewObserver() {
+        notificationCenter.addObserver(
+            forName: .NSManagedObjectContextDidSave,
+            object: viewContext,
+            queue: .main,
+            using: { [weak self] notification in
+                self?.backgroundContext.mergeChanges(fromContextDidSave: notification)
+            }
+        )
+    }
+
+    private func addBackgroundObserver() {
+        notificationCenter.addObserver(
+            forName: .NSManagedObjectContextDidSave,
+            object: backgroundContext,
+            queue: .main,
+            using: { [weak self] notification in
+                self?.viewContext.mergeChanges(fromContextDidSave: notification)
+            }
+        )
+    }
+
 }

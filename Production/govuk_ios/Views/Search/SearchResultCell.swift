@@ -87,7 +87,8 @@ class SearchResultCell: UITableViewCell {
     private func setupConstrains() {
         NSLayoutConstraint.activate([
             card.topAnchor.constraint(
-                equalTo: contentView.topAnchor
+                equalTo: contentView.topAnchor,
+                constant: 16
             ),
             card.leadingAnchor.constraint(
                 equalTo: contentView.layoutMarginsGuide.leadingAnchor
@@ -96,7 +97,7 @@ class SearchResultCell: UITableViewCell {
                 equalTo: contentView.layoutMarginsGuide.trailingAnchor
             ),
             card.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor, constant: -16
+                equalTo: contentView.bottomAnchor
             ),
 
             titleLabel.topAnchor.constraint(

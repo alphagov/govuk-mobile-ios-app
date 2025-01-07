@@ -28,6 +28,7 @@ public final class RecentActivityListViewController: BaseViewController {
         localLabel.textAlignment = .left
         localLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         localLabel.text = viewModel.pageTitle
+        localLabel.accessibilityTraits = .header
         return localLabel
     }()
 

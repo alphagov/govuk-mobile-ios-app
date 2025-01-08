@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import Testing
-import GOVKitTestUtilities
+@testable import GOVKitTestUtilities
 
 @testable import GOVKit
 
@@ -10,7 +10,7 @@ import GOVKitTestUtilities
 struct UIApplication_URLOpenerTests {
     @Test
     func openIfPossible_string_invalidURL_returnsFalse() {
-        let sut = MockURLOpener()
+        let sut = TestURLOpener()
         let result = sut.openIfPossible("")
 
         #expect(result == false)
@@ -18,9 +18,15 @@ struct UIApplication_URLOpenerTests {
 
     @Test
     func openIfPossible_string_valueURL_returnsTrue() {
-        let sut = MockURLOpener()
+        let sut = TestURLOpener()
         let result = sut.openIfPossible("https://www.gov.uk")
 
         #expect(result == true)
+    }
+}
+
+struct TestURLOpener: URLOpener {
+    func openIfPossible(_ url: URL) -> Bool {
+        true
     }
 }

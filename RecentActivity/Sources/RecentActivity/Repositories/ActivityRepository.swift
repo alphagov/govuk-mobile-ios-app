@@ -44,12 +44,14 @@ public struct ActivityRepository: ActivityRepositoryInterface {
         let fetchContext = context ?? coreData.viewContext
         let request = ActivityItem.fetchRequest()
         request.predicate = predicate
-        return NSFetchedResultsController<ActivityItem>(
+        let controller = NSFetchedResultsController<ActivityItem>(
             fetchRequest: request,
             managedObjectContext: fetchContext,
             sectionNameKeyPath: nil,
             cacheName: nil
-        ).fetch()
+        )
+        try? controller.performFetch()
+        return controller
     }
 
     public func delete(objectIds: [NSManagedObjectID]) {

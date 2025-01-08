@@ -160,7 +160,7 @@ struct RecentActivityListViewModelTests {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        resultsController.fetch()
+        try? resultsController.performFetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
         sut.fetchActivities()
@@ -199,7 +199,7 @@ struct RecentActivityListViewModelTests {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        resultsController.fetch()
+        try? resultsController.performFetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
         sut.fetchActivities()

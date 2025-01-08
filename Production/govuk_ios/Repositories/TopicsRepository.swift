@@ -88,11 +88,13 @@ struct TopicsRepository: TopicsRepositoryInterface {
         let fetchContext = context ?? coreData.viewContext
         let request = Topic.fetchRequest()
         request.predicate = predicate
-        return NSFetchedResultsController(
+        let controller = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: fetchContext,
             sectionNameKeyPath: nil,
             cacheName: nil
-        ).fetch()
+        )
+        try? controller.performFetch()
+        return controller
     }
 }

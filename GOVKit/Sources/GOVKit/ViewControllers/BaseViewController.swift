@@ -3,7 +3,7 @@ import Foundation
 
 @MainActor
 open class BaseViewController: UIViewController {
-    private(set) public var analyticsService: AnalyticsServiceInterface
+    public let analyticsService: AnalyticsServiceInterface
 
     public init(analyticsService: AnalyticsServiceInterface) {
         self.analyticsService = analyticsService

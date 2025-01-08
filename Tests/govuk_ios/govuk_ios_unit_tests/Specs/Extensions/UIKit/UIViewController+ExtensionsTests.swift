@@ -1,8 +1,8 @@
 import Foundation
 
 import Testing
-import GOVKitTestUtilities
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

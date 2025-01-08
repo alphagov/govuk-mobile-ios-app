@@ -4,7 +4,8 @@ class TestViewController: BaseViewController {
     private let viewModel: TestViewModel
 
     private lazy var primaryButton: UIButton = {
-        let localView = UIButton(frame: .zero)
+        let configuration = UIButton.Configuration.plain()
+        let localView = UIButton(configuration: configuration)
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.setTitle(viewModel.primaryTitle, for: .normal)
         localView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
@@ -14,7 +15,8 @@ class TestViewController: BaseViewController {
     }()
 
     private lazy var secondaryButton: UIButton = {
-        let localView = UIButton(frame: .zero)
+        let configuration = UIButton.Configuration.plain()
+        let localView = UIButton(configuration: configuration)
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.setTitle(viewModel.secondaryTitle, for: .normal)
         localView.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true

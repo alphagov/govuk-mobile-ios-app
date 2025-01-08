@@ -17,6 +17,6 @@ public final class DividerView: UIView {
     }
 
     private func configureConstraints() {
-        heightAnchor.constraint(equalToConstant: 0.33).isActive = true
+        heightAnchor.constraint(equalToConstant: SinglePixelLineHelper.pixelSize).isActive = true
     }
 }

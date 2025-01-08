@@ -4,8 +4,8 @@ import GOVKit
 
 @objc(ActivityItem)
 public class ActivityItem: NSManagedObject,
-                    Identifiable,
-                    GroupedListRow {
+                           Identifiable,
+                           GroupedListRow {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ActivityItem> {
         let request: NSFetchRequest<ActivityItem> = .init(
             entityName: "ActivityItem"

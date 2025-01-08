@@ -21,7 +21,7 @@ extension String {
         }
 
         public func localized(_ key: String,
-                       comment: String = "") -> String {
+                              comment: String = "") -> String {
             NSLocalizedString(
                 key,
                 tableName: tableName,

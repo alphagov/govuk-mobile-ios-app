@@ -2,8 +2,8 @@ import Foundation
 
 extension AppEvent {
     public static func buttonFunction(text: String,
-                               section: String,
-                               action: String) -> AppEvent {
+                                      section: String,
+                                      action: String) -> AppEvent {
         function(
             text: text,
             type: "Button",
@@ -13,9 +13,9 @@ extension AppEvent {
     }
 
     public static func function(text: String,
-                         type: String,
-                         section: String,
-                         action: String) -> AppEvent {
+                                type: String,
+                                section: String,
+                                action: String) -> AppEvent {
         .init(
             name: "Function",
             params: [

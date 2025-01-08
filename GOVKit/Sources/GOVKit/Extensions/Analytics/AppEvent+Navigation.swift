@@ -2,9 +2,9 @@ import Foundation
 
 extension AppEvent {
     public static func navigation(text: String,
-                           type: String,
-                           external: Bool,
-                           additionalParams: [String: Any?] = [:]) -> AppEvent {
+                                  type: String,
+                                  external: Bool,
+                                  additionalParams: [String: Any?] = [:]) -> AppEvent {
         let params: [String: Any?] = [
             "text": text,
             "type": type,

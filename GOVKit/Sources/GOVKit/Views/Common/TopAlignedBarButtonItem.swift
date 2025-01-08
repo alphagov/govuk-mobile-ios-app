@@ -5,8 +5,8 @@ public final class TopAlignedBarButtonItem: UIBarButtonItem {
     public let actionButton: UIButton
 
     public init(title: String,
-         tint: UIColor,
-         action: @escaping (UIAction) -> Void) {
+                tint: UIColor,
+                action: @escaping (UIAction) -> Void) {
         actionButton = UIButton(
             type: .system,
             primaryAction: .init(title: title, handler: action)

@@ -15,6 +15,8 @@ class CoreDataRepository: CoreDataRepositoryInterface {
     func load() -> Self {
         persistentContainer.persistentStoreDescriptions.forEach { [weak self] in
             self?.setDescriptionProtection(description: $0)
+            $0.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+            $0.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
         }
         persistentContainer.loadPersistentStores(
             completionHandler: { [weak self] description, error in

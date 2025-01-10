@@ -5,6 +5,7 @@ import GOVKit
 private typealias DataSource = UITableViewDiffableDataSource<SearchSection, SearchItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
 
+// swiftlint: disable:next type_body_length
 class SearchViewController: BaseViewController,
                             TrackableScreen {
     private let viewModel: SearchViewModel
@@ -99,6 +100,18 @@ class SearchViewController: BaseViewController,
         return localDataSource
     }()
 
+    private lazy var searchHistoryViewController: SearchHistoryViewController = {
+        let localController = SearchHistoryViewController(
+            viewModel: viewModel.searchHistoryViewModel,
+            selectionAction: { searchText in
+                self.searchBar.text = searchText
+                self.searchReturnPressed()
+            }
+        )
+        localController.view.translatesAutoresizingMaskIntoConstraints = false
+        return localController
+    }()
+
     var trackingName: String { "Search" }
 
     init(viewModel: SearchViewModel,
@@ -145,6 +158,11 @@ class SearchViewController: BaseViewController,
         view.addSubview(tableView)
         view.addSubview(errorScrollView)
         errorScrollView.addSubview(errorView)
+
+        addChild(self.searchHistoryViewController)
+        view.addSubview(searchHistoryViewController.view)
+        searchHistoryViewController.didMove(toParent: self)
+        searchHistoryViewController.view.isHidden = viewModel.historyIsEmpty
     }
 
     private func configureConstraints() {
@@ -175,7 +193,19 @@ class SearchViewController: BaseViewController,
             tableView.leftAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leftAnchor
             ),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            searchHistoryViewController.view.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor,
+                constant: 6
+            ),
+            searchHistoryViewController.view.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor
+            ),
+            searchHistoryViewController.view.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor
+            ),
+            searchHistoryViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -246,6 +276,7 @@ class SearchViewController: BaseViewController,
                 self?.updateFocus()
             }
         )
+        searchHistoryViewController.hide()
     }
 
     private func updateFocus() {
@@ -300,7 +331,8 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         viewModel.clearResults()
         reloadSnapshot()
-
+        searchHistoryViewController.reloadSnapshot()
+        searchHistoryViewController.show()
         return true
     }
 }

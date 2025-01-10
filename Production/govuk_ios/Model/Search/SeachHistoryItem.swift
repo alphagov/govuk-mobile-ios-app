@@ -17,8 +17,8 @@ class SearchHistoryItem: NSManagedObject,
         return request
     }
 
-    @NSManaged public var searchText: String?
-    @NSManaged public var date: Date?
+    @NSManaged public var searchText: String
+    @NSManaged public var date: Date
 
     func update(searchText: String,
                 date: Date) {

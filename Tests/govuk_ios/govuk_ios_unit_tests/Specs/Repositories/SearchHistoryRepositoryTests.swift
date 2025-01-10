@@ -35,14 +35,14 @@ struct SearchHistoryRepositoryTests {
         let expectedSearchString = UUID().uuidString
         let expectedDate = Date()
         
-        let item = sut.save(searchText: expectedSearchString,
-                            date: expectedDate)
+        sut.save(searchText: expectedSearchString,
+                 date: expectedDate)
         let items = sut.fetchAll()
         #expect(items.count == 1)
         
         let updatedDate = Date() + 10
-        let updatedItem = sut.save(searchText: expectedSearchString,
-                                   date: updatedDate)
+        sut.save(searchText: expectedSearchString,
+                 date: updatedDate)
         let updatedItems = sut.fetchAll()
         #expect(updatedItems.count == 1)
         #expect(updatedItems.first?.searchText == expectedSearchString)

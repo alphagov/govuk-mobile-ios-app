@@ -31,7 +31,8 @@ extension Container {
     var searchService: Factory<SearchServiceInterface> {
         Factory(self) {
             SearchService(
-                serviceClient: self.searchServiceClient()
+                serviceClient: self.searchServiceClient(),
+                repository: self.searchHistoryRepository()
             )
         }
     }

@@ -16,4 +16,10 @@ extension Container {
             TopicsRepository(coreData: self.coreDataRepository())
         }
     }
+
+    var searchHistoryRepository: Factory<SearchHistoryRepositoryInterface> {
+        Factory(self) {
+            SearchHistoryRepository(coreData: self.coreDataRepository())
+        }
+    }
 }

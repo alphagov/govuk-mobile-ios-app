@@ -2,9 +2,10 @@ import Foundation
 import CoreData
 
 protocol SearchHistoryRepositoryInterface {
+    @discardableResult
     func save(searchText: String,
               date: Date) -> SearchHistoryItem
-    func fetchAll() -> [SearchHistoryItem]
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
 }
 
 struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
@@ -12,10 +13,6 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
 
     init(coreData: CoreDataRepositoryInterface) {
         self.coreData = coreData
-    }
-
-    func fetchAll() -> [SearchHistoryItem] {
-        return fetch()
     }
 
     @discardableResult
@@ -33,6 +30,16 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
         return searchHistoryItem
     }
 
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> {
+        let fetchRequest = SearchHistoryItem.fetchRequest()
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                    managedObjectContext: coreData.viewContext,
+                                                    sectionNameKeyPath: nil,
+                                                    cacheName: nil)
+        try? controller.performFetch()
+        return controller
+    }
+
     private func pruneSearchHistoryItems(_ context: NSManagedObjectContext) {
         let items = fetch(context: context)
         if items.count > 5 {
@@ -41,10 +48,9 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
     }
 
     private func fetch(predicate: NSPredicate? = nil,
-                       context: NSManagedObjectContext? = nil) -> [SearchHistoryItem] {
-        let fetchContext = context ?? coreData.viewContext
+                       context: NSManagedObjectContext) -> [SearchHistoryItem] {
         let fetchRequest = SearchHistoryItem.fetchRequest()
         fetchRequest.predicate = predicate
-        return (try? fetchContext.fetch(fetchRequest)) ?? []
+        return (try? context.fetch(fetchRequest)) ?? []
     }
 }

@@ -48,7 +48,10 @@ struct AnalyticsConsentContainerView: View {
             Divider()
                 .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
-            AdaptiveStack {
+            let buttonLayout = verticalSizeClass == .compact ?
+            AnyLayout(HStackLayout()) :
+            AnyLayout(VStackLayout())
+            buttonLayout {
                 SwiftUIButton(
                     .primary,
                     viewModel: viewModel.allowButtonViewModel

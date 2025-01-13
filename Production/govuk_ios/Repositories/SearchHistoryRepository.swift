@@ -2,9 +2,9 @@ import Foundation
 import CoreData
 
 protocol SearchHistoryRepositoryInterface {
-    @discardableResult
     func save(searchText: String,
-              date: Date) -> SearchHistoryItem
+              date: Date)
+    func clearSearchHistory()
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
 }
 
@@ -15,9 +15,8 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
         self.coreData = coreData
     }
 
-    @discardableResult
     func save(searchText: String,
-              date: Date) -> SearchHistoryItem {
+              date: Date) {
         let context = coreData.backgroundContext
         let searchHistoryItem = fetch(
             predicate: .init(format: "searchText = %@", searchText),
@@ -27,7 +26,13 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
         searchHistoryItem.date = date
         pruneSearchHistoryItems(context)
         try? context.save()
-        return searchHistoryItem
+    }
+
+    func clearSearchHistory() {
+        fetch(context: coreData.backgroundContext).forEach {
+            coreData.backgroundContext.delete($0)
+        }
+        try? coreData.backgroundContext.save()
     }
 
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> {

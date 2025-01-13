@@ -18,7 +18,7 @@ struct SearchHistoryRepositoryTests {
         
         sut.save(searchText: expectedSearchString,
                  date: expectedDate)
-        let items = sut.fetchAll()
+        let items = try #require(sut.fetchedResultsController.fetchedObjects)
         
         #expect(items.count == 1)
         #expect(items.first?.searchText == expectedSearchString)
@@ -37,13 +37,13 @@ struct SearchHistoryRepositoryTests {
         
         sut.save(searchText: expectedSearchString,
                  date: expectedDate)
-        let items = sut.fetchAll()
+        let items = try #require(sut.fetchedResultsController.fetchedObjects)
         #expect(items.count == 1)
         
         let updatedDate = Date() + 10
         sut.save(searchText: expectedSearchString,
                  date: updatedDate)
-        let updatedItems = sut.fetchAll()
+        let updatedItems = try #require(sut.fetchedResultsController.fetchedObjects)
         #expect(updatedItems.count == 1)
         #expect(updatedItems.first?.searchText == expectedSearchString)
         #expect(updatedItems.first?.date == updatedDate)
@@ -61,13 +61,33 @@ struct SearchHistoryRepositoryTests {
                      date: .init())
         }
         
-        var items = sut.fetchAll()
+        var items = try #require(sut.fetchedResultsController.fetchedObjects)
         #expect(items.count == 5)
         
-        let newItem = sut.save(searchText: "latest search",
-                               date: .init())
-        items = sut.fetchAll()
+        sut.save(searchText: "latest search",
+                 date: .init())
+        items = try #require(sut.fetchedResultsController.fetchedObjects)
         #expect(items.count == 5)
-        #expect(items.first?.searchText == newItem.searchText)
+        #expect(items.first?.searchText == "latest search")
+    }
+    
+    @Test
+    func clear_removesAllItems() throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = SearchHistoryRepository(
+            coreData: coreData
+        )
+        
+        for _ in 0..<5 {
+            sut.save(searchText: UUID().uuidString,
+                     date: .init())
+        }
+        
+        var items = try #require(sut.fetchedResultsController.fetchedObjects)
+        #expect(items.count == 5)
+        
+        sut.clearSearchHistory()
+        items = try #require(sut.fetchedResultsController.fetchedObjects)
+        #expect(items.count == 0)
     }
 }

@@ -1,8 +1,24 @@
 import Foundation
+import CoreData
 
 @testable import govuk_ios
 
-class MockSearchService: SearchServiceInterface {    
+class MockSearchService: SearchServiceInterface {
+    var _didCallSaveSearchHistory: Bool = false
+    func save(searchText: String, date: Date) {
+        _didCallSaveSearchHistory = true
+    }
+    
+    var _didCallClearSearchHistory: Bool = false
+    func clearSearchHistory() {
+        _didCallClearSearchHistory = true
+    }
+    
+    var _stubbedFetchResultsController: NSFetchedResultsController<SearchHistoryItem>!
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> {
+        _stubbedFetchResultsController
+    }
+    
     var _searchReceivedTerm: String?
     var _stubbedSearchResult: Result<SearchResult, SearchError>?
     var _searchReceivedCompletion: ((Result<SearchResult, SearchError>) -> Void)?

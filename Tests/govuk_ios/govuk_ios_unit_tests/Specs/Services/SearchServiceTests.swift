@@ -9,8 +9,10 @@ struct SearchServiceTests {
     @Test
     func search_callsServiceClient() {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRespository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRespository
         )
         let expectedTerm = UUID().uuidString
         sut.search(
@@ -23,8 +25,10 @@ struct SearchServiceTests {
     @Test
     func search_success_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRespository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRespository
         )
         let expectedSearchResult = SearchResult(
             results: [
@@ -50,8 +54,10 @@ struct SearchServiceTests {
     @Test
     func search_failure_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRespository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRespository
         )
         mockServiceClient._stubbedSearchResult = .failure(.apiUnavailable)
         let result = await withCheckedContinuation { continuation in
@@ -69,8 +75,10 @@ struct SearchServiceTests {
     @Test
     func search_success_noResults_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRepository
         )
         let stubbedResult = SearchResult(results: [])
         mockServiceClient._stubbedSearchResult = .success(stubbedResult)

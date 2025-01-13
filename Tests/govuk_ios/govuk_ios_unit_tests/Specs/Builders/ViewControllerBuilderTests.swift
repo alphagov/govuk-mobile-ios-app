@@ -9,29 +9,6 @@ import Factory
 @MainActor
 @Suite
 struct ViewControllerBuilderTests {
-    @Test
-    func driving_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.driving(
-            showPermitAction: {},
-            presentPermitAction: {}
-        )
-
-        #expect(result is TestViewController)
-        #expect(result.title == "Driving")
-    }
-
-    @Test
-    func permit_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.permit(
-            permitId: "123",
-            finishAction: {}
-        )
-
-        #expect(result is TestViewController)
-        #expect(result.title == "Permit - 123")
-    }
 
     @Test
     func home_returnsExpectedResult() {

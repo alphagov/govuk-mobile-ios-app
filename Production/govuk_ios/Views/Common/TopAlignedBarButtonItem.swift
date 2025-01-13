@@ -6,14 +6,17 @@ class TopAlignedBarButtonItem: UIBarButtonItem {
     init(title: String,
          tint: UIColor,
          action: @escaping (UIAction) -> Void) {
+        let configuration = UIButton.Configuration.plain()
         actionButton = UIButton(
-            type: .system,
-            primaryAction: .init(title: title, handler: action)
+            configuration: configuration,
+            primaryAction: .init(
+                title: title,
+                handler: action
+            )
         )
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.titleLabel?.font = UIFont.govUK.body
         actionButton.tintColor = tint
-
         super.init()
         self.customView = createCustomView()
         self.customView?.isUserInteractionEnabled = true

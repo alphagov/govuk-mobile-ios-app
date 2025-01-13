@@ -8,12 +8,60 @@ private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchHistorySection, 
 final class SearchHistoryViewController: BaseViewController {
     private let viewModel: SearchHistoryViewModel
     private let selectionAction: ((String) -> Void)
+
     private let tableView: UITableView = {
-        let localView = UITableView(frame: .zero)
+        let localView = UITableView(frame: .zero, style: .grouped)
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.register(UITableViewCell.self)
+        localView.rowHeight = UITableView.automaticDimension
         localView.backgroundColor = UIColor.govUK.fills.surfaceModal
         return localView
+    }()
+
+    private lazy var tableViewHeader: UIView = {
+        let headerView = UIView()
+
+        let label = UILabel()
+        label.font = UIFont.govUK.bodySemibold
+        label.text = String.search.localized("searchHistoryTitle")
+        label.accessibilityTraits = .header
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .left
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+
+        let button: UIButton = .body(
+            title: String.search.localized("clearHistoryButtonTitle"),
+            accessibilityLabel: String.search.localized("clearHistoryButtonAccessibilityLabel")
+        ) {
+            self.present(UIAlertController.destructiveAlert(
+                title: String.search.localized("clearHistoryAlertTitle"),
+                buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
+                message: String.search.localized("clearHistoryAlertMessage"),
+                handler: {
+                self.hide()
+                self.viewModel.clearSearchHistory()
+                self.reloadSnapshot()
+            }), animated: true)
+        }
+
+        let stackView: UIStackView = .init(arrangedSubviews: [label, UIView(), button])
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.alignment = .firstBaseline
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(stackView)
+
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: headerView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
+        ])
+        return headerView
     }()
 
     private lazy var dataSource: DataSource = {
@@ -23,8 +71,10 @@ final class SearchHistoryViewController: BaseViewController {
                 let cell: UITableViewCell = tableView.dequeue(indexPath: indexPath)
                 var configuration = cell.defaultContentConfiguration()
                 configuration.text = item.searchText
+                configuration.axesPreservingSuperviewLayoutMargins = .vertical
                 cell.contentConfiguration = configuration
                 cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .none
                 return cell
             }
         )
@@ -85,6 +135,10 @@ extension SearchHistoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         selectionAction(viewModel.searchHistoryItems[indexPath.row].searchText)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableViewHeader
     }
 }
 

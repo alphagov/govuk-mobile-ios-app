@@ -200,10 +200,12 @@ class SearchViewController: BaseViewController,
                 constant: 6
             ),
             searchHistoryViewController.view.rightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.rightAnchor
+                equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                constant: -16
             ),
             searchHistoryViewController.view.leftAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leftAnchor
+                equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                constant: 16
             ),
             searchHistoryViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])

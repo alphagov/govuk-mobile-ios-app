@@ -22,6 +22,10 @@ class SearchHistoryViewModel: NSObject {
                                date: Date) {
         searchService.save(searchText: searchText, date: date)
     }
+
+    func clearSearchHistory() {
+        searchService.clearSearchHistory()
+    }
 }
 
 extension SearchHistoryViewModel: NSFetchedResultsControllerDelegate {

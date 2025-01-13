@@ -4,8 +4,9 @@ import CoreData
 protocol SearchServiceInterface {
     func search(_ term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
-    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
     func save(searchText: String, date: Date)
+    func clearSearchHistory()
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
 }
 
 class SearchService: SearchServiceInterface {
@@ -40,5 +41,9 @@ class SearchService: SearchServiceInterface {
 
     func save(searchText: String, date: Date) {
         repository.save(searchText: searchText, date: date)
+    }
+
+    func clearSearchHistory() {
+        repository.clearSearchHistory()
     }
 }

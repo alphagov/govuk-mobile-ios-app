@@ -14,7 +14,10 @@ struct TopicsButtonView: View {
             .background(Color(UIColor.govUK.strokes.listDivider))
             .ignoresSafeArea(edges: [.leading, .trailing])
             .padding([.top], 0)
-        AdaptiveStack {
+        let buttonLayout = verticalSizeClass == .compact ?
+        AnyLayout(HStackLayout()) :
+        AnyLayout(VStackLayout())
+        buttonLayout {
             SwiftUIButton(
                 .primary,
                 viewModel: viewModel.primaryButtonViewModel

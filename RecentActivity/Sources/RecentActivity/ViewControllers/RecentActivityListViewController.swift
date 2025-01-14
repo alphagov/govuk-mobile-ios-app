@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import Foundation
 import UIKit
 import UIComponents
@@ -143,6 +144,7 @@ public final class RecentActivityListViewController: BaseViewController {
         informationScrollView.addSubview(informationView)
         removeBarButtonItem.isEnabled = false
         configureToolbarItems()
+        setEditButtonAccessibilityLabel()
     }
 
     private func configureConstraints() {
@@ -236,6 +238,12 @@ public final class RecentActivityListViewController: BaseViewController {
         ])
     }
 
+    private func setEditButtonAccessibilityLabel() {
+        editButtonItem.accessibilityLabel = String.recentActivity.localized(
+            "editButtonAccessibilityTitle"
+        )
+    }
+
     override public func setEditing(_ editing: Bool, animated: Bool) {
         // Needs to be before super to get correct values
         trackEditingEvent()
@@ -244,8 +252,16 @@ public final class RecentActivityListViewController: BaseViewController {
         configureToolbarItems(animated: false)
         self.tabBarController?.tabBar.isHidden = editing
         editingToolbar.isHidden = !editing
+
         if !editing {
+            editButtonItem.accessibilityLabel = String.recentActivity.localized(
+                "editButtonAccessibilityTitle"
+            )
             viewModel.endEditing()
+        } else {
+            editButtonItem.accessibilityLabel = String.recentActivity.localized(
+                "doneButtonAccessibilityTitle"
+            )
         }
     }
 
@@ -392,8 +408,4 @@ extension RecentActivityListViewController: TrackableScreen {
         viewModel.pageTitle
     }
 }
-
-struct RecentActivitySection: Hashable {
-    let title: String
-    let items: [ActivityItem]
-}
+// swiftlint:enable file_length

@@ -5,7 +5,8 @@ extension UIButton {
     static func body(title: String,
                      accessibilityLabel: String? = nil,
                      action: @escaping () -> Void) -> UIButton {
-        let button = UIButton(type: .system)
+        let configuration = UIButton.Configuration.plain()
+        let button = UIButton(configuration: configuration)
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.govUK.body
         button.titleLabel?.adjustsFontForContentSizeCategory = true

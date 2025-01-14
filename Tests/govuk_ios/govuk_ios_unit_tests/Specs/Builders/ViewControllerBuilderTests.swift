@@ -12,6 +12,7 @@ import RecentActivity
 @MainActor
 @Suite
 struct ViewControllerBuilderTests {
+
     @Test
     func home_returnsExpectedResult() {
         let subject = ViewControllerBuilder()

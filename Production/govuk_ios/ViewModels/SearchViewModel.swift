@@ -1,4 +1,6 @@
 import UIKit
+import GOVKit
+import RecentActivity
 
 enum SearchError: Error {
     case apiUnavailable
@@ -8,7 +10,7 @@ enum SearchError: Error {
 }
 
 class SearchViewModel {
-    private let analyticsService: AnalyticsServiceInterface
+    let analyticsService: AnalyticsServiceInterface
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
     let urlOpener: URLOpener

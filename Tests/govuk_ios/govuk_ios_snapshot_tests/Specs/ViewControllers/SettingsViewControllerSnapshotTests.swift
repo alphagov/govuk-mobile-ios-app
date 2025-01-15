@@ -1,7 +1,9 @@
 import Foundation
 import XCTest
 import UIKit
+import GOVKit
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor
@@ -66,7 +68,7 @@ class GroupedListViewModel: SettingsViewModelInterface {
     var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent.dropLast()
     var scrollToTop: Bool = false
 
-    func trackScreen(screen: any govuk_ios.TrackableScreen) {
+    func trackScreen(screen: any TrackableScreen) {
         // Do Nothing
     }
 }

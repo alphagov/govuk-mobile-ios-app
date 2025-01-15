@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import GOVKit
 
 class HomeViewController: BaseViewController,
                           UIScrollViewDelegate {
@@ -29,7 +30,7 @@ class HomeViewController: BaseViewController,
 
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: viewModel.analyticsService)
         title = String.home.localized("pageTitle")
     }
 

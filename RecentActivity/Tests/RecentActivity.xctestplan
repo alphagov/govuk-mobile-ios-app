@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "9229458D-7343-4D4B-8019-7EA390EFB18C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "RecentActivityTests",
+        "name" : "RecentActivityTests"
+      }
+    }
+  ],
+  "version" : 1
+}

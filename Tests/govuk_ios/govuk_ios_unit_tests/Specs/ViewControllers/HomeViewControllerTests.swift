@@ -31,9 +31,6 @@ struct HomeViewControllerTests {
     @Test
     func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
-        Container.shared.analyticsService.register {
-            mockAnalyticsService
-        }
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             topicAction: { _ in },
@@ -41,7 +38,7 @@ struct HomeViewControllerTests {
             allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
-            analyticsService: MockAnalyticsService(),
+            analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             searchAction: { () -> Void in _ = true },

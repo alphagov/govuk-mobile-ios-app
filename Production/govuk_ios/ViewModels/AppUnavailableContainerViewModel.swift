@@ -1,6 +1,7 @@
 import Foundation
 import UIComponents
 import UIKit
+import GOVKit
 
 class AppUnavailableContainerViewModel: ObservableObject {
     private let urlOpener: URLOpener

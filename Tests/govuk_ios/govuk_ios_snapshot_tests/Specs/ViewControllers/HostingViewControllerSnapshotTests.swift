@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import CoreData
+import GOVKit
 
 @testable import govuk_ios
 

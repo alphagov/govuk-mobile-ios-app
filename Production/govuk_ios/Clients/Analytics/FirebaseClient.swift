@@ -1,6 +1,7 @@
 import Foundation
 
 import Firebase
+import GOVKit
 
 struct FirebaseClient: AnalyticsClient {
     private let firebaseApp: FirebaseAppInterface.Type

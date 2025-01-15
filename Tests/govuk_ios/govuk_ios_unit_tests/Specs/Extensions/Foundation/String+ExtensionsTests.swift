@@ -3,6 +3,7 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
+@testable import GOVKit
 
 @Suite
 struct String_ExtensionsTests {

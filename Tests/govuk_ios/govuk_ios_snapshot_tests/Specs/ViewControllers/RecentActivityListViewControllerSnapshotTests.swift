@@ -1,7 +1,9 @@
 import Foundation
 import XCTest
 import CoreData
+import RecentActivity
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor
@@ -36,7 +38,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        resultsController.fetch()
+        try? resultsController.performFetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
         let viewController = RecentActivityListViewController(
@@ -89,7 +91,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        resultsController.fetch()
+        try? resultsController.performFetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
         let viewController = RecentActivityListViewController(
@@ -142,7 +144,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        resultsController.fetch()
+        try? resultsController.performFetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
         let viewController = RecentActivityListViewController(
@@ -192,7 +194,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        resultsController.fetch()
+        try? resultsController.performFetch()
         mockActivityService._stubbedFetchResultsController = resultsController
 
         let viewController = RecentActivityListViewController(

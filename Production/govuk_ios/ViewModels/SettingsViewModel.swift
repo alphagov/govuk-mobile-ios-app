@@ -1,4 +1,5 @@
 import UIKit
+import GOVKit
 
 protocol SettingsViewModelInterface: ObservableObject {
     var title: String { get }

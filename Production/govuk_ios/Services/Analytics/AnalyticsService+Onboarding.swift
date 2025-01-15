@@ -1,5 +1,6 @@
 import Foundation
 
+import GOVKit
 import Onboarding
 
 extension AnalyticsService: OnboardingAnalyticsService {
@@ -25,8 +26,4 @@ extension AnalyticsService: OnboardingAnalyticsService {
     }
 }
 
-extension OnboardingScreen: TrackableScreen {
-    var trackingLanguage: String {
-        Locale.current.analyticsLanguageCode
-    }
-}
+extension OnboardingScreen: TrackableScreen { }

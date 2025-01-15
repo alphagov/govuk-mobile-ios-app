@@ -27,7 +27,8 @@ class LaunchViewControllerSnapshotTests: SnapshotTestCase {
             animationCompleted: { }
         )
         let subject = LaunchViewController(
-            viewModel: viewModel
+            viewModel: viewModel,
+            analyticsService: MockAnalyticsService()
         )
         subject.overrideUserInterfaceStyle = .light
 

@@ -1,6 +1,7 @@
 import Foundation
 import UIComponents
 import UIKit
+import GOVKit
 
 class AppForcedUpdateContainerViewModel: ObservableObject {
     private let urlOpener: URLOpener

@@ -2,7 +2,9 @@ import Foundation
 import Testing
 
 import FirebaseAnalytics
+import GOVKit
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite(.serialized)
@@ -108,7 +110,7 @@ struct FirebaseClientTests {
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics
         )
-        let expectedScreen = MockBaseViewController()
+        let expectedScreen = MockBaseViewController(analyticsService: MockAnalyticsService())
         let expectedTitle = UUID().uuidString
         expectedScreen.title = expectedTitle
         mockAnalytics.clearValues()

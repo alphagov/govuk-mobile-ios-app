@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 
 protocol TopicsServiceInterface {
     func fetchRemoteList(completion: @escaping FetchTopicsListCompletion)

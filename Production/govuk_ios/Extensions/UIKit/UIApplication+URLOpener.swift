@@ -1,16 +1,9 @@
 import UIKit
+import GOVKit
 
-protocol URLOpener {
+extension UIApplication: @retroactive URLOpener {
     @discardableResult
-    func openIfPossible(_ url: URL) -> Bool
-
-    @discardableResult
-    func openIfPossible(_ urlString: String) -> Bool
-}
-
-extension UIApplication: URLOpener {
-    @discardableResult
-    func openIfPossible(_ url: URL) -> Bool {
+    public func openIfPossible(_ url: URL) -> Bool {
         guard canOpenURL(url)
         else { return false }
         open(url, options: [:], completionHandler: nil)
@@ -20,15 +13,7 @@ extension UIApplication: URLOpener {
 
 extension URLOpener {
     @discardableResult
-    func openSettings() -> Bool {
+    public func openSettings() -> Bool {
         openIfPossible(UIApplication.openSettingsURLString)
-    }
-
-    @discardableResult
-    func openIfPossible(_ urlString: String) -> Bool {
-        guard let url = URL(string: urlString)
-        else { return false }
-
-        return openIfPossible(url)
     }
 }

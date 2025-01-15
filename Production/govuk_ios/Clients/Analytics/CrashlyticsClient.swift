@@ -1,6 +1,7 @@
 import Foundation
 
 import FirebaseCrashlytics
+import GOVKit
 
 struct CrashlyticsClient: AnalyticsClient {
     private let crashlytics: CrashlyticsInterface

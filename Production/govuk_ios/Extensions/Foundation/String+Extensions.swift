@@ -1,13 +1,6 @@
 import Foundation
 
 extension String {
-    static var common: LocalStringBuilder {
-        .init(
-            tableName: "Common",
-            bundle: .main
-        )
-    }
-
     static var appAvailability: LocalStringBuilder {
         .init(
             tableName: "AppAvailability",
@@ -18,13 +11,6 @@ extension String {
     static var home: LocalStringBuilder {
         .init(
             tableName: "Home",
-            bundle: .main
-        )
-    }
-
-    static var recentActivity: LocalStringBuilder {
-        .init(
-            tableName: "RecentActivity",
             bundle: .main
         )
     }
@@ -55,23 +41,6 @@ extension String {
             tableName: "Topics",
             bundle: .main
         )
-    }
-}
-
-extension String {
-    struct LocalStringBuilder {
-        let tableName: String
-        let bundle: Bundle
-
-        func localized(_ key: String,
-                       comment: String = "") -> String {
-            NSLocalizedString(
-                key,
-                tableName: tableName,
-                bundle: bundle,
-                comment: comment
-            )
-        }
     }
 }
 

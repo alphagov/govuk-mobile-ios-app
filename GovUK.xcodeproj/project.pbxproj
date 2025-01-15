@@ -64,7 +64,6 @@
 		4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */; };
 		4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */; };
 		4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646C2D15AB05007A6E97 /* CharValidator.swift */; };
-		4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407532CE278F900D654FC /* StickyFooterView.swift */; };
 		4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407552CE2796900D654FC /* UIButton+Extensions.swift */; };
@@ -280,7 +279,6 @@
 		4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
 		4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = RecentActivity.xcstrings; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		4E6663C42C736ABD0063E81C /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		4E6663C72C7370750063E81C /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -833,7 +831,6 @@
 				3D3378112CAAC0A0004BF83F /* AppAvailability.xcstrings */,
 				5D742BD72C9978B800E7B87A /* Home.xcstrings */,
 				5D742BDD2C997ABB00E7B87A /* Onboarding.xcstrings */,
-				4E4FF25B2C9B67B500310AEC /* RecentActivity.xcstrings */,
 				5D742BDB2C99799000E7B87A /* Search.xcstrings */,
 				5D742BD92C99791A00E7B87A /* Settings.xcstrings */,
 				5D54F4722CC8473900A3B6A7 /* Topics.xcstrings */,
@@ -1347,7 +1344,6 @@
 				D0A8B3C22C9DC66E00849304 /* integration_pubkey.der in Resources */,
 				5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */,
 				5D742BDA2C99791A00E7B87A /* Settings.xcstrings in Resources */,
-				4EDBBEAC2C9C0B6500F31577 /* RecentActivity.xcstrings in Resources */,
 				5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */,
 				162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */,
 				3D3378122CAAC0A0004BF83F /* AppAvailability.xcstrings in Resources */,

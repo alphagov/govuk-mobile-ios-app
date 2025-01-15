@@ -94,4 +94,40 @@ struct SearchServiceTests {
         #expect(result.getError() == .noResults)
     }
 
+    @Test
+    func save_search_savesSearchToRepository() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        sut.save(searchText: "test", date: .init())
+        #expect(mockRepository._didSaveSearchHistory)
+        #expect(mockRepository._savedSearchText == "test")
+    }
+
+    @Test
+    func clear_searchHistory_clearsRepository() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        sut.clearSearchHistory()
+        #expect(mockRepository._didClearSearchHistory)
+    }
+
+    @Test
+    func delete_searchHistory_deletesFromRepository() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        sut.delete(SearchHistoryItem())
+        #expect(mockRepository._didDeleteSearchHistoryItem)
+    }
 }

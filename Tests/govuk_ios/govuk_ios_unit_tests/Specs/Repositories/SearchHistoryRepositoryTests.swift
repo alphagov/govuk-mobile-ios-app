@@ -90,4 +90,24 @@ struct SearchHistoryRepositoryTests {
         items = try #require(sut.fetchedResultsController?.fetchedObjects)
         #expect(items.count == 0)
     }
+
+    @Test
+    func delete_removesItem() throws {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let sut = SearchHistoryRepository(
+            coreData: coreData
+        )
+        
+        sut.save(searchText: "Test text 1",
+                 date: .init())
+        sut.save(searchText: "Test text 2",
+                 date: .init())
+
+        var items = try #require(sut.fetchedResultsController?.fetchedObjects)
+        #expect(items.count == 2)
+        sut.delete(items[0])
+        items = try #require(sut.fetchedResultsController?.fetchedObjects)
+        #expect(items.count == 1)
+        #expect(items[0].searchText == "Test text 1")
+    }
 }

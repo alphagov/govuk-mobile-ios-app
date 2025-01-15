@@ -12,13 +12,15 @@ class MockSearchHistoryRepository: SearchHistoryRepositoryInterface {
     
     
     var _didSaveSearchHistory: Bool = false
+    var _savedSearchText: String? = nil
     func save(searchText: String, date: Date) {
         _didSaveSearchHistory = true
+        _savedSearchText = searchText
     }
     
-    var _didClearSearcchHistory: Bool = false
+    var _didClearSearchHistory: Bool = false
     func clearSearchHistory() {
-        _didClearSearcchHistory = true
+        _didClearSearchHistory = true
     }
     
     var _stubbedFetchResultsController: NSFetchedResultsController<SearchHistoryItem>?

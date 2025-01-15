@@ -331,11 +331,24 @@ class SearchViewController: BaseViewController,
 
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        clearResults()
+        return true
+    }
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if string.isEmpty && textField.text?.count == 1 {
+            clearResults()
+        }
+        return true
+    }
+
+    private func clearResults() {
         viewModel.clearResults()
         reloadSnapshot()
         searchHistoryViewController.reloadSnapshot()
         searchHistoryViewController.show()
-        return true
     }
 }
 

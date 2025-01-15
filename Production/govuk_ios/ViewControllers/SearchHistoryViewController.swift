@@ -132,7 +132,9 @@ final class SearchHistoryViewController: BaseViewController {
     }
 
     func show() {
-        self.view.isHidden = false
+        if !viewModel.searchHistoryItems.isEmpty {
+            self.view.isHidden = false
+        }
     }
 
     func hide() {

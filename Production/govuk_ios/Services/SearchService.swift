@@ -7,7 +7,7 @@ protocol SearchServiceInterface {
     func save(searchText: String, date: Date)
     func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
-    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? { get }
 }
 
 class SearchService: SearchServiceInterface {
@@ -20,7 +20,7 @@ class SearchService: SearchServiceInterface {
         self.repository = repository
     }
 
-    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> {
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? {
         repository.fetchedResultsController
     }
 

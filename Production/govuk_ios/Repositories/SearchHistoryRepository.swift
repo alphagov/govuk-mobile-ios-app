@@ -6,7 +6,7 @@ protocol SearchHistoryRepositoryInterface {
               date: Date)
     func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
-    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? { get }
 }
 
 struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
@@ -42,7 +42,7 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
         try? coreData.backgroundContext.save()
     }
 
-    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> {
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? {
         let fetchRequest = SearchHistoryItem.fetchRequest()
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: coreData.viewContext,

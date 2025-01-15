@@ -6,16 +6,16 @@ class SearchHistoryViewModel: NSObject {
     private let searchService: SearchServiceInterface
     var searchHistoryItems = [SearchHistoryItem]()
 
-    lazy var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? = {
         let localController = searchService.fetchedResultsController
-        localController.delegate = self
+        localController?.delegate = self
         return localController
     }()
 
     init(searchService: SearchServiceInterface) {
         self.searchService = searchService
         super.init()
-        searchHistoryItems = fetchedResultsController.fetchedObjects ?? []
+        searchHistoryItems = fetchedResultsController?.fetchedObjects ?? []
     }
 
     func saveSearchHistoryItem(searchText: String,
@@ -36,6 +36,6 @@ extension SearchHistoryViewModel: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>,
                     didChangeContentWith
                     snapshot: NSDiffableDataSourceSnapshotReference) {
-        searchHistoryItems = fetchedResultsController.fetchedObjects ?? []
+        searchHistoryItems = fetchedResultsController?.fetchedObjects ?? []
     }
 }

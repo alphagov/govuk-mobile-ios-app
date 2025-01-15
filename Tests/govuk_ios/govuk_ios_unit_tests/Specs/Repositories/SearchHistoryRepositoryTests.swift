@@ -18,8 +18,8 @@ struct SearchHistoryRepositoryTests {
         
         sut.save(searchText: expectedSearchString,
                  date: expectedDate)
-        let items = try #require(sut.fetchedResultsController.fetchedObjects)
-        
+        let items = try #require(sut.fetchedResultsController?.fetchedObjects)
+
         #expect(items.count == 1)
         #expect(items.first?.searchText == expectedSearchString)
         #expect(items.first?.date == expectedDate)
@@ -37,13 +37,13 @@ struct SearchHistoryRepositoryTests {
         
         sut.save(searchText: expectedSearchString,
                  date: expectedDate)
-        let items = try #require(sut.fetchedResultsController.fetchedObjects)
+        let items = try #require(sut.fetchedResultsController?.fetchedObjects)
         #expect(items.count == 1)
         
         let updatedDate = Date() + 10
         sut.save(searchText: expectedSearchString,
                  date: updatedDate)
-        let updatedItems = try #require(sut.fetchedResultsController.fetchedObjects)
+        let updatedItems = try #require(sut.fetchedResultsController?.fetchedObjects)
         #expect(updatedItems.count == 1)
         #expect(updatedItems.first?.searchText == expectedSearchString)
         #expect(updatedItems.first?.date == updatedDate)
@@ -61,12 +61,12 @@ struct SearchHistoryRepositoryTests {
                      date: .init())
         }
         
-        var items = try #require(sut.fetchedResultsController.fetchedObjects)
+        var items = try #require(sut.fetchedResultsController?.fetchedObjects)
         #expect(items.count == 5)
         
         sut.save(searchText: "latest search",
                  date: .init())
-        items = try #require(sut.fetchedResultsController.fetchedObjects)
+        items = try #require(sut.fetchedResultsController?.fetchedObjects)
         #expect(items.count == 5)
         #expect(items.first?.searchText == "latest search")
     }
@@ -83,11 +83,11 @@ struct SearchHistoryRepositoryTests {
                      date: .init())
         }
         
-        var items = try #require(sut.fetchedResultsController.fetchedObjects)
+        var items = try #require(sut.fetchedResultsController?.fetchedObjects)
         #expect(items.count == 5)
         
         sut.clearSearchHistory()
-        items = try #require(sut.fetchedResultsController.fetchedObjects)
+        items = try #require(sut.fetchedResultsController?.fetchedObjects)
         #expect(items.count == 0)
     }
 }

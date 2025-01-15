@@ -33,11 +33,21 @@ class TopicsWidgetView: UIView {
         return label
     }()
 
-    private lazy var editButton: UIButton = .body(
-        title: String.common.localized("editButtonTitle"),
-        accessibilityLabel: String.topics.localized("editTopicsTitle"),
-        action: viewModel.editAction
-    )
+    private lazy var editButton: GOVUKButton = {
+        var viewModel: GOVUKButton.ButtonViewModel {
+            .init(
+                localisedTitle: String.common.localized("editButtonTitle"),
+                action: {[weak self] in
+                    self?.viewModel.editAction()
+                }
+            )
+        }
+        let button = GOVUKButton(
+            .secondary,
+            viewModel: viewModel
+        )
+        return button
+    }()
 
     private lazy var headerStackView: UIStackView = {
         let stackView = UIStackView()

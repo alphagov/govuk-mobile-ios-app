@@ -3,12 +3,11 @@ import UIComponents
 
 class SearchHistoryCell: UITableViewCell {
     private let deleteButton: UIButton = {
-        let localButton = UIButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+        let localButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         var buttonConfig = UIButton.Configuration.plain()
         buttonConfig.image = UIImage(systemName: "xmark")
-        buttonConfig.imagePlacement = .trailing
         buttonConfig.baseForegroundColor = UIColor.govUK.text.trailingIcon
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
         buttonConfig.preferredSymbolConfigurationForImage = imageConfig
         localButton.configuration = buttonConfig
         return localButton
@@ -45,6 +44,8 @@ class SearchHistoryCell: UITableViewCell {
         accessoryView = deleteButton
         selectionStyle = .none
         separatorInset.left = 0
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
         deleteButton.addTarget(
             self,
             action: #selector(deleteButtonTapped),
@@ -65,7 +66,7 @@ class SearchHistoryCell: UITableViewCell {
         var config = self.defaultContentConfiguration()
         config.textProperties.font = UIFont.govUK.body
         config.image = magnifyingImage
-        config.imageProperties.tintColor = UIColor.govUK.text.primary
+        config.imageProperties.tintColor = UIColor.govUK.text.secondary
         config.imageToTextPadding = 3
         config.axesPreservingSuperviewLayoutMargins = .vertical
         config.directionalLayoutMargins = NSDirectionalEdgeInsets(

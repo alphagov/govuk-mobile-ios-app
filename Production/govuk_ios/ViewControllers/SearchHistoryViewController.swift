@@ -17,12 +17,13 @@ final class SearchHistoryViewController: BaseViewController {
         localView.rowHeight = UITableView.automaticDimension
         localView.backgroundColor = UIColor.govUK.fills.surfaceModal
         localView.contentInsetAdjustmentBehavior = .never
+        localView.separatorColor = UIColor.govUK.strokes.listDivider
         return localView
     }()
 
     private let headerLabel: UILabel = {
         let localLabel = UILabel()
-        localLabel.font = UIFont.govUK.bodySemibold
+        localLabel.font = UIFont.govUK.title3Semibold
         localLabel.text = String.search.localized("searchHistoryTitle")
         localLabel.accessibilityTraits = .header
         localLabel.numberOfLines = 0

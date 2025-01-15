@@ -15,7 +15,8 @@ class SearchViewModel {
     private let activityService: ActivityServiceInterface
     let urlOpener: URLOpener
     lazy var searchHistoryViewModel: SearchHistoryViewModel = {
-        SearchHistoryViewModel(searchService: searchService)
+        SearchHistoryViewModel(searchService: searchService,
+                               analyticsService: analyticsService)
     }()
 
     var historyIsEmpty: Bool {

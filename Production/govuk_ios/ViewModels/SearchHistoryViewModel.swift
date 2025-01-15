@@ -1,9 +1,11 @@
 import Foundation
 import UIKit
 import CoreData
+import GOVKit
 
 class SearchHistoryViewModel: NSObject {
     private let searchService: SearchServiceInterface
+    let analyticsService: AnalyticsServiceInterface
     var searchHistoryItems = [SearchHistoryItem]()
 
     lazy var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? = {
@@ -12,8 +14,10 @@ class SearchHistoryViewModel: NSObject {
         return localController
     }()
 
-    init(searchService: SearchServiceInterface) {
+    init(searchService: SearchServiceInterface,
+         analyticsService: AnalyticsServiceInterface) {
         self.searchService = searchService
+        self.analyticsService = analyticsService
         super.init()
         searchHistoryItems = fetchedResultsController?.fetchedObjects ?? []
     }

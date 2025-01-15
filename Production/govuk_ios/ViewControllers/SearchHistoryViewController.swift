@@ -1,5 +1,6 @@
 import UIKit
 import UIComponents
+import GOVKit
 
 private typealias DataSource =
     UITableViewDiffableDataSource<SearchHistorySection, SearchHistoryItem>
@@ -105,7 +106,7 @@ final class SearchHistoryViewController: BaseViewController {
          selectionAction: @escaping ((String) -> Void)) {
         self.viewModel = viewModel
         self.selectionAction = selectionAction
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: viewModel.analyticsService)
     }
 
     @MainActor required init?(coder: NSCoder) {

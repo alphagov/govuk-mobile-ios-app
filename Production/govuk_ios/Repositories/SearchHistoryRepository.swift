@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import GOVKit
 
 protocol SearchHistoryRepositoryInterface {
     func save(searchText: String,

@@ -5,6 +5,7 @@ protocol SearchServiceInterface {
     func search(_ term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
     func save(searchText: String, date: Date)
+    func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
 }
@@ -45,5 +46,9 @@ class SearchService: SearchServiceInterface {
 
     func clearSearchHistory() {
         repository.clearSearchHistory()
+    }
+
+    func delete(_ item: SearchHistoryItem) {
+        repository.delete(item)
     }
 }

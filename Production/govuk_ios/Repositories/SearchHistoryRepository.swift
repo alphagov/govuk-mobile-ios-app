@@ -4,6 +4,7 @@ import CoreData
 protocol SearchHistoryRepositoryInterface {
     func save(searchText: String,
               date: Date)
+    func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem> { get }
 }
@@ -26,6 +27,12 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
         searchHistoryItem.date = date
         pruneSearchHistoryItems(context)
         try? context.save()
+    }
+
+    func delete(_ item: SearchHistoryItem) {
+        let context = item.managedObjectContext
+        context?.delete(item)
+        try? context?.save()
     }
 
     func clearSearchHistory() {

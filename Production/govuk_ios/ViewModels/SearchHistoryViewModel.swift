@@ -26,6 +26,10 @@ class SearchHistoryViewModel: NSObject {
     func clearSearchHistory() {
         searchService.clearSearchHistory()
     }
+
+    func delete(_ item: SearchHistoryItem) {
+        searchService.delete(item)
+    }
 }
 
 extension SearchHistoryViewModel: NSFetchedResultsControllerDelegate {

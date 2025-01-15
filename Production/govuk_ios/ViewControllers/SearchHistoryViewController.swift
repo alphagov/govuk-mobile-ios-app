@@ -12,25 +12,39 @@ final class SearchHistoryViewController: BaseViewController {
     private let tableView: UITableView = {
         let localView = UITableView(frame: .zero, style: .grouped)
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.register(UITableViewCell.self)
+        localView.register(SearchHistoryCell.self)
         localView.rowHeight = UITableView.automaticDimension
         localView.backgroundColor = UIColor.govUK.fills.surfaceModal
+        localView.contentInsetAdjustmentBehavior = .never
         return localView
+    }()
+
+    private let headerLabel: UILabel = {
+        let localLabel = UILabel()
+        localLabel.font = UIFont.govUK.bodySemibold
+        localLabel.text = String.search.localized("searchHistoryTitle")
+        localLabel.accessibilityTraits = .header
+        localLabel.numberOfLines = 0
+        localLabel.lineBreakMode = .byWordWrapping
+        localLabel.adjustsFontForContentSizeCategory = true
+        localLabel.textAlignment = .left
+        localLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        localLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        return localLabel
+    }()
+
+    private let headerStackView: UIStackView = {
+        let localStackView = UIStackView()
+        localStackView.axis = .horizontal
+        localStackView.spacing = 16
+        localStackView.translatesAutoresizingMaskIntoConstraints = false
+        localStackView.alignment = .firstBaseline
+        localStackView.distribution = .fill
+        return localStackView
     }()
 
     private lazy var tableViewHeader: UIView = {
         let headerView = UIView()
-
-        let label = UILabel()
-        label.font = UIFont.govUK.bodySemibold
-        label.text = String.search.localized("searchHistoryTitle")
-        label.accessibilityTraits = .header
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.adjustsFontForContentSizeCategory = true
-        label.textAlignment = .left
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.setContentHuggingPriority(.defaultLow, for: .vertical)
 
         let button: UIButton = .body(
             title: String.search.localized("clearHistoryButtonTitle"),
@@ -40,26 +54,32 @@ final class SearchHistoryViewController: BaseViewController {
                 title: String.search.localized("clearHistoryAlertTitle"),
                 buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
                 message: String.search.localized("clearHistoryAlertMessage"),
-                handler: {
-                self.hide()
-                self.viewModel.clearSearchHistory()
-                self.reloadSnapshot()
+                handler: { [weak self] in
+                self?.hide()
+                self?.viewModel.clearSearchHistory()
+                self?.reloadSnapshot()
             }), animated: true)
         }
 
-        let stackView: UIStackView = .init(arrangedSubviews: [label, UIView(), button])
-        stackView.axis = .horizontal
-        stackView.spacing = 16
-        stackView.alignment = .firstBaseline
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.addSubview(stackView)
+        headerStackView.addArrangedSubview(headerLabel)
+        headerStackView.addArrangedSubview(UIView())
+        headerStackView.addArrangedSubview(button)
+        headerView.addSubview(headerStackView)
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: headerView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
+            headerStackView.topAnchor.constraint(
+                equalTo: headerView.topAnchor
+            ),
+            headerStackView.leadingAnchor.constraint(
+                equalTo: headerView.leadingAnchor
+            ),
+            headerStackView.trailingAnchor.constraint(
+                equalTo: headerView.trailingAnchor
+            ),
+            headerStackView.bottomAnchor.constraint(
+                equalTo: headerView.bottomAnchor,
+                constant: -16
+            )
         ])
         return headerView
     }()
@@ -68,13 +88,12 @@ final class SearchHistoryViewController: BaseViewController {
         let localDataSource = DataSource(
             tableView: tableView,
             cellProvider: { tableView, indexPath, item in
-                let cell: UITableViewCell = tableView.dequeue(indexPath: indexPath)
-                var configuration = cell.defaultContentConfiguration()
-                configuration.text = item.searchText
-                configuration.axesPreservingSuperviewLayoutMargins = .vertical
-                cell.contentConfiguration = configuration
-                cell.accessoryType = .disclosureIndicator
-                cell.selectionStyle = .none
+                let cell: SearchHistoryCell = tableView.dequeue(indexPath: indexPath)
+                cell.searchText = item.searchText
+                cell.deleteAction = { [weak self] in
+                    self?.viewModel.delete(item)
+                    self?.reloadSnapshot()
+                }
                 return cell
             }
         )
@@ -107,6 +126,9 @@ final class SearchHistoryViewController: BaseViewController {
         snapshot.appendSections([.history])
         snapshot.appendItems(viewModel.searchHistoryItems, toSection: .history)
         dataSource.apply(snapshot, animatingDifferences: true)
+        if viewModel.searchHistoryItems.isEmpty {
+            hide()
+        }
     }
 
     func show() {

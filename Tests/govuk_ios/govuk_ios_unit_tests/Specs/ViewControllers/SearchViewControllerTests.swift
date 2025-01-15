@@ -4,6 +4,7 @@ import Testing
 
 import Factory
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor
@@ -13,11 +14,8 @@ struct SearchViewControllerTests {
     @Test
     func viewDidAppear_tracksScreen() {
         let mockAnalyticsService = MockAnalyticsService()
-        Container.shared.analyticsService.register {
-            mockAnalyticsService
-        }
         let viewModel = SearchViewModel(
-            analyticsService: MockAnalyticsService(),
+            analyticsService: mockAnalyticsService,
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             urlOpener: MockURLOpener()

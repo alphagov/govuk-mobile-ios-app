@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 
 extension UserProperty {
     static var topicsCustomised: UserProperty {

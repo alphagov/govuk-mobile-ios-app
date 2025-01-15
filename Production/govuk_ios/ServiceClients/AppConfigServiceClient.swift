@@ -1,5 +1,5 @@
 import Foundation
-
+import GOVKit
 
 typealias FetchAppConfigCompletion = (sending FetchAppConfigResult) -> Void
 typealias FetchAppConfigResult = Result<AppConfig, AppConfigError>

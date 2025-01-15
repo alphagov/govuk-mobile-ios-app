@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 
 extension AppEvent {
     static func searchResultNavigation(item: SearchItem) -> AppEvent {

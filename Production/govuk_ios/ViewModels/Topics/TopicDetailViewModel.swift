@@ -1,4 +1,6 @@
 import SwiftUI
+import GOVKit
+import RecentActivity
 
 protocol TopicDetailViewModelInterface: ObservableObject {
     var title: String { get }

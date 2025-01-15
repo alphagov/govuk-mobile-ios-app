@@ -2,15 +2,19 @@ import Foundation
 import UIKit
 import SwiftUI
 import Factory
+import GOVKit
+import RecentActivity
 
 class ViewControllerBuilder {
     @MainActor
-    func launch(completion: @escaping () -> Void) -> UIViewController {
+    func launch(analyticsService: AnalyticsServiceInterface,
+                completion: @escaping () -> Void) -> UIViewController {
         let viewModel = LaunchViewModel(
             animationCompleted: completion
         )
         return LaunchViewController(
-            viewModel: viewModel
+            viewModel: viewModel,
+            analyticsService: analyticsService
         )
     }
 
@@ -97,7 +101,8 @@ class ViewControllerBuilder {
 
         let view = TopicDetailView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
-        viewController.navigationItem.largeTitleDisplayMode = .never
+        viewController.navigationItem.largeTitleDisplayMode =
+        UINavigationItem.LargeTitleDisplayMode.never
         viewController.navigationItem.backButtonTitle = viewModel.title
         return viewController
     }
@@ -114,7 +119,8 @@ class ViewControllerBuilder {
         )
         let view = TopicDetailView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
-        viewController.navigationItem.largeTitleDisplayMode = .never
+        viewController.navigationItem.largeTitleDisplayMode =
+        UINavigationItem.LargeTitleDisplayMode.never
         return viewController
     }
 

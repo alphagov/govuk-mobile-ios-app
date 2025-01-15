@@ -1,4 +1,5 @@
 import UIKit
+import GOVKit
 
 final class AllTopicsCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface

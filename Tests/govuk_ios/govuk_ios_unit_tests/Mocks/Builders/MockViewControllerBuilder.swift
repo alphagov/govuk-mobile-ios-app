@@ -1,5 +1,7 @@
 import Foundation
 import UIKit
+import GOVKit
+import RecentActivity
 
 @testable import govuk_ios
 
@@ -10,10 +12,10 @@ extension ViewControllerBuilder {
 }
 
 class MockViewControllerBuilder: ViewControllerBuilder {
-
     var _stubbedLaunchViewController: UIViewController?
     var _receivedLaunchCompletion: (() -> Void)?
-    override func launch(completion: @escaping () -> Void) -> UIViewController {
+    override func launch(analyticsService: AnalyticsServiceInterface,
+                         completion: @escaping () -> Void) -> UIViewController {
         _receivedLaunchCompletion = completion
         return _stubbedLaunchViewController ?? UIViewController()
     }

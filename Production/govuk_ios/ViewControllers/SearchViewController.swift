@@ -1,5 +1,6 @@
 import UIKit
 import UIComponents
+import GOVKit
 
 private typealias DataSource = UITableViewDiffableDataSource<SearchSection, SearchItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
@@ -104,7 +105,7 @@ class SearchViewController: BaseViewController,
          dismissAction: @escaping () -> Void) {
         self.viewModel = viewModel
         self.dismissAction = dismissAction
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: viewModel.analyticsService)
     }
 
     required init?(coder: NSCoder) {

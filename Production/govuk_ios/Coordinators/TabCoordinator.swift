@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import GOVKit
 
 typealias TabItemCoordinator = BaseCoordinator
 & DeeplinkRouteProvider

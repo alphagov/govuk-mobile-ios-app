@@ -1,6 +1,8 @@
 import UIKit
 import Foundation
 
+import GOVKit
+
 extension AppEvent {
     static var appLoaded: AppEvent {
         let deviceInformationProvider = DeviceInformationProvider()

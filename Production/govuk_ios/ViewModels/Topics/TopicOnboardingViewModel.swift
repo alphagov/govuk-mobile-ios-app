@@ -1,9 +1,10 @@
 import Foundation
 import UIComponents
+import GOVKit
 
 class TopicOnboardingViewModel: ObservableObject {
     let topics: [Topic]
-    private let analyticsService: AnalyticsServiceInterface
+    let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let dismissAction: () -> Void
     @Published private(set) var isTopicSelected: Bool = false

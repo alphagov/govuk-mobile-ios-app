@@ -19,10 +19,10 @@ class CoordinatorBuilder {
 
     var home: TabItemCoordinator {
         HomeCoordinator(
-            navigationController: .home,
+            navigationController: UINavigationController.home,
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: .home(coordinatorBuilder: self),
+            deeplinkStore: DeeplinkDataStore.home(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
             configService: container.appConfigService.resolve(),
             topicsService: container.topicsService.resolve()
@@ -31,9 +31,9 @@ class CoordinatorBuilder {
 
     var settings: TabItemCoordinator {
         SettingsCoordinator(
-            navigationController: .settings,
+            navigationController: UINavigationController.settings,
             viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: .settings(coordinatorBuilder: self),
+            deeplinkStore: DeeplinkDataStore.settings(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
             deviceInformationProvider: DeviceInformationProvider()
         )
@@ -45,6 +45,7 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             appLaunchService: container.appLaunchService.resolve(),
+            anayticsService: container.analyticsService.resolve(),
             completion: completion
         )
     }

@@ -1,5 +1,6 @@
 import SwiftUI
 import UIComponents
+import GOVKit
 
 struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     @StateObject var viewModel: T

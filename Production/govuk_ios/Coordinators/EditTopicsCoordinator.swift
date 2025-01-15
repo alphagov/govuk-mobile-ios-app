@@ -1,4 +1,5 @@
 import UIKit
+import GOVKit
 
 final class EditTopicsCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface

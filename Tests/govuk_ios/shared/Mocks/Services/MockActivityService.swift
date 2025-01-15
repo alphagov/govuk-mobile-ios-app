@@ -1,18 +1,14 @@
 import Foundation
 import  CoreData
-
+import GOVKit
+import RecentActivity
 @testable import govuk_ios
 
 class MockActivityService: ActivityServiceInterface {
     
-    var _receivedSaveTopicContent: TopicDetailResponse.Content?
-    func save(topicContent: TopicDetailResponse.Content) {
-        _receivedSaveTopicContent = topicContent
-    }
-    
-    var _receivedSaveSearchItem: SearchItem?
-    func save(searchItem: SearchItem) {
-        _receivedSaveSearchItem = searchItem
+    var _receivedSaveActivity: ActivityItemCreateParams?
+    func save(activity: ActivityItemCreateParams) {
+        _receivedSaveActivity = activity
     }
 
     var _stubbedFetchResultsController: NSFetchedResultsController<ActivityItem>!

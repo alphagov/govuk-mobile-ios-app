@@ -45,24 +45,30 @@ final class SearchHistoryViewController: BaseViewController {
         return localStackView
     }()
 
-    private lazy var deleteButton: GOVUKButton = {
-        let buttonModel = GOVUKButton.ButtonViewModel(
-            localisedTitle: String.search.localized("clearHistoryButtonTitle")) {
-                self.present(UIAlertController.destructiveAlert(
-                    title: String.search.localized("clearHistoryAlertTitle"),
-                    buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
-                    message: String.search.localized("clearHistoryAlertMessage"),
-                    handler: { [weak self] in
-                    self?.hide()
-                    self?.viewModel.clearSearchHistory()
-                    self?.reloadSnapshot()
-                }), animated: true)
-            }
+    private lazy var deleteAction: UIAction = {
+        .init(handler: { [weak self] _ in
+            self?.present(UIAlertController.destructiveAlert(
+                title: String.search.localized("clearHistoryAlertTitle"),
+                buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
+                message: String.search.localized("clearHistoryAlertMessage"),
+                handler: { [weak self] in
+                self?.hide()
+                self?.viewModel.clearSearchHistory()
+                self?.reloadSnapshot()
+            }), animated: true)
+        })
+    }()
 
-        let button = GOVUKButton(
-            .secondary,
-            viewModel: buttonModel
-        )
+    private lazy var deleteButton: UIButton = {
+        var configuration = UIButton.Configuration.plain()
+        configuration.contentInsets = .zero
+        configuration.titleAlignment = .trailing
+        let button = UIButton(configuration: configuration)
+        button.tintColor = UIColor.govUK.text.link
+        button.setTitle(String.search.localized("clearHistoryButtonTitle"), for: .normal)
+        button.titleLabel?.font = UIFont.govUK.body
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.addAction(deleteAction, for: .touchUpInside)
         button.accessibilityLabel = String.search.localized("clearHistoryButtonAccessibilityTitle")
         button.accessibilityTraits = .button
         return button

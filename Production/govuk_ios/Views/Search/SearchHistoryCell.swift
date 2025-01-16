@@ -3,13 +3,17 @@ import UIComponents
 
 class SearchHistoryCell: UITableViewCell {
     private let deleteButton: UIButton = {
-        let localButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         var buttonConfig = UIButton.Configuration.plain()
         buttonConfig.image = UIImage(systemName: "xmark")
         buttonConfig.baseForegroundColor = UIColor.govUK.text.trailingIcon
+        buttonConfig.contentInsets = .zero
+
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
         buttonConfig.preferredSymbolConfigurationForImage = imageConfig
+
+        let localButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         localButton.configuration = buttonConfig
+        localButton.contentHorizontalAlignment = .trailing
         localButton.accessibilityLabel = String.search.localized("removeSearchAccessibilityTitle")
         return localButton
     }()

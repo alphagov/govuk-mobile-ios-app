@@ -45,27 +45,34 @@ final class SearchHistoryViewController: BaseViewController {
         return localStackView
     }()
 
+    private lazy var deleteButton: GOVUKButton = {
+        let buttonModel = GOVUKButton.ButtonViewModel(
+            localisedTitle: String.search.localized("clearHistoryButtonTitle")) {
+                self.present(UIAlertController.destructiveAlert(
+                    title: String.search.localized("clearHistoryAlertTitle"),
+                    buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
+                    message: String.search.localized("clearHistoryAlertMessage"),
+                    handler: { [weak self] in
+                    self?.hide()
+                    self?.viewModel.clearSearchHistory()
+                    self?.reloadSnapshot()
+                }), animated: true)
+            }
+        var config = GOVUKButton.ButtonConfiguration.secondary
+
+        let button = GOVUKButton(
+            .secondary,
+            viewModel: buttonModel
+        )
+        return button
+    }()
+
     private lazy var tableViewHeader: UIView = {
         let headerView = UIView()
 
-        let button: UIButton = .body(
-            title: String.search.localized("clearHistoryButtonTitle"),
-            accessibilityLabel: String.search.localized("clearHistoryButtonAccessibilityLabel")
-        ) {
-            self.present(UIAlertController.destructiveAlert(
-                title: String.search.localized("clearHistoryAlertTitle"),
-                buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
-                message: String.search.localized("clearHistoryAlertMessage"),
-                handler: { [weak self] in
-                self?.hide()
-                self?.viewModel.clearSearchHistory()
-                self?.reloadSnapshot()
-            }), animated: true)
-        }
-
         headerStackView.addArrangedSubview(headerLabel)
         headerStackView.addArrangedSubview(UIView())
-        headerStackView.addArrangedSubview(button)
+        headerStackView.addArrangedSubview(deleteButton)
         headerView.addSubview(headerStackView)
 
         NSLayoutConstraint.activate([

@@ -2,6 +2,7 @@ import Foundation
 import XCTest
 import CoreData
 import RecentActivity
+import UIComponents
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
@@ -55,7 +56,7 @@ final class SearchHistoryViewControllerSnapshotTests: SnapshotTestCase {
         let service = MockSearchService()
         let coreData = CoreDataRepository.arrangeAndLoad
         let item = SearchHistoryItem(context: coreData.viewContext)
-        item.searchText = UUID().uuidString
+        item.searchText = "Test search"
         item.date = Date()
         try! coreData.viewContext.save()
 

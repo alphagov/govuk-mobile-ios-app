@@ -1523,7 +1523,6 @@
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5D8100892CEB3FE600EE7D15 /* AppLaunchResponse.swift in Sources */,
-				5DA2B69C2CD22718006CFADD /* UIButton+Convenience.swift in Sources */,
 				3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */,
 				3D9C933E2CB0172400EFA337 /* AppForcedUpdateContainerView.swift in Sources */,
 				1687F3172CB4110D005E1473 /* AllTopicsViewModel.swift in Sources */,

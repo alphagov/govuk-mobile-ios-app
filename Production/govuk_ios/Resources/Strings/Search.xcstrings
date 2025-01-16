@@ -45,6 +45,17 @@
         }
       }
     },
+    "clearHistoryButtonAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete all previous searches"
+          }
+        }
+      }
+    },
     "clearHistoryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -63,6 +74,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        }
+      }
+    },
+    "removeSearchAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from search history"
           }
         }
       }

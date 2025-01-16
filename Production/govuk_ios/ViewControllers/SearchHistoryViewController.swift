@@ -63,6 +63,8 @@ final class SearchHistoryViewController: BaseViewController {
             .secondary,
             viewModel: buttonModel
         )
+        button.accessibilityLabel = String.search.localized("clearHistoryButtonAccessibilityTitle")
+        button.accessibilityTraits = .button
         return button
     }()
 
@@ -89,6 +91,7 @@ final class SearchHistoryViewController: BaseViewController {
                 constant: -16
             )
         ])
+        headerView.accessibilityElements = [headerLabel, deleteButton]
         return headerView
     }()
 
@@ -151,6 +154,7 @@ final class SearchHistoryViewController: BaseViewController {
 
     private func configureUI() {
         view.addSubview(tableView)
+        view.isHidden = viewModel.searchHistoryItems.isEmpty
     }
 
     private func configureConstraints() {

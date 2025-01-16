@@ -10,6 +10,7 @@ class SearchHistoryCell: UITableViewCell {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
         buttonConfig.preferredSymbolConfigurationForImage = imageConfig
         localButton.configuration = buttonConfig
+        localButton.accessibilityLabel = String.search.localized("removeSearchAccessibilityTitle")
         return localButton
     }()
 

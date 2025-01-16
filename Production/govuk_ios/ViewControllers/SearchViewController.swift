@@ -162,7 +162,7 @@ class SearchViewController: BaseViewController,
         addChild(self.searchHistoryViewController)
         view.addSubview(searchHistoryViewController.view)
         searchHistoryViewController.didMove(toParent: self)
-        searchHistoryViewController.view.isHidden = viewModel.historyIsEmpty
+        tableView.isHidden = !viewModel.historyIsEmpty
     }
 
     private func configureConstraints() {
@@ -348,6 +348,7 @@ extension SearchViewController: UITextFieldDelegate {
         viewModel.clearResults()
         reloadSnapshot()
         searchHistoryViewController.reloadSnapshot()
+        tableView.isHidden = true
         searchHistoryViewController.show()
     }
 }

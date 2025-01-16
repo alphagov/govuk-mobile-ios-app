@@ -19,10 +19,4 @@ class SearchHistoryItem: NSManagedObject,
 
     @NSManaged public var searchText: String
     @NSManaged public var date: Date
-
-    func update(searchText: String,
-                date: Date) {
-        self.searchText = searchText
-        self.date = date
-    }
 }

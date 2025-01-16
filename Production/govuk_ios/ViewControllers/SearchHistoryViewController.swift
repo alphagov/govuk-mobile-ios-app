@@ -58,7 +58,6 @@ final class SearchHistoryViewController: BaseViewController {
                     self?.reloadSnapshot()
                 }), animated: true)
             }
-        var config = GOVUKButton.ButtonConfiguration.secondary
 
         let button = GOVUKButton(
             .secondary,

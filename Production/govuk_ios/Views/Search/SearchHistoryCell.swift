@@ -15,7 +15,7 @@ class SearchHistoryCell: UITableViewCell {
 
     private let magnifyingImage: UIImage? = {
         var image = UIImage(systemName: "magnifyingglass")
-        var imageConfig = UIImage.SymbolConfiguration(pointSize: 12,
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 12,
                                                  weight: .bold)
         image = image?.withConfiguration(imageConfig)
         return image

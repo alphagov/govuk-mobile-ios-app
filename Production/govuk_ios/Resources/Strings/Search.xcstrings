@@ -1,6 +1,72 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "clearHistoryAlertButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
+    },
+    "clearHistoryAlertMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permanently delete all your previous searches"
+          }
+        }
+      }
+    },
+    "clearHistoryAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete previous searches?"
+          }
+        }
+      }
+    },
+    "clearHistoryButtonAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from search history"
+          }
+        }
+      }
+    },
+    "clearHistoryButtonAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete all previous searches"
+          }
+        }
+      }
+    },
+    "clearHistoryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete all"
+          }
+        }
+      }
+    },
     "pageTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12,6 +78,17 @@
         }
       }
     },
+    "removeSearchAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from search history"
+          }
+        }
+      }
+    },
     "searchBarPlaceholder" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,6 +96,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        }
+      }
+    },
+    "searchHistoryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous searches"
           }
         }
       }

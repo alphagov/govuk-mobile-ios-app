@@ -14,6 +14,14 @@ class SearchViewModel {
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
     let urlOpener: URLOpener
+    lazy var searchHistoryViewModel: SearchHistoryViewModel = {
+        SearchHistoryViewModel(searchService: searchService,
+                               analyticsService: analyticsService)
+    }()
+
+    var historyIsEmpty: Bool {
+        searchHistoryViewModel.searchHistoryItems.isEmpty
+    }
 
     private(set) var results: [SearchItem]?
     private(set) var error: SearchError?
@@ -44,6 +52,7 @@ class SearchViewModel {
                 completion()
             }
         )
+        searchHistoryViewModel.saveSearchHistoryItem(searchText: text, date: .init())
     }
 
     func selected(item: SearchItem) {

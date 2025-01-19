@@ -3,6 +3,9 @@ import Foundation
 protocol SearchServiceInterface {
     func search(_ term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
+
+    func suggestions(_ term: String,
+                     completion: @escaping ([String]) -> Void)
 }
 
 class SearchService: SearchServiceInterface {
@@ -23,6 +26,20 @@ class SearchService: SearchServiceInterface {
 
                 DispatchQueue.main.async {
                     completion(mappedResult)
+                }
+            }
+        )
+    }
+
+    func suggestions(_ term: String,
+                     completion: @escaping ([String]) -> Void) {
+        serviceClient.suggestions(
+            term: term,
+            completion: { result in
+                let suggestions = (try? result.get().suggestions) ?? []
+
+                DispatchQueue.main.async {
+                    completion(suggestions)
                 }
             }
         )

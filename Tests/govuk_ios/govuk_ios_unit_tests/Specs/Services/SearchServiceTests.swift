@@ -86,4 +86,55 @@ struct SearchServiceTests {
         #expect(result.getError() == .noResults)
     }
 
+    @Test
+    func suggestions_callsServiceClient() {
+        let mockServiceClient = MockSearchServiceClient()
+        let sut = SearchService(
+            serviceClient: mockServiceClient
+        )
+        let expectedTerm = UUID().uuidString
+        sut.suggestions(
+            expectedTerm,
+            completion: { _ in }
+        )
+        #expect(mockServiceClient._receivedTerm == expectedTerm)
+    }
+
+    @Test
+    func suggestions_success_returnsExpectedResult() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let sut = SearchService(
+            serviceClient: mockServiceClient
+        )
+        let stubbedSuggestion = SearchSuggestions(suggestions: ["A good suggestion"])
+        mockServiceClient._stubbedSuggestionsResult = .success(stubbedSuggestion)
+        let suggestions = await withCheckedContinuation { continuation in
+            sut.suggestions(
+                "good",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+        #expect(suggestions == ["A good suggestion"])
+    }
+
+    @Test
+    func suggestions_failure_returnsExpectedResult() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let sut = SearchService(
+            serviceClient: mockServiceClient
+        )
+        mockServiceClient._stubbedSuggestionsResult = .failure(.apiUnavailable)
+        let suggestions = await withCheckedContinuation { continuation in
+            sut.suggestions(
+                "good",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+        #expect(suggestions == [])
+    }
+
 }

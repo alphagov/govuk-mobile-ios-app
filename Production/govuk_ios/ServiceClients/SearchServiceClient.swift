@@ -3,13 +3,19 @@ import Foundation
 protocol SearchServiceClientInterface {
     func search(term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
+
+    func suggestions(term: String,
+                     completion: @escaping (Result<SearchSuggestions, SearchError>) -> Void)
 }
 
 class SearchServiceClient: SearchServiceClientInterface {
     private let serviceClient: APIServiceClientInterface
+    private let suggestionsServiceClient: APIServiceClientInterface
 
-    init(serviceClient: APIServiceClientInterface) {
+    init(serviceClient: APIServiceClientInterface,
+         suggestionsServiceClient: APIServiceClientInterface) {
         self.serviceClient = serviceClient
+        self.suggestionsServiceClient = suggestionsServiceClient
     }
 
     func search(term: String,

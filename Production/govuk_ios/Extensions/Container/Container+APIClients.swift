@@ -3,6 +3,16 @@ import Foundation
 import Factory
 
 extension Container {
+    var govukAPIClient: Factory<APIServiceClientInterface> {
+        Factory(self) {
+            APIServiceClient(
+                baseUrl: Constants.API.govukBaseUrl,
+                session: URLSession(configuration: .default),
+                requestBuilder: RequestBuilder()
+            )
+        }
+    }
+
     var appAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
             APIServiceClient(

@@ -67,6 +67,7 @@ class SearchSuggestionsViewController: BaseViewController {
 
         configureUI()
         configureConstraints()
+        reloadSnapshot()
     }
 
     private lazy var dataSource: DataSource = {
@@ -99,7 +100,6 @@ class SearchSuggestionsViewController: BaseViewController {
     }
 
     private func configureUI() {
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
     }
 

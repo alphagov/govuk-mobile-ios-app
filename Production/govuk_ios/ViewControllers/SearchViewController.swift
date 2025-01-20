@@ -315,6 +315,7 @@ class SearchViewController: BaseViewController,
                 self.searchReturnPressed()
             }
         )
+        localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.hide()
         return localController
     }()

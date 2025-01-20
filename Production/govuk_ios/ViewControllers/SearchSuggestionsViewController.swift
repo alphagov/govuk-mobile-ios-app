@@ -22,8 +22,6 @@ class SearchSuggestionsViewController: BaseViewController {
         localLabel.accessibilityTraits = .header
         localLabel.adjustsFontForContentSizeCategory = true
         localLabel.textAlignment = .left
-
-        localHeaderView.translatesAutoresizingMaskIntoConstraints = false
         localLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([

@@ -12,34 +12,40 @@ class SearchSuggestionsViewController: BaseViewController {
     private let selectionAction: (String) -> Void
 
     private let tableViewHeader: UIView = {
-        let headerView = UIView()
-        let label = UILabel()
+        let localHeaderView = UIView()
+        let localLabel = UILabel()
 
-        headerView.addSubview(label)
+        localHeaderView.addSubview(localLabel)
 
-        label.font = UIFont.govUK.title3Semibold
-        label.text = String.search.localized("searchSuggestionsTitle")
-        label.accessibilityTraits = .header
-        label.translatesAutoresizingMaskIntoConstraints = false
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        localLabel.font = UIFont.govUK.title3Semibold
+        localLabel.text = String.search.localized("searchSuggestionsTitle")
+        localLabel.accessibilityTraits = .header
+        localLabel.adjustsFontForContentSizeCategory = true
+        localLabel.textAlignment = .left
+
+        localHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        localLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: headerView.topAnchor),
-            label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8),
-            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16)
+            localLabel.topAnchor.constraint(equalTo: localHeaderView.topAnchor),
+            localLabel.bottomAnchor.constraint(equalTo: localHeaderView.bottomAnchor,
+                                               constant: -16),
+            localLabel.leadingAnchor.constraint(equalTo: localHeaderView.leadingAnchor)
         ])
 
-        return headerView
+        return localHeaderView
     }()
 
     private let tableView: UITableView = {
-        let localTableView = UITableView()
+        let localTableView = UITableView(frame: .zero, style: .grouped)
 
         localTableView.translatesAutoresizingMaskIntoConstraints = false
         localTableView.register(SuggestionCell.self)
         localTableView.separatorStyle = .singleLine
         localTableView.backgroundColor = UIColor.govUK.fills.surfaceModal
         localTableView.translatesAutoresizingMaskIntoConstraints = false
+        localTableView.contentInsetAdjustmentBehavior = .never
+        localTableView.separatorColor = UIColor.govUK.strokes.listDivider
 
         return localTableView
     }()
@@ -101,15 +107,13 @@ class SearchSuggestionsViewController: BaseViewController {
                 equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
             tableView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor
             ),
             tableView.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor
             ),
             tableView.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                constant: -4
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor
             )
         ])
     }

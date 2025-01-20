@@ -212,10 +212,12 @@ class SearchViewController: BaseViewController,
                 constant: 6
             ),
             searchSuggestionsViewController.view.rightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.rightAnchor
+                equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                constant: -16
             ),
             searchSuggestionsViewController.view.leftAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leftAnchor
+                equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                constant: 16
             ),
             searchSuggestionsViewController.view.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
@@ -233,7 +235,9 @@ class SearchViewController: BaseViewController,
                 equalTo: view.safeAreaLayoutGuide.leftAnchor,
                 constant: 16
             ),
-            searchHistoryViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            searchHistoryViewController.view.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            )
         ])
     }
 

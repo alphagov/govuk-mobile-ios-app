@@ -9,8 +9,10 @@ struct SearchServiceTests {
     @Test
     func search_callsServiceClient() {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRespository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRespository
         )
         let expectedTerm = UUID().uuidString
         sut.search(
@@ -23,8 +25,10 @@ struct SearchServiceTests {
     @Test
     func search_success_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRespository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRespository
         )
         let expectedSearchResult = SearchResult(
             results: [
@@ -50,8 +54,10 @@ struct SearchServiceTests {
     @Test
     func search_failure_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRespository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRespository
         )
         mockServiceClient._stubbedSearchResult = .failure(.apiUnavailable)
         let result = await withCheckedContinuation { continuation in
@@ -69,8 +75,10 @@ struct SearchServiceTests {
     @Test
     func search_success_noResults_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRepository
         )
         let stubbedResult = SearchResult(results: [])
         mockServiceClient._stubbedSearchResult = .success(stubbedResult)
@@ -89,8 +97,10 @@ struct SearchServiceTests {
     @Test
     func suggestions_callsServiceClient() {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRepository
         )
         let expectedTerm = UUID().uuidString
         sut.suggestions(
@@ -103,8 +113,10 @@ struct SearchServiceTests {
     @Test
     func suggestions_success_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRepository
         )
         let stubbedSuggestion = SearchSuggestions(suggestions: ["A good suggestion"])
         mockServiceClient._stubbedSuggestionsResult = .success(stubbedSuggestion)
@@ -122,8 +134,10 @@ struct SearchServiceTests {
     @Test
     func suggestions_failure_returnsExpectedResult() async {
         let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(
-            serviceClient: mockServiceClient
+            serviceClient: mockServiceClient,
+            repository: mockRepository
         )
         mockServiceClient._stubbedSuggestionsResult = .failure(.apiUnavailable)
         let suggestions = await withCheckedContinuation { continuation in
@@ -137,4 +151,39 @@ struct SearchServiceTests {
         #expect(suggestions == [])
     }
 
+    func save_search_savesSearchToRepository() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        sut.save(searchText: "test", date: .init())
+        #expect(mockRepository._didSaveSearchHistory)
+        #expect(mockRepository._savedSearchText == "test")
+    }
+
+    @Test
+    func clear_searchHistory_clearsRepository() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        sut.clearSearchHistory()
+        #expect(mockRepository._didClearSearchHistory)
+    }
+
+    @Test
+    func delete_searchHistory_deletesFromRepository() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        sut.delete(SearchHistoryItem())
+        #expect(mockRepository._didDeleteSearchHistoryItem)
+    }
 }

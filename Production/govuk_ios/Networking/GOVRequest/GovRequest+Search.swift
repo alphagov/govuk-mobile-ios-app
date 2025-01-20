@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 
 extension GOVRequest {
     static func search(term: String) -> GOVRequest {

@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 
 @testable import govuk_ios
 
@@ -13,6 +14,26 @@ class MockSearchService: SearchServiceInterface {
         if let result = _stubbedSuggestions {
             completion(result)
         }
+    }
+
+    var _didCallDeleteSearchHistoryItem: Bool = false
+    func delete(_ item: SearchHistoryItem) {
+        _didCallDeleteSearchHistoryItem = true
+    }
+    
+    var _didCallSaveSearchHistory: Bool = false
+    func save(searchText: String, date: Date) {
+        _didCallSaveSearchHistory = true
+    }
+    
+    var _didCallClearSearchHistory: Bool = false
+    func clearSearchHistory() {
+        _didCallClearSearchHistory = true
+    }
+    
+    var _stubbedFetchResultsController: NSFetchedResultsController<SearchHistoryItem>?
+    var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? {
+        _stubbedFetchResultsController
     }
     
     var _searchReceivedTerm: String?

@@ -1,14 +1,16 @@
 import UIKit
 import Foundation
+import GOVKit
 
 class LaunchViewController: BaseViewController {
     private lazy var animationView = AnimationView.launch
 
     private let viewModel: LaunchViewModel
 
-    init(viewModel: LaunchViewModel) {
+    init(viewModel: LaunchViewModel,
+         analyticsService: AnalyticsServiceInterface) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: analyticsService)
     }
 
     required init?(coder: NSCoder) {

@@ -3,6 +3,7 @@ import UIKit
 import SwiftUI
 import UIComponents
 import Combine
+import GOVKit
 
 class TopicOnboardingViewController: BaseViewController,
                                      TrackableScreen {
@@ -12,7 +13,7 @@ class TopicOnboardingViewController: BaseViewController,
 
     init(viewModel: TopicOnboardingViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: viewModel.analyticsService)
     }
 
     override func viewWillAppear(_ animated: Bool) {

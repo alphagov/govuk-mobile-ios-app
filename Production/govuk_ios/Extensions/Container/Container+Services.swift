@@ -1,6 +1,8 @@
 import Foundation
 import Factory
 import Onboarding
+import GOVKit
+import RecentActivity
 
 import Firebase
 import FirebaseCrashlytics
@@ -29,7 +31,8 @@ extension Container {
     var searchService: Factory<SearchServiceInterface> {
         Factory(self) {
             SearchService(
-                serviceClient: self.searchServiceClient()
+                serviceClient: self.searchServiceClient(),
+                repository: self.searchHistoryRepository()
             )
         }
     }

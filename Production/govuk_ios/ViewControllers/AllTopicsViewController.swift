@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import UIComponents
+import GOVKit
 
 class AllTopicsViewController: BaseViewController, TrackableScreen {
     let viewModel: AllTopicsViewModel
@@ -22,7 +23,7 @@ class AllTopicsViewController: BaseViewController, TrackableScreen {
 
     public init(viewModel: AllTopicsViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: viewModel.analyticsService)
     }
 
     var trackingName: String { "All topics" }

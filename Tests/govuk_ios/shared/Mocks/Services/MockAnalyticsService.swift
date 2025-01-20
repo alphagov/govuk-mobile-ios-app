@@ -1,5 +1,6 @@
 import XCTest
 import Onboarding
+import GOVKit
 
 @testable import govuk_ios
 

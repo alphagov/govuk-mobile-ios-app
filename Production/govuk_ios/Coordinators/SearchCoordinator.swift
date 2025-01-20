@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import GOVKit
 
 class SearchCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder

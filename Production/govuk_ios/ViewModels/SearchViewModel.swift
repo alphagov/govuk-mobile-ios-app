@@ -1,4 +1,6 @@
 import UIKit
+import GOVKit
+import RecentActivity
 
 enum SearchError: Error {
     case apiUnavailable
@@ -8,13 +10,22 @@ enum SearchError: Error {
 }
 
 class SearchViewModel {
-    private let analyticsService: AnalyticsServiceInterface
+    let analyticsService: AnalyticsServiceInterface
+    let urlOpener: URLOpener
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
     lazy var searchSuggestionsViewModel: SearchSuggestionsViewModel = {
-        SearchSuggestionsViewModel(searchService: searchService)
+        SearchSuggestionsViewModel(searchService: searchService,
+                                   analyticsService: analyticsService)
     }()
-    let urlOpener: URLOpener
+    lazy var searchHistoryViewModel: SearchHistoryViewModel = {
+        SearchHistoryViewModel(searchService: searchService,
+                               analyticsService: analyticsService)
+    }()
+
+    var historyIsEmpty: Bool {
+        searchHistoryViewModel.searchHistoryItems.isEmpty
+    }
 
     private(set) var results: [SearchItem]?
     private(set) var error: SearchError?
@@ -45,6 +56,7 @@ class SearchViewModel {
                 completion()
             }
         )
+        searchHistoryViewModel.saveSearchHistoryItem(searchText: text, date: .init())
     }
 
     func selected(item: SearchItem) {

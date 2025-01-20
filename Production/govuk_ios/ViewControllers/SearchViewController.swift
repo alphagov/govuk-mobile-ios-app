@@ -1,5 +1,7 @@
+// swiftlint:disable file_length
 import UIKit
 import UIComponents
+import GOVKit
 
 private typealias DataSource = UITableViewDiffableDataSource<SearchSection, SearchItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
@@ -104,13 +106,25 @@ class SearchViewController: BaseViewController,
         return localDataSource
     }()
 
+    private lazy var searchHistoryViewController: SearchHistoryViewController = {
+        let localController = SearchHistoryViewController(
+            viewModel: viewModel.searchHistoryViewModel,
+            selectionAction: { searchText in
+                self.searchBar.text = searchText
+                self.searchReturnPressed()
+            }
+        )
+        localController.view.translatesAutoresizingMaskIntoConstraints = false
+        return localController
+    }()
+
     var trackingName: String { "Search" }
 
     init(viewModel: SearchViewModel,
          dismissAction: @escaping () -> Void) {
         self.viewModel = viewModel
         self.dismissAction = dismissAction
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: viewModel.analyticsService)
     }
 
     required init?(coder: NSCoder) {
@@ -154,8 +168,14 @@ class SearchViewController: BaseViewController,
         addChild(self.searchSuggestionsViewController)
         view.addSubview(searchSuggestionsViewController.view)
         searchSuggestionsViewController.didMove(toParent: self)
+
+        addChild(self.searchHistoryViewController)
+        view.addSubview(searchHistoryViewController.view)
+        searchHistoryViewController.didMove(toParent: self)
+        tableView.isHidden = !viewModel.historyIsEmpty
     }
 
+    // swiftlint:disable:next function_body_length
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(
@@ -199,7 +219,21 @@ class SearchViewController: BaseViewController,
             ),
             searchSuggestionsViewController.view.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
-            )
+            ),
+
+            searchHistoryViewController.view.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor,
+                constant: 6
+            ),
+            searchHistoryViewController.view.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                constant: -16
+            ),
+            searchHistoryViewController.view.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                constant: 16
+            ),
+            searchHistoryViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -271,6 +305,7 @@ class SearchViewController: BaseViewController,
                 self?.updateFocus()
             }
         )
+        searchHistoryViewController.hide()
     }
 
     private lazy var searchSuggestionsViewController: SearchSuggestionsViewController =  {
@@ -353,10 +388,25 @@ class SearchViewController: BaseViewController,
 
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        clearResults()
+        return true
+    }
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if string.isEmpty && textField.text?.count == 1 {
+            clearResults()
+        }
+        return true
+    }
+
+    private func clearResults() {
         viewModel.clearResults()
         reloadSnapshot()
-
-        return true
+        searchHistoryViewController.reloadSnapshot()
+        tableView.isHidden = true
+        searchHistoryViewController.show()
     }
 }
 
@@ -380,3 +430,4 @@ extension SearchViewController: UITableViewDelegate {
 enum SearchSection {
     case results
 }
+// swiftlint:enable file_length

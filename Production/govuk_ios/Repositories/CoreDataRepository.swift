@@ -1,12 +1,6 @@
 import CoreData
 import Foundation
-
-protocol CoreDataRepositoryInterface {
-    var viewContext: NSManagedObjectContext { get }
-    var backgroundContext: NSManagedObjectContext { get }
-
-    func load() -> Self
-}
+import GOVKit
 
 class CoreDataRepository: CoreDataRepositoryInterface {
     private let persistentContainer: NSPersistentContainer
@@ -21,6 +15,8 @@ class CoreDataRepository: CoreDataRepositoryInterface {
     func load() -> Self {
         persistentContainer.persistentStoreDescriptions.forEach { [weak self] in
             self?.setDescriptionProtection(description: $0)
+            $0.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+            $0.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
         }
         persistentContainer.loadPersistentStores(
             completionHandler: { [weak self] description, error in

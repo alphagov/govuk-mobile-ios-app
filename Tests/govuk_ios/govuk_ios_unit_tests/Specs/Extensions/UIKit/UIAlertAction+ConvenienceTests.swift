@@ -13,4 +13,21 @@ struct UIAlertAction_ConvenienceTests {
         #expect(subject.title == "OK")
         #expect(subject.style == .default)
     }
+
+    @Test
+    func cancel_returnsExpectedResult() {
+        let subject = UIAlertAction.cancel()
+
+        #expect(subject.title == "Cancel")
+        #expect(subject.style == .cancel)
+    }
+
+    @Test
+    func destructive_returnsExpectedResult() {
+        let subject = UIAlertAction.destructive(title: "Test",
+                                                handler: nil)
+
+        #expect(subject.title == "Test")
+        #expect(subject.style == .destructive)
+    }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import RecentActivity
 
 @testable import govuk_ios
 

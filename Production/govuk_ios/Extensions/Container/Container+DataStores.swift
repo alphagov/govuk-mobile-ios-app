@@ -1,6 +1,7 @@
 import Foundation
 import Factory
 import CoreData
+import GOVKit
 
 extension Container {
     var coreDataModel: Factory<NSManagedObjectModel> {

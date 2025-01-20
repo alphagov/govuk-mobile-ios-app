@@ -1,15 +1,19 @@
 import Foundation
 import UIKit
+import GOVKit
 
 class SearchSuggestionsViewModel {
     private let searchService: SearchServiceInterface
     private let suggestionHighlighterProcessor = SuggestionHighlighterProcessor()
+    let analyticsService: AnalyticsServiceInterface
 
     var suggestions: [SearchSuggestion] = []
     var searchBarText: String = ""
 
-    init(searchService: SearchServiceInterface) {
+    init(searchService: SearchServiceInterface,
+         analyticsService: AnalyticsServiceInterface) {
         self.searchService = searchService
+        self.analyticsService = analyticsService
     }
 
     func suggestions(completion: @escaping () -> Void) {

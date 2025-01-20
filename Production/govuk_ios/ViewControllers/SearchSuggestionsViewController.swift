@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import GOVKit
 
 private typealias DataSource = UITableViewDiffableDataSource<SearchSuggestionsSection,
                                                              SearchSuggestion>
@@ -47,7 +48,7 @@ class SearchSuggestionsViewController: BaseViewController {
                 selectionAction: @escaping (String) -> Void) {
         self.viewModel = viewModel
         self.selectionAction = selectionAction
-        super.init(nibName: nil, bundle: nil)
+        super.init(analyticsService: viewModel.analyticsService)
     }
 
     required init?(coder: NSCoder) {

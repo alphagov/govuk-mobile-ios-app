@@ -1,8 +1,9 @@
 import UIKit
 import Foundation
+import GOVKit
 
 class AllTopicsViewModel {
-    private let analyticsService: AnalyticsServiceInterface
+    let analyticsService: AnalyticsServiceInterface
     let topicAction: (Topic) -> Void
     private(set) var topics: [Topic] = []
 

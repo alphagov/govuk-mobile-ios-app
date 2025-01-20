@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import GOVKit
 
 typealias LaunchCoordinatorCompletion = (sending AppLaunchResponse) -> Void
 class LaunchCoordinator: BaseCoordinator {
@@ -7,15 +8,18 @@ class LaunchCoordinator: BaseCoordinator {
     private let appLaunchService: AppLaunchServiceInterface
     private let completion: LaunchCoordinatorCompletion
     private var launchResponse: AppLaunchResponse?
+    private let analyticsService: AnalyticsServiceInterface
 
     private let dispatchGroup = DispatchGroup()
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          appLaunchService: AppLaunchServiceInterface,
+         anayticsService: AnalyticsServiceInterface,
          completion: @escaping LaunchCoordinatorCompletion) {
         self.viewControllerBuilder = viewControllerBuilder
         self.appLaunchService = appLaunchService
+        self.analyticsService = anayticsService
         self.completion = completion
         super.init(navigationController: navigationController)
     }
@@ -51,6 +55,7 @@ class LaunchCoordinator: BaseCoordinator {
     private func setLaunchViewController() {
         dispatchGroup.enter()
         let viewController = viewControllerBuilder.launch(
+            analyticsService: analyticsService,
             completion: { [weak self] in
                 self?.dispatchGroup.leave()
             }

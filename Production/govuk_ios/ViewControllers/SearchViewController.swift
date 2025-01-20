@@ -4,6 +4,7 @@ import UIComponents
 private typealias DataSource = UITableViewDiffableDataSource<SearchSection, SearchItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
 
+// swiftlint:disable:next type_body_length
 class SearchViewController: BaseViewController,
                             TrackableScreen {
     private let viewModel: SearchViewModel
@@ -51,6 +52,11 @@ class SearchViewController: BaseViewController,
             self,
             action: #selector(searchReturnPressed),
             for: UIControl.Event.editingDidEndOnExit
+        )
+        localSearchBar.searchTextField.addTarget(
+            self,
+            action: #selector(fetchAndDisplaySuggestions),
+            for: UIControl.Event.editingChanged
         )
 
         return localSearchBar
@@ -144,6 +150,10 @@ class SearchViewController: BaseViewController,
         view.addSubview(tableView)
         view.addSubview(errorScrollView)
         errorScrollView.addSubview(errorView)
+
+        addChild(self.searchSuggestionsViewController)
+        view.addSubview(searchSuggestionsViewController.view)
+        searchSuggestionsViewController.didMove(toParent: self)
     }
 
     private func configureConstraints() {
@@ -160,6 +170,7 @@ class SearchViewController: BaseViewController,
                 equalTo: view.safeAreaLayoutGuide.leftAnchor,
                 constant: 10
             ),
+
             searchBar.heightAnchor.constraint(
                 greaterThanOrEqualToConstant: 36
             ),
@@ -174,7 +185,21 @@ class SearchViewController: BaseViewController,
             tableView.leftAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leftAnchor
             ),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            searchSuggestionsViewController.view.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor,
+                constant: 6
+            ),
+            searchSuggestionsViewController.view.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor
+            ),
+            searchSuggestionsViewController.view.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor
+            ),
+            searchSuggestionsViewController.view.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            )
         ])
     }
 
@@ -232,7 +257,8 @@ class SearchViewController: BaseViewController,
 
     @objc
     private func searchReturnPressed() {
-        self.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
+        searchSuggestionsViewController.view.isHidden = true
 
         let searchText = searchBar.text
         viewModel.search(
@@ -245,6 +271,36 @@ class SearchViewController: BaseViewController,
                 self?.updateFocus()
             }
         )
+    }
+
+    private lazy var searchSuggestionsViewController: SearchSuggestionsViewController =  {
+        let localController = SearchSuggestionsViewController(
+            viewModel: viewModel.searchSuggestionsViewModel,
+            selectionAction: { searchText in
+                self.searchBar.text = searchText
+                self.searchReturnPressed()
+            }
+        )
+        localController.view.isHidden = true
+        return localController
+    }()
+
+    @objc
+    func fetchAndDisplaySuggestions() {
+        let suggestionsViewModel = self.viewModel.searchSuggestionsViewModel
+        suggestionsViewModel.searchBarText = searchBar.text ?? ""
+
+        suggestionsViewModel.suggestions { [weak self] in
+            guard let self else { return }
+
+            let suggestions = suggestionsViewModel.suggestions
+            if viewModel.results?.isEmpty == false && !suggestions.isEmpty {
+                viewModel.clearResults()
+                reloadSnapshot()
+            }
+            searchSuggestionsViewController.view.isHidden = suggestions.isEmpty
+            searchSuggestionsViewController.reloadSnapshot()
+        }
     }
 
     private func updateFocus() {

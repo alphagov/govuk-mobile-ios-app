@@ -13,6 +13,7 @@
 		1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */; };
 		1650769D2D3DAC0D0034C4F1 /* SearchSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650769C2D3DABFE0034C4F1 /* SearchSuggestion.swift */; };
 		166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166248232C4AC91E009F7E58 /* HomeCoordinator.swift */; };
+		1664A5642D36CF1200DB18A5 /* SearchSuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A99D6F2D36C60200C72DEB /* SearchSuggestionsViewController.swift */; };
 		1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1666F49F2C86124900DBD064 /* SearchModalButton.swift */; };
 		166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BDDB52C330D1C00437AE0 /* HomeViewController.swift */; };
 		1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */; };
@@ -22,6 +23,7 @@
 		168A136A2CF749900068006A /* GroupedListSectionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168A13692CF749900068006A /* GroupedListSectionIconView.swift */; };
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
 		168F6FAA2C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */; };
+		16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A98EA42D30333A00C72DEB /* SuggestionCell.swift */; };
 		16A99D6B2D35F19300C72DEB /* SearchSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A99D6A2D35F18700C72DEB /* SearchSuggestionsViewModel.swift */; };
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
@@ -285,7 +287,9 @@
 		168A13692CF749900068006A /* GroupedListSectionIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListSectionIconView.swift; sourceTree = "<group>"; };
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidgetViewModel.swift; sourceTree = "<group>"; };
+		16A98EA42D30333A00C72DEB /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
 		16A99D6A2D35F18700C72DEB /* SearchSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsViewModel.swift; sourceTree = "<group>"; };
+		16A99D6F2D36C60200C72DEB /* SearchSuggestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsViewController.swift; sourceTree = "<group>"; };
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
@@ -681,6 +685,7 @@
 		163800FD2C99DAB900C3DDD1 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				16A98EA42D30333A00C72DEB /* SuggestionCell.swift */,
 				16F961A22C92FD15005CFB04 /* SearchResultCell.swift */,
 			);
 			path = Search;
@@ -1109,6 +1114,7 @@
 		5DAD71A82BD254730075F648 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				16A99D6F2D36C60200C72DEB /* SearchSuggestionsViewController.swift */,
 				1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */,
 				5DBE080B2C4812ED00B58DBE /* BaseViewController.swift */,
 				166BDDB52C330D1C00437AE0 /* HomeViewController.swift */,
@@ -1599,6 +1605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1664A5642D36CF1200DB18A5 /* SearchSuggestionsViewController.swift in Sources */,
 				5DDCF62F2C874AB400A24947 /* GOV.xcdatamodeld in Sources */,
 				5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */,
 				5DAC6E5A2C64CDA20099406C /* TrackableScreen.swift in Sources */,
@@ -1709,6 +1716,7 @@
 				4E00EEEB2CCB040D007B61E8 /* TopicsButtonView.swift in Sources */,
 				5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */,
 				5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */,
+				16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
 				4E6663CA2C737EF50063E81C /* Config.swift in Sources */,
 				3D3378142CAAC0E0004BF83F /* AppUnavailableContainerView.swift in Sources */,

@@ -33,6 +33,17 @@
           }
         }
       }
+    },
+    "searchSuggestionsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search suggestions"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

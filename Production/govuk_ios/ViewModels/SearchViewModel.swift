@@ -11,6 +11,9 @@ class SearchViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
+    lazy var searchSuggestionsViewModel: SearchSuggestionsViewModel = {
+        SearchSuggestionsViewModel(searchService: searchService)
+    }()
     let urlOpener: URLOpener
 
     private(set) var results: [SearchItem]?

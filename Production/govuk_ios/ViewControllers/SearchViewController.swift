@@ -55,11 +55,6 @@ class SearchViewController: BaseViewController,
             action: #selector(searchReturnPressed),
             for: UIControl.Event.editingDidEndOnExit
         )
-        localSearchBar.searchTextField.addTarget(
-            self,
-            action: #selector(textFieldUpdated),
-            for: UIControl.Event.editingChanged
-        )
 
         return localSearchBar
     }()
@@ -324,34 +319,6 @@ class SearchViewController: BaseViewController,
         return localController
     }()
 
-    @objc
-    func textFieldUpdated() {
-        let suggestionsViewModel = self.viewModel.searchSuggestionsViewModel
-        let searchBarText = searchBar.text ?? ""
-        suggestionsViewModel.searchBarText = searchBarText
-
-        guard searchBarText.count >= 3 else {
-            viewModel.searchSuggestionsViewModel.clearSuggestions()
-            searchSuggestionsViewController.hide()
-            searchHistoryViewController.show()
-            return
-        }
-
-        suggestionsViewModel.suggestions { [weak self] in
-            guard let self else { return }
-
-            searchHistoryViewController.hide()
-
-            let suggestions = suggestionsViewModel.suggestions
-            if viewModel.results?.isEmpty == false && !suggestions.isEmpty {
-                viewModel.clearResults()
-                reloadSnapshot()
-            }
-            searchSuggestionsViewController.view.isHidden = suggestions.isEmpty
-            searchSuggestionsViewController.reloadSnapshot()
-        }
-    }
-
     private func updateFocus() {
         let view = errorScrollView.isHidden ? tableViewHeader : errorScrollView
         accessibilityLayoutChanged(focusView: view)
@@ -409,10 +376,42 @@ extension SearchViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        if string.isEmpty && textField.text?.count == 1 {
-            clearResults()
+        let currentText = textField.text ?? ""
+        let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+        // return true if enter / return pressed
+        guard string != "\n" else {
+            return true
         }
+
+        guard !replacementText.isEmpty, replacementText.count >= 3
+        else {
+            clearResults()
+            return true
+        }
+
+        updateSuggestions(replacementText)
+
         return true
+    }
+
+    private func updateSuggestions(_ searchBarText: String) {
+        let suggestionsViewModel = viewModel.searchSuggestionsViewModel
+        suggestionsViewModel.searchBarText = searchBarText
+
+        suggestionsViewModel.suggestions { [weak self] in
+            guard let self else { return }
+
+            searchHistoryViewController.hide()
+
+            let suggestions = suggestionsViewModel.suggestions
+            if viewModel.results?.isEmpty == false && !suggestions.isEmpty {
+                viewModel.clearResults()
+                reloadSnapshot()
+            }
+            searchSuggestionsViewController.view.isHidden = suggestions.isEmpty
+            searchSuggestionsViewController.reloadSnapshot()
+        }
     }
 
     private func clearResults() {

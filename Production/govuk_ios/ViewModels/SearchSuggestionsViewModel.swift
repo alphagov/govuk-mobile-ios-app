@@ -18,7 +18,10 @@ class SearchSuggestionsViewModel {
 
     func suggestions(completion: @escaping () -> Void) {
         guard !searchBarText.isEmpty
-        else { return suggestions = [] }
+        else {
+            suggestions = []
+            return
+        }
 
         searchService.suggestions(
             searchBarText,

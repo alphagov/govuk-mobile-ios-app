@@ -8,7 +8,7 @@
 	<string>NSFileProtectionComplete</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.uk.gov.govuk.onesignal</string>
+		<string>group.uk.gov.govuk.dev.onesignal</string>
 	</array>
 </dict>
 </plist>

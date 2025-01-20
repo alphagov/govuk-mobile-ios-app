@@ -26,7 +26,7 @@ struct HomeViewModel {
             action: feedbackAction
         )
         let content = UserFeedbackView(viewModel: viewModel)
-        let widget = WidgetView()
+        let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.backgroundColor = UIColor.govUK.fills.surfaceCardSelected
         widget.addContent(content)
         return widget
@@ -63,10 +63,7 @@ struct HomeViewModel {
         let content = RecentActivtyWidget(
             viewModel: viewModel
         )
-        let widget = WidgetView()
-        widget.isAccessibilityElement = true
-        widget.accessibilityLabel = content.accessibilityLabel
-        widget.accessibilityTraits = content.accessibilityTraits
+        let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.addContent(content)
         return widget
     }

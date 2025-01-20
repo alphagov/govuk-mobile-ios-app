@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import UIComponents
 
-final class UserFeedbackView: UIView {
+final class UserFeedbackView: UIControl {
     private let viewModel: UserFeedbackViewModel
 
     private let stackView: UIStackView = {
@@ -44,6 +44,7 @@ final class UserFeedbackView: UIView {
         titleLabel.text = viewModel.title
         configureUI()
         configureConstraints()
+        configureAccessibility()
     }
 
     required init?(coder: NSCoder) {
@@ -65,6 +66,12 @@ final class UserFeedbackView: UIView {
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             titleImageView.widthAnchor.constraint(equalToConstant: 12)
         ])
+    }
+
+    private func configureAccessibility() {
+        accessibilityTraits = .link
+        accessibilityLabel = viewModel.title
+        accessibilityHint = String.common.localized("openWebLinkHint")
     }
 
     @objc

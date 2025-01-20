@@ -3,6 +3,7 @@ import UIKit
 
 class SearchSuggestionsViewModel {
     private let searchService: SearchServiceInterface
+    private let suggestionHighlighterProcessor = SuggestionHighlighterProcessor()
 
     var suggestions: [SearchSuggestion] = []
     var searchBarText: String = ""
@@ -28,5 +29,9 @@ class SearchSuggestionsViewModel {
 
     func clearSuggestions() {
         suggestions = []
+    }
+
+    func highlightSuggestion(suggestion: String) -> NSAttributedString {
+        suggestionHighlighterProcessor.process(text: searchBarText, suggestion: suggestion)
     }
 }

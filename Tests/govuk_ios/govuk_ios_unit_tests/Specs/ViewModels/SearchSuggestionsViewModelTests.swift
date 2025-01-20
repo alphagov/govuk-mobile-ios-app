@@ -67,4 +67,11 @@ class SearchSuggestionsViewModelTests {
 
         #expect(subject.suggestions == [])
     }
+
+    @Test
+    func highlightedSuggestion_returns_hightLightedSuggestion() {
+        subject.searchBarText = "cat"
+
+        #expect((subject.highlightSuggestion(suggestion: "category") as Any) is NSAttributedString)
+    }
 }

@@ -129,6 +129,7 @@
 		5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E67C92C5A3BA600DB7877 /* UITabBarController+GOVUK.swift */; };
 		5DA4FB072CCBAF2100804C8A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FB062CCBAF2100804C8A /* SettingsView.swift */; };
 		5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */; };
+		5DAA52E92D3ECDAE002E0B62 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA52E62D3ECDAE002E0B62 /* NotificationService.swift */; };
 		5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DABE8CE2CA41AD4003AB312 /* RecentActivtyWidget.swift */; };
 		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* SceneDelegate.swift */; };
@@ -384,6 +385,10 @@
 		5DA4FB062CCBAF2100804C8A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRouteProvider.swift; sourceTree = "<group>"; };
 		5DAA52E22D3ECB32002E0B62 /* govuk_ios_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_dev.entitlements; sourceTree = "<group>"; };
+		5DAA52E32D3ECDAE002E0B62 /* govuk_ios_notification_service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service.entitlements; sourceTree = "<group>"; };
+		5DAA52E42D3ECDAE002E0B62 /* govuk_ios_notification_service_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service_dev.entitlements; sourceTree = "<group>"; };
+		5DAA52E52D3ECDAE002E0B62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DAA52E62D3ECDAE002E0B62 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5DABE8CE2CA41AD4003AB312 /* RecentActivtyWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivtyWidget.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -593,13 +598,6 @@
 				govuk_ios/govuk_ios_ui_tests/GovUKUITestsLaunchTests.swift,
 			);
 			target = 5DAD71932BD250DF0075F648 /* govuk_ios_ui_tests */;
-		};
-		5DC8E2722D37D9CE0050888F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 5DC8E2642D37D9CD0050888F /* govuk_ios_notification_service */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -985,6 +983,17 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		5DAA52E72D3ECDAE002E0B62 /* govuk_ios_notification_service */ = {
+			isa = PBXGroup;
+			children = (
+				5DAA52E32D3ECDAE002E0B62 /* govuk_ios_notification_service.entitlements */,
+				5DAA52E42D3ECDAE002E0B62 /* govuk_ios_notification_service_dev.entitlements */,
+				5DAA52E52D3ECDAE002E0B62 /* Info.plist */,
+				5DAA52E62D3ECDAE002E0B62 /* NotificationService.swift */,
+			);
+			path = govuk_ios_notification_service;
+			sourceTree = "<group>";
+		};
 		5DAD716B2BD250DA0075F648 = {
 			isa = PBXGroup;
 			children = (
@@ -993,7 +1002,6 @@
 				5DAD71B42BD286730075F648 /* Production */,
 				5D9CDE3A2CD928FB0045DFC3 /* Tests */,
 				5D30CF982C64A64600361C97 /* TestFlight */,
-				5DC8E2662D37D9CE0050888F /* govuk_ios_notification_service */,
 				5DAD71752BD250DB0075F648 /* Products */,
 				5D1353A92BE0D75000414441 /* Frameworks */,
 			);
@@ -1082,6 +1090,7 @@
 			isa = PBXGroup;
 			children = (
 				5DAD71762BD250DB0075F648 /* govuk_ios */,
+				5DAA52E72D3ECDAE002E0B62 /* govuk_ios_notification_service */,
 			);
 			path = Production;
 			sourceTree = "<group>";
@@ -1356,9 +1365,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				5DC8E2662D37D9CE0050888F /* govuk_ios_notification_service */,
 			);
 			name = govuk_ios_notification_service;
 			packageProductDependencies = (
@@ -1744,6 +1750,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DAA52E92D3ECDAE002E0B62 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

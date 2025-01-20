@@ -6,7 +6,9 @@ import Testing
 @Suite
 class SearchSuggestionsViewModelTests {
     private let mockSearchService = MockSearchService()
-    private lazy var subject = SearchSuggestionsViewModel(searchService: mockSearchService)
+    private lazy var subject = SearchSuggestionsViewModel(
+        searchService: mockSearchService, analyticsService: MockAnalyticsService()
+    )
 
     @Test
     func suggestions_sets_searchSuggestions() {
@@ -41,17 +43,6 @@ class SearchSuggestionsViewModelTests {
     @Test
     func suggestions_searchBarTextEmpty_setsEmptySuggestions() {
         subject.searchBarText = ""
-        subject.suggestions(
-            completion: {}
-        )
-
-        #expect(mockSearchService._suggestionsReceivedTerm == nil)
-        #expect(subject.suggestions == [])
-    }
-
-    @Test
-    func suggestions_searchBarTextLessThan3Chars_setsEmptySuggestions() {
-        subject.searchBarText = "he"
         subject.suggestions(
             completion: {}
         )

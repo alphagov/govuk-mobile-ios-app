@@ -17,7 +17,7 @@ class SearchSuggestionsViewModel {
     }
 
     func suggestions(completion: @escaping () -> Void) {
-        guard !searchBarText.isEmpty, searchBarText.count >= 3
+        guard !searchBarText.isEmpty
         else { return suggestions = [] }
 
         searchService.suggestions(

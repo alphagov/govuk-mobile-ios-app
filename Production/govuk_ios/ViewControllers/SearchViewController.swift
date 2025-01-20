@@ -57,7 +57,7 @@ class SearchViewController: BaseViewController,
         )
         localSearchBar.searchTextField.addTarget(
             self,
-            action: #selector(fetchAndDisplaySuggestions),
+            action: #selector(textFieldUpdated),
             for: UIControl.Event.editingChanged
         )
 
@@ -296,7 +296,6 @@ class SearchViewController: BaseViewController,
     @objc
     private func searchReturnPressed() {
         searchBar.resignFirstResponder()
-        searchSuggestionsViewController.view.isHidden = true
 
         let searchText = searchBar.text
         viewModel.search(
@@ -309,6 +308,7 @@ class SearchViewController: BaseViewController,
                 self?.updateFocus()
             }
         )
+        searchSuggestionsViewController.hide()
         searchHistoryViewController.hide()
     }
 
@@ -320,17 +320,27 @@ class SearchViewController: BaseViewController,
                 self.searchReturnPressed()
             }
         )
-        localController.view.isHidden = true
+        localController.hide()
         return localController
     }()
 
     @objc
-    func fetchAndDisplaySuggestions() {
+    func textFieldUpdated() {
         let suggestionsViewModel = self.viewModel.searchSuggestionsViewModel
-        suggestionsViewModel.searchBarText = searchBar.text ?? ""
+        let searchBarText = searchBar.text ?? ""
+        suggestionsViewModel.searchBarText = searchBarText
+
+        guard searchBarText.count >= 3 else {
+            viewModel.searchSuggestionsViewModel.clearSuggestions()
+            searchSuggestionsViewController.hide()
+            searchHistoryViewController.show()
+            return
+        }
 
         suggestionsViewModel.suggestions { [weak self] in
             guard let self else { return }
+
+            searchHistoryViewController.hide()
 
             let suggestions = suggestionsViewModel.suggestions
             if viewModel.results?.isEmpty == false && !suggestions.isEmpty {
@@ -410,6 +420,7 @@ extension SearchViewController: UITextFieldDelegate {
         reloadSnapshot()
         searchHistoryViewController.reloadSnapshot()
         tableView.isHidden = true
+        searchSuggestionsViewController.hide()
         searchHistoryViewController.show()
     }
 }

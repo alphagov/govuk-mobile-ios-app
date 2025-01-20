@@ -88,6 +88,10 @@ class SearchSuggestionsViewController: BaseViewController {
         return localDataSource
     }()
 
+    func hide() {
+        self.view.isHidden = true
+    }
+
     func reloadSnapshot() {
         var snapshot = Snapshot()
         snapshot.deleteAllItems()
@@ -124,7 +128,6 @@ extension SearchSuggestionsViewController: UITableViewDelegate {
         guard let item = dataSource.itemIdentifier(for: indexPath)
         else { return }
 
-        tableView.isHidden = true
         viewModel.clearSuggestions()
         selectionAction(item.text)
     }

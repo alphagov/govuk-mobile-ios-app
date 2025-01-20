@@ -73,6 +73,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
+            feedbackAction: { },
             searchAction: { },
             recentActivityAction: { }
         )

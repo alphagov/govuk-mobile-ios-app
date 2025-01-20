@@ -48,9 +48,10 @@ class SearchService: SearchServiceInterface {
             term: term,
             completion: { result in
                 let suggestions = (try? result.get().suggestions) ?? []
+                let firstFiveSuggestions = Array(suggestions.prefix(5))
 
                 DispatchQueue.main.async {
-                    completion(suggestions)
+                    completion(firstFiveSuggestions)
                 }
             }
         )

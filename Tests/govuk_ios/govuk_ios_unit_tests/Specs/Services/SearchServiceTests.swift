@@ -130,6 +130,43 @@ struct SearchServiceTests {
         }
         #expect(suggestions == ["A good suggestion"])
     }
+    
+    @Test
+    func suggestions_success_fetchedOverFiveSuggestions_returnsFirstFive() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        let suggestions = [
+            "First suggestion",
+            "Second suggestion",
+            "Third suggestion",
+            "Fourth suggestion",
+            "Fifth suggestion",
+            "Sixth suggestion"
+        ]
+        let stubbedSuggestions = SearchSuggestions(suggestions: suggestions)
+        mockServiceClient._stubbedSuggestionsResult = .success(stubbedSuggestions)
+        let returnedSuggestions = await withCheckedContinuation { continuation in
+            sut.suggestions(
+                "good",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+
+        let expectedSuggestions = [
+            "First suggestion",
+            "Second suggestion",
+            "Third suggestion",
+            "Fourth suggestion",
+            "Fifth suggestion"
+        ]
+        #expect(returnedSuggestions == expectedSuggestions)
+    }
 
     @Test
     func suggestions_failure_returnsExpectedResult() async {

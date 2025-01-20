@@ -6,15 +6,30 @@ struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
+    let feedbackAction: () -> Void
     let searchAction: () -> Void
     let recentActivityAction: () -> Void
 
     var widgets: [WidgetView] {
         [
+            feedbackWidget,
             searchWidget,
             recentActivityWidget,
             topicsWidget
         ].compactMap { $0 }
+    }
+
+    private var feedbackWidget: WidgetView {
+        let title = String.home.localized("feedbackWidgetTitle")
+        let viewModel = UserFeedbackViewModel(
+            title: title,
+            action: feedbackAction
+        )
+        let content = UserFeedbackView(viewModel: viewModel)
+        let widget = WidgetView()
+        widget.backgroundColor = UIColor.govUK.fills.surfaceCardSelected
+        widget.addContent(content)
+        return widget
     }
 
     private var searchWidget: WidgetView? {

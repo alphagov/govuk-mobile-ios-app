@@ -31,6 +31,7 @@ class HomeCoordinator: TabItemCoordinator {
             analyticsService: analyticsService,
             configService: configService,
             topicWidgetViewModel: topicWidgetViewModel,
+            feedbackAction: feedbackAction,
             searchAction: presentSearchCoordinator,
             recentActivityAction: startRecentActivityCoordinator
         )
@@ -51,6 +52,13 @@ class HomeCoordinator: TabItemCoordinator {
         }
         if childCoordinators.isEmpty {
             homeViewController.scrollToTop()
+        }
+    }
+
+    private var feedbackAction: () -> Void {
+        return {
+            let urlOpener: URLOpener = UIApplication.shared
+            urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl)
         }
     }
 

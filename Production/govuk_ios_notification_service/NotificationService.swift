@@ -3,7 +3,6 @@ import UserNotifications
 import OneSignalExtension
 
 class NotificationService: UNNotificationServiceExtension {
-
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
     var receivedRequest: UNNotificationRequest!
@@ -23,7 +22,7 @@ class NotificationService: UNNotificationServiceExtension {
             )
         }
     }
-    
+
     override func serviceExtensionTimeWillExpire() {
         guard let contentHandler = contentHandler,
               let bestAttemptContent =  bestAttemptContent
@@ -34,5 +33,4 @@ class NotificationService: UNNotificationServiceExtension {
         )
         contentHandler(bestAttemptContent)
     }
-
 }

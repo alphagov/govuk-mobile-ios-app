@@ -405,6 +405,8 @@
 		5DAD71852BD250DE0075F648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_unit_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71942BD250DF0075F648 /* govuk_ios_ui_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_ui_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DB226322D400C88004C2DD4 /* govuk_ios_notification_service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service.entitlements; sourceTree = "<group>"; };
+		5DB226332D400D02004C2DD4 /* govuk_ios_notification_service_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service_dev.entitlements; sourceTree = "<group>"; };
 		5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimationView+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Convenience.swift"; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 		5DCAFA6F2D3FFB5600C3F284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DCAFA702D3FFB5600C3F284 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5DCAFA742D4004E700C3F284 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		5DCAFA7B2D400C1B00C3F284 /* govuk_ios_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_dev.entitlements; sourceTree = "<group>"; };
 		5DD036842C5A577C00EEF11E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		5DD09EC72C9ADB8500494550 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		5DD6F32F2CC2B937005BC5D3 /* SearchWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWidgetViewModel.swift; sourceTree = "<group>"; };
@@ -1074,6 +1077,7 @@
 				D0B3EBFD2CE226AC00A8F321 /* GoogleService-Info-Dev.plist */,
 				D0B3EBFE2CE226AC00A8F321 /* GoogleService-Info-Live.plist */,
 				5D869B852D07428F006B67F8 /* govuk_ios.entitlements */,
+				5DCAFA7B2D400C1B00C3F284 /* govuk_ios_dev.entitlements */,
 				5DAD71852BD250DE0075F648 /* Info.plist */,
 				5D51D15F2C245A1B008AC8E4 /* PrivacyInfo.xcprivacy */,
 				5DAD71792BD250DB0075F648 /* SceneDelegate.swift */,
@@ -1167,6 +1171,8 @@
 		5DCAFA712D3FFB5600C3F284 /* govuk_ios_notification_service */ = {
 			isa = PBXGroup;
 			children = (
+				5DB226322D400C88004C2DD4 /* govuk_ios_notification_service.entitlements */,
+				5DB226332D400D02004C2DD4 /* govuk_ios_notification_service_dev.entitlements */,
 				5DCAFA6F2D3FFB5600C3F284 /* Info.plist */,
 				5DCAFA702D3FFB5600C3F284 /* NotificationService.swift */,
 			);
@@ -2001,7 +2007,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2174,6 +2180,7 @@
 		5DCAFA6A2D3FE0E800C3F284 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2206,6 +2213,7 @@
 		5DCAFA6B2D3FE0E800C3F284 /* Alpha */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -2241,9 +2249,12 @@
 		5DCAFA6C2D3FE0E800C3F284 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N8W395F695;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N8W395F695;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios_notification_service/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = govuk_ios_notification_service;
@@ -2257,6 +2268,8 @@
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore uk.gov.govuk.notification-service";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -2341,7 +2354,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;

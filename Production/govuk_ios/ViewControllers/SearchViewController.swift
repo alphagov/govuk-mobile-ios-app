@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import UIKit
 import UIComponents
 import GOVKit
@@ -5,7 +6,7 @@ import GOVKit
 private typealias DataSource = UITableViewDiffableDataSource<SearchSection, SearchItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchItem>
 
-// swiftlint: disable:next type_body_length
+// swiftlint:disable:next type_body_length
 class SearchViewController: BaseViewController,
                             TrackableScreen {
     private let viewModel: SearchViewModel
@@ -159,12 +160,17 @@ class SearchViewController: BaseViewController,
         view.addSubview(errorScrollView)
         errorScrollView.addSubview(errorView)
 
+        addChild(self.searchSuggestionsViewController)
+        view.addSubview(searchSuggestionsViewController.view)
+        searchSuggestionsViewController.didMove(toParent: self)
+
         addChild(self.searchHistoryViewController)
         view.addSubview(searchHistoryViewController.view)
         searchHistoryViewController.didMove(toParent: self)
         tableView.isHidden = !viewModel.historyIsEmpty
     }
 
+    // swiftlint:disable:next function_body_length
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(
@@ -179,6 +185,7 @@ class SearchViewController: BaseViewController,
                 equalTo: view.safeAreaLayoutGuide.leftAnchor,
                 constant: 10
             ),
+
             searchBar.heightAnchor.constraint(
                 greaterThanOrEqualToConstant: 36
             ),
@@ -195,6 +202,22 @@ class SearchViewController: BaseViewController,
             ),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
+            searchSuggestionsViewController.view.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor,
+                constant: 6
+            ),
+            searchSuggestionsViewController.view.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                constant: -16
+            ),
+            searchSuggestionsViewController.view.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                constant: 16
+            ),
+            searchSuggestionsViewController.view.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            ),
+
             searchHistoryViewController.view.topAnchor.constraint(
                 equalTo: searchBar.bottomAnchor,
                 constant: 6
@@ -207,7 +230,9 @@ class SearchViewController: BaseViewController,
                 equalTo: view.safeAreaLayoutGuide.leftAnchor,
                 constant: 16
             ),
-            searchHistoryViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            searchHistoryViewController.view.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            )
         ])
     }
 
@@ -265,7 +290,7 @@ class SearchViewController: BaseViewController,
 
     @objc
     private func searchReturnPressed() {
-        self.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
 
         let searchText = searchBar.text
         viewModel.search(
@@ -278,8 +303,22 @@ class SearchViewController: BaseViewController,
                 self?.updateFocus()
             }
         )
+        searchSuggestionsViewController.hide()
         searchHistoryViewController.hide()
     }
+
+    private lazy var searchSuggestionsViewController: SearchSuggestionsViewController =  {
+        let localController = SearchSuggestionsViewController(
+            viewModel: viewModel.searchSuggestionsViewModel,
+            selectionAction: { searchText in
+                self.searchBar.text = searchText
+                self.searchReturnPressed()
+            }
+        )
+        localController.view.translatesAutoresizingMaskIntoConstraints = false
+        localController.hide()
+        return localController
+    }()
 
     private func updateFocus() {
         let view = errorScrollView.isHidden ? tableViewHeader : errorScrollView
@@ -338,10 +377,42 @@ extension SearchViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        if string.isEmpty && textField.text?.count == 1 {
-            clearResults()
+        let currentText = textField.text ?? ""
+        let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+        // return true if enter / return pressed
+        guard string != "\n" else {
+            return true
         }
+
+        guard !replacementText.isEmpty, replacementText.count >= 3
+        else {
+            clearResults()
+            return true
+        }
+
+        updateSuggestions(replacementText)
+
         return true
+    }
+
+    private func updateSuggestions(_ searchBarText: String) {
+        let suggestionsViewModel = viewModel.searchSuggestionsViewModel
+        suggestionsViewModel.searchBarText = searchBarText
+
+        suggestionsViewModel.suggestions { [weak self] in
+            guard let self else { return }
+
+            searchHistoryViewController.hide()
+
+            let suggestions = suggestionsViewModel.suggestions
+            if viewModel.results?.isEmpty == false && !suggestions.isEmpty {
+                viewModel.clearResults()
+                reloadSnapshot()
+            }
+            searchSuggestionsViewController.view.isHidden = suggestions.isEmpty
+            searchSuggestionsViewController.reloadSnapshot()
+        }
     }
 
     private func clearResults() {
@@ -349,6 +420,7 @@ extension SearchViewController: UITextFieldDelegate {
         reloadSnapshot()
         searchHistoryViewController.reloadSnapshot()
         tableView.isHidden = true
+        searchSuggestionsViewController.hide()
         searchHistoryViewController.show()
     }
 }
@@ -373,3 +445,4 @@ extension SearchViewController: UITableViewDelegate {
 enum SearchSection {
     case results
 }
+// swiftlint:enable file_length

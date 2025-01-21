@@ -11,4 +11,14 @@ extension GOVRequest {
             additionalHeaders: nil
         )
     }
+
+    static func searchSuggestions(term: String) -> GOVRequest {
+        GOVRequest(
+            urlPath: Constants.API.searchSuggestionsPath,
+            method: .get,
+            bodyParameters: nil,
+            queryParameters: ["q": term],
+            additionalHeaders: nil
+        )
+    }
 }

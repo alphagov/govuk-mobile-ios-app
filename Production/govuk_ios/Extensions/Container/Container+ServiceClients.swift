@@ -14,7 +14,8 @@ extension Container {
     var searchServiceClient: Factory<SearchServiceClientInterface> {
         Factory(self) {
             SearchServiceClient(
-                serviceClient: self.searchAPIClient()
+                serviceClient: self.searchAPIClient(),
+                suggestionsServiceClient: self.govukAPIClient()
             )
         }
     }

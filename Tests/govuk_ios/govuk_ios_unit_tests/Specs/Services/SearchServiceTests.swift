@@ -95,6 +95,99 @@ struct SearchServiceTests {
     }
 
     @Test
+    func suggestions_callsServiceClient() {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        let expectedTerm = UUID().uuidString
+        sut.suggestions(
+            expectedTerm,
+            completion: { _ in }
+        )
+        #expect(mockServiceClient._receivedTerm == expectedTerm)
+    }
+
+    @Test
+    func suggestions_success_returnsExpectedResult() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        let stubbedSuggestion = SearchSuggestions(suggestions: ["A good suggestion"])
+        mockServiceClient._stubbedSuggestionsResult = .success(stubbedSuggestion)
+        let suggestions = await withCheckedContinuation { continuation in
+            sut.suggestions(
+                "good",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+        #expect(suggestions == ["A good suggestion"])
+    }
+    
+    @Test
+    func suggestions_success_fetchedOverFiveSuggestions_returnsFirstFive() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        let suggestions = [
+            "First suggestion",
+            "Second suggestion",
+            "Third suggestion",
+            "Fourth suggestion",
+            "Fifth suggestion",
+            "Sixth suggestion"
+        ]
+        let stubbedSuggestions = SearchSuggestions(suggestions: suggestions)
+        mockServiceClient._stubbedSuggestionsResult = .success(stubbedSuggestions)
+        let returnedSuggestions = await withCheckedContinuation { continuation in
+            sut.suggestions(
+                "good",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+
+        let expectedSuggestions = [
+            "First suggestion",
+            "Second suggestion",
+            "Third suggestion",
+            "Fourth suggestion",
+            "Fifth suggestion"
+        ]
+        #expect(returnedSuggestions == expectedSuggestions)
+    }
+
+    @Test
+    func suggestions_failure_returnsExpectedResult() async {
+        let mockServiceClient = MockSearchServiceClient()
+        let mockRepository = MockSearchHistoryRepository()
+        let sut = SearchService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        mockServiceClient._stubbedSuggestionsResult = .failure(.apiUnavailable)
+        let suggestions = await withCheckedContinuation { continuation in
+            sut.suggestions(
+                "good",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+        #expect(suggestions == [])
+    }
+
     func save_search_savesSearchToRepository() async {
         let mockServiceClient = MockSearchServiceClient()
         let mockRepository = MockSearchHistoryRepository()

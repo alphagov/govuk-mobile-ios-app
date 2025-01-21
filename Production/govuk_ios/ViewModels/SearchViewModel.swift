@@ -11,9 +11,13 @@ enum SearchError: Error {
 
 class SearchViewModel {
     let analyticsService: AnalyticsServiceInterface
+    let urlOpener: URLOpener
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
-    let urlOpener: URLOpener
+    lazy var searchSuggestionsViewModel: SearchSuggestionsViewModel = {
+        SearchSuggestionsViewModel(searchService: searchService,
+                                   analyticsService: analyticsService)
+    }()
     lazy var searchHistoryViewModel: SearchHistoryViewModel = {
         SearchHistoryViewModel(searchService: searchService,
                                analyticsService: analyticsService)

@@ -1,25 +1,36 @@
 import UserNotifications
 
+import OneSignalExtension
+
 class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
+    var receivedRequest: UNNotificationRequest!
 
     override func didReceive(_ request: UNNotificationRequest,
                              withContentHandler
                              contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.receivedRequest = request
         self.contentHandler = contentHandler
-        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        if let bestAttemptContent = bestAttemptContent {
-            // Modify the notification content here...
-            bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
+        self.bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-            contentHandler(bestAttemptContent)
+        if let bestAttemptContent = bestAttemptContent {
+            OneSignalExtension.didReceiveNotificationExtensionRequest(
+                self.receivedRequest,
+                with: bestAttemptContent,
+                withContentHandler: contentHandler
+            )
         }
     }
 
     override func serviceExtensionTimeWillExpire() {
-        if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
-            contentHandler(bestAttemptContent)
-        }
+        guard let contentHandler = contentHandler,
+              let bestAttemptContent =  bestAttemptContent
+        else { return }
+        OneSignalExtension.serviceExtensionTimeWillExpireRequest(
+            self.receivedRequest,
+            with: bestAttemptContent
+        )
+        contentHandler(bestAttemptContent)
     }
 }

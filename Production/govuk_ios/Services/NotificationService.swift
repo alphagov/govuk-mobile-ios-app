@@ -22,6 +22,6 @@ class NotificationService: NotificationServiceInterface {
 
         OneSignal.Notifications.requestPermission({ accepted in
             print("User accepted notifications: \(accepted)")
-        }, fallbackToSettings: true)
+        }, fallbackToSettings: false)
     }
 }

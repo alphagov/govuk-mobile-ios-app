@@ -9,12 +9,14 @@ class WidgetView: UIView {
         decorateView ? 16 : 0
     }()
 
-    init(decorateView: Bool = true) {
+    init(decorateView: Bool = true,
+         useContentAccessibilityInfo: Bool = false) {
         self.decorateView = decorateView
         super.init(frame: .zero)
         self.backgroundColor = decorateView ?
             UIColor.govUK.fills.surfaceCard :
             UIColor.govUK.fills.surfaceBackground
+        self.isAccessibilityElement = useContentAccessibilityInfo
         configureUI()
         configureConstraints()
     }
@@ -74,5 +76,15 @@ class WidgetView: UIView {
                 content.leftAnchor.constraint(equalTo: contentView.leftAnchor)
             ]
         )
+        configureAccessibility(for: content)
+    }
+
+    private func configureAccessibility(for content: UIView) {
+        guard self.isAccessibilityElement else {
+            return
+        }
+        accessibilityLabel = content.accessibilityLabel
+        accessibilityHint = content.accessibilityHint
+        accessibilityTraits = content.accessibilityTraits
     }
 }

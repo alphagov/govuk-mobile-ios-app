@@ -47,6 +47,14 @@ Builds beta configuration and deploys to Testflight
 
 Download profiles
 
+### ios sign_generate
+
+```sh
+[bundle exec] fastlane ios sign_generate
+```
+
+Regenerate profiles
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

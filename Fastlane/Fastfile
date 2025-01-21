@@ -86,6 +86,28 @@ platform :ios do
     )
   end
 
+  desc 'Regenerate profiles'
+  lane :sign_generate do
+    match(
+      git_url: 'git@github.com:alphagov/govuk-mobile-ios-certificates.git',
+      type: 'adhoc',
+      app_identifier: [
+        'uk.gov.govuk.dev',
+        'uk.gov.govuk.dev.notification-service'
+      ],
+      force: true
+    )
+    match(
+      git_url: 'git@github.com:alphagov/govuk-mobile-ios-certificates.git',
+      type: 'appstore',
+      app_identifier: [
+        'uk.gov.govuk',
+        'uk.gov.govuk.notification-service'
+      ],
+      force: true
+    )
+  end
+
   private_lane :convert_coverage do
     slather(
       build_directory: configuration.scan_output_directory,

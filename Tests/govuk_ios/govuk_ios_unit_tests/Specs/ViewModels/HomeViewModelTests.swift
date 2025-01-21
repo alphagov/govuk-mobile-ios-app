@@ -19,13 +19,14 @@ struct HomeViewModelTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
+            feedbackAction: { },
             searchAction: { () -> Void in _ = true },
             recentActivityAction: { }
         )
         let widgets = subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 3)
+        #expect(widgets.count == 4)
     }
 
     @Test
@@ -43,12 +44,13 @@ struct HomeViewModelTests {
             analyticsService: MockAnalyticsService(),
             configService: configService,
             topicWidgetViewModel: topicsViewModel,
+            feedbackAction: { },
             searchAction: { },
             recentActivityAction: { }
         )
         let widgets = subject.widgets
 
-        #expect(widgets.count == 0)
+        #expect(widgets.count == 1)
     }
 
 }

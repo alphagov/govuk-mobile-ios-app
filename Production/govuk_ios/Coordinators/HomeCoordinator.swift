@@ -31,6 +31,7 @@ class HomeCoordinator: TabItemCoordinator {
             analyticsService: analyticsService,
             configService: configService,
             topicWidgetViewModel: topicWidgetViewModel,
+            feedbackAction: feedbackAction,
             searchAction: presentSearchCoordinator,
             recentActivityAction: startRecentActivityCoordinator
         )
@@ -51,6 +52,15 @@ class HomeCoordinator: TabItemCoordinator {
         }
         if childCoordinators.isEmpty {
             homeViewController.scrollToTop()
+        }
+    }
+
+    private var feedbackAction: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "Feedback",
+                                        external: true)
+            let urlOpener: URLOpener = UIApplication.shared
+            urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl)
         }
     }
 
@@ -127,9 +137,11 @@ class HomeCoordinator: TabItemCoordinator {
         )
     }
 
-    private func trackWidgetNavigation(text: String) {
+    private func trackWidgetNavigation(text: String,
+                                       external: Bool = false) {
         let event = AppEvent.widgetNavigation(
-            text: text
+            text: text,
+            external: external
         )
         analyticsService.track(event: event)
     }

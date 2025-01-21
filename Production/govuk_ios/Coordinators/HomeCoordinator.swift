@@ -56,7 +56,9 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     private var feedbackAction: () -> Void {
-        return {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "Feedback",
+                                        external: true)
             let urlOpener: URLOpener = UIApplication.shared
             urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl)
         }
@@ -135,9 +137,11 @@ class HomeCoordinator: TabItemCoordinator {
         )
     }
 
-    private func trackWidgetNavigation(text: String) {
+    private func trackWidgetNavigation(text: String,
+                                       external: Bool = false) {
         let event = AppEvent.widgetNavigation(
-            text: text
+            text: text,
+            external: external
         )
         analyticsService.track(event: event)
     }

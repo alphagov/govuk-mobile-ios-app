@@ -3,7 +3,7 @@ import UserNotifications
 
 import OneSignalExtension
 
-class NotificationService: UNNotificationServiceExtension {
+class NotificationServiceExtension: UNNotificationServiceExtension {
     lazy var client: NotificationExtensionClient = NotificationExtensionClient()
 
     override func didReceive(_ request: UNNotificationRequest,

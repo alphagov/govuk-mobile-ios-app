@@ -8,7 +8,10 @@ import SwiftUI
 final class AppUnavailableViewControllerSnapshotTests: SnapshotTestCase {
     private var view: some View {
         return AppUnavailableContainerView(
-            viewModel: AppUnavailableContainerViewModel()
+            viewModel: AppUnavailableContainerViewModel(
+                appLaunchService: MockAppLaunchService(),
+                dismissAction: { }
+            )
         )
     }
 

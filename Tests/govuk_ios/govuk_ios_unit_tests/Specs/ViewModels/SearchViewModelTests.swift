@@ -74,6 +74,7 @@ struct SearchViewModelTests{
 
         subject.search(
             text: searchText,
+            type: .typed,
             completion: { }
         )
 
@@ -107,6 +108,7 @@ struct SearchViewModelTests{
 
         subject.search(
             text: searchText,
+            type: .typed,
             completion: { }
         )
 
@@ -129,6 +131,7 @@ struct SearchViewModelTests{
 
         subject.search(
             text: searchText,
+            type: .autocomplete,
             completion: { }
         )
 

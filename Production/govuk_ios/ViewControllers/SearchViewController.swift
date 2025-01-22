@@ -50,11 +50,6 @@ class SearchViewController: BaseViewController,
             ]
         )
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
-        localSearchBar.searchTextField.addTarget(
-            self,
-            action: #selector(searchReturnPressed),
-            for: UIControl.Event.editingDidEndOnExit
-        )
 
         return localSearchBar
     }()
@@ -106,7 +101,7 @@ class SearchViewController: BaseViewController,
             viewModel: viewModel.searchHistoryViewModel,
             selectionAction: { searchText in
                 self.searchBar.text = searchText
-                self.searchReturnPressed()
+                self.didInvokeSearch(using: .history)
             }
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -288,13 +283,13 @@ class SearchViewController: BaseViewController,
         dismissAction()
     }
 
-    @objc
-    private func searchReturnPressed() {
+    private func didInvokeSearch(using type: SearchInvocationType) {
         searchBar.resignFirstResponder()
 
         let searchText = searchBar.text
         viewModel.search(
             text: searchText,
+            type: type,
             completion: { [weak self] in
                 self?.reloadSnapshot()
                 self?.updateErrorView(
@@ -312,7 +307,7 @@ class SearchViewController: BaseViewController,
             viewModel: viewModel.searchSuggestionsViewModel,
             selectionAction: { searchText in
                 self.searchBar.text = searchText
-                self.searchReturnPressed()
+                self.didInvokeSearch(using: .autocomplete)
             }
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -330,7 +325,7 @@ class SearchViewController: BaseViewController,
         switch viewModel.error {
         case .networkUnavailable:
             errorModel = AppErrorViewModel.networkUnavailable {
-                self.searchReturnPressed()
+                self.didInvokeSearch(using: .typed)
             }
             errorScrollView.isHidden = false
         case .apiUnavailable, .parsingError:
@@ -396,6 +391,11 @@ extension SearchViewController: UITextFieldDelegate {
         return true
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        didInvokeSearch(using: .typed)
+        return true
+    }
+
     private func updateSuggestions(_ searchBarText: String) {
         let suggestionsViewModel = viewModel.searchSuggestionsViewModel
         suggestionsViewModel.searchBarText = searchBarText
@@ -444,5 +444,9 @@ extension SearchViewController: UITableViewDelegate {
 
 enum SearchSection {
     case results
+}
+
+enum SearchInvocationType: String {
+    case autocomplete, history, typed
 }
 // swiftlint:enable file_length

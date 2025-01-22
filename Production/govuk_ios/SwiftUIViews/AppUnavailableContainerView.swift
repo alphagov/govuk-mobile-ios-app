@@ -12,14 +12,17 @@ struct AppUnavailableContainerView: View {
 
     var body: some View {
         VStack {
-            HeaderView(title: viewModel.title,
-                       subheading: viewModel.subheading)
-            .padding(.top, verticalSizeClass == .compact ? 30 : 46)
-            .padding(.horizontal, 16)
-            ProgressView()
-                .controlSize(.large)
-                .opacity(viewModel.showProgressView ? 1 : 0)
-                .padding(.top, 32)
+            ScrollView {
+                HeaderView(title: viewModel.title,
+                           subheading: viewModel.subheading)
+                .padding(.top, verticalSizeClass == .compact ? 30 : 46)
+                .padding(.horizontal, 16)
+                ProgressView()
+                    .controlSize(.large)
+                    .opacity(viewModel.showProgressView ? 1 : 0)
+                    .padding(.top, 32)
+            }
+            .padding(.top, 1)
             Spacer()
             Divider()
                 .foregroundColor(Color(UIColor.govUK.strokes.listDivider))

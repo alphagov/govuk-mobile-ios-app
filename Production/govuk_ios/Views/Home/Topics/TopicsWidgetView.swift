@@ -59,6 +59,18 @@ class TopicsWidgetView: UIView {
         return stackView
     }()
 
+    private lazy var noTopicsLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.govUK.text.primary
+        label.font = UIFont.govUK.body
+        label.text = String.home.localized("noTopicsDescriptionText")
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.adjustsFontForContentSizeCategory = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     private lazy var cardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -133,6 +145,7 @@ class TopicsWidgetView: UIView {
         headerStackView.addArrangedSubview(editButton)
         headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)
+        stackView.addArrangedSubview(noTopicsLabel)
         stackView.addArrangedSubview(cardStackView)
         stackView.addArrangedSubview(allTopicsButton)
         stackView.addArrangedSubview(errorView)
@@ -165,6 +178,7 @@ class TopicsWidgetView: UIView {
 
     private func updateTopics(_ topics: [Topic]) {
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        noTopicsLabel.isHidden = topics.count > 0
         for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createNewRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false

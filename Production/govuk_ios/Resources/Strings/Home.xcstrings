@@ -23,6 +23,17 @@
         }
       }
     },
+    "noTopicsDescriptionText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No topics selected"
+          }
+        }
+      }
+    },
     "pageTitle" : {
       "extractionState" : "manual",
       "localizations" : {

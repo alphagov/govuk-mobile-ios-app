@@ -55,7 +55,7 @@ class CoordinatorBuilder {
                         dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AppUnavailableCoordinator(
             navigationController: navigationController,
-            appConfigService: container.appConfigService.resolve(),
+            appLaunchService: container.appLaunchService.resolve(),
             launchResponse: launchResponse,
             dismissAction: dismissAction
         )

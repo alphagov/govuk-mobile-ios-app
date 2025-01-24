@@ -72,9 +72,41 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func test_loadInNavigationController_topicsError_darK_rendersCorrectly() {
+    func test_loadInNavigationController_topicsError_dark_rendersCorrectly() {
         mockTopicService._stubbedHasCustomisedTopics = false
         mockTopicService._stubbedFetchRemoteListResult = .failure(.apiUnavailable)
+        VerifySnapshotInNavigationController(
+            viewController: viewController(),
+            mode: .dark,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_deselectedAllTopics_rendersCorrectly() {
+        let topics = Topic.arrangeMultipleFavourites(
+            context: coreData.viewContext
+        )
+        mockTopicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedHasCustomisedTopics = true
+        mockTopicService._stubbedFetchFavouriteTopics = []
+        mockTopicService._stubbedFetchRemoteListResult = .success([])
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController(),
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_deselectedAllTopics_dark_rendersCorrectly() {
+        let topics = Topic.arrangeMultipleFavourites(
+            context: coreData.viewContext
+        )
+        mockTopicService._stubbedFetchAllTopics = topics
+        mockTopicService._stubbedHasCustomisedTopics = true
+        mockTopicService._stubbedFetchFavouriteTopics = []
+        mockTopicService._stubbedFetchRemoteListResult = .success([])
+
         VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .dark,

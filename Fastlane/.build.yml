@@ -24,6 +24,9 @@ default: &DEFAULTS
 
 unit:
   <<: *DEFAULTS
+  app:
+    <<: *APP_DEFAULTS
+    scheme: GovUKDev
 
 alpha:
   <<: *DEFAULTS

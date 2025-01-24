@@ -1,5 +1,6 @@
 import UIKit
 import UIComponents
+import GOVKit
 
 class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
@@ -77,6 +78,20 @@ class TopicsWidgetView: UIView {
         return stackView
     }()
 
+    private lazy var appErrorViewController: HostingViewController = {
+        let localController = HostingViewController(
+            rootView: AppErrorView(
+                viewModel: self.viewModel.topicErrorViewModel
+            )
+        )
+        localController.view.backgroundColor = .clear
+        return localController
+    }()
+
+    private lazy var errorView: UIView = {
+        self.appErrorViewController.view
+    }()
+
     init(viewModel: TopicsWidgetViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -88,6 +103,7 @@ class TopicsWidgetView: UIView {
             name: .NSManagedObjectContextDidSave,
             object: nil
         )
+        fetchTopics()
         updateTopics(viewModel.displayedTopics)
         showAllTopicsButton()
     }
@@ -101,6 +117,16 @@ class TopicsWidgetView: UIView {
         }
     }
 
+    private func fetchTopics() {
+        viewModel.handleError = { _ in
+            self.cardStackView.isHidden = true
+            self.editButton.isHidden = true
+            self.allTopicsButton.isHidden = true
+            self.errorView.isHidden = false
+        }
+        viewModel.fetchTopics()
+    }
+
     private func configureUI() {
         headerStackView.addArrangedSubview(titleLabel)
         headerStackView.addArrangedSubview(UIView())
@@ -109,6 +135,8 @@ class TopicsWidgetView: UIView {
         stackView.addArrangedSubview(headerStackView)
         stackView.addArrangedSubview(cardStackView)
         stackView.addArrangedSubview(allTopicsButton)
+        stackView.addArrangedSubview(errorView)
+        errorView.isHidden = true
         addSubview(stackView)
     }
 
@@ -199,6 +227,7 @@ class TopicsWidgetView: UIView {
             rowCount = sizeClass == .regular ? 2 : 4
             updateTopics(viewModel.displayedTopics)
         }
+        errorView.invalidateIntrinsicContentSize()
     }
 
     private func showAllTopicsButton() {

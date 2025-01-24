@@ -11,7 +11,7 @@ struct TopicsWidgetViewModelTests {
     let mockTopicService = MockTopicsService()
 
     @Test
-    func initializeModel_downloadSuccess_returnsExpectedData() async throws {
+    func fetchTopics_downloadSuccess_returnsExpectedData() async throws {
         mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
 
         let sut = TopicsWidgetViewModel(
@@ -20,12 +20,17 @@ struct TopicsWidgetViewModelTests {
             editAction: { },
             allTopicsAction: { }
         )
+        var didHandleError = false
+        sut.handleError = { _ in
+            didHandleError = true
+        }
 
-        #expect(sut.downloadError == nil)
+        sut.fetchTopics()
+        #expect(didHandleError == false)
     }
 
     @Test
-    func initializeModel_downloadFailure_returnsExpectedResult() async throws {
+    func fetchTopics_downloadFailure_returnsExpectedResult() async throws {
         mockTopicService._stubbedFetchRemoteListResult = .failure(.decodingError)
 
         let sut = TopicsWidgetViewModel(
@@ -34,8 +39,16 @@ struct TopicsWidgetViewModelTests {
             editAction: { },
             allTopicsAction: { }
         )
+        var didHandleError = false
+        var topicsError: TopicsServiceError?
+        sut.handleError = { error in
+            didHandleError = true
+            topicsError = error
+        }
 
-        #expect(sut.downloadError == .decodingError)
+        sut.fetchTopics()
+        #expect(didHandleError == true)
+        #expect(topicsError == .decodingError)
     }
 
     @Test

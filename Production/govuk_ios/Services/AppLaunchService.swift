@@ -4,7 +4,7 @@ protocol AppLaunchServiceInterface {
     func fetch(completion: @escaping (sending AppLaunchResponse) -> Void)
 }
 
-struct AppLaunchService: AppLaunchServiceInterface {
+struct AppLaunchService: @preconcurrency AppLaunchServiceInterface {
     private let configService: AppConfigServiceInterface
     private let topicService: TopicsServiceInterface
 
@@ -14,6 +14,7 @@ struct AppLaunchService: AppLaunchServiceInterface {
         self.topicService = topicService
     }
 
+    @MainActor
     func fetch(completion: @escaping (sending AppLaunchResponse) -> Void) {
         Task {
             async let configResult = await fetchConfig()
@@ -23,9 +24,7 @@ struct AppLaunchService: AppLaunchServiceInterface {
                 topicResult: topicResult,
                 appVersionProvider: Bundle.main
             )
-            DispatchQueue.main.async {
-                completion(response)
-            }
+            completion(response)
         }
     }
 

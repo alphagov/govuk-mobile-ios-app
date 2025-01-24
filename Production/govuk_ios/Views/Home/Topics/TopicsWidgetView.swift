@@ -131,6 +131,7 @@ class TopicsWidgetView: UIView {
 
     private func fetchTopics() {
         viewModel.handleError = { _ in
+            self.noTopicsLabel.isHidden = true
             self.cardStackView.isHidden = true
             self.editButton.isHidden = true
             self.allTopicsButton.isHidden = true
@@ -177,8 +178,8 @@ class TopicsWidgetView: UIView {
     }
 
     private func updateTopics(_ topics: [Topic]) {
+        noTopicsLabel.isHidden = viewModel.fetchTopicsError || topics.count > 0
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        noTopicsLabel.isHidden = topics.count > 0
         for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createNewRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false

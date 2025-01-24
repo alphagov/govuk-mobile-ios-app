@@ -10,6 +10,7 @@ final class TopicsWidgetViewModel {
     let topicAction: (Topic) -> Void
     let editAction: () -> Void
     var handleError: ((TopicsServiceError) -> Void)?
+    var fetchTopicsError: Bool = false
 
     init(topicsService: TopicsServiceInterface,
          urlOpener: URLOpener = UIApplication.shared,
@@ -60,9 +61,12 @@ final class TopicsWidgetViewModel {
     }()
 
     func fetchTopics() {
-        topicsService.fetchRemoteList { result in
+        topicsService.fetchRemoteList { [weak self] result in
             if case .failure(let error) = result {
-                self.handleError?(error)
+                self?.handleError?(error)
+                self?.fetchTopicsError = true
+            } else {
+                self?.fetchTopicsError = false
             }
         }
     }

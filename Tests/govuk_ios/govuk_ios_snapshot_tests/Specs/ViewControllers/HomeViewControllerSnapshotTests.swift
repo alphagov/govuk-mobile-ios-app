@@ -62,6 +62,26 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
+    func test_loadInNavigationController_topicsError_rendersCorrectly() {
+        mockTopicService._stubbedHasCustomisedTopics = false
+        mockTopicService._stubbedFetchRemoteListResult = .failure(.apiUnavailable)
+        VerifySnapshotInNavigationController(
+            viewController: viewController(),
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_topicsError_darK_rendersCorrectly() {
+        mockTopicService._stubbedHasCustomisedTopics = false
+        mockTopicService._stubbedFetchRemoteListResult = .failure(.apiUnavailable)
+        VerifySnapshotInNavigationController(
+            viewController: viewController(),
+            mode: .dark,
+            navBarHidden: true
+        )
+    }
+
     func viewController() -> HomeViewController {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: mockTopicService,

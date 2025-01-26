@@ -6,10 +6,10 @@ struct AltGroupedListSection {
     let rows: [AdaptiveListRow]
     let footer: String?
 
-    init(heading: any View,
+    init(heading: AdaptiveListRow,
          rows: [AdaptiveListRow],
          footer: String?) {
-        self.heading = .init(view: heading)
+        self.heading = heading
         self.rows = rows
         self.footer = footer
     }

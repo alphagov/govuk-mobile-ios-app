@@ -28,7 +28,6 @@ struct AltGroupedListSectionView: View {
                             antialiased: true
                         )
                 )
-
                 if let footer = section.footer {
                     Text(footer)
                         .font(Font.govUK.footnote)
@@ -41,5 +40,3 @@ struct AltGroupedListSectionView: View {
         }
     }
 }
-
-

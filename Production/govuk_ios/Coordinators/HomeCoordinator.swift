@@ -9,6 +9,7 @@ class HomeCoordinator: TabItemCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let configService: AppConfigServiceInterface
     private let topicsService: TopicsServiceInterface
+    private let deviceInformationProvider: DeviceInformationProviderInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -16,13 +17,15 @@ class HomeCoordinator: TabItemCoordinator {
          deeplinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
-         topicsService: TopicsServiceInterface) {
+         topicsService: TopicsServiceInterface,
+         deviceInformationProvider: DeviceInformationProviderInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
         self.configService = configService
         self.topicsService = topicsService
+        self.deviceInformationProvider = deviceInformationProvider
         super.init(navigationController: navigationController)
     }
 
@@ -57,10 +60,13 @@ class HomeCoordinator: TabItemCoordinator {
 
     private var feedbackAction: () -> Void {
         return { [weak self] in
-            self?.trackWidgetNavigation(text: "Feedback",
+            guard let self = self else { return }
+            self.trackWidgetNavigation(text: "Feedback",
                                         external: true)
             let urlOpener: URLOpener = UIApplication.shared
-            urlOpener.openIfPossible(Constants.API.helpAndFeedbackUrl)
+            urlOpener.openIfPossible(
+                self.deviceInformationProvider.helpAndFeedbackURL(versionProvider: Bundle.main)
+            )
         }
     }
 

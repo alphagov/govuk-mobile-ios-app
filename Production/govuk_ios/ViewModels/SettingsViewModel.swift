@@ -109,31 +109,16 @@ class SettingsViewModel: SettingsViewModelInterface {
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
             body: nil,
-            action: { [weak self, helpAndFeedbackUrl] in
-                self?.openURLIfPossible(
-                    url: helpAndFeedbackUrl,
+            action: { [weak self] in
+                guard let self else { return }
+                self.openURLIfPossible(
+                    url: self.deviceInformationProvider.helpAndFeedbackURL(
+                        versionProvider: self.versionProvider
+                    ),
                     eventTitle: rowTitle
                 )
             }
         )
-    }
-
-    private var helpAndFeedbackUrl: URL {
-        let model = deviceInformationProvider.model
-        let systemVersion = deviceInformationProvider.systemVersion
-        let device = "Apple \(model) \(systemVersion)"
-        let appVersion = versionProvider.fullBuildNumber ?? "-"
-
-        var feedbackUrl = URLComponents(
-            url: Constants.API.helpAndFeedbackUrl,
-            resolvingAgainstBaseURL: true
-        )
-        feedbackUrl?.queryItems = [
-            .init(name: "app_version", value: appVersion),
-            .init(name: "phone", value: device)
-        ]
-
-        return feedbackUrl?.url ?? Constants.API.helpAndFeedbackUrl
     }
 
     private func openSourceLicenceRow() -> GroupedListRow {

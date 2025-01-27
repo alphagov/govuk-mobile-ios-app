@@ -59,7 +59,7 @@ final public class SearchModalButton: UIButton {
         ).leading
         configuration?.titleAlignment = .automatic
         configuration?.titlePadding = leftTitleEdgeInsets
-        configuration?.image = image?.applyingSymbolConfiguration(.init(pointSize: 12))
+        configuration?.image = image?.applyingSymbolConfiguration(.init(pointSize: 14))
         imageView?.clipsToBounds = true
         configuration?.imagePadding = 5
         contentHorizontalAlignment = .left

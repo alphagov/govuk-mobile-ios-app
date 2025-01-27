@@ -5,7 +5,6 @@ final public class SearchModalButton: UIButton {
     init() {
         super.init(frame: .zero)
         self.configuration = UIButton.Configuration.plain()
-
         configureUI()
     }
 
@@ -58,16 +57,11 @@ final public class SearchModalButton: UIButton {
             bottom: 0,
             trailing: 0
         ).leading
+        configuration?.titleAlignment = .automatic
         configuration?.titlePadding = leftTitleEdgeInsets
-        setImage(image, for: .normal)
+        configuration?.image = image?.applyingSymbolConfiguration(.init(pointSize: 12))
         imageView?.clipsToBounds = true
-        let leftImageEdgeInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 8,
-            bottom: 0,
-            trailing: 0
-        ).leading
-        configuration?.imagePadding = leftImageEdgeInsets
+        configuration?.imagePadding = 5
         contentHorizontalAlignment = .left
         backgroundColor = GOVUKColors.fills.surfaceSearchBox
         layer.cornerRadius = 10

@@ -26,7 +26,7 @@ final class TopicsWidgetViewModel {
 
     var allTopicsButtonHidden: Bool {
         (displayedTopics.count >= topicsService.fetchAll().count) ||
-        fetchTopicsError == true
+        fetchTopicsError
     }
 
     var widgetTitle: String {

@@ -20,6 +20,7 @@ struct HomeViewControllerTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
+            feedbackAction: { },
             searchAction: { () -> Void in _ = true },
             recentActivityAction: { }
         )
@@ -41,6 +42,7 @@ struct HomeViewControllerTests {
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
+            feedbackAction: { },
             searchAction: { () -> Void in _ = true },
             recentActivityAction: { }
         )
@@ -66,6 +68,7 @@ struct HomeViewControllerTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
+            feedbackAction: { },
             searchAction: { () -> Void in _ = true },
             recentActivityAction: { }
         )

@@ -27,6 +27,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     override func home(analyticsService: any AnalyticsServiceInterface,
                        configService: any AppConfigServiceInterface,
                        topicWidgetViewModel: TopicsWidgetViewModel,
+                       feedbackAction: @escaping () -> Void,
                        searchAction: @escaping () -> Void,
                        recentActivityAction: @escaping () -> Void) -> UIViewController {
         _receivedHomeSearchAction = searchAction

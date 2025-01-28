@@ -78,7 +78,10 @@ class Configuration
   end
 
   def match_identifiers
-    app_bundle_identifier
+    [
+      app_bundle_identifier,
+      "#{app_bundle_identifier}.notification-service"
+    ]
   end
 
   def match_certificate_token

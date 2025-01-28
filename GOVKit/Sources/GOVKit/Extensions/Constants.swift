@@ -44,6 +44,8 @@ public struct Constants {
 
         public static let defaultSearchUrl: URL = URL(string: "https://search.service.gov.uk")!
 
+        public static var searchSuggestionsPath: String = "/api/search/autocomplete.json"
+
         public static var defaultSearchPath: String = "/v0_1/search.json"
     }
 

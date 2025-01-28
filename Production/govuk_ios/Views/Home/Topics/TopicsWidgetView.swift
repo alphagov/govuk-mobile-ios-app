@@ -1,5 +1,6 @@
 import UIKit
 import UIComponents
+import GOVKit
 
 class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
@@ -58,6 +59,18 @@ class TopicsWidgetView: UIView {
         return stackView
     }()
 
+    private lazy var noTopicsLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.govUK.text.primary
+        label.font = UIFont.govUK.body
+        label.text = String.home.localized("noTopicsDescriptionText")
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.adjustsFontForContentSizeCategory = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     private lazy var cardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -77,6 +90,20 @@ class TopicsWidgetView: UIView {
         return stackView
     }()
 
+    private lazy var appErrorViewController: HostingViewController = {
+        let localController = HostingViewController(
+            rootView: AppErrorView(
+                viewModel: self.viewModel.topicErrorViewModel
+            )
+        )
+        localController.view.backgroundColor = .clear
+        return localController
+    }()
+
+    private lazy var errorView: UIView = {
+        self.appErrorViewController.view
+    }()
+
     init(viewModel: TopicsWidgetViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -88,6 +115,7 @@ class TopicsWidgetView: UIView {
             name: .NSManagedObjectContextDidSave,
             object: nil
         )
+        fetchTopics()
         updateTopics(viewModel.displayedTopics)
         showAllTopicsButton()
     }
@@ -101,14 +129,28 @@ class TopicsWidgetView: UIView {
         }
     }
 
+    private func fetchTopics() {
+        viewModel.handleError = { _ in
+            self.noTopicsLabel.isHidden = true
+            self.cardStackView.isHidden = true
+            self.editButton.isHidden = true
+            self.allTopicsButton.isHidden = true
+            self.errorView.isHidden = false
+        }
+        viewModel.fetchTopics()
+    }
+
     private func configureUI() {
         headerStackView.addArrangedSubview(titleLabel)
         headerStackView.addArrangedSubview(UIView())
         headerStackView.addArrangedSubview(editButton)
         headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)
+        stackView.addArrangedSubview(noTopicsLabel)
         stackView.addArrangedSubview(cardStackView)
         stackView.addArrangedSubview(allTopicsButton)
+        stackView.addArrangedSubview(errorView)
+        errorView.isHidden = true
         addSubview(stackView)
     }
 
@@ -136,6 +178,7 @@ class TopicsWidgetView: UIView {
     }
 
     private func updateTopics(_ topics: [Topic]) {
+        noTopicsLabel.isHidden = viewModel.fetchTopicsError || topics.count > 0
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for index in 0..<topics.count where index % rowCount == 0 {
             let rowStack = createNewRow(startingAt: index, of: topics)
@@ -199,6 +242,7 @@ class TopicsWidgetView: UIView {
             rowCount = sizeClass == .regular ? 2 : 4
             updateTopics(viewModel.displayedTopics)
         }
+        errorView.invalidateIntrinsicContentSize()
     }
 
     private func showAllTopicsButton() {

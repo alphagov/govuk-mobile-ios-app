@@ -26,7 +26,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 
@@ -48,7 +49,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 
@@ -76,7 +78,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 
@@ -104,7 +107,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 
@@ -136,7 +140,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 
@@ -164,7 +169,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         subject.start()
 
@@ -194,7 +200,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         
         subject.start()
@@ -220,7 +227,8 @@ struct HomeCoordinatorTests {
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            topicsService: MockTopicsService()
+            topicsService: MockTopicsService(),
+            deviceInformationProvider: MockDeviceInformationProvider()
         )
         
         subject.start()

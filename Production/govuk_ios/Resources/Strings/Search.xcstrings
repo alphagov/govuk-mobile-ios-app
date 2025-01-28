@@ -121,6 +121,17 @@
           }
         }
       }
+    },
+    "searchSuggestionsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggested searches"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

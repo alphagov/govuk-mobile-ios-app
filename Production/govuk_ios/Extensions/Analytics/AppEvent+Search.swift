@@ -13,10 +13,11 @@ extension AppEvent {
         )
     }
 
-    static func searchTerm(term: String) -> AppEvent {
+    static func searchTerm(term: String, type: SearchInvocationType) -> AppEvent {
         search(
             params: [
-                "text": term
+                "text": term,
+                "type": type.rawValue
             ]
         )
     }

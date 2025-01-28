@@ -25,7 +25,8 @@ class CoordinatorBuilder {
             deeplinkStore: DeeplinkDataStore.home(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
             configService: container.appConfigService.resolve(),
-            topicsService: container.topicsService.resolve()
+            topicsService: container.topicsService.resolve(),
+            deviceInformationProvider: DeviceInformationProvider()
         )
     }
 
@@ -55,7 +56,7 @@ class CoordinatorBuilder {
                         dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AppUnavailableCoordinator(
             navigationController: navigationController,
-            appConfigService: container.appConfigService.resolve(),
+            appLaunchService: container.appLaunchService.resolve(),
             launchResponse: launchResponse,
             dismissAction: dismissAction
         )

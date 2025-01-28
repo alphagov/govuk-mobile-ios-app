@@ -3,15 +3,15 @@ import UIKit
 import SwiftUI
 
 class AppUnavailableCoordinator: BaseCoordinator {
-    private let appConfigService: AppConfigServiceInterface
+    private let appLaunchService: AppLaunchServiceInterface
     private let launchResponse: AppLaunchResponse
-    private let dismissAction: () -> Void
+    let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,
-         appConfigService: AppConfigServiceInterface,
+         appLaunchService: AppLaunchServiceInterface,
          launchResponse: AppLaunchResponse,
          dismissAction: @escaping () -> Void) {
-        self.appConfigService = appConfigService
+        self.appLaunchService = appLaunchService
         self.launchResponse = launchResponse
         self.dismissAction = dismissAction
         super.init(navigationController: navigationController)
@@ -20,11 +20,15 @@ class AppUnavailableCoordinator: BaseCoordinator {
     override func start(url: URL?) {
         guard !launchResponse.isAppAvailable
         else { return dismissAction() }
-        setAppUnavailable()
+        setAppUnavailable(launchResponse.configResult.getError())
     }
 
-    private func setAppUnavailable() {
-        let viewModel = AppUnavailableContainerViewModel()
+    private func setAppUnavailable(_ error: AppConfigError?) {
+        let viewModel = AppUnavailableContainerViewModel(
+            appLaunchService: appLaunchService,
+            error: error,
+            dismissAction: dismissAction
+        )
         let containerView = AppUnavailableContainerView(
             viewModel: viewModel
         )

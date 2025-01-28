@@ -4,6 +4,8 @@ import CoreData
 protocol SearchServiceInterface {
     func search(_ term: String,
                 completion: @escaping (Result<SearchResult, SearchError>) -> Void)
+    func suggestions(_ term: String,
+                     completion: @escaping ([String]) -> Void)
     func save(searchText: String, date: Date)
     func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
@@ -35,6 +37,21 @@ class SearchService: SearchServiceInterface {
 
                 DispatchQueue.main.async {
                     completion(mappedResult)
+                }
+            }
+        )
+    }
+
+    func suggestions(_ term: String,
+                     completion: @escaping ([String]) -> Void) {
+        serviceClient.suggestions(
+            term: term,
+            completion: { result in
+                let suggestions = (try? result.get().suggestions) ?? []
+                let firstFiveSuggestions = Array(suggestions.prefix(5))
+
+                DispatchQueue.main.async {
+                    completion(firstFiveSuggestions)
                 }
             }
         )

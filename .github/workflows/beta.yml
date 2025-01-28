@@ -40,6 +40,7 @@ jobs:
         run: xcodes select
 
       - name: Deploy
+        environment: production
         run: bundle exec fastlane beta
         env:
           APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
@@ -48,6 +49,7 @@ jobs:
           APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
           MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          ONESIGNAL_APP_ID: ${{ env.ONESIGNAL_APP_ID }}
 
       - name: Save Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3

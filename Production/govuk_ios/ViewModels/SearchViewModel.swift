@@ -11,9 +11,13 @@ enum SearchError: Error {
 
 class SearchViewModel {
     let analyticsService: AnalyticsServiceInterface
+    let urlOpener: URLOpener
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
-    let urlOpener: URLOpener
+    lazy var searchSuggestionsViewModel: SearchSuggestionsViewModel = {
+        SearchSuggestionsViewModel(searchService: searchService,
+                                   analyticsService: analyticsService)
+    }()
     lazy var searchHistoryViewModel: SearchHistoryViewModel = {
         SearchHistoryViewModel(searchService: searchService,
                                analyticsService: analyticsService)
@@ -37,13 +41,14 @@ class SearchViewModel {
     }
 
     func search(text: String?,
+                type: SearchInvocationType,
                 completion: @escaping () -> Void) {
         error = nil
         guard let text = text,
               !text.isEmpty
         else { return }
 
-        trackSearchTerm(searchTerm: text)
+        trackSearchTerm(searchTerm: text, type: type)
         searchService.search(
             text,
             completion: { [weak self] result in
@@ -74,11 +79,14 @@ class SearchViewModel {
         )
     }
 
-    private func trackSearchTerm(searchTerm: String) {
+    private func trackSearchTerm(searchTerm: String, type: SearchInvocationType) {
         let redactor = Redactor.pii
         let redactedSearchTerm = redactor.redact(searchTerm)
         analyticsService.track(
-            event: AppEvent.searchTerm(term: redactedSearchTerm)
+            event: AppEvent.searchTerm(
+                term: redactedSearchTerm,
+                type: type
+            )
         )
     }
 }

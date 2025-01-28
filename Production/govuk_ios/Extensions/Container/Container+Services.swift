@@ -99,4 +99,12 @@ extension Container {
             )
         }.scope(.singleton)
     }
+
+    var notificationService: Factory<NotificationServiceInterface> {
+        Factory(self) {
+            NotificationService(
+                environmentService: self.appEnvironmentService.resolve()
+            )
+        }
+    }
 }

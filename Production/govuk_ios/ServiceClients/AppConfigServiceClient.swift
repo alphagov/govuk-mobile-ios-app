@@ -29,16 +29,19 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
         serviceClient.send(
             request: fetchRequest,
             completion: { result in
-                let mappedResult: Result<AppConfig, AppConfigError>
-                switch result {
-                case .failure(let error):
-                    if error is SigningError {
-                        mappedResult = .failure(.invalidSignature)
+                let mappedResult = result.mapError { error in
+                    let nsError = (error as NSError)
+                    if nsError.code == NSURLErrorNotConnectedToInternet {
+                        return AppConfigError.networkUnavailable
                     } else {
-                        mappedResult = .failure(.remoteJson)
+                        if error is SigningError {
+                            return AppConfigError.invalidSignature
+                        } else {
+                            return AppConfigError.remoteJson
+                        }
                     }
-                case .success(let data):
-                    mappedResult = self.decode(data: data)
+                }.flatMap {
+                    self.decode(data: $0)
                 }
                 completion(mappedResult)
             }

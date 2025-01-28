@@ -8,6 +8,7 @@ default: &DEFAULTS
     bundle_identifier: uk.gov.govuk
     profile_specifiers:
       uk.gov.govuk: "match AppStore uk.gov.govuk"
+      uk.gov.govuk.notification-service: "match AppStore uk.gov.govuk.notification-service"
     export_method: app-store
     build_configuration: Release
   scan:
@@ -23,6 +24,9 @@ default: &DEFAULTS
 
 unit:
   <<: *DEFAULTS
+  app:
+    <<: *APP_DEFAULTS
+    scheme: GovUKDev
 
 alpha:
   <<: *DEFAULTS
@@ -33,6 +37,7 @@ alpha:
     bundle_identifier: uk.gov.govuk.dev
     profile_specifiers:
       uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
+      uk.gov.govuk.dev.notification-service: "match AdHoc uk.gov.govuk.dev.notification-service"
     firebase_app_id: 1:299196369979:ios:d118523927e181c1e3e01e
     export_method: ad-hoc
     build_configuration: Alpha

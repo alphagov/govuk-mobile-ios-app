@@ -32,11 +32,15 @@ struct AppEvent_SearchTests {
     @Test
     func searchTerm_returnsExpectedResult() {
         let expectedTerm = UUID().uuidString
-        let result = AppEvent.searchTerm(term: expectedTerm)
+        let result = AppEvent.searchTerm(
+            term: expectedTerm,
+            type: .typed
+        )
 
         #expect(result.name == "Search")
-        #expect(result.params?.count == 1)
+        #expect(result.params?.count == 2)
         #expect(result.params?["text"] as? String == expectedTerm)
+        #expect(result.params?["type"] as? String == "typed")
     }
 
 }

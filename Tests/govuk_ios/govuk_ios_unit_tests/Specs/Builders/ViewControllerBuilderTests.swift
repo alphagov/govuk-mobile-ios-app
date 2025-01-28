@@ -26,6 +26,7 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicWidgetViewModel: viewModel,
+            feedbackAction: {},
             searchAction: { () -> Void in },
             recentActivityAction: {}
         )

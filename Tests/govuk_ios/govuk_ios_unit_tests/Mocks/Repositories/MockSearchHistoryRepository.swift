@@ -10,7 +10,6 @@ class MockSearchHistoryRepository: SearchHistoryRepositoryInterface {
         _didDeleteSearchHistoryItem = true
     }
     
-    
     var _didSaveSearchHistory: Bool = false
     var _savedSearchText: String? = nil
     func save(searchText: String, date: Date) {

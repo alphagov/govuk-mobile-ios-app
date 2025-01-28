@@ -14,7 +14,6 @@ struct AppLaunchService: @preconcurrency AppLaunchServiceInterface {
         self.topicService = topicService
     }
 
-    @MainActor
     func fetch(completion: @escaping (sending AppLaunchResponse) -> Void) {
         Task {
             async let configResult = await fetchConfig()

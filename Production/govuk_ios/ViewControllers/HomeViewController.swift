@@ -52,7 +52,8 @@ class HomeViewController: BaseViewController,
 
     private func configureUI() {
         navigationItem.largeTitleDisplayMode = .never
-        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        view.backgroundColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
+        scrollView.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         view.addSubview(navigationBar)
         scrollView.addSubview(stackView)
@@ -62,18 +63,18 @@ class HomeViewController: BaseViewController,
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor),
-            navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor),
+            navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             stackView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor)
         ])
     }
@@ -84,10 +85,6 @@ class HomeViewController: BaseViewController,
 
     private func addWidgets() {
         viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .darkContent
     }
 }
 

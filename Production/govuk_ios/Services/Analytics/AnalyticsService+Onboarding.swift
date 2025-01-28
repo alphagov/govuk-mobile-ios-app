@@ -26,4 +26,4 @@ extension AnalyticsService: OnboardingAnalyticsService {
     }
 }
 
-extension OnboardingScreen: TrackableScreen { }
+extension OnboardingScreen: @retroactive TrackableScreen { }

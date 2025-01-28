@@ -3,16 +3,6 @@
     {
       "filename" : "logo.svg",
       "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "logoDark.svg",
-      "idiom" : "universal"
     }
   ],
   "info" : {

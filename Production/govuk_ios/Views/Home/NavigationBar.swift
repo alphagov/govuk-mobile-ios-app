@@ -35,7 +35,7 @@ class NavigationBar: UIView {
     }
 
     private func configureUI() {
-        backgroundColor = UIColor.govUK.fills.surfaceBackground
+        backgroundColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
         addSubview(divider)
         addSubview(logoImageView)
     }

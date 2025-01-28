@@ -61,7 +61,7 @@ class HomeCoordinator: TabItemCoordinator {
     private var feedbackAction: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
-            self.trackWidgetNavigation(text: "Feedback",
+            self.trackWidgetNavigation(text: String.home.localized("feedbackWidgetTitle"),
                                         external: true)
             let urlOpener: URLOpener = UIApplication.shared
             urlOpener.openIfPossible(

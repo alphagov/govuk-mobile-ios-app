@@ -259,6 +259,7 @@ public final class RecentActivityListViewController: BaseViewController {
             )
             viewModel.endEditing()
         } else {
+            editButtonItem.title = String.common.localized("cancel")
             editButtonItem.accessibilityLabel = String.recentActivity.localized(
                 "doneButtonAccessibilityTitle"
             )

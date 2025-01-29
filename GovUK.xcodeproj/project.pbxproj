@@ -229,13 +229,6 @@
 			remoteGlobalIDString = 5DAD71732BD250DB0075F648;
 			remoteInfo = GovUK;
 		};
-		5DAD71952BD250DF0075F648 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5DAD716C2BD250DA0075F648 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5DAD71732BD250DB0075F648;
-			remoteInfo = GovUK;
-		};
 		5DCAFA662D3FE0E800C3F284 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DAD716C2BD250DA0075F648 /* Project object */;
@@ -409,7 +402,6 @@
 		5DAD71802BD250DE0075F648 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DAD71852BD250DE0075F648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_unit_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5DAD71942BD250DF0075F648 /* govuk_ios_ui_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_ui_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DB226322D400C88004C2DD4 /* govuk_ios_notification_service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service.entitlements; sourceTree = "<group>"; };
 		5DB226332D400D02004C2DD4 /* govuk_ios_notification_service_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service_dev.entitlements; sourceTree = "<group>"; };
 		5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimationView+Convenience.swift"; sourceTree = "<group>"; };
@@ -515,8 +507,6 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicOnboardingViewControllerSnapshotTests.swift,
-				govuk_ios/govuk_ios_ui_tests/GovUKUITests.swift,
-				govuk_ios/govuk_ios_ui_tests/GovUKUITestsLaunchTests.swift,
 				govuk_ios/govuk_ios_unit_tests/Resources/MockAppConfigResponse.json,
 				govuk_ios/govuk_ios_unit_tests/Resources/MockAppConfigResponseInvalid.json,
 				govuk_ios/govuk_ios_unit_tests/Resources/MockTopicDetailsResponses/FiveStepByStep.json,
@@ -569,18 +559,10 @@
 			);
 			target = 5D4B9D332C074207005F126A /* govuk_ios_snapshot_tests */;
 		};
-		5D9CDF232CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				govuk_ios/govuk_ios_ui_tests/GovUKUITests.swift,
-				govuk_ios/govuk_ios_ui_tests/GovUKUITestsLaunchTests.swift,
-			);
-			target = 5DAD71932BD250DF0075F648 /* govuk_ios_ui_tests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		5D9CDE3A2CD928FB0045DFC3 /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (5D9CDF202CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF212CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF222CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF232CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64, ); path = Tests; sourceTree = "<group>"; };
+		5D9CDE3A2CD928FB0045DFC3 /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (5D9CDF202CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF212CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF222CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64, ); path = Tests; sourceTree = "<group>"; };
 		D0EBFDDD2D13058F000A3151 /* RecentActivity */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RecentActivity; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -616,13 +598,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5DAD71912BD250DF0075F648 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,7 +966,6 @@
 			children = (
 				5DAD71742BD250DB0075F648 /* govuk_ios.app */,
 				5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */,
-				5DAD71942BD250DF0075F648 /* govuk_ios_ui_tests.xctest */,
 				5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */,
 				5DCAFA612D3FE0E800C3F284 /* govuk_ios_notification_service.appex */,
 			);
@@ -1340,24 +1314,6 @@
 			productReference = 5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5DAD71932BD250DF0075F648 /* govuk_ios_ui_tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5DAD71A42BD250DF0075F648 /* Build configuration list for PBXNativeTarget "govuk_ios_ui_tests" */;
-			buildPhases = (
-				5DAD71902BD250DF0075F648 /* Sources */,
-				5DAD71912BD250DF0075F648 /* Frameworks */,
-				5DAD71922BD250DF0075F648 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5DAD71962BD250DF0075F648 /* PBXTargetDependency */,
-			);
-			name = govuk_ios_ui_tests;
-			productName = GovUKUITests;
-			productReference = 5DAD71942BD250DF0075F648 /* govuk_ios_ui_tests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		5DCAFA602D3FE0E800C3F284 /* govuk_ios_notification_service */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DCAFA692D3FE0E800C3F284 /* Build configuration list for PBXNativeTarget "govuk_ios_notification_service" */;
@@ -1399,10 +1355,6 @@
 						CreatedOnToolsVersion = 15.3;
 						TestTargetID = 5DAD71732BD250DB0075F648;
 					};
-					5DAD71932BD250DF0075F648 = {
-						CreatedOnToolsVersion = 15.3;
-						TestTargetID = 5DAD71732BD250DB0075F648;
-					};
 					5DCAFA602D3FE0E800C3F284 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -1434,7 +1386,6 @@
 				5DCAFA602D3FE0E800C3F284 /* govuk_ios_notification_service */,
 				5DAD71892BD250DF0075F648 /* govuk_ios_unit_tests */,
 				5D4B9D332C074207005F126A /* govuk_ios_snapshot_tests */,
-				5DAD71932BD250DF0075F648 /* govuk_ios_ui_tests */,
 			);
 		};
 /* End PBXProject section */
@@ -1467,13 +1418,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5DAD71882BD250DF0075F648 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5DAD71922BD250DF0075F648 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1751,13 +1695,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5DAD71902BD250DF0075F648 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5DCAFA5D2D3FE0E800C3F284 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1779,11 +1716,6 @@
 			isa = PBXTargetDependency;
 			target = 5DAD71732BD250DB0075F648 /* govuk_ios */;
 			targetProxy = 5DAD718B2BD250DF0075F648 /* PBXContainerItemProxy */;
-		};
-		5DAD71962BD250DF0075F648 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5DAD71732BD250DB0075F648 /* govuk_ios */;
-			targetProxy = 5DAD71952BD250DF0075F648 /* PBXContainerItemProxy */;
 		};
 		5DCAFA672D3FE0E800C3F284 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2099,54 +2031,6 @@
 			};
 			name = Release;
 		};
-		5DAD71A52BD250DF0075F648 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N8W395F695;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.ui;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = govuk_ios;
-			};
-			name = Debug;
-		};
-		5DAD71A62BD250DF0075F648 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N8W395F695;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.ui;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = govuk_ios;
-			};
-			name = Release;
-		};
 		5DCAFA6A2D3FE0E800C3F284 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2409,30 +2293,6 @@
 			};
 			name = Alpha;
 		};
-		D01005342CEC9FCE0013CBD0 /* Alpha */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N8W395F695;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.ui;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = govuk_ios;
-			};
-			name = Alpha;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2472,16 +2332,6 @@
 				5DAD71A22BD250DF0075F648 /* Debug */,
 				D01005322CEC9FCE0013CBD0 /* Alpha */,
 				5DAD71A32BD250DF0075F648 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5DAD71A42BD250DF0075F648 /* Build configuration list for PBXNativeTarget "govuk_ios_ui_tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5DAD71A52BD250DF0075F648 /* Debug */,
-				D01005342CEC9FCE0013CBD0 /* Alpha */,
-				5DAD71A62BD250DF0075F648 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

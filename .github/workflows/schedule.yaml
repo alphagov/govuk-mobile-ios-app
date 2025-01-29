@@ -1,0 +1,30 @@
+name: Schedule
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 16 * * 5'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    run: |
+      if [[ "${{ github.ref }}" != "refs/heads/develop" ]]; then
+        echo "Branch is not develop, exiting."
+        exit 0
+      fi
+  beta:
+    uses: ./.github/workflows/beta.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
+      APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+      APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
+      APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
+      MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
+    env:
+      ONESIGNAL_APP_ID: ${{ env.ONESIGNAL_APP_ID }}

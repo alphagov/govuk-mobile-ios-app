@@ -17,7 +17,7 @@ class TopicCard: UIView {
     private lazy var icon: UIImageView = {
         let imageView = UIImageView(image: viewModel.icon)
         imageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor.govUK.fills.surfaceButtonPrimary
+        imageView.tintColor = UIColor.govUK.text.link
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return imageView
     }()

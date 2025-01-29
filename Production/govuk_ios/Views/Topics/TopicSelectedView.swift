@@ -54,6 +54,6 @@ class TopicSelectedView: UIStackView {
 
         selectedIconImageView.tintColor = isSelected ?
         UIColor.govUK.text.buttonSuccess :
-        UIColor.govUK.fills.surfaceButtonPrimary
+        UIColor.govUK.text.buttonCompact
     }
 }

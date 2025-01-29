@@ -21,15 +21,9 @@ final public class SearchModalButton: UIButton {
 
     public override var intrinsicContentSize: CGSize {
         let titlesize = titleLabel?.intrinsicContentSize ?? .zero
-
-        guard let leftContentEdgeInsets = configuration?.contentInsets.leading,
-              let rightContentEdgeInsets = configuration?.contentInsets.trailing,
-              let topContentEdgeInsets = configuration?.contentInsets.top,
-              let bottomContentEdgeInsets = configuration?.contentInsets.bottom
-        else { return .zero }
-
-        let widthEdgeInserts = leftContentEdgeInsets + rightContentEdgeInsets
-        let heightEdgeInserts = topContentEdgeInsets + bottomContentEdgeInsets
+        guard let contentInsets = configuration?.contentInsets else { return .zero }
+        let widthEdgeInserts = contentInsets.leading + contentInsets.trailing
+        let heightEdgeInserts = contentInsets.top + contentInsets.bottom
 
         return CGSize(
             width: titlesize.width + widthEdgeInserts,
@@ -52,14 +46,6 @@ final public class SearchModalButton: UIButton {
         setTitleColor(GOVUKColors.text.secondary, for: .normal)
         titleLabel?.font = UIFont.govUK.body
         tintColor = GOVUKColors.text.secondary
-        let leftTitleEdgeInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 13,
-            bottom: 0,
-            trailing: 0
-        ).leading
-        configuration?.titleAlignment = .automatic
-        configuration?.titlePadding = leftTitleEdgeInsets
         configuration?.image = image?.applyingSymbolConfiguration(.init(pointSize: 14))
         configuration?.imagePadding = 5
 

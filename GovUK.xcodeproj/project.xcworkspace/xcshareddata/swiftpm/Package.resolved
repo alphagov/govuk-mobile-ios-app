@@ -70,7 +70,7 @@
       "location" : "https://github.com/alphagov/govuk-mobile-ios-onboarding",
       "state" : {
         "branch" : "develop",
-        "revision" : "ea8e1f47f46fb8a1952e93a36f824844e9a36cc5"
+        "revision" : "d31a7a59e0943772d11ab6f395b2b4cab1b66a52"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
         "branch" : "develop",
-        "revision" : "f1415aee8d19508a94002dfa1b1b3e8f98895fab"
+        "revision" : "2809194356b463066e4fa71d99028c74e4db9580"
       }
     },
     {

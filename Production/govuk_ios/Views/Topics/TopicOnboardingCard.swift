@@ -17,7 +17,7 @@ class TopicOnboardingCard: UIControl {
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView(image: viewModel.icon)
         imageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor.govUK.fills.surfaceButtonPrimary
+        imageView.tintColor = UIColor.govUK.text.link
         return imageView
     }()
 

@@ -116,7 +116,7 @@ struct ToggleRowView: View {
                     )
                     .padding(.horizontal, -8)
             }
-            .toggleStyle(SwitchToggleStyle(tint: (Color(UIColor.govUK.fills.surfaceButtonPrimary))))
+            .toggleStyle(SwitchToggleStyle(tint: (Color(UIColor.govUK.fills.surfaceToggleSelected))))
         }
     }
 }

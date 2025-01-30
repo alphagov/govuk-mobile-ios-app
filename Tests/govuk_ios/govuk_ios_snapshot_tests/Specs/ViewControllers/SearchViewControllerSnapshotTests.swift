@@ -24,10 +24,12 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_search_successResponse_withResults_rendersCorrectly() {
+        let url = URL(string: "https://www.gov.uk")!
         let result = SearchResult(
             results: [
-                .arrange(title: "Test 1", description: "Description 1"),
-                .arrange(title: "Test 2", description: "Description 2"),
+                SearchItem(title: "Test 1", description: "Description 1", link: url),
+                SearchItem(title: "Test 2", description: "Description 2", link: url),
+                SearchItem(title: "Test 3", description: nil, link: url)
             ]
         )
         let viewController = createViewController(result: .success(result))

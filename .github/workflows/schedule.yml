@@ -11,11 +11,13 @@ concurrency:
 
 jobs:
   validate:
-    run: |
-      if [[ "${{ github.ref }}" != "refs/heads/develop" ]]; then
-        echo "Branch is not develop, exiting."
-        exit 0
-      fi
+    steps:
+      - name: Confirm branch requirement
+        run: |
+        if [[ "${{ github.ref }}" != "refs/heads/develop" ]]; then
+          echo "Branch is not develop, exiting."
+          exit 0
+        fi
   beta:
     uses: ./.github/workflows/beta.yml
     secrets:

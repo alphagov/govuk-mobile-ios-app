@@ -39,6 +39,7 @@ jobs:
           pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 
           sonar-scanner \
+            -X \
             -Dsonar.token=$SONAR_TOKEN \
             -Dsonar.coverageReportPaths="test_output/sonarqube-generic-coverage.xml" \
             -Dsonar.pullrequest.key=$pull_number \

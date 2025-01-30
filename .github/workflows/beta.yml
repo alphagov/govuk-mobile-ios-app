@@ -23,6 +23,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
+    environment: production
 
     steps:
       - name: Checkout
@@ -40,7 +41,6 @@ jobs:
         run: xcodes select
 
       - name: Deploy
-        environment: production
         run: bundle exec fastlane beta
         env:
           APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}

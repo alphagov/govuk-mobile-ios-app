@@ -4,7 +4,7 @@ import UIComponents
 final public class SearchModalButton: UIButton {
     init() {
         super.init(frame: .zero)
-
+        self.configuration = UIButton.Configuration.plain()
         configureUI()
     }
 
@@ -21,8 +21,9 @@ final public class SearchModalButton: UIButton {
 
     public override var intrinsicContentSize: CGSize {
         let titlesize = titleLabel?.intrinsicContentSize ?? .zero
-        let widthEdgeInserts = contentEdgeInsets.left + contentEdgeInsets.right
-        let heightEdgeInserts = contentEdgeInsets.top + contentEdgeInsets.bottom
+        guard let contentInsets = configuration?.contentInsets else { return .zero }
+        let widthEdgeInserts = contentInsets.leading + contentInsets.trailing
+        let heightEdgeInserts = contentInsets.top + contentInsets.bottom
 
         return CGSize(
             width: titlesize.width + widthEdgeInserts,
@@ -44,12 +45,9 @@ final public class SearchModalButton: UIButton {
         setTitle(buttonTitle, for: .normal)
         setTitleColor(GOVUKColors.text.secondary, for: .normal)
         titleLabel?.font = UIFont.govUK.body
-        titleEdgeInsets.left = 13
-
-        setImage(image, for: .normal)
-        imageView?.clipsToBounds = true
-        imageView?.tintColor = GOVUKColors.text.secondary
-        imageEdgeInsets.left = 8
+        tintColor = GOVUKColors.text.secondary
+        configuration?.image = image?.applyingSymbolConfiguration(.init(pointSize: 14))
+        configuration?.imagePadding = 5
 
         contentHorizontalAlignment = .left
         backgroundColor = GOVUKColors.fills.surfaceSearchBox

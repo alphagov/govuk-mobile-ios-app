@@ -90,10 +90,10 @@ struct BaseCoordinatorTests {
     }
 
     @Test
-    func viewControllerPopped_finalViewController_callsFinish() async {
+    func viewControllerPopped_finalViewController_callsFinish() async throws {
         let parentCoordinator = MockBaseCoordinator()
         let navigationController = parentCoordinator.root
-        let window = UIApplication.shared.windows.first!
+        let window = try #require(UIApplication.shared.window)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 

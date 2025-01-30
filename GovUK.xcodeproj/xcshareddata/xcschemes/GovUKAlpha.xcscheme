@@ -51,17 +51,6 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5DAD71932BD250DF0075F648"
-               BuildableName = "govuk_ios_ui_tests.xctest"
-               BlueprintName = "govuk_ios_ui_tests"
-               ReferencedContainer = "container:GovUK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "5D4B9D332C074207005F126A"
                BuildableName = "govuk_ios_snapshot_tests.xctest"
                BlueprintName = "govuk_ios_snapshot_tests"

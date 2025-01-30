@@ -34,7 +34,7 @@ jobs:
 
       - name: Run SonarCloud Scanning
         run: |
-          brew install sonar-scanner@6.2.1
+          brew install sonar-scanner
 
           pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
 

@@ -65,13 +65,19 @@ class SearchResultCell: UITableViewCell {
 
     func configure(item: SearchItem?) {
         titleLabel.text = item?.title
-        let trimmedDescription = item?.description?.trimmingCharacters(in: .whitespacesAndNewlines)
-        bodyLabel.text = trimmedDescription
+        card.accessibilityHint = String.common.localized("openWebLinkHint")
+
+        guard let description = item?.description else {
+            card.accessibilityLabel = titleLabel.text
+            bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+            return
+        }
+
+        bodyLabel.text = description.trimmingCharacters(in: .whitespacesAndNewlines)
         card.accessibilityLabel = [
             titleLabel.text,
             bodyLabel.text
         ].compactMap { $0 }.joined(separator: ", ")
-        card.accessibilityHint = String.common.localized("openWebLinkHint")
     }
 
     private func setupUI() {

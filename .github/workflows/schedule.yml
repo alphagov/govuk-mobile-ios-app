@@ -11,11 +11,14 @@ concurrency:
 
 jobs:
   validate:
-    run: |
-      if [[ "${{ github.ref }}" != "refs/heads/develop" ]]; then
-        echo "Branch is not develop, exiting."
-        exit 0
-      fi
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm branch requirement
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/develop" ]]; then
+            echo "Branch is not develop, exiting."
+            exit 0
+          fi
   beta:
     uses: ./.github/workflows/beta.yml
     secrets:
@@ -26,5 +29,3 @@ jobs:
       APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
       APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
       MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
-    env:
-      ONESIGNAL_APP_ID: ${{ env.ONESIGNAL_APP_ID }}

@@ -49,6 +49,7 @@ jobs:
           MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          ONESIGNAL_APP_ID: ${{ env.ONESIGNAL_APP_ID }}
 
       - name: Save Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3

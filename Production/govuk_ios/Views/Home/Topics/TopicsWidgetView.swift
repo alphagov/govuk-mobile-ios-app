@@ -181,7 +181,6 @@ class TopicsWidgetView: UIView {
     private func updateTopics(_ topics: [Topic]) {
         noTopicsLabel.isHidden = viewModel.fetchTopicsError || topics.count > 0
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        setColumnCount(topics)
         for index in 0..<topics.count where index % columnCount == 0 {
             let rowStack = createNewRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false
@@ -244,7 +243,7 @@ class TopicsWidgetView: UIView {
         previousTraitCollection?.preferredContentSizeCategory
         let sizeClassChanged = traitCollection.verticalSizeClass !=
         previousTraitCollection?.verticalSizeClass
-
+        setColumnCount(viewModel.displayedTopics)
         if sizeClassChanged || contentSizeChanged {
             updateTopics(viewModel.displayedTopics)
         }

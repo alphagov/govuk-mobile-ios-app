@@ -29,6 +29,7 @@ class TopicCard: UIView {
         imageView.preferredSymbolConfiguration = config
         imageView.tintColor = UIColor.govUK.strokes.listDivider
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        imageView.widthAnchor.constraint(greaterThanOrEqualToConstant: 9).isActive = true
         return imageView
     }()
 

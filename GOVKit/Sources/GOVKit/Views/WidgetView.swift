@@ -2,14 +2,14 @@ import UIKit
 import Foundation
 import UIComponents
 
-class WidgetView: UIView {
+public class WidgetView: UIView {
     private(set) lazy var contentView = UIView()
     private let decorateView: Bool
     private lazy var padding: CGFloat = {
         decorateView ? 16 : 0
     }()
 
-    init(decorateView: Bool = true,
+    public init(decorateView: Bool = true,
          useContentAccessibilityInfo: Bool = false) {
         self.decorateView = decorateView
         super.init(frame: .zero)
@@ -60,12 +60,12 @@ class WidgetView: UIView {
         ])
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateBorderColor()
     }
 
-    func addContent(_ content: UIView) {
+    public func addContent(_ content: UIView) {
         content.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(content)
         NSLayoutConstraint.activate(

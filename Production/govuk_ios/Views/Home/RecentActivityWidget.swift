@@ -1,10 +1,11 @@
 import Foundation
 import UIKit
+import GOVKit
 
-class RecentActivtyWidget: UIControl {
-    private let viewModel: RecentActivityWidgetViewModel
+class RecentActivityWidget: UIControl {
+    private let viewModel: WidgetViewModel
 
-    init(viewModel: RecentActivityWidgetViewModel) {
+    init(viewModel: WidgetViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureUI()

@@ -1,8 +1,9 @@
 import UIKit
 import UIComponents
+import GOVKit
 
 class SearchWidgetStackView: UIStackView {
-    private let viewModel: SearchWidgetViewModel
+    private let viewModel: WidgetViewModel
 
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
@@ -23,7 +24,7 @@ class SearchWidgetStackView: UIStackView {
         return button
     }()
 
-    init(viewModel: SearchWidgetViewModel) {
+    init(viewModel: WidgetViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureUI()

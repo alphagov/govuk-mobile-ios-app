@@ -1,9 +1,10 @@
 import Foundation
 import UIKit
 import UIComponents
+import GOVKit
 
 final class UserFeedbackView: UIControl {
-    private let viewModel: UserFeedbackViewModel
+    private let viewModel: WidgetViewModel
 
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -38,7 +39,7 @@ final class UserFeedbackView: UIControl {
         return UITapGestureRecognizer(target: self, action: #selector(handleTap))
     }()
 
-    init(viewModel: UserFeedbackViewModel) {
+    init(viewModel: WidgetViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         titleLabel.text = viewModel.title

@@ -21,13 +21,11 @@ struct HomeViewModelTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { },
             widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
                                          configService: MockAppConfigService(),
                                          topicWidgetViewModel: topicsViewModel,
                                          feedbackAction: { },
-                                         searchAction: { },
+                                         searchAction: { () -> Void in _ = true },
                                          recentActivityAction: { })
         )
         let widgets = subject.widgets
@@ -52,8 +50,6 @@ struct HomeViewModelTests {
             configService: configService,
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { },
-            recentActivityAction: { },
             widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
                                          configService: MockAppConfigService(),
                                          topicWidgetViewModel: topicsViewModel,

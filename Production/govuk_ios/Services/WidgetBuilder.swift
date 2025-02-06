@@ -82,6 +82,8 @@ class WidgetBuilder: NSObject {
                 return searchAction
             case "recentActivity":
                 return recentActivityAction
+            case "userFeedback":
+                return feedbackAction
             default:
                 return { }
             }

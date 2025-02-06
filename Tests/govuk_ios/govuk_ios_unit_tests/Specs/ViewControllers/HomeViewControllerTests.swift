@@ -21,13 +21,11 @@ struct HomeViewControllerTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { },
             widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
                                          configService: MockAppConfigService(),
                                          topicWidgetViewModel: topicsViewModel,
                                          feedbackAction: { },
-                                         searchAction: { },
+                                         searchAction: { () -> Void in _ = true },
                                          recentActivityAction: { })
         )
         let subject = HomeViewController(viewModel: viewModel)
@@ -49,13 +47,11 @@ struct HomeViewControllerTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { },
             widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
                                          configService: MockAppConfigService(),
                                          topicWidgetViewModel: topicsViewModel,
                                          feedbackAction: { },
-                                         searchAction: { },
+                                         searchAction: { () -> Void in _ = true },
                                          recentActivityAction: { })
         )
         let subject = HomeViewController(viewModel: viewModel)
@@ -81,13 +77,11 @@ struct HomeViewControllerTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { },
             widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
                                          configService: MockAppConfigService(),
                                          topicWidgetViewModel: topicsViewModel,
                                          feedbackAction: { },
-                                         searchAction: { },
+                                         searchAction: { () -> Void in _ = true },
                                          recentActivityAction: { })
         )
         let subject = HomeViewController(viewModel: viewModel)

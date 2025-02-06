@@ -2,22 +2,27 @@
     "widgets" : [
         {
             "name" : "TestWidget.TestWidgetProvider",
-            "rank" : 3,
+            "rank" : 4,
             "enabled" : true
         },
         {
             "name" : "TestWidget.TestWebWidgetProvider",
-            "rank" : 2,
+            "rank" : 3,
             "enabled" : true
         },
         {
             "name" : "govuk_ios.SearchWidgetProvider",
-            "rank" : 0,
+            "rank" : 1,
             "enabled" : true
         },
         {
             "name" : "govuk_ios.RecentActivityWidgetProvider",
-            "rank" : 1,
+            "rank" : 2,
+            "enabled" : true
+        },
+        {
+            "name" : "govuk_ios.UserFeedbackWidgetProvider",
+            "rank" : 0,
             "enabled" : true
         }
     ]

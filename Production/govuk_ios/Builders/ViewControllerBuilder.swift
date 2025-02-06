@@ -32,8 +32,6 @@ class ViewControllerBuilder {
             configService: configService,
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
-            searchAction: searchAction,
-            recentActivityAction: recentActivityAction,
             widgetBuilder: widgetBuilder
         )
         return HomeViewController(

@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Testing
+import GOVKit
 
 @testable import govuk_ios
 
@@ -21,7 +22,13 @@ struct HomeViewModelTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
+                                         configService: MockAppConfigService(),
+                                         topicWidgetViewModel: topicsViewModel,
+                                         feedbackAction: { },
+                                         searchAction: { },
+                                         recentActivityAction: { })
         )
         let widgets = subject.widgets
 
@@ -46,7 +53,13 @@ struct HomeViewModelTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
+                                         configService: MockAppConfigService(),
+                                         topicWidgetViewModel: topicsViewModel,
+                                         feedbackAction: { },
+                                         searchAction: { },
+                                         recentActivityAction: { })
         )
         let widgets = subject.widgets
 

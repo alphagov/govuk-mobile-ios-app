@@ -29,7 +29,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                        topicWidgetViewModel: TopicsWidgetViewModel,
                        feedbackAction: @escaping () -> Void,
                        searchAction: @escaping () -> Void,
-                       recentActivityAction: @escaping () -> Void) -> UIViewController {
+                       recentActivityAction: @escaping () -> Void,
+                       widgetBuilder: WidgetBuilder) -> UIViewController {
         _receivedHomeSearchAction = searchAction
         _receivedHomeRecentActivityAction = recentActivityAction
         _receivedTopicWidgetViewModel = topicWidgetViewModel

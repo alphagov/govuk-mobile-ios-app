@@ -22,7 +22,13 @@ struct HomeViewControllerTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
+                                         configService: MockAppConfigService(),
+                                         topicWidgetViewModel: topicsViewModel,
+                                         feedbackAction: { },
+                                         searchAction: { },
+                                         recentActivityAction: { })
         )
         let subject = HomeViewController(viewModel: viewModel)
 
@@ -44,7 +50,13 @@ struct HomeViewControllerTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
+                                         configService: MockAppConfigService(),
+                                         topicWidgetViewModel: topicsViewModel,
+                                         feedbackAction: { },
+                                         searchAction: { },
+                                         recentActivityAction: { })
         )
         let subject = HomeViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
@@ -70,7 +82,13 @@ struct HomeViewControllerTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
+                                         configService: MockAppConfigService(),
+                                         topicWidgetViewModel: topicsViewModel,
+                                         feedbackAction: { },
+                                         searchAction: { },
+                                         recentActivityAction: { })
         )
         let subject = HomeViewController(viewModel: viewModel)
         guard let scrollView: UIScrollView =

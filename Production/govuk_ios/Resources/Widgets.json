@@ -6,7 +6,7 @@
             "enabled" : true
         },
         {
-            "name" : "govuk_ios.UserFeedbackWidgetProvider",
+            "name" : "TestWidget.TestWebWidgetProvider",
             "rank" : 2,
             "enabled" : true
         },

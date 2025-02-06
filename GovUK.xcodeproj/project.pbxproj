@@ -183,6 +183,9 @@
 		D05683792D4CD0A3000F1110 /* Widgets.json in Resources */ = {isa = PBXBuildFile; fileRef = D05683782D4CD0A3000F1110 /* Widgets.json */; };
 		D0568C4F2D521B45000F1110 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568C4D2D521B45000F1110 /* BaseCoordinator.swift */; };
 		D0568C502D521B45000F1110 /* WidgetCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568C4E2D521B45000F1110 /* WidgetCoordinator.swift */; };
+		D0568E442D53B370000F1110 /* UserFeedbackWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568E432D53B370000F1110 /* UserFeedbackWidgetProvider.swift */; };
+		D0568E462D54D462000F1110 /* SearchWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568E452D54D462000F1110 /* SearchWidgetProvider.swift */; };
+		D0568E482D550625000F1110 /* RecentActivityWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568E472D550625000F1110 /* RecentActivityWidgetProvider.swift */; };
 		D056CE762D3A848A005845E0 /* UserFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE752D3A847F005845E0 /* UserFeedbackView.swift */; };
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
@@ -440,6 +443,9 @@
 		D05683782D4CD0A3000F1110 /* Widgets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Widgets.json; sourceTree = "<group>"; };
 		D0568C4D2D521B45000F1110 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		D0568C4E2D521B45000F1110 /* WidgetCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCoordinator.swift; sourceTree = "<group>"; };
+		D0568E432D53B370000F1110 /* UserFeedbackWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackWidgetProvider.swift; sourceTree = "<group>"; };
+		D0568E452D54D462000F1110 /* SearchWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWidgetProvider.swift; sourceTree = "<group>"; };
+		D0568E472D550625000F1110 /* RecentActivityWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidgetProvider.swift; sourceTree = "<group>"; };
 		D056CE752D3A847F005845E0 /* UserFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackView.swift; sourceTree = "<group>"; };
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
@@ -630,6 +636,9 @@
 				5DABE8CE2CA41AD4003AB312 /* RecentActivityWidget.swift */,
 				1666F49F2C86124900DBD064 /* SearchModalButton.swift */,
 				16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */,
+				D0568E432D53B370000F1110 /* UserFeedbackWidgetProvider.swift */,
+				D0568E452D54D462000F1110 /* SearchWidgetProvider.swift */,
+				D0568E472D550625000F1110 /* RecentActivityWidgetProvider.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1616,6 +1625,7 @@
 				D0D9CB932D3024C00051EDDD /* SearchResult.swift in Sources */,
 				D0D9CB942D3024C00051EDDD /* SearchItem.swift in Sources */,
 				D0D9CB952D3024C00051EDDD /* SearchHistoryItem.swift in Sources */,
+				D0568E462D54D462000F1110 /* SearchWidgetProvider.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				5D925B182CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift in Sources */,
@@ -1680,7 +1690,9 @@
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,
 				4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */,
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
+				D0568E442D53B370000F1110 /* UserFeedbackWidgetProvider.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
+				D0568E482D550625000F1110 /* RecentActivityWidgetProvider.swift in Sources */,
 				4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

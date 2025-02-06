@@ -25,14 +25,16 @@ class ViewControllerBuilder {
               topicWidgetViewModel: TopicsWidgetViewModel,
               feedbackAction: @escaping () -> Void,
               searchAction: @escaping () -> Void,
-              recentActivityAction: @escaping () -> Void) -> UIViewController {
+              recentActivityAction: @escaping () -> Void,
+              widgetBuilder: WidgetBuilder) -> UIViewController {
         let viewModel = HomeViewModel(
             analyticsService: analyticsService,
             configService: configService,
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
             searchAction: searchAction,
-            recentActivityAction: recentActivityAction
+            recentActivityAction: recentActivityAction,
+            widgetBuilder: widgetBuilder
         )
         return HomeViewController(
             viewModel: viewModel

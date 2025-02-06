@@ -36,7 +36,14 @@ class HomeCoordinator: TabItemCoordinator {
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
             searchAction: presentSearchCoordinator,
-            recentActivityAction: startRecentActivityCoordinator
+            recentActivityAction: startRecentActivityCoordinator,
+            widgetBuilder: WidgetBuilder(coordinator: self,
+                                         analytics: self.analyticsService,
+                                         configService: configService,
+                                         topicWidgetViewModel: topicWidgetViewModel,
+                                         feedbackAction: feedbackAction,
+                                         searchAction: presentSearchCoordinator,
+                                         recentActivityAction: startRecentActivityCoordinator)
         )
         set([viewController], animated: false)
     }

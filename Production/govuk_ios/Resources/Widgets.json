@@ -1,0 +1,24 @@
+{
+    "widgets" : [
+        {
+            "name" : "TestWidget.TestWidgetProvider",
+            "rank" : 3,
+            "enabled" : true
+        },
+        {
+            "name" : "govuk_ios.UserFeedbackWidgetProvider",
+            "rank" : 2,
+            "enabled" : true
+        },
+        {
+            "name" : "govuk_ios.SearchWidgetProvider",
+            "rank" : 0,
+            "enabled" : true
+        },
+        {
+            "name" : "govuk_ios.RecentActivityWidgetProvider",
+            "rank" : 1,
+            "enabled" : true
+        }
+    ]
+}

@@ -2,13 +2,25 @@ import Foundation
 import UIKit
 
 class TopicOnboardingCard: UIControl {
+    let displayCompactCard: Bool
+
     private let viewModel: TopicOnboardingCardModel
 
     private lazy var cardStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isUserInteractionEnabled = false
+        return stackView
+    }()
+
+    private lazy var mainContentStackView: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8
-        stackView.alignment = .center
+        stackView.alignment = displayCompactCard ? .leading : .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isUserInteractionEnabled = false
         return stackView
@@ -27,7 +39,7 @@ class TopicOnboardingCard: UIControl {
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.title
-        localView.textAlignment = .center
+        localView.textAlignment = displayCompactCard ? .left : .center
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
@@ -38,7 +50,7 @@ class TopicOnboardingCard: UIControl {
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.description
-        localView.textAlignment = .center
+        localView.textAlignment = displayCompactCard ? .left : .center
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
@@ -49,8 +61,10 @@ class TopicOnboardingCard: UIControl {
         return localView
     }()
 
-    init(viewModel: TopicOnboardingCardModel) {
+    init(viewModel: TopicOnboardingCardModel,
+         displayCompactCard: Bool) {
         self.viewModel = viewModel
+        self.displayCompactCard = displayCompactCard
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
@@ -70,16 +84,15 @@ class TopicOnboardingCard: UIControl {
         layer.cornerRadius = 10
         layer.masksToBounds = true
         layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
+
         addSubview(cardStackView)
-        cardStackView.addArrangedSubview(iconImageView)
-        cardStackView.addArrangedSubview(titleLabel)
-        cardStackView.addArrangedSubview(descriptionLabel)
 
-        let spacer = UIView()
-        cardStackView.addArrangedSubview(spacer)
-        cardStackView.setCustomSpacing(0, after: spacer)
-
-        cardStackView.addArrangedSubview(selectedStackView)
+        if displayCompactCard {
+            configureCompactIconImage()
+        } else {
+            mainContentStackView.addArrangedSubview(iconImageView)
+            configureMainContentStackView()
+        }
     }
 
     private func configureSelectedState() {
@@ -93,14 +106,18 @@ class TopicOnboardingCard: UIControl {
             cardStackView.topAnchor.constraint(
                 equalTo: layoutMarginsGuide.topAnchor
             ),
-            cardStackView.bottomAnchor.constraint(
-                equalTo: layoutMarginsGuide.bottomAnchor
-            ),
             cardStackView.leadingAnchor.constraint(
                 equalTo: layoutMarginsGuide.leadingAnchor
             ),
             cardStackView.trailingAnchor.constraint(
                 equalTo: layoutMarginsGuide.trailingAnchor
+            ),
+            cardStackView.bottomAnchor.constraint(
+                equalTo: layoutMarginsGuide.bottomAnchor
+            ),
+
+            selectedStackView.bottomAnchor.constraint(
+                equalTo: cardStackView.bottomAnchor
             )
         ])
     }
@@ -132,5 +149,34 @@ class TopicOnboardingCard: UIControl {
         backgroundColor = viewModel.isSelected ?
         UIColor.govUK.fills.surfaceCardSelected :
         UIColor.govUK.fills.surfaceCard
+    }
+
+    private func configureCompactIconImage() {
+        cardStackView.addArrangedSubview(iconImageView)
+        configureMainContentStackView()
+        NSLayoutConstraint.activate([
+            iconImageView.centerYAnchor.constraint(
+                equalTo: titleLabel.centerYAnchor
+            ),
+            iconImageView.heightAnchor.constraint(
+                equalToConstant: 40
+            ),
+            iconImageView.widthAnchor.constraint(
+                equalToConstant: 30
+            )
+        ])
+    }
+
+    private func configureMainContentStackView() {
+        mainContentStackView.addArrangedSubview(titleLabel)
+        mainContentStackView.addArrangedSubview(descriptionLabel)
+
+        let spacer = UIView()
+        mainContentStackView.addArrangedSubview(spacer)
+        mainContentStackView.setCustomSpacing(0, after: spacer)
+
+        mainContentStackView.addArrangedSubview(selectedStackView)
+
+        cardStackView.addArrangedSubview(mainContentStackView)
     }
 }

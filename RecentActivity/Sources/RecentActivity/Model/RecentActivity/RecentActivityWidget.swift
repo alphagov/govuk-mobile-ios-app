@@ -16,7 +16,7 @@ class RecentActivityWidget: UIControl {
     }
 
     private func configureAccessibility() {
-        accessibilityLabel = String.home.localized(
+        accessibilityLabel = String.recentActivity.localized(
             "recentActivityWidgetAccessibilityLabel"
         )
         accessibilityTraits = .button

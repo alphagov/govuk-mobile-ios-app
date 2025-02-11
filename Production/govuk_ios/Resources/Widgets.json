@@ -16,7 +16,7 @@
             "enabled" : true
         },
         {
-            "name" : "govuk_ios.RecentActivityWidgetProvider",
+            "name" : "RecentActivity.RecentActivityWidgetProvider",
             "rank" : 2,
             "enabled" : true
         },

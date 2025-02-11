@@ -134,7 +134,6 @@
 		5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E67C92C5A3BA600DB7877 /* UITabBarController+GOVUK.swift */; };
 		5DA4FB072CCBAF2100804C8A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FB062CCBAF2100804C8A /* SettingsView.swift */; };
 		5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */; };
-		5DABE8CF2CA41AD4003AB312 /* RecentActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DABE8CE2CA41AD4003AB312 /* RecentActivityWidget.swift */; };
 		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* SceneDelegate.swift */; };
 		5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD71802BD250DE0075F648 /* Assets.xcassets */; };
@@ -185,7 +184,6 @@
 		D0568C502D521B45000F1110 /* WidgetCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568C4E2D521B45000F1110 /* WidgetCoordinator.swift */; };
 		D0568E442D53B370000F1110 /* UserFeedbackWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568E432D53B370000F1110 /* UserFeedbackWidgetProvider.swift */; };
 		D0568E462D54D462000F1110 /* SearchWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568E452D54D462000F1110 /* SearchWidgetProvider.swift */; };
-		D0568E482D550625000F1110 /* RecentActivityWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0568E472D550625000F1110 /* RecentActivityWidgetProvider.swift */; };
 		D056CE762D3A848A005845E0 /* UserFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE752D3A847F005845E0 /* UserFeedbackView.swift */; };
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
@@ -394,7 +392,6 @@
 		5D9E67C92C5A3BA600DB7877 /* UITabBarController+GOVUK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+GOVUK.swift"; sourceTree = "<group>"; };
 		5DA4FB062CCBAF2100804C8A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5DA6E5322C47BD2700D41263 /* DeeplinkRouteProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkRouteProvider.swift; sourceTree = "<group>"; };
-		5DABE8CE2CA41AD4003AB312 /* RecentActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidget.swift; sourceTree = "<group>"; };
 		5DAD71742BD250DB0075F648 /* govuk_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAD71772BD250DB0075F648 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DAD71792BD250DB0075F648 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -445,7 +442,6 @@
 		D0568C4E2D521B45000F1110 /* WidgetCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCoordinator.swift; sourceTree = "<group>"; };
 		D0568E432D53B370000F1110 /* UserFeedbackWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackWidgetProvider.swift; sourceTree = "<group>"; };
 		D0568E452D54D462000F1110 /* SearchWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWidgetProvider.swift; sourceTree = "<group>"; };
-		D0568E472D550625000F1110 /* RecentActivityWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidgetProvider.swift; sourceTree = "<group>"; };
 		D056CE752D3A847F005845E0 /* UserFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackView.swift; sourceTree = "<group>"; };
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
@@ -633,12 +629,10 @@
 				D056CE752D3A847F005845E0 /* UserFeedbackView.swift */,
 				D06EB96A2CA6F6FA007EA081 /* Topics */,
 				5DD036842C5A577C00EEF11E /* NavigationBar.swift */,
-				5DABE8CE2CA41AD4003AB312 /* RecentActivityWidget.swift */,
 				1666F49F2C86124900DBD064 /* SearchModalButton.swift */,
 				16E5AD422C6D5719000B8B3A /* SearchWidgetStackView.swift */,
 				D0568E432D53B370000F1110 /* UserFeedbackWidgetProvider.swift */,
 				D0568E452D54D462000F1110 /* SearchWidgetProvider.swift */,
-				D0568E472D550625000F1110 /* RecentActivityWidgetProvider.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1678,7 +1672,6 @@
 				D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
-				5DABE8CF2CA41AD4003AB312 /* RecentActivityWidget.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
@@ -1692,7 +1685,6 @@
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
 				D0568E442D53B370000F1110 /* UserFeedbackWidgetProvider.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
-				D0568E482D550625000F1110 /* RecentActivityWidgetProvider.swift in Sources */,
 				4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

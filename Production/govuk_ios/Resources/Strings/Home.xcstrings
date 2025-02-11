@@ -45,28 +45,6 @@
         }
       }
     },
-    "recentActivityWidgetAccessibilityLabel" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pages you've visited"
-          }
-        }
-      }
-    },
-    "recentActivityWidgetTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pages you've visited"
-          }
-        }
-      }
-    },
     "searchButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -173,4 +173,13 @@ class CoordinatorBuilder {
             dismissAction: didDismissAction
         )
     }
+
+    func notificationOnboarding(navigationController: UINavigationController,
+                                complete: @escaping () -> Void) -> BaseCoordinator {
+        NotificationOnboardingCoordinator(
+            navigationController: navigationController,
+            notificationService: container.notificationService.resolve(),
+            complete: complete
+        )
+    }
 }

@@ -103,7 +103,8 @@ extension Container {
     var notificationService: Factory<NotificationServiceInterface> {
         Factory(self) {
             NotificationService(
-                environmentService: self.appEnvironmentService.resolve()
+                environmentService: self.appEnvironmentService.resolve(),
+                notificationCenter: .current()
             )
         }
     }

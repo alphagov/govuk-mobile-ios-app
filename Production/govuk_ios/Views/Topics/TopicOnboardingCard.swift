@@ -35,7 +35,7 @@ class TopicOnboardingCard: UIControl {
 
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
-        localView.font = .govUK.bodySemibold
+        localView.font = .govUK.title3Semibold
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.title
@@ -46,7 +46,7 @@ class TopicOnboardingCard: UIControl {
 
     private lazy var descriptionLabel: UILabel = {
         let localView = UILabel()
-        localView.font = .govUK.body
+        localView.font = .govUK.subheadline
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.description

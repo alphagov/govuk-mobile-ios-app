@@ -7,7 +7,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Get notified!"
+            "value" : "I’m in"
           }
         }
       }
@@ -40,7 +40,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I’m in"
+            "value" : "Get notified!"
           }
         }
       }

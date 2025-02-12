@@ -13,6 +13,6 @@ class CustomModalTransitionDelegate: NSObject,
         forPresented presented: UIViewController,
         presenting: UIViewController,
         source: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
-            return nil
+            return animation.returnAnimation
         }
 }

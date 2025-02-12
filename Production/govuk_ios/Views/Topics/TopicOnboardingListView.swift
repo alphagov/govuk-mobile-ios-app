@@ -97,7 +97,7 @@ class TopicOnboardingListView: UIView {
     }
 
     private var shouldReduceColumnCount: Bool {
-        UITraitCollection.current.preferredContentSizeCategory.numericValue > 5
+        UITraitCollection.current.preferredContentSizeCategory > .extraLarge
     }
 
     private func createOnboardingTopicCard(for topic: Topic) -> TopicOnboardingCard {

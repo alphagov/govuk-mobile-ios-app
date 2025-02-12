@@ -88,11 +88,11 @@ class TopicOnboardingCard: UIControl {
         addSubview(cardStackView)
 
         if displayCompactCard {
-            configureCompactIconImage()
+            cardStackView.addArrangedSubview(iconImageView)
         } else {
             mainContentStackView.addArrangedSubview(iconImageView)
-            configureMainContentStackView()
         }
+        configureMainContentStackView()
     }
 
     private func configureSelectedState() {
@@ -118,6 +118,24 @@ class TopicOnboardingCard: UIControl {
 
             selectedStackView.bottomAnchor.constraint(
                 equalTo: cardStackView.bottomAnchor
+            )
+        ])
+
+        if displayCompactCard {
+            configureCompactIconImageConstraints()
+        }
+    }
+
+    private func configureCompactIconImageConstraints() {
+        NSLayoutConstraint.activate([
+            iconImageView.centerYAnchor.constraint(
+                equalTo: titleLabel.centerYAnchor
+            ),
+            iconImageView.heightAnchor.constraint(
+                equalToConstant: 40
+            ),
+            iconImageView.widthAnchor.constraint(
+                equalToConstant: 30
             )
         ])
     }
@@ -149,22 +167,6 @@ class TopicOnboardingCard: UIControl {
         backgroundColor = viewModel.isSelected ?
         UIColor.govUK.fills.surfaceCardSelected :
         UIColor.govUK.fills.surfaceCard
-    }
-
-    private func configureCompactIconImage() {
-        cardStackView.addArrangedSubview(iconImageView)
-        configureMainContentStackView()
-        NSLayoutConstraint.activate([
-            iconImageView.centerYAnchor.constraint(
-                equalTo: titleLabel.centerYAnchor
-            ),
-            iconImageView.heightAnchor.constraint(
-                equalToConstant: 40
-            ),
-            iconImageView.widthAnchor.constraint(
-                equalToConstant: 30
-            )
-        ])
     }
 
     private func configureMainContentStackView() {

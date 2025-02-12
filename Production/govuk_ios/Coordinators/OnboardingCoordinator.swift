@@ -21,10 +21,14 @@ class OnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard appConfigService.isFeatureEnabled(key: .onboarding) &&
-                !onboardingService.hasSeenOnboarding
+        guard shouldShowOnboarding
         else { return dismissAction() }
         setOnboarding()
+    }
+
+    private var shouldShowOnboarding: Bool {
+        appConfigService.isFeatureEnabled(key: .onboarding) &&
+        !onboardingService.hasSeenOnboarding
     }
 
     private func setOnboarding() {

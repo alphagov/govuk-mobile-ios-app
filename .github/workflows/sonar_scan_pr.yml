@@ -13,6 +13,9 @@ concurrency:
 
 jobs:
   build:
+    env:
+      SONAR_SCANNER_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
+      SONAR_SCANNER_JAVA_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
     name: Sonar scan
     runs-on: macos-15
 

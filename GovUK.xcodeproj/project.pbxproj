@@ -78,6 +78,8 @@
 		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
 		5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */; };
 		5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D08A8FF2C9AFABB0049D798 /* Result+Extensions.swift */; };
+		5D09C6EA2D5C8C4300805D8F /* NotificationOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09C6E92D5C8C4300805D8F /* NotificationOnboardingViewModel.swift */; };
+		5D09C6EC2D5C8D5900805D8F /* Notifications.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D09C6EB2D5C8D5900805D8F /* Notifications.xcstrings */; };
 		5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0B02022C81A7E90013A410 /* Onboarding */; };
 		5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */; };
 		5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */; };
@@ -338,6 +340,8 @@
 		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		5D08A8FF2C9AFABB0049D798 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
+		5D09C6E92D5C8C4300805D8F /* NotificationOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationOnboardingViewModel.swift; sourceTree = "<group>"; };
+		5D09C6EB2D5C8D5900805D8F /* Notifications.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Notifications.xcstrings; sourceTree = "<group>"; };
 		5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClient.swift; sourceTree = "<group>"; };
 		5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStore.swift; sourceTree = "<group>"; };
@@ -776,6 +780,7 @@
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
 				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
+				5D09C6E92D5C8C4300805D8F /* NotificationOnboardingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -861,6 +866,7 @@
 			children = (
 				3D3378112CAAC0A0004BF83F /* AppAvailability.xcstrings */,
 				5D742BD72C9978B800E7B87A /* Home.xcstrings */,
+				5D09C6EB2D5C8D5900805D8F /* Notifications.xcstrings */,
 				5D742BDD2C997ABB00E7B87A /* Onboarding.xcstrings */,
 				5D742BDB2C99799000E7B87A /* Search.xcstrings */,
 				5D742BD92C99791A00E7B87A /* Settings.xcstrings */,
@@ -1424,6 +1430,7 @@
 				3D3378122CAAC0A0004BF83F /* AppAvailability.xcstrings in Resources */,
 				5D742BDC2C99799000E7B87A /* Search.xcstrings in Resources */,
 				5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */,
+				5D09C6EC2D5C8D5900805D8F /* Notifications.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1661,7 @@
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5D899A202C946F540074C0AD /* UIViewController+Extensions.swift in Sources */,
 				4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */,
+				5D09C6EA2D5C8C4300805D8F /* NotificationOnboardingViewModel.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
 				4E00EEF32CCB0523007B61E8 /* TopicOnboardingListView.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,

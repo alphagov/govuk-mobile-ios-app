@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "onboardingAcceptButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get notified!"
+          }
+        }
+      }
+    },
+    "onboardingBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stay on top of Government services and announcements"
+          }
+        }
+      }
+    },
+    "onboardingSkipButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        }
+      }
+    },
+    "onboardingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I’m in"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -29,17 +29,15 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func pushNotification() {
         let primaryViewModel = GOVUKButton.ButtonViewModel(
-            localisedTitle: "Accept",
+            localisedTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
             action: { self.request() }
         )
         let secondaryViewModel = GOVUKButton.ButtonViewModel(
-            localisedTitle: "Skip",
+            localisedTitle: String.notifications.localized("onboardingSkipButtonTitle"),
             action: { self.finishCoordination() }
         )
         let viewModel = NotificationOnboardingViewModel(
             animationName: "onboarding_stay_updated",
-            title: "Notifications",
-            body: "Want some?",
             primaryButtonViewModel: primaryViewModel,
             secondaryButtonViewModel: secondaryViewModel
         )
@@ -62,12 +60,4 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
             self.complete()
         }
     }
-}
-
-struct NotificationOnboardingViewModel: OnboardingViewModel {
-    var animationName: String
-    var title: String
-    var body: String
-    var primaryButtonViewModel: GOVUKButton.ButtonViewModel
-    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel
 }

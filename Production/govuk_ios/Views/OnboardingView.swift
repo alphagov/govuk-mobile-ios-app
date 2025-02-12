@@ -17,7 +17,7 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack {
-            scrollView
+            bouncableScrollView
             VStack {
                 SwiftUIButton(
                     .primary,
@@ -33,13 +33,19 @@ struct OnboardingView: View {
         }
     }
 
+    private var bouncableScrollView: some View {
+        if #available(iOS 16.4, *) {
+            return scrollView
+                    .scrollBounceBehavior(.basedOnSize)
+        } else {
+            return scrollView
+        }
+    }
+
     private var scrollView: some View {
         ScrollView(.vertical) {
             VStack {
-                ZStack {
-                    Color(.init(red: 244/255, green: 251/255, blue: 1, alpha: 1))
-                    imageContainer
-                }
+                imageContainer
                 VStack {
                     Text(viewModel.title)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -58,7 +64,8 @@ struct OnboardingView: View {
                 }.accessibilityElement(children: .combine)
                 Spacer()
             }
-        }.ignoresSafeArea()
+        }
+        .ignoresSafeArea()
     }
 
     private var imageContainer: some View {

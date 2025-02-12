@@ -13,9 +13,6 @@ concurrency:
 
 jobs:
   build:
-    env:
-      SONAR_SCANNER_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
-      SONAR_SCANNER_JAVA_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
     name: Sonar scan
     runs-on: macos-15
 
@@ -51,6 +48,8 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_SCANNER_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
+          SONAR_SCANNER_JAVA_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
 
       - name: Check SonarCloud Results
         uses: sonarsource/sonarqube-quality-gate-action@d304d050d930b02a896b0f85935344f023928496 # pin@v1.1.0

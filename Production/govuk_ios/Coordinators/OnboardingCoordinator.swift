@@ -36,11 +36,16 @@ class OnboardingCoordinator: BaseCoordinator {
         let onboardingModule = Onboarding(
             source: .model(slides),
             analyticsService: analyticsService,
-            dismissAction: { [weak self] in
-                self?.onboardingService.setHasSeenOnboarding()
-                self?.dismissAction()
-            }
+            completeAction: dismissOnboarding,
+            dismissAction: dismissOnboarding
         )
         set(onboardingModule.viewController)
+    }
+
+    private var dismissOnboarding: () -> Void {
+        { [weak self] in
+            self?.onboardingService.setHasSeenOnboarding()
+            self?.dismissAction()
+        }
     }
 }

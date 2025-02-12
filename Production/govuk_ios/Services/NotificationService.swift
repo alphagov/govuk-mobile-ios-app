@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import UserNotifications
+import Onboarding
 
 import OneSignalFramework
 
@@ -8,6 +9,7 @@ protocol NotificationServiceInterface {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: @escaping () -> Void)
     var shouldRequestPermission: Bool { get async }
+    func fetchSlides() -> [OnboardingSlide]
 }
 
 class NotificationService: NotificationServiceInterface {
@@ -39,5 +41,16 @@ class NotificationService: NotificationServiceInterface {
         OneSignal.Notifications.requestPermission({ _ in
             completion()
         }, fallbackToSettings: false)
+    }
+
+    func fetchSlides() -> [OnboardingSlide] {
+        return [
+            .init(
+                image: "onboarding_screen_1",
+                title: String.notifications.localized("onboardingTitle"),
+                body: String.notifications.localized("onboardingBody"),
+                name: "Notifications_A"
+            )
+        ]
     }
 }

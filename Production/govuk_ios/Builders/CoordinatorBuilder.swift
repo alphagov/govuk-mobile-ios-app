@@ -179,6 +179,7 @@ class CoordinatorBuilder {
         NotificationOnboardingCoordinator(
             navigationController: navigationController,
             notificationService: container.notificationService.resolve(),
+            analyticsService: container.onboardingAnalyticsService.resolve(),
             complete: complete
         )
     }

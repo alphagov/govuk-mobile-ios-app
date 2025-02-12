@@ -2,15 +2,19 @@ import Foundation
 import UIKit
 import GOVKit
 import UIComponents
+import Onboarding
 
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
+    private let analyticsService: OnboardingAnalyticsService
     private let complete: () -> Void
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
+         analyticsService: OnboardingAnalyticsService,
          complete: @escaping () -> Void) {
         self.notificationService = notificationService
+        self.analyticsService = analyticsService
         self.complete = complete
         super.init(navigationController: navigationController)
     }
@@ -24,7 +28,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     private func startNotifications() async {
         guard await notificationService.shouldRequestPermission
         else { return finishCoordination() }
-        pushNotification()
+        setOnboarding()
     }
 
     private func pushNotification() {
@@ -49,9 +53,26 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
         )
     }
 
+    private func setOnboarding() {
+        let slides = notificationService.fetchSlides()
+        let onboardingModule = Onboarding(
+            source: .model(slides),
+            analyticsService: analyticsService,
+            completeAction: { [weak self] in
+                self?.request()
+            },
+            dismissAction: { [weak self] in
+                self?.finishCoordination()
+            }
+        )
+        set(onboardingModule.viewController)
+    }
+
     private func request() {
         notificationService.requestPermissions(
-            completion: complete
+            completion: { [weak self] in
+                self?.finishCoordination()
+            }
         )
     }
 

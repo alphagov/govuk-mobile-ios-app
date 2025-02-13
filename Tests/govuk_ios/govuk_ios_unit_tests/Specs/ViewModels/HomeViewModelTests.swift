@@ -38,6 +38,7 @@ struct HomeViewModelTests {
     func widgets_featureDisabled_doesntReturnWidget() {
         let configService = MockAppConfigService()
         configService.features = []
+        configService.homeWidgets = ["feedback"]
 
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
@@ -51,7 +52,7 @@ struct HomeViewModelTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             widgetBuilder: WidgetBuilder(analytics: MockAnalyticsService(),
-                                         configService: MockAppConfigService(),
+                                         configService: configService,
                                          topicWidgetViewModel: topicsViewModel,
                                          feedbackAction: { },
                                          searchAction: { },

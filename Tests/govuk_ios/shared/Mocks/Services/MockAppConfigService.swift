@@ -3,6 +3,8 @@ import Foundation
 @testable import govuk_ios
 
 class MockAppConfigService: AppConfigServiceInterface {
+    var homeWidgets: [String] = ["feedback", "search", "recentActivity", "topics"]
+
     var isAppAvailable: Bool = false
 
     var isAppForcedUpdate: Bool = false

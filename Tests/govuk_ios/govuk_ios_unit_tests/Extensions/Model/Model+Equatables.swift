@@ -17,7 +17,8 @@ extension Config: @retroactive Equatable {
         lhs.recommendedVersion == rhs.recommendedVersion &&
         lhs.releaseFlags == rhs.releaseFlags &&
         lhs.lastUpdated == rhs.lastUpdated &&
-        lhs.searchApiUrl == rhs.searchApiUrl
+        lhs.searchApiUrl == rhs.searchApiUrl &&
+        lhs.homeWidgets == rhs.homeWidgets
     }
 }
 

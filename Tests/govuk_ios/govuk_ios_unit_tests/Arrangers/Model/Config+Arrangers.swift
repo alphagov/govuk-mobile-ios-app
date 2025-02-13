@@ -19,7 +19,8 @@ extension Config {
             recommendedVersion: recommendedVersion,
             releaseFlags: releaseFlags,
             lastUpdated: lastUpdated,
-            searchApiUrl: searchApiUrl
+            searchApiUrl: searchApiUrl,
+            homeWidgets: []
         )
     }
 }

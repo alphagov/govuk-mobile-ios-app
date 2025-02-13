@@ -11,10 +11,12 @@ struct HomeViewModel {
     let widgetBuilder: WidgetBuilder
 
     var widgets: [WidgetView] {
-        widgetBuilder.getAll() +
-        [
-            topicsWidget
-        ].compactMap { $0 }
+        var localWidgets = widgetBuilder.getAll()
+        if let topicPosition = configService.homeWidgets.firstIndex(of: Feature.topics.rawValue),
+           let widget = topicsWidget {
+            localWidgets.insert(widget, at: topicPosition)
+        }
+        return localWidgets
     }
 
     private var topicsWidget: WidgetView? {

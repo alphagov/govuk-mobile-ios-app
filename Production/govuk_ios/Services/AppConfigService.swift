@@ -5,10 +5,12 @@ import GOVKit
 protocol AppConfigServiceInterface {
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion)
     func isFeatureEnabled(key: Feature) -> Bool
+    var homeWidgets: [String] { get }
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
+    private(set) var homeWidgets: [String] = []
 
     private let appConfigServiceClient: AppConfigServiceClientInterface
 
@@ -38,7 +40,19 @@ public final class AppConfigService: AppConfigServiceInterface {
                 new
             }
         )
+        self.homeWidgets = configureHomeWidgets(config)
         updateSearch(urlString: config.searchApiUrl)
+    }
+
+    private func configureHomeWidgets(_ config: Config) -> [String] {
+        var localWidgets = config.homeWidgets
+        config.homeWidgets.forEach { widget in
+            if let flag = featureFlags[widget],
+               flag == false {
+                localWidgets.removeAll(where: { $0 == widget })
+            }
+        }
+        return localWidgets
     }
 
     private func updateSearch(urlString: String?) {

@@ -1,29 +1,24 @@
 {
     "widgets" : [
         {
-            "name" : "TestWidget.TestWidgetProvider",
-            "rank" : 4,
-            "enabled" : true
+            "name" : "testViewController",
+            "class" : "TestWidget.TestWidgetProvider"
         },
         {
-            "name" : "TestWidget.TestWebWidgetProvider",
-            "rank" : 3,
-            "enabled" : true
+            "name" : "testWeb",
+            "class" : "TestWidget.TestWebWidgetProvider"
         },
         {
-            "name" : "govuk_ios.SearchWidgetProvider",
-            "rank" : 1,
-            "enabled" : true
+            "name" : "search",
+            "class" : "govuk_ios.SearchWidgetProvider"
         },
         {
-            "name" : "RecentActivity.RecentActivityWidgetProvider",
-            "rank" : 2,
-            "enabled" : true
+            "name" : "recentActivity",
+            "class" : "RecentActivity.RecentActivityWidgetProvider"
         },
         {
-            "name" : "govuk_ios.UserFeedbackWidgetProvider",
-            "rank" : 0,
-            "enabled" : true
+            "name" : "feedback",
+            "class" : "govuk_ios.UserFeedbackWidgetProvider"
         }
     ]
 }

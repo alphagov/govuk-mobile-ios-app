@@ -5,6 +5,7 @@ public enum WidgetAction {
     case push
     case url
     case present
+    case deeplink
     case custom(String)
 }
 

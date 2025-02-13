@@ -38,7 +38,7 @@ class WidgetBuilder: NSObject {
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: widgetPath))
             let widgetList = try JSONDecoder().decode(WidgetList.self, from: data)
-            return widgetList.widgets.filter { $0.enabled }.sorted(by: { $0.rank < $1.rank })
+            return widgetList.widgets
         } catch {
             print(error)
             return []
@@ -48,15 +48,13 @@ class WidgetBuilder: NSObject {
     func getAll() -> [WidgetView] {
         var widgetViews = [WidgetView]()
         let widgetList = loadWidgets()
-        widgetList.forEach {
-            if let type = NSClassFromString($0.name) as? NSObject.Type {
-                if let provider = type.init() as? WidgetProviding {
-                    print($0.name + " is a provider")
-                    configureWidget(provider: provider)
-                    widgetViews.append(provider.widget)
-                }
-            } else {
-                print("couldn't find " + $0.name)
+        let homeWidgets = configService.homeWidgets
+        homeWidgets.forEach { widgetName in
+            if let widget = widgetList.first(where: { $0.name == widgetName }),
+               let type = NSClassFromString(widget.class) as? NSObject.Type,
+               let provider = type.init() as? WidgetProviding {
+                configureWidget(provider: provider)
+                widgetViews.append(provider.widget)
             }
         }
         return widgetViews
@@ -75,6 +73,8 @@ class WidgetBuilder: NSObject {
         case .url:
             return urlAction(provider)
         case .present:
+            return { }
+        case .deeplink:
             return { }
         case .custom(let name):
             switch name {
@@ -134,6 +134,5 @@ struct WidgetList: Codable {
 
 struct WidgetDescriptor: Codable {
     let name: String
-    let rank: Int
-    let enabled: Bool
+    let `class`: String
 }

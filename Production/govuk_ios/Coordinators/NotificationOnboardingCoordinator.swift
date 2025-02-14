@@ -54,9 +54,8 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     }
 
     private func setOnboarding() {
-        let slides = notificationService.fetchSlides()
         let onboardingModule = Onboarding(
-            source: .model(slides),
+            slideProvider: notificationService,
             analyticsService: analyticsService,
             completeAction: { [weak self] in
                 self?.request()

@@ -32,9 +32,8 @@ class OnboardingCoordinator: BaseCoordinator {
     }
 
     private func setOnboarding() {
-        let slides = onboardingService.fetchSlides()
         let onboardingModule = Onboarding(
-            source: .model(slides),
+            slideProvider: onboardingService,
             analyticsService: analyticsService,
             completeAction: dismissOnboarding,
             dismissAction: dismissOnboarding

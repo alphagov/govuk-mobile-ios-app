@@ -1,11 +1,11 @@
 import Foundation
 import Onboarding
 
-protocol OnboardingServiceInterface {
+protocol OnboardingServiceInterface: OnboardingSlideProvider {
     var hasSeenOnboarding: Bool { get }
 
     func setHasSeenOnboarding()
-    func fetchSlides() -> [OnboardingSlide]
+    func fetchSlides(completion: @escaping (Result<[OnboardingSlideViewModel], Error>) -> Void)
 }
 
 struct OnboardingService: OnboardingServiceInterface {
@@ -26,9 +26,9 @@ struct OnboardingService: OnboardingServiceInterface {
         )
     }
 
-    func fetchSlides() -> [OnboardingSlide] {
-        return [
-            .init(
+    func fetchSlides(completion: @escaping (Result<[OnboardingSlideViewModel], Error>) -> Void) {
+        let slides = [
+            OnboardingSlide(
                 image: "onboarding_screen_1",
                 title: "Get things done on the go",
                 body: """
@@ -36,7 +36,7 @@ struct OnboardingService: OnboardingServiceInterface {
                 """,
                 name: "Onboarding_A"
             ),
-            .init(
+            OnboardingSlide(
                 image: "onboarding_screen_2",
                 title: "Quickly get back to previous pages",
                 body: """
@@ -44,7 +44,7 @@ struct OnboardingService: OnboardingServiceInterface {
                 """,
                 name: "Onboarding_B"
             ),
-            .init(
+            OnboardingSlide(
                 image: "onboarding_screen_3",
                 title: "Tailored to you",
                 body: """
@@ -53,5 +53,6 @@ struct OnboardingService: OnboardingServiceInterface {
                 name: "Onboarding_C"
             )
         ]
+        completion(.success(slides.map(OnboardingSlideImageViewModel.init)))
     }
 }

@@ -30,8 +30,7 @@ class OnboardingSlideAnimationViewModel: OnboardingSlideViewModelInterface {
         )
     }
 
-    func willShow() {
-        print("Show \(name)")
+    func didAppear() {
         contentView = AnyView(
             lottieView.playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .playOnce)))
         )

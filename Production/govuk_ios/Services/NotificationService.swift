@@ -9,8 +9,6 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: @escaping () -> Void)
     var shouldRequestPermission: Bool { get async }
-
-    func fetchSlides(completion: @escaping (Result<[OnboardingSlideViewModel], Error>) -> Void)
 }
 
 class NotificationService: NotificationServiceInterface {
@@ -44,7 +42,9 @@ class NotificationService: NotificationServiceInterface {
         }, fallbackToSettings: false)
     }
 
-    func fetchSlides(completion: @escaping (Result<[OnboardingSlideViewModel], Error>) -> Void) {
+    func fetchSlides(
+        completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
+    ) {
         let slides = [
             OnboardingSlide(
                 image: "onboarding_stay_updated",

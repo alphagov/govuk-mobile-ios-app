@@ -5,7 +5,6 @@ protocol OnboardingServiceInterface: OnboardingSlideProvider {
     var hasSeenOnboarding: Bool { get }
 
     func setHasSeenOnboarding()
-    func fetchSlides(completion: @escaping (Result<[OnboardingSlideViewModel], Error>) -> Void)
 }
 
 struct OnboardingService: OnboardingServiceInterface {
@@ -26,7 +25,9 @@ struct OnboardingService: OnboardingServiceInterface {
         )
     }
 
-    func fetchSlides(completion: @escaping (Result<[OnboardingSlideViewModel], Error>) -> Void) {
+    func fetchSlides(
+        completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
+    ) {
         let slides = [
             OnboardingSlide(
                 image: "onboarding_screen_1",

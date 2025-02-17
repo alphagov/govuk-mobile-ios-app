@@ -5,7 +5,7 @@ import CoreData
 import Factory
 import GOVKit
 import RecentActivity
-
+import GOVKit
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
 

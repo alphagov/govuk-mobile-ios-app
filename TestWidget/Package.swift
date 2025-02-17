@@ -13,7 +13,8 @@ let package = Package(
             targets: ["TestWidget"]),
     ],
     dependencies: [
-        .package(name: "GOVKit", path: "../GOVKit")
+        .package(name: "GOVKit", path: "../GOVKit"),
+        .package(name: "RecentActivity", path: "../RecentActivity")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -21,7 +22,11 @@ let package = Package(
         .target(
             name: "TestWidget",
             dependencies: [
-                .product(name: "GOVKit", package: "GOVKit")
+                .product(name: "GOVKit", package: "GOVKit"),
+                .product(name: "RecentActivity", package: "RecentActivity")
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(

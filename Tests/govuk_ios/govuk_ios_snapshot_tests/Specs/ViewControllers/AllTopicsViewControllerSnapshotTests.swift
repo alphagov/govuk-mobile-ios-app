@@ -1,6 +1,7 @@
 import Foundation
 import XCTest
 import UIKit
+import GOVKit
 
 @testable import govuk_ios
 

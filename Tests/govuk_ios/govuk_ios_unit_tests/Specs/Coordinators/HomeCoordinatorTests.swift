@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import Testing
-
+import GOVKit
 @testable import govuk_ios
 
 @Suite

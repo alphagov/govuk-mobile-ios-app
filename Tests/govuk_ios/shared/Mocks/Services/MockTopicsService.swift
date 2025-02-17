@@ -1,5 +1,5 @@
 import Foundation
-
+import GOVKit
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {

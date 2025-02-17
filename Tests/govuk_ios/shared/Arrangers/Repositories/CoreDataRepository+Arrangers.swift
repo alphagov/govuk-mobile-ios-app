@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 import Factory
-
+import GOVKit
 @testable import govuk_ios
 
 extension CoreDataRepository {

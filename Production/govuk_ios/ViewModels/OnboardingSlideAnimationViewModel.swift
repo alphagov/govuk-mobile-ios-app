@@ -10,12 +10,13 @@ class OnboardingSlideAnimationViewModel: OnboardingSlideViewModelInterface {
     let title: String
     let body: String
     let name: String
-    @Published var contentView: AnyView = AnyView(EmptyView())
-    var contentViewPublisher: AnyPublisher<AnyView, Never> {
+
+    private lazy var lottieView = LottieView(animation: .named(slide.image))
+        .resizable()
+    @Published private(set) var contentView: AnyView = AnyView(EmptyView())
+    var contentViewUpdatePublisher: AnyPublisher<AnyView, Never> {
         $contentView.eraseToAnyPublisher()
     }
-
-    @Published var playbackMode: LottiePlaybackMode = .paused(at: .progress(0))
 
     public let slide: OnboardingSlide
 
@@ -24,12 +25,15 @@ class OnboardingSlideAnimationViewModel: OnboardingSlideViewModelInterface {
         self.title = slide.title
         self.body = slide.body
         self.name = slide.name
+        self.contentView = AnyView(
+            lottieView
+        )
     }
 
-    func startAnimation() {
+    func willShow() {
+        print("Show \(name)")
         contentView = AnyView(
-            LottieView(animation: .named(slide.image))
-                .playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .playOnce)))
-                .resizable())
+            lottieView.playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .playOnce)))
+        )
     }
 }

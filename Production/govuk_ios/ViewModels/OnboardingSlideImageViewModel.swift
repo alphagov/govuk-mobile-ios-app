@@ -18,5 +18,7 @@ class OnboardingSlideImageViewModel: OnboardingSlideViewModelInterface {
         )
     }
 
-    func startAnimation() { }
+    func willShow() {
+        print("Show \(name)")
+    }
 }

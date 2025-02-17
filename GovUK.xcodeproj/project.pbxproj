@@ -218,7 +218,6 @@
 		D0D9CFD92D30309D0051EDDD /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9CFD82D30309D0051EDDD /* SearchHistoryViewModel.swift */; };
 		D0E7923B2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E7923A2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift */; };
 		D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */; };
-		D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */; };
 		D0EB04842D37F34200B310D8 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0EB04812D37F34200B310D8 /* GOV.xcdatamodeld */; };
 		D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCD2D109B51000A3151 /* GOVKit */; };
 		D0EBFBD02D109B51000A3151 /* RecentActivity in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCF2D109B51000A3151 /* RecentActivity */; };
@@ -487,7 +486,6 @@
 		D0E7923A2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailViewModelInterface.swift; sourceTree = "<group>"; };
 		D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentService.swift; sourceTree = "<group>"; };
 		D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		D0EB04822D37F34200B310D8 /* GOV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV.xcdatamodel; sourceTree = "<group>"; };
 		D0EB04832D37F34200B310D8 /* GOV_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV_v2.xcdatamodel; sourceTree = "<group>"; };
 		D0EBFBCB2D0C825D000A3151 /* RecentActivity */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RecentActivity; sourceTree = "<group>"; };
@@ -844,7 +842,6 @@
 		5D41DB6A2C088CA30011E691 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */,
 				D0D9CFD42D302F2A0051EDDD /* SearchHistoryRepository.swift */,
 				D028CCF32CB4247100742620 /* TopicsRepository.swift */,
 				D0EB04812D37F34200B310D8 /* GOV.xcdatamodeld */,
@@ -1738,7 +1735,6 @@
 				5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */,
 				D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
-				D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,

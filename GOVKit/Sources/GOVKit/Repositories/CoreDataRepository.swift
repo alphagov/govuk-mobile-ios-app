@@ -1,18 +1,17 @@
 import CoreData
 import Foundation
-import GOVKit
 
-class CoreDataRepository: CoreDataRepositoryInterface {
+public class CoreDataRepository: CoreDataRepositoryInterface {
     private let persistentContainer: NSPersistentContainer
     private let notificationCenter: NotificationCenter
 
-    init(persistentContainer: NSPersistentContainer,
+    public init(persistentContainer: NSPersistentContainer,
          notificationCenter: NotificationCenter) {
         self.persistentContainer = persistentContainer
         self.notificationCenter = notificationCenter
     }
 
-    func load() -> Self {
+    public func load() -> Self {
         persistentContainer.persistentStoreDescriptions.forEach { [weak self] in
             self?.setDescriptionProtection(description: $0)
             $0.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
@@ -45,7 +44,7 @@ class CoreDataRepository: CoreDataRepositoryInterface {
         try? url.setResourceValues(resourceValues)
     }
 
-    private(set) lazy var viewContext: NSManagedObjectContext = {
+    public private(set) lazy var viewContext: NSManagedObjectContext = {
         let local = NSManagedObjectContext(
             concurrencyType: .mainQueueConcurrencyType
         )
@@ -54,7 +53,7 @@ class CoreDataRepository: CoreDataRepositoryInterface {
         return local
     }()
 
-    private(set) lazy var backgroundContext: NSManagedObjectContext = {
+    public private(set) lazy var backgroundContext: NSManagedObjectContext = {
         let local = NSManagedObjectContext(
             concurrencyType: .privateQueueConcurrencyType
         )

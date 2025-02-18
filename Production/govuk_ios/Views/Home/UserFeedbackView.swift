@@ -27,8 +27,11 @@ final class UserFeedbackView: UIControl {
     }()
 
     private let titleImageView: UIImageView = {
-        let image = UIImage(named: "recent_activity_cell_chevron")
+        let image = UIImage(systemName: "chevron.forward")
+        let config = UIImage.SymbolConfiguration(pointSize: 12)
         let imageView = UIImageView(image: image)
+        imageView.preferredSymbolConfiguration = config
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         imageView.contentMode = .scaleAspectFit
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return imageView

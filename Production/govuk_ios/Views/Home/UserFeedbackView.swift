@@ -65,9 +65,12 @@ final class UserFeedbackView: UIControl {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            titleImageView.widthAnchor.constraint(equalToConstant: 12)
+            stackView.topAnchor.constraint(
+                equalTo: topAnchor, constant: 8
+            ),
+            stackView.bottomAnchor.constraint(
+                equalTo: bottomAnchor, constant: -8
+            )
         ])
     }
 

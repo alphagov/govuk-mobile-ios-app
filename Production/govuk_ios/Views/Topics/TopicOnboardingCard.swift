@@ -133,7 +133,7 @@ class TopicOnboardingCard: UIControl {
                 equalToConstant: 40
             ),
             iconImageView.widthAnchor.constraint(
-                equalToConstant: 30
+                equalToConstant: 36
             )
         ])
     }

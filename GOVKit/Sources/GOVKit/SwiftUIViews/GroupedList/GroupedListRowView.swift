@@ -40,7 +40,7 @@ struct InformationRowView: View {
             Text(row.detail)
                 .foregroundColor(
                     Color(
-                        UIColor.govUK.text.trailingIcon
+                        UIColor.govUK.text.secondary
                     )
                 )
         }

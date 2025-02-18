@@ -39,7 +39,8 @@ struct OnboardingService: OnboardingServiceInterface {
                     """,
                     name: "Onboarding_A"
                 ),
-                primaryButtonTitle: "Continue"
+                primaryButtonTitle: "Continue",
+                secondaryButtonTitle: "Skip"
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -50,7 +51,8 @@ struct OnboardingService: OnboardingServiceInterface {
                         """,
                     name: "Onboarding_B"
                 ),
-                primaryButtonTitle: "Continue"
+                primaryButtonTitle: "Continue",
+                secondaryButtonTitle: "Skip"
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -61,7 +63,8 @@ struct OnboardingService: OnboardingServiceInterface {
                         """,
                     name: "Onboarding_C"
                 ),
-                primaryButtonTitle: "Continue"
+                primaryButtonTitle: "Continue",
+                secondaryButtonTitle: "Skip"
             )
         ]
         completion(.success(slides))

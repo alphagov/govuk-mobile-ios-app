@@ -10,7 +10,6 @@ class FadeAnimation: NSObject,
         self.animationsManager = animationsManager
     }
 
-
     func transitionDuration(
         using transitionContext: (any UIViewControllerContextTransitioning)?) -> TimeInterval {
         return duration

@@ -29,7 +29,7 @@ class TopicOnboardingCard: UIControl {
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView(image: viewModel.icon)
         imageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor.govUK.text.link
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         return imageView
     }()
 
@@ -79,11 +79,9 @@ class TopicOnboardingCard: UIControl {
 
     private func configureUI() {
         layoutMargins = .init(all: 16)
-        backgroundColor = UIColor.govUK.fills.surfaceCardDefault
-        layer.borderWidth = 1
+        layer.borderWidth = 0.5
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
 
         addSubview(cardStackView)
 
@@ -135,7 +133,7 @@ class TopicOnboardingCard: UIControl {
                 equalToConstant: 40
             ),
             iconImageView.widthAnchor.constraint(
-                equalToConstant: 30
+                equalToConstant: 36
             )
         ])
     }
@@ -164,9 +162,13 @@ class TopicOnboardingCard: UIControl {
     }
 
     private func toggleTintColorOfCard() {
-        backgroundColor = viewModel.isSelected ?
-        UIColor.govUK.fills.surfaceCardSelected :
-        UIColor.govUK.fills.surfaceCardDefault
+        if viewModel.isSelected {
+            backgroundColor = UIColor.govUK.fills.surfaceCardSelected
+            layer.borderColor = UIColor.govUK.strokes.cardSelected.cgColor
+        } else {
+            backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+            layer.borderColor = UIColor.govUK.strokes.cardBlue.cgColor
+        }
     }
 
     private func configureMainContentStackView() {

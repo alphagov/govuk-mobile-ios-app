@@ -45,6 +45,7 @@ struct HomeViewModel {
             viewModel: viewModel
         )
         let widget = WidgetView()
+        widget.backgroundColor = UIColor.govUK.fills.surfaceCardDefault
         widget.addContent(content)
         return widget
     }

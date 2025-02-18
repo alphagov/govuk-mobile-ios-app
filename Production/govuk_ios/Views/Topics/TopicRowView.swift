@@ -51,7 +51,7 @@ class TopicRowView: UIView {
     }
 
     private func configureUI() {
-        backgroundColor = UIColor.govUK.fills.surfaceCard
+        backgroundColor = UIColor.govUK.fills.surfaceCardDefault
         layer.borderWidth = 1
         layer.cornerRadius = 10
         layer.masksToBounds = true

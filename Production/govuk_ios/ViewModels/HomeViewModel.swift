@@ -27,7 +27,7 @@ struct HomeViewModel {
         )
         let content = UserFeedbackView(viewModel: viewModel)
         let widget = WidgetView(useContentAccessibilityInfo: true)
-        widget.backgroundColor = UIColor.govUK.fills.surfaceCardSelected
+        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
         widget.addContent(content)
         return widget
     }

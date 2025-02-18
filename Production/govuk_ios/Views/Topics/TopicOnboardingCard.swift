@@ -79,7 +79,7 @@ class TopicOnboardingCard: UIControl {
 
     private func configureUI() {
         layoutMargins = .init(all: 16)
-        backgroundColor = UIColor.govUK.fills.surfaceCard
+        backgroundColor = UIColor.govUK.fills.surfaceCardDefault
         layer.borderWidth = 1
         layer.cornerRadius = 10
         layer.masksToBounds = true
@@ -166,7 +166,7 @@ class TopicOnboardingCard: UIControl {
     private func toggleTintColorOfCard() {
         backgroundColor = viewModel.isSelected ?
         UIColor.govUK.fills.surfaceCardSelected :
-        UIColor.govUK.fills.surfaceCard
+        UIColor.govUK.fills.surfaceCardDefault
     }
 
     private func configureMainContentStackView() {

@@ -14,7 +14,7 @@ class WidgetView: UIView {
         self.decorateView = decorateView
         super.init(frame: .zero)
         self.backgroundColor = decorateView ?
-            UIColor.govUK.fills.surfaceCard :
+        UIColor.govUK.fills.surfaceCardDefault :
             UIColor.govUK.fills.surfaceBackground
         self.isAccessibilityElement = useContentAccessibilityInfo
         configureUI()

@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "topic_related_icon_light.svg",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "topic_related_icon_dark.svg",
+      "filename" : "topic_related_icon.svg",
       "idiom" : "universal"
     }
   ],

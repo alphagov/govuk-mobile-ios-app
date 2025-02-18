@@ -18,7 +18,7 @@ class AnimationManagerTests {
     }
 
     @Test
-    func test_animationsEnabled_callsAnimates() async throws {
+    func animate_whenAnimationsEnabled_callsAnimates() async throws {
         let sut = AnimationsManager()
         mockAccessibilityManager.animationsEnabled = true
 
@@ -34,7 +34,7 @@ class AnimationManagerTests {
     }
 
     @MainActor
-    func animationsEnabled_doesNotCallAnimate() async {
+    func animate_whenAnimationsDisabled_doesNotCallAnimate() async {
         let sut = AnimationsManager()
         mockAccessibilityManager.animationsEnabled = false
 

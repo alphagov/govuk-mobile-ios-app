@@ -7,23 +7,26 @@ struct GroupedListSectionIconView: View {
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 8) {
             ZStack {
-                Color(UIColor.govUK.fills.surfaceCardDefault)
+                Color(UIColor.govUK.fills.surfaceList)
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Image(uiImage: section.heading?.icon ?? UIImage())
-                            .padding(.leading, 16)
-                            .padding(.vertical, 16)
                         Text(section.heading?.title ?? "")
                             .font(Font.govUK.title3.bold())
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .accessibilityAddTraits(.isHeader)
-                            .padding(.leading, 8)
+                            .padding(.leading, 16)
                             .padding(.trailing, 16)
                             .padding(.vertical, 16)
                             .fixedSize(horizontal: false, vertical: true)
+                        Spacer()
+                        Image(uiImage: section.heading?.icon ?? UIImage())
+                            .renderingMode(.template)
+                            .foregroundStyle(Color(UIColor.govUK.text.trailingIcon))
+                            .padding(.trailing, 16)
+                            .padding(.vertical, 16)
                     }
                     Divider()
-                        .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                        .overlay(Color(UIColor.govUK.strokes.listDivider))
                     ForEach(
                         Array(zip(section.rows,
                                   section.rows.indices)),
@@ -31,7 +34,7 @@ struct GroupedListSectionIconView: View {
                     ) { row, index in
                         if index > 0 {
                             Divider()
-                                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                                .overlay(Color(UIColor.govUK.strokes.listDivider))
                                 .padding(.leading, 16)
                         }
                         GroupedListRowView(row: row)

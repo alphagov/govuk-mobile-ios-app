@@ -14,7 +14,7 @@ struct GroupedListSectionView: View {
                     .accessibilityAddTraits(.isHeader)
             }
             ZStack {
-                Color(UIColor.govUK.fills.surfaceCardDefault)
+                Color(UIColor.govUK.fills.surfaceList)
                 VStack(spacing: 0) {
                     ForEach(
                         Array(zip(section.rows, section.rows.indices)),
@@ -22,7 +22,7 @@ struct GroupedListSectionView: View {
                     ) { row, index in
                         if index > 0 {
                             Divider()
-                                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                                .overlay(Color(UIColor.govUK.strokes.listDivider))
                                 .padding(.leading, 16)
                         }
                         GroupedListRowView(row: row)
@@ -35,7 +35,7 @@ struct GroupedListSectionView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .strokeBorder(
-                        Color(UIColor.govUK.strokes.listDivider),
+                        Color((UIColor.govUK.strokes.listDivider)),
                         lineWidth: SinglePixelLineHelper.pixelSize,
                         antialiased: true
                     )

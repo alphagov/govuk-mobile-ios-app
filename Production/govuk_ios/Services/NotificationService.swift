@@ -46,13 +46,16 @@ class NotificationService: NotificationServiceInterface {
         completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
     ) {
         let slides = [
-            OnboardingSlide(
-                image: "onboarding_stay_updated",
-                title: String.notifications.localized("onboardingTitle"),
-                body: String.notifications.localized("onboardingBody"),
-                name: "Notifications_A"
+            OnboardingSlideAnimationViewModel(
+                slide: .init(
+                    image: "onboarding_stay_updated",
+                    title: String.notifications.localized("onboardingTitle"),
+                    body: String.notifications.localized("onboardingBody"),
+                    name: "Notifications_A"
+                ),
+                primaryButtonTitle: "I'm in"
             )
         ]
-        completion(.success(slides.map(OnboardingSlideAnimationViewModel.init)))
+        completion(.success(slides))
     }
 }

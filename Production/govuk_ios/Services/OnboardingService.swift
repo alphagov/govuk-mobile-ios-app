@@ -38,7 +38,8 @@ struct OnboardingService: OnboardingServiceInterface {
                     Access government services and information on your phone using the GOV.UK app
                     """,
                     name: "Onboarding_A"
-                )
+                ),
+                primaryButtonTitle: "Continue"
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -48,7 +49,8 @@ struct OnboardingService: OnboardingServiceInterface {
                         Pages you’ve visited are saved so you can easily return to them
                         """,
                     name: "Onboarding_B"
-                )
+                ),
+                primaryButtonTitle: "Continue"
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -58,7 +60,8 @@ struct OnboardingService: OnboardingServiceInterface {
                         Choose topics that are relevant to you so you can find what you need faster
                         """,
                     name: "Onboarding_C"
-                )
+                ),
+                primaryButtonTitle: "Continue"
             )
         ]
         completion(.success(slides))

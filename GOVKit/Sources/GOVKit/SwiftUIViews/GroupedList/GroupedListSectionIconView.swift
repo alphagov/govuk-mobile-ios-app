@@ -7,7 +7,7 @@ struct GroupedListSectionIconView: View {
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 8) {
             ZStack {
-                Color(UIColor.govUK.fills.surfaceCard)
+                Color(UIColor.govUK.fills.surfaceCardDefault)
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
                         Image(uiImage: section.heading?.icon ?? UIImage())

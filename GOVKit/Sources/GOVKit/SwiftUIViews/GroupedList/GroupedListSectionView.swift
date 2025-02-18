@@ -14,7 +14,7 @@ struct GroupedListSectionView: View {
                     .accessibilityAddTraits(.isHeader)
             }
             ZStack {
-                Color(UIColor.govUK.fills.surfaceCard)
+                Color(UIColor.govUK.fills.surfaceCardDefault)
                 VStack(spacing: 0) {
                     ForEach(
                         Array(zip(section.rows, section.rows.indices)),

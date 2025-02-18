@@ -5,7 +5,6 @@ import Factory
 
 @Suite
 class AnimationManagerTests {
-
     private var mockAccessibilityManager: MockAccessibilityManager!
 
     init() {

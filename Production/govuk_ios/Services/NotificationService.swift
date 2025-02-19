@@ -53,8 +53,8 @@ class NotificationService: NotificationServiceInterface {
                     body: String.notifications.localized("onboardingBody"),
                     name: "Notifications_A"
                 ),
-                primaryButtonTitle: "I'm in",
-                secondaryButtonTitle: "Skip"
+                primaryButtonTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
+                secondaryButtonTitle: String.notifications.localized("onboardingSkipButtonTitle")
             )
         ]
         completion(.success(slides))

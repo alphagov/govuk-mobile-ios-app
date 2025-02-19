@@ -3,7 +3,7 @@ import Factory
 
 @testable import govuk_ios
 
-@Suite
+@Suite(.serialized)
 class AnimationManagerTests {
     private var mockAccessibilityManager: MockAccessibilityManager!
 
@@ -17,6 +17,7 @@ class AnimationManagerTests {
     }
 
     @Test
+    @MainActor
     func animate_whenAnimationsEnabled_callsAnimates() async throws {
         let sut = AnimationsManager()
         mockAccessibilityManager.animationsEnabled = true
@@ -32,8 +33,8 @@ class AnimationManagerTests {
         #expect(called == false)
     }
 
-    @MainActor
     @Test
+    @MainActor
     func animate_whenAnimationsDisabled_doesNotCallAnimate() async {
         let sut = AnimationsManager()
         mockAccessibilityManager.animationsEnabled = false

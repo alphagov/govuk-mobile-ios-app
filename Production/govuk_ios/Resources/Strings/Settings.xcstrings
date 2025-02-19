@@ -67,6 +67,17 @@
         }
       }
     },
+    "openNotificationsSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Notification Settings"
+          }
+        }
+      }
+    },
     "openSourceLicenceRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {

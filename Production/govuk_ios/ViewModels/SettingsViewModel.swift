@@ -79,7 +79,8 @@ class SettingsViewModel: SettingsViewModelInterface {
                     privacyPolicyRow(),
                     accessibilityStatementRow(),
                     openSourceLicenceRow(),
-                    termsAndConditionsRow()
+                    termsAndConditionsRow(),
+                    openNotificationsSettings()
                 ],
                 footer: nil
             )
@@ -125,6 +126,20 @@ class SettingsViewModel: SettingsViewModelInterface {
         let rowTitle = String.settings.localized("openSourceLicenceRowTitle")
         return LinkRow(
             id: "settings.licence.row",
+            title: rowTitle,
+            body: nil,
+            action: { [weak self] in
+                if self?.urlOpener.openSettings() == true {
+                    self?.trackLinkEvent(rowTitle)
+                }
+            }
+        )
+    }
+
+    private func openNotificationsSettings() -> GroupedListRow {
+        let rowTitle = String.settings.localized("openNotificationsSettings")
+        return LinkRow(
+            id: "settings.notifications.row",
             title: rowTitle,
             body: nil,
             action: { [weak self] in

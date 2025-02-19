@@ -108,7 +108,7 @@ class AppCoordinator: BaseCoordinator {
     private func startNotificationOnboardingCoordinator(url: URL?) {
         let coordinator = coordinatorBuilder.notificationOnboarding(
             navigationController: root,
-            complete: { [weak self] in
+            completion: { [weak self] in
                 self?.startTabs(url: url)
             }
         )

@@ -7,15 +7,15 @@ import Onboarding
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
     private let analyticsService: OnboardingAnalyticsService
-    private let complete: () -> Void
+    private let completeAction: () -> Void
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
          analyticsService: OnboardingAnalyticsService,
-         complete: @escaping () -> Void) {
+         completion: @escaping () -> Void) {
         self.notificationService = notificationService
         self.analyticsService = analyticsService
-        self.complete = complete
+        self.completeAction = completion
         super.init(navigationController: navigationController)
     }
 
@@ -77,7 +77,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func finishCoordination() {
         DispatchQueue.main.async {
-            self.complete()
+            self.completeAction()
         }
     }
 }

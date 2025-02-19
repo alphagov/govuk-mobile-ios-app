@@ -175,12 +175,12 @@ class CoordinatorBuilder {
     }
 
     func notificationOnboarding(navigationController: UINavigationController,
-                                complete: @escaping () -> Void) -> BaseCoordinator {
+                                completion: @escaping () -> Void) -> BaseCoordinator {
         NotificationOnboardingCoordinator(
             navigationController: navigationController,
             notificationService: container.notificationService.resolve(),
             analyticsService: container.onboardingAnalyticsService.resolve(),
-            complete: complete
+            completion: completion
         )
     }
 }

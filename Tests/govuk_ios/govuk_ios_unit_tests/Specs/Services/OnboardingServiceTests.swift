@@ -35,13 +35,23 @@ struct OnboardingServiceTests {
     }
 
     @Test
-    func fetchSlides_returnsExpectedResult() {
+    func fetchSlides_returnsExpectedResult() async {
         let subject = OnboardingService(
             userDefaults: MockUserDefaults()
         )
-        let result = subject.fetchSlides()
-
-        #expect(result.count == 3)
+        let result = await withCheckedContinuation { continuation in
+            subject.fetchSlides(
+                completion: {
+                    continuation.resume(returning: $0)
+                }
+            )
+        }
+        switch result {
+        case .success(let slides):
+            #expect(slides.count == 3)
+        default:
+            #expect(Bool(false))
+        }
     }
 
 }

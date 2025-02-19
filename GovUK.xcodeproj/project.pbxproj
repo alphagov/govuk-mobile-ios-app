@@ -168,7 +168,6 @@
 		5DDD588B2D5A557D001C0B3E /* onboarding_stay_updated.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DDD588A2D5A557D001C0B3E /* onboarding_stay_updated.json */; };
 		5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */; };
 		5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* APIServiceClient.swift */; };
-		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
 		5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */; };
 		5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */; };
 		5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */; };
@@ -359,7 +358,6 @@
 		5D41DB5C2C0870020011E691 /* Container+Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Aliases.swift"; sourceTree = "<group>"; };
 		5D41DB642C087BCE0011E691 /* Container+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Services.swift"; sourceTree = "<group>"; };
 		5D41DB682C088C580011E691 /* APIServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceClient.swift; sourceTree = "<group>"; };
-		5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+DataStores.swift"; sourceTree = "<group>"; };
 		5D41DB6F2C088FEB0011E691 /* Container+ServiceClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+ServiceClients.swift"; sourceTree = "<group>"; };
 		5D41DB7B2C09BF340011E691 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_snapshot_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -820,7 +818,6 @@
 				5D41DB5C2C0870020011E691 /* Container+Aliases.swift */,
 				5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */,
 				5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */,
-				5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */,
 				5D3123852C85AEE20088B931 /* Container+Repositories.swift */,
 				5D41DB6F2C088FEB0011E691 /* Container+ServiceClients.swift */,
 				5D41DB642C087BCE0011E691 /* Container+Services.swift */,
@@ -1728,7 +1725,6 @@
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
 				5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */,
 				D04191802CA595400034722A /* TopicResponseItem.swift in Sources */,
-				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5DA4FB072CCBAF2100804C8A /* SettingsView.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */,

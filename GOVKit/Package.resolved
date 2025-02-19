@@ -1,6 +1,15 @@
 {
-  "originHash" : "75bc73283bb0bd2952e5b7f635611d098006e6832f5e944ff6183924c8b83a00",
+  "originHash" : "75da13b63b6a2b2de7a820db246293cd5f45920719758cd34d35107376167c86",
   "pins" : [
+    {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory",
+      "state" : {
+        "revision" : "587995f7d5cc667951d635fbf6b4252324ba0439",
+        "version" : "2.3.2"
+      }
+    },
     {
       "identity" : "govuk-mobile-ios-ui-components",
       "kind" : "remoteSourceControl",

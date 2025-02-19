@@ -18,7 +18,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", branch: "develop")
+        .package(url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", branch: "develop"),
+        .package(url: "https://github.com/hmlongco/Factory", exact: "2.3.2")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -26,7 +27,8 @@ let package = Package(
         .target(
             name: "GOVKit",
             dependencies: [
-                .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components")
+                .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components"),
+                .product(name: "Factory", package: "Factory")
             ],
             resources: [
                 .process("Resources")

@@ -1,10 +1,9 @@
 import Foundation
 import Factory
 import CoreData
-import GOVKit
 
 extension Container {
-    var coreDataModel: Factory<NSManagedObjectModel> {
+    public var coreDataModel: Factory<NSManagedObjectModel> {
         Factory(self) {
             let url = Bundle.main.url(
                 forResource: "GOV",
@@ -17,7 +16,7 @@ extension Container {
         .scope(.singleton)
     }
 
-    var coreDataRepository: Factory<CoreDataRepositoryInterface> {
+    public var coreDataRepository: Factory<CoreDataRepositoryInterface> {
         Factory(self) {
             let container = NSPersistentContainer(
                 name: "GOV",

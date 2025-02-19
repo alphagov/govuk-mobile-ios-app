@@ -6,6 +6,9 @@ struct AnimationsManager {
 
     func animate(
         withDuration duration: TimeInterval,
+        delay: CGFloat = 0.8,
+        usingSpringWithDamping: CGFloat = 1.0,
+        initialSpringVelocity: CGFloat = 1.0,
         animations: @escaping () -> Void,
         completion: ((Bool) -> Void)?) {
             guard accessibilityManager.animationsEnabled else {
@@ -15,9 +18,9 @@ struct AnimationsManager {
             }
             UIView.animate(
                 withDuration: duration,
-                delay: 0.8,
-                usingSpringWithDamping: 1.0,
-                initialSpringVelocity: 1.0,
+                delay: delay,
+                usingSpringWithDamping: usingSpringWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
                 animations: animations,
                 completion: completion
             )

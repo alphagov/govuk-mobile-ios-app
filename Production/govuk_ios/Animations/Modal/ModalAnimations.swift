@@ -1,12 +1,12 @@
 import Foundation
 import UIKit
 
-enum ModalAnimations {
-    case fadeAnimation
+enum ModalAnimation {
+    case fade
 
     var returnAnimation: UIViewControllerAnimatedTransitioning {
         switch self {
-        case .fadeAnimation:
+        case .fade:
             return FadeAnimation(animationsManager: AnimationsManager())
         }
     }

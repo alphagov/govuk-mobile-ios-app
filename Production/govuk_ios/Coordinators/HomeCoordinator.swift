@@ -77,7 +77,7 @@ class HomeCoordinator: TabItemCoordinator {
             let navigationController = UINavigationController()
             navigationController.modalPresentationStyle = .custom
             let transitionManager = CustomModalTransitionDelegate(
-                animation: .fadeAnimation
+                animation: .fade
             )
             navigationController.transitioningDelegate = transitionManager
             let coordinator = strongSelf.coordinatorBuilder.search(

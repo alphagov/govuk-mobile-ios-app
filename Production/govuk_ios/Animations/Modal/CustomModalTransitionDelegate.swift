@@ -3,9 +3,9 @@ import UIKit
 
 class CustomModalTransitionDelegate: NSObject,
                                      UIViewControllerTransitioningDelegate {
-    private let animation: ModalAnimations
+    private let animation: ModalAnimation
 
-    init(animation: ModalAnimations) {
+    init(animation: ModalAnimation) {
         self.animation = animation
     }
 

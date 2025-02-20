@@ -1,19 +1,24 @@
 import UIKit
 import GOVKit
+import Combine
 
 protocol SettingsViewModelInterface: ObservableObject {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
     func trackScreen(screen: TrackableScreen)
     var scrollToTop: Bool { get set }
+    var showUpsell: PassthroughSubject<Bool, Error> { get set }
 }
 
 class SettingsViewModel: SettingsViewModelInterface {
+    var showUpsell = PassthroughSubject<Bool, Error>()
+
     let title: String = String.settings.localized("pageTitle")
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let versionProvider: AppVersionProvider
     private let deviceInformationProvider: DeviceInformationProviderInterface
+    @Published var showNotificationUpsell: Bool = false
 
     @Published var scrollToTop: Bool = false
 
@@ -25,6 +30,23 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
+    }
+
+    private func notificationStatus(completion: @escaping (Bool) -> Void) {
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { (settings) in
+            let authorized = settings.authorizationStatus == .authorized
+            completion(authorized)
+        }
+    }
+
+    func checkNotificationStatus() {
+        notificationStatus(completion: { [weak self] authorized in
+            if authorized == false {
+                self?.showNotificationUpsell = true
+                self?.showUpsell.send(true)
+            }
+        })
     }
 
     private var hasAcceptedAnalytics: Bool {

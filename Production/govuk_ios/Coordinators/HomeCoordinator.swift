@@ -75,11 +75,6 @@ class HomeCoordinator: TabItemCoordinator {
             self?.trackWidgetNavigation(text: "Search")
             guard let strongSelf = self else { return }
             let navigationController = UINavigationController()
-            navigationController.modalPresentationStyle = .custom
-            let transitionManager = CustomModalTransitionDelegate(
-                animation: .fade
-            )
-            navigationController.transitioningDelegate = transitionManager
             let coordinator = strongSelf.coordinatorBuilder.search(
                 navigationController: navigationController,
                 didDismissAction: {

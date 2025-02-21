@@ -47,9 +47,11 @@ class ViewControllerBuilder {
 
         let viewController = HostingViewController(
             rootView: settingsContentView,
-            statusBarStyle: .darkContent
+            statusBarStyle: .darkContent,
+            setNavBarAppearance: { navBar in UINavigationBar.setGovUKAppearance(navBar) }
         )
         viewController.title = viewModel.title
+
         viewController.navigationItem.largeTitleDisplayMode = .always
         return viewController
     }

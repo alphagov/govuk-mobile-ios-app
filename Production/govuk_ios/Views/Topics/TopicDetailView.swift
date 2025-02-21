@@ -11,34 +11,40 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
 
     var body: some View {
         VStack {
-            ScrollView {
-                VStack {
-                    titleView
-                    if let errorViewModel = viewModel.errorViewModel {
+            if let errorViewModel = viewModel.errorViewModel {
+                ScrollView {
+                    VStack {
+                        titleView
                         AppErrorView(viewModel: errorViewModel)
                             .padding(.top, 12)
                         Spacer()
-                    } else {
+                    }
+                }
+                .padding(.bottom, 16)
+            } else {
+                ScrollView {
+                    VStack {
+                        titleView
                         topicDetails
                     }
                 }
                 .padding(.bottom, 16)
+                .background(
+                    Gradient(stops: [
+                        .init(
+                            color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                            location: 0),
+                        .init(
+                            color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                            location: 0.33),
+                        .init(
+                            color: .clear,
+                            location: 0.33),
+                        .init(
+                            color: .clear,
+                            location: 1)])
+                )
             }
-            .background(
-                Gradient(stops: [
-                    .init(
-                        color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
-                        location: 0),
-                    .init(
-                        color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
-                        location: 0.33),
-                    .init(
-                        color: .clear,
-                        location: 0.33),
-                    .init(
-                        color: .clear,
-                        location: 1)])
-            )
         }
         .onAppear {
             viewModel.trackScreen(screen: self)

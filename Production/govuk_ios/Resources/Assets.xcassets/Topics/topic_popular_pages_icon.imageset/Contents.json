@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "topic_popular_pages_light_icon.svg",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "topic_popular_pages_icon_dark.svg",
+      "filename" : "topic_popular_icon.svg",
       "idiom" : "universal"
     }
   ],

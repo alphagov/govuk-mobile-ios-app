@@ -14,7 +14,7 @@ class WidgetView: UIView {
         self.decorateView = decorateView
         super.init(frame: .zero)
         self.backgroundColor = decorateView ?
-            UIColor.govUK.fills.surfaceCard :
+            UIColor.govUK.fills.surfaceCardBlue :
             UIColor.govUK.fills.surfaceBackground
         self.isAccessibilityElement = useContentAccessibilityInfo
         configureUI()
@@ -27,14 +27,14 @@ class WidgetView: UIView {
 
     private func updateBorderColor() {
         if decorateView {
-            layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
+            layer.borderColor = UIColor.govUK.strokes.cardBlue.cgColor
         }
     }
 
     private func configureUI() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         if decorateView {
-            layer.borderWidth = 1
+            layer.borderWidth = 0.5
             layer.cornerRadius = 10
             layer.masksToBounds = true
         }

@@ -25,6 +25,12 @@ class HomeViewController: BaseViewController,
         scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
     }()
+    private let crownLogoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "crownLogo"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 
     private let viewModel: HomeViewModel
 
@@ -85,6 +91,10 @@ class HomeViewController: BaseViewController,
 
     private func addWidgets() {
         viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
+        if let lastWidget = stackView.arrangedSubviews.last {
+            stackView.setCustomSpacing(32, after: lastWidget)
+        }
+        stackView.addArrangedSubview(crownLogoImageView)
     }
 }
 

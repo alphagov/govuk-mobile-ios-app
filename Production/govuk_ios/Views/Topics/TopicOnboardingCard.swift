@@ -2,13 +2,25 @@ import Foundation
 import UIKit
 
 class TopicOnboardingCard: UIControl {
+    let displayCompactCard: Bool
+
     private let viewModel: TopicOnboardingCardModel
 
     private lazy var cardStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isUserInteractionEnabled = false
+        return stackView
+    }()
+
+    private lazy var mainContentStackView: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8
-        stackView.alignment = .center
+        stackView.alignment = displayCompactCard ? .leading : .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isUserInteractionEnabled = false
         return stackView
@@ -17,28 +29,28 @@ class TopicOnboardingCard: UIControl {
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView(image: viewModel.icon)
         imageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor.govUK.text.link
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         return imageView
     }()
 
     private lazy var titleLabel: UILabel = {
         let localView = UILabel()
-        localView.font = .govUK.bodySemibold
+        localView.font = .govUK.title3Semibold
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.title
-        localView.textAlignment = .center
+        localView.textAlignment = displayCompactCard ? .left : .center
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
 
     private lazy var descriptionLabel: UILabel = {
         let localView = UILabel()
-        localView.font = .govUK.body
+        localView.font = .govUK.subheadline
         localView.adjustsFontForContentSizeCategory = true
         localView.numberOfLines = 0
         localView.text = viewModel.description
-        localView.textAlignment = .center
+        localView.textAlignment = displayCompactCard ? .left : .center
         localView.lineBreakMode = .byWordWrapping
         return localView
     }()
@@ -49,8 +61,10 @@ class TopicOnboardingCard: UIControl {
         return localView
     }()
 
-    init(viewModel: TopicOnboardingCardModel) {
+    init(viewModel: TopicOnboardingCardModel,
+         displayCompactCard: Bool) {
         self.viewModel = viewModel
+        self.displayCompactCard = displayCompactCard
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
@@ -65,21 +79,18 @@ class TopicOnboardingCard: UIControl {
 
     private func configureUI() {
         layoutMargins = .init(all: 16)
-        backgroundColor = UIColor.govUK.fills.surfaceCard
-        layer.borderWidth = 1
+        layer.borderWidth = 0.5
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
+
         addSubview(cardStackView)
-        cardStackView.addArrangedSubview(iconImageView)
-        cardStackView.addArrangedSubview(titleLabel)
-        cardStackView.addArrangedSubview(descriptionLabel)
 
-        let spacer = UIView()
-        cardStackView.addArrangedSubview(spacer)
-        cardStackView.setCustomSpacing(0, after: spacer)
-
-        cardStackView.addArrangedSubview(selectedStackView)
+        if displayCompactCard {
+            cardStackView.addArrangedSubview(iconImageView)
+        } else {
+            mainContentStackView.addArrangedSubview(iconImageView)
+        }
+        configureMainContentStackView()
     }
 
     private func configureSelectedState() {
@@ -93,14 +104,36 @@ class TopicOnboardingCard: UIControl {
             cardStackView.topAnchor.constraint(
                 equalTo: layoutMarginsGuide.topAnchor
             ),
-            cardStackView.bottomAnchor.constraint(
-                equalTo: layoutMarginsGuide.bottomAnchor
-            ),
             cardStackView.leadingAnchor.constraint(
                 equalTo: layoutMarginsGuide.leadingAnchor
             ),
             cardStackView.trailingAnchor.constraint(
                 equalTo: layoutMarginsGuide.trailingAnchor
+            ),
+            cardStackView.bottomAnchor.constraint(
+                equalTo: layoutMarginsGuide.bottomAnchor
+            ),
+
+            selectedStackView.bottomAnchor.constraint(
+                equalTo: cardStackView.bottomAnchor
+            )
+        ])
+
+        if displayCompactCard {
+            configureCompactIconImageConstraints()
+        }
+    }
+
+    private func configureCompactIconImageConstraints() {
+        NSLayoutConstraint.activate([
+            iconImageView.centerYAnchor.constraint(
+                equalTo: titleLabel.centerYAnchor
+            ),
+            iconImageView.heightAnchor.constraint(
+                equalToConstant: 40
+            ),
+            iconImageView.widthAnchor.constraint(
+                equalToConstant: 36
             )
         ])
     }
@@ -129,8 +162,25 @@ class TopicOnboardingCard: UIControl {
     }
 
     private func toggleTintColorOfCard() {
-        backgroundColor = viewModel.isSelected ?
-        UIColor.govUK.fills.surfaceCardSelected :
-        UIColor.govUK.fills.surfaceCard
+        if viewModel.isSelected {
+            backgroundColor = UIColor.govUK.fills.surfaceCardSelected
+            layer.borderColor = UIColor.govUK.strokes.cardSelected.cgColor
+        } else {
+            backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+            layer.borderColor = UIColor.govUK.strokes.cardBlue.cgColor
+        }
+    }
+
+    private func configureMainContentStackView() {
+        mainContentStackView.addArrangedSubview(titleLabel)
+        mainContentStackView.addArrangedSubview(descriptionLabel)
+
+        let spacer = UIView()
+        mainContentStackView.addArrangedSubview(spacer)
+        mainContentStackView.setCustomSpacing(0, after: spacer)
+
+        mainContentStackView.addArrangedSubview(selectedStackView)
+
+        cardStackView.addArrangedSubview(mainContentStackView)
     }
 }

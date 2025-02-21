@@ -16,15 +16,16 @@ struct GroupedListSectionIconView: View {
                             .accessibilityAddTraits(.isHeader)
                             .padding(.leading, 16)
                             .padding(.trailing, 16)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 8)
                             .fixedSize(horizontal: false, vertical: true)
                         Spacer()
                         Image(uiImage: section.heading?.icon ?? UIImage())
                             .renderingMode(.template)
                             .foregroundStyle(Color(UIColor.govUK.text.trailingIcon))
                             .padding(.trailing, 16)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 8)
                     }
+                    .background(Color(UIColor.govUK.fills.surfaceListHeading))
                     Divider()
                         .overlay(Color(UIColor.govUK.strokes.listDivider))
                     ForEach(

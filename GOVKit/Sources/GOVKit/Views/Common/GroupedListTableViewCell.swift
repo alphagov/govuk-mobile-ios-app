@@ -91,7 +91,7 @@ public class GroupedListTableViewCell: UITableViewCell {
         multipleSelectionBackgroundView = UIView()
 
         // Tints the checkmark
-        tintColor = UIColor.govUK.text.link
+        tintColor = UIColor.govUK.fills.surfaceToggleSelected
 
         accessibilityTraits.insert(.link)
     }

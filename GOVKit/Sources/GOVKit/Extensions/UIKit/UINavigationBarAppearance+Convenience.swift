@@ -18,7 +18,7 @@ extension UINavigationBarAppearance {
     public static var standardScroll: UINavigationBarAppearance {
         let standardScrollAppearance = UINavigationBarAppearance()
         standardScrollAppearance.configureWithTransparentBackground()
-        standardScrollAppearance.backgroundColor = UIColor.govUK.fills.surfaceModal
+        standardScrollAppearance.backgroundColor = UIColor.govUK.fills.surfaceBackground
         return standardScrollAppearance
     }
 

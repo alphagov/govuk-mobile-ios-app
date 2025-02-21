@@ -26,7 +26,7 @@ struct HomeViewModelTests {
         let widgets = subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 4)
+        #expect(widgets.count == 3)
     }
 
     @Test
@@ -50,7 +50,7 @@ struct HomeViewModelTests {
         )
         let widgets = subject.widgets
 
-        #expect(widgets.count == 1)
+        #expect(widgets.count == 0)
     }
 
 }

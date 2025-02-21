@@ -105,7 +105,10 @@ class ViewControllerBuilder {
         )
 
         let view = TopicDetailView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view,
+            setNavBarAppearance: { navBar in UINavigationBar.setGovUKAppearance(navBar) }
+        )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never
         viewController.navigationItem.backButtonTitle = viewModel.title
@@ -123,7 +126,10 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared
         )
         let view = TopicDetailView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view,
+            setNavBarAppearance: { navBar in UINavigationBar.setGovUKAppearance(navBar) }
+        )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never
         return viewController

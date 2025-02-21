@@ -4,12 +4,12 @@ import SwiftUI
 public final class HostingViewController<T>: UIHostingController<T> where T: View {
     private let navigationBarHidden: Bool
     private let statusBarStyle: UIStatusBarStyle
-    private let setNavBarAppearance: (UINavigationBar) -> Void
+    private let setNavBarAppearance: ((UINavigationBar) -> Void)?
 
     public init(rootView: T,
                 navigationBarHidden: Bool = false,
                 statusBarStyle: UIStatusBarStyle = .default,
-                setNavBarAppearance: @escaping (UINavigationBar) -> Void = defaultNavBarAppearance) {
+                setNavBarAppearance: ((UINavigationBar) -> Void)? = nil) {
         self.navigationBarHidden = navigationBarHidden
         self.statusBarStyle = statusBarStyle
         self.setNavBarAppearance = setNavBarAppearance
@@ -24,7 +24,8 @@ public final class HostingViewController<T>: UIHostingController<T> where T: Vie
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let navigationController = navigationController else { return }
-        setNavBarAppearance(navigationController.navigationBar)
+        setNavBarAppearance?(navigationController.navigationBar) ?? UINavigationBar.setStandardAppearance(navigationController.navigationBar)
+
         navigationController.setNavigationBarHidden(
             navigationBarHidden,
             animated: animated
@@ -45,9 +46,5 @@ public final class HostingViewController<T>: UIHostingController<T> where T: Vie
 
     public override var preferredStatusBarStyle: UIStatusBarStyle {
         statusBarStyle
-    }
-
-    public static func defaultNavBarAppearance(_ navigationBar: UINavigationBar) {
-        UINavigationBar.setStandardAppearance(navigationBar)
     }
 }

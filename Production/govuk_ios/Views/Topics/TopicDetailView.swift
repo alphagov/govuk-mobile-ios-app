@@ -24,6 +24,21 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 }
                 .padding(.bottom, 16)
             }
+            .background(
+                Gradient(stops: [
+                    .init(
+                        color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                        location: 0),
+                    .init(
+                        color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                        location: 0.33),
+                    .init(
+                        color: .clear,
+                        location: 0.33),
+                    .init(
+                        color: .clear,
+                        location: 1)])
+            )
         }
         .onAppear {
             viewModel.trackScreen(screen: self)

@@ -119,8 +119,6 @@ public final class RecentActivityListViewController: BaseViewController {
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let navBar = navigationController?.navigationBar
-        UINavigationBar.setGovUKAppearance(navBar)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 

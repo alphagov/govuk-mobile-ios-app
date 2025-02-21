@@ -14,17 +14,4 @@ extension UINavigationBarAppearance {
         ]
         return appearance
     }
-
-    public static var standardScroll: UINavigationBarAppearance {
-        let standardScrollAppearance = UINavigationBarAppearance()
-        standardScrollAppearance.configureWithTransparentBackground()
-        standardScrollAppearance.backgroundColor = UIColor.govUK.fills.surfaceBackground
-        return standardScrollAppearance
-    }
-
-    public static var standard: UINavigationBarAppearance {
-        let standardAppearance = UINavigationBarAppearance()
-        standardAppearance.configureWithDefaultBackground()
-        return standardAppearance
-    }
 }

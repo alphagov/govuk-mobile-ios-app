@@ -47,8 +47,7 @@ class ViewControllerBuilder {
 
         let viewController = HostingViewController(
             rootView: settingsContentView,
-            statusBarStyle: .darkContent,
-            setNavBarAppearance: { navBar in UINavigationBar.setGovUKAppearance(navBar) }
+            statusBarStyle: .darkContent
         )
         viewController.title = viewModel.title
 
@@ -106,8 +105,7 @@ class ViewControllerBuilder {
 
         let view = TopicDetailView(viewModel: viewModel)
         let viewController = HostingViewController(
-            rootView: view,
-            setNavBarAppearance: { navBar in UINavigationBar.setGovUKAppearance(navBar) }
+            rootView: view
         )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never
@@ -127,8 +125,7 @@ class ViewControllerBuilder {
         )
         let view = TopicDetailView(viewModel: viewModel)
         let viewController = HostingViewController(
-            rootView: view,
-            setNavBarAppearance: { navBar in UINavigationBar.setGovUKAppearance(navBar) }
+            rootView: view
         )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never

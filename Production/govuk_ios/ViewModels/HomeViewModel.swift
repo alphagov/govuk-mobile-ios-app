@@ -12,7 +12,7 @@ struct HomeViewModel {
 
     var widgets: [WidgetView] {
         [
-            feedbackWidget,
+//            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
             searchWidget,
             recentActivityWidget,
             topicsWidget

@@ -84,7 +84,6 @@
 		5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */; };
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
 		5D18E83E2CCFB68900F20419 /* Container+APIClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */; };
-		5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */; };
 		5D3123862C85AEE20088B931 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123852C85AEE20088B931 /* Container+Repositories.swift */; };
 		5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349F662C6B548200B7F747 /* RequestBuilder.swift */; };
 		5D349F692C6B550000B7F747 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349F682C6B550000B7F747 /* URL+Extensions.swift */; };
@@ -340,7 +339,6 @@
 		5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStore.swift; sourceTree = "<group>"; };
 		5D15A8E72C6A47770050C780 /* GOVRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GOVRequest.swift; sourceTree = "<group>"; };
 		5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+APIClients.swift"; sourceTree = "<group>"; };
-		5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBarAppearance+GOVUK.swift"; sourceTree = "<group>"; };
 		5D30CF972C64A64600361C97 /* WhatToTest.en-GB.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WhatToTest.en-GB.txt"; sourceTree = "<group>"; };
 		5D3123852C85AEE20088B931 /* Container+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Repositories.swift"; sourceTree = "<group>"; };
 		5D349F662C6B548200B7F747 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
@@ -1067,7 +1065,6 @@
 				D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */,
 				5D899A212C946F8A0074C0AD /* UIBarButtonItem+Convenience.swift */,
 				5DC70CBC2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift */,
-				5D1A023A2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift */,
 				5DBE08012C480CA700B58DBE /* UINavigationController+Convenience.swift */,
 				5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */,
 				5D9E67C12C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift */,
@@ -1654,7 +1651,6 @@
 				5D41DB702C088FEB0011E691 /* Container+ServiceClients.swift in Sources */,
 				D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */,
 				D056CE762D3A848A005845E0 /* UserFeedbackView.swift in Sources */,
-				5D1A023B2C8B3119004A72E1 /* UINavigationBarAppearance+GOVUK.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
 				1666F4A02C86124900DBD064 /* SearchModalButton.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,

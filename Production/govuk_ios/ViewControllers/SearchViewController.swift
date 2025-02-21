@@ -273,9 +273,23 @@ class SearchViewController: BaseViewController,
             barButton,
             animated: animated
         )
-        navigationItem.standardAppearance = .govUK
-        navigationItem.compactAppearance = .govUK
-        navigationItem.scrollEdgeAppearance = .govUK
+
+        let barButtonAppearance = UIBarButtonItemAppearance()
+        barButtonAppearance.normal.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.govUK.text.link
+        ]
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.govUK.bodySemibold
+        ]
+        navBarAppearance.configureWithTransparentBackground()
+        navBarAppearance.backgroundColor = UIColor.govUK.fills.surfaceModal
+        navBarAppearance.buttonAppearance = barButtonAppearance
+        navBarAppearance.backButtonAppearance = barButtonAppearance
+
+        navigationItem.standardAppearance = navBarAppearance
+        navigationItem.compactAppearance = navBarAppearance
+        navigationItem.scrollEdgeAppearance = navBarAppearance
     }
 
     @objc

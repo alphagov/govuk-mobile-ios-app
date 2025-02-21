@@ -20,7 +20,20 @@ public final class RecentActivityListViewController: BaseViewController {
         return localDataSource
     }()
 
-    private lazy var titleView: UILabel = {
+    private let titleBackgroundView: UIView = {
+        let localView = UIView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.backgroundColor = .govUK.fills.surfaceHomeHeaderBackground
+        return localView
+    }()
+
+    private let titleContainerView: UIView = {
+        let localView = UIView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
+    }()
+
+    private lazy var titleLabel: UIView = {
         let localLabel = UILabel()
         localLabel.translatesAutoresizingMaskIntoConstraints = false
         localLabel.adjustsFontForContentSizeCategory = true
@@ -30,14 +43,8 @@ public final class RecentActivityListViewController: BaseViewController {
         localLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         localLabel.text = viewModel.pageTitle
         localLabel.accessibilityTraits = .header
+        localLabel.textColor = .govUK.text.header
         return localLabel
-    }()
-
-    private lazy var dividerView: DividerView = {
-        let localView = DividerView()
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.isHidden = true
-        return localView
     }()
 
     private lazy var removeBarButtonItem: UIBarButtonItem = .remove(
@@ -126,6 +133,8 @@ public final class RecentActivityListViewController: BaseViewController {
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let navBar = navigationController?.navigationBar
+        UINavigationBar.setGovUKAppearance(navBar)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
@@ -136,8 +145,9 @@ public final class RecentActivityListViewController: BaseViewController {
 
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
-        view.addSubview(titleView)
-        view.addSubview(dividerView)
+        titleContainerView.addSubview(titleLabel)
+        titleBackgroundView.addSubview(titleContainerView)
+        view.addSubview(titleBackgroundView)
         view.addSubview(tableView)
         view.addSubview(informationScrollView)
         view.addSubview(editingToolbar)
@@ -155,25 +165,41 @@ public final class RecentActivityListViewController: BaseViewController {
 
     private func configureTitleConstraints() {
         NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 4
+            titleBackgroundView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
-            titleView.leadingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leadingAnchor
-            ),
-            titleView.trailingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.trailingAnchor
-            ),
-            dividerView.topAnchor.constraint(
-                equalTo: titleView.bottomAnchor,
-                constant: 8
-            ),
-            dividerView.leadingAnchor.constraint(
+            titleBackgroundView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor
             ),
-            dividerView.trailingAnchor.constraint(
+            titleBackgroundView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor
+            ),
+
+            titleContainerView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: 16
+            ),
+            titleContainerView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor
+            ),
+            titleContainerView.topAnchor.constraint(
+                equalTo: titleBackgroundView.topAnchor
+            ),
+            titleContainerView.bottomAnchor.constraint(
+                equalTo: titleBackgroundView.bottomAnchor, constant: -8
+            ),
+
+            titleLabel.leadingAnchor.constraint(
+                equalTo: titleContainerView.leadingAnchor
+            ),
+            titleLabel.trailingAnchor.constraint(
+                equalTo: titleContainerView.trailingAnchor
+            ),
+            titleLabel.topAnchor.constraint(
+                equalTo: titleContainerView.topAnchor
+            ),
+            titleLabel.bottomAnchor.constraint(
+                equalTo: titleContainerView.bottomAnchor
             )
         ])
     }
@@ -181,7 +207,8 @@ public final class RecentActivityListViewController: BaseViewController {
     private func configureTableConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(
-                equalTo: dividerView.bottomAnchor
+                equalTo: titleBackgroundView.bottomAnchor,
+                constant: 16
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.rightAnchor
@@ -193,7 +220,7 @@ public final class RecentActivityListViewController: BaseViewController {
                 equalTo: view.layoutMarginsGuide.leftAnchor
             ),
             informationScrollView.topAnchor.constraint(
-                equalTo: titleView.bottomAnchor,
+                equalTo: titleBackgroundView.bottomAnchor,
                 constant: 40
             ),
             informationScrollView.rightAnchor.constraint(
@@ -394,12 +421,6 @@ extension RecentActivityListViewController: UITableViewDelegate {
         else { return }
         viewModel.removeEdit(item: item)
         configureToolbarItems()
-    }
-}
-
-extension RecentActivityListViewController: UIScrollViewDelegate {
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        dividerView.isHidden = scrollView.contentOffset.y < 1.0
     }
 }
 

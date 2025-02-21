@@ -24,6 +24,11 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                             backgroundColor: UIColor.govUK.fills.surfaceBackground
                         )
                         .padding(.top, 8)
+                    } .alert(viewModel.notificationUpSellText,
+                             isPresented: $viewModel.showNotificationUpsellAlert) {
+                        Button("OK", role: .cancel) {
+                            viewModel.handleAlertAction()
+                        }
                     }
                     .onChange(of: viewModel.scrollToTop) { shouldScroll in
                         if shouldScroll {

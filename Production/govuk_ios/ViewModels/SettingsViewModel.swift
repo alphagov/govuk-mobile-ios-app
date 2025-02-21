@@ -1,26 +1,28 @@
 import UIKit
 import GOVKit
 import Combine
+import SwiftUI
 
 protocol SettingsViewModelInterface: ObservableObject {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
     func trackScreen(screen: TrackableScreen)
     var scrollToTop: Bool { get set }
-    var showUpsell: PassthroughSubject<Bool, Error> { get set }
+    var showNotificationUpsellAlert: Bool { get set }
+    var notificationUpSellText: String { get }
+    func handleAlertAction()
 }
 
 class SettingsViewModel: SettingsViewModelInterface {
     var showUpsell = PassthroughSubject<Bool, Error>()
-
     let title: String = String.settings.localized("pageTitle")
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let versionProvider: AppVersionProvider
     private let deviceInformationProvider: DeviceInformationProviderInterface
-    @Published var showNotificationUpsell: Bool = false
-
+    private var notificationpPermissionState: NotificationPermissionState?
     @Published var scrollToTop: Bool = false
+    @Published var showNotificationUpsellAlert: Bool = false
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
@@ -30,23 +32,51 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
+        checkNotificationPermissionStatus()
     }
 
-    private func notificationStatus(completion: @escaping (Bool) -> Void) {
-        let center = UNUserNotificationCenter.current()
-        center.getNotificationSettings { (settings) in
-            let authorized = settings.authorizationStatus == .authorized
-            completion(authorized)
+    enum NotificationPermissionState {
+        case notDetermined
+        case denied
+        case authorized
+    }
+    // create callback to show onboarding notficaitons
+    // remember to put this behind a feature flagg 
+
+    private func checkNotificationPermissionStatus() {
+        let current = UNUserNotificationCenter.current()
+        current.getNotificationSettings(completionHandler: { [weak self] (settings) in
+            switch settings.authorizationStatus {
+            case .authorized:
+                self?.notificationpPermissionState = .authorized
+            case .denied:
+                self?.notificationpPermissionState = .denied
+            default:
+                self?.notificationpPermissionState = .notDetermined
+            }
+        })
+    }
+
+    var notificationUpSellText: String {
+        switch notificationpPermissionState {
+        case .authorized:
+            return" auth"
+        case .denied:
+            return "denied"
+        default:
+            // handle undetermined case
+            return "undetermined"
         }
     }
 
-    func checkNotificationStatus() {
-        notificationStatus(completion: { [weak self] authorized in
-            if authorized == false {
-                self?.showNotificationUpsell = true
-                self?.showUpsell.send(true)
-            }
-        })
+    internal func handleAlertAction() {
+        switch notificationpPermissionState {
+        case .authorized, .denied:
+            urlOpener.openSettings()
+        default:
+            // handle undetermined case
+            print("undetermined")
+        }
     }
 
     private var hasAcceptedAnalytics: Bool {
@@ -102,7 +132,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                     accessibilityStatementRow(),
                     openSourceLicenceRow(),
                     termsAndConditionsRow(),
-                    openNotificationsSettings()
+                    notificationsSettingsRow()
                 ],
                 footer: nil
             )
@@ -158,16 +188,14 @@ class SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    private func openNotificationsSettings() -> GroupedListRow {
+    private func notificationsSettingsRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("openNotificationsSettings")
         return LinkRow(
             id: "settings.notifications.row",
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                if self?.urlOpener.openSettings() == true {
-                    self?.trackLinkEvent(rowTitle)
-                }
+                self?.showNotificationUpsellAlert = true
             }
         )
     }

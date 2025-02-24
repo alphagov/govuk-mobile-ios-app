@@ -90,7 +90,8 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.analyticsConsent(
             navigationController: MockNavigationController(),
-            dismissAction: {})
+            dismissAction: {}
+        )
 
         #expect(coordinator is AnalyticsConsentCoordinator)
     }

@@ -38,7 +38,9 @@ class OnboardingSlideAnimationViewModel: OnboardingSlideViewModelInterface {
 
     func didAppear() {
         contentView = AnyView(
-            lottieView.playbackMode(.playing(.fromProgress(0, toProgress: 1, loopMode: .playOnce)))
+            lottieView.playbackMode(
+                .playing(.fromProgress(0, toProgress: 1, loopMode: .playOnce))
+            )
         )
     }
 }

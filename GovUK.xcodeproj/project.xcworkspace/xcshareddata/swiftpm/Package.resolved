@@ -1,5 +1,5 @@
 {
-  "originHash" : "2fbc020bea05b373854936c480686b37fb140aeebafc6bc28dcd8c8315e478ba",
+  "originHash" : "38487e403a931eedf720f067efbbdbff300f6c4ab0e9a73e89f10489fee9029b",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -70,7 +70,7 @@
       "location" : "https://github.com/alphagov/govuk-mobile-ios-onboarding",
       "state" : {
         "branch" : "feature/Bounce",
-        "revision" : "3954a669504a91aa54ccc8aee16d9ffa4ad51fe1"
+        "revision" : "d0d80a8c61f2a678d3686d8e0cdadd462566f02f"
       }
     },
     {

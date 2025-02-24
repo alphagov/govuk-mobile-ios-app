@@ -31,28 +31,6 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
         setOnboarding()
     }
 
-    private func pushNotification() {
-        let primaryViewModel = GOVUKButton.ButtonViewModel(
-            localisedTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
-            action: { self.request() }
-        )
-        let secondaryViewModel = GOVUKButton.ButtonViewModel(
-            localisedTitle: String.notifications.localized("onboardingSkipButtonTitle"),
-            action: { self.finishCoordination() }
-        )
-        let viewModel = NotificationOnboardingViewModel(
-            animationName: "onboarding_stay_updated",
-            primaryButtonViewModel: primaryViewModel,
-            secondaryButtonViewModel: secondaryViewModel
-        )
-        let view = OnboardingView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
-        root.setViewControllers(
-            [viewController],
-            animated: true
-        )
-    }
-
     private func setOnboarding() {
         let onboardingModule = Onboarding(
             slideProvider: notificationService,

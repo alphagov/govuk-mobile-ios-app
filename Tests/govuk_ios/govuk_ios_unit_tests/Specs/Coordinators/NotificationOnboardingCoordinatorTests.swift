@@ -8,21 +8,42 @@ import Onboarding
 
 @Suite
 class NotificationOnboardingCoordinatorTests {
-
     @Test
-    func start_shouldRequestPermission() async throws {
+    func start_shouldRequestPermission_startsOnboarding() async throws {
         let mockNotificationService = MockNotificationService()
-        let sut = NotificationOnboardingCoordinator(
-            navigationController: MockNavigationController(),
-            notificationService: MockNotificationService(),
+        let mockNavigationController = await MockNavigationController()
+        let sut = await NotificationOnboardingCoordinator(
+            navigationController: mockNavigationController,
+            notificationService: mockNotificationService,
             analyticsService: MockAnalyticsService(),
             completion: {}
         )
-        sut.start(url: nil)
+        mockNotificationService._stubbedShouldRequestPermission = true
+        await sut.start(url: nil)
 
-        #expect(Bool(true))
+        await #expect(mockNavigationController._setViewControllers?.count == .some(1))
     }
 
+    @Test
+    @MainActor
+    func start_shouldRequestPermissionFalse_completesCoordinator() async {
+        let mockNotificationService = MockNotificationService()
+        let mockNavigationController = MockNavigationController()
+        mockNotificationService._stubbedShouldRequestPermission = false
+        let completed = await withCheckedContinuation { continuation in
+            let sut = NotificationOnboardingCoordinator(
+                navigationController: mockNavigationController,
+                notificationService: mockNotificationService,
+                analyticsService: MockAnalyticsService(),
+                completion: {
+                    continuation.resume(returning: true)
+                }
+            )
+            sut.start(url: nil)
+        }
+        #expect(completed)
+        #expect(mockNavigationController._setViewControllers == nil)
+    }
 }
 
 class MockNotificationService: NotificationServiceInterface {
@@ -33,9 +54,10 @@ class MockNotificationService: NotificationServiceInterface {
     func requestPermissions(completion: @escaping () -> Void) {
 
     }
-    
+
+    var _stubbedShouldRequestPermission: Bool = true
     var shouldRequestPermission: Bool {
-        true
+        _stubbedShouldRequestPermission
     }
 
     func fetchSlides(completion: @escaping (Result<[any OnboardingSlideViewModelInterface], any Error>) -> Void) {

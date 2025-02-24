@@ -51,7 +51,7 @@ class NotificationService: NotificationServiceInterface {
                     image: "onboarding_stay_updated",
                     title: String.notifications.localized("onboardingTitle"),
                     body: String.notifications.localized("onboardingBody"),
-                    name: "Notifications_A"
+                    name: "NotificationsOnboardingScreen"
                 ),
                 primaryButtonTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
                 secondaryButtonTitle: String.notifications.localized("onboardingSkipButtonTitle")

@@ -104,7 +104,7 @@ extension Container {
         Factory(self) {
             NotificationService(
                 environmentService: self.appEnvironmentService.resolve(),
-                notificationCenter: .current()
+                notificationCenter: UNUserNotificationCenter.current()
             )
         }
     }

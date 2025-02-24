@@ -13,10 +13,10 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
 
 class NotificationService: NotificationServiceInterface {
     private var environmentService: AppEnvironmentServiceInterface
-    private let notificationCenter: UNUserNotificationCenter
+    private let notificationCenter: UserNotificationCenterInterface
 
     init(environmentService: AppEnvironmentServiceInterface,
-         notificationCenter: UNUserNotificationCenter) {
+         notificationCenter: UserNotificationCenterInterface) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
     }
@@ -31,7 +31,7 @@ class NotificationService: NotificationServiceInterface {
 
     var shouldRequestPermission: Bool {
         get async {
-            await notificationCenter.notificationSettings().authorizationStatus == .notDetermined
+            await notificationCenter.authorizationStatus == .notDetermined
         }
     }
 
@@ -58,5 +58,17 @@ class NotificationService: NotificationServiceInterface {
             )
         ]
         completion(.success(slides))
+    }
+}
+
+protocol UserNotificationCenterInterface {
+    var authorizationStatus: UNAuthorizationStatus { get async }
+}
+
+extension UNUserNotificationCenter: UserNotificationCenterInterface {
+    var authorizationStatus: UNAuthorizationStatus {
+        get async {
+            await notificationSettings().authorizationStatus
+        }
     }
 }

@@ -28,7 +28,7 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         nil
     }
 
-    var sections: [GroupedListSection] {
+    lazy var sections: [GroupedListSection] = {
         [
             GroupedListSection(
                 heading: nil,
@@ -36,10 +36,14 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
                 footer: nil
             )
         ]
-    }
+    }()
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
+        trackEcommerce()
+    }
+
+    func trackEcommerce() {
         let eCommerceEvent = AppEvent.viewItemList(
             name: String.topics.localized("topicDetailStepByStepHeader"),
             items: commerceItems

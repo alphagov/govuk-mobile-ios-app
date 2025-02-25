@@ -70,7 +70,6 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
                 if case let .success(detail) = result {
                     self.topicDetail = detail
                     self.configureSections()
-                    self.trackEcommerce()
                 }
                 self.handleError(result.getError())
             }

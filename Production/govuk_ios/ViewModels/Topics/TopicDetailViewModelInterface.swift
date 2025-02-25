@@ -9,6 +9,7 @@ protocol TopicDetailViewModelInterface: ObservableObject {
     var errorViewModel: AppErrorViewModel? { get }
     func trackScreen(screen: TrackableScreen)
     var commerceItems: [ECommerceItem] { get set }
+    func trackEcommerce()
 }
 
 extension TopicDetailViewModelInterface {

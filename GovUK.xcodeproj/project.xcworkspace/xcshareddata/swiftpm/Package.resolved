@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alphagov/govuk-mobile-ios-onboarding",
       "state" : {
-        "branch" : "feature/Bounce",
-        "revision" : "d0d80a8c61f2a678d3686d8e0cdadd462566f02f"
+        "branch" : "develop",
+        "revision" : "93edc8b1cd3b3033d18690019e08e9504be315f1"
       }
     },
     {

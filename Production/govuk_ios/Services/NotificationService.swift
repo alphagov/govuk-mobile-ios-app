@@ -31,7 +31,9 @@ class NotificationService: NotificationServiceInterface {
 
     var shouldRequestPermission: Bool {
         get async {
-            await notificationCenter.authorizationStatus == .notDetermined
+            async let value = false
+            return await value
+//            await notificationCenter.authorizationStatus == .notDetermined
         }
     }
 

@@ -178,6 +178,7 @@
 		5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */; };
 		5DEAA6EB2D6636D9004DF245 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5DEAA6EA2D6636D9004DF245 /* Onboarding */; };
 		5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */; };
+		5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */; };
 		D00984F22D47BC9600D70FEE /* DeviceInformation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */; };
 		D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF32CB4247100742620 /* TopicsRepository.swift */; };
 		D028CCF62CB9619B00742620 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF52CB9619B00742620 /* Topic.swift */; };
@@ -440,6 +441,7 @@
 		5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Convenience.swift"; sourceTree = "<group>"; };
 		5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProperty+Convenience.swift"; sourceTree = "<group>"; };
+		5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Interface.swift"; sourceTree = "<group>"; };
 		D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceInformation+Convenience.swift"; sourceTree = "<group>"; };
 		D01005352CECA6420013CBD0 /* Alpha.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Alpha.xcconfig; sourceTree = "<group>"; };
 		D028CCF32CB4247100742620 /* TopicsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRepository.swift; sourceTree = "<group>"; };
@@ -728,14 +730,15 @@
 		5D1353AE2BE0D9A700414441 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D00984F02D47BC7900D70FEE /* Model */,
-				D0EBFDDD2D13058F000A3151 /* RecentActivity */,
 				5DE970552C297CF3009D66C4 /* Analytics */,
 				5D41DB662C087C520011E691 /* Container */,
 				5D9CF3962C38492500317B70 /* Deeplinking */,
 				5D51C8362C5BB9E80011ABE9 /* Foundation */,
+				D00984F02D47BC7900D70FEE /* Model */,
+				D0EBFDDD2D13058F000A3151 /* RecentActivity */,
 				5D08A8FE2C9AFAAD0049D798 /* Swift */,
 				5DBE08032C480CA700B58DBE /* UIKit */,
+				5DFE5F1C2D6DE5830041E3B4 /* UserNotifications */,
 				5DBE07FE2C480CA700B58DBE /* Views */,
 			);
 			path = Extensions;
@@ -1150,6 +1153,14 @@
 				5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		5DFE5F1C2D6DE5830041E3B4 /* UserNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */,
+			);
+			path = UserNotifications;
 			sourceTree = "<group>";
 		};
 		9685F8292C78C01600C33614 /* SwiftUIViews */ = {
@@ -1620,6 +1631,7 @@
 				4E00EEEB2CCB040D007B61E8 /* TopicsButtonView.swift in Sources */,
 				5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */,
 				5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */,
+				5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */,
 				16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
 				D0D9B87B2D2D547D0051EDDD /* StringValidator.swift in Sources */,

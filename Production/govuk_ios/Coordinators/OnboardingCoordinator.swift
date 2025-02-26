@@ -21,22 +21,30 @@ class OnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard appConfigService.isFeatureEnabled(key: .onboarding) &&
-                !onboardingService.hasSeenOnboarding
+        guard shouldShowOnboarding
         else { return dismissAction() }
         setOnboarding()
     }
 
+    private var shouldShowOnboarding: Bool {
+        appConfigService.isFeatureEnabled(key: .onboarding) &&
+        !onboardingService.hasSeenOnboarding
+    }
+
     private func setOnboarding() {
-        let slides = onboardingService.fetchSlides()
         let onboardingModule = Onboarding(
-            source: .model(slides),
+            slideProvider: onboardingService,
             analyticsService: analyticsService,
-            dismissAction: { [weak self] in
-                self?.onboardingService.setHasSeenOnboarding()
-                self?.dismissAction()
-            }
+            completeAction: dismissOnboarding,
+            dismissAction: dismissOnboarding
         )
         set(onboardingModule.viewController)
+    }
+
+    private var dismissOnboarding: () -> Void {
+        { [weak self] in
+            self?.onboardingService.setHasSeenOnboarding()
+            self?.dismissAction()
+        }
     }
 }

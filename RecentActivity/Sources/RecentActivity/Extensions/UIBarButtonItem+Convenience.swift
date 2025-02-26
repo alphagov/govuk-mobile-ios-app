@@ -21,7 +21,7 @@ extension UIBarButtonItem {
     public static func remove(action: @escaping (UIAction) -> Void) -> UIBarButtonItem {
         let title = String.recentActivity.localized("removeActivitiesButtonTitle")
         return TopAlignedBarButtonItem(title: title,
-                                       tint: .red,
+                                       tint: UIColor.govUK.text.buttonDestructive,
                                        action: action)
     }
 }

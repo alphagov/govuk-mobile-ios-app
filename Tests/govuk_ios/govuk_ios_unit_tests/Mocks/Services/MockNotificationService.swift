@@ -22,4 +22,9 @@ class MockNotificationService: NotificationServiceInterface {
     func fetchSlides(completion: @escaping (Result<[any OnboardingSlideViewModelInterface], any Error>) -> Void) {
 
     }
+
+    var _stubbedIsFetureEnabled: Bool = true
+    var isFeatureEnabled: Bool {
+        _stubbedIsFetureEnabled
+    }
 }

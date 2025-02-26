@@ -25,19 +25,3 @@ extension AppEvent {
         )
     }
 }
-
-struct ECommerceItem {
-    let name: String
-    let category: String
-    let index: Int
-    let itemId: String?
-    let locationId: String?
-
-    func eventParameters() -> [String: String] {
-        ["item_name": name,
-         "item_category": category,
-         "index": "\(index)",
-         "item_id": itemId ?? "",
-         "location_id": locationId ?? ""]
-    }
-}

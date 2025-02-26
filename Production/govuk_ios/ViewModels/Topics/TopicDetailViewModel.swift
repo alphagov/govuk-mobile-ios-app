@@ -267,11 +267,13 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     private func createSeeAllCommerceItem(_ rowTitle: String,
                                           category: String) {
-        let appEventItem = ECommerceItem(name: rowTitle,
-                                         category: category,
-                                         index: commerceItems.count + 1,
-                                         itemId: nil,
-                                         locationId: nil)
+        let appEventItem = ECommerceItem(
+            name: rowTitle,
+            category: category,
+            index: commerceItems.count + 1,
+            itemId: nil,
+            locationId: nil
+        )
         commerceItems.append(appEventItem)
     }
 }

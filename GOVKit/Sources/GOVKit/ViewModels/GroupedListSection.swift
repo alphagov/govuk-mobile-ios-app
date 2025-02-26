@@ -16,7 +16,7 @@ public struct GroupedListSection {
 }
 
 public struct GroupedListHeader {
-    let title: String
+    public let title: String
     let icon: UIImage?
     
     public init(title: String,

@@ -54,6 +54,9 @@ final class UserFeedbackView: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func hideChevron() {
+        titleImageView.isHidden = true
+    }
     private func configureUI() {
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(titleImageView)

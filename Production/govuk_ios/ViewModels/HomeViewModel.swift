@@ -8,11 +8,13 @@ struct HomeViewModel {
     let topicWidgetViewModel: TopicsWidgetViewModel
     let feedbackAction: () -> Void
     let searchAction: () -> Void
+    let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
 
     var widgets: [WidgetView] {
         [
-//            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
+            notificationsWidget,
+            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
             searchWidget,
             recentActivityWidget,
             topicsWidget
@@ -26,6 +28,21 @@ struct HomeViewModel {
             action: feedbackAction
         )
         let content = UserFeedbackView(viewModel: viewModel)
+        let widget = WidgetView(useContentAccessibilityInfo: true)
+        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+        widget.addContent(content)
+        return widget
+    }
+
+
+    private var notificationsWidget: WidgetView {
+        let title = String.home.localized("homeWidgetTitle")
+        let viewModel = UserFeedbackViewModel(
+            title: title,
+            action: notificationsAction
+        )
+        let content = UserFeedbackView(viewModel: viewModel)
+        content.hideChevron()
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
         widget.addContent(content)

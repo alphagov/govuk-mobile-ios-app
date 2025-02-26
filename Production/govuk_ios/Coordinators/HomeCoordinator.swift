@@ -36,6 +36,7 @@ class HomeCoordinator: TabItemCoordinator {
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
             searchAction: presentSearchCoordinator,
+            notificationsAction: notificationsAction,
             recentActivityAction: startRecentActivityCoordinator
         )
         set([viewController], animated: false)
@@ -58,11 +59,27 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
+    private var notificationsAction: () -> Void {
+        return { [weak self] in
+            guard let self = self else { return }
+            self.trackWidgetNavigation(
+                text: String.home.localized("feedbackWidgetTitle"),
+                external: true
+            )
+            let urlOpener: URLOpener = UIApplication.shared
+            urlOpener.openIfPossible(
+                self.deviceInformationProvider.helpAndFeedbackURL(versionProvider: Bundle.main)
+            )
+        }
+    }
+
     private var feedbackAction: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
-            self.trackWidgetNavigation(text: String.home.localized("feedbackWidgetTitle"),
-                                        external: true)
+            self.trackWidgetNavigation(
+                text: String.home.localized("feedbackWidgetTitle"),
+                external: true
+            )
             let urlOpener: URLOpener = UIApplication.shared
             urlOpener.openIfPossible(
                 self.deviceInformationProvider.helpAndFeedbackURL(versionProvider: Bundle.main)

@@ -26,10 +26,9 @@ public final class RecentActivityListViewController: BaseViewController {
     }()
 
     private lazy var titleView: UIView = {
-        let localView = BlueHeaderView()
+        let localView = GovUKHeaderView()
         localView.configure(titleText: viewModel.pageTitle)
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.backgroundColor = .govUK.fills.surfaceHomeHeaderBackground
         return localView
     }()
 

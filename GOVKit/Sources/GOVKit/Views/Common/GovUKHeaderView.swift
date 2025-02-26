@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class BlueHeaderView: UIView {
+public class GovUKHeaderView: UIView {
     public init() {
         super.init(frame: .zero)
         configureUI()
@@ -17,6 +17,7 @@ public class BlueHeaderView: UIView {
     }
 
     private func configureUI() {
+        backgroundColor = .govUK.fills.surfaceHomeHeaderBackground
         titleContainerView.addSubview(titleLabel)
         addSubview(titleContainerView)
     }

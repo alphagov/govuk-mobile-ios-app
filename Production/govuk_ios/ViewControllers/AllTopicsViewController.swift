@@ -7,10 +7,9 @@ class AllTopicsViewController: BaseViewController, TrackableScreen {
     let viewModel: AllTopicsViewModel
 
     lazy private var titleView: UIView = {
-        let localView = BlueHeaderView()
+        let localView = GovUKHeaderView()
         localView.configure(titleText: String.topics.localized("allTopicsTitle"))
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.backgroundColor = .govUK.fills.surfaceHomeHeaderBackground
         return localView
     }()
 

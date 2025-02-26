@@ -42,6 +42,13 @@ extension String {
             bundle: .main
         )
     }
+
+    static var notifications: LocalStringBuilder {
+        .init(
+            tableName: "Notifications",
+            bundle: .main
+        )
+    }
 }
 
 extension String {

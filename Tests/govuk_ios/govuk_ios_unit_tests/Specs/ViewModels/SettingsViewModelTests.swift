@@ -15,6 +15,7 @@ struct SettingsViewModelTests {
     init() {
         let mockVersionProvider = MockAppVersionProvider()
         let mockDeviceInformationProvider = MockDeviceInformationProvider()
+        let mockNotificationAuthStatus = MockNotificationAuthStatus()
 
         mockVersionProvider.versionNumber = "123"
         mockVersionProvider.buildNumber = "456"
@@ -23,7 +24,13 @@ struct SettingsViewModelTests {
             analyticsService: mockAnalyticsService,
             urlOpener: mockURLOpener,
             versionProvider: mockVersionProvider,
-            deviceInformationProvider: mockDeviceInformationProvider
+            deviceInformationProvider: mockDeviceInformationProvider,
+            configService: MockAppConfigService(),
+            notificationsAuthStatus: mockNotificationAuthStatus,
+            dismissAction: {
+                
+            }
+
         )
     }
 

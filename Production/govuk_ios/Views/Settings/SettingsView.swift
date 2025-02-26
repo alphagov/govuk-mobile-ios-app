@@ -24,9 +24,9 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                             backgroundColor: UIColor.govUK.fills.surfaceBackground
                         )
                         .padding(.top, 8)
-                    } .alert(viewModel.notificationUpSellText,
+                    } .alert(viewModel.notificationSettingsAlertText,
                              isPresented: $viewModel.showNotificationUpsellAlert) {
-                        Button("OK", role: .cancel) {
+                        Button(viewModel.alertButtonText, role: .cancel) {
                             viewModel.handleAlertAction()
                         }
                     }

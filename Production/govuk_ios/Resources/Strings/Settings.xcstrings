@@ -122,6 +122,28 @@
         }
       }
     },
+    "settingsNotificationsAlertButtonText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update settings"
+          }
+        }
+      }
+    },
+    "settingsPushNotificationsAlertText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Push notifications are used to provide updates. You can change this in the settings"
+          }
+        }
+      }
+    },
     "termsAndConditionsRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -9,77 +9,70 @@ protocol SettingsViewModelInterface: ObservableObject {
     func trackScreen(screen: TrackableScreen)
     var scrollToTop: Bool { get set }
     var showNotificationUpsellAlert: Bool { get set }
-    var notificationUpSellText: String { get }
+    var notificationSettingsAlertText: String { get }
     func handleAlertAction()
+    var alertButtonText: String { get }
 }
 
+// test functions
+
 class SettingsViewModel: SettingsViewModelInterface {
-    var showUpsell = PassthroughSubject<Bool, Error>()
     let title: String = String.settings.localized("pageTitle")
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let versionProvider: AppVersionProvider
+    private let configService: AppConfigServiceInterface
     private let deviceInformationProvider: DeviceInformationProviderInterface
-    private var notificationpPermissionState: NotificationPermissionState?
     @Published var scrollToTop: Bool = false
     @Published var showNotificationUpsellAlert: Bool = false
+    private let dismissAction: () -> Void
+    private var notificationsAuthStatus: NotificationAuthorisationInterface
+
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
          versionProvider: AppVersionProvider,
-         deviceInformationProvider: DeviceInformationProviderInterface) {
+         deviceInformationProvider: DeviceInformationProviderInterface,
+         configService: AppConfigServiceInterface,
+         notificationsAuthStatus: NotificationAuthorisationInterface,
+         dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
-        checkNotificationPermissionStatus()
+        self.configService = configService
+        self.notificationsAuthStatus = notificationsAuthStatus
+        self.dismissAction = dismissAction
     }
 
-    enum NotificationPermissionState {
-        case notDetermined
-        case denied
-        case authorized
-    }
-    // create callback to show onboarding notficaitons
-    // remember to put this behind a feature flagg 
+    let notificationSettingsAlertText = String.settings.localized(
+        "settingsPushNotificationsAlertText"
+    )
 
-    private func checkNotificationPermissionStatus() {
-        let current = UNUserNotificationCenter.current()
-        current.getNotificationSettings(completionHandler: { [weak self] (settings) in
-            switch settings.authorizationStatus {
-            case .authorized:
-                self?.notificationpPermissionState = .authorized
-            case .denied:
-                self?.notificationpPermissionState = .denied
-            default:
-                self?.notificationpPermissionState = .notDetermined
-            }
-        })
-    }
+    let alertButtonText = String.settings.localized(
+        "settingsNotificationsAlertButtonText"
+    )
 
-    var notificationUpSellText: String {
-        switch notificationpPermissionState {
-        case .authorized:
-            return" auth"
-        case .denied:
-            return "denied"
-        default:
-            // handle undetermined case
-            return "undetermined"
-        }
-    }
-
-    internal func handleAlertAction() {
-        switch notificationpPermissionState {
+    func handleAlertAction() {
+        switch notificationsAuthStatus.notificationsPermissionState {
         case .authorized, .denied:
-            urlOpener.openSettings()
+             urlOpener.openSettings()
+            if self.urlOpener.openSettings() == true {
+                self.trackLinkEvent(
+                    String.settings.localized("openNotificationsSettings"),
+                    external: false
+                )
+            }
         default:
-            // handle undetermined case
-            print("undetermined")
+            trackLinkEvent(
+                String.settings.localized("openNotificationsSettings"),
+                external: false
+            )
+            dismissAction()
         }
     }
 
-    private var hasAcceptedAnalytics: Bool {
+     var hasAcceptedAnalytics: Bool {
         switch analyticsService.permissionState {
         case .denied, .unknown:
             return false
@@ -127,17 +120,24 @@ class SettingsViewModel: SettingsViewModelInterface {
             ),
             .init(
                 heading: nil,
-                rows: [
-                    privacyPolicyRow(),
-                    accessibilityStatementRow(),
-                    openSourceLicenceRow(),
-                    termsAndConditionsRow(),
-                    notificationsSettingsRow()
-                ],
+                rows: returnPrivacyAndLegalRows(),
                 footer: nil
             )
         ]
     }
+
+    private func returnPrivacyAndLegalRows() -> [GroupedListRow] {
+        var rows: [GroupedListRow] = []
+        rows.append(privacyPolicyRow())
+        rows.append(accessibilityStatementRow())
+        rows.append(openSourceLicenceRow())
+        // if configService.isFeatureEnabled(key: .notifications) {
+            rows.append(notificationsSettingsRow())
+       // }
+        rows.append(termsAndConditionsRow())
+        return rows
+    }
+
 
     private func privacyPolicyRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("privacyPolicyRowTitle")
@@ -147,7 +147,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 if self?.urlOpener.openIfPossible(Constants.API.privacyPolicyUrl) == true {
-                    self?.trackLinkEvent(rowTitle)
+                    self?.trackLinkEvent(rowTitle, external: true)
                 }
             }
         )
@@ -182,19 +182,26 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 if self?.urlOpener.openSettings() == true {
-                    self?.trackLinkEvent(rowTitle)
+                    self?.trackLinkEvent(rowTitle, external: true)
                 }
             }
         )
     }
 
     private func notificationsSettingsRow() -> GroupedListRow {
+        print(hasAcceptedAnalytics)
         let rowTitle = String.settings.localized("openNotificationsSettings")
-        return LinkRow(
+        return NotificationSettingsRow(
             id: "settings.notifications.row",
             title: rowTitle,
             body: nil,
+            isAuthorized: notificationsAuthStatus.notificationsPermissionState == .authorized
+            ? true
+            : false,
             action: { [weak self] in
+                if self?.notificationsAuthStatus.notificationsPermissionState == .notDetermined {
+                    self?.handleAlertAction()
+                }
                 self?.showNotificationUpsellAlert = true
             }
         )
@@ -233,14 +240,15 @@ class SettingsViewModel: SettingsViewModelInterface {
     private func openURLIfPossible(url: URL,
                                    eventTitle: String) {
         if urlOpener.openIfPossible(url) {
-            trackLinkEvent(eventTitle)
+            trackLinkEvent(eventTitle, external: true)
         }
     }
 
-    private func trackLinkEvent(_ title: String) {
+    private func trackLinkEvent(_ title: String,
+                                external: Bool) {
         let event = AppEvent.buttonNavigation(
             text: title,
-            external: true
+            external: external
         )
         analyticsService.track(event: event)
     }

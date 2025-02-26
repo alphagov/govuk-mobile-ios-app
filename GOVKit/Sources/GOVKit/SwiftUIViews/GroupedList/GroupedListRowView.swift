@@ -14,6 +14,8 @@ struct GroupedListRowView: View {
                 InformationRowView(row: row)
             case let row as ToggleRow:
                 ToggleRowView(row: row)
+            case let row as NotificationSettingsRow:
+                NotificationsRowView(row: row)
             default:
                 EmptyView()
             }
@@ -71,6 +73,34 @@ struct LinkRowView: View {
         .accessibilityHint(row.isWebLink ? String.common.localized("openWebLinkHint") : "")
     }
 }
+
+struct NotificationsRowView: View {
+    let row: NotificationSettingsRow
+
+    var body: some View {
+        Button {
+            row.action()
+        } label: {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(row.title)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                    Text(row.isAuthorized ? "Enabled" : "Disabled")
+                        .font(Font.govUK.caption1Medium)
+                        .multilineTextAlignment(.leading)
+                }
+                .foregroundColor(Color(UIColor.govUK.text.link))
+
+                RowDetail(text: row.body)
+            }
+        }
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
+        .accessibilityHint(row.isWebLink ? String.common.localized("openWebLinkHint") : "")
+    }
+}
+
 
 struct NavigationRowView: View {
     let row: NavigationRow

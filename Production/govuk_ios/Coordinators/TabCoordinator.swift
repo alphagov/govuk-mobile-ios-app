@@ -13,7 +13,9 @@ protocol TabItemCoordinatorInterface {
 class TabCoordinator: BaseCoordinator,
                       UITabBarControllerDelegate {
     private lazy var homeCoordinator = coordinatorBuilder.home
-    private lazy var settingsCoordinator = coordinatorBuilder.settings
+    private lazy var settingsCoordinator = coordinatorBuilder.setttings(
+        dissmissAction: dismissAction
+    )
     private var currentTabIndex = 0
 
     private var coordinators: [TabItemCoordinator] {
@@ -26,12 +28,15 @@ class TabCoordinator: BaseCoordinator,
     private lazy var tabController = UITabBarController.govUK
     private let coordinatorBuilder: CoordinatorBuilder
     private let analyticsService: AnalyticsServiceInterface
+    private let dismissAction: () -> Void
 
     init(coordinatorBuilder: CoordinatorBuilder,
          navigationController: UINavigationController,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         dissmissAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.analyticsService = analyticsService
+        self.dismissAction = dissmissAction
         super.init(navigationController: navigationController)
         tabController.delegate = self
     }

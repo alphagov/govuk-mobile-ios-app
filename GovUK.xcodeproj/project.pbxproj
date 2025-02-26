@@ -69,6 +69,8 @@
 		4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */; };
 		4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */; };
 		4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646C2D15AB05007A6E97 /* CharValidator.swift */; };
+		4EC7A39C2D6E077900B57D94 /* NotificationsAuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A39B2D6E077900B57D94 /* NotificationsAuthStatus.swift */; };
+		4EC7A39E2D6E07BE00B57D94 /* NotificationsPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A39D2D6E07BE00B57D94 /* NotificationsPermissionState.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407532CE278F900D654FC /* StickyFooterView.swift */; };
 		4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407552CE2796900D654FC /* UIButton+Extensions.swift */; };
@@ -327,6 +329,8 @@
 		4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646C2D15AB05007A6E97 /* CharValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharValidator.swift; sourceTree = "<group>"; };
+		4EC7A39B2D6E077900B57D94 /* NotificationsAuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAuthStatus.swift; sourceTree = "<group>"; };
+		4EC7A39D2D6E07BE00B57D94 /* NotificationsPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPermissionState.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		4EF407532CE278F900D654FC /* StickyFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyFooterView.swift; sourceTree = "<group>"; };
 		4EF407552CE2796900D654FC /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -677,6 +681,15 @@
 			path = Validators;
 			sourceTree = "<group>";
 		};
+		4EC7A39A2D6E075C00B57D94 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				4EC7A39B2D6E077900B57D94 /* NotificationsAuthStatus.swift */,
+				4EC7A39D2D6E07BE00B57D94 /* NotificationsPermissionState.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		4EFE229F2D0CD07400136D56 /* Redactors */ = {
 			isa = PBXGroup;
 			children = (
@@ -975,6 +988,7 @@
 		5DAD71762BD250DB0075F648 /* govuk_ios */ = {
 			isa = PBXGroup;
 			children = (
+				4EC7A39A2D6E075C00B57D94 /* Notifications */,
 				5D4F97E92BFF771A002CBDDE /* Builders */,
 				5D26A75F2C92E054009902DD /* Clients */,
 				5D962D5E2C29BD0B0038BC0A /* Coordinators */,
@@ -1614,6 +1628,7 @@
 				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
 				4EFE22A52D0CD0D500136D56 /* RegexRedactor.swift in Sources */,
 				D028CCF62CB9619B00742620 /* Topic.swift in Sources */,
+				4EC7A39C2D6E077900B57D94 /* NotificationsAuthStatus.swift in Sources */,
 				5D7D255F2D141CEC00BDC217 /* Redactor+Convenience.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5D18E83E2CCFB68900F20419 /* Container+APIClients.swift in Sources */,
@@ -1625,6 +1640,7 @@
 				5D925B182CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
 				3D15E7B22CB562E40046CE64 /* AppRecommendUpdateContainerView.swift in Sources */,
+				4EC7A39E2D6E07BE00B57D94 /* NotificationsPermissionState.swift in Sources */,
 				4E996D302D11AB00007F21A8 /* ValidatorProvider.swift in Sources */,
 				D028CD0E2CBFEA4E00742620 /* TopicDetailViewModel.swift in Sources */,
 				4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */,

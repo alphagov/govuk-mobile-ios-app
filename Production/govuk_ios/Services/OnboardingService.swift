@@ -32,39 +32,32 @@ struct OnboardingService: OnboardingServiceInterface {
             OnboardingSlideAnimationViewModel(
                 slide: .init(
                     image: "onboarding_personalisation",
-                    title: "Get things done on the go",
-                    body:
-                    """
-                    Access government services and information on your phone using the GOV.UK app
-                    """,
+                    title: String.onboarding.localized("personalisationTitle"),
+                    body: String.onboarding.localized("personalisationBody"),
                     name: "Onboarding_A"
                 ),
-                primaryButtonTitle: "Continue",
-                secondaryButtonTitle: "Skip"
+                primaryButtonTitle: String.onboarding.localized("continueButtonTitle"),
+                secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle")
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
                     image: "onboarding_screen_2",
-                    title: "Quickly get back to previous pages",
-                    body: """
-                        Pages you’ve visited are saved so you can easily return to them
-                        """,
+                    title: String.onboarding.localized("pagesYouveVisitedTitle"),
+                    body: String.onboarding.localized("pagesYouveVisitedBody"),
                     name: "Onboarding_B"
                 ),
-                primaryButtonTitle: "Continue",
-                secondaryButtonTitle: "Skip"
+                primaryButtonTitle: String.onboarding.localized("continueButtonTitle"),
+                secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle")
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
                     image: "onboarding_screen_3",
-                    title: "Tailored to you",
-                    body: """
-                        Choose topics that are relevant to you so you can find what you need faster
-                        """,
+                    title: String.onboarding.localized("tailoredToYouTitle"),
+                    body: String.onboarding.localized("tailoredToYouBody"),
                     name: "Onboarding_C"
                 ),
-                primaryButtonTitle: "Continue",
-                secondaryButtonTitle: "Skip"
+                primaryButtonTitle: String.onboarding.localized("doneButtonTitle"),
+                secondaryButtonTitle: ""
             )
         ]
         completion(.success(slides))

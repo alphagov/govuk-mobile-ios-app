@@ -5,9 +5,9 @@ import GOVKit
 extension Onboarding {
     static var appSlides: [any OnboardingSlideViewModelInterface] {
         [
-            OnboardingSlideAnimationViewModel(
+            OnboardingSlideImageViewModel(
                 slide: .init(
-                    image: "onboarding_personalisation",
+                    image: "onboarding_screen_1",
                     title: String.onboarding.localized("personalisationTitle"),
                     body: String.onboarding.localized("personalisationBody"),
                     name: "Onboarding_A"

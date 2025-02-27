@@ -20,9 +20,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/AppCheck</string>
+			<string>Packages/app-check</string>
 			<key>Title</key>
-			<string>AppCheck</string>
+			<string>app-check</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -36,9 +36,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/Firebase</string>
+			<string>Packages/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>Firebase</string>
+			<string>firebase-ios-sdk</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -76,17 +76,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/UIComponents</string>
+			<string>Packages/govuk-mobile-ios-ui-components</string>
 			<key>Title</key>
-			<string>UIComponents</string>
+			<string>govuk-mobile-ios-ui-components</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/gRPC</string>
+			<string>Packages/grpc-binary</string>
 			<key>Title</key>
-			<string>gRPC</string>
+			<string>grpc-binary</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -132,25 +132,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>Packages/Logging</string>
-			<key>Title</key>
-			<string>Logging</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>Packages/Networking</string>
-			<key>Title</key>
-			<string>Networking</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>Packages/nanopb</string>
 			<key>Title</key>
 			<string>nanopb</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Packages/OneSignal-XCFramework</string>
+			<key>Title</key>
+			<string>OneSignal-XCFramework</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

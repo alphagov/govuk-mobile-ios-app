@@ -8,7 +8,7 @@ protocol TopicDetailViewModelInterface: ObservableObject {
     var sections: [GroupedListSection] { get }
     var errorViewModel: AppErrorViewModel? { get }
     func trackScreen(screen: TrackableScreen)
-    var commerceItems: [ECommerceItem] { get set }
+    var commerceItems: [TopicCommerceItem] { get set }
     func trackEcommerce()
 }
 
@@ -17,7 +17,7 @@ extension TopicDetailViewModelInterface {
         guard let commerceItem = commerceItems.first(where: { $0.name == name}) else {
             return nil
         }
-        let event = AppEvent.selectItem(
+        let event = AppEvent.selectTopicItem(
             name: name,
             results: commerceItems.count,
             items: [commerceItem]
@@ -27,7 +27,7 @@ extension TopicDetailViewModelInterface {
 
     func createCommerceItem(_ content: TopicDetailResponse.Content,
                             category: String) {
-        let appEventItem = ECommerceItem(
+        let appEventItem = TopicCommerceItem(
             name: content.title,
             category: category,
             index: commerceItems.count + 1,

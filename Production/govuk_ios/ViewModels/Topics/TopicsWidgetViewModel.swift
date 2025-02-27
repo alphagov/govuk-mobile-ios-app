@@ -45,10 +45,6 @@ final class TopicsWidgetViewModel {
         topicsService.fetchAll()
     }
 
-    var topicCount: Int {
-        topicsService.fetchAll().count
-    }
-
     lazy var topicErrorViewModel: AppErrorViewModel = {
         AppErrorViewModel(
             title: String.common.localized("genericErrorTitle"),
@@ -77,7 +73,6 @@ final class TopicsWidgetViewModel {
 
     func trackECommerce() {
         let trackedTopics = displayedTopics
-        let count = trackedTopics.count
         var items = [HomeCommerceItem]()
         trackedTopics.enumerated().forEach { index, topic in
             let item = HomeCommerceItem(name: topic.title,

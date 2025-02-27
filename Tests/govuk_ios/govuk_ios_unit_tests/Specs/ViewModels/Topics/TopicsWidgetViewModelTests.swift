@@ -16,6 +16,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -35,6 +36,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -57,6 +59,7 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in
                 expectedValue = true
             },
@@ -73,6 +76,7 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: {
                 expectedValue = true
@@ -89,6 +93,7 @@ struct TopicsWidgetViewModelTests {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: {
@@ -115,6 +120,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -141,6 +147,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -165,6 +172,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -186,6 +194,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -209,6 +218,7 @@ struct TopicsWidgetViewModelTests {
 
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -222,6 +232,7 @@ struct TopicsWidgetViewModelTests {
         mockTopicService._stubbedHasCustomisedTopics = true
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -235,6 +246,7 @@ struct TopicsWidgetViewModelTests {
         mockTopicService._stubbedHasCustomisedTopics = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }

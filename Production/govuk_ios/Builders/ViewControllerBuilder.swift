@@ -50,6 +50,7 @@ class ViewControllerBuilder {
             statusBarStyle: .darkContent
         )
         viewController.title = viewModel.title
+
         viewController.navigationItem.largeTitleDisplayMode = .always
         return viewController
     }
@@ -103,7 +104,9 @@ class ViewControllerBuilder {
         )
 
         let view = TopicDetailView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view
+        )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never
         viewController.navigationItem.backButtonTitle = viewModel.title
@@ -121,7 +124,9 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared
         )
         let view = TopicDetailView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view
+        )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never
         return viewController

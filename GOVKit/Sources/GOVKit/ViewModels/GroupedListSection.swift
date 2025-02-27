@@ -59,14 +59,15 @@ public struct LinkRow: GroupedListRow,
     }
 }
 
-public struct NotificationSettingsRow: GroupedListRow,
-                       Identifiable {
+public class NotificationSettingsRow: GroupedListRow,
+                       Identifiable,
+                       ObservableObject{
     public let id: String
     public let title: String
     public let body: String?
     public var isWebLink: Bool = true
     public let action: () -> Void
-    public var isAuthorized: Bool
+    @Published public var isAuthorized: Bool
 
     public init(id: String,
                 title: String,

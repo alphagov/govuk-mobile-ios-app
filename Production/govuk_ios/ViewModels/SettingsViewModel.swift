@@ -12,37 +12,42 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationSettingsAlertText: String { get }
     func handleAlertAction()
     var alertButtonText: String { get }
+    func setNotificationAuthStatus()
 }
 
-// test functions
-
 class SettingsViewModel: SettingsViewModelInterface {
+    @Published var authNotifications: NotificationPermissionState = .notDetermined
     let title: String = String.settings.localized("pageTitle")
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let versionProvider: AppVersionProvider
-    private let configService: AppConfigServiceInterface
     private let deviceInformationProvider: DeviceInformationProviderInterface
     @Published var scrollToTop: Bool = false
     @Published var showNotificationUpsellAlert: Bool = false
     private let dismissAction: () -> Void
-    private var notificationsAuthStatus: NotificationAuthorisationInterface
-
+    private let notificationService: NotificationServiceInterface
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
          versionProvider: AppVersionProvider,
          deviceInformationProvider: DeviceInformationProviderInterface,
-         configService: AppConfigServiceInterface,
-         notificationsAuthStatus: NotificationAuthorisationInterface,
+         notificationService: NotificationServiceInterface,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
-        self.configService = configService
-        self.notificationsAuthStatus = notificationsAuthStatus
         self.dismissAction = dismissAction
+        self.notificationService = notificationService
+        setNotificationAuthStatus()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self, selector: #selector(appMovedToForeground),
+            name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+
+    @objc func appMovedToForeground() {
+        setNotificationAuthStatus()
     }
 
     let notificationSettingsAlertText = String.settings.localized(
@@ -53,12 +58,34 @@ class SettingsViewModel: SettingsViewModelInterface {
         "settingsNotificationsAlertButtonText"
     )
 
+     func setNotificationAuthStatus() {
+         notificationService.returnUserNotificationStatus { [weak self] authSettings in
+             switch authSettings.authorizationStatus {
+             case .authorized:
+                 DispatchQueue.main.async {
+                     self?.authNotifications = .authorized
+                 }
+             case .denied:
+                 DispatchQueue.main.async {
+                     self?.authNotifications = .denied
+                 }
+             default:
+                 self?.authNotifications = .notDetermined
+             }
+         }
+    }
+
+    enum NotificationPermissionState {
+        case notDetermined
+        case denied
+        case authorized
+    }
     func handleAlertAction() {
-        switch notificationsAuthStatus.notificationsPermissionState {
+        switch authNotifications {
         case .authorized, .denied:
-             urlOpener.openSettings()
-            if self.urlOpener.openSettings() == true {
-                self.trackLinkEvent(
+            urlOpener.openSettings()
+            if urlOpener.openSettings() == true {
+                trackLinkEvent(
                     String.settings.localized("openNotificationsSettings"),
                     external: false
                 )
@@ -72,7 +99,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         }
     }
 
-     var hasAcceptedAnalytics: Bool {
+    var hasAcceptedAnalytics: Bool {
         switch analyticsService.permissionState {
         case .denied, .unknown:
             return false
@@ -131,13 +158,12 @@ class SettingsViewModel: SettingsViewModelInterface {
         rows.append(privacyPolicyRow())
         rows.append(accessibilityStatementRow())
         rows.append(openSourceLicenceRow())
-        // if configService.isFeatureEnabled(key: .notifications) {
+        if notificationService.isFeatureEnabled {
             rows.append(notificationsSettingsRow())
-       // }
+        }
         rows.append(termsAndConditionsRow())
         return rows
     }
-
 
     private func privacyPolicyRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("privacyPolicyRowTitle")
@@ -189,20 +215,14 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     private func notificationsSettingsRow() -> GroupedListRow {
-        print(hasAcceptedAnalytics)
         let rowTitle = String.settings.localized("openNotificationsSettings")
         return NotificationSettingsRow(
             id: "settings.notifications.row",
             title: rowTitle,
             body: nil,
-            isAuthorized: notificationsAuthStatus.notificationsPermissionState == .authorized
-            ? true
-            : false,
+            isAuthorized: authNotifications == .authorized ? true : false,
             action: { [weak self] in
-                if self?.notificationsAuthStatus.notificationsPermissionState == .notDetermined {
-                    self?.handleAlertAction()
-                }
-                self?.showNotificationUpsellAlert = true
+                self?.showNotificationUpsellAlert.toggle()
             }
         )
     }

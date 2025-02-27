@@ -10,6 +10,8 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     func requestPermissions(completion: @escaping () -> Void)
     var shouldRequestPermission: Bool { get async }
     var isFeatureEnabled: Bool { get }
+    func returnUserNotificationStatus(
+        completionHandler: @escaping (UNNotificationSettings) -> Void)
 }
 
 class NotificationService: NotificationServiceInterface {
@@ -30,6 +32,12 @@ class NotificationService: NotificationServiceInterface {
         )
     }
 
+
+    func returnUserNotificationStatus(
+        completionHandler: @escaping (UNNotificationSettings) -> Void) {
+        notificationCenter.returnAuthorisationStatus(completionHandler: completionHandler)
+    }
+
     var shouldRequestPermission: Bool {
         get async {
             let switches = (
@@ -41,7 +49,7 @@ class NotificationService: NotificationServiceInterface {
     }
 
     var isFeatureEnabled: Bool {
-        false
+        true
     }
 
     func requestPermissions(completion: @escaping () -> Void) {

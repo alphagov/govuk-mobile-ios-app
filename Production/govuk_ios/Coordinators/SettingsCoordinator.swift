@@ -6,7 +6,8 @@ class SettingsCoordinator: TabItemCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
     private let settingsViewModel: any SettingsViewModelInterface
-    private let configService: AppConfigServiceInterface
+    private let notificationService: NotificationServiceInterface
+
     private let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,
@@ -14,19 +15,18 @@ class SettingsCoordinator: TabItemCoordinator {
          deeplinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
          deviceInformationProvider: DeviceInformationProviderInterface,
-         configService: AppConfigServiceInterface,
+         notificationService: NotificationServiceInterface,
          dismissAction: @escaping () -> Void) {
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
-        self.configService = configService
         self.dismissAction = dismissAction
+        self.notificationService = notificationService
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,
             versionProvider: Bundle.main,
             deviceInformationProvider: deviceInformationProvider,
-            configService: configService,
-            notificationsAuthStatus: NotificationsAuthStatus(),
+            notificationService: notificationService,
             dismissAction: dismissAction
         )
 

@@ -37,7 +37,7 @@ class CoordinatorBuilder {
             deeplinkStore: DeeplinkDataStore.settings(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
             deviceInformationProvider: DeviceInformationProvider(),
-            configService: container.appConfigService.resolve(),
+            notificationService: container.notificationService.resolve(),
             dismissAction: dissmissAction
         )
     }

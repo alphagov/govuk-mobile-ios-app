@@ -32,7 +32,8 @@ class ViewControllerBuilder {
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
             searchAction: searchAction,
-            recentActivityAction: recentActivityAction
+            recentActivityAction: recentActivityAction,
+            urlOpener: UIApplication.shared
         )
         return HomeViewController(
             viewModel: viewModel
@@ -65,10 +66,10 @@ class ViewControllerBuilder {
             activityService: Container.shared.activityService.resolve(),
             urlOpener: UIApplication.shared
         )
-        return SearchViewController(
-            viewModel: viewModel,
-            dismissAction: dismissAction
-        )
+        return UIViewController()
+//        return SearchViewController(
+//            viewModel: viewModel
+//        )
     }
 
     @MainActor

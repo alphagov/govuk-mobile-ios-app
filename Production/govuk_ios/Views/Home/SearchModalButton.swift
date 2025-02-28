@@ -45,12 +45,12 @@ final public class SearchModalButton: UIButton {
         setTitle(buttonTitle, for: .normal)
         setTitleColor(GOVUKColors.text.secondary, for: .normal)
         titleLabel?.font = UIFont.govUK.body
-        tintColor = GOVUKColors.text.secondary
+        tintColor = UIColor.govUK.text.secondary
         configuration?.image = image?.applyingSymbolConfiguration(.init(pointSize: 14))
         configuration?.imagePadding = 5
 
         contentHorizontalAlignment = .left
-        backgroundColor = GOVUKColors.fills.surfaceSearchBox
+        backgroundColor = .white
         layer.cornerRadius = 10
     }
 }

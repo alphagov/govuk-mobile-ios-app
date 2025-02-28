@@ -1,19 +1,29 @@
 import Foundation
 import UIKit
 import GOVKit
+import RecentActivity
 
 struct HomeViewModel {
+    @Inject(\.searchService) private var searchService: SearchServiceInterface
+    @Inject(\.activityService) private var activityService: ActivityServiceInterface
+
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let feedbackAction: () -> Void
     let searchAction: () -> Void
     let recentActivityAction: () -> Void
+    let urlOpener: URLOpener
+    lazy var searchViewModel: SearchViewModel = SearchViewModel(
+        analyticsService: analyticsService,
+        searchService: searchService,
+        activityService: activityService,
+        urlOpener: urlOpener
+    )
 
     var widgets: [WidgetView] {
         [
 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
-            searchWidget,
             recentActivityWidget,
             topicsWidget
         ].compactMap { $0 }

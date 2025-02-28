@@ -1,4 +1,3 @@
-// swiftlint:disable file_length
 import UIKit
 import UIComponents
 import GOVKit
@@ -10,7 +9,7 @@ private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSection, SearchI
 class SearchViewController: BaseViewController,
                             TrackableScreen {
     private let viewModel: SearchViewModel
-    private let dismissAction: () -> Void
+    private let searchBar: UISearchBar
 
     private lazy var errorView: UIView = {
         self.appErrorViewController.view
@@ -32,26 +31,6 @@ class SearchViewController: BaseViewController,
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .govUK.fills.surfaceModal
         return localController
-    }()
-
-    private lazy var searchBar: UISearchBar = {
-        let localSearchBar = UISearchBar()
-
-        let placeholderText = String.search.localized("searchBarPlaceholder")
-        localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceSearchBox
-        localSearchBar.enablesReturnKeyAutomatically = false
-        localSearchBar.translatesAutoresizingMaskIntoConstraints = false
-        localSearchBar.backgroundImage = UIImage()
-        localSearchBar.searchTextField.attributedPlaceholder = NSAttributedString(
-            string: placeholderText,
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.govUK.text.secondary,
-                NSAttributedString.Key.font: UIFont.govUK.body
-            ]
-        )
-        localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
-
-        return localSearchBar
     }()
 
     private let tableViewHeader: UIView = {
@@ -110,10 +89,9 @@ class SearchViewController: BaseViewController,
 
     var trackingName: String { "Search" }
 
-    init(viewModel: SearchViewModel,
-         dismissAction: @escaping () -> Void) {
+    init(viewModel: SearchViewModel, searchBar: UISearchBar) {
         self.viewModel = viewModel
-        self.dismissAction = dismissAction
+        self.searchBar = searchBar
         super.init(analyticsService: viewModel.analyticsService)
     }
 
@@ -128,29 +106,15 @@ class SearchViewController: BaseViewController,
         searchBar.searchTextField.delegate = self
         setupTableViewDelegate()
 
-        sheetPresentationController?.prefersGrabberVisible = true
-
         configureUI()
         configureConstraints()
         configureErrorConstraints()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        configureNavBar(animated: animated)
-    }
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        searchBar.becomeFirstResponder()
     }
 
     private func configureUI() {
         title = String.search.localized("pageTitle")
         view.backgroundColor = GOVUKColors.fills.surfaceModal
 
-        view.addSubview(searchBar)
         view.addSubview(tableView)
         view.addSubview(errorScrollView)
         errorScrollView.addSubview(errorView)
@@ -165,29 +129,11 @@ class SearchViewController: BaseViewController,
         tableView.isHidden = !viewModel.historyIsEmpty
     }
 
-    // swiftlint:disable:next function_body_length
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: -10
-            ),
-            searchBar.rightAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.rightAnchor,
-                constant: -10
-            ),
-            searchBar.leftAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leftAnchor,
-                constant: 10
-            ),
-
-            searchBar.heightAnchor.constraint(
-                greaterThanOrEqualToConstant: 36
-            ),
-
             tableView.topAnchor.constraint(
-                equalTo: searchBar.bottomAnchor,
-                constant: 6
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 16
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor
@@ -198,8 +144,8 @@ class SearchViewController: BaseViewController,
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             searchSuggestionsViewController.view.topAnchor.constraint(
-                equalTo: searchBar.bottomAnchor,
-                constant: 6
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 16
             ),
             searchSuggestionsViewController.view.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,
@@ -214,8 +160,8 @@ class SearchViewController: BaseViewController,
             ),
 
             searchHistoryViewController.view.topAnchor.constraint(
-                equalTo: searchBar.bottomAnchor,
-                constant: 6
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 16
             ),
             searchHistoryViewController.view.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,
@@ -234,13 +180,14 @@ class SearchViewController: BaseViewController,
     private func configureErrorConstraints() {
         NSLayoutConstraint.activate([
             errorScrollView.topAnchor.constraint(
-                equalTo: searchBar.bottomAnchor, constant: 24
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 24
             ),
             errorScrollView.leftAnchor.constraint(
-                equalTo: searchBar.leftAnchor
+                equalTo: view.safeAreaLayoutGuide.leftAnchor
             ),
             errorScrollView.rightAnchor.constraint(
-                equalTo: searchBar.rightAnchor
+                equalTo: view.safeAreaLayoutGuide.rightAnchor
             ),
             errorScrollView.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
@@ -264,42 +211,7 @@ class SearchViewController: BaseViewController,
         ])
     }
 
-    private func configureNavBar(animated: Bool) {
-        let barButton = UIBarButtonItem.cancel(
-            target: self,
-            action: #selector(cancelButtonPressed)
-        )
-        navigationItem.setLeftBarButton(
-            barButton,
-            animated: animated
-        )
-
-        let barButtonAppearance = UIBarButtonItemAppearance()
-        barButtonAppearance.normal.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.govUK.text.link
-        ]
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.govUK.bodySemibold
-        ]
-        navBarAppearance.configureWithTransparentBackground()
-        navBarAppearance.backgroundColor = UIColor.govUK.fills.surfaceModal
-        navBarAppearance.buttonAppearance = barButtonAppearance
-        navBarAppearance.backButtonAppearance = barButtonAppearance
-
-        navigationItem.standardAppearance = navBarAppearance
-        navigationItem.compactAppearance = navBarAppearance
-        navigationItem.scrollEdgeAppearance = navBarAppearance
-    }
-
-    @objc
-    private func cancelButtonPressed(_ sender: UIBarItem) {
-        dismissAction()
-    }
-
-    private func didInvokeSearch(using type: SearchInvocationType) {
-        searchBar.resignFirstResponder()
-
+    func didInvokeSearch(using type: SearchInvocationType) {
         let searchText = searchBar.text
         viewModel.search(
             text: searchText,
@@ -375,13 +287,27 @@ class SearchViewController: BaseViewController,
         super.traitCollectionDidChange(previousTraitCollection)
         errorView.invalidateIntrinsicContentSize()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        clearResults()
+    }
+
+    func clearResults() {
+        viewModel.clearResults()
+        reloadSnapshot()
+        searchHistoryViewController.reloadSnapshot()
+        tableView.isHidden = true
+        searchSuggestionsViewController.hide()
+        searchHistoryViewController.show()
+    }
 }
 
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         clearResults()
         return true
-    }
+     }
 
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
@@ -428,16 +354,8 @@ extension SearchViewController: UITextFieldDelegate {
             searchSuggestionsViewController.reloadSnapshot()
         }
     }
-
-    private func clearResults() {
-        viewModel.clearResults()
-        reloadSnapshot()
-        searchHistoryViewController.reloadSnapshot()
-        tableView.isHidden = true
-        searchSuggestionsViewController.hide()
-        searchHistoryViewController.show()
-    }
 }
+
 
 extension SearchViewController: UITableViewDelegate {
     func setupTableViewDelegate() {
@@ -463,4 +381,3 @@ enum SearchSection {
 enum SearchInvocationType: String {
     case autocomplete, history, typed
 }
-// swiftlint:enable file_length

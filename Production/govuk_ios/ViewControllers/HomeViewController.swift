@@ -2,41 +2,41 @@ import Foundation
 import UIKit
 import GOVKit
 
-class HomeViewController: BaseViewController,
-                          UIScrollViewDelegate {
-    private lazy var navigationBar: NavigationBar = {
-        let localView = NavigationBar()
-        localView.translatesAutoresizingMaskIntoConstraints = false
-        return localView
-    }()
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        return stackView
-    }()
-    private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.contentInset.bottom = 32
-        scrollView.contentInsetAdjustmentBehavior = .always
-        return scrollView
-    }()
-    private let crownLogoImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "crownLogo"))
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+class HomeViewController: BaseViewController {
+    private var searchViewController: UIViewController!
+    private var homeContentViewController: UIViewController!
+    private var viewModel: HomeViewModel
+    private lazy var logoImageView: UIImageView = {
+        let uiImageView = UIImageView(image: .homeLogo)
+        uiImageView.translatesAutoresizingMaskIntoConstraints = false
+        uiImageView.isAccessibilityElement = true
+        uiImageView.accessibilityLabel = String.home.localized("logoAccessibilityTitle")
+        uiImageView.accessibilityTraits = .header
 
-    private let viewModel: HomeViewModel
+        return uiImageView
+    }()
+    private lazy var searchBar: UISearchBar = {
+        let localSearchBar = UISearchBar()
+        localSearchBar.searchTextField.backgroundColor = .white
+        localSearchBar.enablesReturnKeyAutomatically = false
+        localSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        localSearchBar.backgroundImage = UIImage()
+        localSearchBar.searchTextField.attributedPlaceholder = NSAttributedString(
+            string: String.search.localized("searchBarPlaceholder"),
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.govUK.text.secondary,
+                NSAttributedString.Key.font: UIFont.govUK.body
+            ]
+        )
+        localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
+        localSearchBar.delegate = self
+
+        return localSearchBar
+    }()
 
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(analyticsService: viewModel.analyticsService)
-        title = String.home.localized("pageTitle")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -52,48 +52,94 @@ class HomeViewController: BaseViewController,
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        scrollView.delegate = self
+        configureContentControllers()
     }
 
+    private func configureContentControllers() {
+        searchViewController = SearchViewController(
+            viewModel: viewModel.searchViewModel,
+            searchBar: searchBar
+        )
+        homeContentViewController = HomeContentViewController(
+            viewModel: viewModel
+        )
+        displayContentController(homeContentViewController!)
+    }
+
+
     private func configureUI() {
-        navigationItem.largeTitleDisplayMode = .never
+        view.addSubview(logoImageView)
+        view.addSubview(searchBar)
+
+        navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
-        scrollView.backgroundColor = UIColor.govUK.fills.surfaceBackground
-        view.addSubview(scrollView)
-        view.addSubview(navigationBar)
-        scrollView.addSubview(stackView)
-        addWidgets()
+    }
+
+    private func displayContentController(_ content: UIViewController) {
+        addChild(content)
+        view.addSubview(content.view)
+        content.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            content.view.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor
+            ),
+            content.view.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor
+            ),
+            content.view.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor,
+                constant: 8
+            ),
+            content.view.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            )
+        ])
+        content.didMove(toParent: self)
+    }
+
+    private func removeContentController(_ content: UIViewController) {
+        content.willMove(toParent: nil)
+        content.view.removeFromSuperview()
+        content.removeFromParent()
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            logoImageView.centerXAnchor.constraint(
+                equalTo: view.centerXAnchor
+            ),
+            logoImageView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 16
+            ),
 
-            scrollView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            stackView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor)
+            searchBar.topAnchor.constraint(
+                equalTo: logoImageView.bottomAnchor,
+                constant: 16
+            ),
+            searchBar.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                constant: -8
+            ),
+            searchBar.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                constant: 8
+            )
         ])
-    }
-
-    private func addWidgets() {
-        viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
-        if let lastWidget = stackView.arrangedSubviews.last {
-            stackView.setCustomSpacing(32, after: lastWidget)
-        }
-        stackView.addArrangedSubview(crownLogoImageView)
     }
 }
 
-extension HomeViewController: TrackableScreen {
-    var trackingName: String { "Homepage" }
-    var trackingTitle: String? { "Homepage" }
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        (searchBar.value(forKey: "cancelButton") as? UIButton)?.tintColor = UIColor.white
+        displayContentController(searchViewController)
+        return true
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        displayContentController(homeContentViewController)
+    }
 }

@@ -5,7 +5,7 @@ import RecentActivity
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?
-    var commerceItems = [ECommerceItem]()
+    var commerceItems = [TopicCommerceItem]()
 
     private var topicDetail: TopicDetailResponse?
     private var topic: DisplayableTopic
@@ -215,7 +215,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     func trackEcommerce() {
         let eCommerceEvent = AppEvent.viewItemList(
-            name: topic.title,
+            name: "Topics",
+            id: topic.title,
             items: commerceItems
         )
         analyticsService.track(event: eCommerceEvent)
@@ -255,7 +256,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     private func createSubtopicCommerceItem(_ subtopic: TopicDetailResponse.Subtopic,
                                             category: String) {
-        let appEventItem = ECommerceItem(
+        let appEventItem = TopicCommerceItem(
             name: subtopic.title,
             category: category,
             index: commerceItems.count + 1,
@@ -267,7 +268,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     private func createSeeAllCommerceItem(_ rowTitle: String,
                                           category: String) {
-        let appEventItem = ECommerceItem(
+        let appEventItem = TopicCommerceItem(
             name: rowTitle,
             category: category,
             index: commerceItems.count + 1,

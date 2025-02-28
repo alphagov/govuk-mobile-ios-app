@@ -125,6 +125,7 @@ class TopicsWidgetView: UIView {
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
+            self.viewModel.trackECommerce()
             self.showAllTopicsButton()
             self.titleLabel.text = self.viewModel.widgetTitle
         }
@@ -225,6 +226,7 @@ class TopicsWidgetView: UIView {
             topic: topic,
             tapAction: { [weak self] in
                 self?.viewModel.topicAction(topic)
+                self?.viewModel.trackECommerceSelection(topic.title)
             }
         )
         let topicCard = TopicCard(viewModel: topicCardModel)

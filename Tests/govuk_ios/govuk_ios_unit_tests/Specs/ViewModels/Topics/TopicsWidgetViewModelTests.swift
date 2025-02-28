@@ -257,6 +257,43 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
+    func trackEcommerce_createsExpectedEvent() async throws {
+        mockTopicService._stubbedHasCustomisedTopics = true
+
+        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
+        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
+
+        let allOne = Topic.arrange(context: coreData.backgroundContext)
+        let allTwo = Topic.arrange(context: coreData.backgroundContext)
+
+        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            topicAction: { _ in },
+            editAction: { },
+            allTopicsAction: { }
+        )
+
+        let trackedTopic = try #require(sut.displayedTopics.first?.title)
+        sut.trackECommerce()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.name == "view_item_list")
+        let parameters = try #require(mockAnalyticsService._trackedEvents.first?.params as? [String: Any])
+        #expect(parameters["item_list_id"] as? String == "Homepage")
+        #expect(parameters["item_list_name"] as? String == "Homepage")
+        #expect(parameters["results"] as? Int == 2)
+        let items = try #require((parameters["items"] as? [[String: String]]))
+        #expect(items.count == 2)
+        let item = try #require(items.first)
+        #expect(item["item_name"] == trackedTopic)
+        #expect(item["index"] == "1")
+        #expect(items.last?["index"] == "2")
+    }
+
+    @Test
     func trackEcommerceSelection_createsExpectedEvent() async throws {
         mockTopicService._stubbedHasCustomisedTopics = true
 
@@ -279,14 +316,15 @@ struct TopicsWidgetViewModelTests {
 
         let trackedTopic = try #require(sut.displayedTopics.first?.title)
         sut.trackECommerceSelection(trackedTopic)
-        print("Stop")
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.name == "select_item")
         let parameters = try #require(mockAnalyticsService._trackedEvents.first?.params as? [String: Any])
         #expect(parameters["item_list_id"] as? String == "Homepage")
         #expect(parameters["item_list_name"] as? String == "Homepage")
         #expect(parameters["results"] as? Int == 2)
-        let item = try #require((parameters["items"] as? [[String: String]])?.first)
+        let items = try #require((parameters["items"] as? [[String: String]]))
+        #expect(items.count == 1)
+        let item = try #require(items.first)
         #expect(item["item_name"] == trackedTopic)
         #expect(item["index"] == "1")
     }

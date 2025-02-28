@@ -20,7 +20,6 @@ class HomeViewController: BaseViewController,
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.contentInset.top = navigationBar.sittingHeight + 16
         scrollView.contentInset.bottom = 32
         scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
@@ -72,21 +71,17 @@ class HomeViewController: BaseViewController,
             navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             stackView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor)
         ])
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        navigationBar.handleScroll(scrollView: scrollView)
     }
 
     private func addWidgets() {
@@ -101,15 +96,4 @@ class HomeViewController: BaseViewController,
 extension HomeViewController: TrackableScreen {
     var trackingName: String { "Homepage" }
     var trackingTitle: String? { "Homepage" }
-}
-
-extension HomeViewController: ContentScrollable {
-    func scrollToTop() {
-        scrollView.setContentOffset(
-            CGPoint(
-                x: 0,
-                y: -(navigationBar.sittingHeight + 16)
-            ),
-            animated: true)
-    }
 }

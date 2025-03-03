@@ -9,6 +9,8 @@ class HomeCoordinator: TabItemCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let configService: AppConfigServiceInterface
     private let topicsService: TopicsServiceInterface
+    private let notificationService: NotificationServiceInterface
+
     private let deviceInformationProvider: DeviceInformationProviderInterface
 
     init(navigationController: UINavigationController,
@@ -18,6 +20,7 @@ class HomeCoordinator: TabItemCoordinator {
          analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
          topicsService: TopicsServiceInterface,
+         notificationService: NotificationServiceInterface,
          deviceInformationProvider: DeviceInformationProviderInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
@@ -25,6 +28,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.analyticsService = analyticsService
         self.configService = configService
         self.topicsService = topicsService
+        self.notificationService = notificationService
         self.deviceInformationProvider = deviceInformationProvider
         super.init(navigationController: navigationController)
     }
@@ -66,10 +70,7 @@ class HomeCoordinator: TabItemCoordinator {
                 text: String.home.localized("feedbackWidgetTitle"),
                 external: true
             )
-            let urlOpener: URLOpener = UIApplication.shared
-            urlOpener.openIfPossible(
-                self.deviceInformationProvider.helpAndFeedbackURL(versionProvider: Bundle.main)
-            )
+            self.notificationService.requestPermissions { }
         }
     }
 

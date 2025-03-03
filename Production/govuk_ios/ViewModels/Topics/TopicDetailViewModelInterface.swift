@@ -4,11 +4,12 @@ import GOVKit
 
 protocol TopicDetailViewModelInterface: ObservableObject {
     var title: String { get }
+    var isLoaded: Bool { get }
     var description: String? { get }
     var sections: [GroupedListSection] { get }
     var errorViewModel: AppErrorViewModel? { get }
-    func trackScreen(screen: TrackableScreen)
     var commerceItems: [TopicCommerceItem] { get set }
+    func trackScreen(screen: TrackableScreen)
     func trackEcommerce()
 }
 

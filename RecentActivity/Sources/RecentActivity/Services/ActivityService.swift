@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import GOVKit
 
 public protocol ActivityServiceInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
@@ -9,6 +10,12 @@ public protocol ActivityServiceInterface {
 
 public struct ActivityService: ActivityServiceInterface {
     private let repository: ActivityRepositoryInterface
+
+    public static let shared = ActivityService(
+        repository: ActivityRepository(
+            coreData: CoreDataRepository.govUK
+        )
+    )
 
     public init(repository: ActivityRepositoryInterface) {
         self.repository = repository

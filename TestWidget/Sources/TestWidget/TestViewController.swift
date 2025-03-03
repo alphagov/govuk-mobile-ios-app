@@ -91,7 +91,7 @@ class TestViewController: UIViewController,
 
     init() {
         coreData = TestWidgetRepository().coreData
-        activityService = ActivityService(repository: Container.shared.activityRepository.resolve())
+        activityService = ActivityService.shared
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -9,7 +9,12 @@ private typealias Snapshot = NSDiffableDataSourceSnapshot<RecentActivitySection,
 
 // swiftlint:disable:next type_body_length
 public final class RecentActivityListViewController: BaseViewController {
-    private lazy var tableView: UITableView = UITableView.groupedList
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView.groupedList
+        tableView.contentInset.top = 16
+        return tableView
+    }()
+
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     private lazy var dataSource: DataSource = {
         let localDataSource = DataSource(
@@ -20,23 +25,10 @@ public final class RecentActivityListViewController: BaseViewController {
         return localDataSource
     }()
 
-    private lazy var titleView: UILabel = {
-        let localLabel = UILabel()
-        localLabel.translatesAutoresizingMaskIntoConstraints = false
-        localLabel.adjustsFontForContentSizeCategory = true
-        localLabel.font = .govUK.largeTitleBold
-        localLabel.numberOfLines = 0
-        localLabel.textAlignment = .left
-        localLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        localLabel.text = viewModel.pageTitle
-        localLabel.accessibilityTraits = .header
-        return localLabel
-    }()
-
-    private lazy var dividerView: DividerView = {
-        let localView = DividerView()
+    private lazy var titleView: UIView = {
+        let localView = GovUKHeaderView()
+        localView.configure(titleText: viewModel.pageTitle)
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.isHidden = true
         return localView
     }()
 
@@ -137,7 +129,6 @@ public final class RecentActivityListViewController: BaseViewController {
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(titleView)
-        view.addSubview(dividerView)
         view.addSubview(tableView)
         view.addSubview(informationScrollView)
         view.addSubview(editingToolbar)
@@ -156,23 +147,12 @@ public final class RecentActivityListViewController: BaseViewController {
     private func configureTitleConstraints() {
         NSLayoutConstraint.activate([
             titleView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 4
+                equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
             titleView.leadingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leadingAnchor
-            ),
-            titleView.trailingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.trailingAnchor
-            ),
-            dividerView.topAnchor.constraint(
-                equalTo: titleView.bottomAnchor,
-                constant: 8
-            ),
-            dividerView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor
             ),
-            dividerView.trailingAnchor.constraint(
+            titleView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor
             )
         ])
@@ -181,7 +161,7 @@ public final class RecentActivityListViewController: BaseViewController {
     private func configureTableConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(
-                equalTo: dividerView.bottomAnchor
+                equalTo: titleView.bottomAnchor
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.rightAnchor
@@ -394,12 +374,6 @@ extension RecentActivityListViewController: UITableViewDelegate {
         else { return }
         viewModel.removeEdit(item: item)
         configureToolbarItems()
-    }
-}
-
-extension RecentActivityListViewController: UIScrollViewDelegate {
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        dividerView.isHidden = scrollView.contentOffset.y < 1.0
     }
 }
 

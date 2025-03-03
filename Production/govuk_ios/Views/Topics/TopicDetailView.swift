@@ -10,24 +10,54 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     }
 
     var body: some View {
-        ZStack {
-            Color(UIColor.govUK.fills.surfaceBackground)
-                .ignoresSafeArea()
-            ScrollView {
-                VStack {
-                    titleView
-                    if let errorViewModel = viewModel.errorViewModel {
+        VStack {
+            if let errorViewModel = viewModel.errorViewModel {
+                ScrollView {
+                    VStack {
+                        titleView
                         AppErrorView(viewModel: errorViewModel)
                             .padding(.top, 12)
                         Spacer()
-                    } else {
+                    }
+                }
+                .padding(.bottom, 16)
+            } else {
+                ScrollView {
+                    VStack {
+                        titleView
                         topicDetails
                     }
                 }
+                .padding(.bottom, 16)
+                .background(
+                    Gradient(stops: [
+                        .init(
+                            color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                            location: 0),
+                        .init(
+                            color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                            location: 0.33),
+                        .init(
+                            color: .clear,
+                            location: 0.33),
+                        .init(
+                            color: .clear,
+                            location: 1)])
+                )
             }
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
+            // isLoaded == true on back navigation, otherwise e-commerce
+            // triggered in .onChange
+            if viewModel.isLoaded {
+                viewModel.trackEcommerce()
+            }
+        }
+        .onChange(of: viewModel.isLoaded) { isLoaded in
+            if isLoaded {
+                viewModel.trackEcommerce()
+            }
         }
     }
 
@@ -37,10 +67,12 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 .font(.govUK.largeTitleBold)
                 .multilineTextAlignment(.leading)
                 .accessibility(addTraits: .isHeader)
+                .foregroundColor(Color(UIColor.govUK.text.header))
             Spacer()
         }
         .padding(.leading, 16)
         .padding(.bottom, 4)
+        .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
     }
 
     private var topicDetails: some View {
@@ -55,6 +87,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             )
             .padding(.top, 16)
         }
+        .background(Color(UIColor.govUK.fills.surfaceBackground))
     }
 
     private func descripitonView(description: String) -> some View {
@@ -62,6 +95,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Text(description)
                 .font(.govUK.subheadline)
                 .multilineTextAlignment(.leading)
+                .padding(.top, 16)
                 .padding(.horizontal, 18)
             Spacer()
         }

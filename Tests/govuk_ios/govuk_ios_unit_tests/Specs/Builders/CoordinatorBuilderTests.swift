@@ -50,6 +50,53 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
+    func appUnavailable_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.appUnavailable(
+            navigationController: MockNavigationController(),
+            launchResponse: .arrangeAvailable,
+            dismissAction: {}
+        )
+
+        #expect(coordinator is AppUnavailableCoordinator)
+    }
+
+    @Test
+    func appRecommendUpdate_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.appRecommendUpdate(
+            navigationController: MockNavigationController(),
+            launchResponse: .arrangeAvailable,
+            dismissAction: {}
+        )
+
+        #expect(coordinator is AppRecommendUpdateCoordinator)
+    }
+
+    @Test
+    func appForcedUpdate_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.appForcedUpdate(
+            navigationController: MockNavigationController(),
+            launchResponse: .arrangeAvailable,
+            dismissAction: {}
+        )
+
+        #expect(coordinator is AppForcedUpdateCoordinator)
+    }
+
+    @Test
+    func analyticsConsent_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.analyticsConsent(
+            navigationController: MockNavigationController(),
+            dismissAction: {}
+        )
+
+        #expect(coordinator is AnalyticsConsentCoordinator)
+    }
+
+    @Test
     func tab_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
@@ -141,5 +188,17 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is TopicOnboardingCoordinator)
+    }
+
+    @Test
+    func notificationOnboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.notificationOnboarding(
+            navigationController: mockNavigationController,
+            completion: { }
+        )
+        
+        #expect(coordinator is NotificationOnboardingCoordinator)
     }
 }

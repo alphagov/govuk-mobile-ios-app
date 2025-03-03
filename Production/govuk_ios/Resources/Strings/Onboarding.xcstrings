@@ -56,6 +56,28 @@
         }
       }
     },
+    "continueButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "doneButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
     "dontAllowAnalyticsButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -63,6 +85,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Don't allow statistics sharing"
+          }
+        }
+      }
+    },
+    "pagesYouveVisitedBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pages you’ve visited are saved so you can easily return to them"
+          }
+        }
+      }
+    },
+    "pagesYouveVisitedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quickly get back to previous pages"
+          }
+        }
+      }
+    },
+    "personalisationBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access government services and information on your phone using the GOV.UK app"
+          }
+        }
+      }
+    },
+    "personalisationTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get things done on the go"
+          }
+        }
+      }
+    },
+    "primaryButtonAccessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to the next slide"
+          }
+        }
+      }
+    },
+    "primaryButtonLastSlideAccessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish onboarding"
           }
         }
       }
@@ -96,6 +184,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Read more about this in the privacy notice ↗"
+          }
+        }
+      }
+    },
+    "secondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        }
+      }
+    },
+    "skipButtonAcessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip onboarding"
+          }
+        }
+      }
+    },
+    "tailoredToYouBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose topics that are relevant to you so you can find what you need faster"
+          }
+        }
+      }
+    },
+    "tailoredToYouTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tailored to you"
           }
         }
       }

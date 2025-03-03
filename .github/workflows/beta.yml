@@ -1,12 +1,13 @@
 name: Beta
 
 on:
+  workflow_call:
   push:
     branches:
       - 'release/**'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}-beta
   cancel-in-progress: true
 
 jobs:
@@ -23,6 +24,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
+    environment: production
 
     steps:
       - name: Checkout
@@ -40,7 +42,6 @@ jobs:
         run: xcodes select
 
       - name: Deploy
-        environment: production
         run: bundle exec fastlane beta
         env:
           APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}

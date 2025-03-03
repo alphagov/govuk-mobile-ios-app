@@ -28,8 +28,11 @@ final class UserFeedbackView: UIControl {
     }()
 
     private let titleImageView: UIImageView = {
-        let image = UIImage(named: "recent_activity_cell_chevron")
+        let image = UIImage(systemName: "chevron.forward")
+        let config = UIImage.SymbolConfiguration(pointSize: 12)
         let imageView = UIImageView(image: image)
+        imageView.preferredSymbolConfiguration = config
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         imageView.contentMode = .scaleAspectFit
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return imageView
@@ -63,9 +66,12 @@ final class UserFeedbackView: UIControl {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            titleImageView.widthAnchor.constraint(equalToConstant: 12)
+            stackView.topAnchor.constraint(
+                equalTo: topAnchor, constant: 8
+            ),
+            stackView.bottomAnchor.constraint(
+                equalTo: bottomAnchor, constant: -8
+            )
         ])
     }
 

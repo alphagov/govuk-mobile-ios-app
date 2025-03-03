@@ -2,10 +2,11 @@ import UIKit
 import UIComponents
 import GOVKit
 
+// swiftlint:disable:next type_body_length
 class TopicsWidgetView: UIView {
     let viewModel: TopicsWidgetViewModel
 
-    private var rowCount = 2
+    private var columnCount = 2
     private lazy var allTopicsButton: GOVUKButton = {
         var buttonViewModel: GOVUKButton.ButtonViewModel {
             .init(
@@ -124,6 +125,8 @@ class TopicsWidgetView: UIView {
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
+            self.viewModel.initialLoadComplete = true
+            self.viewModel.trackECommerce()
             self.showAllTopicsButton()
             self.titleLabel.text = self.viewModel.widgetTitle
         }
@@ -180,7 +183,7 @@ class TopicsWidgetView: UIView {
     private func updateTopics(_ topics: [Topic]) {
         noTopicsLabel.isHidden = viewModel.fetchTopicsError || topics.count > 0
         cardStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        for index in 0..<topics.count where index % rowCount == 0 {
+        for index in 0..<topics.count where index % columnCount == 0 {
             let rowStack = createNewRow(startingAt: index, of: topics)
             rowStack.translatesAutoresizingMaskIntoConstraints = false
             cardStackView.addArrangedSubview(rowStack)
@@ -198,7 +201,7 @@ class TopicsWidgetView: UIView {
         let firstCard = createTopicCard(for: topics[startIndex])
         rowStack.addArrangedSubview(firstCard)
 
-        for index in (startIndex + 1)..<(startIndex + rowCount) {
+        for index in (startIndex + 1)..<(startIndex + columnCount) {
             if index <= topics.count - 1 {
                 let card = createTopicCard(for: topics[index])
                 rowStack.addArrangedSubview(card)
@@ -224,6 +227,7 @@ class TopicsWidgetView: UIView {
             topic: topic,
             tapAction: { [weak self] in
                 self?.viewModel.topicAction(topic)
+                self?.viewModel.trackECommerceSelection(topic.title)
             }
         )
         let topicCard = TopicCard(viewModel: topicCardModel)
@@ -237,12 +241,50 @@ class TopicsWidgetView: UIView {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        let sizeClass = UITraitCollection.current.verticalSizeClass
-        if sizeClass != previousTraitCollection?.verticalSizeClass {
-            rowCount = sizeClass == .regular ? 2 : 4
+
+        let contentSizeChanged = traitCollection.preferredContentSizeCategory !=
+        previousTraitCollection?.preferredContentSizeCategory
+        let sizeClassChanged = traitCollection.verticalSizeClass !=
+        previousTraitCollection?.verticalSizeClass
+        setColumnCount(viewModel.displayedTopics)
+        if sizeClassChanged || contentSizeChanged {
             updateTopics(viewModel.displayedTopics)
         }
+
         errorView.invalidateIntrinsicContentSize()
+    }
+
+    private func setColumnCount(_ topics: [Topic]) {
+        layoutIfNeeded()
+        let sizeClass = UITraitCollection.current.verticalSizeClass
+        let defaultColumnCount = sizeClass == .regular ? 2 : 4
+        // Horizontal card space not available to title + spacing between cards
+        let unavailableTitleCardWidth = (50 * defaultColumnCount) + (16 * (defaultColumnCount - 1))
+        let availableTitleCardWidth = (bounds.width - CGFloat(unavailableTitleCardWidth)) /
+        CGFloat(defaultColumnCount)
+        let reduceColumnCount = shouldReduceColumnCount(
+            for: availableTitleCardWidth, topics: topics
+        )
+
+        if sizeClass == .regular {
+            columnCount = reduceColumnCount ? 1 : 2
+        } else {
+            columnCount = reduceColumnCount ? 2 : 4
+        }
+    }
+
+    private func shouldReduceColumnCount(for availableTitleCardWidth: CGFloat,
+                                         topics: [Topic]) -> Bool {
+        let longestWord = topics.flatMap {
+            $0.title.components(separatedBy: .whitespacesAndNewlines)
+        }.max { $0.count < $1.count } ?? ""
+        let wordSize = (longestWord as NSString).size(
+            withAttributes: [.font: UIFont.govUK.body]
+        )
+        if wordSize.width > availableTitleCardWidth {
+            return true
+        }
+        return false
     }
 
     private func showAllTopicsButton() {

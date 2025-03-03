@@ -2,17 +2,11 @@ import SwiftUI
 import GOVKit
 import RecentActivity
 
-protocol TopicDetailViewModelInterface: ObservableObject {
-    var title: String { get }
-    var description: String? { get }
-    var sections: [GroupedListSection] { get }
-    var errorViewModel: AppErrorViewModel? { get }
-    func trackScreen(screen: TrackableScreen)
-}
-
+// swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?
+    var commerceItems = [TopicCommerceItem]()
 
     private var topicDetail: TopicDetailResponse?
     private var topic: DisplayableTopic
@@ -23,6 +17,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private let urlOpener: URLOpener
     private let subtopicAction: (DisplayableTopic) -> Void
     private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+
+    var isLoaded: Bool = false
 
     var title: String {
         topic.title
@@ -71,12 +67,14 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func fetchTopicDetails(topicRef: String) {
+        self.isLoaded = false
         topicsService.fetchDetails(
             ref: topicRef,
             completion: { result in
                 if case let .success(detail) = result {
                     self.topicDetail = detail
                     self.configureSections()
+                    self.isLoaded = true
                 }
                 self.handleError(result.getError())
             }
@@ -143,6 +141,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
                     self?.stepByStepAction(stepBySteps)
                 }
             )
+            createSeeAllCommerceItem(rowTitle, category: sectionTitle)
             rows.append(seeAllRow)
         } else {
             rows = stepBySteps.map { createContentRow($0, sectionTitle: sectionTitle) }
@@ -185,7 +184,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     private func createContentRow(_ content: TopicDetailResponse.Content,
                                   sectionTitle: String) -> LinkRow {
-        LinkRow(
+        createCommerceItem(content, category: sectionTitle)
+        return LinkRow(
             id: content.title,
             title: content.title,
             body: nil,
@@ -202,7 +202,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func createSubtopicRow(_ content: TopicDetailResponse.Subtopic) -> NavigationRow {
-        NavigationRow(
+        createSubtopicCommerceItem(content, category: subtopicsHeading.title)
+        return NavigationRow(
             id: content.ref,
             title: content.title,
             body: nil,
@@ -217,6 +218,15 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         analyticsService.track(screen: screen)
     }
 
+    func trackEcommerce() {
+        let eCommerceEvent = AppEvent.viewItemList(
+            name: "Topics",
+            id: topic.title,
+            items: commerceItems
+        )
+        analyticsService.track(event: eCommerceEvent)
+    }
+
     private func trackLinkEvent(content: TopicDetailResponse.Content,
                                 sectionTitle: String) {
         let event = AppEvent.topicLinkNavigation(
@@ -224,6 +234,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             sectionTitle: sectionTitle
         )
         analyticsService.track(event: event)
+        guard let commerceEvent = createCommerceEvent(content.title) else { return }
+        analyticsService.track(event: commerceEvent)
     }
 
     private func trackLinkEvent(contentTitle: String,
@@ -236,10 +248,38 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             external: external
         )
         analyticsService.track(event: event)
+        guard let commerceEvent = createCommerceEvent(contentTitle) else { return }
+        analyticsService.track(event: commerceEvent)
     }
 
     private func trackSubtopicNavigationEvent(_ subtopic: TopicDetailResponse.Subtopic) {
         let event = AppEvent.subtopicNavigation(subtopic: subtopic)
         analyticsService.track(event: event)
+        guard let commerceEvent = createCommerceEvent(subtopic.title) else { return }
+        analyticsService.track(event: commerceEvent)
+    }
+
+    private func createSubtopicCommerceItem(_ subtopic: TopicDetailResponse.Subtopic,
+                                            category: String) {
+        let appEventItem = TopicCommerceItem(
+            name: subtopic.title,
+            category: category,
+            index: commerceItems.count + 1,
+            itemId: nil,
+            locationId: nil
+        )
+        commerceItems.append(appEventItem)
+    }
+
+    private func createSeeAllCommerceItem(_ rowTitle: String,
+                                          category: String) {
+        let appEventItem = TopicCommerceItem(
+            name: rowTitle,
+            category: category,
+            index: commerceItems.count + 1,
+            itemId: nil,
+            locationId: nil
+        )
+        commerceItems.append(appEventItem)
     }
 }

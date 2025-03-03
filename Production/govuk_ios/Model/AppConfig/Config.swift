@@ -45,8 +45,7 @@ struct Config: Decodable {
         self.searchApiUrl = try container.decodeIfPresent(String.self, forKey: .searchApiUrl)
         self.homeWidgets = try container.decodeIfPresent([String].self,
                                                          forKey: .homeWidgets)
-        ?? ["feedback",
-            "search",
+        ?? ["search",
             "recentActivity",
             "testViewController",
             "testWeb",

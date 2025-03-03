@@ -8,6 +8,7 @@ import UIKit
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
     let coreData = CoreDataRepository.arrangeAndLoad
     let mockTopicService = MockTopicsService()
+    let mockAnalyticsService = MockAnalyticsService()
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         mockTopicService._stubbedHasCustomisedTopics = true
@@ -117,6 +118,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     func viewController() -> HomeViewController {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }

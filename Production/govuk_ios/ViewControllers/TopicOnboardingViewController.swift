@@ -52,6 +52,7 @@ class TopicOnboardingViewController: BaseViewController,
     }()
 
     private lazy var topicsListView = TopicOnboardingListView(
+        topics: viewModel.topics,
         selectedAction: { [weak self] topic in
             self?.viewModel.topicSelected(
                 topic: topic
@@ -84,7 +85,7 @@ class TopicOnboardingViewController: BaseViewController,
     private func topicsDidUpdate() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            self.topicsListView.updateTopics(self.viewModel.topics)
+            self.topicsListView.updateTopics()
         }
     }
 
@@ -96,7 +97,7 @@ class TopicOnboardingViewController: BaseViewController,
         view.addSubview(footerView)
         stackView.addArrangedSubview(subtitleLabel)
         stackView.addArrangedSubview(topicsListView)
-        topicsListView.updateTopics(viewModel.topics)
+        topicsListView.updateTopics()
     }
 
     private lazy var footerView: UIView = {
@@ -177,6 +178,6 @@ class TopicOnboardingViewController: BaseViewController,
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        topicsListView.updateTopics(viewModel.topics)
+        topicsListView.updateTopics()
     }
 }

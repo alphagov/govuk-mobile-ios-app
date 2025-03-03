@@ -4,7 +4,7 @@ import RecentActivity
 
 class StepByStepsViewModel: TopicDetailViewModelInterface {
     var errorViewModel: AppErrorViewModel?
-
+    var commerceItems = [TopicCommerceItem]()
     private let content: [TopicDetailResponse.Content]
     private let analyticsService: AnalyticsServiceInterface
     private let activityService: ActivityServiceInterface
@@ -20,6 +20,8 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         self.urlOpener = urlOpener
     }
 
+    var isLoaded: Bool = true
+
     var title: String {
         String.topics.localized("topicDetailStepByStepHeader")
     }
@@ -28,7 +30,7 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         nil
     }
 
-    var sections: [GroupedListSection] {
+    lazy var sections: [GroupedListSection] = {
         [
             GroupedListSection(
                 heading: nil,
@@ -36,14 +38,27 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
                 footer: nil
             )
         ]
-    }
+    }()
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }
 
+    func trackEcommerce() {
+        let eCommerceEvent = AppEvent.viewItemList(
+            name: "Topics",
+            id: String.topics.localized("topicDetailStepByStepHeader"),
+            items: commerceItems
+        )
+        analyticsService.track(event: eCommerceEvent)
+    }
+
     private func createContentRow(_ content: TopicDetailResponse.Content) -> LinkRow {
-        LinkRow(
+        createCommerceItem(
+            content,
+            category: String.topics.localized("topicDetailStepByStepHeader")
+        )
+        return LinkRow(
             id: content.title,
             title: content.title,
             body: nil,
@@ -66,5 +81,7 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
             sectionTitle: String.topics.localized("topicDetailStepByStepHeader")
         )
         analyticsService.track(event: event)
+        guard let commerceEvent = createCommerceEvent(content.title) else { return }
+        analyticsService.track(event: commerceEvent)
     }
 }

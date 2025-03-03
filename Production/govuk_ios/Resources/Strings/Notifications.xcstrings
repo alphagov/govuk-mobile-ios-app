@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "onboardingAcceptButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow"
+          }
+        }
+      }
+    },
+    "onboardingBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find out about things like important dates and deadlines, services you might find useful and new features that have been added to the app.\n\nYou can change your preferences at any time in the app settings."
+          }
+        }
+      }
+    },
+    "onboardingSkipButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not now"
+          }
+        }
+      }
+    },
+    "onboardingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow notifications?"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -44,6 +44,12 @@ struct String_ExtensionsTests {
     }
 
     @Test
+    func notifications_hasCorrectValues() {
+        let sut = String.notifications
+        #expect(sut.tableName == "Notifications")
+    }
+
+    @Test
     func localized_returnsExpectedResult() {
         let sut = String.LocalStringBuilder(
             tableName: "TestStrings",

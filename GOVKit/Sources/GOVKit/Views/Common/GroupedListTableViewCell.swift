@@ -46,7 +46,7 @@ public class GroupedListTableViewCell: UITableViewCell {
         let localLayer = CAShapeLayer()
         localLayer.lineWidth = borderWidth
         localLayer.strokeColor = UIColor.govUK.strokes.listDivider.cgColor
-        localLayer.fillColor = UIColor.clear.cgColor
+        localLayer.fillColor = UIColor.govUK.fills.surfaceList.cgColor
         return localLayer
     }()
 
@@ -91,7 +91,7 @@ public class GroupedListTableViewCell: UITableViewCell {
         multipleSelectionBackgroundView = UIView()
 
         // Tints the checkmark
-        tintColor = UIColor.govUK.text.link
+        tintColor = UIColor.govUK.fills.surfaceToggleSelected
 
         accessibilityTraits.insert(.link)
     }

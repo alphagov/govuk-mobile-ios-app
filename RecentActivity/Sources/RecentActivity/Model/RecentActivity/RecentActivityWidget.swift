@@ -58,8 +58,11 @@ class RecentActivityWidget: UIControl {
     }()
 
     private lazy var chevronImage: UIImageView = {
-        let image = UIImage(named: "recent_activity_cell_chevron")
+        let image = UIImage(systemName: "chevron.forward")
         let imageView = UIImageView(image: image)
+        let config = UIImage.SymbolConfiguration(pointSize: 12)
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
+        imageView.preferredSymbolConfiguration = config
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return imageView
     }()

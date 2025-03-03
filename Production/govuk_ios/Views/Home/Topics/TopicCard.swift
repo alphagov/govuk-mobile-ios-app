@@ -17,7 +17,7 @@ class TopicCard: UIView {
     private lazy var icon: UIImageView = {
         let imageView = UIImageView(image: viewModel.icon)
         imageView.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor.govUK.text.link
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return imageView
     }()
@@ -27,15 +27,16 @@ class TopicCard: UIView {
         let config = UIImage.SymbolConfiguration(pointSize: 12)
         let imageView = UIImageView(image: image)
         imageView.preferredSymbolConfiguration = config
-        imageView.tintColor = UIColor.govUK.strokes.listDivider
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        imageView.widthAnchor.constraint(greaterThanOrEqualToConstant: 9).isActive = true
         return imageView
     }()
 
     private lazy var cardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 24
+        stackView.spacing = 8
         stackView.alignment = .leading
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -60,11 +61,11 @@ class TopicCard: UIView {
     }
 
     private func configureUI() {
-        backgroundColor = UIColor.govUK.fills.surfaceCard
-        layer.borderWidth = 1
+        backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+        layer.borderWidth = 0.5
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
+        layer.borderColor = UIColor.govUK.strokes.cardBlue.cgColor
         addSubview(cardStackView)
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(chevronImage)

@@ -16,7 +16,7 @@ class TopicRowView: UIView {
 
     private lazy var icon: UIImageView = {
         let imageView = UIImageView(image: topic.icon.withRenderingMode(.alwaysTemplate))
-        imageView.tintColor = UIColor.govUK.text.link
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         imageView.contentMode = .center
         return imageView
     }()
@@ -26,7 +26,7 @@ class TopicRowView: UIView {
         let config = UIImage.SymbolConfiguration(pointSize: 12)
         let imageView = UIImageView(image: image)
         imageView.preferredSymbolConfiguration = config
-        imageView.tintColor = UIColor.govUK.strokes.listDivider
+        imageView.tintColor = UIColor.govUK.text.trailingIcon
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .right
         return imageView
@@ -51,11 +51,11 @@ class TopicRowView: UIView {
     }
 
     private func configureUI() {
-        backgroundColor = UIColor.govUK.fills.surfaceCard
-        layer.borderWidth = 1
+        backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+        layer.borderWidth = 0.5
         layer.cornerRadius = 10
         layer.masksToBounds = true
-        layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
+        layer.borderColor = UIColor.govUK.strokes.cardBlue.cgColor
         translatesAutoresizingMaskIntoConstraints = false
 
         cardStackView.addArrangedSubview(icon)

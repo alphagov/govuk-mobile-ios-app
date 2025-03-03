@@ -277,6 +277,8 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
 
+        sut.initialLoadComplete = true
+
         let trackedTopic = try #require(sut.displayedTopics.first?.title)
         sut.trackECommerce()
         #expect(mockAnalyticsService._trackedEvents.count == 1)

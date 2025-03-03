@@ -20,6 +20,8 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         self.urlOpener = urlOpener
     }
 
+    var isLoaded: Bool = true
+
     var title: String {
         String.topics.localized("topicDetailStepByStepHeader")
     }
@@ -40,7 +42,6 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
-        trackEcommerce()
     }
 
     func trackEcommerce() {

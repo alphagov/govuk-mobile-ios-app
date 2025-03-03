@@ -12,6 +12,8 @@ final class TopicsWidgetViewModel {
     let editAction: () -> Void
     var handleError: ((TopicsServiceError) -> Void)?
     var fetchTopicsError: Bool = false
+    var initialLoadComplete: Bool = false
+    var isEditing: Bool = false
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -72,19 +74,21 @@ final class TopicsWidgetViewModel {
     }
 
     func trackECommerce() {
-        let trackedTopics = displayedTopics
-        var items = [HomeCommerceItem]()
-        trackedTopics.enumerated().forEach { index, topic in
-            let item = HomeCommerceItem(name: topic.title,
-                                        index: index + 1,
-                                        itemId: nil,
-                                        locationId: nil)
-            items.append(item)
+        if !isEditing && initialLoadComplete {
+            let trackedTopics = displayedTopics
+            var items = [HomeCommerceItem]()
+            trackedTopics.enumerated().forEach { index, topic in
+                let item = HomeCommerceItem(name: topic.title,
+                                            index: index + 1,
+                                            itemId: nil,
+                                            locationId: nil)
+                items.append(item)
+            }
+            let event = AppEvent.viewItemList(name: "Homepage",
+                                              id: "Homepage",
+                                              items: items)
+            analyticsService.track(event: event)
         }
-        let event = AppEvent.viewItemList(name: "Homepage",
-                                          id: "Homepage",
-                                          items: items)
-        analyticsService.track(event: event)
     }
 
     func trackECommerceSelection(_ name: String) {

@@ -48,11 +48,16 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
+            // isLoaded == true on back navigation, otherwise e-commerce
+            // triggered in .onChange
+            if viewModel.isLoaded {
+                viewModel.trackEcommerce()
+            }
         }
-        .onChange(of: viewModel.sections.count) { _ in
-            // Note that this change event does not fire for the Step by step screen
-            // Ecommerce tracking is handled in the trackScreen event in that case
-            viewModel.trackEcommerce()
+        .onChange(of: viewModel.isLoaded) { isLoaded in
+            if isLoaded {
+                viewModel.trackEcommerce()
+            }
         }
     }
 

@@ -133,6 +133,28 @@
         }
       }
     },
+    "primaryButtonAccessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to the next slide"
+          }
+        }
+      }
+    },
+    "primaryButtonLastSlideAccessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish onboarding"
+          }
+        }
+      }
+    },
     "privacyPolicyLinkAccessibilityTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -173,6 +195,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skip"
+          }
+        }
+      }
+    },
+    "skipButtonAcessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip onboarding"
           }
         }
       }

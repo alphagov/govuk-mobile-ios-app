@@ -11,7 +11,9 @@ class OnboardingSlideAnimationViewModel: OnboardingSlideViewModelInterface {
     let body: String
     let name: String
     let primaryButtonTitle: String
+    let primaryButtonAccessibilityHint: String?
     let secondaryButtonTitle: String
+    let secondaryButtonAccessibilityHint: String?
 
     private lazy var lottieView = LottieView(animation: .named(slide.image))
         .resizable()
@@ -24,13 +26,17 @@ class OnboardingSlideAnimationViewModel: OnboardingSlideViewModelInterface {
 
     init(slide: OnboardingSlide,
          primaryButtonTitle: String,
-         secondaryButtonTitle: String) {
+         primaryButtonAccessibilityHint: String?,
+         secondaryButtonTitle: String,
+         secondaryButtonAccessibilityHint: String?) {
         self.slide = slide
         self.title = slide.title
         self.body = slide.body
         self.name = slide.name
         self.primaryButtonTitle = primaryButtonTitle
+        self.primaryButtonAccessibilityHint = primaryButtonAccessibilityHint
         self.secondaryButtonTitle = secondaryButtonTitle
+        self.secondaryButtonAccessibilityHint = secondaryButtonAccessibilityHint
         self.contentView = AnyView(
             lottieView
         )

@@ -58,7 +58,6 @@ struct AppEvent_EcommerceTests {
     @Test
     func selectTopicItem_returnsExpectedResult() throws {
         let expectedName = UUID().uuidString
-        let expectedId = UUID().uuidString
         let expectedItems = TopicCommerceItem.arrangeItems(count: 1)
         let expectedResultCount = 3
         let result = AppEvent.selectTopicItem(

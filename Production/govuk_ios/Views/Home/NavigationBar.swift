@@ -2,11 +2,15 @@ import Foundation
 import UIKit
 
 class NavigationBar: UIView {
-    let sittingHeight: CGFloat = 56
-    let scrolledHeight: CGFloat = 50
+    let navBarHeight: CGFloat = 56
 
     private lazy var heightConstraint = heightAnchor.constraint(
-        equalToConstant: sittingHeight
+        equalToConstant: navBarHeight
+    )
+
+    private lazy var logoBottomAnchor = logoImageView.bottomAnchor.constraint(
+        equalTo: bottomAnchor,
+        constant: -12
     )
 
     lazy var divider: UIView = {
@@ -45,8 +49,6 @@ class NavigationBar: UIView {
                     (logoImageView.image?.size.width ?? 1)
 
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(lessThanOrEqualToConstant: sittingHeight),
-            heightAnchor.constraint(greaterThanOrEqualToConstant: scrolledHeight),
             heightConstraint,
 
             divider.rightAnchor.constraint(equalTo: rightAnchor),
@@ -58,10 +60,7 @@ class NavigationBar: UIView {
                 equalTo: topAnchor,
                 constant: 16
             ),
-            logoImageView.bottomAnchor.constraint(
-                equalTo: bottomAnchor,
-                constant: -12
-            ),
+            logoBottomAnchor,
             logoImageView.heightAnchor.constraint(
                 equalTo: logoImageView.widthAnchor,
                 multiplier: ratio
@@ -69,20 +68,16 @@ class NavigationBar: UIView {
         ])
     }
 
-    func handleScroll(scrollView: UIScrollView) {
-        guard scrollView.frame != .zero else { return }
-
-        let adjustedScroll = (scrollView.verticalScroll / 7)
-        var offset = sittingHeight - adjustedScroll
-
-        if offset < scrolledHeight {
-            offset = scrolledHeight
-        } else if offset > sittingHeight {
-            offset = sittingHeight
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.verticalSizeClass == .compact {
+            logoImageView.isHidden = true
+            heightConstraint.constant = 0
+            NSLayoutConstraint.deactivate([logoBottomAnchor])
+        } else {
+            logoImageView.isHidden = false
+            heightConstraint.constant = navBarHeight
+            NSLayoutConstraint.activate([logoBottomAnchor])
         }
-
-        heightConstraint.constant = offset
-        let diff = adjustedScroll / (sittingHeight - scrolledHeight)
-        divider.alpha = diff
     }
 }

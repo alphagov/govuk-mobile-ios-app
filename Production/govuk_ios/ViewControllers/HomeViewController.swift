@@ -20,7 +20,7 @@ class HomeViewController: BaseViewController,
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.contentInset.top = navigationBar.sittingHeight + 16
+        scrollView.contentInset.top = navigationBar.navBarHeight + 16
         scrollView.contentInset.bottom = 32
         scrollView.contentInsetAdjustmentBehavior = .always
         return scrollView
@@ -90,10 +90,6 @@ class HomeViewController: BaseViewController,
         ])
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        navigationBar.handleScroll(scrollView: scrollView)
-    }
-
     private func addWidgets() {
         viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
         if let lastWidget = stackView.arrangedSubviews.last {
@@ -112,8 +108,8 @@ extension HomeViewController: ContentScrollable {
     func scrollToTop() {
         scrollView.setContentOffset(
             CGPoint(
-                x: 0,
-                y: -(navigationBar.sittingHeight + 16)
+                x: scrollView.contentOffset.x,
+                y: -(navigationBar.navBarHeight + 16)
             ),
             animated: true)
     }

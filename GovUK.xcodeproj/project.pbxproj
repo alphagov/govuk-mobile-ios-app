@@ -145,6 +145,7 @@
 		5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* SceneDelegate.swift */; };
 		5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD71802BD250DE0075F648 /* Assets.xcassets */; };
 		5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB637072D7732A800A44E36 /* GOVRequest+Topics.swift */; };
+		5DB6370D2D7736AD00A44E36 /* GOVRequest+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB6370C2D7736AD00A44E36 /* GOVRequest+App.swift */; };
 		5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */; };
 		5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */; };
 		5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */; };
@@ -419,6 +420,7 @@
 		5DB226322D400C88004C2DD4 /* govuk_ios_notification_service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service.entitlements; sourceTree = "<group>"; };
 		5DB226332D400D02004C2DD4 /* govuk_ios_notification_service_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service_dev.entitlements; sourceTree = "<group>"; };
 		5DB637072D7732A800A44E36 /* GOVRequest+Topics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GOVRequest+Topics.swift"; sourceTree = "<group>"; };
+		5DB6370C2D7736AD00A44E36 /* GOVRequest+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GOVRequest+App.swift"; sourceTree = "<group>"; };
 		5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimationView+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Convenience.swift"; sourceTree = "<group>"; };
@@ -1132,6 +1134,7 @@
 		5DC79FB32CA18AEA00014446 /* GOVRequest */ = {
 			isa = PBXGroup;
 			children = (
+				5DB6370C2D7736AD00A44E36 /* GOVRequest+App.swift */,
 				5DC79FB12CA18A9A00014446 /* GOVRequest+Search.swift */,
 				5DB637072D7732A800A44E36 /* GOVRequest+Topics.swift */,
 			);
@@ -1608,6 +1611,7 @@
 				D028CD0C2CBEC8F400742620 /* TopicDetailResponse.swift in Sources */,
 				5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */,
 				168F6FAA2C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift in Sources */,
+				5DB6370D2D7736AD00A44E36 /* GOVRequest+App.swift in Sources */,
 				D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */,
 				5D62DC0B2CE6373A0079D842 /* TopicSelectedView.swift in Sources */,
 				5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */,

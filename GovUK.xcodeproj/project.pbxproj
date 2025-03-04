@@ -144,6 +144,7 @@
 		5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71772BD250DB0075F648 /* AppDelegate.swift */; };
 		5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAD71792BD250DB0075F648 /* SceneDelegate.swift */; };
 		5DAD71812BD250DE0075F648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD71802BD250DE0075F648 /* Assets.xcassets */; };
+		5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB637072D7732A800A44E36 /* GOVRequest+Topics.swift */; };
 		5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */; };
 		5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */; };
 		5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */; };
@@ -160,7 +161,7 @@
 		5DC250682C91D80F009E9E7F /* CrashlyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC250672C91D80F009E9E7F /* CrashlyticsClient.swift */; };
 		5DC70CBD2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70CBC2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift */; };
 		5DC7647A2D6F165A00ABBAF4 /* OnboardingSlides+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC764792D6F165900ABBAF4 /* OnboardingSlides+Convenience.swift */; };
-		5DC79FB22CA18A9A00014446 /* GovRequest+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FB12CA18A9A00014446 /* GovRequest+Search.swift */; };
+		5DC79FB22CA18A9A00014446 /* GOVRequest+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC79FB12CA18A9A00014446 /* GOVRequest+Search.swift */; };
 		5DCAFA682D3FE0E800C3F284 /* govuk_ios_notification_service.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5DCAFA612D3FE0E800C3F284 /* govuk_ios_notification_service.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5DCAFA732D3FFB5600C3F284 /* NotificationServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCAFA702D3FFB5600C3F284 /* NotificationServiceExtension.swift */; };
 		5DCAFA752D4004E700C3F284 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCAFA742D4004E700C3F284 /* NotificationService.swift */; };
@@ -417,6 +418,7 @@
 		5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_unit_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DB226322D400C88004C2DD4 /* govuk_ios_notification_service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service.entitlements; sourceTree = "<group>"; };
 		5DB226332D400D02004C2DD4 /* govuk_ios_notification_service_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_notification_service_dev.entitlements; sourceTree = "<group>"; };
+		5DB637072D7732A800A44E36 /* GOVRequest+Topics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GOVRequest+Topics.swift"; sourceTree = "<group>"; };
 		5DBE07FD2C480CA700B58DBE /* AnimationView+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnimationView+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE07FF2C480CA700B58DBE /* UIAlertAction+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Convenience.swift"; sourceTree = "<group>"; };
 		5DBE08002C480CA700B58DBE /* UIAlertController+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Convenience.swift"; sourceTree = "<group>"; };
@@ -430,7 +432,7 @@
 		5DC250672C91D80F009E9E7F /* CrashlyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsClient.swift; sourceTree = "<group>"; };
 		5DC70CBC2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Convenience.swift"; sourceTree = "<group>"; };
 		5DC764792D6F165900ABBAF4 /* OnboardingSlides+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingSlides+Convenience.swift"; sourceTree = "<group>"; };
-		5DC79FB12CA18A9A00014446 /* GovRequest+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GovRequest+Search.swift"; sourceTree = "<group>"; };
+		5DC79FB12CA18A9A00014446 /* GOVRequest+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GOVRequest+Search.swift"; sourceTree = "<group>"; };
 		5DCAFA612D3FE0E800C3F284 /* govuk_ios_notification_service.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = govuk_ios_notification_service.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DCAFA6F2D3FFB5600C3F284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DCAFA702D3FFB5600C3F284 /* NotificationServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceExtension.swift; sourceTree = "<group>"; };
@@ -1130,7 +1132,8 @@
 		5DC79FB32CA18AEA00014446 /* GOVRequest */ = {
 			isa = PBXGroup;
 			children = (
-				5DC79FB12CA18A9A00014446 /* GovRequest+Search.swift */,
+				5DC79FB12CA18A9A00014446 /* GOVRequest+Search.swift */,
+				5DB637072D7732A800A44E36 /* GOVRequest+Topics.swift */,
 			);
 			path = GOVRequest;
 			sourceTree = "<group>";
@@ -1637,7 +1640,7 @@
 				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
 				16A99D6B2D35F19300C72DEB /* SearchSuggestionsViewModel.swift in Sources */,
 				16EE1A452C6F8ED3005E820F /* SearchCoordinator.swift in Sources */,
-				5DC79FB22CA18A9A00014446 /* GovRequest+Search.swift in Sources */,
+				5DC79FB22CA18A9A00014446 /* GOVRequest+Search.swift in Sources */,
 				4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
@@ -1742,6 +1745,7 @@
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
+				5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,

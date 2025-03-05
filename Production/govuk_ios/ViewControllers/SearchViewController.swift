@@ -59,6 +59,7 @@ class SearchViewController: BaseViewController,
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.govUK.fills.surfaceModal
+        tableView.contentInset.top = 16
         return tableView
     }()
 
@@ -131,8 +132,7 @@ class SearchViewController: BaseViewController,
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 16
+                equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor
@@ -140,11 +140,12 @@ class SearchViewController: BaseViewController,
             tableView.leftAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.leftAnchor
             ),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            ),
 
             searchSuggestionsViewController.view.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 16
+                equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
             searchSuggestionsViewController.view.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,
@@ -159,8 +160,7 @@ class SearchViewController: BaseViewController,
             ),
 
             searchHistoryViewController.view.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 16
+                equalTo: view.safeAreaLayoutGuide.topAnchor
             ),
             searchHistoryViewController.view.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,

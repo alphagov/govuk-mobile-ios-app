@@ -74,4 +74,8 @@ struct HomeViewModel {
     private func widgetEnabled(feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }
+
+    func trackECommerce() {
+        topicWidgetViewModel.trackECommerce()
+    }
 }

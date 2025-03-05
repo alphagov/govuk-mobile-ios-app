@@ -2,6 +2,7 @@ import SwiftUI
 import GOVKit
 import RecentActivity
 
+// swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?
@@ -16,6 +17,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private let urlOpener: URLOpener
     private let subtopicAction: (DisplayableTopic) -> Void
     private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+
+    var isLoaded: Bool = false
 
     var title: String {
         topic.title
@@ -64,12 +67,14 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func fetchTopicDetails(topicRef: String) {
+        self.isLoaded = false
         topicsService.fetchDetails(
             ref: topicRef,
             completion: { result in
                 if case let .success(detail) = result {
                     self.topicDetail = detail
                     self.configureSections()
+                    self.isLoaded = true
                 }
                 self.handleError(result.getError())
             }

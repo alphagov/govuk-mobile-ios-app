@@ -107,10 +107,12 @@ class HomeCoordinator: TabItemCoordinator {
         return { [weak self] in
             self?.trackWidgetNavigation(text: "EditTopics")
             guard let self = self else { return }
+            self.topicWidgetViewModel.isEditing = true
             let navigationController = UINavigationController()
             let coordinator = self.coordinatorBuilder.editTopics(
                 navigationController: navigationController,
                 didDismissAction: {
+                    self.topicWidgetViewModel.isEditing = false
                     self.root.viewWillReAppear()
                 }
             )
@@ -118,7 +120,7 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var topicWidgetViewModel: TopicsWidgetViewModel {
+    private lazy var topicWidgetViewModel: TopicsWidgetViewModel = {
         TopicsWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
@@ -126,7 +128,7 @@ class HomeCoordinator: TabItemCoordinator {
             editAction: presentEditTopicsCoordinator,
             allTopicsAction: startAllTopicsCoordinator
         )
-    }
+    }()
 
     private func trackWidgetNavigation(text: String,
                                        external: Bool = false) {

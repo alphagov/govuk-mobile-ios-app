@@ -17,17 +17,8 @@ struct AppConfigServiceClient: AppConfigServiceClientInterface {
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {
-        let fetchRequest = GOVRequest(
-            urlPath: "/config/appinfo/ios",
-            method: .get,
-            bodyParameters: nil,
-            queryParameters: nil,
-            additionalHeaders: nil,
-            signingKey: Constants.SigningKey.govUK
-        )
-
         serviceClient.send(
-            request: fetchRequest,
+            request: .config,
             completion: { result in
                 let mappedResult = result.mapError { error in
                     let nsError = (error as NSError)

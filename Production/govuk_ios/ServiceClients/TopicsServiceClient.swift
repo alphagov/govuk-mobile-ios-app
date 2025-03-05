@@ -27,17 +27,8 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
     }
 
     func fetchList(completion: @escaping FetchTopicsListCompletion) {
-        let topicsRequest = GOVRequest(
-            urlPath: "/static/topics/list",
-            method: .get,
-            bodyParameters: nil,
-            queryParameters: nil,
-            additionalHeaders: nil,
-            signingKey: Constants.SigningKey.govUK
-        )
-
         serviceClient.send(
-            request: topicsRequest,
+            request: .topics,
             completion: { result in
                 completion(handleResponse(result))
             }
@@ -46,17 +37,8 @@ struct TopicsServiceClient: TopicsServiceClientInterface {
 
     func fetchDetails(ref: String,
                       completion: @escaping FetchTopicDetailsCompletion) {
-        let topicsRequest = GOVRequest(
-            urlPath: "/static/topics/" + ref,
-            method: .get,
-            bodyParameters: nil,
-            queryParameters: nil,
-            additionalHeaders: nil,
-            signingKey: Constants.SigningKey.govUK
-        )
-
         serviceClient.send(
-            request: topicsRequest,
+            request: .topic(ref: ref),
             completion: { result in
                 completion(handleResponse(result))
             }

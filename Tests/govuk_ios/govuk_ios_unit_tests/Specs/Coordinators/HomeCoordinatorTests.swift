@@ -65,35 +65,6 @@ struct HomeCoordinatorTests {
 
     @Test
     @MainActor
-    func searchAction_startsCoordinatorAndTracksEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
-        let mockViewControllerBuilder = MockViewControllerBuilder()
-        mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
-        let mockAnalyticsService = MockAnalyticsService()
-        let navigationController = UINavigationController()
-        let subject = HomeCoordinator(
-            navigationController: navigationController,
-            coordinatorBuilder: mockCoodinatorBuilder,
-            viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: mockAnalyticsService,
-            configService: MockAppConfigService(),
-            topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
-        )
-        subject.start()
-
-        mockViewControllerBuilder._receivedHomeSearchAction?()
-
-        let navigationEvent = mockAnalyticsService._trackedEvents.first
-
-        #expect(navigationEvent?.params?["text"] as? String == "Search")
-        #expect(navigationEvent?.params?["type"] as? String == "Widget")
-        #expect(navigationEvent?.name == "Navigation")
-    }
-
-    @Test
-    @MainActor
     func topicAction_startsCoordinatorAndTracksEvent() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()

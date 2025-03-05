@@ -8,7 +8,7 @@ import Factory
 @testable import GOVKitTestUtilities
 
 @MainActor
-struct HomeViewControllerTests {
+struct HomeContentViewControllerTests {
     @Test
     func init_hasExpectedValues() {
         let topicsViewModel = TopicsWidgetViewModel(
@@ -26,7 +26,7 @@ struct HomeViewControllerTests {
             recentActivityAction: { },
             urlOpener: MockURLOpener()
         )
-        let subject = HomeViewController(viewModel: viewModel)
+        let subject = HomeContentViewController(viewModel: viewModel)
 
         #expect(subject.title == "Home")
     }
@@ -49,7 +49,7 @@ struct HomeViewControllerTests {
             recentActivityAction: { },
             urlOpener: MockURLOpener()
         )
-        let subject = HomeViewController(viewModel: viewModel)
+        let subject = HomeContentViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
 
         let screens = mockAnalyticsService._trackScreenReceivedScreens
@@ -76,7 +76,7 @@ struct HomeViewControllerTests {
             recentActivityAction: { },
             urlOpener: MockURLOpener()
         )
-        let subject = HomeViewController(viewModel: viewModel)
+        let subject = HomeContentViewController(viewModel: viewModel)
         guard let scrollView: UIScrollView =
                 subject.view.subviews.first(where: { $0 is UIScrollView } ) as? UIScrollView
         else {
@@ -84,6 +84,6 @@ struct HomeViewControllerTests {
         }
         scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: false)
         subject.scrollToTop()
-        #expect(scrollView.contentOffset.y == -72)
+        #expect(scrollView.contentOffset.y == 0)
     }
 }

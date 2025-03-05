@@ -5,6 +5,7 @@ import GOVKit
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
+    let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let feedbackAction: () -> Void
     let searchAction: () -> Void
@@ -35,7 +36,10 @@ struct HomeViewModel {
     }
 
 
-    private var notificationsWidget: WidgetView {
+    private var notificationsWidget: WidgetView? {
+        guard widgetEnabled(feature: .notification)
+        else { return nil }
+
         let title = String.home.localized("homeWidgetTitle")
         let viewModel = UserFeedbackViewModel(
             title: title,

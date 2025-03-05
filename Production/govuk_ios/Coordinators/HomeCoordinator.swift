@@ -37,6 +37,7 @@ class HomeCoordinator: TabItemCoordinator {
         let viewController = viewControllerBuilder.home(
             analyticsService: analyticsService,
             configService: configService,
+            notificationService: notificationService,
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
             searchAction: presentSearchCoordinator,

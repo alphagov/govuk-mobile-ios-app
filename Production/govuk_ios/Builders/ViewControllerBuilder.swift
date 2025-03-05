@@ -22,6 +22,7 @@ class ViewControllerBuilder {
     // swiftlint:disable:next function_parameter_count
     func home(analyticsService: AnalyticsServiceInterface,
               configService: AppConfigServiceInterface,
+              notificationService: NotificationServiceInterface,
               topicWidgetViewModel: TopicsWidgetViewModel,
               feedbackAction: @escaping () -> Void,
               searchAction: @escaping () -> Void,
@@ -30,6 +31,7 @@ class ViewControllerBuilder {
         let viewModel = HomeViewModel(
             analyticsService: analyticsService,
             configService: configService,
+            notificationService: notificationService,
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
             searchAction: searchAction,

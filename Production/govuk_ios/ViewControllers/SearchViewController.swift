@@ -211,6 +211,7 @@ class SearchViewController: BaseViewController,
     }
 
     private func didInvokeSearch(using type: SearchInvocationType) {
+        handleSearchInvocationFocusState()
         let searchText = searchBar.text
         viewModel.search(
             text: searchText,
@@ -225,6 +226,13 @@ class SearchViewController: BaseViewController,
         )
         searchSuggestionsViewController.hide()
         searchHistoryViewController.hide()
+    }
+
+    private func handleSearchInvocationFocusState() {
+        searchBar.resignFirstResponder()
+        let cancelButton = (searchBar.value(forKey: "cancelButton") as? UIButton)
+        cancelButton?.isEnabled = true
+        tableViewHeader.becomeFirstResponder()
     }
 
     private lazy var searchSuggestionsViewController: SearchSuggestionsViewController =  {

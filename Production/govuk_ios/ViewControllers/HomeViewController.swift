@@ -35,6 +35,19 @@ class HomeViewController: BaseViewController {
         return localSearchBar
     }()
 
+    private let imageHeight = 28.0
+    private lazy var logoHeightConstraint = {
+        logoImageView.heightAnchor.constraint(
+            equalToConstant: imageHeight
+        )
+    }()
+    private lazy var searchTopConstraint = {
+        searchBar.topAnchor.constraint(
+            equalTo: logoImageView.bottomAnchor,
+            constant: 16
+        )
+    }()
+
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(analyticsService: viewModel.analyticsService)
@@ -113,11 +126,8 @@ class HomeViewController: BaseViewController {
                 equalTo: view.safeAreaLayoutGuide.topAnchor,
                 constant: 16
             ),
-
-            searchBar.topAnchor.constraint(
-                equalTo: logoImageView.bottomAnchor,
-                constant: 16
-            ),
+            logoHeightConstraint,
+            searchTopConstraint,
             searchBar.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor,
                 constant: -8
@@ -128,6 +138,27 @@ class HomeViewController: BaseViewController {
             )
         ])
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setLogoHidden(searchBar.searchTextField.isEditing)
+    }
+
+    fileprivate func setLogoHidden(_ hideLogo: Bool) {
+        // Flush any pending layouts before animating header layout
+        self.view.layoutIfNeeded()
+        if hideLogo &&
+            traitCollection.verticalSizeClass == .compact {
+            logoHeightConstraint.constant = 0
+            searchTopConstraint.constant = -4
+        } else {
+            logoHeightConstraint.constant = imageHeight
+            searchTopConstraint.constant = 16
+        }
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -137,6 +168,7 @@ extension HomeViewController: UISearchBarDelegate {
         cancelButton?.tintColor = UIColor.govUK.text.linkHeader
         removeContentController(homeContentViewController)
         displayContentController(searchViewController)
+        setLogoHidden(true)
         return true
     }
 
@@ -145,5 +177,6 @@ extension HomeViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         removeContentController(searchViewController)
         displayContentController(homeContentViewController)
+        setLogoHidden(false)
     }
 }

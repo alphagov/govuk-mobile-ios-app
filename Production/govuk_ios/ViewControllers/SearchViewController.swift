@@ -290,10 +290,11 @@ class SearchViewController: BaseViewController,
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        searchBar.text = ""
         clearResults()
     }
 
-    func clearResults() {
+    private func clearResults() {
         viewModel.clearResults()
         reloadSnapshot()
         searchHistoryViewController.reloadSnapshot()

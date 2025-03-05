@@ -135,6 +135,7 @@ extension HomeViewController: UISearchBarDelegate {
         searchBar.setShowsCancelButton(true, animated: true)
         let cancelButton = (searchBar.value(forKey: "cancelButton") as? UIButton)
         cancelButton?.tintColor = UIColor.govUK.text.linkHeader
+        removeContentController(homeContentViewController)
         displayContentController(searchViewController)
         return true
     }
@@ -142,6 +143,7 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
+        removeContentController(searchViewController)
         displayContentController(homeContentViewController)
     }
 }

@@ -7,22 +7,6 @@ import UIKit
 
 @MainActor
 class SearchViewControllerSnapshotTests: SnapshotTestCase {
-    func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewController = createViewController(result: nil)
-        VerifySnapshotInNavigationController(
-            viewController: viewController,
-            mode: .light
-        )
-    }
-
-    func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewController = createViewController(result: nil)
-        VerifySnapshotInNavigationController(
-            viewController: viewController,
-            mode: .dark
-        )
-    }
-
     func test_search_successResponse_withResults_rendersCorrectly() {
         let url = URL(string: "https://www.gov.uk")!
         let result = SearchResult(
@@ -34,17 +18,35 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
         )
         let viewController = createViewController(result: .success(result))
         viewController.viewDidLoad()
-        let _ = viewController.textFieldShouldReturn(UITextField())
+        searchBar.searchTextField.text = "With results"
+        let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
         VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .light
         )
     }
 
+    func test_search_successResponse_withResults_dark_rendersCorrectly() {
+        let url = URL(string: "https://www.gov.uk")!
+        let result = SearchResult(
+            results: [SearchItem(title: "Test 1", description: "Description 1", link: url)]
+        )
+        let viewController = createViewController(result: .success(result))
+        viewController.viewDidLoad()
+        searchBar.searchTextField.text = "Dark mode with results"
+        let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .dark
+        )
+    }
+
     func test_search_successResponse_noResults_rendersCorrectly() {
         let viewController = createViewController(result: .failure(.noResults))
         viewController.viewDidLoad()
-        let _ = viewController.textFieldShouldReturn(UITextField())
+        let textField = UITextField()
+        searchBar.searchTextField.text = "No results"
+        let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
         viewController.view.layoutSubviews()
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -55,7 +57,9 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_search_failureResponse_genericError_rendersCorrectly() {
         let viewController = createViewController(result: .failure(.apiUnavailable))
         viewController.viewDidLoad()
-        let _ = viewController.textFieldShouldReturn(UITextField())
+        let textField = UITextField()
+        searchBar.searchTextField.text = "Generic error"
+        let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
         viewController.view.layoutSubviews()
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -66,7 +70,9 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_search_failureResponse_networkUnavailable_rendersCorrectly() {
         let viewController = createViewController(result: .failure(.networkUnavailable))
         viewController.viewDidLoad()
-        let _ = viewController.textFieldShouldReturn(UITextField())
+        let textField = UITextField()
+        searchBar.searchTextField.text = "Network unavailable"
+        let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
         viewController.view.layoutSubviews()
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -85,7 +91,8 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
         )
         return SearchViewController(
             viewModel: viewModel,
-            searchBar: UISearchBar()
+            searchBar: searchBar
         )
     }
+    let searchBar = UISearchBar()
 }

@@ -17,7 +17,7 @@ class HomeViewController: BaseViewController {
     }()
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
-        localSearchBar.searchTextField.backgroundColor = .white
+        localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceBackground
         localSearchBar.enablesReturnKeyAutomatically = false
         localSearchBar.translatesAutoresizingMaskIntoConstraints = false
         localSearchBar.backgroundImage = UIImage()
@@ -29,6 +29,7 @@ class HomeViewController: BaseViewController {
             ]
         )
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
+        localSearchBar.tintColor = UIColor.govUK.text.secondary
         localSearchBar.delegate = self
 
         return localSearchBar
@@ -132,7 +133,8 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
-        (searchBar.value(forKey: "cancelButton") as? UIButton)?.tintColor = UIColor.white
+        let cancelButton = (searchBar.value(forKey: "cancelButton") as? UIButton)
+        cancelButton?.tintColor = UIColor.govUK.text.linkHeader
         displayContentController(searchViewController)
         return true
     }

@@ -112,7 +112,6 @@ class SearchViewController: BaseViewController,
     }
 
     private func configureUI() {
-        title = String.search.localized("pageTitle")
         view.backgroundColor = GOVUKColors.fills.surfaceModal
 
         view.addSubview(tableView)

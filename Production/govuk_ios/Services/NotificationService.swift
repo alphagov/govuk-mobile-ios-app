@@ -10,18 +10,22 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     func requestPermissions(completion: @escaping () -> Void)
     var shouldRequestPermission: Bool { get async }
     var isFeatureEnabled: Bool { get }
-    func returnUserNotificationStatus(
-        completionHandler: @escaping (UNNotificationSettings) -> Void)
+    var redirectedToNotifcationsOnboarding: Bool { get }
+    func setRedirectedToNotificationsOnboarding(redirected: Bool)
+    func returnUserNotificationStatus(completionHandler: @escaping  (UNAuthorizationStatus) -> Void)
 }
 
 class NotificationService: NotificationServiceInterface {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
+    private let userDefaults: UserDefaultsInterface
 
     init(environmentService: AppEnvironmentServiceInterface,
-         notificationCenter: UserNotificationCenterInterface) {
+         notificationCenter: UserNotificationCenterInterface,
+         userDefaults: UserDefaultsInterface) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
+        self.userDefaults = userDefaults
     }
 
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -32,10 +36,25 @@ class NotificationService: NotificationServiceInterface {
         )
     }
 
-
     func returnUserNotificationStatus(
-        completionHandler: @escaping (UNNotificationSettings) -> Void) {
-        notificationCenter.returnAuthorisationStatus(completionHandler: completionHandler)
+        completionHandler: @escaping (UNAuthorizationStatus) -> Void) {
+        Task {
+            await notificationCenter.getAuthorisationStaus { status in
+                completionHandler(status)
+            }
+        }
+    }
+
+    // tested
+    func setRedirectedToNotificationsOnboarding(redirected: Bool) {
+        userDefaults.set(
+            bool: redirected,
+            forKey: .redirectedToNotificationsOnboarding
+        )
+    }
+
+    var redirectedToNotifcationsOnboarding: Bool {
+        userDefaults.bool(forKey: .redirectedToNotificationsOnboarding)
     }
 
     var shouldRequestPermission: Bool {
@@ -44,7 +63,7 @@ class NotificationService: NotificationServiceInterface {
                 isFeatureEnabled,
                 await notificationCenter.authorizationStatus == .notDetermined
             )
-            return switches.0 && switches.1
+            return switches.0 && switches.1 || redirectedToNotifcationsOnboarding
         }
     }
 

@@ -6,6 +6,26 @@ import Onboarding
 @testable import govuk_ios
 
 class MockNotificationService: NotificationServiceInterface {
+
+
+    var  _receivedCompletion: UNAuthorizationStatus?
+    func returnUserNotificationStatus(completionHandler: @escaping (UNAuthorizationStatus) -> Void) {
+        if let result = _receivedCompletion {
+            completionHandler(result)
+
+        }
+    }
+    
+    var _setRedirectedToNotificationsOnboardinCalled: Bool?
+    func setRedirectedToNotificationsOnboarding(redirected: Bool) {
+        _setRedirectedToNotificationsOnboardinCalled = redirected
+    }
+
+    var _stubbedRedirectedToNotifcationsOnboarding: Bool = false
+    var redirectedToNotifcationsOnboarding: Bool {
+        _stubbedRedirectedToNotifcationsOnboarding
+    }
+
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
 
     }

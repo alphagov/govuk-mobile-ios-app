@@ -22,7 +22,8 @@ struct TabCoordinatorTests {
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            dissmissAction: {}
         )
 
         subject.start()
@@ -58,7 +59,8 @@ struct TabCoordinatorTests {
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            dissmissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/test")
@@ -83,7 +85,8 @@ struct TabCoordinatorTests {
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            dissmissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")
@@ -108,7 +111,8 @@ struct TabCoordinatorTests {
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            dissmissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")
@@ -148,7 +152,8 @@ struct TabCoordinatorTests {
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            dissmissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")
@@ -186,7 +191,8 @@ struct TabCoordinatorTests {
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
-            analyticsService: mockAnalyticsService
+            analyticsService: mockAnalyticsService,
+            dissmissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")

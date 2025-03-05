@@ -117,8 +117,9 @@ class AppCoordinator: BaseCoordinator {
 
     private func startTabs(url: URL?) {
         let coordinator = coordinatorBuilder.tab(
-            navigationController: root, dismissAction: { [weak self] in
-               // self?.startNotificationOnboardingCoordinator(url: URL?)
+            navigationController: root,
+            dismissAction: { [weak self] in
+               self?.startNotificationOnboardingCoordinator(url: url)
             }
         )
         start(coordinator, url: url)

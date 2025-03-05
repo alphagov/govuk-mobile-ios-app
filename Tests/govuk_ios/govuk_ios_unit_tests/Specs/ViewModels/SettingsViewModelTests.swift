@@ -1,5 +1,7 @@
 import Foundation
+import UserNotifications
 import Testing
+import Combine
 
 @testable import govuk_ios
 @testable import GOVKit
@@ -11,11 +13,13 @@ struct SettingsViewModelTests {
     let sut: SettingsViewModel
     let mockAnalyticsService: MockAnalyticsService = MockAnalyticsService()
     let mockURLOpener: MockURLOpener = MockURLOpener()
+    let mockVersionProvider = MockAppVersionProvider()
+    let mockDeviceInformationProvider = MockDeviceInformationProvider()
+    let mockNotificationsService = MockNotificationService()
+    private var cancellables = Set<AnyCancellable>()
 
     init() {
-        let mockVersionProvider = MockAppVersionProvider()
-        let mockDeviceInformationProvider = MockDeviceInformationProvider()
-        let mockNotificationAuthStatus = MockNotificationAuthStatus()
+
 
         mockVersionProvider.versionNumber = "123"
         mockVersionProvider.buildNumber = "456"
@@ -25,10 +29,9 @@ struct SettingsViewModelTests {
             urlOpener: mockURLOpener,
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            configService: MockAppConfigService(),
-            notificationsAuthStatus: mockNotificationAuthStatus,
+            notificationService: MockNotificationService(),
             dismissAction: {
-                
+
             }
 
         )
@@ -38,7 +41,7 @@ struct SettingsViewModelTests {
     func title_isCorrect() {
         #expect(sut.title == "Settings")
     }
-    
+
     @Test
     func listContent_isCorrect() throws {
         try #require(sut.listContent.count == 3)
@@ -69,7 +72,7 @@ struct SettingsViewModelTests {
         #expect(linkSection.rows[2].title == "Open source licences")
         #expect(linkSection.rows[3].title == "Terms and conditions")
     }
-    
+
     @Test
     func analytics_toggledOnThenOff_deniesPermissions() throws {
         mockAnalyticsService.setAcceptedAnalytics(accepted: true)
@@ -79,7 +82,7 @@ struct SettingsViewModelTests {
         toggleRow.isOn = false
         #expect(mockAnalyticsService.permissionState == .denied)
     }
-    
+
     @Test
     func analytics_toggledOffThenOn_acceptsPermissions() throws {
         mockAnalyticsService.setAcceptedAnalytics(accepted: false)
@@ -89,7 +92,7 @@ struct SettingsViewModelTests {
         toggleRow.isOn = true
         #expect(mockAnalyticsService.permissionState == .accepted)
     }
-    
+
     @Test
     func privacyPolicy_action_tracksEvent() throws {
         let linkSection = sut.listContent[2]
@@ -141,4 +144,30 @@ struct SettingsViewModelTests {
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
     }
+
+    @Test
+    mutating func setNotificationAuthStatus_whenDenied_setsAuthStatusToDenied() async throws {
+        let sut = SettingsViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener(),
+            versionProvider: mockVersionProvider,
+            deviceInformationProvider: mockDeviceInformationProvider,
+            notificationService: mockNotificationsService,
+            dismissAction: { }
+        )
+
+        let result = await withCheckedContinuation { continutation in
+            sut.setNotificationAuthStatus()
+
+            sut.$notificationsPermissionState
+                .dropFirst()
+                .sink(receiveValue: { value in
+                    continutation.resume(returning: value)
+                }).store(in: &cancellables)
+            mockNotificationsService._receivedCompletion? = .denied
+        }
+        #expect(result == .denied)
+        // enounters threading issue
+    }
 }
+

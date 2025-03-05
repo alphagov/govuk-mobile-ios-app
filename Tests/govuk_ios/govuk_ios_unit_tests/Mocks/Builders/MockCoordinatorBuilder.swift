@@ -14,7 +14,8 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedTabCoordinator: MockBaseCoordinator?
     var _receivedTabNavigationController: UINavigationController?
-    override func tab(navigationController: UINavigationController) -> BaseCoordinator {
+    override func tab(navigationController: UINavigationController,
+                      dismissAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedTabNavigationController = navigationController
         return _stubbedTabCoordinator ??
         MockBaseCoordinator(
@@ -44,8 +45,8 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedSettingsCoordinator: TabItemCoordinator?
-    override var settings: any TabItemCoordinator {
-        _stubbedSettingsCoordinator ??
+    override func setttings(dissmissAction: @escaping () -> Void) -> any TabItemCoordinator {
+        return _stubbedSettingsCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )

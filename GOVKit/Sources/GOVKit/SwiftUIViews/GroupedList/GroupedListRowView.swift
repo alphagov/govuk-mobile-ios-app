@@ -75,7 +75,7 @@ struct LinkRowView: View {
 }
 
 struct NotificationsRowView: View {
-    @ObservedObject var row: NotificationSettingsRow
+    var row: NotificationSettingsRow
 
     var body: some View {
         Button {

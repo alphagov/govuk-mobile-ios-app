@@ -25,9 +25,9 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                         )
                         .padding(.top, 8)
                     } .alert(viewModel.notificationSettingsAlertText,
-                             isPresented: $viewModel.showNotificationUpsellAlert) {
-                        Button(viewModel.alertButtonText, role: .cancel) {
-                            viewModel.handleAlertAction()
+                             isPresented: $viewModel.displayNotificationSettingsAlert) {
+                        Button(viewModel.notificationAlertButtonText, role: .cancel) {
+                            viewModel.handleNotificationAlertAction()
                         }
                     }
                     .onChange(of: viewModel.scrollToTop) { shouldScroll in

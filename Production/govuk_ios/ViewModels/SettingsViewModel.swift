@@ -1,6 +1,5 @@
 import UIKit
 import GOVKit
-import Combine
 import SwiftUI
 
 protocol SettingsViewModelInterface: ObservableObject {
@@ -8,24 +7,32 @@ protocol SettingsViewModelInterface: ObservableObject {
     var listContent: [GroupedListSection] { get }
     func trackScreen(screen: TrackableScreen)
     var scrollToTop: Bool { get set }
-    var showNotificationUpsellAlert: Bool { get set }
+    var displayNotificationSettingsAlert: Bool { get set }
     var notificationSettingsAlertText: String { get }
-    func handleAlertAction()
-    var alertButtonText: String { get }
-    func setNotificationAuthStatus()
+    func handleNotificationAlertAction()
+    var notificationAlertButtonText: String { get }
 }
 
+// swiftlint:disable type_body_length
 class SettingsViewModel: SettingsViewModelInterface {
-    @Published var authNotifications: NotificationPermissionState = .notDetermined
     let title: String = String.settings.localized("pageTitle")
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let versionProvider: AppVersionProvider
     private let deviceInformationProvider: DeviceInformationProviderInterface
     @Published var scrollToTop: Bool = false
-    @Published var showNotificationUpsellAlert: Bool = false
-    private let dismissAction: () -> Void
+    @Published var displayNotificationSettingsAlert: Bool = false
+    @Published var notificationsPermissionState: NotificationPermissionState = .notDetermined
     private let notificationService: NotificationServiceInterface
+    private let notificationCenter = NotificationCenter.default
+    private let dismissAction: () -> Void
+
+    let notificationSettingsAlertText = String.settings.localized(
+        "settingsPushNotificationsAlertText"
+    )
+    let notificationAlertButtonText = String.settings.localized(
+        "settingsNotificationsAlertButtonText"
+    )
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
@@ -37,42 +44,23 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
-        self.dismissAction = dismissAction
         self.notificationService = notificationService
+        self.dismissAction = dismissAction
         setNotificationAuthStatus()
-        let notificationCenter = NotificationCenter.default
+        addObservers()
+    }
+
+    private func addObservers() {
         notificationCenter.addObserver(
-            self, selector: #selector(appMovedToForeground),
-            name: UIApplication.willEnterForegroundNotification, object: nil)
+            self,
+            selector: #selector(appMovedToForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
     }
 
     @objc func appMovedToForeground() {
         setNotificationAuthStatus()
-    }
-
-    let notificationSettingsAlertText = String.settings.localized(
-        "settingsPushNotificationsAlertText"
-    )
-
-    let alertButtonText = String.settings.localized(
-        "settingsNotificationsAlertButtonText"
-    )
-
-     func setNotificationAuthStatus() {
-         notificationService.returnUserNotificationStatus { [weak self] authSettings in
-             switch authSettings.authorizationStatus {
-             case .authorized:
-                 DispatchQueue.main.async {
-                     self?.authNotifications = .authorized
-                 }
-             case .denied:
-                 DispatchQueue.main.async {
-                     self?.authNotifications = .denied
-                 }
-             default:
-                 self?.authNotifications = .notDetermined
-             }
-         }
     }
 
     enum NotificationPermissionState {
@@ -80,8 +68,27 @@ class SettingsViewModel: SettingsViewModelInterface {
         case denied
         case authorized
     }
-    func handleAlertAction() {
-        switch authNotifications {
+     // test
+     func setNotificationAuthStatus() {
+         notificationService.returnUserNotificationStatus { [weak self] authorizationStatus in
+             switch authorizationStatus {
+             case .authorized:
+                 DispatchQueue.main.async {
+                     self?.notificationsPermissionState = .authorized
+                 }
+             case .denied:
+                 DispatchQueue.main.async {
+                     self?.notificationsPermissionState = .denied
+                 }
+             default:
+                 self?.notificationsPermissionState = .notDetermined
+             }
+         }
+    }
+
+    // test
+    func handleNotificationAlertAction() {
+        switch notificationsPermissionState {
         case .authorized, .denied:
             urlOpener.openSettings()
             if urlOpener.openSettings() == true {
@@ -109,58 +116,71 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     var listContent: [GroupedListSection] {
-        [
-            .init(
+        returnGroupedList()
+    }
+
+    private func returnGroupedList() -> [GroupedListSection] {
+        var rows: [GroupedListSection] = []
+        rows.append(GroupedListSection(
+            heading: GroupedListHeader(
+                title: String.settings.localized("aboutTheAppHeading"),
+                icon: nil
+            ),
+            rows: [helpAndFeedbackRow(),
+                   InformationRow(
+                    id: "settings.version.row",
+                    title: String.settings.localized("appVersionTitle"),
+                    body: nil,
+                    detail: versionProvider.fullBuildNumber ?? "-"
+                   )
+                  ],
+            footer: nil
+        ))
+
+        if notificationService.isFeatureEnabled {
+            rows.append(GroupedListSection(
                 heading: GroupedListHeader(
-                    title: String.settings.localized("aboutTheAppHeading"),
+                    title: "Notification",
                     icon: nil
                 ),
-                rows: [
-                    helpAndFeedbackRow(),
-                    InformationRow(
-                        id: "settings.version.row",
-                        title: String.settings.localized("appVersionTitle"),
-                        body: nil,
-                        detail: versionProvider.fullBuildNumber ?? "-"
-                    )
-                ],
-                footer: nil
-            ),
-            .init(
+                rows: [notificationsSettingsRow()],
+                footer: nil)
+            )
+        }
+        rows.append(
+            GroupedListSection(
                 heading: GroupedListHeader(
                     title: String.settings.localized("privacyAndLegalHeading"),
                     icon: nil
                 ),
-                rows: [
-                    ToggleRow(
-                        id: "settings.privacy.row",
-                        title: String.settings.localized("appUsageTitle"),
-                        isOn: hasAcceptedAnalytics,
-                        action: { [weak self] isOn in
-                            self?.analyticsService.setAcceptedAnalytics(
-                                accepted: isOn
-                            )
-                        }
-                    )
-                ],
+                rows: [ToggleRow(
+                    id: "settings.privacy.row",
+                    title: String.settings.localized("appUsageTitle"),
+                    isOn: hasAcceptedAnalytics,
+                    action: { [weak self] isOn in
+                        self?.analyticsService.setAcceptedAnalytics(
+                            accepted: isOn
+                        )
+                    }
+                )],
                 footer: String.settings.localized("appUsageFooter")
-            ),
-            .init(
-                heading: nil,
-                rows: returnPrivacyAndLegalRows(),
-                footer: nil
-            )
-        ]
+        ))
+
+        rows.append(GroupedListSection(
+            heading: nil,
+            rows: returnPrivacyAndLegalRows(),
+            footer: nil
+        ))
+
+        return rows
     }
+
 
     private func returnPrivacyAndLegalRows() -> [GroupedListRow] {
         var rows: [GroupedListRow] = []
         rows.append(privacyPolicyRow())
         rows.append(accessibilityStatementRow())
         rows.append(openSourceLicenceRow())
-        if notificationService.isFeatureEnabled {
-            rows.append(notificationsSettingsRow())
-        }
         rows.append(termsAndConditionsRow())
         return rows
     }
@@ -183,7 +203,6 @@ class SettingsViewModel: SettingsViewModelInterface {
         let rowTitle = String.settings.localized(
             "helpAndFeedbackSettingsTitle"
         )
-
         return LinkRow(
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
@@ -220,9 +239,16 @@ class SettingsViewModel: SettingsViewModelInterface {
             id: "settings.notifications.row",
             title: rowTitle,
             body: nil,
-            isAuthorized: authNotifications == .authorized ? true : false,
+            isAuthorized: notificationsPermissionState == .authorized,
             action: { [weak self] in
-                self?.showNotificationUpsellAlert.toggle()
+                if self?.notificationsPermissionState == .notDetermined {
+                    self?.notificationService.setRedirectedToNotificationsOnboarding(
+                        redirected: true
+                    )
+                    self?.dismissAction()
+                } else {
+                    self?.displayNotificationSettingsAlert.toggle()
+                }
             }
         )
     }
@@ -277,3 +303,4 @@ class SettingsViewModel: SettingsViewModelInterface {
         analyticsService.track(screen: screen)
     }
 }
+// swiftlint:enable type_body_length

@@ -11,7 +11,8 @@ class NotificationServiceTests {
     func fetchSlides_returnsExpectedSlides() async throws {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
         let result = await withCheckedContinuation { continuation in
             sut.fetchSlides(
@@ -46,7 +47,8 @@ class NotificationServiceTests {
         mockUserNotificationCenter._stubbedAuthorizationStatus = status
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: mockUserNotificationCenter
+            notificationCenter: mockUserNotificationCenter,
+            userDefaults: MockUserDefaults()
         )
         #expect(await !sut.shouldRequestPermission)
     }
@@ -55,8 +57,25 @@ class NotificationServiceTests {
     func isFeatureEnabled_returnsExpectedValue() async throws {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
         #expect(!sut.isFeatureEnabled)
     }
+
+    @Test(.serialized, arguments: [true, false])
+    func setRedirectedToNotificationsOnboarding_setRedirectedToNotificationsOnboardingToTrue(expectedValue: Bool) {
+
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults.set(bool: expectedValue, forKey: .redirectedToNotificationsOnboarding)
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(sut.redirectedToNotifcationsOnboarding == expectedValue)
+    }
+
 }

@@ -24,7 +24,9 @@ struct SettingsCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: MockAnalyticsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: MockNotificationService(),
+            dismissAction: {}
         )
         subject.start()
 
@@ -40,7 +42,9 @@ struct SettingsCoordinatorTests {
             viewControllerBuilder: viewControllerBuilder,
             deeplinkStore: DeeplinkDataStore(routes: []),
             analyticsService: MockAnalyticsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: MockNotificationService(),
+            dismissAction: {}
         )
         subject.start()
 

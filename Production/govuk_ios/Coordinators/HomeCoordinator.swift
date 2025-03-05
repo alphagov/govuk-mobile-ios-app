@@ -35,7 +35,6 @@ class HomeCoordinator: TabItemCoordinator {
             configService: configService,
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
-            searchAction: presentSearchCoordinator,
             recentActivityAction: startRecentActivityCoordinator
         )
         set([viewController], animated: false)
@@ -67,21 +66,6 @@ class HomeCoordinator: TabItemCoordinator {
             urlOpener.openIfPossible(
                 self.deviceInformationProvider.helpAndFeedbackURL(versionProvider: Bundle.main)
             )
-        }
-    }
-
-    private var presentSearchCoordinator: () -> Void {
-        return { [weak self] in
-            self?.trackWidgetNavigation(text: "Search")
-            guard let strongSelf = self else { return }
-            let navigationController = UINavigationController()
-            let coordinator = strongSelf.coordinatorBuilder.search(
-                navigationController: navigationController,
-                didDismissAction: {
-                    self?.root.viewWillReAppear()
-                }
-            )
-            strongSelf.present(coordinator)
         }
     }
 

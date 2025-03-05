@@ -11,7 +11,6 @@ struct HomeViewModel {
     let configService: AppConfigServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let feedbackAction: () -> Void
-    let searchAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
@@ -38,24 +37,6 @@ struct HomeViewModel {
         let content = UserFeedbackView(viewModel: viewModel)
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
-        widget.addContent(content)
-        return widget
-    }
-
-    private var searchWidget: WidgetView? {
-        guard widgetEnabled(feature: .search)
-        else { return nil }
-
-        let title = String.home.localized("searchWidgetTitle")
-        let viewModel = SearchWidgetViewModel(
-            title: title,
-            action: searchAction
-        )
-        let content = SearchWidgetStackView(
-            viewModel: viewModel
-        )
-        let widget = WidgetView()
-        widget.backgroundColor = UIColor.govUK.fills.surfaceCardDefault
         widget.addContent(content)
         return widget
     }

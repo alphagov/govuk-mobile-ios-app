@@ -110,17 +110,6 @@ class CoordinatorBuilder {
         )
     }
 
-    func search(navigationController: UINavigationController,
-                didDismissAction: @escaping () -> Void) -> BaseCoordinator {
-        SearchCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
-            analyticsService: container.analyticsService.resolve(),
-            searchService: container.searchService.resolve(),
-            dismissed: didDismissAction
-        )
-    }
-
     func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
         RecentActivityCoordinator(
             navigationController: navigationController,

@@ -24,14 +24,12 @@ class ViewControllerBuilder {
               configService: AppConfigServiceInterface,
               topicWidgetViewModel: TopicsWidgetViewModel,
               feedbackAction: @escaping () -> Void,
-              searchAction: @escaping () -> Void,
               recentActivityAction: @escaping () -> Void) -> UIViewController {
         let viewModel = HomeViewModel(
             analyticsService: analyticsService,
             configService: configService,
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
-            searchAction: searchAction,
             recentActivityAction: recentActivityAction,
             urlOpener: UIApplication.shared
         )
@@ -54,22 +52,6 @@ class ViewControllerBuilder {
 
         viewController.navigationItem.largeTitleDisplayMode = .always
         return viewController
-    }
-
-    @MainActor
-    func search(analyticsService: AnalyticsServiceInterface,
-                searchService: SearchServiceInterface,
-                dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = SearchViewModel(
-            analyticsService: analyticsService,
-            searchService: searchService,
-            activityService: Container.shared.activityService.resolve(),
-            urlOpener: UIApplication.shared
-        )
-        return UIViewController()
-//        return SearchViewController(
-//            viewModel: viewModel
-//        )
     }
 
     @MainActor

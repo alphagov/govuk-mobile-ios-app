@@ -211,7 +211,7 @@ class SearchViewController: BaseViewController,
         ])
     }
 
-    func didInvokeSearch(using type: SearchInvocationType) {
+    private func didInvokeSearch(using type: SearchInvocationType) {
         let searchText = searchBar.text
         viewModel.search(
             text: searchText,

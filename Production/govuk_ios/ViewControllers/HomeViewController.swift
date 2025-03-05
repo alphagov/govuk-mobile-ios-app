@@ -180,3 +180,14 @@ extension HomeViewController: UISearchBarDelegate {
         setLogoHidden(false)
     }
 }
+
+extension HomeViewController: ContentScrollable {
+    func scrollToTop() {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        removeContentController(searchViewController)
+        displayContentController(homeContentViewController)
+        setLogoHidden(false)
+        (homeContentViewController as? HomeContentViewController)?.scrollToTop()
+    }
+}

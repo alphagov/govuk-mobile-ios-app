@@ -78,6 +78,17 @@ class HomeContentViewController: BaseViewController,
     }
 }
 
+extension HomeContentViewController: ContentScrollable {
+    func scrollToTop() {
+        let currentX = scrollView.contentOffset.x
+        let topOffset = CGPoint(x: currentX, y: -scrollView.adjustedContentInset.top)
+        scrollView.setContentOffset(
+            topOffset,
+            animated: true
+        )
+    }
+}
+
 extension HomeContentViewController: TrackableScreen {
     var trackingName: String { "Homepage" }
     var trackingTitle: String? { "Homepage" }

@@ -3,8 +3,8 @@ import UIKit
 import GOVKit
 
 class HomeViewController: BaseViewController {
-    private var searchViewController: UIViewController!
-    private var homeContentViewController: UIViewController!
+    private var searchViewController: SearchViewController!
+    private var homeContentViewController: HomeContentViewController!
     private var viewModel: HomeViewModel
     private lazy var logoImageView: UIImageView = {
         let uiImageView = UIImageView(image: .homeLogo)
@@ -20,7 +20,9 @@ class HomeViewController: BaseViewController {
         localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceBackground
         localSearchBar.enablesReturnKeyAutomatically = false
         localSearchBar.translatesAutoresizingMaskIntoConstraints = false
-        localSearchBar.backgroundImage = UIImage()
+        localSearchBar.barTintColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
+        localSearchBar.layer.borderColor = UIColor.govUK.fills.surfaceHomeHeaderBackground.cgColor
+        localSearchBar.layer.borderWidth = 1
         localSearchBar.searchTextField.attributedPlaceholder = NSAttributedString(
             string: String.search.localized("searchBarPlaceholder"),
             attributes: [
@@ -147,6 +149,9 @@ class HomeViewController: BaseViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         setLogoHidden(searchBar.searchTextField.isEditing)
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            searchBar.layer.borderColor = UIColor.govUK.fills.surfaceHomeHeaderBackground.cgColor
+        }
     }
 
     fileprivate func setLogoHidden(_ hideLogo: Bool) {
@@ -193,6 +198,6 @@ extension HomeViewController: ContentScrollable {
         removeContentController(searchViewController)
         displayContentController(homeContentViewController)
         setLogoHidden(false)
-        (homeContentViewController as? HomeContentViewController)?.scrollToTop()
+        homeContentViewController.scrollToTop()
     }
 }

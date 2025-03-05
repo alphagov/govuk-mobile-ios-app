@@ -28,7 +28,6 @@ struct ViewControllerBuilderTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: viewModel,
             feedbackAction: {},
-            searchAction: { () -> Void in },
             recentActivityAction: {}
         )
 
@@ -50,18 +49,6 @@ struct ViewControllerBuilderTests {
         #expect(result.title == "Settings")
         #expect(result.navigationItem.largeTitleDisplayMode == .always)
         #expect(result is HostingViewController<SettingsView<SettingsViewModel>>)
-    }
-
-    @Test
-    func search_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.search(
-            analyticsService: MockAnalyticsService(),
-            searchService: MockSearchService(),
-            dismissAction: { }
-        )
-
-        #expect(result is SearchViewController)
     }
 
     @Test

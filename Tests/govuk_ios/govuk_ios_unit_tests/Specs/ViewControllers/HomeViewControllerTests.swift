@@ -5,6 +5,7 @@ import Testing
 import Factory
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @MainActor
 struct HomeViewControllerTests {
@@ -22,8 +23,8 @@ struct HomeViewControllerTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         let subject = HomeViewController(viewModel: viewModel)
 
@@ -45,8 +46,8 @@ struct HomeViewControllerTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         let subject = HomeViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
@@ -72,8 +73,8 @@ struct HomeViewControllerTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         let subject = HomeViewController(viewModel: viewModel)
         guard let scrollView: UIScrollView =

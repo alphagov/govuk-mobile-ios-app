@@ -3,6 +3,7 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @Suite
 @MainActor
@@ -21,8 +22,8 @@ struct HomeViewModelTests {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         let widgets = subject.widgets
 
@@ -47,8 +48,8 @@ struct HomeViewModelTests {
             configService: configService,
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         let widgets = subject.widgets
 

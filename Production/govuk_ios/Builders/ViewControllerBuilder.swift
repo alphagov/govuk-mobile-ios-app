@@ -19,7 +19,6 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    // swiftlint:disable:next function_parameter_count
     func home(analyticsService: AnalyticsServiceInterface,
               configService: AppConfigServiceInterface,
               topicWidgetViewModel: TopicsWidgetViewModel,

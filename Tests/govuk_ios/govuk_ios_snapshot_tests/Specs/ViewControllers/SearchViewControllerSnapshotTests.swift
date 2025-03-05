@@ -98,7 +98,7 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
         )
         return SearchViewController(
             viewModel: viewModel,
-            dismissAction: {}
+            searchBar: UISearchBar()
         )
     }
 }

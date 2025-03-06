@@ -120,13 +120,9 @@ class SearchViewController: BaseViewController,
         view.addSubview(errorScrollView)
         errorScrollView.addSubview(errorView)
 
-        addChild(self.searchSuggestionsViewController)
-        view.addSubview(searchSuggestionsViewController.view)
-        searchSuggestionsViewController.didMove(toParent: self)
+        addController(searchSuggestionsViewController)
+        addController(searchHistoryViewController)
 
-        addChild(self.searchHistoryViewController)
-        view.addSubview(searchHistoryViewController.view)
-        searchHistoryViewController.didMove(toParent: self)
         tableView.isHidden = !viewModel.historyIsEmpty
     }
 

@@ -80,7 +80,7 @@ class HomeViewController: BaseViewController {
         homeContentViewController = HomeContentViewController(
             viewModel: viewModel
         )
-        displayContentController(homeContentViewController!)
+        displayController(homeContentViewController!)
     }
 
 
@@ -92,9 +92,8 @@ class HomeViewController: BaseViewController {
         view.backgroundColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
     }
 
-    private func displayContentController(_ content: UIViewController) {
-        addChild(content)
-        view.addSubview(content.view)
+    func displayController(_ content: UIViewController) {
+        addController(content)
         content.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             content.view.leadingAnchor.constraint(
@@ -111,13 +110,6 @@ class HomeViewController: BaseViewController {
                 equalTo: view.bottomAnchor
             )
         ])
-        content.didMove(toParent: self)
-    }
-
-    private func removeContentController(_ content: UIViewController) {
-        content.willMove(toParent: nil)
-        content.view.removeFromSuperview()
-        content.removeFromParent()
     }
 
     private func configureConstraints() {
@@ -181,8 +173,8 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
-        removeContentController(homeContentViewController)
-        displayContentController(searchViewController)
+        removeController(homeContentViewController)
+        displayController(searchViewController)
         setLogoHidden(true)
         return true
     }
@@ -190,8 +182,8 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
-        removeContentController(searchViewController)
-        displayContentController(homeContentViewController)
+        removeController(searchViewController)
+        displayController(homeContentViewController)
         setLogoHidden(false)
     }
 }
@@ -200,8 +192,8 @@ extension HomeViewController: ContentScrollable {
     func scrollToTop() {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
-        removeContentController(searchViewController)
-        displayContentController(homeContentViewController)
+        removeController(searchViewController)
+        displayController(homeContentViewController)
         setLogoHidden(false)
         homeContentViewController.scrollToTop()
     }

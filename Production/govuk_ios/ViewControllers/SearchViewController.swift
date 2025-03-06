@@ -292,13 +292,7 @@ class SearchViewController: BaseViewController,
         errorView.invalidateIntrinsicContentSize()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        searchBar.text = ""
-        clearResults()
-    }
-
-    private func clearResults() {
+    func clearResults() {
         viewModel.clearResults()
         reloadSnapshot()
         searchHistoryViewController.reloadSnapshot()

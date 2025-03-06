@@ -182,6 +182,8 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
+        searchBar.text = ""
+        searchViewController.clearResults()
         removeController(searchViewController)
         displayController(homeContentViewController)
         setLogoHidden(false)
@@ -192,6 +194,8 @@ extension HomeViewController: ContentScrollable {
     func scrollToTop() {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
+        searchBar.text = ""
+        searchViewController.clearResults()
         removeController(searchViewController)
         displayController(homeContentViewController)
         setLogoHidden(false)

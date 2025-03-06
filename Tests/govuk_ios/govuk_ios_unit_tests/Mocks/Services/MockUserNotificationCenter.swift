@@ -5,10 +5,9 @@ import UserNotifications
 
 class MockUserNotificationCenter: UserNotificationCenterInterface {
 
-
-    func getAuthorisationStaus(completionHandler: @escaping (UNAuthorizationStatus) -> Void) async {
-        let result = await authorizationStatus
-        completionHandler(result)
+    var  _receivedGetAuthorizationStatusCompletion: ((UNAuthorizationStatus) -> Void)?
+    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        _receivedGetAuthorizationStatusCompletion = completion
     }
 
 

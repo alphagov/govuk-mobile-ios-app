@@ -8,9 +8,10 @@ protocol SettingsViewModelInterface: ObservableObject {
     func trackScreen(screen: TrackableScreen)
     var scrollToTop: Bool { get set }
     var displayNotificationSettingsAlert: Bool { get set }
-    var notificationSettingsAlertText: String { get }
     func handleNotificationAlertAction()
-    var notificationAlertButtonText: String { get }
+    var notificationSettingsAlertTitle: String { get }
+    var notificationSettingsAlertBody: String { get }
+    var notificationAlertButtonTitle: String { get }
 }
 
 // swiftlint:disable type_body_length
@@ -25,14 +26,11 @@ class SettingsViewModel: SettingsViewModelInterface {
     @Published var notificationsPermissionState: NotificationPermissionState = .notDetermined
     private let notificationService: NotificationServiceInterface
     private let notificationCenter = NotificationCenter.default
+    var notificationAlertButtonTitle: String = String.settings.localized(
+        "settingsNotificationAlertPrimaryButtonTitle"
+    )
     private let dismissAction: () -> Void
 
-    let notificationSettingsAlertText = String.settings.localized(
-        "settingsPushNotificationsAlertText"
-    )
-    let notificationAlertButtonText = String.settings.localized(
-        "settingsNotificationsAlertButtonText"
-    )
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
@@ -46,7 +44,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.deviceInformationProvider = deviceInformationProvider
         self.notificationService = notificationService
         self.dismissAction = dismissAction
-        setNotificationAuthStatus()
+        setNotificationAuthorisationStatus()
         addObservers()
     }
 
@@ -59,18 +57,38 @@ class SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    @objc func appMovedToForeground() {
-        setNotificationAuthStatus()
+
+    var notificationSettingsAlertTitle: String {
+        switch notificationsPermissionState {
+        case .authorized:
+            return String.settings.localized("settingsPushNotificationsAlertTitleEnabled")
+        default:
+            return String.settings.localized("settingsPushNotificationsAlertTitleDisabled")
+        }
     }
 
-    enum NotificationPermissionState {
+    var notificationSettingsAlertBody: String {
+        switch notificationsPermissionState {
+        case .authorized:
+            return String.settings.localized("settingsPushNotificationsAlertBodyEnabled")
+        default:
+            return String.settings.localized("settingsPushNotificationsAlertBodyDisabled")
+        }
+    }
+
+    @objc func appMovedToForeground() {
+        setNotificationAuthorisationStatus()
+    }
+
+     enum NotificationPermissionState {
         case notDetermined
         case denied
         case authorized
     }
-     // test
-     func setNotificationAuthStatus() {
-         notificationService.returnUserNotificationStatus { [weak self] authorizationStatus in
+
+     private func setNotificationAuthorisationStatus() {
+         notificationsPermissionState = .notDetermined
+         notificationService.getAuthorizationStatus { [weak self] authorizationStatus in
              switch authorizationStatus {
              case .authorized:
                  DispatchQueue.main.async {
@@ -86,23 +104,17 @@ class SettingsViewModel: SettingsViewModelInterface {
          }
     }
 
-    // test
     func handleNotificationAlertAction() {
         switch notificationsPermissionState {
         case .authorized, .denied:
-            urlOpener.openSettings()
             if urlOpener.openSettings() == true {
                 trackLinkEvent(
-                    String.settings.localized("openNotificationsSettings"),
+                    notificationAlertButtonTitle,
                     external: false
                 )
             }
         default:
-            trackLinkEvent(
-                String.settings.localized("openNotificationsSettings"),
-                external: false
-            )
-            dismissAction()
+            break
         }
     }
 
@@ -132,19 +144,18 @@ class SettingsViewModel: SettingsViewModelInterface {
                     title: String.settings.localized("appVersionTitle"),
                     body: nil,
                     detail: versionProvider.fullBuildNumber ?? "-"
-                   )
-                  ],
+                   )],
             footer: nil
         ))
-
         if notificationService.isFeatureEnabled {
-            rows.append(GroupedListSection(
-                heading: GroupedListHeader(
-                    title: "Notification",
-                    icon: nil
-                ),
-                rows: [notificationsSettingsRow()],
-                footer: nil)
+            rows.append(
+                GroupedListSection(
+                    heading: GroupedListHeader(
+                        title: String.settings.localized("settingsNotificationsTitle"),
+                        icon: nil
+                    ),
+                    rows: [notificationsSettingsRow()],
+                    footer: nil)
             )
         }
         rows.append(
@@ -164,17 +175,14 @@ class SettingsViewModel: SettingsViewModelInterface {
                     }
                 )],
                 footer: String.settings.localized("appUsageFooter")
-        ))
-
-        rows.append(GroupedListSection(
-            heading: nil,
-            rows: returnPrivacyAndLegalRows(),
-            footer: nil
-        ))
-
+            ))
+        rows.append(
+            GroupedListSection(
+                heading: nil,
+                rows: returnPrivacyAndLegalRows(),
+                footer: nil ))
         return rows
     }
-
 
     private func returnPrivacyAndLegalRows() -> [GroupedListRow] {
         var rows: [GroupedListRow] = []
@@ -234,7 +242,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     private func notificationsSettingsRow() -> GroupedListRow {
-        let rowTitle = String.settings.localized("openNotificationsSettings")
+        let rowTitle = String.settings.localized("settingsNotificationsTitle")
         return NotificationSettingsRow(
             id: "settings.notifications.row",
             title: rowTitle,
@@ -244,6 +252,10 @@ class SettingsViewModel: SettingsViewModelInterface {
                 if self?.notificationsPermissionState == .notDetermined {
                     self?.notificationService.setRedirectedToNotificationsOnboarding(
                         redirected: true
+                    )
+                    self?.trackLinkEvent(
+                        String.settings.localized("settingsNotificationsTitle"),
+                        external: false
                     )
                     self?.dismissAction()
                 } else {

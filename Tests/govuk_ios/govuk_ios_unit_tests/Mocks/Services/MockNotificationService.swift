@@ -7,15 +7,11 @@ import Onboarding
 
 class MockNotificationService: NotificationServiceInterface {
 
-
-    var  _receivedCompletion: UNAuthorizationStatus?
-    func returnUserNotificationStatus(completionHandler: @escaping (UNAuthorizationStatus) -> Void) {
-        if let result = _receivedCompletion {
-            completionHandler(result)
-
-        }
+    var  _receivedCompletion: ((UNAuthorizationStatus) -> Void)?
+    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        _receivedCompletion = completion
     }
-    
+
     var _setRedirectedToNotificationsOnboardinCalled: Bool?
     func setRedirectedToNotificationsOnboarding(redirected: Bool) {
         _setRedirectedToNotificationsOnboardinCalled = redirected

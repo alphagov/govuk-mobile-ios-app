@@ -12,7 +12,7 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     var isFeatureEnabled: Bool { get }
     var redirectedToNotifcationsOnboarding: Bool { get }
     func setRedirectedToNotificationsOnboarding(redirected: Bool)
-    func returnUserNotificationStatus(completionHandler: @escaping  (UNAuthorizationStatus) -> Void)
+    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void)
 }
 
 class NotificationService: NotificationServiceInterface {
@@ -35,14 +35,9 @@ class NotificationService: NotificationServiceInterface {
             withLaunchOptions: launchOptions
         )
     }
-
-    func returnUserNotificationStatus(
-        completionHandler: @escaping (UNAuthorizationStatus) -> Void) {
-        Task {
-            await notificationCenter.getAuthorisationStaus { status in
-                completionHandler(status)
-            }
-        }
+    // test
+    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        notificationCenter.getAuthorizationStatus(completion: completion)
     }
 
     // tested

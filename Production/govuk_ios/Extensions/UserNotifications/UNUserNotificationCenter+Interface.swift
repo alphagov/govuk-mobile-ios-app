@@ -3,8 +3,8 @@ import UserNotifications
 
 protocol UserNotificationCenterInterface {
     var authorizationStatus: UNAuthorizationStatus { get async }
-    func getAuthorisationStaus(
-        completionHandler: @escaping (UNAuthorizationStatus) -> Void) async
+    func getAuthorizationStatus(
+        completion: @escaping (UNAuthorizationStatus) -> Void)
 }
 
 extension UNUserNotificationCenter: UserNotificationCenterInterface {
@@ -14,9 +14,11 @@ extension UNUserNotificationCenter: UserNotificationCenterInterface {
         }
     }
 
-    func getAuthorisationStaus(
-        completionHandler: @escaping (UNAuthorizationStatus) -> Void) async {
-        let settings = await self.authorizationStatus
-            completionHandler(settings)
+    func getAuthorizationStatus(
+        completion: @escaping (UNAuthorizationStatus) -> Void) {
+            Task {
+                let status = await self.authorizationStatus
+                completion(status)
+            }
     }
 }

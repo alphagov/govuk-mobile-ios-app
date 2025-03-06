@@ -67,17 +67,6 @@
         }
       }
     },
-    "openNotificationsSettings" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications"
-          }
-        }
-      }
-    },
     "openSourceLicenceRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -122,6 +111,17 @@
         }
       }
     },
+    "settingsNotificationAlertPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
     "settingsNotificationsAlertButtonText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -133,13 +133,57 @@
         }
       }
     },
-    "settingsPushNotificationsAlertText" : {
+    "settingsNotificationsTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Push notifications are used to provide updates. You can change this in the settings"
+            "value" : "Notifications"
+          }
+        }
+      }
+    },
+    "settingsPushNotificationsAlertBodyDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn on notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "settingsPushNotificationsAlertBodyEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn off notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "settingsPushNotificationsAlertTitleDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on notifications"
+          }
+        }
+      }
+    },
+    "settingsPushNotificationsAlertTitleEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn off notifications"
           }
         }
       }

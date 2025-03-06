@@ -24,11 +24,13 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                             backgroundColor: UIColor.govUK.fills.surfaceBackground
                         )
                         .padding(.top, 8)
-                    } .alert(viewModel.notificationSettingsAlertText,
-                             isPresented: $viewModel.displayNotificationSettingsAlert) {
-                        Button(viewModel.notificationAlertButtonText, role: .cancel) {
+                    }.alert(isPresented: $viewModel.displayNotificationSettingsAlert) {
+                        Alert(title: Text(viewModel.notificationSettingsAlertTitle),
+                              message: Text(viewModel.notificationSettingsAlertBody),
+                              primaryButton: .destructive(
+                                Text(viewModel.notificationAlertButtonTitle)) {
                             viewModel.handleNotificationAlertAction()
-                        }
+                        }, secondaryButton: .cancel())
                     }
                     .onChange(of: viewModel.scrollToTop) { shouldScroll in
                         if shouldScroll {

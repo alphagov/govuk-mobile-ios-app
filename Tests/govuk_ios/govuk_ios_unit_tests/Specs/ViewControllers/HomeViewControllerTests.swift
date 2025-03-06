@@ -20,9 +20,11 @@ struct HomeViewControllerTests {
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { () -> Void in _ = true },
+            notificationsAction: { },
             recentActivityAction: { }
         )
         let subject = HomeViewController(viewModel: viewModel)
@@ -43,9 +45,11 @@ struct HomeViewControllerTests {
         let viewModel = HomeViewModel(
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { () -> Void in _ = true },
+            notificationsAction: { },
             recentActivityAction: { }
         )
         let subject = HomeViewController(viewModel: viewModel)
@@ -70,9 +74,11 @@ struct HomeViewControllerTests {
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { () -> Void in _ = true },
+            notificationsAction: { },
             recentActivityAction: { }
         )
         let subject = HomeViewController(viewModel: viewModel)

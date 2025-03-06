@@ -26,9 +26,11 @@ struct ViewControllerBuilderTests {
         let result = subject.home(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: viewModel,
             feedbackAction: {},
             searchAction: { () -> Void in },
+            notificationsAction: {},
             recentActivityAction: {}
         )
 

@@ -126,9 +126,11 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { },
+            notificationsAction: { },
             recentActivityAction: { }
         )
         return HomeViewController(viewModel: viewModel)

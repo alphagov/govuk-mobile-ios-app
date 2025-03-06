@@ -13,15 +13,38 @@ struct HomeViewModel {
     let recentActivityAction: () -> Void
 
     var widgets: [WidgetView] {
-        [
-            notificationsWidget,
-            // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
-            searchWidget,
-            recentActivityWidget,
-            topicsWidget
-        ].compactMap { $0 }
+        get async {
+            await [
+                notificationsWidget,
+                //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
+                searchWidget,
+                recentActivityWidget,
+                topicsWidget
+            ].compactMap { $0 }
+        }
     }
 
+    @MainActor
+    private var notificationsWidget: WidgetView? {
+        get async {
+            guard await notificationService.shouldRequestPermission
+            else { return nil }
+
+            let title = String.home.localized("homeWidgetTitle")
+            let viewModel = UserFeedbackViewModel(
+                title: title,
+                action: notificationsAction
+            )
+            let content = UserFeedbackView(viewModel: viewModel)
+            content.hideChevron()
+            let widget = WidgetView(useContentAccessibilityInfo: true)
+            widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+            widget.addContent(content)
+            return widget
+        }
+    }
+
+    @MainActor
     private var feedbackWidget: WidgetView {
         let title = String.home.localized("feedbackWidgetTitle")
         let viewModel = UserFeedbackViewModel(
@@ -35,24 +58,7 @@ struct HomeViewModel {
         return widget
     }
 
-
-    private var notificationsWidget: WidgetView? {
-        guard notificationService.isFeatureEnabled
-        else { return nil }
-
-        let title = String.home.localized("homeWidgetTitle")
-        let viewModel = UserFeedbackViewModel(
-            title: title,
-            action: notificationsAction
-        )
-        let content = UserFeedbackView(viewModel: viewModel)
-        content.hideChevron()
-        let widget = WidgetView(useContentAccessibilityInfo: true)
-        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
-        widget.addContent(content)
-        return widget
-    }
-
+    @MainActor
     private var searchWidget: WidgetView? {
         guard widgetEnabled(feature: .search)
         else { return nil }
@@ -71,6 +77,7 @@ struct HomeViewModel {
         return widget
     }
 
+    @MainActor
     private var recentActivityWidget: WidgetView? {
         guard widgetEnabled(feature: .recentActivity)
         else { return nil }
@@ -90,6 +97,7 @@ struct HomeViewModel {
         return widget
     }
 
+    @MainActor
     private var topicsWidget: WidgetView? {
         guard widgetEnabled(feature: .topics)
         else { return nil }

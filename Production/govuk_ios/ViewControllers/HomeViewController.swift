@@ -32,6 +32,7 @@ class HomeViewController: BaseViewController {
         )
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
         localSearchBar.tintColor = UIColor.govUK.text.secondary
+        colorSearchBarButton()
         localSearchBar.delegate = self
 
         return localSearchBar
@@ -169,13 +170,22 @@ class HomeViewController: BaseViewController {
             self.view.layoutIfNeeded()
         }
     }
+
+    private func colorSearchBarButton() {
+        let searchBarButton = UIBarButtonItem.appearance(
+            whenContainedInInstancesOf: [UISearchBar.self]
+        )
+        let foregroundColor = NSAttributedString.Key.foregroundColor.rawValue
+        searchBarButton.setTitleTextAttributes(
+            [NSAttributedString.Key(rawValue: foregroundColor): UIColor.govUK.text.linkHeader],
+            for: .normal
+        )
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
-        let cancelButton = (searchBar.value(forKey: "cancelButton") as? UIButton)
-        cancelButton?.tintColor = UIColor.govUK.text.linkHeader
         removeContentController(homeContentViewController)
         displayContentController(searchViewController)
         setLogoHidden(true)

@@ -90,7 +90,8 @@ class SearchViewController: BaseViewController,
 
     var trackingName: String { "Search" }
 
-    init(viewModel: SearchViewModel, searchBar: UISearchBar) {
+    init(viewModel: SearchViewModel,
+         searchBar: UISearchBar) {
         self.viewModel = viewModel
         self.searchBar = searchBar
         super.init(analyticsService: viewModel.analyticsService)
@@ -315,7 +316,7 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         clearResults()
         return true
-     }
+    }
 
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,

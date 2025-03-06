@@ -3,6 +3,7 @@ import XCTest
 import UIKit
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @MainActor
 class HomeViewControllerSnapshotTests: SnapshotTestCase {
@@ -128,8 +129,8 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             configService: MockAppConfigService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         return HomeViewController(viewModel: viewModel)
     }

@@ -22,7 +22,7 @@ struct SearchViewControllerTests {
         )
         let subject = SearchViewController(
             viewModel: viewModel,
-            dismissAction: { }
+            searchBar: UISearchBar()
         )
         subject.viewDidAppear(false)
 

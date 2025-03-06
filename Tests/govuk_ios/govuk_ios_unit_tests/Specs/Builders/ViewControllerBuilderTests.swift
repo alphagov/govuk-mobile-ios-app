@@ -18,6 +18,7 @@ struct ViewControllerBuilderTests {
         let subject = ViewControllerBuilder()
         let viewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }

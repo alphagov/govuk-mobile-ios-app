@@ -5,19 +5,24 @@ import GOVKit
 
 final class TopicsWidgetViewModel {
     private let topicsService: TopicsServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
     let editAction: () -> Void
     var handleError: ((TopicsServiceError) -> Void)?
     var fetchTopicsError: Bool = false
+    var initialLoadComplete: Bool = false
+    var isEditing: Bool = false
 
     init(topicsService: TopicsServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener = UIApplication.shared,
          topicAction: @escaping (Topic) -> Void,
          editAction: @escaping () -> Void,
          allTopicsAction: @escaping () -> Void) {
         self.topicsService = topicsService
+        self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.topicAction = topicAction
         self.editAction = editAction
@@ -40,10 +45,6 @@ final class TopicsWidgetViewModel {
         topicsService.hasCustomisedTopics ?
         topicsService.fetchFavourites() :
         topicsService.fetchAll()
-    }
-
-    var topicCount: Int {
-        topicsService.fetchAll().count
     }
 
     lazy var topicErrorViewModel: AppErrorViewModel = {
@@ -70,5 +71,40 @@ final class TopicsWidgetViewModel {
                 self?.fetchTopicsError = false
             }
         }
+    }
+
+    func trackECommerce() {
+        if !isEditing && initialLoadComplete {
+            let trackedTopics = displayedTopics
+            var items = [HomeCommerceItem]()
+            trackedTopics.enumerated().forEach { index, topic in
+                let item = HomeCommerceItem(name: topic.title,
+                                            index: index + 1,
+                                            itemId: nil,
+                                            locationId: nil)
+                items.append(item)
+            }
+            let event = AppEvent.viewItemList(name: "Homepage",
+                                              id: "Homepage",
+                                              items: items)
+            analyticsService.track(event: event)
+        }
+    }
+
+    func trackECommerceSelection(_ name: String) {
+        let trackedTopics = displayedTopics
+        guard let topic = trackedTopics.first(where: {$0.title == name}),
+              let index = trackedTopics.firstIndex(of: topic) else {
+            return
+        }
+        let items = [HomeCommerceItem(name: topic.title,
+                                      index: index + 1,
+                                      itemId: nil,
+                                      locationId: nil)]
+
+        let event = AppEvent.selectHomePageItem(
+            results: trackedTopics.count,
+            items: items)
+        analyticsService.track(event: event)
     }
 }

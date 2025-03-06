@@ -6,8 +6,8 @@ public final class HostingViewController<T>: UIHostingController<T> where T: Vie
     private let statusBarStyle: UIStatusBarStyle
 
     public init(rootView: T,
-         navigationBarHidden: Bool = false,
-         statusBarStyle: UIStatusBarStyle = .default) {
+                navigationBarHidden: Bool = false,
+                statusBarStyle: UIStatusBarStyle = .default) {
         self.navigationBarHidden = navigationBarHidden
         self.statusBarStyle = statusBarStyle
         super.init(rootView: rootView)
@@ -20,7 +20,9 @@ public final class HostingViewController<T>: UIHostingController<T> where T: Vie
 
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(
+        guard let navigationController = navigationController else { return }
+
+        navigationController.setNavigationBarHidden(
             navigationBarHidden,
             animated: animated
         )

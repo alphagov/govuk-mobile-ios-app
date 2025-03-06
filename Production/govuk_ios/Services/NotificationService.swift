@@ -1,28 +1,47 @@
 import Foundation
 import UIKit
 import UserNotifications
+import Onboarding
 
 import OneSignalFramework
 
-protocol NotificationServiceInterface {
+protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: @escaping () -> Void)
     var shouldRequestPermission: Bool { get async }
+    var isFeatureEnabled: Bool { get }
 }
 
 class NotificationService: NotificationServiceInterface {
     private var environmentService: AppEnvironmentServiceInterface
+    private let notificationCenter: UserNotificationCenterInterface
 
-    init(environmentService: AppEnvironmentServiceInterface) {
+    init(environmentService: AppEnvironmentServiceInterface,
+         notificationCenter: UserNotificationCenterInterface) {
         self.environmentService = environmentService
+        self.notificationCenter = notificationCenter
+    }
+
+    func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        OneSignal.setConsentRequired(true)
+        OneSignal.initialize(
+            environmentService.oneSignalAppId,
+            withLaunchOptions: launchOptions
+        )
     }
 
     var shouldRequestPermission: Bool {
         get async {
-            await UNUserNotificationCenter.current()
-                .notificationSettings()
-                .authorizationStatus == .notDetermined
+            let switches = (
+                isFeatureEnabled,
+                await notificationCenter.authorizationStatus == .notDetermined
+            )
+            return switches.0 && switches.1
         }
+    }
+
+    var isFeatureEnabled: Bool {
+        true
     }
 
     func requestPermissions(completion: @escaping () -> Void) {
@@ -32,14 +51,9 @@ class NotificationService: NotificationServiceInterface {
         }, fallbackToSettings: false)
     }
 
-    func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        OneSignal.initialize(
-            environmentService.oneSignalAppId,
-            withLaunchOptions: launchOptions
-        )
-
-        OneSignal.Notifications.requestPermission({ accepted in
-            print("User accepted notifications: \(accepted)")
-        }, fallbackToSettings: false)
+    func fetchSlides(
+        completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
+    ) {
+        completion(.success(Onboarding.notificationSlides))
     }
 }

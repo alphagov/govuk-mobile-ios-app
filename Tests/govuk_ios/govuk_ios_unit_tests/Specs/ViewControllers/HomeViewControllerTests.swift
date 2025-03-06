@@ -12,6 +12,7 @@ struct HomeViewControllerTests {
     func init_hasExpectedValues() {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -34,6 +35,7 @@ struct HomeViewControllerTests {
         let mockAnalyticsService = MockAnalyticsService()
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -60,6 +62,7 @@ struct HomeViewControllerTests {
     func scrollToTop_scrollsContentToTop() {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }

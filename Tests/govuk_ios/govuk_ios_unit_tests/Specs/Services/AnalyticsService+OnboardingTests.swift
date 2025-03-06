@@ -43,7 +43,7 @@ struct AnalyticsService_OnboardingTests {
 
         #expect(mockAnalyticsClient._trackScreenReceivedScreens.count == 1)
         #expect(mockAnalyticsClient._trackScreenReceivedScreens.first?.trackingName == "test_name")
-        #expect(onboardingScreen.trackingLanguage == Locale.current.languageCode)
+        #expect(onboardingScreen.trackingLanguage == Locale.current.language.languageCode?.identifier)
     }
 
 }

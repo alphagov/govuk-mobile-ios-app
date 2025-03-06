@@ -165,7 +165,7 @@ struct TopicDetailViewModelTests {
         let subTopicRow = try #require(sut.sections[3].rows.first as? NavigationRow)
         subTopicRow.action()
         #expect(didNavigate)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Driving")
     }
     
@@ -189,7 +189,7 @@ struct TopicDetailViewModelTests {
         try #require(sut.sections.count == 4)
         let contentRow = try #require(sut.sections[0].rows.first as? LinkRow)
         contentRow.action()
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.gov.uk/view-driving-licence")
     }
     

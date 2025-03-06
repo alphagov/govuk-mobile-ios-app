@@ -6,6 +6,13 @@ import GOVKit
 class AllTopicsViewController: BaseViewController, TrackableScreen {
     let viewModel: AllTopicsViewModel
 
+    lazy private var titleView: UIView = {
+        let localView = GovUKHeaderView()
+        localView.configure(titleText: String.topics.localized("allTopicsTitle"))
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
+    }()
+
     lazy private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -13,6 +20,7 @@ class AllTopicsViewController: BaseViewController, TrackableScreen {
         tableView.register(TopicTableViewCell.self)
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        tableView.contentInset.top = 16
         return tableView
     }()
 
@@ -39,25 +47,30 @@ class AllTopicsViewController: BaseViewController, TrackableScreen {
         configureConstraints()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        navigationController?.setNavigationBarHidden(
-            false,
-            animated: animated
-        )
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     private func setupUI() {
-        title = String.topics.localized("allTopicsTitle")
+        view.addSubview(titleView)
         view.addSubview(tableView)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
+            titleView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            titleView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor
+            ),
+            titleView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor
+            ),
+
             tableView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 16
+                equalTo: titleView.bottomAnchor
             ),
             tableView.rightAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.rightAnchor

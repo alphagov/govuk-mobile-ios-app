@@ -37,7 +37,7 @@ struct HomeViewModel {
 
 
     private var notificationsWidget: WidgetView? {
-        guard widgetEnabled(feature: .notification)
+        guard notificationService.isFeatureEnabled
         else { return nil }
 
         let title = String.home.localized("homeWidgetTitle")
@@ -103,5 +103,9 @@ struct HomeViewModel {
 
     private func widgetEnabled(feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
+    }
+
+    func trackECommerce() {
+        topicWidgetViewModel.trackECommerce()
     }
 }

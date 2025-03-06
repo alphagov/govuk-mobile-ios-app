@@ -92,7 +92,7 @@ class HomeViewController: BaseViewController {
         view.backgroundColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
     }
 
-    func displayController(_ content: UIViewController) {
+    private func displayController(_ content: UIViewController) {
         addController(content)
         content.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -190,8 +190,8 @@ extension HomeViewController: UISearchBarDelegate {
     }
 }
 
-extension HomeViewController: ContentScrollable {
-    func scrollToTop() {
+extension HomeViewController: ResetsToDefault {
+    func resetState() {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
         searchBar.text = ""

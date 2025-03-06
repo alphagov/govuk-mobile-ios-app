@@ -81,9 +81,7 @@ class HomeContentViewController: BaseViewController,
         }
         stackView.addArrangedSubview(crownLogoImageView)
     }
-}
 
-extension HomeContentViewController: ContentScrollable {
     func scrollToTop() {
         let currentX = scrollView.contentOffset.x
         let topOffset = CGPoint(x: currentX, y: -scrollView.adjustedContentInset.top)

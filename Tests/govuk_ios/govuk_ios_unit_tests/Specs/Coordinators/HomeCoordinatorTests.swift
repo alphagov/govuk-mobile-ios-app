@@ -156,7 +156,7 @@ struct HomeCoordinatorTests {
     
     @Test
     @MainActor
-    func didReselectTab_scrollsToTop_whenOnHomeScreen() {
+    func didReselectTab_resetsToDefaultState_whenOnHomeScreen() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
@@ -178,12 +178,12 @@ struct HomeCoordinatorTests {
         subject.start()
         subject.didReselectTab()
         
-        #expect(homeViewController._didScrollToTop)
+        #expect(homeViewController._hasResetState)
     }
     
     @Test
     @MainActor
-    func didReselectTab_doesNotScrollsToTop_whenOnChildScreen() {
+    func didReselectTab_doesNotResetToDefaultState_whenOnChildScreen() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
@@ -206,6 +206,6 @@ struct HomeCoordinatorTests {
         subject.start(MockBaseCoordinator())
         subject.didReselectTab()
         
-        #expect(homeViewController._didScrollToTop == false)
+        #expect(homeViewController._hasResetState == false)
     }
 }

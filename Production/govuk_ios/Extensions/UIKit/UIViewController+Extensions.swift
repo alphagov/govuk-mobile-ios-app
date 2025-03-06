@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
-protocol ContentScrollable {
-    func scrollToTop()
+protocol ResetsToDefault {
+    func resetState()
 }
 
 extension UIViewController {

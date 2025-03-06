@@ -61,11 +61,6 @@ class HomeViewController: BaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewModel.trackECommerce()
-    }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

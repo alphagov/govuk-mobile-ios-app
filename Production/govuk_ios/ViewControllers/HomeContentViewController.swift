@@ -47,6 +47,11 @@ class HomeContentViewController: BaseViewController,
         scrollView.delegate = self
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.trackECommerce()
+    }
+
     private func configureUI() {
         scrollView.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)

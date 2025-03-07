@@ -116,7 +116,30 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func viewController() -> HomeViewController {
+    func test_loadInNavigationController_searchDisabled_rendersCorrectly() {
+        mockTopicService._stubbedHasCustomisedTopics = true
+        mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
+        var topics = Topic.arrangeMultipleFavourites(
+            context: coreData.viewContext
+        )
+        let mockConfigService = MockAppConfigService()
+        mockConfigService.features = [.onboarding, .topics, .recentActivity]
+
+        mockTopicService._stubbedFetchAllTopics = topics
+
+        topics.removeLast()
+        mockTopicService._stubbedFetchFavouriteTopics = topics
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController(configService: mockConfigService),
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func viewController(
+        configService: MockAppConfigService = MockAppConfigService()
+    ) -> HomeViewController {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
@@ -126,7 +149,7 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         )
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
-            configService: MockAppConfigService(),
+            configService: configService,
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },

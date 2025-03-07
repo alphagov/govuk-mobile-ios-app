@@ -54,16 +54,13 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             notificationService: notficationService,
             dismissAction: {}
         )
-
         let settingsContentView = SettingsView(
             viewModel: viewModel
         )
-
         let hostingViewController =  HostingViewController(
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-
         VerifySnapshotInNavigationController(
             viewController: hostingViewController,
             mode: .dark,
@@ -143,30 +140,6 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             viewController: viewController,
             mode: .light,
             prefersLargeTitles: true
-        )
-    }
-
-    private lazy var viewModel: SettingsViewModel = {
-        let mockVersionProvider = MockAppVersionProvider()
-        mockVersionProvider.versionNumber = "1.2.3"
-        mockVersionProvider.buildNumber = "123"
-        return SettingsViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener(),
-            versionProvider: mockVersionProvider,
-            deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: MockNotificationService(),
-            dismissAction: {}
-        )
-    }()
-
-    private func viewController() -> UIViewController {
-        let settingsContentView = SettingsView(
-            viewModel: viewModel
-        )
-        return HostingViewController(
-            rootView: settingsContentView,
-            statusBarStyle: .darkContent
         )
     }
 }

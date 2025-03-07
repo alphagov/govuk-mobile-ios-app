@@ -95,4 +95,36 @@ class NotificationServiceTests {
         }
         #expect(result == .authorized)
     }
+
+    @Test
+    func setRedirectedToNotificationsOnboarding_setsRedirectedToNotificationsOnboardingToTrue() {
+        let userDefaults = MockUserDefaults()
+        let notificationCenter = MockUserNotificationCenter()
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter,
+            userDefaults: userDefaults
+        )
+        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == false)
+        sut.setRedirectedToNotificationsOnboarding(redirected: true)
+        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == true)
+    }
+
+    @Test
+    func setRedirectedToNotificationsOnboarding_setsRedirectedToNotificationsOnboardingToFalse() {
+        let userDefaults = MockUserDefaults()
+        let notificationCenter = MockUserNotificationCenter()
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter,
+            userDefaults: userDefaults
+        )
+        sut.setRedirectedToNotificationsOnboarding(redirected: true)
+
+        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == true)
+        sut.setRedirectedToNotificationsOnboarding(redirected: false)
+        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == false)
+    }
 }

@@ -86,12 +86,11 @@ struct NotificationsRowView: View {
                     Text(row.title)
                         .multilineTextAlignment(.leading)
                     Spacer()
-                    Text(row.isAuthorized ? "On" : "Off")
-                        .font(Font.govUK.caption1Medium)
-                        .multilineTextAlignment(.leading)
+                    Text(row.isAuthorized ? String.common.localized("On") : String.common.localized("Off"))
+                    .font(Font.govUK.caption1Medium)
+                    .multilineTextAlignment(.leading)
                 }
                 .foregroundColor(Color(UIColor.govUK.text.link))
-
                 RowDetail(text: row.body)
             }
         }

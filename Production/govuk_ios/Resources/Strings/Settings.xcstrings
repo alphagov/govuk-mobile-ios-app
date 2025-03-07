@@ -122,6 +122,28 @@
         }
       }
     },
+    "settingsNotificationRowDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off"
+          }
+        }
+      }
+    },
+    "settingsNotificationRowEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        }
+      }
+    },
     "settingsNotificationsAlertButtonText" : {
       "extractionState" : "manual",
       "localizations" : {

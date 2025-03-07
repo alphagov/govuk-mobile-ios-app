@@ -309,8 +309,6 @@ class SettingsViewModelTests {
                     dismissAction: { }
                 )
                 let notificationsSection = sut.listContent[1]
-                let notificationRow = notificationsSection.rows.first as? NotificationSettingsRow
-
                 sut.$notificationsPermissionState
                     .dropFirst()
                     .receive(on: DispatchQueue.main)
@@ -343,7 +341,6 @@ class SettingsViewModelTests {
                 dismissAction: { }
             )
             let notificationsSection = sut.listContent[1]
-            let notificationRow = notificationsSection.rows.first as? NotificationSettingsRow
 
             sut.$notificationsPermissionState
                 .dropFirst()

@@ -4,11 +4,7 @@ import GOVKit
 
 extension Onboarding {
     static var appSlides: [any OnboardingSlideViewModelInterface] {
-        let primaryAccessibilityHint = String.onboarding.localized("primaryButtonAccessibilityHint")
-        let finalPrimaryAccessibilityHint = String.onboarding
-            .localized("primaryButtonLastSlideAccessibilityHint")
-        let secondaryAccessibilityHint = String.onboarding.localized("skipButtonAcessibilityHint")
-        return [
+        [
             OnboardingSlideImageViewModel(
                 slide: .init(
                     image: "onboarding_screen_1",
@@ -17,9 +13,9 @@ extension Onboarding {
                     name: "Onboarding_A"
                 ),
                 primaryButtonTitle: String.onboarding.localized("continueButtonTitle"),
-                primaryButtonAccessibilityHint: primaryAccessibilityHint,
+                primaryButtonAccessibilityHint: nil,
                 secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle"),
-                secondaryButtonAccessibilityHint: secondaryAccessibilityHint
+                secondaryButtonAccessibilityHint: nil
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -29,9 +25,9 @@ extension Onboarding {
                     name: "Onboarding_B"
                 ),
                 primaryButtonTitle: String.onboarding.localized("continueButtonTitle"),
-                primaryButtonAccessibilityHint: primaryAccessibilityHint,
+                primaryButtonAccessibilityHint: nil,
                 secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle"),
-                secondaryButtonAccessibilityHint: secondaryAccessibilityHint
+                secondaryButtonAccessibilityHint: nil
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -41,7 +37,7 @@ extension Onboarding {
                     name: "Onboarding_C"
                 ),
                 primaryButtonTitle: String.onboarding.localized("doneButtonTitle"),
-                primaryButtonAccessibilityHint: finalPrimaryAccessibilityHint,
+                primaryButtonAccessibilityHint: nil,
                 secondaryButtonTitle: "",
                 secondaryButtonAccessibilityHint: nil
             )

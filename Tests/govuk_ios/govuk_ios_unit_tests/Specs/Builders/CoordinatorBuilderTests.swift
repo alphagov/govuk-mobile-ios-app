@@ -121,18 +121,6 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func search_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.search(
-            navigationController: mockNavigationController,
-            didDismissAction: { }
-        )
-
-        #expect(coordinator is SearchCoordinator)
-    }
-
-    @Test
     func recentActivity_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()

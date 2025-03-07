@@ -44,6 +44,7 @@ class SearchSuggestionsViewController: BaseViewController {
         localTableView.translatesAutoresizingMaskIntoConstraints = false
         localTableView.contentInsetAdjustmentBehavior = .never
         localTableView.separatorColor = UIColor.govUK.strokes.listDivider
+        localTableView.contentInset.top = 16
 
         return localTableView
     }()

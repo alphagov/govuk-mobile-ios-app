@@ -29,10 +29,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                        notificationService: any NotificationServiceInterface,
                        topicWidgetViewModel: TopicsWidgetViewModel,
                        feedbackAction: @escaping () -> Void,
-                       searchAction: @escaping () -> Void,
                        notificationsAction: @escaping () -> Void,
                        recentActivityAction: @escaping () -> Void) -> UIViewController {
-        _receivedHomeSearchAction = searchAction
         _receivedHomeRecentActivityAction = recentActivityAction
         _receivedTopicWidgetViewModel = topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
@@ -41,15 +39,6 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _stubbedSettingsViewController: UIViewController?
     override func settings<T: SettingsViewModelInterface>(viewModel: T) -> UIViewController {
         return _stubbedSettingsViewController ?? UIViewController()
-    }
-
-    var _stubbedSearchViewController: UIViewController?
-    var _receivedSearchDismissAction: (() -> Void)?
-    override func search(analyticsService: any AnalyticsServiceInterface,
-                         searchService: any SearchServiceInterface,
-                         dismissAction: @escaping () -> Void) -> UIViewController {
-        _receivedSearchDismissAction = dismissAction
-        return _stubbedSearchViewController ?? UIViewController()
     }
 
     var _stubbedRecentActivityViewController: UIViewController?

@@ -125,8 +125,10 @@ class TopicsWidgetView: UIView {
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
-            self.viewModel.initialLoadComplete = true
-            self.viewModel.trackECommerce()
+            if self.viewModel.initialLoadComplete == false {
+                self.viewModel.initialLoadComplete = true
+                self.viewModel.trackECommerce()
+            }
             self.showAllTopicsButton()
             self.titleLabel.text = self.viewModel.widgetTitle
         }

@@ -89,17 +89,6 @@
         }
       }
     },
-    "searchWidgetTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find government services and information"
-          }
-        }
-      }
-    },
     "topicsWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {

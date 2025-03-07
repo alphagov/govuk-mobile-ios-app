@@ -3,6 +3,7 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @Suite
 struct HomeViewModelTests {
@@ -21,14 +22,14 @@ struct HomeViewModelTests {
             notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
             notificationsAction: { },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         let widgets = await subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 4)
+        #expect(widgets.count == 3)
     }
 
     @Test
@@ -52,9 +53,9 @@ struct HomeViewModelTests {
             notificationService: mockNotificationService,
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { },
             notificationsAction: { },
-            recentActivityAction: { }
+            recentActivityAction: { },
+            urlOpener: MockURLOpener()
         )
         let widgets = await subject.widgets
 

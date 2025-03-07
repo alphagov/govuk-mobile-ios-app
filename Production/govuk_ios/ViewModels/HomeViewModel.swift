@@ -1,23 +1,32 @@
 import Foundation
 import UIKit
 import GOVKit
+import RecentActivity
 
 struct HomeViewModel {
+    @Inject(\.searchService) private var searchService: SearchServiceInterface
+    @Inject(\.activityService) private var activityService: ActivityServiceInterface
+
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let feedbackAction: () -> Void
-    let searchAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
+    let urlOpener: URLOpener
+    lazy var searchViewModel: SearchViewModel = SearchViewModel(
+        analyticsService: analyticsService,
+        searchService: searchService,
+        activityService: activityService,
+        urlOpener: urlOpener
+    )
 
     var widgets: [WidgetView] {
         get async {
             await [
                 notificationsWidget,
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
-                searchWidget,
                 recentActivityWidget,
                 topicsWidget
             ].compactMap { $0 }
@@ -54,25 +63,6 @@ struct HomeViewModel {
         let content = UserFeedbackView(viewModel: viewModel)
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
-        widget.addContent(content)
-        return widget
-    }
-
-    @MainActor
-    private var searchWidget: WidgetView? {
-        guard widgetEnabled(feature: .search)
-        else { return nil }
-
-        let title = String.home.localized("searchWidgetTitle")
-        let viewModel = SearchWidgetViewModel(
-            title: title,
-            action: searchAction
-        )
-        let content = SearchWidgetStackView(
-            viewModel: viewModel
-        )
-        let widget = WidgetView()
-        widget.backgroundColor = UIColor.govUK.fills.surfaceCardDefault
         widget.addContent(content)
         return widget
     }

@@ -18,6 +18,7 @@ final class SearchHistoryViewController: BaseViewController {
         localView.backgroundColor = UIColor.govUK.fills.surfaceModal
         localView.contentInsetAdjustmentBehavior = .never
         localView.separatorColor = UIColor.govUK.strokes.listDivider
+        localView.contentInset.top = 16
         return localView
     }()
 

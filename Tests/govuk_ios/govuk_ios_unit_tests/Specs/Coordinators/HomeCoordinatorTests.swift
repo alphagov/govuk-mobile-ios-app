@@ -67,36 +67,6 @@ struct HomeCoordinatorTests {
 
     @Test
     @MainActor
-    func searchAction_startsCoordinatorAndTracksEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
-        let mockViewControllerBuilder = MockViewControllerBuilder()
-        mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
-        let mockAnalyticsService = MockAnalyticsService()
-        let navigationController = UINavigationController()
-        let subject = HomeCoordinator(
-            navigationController: navigationController,
-            coordinatorBuilder: mockCoodinatorBuilder,
-            viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
-            analyticsService: mockAnalyticsService,
-            configService: MockAppConfigService(),
-            topicsService: MockTopicsService(),
-            notificationService: MockNotificationService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
-        )
-        subject.start()
-
-        mockViewControllerBuilder._receivedHomeSearchAction?()
-
-        let navigationEvent = mockAnalyticsService._trackedEvents.first
-
-        #expect(navigationEvent?.params?["text"] as? String == "Search")
-        #expect(navigationEvent?.params?["type"] as? String == "Widget")
-        #expect(navigationEvent?.name == "Navigation")
-    }
-
-    @Test
-    @MainActor
     func topicAction_startsCoordinatorAndTracksEvent() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
@@ -191,7 +161,7 @@ struct HomeCoordinatorTests {
     
     @Test
     @MainActor
-    func didReselectTab_scrollsToTop_whenOnHomeScreen() {
+    func didReselectTab_resetsToDefaultState_whenOnHomeScreen() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
@@ -214,12 +184,12 @@ struct HomeCoordinatorTests {
         subject.start()
         subject.didReselectTab()
         
-        #expect(homeViewController._didScrollToTop)
+        #expect(homeViewController._hasResetState)
     }
     
     @Test
     @MainActor
-    func didReselectTab_doesNotScrollsToTop_whenOnChildScreen() {
+    func didReselectTab_doesNotResetToDefaultState_whenOnChildScreen() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
@@ -243,6 +213,6 @@ struct HomeCoordinatorTests {
         subject.start(MockBaseCoordinator())
         subject.didReselectTab()
         
-        #expect(homeViewController._didScrollToTop == false)
+        #expect(homeViewController._hasResetState == false)
     }
 }

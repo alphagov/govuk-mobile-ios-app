@@ -92,7 +92,6 @@ class NotificationServiceTests {
                 continuation.resume(returning: status)
             })
             notificationCenter._receivedGetAuthorizationStatusCompletion?(.authorized)
-
         }
         #expect(result == .authorized)
     }

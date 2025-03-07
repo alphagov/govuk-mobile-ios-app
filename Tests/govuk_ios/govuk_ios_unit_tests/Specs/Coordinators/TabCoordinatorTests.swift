@@ -23,7 +23,7 @@ struct TabCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
             analyticsService: MockAnalyticsService(),
-            dissmissAction: {}
+            dismissAction: {}
         )
 
         subject.start()
@@ -60,7 +60,7 @@ struct TabCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
             analyticsService: MockAnalyticsService(),
-            dissmissAction: {}
+            dismissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/test")
@@ -86,7 +86,7 @@ struct TabCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
             analyticsService: MockAnalyticsService(),
-            dissmissAction: {}
+            dismissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")
@@ -112,7 +112,7 @@ struct TabCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
             analyticsService: mockAnalyticsService,
-            dissmissAction: {}
+            dismissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")
@@ -153,7 +153,7 @@ struct TabCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
             analyticsService: mockAnalyticsService,
-            dissmissAction: {}
+            dismissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")
@@ -192,7 +192,7 @@ struct TabCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
             analyticsService: mockAnalyticsService,
-            dissmissAction: {}
+            dismissAction: {}
         )
 
         let url = URL(string: "govuk://gov.uk/unknown")

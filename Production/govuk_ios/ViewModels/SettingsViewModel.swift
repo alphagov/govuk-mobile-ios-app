@@ -57,7 +57,6 @@ class SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-
     var notificationSettingsAlertTitle: String {
         switch notificationsPermissionState {
         case .authorized:

@@ -14,7 +14,7 @@ class TabCoordinator: BaseCoordinator,
                       UITabBarControllerDelegate {
     private lazy var homeCoordinator = coordinatorBuilder.home
     private lazy var settingsCoordinator = coordinatorBuilder.setttings(
-        dissmissAction: dismissAction
+        dismissAction: dismissAction
     )
     private var currentTabIndex = 0
 
@@ -33,10 +33,10 @@ class TabCoordinator: BaseCoordinator,
     init(coordinatorBuilder: CoordinatorBuilder,
          navigationController: UINavigationController,
          analyticsService: AnalyticsServiceInterface,
-         dissmissAction: @escaping () -> Void) {
+         dismissAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.analyticsService = analyticsService
-        self.dismissAction = dissmissAction
+        self.dismissAction = dismissAction
         super.init(navigationController: navigationController)
         tabController.delegate = self
     }

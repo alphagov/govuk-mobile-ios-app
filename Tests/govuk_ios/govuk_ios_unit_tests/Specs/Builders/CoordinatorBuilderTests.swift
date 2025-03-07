@@ -31,7 +31,7 @@ struct CoordinatorBuilderTests {
     @Test
     func settings_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.setttings(dissmissAction: {})
+        let coordinator = subject.setttings(dismissAction: {})
 
         #expect(coordinator is SettingsCoordinator)
     }

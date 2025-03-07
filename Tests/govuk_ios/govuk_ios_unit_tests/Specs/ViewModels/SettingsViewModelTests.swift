@@ -332,7 +332,7 @@ class SettingsViewModelTests {
     func handleNotificationAlertAction_whenNotificationPermissionIsAuthorized_tracksEventCorrectly()  async throws {
         let notiifcationservice = MockNotificationService()
         let analyticsService = MockAnalyticsService()
-        var receivedTitle = ""
+        var receivedTrackingTitle = ""
         let result = await withCheckedContinuation { continuation in
             let sut = SettingsViewModel(
                 analyticsService: analyticsService,
@@ -351,16 +351,15 @@ class SettingsViewModelTests {
                 .sink(
                     receiveValue: { _ in
                         sut.handleNotificationAlertAction()
-
                         let trackingText = analyticsService._trackedEvents.first?.params?["text"]
                         as? String
-                        receivedTitle = trackingText!
+                        receivedTrackingTitle = trackingText!
                         continuation.resume(returning: sut.notificationAlertButtonTitle)
                     }
                 ).store(in: &cancellables)
             notiifcationservice._receivedCompletion?(.authorized)
         }
-        #expect(receivedTitle == result)
+        #expect(receivedTrackingTitle == result)
     }
 }
 

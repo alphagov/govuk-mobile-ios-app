@@ -30,7 +30,7 @@ class CoordinatorBuilder {
         )
     }
 
-    func setttings(dissmissAction: @escaping () -> Void) -> TabItemCoordinator {
+    func setttings(dismissAction: @escaping () -> Void) -> TabItemCoordinator {
         SettingsCoordinator(
             navigationController: UINavigationController.settings,
             viewControllerBuilder: ViewControllerBuilder(),
@@ -38,7 +38,7 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             deviceInformationProvider: DeviceInformationProvider(),
             notificationService: container.notificationService.resolve(),
-            dismissAction: dissmissAction
+            dismissAction: dismissAction
         )
     }
 
@@ -99,7 +99,7 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             navigationController: navigationController,
             analyticsService: container.analyticsService(),
-            dissmissAction: dismissAction
+            dismissAction: dismissAction
         )
     }
 

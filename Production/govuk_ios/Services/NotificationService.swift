@@ -35,12 +35,11 @@ class NotificationService: NotificationServiceInterface {
             withLaunchOptions: launchOptions
         )
     }
-    // test
+
     func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
         notificationCenter.getAuthorizationStatus(completion: completion)
     }
 
-    // tested
     func setRedirectedToNotificationsOnboarding(redirected: Bool) {
         userDefaults.set(
             bool: redirected,

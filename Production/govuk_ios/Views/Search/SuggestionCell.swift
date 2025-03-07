@@ -4,8 +4,11 @@ import UIKit
 class SuggestionCell: UITableViewCell {
     private let magnifyingImage: UIImage? = {
         var image = UIImage(systemName: "magnifyingglass")
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 12,
-                                                 weight: .bold)
+        let imageConfig = UIImage.SymbolConfiguration(
+            pointSize: 12,
+            weight: .bold,
+            scale: .large
+        )
         image = image?.withConfiguration(imageConfig)
         return image
     }()

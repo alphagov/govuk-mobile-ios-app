@@ -74,12 +74,11 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             userDefaults: mockUserDefaults
         )
-
         #expect(sut.redirectedToNotifcationsOnboarding == expectedValue)
     }
 
     @Test
-    func getAuthorizationStatus_returnsCorrectAuthorizationStatus() async {
+    func getAuthorizationStatus_whenaAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
         let notificationCenter = MockUserNotificationCenter()
 
         let sut = NotificationService(
@@ -94,6 +93,42 @@ class NotificationServiceTests {
             notificationCenter._receivedGetAuthorizationStatusCompletion?(.authorized)
         }
         #expect(result == .authorized)
+    }
+
+    @Test
+    func getAuthorizationStatus_whenaAuthorizationStatusIsDenied_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter,
+            userDefaults: MockUserDefaults()
+        )
+        let result = await withCheckedContinuation { continuation in
+            sut.getAuthorizationStatus(completion: { status in
+                continuation.resume(returning: status)
+            })
+            notificationCenter._receivedGetAuthorizationStatusCompletion?(.denied)
+        }
+        #expect(result == .denied)
+    }
+
+    @Test
+    func getAuthorizationStatus_whenaAuthorizationStatusIsNotDetermined_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter,
+            userDefaults: MockUserDefaults()
+        )
+        let result = await withCheckedContinuation { continuation in
+            sut.getAuthorizationStatus(completion: { status in
+                continuation.resume(returning: status)
+            })
+            notificationCenter._receivedGetAuthorizationStatusCompletion?(.notDetermined)
+        }
+        #expect(result == .notDetermined)
     }
 
     @Test

@@ -38,11 +38,9 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
-
         let notficationService = MockNotificationService()
         notficationService._stubbedIsFetureEnabled = false
 

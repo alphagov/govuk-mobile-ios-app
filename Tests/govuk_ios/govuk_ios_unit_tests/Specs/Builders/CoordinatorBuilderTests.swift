@@ -102,7 +102,7 @@ struct CoordinatorBuilderTests {
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.tab(
             navigationController: mockNavigationController,
-            dismissAction: { }
+            dismissAction: {}
         )
 
         #expect(coordinator is TabCoordinator)

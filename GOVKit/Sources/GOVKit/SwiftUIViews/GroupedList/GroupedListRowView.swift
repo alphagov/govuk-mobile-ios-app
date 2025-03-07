@@ -86,7 +86,7 @@ struct NotificationsRowView: View {
                     Text(row.title)
                         .multilineTextAlignment(.leading)
                     Spacer()
-                    Text(row.isAuthorized ? "Enabled" : "Disabled")
+                    Text(row.isAuthorized ? "On" : "Off")
                         .font(Font.govUK.caption1Medium)
                         .multilineTextAlignment(.leading)
                 }

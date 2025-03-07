@@ -58,19 +58,17 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     var notificationSettingsAlertTitle: String {
-        switch notificationsPermissionState {
-        case .authorized:
+        if notificationsPermissionState == .authorized {
             return String.settings.localized("settingsPushNotificationsAlertTitleEnabled")
-        default:
+        } else {
             return String.settings.localized("settingsPushNotificationsAlertTitleDisabled")
         }
     }
 
     var notificationSettingsAlertBody: String {
-        switch notificationsPermissionState {
-        case .authorized:
+        if notificationsPermissionState == .authorized {
             return String.settings.localized("settingsPushNotificationsAlertBodyEnabled")
-        default:
+        } else {
             return String.settings.localized("settingsPushNotificationsAlertBodyDisabled")
         }
     }

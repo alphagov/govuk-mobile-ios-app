@@ -13,6 +13,7 @@ struct HomeViewModel {
     let feedbackAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
+    lazy var searchEnabled = false // featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
         analyticsService: analyticsService,
         searchService: searchService,
@@ -42,7 +43,7 @@ struct HomeViewModel {
     }
 
     private var recentActivityWidget: WidgetView? {
-        guard widgetEnabled(feature: .recentActivity)
+        guard featureEnabled(.recentActivity)
         else { return nil }
         let title = String.home.localized(
             "recentActivityWidgetTitle"
@@ -61,7 +62,7 @@ struct HomeViewModel {
     }
 
     private var topicsWidget: WidgetView? {
-        guard widgetEnabled(feature: .topics)
+        guard featureEnabled(.topics)
         else { return nil }
         let content = TopicsWidgetView(
             viewModel: topicWidgetViewModel
@@ -71,7 +72,7 @@ struct HomeViewModel {
         return widget
     }
 
-    private func widgetEnabled(feature: Feature) -> Bool {
+    private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }
 

@@ -173,20 +173,13 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 
 class GroupedListViewModel: SettingsViewModelInterface {
     var displayNotificationSettingsAlert: Bool = false
-    func handleNotificationAlertAction() {
-        // Do Nothing
-    }
-
+    func handleNotificationAlertAction() { }
     var notificationSettingsAlertTitle: String = "Turn on notifications"
-
     var notificationSettingsAlertBody: String = "Continue to your phone’s notifications settings to turn off notifications from GOV.UK"
-
     var notificationAlertButtonTitle: String = "Continue"
-
     var title: String = "Settings"
     var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent.dropLast()
     var scrollToTop: Bool = false
-
     func trackScreen(screen: any TrackableScreen) {
         // Do Nothing
     }

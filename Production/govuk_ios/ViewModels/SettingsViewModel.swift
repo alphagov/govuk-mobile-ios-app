@@ -44,7 +44,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.deviceInformationProvider = deviceInformationProvider
         self.notificationService = notificationService
         self.dismissAction = dismissAction
-        setNotificationAuthorisationStatus()
+        setNotificationAuthorizationStatus()
         addObservers()
     }
 
@@ -76,7 +76,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     @objc func appMovedToForeground() {
-        setNotificationAuthorisationStatus()
+        setNotificationAuthorizationStatus()
     }
 
      enum NotificationPermissionState {
@@ -85,7 +85,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         case authorized
     }
 
-     private func setNotificationAuthorisationStatus() {
+     private func setNotificationAuthorizationStatus() {
          notificationsPermissionState = .notDetermined
          notificationService.getAuthorizationStatus { [weak self] authorizationStatus in
              switch authorizationStatus {
@@ -106,7 +106,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     func handleNotificationAlertAction() {
         switch notificationsPermissionState {
         case .authorized, .denied:
-            if urlOpener.openSettings() == true {
+            if urlOpener.openSettings() {
                 trackLinkEvent(
                     notificationAlertButtonTitle,
                     external: false

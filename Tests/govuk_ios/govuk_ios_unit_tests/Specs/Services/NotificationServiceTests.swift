@@ -64,7 +64,7 @@ class NotificationServiceTests {
     }
 
     @Test(.serialized, arguments: [true, false])
-    func setRedirectedToNotificationsOnboarding_setRedirectedToNotificationsOnboardingToTrue(expectedValue: Bool) {
+    func redirectedToNotifcationsOnboarding_returnsCorrectValue(expectedValue: Bool) {
 
         let mockUserDefaults = MockUserDefaults()
         mockUserDefaults.set(bool: expectedValue, forKey: .redirectedToNotificationsOnboarding)

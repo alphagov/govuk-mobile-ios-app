@@ -13,7 +13,7 @@ struct HomeViewModel {
     let feedbackAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
-    lazy var searchEnabled = false // featureEnabled(.search)
+    lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
         analyticsService: analyticsService,
         searchService: searchService,

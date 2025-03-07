@@ -69,29 +69,43 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        configureContentControllers()
+        if viewModel.searchEnabled {
+            configureSearchBar()
+        }
+        configureHomeContent()
     }
 
-    private func configureContentControllers() {
-        if viewModel.searchEnabled {
-            searchViewController = SearchViewController(
-                viewModel: viewModel.searchViewModel,
-                searchBar: searchBar
-            )
-        }
+    private func configureHomeContent() {
         homeContentViewController = HomeContentViewController(
             viewModel: viewModel
         )
-        displayController(homeContentViewController!)
+        displayController(homeContentViewController)
     }
 
+    private func configureSearchBar() {
+        searchViewController = SearchViewController(
+            viewModel: viewModel.searchViewModel,
+            searchBar: searchBar
+        )
+
+        view.addSubview(searchBar)
+
+        NSLayoutConstraint.activate([
+            logoHeightConstraint,
+            searchTopConstraint,
+            searchBar.rightAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                constant: -8
+            ),
+            searchBar.leftAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                constant: 8
+            )
+        ])
+    }
 
     private func configureUI() {
         view.addSubview(logoImageView)
-        if viewModel.searchEnabled {
-            view.addSubview(searchBar)
-        }
-
         navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
     }
@@ -110,7 +124,7 @@ class HomeViewController: BaseViewController {
             ),
             content.view.topAnchor.constraint(
                 equalTo: header.bottomAnchor,
-                constant: headerBottomPadding
+                constant: CGFloat(headerBottomPadding)
             ),
             content.view.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
@@ -128,20 +142,6 @@ class HomeViewController: BaseViewController {
                 constant: 16
             )
         ])
-        if viewModel.searchEnabled {
-            NSLayoutConstraint.activate([
-                logoHeightConstraint,
-                searchTopConstraint,
-                searchBar.rightAnchor.constraint(
-                    equalTo: view.safeAreaLayoutGuide.rightAnchor,
-                    constant: -8
-                ),
-                searchBar.leftAnchor.constraint(
-                    equalTo: view.safeAreaLayoutGuide.leftAnchor,
-                    constant: 8
-                )
-            ])
-        }
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -149,8 +149,10 @@ class HomeViewController: BaseViewController {
         if viewModel.searchEnabled {
             setLogoHidden(searchBar.searchTextField.isEditing)
             if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-                searchBar.layer.borderColor = UIColor
-                    .govUK.fills.surfaceHomeHeaderBackground.cgColor
+                searchBar.layer.borderColor = UIColor.govUK
+                                                     .fills
+                                                     .surfaceHomeHeaderBackground
+                                                     .cgColor
             }
         }
     }
@@ -181,6 +183,14 @@ class HomeViewController: BaseViewController {
             for: .normal
         )
     }
+
+    private func removeSearchBar() {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        searchViewController.clearResults()
+        removeController(searchViewController)
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -193,11 +203,7 @@ extension HomeViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-        searchBar.resignFirstResponder()
-        searchBar.text = ""
-        searchViewController.clearResults()
-        removeController(searchViewController)
+        removeSearchBar()
         displayController(homeContentViewController)
         setLogoHidden(false)
     }
@@ -206,11 +212,7 @@ extension HomeViewController: UISearchBarDelegate {
 extension HomeViewController: ResetsToDefault {
     func resetState() {
         if viewModel.searchEnabled {
-            searchBar.setShowsCancelButton(false, animated: true)
-            searchBar.resignFirstResponder()
-            searchBar.text = ""
-            searchViewController.clearResults()
-            removeController(searchViewController)
+            removeSearchBar()
             displayController(homeContentViewController)
             setLogoHidden(false)
         }

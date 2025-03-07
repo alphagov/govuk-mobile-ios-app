@@ -59,9 +59,9 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     var notificationSettingsAlertTitle: String {
         if notificationsPermissionState == .authorized {
-            return String.settings.localized("settingsPushNotificationsAlertTitleEnabled")
+            return String.settings.localized("settingsNotificationsAlertTitleEnabled")
         } else {
-            return String.settings.localized("settingsPushNotificationsAlertTitleDisabled")
+            return String.settings.localized("settingsNotificationsAlertTitleDisabled")
         }
     }
 

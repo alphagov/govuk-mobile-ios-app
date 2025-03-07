@@ -188,6 +188,17 @@
         }
       }
     },
+    "settingsNotificationsAlertTitleEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn off notifications"
+          }
+        }
+      }
+    },
     "settingsNotificationsTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -195,17 +206,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notifications"
-          }
-        }
-      }
-    },
-    "settingsPushNotificationsAlertTitleEnabled" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn off notifications"
           }
         }
       }

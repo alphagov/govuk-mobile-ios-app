@@ -95,8 +95,8 @@ struct NotificationsRowView: View {
             }
         }
         .accessibilityRemoveTraits(.isButton)
-        .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
-        .accessibilityHint(row.isWebLink ? String.common.localized("openWebLinkHint") : "")
+        .accessibilityAddTraits(.isButton)
+        .accessibilityHint(String.common.localized("openNotificationsSettings"))
     }
 }
 

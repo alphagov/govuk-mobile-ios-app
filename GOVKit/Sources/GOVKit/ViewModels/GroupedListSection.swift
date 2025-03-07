@@ -64,20 +64,17 @@ public class NotificationSettingsRow: GroupedListRow,
     public let id: String
     public let title: String
     public let body: String?
-    public var isWebLink: Bool = true
     public let action: () -> Void
     public var isAuthorized: Bool
 
     public init(id: String,
                 title: String,
                 body: String? = nil,
-                isWebLink: Bool = true,
                 isAuthorized: Bool,
                 action: @escaping () -> Void) {
         self.id = id
         self.title = title
         self.body = body
-        self.isWebLink = isWebLink
         self.isAuthorized = isAuthorized
         self.action = action
     }

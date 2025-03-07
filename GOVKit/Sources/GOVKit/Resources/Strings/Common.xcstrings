@@ -133,6 +133,17 @@
         }
       }
     },
+    "openNotificationsSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens notification settings"
+          }
+        }
+      }
+    },
     "openWebLinkHint" : {
       "extractionState" : "manual",
       "localizations" : {

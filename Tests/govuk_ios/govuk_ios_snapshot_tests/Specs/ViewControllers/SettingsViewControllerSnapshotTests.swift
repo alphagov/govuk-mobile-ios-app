@@ -9,11 +9,9 @@ import GOVKit
 @MainActor
 class SettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
-
         let notficationService = MockNotificationService()
         notficationService._stubbedIsFetureEnabled = false
 
@@ -25,16 +23,13 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             notificationService: notficationService,
             dismissAction: {}
         )
-
         let settingsContentView = SettingsView(
             viewModel: viewModel
         )
-
         let hostingViewController =  HostingViewController(
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-
         VerifySnapshotInNavigationController(
             viewController: hostingViewController,
             mode: .light,
@@ -77,6 +72,65 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         // This is here to meet code coverage requirements
         viewModel.scrollToTop = true
     }
+
+    func test_loadInNavigationController_notificationsFeatureEnabled_light_rendersCorrectly() {
+        let mockVersionProvider = MockAppVersionProvider()
+        mockVersionProvider.versionNumber = "1.2.3"
+        mockVersionProvider.buildNumber = "123"
+        let notficationService = MockNotificationService()
+        notficationService._stubbedIsFetureEnabled = true
+
+        let viewModel = SettingsViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener(),
+            versionProvider: mockVersionProvider,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: notficationService,
+            dismissAction: {}
+        )
+        let settingsContentView = SettingsView(
+            viewModel: viewModel
+        )
+        let hostingViewController =  HostingViewController(
+            rootView: settingsContentView,
+            statusBarStyle: .darkContent
+        )
+        VerifySnapshotInNavigationController(
+            viewController: hostingViewController,
+            mode: .light,
+            prefersLargeTitles: true
+        )
+    }
+
+    func test_loadInNavigationController_notificationsFeatureEnabled_dark_rendersCorrectly() {
+        let mockVersionProvider = MockAppVersionProvider()
+        mockVersionProvider.versionNumber = "1.2.3"
+        mockVersionProvider.buildNumber = "123"
+        let notficationService = MockNotificationService()
+        notficationService._stubbedIsFetureEnabled = true
+
+        let viewModel = SettingsViewModel(
+            analyticsService: MockAnalyticsService(),
+            urlOpener: MockURLOpener(),
+            versionProvider: mockVersionProvider,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: notficationService,
+            dismissAction: {}
+        )
+        let settingsContentView = SettingsView(
+            viewModel: viewModel
+        )
+        let hostingViewController =  HostingViewController(
+            rootView: settingsContentView,
+            statusBarStyle: .darkContent
+        )
+        VerifySnapshotInNavigationController(
+            viewController: hostingViewController,
+            mode: .dark,
+            prefersLargeTitles: true
+        )
+    }
+
 
     func test_loadInNavigationController_preview_rendersCorrectly() {
         let settingsContentView = SettingsView(

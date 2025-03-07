@@ -67,9 +67,9 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     var notificationSettingsAlertBody: String {
         if notificationsPermissionState == .authorized {
-            return String.settings.localized("settingsPushNotificationsAlertBodyEnabled")
+            return String.settings.localized("settingsNotificationsAlertBodyEnabled")
         } else {
-            return String.settings.localized("settingsPushNotificationsAlertBodyDisabled")
+            return String.settings.localized("settingsNotificationsAlertBodyDisabled")
         }
     }
 
@@ -84,7 +84,6 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
      private func setNotificationAuthorizationStatus() {
-         notificationsPermissionState = .notDetermined
          notificationService.getAuthorizationStatus { [weak self] authorizationStatus in
              switch authorizationStatus {
              case .authorized:
@@ -115,7 +114,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         }
     }
 
-    var hasAcceptedAnalytics: Bool {
+    private var hasAcceptedAnalytics: Bool {
         switch analyticsService.permissionState {
         case .denied, .unknown:
             return false

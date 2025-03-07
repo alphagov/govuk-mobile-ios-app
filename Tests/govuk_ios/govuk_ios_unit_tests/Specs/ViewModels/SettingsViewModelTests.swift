@@ -214,7 +214,7 @@ class SettingsViewModelTests {
                 ).store(in: &cancellables)
             mockNotificationsService._receivedCompletion?(.authorized)
         }
-        #expect(result == String.settings.localized("settingsPushNotificationsAlertTitleEnabled"))
+        #expect(result == String.settings.localized("settingsNotificationsAlertTitleEnabled"))
     }
 
     @Test
@@ -239,7 +239,7 @@ class SettingsViewModelTests {
                 ).store(in: &cancellables)
             mockNotificationsService._receivedCompletion?(.denied)
         }
-        #expect(result == String.settings.localized("settingsPushNotificationsAlertTitleDisabled"))
+        #expect(result == String.settings.localized("settingsNotificationsAlertTitleDisabled"))
     }
 
     @Test
@@ -264,7 +264,7 @@ class SettingsViewModelTests {
                 ).store(in: &cancellables)
             mockNotificationsService._receivedCompletion?(.authorized)
         }
-        #expect(result == String.settings.localized("settingsPushNotificationsAlertBodyEnabled"))
+        #expect(result == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
 
     }
 
@@ -290,7 +290,7 @@ class SettingsViewModelTests {
                 ).store(in: &cancellables)
             mockNotificationsService._receivedCompletion?(.denied)
         }
-        #expect(result == String.settings.localized("settingsPushNotificationsAlertBodyDisabled"))
+        #expect(result == String.settings.localized("settingsNotificationsAlertBodyDisabled"))
 
     }
 

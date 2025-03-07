@@ -7,7 +7,6 @@ class SettingsCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let settingsViewModel: any SettingsViewModelInterface
     private let notificationService: NotificationServiceInterface
-
     private let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,

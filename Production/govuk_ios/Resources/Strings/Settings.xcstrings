@@ -144,6 +144,28 @@
         }
       }
     },
+    "settingsNotificationsAlertBodyDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn on notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "settingsNotificationsAlertBodyEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn off notifications from GOV.UK"
+          }
+        }
+      }
+    },
     "settingsNotificationsAlertButtonText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -155,6 +177,17 @@
         }
       }
     },
+    "settingsNotificationsAlertTitleDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on notifications"
+          }
+        }
+      }
+    },
     "settingsNotificationsTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -162,39 +195,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notifications"
-          }
-        }
-      }
-    },
-    "settingsPushNotificationsAlertBodyDisabled" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continue to your phone’s notifications settings to turn on notifications from GOV.UK"
-          }
-        }
-      }
-    },
-    "settingsPushNotificationsAlertBodyEnabled" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continue to your phone’s notifications settings to turn off notifications from GOV.UK"
-          }
-        }
-      }
-    },
-    "settingsPushNotificationsAlertTitleDisabled" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn on notifications"
           }
         }
       }

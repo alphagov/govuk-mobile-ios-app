@@ -5,5 +5,4 @@ enum Feature: String {
     case onboarding
     case topics
     case recentActivity
-    case notifications
 }

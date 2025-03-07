@@ -573,6 +573,7 @@
 				govuk_ios/shared/Mocks/Services/MockAnalyticsService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppConfigService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppLaunchService.swift,
+				govuk_ios/shared/Mocks/Services/MockNotificationService.swift,
 				govuk_ios/shared/Mocks/Services/MockSearchService.swift,
 				govuk_ios/shared/Mocks/Services/MockTopicsService.swift,
 			);

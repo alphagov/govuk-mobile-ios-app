@@ -62,7 +62,7 @@ class NotificationService: NotificationServiceInterface {
     }
 
     var isFeatureEnabled: Bool {
-        true
+        false
     }
 
     func requestPermissions(completion: @escaping () -> Void) {

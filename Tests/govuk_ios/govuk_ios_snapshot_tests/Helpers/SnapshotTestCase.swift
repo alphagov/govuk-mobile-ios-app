@@ -38,12 +38,12 @@ class SnapshotTestCase: FBSnapshotTestCase {
                                               prefersLargeTitles: Bool = false,
                                               file: StaticString = #file,
                                               line: UInt = #line) {
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
-        navigationController.overrideUserInterfaceStyle = mode
-        navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
+//        let navigationController = UINavigationController(rootViewController: viewController)
+//        navigationController.setNavigationBarHidden(navBarHidden, animated: false)
+//        navigationController.overrideUserInterfaceStyle = mode
+//        navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
         VerifySnapshotInWindow(
-            navigationController,
+            viewController,
             overallTolerance: 0.001,
             file: file,
             line: line
@@ -55,7 +55,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
                                 overallTolerance: CGFloat = 0,
                                 file: StaticString = #file, 
                                 line: UInt = #line) {
-        wrapInWindow(viewController)
+//        wrapInWindow(viewController)
         FBSnapshotVerifyViewController(
             viewController,
             perPixelTolerance: perPixelTolerance,

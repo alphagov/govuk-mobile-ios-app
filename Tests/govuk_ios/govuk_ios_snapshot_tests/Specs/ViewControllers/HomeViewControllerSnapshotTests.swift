@@ -21,9 +21,17 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
 
         topics.removeLast()
         mockTopicService._stubbedFetchFavouriteTopics = topics
+        let viewController = viewController()
+
+        let window = UIApplication.shared.window
+        guard let window = window else { return }
+        window.rootViewController = viewController
+
+        viewController.viewDidLoad()
+
 
         VerifySnapshotInNavigationController(
-            viewController: viewController(),
+            viewController: viewController,
             mode: .light,
             navBarHidden: true
         )
@@ -123,16 +131,19 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             editAction: { },
             allTopicsAction: { }
         )
+        let mockNotificationService = MockNotificationService()
+        mockNotificationService._stubbedShouldRequestPermission = true
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            notificationService: MockNotificationService(),
+            notificationService: mockNotificationService,
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             searchAction: { },
             notificationsAction: { },
             recentActivityAction: { }
         )
-        return HomeViewController(viewModel: viewModel)
+        let vc = HomeViewController(viewModel: viewModel)
+        return vc
     }
 }

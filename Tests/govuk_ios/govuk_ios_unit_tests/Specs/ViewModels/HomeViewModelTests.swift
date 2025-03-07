@@ -5,7 +5,6 @@ import Testing
 @testable import govuk_ios
 
 @Suite
-@MainActor
 struct HomeViewModelTests {
     @Test
     func widgets_returnsArrayOfWidgets() async {

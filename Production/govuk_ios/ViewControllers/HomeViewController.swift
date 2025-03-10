@@ -114,7 +114,7 @@ class HomeViewController: BaseViewController {
         addController(content)
         content.view.translatesAutoresizingMaskIntoConstraints = false
         let header = viewModel.searchEnabled ? searchBar : logoImageView
-        let headerBottomPadding = viewModel.searchEnabled ? 8 : 16
+        let headerBottomPadding = viewModel.searchEnabled ? 8.0 : 16.0
         NSLayoutConstraint.activate([
             content.view.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor
@@ -124,7 +124,7 @@ class HomeViewController: BaseViewController {
             ),
             content.view.topAnchor.constraint(
                 equalTo: header.bottomAnchor,
-                constant: CGFloat(headerBottomPadding)
+                constant: headerBottomPadding
             ),
             content.view.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor
@@ -184,12 +184,14 @@ class HomeViewController: BaseViewController {
         )
     }
 
-    private func removeSearchBar() {
+    private func cancelSearch() {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
         searchBar.text = ""
         searchViewController.clearResults()
         removeController(searchViewController)
+        displayController(homeContentViewController)
+        setLogoHidden(false)
     }
 }
 
@@ -203,18 +205,14 @@ extension HomeViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        removeSearchBar()
-        displayController(homeContentViewController)
-        setLogoHidden(false)
+        cancelSearch()
     }
 }
 
 extension HomeViewController: ResetsToDefault {
     func resetState() {
         if viewModel.searchEnabled {
-            removeSearchBar()
-            displayController(homeContentViewController)
-            setLogoHidden(false)
+            cancelSearch()
         }
         homeContentViewController.scrollToTop()
     }

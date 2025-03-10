@@ -4,15 +4,15 @@ import GOVKit
 import RecentActivity
 
 struct HomeViewModel {
-    @Inject(\.searchService) private var searchService: SearchServiceInterface
-    @Inject(\.activityService) private var activityService: ActivityServiceInterface
-
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let feedbackAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
+    let searchService: SearchServiceInterface
+    let activityService: ActivityServiceInterface
+
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
         analyticsService: analyticsService,

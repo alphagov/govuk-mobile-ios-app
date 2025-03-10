@@ -203,7 +203,9 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         return HomeViewController(viewModel: viewModel)
     }

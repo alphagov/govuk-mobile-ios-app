@@ -44,8 +44,7 @@ struct HomeViewModel {
                 title: title,
                 action: notificationsAction
             )
-            let content = UserFeedbackView(viewModel: viewModel)
-            content.hideChevron()
+            let content = InformationView(viewModel: viewModel, shouldHideChevron: true)
             let widget = WidgetView(useContentAccessibilityInfo: true)
             widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
             widget.addContent(content)
@@ -60,7 +59,7 @@ struct HomeViewModel {
             title: title,
             action: feedbackAction
         )
-        let content = UserFeedbackView(viewModel: viewModel)
+        let content = InformationView(viewModel: viewModel, shouldHideChevron: false)
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
         widget.addContent(content)

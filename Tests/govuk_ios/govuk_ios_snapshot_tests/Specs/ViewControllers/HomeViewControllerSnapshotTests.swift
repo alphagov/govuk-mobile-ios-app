@@ -137,6 +137,56 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
+    func test_loadInNavigationController_searchBarShouldBeginEditing_rendersCorrectly() {
+        let viewController = viewController()
+        guard let searchBar: UISearchBar =
+                viewController.view.subviews.first(where: { $0 is UISearchBar } ) as? UISearchBar
+        else {
+            return
+        }
+        let _ = viewController.searchBarShouldBeginEditing(searchBar)
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_searchEditing_resetState_rendersCorrectly() {
+        let viewController = viewController()
+        guard let searchBar: UISearchBar =
+                viewController.view.subviews.first(where: { $0 is UISearchBar } ) as? UISearchBar
+        else {
+            return
+        }
+        let _ = viewController.searchBarShouldBeginEditing(searchBar)
+        viewController.resetState()
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_searchEditing_cancelSearch_rendersCorrectly() {
+        let viewController = viewController()
+        guard let searchBar: UISearchBar =
+                viewController.view.subviews.first(where: { $0 is UISearchBar } ) as? UISearchBar
+        else {
+            return
+        }
+        let _ = viewController.searchBarShouldBeginEditing(searchBar)
+        viewController.searchBarCancelButtonClicked(searchBar)
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
     func viewController(
         configService: MockAppConfigService = MockAppConfigService()
     ) -> HomeViewController {

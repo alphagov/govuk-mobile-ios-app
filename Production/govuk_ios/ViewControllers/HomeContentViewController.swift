@@ -85,11 +85,6 @@ class HomeContentViewController: BaseViewController,
                 self.stackView.addArrangedSubview(self.crownLogoImageView)
             }
         }
-//        viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
-//        if let lastWidget = stackView.arrangedSubviews.last {
-//            stackView.setCustomSpacing(32, after: lastWidget)
-//        }
-//        stackView.addArrangedSubview(crownLogoImageView)
     }
 
     func scrollToTop() {

@@ -65,10 +65,9 @@ class HomeCoordinator: TabItemCoordinator {
         return { [weak self] in
             guard let self = self else { return }
             self.trackWidgetNavigation(
-                text: String.home.localized("feedbackWidgetTitle"),
-                external: true
+                text: String.home.localized("feedbackWidgetTitle")
             )
-            self.notificationService.requestPermissions { }
+            self.notificationService.requestPermissions(completion: nil)
         }
     }
 

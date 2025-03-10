@@ -5,8 +5,8 @@ class SearchResultCell: UITableViewCell {
     private lazy var card: UIView = {
         let localView = UIView()
         localView.translatesAutoresizingMaskIntoConstraints = false
-        localView.backgroundColor = UIColor.govUK.fills.surfaceCardDefault
-        localView.layer.borderColor = UIColor.govUK.strokes.listDivider.cgColor
+        localView.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+        localView.layer.borderColor = UIColor.govUK.strokes.cardBlue.cgColor
         localView.layer.borderWidth = 0.5
         localView.layer.cornerRadius = 10
         localView.directionalLayoutMargins = NSDirectionalEdgeInsets(

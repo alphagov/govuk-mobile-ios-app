@@ -27,7 +27,9 @@ struct HomeCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         subject.start()
 
@@ -50,7 +52,9 @@ struct HomeCoordinatorTests {
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         subject.start()
 
@@ -79,7 +83,10 @@ struct HomeCoordinatorTests {
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
+
         )
         subject.start()
 
@@ -112,7 +119,10 @@ struct HomeCoordinatorTests {
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
+
         )
         subject.start()
 
@@ -141,7 +151,10 @@ struct HomeCoordinatorTests {
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
+
         )
         subject.start()
 
@@ -172,7 +185,9 @@ struct HomeCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         
         subject.start()
@@ -199,7 +214,9 @@ struct HomeCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             topicsService: MockTopicsService(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         
         subject.start()

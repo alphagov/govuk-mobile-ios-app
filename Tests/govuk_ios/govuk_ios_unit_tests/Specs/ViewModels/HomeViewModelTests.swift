@@ -23,7 +23,9 @@ struct HomeViewModelTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         let widgets = subject.widgets
 
@@ -49,7 +51,9 @@ struct HomeViewModelTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         let widgets = subject.widgets
 

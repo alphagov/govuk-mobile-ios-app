@@ -116,7 +116,80 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func viewController() -> HomeViewController {
+    func test_loadInNavigationController_searchDisabled_rendersCorrectly() {
+        mockTopicService._stubbedHasCustomisedTopics = true
+        mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
+        var topics = Topic.arrangeMultipleFavourites(
+            context: coreData.viewContext
+        )
+        let mockConfigService = MockAppConfigService()
+        mockConfigService.features = [.onboarding, .topics, .recentActivity]
+
+        mockTopicService._stubbedFetchAllTopics = topics
+
+        topics.removeLast()
+        mockTopicService._stubbedFetchFavouriteTopics = topics
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController(configService: mockConfigService),
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_searchBarShouldBeginEditing_rendersCorrectly() {
+        let viewController = viewController()
+        guard let searchBar: UISearchBar =
+                viewController.view.subviews.first(where: { $0 is UISearchBar } ) as? UISearchBar
+        else {
+            return
+        }
+        let _ = viewController.searchBarShouldBeginEditing(searchBar)
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_searchEditing_resetState_rendersCorrectly() {
+        let viewController = viewController()
+        guard let searchBar: UISearchBar =
+                viewController.view.subviews.first(where: { $0 is UISearchBar } ) as? UISearchBar
+        else {
+            return
+        }
+        let _ = viewController.searchBarShouldBeginEditing(searchBar)
+        viewController.resetState()
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_searchEditing_cancelSearch_rendersCorrectly() {
+        let viewController = viewController()
+        guard let searchBar: UISearchBar =
+                viewController.view.subviews.first(where: { $0 is UISearchBar } ) as? UISearchBar
+        else {
+            return
+        }
+        let _ = viewController.searchBarShouldBeginEditing(searchBar)
+        viewController.searchBarCancelButtonClicked(searchBar)
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func viewController(
+        configService: MockAppConfigService = MockAppConfigService()
+    ) -> HomeViewController {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
@@ -126,11 +199,13 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         )
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
-            configService: MockAppConfigService(),
+            configService: configService,
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         return HomeViewController(viewModel: viewModel)
     }

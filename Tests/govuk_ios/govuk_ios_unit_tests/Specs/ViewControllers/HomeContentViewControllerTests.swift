@@ -24,7 +24,9 @@ struct HomeContentViewControllerTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
 
@@ -47,7 +49,9 @@ struct HomeContentViewControllerTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
@@ -74,7 +78,9 @@ struct HomeContentViewControllerTests {
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         guard let scrollView: UIScrollView =

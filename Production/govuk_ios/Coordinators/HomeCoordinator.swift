@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import GOVKit
+import RecentActivity
 
 class HomeCoordinator: TabItemCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
@@ -10,6 +11,8 @@ class HomeCoordinator: TabItemCoordinator {
     private let configService: AppConfigServiceInterface
     private let topicsService: TopicsServiceInterface
     private let deviceInformationProvider: DeviceInformationProviderInterface
+    private let searchService: SearchServiceInterface
+    private let activityService: ActivityServiceInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -18,7 +21,9 @@ class HomeCoordinator: TabItemCoordinator {
          analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
          topicsService: TopicsServiceInterface,
-         deviceInformationProvider: DeviceInformationProviderInterface) {
+         deviceInformationProvider: DeviceInformationProviderInterface,
+         searchService: SearchServiceInterface,
+         activityService: ActivityServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
@@ -26,6 +31,8 @@ class HomeCoordinator: TabItemCoordinator {
         self.configService = configService
         self.topicsService = topicsService
         self.deviceInformationProvider = deviceInformationProvider
+        self.searchService = searchService
+        self.activityService = activityService
         super.init(navigationController: navigationController)
     }
 
@@ -35,7 +42,9 @@ class HomeCoordinator: TabItemCoordinator {
             configService: configService,
             topicWidgetViewModel: topicWidgetViewModel,
             feedbackAction: feedbackAction,
-            recentActivityAction: startRecentActivityCoordinator
+            recentActivityAction: startRecentActivityCoordinator,
+            searchService: searchService,
+            activityService: activityService
         )
         set([viewController], animated: false)
     }

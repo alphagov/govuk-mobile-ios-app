@@ -4,9 +4,6 @@ import GOVKit
 import RecentActivity
 
 struct HomeViewModel {
-    @Inject(\.searchService) private var searchService: SearchServiceInterface
-    @Inject(\.activityService) private var activityService: ActivityServiceInterface
-
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
@@ -15,6 +12,10 @@ struct HomeViewModel {
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
+    let searchService: SearchServiceInterface
+    let activityService: ActivityServiceInterface
+
+    lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
         analyticsService: analyticsService,
         searchService: searchService,
@@ -68,7 +69,7 @@ struct HomeViewModel {
 
     @MainActor
     private var recentActivityWidget: WidgetView? {
-        guard widgetEnabled(feature: .recentActivity)
+        guard featureEnabled(.recentActivity)
         else { return nil }
         let title = String.home.localized(
             "recentActivityWidgetTitle"
@@ -88,7 +89,7 @@ struct HomeViewModel {
 
     @MainActor
     private var topicsWidget: WidgetView? {
-        guard widgetEnabled(feature: .topics)
+        guard featureEnabled(.topics)
         else { return nil }
         let content = TopicsWidgetView(
             viewModel: topicWidgetViewModel
@@ -98,7 +99,7 @@ struct HomeViewModel {
         return widget
     }
 
-    private func widgetEnabled(feature: Feature) -> Bool {
+    private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }
 

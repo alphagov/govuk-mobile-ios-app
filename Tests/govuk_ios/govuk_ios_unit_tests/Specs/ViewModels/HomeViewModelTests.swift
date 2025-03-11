@@ -24,7 +24,9 @@ struct HomeViewModelTests {
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         let widgets = await subject.widgets
 
@@ -55,7 +57,9 @@ struct HomeViewModelTests {
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
         let widgets = await subject.widgets
 

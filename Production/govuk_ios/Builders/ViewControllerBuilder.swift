@@ -26,7 +26,9 @@ class ViewControllerBuilder {
               topicWidgetViewModel: TopicsWidgetViewModel,
               feedbackAction: @escaping () -> Void,
               notificationsAction: @escaping () -> Void,
-              recentActivityAction: @escaping () -> Void) -> UIViewController {
+              recentActivityAction: @escaping () -> Void,
+              searchService: SearchServiceInterface,
+              activityService: ActivityServiceInterface) -> UIViewController {
         let viewModel = HomeViewModel(
             analyticsService: analyticsService,
             configService: configService,
@@ -35,7 +37,9 @@ class ViewControllerBuilder {
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
             recentActivityAction: recentActivityAction,
-            urlOpener: UIApplication.shared
+            urlOpener: UIApplication.shared,
+            searchService: searchService,
+            activityService: activityService
         )
         return HomeViewController(
             viewModel: viewModel

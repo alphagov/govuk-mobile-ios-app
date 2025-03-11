@@ -30,7 +30,9 @@ struct ViewControllerBuilderTests {
             topicWidgetViewModel: viewModel,
             feedbackAction: {},
             notificationsAction: {},
-            recentActivityAction: {}
+            recentActivityAction: {},
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
 
         #expect(result is HomeViewController)

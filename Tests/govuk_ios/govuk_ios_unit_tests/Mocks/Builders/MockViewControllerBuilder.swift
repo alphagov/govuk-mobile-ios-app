@@ -30,7 +30,9 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                        topicWidgetViewModel: TopicsWidgetViewModel,
                        feedbackAction: @escaping () -> Void,
                        notificationsAction: @escaping () -> Void,
-                       recentActivityAction: @escaping () -> Void) -> UIViewController {
+                       recentActivityAction: @escaping () -> Void,
+                       searchService: SearchServiceInterface,
+                       activityService: ActivityServiceInterface) -> UIViewController {
         _receivedHomeRecentActivityAction = recentActivityAction
         _receivedTopicWidgetViewModel = topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()

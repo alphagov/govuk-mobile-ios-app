@@ -27,7 +27,9 @@ class CoordinatorBuilder {
             configService: container.appConfigService.resolve(),
             topicsService: container.topicsService.resolve(),
             notificationService: container.notificationService.resolve(),
-            deviceInformationProvider: DeviceInformationProvider()
+            deviceInformationProvider: DeviceInformationProvider(),
+            searchService: container.searchService.resolve(),
+            activityService: container.activityService.resolve()
         )
     }
 

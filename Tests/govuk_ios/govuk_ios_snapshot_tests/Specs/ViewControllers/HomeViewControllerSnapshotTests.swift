@@ -275,5 +275,4 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
 //        )
 //        return HomeViewController(viewModel: viewModel)
 //    }
-
 }

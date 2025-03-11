@@ -41,16 +41,24 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.home(
+        let dependencies = ViewControllerBuilder.HomeDependencies(
             analyticsService: analyticsService,
             configService: configService,
             notificationService: notificationService,
-            topicWidgetViewModel: topicWidgetViewModel,
+            searchService: searchService,
+            activityService: activityService,
+            topicWidgetViewModel: topicWidgetViewModel
+        )
+
+        let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
-            recentActivityAction: startRecentActivityCoordinator,
-            searchService: searchService,
-            activityService: activityService
+            recentActivityAction: startRecentActivityCoordinator
+        )
+
+        let viewController = viewControllerBuilder.home(
+            dependencies: dependencies,
+            actions: actions
         )
         set([viewController], animated: false)
     }

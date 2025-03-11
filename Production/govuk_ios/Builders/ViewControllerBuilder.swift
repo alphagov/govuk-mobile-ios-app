@@ -18,28 +18,34 @@ class ViewControllerBuilder {
         )
     }
 
+    struct HomeDependencies {
+        let analyticsService: AnalyticsServiceInterface
+        let configService: AppConfigServiceInterface
+        let notificationService: NotificationServiceInterface
+        let searchService: SearchServiceInterface
+        let activityService: ActivityServiceInterface
+        let topicWidgetViewModel: TopicsWidgetViewModel
+    }
+
+    struct HomeActions {
+        let feedbackAction: () -> Void
+        let notificationsAction: () -> Void
+        let recentActivityAction: () -> Void
+    }
+
     @MainActor
-    // swiftlint:disable:next function_parameter_count
-    func home(analyticsService: AnalyticsServiceInterface,
-              configService: AppConfigServiceInterface,
-              notificationService: NotificationServiceInterface,
-              topicWidgetViewModel: TopicsWidgetViewModel,
-              feedbackAction: @escaping () -> Void,
-              notificationsAction: @escaping () -> Void,
-              recentActivityAction: @escaping () -> Void,
-              searchService: SearchServiceInterface,
-              activityService: ActivityServiceInterface) -> UIViewController {
+    func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
         let viewModel = HomeViewModel(
-            analyticsService: analyticsService,
-            configService: configService,
-            notificationService: notificationService,
-            topicWidgetViewModel: topicWidgetViewModel,
-            feedbackAction: feedbackAction,
-            notificationsAction: notificationsAction,
-            recentActivityAction: recentActivityAction,
+            analyticsService: dependencies.analyticsService,
+            configService: dependencies.configService,
+            notificationService: dependencies.notificationService,
+            topicWidgetViewModel: dependencies.topicWidgetViewModel,
+            feedbackAction: actions.feedbackAction,
+            notificationsAction: actions.notificationsAction,
+            recentActivityAction: actions.recentActivityAction,
             urlOpener: UIApplication.shared,
-            searchService: searchService,
-            activityService: activityService
+            searchService: dependencies.searchService,
+            activityService: dependencies.activityService
         )
         return HomeViewController(
             viewModel: viewModel

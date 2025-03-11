@@ -38,24 +38,13 @@ class NotificationService: NotificationServiceInterface {
         notificationCenter.getAuthorizationStatus(completion: completion)
     }
 
-    func setRedirectedToNotificationsOnboarding(redirected: Bool) {
-        userDefaults.set(
-            bool: redirected,
-            forKey: .redirectedToNotificationsOnboarding
-        )
-    }
-
-    var redirectedToNotifcationsOnboarding: Bool {
-        userDefaults.bool(forKey: .redirectedToNotificationsOnboarding)
-    }
-
     var shouldRequestPermission: Bool {
         get async {
             let switches = (
                 isFeatureEnabled,
-                await notificationCenter.authorizationStatus == .notDetermined
+                await notificationCenter.authorizationStatus
             )
-            return switches.0 && switches.1 || redirectedToNotifcationsOnboarding
+            return switches.0 && switches.1 == .notDetermined
         }
     }
 

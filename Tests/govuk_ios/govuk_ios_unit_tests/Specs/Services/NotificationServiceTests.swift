@@ -63,19 +63,6 @@ class NotificationServiceTests {
         #expect(!sut.isFeatureEnabled)
     }
 
-    @Test(.serialized, arguments: [true, false])
-    func redirectedToNotifcationsOnboarding_returnsCorrectValue(expectedValue: Bool) {
-
-        let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.set(bool: expectedValue, forKey: .redirectedToNotificationsOnboarding)
-
-        let sut = NotificationService(
-            environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter(),
-            userDefaults: mockUserDefaults
-        )
-        #expect(sut.redirectedToNotifcationsOnboarding == expectedValue)
-    }
 
     @Test
     func getAuthorizationStatus_whenaAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
@@ -129,37 +116,5 @@ class NotificationServiceTests {
             notificationCenter._receivedGetAuthorizationStatusCompletion?(.notDetermined)
         }
         #expect(result == .notDetermined)
-    }
-
-    @Test
-    func setRedirectedToNotificationsOnboarding_setsRedirectedToNotificationsOnboardingToTrue() {
-        let userDefaults = MockUserDefaults()
-        let notificationCenter = MockUserNotificationCenter()
-
-        let sut = NotificationService(
-            environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter,
-            userDefaults: userDefaults
-        )
-        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == false)
-        sut.setRedirectedToNotificationsOnboarding(redirected: true)
-        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == true)
-    }
-
-    @Test
-    func setRedirectedToNotificationsOnboarding_setsRedirectedToNotificationsOnboardingToFalse() {
-        let userDefaults = MockUserDefaults()
-        let notificationCenter = MockUserNotificationCenter()
-
-        let sut = NotificationService(
-            environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter,
-            userDefaults: userDefaults
-        )
-        sut.setRedirectedToNotificationsOnboarding(redirected: true)
-
-        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == true)
-        sut.setRedirectedToNotificationsOnboarding(redirected: false)
-        #expect(userDefaults.bool(forKey: .redirectedToNotificationsOnboarding) == false)
     }
 }

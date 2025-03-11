@@ -24,7 +24,6 @@ enum UserDefaultsKeys: String {
     case acceptedAnalytics = "govuk_app_analytics_accepted"
     case customisedTopics = "govuk_topics_customised"
     case topicsOnboardingSeen = "govuk_topics_onboarding_seen"
-    case redirectedToNotificationsOnboarding = "govuk_redirected_to_notifications_onboarding"
 }
 
 protocol UserDefaultsInterface {

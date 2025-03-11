@@ -28,7 +28,6 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     private func startNotifications() async {
         guard await notificationService.shouldRequestPermission
         else { return finishCoordination() }
-        notificationService.setRedirectedToNotificationsOnboarding(redirected: false)
         setOnboarding()
     }
 

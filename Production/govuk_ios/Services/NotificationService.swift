@@ -10,8 +10,6 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     func requestPermissions(completion: @escaping () -> Void)
     var shouldRequestPermission: Bool { get async }
     var isFeatureEnabled: Bool { get }
-    var redirectedToNotifcationsOnboarding: Bool { get }
-    func setRedirectedToNotificationsOnboarding(redirected: Bool)
     func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void)
 }
 

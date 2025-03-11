@@ -3,8 +3,7 @@ import UserNotifications
 
 protocol UserNotificationCenterInterface {
     var authorizationStatus: UNAuthorizationStatus { get async }
-    func getAuthorizationStatus(
-        completion: @escaping (UNAuthorizationStatus) -> Void)
+    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void)
 }
 
 extension UNUserNotificationCenter: UserNotificationCenterInterface {

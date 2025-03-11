@@ -1,6 +1,5 @@
 import UIKit
 import GOVKit
-import SwiftUI
 
 protocol SettingsViewModelInterface: ObservableObject {
     var title: String { get }
@@ -30,7 +29,6 @@ class SettingsViewModel: SettingsViewModelInterface {
         "settingsNotificationAlertPrimaryButtonTitle"
     )
     private let dismissAction: () -> Void
-
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
@@ -77,12 +75,6 @@ class SettingsViewModel: SettingsViewModelInterface {
         setNotificationAuthorizationStatus()
     }
 
-     enum NotificationPermissionState {
-        case notDetermined
-        case denied
-        case authorized
-    }
-
      private func setNotificationAuthorizationStatus() {
          notificationService.getAuthorizationStatus { [weak self] authorizationStatus in
              switch authorizationStatus {
@@ -104,7 +96,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         switch notificationsPermissionState {
         case .authorized, .denied:
             if urlOpener.openSettings() {
-                trackLinkEvent(
+                trackNavigationEvent(
                     notificationAlertButtonTitle,
                     external: false
                 )
@@ -160,18 +152,21 @@ class SettingsViewModel: SettingsViewModelInterface {
                     title: String.settings.localized("privacyAndLegalHeading"),
                     icon: nil
                 ),
-                rows: [ToggleRow(
-                    id: "settings.privacy.row",
-                    title: String.settings.localized("appUsageTitle"),
-                    isOn: hasAcceptedAnalytics,
-                    action: { [weak self] isOn in
-                        self?.analyticsService.setAcceptedAnalytics(
-                            accepted: isOn
-                        )
-                    }
-                )],
+                rows: [
+                    ToggleRow(
+                        id: "settings.privacy.row",
+                        title: String.settings.localized("appUsageTitle"),
+                        isOn: hasAcceptedAnalytics,
+                        action: { [weak self] isOn in
+                            self?.analyticsService.setAcceptedAnalytics(
+                                accepted: isOn
+                            )
+                        }
+                    )
+                ],
                 footer: String.settings.localized("appUsageFooter")
-            ))
+            )
+        )
         rows.append(
             GroupedListSection(
                 heading: nil,
@@ -197,16 +192,14 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 if self?.urlOpener.openIfPossible(Constants.API.privacyPolicyUrl) == true {
-                    self?.trackLinkEvent(rowTitle, external: true)
+                    self?.trackNavigationEvent(rowTitle, external: true)
                 }
             }
         )
     }
 
     private func helpAndFeedbackRow() -> GroupedListRow {
-        let rowTitle = String.settings.localized(
-            "helpAndFeedbackSettingsTitle"
-        )
+        let rowTitle = String.settings.localized("helpAndFeedbackSettingsTitle")
         return LinkRow(
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
@@ -231,7 +224,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 if self?.urlOpener.openSettings() == true {
-                    self?.trackLinkEvent(rowTitle, external: true)
+                    self?.trackNavigationEvent(rowTitle, external: true)
                 }
             }
         )
@@ -246,11 +239,8 @@ class SettingsViewModel: SettingsViewModelInterface {
             isAuthorized: notificationsPermissionState == .authorized,
             action: { [weak self] in
                 if self?.notificationsPermissionState == .notDetermined {
-                    self?.notificationService.setRedirectedToNotificationsOnboarding(
-                        redirected: true
-                    )
-                    self?.trackLinkEvent(
-                        String.settings.localized("settingsNotificationsTitle"),
+                    self?.trackNavigationEvent(
+                        String.settings.localized(rowTitle),
                         external: false
                     )
                     self?.dismissAction()
@@ -294,12 +284,12 @@ class SettingsViewModel: SettingsViewModelInterface {
     private func openURLIfPossible(url: URL,
                                    eventTitle: String) {
         if urlOpener.openIfPossible(url) {
-            trackLinkEvent(eventTitle, external: true)
+            trackNavigationEvent(eventTitle, external: true)
         }
     }
 
-    private func trackLinkEvent(_ title: String,
-                                external: Bool) {
+    private func trackNavigationEvent(_ title: String,
+                                      external: Bool) {
         let event = AppEvent.buttonNavigation(
             text: title,
             external: external
@@ -311,4 +301,11 @@ class SettingsViewModel: SettingsViewModelInterface {
         analyticsService.track(screen: screen)
     }
 }
-// swiftlint:enable type_body_length
+
+extension SettingsViewModel {
+    enum NotificationPermissionState {
+        case notDetermined
+        case denied
+        case authorized
+    }
+}

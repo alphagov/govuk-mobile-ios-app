@@ -100,7 +100,7 @@
         }
       }
     },
-    "Off" : {
+    "off" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -122,7 +122,7 @@
         }
       }
     },
-    "On" : {
+    "on" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

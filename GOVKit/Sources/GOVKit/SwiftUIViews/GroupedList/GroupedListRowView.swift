@@ -86,7 +86,7 @@ struct NotificationsRowView: View {
                     Text(row.title)
                         .multilineTextAlignment(.leading)
                     Spacer()
-                    Text(row.isAuthorized ? String.common.localized("On") : String.common.localized("Off"))
+                    Text(row.isAuthorized ? String.common.localized("on") : String.common.localized("off"))
                     .font(Font.govUK.caption1Medium)
                     .multilineTextAlignment(.leading)
                 }
@@ -99,7 +99,6 @@ struct NotificationsRowView: View {
         .accessibilityHint(String.common.localized("openNotificationsSettings"))
     }
 }
-
 
 struct NavigationRowView: View {
     let row: NavigationRow

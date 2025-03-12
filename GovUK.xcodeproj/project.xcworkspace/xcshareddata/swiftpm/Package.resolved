@@ -1,5 +1,5 @@
 {
-  "originHash" : "38487e403a931eedf720f067efbbdbff300f6c4ab0e9a73e89f10489fee9029b",
+  "originHash" : "bc3cd25fb603f342ebd7d026a04f0d3f1002d6f2b9e7d7d7349a64db16f865dd",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
         "version" : "11.2.0"
+      }
+    },
+    {
+      "identity" : "bigint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/attaswift/BigInt",
+      "state" : {
+        "revision" : "114343a705df4725dfe7ab8a2a326b8883cfd79c",
+        "version" : "5.5.1"
       }
     },
     {
@@ -134,6 +143,15 @@
       "state" : {
         "revision" : "047aa81b77adcbf583a966dfef620d17650cc656",
         "version" : "4.5.1"
+      }
+    },
+    {
+      "identity" : "mobile-ios-secure-store",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/govuk-one-login/mobile-ios-secure-store",
+      "state" : {
+        "revision" : "8f2c93b86b4b56e91de734da627324c312f2df10",
+        "version" : "1.1.1"
       }
     },
     {

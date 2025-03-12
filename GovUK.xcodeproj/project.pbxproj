@@ -178,11 +178,16 @@
 		5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */; };
 		5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */; };
 		D00984F22D47BC9600D70FEE /* DeviceInformation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */; };
+		D011E9F02D80AE2C00931DCB /* CryptoService in Frameworks */ = {isa = PBXBuildFile; productRef = D011E9EF2D80AE2C00931DCB /* CryptoService */; };
+		D011E9F22D80AE2C00931DCB /* SecureStore in Frameworks */ = {isa = PBXBuildFile; productRef = D011E9F12D80AE2C00931DCB /* SecureStore */; };
 		D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF32CB4247100742620 /* TopicsRepository.swift */; };
 		D028CCF62CB9619B00742620 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF52CB9619B00742620 /* Topic.swift */; };
 		D028CD0C2CBEC8F400742620 /* TopicDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */; };
 		D028CD0E2CBFEA4E00742620 /* TopicDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */; };
 		D028CD122CC14A0100742620 /* DisplayableTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD112CC149FA00742620 /* DisplayableTopic.swift */; };
+		D03637A42D81A803007AF37F /* TokenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03637A32D81A803007AF37F /* TokenCoordinator.swift */; };
+		D03637A72D81ACB1007AF37F /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03637A62D81ACB1007AF37F /* TokenView.swift */; };
+		D03637A92D81ACD5007AF37F /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03637A82D81ACD5007AF37F /* TokenViewModel.swift */; };
 		D04191782CA57A6F0034722A /* TopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191772CA57A6F0034722A /* TopicsService.swift */; };
 		D04191802CA595400034722A /* TopicResponseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D041917F2CA595400034722A /* TopicResponseItem.swift */; };
 		D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191852CA6A5910034722A /* TopicsServiceClient.swift */; };
@@ -449,6 +454,9 @@
 		D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailResponse.swift; sourceTree = "<group>"; };
 		D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailViewModel.swift; sourceTree = "<group>"; };
 		D028CD112CC149FA00742620 /* DisplayableTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableTopic.swift; sourceTree = "<group>"; };
+		D03637A32D81A803007AF37F /* TokenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCoordinator.swift; sourceTree = "<group>"; };
+		D03637A62D81ACB1007AF37F /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		D03637A82D81ACD5007AF37F /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
 		D04191772CA57A6F0034722A /* TopicsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsService.swift; sourceTree = "<group>"; };
 		D041917F2CA595400034722A /* TopicResponseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicResponseItem.swift; sourceTree = "<group>"; };
 		D04191852CA6A5910034722A /* TopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClient.swift; sourceTree = "<group>"; };
@@ -599,6 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */,
+				D011E9F22D80AE2C00931DCB /* SecureStore in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
 				D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */,
 				D0EBFBD02D109B51000A3151 /* RecentActivity in Frameworks */,
@@ -609,6 +618,7 @@
 				5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
 				5D1F7E772D75A959007FD506 /* Onboarding in Frameworks */,
+				D011E9F02D80AE2C00931DCB /* CryptoService in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -789,6 +799,7 @@
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
 				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
 				5D0F199D2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift */,
+				D03637A82D81ACD5007AF37F /* TokenViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -890,6 +901,7 @@
 				16E5AD442C6E499B000B8B3A /* Home */,
 				163800FD2C99DAB900C3DDD1 /* Search */,
 				5DA4FB052CCBAF1800804C8A /* Settings */,
+				D03637A52D81AC85007AF37F /* Token */,
 				D0F86E1F2CAC3BE000FF2D9E /* Topics */,
 			);
 			path = Views;
@@ -949,6 +961,7 @@
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 				5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */,
 				4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */,
+				D03637A32D81A803007AF37F /* TokenCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1197,6 +1210,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D03637A52D81AC85007AF37F /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				D03637A62D81ACB1007AF37F /* TokenView.swift */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
 		D041917C2CA57B3D0034722A /* Topics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1339,6 +1360,8 @@
 				5DCAFA792D40088600C3F284 /* OneSignalFramework */,
 				5D1F7E762D75A959007FD506 /* Onboarding */,
 				5D8BE2922D75F2BD0036A1FA /* Onboarding */,
+				D011E9EF2D80AE2C00931DCB /* CryptoService */,
+				D011E9F12D80AE2C00931DCB /* SecureStore */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1431,6 +1454,7 @@
 				5DC165912CF080F50074F2DC /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
 				5DCAFA762D40088600C3F284 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 				5D8BE2912D75F2BD0036A1FA /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				D011E9EE2D80AE2C00931DCB /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -1616,6 +1640,7 @@
 				D076F9192D3544F0000278D5 /* SearchHistoryCell.swift in Sources */,
 				D04A8F4B2CD3949800685FD3 /* URLResponse+Extensions.swift in Sources */,
 				4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */,
+				D03637A72D81ACB1007AF37F /* TokenView.swift in Sources */,
 				D0D9CFD92D30309D0051EDDD /* SearchHistoryViewModel.swift in Sources */,
 				5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */,
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,
@@ -1649,7 +1674,9 @@
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */,
 				5D0F199E2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift in Sources */,
+				D03637A92D81ACD5007AF37F /* TokenViewModel.swift in Sources */,
 				4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */,
+				D03637A42D81A803007AF37F /* TokenCoordinator.swift in Sources */,
 				5D8100872CEB3FD600EE7D15 /* AppLaunchService.swift in Sources */,
 				5D9E67C42C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift in Sources */,
 				4E00EEEB2CCB040D007B61E8 /* TopicsButtonView.swift in Sources */,
@@ -2467,6 +2494,14 @@
 				minimumVersion = 5.2.9;
 			};
 		};
+		D011E9EE2D80AE2C00931DCB /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/govuk-one-login/mobile-ios-secure-store";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2526,6 +2561,16 @@
 		5DDB31CB2CEF84D100E49259 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
+		};
+		D011E9EF2D80AE2C00931DCB /* CryptoService */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D011E9EE2D80AE2C00931DCB /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */;
+			productName = CryptoService;
+		};
+		D011E9F12D80AE2C00931DCB /* SecureStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D011E9EE2D80AE2C00931DCB /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */;
+			productName = SecureStore;
 		};
 		D0D661A22D285D1B00571841 /* GOVKitTestUtilities */ = {
 			isa = XCSwiftPackageProductDependency;

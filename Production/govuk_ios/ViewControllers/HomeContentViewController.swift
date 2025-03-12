@@ -75,11 +75,16 @@ class HomeContentViewController: BaseViewController,
     }
 
     private func addWidgets() {
-        viewModel.widgets.lazy.forEach(stackView.addArrangedSubview)
-        if let lastWidget = stackView.arrangedSubviews.last {
-            stackView.setCustomSpacing(32, after: lastWidget)
+        Task {
+            let widgets = await viewModel.widgets
+            DispatchQueue.main.async {
+                widgets.lazy.forEach(self.stackView.addArrangedSubview)
+                if let lastWidget = self.stackView.arrangedSubviews.last {
+                    self.stackView.setCustomSpacing(32, after: lastWidget)
+                }
+                self.stackView.addArrangedSubview(self.crownLogoImageView)
+            }
         }
-        stackView.addArrangedSubview(crownLogoImageView)
     }
 
     func scrollToTop() {

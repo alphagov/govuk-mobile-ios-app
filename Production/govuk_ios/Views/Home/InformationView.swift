@@ -2,8 +2,9 @@ import Foundation
 import UIKit
 import UIComponents
 
-final class UserFeedbackView: UIControl {
+final class InformationView: UIControl {
     private let viewModel: UserFeedbackViewModel
+    private let shouldHideChevron: Bool
 
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -41,8 +42,9 @@ final class UserFeedbackView: UIControl {
         return UITapGestureRecognizer(target: self, action: #selector(handleTap))
     }()
 
-    init(viewModel: UserFeedbackViewModel) {
+    init(viewModel: UserFeedbackViewModel, shouldHideChevron: Bool = false) {
         self.viewModel = viewModel
+        self.shouldHideChevron = shouldHideChevron
         super.init(frame: .zero)
         titleLabel.text = viewModel.title
         configureUI()
@@ -56,7 +58,9 @@ final class UserFeedbackView: UIControl {
 
     private func configureUI() {
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(titleImageView)
+        if !shouldHideChevron {
+            stackView.addArrangedSubview(titleImageView)
+        }
         addSubview(stackView)
         addGestureRecognizer(gestureRecognizer)
     }

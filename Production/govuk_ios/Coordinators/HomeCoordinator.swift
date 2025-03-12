@@ -10,6 +10,8 @@ class HomeCoordinator: TabItemCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let configService: AppConfigServiceInterface
     private let topicsService: TopicsServiceInterface
+    private let notificationService: NotificationServiceInterface
+
     private let deviceInformationProvider: DeviceInformationProviderInterface
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
@@ -21,6 +23,7 @@ class HomeCoordinator: TabItemCoordinator {
          analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
          topicsService: TopicsServiceInterface,
+         notificationService: NotificationServiceInterface,
          deviceInformationProvider: DeviceInformationProviderInterface,
          searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface) {
@@ -30,6 +33,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.analyticsService = analyticsService
         self.configService = configService
         self.topicsService = topicsService
+        self.notificationService = notificationService
         self.deviceInformationProvider = deviceInformationProvider
         self.searchService = searchService
         self.activityService = activityService
@@ -37,14 +41,24 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.home(
+        let dependencies = ViewControllerBuilder.HomeDependencies(
             analyticsService: analyticsService,
             configService: configService,
-            topicWidgetViewModel: topicWidgetViewModel,
-            feedbackAction: feedbackAction,
-            recentActivityAction: startRecentActivityCoordinator,
+            notificationService: notificationService,
             searchService: searchService,
-            activityService: activityService
+            activityService: activityService,
+            topicWidgetViewModel: topicWidgetViewModel
+        )
+
+        let actions = ViewControllerBuilder.HomeActions(
+            feedbackAction: feedbackAction,
+            notificationsAction: notificationsAction,
+            recentActivityAction: startRecentActivityCoordinator
+        )
+
+        let viewController = viewControllerBuilder.home(
+            dependencies: dependencies,
+            actions: actions
         )
         set([viewController], animated: false)
     }
@@ -64,11 +78,23 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
+    private var notificationsAction: () -> Void {
+        return { [weak self] in
+            guard let self = self else { return }
+            self.trackWidgetNavigation(
+                text: String.home.localized("feedbackWidgetTitle")
+            )
+            self.notificationService.requestPermissions(completion: nil)
+        }
+    }
+
     private var feedbackAction: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
-            self.trackWidgetNavigation(text: String.home.localized("feedbackWidgetTitle"),
-                                        external: true)
+            self.trackWidgetNavigation(
+                text: String.home.localized("feedbackWidgetTitle"),
+                external: true
+            )
             let urlOpener: URLOpener = UIApplication.shared
             urlOpener.openIfPossible(
                 self.deviceInformationProvider.helpAndFeedbackURL(versionProvider: Bundle.main)

@@ -6,8 +6,10 @@ import RecentActivity
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
+    let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let feedbackAction: () -> Void
+    let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
@@ -22,26 +24,50 @@ struct HomeViewModel {
     )
 
     var widgets: [WidgetView] {
-        [
-//            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
-            recentActivityWidget,
-            topicsWidget
-        ].compactMap { $0 }
+        get async {
+            await [
+                notificationsWidget,
+                //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
+                recentActivityWidget,
+                topicsWidget
+            ].compactMap { $0 }
+        }
     }
 
+    @MainActor
+    private var notificationsWidget: WidgetView? {
+        get async {
+            guard await notificationService.shouldRequestPermission
+            else { return nil }
+
+            let title = String.home.localized("homeWidgetTitle")
+            let viewModel = UserFeedbackViewModel(
+                title: title,
+                action: notificationsAction
+            )
+            let content = InformationView(viewModel: viewModel, shouldHideChevron: true)
+            let widget = WidgetView(useContentAccessibilityInfo: true)
+            widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+            widget.addContent(content)
+            return widget
+        }
+    }
+
+    @MainActor
     private var feedbackWidget: WidgetView {
         let title = String.home.localized("feedbackWidgetTitle")
         let viewModel = UserFeedbackViewModel(
             title: title,
             action: feedbackAction
         )
-        let content = UserFeedbackView(viewModel: viewModel)
+        let content = InformationView(viewModel: viewModel, shouldHideChevron: false)
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
         widget.addContent(content)
         return widget
     }
 
+    @MainActor
     private var recentActivityWidget: WidgetView? {
         guard featureEnabled(.recentActivity)
         else { return nil }
@@ -61,6 +87,7 @@ struct HomeViewModel {
         return widget
     }
 
+    @MainActor
     private var topicsWidget: WidgetView? {
         guard featureEnabled(.topics)
         else { return nil }

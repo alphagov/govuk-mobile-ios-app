@@ -23,15 +23,22 @@ struct ViewControllerBuilderTests {
             editAction: { },
             allTopicsAction: { }
         )
-        let result = subject.home(
+        let dependencies = ViewControllerBuilder.HomeDependencies(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
-            topicWidgetViewModel: viewModel,
-            feedbackAction: {},
-            recentActivityAction: {},
+            notificationService: MockNotificationService(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            topicWidgetViewModel: viewModel
         )
+
+        let actions = ViewControllerBuilder.HomeActions(
+            feedbackAction: {},
+            notificationsAction: {},
+            recentActivityAction: {}
+        )
+
+        let result = subject.home(dependencies: dependencies, actions: actions)
 
         #expect(result is HomeViewController)
     }

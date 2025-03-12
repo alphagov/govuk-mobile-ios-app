@@ -44,7 +44,6 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_search_successResponse_noResults_rendersCorrectly() {
         let viewController = createViewController(result: .failure(.noResults))
         viewController.viewDidLoad()
-        let textField = UITextField()
         searchBar.searchTextField.text = "No results"
         let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
         viewController.view.layoutSubviews()
@@ -57,7 +56,6 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_search_failureResponse_genericError_rendersCorrectly() {
         let viewController = createViewController(result: .failure(.apiUnavailable))
         viewController.viewDidLoad()
-        let textField = UITextField()
         searchBar.searchTextField.text = "Generic error"
         let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
         viewController.view.layoutSubviews()
@@ -70,7 +68,6 @@ class SearchViewControllerSnapshotTests: SnapshotTestCase {
     func test_search_failureResponse_networkUnavailable_rendersCorrectly() {
         let viewController = createViewController(result: .failure(.networkUnavailable))
         viewController.viewDidLoad()
-        let textField = UITextField()
         searchBar.searchTextField.text = "Network unavailable"
         let _ = viewController.textFieldShouldReturn(searchBar.searchTextField)
         viewController.view.layoutSubviews()

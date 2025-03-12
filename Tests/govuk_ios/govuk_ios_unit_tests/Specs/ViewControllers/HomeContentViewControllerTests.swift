@@ -21,8 +21,10 @@ struct HomeContentViewControllerTests {
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
+            notificationsAction: { },
             recentActivityAction: { },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
@@ -46,8 +48,10 @@ struct HomeContentViewControllerTests {
         let viewModel = HomeViewModel(
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
+            notificationsAction: { },
             recentActivityAction: { },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
@@ -75,8 +79,10 @@ struct HomeContentViewControllerTests {
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
+            notificationsAction: { },
             recentActivityAction: { },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),

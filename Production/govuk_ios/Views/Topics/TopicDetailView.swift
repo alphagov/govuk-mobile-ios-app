@@ -73,7 +73,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Spacer()
         }
         .padding(.leading, 16)
-        .padding(.bottom, 8)
+        .padding(.bottom, 12)
         .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
     }
 

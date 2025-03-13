@@ -30,15 +30,15 @@ class CoordinatorBuilder {
         )
     }
 
-    func setttings(dismissAction: @escaping () -> Void) -> TabItemCoordinator {
+    var settings: TabItemCoordinator {
         SettingsCoordinator(
             navigationController: UINavigationController.settings,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: DeeplinkDataStore.settings(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
+            coordinatorBuilder: self,
             deviceInformationProvider: DeviceInformationProvider(),
-            notificationService: container.notificationService.resolve(),
-            dismissAction: dismissAction
+            notificationService: container.notificationService.resolve()
         )
     }
 
@@ -93,13 +93,13 @@ class CoordinatorBuilder {
         )
     }
 
-    func tab(navigationController: UINavigationController,
-             dismissAction: @escaping () -> Void) -> BaseCoordinator {
+    func tab(navigationController: UINavigationController) -> BaseCoordinator {
         TabCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,
             analyticsService: container.analyticsService(),
-            dismissAction: dismissAction
+            deviceInformationProvider: DeviceInformationProvider(),
+            notificationService: container.notificationService.resolve()
         )
     }
 

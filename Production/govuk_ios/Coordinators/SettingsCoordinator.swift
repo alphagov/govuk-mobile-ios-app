@@ -5,31 +5,32 @@ import GOVKit
 class SettingsCoordinator: TabItemCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
-    private let settingsViewModel: any SettingsViewModelInterface
-    private let notificationService: NotificationServiceInterface
-    private let dismissAction: () -> Void
+    private var settingsViewModel: any SettingsViewModelInterface
+    private let coordinatorBuilder: CoordinatorBuilder
+    private let analyticsService: AnalyticsServiceInterface
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
+         coordinatorBuilder: CoordinatorBuilder,
          deviceInformationProvider: DeviceInformationProviderInterface,
-         notificationService: NotificationServiceInterface,
-         dismissAction: @escaping () -> Void) {
+         notificationService: NotificationServiceInterface) {
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
-        self.dismissAction = dismissAction
-        self.notificationService = notificationService
+        self.analyticsService = analyticsService
+        self.coordinatorBuilder = coordinatorBuilder
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,
             versionProvider: Bundle.main,
             deviceInformationProvider: deviceInformationProvider,
-            notificationService: notificationService,
-            dismissAction: dismissAction
+            notificationService: notificationService
         )
-
         super.init(navigationController: navigationController)
+        self.settingsViewModel.dismissAction = { [weak self] in
+            self?.presentNotificationsOnboardingCoordinator()
+        }
     }
 
     override func start(url: URL?) {
@@ -48,5 +49,14 @@ class SettingsCoordinator: TabItemCoordinator {
 
     func didReselectTab() {
         settingsViewModel.scrollToTop = true
+    }
+
+    private func presentNotificationsOnboardingCoordinator() {
+        let coordinator = coordinatorBuilder.notificationOnboarding(
+            navigationController: root,
+            completion: { [weak self] in
+                self?.start(url: nil)
+            })
+        start(coordinator)
     }
 }

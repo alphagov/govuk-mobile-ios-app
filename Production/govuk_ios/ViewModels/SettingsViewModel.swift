@@ -11,10 +11,12 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationSettingsAlertTitle: String { get }
     var notificationSettingsAlertBody: String { get }
     var notificationAlertButtonTitle: String { get }
+    var dismissAction: () -> Void { get set }
 }
 
-// swiftlint:disable type_body_length
+// swiftlint:disable:next type_body_length
 class SettingsViewModel: SettingsViewModelInterface {
+    var dismissAction: () -> Void = {}
     let title: String = String.settings.localized("pageTitle")
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
@@ -28,20 +30,17 @@ class SettingsViewModel: SettingsViewModelInterface {
     var notificationAlertButtonTitle: String = String.settings.localized(
         "settingsNotificationAlertPrimaryButtonTitle"
     )
-    private let dismissAction: () -> Void
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
          versionProvider: AppVersionProvider,
          deviceInformationProvider: DeviceInformationProviderInterface,
-         notificationService: NotificationServiceInterface,
-         dismissAction: @escaping () -> Void) {
+         notificationService: NotificationServiceInterface) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
         self.notificationService = notificationService
-        self.dismissAction = dismissAction
         setNotificationAuthorizationStatus()
         addObservers()
     }
@@ -152,18 +151,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                     title: String.settings.localized("privacyAndLegalHeading"),
                     icon: nil
                 ),
-                rows: [
-                    ToggleRow(
-                        id: "settings.privacy.row",
-                        title: String.settings.localized("appUsageTitle"),
-                        isOn: hasAcceptedAnalytics,
-                        action: { [weak self] isOn in
-                            self?.analyticsService.setAcceptedAnalytics(
-                                accepted: isOn
-                            )
-                        }
-                    )
-                ],
+                rows: [returnSettingsRows()],
                 footer: String.settings.localized("appUsageFooter")
             )
         )
@@ -173,6 +161,20 @@ class SettingsViewModel: SettingsViewModelInterface {
                 rows: returnPrivacyAndLegalRows(),
                 footer: nil ))
         return rows
+    }
+
+    private func returnSettingsRows() -> GroupedListRow {
+        let settingsPrivacyRow = ToggleRow(
+            id: "settings.privacy.row",
+            title: String.settings.localized("appUsageTitle"),
+            isOn: hasAcceptedAnalytics,
+            action: { [weak self] isOn in
+                self?.analyticsService.setAcceptedAnalytics(
+                    accepted: isOn
+                )
+            }
+        )
+        return settingsPrivacyRow
     }
 
     private func returnPrivacyAndLegalRows() -> [GroupedListRow] {

@@ -26,18 +26,12 @@ class TabCoordinator: BaseCoordinator,
     private lazy var tabController = UITabBarController.govUK
     private let coordinatorBuilder: CoordinatorBuilder
     private let analyticsService: AnalyticsServiceInterface
-    private let deviceInformationProvider: DeviceInformationProviderInterface
-    private let notificationService: NotificationServiceInterface
 
     init(coordinatorBuilder: CoordinatorBuilder,
          navigationController: UINavigationController,
-         analyticsService: AnalyticsServiceInterface,
-         deviceInformationProvider: DeviceInformationProviderInterface,
-         notificationService: NotificationServiceInterface) {
+         analyticsService: AnalyticsServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.analyticsService = analyticsService
-        self.deviceInformationProvider = deviceInformationProvider
-        self.notificationService = notificationService
         super.init(navigationController: navigationController)
         tabController.delegate = self
     }

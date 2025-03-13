@@ -20,8 +20,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService,
-            dismissAction: {}
+            notificationService: notficationService
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -49,8 +48,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService,
-            dismissAction: {}
+            notificationService: notficationService
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -80,8 +78,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService,
-            dismissAction: {}
+            notificationService: notficationService
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -109,9 +106,9 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService,
-            dismissAction: {}
+            notificationService: notficationService
         )
+        
         let settingsContentView = SettingsView(
             viewModel: viewModel
         )
@@ -143,6 +140,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 }
 
 class GroupedListViewModel: SettingsViewModelInterface {
+    var dismissAction: () -> Void = {}
     var displayNotificationSettingsAlert: Bool = false
     func handleNotificationAlertAction() { }
     var notificationSettingsAlertTitle: String = "Turn on notifications"

@@ -97,9 +97,7 @@ class CoordinatorBuilder {
         TabCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,
-            analyticsService: container.analyticsService(),
-            deviceInformationProvider: DeviceInformationProvider(),
-            notificationService: container.notificationService.resolve()
+            analyticsService: container.analyticsService()
         )
     }
 

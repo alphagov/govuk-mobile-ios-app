@@ -31,7 +31,7 @@ struct CoordinatorBuilderTests {
     @Test
     func settings_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.setttings(dismissAction: {})
+        let coordinator = subject.settings
 
         #expect(coordinator is SettingsCoordinator)
     }
@@ -101,8 +101,7 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.tab(
-            navigationController: mockNavigationController,
-            dismissAction: {}
+            navigationController: mockNavigationController
         )
 
         #expect(coordinator is TabCoordinator)

@@ -27,8 +27,7 @@ class SettingsViewModelTests {
             urlOpener: mockURLOpener,
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            notificationService: MockNotificationService(),
-            dismissAction: { }
+            notificationService: MockNotificationService()
         )
     }
 
@@ -148,8 +147,7 @@ class SettingsViewModelTests {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            notificationService: mockNotificationsService,
-            dismissAction: { }
+            notificationService: mockNotificationsService
         )
 
         let result = await withCheckedContinuation { continutation in
@@ -173,8 +171,7 @@ class SettingsViewModelTests {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            notificationService: mockNotificationsService,
-            dismissAction: { }
+            notificationService: mockNotificationsService
         )
 
         let result = await withCheckedContinuation { continutation in
@@ -199,8 +196,7 @@ class SettingsViewModelTests {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            notificationService: mockNotificationsService,
-            dismissAction: { }
+            notificationService: mockNotificationsService
         )
 
         let result = await withCheckedContinuation { continutation in
@@ -224,8 +220,7 @@ class SettingsViewModelTests {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            notificationService: mockNotificationsService,
-            dismissAction: { }
+            notificationService: mockNotificationsService
         )
 
         let result = await withCheckedContinuation { continutation in
@@ -249,8 +244,7 @@ class SettingsViewModelTests {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            notificationService: mockNotificationsService,
-            dismissAction: { }
+            notificationService: mockNotificationsService
         )
 
         let result = await withCheckedContinuation { continutation in
@@ -275,8 +269,7 @@ class SettingsViewModelTests {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            notificationService: mockNotificationsService,
-            dismissAction: { }
+            notificationService: mockNotificationsService
         )
 
         let result = await withCheckedContinuation { continutation in
@@ -305,8 +298,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: mockVersionProvider,
                 deviceInformationProvider: mockDeviceInformationProvider,
-                notificationService: notiifcationservice,
-                dismissAction: { }
+                notificationService: notiifcationservice
             )
             sut.$notificationsPermissionState
                 .dropFirst()
@@ -336,8 +328,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: mockVersionProvider,
                 deviceInformationProvider: mockDeviceInformationProvider,
-                notificationService: notiifcationservice,
-                dismissAction: { }
+                notificationService: notiifcationservice
             )
 
             sut.$notificationsPermissionState

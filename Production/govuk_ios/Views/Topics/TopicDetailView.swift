@@ -23,7 +23,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 .padding(.bottom, 16)
             } else {
                 ScrollView {
-                    VStack {
+                    VStack(spacing: 0) {
                         titleView
                         topicDetails
                     }
@@ -32,10 +32,12 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 .background(
                     Gradient(stops: [
                         .init(
-                            color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                            color: viewModel.isLoaded ?
+                            Color(UIColor.govUK.fills.surfaceHomeHeaderBackground) : .clear,
                             location: 0),
                         .init(
-                            color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                            color: viewModel.isLoaded ?
+                            Color(UIColor.govUK.fills.surfaceHomeHeaderBackground) : .clear,
                             location: 0.33),
                         .init(
                             color: .clear,
@@ -71,7 +73,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             Spacer()
         }
         .padding(.leading, 16)
-        .padding(.bottom, 4)
+        .padding(.bottom, 8)
         .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
     }
 

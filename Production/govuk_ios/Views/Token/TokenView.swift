@@ -1,13 +1,38 @@
 import SwiftUI
+import Factory
+import UIComponents
 
 struct TokenView: View {
-    private let viewModel: TokenViewModel
+    @StateObject private var viewModel: TokenViewModel
 
     init(viewModel: TokenViewModel) {
-        self.viewModel = viewModel
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 8) {
+            TextField("Text to encrypt", text: $viewModel.token)
+                .border(.tertiary)
+                .padding()
+            SwiftUIButton(
+                .primary,
+                viewModel: viewModel.encryptButtonViewModel
+            )
+            Text(viewModel.encryptedToken)
+                .border(.primary)
+            SwiftUIButton(
+                .primary,
+                viewModel: viewModel.decryptButtonViewModel
+            )
+            Text(viewModel.decryptedToken)
+        }
+        .padding()
     }
+}
+
+#Preview {
+    let model = TokenViewModel(
+        secureStoreService: Container.shared.secureStoreService.resolve()
+    )
+    TokenView(viewModel: model)
 }

@@ -175,4 +175,12 @@ class CoordinatorBuilder {
             completion: completion
         )
     }
+
+    func tokenCoordinator(navigationController: UINavigationController) -> BaseCoordinator {
+        TokenCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            secureStoreService: container.secureStoreService.resolve()
+        )
+    }
 }

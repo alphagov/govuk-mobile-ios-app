@@ -53,7 +53,8 @@ class HomeCoordinator: TabItemCoordinator {
         let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
-            recentActivityAction: startRecentActivityCoordinator
+            recentActivityAction: startRecentActivityCoordinator,
+            tokenAction: tokenAction
         )
 
         let viewController = viewControllerBuilder.home(
@@ -99,6 +100,16 @@ class HomeCoordinator: TabItemCoordinator {
             urlOpener.openIfPossible(
                 self.deviceInformationProvider.helpAndFeedbackURL(versionProvider: Bundle.main)
             )
+        }
+    }
+
+    private var tokenAction: () -> Void {
+        return { [weak self] in
+            guard let self = self else { return }
+            let coordinator = self.coordinatorBuilder.tokenCoordinator(
+                navigationController: self.root
+            )
+            start(coordinator)
         }
     }
 

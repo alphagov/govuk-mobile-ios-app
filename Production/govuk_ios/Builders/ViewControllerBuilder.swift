@@ -32,6 +32,7 @@ class ViewControllerBuilder {
         let feedbackAction: () -> Void
         let notificationsAction: () -> Void
         let recentActivityAction: () -> Void
+        let tokenAction: () -> Void
     }
 
     @MainActor
@@ -44,6 +45,7 @@ class ViewControllerBuilder {
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
+            tokenAction: actions.tokenAction,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService

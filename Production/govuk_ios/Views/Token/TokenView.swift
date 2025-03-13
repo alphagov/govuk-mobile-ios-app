@@ -12,19 +12,28 @@ struct TokenView: View {
     var body: some View {
         VStack(spacing: 8) {
             TextField("Text to encrypt", text: $viewModel.token)
-                .border(.tertiary)
+                .textFieldStyle(.roundedBorder)
                 .padding()
             SwiftUIButton(
                 .primary,
                 viewModel: viewModel.encryptButtonViewModel
             )
-            Text(viewModel.encryptedToken)
-                .border(.primary)
+            Text(viewModel.encryptedToken ?? "Nothing encrypted")
+                .padding()
+
             SwiftUIButton(
                 .primary,
                 viewModel: viewModel.decryptButtonViewModel
             )
-            Text(viewModel.decryptedToken)
+            Text(viewModel.decryptedToken ?? "No decrypted data")
+                .padding()
+                .background(Color.secondary.opacity(0.2))
+                .cornerRadius(10)
+            Spacer()
+            SwiftUIButton(
+                .secondary,
+                viewModel: viewModel.deleteDataButtonViewModel
+            )
         }
         .padding()
     }

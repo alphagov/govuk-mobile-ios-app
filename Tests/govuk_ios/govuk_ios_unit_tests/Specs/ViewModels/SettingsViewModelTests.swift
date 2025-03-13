@@ -1,5 +1,4 @@
 import Foundation
-import UserNotifications
 import Testing
 import Combine
 
@@ -190,7 +189,6 @@ class SettingsViewModelTests {
 
     @Test
     func notificationSettingsAlertTitle_whenNotificationPermissionIsAuthorized_setsCorrectTitle() async  {
-
         let sut = SettingsViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),

@@ -11,8 +11,7 @@ class NotificationServiceTests {
     func fetchSlides_returnsExpectedSlides() async throws {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter(),
-            userDefaults: MockUserDefaults()
+            notificationCenter: MockUserNotificationCenter()
         )
         let result = await withCheckedContinuation { continuation in
             sut.fetchSlides(
@@ -47,8 +46,7 @@ class NotificationServiceTests {
         mockUserNotificationCenter._stubbedAuthorizationStatus = status
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: mockUserNotificationCenter,
-            userDefaults: MockUserDefaults()
+            notificationCenter: mockUserNotificationCenter
         )
         #expect(await !sut.shouldRequestPermission)
     }
@@ -57,8 +55,7 @@ class NotificationServiceTests {
     func isFeatureEnabled_returnsExpectedValue() async throws {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter(),
-            userDefaults: MockUserDefaults()
+            notificationCenter: MockUserNotificationCenter()
         )
         #expect(!sut.isFeatureEnabled)
     }
@@ -70,8 +67,7 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter,
-            userDefaults: MockUserDefaults()
+            notificationCenter: notificationCenter
         )
         let result = await withCheckedContinuation { continuation in
             sut.getAuthorizationStatus(completion: { status in
@@ -88,8 +84,7 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter,
-            userDefaults: MockUserDefaults()
+            notificationCenter: notificationCenter
         )
         let result = await withCheckedContinuation { continuation in
             sut.getAuthorizationStatus(completion: { status in
@@ -106,8 +101,7 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter,
-            userDefaults: MockUserDefaults()
+            notificationCenter: notificationCenter
         )
         let result = await withCheckedContinuation { continuation in
             sut.getAuthorizationStatus(completion: { status in

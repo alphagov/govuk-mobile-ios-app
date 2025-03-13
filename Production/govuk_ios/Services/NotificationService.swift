@@ -16,14 +16,11 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
 class NotificationService: NotificationServiceInterface {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
-    private let userDefaults: UserDefaultsInterface
 
     init(environmentService: AppEnvironmentServiceInterface,
-         notificationCenter: UserNotificationCenterInterface,
-         userDefaults: UserDefaultsInterface) {
+         notificationCenter: UserNotificationCenterInterface) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
-        self.userDefaults = userDefaults
     }
 
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -42,9 +39,9 @@ class NotificationService: NotificationServiceInterface {
         get async {
             let switches = (
                 isFeatureEnabled,
-                await notificationCenter.authorizationStatus
+                await notificationCenter.authorizationStatus == .notDetermined
             )
-            return switches.0 && switches.1 == .notDetermined
+            return switches.0 && switches.1
         }
     }
 

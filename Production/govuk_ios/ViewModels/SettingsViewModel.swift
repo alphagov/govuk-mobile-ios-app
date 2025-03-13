@@ -16,7 +16,6 @@ protocol SettingsViewModelInterface: ObservableObject {
 
 // swiftlint:disable:next type_body_length
 class SettingsViewModel: SettingsViewModelInterface {
-    var dismissAction: () -> Void = {}
     let title: String = String.settings.localized("pageTitle")
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
@@ -27,6 +26,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     @Published var notificationsPermissionState: NotificationPermissionState = .notDetermined
     private let notificationService: NotificationServiceInterface
     private let notificationCenter = NotificationCenter.default
+    var dismissAction: () -> Void = {}
     var notificationAlertButtonTitle: String = String.settings.localized(
         "settingsNotificationAlertPrimaryButtonTitle"
     )

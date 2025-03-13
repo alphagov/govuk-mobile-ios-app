@@ -123,7 +123,6 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-
     func test_loadInNavigationController_preview_rendersCorrectly() {
         let settingsContentView = SettingsView(
             viewModel: GroupedListViewModel()

@@ -52,5 +52,6 @@ public struct AppErrorView: View {
             ? String.common.localized("openWebLinkHint")
             : ""
         )
+        .opacity(viewModel?.buttonTitle == nil ? 0 : 1)
     }
 }

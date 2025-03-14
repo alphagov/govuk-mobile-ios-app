@@ -2,10 +2,11 @@ import SwiftUI
 import GOVKit
 import RecentActivity
 
+// swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?
-    var commerceItems = [ECommerceItem]()
+    var commerceItems = [TopicCommerceItem]()
 
     private var topicDetail: TopicDetailResponse?
     private var topic: DisplayableTopic
@@ -16,6 +17,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private let urlOpener: URLOpener
     private let subtopicAction: (DisplayableTopic) -> Void
     private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+
+    var isLoaded: Bool = false
 
     var title: String {
         topic.title
@@ -64,12 +67,14 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func fetchTopicDetails(topicRef: String) {
+        self.isLoaded = false
         topicsService.fetchDetails(
             ref: topicRef,
             completion: { result in
                 if case let .success(detail) = result {
                     self.topicDetail = detail
                     self.configureSections()
+                    self.isLoaded = true
                 }
                 self.handleError(result.getError())
             }
@@ -215,7 +220,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     func trackEcommerce() {
         let eCommerceEvent = AppEvent.viewItemList(
-            name: topic.title,
+            name: "Topics",
+            id: topic.title,
             items: commerceItems
         )
         analyticsService.track(event: eCommerceEvent)
@@ -255,7 +261,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     private func createSubtopicCommerceItem(_ subtopic: TopicDetailResponse.Subtopic,
                                             category: String) {
-        let appEventItem = ECommerceItem(
+        let appEventItem = TopicCommerceItem(
             name: subtopic.title,
             category: category,
             index: commerceItems.count + 1,
@@ -267,7 +273,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
     private func createSeeAllCommerceItem(_ rowTitle: String,
                                           category: String) {
-        let appEventItem = ECommerceItem(
+        let appEventItem = TopicCommerceItem(
             name: rowTitle,
             category: category,
             index: commerceItems.count + 1,

@@ -5,15 +5,17 @@ import GOVKit
 extension Onboarding {
     static var appSlides: [any OnboardingSlideViewModelInterface] {
         [
-            OnboardingSlideAnimationViewModel(
+            OnboardingSlideImageViewModel(
                 slide: .init(
-                    image: "onboarding_personalisation",
+                    image: "onboarding_screen_1",
                     title: String.onboarding.localized("personalisationTitle"),
                     body: String.onboarding.localized("personalisationBody"),
                     name: "Onboarding_A"
                 ),
                 primaryButtonTitle: String.onboarding.localized("continueButtonTitle"),
-                secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle")
+                primaryButtonAccessibilityHint: nil,
+                secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle"),
+                secondaryButtonAccessibilityHint: nil
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -23,7 +25,9 @@ extension Onboarding {
                     name: "Onboarding_B"
                 ),
                 primaryButtonTitle: String.onboarding.localized("continueButtonTitle"),
-                secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle")
+                primaryButtonAccessibilityHint: nil,
+                secondaryButtonTitle: String.onboarding.localized("secondaryButtonTitle"),
+                secondaryButtonAccessibilityHint: nil
             ),
             OnboardingSlideImageViewModel(
                 slide: .init(
@@ -33,7 +37,9 @@ extension Onboarding {
                     name: "Onboarding_C"
                 ),
                 primaryButtonTitle: String.onboarding.localized("doneButtonTitle"),
-                secondaryButtonTitle: ""
+                primaryButtonAccessibilityHint: nil,
+                secondaryButtonTitle: "",
+                secondaryButtonAccessibilityHint: nil
             )
         ]
     }
@@ -48,7 +54,9 @@ extension Onboarding {
                     name: "NotificationsOnboardingScreen"
                 ),
                 primaryButtonTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
-                secondaryButtonTitle: String.notifications.localized("onboardingSkipButtonTitle")
+                primaryButtonAccessibilityHint: nil,
+                secondaryButtonTitle: String.notifications.localized("onboardingSkipButtonTitle"),
+                secondaryButtonAccessibilityHint: nil
             )
         ]
     }

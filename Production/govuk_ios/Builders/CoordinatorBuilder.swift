@@ -26,7 +26,10 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             configService: container.appConfigService.resolve(),
             topicsService: container.topicsService.resolve(),
-            deviceInformationProvider: DeviceInformationProvider()
+            notificationService: container.notificationService.resolve(),
+            deviceInformationProvider: DeviceInformationProvider(),
+            searchService: container.searchService.resolve(),
+            activityService: container.activityService.resolve()
         )
     }
 
@@ -109,17 +112,6 @@ class CoordinatorBuilder {
             analyticsService: container.onboardingAnalyticsService.resolve(),
             appConfigService: container.appConfigService.resolve(),
             dismissAction: dismissAction
-        )
-    }
-
-    func search(navigationController: UINavigationController,
-                didDismissAction: @escaping () -> Void) -> BaseCoordinator {
-        SearchCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
-            analyticsService: container.analyticsService.resolve(),
-            searchService: container.searchService.resolve(),
-            dismissed: didDismissAction
         )
     }
 

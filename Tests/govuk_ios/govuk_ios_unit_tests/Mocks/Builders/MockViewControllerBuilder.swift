@@ -24,30 +24,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _receivedHomeSearchAction: (() -> Void)?
     var _receivedHomeRecentActivityAction: (() -> Void)?
     var _receivedTopicWidgetViewModel: TopicsWidgetViewModel?
-    override func home(analyticsService: any AnalyticsServiceInterface,
-                       configService: any AppConfigServiceInterface,
-                       topicWidgetViewModel: TopicsWidgetViewModel,
-                       feedbackAction: @escaping () -> Void,
-                       searchAction: @escaping () -> Void,
-                       recentActivityAction: @escaping () -> Void) -> UIViewController {
-        _receivedHomeSearchAction = searchAction
-        _receivedHomeRecentActivityAction = recentActivityAction
-        _receivedTopicWidgetViewModel = topicWidgetViewModel
+    override func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
+        _receivedHomeRecentActivityAction = actions.recentActivityAction
+        _receivedTopicWidgetViewModel = dependencies.topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
     }
-
+    
     var _stubbedSettingsViewController: UIViewController?
     override func settings<T: SettingsViewModelInterface>(viewModel: T) -> UIViewController {
         return _stubbedSettingsViewController ?? UIViewController()
-    }
-
-    var _stubbedSearchViewController: UIViewController?
-    var _receivedSearchDismissAction: (() -> Void)?
-    override func search(analyticsService: any AnalyticsServiceInterface,
-                         searchService: any SearchServiceInterface,
-                         dismissAction: @escaping () -> Void) -> UIViewController {
-        _receivedSearchDismissAction = dismissAction
-        return _stubbedSearchViewController ?? UIViewController()
     }
 
     var _stubbedRecentActivityViewController: UIViewController?

@@ -18,7 +18,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stay on top of Government services and announcements"
+            "value" : "Find out about things like important dates and deadlines, services you might find useful and new features that have been added to the app.\n\nYou can change your preferences at any time in the app settings."
           }
         }
       }
@@ -40,7 +40,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Get notified!"
+            "value" : "Allow notifications?"
           }
         }
       }

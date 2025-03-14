@@ -20,12 +20,15 @@ class SearchSuggestionsViewController: BaseViewController {
         localLabel.font = UIFont.govUK.title3Semibold
         localLabel.text = String.search.localized("searchSuggestionsTitle")
         localLabel.accessibilityTraits = .header
-        localLabel.adjustsFontForContentSizeCategory = true
         localLabel.textAlignment = .left
         localLabel.translatesAutoresizingMaskIntoConstraints = false
+        localLabel.numberOfLines = 0
+        localLabel.lineBreakMode = .byWordWrapping
+        localLabel.adjustsFontForContentSizeCategory = true
 
         NSLayoutConstraint.activate([
             localLabel.topAnchor.constraint(equalTo: localHeaderView.topAnchor),
+            localLabel.trailingAnchor.constraint(equalTo: localHeaderView.trailingAnchor),
             localLabel.bottomAnchor.constraint(equalTo: localHeaderView.bottomAnchor,
                                                constant: -16),
             localLabel.leadingAnchor.constraint(equalTo: localHeaderView.leadingAnchor)
@@ -44,6 +47,7 @@ class SearchSuggestionsViewController: BaseViewController {
         localTableView.translatesAutoresizingMaskIntoConstraints = false
         localTableView.contentInsetAdjustmentBehavior = .never
         localTableView.separatorColor = UIColor.govUK.strokes.listDivider
+        localTableView.contentInset.top = 16
 
         return localTableView
     }()

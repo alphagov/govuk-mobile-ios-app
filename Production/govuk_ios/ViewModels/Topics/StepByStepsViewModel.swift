@@ -4,7 +4,7 @@ import RecentActivity
 
 class StepByStepsViewModel: TopicDetailViewModelInterface {
     var errorViewModel: AppErrorViewModel?
-    var commerceItems = [ECommerceItem]()
+    var commerceItems = [TopicCommerceItem]()
     private let content: [TopicDetailResponse.Content]
     private let analyticsService: AnalyticsServiceInterface
     private let activityService: ActivityServiceInterface
@@ -19,6 +19,8 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
     }
+
+    var isLoaded: Bool = true
 
     var title: String {
         String.topics.localized("topicDetailStepByStepHeader")
@@ -40,12 +42,12 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
-        trackEcommerce()
     }
 
     func trackEcommerce() {
         let eCommerceEvent = AppEvent.viewItemList(
-            name: String.topics.localized("topicDetailStepByStepHeader"),
+            name: "Topics",
+            id: String.topics.localized("topicDetailStepByStepHeader"),
             items: commerceItems
         )
         analyticsService.track(event: eCommerceEvent)

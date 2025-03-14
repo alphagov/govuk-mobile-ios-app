@@ -7,7 +7,7 @@ import OneSignalFramework
 
 protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
-    func requestPermissions(completion: @escaping () -> Void)
+    func requestPermissions(completion: (() -> Void)?)
     var shouldRequestPermission: Bool { get async }
     var isFeatureEnabled: Bool { get }
     func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void)
@@ -49,10 +49,10 @@ class NotificationService: NotificationServiceInterface {
         false
     }
 
-    func requestPermissions(completion: @escaping () -> Void) {
+    func requestPermissions(completion: (() -> Void)?) {
         OneSignal.setConsentGiven(true)
         OneSignal.Notifications.requestPermission({ _ in
-            completion()
+            completion?()
         }, fallbackToSettings: false)
     }
 

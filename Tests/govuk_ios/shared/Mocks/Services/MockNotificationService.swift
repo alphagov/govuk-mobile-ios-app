@@ -26,7 +26,8 @@ class MockNotificationService: NotificationServiceInterface {
 
     }
 
-    func requestPermissions(completion: @escaping () -> Void) {
+    func requestPermissions(completion: (() -> Void)?) {
+        completion?()
 
     }
 
@@ -44,4 +45,3 @@ class MockNotificationService: NotificationServiceInterface {
         _stubbedIsFetureEnabled
     }
 }
-

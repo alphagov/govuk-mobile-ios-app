@@ -12,6 +12,17 @@
         }
       }
     },
+    "homeWidgetTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stay on top of Government services and announcements"
+          }
+        }
+      }
+    },
     "logoAccessibilityTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -74,17 +85,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
-          }
-        }
-      }
-    },
-    "searchWidgetTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find government services and information"
           }
         }
       }

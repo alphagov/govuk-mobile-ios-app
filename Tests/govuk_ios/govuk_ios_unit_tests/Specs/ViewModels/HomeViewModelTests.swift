@@ -3,14 +3,15 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @Suite
-@MainActor
 struct HomeViewModelTests {
     @Test
-    func widgets_returnsArrayOfWidgets() {
+    func widgets_returnsArrayOfWidgets() async {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -18,24 +19,32 @@ struct HomeViewModelTests {
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { () -> Void in _ = true },
-            recentActivityAction: { }
+            notificationsAction: { },
+            recentActivityAction: { },
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
-        let widgets = subject.widgets
+        let widgets = await subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
         #expect(widgets.count == 3)
     }
 
     @Test
-    func widgets_featureDisabled_doesntReturnWidget() {
+    func widgets_featureDisabled_doesntReturnWidget() async {
         let configService = MockAppConfigService()
         configService.features = []
 
+        let mockNotificationService = MockNotificationService()
+        mockNotificationService._stubbedShouldRequestPermission = false
+
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
             editAction: { },
             allTopicsAction: { }
@@ -43,12 +52,16 @@ struct HomeViewModelTests {
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: configService,
+            notificationService: mockNotificationService,
             topicWidgetViewModel: topicsViewModel,
             feedbackAction: { },
-            searchAction: { },
-            recentActivityAction: { }
+            notificationsAction: { },
+            recentActivityAction: { },
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService()
         )
-        let widgets = subject.widgets
+        let widgets = await subject.widgets
 
         #expect(widgets.count == 0)
     }

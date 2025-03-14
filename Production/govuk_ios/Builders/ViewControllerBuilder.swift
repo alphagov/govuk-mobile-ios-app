@@ -18,21 +18,34 @@ class ViewControllerBuilder {
         )
     }
 
+    struct HomeDependencies {
+        let analyticsService: AnalyticsServiceInterface
+        let configService: AppConfigServiceInterface
+        let notificationService: NotificationServiceInterface
+        let searchService: SearchServiceInterface
+        let activityService: ActivityServiceInterface
+        let topicWidgetViewModel: TopicsWidgetViewModel
+    }
+
+    struct HomeActions {
+        let feedbackAction: () -> Void
+        let notificationsAction: () -> Void
+        let recentActivityAction: () -> Void
+    }
+
     @MainActor
-    // swiftlint:disable:next function_parameter_count
-    func home(analyticsService: AnalyticsServiceInterface,
-              configService: AppConfigServiceInterface,
-              topicWidgetViewModel: TopicsWidgetViewModel,
-              feedbackAction: @escaping () -> Void,
-              searchAction: @escaping () -> Void,
-              recentActivityAction: @escaping () -> Void) -> UIViewController {
+    func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
         let viewModel = HomeViewModel(
-            analyticsService: analyticsService,
-            configService: configService,
-            topicWidgetViewModel: topicWidgetViewModel,
-            feedbackAction: feedbackAction,
-            searchAction: searchAction,
-            recentActivityAction: recentActivityAction
+            analyticsService: dependencies.analyticsService,
+            configService: dependencies.configService,
+            notificationService: dependencies.notificationService,
+            topicWidgetViewModel: dependencies.topicWidgetViewModel,
+            feedbackAction: actions.feedbackAction,
+            notificationsAction: actions.notificationsAction,
+            recentActivityAction: actions.recentActivityAction,
+            urlOpener: UIApplication.shared,
+            searchService: dependencies.searchService,
+            activityService: dependencies.activityService
         )
         return HomeViewController(
             viewModel: viewModel
@@ -50,24 +63,9 @@ class ViewControllerBuilder {
             statusBarStyle: .darkContent
         )
         viewController.title = viewModel.title
+
         viewController.navigationItem.largeTitleDisplayMode = .always
         return viewController
-    }
-
-    @MainActor
-    func search(analyticsService: AnalyticsServiceInterface,
-                searchService: SearchServiceInterface,
-                dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = SearchViewModel(
-            analyticsService: analyticsService,
-            searchService: searchService,
-            activityService: Container.shared.activityService.resolve(),
-            urlOpener: UIApplication.shared
-        )
-        return SearchViewController(
-            viewModel: viewModel,
-            dismissAction: dismissAction
-        )
     }
 
     @MainActor
@@ -103,7 +101,9 @@ class ViewControllerBuilder {
         )
 
         let view = TopicDetailView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view
+        )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never
         viewController.navigationItem.backButtonTitle = viewModel.title
@@ -121,7 +121,9 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared
         )
         let view = TopicDetailView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
+        let viewController = HostingViewController(
+            rootView: view
+        )
         viewController.navigationItem.largeTitleDisplayMode =
         UINavigationItem.LargeTitleDisplayMode.never
         return viewController

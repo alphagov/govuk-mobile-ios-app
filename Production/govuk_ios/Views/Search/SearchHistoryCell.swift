@@ -3,9 +3,10 @@ import UIComponents
 
 class SearchHistoryCell: UITableViewCell {
     private let deleteButton: UIButton = {
-        var buttonConfig = UIButton.Configuration.plain()
+        var buttonConfig = UIButton.Configuration.filled()
         buttonConfig.image = UIImage(systemName: "xmark")
         buttonConfig.baseForegroundColor = UIColor.govUK.text.trailingIcon
+        buttonConfig.baseBackgroundColor = .clear
         buttonConfig.contentInsets = .zero
 
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)

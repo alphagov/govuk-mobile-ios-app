@@ -24,7 +24,6 @@ struct GroupedListSectionIconView: View {
                             .foregroundStyle(Color(UIColor.govUK.text.trailingIcon))
                             .padding(.trailing, 16)
                             .padding(.vertical, 8)
-                            .accessibilityLabel(Text(section.heading?.title ?? ""))
                     }
                     .background(Color(UIColor.govUK.fills.surfaceListHeading))
                     Divider()

@@ -257,7 +257,6 @@ class SettingsViewModelTests {
             mockNotificationsService._receivedCompletion?(.authorized)
         }
         #expect(result == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
-
     }
 
     @Test

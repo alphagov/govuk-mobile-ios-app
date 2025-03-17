@@ -43,7 +43,7 @@ struct InformationRowView: View {
                         UIColor.govUK.text.secondary
                     )
                 )
-        }
+        }.accessibilityElement(children: .combine)
     }
 }
 

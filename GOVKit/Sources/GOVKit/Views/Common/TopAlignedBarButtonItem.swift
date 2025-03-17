@@ -16,6 +16,7 @@ public class TopAlignedBarButtonItem: UIBarButtonItem {
         )
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.titleLabel?.font = UIFont.govUK.body
+        actionButton.titleLabel?.adjustsFontForContentSizeCategory = true
         actionButton.tintColor = tint
         super.init()
         self.customView = createCustomView()

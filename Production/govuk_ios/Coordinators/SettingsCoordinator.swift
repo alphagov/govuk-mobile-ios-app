@@ -56,7 +56,8 @@ class SettingsCoordinator: TabItemCoordinator {
             navigationController: root,
             completion: { [weak self] in
                 self?.start(url: nil)
-            })
+            }
+        )
         start(coordinator)
     }
 }

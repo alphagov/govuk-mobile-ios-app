@@ -62,7 +62,7 @@ class NotificationServiceTests {
 
 
     @Test
-    func getAuthorizationStatus_whenaAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
+    func getAuthorizationStatus_whenAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
         let notificationCenter = MockUserNotificationCenter()
 
         let sut = NotificationService(
@@ -79,7 +79,7 @@ class NotificationServiceTests {
     }
 
     @Test
-    func getAuthorizationStatus_whenaAuthorizationStatusIsDenied_returnsCorrectAuthorizationStatus() async {
+    func getAuthorizationStatus_whenAuthorizationStatusIsDenied_returnsCorrectAuthorizationStatus() async {
         let notificationCenter = MockUserNotificationCenter()
 
         let sut = NotificationService(
@@ -96,7 +96,7 @@ class NotificationServiceTests {
     }
 
     @Test
-    func getAuthorizationStatus_whenaAuthorizationStatusIsNotDetermined_returnsCorrectAuthorizationStatus() async {
+    func getAuthorizationStatus_whenAuthorizationStatusIsNotDetermined_returnsCorrectAuthorizationStatus() async {
         let notificationCenter = MockUserNotificationCenter()
 
         let sut = NotificationService(

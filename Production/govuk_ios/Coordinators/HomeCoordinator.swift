@@ -84,7 +84,7 @@ class HomeCoordinator: TabItemCoordinator {
             self.trackWidgetNavigation(
                 text: String.home.localized("feedbackWidgetTitle")
             )
-            self.notificationService.requestPermissions(completion: nil)
+            self.notificationService.requestPermissions { self.start(url: nil) }
         }
     }
 

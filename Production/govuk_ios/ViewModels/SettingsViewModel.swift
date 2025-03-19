@@ -131,9 +131,10 @@ class SettingsViewModel: SettingsViewModelInterface {
                     title: String.settings.localized("appVersionTitle"),
                     body: nil,
                     detail: versionProvider.fullBuildNumber ?? "-"
-                   )],
-            footer: nil
-        ))
+                   )
+                  ],
+            footer: nil)
+        )
         if notificationService.isFeatureEnabled {
             rows.append(
                 GroupedListSection(
@@ -159,7 +160,8 @@ class SettingsViewModel: SettingsViewModelInterface {
             GroupedListSection(
                 heading: nil,
                 rows: returnPrivacyAndLegalRows(),
-                footer: nil ))
+                footer: nil )
+        )
         return rows
     }
 

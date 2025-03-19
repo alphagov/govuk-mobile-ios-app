@@ -28,7 +28,7 @@ class SettingsCoordinator: TabItemCoordinator {
             notificationService: notificationService
         )
         super.init(navigationController: navigationController)
-        self.settingsViewModel.dismissAction = { [weak self] in
+        self.settingsViewModel.redirectToNotificationOnboarding = { [weak self] in
             self?.presentNotificationsOnboardingCoordinator()
         }
     }

@@ -139,7 +139,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 }
 
 class GroupedListViewModel: SettingsViewModelInterface {
-    var dismissAction: () -> Void = {}
+    var redirectToNotificationOnboarding: () -> Void = {}
     var displayNotificationSettingsAlert: Bool = false
     func handleNotificationAlertAction() { }
     var notificationSettingsAlertTitle: String = "Turn on notifications"

@@ -11,7 +11,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationSettingsAlertTitle: String { get }
     var notificationSettingsAlertBody: String { get }
     var notificationAlertButtonTitle: String { get }
-    var dismissAction: () -> Void { get set }
+    var redirectToNotificationOnboarding: () -> Void { get set }
 }
 
 // swiftlint:disable:next type_body_length
@@ -26,7 +26,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     @Published var notificationsPermissionState: NotificationPermissionState = .notDetermined
     private let notificationService: NotificationServiceInterface
     private let notificationCenter = NotificationCenter.default
-    var dismissAction: () -> Void = {}
+    var redirectToNotificationOnboarding: () -> Void = {}
     var notificationAlertButtonTitle: String = String.settings.localized(
         "settingsNotificationAlertPrimaryButtonTitle"
     )
@@ -245,7 +245,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                         String.settings.localized(rowTitle),
                         external: false
                     )
-                    self?.dismissAction()
+                    self?.redirectToNotificationOnboarding()
                 } else {
                     self?.displayNotificationSettingsAlert.toggle()
                 }

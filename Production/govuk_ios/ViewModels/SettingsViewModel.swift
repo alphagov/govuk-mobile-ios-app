@@ -70,7 +70,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         }
     }
 
-    @objc func appMovedToForeground() {
+    @objc private func appMovedToForeground() {
         setNotificationAuthorizationStatus()
     }
 

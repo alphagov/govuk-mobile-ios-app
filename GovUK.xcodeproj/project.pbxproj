@@ -1999,7 +1999,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2040,7 +2040,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				ONESIGNAL_APP_ID = "";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2123,7 +2123,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2157,7 +2157,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2192,7 +2192,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2302,7 +2302,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";

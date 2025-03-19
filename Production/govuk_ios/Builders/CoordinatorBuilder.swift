@@ -164,6 +164,7 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
             topicsService: container.topicsService.resolve(),
+            configService: container.appConfigService.resolve(),
             dismissAction: didDismissAction
         )
     }

@@ -18,7 +18,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "These statistics are anonymous.\n\nYou can stop sharing these statistics at any time by changing your app settings."
+            "value" : "We will not use this data to directly identify you.\n\nYou can stop sharing these statistics at any time by changing your app settings."
           }
         }
       }

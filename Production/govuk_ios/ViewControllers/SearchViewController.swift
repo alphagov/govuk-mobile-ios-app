@@ -21,6 +21,7 @@ class SearchViewController: BaseViewController,
         localView.showsVerticalScrollIndicator = false
         localView.contentInsetAdjustmentBehavior = .always
         localView.backgroundColor = .govUK.fills.surfaceModal
+        localView.isHidden = true
         return localView
     }()
 

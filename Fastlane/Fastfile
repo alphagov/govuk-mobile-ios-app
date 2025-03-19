@@ -1,0 +1,179 @@
+# frozen_string_literal: true
+
+require_relative 'configuration'
+
+opt_out_usage
+
+default_platform :ios
+
+# rubocop:disable Metrics/BlockLength
+platform :ios do
+  before_all do
+    ENV['FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT'] = '600'
+  end
+
+  desc 'Runs all the tests'
+  lane :unit do
+    unit_test
+    convert_coverage
+  end
+
+  desc 'Builds alpha configuration and deploys to Firebase'
+  lane :alpha do
+    setup_ci
+    deploy_to_firebase
+  end
+
+  desc 'Builds beta configuration and deploys to Testflight'
+  lane :beta do
+    setup_ci
+    deploy_to_testflight
+  end
+
+  private_lane :deploy_to_testflight do
+    prepare_for_deployment
+    app_store
+  end
+
+  private_lane :deploy_to_firebase do
+    prepare_for_deployment
+    firebase
+  end
+
+  private_lane :prepare_for_deployment do
+    sign
+    update_build_number
+    build
+  end
+
+  private_lane :unit_test do
+    scan(
+      scheme: configuration.app_scheme,
+      devices: configuration.scan_devices,
+      ensure_devices_found: true,
+      prelaunch_simulator: true,
+      xcodebuild_formatter: 'xcbeautify',
+      output_types: 'junit',
+      derived_data_path: './build_for_unit_testing',
+      output_directory: configuration.scan_output_directory,
+      code_coverage: true
+    )
+  end
+
+  private_lane :build do |options|
+    gym(
+      project: configuration.app_project,
+      scheme: configuration.app_scheme,
+      configuration: configuration.app_configuration,
+      output_directory: configuration.app_output_directory,
+      clean: options[:clean].nil? ? true : options[:clean],
+      skip_profile_detection: true,
+      export_method: configuration.app_export_method,
+      export_options: configuration.app_export_options,
+      xcargs: configuration.app_args
+    )
+  end
+
+  desc 'Download profiles'
+  lane :sign do
+    match(
+      type: configuration.match_method,
+      app_identifier: configuration.match_identifiers,
+      readonly: true,
+      git_branch: 'main',
+      api_key: app_store_key,
+      git_basic_authorization: configuration.match_certificate_token
+    )
+  end
+
+  desc 'Regenerate profiles'
+  lane :sign_generate do
+    match(
+      git_url: 'git@github.com:alphagov/govuk-mobile-ios-certificates.git',
+      type: 'adhoc',
+      app_identifier: [
+        'uk.gov.govuk.dev',
+        'uk.gov.govuk.dev.notification-service'
+      ],
+      force: true
+    )
+    match(
+      git_url: 'git@github.com:alphagov/govuk-mobile-ios-certificates.git',
+      type: 'appstore',
+      app_identifier: [
+        'uk.gov.govuk',
+        'uk.gov.govuk.notification-service'
+      ],
+      force: true
+    )
+  end
+
+  private_lane :convert_coverage do
+    slather(
+      build_directory: configuration.scan_output_directory,
+      output_directory: configuration.scan_output_directory,
+      sonarqube_xml: true,
+      scheme: configuration.app_scheme,
+      proj: configuration.app_project
+    )
+  end
+
+  private_lane :update_build_number do
+    if !configuration.firebase_app_id.nil?
+      latest_release = firebase_app_distribution_get_latest_release(
+        app: configuration.firebase_app_id
+      )
+      current_build_number = latest_release[:buildVersion].to_i
+    else
+      current_build_number = fetch_build_number_from_testflight
+    end
+    increment_build_number(
+      build_number: current_build_number + 1
+    )
+  end
+
+  private_lane :fetch_build_number_from_testflight do
+    latest_testflight_build_number(
+      api_key: app_store_key,
+      app_identifier: configuration.app_bundle_identifier
+    )
+  end
+
+  private_lane :app_store do
+    pilot(
+      app_identifier: configuration.app_bundle_identifier,
+      distribute_external: true,
+      notify_external_testers: true,
+      expire_previous_builds: false,
+      groups: configuration.deliver_groups,
+      changelog: 'Automated internal build',
+      api_key: app_store_key
+    )
+  end
+
+  private_lane :firebase do
+    firebase_app_distribution(
+      app: configuration.firebase_app_id,
+      firebase_cli_token: configuration.firebase_token,
+      groups: 'ios-alpha-testers'
+    )
+  end
+end
+
+def app_store_key
+  app_store_connect_api_key(
+    key_id: configuration.deliver_key_id,
+    issuer_id: configuration.deliver_key_issuer_id,
+    key_content: configuration.deliver_key_content,
+    is_key_content_base64: true,
+    in_house: false
+  )
+end
+
+def configuration
+  @configuration ||= Configuration.new(
+    lane_context[SharedValues::LANE_NAME],
+    '.build.yml'
+  )
+end
+# rubocop:enable Metrics/BlockLength

@@ -1,0 +1,21 @@
+name: Pull Request
+
+on:
+  pull_request:
+    types: [ opened, reopened, synchronize, ready_for_review ]
+    branches: [ develop, release/*, main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-pr
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+  unit-test:
+    uses: ./.github/workflows/unit_test.yml
+  sonar-scan:
+    uses: ./.github/workflows/sonar_scan_pr.yml
+    needs: unit-test
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

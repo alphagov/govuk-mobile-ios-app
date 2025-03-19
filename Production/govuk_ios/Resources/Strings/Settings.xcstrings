@@ -1,0 +1,127 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "aboutTheAppHeading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About the app"
+          }
+        }
+      }
+    },
+    "accessibilityStatementRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibility statement"
+          }
+        }
+      }
+    },
+    "appUsageFooter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. These statistics are anonymous and do not contain any of your personal information. Read more about this in the privacy notice."
+          }
+        }
+      }
+    },
+    "appUsageTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share app usage statistics"
+          }
+        }
+      }
+    },
+    "appVersionTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App version number"
+          }
+        }
+      }
+    },
+    "helpAndFeedbackSettingsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help and feedback"
+          }
+        }
+      }
+    },
+    "openSourceLicenceRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open source licences"
+          }
+        }
+      }
+    },
+    "pageTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "privacyAndLegalHeading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy and legal"
+          }
+        }
+      }
+    },
+    "privacyPolicyRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy notice"
+          }
+        }
+      }
+    },
+    "termsAndConditionsRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms and conditions"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

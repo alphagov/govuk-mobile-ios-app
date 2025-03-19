@@ -1,0 +1,54 @@
+{
+  "configurations" : [
+    {
+      "id" : "B5802D24-611B-4AB7-9C83-5F5728D5DC82",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-UIPreferredContentSizeCategoryName UICTContentSizeCategoryL"
+      }
+    ],
+    "defaultTestExecutionTimeAllowance" : 60,
+    "environmentVariableEntries" : [
+      {
+        "key" : "IMAGE_DIFF_DIR",
+        "value" : "$(SOURCE_ROOT)\/FailureDiffs"
+      },
+      {
+        "key" : "FB_REFERENCE_IMAGE_DIR",
+        "value" : "$(SOURCE_ROOT)\/Tests\/govuk_ios\/govuk_ios_snapshot_tests\/ReferenceImages"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:GovUK.xcodeproj",
+      "identifier" : "5DAD71732BD250DB0075F648",
+      "name" : "govuk_ios"
+    },
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:GovUK.xcodeproj",
+        "identifier" : "5DAD71892BD250DF0075F648",
+        "name" : "govuk_ios_unit_tests"
+      }
+    },
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:GovUK.xcodeproj",
+        "identifier" : "5D4B9D332C074207005F126A",
+        "name" : "govuk_ios_snapshot_tests"
+      }
+    }
+  ],
+  "version" : 1
+}

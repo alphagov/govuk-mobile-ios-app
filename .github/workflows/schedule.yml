@@ -1,0 +1,24 @@
+name: Schedule
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 15 * * 5'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-scheduled
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm branch requirement
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/develop" ]]; then
+            echo "Branch is not develop, exiting."
+            exit 0
+          fi
+  beta:
+    uses: ./.github/workflows/beta.yml
+    secrets: inherit

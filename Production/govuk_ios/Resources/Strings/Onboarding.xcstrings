@@ -1,0 +1,204 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "allowAnalyticsButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow statistics sharing"
+          }
+        }
+      }
+    },
+    "analyticsConsentDescriptionBottom" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We will not use this data to directly identify you.\n\nYou can stop sharing these statistics at any time by changing your app settings."
+          }
+        }
+      }
+    },
+    "analyticsConsentDescriptionBullets" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  •  the pages you visit within the app\n  •  how long you spend on each page\n  •  what you tap on while you're on each page\n  •  errors that happen"
+          }
+        }
+      }
+    },
+    "analyticsConsentDescriptionTop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can help us improve this app by agreeing to share statistics about:"
+          }
+        }
+      }
+    },
+    "analyticsConsentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share statistics about how you use the GOV.UK app"
+          }
+        }
+      }
+    },
+    "continueButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "doneButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "dontAllowAnalyticsButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't allow statistics sharing"
+          }
+        }
+      }
+    },
+    "pagesYouveVisitedBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pages you’ve visited are saved so you can easily return to them"
+          }
+        }
+      }
+    },
+    "pagesYouveVisitedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quickly get back to previous pages"
+          }
+        }
+      }
+    },
+    "personalisationBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access government services and information on your phone using the GOV.UK app"
+          }
+        }
+      }
+    },
+    "personalisationTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get things done on the go"
+          }
+        }
+      }
+    },
+    "privacyPolicyLinkAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more about this in the privacy notice"
+          }
+        }
+      }
+    },
+    "privacyPolicyLinkHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens in web browser"
+          }
+        }
+      }
+    },
+    "privacyPolicyLinkTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more about this in the privacy notice ↗"
+          }
+        }
+      }
+    },
+    "secondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        }
+      }
+    },
+    "tailoredToYouBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose topics that are relevant to you so you can find what you need faster"
+          }
+        }
+      }
+    },
+    "tailoredToYouTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tailored to you"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

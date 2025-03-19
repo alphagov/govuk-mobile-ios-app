@@ -86,7 +86,9 @@ class SettingsViewModel: SettingsViewModelInterface {
                      self?.notificationsPermissionState = .denied
                  }
              default:
-                 self?.notificationsPermissionState = .notDetermined
+                 DispatchQueue.main.async {
+                     self?.notificationsPermissionState = .notDetermined
+                 }
              }
          }
     }

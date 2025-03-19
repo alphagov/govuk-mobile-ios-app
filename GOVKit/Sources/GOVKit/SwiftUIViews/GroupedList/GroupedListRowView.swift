@@ -96,7 +96,11 @@ struct NotificationsRowView: View {
         }
         .accessibilityRemoveTraits(.isButton)
         .accessibilityAddTraits(.isButton)
-        .accessibilityHint(String.common.localized("openNotificationsSettings"))
+        .accessibilityHint(
+            row.isAuthorized ?
+            String.common.localized("notificationsSettingsOn") :
+            String.common.localized("notificationsSettingsOff")
+        )
     }
 }
 

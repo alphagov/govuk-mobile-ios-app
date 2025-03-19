@@ -42,13 +42,13 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.deviceInformationProvider = deviceInformationProvider
         self.notificationService = notificationService
         setNotificationAuthorizationStatus()
-        addObservers()
+        observeAppMoveToForeground()
     }
 
-    private func addObservers() {
+    private func observeAppMoveToForeground() {
         notificationCenter.addObserver(
             self,
-            selector: #selector(appMovedToForeground),
+            selector: #selector(updateNotificationsAuthorizationStatus),
             name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
@@ -70,7 +70,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         }
     }
 
-    @objc private func appMovedToForeground() {
+    @objc private func updateNotificationsAuthorizationStatus() {
         setNotificationAuthorizationStatus()
     }
 

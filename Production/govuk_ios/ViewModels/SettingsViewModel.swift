@@ -226,7 +226,10 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 if self?.urlOpener.openSettings() == true {
-                    self?.trackNavigationEvent(rowTitle, external: true)
+                    self?.trackNavigationEvent(
+                        rowTitle,
+                        external: true
+                    )
                 }
             }
         )

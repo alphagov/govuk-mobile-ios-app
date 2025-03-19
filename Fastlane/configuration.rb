@@ -17,10 +17,6 @@ class Configuration
     setting(:app, :output_directory)
   end
 
-  def app_display_name
-    setting(:app, :display_name)
-  end
-
   def app_project
     setting(:app, :project)
   end

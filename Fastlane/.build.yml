@@ -2,7 +2,6 @@
 default: &DEFAULTS
   app: &APP_DEFAULTS
     scheme: GovUK
-    display_name: Gov.UK - Dev
     output_directory: build_output
     project: GovUK.xcodeproj
     bundle_identifier: uk.gov.govuk
@@ -27,13 +26,13 @@ unit:
   app:
     <<: *APP_DEFAULTS
     scheme: GovUKDev
+    build_configuration: Debug
 
 alpha:
   <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
     scheme: GovUKAlpha
-    display_name: Gov.UK - Alpha
     bundle_identifier: uk.gov.govuk.dev
     profile_specifiers:
       uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
@@ -48,7 +47,7 @@ beta:
   <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
-    display_name: Gov.UK - Beta
+    build_configuration: Release
   match:
     <<: *MATCH_DEFAULTS
     method: "appstore"

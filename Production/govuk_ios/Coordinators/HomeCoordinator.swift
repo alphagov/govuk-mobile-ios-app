@@ -82,7 +82,7 @@ class HomeCoordinator: TabItemCoordinator {
         return { [weak self] in
             guard let self = self else { return }
             self.trackWidgetNavigation(
-                text: String.home.localized("homeWidgetTitle")
+                text: String.home.localized("notificationWidgetTitle")
             )
             self.notificationService.requestPermissions { self.start(url: nil) }
         }

@@ -13,8 +13,7 @@ extension UNUserNotificationCenter: UserNotificationCenterInterface {
         }
     }
 
-    func getAuthorizationStatus(
-        completion: @escaping (UNAuthorizationStatus) -> Void) {
+    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
             Task {
                 let status = await self.authorizationStatus
                 completion(status)

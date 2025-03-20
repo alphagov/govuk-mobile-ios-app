@@ -41,7 +41,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
         self.notificationService = notificationService
-        setNotificationAuthorizationStatus()
+        updateNotificationsAuthorizationStatus()
         observeAppMoveToForeground()
     }
 
@@ -70,25 +70,12 @@ class SettingsViewModel: SettingsViewModelInterface {
         }
     }
 
-    @objc private func updateNotificationsAuthorizationStatus() {
-        setNotificationAuthorizationStatus()
-    }
-
-     private func setNotificationAuthorizationStatus() {
-         notificationService.getAuthorizationStatus { [weak self] authorizationStatus in
-             switch authorizationStatus {
-             case .authorized:
-                 DispatchQueue.main.async {
-                     self?.notificationsPermissionState = .authorized
-                 }
-             case .denied:
-                 DispatchQueue.main.async {
-                     self?.notificationsPermissionState = .denied
-                 }
-             default:
-                 DispatchQueue.main.async {
-                     self?.notificationsPermissionState = .notDetermined
-                 }
+    @objc
+    private func updateNotificationsAuthorizationStatus() {
+         Task {
+             let authorizationStatus = await notificationService.authorizationStatus
+             DispatchQueue.main.async {
+                 self.notificationsPermissionState = authorizationStatus
              }
          }
     }
@@ -308,13 +295,5 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
-    }
-}
-
-extension SettingsViewModel {
-    enum NotificationPermissionState {
-        case notDetermined
-        case denied
-        case authorized
     }
 }

@@ -59,4 +59,65 @@ class NotificationServiceTests {
         )
         #expect(!sut.isFeatureEnabled)
     }
+
+
+    @Test
+    func authorizationStatus_whenAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .authorized
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter
+        )
+        #expect(await sut.authorizationStatus == .authorized)
+    }
+
+    @Test
+    func authorizationStatus_whenAuthorizationStatusIsDenied_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .denied
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter
+        )
+        #expect(await sut.authorizationStatus == .denied)
+    }
+
+    @Test
+    func authorizationStatus_whenAuthorizationStatusIsNotDetermined_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .notDetermined
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter
+        )
+        #expect(await sut.authorizationStatus == .notDetermined)
+    }
+
+    @Test
+    func authorizationStatus_whenAuthorizationStatusIsEphemeral_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .ephemeral
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter
+        )
+        #expect(await sut.authorizationStatus == .notDetermined)
+    }
+
+    @Test
+    func authorizationStatus_whenAuthorizationStatusIsProvisional_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .provisional
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter
+        )
+        #expect(await sut.authorizationStatus == .notDetermined)
+    }
 }

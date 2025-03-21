@@ -50,7 +50,9 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
             versionProvider: MockAppVersionProvider(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: MockNotificationService(),
+            notificationCenter: .default
         )
         let result = subject.settings(
             viewModel: viewModel

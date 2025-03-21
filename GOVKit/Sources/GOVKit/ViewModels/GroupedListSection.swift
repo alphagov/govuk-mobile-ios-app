@@ -59,6 +59,28 @@ public struct LinkRow: GroupedListRow,
     }
 }
 
+public class NotificationSettingsRow: GroupedListRow,
+                                      Identifiable {
+    public let id: String
+    public let title: String
+    public let body: String?
+    public let action: () -> Void
+    public var isAuthorized: Bool
+
+    public init(id: String,
+                title: String,
+                body: String? = nil,
+                isAuthorized: Bool,
+                action: @escaping () -> Void) {
+        self.id = id
+        self.title = title
+        self.body = body
+        self.isAuthorized = isAuthorized
+        self.action = action
+    }
+}
+
+
 public struct NavigationRow: GroupedListRow,
                       Identifiable {
     public let id: String

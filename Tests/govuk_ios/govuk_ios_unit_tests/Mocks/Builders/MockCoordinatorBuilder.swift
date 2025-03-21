@@ -45,7 +45,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedSettingsCoordinator: TabItemCoordinator?
     override var settings: any TabItemCoordinator {
-        _stubbedSettingsCoordinator ??
+        return _stubbedSettingsCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )

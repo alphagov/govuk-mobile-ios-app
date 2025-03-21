@@ -111,6 +111,72 @@
         }
       }
     },
+    "settingsNotificationAlertPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "settingsNotificationsAlertBodyDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn on notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "settingsNotificationsAlertBodyEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn off notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "settingsNotificationsAlertTitleDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on notifications"
+          }
+        }
+      }
+    },
+    "settingsNotificationsAlertTitleEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn off notifications"
+          }
+        }
+      }
+    },
+    "settingsNotificationsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        }
+      }
+    },
     "termsAndConditionsRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -40,7 +40,7 @@ struct HomeViewModel {
             guard await notificationService.shouldRequestPermission
             else { return nil }
 
-            let title = String.home.localized("homeWidgetTitle")
+            let title = String.home.localized("notificationWidgetTitle")
             let viewModel = UserFeedbackViewModel(
                 title: title,
                 action: notificationsAction

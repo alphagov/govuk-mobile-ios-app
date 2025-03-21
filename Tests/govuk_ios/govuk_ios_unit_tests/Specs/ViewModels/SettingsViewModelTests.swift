@@ -183,17 +183,17 @@ class SettingsViewModelTests {
                 notificationCenter: mockNotifcationCenter
             )
             let tester = SettingsViewModelTester(settingsViewModel: sut)
-            tester.$settingsViewModel
-                .receive(on: DispatchQueue.main)
-                .dropFirst(1)
-                .sink { viewModel in
-                    continuation.resume(returning: viewModel.notificationSettingsAlertTitle)
-                }.store(in: &cancellables)
             mockNotificationService._stubbededPermissionState = .denied
             mockNotifcationCenter.post(
                 name: UIApplication.willEnterForegroundNotification,
                 object: nil
             )
+            tester.$settingsViewModel
+                .receive(on: DispatchQueue.main)
+//                            .dropFirst(1)
+                .sink { viewModel in
+                    continuation.resume(returning: viewModel.notificationSettingsAlertTitle)
+                }.store(in: &cancellables)
         }
         #expect(result == "Turn on notifications")
     }

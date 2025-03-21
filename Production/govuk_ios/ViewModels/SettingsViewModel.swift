@@ -104,10 +104,10 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     var listContent: [GroupedListSection] {
-        returnGroupedList()
+        getGroupedList()
     }
 
-    private func returnGroupedList() -> [GroupedListSection] {
+    private func getGroupedList() -> [GroupedListSection] {
         var rows: [GroupedListSection] = []
         rows.append(GroupedListSection(
             heading: GroupedListHeader(
@@ -141,20 +141,20 @@ class SettingsViewModel: SettingsViewModelInterface {
                     title: String.settings.localized("privacyAndLegalHeading"),
                     icon: nil
                 ),
-                rows: [returnSettingsRows()],
+                rows: [getSettingsRows()],
                 footer: String.settings.localized("appUsageFooter")
             )
         )
         rows.append(
             GroupedListSection(
                 heading: nil,
-                rows: returnPrivacyAndLegalRows(),
+                rows: getPrivacyAndLegalRows(),
                 footer: nil )
         )
         return rows
     }
 
-    private func returnSettingsRows() -> GroupedListRow {
+    private func getSettingsRows() -> GroupedListRow {
         let settingsPrivacyRow = ToggleRow(
             id: "settings.privacy.row",
             title: String.settings.localized("appUsageTitle"),
@@ -168,7 +168,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         return settingsPrivacyRow
     }
 
-    private func returnPrivacyAndLegalRows() -> [GroupedListRow] {
+    private func getPrivacyAndLegalRows() -> [GroupedListRow] {
         var rows: [GroupedListRow] = []
         rows.append(privacyPolicyRow())
         rows.append(accessibilityStatementRow())

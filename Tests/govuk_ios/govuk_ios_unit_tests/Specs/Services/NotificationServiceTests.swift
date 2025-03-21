@@ -62,53 +62,62 @@ class NotificationServiceTests {
 
 
     @Test
-    func getAuthorizationStatus_whenAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
+    func authorizationStatus_whenAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
         let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .authorized
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        let result = await withCheckedContinuation { continuation in
-            sut.getAuthorizationStatus(completion: { status in
-                continuation.resume(returning: status)
-            })
-            notificationCenter._receivedGetAuthorizationStatusCompletion?(.authorized)
-        }
-        #expect(result == .authorized)
+        #expect(await sut.authorizationStatus == .authorized)
     }
 
     @Test
-    func getAuthorizationStatus_whenAuthorizationStatusIsDenied_returnsCorrectAuthorizationStatus() async {
+    func authorizationStatus_whenAuthorizationStatusIsDenied_returnsCorrectAuthorizationStatus() async {
         let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .denied
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        let result = await withCheckedContinuation { continuation in
-            sut.getAuthorizationStatus(completion: { status in
-                continuation.resume(returning: status)
-            })
-            notificationCenter._receivedGetAuthorizationStatusCompletion?(.denied)
-        }
-        #expect(result == .denied)
+        #expect(await sut.authorizationStatus == .denied)
     }
 
     @Test
-    func getAuthorizationStatus_whenAuthorizationStatusIsNotDetermined_returnsCorrectAuthorizationStatus() async {
+    func authorizationStatus_whenAuthorizationStatusIsNotDetermined_returnsCorrectAuthorizationStatus() async {
         let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .notDetermined
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        let result = await withCheckedContinuation { continuation in
-            sut.getAuthorizationStatus(completion: { status in
-                continuation.resume(returning: status)
-            })
-            notificationCenter._receivedGetAuthorizationStatusCompletion?(.notDetermined)
-        }
-        #expect(result == .notDetermined)
+        #expect(await sut.authorizationStatus == .notDetermined)
+    }
+
+    @Test
+    func authorizationStatus_whenAuthorizationStatusIsEphemeral_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .ephemeral
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter
+        )
+        #expect(await sut.authorizationStatus == .notDetermined)
+    }
+
+    @Test
+    func authorizationStatus_whenAuthorizationStatusIsProvisional_returnsCorrectAuthorizationStatus() async {
+        let notificationCenter = MockUserNotificationCenter()
+        notificationCenter._stubbedAuthorizationStatus = .provisional
+
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: notificationCenter
+        )
+        #expect(await sut.authorizationStatus == .notDetermined)
     }
 }

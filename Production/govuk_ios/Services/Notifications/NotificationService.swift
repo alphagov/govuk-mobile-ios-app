@@ -11,7 +11,6 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     var shouldRequestPermission: Bool { get async }
     var authorizationStatus: NotificationPermissionState { get async }
     var isFeatureEnabled: Bool { get }
-    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void)
 }
 
 class NotificationService: NotificationServiceInterface {
@@ -48,15 +47,11 @@ class NotificationService: NotificationServiceInterface {
         }
     }
 
-    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
-        notificationCenter.getAuthorizationStatus(completion: completion)
-    }
-
     var shouldRequestPermission: Bool {
         get async {
             let switches = (
                 isFeatureEnabled,
-                await notificationCenter.authorizationStatus == .notDetermined
+                await authorizationStatus == .notDetermined
             )
             return switches.0 && switches.1
         }
@@ -78,10 +73,4 @@ class NotificationService: NotificationServiceInterface {
     ) {
         completion(.success(Onboarding.notificationSlides))
     }
-}
-
-enum NotificationPermissionState {
-    case notDetermined
-    case denied
-    case authorized
 }

@@ -48,6 +48,13 @@
         "identifier" : "5D4B9D332C074207005F126A",
         "name" : "govuk_ios_snapshot_tests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:RecentActivity",
+        "identifier" : "RecentActivityTests",
+        "name" : "RecentActivityTests"
+      }
     }
   ],
   "version" : 1

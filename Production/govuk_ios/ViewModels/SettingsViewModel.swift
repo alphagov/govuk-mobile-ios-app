@@ -23,9 +23,10 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let deviceInformationProvider: DeviceInformationProviderInterface
     @Published var scrollToTop: Bool = false
     @Published var displayNotificationSettingsAlert: Bool = false
-    @Published var notificationsPermissionState: NotificationPermissionState = .notDetermined
+    @Published private var notificationsPermissionState: NotificationPermissionState
+    = .notDetermined
     private let notificationService: NotificationServiceInterface
-    private let notificationCenter = NotificationCenter.default
+    private let notificationCenter: NotificationCenter
     var redirectToNotificationOnboarding: () -> Void = {}
     var notificationAlertButtonTitle: String = String.settings.localized(
         "settingsNotificationAlertPrimaryButtonTitle"
@@ -35,12 +36,14 @@ class SettingsViewModel: SettingsViewModelInterface {
          urlOpener: URLOpener,
          versionProvider: AppVersionProvider,
          deviceInformationProvider: DeviceInformationProviderInterface,
-         notificationService: NotificationServiceInterface) {
+         notificationService: NotificationServiceInterface,
+         notificationCenter: NotificationCenter) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
         self.notificationService = notificationService
+        self.notificationCenter = notificationCenter
         updateNotificationsAuthorizationStatus()
         observeAppMoveToForeground()
     }

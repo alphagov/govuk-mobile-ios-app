@@ -25,7 +25,8 @@ class SettingsCoordinator: TabItemCoordinator {
             urlOpener: UIApplication.shared,
             versionProvider: Bundle.main,
             deviceInformationProvider: deviceInformationProvider,
-            notificationService: notificationService
+            notificationService: notificationService,
+            notificationCenter: .default
         )
         super.init(navigationController: navigationController)
         self.settingsViewModel.redirectToNotificationOnboarding = { [weak self] in

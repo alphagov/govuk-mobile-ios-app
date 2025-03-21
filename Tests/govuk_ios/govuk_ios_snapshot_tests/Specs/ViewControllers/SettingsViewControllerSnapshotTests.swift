@@ -20,7 +20,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService
+            notificationService: notficationService,
+            notificationCenter: .default
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -48,7 +49,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService
+            notificationService: notficationService,
+            notificationCenter: .default
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -78,7 +80,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService
+            notificationService: notficationService,
+            notificationCenter: .default
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -106,7 +109,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: notficationService
+            notificationService: notficationService,
+            notificationCenter: .default
         )
         
         let settingsContentView = SettingsView(

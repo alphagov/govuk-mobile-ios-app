@@ -7,14 +7,9 @@ import Onboarding
 
 class MockNotificationService: NotificationServiceInterface {
 
-    var _stubbededPermissionState: NotificationPermissionState = .authorized
+    var _stubbededPermissionState: NotificationPermissionState = .notDetermined
     var authorizationStatus: NotificationPermissionState {
         _stubbededPermissionState
-    }
-
-    var  _receivedCompletion: ((UNAuthorizationStatus) -> Void)?
-    func getAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
-        _receivedCompletion = completion
     }
 
     var _setRedirectedToNotificationsOnboardinCalled: Bool?

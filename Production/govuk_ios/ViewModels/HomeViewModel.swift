@@ -11,6 +11,7 @@ struct HomeViewModel {
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
+    let tokenAction: () -> Void
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
@@ -29,6 +30,7 @@ struct HomeViewModel {
                 notificationsWidget,
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
+                tokenWidget,
                 topicsWidget
             ].compactMap { $0 }
         }
@@ -95,6 +97,20 @@ struct HomeViewModel {
             viewModel: topicWidgetViewModel
         )
         let widget = WidgetView(decorateView: false)
+        widget.addContent(content)
+        return widget
+    }
+
+    @MainActor
+    private var tokenWidget: WidgetView {
+        let title = "Token Test"
+        let viewModel = UserFeedbackViewModel(
+            title: title,
+            action: tokenAction
+        )
+        let content = InformationView(viewModel: viewModel, shouldHideChevron: false)
+        let widget = WidgetView(useContentAccessibilityInfo: true)
+        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
         widget.addContent(content)
         return widget
     }

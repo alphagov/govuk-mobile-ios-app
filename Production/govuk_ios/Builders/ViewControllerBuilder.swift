@@ -4,6 +4,7 @@ import SwiftUI
 import Factory
 import GOVKit
 import RecentActivity
+import SecureStore
 
 class ViewControllerBuilder {
     @MainActor
@@ -31,6 +32,7 @@ class ViewControllerBuilder {
         let feedbackAction: () -> Void
         let notificationsAction: () -> Void
         let recentActivityAction: () -> Void
+        let tokenAction: () -> Void
     }
 
     @MainActor
@@ -43,6 +45,7 @@ class ViewControllerBuilder {
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
+            tokenAction: actions.tokenAction,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService
@@ -171,5 +174,15 @@ class ViewControllerBuilder {
             dismissAction: dismissAction
         )
         return TopicOnboardingViewController(viewModel: viewModel)
+    }
+
+    @MainActor
+    func tokenStore(secureStoreService: SecureStorable) -> UIViewController {
+        let tokenView = TokenView(
+            viewModel: TokenViewModel(
+                secureStoreService: secureStoreService
+            )
+        )
+        return HostingViewController(rootView: tokenView)
     }
 }

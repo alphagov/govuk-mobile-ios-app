@@ -3,6 +3,7 @@ import Factory
 import Onboarding
 import GOVKit
 import RecentActivity
+import SecureStore
 
 import Firebase
 import FirebaseCrashlytics
@@ -106,6 +107,37 @@ extension Container {
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current()
             )
+        }
+    }
+
+    var secureStoreService: Factory<SecureStorable> {
+        Factory(self) {
+            SecureStoreService(
+                configuration: self.secureStoreConfiguration.resolve()
+            )
+        }
+    }
+
+    var secureStoreConfiguration: Factory<SecureStorageConfiguration> {
+        Factory(self) {
+            let localAuthStrings = LocalAuthenticationLocalizedStrings(
+                localizedReason: "Enter Passcode to access your saved data",
+                localisedFallbackTitle: "Enter Passcode",
+                localisedCancelTitle: "Cancel"
+            )
+            #if targetEnvironment(simulator)
+            let accessControlLevel =
+            SecureStorageConfiguration.AccessControlLevel.open
+            #else
+            let accessControlLevel =
+            SecureStorageConfiguration.AccessControlLevel.currentBiometricsOrPasscode
+            #endif
+            let config = SecureStorageConfiguration(
+                id: "GOVUK",
+                accessControlLevel: accessControlLevel,
+                localAuthStrings: localAuthStrings
+            )
+            return config
         }
     }
 }

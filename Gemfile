@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 
 gem 'fastlane'
 gem 'fastlane-plugin-firebase_app_distribution'
-gem 'rubocop'
 gem 'slather'
 
 # plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')

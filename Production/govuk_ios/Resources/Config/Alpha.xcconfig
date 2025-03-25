@@ -1,1 +1,2 @@
 BASE_URL = https:/$()/app.integration.publishing.service.gov.uk
+ASSETCATALOGUE_COMPILER_APPICON_NAME = AppIconAlpha

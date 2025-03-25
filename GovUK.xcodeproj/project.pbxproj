@@ -1978,7 +1978,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2018,7 +2017,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2279,7 +2277,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";

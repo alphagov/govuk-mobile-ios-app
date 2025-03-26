@@ -143,6 +143,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 }
 
 class GroupedListViewModel: SettingsViewModelInterface {
+    func updateNotificationsAuthorizationStatus() {}
     var redirectToNotificationOnboarding: () -> Void = {}
     var displayNotificationSettingsAlert: Bool = false
     func handleNotificationAlertAction() { }

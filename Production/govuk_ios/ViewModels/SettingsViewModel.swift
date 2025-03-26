@@ -12,6 +12,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationSettingsAlertBody: String { get }
     var notificationAlertButtonTitle: String { get }
     var redirectToNotificationOnboarding: () -> Void { get set }
+    func updateNotificationsAuthorizationStatus()
 }
 
 // swiftlint:disable:next type_body_length
@@ -74,7 +75,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     @objc
-    private func updateNotificationsAuthorizationStatus() {
+     func updateNotificationsAuthorizationStatus() {
          Task {
              let authorizationStatus = await notificationService.authorizationStatus
              DispatchQueue.main.async {

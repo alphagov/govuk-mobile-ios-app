@@ -139,7 +139,7 @@ struct TopicsRepositoryTests {
     }
     
     @Test
-    func save_persistsDataAsExpected() async throws {
+    func save_persistsDataAsExpected() throws {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
         Topic.arrangeMultiple(context: coreData.viewContext)

@@ -54,6 +54,29 @@ struct SettingsCoordinatorTests {
     }
 
     @Test
+    func redirectToNotificationOnboarding_startsNotificationOnboarding() {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNotificationOnboardingCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedNotificaitonOnboardingCoordinator = mockNotificationOnboardingCoordinator
+        let navigationController = UINavigationController()
+        let subject = SettingsCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: []),
+            analyticsService: MockAnalyticsService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: MockNotificationService()
+        )
+        subject.start(url: nil)
+        mockViewControllerBuilder._receivedSettingsViewModel?.redirectToNotificationOnboarding()
+        #expect(mockNotificationOnboardingCoordinator._startCalled)
+    }
+
+    @Test
     func didReselectTab_updatesViewModel() throws {
         let viewControllerBuilder = ViewControllerBuilder()
         let navigationController = UINavigationController()

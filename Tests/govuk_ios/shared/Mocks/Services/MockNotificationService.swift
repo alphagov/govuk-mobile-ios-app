@@ -9,7 +9,9 @@ class MockNotificationService: NotificationServiceInterface {
 
     var _stubbededPermissionState: NotificationPermissionState = .notDetermined
     var authorizationStatus: NotificationPermissionState {
-        _stubbededPermissionState
+        get async {
+            _stubbededPermissionState
+        }
     }
 
     var _setRedirectedToNotificationsOnboardinCalled: Bool?

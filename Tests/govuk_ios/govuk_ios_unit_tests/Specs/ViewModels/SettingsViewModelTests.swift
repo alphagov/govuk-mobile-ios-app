@@ -142,24 +142,32 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_first() async throws {
-        let mockNotificationService = MockNotificationService()
-        mockNotificationService._stubbededPermissionState = .authorized
-        let sut = SettingsViewModel(
-            analyticsService: MockAnalyticsService(),
-            urlOpener: MockURLOpener(),
-            versionProvider: MockAppVersionProvider(),
-            deviceInformationProvider: MockDeviceInformationProvider(),
-            notificationService: mockNotificationService,
-            notificationCenter: .default
-        )
-        let tester = SettingsViewModelTester(settingsViewModel: sut)
-        #expect(tester.settingsViewModel.notificationSettingsAlertTitle == "Turn on notifications")
+    func test_first() async {
+        let result = await withCheckedContinuation { continuation in
+            let mockNotificationService = MockNotificationService()
+            let expectedPermission: NotificationPermissionState = .authorized
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: MockURLOpener(),
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    continuation.resume(returning: sut.notificationSettingsAlertTitle)
+                }.store(in: &cancellables)
+        }
+        #expect(result == "Turn off notifications")
     }
 
     @Test
-    func test_foreground() async throws {
-
+    func test_foreground() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotifcationCenter = NotificationCenter()
 
@@ -174,11 +182,13 @@ class SettingsViewModelTests {
                 notificationCenter: mockNotifcationCenter
             )
             let tester = SettingsViewModelTester(settingsViewModel: sut)
-            mockNotificationService._stubbededPermissionState = .denied
+            let expectedPermission: NotificationPermissionState = .denied
+            mockNotificationService._stubbededPermissionState = expectedPermission
             tester.objectWillChange
-                .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { _ in
+                    guard expectedPermission == tester.settingsViewModel.notificationsPermissionState
+                    else { return }
                     continuation.resume(returning: tester.settingsViewModel.notificationSettingsAlertTitle)
                 }.store(in: &cancellables)
             mockNotifcationCenter.post(

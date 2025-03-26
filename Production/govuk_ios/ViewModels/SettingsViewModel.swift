@@ -23,7 +23,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let deviceInformationProvider: DeviceInformationProviderInterface
     @Published var scrollToTop: Bool = false
     @Published var displayNotificationSettingsAlert: Bool = false
-    @Published private var notificationsPermissionState: NotificationPermissionState
+    @Published private(set) var notificationsPermissionState: NotificationPermissionState
     = .notDetermined
     private let notificationService: NotificationServiceInterface
     private let notificationCenter: NotificationCenter

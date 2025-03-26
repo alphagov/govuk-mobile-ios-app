@@ -1,2 +1,2 @@
 BASE_URL = https:/$()/app.publishing.service.gov.uk/
-ASSETCATALOGUE_COMPILER_APPICON_NAME = AppIcon
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon

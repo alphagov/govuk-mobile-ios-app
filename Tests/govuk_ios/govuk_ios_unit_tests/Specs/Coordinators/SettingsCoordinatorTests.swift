@@ -32,7 +32,27 @@ struct SettingsCoordinatorTests {
 
         #expect(navigationController.viewControllers.first == expectedViewController)
     }
-    
+
+    @Test
+    func start_passesHydratedViewModel() {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
+        let navigationController = UINavigationController()
+        let subject = SettingsCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: []),
+            analyticsService: MockAnalyticsService(),
+            coordinatorBuilder: CoordinatorBuilder.mock,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: MockNotificationService()
+        )
+        subject.start(url: nil)
+
+        #expect(mockViewControllerBuilder._receivedSettingsViewModel?.redirectToNotificationOnboarding != nil)
+    }
+
     @Test
     func didReselectTab_updatesViewModel() throws {
         let viewControllerBuilder = ViewControllerBuilder()

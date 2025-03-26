@@ -31,7 +31,9 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
     
     var _stubbedSettingsViewController: UIViewController?
+    var _receivedSettingsViewModel: (any SettingsViewModelInterface)?
     override func settings<T: SettingsViewModelInterface>(viewModel: T) -> UIViewController {
+        _receivedSettingsViewModel = viewModel
         return _stubbedSettingsViewController ?? UIViewController()
     }
 

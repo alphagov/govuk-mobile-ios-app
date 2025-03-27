@@ -140,9 +140,9 @@ class SettingsViewModelTests {
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
     }
-
+    
     @Test
-    func test_first() async {
+    func test_notificationSettingsAlertTitle_whenNotificationsPermissionStateisAuthorized_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .authorized
@@ -164,11 +164,87 @@ class SettingsViewModelTests {
                 }.store(in: &cancellables)
         }
         #expect(result.notificationSettingsAlertTitle == "Turn off notifications")
-        #expect(result.notificationSettingsAlertBody == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
+    }
+
+
+    @Test
+    func test_notificationSettingsAlertTitle_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
+        let result = await withCheckedContinuation { continuation in
+            let mockNotificationService = MockNotificationService()
+            let expectedPermission: NotificationPermissionState = .denied
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: MockURLOpener(),
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    continuation.resume(returning: sut.notificationSettingsAlertTitle)
+                }.store(in: &cancellables)
+        }
+        #expect(result == "Turn on notifications")
+    }
+
+    //work
+    @Test
+    func test_notificationSettingsAlertBody_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
+        let result = await withCheckedContinuation { continuation in
+            let mockNotificationService = MockNotificationService()
+            let expectedPermission: NotificationPermissionState = .denied
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: MockURLOpener(),
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    continuation.resume(returning: sut.notificationSettingsAlertBody)
+                }.store(in: &cancellables)
+        }
+        #expect(result == String.settings.localized("settingsNotificationsAlertBodyDisabled"))
     }
 
     @Test
-    func test_foreground() async {
+    func test_notificationSettingsAlertBody_whenNotificationsPermissionStateisAuthorised_returnsCorrectText() async {
+        let result = await withCheckedContinuation { continuation in
+            let mockNotificationService = MockNotificationService()
+            let expectedPermission: NotificationPermissionState = .authorized
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: MockURLOpener(),
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    continuation.resume(returning: sut.notificationSettingsAlertBody)
+                }.store(in: &cancellables)
+        }
+        #expect(result == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
+    }
+
+    @Test
+    func test_notificationSettingsAlertTitle_whenAppComesIntoForegroundAfterAuthorisationDenied_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotifcationCenter = NotificationCenter()
 
@@ -201,8 +277,43 @@ class SettingsViewModelTests {
         #expect(result.notificationSettingsAlertBody == String.settings.localized("settingsNotificationsAlertBodyDisabled"))
     }
 
+    @Test
+    func test_notificationSettingsAlertTitle_whenAppComesIntoForegroundAfterAuthorisationAccepted_returnsCorrectText() async {
+        let result = await withCheckedContinuation { continuation in
+            let mockNotifcationCenter = NotificationCenter()
+
+            let mockNotificationService = MockNotificationService()
+            mockNotificationService._stubbededPermissionState = .denied
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: MockURLOpener(),
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: mockNotifcationCenter
+            )
+            let tester = SettingsViewModelTester(settingsViewModel: sut)
+            let expectedPermission: NotificationPermissionState = .authorized
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            tester.objectWillChange
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                    guard expectedPermission == tester.settingsViewModel.notificationsPermissionState
+                    else { return }
+                    continuation.resume(returning: tester.settingsViewModel)
+                }.store(in: &cancellables)
+            mockNotifcationCenter.post(
+                name: UIApplication.willEnterForegroundNotification,
+                object: nil
+            )
+        }
+        #expect(result.notificationSettingsAlertTitle == "Turn off notifications")
+        #expect(result.notificationSettingsAlertBody == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
+    }
+
+    @Test
     func test_handleNotificationAlertAction_authorized() async {
-        await withCheckedContinuation { continuation in
+        let urlString = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .authorized
             mockNotificationService._stubbededPermissionState = expectedPermission
@@ -220,45 +331,83 @@ class SettingsViewModelTests {
                 .sink { value in
                     guard expectedPermission == value
                     else { return }
-                    continuation.resume()
+                    sut.handleNotificationAlertAction()
+                    let urlString = mockURLOpener._receivedOpenIfPossibleUrlString
+                    continuation.resume(returning: urlString)
                 }.store(in: &cancellables)
         }
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == UIApplication.openSettingsURLString)
+        #expect(urlString == UIApplication.openSettingsURLString)
     }
 
+    @Test
     func test_handleNotificationAlertAction_denied() async {
-        await withCheckedContinuation { continuation in
+        let urlString = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
+            let expectedPermission: NotificationPermissionState = .denied
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let mockURLOpener = MockURLOpener()
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: mockURLOpener,
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    sut.handleNotificationAlertAction()
+                    let urlString = mockURLOpener._receivedOpenIfPossibleUrlString
+                    continuation.resume(returning: urlString)
+                }.store(in: &cancellables)
+        }
+        #expect(urlString == UIApplication.openSettingsURLString)
+    }
+
+    @Test
+    func handleNotificationAlertAction_whenNotificationPermissionIsAuthorized_tracksEventCorrectly()  async throws {
+        let result: String = await withCheckedContinuation { continuation in
+             let mockNotificationService = MockNotificationService()
+             let analyticsService = MockAnalyticsService()
             let expectedPermission: NotificationPermissionState = .authorized
-            mockNotificationService._stubbededPermissionState = expectedPermission
-            let mockURLOpener = MockURLOpener()
-            let sut = SettingsViewModel(
-                analyticsService: MockAnalyticsService(),
+             mockNotificationService._stubbededPermissionState = expectedPermission
+             let sut = SettingsViewModel(
+                analyticsService: analyticsService,
                 urlOpener: mockURLOpener,
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 notificationService: mockNotificationService,
                 notificationCenter: .init()
-            )
+             )
+
             sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
-                .sink { value in
-                    guard expectedPermission == value
-                    else { return }
-                    continuation.resume()
-                }.store(in: &cancellables)
+                .sink(
+                    receiveValue: { value in
+                        guard expectedPermission == value
+                        else { return }
+                        sut.handleNotificationAlertAction()
+                        let trackingText = analyticsService._trackedEvents.first?.params?["text"]
+                        as? String
+                        continuation.resume(returning: trackingText!)
+                    }
+                ).store(in: &cancellables)
         }
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == UIApplication.openSettingsURLString)
+        #expect(result == "Continue")
     }
 
-    func test_handleNotificationAlertAction_notDetermined() async {
-        await withCheckedContinuation { continuation in
+    @Test
+    func handleNotificationAlertAction_whenNotificationPermissionIsDenied_tracksEventCorrectly()  async throws {
+        let result: String = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
-            let expectedPermission: NotificationPermissionState = .notDetermined
+            let analyticsService = MockAnalyticsService()
+            let expectedPermission: NotificationPermissionState = .denied
             mockNotificationService._stubbededPermissionState = expectedPermission
-            let mockURLOpener = MockURLOpener()
             let sut = SettingsViewModel(
-                analyticsService: MockAnalyticsService(),
+                analyticsService: analyticsService,
                 urlOpener: mockURLOpener,
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
@@ -267,224 +416,19 @@ class SettingsViewModelTests {
             )
             sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
-                .sink { value in
-                    guard expectedPermission == value
-                    else { return }
-                    continuation.resume()
-                }.store(in: &cancellables)
+                .sink(
+                    receiveValue: { value in
+                        guard expectedPermission == value
+                        else { return }
+                        sut.handleNotificationAlertAction()
+                        let trackingText = analyticsService._trackedEvents.first?.params?["text"]
+                        as? String
+                        continuation.resume(returning: trackingText!)
+                    }
+                ).store(in: &cancellables)
         }
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == nil)
+        #expect(result == "Continue")
     }
-
-//    @Test
-//    func notificationPermissionState_whenNotificationPermissionIsDenied_isSetToDenied() async throws {
-//        let sut = SettingsViewModel(
-//            analyticsService: MockAnalyticsService(),
-//            urlOpener: MockURLOpener(),
-//            versionProvider: mockVersionProvider,
-//            deviceInformationProvider: mockDeviceInformationProvider,
-//            notificationService: mockNotificationsService
-//        )
-//        let result: NotificationPermissionState = await withCheckedContinuation { continuation in
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { value in
-//                        print(value)
-//                        print("testing 1")
-//                        continuation.resume(returning: value)
-//                    }
-//                ).store(in: &cancellables)
-//            sut.updateNotificationsAuthorizationStatus()
-//            mockNotificationsService._stubbededPermissionState = .denied
-//        }
-//        #expect(result == .denied)
-//
-//
-//    }
-
-//    @Test
-//    func notificationPermissionState_whenNotificationPermissionIsAuthorized_isSetToAuthorized() async throws {
-//        let sut = SettingsViewModel(
-//            analyticsService: MockAnalyticsService(),
-//            urlOpener: MockURLOpener(),
-//            versionProvider: mockVersionProvider,
-//            deviceInformationProvider: mockDeviceInformationProvider,
-//            notificationService: mockNotificationsService
-//        )
-//
-//        let result = await withCheckedContinuation { continutation in
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { value in
-//                        continutation.resume(returning: value)
-//                    }
-//                ).store(in: &cancellables)
-//            mockNotificationsService._receivedCompletion?(.authorized)
-//        }
-//        #expect(result == .authorized)
-//    }
-//
-//    @Test
-//    func notificationSettingsAlertTitle_whenNotificationPermissionIsAuthorized_setsCorrectTitle() async  {
-//        let sut = SettingsViewModel(
-//            analyticsService: MockAnalyticsService(),
-//            urlOpener: MockURLOpener(),
-//            versionProvider: mockVersionProvider,
-//            deviceInformationProvider: mockDeviceInformationProvider,
-//            notificationService: mockNotificationsService
-//        )
-//
-//        let result = await withCheckedContinuation { continutation in
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { value in
-//                        continutation.resume(returning: sut.notificationSettingsAlertTitle)
-//                    }
-//                ).store(in: &cancellables)
-//            mockNotificationsService._receivedCompletion?(.authorized)
-//        }
-//        #expect(result == String.settings.localized("settingsNotificationsAlertTitleEnabled"))
-//    }
-//
-//    @Test
-//    func notificationSettingsAlertTitle_whenNotificationPermissionIsDenied_setsCorrectTitle() async  {
-//        let sut = SettingsViewModel(
-//            analyticsService: MockAnalyticsService(),
-//            urlOpener: MockURLOpener(),
-//            versionProvider: mockVersionProvider,
-//            deviceInformationProvider: mockDeviceInformationProvider,
-//            notificationService: mockNotificationsService
-//        )
-//
-//        let result = await withCheckedContinuation { continutation in
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { value in
-//                        continutation.resume(returning: sut.notificationSettingsAlertTitle)
-//                    }
-//                ).store(in: &cancellables)
-//            mockNotificationsService._receivedCompletion?(.denied)
-//        }
-//        #expect(result == String.settings.localized("settingsNotificationsAlertTitleDisabled"))
-//    }
-//
-//    @Test
-//    func notificationSettingsAlertBody_whenNotificationPermissionIsAuthorized_setsCorrectText() async {
-//        let sut = SettingsViewModel(
-//            analyticsService: MockAnalyticsService(),
-//            urlOpener: MockURLOpener(),
-//            versionProvider: mockVersionProvider,
-//            deviceInformationProvider: mockDeviceInformationProvider,
-//            notificationService: mockNotificationsService
-//        )
-//
-//        let result = await withCheckedContinuation { continutation in
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { value in
-//                        continutation.resume(returning: sut.notificationSettingsAlertBody)
-//                    }
-//                ).store(in: &cancellables)
-//            mockNotificationsService._receivedCompletion?(.authorized)
-//        }
-//        #expect(result == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
-//    }
-//
-//    @Test
-//    func notificationSettingsAlertBody_whenNotificationPermissionIsDenied_setsCorrectText() async {
-//        let sut = SettingsViewModel(
-//            analyticsService: MockAnalyticsService(),
-//            urlOpener: MockURLOpener(),
-//            versionProvider: mockVersionProvider,
-//            deviceInformationProvider: mockDeviceInformationProvider,
-//            notificationService: mockNotificationsService
-//        )
-//
-//        let result = await withCheckedContinuation { continutation in
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { value in
-//                        continutation.resume(returning: sut.notificationSettingsAlertBody)
-//                    }
-//                ).store(in: &cancellables)
-//            mockNotificationsService._receivedCompletion?(.denied)
-//        }
-//        #expect(result == String.settings.localized("settingsNotificationsAlertBodyDisabled"))
-//
-//    }
-//
-//    @Test
-//    func handleNotificationAlertAction_whenNotificationPermissionIsDenied_tracksEventCorrectly()  async throws {
-//        let notiifcationservice = MockNotificationService()
-//        let analyticsService = MockAnalyticsService()
-//        var receivedTitle = ""
-//        let result = await withCheckedContinuation { continuation in
-//            let sut = SettingsViewModel(
-//                analyticsService: analyticsService,
-//                urlOpener: MockURLOpener(),
-//                versionProvider: mockVersionProvider,
-//                deviceInformationProvider: mockDeviceInformationProvider,
-//                notificationService: notiifcationservice
-//            )
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { _ in
-//                        sut.handleNotificationAlertAction()
-//                        let trackingText = analyticsService._trackedEvents.first?.params?["text"]
-//                        as? String
-//                        receivedTitle = trackingText!
-//                        continuation.resume(returning: sut.notificationAlertButtonTitle)
-//                    }
-//                ).store(in: &cancellables)
-//            notiifcationservice._receivedCompletion?(.denied)
-//        }
-//        #expect(receivedTitle == result)
-//    }
-//
-//    @Test
-//    func handleNotificationAlertAction_whenNotificationPermissionIsAuthorized_tracksEventCorrectly()  async throws {
-//        let notiifcationservice = MockNotificationService()
-//        let analyticsService = MockAnalyticsService()
-//        var receivedTrackingTitle = ""
-//        let result = await withCheckedContinuation { continuation in
-//            let sut = SettingsViewModel(
-//                analyticsService: analyticsService,
-//                urlOpener: MockURLOpener(),
-//                versionProvider: mockVersionProvider,
-//                deviceInformationProvider: mockDeviceInformationProvider,
-//                notificationService: notiifcationservice
-//            )
-//
-//            sut.$notificationsPermissionState
-//                .dropFirst()
-//                .receive(on: DispatchQueue.main)
-//                .sink(
-//                    receiveValue: { _ in
-//                        sut.handleNotificationAlertAction()
-//                        let trackingText = analyticsService._trackedEvents.first?.params?["text"]
-//                        as? String
-//                        receivedTrackingTitle = trackingText!
-//                        continuation.resume(returning: sut.notificationAlertButtonTitle)
-//                    }
-//                ).store(in: &cancellables)
-//            notiifcationservice._receivedCompletion?(.authorized)
-//        }
-//        #expect(receivedTrackingTitle == result)
-//    }
 }
 
 class SettingsViewModelTester: ObservableObject {

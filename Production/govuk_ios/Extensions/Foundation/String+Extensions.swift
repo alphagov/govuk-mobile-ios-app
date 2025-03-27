@@ -49,6 +49,13 @@ extension String {
             bundle: .main
         )
     }
+
+    static var recentActivity: LocalStringBuilder {
+        .init(
+            tableName: "RecentActivity",
+            bundle: .module
+        )
+    }
 }
 
 extension String {

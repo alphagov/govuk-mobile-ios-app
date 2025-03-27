@@ -3,7 +3,7 @@ import Testing
 import GOVKit
 import CoreData
 
-@testable import RecentActivity
+@testable import govuk_ios
 
 @Suite
 struct AppEvent_RecentActivityTests {

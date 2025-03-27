@@ -12,7 +12,7 @@ struct TopicsWidgetViewModelTests {
     let mockAnalyticsService = MockAnalyticsService()
 
     @Test
-    func fetchTopics_downloadSuccess_returnsExpectedData() async throws {
+    func fetchTopics_downloadSuccess_returnsExpectedData() {
         mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
 
         let sut = TopicsWidgetViewModel(
@@ -32,7 +32,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func fetchTopics_downloadFailure_returnsExpectedResult() async throws {
+    func fetchTopics_downloadFailure_returnsExpectedResult() {
         mockTopicService._stubbedFetchRemoteListResult = .failure(.decodingError)
 
         let sut = TopicsWidgetViewModel(
@@ -56,7 +56,7 @@ struct TopicsWidgetViewModelTests {
 
     @Test
     @MainActor
-    func didTapTopic_invokesExpectedAction() async throws {
+    func didTapTopic_invokesExpectedAction() {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
@@ -73,7 +73,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func didTapEdit_invokesExpectedAction() async throws {
+    func didTapEdit_invokesExpectedAction() {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
@@ -90,7 +90,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func didTapSeeAllTopics_invokesExpectedAction() async throws {
+    func didTapSeeAllTopics_invokesExpectedAction() {
         var expectedValue = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,
@@ -257,7 +257,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func trackEcommerce_createsExpectedEvent() async throws {
+    func trackEcommerce_createsExpectedEvent() throws {
         mockTopicService._stubbedHasCustomisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
@@ -296,7 +296,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func trackEcommerceSelection_createsExpectedEvent() async throws {
+    func trackEcommerceSelection_createsExpectedEvent() throws {
         mockTopicService._stubbedHasCustomisedTopics = true
 
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)

@@ -78,7 +78,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func topicDetail_returnsExpectedResult() async throws {
+    func topicDetail_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
             topic: MockDisplayableTopic(ref: "", title: ""),
@@ -94,7 +94,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func editTopics_returnsExpectedResult() async throws {
+    func editTopics_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.editTopics(
             analyticsService: MockAnalyticsService(),
@@ -107,7 +107,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func allTopics_returnsExpectedResult() async throws {
+    func allTopics_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.allTopics(
             analyticsService: MockAnalyticsService(),
@@ -119,7 +119,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func topicOnboarding_returnsExpectedResult() async throws {
+    func topicOnboarding_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicOnboarding(
             topics: [],

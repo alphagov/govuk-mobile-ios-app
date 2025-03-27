@@ -188,7 +188,7 @@ struct SearchServiceTests {
         #expect(suggestions == [])
     }
 
-    func save_search_savesSearchToRepository() async {
+    func save_search_savesSearchToRepository() {
         let mockServiceClient = MockSearchServiceClient()
         let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(
@@ -201,7 +201,7 @@ struct SearchServiceTests {
     }
 
     @Test
-    func clear_searchHistory_clearsRepository() async {
+    func clear_searchHistory_clearsRepository() {
         let mockServiceClient = MockSearchServiceClient()
         let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(
@@ -213,7 +213,7 @@ struct SearchServiceTests {
     }
 
     @Test
-    func delete_searchHistory_deletesFromRepository() async {
+    func delete_searchHistory_deletesFromRepository() {
         let mockServiceClient = MockSearchServiceClient()
         let mockRepository = MockSearchHistoryRepository()
         let sut = SearchService(

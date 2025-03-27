@@ -7,7 +7,7 @@ import CoreData
 @Suite
 struct TopicsRepositoryTests {
     @Test
-    func saveTopics_doesSaveResponseItems() async throws {
+    func saveTopics_doesSaveResponseItems() throws {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
         sut.save(topics: TopicResponseItem.arrangeMultiple)
@@ -19,7 +19,7 @@ struct TopicsRepositoryTests {
     }
     
     @Test
-    func saveTopics_newTopics_savesNewTopics() async throws {
+    func saveTopics_newTopics_savesNewTopics() throws {
         // Given I have started the app the first time, and gotten topics
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
@@ -43,7 +43,7 @@ struct TopicsRepositoryTests {
     }
 
     @Test
-    func saveTopics_updatedTopics_updatesTopics() async throws {
+    func saveTopics_updatedTopics_updatesTopics() throws {
         // Given I have started the app the first time, and gotten topics
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
@@ -91,7 +91,7 @@ struct TopicsRepositoryTests {
     }
 
     @Test
-    func saveTopics_deleteTopics_updatesTopics() async throws {
+    func saveTopics_deleteTopics_updatesTopics() throws {
         // Given I have started the app the first time, and gotten topics
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
@@ -127,7 +127,7 @@ struct TopicsRepositoryTests {
     }
 
     @Test
-    func fetchFavourites_onlyReturnsFavourites() async throws {
+    func fetchFavourites_onlyReturnsFavourites() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
         let expectedResult = Topic.arrange(context: coreData.viewContext, isFavourite: true)
@@ -139,7 +139,7 @@ struct TopicsRepositoryTests {
     }
     
     @Test
-    func save_persistsDataAsExpected() async throws {
+    func save_persistsDataAsExpected() throws {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
         Topic.arrangeMultiple(context: coreData.viewContext)

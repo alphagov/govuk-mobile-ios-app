@@ -9,7 +9,7 @@ import Onboarding
 @Suite
 class NotificationOnboardingCoordinatorTests {
     @Test
-    func start_shouldRequestPermission_startsOnboarding() async throws {
+    func start_shouldRequestPermission_startsOnboarding() async {
         let mockNotificationService = MockNotificationService()
         let mockNavigationController = await MockNavigationController()
         let sut = await NotificationOnboardingCoordinator(

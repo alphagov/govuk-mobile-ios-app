@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import GOVKit
-import RecentActivity
 
 class HomeCoordinator: TabItemCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder

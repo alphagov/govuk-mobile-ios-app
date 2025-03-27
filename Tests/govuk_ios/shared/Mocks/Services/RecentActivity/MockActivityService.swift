@@ -1,7 +1,7 @@
 import Foundation
 import  CoreData
 import GOVKit
-import RecentActivity
+
 @testable import govuk_ios
 
 class MockActivityService: ActivityServiceInterface {

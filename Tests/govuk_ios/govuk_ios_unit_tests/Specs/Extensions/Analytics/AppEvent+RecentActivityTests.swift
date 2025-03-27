@@ -3,13 +3,13 @@ import Testing
 import GOVKit
 import CoreData
 
-@testable import RecentActivity
+@testable import govuk_ios
 
 @Suite
 struct AppEvent_RecentActivityTests {
     @Test
     func recentActivityNavigation_returnsExpectedResult() {
-        let container = TestRepository()
+        let container = CoreDataRepository.arrangeAndLoad
         let expectedActivity = ActivityItem.arrange(context: container.viewContext)
         let result = AppEvent.recentActivityNavigation(
             activity: expectedActivity

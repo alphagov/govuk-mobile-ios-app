@@ -3,7 +3,7 @@ import UIKit
 import Testing
 import GOVKit
 
-@testable import RecentActivity
+@testable import govuk_ios
 
 @Suite
 @MainActor

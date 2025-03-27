@@ -3,7 +3,7 @@ import UIKit
 import CoreData
 import GOVKit
 
-public final class RecentActivityListViewModel: NSObject,
+final class RecentActivityListViewModel: NSObject,
                                    NSFetchedResultsControllerDelegate {
     let pageTitle: String = String.recentActivity.localized(
         "recentActivityNavigationTitle"
@@ -20,7 +20,7 @@ public final class RecentActivityListViewModel: NSObject,
         recentMonthActivities: [:]
     )
 
-    public init(activityService: ActivityServiceInterface,
+    init(activityService: ActivityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          urlopener: URLOpener) {
         self.activityService = activityService
@@ -106,7 +106,7 @@ public final class RecentActivityListViewModel: NSObject,
         )
     }
 
-    public func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>,
+    func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>,
                     didChangeContentWith
                     snapshot: NSDiffableDataSourceSnapshotReference) {
         let items = retainedResultsController?.fetchedObjects ?? []

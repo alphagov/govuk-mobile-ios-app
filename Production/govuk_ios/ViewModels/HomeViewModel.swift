@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import GOVKit
-import RecentActivity
 
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface

@@ -4,7 +4,6 @@ import SwiftUI
 import CoreData
 import Factory
 import GOVKit
-import RecentActivity
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios

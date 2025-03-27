@@ -7,6 +7,7 @@ import Lottie
 
 @testable import govuk_ios
 
+@MainActor
 class SnapshotTestCase: FBSnapshotTestCase {
 
     override func setUp() {

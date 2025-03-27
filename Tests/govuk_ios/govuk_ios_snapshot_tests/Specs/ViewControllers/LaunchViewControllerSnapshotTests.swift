@@ -10,8 +10,8 @@ import Factory
 class LaunchViewControllerSnapshotTests: SnapshotTestCase {
     private var mockAccessibilityManager: MockAccessibilityManager!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override func setUp() {
+        super.setUp()
         mockAccessibilityManager = MockAccessibilityManager()
         Container.shared.accessibilityManager.register(
             factory: {

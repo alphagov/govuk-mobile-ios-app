@@ -7,7 +7,7 @@ import GOVKit
 @Suite
 struct AppRecommendUpdateContainerViewModelTests {
     @Test
-    func init_hasCorrectInitialState() throws {
+    func init_hasCorrectInitialState() {
         let sut = AppRecommendUpdateContainerViewModel (dismissAction: {})
 
         #expect(sut.title == "You’re using an old version of the app")
@@ -17,7 +17,7 @@ struct AppRecommendUpdateContainerViewModelTests {
     }
 
     @Test
-    func updateButtonAction_opensURL() throws {
+    func updateButtonAction_opensURL() {
         let urlOpener = MockURLOpener()
         let sut = AppForcedUpdateContainerViewModel(
             urlOpener: urlOpener
@@ -27,7 +27,7 @@ struct AppRecommendUpdateContainerViewModelTests {
     }
 
     @Test
-    func skipButtonAction_callsDismiss() async throws {
+    func skipButtonAction_callsDismiss() async {
         let dismissCalled = await withCheckedContinuation { continuation in
             let sut = AppRecommendUpdateContainerViewModel(
                 dismissAction: {

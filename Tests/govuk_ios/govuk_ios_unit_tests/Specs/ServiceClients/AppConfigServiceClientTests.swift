@@ -17,7 +17,7 @@ struct AppConfigServiceClientTests {
     }
 
     @Test
-    func fetchAppConfig_sendsRequest() async throws {
+    func fetchAppConfig_sendsRequest() {
             sut.fetchAppConfig(
                 completion: { _ in }
             )
@@ -41,7 +41,7 @@ struct AppConfigServiceClientTests {
     }
 
     @Test
-    func fetchAppConfig_invalidJson_returnsError() async throws {
+    func fetchAppConfig_invalidJson_returnsError() async {
         let result = await withCheckedContinuation { continuation in
             sut.fetchAppConfig(
                 completion: { result in
@@ -56,7 +56,7 @@ struct AppConfigServiceClientTests {
     }
 
     @Test
-    func fetchAppConfig_invalidJSON_returnsError() async throws {
+    func fetchAppConfig_invalidJSON_returnsError() async {
         let mockJsonData = getJsonData(filename: "MockAppConfigResponseInvalid", bundle: .main)
         let result = await withCheckedContinuation { continuation in
             sut.fetchAppConfig(

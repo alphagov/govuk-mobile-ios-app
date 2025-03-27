@@ -6,7 +6,7 @@ import Testing
 struct DeviceInformationProvider_ConvenienceTests {
 
     @Test
-    func helpAndFeedbackURL_returnsExpectedValue() async throws {
+    func helpAndFeedbackURL_returnsExpectedValue() throws {
         let sut = MockDeviceInformationProvider(
             systemVersion: "18.2",
             model: "iPhone16"

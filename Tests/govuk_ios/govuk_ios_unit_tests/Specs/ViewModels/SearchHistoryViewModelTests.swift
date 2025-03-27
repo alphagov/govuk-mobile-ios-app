@@ -9,7 +9,7 @@ import CoreData
 struct SearchHistoryViewModelTests {
 
     @Test
-    func init_fetches_searchHistoryItems_from_searchService() async throws {
+    func init_fetches_searchHistoryItems_from_searchService() throws {
 
         let coreData = CoreDataRepository.arrangeAndLoad
         let item = SearchHistoryItem(context: coreData.viewContext)
@@ -18,11 +18,13 @@ struct SearchHistoryViewModelTests {
         try! coreData.viewContext.save()
 
         let fetchRequest = SearchHistoryItem.fetchRequest()
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                    managedObjectContext: coreData.viewContext,
-                                                    sectionNameKeyPath: nil,
-                                                    cacheName: nil)
-        try? controller.performFetch()
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: coreData.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        try controller.performFetch()
 
         let mockSearchService = MockSearchService()
         mockSearchService._stubbedFetchResultsController = controller
@@ -35,7 +37,7 @@ struct SearchHistoryViewModelTests {
     }
 
     @Test
-    func save_calls_save_on_searchService() async throws {
+    func save_calls_save_on_searchService() {
         let mockSearchService = MockSearchService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = SearchHistoryViewModel(
@@ -43,13 +45,15 @@ struct SearchHistoryViewModelTests {
             analyticsService: mockAnalyticsService
         )
 
-        sut.saveSearchHistoryItem(searchText: UUID().uuidString,
-                                  date: Date())
+        sut.saveSearchHistoryItem(
+            searchText: UUID().uuidString,
+            date: Date()
+        )
         #expect(mockSearchService._didCallSaveSearchHistory)
     }
 
     @Test
-    func clearSearchHistory_calls_clear_on_searchService() async throws {
+    func clearSearchHistory_calls_clear_on_searchService() {
         let mockSearchService = MockSearchService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = SearchHistoryViewModel(
@@ -62,7 +66,7 @@ struct SearchHistoryViewModelTests {
     }
 
     @Test
-    func delete_calls_delete_on_searchService() async throws {
+    func delete_calls_delete_on_searchService() {
         let mockSearchService = MockSearchService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = SearchHistoryViewModel(
@@ -75,3 +79,4 @@ struct SearchHistoryViewModelTests {
     }
 
 }
+

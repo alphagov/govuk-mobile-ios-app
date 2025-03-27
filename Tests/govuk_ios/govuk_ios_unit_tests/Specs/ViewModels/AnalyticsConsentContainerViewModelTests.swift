@@ -7,7 +7,7 @@ import GOVKit
 @Suite
 struct AnalyticsConsentContainerViewModelTests {
     @Test
-    func init_hasCorrectInitialState() throws {
+    func init_hasCorrectInitialState() {
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
             dismissAction: {}
@@ -33,7 +33,7 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func allowButtonAction_setsAcceptedAnalyticsToTrue() throws {
+    func allowButtonAction_setsAcceptedAnalyticsToTrue() {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
@@ -44,7 +44,7 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func allowButtonAction_callsDismiss() async throws {
+    func allowButtonAction_callsDismiss() async {
         let dismissCalled = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentContainerViewModel(
                 analyticsService: nil,
@@ -58,7 +58,7 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func dontAllowButtonAction_setsAcceptedAnalyticsToFalse() throws {
+    func dontAllowButtonAction_setsAcceptedAnalyticsToFalse() {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
@@ -69,7 +69,7 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func dontAllowButtonAction_callsDismiss() async throws {
+    func dontAllowButtonAction_callsDismiss() async {
         let dismissCalled = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentContainerViewModel(
                 analyticsService: nil,
@@ -83,7 +83,7 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func openPrivacyPolicy_opensURL() throws {
+    func openPrivacyPolicy_opensURL() {
         let urlOpener = MockURLOpener()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,

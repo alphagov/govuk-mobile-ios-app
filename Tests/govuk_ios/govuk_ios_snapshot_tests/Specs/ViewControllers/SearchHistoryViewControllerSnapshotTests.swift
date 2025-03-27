@@ -1,7 +1,6 @@
 import Foundation
 import XCTest
 import CoreData
-import RecentActivity
 import UIComponents
 
 @testable import GOVKitTestUtilities

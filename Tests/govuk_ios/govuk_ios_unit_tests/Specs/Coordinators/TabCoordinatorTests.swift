@@ -172,7 +172,7 @@ struct TabCoordinatorTests {
         [true, false]
     ))
     func selectingTab_doesCall_didReselectTab_asNeeded(selectedIndex: Int,
-                                                       didReselectTab: Bool) async throws {
+                                                       didReselectTab: Bool) throws {
         let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 

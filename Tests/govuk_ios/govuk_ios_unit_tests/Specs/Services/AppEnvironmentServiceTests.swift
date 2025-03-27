@@ -5,7 +5,7 @@ import Testing
 struct AppEnvironmentServiceTests {
 
     @Test
-    func baseURL_returnsExpectedValue() async throws {
+    func baseURL_returnsExpectedValue() {
         let mockConfig = ["BaseURL": "https://www.example.com"]
         let sut = AppEnvironmentService(
             config: mockConfig
@@ -15,7 +15,7 @@ struct AppEnvironmentServiceTests {
     }
 
     @Test
-    func oneSignalAppID_returnsExpectedValue() async throws {
+    func oneSignalAppID_returnsExpectedValue() {
         let mockConfig = ["ONESIGNAL_APP_ID": "123456"]
         let sut = AppEnvironmentService(
             config: mockConfig

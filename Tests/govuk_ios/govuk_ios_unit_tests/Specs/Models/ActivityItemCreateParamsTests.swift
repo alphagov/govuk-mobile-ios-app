@@ -1,6 +1,5 @@
 import Foundation
 import Testing
-import RecentActivity
 
 @testable import govuk_ios
 

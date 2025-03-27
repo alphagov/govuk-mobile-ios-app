@@ -7,7 +7,7 @@ import GOVKit
 struct APIServiceClientTests {
 
     @Test()
-    func send_post_withParameters_passesExpectedValues() async throws {
+    func send_post_withParameters_passesExpectedValues() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,

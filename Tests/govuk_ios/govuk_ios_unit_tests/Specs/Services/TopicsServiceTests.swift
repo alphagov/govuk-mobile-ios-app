@@ -56,30 +56,30 @@ struct TopicsServiceTests {
     }
 
     @Test
-    func fetchAll_fetchesFromRepository() async {
+    func fetchAll_fetchesFromRepository() {
         _ = sut.fetchAll()
         #expect(mockTopicsRepository._didCallFetchAll)
     }
 
     @Test
-    func fetchFavourites_fetchesFromRepository() async {
+    func fetchFavourites_fetchesFromRepository() {
         _ = sut.fetchFavourites()
         #expect(mockTopicsRepository._didCallFetchFavourites)
     }
 
     @Test
-    func save_savesChangesToRepository() async {
+    func save_savesChangesToRepository() {
         sut.save()
         #expect(mockTopicsRepository._didCallSaveChanges)
     }
 
     @Test
     func fetchDetails_success_returnsExpectedData() async {
-        _ = await withCheckedContinuation { continuation in
+        await withCheckedContinuation { continuation in
             sut.fetchDetails(
                 ref: "test_ref",
-                completion: { result in
-                    continuation.resume(returning: result)
+                completion: { _ in
+                    continuation.resume()
                 }
             )
             mockTopicsServiceClient._receivedFetchDetailsCompletion?(

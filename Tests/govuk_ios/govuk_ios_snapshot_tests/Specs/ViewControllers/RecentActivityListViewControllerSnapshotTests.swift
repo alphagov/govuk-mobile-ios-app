@@ -1,7 +1,6 @@
 import Foundation
 import XCTest
 import CoreData
-import RecentActivity
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios

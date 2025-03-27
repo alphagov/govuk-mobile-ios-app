@@ -1,5 +1,4 @@
 import Foundation
-import RecentActivity
 
 extension ActivityItemCreateParams {
     init(searchItem: SearchItem) {

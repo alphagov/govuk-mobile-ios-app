@@ -1,6 +1,5 @@
 import UIKit
 import GOVKit
-import RecentActivity
 
 final class TopicDetailsCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface

@@ -12,7 +12,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationSettingsAlertBody: String { get }
     var notificationAlertButtonTitle: String { get }
     var redirectToNotificationOnboarding: () -> Void { get set }
-    func updateNotificationsAuthorizationStatus()
+    func updateNotificationPermissionState()
 }
 
 // swiftlint:disable:next type_body_length
@@ -45,14 +45,14 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.deviceInformationProvider = deviceInformationProvider
         self.notificationService = notificationService
         self.notificationCenter = notificationCenter
-        updateNotificationsAuthorizationStatus()
+        updateNotificationPermissionState()
         observeAppMoveToForeground()
     }
 
     private func observeAppMoveToForeground() {
         notificationCenter.addObserver(
             self,
-            selector: #selector(updateNotificationsAuthorizationStatus),
+            selector: #selector(updateNotificationPermissionState),
             name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
@@ -75,7 +75,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     @objc
-     func updateNotificationsAuthorizationStatus() {
+     func updateNotificationPermissionState() {
          Task {
              let authorizationStatus = await notificationService.authorizationStatus
              DispatchQueue.main.async {

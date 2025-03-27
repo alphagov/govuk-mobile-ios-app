@@ -45,7 +45,7 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
-            viewModel.updateNotificationsAuthorizationStatus()
+            viewModel.updateNotificationPermissionState()
         }
     }
 }

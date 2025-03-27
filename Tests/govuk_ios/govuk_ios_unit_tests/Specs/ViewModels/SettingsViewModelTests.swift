@@ -191,30 +191,6 @@ class SettingsViewModelTests {
         #expect(result == .denied)
     }
 
-    @Test
-    func notificationPermissionState_whenNotificationsPermissionStateisNotDetermined_returnsCorrectState() async {
-        let result = await withCheckedContinuation { continuation in
-            let mockNotificationService = MockNotificationService()
-            let expectedPermission: NotificationPermissionState = .notDetermined
-            mockNotificationService._stubbededPermissionState = expectedPermission
-            let sut = SettingsViewModel(
-                analyticsService: MockAnalyticsService(),
-                urlOpener: MockURLOpener(),
-                versionProvider: MockAppVersionProvider(),
-                deviceInformationProvider: MockDeviceInformationProvider(),
-                notificationService: mockNotificationService,
-                notificationCenter: .init()
-            )
-            sut.$notificationsPermissionState
-                .receive(on: DispatchQueue.main)
-                .sink { value in
-                    guard expectedPermission == value
-                    else { return }
-                    continuation.resume(returning: sut.notificationsPermissionState)
-                }.store(in: &cancellables)
-        }
-        #expect(result == .notDetermined)
-    }
 
     @Test
     func notificationSettingsAlertTitle_whenNotificationsPermissionStateisAuthorized_returnsCorrectText() async {

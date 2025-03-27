@@ -76,7 +76,7 @@ struct LinkRowView: View {
 
 struct NotificationsRowView: View {
     var row: NotificationSettingsRow
-
+    
     var body: some View {
         Button {
             row.action()

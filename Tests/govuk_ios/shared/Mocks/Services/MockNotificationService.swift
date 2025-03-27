@@ -30,7 +30,6 @@ class MockNotificationService: NotificationServiceInterface {
 
     func requestPermissions(completion: (() -> Void)?) {
         completion?()
-
     }
 
     var _stubbedShouldRequestPermission: Bool = true

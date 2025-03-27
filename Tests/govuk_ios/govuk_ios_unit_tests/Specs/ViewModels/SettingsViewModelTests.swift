@@ -167,7 +167,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationPermissionState_whenNotificationsPermissionStateisDenied_returnsCorrectState() async {
+    func notificationPermissionState_whenNotificationsPermissionStateisDenied_returnsCorrectState() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .denied
@@ -192,7 +192,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationPermissionState_whenNotificationsPermissionStateisNotDetermined_returnsCorrectState() async {
+    func notificationPermissionState_whenNotificationsPermissionStateisNotDetermined_returnsCorrectState() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .notDetermined
@@ -217,7 +217,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationSettingsAlertTitle_whenNotificationsPermissionStateisAuthorized_returnsCorrectText() async {
+    func notificationSettingsAlertTitle_whenNotificationsPermissionStateisAuthorized_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .authorized
@@ -243,7 +243,7 @@ class SettingsViewModelTests {
 
 
     @Test
-    func test_notificationSettingsAlertTitle_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
+    func notificationSettingsAlertTitle_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .denied
@@ -268,7 +268,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationSettingsAlertBody_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
+    func notificationSettingsAlertBody_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .denied
@@ -293,7 +293,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationSettingsAlertBody_whenNotificationsPermissionStateisAuthorised_returnsCorrectText() async {
+    func notificationSettingsAlertBody_whenNotificationsPermissionStateisAuthorised_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .authorized
@@ -318,7 +318,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationSettingsAlertTitle_whenAppComesIntoForegroundAfterAuthorisationDenied_returnsCorrectText() async {
+    func notificationSettingsAlertTitle_whenAppComesIntoForegroundAfterAuthorisationDenied_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotifcationCenter = NotificationCenter()
 
@@ -352,7 +352,7 @@ class SettingsViewModelTests {
 
 
     @Test
-    func test_notificationSettingsAlertBody_whenAppComesIntoForegroundAfterAuthorisationDenied_returnsCorrectText() async {
+    func notificationSettingsAlertBody_whenAppComesIntoForegroundAfterAuthorisationDenied_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotifcationCenter = NotificationCenter()
 
@@ -385,7 +385,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationSettingsAlertTitle_whenAppComesIntoForegroundAfterAuthorisationAccepted_returnsCorrectText() async {
+    func notificationSettingsAlertTitle_whenAppComesIntoForegroundAfterAuthorisationAccepted_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotifcationCenter = NotificationCenter()
 
@@ -418,7 +418,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationSettingsAlertBody_whenAppComesIntoForegroundAfterAuthorisationAccepted_returnsCorrectText() async {
+    func notificationSettingsAlertBody_whenAppComesIntoForegroundAfterAuthorisationAccepted_returnsCorrectText() async {
         let result = await withCheckedContinuation { continuation in
             let mockNotifcationCenter = NotificationCenter()
 
@@ -451,7 +451,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_handleNotificationAlertAction_authorized() async {
+    func handleNotificationAlertAction_authorized() async {
         let urlString = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .authorized
@@ -479,7 +479,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_handleNotificationAlertAction_denied() async {
+    func handleNotificationAlertAction_denied() async {
         let urlString = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .denied
@@ -509,11 +509,11 @@ class SettingsViewModelTests {
     @Test
     func handleNotificationAlertAction_whenNotificationPermissionIsAuthorized_tracksEventCorrectly()  async throws {
         let result: String = await withCheckedContinuation { continuation in
-             let mockNotificationService = MockNotificationService()
-             let analyticsService = MockAnalyticsService()
+            let mockNotificationService = MockNotificationService()
+            let analyticsService = MockAnalyticsService()
             let expectedPermission: NotificationPermissionState = .authorized
-             mockNotificationService._stubbededPermissionState = expectedPermission
-             let sut = SettingsViewModel(
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let sut = SettingsViewModel(
                 analyticsService: analyticsService,
                 urlOpener: mockURLOpener,
                 versionProvider: MockAppVersionProvider(),

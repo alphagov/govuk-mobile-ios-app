@@ -1,6 +1,5 @@
 import SwiftUI
 import GOVKit
-import RecentActivity
 
 // swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {

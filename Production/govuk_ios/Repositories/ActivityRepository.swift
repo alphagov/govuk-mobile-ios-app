@@ -2,27 +2,27 @@ import Foundation
 import CoreData
 import GOVKit
 
-public protocol ActivityRepositoryInterface {
+protocol ActivityRepositoryInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(params: ActivityItemCreateParams)
     func delete(objectIds: [NSManagedObjectID])
 }
 
-public struct ActivityRepository: ActivityRepositoryInterface {
+struct ActivityRepository: ActivityRepositoryInterface {
     private let coreData: CoreDataRepositoryInterface
 
-    public init(coreData: CoreDataRepositoryInterface) {
+    init(coreData: CoreDataRepositoryInterface) {
         self.coreData = coreData
     }
 
-    public func fetch() -> NSFetchedResultsController<ActivityItem> {
+    func fetch() -> NSFetchedResultsController<ActivityItem> {
         fetch(
             predicate: nil,
             context: coreData.viewContext
         )
     }
 
-    public func save(params: ActivityItemCreateParams) {
+    func save(params: ActivityItemCreateParams) {
         let localContext = coreData.backgroundContext
         let local = get(id: params.id, context: localContext) ??
         ActivityItem(context: localContext)
@@ -54,7 +54,7 @@ public struct ActivityRepository: ActivityRepositoryInterface {
         return controller
     }
 
-    public func delete(objectIds: [NSManagedObjectID]) {
+    func delete(objectIds: [NSManagedObjectID]) {
         for objectId in objectIds {
             let object = coreData.backgroundContext.object(with: objectId)
             coreData.backgroundContext.delete(object)

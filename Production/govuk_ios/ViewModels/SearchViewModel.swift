@@ -1,6 +1,5 @@
 import UIKit
 import GOVKit
-import RecentActivity
 
 enum SearchError: Error {
     case apiUnavailable

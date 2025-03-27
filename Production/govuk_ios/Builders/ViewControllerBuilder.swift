@@ -3,7 +3,6 @@ import UIKit
 import SwiftUI
 import Factory
 import GOVKit
-import RecentActivity
 
 class ViewControllerBuilder {
     @MainActor

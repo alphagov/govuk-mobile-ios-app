@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import GOVKitTestUtilities
 
-@testable import RecentActivity
+@testable import govuk_ios
 
 @Suite
 struct MonthGroupKeyTests {

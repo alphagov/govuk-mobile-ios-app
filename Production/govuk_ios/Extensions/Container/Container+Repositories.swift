@@ -1,6 +1,5 @@
 import Foundation
 import Factory
-import RecentActivity
 
 extension Container {
     var activityRepository: Factory<ActivityRepositoryInterface> {

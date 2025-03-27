@@ -2,7 +2,6 @@ import Foundation
 import Factory
 import Onboarding
 import GOVKit
-import RecentActivity
 
 import Firebase
 import FirebaseCrashlytics

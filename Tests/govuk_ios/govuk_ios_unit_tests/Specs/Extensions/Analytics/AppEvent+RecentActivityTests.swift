@@ -9,7 +9,7 @@ import CoreData
 struct AppEvent_RecentActivityTests {
     @Test
     func recentActivityNavigation_returnsExpectedResult() {
-        let container = TestRepository()
+        let container = CoreDataRepository.arrangeAndLoad
         let expectedActivity = ActivityItem.arrange(context: container.viewContext)
         let result = AppEvent.recentActivityNavigation(
             activity: expectedActivity

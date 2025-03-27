@@ -1,4 +1,3 @@
-// swiftlint:disable file_length
 import Foundation
 import UIKit
 import UIComponents
@@ -8,11 +7,12 @@ private typealias DataSource = UITableViewDiffableDataSource<RecentActivitySecti
 private typealias Snapshot = NSDiffableDataSourceSnapshot<RecentActivitySection, ActivityItem>
 
 // swiftlint:disable:next type_body_length
-public final class RecentActivityListViewController: BaseViewController {
+final class RecentActivityListViewController: BaseViewController {
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.groupedList
-        tableView.contentInset.top = 16
-        return tableView
+        let localView = UITableView.groupedList
+        localView.contentInset.top = 16
+//        localView.register(GroupedListTableViewCell.self)
+        return localView
     }()
 
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
@@ -87,7 +87,7 @@ public final class RecentActivityListViewController: BaseViewController {
         return localController.view
     }()
 
-    public var trackingName: String { "Pages you've visited" }
+    var trackingName: String { "Pages you've visited" }
 
     private let viewModel: RecentActivityListViewModel
     private var tabBarHeight: CGFloat {
@@ -96,7 +96,7 @@ public final class RecentActivityListViewController: BaseViewController {
     private var toolbarHeightConstraint: NSLayoutConstraint?
     private var isScrolled = false
 
-    public init(viewModel: RecentActivityListViewModel) {
+    init(viewModel: RecentActivityListViewModel) {
         self.viewModel = viewModel
         super.init(analyticsService: viewModel.analyticsService)
         navigationItem.largeTitleDisplayMode = .never
@@ -106,7 +106,7 @@ public final class RecentActivityListViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
@@ -116,12 +116,12 @@ public final class RecentActivityListViewController: BaseViewController {
         reloadSnapshot()
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    override public func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setEditing(false, animated: false)
     }
@@ -338,7 +338,7 @@ public final class RecentActivityListViewController: BaseViewController {
         editingToolbar.setItems(items, animated: animated)
     }
 
-    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         toolbarHeightConstraint?.constant = tabBarHeight
         informationView.invalidateIntrinsicContentSize()
@@ -346,14 +346,14 @@ public final class RecentActivityListViewController: BaseViewController {
 }
 
 extension RecentActivityListViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         let localLabel = GroupedListSectionHeaderView()
         localLabel.text = viewModel.structure.sections[section].title
         return localLabel
     }
 
-    public func tableView(_ tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
         guard let item = dataSource.itemIdentifier(for: indexPath)
@@ -367,7 +367,7 @@ extension RecentActivityListViewController: UITableViewDelegate {
         configureToolbarItems()
     }
 
-    public func tableView(_ tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                    didDeselectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
         guard let item = dataSource.itemIdentifier(for: indexPath)
@@ -379,8 +379,7 @@ extension RecentActivityListViewController: UITableViewDelegate {
 
 extension RecentActivityListViewController: TrackableScreen {
     @MainActor
-    public var trackingTitle: String? {
+    var trackingTitle: String? {
         viewModel.pageTitle
     }
 }
-// swiftlint:enable file_length

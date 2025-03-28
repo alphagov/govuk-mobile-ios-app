@@ -543,6 +543,62 @@ class SettingsViewModelTests {
         }
         #expect(result == "Continue")
     }
+
+    @Test
+    func updateNotificationPermissionState_whenUpdateNotificationPermissionStateSetToAuthorized_returnsAuthorized() async  {
+
+        let result = await withCheckedContinuation { continuation in
+            let mockNotificationService = MockNotificationService()
+            let expectedPermission: NotificationPermissionState = .denied
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: MockURLOpener(),
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    continuation.resume(returning: sut.notificationsPermissionState)
+                }.store(in: &cancellables)
+            mockNotificationService._stubbededPermissionState = .authorized
+            sut.updateNotificationPermissionState()
+        }
+        #expect(result == .authorized)
+    }
+
+    @Test
+    func updateNotificationPermissionState_whenUpdateNotificationPermissionStateSetToDenied_returnsDenied() async  {
+        let result = await withCheckedContinuation { continuation in
+            let mockNotificationService = MockNotificationService()
+            let expectedPermission: NotificationPermissionState = .authorized
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: MockURLOpener(),
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    continuation.resume(returning: sut.notificationsPermissionState)
+                }.store(in: &cancellables)
+            mockNotificationService._stubbededPermissionState = .denied
+            sut.updateNotificationPermissionState()
+        }
+        #expect(result == .authorized)
+    }
+
 }
 
 class SettingsViewModelTester: ObservableObject {

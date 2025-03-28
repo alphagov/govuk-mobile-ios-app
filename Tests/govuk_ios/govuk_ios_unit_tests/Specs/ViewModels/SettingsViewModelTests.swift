@@ -598,7 +598,6 @@ class SettingsViewModelTests {
         }
         #expect(result == .authorized)
     }
-
 }
 
 class SettingsViewModelTester: ObservableObject {

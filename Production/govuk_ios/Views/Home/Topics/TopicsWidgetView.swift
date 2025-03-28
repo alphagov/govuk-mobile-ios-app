@@ -125,7 +125,7 @@ class TopicsWidgetView: UIView {
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
-            if self.viewModel.initialLoadComplete == false {
+            if !self.viewModel.initialLoadComplete {
                 self.viewModel.initialLoadComplete = true
                 self.viewModel.trackECommerce()
             }

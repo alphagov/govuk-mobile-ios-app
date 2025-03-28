@@ -497,7 +497,6 @@ class SettingsViewModelTests {
                 notificationService: mockNotificationService,
                 notificationCenter: .init()
              )
-
             sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
                 .sink(

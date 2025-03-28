@@ -357,7 +357,9 @@ class SettingsViewModelTests {
                 object: nil
             )
         }
-        #expect(result.notificationSettingsAlertBody == String.settings.localized("settingsNotificationsAlertBodyDisabled"))
+        #expect(result.notificationSettingsAlertBody == String.settings.localized(
+            "settingsNotificationsAlertBodyDisabled")
+        )
     }
 
     @Test
@@ -423,7 +425,9 @@ class SettingsViewModelTests {
                 object: nil
             )
         }
-        #expect(result.notificationSettingsAlertBody == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
+        #expect(result.notificationSettingsAlertBody == String.settings.localized(
+            "settingsNotificationsAlertBodyEnabled")
+        )
     }
 
     @Test
@@ -546,7 +550,6 @@ class SettingsViewModelTests {
 
     @Test
     func updateNotificationPermissionState_whenUpdateNotificationPermissionStateSetToAuthorized_returnsAuthorized() async  {
-
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
             let expectedPermission: NotificationPermissionState = .denied

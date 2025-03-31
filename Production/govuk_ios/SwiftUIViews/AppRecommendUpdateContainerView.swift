@@ -47,6 +47,10 @@ struct AppRecommendUpdateContainerView: View {
 }
 
 #Preview {
-    let viewModel = AppRecommendUpdateContainerViewModel(dismissAction: {})
+    let viewModel = AppRecommendUpdateContainerViewModel(
+        dismissAction: {
+            // Do nothing
+        }
+    )
     return AppRecommendUpdateContainerView(viewModel: viewModel)
 }

@@ -74,7 +74,9 @@ struct AnalyticsConsentContainerView: View {
 #Preview {
     let viewModel = AnalyticsConsentContainerViewModel(
         analyticsService: nil,
-        dismissAction: {}
+        dismissAction: {
+            // Do nothing
+        }
     )
     return AnalyticsConsentContainerView(viewModel: viewModel)
 }

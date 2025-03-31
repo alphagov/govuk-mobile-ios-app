@@ -35,7 +35,7 @@ struct GroupedListSectionView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .strokeBorder(
-                        Color((UIColor.govUK.strokes.listDivider)),
+                        Color(UIColor.govUK.strokes.listDivider),
                         lineWidth: SinglePixelLineHelper.pixelSize,
                         antialiased: true
                     )

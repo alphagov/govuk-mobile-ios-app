@@ -81,9 +81,9 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func notificationPrompt(analyticsService: AnalyticsServiceInterface,
-                            notificationService: NotificationServiceInterface,
-                            completeAction: @escaping () -> Void) -> UIViewController {
+    func notificationSettings(analyticsService: AnalyticsServiceInterface,
+                              notificationService: NotificationServiceInterface,
+                              completeAction: @escaping () -> Void) -> UIViewController {
         let viewModel = NotificationSettingsViewModel(
             notificationService: notificationService,
             analyticsService: analyticsService,

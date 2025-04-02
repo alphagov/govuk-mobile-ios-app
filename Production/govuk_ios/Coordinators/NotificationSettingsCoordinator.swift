@@ -22,7 +22,7 @@ class NotificationSettingsCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.notificationPrompt(
+        let viewController = viewControllerBuilder.notificationSettings(
             analyticsService: analyticsService,
             notificationService: notificationService,
             completeAction: completeAction

@@ -12,10 +12,7 @@ struct Container_APIClientTests {
         Container.shared.reset()
         Container.shared.urlSession.register { URLSession.mock }
         let sut = Container.shared.searchAPIClient()
-
-        #expect(sut != nil)
         return await withCheckedContinuation { continuation in
-
             MockURLProtocol.requestHandlers["https://search.service.gov.uk/v0_1/search.json"] = { request in
                 let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)
                 let countQuery = components?.queryItems?.first(where: { $0.name == "count" })

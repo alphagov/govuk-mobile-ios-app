@@ -33,8 +33,8 @@ class NotificationService: NotificationServiceInterface {
 
     var authorizationStatus: NotificationPermissionState {
         get async {
-            let authorizationStatus = await notificationCenter.authorizationStatus
-            switch authorizationStatus {
+            let localStatus = await notificationCenter.authorizationStatus
+            switch localStatus {
             case .authorized:
                 return .authorized
             case .denied:

@@ -72,7 +72,7 @@ struct SettingsCoordinatorTests {
             notificationService: MockNotificationService()
         )
         subject.start(url: nil)
-        mockViewControllerBuilder._receivedSettingsViewModel?.notificationsAction()
+        mockViewControllerBuilder._receivedSettingsViewModel?.notificationsAction?()
         #expect(mockNotificationCoordinator._startCalled)
     }
 

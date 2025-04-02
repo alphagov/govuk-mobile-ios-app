@@ -144,7 +144,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 
 class GroupedListViewModel: SettingsViewModelInterface {
     func updateNotificationPermissionState() {}
-    var redirectToNotificationOnboarding: () -> Void = {}
+    var notificationsAction: () -> Void = {}
     var displayNotificationSettingsAlert: Bool = false
     func handleNotificationAlertAction() { }
     var notificationSettingsAlertTitle: String = "Turn on notifications"

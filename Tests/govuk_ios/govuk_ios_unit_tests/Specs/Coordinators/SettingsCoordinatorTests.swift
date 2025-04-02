@@ -50,17 +50,17 @@ struct SettingsCoordinatorTests {
         )
         subject.start(url: nil)
 
-        #expect(mockViewControllerBuilder._receivedSettingsViewModel?.redirectToNotificationOnboarding != nil)
+        #expect(mockViewControllerBuilder._receivedSettingsViewModel?.notificationsAction != nil)
     }
 
     @Test
-    func redirectToNotificationOnboarding_startsNotificationOnboarding() {
+    func selectingNotifications_startsNotificationOnboarding() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
-        let mockNotificationOnboardingCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedNotificaitonOnboardingCoordinator = mockNotificationOnboardingCoordinator
+        let mockNotificationCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedNotificaitonSettingsCoordinator = mockNotificationCoordinator
         let navigationController = UINavigationController()
         let subject = SettingsCoordinator(
             navigationController: navigationController,
@@ -72,8 +72,8 @@ struct SettingsCoordinatorTests {
             notificationService: MockNotificationService()
         )
         subject.start(url: nil)
-        mockViewControllerBuilder._receivedSettingsViewModel?.redirectToNotificationOnboarding()
-        #expect(mockNotificationOnboardingCoordinator._startCalled)
+        mockViewControllerBuilder._receivedSettingsViewModel?.notificationsAction()
+        #expect(mockNotificationCoordinator._startCalled)
     }
 
     @Test

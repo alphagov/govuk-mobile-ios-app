@@ -20,7 +20,7 @@ class NotificationServiceTests {
                 }
             )
         }
-        let slides = try #require(try result.get())
+        let slides = try result.get()
         #expect(slides.count == 1)
     }
 

@@ -31,8 +31,8 @@ class SettingsCoordinator: TabItemCoordinator {
             notificationCenter: .default
         )
         super.init(navigationController: navigationController)
-        self.settingsViewModel.redirectToNotificationOnboarding = { [weak self] in
-            self?.startNotificationsOnboardingCoordinator()
+        self.settingsViewModel.notificationsAction = { [weak self] in
+            self?.startNotificationsSettings()
         }
     }
 
@@ -54,8 +54,8 @@ class SettingsCoordinator: TabItemCoordinator {
         settingsViewModel.scrollToTop = true
     }
 
-    private func startNotificationsOnboardingCoordinator() {
-        let coordinator = coordinatorBuilder.notificationPrompt(
+    private func startNotificationsSettings() {
+        let coordinator = coordinatorBuilder.notificationSettings(
             navigationController: root,
             notificationService: notificationService,
             completionAction: { [weak self] in

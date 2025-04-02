@@ -11,7 +11,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationSettingsAlertTitle: String { get }
     var notificationSettingsAlertBody: String { get }
     var notificationAlertButtonTitle: String { get }
-    var redirectToNotificationOnboarding: () -> Void { get set }
+    var notificationsAction: () -> Void { get set }
     func updateNotificationPermissionState()
 }
 
@@ -28,7 +28,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     = .notDetermined
     private let notificationService: NotificationServiceInterface
     private let notificationCenter: NotificationCenter
-    var redirectToNotificationOnboarding: () -> Void = {}
+    var notificationsAction: () -> Void = {}
     var notificationAlertButtonTitle: String = String.settings.localized(
         "settingsNotificationAlertPrimaryButtonTitle"
     )
@@ -243,7 +243,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                         String.settings.localized(rowTitle),
                         external: false
                     )
-                    self?.redirectToNotificationOnboarding()
+                    self?.notificationsAction()
                 } else {
                     self?.displayNotificationSettingsAlert.toggle()
                 }

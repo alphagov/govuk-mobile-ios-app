@@ -126,4 +126,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _receivedNotificationOnboardingCompletion = completion
         return _stubbedNotificaitonOnboardingCoordinator ?? MockBaseCoordinator()
     }
+
+    var _stubbedNotificaitonSettingsCoordinator: MockBaseCoordinator?
+    override func notificationSettings(navigationController: UINavigationController,
+                                       notificationService: any NotificationServiceInterface,
+                                       completionAction: @escaping () -> Void) -> BaseCoordinator {
+        return _stubbedNotificaitonSettingsCoordinator ?? MockBaseCoordinator()
+    }
 }

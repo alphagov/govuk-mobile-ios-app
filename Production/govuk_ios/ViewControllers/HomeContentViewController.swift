@@ -56,7 +56,7 @@ class HomeContentViewController: BaseViewController,
         scrollView.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        addWidgets()
+        reloadWidgets()
     }
 
     private func configureConstraints() {
@@ -74,7 +74,7 @@ class HomeContentViewController: BaseViewController,
         ])
     }
 
-    private func addWidgets() {
+    private func reloadWidgets() {
         Task {
             let widgets = await viewModel.widgets
             DispatchQueue.main.async {

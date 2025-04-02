@@ -8,6 +8,7 @@ class SettingsCoordinator: TabItemCoordinator {
     private var settingsViewModel: any SettingsViewModelInterface
     private let coordinatorBuilder: CoordinatorBuilder
     private let analyticsService: AnalyticsServiceInterface
+    private let notificationService: NotificationServiceInterface
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
@@ -20,6 +21,7 @@ class SettingsCoordinator: TabItemCoordinator {
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
+        self.notificationService = notificationService
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,
@@ -53,9 +55,10 @@ class SettingsCoordinator: TabItemCoordinator {
     }
 
     private func startNotificationsOnboardingCoordinator() {
-        let coordinator = coordinatorBuilder.notificationOnboarding(
+        let coordinator = coordinatorBuilder.notificationPrompt(
             navigationController: root,
-            completion: { [weak self] in
+            notificationService: notificationService,
+            completionAction: { [weak self] in
                 self?.start(url: nil)
             }
         )

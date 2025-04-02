@@ -87,6 +87,18 @@ class CoordinatorBuilder {
         )
     }
 
+    func notificationPrompt(navigationController: UINavigationController,
+                            notificationService: NotificationServiceInterface,
+                            completionAction: @escaping() -> Void) -> BaseCoordinator {
+        NotificationPromptCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            notificationService: container.notificationService.resolve(),
+            completeAction: completionAction
+        )
+    }
+
     func analyticsConsent(navigationController: UINavigationController,
                           dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AnalyticsConsentCoordinator(

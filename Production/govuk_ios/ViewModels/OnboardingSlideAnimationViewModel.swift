@@ -15,7 +15,7 @@ class OnboardingSlideAnimationViewModel: OnboardingSlideViewModelInterface {
     let secondaryButtonTitle: String
     let secondaryButtonAccessibilityHint: String?
 
-    private lazy var lottieView = LottieView(animation: .named(slide.image))
+    lazy var lottieView = LottieView(animation: .named(slide.image))
         .resizable()
     @Published private(set) var contentView: AnyView = AnyView(EmptyView())
     var contentViewUpdatePublisher: AnyPublisher<AnyView, Never> {

@@ -81,6 +81,22 @@ class ViewControllerBuilder {
     }
 
     @MainActor
+    func notificationPrompt(analyticsService: AnalyticsServiceInterface,
+                            notificationService: NotificationServiceInterface,
+                            completeAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = NotificationPromptViewModel(
+            notificationService: notificationService,
+            analyticsService: analyticsService,
+            completeAction: completeAction
+        )
+        let view = NotificationPromptView(
+            viewModel: viewModel,
+            analyticsService: analyticsService
+        )
+        return UIHostingController(rootView: view)
+    }
+
+    @MainActor
     // swiftlint:disable:next function_parameter_count
     func topicDetail(topic: DisplayableTopic,
                      topicsService: TopicsServiceInterface,

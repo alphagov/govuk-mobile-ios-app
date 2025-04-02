@@ -93,7 +93,10 @@ class ViewControllerBuilder {
             viewModel: viewModel,
             analyticsService: analyticsService
         )
-        return UIHostingController(rootView: view)
+        let viewController = HostingViewController(rootView: view)
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
     }
 
     @MainActor
@@ -119,8 +122,7 @@ class ViewControllerBuilder {
         let viewController = HostingViewController(
             rootView: view
         )
-        viewController.navigationItem.largeTitleDisplayMode =
-        UINavigationItem.LargeTitleDisplayMode.never
+        viewController.navigationItem.largeTitleDisplayMode = .never
         viewController.navigationItem.backButtonTitle = viewModel.title
         return viewController
     }

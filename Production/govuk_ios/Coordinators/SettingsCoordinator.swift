@@ -59,7 +59,7 @@ class SettingsCoordinator: TabItemCoordinator {
             navigationController: root,
             notificationService: notificationService,
             completionAction: { [weak self] in
-                self?.start(url: nil)
+                self?.root.popToRootViewController(animated: true)
             }
         )
         start(coordinator)

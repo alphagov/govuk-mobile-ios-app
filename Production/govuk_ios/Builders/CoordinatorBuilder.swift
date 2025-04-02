@@ -89,7 +89,7 @@ class CoordinatorBuilder {
 
     func notificationPrompt(navigationController: UINavigationController,
                             notificationService: NotificationServiceInterface,
-                            completionAction: @escaping() -> Void) -> BaseCoordinator {
+                            completionAction: @escaping () -> Void) -> BaseCoordinator {
         NotificationPromptCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),

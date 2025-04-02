@@ -57,7 +57,6 @@ class SettingsCoordinator: TabItemCoordinator {
     private func startNotificationsSettings() {
         let coordinator = coordinatorBuilder.notificationSettings(
             navigationController: root,
-            notificationService: notificationService,
             completionAction: { [weak self] in
                 self?.root.popToRootViewController(animated: true)
             }

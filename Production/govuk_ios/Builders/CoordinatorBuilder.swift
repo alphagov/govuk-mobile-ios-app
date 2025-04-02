@@ -180,7 +180,6 @@ class CoordinatorBuilder {
     }
 
     func notificationSettings(navigationController: UINavigationController,
-                              notificationService: NotificationServiceInterface,
                               completionAction: @escaping () -> Void) -> BaseCoordinator {
         NotificationSettingsCoordinator(
             navigationController: navigationController,

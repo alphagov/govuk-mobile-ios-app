@@ -141,7 +141,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func test_notificationPermissionState_whenNotificationsPermissionStateisAuthorized_returnsCorrectState() async {
+    func test_notificationPermissionState_notificationsPermissionStateAuthorized_returnsCorrectState() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
@@ -167,7 +167,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func notificationPermissionState_whenNotificationsPermissionStateisDenied_returnsCorrectState() async {
+    func notificationPermissionState_notificationsPermissionStateDenied_returnsCorrectState() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
@@ -193,7 +193,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func notificationPermissionState_whenNotificationsPermissionStateisNotdetermined_returnsCorrectState() async {
+    func notificationPermissionState_notificationsPermissionStateNotDetermined_returnsCorrectState() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
@@ -220,7 +220,7 @@ class SettingsViewModelTests {
 
 
     @Test
-    func notificationSettingsAlertTitle_whenNotificationsPermissionStateisAuthorized_returnsCorrectText() async {
+    func notificationSettingsAlertTitle_notificationsPermissionStateisAuthorized_returnsCorrectText() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
@@ -246,7 +246,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func notificationSettingsAlertTitle_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
+    func notificationSettingsAlertTitle_notificationsPermissionStateisDenied_returnsCorrectText() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
@@ -272,7 +272,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func notificationSettingsAlertBody_whenNotificationsPermissionStateisDenied_returnsCorrectText() async {
+    func notificationSettingsAlertBody_notificationsPermissionStateisDenied_returnsCorrectText() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()
@@ -298,7 +298,7 @@ class SettingsViewModelTests {
     }
 
     @Test
-    func notificationSettingsAlertBody_whenNotificationsPermissionStateisAuthorised_returnsCorrectText() async {
+    func notificationSettingsAlertBody_notificationsPermissionStateisAuthorised_returnsCorrectText() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockNotificationService = MockNotificationService()

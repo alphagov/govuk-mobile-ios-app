@@ -3,11 +3,11 @@ import SwiftUI
 import UIComponents
 import GOVKit
 
-struct NotificationPromptView: View {
-    @StateObject private var viewModel: NotificationPromptViewModel
+struct NotificationSettingsView: View {
+    @StateObject private var viewModel: NotificationSettingsViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    init(viewModel: NotificationPromptViewModel,
+    init(viewModel: NotificationSettingsViewModel,
          analyticsService: AnalyticsServiceInterface) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }

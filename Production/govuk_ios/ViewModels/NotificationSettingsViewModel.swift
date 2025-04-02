@@ -3,7 +3,7 @@ import Onboarding
 import GOVKit
 import UIComponents
 
-final class NotificationPromptViewModel: ObservableObject {
+final class NotificationSettingsViewModel: ObservableObject {
     private let notificationService: NotificationServiceInterface
     private let completeAction: () -> Void
     private let primaryButtonTitle = String.notifications.localized("onboardingAcceptButtonTitle")

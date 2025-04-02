@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 import GOVKit
 
-class NotificationPromptCoordinator: BaseCoordinator {
+class NotificationSettingsCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let notificationService: NotificationServiceInterface

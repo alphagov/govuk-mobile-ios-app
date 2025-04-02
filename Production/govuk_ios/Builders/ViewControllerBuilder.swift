@@ -84,12 +84,12 @@ class ViewControllerBuilder {
     func notificationPrompt(analyticsService: AnalyticsServiceInterface,
                             notificationService: NotificationServiceInterface,
                             completeAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = NotificationPromptViewModel(
+        let viewModel = NotificationSettingsViewModel(
             notificationService: notificationService,
             analyticsService: analyticsService,
             completeAction: completeAction
         )
-        let view = NotificationPromptView(
+        let view = NotificationSettingsView(
             viewModel: viewModel,
             analyticsService: analyticsService
         )

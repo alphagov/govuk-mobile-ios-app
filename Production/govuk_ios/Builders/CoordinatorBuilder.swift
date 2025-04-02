@@ -182,7 +182,7 @@ class CoordinatorBuilder {
     func notificationSettings(navigationController: UINavigationController,
                               notificationService: NotificationServiceInterface,
                               completionAction: @escaping () -> Void) -> BaseCoordinator {
-        NotificationPromptCoordinator(
+        NotificationSettingsCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),

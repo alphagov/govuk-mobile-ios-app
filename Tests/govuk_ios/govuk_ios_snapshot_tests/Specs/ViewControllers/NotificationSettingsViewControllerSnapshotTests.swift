@@ -10,7 +10,6 @@ import Onboarding
 
 @MainActor
 class NotificationSettingsViewControllerSnapshotTests: SnapshotTestCase {
-    var cancellables = Set<AnyCancellable>()
     func test_loadInNavigationController_light_rendersCorrectly() {
         let mockNotificationService = MockNotificationService()
 
@@ -26,31 +25,10 @@ class NotificationSettingsViewControllerSnapshotTests: SnapshotTestCase {
         let hostingViewController = HostingViewController(
             rootView: subject
         )
-        let expectation = expectation(description: "sdf")
-        viewModel.$state
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] value in
-            guard case .loaded = value else { return }
-            self?.RecordSnapshotInNavigationController(
-                viewController: hostingViewController,
-                mode: .light,
-                prefersLargeTitles: false
-            )
-            expectation.fulfill()
-        }.store(in: &cancellables)
-        mockNotificationService._receivedFetchSlidesCompletion?(
-            .success(
-                [
-                    OnboardingSlideImageViewModel(
-                        slide: .init(image: "", title: "testwerwer", body: "dsvsdfds", name: "sdfsdf"),
-                        primaryButtonTitle: "Test2234",
-                        primaryButtonAccessibilityHint: nil,
-                        secondaryButtonTitle: "",
-                        secondaryButtonAccessibilityHint: nil
-                    )
-                ]
-            )
+        RecordSnapshotInNavigationController(
+            viewController: hostingViewController,
+            mode: .light,
+            prefersLargeTitles: false
         )
-        wait(for: [expectation])
     }
 }

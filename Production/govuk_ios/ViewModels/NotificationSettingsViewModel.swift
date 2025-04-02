@@ -5,17 +5,12 @@ import UIComponents
 
 final class NotificationSettingsViewModel: ObservableObject {
     private let notificationService: NotificationServiceInterface
-    private let completeAction: () -> Void
-    private let primaryButtonTitle = String.notifications.localized("onboardingAcceptButtonTitle")
     private let analyticsService: AnalyticsServiceInterface
-    let title = String.notifications.localized("onboardingTitle")
-    @Published var state: State = .loading
-    let primarybuttonAccessibilityHint = ""
+    private let completeAction: () -> Void
 
-    enum State {
-        case loading
-        case loaded(OnboardingSlideAnimationViewModel)
-    }
+    let slide: OnboardingSlideAnimationViewModel = Onboarding.notificationSlide
+    var primaryButtonTitle: String { slide.primaryButtonTitle }
+    var primarybuttonAccessibilityHint: String? { slide.primaryButtonAccessibilityHint }
 
     init(notificationService: NotificationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -23,38 +18,12 @@ final class NotificationSettingsViewModel: ObservableObject {
         self.analyticsService = analyticsService
         self.completeAction = completeAction
         self.notificationService = notificationService
-        fetchSlideInformation()
     }
 
     private func requestNotificationPermission() {
         notificationService.requestPermissions(
-            completion: { [weak self] in
-                self?.completeAction()
-            }
+            completion: completeAction
         )
-    }
-
-    private func fetchSlideInformation() {
-        notificationService.fetchSlides { [weak self] slideInformation in
-            switch slideInformation {
-            case .success(let slides):
-                guard let slide = slides.first else {
-                    self?.completeAction()
-                    return
-                }
-                guard let animationSlide = slide as? OnboardingSlideAnimationViewModel
-                else {
-                    self?.completeAction()
-                    return
-                }
-                DispatchQueue.main.async {
-                    self?.state = .loaded(animationSlide)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                self?.completeAction()
-            }
-        }
     }
 
     func trackScreen(screen: TrackableScreen) {
@@ -62,7 +31,7 @@ final class NotificationSettingsViewModel: ObservableObject {
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        return .init(
+        .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 self?.requestNotificationPermission()

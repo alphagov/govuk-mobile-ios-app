@@ -37,8 +37,9 @@ class MockNotificationService: NotificationServiceInterface {
         _stubbedShouldRequestPermission
     }
 
+    var _receivedFetchSlidesCompletion: ((Result<[any OnboardingSlideViewModelInterface], any Error>) -> Void)?
     func fetchSlides(completion: @escaping (Result<[any OnboardingSlideViewModelInterface], any Error>) -> Void) {
-
+        _receivedFetchSlidesCompletion = completion
     }
 
     var _stubbedIsFetureEnabled: Bool = true

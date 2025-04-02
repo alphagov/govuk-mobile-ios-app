@@ -25,7 +25,7 @@ class NotificationSettingsViewControllerSnapshotTests: SnapshotTestCase {
         let hostingViewController = HostingViewController(
             rootView: subject
         )
-        RecordSnapshotInNavigationController(
+        VerifySnapshotInNavigationController(
             viewController: hostingViewController,
             mode: .light,
             prefersLargeTitles: false

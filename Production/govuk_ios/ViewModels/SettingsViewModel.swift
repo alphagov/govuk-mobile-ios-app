@@ -77,9 +77,9 @@ class SettingsViewModel: SettingsViewModelInterface {
     @objc
      func updateNotificationPermissionState() {
          Task {
-             let authorizationStatus = await notificationService.authorizationStatus
+             let permissionState = await notificationService.permissionState
              DispatchQueue.main.async {
-                 self.notificationsPermissionState = authorizationStatus
+                 self.notificationsPermissionState = permissionState
              }
          }
     }

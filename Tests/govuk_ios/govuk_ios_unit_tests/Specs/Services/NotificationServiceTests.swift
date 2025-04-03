@@ -70,7 +70,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        #expect(await sut.authorizationStatus == .authorized)
+        #expect(await sut.permissionState == .authorized)
     }
 
     @Test
@@ -82,7 +82,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        #expect(await sut.authorizationStatus == .denied)
+        #expect(await sut.permissionState == .denied)
     }
 
     @Test
@@ -94,7 +94,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        #expect(await sut.authorizationStatus == .notDetermined)
+        #expect(await sut.permissionState == .notDetermined)
     }
 
     @Test
@@ -106,7 +106,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        #expect(await sut.authorizationStatus == .notDetermined)
+        #expect(await sut.permissionState == .notDetermined)
     }
 
     @Test
@@ -118,6 +118,6 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter
         )
-        #expect(await sut.authorizationStatus == .notDetermined)
+        #expect(await sut.permissionState == .notDetermined)
     }
 }

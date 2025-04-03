@@ -8,7 +8,7 @@ import Onboarding
 class MockNotificationService: NotificationServiceInterface {
 
     var _stubbededPermissionState: NotificationPermissionState = .notDetermined
-    var authorizationStatus: NotificationPermissionState {
+    var permissionState: NotificationPermissionState {
         get async {
             _stubbededPermissionState
         }

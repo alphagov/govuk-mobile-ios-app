@@ -60,7 +60,7 @@ struct SettingsCoordinatorTests {
         mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNotificationCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedNotificaitonSettingsCoordinator = mockNotificationCoordinator
+        mockCoordinatorBuilder._stubbedNotificationSettingsCoordinator = mockNotificationCoordinator
         let navigationController = UINavigationController()
         let subject = SettingsCoordinator(
             navigationController: navigationController,
@@ -74,6 +74,30 @@ struct SettingsCoordinatorTests {
         subject.start(url: nil)
         mockViewControllerBuilder._receivedSettingsViewModel?.notificationsAction?()
         #expect(mockNotificationCoordinator._startCalled)
+    }
+
+    @Test
+    func completingNotifications_popsViewController() {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNotificationCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedNotificationSettingsCoordinator = mockNotificationCoordinator
+        let mockNavigationController = MockNavigationController()
+        let subject = SettingsCoordinator(
+            navigationController: mockNavigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: []),
+            analyticsService: MockAnalyticsService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: MockNotificationService()
+        )
+        subject.start(url: nil)
+        mockViewControllerBuilder._receivedSettingsViewModel?.notificationsAction?()
+        mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
+        #expect(mockNavigationController._popToRootCalled)
     }
 
     @Test

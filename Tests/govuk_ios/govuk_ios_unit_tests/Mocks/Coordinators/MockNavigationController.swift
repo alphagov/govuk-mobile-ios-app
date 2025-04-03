@@ -34,6 +34,12 @@ class MockNavigationController: UINavigationController {
         return super.popViewController(animated: animated)
     }
 
+    var _popToRootCalled: Bool = false
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        _popToRootCalled = true
+        return []
+    }
+
     var _pushedViewController: UIViewController?
     override func pushViewController(_ viewController: UIViewController, 
                                      animated: Bool) {

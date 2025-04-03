@@ -59,29 +59,25 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     var notificationSettingsAlertTitle: String {
-        if notificationsPermissionState == .authorized {
-            return String.settings.localized("notificationsAlertTitleEnabled")
-        } else {
-            return String.settings.localized("notificationsAlertTitleDisabled")
-        }
+        notificationsPermissionState == .authorized ?
+        String.settings.localized("notificationsAlertTitleEnabled") :
+        String.settings.localized("notificationsAlertTitleDisabled")
     }
 
     var notificationSettingsAlertBody: String {
-        if notificationsPermissionState == .authorized {
-            return String.settings.localized("notificationsAlertBodyEnabled")
-        } else {
-            return String.settings.localized("notificationsAlertBodyDisabled")
-        }
+        notificationsPermissionState == .authorized ?
+        String.settings.localized("notificationsAlertBodyEnabled") :
+        String.settings.localized("notificationsAlertBodyDisabled")
     }
 
     @objc
-     func updateNotificationPermissionState() {
-         Task {
-             let permissionState = await notificationService.permissionState
-             DispatchQueue.main.async {
-                 self.notificationsPermissionState = permissionState
-             }
-         }
+    func updateNotificationPermissionState() {
+        Task {
+            let permissionState = await notificationService.permissionState
+            DispatchQueue.main.async {
+                self.notificationsPermissionState = permissionState
+            }
+        }
     }
 
     func handleNotificationAlertAction() {
@@ -108,73 +104,81 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     private func getGroupedList() -> [GroupedListSection] {
-        var rows: [GroupedListSection] = []
-        rows.append(GroupedListSection(
+        return [
+            aboutSection,
+            notificationSection,
+            privacyTopSection,
+            privacyBottomSection
+        ].compactMap { $0 }
+    }
+
+    private var aboutSection: GroupedListSection {
+        GroupedListSection(
             heading: GroupedListHeader(
                 title: String.settings.localized("aboutTheAppHeading"),
                 icon: nil
             ),
-            rows: [helpAndFeedbackRow(),
-                   InformationRow(
+            rows: [
+                helpAndFeedbackRow(),
+                InformationRow(
                     id: "settings.version.row",
                     title: String.settings.localized("appVersionTitle"),
                     body: nil,
                     detail: versionProvider.fullBuildNumber ?? "-"
-                   )
-                  ],
-            footer: nil)
-        )
-        if notificationService.isFeatureEnabled {
-            rows.append(
-                GroupedListSection(
-                    heading: GroupedListHeader(
-                        title: String.settings.localized("notificationsTitle"),
-                        icon: nil
-                    ),
-                    rows: [notificationsSettingsRow()],
-                    footer: nil)
-            )
-        }
-        rows.append(
-            GroupedListSection(
-                heading: GroupedListHeader(
-                    title: String.settings.localized("privacyAndLegalHeading"),
-                    icon: nil
-                ),
-                rows: [getSettingsRows()],
-                footer: String.settings.localized("appUsageFooter")
-            )
-        )
-        rows.append(
-            GroupedListSection(
-                heading: nil,
-                rows: getPrivacyAndLegalRows(),
-                footer: nil )
-        )
-        return rows
-    }
-
-    private func getSettingsRows() -> GroupedListRow {
-        let settingsPrivacyRow = ToggleRow(
-            id: "settings.privacy.row",
-            title: String.settings.localized("appUsageTitle"),
-            isOn: hasAcceptedAnalytics,
-            action: { [weak self] isOn in
-                self?.analyticsService.setAcceptedAnalytics(
-                    accepted: isOn
                 )
-            }
+            ],
+            footer: nil
         )
-        return settingsPrivacyRow
     }
 
-    private func getPrivacyAndLegalRows() -> [GroupedListRow] {
-        var rows: [GroupedListRow] = []
-        rows.append(privacyPolicyRow())
-        rows.append(accessibilityStatementRow())
-        rows.append(openSourceLicenceRow())
-        rows.append(termsAndConditionsRow())
-        return rows
+    private var notificationSection: GroupedListSection? {
+        guard notificationService.isFeatureEnabled
+        else { return nil }
+        return GroupedListSection(
+            heading: GroupedListHeader(
+                title: String.settings.localized("notificationsTitle"),
+                icon: nil
+            ),
+            rows: [
+                notificationsSettingsRow()
+            ],
+            footer: nil
+        )
+    }
+
+    private var privacyTopSection: GroupedListSection {
+        GroupedListSection(
+            heading: GroupedListHeader(
+                title: String.settings.localized("privacyAndLegalHeading"),
+                icon: nil
+            ),
+            rows: [
+                ToggleRow(
+                    id: "settings.privacy.row",
+                    title: String.settings.localized("appUsageTitle"),
+                    isOn: hasAcceptedAnalytics,
+                    action: { [weak self] isOn in
+                        self?.analyticsService.setAcceptedAnalytics(
+                            accepted: isOn
+                        )
+                    }
+                )
+            ],
+            footer: String.settings.localized("appUsageFooter")
+        )
+    }
+
+    private var privacyBottomSection: GroupedListSection {
+        GroupedListSection(
+            heading: nil,
+            rows: [
+                privacyPolicyRow(),
+                accessibilityStatementRow(),
+                openSourceLicenceRow(),
+                termsAndConditionsRow()
+            ],
+            footer: nil
+        )
     }
 
     private func privacyPolicyRow() -> GroupedListRow {

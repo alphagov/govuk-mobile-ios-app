@@ -14,8 +14,8 @@ struct GroupedListRowView: View {
                 InformationRowView(row: row)
             case let row as ToggleRow:
                 ToggleRowView(row: row)
-            case let row as NotificationSettingsRow:
-                NotificationsRowView(row: row)
+            case let row as DetailRow:
+                DetailRowView(row: row)
             default:
                 EmptyView()
             }
@@ -74,8 +74,8 @@ struct LinkRowView: View {
     }
 }
 
-struct NotificationsRowView: View {
-    var row: NotificationSettingsRow
+struct DetailRowView: View {
+    var row: DetailRow
     
     var body: some View {
         Button {

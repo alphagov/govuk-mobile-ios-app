@@ -229,7 +229,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     private func notificationsSettingsRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("settingsNotificationsTitle")
         let isAuthorized = notificationsPermissionState == .authorized
-        return NotificationSettingsRow(
+        return DetailRow(
             id: "settings.notifications.row",
             title: rowTitle,
             body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),

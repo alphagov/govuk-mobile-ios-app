@@ -59,8 +59,8 @@ public struct LinkRow: GroupedListRow,
     }
 }
 
-public class NotificationSettingsRow: GroupedListRow,
-                                      Identifiable {
+public class DetailRow: GroupedListRow,
+                        Identifiable {
     public let id: String
     public let title: String
     public let body: String

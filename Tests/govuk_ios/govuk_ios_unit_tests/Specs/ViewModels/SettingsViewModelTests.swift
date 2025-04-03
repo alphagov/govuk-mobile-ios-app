@@ -58,7 +58,7 @@ class SettingsViewModelTests {
 
         let notificationsSection = sut.listContent[1]
         #expect(notificationsSection.heading?.title == "Notifications")
-        let notificationRow = try #require(notificationsSection.rows.first as? NotificationSettingsRow)
+        let notificationRow = try #require(notificationsSection.rows.first as? DetailRow)
         #expect(notificationRow.title == "Notifications")
 
         let privacyAndLegalSection = sut.listContent[3]

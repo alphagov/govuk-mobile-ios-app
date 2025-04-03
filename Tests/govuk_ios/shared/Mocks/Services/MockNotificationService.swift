@@ -19,17 +19,13 @@ class MockNotificationService: NotificationServiceInterface {
         _setRedirectedToNotificationsOnboardinCalled = redirected
     }
 
-    var _stubbedRedirectedToNotifcationsOnboarding: Bool = false
-    var redirectedToNotifcationsOnboarding: Bool {
-        _stubbedRedirectedToNotifcationsOnboarding
-    }
-
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
 
     }
 
+    var _receivedRequestPermissionsCompletion: (() -> Void)?
     func requestPermissions(completion: (() -> Void)?) {
-        completion?()
+        _receivedRequestPermissionsCompletion = completion
     }
 
     var _stubbedShouldRequestPermission: Bool = true

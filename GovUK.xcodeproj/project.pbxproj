@@ -833,6 +833,7 @@
 				3D3378152CAAC113004BF83F /* AppUnavailableContainerViewModel.swift */,
 				168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */,
 				5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */,
+				4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */,
 				5D0F199D2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift */,
 				5DD4CB192D95491E00459FB5 /* RecentActivityListViewModel.swift */,
 				168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */,
@@ -842,7 +843,6 @@
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
 				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
-				4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1310,9 +1310,9 @@
 				5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */,
 				D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */,
 				D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */,
-				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
-				4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */,
 				D0E7923A2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift */,
+				4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */,
+				D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";

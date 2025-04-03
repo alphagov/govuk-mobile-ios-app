@@ -67,6 +67,17 @@
         }
       }
     },
+    "notificationsSettingsAccessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select to change notification permissions"
+          }
+        }
+      }
+    },
     "openSourceLicenceRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {

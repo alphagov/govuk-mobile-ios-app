@@ -58,7 +58,7 @@ class NotificationService: NotificationServiceInterface {
     }
 
     var isFeatureEnabled: Bool {
-        false
+        true
     }
 
     func requestPermissions(completion: (() -> Void)?) {

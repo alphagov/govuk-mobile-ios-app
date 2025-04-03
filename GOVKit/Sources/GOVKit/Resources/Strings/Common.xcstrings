@@ -100,28 +100,6 @@
         }
       }
     },
-    "notificationsSettingsOff" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications Off"
-          }
-        }
-      }
-    },
-    "notificationsSettingsOn" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications On"
-          }
-        }
-      }
-    },
     "off" : {
       "extractionState" : "manual",
       "localizations" : {

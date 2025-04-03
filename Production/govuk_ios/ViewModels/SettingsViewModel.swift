@@ -85,17 +85,13 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     func handleNotificationAlertAction() {
-        switch notificationsPermissionState {
-        case .authorized, .denied:
-            if urlOpener.openSettings() {
-                trackNavigationEvent(
-                    notificationAlertButtonTitle,
-                    external: false
-                )
-            }
-        default:
-            break
-        }
+        guard [.authorized, .denied].contains(notificationsPermissionState),
+              urlOpener.openSettings()
+        else { return }
+        trackNavigationEvent(
+            notificationAlertButtonTitle,
+            external: false
+        )
     }
 
     private var hasAcceptedAnalytics: Bool {
@@ -232,23 +228,28 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func notificationsSettingsRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("settingsNotificationsTitle")
+        let isAuthorized = notificationsPermissionState == .authorized
         return NotificationSettingsRow(
             id: "settings.notifications.row",
             title: rowTitle,
-            body: nil,
-            isAuthorized: notificationsPermissionState == .authorized,
+            body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
+            accessibilityHint: String.settings.localized("notificationsSettingsAccessibilityHint"),
             action: { [weak self] in
-                if self?.notificationsPermissionState == .notDetermined {
-                    self?.trackNavigationEvent(
-                        String.settings.localized(rowTitle),
-                        external: false
-                    )
-                    self?.notificationsAction?()
-                } else {
-                    self?.displayNotificationSettingsAlert.toggle()
-                }
+                self?.handleNotificationSettingsPressed(title: rowTitle)
             }
         )
+    }
+
+    private func handleNotificationSettingsPressed(title: String) {
+        if notificationsPermissionState == .notDetermined {
+            trackNavigationEvent(
+                String.settings.localized(title),
+                external: false
+            )
+            notificationsAction?()
+        } else {
+            displayNotificationSettingsAlert.toggle()
+        }
     }
 
     private func termsAndConditionsRow() -> GroupedListRow {

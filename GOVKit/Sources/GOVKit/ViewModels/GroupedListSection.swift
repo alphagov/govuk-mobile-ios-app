@@ -39,7 +39,7 @@ public extension GroupedListRow {
 }
 
 public struct LinkRow: GroupedListRow,
-                Identifiable {
+                       Identifiable {
     public let id: String
     public let title: String
     public let body: String?
@@ -63,26 +63,26 @@ public class NotificationSettingsRow: GroupedListRow,
                                       Identifiable {
     public let id: String
     public let title: String
-    public let body: String?
+    public let body: String
+    public let accessibilityHint: String
     public let action: () -> Void
-    public var isAuthorized: Bool
 
     public init(id: String,
                 title: String,
-                body: String? = nil,
-                isAuthorized: Bool,
+                body: String,
+                accessibilityHint: String,
                 action: @escaping () -> Void) {
         self.id = id
         self.title = title
         self.body = body
-        self.isAuthorized = isAuthorized
+        self.accessibilityHint = accessibilityHint
         self.action = action
     }
 }
 
 
 public struct NavigationRow: GroupedListRow,
-                      Identifiable {
+                             Identifiable {
     public let id: String
     public let title: String
     public let body: String?
@@ -100,7 +100,7 @@ public struct NavigationRow: GroupedListRow,
 }
 
 public struct InformationRow: GroupedListRow,
-                       Identifiable {
+                              Identifiable {
     public let id: String
     public let title: String
     public let body: String?
@@ -118,7 +118,7 @@ public struct InformationRow: GroupedListRow,
 }
 
 public class ToggleRow: GroupedListRow,
-                 ObservableObject {
+                        ObservableObject {
     public var id: String
     public let title: String
     @Published var isOn: Bool {

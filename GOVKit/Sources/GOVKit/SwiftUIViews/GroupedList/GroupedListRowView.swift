@@ -86,7 +86,7 @@ struct NotificationsRowView: View {
                     Text(row.title)
                         .multilineTextAlignment(.leading)
                     Spacer()
-                    Text(row.isAuthorized ? String.common.localized("on") : String.common.localized("off"))
+                    Text(row.body)
                     .font(Font.govUK.caption1Medium)
                     .multilineTextAlignment(.leading)
                 }
@@ -96,11 +96,7 @@ struct NotificationsRowView: View {
         }
         .accessibilityRemoveTraits(.isButton)
         .accessibilityAddTraits(.isButton)
-        .accessibilityHint(
-            row.isAuthorized ?
-            String.common.localized("notificationsSettingsOn") :
-            String.common.localized("notificationsSettingsOff")
-        )
+        .accessibilityHint(row.accessibilityHint)
     }
 }
 

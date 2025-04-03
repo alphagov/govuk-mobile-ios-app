@@ -15,40 +15,7 @@ struct NotificationSettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                VStack {
-                    if verticalSizeClass == .regular {
-                        Spacer(minLength: 32)
-                    }
-                    if verticalSizeClass != .compact {
-                        viewModel.slide.lottieView
-                            .playbackMode(.playing(.fromProgress(
-                                0,
-                                toProgress: 1,
-                                loopMode: .playOnce
-                            )))
-                            .scaledToFit()
-                            .frame(width: 290, height: 290)
-                            .padding([.bottom])
-                    }
-                    Text(viewModel.slide.title)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .accessibilityLabel(Text(viewModel.slide.title))
-                        .padding(.top, verticalSizeClass == .compact ? 32 : 0)
-                        .padding([.trailing, .leading], 16)
-                        .accessibilityAddTraits(.isHeader)
-                        .accessibilitySortPriority(1)
-                    Text(viewModel.slide.body)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .multilineTextAlignment(.center)
-                        .accessibilityLabel(Text(viewModel.slide.body))
-                        .padding([.top, .leading, .trailing], 16)
-                        .accessibilitySortPriority(0)
-                }
-                .accessibilityElement(children: .contain)
+                content
             }
             buttons
         }
@@ -57,6 +24,44 @@ struct NotificationSettingsView: View {
                 viewModel.trackScreen(screen: self)
             }
         )
+    }
+
+    @ViewBuilder
+    var content: some View {
+        VStack {
+            if verticalSizeClass == .regular {
+                Spacer(minLength: 32)
+            }
+            if verticalSizeClass != .compact {
+                viewModel.slide.lottieView
+                    .playbackMode(.playing(.fromProgress(
+                        0,
+                        toProgress: 1,
+                        loopMode: .playOnce
+                    )))
+                    .scaledToFit()
+                    .frame(width: 290, height: 290)
+                    .padding([.bottom])
+            }
+            Text(viewModel.slide.title)
+                .foregroundColor(Color(UIColor.govUK.text.primary))
+                .font(.title)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .accessibilityLabel(Text(viewModel.slide.title))
+                .padding(.top, verticalSizeClass == .compact ? 32 : 0)
+                .padding([.trailing, .leading], 16)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilitySortPriority(1)
+            Text(viewModel.slide.body)
+                .foregroundColor(Color(UIColor.govUK.text.primary))
+                .multilineTextAlignment(.center)
+                .accessibilityLabel(Text(viewModel.slide.body))
+                .padding([.top, .leading, .trailing], 16)
+                .accessibilitySortPriority(0)
+        }
+        .accessibilityElement(children: .contain)
     }
 
     @ViewBuilder

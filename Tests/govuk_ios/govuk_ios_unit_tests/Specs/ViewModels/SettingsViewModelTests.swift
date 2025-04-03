@@ -242,7 +242,7 @@ class SettingsViewModelTests {
                     continuation.resume(returning: sut)
                 }.store(in: &cancellables)
         }
-        #expect(result.notificationSettingsAlertTitle == String.settings.localized("settingsNotificationsAlertTitleEnabled"))
+        #expect(result.notificationSettingsAlertTitle == String.settings.localized("notificationsAlertTitleEnabled"))
     }
 
     @Test
@@ -268,7 +268,7 @@ class SettingsViewModelTests {
                     continuation.resume(returning: sut.notificationSettingsAlertTitle)
                 }.store(in: &cancellables)
         }
-        #expect(result == String.settings.localized("settingsNotificationsAlertTitleDisabled"))
+        #expect(result == String.settings.localized("notificationsAlertTitleDisabled"))
     }
 
     @Test
@@ -294,7 +294,7 @@ class SettingsViewModelTests {
                     continuation.resume(returning: sut.notificationSettingsAlertBody)
                 }.store(in: &cancellables)
         }
-        #expect(result == String.settings.localized("settingsNotificationsAlertBodyDisabled"))
+        #expect(result == String.settings.localized("notificationsAlertBodyDisabled"))
     }
 
     @Test
@@ -320,7 +320,7 @@ class SettingsViewModelTests {
                     continuation.resume(returning: sut.notificationSettingsAlertBody)
                 }.store(in: &cancellables)
         }
-        #expect(result == String.settings.localized("settingsNotificationsAlertBodyEnabled"))
+        #expect(result == String.settings.localized("notificationsAlertBodyEnabled"))
     }
 
     @Test

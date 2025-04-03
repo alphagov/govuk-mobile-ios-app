@@ -30,7 +30,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let notificationCenter: NotificationCenter
     var notificationsAction: (() -> Void)?
     var notificationAlertButtonTitle: String = String.settings.localized(
-        "settingsNotificationAlertPrimaryButtonTitle"
+        "notificationAlertPrimaryButtonTitle"
     )
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -60,17 +60,17 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     var notificationSettingsAlertTitle: String {
         if notificationsPermissionState == .authorized {
-            return String.settings.localized("settingsNotificationsAlertTitleEnabled")
+            return String.settings.localized("notificationsAlertTitleEnabled")
         } else {
-            return String.settings.localized("settingsNotificationsAlertTitleDisabled")
+            return String.settings.localized("notificationsAlertTitleDisabled")
         }
     }
 
     var notificationSettingsAlertBody: String {
         if notificationsPermissionState == .authorized {
-            return String.settings.localized("settingsNotificationsAlertBodyEnabled")
+            return String.settings.localized("notificationsAlertBodyEnabled")
         } else {
-            return String.settings.localized("settingsNotificationsAlertBodyDisabled")
+            return String.settings.localized("notificationsAlertBodyDisabled")
         }
     }
 
@@ -128,7 +128,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             rows.append(
                 GroupedListSection(
                     heading: GroupedListHeader(
-                        title: String.settings.localized("settingsNotificationsTitle"),
+                        title: String.settings.localized("notificationsTitle"),
                         icon: nil
                     ),
                     rows: [notificationsSettingsRow()],
@@ -227,13 +227,13 @@ class SettingsViewModel: SettingsViewModelInterface {
     }
 
     private func notificationsSettingsRow() -> GroupedListRow {
-        let rowTitle = String.settings.localized("settingsNotificationsTitle")
+        let rowTitle = String.settings.localized("notificationsTitle")
         let isAuthorized = notificationsPermissionState == .authorized
         return DetailRow(
             id: "settings.notifications.row",
             title: rowTitle,
             body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
-            accessibilityHint: String.settings.localized("notificationsSettingsAccessibilityHint"),
+            accessibilityHint: String.settings.localized("notificationsAccessibilityHint"),
             action: { [weak self] in
                 self?.handleNotificationSettingsPressed(title: rowTitle)
             }

@@ -93,5 +93,5 @@ struct NotificationSettingsView: View {
 
 extension NotificationSettingsView: TrackableScreen {
     var trackingTitle: String? { viewModel.slide.title }
-    var trackingName: String { "NotificationSettings" }
+    var trackingName: String { viewModel.slide.name }
 }

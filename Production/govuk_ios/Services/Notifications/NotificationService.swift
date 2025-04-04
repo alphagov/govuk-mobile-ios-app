@@ -9,6 +9,7 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: (() -> Void)?)
     var shouldRequestPermission: Bool { get async }
+    var permissionState: NotificationPermissionState { get async }
     var isFeatureEnabled: Bool { get }
 }
 
@@ -30,11 +31,27 @@ class NotificationService: NotificationServiceInterface {
         )
     }
 
+    var permissionState: NotificationPermissionState {
+        get async {
+            let localStatus = await notificationCenter.authorizationStatus
+            switch localStatus {
+            case .authorized:
+                return .authorized
+            case .denied:
+                return .denied
+            case .notDetermined, .ephemeral, .provisional:
+                return .notDetermined
+            @unknown default:
+                return .notDetermined
+            }
+        }
+    }
+
     var shouldRequestPermission: Bool {
         get async {
             let switches = (
                 isFeatureEnabled,
-                await notificationCenter.authorizationStatus == .notDetermined
+                await permissionState == .notDetermined
             )
             return switches.0 && switches.1
         }

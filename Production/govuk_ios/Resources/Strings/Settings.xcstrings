@@ -67,6 +67,83 @@
         }
       }
     },
+    "notificationAlertPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "notificationsAccessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select to change notification permissions"
+          }
+        }
+      }
+    },
+    "notificationsAlertBodyDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn on notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "notificationsAlertBodyEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn off notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "notificationsAlertTitleDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on notifications"
+          }
+        }
+      }
+    },
+    "notificationsAlertTitleEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn off notifications"
+          }
+        }
+      }
+    },
+    "notificationsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        }
+      }
+    },
     "openSourceLicenceRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {

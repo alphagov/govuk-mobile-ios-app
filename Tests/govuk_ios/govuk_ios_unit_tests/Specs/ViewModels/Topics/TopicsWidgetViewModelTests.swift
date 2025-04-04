@@ -30,7 +30,6 @@ struct TopicsWidgetViewModelTests {
         sut.fetchTopics()
         #expect(didHandleError == false)
     }
-
     @Test
     func fetchTopics_downloadFailure_returnsExpectedResult() {
         mockTopicService._stubbedFetchRemoteListResult = .failure(.decodingError)

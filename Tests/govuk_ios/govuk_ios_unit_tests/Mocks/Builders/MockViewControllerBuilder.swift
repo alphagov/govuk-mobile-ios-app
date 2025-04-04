@@ -28,16 +28,18 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedTopicWidgetViewModel = dependencies.topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
     }
-    
+
     var _stubbedSettingsViewController: UIViewController?
+    var _receivedSettingsViewModel: (any SettingsViewModelInterface)?
     override func settings<T: SettingsViewModelInterface>(viewModel: T) -> UIViewController {
+        _receivedSettingsViewModel = viewModel
         return _stubbedSettingsViewController ?? UIViewController()
     }
 
     var _stubbedRecentActivityViewController: UIViewController?
     override func recentActivity(analyticsService: AnalyticsServiceInterface,
                                  activityService: ActivityServiceInterface) -> UIViewController {
-            return _stubbedRecentActivityViewController ?? UIViewController()
+        return _stubbedRecentActivityViewController ?? UIViewController()
     }
 
     var _stubbedTopicDetailViewController: UIViewController?
@@ -49,7 +51,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                               stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void) -> UIViewController {
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
-    
+
     var _stubbedEditTopicsViewController: UIViewController?
     var _receivedDismissAction: (() -> Void)?
     override func editTopics(analyticsService: any AnalyticsServiceInterface,
@@ -78,5 +80,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedTopicOnboardingTopics = topics
         _receivedTopicOnboardingDismissAction = dismissAction
         return _stubbedTopicOnboardingViewController ?? UIViewController()
+    }
+
+    var _stubbedNotificationSettingsViewController: UIViewController?
+    override func notificationSettings(analyticsService: any AnalyticsServiceInterface,
+                                       notificationService: any NotificationServiceInterface,
+                                       completeAction: @escaping () -> Void) -> UIViewController {
+        _stubbedNotificationSettingsViewController ?? UIViewController()
     }
 }

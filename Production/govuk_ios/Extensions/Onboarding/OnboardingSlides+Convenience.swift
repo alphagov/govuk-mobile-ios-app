@@ -44,20 +44,24 @@ extension Onboarding {
         ]
     }
 
+    static var notificationSlide: OnboardingSlideAnimationViewModel {
+        OnboardingSlideAnimationViewModel(
+            slide: .init(
+                image: "onboarding_stay_updated",
+                title: String.notifications.localized("onboardingTitle"),
+                body: String.notifications.localized("onboardingBody"),
+                name: "NotificationsOnboardingScreen"
+            ),
+            primaryButtonTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
+            primaryButtonAccessibilityHint: nil,
+            secondaryButtonTitle: String.notifications.localized("onboardingSkipButtonTitle"),
+            secondaryButtonAccessibilityHint: nil
+        )
+    }
+
     static var notificationSlides: [any OnboardingSlideViewModelInterface] {
         [
-            OnboardingSlideAnimationViewModel(
-                slide: .init(
-                    image: "onboarding_stay_updated",
-                    title: String.notifications.localized("onboardingTitle"),
-                    body: String.notifications.localized("onboardingBody"),
-                    name: "NotificationsOnboardingScreen"
-                ),
-                primaryButtonTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
-                primaryButtonAccessibilityHint: nil,
-                secondaryButtonTitle: String.notifications.localized("onboardingSkipButtonTitle"),
-                secondaryButtonAccessibilityHint: nil
-            )
+            notificationSlide
         ]
     }
 }

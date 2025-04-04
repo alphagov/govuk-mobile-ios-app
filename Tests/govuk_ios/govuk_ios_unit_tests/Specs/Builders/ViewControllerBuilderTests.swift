@@ -49,7 +49,9 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
             versionProvider: MockAppVersionProvider(),
-            deviceInformationProvider: MockDeviceInformationProvider()
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            notificationService: MockNotificationService(),
+            notificationCenter: .default
         )
         let result = subject.settings(
             viewModel: viewModel
@@ -74,6 +76,22 @@ struct ViewControllerBuilderTests {
         #expect(result?.trackingClass == String(describing: RecentActivityListViewController.self))
         #expect(result?.trackingName == "Pages you've visited")
         #expect(result?.trackingTitle == "Pages you've visited")
+    }
+
+    @Test
+    func notificationSettings_returnsExpectedResult() {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        Container.shared.coreDataRepository.register {
+            coreData
+        }
+        let subject = ViewControllerBuilder()
+        let result = subject.notificationSettings(
+            analyticsService: MockAnalyticsService(),
+            notificationService: MockNotificationService(),
+            completeAction: {}
+        )
+
+        #expect(result is HostingViewController<NotificationSettingsView>)
     }
 
     @Test

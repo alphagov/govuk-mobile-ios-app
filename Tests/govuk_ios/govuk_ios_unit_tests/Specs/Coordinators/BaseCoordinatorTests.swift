@@ -34,7 +34,7 @@ struct BaseCoordinatorTests {
             subject.presentationControllerDidDismiss(presentationController)
         }
 
-        #expect(child != nil)
+        #expect(child == subject)
     }
 
     @Test

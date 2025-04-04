@@ -81,6 +81,25 @@ class ViewControllerBuilder {
     }
 
     @MainActor
+    func notificationSettings(analyticsService: AnalyticsServiceInterface,
+                              notificationService: NotificationServiceInterface,
+                              completeAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = NotificationSettingsViewModel(
+            notificationService: notificationService,
+            analyticsService: analyticsService,
+            completeAction: completeAction
+        )
+        let view = NotificationSettingsView(
+            viewModel: viewModel,
+            analyticsService: analyticsService
+        )
+        let viewController = HostingViewController(rootView: view)
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+
+    @MainActor
     // swiftlint:disable:next function_parameter_count
     func topicDetail(topic: DisplayableTopic,
                      topicsService: TopicsServiceInterface,
@@ -103,8 +122,7 @@ class ViewControllerBuilder {
         let viewController = HostingViewController(
             rootView: view
         )
-        viewController.navigationItem.largeTitleDisplayMode =
-        UINavigationItem.LargeTitleDisplayMode.never
+        viewController.navigationItem.largeTitleDisplayMode = .never
         viewController.navigationItem.backButtonTitle = viewModel.title
         return viewController
     }

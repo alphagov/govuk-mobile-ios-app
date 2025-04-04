@@ -186,7 +186,19 @@ struct CoordinatorBuilderTests {
             navigationController: mockNavigationController,
             completion: { }
         )
-        
+
         #expect(coordinator is NotificationOnboardingCoordinator)
+    }
+
+    @Test
+    func notificationSettings_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.notificationSettings(
+            navigationController: mockNavigationController,
+            completionAction: { }
+        )
+
+        #expect(coordinator is NotificationSettingsCoordinator)
     }
 }

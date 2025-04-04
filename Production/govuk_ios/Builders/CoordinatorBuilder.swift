@@ -39,7 +39,9 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: DeeplinkDataStore.settings(coordinatorBuilder: self),
             analyticsService: container.analyticsService.resolve(),
-            deviceInformationProvider: DeviceInformationProvider()
+            coordinatorBuilder: self,
+            deviceInformationProvider: DeviceInformationProvider(),
+            notificationService: container.notificationService.resolve()
         )
     }
 
@@ -174,6 +176,17 @@ class CoordinatorBuilder {
             notificationService: container.notificationService.resolve(),
             analyticsService: container.onboardingAnalyticsService.resolve(),
             completion: completion
+        )
+    }
+
+    func notificationSettings(navigationController: UINavigationController,
+                              completionAction: @escaping () -> Void) -> BaseCoordinator {
+        NotificationSettingsCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            notificationService: container.notificationService.resolve(),
+            completeAction: completionAction
         )
     }
 }

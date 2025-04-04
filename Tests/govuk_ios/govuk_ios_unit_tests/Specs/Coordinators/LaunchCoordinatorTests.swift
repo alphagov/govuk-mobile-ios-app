@@ -33,7 +33,7 @@ struct LaunchCoordinatorTests {
             mockAppLaunchService._receivedFetchCompletion?(expectedResponse)
             mockViewControllerBuilder._receivedLaunchCompletion?()
         }
-        let topics = try #require(try response.topicResult.get())
+        let topics = try response.topicResult.get()
 
         #expect(topics.count == expectedTopics.count)
 

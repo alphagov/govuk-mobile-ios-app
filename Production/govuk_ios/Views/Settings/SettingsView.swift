@@ -24,6 +24,13 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                             backgroundColor: UIColor.govUK.fills.surfaceBackground
                         )
                         .padding(.top, 8)
+                    }.alert(isPresented: $viewModel.displayNotificationSettingsAlert) {
+                        Alert(title: Text(viewModel.notificationSettingsAlertTitle),
+                              message: Text(viewModel.notificationSettingsAlertBody),
+                              primaryButton: .destructive(
+                                Text(viewModel.notificationAlertButtonTitle)) {
+                            viewModel.handleNotificationAlertAction()
+                        }, secondaryButton: .cancel())
                     }
                     .onChange(of: viewModel.scrollToTop) { shouldScroll in
                         if shouldScroll {
@@ -38,6 +45,7 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
+            viewModel.updateNotificationPermissionState()
         }
     }
 }

@@ -7,7 +7,7 @@ import Testing
 struct JSONDecoder_ExtensionsTests {
 
     @Test
-    func decode_success_returnsExptedResult() throws {
+    func decode_success_returnsExpectedResult() throws {
         let expectedTitle = UUID().uuidString
         let object = TestCodableObject(title: expectedTitle)
         let data = try JSONEncoder().encode(object)
@@ -16,14 +16,15 @@ struct JSONDecoder_ExtensionsTests {
     }
 
     @Test
-    func decode_failure_returnsExptedResult() throws {
+    func decode_failure_returnsExpectedResult() throws {
         let object = TestSecondCodableObject(count: 10)
         let data = try JSONEncoder().encode(object)
-        do {
-            let _: TestCodableObject = try JSONDecoder().decode(from: data)
-        } catch {
-            #expect(error != nil)
-        }
+        #expect(
+            throws: Error.self,
+            performing: {
+                let _: TestCodableObject = try JSONDecoder().decode(from: data)
+            }
+        )
     }
 }
 

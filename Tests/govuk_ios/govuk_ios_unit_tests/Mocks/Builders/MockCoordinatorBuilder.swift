@@ -45,7 +45,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedSettingsCoordinator: TabItemCoordinator?
     override var settings: any TabItemCoordinator {
-        _stubbedSettingsCoordinator ??
+        return _stubbedSettingsCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
         )
@@ -125,5 +125,13 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
                                          completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedNotificationOnboardingCompletion = completion
         return _stubbedNotificaitonOnboardingCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedNotificationSettingsCoordinator: MockBaseCoordinator?
+    var _receivedNotificationSettingsCoordinatorCompletion: (() -> Void)?
+    override func notificationSettings(navigationController: UINavigationController,
+                                       completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedNotificationOnboardingCompletion = completionAction
+        return _stubbedNotificationSettingsCoordinator ?? MockBaseCoordinator()
     }
 }

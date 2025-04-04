@@ -56,6 +56,28 @@
         }
       }
     },
+    "authenticationBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’ll need to create a GOV.UK One Login if you do not already have one"
+          }
+        }
+      }
+    },
+    "authenticationTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with GOV.UK One Login"
+          }
+        }
+      }
+    },
     "continueButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

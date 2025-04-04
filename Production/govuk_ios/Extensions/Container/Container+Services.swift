@@ -107,4 +107,12 @@ extension Container {
             )
         }
     }
+
+    var authenticationService: Factory<AuthenticationServiceInterface> {
+        Factory(self) {
+            AuthenticationService(
+                userDefaults: UserDefaults.standard
+            )
+        }
+    }
 }

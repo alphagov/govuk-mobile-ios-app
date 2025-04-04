@@ -1,5 +1,5 @@
 {
-  "originHash" : "38487e403a931eedf720f067efbbdbff300f6c4ab0e9a73e89f10489fee9029b",
+  "originHash" : "88c6bec89b69b8e5f90e5414a0ede38e8c92d0aed9ba2cfcd2a0c6b06f6e7961",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -17,6 +17,24 @@
       "state" : {
         "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
         "version" : "11.2.0"
+      }
+    },
+    {
+      "identity" : "appauth-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/openid/AppAuth-iOS",
+      "state" : {
+        "revision" : "2781038865a80e2c425a1da12cc1327bcd56501f",
+        "version" : "1.7.6"
+      }
+    },
+    {
+      "identity" : "bigint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/attaswift/BigInt",
+      "state" : {
+        "revision" : "114343a705df4725dfe7ab8a2a326b8883cfd79c",
+        "version" : "5.5.1"
       }
     },
     {
@@ -134,6 +152,24 @@
       "state" : {
         "revision" : "047aa81b77adcbf583a966dfef620d17650cc656",
         "version" : "4.5.1"
+      }
+    },
+    {
+      "identity" : "mobile-ios-authentication",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/govuk-one-login/mobile-ios-authentication",
+      "state" : {
+        "revision" : "49a6b61027d6371215b177a6567f583ccc4217f8",
+        "version" : "2.2.0"
+      }
+    },
+    {
+      "identity" : "mobile-ios-secure-store",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/govuk-one-login/mobile-ios-secure-store",
+      "state" : {
+        "revision" : "cebce88947a4e0dfc59b765b1f8f40c8319bd89a",
+        "version" : "1.1.2"
       }
     },
     {

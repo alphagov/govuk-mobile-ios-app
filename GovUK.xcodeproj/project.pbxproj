@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160AEAC52DA038030072BA43 /* Authentication in Frameworks */ = {isa = PBXBuildFile; productRef = 160AEAC42DA038030072BA43 /* Authentication */; };
+		160AEAC82DA038550072BA43 /* CryptoService in Frameworks */ = {isa = PBXBuildFile; productRef = 160AEAC72DA038550072BA43 /* CryptoService */; };
+		160AEACA2DA038550072BA43 /* SecureStore in Frameworks */ = {isa = PBXBuildFile; productRef = 160AEAC92DA038550072BA43 /* SecureStore */; };
 		160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160EA7542C5B0401008F97AF /* SettingsViewModel.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
 		1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */; };
@@ -635,7 +638,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */,
+				160AEACA2DA038550072BA43 /* SecureStore in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
+				160AEAC52DA038030072BA43 /* Authentication in Frameworks */,
 				D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */,
 				5DCAFA7A2D40088600C3F284 /* OneSignalFramework in Frameworks */,
 				5D8BE2932D75F2BD0036A1FA /* Onboarding in Frameworks */,
@@ -644,6 +649,7 @@
 				5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
 				5D1F7E772D75A959007FD506 /* Onboarding in Frameworks */,
+				160AEAC82DA038550072BA43 /* CryptoService in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1418,6 +1424,9 @@
 				5DCAFA792D40088600C3F284 /* OneSignalFramework */,
 				5D1F7E762D75A959007FD506 /* Onboarding */,
 				5D8BE2922D75F2BD0036A1FA /* Onboarding */,
+				160AEAC42DA038030072BA43 /* Authentication */,
+				160AEAC72DA038550072BA43 /* CryptoService */,
+				160AEAC92DA038550072BA43 /* SecureStore */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1510,6 +1519,8 @@
 				5DC165912CF080F50074F2DC /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
 				5DCAFA762D40088600C3F284 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 				5D8BE2912D75F2BD0036A1FA /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				160AEAC32DA038030072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-authentication" */,
+				160AEAC62DA038550072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -2505,6 +2516,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		160AEAC32DA038030072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-authentication" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/govuk-one-login/mobile-ios-authentication";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+		160AEAC62DA038550072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/govuk-one-login/mobile-ios-secure-store";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
 		5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -2564,6 +2591,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		160AEAC42DA038030072BA43 /* Authentication */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 160AEAC32DA038030072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-authentication" */;
+			productName = Authentication;
+		};
+		160AEAC72DA038550072BA43 /* CryptoService */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 160AEAC62DA038550072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */;
+			productName = CryptoService;
+		};
+		160AEAC92DA038550072BA43 /* SecureStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 160AEAC62DA038550072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */;
+			productName = SecureStore;
+		};
 		5D0278362C29CB5800F2A4EB /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */;

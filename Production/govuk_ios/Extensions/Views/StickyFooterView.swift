@@ -52,14 +52,14 @@ class StickyFooterView: UIView {
                 equalTo: divider.bottomAnchor,
                 constant: 16
             ),
-            stackView.leadingAnchor.constraint(
-                equalTo: layoutMarginsGuide.leadingAnchor
-            ),
             stackView.trailingAnchor.constraint(
                 equalTo: layoutMarginsGuide.trailingAnchor
             ),
             stackView.bottomAnchor.constraint(
-                equalTo: layoutMarginsGuide.bottomAnchor
+                equalTo: safeAreaLayoutGuide.bottomAnchor
+            ),
+            stackView.leadingAnchor.constraint(
+                equalTo: layoutMarginsGuide.leadingAnchor
             )
         ])
     }

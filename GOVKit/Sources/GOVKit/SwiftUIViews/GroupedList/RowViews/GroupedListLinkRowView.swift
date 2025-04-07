@@ -10,7 +10,7 @@ struct GroupedListLinkRowView: View {
         } label: {
             VStack(alignment: .leading) {
                 HStack {
-                    GroupedListRowTitle(
+                    GroupedListRowTitleView(
                         row.title,
                         color: Color(UIColor.govUK.text.link)
                     )
@@ -20,7 +20,7 @@ struct GroupedListLinkRowView: View {
                 }
                 .foregroundColor(Color(UIColor.govUK.text.link))
 
-                GroupedListRowFooter(text: row.body)
+                GroupedListRowBodyView(text: row.body)
             }
         }
         .accessibilityRemoveTraits(.isButton)

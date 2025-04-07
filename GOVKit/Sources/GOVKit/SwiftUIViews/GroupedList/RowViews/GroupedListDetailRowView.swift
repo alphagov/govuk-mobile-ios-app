@@ -10,14 +10,14 @@ struct GroupedListDetailRowView: View {
         } label: {
             VStack(alignment: .leading) {
                 HStack {
-                    GroupedListRowTitle(row.title)
+                    GroupedListRowTitleView(row.title)
                     Spacer()
                     Text(row.body)
                         .font(Font.govUK.body)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Color(UIColor.govUK.text.link))
                 }
-                GroupedListRowFooter(text: row.body)
+                GroupedListRowBodyView(text: row.body)
             }
         }
         .accessibilityRemoveTraits(.isButton)

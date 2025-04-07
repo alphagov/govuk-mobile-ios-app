@@ -10,7 +10,7 @@ struct GroupedListNavigationRowView: View {
         } label: {
             VStack(alignment: .leading) {
                 HStack {
-                    GroupedListRowTitle(
+                    GroupedListRowTitleView(
                         row.title
                     )
                     .multilineTextAlignment(.leading)

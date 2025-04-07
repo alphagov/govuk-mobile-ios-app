@@ -7,7 +7,7 @@ struct GroupedListInformationRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                GroupedListRowTitle(row.title)
+                GroupedListRowTitleView(row.title)
                 Spacer()
                 Text(row.detail)
                     .foregroundColor(
@@ -17,7 +17,7 @@ struct GroupedListInformationRowView: View {
                     )
             }.accessibilityElement(children: .combine)
 
-            GroupedListRowFooter(text: row.body)
+            GroupedListRowBodyView(text: row.body)
         }
     }
 }

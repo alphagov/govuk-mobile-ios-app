@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct GroupedListRowTitle: View {
+struct GroupedListRowTitleView: View {
     let title: String
     let color: Color
 

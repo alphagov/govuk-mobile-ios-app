@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct GroupedListRowFooter: View {
+struct GroupedListRowBodyView: View {
     let text: String?
 
     var body: some View {

@@ -7,7 +7,7 @@ struct GroupedListToggleRowView: View {
         HStack {
             Spacer()
             Toggle(isOn: $row.isOn) {
-                GroupedListRowTitle(row.title)
+                GroupedListRowTitleView(row.title)
                 .padding(.horizontal, -8)
             }
             .toggleStyle(SwitchToggleStyle(tint: (Color(UIColor.govUK.fills.surfaceToggleSelected))))

@@ -36,7 +36,10 @@ final class TopicDetailsCoordinator: BaseCoordinator {
                 analyticsService: self.analyticsService,
                 activityService: self.activityService,
                 subtopicAction: self.pushTopic,
-                stepByStepAction: self.pushStepBySteps
+                stepByStepAction: self.pushStepBySteps,
+                openAction: { [weak self] url in
+                    self?.presentWebView(url: url)
+                }
             )
             self.push(viewController, animated: true)
         }
@@ -53,5 +56,11 @@ final class TopicDetailsCoordinator: BaseCoordinator {
             )
             self.push(viewController, animated: true)
         }
+    }
+
+    private func presentWebView(url: URL) {
+        let viewController = WebViewController(url: url)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        root.present(navigationController, animated: true)
     }
 }

@@ -17,6 +17,7 @@ struct GroupedListDetailRowView: View {
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Color(UIColor.govUK.text.link))
                 }
+                GroupedListRowFooter(text: row.body)
             }
         }
         .accessibilityRemoveTraits(.isButton)

@@ -60,7 +60,7 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
     }
 
     var isFeatureEnabled: Bool {
-        false
+        true
     }
 
     func requestPermissions(completion: (() -> Void)?) {

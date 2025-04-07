@@ -5,21 +5,29 @@ struct GroupedListDetailRowView: View {
     let row: DetailRow
 
     var body: some View {
-        Button {
-            row.action?()
-        } label: {
-            VStack(alignment: .leading) {
-                HStack {
-                    GroupedListRowTitleView(row.title)
-                    Spacer()
-                    Text(row.detail)
-                        .foregroundColor(color)
-                }.accessibilityElement(children: .combine)
-
-                GroupedListRowBodyView(text: row.body)
+        if row.action == nil {
+            stack
+        } else {
+            Button {
+                row.action?()
+            } label: {
+                stack
             }
+            .accessibilityHint(row.accessibilityHint ?? "")
         }
-        .disabled(row.action == nil)
+    }
+
+    private var stack: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                GroupedListRowTitleView(row.title)
+                Spacer()
+                Text(row.detail)
+                    .foregroundColor(color)
+            }.accessibilityElement(children: .combine)
+
+            GroupedListRowBodyView(text: row.body)
+        }
     }
 
     private var color: Color {

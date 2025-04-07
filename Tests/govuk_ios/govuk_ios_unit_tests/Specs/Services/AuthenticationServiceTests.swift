@@ -11,7 +11,7 @@ struct AuthenticationServiceTests {
     func hasSeenOnboarding_hasSeen_returnsTrue() {
         let userDefaults = UserDefaults()
         userDefaults.set(bool: true, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationService(userDefaults: userDefaults)
+        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
 
         #expect(subject.hasSeenOnboarding)
     }
@@ -20,7 +20,7 @@ struct AuthenticationServiceTests {
     func hasSeenOnboarding_hasntSeen_returnsTrue() {
         let userDefaults = UserDefaults()
         userDefaults.set(bool: false, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationService(userDefaults: userDefaults)
+        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
 
         #expect(subject.hasSeenOnboarding == false)
     }
@@ -28,7 +28,7 @@ struct AuthenticationServiceTests {
     @Test
     func setHasSeenOnboarding_setsTrue() {
         let userDefaults = UserDefaults()
-        let subject = AuthenticationService(userDefaults: userDefaults)
+        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
         subject.setHasSeenOnboarding()
 
         #expect(userDefaults.bool(forKey: .authenticationOnboardingSeen) == true)
@@ -36,7 +36,7 @@ struct AuthenticationServiceTests {
 
     @Test
     func fetchSlides_returnsExpectedResult() async {
-        let subject = AuthenticationService(
+        let subject = AuthenticationOnboardingService(
             userDefaults: MockUserDefaults()
         )
         let result = await withCheckedContinuation { continuation in

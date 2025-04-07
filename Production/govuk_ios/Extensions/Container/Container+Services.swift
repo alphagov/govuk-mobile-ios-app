@@ -108,10 +108,20 @@ extension Container {
         }
     }
 
-    var authenticationService: Factory<AuthenticationServiceInterface> {
+    var authenticationOnboardingService: Factory<AuthenticationOnboardingServiceInterface> {
+        Factory(self) {
+            AuthenticationOnboardingService(
+                userDefaults: UserDefaults.standard
+            )
+        }
+    }
+
+    var authenticationService: Factory<AuthenticationService> {
         Factory(self) {
             AuthenticationService(
-                userDefaults: UserDefaults.standard
+                authenticationServiceClient: AuthenticationServiceClient(
+                    appConfig: self.appConfigService.resolve()
+                )
             )
         }
     }

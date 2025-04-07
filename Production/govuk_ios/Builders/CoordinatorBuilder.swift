@@ -196,6 +196,7 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             analyticsService: container.onboardingAnalyticsService.resolve(),
             authenticationService: container.authenticationService.resolve(),
+            authenticationOnboardingService: container.authenticationOnboardingService.resolve(),
             completionAction: completionAction
         )
     }

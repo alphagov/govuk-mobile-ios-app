@@ -1,33 +1,34 @@
 import Foundation
-import Onboarding
+import UIKit
+import Authentication
 
-protocol AuthenticationServiceInterface: OnboardingSlideProvider {
-    var hasSeenOnboarding: Bool { get }
-
-    func setHasSeenOnboarding()
+protocol AuthenticationServiceInterface {
+    func authenticate(
+        window: UIWindow,
+        completion: @escaping (Result<Authentication.TokenResponse, AuthenticationError>) -> Void
+    ) async
 }
 
-struct AuthenticationService: AuthenticationServiceInterface {
-    private let userDefaults: UserDefaultsInterface
+class AuthenticationService: AuthenticationServiceInterface {
+    let authenticationServiceClient: AuthenticationServiceClientInterface
 
-    init(userDefaults: UserDefaultsInterface) {
-        self.userDefaults = userDefaults
+    init(authenticationServiceClient: AuthenticationServiceClientInterface) {
+        self.authenticationServiceClient = authenticationServiceClient
     }
 
-    var hasSeenOnboarding: Bool {
-        userDefaults.bool(forKey: .authenticationOnboardingSeen)
-    }
-
-    func setHasSeenOnboarding() {
-        userDefaults.set(
-            bool: true,
-            forKey: .authenticationOnboardingSeen
+    func authenticate(
+        window: UIWindow,
+        completion: @escaping (Result<Authentication.TokenResponse, AuthenticationError>) -> Void
+    ) async {
+        await authenticationServiceClient.performAuthenticationFlow(
+            window: window,
+            completion: { result in
+                guard let tokenResponse = try? result.get() else {
+                    completion(result)
+                    return
+                }
+                completion(result)
+            }
         )
-    }
-
-    func fetchSlides(
-        completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
-    ) {
-        completion(.success(Onboarding.authenticationSlides))
     }
 }

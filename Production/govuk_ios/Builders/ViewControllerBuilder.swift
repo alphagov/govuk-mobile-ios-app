@@ -30,10 +30,12 @@ class ViewControllerBuilder {
         let feedbackAction: () -> Void
         let notificationsAction: () -> Void
         let recentActivityAction: () -> Void
+        let openSearchAction: (SearchItem) -> Void
     }
 
     @MainActor
-    func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
+    func home(dependencies: HomeDependencies,
+              actions: HomeActions) -> UIViewController {
         let viewModel = HomeViewModel(
             analyticsService: dependencies.analyticsService,
             configService: dependencies.configService,
@@ -42,6 +44,7 @@ class ViewControllerBuilder {
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
+            openAction: actions.openSearchAction,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService
@@ -106,7 +109,8 @@ class ViewControllerBuilder {
                      analyticsService: AnalyticsServiceInterface,
                      activityService: ActivityServiceInterface,
                      subtopicAction: @escaping (DisplayableTopic) -> Void,
-                     stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void
+                     stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
+                     openAction: @escaping (URL) -> Void
     ) -> UIViewController {
         let viewModel = TopicDetailViewModel(
             topic: topic,
@@ -115,7 +119,8 @@ class ViewControllerBuilder {
             activityService: activityService,
             urlOpener: UIApplication.shared,
             subtopicAction: subtopicAction,
-            stepByStepAction: stepByStepAction
+            stepByStepAction: stepByStepAction,
+            openAction: openAction
         )
 
         let view = TopicDetailView(viewModel: viewModel)

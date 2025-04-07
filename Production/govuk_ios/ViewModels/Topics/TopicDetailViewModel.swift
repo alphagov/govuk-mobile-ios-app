@@ -1,7 +1,6 @@
 import SwiftUI
 import GOVKit
 
-// swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?
@@ -16,6 +15,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private let urlOpener: URLOpener
     private let subtopicAction: (DisplayableTopic) -> Void
     private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+    private let openAction: (URL) -> Void
 
     var isLoaded: Bool = false
 
@@ -53,7 +53,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
          activityService: ActivityServiceInterface,
          urlOpener: URLOpener,
          subtopicAction: @escaping (DisplayableTopic) -> Void,
-         stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void) {
+         stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
+         openAction: @escaping (URL) -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.activityService = activityService
@@ -61,7 +62,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         self.subtopicAction = subtopicAction
         self.stepByStepAction = stepByStepAction
         self.topic = topic
-
+        self.openAction = openAction
         fetchTopicDetails(topicRef: topic.ref)
     }
 
@@ -189,13 +190,14 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             title: content.title,
             body: nil,
             action: {
-                if self.urlOpener.openIfPossible(content.url) {
-                    self.activityService.save(topicContent: content)
-                    self.trackLinkEvent(
-                        content: content,
-                        sectionTitle: sectionTitle
-                    )
-                }
+                self.openAction(content.url)
+//                if self.urlOpener.openIfPossible(content.url) {
+//                    self.activityService.save(topicContent: content)
+//                    self.trackLinkEvent(
+//                        content: content,
+//                        sectionTitle: sectionTitle
+//                    )
+//                }
             }
         )
     }

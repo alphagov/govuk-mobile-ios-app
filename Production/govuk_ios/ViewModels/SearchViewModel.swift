@@ -28,15 +28,18 @@ class SearchViewModel {
 
     private(set) var results: [SearchItem]?
     private(set) var error: SearchError?
+    private let openAction: (SearchItem) -> Void
 
     init(analyticsService: AnalyticsServiceInterface,
          searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface,
-         urlOpener: URLOpener) {
+         urlOpener: URLOpener,
+         openAction: @escaping (SearchItem) -> Void) {
         self.analyticsService = analyticsService
         self.activityService = activityService
         self.searchService = searchService
         self.urlOpener = urlOpener
+        self.openAction = openAction
     }
 
     func search(text: String?,
@@ -62,7 +65,8 @@ class SearchViewModel {
     func selected(item: SearchItem) {
         activityService.save(searchItem: item)
         trackSearchItemSelection(item)
-        urlOpener.openIfPossible(item.link)
+//        urlOpener.openIfPossible(item.link)
+        openAction(item)
     }
 
     func clearResults() {

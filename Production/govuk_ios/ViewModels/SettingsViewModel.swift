@@ -124,7 +124,8 @@ class SettingsViewModel: SettingsViewModelInterface {
                     id: "settings.version.row",
                     title: String.settings.localized("appVersionTitle"),
                     body: nil,
-                    detail: versionProvider.fullBuildNumber ?? "-"
+                    detail: versionProvider.fullBuildNumber ?? "-",
+                    action: nil
                 )
             ],
             footer: nil
@@ -233,10 +234,10 @@ class SettingsViewModel: SettingsViewModelInterface {
     private func notificationsSettingsRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("notificationsTitle")
         let isAuthorized = notificationsPermissionState == .authorized
-        return DetailRow(
+        return InformationRow(
             id: "settings.notifications.row",
             title: rowTitle,
-            body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
+            detail: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
             accessibilityHint: String.settings.localized("notificationsAccessibilityHint"),
             action: { [weak self] in
                 self?.handleNotificationSettingsPressed(title: rowTitle)

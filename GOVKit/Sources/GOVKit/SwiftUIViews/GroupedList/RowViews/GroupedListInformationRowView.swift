@@ -5,19 +5,28 @@ struct GroupedListInformationRowView: View {
     let row: InformationRow
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                GroupedListRowTitleView(row.title)
-                Spacer()
-                Text(row.detail)
-                    .foregroundColor(
-                        Color(
-                            UIColor.govUK.text.secondary
-                        )
-                    )
-            }.accessibilityElement(children: .combine)
+        Button {
+            row.action?()
+        } label: {
+            VStack(alignment: .leading) {
+                HStack {
+                    GroupedListRowTitleView(row.title)
+                    Spacer()
+                    Text(row.detail)
+                        .foregroundColor(color)
+                }.accessibilityElement(children: .combine)
 
-            GroupedListRowBodyView(text: row.body)
+                GroupedListRowBodyView(text: row.body)
+            }
         }
+        .disabled(row.action == nil)
+    }
+
+    private var color: Color {
+        Color(
+            row.action == nil
+            ? UIColor.govUK.text.secondary
+            : UIColor.govUK.text.link
+        )
     }
 }

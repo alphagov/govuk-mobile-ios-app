@@ -14,8 +14,6 @@ struct GroupedListRowView: View {
                 GroupedListInformationRowView(row: row)
             case let row as ToggleRow:
                 GroupedListToggleRowView(row: row)
-            case let row as DetailRow:
-                GroupedListDetailRowView(row: row)
             default:
                 EmptyView()
             }

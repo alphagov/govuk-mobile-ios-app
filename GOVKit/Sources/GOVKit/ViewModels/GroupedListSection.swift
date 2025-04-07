@@ -59,28 +59,6 @@ public struct LinkRow: GroupedListRow,
     }
 }
 
-public class DetailRow: GroupedListRow,
-                        Identifiable {
-    public let id: String
-    public let title: String
-    public let body: String
-    public let accessibilityHint: String
-    public let action: () -> Void
-
-    public init(id: String,
-                title: String,
-                body: String,
-                accessibilityHint: String,
-                action: @escaping () -> Void) {
-        self.id = id
-        self.title = title
-        self.body = body
-        self.accessibilityHint = accessibilityHint
-        self.action = action
-    }
-}
-
-
 public struct NavigationRow: GroupedListRow,
                              Identifiable {
     public let id: String
@@ -105,15 +83,21 @@ public struct InformationRow: GroupedListRow,
     public let title: String
     public let body: String?
     let detail: String
-    
+    let accessibilityHint: String?
+    let action: (() -> Void)?
+
     public init(id: String,
                 title: String,
-                body: String?,
-                detail: String) {
+                body: String? = nil,
+                detail: String,
+                accessibilityHint: String? = nil,
+                action: (() -> Void)? = nil) {
         self.id = id
         self.title = title
         self.body = body
         self.detail = detail
+        self.accessibilityHint = accessibilityHint
+        self.action = action
     }
 }
 
@@ -153,7 +137,8 @@ public struct GroupedListSection_Previews: PreviewProvider {
                         id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
-                        detail: "0.0.1"
+                        detail: "0.0.1",
+                        action: nil
                     ),
                     LinkRow(
                         id: UUID().uuidString,
@@ -189,7 +174,8 @@ public struct GroupedListSection_Previews: PreviewProvider {
                         id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
-                        detail: "1.0"
+                        detail: "1.0",
+                        action: nil
                     ),
                     LinkRow(
                         id: UUID().uuidString,
@@ -220,7 +206,8 @@ public struct GroupedListSection_Previews: PreviewProvider {
                         id: UUID().uuidString,
                         title: "A really important piece of info",
                         body: nil,
-                        detail: "1.0"
+                        detail: "1.0",
+                        action: nil
                     )
                 ],
                 footer: "some really important text about this section"

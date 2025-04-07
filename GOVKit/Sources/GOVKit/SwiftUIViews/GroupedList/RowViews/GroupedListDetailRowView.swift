@@ -1,8 +1,8 @@
 import Foundation
 import SwiftUI
 
-struct GroupedListInformationRowView: View {
-    let row: InformationRow
+struct GroupedListDetailRowView: View {
+    let row: DetailRow
 
     var body: some View {
         Button {

@@ -10,8 +10,8 @@ struct GroupedListRowView: View {
                 GroupedListNavigationRowView(row: row)
             case let row as LinkRow:
                 GroupedListLinkRowView(row: row)
-            case let row as InformationRow:
-                GroupedListInformationRowView(row: row)
+            case let row as DetailRow:
+                GroupedListDetailRowView(row: row)
             case let row as ToggleRow:
                 GroupedListToggleRowView(row: row)
             default:

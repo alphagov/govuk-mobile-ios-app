@@ -77,8 +77,8 @@ public struct NavigationRow: GroupedListRow,
     }
 }
 
-public struct InformationRow: GroupedListRow,
-                              Identifiable {
+public struct DetailRow: GroupedListRow,
+                         Identifiable {
     public let id: String
     public let title: String
     public let body: String?
@@ -133,7 +133,7 @@ public struct GroupedListSection_Previews: PreviewProvider {
             .init(
                 heading: GroupedListHeader(title: "Section 1", icon: nil),
                 rows: [
-                    InformationRow(
+                    DetailRow(
                         id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
@@ -170,7 +170,7 @@ public struct GroupedListSection_Previews: PreviewProvider {
             .init(
                 heading: nil,
                 rows: [
-                    InformationRow(
+                    DetailRow(
                         id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
@@ -202,7 +202,7 @@ public struct GroupedListSection_Previews: PreviewProvider {
                     icon: UIImage(systemName: "house")
                 ),
                 rows: [
-                    InformationRow(
+                    DetailRow(
                         id: UUID().uuidString,
                         title: "A really important piece of info",
                         body: nil,

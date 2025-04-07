@@ -52,13 +52,13 @@ class SettingsViewModelTests {
         #expect(helpAndFeedbackRow.isWebLink == true)
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
 
-        let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
+        let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? DetailRow)
         #expect(appBundleInformation.title == "App version number")
         #expect(appBundleInformation.detail == "123 (456)")
 
         let notificationsSection = sut.listContent[1]
         #expect(notificationsSection.heading?.title == "Notifications")
-        let notificationRow = try #require(notificationsSection.rows.first as? InformationRow)
+        let notificationRow = try #require(notificationsSection.rows.first as? DetailRow)
         #expect(notificationRow.title == "Notifications")
 
         let privacyAndLegalSection = sut.listContent[3]

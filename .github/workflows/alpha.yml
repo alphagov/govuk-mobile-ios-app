@@ -1,6 +1,7 @@
 name: Alpha
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - develop

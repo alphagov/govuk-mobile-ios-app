@@ -121,8 +121,15 @@ extension Container {
             AuthenticationService(
                 authenticationServiceClient: AuthenticationServiceClient(
                     appConfig: self.appConfigService.resolve()
-                )
+                ),
+                tokenService: self.authenticationTokenService.resolve()
             )
         }
+    }
+
+    var authenticationTokenService: Factory<AuthenticationTokenService> {
+        Factory(self) {
+            AuthenticationTokenService()
+        }.scope(.singleton)
     }
 }

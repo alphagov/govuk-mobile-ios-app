@@ -74,4 +74,8 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 enum AuthenticationError: Error {
     case fetchConfigError
     case authenticationFlowError
+    case missingAccessToken
+    case missingRefreshToken
+    case missingIDToken
+    case unknown
 }

@@ -14,7 +14,8 @@ struct SearchViewModelTests{
             analyticsService: mockAnalyticsService,
             searchService: MockSearchService(), 
             activityService: MockActivityService(),
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
         )
         let expectedTitle = UUID().uuidString
         let item = SearchItem(
@@ -42,7 +43,8 @@ struct SearchViewModelTests{
             analyticsService: MockAnalyticsService(),
             searchService: MockSearchService(),
             activityService: mockActivityService,
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
         )
         let expectedTitle = UUID().uuidString
         let item = SearchItem(
@@ -68,7 +70,8 @@ struct SearchViewModelTests{
             analyticsService: mockAnalyticsService,
             searchService: mockService,
             activityService: MockActivityService(),
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
         )
         let searchText = "E3 6SY bin collection"
 
@@ -102,7 +105,8 @@ struct SearchViewModelTests{
             analyticsService: mockAnalyticsService,
             searchService: mockService,
             activityService: MockActivityService(),
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
         )
         let searchText = UUID().uuidString
 
@@ -125,7 +129,8 @@ struct SearchViewModelTests{
             analyticsService: mockAnalyticsService,
             searchService: mockService,
             activityService: MockActivityService(),
-            urlOpener: MockURLOpener()
+            urlOpener: MockURLOpener(),
+            openAction: { _ in }
         )
         let searchText = "ASDLALSD"
 

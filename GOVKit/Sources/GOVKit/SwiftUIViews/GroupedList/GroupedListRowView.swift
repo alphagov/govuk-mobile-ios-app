@@ -85,12 +85,13 @@ struct DetailRowView: View {
                 HStack {
                     Text(row.title)
                         .multilineTextAlignment(.leading)
+                        .foregroundColor(Color(UIColor.govUK.text.primary))
                     Spacer()
                     Text(row.body)
-                    .font(Font.govUK.caption1Medium)
+                    .font(Font.govUK.body)
                     .multilineTextAlignment(.leading)
+                    .foregroundColor(Color(UIColor.govUK.text.link))
                 }
-                .foregroundColor(Color(UIColor.govUK.text.link))
                 RowDetail(text: row.body)
             }
         }

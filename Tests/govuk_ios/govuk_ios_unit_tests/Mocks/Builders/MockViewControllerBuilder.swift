@@ -48,7 +48,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                               analyticsService: any AnalyticsServiceInterface,
                               activityService: any ActivityServiceInterface,
                               subtopicAction: @escaping (any DisplayableTopic) -> Void,
-                              stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void) -> UIViewController {
+                              stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
+                              openAction: @escaping (URL) -> Void) -> UIViewController {
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
 

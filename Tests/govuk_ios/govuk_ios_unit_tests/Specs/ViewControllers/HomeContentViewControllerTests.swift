@@ -26,6 +26,7 @@ struct HomeContentViewControllerTests {
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService()
@@ -53,6 +54,7 @@ struct HomeContentViewControllerTests {
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService()
@@ -84,6 +86,7 @@ struct HomeContentViewControllerTests {
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService()

@@ -24,6 +24,7 @@ struct HomeViewModelTests {
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService()
@@ -57,6 +58,7 @@ struct HomeViewModelTests {
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService()

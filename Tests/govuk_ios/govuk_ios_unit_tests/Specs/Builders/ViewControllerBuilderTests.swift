@@ -34,7 +34,8 @@ struct ViewControllerBuilderTests {
         let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: {},
             notificationsAction: {},
-            recentActivityAction: {}
+            recentActivityAction: {},
+            openSearchAction: { _ in }
         )
 
         let result = subject.home(dependencies: dependencies, actions: actions)
@@ -103,7 +104,8 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            openAction: { _ in }
         )
 
         let rootView = (result as? HostingViewController<TopicDetailView<TopicDetailViewModel>>)?.rootView

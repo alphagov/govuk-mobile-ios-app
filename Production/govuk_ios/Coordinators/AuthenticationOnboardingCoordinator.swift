@@ -3,20 +3,22 @@ import UIKit
 import Onboarding
 
 class AuthenticationOnboardingCoordinator: BaseCoordinator {
+    private let navigationController: UINavigationController
     private let analyticsService: OnboardingAnalyticsService
-    private let authenticationService: AuthenticationServiceInterface
     private let authenticationOnboardingService: AuthenticationOnboardingServiceInterface
-    private let completeAction: () -> Void
+    private let coordinatorBuilder: CoordinatorBuilder
+    private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
          analyticsService: OnboardingAnalyticsService,
-         authenticationService: AuthenticationServiceInterface,
          authenticationOnboardingService: AuthenticationOnboardingServiceInterface,
+         coordinatorBuilder: CoordinatorBuilder,
          completionAction: @escaping () -> Void) {
-        self.authenticationService = authenticationService
+        self.navigationController = navigationController
         self.authenticationOnboardingService = authenticationOnboardingService
         self.analyticsService = analyticsService
-        self.completeAction = completionAction
+        self.coordinatorBuilder = coordinatorBuilder
+        self.completionAction = completionAction
         super.init(navigationController: navigationController)
     }
 
@@ -49,26 +51,15 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
 
     private func finishCoordination() {
         DispatchQueue.main.async {
-            self.completeAction()
+            self.completionAction()
         }
     }
 
     private func authenticateAction() async {
-        guard let window = UIApplication.shared.window else {
-            return
-        }
-
-        await authenticationService.authenticate(
-            window: window,
-            completion: { [weak self] result in
-                switch result {
-                case .success(let response):
-                    print("\(response)")
-                    self?.finishCoordination()
-                case .failure(let error):
-                    print("\(error)")
-                }
-            }
+        let authenticationCoordinator = coordinatorBuilder.authentication(
+            navigationController: navigationController,
+            completionAction: completionAction
         )
+        authenticationCoordinator.start()
     }
 }

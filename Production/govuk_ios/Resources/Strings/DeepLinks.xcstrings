@@ -1,0 +1,28 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "pageNotFoundAlertMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update the app to the latest version.\\n\\nIf you’re already using the latest version, try again later."
+          }
+        }
+      }
+    },
+    "pageNotFoundAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page not found"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

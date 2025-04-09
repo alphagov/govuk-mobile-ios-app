@@ -51,12 +51,20 @@ class TabCoordinator: BaseCoordinator,
             .compactMap { $0.route(for: url) }
             .first
 
+        var isDeepLinkSuccessful: Bool
         if let route = route {
             selectTabIndex(for: route.parent.root)
             route.action()
+            isDeepLinkSuccessful = true
         } else {
             presentDeeplinkError()
+            isDeepLinkSuccessful = false
         }
+        let event = AppEvent.deepLinkNavigation(
+            isSuccessful: isDeepLinkSuccessful,
+            url: url.absoluteString
+        )
+        analyticsService.track(event: event)
     }
 
     private func presentDeeplinkError() {

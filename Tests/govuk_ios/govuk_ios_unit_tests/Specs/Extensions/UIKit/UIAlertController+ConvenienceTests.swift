@@ -12,9 +12,10 @@ struct UIAlertController_ConvenienceTests {
         let subject = UIAlertController.unhandledDeeplinkAlert
 
         #expect(subject.title == "Page not found")
-        #expect(subject.message == "Try again later.")
+        #expect(subject.message == "Update the app to the latest version." +
+                "\n\nIf you’re already using the latest version, try again later.")
         #expect(subject.actions.count == 1)
-        #expect(subject.actions.first?.title == "OK")
+        #expect(subject.actions.first?.title == "Close")
     }
 
     @Test
@@ -30,7 +31,7 @@ struct UIAlertController_ConvenienceTests {
         #expect(subject.title == expectedTitle)
         #expect(subject.message == expectedMessage)
         #expect(subject.actions.count == 1)
-        #expect(subject.actions.first?.title == "OK")
+        #expect(subject.actions.first?.title == "Close")
     }
 
     @Test

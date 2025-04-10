@@ -7,7 +7,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update the app to the latest version.\\n\\nIf you’re already using the latest version, try again later."
+            "value" : "Update the app to the latest version.\n\nIf you’re already using the latest version, try again later."
           }
         }
       }

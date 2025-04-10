@@ -4,14 +4,13 @@ import Authentication
 
 protocol AuthenticationServiceInterface {
     func authenticate(
-        window: UIWindow,
         completion: @escaping (Result<Void, AuthenticationError>) -> Void
     ) async
 }
 
 class AuthenticationService: AuthenticationServiceInterface {
-    let authenticationServiceClient: AuthenticationServiceClientInterface
-    let tokenService: AuthenticationTokenServiceInterface
+    private let authenticationServiceClient: AuthenticationServiceClientInterface
+    private let tokenService: AuthenticationTokenServiceInterface
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          tokenService: AuthenticationTokenServiceInterface) {
@@ -20,11 +19,9 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     func authenticate(
-        window: UIWindow,
         completion: @escaping (Result<Void, AuthenticationError>) -> Void
     ) async {
         await authenticationServiceClient.performAuthenticationFlow(
-            window: window,
             completion: { [weak self] result in
                 guard let self = self else { return }
 
@@ -46,14 +43,14 @@ class AuthenticationService: AuthenticationServiceInterface {
         guard case .success(let tokenResponse) = result
         else { return }
 
-        switch (tokenResponse.accessToken.isEmpty,
-                tokenResponse.idToken,
-                tokenResponse.refreshToken) {
-        case (_, _, nil):
-            throw AuthenticationError.missingRefreshToken
-        case (_, nil, _):
-            throw AuthenticationError.missingIDToken
+        switch (tokenResponse.refreshToken == nil || tokenResponse.refreshToken?.isEmpty == true,
+                tokenResponse.idToken == nil || tokenResponse.idToken?.isEmpty == true,
+                tokenResponse.accessToken.isEmpty) {
         case (true, _, _):
+            throw AuthenticationError.missingRefreshToken
+        case (_, true, _):
+            throw AuthenticationError.missingIDToken
+        case (_, _, true):
             throw AuthenticationError.missingAccessToken
         default:
             tokenService.setTokens(

@@ -116,12 +116,11 @@ extension Container {
         }
     }
 
+    @MainActor
     var authenticationService: Factory<AuthenticationService> {
         Factory(self) {
             AuthenticationService(
-                authenticationServiceClient: AuthenticationServiceClient(
-                    appConfig: self.appConfigService.resolve()
-                ),
+                authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 tokenService: self.authenticationTokenService.resolve()
             )
         }

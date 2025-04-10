@@ -5,7 +5,6 @@ import Authentication
 
 protocol AuthenticationServiceClientInterface {
     func performAuthenticationFlow(
-        window: UIWindow,
         completion: @escaping (Result<Authentication.TokenResponse, AuthenticationError>) -> Void
     ) async
 }
@@ -19,26 +18,31 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     )!
 
     private let redirectURI = "govuk://govuk/login-auth-callback"
+    private let appAuthSession: LoginSession
+    private let oidConfigService: AppOIDConfigServiceInterface
     private var config: LoginSessionConfiguration?
 
-    init(appConfig: AppConfigServiceInterface) {
+    init(appConfig: AppConfigServiceInterface,
+         appAuthSession: LoginSession,
+         oidConfigService: AppOIDConfigServiceInterface) {
         self.appConfig = appConfig
+        self.appAuthSession = appAuthSession
+        self.oidConfigService = oidConfigService
     }
 
     func performAuthenticationFlow(
-        window: UIWindow,
         completion: @escaping (Result<Authentication.TokenResponse, AuthenticationError>) -> Void
     ) async {
         do {
             let config = try await setConfig()
-            let tokenResponse = try await AppAuthSession(window: window).performLoginFlow(
+            let tokenResponse = try await appAuthSession.performLoginFlow(
                 configuration: config
             )
             completion(.success(tokenResponse))
         } catch let error as AuthenticationError {
             completion(.failure(error))
         } catch {
-            completion(.failure(.authenticationFlowError))
+            completion(.failure(.flowError))
         }
     }
 
@@ -58,7 +62,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 
     private func discoverConfiguration() async throws -> OIDServiceConfiguration {
         return try await withCheckedThrowingContinuation { continuation in
-            OIDAuthorizationService.discoverConfiguration(
+            oidConfigService.discoverConfiguration(
                 forIssuer: issuer
             ) { configuration, _ in
                 if let configuration = configuration {
@@ -73,7 +77,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 
 enum AuthenticationError: Error {
     case fetchConfigError
-    case authenticationFlowError
+    case flowError
     case missingAccessToken
     case missingRefreshToken
     case missingIDToken

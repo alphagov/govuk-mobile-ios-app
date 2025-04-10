@@ -1,4 +1,6 @@
 import Foundation
+import Authentication
+import AppAuth
 
 import Factory
 
@@ -24,6 +26,21 @@ extension Container {
         Factory(self) {
             TopicsServiceClient(
                 serviceClient: self.appAPIClient()
+            )
+        }
+    }
+
+    @MainActor
+    var authenticationServiceClient: Factory<AuthenticationServiceClient> {
+        Factory(self) {
+            guard let window = UIApplication.shared.window else {
+                fatalError("Window not found")
+            }
+
+            return AuthenticationServiceClient(
+                appConfig: self.appConfigService.resolve(),
+                appAuthSession: AppAuthSession(window: window),
+                oidConfigService: AppOIDConfigService()
             )
         }
     }

@@ -25,7 +25,6 @@ class AuthenticationCoordinator: BaseCoordinator {
         }
 
         await authenticationService.authenticate(
-            window: window,
             completion: { [weak self] result in
                 switch result {
                 case .success(let response):

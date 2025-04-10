@@ -1,13 +1,17 @@
 import Foundation
 
-protocol AuthenticationTokenServiceInterface {
+protocol AuthenticationTokenSetInterface {
     func setTokens(refreshToken: String, idToken: String, accessToken: String)
 }
 
-class AuthenticationTokenService: AuthenticationTokenServiceInterface {
+class AuthenticationTokenSet: AuthenticationTokenSetInterface {
+    static let shared = AuthenticationTokenSet()
+
     var refreshToken: String?
     var idToken: String?
     var accessToken: String?
+
+    private init() {}
 
     func setTokens(refreshToken: String, idToken: String, accessToken: String) {
         self.refreshToken = refreshToken

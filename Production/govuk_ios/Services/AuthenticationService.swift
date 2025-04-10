@@ -10,12 +10,12 @@ protocol AuthenticationServiceInterface {
 
 class AuthenticationService: AuthenticationServiceInterface {
     private let authenticationServiceClient: AuthenticationServiceClientInterface
-    private let tokenService: AuthenticationTokenServiceInterface
+    private let authenticationTokenSet: AuthenticationTokenSetInterface
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
-         tokenService: AuthenticationTokenServiceInterface) {
+         authenticationTokenSet: AuthenticationTokenSetInterface) {
         self.authenticationServiceClient = authenticationServiceClient
-        self.tokenService = tokenService
+        self.authenticationTokenSet = authenticationTokenSet
     }
 
     func authenticate(
@@ -51,7 +51,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         case (_, _, true):
             throw AuthenticationError.missingAccessToken
         default:
-            tokenService.setTokens(
+            authenticationTokenSet.setTokens(
                 refreshToken: tokenResponse.refreshToken!,
                 idToken: tokenResponse.idToken!,
                 accessToken: tokenResponse.accessToken

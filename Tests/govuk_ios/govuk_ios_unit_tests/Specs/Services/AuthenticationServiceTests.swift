@@ -11,10 +11,10 @@ struct AuthenticationServiceTests {
     @Test
     func authenticate_success_setsTokens() async {
         let mockAuthClient = MockAuthenticationServiceClient()
-        let mockAuthTokenService = MockAuthenticationTokenService()
+        let mockAuthTokenSet = MockAuthenticationTokenSet()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            tokenService: mockAuthTokenService
+            authenticationTokenSet: mockAuthTokenSet
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -36,9 +36,9 @@ struct AuthenticationServiceTests {
         await confirmation("Auth request success") { authRequestComplete in
             await sut.authenticate { result in
                 if case .success(let tokenResponse) = result {
-                    #expect(mockAuthTokenService.tokensSet?.0 == expectedRefreshToken)
-                    #expect(mockAuthTokenService.tokensSet?.1 == expectedIdToken)
-                    #expect(mockAuthTokenService.tokensSet?.2 == expectedAccessToken)
+                    #expect(mockAuthTokenSet.tokensSet?.0 == expectedRefreshToken)
+                    #expect(mockAuthTokenSet.tokensSet?.1 == expectedIdToken)
+                    #expect(mockAuthTokenSet.tokensSet?.2 == expectedAccessToken)
                     authRequestComplete()
                 }
             }
@@ -48,10 +48,10 @@ struct AuthenticationServiceTests {
     @Test
     func authenticate_missingAccessToken_returnsFailure() async {
         let mockAuthClient = MockAuthenticationServiceClient()
-        let mockAuthTokenService = MockAuthenticationTokenService()
+        let mockAuthTokenSet = MockAuthenticationTokenSet()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            tokenService: mockAuthTokenService
+            authenticationTokenSet: mockAuthTokenSet
         )
         let jsonData = """
         {
@@ -78,10 +78,10 @@ struct AuthenticationServiceTests {
     @Test
     func authenticate_missingRefreshToken_returnsFailure() async {
         let mockAuthClient = MockAuthenticationServiceClient()
-        let mockAuthTokenService = MockAuthenticationTokenService()
+        let mockAuthTokenSet = MockAuthenticationTokenSet()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            tokenService: mockAuthTokenService
+            authenticationTokenSet: mockAuthTokenSet
         )
         let jsonData = """
         {
@@ -107,10 +107,10 @@ struct AuthenticationServiceTests {
     @Test
     func authenticate_missingIDToken_returnsFailure() async {
         let mockAuthClient = MockAuthenticationServiceClient()
-        let mockAuthTokenService = MockAuthenticationTokenService()
+        let mockAuthTokenSet = MockAuthenticationTokenSet()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            tokenService: mockAuthTokenService
+            authenticationTokenSet: mockAuthTokenSet
         )
         let jsonData = """
         {

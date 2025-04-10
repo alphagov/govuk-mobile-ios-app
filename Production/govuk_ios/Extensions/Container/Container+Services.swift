@@ -121,14 +121,8 @@ extension Container {
         Factory(self) {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
-                tokenService: self.authenticationTokenService.resolve()
+                authenticationTokenSet: AuthenticationTokenSet.shared
             )
         }
-    }
-
-    var authenticationTokenService: Factory<AuthenticationTokenService> {
-        Factory(self) {
-            AuthenticationTokenService()
-        }.scope(.singleton)
     }
 }

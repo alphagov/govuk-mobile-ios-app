@@ -1,13 +1,12 @@
 import Foundation
+import UIKit
 
 typealias URLPattern = String
 
 struct DeeplinkDataStore {
-    private let routes: [DeeplinkRoute]
-
-    init(routes: [DeeplinkRoute]) {
-        self.routes = routes
-    }
+    let routes: [DeeplinkRoute]
+    let viewControllerBuilder: ViewControllerBuilder
+    let root: UIViewController
 
     func route(for url: URL,
                parent: BaseCoordinator) -> ResolvedDeeplinkRoute? {
@@ -34,5 +33,13 @@ struct DeeplinkDataStore {
     private func isValidDeeplink(url: URL) -> Bool {
         !url.isFileURL &&
         !url.pathComponents.isEmpty
+    }
+
+    @MainActor
+    func presentDeeplinkPage(for url: URL) {
+        let modalViewController = viewControllerBuilder.webViewController(for: url)
+        let navigationController = UINavigationController(rootViewController: modalViewController)
+        navigationController.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        root.present(navigationController, animated: true)
     }
 }

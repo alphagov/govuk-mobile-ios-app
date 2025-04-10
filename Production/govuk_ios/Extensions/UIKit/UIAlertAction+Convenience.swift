@@ -4,7 +4,7 @@ import UIKit
 extension UIAlertAction {
     static func close(handler: (() -> Void)?) -> UIAlertAction {
         .init(
-            title: String.common.localized("Close"),
+            title: String.common.localized("close"),
             style: .default,
             handler: { _ in
                 handler?()

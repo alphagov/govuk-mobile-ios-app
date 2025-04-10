@@ -20,10 +20,6 @@ class AuthenticationCoordinator: BaseCoordinator {
     }
 
     private func authenticate() async {
-        guard let window = UIApplication.shared.window else {
-            return
-        }
-
         await authenticationService.authenticate(
             completion: { [weak self] result in
                 switch result {

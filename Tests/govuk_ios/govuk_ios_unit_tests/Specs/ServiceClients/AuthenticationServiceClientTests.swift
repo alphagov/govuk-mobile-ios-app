@@ -30,7 +30,7 @@ struct AuthenticationServiceClientTests {
     }
 
     @Test @MainActor
-    func performAuthenticationFlow_failure_authenticationError() async {
+    func performAuthenticationFlow_failure_loginFlowError() async {
         let appConfig = MockAppConfigService()
         let appAuthSession = MockAuthenticationSession()
         let oidConfigService = MockOIDConfigService()
@@ -45,7 +45,7 @@ struct AuthenticationServiceClientTests {
         await confirmation("Auth request failure") { authRequestComplete in
             await sut.performAuthenticationFlow { result in
                 if case .failure(let error) = result {
-                    #expect(error == .flowError)
+                    #expect(error == .loginFlow(.userCancelled))
                     authRequestComplete()
                 }
             }

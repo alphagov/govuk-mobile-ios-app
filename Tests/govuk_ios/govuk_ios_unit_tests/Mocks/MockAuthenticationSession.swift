@@ -8,7 +8,7 @@ class MockAuthenticationSession: LoginSession {
     var _tokenResponse: TokenResponse = tokenResponse
     func performLoginFlow(configuration: LoginSessionConfiguration) async throws -> TokenResponse {
         if _shouldReturnError {
-            throw FakeSessionError.genericError
+            throw LoginError.userCancelled
         }
         
         return MockAuthenticationSession.tokenResponse
@@ -35,9 +35,5 @@ class MockAuthenticationSession: LoginSession {
         decoder.dateDecodingStrategy = .iso8601
         let tokenResponse = try? decoder.decode(TokenResponse.self, from: jsonData)
         return tokenResponse!
-    }
-
-    enum FakeSessionError: Error {
-        case genericError
     }
 }

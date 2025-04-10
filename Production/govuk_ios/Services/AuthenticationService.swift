@@ -23,26 +23,24 @@ class AuthenticationService: AuthenticationServiceInterface {
     ) async {
         await authenticationServiceClient.performAuthenticationFlow(
             completion: { [weak self] result in
-                guard let self = self else { return }
-
-                do {
-                    try self.handleResult(result)
-                    completion(.success(()))
-                } catch let error as AuthenticationError {
+                switch result {
+                case .success(let tokenResponse):
+                    do {
+                        try self?.handleResult(tokenResponse)
+                        completion(.success(()))
+                    } catch let error as AuthenticationError {
+                        completion(.failure(error))
+                    } catch {
+                        completion(.failure(.generic))
+                    }
+                case .failure(let error):
                     completion(.failure(error))
-                } catch {
-                    completion(.failure(.unknown))
                 }
             }
         )
     }
 
-    private func handleResult(
-        _ result: Result<Authentication.TokenResponse, AuthenticationError>
-    ) throws {
-        guard case .success(let tokenResponse) = result
-        else { return }
-
+    private func handleResult(_ tokenResponse: TokenResponse) throws {
         switch (tokenResponse.refreshToken == nil || tokenResponse.refreshToken?.isEmpty == true,
                 tokenResponse.idToken == nil || tokenResponse.idToken?.isEmpty == true,
                 tokenResponse.accessToken.isEmpty) {

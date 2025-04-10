@@ -39,10 +39,17 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
                 configuration: config
             )
             completion(.success(tokenResponse))
-        } catch let error as AuthenticationError {
-            completion(.failure(error))
+        } catch AuthenticationError.fetchConfigError {
+            completion(.failure(.fetchConfigError))
+        } catch let error as LoginError {
+            switch error {
+            case .userCancelled:
+                completion(.failure(.loginFlow(.userCancelled)))
+            default:
+                completion(.failure(.loginFlow(.generic(description: "Login flow error"))))
+            }
         } catch {
-            completion(.failure(.flowError))
+            completion(.failure(.generic))
         }
     }
 
@@ -75,11 +82,11 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 }
 
-enum AuthenticationError: Error {
+enum AuthenticationError: Error, Equatable {
+    case loginFlow(LoginError)
     case fetchConfigError
-    case flowError
     case missingAccessToken
     case missingRefreshToken
     case missingIDToken
-    case unknown
+    case generic
 }

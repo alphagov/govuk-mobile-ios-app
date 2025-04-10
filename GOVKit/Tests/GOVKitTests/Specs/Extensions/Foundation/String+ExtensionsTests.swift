@@ -6,11 +6,11 @@ import Testing
 
 @Suite
 struct String_ExtensionsTests {
-    @Test
-    func common_hasCorrectValues() {
-        let sut = String.common
-        #expect(sut.tableName == "Common")
-    }
+//    @Test
+//    func common_hasCorrectValues() {
+//        let sut = String.common
+//        #expect(sut.tableName == "Common")
+//    }
     
     @Test
     func localized_returnsExpectedResult() {

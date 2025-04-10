@@ -69,7 +69,7 @@ class TabCoordinator: BaseCoordinator,
 
     private func presentDeeplinkNotFoundAlert() {
         tabController.present(
-            UIAlertController.unhandledDeeplinkAlert,
+            UIAlertController.deeplinkNotFoundAlert,
             animated: true
         )
     }

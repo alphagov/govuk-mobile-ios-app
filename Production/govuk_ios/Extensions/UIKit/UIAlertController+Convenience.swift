@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 extension UIAlertController {
-    static var unhandledDeeplinkAlert: UIAlertController {
+    static var deeplinkNotFoundAlert: UIAlertController {
         .generalAlert(
             title: String.deeplinks.localized("pageNotFoundAlertTitle"),
             message: String.deeplinks.localized("pageNotFoundAlertMessage"),

@@ -8,8 +8,8 @@ import Testing
 @MainActor
 struct UIAlertController_ConvenienceTests {
     @Test
-    func unhandledDeeplinkAlert_returnsExpectedResult() {
-        let subject = UIAlertController.unhandledDeeplinkAlert
+    func deeplinkNotFoundAlert_returnsExpectedResult() {
+        let subject = UIAlertController.deeplinkNotFoundAlert
 
         #expect(subject.title == "Page not found")
         #expect(subject.message == "Update the app to the latest version.\n\nIf you’re already using the latest version, try again later.")

@@ -8,6 +8,13 @@ extension String {
         )
     }
 
+    static var deeplinks: LocalStringBuilder {
+        .init(
+            tableName: "Deeplinks",
+            bundle: .main
+        )
+    }
+
     static var home: LocalStringBuilder {
         .init(
             tableName: "Home",

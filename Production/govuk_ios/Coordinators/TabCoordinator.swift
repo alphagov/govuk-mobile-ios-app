@@ -51,17 +51,25 @@ class TabCoordinator: BaseCoordinator,
             .compactMap { $0.route(for: url) }
             .first
 
+        let isDeeplinkFound: Bool
         if let route = route {
             selectTabIndex(for: route.parent.root)
             route.action()
+            isDeeplinkFound = true
         } else {
-            presentDeeplinkError()
+            presentDeeplinkNotFoundAlert()
+            isDeeplinkFound = false
         }
+        let event = AppEvent.deeplinkNavigation(
+            isDeeplinkFound: isDeeplinkFound,
+            url: url.absoluteString
+        )
+        analyticsService.track(event: event)
     }
 
-    private func presentDeeplinkError() {
+    private func presentDeeplinkNotFoundAlert() {
         tabController.present(
-            UIAlertController.unhandledDeeplinkAlert,
+            UIAlertController.deeplinkNotFoundAlert,
             animated: true
         )
     }

@@ -85,4 +85,36 @@ struct AppEvent_NavigationTests {
         #expect(result.params?["language"] as? String == "en")
         #expect(result.params?["section"] as? String == "Homepage")
     }
+
+    @Test
+    func deeplinkNavigation_deeplinkFound_returnsExpectedResult() {
+        let result = AppEvent.deeplinkNavigation(
+            isDeeplinkFound: true,
+            url: "scheme://host"
+        )
+
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 5)
+        #expect(result.params?["text"] as? String == "Opened")
+        #expect(result.params?["type"] as? String == "DeepLink")
+        #expect(result.params?["external"] as? Bool == false)
+        #expect(result.params?["language"] as? String == "en")
+        #expect(result.params?["url"] as? String == "scheme://host")
+    }
+
+    @Test
+    func deeplinkNavigation_deeplinkNotFound_returnsExpectedResult() {
+        let result = AppEvent.deeplinkNavigation(
+            isDeeplinkFound: false,
+            url: "scheme://host"
+        )
+
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 5)
+        #expect(result.params?["text"] as? String == "Failed")
+        #expect(result.params?["type"] as? String == "DeepLink")
+        #expect(result.params?["external"] as? Bool == false)
+        #expect(result.params?["language"] as? String == "en")
+        #expect(result.params?["url"] as? String == "scheme://host")
+    }
 }

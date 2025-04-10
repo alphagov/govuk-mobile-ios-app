@@ -129,7 +129,7 @@ struct TabCoordinatorTests {
         let tabController = try #require(navigationController.viewControllers.first as? UITabBarController)
 
         let viewController = UIViewController()
-        let expectedTitle = "Failed"
+        let expectedTitle = UUID().uuidString
         viewController.tabBarItem = .init(
             title: expectedTitle,
             image: nil,
@@ -152,7 +152,7 @@ struct TabCoordinatorTests {
         let receivedUrl = trackedEvent1.params?["url"] as? String
         #expect(receivedUrl == url?.absoluteString)
         let receivedTitle1 = trackedEvent1.params?["text"] as? String
-        #expect(receivedTitle1 == expectedTitle)
+        #expect(receivedTitle1 == "Failed")
         let receivedTitle2 = trackedEvent2.params?["text"] as? String
         #expect(receivedTitle2 == expectedTitle)
     }

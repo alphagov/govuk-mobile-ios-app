@@ -4,8 +4,8 @@ import UIKit
 extension UIAlertController {
     static var unhandledDeeplinkAlert: UIAlertController {
         .generalAlert(
-            title: String.deepLinks.localized("pageNotFoundAlertTitle"),
-            message: String.deepLinks.localized("pageNotFoundAlertMessage"),
+            title: String.deeplinks.localized("pageNotFoundAlertTitle"),
+            message: String.deeplinks.localized("pageNotFoundAlertMessage"),
             handler: nil
         )
     }

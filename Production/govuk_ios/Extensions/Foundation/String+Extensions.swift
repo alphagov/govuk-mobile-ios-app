@@ -8,9 +8,9 @@ extension String {
         )
     }
 
-    static var deepLinks: LocalStringBuilder {
+    static var deeplinks: LocalStringBuilder {
         .init(
-            tableName: "DeepLinks",
+            tableName: "Deeplinks",
             bundle: .main
         )
     }

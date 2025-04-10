@@ -29,9 +29,9 @@ extension AppEvent {
         )
     }
 
-    static func deepLinkNavigation(isSuccessful: Bool, url: String) -> AppEvent {
+    static func deeplinkNavigation(isDeeplinkFound: Bool, url: String) -> AppEvent {
         navigation(
-            text: isSuccessful ? "Opened" : "Failed",
+            text: isDeeplinkFound ? "Opened" : "Failed",
             type: "DeepLink",
             external: false,
             additionalParams: ["url": url]

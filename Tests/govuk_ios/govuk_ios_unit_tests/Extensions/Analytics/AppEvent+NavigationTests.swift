@@ -87,9 +87,9 @@ struct AppEvent_NavigationTests {
     }
 
     @Test
-    func deepLinkNavigation_successful_returnsExpectedResult() {
-        let result = AppEvent.deepLinkNavigation(
-            isSuccessful: true,
+    func deeplinkNavigation_deeplinkFound_returnsExpectedResult() {
+        let result = AppEvent.deeplinkNavigation(
+            isDeeplinkFound: true,
             url: "scheme://host"
         )
 
@@ -103,9 +103,9 @@ struct AppEvent_NavigationTests {
     }
 
     @Test
-    func deepLinkNavigation_unsuccessful_returnsExpectedResult() {
-        let result = AppEvent.deepLinkNavigation(
-            isSuccessful: false,
+    func deeplinkNavigation_deeplinkNotFound_returnsExpectedResult() {
+        let result = AppEvent.deeplinkNavigation(
+            isDeeplinkFound: false,
             url: "scheme://host"
         )
 

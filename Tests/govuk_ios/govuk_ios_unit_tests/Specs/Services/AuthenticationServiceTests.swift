@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Testing
+import Authentication
 
 @testable import govuk_ios
 
@@ -8,51 +9,134 @@ import Testing
 @MainActor
 struct AuthenticationServiceTests {
     @Test
-    func hasSeenOnboarding_hasSeen_returnsTrue() {
-        let userDefaults = UserDefaults()
-        userDefaults.set(bool: true, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
-
-        #expect(subject.hasSeenOnboarding)
-    }
-
-    @Test
-    func hasSeenOnboarding_hasntSeen_returnsTrue() {
-        let userDefaults = UserDefaults()
-        userDefaults.set(bool: false, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
-
-        #expect(subject.hasSeenOnboarding == false)
-    }
-
-    @Test
-    func setHasSeenOnboarding_setsTrue() {
-        let userDefaults = UserDefaults()
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
-        subject.setHasSeenOnboarding()
-
-        #expect(userDefaults.bool(forKey: .authenticationOnboardingSeen) == true)
-    }
-
-    @Test
-    func fetchSlides_returnsExpectedResult() async {
-        let subject = AuthenticationOnboardingService(
-            userDefaults: MockUserDefaults()
+    func authenticate_success_setsTokens() async {
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockAuthTokenService = MockAuthenticationTokenService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            tokenService: mockAuthTokenService
         )
-        let result = await withCheckedContinuation { continuation in
-            subject.fetchSlides(
-                completion: {
-                    continuation.resume(returning: $0)
-                }
-            )
+        let expectedAccessToken = "access_token_value"
+        let expectedRefreshToken = "refresh_token_value"
+        let expectedIdToken = "id_token"
+        let expectedExpiryDate = "2099-01-01T00:00:00Z"
+        let jsonData = """
+        {
+            "accessToken": "\(expectedAccessToken)",
+            "refreshToken": "\(expectedRefreshToken)",
+            "idToken": "\(expectedIdToken)",
+            "tokenType": "id_token",
+            "expiryDate": "\(expectedExpiryDate)"
         }
-        switch result {
-        case .success(let slides):
-            #expect(slides.count == 1)
-        default:
-            #expect(Bool(false))
+        """.data(using: .utf8)!
+
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthClient._stubbedResult = .success(tokenResponse)
+
+        await confirmation("Auth request success") { authRequestComplete in
+            await sut.authenticate { result in
+                if case .success(let tokenResponse) = result {
+                    #expect(mockAuthTokenService.tokensSet?.0 == expectedRefreshToken)
+                    #expect(mockAuthTokenService.tokensSet?.1 == expectedIdToken)
+                    #expect(mockAuthTokenService.tokensSet?.2 == expectedAccessToken)
+                    authRequestComplete()
+                }
+            }
         }
     }
 
-}
+    @Test
+    func authenticate_missingAccessToken_returnsFailure() async {
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockAuthTokenService = MockAuthenticationTokenService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            tokenService: mockAuthTokenService
+        )
+        let jsonData = """
+        {
+            "accessToken": "",
+            "refreshToken": "refresh_token_value",
+            "idToken": "id_token",
+            "tokenType": "id_token",
+            "expiryDate": "2099-01-01T00:00:00Z"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthClient._stubbedResult = .success(tokenResponse)
 
+        await confirmation("Auth request failure") { authRequestComplete in
+            await sut.authenticate { result in
+                if case .failure(let error) = result {
+                    #expect(error == .missingAccessToken)
+                    authRequestComplete()
+                }
+            }
+        }
+    }
+
+    @Test
+    func authenticate_missingRefreshToken_returnsFailure() async {
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockAuthTokenService = MockAuthenticationTokenService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            tokenService: mockAuthTokenService
+        )
+        let jsonData = """
+        {
+            "accessToken": "acces_token",
+            "idToken": "id_token",
+            "tokenType": "id_token",
+            "expiryDate": "2099-01-01T00:00:00Z"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthClient._stubbedResult = .success(tokenResponse)
+
+        await confirmation("Auth request failure") { authRequestComplete in
+            await sut.authenticate { result in
+                if case .failure(let error) = result {
+                    #expect(error == .missingRefreshToken)
+                    authRequestComplete()
+                }
+            }
+        }
+    }
+
+    @Test
+    func authenticate_missingIDToken_returnsFailure() async {
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockAuthTokenService = MockAuthenticationTokenService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            tokenService: mockAuthTokenService
+        )
+        let jsonData = """
+        {
+            "accessToken": "acces_token",
+            "refreshToken": "refresh_token_value",
+            "tokenType": "id_token",
+            "expiryDate": "2099-01-01T00:00:00Z"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthClient._stubbedResult = .success(tokenResponse)
+
+        await confirmation("Auth request failure") { authRequestComplete in
+            await sut.authenticate { result in
+                if case .failure(let error) = result {
+                    #expect(error == .missingIDToken)
+                    authRequestComplete()
+                }
+            }
+        }
+    }
+
+    private func createTokenResponse(_ jsonData: Data) -> TokenResponse {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let tokenResponse = try? decoder.decode(TokenResponse.self, from: jsonData)
+        return tokenResponse!
+    }
+}

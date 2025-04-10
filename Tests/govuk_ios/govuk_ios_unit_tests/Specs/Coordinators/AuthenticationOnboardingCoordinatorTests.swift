@@ -8,18 +8,20 @@ import Onboarding
 
 @Suite
 class AuthenticationOnboardingCoordinatorTests {
-    @Test
-    func start_startsOnboarding() async {
-        let mockAuthenticationService = MockAuthenticationService()
-        let mockNavigationController = await MockNavigationController()
-        let sut = await AuthenticationOnboardingCoordinator(
+    @MainActor @Test
+    func start_startsOnboarding() {
+        let mockAuthenticationOnboardingService = MockAuthenticationOnboardingService()
+        let mockNavigationController = MockNavigationController()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let sut = AuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             analyticsService: MockAnalyticsService(),
-            authenticationService: mockAuthenticationService,
+            authenticationOnboardingService: mockAuthenticationOnboardingService,
+            coordinatorBuilder: mockCoordinatorBuilder,
             completionAction: {}
         )
-        await sut.start(url: nil)
+        sut.start(url: nil)
 
-        await #expect(mockNavigationController._setViewControllers?.count == .some(1))
+        #expect(mockNavigationController._setViewControllers?.count == .some(1))
     }
 }

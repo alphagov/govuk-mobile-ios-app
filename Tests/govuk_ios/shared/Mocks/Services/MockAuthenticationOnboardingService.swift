@@ -5,7 +5,7 @@ import Onboarding
 
 @testable import govuk_ios
 
-class MockAuthenticationService: AuthenticationServiceInterface {
+class MockAuthenticationOnboardingService: AuthenticationOnboardingServiceInterface {
     var _stubbedHasSeenOnboarding: Bool = false
     var hasSeenOnboarding: Bool {
         _stubbedHasSeenOnboarding

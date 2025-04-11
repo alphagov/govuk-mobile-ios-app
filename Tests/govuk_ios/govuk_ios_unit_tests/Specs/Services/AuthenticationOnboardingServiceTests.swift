@@ -35,6 +35,24 @@ struct AuthenticationOnboardingServiceTests {
     }
 
     @Test
+    func shouldSkipOnboarding_featureDisabledHasntSeenOnboarding_returnsTrue() {
+        let userDefaults = UserDefaults()
+        userDefaults.set(bool: false, forKey: .authenticationOnboardingSeen)
+        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
+
+        #expect(subject.shouldSkipOnboarding())
+    }
+
+    @Test
+    func shouldSkipOnboarding_featureDisabledHasSeenOnboarding_returnsTrue() {
+        let userDefaults = UserDefaults()
+        userDefaults.set(bool: true, forKey: .authenticationOnboardingSeen)
+        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
+
+        #expect(subject.shouldSkipOnboarding())
+    }
+
+    @Test
     func fetchSlides_returnsExpectedResult() async {
         let subject = AuthenticationOnboardingService(
             userDefaults: MockUserDefaults()

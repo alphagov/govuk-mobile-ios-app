@@ -133,6 +133,26 @@ struct AuthenticationServiceTests {
         }
     }
 
+    @Test
+    func authenticate_serviceClientError_returnsFailure() async {
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockAuthTokenSet = MockAuthenticationTokenSet()
+        mockAuthClient._stubbedResult = .failure(.loginFlow(.clientError))
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticationTokenSet: mockAuthTokenSet
+        )
+
+        await confirmation("Auth request failure") { authRequestComplete in
+            await sut.authenticate { result in
+                if case .failure(let error) = result {
+                    #expect(error == .loginFlow(.clientError))
+                    authRequestComplete()
+                }
+            }
+        }
+    }
+
     private func createTokenResponse(_ jsonData: Data) -> TokenResponse {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601

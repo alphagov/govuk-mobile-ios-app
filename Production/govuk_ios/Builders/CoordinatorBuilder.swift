@@ -42,14 +42,12 @@ class CoordinatorBuilder {
 
     var settings: TabItemCoordinator {
         let navigationController = UINavigationController.settings
-        let viewControllerBuilder = ViewControllerBuilder()
 
         return SettingsCoordinator(
-            navigationController: UINavigationController.settings,
+            navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: DeeplinkDataStore.settings(
                 coordinatorBuilder: self,
-                viewControllerBuilder: viewControllerBuilder,
                 root: navigationController
             ),
             analyticsService: container.analyticsService.resolve(),

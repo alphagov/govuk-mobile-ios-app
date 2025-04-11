@@ -3,9 +3,7 @@ import UIKit
 import Authentication
 
 protocol AuthenticationServiceInterface {
-    func authenticate(
-        completion: @escaping (Result<Void, AuthenticationError>) -> Void
-    ) async
+    func authenticate() async -> AuthenticationResult
 }
 
 class AuthenticationService: AuthenticationServiceInterface {
@@ -18,26 +16,21 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.authenticationTokenSet = authenticationTokenSet
     }
 
-    func authenticate(
-        completion: @escaping (Result<Void, AuthenticationError>) -> Void
-    ) async {
-        await authenticationServiceClient.performAuthenticationFlow(
-            completion: { [weak self] result in
-                switch result {
-                case .success(let tokenResponse):
-                    do {
-                        try self?.handleResult(tokenResponse)
-                        completion(.success(()))
-                    } catch let error as AuthenticationError {
-                        completion(.failure(error))
-                    } catch {
-                        completion(.failure(.generic))
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-                }
+    func authenticate() async -> AuthenticationResult {
+        let result = await authenticationServiceClient.performAuthenticationFlow()
+        switch result {
+        case .success(let tokenResponse):
+            do {
+                try handleResult(tokenResponse)
+                return AuthenticationResult.success(tokenResponse)
+            } catch let error as AuthenticationError {
+                return AuthenticationResult.failure(error)
+            } catch {
+                return AuthenticationResult.failure(.generic)
             }
-        )
+        case .failure(let error):
+            return AuthenticationResult.failure(error)
+        }
     }
 
     private func handleResult(_ tokenResponse: TokenResponse) throws {

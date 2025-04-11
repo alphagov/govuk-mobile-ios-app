@@ -18,13 +18,12 @@ struct AuthenticationServiceClientTests {
         )
 
         await confirmation("Auth request success") { authRequestComplete in
-            await sut.performAuthenticationFlow { result in
-                if case .success(let tokenResponse) = result {
-                    #expect(tokenResponse.accessToken == appAuthSession._tokenResponse.accessToken)
-                    #expect(tokenResponse.refreshToken == appAuthSession._tokenResponse.refreshToken)
-                    #expect(tokenResponse.idToken == appAuthSession._tokenResponse.idToken)
-                    authRequestComplete()
-                }
+            let result = await sut.performAuthenticationFlow()
+            if case .success(let tokenResponse) = result {
+                #expect(tokenResponse.accessToken == appAuthSession._tokenResponse.accessToken)
+                #expect(tokenResponse.refreshToken == appAuthSession._tokenResponse.refreshToken)
+                #expect(tokenResponse.idToken == appAuthSession._tokenResponse.idToken)
+                authRequestComplete()
             }
         }
     }
@@ -43,11 +42,10 @@ struct AuthenticationServiceClientTests {
         )
 
         await confirmation("Auth request failure") { authRequestComplete in
-            await sut.performAuthenticationFlow { result in
-                if case .failure(let error) = result {
-                    #expect(error == .loginFlow(.userCancelled))
-                    authRequestComplete()
-                }
+            let result = await sut.performAuthenticationFlow()
+            if case .failure(let error) = result {
+                #expect(error == .loginFlow(.userCancelled))
+                authRequestComplete()
             }
         }
     }
@@ -66,11 +64,10 @@ struct AuthenticationServiceClientTests {
         )
 
         await confirmation("Auth request failure") { authRequestComplete in
-            await sut.performAuthenticationFlow { result in
-                if case .failure(let error) = result {
-                    #expect(error == .fetchConfigError)
-                    authRequestComplete()
-                }
+            let result = await sut.performAuthenticationFlow()
+            if case .failure(let error) = result {
+                #expect(error == .fetchConfigError)
+                authRequestComplete()
             }
         }
     }

@@ -3,10 +3,10 @@ import UIKit
 import AppAuth
 import Authentication
 
+typealias AuthenticationResult = Result<Authentication.TokenResponse, AuthenticationError>
+
 protocol AuthenticationServiceClientInterface {
-    func performAuthenticationFlow(
-        completion: @escaping (Result<Authentication.TokenResponse, AuthenticationError>) -> Void
-    ) async
+    func performAuthenticationFlow() async -> AuthenticationResult
 }
 
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
@@ -30,26 +30,26 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         self.oidConfigService = oidConfigService
     }
 
-    func performAuthenticationFlow(
-        completion: @escaping (Result<Authentication.TokenResponse, AuthenticationError>) -> Void
-    ) async {
+    func performAuthenticationFlow() async -> AuthenticationResult {
         do {
             let config = try await setConfig()
             let tokenResponse = try await appAuthSession.performLoginFlow(
                 configuration: config
             )
-            completion(.success(tokenResponse))
+            return AuthenticationResult.success(tokenResponse)
         } catch AuthenticationError.fetchConfigError {
-            completion(.failure(.fetchConfigError))
+            return AuthenticationResult.failure(.fetchConfigError)
         } catch let error as LoginError {
             switch error {
             case .userCancelled:
-                completion(.failure(.loginFlow(.userCancelled)))
+                return AuthenticationResult.failure(.loginFlow(.userCancelled))
             default:
-                completion(.failure(.loginFlow(.generic(description: "Login flow error"))))
+                return AuthenticationResult.failure(
+                    .loginFlow(.generic(description: "Login flow error"))
+                )
             }
         } catch {
-            completion(.failure(.generic))
+            return AuthenticationResult.failure(.generic)
         }
     }
 

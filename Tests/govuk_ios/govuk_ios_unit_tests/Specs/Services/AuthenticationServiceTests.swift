@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 import Testing
 import Authentication
 
@@ -33,14 +32,14 @@ struct AuthenticationServiceTests {
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
+        let result = await sut.authenticate()
+
         await confirmation("Auth request success") { authRequestComplete in
-            await sut.authenticate { result in
-                if case .success = result {
-                    #expect(mockAuthTokenSet.tokensSet?.0 == expectedRefreshToken)
-                    #expect(mockAuthTokenSet.tokensSet?.1 == expectedIdToken)
-                    #expect(mockAuthTokenSet.tokensSet?.2 == expectedAccessToken)
-                    authRequestComplete()
-                }
+            if case .success(_) = result {
+                #expect(mockAuthTokenSet.tokensSet?.0 == expectedRefreshToken)
+                #expect(mockAuthTokenSet.tokensSet?.1 == expectedIdToken)
+                #expect(mockAuthTokenSet.tokensSet?.2 == expectedAccessToken)
+                authRequestComplete()
             }
         }
     }
@@ -66,11 +65,10 @@ struct AuthenticationServiceTests {
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
         await confirmation("Auth request failure") { authRequestComplete in
-            await sut.authenticate { result in
-                if case .failure(let error) = result {
-                    #expect(error == .missingAccessToken)
-                    authRequestComplete()
-                }
+            let result = await sut.authenticate()
+            if case .failure(let error) = result {
+                #expect(error == .missingAccessToken)
+                authRequestComplete()
             }
         }
     }
@@ -95,11 +93,10 @@ struct AuthenticationServiceTests {
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
         await confirmation("Auth request failure") { authRequestComplete in
-            await sut.authenticate { result in
-                if case .failure(let error) = result {
-                    #expect(error == .missingRefreshToken)
-                    authRequestComplete()
-                }
+            let result = await sut.authenticate()
+            if case .failure(let error) = result {
+                #expect(error == .missingRefreshToken)
+                authRequestComplete()
             }
         }
     }
@@ -124,11 +121,10 @@ struct AuthenticationServiceTests {
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
         await confirmation("Auth request failure") { authRequestComplete in
-            await sut.authenticate { result in
-                if case .failure(let error) = result {
-                    #expect(error == .missingIDToken)
-                    authRequestComplete()
-                }
+            let result = await sut.authenticate()
+            if case .failure(let error) = result {
+                #expect(error == .missingIDToken)
+                authRequestComplete()
             }
         }
     }
@@ -144,11 +140,10 @@ struct AuthenticationServiceTests {
         )
 
         await confirmation("Auth request failure") { authRequestComplete in
-            await sut.authenticate { result in
-                if case .failure(let error) = result {
-                    #expect(error == .loginFlow(.clientError))
-                    authRequestComplete()
-                }
+            let result = await sut.authenticate()
+            if case .failure(let error) = result {
+                #expect(error == .loginFlow(.clientError))
+                authRequestComplete()
             }
         }
     }

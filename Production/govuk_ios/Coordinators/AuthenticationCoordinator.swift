@@ -20,16 +20,13 @@ class AuthenticationCoordinator: BaseCoordinator {
     }
 
     private func authenticate() async {
-        await authenticationService.authenticate(
-            completion: { [weak self] result in
-                switch result {
-                case .success(let response):
-                    print("\(response)")
-                    self?.completionAction()
-                case .failure(let error):
-                    print("\(error)")
-                }
-            }
-        )
+        let result = await authenticationService.authenticate()
+        switch result {
+        case .success(let response):
+            print("\(response)")
+            completionAction()
+        case .failure(let error):
+            print("\(error)")
+        }
     }
 }

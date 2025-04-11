@@ -2,10 +2,10 @@ import Foundation
 import UIKit
 
 struct WebDeeplinkRoute: DeeplinkRoute {
-    private let viewControllerBuilder: ViewControllerBuilder
+    private let coordinatorBuilder: CoordinatorBuilder
 
-    init(viewControllerBuilder: ViewControllerBuilder) {
-        self.viewControllerBuilder = viewControllerBuilder
+    init(coordinatorBuilder: CoordinatorBuilder) {
+        self.coordinatorBuilder = coordinatorBuilder
     }
 
     var pattern: URLPattern {
@@ -36,9 +36,7 @@ struct WebDeeplinkRoute: DeeplinkRoute {
 
     @MainActor
     private func presentDeeplinkPage(for url: URL, coordinator: BaseCoordinator) {
-        let modalViewController = viewControllerBuilder.webViewController(for: url)
-        let navigationController = UINavigationController(rootViewController: modalViewController)
-        navigationController.modalPresentationStyle = UIModalPresentationStyle.formSheet
-        coordinator.root.present(navigationController, animated: true)
+        let webCoordinator = coordinatorBuilder.webView(url: url)
+        coordinator.present(webCoordinator)
     }
 }

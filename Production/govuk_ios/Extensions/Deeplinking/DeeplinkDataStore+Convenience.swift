@@ -3,12 +3,11 @@ import UIKit
 
 extension DeeplinkDataStore {
     static func home(coordinatorBuilder: CoordinatorBuilder,
-                     viewControllerBuilder: ViewControllerBuilder,
                      root: UIViewController) -> DeeplinkDataStore {
         DeeplinkDataStore(
             routes: [
                 HomeDeeplinkRoute(coordinatorBuilder: coordinatorBuilder),
-                WebDeeplinkRoute(viewControllerBuilder: viewControllerBuilder)
+                WebDeeplinkRoute(coordinatorBuilder: coordinatorBuilder)
             ],
             root: root
         )

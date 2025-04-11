@@ -19,15 +19,13 @@ class CoordinatorBuilder {
 
     var home: TabItemCoordinator {
         let navigationController = UINavigationController.home
-        let viewControllerBuilder = ViewControllerBuilder()
 
         return HomeCoordinator(
-            navigationController: UINavigationController.home,
+            navigationController: navigationController,
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             deeplinkStore: DeeplinkDataStore.home(
                 coordinatorBuilder: self,
-                viewControllerBuilder: viewControllerBuilder,
                 root: navigationController
             ),
             analyticsService: container.analyticsService.resolve(),
@@ -199,6 +197,14 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             notificationService: container.notificationService.resolve(),
             completeAction: completionAction
+        )
+    }
+
+    func webView(url: URL) -> BaseCoordinator {
+        WebViewCoordinator(
+            navigationController: UINavigationController(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            url: url
         )
     }
 }

@@ -35,7 +35,7 @@ struct AuthenticationServiceTests {
 
         await confirmation("Auth request success") { authRequestComplete in
             await sut.authenticate { result in
-                if case .success(let tokenResponse) = result {
+                if case .success = result {
                     #expect(mockAuthTokenSet.tokensSet?.0 == expectedRefreshToken)
                     #expect(mockAuthTokenSet.tokensSet?.1 == expectedIdToken)
                     #expect(mockAuthTokenSet.tokensSet?.2 == expectedAccessToken)

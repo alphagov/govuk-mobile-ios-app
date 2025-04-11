@@ -23,7 +23,7 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard !authenticationOnboardingService.hasSeenOnboarding else {
+        guard !authenticationOnboardingService.shouldSkipOnboarding() else {
             finishCoordination()
             return
         }

@@ -3,8 +3,10 @@ import Onboarding
 
 protocol AuthenticationOnboardingServiceInterface: OnboardingSlideProvider {
     var hasSeenOnboarding: Bool { get }
+    var isFeatureEnabled: Bool { get }
 
     func setHasSeenOnboarding()
+    func shouldSkipOnboarding() -> Bool
 }
 
 struct AuthenticationOnboardingService: AuthenticationOnboardingServiceInterface {
@@ -16,6 +18,14 @@ struct AuthenticationOnboardingService: AuthenticationOnboardingServiceInterface
 
     var hasSeenOnboarding: Bool {
         userDefaults.bool(forKey: .authenticationOnboardingSeen)
+    }
+
+    var isFeatureEnabled: Bool {
+        false
+    }
+
+    func shouldSkipOnboarding() -> Bool {
+        hasSeenOnboarding || !isFeatureEnabled
     }
 
     func setHasSeenOnboarding() {

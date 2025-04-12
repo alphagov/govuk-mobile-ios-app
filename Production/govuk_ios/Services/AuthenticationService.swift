@@ -3,7 +3,7 @@ import UIKit
 import Authentication
 
 protocol AuthenticationServiceInterface {
-    func authenticate() async -> AuthenticationResult
+    func authenticate(window: UIWindow) async -> AuthenticationResult
 }
 
 class AuthenticationService: AuthenticationServiceInterface {
@@ -16,8 +16,8 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.authenticationTokenSet = authenticationTokenSet
     }
 
-    func authenticate() async -> AuthenticationResult {
-        let result = await authenticationServiceClient.performAuthenticationFlow()
+    func authenticate(window: UIWindow) async -> AuthenticationResult {
+        let result = await authenticationServiceClient.performAuthenticationFlow(window: window)
         switch result {
         case .success(let tokenResponse):
             do {

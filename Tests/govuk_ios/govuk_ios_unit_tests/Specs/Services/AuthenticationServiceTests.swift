@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import Testing
 import Authentication
 
@@ -32,7 +33,7 @@ struct AuthenticationServiceTests {
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
-        let result = await sut.authenticate()
+        let result = await sut.authenticate(window: UIApplication.shared.window!)
 
         await confirmation("Auth request success") { authRequestComplete in
             if case .success(_) = result {
@@ -65,7 +66,7 @@ struct AuthenticationServiceTests {
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
         await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.authenticate()
+            let result = await sut.authenticate(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .missingAccessToken)
                 authRequestComplete()
@@ -93,7 +94,7 @@ struct AuthenticationServiceTests {
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
         await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.authenticate()
+            let result = await sut.authenticate(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .missingRefreshToken)
                 authRequestComplete()
@@ -121,7 +122,7 @@ struct AuthenticationServiceTests {
         mockAuthClient._stubbedResult = .success(tokenResponse)
 
         await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.authenticate()
+            let result = await sut.authenticate(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .missingIDToken)
                 authRequestComplete()
@@ -140,7 +141,7 @@ struct AuthenticationServiceTests {
         )
 
         await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.authenticate()
+            let result = await sut.authenticate(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .loginFlow(.clientError))
                 authRequestComplete()

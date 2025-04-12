@@ -33,14 +33,10 @@ extension Container {
     @MainActor
     var authenticationServiceClient: Factory<AuthenticationServiceClient> {
         Factory(self) {
-            guard let window = UIApplication.shared.window else {
-                fatalError("Window not found")
-            }
-
             return AuthenticationServiceClient(
                 appConfig: self.appConfigService.resolve(),
-                appAuthSession: AppAuthSession(window: window),
-                oidConfigService: AppOIDConfigService()
+                appAuthSession: AppAuthSessionWrapper(),
+                oidConfigService: OIDAuthorizationServiceWrapper()
             )
         }
     }

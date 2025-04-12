@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import Testing
 
 @testable import govuk_ios
@@ -8,21 +9,22 @@ struct AuthenticationServiceClientTests {
     @Test @MainActor
     func performAuthenticationFlow_success() async {
         let appConfig = MockAppConfigService()
-        let appAuthSession = MockAuthenticationSession()
+        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let oidConfigService = MockOIDConfigService()
 
         let sut = AuthenticationServiceClient(
             appConfig: appConfig,
-            appAuthSession: appAuthSession,
+            appAuthSession: appAuthSessionWrapper,
             oidConfigService: oidConfigService
         )
 
         await confirmation("Auth request success") { authRequestComplete in
-            let result = await sut.performAuthenticationFlow()
+            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
             if case .success(let tokenResponse) = result {
-                #expect(tokenResponse.accessToken == appAuthSession._tokenResponse.accessToken)
-                #expect(tokenResponse.refreshToken == appAuthSession._tokenResponse.refreshToken)
-                #expect(tokenResponse.idToken == appAuthSession._tokenResponse.idToken)
+                let authSessionResponse = appAuthSessionWrapper._mockAuthenticationSession._tokenResponse
+                #expect(tokenResponse.accessToken == authSessionResponse.accessToken)
+                #expect(tokenResponse.refreshToken == authSessionResponse.refreshToken)
+                #expect(tokenResponse.idToken == authSessionResponse.idToken)
                 authRequestComplete()
             }
         }
@@ -31,18 +33,18 @@ struct AuthenticationServiceClientTests {
     @Test @MainActor
     func performAuthenticationFlow_failure_loginFlowError() async {
         let appConfig = MockAppConfigService()
-        let appAuthSession = MockAuthenticationSession()
+        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let oidConfigService = MockOIDConfigService()
-        appAuthSession._shouldReturnError = true
+        appAuthSessionWrapper._mockAuthenticationSession._shouldReturnError = true
 
         let sut = AuthenticationServiceClient(
             appConfig: appConfig,
-            appAuthSession: appAuthSession,
+            appAuthSession: appAuthSessionWrapper,
             oidConfigService: oidConfigService
         )
 
         await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.performAuthenticationFlow()
+            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .loginFlow(.userCancelled))
                 authRequestComplete()
@@ -53,18 +55,18 @@ struct AuthenticationServiceClientTests {
     @Test @MainActor
     func performAuthenticationFlow_failure_fetchConfigError() async {
         let appConfig = MockAppConfigService()
-        let appAuthSession = MockAuthenticationSession()
+        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let oidConfigService = MockOIDConfigService()
         oidConfigService._shouldReturnFetchConfigError = true
 
         let sut = AuthenticationServiceClient(
             appConfig: appConfig,
-            appAuthSession: appAuthSession,
+            appAuthSession: appAuthSessionWrapper,
             oidConfigService: oidConfigService
         )
 
         await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.performAuthenticationFlow()
+            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .fetchConfigError)
                 authRequestComplete()

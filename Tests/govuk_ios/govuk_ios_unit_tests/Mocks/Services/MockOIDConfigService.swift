@@ -3,7 +3,7 @@ import AppAuthCore
 
 @testable import govuk_ios
 
-class MockOIDConfigService: AppOIDConfigServiceInterface {
+class MockOIDConfigService: OIDAuthorizationServiceWrapperInterface {
     var _shouldReturnFetchConfigError: Bool = false
     func discoverConfiguration(forIssuer issuer: URL, completion: @escaping (OIDServiceConfiguration?, Error?) -> Void) {
         if _shouldReturnFetchConfigError {

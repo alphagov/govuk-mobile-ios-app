@@ -1,7 +1,16 @@
 import Foundation
+import UIKit
 import Authentication
 
 @testable import govuk_ios
+
+@MainActor
+class MockAuthenticationSessionWrapper: AppAuthSessionWrapperInterface {
+    var _mockAuthenticationSession = MockAuthenticationSession()
+    func session(window: UIWindow) -> LoginSession {
+        _mockAuthenticationSession
+    }
+}
 
 class MockAuthenticationSession: LoginSession {
     var _shouldReturnError: Bool = false

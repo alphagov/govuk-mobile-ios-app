@@ -6,7 +6,7 @@ import Authentication
 typealias AuthenticationResult = Result<Authentication.TokenResponse, AuthenticationError>
 
 protocol AuthenticationServiceClientInterface {
-    func performAuthenticationFlow() async -> AuthenticationResult
+    func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult
 }
 
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
@@ -18,22 +18,23 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     )!
 
     private let redirectURI = "govuk://govuk/login-auth-callback"
-    private let appAuthSession: LoginSession
-    private let oidConfigService: AppOIDConfigServiceInterface
+    private let appAuthSession: AppAuthSessionWrapperInterface
+    private let oidConfigService: OIDAuthorizationServiceWrapperInterface
     private var config: LoginSessionConfiguration?
 
     init(appConfig: AppConfigServiceInterface,
-         appAuthSession: LoginSession,
-         oidConfigService: AppOIDConfigServiceInterface) {
+         appAuthSession: AppAuthSessionWrapperInterface,
+         oidConfigService: OIDAuthorizationServiceWrapperInterface) {
         self.appConfig = appConfig
         self.appAuthSession = appAuthSession
         self.oidConfigService = oidConfigService
     }
 
-    func performAuthenticationFlow() async -> AuthenticationResult {
+    func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
         do {
             let config = try await setConfig()
-            let tokenResponse = try await appAuthSession.performLoginFlow(
+            let session = await appAuthSession.session(window: window)
+            let tokenResponse = try await session.performLoginFlow(
                 configuration: config
             )
             return AuthenticationResult.success(tokenResponse)

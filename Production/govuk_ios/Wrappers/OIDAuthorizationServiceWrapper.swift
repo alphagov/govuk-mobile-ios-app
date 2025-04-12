@@ -1,14 +1,14 @@
 import Foundation
 import AppAuth
 
-protocol AppOIDConfigServiceInterface {
+protocol OIDAuthorizationServiceWrapperInterface {
     func discoverConfiguration(
         forIssuer issuer: URL,
         completion: @escaping (OIDServiceConfiguration?, Error?) -> Void
     )
 }
 
-class AppOIDConfigService: AppOIDConfigServiceInterface {
+class OIDAuthorizationServiceWrapper: OIDAuthorizationServiceWrapperInterface {
     func discoverConfiguration(
         forIssuer issuer: URL,
         completion: @escaping (OIDServiceConfiguration?, Error?) -> Void

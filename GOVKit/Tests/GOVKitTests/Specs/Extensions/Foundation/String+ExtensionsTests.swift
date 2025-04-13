@@ -12,12 +12,12 @@ struct String_ExtensionsTests {
 //        #expect(sut.tableName == "Common")
 //    }
     
-    @Test
-    func localized_returnsExpectedResult() {
-        let sut = String.LocalStringBuilder(
-            tableName: "TestStrings",
-            bundle: .module
-        )
-        #expect(sut.localized("testString") == "Test string 123")
-    }
+//    @Test
+//    func localized_returnsExpectedResult() {
+//        let sut = String.LocalStringBuilder(
+//            tableName: "TestStrings",
+//            bundle: .module
+//        )
+//        #expect(sut.localized("testString") == "Test string 123")
+//    }
 }

@@ -20,7 +20,6 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let redirectURI = "govuk://govuk/login-auth-callback"
     private let appAuthSession: AppAuthSessionWrapperInterface
     private let oidConfigService: OIDAuthorizationServiceWrapperInterface
-    private var config: LoginSessionConfiguration?
 
     init(appConfig: AppConfigServiceInterface,
          appAuthSession: AppAuthSessionWrapperInterface,

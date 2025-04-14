@@ -9,7 +9,7 @@ struct WebDeeplinkRoute: DeeplinkRoute {
     }
 
     var pattern: URLPattern {
-        "/web" // Pattern to match web deeplinks
+        "/web"
     }
 
     @MainActor

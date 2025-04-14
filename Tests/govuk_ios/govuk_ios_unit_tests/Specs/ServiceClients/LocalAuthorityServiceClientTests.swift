@@ -3,15 +3,15 @@ import Testing
 
 @testable import govuk_ios
 
+@Suite
 struct LocalAuthorityServiceClientTests {
 
     @Test
     func fetchLocalAuthority_sendsExpectedResults() async throws {
-
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
-
         let expectedPostcode = "SE129PT"
+
         sut.fetchLocalAuthority(
             postcode: expectedPostcode) { _ in }
 
@@ -23,7 +23,6 @@ struct LocalAuthorityServiceClientTests {
     @Test
     func fetchLocalAuthority_success_addressLists_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
-
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
@@ -38,10 +37,9 @@ struct LocalAuthorityServiceClientTests {
                 slug: "slug2",
                 name: "name2"
             )
-
         ]
-        let expectedResult = LocalAuthoritiesList(addresses: addresses)
 
+        let expectedResult = LocalAuthoritiesList(addresses: addresses)
         let stubbedData = try! JSONEncoder().encode(expectedResult)
         mockAPI._stubbedSendResponse = .success(stubbedData)
         let result = await withCheckedContinuation { continuation in
@@ -62,7 +60,6 @@ struct LocalAuthorityServiceClientTests {
     @Test
     func fetchLocalAuthority_success_tierOnelocalAuthority_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
-
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
@@ -75,7 +72,6 @@ struct LocalAuthorityServiceClientTests {
         )
 
         let expectedResult = LocalAuthority(localAuthority: authority)
-
         let stubbedData = try! JSONEncoder().encode(expectedResult)
         mockAPI._stubbedSendResponse = .success(stubbedData)
 
@@ -98,7 +94,6 @@ struct LocalAuthorityServiceClientTests {
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
-
         let parentAuthority = Authority(
             name: "parentAuthority",
             homepageUrl: "homepageUrl",
@@ -106,7 +101,6 @@ struct LocalAuthorityServiceClientTests {
             slug: "slug",
             parent: nil
         )
-
         let authority = Authority(
             name: "name2",
             homepageUrl: "homepageUrl",
@@ -114,9 +108,7 @@ struct LocalAuthorityServiceClientTests {
             slug: "slug2",
             parent: parentAuthority
         )
-
         let expectedResult = LocalAuthority(localAuthority: authority)
-
         let stubbedData = try! JSONEncoder().encode(expectedResult)
         mockAPI._stubbedSendResponse = .success(stubbedData)
 
@@ -138,8 +130,8 @@ struct LocalAuthorityServiceClientTests {
     func fetchLocalAuthority_failure_apiUnavailable_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
-
         mockAPI._stubbedSendResponse = .failure(TestError.fakeNetwork)
+
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
@@ -159,6 +151,7 @@ struct LocalAuthorityServiceClientTests {
         mockAPI._stubbedSendResponse = .failure(
             NSError(domain: "TestError", code: NSURLErrorNotConnectedToInternet)
         )
+
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
@@ -175,6 +168,7 @@ struct LocalAuthorityServiceClientTests {
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
         let invalidObject = try! JSONEncoder().encode("Test")
         mockAPI._stubbedSendResponse = .success(invalidObject)
+
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
@@ -189,9 +183,9 @@ struct LocalAuthorityServiceClientTests {
     func fetchLocalAuthority_error_returnsExpectedresult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
-
         let stubbedData = try! JSONEncoder().encode(LocalErrorMessage(message: "errorMessage"))
         mockAPI._stubbedSendResponse = .success(stubbedData)
+
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
                 postcode: "test") { result in

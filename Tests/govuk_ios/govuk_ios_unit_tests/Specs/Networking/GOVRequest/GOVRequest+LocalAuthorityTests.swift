@@ -10,7 +10,7 @@ struct GOVRequest_LocalAuthorityTests {
     @Test
     func local_returnsExpectedVlues() async throws {
         let expectedPostcode = "SW1A 0AA"
-        let request = GOVRequest.local(postcode: expectedPostcode)
+        let request = GOVRequest.localAuthority(postcode: expectedPostcode)
 
         #expect(request.urlPath == "/find-local-council/query.json")
         #expect(request.method == .get)

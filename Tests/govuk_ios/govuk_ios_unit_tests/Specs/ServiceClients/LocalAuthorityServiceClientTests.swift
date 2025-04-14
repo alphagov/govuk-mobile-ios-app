@@ -6,13 +6,13 @@ import Testing
 struct LocalAuthorityServiceClientTests {
 
     @Test
-    func fetchLocal_sendsExpectedResults() async throws {
+    func fetchLocalAuthority_sendsExpectedResults() async throws {
 
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
 
         let expectedPostcode = "SE129PT"
-        sut.fetchLocal(
+        sut.fetchLocalAuthority(
             postcode: expectedPostcode) { _ in }
 
         #expect(mockAPI._receivedSendRequest?.urlPath == "/find-local-council/query.json")
@@ -21,7 +21,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocal_success_addressLists_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_success_addressLists_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
 
         let sut = LocalAuthorityServiceClient(
@@ -45,7 +45,7 @@ struct LocalAuthorityServiceClientTests {
         let stubbedData = try! JSONEncoder().encode(expectedResult)
         mockAPI._stubbedSendResponse = .success(stubbedData)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
@@ -60,7 +60,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocal_success_tierOnelocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_success_tierOnelocalAuthority_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
 
         let sut = LocalAuthorityServiceClient(
@@ -80,7 +80,7 @@ struct LocalAuthorityServiceClientTests {
         mockAPI._stubbedSendResponse = .success(stubbedData)
 
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(postcode: "test") { result in
+            sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
             }
         }
@@ -93,7 +93,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocal_success_tierTwolocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_success_tierTwolocalAuthority_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
@@ -121,7 +121,7 @@ struct LocalAuthorityServiceClientTests {
         mockAPI._stubbedSendResponse = .success(stubbedData)
 
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(postcode: "test") { result in
+            sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
             }
         }
@@ -135,13 +135,13 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocal_failure_apiUnavailable_returnsExpectedResult() async {
+    func fetchLocalAuthority_failure_apiUnavailable_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
 
         mockAPI._stubbedSendResponse = .failure(TestError.fakeNetwork)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(postcode: "test") { result in
+            sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
             }
         }
@@ -151,7 +151,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocal_failure_networkUnavailable_returnsExpectedResult() async {
+    func fetchLocalAuthority_failure_networkUnavailable_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
@@ -160,7 +160,7 @@ struct LocalAuthorityServiceClientTests {
             NSError(domain: "TestError", code: NSURLErrorNotConnectedToInternet)
         )
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(postcode: "test") { result in
+            sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
             }
         }
@@ -170,13 +170,13 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocal_decodingError_returnsExpectedResult() async {
+    func fetchLocalAuthority_decodingError_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
         let invalidObject = try! JSONEncoder().encode("Test")
         mockAPI._stubbedSendResponse = .success(invalidObject)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(postcode: "test") { result in
+            sut.fetchLocalAuthority(postcode: "test") { result in
                 continuation.resume(returning: result)
             }
         }
@@ -186,20 +186,20 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocal_error_returnsExpectedresult() async throws {
+    func fetchLocalAuthority_error_returnsExpectedresult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
 
         let stubbedData = try! JSONEncoder().encode(LocalErrorMessage(message: "errorMessage"))
         mockAPI._stubbedSendResponse = .success(stubbedData)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
         }
         let localResult = try? result.get()
         let errormessage = localResult as? LocalErrorMessage
-        #expect(errormessage?.message == "")
+        #expect(errormessage?.message == "errorMessage")
     }
 }

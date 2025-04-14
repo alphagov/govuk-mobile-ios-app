@@ -1,13 +1,13 @@
 import Foundation
 
 typealias FetchLocalServiceCompletion = (sending FetchLocalServiceResult) -> Void
-typealias FetchLocalServiceResult = Result<LocalAuthorityType, LocalServiceError>
+typealias FetchLocalServiceResult = Result<LocalAuthorityType, LocalAuthorityError>
 
 protocol LocalAuthorityServiceClientInterface {
     func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalServiceCompletion)
 }
 
-enum LocalServiceError: LocalizedError {
+enum LocalAuthorityError: LocalizedError {
     case networkUnavailable
     case apiUnavailable
     case decodingError
@@ -27,18 +27,18 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
     }
 
     private func mapResult(
-        _ result: NetworkResult<Data>) -> Result<LocalAuthorityType, LocalServiceError> {
+        _ result: NetworkResult<Data>) -> Result<LocalAuthorityType, LocalAuthorityError> {
             return result.mapError { error in
                 let nsError = (error as NSError)
                 if nsError.code == NSURLErrorNotConnectedToInternet {
-                    return LocalServiceError.networkUnavailable
+                    return LocalAuthorityError.networkUnavailable
                 } else {
-                    return LocalServiceError.apiUnavailable
+                    return LocalAuthorityError.apiUnavailable
                 }
             }.flatMap {
                 do {
                     guard let response = decode(data: $0) else {
-                        return .failure(LocalServiceError.decodingError)
+                        return .failure(LocalAuthorityError.decodingError)
                     }
                     return .success(response)
                 }

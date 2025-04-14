@@ -7,7 +7,7 @@ import Testing
 struct LocalAuthorityServiceTests {
 
     @Test
-    func fetchLocal_callsServiceClient() async throws {
+    func fetchLocalAuthority_callsServiceClient() async throws {
         let mockServiceClient = MockLocalServiceClient()
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
         let expectedPostcode = "SW1"
@@ -18,7 +18,7 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
-    func fetchLocal_success_addressLists_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_success_addressLists_returnsExpectedResult() async throws {
         let addresses:[LocalAuthorityAddress] = [
             LocalAuthorityAddress(
                 address: "address1",
@@ -53,7 +53,7 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
-    func fetchLocal_success_tierOnelocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_success_tierOnelocalAuthority_returnsExpectedResult() async throws {
         let authority = Authority(
             name: "name1",
             homepageUrl: "homepageUrl",
@@ -81,7 +81,7 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
-    func fetchLocal_success_tierTwolocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_success_tierTwolocalAuthority_returnsExpectedResult() async throws {
         let parentAuthority = Authority(
             name: "parentAuthority",
             homepageUrl: "homepageUrl",
@@ -120,7 +120,7 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
-    func fetchLocal_apiUnavailable_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_apiUnavailable_returnsExpectedResult() async throws {
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .failure(.apiUnavailable)
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
@@ -153,7 +153,7 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
-    func fetchLocal_networkUnavailable_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_networkUnavailable_returnsExpectedResult() async throws {
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .failure(.networkUnavailable)
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
@@ -169,7 +169,7 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
-    func fetchLocal_errorCase_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_errorCase_returnsExpectedResult() async throws {
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .success(LocalErrorMessage(message: "errorMessage"))
 

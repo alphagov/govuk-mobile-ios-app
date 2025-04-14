@@ -21,7 +21,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocalAuthority_success_addressLists_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_addressLists_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
@@ -58,7 +58,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocalAuthority_success_tierOnelocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_tierOnelocalAuthority_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
@@ -89,7 +89,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocalAuthority_success_tierTwolocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_tierTwolocalAuthority_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
@@ -127,7 +127,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocalAuthority_failure_apiUnavailable_returnsExpectedResult() async {
+    func fetchLocalAuthority_apiUnavailable_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
         mockAPI._stubbedSendResponse = .failure(TestError.fakeNetwork)
@@ -143,7 +143,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocalAuthority_failure_networkUnavailable_returnsExpectedResult() async {
+    func fetchLocalAuthority_networkUnavailable_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
@@ -180,7 +180,7 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
-    func fetchLocalAuthority_error_returnsExpectedresult() async throws {
+    func fetchLocalAuthority_localErrorMessage_returnsExpectedresult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
         let stubbedData = try! JSONEncoder().encode(LocalErrorMessage(message: "errorMessage"))

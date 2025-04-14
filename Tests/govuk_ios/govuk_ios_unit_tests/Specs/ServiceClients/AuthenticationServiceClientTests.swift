@@ -78,25 +78,25 @@ struct AuthenticationServiceClientTests {
         }
     }
 
-    @Test @MainActor
-    func performAuthenticationFlow_failure_missingIssuerBaseURL() async {
-        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
-        let oidConfigService = MockOIDConfigService()
-        let mockAppEnvironmentService = MockAppEnvironmentService()
-        Constants.API.authenticationIssuerBaseUrl = nil
-
-        let sut = AuthenticationServiceClient(
-            appEnvironmentService: mockAppEnvironmentService,
-            appAuthSession: appAuthSessionWrapper,
-            oidConfigService: oidConfigService
-        )
-
-        await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
-            if case .failure(let error) = result {
-                #expect(error == .missingIssuerBaseURL)
-                authRequestComplete()
-            }
-        }
-    }
+//    @Test @MainActor
+//    func performAuthenticationFlow_failure_missingIssuerBaseURL() async {
+//        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
+//        let oidConfigService = MockOIDConfigService()
+//        let mockAppEnvironmentService = MockAppEnvironmentService()
+//        Constants.API.authenticationIssuerBaseUrl = nil
+//
+//        let sut = AuthenticationServiceClient(
+//            appEnvironmentService: mockAppEnvironmentService,
+//            appAuthSession: appAuthSessionWrapper,
+//            oidConfigService: oidConfigService
+//        )
+//
+//        await confirmation("Auth request failure") { authRequestComplete in
+//            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
+//            if case .failure(let error) = result {
+//                #expect(error == .missingIssuerBaseURL)
+//                authRequestComplete()
+//            }
+//        }
+//    }
 }

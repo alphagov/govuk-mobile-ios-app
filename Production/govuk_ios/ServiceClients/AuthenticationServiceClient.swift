@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 import UIKit
 import AppAuth
 import Authentication
@@ -10,21 +11,14 @@ protocol AuthenticationServiceClientInterface {
 }
 
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
-    // clientID + issuer will be added to appConfig
-    private let appConfig: AppConfigServiceInterface
-    private let clientID: String = "replaceID"
-    private let issuer: URL = URL(
-        string: "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_fIJ6F25Zh"
-    )!
-
-    private let redirectURI = "govuk://govuk/login-auth-callback"
     private let appAuthSession: AppAuthSessionWrapperInterface
+    private let appEnvironmentService: AppEnvironmentServiceInterface
     private let oidConfigService: OIDAuthorizationServiceWrapperInterface
 
-    init(appConfig: AppConfigServiceInterface,
+    init(appEnvironmentService: AppEnvironmentServiceInterface,
          appAuthSession: AppAuthSessionWrapperInterface,
          oidConfigService: OIDAuthorizationServiceWrapperInterface) {
-        self.appConfig = appConfig
+        self.appEnvironmentService = appEnvironmentService
         self.appAuthSession = appAuthSession
         self.oidConfigService = oidConfigService
     }
@@ -37,8 +31,8 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
                 configuration: config
             )
             return AuthenticationResult.success(tokenResponse)
-        } catch AuthenticationError.fetchConfigError {
-            return AuthenticationResult.failure(.fetchConfigError)
+        } catch let error as AuthenticationError {
+            return AuthenticationResult.failure(error)
         } catch let error as LoginError {
             switch error {
             case .userCancelled:
@@ -60,17 +54,22 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             tokenEndpoint: idConfig.tokenEndpoint,
             responseType: .code,
             scopes: [.openid, .email],
-            clientID: clientID,
+            clientID: appEnvironmentService.authenticationClientId,
             prefersEphemeralWebSession: true,
-            redirectURI: redirectURI,
+            redirectURI: Constants.API.authenticationCallbackUri,
             locale: .en
         )
     }
 
     private func discoverConfiguration() async throws -> OIDServiceConfiguration {
+        guard let issuerBaseUrl = Constants.API.authenticationIssuerBaseUrl else {
+            throw AuthenticationError.missingIssuerBaseURL
+        }
+
         return try await withCheckedThrowingContinuation { continuation in
             oidConfigService.discoverConfiguration(
-                forIssuer: issuer
+                 forIssuer: issuerBaseUrl
+//                forIssuer: URL(string: "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_fIJ6F25Zh")!
             ) { configuration, _ in
                 if let configuration = configuration {
                     continuation.resume(returning: configuration)
@@ -85,6 +84,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 enum AuthenticationError: Error, Equatable {
     case loginFlow(LoginError)
     case fetchConfigError
+    case missingIssuerBaseURL
     case missingAccessToken
     case missingRefreshToken
     case missingIDToken

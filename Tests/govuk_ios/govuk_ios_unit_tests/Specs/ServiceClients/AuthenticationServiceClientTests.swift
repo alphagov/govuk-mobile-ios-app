@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Testing
+import GOVKit
 
 @testable import govuk_ios
 
@@ -8,12 +9,13 @@ import Testing
 struct AuthenticationServiceClientTests {
     @Test @MainActor
     func performAuthenticationFlow_success() async {
-        let appConfig = MockAppConfigService()
         let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let oidConfigService = MockOIDConfigService()
+        let mockAppEnvironmentService = MockAppEnvironmentService()
+        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
 
         let sut = AuthenticationServiceClient(
-            appConfig: appConfig,
+            appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidConfigService: oidConfigService
         )
@@ -32,13 +34,14 @@ struct AuthenticationServiceClientTests {
 
     @Test @MainActor
     func performAuthenticationFlow_failure_loginFlowError() async {
-        let appConfig = MockAppConfigService()
         let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let oidConfigService = MockOIDConfigService()
+        let mockAppEnvironmentService = MockAppEnvironmentService()
         appAuthSessionWrapper._mockAuthenticationSession._shouldReturnError = true
+        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
 
         let sut = AuthenticationServiceClient(
-            appConfig: appConfig,
+            appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidConfigService: oidConfigService
         )
@@ -54,13 +57,14 @@ struct AuthenticationServiceClientTests {
 
     @Test @MainActor
     func performAuthenticationFlow_failure_fetchConfigError() async {
-        let appConfig = MockAppConfigService()
         let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let oidConfigService = MockOIDConfigService()
+        let mockAppEnvironmentService = MockAppEnvironmentService()
         oidConfigService._shouldReturnFetchConfigError = true
+        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
 
         let sut = AuthenticationServiceClient(
-            appConfig: appConfig,
+            appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidConfigService: oidConfigService
         )
@@ -69,6 +73,28 @@ struct AuthenticationServiceClientTests {
             let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .fetchConfigError)
+                authRequestComplete()
+            }
+        }
+    }
+
+    @Test @MainActor
+    func performAuthenticationFlow_failure_missingIssuerBaseURL() async {
+        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
+        let oidConfigService = MockOIDConfigService()
+        let mockAppEnvironmentService = MockAppEnvironmentService()
+        Constants.API.authenticationIssuerBaseUrl = nil
+
+        let sut = AuthenticationServiceClient(
+            appEnvironmentService: mockAppEnvironmentService,
+            appAuthSession: appAuthSessionWrapper,
+            oidConfigService: oidConfigService
+        )
+
+        await confirmation("Auth request failure") { authRequestComplete in
+            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
+            if case .failure(let error) = result {
+                #expect(error == .missingIssuerBaseURL)
                 authRequestComplete()
             }
         }

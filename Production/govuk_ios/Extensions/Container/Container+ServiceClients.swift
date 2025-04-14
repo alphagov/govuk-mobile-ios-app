@@ -34,7 +34,7 @@ extension Container {
     var authenticationServiceClient: Factory<AuthenticationServiceClient> {
         Factory(self) {
             return AuthenticationServiceClient(
-                appConfig: self.appConfigService.resolve(),
+                appEnvironmentService: self.appEnvironmentService.resolve(),
                 appAuthSession: AppAuthSessionWrapper(),
                 oidConfigService: OIDAuthorizationServiceWrapper()
             )

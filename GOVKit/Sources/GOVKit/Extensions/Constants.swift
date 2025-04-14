@@ -47,6 +47,10 @@ public struct Constants {
         public static var searchSuggestionsPath: String = "/api/search/autocomplete.json"
 
         public static var defaultSearchPath: String = "/v0_1/search.json"
+
+        public static var authenticationIssuerBaseUrl: URL?
+
+        public static let authenticationCallbackUri: String = "govuk://govuk/login-auth-callback"
     }
 
     public struct SigningKey {

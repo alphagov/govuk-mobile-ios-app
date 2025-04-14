@@ -46,9 +46,9 @@ struct LocalAuthorityServiceTests {
         let addressList = localResult as? LocalAuthoritiesList
         #expect(addressList?.addresses.count == 2)
         #expect(addressList?.addresses.first?.name == "name1")
-        #expect(addressList?.addresses[1].name == "name2")
+        #expect(addressList?.addresses.last?.name == "name2")
         #expect(addressList?.addresses.first?.slug == "slug1")
-        #expect(addressList?.addresses[1].name == "name2")
+        #expect(addressList?.addresses.last?.name == "name2")
     }
 
     @Test

@@ -26,22 +26,8 @@ struct LocalAuthorityServiceClientTests {
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
-        let addresses:[LocalAuthorityAddress] = [
-            LocalAuthorityAddress(
-                address: "address1",
-                slug: "slug1",
-                name: "name1"
-            ),
-            LocalAuthorityAddress(
-                address: "address2",
-                slug: "slug2",
-                name: "name2"
-            )
-        ]
 
-        let expectedResult = LocalAuthoritiesList(addresses: addresses)
-        let stubbedData = try! JSONEncoder().encode(expectedResult)
-        mockAPI._stubbedSendResponse = .success(stubbedData)
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityListData)
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
                 postcode: "test") { result in
@@ -51,10 +37,9 @@ struct LocalAuthorityServiceClientTests {
         let localResult = try? result.get()
         let addressList = localResult as? LocalAuthoritiesList
         #expect(addressList?.addresses.count == 2)
-        #expect(addressList?.addresses.first?.name == "name1")
-        #expect(addressList?.addresses[1].name == "name2")
-        #expect(addressList?.addresses.first?.slug == "slug1")
-        #expect(addressList?.addresses[1].name == "name2")
+        #expect(addressList?.addresses.first?.name == "Dorset County Council")
+        #expect(addressList?.addresses.last?.name == "Bournemouth, Christchurch, and Poole")
+        #expect(addressList?.addresses.first?.slug == "dorset")
     }
 
     @Test
@@ -63,17 +48,7 @@ struct LocalAuthorityServiceClientTests {
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
-        let authority = Authority(
-            name: "name1",
-            homepageUrl: "homepageUrl",
-            tier: "tier1",
-            slug: "slug1",
-            parent: nil
-        )
-
-        let expectedResult = LocalAuthority(localAuthority: authority)
-        let stubbedData = try! JSONEncoder().encode(expectedResult)
-        mockAPI._stubbedSendResponse = .success(stubbedData)
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityTierOneData)
 
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(postcode: "test") { result in
@@ -82,10 +57,10 @@ struct LocalAuthorityServiceClientTests {
         }
         let localResult = try? result.get()
         let localAuthority = localResult as? LocalAuthority
-        #expect(localAuthority?.localAuthority.homepageUrl == "homepageUrl")
-        #expect(localAuthority?.localAuthority.name == "name1")
-        #expect(localAuthority?.localAuthority.tier == "tier1")
-        #expect(localAuthority?.localAuthority.slug == "slug1")
+        #expect(localAuthority?.localAuthority.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(localAuthority?.localAuthority.name == "London Borough of Tower Hamlets")
+        #expect(localAuthority?.localAuthority.tier == "unitary")
+        #expect(localAuthority?.localAuthority.slug == "tower-hamlets")
     }
 
     @Test
@@ -94,23 +69,7 @@ struct LocalAuthorityServiceClientTests {
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
-        let parentAuthority = Authority(
-            name: "parentAuthority",
-            homepageUrl: "homepageUrl",
-            tier: "parentTier",
-            slug: "slug",
-            parent: nil
-        )
-        let authority = Authority(
-            name: "name2",
-            homepageUrl: "homepageUrl",
-            tier: "tier2",
-            slug: "slug2",
-            parent: parentAuthority
-        )
-        let expectedResult = LocalAuthority(localAuthority: authority)
-        let stubbedData = try! JSONEncoder().encode(expectedResult)
-        mockAPI._stubbedSendResponse = .success(stubbedData)
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityTierTwoData)
 
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(postcode: "test") { result in
@@ -119,11 +78,11 @@ struct LocalAuthorityServiceClientTests {
         }
         let localResult = try? result.get()
         let localAuthority = localResult as? LocalAuthority
-        #expect(localAuthority?.localAuthority.homepageUrl == "homepageUrl")
-        #expect(localAuthority?.localAuthority.name == "name2")
-        #expect(localAuthority?.localAuthority.tier == "tier2")
-        #expect(localAuthority?.localAuthority.slug == "slug2")
-        #expect(localAuthority?.localAuthority.parent?.name == "parentAuthority")
+        #expect(localAuthority?.localAuthority.homepageUrl == "https://www.derbyshiredales.gov.uk/")
+        #expect(localAuthority?.localAuthority.name == "Derbyshire Dales District Council")
+        #expect(localAuthority?.localAuthority.tier == "district")
+        #expect(localAuthority?.localAuthority.slug == "derbyshire-dales")
+        #expect(localAuthority?.localAuthority.parent?.name == "Derbyshire County Council")
     }
 
     @Test
@@ -166,8 +125,7 @@ struct LocalAuthorityServiceClientTests {
     func fetchLocalAuthority_decodingError_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
-        let invalidObject = try! JSONEncoder().encode("Test")
-        mockAPI._stubbedSendResponse = .success(invalidObject)
+        mockAPI._stubbedSendResponse = .success(Self.invalidObjectData)
 
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(postcode: "test") { result in
@@ -183,8 +141,7 @@ struct LocalAuthorityServiceClientTests {
     func fetchLocalAuthority_localErrorMessage_returnsExpectedresult() async throws {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
-        let stubbedData = try! JSONEncoder().encode(LocalErrorMessage(message: "errorMessage"))
-        mockAPI._stubbedSendResponse = .success(stubbedData)
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityErrorMessage)
 
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
@@ -194,6 +151,72 @@ struct LocalAuthorityServiceClientTests {
         }
         let localResult = try? result.get()
         let errormessage = localResult as? LocalErrorMessage
-        #expect(errormessage?.message == "errorMessage")
+        #expect(errormessage?.message == "Postcode not found")
     }
+}
+private extension LocalAuthorityServiceClientTests {
+
+    static let localAuthorityTierOneData =
+    """
+    {
+        "local_authority": {
+            "name": "London Borough of Tower Hamlets",
+            "homepage_url": "https://www.towerhamlets.gov.uk",
+            "tier": "unitary",
+            "slug": "tower-hamlets",
+            "parent": null
+        }
+    }
+    """.data(using: .utf8)!
+
+    static let localAuthorityListData =
+    """
+    {
+        "addresses": [
+            {
+                "address": "APPLETREE COTTAGE, BARRACK ROAD, WEST PARLEY, FERNDOWN, BH22 8UB",
+                "slug": "dorset",
+                "name": "Dorset County Council"
+            },
+            {
+                "address": "LONGCROFT BRICK, BARRACK ROAD, FERNDOWN, DORSET, BH22 8UB",
+                "slug": "bournemouth-christchurch-poole",
+                "name": "Bournemouth, Christchurch, and Poole"
+            }
+        ]
+    }
+    """.data(using: .utf8)!
+
+    static let localAuthorityTierTwoData =
+    """
+    {
+        "local_authority": {
+            "name": "Derbyshire Dales District Council",
+            "homepage_url": "https://www.derbyshiredales.gov.uk/",
+            "tier": "district",
+            "slug": "derbyshire-dales",
+            "parent": {
+                "name": "Derbyshire County Council",
+                "homepage_url": "https://www.derbyshiredales.gov.uk/",
+                "tier": "county",
+                "slug": "derbyshire",
+                "parent": null
+            }
+        }
+    }
+    """.data(using: .utf8)!
+
+    static let localAuthorityErrorMessage =
+    """
+    {
+    "message": "Postcode not found"
+    }
+    """.data(using: .utf8)!
+
+    static let invalidObjectData =
+    """
+    {
+    "Test"
+    }
+    """.data(using: .utf8)!
 }

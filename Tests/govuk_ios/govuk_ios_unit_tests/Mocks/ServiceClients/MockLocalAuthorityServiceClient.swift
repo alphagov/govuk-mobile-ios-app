@@ -5,8 +5,8 @@ import Foundation
 class MockLocalServiceClient: LocalAuthorityServiceClientInterface {
     var _stubbedPostcode: String?
     var _stubbedLocalResult: Result<LocalAuthorityType, LocalAuthorityError>?
-    var _receivedLocalCompletion: FetchLocalServiceCompletion?
-    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalServiceCompletion) {
+    var _receivedLocalCompletion: FetchLocalAuthorityCompletion?
+    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion) {
         _stubbedPostcode = postcode
         if let result = _stubbedLocalResult {
             completion(result)

@@ -1,7 +1,7 @@
 import Foundation
 
 protocol LocalAuthorityServiceInterface {
-    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalServiceCompletion)
+    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion)
 }
 
 class LocalAuthorityService: LocalAuthorityServiceInterface {
@@ -11,7 +11,8 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
         self.serviceClient = serviceClient
     }
 
-    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalServiceCompletion) {
+    func fetchLocalAuthority(postcode: String,
+                             completion: @escaping FetchLocalAuthorityCompletion) {
         serviceClient.fetchLocalAuthority(postcode: postcode) { result in
             completion(result)
         }

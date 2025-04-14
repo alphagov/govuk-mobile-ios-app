@@ -1,10 +1,10 @@
 import Foundation
 
-typealias FetchLocalServiceCompletion = (sending FetchLocalServiceResult) -> Void
-typealias FetchLocalServiceResult = Result<LocalAuthorityType, LocalAuthorityError>
+typealias FetchLocalAuthorityCompletion = (sending FetchLocalAuthorityResult) -> Void
+typealias FetchLocalAuthorityResult = Result<LocalAuthorityType, LocalAuthorityError>
 
 protocol LocalAuthorityServiceClientInterface {
-    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalServiceCompletion)
+    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion)
 }
 
 enum LocalAuthorityError: LocalizedError {
@@ -20,7 +20,8 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
         self.serviceClient = serviceClient
     }
 
-    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalServiceCompletion) {
+    func fetchLocalAuthority(postcode: String,
+                             completion: @escaping FetchLocalAuthorityCompletion) {
         serviceClient.send(request: .localAuthority(postcode: postcode)) { result in
             completion(mapResult(result))
         }

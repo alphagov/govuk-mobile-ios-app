@@ -47,6 +47,12 @@ public struct Constants {
         public static var searchSuggestionsPath: String = "/api/search/autocomplete.json"
 
         public static var defaultSearchPath: String = "/v0_1/search.json"
+
+        public static var defaultLocalAuthorityURL: URL = URL(
+            string: "https://development-local-api-05fe62f9622c.herokuapp.com"
+        )!
+
+        public static var localAuthorityPath: String = "/find-local-council/query.json"
     }
 
     public struct SigningKey {

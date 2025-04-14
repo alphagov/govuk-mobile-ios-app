@@ -1,7 +1,5 @@
 import Foundation
 
-import Foundation
-
 @testable import govuk_ios
 
 class MockLocalServiceClient: LocalAuthorityServiceClientInterface {

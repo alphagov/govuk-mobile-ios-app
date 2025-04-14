@@ -12,7 +12,7 @@ struct LocalAuthorityServiceTests {
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
         let expectedPostcode = "SW1"
 
-        sut.fetchLocal(
+        sut.fetchLocalAuthority(
             postcode: expectedPostcode) { _ in }
         #expect(mockServiceClient._stubbedPostcode == expectedPostcode)
     }
@@ -38,7 +38,7 @@ struct LocalAuthorityServiceTests {
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
 
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
@@ -67,7 +67,7 @@ struct LocalAuthorityServiceTests {
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
 
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
@@ -105,7 +105,7 @@ struct LocalAuthorityServiceTests {
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
 
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
@@ -125,7 +125,7 @@ struct LocalAuthorityServiceTests {
         mockServiceClient._stubbedLocalResult = .failure(.apiUnavailable)
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
@@ -142,7 +142,7 @@ struct LocalAuthorityServiceTests {
         mockServiceClient._stubbedLocalResult = .failure(.decodingError)
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
@@ -158,7 +158,7 @@ struct LocalAuthorityServiceTests {
         mockServiceClient._stubbedLocalResult = .failure(.networkUnavailable)
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }
@@ -175,7 +175,7 @@ struct LocalAuthorityServiceTests {
 
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
         let result = await withCheckedContinuation { continuation in
-            sut.fetchLocal(
+            sut.fetchLocalAuthority(
                 postcode: "test") { result in
                     continuation.resume(returning: result)
                 }

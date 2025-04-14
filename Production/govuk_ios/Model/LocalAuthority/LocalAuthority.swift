@@ -1,7 +1,5 @@
 import Foundation
 
-import Foundation
-
 struct LocalAuthority: Codable,
                        LocalAuthorityType {
     let localAuthority: Authority

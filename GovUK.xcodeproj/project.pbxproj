@@ -69,6 +69,9 @@
 		4E9AFCE32C99D43B00DBF66F /* AnalyticsConsentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */; };
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
+		4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */; };
+		4EBCA3292DAC546A0063A723 /* LocalAuthorityServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */; };
+		4EBCA3362DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3352DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift */; };
 		4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */; };
 		4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */; };
 		4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646C2D15AB05007A6E97 /* CharValidator.swift */; };
@@ -358,6 +361,9 @@
 		4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerView.swift; sourceTree = "<group>"; };
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
+		4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityService.swift; sourceTree = "<group>"; };
+		4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceClient.swift; sourceTree = "<group>"; };
+		4EBCA3352DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GOVRequest+LocalAuthority.swift"; sourceTree = "<group>"; };
 		4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646C2D15AB05007A6E97 /* CharValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharValidator.swift; sourceTree = "<group>"; };
@@ -625,6 +631,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4EBCA32A2DAC54E20063A723 /* LocalAuthority */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LocalAuthority; sourceTree = "<group>"; };
 		5D9CDE3A2CD928FB0045DFC3 /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (5D9CDF202CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF212CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF222CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64, ); path = Tests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -710,6 +717,7 @@
 				3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */,
 				5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */,
 				D04191852CA6A5910034722A /* TopicsServiceClient.swift */,
+				4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */,
 			);
 			path = ServiceClients;
 			sourceTree = "<group>";
@@ -868,6 +876,7 @@
 				5DBE080D2C49233200B58DBE /* OnboardingService.swift */,
 				5DD09EC72C9ADB8500494550 /* SearchService.swift */,
 				D04191772CA57A6F0034722A /* TopicsService.swift */,
+				4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1197,6 +1206,7 @@
 				5DB6370C2D7736AD00A44E36 /* GOVRequest+App.swift */,
 				5DC79FB12CA18A9A00014446 /* GOVRequest+Search.swift */,
 				5DB637072D7732A800A44E36 /* GOVRequest+Topics.swift */,
+				4EBCA3352DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift */,
 			);
 			path = GOVRequest;
 			sourceTree = "<group>";
@@ -1228,6 +1238,7 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4EBCA32A2DAC54E20063A723 /* LocalAuthority */,
 				D04C542A2D7081C00070EE79 /* Analytics */,
 				D0D9CB922D3024C00051EDDD /* Search */,
 				4E003E7D2C75F497008FCBF2 /* AppConfig */,
@@ -1416,6 +1427,9 @@
 			);
 			dependencies = (
 				5DCAFA672D3FE0E800C3F284 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4EBCA32A2DAC54E20063A723 /* LocalAuthority */,
 			);
 			name = govuk_ios;
 			packageProductDependencies = (
@@ -1700,6 +1714,7 @@
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
 				5DFA017B2D89651100EAC839 /* ActivityItemCreateParams+Extensions.swift in Sources */,
 				5DFA017C2D89651100EAC839 /* ActivityService+Extensions.swift in Sources */,
+				4EBCA3292DAC546A0063A723 /* LocalAuthorityServiceClient.swift in Sources */,
 				16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */,
 				D0E7923B2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
@@ -1739,6 +1754,7 @@
 				B04C2E822DA9339B00F0F63E /* WebViewCoordinator.swift in Sources */,
 				5DD4CB0A2D95483100459FB5 /* RecentActivitySection.swift in Sources */,
 				5DD4CB0B2D95483100459FB5 /* RecentActivitiesViewStructure.swift in Sources */,
+				4EBCA3362DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift in Sources */,
 				5DD4CB0C2D95483100459FB5 /* ActivityItemCreateParams.swift in Sources */,
 				16FD684A2D39AEB5002F1597 /* SuggestionHighlighterProcessor.swift in Sources */,
 				5D79AEC02C32B9180061F344 /* AnimationView.swift in Sources */,
@@ -1763,6 +1779,7 @@
 				5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */,
 				5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */,
 				5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */,
+				4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */,
 				16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
 				D0D9B87B2D2D547D0051EDDD /* StringValidator.swift in Sources */,

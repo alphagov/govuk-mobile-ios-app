@@ -6,9 +6,9 @@ import Testing
 
 @Suite
 struct String_ExtensionsTests {
-//    @Test
-//    func common_hasCorrectValues() {
-//        let sut = String.common
-//        #expect(sut.tableName == "Common")
-//    }
+    @Test(.disabled("Disabled due to bundle loading issues"))
+    func common_hasCorrectValues() {
+        let sut = String.common
+        #expect(sut.tableName == "Common")
+    }
 }

@@ -8,7 +8,7 @@ import Foundation
 struct GOVRequest_LocalAuthorityTests {
 
     @Test
-    func local_returnsExpectedVlues() async throws {
+    func localAuthority_returnsExpectedValues() async throws {
         let expectedPostcode = "SW1A 0AA"
         let request = GOVRequest.localAuthority(postcode: expectedPostcode)
 

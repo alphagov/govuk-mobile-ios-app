@@ -30,7 +30,6 @@ struct LocalAuthorityServiceTests {
                 slug: "slug2",
                 name: "name2"
             )
-
         ]
         let expectedResult = LocalAuthoritiesList(addresses: addresses)
         let mockServiceClient = MockLocalServiceClient()
@@ -89,7 +88,6 @@ struct LocalAuthorityServiceTests {
             slug: "slug",
             parent: nil
         )
-
         let authority = Authority(
             name: "name2",
             homepageUrl: "homepageUrl",
@@ -97,11 +95,9 @@ struct LocalAuthorityServiceTests {
             slug: "slug2",
             parent: parentAuthority
         )
-
         let expectedResult = LocalAuthority(localAuthority: authority)
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .success(expectedResult)
-
         let sut = LocalAuthorityService(serviceClient: mockServiceClient)
 
         let result = await withCheckedContinuation { continuation in

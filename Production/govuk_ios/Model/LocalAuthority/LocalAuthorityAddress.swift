@@ -6,4 +6,3 @@ struct LocalAuthorityAddress: Codable,
     let slug: String
     let name: String
 }
-

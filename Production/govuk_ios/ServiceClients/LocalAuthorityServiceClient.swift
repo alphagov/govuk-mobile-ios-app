@@ -20,9 +20,8 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
         self.serviceClient = serviceClient
     }
 
-    func fetchLocalAuthority(postcode: String,
-                    completion: @escaping FetchLocalServiceCompletion) {
-        serviceClient.send(request: .localAuthority(postcode: postcode)) { result  in
+    func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalServiceCompletion) {
+        serviceClient.send(request: .localAuthority(postcode: postcode)) { result in
             completion(mapResult(result))
         }
     }
@@ -61,4 +60,3 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
 }
 
 protocol LocalAuthorityType { }
-

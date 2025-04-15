@@ -7,10 +7,10 @@ import Testing
 @Suite
 struct UIAlertAction_ConvenienceTests {
     @Test
-    func ok_returnsExpectedResult() {
-        let subject = UIAlertAction.ok(handler: nil)
+    func close_returnsExpectedResult() {
+        let subject = UIAlertAction.close(handler: nil)
 
-        #expect(subject.title == "OK")
+        #expect(subject.title == "Close")
         #expect(subject.style == .default)
     }
 

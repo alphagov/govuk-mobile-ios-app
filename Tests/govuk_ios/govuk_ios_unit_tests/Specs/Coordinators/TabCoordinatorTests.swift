@@ -42,6 +42,7 @@ struct TabCoordinatorTests {
     @Test
     func start_withKnownURL_selectsTabs() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockAnalyticsService = MockAnalyticsService()
 
         let mockHomeCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
@@ -58,7 +59,7 @@ struct TabCoordinatorTests {
         let subject = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: navigationController,
-            analyticsService: MockAnalyticsService()
+            analyticsService: mockAnalyticsService
         )
 
         let url = URL(string: "govuk://gov.uk/test")
@@ -67,6 +68,17 @@ struct TabCoordinatorTests {
 
         #expect(tabController?.selectedIndex == 1)
         #expect(mockRoute._actionCalled)
+
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        let trackedEvent = mockAnalyticsService._trackedEvents[0]
+
+        #expect(trackedEvent.name == "Navigation")
+        let receivedType = trackedEvent.params?["type"] as? String
+        #expect(receivedType == "DeepLink")
+        let receivedUrl = trackedEvent.params?["url"] as? String
+        #expect(receivedUrl == url?.absoluteString)
+        let receivedTitle = trackedEvent.params?["text"] as? String
+        #expect(receivedTitle == "Opened")
     }
 
     @Test
@@ -127,10 +139,22 @@ struct TabCoordinatorTests {
 
         let expectedEvent = AppEvent.tabNavigation(text: expectedTitle)
 
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.name == expectedEvent.name)
-        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(receivedTitle == expectedTitle)
+        #expect(mockAnalyticsService._trackedEvents.count == 2)
+        let trackedEvent1 = mockAnalyticsService._trackedEvents[0]
+        let trackedEvent2 = mockAnalyticsService._trackedEvents[1]
+
+        #expect(trackedEvent1.name == expectedEvent.name)
+        #expect(trackedEvent2.name == expectedEvent.name)
+        let receivedType1 = trackedEvent1.params?["type"] as? String
+        #expect(receivedType1 == "DeepLink")
+        let receivedType2 = trackedEvent2.params?["type"] as? String
+        #expect(receivedType2 == "Tab")
+        let receivedUrl = trackedEvent1.params?["url"] as? String
+        #expect(receivedUrl == url?.absoluteString)
+        let receivedTitle1 = trackedEvent1.params?["text"] as? String
+        #expect(receivedTitle1 == "Failed")
+        let receivedTitle2 = trackedEvent2.params?["text"] as? String
+        #expect(receivedTitle2 == expectedTitle)
     }
 
     @Test
@@ -164,7 +188,16 @@ struct TabCoordinatorTests {
         )
         subject.tabBarController(tabController, didSelect: viewController)
 
-        #expect(mockAnalyticsService._trackedEvents.count == 0)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        let trackedEvent = mockAnalyticsService._trackedEvents[0]
+
+        #expect(trackedEvent.name == "Navigation")
+        let receivedType = trackedEvent.params?["type"] as? String
+        #expect(receivedType == "DeepLink")
+        let receivedUrl = trackedEvent.params?["url"] as? String
+        #expect(receivedUrl == url?.absoluteString)
+        let receivedTitle = trackedEvent.params?["text"] as? String
+        #expect(receivedTitle == "Failed")
     }
 
     @Test(arguments: zip(

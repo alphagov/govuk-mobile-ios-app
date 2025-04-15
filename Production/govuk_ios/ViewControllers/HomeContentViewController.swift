@@ -47,6 +47,11 @@ class HomeContentViewController: BaseViewController,
         scrollView.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadWidgets()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.trackECommerce()
@@ -56,7 +61,6 @@ class HomeContentViewController: BaseViewController,
         scrollView.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        reloadWidgets()
     }
 
     private func configureConstraints() {
@@ -76,6 +80,7 @@ class HomeContentViewController: BaseViewController,
 
     private func reloadWidgets() {
         Task {
+            self.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
             let widgets = await viewModel.widgets
             DispatchQueue.main.async {
                 widgets.lazy.forEach(self.stackView.addArrangedSubview)

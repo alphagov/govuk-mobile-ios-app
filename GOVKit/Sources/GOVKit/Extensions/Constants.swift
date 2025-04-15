@@ -51,6 +51,12 @@ public struct Constants {
         public static var authenticationIssuerBaseUrl: URL?
 
         public static let authenticationCallbackUri: String = "govuk://govuk/login-auth-callback"
+
+        public static var defaultLocalAuthorityURL: URL = URL(
+            string: "https://development-local-api-05fe62f9622c.herokuapp.com"
+        )!
+
+        public static var localAuthorityPath: String = "/find-local-council/query.json"
     }
 
     public struct SigningKey {

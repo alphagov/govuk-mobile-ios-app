@@ -4,6 +4,7 @@ import UIKit
 class SceneDelegate: UIResponder,
                      UIWindowSceneDelegate {
     var window: UIWindow?
+    @Inject(\.notificationService) private var notificationService: NotificationServiceInterface
 
     private lazy var navigationController: UINavigationController = {
         let controller = UINavigationController()
@@ -29,6 +30,9 @@ class SceneDelegate: UIResponder,
 
         let url = connectionOptions.urlContexts.first?.url
         coordinator?.start(url: url)
+        notificationService.addClickListener { deeplink in
+            self.coordinator?.start(url: deeplink)
+        }
     }
 
     func scene(_ scene: UIScene,

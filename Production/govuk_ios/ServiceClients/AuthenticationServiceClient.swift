@@ -69,7 +69,6 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         return try await withCheckedThrowingContinuation { continuation in
             oidConfigService.discoverConfiguration(
                  forIssuer: issuerBaseUrl
-//                forIssuer: URL(string: "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_fIJ6F25Zh")!
             ) { configuration, _ in
                 if let configuration = configuration {
                     continuation.resume(returning: configuration)

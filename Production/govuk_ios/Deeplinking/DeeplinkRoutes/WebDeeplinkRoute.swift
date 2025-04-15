@@ -14,7 +14,9 @@ struct WebDeeplinkRoute: DeeplinkRoute {
 
     @MainActor
     func action(parent: BaseCoordinator, params: [String: String]) {
-        if let targetUrl = params["url"], let url = URL(string: targetUrl) {
+        if let targetUrl = params["url"],
+            let url = URL(string: targetUrl),
+            url.scheme != nil && (url.scheme == "http" || url.scheme == "https") {
             presentDeeplinkPage(for: url, coordinator: parent)
         }
     }

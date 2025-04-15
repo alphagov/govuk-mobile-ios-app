@@ -1,8 +1,10 @@
 import Foundation
 import UIKit
 import GOVKit
+import SafariServices
 
-class HomeCoordinator: TabItemCoordinator {
+class HomeCoordinator: TabItemCoordinator,
+                       SFSafariViewControllerDelegate {
     private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let deeplinkStore: DeeplinkDataStore
@@ -66,15 +68,17 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     private func presentWebView(url: URL) {
-        let viewModel = ExampleWebViewModel(
-            url: url,
-            title: nil,
-            appearAction: {},
-            dismissAction: {}
-        )
-        let viewController = WebViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        root.present(navigationController, animated: true)
+        let viewController = SFSafariViewController(url: url)
+        root.present(viewController, animated: true)
+//        let viewModel = ExampleWebViewModel(
+//            url: url,
+//            title: nil,
+//            appearAction: {},
+//            dismissAction: {}
+//        )
+//        let viewController = WebViewController(viewModel: viewModel)
+//        let navigationController = UINavigationController(rootViewController: viewController)
+//        root.present(navigationController, animated: true)
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {

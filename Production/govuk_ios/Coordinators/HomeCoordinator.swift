@@ -72,9 +72,11 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     private func presentWebView(url: URL) {
-        let viewController = WebViewController(url: url)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        root.present(navigationController, animated: true)
+        let coordinator = SafariCoordinator(
+            navigationController: root,
+            url: url
+        )
+        start(coordinator, url: url)
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {

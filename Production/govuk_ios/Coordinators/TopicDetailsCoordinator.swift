@@ -1,5 +1,6 @@
 import UIKit
 import GOVKit
+import SafariServices
 
 final class TopicDetailsCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
@@ -59,8 +60,42 @@ final class TopicDetailsCoordinator: BaseCoordinator {
     }
 
     private func presentWebView(url: URL) {
-        let viewController = WebViewController(url: url)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        root.present(navigationController, animated: true)
+        let coordinator = SafariCoordinator(
+            navigationController: root,
+            url: url
+        )
+        start(coordinator, url: url)
+    }
+}
+
+class SafariCoordinator: BaseCoordinator {
+    private let url: URL
+
+    init(navigationController: UINavigationController,
+         url: URL) {
+        self.url = url
+        super.init(navigationController: navigationController)
+    }
+
+    override func start(url: URL?) {
+        presentViewController(url: self.url)
+    }
+
+    private func presentViewController(url: URL) {
+        let config = SFSafariViewController.Configuration()
+        config.barCollapsingEnabled = true
+        let viewController = SFSafariViewController(url: url, configuration: config)
+        viewController.modalPresentationStyle = .pageSheet
+        viewController.dismissButtonStyle = .close
+        viewController.isModalInPresentation = true
+        root.present(viewController, animated: false)
+        viewController.navigationController?.presentationController?.delegate = self
+        viewController.presentationController?.delegate = self
+    }
+
+    func presentationControllerShouldDismiss(
+        _ presentationController: UIPresentationController
+    ) -> Bool {
+        false
     }
 }

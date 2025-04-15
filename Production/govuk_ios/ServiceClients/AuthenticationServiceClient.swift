@@ -55,7 +55,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             responseType: .code,
             scopes: [.openid, .email],
             clientID: appEnvironmentService.authenticationClientId,
-            prefersEphemeralWebSession: true,
+            prefersEphemeralWebSession: false,
             redirectURI: Constants.API.authenticationCallbackUri,
             locale: .en
         )

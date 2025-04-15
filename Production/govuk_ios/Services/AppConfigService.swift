@@ -39,9 +39,9 @@ public final class AppConfigService: AppConfigServiceInterface {
             }
         )
         updateSearch(urlString: config.searchApiUrl)
-        Constants.API.authenticationIssuerBaseUrl = URL(
-            string: config.authenticationIssuerBaseUrl
-        )
+//        Constants.API.authenticationIssuerBaseUrl = URL(
+//            string: config.authenticationIssuerBaseUrl
+//        )
     }
 
     private func updateSearch(urlString: String?) {

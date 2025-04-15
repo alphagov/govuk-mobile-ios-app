@@ -18,7 +18,7 @@ struct AppForcedUpdateContainerView: View {
             .padding(.horizontal, 16)
             Spacer()
             Divider()
-                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
             SwiftUIButton(
                 .primary,

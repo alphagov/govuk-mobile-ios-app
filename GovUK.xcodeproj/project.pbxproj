@@ -92,10 +92,12 @@
 		5D0F199E2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F199D2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift */; };
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
 		5D18E83E2CCFB68900F20419 /* Container+APIClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */; };
+		5D1D495D2DAEF9C400C8872A /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1D495C2DAEF9C400C8872A /* Onboarding */; };
 		5D1F7E772D75A959007FD506 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1F7E762D75A959007FD506 /* Onboarding */; };
 		5D3123862C85AEE20088B931 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123852C85AEE20088B931 /* Container+Repositories.swift */; };
 		5D349F672C6B548200B7F747 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349F662C6B548200B7F747 /* RequestBuilder.swift */; };
 		5D349F692C6B550000B7F747 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D349F682C6B550000B7F747 /* URL+Extensions.swift */; };
+		5D34E4732DAEFA6700880CE7 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D34E4722DAEFA6700880CE7 /* Onboarding */; };
 		5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB5C2C0870020011E691 /* Container+Aliases.swift */; };
 		5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB642C087BCE0011E691 /* Container+Services.swift */; };
 		5D41DB702C088FEB0011E691 /* Container+ServiceClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6F2C088FEB0011E691 /* Container+ServiceClients.swift */; };
@@ -132,7 +134,6 @@
 		5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8683982C3431050024F2D8 /* ResolvedDeeplinkRoute.swift */; };
 		5D899A202C946F540074C0AD /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D899A1F2C946F540074C0AD /* UIViewController+Extensions.swift */; };
 		5D899A222C946F8A0074C0AD /* UIBarButtonItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D899A212C946F8A0074C0AD /* UIBarButtonItem+Convenience.swift */; };
-		5D8BE2932D75F2BD0036A1FA /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5D8BE2922D75F2BD0036A1FA /* Onboarding */; };
 		5D925B182CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D925B172CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift */; };
 		5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D562C29BD0B0038BC0A /* AppCoordinator.swift */; };
 		5D962D622C29BD0B0038BC0A /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */; };
@@ -160,7 +161,6 @@
 		5DBE080E2C49233200B58DBE /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBE080D2C49233200B58DBE /* OnboardingService.swift */; };
 		5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC04B8E2C2D71400036EF2B /* ViewControllerBuilder.swift */; };
 		5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */; };
-		5DC165932CF080F50074F2DC /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 5DC165922CF080F50074F2DC /* UIComponents */; };
 		5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 5DC2505F2C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5DC250612C91D395009E9E7F /* FirebaseCrashlytics */; };
 		5DC250662C91D802009E9E7F /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC250652C91D802009E9E7F /* FirebaseClient.swift */; };
@@ -647,12 +647,12 @@
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
 				D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */,
 				5DCAFA7A2D40088600C3F284 /* OneSignalFramework in Frameworks */,
-				5D8BE2932D75F2BD0036A1FA /* Onboarding in Frameworks */,
 				5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				5DC165932CF080F50074F2DC /* UIComponents in Frameworks */,
 				5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
+				5D1D495D2DAEF9C400C8872A /* Onboarding in Frameworks */,
 				5D1F7E772D75A959007FD506 /* Onboarding in Frameworks */,
+				5D34E4732DAEFA6700880CE7 /* Onboarding in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1430,11 +1430,11 @@
 				5DC2505F2C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport */,
 				5DC250612C91D395009E9E7F /* FirebaseCrashlytics */,
 				5DDB31CB2CEF84D100E49259 /* Onboarding */,
-				5DC165922CF080F50074F2DC /* UIComponents */,
 				D0EBFBCD2D109B51000A3151 /* GOVKit */,
 				5DCAFA792D40088600C3F284 /* OneSignalFramework */,
 				5D1F7E762D75A959007FD506 /* Onboarding */,
-				5D8BE2922D75F2BD0036A1FA /* Onboarding */,
+				5D1D495C2DAEF9C400C8872A /* Onboarding */,
+				5D34E4722DAEFA6700880CE7 /* Onboarding */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1524,9 +1524,9 @@
 				5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */,
 				5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				5DC165912CF080F50074F2DC /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
 				5DCAFA762D40088600C3F284 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
-				5D8BE2912D75F2BD0036A1FA /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				5D0A70F42DAEEC860057D733 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-ui-components" */,
+				5D34E4712DAEFA6700880CE7 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -2525,6 +2525,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		5D0A70F42DAEEC860057D733 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-ui-components" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../govuk-mobile-ios-ui-components";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2532,6 +2539,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.4.3;
+			};
+		};
+		5D34E4712DAEFA6700880CE7 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
+			requirement = {
+				branch = develop;
+				kind = branch;
 			};
 		};
 		5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */ = {
@@ -2548,22 +2563,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.0.0;
-			};
-		};
-		5D8BE2912D75F2BD0036A1FA /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-		5DC165912CF080F50074F2DC /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-ui-components";
-			requirement = {
-				branch = develop;
-				kind = branch;
 			};
 		};
 		5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -2594,8 +2593,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
 		};
+		5D1D495C2DAEF9C400C8872A /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Onboarding;
+		};
 		5D1F7E762D75A959007FD506 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Onboarding;
+		};
+		5D34E4722DAEFA6700880CE7 /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D34E4712DAEFA6700880CE7 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
 			productName = Onboarding;
 		};
 		5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */ = {
@@ -2607,16 +2615,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D7F267C2C0F0EF000842090 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
-		};
-		5D8BE2922D75F2BD0036A1FA /* Onboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D8BE2912D75F2BD0036A1FA /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */;
-			productName = Onboarding;
-		};
-		5DC165922CF080F50074F2DC /* UIComponents */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5DC165912CF080F50074F2DC /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */;
-			productName = UIComponents;
 		};
 		5DC2505F2C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;

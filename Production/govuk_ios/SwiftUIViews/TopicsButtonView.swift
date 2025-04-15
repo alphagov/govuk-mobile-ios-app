@@ -11,7 +11,7 @@ struct TopicsButtonView: View {
 
     var body: some View {
         Divider()
-            .background(Color(UIColor.govUK.strokes.listDivider))
+            .overlay(Color(UIColor.govUK.strokes.listDivider))
             .ignoresSafeArea(edges: [.leading, .trailing])
             .padding([.top], 0)
         let buttonLayout = verticalSizeClass == .compact ?

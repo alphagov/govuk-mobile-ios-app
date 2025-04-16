@@ -6,15 +6,30 @@ protocol LocalAuthorityServiceInterface {
 
 class LocalAuthorityService: LocalAuthorityServiceInterface {
     private let serviceClient: LocalAuthorityServiceClientInterface
+    private let repository: LocalAuthorityRepositoryInterface
 
-    init(serviceClient: LocalAuthorityServiceClientInterface) {
+    init(serviceClient: LocalAuthorityServiceClientInterface,
+         repository: LocalAuthorityRepositoryInterface) {
         self.serviceClient = serviceClient
+        self.repository = repository
     }
 
     func fetchLocalAuthority(postcode: String,
                              completion: @escaping FetchLocalAuthorityCompletion) {
         serviceClient.fetchLocalAuthority(postcode: postcode) { result in
-            completion(result)
+            switch result {
+            case .success(let authorityType):
+                self.updateLocalAuthority(authorityType)
+                completion(.success(authorityType))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    private func updateLocalAuthority(_ authorityType: LocalAuthorityType) {
+        if let localAuthority = authorityType as? LocalAuthority {
+            repository.save(localAuthority)
         }
     }
 }

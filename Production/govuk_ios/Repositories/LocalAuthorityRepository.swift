@@ -17,7 +17,7 @@ struct LocalAuthorityRepository: LocalAuthorityRepositoryInterface {
     func save(_ localAuthority: LocalAuthority) {
         let context = coreData.backgroundContext
         var oldLocalAuthorityItems = [LocalAuthorityItem]()
-        
+
         context.performAndWait {
             oldLocalAuthorityItems = fetch(context: context)
         }

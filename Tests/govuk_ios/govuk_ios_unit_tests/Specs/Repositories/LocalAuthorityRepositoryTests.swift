@@ -28,6 +28,8 @@ struct LocalAuthorityRepositoryTests {
             )
         )
 
+        sut.save(localAuthority)
+
         let localAuthorityItems = sut.fetchLocalAuthority()
         #expect(localAuthorityItems.count == 2)
         let childAuthority = localAuthorityItems.first(where: { $0.parent != nil })

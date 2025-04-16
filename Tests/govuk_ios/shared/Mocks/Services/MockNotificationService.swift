@@ -42,4 +42,9 @@ class MockNotificationService: NotificationServiceInterface {
     var isFeatureEnabled: Bool {
         _stubbedIsFetureEnabled
     }
+
+    var _onClickAction: ((URL) -> Void)?
+    func addClickListener(onClickAction: @escaping (URL) -> Void) {
+        _onClickAction = onClickAction
+    }
 }

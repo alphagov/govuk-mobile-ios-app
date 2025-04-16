@@ -1,10 +1,10 @@
 import Foundation
 import UIKit
+import Factory
 
 class SceneDelegate: UIResponder,
                      UIWindowSceneDelegate {
     var window: UIWindow?
-    @Inject(\.notificationService) private var notificationService: NotificationServiceInterface
 
     private lazy var navigationController: UINavigationController = {
         let controller = UINavigationController()
@@ -30,6 +30,7 @@ class SceneDelegate: UIResponder,
 
         let url = connectionOptions.urlContexts.first?.url
         coordinator?.start(url: url)
+        let notificationService = Container.shared.notificationService.resolve()
         notificationService.addClickListener { deeplink in
             self.coordinator?.start(url: deeplink)
         }

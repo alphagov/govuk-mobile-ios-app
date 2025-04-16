@@ -31,9 +31,7 @@ class SceneDelegate: UIResponder,
         let url = connectionOptions.urlContexts.first?.url
         coordinator?.start(url: url)
         let notificationService = Container.shared.notificationService.resolve()
-        notificationService.addClickListener { deeplink in
-            self.coordinator?.start(url: deeplink)
-        }
+        notificationService.addClickListener { deeplink in self.coordinator?.start(url: deeplink) }
     }
 
     func scene(_ scene: UIScene,

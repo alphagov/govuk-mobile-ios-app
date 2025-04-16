@@ -30,9 +30,7 @@ class LocalAuthorityViewModel: ObservableObject {
     let postcodeEntryViewTitle: String =  String.localAuthority.localized(
         "localAuthorityPostcodeEntryViewTitle"
     )
-    let postcodeEntryViewTextfieldHint: String = String.localAuthority.localized(
-        "localAuthoritypostcodeEntryViewTextfieldHint"
-    )
+
     let postcodeEntryViewExampleText: String = String.localAuthority.localized(
         "localAthorityPostcodeEntryViewExampleText"
     )
@@ -119,7 +117,8 @@ class LocalAuthorityViewModel: ObservableObject {
     }
     // print statements have been left in for post amigos purposes
     func fetchLocalAuthority(postCode: String) {
-        service.fetchLocalAuthority(postcode: postCode) { [weak self] results in
+        service.fetchLocalAuthority(postcode: postCode) { [weak self] results
+            in
             switch results {
             case .success(let response as LocalAuthority):
                 self?.localAuthority = response

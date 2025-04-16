@@ -21,12 +21,14 @@ struct HomeViewModelTests {
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
+            localAuthorityAction: { },
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            localService: MockLocalAuthorityService()
         )
         let widgets = await subject.widgets
 
@@ -54,12 +56,14 @@ struct HomeViewModelTests {
             configService: configService,
             notificationService: mockNotificationService,
             topicWidgetViewModel: topicsViewModel,
+            localAuthorityAction: { },
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            localService: MockLocalAuthorityService()
         )
         let widgets = await subject.widgets
 

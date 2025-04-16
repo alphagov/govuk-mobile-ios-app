@@ -28,13 +28,15 @@ struct ViewControllerBuilderTests {
             notificationService: MockNotificationService(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            topicWidgetViewModel: viewModel
+            topicWidgetViewModel: viewModel,
+            localService: MockLocalAuthorityService()
         )
 
         let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: {},
             notificationsAction: {},
-            recentActivityAction: {}
+            recentActivityAction: {},
+            localAuthorityAction: {}
         )
 
         let result = subject.home(dependencies: dependencies, actions: actions)

@@ -24,7 +24,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                         Color(UIColor.govUK.text.secondary)
                     )
                     TextField(
-                        viewModel.postcodeEntryViewTextfieldHint,
+                        "",
                         text: $viewModel.postCode
                     ).textFieldStyle(CustomTextFieldBorder())
                     Text(viewModel.postcodeEntryViewDescriptionTitle).font(

@@ -28,6 +28,7 @@ struct HomeViewModel {
     var widgets: [WidgetView] {
         get async {
             await [
+                localWidget,
                 notificationsWidget,
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,

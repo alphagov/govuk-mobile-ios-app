@@ -7,10 +7,10 @@ struct CustomTextFieldBorder: TextFieldStyle {
         configuration
             .padding()
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 4)
                     .stroke(
                         Color(uiColor: UIColor.govUK.strokes.listDivider ),
-                        lineWidth: 1.5
+                        lineWidth: 0.5
                     )
             )
     }

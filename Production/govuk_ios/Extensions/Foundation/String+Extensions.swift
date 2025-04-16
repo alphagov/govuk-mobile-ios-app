@@ -63,6 +63,13 @@ extension String {
             bundle: .main
         )
     }
+
+    static var localAuthority: LocalStringBuilder {
+        .init(
+            tableName: "LocalAuthority",
+            bundle: .main
+        )
+    }
 }
 
 extension String {

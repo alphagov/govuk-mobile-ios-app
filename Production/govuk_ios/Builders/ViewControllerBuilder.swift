@@ -24,12 +24,14 @@ class ViewControllerBuilder {
         let searchService: SearchServiceInterface
         let activityService: ActivityServiceInterface
         let topicWidgetViewModel: TopicsWidgetViewModel
+        let localService: LocalAuthorityServiceInterface
     }
 
     struct HomeActions {
         let feedbackAction: () -> Void
         let notificationsAction: () -> Void
         let recentActivityAction: () -> Void
+        let localAuthorityAction: () -> Void
     }
 
     @MainActor
@@ -39,12 +41,14 @@ class ViewControllerBuilder {
             configService: dependencies.configService,
             notificationService: dependencies.notificationService,
             topicWidgetViewModel: dependencies.topicWidgetViewModel,
+            localAuthorityAction: actions.localAuthorityAction,
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
-            activityService: dependencies.activityService
+            activityService: dependencies.activityService,
+            localService: dependencies.localService
         )
         return HomeViewController(
             viewModel: viewModel

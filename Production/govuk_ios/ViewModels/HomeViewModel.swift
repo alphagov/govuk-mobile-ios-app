@@ -1,18 +1,21 @@
 import Foundation
 import UIKit
 import GOVKit
+import UIComponents
 
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
+    let localAuthorityAction: () -> Void
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
+    let localService: LocalAuthorityServiceInterface
 
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
@@ -83,6 +86,27 @@ struct HomeViewModel {
         )
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.addContent(content)
+        return widget
+    }
+
+    @MainActor
+    private var localWidget: WidgetView? {
+        //  guard featureEnabled(.local) else { return nil }
+        let viewModel = LocalAuthorityViewModel(
+            service: localService,
+            analyticsService: analyticsService,
+            action: localAuthorityAction
+        )
+        let content = LocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        let hostingViewController = HostingViewController(rootView: content)
+        let widget = WidgetView(
+            useContentAccessibilityInfo: true,
+            backgroundColor: UIColor.govUK.fills.surfaceCardSelected,
+            borderColor: UIColor.govUK.strokes.cardGreen.cgColor
+        )
+        widget.addContent(hostingViewController.view)
         return widget
     }
 

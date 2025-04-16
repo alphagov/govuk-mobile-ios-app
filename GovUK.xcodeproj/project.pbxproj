@@ -75,6 +75,12 @@
 		4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */; };
 		4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */; };
 		4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646C2D15AB05007A6E97 /* CharValidator.swift */; };
+		4EE5F3E22DAFD327008C60ED /* LocalAuthorityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E12DAFD327008C60ED /* LocalAuthorityViewModel.swift */; };
+		4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */; };
+		4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */; };
+		4EE5F3E92DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */; };
+		4EE5F3F02DAFDB80008C60ED /* LocalAuthority.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */; };
+		4EE5F3F22DAFE030008C60ED /* CustomTextFeildBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3F12DAFE030008C60ED /* CustomTextFeildBorder.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407532CE278F900D654FC /* StickyFooterView.swift */; };
 		4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407552CE2796900D654FC /* UIButton+Extensions.swift */; };
@@ -364,6 +370,12 @@
 		4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646C2D15AB05007A6E97 /* CharValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharValidator.swift; sourceTree = "<group>"; };
+		4EE5F3E12DAFD327008C60ED /* LocalAuthorityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityViewModel.swift; sourceTree = "<group>"; };
+		4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityWidgetView.swift; sourceTree = "<group>"; };
+		4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityExplainerView.swift; sourceTree = "<group>"; };
+		4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityPostcodeEntryView.swift; sourceTree = "<group>"; };
+		4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LocalAuthority.xcstrings; sourceTree = "<group>"; };
+		4EE5F3F12DAFE030008C60ED /* CustomTextFeildBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFeildBorder.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		4EF407532CE278F900D654FC /* StickyFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyFooterView.swift; sourceTree = "<group>"; };
 		4EF407552CE2796900D654FC /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -689,6 +701,7 @@
 		16E5AD442C6E499B000B8B3A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				4EE5F3E32DAFD350008C60ED /* LocalAuthority */,
 				D056CE752D3A847F005845E0 /* InformationView.swift */,
 				D06EB96A2CA6F6FA007EA081 /* Topics */,
 				5DABE8CE2CA41AD4003AB312 /* RecentActivtyWidget.swift */,
@@ -754,6 +767,16 @@
 				4EBE646C2D15AB05007A6E97 /* CharValidator.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		4EE5F3E32DAFD350008C60ED /* LocalAuthority */ = {
+			isa = PBXGroup;
+			children = (
+				4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */,
+				4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */,
+				4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */,
+			);
+			path = LocalAuthority;
 			sourceTree = "<group>";
 		};
 		4EFE229F2D0CD07400136D56 /* Redactors */ = {
@@ -853,6 +876,7 @@
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
 				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
+				4EE5F3E12DAFD327008C60ED /* LocalAuthorityViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -950,6 +974,7 @@
 				5D742BDB2C99799000E7B87A /* Search.xcstrings */,
 				5D742BD92C99791A00E7B87A /* Settings.xcstrings */,
 				5D54F4722CC8473900A3B6A7 /* Topics.xcstrings */,
+				4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -1281,6 +1306,7 @@
 				3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */,
 				3D211B8E2CB6B4FE005D1472 /* HeaderView.swift */,
 				4E00EEEA2CCB040D007B61E8 /* TopicsButtonView.swift */,
+				4EE5F3F12DAFE030008C60ED /* CustomTextFeildBorder.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -1553,6 +1579,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D742BDE2C997ABB00E7B87A /* Onboarding.xcstrings in Resources */,
+				4EE5F3F02DAFDB80008C60ED /* LocalAuthority.xcstrings in Resources */,
 				5D54F4732CC8473900A3B6A7 /* Topics.xcstrings in Resources */,
 				3D3956A92DA6C32000673D3A /* Deeplinks.xcstrings in Resources */,
 				5D51D1602C245AAC008AC8E4 /* PrivacyInfo.xcprivacy in Resources */,
@@ -1711,6 +1738,7 @@
 				5DC70CBD2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift in Sources */,
 				5D7D25612D141D1700BDC217 /* CompoundRedactor.swift in Sources */,
 				5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */,
+				4EE5F3E22DAFD327008C60ED /* LocalAuthorityViewModel.swift in Sources */,
 				3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */,
 				16F961A32C92FD15005CFB04 /* SearchResultCell.swift in Sources */,
 				5DD4CB182D95491600459FB5 /* RecentActivityListViewController.swift in Sources */,
@@ -1728,6 +1756,7 @@
 				5D8100892CEB3FE600EE7D15 /* AppLaunchResponse.swift in Sources */,
 				D04C54302D70821D0070EE79 /* HomeCommerceItem.swift in Sources */,
 				3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */,
+				4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */,
 				3D9C933E2CB0172400EFA337 /* AppForcedUpdateContainerView.swift in Sources */,
 				1687F3172CB4110D005E1473 /* AllTopicsViewModel.swift in Sources */,
 				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
@@ -1765,6 +1794,7 @@
 				5D8100872CEB3FD600EE7D15 /* AppLaunchService.swift in Sources */,
 				5D9E67C42C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift in Sources */,
 				4E00EEEB2CCB040D007B61E8 /* TopicsButtonView.swift in Sources */,
+				4EE5F3F22DAFE030008C60ED /* CustomTextFeildBorder.swift in Sources */,
 				5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */,
 				5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */,
 				5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */,
@@ -1787,6 +1817,7 @@
 				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
 				4EFE22A52D0CD0D500136D56 /* RegexRedactor.swift in Sources */,
 				D028CCF62CB9619B00742620 /* Topic.swift in Sources */,
+				4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidgetView.swift in Sources */,
 				5D7D255F2D141CEC00BDC217 /* Redactor+Convenience.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5DDD58892D5A556A001C0B3E /* NotificationOnboardingCoordinator.swift in Sources */,
@@ -1822,6 +1853,7 @@
 				4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
 				4E00EEF32CCB0523007B61E8 /* TopicOnboardingListView.swift in Sources */,
+				4EE5F3E92DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift in Sources */,
 				5DC7647A2D6F165A00ABBAF4 /* OnboardingSlides+Convenience.swift in Sources */,
 				5D41DB652C087BCE0011E691 /* Container+Services.swift in Sources */,
 				4E00EEFB2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift in Sources */,
@@ -2126,11 +2158,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N8W395F695;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
@@ -2149,8 +2180,7 @@
 				ONESIGNAL_APP_ID = "";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore uk.gov.govuk";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore uk.gov.govuk";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

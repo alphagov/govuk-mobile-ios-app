@@ -14,6 +14,7 @@ class HomeCoordinator: TabItemCoordinator {
     private let deviceInformationProvider: DeviceInformationProviderInterface
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
+    private let localService: LocalAuthorityServiceInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -25,7 +26,8 @@ class HomeCoordinator: TabItemCoordinator {
          notificationService: NotificationServiceInterface,
          deviceInformationProvider: DeviceInformationProviderInterface,
          searchService: SearchServiceInterface,
-         activityService: ActivityServiceInterface) {
+         activityService: ActivityServiceInterface,
+         localService: LocalAuthorityServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
@@ -36,6 +38,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.deviceInformationProvider = deviceInformationProvider
         self.searchService = searchService
         self.activityService = activityService
+        self.localService = localService
         super.init(navigationController: navigationController)
     }
 
@@ -46,13 +49,15 @@ class HomeCoordinator: TabItemCoordinator {
             notificationService: notificationService,
             searchService: searchService,
             activityService: activityService,
-            topicWidgetViewModel: topicWidgetViewModel
+            topicWidgetViewModel: topicWidgetViewModel,
+            localService: localService
         )
 
         let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
-            recentActivityAction: startRecentActivityCoordinator
+            recentActivityAction: startRecentActivityCoordinator,
+            localAuthorityAction: trackRecentLocalAuthorityWidget
         )
 
         let viewController = viewControllerBuilder.home(
@@ -74,6 +79,12 @@ class HomeCoordinator: TabItemCoordinator {
         else { return }
         if childCoordinators.isEmpty {
             homeViewController.resetState()
+        }
+    }
+
+    private var trackRecentLocalAuthorityWidget: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "Your local services")
         }
     }
 

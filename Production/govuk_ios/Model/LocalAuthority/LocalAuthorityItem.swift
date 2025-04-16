@@ -13,11 +13,13 @@ class LocalAuthorityItem: NSManagedObject,
     @NSManaged public var tier: String
     @NSManaged public var slug: String
     @NSManaged public var parent: LocalAuthorityItem?
+}
 
+extension LocalAuthorityItem {
     func update(with authority: Authority) {
-        self.name = authority.name
-        self.homepageUrl = authority.homepageUrl
-        self.slug = authority.slug
-        self.tier = authority.tier
+        name = authority.name
+        homepageUrl = authority.homepageUrl
+        slug = authority.slug
+        tier = authority.tier
     }
 }

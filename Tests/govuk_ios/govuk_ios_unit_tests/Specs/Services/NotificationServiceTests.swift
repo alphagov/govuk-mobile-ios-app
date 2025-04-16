@@ -127,76 +127,76 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter()
         )
-        let onClick: ((URL) -> Void)? = { url in }
+        let onClickAction: ((URL) -> Void)? = { _ in }
         sut.addClickListener(
-            onClick: onClick!
+            onClickAction: onClickAction!
         )
-        #expect(sut.onClick != nil)
+        #expect(sut.onClickAction != nil)
     }
 
     @Test
-    func handleAdditionalData_whenAdditionalDataIsNil_doesNotCallOnClick() {
+    func handleAdditionalData_whenAdditionalDataIsNil_doesNotCallOnClickAction() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter()
         )
 
-        var didOnClick = false
-        sut.onClick = { _ in
-            didOnClick = true
+        var didOnClickAction = false
+        sut.onClickAction = { _ in
+            didOnClickAction = true
         }
 
         let additionalData: [AnyHashable: Any]? = nil
         sut.handleAdditionalData(additionalData)
 
-        #expect(didOnClick == false)
+        #expect(didOnClickAction == false)
     }
 
     @Test
-    func handleAdditionalData_whenAdditionalDataIsEmpty_doesNotCallOnClick() {
+    func handleAdditionalData_whenAdditionalDataIsEmpty_doesNotCallOnClickAction() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter()
         )
 
-        var didOnClick = false
-        sut.onClick = { _ in
-            didOnClick = true
+        var didOnClickAction = false
+        sut.onClickAction = { _ in
+            didOnClickAction = true
         }
 
         let additionalData: [AnyHashable: Any]? = [:]
         sut.handleAdditionalData(additionalData)
 
-        #expect(didOnClick == false)
+        #expect(didOnClickAction == false)
     }
 
     @Test
-    func handleAdditionalData_whenAdditionalDataDeeplinkCannotBeParsedToAUrl_doesNotCallOnClick() {
+    func handleAdditionalData_whenAdditionalDataDeeplinkCannotBeParsedToAUrl_doesNotCallOnClickAction() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter()
         )
 
-        var didOnClick = false
-        sut.onClick = { _ in
-            didOnClick = true
+        var didOnClickAction = false
+        sut.onClickAction = { _ in
+            didOnClickAction = true
         }
 
         let additionalData: [AnyHashable: Any]? = ["deeplink": ""]
         sut.handleAdditionalData(additionalData)
 
-        #expect(didOnClick == false)
+        #expect(didOnClickAction == false)
     }
 
     @Test
-    func handleAdditionalData_whenAdditionalDataIsValid_onClickHasTheCorrectUrl() {
+    func handleAdditionalData_whenAdditionalDataIsValid_onClickActionHasTheCorrectUrl() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter()
         )
 
         var result: URL?
-        sut.onClick = { url in
+        sut.onClickAction = { url in
             result = url
         }
 

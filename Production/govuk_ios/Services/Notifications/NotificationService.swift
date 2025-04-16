@@ -8,7 +8,7 @@ import OneSignalFramework
 protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: (() -> Void)?)
-    func addClickListener(onClick: @escaping (URL) -> Void)
+    func addClickListener(onClickAction: @escaping (URL) -> Void)
     var shouldRequestPermission: Bool { get async }
     var permissionState: NotificationPermissionState { get async }
     var isFeatureEnabled: Bool { get }
@@ -17,7 +17,7 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
 class NotificationService: NSObject, NotificationServiceInterface, OSNotificationClickListener {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
-    var onClick: ((URL) -> Void)?
+    var onClickAction: ((URL) -> Void)?
 
     init(environmentService: AppEnvironmentServiceInterface,
          notificationCenter: UserNotificationCenterInterface) {
@@ -76,9 +76,9 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
         completion(.success(Onboarding.notificationSlides))
     }
 
-    func addClickListener(onClick: @escaping (URL) -> Void) {
+    func addClickListener(onClickAction: @escaping (URL) -> Void) {
         OneSignal.Notifications.addClickListener(self)
-        self.onClick = onClick
+        self.onClickAction = onClickAction
     }
 
     func onClick(event: OSNotificationClickEvent) {
@@ -86,10 +86,9 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
     }
 
     func handleAdditionalData(_ additionalData: [AnyHashable: Any]?) {
-        guard let additionalData else { return }
-        guard let deeplinkStr = additionalData["deeplink"] as? String else { return }
-        if let deeplink = URL(string: deeplinkStr) {
-            onClick?(deeplink)
-        }
+        guard let additionalData,
+              let deeplinkStr = additionalData["deeplink"] as? String,
+              let deeplink = URL(string: deeplinkStr) else { return }
+        onClickAction?(deeplink)
     }
 }

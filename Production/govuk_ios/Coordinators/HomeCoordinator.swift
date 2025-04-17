@@ -14,7 +14,7 @@ class HomeCoordinator: TabItemCoordinator {
     private let deviceInformationProvider: DeviceInformationProviderInterface
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
-    private let localService: LocalAuthorityServiceInterface
+    private let localAuthorityService: LocalAuthorityServiceInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -38,7 +38,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.deviceInformationProvider = deviceInformationProvider
         self.searchService = searchService
         self.activityService = activityService
-        self.localService = localService
+        self.localAuthorityService = localService
         super.init(navigationController: navigationController)
     }
 
@@ -50,14 +50,14 @@ class HomeCoordinator: TabItemCoordinator {
             searchService: searchService,
             activityService: activityService,
             topicWidgetViewModel: topicWidgetViewModel,
-            localService: localService
+            localService: localAuthorityService
         )
 
         let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
             recentActivityAction: startRecentActivityCoordinator,
-            localAuthorityAction: trackRecentLocalAuthorityWidget
+            localAuthorityAction: trackLocalAuthorityWidget
         )
 
         let viewController = viewControllerBuilder.home(
@@ -82,7 +82,7 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var trackRecentLocalAuthorityWidget: () -> Void {
+    private var trackLocalAuthorityWidget: () -> Void {
         return { [weak self] in
             self?.trackWidgetNavigation(text: "Your local services")
         }

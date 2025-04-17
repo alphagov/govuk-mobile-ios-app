@@ -12,6 +12,7 @@ struct LocalAuthorityPostcodeEntryView: View {
     }
     var body: some View {
         NavigationView {
+            ScrollView {
             VStack {
                 VStack(alignment: .leading, spacing: 15) {
                     Text(viewModel.postcodeEntryViewTitle)
@@ -23,12 +24,10 @@ struct LocalAuthorityPostcodeEntryView: View {
                     Text(viewModel.postcodeEntryViewExampleText).foregroundColor(
                         Color(UIColor.govUK.text.secondary)
                     )
-                    TextField("",
-                        text: $viewModel.postCode
-                    ).textFieldStyle(CustomTextFieldBorder())
-                    Text(viewModel.postcodeEntryViewDescriptionTitle).font(
-                        Font.govUK.bodySemibold
-                    )
+                    TextField("",text: $viewModel.postCode)
+                        .textFieldStyle(CustomTextFieldBorder())
+                    Text(viewModel.postcodeEntryViewDescriptionTitle)
+                        .font(Font.govUK.bodySemibold)
                     Text(viewModel.postcodeEntryViewDescriptionBody)
                     Spacer()
                 }.padding()
@@ -38,6 +37,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                     doneButton
                 }
                 .navigationBarTitleDisplayMode(.inline)
+        }
         }.onAppear(perform: {
             viewModel.trackScreen(screen: self)
         })

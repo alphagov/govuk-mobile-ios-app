@@ -12,6 +12,7 @@ struct LocalAuthorityExplainerView: View {
     }
     var body: some View {
         NavigationView {
+            ScrollView {
             VStack {
                 VStack {
                     if verticalSizeClass != .compact {
@@ -51,6 +52,7 @@ struct LocalAuthorityExplainerView: View {
                 .sheet(isPresented: $viewModel.showPostcodeEntryView) {
                     LocalAuthorityPostcodeEntryView(viewModel: viewModel)
                 }
+        }
         }.onAppear {
             viewModel.trackScreen(screen: self)
         }

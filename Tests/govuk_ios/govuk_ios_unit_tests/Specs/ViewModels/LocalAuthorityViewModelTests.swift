@@ -26,7 +26,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthorityAdressList
@@ -60,7 +60,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthority
@@ -104,7 +104,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthority
@@ -132,7 +132,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthorityErrorMessage
@@ -155,7 +155,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
@@ -178,7 +178,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
@@ -201,7 +201,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
@@ -221,7 +221,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
-            action: { }
+            trackWidgetTapAction: { }
         )
         sut.explainerViewPrimaryButtonViewModel.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
@@ -234,7 +234,7 @@ struct LocalAuthorityViewModelTests {
         let sut = LocalAuthorityViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
-            action: { }
+            trackWidgetTapAction: { }
         )
         sut.postcodeEntryViewPrimaryButtonViewModel.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String

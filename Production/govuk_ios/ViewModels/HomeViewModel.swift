@@ -28,7 +28,7 @@ struct HomeViewModel {
     var widgets: [WidgetView] {
         get async {
             await [
-                localWidget,
+                localAuthorityWidget,
                 notificationsWidget,
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
@@ -91,13 +91,13 @@ struct HomeViewModel {
     }
 
     @MainActor
-    private var localWidget: WidgetView? {
+    private var localAuthorityWidget: WidgetView? {
         guard featureEnabled(.localServices)
         else { return nil }
         let viewModel = LocalAuthorityViewModel(
             service: localService,
             analyticsService: analyticsService,
-            action: localAuthorityAction
+            trackWidgetTapAction: localAuthorityAction
         )
         let content = LocalAuthorityWidgetView(
             viewModel: viewModel

@@ -29,7 +29,7 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         let viewModel = LocalAuthorityViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
-            action: { }
+            trackWidgetTapAction: { }
         )
         let view = LocalAuthorityPostcodeEntryView(
             viewModel: viewModel

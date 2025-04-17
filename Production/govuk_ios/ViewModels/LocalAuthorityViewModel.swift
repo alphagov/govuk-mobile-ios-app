@@ -60,10 +60,10 @@ class LocalAuthorityViewModel: ObservableObject {
 
     init(service: LocalAuthorityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         action: @escaping () -> Void) {
+         trackWidgetTapAction: @escaping () -> Void) {
         self.service = service
         self.analyticsService = analyticsService
-        self.trackWidgetTapAction = action
+        self.trackWidgetTapAction = trackWidgetTapAction
         addTextFieldSubscribers()
     }
 

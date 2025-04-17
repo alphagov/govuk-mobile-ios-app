@@ -25,7 +25,7 @@ struct AppUnavailableContainerView: View {
             .padding(.top, 1)
             Spacer()
             Divider()
-                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
             SwiftUIButton(
                 viewModel.error == AppConfigError.networkUnavailable ? .primary : .secondary,

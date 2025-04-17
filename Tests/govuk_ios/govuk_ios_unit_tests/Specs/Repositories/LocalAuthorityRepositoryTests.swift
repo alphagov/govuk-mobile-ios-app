@@ -8,7 +8,7 @@ import CoreData
 @MainActor
 struct LocalAuthorityRepositoryTests {
 
-    @Test func save_localAuthorityItem_savesObject() async throws {
+    @Test func save_localAuthorityItem_savesObject() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = LocalAuthorityRepository(coreData: coreData)
 
@@ -46,7 +46,7 @@ struct LocalAuthorityRepositoryTests {
 
     }
 
-    @Test func save_localAuthorityItem_replacesOldItems() async throws {
+    @Test func save_localAuthorityItem_replacesOldItems() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = LocalAuthorityRepository(coreData: coreData)
 

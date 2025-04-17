@@ -16,10 +16,10 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
 
     func fetchLocalAuthority(postcode: String,
                              completion: @escaping FetchLocalAuthorityCompletion) {
-        serviceClient.fetchLocalAuthority(postcode: postcode) { result in
+        serviceClient.fetchLocalAuthority(postcode: postcode) { [weak self] result in
             switch result {
             case .success(let authorityType):
-                self.updateLocalAuthority(authorityType)
+                self?.updateLocalAuthority(authorityType)
                 completion(.success(authorityType))
             case .failure(let error):
                 completion(.failure(error))

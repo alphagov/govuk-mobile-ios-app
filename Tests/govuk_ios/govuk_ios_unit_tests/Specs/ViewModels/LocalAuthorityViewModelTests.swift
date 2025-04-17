@@ -66,8 +66,8 @@ struct LocalAuthorityViewModelTests {
             sut.$localAuthority
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { address in
-                    continuation.resume(returning: address)
+                .sink { localAuthority in
+                    continuation.resume(returning: localAuthority)
                 }.store(in: &cancellables)
             sut.fetchLocalAuthority(postCode: "")
         }
@@ -110,8 +110,8 @@ struct LocalAuthorityViewModelTests {
             sut.$localAuthority
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { address in
-                    continuation.resume(returning: address)
+                .sink { localAuthority in
+                    continuation.resume(returning: localAuthority)
                 }.store(in: &cancellables)
             sut.fetchLocalAuthority(postCode: "")
         }
@@ -138,8 +138,8 @@ struct LocalAuthorityViewModelTests {
             sut.$localAuthorityErrorMessage
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { address in
-                    continuation.resume(returning: address)
+                .sink { errorMessage in
+                    continuation.resume(returning: errorMessage)
                 }.store(in: &cancellables)
             sut.fetchLocalAuthority(postCode: "")
         }
@@ -161,8 +161,8 @@ struct LocalAuthorityViewModelTests {
             sut.objectWillChange
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { address in
-                    continuation.resume(returning: address)
+                .sink { error in
+                    continuation.resume(returning: error)
                 }.store(in: &cancellables)
             sut.fetchLocalAuthority(postCode: "")
         }
@@ -184,8 +184,8 @@ struct LocalAuthorityViewModelTests {
             sut.objectWillChange
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { address in
-                    continuation.resume(returning: address)
+                .sink { error in
+                    continuation.resume(returning: error)
                 }.store(in: &cancellables)
             sut.fetchLocalAuthority(postCode: "")
         }
@@ -207,8 +207,8 @@ struct LocalAuthorityViewModelTests {
             sut.objectWillChange
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { address in
-                    continuation.resume(returning: address)
+                .sink { error in
+                    continuation.resume(returning: error)
                 }.store(in: &cancellables)
             sut.fetchLocalAuthority(postCode: "")
         }

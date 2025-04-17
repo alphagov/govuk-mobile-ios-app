@@ -2169,8 +2169,7 @@
 				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore uk.gov.govuk";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore uk.gov.govuk";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

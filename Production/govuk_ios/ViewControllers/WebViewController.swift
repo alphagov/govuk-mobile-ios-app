@@ -3,7 +3,13 @@ import WebKit
 
 class WebViewController: UIViewController {
     private let url: URL
-    private var webView: WKWebView!
+
+    private lazy var webView: WKWebView = {
+        let configuration = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
 
     init(url: URL) {
         self.url = url
@@ -16,16 +22,16 @@ class WebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupWebView()
+        configureUI()
+        configureConstraints()
         loadURL()
     }
 
-    private func setupWebView() {
-        let configuration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: configuration)
-        webView.translatesAutoresizingMaskIntoConstraints = false
+    private func configureUI() {
         view.addSubview(webView)
+    }
 
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
             webView.topAnchor.constraint(equalTo: view.topAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

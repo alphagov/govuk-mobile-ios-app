@@ -10,14 +10,6 @@ import Foundation
 struct WebViewCoordinatorTests {
 
     @Test
-    func init_setsURLCorrectly() {
-        let url = URL(string: "https://gov.uk")!
-        let subject = WebViewController(url: url)
-
-        #expect(subject.view != nil)
-    }
-
-    @Test
     func viewDidLoad_setsUpWebViewAndLoadsURL() {
         let url = URL(string: "https://gov.uk")!
         let subject = WebViewController(url: url)

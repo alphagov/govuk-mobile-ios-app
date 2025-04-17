@@ -78,7 +78,6 @@ class LocalAuthorityViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
 
-
     func trackWidgetTap() {
         trackWidgetTapAction()
     }

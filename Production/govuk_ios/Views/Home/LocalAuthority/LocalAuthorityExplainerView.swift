@@ -12,38 +12,39 @@ struct LocalAuthorityExplainerView: View {
     }
     var body: some View {
         NavigationView {
-            ScrollView {
             VStack {
-                VStack {
-                    if verticalSizeClass != .compact {
-                        let imageResource = ImageResource(
-                            name: "onboarding_screen_1",
-                            bundle: .main
-                        )
-                        Image(imageResource)
-                            .scaledToFit()
-                            .frame(width: 290, height: 290)
+                ScrollView {
+                    VStack {
+                        if verticalSizeClass != .compact {
+                            let imageResource = ImageResource(
+                                name: "onboarding_screen_1",
+                                bundle: .main
+                            )
+                            Image(imageResource)
+                                .scaledToFit()
+                                .frame(width: 290, height: 290)
+                        }
+                        Text(viewModel.explainerViewTitle)
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .accessibilityLabel(Text(viewModel.explainerViewTitle))
+                            .padding([.trailing, .leading], 16)
+                            .accessibilityAddTraits(.isHeader)
+                            .accessibilitySortPriority(1)
+                        Text(viewModel.explainerViewDescription)
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
+                            .multilineTextAlignment(.center)
+                            .accessibilityLabel(Text(viewModel.explainerViewDescription))
+                            .padding([.top, .leading, .trailing], 4)
+                            .accessibilitySortPriority(0)
+                        Spacer()
                     }
-                    Text(viewModel.explainerViewTitle)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .accessibilityLabel(Text(viewModel.explainerViewTitle))
-                        .padding([.trailing, .leading], 16)
-                        .accessibilityAddTraits(.isHeader)
-                        .accessibilitySortPriority(1)
-                    Text(viewModel.explainerViewDescription)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .multilineTextAlignment(.center)
-                        .accessibilityLabel(Text(viewModel.explainerViewDescription))
-                        .padding([.top, .leading, .trailing], 4)
-                        .accessibilitySortPriority(0)
-                    Spacer()
+                    .accessibilityElement(children: .contain)
                 }
-                .accessibilityElement(children: .contain)
-                buttons
+                    buttons
             }.navigationTitle(viewModel.navigationTitle)
                 .toolbar {
                     doneButton
@@ -52,7 +53,6 @@ struct LocalAuthorityExplainerView: View {
                 .sheet(isPresented: $viewModel.showPostcodeEntryView) {
                     LocalAuthorityPostcodeEntryView(viewModel: viewModel)
                 }
-        }
         }.onAppear {
             viewModel.trackScreen(screen: self)
         }

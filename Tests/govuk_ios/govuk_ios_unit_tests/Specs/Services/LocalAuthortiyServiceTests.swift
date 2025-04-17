@@ -9,7 +9,11 @@ struct LocalAuthorityServiceTests {
     @Test
     func fetchLocalAuthority_callsServiceClient() async throws {
         let mockServiceClient = MockLocalServiceClient()
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
         let expectedPostcode = "SW1"
 
         sut.fetchLocalAuthority(
@@ -34,7 +38,11 @@ struct LocalAuthorityServiceTests {
         let expectedResult = LocalAuthoritiesList(addresses: addresses)
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .success(expectedResult)
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
 
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
@@ -49,6 +57,7 @@ struct LocalAuthorityServiceTests {
         #expect(addressList?.addresses.last?.name == "name2")
         #expect(addressList?.addresses.first?.slug == "slug1")
         #expect(addressList?.addresses.last?.name == "name2")
+        #expect(!mockRepository._didSaveLocalAuthority)
     }
 
     @Test
@@ -63,7 +72,11 @@ struct LocalAuthorityServiceTests {
         let expectedResult = LocalAuthority(localAuthority: authority)
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .success(expectedResult)
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
 
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
@@ -77,6 +90,7 @@ struct LocalAuthorityServiceTests {
         #expect(localAuthority?.localAuthority.name == "name1")
         #expect(localAuthority?.localAuthority.tier == "tier1")
         #expect(localAuthority?.localAuthority.slug == "slug1")
+        #expect(mockRepository._didSaveLocalAuthority)
     }
 
     @Test
@@ -98,7 +112,11 @@ struct LocalAuthorityServiceTests {
         let expectedResult = LocalAuthority(localAuthority: authority)
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .success(expectedResult)
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
 
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
@@ -113,13 +131,18 @@ struct LocalAuthorityServiceTests {
         #expect(localAuthority?.localAuthority.tier == "tier2")
         #expect(localAuthority?.localAuthority.slug == "slug2")
         #expect(localAuthority?.localAuthority.parent?.name == "parentAuthority")
+        #expect(mockRepository._didSaveLocalAuthority)
     }
 
     @Test
     func fetchLocalAuthority_apiUnavailable_returnsExpectedResult() async throws {
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .failure(.apiUnavailable)
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
                 postcode: "test") { result in
@@ -129,6 +152,7 @@ struct LocalAuthorityServiceTests {
         let localResult = try? result.get()
         #expect(localResult == nil)
         #expect(result.getError() == .apiUnavailable)
+        #expect(!mockRepository._didSaveLocalAuthority)
     }
 
 
@@ -136,7 +160,11 @@ struct LocalAuthorityServiceTests {
     func fetchLocalAuthority_decodingError_returnsExpectedResult() async throws {
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .failure(.decodingError)
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
                 postcode: "test") { result in
@@ -146,13 +174,18 @@ struct LocalAuthorityServiceTests {
         let localResult = try? result.get()
         #expect(localResult == nil)
         #expect(result.getError() == .decodingError)
+        #expect(!mockRepository._didSaveLocalAuthority)
     }
 
     @Test
     func fetchLocalAuthority_networkUnavailable_returnsExpectedResult() async throws {
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .failure(.networkUnavailable)
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
                 postcode: "test") { result in
@@ -162,6 +195,7 @@ struct LocalAuthorityServiceTests {
         let localResult = try? result.get()
         #expect(localResult == nil)
         #expect(result.getError() == .networkUnavailable)
+        #expect(!mockRepository._didSaveLocalAuthority)
     }
 
     @Test
@@ -169,7 +203,11 @@ struct LocalAuthorityServiceTests {
         let mockServiceClient = MockLocalServiceClient()
         mockServiceClient._stubbedLocalResult = .success(LocalErrorMessage(message: "errorMessage"))
 
-        let sut = LocalAuthorityService(serviceClient: mockServiceClient)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
                 postcode: "test") { result in
@@ -179,5 +217,6 @@ struct LocalAuthorityServiceTests {
         let localResult = try? result.get()
         let errorMessage = localResult as? LocalErrorMessage
         #expect(errorMessage?.message == "errorMessage")
+        #expect(!mockRepository._didSaveLocalAuthority)
     }
 }

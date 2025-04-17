@@ -80,7 +80,6 @@ struct LocalAuthorityExplainerView: View {
                     .primary,
                     viewModel: viewModel.explainerViewPrimaryButtonViewModel
                 )
-                .accessibilityHint("")
                 .frame(
                     minHeight: 44,
                     idealHeight: 44

@@ -23,8 +23,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                     Text(viewModel.postcodeEntryViewExampleText).foregroundColor(
                         Color(UIColor.govUK.text.secondary)
                     )
-                    TextField(
-                        "",
+                    TextField("",
                         text: $viewModel.postCode
                     ).textFieldStyle(CustomTextFieldBorder())
                     Text(viewModel.postcodeEntryViewDescriptionTitle).font(
@@ -68,7 +67,6 @@ struct LocalAuthorityPostcodeEntryView: View {
                     .primary,
                     viewModel: viewModel.postcodeEntryViewPrimaryButtonViewModel
                 )
-                .accessibilityHint("")
                 .frame(
                     minHeight: 44,
                     idealHeight: 44

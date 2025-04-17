@@ -57,6 +57,11 @@
 		4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */; };
 		4E00EEFB2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
+		4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D252DB0E6510089CF9E /* Authority.swift */; };
+		4E265D2B2DB0E6510089CF9E /* LocalAuthoritiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */; };
+		4E265D2C2DB0E6510089CF9E /* LocalAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D272DB0E6510089CF9E /* LocalAuthority.swift */; };
+		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
+		4E265D2E2DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */; };
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
 		4E3E57EB2D9ADC6F00402E8B /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E57EA2D9ADC6F00402E8B /* NotificationSettingsView.swift */; };
 		4E3E57EF2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */; };
@@ -351,6 +356,11 @@
 		4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
 		4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		4E265D252DB0E6510089CF9E /* Authority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
+		4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthoritiesList.swift; sourceTree = "<group>"; };
+		4E265D272DB0E6510089CF9E /* LocalAuthority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthority.swift; sourceTree = "<group>"; };
+		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
+		4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityErrorMessage.swift; sourceTree = "<group>"; };
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		4E3E57EA2D9ADC6F00402E8B /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -642,7 +652,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		4EBCA32A2DAC54E20063A723 /* LocalAuthority */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LocalAuthority; sourceTree = "<group>"; };
 		5D9CDE3A2CD928FB0045DFC3 /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (5D9CDF202CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF212CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 5D9CDF222CD928FB0045DFC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64, ); path = Tests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -743,6 +752,18 @@
 				4E6663C42C736ABD0063E81C /* Feature.swift */,
 			);
 			path = AppConfig;
+			sourceTree = "<group>";
+		};
+		4E265F142DB0E6B70089CF9E /* LocalAuthority */ = {
+			isa = PBXGroup;
+			children = (
+				4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */,
+				4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */,
+				4E265D272DB0E6510089CF9E /* LocalAuthority.swift */,
+				4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */,
+				4E265D252DB0E6510089CF9E /* Authority.swift */,
+			);
+			path = LocalAuthority;
 			sourceTree = "<group>";
 		};
 		4E3E57E72D9ADBB800402E8B /* Notifications */ = {
@@ -1259,7 +1280,7 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4EBCA32A2DAC54E20063A723 /* LocalAuthority */,
+				4E265F142DB0E6B70089CF9E /* LocalAuthority */,
 				D04C542A2D7081C00070EE79 /* Analytics */,
 				D0D9CB922D3024C00051EDDD /* Search */,
 				4E003E7D2C75F497008FCBF2 /* AppConfig */,
@@ -1449,9 +1470,6 @@
 			);
 			dependencies = (
 				5DCAFA672D3FE0E800C3F284 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				4EBCA32A2DAC54E20063A723 /* LocalAuthority */,
 			);
 			name = govuk_ios;
 			packageProductDependencies = (
@@ -1895,6 +1913,11 @@
 				D0D9CFD72D3030640051EDDD /* SearchHistoryViewController.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */,
+				4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */,
+				4E265D2B2DB0E6510089CF9E /* LocalAuthoritiesList.swift in Sources */,
+				4E265D2C2DB0E6510089CF9E /* LocalAuthority.swift in Sources */,
+				4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */,
+				4E265D2E2DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift in Sources */,
 				5D54F4752CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,

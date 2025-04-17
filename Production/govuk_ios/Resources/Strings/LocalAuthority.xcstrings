@@ -23,17 +23,6 @@
         }
       }
     },
-    "localAuthorityDoneButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        }
-      }
-    },
     "localAuthorityExplainerViewDesciption" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,6 +30,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "We’ll use your postcode to add a link from the app home page to your local council's website"
+          }
+        }
+      }
+    },
+    "localAuthorityExplainerViewPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
           }
         }
       }

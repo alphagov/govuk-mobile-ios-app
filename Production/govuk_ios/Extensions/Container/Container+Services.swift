@@ -36,7 +36,7 @@ extension Container {
         }
     }
 
-    var localService: Factory<LocalAuthorityServiceInterface> {
+    var localAuthorityService: Factory<LocalAuthorityServiceInterface> {
         Factory(self) {
             LocalAuthorityService(serviceClient: self.localAuthorityServiceClient())
         }

@@ -8,13 +8,15 @@ class LocalAuthorityViewModel: ObservableObject {
     @Published var localAuthority: LocalAuthority?
     @Published var localAuthorityAdressList: LocalAuthoritiesList?
     @Published var localAuthorityErrorMessage: LocalErrorMessage?
-    private let explainerPrimaryButtonTitle: String = "Continue"
+    private let explainerPrimaryButtonTitle: String = String.localAuthority.localized(
+        "localAuthorityExplainerViewPrimaryButtonTitle"
+    )
     @Published var showPostcodeEntryView: Bool = false
     @Published var postCode: String = ""
     @Published var shouldShowErrorMessage: Bool = false
     private let analyticsService: AnalyticsServiceInterface
     private var cancellables = Set<AnyCancellable>()
-    private let action: () -> Void
+    private let trackWidgetTapAction: () -> Void
     let cancelButtonTitle: String = String.localAuthority.localized(
         "localAuthorityCancelbuttonTitle"
     )
@@ -61,7 +63,7 @@ class LocalAuthorityViewModel: ObservableObject {
          action: @escaping () -> Void) {
         self.service = service
         self.analyticsService = analyticsService
-        self.action = action
+        self.trackWidgetTapAction = action
         addTextFieldSubscribers()
     }
 
@@ -78,7 +80,7 @@ class LocalAuthorityViewModel: ObservableObject {
 
 
     func trackWidgetTap() {
-        action()
+        trackWidgetTapAction()
     }
 
     func trackScreen(screen: TrackableScreen) {

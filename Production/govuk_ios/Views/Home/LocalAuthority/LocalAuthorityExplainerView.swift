@@ -43,7 +43,7 @@ struct LocalAuthorityExplainerView: View {
                 }
                 .accessibilityElement(children: .contain)
                 buttons
-            }.navigationTitle("Your local services")
+            }.navigationTitle(viewModel.navigationTitle)
                 .toolbar {
                     doneButton
                 }

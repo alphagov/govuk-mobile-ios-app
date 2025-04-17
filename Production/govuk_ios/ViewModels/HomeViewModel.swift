@@ -92,7 +92,8 @@ struct HomeViewModel {
 
     @MainActor
     private var localWidget: WidgetView? {
-        //  guard featureEnabled(.local) else { return nil }
+        guard featureEnabled(.localServices)
+        else { return nil }
         let viewModel = LocalAuthorityViewModel(
             service: localService,
             analyticsService: analyticsService,

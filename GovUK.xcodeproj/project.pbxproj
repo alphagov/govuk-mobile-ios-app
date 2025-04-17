@@ -111,6 +111,7 @@
 		5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */; };
 		5D54F4732CC8473900A3B6A7 /* Topics.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D54F4722CC8473900A3B6A7 /* Topics.xcstrings */; };
 		5D54F4752CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */; };
+		5D5DB7F12DB0DD3200F6FEAE /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 5D5DB7F02DB0DD3200F6FEAE /* UIComponents */; };
 		5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62ABC22C32F49F0072BE6C /* Container+Configs.swift */; };
 		5D62DC0B2CE6373A0079D842 /* TopicSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62DC0A2CE6373A0079D842 /* TopicSelectedView.swift */; };
 		5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D649D322C6BA07800CBED96 /* AnalyticsService+Onboarding.swift */; };
@@ -643,6 +644,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D5DB7F12DB0DD3200F6FEAE /* UIComponents in Frameworks */,
 				5D0B02032C81A7E90013A410 /* Onboarding in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
 				D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */,
@@ -1435,6 +1437,7 @@
 				5D1F7E762D75A959007FD506 /* Onboarding */,
 				5D1D495C2DAEF9C400C8872A /* Onboarding */,
 				5D34E4722DAEFA6700880CE7 /* Onboarding */,
+				5D5DB7F02DB0DD3200F6FEAE /* UIComponents */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1525,8 +1528,8 @@
 				5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5DCAFA762D40088600C3F284 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
-				5D0A70F42DAEEC860057D733 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-ui-components" */,
 				5D34E4712DAEFA6700880CE7 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				5D5DB7EF2DB0DD3200F6FEAE /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -2525,13 +2528,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		5D0A70F42DAEEC860057D733 /* XCLocalSwiftPackageReference "../govuk-mobile-ios-ui-components" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../govuk-mobile-ios-ui-components";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		5D0278352C29CB5800F2A4EB /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2544,6 +2540,14 @@
 		5D34E4712DAEFA6700880CE7 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-onboarding";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		5D5DB7EF2DB0DD3200F6FEAE /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-ui-components";
 			requirement = {
 				branch = develop;
 				kind = branch;
@@ -2610,6 +2614,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D89226D2C071FE70019FBD7 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
 			productName = iOSSnapshotTestCase;
+		};
+		5D5DB7F02DB0DD3200F6FEAE /* UIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D5DB7EF2DB0DD3200F6FEAE /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */;
+			productName = UIComponents;
 		};
 		5D7F267D2C0F0EF000842090 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,5 +1,5 @@
 {
-  "originHash" : "7fb760bd83e1d4e0e1805ee2b72dda30367d0d62cb7f87a137b6314c4c15264e",
+  "originHash" : "069abb0cdb94713faf9f293078ab10cf16a13a895d390f45d9e0287aa140f443",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -71,6 +71,15 @@
       "state" : {
         "branch" : "develop",
         "revision" : "01dc0dc26e970be0d4efd6f3126bc8b0e53ca6fd"
+      }
+    },
+    {
+      "identity" : "govuk-mobile-ios-ui-components",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "677a88ef300d8cfa07ce55f1bcbca44243f3b3aa"
       }
     },
     {

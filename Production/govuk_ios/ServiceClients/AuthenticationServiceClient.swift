@@ -34,14 +34,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         } catch let error as AuthenticationError {
             return AuthenticationResult.failure(error)
         } catch let error as LoginError {
-            switch error {
-            case .userCancelled:
-                return AuthenticationResult.failure(.loginFlow(.userCancelled))
-            default:
-                return AuthenticationResult.failure(
-                    .loginFlow(.generic(description: "Login flow error"))
-                )
-            }
+            return AuthenticationResult.failure(.loginFlow(error))
         } catch {
             return AuthenticationResult.failure(.generic)
         }

@@ -29,6 +29,9 @@
 		168CB4382D77487B009BAA12 /* HomeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168CB4372D77487B009BAA12 /* HomeContentViewController.swift */; };
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
 		168F6FAA2C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */; };
+		169842D42DAE823000E3EA66 /* AuthenticationTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842D32DAE822300E3EA66 /* AuthenticationTokenService.swift */; };
+		169842D62DAEA5FB00E3EA66 /* LocalAuthenticationOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842D52DAEA5E100E3EA66 /* LocalAuthenticationOnboardingCoordinator.swift */; };
+		169842D82DAEAADC00E3EA66 /* LocalAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842D72DAEAAD500E3EA66 /* LocalAuthenticationService.swift */; };
 		169842DA2DB0004800E3EA66 /* LocalAuthenticationOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842D92DB0003C00E3EA66 /* LocalAuthenticationOnboardingViewModel.swift */; };
 		169842DE2DB05F2900E3EA66 /* LocalAuthenticationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842DD2DB05F1C00E3EA66 /* LocalAuthenticationOnboardingView.swift */; };
 		16A39A2E2DA9D05200C71F43 /* AppAuthSessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A39A2D2DA9D04100C71F43 /* AppAuthSessionWrapper.swift */; };
@@ -326,6 +329,9 @@
 		168CB4372D77487B009BAA12 /* HomeContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentViewController.swift; sourceTree = "<group>"; };
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidgetViewModel.swift; sourceTree = "<group>"; };
+		169842D32DAE822300E3EA66 /* AuthenticationTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTokenService.swift; sourceTree = "<group>"; };
+		169842D52DAEA5E100E3EA66 /* LocalAuthenticationOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationOnboardingCoordinator.swift; sourceTree = "<group>"; };
+		169842D72DAEAAD500E3EA66 /* LocalAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationService.swift; sourceTree = "<group>"; };
 		169842D92DB0003C00E3EA66 /* LocalAuthenticationOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationOnboardingViewModel.swift; sourceTree = "<group>"; };
 		169842DD2DB05F1C00E3EA66 /* LocalAuthenticationOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationOnboardingView.swift; sourceTree = "<group>"; };
 		16A39A2D2DA9D04100C71F43 /* AppAuthSessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAuthSessionWrapper.swift; sourceTree = "<group>"; };
@@ -906,6 +912,8 @@
 		5D41DB612C0875560011E691 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				169842D72DAEAAD500E3EA66 /* LocalAuthenticationService.swift */,
+				169842D32DAE822300E3EA66 /* AuthenticationTokenService.swift */,
 				164091FB2DA41B2700E3BE99 /* AuthenticationService.swift */,
 				5DC069EB2C3BFD4B00A81AAE /* AccessibilityManager.swift */,
 				5DD4CB152D95490100459FB5 /* ActivityService.swift */,
@@ -1052,6 +1060,7 @@
 		5D962D5E2C29BD0B0038BC0A /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				169842D52DAEA5E100E3EA66 /* LocalAuthenticationOnboardingCoordinator.swift */,
 				164091F92DA3F49D00E3BE99 /* AuthenticationCoordinator.swift */,
 				160AEACB2DA03B7B0072BA43 /* AuthenticationOnboardingCoordinator.swift */,
 				1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */,
@@ -1790,6 +1799,7 @@
 				16C37F0E2DA54F4C00BFE4A1 /* AuthenticationTokenSet.swift in Sources */,
 				3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */,
 				3D9C933E2CB0172400EFA337 /* AppForcedUpdateContainerView.swift in Sources */,
+				169842D42DAE823000E3EA66 /* AuthenticationTokenService.swift in Sources */,
 				1687F3172CB4110D005E1473 /* AllTopicsViewModel.swift in Sources */,
 				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
 				16A99D6B2D35F19300C72DEB /* SearchSuggestionsViewModel.swift in Sources */,
@@ -1802,6 +1812,7 @@
 				D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */,
 				5DD4CB082D95483100459FB5 /* ActivityItem.swift in Sources */,
 				5DD4CB092D95483100459FB5 /* MonthGroupKey.swift in Sources */,
+				169842D62DAEA5FB00E3EA66 /* LocalAuthenticationOnboardingCoordinator.swift in Sources */,
 				5DD4CB0A2D95483100459FB5 /* RecentActivitySection.swift in Sources */,
 				5DD4CB0B2D95483100459FB5 /* RecentActivitiesViewStructure.swift in Sources */,
 				4EBCA3362DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift in Sources */,
@@ -1904,6 +1915,7 @@
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
 				5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */,
 				D04191802CA595400034722A /* TopicResponseItem.swift in Sources */,
+				169842D82DAEAADC00E3EA66 /* LocalAuthenticationService.swift in Sources */,
 				5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */,
 				5DA4FB072CCBAF2100804C8A /* SettingsView.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,

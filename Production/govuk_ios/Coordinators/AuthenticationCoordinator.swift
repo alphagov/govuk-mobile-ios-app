@@ -28,7 +28,9 @@ class AuthenticationCoordinator: BaseCoordinator {
         switch result {
         case .success(let response):
             print("\(response)")
-            completionAction()
+            DispatchQueue.main.async {
+                self.completionAction()
+            }
         case .failure(let error):
             print("\(error)")
         }

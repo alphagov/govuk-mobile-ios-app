@@ -111,6 +111,39 @@
         }
       }
     },
+    "faceIdEnrolmentButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Face ID"
+          }
+        }
+      }
+    },
+    "faceIdEnrolmentMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can use your face to unlock the app within 90 days of signing in with GOV.UK One Login.\n\nIf you do not want to use Face ID, you can unlock the app with your phone’s passcode, or with your email address and password.\n\nAnyone who can unlock your phone with their face or with your phone's passcode might be able to access your app."
+          }
+        }
+      }
+    },
+    "faceIdEnrolmentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock the app with Face ID"
+          }
+        }
+      }
+    },
     "pagesYouveVisitedBody" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -217,6 +250,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tailored to you"
+          }
+        }
+      }
+    },
+    "touchIdEnrolmentButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Touch ID"
+          }
+        }
+      }
+    },
+    "touchIdEnrolmentMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can use your fingerprint to unlock the app within 90 days of signing in with GOV.UK One Login.\n\nIf you do not want to use Touch ID, you can unlock the app with your phone’s passcode, or with your email address and password.\n\nAnyone who can unlock your phone with their fingerprint or with your phone's passcode might be able to access your app."
+          }
+        }
+      }
+    },
+    "touchIdEnrolmentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock the app with Touch ID"
           }
         }
       }

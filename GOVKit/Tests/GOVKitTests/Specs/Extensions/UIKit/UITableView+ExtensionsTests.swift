@@ -12,7 +12,8 @@ struct UITableView_ExtensionsTests {
         let sut = TestTableView()
         sut.register(TestTableViewCell.self)
 
-        let cell: TestTableViewCell = sut.dequeue(
+        var cell: TestTableViewCell?
+        cell = sut.dequeue(
             indexPath: .init(row: 0, section: 0)
         )
 

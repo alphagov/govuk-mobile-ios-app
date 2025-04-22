@@ -6,7 +6,7 @@ import Combine
 class LocalAuthorityViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
     @Published var localAuthority: LocalAuthority?
-    @Published var localAuthorityAdressList: LocalAuthoritiesList?
+    @Published var localAuthorityAddressList: LocalAuthoritiesList?
     @Published var localAuthorityErrorMessage: LocalErrorMessage?
     private let explainerPrimaryButtonTitle: String = String.localAuthority.localized(
         "localAuthorityExplainerViewPrimaryButtonTitle"
@@ -32,7 +32,6 @@ class LocalAuthorityViewModel: ObservableObject {
     let postcodeEntryViewTitle: String =  String.localAuthority.localized(
         "localAuthorityPostcodeEntryViewTitle"
     )
-
     let postcodeEntryViewExampleText: String = String.localAuthority.localized(
         "localAthorityPostcodeEntryViewExampleText"
     )
@@ -127,7 +126,7 @@ class LocalAuthorityViewModel: ObservableObject {
                 self?.localAuthority = response
                 print(response.localAuthority.name)
             case .success(let response as LocalAuthoritiesList):
-                self?.localAuthorityAdressList = response
+                self?.localAuthorityAddressList = response
                 print(response.addresses)
             case .success(let response as LocalErrorMessage):
                 self?.localAuthorityErrorMessage = response

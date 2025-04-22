@@ -37,7 +37,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                 )
             }.navigationTitle(viewModel.navigationTitle)
                 .toolbar {
-                    doneButton
+                    cancelButton
                 }
                 .navigationBarTitleDisplayMode(.inline)
         }.onAppear(perform: {
@@ -45,7 +45,7 @@ struct LocalAuthorityPostcodeEntryView: View {
         })
     }
 
-    private var doneButton: some ToolbarContent {
+    private var cancelButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button(viewModel.cancelButtonTitle) {
                 dismiss()

@@ -14,7 +14,8 @@ struct LocalAuthorityWidgetView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(viewModel.widgetViewTitleOne).font(Font.govUK.bodySemibold)
+                Text(viewModel.widgetViewTitleOne)
+                    .font(Font.govUK.bodySemibold)
                 Spacer()
             }
             Divider().overlay(Color(cgColor: UIColor.govUK.strokes.cardGreen.cgColor))

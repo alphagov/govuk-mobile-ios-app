@@ -29,7 +29,7 @@ struct LocalAuthorityViewModelTests {
             trackWidgetTapAction: { }
         )
         let result = await withCheckedContinuation { continuation in
-            sut.$localAuthorityAdressList
+            sut.$localAuthorityAddressList
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { address in
@@ -44,7 +44,7 @@ struct LocalAuthorityViewModelTests {
     }
 
     @Test
-    func fetchLocaAuthority_tierOnelocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_tierOnelocalAuthority_returnsExpectedResult() async throws {
         var cancellables = Set<AnyCancellable>()
         let authority = Authority(
             name: "name1",
@@ -79,7 +79,7 @@ struct LocalAuthorityViewModelTests {
 
 
     @Test
-    func fetchLocaAuthority_tierTwolocalAuthority_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_tierTwolocalAuthority_returnsExpectedResult() async throws {
         var cancellables = Set<AnyCancellable>()
         let parentAuthority = Authority(
             name: "parentAuthority",
@@ -123,7 +123,7 @@ struct LocalAuthorityViewModelTests {
     }
 
     @Test
-    func fetchLocaAuthority_localErrorMessage_returnsExpectedResult() async throws {
+    func fetchLocalAuthority_localErrorMessage_returnsExpectedResult() async throws {
         var cancellables = Set<AnyCancellable>()
         let expectedResult = LocalErrorMessage(message: "error message")
         let mockService = MockLocalAuthorityService()
@@ -147,7 +147,7 @@ struct LocalAuthorityViewModelTests {
     }
 
     @Test
-    func fetchLocaAuthority_apiUnavailable_shouldShowErrorMessageIsTrue() async throws {
+    func fetchLocalAuthority_apiUnavailable_shouldShowErrorMessageIsTrue() async throws {
         var cancellables = Set<AnyCancellable>()
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.apiUnavailable)
@@ -193,7 +193,7 @@ struct LocalAuthorityViewModelTests {
     }
 
     @Test
-    func fetchLocaAuthority_networkUnaivalable_shouldShowErrorMessageIsTrue() async throws {
+    func fetchLocalAuthority_networkUnavailable_shouldShowErrorMessageIsTrue() async throws {
         var cancellables = Set<AnyCancellable>()
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.networkUnavailable)

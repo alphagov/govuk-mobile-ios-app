@@ -150,4 +150,12 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _receivedAuthenticationCompletion = completionAction
         return _stubbedAuthenticationCoordinator ?? MockBaseCoordinator()
     }
+
+    var _receivedLocalAuthenticationOnboardingCompletion: (() -> Void)?
+    var _stubbedLocalAuthenticationOnboardingCoordinator: MockBaseCoordinator?
+    override func localAuthenticationOnboarding(navigationController: UINavigationController,
+                                                completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedLocalAuthenticationOnboardingCompletion = completionAction
+        return _stubbedLocalAuthenticationOnboardingCoordinator ?? MockBaseCoordinator()
+    }
 }

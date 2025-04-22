@@ -28,7 +28,7 @@ struct HomeViewModelTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         let widgets = await subject.widgets
 
@@ -63,7 +63,7 @@ struct HomeViewModelTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         let widgets = await subject.widgets
 

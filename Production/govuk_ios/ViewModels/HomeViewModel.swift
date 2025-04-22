@@ -15,7 +15,7 @@ struct HomeViewModel {
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
-    let localService: LocalAuthorityServiceInterface
+    let localAuthorityService: LocalAuthorityServiceInterface
 
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
@@ -95,7 +95,7 @@ struct HomeViewModel {
         guard featureEnabled(.localServices)
         else { return nil }
         let viewModel = LocalAuthorityViewModel(
-            service: localService,
+            service: localAuthorityService,
             analyticsService: analyticsService,
             trackWidgetTapAction: localAuthorityAction
         )

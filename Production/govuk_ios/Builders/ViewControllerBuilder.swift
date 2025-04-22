@@ -48,7 +48,7 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService,
-            localService: dependencies.localService
+            localAuthorityService: dependencies.localService
         )
         return HomeViewController(
             viewModel: viewModel

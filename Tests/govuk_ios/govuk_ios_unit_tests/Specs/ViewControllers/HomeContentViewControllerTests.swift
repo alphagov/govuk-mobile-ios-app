@@ -30,7 +30,7 @@ struct HomeContentViewControllerTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
 
@@ -59,7 +59,7 @@ struct HomeContentViewControllerTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
@@ -92,7 +92,7 @@ struct HomeContentViewControllerTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         guard let scrollView: UIScrollView =

@@ -98,9 +98,10 @@ class LocalAuthorityViewModel: ObservableObject {
         .init(
             localisedTitle: explainerPrimaryButtonTitle,
             action: { [weak self] in
-                guard let buttonTitle = self?.explainerPrimaryButtonTitle else { return }
-                self?.trackNavigationEvent(buttonTitle)
-                self?.showPostcodeEntryView = true
+                guard let self = self else { return }
+                let buttonTitle = self.explainerPrimaryButtonTitle
+                self.trackNavigationEvent(buttonTitle)
+                self.showPostcodeEntryView = true
             }
         )
     }
@@ -109,10 +110,11 @@ class LocalAuthorityViewModel: ObservableObject {
         .init(
             localisedTitle: postcodeEntryViewPrimaryButtonTitle,
             action: { [weak self] in
-                guard let postcode = self?.postCode else { return }
-                guard let buttonTitle = self?.postcodeEntryViewPrimaryButtonTitle else { return }
-                self?.trackNavigationEvent(buttonTitle)
-                self?.fetchLocalAuthority(postCode: postcode)
+                guard let self = self else { return }
+                let postcode = self.postCode
+                let buttonTitle = self.postcodeEntryViewPrimaryButtonTitle
+                self.trackNavigationEvent(buttonTitle)
+                self.fetchLocalAuthority(postCode: postcode)
             }
         )
     }

@@ -72,9 +72,10 @@
 		4E996D302D11AB00007F21A8 /* ValidatorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E996D2F2D11AB00007F21A8 /* ValidatorProvider.swift */; };
 		4E9AFCE32C99D43B00DBF66F /* AnalyticsConsentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */; };
 		4E9F5D032DB78DBA0063FA78 /* LocalAuthorityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */; };
-		4E9F5D072DB79D370063FA78 /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D062DB79D370063FA78 /* ButtonStackView.swift */; };
+		4E9F5D072DB79D370063FA78 /* PrimaryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */; };
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
+		4EB7D84F2DB7F4E9002B6765 /* TextfeildStyle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D84E2DB7F4E9002B6765 /* TextfeildStyle+Extensions.swift */; };
 		4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */; };
 		4EBCA3292DAC546A0063A723 /* LocalAuthorityServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */; };
 		4EBCA3362DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3352DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift */; };
@@ -375,9 +376,10 @@
 		4E996D2F2D11AB00007F21A8 /* ValidatorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorProvider.swift; sourceTree = "<group>"; };
 		4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerView.swift; sourceTree = "<group>"; };
 		4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityItem.swift; sourceTree = "<group>"; };
-		4E9F5D062DB79D370063FA78 /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
+		4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonView.swift; sourceTree = "<group>"; };
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
+		4EB7D84E2DB7F4E9002B6765 /* TextfeildStyle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextfeildStyle+Extensions.swift"; sourceTree = "<group>"; };
 		4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityService.swift; sourceTree = "<group>"; };
 		4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceClient.swift; sourceTree = "<group>"; };
 		4EBCA3352DAC5E2E0063A723 /* GOVRequest+LocalAuthority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GOVRequest+LocalAuthority.swift"; sourceTree = "<group>"; };
@@ -791,6 +793,14 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
+		4EB7D84D2DB7F45A002B6765 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				4EB7D84E2DB7F4E9002B6765 /* TextfeildStyle+Extensions.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		4EBE64672D15AA75007A6E97 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,6 +861,7 @@
 		5D1353AE2BE0D9A700414441 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4EB7D84D2DB7F45A002B6765 /* SwiftUI */,
 				5DE970552C297CF3009D66C4 /* Analytics */,
 				5D41DB662C087C520011E691 /* Container */,
 				5D9CF3962C38492500317B70 /* Deeplinking */,
@@ -1341,7 +1352,7 @@
 				3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */,
 				3D211B8E2CB6B4FE005D1472 /* HeaderView.swift */,
 				4EE5F3F12DAFE030008C60ED /* CustomTextFeildBorder.swift */,
-				4E9F5D062DB79D370063FA78 /* ButtonStackView.swift */,
+				4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -1766,7 +1777,7 @@
 				5DFA017B2D89651100EAC839 /* ActivityItemCreateParams+Extensions.swift in Sources */,
 				5DFA017C2D89651100EAC839 /* ActivityService+Extensions.swift in Sources */,
 				4EBCA3292DAC546A0063A723 /* LocalAuthorityServiceClient.swift in Sources */,
-				4E9F5D072DB79D370063FA78 /* ButtonStackView.swift in Sources */,
+				4E9F5D072DB79D370063FA78 /* PrimaryButtonView.swift in Sources */,
 				16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */,
 				D0E7923B2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift in Sources */,
 				5D962D612C29BD0B0038BC0A /* AppCoordinator.swift in Sources */,
@@ -1923,6 +1934,7 @@
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				D0D9CFD72D3030640051EDDD /* SearchHistoryViewController.swift in Sources */,
+				4EB7D84F2DB7F4E9002B6765 /* TextfeildStyle+Extensions.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */,
 				4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */,

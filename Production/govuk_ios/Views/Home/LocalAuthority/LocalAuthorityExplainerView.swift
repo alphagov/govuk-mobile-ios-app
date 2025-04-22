@@ -44,12 +44,12 @@ struct LocalAuthorityExplainerView: View {
                     }
                     .accessibilityElement(children: .contain)
                 }
-                ButtonStackView(
+                PrimaryButtonView(
                     viewModel: viewModel.explainerViewPrimaryButtonViewModel
                 )
             }.navigationTitle(viewModel.navigationTitle)
                 .toolbar {
-                    doneButton
+                    cancelButton
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $viewModel.showPostcodeEntryView) {
@@ -60,7 +60,7 @@ struct LocalAuthorityExplainerView: View {
         }
     }
 
-    private var doneButton: some ToolbarContent {
+    private var cancelButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button(viewModel.cancelButtonTitle) {
                 dismiss()

@@ -9,7 +9,7 @@ struct CustomTextFieldBorder: TextFieldStyle {
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(
-                        Color(uiColor: UIColor.govUK.strokes.listDivider ),
+                        Color(uiColor: UIColor.govUK.strokes.listDivider),
                         lineWidth: 0.5
                     )
             )

@@ -31,7 +31,9 @@ extension Container {
 
     var localAuthorityServiceClient: Factory<LocalAuthorityServiceClientInterface> {
         Factory(self) {
-            LocalAuthorityServiceClient(serviceClient: self.localAuthorityAPIClient())
+            LocalAuthorityServiceClient(
+                serviceClient: self.localAuthorityAPIClient()
+            )
         }
     }
 }

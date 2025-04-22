@@ -25,14 +25,14 @@ struct LocalAuthorityPostcodeEntryView: View {
                         Color(UIColor.govUK.text.secondary)
                     )
                     TextField("", text: $viewModel.postCode)
-                        .textFieldStyle(CustomTextFieldBorder())
+                        .textFieldStyle(.customTextFieldBorder)
                     Text(viewModel.postcodeEntryViewDescriptionTitle)
                         .font(Font.govUK.bodySemibold)
                     Text(viewModel.postcodeEntryViewDescriptionBody)
                     Spacer()
                 }.padding()
             }
-                ButtonStackView(
+                PrimaryButtonView(
                     viewModel: viewModel.postcodeEntryViewPrimaryButtonViewModel
                 )
             }.navigationTitle(viewModel.navigationTitle)

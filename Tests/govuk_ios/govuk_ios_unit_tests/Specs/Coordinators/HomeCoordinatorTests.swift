@@ -31,7 +31,7 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         subject.start()
 
@@ -58,7 +58,7 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         subject.start()
 
@@ -91,7 +91,7 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         subject.start()
 
@@ -128,7 +128,7 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         subject.start()
 
@@ -161,7 +161,7 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         subject.start()
 
@@ -196,7 +196,7 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         
         subject.start()
@@ -227,7 +227,7 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService()
         )
         
         subject.start()

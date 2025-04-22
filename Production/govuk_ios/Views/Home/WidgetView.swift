@@ -13,10 +13,10 @@ class WidgetView: UIView {
 
     init(decorateView: Bool = true,
          useContentAccessibilityInfo: Bool = false,
-         backgroundColor: UIColor = UIColor.govUK.fills.surfaceCardBlue,
+         cardBackgroundColor: UIColor = UIColor.govUK.fills.surfaceCardBlue,
          borderColor: CGColor = UIColor.govUK.strokes.cardBlue.cgColor) {
         self.decorateView = decorateView
-        self.cardBackgroundColor = backgroundColor
+        self.cardBackgroundColor = cardBackgroundColor
         self.borderColor = borderColor
         super.init(frame: .zero)
         self.backgroundColor = decorateView ?

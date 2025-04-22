@@ -27,7 +27,7 @@ class HomeCoordinator: TabItemCoordinator {
          deviceInformationProvider: DeviceInformationProviderInterface,
          searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface,
-         localService: LocalAuthorityServiceInterface) {
+         localAuthorityService: LocalAuthorityServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
@@ -38,7 +38,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.deviceInformationProvider = deviceInformationProvider
         self.searchService = searchService
         self.activityService = activityService
-        self.localAuthorityService = localService
+        self.localAuthorityService = localAuthorityService
         super.init(navigationController: navigationController)
     }
 

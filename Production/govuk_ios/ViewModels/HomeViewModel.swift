@@ -105,7 +105,7 @@ struct HomeViewModel {
         let hostingViewController = HostingViewController(rootView: content)
         let widget = WidgetView(
             useContentAccessibilityInfo: true,
-            cardBackgroundColor: UIColor.govUK.fills.surfaceCardSelected,
+            backgroundColor: UIColor.govUK.fills.surfaceCardSelected,
             borderColor: UIColor.govUK.strokes.cardGreen.cgColor
         )
         widget.addContent(hostingViewController.view)

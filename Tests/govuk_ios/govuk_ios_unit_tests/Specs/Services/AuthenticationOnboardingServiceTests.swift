@@ -40,7 +40,7 @@ struct AuthenticationOnboardingServiceTests {
         userDefaults.set(bool: false, forKey: .authenticationOnboardingSeen)
         let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
 
-        #expect(subject.shouldSkipOnboarding())
+        #expect(subject.shouldSkipOnboarding)
     }
 
     @Test
@@ -49,7 +49,7 @@ struct AuthenticationOnboardingServiceTests {
         userDefaults.set(bool: true, forKey: .authenticationOnboardingSeen)
         let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
 
-        #expect(subject.shouldSkipOnboarding())
+        #expect(subject.shouldSkipOnboarding)
     }
 
     @Test

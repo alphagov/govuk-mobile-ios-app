@@ -55,13 +55,9 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 
     private func discoverConfiguration() async throws -> OIDServiceConfiguration {
-        guard let issuerBaseUrl = Constants.API.authenticationIssuerBaseUrl else {
-            throw AuthenticationError.missingIssuerBaseURL
-        }
-
         return try await withCheckedThrowingContinuation { continuation in
             oidConfigService.discoverConfiguration(
-                 forIssuer: issuerBaseUrl
+                forIssuer: Constants.API.authenticationIssuerBaseUrl
             ) { configuration, _ in
                 if let configuration = configuration {
                     continuation.resume(returning: configuration)
@@ -76,6 +72,5 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 enum AuthenticationError: Error, Equatable {
     case loginFlow(LoginError)
     case fetchConfigError
-    case missingIssuerBaseURL
     case generic
 }

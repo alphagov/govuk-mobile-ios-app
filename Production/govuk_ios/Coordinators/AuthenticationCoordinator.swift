@@ -27,7 +27,6 @@ class AuthenticationCoordinator: BaseCoordinator {
         let result = await authenticationService.authenticate(window: window)
         switch result {
         case .success(let response):
-            print("\(response)")
             DispatchQueue.main.async {
                 self.completionAction()
             }

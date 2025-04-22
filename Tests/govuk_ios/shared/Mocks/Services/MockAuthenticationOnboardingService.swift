@@ -6,7 +6,7 @@ import Onboarding
 @testable import govuk_ios
 
 class MockAuthenticationOnboardingService: AuthenticationOnboardingServiceInterface {
-    func shouldSkipOnboarding() -> Bool {
+    var shouldSkipOnboarding: Bool {
         !_stubbedFeatureEnabled || _stubbedHasSeenOnboarding
     }
     

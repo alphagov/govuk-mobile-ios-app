@@ -4,9 +4,9 @@ import Onboarding
 protocol AuthenticationOnboardingServiceInterface: OnboardingSlideProvider {
     var hasSeenOnboarding: Bool { get }
     var isFeatureEnabled: Bool { get }
+    var shouldSkipOnboarding: Bool { get }
 
     func setHasSeenOnboarding()
-    func shouldSkipOnboarding() -> Bool
 }
 
 struct AuthenticationOnboardingService: AuthenticationOnboardingServiceInterface {
@@ -24,7 +24,7 @@ struct AuthenticationOnboardingService: AuthenticationOnboardingServiceInterface
         false
     }
 
-    func shouldSkipOnboarding() -> Bool {
+    var shouldSkipOnboarding: Bool {
         hasSeenOnboarding || !isFeatureEnabled
     }
 

@@ -71,6 +71,7 @@
 		4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663CE2C73F3220063E81C /* AppConfigError.swift */; };
 		4E996D302D11AB00007F21A8 /* ValidatorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E996D2F2D11AB00007F21A8 /* ValidatorProvider.swift */; };
 		4E9AFCE32C99D43B00DBF66F /* AnalyticsConsentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */; };
+		4E9F5D032DB78DBA0063FA78 /* LocalAuthorityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */; };
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */; };
@@ -372,6 +373,7 @@
 		4E996D2D2D11AAC7007F21A8 /* StringValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValidator.swift; sourceTree = "<group>"; };
 		4E996D2F2D11AB00007F21A8 /* ValidatorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorProvider.swift; sourceTree = "<group>"; };
 		4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerView.swift; sourceTree = "<group>"; };
+		4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityItem.swift; sourceTree = "<group>"; };
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityService.swift; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 				4E265D272DB0E6510089CF9E /* LocalAuthority.swift */,
 				4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */,
 				4E265D252DB0E6510089CF9E /* Authority.swift */,
+				4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -1722,6 +1725,7 @@
 				1664A5642D36CF1200DB18A5 /* SearchSuggestionsViewController.swift in Sources */,
 				5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
+				4E9F5D032DB78DBA0063FA78 /* LocalAuthorityItem.swift in Sources */,
 				D0EB04842D37F34200B310D8 /* GOV.xcdatamodeld in Sources */,
 				D04191782CA57A6F0034722A /* TopicsService.swift in Sources */,
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,

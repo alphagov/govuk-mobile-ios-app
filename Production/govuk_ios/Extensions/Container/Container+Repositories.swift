@@ -16,6 +16,13 @@ extension Container {
         }
     }
 
+    var localAuthorityRepository: Factory<LocalAuthorityRepositoryInterface> {
+        Factory(self) {
+            LocalAuthorityRepository(coreData: self.coreDataRepository())
+        }
+    }
+
+
     var searchHistoryRepository: Factory<SearchHistoryRepositoryInterface> {
         Factory(self) {
             SearchHistoryRepository(coreData: self.coreDataRepository())

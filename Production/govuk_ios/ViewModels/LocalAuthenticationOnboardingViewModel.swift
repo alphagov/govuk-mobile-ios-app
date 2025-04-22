@@ -8,16 +8,16 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
     @Published var message: String = ""
     @Published var enrolButtonTitle: String = ""
     private let localAuthenticationService: LocalAuthenticationServiceInterface
-    private let authenticationTokenService: AuthenticationTokenServiceInterface
+    private let authenticationService: AuthenticationServiceInterface
     private var biometryType: LocalAuthenticationType = .none
     private let analyticsService: AnalyticsServiceInterface
     private let completionAction: (() -> Void)
     init(localAuthenticationService: LocalAuthenticationServiceInterface,
-         authenticationTokenService: AuthenticationTokenServiceInterface,
+         authenticationService: AuthenticationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void) {
         self.localAuthenticationService = localAuthenticationService
-        self.authenticationTokenService = authenticationTokenService
+        self.authenticationService = authenticationService
         self.analyticsService = analyticsService
         self.completionAction = completionAction
         updateAuthType()
@@ -32,7 +32,7 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
                 if success {
                     do {
                         self?.localAuthenticationService.setHasSeenOnboarding()
-                        try self?.authenticationTokenService.encryptRefreshToken()
+                        try self?.authenticationService.encryptRefreshToken()
                         self?.completionAction()
                     } catch {
                         self?.completionAction()

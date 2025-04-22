@@ -122,7 +122,7 @@ extension Container {
         Factory(self) {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
-                authenticationTokenSet: AuthenticationTokenSet.shared
+                secureStoreService: self.secureStoreService.resolve()
             )
         }
     }
@@ -139,14 +139,6 @@ extension Container {
         Factory(self) {
             LocalAuthenticationService(
                 userDefaults: UserDefaults.standard
-            )
-        }
-    }
-
-    var authenticationTokenService: Factory<AuthenticationTokenServiceInterface> {
-        Factory(self) {
-            AuthenticationTokenService(
-                secureStoreService: self.secureStoreService.resolve()
             )
         }
     }

@@ -77,8 +77,5 @@ enum AuthenticationError: Error, Equatable {
     case loginFlow(LoginError)
     case fetchConfigError
     case missingIssuerBaseURL
-    case missingAccessToken
-    case missingRefreshToken
-    case missingIDToken
     case generic
 }

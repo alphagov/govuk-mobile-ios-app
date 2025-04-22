@@ -9,12 +9,12 @@ class LocalAuthenticationOnboardingCoordinatorTests {
     func start_faceIDEnrolled_setsOnboarding() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             analyticsService: MockAnalyticsService(),
             localAuthenticationService: mockLocalAuthenticationService,
-            authenticationTokenService: mockAuthenticationTokenService,
+            authenticationService: mockAuthenticationService,
             completionAction: { }
         )
         mockLocalAuthenticationService._stubbedAuthType = .faceID
@@ -27,12 +27,12 @@ class LocalAuthenticationOnboardingCoordinatorTests {
     func start_touchIDEnrolled_setsOnboarding() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             analyticsService: MockAnalyticsService(),
             localAuthenticationService: mockLocalAuthenticationService,
-            authenticationTokenService: mockAuthenticationTokenService,
+            authenticationService: mockAuthenticationService,
             completionAction: { }
         )
         mockLocalAuthenticationService._stubbedAuthType = .touchID
@@ -45,14 +45,14 @@ class LocalAuthenticationOnboardingCoordinatorTests {
     func start_passcodeOnlyEnrolled_encryptsTokenAndCallsCompletion() async {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .passcodeOnly
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 analyticsService: MockAnalyticsService(),
                 localAuthenticationService: mockLocalAuthenticationService,
-                authenticationTokenService: mockAuthenticationTokenService,
+                authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -60,21 +60,21 @@ class LocalAuthenticationOnboardingCoordinatorTests {
 
         #expect(completion)
         #expect(mockNavigationController._setViewControllers == .none)
-        #expect(mockAuthenticationTokenService._encryptRefreshTokenCallSuccess)
+        #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }
 
     @Test @MainActor
     func start_noAuthEnrolled_callsCompletion() async {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .none
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 analyticsService: MockAnalyticsService(),
                 localAuthenticationService: mockLocalAuthenticationService,
-                authenticationTokenService: mockAuthenticationTokenService,
+                authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -82,6 +82,6 @@ class LocalAuthenticationOnboardingCoordinatorTests {
 
         #expect(completion)
         #expect(mockNavigationController._setViewControllers == .none)
-        #expect(!mockAuthenticationTokenService._encryptRefreshTokenCallSuccess)
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }
 }

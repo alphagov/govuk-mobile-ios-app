@@ -7,17 +7,17 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     private let analyticsService: AnalyticsServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
-    private let authenticationTokenService: AuthenticationTokenServiceInterface
+    private let authenticationService: AuthenticationServiceInterface
     private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
          analyticsService: AnalyticsServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
-         authenticationTokenService: AuthenticationTokenServiceInterface,
+         authenticationService: AuthenticationServiceInterface,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
         self.localAuthenticationService = localAuthenticationService
-        self.authenticationTokenService = authenticationTokenService
+        self.authenticationService = authenticationService
         self.analyticsService = analyticsService
         self.completionAction = completionAction
         super.init(navigationController: navigationController)
@@ -29,7 +29,7 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
             setLocalAuthenticationOnboardingViewController()
         case .passcodeOnly:
             do {
-                try authenticationTokenService.encryptRefreshToken()
+                try authenticationService.encryptRefreshToken()
                 finishCoordination()
             } catch {
                 print("Handle error")
@@ -48,7 +48,7 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
     private func setLocalAuthenticationOnboardingViewController() {
         let viewModel = LocalAuthenticationOnboardingViewModel(
             localAuthenticationService: localAuthenticationService,
-            authenticationTokenService: authenticationTokenService,
+            authenticationService: authenticationService,
             analyticsService: analyticsService,
             completionAction: finishCoordination
         )

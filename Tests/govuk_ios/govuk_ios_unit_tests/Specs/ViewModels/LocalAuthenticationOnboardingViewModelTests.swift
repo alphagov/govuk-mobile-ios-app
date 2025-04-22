@@ -10,11 +10,11 @@ struct LocalAuthenticationOnboardingViewModelTests {
     func updateBiometryType_forTouchID_setsCorrectValues() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .touchID
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = LocalAuthenticationOnboardingViewModel(
             localAuthenticationService: mockLocalAuthenticationService,
-            authenticationTokenService: mockAuthenticationTokenService,
+            authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
             completionAction: { }
         )
@@ -29,11 +29,11 @@ struct LocalAuthenticationOnboardingViewModelTests {
     func updateBiometryType_forFaceID_setsCorrectValues() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = LocalAuthenticationOnboardingViewModel(
             localAuthenticationService: mockLocalAuthenticationService,
-            authenticationTokenService: mockAuthenticationTokenService,
+            authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
             completionAction: { }
         )
@@ -48,14 +48,14 @@ struct LocalAuthenticationOnboardingViewModelTests {
     func enrolButtonViewModel_action_encryptionSuccess_encryptsToken() async {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (true, nil)
 
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 localAuthenticationService: mockLocalAuthenticationService,
-                authenticationTokenService: mockAuthenticationTokenService,
+                authenticationService: mockAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
@@ -64,22 +64,22 @@ struct LocalAuthenticationOnboardingViewModelTests {
         }
         #expect(completion)
         #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
-        #expect(mockAuthenticationTokenService._encryptRefreshTokenCallSuccess)
+        #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }
 
     @Test
     func enrolButtonViewModel_action_encryptionFailure_callsCompletion() async {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (true, nil)
-        mockAuthenticationTokenService._encryptRefreshTokenError = .some(NSError())
+        mockAuthenticationService._encryptRefreshTokenError = .some(NSError())
 
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 localAuthenticationService: mockLocalAuthenticationService,
-                authenticationTokenService: mockAuthenticationTokenService,
+                authenticationService: mockAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
@@ -88,20 +88,20 @@ struct LocalAuthenticationOnboardingViewModelTests {
         }
         #expect(completion)
         #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
-        #expect(!mockAuthenticationTokenService._encryptRefreshTokenCallSuccess)
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }
 
     @Test
     func skipButtonViewModel_action_callsCompletion() async {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
-        let mockAuthenticationTokenService = MockAuthenticationTokenService()
+        let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
 
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 localAuthenticationService: mockLocalAuthenticationService,
-                authenticationTokenService: mockAuthenticationTokenService,
+                authenticationService: mockAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )

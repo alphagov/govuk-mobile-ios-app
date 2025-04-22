@@ -2,9 +2,8 @@ import Foundation
 
 @testable import govuk_ios
 
-class MockAuthenticationTokenSet: AuthenticationTokenSetInterface {
-    var tokensSet: (String?, String?, String?)? = nil
-    func setTokens(refreshToken: String, idToken: String, accessToken: String) {
-        tokensSet = (refreshToken, idToken, accessToken)
-    }
+struct MockAuthenticationTokenSet: AuthenticationTokenSetInterface {
+    var refreshToken: String? = "refresh_token"
+    var idToken: String? = "id_token"
+    var accessToken: String? = "access_token"
 }

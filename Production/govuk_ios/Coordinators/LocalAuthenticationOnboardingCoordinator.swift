@@ -28,12 +28,8 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
         case .faceID, .touchID:
             setLocalAuthenticationOnboardingViewController()
         case .passcodeOnly:
-            do {
-                try authenticationService.encryptRefreshToken()
-                finishCoordination()
-            } catch {
-                print("Handle error")
-            }
+            authenticationService.encryptRefreshToken()
+            finishCoordination()
         default:
             finishCoordination()
         }

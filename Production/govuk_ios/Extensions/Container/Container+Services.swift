@@ -124,7 +124,7 @@ extension Container {
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 secureStoreService: self.secureStoreService.resolve()
             )
-        }
+        }.scope(.singleton)
     }
 
     var secureStoreService: Factory<SecureStorable> {

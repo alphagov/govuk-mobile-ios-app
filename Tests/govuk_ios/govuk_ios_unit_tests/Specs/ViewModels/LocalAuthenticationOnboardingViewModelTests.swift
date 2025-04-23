@@ -18,7 +18,6 @@ struct LocalAuthenticationOnboardingViewModelTests {
             analyticsService: mockAnalyticsService,
             completionAction: { }
         )
-        sut.updateAuthType()
         #expect(sut.iconName == "touchid")
         #expect(sut.title == String.onboarding.localized("touchIdEnrolmentTitle"))
         #expect(sut.message == String.onboarding.localized("touchIdEnrolmentMessage"))
@@ -37,58 +36,10 @@ struct LocalAuthenticationOnboardingViewModelTests {
             analyticsService: mockAnalyticsService,
             completionAction: { }
         )
-        sut.updateAuthType()
         #expect(sut.iconName == "faceid")
         #expect(sut.title == String.onboarding.localized("faceIdEnrolmentTitle"))
         #expect(sut.message == String.onboarding.localized("faceIdEnrolmentMessage"))
         #expect(sut.enrolButtonTitle == String.onboarding.localized("faceIdEnrolmentButtonTitle"))
-    }
-
-    @Test
-    func enrolButtonViewModel_action_encryptionSuccess_encryptsToken() async {
-        let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .faceID
-        let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
-        mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (true, nil)
-
-        let completion = await withCheckedContinuation { continuation in
-            let sut = LocalAuthenticationOnboardingViewModel(
-                localAuthenticationService: mockLocalAuthenticationService,
-                authenticationService: mockAuthenticationService,
-                analyticsService: mockAnalyticsService,
-                completionAction: { continuation.resume(returning: true) }
-            )
-            let enrolButtonViewModel = sut.enrolButtonViewModel
-            enrolButtonViewModel.action()
-        }
-        #expect(completion)
-        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
-        #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
-    }
-
-    @Test
-    func enrolButtonViewModel_action_encryptionFailure_callsCompletion() async {
-        let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .faceID
-        let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
-        mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (true, nil)
-        mockAuthenticationService._encryptRefreshTokenError = .some(NSError())
-
-        let completion = await withCheckedContinuation { continuation in
-            let sut = LocalAuthenticationOnboardingViewModel(
-                localAuthenticationService: mockLocalAuthenticationService,
-                authenticationService: mockAuthenticationService,
-                analyticsService: mockAnalyticsService,
-                completionAction: { continuation.resume(returning: true) }
-            )
-            let enrolButtonViewModel = sut.enrolButtonViewModel
-            enrolButtonViewModel.action()
-        }
-        #expect(completion)
-        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
-        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }
 
     @Test

@@ -11,7 +11,6 @@ struct AuthenticationServiceTests {
     func authenticate_success_setsTokens() async {
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let tokenSet = AuthenticationTokenSet.shared
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             secureStoreService: mockSecureStoreService
@@ -37,9 +36,9 @@ struct AuthenticationServiceTests {
 
         await confirmation("Auth request success") { authRequestComplete in
             if case .success(_) = result {
-                #expect(tokenSet.refreshToken == expectedRefreshToken)
-                #expect(tokenSet.idToken == expectedIdToken)
-                #expect(tokenSet.accessToken == expectedAccessToken)
+                #expect(sut.refreshToken == expectedRefreshToken)
+                #expect(sut.idToken == expectedIdToken)
+                #expect(sut.accessToken == expectedAccessToken)
                 authRequestComplete()
             }
         }
@@ -88,36 +87,26 @@ struct AuthenticationServiceTests {
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedResult = .success(tokenResponse)
         _ = await sut.authenticate(window: UIApplication.shared.window!)
-        try! sut.encryptRefreshToken()
+        sut.encryptRefreshToken()
 
         #expect(mockSecureStoreService._savedItems["refreshToken"] == expectedRefreshToken)
     }
 
     @Test
-    func encryptRefreshToken_blankRefreshTokenFailure_throwsError() async {
+    func encryptRefreshToken_blankRefreshTokenFailure_doesntEncrypt() async {
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             secureStoreService: mockSecureStoreService
         )
+        sut.encryptRefreshToken()
 
-        await confirmation() { confirmation in
-            do {
-                try sut.encryptRefreshToken()
-            } catch {
-                switch error {
-                case AuthenticationTokenError.blankRefreshToken:
-                    confirmation()
-                default:
-                    Issue.record("Should throw blank refresh token error")
-                }
-            }
-        }
+        #expect(mockSecureStoreService._savedItems["refreshToken"] == nil)
     }
 
     @Test
-    func encryptRefreshToken_failedEncrypt_throwsError() async {
+    func encryptRefreshToken_failedEncrypt_doesntEncrypt() async {
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
         mockSecureStoreService._stubbedSaveItemResult = .failure(TestSecureStoreError.failedEncrypt)
@@ -141,29 +130,19 @@ struct AuthenticationServiceTests {
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedResult = .success(tokenResponse)
         _ = await sut.authenticate(window: UIApplication.shared.window!)
+        sut.encryptRefreshToken()
 
-        await confirmation() { confirmation in
-            do {
-                try sut.encryptRefreshToken()
-            } catch {
-                switch error {
-                case TestSecureStoreError.failedEncrypt:
-                    confirmation()
-                default:
-                    Issue.record("Should throw blank refresh token error")
-                }
-            }
-        }
+        #expect(mockSecureStoreService._savedItems["refreshToken"] == nil)
     }
+}
 
-    private func createTokenResponse(_ jsonData: Data) -> TokenResponse {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        let tokenResponse = try? decoder.decode(TokenResponse.self, from: jsonData)
-        return tokenResponse!
-    }
+private func createTokenResponse(_ jsonData: Data) -> TokenResponse {
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    let tokenResponse = try? decoder.decode(TokenResponse.self, from: jsonData)
+    return tokenResponse!
+}
 
-    enum TestSecureStoreError: Error {
-        case failedDecrypt, failedEncrypt
-    }
+enum TestSecureStoreError: Error {
+    case failedDecrypt, failedEncrypt
 }

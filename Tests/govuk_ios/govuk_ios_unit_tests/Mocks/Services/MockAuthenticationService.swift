@@ -5,26 +5,22 @@ import Authentication
 @testable import govuk_ios
 
 class MockAuthenticationService: AuthenticationServiceInterface {
+    var refreshToken: String?
+    var idToken: String?
+    var accessToken: String?
+
     var _stubbedResult: AuthenticationResult = .failure(.generic)
     func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationResult {
         _stubbedResult
     }
 
     var _encryptRefreshTokenCallSuccess = false
-    var _encryptRefreshTokenError: Error?
-    func encryptRefreshToken() throws {
-        if let error = _encryptRefreshTokenError {
-            throw error
-        }
+    func encryptRefreshToken() {
         _encryptRefreshTokenCallSuccess = true
     }
 
     var _decryptRefreshTokenCallSuccess = false
-    var _decryptRefreshTokenError: Error?
-    func decryptRefreshToken() throws {
-        if let error = _decryptRefreshTokenError {
-            throw error
-        }
+    func decryptRefreshToken() {
         _decryptRefreshTokenCallSuccess = true
     }
 }

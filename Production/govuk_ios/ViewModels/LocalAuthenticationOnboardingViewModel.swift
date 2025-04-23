@@ -30,14 +30,10 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
                 reason: "Unlock to proceed"
             ) { [weak self] success, _ in
                 if success {
-                    do {
-                        self?.localAuthenticationService.setHasSeenOnboarding()
-                        try self?.authenticationService.encryptRefreshToken()
-                        self?.completionAction()
-                    } catch {
-                        self?.completionAction()
-                    }
+                    self?.localAuthenticationService.setHasSeenOnboarding()
+                    self?.authenticationService.encryptRefreshToken()
                 }
+                self?.completionAction()
             }
         }
     }
@@ -48,7 +44,7 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
         }
     }
 
-    func updateAuthType() {
+    private func updateAuthType() {
         let authType = localAuthenticationService.authType
         switch localAuthenticationService.authType {
         case .touchID:

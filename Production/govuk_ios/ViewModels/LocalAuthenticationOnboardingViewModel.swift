@@ -24,8 +24,8 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
     }
 
     var enrolButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(localisedTitle: enrolButtonTitle) {
-            self.localAuthenticationService.evaluatePolicy(
+        .init(localisedTitle: enrolButtonTitle) { [weak self] in
+            self?.localAuthenticationService.evaluatePolicy(
                 .deviceOwnerAuthentication,
                 reason: "Unlock to proceed"
             ) { [weak self] success, _ in
@@ -35,13 +35,31 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
                 }
                 self?.completionAction()
             }
+            self?.trackEnrolEvent()
         }
     }
 
     var skipButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(localisedTitle: "Skip") {
-            self.completionAction()
+        .init(localisedTitle: "Skip") { [weak self] in
+            self?.completionAction()
+            self?.trackSkipEvent()
         }
+    }
+
+    private func trackEnrolEvent() {
+        let event = AppEvent.buttonNavigation(
+            text: enrolButtonTitle,
+            external: false
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackSkipEvent() {
+        let event = AppEvent.buttonNavigation(
+            text: "Skip",
+            external: false
+        )
+        analyticsService.track(event: event)
     }
 
     private func updateAuthType() {

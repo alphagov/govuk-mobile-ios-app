@@ -36,10 +36,61 @@ struct LocalAuthenticationOnboardingViewModelTests {
             analyticsService: mockAnalyticsService,
             completionAction: { }
         )
+
         #expect(sut.iconName == "faceid")
         #expect(sut.title == String.onboarding.localized("faceIdEnrolmentTitle"))
         #expect(sut.message == String.onboarding.localized("faceIdEnrolmentMessage"))
         #expect(sut.enrolButtonTitle == String.onboarding.localized("faceIdEnrolmentButtonTitle"))
+    }
+
+    @Test
+    func enrolButtonViewModel_faceID_action_completesEnrolment() async {
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockLocalAuthenticationService._stubbedAuthType = .faceID
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockAnalyticsService = MockAnalyticsService()
+        let completion = await withCheckedContinuation { continuation in
+            let sut = LocalAuthenticationOnboardingViewModel(
+                localAuthenticationService: mockLocalAuthenticationService,
+                authenticationService: mockAuthenticationService,
+                analyticsService: mockAnalyticsService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            let enrolButtonViewModel = sut.enrolButtonViewModel
+            enrolButtonViewModel.action()
+        }
+
+        #expect(completion)
+        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
+        #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        let event = mockAnalyticsService._trackedEvents.first
+        #expect(event?.params?["text"] as? String == "Allow Face ID")
+    }
+
+    @Test
+    func enrolButtonViewModel_touchID_action_completesEnrolment() async {
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockLocalAuthenticationService._stubbedAuthType = .touchID
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockAnalyticsService = MockAnalyticsService()
+        let completion = await withCheckedContinuation { continuation in
+            let sut = LocalAuthenticationOnboardingViewModel(
+                localAuthenticationService: mockLocalAuthenticationService,
+                authenticationService: mockAuthenticationService,
+                analyticsService: mockAnalyticsService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            let enrolButtonViewModel = sut.enrolButtonViewModel
+            enrolButtonViewModel.action()
+        }
+
+        #expect(completion)
+        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
+        #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        let event = mockAnalyticsService._trackedEvents.first
+        #expect(event?.params?["text"] as? String == "Allow Touch ID")
     }
 
     @Test
@@ -48,7 +99,6 @@ struct LocalAuthenticationOnboardingViewModelTests {
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 localAuthenticationService: mockLocalAuthenticationService,
@@ -59,6 +109,10 @@ struct LocalAuthenticationOnboardingViewModelTests {
             let skipButtonViewModel = sut.skipButtonViewModel
             skipButtonViewModel.action()
         }
+
         #expect(completion)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        let event = mockAnalyticsService._trackedEvents.first
+        #expect(event?.params?["text"] as? String == "Skip")
     }
 }

@@ -59,10 +59,6 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         analyticsService.track(screen: screen)
     }
 
-    func dismissView() {
-        dismissAction()
-    }
-
     private func trackNavigationEvent(_ title: String) {
         let event = AppEvent.buttonNavigation(
             text: title,
@@ -80,7 +76,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
                 let buttonTitle = self.postcodeEntryViewPrimaryButtonTitle
                 self.trackNavigationEvent(buttonTitle)
                 self.fetchLocalAuthority(postCode: postcode)
-                dismissView()
+                dismissAction()
             }
         )
     }
@@ -101,7 +97,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
             case .failure(let error):
                 self?.shouldShowErrorMessage.toggle()
             default:
-                self?.shouldShowErrorMessage.toggle()
+                break
             }
         }
     }

@@ -6,7 +6,6 @@ class LocalAuthorityExplainerViewModel {
     private let explainerPrimaryButtonTitle: String = String.localAuthority.localized(
         "localAuthorityExplainerViewPrimaryButtonTitle"
     )
-    private let analyticsService: AnalyticsServiceInterface
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
     )
@@ -19,15 +18,16 @@ class LocalAuthorityExplainerViewModel {
     let navigationTitle: String = String.localAuthority.localized(
         "localAuthorityNavigationTitle"
     )
-    let navigateToPosteCodeEntry: () -> Void
+    private let analyticsService: AnalyticsServiceInterface
+    private let navigateToPosteCodeEntry: () -> Void
     let dismissAction: () -> Void
 
 
     init(analyticsService: AnalyticsServiceInterface,
-         navigateToPosteCodeEntry: @escaping () -> Void,
+         navigateToPostcodeEntry: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
-        self.navigateToPosteCodeEntry = navigateToPosteCodeEntry
+        self.navigateToPosteCodeEntry = navigateToPostcodeEntry
         self.dismissAction = dismissAction
     }
 

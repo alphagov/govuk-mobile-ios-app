@@ -38,7 +38,6 @@ struct LocalAuthorityExplainerView: View {
                         .padding([.leading, .trailing], 16)
                         .multilineTextAlignment(.center)
                         .accessibilityLabel(Text(viewModel.explainerViewDescription))
-
                         .accessibilitySortPriority(0)
                     Spacer()
                 }

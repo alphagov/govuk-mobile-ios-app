@@ -24,7 +24,7 @@ class ViewControllerBuilder {
         let searchService: SearchServiceInterface
         let activityService: ActivityServiceInterface
         let topicWidgetViewModel: TopicsWidgetViewModel
-        let localService: LocalAuthorityServiceInterface
+        let localAuthorityService: LocalAuthorityServiceInterface
     }
 
     struct HomeActions {
@@ -48,7 +48,7 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService,
-            localAuthorityService: dependencies.localService
+            localAuthorityService: dependencies.localAuthorityService
         )
         return HomeViewController(
             viewModel: viewModel
@@ -90,7 +90,7 @@ class ViewControllerBuilder {
                                      dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = LocalAuthorityExplainerViewModel(
             analyticsService: analyticsService,
-            navigateToPosteCodeEntry: navigateToPostCodeEntryViewAction,
+            navigateToPostcodeEntry: navigateToPostCodeEntryViewAction,
             dismissAction: dismissAction
         )
         let view = LocalAuthorityExplainerView(

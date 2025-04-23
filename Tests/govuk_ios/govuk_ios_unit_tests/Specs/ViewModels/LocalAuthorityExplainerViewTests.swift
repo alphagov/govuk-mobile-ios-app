@@ -10,7 +10,7 @@ struct LocalAuthorityExplainerViewTests {
         let mockAnalyticsService = MockAnalyticsService()
         let sut = LocalAuthorityExplainerViewModel(
             analyticsService: mockAnalyticsService,
-            navigateToPosteCodeEntry: {},
+            navigateToPostcodeEntry: {},
             dismissAction: {}
         )
         sut.primaryButtonViewModel.action()

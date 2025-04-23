@@ -11,8 +11,4 @@ import Foundation
         "localAuthorityWidgetViewDescription"
     )
     let tapAction: () -> Void
-
-    func handleTap() {
-        tapAction()
-    }
 }

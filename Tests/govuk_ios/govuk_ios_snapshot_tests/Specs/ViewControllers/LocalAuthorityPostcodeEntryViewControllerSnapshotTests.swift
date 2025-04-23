@@ -7,7 +7,6 @@ import UIKit
 
 @MainActor
 final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTestCase {
-
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),

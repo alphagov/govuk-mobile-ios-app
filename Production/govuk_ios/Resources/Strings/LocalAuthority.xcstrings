@@ -56,17 +56,6 @@
         }
       }
     },
-    "localAuthorityNavigationTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your local services"
-          }
-        }
-      }
-    },
     "localAuthoritypostcodeEntryPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -37,7 +37,7 @@ struct LocalAuthorityWidgetView: View {
                 .ignoresSafeArea()
         }
         .onTapGesture {
-            viewModel.handleTap()
+            viewModel.tapAction()
         }
     }
 }

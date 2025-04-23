@@ -45,7 +45,7 @@ struct LocalAuthorityPostcodeEntryView: View {
     private var cancelButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button(viewModel.cancelButtonTitle) {
-                viewModel.dismissView()
+                viewModel.dismissAction()
             }
             .foregroundColor(Color(UIColor.govUK.text.link))
         }

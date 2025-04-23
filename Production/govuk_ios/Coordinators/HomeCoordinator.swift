@@ -50,7 +50,7 @@ class HomeCoordinator: TabItemCoordinator {
             searchService: searchService,
             activityService: activityService,
             topicWidgetViewModel: topicWidgetViewModel,
-            localService: localAuthorityService
+            localAuthorityService: localAuthorityService
         )
 
         let actions = ViewControllerBuilder.HomeActions(
@@ -163,7 +163,8 @@ class HomeCoordinator: TabItemCoordinator {
             guard let self = self else { return }
             let navigationController = UINavigationController()
             let coordinator = self.coordinatorBuilder.localAuthority(
-                navigationController: navigationController, didDismissAction: {
+                navigationController: navigationController,
+                dismissAction: {
                     self.root.viewWillReAppear()
                 }
             )

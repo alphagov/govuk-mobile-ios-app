@@ -17,7 +17,7 @@ struct LocalAuthorityCoordinatorTests {
 
         mockViewControllerBuilder._stubbedLocalAuthorityExplainerViewController = expectedViewController
 
-        let subject = LocalAuthorityCoordinator(
+        let subject = LocalAuthorityServiceCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: mockAnalyticsService,
@@ -42,7 +42,7 @@ struct LocalAuthorityCoordinatorTests {
         mockViewControllerBuilder._stubbedLocalAuthorityExplainerViewController = expectedViewController
 
         let dismissed = await withCheckedContinuation { continuation in
-            let sut = LocalAuthorityCoordinator(
+            let sut = LocalAuthorityServiceCoordinator(
                 navigationController: navigationController,
                 viewControllerBuilder: mockViewControllerBuilder,
                 analyticsService: MockAnalyticsService(),
@@ -68,9 +68,9 @@ struct LocalAuthorityCoordinatorTests {
         let mockCoordinator = MockBaseCoordinator()
 
         mockViewControllerBuilder._stubbedLocalAuthorityExplainerViewController = expectedViewController
-        var sut: LocalAuthorityCoordinator!
+        var sut: LocalAuthorityServiceCoordinator!
         let dismissed = await  withCheckedContinuation { continuation in
-            sut = LocalAuthorityCoordinator(
+            sut = LocalAuthorityServiceCoordinator(
                 navigationController: mockNavigationController,
                 viewControllerBuilder: mockViewControllerBuilder,
                 analyticsService: MockAnalyticsService(),

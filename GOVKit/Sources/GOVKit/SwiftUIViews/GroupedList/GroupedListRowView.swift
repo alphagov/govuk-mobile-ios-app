@@ -37,14 +37,23 @@ struct InformationRowView: View {
 
     var body: some View {
         HStack {
-            Text(row.title)
-            Spacer()
-            Text(row.detail)
-                .foregroundColor(
-                    Color(
-                        UIColor.govUK.text.secondary
-                    )
-                )
+            if let imageName = row.imageName {
+                Image(imageName)
+            }
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(row.title)
+                    Spacer()
+                    Text(row.detail)
+                        .foregroundColor(
+                            Color(
+                                UIColor.govUK.text.secondary
+                            )
+                        )
+                }
+                RowDetail(text: row.body)
+            }
+
         }.accessibilityElement(children: .combine)
     }
 }

@@ -32,6 +32,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     var notificationAlertButtonTitle: String = String.settings.localized(
         "notificationAlertPrimaryButtonTitle"
     )
+    private var accountEmail: String?
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
@@ -105,65 +106,70 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func getGroupedList() -> [GroupedListSection] {
         return [
+            accountSection,
+            signoutSection,
+            appOptionsSection,
             aboutSection,
-            notificationSection,
-            privacyTopSection,
             privacyBottomSection
         ].compactMap { $0 }
     }
 
+    private var accountSection: GroupedListSection {
+        GroupedListSection(
+            heading: nil,
+            rows: [
+                InformationRow(
+                    id: "settings.email.row",
+                    title: String.settings.localized("accountRowTitle"),
+                    body: accountEmail,
+                    imageName: "account_icon",
+                    detail: ""),
+                LinkRow(
+                    id: "settings.account.row",
+                    title: String.settings.localized("manageAccountRowTitle"),
+                    action: {})
+            ],
+            footer: String.settings.localized("accountSectionFooter"))
+    }
+
+    private var signoutSection: GroupedListSection {
+        GroupedListSection(
+            heading: nil,
+            rows: [
+                DetailRow(
+                    id: "settings.signout.row",
+                    title: String.settings.localized("signOutRowTitle"),
+                    body: "",
+                    accessibilityHint: "",
+                    destructive: true,
+                    action: {
+                        print("Signing out")
+                    }
+                )
+            ],
+            footer: nil)
+    }
+
     private var aboutSection: GroupedListSection {
         GroupedListSection(
-            heading: GroupedListHeader(
-                title: String.settings.localized("aboutTheAppHeading"),
-                icon: nil
-            ),
+            heading: nil,
             rows: [
-                helpAndFeedbackRow(),
                 InformationRow(
                     id: "settings.version.row",
                     title: String.settings.localized("appVersionTitle"),
                     body: nil,
                     detail: versionProvider.fullBuildNumber ?? "-"
-                )
+                ),
+                helpAndFeedbackRow(),
             ],
             footer: nil
         )
     }
 
-    private var notificationSection: GroupedListSection? {
-        guard notificationService.isFeatureEnabled
-        else { return nil }
+    private var appOptionsSection: GroupedListSection? {
         return GroupedListSection(
-            heading: GroupedListHeader(
-                title: String.settings.localized("notificationsTitle"),
-                icon: nil
-            ),
-            rows: [
-                notificationsSettingsRow()
-            ],
-            footer: nil
-        )
-    }
-
-    private var privacyTopSection: GroupedListSection {
-        GroupedListSection(
-            heading: GroupedListHeader(
-                title: String.settings.localized("privacyAndLegalHeading"),
-                icon: nil
-            ),
-            rows: [
-                ToggleRow(
-                    id: "settings.privacy.row",
-                    title: String.settings.localized("appUsageTitle"),
-                    isOn: hasAcceptedAnalytics,
-                    action: { [weak self] isOn in
-                        self?.analyticsService.setAcceptedAnalytics(
-                            accepted: isOn
-                        )
-                    }
-                )
-            ],
+            heading: nil,
+            rows: appOptionsRows(),
             footer: String.settings.localized("appUsageFooter")
         )
     }
@@ -230,18 +236,37 @@ class SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    private func notificationsSettingsRow() -> GroupedListRow {
-        let rowTitle = String.settings.localized("notificationsTitle")
-        let isAuthorized = notificationsPermissionState == .authorized
-        return DetailRow(
-            id: "settings.notifications.row",
-            title: rowTitle,
-            body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
-            accessibilityHint: String.settings.localized("notificationsAccessibilityHint"),
-            action: { [weak self] in
-                self?.handleNotificationSettingsPressed(title: rowTitle)
-            }
+    private func appOptionsRows() -> [GroupedListRow] {
+        var appOptionRows = [GroupedListRow]()
+
+        if notificationService.isFeatureEnabled {
+            let rowTitle = String.settings.localized("notificationsTitle")
+            let isAuthorized = notificationsPermissionState == .authorized
+            let notificationRow = DetailRow(
+                id: "settings.notifications.row",
+                title: rowTitle,
+                body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
+                accessibilityHint: String.settings.localized("notificationsAccessibilityHint"),
+                action: { [weak self] in
+                    self?.handleNotificationSettingsPressed(title: rowTitle)
+                }
+            )
+            appOptionRows.append(notificationRow)
+        }
+
+        appOptionRows.append(
+            ToggleRow(
+                id: "settings.privacy.row",
+                title: String.settings.localized("appUsageTitle"),
+                isOn: hasAcceptedAnalytics,
+                action: { [weak self] isOn in
+                    self?.analyticsService.setAcceptedAnalytics(
+                        accepted: isOn
+                    )
+                }
+            )
         )
+        return appOptionRows
     }
 
     private func handleNotificationSettingsPressed(title: String) {

@@ -23,6 +23,28 @@
         }
       }
     },
+    "accountRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your GOV.UK One Login"
+          }
+        }
+      }
+    },
+    "accountSectionFooter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You might need to sign in again to manage your GOV.UK One Login details."
+          }
+        }
+      }
+    },
     "appUsageFooter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -63,6 +85,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Help and feedback"
+          }
+        }
+      }
+    },
+    "manageAccountRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage your GOV.UK One Login"
           }
         }
       }
@@ -184,6 +217,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy notice"
+          }
+        }
+      }
+    },
+    "signOutRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign out"
           }
         }
       }

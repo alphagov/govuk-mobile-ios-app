@@ -8,57 +8,39 @@ import Testing
 @MainActor
 struct AuthenticationOnboardingServiceTests {
     @Test
-    func hasSeenOnboarding_hasSeen_returnsTrue() {
-        let userDefaults = UserDefaults()
-        userDefaults.set(bool: true, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
-
-        #expect(subject.hasSeenOnboarding)
-    }
-
-    @Test
-    func hasSeenOnboarding_hasntSeen_returnsTrue() {
-        let userDefaults = UserDefaults()
-        userDefaults.set(bool: false, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
-
-        #expect(subject.hasSeenOnboarding == false)
-    }
-
-    @Test
     func setHasSeenOnboarding_setsTrue() {
-        let userDefaults = UserDefaults()
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
-        subject.setHasSeenOnboarding()
+        let userDefaults = MockUserDefaults()
+        let sut = AuthenticationOnboardingService(userDefaults: userDefaults)
+        sut.setHasSeenOnboarding()
 
         #expect(userDefaults.bool(forKey: .authenticationOnboardingSeen) == true)
     }
 
     @Test
     func shouldSkipOnboarding_featureDisabledHasntSeenOnboarding_returnsTrue() {
-        let userDefaults = UserDefaults()
+        let userDefaults = MockUserDefaults()
         userDefaults.set(bool: false, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
+        let sut = AuthenticationOnboardingService(userDefaults: userDefaults)
 
-        #expect(subject.shouldSkipOnboarding)
+        #expect(sut.shouldSkipOnboarding)
     }
 
     @Test
     func shouldSkipOnboarding_featureDisabledHasSeenOnboarding_returnsTrue() {
-        let userDefaults = UserDefaults()
+        let userDefaults = MockUserDefaults()
         userDefaults.set(bool: true, forKey: .authenticationOnboardingSeen)
-        let subject = AuthenticationOnboardingService(userDefaults: userDefaults)
+        let sut = AuthenticationOnboardingService(userDefaults: userDefaults)
 
-        #expect(subject.shouldSkipOnboarding)
+        #expect(sut.shouldSkipOnboarding)
     }
 
     @Test
     func fetchSlides_returnsExpectedResult() async {
-        let subject = AuthenticationOnboardingService(
+        let sut = AuthenticationOnboardingService(
             userDefaults: MockUserDefaults()
         )
         let result = await withCheckedContinuation { continuation in
-            subject.fetchSlides(
+            sut.fetchSlides(
                 completion: {
                     continuation.resume(returning: $0)
                 }

@@ -6,11 +6,11 @@ import Testing
 @Suite
 class AuthenticationOnboardingCoordinatorTests {
     @Test @MainActor
-    func start_hasNotSeenOnboarding_setsOnboarding() {
+    func start_shouldntSkipOnboarding_setsOnboarding() {
         let mockAuthenticationOnboardingService = MockAuthenticationOnboardingService()
         let mockNavigationController = MockNavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
-
+        mockAuthenticationOnboardingService._stubbedShouldSkipOnboarding = false
         let sut = AuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             analyticsService: MockAnalyticsService(),
@@ -25,35 +25,11 @@ class AuthenticationOnboardingCoordinatorTests {
     }
 
     @Test @MainActor
-    func start_hasSeenOnboarding_finishesCoordination() async {
+    func start_shouldSkipOnboarding_finishesCoordination() async {
         let mockAuthenticationOnboardingService = MockAuthenticationOnboardingService()
         let mockNavigationController = MockNavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
-        mockAuthenticationOnboardingService._stubbedHasSeenOnboarding = true
-
-        let completion = await withCheckedContinuation { continuation in
-            let sut = AuthenticationOnboardingCoordinator(
-                navigationController: mockNavigationController,
-                analyticsService: MockAnalyticsService(),
-                authenticationOnboardingService: mockAuthenticationOnboardingService,
-                coordinatorBuilder: mockCoordinatorBuilder,
-                completionAction: { continuation.resume(returning: true) }
-            )
-            sut.start(url: nil)
-        }
-
-        #expect(completion)
-        #expect(mockNavigationController._setViewControllers?.count == .none)
-    }
-
-    @Test @MainActor
-    func start_featureDisablaed_finishesCoordination() async {
-        let mockAuthenticationOnboardingService = MockAuthenticationOnboardingService()
-        let mockNavigationController = MockNavigationController()
-        let mockCoordinatorBuilder = CoordinatorBuilder.mock
-        mockAuthenticationOnboardingService._stubbedHasSeenOnboarding = false
-        mockAuthenticationOnboardingService._stubbedFeatureEnabled = false
-
+        mockAuthenticationOnboardingService._stubbedShouldSkipOnboarding = true
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,

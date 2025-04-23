@@ -6,18 +6,9 @@ import Onboarding
 @testable import govuk_ios
 
 class MockAuthenticationOnboardingService: AuthenticationOnboardingServiceInterface {
+    var _stubbedShouldSkipOnboarding: Bool = false
     var shouldSkipOnboarding: Bool {
-        !_stubbedFeatureEnabled || _stubbedHasSeenOnboarding
-    }
-    
-    var _stubbedFeatureEnabled: Bool = true
-    var isFeatureEnabled: Bool {
-        _stubbedFeatureEnabled
-    }
-
-    var _stubbedHasSeenOnboarding: Bool = false
-    var hasSeenOnboarding: Bool {
-        _stubbedHasSeenOnboarding
+        _stubbedShouldSkipOnboarding
     }
 
     var _setHasSeenOnboardingCalled: Bool = false

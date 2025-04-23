@@ -9,13 +9,14 @@ enum LocalAuthenticationType {
 }
 
 protocol LocalAuthenticationServiceInterface {
+    var authType: LocalAuthenticationType { get }
+    var shouldSkipOnboarding: Bool { get }
+
+    func setHasSeenOnboarding()
     func canEvaluatePolicy(_ policy: LAPolicy) -> Bool
     func evaluatePolicy(_ policy: LAPolicy,
                         reason: String,
                         completion: @escaping (Bool, Error?) -> Void)
-    var authType: LocalAuthenticationType { get }
-    var hasSeenOnboarding: Bool { get }
-    func setHasSeenOnboarding()
 }
 
 final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
@@ -60,11 +61,19 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
         }
     }
 
-    var hasSeenOnboarding: Bool {
-        userDefaults.bool(forKey: .localAuthenticationOnboardingSeen)
-    }
-
     func setHasSeenOnboarding() {
         userDefaults.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
+    }
+
+    var shouldSkipOnboarding: Bool {
+        hasSeenOnboarding || !isFeatureEnabled
+    }
+
+    private var isFeatureEnabled: Bool {
+        false
+    }
+
+    private var hasSeenOnboarding: Bool {
+        userDefaults.bool(forKey: .localAuthenticationOnboardingSeen)
     }
 }

@@ -24,6 +24,11 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
+        guard !localAuthenticationService.shouldSkipOnboarding else {
+            finishCoordination()
+            return
+        }
+
         switch localAuthenticationService.authType {
         case .faceID, .touchID:
             setLocalAuthenticationOnboardingViewController()

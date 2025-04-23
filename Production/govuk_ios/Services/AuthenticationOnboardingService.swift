@@ -2,10 +2,7 @@ import Foundation
 import Onboarding
 
 protocol AuthenticationOnboardingServiceInterface: OnboardingSlideProvider {
-    var hasSeenOnboarding: Bool { get }
-    var isFeatureEnabled: Bool { get }
     var shouldSkipOnboarding: Bool { get }
-
     func setHasSeenOnboarding()
 }
 
@@ -14,14 +11,6 @@ struct AuthenticationOnboardingService: AuthenticationOnboardingServiceInterface
 
     init(userDefaults: UserDefaultsInterface) {
         self.userDefaults = userDefaults
-    }
-
-    var hasSeenOnboarding: Bool {
-        userDefaults.bool(forKey: .authenticationOnboardingSeen)
-    }
-
-    var isFeatureEnabled: Bool {
-        false
     }
 
     var shouldSkipOnboarding: Bool {
@@ -39,5 +28,13 @@ struct AuthenticationOnboardingService: AuthenticationOnboardingServiceInterface
         completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
     ) {
         completion(.success(Onboarding.authenticationSlides))
+    }
+
+    private var hasSeenOnboarding: Bool {
+        userDefaults.bool(forKey: .authenticationOnboardingSeen)
+    }
+
+    private var isFeatureEnabled: Bool {
+        false
     }
 }

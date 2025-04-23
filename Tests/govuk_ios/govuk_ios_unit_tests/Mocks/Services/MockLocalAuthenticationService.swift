@@ -4,6 +4,11 @@ import LocalAuthentication
 @testable import govuk_ios
 
 class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
+    var _stubbedSkipOnboarding = false
+    var shouldSkipOnboarding: Bool {
+        _stubbedSkipOnboarding
+    }
+
     var _stubbedCanEvaluatePolicy: Bool = true
     func canEvaluatePolicy(_ policy: LAPolicy) -> Bool {
         return _stubbedCanEvaluatePolicy
@@ -17,11 +22,6 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
     var _stubbedAuthType: LocalAuthenticationType = .none
     var authType: LocalAuthenticationType {
         return _stubbedAuthType
-    }
-
-    var _stubbedHasSeenOnboarding: Bool = false
-    var hasSeenOnboarding: Bool {
-        _stubbedHasSeenOnboarding
     }
 
     var _setHasSeenOnboardingCalled: Bool = false

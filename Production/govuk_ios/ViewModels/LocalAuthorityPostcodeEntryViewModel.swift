@@ -3,7 +3,7 @@ import UIComponents
 import GOVKit
 import Combine
 
-class LocalAuthorityPostecodEntryViewModel: ObservableObject {
+class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
     @Published var localAuthority: LocalAuthority?
     @Published var localAuthorityAddressList: LocalAuthoritiesList?
@@ -34,10 +34,6 @@ class LocalAuthorityPostecodEntryViewModel: ObservableObject {
     private let postcodeEntryViewPrimaryButtonTitle: String = String.localAuthority.localized(
         "localAuthoritypostcodeEntryPrimaryButtonTitle"
     )
-    let navigationTitle: String = String.localAuthority.localized(
-        "localAuthorityNavigationTitle"
-    )
-
 
     init(service: LocalAuthorityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -75,7 +71,7 @@ class LocalAuthorityPostecodEntryViewModel: ObservableObject {
         analyticsService.track(event: event)
     }
 
-    var postcodeEntryViewPrimaryButtonViewModel: GOVUKButton.ButtonViewModel {
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
             localisedTitle: postcodeEntryViewPrimaryButtonTitle,
             action: { [weak self] in
@@ -84,6 +80,7 @@ class LocalAuthorityPostecodEntryViewModel: ObservableObject {
                 let buttonTitle = self.postcodeEntryViewPrimaryButtonTitle
                 self.trackNavigationEvent(buttonTitle)
                 self.fetchLocalAuthority(postCode: postcode)
+                dismissView()
             }
         )
     }

@@ -7,16 +7,19 @@ import GOVKit
     private let analyticsService: AnalyticsServiceInterface
     private let localAuthorityService: LocalAuthorityServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
+    private let dismissed: () -> Void
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
-         coordinatorBuilder: CoordinatorBuilder) {
+         coordinatorBuilder: CoordinatorBuilder,
+         dismissed: @escaping () -> Void) {
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
         self.localAuthorityService = localAuthorityService
         self.coordinatorBuilder = coordinatorBuilder
+        self.dismissed = dismissed
         super.init(navigationController: navigationController)
     }
 
@@ -28,7 +31,8 @@ import GOVKit
             },
             dismissAction: { [weak self] in
                 self?.dismissModal()
-            })
+            }
+        )
         set(viewController, animated: true)
     }
 
@@ -38,8 +42,8 @@ import GOVKit
             localAuthorityService: localAuthorityService,
             dismissAction: { [weak self] in
                 self?.dismissModal()
-            })
-
+            }
+        )
         push(viewController, animated: true)
     }
 
@@ -51,4 +55,9 @@ import GOVKit
             }
         )
     }
+
+     override func finish() {
+         super.finish()
+         dismissed()
+     }
  }

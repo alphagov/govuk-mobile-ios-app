@@ -158,13 +158,15 @@ class CoordinatorBuilder {
         )
     }
 
-    func localAuthority(navigationController: UINavigationController) -> BaseCoordinator {
+    func localAuthority(navigationController: UINavigationController,
+                        didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         LocalAuthorityCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
             localAuthorityService: container.localAuthorityService.resolve(),
-            coordinatorBuilder: self
+            coordinatorBuilder: self,
+            dismissed: didDismissAction
         )
     }
 

@@ -43,7 +43,7 @@ class LocalAuthorityExplainerViewModel {
         analyticsService.track(event: event)
     }
 
-    var explainerViewPrimaryButtonViewModel: GOVUKButton.ButtonViewModel {
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
             localisedTitle: explainerPrimaryButtonTitle,
             action: { [weak self] in

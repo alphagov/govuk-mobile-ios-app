@@ -26,9 +26,9 @@ final class LocalAuthorityExplainerViewSnapshotTests: SnapshotTestCase {
 
     private func viewController() -> UIViewController {
         let viewModel = LocalAuthorityExplainerViewModel(
-            service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            navigateToPosteCodeEntry: {},
+            dismissAction: {}
         )
         let view = LocalAuthorityExplainerView(
             viewModel: viewModel

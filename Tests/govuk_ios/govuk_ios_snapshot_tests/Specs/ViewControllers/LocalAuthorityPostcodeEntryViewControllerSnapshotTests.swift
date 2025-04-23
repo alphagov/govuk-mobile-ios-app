@@ -25,11 +25,10 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
     }
 
     private func viewController() -> UIViewController {
-
-        let viewModel = LocalAuthorityExplainerViewModel(
+        let viewModel = LocalAuthorityPostecodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
         let view = LocalAuthorityPostcodeEntryView(
             viewModel: viewModel

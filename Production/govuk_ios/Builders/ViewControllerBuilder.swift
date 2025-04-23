@@ -103,7 +103,7 @@ class ViewControllerBuilder {
     func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
                                          localAuthorityService: LocalAuthorityServiceInterface,
                                          dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = LocalAuthorityPostecodEntryViewModel(
+        let viewModel = LocalAuthorityPostecodeEntryViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
             dismissAction: dismissAction

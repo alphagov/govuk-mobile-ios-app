@@ -163,7 +163,9 @@ class HomeCoordinator: TabItemCoordinator {
             guard let self = self else { return }
             let navigationController = UINavigationController()
             let coordinator = self.coordinatorBuilder.localAuthority(
-                navigationController: navigationController
+                navigationController: navigationController, didDismissAction: {
+                    self.root.viewWillReAppear()
+                }
             )
             present(coordinator)
         }

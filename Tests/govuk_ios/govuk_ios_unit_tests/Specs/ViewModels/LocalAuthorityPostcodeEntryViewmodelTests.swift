@@ -1,10 +1,11 @@
 import Foundation
 import Testing
 import Combine
+
 @testable import govuk_ios
 
 @Suite
-struct LocalAuthorityViewModelTests {
+struct LocalAuthorityPostcodeEntryViewmodelTests {
     @Test
     func fetchLocalAuthority_addressList_returnsExpectedResults() async throws {
         var cancellables = Set<AnyCancellable>()
@@ -23,10 +24,10 @@ struct LocalAuthorityViewModelTests {
         let expectedResult = LocalAuthoritiesList(addresses: addresses)
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthorityAddressList
@@ -57,11 +58,12 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
 
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
+
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthority
                 .dropFirst()
@@ -101,11 +103,12 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
 
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
+
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthority
                 .dropFirst()
@@ -129,11 +132,12 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
 
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
+
         let result = await withCheckedContinuation { continuation in
             sut.$localAuthorityErrorMessage
                 .dropFirst()
@@ -152,11 +156,12 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.apiUnavailable)
 
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
+
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
                 .dropFirst()
@@ -175,11 +180,12 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.decodingError)
 
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
+
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
                 .dropFirst()
@@ -198,11 +204,12 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.networkUnavailable)
 
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
+
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
                 .dropFirst()
@@ -216,27 +223,15 @@ struct LocalAuthorityViewModelTests {
     }
 
     @Test
-    func explainerViewPrimaryButtonViewModel_action_trackNavigationEvent() async throws {
+    func primaryButtonViewModel_action_trackNavigationEvent() async throws {
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = LocalAuthorityExplainerViewModel(
+        let sut = LocalAuthorityPostecodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
-            trackWidgetTapAction: { }
+            dismissAction: {}
         )
-        sut.explainerViewPrimaryButtonViewModel.action()
-        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(receivedTitle == "Continue")
-    }
 
-    @Test
-    func postcodeEntryViewPrimaryButtonViewModel_action_trackNavigationEvent() async throws {
-        let mockAnalyticsService = MockAnalyticsService()
-        let sut = LocalAuthorityExplainerViewModel(
-            service: MockLocalAuthorityService(),
-            analyticsService: mockAnalyticsService,
-            trackWidgetTapAction: { }
-        )
-        sut.postcodeEntryViewPrimaryButtonViewModel.action()
+        sut.primaryButtonViewModel.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(receivedTitle == "Confirm postcode")
     }

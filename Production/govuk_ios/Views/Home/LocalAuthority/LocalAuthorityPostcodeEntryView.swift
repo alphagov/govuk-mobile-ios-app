@@ -10,8 +10,8 @@ struct LocalAuthorityPostcodeEntryView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {
-            VStack {
-                ScrollView {
+        VStack {
+            ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
                     Text(viewModel.postcodeEntryViewTitle)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -30,15 +30,16 @@ struct LocalAuthorityPostcodeEntryView: View {
                     Spacer()
                 }.padding()
             }
-                PrimaryButtonView(
-                    viewModel: viewModel.postcodeEntryViewPrimaryButtonViewModel
-                )
-            }.navigationTitle(viewModel.navigationTitle)
-                .toolbar {
-                    cancelButton
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .onAppear {viewModel.trackScreen(screen: self) }
+            PrimaryButtonView(
+                viewModel: viewModel.primaryButtonViewModel
+            )
+        }.toolbar {
+            cancelButton
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
 
     private var cancelButton: some ToolbarContent {

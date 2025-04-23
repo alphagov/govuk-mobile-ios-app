@@ -3,10 +3,10 @@ import GOVKit
 import UIComponents
 
 struct LocalAuthorityPostcodeEntryView: View {
-    @StateObject private var viewModel: LocalAuthorityPostecodEntryViewModel
+    @StateObject private var viewModel: LocalAuthorityPostecodeEntryViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    init(viewModel: LocalAuthorityPostecodEntryViewModel) {
+    init(viewModel: LocalAuthorityPostecodeEntryViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {

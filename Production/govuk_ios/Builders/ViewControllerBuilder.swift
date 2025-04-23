@@ -85,6 +85,20 @@ class ViewControllerBuilder {
     }
 
     @MainActor
+    func localAuthorityExplainerView(
+        analyticsService: AnalyticsServiceInterface,
+        localAuthorityService: LocalAuthorityServiceInterface,
+        navigateToPostCodeEntryViewAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = LocalAuthorityViewModel(
+            service: localAuthorityService,
+            analyticsService: analyticsService,
+            navigateToPosteCodeEntry: navigateToPostCodeEntryViewAction
+        )
+            let view = LocalAuthorityExplainerView(viewModel: viewModel)
+            return HostingViewController(rootView: view)
+    }
+
+    @MainActor
     func notificationSettings(analyticsService: AnalyticsServiceInterface,
                               notificationService: NotificationServiceInterface,
                               completeAction: @escaping () -> Void) -> UIViewController {
@@ -179,6 +193,22 @@ class ViewControllerBuilder {
         )
         return HostingViewController(rootView: view)
     }
+
+    @MainActor
+    func localAuthorityPostcodeEntryView(
+        analyticsService: AnalyticsServiceInterface,
+        localAuthorityService: LocalAuthorityServiceInterface,
+        navigateToExplainerViewAction: @escaping () -> Void) -> UIViewController {
+            let viewModel = LocalAuthorityViewModel(
+                service: localAuthorityService,
+                analyticsService: analyticsService,
+                navigateToPosteCodeEntry: navigateToExplainerViewAction
+            )
+            let view = LocalAuthorityPostcodeEntryView(
+                viewModel: viewModel
+            )
+            return HostingViewController(rootView: view)
+        }
 
     @MainActor
     func topicOnboarding(topics: [Topic],

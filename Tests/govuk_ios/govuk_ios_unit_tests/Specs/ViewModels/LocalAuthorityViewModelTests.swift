@@ -6,7 +6,7 @@ import Combine
 @Suite
 struct LocalAuthorityViewModelTests {
     @Test
-    func fetchlocalAuthority_addressList_returnsExpectedResults() async throws {
+    func fetchLocalAuthority_addressList_returnsExpectedResults() async throws {
         var cancellables = Set<AnyCancellable>()
         let addresses:[LocalAuthorityAddress] = [
             LocalAuthorityAddress(

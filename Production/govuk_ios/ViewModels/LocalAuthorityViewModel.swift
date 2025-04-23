@@ -16,9 +16,9 @@ class LocalAuthorityViewModel: ObservableObject {
     @Published var shouldShowErrorMessage: Bool = false
     private let analyticsService: AnalyticsServiceInterface
     private var cancellables = Set<AnyCancellable>()
-    private let trackWidgetTapAction: () -> Void
-    let cancelButtonTitle: String = String.localAuthority.localized(
-        "localAuthorityCancelbuttonTitle"
+    let navigateToPosteCodeEntry: () -> Void
+    let cancelButtonTitle: String = String.common.localized(
+        "cancel"
     )
     let explainerViewTitle: String = String.localAuthority.localized(
         "localAuthorityExplainerViewTitle"
@@ -59,10 +59,10 @@ class LocalAuthorityViewModel: ObservableObject {
 
     init(service: LocalAuthorityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         trackWidgetTapAction: @escaping () -> Void) {
+         navigateToPosteCodeEntry: @escaping () -> Void) {
         self.service = service
         self.analyticsService = analyticsService
-        self.trackWidgetTapAction = trackWidgetTapAction
+        self.navigateToPosteCodeEntry = navigateToPosteCodeEntry
         addTextFieldSubscribers()
     }
 
@@ -77,9 +77,9 @@ class LocalAuthorityViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
 
-    func trackWidgetTap() {
-        trackWidgetTapAction()
-    }
+//    func trackWidgetTap() {
+//        dismissAction()
+//    }
 
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
@@ -100,7 +100,7 @@ class LocalAuthorityViewModel: ObservableObject {
                 guard let self = self else { return }
                 let buttonTitle = self.explainerPrimaryButtonTitle
                 self.trackNavigationEvent(buttonTitle)
-                self.showPostcodeEntryView = true
+                navigateToPosteCodeEntry()
             }
         )
     }

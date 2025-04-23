@@ -11,7 +11,6 @@ struct LocalAuthorityPostcodeEntryView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {
-        NavigationView {
             VStack {
                 ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
@@ -40,9 +39,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                     cancelButton
                 }
                 .navigationBarTitleDisplayMode(.inline)
-        }.onAppear(perform: {
-            viewModel.trackScreen(screen: self)
-        })
+                .onAppear {viewModel.trackScreen(screen: self) }
     }
 
     private var cancelButton: some ToolbarContent {

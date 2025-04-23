@@ -57,7 +57,7 @@ class HomeCoordinator: TabItemCoordinator {
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
             recentActivityAction: startRecentActivityCoordinator,
-            localAuthorityAction: trackLocalAuthorityWidget
+            localAuthorityAction: presentLocalAuthorityCoordinator
         )
 
         let viewController = viewControllerBuilder.home(
@@ -79,12 +79,6 @@ class HomeCoordinator: TabItemCoordinator {
         else { return }
         if childCoordinators.isEmpty {
             homeViewController.resetState()
-        }
-    }
-
-    private var trackLocalAuthorityWidget: () -> Void {
-        return { [weak self] in
-            self?.trackWidgetNavigation(text: "Your local services")
         }
     }
 
@@ -123,6 +117,17 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
+//    private var localAuthorityActivityCoordinator: () -> Void {
+//        return { [weak self] in
+//          //  self?.trackWidgetNavigation(text: "Pages you’ve visited")
+//            guard let self = self else { return }
+//            let coordinator = self.coordinatorBuilder.localAuthority(
+//                navigationController: self.root
+//            )
+//            start(coordinator)
+//        }
+//    }
+
     private var startTopicDetailCoordinator: (Topic) -> Void {
         return { [weak self] topic in
             self?.trackWidgetNavigation(text: topic.title)
@@ -158,6 +163,19 @@ class HomeCoordinator: TabItemCoordinator {
                     self.topicWidgetViewModel.isEditing = false
                     self.root.viewWillReAppear()
                 }
+            )
+            self.present(coordinator)
+        }
+    }
+
+    private var presentLocalAuthorityCoordinator: () -> Void {
+        return { [weak self] in
+            // self?.trackWidgetNavigation(text: "Pages you’ve visited")
+
+            guard let self = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = self.coordinatorBuilder.localAuthority(
+                navigationController: navigationController
             )
             self.present(coordinator)
         }

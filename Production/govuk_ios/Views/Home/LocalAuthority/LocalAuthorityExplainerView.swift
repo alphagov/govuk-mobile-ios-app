@@ -11,7 +11,6 @@ struct LocalAuthorityExplainerView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {
-        NavigationView {
             VStack {
                 ScrollView {
                     VStack {
@@ -32,32 +31,32 @@ struct LocalAuthorityExplainerView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .accessibilityLabel(Text(viewModel.explainerViewTitle))
                             .padding([.trailing, .leading], 16)
+                            .padding(.bottom, 4)
                             .accessibilityAddTraits(.isHeader)
                             .accessibilitySortPriority(1)
                         Text(viewModel.explainerViewDescription)
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .multilineTextAlignment(.center)
                             .accessibilityLabel(Text(viewModel.explainerViewDescription))
-                            .padding([.top, .leading, .trailing], 4)
+                            .padding([.leading, .trailing], 8)
                             .accessibilitySortPriority(0)
                         Spacer()
                     }
                     .accessibilityElement(children: .contain)
                 }
-                PrimaryButtonView(
-                    viewModel: viewModel.explainerViewPrimaryButtonViewModel
-                )
+                NavigationLink(destination: LocalAuthorityPostcodeEntryView(
+                    viewModel: viewModel)) {
+                        PrimaryButtonView(
+                            viewModel: viewModel.explainerViewPrimaryButtonViewModel
+                        )
+                    }
             }.navigationTitle(viewModel.navigationTitle)
                 .toolbar {
                     cancelButton
+                }.onAppear {
+                    viewModel.trackScreen(screen: self)
                 }
                 .navigationBarTitleDisplayMode(.inline)
-                .sheet(isPresented: $viewModel.showPostcodeEntryView) {
-                    LocalAuthorityPostcodeEntryView(viewModel: viewModel)
-                }
-        }.onAppear {
-            viewModel.trackScreen(screen: self)
-        }
     }
 
     private var cancelButton: some ToolbarContent {

@@ -50,18 +50,12 @@ extension Container {
 
     var localAuthorityAPIClient: Factory<APIServiceClientInterface> {
         Factory(self) {
-            self.localAuthorityAPIClient(
-                url: Constants.API.defaultLocalAuthorityURL
+            APIServiceClient(
+                baseUrl: Constants.API.defaultLocalAuthorityURL,
+                session: self.urlSession(),
+                requestBuilder: RequestBuilder()
             )
         }
-    }
-
-    private func localAuthorityAPIClient(url: URL) -> APIServiceClient {
-        APIServiceClient(
-            baseUrl: url,
-            session: self.urlSession(),
-            requestBuilder: RequestBuilder()
-        )
     }
 
     var urlSession: Factory<URLSession> {

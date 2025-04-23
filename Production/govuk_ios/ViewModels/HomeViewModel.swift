@@ -97,7 +97,7 @@ struct HomeViewModel {
         let viewModel = LocalAuthorityViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
-            trackWidgetTapAction: localAuthorityAction
+            navigateToPosteCodeEntry: localAuthorityAction
         )
         let content = LocalAuthorityWidgetView(
             viewModel: viewModel

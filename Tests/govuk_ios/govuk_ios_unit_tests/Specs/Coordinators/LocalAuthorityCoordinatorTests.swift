@@ -14,7 +14,6 @@ struct LocalAuthorityCoordinatorTests {
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
-
         mockViewControllerBuilder._stubbedLocalAuthorityExplainerViewController = expectedViewController
 
         let subject = LocalAuthorityServiceCoordinator(
@@ -25,9 +24,7 @@ struct LocalAuthorityCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             dismissed: {}
         )
-
         subject.start()
-
         #expect(navigationController.viewControllers.first == expectedViewController)
     }
 
@@ -38,7 +35,6 @@ struct LocalAuthorityCoordinatorTests {
         let navigationController = UINavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockCoordinator = MockBaseCoordinator()
-
         mockViewControllerBuilder._stubbedLocalAuthorityExplainerViewController = expectedViewController
 
         let dismissed = await withCheckedContinuation { continuation in
@@ -52,11 +48,32 @@ struct LocalAuthorityCoordinatorTests {
                     continuation.resume(returning: true)
                 }
             )
-
             mockCoordinator.start(sut)
             sut.presentationControllerDidDismiss(sut.root.presentationController!)
         }
         #expect(dismissed)
+    }
+
+    @Test
+    func navigateToLocalAuthority_pushesLocalAuthorityExplainerViewController() async {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        let navigationController = UINavigationController()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockCoordinator = MockBaseCoordinator()
+
+        mockViewControllerBuilder._stubbedLocalAuthortiyPostcodeEntryViewController = expectedViewController
+
+        let sut = LocalAuthorityServiceCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            analyticsService: MockAnalyticsService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            dismissed: {}
+        )
+        sut.navigateToPostcodeEntryView()
+        #expect(navigationController.viewControllers.first == expectedViewController)
     }
 
     @Test

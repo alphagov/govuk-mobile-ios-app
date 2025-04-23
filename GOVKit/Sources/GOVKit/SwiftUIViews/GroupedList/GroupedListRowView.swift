@@ -94,7 +94,9 @@ struct DetailRowView: View {
                 HStack {
                     Text(row.title)
                         .multilineTextAlignment(.leading)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
+                        .foregroundColor(row.destructive ?
+                                         Color(UIColor.govUK.text.buttonDestructive) :
+                                            Color(UIColor.govUK.text.primary))
                     Spacer()
                     Text(row.body)
                     .font(Font.govUK.body)

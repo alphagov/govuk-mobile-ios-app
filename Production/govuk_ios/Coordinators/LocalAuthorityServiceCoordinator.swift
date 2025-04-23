@@ -23,25 +23,25 @@ import GOVKit
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.localAuthorityExplainerView(
             analyticsService: analyticsService,
-            localAuthorityService: localAuthorityService) { [weak self] in
+            navigateToPostCodeEntryViewAction: { [weak self] in
                 self?.navigateToPostCodeEntryView()
-            }
+            },
+            dismissAction: { [weak self] in
+                self?.dismissModal()
+            })
         set(viewController, animated: true)
     }
 
     func navigateToPostCodeEntryView() {
         let viewController = viewControllerBuilder.localAuthorityPostcodeEntryView(
             analyticsService: analyticsService,
-            localAuthorityService: localAuthorityService) { [weak self] in
-                self?.navigagteToHome()
-            }
+            localAuthorityService: localAuthorityService,
+            dismissAction: { [weak self] in
+                self?.dismissModal()
+            })
+
         push(viewController, animated: true)
     }
-
-     func navigagteToHome() {
-         let coordinator = self.coordinatorBuilder.home
-         start(coordinator)
-     }
 
     private func dismissModal() {
         root.dismiss(

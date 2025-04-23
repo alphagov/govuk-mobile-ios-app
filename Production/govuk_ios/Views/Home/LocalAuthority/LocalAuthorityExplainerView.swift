@@ -3,12 +3,11 @@ import GOVKit
 import UIComponents
 
 struct LocalAuthorityExplainerView: View {
-    @StateObject private var viewModel: LocalAuthorityViewModel
+    private var viewModel: LocalAuthorityExplainerViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @Environment(\.dismiss) var dismiss
 
-    init(viewModel: LocalAuthorityViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: LocalAuthorityExplainerViewModel) {
+        self.viewModel = viewModel
     }
     var body: some View {
             VStack {
@@ -44,12 +43,9 @@ struct LocalAuthorityExplainerView: View {
                     }
                     .accessibilityElement(children: .contain)
                 }
-                NavigationLink(destination: LocalAuthorityPostcodeEntryView(
-                    viewModel: viewModel)) {
-                        PrimaryButtonView(
-                            viewModel: viewModel.explainerViewPrimaryButtonViewModel
-                        )
-                    }
+                PrimaryButtonView(
+                    viewModel: viewModel.explainerViewPrimaryButtonViewModel
+                )
             }.navigationTitle(viewModel.navigationTitle)
                 .toolbar {
                     cancelButton
@@ -62,7 +58,7 @@ struct LocalAuthorityExplainerView: View {
     private var cancelButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button(viewModel.cancelButtonTitle) {
-                dismiss()
+                viewModel.dismissAction()
             }
             .foregroundColor(Color(UIColor.govUK.text.link))
         }

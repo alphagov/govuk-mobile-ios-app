@@ -23,7 +23,7 @@ struct LocalAuthorityViewModelTests {
         let expectedResult = LocalAuthoritiesList(addresses: addresses)
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             trackWidgetTapAction: { }
@@ -57,7 +57,7 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
 
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             trackWidgetTapAction: { }
@@ -101,7 +101,7 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
 
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             trackWidgetTapAction: { }
@@ -129,7 +129,7 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .success(expectedResult)
 
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             trackWidgetTapAction: { }
@@ -152,7 +152,7 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.apiUnavailable)
 
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             trackWidgetTapAction: { }
@@ -175,7 +175,7 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.decodingError)
 
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             trackWidgetTapAction: { }
@@ -198,7 +198,7 @@ struct LocalAuthorityViewModelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalResult = .failure(.networkUnavailable)
 
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             trackWidgetTapAction: { }
@@ -218,7 +218,7 @@ struct LocalAuthorityViewModelTests {
     @Test
     func explainerViewPrimaryButtonViewModel_action_trackNavigationEvent() async throws {
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
             trackWidgetTapAction: { }
@@ -231,7 +231,7 @@ struct LocalAuthorityViewModelTests {
     @Test
     func postcodeEntryViewPrimaryButtonViewModel_action_trackNavigationEvent() async throws {
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = LocalAuthorityViewModel(
+        let sut = LocalAuthorityExplainerViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
             trackWidgetTapAction: { }

@@ -1,20 +1,18 @@
 import SwiftUI
-import UIKit
 import Foundation
 import UIComponents
 
-
 struct LocalAuthorityWidgetView: View {
-    @State private var showingSheet = false
-    @StateObject private var viewModel: LocalAuthorityViewModel
+    private var viewModel: LocalAuthorityWidgetViewModel
 
-    init(viewModel: LocalAuthorityViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: LocalAuthorityWidgetViewModel) {
+        self.viewModel = viewModel
     }
+
     var body: some View {
         VStack {
             HStack {
-                Text(viewModel.widgetViewTitleOne)
+                Text(viewModel.titleOne)
                     .font(Font.govUK.bodySemibold)
                 Spacer()
             }
@@ -22,8 +20,8 @@ struct LocalAuthorityWidgetView: View {
             HStack {
                 Image("local_widget_icon", bundle: .main)
                 VStack(alignment: .leading) {
-                    Text(viewModel.widgetViewTitleTwo).font(Font.govUK.bodySemibold)
-                    Text(viewModel.widgetViewDescription)
+                    Text(viewModel.titleTwo).font(Font.govUK.bodySemibold)
+                    Text(viewModel.description)
                         .font(Font.govUK.subheadline)
                         .foregroundColor(
                             Color(
@@ -39,10 +37,7 @@ struct LocalAuthorityWidgetView: View {
                 .ignoresSafeArea()
         }
         .onTapGesture {
-            viewModel.trackWidgetTap()
-            showingSheet.toggle()
-        }.sheet(isPresented: $showingSheet) {
-            LocalAuthorityExplainerView(viewModel: viewModel)
+            viewModel.handleTap()
         }
     }
 }

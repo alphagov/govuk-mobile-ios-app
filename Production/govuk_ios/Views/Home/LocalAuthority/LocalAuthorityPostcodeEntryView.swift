@@ -3,11 +3,10 @@ import GOVKit
 import UIComponents
 
 struct LocalAuthorityPostcodeEntryView: View {
-    @StateObject private var viewModel: LocalAuthorityViewModel
+    @StateObject private var viewModel: LocalAuthorityPostecodEntryViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @Environment(\.dismiss) var dismiss
 
-    init(viewModel: LocalAuthorityViewModel) {
+    init(viewModel: LocalAuthorityPostecodEntryViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {
@@ -45,7 +44,7 @@ struct LocalAuthorityPostcodeEntryView: View {
     private var cancelButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button(viewModel.cancelButtonTitle) {
-                dismiss()
+                viewModel.dismissView()
             }
             .foregroundColor(Color(UIColor.govUK.text.link))
         }

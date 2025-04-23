@@ -3,28 +3,18 @@ import UIComponents
 import GOVKit
 import Combine
 
-class LocalAuthorityViewModel: ObservableObject {
+class LocalAuthorityPostecodEntryViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
     @Published var localAuthority: LocalAuthority?
     @Published var localAuthorityAddressList: LocalAuthoritiesList?
     @Published var localAuthorityErrorMessage: LocalErrorMessage?
-    private let explainerPrimaryButtonTitle: String = String.localAuthority.localized(
-        "localAuthorityExplainerViewPrimaryButtonTitle"
-    )
-    @Published var showPostcodeEntryView: Bool = false
     @Published var postCode: String = ""
     @Published var shouldShowErrorMessage: Bool = false
     private let analyticsService: AnalyticsServiceInterface
     private var cancellables = Set<AnyCancellable>()
-    let navigateToPosteCodeEntry: () -> Void
+    let dismissAction: () -> Void
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
-    )
-    let explainerViewTitle: String = String.localAuthority.localized(
-        "localAuthorityExplainerViewTitle"
-    )
-    let explainerViewDescription: String = String.localAuthority.localized(
-        "localAuthorityExplainerViewDesciption"
     )
     let postcodeEntryViewDescription: String = String.localAuthority.localized(
         "localAuthrorityExplainerViewDescription"
@@ -47,22 +37,14 @@ class LocalAuthorityViewModel: ObservableObject {
     let navigationTitle: String = String.localAuthority.localized(
         "localAuthorityNavigationTitle"
     )
-    let widgetViewTitleOne: String = String.localAuthority.localized(
-        "localAuthorityWidgetViewTitle"
-    )
-    let widgetViewTitleTwo: String = String.localAuthority.localized(
-        "localAuthorityWidgetViewTitleTwo"
-    )
-    let widgetViewDescription: String = String.localAuthority.localized(
-        "localAuthorityWidgetViewDescription"
-    )
+
 
     init(service: LocalAuthorityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         navigateToPosteCodeEntry: @escaping () -> Void) {
+         dismissAction: @escaping () -> Void) {
         self.service = service
         self.analyticsService = analyticsService
-        self.navigateToPosteCodeEntry = navigateToPosteCodeEntry
+        self.dismissAction = dismissAction
         addTextFieldSubscribers()
     }
 
@@ -77,12 +59,12 @@ class LocalAuthorityViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
 
-//    func trackWidgetTap() {
-//        dismissAction()
-//    }
-
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
+    }
+
+    func dismissView() {
+        dismissAction()
     }
 
     private func trackNavigationEvent(_ title: String) {
@@ -91,18 +73,6 @@ class LocalAuthorityViewModel: ObservableObject {
             external: true
         )
         analyticsService.track(event: event)
-    }
-
-    var explainerViewPrimaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: explainerPrimaryButtonTitle,
-            action: { [weak self] in
-                guard let self = self else { return }
-                let buttonTitle = self.explainerPrimaryButtonTitle
-                self.trackNavigationEvent(buttonTitle)
-                navigateToPosteCodeEntry()
-            }
-        )
     }
 
     var postcodeEntryViewPrimaryButtonViewModel: GOVUKButton.ButtonViewModel {

@@ -56,6 +56,8 @@
 		4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */; };
 		4E00EEFB2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
+		4E038AB72DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E038AB62DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift */; };
+		4E038AB92DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E038AB82DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift */; };
 		4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D252DB0E6510089CF9E /* Authority.swift */; };
 		4E265D2B2DB0E6510089CF9E /* LocalAuthoritiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */; };
 		4E265D2C2DB0E6510089CF9E /* LocalAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D272DB0E6510089CF9E /* LocalAuthority.swift */; };
@@ -83,7 +85,7 @@
 		4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */; };
 		4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */; };
 		4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646C2D15AB05007A6E97 /* CharValidator.swift */; };
-		4EE5F3E22DAFD327008C60ED /* LocalAuthorityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E12DAFD327008C60ED /* LocalAuthorityViewModel.swift */; };
+		4EE5F3E22DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E12DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift */; };
 		4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */; };
 		4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */; };
 		4EE5F3E92DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */; };
@@ -360,6 +362,8 @@
 		4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
 		4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		4E038AB62DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityWidgetViewModel.swift; sourceTree = "<group>"; };
+		4E038AB82DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityPostcodeEntryViewModel.swift; sourceTree = "<group>"; };
 		4E265D252DB0E6510089CF9E /* Authority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
 		4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthoritiesList.swift; sourceTree = "<group>"; };
 		4E265D272DB0E6510089CF9E /* LocalAuthority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthority.swift; sourceTree = "<group>"; };
@@ -388,7 +392,7 @@
 		4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646C2D15AB05007A6E97 /* CharValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharValidator.swift; sourceTree = "<group>"; };
-		4EE5F3E12DAFD327008C60ED /* LocalAuthorityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityViewModel.swift; sourceTree = "<group>"; };
+		4EE5F3E12DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityExplainerViewModel.swift; sourceTree = "<group>"; };
 		4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityWidgetView.swift; sourceTree = "<group>"; };
 		4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityExplainerView.swift; sourceTree = "<group>"; };
 		4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityPostcodeEntryView.swift; sourceTree = "<group>"; };
@@ -923,7 +927,9 @@
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
 				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
-				4EE5F3E12DAFD327008C60ED /* LocalAuthorityViewModel.swift */,
+				4EE5F3E12DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift */,
+				4E038AB62DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift */,
+				4E038AB82DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1787,7 +1793,7 @@
 				5DC70CBD2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift in Sources */,
 				5D7D25612D141D1700BDC217 /* CompoundRedactor.swift in Sources */,
 				5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */,
-				4EE5F3E22DAFD327008C60ED /* LocalAuthorityViewModel.swift in Sources */,
+				4EE5F3E22DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift in Sources */,
 				3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */,
 				16F961A32C92FD15005CFB04 /* SearchResultCell.swift in Sources */,
 				5DD4CB182D95491600459FB5 /* RecentActivityListViewController.swift in Sources */,
@@ -1894,6 +1900,7 @@
 				1687F05D2CB035E3005E1473 /* AllTopicsViewController.swift in Sources */,
 				5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */,
 				3D3378102CAAC015004BF83F /* AppUnavailableCoordinator.swift in Sources */,
+				4E038AB72DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift in Sources */,
 				3D9C933A2CB014D800EFA337 /* AppForcedUpdateCoordinator.swift in Sources */,
 				D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */,
 				5DC250682C91D80F009E9E7F /* CrashlyticsClient.swift in Sources */,
@@ -1935,6 +1942,7 @@
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
 				5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
+				4E038AB92DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				D0D9CFD72D3030640051EDDD /* SearchHistoryViewController.swift in Sources */,

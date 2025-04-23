@@ -94,15 +94,15 @@ struct HomeViewModel {
     private var localAuthorityWidget: WidgetView? {
         guard featureEnabled(.localServices)
         else { return nil }
-        let viewModel = LocalAuthorityViewModel(
-            service: localAuthorityService,
-            analyticsService: analyticsService,
-            navigateToPosteCodeEntry: localAuthorityAction
+        let viewModel = LocalAuthorityWidgetViewModel(
+            tapAction: localAuthorityAction
         )
         let content = LocalAuthorityWidgetView(
             viewModel: viewModel
         )
-        let hostingViewController = HostingViewController(rootView: content)
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
         let widget = WidgetView(
             useContentAccessibilityInfo: true,
             backgroundColor: UIColor.govUK.fills.surfaceCardSelected,

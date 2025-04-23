@@ -117,17 +117,6 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-//    private var localAuthorityActivityCoordinator: () -> Void {
-//        return { [weak self] in
-//          //  self?.trackWidgetNavigation(text: "Pages you’ve visited")
-//            guard let self = self else { return }
-//            let coordinator = self.coordinatorBuilder.localAuthority(
-//                navigationController: self.root
-//            )
-//            start(coordinator)
-//        }
-//    }
-
     private var startTopicDetailCoordinator: (Topic) -> Void {
         return { [weak self] topic in
             self?.trackWidgetNavigation(text: topic.title)
@@ -170,14 +159,13 @@ class HomeCoordinator: TabItemCoordinator {
 
     private var presentLocalAuthorityCoordinator: () -> Void {
         return { [weak self] in
-            // self?.trackWidgetNavigation(text: "Pages you’ve visited")
-
+            self?.trackWidgetNavigation(text: "Your local services")
             guard let self = self else { return }
             let navigationController = UINavigationController()
             let coordinator = self.coordinatorBuilder.localAuthority(
                 navigationController: navigationController
             )
-            self.present(coordinator)
+            present(coordinator)
         }
     }
 

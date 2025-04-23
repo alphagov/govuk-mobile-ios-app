@@ -189,4 +189,9 @@ class ViewControllerBuilder {
         )
         return TopicOnboardingViewController(viewModel: viewModel)
     }
+
+    @MainActor
+    func webViewController(for url: URL) -> UIViewController {
+        return WebViewController(url: url)
+    }
 }

@@ -22,7 +22,7 @@ struct SettingsCoordinatorTests {
         let subject = SettingsCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: CoordinatorBuilder.mock,
             deviceInformationProvider: MockDeviceInformationProvider(),
@@ -42,7 +42,7 @@ struct SettingsCoordinatorTests {
         let subject = SettingsCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: CoordinatorBuilder.mock,
             deviceInformationProvider: MockDeviceInformationProvider(),
@@ -65,7 +65,7 @@ struct SettingsCoordinatorTests {
         let subject = SettingsCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             deviceInformationProvider: MockDeviceInformationProvider(),
@@ -88,7 +88,7 @@ struct SettingsCoordinatorTests {
         let subject = SettingsCoordinator(
             navigationController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             deviceInformationProvider: MockDeviceInformationProvider(),
@@ -107,7 +107,7 @@ struct SettingsCoordinatorTests {
         let subject = SettingsCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: viewControllerBuilder,
-            deeplinkStore: DeeplinkDataStore(routes: []),
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: CoordinatorBuilder.mock,
             deviceInformationProvider: MockDeviceInformationProvider(),

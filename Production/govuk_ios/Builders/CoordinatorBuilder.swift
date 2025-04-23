@@ -18,11 +18,16 @@ class CoordinatorBuilder {
     }
 
     var home: TabItemCoordinator {
-        HomeCoordinator(
-            navigationController: UINavigationController.home,
+        let navigationController = UINavigationController.home
+
+        return HomeCoordinator(
+            navigationController: navigationController,
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: DeeplinkDataStore.home(coordinatorBuilder: self),
+            deeplinkStore: DeeplinkDataStore.home(
+                coordinatorBuilder: self,
+                root: navigationController
+            ),
             analyticsService: container.analyticsService.resolve(),
             configService: container.appConfigService.resolve(),
             topicsService: container.topicsService.resolve(),
@@ -34,10 +39,15 @@ class CoordinatorBuilder {
     }
 
     var settings: TabItemCoordinator {
-        SettingsCoordinator(
-            navigationController: UINavigationController.settings,
+        let navigationController = UINavigationController.settings
+
+        return SettingsCoordinator(
+            navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
-            deeplinkStore: DeeplinkDataStore.settings(coordinatorBuilder: self),
+            deeplinkStore: DeeplinkDataStore.settings(
+                coordinatorBuilder: self,
+                root: navigationController
+            ),
             analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
             deviceInformationProvider: DeviceInformationProvider(),
@@ -187,6 +197,14 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             notificationService: container.notificationService.resolve(),
             completeAction: completionAction
+        )
+    }
+
+    func webView(url: URL) -> BaseCoordinator {
+        WebViewCoordinator(
+            navigationController: UINavigationController(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            url: url
         )
     }
 }

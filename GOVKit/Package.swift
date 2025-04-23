@@ -38,10 +38,7 @@ let package = Package(
         ),
         .testTarget(
             name: "GOVKitTests",
-            dependencies: ["GOVKit", "GOVKitTestUtilities"],
-            resources: [
-                .process("Resources")
-            ]
+            dependencies: ["GOVKit", "GOVKitTestUtilities"]
         ),
     ]
 )

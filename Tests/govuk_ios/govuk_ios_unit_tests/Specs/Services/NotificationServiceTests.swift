@@ -120,4 +120,89 @@ class NotificationServiceTests {
         )
         #expect(await sut.permissionState == .notDetermined)
     }
+
+    @Test
+    func addClickListener_assignsOnClick() {
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter()
+        )
+        let onClickAction: ((URL) -> Void)? = { _ in }
+        sut.addClickListener(
+            onClickAction: onClickAction!
+        )
+        #expect(sut.onClickAction != nil)
+    }
+
+    @Test
+    func handleAdditionalData_whenAdditionalDataIsNil_doesNotCallOnClickAction() {
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter()
+        )
+
+        var didOnClickAction = false
+        sut.onClickAction = { _ in
+            didOnClickAction = true
+        }
+
+        let additionalData: [AnyHashable: Any]? = nil
+        sut.handleAdditionalData(additionalData)
+
+        #expect(didOnClickAction == false)
+    }
+
+    @Test
+    func handleAdditionalData_whenAdditionalDataIsEmpty_doesNotCallOnClickAction() {
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter()
+        )
+
+        var didOnClickAction = false
+        sut.onClickAction = { _ in
+            didOnClickAction = true
+        }
+
+        let additionalData: [AnyHashable: Any]? = [:]
+        sut.handleAdditionalData(additionalData)
+
+        #expect(didOnClickAction == false)
+    }
+
+    @Test
+    func handleAdditionalData_whenAdditionalDataDeeplinkCannotBeParsedToAUrl_doesNotCallOnClickAction() {
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter()
+        )
+
+        var didOnClickAction = false
+        sut.onClickAction = { _ in
+            didOnClickAction = true
+        }
+
+        let additionalData: [AnyHashable: Any]? = ["deeplink": ""]
+        sut.handleAdditionalData(additionalData)
+
+        #expect(didOnClickAction == false)
+    }
+
+    @Test
+    func handleAdditionalData_whenAdditionalDataIsValid_onClickActionHasTheCorrectUrl() {
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter()
+        )
+
+        var result: URL?
+        sut.onClickAction = { url in
+            result = url
+        }
+
+        let additionalData: [AnyHashable: Any]? = ["deeplink": "scheme://host"]
+        sut.handleAdditionalData(additionalData)
+
+        #expect(result?.absoluteString == "scheme://host")
+    }
 }

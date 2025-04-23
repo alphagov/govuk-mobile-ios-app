@@ -6,7 +6,10 @@ import GOVKit
 
 @Suite
 struct AppEvent_TopicsTests {
-    @Test(arguments:[true, false])
+    @Test(arguments:[
+        true,
+        false
+    ])
     func toggleTopic_returnsExpectedResult(isFavourite: Bool) {
         let expectedTitle = UUID().uuidString
         let expectedValue = isFavourite ? "On" : "Off"

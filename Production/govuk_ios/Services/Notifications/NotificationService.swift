@@ -8,14 +8,16 @@ import OneSignalFramework
 protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: (() -> Void)?)
+    func addClickListener(onClickAction: @escaping (URL) -> Void)
     var shouldRequestPermission: Bool { get async }
     var permissionState: NotificationPermissionState { get async }
     var isFeatureEnabled: Bool { get }
 }
 
-class NotificationService: NotificationServiceInterface {
+class NotificationService: NSObject, NotificationServiceInterface, OSNotificationClickListener {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
+    var onClickAction: ((URL) -> Void)?
 
     init(environmentService: AppEnvironmentServiceInterface,
          notificationCenter: UserNotificationCenterInterface) {
@@ -72,5 +74,21 @@ class NotificationService: NotificationServiceInterface {
         completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
     ) {
         completion(.success(Onboarding.notificationSlides))
+    }
+
+    func addClickListener(onClickAction: @escaping (URL) -> Void) {
+        OneSignal.Notifications.addClickListener(self)
+        self.onClickAction = onClickAction
+    }
+
+    func onClick(event: OSNotificationClickEvent) {
+        handleAdditionalData(event.notification.additionalData)
+    }
+
+    func handleAdditionalData(_ additionalData: [AnyHashable: Any]?) {
+        guard let additionalData,
+              let deeplinkStr = additionalData["deeplink"] as? String,
+              let deeplink = URL(string: deeplinkStr) else { return }
+        onClickAction?(deeplink)
     }
 }

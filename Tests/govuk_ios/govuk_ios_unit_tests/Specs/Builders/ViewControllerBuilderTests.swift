@@ -149,4 +149,13 @@ struct ViewControllerBuilderTests {
 
         #expect(result is TopicOnboardingViewController)
     }
+
+    @Test
+    func webViewController_returnsExpectedViewController() {
+        let subject = ViewControllerBuilder()
+        let testURL = URL(string: "https://www.gov.uk")!
+        let viewController = subject.webViewController(for: testURL)
+
+        #expect(viewController is WebViewController)
+    }
 }

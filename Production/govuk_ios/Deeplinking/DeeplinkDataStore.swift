@@ -1,13 +1,11 @@
 import Foundation
+import UIKit
 
 typealias URLPattern = String
 
 struct DeeplinkDataStore {
-    private let routes: [DeeplinkRoute]
-
-    init(routes: [DeeplinkRoute]) {
-        self.routes = routes
-    }
+    let routes: [DeeplinkRoute]
+    let root: UIViewController
 
     func route(for url: URL,
                parent: BaseCoordinator) -> ResolvedDeeplinkRoute? {

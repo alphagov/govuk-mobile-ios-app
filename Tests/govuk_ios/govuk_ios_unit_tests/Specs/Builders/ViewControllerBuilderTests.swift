@@ -149,4 +149,28 @@ struct ViewControllerBuilderTests {
 
         #expect(result is TopicOnboardingViewController)
     }
+
+    @Test
+    func localAuthorityPostcodeEntryView_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.localAuthorityPostcodeEntryView(
+            analyticsService: MockAnalyticsService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            dismissAction: {}
+        )
+        let rootView = (result as? HostingViewController<LocalAuthorityPostcodeEntryView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func localAuthorityExaplainerView_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.localAuthorityExplainerView(
+            analyticsService: MockAnalyticsService(),
+            navigateToPostCodeEntryViewAction: {},
+            dismissAction: {}
+        )
+        let rootView = (result as? HostingViewController<LocalAuthorityExplainerView>)?.rootView
+        #expect(rootView != nil)
+    }
 }

@@ -19,7 +19,7 @@ class LocalAuthorityExplainerViewModel {
         "localAuthorityNavigationTitle"
     )
     private let analyticsService: AnalyticsServiceInterface
-    private let navigateToPosteCodeEntry: () -> Void
+    private let navigateToPostcodeEntry: () -> Void
     let dismissAction: () -> Void
 
 
@@ -27,7 +27,7 @@ class LocalAuthorityExplainerViewModel {
          navigateToPostcodeEntry: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
-        self.navigateToPosteCodeEntry = navigateToPostcodeEntry
+        self.navigateToPostcodeEntry = navigateToPostcodeEntry
         self.dismissAction = dismissAction
     }
 
@@ -50,7 +50,7 @@ class LocalAuthorityExplainerViewModel {
                 guard let self = self else { return }
                 let buttonTitle = self.explainerPrimaryButtonTitle
                 self.trackNavigationEvent(buttonTitle)
-                navigateToPosteCodeEntry()
+                navigateToPostcodeEntry()
             }
         )
     }

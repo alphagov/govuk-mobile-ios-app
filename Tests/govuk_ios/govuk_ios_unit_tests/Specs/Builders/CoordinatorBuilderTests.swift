@@ -160,7 +160,7 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.localAuthority(
-            navigationController: MockNavigationController(),
+            navigationController: mockNavigationController,
             dismissAction: {}
         )
         #expect(coordinator is LocalAuthorityServiceCoordinator)
@@ -235,6 +235,18 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is AuthenticationCoordinator)
+    }
+
+    @Test
+    func localAuthenticationOnboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.localAuthenticationOnboarding(
+            navigationController: mockNavigationController,
+            completionAction: { }
+        )
+
+        #expect(coordinator is LocalAuthenticationOnboardingCoordinator)
     }
 
     func webView_returnsExpectedResult() {

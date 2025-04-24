@@ -1,0 +1,127 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "localAthorityPostcodeEntryViewExampleText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For example SW1A 2AA"
+          }
+        }
+      }
+    },
+    "localAuthorityExplainerViewDesciption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We’ll use your postcode to add a link from the app home page to your local council's website"
+          }
+        }
+      }
+    },
+    "localAuthorityExplainerViewPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "localAuthorityExplainerViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local services"
+          }
+        }
+      }
+    },
+    "localAuthoritypostcodeEntryPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm postcode"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewDescriptionBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We only use your postcode to find out what your local council is. It’s not saved or shared anywhere.\n\nYour local council is only kept on your phone. It’s not saved online or shared with any other organisations. You can update it at any time on the app home page."
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewDescriptionTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How we use this information?"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is your postcode?"
+          }
+        }
+      }
+    },
+    "localAuthorityWidgetViewDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your postcode to see services for your area"
+          }
+        }
+      }
+    },
+    "localAuthorityWidgetViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For you"
+          }
+        }
+      }
+    },
+    "localAuthorityWidgetViewTitleTwo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local services"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

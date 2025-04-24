@@ -61,6 +61,26 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedEditTopicsViewController ?? UIViewController()
     }
 
+    var _stubbedLocalAuthortiyPostcodeEntryViewController: UIViewController?
+    var _receivedLocalAuthorityDismissAction: (() -> Void)?
+    override func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
+                                                  localAuthorityService: LocalAuthorityServiceInterface,
+                                                  dismissAction: @escaping () -> Void) -> UIViewController {
+        _receivedLocalAuthorityDismissAction = dismissAction
+        return _stubbedLocalAuthortiyPostcodeEntryViewController ?? UIViewController()
+    }
+
+    var _stubbedLocalAuthorityExplainerViewController: UIViewController?
+    var _receivedNavigateToPostCodeEntryViewAction: (() -> Void)?
+    var _receivedLocalAuthorityExplainerDismissAction: (() -> Void)?
+    override func localAuthorityExplainerView(analyticsService: AnalyticsServiceInterface,
+                                              navigateToPostCodeEntryViewAction: @escaping () -> Void,
+                                              dismissAction: @escaping () -> Void) -> UIViewController {
+        _receivedNavigateToPostCodeEntryViewAction = navigateToPostCodeEntryViewAction
+        _receivedLocalAuthorityExplainerDismissAction = dismissAction
+        return _stubbedLocalAuthorityExplainerViewController ?? UIViewController()
+    }
+
     var _stubbedAllTopicsViewController: UIViewController?
     var _receivedTopicAction: ((Topic) -> Void)?
     override func allTopics(analyticsService: AnalyticsServiceInterface,

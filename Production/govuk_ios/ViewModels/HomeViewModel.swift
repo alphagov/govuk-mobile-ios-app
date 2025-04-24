@@ -1,18 +1,21 @@
 import Foundation
 import UIKit
 import GOVKit
+import UIComponents
 
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
+    let localAuthorityAction: () -> Void
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
+    let localAuthorityService: LocalAuthorityServiceInterface
 
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
@@ -25,6 +28,7 @@ struct HomeViewModel {
     var widgets: [WidgetView] {
         get async {
             await [
+                localAuthorityWidget,
                 notificationsWidget,
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
@@ -83,6 +87,28 @@ struct HomeViewModel {
         )
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.addContent(content)
+        return widget
+    }
+
+    @MainActor
+    private var localAuthorityWidget: WidgetView? {
+        guard featureEnabled(.localServices)
+        else { return nil }
+        let viewModel = LocalAuthorityWidgetViewModel(
+            tapAction: localAuthorityAction
+        )
+        let content = LocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        let widget = WidgetView(
+            useContentAccessibilityInfo: true,
+            backgroundColor: UIColor.govUK.fills.surfaceCardSelected,
+            borderColor: UIColor.govUK.strokes.cardGreen.cgColor
+        )
+        widget.addContent(hostingViewController.view)
         return widget
     }
 

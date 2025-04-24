@@ -156,6 +156,17 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
+    func localAuhority_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.localAuthority(
+            navigationController: MockNavigationController(),
+            dismissAction: {}
+        )
+        #expect(coordinator is LocalAuthorityServiceCoordinator)
+    }
+
+    @Test
     func allTopics_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()

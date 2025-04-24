@@ -13,6 +13,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationAlertButtonTitle: String { get }
     var notificationsAction: (() -> Void)? { get set }
     func updateNotificationPermissionState()
+    var signoutAction: (() -> Void)? { get set }
 }
 
 // swiftlint:disable:next type_body_length
@@ -32,6 +33,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     var notificationAlertButtonTitle: String = String.settings.localized(
         "notificationAlertPrimaryButtonTitle"
     )
+    var signoutAction: (() -> Void)?
     private var accountEmail: String?
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -142,8 +144,8 @@ class SettingsViewModel: SettingsViewModelInterface {
                     body: "",
                     accessibilityHint: "",
                     destructive: true,
-                    action: {
-                        print("Signing out")
+                    action: { [weak self] in
+                        self?.handleSignOutPressed()
                     }
                 )
             ],
@@ -160,7 +162,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                     body: nil,
                     detail: versionProvider.fullBuildNumber ?? "-"
                 ),
-                helpAndFeedbackRow(),
+                helpAndFeedbackRow()
             ],
             footer: nil
         )
@@ -279,6 +281,16 @@ class SettingsViewModel: SettingsViewModelInterface {
         } else {
             displayNotificationSettingsAlert.toggle()
         }
+    }
+
+    private func handleSignOutPressed() {
+        trackNavigationEvent(
+            String.settings.localized(
+                String.settings.localized("signOutRowTitle")
+            ),
+            external: false
+        )
+        signoutAction?()
     }
 
     private func termsAndConditionsRow() -> GroupedListRow {

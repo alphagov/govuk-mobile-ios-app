@@ -244,6 +244,16 @@ class CoordinatorBuilder {
         )
     }
 
+    func signOut(navigationController: UINavigationController,
+                 completion: @escaping () -> Void) -> BaseCoordinator {
+        SignOutCoordinator(
+            navigationController: UINavigationController(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            completion: completion
+        )
+    }
+
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(
             navigationController: UINavigationController(),

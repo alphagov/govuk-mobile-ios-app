@@ -34,6 +34,9 @@ class SettingsCoordinator: TabItemCoordinator {
         self.settingsViewModel.notificationsAction = { [weak self] in
             self?.startNotificationsSettings()
         }
+        self.settingsViewModel.signoutAction = { [weak self] in
+            self?.startSignOut()
+        }
     }
 
     override func start(url: URL?) {
@@ -62,5 +65,15 @@ class SettingsCoordinator: TabItemCoordinator {
             }
         )
         start(coordinator)
+    }
+
+    private func startSignOut() {
+        let coordinator = coordinatorBuilder.signOut(
+            navigationController: root,
+            completion: { [weak self] in
+                self?.root.dismiss(animated: true)
+            }
+        )
+        present(coordinator)
     }
 }

@@ -28,13 +28,15 @@ struct ViewControllerBuilderTests {
             notificationService: MockNotificationService(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            topicWidgetViewModel: viewModel
+            topicWidgetViewModel: viewModel,
+            localAuthorityService: MockLocalAuthorityService()
         )
 
         let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: {},
             notificationsAction: {},
-            recentActivityAction: {}
+            recentActivityAction: {},
+            localAuthorityAction: {}
         )
 
         let result = subject.home(dependencies: dependencies, actions: actions)
@@ -149,11 +151,34 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func webViewController_returnsExpectedViewController() {
+    func localAuthorityPostcodeEntryView_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
-        let testURL = URL(string: "https://www.gov.uk")!
-        let viewController = subject.webViewController(for: testURL)
+        let result = subject.localAuthorityPostcodeEntryView(
+            analyticsService: MockAnalyticsService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            dismissAction: {}
+        )
+        let rootView = (result as? HostingViewController<LocalAuthorityPostcodeEntryView>)?.rootView
+        #expect(rootView != nil)
+    }
 
-        #expect(viewController is WebViewController)
+    @Test
+    func localAuthorityExaplainerView_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.localAuthorityExplainerView(
+            analyticsService: MockAnalyticsService(),
+            navigateToPostCodeEntryViewAction: {},
+            dismissAction: {}
+        )
+        let rootView = (result as? HostingViewController<LocalAuthorityExplainerView>)?.rootView
+        #expect(rootView != nil)
+
+        func webViewController_returnsExpectedViewController() {
+            let subject = ViewControllerBuilder()
+            let testURL = URL(string: "https://www.gov.uk")!
+            let viewController = subject.webViewController(for: testURL)
+
+            #expect(viewController is WebViewController)
+        }
     }
 }

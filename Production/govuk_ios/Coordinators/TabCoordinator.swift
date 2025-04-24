@@ -83,6 +83,7 @@ class TabCoordinator: BaseCoordinator,
     private func selectTabIndex(for navigationController: UINavigationController) {
         let index = tabController.viewControllers?.firstIndex(of: navigationController)
         tabController.selectedIndex = index ?? 0
+        currentTabIndex = tabController.selectedIndex
     }
 
     func tabBarController(_ tabBarController: UITabBarController,

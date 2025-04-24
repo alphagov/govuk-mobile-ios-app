@@ -37,6 +37,15 @@ extension Container {
         }
     }
 
+    var localAuthorityService: Factory<LocalAuthorityServiceInterface> {
+        Factory(self) {
+            LocalAuthorityService(
+                serviceClient: self.localAuthorityServiceClient(),
+                repository: self.localAuthorityRepository()
+            )
+        }
+    }
+
     var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
         Factory(self) {
             AnalyticsService(

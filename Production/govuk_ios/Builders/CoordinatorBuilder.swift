@@ -34,7 +34,8 @@ class CoordinatorBuilder {
             notificationService: container.notificationService.resolve(),
             deviceInformationProvider: DeviceInformationProvider(),
             searchService: container.searchService.resolve(),
-            activityService: container.activityService.resolve()
+            activityService: container.activityService.resolve(),
+            localAuthorityService: container.localAuthorityService.resolve()
         )
     }
 
@@ -164,6 +165,18 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             coordinatorBuilder: self,
             topicsService: container.topicsService.resolve()
+        )
+    }
+
+    func localAuthority(navigationController: UINavigationController,
+                        dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        LocalAuthorityServiceCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            localAuthorityService: container.localAuthorityService.resolve(),
+            coordinatorBuilder: self,
+            dismissed: dismissAction
         )
     }
 

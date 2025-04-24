@@ -24,12 +24,14 @@ class ViewControllerBuilder {
         let searchService: SearchServiceInterface
         let activityService: ActivityServiceInterface
         let topicWidgetViewModel: TopicsWidgetViewModel
+        let localAuthorityService: LocalAuthorityServiceInterface
     }
 
     struct HomeActions {
         let feedbackAction: () -> Void
         let notificationsAction: () -> Void
         let recentActivityAction: () -> Void
+        let localAuthorityAction: () -> Void
     }
 
     @MainActor
@@ -39,12 +41,14 @@ class ViewControllerBuilder {
             configService: dependencies.configService,
             notificationService: dependencies.notificationService,
             topicWidgetViewModel: dependencies.topicWidgetViewModel,
+            localAuthorityAction: actions.localAuthorityAction,
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
-            activityService: dependencies.activityService
+            activityService: dependencies.activityService,
+            localAuthorityService: dependencies.localAuthorityService
         )
         return HomeViewController(
             viewModel: viewModel
@@ -78,6 +82,36 @@ class ViewControllerBuilder {
         return RecentActivityListViewController(
             viewModel: viewModel
         )
+    }
+
+    @MainActor
+    func localAuthorityExplainerView(analyticsService: AnalyticsServiceInterface,
+                                     navigateToPostCodeEntryViewAction: @escaping () -> Void,
+                                     dismissAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = LocalAuthorityExplainerViewModel(
+            analyticsService: analyticsService,
+            navigateToPostcodeEntry: navigateToPostCodeEntryViewAction,
+            dismissAction: dismissAction
+        )
+        let view = LocalAuthorityExplainerView(
+            viewModel: viewModel
+        )
+        return HostingViewController(rootView: view)
+    }
+
+    @MainActor
+    func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
+                                         localAuthorityService: LocalAuthorityServiceInterface,
+                                         dismissAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+            service: localAuthorityService,
+            analyticsService: analyticsService,
+            dismissAction: dismissAction
+        )
+        let view = LocalAuthorityPostcodeEntryView(
+            viewModel: viewModel
+        )
+        return HostingViewController(rootView: view)
     }
 
     @MainActor

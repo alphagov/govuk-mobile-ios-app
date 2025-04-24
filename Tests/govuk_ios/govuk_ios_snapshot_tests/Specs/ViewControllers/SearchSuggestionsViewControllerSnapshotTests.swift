@@ -47,7 +47,6 @@ final class SearchSuggestionsViewControllerSnapshotTests: SnapshotTestCase {
             viewModel: viewModel,
             selectionAction: { _ in }
         )
-
         VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .dark

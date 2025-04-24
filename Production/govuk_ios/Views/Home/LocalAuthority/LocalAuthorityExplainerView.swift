@@ -14,11 +14,7 @@ struct LocalAuthorityExplainerView: View {
             ScrollView {
                 VStack {
                     if verticalSizeClass != .compact {
-                        let imageResource = ImageResource(
-                            name: "onboarding_screen_1",
-                            bundle: .main
-                        )
-                        Image(imageResource)
+                        Image("onboarding_screen_1")
                             .scaledToFit()
                             .frame(width: 290, height: 290)
                     }
@@ -28,16 +24,14 @@ struct LocalAuthorityExplainerView: View {
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .accessibilityLabel(Text(viewModel.explainerViewTitle))
-                        .padding([.trailing, .leading], 16)
+                        .padding([.horizontal], 16)
                         .padding(.bottom, 4)
                         .accessibilityAddTraits(.isHeader)
                         .accessibilitySortPriority(1)
                     Text(viewModel.explainerViewDescription)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .padding([.leading, .trailing], 16)
+                        .padding([.horizontal], 16)
                         .multilineTextAlignment(.center)
-                        .accessibilityLabel(Text(viewModel.explainerViewDescription))
                         .accessibilitySortPriority(0)
                     Spacer()
                 }

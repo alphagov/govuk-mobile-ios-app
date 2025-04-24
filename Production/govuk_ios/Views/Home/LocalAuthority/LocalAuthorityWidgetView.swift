@@ -18,9 +18,10 @@ struct LocalAuthorityWidgetView: View {
             }
             Divider().overlay(Color(cgColor: UIColor.govUK.strokes.cardGreen.cgColor))
             HStack {
-                Image("local_widget_icon", bundle: .main)
+                Image("local_widget_icon")
                 VStack(alignment: .leading) {
-                    Text(viewModel.titleTwo).font(Font.govUK.bodySemibold)
+                    Text(viewModel.titleTwo)
+                        .font(Font.govUK.bodySemibold)
                     Text(viewModel.description)
                         .font(Font.govUK.subheadline)
                         .foregroundColor(

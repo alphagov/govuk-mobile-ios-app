@@ -17,11 +17,9 @@ struct LocalAuthorityPostcodeEntryView: View {
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .font(.title)
                         .fontWeight(.bold)
-                        .accessibilityLabel(Text(viewModel.postcodeEntryViewTitle))
                         .accessibilityAddTraits(.isHeader)
-                    Text(viewModel.postcodeEntryViewExampleText).foregroundColor(
-                        Color(UIColor.govUK.text.secondary)
-                    )
+                    Text(viewModel.postcodeEntryViewExampleText)
+                        .foregroundColor(Color(UIColor.govUK.text.secondary))
                     TextField("", text: $viewModel.postCode)
                         .textFieldStyle(.customTextFieldBorder)
                     Text(viewModel.postcodeEntryViewDescriptionTitle)

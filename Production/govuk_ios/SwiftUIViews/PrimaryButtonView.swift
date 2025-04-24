@@ -23,7 +23,7 @@ struct PrimaryButtonView: View {
                     minHeight: 44,
                     idealHeight: 44
                 )
-            .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
+                .padding([.horizontal], verticalSizeClass == .regular ? 16 : 0)
         }
         .accessibilityElement(children: .contain)
     }

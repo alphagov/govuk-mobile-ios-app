@@ -12,17 +12,6 @@
         }
       }
     },
-    "localAuthorityCancelbuttonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        }
-      }
-    },
     "localAuthorityExplainerViewDesciption" : {
       "extractionState" : "manual",
       "localizations" : {

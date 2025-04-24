@@ -3,6 +3,7 @@ import Factory
 import Onboarding
 import GOVKit
 
+import SecureStore
 import Firebase
 import FirebaseCrashlytics
 
@@ -113,6 +114,40 @@ extension Container {
             NotificationService(
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current()
+            )
+        }
+    }
+
+    var authenticationOnboardingService: Factory<AuthenticationOnboardingServiceInterface> {
+        Factory(self) {
+            AuthenticationOnboardingService(
+                userDefaults: UserDefaults.standard
+            )
+        }
+    }
+
+    @MainActor
+    var authenticationService: Factory<AuthenticationServiceInterface> {
+        Factory(self) {
+            AuthenticationService(
+                authenticationServiceClient: self.authenticationServiceClient.resolve(),
+                secureStoreService: self.secureStoreService.resolve()
+            )
+        }.scope(.singleton)
+    }
+
+    var secureStoreService: Factory<SecureStorable> {
+        Factory(self) {
+            SecureStoreService(
+                configuration: self.secureStoreConfiguration.resolve()
+            )
+        }
+    }
+
+    var localAuthenticationService: Factory<LocalAuthenticationServiceInterface> {
+        Factory(self) {
+            LocalAuthenticationService(
+                userDefaults: UserDefaults.standard
             )
         }
     }

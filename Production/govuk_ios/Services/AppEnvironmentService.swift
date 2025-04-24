@@ -3,11 +3,13 @@ import Foundation
 protocol AppEnvironmentServiceInterface {
     var baseURL: URL { get }
     var oneSignalAppId: String { get }
+    var authenticationClientId: String { get }
 }
 
 enum AppEnvironmentKey: String {
     case baseURL = "BaseURL"
     case oneSignalAppId = "ONESIGNAL_APP_ID"
+    case authenticationClientId = "AUTHENTICATION_CLIENT_ID"
 }
 
 struct AppEnvironmentService: AppEnvironmentServiceInterface {
@@ -24,6 +26,10 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
 
     var oneSignalAppId: String {
         string(for: .oneSignalAppId)
+    }
+
+    var authenticationClientId: String {
+        string(for: .authenticationClientId)
     }
 
     private func string(for key: AppEnvironmentKey) -> String {

@@ -213,6 +213,37 @@ class CoordinatorBuilder {
         )
     }
 
+    func authenticationOnboarding(navigationController: UINavigationController,
+                                  completionAction: @escaping () -> Void) -> BaseCoordinator {
+        AuthenticationOnboardingCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.onboardingAnalyticsService.resolve(),
+            authenticationOnboardingService: container.authenticationOnboardingService.resolve(),
+            coordinatorBuilder: self,
+            completionAction: completionAction
+        )
+    }
+
+    func authentication(navigationController: UINavigationController,
+                        completionAction: @escaping () -> Void) -> BaseCoordinator {
+        AuthenticationCoordinator(
+            navigationController: navigationController,
+            authenticationService: container.authenticationService.resolve(),
+            completionAction: completionAction
+        )
+    }
+
+    func localAuthenticationOnboarding(navigationController: UINavigationController,
+                                       completionAction: @escaping () -> Void) -> BaseCoordinator {
+        LocalAuthenticationOnboardingCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
+            authenticationService: container.authenticationService.resolve(),
+            completionAction: completionAction
+        )
+    }
+
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(
             navigationController: UINavigationController(),

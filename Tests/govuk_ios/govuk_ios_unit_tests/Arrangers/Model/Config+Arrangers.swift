@@ -12,14 +12,16 @@ extension Config {
                         recommendedVersion: String = "0.0.1",
                         releaseFlags: [String: Bool] = [:],
                         lastUpdated: String = "test",
-                        searchApiUrl: String? = nil) -> Config {
+                        searchApiUrl: String? = nil,
+                        authenticationIssuerBaseUrl: String = "https://test.com") -> Config {
         .init(
             available: available,
             minimumVersion: minimumVersion,
             recommendedVersion: recommendedVersion,
             releaseFlags: releaseFlags,
             lastUpdated: lastUpdated,
-            searchApiUrl: searchApiUrl
+            searchApiUrl: searchApiUrl,
+            authenticationIssuerBaseUrl: authenticationIssuerBaseUrl
         )
     }
 }

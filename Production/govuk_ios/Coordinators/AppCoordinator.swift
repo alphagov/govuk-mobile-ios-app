@@ -89,7 +89,7 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.onboarding(
             navigationController: root,
             dismissAction: { [weak self] in
-                self?.startTopicOnboardingCoordinator(url: url)
+                self?.startAuthenticationOnboardingCoordinator(url: url)
             }
         )
         start(coordinator)
@@ -100,6 +100,26 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             didDismissAction: { [weak self] in
                 self?.startNotificationOnboardingCoordinator(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startAuthenticationOnboardingCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.authenticationOnboarding(
+            navigationController: root,
+            completionAction: { [weak self] in
+                self?.startLocalAuthenticationOnboardingCoordinator(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startLocalAuthenticationOnboardingCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.localAuthenticationOnboarding(
+            navigationController: root,
+            completionAction: { [weak self] in
+                self?.startTopicOnboardingCoordinator(url: url)
             }
         )
         start(coordinator)

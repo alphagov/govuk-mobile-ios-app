@@ -1,4 +1,6 @@
 import Foundation
+import Authentication
+import AppAuth
 
 import Factory
 
@@ -28,6 +30,16 @@ extension Container {
         }
     }
 
+    @MainActor
+    var authenticationServiceClient: Factory<AuthenticationServiceClient> {
+        Factory(self) {
+            AuthenticationServiceClient(
+                appEnvironmentService: self.appEnvironmentService.resolve(),
+                appAuthSession: AppAuthSessionWrapper(),
+                oidConfigService: OIDAuthorizationServiceWrapper()
+            )
+        }
+    }
 
     var localAuthorityServiceClient: Factory<LocalAuthorityServiceClientInterface> {
         Factory(self) {

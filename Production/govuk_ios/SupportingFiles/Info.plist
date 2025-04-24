@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AUTHENTICATION_CLIENT_ID</key>
+	<string>$(AUTHENTICATION_CLIENT_ID)</string>
 	<key>OneSignal_suppress_launch_urls</key>
 	<true/>
 	<key>BaseURL</key>
@@ -42,6 +44,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Your FaceID is not shared with GOV.UK</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

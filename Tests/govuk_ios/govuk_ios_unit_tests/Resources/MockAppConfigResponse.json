@@ -4,6 +4,7 @@
     "available": true,
     "minimumVersion": "0.0.1",
     "recommendedVersion": "0.0.1",
+    "authenticationIssuerBaseUrl": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_fIJ6F25Zh",
     "releaseFlags": {
       "onboarding": true,
       "search": true

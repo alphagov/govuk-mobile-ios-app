@@ -15,7 +15,6 @@ class TabCoordinator: BaseCoordinator,
     private lazy var homeCoordinator = coordinatorBuilder.home
     private lazy var settingsCoordinator = coordinatorBuilder.settings
     private var currentTabIndex = 0
-    private var isTabInitialised = false
 
     private var coordinators: [TabItemCoordinator] {
         [
@@ -79,7 +78,6 @@ class TabCoordinator: BaseCoordinator,
         tabController.viewControllers = coordinators.map { $0.root }
         set([tabController], animated: false)
         coordinators.forEach { start($0) }
-        isTabInitialised = true
     }
 
     private func selectTabIndex(for navigationController: UINavigationController) {
@@ -93,8 +91,7 @@ class TabCoordinator: BaseCoordinator,
         guard let title = viewController.tabBarItem.title else { return }
         let event = AppEvent.tabNavigation(text: title)
         analyticsService.track(event: event)
-
-        if currentTabIndex == tabBarController.selectedIndex && isTabInitialised {
+        if currentTabIndex == tabBarController.selectedIndex {
             coordinators[currentTabIndex].didReselectTab()
         }
         currentTabIndex = tabBarController.selectedIndex

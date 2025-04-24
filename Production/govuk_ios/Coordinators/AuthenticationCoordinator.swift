@@ -20,7 +20,7 @@ class AuthenticationCoordinator: BaseCoordinator {
     }
 
     private func authenticate() async {
-        guard let window = self.root.view.window else {
+        guard let window = root.view.window else {
             return
         }
 

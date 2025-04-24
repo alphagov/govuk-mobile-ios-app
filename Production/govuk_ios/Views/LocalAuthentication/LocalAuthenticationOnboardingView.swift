@@ -6,7 +6,7 @@ struct LocalAuthenticationOnboardingView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     init(viewModel: LocalAuthenticationOnboardingViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {

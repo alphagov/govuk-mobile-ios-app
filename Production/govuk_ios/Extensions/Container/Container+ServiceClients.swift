@@ -33,7 +33,7 @@ extension Container {
     @MainActor
     var authenticationServiceClient: Factory<AuthenticationServiceClient> {
         Factory(self) {
-            return AuthenticationServiceClient(
+            AuthenticationServiceClient(
                 appEnvironmentService: self.appEnvironmentService.resolve(),
                 appAuthSession: AppAuthSessionWrapper(),
                 oidConfigService: OIDAuthorizationServiceWrapper()

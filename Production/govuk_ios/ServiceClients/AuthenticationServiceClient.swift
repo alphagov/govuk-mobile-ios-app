@@ -31,12 +31,8 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
                 configuration: config
             )
             return AuthenticationResult.success(tokenResponse)
-        } catch let error as AuthenticationError {
-            return AuthenticationResult.failure(error)
-        } catch let error as LoginError {
-            return AuthenticationResult.failure(.loginFlow(error))
         } catch {
-            return AuthenticationResult.failure(.generic)
+            return returnError(error)
         }
     }
 
@@ -65,6 +61,17 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
                     continuation.resume(throwing: AuthenticationError.fetchConfigError)
                 }
             }
+        }
+    }
+
+    private func returnError(_ error: Error) -> AuthenticationResult {
+        switch error {
+        case let error as AuthenticationError:
+            return AuthenticationResult.failure(error)
+        case let error as LoginError:
+            return AuthenticationResult.failure(.loginFlow(error))
+        default:
+            return AuthenticationResult.failure(.generic)
         }
     }
 }

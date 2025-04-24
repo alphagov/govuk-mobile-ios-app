@@ -164,7 +164,6 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
 
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
-                .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { error in
                     continuation.resume(returning: error)
@@ -188,7 +187,6 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
 
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
-                .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { error in
                     continuation.resume(returning: error)
@@ -212,7 +210,6 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
 
         let _: Publishers.Drop<ObservableObjectPublisher>.Output = await withCheckedContinuation { continuation in
             sut.objectWillChange
-                .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { error in
                     continuation.resume(returning: error)

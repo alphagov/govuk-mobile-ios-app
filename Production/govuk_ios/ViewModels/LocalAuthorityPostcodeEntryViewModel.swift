@@ -1,7 +1,6 @@
 import Foundation
 import UIComponents
 import GOVKit
-import Combine
 
 class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
@@ -11,7 +10,6 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     @Published var postCode: String = ""
     @Published var shouldShowErrorMessage: Bool = false
     private let analyticsService: AnalyticsServiceInterface
-    private var cancellables = Set<AnyCancellable>()
     let dismissAction: () -> Void
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
@@ -41,18 +39,6 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         self.service = service
         self.analyticsService = analyticsService
         self.dismissAction = dismissAction
-        addTextFieldSubscribers()
-    }
-
-    private func addTextFieldSubscribers() {
-        $postCode
-            .debounce(
-                for: .seconds(0.5),
-                scheduler: DispatchQueue.main
-            )
-            .sink { [weak self] postcode in
-                self?.postCode = postcode
-            }.store(in: &cancellables)
     }
 
     func trackScreen(screen: TrackableScreen) {

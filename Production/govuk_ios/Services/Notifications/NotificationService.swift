@@ -26,7 +26,6 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
     }
 
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        OneSignal.setConsentRequired(true)
         OneSignal.initialize(
             environmentService.oneSignalAppId,
             withLaunchOptions: launchOptions
@@ -65,7 +64,8 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
 
     func requestPermissions(completion: (() -> Void)?) {
         OneSignal.setConsentGiven(true)
-        OneSignal.Notifications.requestPermission({ _ in
+        OneSignal.Notifications.requestPermission({ accepted in
+            OneSignal.setConsentGiven(accepted)
             completion?()
         }, fallbackToSettings: false)
     }
@@ -88,7 +88,8 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
     func handleAdditionalData(_ additionalData: [AnyHashable: Any]?) {
         guard let additionalData,
               let deeplinkStr = additionalData["deeplink"] as? String,
-              let deeplink = URL(string: deeplinkStr) else { return }
+              let deeplink = URL(string: deeplinkStr)
+        else { return }
         onClickAction?(deeplink)
     }
 }

@@ -257,6 +257,9 @@
 		D08A9A862DB92F79002E9C78 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A852DB92F6F002E9C78 /* SignOutViewModel.swift */; };
 		D08AA4242DB94A4E002E9C78 /* BulletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AA4232DB94A4E002E9C78 /* BulletView.swift */; };
 		D08AA4262DB950F2002E9C78 /* SignOut.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */; };
+		D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */; };
+		D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */; };
+		D090467F2DBBC1ED0096EE66 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = D090467E2DBBC1ED0096EE66 /* JWTKit */; };
 		D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA622CB0499A004F489B /* EditTopicsView.swift */; };
 		D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */; };
 		D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */; };
@@ -580,6 +583,8 @@
 		D08A9A852DB92F6F002E9C78 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
 		D08AA4232DB94A4E002E9C78 /* BulletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletView.swift; sourceTree = "<group>"; };
 		D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = SignOut.xcstrings; sourceTree = "<group>"; };
+		D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenPayload.swift; sourceTree = "<group>"; };
+		D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenExtractor.swift; sourceTree = "<group>"; };
 		D093BA622CB0499A004F489B /* EditTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsView.swift; sourceTree = "<group>"; };
 		D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsViewModel.swift; sourceTree = "<group>"; };
 		D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsCoordinator.swift; sourceTree = "<group>"; };
@@ -738,6 +743,7 @@
 				D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */,
 				5DCAFA7A2D40088600C3F284 /* OneSignalFramework in Frameworks */,
 				5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				D090467F2DBBC1ED0096EE66 /* JWTKit in Frameworks */,
 				5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
 				160AEAC82DA038550072BA43 /* CryptoService in Frameworks */,
@@ -880,6 +886,7 @@
 				4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */,
 				4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */,
 				4EBE646C2D15AB05007A6E97 /* CharValidator.swift */,
+				D09046762DBBC1AC0096EE66 /* JWT */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -1511,6 +1518,15 @@
 			path = SignOut;
 			sourceTree = "<group>";
 		};
+		D09046762DBBC1AC0096EE66 /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */,
+				D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */,
+			);
+			path = JWT;
+			sourceTree = "<group>";
+		};
 		D0D9CB922D3024C00051EDDD /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1604,6 +1620,7 @@
 				160AEAC92DA038550072BA43 /* SecureStore */,
 				5D5DB7F02DB0DD3200F6FEAE /* UIComponents */,
 				164024722DB8004100C762B8 /* Onboarding */,
+				D090467E2DBBC1ED0096EE66 /* JWTKit */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1698,6 +1715,7 @@
 				160AEAC62DA038550072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */,
 				5D5DB7EF2DB0DD3200F6FEAE /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
 				164024712DB8004100C762B8 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -1905,6 +1923,8 @@
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,
 				5D9E67C22C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift in Sources */,
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
+				D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */,
+				D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5D8100892CEB3FE600EE7D15 /* AppLaunchResponse.swift in Sources */,
 				D04C54302D70821D0070EE79 /* HomeCommerceItem.swift in Sources */,
@@ -2808,6 +2828,14 @@
 				minimumVersion = 5.2.9;
 			};
 		};
+		D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/jwt-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2878,6 +2906,11 @@
 		5DDB31CB2CEF84D100E49259 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
+		};
+		D090467E2DBBC1ED0096EE66 /* JWTKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */;
+			productName = JWTKit;
 		};
 		D0D661A22D285D1B00571841 /* GOVKitTestUtilities */ = {
 			isa = XCSwiftPackageProductDependency;

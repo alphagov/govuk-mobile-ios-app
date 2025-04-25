@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 import GOVKit
 
- class LocalAuthorityServiceCoordinator: BaseCoordinator {
+class EditLocalAuthorityCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let localAuthorityService: LocalAuthorityServiceInterface
@@ -24,19 +24,6 @@ import GOVKit
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.localAuthorityExplainerView(
-            analyticsService: analyticsService,
-            navigateToPostCodeEntryViewAction: { [weak self] in
-                self?.navigateToPostcodeEntryView()
-            },
-            dismissAction: { [weak self] in
-                self?.dismissModal()
-            }
-        )
-        set(viewController, animated: true)
-    }
-
-    func navigateToPostcodeEntryView() {
         let viewController = viewControllerBuilder.localAuthorityPostcodeEntryView(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
@@ -44,19 +31,8 @@ import GOVKit
                 self?.dismissModal()
             }
         )
-        push(viewController, animated: true)
+        set(viewController, animated: true)
     }
-
-     func presentPostcodeEntryView() {
-         let viewController = viewControllerBuilder.localAuthorityPostcodeEntryView(
-            analyticsService: analyticsService,
-            localAuthorityService: localAuthorityService,
-            dismissAction: { [weak self] in
-                self?.dismissModal()
-            }
-         )
-         set(viewController, animated: true)
-     }
 
     private func dismissModal() {
         root.dismiss(
@@ -67,8 +43,8 @@ import GOVKit
         )
     }
 
-     override func finish() {
-         super.finish()
-         dismissed()
-     }
- }
+    override func finish() {
+        super.finish()
+        dismissed()
+    }
+}

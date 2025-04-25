@@ -9,6 +9,7 @@ struct HomeViewModel {
     let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let localAuthorityAction: () -> Void
+    let editLocalAuthorityAction: () -> Void
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
@@ -32,7 +33,8 @@ struct HomeViewModel {
                 notificationsWidget,
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
-                topicsWidget
+                topicsWidget,
+                personalLocalAuthortiy
             ].compactMap { $0 }
         }
     }
@@ -120,7 +122,8 @@ struct HomeViewModel {
         let viewModel = StoredLocalAuthrorityWidgetViewModel(
             analyticsService: analyticsService,
             model: localAuthority,
-            urlOpener: urlOpener
+            urlOpener: urlOpener,
+            openEditViewAction: editLocalAuthorityAction
         )
         let content = StoredLocalAuthorityWidgetView(
             viewModel: viewModel

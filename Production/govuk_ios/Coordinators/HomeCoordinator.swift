@@ -57,7 +57,8 @@ class HomeCoordinator: TabItemCoordinator {
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
             recentActivityAction: startRecentActivityCoordinator,
-            localAuthorityAction: presentLocalAuthorityCoordinator
+            localAuthorityAction: presentLocalAuthorityCoordinator,
+            editLocalAuthorityAction: presentEditLocalAuthorityCoordinator
         )
 
         let viewController = viewControllerBuilder.home(
@@ -171,6 +172,22 @@ class HomeCoordinator: TabItemCoordinator {
             present(coordinator)
         }
     }
+
+    private var presentEditLocalAuthorityCoordinator: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "Confirm with andrew")
+            guard let self = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = self.coordinatorBuilder.editLocalAuthority(
+                navigationController: navigationController,
+                dismissAction: {
+                    self.root.viewWillReAppear()
+                }
+            )
+            present(coordinator)
+        }
+    }
+
 
     private lazy var topicWidgetViewModel: TopicsWidgetViewModel = {
         TopicsWidgetViewModel(

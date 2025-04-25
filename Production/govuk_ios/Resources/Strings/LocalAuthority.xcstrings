@@ -12,6 +12,17 @@
         }
       }
     },
+    "localAuthorityCardWebsiteConstant" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "website"
+          }
+        }
+      }
+    },
     "localAuthorityExplainerViewDesciption" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -30,17 +41,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continue"
-          }
-        }
-      }
-    },
-    "localAuthorityExplainerViewTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your local services"
           }
         }
       }
@@ -89,6 +89,39 @@
         }
       }
     },
+    "localAuthoritytwoTierChildDescitption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services like education, social care and transport on the "
+          }
+        }
+      }
+    },
+    "localAuthorityTwoTierParentDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services like rubbish and recycling collection, council tax and housing on the "
+          }
+        }
+      }
+    },
+    "localAuthorityUnitaryCard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services for your area on the"
+          }
+        }
+      }
+    },
     "localAuthorityWidgetViewDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -111,13 +144,24 @@
         }
       }
     },
-    "localAuthorityWidgetViewTitleTwo" : {
+    "localServicesTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your local services"
+          }
+        }
+      }
+    },
+    "StoredLocalAuthorityWidgetDescriptionTwoTier" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services in your area are provided by 2 local councils"
           }
         }
       }

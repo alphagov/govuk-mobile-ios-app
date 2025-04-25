@@ -180,6 +180,18 @@ class CoordinatorBuilder {
         )
     }
 
+    func editLocalAuthority(navigationController: UINavigationController,
+                            dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        EditLocalAuthorityCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            localAuthorityService: container.localAuthorityService.resolve(),
+            coordinatorBuilder: self,
+            dismissed: dismissAction
+        )
+    }
+
     func topicOnboarding(navigationController: UINavigationController,
                          didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         TopicOnboardingCoordinator(

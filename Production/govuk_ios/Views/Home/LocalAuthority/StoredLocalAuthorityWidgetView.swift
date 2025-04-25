@@ -1,38 +1,39 @@
 import Foundation
+import SwiftUI
 
 struct StoredLocalAuthorityWidgetView: View {
-    let viewModel: StoredLocalAuthrorityCardViewModel
+    @StateObject var viewModel: StoredLocalAuthrorityWidgetViewModel
     var body: some View {
         VStack(spacing: 6) {
             HStack {
-                Text("Your local services")
+                Text(viewModel.title)
                     .font(Font.govUK.bodySemibold)
                 Spacer()
-                Button(String.common.localized("editButtonTitle")) { }
+                Button {
+                    viewModel.openEditViewAction()
+                } label: {
+                    Text(viewModel.editButtonTitle)
+                        .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
+                }
             }
-            HStack {
-                Text("Services in your area are provided by 2 local councils")
-                Spacer()
+            if viewModel.isTwoTierAuthority {
+                Text(viewModel.twoTierAuthorityDesction)
             }
-            StoredLocalAuthrorityCardView(
-                model: viewModel.model
-            ).onTapGesture {
-                viewModel.openURL(
-                    url: viewModel.model.homepageUrl,
-                    title: ""
-                )
-            }
-            if let parentAuthority = viewModel.model.parent {
-                StoredLocalAuthrorityCardView(
-                    model: parentAuthority
-                ).onTapGesture {
-                    viewModel.openURL(
-                        url: parentAuthority.homepageUrl,
-                        title: ""
+            storedCardViews
+        }
+    }
+    @ViewBuilder
+    var storedCardViews: some View {
+        ForEach(viewModel.convertModel(), id: \.name) { item in
+            StoredLocalAuthrorityCardView(model: item)
+                .onTapGesture {
+                    guard let url = URL(string: item.homepageUrl)
+                    else { return }
+                    viewModel.openURLIfPossible(
+                        url: url,
+                        eventTitle: ""
                     )
                 }
-                .padding(.top, 4)
-            }
         }
     }
 }

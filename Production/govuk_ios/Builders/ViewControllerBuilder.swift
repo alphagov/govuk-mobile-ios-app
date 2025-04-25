@@ -134,9 +134,11 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func signOut(analyticsService: AnalyticsServiceInterface,
+    func signOut(authenticationService: AuthenticationServiceInterface,
+                 analyticsService: AnalyticsServiceInterface,
                  completion: @escaping () -> Void) -> UIViewController {
         let viewModel = SignOutViewModel(
+            authenticationService: authenticationService,
             analyticsService: analyticsService,
             completion: completion
         )

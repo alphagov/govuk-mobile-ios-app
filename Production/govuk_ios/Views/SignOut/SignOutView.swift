@@ -1,4 +1,5 @@
 import SwiftUI
+import GOVKit
 import UIComponents
 
 struct SignOutView: View {
@@ -41,23 +42,13 @@ struct SignOutView: View {
             .ignoresSafeArea()
             .padding(16)
         }
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
 }
 
-extension GOVUKButton.ButtonConfiguration {
-    public static var destructive: GOVUKButton.ButtonConfiguration {
-        .init(
-            titleColorNormal: UIColor.govUK.text.buttonPrimary,
-            titleColorHighlighted: nil,
-            titleColorFocused: UIColor.govUK.text.buttonPrimaryFocussed,
-            titleColorDisabled: UIColor.govUK.text.buttonPrimaryDisabled,
-            titleFont: UIFont.govUK.bodySemibold,
-            backgroundColorNormal: UIColor.govUK.text.buttonDestructive,
-            backgroundColorHighlighted: UIColor.govUK.fills.surfaceButtonPrimaryHighlight,
-            backgroundColorFocused: UIColor.govUK.fills.surfaceButtonPrimaryFocussed,
-            backgroundColorDisabled: UIColor.govUK.fills.surfaceButtonPrimaryDisabled,
-            cornerRadius: 15,
-            accessibilityButtonShapesColor: UIColor.govUK.fills.surfaceButtonPrimaryDisabled
-        )
-    }
+extension SignOutView: TrackableScreen {
+    var trackingTitle: String? { viewModel.title }
+    var trackingName: String { "Sign Out" }
 }

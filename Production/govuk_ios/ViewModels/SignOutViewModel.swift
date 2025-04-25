@@ -10,33 +10,49 @@ final class SignOutViewModel {
     let body: String = String.signOut.localized("signOutBody")
 
     private let analyticsService: AnalyticsServiceInterface
+    private let authenticationService: AuthenticationServiceInterface
     private let completion: () -> Void
 
-    init(analyticsService: AnalyticsServiceInterface,
+    init(authenticationService: AuthenticationServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          completion: @escaping () -> Void) {
+        self.authenticationService = authenticationService
         self.analyticsService = analyticsService
         self.completion = completion
     }
 
     var signOutButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.signOut.localized("signOutButtonTitle"),
+        let buttonTitle = String.signOut.localized("signOutButtonTitle")
+        return GOVUKButton.ButtonViewModel(
+            localisedTitle: buttonTitle,
             action: { [weak self] in
+                self?.authenticationService.signOut()
+                self?.trackNavigationEvent(buttonTitle)
                 self?.completion()
-//                self?.analyticsService?.setAcceptedAnalytics(accepted: true)
-//                self?.finishAnalyticsConsent()
             }
         )
     }
 
     var cancelButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.common.localized("cancel"),
+        let buttonTitle = String.common.localized("cancel")
+        return GOVUKButton.ButtonViewModel(
+            localisedTitle: buttonTitle,
             action: { [weak self] in
+                self?.trackNavigationEvent(buttonTitle)
                 self?.completion()
-//                self?.analyticsService?.setAcceptedAnalytics(accepted: false)
-//                self?.finishAnalyticsConsent()
             }
         )
+    }
+
+    private func trackNavigationEvent(_ title: String) {
+        let event = AppEvent.buttonNavigation(
+            text: title,
+            external: false
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
     }
 }

@@ -23,6 +23,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let urlOpener: URLOpener
     private let versionProvider: AppVersionProvider
     private let deviceInformationProvider: DeviceInformationProviderInterface
+    private let authenticationService: AuthenticationServiceInterface
     @Published var scrollToTop: Bool = false
     @Published var displayNotificationSettingsAlert: Bool = false
     @Published private(set) var notificationsPermissionState: NotificationPermissionState
@@ -34,22 +35,25 @@ class SettingsViewModel: SettingsViewModelInterface {
         "notificationAlertPrimaryButtonTitle"
     )
     var signoutAction: (() -> Void)?
-    private var accountEmail: String?
+    @Published var userEmail: String?
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
          versionProvider: AppVersionProvider,
          deviceInformationProvider: DeviceInformationProviderInterface,
+         authenticationService: AuthenticationServiceInterface,
          notificationService: NotificationServiceInterface,
          notificationCenter: NotificationCenter) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
+        self.authenticationService = authenticationService
         self.notificationService = notificationService
         self.notificationCenter = notificationCenter
         updateNotificationPermissionState()
         observeAppMoveToForeground()
+        setEmail()
     }
 
     private func observeAppMoveToForeground() {
@@ -106,6 +110,12 @@ class SettingsViewModel: SettingsViewModelInterface {
         getGroupedList()
     }
 
+    private func setEmail() {
+        Task {
+            userEmail = await self.authenticationService.userEmail
+        }
+    }
+
     private func getGroupedList() -> [GroupedListSection] {
         return [
             accountSection,
@@ -123,7 +133,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                 InformationRow(
                     id: "settings.email.row",
                     title: String.settings.localized("accountRowTitle"),
-                    body: accountEmail,
+                    body: userEmail,
                     imageName: "account_icon",
                     detail: ""),
                 LinkRow(

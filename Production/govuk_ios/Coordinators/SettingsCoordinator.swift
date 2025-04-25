@@ -16,6 +16,7 @@ class SettingsCoordinator: TabItemCoordinator {
          analyticsService: AnalyticsServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
          deviceInformationProvider: DeviceInformationProviderInterface,
+         authenticationService: AuthenticationServiceInterface,
          notificationService: NotificationServiceInterface) {
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
@@ -27,6 +28,7 @@ class SettingsCoordinator: TabItemCoordinator {
             urlOpener: UIApplication.shared,
             versionProvider: Bundle.main,
             deviceInformationProvider: deviceInformationProvider,
+            authenticationService: authenticationService,
             notificationService: notificationService,
             notificationCenter: .default
         )

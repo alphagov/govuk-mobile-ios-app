@@ -113,6 +113,27 @@ struct HomeViewModel {
     }
 
     @MainActor
+    private var personalLocalAuthortiy: WidgetView? {
+        guard featureEnabled(.localServices) else { return nil }
+        guard let localAuthority = localAuthorityService.fetchSavedLocalAuthority().first
+        else { return nil }
+        let viewModel = StoredLocalAuthrorityWidgetViewModel(
+            analyticsService: analyticsService,
+            model: localAuthority,
+            urlOpener: urlOpener
+        )
+        let content = StoredLocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        let widget = WidgetView(decorateView: false)
+        widget.addContent(hostingViewController.view)
+        return widget
+    }
+
+    @MainActor
     private var topicsWidget: WidgetView? {
         guard featureEnabled(.topics)
         else { return nil }

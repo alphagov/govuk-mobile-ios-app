@@ -47,17 +47,6 @@ import GOVKit
         push(viewController, animated: true)
     }
 
-     func presentPostcodeEntryView() {
-         let viewController = viewControllerBuilder.localAuthorityPostcodeEntryView(
-            analyticsService: analyticsService,
-            localAuthorityService: localAuthorityService,
-            dismissAction: { [weak self] in
-                self?.dismissModal()
-            }
-         )
-         set(viewController, animated: true)
-     }
-
     private func dismissModal() {
         root.dismiss(
             animated: true,

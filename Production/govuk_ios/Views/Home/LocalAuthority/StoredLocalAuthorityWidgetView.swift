@@ -27,11 +27,9 @@ struct StoredLocalAuthorityWidgetView: View {
         ForEach(viewModel.convertModel(), id: \.name) { item in
             StoredLocalAuthrorityCardView(model: item)
                 .onTapGesture {
-                    guard let url = URL(string: item.homepageUrl)
-                    else { return }
-                    viewModel.openURLIfPossible(
-                        url: url,
-                        eventTitle: ""
+                    viewModel.openURL(
+                        url: item.homepageUrl,
+                        title: ""
                     )
                 }
         }

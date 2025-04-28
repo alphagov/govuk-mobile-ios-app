@@ -23,25 +23,20 @@ class StoredLocalAuthrorityWidgetViewModel: ObservableObject {
     let localAuthorityCardWedbsiteConstant = String.localAuthority.localized(
         "localAuthorityCardWebsiteConstant"
     )
-
+    let localAuthoritytwoTierChildDescitption = String.localAuthority.localized(
+        "localAuthoritytwoTierChildDescitption"
+    )
+    let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
+        "localAuthorityTwoTierParentDescription"
+    )
     private func unitaryCardDescription(councilName: String) -> String {
         return "\(unitaryCardDescription) " +
         councilName + " \(localAuthorityCardWedbsiteConstant)"
     }
-
-    let localAuthoritytwoTierChildDescitption = String.localAuthority.localized(
-        "localAuthoritytwoTierChildDescitption"
-    )
-
-    let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
-        "localAuthorityTwoTierParentDescription"
-    )
-
     private func localAuthorityTwoTierChildDescitption(councilName: String) -> String {
         localAuthoritytwoTierChildDescitption + councilName +
         " \(localAuthorityCardWedbsiteConstant)"
     }
-
     private func localAuthorityTwoTierParentDescription(councilName: String) -> String {
         localAuthorityTwoTierParentDescription + councilName +
         " \(localAuthorityCardWedbsiteConstant)"
@@ -113,7 +108,7 @@ class StoredLocalAuthrorityWidgetViewModel: ObservableObject {
         analyticsService.track(event: event)
     }
 
-    func openURLIfPossible(url: URL,
+    private func openURLIfPossible(url: URL,
                            eventTitle: String) {
         if urlOpener.openIfPossible(url) {
             trackNavigationEvent(

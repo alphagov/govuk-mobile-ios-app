@@ -104,9 +104,13 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
         childAuthority.tier = "district"
         childAuthority.parent = parentAuthority
 
+        var authorityItems: [LocalAuthorityItem] = []
+        authorityItems.append(parentAuthority)
+        authorityItems.append(childAuthority)
+
         let sut = StoredLocalAuthrorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
-            localAuthorities: [childAuthority],
+            localAuthorities: authorityItems,
             urlOpener: MockURLOpener(),
             openEditViewAction: {}
         )

@@ -89,24 +89,24 @@
         }
       }
     },
-    "localAuthoritytwoTierChildDescitption" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find services like education, social care and transport on the "
-          }
-        }
-      }
-    },
-    "localAuthorityTwoTierParentDescription" : {
+    "localAuthorityTwoTierChildDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Find services like rubbish and recycling collection, council tax and housing on the "
+          }
+        }
+      }
+    },
+    "localAuthoritytwoTierParentDescitption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services like education, social care and transport on the "
           }
         }
       }

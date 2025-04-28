@@ -23,7 +23,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
 
         let sut = StoredLocalAuthrorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
-            model: localAuthorityItem,
+            localAuthorities: [localAuthorityItem],
             urlOpener: mockURLOpener,
             openEditViewAction: {}
         )
@@ -48,7 +48,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
 
         let sut = StoredLocalAuthrorityWidgetViewModel(
             analyticsService: mockAnalyticsService,
-            model: localAuthorityItem,
+            localAuthorities: [localAuthorityItem],
             urlOpener: mockURLOpener,
             openEditViewAction: {}
         )
@@ -73,7 +73,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
 
         let sut = StoredLocalAuthrorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
-            model: mockAuthorityItem,
+            localAuthorities: [mockAuthorityItem],
             urlOpener: MockURLOpener(),
             openEditViewAction: {}
         )
@@ -104,10 +104,9 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
         childAuthority.tier = "district"
         childAuthority.parent = parentAuthority
 
-
         let sut = StoredLocalAuthrorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
-            model: childAuthority,
+            localAuthorities: [childAuthority],
             urlOpener: MockURLOpener(),
             openEditViewAction: {}
         )

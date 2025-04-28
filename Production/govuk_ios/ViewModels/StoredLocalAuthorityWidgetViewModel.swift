@@ -22,20 +22,20 @@ class StoredLocalAuthrorityWidgetViewModel {
     let localAuthorityCardWedbsiteConstant = String.localAuthority.localized(
         "localAuthorityCardWebsiteConstant"
     )
-    let localAuthoritytwoTierChildDescitption = String.localAuthority.localized(
-        "localAuthoritytwoTierChildDescitption"
+    let localAuthorityTwoTierParentDescitption = String.localAuthority.localized(
+        "localAuthoritytwoTierParentDescitption"
     )
-    let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
-        "localAuthorityTwoTierParentDescription"
+    let localAuthorityTwoTierChildDescription = String.localAuthority.localized(
+        "localAuthorityTwoTierChildDescription"
     )
 
     private func returnCardDescription(authority: LocalAuthorityItem) -> String {
         if authority.parent != nil {
-            return localAuthorityTwoTierChildDescitption(
+            return localAuthorityTwoTierChildDescription(
                 councilName: authority.name
             )
         } else {
-            return localAuthorityTwoTierParentDescription(
+            return localAuthorityTwoTierParentDescitption(
                 councilName: authority.name
             )
         }
@@ -45,13 +45,13 @@ class StoredLocalAuthrorityWidgetViewModel {
         councilName + " \(localAuthorityCardWedbsiteConstant)"
     }
 
-    private func localAuthorityTwoTierChildDescitption(councilName: String) -> String {
-        localAuthoritytwoTierChildDescitption + councilName +
+    private func localAuthorityTwoTierParentDescitption(councilName: String) -> String {
+        localAuthorityTwoTierParentDescitption + councilName +
         " \(localAuthorityCardWedbsiteConstant)"
     }
 
-    private func localAuthorityTwoTierParentDescription(councilName: String) -> String {
-        localAuthorityTwoTierParentDescription + councilName +
+    private func localAuthorityTwoTierChildDescription(councilName: String) -> String {
+        localAuthorityTwoTierChildDescription + councilName +
         " \(localAuthorityCardWedbsiteConstant)"
     }
 

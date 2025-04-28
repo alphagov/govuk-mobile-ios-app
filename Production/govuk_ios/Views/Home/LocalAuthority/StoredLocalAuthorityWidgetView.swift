@@ -2,7 +2,12 @@ import Foundation
 import SwiftUI
 
 struct StoredLocalAuthorityWidgetView: View {
-    @StateObject var viewModel: StoredLocalAuthrorityWidgetViewModel
+    private let viewModel: StoredLocalAuthrorityWidgetViewModel
+
+    init(viewModel: StoredLocalAuthrorityWidgetViewModel) {
+        self.viewModel = viewModel
+    }
+
     var body: some View {
         VStack(spacing: 6) {
             HStack {
@@ -16,9 +21,9 @@ struct StoredLocalAuthorityWidgetView: View {
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
                 }
             }
-            if viewModel.isTwoTierAuthority {
+            if viewModel.localAuthorities.count == 2 {
                 HStack {
-                    Text(viewModel.twoTierAuthorityDesction)
+                    Text(viewModel.twoTierAuthorityDescription)
                     Spacer()
                 }
             }
@@ -32,7 +37,7 @@ struct StoredLocalAuthorityWidgetView: View {
                 .onTapGesture {
                     viewModel.openURL(
                         url: item.homepageUrl,
-                        title: ""
+                        title: item.name
                     )
                 }
         }

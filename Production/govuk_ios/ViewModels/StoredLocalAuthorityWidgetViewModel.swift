@@ -2,13 +2,12 @@ import Foundation
 import GOVKit
 import SwiftUI
 
-class StoredLocalAuthrorityWidgetViewModel: ObservableObject {
+class StoredLocalAuthrorityWidgetViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
-    let localAuthority: LocalAuthorityItem
-    @Published var isTwoTierAuthority: Bool = false
+    let localAuthorities: [LocalAuthorityItem]
     let openEditViewAction: () -> Void
-    let twoTierAuthorityDesction: String = String.localAuthority.localized(
+    let twoTierAuthorityDescription: String = String.localAuthority.localized(
         "StoredLocalAuthorityWidgetDescriptionTwoTier"
     )
     let editButtonTitle = String.common.localized(
@@ -29,28 +28,41 @@ class StoredLocalAuthrorityWidgetViewModel: ObservableObject {
     let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
         "localAuthorityTwoTierParentDescription"
     )
+
+    private func returnCardDescription(authority: LocalAuthorityItem) -> String {
+        if authority.parent != nil {
+            return localAuthorityTwoTierChildDescitption(
+                councilName: authority.name
+            )
+        } else {
+            return localAuthorityTwoTierParentDescription(
+                councilName: authority.name
+            )
+        }
+    }
     private func unitaryCardDescription(councilName: String) -> String {
         return "\(unitaryCardDescription) " +
         councilName + " \(localAuthorityCardWedbsiteConstant)"
     }
+
     private func localAuthorityTwoTierChildDescitption(councilName: String) -> String {
         localAuthoritytwoTierChildDescitption + councilName +
         " \(localAuthorityCardWedbsiteConstant)"
     }
+
     private func localAuthorityTwoTierParentDescription(councilName: String) -> String {
         localAuthorityTwoTierParentDescription + councilName +
         " \(localAuthorityCardWedbsiteConstant)"
     }
 
     init(analyticsService: AnalyticsServiceInterface,
-         model: LocalAuthorityItem,
+         localAuthorities: [LocalAuthorityItem],
          urlOpener: URLOpener,
          openEditViewAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
-        self.localAuthority = model
+        self.localAuthorities = localAuthorities
         self.urlOpener = urlOpener
         self.openEditViewAction = openEditViewAction
-        isAuthorityTwoTiew()
     }
 
     func openURL(url: String, title: String) {
@@ -62,41 +74,33 @@ class StoredLocalAuthrorityWidgetViewModel: ObservableObject {
         }
     }
 
-     func convertModel() -> [StoredLocalAuthorityWidgetCardModel] {
+    func convertModel() -> [StoredLocalAuthorityWidgetCardModel] {
         var cardArray: [StoredLocalAuthorityWidgetCardModel] = []
-        if localAuthority.parent == nil {
-            let card = StoredLocalAuthorityWidgetCardModel(
-                name: localAuthority.name,
-                homepageUrl: localAuthority.homepageUrl,
-                description: unitaryCardDescription(
-                    councilName: localAuthority.name
+        if localAuthorities.count == 1 {
+            if let localAuthority = localAuthorities.first {
+                let card = StoredLocalAuthorityWidgetCardModel(
+                    name: localAuthority.name,
+                    homepageUrl: localAuthority.homepageUrl,
+                    description: unitaryCardDescription(
+                        councilName: localAuthority.name
+                    )
                 )
-            )
-            cardArray.append(card)
-            return cardArray
+                cardArray.append(card)
+                return cardArray
+            }
         } else {
-            let childCard = StoredLocalAuthorityWidgetCardModel(
-                name: localAuthority.name,
-                homepageUrl: localAuthority.homepageUrl,
-                description: localAuthorityTwoTierChildDescitption(
-                    councilName: localAuthority.name
+            for item in localAuthorities {
+                let card = StoredLocalAuthorityWidgetCardModel(
+                    name: item.name,
+                    homepageUrl: item.homepageUrl,
+                    description: returnCardDescription(
+                        authority: item
+                    )
                 )
-            )
-            cardArray.append(childCard)
-            let parentCard = StoredLocalAuthorityWidgetCardModel(
-                name: localAuthority.name,
-                homepageUrl: localAuthority.homepageUrl,
-                description: localAuthorityTwoTierParentDescription(
-                    councilName: localAuthority.name
-                )
-            )
-            cardArray.append(parentCard)
-            return cardArray
+                cardArray.append(card)
+            }
         }
-    }
-
-    private func isAuthorityTwoTiew() {
-        self.isTwoTierAuthority = localAuthority.parent != nil
+        return cardArray
     }
 
     private func trackNavigationEvent(_ title: String,

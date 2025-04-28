@@ -175,7 +175,7 @@ class HomeCoordinator: TabItemCoordinator {
 
     private var presentEditLocalAuthorityCoordinator: () -> Void {
         return { [weak self] in
-            self?.trackWidgetNavigation(text: "Confirm with andrew")
+            self?.trackWidgetNavigation(text: "Edit your local services")
             guard let self = self else { return }
             let navigationController = UINavigationController()
             let coordinator = self.coordinatorBuilder.editLocalAuthority(

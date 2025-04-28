@@ -36,7 +36,8 @@ struct ViewControllerBuilderTests {
             feedbackAction: {},
             notificationsAction: {},
             recentActivityAction: {},
-            localAuthorityAction: {}
+            localAuthorityAction: {},
+            editLocalAuthorityAction: {}
         )
 
         let result = subject.home(dependencies: dependencies, actions: actions)

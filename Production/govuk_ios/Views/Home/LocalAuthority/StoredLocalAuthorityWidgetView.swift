@@ -17,7 +17,10 @@ struct StoredLocalAuthorityWidgetView: View {
                 }
             }
             if viewModel.isTwoTierAuthority {
-                Text(viewModel.twoTierAuthorityDesction)
+                HStack {
+                    Text(viewModel.twoTierAuthorityDesction)
+                    Spacer()
+                }
             }
             storedCardViews
         }

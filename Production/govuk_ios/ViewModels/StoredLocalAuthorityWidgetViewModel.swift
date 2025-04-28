@@ -109,7 +109,7 @@ class StoredLocalAuthrorityWidgetViewModel: ObservableObject {
     }
 
     private func openURLIfPossible(url: URL,
-                           eventTitle: String) {
+                                   eventTitle: String) {
         if urlOpener.openIfPossible(url) {
             trackNavigationEvent(
                 eventTitle,

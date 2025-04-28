@@ -4,19 +4,117 @@ import Testing
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
 
+@Suite
 struct StoredLocalAuthrorityWidgetViewModelTests {
+    let coreData = CoreDataRepository.arrangeAndLoad
 
     @Test
-    func <#test function name#>() async throws {
+    func openURL_opensCorrectUrl() async throws {
         let mockURLOpener: MockURLOpener = MockURLOpener()
+
+        let localAuthorityItem = LocalAuthorityItem(
+            context: coreData.backgroundContext
+        )
+
+        localAuthorityItem.name = "Test Local Authority"
+        localAuthorityItem.slug = "slug"
+        localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
+        localAuthorityItem.tier = "unitary"
+
         let sut = StoredLocalAuthrorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
-            model: <#LocalAuthorityItem#>,
+            model: localAuthorityItem,
+            urlOpener: mockURLOpener,
+            openEditViewAction: {}
+        )
+
+        sut.openURL(url: "https://www.gov.uk/some-url", title: "")
+        let expectedUrl = "https://www.gov.uk/some-url"
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
+    }
+
+
+    @Test
+    func openURL_tracksEventCorrectly() async throws {
+        let mockURLOpener: MockURLOpener = MockURLOpener()
+        let mockAnalyticsService: MockAnalyticsService = MockAnalyticsService()
+        let localAuthorityItem = LocalAuthorityItem(
+            context: coreData.backgroundContext
+        )
+        localAuthorityItem.name = "Test Local Authority"
+        localAuthorityItem.slug = "slug"
+        localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
+        localAuthorityItem.tier = "unitary"
+
+        let sut = StoredLocalAuthrorityWidgetViewModel(
+            analyticsService: mockAnalyticsService,
+            model: localAuthorityItem,
+            urlOpener: mockURLOpener,
+            openEditViewAction: {}
+        )
+        sut.openURL(
+            url: "https://www.gov.uk/some-url",
+            title: "test"
+        )
+        let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(receivedTrackingTitle == "test")
+
+    }
+
+    @Test
+    func convertModel_unitaryAuthority_returnsExpectedResult() async throws {
+        let mockAuthorityItem = LocalAuthorityItem(
+            context: coreData.backgroundContext
+        )
+        mockAuthorityItem.name = "London Borough of Tower Hamlets"
+        mockAuthorityItem.slug = "tower-hamlets"
+        mockAuthorityItem.homepageUrl = "https://www.towerhamlets.gov.uk"
+        mockAuthorityItem.tier = "unitary"
+
+        let sut = StoredLocalAuthrorityWidgetViewModel(
+            analyticsService: MockAnalyticsService(),
+            model: mockAuthorityItem,
             urlOpener: MockURLOpener(),
             openEditViewAction: {}
         )
-        let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
+
+        let result = sut.convertModel()
+        #expect(result.count == 1)
+        #expect(result.first?.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(result.first?.description == "Find services for your area on the London Borough of Tower Hamlets website")
+    }
+
+    @Test
+    func convertModel_twoTier_returnsExpectedResult() async throws {
+
+        let parentAuthority = LocalAuthorityItem(
+            context: coreData.backgroundContext
+        )
+        parentAuthority.name = "Derbyshire County Council"
+        parentAuthority.slug =  "derbyshire"
+        parentAuthority.homepageUrl = "https://www.derbyshire.gov.uk/"
+        parentAuthority.tier = "county"
+
+        let childAuthority = LocalAuthorityItem(
+            context: coreData.backgroundContext
+        )
+        childAuthority.name = "Derbyshire Dales District Council"
+        childAuthority.slug = "derbyshire-dales"
+        childAuthority.homepageUrl = "https://www.derbyshiredales.gov.uk/"
+        childAuthority.tier = "district"
+        childAuthority.parent = parentAuthority
+
+
+        let sut = StoredLocalAuthrorityWidgetViewModel(
+            analyticsService: MockAnalyticsService(),
+            model: childAuthority,
+            urlOpener: MockURLOpener(),
+            openEditViewAction: {}
+        )
+
+        let result = sut.convertModel()
+        #expect(result.count == 2)
+        #expect(result.first?.homepageUrl == "https://www.derbyshiredales.gov.uk/")
+        #expect(result.first?.description == "Find services like education, social care and transport on the Derbyshire Dales District Council website")
     }
 }
-

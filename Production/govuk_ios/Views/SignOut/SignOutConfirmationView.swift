@@ -2,11 +2,11 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-struct SignOutView: View {
+struct SignOutConfirmationView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    private var viewModel: SignOutViewModel
+    private var viewModel: SignOutConfirmationViewModel
 
-    init(viewModel: SignOutViewModel) {
+    init(viewModel: SignOutConfirmationViewModel) {
         self.viewModel = viewModel
     }
 
@@ -48,7 +48,7 @@ struct SignOutView: View {
     }
 }
 
-extension SignOutView: TrackableScreen {
+extension SignOutConfirmationView: TrackableScreen {
     var trackingTitle: String? { viewModel.title }
     var trackingName: String { "Sign Out" }
 }

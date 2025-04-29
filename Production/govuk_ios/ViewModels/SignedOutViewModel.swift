@@ -2,12 +2,9 @@ import Foundation
 import GOVKit
 import UIComponents
 
-final class SignOutViewModel {
-    let bulletStrings: [String] = [String.signOut.localized("signOutBulletOne"),
-                                   String.signOut.localized("signOutBulletTwo")]
-    let title: String = String.signOut.localized("signOutTitle")
-    let subTitle: String = String.signOut.localized("signOutSubtitle")
-    let body: String = String.signOut.localized("signOutBody")
+final class SignedOutViewModel {
+    let title: String = String.signOut.localized("signedOutTitle")
+    let subTitle: String = String.signOut.localized("signedOutSubtitle")
 
     private let analyticsService: AnalyticsServiceInterface
     private let authenticationService: AuthenticationServiceInterface
@@ -21,23 +18,12 @@ final class SignOutViewModel {
         self.completion = completion
     }
 
-    var signOutButtonViewModel: GOVUKButton.ButtonViewModel {
-        let buttonTitle = String.signOut.localized("signOutButtonTitle")
+    var signInButtonViewModel: GOVUKButton.ButtonViewModel {
+        let buttonTitle = String.signOut.localized("signInButtonTitle")
         return GOVUKButton.ButtonViewModel(
             localisedTitle: buttonTitle,
             action: { [weak self] in
                 self?.authenticationService.signOut()
-                self?.trackNavigationEvent(buttonTitle)
-                self?.completion()
-            }
-        )
-    }
-
-    var cancelButtonViewModel: GOVUKButton.ButtonViewModel {
-        let buttonTitle = String.common.localized("cancel")
-        return GOVUKButton.ButtonViewModel(
-            localisedTitle: buttonTitle,
-            action: { [weak self] in
                 self?.trackNavigationEvent(buttonTitle)
                 self?.completion()
             }

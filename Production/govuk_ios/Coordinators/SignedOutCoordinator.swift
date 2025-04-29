@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 import GOVKit
 
-final class SignOutCoordinator: BaseCoordinator {
+class SignedOutCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let authenticationService: AuthenticationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
@@ -21,11 +21,13 @@ final class SignOutCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.signOut(
+        let viewController = viewControllerBuilder.signedOut(
             authenticationService: authenticationService,
             analyticsService: analyticsService,
-            completion: completion
+            completion: { [weak self] in
+                self?.completion()
+            }
         )
-        set([viewController])
+        set(viewController, animated: false)
     }
 }

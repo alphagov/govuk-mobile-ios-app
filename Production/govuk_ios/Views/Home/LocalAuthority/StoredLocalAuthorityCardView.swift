@@ -9,6 +9,7 @@ struct StoredLocalAuthorityCardView: View {
             VStack {
                 HStack {
                     Text(model.name)
+                        .font(.govUK.body)
                         .foregroundColor(Color(UIColor.govUK.text.link))
                     Spacer()
                     Image(systemName: "arrow.up.right")
@@ -16,6 +17,7 @@ struct StoredLocalAuthorityCardView: View {
                 }.padding(.bottom, 4)
                 HStack {
                     Text(model.description)
+                        .font(.govUK.body)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .multilineTextAlignment(.leading)
                     Spacer()

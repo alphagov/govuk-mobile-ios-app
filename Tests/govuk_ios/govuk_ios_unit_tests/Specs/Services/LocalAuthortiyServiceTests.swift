@@ -32,7 +32,6 @@ struct LocalAuthorityServiceTests {
         )
         _ = sut.fetchSavedLocalAuthority()
         #expect(mockRepository._didFetchLocalAuthority)
-
     }
 
     @Test

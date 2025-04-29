@@ -12,12 +12,13 @@ struct StoredLocalAuthorityWidgetView: View {
         VStack(spacing: 6) {
             HStack {
                 Text(viewModel.title)
-                    .font(Font.govUK.bodySemibold)
+                    .font(Font.govUK.title3Semibold)
                 Spacer()
                 Button {
                     viewModel.openEditViewAction()
                 } label: {
                     Text(viewModel.editButtonTitle)
+                        .font(.govUK.body)
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
                 }
             }

@@ -134,15 +134,29 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func signOut(authenticationService: AuthenticationServiceInterface,
-                 analyticsService: AnalyticsServiceInterface,
-                 completion: @escaping () -> Void) -> UIViewController {
-        let viewModel = SignOutViewModel(
+    func signOutConfirmation(authenticationService: AuthenticationServiceInterface,
+                             analyticsService: AnalyticsServiceInterface,
+                             completion: @escaping () -> Void) -> UIViewController {
+        let viewModel = SignOutConfirmationViewModel(
             authenticationService: authenticationService,
             analyticsService: analyticsService,
             completion: completion
         )
-        let view = SignOutView(viewModel: viewModel)
+        let view = SignOutConfirmationView(viewModel: viewModel)
+        let viewController = HostingViewController(rootView: view)
+        return viewController
+    }
+
+    @MainActor
+    func signedOut(authenticationService: AuthenticationServiceInterface,
+                   analyticsService: AnalyticsServiceInterface,
+                   completion: @escaping () -> Void) -> UIViewController {
+        let viewModel = SignedOutViewModel(
+            authenticationService: authenticationService,
+            analyticsService: analyticsService,
+            completion: completion
+        )
+        let view = SignedOutView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
         return viewController
     }

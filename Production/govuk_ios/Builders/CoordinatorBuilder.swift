@@ -245,10 +245,19 @@ class CoordinatorBuilder {
         )
     }
 
-    func signOut(navigationController: UINavigationController,
-                 completion: @escaping () -> Void) -> BaseCoordinator {
-        SignOutCoordinator(
+    func signOutConfirmation(navigationController: UINavigationController) -> BaseCoordinator {
+        SignOutConfirmationCoordinator(
             navigationController: UINavigationController(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            authenticationService: container.authenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve()
+        )
+    }
+
+    func signedOut(navigationController: UINavigationController,
+                   completion: @escaping () -> Void) -> BaseCoordinator {
+        SignedOutCoordinator(
+            navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             authenticationService: container.authenticationService.resolve(),
             analyticsService: container.analyticsService.resolve(),

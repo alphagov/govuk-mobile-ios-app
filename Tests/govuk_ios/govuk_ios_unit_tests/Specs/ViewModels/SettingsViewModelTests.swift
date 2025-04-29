@@ -16,18 +16,21 @@ class SettingsViewModelTests {
     let mockVersionProvider = MockAppVersionProvider()
     let mockDeviceInformationProvider = MockDeviceInformationProvider()
     let mockNotificationsService = MockNotificationService()
+    let mockAuthenticationService = MockAuthenticationService()
 
     init() {
         mockVersionProvider.versionNumber = "123"
         mockVersionProvider.buildNumber = "456"
+        mockAuthenticationService._stubbedIsSignedIn = true
+        mockAuthenticationService._stubbedUserEmail = "test@example.com"
 
         sut = SettingsViewModel(
             analyticsService: mockAnalyticsService,
             urlOpener: mockURLOpener,
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
-            authenticationService: MockAuthenticationService(),
-            notificationService: MockNotificationService(),
+            authenticationService: mockAuthenticationService,
+            notificationService: mockNotificationsService,
             notificationCenter: .default
         )
     }
@@ -39,30 +42,42 @@ class SettingsViewModelTests {
 
     @Test
     func listContent_isCorrect() throws {
-        try #require(sut.listContent.count == 4)
-        try #require(sut.listContent[2].rows.count == 1)
-        try #require(sut.listContent[3].rows.count == 4)
+        try #require(sut.listContent.count == 5)
+        try #require(sut.listContent[0].rows.count == 2)
+        try #require(sut.listContent[1].rows.count == 1)
+        try #require(sut.listContent[2].rows.count == 2)
+        try #require(sut.listContent[3].rows.count == 2)
+        try #require(sut.listContent[4].rows.count == 4)
 
-        let aboutTheAppSection = sut.listContent[0]
-        #expect(aboutTheAppSection.heading?.title == "About the app")
+        let manageAccountSection = sut.listContent[0]
+        #expect(manageAccountSection.heading?.title == nil)
+        try #require(manageAccountSection.rows.count == 2)
+        #expect(manageAccountSection.rows[0].title == "Your GOV.UK One Login")
+        #expect(manageAccountSection.rows[0].body == "test@example.com")
+        #expect(manageAccountSection.rows[1].title == "Manage your GOV.UK One Login")
 
-        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
+        let signOutSection = sut.listContent[1]
+        let signOutRow = try #require(signOutSection.rows.first as? DetailRow)
+        #expect(signOutRow.title == "Sign out")
+
+        let notificationsSection = sut.listContent[2]
+        #expect(notificationsSection.heading?.title == nil)
+        let notificationRow = try #require(notificationsSection.rows.first as? DetailRow)
+        #expect(notificationRow.title == "Notifications")
+
+        let aboutSection = sut.listContent[3]
+        let helpAndFeedbackRow = try #require(aboutSection.rows.last as? LinkRow)
         let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
         helpAndFeedbackRow.action()
         #expect(helpAndFeedbackRow.title == "Help and feedback")
         #expect(helpAndFeedbackRow.isWebLink == true)
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
 
-        let appBundleInformation = try #require(aboutTheAppSection.rows[1] as? InformationRow)
+        let appBundleInformation = try #require(aboutSection.rows.first as? InformationRow)
         #expect(appBundleInformation.title == "App version number")
         #expect(appBundleInformation.detail == "123 (456)")
 
-        let notificationsSection = sut.listContent[1]
-        #expect(notificationsSection.heading?.title == "Notifications")
-        let notificationRow = try #require(notificationsSection.rows.first as? DetailRow)
-        #expect(notificationRow.title == "Notifications")
-
-        let privacyAndLegalSection = sut.listContent[3]
+        let privacyAndLegalSection = sut.listContent[4]
         #expect(privacyAndLegalSection.rows[0].title == "Privacy notice")
         #expect(privacyAndLegalSection.rows[1].title == "Accessibility statement")
         #expect(privacyAndLegalSection.rows[2].title == "Open source licences")
@@ -72,8 +87,8 @@ class SettingsViewModelTests {
     @Test
     func analytics_toggledOnThenOff_deniesPermissions() throws {
         mockAnalyticsService.setAcceptedAnalytics(accepted: true)
-        let privacySection = sut.listContent[2]
-        let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
+        let appOptionsSection = sut.listContent[2]
+        let toggleRow = try #require(appOptionsSection.rows.last as? ToggleRow)
         #expect(toggleRow.isOn)
         toggleRow.isOn = false
         #expect(mockAnalyticsService.permissionState == .denied)
@@ -82,8 +97,8 @@ class SettingsViewModelTests {
     @Test
     func analytics_toggledOffThenOn_acceptsPermissions() throws {
         mockAnalyticsService.setAcceptedAnalytics(accepted: false)
-        let privacySection = sut.listContent[2]
-        let toggleRow = try #require(privacySection.rows.first as? ToggleRow)
+        let appOptionsSection = sut.listContent[2]
+        let toggleRow = try #require(appOptionsSection.rows.last as? ToggleRow)
         #expect(toggleRow.isOn == false)
         toggleRow.isOn = true
         #expect(mockAnalyticsService.permissionState == .accepted)
@@ -91,7 +106,7 @@ class SettingsViewModelTests {
 
     @Test
     func privacyPolicy_action_tracksEvent() throws {
-        let linkSection = sut.listContent[3]
+        let linkSection = sut.listContent[4]
         let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
         privacyPolicyRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
@@ -101,7 +116,7 @@ class SettingsViewModelTests {
 
     @Test
     func accessibilityStatement_action_tracksEvent() throws {
-        let linkSection = sut.listContent[3]
+        let linkSection = sut.listContent[4]
         let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
         accessibilityStatementRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
@@ -111,7 +126,7 @@ class SettingsViewModelTests {
 
     @Test
     func openSourceLicences_action_tracksEvent() throws {
-        let linkSection = sut.listContent[3]
+        let linkSection = sut.listContent[4]
         let openSourceLicencesRow = try #require(linkSection.rows[2] as? LinkRow)
         openSourceLicencesRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
@@ -120,7 +135,7 @@ class SettingsViewModelTests {
 
     @Test
     func termsAndConditions_action_tracksEvent() throws {
-        let linkSection = sut.listContent[3]
+        let linkSection = sut.listContent[4]
         let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
         termsAndConditionsRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
@@ -130,8 +145,8 @@ class SettingsViewModelTests {
 
     @Test
     func helpAndFeedback_action_tracksEvent() throws {
-        let aboutTheAppSection = sut.listContent[0]
-        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.first as? LinkRow)
+        let aboutTheAppSection = sut.listContent[3]
+        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.last as? LinkRow)
 
         helpAndFeedbackRow.action()
 
@@ -139,6 +154,30 @@ class SettingsViewModelTests {
         let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
         #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
+    }
+
+    @Test
+    func manageYourAccount_action_tracksEvent() throws {
+        let accountSection = sut.listContent[0]
+        let manageAccountRow = try #require(accountSection.rows.last as? LinkRow)
+
+        manageAccountRow.action()
+
+        let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        let expectedUrl = "https://home.account.gov.uk/"
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
+        #expect(receivedTrackingTitle == manageAccountRow.title)
+    }
+
+    @Test
+    func signOut_action_tracksEvent() throws {
+        let signOutSection = sut.listContent[1]
+        let signOutRow = try #require(signOutSection.rows.last as? DetailRow)
+
+        signOutRow.action()
+
+        let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
+        #expect(receivedTrackingTitle == signOutRow.title)
     }
 
     @Test(.serialized, arguments: [NotificationPermissionState.authorized,

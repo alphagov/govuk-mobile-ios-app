@@ -8,7 +8,7 @@ class StoredLocalAuthorityWidgetViewModel {
     let localAuthorities: [LocalAuthorityItem]
     let openEditViewAction: () -> Void
     let twoTierAuthorityDescription: String = String.localAuthority.localized(
-        "StoredLocalAuthorityWidgetDescriptionTwoTier"
+        "storedLocalAuthorityWidgetDescriptionTwoTier"
     )
     let editButtonTitle = String.common.localized(
         "editButtonTitle"
@@ -74,7 +74,7 @@ class StoredLocalAuthorityWidgetViewModel {
         }
     }
 
-    func convertModel() -> [StoredLocalAuthorityWidgetCardModel] {
+    func returnCards() -> [StoredLocalAuthorityWidgetCardModel] {
         var cardArray: [StoredLocalAuthorityWidgetCardModel] = []
         if localAuthorities.count == 1 {
             if let localAuthority = localAuthorities.first {

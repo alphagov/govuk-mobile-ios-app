@@ -5,17 +5,16 @@ import Testing
 @testable import govuk_ios
 
 @Suite
-struct StoredLocalAuthrorityWidgetViewModelTests {
+struct StoredLocalAuthorityWidgetViewModelTests {
     let coreData = CoreDataRepository.arrangeAndLoad
 
     @Test
-    func openURL_opensCorrectUrl() async throws {
+    func openURL_opensCorrectURL() async throws {
         let mockURLOpener: MockURLOpener = MockURLOpener()
 
         let localAuthorityItem = LocalAuthorityItem(
             context: coreData.backgroundContext
         )
-
         localAuthorityItem.name = "Test Local Authority"
         localAuthorityItem.slug = "slug"
         localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
@@ -78,7 +77,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
             openEditViewAction: {}
         )
 
-        let result = sut.convertModel()
+        let result = sut.returnCards()
         #expect(result.count == 1)
         #expect(result.first?.homepageUrl == "https://www.towerhamlets.gov.uk")
         #expect(result.first?.description == "Find services for your area on the London Borough of Tower Hamlets website")
@@ -115,7 +114,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
             openEditViewAction: {}
         )
 
-        let result = sut.convertModel()
+        let result = sut.returnCards()
         #expect(result.count == 2)
         #expect(result.first?.homepageUrl == "https://www.derbyshire.gov.uk/")
         #expect(result.first?.description == "Find services like education, social care and transport on the Derbyshire County Council website")

@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
-struct StoredLocalAuthrorityCardView: View {
+
+struct StoredLocalAuthorityCardView: View {
     let model: StoredLocalAuthorityWidgetCardModel
     var body: some View {
         ZStack {

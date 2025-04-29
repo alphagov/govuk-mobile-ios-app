@@ -21,9 +21,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedHomeViewController: UIViewController?
     var _receivedHomeSearchAction: (() -> Void)?
+    var _receivedEditLocalAuthorityAction: (() -> Void)?
     var _receivedHomeRecentActivityAction: (() -> Void)?
     var _receivedTopicWidgetViewModel: TopicsWidgetViewModel?
     override func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
+        _receivedEditLocalAuthorityAction = actions.editLocalAuthorityAction
         _receivedHomeRecentActivityAction = actions.recentActivityAction
         _receivedTopicWidgetViewModel = dependencies.topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
@@ -60,7 +62,6 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedDismissAction = dismissAction
         return _stubbedEditTopicsViewController ?? UIViewController()
     }
-
     var _stubbedLocalAuthortiyPostcodeEntryViewController: UIViewController?
     var _receivedLocalAuthorityDismissAction: (() -> Void)?
     override func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,

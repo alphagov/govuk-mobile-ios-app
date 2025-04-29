@@ -1,6 +1,39 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "signedOutSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need to sign in again to use the app"
+          }
+        }
+      }
+    },
+    "signedOutTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’ve signed out"
+          }
+        }
+      }
+    },
+    "signInButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with GOV.UK One Login"
+          }
+        }
+      }
+    },
     "signOutBody" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -18,11 +18,9 @@ final class StoredLocalAuthorityWidgetViewSnapshotTests: SnapshotTestCase {
         localAuthorityItem.slug = "slug"
         localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
         localAuthorityItem.tier = "unitary"
-        let viewModel = StoredLocalAuthorityWidgetViewModel(
-            analyticsService: MockAnalyticsService(),
-            localAuthorities: [localAuthorityItem],
-            urlOpener: MockURLOpener(),
-            openEditViewAction: {}
+
+        let viewModel = returnViewModel(
+            localAuthorities: [localAuthorityItem]
         )
         let view = StoredLocalAuthorityWidgetView(
             viewModel: viewModel
@@ -43,11 +41,9 @@ final class StoredLocalAuthorityWidgetViewSnapshotTests: SnapshotTestCase {
         localAuthorityItem.slug = "slug"
         localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
         localAuthorityItem.tier = "unitary"
-        let viewModel = StoredLocalAuthorityWidgetViewModel(
-            analyticsService: MockAnalyticsService(),
-            localAuthorities: [localAuthorityItem],
-            urlOpener: MockURLOpener(),
-            openEditViewAction: {}
+
+        let viewModel = returnViewModel(
+            localAuthorities: [localAuthorityItem]
         )
         let view = StoredLocalAuthorityWidgetView(
             viewModel: viewModel
@@ -78,18 +74,12 @@ final class StoredLocalAuthorityWidgetViewSnapshotTests: SnapshotTestCase {
         childAuthority.homepageUrl = "https://www.derbyshiredales.gov.uk/"
         childAuthority.tier = "district"
         childAuthority.parent = parentAuthority
-
         var authorityItems: [LocalAuthorityItem] = []
         authorityItems.append(parentAuthority)
         authorityItems.append(childAuthority)
 
-
-
-        let viewModel = StoredLocalAuthorityWidgetViewModel(
-            analyticsService: MockAnalyticsService(),
-            localAuthorities: authorityItems,
-            urlOpener: MockURLOpener(),
-            openEditViewAction: {}
+        let viewModel = returnViewModel(
+            localAuthorities: authorityItems
         )
         let view = StoredLocalAuthorityWidgetView(
             viewModel: viewModel
@@ -125,13 +115,8 @@ final class StoredLocalAuthorityWidgetViewSnapshotTests: SnapshotTestCase {
         authorityItems.append(parentAuthority)
         authorityItems.append(childAuthority)
 
-
-
-        let viewModel = StoredLocalAuthorityWidgetViewModel(
-            analyticsService: MockAnalyticsService(),
-            localAuthorities: authorityItems,
-            urlOpener: MockURLOpener(),
-            openEditViewAction: {}
+        let viewModel = returnViewModel(
+            localAuthorities: authorityItems
         )
         let view = StoredLocalAuthorityWidgetView(
             viewModel: viewModel
@@ -140,6 +125,14 @@ final class StoredLocalAuthorityWidgetViewSnapshotTests: SnapshotTestCase {
             viewController: HostingViewController(rootView: view),
             mode: .dark,
             prefersLargeTitles: true
+        )
+    }
+    private func returnViewModel(localAuthorities: [LocalAuthorityItem]) -> StoredLocalAuthorityWidgetViewModel {
+        return StoredLocalAuthorityWidgetViewModel(
+            analyticsService: MockAnalyticsService(),
+            localAuthorities: localAuthorities,
+            urlOpener: MockURLOpener(),
+            openEditViewAction: {}
         )
     }
 }

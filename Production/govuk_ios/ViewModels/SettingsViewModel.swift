@@ -126,8 +126,10 @@ class SettingsViewModel: SettingsViewModelInterface {
         ].compactMap { $0 }
     }
 
-    private var accountSection: GroupedListSection {
-        GroupedListSection(
+    private var accountSection: GroupedListSection? {
+        guard authenticationService.isSignedIn else { return nil }
+        let rowTitle = String.settings.localized("manageAccountRowTitle")
+        return GroupedListSection(
             heading: nil,
             rows: [
                 InformationRow(
@@ -138,14 +140,22 @@ class SettingsViewModel: SettingsViewModelInterface {
                     detail: ""),
                 LinkRow(
                     id: "settings.account.row",
-                    title: String.settings.localized("manageAccountRowTitle"),
-                    action: {})
+                    title: rowTitle,
+                    action: { [weak self] in
+                        if self?.urlOpener.openIfPossible(
+                            Constants.API.privacyPolicyUrl
+                        ) == true {
+                            self?.trackNavigationEvent(rowTitle, external: true)
+                        }
+                    }
+                )
             ],
             footer: String.settings.localized("accountSectionFooter"))
     }
 
-    private var signoutSection: GroupedListSection {
-        GroupedListSection(
+    private var signoutSection: GroupedListSection? {
+        guard authenticationService.isSignedIn else { return nil }
+        return GroupedListSection(
             heading: nil,
             rows: [
                 DetailRow(

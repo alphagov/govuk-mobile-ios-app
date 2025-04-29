@@ -66,7 +66,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
             }
         )
     }
-    // print statements have been left in for post amigos purposes
+    
     func fetchLocalAuthority(postCode: String) {
         service.fetchLocalAuthority(postcode: postCode) { [weak self] results
             in

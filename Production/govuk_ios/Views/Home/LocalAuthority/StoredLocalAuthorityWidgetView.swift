@@ -9,29 +9,31 @@ struct StoredLocalAuthorityWidgetView: View {
     }
 
     var body: some View {
-        VStack(spacing: 6) {
-            HStack {
-                Text(viewModel.title)
-                    .font(Font.govUK.title3Semibold)
-                    .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
-                Spacer()
-                Button {
-                    viewModel.openEditViewAction()
-                } label: {
-                    Text(viewModel.editButtonTitle)
-                        .font(.govUK.body)
-                        .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
-                }
-            }
-            if viewModel.localAuthorities.count == 2 {
+        ScrollView {
+            VStack(spacing: 6) {
                 HStack {
-                    Text(viewModel.twoTierAuthorityDescription)
-                        .font(.govUK.body)
+                    Text(viewModel.title)
+                        .font(Font.govUK.title3Semibold)
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
                     Spacer()
+                    Button {
+                        viewModel.openEditViewAction()
+                    } label: {
+                        Text(viewModel.editButtonTitle)
+                            .font(.govUK.body)
+                            .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
+                    }
                 }
+                if viewModel.localAuthorities.count == 2 {
+                    HStack {
+                        Text(viewModel.twoTierAuthorityDescription)
+                            .font(.govUK.body)
+                            .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                        Spacer()
+                    }
+                }
+                cardView
             }
-            cardView
         }
     }
     @ViewBuilder

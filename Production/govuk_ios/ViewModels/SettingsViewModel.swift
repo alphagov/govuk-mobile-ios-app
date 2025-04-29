@@ -143,7 +143,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                     title: rowTitle,
                     action: { [weak self] in
                         if self?.urlOpener.openIfPossible(
-                            Constants.API.privacyPolicyUrl
+                            Constants.API.manageAccountURL
                         ) == true {
                             self?.trackNavigationEvent(rowTitle, external: true)
                         }

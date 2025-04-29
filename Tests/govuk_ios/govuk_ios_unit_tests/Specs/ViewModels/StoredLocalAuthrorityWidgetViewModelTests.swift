@@ -117,7 +117,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
 
         let result = sut.convertModel()
         #expect(result.count == 2)
-        #expect(result.first?.homepageUrl == "https://www.derbyshiredales.gov.uk/")
-        #expect(result.first?.description == "Find services like education, social care and transport on the Derbyshire Dales District Council website")
+        #expect(result.first?.homepageUrl == "https://www.derbyshire.gov.uk/")
+        #expect(result.first?.description == "Find services like education, social care and transport on the Derbyshire County Council website")
     }
 }

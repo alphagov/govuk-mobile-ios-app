@@ -12,16 +12,19 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
-        let notficationService = MockNotificationService()
-        notficationService._stubbedIsFetureEnabled = false
+        let notificationService = MockNotificationService()
+        notificationService._stubbedIsFetureEnabled = false
+        let authenticationService = MockAuthenticationService()
+        authenticationService._stubbedIsSignedIn = true
+        authenticationService._stubbedUserEmail = "test@example.com"
 
         let viewModel = SettingsViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            authenticationService: MockAuthenticationService(),
-            notificationService: notficationService,
+            authenticationService: authenticationService,
+            notificationService: notificationService,
             notificationCenter: .default
         )
         let settingsContentView = SettingsView(
@@ -42,16 +45,20 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
-        let notficationService = MockNotificationService()
-        notficationService._stubbedIsFetureEnabled = false
+        let notificationService = MockNotificationService()
+        notificationService._stubbedIsFetureEnabled = false
+        let authenticationService = MockAuthenticationService()
+        authenticationService._stubbedIsSignedIn = true
+        authenticationService._stubbedUserEmail = "test@example.com"
+
 
         let viewModel = SettingsViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            authenticationService: MockAuthenticationService(),
-            notificationService: notficationService,
+            authenticationService: authenticationService,
+            notificationService: notificationService,
             notificationCenter: .default
         )
         let settingsContentView = SettingsView(
@@ -74,16 +81,19 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
-        let notficationService = MockNotificationService()
-        notficationService._stubbedIsFetureEnabled = true
+        let notificationService = MockNotificationService()
+        notificationService._stubbedIsFetureEnabled = true
+        let authenticationService = MockAuthenticationService()
+        authenticationService._stubbedIsSignedIn = true
+        authenticationService._stubbedUserEmail = "test@example.com"
 
         let viewModel = SettingsViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            authenticationService: MockAuthenticationService(),
-            notificationService: notficationService,
+            authenticationService: authenticationService,
+            notificationService: notificationService,
             notificationCenter: .default
         )
         let settingsContentView = SettingsView(
@@ -104,16 +114,19 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         let mockVersionProvider = MockAppVersionProvider()
         mockVersionProvider.versionNumber = "1.2.3"
         mockVersionProvider.buildNumber = "123"
-        let notficationService = MockNotificationService()
-        notficationService._stubbedIsFetureEnabled = true
+        let notificationService = MockNotificationService()
+        notificationService._stubbedIsFetureEnabled = true
+        let authenticationService = MockAuthenticationService()
+        authenticationService._stubbedIsSignedIn = true
+        authenticationService._stubbedUserEmail = "test@example.com"
 
         let viewModel = SettingsViewModel(
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
-            authenticationService: MockAuthenticationService(),
-            notificationService: notficationService,
+            authenticationService: authenticationService,
+            notificationService: notificationService,
             notificationCenter: .default
         )
         

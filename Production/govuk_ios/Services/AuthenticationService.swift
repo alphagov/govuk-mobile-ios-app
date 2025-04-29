@@ -8,6 +8,7 @@ protocol AuthenticationServiceInterface {
     var idToken: String? { get }
     var accessToken: String? { get }
     var userEmail: String? { get async }
+    var isSignedIn: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationResult
     func signOut()
@@ -23,12 +24,17 @@ class AuthenticationService: AuthenticationServiceInterface {
 
     var userEmail: String? {
         get async {
-            guard let payload = try? await JWTExtractor().extract(jwt: self.idToken!)
+            guard let idToken,
+                  let payload = try? await JWTExtractor().extract(jwt: idToken)
             else {
                 return nil
             }
             return payload.email
         }
+    }
+
+    var isSignedIn: Bool {
+        refreshToken != nil
     }
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
@@ -54,6 +60,7 @@ class AuthenticationService: AuthenticationServiceInterface {
 
     func signOut() {
         secureStoreService.deleteItem(itemName: "refreshToken")
+        try? secureStoreService.delete()
         setTokens()
     }
 

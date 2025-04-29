@@ -22,6 +22,20 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
+    func fetchSavedLocalAuthority_fetchesFromRepository() async throws {
+        let mockServiceClient = MockLocalServiceClient()
+        let mockRepository = MockLocalAuthorityRepository()
+
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+        _ = sut.fetchSavedLocalAuthority()
+        #expect(mockRepository._didFetchLocalAuthority)
+
+    }
+
+    @Test
     func fetchLocalAuthority_addressLists_returnsExpectedResult() async throws {
         let addresses:[LocalAuthorityAddress] = [
             LocalAuthorityAddress(

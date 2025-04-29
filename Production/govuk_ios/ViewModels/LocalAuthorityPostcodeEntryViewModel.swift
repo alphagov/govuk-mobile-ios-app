@@ -73,13 +73,10 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
             switch results {
             case .success(let response as LocalAuthority):
                 self?.localAuthority = response
-                print(response.localAuthority.name)
             case .success(let response as LocalAuthoritiesList):
                 self?.localAuthorityAddressList = response
-                print(response.addresses)
             case .success(let response as LocalErrorMessage):
                 self?.localAuthorityErrorMessage = response
-                print(response.message)
             case .failure(let error):
                 self?.shouldShowErrorMessage.toggle()
             default:

@@ -52,6 +52,7 @@ struct ViewControllerBuilderTests {
             urlOpener: MockURLOpener(),
             versionProvider: MockAppVersionProvider(),
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService(),
             notificationCenter: .default
         )

@@ -20,6 +20,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: notficationService,
             notificationCenter: .default
         )
@@ -49,6 +50,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: notficationService,
             notificationCenter: .default
         )
@@ -80,6 +82,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: notficationService,
             notificationCenter: .default
         )
@@ -109,6 +112,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             urlOpener: MockURLOpener(),
             versionProvider: mockVersionProvider,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: notficationService,
             notificationCenter: .default
         )
@@ -156,4 +160,5 @@ class GroupedListViewModel: SettingsViewModelInterface {
     func trackScreen(screen: any TrackableScreen) {
         // Do Nothing
     }
+    var signoutAction: (() -> Void)?
 }

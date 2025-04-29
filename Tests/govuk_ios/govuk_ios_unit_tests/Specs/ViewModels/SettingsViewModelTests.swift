@@ -26,6 +26,7 @@ class SettingsViewModelTests {
             urlOpener: mockURLOpener,
             versionProvider: mockVersionProvider,
             deviceInformationProvider: mockDeviceInformationProvider,
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService(),
             notificationCenter: .default
         )
@@ -155,6 +156,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: .init()
             )
@@ -189,6 +191,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: .init()
             )
@@ -223,6 +226,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: .init()
             )
@@ -255,6 +259,7 @@ class SettingsViewModelTests {
                 urlOpener: mockURLOpener,
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: .init()
             )
@@ -288,6 +293,7 @@ class SettingsViewModelTests {
                 urlOpener: mockURLOpener,
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: .init()
              )
@@ -320,6 +326,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: mockNotifcationCenter
             )
@@ -357,6 +364,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: mockNotifcationCenter
             )
@@ -394,6 +402,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: mockNotifcationCenter
             )
@@ -431,6 +440,7 @@ class SettingsViewModelTests {
                 urlOpener: MockURLOpener(),
                 versionProvider: MockAppVersionProvider(),
                 deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
                 notificationCenter: mockNotifcationCenter
             )

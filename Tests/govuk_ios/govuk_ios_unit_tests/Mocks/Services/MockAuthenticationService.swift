@@ -5,6 +5,15 @@ import Authentication
 @testable import govuk_ios
 
 class MockAuthenticationService: AuthenticationServiceInterface {
+    var userEmail: String?
+
+    var _stubbedIsSignedIn: Bool = false
+    var isSignedIn: Bool {
+        _stubbedIsSignedIn
+    }
+
+    func signOut() { }
+
     var refreshToken: String?
     var idToken: String?
     var accessToken: String?

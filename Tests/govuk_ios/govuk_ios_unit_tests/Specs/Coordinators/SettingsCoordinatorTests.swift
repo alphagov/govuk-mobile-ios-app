@@ -26,6 +26,7 @@ struct SettingsCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: CoordinatorBuilder.mock,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService()
         )
         subject.start()
@@ -46,6 +47,7 @@ struct SettingsCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: CoordinatorBuilder.mock,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService()
         )
         subject.start(url: nil)
@@ -69,6 +71,7 @@ struct SettingsCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService()
         )
         subject.start(url: nil)
@@ -92,6 +95,7 @@ struct SettingsCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService()
         )
         subject.start(url: nil)
@@ -111,6 +115,7 @@ struct SettingsCoordinatorTests {
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: CoordinatorBuilder.mock,
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService()
         )
         subject.start()

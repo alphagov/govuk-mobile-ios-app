@@ -13,6 +13,7 @@ struct StoredLocalAuthorityWidgetView: View {
             HStack {
                 Text(viewModel.title)
                     .font(Font.govUK.title3Semibold)
+                    .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
                 Spacer()
                 Button {
                     viewModel.openEditViewAction()
@@ -25,6 +26,8 @@ struct StoredLocalAuthorityWidgetView: View {
             if viewModel.localAuthorities.count == 2 {
                 HStack {
                     Text(viewModel.twoTierAuthorityDescription)
+                        .font(.govUK.body)
+                        .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
                     Spacer()
                 }
             }

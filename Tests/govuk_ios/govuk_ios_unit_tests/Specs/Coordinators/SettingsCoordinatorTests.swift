@@ -126,4 +126,28 @@ struct SettingsCoordinatorTests {
         subject.didReselectTab()
         #expect(settingsViewController.rootView.viewModel.scrollToTop == true)
     }
+
+    @Test
+    func selecting_signOut_starts_signOutConfirmation() throws {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockSignOutConfirmationCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSignOutConfirmationCoordinator = mockSignOutConfirmationCoordinator
+        let navigationController = UINavigationController()
+        let subject = SettingsCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
+            notificationService: MockNotificationService()
+        )
+        subject.start(url: nil)
+        mockViewControllerBuilder._receivedSettingsViewModel?.signoutAction?()
+        #expect(mockSignOutConfirmationCoordinator._startCalled)
+    }
 }

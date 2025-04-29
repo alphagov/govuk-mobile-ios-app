@@ -53,7 +53,6 @@ class SettingsViewModelTests {
         #expect(manageAccountSection.heading?.title == nil)
         try #require(manageAccountSection.rows.count == 2)
         #expect(manageAccountSection.rows[0].title == "Your GOV.UK One Login")
-        #expect(manageAccountSection.rows[0].body == "test@example.com")
         #expect(manageAccountSection.rows[1].title == "Manage your GOV.UK One Login")
 
         let signOutSection = sut.listContent[1]

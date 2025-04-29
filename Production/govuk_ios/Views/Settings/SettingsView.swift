@@ -42,6 +42,7 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                     }
                 }
             }
+            .padding(.top, 12)
         }
         .onAppear {
             viewModel.trackScreen(screen: self)

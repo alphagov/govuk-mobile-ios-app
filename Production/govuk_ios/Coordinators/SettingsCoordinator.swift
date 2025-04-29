@@ -8,6 +8,7 @@ class SettingsCoordinator: TabItemCoordinator {
     private var settingsViewModel: any SettingsViewModelInterface
     private let coordinatorBuilder: CoordinatorBuilder
     private let analyticsService: AnalyticsServiceInterface
+    let authenticationService: AuthenticationServiceInterface
     private let notificationService: NotificationServiceInterface
 
     init(navigationController: UINavigationController,
@@ -22,6 +23,7 @@ class SettingsCoordinator: TabItemCoordinator {
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
+        self.authenticationService = authenticationService
         self.notificationService = notificationService
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
@@ -48,6 +50,14 @@ class SettingsCoordinator: TabItemCoordinator {
         set([viewController], animated: false)
     }
 
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        if child is SignOutConfirmationCoordinator,
+           !authenticationService.isSignedIn {
+            finish()
+        }
+    }
+
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
         deeplinkStore.route(
             for: url,
@@ -70,11 +80,8 @@ class SettingsCoordinator: TabItemCoordinator {
     }
 
     private func startSignOut() {
-        let coordinator = coordinatorBuilder.signOut(
-            navigationController: root,
-            completion: { [weak self] in
-                self?.root.dismiss(animated: true)
-            }
+        let coordinator = coordinatorBuilder.signOutConfirmation(
+            navigationController: root
         )
         present(coordinator)
     }

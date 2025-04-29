@@ -30,6 +30,38 @@ struct EditLocalAuthorityCoordinatorTests {
     }
 
     @Test
+    func cancelButton_callsDismissed() async {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        let mockNavigationController = MockNavigationController()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockCoordinator = MockBaseCoordinator()
+
+        mockViewControllerBuilder._stubbedLocalAuthortiyPostcodeEntryViewController = expectedViewController
+        var sut: EditLocalAuthorityCoordinator!
+        let dismissed = await  withCheckedContinuation { continuation in
+              sut = EditLocalAuthorityCoordinator(
+                navigationController: mockNavigationController,
+                viewControllerBuilder: mockViewControllerBuilder,
+                analyticsService: MockAnalyticsService(),
+                localAuthorityService: MockLocalAuthorityService(),
+                coordinatorBuilder: mockCoordinatorBuilder,
+                dismissed: {
+                    continuation.resume(returning: true)
+                }
+            )
+            mockCoordinator.start(sut)
+            mockViewControllerBuilder._receivedLocalAuthorityDismissAction?()
+        }
+        
+        #expect(dismissed)
+        #expect(mockCoordinator._childDidFinishReceivedChild == sut)
+        #expect(sut != nil)
+        #expect(mockNavigationController._dismissCalled)
+        #expect(mockNavigationController._receivedDismissAnimated == true)
+    }
+
+    @Test
     func dragToDismiss_callsDismissed() async {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()

@@ -94,12 +94,11 @@ struct HomeViewModel {
 
     @MainActor
     private var localAuthorityWidget: WidgetView? {
+        guard featureEnabled(.localServices)
+        else { return nil }
         if let storedLocalAuthortiy = localAuthorityService.fetchSavedLocalAuthority().first {
             return nil
         }
-        guard featureEnabled(.localServices)
-        else { return nil }
-
         let viewModel = LocalAuthorityWidgetViewModel(
             tapAction: localAuthorityAction
         )
@@ -124,7 +123,7 @@ struct HomeViewModel {
         let localAuthorities = localAuthorityService.fetchSavedLocalAuthority()
         guard localAuthorities.count > 0 else { return nil }
 
-        let viewModel = StoredLocalAuthrorityWidgetViewModel(
+        let viewModel = StoredLocalAuthorityWidgetViewModel(
             analyticsService: analyticsService,
             localAuthorities: localAuthorities,
             urlOpener: urlOpener,

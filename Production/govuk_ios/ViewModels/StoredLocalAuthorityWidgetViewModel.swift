@@ -2,7 +2,7 @@ import Foundation
 import GOVKit
 import SwiftUI
 
-class StoredLocalAuthrorityWidgetViewModel {
+class StoredLocalAuthorityWidgetViewModel {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     let localAuthorities: [LocalAuthorityItem]

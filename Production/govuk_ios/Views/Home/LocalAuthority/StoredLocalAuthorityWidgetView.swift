@@ -2,9 +2,9 @@ import Foundation
 import SwiftUI
 
 struct StoredLocalAuthorityWidgetView: View {
-    private let viewModel: StoredLocalAuthrorityWidgetViewModel
+    private let viewModel: StoredLocalAuthorityWidgetViewModel
 
-    init(viewModel: StoredLocalAuthrorityWidgetViewModel) {
+    init(viewModel: StoredLocalAuthorityWidgetViewModel) {
         self.viewModel = viewModel
     }
 

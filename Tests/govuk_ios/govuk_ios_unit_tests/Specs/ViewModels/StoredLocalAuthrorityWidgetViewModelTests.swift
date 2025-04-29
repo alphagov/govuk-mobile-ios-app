@@ -21,7 +21,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
         localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
         localAuthorityItem.tier = "unitary"
 
-        let sut = StoredLocalAuthrorityWidgetViewModel(
+        let sut = StoredLocalAuthorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorities: [localAuthorityItem],
             urlOpener: mockURLOpener,
@@ -46,7 +46,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
         localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
         localAuthorityItem.tier = "unitary"
 
-        let sut = StoredLocalAuthrorityWidgetViewModel(
+        let sut = StoredLocalAuthorityWidgetViewModel(
             analyticsService: mockAnalyticsService,
             localAuthorities: [localAuthorityItem],
             urlOpener: mockURLOpener,
@@ -71,7 +71,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
         mockAuthorityItem.homepageUrl = "https://www.towerhamlets.gov.uk"
         mockAuthorityItem.tier = "unitary"
 
-        let sut = StoredLocalAuthrorityWidgetViewModel(
+        let sut = StoredLocalAuthorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorities: [mockAuthorityItem],
             urlOpener: MockURLOpener(),
@@ -108,7 +108,7 @@ struct StoredLocalAuthrorityWidgetViewModelTests {
         authorityItems.append(parentAuthority)
         authorityItems.append(childAuthority)
 
-        let sut = StoredLocalAuthrorityWidgetViewModel(
+        let sut = StoredLocalAuthorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorities: authorityItems,
             urlOpener: MockURLOpener(),

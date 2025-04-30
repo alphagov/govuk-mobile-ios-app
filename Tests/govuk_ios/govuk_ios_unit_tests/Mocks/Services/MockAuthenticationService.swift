@@ -15,7 +15,9 @@ class MockAuthenticationService: AuthenticationServiceInterface {
         _stubbedIsSignedIn
     }
 
-    func signOut() { }
+    func signOut() {
+        _stubbedIsSignedIn = false
+    }
 
     var refreshToken: String?
     var idToken: String?

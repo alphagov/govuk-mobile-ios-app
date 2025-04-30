@@ -29,7 +29,7 @@ final class SignOutConfirmationCoordinator: BaseCoordinator {
     }
 
     private func dismiss() {
-        self.finish()
+        finish()
         root.dismiss(animated: authenticationService.isSignedIn)
     }
 }

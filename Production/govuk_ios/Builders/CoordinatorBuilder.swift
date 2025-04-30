@@ -245,7 +245,7 @@ class CoordinatorBuilder {
         )
     }
 
-    func signOutConfirmation(navigationController: UINavigationController) -> BaseCoordinator {
+    func signOutConfirmation() -> BaseCoordinator {
         SignOutConfirmationCoordinator(
             navigationController: UINavigationController(),
             viewControllerBuilder: ViewControllerBuilder(),

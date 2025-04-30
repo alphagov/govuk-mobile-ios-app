@@ -80,9 +80,7 @@ class SettingsCoordinator: TabItemCoordinator {
     }
 
     private func startSignOut() {
-        let coordinator = coordinatorBuilder.signOutConfirmation(
-            navigationController: root
-        )
+        let coordinator = coordinatorBuilder.signOutConfirmation()
         present(coordinator)
     }
 }

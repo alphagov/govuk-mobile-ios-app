@@ -52,11 +52,3 @@ struct SignedOutView: View {
         .padding(.horizontal, 16)
     }
 }
-
-#Preview {
-    SignedOutView(viewModel: SignedOutViewModel(
-        authenticationService: Container.shared.authenticationService.resolve(),
-        analyticsService: Container.shared.analyticsService.resolve(),
-        completion: { })
-    )
-}

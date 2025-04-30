@@ -252,10 +252,7 @@ struct CoordinatorBuilderTests {
     @Test
     func signOutConfirmation_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.signOutConfirmation(
-            navigationController: mockNavigationController
-        )
+        let coordinator = subject.signOutConfirmation()
 
         #expect(coordinator is SignOutConfirmationCoordinator)
     }

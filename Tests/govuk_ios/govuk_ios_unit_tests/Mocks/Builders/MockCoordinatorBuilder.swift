@@ -160,7 +160,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedSignOutConfirmationCoordinator: MockBaseCoordinator?
-    override func signOutConfirmation(navigationController: UINavigationController) -> BaseCoordinator {
+    override func signOutConfirmation() -> BaseCoordinator {
         _stubbedSignOutConfirmationCoordinator ?? MockBaseCoordinator()
     }
 

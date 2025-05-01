@@ -23,13 +23,35 @@
         }
       }
     },
+    "accountRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your GOV.UK One Login"
+          }
+        }
+      }
+    },
+    "accountSectionFooter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You might need to sign in again to manage your GOV.UK One Login details."
+          }
+        }
+      }
+    },
     "appUsageFooter" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. These statistics are anonymous and do not contain any of your personal information. Read more about this in the privacy notice."
+            "value" : "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. The team will not use these statistics to directly identify you. Read more about this in the privacy notice."
           }
         }
       }
@@ -63,6 +85,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Help and feedback"
+          }
+        }
+      }
+    },
+    "manageAccountRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage your GOV.UK One Login"
           }
         }
       }
@@ -184,6 +217,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy notice"
+          }
+        }
+      }
+    },
+    "signOutRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign out"
           }
         }
       }

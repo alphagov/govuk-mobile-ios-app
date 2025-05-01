@@ -261,6 +261,26 @@ struct CoordinatorBuilderTests {
     }
     
 
+    @Test
+    func signOutConfirmation_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.signOutConfirmation()
+
+        #expect(coordinator is SignOutConfirmationCoordinator)
+    }
+
+    @Test
+    func signedOut_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.signedOut(
+            navigationController: mockNavigationController,
+            completion: { }
+        )
+
+        #expect(coordinator is SignedOutCoordinator)
+    }
+
     func webView_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let testURL = URL(string: "https://www.gov.uk")!

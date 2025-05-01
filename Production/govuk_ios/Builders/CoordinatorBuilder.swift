@@ -52,6 +52,7 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
             deviceInformationProvider: DeviceInformationProvider(),
+            authenticationService: container.authenticationService.resolve(),
             notificationService: container.notificationService.resolve()
         )
     }
@@ -253,6 +254,26 @@ class CoordinatorBuilder {
             localAuthenticationService: container.localAuthenticationService.resolve(),
             authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction
+        )
+    }
+
+    func signOutConfirmation() -> BaseCoordinator {
+        SignOutConfirmationCoordinator(
+            navigationController: UINavigationController(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            authenticationService: container.authenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve()
+        )
+    }
+
+    func signedOut(navigationController: UINavigationController,
+                   completion: @escaping () -> Void) -> BaseCoordinator {
+        SignedOutCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            authenticationService: container.authenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
+            completion: completion
         )
     }
 

@@ -13,6 +13,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationAlertButtonTitle: String { get }
     var notificationsAction: (() -> Void)? { get set }
     func updateNotificationPermissionState()
+    var signoutAction: (() -> Void)? { get set }
 }
 
 // swiftlint:disable:next type_body_length
@@ -22,6 +23,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let urlOpener: URLOpener
     private let versionProvider: AppVersionProvider
     private let deviceInformationProvider: DeviceInformationProviderInterface
+    private let authenticationService: AuthenticationServiceInterface
     @Published var scrollToTop: Bool = false
     @Published var displayNotificationSettingsAlert: Bool = false
     @Published private(set) var notificationsPermissionState: NotificationPermissionState
@@ -32,21 +34,26 @@ class SettingsViewModel: SettingsViewModelInterface {
     var notificationAlertButtonTitle: String = String.settings.localized(
         "notificationAlertPrimaryButtonTitle"
     )
+    var signoutAction: (() -> Void)?
+    @Published var userEmail: String?
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,
          versionProvider: AppVersionProvider,
          deviceInformationProvider: DeviceInformationProviderInterface,
+         authenticationService: AuthenticationServiceInterface,
          notificationService: NotificationServiceInterface,
          notificationCenter: NotificationCenter) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
         self.deviceInformationProvider = deviceInformationProvider
+        self.authenticationService = authenticationService
         self.notificationService = notificationService
         self.notificationCenter = notificationCenter
         updateNotificationPermissionState()
         observeAppMoveToForeground()
+        setEmail()
     }
 
     private func observeAppMoveToForeground() {
@@ -103,67 +110,88 @@ class SettingsViewModel: SettingsViewModelInterface {
         getGroupedList()
     }
 
+    private func setEmail() {
+        Task {
+            userEmail = await self.authenticationService.userEmail
+        }
+    }
+
     private func getGroupedList() -> [GroupedListSection] {
         return [
+            accountSection,
+            signoutSection,
+            appOptionsSection,
             aboutSection,
-            notificationSection,
-            privacyTopSection,
             privacyBottomSection
         ].compactMap { $0 }
     }
 
+    private var accountSection: GroupedListSection? {
+        guard authenticationService.isSignedIn else { return nil }
+        let rowTitle = String.settings.localized("manageAccountRowTitle")
+        return GroupedListSection(
+            heading: nil,
+            rows: [
+                InformationRow(
+                    id: "settings.email.row",
+                    title: String.settings.localized("accountRowTitle"),
+                    body: userEmail,
+                    imageName: "account_icon",
+                    detail: ""),
+                LinkRow(
+                    id: "settings.account.row",
+                    title: rowTitle,
+                    action: { [weak self] in
+                        if self?.urlOpener.openIfPossible(
+                            Constants.API.manageAccountURL
+                        ) == true {
+                            self?.trackNavigationEvent(rowTitle, external: true)
+                        }
+                    }
+                )
+            ],
+            footer: String.settings.localized("accountSectionFooter"))
+    }
+
+    private var signoutSection: GroupedListSection? {
+        guard authenticationService.isSignedIn else { return nil }
+        return GroupedListSection(
+            heading: nil,
+            rows: [
+                DetailRow(
+                    id: "settings.signout.row",
+                    title: String.settings.localized("signOutRowTitle"),
+                    body: "",
+                    accessibilityHint: "",
+                    destructive: true,
+                    action: { [weak self] in
+                        self?.handleSignOutPressed()
+                    }
+                )
+            ],
+            footer: nil)
+    }
+
     private var aboutSection: GroupedListSection {
         GroupedListSection(
-            heading: GroupedListHeader(
-                title: String.settings.localized("aboutTheAppHeading"),
-                icon: nil
-            ),
+            heading: nil,
             rows: [
-                helpAndFeedbackRow(),
                 InformationRow(
                     id: "settings.version.row",
                     title: String.settings.localized("appVersionTitle"),
                     body: nil,
                     detail: versionProvider.fullBuildNumber ?? "-"
-                )
+                ),
+                helpAndFeedbackRow()
             ],
             footer: nil
         )
     }
 
-    private var notificationSection: GroupedListSection? {
-        guard notificationService.isFeatureEnabled
-        else { return nil }
+    private var appOptionsSection: GroupedListSection? {
         return GroupedListSection(
-            heading: GroupedListHeader(
-                title: String.settings.localized("notificationsTitle"),
-                icon: nil
-            ),
-            rows: [
-                notificationsSettingsRow()
-            ],
-            footer: nil
-        )
-    }
-
-    private var privacyTopSection: GroupedListSection {
-        GroupedListSection(
-            heading: GroupedListHeader(
-                title: String.settings.localized("privacyAndLegalHeading"),
-                icon: nil
-            ),
-            rows: [
-                ToggleRow(
-                    id: "settings.privacy.row",
-                    title: String.settings.localized("appUsageTitle"),
-                    isOn: hasAcceptedAnalytics,
-                    action: { [weak self] isOn in
-                        self?.analyticsService.setAcceptedAnalytics(
-                            accepted: isOn
-                        )
-                    }
-                )
-            ],
+            heading: nil,
+            rows: appOptionsRows(),
             footer: String.settings.localized("appUsageFooter")
         )
     }
@@ -230,18 +258,37 @@ class SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    private func notificationsSettingsRow() -> GroupedListRow {
-        let rowTitle = String.settings.localized("notificationsTitle")
-        let isAuthorized = notificationsPermissionState == .authorized
-        return DetailRow(
-            id: "settings.notifications.row",
-            title: rowTitle,
-            body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
-            accessibilityHint: String.settings.localized("notificationsAccessibilityHint"),
-            action: { [weak self] in
-                self?.handleNotificationSettingsPressed(title: rowTitle)
-            }
+    private func appOptionsRows() -> [GroupedListRow] {
+        var appOptionRows = [GroupedListRow]()
+
+        if notificationService.isFeatureEnabled {
+            let rowTitle = String.settings.localized("notificationsTitle")
+            let isAuthorized = notificationsPermissionState == .authorized
+            let notificationRow = DetailRow(
+                id: "settings.notifications.row",
+                title: rowTitle,
+                body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
+                accessibilityHint: String.settings.localized("notificationsAccessibilityHint"),
+                action: { [weak self] in
+                    self?.handleNotificationSettingsPressed(title: rowTitle)
+                }
+            )
+            appOptionRows.append(notificationRow)
+        }
+
+        appOptionRows.append(
+            ToggleRow(
+                id: "settings.privacy.row",
+                title: String.settings.localized("appUsageTitle"),
+                isOn: hasAcceptedAnalytics,
+                action: { [weak self] isOn in
+                    self?.analyticsService.setAcceptedAnalytics(
+                        accepted: isOn
+                    )
+                }
+            )
         )
+        return appOptionRows
     }
 
     private func handleNotificationSettingsPressed(title: String) {
@@ -254,6 +301,16 @@ class SettingsViewModel: SettingsViewModelInterface {
         } else {
             displayNotificationSettingsAlert.toggle()
         }
+    }
+
+    private func handleSignOutPressed() {
+        trackNavigationEvent(
+            String.settings.localized(
+                String.settings.localized("signOutRowTitle")
+            ),
+            external: false
+        )
+        signoutAction?()
     }
 
     private func termsAndConditionsRow() -> GroupedListRow {

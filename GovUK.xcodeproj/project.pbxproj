@@ -93,7 +93,7 @@
 		4E9F5D072DB79D370063FA78 /* PrimaryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */; };
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
-		4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityWidgetCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityWidgetCardModel.swift */; };
+		4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */; };
 		4EB7D84F2DB7F4E9002B6765 /* TextFieldStyle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D84E2DB7F4E9002B6765 /* TextFieldStyle+Extensions.swift */; };
 		4EB7D8512DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */; };
 		4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */; };
@@ -416,7 +416,7 @@
 		4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonView.swift; sourceTree = "<group>"; };
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
-		4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityWidgetCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityWidgetCardModel.swift; sourceTree = "<group>"; };
+		4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityCardModel.swift; sourceTree = "<group>"; };
 		4EB7D84E2DB7F4E9002B6765 /* TextFieldStyle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldStyle+Extensions.swift"; sourceTree = "<group>"; };
 		4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceCoordinator.swift; sourceTree = "<group>"; };
 		4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityService.swift; sourceTree = "<group>"; };
@@ -845,7 +845,7 @@
 				4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */,
 				4E265D252DB0E6510089CF9E /* Authority.swift */,
 				4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */,
-				4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityWidgetCardModel.swift */,
+				4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -2036,7 +2036,7 @@
 				D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */,
-				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityWidgetCardModel.swift in Sources */,
+				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,

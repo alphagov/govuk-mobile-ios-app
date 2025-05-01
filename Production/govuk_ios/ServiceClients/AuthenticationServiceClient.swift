@@ -5,9 +5,11 @@ import AppAuth
 import Authentication
 
 typealias AuthenticationResult = Result<Authentication.TokenResponse, AuthenticationError>
+typealias TokenRefreshResult = Result<OIDTokenResponse, TokenRefreshError>
 
 protocol AuthenticationServiceClientInterface {
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult
+    func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult
 }
 
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
@@ -33,6 +35,44 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             return AuthenticationResult.success(tokenResponse)
         } catch {
             return returnError(error)
+        }
+    }
+
+    func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult {
+        do {
+            let config = try await setConfig()
+            let oidServiceConfig = OIDServiceConfiguration(
+                authorizationEndpoint: config.authorizationEndpoint,
+                tokenEndpoint: config.tokenEndpoint
+            )
+            let tokenRequest = OIDTokenRequest(
+                configuration: oidServiceConfig,
+                grantType: OIDGrantTypeRefreshToken,
+                authorizationCode: nil,
+                redirectURL: nil,
+                clientID: appEnvironmentService.authenticationClientId,
+                clientSecret: nil,
+                scope: nil,
+                refreshToken: refreshToken,
+                codeVerifier: nil,
+                additionalParameters: nil
+            )
+
+            return try await withCheckedThrowingContinuation { continuation in
+                OIDAuthorizationService.perform(tokenRequest) { tokenResponse, _ in
+                    if let response = tokenResponse {
+                        continuation.resume(
+                            returning: .success(response)
+                        )
+                    } else {
+                        continuation.resume(
+                            returning: .failure(.tokenResponseError)
+                        )
+                    }
+                }
+            }
+        } catch {
+            return .failure(.fetchConfigError)
         }
     }
 
@@ -80,4 +120,11 @@ enum AuthenticationError: Error, Equatable {
     case loginFlow(LoginError)
     case fetchConfigError
     case generic
+}
+
+enum TokenRefreshError: Error {
+    case missingRefreshTokenError
+    case tokenResponseError
+    case decryptRefreshTokenError
+    case fetchConfigError
 }

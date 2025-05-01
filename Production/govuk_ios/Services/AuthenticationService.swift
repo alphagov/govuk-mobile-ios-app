@@ -10,6 +10,7 @@ protocol AuthenticationServiceInterface {
 
     func authenticate(window: UIWindow) async -> AuthenticationResult
     func encryptRefreshToken()
+    func tokenRefreshRequest() async -> TokenRefreshResult
 }
 
 class AuthenticationService: AuthenticationServiceInterface {
@@ -45,6 +46,35 @@ class AuthenticationService: AuthenticationServiceInterface {
             return
         }
         try? secureStoreService.saveItem(item: refreshToken, itemName: "refreshToken")
+    }
+
+    func tokenRefreshRequest() async -> TokenRefreshResult {
+        var decryptedRefreshToken: String
+        do {
+            decryptedRefreshToken = try decryptRefreshToken()
+        } catch {
+            return .failure(.decryptRefreshTokenError)
+        }
+
+        let result = await authenticationServiceClient.performTokenRefresh(
+            refreshToken: decryptedRefreshToken
+        )
+        switch result {
+        case .success(let tokenResponse):
+            setTokens(
+                refreshToken: decryptedRefreshToken,
+                idToken: tokenResponse.idToken,
+                accessToken: tokenResponse.accessToken
+            )
+            return .success(tokenResponse)
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+
+    private func decryptRefreshToken() throws -> String {
+        let fetchedRefreshToken = try secureStoreService.readItem(itemName: "refreshToken")
+        return fetchedRefreshToken
     }
 
     private func setTokens(refreshToken: String? = nil,

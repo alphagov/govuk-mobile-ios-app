@@ -77,7 +77,7 @@ struct StoredLocalAuthorityWidgetViewModelTests {
             openEditViewAction: {}
         )
 
-        let result = sut.returnCards()
+        let result = sut.cardModels()
         #expect(result.count == 1)
         #expect(result.first?.homepageUrl == "https://www.towerhamlets.gov.uk")
         #expect(result.first?.description == "Find services for your area on the London Borough of Tower Hamlets website")
@@ -114,7 +114,7 @@ struct StoredLocalAuthorityWidgetViewModelTests {
             openEditViewAction: {}
         )
 
-        let result = sut.returnCards()
+        let result = sut.cardModels()
         #expect(result.count == 2)
         #expect(result.first?.homepageUrl == "https://www.derbyshire.gov.uk/")
         #expect(result.first?.description == "Find services like education, social care and transport on the Derbyshire County Council website")

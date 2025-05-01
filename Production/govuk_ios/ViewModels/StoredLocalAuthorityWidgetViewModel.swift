@@ -19,10 +19,10 @@ class StoredLocalAuthorityWidgetViewModel {
     let unitaryCardDescription = String.localAuthority.localized(
         "localAuthorityUnitaryCard"
     )
-    let localAuthorityCardWedbsiteConstant = String.localAuthority.localized(
+    let localAuthorityCardWebsiteConstant = String.localAuthority.localized(
         "localAuthorityCardWebsiteConstant"
     )
-    let localAuthorityTwoTierParentDescitption = String.localAuthority.localized(
+    let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
         "localAuthoritytwoTierParentDescitption"
     )
     let localAuthorityTwoTierChildDescription = String.localAuthority.localized(
@@ -35,24 +35,24 @@ class StoredLocalAuthorityWidgetViewModel {
                 councilName: authority.name
             )
         } else {
-            return localAuthorityTwoTierParentDescitption(
+            return localAuthorityTwoTierParentDescription(
                 councilName: authority.name
             )
         }
     }
     private func unitaryCardDescription(councilName: String) -> String {
         return "\(unitaryCardDescription) " +
-        councilName + " \(localAuthorityCardWedbsiteConstant)"
+        councilName + " \(localAuthorityCardWebsiteConstant)"
     }
 
-    private func localAuthorityTwoTierParentDescitption(councilName: String) -> String {
-        localAuthorityTwoTierParentDescitption + councilName +
-        " \(localAuthorityCardWedbsiteConstant)"
+    private func localAuthorityTwoTierParentDescription(councilName: String) -> String {
+        localAuthorityTwoTierParentDescription + councilName +
+        " \(localAuthorityCardWebsiteConstant)"
     }
 
     private func localAuthorityTwoTierChildDescription(councilName: String) -> String {
         localAuthorityTwoTierChildDescription + councilName +
-        " \(localAuthorityCardWedbsiteConstant)"
+        " \(localAuthorityCardWebsiteConstant)"
     }
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -74,11 +74,11 @@ class StoredLocalAuthorityWidgetViewModel {
         }
     }
 
-    func returnCards() -> [StoredLocalAuthorityWidgetCardModel] {
-        var cardArray: [StoredLocalAuthorityWidgetCardModel] = []
+    func returnCards() -> [StoredLocalAuthorityCardModel] {
+        var cardArray: [StoredLocalAuthorityCardModel] = []
         if localAuthorities.count == 1 {
             if let localAuthority = localAuthorities.first {
-                let card = StoredLocalAuthorityWidgetCardModel(
+                let card = StoredLocalAuthorityCardModel(
                     name: localAuthority.name,
                     homepageUrl: localAuthority.homepageUrl,
                     description: unitaryCardDescription(
@@ -90,7 +90,7 @@ class StoredLocalAuthorityWidgetViewModel {
             }
         } else {
             for item in localAuthorities {
-                let card = StoredLocalAuthorityWidgetCardModel(
+                let card = StoredLocalAuthorityCardModel(
                     name: item.name,
                     homepageUrl: item.homepageUrl,
                     description: returnCardDescription(

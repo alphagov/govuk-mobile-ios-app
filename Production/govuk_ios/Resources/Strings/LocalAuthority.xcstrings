@@ -100,7 +100,7 @@
         }
       }
     },
-    "localAuthoritytwoTierParentDescitption" : {
+    "localAuthorityTwoTierParentDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -155,7 +155,7 @@
         }
       }
     },
-    "storedLocalAuthorityWidgetDescriptionTwoTier" : {
+    "to storedLocalAuthorityWidgetTwoTierDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

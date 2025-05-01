@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct StoredLocalAuthorityCardView: View {
-    let model: StoredLocalAuthorityWidgetCardModel
+    let model: StoredLocalAuthorityCardModel
     var body: some View {
         ZStack {
             Color(uiColor: UIColor.govUK.fills.surfaceCardBlue)
@@ -14,7 +14,8 @@ struct StoredLocalAuthorityCardView: View {
                     Spacer()
                     Image(systemName: "arrow.up.right")
                         .foregroundColor(Color(UIColor.govUK.text.link))
-                }.padding(.bottom, 4)
+                }
+                .padding(.bottom, 4)
                 HStack {
                     Text(model.description)
                         .font(.govUK.body)
@@ -22,13 +23,15 @@ struct StoredLocalAuthorityCardView: View {
                         .multilineTextAlignment(.leading)
                     Spacer()
                 }
-            }.padding()
+            }
+            .padding()
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(
                     Color(cgColor: UIColor.govUK.strokes.cardBlue.cgColor),
                     lineWidth: 0.5
                 )
             )
-        }.clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }

@@ -34,7 +34,7 @@ struct HomeViewModel {
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
                 topicsWidget,
-                storedLocalAuthortiy
+                storedLocalAuthorityWidget
             ].compactMap { $0 }
         }
     }
@@ -94,11 +94,9 @@ struct HomeViewModel {
 
     @MainActor
     private var localAuthorityWidget: WidgetView? {
-        guard featureEnabled(.localServices)
+        guard featureEnabled(.localServices),
+              localAuthorityService.fetchSavedLocalAuthority().first == nil
         else { return nil }
-        if localAuthorityService.fetchSavedLocalAuthority().first != nil {
-            return nil
-        }
         let viewModel = LocalAuthorityWidgetViewModel(
             tapAction: localAuthorityAction
         )
@@ -118,7 +116,7 @@ struct HomeViewModel {
     }
 
     @MainActor
-    private var storedLocalAuthortiy: WidgetView? {
+    private var storedLocalAuthorityWidget: WidgetView? {
         guard featureEnabled(.localServices) else { return nil }
         let localAuthorities = localAuthorityService.fetchSavedLocalAuthority()
         guard localAuthorities.count > 0 else { return nil }

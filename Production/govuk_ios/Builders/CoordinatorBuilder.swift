@@ -3,6 +3,7 @@ import Foundation
 import Factory
 
 @MainActor
+// swiftlint:disable:next type_body_length
 class CoordinatorBuilder {
     private let container: Container
 

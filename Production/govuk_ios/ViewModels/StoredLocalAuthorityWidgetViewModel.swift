@@ -8,7 +8,7 @@ class StoredLocalAuthorityWidgetViewModel {
     let localAuthorities: [LocalAuthorityItem]
     let openEditViewAction: () -> Void
     let twoTierAuthorityDescription: String = String.localAuthority.localized(
-        "storedLocalAuthorityWidgetDescriptionTwoTier"
+        "storedLocalAuthorityWidgetTwoTierDescription"
     )
     let editButtonTitle = String.common.localized(
         "editButtonTitle"
@@ -23,7 +23,7 @@ class StoredLocalAuthorityWidgetViewModel {
         "localAuthorityCardWebsiteConstant"
     )
     let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
-        "localAuthoritytwoTierParentDescitption"
+        "localAuthorityTwoTierParentDescription"
     )
     let localAuthorityTwoTierChildDescription = String.localAuthority.localized(
         "localAuthorityTwoTierChildDescription"
@@ -74,31 +74,17 @@ class StoredLocalAuthorityWidgetViewModel {
         }
     }
 
-    func returnCards() -> [StoredLocalAuthorityCardModel] {
+    func cardModels() -> [StoredLocalAuthorityCardModel] {
         var cardArray: [StoredLocalAuthorityCardModel] = []
-        if localAuthorities.count == 1 {
-            if let localAuthority = localAuthorities.first {
-                let card = StoredLocalAuthorityCardModel(
-                    name: localAuthority.name,
-                    homepageUrl: localAuthority.homepageUrl,
-                    description: unitaryCardDescription(
-                        councilName: localAuthority.name
-                    )
-                )
-                cardArray.append(card)
-                return cardArray
-            }
-        } else {
-            for item in localAuthorities {
-                let card = StoredLocalAuthorityCardModel(
-                    name: item.name,
-                    homepageUrl: item.homepageUrl,
-                    description: returnCardDescription(
-                        authority: item
-                    )
-                )
-                cardArray.append(card)
-            }
+        for localAuthority in localAuthorities {
+            let card = StoredLocalAuthorityCardModel(
+                name: localAuthority.name,
+                homepageUrl: localAuthority.homepageUrl,
+                description: localAuthorities.count > 1 ?
+                returnCardDescription(authority: localAuthority) :
+                    unitaryCardDescription(councilName: localAuthority.name)
+            )
+            cardArray.append(card)
         }
         return cardArray
     }

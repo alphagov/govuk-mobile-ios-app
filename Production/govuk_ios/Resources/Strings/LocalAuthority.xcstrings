@@ -155,7 +155,7 @@
         }
       }
     },
-    "to storedLocalAuthorityWidgetTwoTierDescription" : {
+    "storedLocalAuthorityWidgetTwoTierDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

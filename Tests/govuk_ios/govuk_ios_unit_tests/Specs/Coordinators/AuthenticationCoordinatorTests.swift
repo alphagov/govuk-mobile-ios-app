@@ -21,7 +21,7 @@ class AuthenticationCoordinatorTests {
         }
         """.data(using: .utf8)!
         let tokenResponse = createTokenResponse(jsonData)
-        mockAuthenticationService._stubbedResult = .success(tokenResponse)
+        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()

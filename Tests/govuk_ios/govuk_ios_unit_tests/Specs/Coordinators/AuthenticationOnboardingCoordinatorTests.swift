@@ -7,14 +7,16 @@ import Testing
 class AuthenticationOnboardingCoordinatorTests {
     @Test @MainActor
     func start_shouldntSkipOnboarding_setsOnboarding() {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockAuthenticationOnboardingService = MockAuthenticationOnboardingService()
         let mockNavigationController = MockNavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
-        mockAuthenticationOnboardingService._stubbedShouldSkipOnboarding = false
+        mockAuthenticationOnboardingService.isFeatureEnabled = true
         let sut = AuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
-            analyticsService: MockAnalyticsService(),
+            authenticationService: mockAuthenticationService,
             authenticationOnboardingService: mockAuthenticationOnboardingService,
+            analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             completionAction: { }
         )
@@ -26,15 +28,18 @@ class AuthenticationOnboardingCoordinatorTests {
 
     @Test @MainActor
     func start_shouldSkipOnboarding_finishesCoordination() async {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockAuthenticationOnboardingService = MockAuthenticationOnboardingService()
         let mockNavigationController = MockNavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
-        mockAuthenticationOnboardingService._stubbedShouldSkipOnboarding = true
+        mockAuthenticationOnboardingService.isFeatureEnabled = true
+        mockAuthenticationService.refreshToken = UUID().uuidString
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
-                analyticsService: MockAnalyticsService(),
+                authenticationService: mockAuthenticationService,
                 authenticationOnboardingService: mockAuthenticationOnboardingService,
+                analyticsService: MockAnalyticsService(),
                 coordinatorBuilder: mockCoordinatorBuilder,
                 completionAction: { continuation.resume(returning: true) }
             )

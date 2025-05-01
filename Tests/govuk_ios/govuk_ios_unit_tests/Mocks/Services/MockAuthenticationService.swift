@@ -8,10 +8,11 @@ class MockAuthenticationService: AuthenticationServiceInterface {
     var refreshToken: String?
     var idToken: String?
     var accessToken: String?
+    var shouldReauthenticate: Bool = true
 
-    var _stubbedResult: AuthenticationResult = .failure(.generic)
+    var _stubbedAuthenticationResult: AuthenticationResult = .failure(.generic)
     func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationResult {
-        _stubbedResult
+        _stubbedAuthenticationResult
     }
 
     var _encryptRefreshTokenCallSuccess = false
@@ -22,5 +23,10 @@ class MockAuthenticationService: AuthenticationServiceInterface {
     var _decryptRefreshTokenCallSuccess = false
     func decryptRefreshToken() {
         _decryptRefreshTokenCallSuccess = true
+    }
+
+    var _stubbedTokenRefreshRequest = TokenRefreshResult.failure(.decryptRefreshTokenError)
+    func tokenRefreshRequest() async -> TokenRefreshResult {
+        _stubbedTokenRefreshRequest
     }
 }

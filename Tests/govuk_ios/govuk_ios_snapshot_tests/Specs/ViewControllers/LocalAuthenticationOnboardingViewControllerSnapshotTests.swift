@@ -4,12 +4,14 @@ import UIKit
 import GOVKit
 
 @testable import govuk_ios
+@testable import govuk_ios_unit_tests
 
 class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
+            userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),
@@ -32,6 +34,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
+            userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),

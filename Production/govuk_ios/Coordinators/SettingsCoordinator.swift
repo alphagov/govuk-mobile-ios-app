@@ -35,12 +35,7 @@ class SettingsCoordinator: TabItemCoordinator {
             notificationCenter: .default
         )
         super.init(navigationController: navigationController)
-        self.settingsViewModel.notificationsAction = { [weak self] in
-            self?.startNotificationsSettings()
-        }
-        self.settingsViewModel.signoutAction = { [weak self] in
-            self?.startSignOut()
-        }
+        setViewModelActions()
     }
 
     override func start(url: URL?) {
@@ -67,6 +62,15 @@ class SettingsCoordinator: TabItemCoordinator {
 
     func didReselectTab() {
         settingsViewModel.scrollToTop = true
+    }
+
+    private func setViewModelActions() {
+        self.settingsViewModel.notificationsAction = { [weak self] in
+            self?.startNotificationsSettings()
+        }
+        self.settingsViewModel.signoutAction = { [weak self] in
+            self?.startSignOut()
+        }
     }
 
     private func startNotificationsSettings() {

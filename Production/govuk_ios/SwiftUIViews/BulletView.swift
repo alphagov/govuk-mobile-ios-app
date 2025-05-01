@@ -2,9 +2,9 @@ import SwiftUI
 import UIComponents
 
 struct BulletView: View {
-    var bulletText: [String]
-    var bulletSpacing: CGFloat
-    var itemSpacing: CGFloat
+    private let bulletText: [String]
+    private let bulletSpacing: CGFloat
+    private let itemSpacing: CGFloat
 
     init(bulletText: [String],
          bulletSpacing: CGFloat = 20.0,
@@ -15,8 +15,10 @@ struct BulletView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading,
-               spacing: itemSpacing) {
+        VStack(
+            alignment: .leading,
+            spacing: itemSpacing
+        ) {
             ForEach(bulletText, id: \.self) { text in
                 HStack(alignment: .firstTextBaseline,
                        spacing: bulletSpacing) {
@@ -29,7 +31,7 @@ struct BulletView: View {
             }
             .foregroundStyle(Color(UIColor.govUK.text.primary))
         }
-               .padding(.horizontal, 16.0)
+        .padding(.horizontal, 16.0)
     }
 }
 

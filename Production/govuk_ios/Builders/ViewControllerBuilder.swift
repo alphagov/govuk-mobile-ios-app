@@ -32,6 +32,7 @@ class ViewControllerBuilder {
         let notificationsAction: () -> Void
         let recentActivityAction: () -> Void
         let localAuthorityAction: () -> Void
+        let editLocalAuthorityAction: () -> Void
     }
 
     @MainActor
@@ -42,6 +43,7 @@ class ViewControllerBuilder {
             notificationService: dependencies.notificationService,
             topicWidgetViewModel: dependencies.topicWidgetViewModel,
             localAuthorityAction: actions.localAuthorityAction,
+            editLocalAuthorityAction: actions.editLocalAuthorityAction,
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,

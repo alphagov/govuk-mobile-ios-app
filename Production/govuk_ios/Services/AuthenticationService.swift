@@ -7,6 +7,7 @@ protocol AuthenticationServiceInterface {
     var refreshToken: String? { get }
     var idToken: String? { get }
     var accessToken: String? { get }
+    var shouldReauthenticate: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationResult
     func encryptRefreshToken()
@@ -16,12 +17,15 @@ protocol AuthenticationServiceInterface {
 class AuthenticationService: AuthenticationServiceInterface {
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let secureStoreService: SecureStorable
+    private let userDefaults: UserDefaultsInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
-         secureStoreService: SecureStorable) {
+         secureStoreService: SecureStorable,
+         userDefaults: UserDefaultsInterface) {
+        self.userDefaults = userDefaults
         self.secureStoreService = secureStoreService
         self.authenticationServiceClient = authenticationServiceClient
     }
@@ -70,6 +74,10 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .failure(let error):
             return .failure(error)
         }
+    }
+
+    var shouldReauthenticate: Bool {
+        userDefaults.bool(forKey: .authenticationOnboardingFlowSeen)
     }
 
     private func decryptRefreshToken() throws -> String {

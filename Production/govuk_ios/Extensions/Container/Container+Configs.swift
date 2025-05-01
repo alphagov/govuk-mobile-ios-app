@@ -24,8 +24,13 @@ extension Container {
                 localisedFallbackTitle: "Enter Passcode",
                 localisedCancelTitle: "Cancel"
             )
+            #if targetEnvironment(simulator)
+            let accessControlLevel =
+            SecureStorageConfiguration.AccessControlLevel.open
+            #else
             let accessControlLevel =
             SecureStorageConfiguration.AccessControlLevel.currentBiometricsOrPasscode
+            #endif
             let config = SecureStorageConfiguration(
                 id: "GOVUK",
                 accessControlLevel: accessControlLevel,

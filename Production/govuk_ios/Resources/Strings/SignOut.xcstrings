@@ -1,0 +1,105 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "signedOutSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need to sign in again to use the app"
+          }
+        }
+      }
+    },
+    "signedOutTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’ve signed out"
+          }
+        }
+      }
+    },
+    "signInButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with GOV.UK One Login"
+          }
+        }
+      }
+    },
+    "signOutBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next time you sign in, you’ll be able to set these preferences again."
+          }
+        }
+      }
+    },
+    "signOutBulletOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "if you’re using Face ID or Touch ID to unlock the app, this will be turned off"
+          }
+        }
+      }
+    },
+    "signOutBulletTwo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "you’ll stop sharing statistics about how you use the app"
+          }
+        }
+      }
+    },
+    "signOutButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign out"
+          }
+        }
+      }
+    },
+    "signOutSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This means:"
+          }
+        }
+      }
+    },
+    "signOutTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to sign out?"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

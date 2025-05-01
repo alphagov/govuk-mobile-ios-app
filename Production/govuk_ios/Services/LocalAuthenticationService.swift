@@ -58,7 +58,7 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     func setHasSeenOnboarding() {
-        userDefaults.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
+        userDefaults.set(bool: true, forKey: .authenticationOnboardingFlowSeen)
     }
 
     var shouldSkipOnboarding: Bool {
@@ -70,6 +70,6 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     private var hasSeenOnboarding: Bool {
-        userDefaults.bool(forKey: .localAuthenticationOnboardingSeen)
+        userDefaults.bool(forKey: .authenticationOnboardingFlowSeen)
     }
 }

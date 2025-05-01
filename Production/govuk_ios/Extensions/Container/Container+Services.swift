@@ -120,9 +120,7 @@ extension Container {
 
     var authenticationOnboardingService: Factory<AuthenticationOnboardingServiceInterface> {
         Factory(self) {
-            AuthenticationOnboardingService(
-                userDefaults: UserDefaults.standard
-            )
+            AuthenticationOnboardingService()
         }
     }
 

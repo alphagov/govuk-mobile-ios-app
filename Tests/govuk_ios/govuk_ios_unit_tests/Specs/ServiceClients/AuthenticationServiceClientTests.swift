@@ -12,7 +12,6 @@ struct AuthenticationServiceClientTests {
         let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let oidConfigService = MockOIDConfigService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
-        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
 
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
@@ -38,7 +37,6 @@ struct AuthenticationServiceClientTests {
         let oidConfigService = MockOIDConfigService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
         appAuthSessionWrapper._mockAuthenticationSession._shouldReturnError = true
-        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
 
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
@@ -50,29 +48,6 @@ struct AuthenticationServiceClientTests {
             let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .loginFlow(.userCancelled))
-                authRequestComplete()
-            }
-        }
-    }
-
-    @Test @MainActor
-    func performAuthenticationFlow_failure_fetchConfigError() async {
-        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
-        let oidConfigService = MockOIDConfigService()
-        let mockAppEnvironmentService = MockAppEnvironmentService()
-        oidConfigService._shouldReturnFetchConfigError = true
-        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
-
-        let sut = AuthenticationServiceClient(
-            appEnvironmentService: mockAppEnvironmentService,
-            appAuthSession: appAuthSessionWrapper,
-            oidConfigService: oidConfigService
-        )
-
-        await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
-            if case .failure(let error) = result {
-                #expect(error == .fetchConfigError)
                 authRequestComplete()
             }
         }

@@ -2270,6 +2270,7 @@
 			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTHENTICATION_BASE_URL = "eu-west-2fij6f25zh.auth.eu-west-2.amazoncognito.com";
 				AUTHENTICATION_CLIENT_ID = 121f51j1s4kmk9i98um0b5mphh;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2310,6 +2311,7 @@
 			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTHENTICATION_BASE_URL = "";
 				AUTHENTICATION_CLIENT_ID = "";
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2571,6 +2573,7 @@
 			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTHENTICATION_BASE_URL = "eu-west-2fij6f25zh.auth.eu-west-2.amazoncognito.com";
 				AUTHENTICATION_CLIENT_ID = 121f51j1s4kmk9i98um0b5mphh;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";

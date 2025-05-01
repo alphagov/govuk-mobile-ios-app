@@ -10,7 +10,7 @@ class MockAuthenticationServiceClient: AuthenticationServiceClientInterface {
         _stubbedTokenRefreshResult
     }
     
-    var _stubbedAuthenticationResult: AuthenticationResult = .failure(.generic)
+    var _stubbedAuthenticationResult: AuthenticationResult = .failure(.loginFlow(.clientError))
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
         _stubbedAuthenticationResult
     }

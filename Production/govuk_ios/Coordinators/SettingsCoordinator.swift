@@ -65,10 +65,10 @@ class SettingsCoordinator: TabItemCoordinator {
     }
 
     private func setViewModelActions() {
-        self.settingsViewModel.notificationsAction = { [weak self] in
+        settingsViewModel.notificationsAction = { [weak self] in
             self?.startNotificationsSettings()
         }
-        self.settingsViewModel.signoutAction = { [weak self] in
+        settingsViewModel.signoutAction = { [weak self] in
             self?.startSignOut()
         }
     }

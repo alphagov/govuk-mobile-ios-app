@@ -8,6 +8,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     @Published var localAuthorityAddressList: LocalAuthoritiesList?
     @Published var postCode: String = ""
     @Published var error: PostcodeError?
+    @Published var ambiguoseAuthorities: [LocalAuthority] = []
     @Published var textFieldColour: UIColor = UIColor.govUK.strokes.listDivider
     private let analyticsService: AnalyticsServiceInterface
     let dismissAction: () -> Void
@@ -54,8 +55,19 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     }
 
     private func fetchAuthoritiesBySlug(slugs: [String]) {
-        for slug in slugs  {
-
+        for slug in slugs {
+            service.fetchAuthoritiesBySlug(slug: slug) {[weak self] result in
+                switch result {
+                case .success(let response as LocalAuthority):
+                    self?.ambiguoseAuthorities.append(response)
+                case .failure(let error):
+                    // ask graham
+                    // give a generic answer
+                    print("ask graham")
+                default:
+                    break
+                }
+            }
         }
     }
 
@@ -121,6 +133,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
                 self?.dismissAction()
             case .success(let response as LocalAuthoritiesList):
                 self?.localAuthorityAddressList = response
+                self?.fetchAuthoritiesBySlug(slugs: localAuthorityAddressList.map{ $0.addresses.s})
             case .success(let response as LocalErrorMessage):
                 self?.populateErrorMessage(error: response)
             default:

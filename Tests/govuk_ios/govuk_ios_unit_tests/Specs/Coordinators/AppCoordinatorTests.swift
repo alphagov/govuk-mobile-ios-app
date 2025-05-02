@@ -82,4 +82,65 @@ struct AppCoordinatorTests {
         #expect(mockTabCoodinator._startCalled)
     }
 
+    @Test
+    @MainActor
+    func successfulSignout_starts_loginCoordinator() throws {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockLaunchCoodinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoodinator
+
+        let tabCoordinator = TabCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: mockNavigationController,
+            analyticsService: MockAnalyticsService()
+        )
+
+        let mockSignedOutCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+
+        let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+
+        mockCoordinatorBuilder._stubbedTabCoordinator = tabCoordinator
+        mockCoordinatorBuilder._stubbedSignedOutCoordinator = mockSignedOutCoordinator
+        mockCoordinatorBuilder
+            ._stubbedAuthenticationOnboardingCoordinator = mockAuthenticationOnboardingCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: mockNavigationController
+        )
+
+        //First launch
+        subject.start()
+        //Finish launch loading
+        let launchResult = AppLaunchResponse(
+            configResult: .success(.arrange),
+            topicResult: .success(TopicResponseItem.arrangeMultiple),
+            appVersionProvider: MockAppVersionProvider()
+        )
+        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
+        // This is in order of launch
+        mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
+        mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
+        mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
+        mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
+        mockCoordinatorBuilder._receivedOnboardingDismissAction?()
+        mockCoordinatorBuilder._receivedAuthenticationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
+        mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
+
+        tabCoordinator.finish()
+        #expect(mockSignedOutCoordinator._startCalled)
+
+        mockCoordinatorBuilder._receivedSignedOutCompletion?(false)
+        #expect(mockAuthenticationOnboardingCoordinator._startCalled)
+
+    }
 }

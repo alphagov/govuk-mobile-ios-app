@@ -12,7 +12,7 @@ extension CoordinatorBuilder {
 
 class MockCoordinatorBuilder: CoordinatorBuilder {
 
-    var _stubbedTabCoordinator: MockBaseCoordinator?
+    var _stubbedTabCoordinator: BaseCoordinator?
     var _receivedTabNavigationController: UINavigationController?
     override func tab(navigationController: UINavigationController) -> BaseCoordinator {
         _receivedTabNavigationController = navigationController

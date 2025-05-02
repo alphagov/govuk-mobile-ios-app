@@ -11,11 +11,11 @@ final class SignOutConfirmationViewModel {
 
     private let analyticsService: AnalyticsServiceInterface
     private let authenticationService: AuthenticationServiceInterface
-    private let completion: () -> Void
+    private let completion: (Bool) -> Void
 
     init(authenticationService: AuthenticationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         completion: @escaping () -> Void) {
+         completion: @escaping (Bool) -> Void) {
         self.authenticationService = authenticationService
         self.analyticsService = analyticsService
         self.completion = completion
@@ -28,7 +28,7 @@ final class SignOutConfirmationViewModel {
             action: { [weak self] in
                 self?.authenticationService.signOut()
                 self?.trackNavigationEvent(buttonTitle)
-                self?.completion()
+                self?.completion(true)
             }
         )
     }
@@ -39,7 +39,7 @@ final class SignOutConfirmationViewModel {
             localisedTitle: buttonTitle,
             action: { [weak self] in
                 self?.trackNavigationEvent(buttonTitle)
-                self?.completion()
+                self?.completion(false)
             }
         )
     }

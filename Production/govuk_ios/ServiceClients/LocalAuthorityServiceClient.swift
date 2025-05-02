@@ -5,6 +5,8 @@ typealias FetchLocalAuthorityResult = Result<LocalAuthorityType, LocalAuthorityE
 
 protocol LocalAuthorityServiceClientInterface {
     func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion)
+
+    func fetchAuthoritiesBySlug(slug: String, completion: @escaping FetchLocalAuthorityCompletion)
 }
 
 enum LocalAuthorityError: LocalizedError {
@@ -23,6 +25,13 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
     func fetchLocalAuthority(postcode: String,
                              completion: @escaping FetchLocalAuthorityCompletion) {
         serviceClient.send(request: .localAuthority(postcode: postcode)) { result in
+            completion(mapResult(result))
+        }
+    }
+
+    func fetchAuthoritiesBySlug(slug: String,
+                                completion: @escaping FetchLocalAuthorityCompletion) {
+        serviceClient.send(request: .localAuthoritySlug(slug: slug)) { result in
             completion(mapResult(result))
         }
     }

@@ -53,6 +53,12 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         }
     }
 
+    private func fetchAuthoritiesBySlug(slugs: [String]) {
+        for slug in slugs  {
+
+        }
+    }
+
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }
@@ -63,6 +69,14 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
             external: true
         )
         analyticsService.track(event: event)
+    }
+
+    private func filterSlugs(localAuthorities: [LocalAuthorityItem]) -> [String] {
+        var slugs: [String] = []
+        for slug in localAuthorities {
+            slugs.append(slug.slug)
+        }
+        return Array(Set(slugs))
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {

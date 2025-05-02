@@ -83,7 +83,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         analyticsService.track(event: event)
     }
 
-    private func filterSlugs(localAuthorities: [LocalAuthorityItem]) -> [String] {
+    private func filterSlugs(localAuthorities: [LocalAuthorityAddress]) -> [String] {
         var slugs: [String] = []
         for slug in localAuthorities {
             slugs.append(slug.slug)
@@ -133,7 +133,9 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
                 self?.dismissAction()
             case .success(let response as LocalAuthoritiesList):
                 self?.localAuthorityAddressList = response
-                self?.fetchAuthoritiesBySlug(slugs: localAuthorityAddressList.map{ $0.addresses.s})
+                guard let uniqueSlugs = self?.filterSlugs(localAuthorities: response.addresses)
+                else { return }
+                self?.fetchAuthoritiesBySlug(slugs: uniqueSlugs)
             case .success(let response as LocalErrorMessage):
                 self?.populateErrorMessage(error: response)
             default:

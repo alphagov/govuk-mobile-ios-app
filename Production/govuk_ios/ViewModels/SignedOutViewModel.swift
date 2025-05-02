@@ -1,11 +1,8 @@
-import Foundation
+import SwiftUI
 import GOVKit
 import UIComponents
 
 final class SignedOutViewModel {
-    let title: String = String.signOut.localized("signedOutTitle")
-    let subTitle: String = String.signOut.localized("signedOutSubtitle")
-
     private let analyticsService: AnalyticsServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private let completion: () -> Void
@@ -18,13 +15,37 @@ final class SignedOutViewModel {
         self.completion = completion
     }
 
-    var signInButtonViewModel: GOVUKButton.ButtonViewModel {
-        let buttonTitle = String.signOut.localized("signInButtonTitle")
+    var title: String {
+        authenticationService.isSignedIn ?
+        String.signOut.localized("signedOutErrorTitle") :
+        String.signOut.localized("signedOutTitle")
+    }
+
+    var subtitle: String {
+        authenticationService.isSignedIn ?
+        String.signOut.localized("signedOutErrorSubtitle") :
+        String.signOut.localized("signedOutSubtitle")
+    }
+
+    var buttonTitle: String {
+        authenticationService.isSignedIn ?
+        String.signOut.localized("signedOutErrorButtonTitle") :
+        String.signOut.localized("signedOutButtonTitle")
+    }
+
+    var warningImage: Image? {
+        authenticationService.isSignedIn ?
+        Image(systemName: "exclamationmark.circle") :
+        nil
+    }
+
+    var signedOutButtonViewModel: GOVUKButton.ButtonViewModel {
         return GOVUKButton.ButtonViewModel(
             localisedTitle: buttonTitle,
             action: { [weak self] in
-                self?.trackNavigationEvent(buttonTitle)
-                self?.completion()
+                guard let self = self else { return }
+                self.trackNavigationEvent(self.buttonTitle)
+                self.completion()
             }
         )
     }

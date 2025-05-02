@@ -46,17 +46,10 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         case textFieldEmpty = "localAuthorityEmptyTextField"
         case invalidPostcode = "localAuthorityInvalidPostcode"
 
-        private var localizedString: String {
-            return String.localAuthority.localized(
+        var errorMessage: String {
+            String.localAuthority.localized(
                 rawValue
             )
-        }
-
-        func returnErrorMessage() -> String {
-            switch self {
-            case .textFieldEmpty, .invalidPostcode, .postCodeNotFound:
-                return localizedString
-            }
         }
     }
 

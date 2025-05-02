@@ -22,7 +22,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                         .foregroundColor(Color(UIColor.govUK.text.secondary))
                     if let errorCase = viewModel.error {
                         withAnimation {
-                            Text(errorCase.returnErrorMessage())
+                            Text(errorCase.errorMessage)
                                 .foregroundColor(
                                     Color(uiColor: UIColor.govUK.text.buttonDestructive)
                                 )

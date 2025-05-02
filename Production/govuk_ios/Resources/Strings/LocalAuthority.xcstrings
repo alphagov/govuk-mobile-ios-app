@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
-    "Key" : {
-      "extractionState" : "manual"
-    },
     "localAthorityPostcodeEntryViewExampleText" : {
       "extractionState" : "manual",
       "localizations" : {

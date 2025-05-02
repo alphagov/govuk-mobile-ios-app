@@ -54,7 +54,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             dismissAction: {}
         )
         sut.primaryButtonViewModel.action()
-        #expect(sut.error?.returnErrorMessage() == "Enter your postcode")
+        #expect(sut.error?.errorMessage == "Enter your postcode")
     }
 
     @Test
@@ -80,7 +80,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             sut.postCode = "test"
             sut.primaryButtonViewModel.action()
         }
-        #expect(result?.returnErrorMessage() == "Enter a postcode in the correct format")
+        #expect(result?.errorMessage == "Enter a postcode in the correct format")
     }
 
 
@@ -107,7 +107,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             sut.postCode = "test"
             sut.primaryButtonViewModel.action()
         }
-        #expect(result?.returnErrorMessage() == "We could not find a council for this postcode. Check the postcode and try again.")
+        #expect(result?.errorMessage == "We could not find a council for this postcode. Check the postcode and try again.")
     }
 
     @Test

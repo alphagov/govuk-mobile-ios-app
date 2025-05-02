@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 import UIComponents
 import GOVKit
+import govuk_ios
+import WebKit
 
 class HomeContentViewController: BaseViewController,
                                  UIScrollViewDelegate {
@@ -27,6 +29,14 @@ class HomeContentViewController: BaseViewController,
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+
+    private lazy var testWebViewButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Test WebView", for: .normal)
+        button.addTarget(self, action: #selector(testWebViewTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
     public init(viewModel: HomeViewModel) {
@@ -57,10 +67,21 @@ class HomeContentViewController: BaseViewController,
         viewModel.trackECommerce()
     }
 
+    @objc private func testWebViewTapped() {
+        // Create and configure the FullScreenWebViewController
+        let webVC = FullScreenWebViewController()
+        webVC.title = "WebView Test"
+
+        // Push the view controller to fill the screen
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.pushViewController(webVC, animated: true)
+    }
+
     private func configureUI() {
         scrollView.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
+        stackView.addArrangedSubview(testWebViewButton)
     }
 
     private func configureConstraints() {
@@ -80,11 +101,20 @@ class HomeContentViewController: BaseViewController,
 
     private func reloadWidgets() {
         Task {
-            self.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            // Remove all views except the test button
+            for view in self.stackView.arrangedSubviews where view != testWebViewButton {
+                view.removeFromSuperview()
+            }
             let widgets = await viewModel.widgets
             DispatchQueue.main.async {
+                // Add the test button first if it's not already in the stack
+                if !self.stackView.arrangedSubviews.contains(self.testWebViewButton) {
+                    self.stackView.insertArrangedSubview(self.testWebViewButton, at: 0)
+                }
+                // Add widgets after the test button
                 widgets.lazy.forEach(self.stackView.addArrangedSubview)
-                if let lastWidget = self.stackView.arrangedSubviews.last {
+                if let lastWidget = self.stackView.arrangedSubviews.last,
+                   lastWidget != self.testWebViewButton {
                     self.stackView.setCustomSpacing(32, after: lastWidget)
                 }
                 self.stackView.addArrangedSubview(self.crownLogoImageView)

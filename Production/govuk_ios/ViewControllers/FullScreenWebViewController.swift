@@ -3,27 +3,50 @@ import WebKit
 
 class FullScreenWebViewController: UIViewController {
     private var webView: WKWebView!
+    private var wasNavigationBarHidden = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        title = "WebView Test"
+        view.backgroundColor = .govUK.fills.surfaceBackground
+        title = title ?? "WebView"
         setupWebView()
         setupCloseButton()
         loadContent()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Store the current navigation bar state
+        if let navController = navigationController {
+            wasNavigationBarHidden = navController.isNavigationBarHidden
+            navController.setNavigationBarHidden(false, animated: animated)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Restore previous navigation bar state if we're being popped
+        if isMovingFromParent, let navController = navigationController {
+            navController.setNavigationBarHidden(wasNavigationBarHidden, animated: animated)
+        }
     }
 
     private func setupWebView() {
         let configuration = WKWebViewConfiguration()
         webView = WKWebView(frame: view.bounds, configuration: configuration)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        webView.backgroundColor = .white
+        webView.isOpaque = true
         view.addSubview(webView)
     }
 
     private func setupCloseButton() {
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                          target: self, action: #selector(dismissWebView))
-        navigationItem.rightBarButtonItem = closeButton
+        // Only add a done button if we're presented modally
+        if presentingViewController != nil && navigationController?.viewControllers.count == 1 {
+            let closeButton = UIBarButtonItem(barButtonSystemItem: .done,
+                                           target: self, action: #selector(dismissWebView))
+            navigationItem.rightBarButtonItem = closeButton
+        }
     }
 
     private func loadContent() {
@@ -54,6 +77,10 @@ class FullScreenWebViewController: UIViewController {
     }
 
     @objc private func dismissWebView() {
-        dismiss(animated: true, completion: nil)
+        if presentingViewController != nil {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }

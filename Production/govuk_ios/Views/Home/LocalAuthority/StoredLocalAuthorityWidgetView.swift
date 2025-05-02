@@ -30,7 +30,7 @@ struct StoredLocalAuthorityWidgetView: View {
                             .font(.govUK.body)
                             .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
                         Spacer()
-                    }
+                    }.padding(.bottom, 8)
                 }
                 cardView
             }

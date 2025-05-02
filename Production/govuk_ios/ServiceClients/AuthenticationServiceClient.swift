@@ -89,7 +89,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             redirectURL: nil,
             clientID: appEnvironmentService.authenticationClientId,
             clientSecret: nil,
-            scope: nil,
+            scope: "openid email",
             refreshToken: refreshToken,
             codeVerifier: nil,
             additionalParameters: nil

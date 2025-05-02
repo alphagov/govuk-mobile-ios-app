@@ -13,6 +13,6 @@ struct AuthenticationOnboardingService: AuthenticationOnboardingServiceInterface
     }
 
     var isFeatureEnabled: Bool {
-        true
+        false
     }
 }

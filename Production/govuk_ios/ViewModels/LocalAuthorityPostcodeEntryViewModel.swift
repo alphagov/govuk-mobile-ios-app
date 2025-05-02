@@ -48,7 +48,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
 
         private var localizedString: String {
             return String.localAuthority.localized(
-                self.rawValue
+                rawValue
             )
         }
 
@@ -103,7 +103,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     }
 
     private func setErrorTextFieldColour() {
-        self.textFieldColour = UIColor.govUK.strokes.error
+        textFieldColour = UIColor.govUK.strokes.error
     }
 
     func fetchLocalAuthority(postCode: String) {

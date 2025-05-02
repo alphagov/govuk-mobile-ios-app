@@ -23,6 +23,17 @@
         }
       }
     },
+    "localAuthorityEmptyTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your postcode"
+          }
+        }
+      }
+    },
     "localAuthorityExplainerViewDesciption" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,6 +52,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continue"
+          }
+        }
+      }
+    },
+    "localAuthorityInvalidPostcode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a postcode in the correct format"
           }
         }
       }
@@ -85,6 +107,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "What is your postcode?"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeNotFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We could not find a council for this postcode. Check the postcode and try again."
           }
         }
       }

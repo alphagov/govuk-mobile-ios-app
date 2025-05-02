@@ -20,8 +20,20 @@ struct LocalAuthorityPostcodeEntryView: View {
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewExampleText)
                         .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    if let errorCase = viewModel.error {
+                        withAnimation {
+                            Text(errorCase.errorMessage)
+                                .foregroundColor(
+                                    Color(uiColor: UIColor.govUK.text.buttonDestructive)
+                                )
+                                .font(Font.govUK.body)
+                        }
+                    }
                     TextField("", text: $viewModel.postCode)
-                        .textFieldStyle(.customTextFieldBorder)
+                        .textFieldStyle(
+                            CustomTextFieldBorder(
+                                borderColor: viewModel.textFieldColour)
+                        )
                     Text(viewModel.postcodeEntryViewDescriptionTitle)
                         .font(Font.govUK.bodySemibold)
                     Text(viewModel.postcodeEntryViewDescriptionBody)

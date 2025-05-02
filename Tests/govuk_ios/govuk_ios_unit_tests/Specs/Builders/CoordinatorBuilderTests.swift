@@ -275,7 +275,7 @@ struct CoordinatorBuilderTests {
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.signedOut(
             navigationController: mockNavigationController,
-            completion: { }
+            completion: { _ in }
         )
 
         #expect(coordinator is SignedOutCoordinator)

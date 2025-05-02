@@ -113,7 +113,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _stubbedSignOutConfirmationViewController: UIViewController?
     override func signOutConfirmation(authenticationService: any AuthenticationServiceInterface,
                                       analyticsService: any AnalyticsServiceInterface,
-                                      completion: @escaping () -> Void) -> UIViewController {
+                                      completion: @escaping (Bool) -> Void) -> UIViewController {
         _stubbedSignOutConfirmationViewController ?? UIViewController()
     }
 

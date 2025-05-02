@@ -164,10 +164,10 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _stubbedSignOutConfirmationCoordinator ?? MockBaseCoordinator()
     }
 
-    var _receivedSignedOutCompletion: (() -> Void)?
+    var _receivedSignedOutCompletion: ((Bool) -> Void)?
     var _stubbedSignedOutCoordinator: MockBaseCoordinator?
     override func signedOut(navigationController: UINavigationController,
-                            completion: @escaping () -> Void) -> BaseCoordinator {
+                            completion: @escaping (Bool) -> Void) -> BaseCoordinator {
         _receivedSignedOutCompletion = completion
         return _stubbedSignedOutCoordinator ?? MockBaseCoordinator()
     }

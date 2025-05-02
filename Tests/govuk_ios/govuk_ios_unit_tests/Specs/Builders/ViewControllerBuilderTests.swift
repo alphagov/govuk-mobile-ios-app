@@ -190,7 +190,7 @@ struct ViewControllerBuilderTests {
         let result = subject.signOutConfirmation(
             authenticationService:MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),
-            completion: { }
+            completion: { _ in }
         )
         let rootView = (result as? HostingViewController<SignOutConfirmationView>)?.rootView
         #expect(rootView != nil)

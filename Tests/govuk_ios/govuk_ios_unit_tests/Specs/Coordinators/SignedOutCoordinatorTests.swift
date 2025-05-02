@@ -18,7 +18,7 @@ struct SignedOutCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             authenticationService: MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),
-            completion: { }
+            completion: { _ in }
         )
 
         sut.start()

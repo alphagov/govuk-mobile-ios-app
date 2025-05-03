@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 
 class ReauthenticationCoordinator: BaseCoordinator {
-    private let navigationController: UINavigationController
     private let coordinatorBuilder: CoordinatorBuilder
     private let authenticationService: AuthenticationServiceInterface
     private let completionAction: () -> Void
@@ -11,7 +10,6 @@ class ReauthenticationCoordinator: BaseCoordinator {
          coordinatorBuilder: CoordinatorBuilder,
          authenticationService: AuthenticationServiceInterface,
          completionAction: @escaping () -> Void) {
-        self.navigationController = navigationController
         self.authenticationService = authenticationService
         self.completionAction = completionAction
         self.coordinatorBuilder = coordinatorBuilder
@@ -36,7 +34,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
             completionAction()
         case .failure:
             let coordinator = coordinatorBuilder.authenticationOnboarding(
-                navigationController: navigationController,
+                navigationController: self.root,
                 completionAction: completionAction
             )
             start(coordinator)

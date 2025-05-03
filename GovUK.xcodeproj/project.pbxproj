@@ -47,6 +47,7 @@
 		16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A402C6F8968005E820F /* SearchViewController.swift */; };
 		16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A422C6F89D9005E820F /* SearchViewModel.swift */; };
 		16F961A32C92FD15005CFB04 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961A22C92FD15005CFB04 /* SearchResultCell.swift */; };
+		16FCDE782DC4E39A000E870D /* TokenRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */; };
 		16FD684A2D39AEB5002F1597 /* SuggestionHighlighterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FD68482D39AEAE002F1597 /* SuggestionHighlighterProcessor.swift */; };
 		3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */; };
 		3D15E7B02CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7AF2CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift */; };
@@ -365,6 +366,7 @@
 		16EE1A402C6F8968005E820F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		16EE1A422C6F89D9005E820F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		16F961A22C92FD15005CFB04 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshResponse.swift; sourceTree = "<group>"; };
 		16FD68482D39AEAE002F1597 /* SuggestionHighlighterProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionHighlighterProcessor.swift; sourceTree = "<group>"; };
 		3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceClient.swift; sourceTree = "<group>"; };
 		3D15E7AF2CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateCoordinator.swift; sourceTree = "<group>"; };
@@ -1380,12 +1382,13 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4E265F142DB0E6B70089CF9E /* LocalAuthority */,
-				D04C542A2D7081C00070EE79 /* Analytics */,
-				D0D9CB922D3024C00051EDDD /* Search */,
-				4E003E7D2C75F497008FCBF2 /* AppConfig */,
 				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
 				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
+				16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */,
+				D04C542A2D7081C00070EE79 /* Analytics */,
+				4E003E7D2C75F497008FCBF2 /* AppConfig */,
+				4E265F142DB0E6B70089CF9E /* LocalAuthority */,
+				D0D9CB922D3024C00051EDDD /* Search */,
 				D041917C2CA57B3D0034722A /* Topics */,
 			);
 			path = Model;
@@ -1830,6 +1833,7 @@
 				4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */,
 				3D15E7B02CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift in Sources */,
 				4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */,
+				16FCDE782DC4E39A000E870D /* TokenRefreshResponse.swift in Sources */,
 				5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */,
 				4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */,
 				164091FA2DA3F4A600E3BE99 /* AuthenticationCoordinator.swift in Sources */,

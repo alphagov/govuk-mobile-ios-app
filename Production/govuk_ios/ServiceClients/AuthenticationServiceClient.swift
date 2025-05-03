@@ -5,7 +5,7 @@ import AppAuth
 import Authentication
 
 typealias AuthenticationResult = Result<Authentication.TokenResponse, AuthenticationError>
-typealias TokenRefreshResult = Result<OIDTokenResponse, TokenRefreshError>
+typealias TokenRefreshResult = Result<TokenRefreshResponse, TokenRefreshError>
 
 protocol AuthenticationServiceClientInterface {
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult
@@ -44,11 +44,19 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             return try await withCheckedThrowingContinuation { continuation in
                 OIDAuthorizationService.perform(
                     tokenRequest(refreshToken: refreshToken)
-                ) { tokenResponse, _ in
+                ) { [weak self] tokenResponse, _ in
+                    guard let self = self else { return }
                     if let response = tokenResponse {
-                        continuation.resume(
-                            returning: .success(response)
-                        )
+                        do {
+                            let tokenRefreshRespnse = try generateTokenRefreshResponse(response)
+                            continuation.resume(
+                                returning: .success(tokenRefreshRespnse)
+                            )
+                        } catch {
+                            continuation.resume(
+                                throwing: error
+                            )
+                        }
                     } else {
                         continuation.resume(
                             throwing: TokenRefreshError.tokenResponseError
@@ -95,6 +103,15 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             additionalParameters: nil
         )
     }
+
+    private func generateTokenRefreshResponse(
+        _ token: OIDTokenResponse
+    ) throws -> TokenRefreshResponse {
+        guard let accessToken = token.accessToken else {
+            throw TokenRefreshError.missingAccessTokenError
+        }
+        return TokenRefreshResponse(accessToken: accessToken, idToken: token.idToken)
+    }
 }
 
 enum AuthenticationError: Error, Equatable {
@@ -104,6 +121,7 @@ enum AuthenticationError: Error, Equatable {
 
 enum TokenRefreshError: Error {
     case missingRefreshTokenError
+    case missingAccessTokenError
     case tokenResponseError
     case decryptRefreshTokenError
     case genericError

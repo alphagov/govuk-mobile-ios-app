@@ -4,7 +4,6 @@ import UIKit
 import GOVKit
 
 @testable import govuk_ios
-@testable import govuk_ios_unit_tests
 
 class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {

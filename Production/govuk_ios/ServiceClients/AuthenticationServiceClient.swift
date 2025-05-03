@@ -15,14 +15,14 @@ protocol AuthenticationServiceClientInterface {
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let appAuthSession: AppAuthSessionWrapperInterface
     private let appEnvironmentService: AppEnvironmentServiceInterface
-    private let oidConfigService: OIDAuthorizationServiceWrapperInterface
+    private let oidAuthService: OIDAuthorizationServiceWrapperInterface
 
     init(appEnvironmentService: AppEnvironmentServiceInterface,
          appAuthSession: AppAuthSessionWrapperInterface,
-         oidConfigService: OIDAuthorizationServiceWrapperInterface) {
+         oidAuthService: OIDAuthorizationServiceWrapperInterface) {
         self.appEnvironmentService = appEnvironmentService
         self.appAuthSession = appAuthSession
-        self.oidConfigService = oidConfigService
+        self.oidAuthService = oidAuthService
     }
 
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
@@ -42,7 +42,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult {
         do {
             return try await withCheckedThrowingContinuation { continuation in
-                oidConfigService.perform(
+                oidAuthService.perform(
                     tokenRequest(refreshToken: refreshToken)
                 ) { [weak self] tokenResponse, _ in
                     guard let self = self else { return }

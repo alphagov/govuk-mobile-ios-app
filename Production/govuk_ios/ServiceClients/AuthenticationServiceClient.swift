@@ -42,7 +42,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult {
         do {
             return try await withCheckedThrowingContinuation { continuation in
-                OIDAuthorizationService.perform(
+                oidConfigService.perform(
                     tokenRequest(refreshToken: refreshToken)
                 ) { [weak self] tokenResponse, _ in
                     guard let self = self else { return }

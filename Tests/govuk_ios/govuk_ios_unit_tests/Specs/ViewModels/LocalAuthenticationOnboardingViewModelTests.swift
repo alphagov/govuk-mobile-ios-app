@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Testing
+import LocalAuthentication
 
 @testable import govuk_ios
 
@@ -102,6 +103,34 @@ struct LocalAuthenticationOnboardingViewModelTests {
     }
 
     @Test
+    func enrolButtonViewModel_userCancels_action_setsNoLocalAuth() async {
+        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockLocalAuthenticationService._stubbedAuthType = .faceID
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockAnalyticsService = MockAnalyticsService()
+        mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (false, LAError(.userCancel))
+        let completion = await withCheckedContinuation { continuation in
+            let sut = LocalAuthenticationOnboardingViewModel(
+                userDefaults: mockUserDefaults,
+                localAuthenticationService: mockLocalAuthenticationService,
+                authenticationService: mockAuthenticationService,
+                analyticsService: mockAnalyticsService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            let enrolButtonViewModel = sut.enrolButtonViewModel
+            enrolButtonViewModel.action()
+        }
+
+        #expect(completion)
+        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockUserDefaults.bool(forKey: .skipLocalAuthentication))
+        let event = mockAnalyticsService._trackedEvents.first
+        #expect(event?.params?["text"] as? String == "Allow Face ID")
+    }
+
+    @Test
     func skipButtonViewModel_action_callsCompletion() async {
         let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -122,6 +151,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
         #expect(completion)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockUserDefaults.bool(forKey: .skipLocalAuthentication))
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["text"] as? String == "Skip")
     }

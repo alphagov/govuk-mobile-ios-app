@@ -34,7 +34,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
             completionAction()
         case .failure:
             let coordinator = coordinatorBuilder.authenticationOnboarding(
-                navigationController: self.root,
+                navigationController: root,
                 completionAction: completionAction
             )
             start(coordinator)

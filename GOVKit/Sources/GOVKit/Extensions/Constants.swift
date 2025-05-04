@@ -55,6 +55,10 @@ public struct Constants {
         )!
 
         public static var localAuthorityPath: String = "/find-local-council/query.json"
+
+        public static var manageAccountURL: URL = URL(
+            string: "https://home.account.gov.uk/"
+        )!
     }
 
     public struct SigningKey {

@@ -83,6 +83,7 @@
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
 		4E3E57EB2D9ADC6F00402E8B /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E57EA2D9ADC6F00402E8B /* NotificationSettingsView.swift */; };
 		4E3E57EF2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */; };
+		4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
 		4E6663C52C736ABD0063E81C /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C42C736ABD0063E81C /* Feature.swift */; };
 		4E6663C82C7370750063E81C /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C72C7370750063E81C /* AppConfig.swift */; };
@@ -94,6 +95,7 @@
 		4E9F5D072DB79D370063FA78 /* PrimaryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */; };
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
+		4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */; };
 		4EB7D84F2DB7F4E9002B6765 /* TextFieldStyle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D84E2DB7F4E9002B6765 /* TextFieldStyle+Extensions.swift */; };
 		4EB7D8512DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */; };
 		4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */; };
@@ -108,6 +110,9 @@
 		4EE5F3E92DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */; };
 		4EE5F3F02DAFDB80008C60ED /* LocalAuthority.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */; };
 		4EE5F3F22DAFE030008C60ED /* CustomTextFieldBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3F12DAFE030008C60ED /* CustomTextFieldBorder.swift */; };
+		4EEC0F302DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC0F2F2DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift */; };
+		4EEC0F322DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC0F312DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift */; };
+		4EEC0F342DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC0F332DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift */; };
 		4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */; };
 		4EF407542CE278F900D654FC /* StickyFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407532CE278F900D654FC /* StickyFooterView.swift */; };
 		4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF407552CE2796900D654FC /* UIButton+Extensions.swift */; };
@@ -254,6 +259,17 @@
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
 		D076F9192D3544F0000278D5 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076F9182D3544F0000278D5 /* SearchHistoryCell.swift */; };
 		D07E7A582DAE662A00B92D40 /* LocalAuthorityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7A572DAE662A00B92D40 /* LocalAuthorityRepository.swift */; };
+		D08A9A802DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */; };
+		D08A9A842DB92A3E002E9C78 /* SignOutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A832DB92A3E002E9C78 /* SignOutConfirmationView.swift */; };
+		D08A9A862DB92F79002E9C78 /* SignOutConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */; };
+		D08AA4242DB94A4E002E9C78 /* BulletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AA4232DB94A4E002E9C78 /* BulletView.swift */; };
+		D08AA4262DB950F2002E9C78 /* SignOut.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */; };
+		D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */; };
+		D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */; };
+		D090467F2DBBC1ED0096EE66 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = D090467E2DBBC1ED0096EE66 /* JWTKit */; };
+		D09046812DBFD8480096EE66 /* SignedOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046802DBFD8480096EE66 /* SignedOutView.swift */; };
+		D09046832DBFD9430096EE66 /* SignedOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046822DBFD9370096EE66 /* SignedOutViewModel.swift */; };
+		D09046872DBFDF5D0096EE66 /* SignedOutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */; };
 		D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA622CB0499A004F489B /* EditTopicsView.swift */; };
 		D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */; };
 		D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */; };
@@ -402,6 +418,7 @@
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		4E3E57EA2D9ADC6F00402E8B /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
+		4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocalAuthorityCoordinator.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		4E6663C42C736ABD0063E81C /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		4E6663C72C7370750063E81C /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -414,6 +431,7 @@
 		4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonView.swift; sourceTree = "<group>"; };
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
+		4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityCardModel.swift; sourceTree = "<group>"; };
 		4EB7D84E2DB7F4E9002B6765 /* TextFieldStyle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldStyle+Extensions.swift"; sourceTree = "<group>"; };
 		4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceCoordinator.swift; sourceTree = "<group>"; };
 		4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityService.swift; sourceTree = "<group>"; };
@@ -428,6 +446,9 @@
 		4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityPostcodeEntryView.swift; sourceTree = "<group>"; };
 		4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LocalAuthority.xcstrings; sourceTree = "<group>"; };
 		4EE5F3F12DAFE030008C60ED /* CustomTextFieldBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldBorder.swift; sourceTree = "<group>"; };
+		4EEC0F2F2DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityWidgetViewModel.swift; sourceTree = "<group>"; };
+		4EEC0F312DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityWidgetView.swift; sourceTree = "<group>"; };
+		4EEC0F332DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityCardView.swift; sourceTree = "<group>"; };
 		4EECB5FB2C413DCE00A49DC8 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		4EF407532CE278F900D654FC /* StickyFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyFooterView.swift; sourceTree = "<group>"; };
 		4EF407552CE2796900D654FC /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -574,6 +595,16 @@
 		D06EB96B2CA6F71E007EA081 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
 		D076F9182D3544F0000278D5 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		D07E7A572DAE662A00B92D40 /* LocalAuthorityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityRepository.swift; sourceTree = "<group>"; };
+		D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutConfirmationCoordinator.swift; sourceTree = "<group>"; };
+		D08A9A832DB92A3E002E9C78 /* SignOutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutConfirmationView.swift; sourceTree = "<group>"; };
+		D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutConfirmationViewModel.swift; sourceTree = "<group>"; };
+		D08AA4232DB94A4E002E9C78 /* BulletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletView.swift; sourceTree = "<group>"; };
+		D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = SignOut.xcstrings; sourceTree = "<group>"; };
+		D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenPayload.swift; sourceTree = "<group>"; };
+		D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenExtractor.swift; sourceTree = "<group>"; };
+		D09046802DBFD8480096EE66 /* SignedOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedOutView.swift; sourceTree = "<group>"; };
+		D09046822DBFD9370096EE66 /* SignedOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedOutViewModel.swift; sourceTree = "<group>"; };
+		D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedOutCoordinator.swift; sourceTree = "<group>"; };
 		D093BA622CB0499A004F489B /* EditTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsView.swift; sourceTree = "<group>"; };
 		D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsViewModel.swift; sourceTree = "<group>"; };
 		D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsCoordinator.swift; sourceTree = "<group>"; };
@@ -637,6 +668,9 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchSuggestionsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SettingsViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/StoredLocalAuthorityWidgetViewSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignedOutViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignOutConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicOnboardingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/WebViewControllerSnapshotTests.swift,
@@ -671,6 +705,9 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchSuggestionsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SettingsViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/StoredLocalAuthorityWidgetViewSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignedOutViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignOutConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicOnboardingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/WebViewControllerSnapshotTests.swift,
@@ -733,6 +770,7 @@
 				D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */,
 				5DCAFA7A2D40088600C3F284 /* OneSignalFramework in Frameworks */,
 				5DC250602C91D395009E9E7F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				D090467F2DBBC1ED0096EE66 /* JWTKit in Frameworks */,
 				5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
 				160AEAC82DA038550072BA43 /* CryptoService in Frameworks */,
@@ -838,6 +876,7 @@
 				4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */,
 				4E265D252DB0E6510089CF9E /* Authority.swift */,
 				4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */,
+				4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -875,6 +914,7 @@
 				4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */,
 				4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */,
 				4EBE646C2D15AB05007A6E97 /* CharValidator.swift */,
+				D09046762DBBC1AC0096EE66 /* JWT */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -885,6 +925,8 @@
 				4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */,
 				4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */,
 				4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */,
+				4EEC0F312DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift */,
+				4EEC0F332DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -986,11 +1028,14 @@
 				16A99D6A2D35F18700C72DEB /* SearchSuggestionsViewModel.swift */,
 				16EE1A422C6F89D9005E820F /* SearchViewModel.swift */,
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
+				D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */,
+				D09046822DBFD9370096EE66 /* SignedOutViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
 				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
 				4EE5F3E12DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift */,
 				4E038AB62DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift */,
 				4E038AB82DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift */,
+				4EEC0F2F2DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1093,6 +1138,7 @@
 				5D742BD92C99791A00E7B87A /* Settings.xcstrings */,
 				5D54F4722CC8473900A3B6A7 /* Topics.xcstrings */,
 				4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */,
+				D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -1106,6 +1152,7 @@
 				16E5AD442C6E499B000B8B3A /* Home */,
 				163800FD2C99DAB900C3DDD1 /* Search */,
 				5DA4FB052CCBAF1800804C8A /* Settings */,
+				D08A9A812DB92A15002E9C78 /* SignOut */,
 				D0F86E1F2CAC3BE000FF2D9E /* Topics */,
 			);
 			path = Views;
@@ -1172,6 +1219,9 @@
 				4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */,
 				4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */,
 				B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */,
+				4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */,
+				D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */,
+				D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1436,6 +1486,7 @@
 				3D211B8E2CB6B4FE005D1472 /* HeaderView.swift */,
 				4EE5F3F12DAFE030008C60ED /* CustomTextFieldBorder.swift */,
 				4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */,
+				D08AA4232DB94A4E002E9C78 /* BulletView.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -1493,6 +1544,24 @@
 				D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */,
 			);
 			path = Topics;
+			sourceTree = "<group>";
+		};
+		D08A9A812DB92A15002E9C78 /* SignOut */ = {
+			isa = PBXGroup;
+			children = (
+				D08A9A832DB92A3E002E9C78 /* SignOutConfirmationView.swift */,
+				D09046802DBFD8480096EE66 /* SignedOutView.swift */,
+			);
+			path = SignOut;
+			sourceTree = "<group>";
+		};
+		D09046762DBBC1AC0096EE66 /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */,
+				D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */,
+			);
+			path = JWT;
 			sourceTree = "<group>";
 		};
 		D0D9CB922D3024C00051EDDD /* Search */ = {
@@ -1588,6 +1657,7 @@
 				160AEAC92DA038550072BA43 /* SecureStore */,
 				5D5DB7F02DB0DD3200F6FEAE /* UIComponents */,
 				164024722DB8004100C762B8 /* Onboarding */,
+				D090467E2DBBC1ED0096EE66 /* JWTKit */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -1682,6 +1752,7 @@
 				160AEAC62DA038550072BA43 /* XCRemoteSwiftPackageReference "mobile-ios-secure-store" */,
 				5D5DB7EF2DB0DD3200F6FEAE /* XCRemoteSwiftPackageReference "govuk-mobile-ios-ui-components" */,
 				164024712DB8004100C762B8 /* XCRemoteSwiftPackageReference "govuk-mobile-ios-onboarding" */,
+				D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */,
 			);
 			productRefGroup = 5DAD71752BD250DB0075F648 /* Products */;
 			projectDirPath = "";
@@ -1724,6 +1795,7 @@
 				5D742BDC2C99799000E7B87A /* Search.xcstrings in Resources */,
 				5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */,
 				5D09C6EC2D5C8D5900805D8F /* Notifications.xcstrings in Resources */,
+				D08AA4262DB950F2002E9C78 /* SignOut.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1827,6 +1899,7 @@
 				5DBE08062C480CA700B58DBE /* UIAlertController+Convenience.swift in Sources */,
 				4EECB5FC2C413DCE00A49DC8 /* UserDefaults+Extensions.swift in Sources */,
 				4E9F5D032DB78DBA0063FA78 /* LocalAuthorityItem.swift in Sources */,
+				D08A9A862DB92F79002E9C78 /* SignOutConfirmationViewModel.swift in Sources */,
 				D0EB04842D37F34200B310D8 /* GOV.xcdatamodeld in Sources */,
 				D04191782CA57A6F0034722A /* TopicsService.swift in Sources */,
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,
@@ -1838,6 +1911,7 @@
 				4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */,
 				164091FA2DA3F4A600E3BE99 /* AuthenticationCoordinator.swift in Sources */,
 				5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */,
+				4EEC0F342DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift in Sources */,
 				5DBE080A2C480D9200B58DBE /* OnboardingCoordinator.swift in Sources */,
 				5D649D332C6BA07800CBED96 /* AnalyticsService+Onboarding.swift in Sources */,
 				160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */,
@@ -1875,9 +1949,11 @@
 				5D9E67CA2C5A3BA600DB7877 /* UITabBarController+GOVUK.swift in Sources */,
 				4EE5F3E22DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift in Sources */,
 				3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */,
+				D08AA4242DB94A4E002E9C78 /* BulletView.swift in Sources */,
 				16F961A32C92FD15005CFB04 /* SearchResultCell.swift in Sources */,
 				5DD4CB182D95491600459FB5 /* RecentActivityListViewController.swift in Sources */,
 				3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */,
+				4EEC0F302DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift in Sources */,
 				3D211B8F2CB6B4FE005D1472 /* HeaderView.swift in Sources */,
 				D076F9192D3544F0000278D5 /* SearchHistoryCell.swift in Sources */,
 				D04A8F4B2CD3949800685FD3 /* URLResponse+Extensions.swift in Sources */,
@@ -1887,8 +1963,11 @@
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,
 				5D9E67C22C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift in Sources */,
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
+				D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */,
+				D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
 				5D8100892CEB3FE600EE7D15 /* AppLaunchResponse.swift in Sources */,
+				4EEC0F322DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift in Sources */,
 				D04C54302D70821D0070EE79 /* HomeCommerceItem.swift in Sources */,
 				3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */,
 				4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */,
@@ -1902,6 +1981,7 @@
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
 				4EB7D8512DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift in Sources */,
 				D0D9CFD52D302F2A0051EDDD /* SearchHistoryRepository.swift in Sources */,
+				D09046812DBFD8480096EE66 /* SignedOutView.swift in Sources */,
 				D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */,
 				D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */,
 				5DD4CB082D95483100459FB5 /* ActivityItem.swift in Sources */,
@@ -1927,6 +2007,7 @@
 				16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */,
+				D08A9A802DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift in Sources */,
 				5D0F199E2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift in Sources */,
 				4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */,
 				5D8100872CEB3FD600EE7D15 /* AppLaunchService.swift in Sources */,
@@ -1970,6 +2051,7 @@
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				5D925B182CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift in Sources */,
 				5DD4CB162D95490100459FB5 /* ActivityService.swift in Sources */,
+				D09046872DBFDF5D0096EE66 /* SignedOutCoordinator.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
 				164091FC2DA41B3000E3BE99 /* AuthenticationService.swift in Sources */,
 				3D15E7B22CB562E40046CE64 /* AppRecommendUpdateContainerView.swift in Sources */,
@@ -2012,6 +2094,7 @@
 				D056CE762D3A848A005845E0 /* InformationView.swift in Sources */,
 				4E0043142D9BE25E00DDDA8A /* NotificationSettingsCoordinator.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
+				D08A9A842DB92A3E002E9C78 /* SignOutConfirmationView.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
 				5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */,
 				D04191802CA595400034722A /* TopicResponseItem.swift in Sources */,
@@ -2025,9 +2108,11 @@
 				D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */,
+				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
+				D09046832DBFD9430096EE66 /* SignedOutViewModel.swift in Sources */,
 				4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */,
 				168CB4382D77487B009BAA12 /* HomeContentViewController.swift in Sources */,
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
@@ -2051,6 +2136,7 @@
 				4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */,
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
+				4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */,
 				4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */,
 				16E912AF2DA72CE000CD2049 /* OIDAuthorizationServiceWrapper.swift in Sources */,
 			);
@@ -2792,6 +2878,14 @@
 				minimumVersion = 5.2.9;
 			};
 		};
+		D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/jwt-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2862,6 +2956,11 @@
 		5DDB31CB2CEF84D100E49259 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
+		};
+		D090467E2DBBC1ED0096EE66 /* JWTKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */;
+			productName = JWTKit;
 		};
 		D0D661A22D285D1B00571841 /* GOVKitTestUtilities */ = {
 			isa = XCSwiftPackageProductDependency;

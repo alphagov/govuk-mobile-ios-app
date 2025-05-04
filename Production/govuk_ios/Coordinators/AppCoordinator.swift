@@ -19,6 +19,13 @@ class AppCoordinator: BaseCoordinator {
         }
     }
 
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        if child is TabCoordinator {
+            startSignedOutCoordinator(url: nil)
+        }
+    }
+
     private func startLaunch(url: URL?) {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
@@ -143,6 +150,16 @@ class AppCoordinator: BaseCoordinator {
             }
         )
         start(coordinator)
+    }
+
+    private func startSignedOutCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.signedOut(
+            navigationController: root,
+            completion: { [weak self] in
+                self?.startTabs(url: nil)
+            }
+        )
+        start(coordinator, url: url)
     }
 
     private func startTabs(url: URL?) {

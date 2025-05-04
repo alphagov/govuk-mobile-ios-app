@@ -43,6 +43,14 @@ class TabCoordinator: BaseCoordinator,
         handleDeeplink(url: url)
     }
 
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        if let child = child as? SettingsCoordinator,
+           !child.authenticationService.isSignedIn {
+            finish()
+        }
+    }
+
     private func handleDeeplink(url: URL) {
         tabController.dismiss(animated: true)
 

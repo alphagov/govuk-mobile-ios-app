@@ -8,8 +8,11 @@ protocol AuthenticationServiceInterface {
     var idToken: String? { get }
     var accessToken: String? { get }
     var shouldReauthenticate: Bool { get }
+    var userEmail: String? { get async }
+    var isSignedIn: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationResult
+    func signOut()
     func encryptRefreshToken()
     func tokenRefreshRequest() async -> TokenRefreshResult
 }
@@ -21,6 +24,21 @@ class AuthenticationService: AuthenticationServiceInterface {
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
+
+    var userEmail: String? {
+        get async {
+            guard let idToken,
+                  let payload = try? await JWTExtractor().extract(jwt: idToken)
+            else {
+                return nil
+            }
+            return payload.email
+        }
+    }
+
+    var isSignedIn: Bool {
+        refreshToken != nil
+    }
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          secureStoreService: SecureStorable,
@@ -43,6 +61,12 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .failure(let error):
             return AuthenticationResult.failure(error)
         }
+    }
+
+    func signOut() {
+        secureStoreService.deleteItem(itemName: "refreshToken")
+        try? secureStoreService.delete()
+        setTokens()
     }
 
     func encryptRefreshToken() {

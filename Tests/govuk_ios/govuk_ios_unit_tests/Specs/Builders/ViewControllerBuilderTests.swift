@@ -36,7 +36,8 @@ struct ViewControllerBuilderTests {
             feedbackAction: {},
             notificationsAction: {},
             recentActivityAction: {},
-            localAuthorityAction: {}
+            localAuthorityAction: {},
+            editLocalAuthorityAction: {}
         )
 
         let result = subject.home(dependencies: dependencies, actions: actions)
@@ -52,6 +53,7 @@ struct ViewControllerBuilderTests {
             urlOpener: MockURLOpener(),
             versionProvider: MockAppVersionProvider(),
             deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
             notificationService: MockNotificationService(),
             notificationCenter: .default
         )
@@ -180,5 +182,29 @@ struct ViewControllerBuilderTests {
 
             #expect(viewController is WebViewController)
         }
+    }
+
+    @Test
+    func signOutConfirmation_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.signOutConfirmation(
+            authenticationService:MockAuthenticationService(),
+            analyticsService: MockAnalyticsService(),
+            completion: { }
+        )
+        let rootView = (result as? HostingViewController<SignOutConfirmationView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func signedOut_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.signedOut(
+            authenticationService:MockAuthenticationService(),
+            analyticsService: MockAnalyticsService(),
+            completion: { }
+        )
+        let rootView = (result as? HostingViewController<SignedOutView>)?.rootView
+        #expect(rootView != nil)
     }
 }

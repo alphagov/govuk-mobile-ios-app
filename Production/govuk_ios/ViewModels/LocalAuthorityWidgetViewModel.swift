@@ -5,7 +5,7 @@ import Foundation
         "localAuthorityWidgetViewTitle"
     )
     let titleTwo: String = String.localAuthority.localized(
-        "localAuthorityWidgetViewTitleTwo"
+        "localServicesTitle"
     )
     let description: String = String.localAuthority.localized(
         "localAuthorityWidgetViewDescription"

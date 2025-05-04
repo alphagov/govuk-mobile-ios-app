@@ -211,12 +211,6 @@ struct AuthenticationServiceTests {
         let mockUserDefaults = MockUserDefaults()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let idToken = UUID().uuidString
-        let accessToken = UUID().uuidString
-        let tokenResponse = TokenRefreshResponse(
-            accessToken: accessToken,
-            idToken: idToken
-        )
         mockAuthClient._stubbedTokenRefreshResult = .failure(.tokenResponseError)
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         let sut = AuthenticationService(

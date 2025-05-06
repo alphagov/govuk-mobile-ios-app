@@ -66,6 +66,6 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
 
     private var shouldSkipOnboarding: Bool {
         !authenticationOnboardingService.isFeatureEnabled ||
-        authenticationService.refreshToken != nil
+        authenticationService.isSignedIn
     }
 }

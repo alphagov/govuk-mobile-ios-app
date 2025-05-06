@@ -24,6 +24,11 @@ struct AuthenticationOnboardingServiceTests {
             #expect(Bool(false))
         }
     }
+    
+    @Test
+    func isFeatureEnabled_returnsFalse() {
+        let sut = AuthenticationOnboardingService()
 
+        #expect(!sut.isFeatureEnabled)
+    }
 }
-

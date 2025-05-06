@@ -107,7 +107,7 @@ struct HomeViewModel {
             rootView: content
         )
         let widget = WidgetView(
-            useContentAccessibilityInfo: true,
+            useContentAccessibilityInfo: false,
             backgroundColor: UIColor.govUK.fills.surfaceCardSelected,
             borderColor: UIColor.govUK.strokes.cardGreen.cgColor
         )
@@ -133,7 +133,10 @@ struct HomeViewModel {
         let hostingViewController = HostingViewController(
             rootView: content
         )
-        let widget = WidgetView(decorateView: false)
+        let widget = WidgetView(
+            decorateView: false,
+            useContentAccessibilityInfo: false
+        )
         widget.addContent(hostingViewController.view)
         return widget
     }

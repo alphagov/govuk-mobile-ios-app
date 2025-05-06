@@ -24,6 +24,8 @@ struct StoredLocalAuthorityCardView: View {
                     Spacer()
                 }
             }
+            .accessibilityAddTraits(.isLink)
+            .accessibilityHint(String.common.localized("openWebLinkHint"))
             .padding()
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(

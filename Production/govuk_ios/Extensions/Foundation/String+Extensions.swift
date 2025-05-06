@@ -70,6 +70,13 @@ extension String {
             bundle: .main
         )
     }
+
+    static var signOut: LocalStringBuilder {
+        .init(
+            tableName: "SignOut",
+            bundle: .main
+        )
+    }
 }
 
 extension String {

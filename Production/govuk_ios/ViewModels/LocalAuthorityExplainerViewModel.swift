@@ -10,7 +10,7 @@ class LocalAuthorityExplainerViewModel {
         "cancel"
     )
     let explainerViewTitle: String = String.localAuthority.localized(
-        "localAuthorityExplainerViewTitle"
+        "localServicesTitle"
     )
     let explainerViewDescription: String = String.localAuthority.localized(
         "localAuthorityExplainerViewDesciption"

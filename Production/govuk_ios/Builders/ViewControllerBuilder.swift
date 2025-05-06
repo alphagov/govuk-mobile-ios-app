@@ -32,6 +32,7 @@ class ViewControllerBuilder {
         let notificationsAction: () -> Void
         let recentActivityAction: () -> Void
         let localAuthorityAction: () -> Void
+        let editLocalAuthorityAction: () -> Void
     }
 
     @MainActor
@@ -42,6 +43,7 @@ class ViewControllerBuilder {
             notificationService: dependencies.notificationService,
             topicWidgetViewModel: dependencies.topicWidgetViewModel,
             localAuthorityAction: actions.localAuthorityAction,
+            editLocalAuthorityAction: actions.editLocalAuthorityAction,
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
@@ -130,6 +132,34 @@ class ViewControllerBuilder {
         let viewController = HostingViewController(rootView: view)
         viewController.navigationItem.largeTitleDisplayMode = .never
         viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+
+    @MainActor
+    func signOutConfirmation(authenticationService: AuthenticationServiceInterface,
+                             analyticsService: AnalyticsServiceInterface,
+                             completion: @escaping () -> Void) -> UIViewController {
+        let viewModel = SignOutConfirmationViewModel(
+            authenticationService: authenticationService,
+            analyticsService: analyticsService,
+            completion: completion
+        )
+        let view = SignOutConfirmationView(viewModel: viewModel)
+        let viewController = HostingViewController(rootView: view)
+        return viewController
+    }
+
+    @MainActor
+    func signedOut(authenticationService: AuthenticationServiceInterface,
+                   analyticsService: AnalyticsServiceInterface,
+                   completion: @escaping () -> Void) -> UIViewController {
+        let viewModel = SignedOutViewModel(
+            authenticationService: authenticationService,
+            analyticsService: analyticsService,
+            completion: completion
+        )
+        let view = SignedOutView(viewModel: viewModel)
+        let viewController = HostingViewController(rootView: view)
         return viewController
     }
 

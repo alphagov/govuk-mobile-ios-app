@@ -2,6 +2,7 @@ import Foundation
 
 protocol LocalAuthorityServiceInterface {
     func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion)
+    func fetchSavedLocalAuthority() -> [LocalAuthorityItem]
 }
 
 class LocalAuthorityService: LocalAuthorityServiceInterface {
@@ -25,6 +26,10 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
                 completion(.failure(error))
             }
         }
+    }
+
+    func fetchSavedLocalAuthority() -> [LocalAuthorityItem] {
+        repository.fetchLocalAuthority()
     }
 
     private func updateLocalAuthority(_ authorityType: LocalAuthorityType) {

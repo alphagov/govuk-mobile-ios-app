@@ -23,6 +23,44 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         )
     }
 
+    func test_loadInNavigationController_error_light_rendersCorrectly() {
+
+        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+            service: MockLocalAuthorityService(),
+            analyticsService: MockAnalyticsService(),
+            dismissAction: {}
+        )
+        let view = LocalAuthorityPostcodeEntryView(
+            viewModel: viewModel
+        )
+        viewModel.postCode = ""
+        viewModel.primaryButtonViewModel.action()
+        VerifySnapshotInNavigationController(
+            viewController: HostingViewController(rootView: view),
+            mode: .light,
+            prefersLargeTitles: true
+        )
+    }
+
+    func test_loadInNavigationController_error_dark_rendersCorrectly() {
+
+        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+            service: MockLocalAuthorityService(),
+            analyticsService: MockAnalyticsService(),
+            dismissAction: {}
+        )
+        let view = LocalAuthorityPostcodeEntryView(
+            viewModel: viewModel
+        )
+        viewModel.postCode = ""
+        viewModel.primaryButtonViewModel.action()
+        VerifySnapshotInNavigationController(
+            viewController: HostingViewController(rootView: view),
+            mode: .dark,
+            prefersLargeTitles: true
+        )
+    }
+
     private func viewController() -> UIViewController {
         let viewModel = LocalAuthorityPostecodeEntryViewModel(
             service: MockLocalAuthorityService(),

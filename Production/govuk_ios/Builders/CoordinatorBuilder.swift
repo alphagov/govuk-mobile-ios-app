@@ -244,6 +244,7 @@ class CoordinatorBuilder {
         AuthenticationCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
             completionAction: completionAction
         )
     }

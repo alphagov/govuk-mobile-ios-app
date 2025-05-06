@@ -30,10 +30,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                         }
                     }
                     TextField("", text: $viewModel.postCode)
-                        .textFieldStyle(
-                            CustomTextFieldBorder(
-                                borderColor: viewModel.textFieldColour)
-                        )
+                        .textFieldStyle(.roundedBorder)
                     Text(viewModel.postcodeEntryViewDescriptionTitle)
                         .font(Font.govUK.bodySemibold)
                     Text(viewModel.postcodeEntryViewDescriptionBody)

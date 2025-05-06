@@ -36,7 +36,8 @@ final class TopicDetailsCoordinator: BaseCoordinator {
                 analyticsService: self.analyticsService,
                 activityService: self.activityService,
                 subtopicAction: self.pushTopic,
-                stepByStepAction: self.pushStepBySteps
+                stepByStepAction: self.pushStepBySteps,
+                webViewAction: self.pushWebView
             )
             self.push(viewController, animated: true)
         }
@@ -52,6 +53,15 @@ final class TopicDetailsCoordinator: BaseCoordinator {
                 activityService: self.activityService
             )
             self.push(viewController, animated: true)
+        }
+    }
+
+    private var pushWebView: () -> Void {
+        return { [weak self] in
+            guard let self = self else { return }
+            let webVC = FullScreenWebViewController()
+            webVC.title = "Sign in to your Universal Credit account"
+            self.push(webVC, animated: true)
         }
     }
 }

@@ -140,7 +140,8 @@ class ViewControllerBuilder {
                      analyticsService: AnalyticsServiceInterface,
                      activityService: ActivityServiceInterface,
                      subtopicAction: @escaping (DisplayableTopic) -> Void,
-                     stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void
+                     stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
+                     webViewAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = TopicDetailViewModel(
             topic: topic,
@@ -149,7 +150,8 @@ class ViewControllerBuilder {
             activityService: activityService,
             urlOpener: UIApplication.shared,
             subtopicAction: subtopicAction,
-            stepByStepAction: stepByStepAction
+            stepByStepAction: stepByStepAction,
+            webViewAction: webViewAction
         )
 
         let view = TopicDetailView(viewModel: viewModel)

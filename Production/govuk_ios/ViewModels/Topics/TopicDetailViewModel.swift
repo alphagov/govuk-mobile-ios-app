@@ -16,6 +16,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private let urlOpener: URLOpener
     private let subtopicAction: (DisplayableTopic) -> Void
     private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+    private let webViewAction: () -> Void
 
     var isLoaded: Bool = false
 
@@ -53,7 +54,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
          activityService: ActivityServiceInterface,
          urlOpener: URLOpener,
          subtopicAction: @escaping (DisplayableTopic) -> Void,
-         stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void) {
+         stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
+         webViewAction: @escaping () -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.activityService = activityService
@@ -61,6 +63,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         self.subtopicAction = subtopicAction
         self.stepByStepAction = stepByStepAction
         self.topic = topic
+        self.webViewAction = webViewAction
 
         fetchTopicDetails(topicRef: topic.ref)
     }
@@ -189,6 +192,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             title: content.title,
             body: nil,
             action: {
+                if content.title == "Sign in to your Universal Credit account" {
+                    self.webViewAction()
+                    return
+                }
+
                 if self.urlOpener.openIfPossible(content.url) {
                     self.activityService.save(topicContent: content)
                     self.trackLinkEvent(

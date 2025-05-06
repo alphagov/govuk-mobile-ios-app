@@ -23,7 +23,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
     }
 
     private func reauthenticate() async {
-        guard authenticationService.shouldReauthenticate else {
+        guard authenticationService.authenticationOnboardingFlowSeen else {
             completionAction()
             return
         }

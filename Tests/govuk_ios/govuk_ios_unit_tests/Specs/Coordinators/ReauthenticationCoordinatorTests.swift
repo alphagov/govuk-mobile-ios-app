@@ -15,6 +15,7 @@ class ReauthenticationCoordinatorTests {
             idToken: "id_token"
         )
         mockAuthenticationService._stubbedTokenRefreshRequest = .success(tokenRefreshResponse)
+        mockAuthenticationService.authenticationOnboardingFlowSeen = true
         let completion = await withCheckedContinuation { continuation in
             let sut = ReauthenticationCoordinator(
                 navigationController: mockNavigationController,
@@ -54,11 +55,11 @@ class ReauthenticationCoordinatorTests {
     }
 
     @Test @MainActor
-    func start_shouldntReauthenticate_callsCompletion() async {
+    func start_onboardingFlowNotSeen_callsCompletion() async {
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        mockAuthenticationService.shouldReauthenticate = false
+        mockAuthenticationService.authenticationOnboardingFlowSeen = false
         let completion = await withCheckedContinuation { continuation in
             let sut = ReauthenticationCoordinator(
                 navigationController: mockNavigationController,

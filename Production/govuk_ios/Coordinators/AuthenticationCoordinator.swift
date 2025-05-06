@@ -27,6 +27,10 @@ class AuthenticationCoordinator: BaseCoordinator {
         let result = await authenticationService.authenticate(window: window)
         switch result {
         case .success:
+            if authenticationService.authenticationOnboardingFlowSeen,
+               !authenticationService.isLocalAuthenticationSkipped {
+                authenticationService.encryptRefreshToken()
+            }
             DispatchQueue.main.async {
                 self.completionAction()
             }

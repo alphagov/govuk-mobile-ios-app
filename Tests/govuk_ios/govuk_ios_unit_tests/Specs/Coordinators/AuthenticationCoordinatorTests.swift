@@ -8,7 +8,7 @@ import Authentication
 @Suite
 class AuthenticationCoordinatorTests {
     @Test @MainActor
-    func start_startsAuthentication() async {
+    func start_shouldEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         let jsonData = """
@@ -21,6 +21,8 @@ class AuthenticationCoordinatorTests {
         }
         """.data(using: .utf8)!
         let tokenResponse = createTokenResponse(jsonData)
+        mockAuthenticationService.authenticationOnboardingFlowSeen = true
+        mockAuthenticationService.isLocalAuthenticationSkipped = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
@@ -35,6 +37,75 @@ class AuthenticationCoordinatorTests {
             sut.start(url: nil)
         }
 
+        #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
+        #expect(completion)
+    }
+
+    @Test @MainActor
+    func start_onboardingFlowNotSeen_shouldntEncryptToken_callsCompletion() async {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        let jsonData = """
+        {
+            "accessToken": "access_token",
+            "refreshToken": "refresh_token",
+            "idToken": "id_token",
+            "tokenType": "id_token",
+            "expiryDate": "2099-01-01T00:00:00Z"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthenticationService.authenticationOnboardingFlowSeen = false
+        mockAuthenticationService.isLocalAuthenticationSkipped = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        let newWindow = UIWindow(frame: UIScreen.main.bounds)
+        newWindow.rootViewController = mockNavigationController
+        newWindow.makeKeyAndVisible()
+
+        let completion = await withCheckedContinuation { continuation in
+            let sut = AuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                authenticationService: mockAuthenticationService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            sut.start(url: nil)
+        }
+
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
+        #expect(completion)
+    }
+
+    @Test @MainActor
+    func start_skipsLocalAuthentication_shouldntEncryptToken_callsCompletion() async {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        let jsonData = """
+        {
+            "accessToken": "access_token",
+            "refreshToken": "refresh_token",
+            "idToken": "id_token",
+            "tokenType": "id_token",
+            "expiryDate": "2099-01-01T00:00:00Z"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthenticationService.authenticationOnboardingFlowSeen = false
+        mockAuthenticationService.isLocalAuthenticationSkipped = true
+        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        let newWindow = UIWindow(frame: UIScreen.main.bounds)
+        newWindow.rootViewController = mockNavigationController
+        newWindow.makeKeyAndVisible()
+
+        let completion = await withCheckedContinuation { continuation in
+            let sut = AuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                authenticationService: mockAuthenticationService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            sut.start(url: nil)
+        }
+
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(completion)
     }
 

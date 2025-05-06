@@ -7,9 +7,10 @@ protocol AuthenticationServiceInterface {
     var refreshToken: String? { get }
     var idToken: String? { get }
     var accessToken: String? { get }
-    var shouldReauthenticate: Bool { get }
+    var authenticationOnboardingFlowSeen: Bool { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
+    var isLocalAuthenticationSkipped: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationResult
     func signOut()
@@ -38,6 +39,14 @@ class AuthenticationService: AuthenticationServiceInterface {
 
     var isSignedIn: Bool {
         refreshToken != nil
+    }
+
+    var authenticationOnboardingFlowSeen: Bool {
+        userDefaults.bool(forKey: .authenticationOnboardingFlowSeen)
+    }
+
+    var isLocalAuthenticationSkipped: Bool {
+        userDefaults.bool(forKey: .skipLocalAuthentication)
     }
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
@@ -98,10 +107,6 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .failure(let error):
             return .failure(error)
         }
-    }
-
-    var shouldReauthenticate: Bool {
-        userDefaults.bool(forKey: .authenticationOnboardingFlowSeen)
     }
 
     private func decryptRefreshToken() throws -> String {

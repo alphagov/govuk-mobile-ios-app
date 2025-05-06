@@ -60,10 +60,6 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
                 switch result {
                 case .success(let response as LocalAuthority):
                     self?.ambiguoseAuthorities.append(response)
-                case .failure(let error):
-                    // ask graham
-                    // give a generic answer
-                    print("ask graham")
                 default:
                     break
                 }

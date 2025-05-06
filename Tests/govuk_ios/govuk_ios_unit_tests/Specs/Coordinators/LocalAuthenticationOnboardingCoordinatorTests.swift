@@ -46,7 +46,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
     }
 
     @Test @MainActor
-    func start_passcodeOnlyEnrolled_encryptsTokenAndCallsCompletion() async {
+    func start_passcodeOnlyOption_encryptsTokenAndCallsCompletion() async {
         let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
@@ -65,6 +65,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         }
 
         #expect(completion)
+        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
         #expect(mockNavigationController._setViewControllers == .none)
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }

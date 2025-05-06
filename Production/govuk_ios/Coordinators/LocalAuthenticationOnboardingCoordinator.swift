@@ -36,6 +36,7 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
         case .faceID, .touchID:
             setLocalAuthenticationOnboardingViewController()
         case .passcodeOnly:
+            localAuthenticationService.setHasSeenOnboarding()
             authenticationService.encryptRefreshToken()
             finishCoordination()
         default:

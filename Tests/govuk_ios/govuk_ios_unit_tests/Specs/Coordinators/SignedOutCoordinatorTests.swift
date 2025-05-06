@@ -25,4 +25,30 @@ struct SignedOutCoordinatorTests {
 
         #expect(navigationController.viewControllers.first == expectedViewController)
     }
+
+    @Test
+    func completionCalled_withAuthStatus() throws {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockAuthenticationService = MockAuthenticationService()
+        mockAuthenticationService._stubbedIsSignedIn = true
+        let navigationController = UINavigationController()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSignedOutViewController = expectedViewController
+
+        var isAuthenticated = false
+        let sut = SignedOutCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            authenticationService: mockAuthenticationService,
+            analyticsService: MockAnalyticsService(),
+            completion: { signedIn in
+                isAuthenticated = signedIn
+            }
+        )
+
+        sut.start()
+        mockViewControllerBuilder
+            ._receivedSignedOutCompletion?()
+        #expect(isAuthenticated)
+    }
 }

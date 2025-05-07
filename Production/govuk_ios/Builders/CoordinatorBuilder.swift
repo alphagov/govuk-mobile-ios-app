@@ -231,8 +231,9 @@ class CoordinatorBuilder {
                                   completionAction: @escaping () -> Void) -> BaseCoordinator {
         AuthenticationOnboardingCoordinator(
             navigationController: navigationController,
-            analyticsService: container.onboardingAnalyticsService.resolve(),
+            authenticationService: container.authenticationService.resolve(),
             authenticationOnboardingService: container.authenticationOnboardingService.resolve(),
+            analyticsService: container.onboardingAnalyticsService.resolve(),
             coordinatorBuilder: self,
             completionAction: completionAction
         )
@@ -243,6 +244,17 @@ class CoordinatorBuilder {
         AuthenticationCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
+            completionAction: completionAction
+        )
+    }
+
+    func reauthentication(navigationController: UINavigationController,
+                          completionAction: @escaping () -> Void) -> BaseCoordinator {
+        ReauthenticationCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
+            authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction
         )
     }
@@ -251,6 +263,7 @@ class CoordinatorBuilder {
                                        completionAction: @escaping () -> Void) -> BaseCoordinator {
         LocalAuthenticationOnboardingCoordinator(
             navigationController: navigationController,
+            userDefaults: UserDefaults.standard,
             analyticsService: container.analyticsService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             authenticationService: container.authenticationService.resolve(),

@@ -76,10 +76,20 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             launchResponse: launchResponse,
             dismissAction: { [weak self] in
-                self?.startAnalyticsConsent(url: url)
+                self?.startReauthentication(url: url)
             }
         )
         start(coordinator)
+    }
+
+    private func startReauthentication(url: URL?) {
+        let coordinator = coordinatorBuilder.reauthentication(
+            navigationController: root,
+            completionAction: { [weak self] in
+                self?.startAnalyticsConsent(url: url)
+            }
+        )
+        start(coordinator, url: url)
     }
 
     private func startAnalyticsConsent(url: URL?) {

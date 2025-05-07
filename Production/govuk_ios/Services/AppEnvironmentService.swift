@@ -4,12 +4,15 @@ protocol AppEnvironmentServiceInterface {
     var baseURL: URL { get }
     var oneSignalAppId: String { get }
     var authenticationClientId: String { get }
+    var authenticationAuthorizeURL: URL { get }
+    var authenticationTokenURL: URL { get }
 }
 
 enum AppEnvironmentKey: String {
     case baseURL = "BaseURL"
     case oneSignalAppId = "ONESIGNAL_APP_ID"
     case authenticationClientId = "AUTHENTICATION_CLIENT_ID"
+    case authenticationBaseURL = "AUTHENTICATION_BASE_URL"
 }
 
 struct AppEnvironmentService: AppEnvironmentServiceInterface {
@@ -32,10 +35,25 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
         string(for: .authenticationClientId)
     }
 
+    var authenticationAuthorizeURL: URL {
+        authenticationBaseURL.appendingPathComponent("oauth2/authorize")
+    }
+
+    var authenticationTokenURL: URL {
+        authenticationBaseURL.appendingPathComponent("oauth2/token")
+    }
+
     private func string(for key: AppEnvironmentKey) -> String {
         guard let value = config[key.rawValue] as? String else {
             preconditionFailure("No AppEnvironment value found for " + key.rawValue)
         }
         return value
+    }
+
+    private var authenticationBaseURL: URL {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = string(for: .authenticationBaseURL)
+        return components.url!
     }
 }

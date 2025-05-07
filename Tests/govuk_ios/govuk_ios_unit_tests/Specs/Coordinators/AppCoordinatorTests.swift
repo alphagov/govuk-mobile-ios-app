@@ -62,6 +62,7 @@ struct AppCoordinatorTests {
         mockCoodinatorBuilder._receivedAppForcedUpdateDismissAction?()
         mockCoodinatorBuilder._receivedAppUnavailableDismissAction?()
         mockCoodinatorBuilder._receivedAppRecommendUpdateDismissAction?()
+        mockCoodinatorBuilder._receivedReauthenticationCompletion?()
         mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoodinatorBuilder._receivedOnboardingDismissAction?()
         mockCoodinatorBuilder._receivedAuthenticationOnboardingCompletion?()

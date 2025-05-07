@@ -1,21 +1,25 @@
 import SwiftUI
 import GOVKit
 import UIComponents
+import LocalAuthentication
 
 class LocalAuthenticationOnboardingViewModel: ObservableObject {
     @Published var iconName: String = ""
     @Published var title: String = ""
     @Published var message: String = ""
     @Published var enrolButtonTitle: String = ""
+    private let userDefaults: UserDefaultsInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private var biometryType: LocalAuthenticationType = .none
     private let analyticsService: AnalyticsServiceInterface
     private let completionAction: (() -> Void)
-    init(localAuthenticationService: LocalAuthenticationServiceInterface,
+    init(userDefaults: UserDefaultsInterface,
+         localAuthenticationService: LocalAuthenticationServiceInterface,
          authenticationService: AuthenticationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void) {
+        self.userDefaults = userDefaults
         self.localAuthenticationService = localAuthenticationService
         self.authenticationService = authenticationService
         self.analyticsService = analyticsService
@@ -28,21 +32,26 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
             self?.localAuthenticationService.evaluatePolicy(
                 .deviceOwnerAuthentication,
                 reason: "Unlock to proceed"
-            ) { [weak self] success, _ in
+            ) { [weak self] success, error in
                 if success {
-                    self?.localAuthenticationService.setHasSeenOnboarding()
                     self?.authenticationService.encryptRefreshToken()
+                } else if let laError = error as? LAError, laError.code == .userCancel {
+                    self?.userDefaults.set(bool: true, forKey: .skipLocalAuthentication)
                 }
+
+                self?.localAuthenticationService.setHasSeenOnboarding()
+                self?.trackEnrolEvent()
                 self?.completionAction()
             }
-            self?.trackEnrolEvent()
         }
     }
 
     var skipButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(localisedTitle: "Skip") { [weak self] in
-            self?.completionAction()
+            self?.localAuthenticationService.setHasSeenOnboarding()
+            self?.userDefaults.set(bool: true, forKey: .skipLocalAuthentication)
             self?.trackSkipEvent()
+            self?.completionAction()
         }
     }
 

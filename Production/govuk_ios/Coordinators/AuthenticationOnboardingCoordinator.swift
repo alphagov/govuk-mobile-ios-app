@@ -4,17 +4,20 @@ import Onboarding
 
 class AuthenticationOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
-    private let analyticsService: OnboardingAnalyticsService
+    private let authenticationService: AuthenticationServiceInterface
     private let authenticationOnboardingService: AuthenticationOnboardingServiceInterface
+    private let analyticsService: OnboardingAnalyticsService
     private let coordinatorBuilder: CoordinatorBuilder
     private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
-         analyticsService: OnboardingAnalyticsService,
+         authenticationService: AuthenticationServiceInterface,
          authenticationOnboardingService: AuthenticationOnboardingServiceInterface,
+         analyticsService: OnboardingAnalyticsService,
          coordinatorBuilder: CoordinatorBuilder,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
+        self.authenticationService = authenticationService
         self.authenticationOnboardingService = authenticationOnboardingService
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
@@ -23,7 +26,7 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard !authenticationOnboardingService.shouldSkipOnboarding else {
+        guard !shouldSkipOnboarding else {
             finishCoordination()
             return
         }
@@ -36,13 +39,11 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
             slideProvider: authenticationOnboardingService,
             analyticsService: analyticsService,
             completeAction: { [weak self] in
-                self?.authenticationOnboardingService.setHasSeenOnboarding()
                 Task {
                     await self?.authenticateAction()
                 }
             },
             dismissAction: { [weak self] in
-                self?.authenticationOnboardingService.setHasSeenOnboarding()
                 self?.finishCoordination()
             }
         )
@@ -61,5 +62,10 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
             completionAction: completionAction
         )
         authenticationCoordinator.start()
+    }
+
+    private var shouldSkipOnboarding: Bool {
+        !authenticationOnboardingService.isFeatureEnabled ||
+        authenticationService.isSignedIn
     }
 }

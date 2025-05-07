@@ -120,9 +120,7 @@ extension Container {
 
     var authenticationOnboardingService: Factory<AuthenticationOnboardingServiceInterface> {
         Factory(self) {
-            AuthenticationOnboardingService(
-                userDefaults: UserDefaults.standard
-            )
+            AuthenticationOnboardingService()
         }
     }
 
@@ -131,7 +129,8 @@ extension Container {
         Factory(self) {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
-                secureStoreService: self.secureStoreService.resolve()
+                secureStoreService: self.secureStoreService.resolve(),
+                userDefaults: UserDefaults.standard
             )
         }.scope(.singleton)
     }

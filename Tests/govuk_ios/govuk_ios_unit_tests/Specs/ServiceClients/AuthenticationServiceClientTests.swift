@@ -8,72 +8,112 @@ import GOVKit
 @Suite
 struct AuthenticationServiceClientTests {
     @Test @MainActor
-    func performAuthenticationFlow_success() async {
+    func performAuthenticationFlow_success_returnsSuccess() async {
         let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
-        let oidConfigService = MockOIDConfigService()
+        let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
-        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
-
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
-            oidConfigService: oidConfigService
+            oidAuthService: mockOidAuthService
         )
 
-        await confirmation("Auth request success") { authRequestComplete in
+        await confirmation() { confirmation in
             let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
             if case .success(let tokenResponse) = result {
                 let authSessionResponse = appAuthSessionWrapper._mockAuthenticationSession._tokenResponse
                 #expect(tokenResponse.accessToken == authSessionResponse.accessToken)
                 #expect(tokenResponse.refreshToken == authSessionResponse.refreshToken)
                 #expect(tokenResponse.idToken == authSessionResponse.idToken)
-                authRequestComplete()
+                confirmation()
             }
         }
     }
 
     @Test @MainActor
-    func performAuthenticationFlow_failure_loginFlowError() async {
+    func performAuthenticationFlow_loginFlowError_returnsFailure() async {
         let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
-        let oidConfigService = MockOIDConfigService()
+        let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
         appAuthSessionWrapper._mockAuthenticationSession._shouldReturnError = true
-        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
-
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
-            oidConfigService: oidConfigService
+            oidAuthService: mockOidAuthService
         )
 
-        await confirmation("Auth request failure") { authRequestComplete in
+        await confirmation() { confirmation in
             let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .loginFlow(.userCancelled))
-                authRequestComplete()
+                confirmation()
             }
         }
     }
 
-    @Test @MainActor
-    func performAuthenticationFlow_failure_fetchConfigError() async {
-        let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
-        let oidConfigService = MockOIDConfigService()
+    @Test
+    func performTokenRefresh_success_returnsSuccess() async {
+        let appAuthSessionWrapper = await MockAuthenticationSessionWrapper()
+        let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
-        oidConfigService._shouldReturnFetchConfigError = true
-        Constants.API.authenticationIssuerBaseUrl = URL(string: "https://example.com")!
-
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
-            oidConfigService: oidConfigService
+            oidAuthService: mockOidAuthService
         )
+        let accessToken = UUID().uuidString
+        let idToken = UUID().uuidString
+        mockOidAuthService._stubbedAccessToken = accessToken
+        mockOidAuthService._stubbedIdToken = idToken
 
-        await confirmation("Auth request failure") { authRequestComplete in
-            let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
+        await confirmation() { confirmation in
+            let result = await sut.performTokenRefresh(refreshToken: UUID().uuidString)
+            if case .success(let tokenResponse) = result {
+                #expect(tokenResponse.accessToken == accessToken)
+                #expect(tokenResponse.idToken == idToken)
+                confirmation()
+            }
+        }
+    }
+
+    @Test
+    func performTokenRefresh_missingAccessToken_returnsFailure() async {
+        let appAuthSessionWrapper = await MockAuthenticationSessionWrapper()
+        let mockOidAuthService = MockOIDAuthService()
+        let mockAppEnvironmentService = MockAppEnvironmentService()
+        let sut = AuthenticationServiceClient(
+            appEnvironmentService: mockAppEnvironmentService,
+            appAuthSession: appAuthSessionWrapper,
+            oidAuthService: mockOidAuthService
+        )
+        mockOidAuthService._stubbedAccessToken = nil
+
+        await confirmation() { confirmation in
+            let result = await sut.performTokenRefresh(refreshToken: UUID().uuidString)
             if case .failure(let error) = result {
-                #expect(error == .fetchConfigError)
-                authRequestComplete()
+                #expect(error == .missingAccessTokenError)
+                confirmation()
+            }
+        }
+    }
+
+    @Test
+    func performTokenRefresh_oidAuthServiceError_returnsFailure() async {
+        let appAuthSessionWrapper = await MockAuthenticationSessionWrapper()
+        let mockOidAuthService = MockOIDAuthService()
+        let mockAppEnvironmentService = MockAppEnvironmentService()
+        let sut = AuthenticationServiceClient(
+            appEnvironmentService: mockAppEnvironmentService,
+            appAuthSession: appAuthSessionWrapper,
+            oidAuthService: mockOidAuthService
+        )
+        mockOidAuthService._shouldReturnError = true
+
+        await confirmation() { confirmation in
+            let result = await sut.performTokenRefresh(refreshToken: UUID().uuidString)
+            if case .failure(let error) = result {
+                #expect(error == .tokenResponseError)
+                confirmation()
             }
         }
     }

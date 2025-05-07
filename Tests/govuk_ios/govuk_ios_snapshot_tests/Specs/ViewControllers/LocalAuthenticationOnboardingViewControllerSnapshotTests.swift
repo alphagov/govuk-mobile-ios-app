@@ -10,6 +10,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
+            userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),
@@ -32,6 +33,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
+            userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),
@@ -54,6 +56,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .touchID
         let viewModel = LocalAuthenticationOnboardingViewModel(
+            userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),
@@ -76,6 +79,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .touchID
         let viewModel = LocalAuthenticationOnboardingViewModel(
+            userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             analyticsService: MockAnalyticsService(),

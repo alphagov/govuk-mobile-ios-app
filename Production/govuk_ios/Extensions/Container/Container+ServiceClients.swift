@@ -36,7 +36,7 @@ extension Container {
             AuthenticationServiceClient(
                 appEnvironmentService: self.appEnvironmentService.resolve(),
                 appAuthSession: AppAuthSessionWrapper(),
-                oidConfigService: OIDAuthorizationServiceWrapper()
+                oidAuthService: OIDAuthorizationServiceWrapper()
             )
         }
     }

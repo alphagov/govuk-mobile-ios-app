@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Testing
+import LocalAuthentication
 
 @testable import govuk_ios
 
@@ -8,11 +9,13 @@ import Testing
 struct LocalAuthenticationOnboardingViewModelTests {
     @Test
     func updateBiometryType_forTouchID_setsCorrectValues() {
+        let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = LocalAuthenticationOnboardingViewModel(
+            userDefaults: mockUserDefaults,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
@@ -26,11 +29,13 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func updateBiometryType_forFaceID_setsCorrectValues() {
+        let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = LocalAuthenticationOnboardingViewModel(
+            userDefaults: mockUserDefaults,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
@@ -45,12 +50,14 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func enrolButtonViewModel_faceID_action_completesEnrolment() async {
+        let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
+                userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 analyticsService: mockAnalyticsService,
@@ -70,12 +77,14 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func enrolButtonViewModel_touchID_action_completesEnrolment() async {
+        let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
+                userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 analyticsService: mockAnalyticsService,
@@ -94,13 +103,43 @@ struct LocalAuthenticationOnboardingViewModelTests {
     }
 
     @Test
+    func enrolButtonViewModel_userCancels_action_setsNoLocalAuth() async {
+        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockLocalAuthenticationService._stubbedAuthType = .faceID
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockAnalyticsService = MockAnalyticsService()
+        mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (false, LAError(.userCancel))
+        let completion = await withCheckedContinuation { continuation in
+            let sut = LocalAuthenticationOnboardingViewModel(
+                userDefaults: mockUserDefaults,
+                localAuthenticationService: mockLocalAuthenticationService,
+                authenticationService: mockAuthenticationService,
+                analyticsService: mockAnalyticsService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            let enrolButtonViewModel = sut.enrolButtonViewModel
+            enrolButtonViewModel.action()
+        }
+
+        #expect(completion)
+        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockUserDefaults.bool(forKey: .skipLocalAuthentication))
+        let event = mockAnalyticsService._trackedEvents.first
+        #expect(event?.params?["text"] as? String == "Allow Face ID")
+    }
+
+    @Test
     func skipButtonViewModel_action_callsCompletion() async {
+        let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
+                userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 analyticsService: mockAnalyticsService,
@@ -112,6 +151,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
         #expect(completion)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockUserDefaults.bool(forKey: .skipLocalAuthentication))
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["text"] as? String == "Skip")
     }

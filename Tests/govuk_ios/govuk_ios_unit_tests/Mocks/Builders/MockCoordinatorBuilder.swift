@@ -159,6 +159,14 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedLocalAuthenticationOnboardingCoordinator ?? MockBaseCoordinator()
     }
 
+    var _receivedReauthenticationCompletion: (() -> Void)?
+    var _stubbedReauthenticationCoordinator: MockBaseCoordinator?
+    override func reauthentication(navigationController: UINavigationController,
+                                   completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedReauthenticationCompletion = completionAction
+        return _stubbedReauthenticationCoordinator ?? MockBaseCoordinator()
+    }
+
     var _stubbedSignOutConfirmationCoordinator: MockBaseCoordinator?
     override func signOutConfirmation() -> BaseCoordinator {
         _stubbedSignOutConfirmationCoordinator ?? MockBaseCoordinator()
@@ -171,5 +179,4 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _receivedSignedOutCompletion = completion
         return _stubbedSignedOutCoordinator ?? MockBaseCoordinator()
     }
-
 }

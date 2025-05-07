@@ -33,6 +33,7 @@ struct LocalAuthorityWidgetView: View {
                 Spacer()
             }
         }
+        .accessibilityElement(children: .combine)
         .background {
             Color(uiColor: UIColor.govUK.fills.surfaceCardSelected)
                 .ignoresSafeArea()

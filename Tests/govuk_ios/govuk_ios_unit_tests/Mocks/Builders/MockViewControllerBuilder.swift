@@ -112,16 +112,20 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedSignOutConfirmationViewController: UIViewController?
+    var _receivedSignOutConfirmationCompletion: ((Bool) -> Void)?
     override func signOutConfirmation(authenticationService: any AuthenticationServiceInterface,
                                       analyticsService: any AnalyticsServiceInterface,
-                                      completion: @escaping () -> Void) -> UIViewController {
-        _stubbedSignOutConfirmationViewController ?? UIViewController()
+                                      completion: @escaping (Bool) -> Void) -> UIViewController {
+        _receivedSignOutConfirmationCompletion = completion
+        return _stubbedSignOutConfirmationViewController ?? UIViewController()
     }
 
+    var _receivedSignedOutCompletion: (() -> Void)?
     var _stubbedSignedOutViewController: UIViewController?
     override func signedOut(authenticationService: AuthenticationServiceInterface,
                             analyticsService: AnalyticsServiceInterface,
                             completion: @escaping () -> Void) -> UIViewController {
-        _stubbedSignedOutViewController ?? UIViewController()
+        _receivedSignedOutCompletion = completion
+        return _stubbedSignedOutViewController ?? UIViewController()
     }
 }

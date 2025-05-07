@@ -21,15 +21,17 @@ final class SignOutConfirmationCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.signOutConfirmation(
             authenticationService: authenticationService,
             analyticsService: analyticsService,
-            completion: { [weak self] in
-                self?.dismiss()
+            completion: { [weak self] didAttemptSignOut in
+                self?.dismiss(didAttemptSignOut)
             }
         )
         set([viewController])
     }
 
-    private func dismiss() {
-        finish()
-        root.dismiss(animated: authenticationService.isSignedIn)
+    private func dismiss(_ didAttemptSignOut: Bool) {
+        if didAttemptSignOut {
+            finish()
+        }
+        root.dismiss(animated: true)
     }
 }

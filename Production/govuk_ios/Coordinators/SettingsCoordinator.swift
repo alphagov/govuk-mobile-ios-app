@@ -47,8 +47,7 @@ class SettingsCoordinator: TabItemCoordinator {
 
     override func childDidFinish(_ child: BaseCoordinator) {
         super.childDidFinish(child)
-        if child is SignOutConfirmationCoordinator,
-           !authenticationService.isSignedIn {
+        if child is SignOutConfirmationCoordinator {
             finish()
         }
     }

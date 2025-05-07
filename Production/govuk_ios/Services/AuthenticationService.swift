@@ -59,9 +59,19 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     func signOut() {
-        secureStoreService.deleteItem(itemName: "refreshToken")
-        try? secureStoreService.delete()
-        setTokens()
+        do {
+            try secureStoreService.delete()
+            secureStoreService.deleteItem(itemName: "refreshToken")
+            setTokens()
+        } catch {
+            #if targetEnvironment(simulator)
+            // secure store deletion will always fail on simulator
+            // as secure enclave unavailable.
+            secureStoreService.deleteItem(itemName: "refreshToken")
+            setTokens()
+            #endif
+            return
+        }
     }
 
     func encryptRefreshToken() {

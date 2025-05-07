@@ -1,6 +1,50 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "signedOutButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with GOV.UK One Login"
+          }
+        }
+      }
+    },
+    "signedOutErrorButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go back to settings"
+          }
+        }
+      }
+    },
+    "signedOutErrorSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try again later.\n\nIf you need to sign out right now, you can delete the app from your phone."
+          }
+        }
+      }
+    },
+    "signedOutErrorTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was a problem signing you out"
+          }
+        }
+      }
+    },
     "signedOutSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,17 +63,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You’ve signed out"
-          }
-        }
-      }
-    },
-    "signInButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sign in with GOV.UK One Login"
           }
         }
       }

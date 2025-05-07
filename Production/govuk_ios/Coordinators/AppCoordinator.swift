@@ -145,8 +145,14 @@ class AppCoordinator: BaseCoordinator {
     private func startSignedOutCoordinator(url: URL?) {
         let coordinator = coordinatorBuilder.signedOut(
             navigationController: root,
-            completion: { [weak self] in
-                self?.startTabs(url: nil)
+            completion: { [weak self] signedIn in
+                if signedIn {
+                    self?.startTabs(
+                        url: URL(string: "govuk://settings/settings")
+                    )
+                } else {
+                    self?.startAuthenticationOnboardingCoordinator(url: nil)
+                }
             }
         )
         start(coordinator, url: url)

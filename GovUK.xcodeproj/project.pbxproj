@@ -265,7 +265,7 @@
 		D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */; };
 		D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */; };
 		D090467F2DBBC1ED0096EE66 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = D090467E2DBBC1ED0096EE66 /* JWTKit */; };
-		D09046812DBFD8480096EE66 /* SignedOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046802DBFD8480096EE66 /* SignedOutView.swift */; };
+		D09046812DBFD8480096EE66 /* AuthenticationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046802DBFD8480096EE66 /* AuthenticationInfoView.swift */; };
 		D09046832DBFD9430096EE66 /* SignedOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046822DBFD9370096EE66 /* SignedOutViewModel.swift */; };
 		D09046872DBFDF5D0096EE66 /* SignedOutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */; };
 		D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093BA622CB0499A004F489B /* EditTopicsView.swift */; };
@@ -291,6 +291,7 @@
 		D0EB04842D37F34200B310D8 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0EB04812D37F34200B310D8 /* GOV.xcdatamodeld */; };
 		D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCD2D109B51000A3151 /* GOVKit */; };
 		D0EBFBD22D11C0E7000A3151 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBFBD12D11C0E7000A3151 /* AnalyticsService.swift */; };
+		D0EC94C52DCBA5F700A9707E /* AuthenticationInfoViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC94C42DCBA5E000A9707E /* AuthenticationInfoViewModelInterface.swift */; };
 		D0F5FF7E2D64D22400C3BF51 /* AppEvent+ECommerce.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F5FF7D2D64D22400C3BF51 /* AppEvent+ECommerce.swift */; };
 /* End PBXBuildFile section */
 
@@ -598,7 +599,7 @@
 		D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = SignOut.xcstrings; sourceTree = "<group>"; };
 		D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenPayload.swift; sourceTree = "<group>"; };
 		D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenExtractor.swift; sourceTree = "<group>"; };
-		D09046802DBFD8480096EE66 /* SignedOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedOutView.swift; sourceTree = "<group>"; };
+		D09046802DBFD8480096EE66 /* AuthenticationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInfoView.swift; sourceTree = "<group>"; };
 		D09046822DBFD9370096EE66 /* SignedOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedOutViewModel.swift; sourceTree = "<group>"; };
 		D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedOutCoordinator.swift; sourceTree = "<group>"; };
 		D093BA622CB0499A004F489B /* EditTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTopicsView.swift; sourceTree = "<group>"; };
@@ -626,6 +627,7 @@
 		D0EB04832D37F34200B310D8 /* GOV_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV_v2.xcdatamodel; sourceTree = "<group>"; };
 		D0EBFBCC2D0C9653000A3151 /* GOVKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GOVKit; sourceTree = "<group>"; };
 		D0EBFBD12D11C0E7000A3151 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		D0EC94C42DCBA5E000A9707E /* AuthenticationInfoViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInfoViewModelInterface.swift; sourceTree = "<group>"; };
 		D0F5FF7D2D64D22400C3BF51 /* AppEvent+ECommerce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+ECommerce.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1000,6 +1002,7 @@
 		5D41DB5E2C0875460011E691 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D0EC94C42DCBA5E000A9707E /* AuthenticationInfoViewModelInterface.swift */,
 				169842D92DB0003C00E3EA66 /* LocalAuthenticationOnboardingViewModel.swift */,
 				3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */,
 				3D9C933F2CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift */,
@@ -1536,7 +1539,7 @@
 			isa = PBXGroup;
 			children = (
 				D08A9A832DB92A3E002E9C78 /* SignOutConfirmationView.swift */,
-				D09046802DBFD8480096EE66 /* SignedOutView.swift */,
+				D09046802DBFD8480096EE66 /* AuthenticationInfoView.swift */,
 			);
 			path = SignOut;
 			sourceTree = "<group>";
@@ -1967,7 +1970,7 @@
 				5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */,
 				4EB7D8512DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift in Sources */,
 				D0D9CFD52D302F2A0051EDDD /* SearchHistoryRepository.swift in Sources */,
-				D09046812DBFD8480096EE66 /* SignedOutView.swift in Sources */,
+				D09046812DBFD8480096EE66 /* AuthenticationInfoView.swift in Sources */,
 				D093BA632CB0499A004F489B /* EditTopicsView.swift in Sources */,
 				D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */,
 				5DD4CB082D95483100459FB5 /* ActivityItem.swift in Sources */,
@@ -2106,6 +2109,7 @@
 				4E038AB92DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
+				D0EC94C52DCBA5F700A9707E /* AuthenticationInfoViewModelInterface.swift in Sources */,
 				D0D9CFD72D3030640051EDDD /* SearchHistoryViewController.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */,

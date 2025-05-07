@@ -18,7 +18,7 @@ struct SignedOutViewModelTests {
             }
         )
 
-        sut.signedOutButtonViewModel.action()
+        sut.buttonViewModel.action()
 
         #expect(didCallCompletion)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == String.signOut.localized("signedOutButtonTitle"))

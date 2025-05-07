@@ -2,8 +2,8 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-final class SignedOutViewModel {
-    private let analyticsService: AnalyticsServiceInterface
+final class SignedOutViewModel: AuthenticationInfoViewModelInterface {
+    let analyticsService: AnalyticsServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private let completion: () -> Void
 
@@ -33,13 +33,13 @@ final class SignedOutViewModel {
         String.signOut.localized("signedOutButtonTitle")
     }
 
-    var warningImage: Image? {
+    var image: Image? {
         authenticationService.isSignedIn ?
         Image(systemName: "exclamationmark.circle") :
         nil
     }
 
-    var signedOutButtonViewModel: GOVUKButton.ButtonViewModel {
+    var buttonViewModel: GOVUKButton.ButtonViewModel {
         return GOVUKButton.ButtonViewModel(
             localisedTitle: buttonTitle,
             action: { [weak self] in
@@ -50,15 +50,19 @@ final class SignedOutViewModel {
         )
     }
 
+    var trackingName: String {
+        "Signed Out"
+    }
+
+    var trackingTitle: String {
+        title
+    }
+
     private func trackNavigationEvent(_ title: String) {
         let event = AppEvent.buttonNavigation(
             text: title,
             external: false
         )
         analyticsService.track(event: event)
-    }
-
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
     }
 }

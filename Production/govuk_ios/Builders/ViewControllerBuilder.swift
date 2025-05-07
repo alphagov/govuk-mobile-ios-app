@@ -158,7 +158,7 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             completion: completion
         )
-        let view = SignedOutView(viewModel: viewModel)
+        let view = AuthenticationInfoView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
         return viewController
     }

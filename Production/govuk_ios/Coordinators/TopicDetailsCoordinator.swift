@@ -59,7 +59,7 @@ final class TopicDetailsCoordinator: BaseCoordinator {
     private var pushWebView: () -> Void {
         return { [weak self] in
             guard let self = self else { return }
-            let webVC = FullScreenWebViewController()
+            let webVC = WebViewController(url: URL(string: "https://www.gov.uk/sign-in-universal-credit")!)
             webVC.title = "Sign in to your Universal Credit account"
             self.push(webVC, animated: true)
         }

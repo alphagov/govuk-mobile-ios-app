@@ -12,7 +12,7 @@ class SignOutConfirmationViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = SignOutConfirmationViewModel(authenticationService: MockAuthenticationService(),
                                                      analyticsService: MockAnalyticsService(),
-                                                     completion: { })
+                                                     completion: { _ in })
         let signOutConfirmationView = SignOutConfirmationView(
             viewModel: viewModel
         )
@@ -30,7 +30,7 @@ class SignOutConfirmationViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = SignOutConfirmationViewModel(authenticationService: MockAuthenticationService(),
                                                      analyticsService: MockAnalyticsService(),
-                                                     completion: { })
+                                                     completion: { _ in })
         let signOutConfirmationView = SignOutConfirmationView(
             viewModel: viewModel
         )

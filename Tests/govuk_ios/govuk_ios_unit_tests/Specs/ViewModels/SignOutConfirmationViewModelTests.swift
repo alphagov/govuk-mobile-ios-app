@@ -14,7 +14,7 @@ struct SignOutConfirmationViewModelTests {
         let sut = SignOutConfirmationViewModel(
             authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
-            completion: {
+            completion: { _ in
                 didCallCompletion = true
             }
         )
@@ -34,7 +34,7 @@ struct SignOutConfirmationViewModelTests {
         let sut = SignOutConfirmationViewModel(
             authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
-            completion: {
+            completion: { _ in 
                 didCallCompletion = true
             }
         )
@@ -53,7 +53,7 @@ struct SignOutConfirmationViewModelTests {
         let sut = SignOutConfirmationViewModel(
             authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
-            completion: { }
+            completion: { _ in }
         )
 
         sut.signOutButtonViewModel.action()
@@ -70,7 +70,7 @@ struct SignOutConfirmationViewModelTests {
         let sut = SignOutConfirmationViewModel(
             authenticationService: mockAuthenticationService,
             analyticsService: mockAnalyticsService,
-            completion: { }
+            completion: { _ in }
         )
 
         sut.cancelButtonViewModel.action()

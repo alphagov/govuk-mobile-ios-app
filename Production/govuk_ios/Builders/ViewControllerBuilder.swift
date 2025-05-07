@@ -138,7 +138,7 @@ class ViewControllerBuilder {
     @MainActor
     func signOutConfirmation(authenticationService: AuthenticationServiceInterface,
                              analyticsService: AnalyticsServiceInterface,
-                             completion: @escaping () -> Void) -> UIViewController {
+                             completion: @escaping (Bool) -> Void) -> UIViewController {
         let viewModel = SignOutConfirmationViewModel(
             authenticationService: authenticationService,
             analyticsService: analyticsService,

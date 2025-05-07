@@ -26,7 +26,7 @@ struct SignedOutView: View {
                 .ignoresSafeArea()
             SwiftUIButton(
                 .primary,
-                viewModel: viewModel.signInButtonViewModel
+                viewModel: viewModel.signedOutButtonViewModel
             )
             .frame(minHeight: 44, idealHeight: 44)
             .padding(16)
@@ -37,6 +37,10 @@ struct SignedOutView: View {
 
     private var infoView: some View {
         VStack {
+            if let image = viewModel.warningImage {
+                image
+                    .font(Font.system(size: 107, weight: .light))
+            }
             Text(viewModel.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -44,7 +48,7 @@ struct SignedOutView: View {
                 .multilineTextAlignment(.center)
                 .accessibilityAddTraits(.isHeader)
                 .padding(.bottom, 16)
-            Text(viewModel.subTitle)
+            Text(viewModel.subtitle)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
                 .font(Font.govUK.body)
                 .multilineTextAlignment(.center)

@@ -45,8 +45,7 @@ class TabCoordinator: BaseCoordinator,
 
     override func childDidFinish(_ child: BaseCoordinator) {
         super.childDidFinish(child)
-        if let child = child as? SettingsCoordinator,
-           !child.authenticationService.isSignedIn {
+        if child is SettingsCoordinator {
             finish()
         }
     }

@@ -268,7 +268,7 @@ class CoordinatorBuilder {
     }
 
     func signedOut(navigationController: UINavigationController,
-                   completion: @escaping () -> Void) -> BaseCoordinator {
+                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
         SignedOutCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),

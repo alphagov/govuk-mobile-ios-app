@@ -107,7 +107,8 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
 
         let rootView = (result as? HostingViewController<TopicDetailView<TopicDetailViewModel>>)?.rootView

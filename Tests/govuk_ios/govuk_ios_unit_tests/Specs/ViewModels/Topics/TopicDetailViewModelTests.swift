@@ -27,7 +27,8 @@ struct TopicDetailViewModelTests {
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
 
         try #require(sut.sections.count == 3)
@@ -61,7 +62,8 @@ struct TopicDetailViewModelTests {
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         
         try #require(sut.sections.count == 3)
@@ -99,7 +101,8 @@ struct TopicDetailViewModelTests {
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         
         try #require(sut.sections.count == 4)
@@ -133,7 +136,8 @@ struct TopicDetailViewModelTests {
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
 
         #expect(sut.sections[3].heading?.title == "Related")
@@ -158,7 +162,8 @@ struct TopicDetailViewModelTests {
             subtopicAction: { _ in
                 didNavigate = true
             },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         
         try #require(sut.sections.count == 4)
@@ -183,7 +188,8 @@ struct TopicDetailViewModelTests {
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         
         try #require(sut.sections.count == 4)
@@ -203,7 +209,8 @@ struct TopicDetailViewModelTests {
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         let errorViewModel = try #require(sut.errorViewModel)
         #expect(errorViewModel.title == String.common.localized("genericErrorTitle"))
@@ -227,7 +234,8 @@ struct TopicDetailViewModelTests {
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         let errorViewModel = try #require(sut.errorViewModel)
         #expect(errorViewModel.title == String.common.localized("networkUnavailableErrorTitle"))

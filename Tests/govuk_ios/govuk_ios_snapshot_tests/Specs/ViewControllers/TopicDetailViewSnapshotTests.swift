@@ -14,7 +14,8 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         VerifySnapshotInNavigationController(
             viewController: sut,
@@ -33,7 +34,8 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         VerifySnapshotInNavigationController(
             viewController: sut,
@@ -52,7 +54,8 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         VerifySnapshotInNavigationController(
             viewController: sut,
@@ -71,7 +74,8 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         VerifySnapshotInNavigationController(
             viewController: sut,
@@ -90,7 +94,8 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         VerifySnapshotInNavigationController(
             viewController: sut,
@@ -109,7 +114,8 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         VerifySnapshotInNavigationController(
             viewController: sut,
@@ -127,7 +133,8 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            webViewAction: { }
         )
         VerifySnapshotInNavigationController(
             viewController: sut,

@@ -292,6 +292,8 @@
 		D0EBFBCE2D109B51000A3151 /* GOVKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0EBFBCD2D109B51000A3151 /* GOVKit */; };
 		D0EBFBD22D11C0E7000A3151 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EBFBD12D11C0E7000A3151 /* AnalyticsService.swift */; };
 		D0EC94C52DCBA5F700A9707E /* AuthenticationInfoViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC94C42DCBA5E000A9707E /* AuthenticationInfoViewModelInterface.swift */; };
+		D0EC94C72DCBAEE400A9707E /* SignInErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC94C62DCBAEE400A9707E /* SignInErrorViewModel.swift */; };
+		D0EC94C92DCBC65000A9707E /* SignInErrorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC94C82DCBC65000A9707E /* SignInErrorCoordinator.swift */; };
 		D0F5FF7E2D64D22400C3BF51 /* AppEvent+ECommerce.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F5FF7D2D64D22400C3BF51 /* AppEvent+ECommerce.swift */; };
 /* End PBXBuildFile section */
 
@@ -628,6 +630,8 @@
 		D0EBFBCC2D0C9653000A3151 /* GOVKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GOVKit; sourceTree = "<group>"; };
 		D0EBFBD12D11C0E7000A3151 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		D0EC94C42DCBA5E000A9707E /* AuthenticationInfoViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInfoViewModelInterface.swift; sourceTree = "<group>"; };
+		D0EC94C62DCBAEE400A9707E /* SignInErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInErrorViewModel.swift; sourceTree = "<group>"; };
+		D0EC94C82DCBC65000A9707E /* SignInErrorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInErrorCoordinator.swift; sourceTree = "<group>"; };
 		D0F5FF7D2D64D22400C3BF51 /* AppEvent+ECommerce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+ECommerce.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -667,6 +671,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignedOutViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignInErrorViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignOutConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/StoredLocalAuthorityWidgetViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
@@ -704,6 +709,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignedOutViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignInErrorViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignOutConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/StoredLocalAuthorityWidgetViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
@@ -1026,6 +1032,7 @@
 				4E038AB62DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift */,
 				4E038AB82DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift */,
 				4EEC0F2F2DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift */,
+				D0EC94C62DCBAEE400A9707E /* SignInErrorViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1212,6 +1219,7 @@
 				4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */,
 				D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */,
 				D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */,
+				D0EC94C82DCBC65000A9707E /* SignInErrorCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1898,6 +1906,7 @@
 				16FCDE782DC4E39A000E870D /* TokenRefreshResponse.swift in Sources */,
 				5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */,
 				4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */,
+				D0EC94C72DCBAEE400A9707E /* SignInErrorViewModel.swift in Sources */,
 				164091FA2DA3F4A600E3BE99 /* AuthenticationCoordinator.swift in Sources */,
 				5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */,
 				4EEC0F342DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift in Sources */,
@@ -2021,6 +2030,7 @@
 				D0F5FF7E2D64D22400C3BF51 /* AppEvent+ECommerce.swift in Sources */,
 				D04C542C2D7081CC0070EE79 /* TopicCommerceItem.swift in Sources */,
 				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
+				D0EC94C92DCBC65000A9707E /* SignInErrorCoordinator.swift in Sources */,
 				4EFE22A52D0CD0D500136D56 /* RegexRedactor.swift in Sources */,
 				169842DA2DB0004800E3EA66 /* LocalAuthenticationOnboardingViewModel.swift in Sources */,
 				D028CCF62CB9619B00742620 /* Topic.swift in Sources */,

@@ -9,12 +9,19 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: (() -> Void)?)
     func addClickListener(onClickAction: @escaping (URL) -> Void)
+    func acceptConsent()
+    func rejectConsent()
+    func toggleHasGivenConsent()
     var shouldRequestPermission: Bool { get async }
     var permissionState: NotificationPermissionState { get async }
     var isFeatureEnabled: Bool { get }
+    var hasGivenConsent: Bool { get }
+    func fetchConsentAlignment() async -> NotificationConsentResult
 }
 
-class NotificationService: NSObject, NotificationServiceInterface, OSNotificationClickListener {
+class NotificationService: NSObject,
+                           NotificationServiceInterface,
+                           OSNotificationClickListener {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
     var onClickAction: ((URL) -> Void)?
@@ -26,6 +33,7 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
     }
 
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        OneSignal.setConsentRequired(true)
         OneSignal.initialize(
             environmentService.oneSignalAppId,
             withLaunchOptions: launchOptions
@@ -59,13 +67,37 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
     }
 
     var isFeatureEnabled: Bool {
-        false
+        true
+    }
+
+    var hasGivenConsent: Bool {
+        UserDefaults.standard.bool(forKey: "OneSignalConsentGiven")
+    }
+
+    func acceptConsent() {
+        updateConsent(given: true)
+    }
+
+    func rejectConsent() {
+        updateConsent(given: false)
+    }
+
+    func toggleHasGivenConsent() {
+        var permission = hasGivenConsent
+        permission.toggle()
+        updateConsent(given: permission)
+    }
+
+    private func updateConsent(given: Bool) {
+        UserDefaults.standard.set(given, forKey: "OneSignalConsentGiven")
+        OneSignal.setConsentGiven(given)
+        UserDefaults.standard.synchronize()
     }
 
     func requestPermissions(completion: (() -> Void)?) {
-        OneSignal.setConsentGiven(true)
-        OneSignal.Notifications.requestPermission({ accepted in
-            OneSignal.setConsentGiven(accepted)
+        updateConsent(given: true)
+        OneSignal.Notifications.requestPermission({ [weak self] accepted in
+            self?.updateConsent(given: accepted)
             completion?()
         }, fallbackToSettings: false)
     }
@@ -91,5 +123,17 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
               let deeplink = URL(string: deeplinkStr)
         else { return }
         onClickAction?(deeplink)
+    }
+
+    func fetchConsentAlignment() async -> NotificationConsentResult {
+        let isSubscribed = await permissionState == .authorized
+        switch (hasGivenConsent, isSubscribed) {
+        case (true, false):
+            return .failure(.consentGrantedNotificationsOff)
+        case (false, true):
+            return .failure(.consentNotGrantedNotificationsOn)
+        default:
+            return .success(())
+        }
     }
 }

@@ -4,6 +4,11 @@ import Foundation
 class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private var initialLaunch: Bool = true
+    private lazy var tabCooordinator: BaseCoordinator = {
+        coordinatorBuilder.tab(
+            navigationController: root
+        )
+    }()
 
     init(coordinatorBuilder: CoordinatorBuilder,
          navigationController: UINavigationController) {
@@ -13,20 +18,45 @@ class AppCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         if initialLaunch {
-            startLaunch(url: url)
+            firstLaunch(url: url)
         } else {
-            startTabs(url: url)
+            reLaunch(url: url)
         }
     }
 
-    private func startLaunch(url: URL?) {
+    private func firstLaunch(url: URL?) {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
             completion: { [weak self] response in
                 self?.initialLaunch = false
-                self?.startAppForcedUpdate(
+                self?.startConsentCheck(
                     url: url,
                     launchResponse: response
+                )
+            }
+        )
+        start(coordinator)
+    }
+
+    private func reLaunch(url: URL?) {
+        let coordinator = coordinatorBuilder.relaunch(
+            navigationController: root,
+            completion: { [weak self] in
+                self?.startTabs(url: url)
+            }
+        )
+        start(coordinator, url: url)
+    }
+
+    private func startConsentCheck(url: URL?,
+                                   launchResponse: AppLaunchResponse) {
+        let coordinator = coordinatorBuilder.notificationConsent(
+            navigationController: root,
+            consentResult: launchResponse.notificationConsentResult,
+            completion: { [weak self] in
+                self?.startAppForcedUpdate(
+                    url: url,
+                    launchResponse: launchResponse
                 )
             }
         )
@@ -136,9 +166,6 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startTabs(url: URL?) {
-        let coordinator = coordinatorBuilder.tab(
-            navigationController: root
-        )
-        start(coordinator, url: url)
+        start(tabCooordinator, url: url)
     }
 }

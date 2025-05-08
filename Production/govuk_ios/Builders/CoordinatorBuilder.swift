@@ -67,6 +67,16 @@ class CoordinatorBuilder {
         )
     }
 
+    func relaunch(navigationController: UINavigationController,
+                  completion: @escaping () -> Void) -> BaseCoordinator {
+        ReLaunchCoordinator(
+            coordinatorBuilder: self,
+            notificationService: container.notificationService.resolve(),
+            navigationController: navigationController,
+            completion: completion
+        )
+    }
+
     func appUnavailable(navigationController: UINavigationController,
                         launchResponse: AppLaunchResponse,
                         dismissAction: @escaping () -> Void) -> BaseCoordinator {
@@ -198,6 +208,18 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             notificationService: container.notificationService.resolve(),
             analyticsService: container.onboardingAnalyticsService.resolve(),
+            completion: completion
+        )
+    }
+
+    func notificationConsent(navigationController: UINavigationController,
+                             consentResult: NotificationConsentResult,
+                             completion: @escaping () -> Void) -> BaseCoordinator {
+        NotificationConsentCoordinator(
+            navigationController: navigationController,
+            notificationService: container.notificationService.resolve(),
+            consentResult: consentResult,
+            urlOpener: UIApplication.shared,
             completion: completion
         )
     }

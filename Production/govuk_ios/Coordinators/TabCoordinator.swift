@@ -37,7 +37,7 @@ class TabCoordinator: BaseCoordinator,
     }
 
     override func start(url: URL?) {
-        showTabs()
+        showTabsIfRequired()
         guard let url = url
         else { return }
         handleDeeplink(url: url)
@@ -74,7 +74,10 @@ class TabCoordinator: BaseCoordinator,
         )
     }
 
-    private func showTabs() {
+    private func showTabsIfRequired() {
+        let viewControllers = tabController.viewControllers ?? []
+        guard viewControllers.isEmpty else { return }
+
         tabController.viewControllers = coordinators.map { $0.root }
         set([tabController], animated: false)
         coordinators.forEach { start($0) }

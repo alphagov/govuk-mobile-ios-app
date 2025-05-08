@@ -3,6 +3,7 @@ import Foundation
 struct AppLaunchResponse {
     let configResult: FetchAppConfigResult
     let topicResult: FetchTopicsListResult
+    let notificationConsentResult: NotificationConsentResult
     let appVersionProvider: AppVersionProvider
 
     var isAppAvailable: Bool {
@@ -35,4 +36,11 @@ struct AppLaunchResponse {
     private var appVersionNumber: String {
         appVersionProvider.versionNumber ?? ""
     }
+}
+
+typealias NotificationConsentResult = Result<Void, NotificationConsentResultError>
+
+enum NotificationConsentResultError: Error {
+    case consentNotGrantedNotificationsOn
+    case consentGrantedNotificationsOff
 }

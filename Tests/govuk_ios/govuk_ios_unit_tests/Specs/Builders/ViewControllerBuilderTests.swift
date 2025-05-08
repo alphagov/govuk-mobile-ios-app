@@ -207,4 +207,15 @@ struct ViewControllerBuilderTests {
         let rootView = (result as? HostingViewController<AuthenticationInfoView>)?.rootView
         #expect(rootView != nil)
     }
+
+    @Test
+    func signInError_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.signInError(
+            analyticsService: MockAnalyticsService(),
+            completion: { }
+        )
+        let rootView = (result as? HostingViewController<AuthenticationInfoView>)?.rootView
+        #expect(rootView != nil)
+    }
 }

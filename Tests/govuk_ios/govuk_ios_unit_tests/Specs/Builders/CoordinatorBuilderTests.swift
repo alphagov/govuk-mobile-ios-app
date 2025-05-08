@@ -242,7 +242,8 @@ struct CoordinatorBuilderTests {
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.authentication(
             navigationController: mockNavigationController,
-            completionAction: { }
+            completionAction: { },
+            handleError: { _ in }
         )
 
         #expect(coordinator is AuthenticationCoordinator)
@@ -279,6 +280,18 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is SignedOutCoordinator)
+    }
+
+    @Test
+    func signInError_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.signInError(
+            navigationController: mockNavigationController,
+            completion: { }
+        )
+
+        #expect(coordinator is SignInErrorCoordinator)
     }
 
     func webView_returnsExpectedResult() {

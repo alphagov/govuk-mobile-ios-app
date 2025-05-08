@@ -50,13 +50,8 @@ final class SignedOutViewModel: AuthenticationInfoViewModelInterface {
         )
     }
 
-    var trackingName: String {
-        "Signed Out"
-    }
-
-    var trackingTitle: String {
-        title
-    }
+    var trackingName: String { "Signed Out" }
+    var trackingTitle: String { title }
 
     private func trackNavigationEvent(_ title: String) {
         let event = AppEvent.buttonNavigation(

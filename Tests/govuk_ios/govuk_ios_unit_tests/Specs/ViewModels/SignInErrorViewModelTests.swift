@@ -3,15 +3,14 @@ import Testing
 @testable import govuk_ios
 @testable import GOVKit
 
-struct SignedOutViewModelTests {
+struct SignInErrorViewModelTests {
 
     @Test
-    func signInButton_action_tracksNavigationEvent() {
-        let mockAuthenticationService = MockAuthenticationService()
+    func signInRetryButton_tracksNavigationEvent() {
         let mockAnalyticsService = MockAnalyticsService()
         var didCallCompletion = false
-        let sut = SignedOutViewModel(
-            authenticationService: mockAuthenticationService,
+
+        let sut = SignInErrorViewModel(
             analyticsService: mockAnalyticsService,
             completion: {
                 didCallCompletion = true
@@ -21,6 +20,7 @@ struct SignedOutViewModelTests {
         sut.buttonViewModel.action()
 
         #expect(didCallCompletion)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == String.signOut.localized("signedOutButtonTitle"))
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == String.signOut.localized("signInRetryButtonTitle"))
     }
+
 }

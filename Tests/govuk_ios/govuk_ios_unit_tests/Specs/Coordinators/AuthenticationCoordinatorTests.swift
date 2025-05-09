@@ -12,24 +12,15 @@ class AuthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockAuthenticationService.authenticationOnboardingFlowSeen = true
         mockAuthenticationService.isLocalAuthenticationSkipped = false
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
@@ -49,24 +40,15 @@ class AuthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockAuthenticationService.authenticationOnboardingFlowSeen = false
         mockAuthenticationService.isLocalAuthenticationSkipped = false
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
@@ -86,24 +68,15 @@ class AuthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockAuthenticationService.authenticationOnboardingFlowSeen = true
         mockAuthenticationService.isLocalAuthenticationSkipped = true
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
@@ -123,24 +96,15 @@ class AuthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
         mockAuthenticationService.authenticationOnboardingFlowSeen = false
         mockAuthenticationService.isLocalAuthenticationSkipped = true
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
@@ -160,20 +124,12 @@ class AuthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
         mockAuthenticationService.authenticationOnboardingFlowSeen = true
         mockAuthenticationService.isLocalAuthenticationSkipped = false
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -190,12 +146,5 @@ class AuthenticationCoordinatorTests {
 
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(completion)
-    }
-
-    private func createTokenResponse(_ jsonData: Data) -> TokenResponse {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        let tokenResponse = try? decoder.decode(TokenResponse.self, from: jsonData)
-        return tokenResponse!
     }
 }

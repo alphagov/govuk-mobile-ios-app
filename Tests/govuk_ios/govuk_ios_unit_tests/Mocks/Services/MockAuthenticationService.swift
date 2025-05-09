@@ -26,8 +26,8 @@ class MockAuthenticationService: AuthenticationServiceInterface {
     var accessToken: String?
     var authenticationOnboardingFlowSeen: Bool = true
 
-    var _stubbedAuthenticationResult: AuthenticationResult = .failure(.loginFlow(.clientError))
-    func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationResult {
+    var _stubbedAuthenticationResult: AuthenticationServiceResult = .failure(.loginFlow(.clientError))
+    func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationServiceResult {
         _stubbedAuthenticationResult
     }
 

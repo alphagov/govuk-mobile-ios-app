@@ -41,6 +41,7 @@ struct AuthenticationInfoView: View {
             if let image = viewModel.image {
                 image
                     .font(Font.system(size: 107, weight: .light))
+                    .accessibilityHidden(true)
             }
             Text(viewModel.title)
                 .fontWeight(.bold)

@@ -1,18 +1,25 @@
 import Foundation
 import UIKit
+import Authentication
 
 class AuthenticationCoordinator: BaseCoordinator {
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
+    private let coordinatorBuilder: CoordinatorBuilder
     private let completionAction: () -> Void
+    private let handleError: (AuthenticationError) -> Void
 
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
-         completionAction: @escaping () -> Void) {
+         coordinatorBuilder: CoordinatorBuilder,
+         completionAction: @escaping () -> Void,
+         handleError: @escaping (AuthenticationError) -> Void) {
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
+        self.coordinatorBuilder = coordinatorBuilder
         self.completionAction = completionAction
+        self.handleError = handleError
         super.init(navigationController: navigationController)
     }
 
@@ -37,7 +44,9 @@ class AuthenticationCoordinator: BaseCoordinator {
                 self.completionAction()
             }
         case .failure(let error):
-            print("\(error)")
+            DispatchQueue.main.async {
+                self.handleError(error)
+            }
         }
     }
 

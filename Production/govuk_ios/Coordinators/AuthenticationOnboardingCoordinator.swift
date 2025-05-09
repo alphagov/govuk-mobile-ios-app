@@ -34,7 +34,7 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
         setOnboarding()
     }
 
-    private func setOnboarding() {
+    private func setOnboarding(_ animated: Bool = true) {
         let onboardingModule = Onboarding(
             slideProvider: authenticationOnboardingService,
             analyticsService: analyticsService,
@@ -47,7 +47,10 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
                 self?.finishCoordination()
             }
         )
-        set(onboardingModule.viewController)
+        set(
+            onboardingModule.viewController,
+            animated: animated
+        )
     }
 
     private func finishCoordination() {
@@ -59,9 +62,23 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
     private func authenticateAction() async {
         let authenticationCoordinator = coordinatorBuilder.authentication(
             navigationController: navigationController,
-            completionAction: completionAction
+            completionAction: completionAction,
+            handleError: showError
         )
-        authenticationCoordinator.start()
+        start(authenticationCoordinator)
+    }
+
+    func showError(_ error: AuthenticationError) {
+        guard case .loginFlow(.userCancelled) = error else {
+            let errorCoordinator = coordinatorBuilder.signInError(
+                navigationController: root,
+                completion: { [weak self] in
+                    self?.setOnboarding(false)
+                }
+            )
+            start(errorCoordinator)
+            return
+        }
     }
 
     private var shouldSkipOnboarding: Bool {

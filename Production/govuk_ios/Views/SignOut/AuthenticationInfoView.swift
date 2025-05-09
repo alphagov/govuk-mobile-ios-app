@@ -2,13 +2,11 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-import Factory
-
-struct SignedOutView: View {
+struct AuthenticationInfoView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    private var viewModel: SignedOutViewModel
+    private var viewModel: AuthenticationInfoViewModelInterface
 
-    init(viewModel: SignedOutViewModel) {
+    init(viewModel: AuthenticationInfoViewModelInterface) {
         self.viewModel = viewModel
     }
 
@@ -26,20 +24,24 @@ struct SignedOutView: View {
                 .ignoresSafeArea()
             SwiftUIButton(
                 .primary,
-                viewModel: viewModel.signedOutButtonViewModel
+                viewModel: viewModel.buttonViewModel
             )
             .frame(minHeight: 44, idealHeight: 44)
             .padding(16)
             .ignoresSafeArea()
         }
         .navigationBarHidden(true)
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
 
     private var infoView: some View {
         VStack {
-            if let image = viewModel.warningImage {
+            if let image = viewModel.image {
                 image
                     .font(Font.system(size: 107, weight: .light))
+                    .accessibilityHidden(true)
             }
             Text(viewModel.title)
                 .fontWeight(.bold)
@@ -54,5 +56,15 @@ struct SignedOutView: View {
                 .multilineTextAlignment(.center)
         }
         .padding(.horizontal, 16)
+    }
+}
+
+extension AuthenticationInfoView: TrackableScreen {
+    var trackingName: String {
+        viewModel.trackingName
+    }
+
+    var trackingTitle: String? {
+        viewModel.trackingTitle
     }
 }

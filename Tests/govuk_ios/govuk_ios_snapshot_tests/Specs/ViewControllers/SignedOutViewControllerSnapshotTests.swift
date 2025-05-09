@@ -13,7 +13,7 @@ class SignedOutViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = SignedOutViewModel(authenticationService: MockAuthenticationService(),
                                            analyticsService: MockAnalyticsService(),
                                            completion: { })
-        let signedOutView = SignedOutView(viewModel: viewModel)
+        let signedOutView = AuthenticationInfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signedOutView,
             statusBarStyle: .darkContent
@@ -29,7 +29,7 @@ class SignedOutViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = SignedOutViewModel(authenticationService: MockAuthenticationService(),
                                            analyticsService: MockAnalyticsService(),
                                            completion: { })
-        let signedOutView = SignedOutView(viewModel: viewModel)
+        let signedOutView = AuthenticationInfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signedOutView,
             statusBarStyle: .darkContent
@@ -47,7 +47,7 @@ class SignedOutViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = SignedOutViewModel(authenticationService: mockAuthenticationService,
                                            analyticsService: MockAnalyticsService(),
                                            completion: { })
-        let signedOutView = SignedOutView(viewModel: viewModel)
+        let signedOutView = AuthenticationInfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signedOutView,
             statusBarStyle: .darkContent
@@ -65,7 +65,7 @@ class SignedOutViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = SignedOutViewModel(authenticationService: mockAuthenticationService,
                                            analyticsService: MockAnalyticsService(),
                                            completion: { })
-        let signedOutView = SignedOutView(viewModel: viewModel)
+        let signedOutView = AuthenticationInfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signedOutView,
             statusBarStyle: .darkContent

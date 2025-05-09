@@ -67,6 +67,39 @@
         }
       }
     },
+    "signInErrorSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try to sign in again"
+          }
+        }
+      }
+    },
+    "signInErrorTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was a problem signing you in"
+          }
+        }
+      }
+    },
+    "signInRetryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go back and try again"
+          }
+        }
+      }
+    },
     "signOutBody" : {
       "extractionState" : "manual",
       "localizations" : {

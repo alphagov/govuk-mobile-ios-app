@@ -30,7 +30,7 @@ struct AppCoordinatorTests {
     @Test
     @MainActor
     func start_secondLaunch_startsTabCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockLaunchCoodinator = MockBaseCoordinator(
             navigationController: mockNavigationController
@@ -38,11 +38,11 @@ struct AppCoordinatorTests {
         let mockTabCoodinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoodinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoodinator
-        mockCoodinatorBuilder._stubbedTabCoordinator = mockTabCoodinator
+        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoodinator
+        mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoodinator
 
         let subject = AppCoordinator(
-            coordinatorBuilder: mockCoodinatorBuilder,
+            coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: mockNavigationController
         )
 
@@ -57,18 +57,18 @@ struct AppCoordinatorTests {
             topicResult: .success(TopicResponseItem.arrangeMultiple),
             appVersionProvider: MockAppVersionProvider()
         )
-        mockCoodinatorBuilder._receivedLaunchCompletion?(launchResult)
+        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
         // This is in order of launch
-        mockCoodinatorBuilder._receivedAppForcedUpdateDismissAction?()
-        mockCoodinatorBuilder._receivedAppUnavailableDismissAction?()
-        mockCoodinatorBuilder._receivedAppRecommendUpdateDismissAction?()
-        mockCoodinatorBuilder._receivedReauthenticationCompletion?()
-        mockCoodinatorBuilder._receivedAnalyticsConsentDismissAction?()
-        mockCoodinatorBuilder._receivedOnboardingDismissAction?()
-        mockCoodinatorBuilder._receivedAuthenticationOnboardingCompletion?()
-        mockCoodinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
-        mockCoodinatorBuilder._receivedTopicOnboardingDidDismissAction?()
-        mockCoodinatorBuilder._receivedNotificationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
+        mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
+        mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
+        mockCoordinatorBuilder._receivedReauthenticationCompletion?()
+        mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
+        mockCoordinatorBuilder._receivedOnboardingDismissAction?()
+        mockCoordinatorBuilder._receivedAuthenticationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
+        mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
 
         #expect(mockTabCoodinator._startCalled)
 
@@ -130,6 +130,7 @@ struct AppCoordinatorTests {
         mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
         mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
         mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
+        mockCoordinatorBuilder._receivedReauthenticationCompletion?()
         mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
         mockCoordinatorBuilder._receivedOnboardingDismissAction?()
         mockCoordinatorBuilder._receivedAuthenticationOnboardingCompletion?()

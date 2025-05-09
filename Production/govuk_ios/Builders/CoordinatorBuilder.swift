@@ -240,12 +240,15 @@ class CoordinatorBuilder {
     }
 
     func authentication(navigationController: UINavigationController,
-                        completionAction: @escaping () -> Void) -> BaseCoordinator {
+                        completionAction: @escaping () -> Void,
+                        handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         AuthenticationCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
-            completionAction: completionAction
+            coordinatorBuilder: self,
+            completionAction: completionAction,
+            handleError: handleError
         )
     }
 
@@ -286,6 +289,16 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             authenticationService: container.authenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
+            completion: completion
+        )
+    }
+
+    func signInError(navigationController: UINavigationController,
+                     completion: @escaping () -> Void) -> BaseCoordinator {
+        SignInErrorCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
             completion: completion
         )

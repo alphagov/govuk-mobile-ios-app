@@ -149,7 +149,7 @@
 		5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1872CBFC15000006723 /* AppEvent+Search.swift */; };
 		5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1952CBFF3D600006723 /* AppEvent+Topics.swift */; };
 		5D6B90132DCB75A700D36463 /* ReLaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B90122DCB75A700D36463 /* ReLaunchCoordinator.swift */; };
-		5D6B90152DCB7F0000D36463 /* ConsentAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B90142DCB7F0000D36463 /* ConsentAlertViewController.swift */; };
+		5D6B90152DCB7F0000D36463 /* NotificationConsentAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B90142DCB7F0000D36463 /* NotificationConsentAlertViewController.swift */; };
 		5D6E8F0D2D40F43600761AB6 /* NotificationExtensionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E8F0C2D40F43600761AB6 /* NotificationExtensionClient.swift */; };
 		5D742BD82C9978B800E7B87A /* Home.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D742BD72C9978B800E7B87A /* Home.xcstrings */; };
 		5D742BDA2C99791A00E7B87A /* Settings.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5D742BD92C99791A00E7B87A /* Settings.xcstrings */; };
@@ -469,7 +469,7 @@
 		5D66D1872CBFC15000006723 /* AppEvent+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Search.swift"; sourceTree = "<group>"; };
 		5D66D1952CBFF3D600006723 /* AppEvent+Topics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Topics.swift"; sourceTree = "<group>"; };
 		5D6B90122DCB75A700D36463 /* ReLaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLaunchCoordinator.swift; sourceTree = "<group>"; };
-		5D6B90142DCB7F0000D36463 /* ConsentAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentAlertViewController.swift; sourceTree = "<group>"; };
+		5D6B90142DCB7F0000D36463 /* NotificationConsentAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationConsentAlertViewController.swift; sourceTree = "<group>"; };
 		5D6E8F0C2D40F43600761AB6 /* NotificationExtensionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensionClient.swift; sourceTree = "<group>"; };
 		5D742BD72C9978B800E7B87A /* Home.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Home.xcstrings; sourceTree = "<group>"; };
 		5D742BD92C99791A00E7B87A /* Settings.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Settings.xcstrings; sourceTree = "<group>"; };
@@ -633,6 +633,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthenticationOnboardingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationSettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/RecentActivityListViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchHistoryViewControllerSnapshotTests.swift,
@@ -667,6 +668,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthenticationOnboardingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationSettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/RecentActivityListViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchHistoryViewControllerSnapshotTests.swift,
@@ -1265,7 +1267,7 @@
 			isa = PBXGroup;
 			children = (
 				1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */,
-				5D6B90142DCB7F0000D36463 /* ConsentAlertViewController.swift */,
+				5D6B90142DCB7F0000D36463 /* NotificationConsentAlertViewController.swift */,
 				168CB4372D77487B009BAA12 /* HomeContentViewController.swift */,
 				166BDDB52C330D1C00437AE0 /* HomeViewController.swift */,
 				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
@@ -2014,7 +2016,7 @@
 				D056CE762D3A848A005845E0 /* InformationView.swift in Sources */,
 				4E0043142D9BE25E00DDDA8A /* NotificationSettingsCoordinator.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
-				5D6B90152DCB7F0000D36463 /* ConsentAlertViewController.swift in Sources */,
+				5D6B90152DCB7F0000D36463 /* NotificationConsentAlertViewController.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
 				5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */,
 				D04191802CA595400034722A /* TopicResponseItem.swift in Sources */,

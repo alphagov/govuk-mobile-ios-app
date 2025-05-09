@@ -4,16 +4,19 @@ import GOVKit
 
 class NotificationConsentCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let consentResult: NotificationConsentResult
     private let urlOpener: URLOpener
     private let completion: () -> Void
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          consentResult: NotificationConsentResult,
          urlOpener: URLOpener,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
+        self.analyticsService = analyticsService
         self.consentResult = consentResult
         self.urlOpener = urlOpener
         self.completion = completion
@@ -38,7 +41,9 @@ class NotificationConsentCoordinator: BaseCoordinator {
     private func presentConsentViewController() {
         guard !isPresentingConsentAlert else { return }
         root.dismiss(animated: true)
-        let viewController = ConsentAlertViewController()
+        let viewController = NotificationConsentAlertViewController(
+            analyticsService: analyticsService
+        )
         viewController.grantConsentAction = { [weak self] in
             self?.notificationService.acceptConsent()
             self?.root.dismiss(
@@ -63,7 +68,7 @@ class NotificationConsentCoordinator: BaseCoordinator {
         let presentedNavigationController = root.presentedViewController as? UINavigationController
         let presentedViewController = presentedNavigationController?.topViewController ??
         root.presentedViewController
-        return presentedViewController is ConsentAlertViewController
+        return presentedViewController is NotificationConsentAlertViewController
     }
 
     private func openSettings() {

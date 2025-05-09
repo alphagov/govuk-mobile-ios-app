@@ -55,6 +55,7 @@ struct AppCoordinatorTests {
         let launchResult = AppLaunchResponse(
             configResult: .success(.arrange),
             topicResult: .success(TopicResponseItem.arrangeMultiple),
+            notificationConsentResult: .success(()),
             appVersionProvider: MockAppVersionProvider()
         )
         mockCoodinatorBuilder._receivedLaunchCompletion?(launchResult)

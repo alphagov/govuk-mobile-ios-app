@@ -17,6 +17,7 @@ struct LaunchCoordinatorTests {
         let expectedResponse = AppLaunchResponse(
             configResult: .success(.arrange),
             topicResult: .success(expectedTopics),
+            notificationConsentResult: .success(()),
             appVersionProvider: MockAppVersionProvider()
         )
         var sut: LaunchCoordinator?

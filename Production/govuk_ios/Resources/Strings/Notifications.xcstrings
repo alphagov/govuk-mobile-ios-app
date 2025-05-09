@@ -1,6 +1,61 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "consentAlertBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’ve turned on notifications for this app in your phone settings.\n\nBy allowing notifications from the app, you also agree to share statistics about how you use the app.\n\nYou can change your preferences at any time in your phone’s notifications settings."
+          }
+        }
+      }
+    },
+    "consentAlertButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more about this in the privacy notice"
+          }
+        }
+      }
+    },
+    "consentAlertPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow notifications"
+          }
+        }
+      }
+    },
+    "consentAlertSecondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn off notifications"
+          }
+        }
+      }
+    },
+    "consentAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow notifications?"
+          }
+        }
+      }
+    },
     "onboardingAcceptButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

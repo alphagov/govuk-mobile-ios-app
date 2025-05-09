@@ -26,6 +26,7 @@ enum UserDefaultsKeys: String {
     case topicsOnboardingSeen = "govuk_topics_onboarding_seen"
     case authenticationOnboardingFlowSeen = "govuk_authentication_onboarding_flow_seen"
     case skipLocalAuthentication = "govuk_skip_local_authentication"
+    case persistentUserIdentifer = "persistent_user_identifier"
 }
 
 protocol UserDefaultsInterface {

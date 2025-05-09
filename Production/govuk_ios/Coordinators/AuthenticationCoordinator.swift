@@ -36,8 +36,18 @@ class AuthenticationCoordinator: BaseCoordinator {
             DispatchQueue.main.async {
                 self.completionAction()
             }
+            if result.returningUser {
+                print("RETURNING USER")
+            } else {
+                print("NEW USER")
+            }
         case .failure(let error):
-            print("\(error)")
+            switch error {
+            case AuthenticationError.persistentUserIdentifierError:
+                print("USER IDENTIFIER ERROR")
+            default:
+                print("Other error")
+            }
         }
     }
 

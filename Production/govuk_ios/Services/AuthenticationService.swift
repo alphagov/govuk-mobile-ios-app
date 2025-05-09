@@ -12,15 +12,22 @@ protocol AuthenticationServiceInterface {
     var isSignedIn: Bool { get }
     var isLocalAuthenticationSkipped: Bool { get }
 
-    func authenticate(window: UIWindow) async -> AuthenticationResult
+    func authenticate(window: UIWindow) async -> AuthenticationServiceResult
     func signOut()
     func encryptRefreshToken()
     func tokenRefreshRequest() async -> TokenRefreshResult
 }
 
+struct AuthenticationServiceResponse {
+    let returningUser: Bool
+}
+
+typealias AuthenticationServiceResult = Result<AuthenticationServiceResponse, AuthenticationError>
+
 class AuthenticationService: AuthenticationServiceInterface {
     private let authenticationServiceClient: AuthenticationServiceClientInterface
-    private let secureStoreService: SecureStorable
+    private let authenticatedSecureStoreService: SecureStorable
+    private let persistentUserIdentifierManager: PersistentUserIdentifierManagerInterface
     private let userDefaults: UserDefaultsInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
@@ -50,14 +57,16 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
-         secureStoreService: SecureStorable,
+         authenticatedSecureStoreService: SecureStorable,
+         persistentUserIdentifierManager: PersistentUserIdentifierManagerInterface,
          userDefaults: UserDefaultsInterface) {
         self.userDefaults = userDefaults
-        self.secureStoreService = secureStoreService
+        self.authenticatedSecureStoreService = authenticatedSecureStoreService
+        self.persistentUserIdentifierManager = persistentUserIdentifierManager
         self.authenticationServiceClient = authenticationServiceClient
     }
 
-    func authenticate(window: UIWindow) async -> AuthenticationResult {
+    func authenticate(window: UIWindow) async -> AuthenticationServiceResult {
         let result = await authenticationServiceClient.performAuthenticationFlow(window: window)
         switch result {
         case .success(let tokenResponse):
@@ -66,22 +75,37 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
-            return AuthenticationResult.success(tokenResponse)
+            return await handleReturningUser()
         case .failure(let error):
-            return AuthenticationResult.failure(error)
+            return AuthenticationServiceResult.failure(error)
+        }
+    }
+
+    private func handleReturningUser() async -> AuthenticationServiceResult {
+        let result = await persistentUserIdentifierManager.process(
+            authenticationOnboardingFlowSeen: authenticationOnboardingFlowSeen,
+            idToken: idToken
+        )
+        switch result {
+        case ReturningUserResult.success(true):
+            return .success(.init(returningUser: true))
+        case ReturningUserResult.success(false):
+            return .success(.init(returningUser: false))
+        case ReturningUserResult.failure(let error):
+            return .failure(.persistentUserIdentifierError)
         }
     }
 
     func signOut() {
         do {
-            try secureStoreService.delete()
-            secureStoreService.deleteItem(itemName: "refreshToken")
+            try authenticatedSecureStoreService.delete()
+            authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
         } catch {
             #if targetEnvironment(simulator)
             // secure store deletion will always fail on simulator
             // as secure enclave unavailable.
-            secureStoreService.deleteItem(itemName: "refreshToken")
+            authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
             #endif
             return
@@ -92,7 +116,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         guard let refreshToken = refreshToken else {
             return
         }
-        try? secureStoreService.saveItem(item: refreshToken, itemName: "refreshToken")
+        try? authenticatedSecureStoreService.saveItem(item: refreshToken, itemName: "refreshToken")
     }
 
     func tokenRefreshRequest() async -> TokenRefreshResult {
@@ -120,7 +144,8 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     private func decryptRefreshToken() throws -> String {
-        let fetchedRefreshToken = try secureStoreService.readItem(itemName: "refreshToken")
+        let fetchedRefreshToken =
+        try authenticatedSecureStoreService.readItem(itemName: "refreshToken")
         return fetchedRefreshToken
     }
 

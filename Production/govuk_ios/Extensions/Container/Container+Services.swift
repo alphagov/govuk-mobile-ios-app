@@ -129,16 +129,33 @@ extension Container {
         Factory(self) {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
-                secureStoreService: self.secureStoreService.resolve(),
+                authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
+                persistentUserIdentifierManager: self.persistentUserIdentifierManager.resolve(),
                 userDefaults: UserDefaults.standard
             )
         }.scope(.singleton)
     }
 
-    var secureStoreService: Factory<SecureStorable> {
+    var authenticatedSecureStoreService: Factory<SecureStorable> {
         Factory(self) {
             SecureStoreService(
-                configuration: self.secureStoreConfiguration.resolve()
+                configuration: self.authenticatedSecureStoreConfiguration.resolve()
+            )
+        }
+    }
+
+    var persistentUserIdentifierManager: Factory<PersistentUserIdentifierManagerInterface> {
+        Factory(self) {
+            PersistentUserIdentifierManager(
+                openSecureStoreService: self.openSecureStoreService.resolve()
+            )
+        }
+    }
+
+    var openSecureStoreService: Factory<SecureStorable> {
+        Factory(self) {
+            SecureStoreService(
+                configuration: self.openSecureStoreConfiguration.resolve()
             )
         }
     }

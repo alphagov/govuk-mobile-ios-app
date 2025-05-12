@@ -47,20 +47,24 @@ class MockNotificationService: NotificationServiceInterface {
         _onClickAction = onClickAction
     }
 
+    var _receivedAcceptConsent: Bool = false
     func acceptConsent() {
-
+        _receivedAcceptConsent = true
     }
 
+    var _receivedRejectConsent: Bool = false
     func rejectConsent() {
-
+        _receivedRejectConsent = true
     }
 
+    var _receivedToggleHasGivenConsent: Bool = false
     func toggleHasGivenConsent() {
-
+        _receivedToggleHasGivenConsent = true
     }
 
+    var _stubbedhasGivenConsent: Bool = false
     var hasGivenConsent: Bool {
-        false
+        _stubbedhasGivenConsent
     }
 
     func fetchConsentAlignment() async -> NotificationConsentResult {

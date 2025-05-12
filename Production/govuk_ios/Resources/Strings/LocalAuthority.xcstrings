@@ -23,6 +23,17 @@
         }
       }
     },
+    "localAuthorityEditButtonAltText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit your local council"
+          }
+        }
+      }
+    },
     "localAuthorityEmptyTextField" : {
       "extractionState" : "manual",
       "localizations" : {

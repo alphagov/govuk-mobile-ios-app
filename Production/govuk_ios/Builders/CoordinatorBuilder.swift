@@ -3,6 +3,7 @@ import Foundation
 import Factory
 
 @MainActor
+// swiftlint:disable:next type_body_length
 class CoordinatorBuilder {
     private let container: Container
 
@@ -52,6 +53,7 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
             deviceInformationProvider: DeviceInformationProvider(),
+            authenticationService: container.authenticationService.resolve(),
             notificationService: container.notificationService.resolve()
         )
     }
@@ -190,6 +192,18 @@ class CoordinatorBuilder {
         )
     }
 
+    func editLocalAuthority(navigationController: UINavigationController,
+                            dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        EditLocalAuthorityCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            localAuthorityService: container.localAuthorityService.resolve(),
+            coordinatorBuilder: self,
+            dismissed: dismissAction
+        )
+    }
+
     func topicOnboarding(navigationController: UINavigationController,
                          didDismissAction: @escaping () -> Void) -> BaseCoordinator {
         TopicOnboardingCoordinator(
@@ -240,17 +254,32 @@ class CoordinatorBuilder {
                                   completionAction: @escaping () -> Void) -> BaseCoordinator {
         AuthenticationOnboardingCoordinator(
             navigationController: navigationController,
-            analyticsService: container.onboardingAnalyticsService.resolve(),
+            authenticationService: container.authenticationService.resolve(),
             authenticationOnboardingService: container.authenticationOnboardingService.resolve(),
+            analyticsService: container.onboardingAnalyticsService.resolve(),
             coordinatorBuilder: self,
             completionAction: completionAction
         )
     }
 
     func authentication(navigationController: UINavigationController,
-                        completionAction: @escaping () -> Void) -> BaseCoordinator {
+                        completionAction: @escaping () -> Void,
+                        handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         AuthenticationCoordinator(
             navigationController: navigationController,
+            authenticationService: container.authenticationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
+            coordinatorBuilder: self,
+            completionAction: completionAction,
+            handleError: handleError
+        )
+    }
+
+    func reauthentication(navigationController: UINavigationController,
+                          completionAction: @escaping () -> Void) -> BaseCoordinator {
+        ReauthenticationCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction
         )
@@ -260,10 +289,41 @@ class CoordinatorBuilder {
                                        completionAction: @escaping () -> Void) -> BaseCoordinator {
         LocalAuthenticationOnboardingCoordinator(
             navigationController: navigationController,
+            userDefaults: UserDefaults.standard,
             analyticsService: container.analyticsService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction
+        )
+    }
+
+    func signOutConfirmation() -> BaseCoordinator {
+        SignOutConfirmationCoordinator(
+            navigationController: UINavigationController(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            authenticationService: container.authenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve()
+        )
+    }
+
+    func signedOut(navigationController: UINavigationController,
+                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
+        SignedOutCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            authenticationService: container.authenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
+            completion: completion
+        )
+    }
+
+    func signInError(navigationController: UINavigationController,
+                     completion: @escaping () -> Void) -> BaseCoordinator {
+        SignInErrorCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            completion: completion
         )
     }
 

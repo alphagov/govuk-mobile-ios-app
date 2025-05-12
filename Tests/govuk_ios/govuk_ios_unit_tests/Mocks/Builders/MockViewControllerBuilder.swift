@@ -21,9 +21,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedHomeViewController: UIViewController?
     var _receivedHomeSearchAction: (() -> Void)?
+    var _receivedEditLocalAuthorityAction: (() -> Void)?
     var _receivedHomeRecentActivityAction: (() -> Void)?
     var _receivedTopicWidgetViewModel: TopicsWidgetViewModel?
     override func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
+        _receivedEditLocalAuthorityAction = actions.editLocalAuthorityAction
         _receivedHomeRecentActivityAction = actions.recentActivityAction
         _receivedTopicWidgetViewModel = dependencies.topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
@@ -60,7 +62,6 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedDismissAction = dismissAction
         return _stubbedEditTopicsViewController ?? UIViewController()
     }
-
     var _stubbedLocalAuthortiyPostcodeEntryViewController: UIViewController?
     var _receivedLocalAuthorityDismissAction: (() -> Void)?
     override func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
@@ -107,5 +108,32 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                                        notificationService: any NotificationServiceInterface,
                                        completeAction: @escaping () -> Void) -> UIViewController {
         _stubbedNotificationSettingsViewController ?? UIViewController()
+    }
+
+    var _stubbedSignOutConfirmationViewController: UIViewController?
+    var _receivedSignOutConfirmationCompletion: ((Bool) -> Void)?
+    override func signOutConfirmation(authenticationService: any AuthenticationServiceInterface,
+                                      analyticsService: any AnalyticsServiceInterface,
+                                      completion: @escaping (Bool) -> Void) -> UIViewController {
+        _receivedSignOutConfirmationCompletion = completion
+        return _stubbedSignOutConfirmationViewController ?? UIViewController()
+    }
+
+    var _receivedSignedOutCompletion: (() -> Void)?
+    var _stubbedSignedOutViewController: UIViewController?
+    override func signedOut(authenticationService: AuthenticationServiceInterface,
+                            analyticsService: AnalyticsServiceInterface,
+                            completion: @escaping () -> Void) -> UIViewController {
+        _receivedSignedOutCompletion = completion
+        return _stubbedSignedOutViewController ?? UIViewController()
+    }
+
+    var _receivedSignInErrorCompletion: (() -> Void)?
+    var _stubbedSignInErrorViewController: UIViewController?
+    override func signInError(analyticsService: any AnalyticsServiceInterface,
+                              completion: @escaping () -> Void) -> UIViewController {
+        _receivedSignInErrorCompletion = completion
+        return _stubbedSignInErrorViewController ?? UIViewController()
+
     }
 }

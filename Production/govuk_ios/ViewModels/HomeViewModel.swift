@@ -9,6 +9,7 @@ struct HomeViewModel {
     let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
     let localAuthorityAction: () -> Void
+    let editLocalAuthorityAction: () -> Void
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
@@ -32,7 +33,8 @@ struct HomeViewModel {
                 notificationsWidget,
                 //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
-                topicsWidget
+                topicsWidget,
+                storedLocalAuthorityWidget
             ].compactMap { $0 }
         }
     }
@@ -92,7 +94,8 @@ struct HomeViewModel {
 
     @MainActor
     private var localAuthorityWidget: WidgetView? {
-        guard featureEnabled(.localServices)
+        guard featureEnabled(.localServices),
+              localAuthorityService.fetchSavedLocalAuthority().first == nil
         else { return nil }
         let viewModel = LocalAuthorityWidgetViewModel(
             tapAction: localAuthorityAction
@@ -104,9 +107,35 @@ struct HomeViewModel {
             rootView: content
         )
         let widget = WidgetView(
-            useContentAccessibilityInfo: true,
+            useContentAccessibilityInfo: false,
             backgroundColor: UIColor.govUK.fills.surfaceCardSelected,
             borderColor: UIColor.govUK.strokes.cardGreen.cgColor
+        )
+        widget.addContent(hostingViewController.view)
+        return widget
+    }
+
+    @MainActor
+    private var storedLocalAuthorityWidget: WidgetView? {
+        guard featureEnabled(.localServices) else { return nil }
+        let localAuthorities = localAuthorityService.fetchSavedLocalAuthority()
+        guard localAuthorities.count > 0 else { return nil }
+
+        let viewModel = StoredLocalAuthorityWidgetViewModel(
+            analyticsService: analyticsService,
+            localAuthorities: localAuthorities,
+            urlOpener: urlOpener,
+            openEditViewAction: editLocalAuthorityAction
+        )
+        let content = StoredLocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        let widget = WidgetView(
+            decorateView: false,
+            useContentAccessibilityInfo: false
         )
         widget.addContent(hostingViewController.view)
         return widget

@@ -48,10 +48,6 @@ public struct Constants {
 
         public static var defaultSearchPath: String = "/v0_1/search.json"
 
-        public static var authenticationIssuerBaseUrl: URL = URL(
-            string: "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_fIJ6F25Zh"
-        )!
-
         public static let authenticationCallbackUri: String = "govuk://govuk/login-auth-callback"
 
         public static var defaultLocalAuthorityURL: URL = URL(
@@ -59,6 +55,10 @@ public struct Constants {
         )!
 
         public static var localAuthorityPath: String = "/find-local-council/query.json"
+
+        public static var manageAccountURL: URL = URL(
+            string: "https://home.account.gov.uk/"
+        )!
     }
 
     public struct SigningKey {

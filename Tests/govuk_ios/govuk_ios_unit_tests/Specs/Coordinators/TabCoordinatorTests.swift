@@ -238,4 +238,39 @@ struct TabCoordinatorTests {
 
         #expect(mockHomeCoordinator._didReselectTab == didReselectTab)
     }
+
+    @Test
+    func finishingSettingsTab_finishesTabCoordinator() throws {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+
+        let mockHomeCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
+        let mockAuthenticationService = MockAuthenticationService()
+        mockAuthenticationService._stubbedIsSignedIn = false
+
+        let settingsCoordinator = SettingsCoordinator(
+            navigationController: MockNavigationController(),
+            viewControllerBuilder: MockViewControllerBuilder(),
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: mockAuthenticationService,
+            notificationService: MockNotificationService()
+        )
+        mockCoordinatorBuilder._stubbedSettingsCoordinator = settingsCoordinator
+
+        let navigationController = UINavigationController()
+        let subject = TabCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: navigationController,
+            analyticsService: mockAnalyticsService
+        )
+
+        subject.start(url: nil)
+        #expect(subject.childCoordinators.count == 2)
+        settingsCoordinator.finish()
+        #expect(subject.childCoordinators.count == 1)
+    }
 }

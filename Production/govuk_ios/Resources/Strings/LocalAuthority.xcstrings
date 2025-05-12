@@ -12,6 +12,28 @@
         }
       }
     },
+    "localAuthorityCardWebsiteConstant" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "website"
+          }
+        }
+      }
+    },
+    "localAuthorityEmptyTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your postcode"
+          }
+        }
+      }
+    },
     "localAuthorityExplainerViewDesciption" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -34,13 +56,13 @@
         }
       }
     },
-    "localAuthorityExplainerViewTitle" : {
+    "localAuthorityInvalidPostcode" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your local services"
+            "value" : "Enter a postcode in the correct format"
           }
         }
       }
@@ -89,6 +111,50 @@
         }
       }
     },
+    "localAuthorityPostcodeNotFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We could not find a council for this postcode. Check the postcode and try again."
+          }
+        }
+      }
+    },
+    "localAuthorityTwoTierChildDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services like rubbish and recycling collection, council tax and housing on the "
+          }
+        }
+      }
+    },
+    "localAuthorityTwoTierParentDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services like education, social care and transport on the "
+          }
+        }
+      }
+    },
+    "localAuthorityUnitaryCard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services for your area on the"
+          }
+        }
+      }
+    },
     "localAuthorityWidgetViewDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -111,13 +177,24 @@
         }
       }
     },
-    "localAuthorityWidgetViewTitleTwo" : {
+    "localServicesTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your local services"
+          }
+        }
+      }
+    },
+    "storedLocalAuthorityWidgetTwoTierDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services in your area are provided by 2 local councils"
           }
         }
       }

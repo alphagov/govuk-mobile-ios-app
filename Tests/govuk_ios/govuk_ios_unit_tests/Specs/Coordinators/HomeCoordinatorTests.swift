@@ -73,6 +73,39 @@ struct HomeCoordinatorTests {
 
     @Test
     @MainActor
+    func startEditLocalAuthority_startsCoordinatorAndTrackEvent() {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
+        let mockAnalyticsService = MockAnalyticsService()
+        let navigationController = UINavigationController()
+        let subject = HomeCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoodinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: mockAnalyticsService,
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
+            notificationService: MockNotificationService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService()
+        )
+        subject.start()
+
+        mockViewControllerBuilder._receivedEditLocalAuthorityAction?()
+
+        let navigationEvent = mockAnalyticsService._trackedEvents.first
+
+        #expect(navigationEvent?.params?["text"] as? String == "Edit your local services")
+        #expect(navigationEvent?.params?["type"] as? String == "Widget")
+        #expect(navigationEvent?.name == "Navigation")
+    }
+
+    @Test
+    @MainActor
     func topicAction_startsCoordinatorAndTracksEvent() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()

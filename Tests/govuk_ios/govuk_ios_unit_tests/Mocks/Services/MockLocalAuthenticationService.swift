@@ -9,9 +9,17 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
         _stubbedSkipOnboarding
     }
 
-    var _stubbedCanEvaluatePolicy: Bool = true
+    var _stubbedCanEvaluateBiometricsPolicy: Bool = false
+    var _stubbedCanEvaluatePasscodePolicy: Bool = false
     func canEvaluatePolicy(_ policy: LAPolicy) -> Bool {
-        return _stubbedCanEvaluatePolicy
+        switch policy {
+        case .deviceOwnerAuthenticationWithBiometrics:
+            _stubbedCanEvaluateBiometricsPolicy
+        case .deviceOwnerAuthentication:
+            _stubbedCanEvaluatePasscodePolicy
+        default:
+            false
+        }
     }
 
     var _stubbedEvaluatePolicyResult: (Bool, Error?) = (true, nil)

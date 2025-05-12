@@ -2,17 +2,11 @@ import Foundation
 import AppAuth
 
 protocol OIDAuthorizationServiceWrapperInterface {
-    func discoverConfiguration(
-        forIssuer issuer: URL,
-        completion: @escaping (OIDServiceConfiguration?, Error?) -> Void
-    )
+    func perform(_ request: OIDTokenRequest, completion: @escaping OIDTokenCallback)
 }
 
 class OIDAuthorizationServiceWrapper: OIDAuthorizationServiceWrapperInterface {
-    func discoverConfiguration(
-        forIssuer issuer: URL,
-        completion: @escaping (OIDServiceConfiguration?, Error?) -> Void
-    ) {
-        OIDAuthorizationService.discoverConfiguration(forIssuer: issuer, completion: completion)
+    func perform(_ request: OIDTokenRequest, completion: @escaping OIDTokenCallback) {
+        OIDAuthorizationService.perform(request, callback: completion)
     }
 }

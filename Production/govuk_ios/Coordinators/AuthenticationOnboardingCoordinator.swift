@@ -4,17 +4,20 @@ import Onboarding
 
 class AuthenticationOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
-    private let analyticsService: OnboardingAnalyticsService
+    private let authenticationService: AuthenticationServiceInterface
     private let authenticationOnboardingService: AuthenticationOnboardingServiceInterface
+    private let analyticsService: OnboardingAnalyticsService
     private let coordinatorBuilder: CoordinatorBuilder
     private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
-         analyticsService: OnboardingAnalyticsService,
+         authenticationService: AuthenticationServiceInterface,
          authenticationOnboardingService: AuthenticationOnboardingServiceInterface,
+         analyticsService: OnboardingAnalyticsService,
          coordinatorBuilder: CoordinatorBuilder,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
+        self.authenticationService = authenticationService
         self.authenticationOnboardingService = authenticationOnboardingService
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
@@ -23,7 +26,7 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard !authenticationOnboardingService.shouldSkipOnboarding else {
+        guard !shouldSkipOnboarding else {
             finishCoordination()
             return
         }
@@ -31,22 +34,23 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
         setOnboarding()
     }
 
-    private func setOnboarding() {
+    private func setOnboarding(_ animated: Bool = true) {
         let onboardingModule = Onboarding(
             slideProvider: authenticationOnboardingService,
             analyticsService: analyticsService,
             completeAction: { [weak self] in
-                self?.authenticationOnboardingService.setHasSeenOnboarding()
                 Task {
                     await self?.authenticateAction()
                 }
             },
             dismissAction: { [weak self] in
-                self?.authenticationOnboardingService.setHasSeenOnboarding()
                 self?.finishCoordination()
             }
         )
-        set(onboardingModule.viewController)
+        set(
+            onboardingModule.viewController,
+            animated: animated
+        )
     }
 
     private func finishCoordination() {
@@ -58,8 +62,27 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
     private func authenticateAction() async {
         let authenticationCoordinator = coordinatorBuilder.authentication(
             navigationController: navigationController,
-            completionAction: completionAction
+            completionAction: completionAction,
+            handleError: showError
         )
-        authenticationCoordinator.start()
+        start(authenticationCoordinator)
+    }
+
+    func showError(_ error: AuthenticationError) {
+        guard case .loginFlow(.userCancelled) = error else {
+            let errorCoordinator = coordinatorBuilder.signInError(
+                navigationController: root,
+                completion: { [weak self] in
+                    self?.setOnboarding(false)
+                }
+            )
+            start(errorCoordinator)
+            return
+        }
+    }
+
+    private var shouldSkipOnboarding: Bool {
+        !authenticationOnboardingService.isFeatureEnabled ||
+        authenticationService.isSignedIn
     }
 }

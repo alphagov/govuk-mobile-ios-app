@@ -28,12 +28,15 @@ struct LocalAuthenticationOnboardingView: View {
                     .padding(.bottom, 16)
                     .accessibilityAddTraits(.isHeader)
                     .accessibilitySortPriority(1)
-                Text(viewModel.message)
-                    .font(Font.govUK.body)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 16)
-                    .accessibilitySortPriority(0)
-                Spacer()
+                VStack(alignment: .center, spacing: 24) {
+                    ForEach(viewModel.message.split(separator: "\n\n"), id: \.self) { paragraph in
+                        Text(paragraph)
+                            .font(Font.govUK.body)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 16)
+                    }
+                    Spacer()
+                }
             }
             .accessibilityElement(children: .contain)
             let buttonLayout = verticalSizeClass == .compact ?

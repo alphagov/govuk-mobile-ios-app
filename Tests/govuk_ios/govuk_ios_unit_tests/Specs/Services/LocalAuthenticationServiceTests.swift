@@ -85,14 +85,14 @@ struct LocalAuthenticationServiceTests {
             context: mockLAContext
         )
         sut.setHasSeenOnboarding()
-        #expect(mockUserDefaults.value(forKey: .localAuthenticationOnboardingSeen) != nil)
+        #expect(mockUserDefaults.value(forKey: .authenticationOnboardingFlowSeen) != nil)
     }
 
     @Test
     func shouldSkipOnboarding_featureDisabledHasntSeenOnboarding_returnsTrue() {
         let mockLAContext = MockLAContext()
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.set(bool: false, forKey: .localAuthenticationOnboardingSeen)
+        mockUserDefaults.set(bool: false, forKey: .authenticationOnboardingFlowSeen)
         let sut = LocalAuthenticationService(
             userDefaults: mockUserDefaults,
             context: mockLAContext
@@ -105,7 +105,7 @@ struct LocalAuthenticationServiceTests {
     func shouldSkipOnboarding_featureDisabledHasSeenOnboarding_returnsTrue() {
         let mockLAContext = MockLAContext()
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
+        mockUserDefaults.set(bool: true, forKey: .authenticationOnboardingFlowSeen)
         let sut = LocalAuthenticationService(
             userDefaults: mockUserDefaults,
             context: mockLAContext

@@ -15,7 +15,7 @@ public struct GroupedList: View {
             ZStack {
                 Color(backgroundColor ?? .clear)
                 VStack {
-                    ForEach(content, id: \.heading?.title) { section in
+                    ForEach(content, id: \.rows.first?.id) { section in
                         if section.heading?.icon != nil {
                             GroupedListSectionIconView(
                                 section: section

@@ -1,14 +1,14 @@
 import Foundation
 import UIComponents
 import GOVKit
+import SwiftUI
 
 class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
-    @Published var localAuthority: LocalAuthority?
     @Published var localAuthorityAddressList: LocalAuthoritiesList?
-    @Published var localAuthorityErrorMessage: LocalErrorMessage?
     @Published var postCode: String = ""
-    @Published var shouldShowErrorMessage: Bool = false
+    @Published var error: PostcodeError?
+    @Published var textFieldColour: UIColor = UIColor.govUK.strokes.listDivider
     private let analyticsService: AnalyticsServiceInterface
     let dismissAction: () -> Void
     let cancelButtonTitle: String = String.common.localized(
@@ -41,6 +41,18 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         self.dismissAction = dismissAction
     }
 
+    enum PostcodeError: String {
+        case postCodeNotFound = "localAuthorityPostcodeNotFound"
+        case textFieldEmpty = "localAuthorityEmptyTextField"
+        case invalidPostcode = "localAuthorityInvalidPostcode"
+
+        var errorMessage: String {
+            String.localAuthority.localized(
+                rawValue
+            )
+        }
+    }
+
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }
@@ -58,33 +70,60 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
             localisedTitle: postcodeEntryViewPrimaryButtonTitle,
             action: { [weak self] in
                 guard let self = self else { return }
-                let postcode = self.postCode
+                if postCode.isEmpty {
+                    self.error = .textFieldEmpty
+                    self.setErrorTextFieldColour()
+                    return
+                }
+                let sanitisedPostcode = self.preprocessTextInput(
+                    postcode: postCode
+                )
                 let buttonTitle = self.postcodeEntryViewPrimaryButtonTitle
                 self.trackNavigationEvent(buttonTitle)
-                self.fetchLocalAuthority(postCode: postcode)
-                dismissAction()
+                self.fetchLocalAuthority(postCode: sanitisedPostcode)
             }
         )
     }
-    // print statements have been left in for post amigos purposes
+
+    private func preprocessTextInput(postcode: String) -> String {
+        let upperCasedText = postcode.uppercased()
+        let textWithoutUnderScores = upperCasedText.replacingOccurrences(
+            of: "_",
+            with: ""
+        )
+        let removedWhiteSpace = textWithoutUnderScores.filter {!$0.isWhitespace}
+        return removedWhiteSpace
+    }
+
+    private func setErrorTextFieldColour() {
+        textFieldColour = UIColor.govUK.strokes.error
+    }
+
     func fetchLocalAuthority(postCode: String) {
         service.fetchLocalAuthority(postcode: postCode) { [weak self] results
             in
             switch results {
-            case .success(let response as LocalAuthority):
-                self?.localAuthority = response
-                print(response.localAuthority.name)
+            case .success(_ as LocalAuthority):
+                self?.dismissAction()
             case .success(let response as LocalAuthoritiesList):
                 self?.localAuthorityAddressList = response
-                print(response.addresses)
             case .success(let response as LocalErrorMessage):
-                self?.localAuthorityErrorMessage = response
-                print(response.message)
-            case .failure(let error):
-                self?.shouldShowErrorMessage.toggle()
+                self?.populateErrorMessage(error: response)
             default:
                 break
             }
         }
+    }
+
+    private func populateErrorMessage(error: LocalErrorMessage) {
+        switch error.message {
+        case "Invalid postcode":
+            self.error  = .invalidPostcode
+        case "Postcode not found":
+            self.error = .postCodeNotFound
+        default:
+            break
+        }
+        setErrorTextFieldColour()
     }
 }

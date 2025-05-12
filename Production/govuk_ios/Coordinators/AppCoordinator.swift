@@ -99,10 +99,20 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             launchResponse: launchResponse,
             dismissAction: { [weak self] in
-                self?.startAnalyticsConsent(url: url)
+                self?.startReauthentication(url: url)
             }
         )
         start(coordinator)
+    }
+
+    private func startReauthentication(url: URL?) {
+        let coordinator = coordinatorBuilder.reauthentication(
+            navigationController: root,
+            completionAction: { [weak self] in
+                self?.startAnalyticsConsent(url: url)
+            }
+        )
+        start(coordinator, url: url)
     }
 
     private func startAnalyticsConsent(url: URL?) {
@@ -165,7 +175,30 @@ class AppCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
+    private func startSignedOutCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.signedOut(
+            navigationController: root,
+            completion: { [weak self] signedIn in
+                if signedIn {
+                    self?.startTabs(
+                        url: URL(string: "govuk://settings/settings")
+                    )
+                } else {
+                    self?.startAuthenticationOnboardingCoordinator(url: nil)
+                }
+            }
+        )
+        start(coordinator, url: url)
+    }
+
     private func startTabs(url: URL?) {
         start(tabCooordinator, url: url)
+    }
+
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        if child is TabCoordinator {
+            startSignedOutCoordinator(url: nil)
+        }
     }
 }

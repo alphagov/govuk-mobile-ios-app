@@ -100,6 +100,7 @@ class NotificationConsentAlertViewController: BaseViewController {
     }
 
     private func configureUI() {
+        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
         view.addSubview(titleLabel)
         view.addSubview(bodyLabel)
         privacyStackView.addArrangedSubview(privacyButton)

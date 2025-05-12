@@ -15,7 +15,6 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     var shouldRequestPermission: Bool { get async }
     var permissionState: NotificationPermissionState { get async }
     var isFeatureEnabled: Bool { get }
-    var hasGivenConsent: Bool { get }
     func fetchConsentAlignment() async -> NotificationConsentResult
 }
 
@@ -70,7 +69,7 @@ class NotificationService: NSObject,
         false
     }
 
-    var hasGivenConsent: Bool {
+    private var hasGivenConsent: Bool {
         UserDefaults.standard.bool(forKey: "OneSignalConsentGiven")
     }
 

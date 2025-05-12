@@ -67,7 +67,7 @@ class NotificationService: NSObject,
     }
 
     var isFeatureEnabled: Bool {
-        true
+        false
     }
 
     var hasGivenConsent: Bool {

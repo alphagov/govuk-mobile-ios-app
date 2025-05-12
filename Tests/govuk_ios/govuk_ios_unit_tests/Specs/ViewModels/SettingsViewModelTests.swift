@@ -268,7 +268,7 @@ class SettingsViewModelTests {
                     continuation.resume(returning: urlString)
                 }.store(in: &cancellables)
         }
-        #expect(urlString == UIApplication.openSettingsURLString)
+        #expect(urlString == UIApplication.openNotificationSettingsURLString)
     }
 
     @Test(arguments:

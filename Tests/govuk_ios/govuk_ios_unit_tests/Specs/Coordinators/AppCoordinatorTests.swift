@@ -60,6 +60,7 @@ struct AppCoordinatorTests {
         )
         mockCoodinatorBuilder._receivedLaunchCompletion?(launchResult)
         // This is in order of launch
+        mockCoodinatorBuilder._receivedNotificationConsentCompletion?()
         mockCoodinatorBuilder._receivedAppForcedUpdateDismissAction?()
         mockCoodinatorBuilder._receivedAppUnavailableDismissAction?()
         mockCoodinatorBuilder._receivedAppRecommendUpdateDismissAction?()
@@ -78,6 +79,8 @@ struct AppCoordinatorTests {
 
         //Second launch
         subject.start()
+
+        mockCoodinatorBuilder._receivedRelaunchCompletion?()
 
         #expect(!mockLaunchCoodinator._startCalled)
         #expect(mockTabCoodinator._startCalled)

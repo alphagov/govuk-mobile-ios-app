@@ -23,6 +23,7 @@ struct StoredLocalAuthorityWidgetView: View {
                             .font(.govUK.body)
                             .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
                     }
+                    .accessibilityLabel(viewModel.editButtonAltText)
                 }
                 if viewModel.localAuthorities.count == 2 {
                     HStack {

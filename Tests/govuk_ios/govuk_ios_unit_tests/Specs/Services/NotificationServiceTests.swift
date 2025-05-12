@@ -264,4 +264,50 @@ class NotificationServiceTests {
 
         #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
     }
+
+    @Test
+    func rejectConsent_whenNotAccepted_rejectsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        sut.rejectConsent()
+
+        #expect(!mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func rejectConsent_whenRejected_remainsRejected() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
+
+        sut.rejectConsent()
+
+        #expect(!mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func rejectConsent_whenAccepted_rejectsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
+
+        sut.rejectConsent()
+
+        #expect(!mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
 }

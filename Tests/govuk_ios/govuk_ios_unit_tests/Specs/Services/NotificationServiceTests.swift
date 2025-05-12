@@ -11,7 +11,8 @@ class NotificationServiceTests {
     func fetchSlides_returnsExpectedSlides() async throws {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
         let result = await withCheckedContinuation { continuation in
             sut.fetchSlides(
@@ -24,29 +25,30 @@ class NotificationServiceTests {
         #expect(slides.count == 1)
     }
 
-//    @Test
-//    func shouldRequestPermissions_statusNotDetermined_returnsTrue() async {
-//        let mockUserNotificationCenter = MockUserNotificationCenter()
-//        mockUserNotificationCenter._stubbedAuthorizationStatus = .notDetermined
-//        let sut = NotificationService(
-//            environmentService: MockAppEnvironmentService(),
-//            notificationCenter: mockUserNotificationCenter
-//        )
-//        #expect(await sut.shouldRequestPermission)
-//    }
+    //    @Test
+    //    func shouldRequestPermissions_statusNotDetermined_returnsTrue() async {
+    //        let mockUserNotificationCenter = MockUserNotificationCenter()
+    //        mockUserNotificationCenter._stubbedAuthorizationStatus = .notDetermined
+    //        let sut = NotificationService(
+    //            environmentService: MockAppEnvironmentService(),
+    //            notificationCenter: mockUserNotificationCenter
+    //        )
+    //        #expect(await sut.shouldRequestPermission)
+    //    }
 
     @Test(arguments: [
         UNAuthorizationStatus.authorized,
-//        UNAuthorizationStatus.denied,
-//        UNAuthorizationStatus.provisional,
-//        UNAuthorizationStatus.ephemeral
+        //        UNAuthorizationStatus.denied,
+        //        UNAuthorizationStatus.provisional,
+        //        UNAuthorizationStatus.ephemeral
     ])
     func shouldRequestPermissions_statusDetermined_returnsFalse(status: UNAuthorizationStatus) async {
         let mockUserNotificationCenter = MockUserNotificationCenter()
         mockUserNotificationCenter._stubbedAuthorizationStatus = status
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: mockUserNotificationCenter
+            notificationCenter: mockUserNotificationCenter,
+            userDefaults: MockUserDefaults()
         )
         #expect(await !sut.shouldRequestPermission)
     }
@@ -55,7 +57,8 @@ class NotificationServiceTests {
     func isFeatureEnabled_returnsExpectedValue() async throws {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
         #expect(!sut.isFeatureEnabled)
     }
@@ -68,7 +71,8 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .authorized)
     }
@@ -80,7 +84,8 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .denied)
     }
@@ -92,7 +97,8 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -104,7 +110,8 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -116,7 +123,8 @@ class NotificationServiceTests {
 
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -125,7 +133,8 @@ class NotificationServiceTests {
     func addClickListener_assignsOnClick() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
         let onClickAction: ((URL) -> Void)? = { _ in }
         sut.addClickListener(
@@ -138,7 +147,8 @@ class NotificationServiceTests {
     func handleAdditionalData_whenAdditionalDataIsNil_doesNotCallOnClickAction() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
 
         var didOnClickAction = false
@@ -156,7 +166,8 @@ class NotificationServiceTests {
     func handleAdditionalData_whenAdditionalDataIsEmpty_doesNotCallOnClickAction() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
 
         var didOnClickAction = false
@@ -174,7 +185,8 @@ class NotificationServiceTests {
     func handleAdditionalData_whenAdditionalDataDeeplinkCannotBeParsedToAUrl_doesNotCallOnClickAction() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
 
         var didOnClickAction = false
@@ -192,7 +204,8 @@ class NotificationServiceTests {
     func handleAdditionalData_whenAdditionalDataIsValid_onClickActionHasTheCorrectUrl() {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
-            notificationCenter: MockUserNotificationCenter()
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: MockUserDefaults()
         )
 
         var result: URL?
@@ -204,5 +217,51 @@ class NotificationServiceTests {
         sut.handleAdditionalData(additionalData)
 
         #expect(result?.absoluteString == "scheme://host")
+    }
+
+    @Test
+    func acceptConsent_whenNotAccepted_acceptsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        sut.acceptConsent()
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func acceptConsent_whenRejected_acceptsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
+
+        sut.acceptConsent()
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func acceptConsent_whenAccepted_remainsAccepted() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
+
+        sut.acceptConsent()
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
     }
 }

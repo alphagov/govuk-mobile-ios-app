@@ -23,12 +23,15 @@ class NotificationService: NSObject,
                            OSNotificationClickListener {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
+    private let userDefaults: UserDefaultsInterface
     var onClickAction: ((URL) -> Void)?
 
     init(environmentService: AppEnvironmentServiceInterface,
-         notificationCenter: UserNotificationCenterInterface) {
+         notificationCenter: UserNotificationCenterInterface,
+         userDefaults: UserDefaultsInterface) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
+        self.userDefaults = userDefaults
     }
 
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -70,7 +73,7 @@ class NotificationService: NSObject,
     }
 
     private var hasGivenConsent: Bool {
-        UserDefaults.standard.bool(forKey: "OneSignalConsentGiven")
+        userDefaults.bool(forKey: .notificationsConsentGranted)
     }
 
     func acceptConsent() {
@@ -88,9 +91,8 @@ class NotificationService: NSObject,
     }
 
     private func updateConsent(given: Bool) {
-        UserDefaults.standard.set(given, forKey: "OneSignalConsentGiven")
+        userDefaults.set(bool: given, forKey: .notificationsConsentGranted)
         OneSignal.setConsentGiven(given)
-        UserDefaults.standard.synchronize()
     }
 
     func requestPermissions(completion: (() -> Void)?) {

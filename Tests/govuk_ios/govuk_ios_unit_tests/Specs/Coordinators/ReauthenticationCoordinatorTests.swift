@@ -11,6 +11,7 @@ class ReauthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let tokenRefreshResponse = TokenRefreshResponse(
             accessToken: "access_token",
             idToken: "id_token"
@@ -54,6 +55,33 @@ class ReauthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { },
                 newUserAction: { }
+            )
+            sut.start(url: nil)
+        }
+
+        #expect(authenticationOnboardingStartCalled)
+    }
+
+    @Test @MainActor
+    func start_biometricsChanged_startsAuthenticationLogin() async {
+        let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockLocalAuthenticationService._stubbedBiometricsHaveChanged = true
+        mockCoordinatorBuilder._stubbedAuthenticationOnboardingCoordinator =
+        mockAuthenticationOnboardingCoordinator
+        mockAuthenticationService._stubbedTokenRefreshRequest = .failure(.genericError)
+        // Need too add continuation as starting coordinator is called after #expect
+        let authenticationOnboardingStartCalled = await withCheckedContinuation { continuation in
+            mockAuthenticationOnboardingCoordinator._startCalledContinuation = continuation
+            let sut = ReauthenticationCoordinator(
+                navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
+                authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                completionAction: { }
             )
             sut.start(url: nil)
         }

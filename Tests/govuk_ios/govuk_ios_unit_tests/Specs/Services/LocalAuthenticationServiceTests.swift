@@ -175,4 +175,41 @@ struct LocalAuthenticationServiceTests {
         mockLAContext._stubbedAuthenticationEvaluatePolicyResult = false
         #expect(sut.authType == .none)
     }
+
+    @Test
+    func biometricsHaveChanged_noExistingState_returnsFalse() {
+        let mockLAContext = MockLAContext()
+        let mockUserDefaults = MockUserDefaults()
+        let sut = LocalAuthenticationService(
+            userDefaults: mockUserDefaults,
+            context: mockLAContext
+        )
+        #expect(!sut.biometricsHaveChanged)
+    }
+
+    @Test
+    func biometricsHaveChanged_changesState_returnsTrue() {
+        let mockLAContext = MockLAContext()
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults.set("oldState".data(using: .utf8), forKey: .biometricsPolicyState)
+        mockLAContext._stubbedEvaluatedPolicyDomainState = "newState".data(using: .utf8)
+        let sut = LocalAuthenticationService(
+            userDefaults: mockUserDefaults,
+            context: mockLAContext
+        )
+        #expect(sut.biometricsHaveChanged)
+    }
+
+    @Test
+    func biometricsHaveChanged_unchangedState_returnsFalse() {
+        let mockLAContext = MockLAContext()
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults.set("sameState".data(using: .utf8), forKey: .biometricsPolicyState)
+        mockLAContext._stubbedEvaluatedPolicyDomainState = "sameState".data(using: .utf8)
+        let sut = LocalAuthenticationService(
+            userDefaults: mockUserDefaults,
+            context: mockLAContext
+        )
+        #expect(!sut.biometricsHaveChanged)
+    }
 }

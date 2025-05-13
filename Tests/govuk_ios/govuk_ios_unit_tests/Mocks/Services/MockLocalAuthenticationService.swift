@@ -20,7 +20,12 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
         _setLocalAuthenticationCalled = true
         _localAuthenticationEnabled = enabled
     }
-    
+
+    var _stubbedBiometricsHaveChanged = false
+    var biometricsHaveChanged: Bool {
+        _stubbedBiometricsHaveChanged
+    }
+
     var _stubbedCanEvaluateBiometricsPolicy: Bool = false
     var _stubbedCanEvaluatePasscodePolicy: Bool = false
     func canEvaluatePolicy(_ policy: LAPolicy) -> Bool {

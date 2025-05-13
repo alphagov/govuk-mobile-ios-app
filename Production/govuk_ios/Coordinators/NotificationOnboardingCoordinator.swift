@@ -26,8 +26,11 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     }
 
     private func startNotifications() async {
-        guard await notificationService.shouldRequestPermission
-        else { return finishCoordination() }
+        guard await notificationService.shouldRequestPermission,
+              !UserDefaults.standard.bool(forKey: .notificationsOnboardingSeen)
+        else {
+            return finishCoordination()
+        }
         setOnboarding()
     }
 
@@ -39,6 +42,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
                 self?.request()
             },
             dismissAction: { [weak self] in
+                UserDefaults.standard.setNotificationsOnboardingSeen()
                 self?.finishCoordination()
             }
         )

@@ -17,6 +17,15 @@ extension UserDefaults: UserDefaultsInterface {
         )
         synchronize()
     }
+
+    func setNotificationsOnboardingSeen() {
+        set(bool: true, forKey: .notificationsOnboardingSeen)
+        synchronize()
+    }
+
+    func isNotificationsOnboardingSeen() -> Bool {
+        bool(forKey: .notificationsOnboardingSeen)
+    }
 }
 
 enum UserDefaultsKeys: String {
@@ -24,6 +33,7 @@ enum UserDefaultsKeys: String {
     case acceptedAnalytics = "govuk_app_analytics_accepted"
     case customisedTopics = "govuk_topics_customised"
     case topicsOnboardingSeen = "govuk_topics_onboarding_seen"
+    case notificationsOnboardingSeen = "govuk_notifications_onboarding_seen"
     case authenticationOnboardingFlowSeen = "govuk_authentication_onboarding_flow_seen"
     case skipLocalAuthentication = "govuk_skip_local_authentication"
 }
@@ -33,4 +43,6 @@ protocol UserDefaultsInterface {
     func bool(forKey key: UserDefaultsKeys) -> Bool
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
+    func setNotificationsOnboardingSeen()
+    func isNotificationsOnboardingSeen() -> Bool
 }

@@ -6,6 +6,7 @@ import UIComponents
 final class NotificationSettingsViewModel: ObservableObject {
     private let notificationService: NotificationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let userDefaults: UserDefaultsInterface
     private let completeAction: () -> Void
 
     let slide: OnboardingSlideAnimationViewModel = Onboarding.notificationSlide
@@ -14,16 +15,19 @@ final class NotificationSettingsViewModel: ObservableObject {
 
     init(notificationService: NotificationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         userDefaults: UserDefaultsInterface = UserDefaults.standard,
          completeAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.completeAction = completeAction
+        self.userDefaults = userDefaults
         self.notificationService = notificationService
     }
 
     private func requestNotificationPermission() {
-        notificationService.requestPermissions(
-            completion: completeAction
-        )
+        notificationService.requestPermissions {
+            self.userDefaults.setNotificationsOnboardingSeen()
+            self.completeAction()
+        }
     }
 
     func trackScreen(screen: TrackableScreen) {

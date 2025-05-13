@@ -91,7 +91,7 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
             return false
         }
         if let domainState = context.evaluatedPolicyDomainState,
-           domainState != biometricsPolicyState! {
+           domainState != biometricsPolicyState {
             biometricsPolicyState = domainState
             return true
         }

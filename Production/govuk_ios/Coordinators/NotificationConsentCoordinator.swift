@@ -25,14 +25,14 @@ class NotificationConsentCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         switch consentResult {
-        case .success:
+        case .aligned:
             dismissConsentViewControllerIfRequired()
             finishAction()
-        case .failure(.consentGrantedNotificationsOff):
+        case .misaligned(.consentGrantedNotificationsOff):
             notificationService.rejectConsent()
             dismissConsentViewControllerIfRequired()
             finishAction()
-        case .failure(.consentNotGrantedNotificationsOn):
+        case .misaligned(.consentNotGrantedNotificationsOn):
             presentConsentViewController()
         }
     }

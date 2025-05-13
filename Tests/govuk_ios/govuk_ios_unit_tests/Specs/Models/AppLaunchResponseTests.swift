@@ -10,7 +10,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .failure(.invalidSignature),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -22,7 +22,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: .arrange(available: false))),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -40,7 +40,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -58,7 +58,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -77,7 +77,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -89,7 +89,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .failure(.invalidSignature),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -101,7 +101,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .failure(.remoteJson),
             topicResult: .failure(.apiUnavailable),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -119,7 +119,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -137,7 +137,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -155,7 +155,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -167,7 +167,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .failure(.remoteJson),
             topicResult: .failure(.apiUnavailable),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 

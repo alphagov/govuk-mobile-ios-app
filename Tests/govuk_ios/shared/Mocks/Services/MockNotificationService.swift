@@ -67,7 +67,7 @@ class MockNotificationService: NotificationServiceInterface {
         _stubbedhasGivenConsent
     }
 
-    var _stubbedFetchConsentAlignmentResult: NotificationConsentResult = .success(())
+    var _stubbedFetchConsentAlignmentResult: NotificationConsentResult = .aligned
     func fetchConsentAlignment() async -> NotificationConsentResult {
         _stubbedFetchConsentAlignmentResult
     }

@@ -330,7 +330,7 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.notificationConsent(
             navigationController: MockNavigationController(),
-            consentResult: .success(()),
+            consentResult: .aligned,
             completion: { }
         )
 

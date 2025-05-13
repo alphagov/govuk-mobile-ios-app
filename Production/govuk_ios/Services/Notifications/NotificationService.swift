@@ -130,11 +130,21 @@ class NotificationService: NSObject,
         let isSubscribed = await permissionState == .authorized
         switch (hasGivenConsent, isSubscribed) {
         case (true, false):
-            return .failure(.consentGrantedNotificationsOff)
+            return .misaligned(.consentGrantedNotificationsOff)
         case (false, true):
-            return .failure(.consentNotGrantedNotificationsOn)
+            return .misaligned(.consentNotGrantedNotificationsOn)
         default:
-            return .success(())
+            return .aligned
         }
     }
+}
+
+enum NotificationConsentResult: Equatable {
+    case aligned
+    case misaligned(NotificationConsentMisalignment)
+}
+
+enum NotificationConsentMisalignment: Equatable {
+    case consentNotGrantedNotificationsOn
+    case consentGrantedNotificationsOff
 }

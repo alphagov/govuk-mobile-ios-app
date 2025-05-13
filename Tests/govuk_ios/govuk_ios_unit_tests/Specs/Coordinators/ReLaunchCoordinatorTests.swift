@@ -16,7 +16,7 @@ struct ReLaunchCoordinatorTests {
         )
         mockCoordinatorBuilder._stubbedNotificationConsentCoordinator = mockConsentCoordinator
         let mockNotificationService = MockNotificationService()
-        mockNotificationService._stubbedFetchConsentAlignmentResult = .success(())
+        mockNotificationService._stubbedFetchConsentAlignmentResult = .aligned
         await withCheckedContinuation { continuation in
             let subject = ReLaunchCoordinator(
                 coordinatorBuilder: mockCoordinatorBuilder,

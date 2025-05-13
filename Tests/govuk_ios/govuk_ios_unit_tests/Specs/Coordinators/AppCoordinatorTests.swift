@@ -55,7 +55,7 @@ struct AppCoordinatorTests {
         let launchResult = AppLaunchResponse(
             configResult: .success(.arrange),
             topicResult: .success(TopicResponseItem.arrangeMultiple),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
         // This is in order of launch
@@ -127,7 +127,7 @@ struct AppCoordinatorTests {
         let launchResult = AppLaunchResponse(
             configResult: .success(.arrange),
             topicResult: .success(TopicResponseItem.arrangeMultiple),
-            notificationConsentResult: .success(()),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
         // This is in order of launch

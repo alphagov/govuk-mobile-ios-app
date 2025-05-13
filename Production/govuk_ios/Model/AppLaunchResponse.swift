@@ -37,10 +37,3 @@ struct AppLaunchResponse {
         appVersionProvider.versionNumber ?? ""
     }
 }
-
-typealias NotificationConsentResult = Result<Void, NotificationConsentResultError>
-
-enum NotificationConsentResultError: Error {
-    case consentNotGrantedNotificationsOn
-    case consentGrantedNotificationsOff
-}

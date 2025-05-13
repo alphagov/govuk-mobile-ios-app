@@ -310,4 +310,153 @@ class NotificationServiceTests {
 
         #expect(!mockDefaults.bool(forKey: .notificationsConsentGranted))
     }
+
+    @Test
+    func toggleHasGivenConsent_whenAccepted_rejectsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
+
+        sut.toggleHasGivenConsent()
+
+        #expect(!mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func toggleHasGivenConsent_whenRejected_acceptsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
+
+        sut.toggleHasGivenConsent()
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func toggleHasGivenConsent_consentNotSet_acceptsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        sut.toggleHasGivenConsent()
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func requestPermissions_consentGranted_doesNothing() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
+
+        sut.requestPermissions(completion: nil)
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func requestPermissions_consentRejected_grantsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
+
+        sut.requestPermissions(completion: nil)
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func requestPermissions_consentNotSet_grantsConsent() {
+        let mockDefaults = MockUserDefaults()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            userDefaults: mockDefaults
+        )
+
+        sut.requestPermissions(completion: nil)
+
+        #expect(mockDefaults.bool(forKey: .notificationsConsentGranted))
+    }
+
+    @Test
+    func fetchConsentAlignment_consentAligned_returnsExpectedResult() async {
+        let mockDefaults = MockUserDefaults()
+        let mockUserNotificationCenter = MockUserNotificationCenter()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: mockUserNotificationCenter,
+            userDefaults: mockDefaults
+        )
+
+        mockUserNotificationCenter._stubbedAuthorizationStatus = .authorized
+
+        mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
+
+        let alignment = await sut.fetchConsentAlignment()
+
+        #expect(alignment == .aligned)
+    }
+
+    @Test
+    func fetchConsentAlignment_notificationsEnabled_consentNotGranted_returnsExpectedResult() async {
+        let mockDefaults = MockUserDefaults()
+        let mockUserNotificationCenter = MockUserNotificationCenter()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: mockUserNotificationCenter,
+            userDefaults: mockDefaults
+        )
+
+        mockUserNotificationCenter._stubbedAuthorizationStatus = .authorized
+
+        mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
+
+        let alignment = await sut.fetchConsentAlignment()
+
+        #expect(alignment == .misaligned(.consentNotGrantedNotificationsOn))
+    }
+
+    @Test
+    func fetchConsentAlignment_notificationsDisabled_consentGranted_returnsExpectedResult() async {
+        let mockDefaults = MockUserDefaults()
+        let mockUserNotificationCenter = MockUserNotificationCenter()
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: mockUserNotificationCenter,
+            userDefaults: mockDefaults
+        )
+
+        mockUserNotificationCenter._stubbedAuthorizationStatus = .denied
+
+        mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
+
+        let alignment = await sut.fetchConsentAlignment()
+
+        #expect(alignment == .misaligned(.consentGrantedNotificationsOff))
+    }
 }

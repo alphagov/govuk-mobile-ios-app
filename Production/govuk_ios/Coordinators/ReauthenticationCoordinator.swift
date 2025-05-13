@@ -34,6 +34,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
             return
         }
         guard localAuthenticationService.biometricsHaveChanged == false else {
+            authenticationService.signOut()
             handleReauthFailure()
             return
         }

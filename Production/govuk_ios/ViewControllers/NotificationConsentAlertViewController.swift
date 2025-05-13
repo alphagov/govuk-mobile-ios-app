@@ -63,9 +63,10 @@ class NotificationConsentAlertViewController: BaseViewController {
         let localView = UIButton.govUK.secondary
         localView.viewModel = .init(
             localisedTitle: String.notifications.localized("consentAlertSecondaryButtonTitle"),
-            action: { }
+            action: { [weak self] in
+                self?.openSettingsAction?()
+            }
         )
-        localView.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
         return localView
     }()
 
@@ -73,9 +74,10 @@ class NotificationConsentAlertViewController: BaseViewController {
         let localView = UIButton.govUK.primary
         localView.viewModel = .init(
             localisedTitle: String.notifications.localized("consentAlertPrimaryButtonTitle"),
-            action: { }
+            action: { [weak self] in
+                self?.grantConsentAction?()
+            }
         )
-        localView.addTarget(self, action: #selector(grantConsentButtonPressed), for: .touchUpInside)
         return localView
     }()
 
@@ -151,15 +153,5 @@ class NotificationConsentAlertViewController: BaseViewController {
             footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
-    }
-
-    @objc
-    private func grantConsentButtonPressed() {
-        grantConsentAction?()
-    }
-
-    @objc
-    private func settingsButtonPressed() {
-        openSettingsAction?()
     }
 }

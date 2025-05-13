@@ -87,6 +87,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         do {
             try authenticatedSecureStoreService.delete()
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
+            userDefaults.set(nil, forKey: .biometricsPolicyState)
             setTokens()
             authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()
         } catch {

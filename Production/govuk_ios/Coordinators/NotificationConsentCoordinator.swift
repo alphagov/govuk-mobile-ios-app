@@ -52,9 +52,26 @@ class NotificationConsentCoordinator: BaseCoordinator {
             )
         }
         viewController.openSettingsAction = { [weak self] in
-            self?.openSettings()
+            self?.presentSettingsAlert(viewController: viewController)
         }
         root.present(viewController, animated: true)
+    }
+
+    private func presentSettingsAlert(viewController: UIViewController) {
+        let alert = UIAlertController(
+            title: String.notifications.localized("consentAlertSettingsAlertTitle"),
+            message: String.notifications.localized("consentAlertSettingsAlertBody"),
+            preferredStyle: .alert
+        )
+        alert.addAction(.cancel(handler: nil))
+        alert.addAction(
+            .continueAction(
+                handler: { [weak self] in
+                    self?.openSettings()
+                }
+            )
+        )
+        viewController.present(alert, animated: true)
     }
 
     private func dismissConsentViewControllerIfRequired() {

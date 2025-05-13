@@ -130,8 +130,7 @@ extension Container {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
-                persistentUserIdentifierManager: self.persistentUserIdentifierManager.resolve(),
-                userDefaults: UserDefaults.standard
+                returningUserService: self.returningUserService.resolve()
             )
         }.scope(.singleton)
     }
@@ -144,10 +143,13 @@ extension Container {
         }
     }
 
-    var persistentUserIdentifierManager: Factory<PersistentUserIdentifierManagerInterface> {
+    var returningUserService: Factory<ReturningUserServiceInterface> {
         Factory(self) {
-            PersistentUserIdentifierManager(
-                openSecureStoreService: self.openSecureStoreService.resolve()
+            ReturningUserService(
+                openSecureStoreService: self.openSecureStoreService.resolve(),
+                coreDataDeletionService: self.coreDataDeletionService.resolve(),
+                userDefaults: UserDefaults.standard,
+                localAuthenticationService: self.localAuthenticationService.resolve()
             )
         }
     }

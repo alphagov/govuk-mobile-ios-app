@@ -2,15 +2,14 @@ import Foundation
 import UIKit
 import Authentication
 import SecureStore
+import Factory
 
 protocol AuthenticationServiceInterface {
     var refreshToken: String? { get }
     var idToken: String? { get }
     var accessToken: String? { get }
-    var authenticationOnboardingFlowSeen: Bool { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
-    var isLocalAuthenticationSkipped: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult
     func signOut()
@@ -25,10 +24,10 @@ struct AuthenticationServiceResponse {
 typealias AuthenticationServiceResult = Result<AuthenticationServiceResponse, AuthenticationError>
 
 class AuthenticationService: AuthenticationServiceInterface {
+    private let container = Container.shared
+    private var authenticatedSecureStoreService: SecureStorable
     private let authenticationServiceClient: AuthenticationServiceClientInterface
-    private let authenticatedSecureStoreService: SecureStorable
-    private let persistentUserIdentifierManager: PersistentUserIdentifierManagerInterface
-    private let userDefaults: UserDefaultsInterface
+    private let returningUserService: ReturningUserServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
@@ -48,21 +47,11 @@ class AuthenticationService: AuthenticationServiceInterface {
         refreshToken != nil
     }
 
-    var authenticationOnboardingFlowSeen: Bool {
-        userDefaults.bool(forKey: .authenticationOnboardingFlowSeen)
-    }
-
-    var isLocalAuthenticationSkipped: Bool {
-        userDefaults.bool(forKey: .skipLocalAuthentication)
-    }
-
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
-         persistentUserIdentifierManager: PersistentUserIdentifierManagerInterface,
-         userDefaults: UserDefaultsInterface) {
-        self.userDefaults = userDefaults
+         returningUserService: ReturningUserServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
-        self.persistentUserIdentifierManager = persistentUserIdentifierManager
+        self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
     }
 
@@ -82,17 +71,17 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     private func handleReturningUser() async -> AuthenticationServiceResult {
-        let result = await persistentUserIdentifierManager.process(
-            authenticationOnboardingFlowSeen: authenticationOnboardingFlowSeen,
+        let returningUserResult = await returningUserService.process(
             idToken: idToken
         )
-        switch result {
-        case ReturningUserResult.success(true):
+        switch returningUserResult {
+        case .success(true):
             return .success(.init(returningUser: true))
-        case ReturningUserResult.success(false):
+        case .success(false):
             return .success(.init(returningUser: false))
-        case ReturningUserResult.failure(let error):
-            return .failure(.persistentUserIdentifierError)
+        case .failure(let error):
+            setTokens()
+            return .failure(.returningUserService(error))
         }
     }
 
@@ -101,6 +90,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             try authenticatedSecureStoreService.delete()
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
+            authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()
         } catch {
             #if targetEnvironment(simulator)
             // secure store deletion will always fail on simulator

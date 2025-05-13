@@ -26,7 +26,7 @@ class NotificationConsentAlertViewController: BaseViewController {
         return localView
     }()
 
-    private var privacyButton: UIButton = {
+    private lazy var privacyButton: UIButton = {
         let localView = UIButton()
         localView.titleLabel?.font = UIFont.govUK.body
         localView.titleLabel?.numberOfLines = 0
@@ -38,15 +38,16 @@ class NotificationConsentAlertViewController: BaseViewController {
         )
         localView.contentHorizontalAlignment = .leading
         localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.accessibilityHint = String.common.localized("openWebLinkHint")
         return localView
     }()
 
-    private let linkImage: UIImageView = {
+    private lazy var linkImage: UIImageView = {
         let localView = UIImageView()
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.image = UIImage(systemName: "arrow.up.right")
         localView.tintColor = UIColor.govUK.text.link
-
+        localView.isAccessibilityElement = false
         return localView
     }()
 
@@ -153,5 +154,10 @@ class NotificationConsentAlertViewController: BaseViewController {
             footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        privacyButton.accessibilityFrame = privacyStackView.frame
     }
 }

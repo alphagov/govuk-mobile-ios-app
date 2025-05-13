@@ -52,14 +52,14 @@ class MockNotificationService: NotificationServiceInterface {
         _receivedAcceptConsent = true
     }
 
-    var _receivedRejectConsent: Bool = false
+    var _rejectConsentCalled: Bool = false
     func rejectConsent() {
-        _receivedRejectConsent = true
+        _rejectConsentCalled = true
     }
 
-    var _receivedToggleHasGivenConsent: Bool = false
+    var _toggleHasGivenConsentCalled: Bool = false
     func toggleHasGivenConsent() {
-        _receivedToggleHasGivenConsent = true
+        _toggleHasGivenConsentCalled = true
     }
 
     var _stubbedhasGivenConsent: Bool = false

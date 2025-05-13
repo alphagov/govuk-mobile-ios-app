@@ -284,7 +284,7 @@ class SettingsViewModelTests {
             [NotificationPermissionState.authorized,
              .denied]
     )
-    func handleNotificationAlertActions(
+    func handleNotificationAlertAction_opensSettings(
         _ expectedPermission: NotificationPermissionState
     ) async {
         var cancellables = Set<AnyCancellable>()
@@ -314,9 +314,49 @@ class SettingsViewModelTests {
         #expect(urlString == UIApplication.openNotificationSettingsURLString)
     }
 
-    @Test(arguments:
-            [NotificationPermissionState.authorized,
-             .denied]
+    @Test(
+        arguments:
+            [
+                NotificationPermissionState.authorized,
+                .denied
+            ]
+    )
+    func handleNotificationAlertAction_togglesConsent(
+        _ expectedPermission: NotificationPermissionState
+    ) async {
+        var cancellables = Set<AnyCancellable>()
+        let mockNotificationService = MockNotificationService()
+        await withCheckedContinuation { continuation in
+            mockNotificationService._stubbededPermissionState = expectedPermission
+            let mockURLOpener = MockURLOpener()
+            let sut = SettingsViewModel(
+                analyticsService: MockAnalyticsService(),
+                urlOpener: mockURLOpener,
+                versionProvider: MockAppVersionProvider(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                authenticationService: MockAuthenticationService(),
+                notificationService: mockNotificationService,
+                notificationCenter: .init()
+            )
+            sut.$notificationsPermissionState
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    guard expectedPermission == value
+                    else { return }
+                    sut.handleNotificationAlertAction()
+                    continuation.resume()
+                }.store(in: &cancellables)
+            mockURLOpener._stubbedOpenResult = true
+        }
+        #expect(mockNotificationService._toggleHasGivenConsentCalled)
+    }
+
+    @Test(
+        arguments:
+            [
+                NotificationPermissionState.authorized,
+                .denied
+            ]
     )
     func handleNotificationAlertActions_tracksEventCorrectly(
         _ expectedPermission: NotificationPermissionState

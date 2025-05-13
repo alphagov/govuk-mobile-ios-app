@@ -62,17 +62,9 @@ class AuthenticationCoordinator: BaseCoordinator {
     }
 
     private var shouldEncryptRefreshToken: Bool {
-        let onboardingFlowSeen = authenticationService.authenticationOnboardingFlowSeen
-        let shouldAuthByBiometrics =
-        localAuthenticationService.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics)
-        let shouldAuthByPasscode =
-        !authenticationService.isLocalAuthenticationSkipped &&
-        localAuthenticationService.canEvaluatePolicy(.deviceOwnerAuthentication)
+        let shouldLocalAuth = localAuthenticationService.isLocalAuthenticationEnabled
+        let onboardingFlowSeen = localAuthenticationService.authenticationOnboardingFlowSeen
 
-        // encrypts refresh token if user has seen onboarding, and either:
-        // can evaluate by biometrics (enrolled during onboarding or iOS settings)
-        // OR
-        // hasn't skipped local authentication + can evaluate by passcode
-        return onboardingFlowSeen && (shouldAuthByBiometrics || shouldAuthByPasscode)
+        return onboardingFlowSeen && shouldLocalAuth
     }
 }

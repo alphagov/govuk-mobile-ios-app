@@ -65,7 +65,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         }
 
         #expect(completion)
-        #expect(mockLocalAuthenticationService._setHasSeenOnboardingCalled)
+        #expect(mockLocalAuthenticationService._localAuthenticationEnabled!)
         #expect(mockNavigationController._setViewControllers == .none)
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }
@@ -90,18 +90,19 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         }
 
         #expect(completion)
+        #expect(!(mockLocalAuthenticationService._localAuthenticationEnabled!))
         #expect(mockNavigationController._setViewControllers == .none)
         #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }
 
     @Test @MainActor
-    func start_shouldSkipOnboarding_true_callsCompletion() async {
+    func start_authenticationOnboardingSeen_true_callsCompletion() async {
         let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthType = .touchID
-        mockLocalAuthenticationService._stubbedSkipOnboarding = true
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
@@ -120,12 +121,12 @@ class LocalAuthenticationOnboardingCoordinatorTests {
     }
 
     @Test @MainActor
-    func start_shouldSkipOnboarding_false_setsOnboarding() async {
+    func start_authenticationOnboardingSeen_false_setsOnboarding() async {
         let mockUserDefaults = MockUserDefaults()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
-        mockLocalAuthenticationService._stubbedSkipOnboarding = false
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
         mockLocalAuthenticationService._stubbedAuthType = .touchID
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,

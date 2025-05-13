@@ -9,18 +9,20 @@ class ReauthenticationCoordinatorTests {
     func start_shouldReauthenticate_successfulTokenResponse_callsCompletion() async {
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         let tokenRefreshResponse = TokenRefreshResponse(
             accessToken: "access_token",
             idToken: "id_token"
         )
         mockAuthenticationService._stubbedTokenRefreshRequest = .success(tokenRefreshResponse)
-        mockAuthenticationService.authenticationOnboardingFlowSeen = true
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         let completion = await withCheckedContinuation { continuation in
             let sut = ReauthenticationCoordinator(
                 navigationController: mockNavigationController,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -35,6 +37,7 @@ class ReauthenticationCoordinatorTests {
         let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockCoordinatorBuilder._stubbedAuthenticationOnboardingCoordinator =
         mockAuthenticationOnboardingCoordinator
@@ -46,6 +49,7 @@ class ReauthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { }
             )
             sut.start(url: nil)
@@ -58,13 +62,15 @@ class ReauthenticationCoordinatorTests {
     func start_onboardingFlowNotSeen_callsCompletion() async {
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        mockAuthenticationService.authenticationOnboardingFlowSeen = false
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
         let completion = await withCheckedContinuation { continuation in
             let sut = ReauthenticationCoordinator(
                 navigationController: mockNavigationController,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)

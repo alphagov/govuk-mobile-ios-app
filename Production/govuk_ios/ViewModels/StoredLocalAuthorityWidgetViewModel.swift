@@ -29,6 +29,10 @@ class StoredLocalAuthorityWidgetViewModel {
         "localAuthorityTwoTierChildDescription"
     )
 
+    let editButtonAltText = String.localAuthority.localized(
+        "localAuthorityEditButtonAltText"
+    )
+
     private func returnCardDescription(authority: LocalAuthorityItem) -> String {
         if authority.parent != nil {
             return localAuthorityTwoTierChildDescription(

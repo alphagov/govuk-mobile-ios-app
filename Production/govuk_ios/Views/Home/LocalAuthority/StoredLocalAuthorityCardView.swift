@@ -15,6 +15,10 @@ struct StoredLocalAuthorityCardView: View {
                     Image(systemName: "arrow.up.right")
                         .foregroundColor(Color(UIColor.govUK.text.link))
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(model.name)
+                .accessibilityAddTraits(.isLink)
+                .accessibilityHint(String.common.localized("openWebLinkHint"))
                 .padding(.bottom, 4)
                 HStack {
                     Text(model.description)
@@ -24,8 +28,6 @@ struct StoredLocalAuthorityCardView: View {
                     Spacer()
                 }
             }
-            .accessibilityAddTraits(.isLink)
-            .accessibilityHint(String.common.localized("openWebLinkHint"))
             .padding()
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(

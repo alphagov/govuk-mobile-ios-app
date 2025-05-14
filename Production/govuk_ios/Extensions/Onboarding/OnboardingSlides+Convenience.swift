@@ -59,12 +59,6 @@ extension Onboarding {
         )
     }
 
-//    static var notificationSlides: [any OnboardingSlideViewModelInterface] {
-//        [
-//            notificationSlide
-//        ]
-//    }
-
     static var authenticationSlide: OnboardingSlideImageViewModel {
         OnboardingSlideImageViewModel(
             slide: .init(

@@ -7,12 +7,6 @@ import GOVKit
 
 @MainActor
 class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
-
-    override func setUp() {
-        super.setUp()
-        UIView.setAnimationsEnabled(false)
-    }
-
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = NotificationsOnboardingViewModel(
             urlOpener: MockURLOpener(),

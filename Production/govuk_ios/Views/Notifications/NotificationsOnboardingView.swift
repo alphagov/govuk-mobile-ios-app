@@ -99,6 +99,7 @@ struct NotificationsOnboardingView: View {
                     Image(systemName: "arrow.up.right")
                         .foregroundColor(Color(UIColor.govUK.text.link))
                 }
+                .accessibilityElement(children: .combine)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 24)
                 .onTapGesture {
@@ -109,7 +110,6 @@ struct NotificationsOnboardingView: View {
         }
         .padding(.top, verticalSizeClass == .compact ? 30 : 46)
         .padding(.horizontal, 16)
-        .accessibilityValue(" ")
     }
 }
 

@@ -40,21 +40,19 @@ class AuthenticationCoordinator: BaseCoordinator {
             if shouldEncryptRefreshToken {
                 authenticationService.encryptRefreshToken()
             }
-            DispatchQueue.main.async {
-                self.completionAction()
-            }
             if response.returningUser {
-                print("RETURNING USER")
+                DispatchQueue.main.async {
+                    self.completionAction()
+                }
             } else {
-                print("NEW USER")
+                DispatchQueue.main.async {
+                    let coordinator = self.coordinatorBuilder.newUserOnboardingCoordinator(
+                        navigationController: self.root
+                    )
+                    coordinator.start(url: nil)
+                }
             }
         case .failure(let error):
-            switch error {
-            case AuthenticationError.persistentUserIdentifierError:
-                print("USER IDENTIFIER ERROR")
-            default:
-                print("Other error")
-            }
             DispatchQueue.main.async {
                 self.handleError(error)
             }

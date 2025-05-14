@@ -258,6 +258,7 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
             completionAction: completionAction
         )
     }
@@ -309,6 +310,15 @@ class CoordinatorBuilder {
             navigationController: UINavigationController(),
             viewControllerBuilder: ViewControllerBuilder(),
             url: url
+        )
+    }
+
+    func newUserOnboardingCoordinator(
+        navigationController: UINavigationController
+    ) -> BaseCoordinator {
+        NewUserOnboardingCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController
         )
     }
 }

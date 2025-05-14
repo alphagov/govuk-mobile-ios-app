@@ -16,4 +16,9 @@ extension URLOpener {
     public func openSettings() -> Bool {
         openIfPossible(UIApplication.openSettingsURLString)
     }
+
+    @discardableResult
+    public func openNotificationSettings() -> Bool {
+        openIfPossible(UIApplication.openNotificationSettingsURLString)
+    }
 }

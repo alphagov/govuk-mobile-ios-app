@@ -6,7 +6,6 @@ import Onboarding
 @testable import govuk_ios
 
 class MockNotificationService: NotificationServiceInterface {
-
     var _stubbededPermissionState: NotificationPermissionState = .notDetermined
     var permissionState: NotificationPermissionState {
         get async {
@@ -46,5 +45,30 @@ class MockNotificationService: NotificationServiceInterface {
     var _onClickAction: ((URL) -> Void)?
     func addClickListener(onClickAction: @escaping (URL) -> Void) {
         _onClickAction = onClickAction
+    }
+
+    var _receivedAcceptConsent: Bool = false
+    func acceptConsent() {
+        _receivedAcceptConsent = true
+    }
+
+    var _rejectConsentCalled: Bool = false
+    func rejectConsent() {
+        _rejectConsentCalled = true
+    }
+
+    var _toggleHasGivenConsentCalled: Bool = false
+    func toggleHasGivenConsent() {
+        _toggleHasGivenConsentCalled = true
+    }
+
+    var _stubbedhasGivenConsent: Bool = false
+    var hasGivenConsent: Bool {
+        _stubbedhasGivenConsent
+    }
+
+    var _stubbedFetchConsentAlignmentResult: NotificationConsentResult = .aligned
+    func fetchConsentAlignment() async -> NotificationConsentResult {
+        _stubbedFetchConsentAlignmentResult
     }
 }

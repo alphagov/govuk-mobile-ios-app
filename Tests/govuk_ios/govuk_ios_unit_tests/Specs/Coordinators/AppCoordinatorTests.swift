@@ -9,22 +9,22 @@ struct AppCoordinatorTests {
     @Test
     @MainActor
     func start_firstLaunch_startsLaunchCoordinator() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
-        let mockLaunchCoodinator = MockBaseCoordinator(
+        let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoodinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoodinator
+        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoordinator
 
         let subject = AppCoordinator(
-            coordinatorBuilder: mockCoodinatorBuilder,
+            coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: mockNavigationController
         )
 
         subject.start()
 
-        #expect(mockCoodinatorBuilder._receivedLaunchNavigationController == mockNavigationController)
-        #expect(mockLaunchCoodinator._startCalled)
+        #expect(mockCoordinatorBuilder._receivedLaunchNavigationController == mockNavigationController)
+        #expect(mockLaunchCoordinator._startCalled)
     }
 
     @Test
@@ -32,14 +32,14 @@ struct AppCoordinatorTests {
     func start_secondLaunch_startsTabCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
-        let mockLaunchCoodinator = MockBaseCoordinator(
+        let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        let mockTabCoodinator = MockBaseCoordinator(
+        let mockTabCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoodinator
-        mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoodinator
+        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoordinator
+        mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -49,16 +49,18 @@ struct AppCoordinatorTests {
         //First launch
         subject.start()
 
-        #expect(mockLaunchCoodinator._startCalled)
+        #expect(mockLaunchCoordinator._startCalled)
 
         //Finish launch loading
         let launchResult = AppLaunchResponse(
             configResult: .success(.arrange),
             topicResult: .success(TopicResponseItem.arrangeMultiple),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
-        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
         // This is in order of launch
+        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
+        mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
         mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
         mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
         mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
@@ -70,28 +72,30 @@ struct AppCoordinatorTests {
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
         mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
 
-        #expect(mockTabCoodinator._startCalled)
+        #expect(mockTabCoordinator._startCalled)
 
         //Reset values for second launch
-        mockLaunchCoodinator._startCalled = false
-        mockTabCoodinator._startCalled = false
+        mockLaunchCoordinator._startCalled = false
+        mockTabCoordinator._startCalled = false
 
         //Second launch
         subject.start()
 
-        #expect(!mockLaunchCoodinator._startCalled)
-        #expect(mockTabCoodinator._startCalled)
+        mockCoordinatorBuilder._receivedRelaunchCompletion?()
+
+        #expect(!mockLaunchCoordinator._startCalled)
+        #expect(mockTabCoordinator._startCalled)
     }
 
     @Test
     @MainActor
-    func successfulSignout_starts_loginCoordinator() throws {
+    func successfulSignout_startsLoginCoordinator() throws {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
-        let mockLaunchCoodinator = MockBaseCoordinator(
+        let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoodinator
+        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoordinator
 
         let tabCoordinator = TabCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -123,10 +127,12 @@ struct AppCoordinatorTests {
         let launchResult = AppLaunchResponse(
             configResult: .success(.arrange),
             topicResult: .success(TopicResponseItem.arrangeMultiple),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
-        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
         // This is in order of launch
+        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
+        mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
         mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
         mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
         mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
@@ -143,6 +149,5 @@ struct AppCoordinatorTests {
 
         mockCoordinatorBuilder._receivedSignedOutCompletion?(false)
         #expect(mockAuthenticationOnboardingCoordinator._startCalled)
-
     }
 }

@@ -31,8 +31,11 @@ enum UserDefaultsKeys: String, CaseIterable {
     case acceptedAnalytics = "govuk_app_analytics_accepted"
     case customisedTopics = "govuk_topics_customised"
     case topicsOnboardingSeen = "govuk_topics_onboarding_seen"
+    case authenticationOnboardingSeen = "govuk_authentication_onboarding_seen"
+    case localAuthenticationOnboardingSeen = "govuk_local_authentication_onboarding_seen"
     case authenticationOnboardingFlowSeen = "govuk_authentication_onboarding_flow_seen"
-    case localAuthenticationEnabled = "govuk_skip_local_authentication_enabled"
+    case localAuthenticationEnabled = "govuk_local_authentication_enabled"
+    case notificationsConsentGranted = "govuk_notifications_consent_granted"
 }
 
 protocol UserDefaultsInterface {

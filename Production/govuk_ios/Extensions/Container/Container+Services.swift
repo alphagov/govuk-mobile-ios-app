@@ -2,6 +2,7 @@ import Foundation
 import Factory
 import Onboarding
 import GOVKit
+import UserNotifications
 
 import SecureStore
 import Firebase
@@ -66,7 +67,8 @@ extension Container {
         Factory(self) {
             AppLaunchService(
                 configService: self.appConfigService.resolve(),
-                topicService: self.topicsService.resolve()
+                topicService: self.topicsService.resolve(),
+                notificationService: self.notificationService.resolve()
             )
         }.scope(.singleton)
     }
@@ -113,7 +115,8 @@ extension Container {
         Factory(self) {
             NotificationService(
                 environmentService: self.appEnvironmentService.resolve(),
-                notificationCenter: UNUserNotificationCenter.current()
+                notificationCenter: UNUserNotificationCenter.current(),
+                userDefaults: UserDefaults.standard
             )
         }
     }

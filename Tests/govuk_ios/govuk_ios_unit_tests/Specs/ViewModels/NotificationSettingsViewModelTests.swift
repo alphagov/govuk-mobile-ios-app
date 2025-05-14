@@ -50,4 +50,37 @@ struct NotificationSettingsViewModelTests {
         }
         #expect(result)
     }
+
+    @Test
+    func requestNotificationPermission_setsOnboardingSeen() {
+        let mockNotificationService = MockNotificationService()
+        let mockUserDefaults = MockUserDefaults()
+        let sut = NotificationSettingsViewModel(
+            notificationService: mockNotificationService,
+            analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults,
+            completeAction: { }
+        )
+        mockUserDefaults.set(bool: false, forKey: .notificationsOnboardingSeen)
+        sut.primaryButtonViewModel.action()
+        mockNotificationService._receivedRequestPermissionsCompletion?()
+        #expect(mockUserDefaults.isNotificationsOnboardingSeen())
+    }
+
+    @Test
+    func requestNotificationPermission_completionCalledAfterPermissionRequest() async {
+        var completionCalled = false
+        let mockNotificationService = MockNotificationService()
+        let sut = NotificationSettingsViewModel(
+            notificationService: mockNotificationService,
+            analyticsService: MockAnalyticsService(),
+            completeAction: {
+                completionCalled = true
+            }
+        )
+        sut.primaryButtonViewModel.action()
+        #expect(!completionCalled)
+        mockNotificationService._receivedRequestPermissionsCompletion?()
+        #expect(completionCalled)
+    }
 }

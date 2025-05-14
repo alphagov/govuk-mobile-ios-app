@@ -8,13 +8,16 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
     private let analyticsService: OnboardingAnalyticsService
     private let completeAction: () -> Void
+    private let userDefaults: UserDefaultsInterface
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
          analyticsService: OnboardingAnalyticsService,
+         userDefaults: UserDefaultsInterface = UserDefaults.standard,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
         self.analyticsService = analyticsService
+        self.userDefaults = userDefaults
         self.completeAction = completion
         super.init(navigationController: navigationController)
     }
@@ -27,7 +30,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func startNotifications() async {
         guard await notificationService.shouldRequestPermission,
-              !UserDefaults.standard.bool(forKey: .notificationsOnboardingSeen)
+              !userDefaults.isNotificationsOnboardingSeen()
         else {
             return finishCoordination()
         }
@@ -42,7 +45,6 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
                 self?.request()
             },
             dismissAction: { [weak self] in
-                UserDefaults.standard.setNotificationsOnboardingSeen()
                 self?.finishCoordination()
             }
         )
@@ -59,6 +61,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func finishCoordination() {
         DispatchQueue.main.async {
+            self.userDefaults.setNotificationsOnboardingSeen()
             self.completeAction()
         }
     }

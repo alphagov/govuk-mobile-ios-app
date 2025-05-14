@@ -39,6 +39,7 @@ class ReauthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         mockCoordinatorBuilder._stubbedAuthenticationOnboardingCoordinator =
         mockAuthenticationOnboardingCoordinator
         mockAuthenticationService._stubbedTokenRefreshRequest = .failure(.genericError)

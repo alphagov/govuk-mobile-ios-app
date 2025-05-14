@@ -39,6 +39,7 @@ extension AppLaunchResponse {
         return .init(
             configResult: configResult,
             topicResult: topic,
+            notificationConsentResult: .aligned,
             appVersionProvider: provider
         )
     }

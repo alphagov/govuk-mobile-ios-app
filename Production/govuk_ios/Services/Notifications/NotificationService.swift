@@ -9,20 +9,29 @@ protocol NotificationServiceInterface: OnboardingSlideProvider {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: (() -> Void)?)
     func addClickListener(onClickAction: @escaping (URL) -> Void)
+    func acceptConsent()
+    func rejectConsent()
+    func toggleHasGivenConsent()
     var shouldRequestPermission: Bool { get async }
     var permissionState: NotificationPermissionState { get async }
     var isFeatureEnabled: Bool { get }
+    func fetchConsentAlignment() async -> NotificationConsentResult
 }
 
-class NotificationService: NSObject, NotificationServiceInterface, OSNotificationClickListener {
+class NotificationService: NSObject,
+                           NotificationServiceInterface,
+                           OSNotificationClickListener {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
+    private let userDefaults: UserDefaultsInterface
     var onClickAction: ((URL) -> Void)?
 
     init(environmentService: AppEnvironmentServiceInterface,
-         notificationCenter: UserNotificationCenterInterface) {
+         notificationCenter: UserNotificationCenterInterface,
+         userDefaults: UserDefaultsInterface) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
+        self.userDefaults = userDefaults
     }
 
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
@@ -63,9 +72,33 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
         false
     }
 
+    private var hasGivenConsent: Bool {
+        userDefaults.bool(forKey: .notificationsConsentGranted)
+    }
+
+    func acceptConsent() {
+        updateConsent(given: true)
+    }
+
+    func rejectConsent() {
+        updateConsent(given: false)
+    }
+
+    func toggleHasGivenConsent() {
+        var permission = hasGivenConsent
+        permission.toggle()
+        updateConsent(given: permission)
+    }
+
+    private func updateConsent(given: Bool) {
+        userDefaults.set(bool: given, forKey: .notificationsConsentGranted)
+        OneSignal.setConsentGiven(given)
+    }
+
     func requestPermissions(completion: (() -> Void)?) {
-        OneSignal.setConsentGiven(true)
-        OneSignal.Notifications.requestPermission({ _ in
+        updateConsent(given: true)
+        OneSignal.Notifications.requestPermission({ [weak self] accepted in
+            self?.updateConsent(given: accepted)
             completion?()
         }, fallbackToSettings: false)
     }
@@ -88,7 +121,30 @@ class NotificationService: NSObject, NotificationServiceInterface, OSNotificatio
     func handleAdditionalData(_ additionalData: [AnyHashable: Any]?) {
         guard let additionalData,
               let deeplinkStr = additionalData["deeplink"] as? String,
-              let deeplink = URL(string: deeplinkStr) else { return }
+              let deeplink = URL(string: deeplinkStr)
+        else { return }
         onClickAction?(deeplink)
     }
+
+    func fetchConsentAlignment() async -> NotificationConsentResult {
+        let isSubscribed = await permissionState == .authorized
+        switch (hasGivenConsent, isSubscribed) {
+        case (true, false):
+            return .misaligned(.consentGrantedNotificationsOff)
+        case (false, true):
+            return .misaligned(.consentNotGrantedNotificationsOn)
+        default:
+            return .aligned
+        }
+    }
+}
+
+enum NotificationConsentResult: Equatable {
+    case aligned
+    case misaligned(NotificationConsentMisalignment)
+}
+
+enum NotificationConsentMisalignment: Equatable {
+    case consentNotGrantedNotificationsOn
+    case consentGrantedNotificationsOff
 }

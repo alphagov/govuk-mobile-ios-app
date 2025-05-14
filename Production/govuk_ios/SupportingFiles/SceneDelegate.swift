@@ -40,4 +40,8 @@ class SceneDelegate: UIResponder,
         else { return }
         coordinator?.start(url: path)
     }
+
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        coordinator?.start(url: nil)
+    }
 }

@@ -22,6 +22,16 @@ extension UIAlertAction {
         )
     }
 
+    static func continueAction(handler: (() -> Void)? = nil) -> UIAlertAction {
+        .init(
+            title: String.common.localized("continue"),
+            style: .default,
+            handler: { _ in
+                handler?()
+            }
+        )
+    }
+
     static func destructive(title: String,
                             handler: (() -> Void)?) -> UIAlertAction {
         .init(

@@ -89,8 +89,9 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     func handleNotificationAlertAction() {
         guard [.authorized, .denied].contains(notificationsPermissionState),
-              urlOpener.openSettings()
+              urlOpener.openNotificationSettings()
         else { return }
+        notificationService.toggleHasGivenConsent()
         trackNavigationEvent(
             notificationAlertButtonTitle,
             external: false

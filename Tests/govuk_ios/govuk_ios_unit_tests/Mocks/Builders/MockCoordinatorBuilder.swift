@@ -54,7 +54,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _stubbedAnalyticsConsentCoordinator: BaseCoordinator?
     var _receivedAnalyticsConsentNavigationController: UINavigationController?
     var _receivedAnalyticsConsentDismissAction: (() -> Void)?
-
     override func analyticsConsent(navigationController: UINavigationController,
                                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedAnalyticsConsentNavigationController = navigationController
@@ -160,6 +159,23 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
                                                 completionAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedLocalAuthenticationOnboardingCompletion = completionAction
         return _stubbedLocalAuthenticationOnboardingCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedNotificationConsentCompletion: (() -> Void)?
+    var _stubbedNotificationConsentCoordinator: MockBaseCoordinator?
+    override func notificationConsent(navigationController: UINavigationController,
+                                      consentResult: NotificationConsentResult,
+                                      completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedNotificationConsentCompletion = completion
+        return _stubbedNotificationConsentCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedRelaunchCompletion: (() -> Void)?
+    var _stubbedRelaunchCoordinator: MockBaseCoordinator?
+    override func relaunch(navigationController: UINavigationController,
+                           completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedRelaunchCompletion = completion
+        return _stubbedRelaunchCoordinator ?? MockBaseCoordinator()
     }
 
     var _receivedReauthenticationCompletion: (() -> Void)?

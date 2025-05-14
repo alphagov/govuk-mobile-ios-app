@@ -11,7 +11,8 @@ struct AppLaunchServiceTests {
         let mockTopicsService = MockTopicsService()
         let sut = AppLaunchService(
             configService: mockConfigService,
-            topicService: mockTopicsService
+            topicService: mockTopicsService,
+            notificationService: MockNotificationService()
         )
         mockConfigService._stubbedFetchAppConfigResult = .failure(.remoteJson)
         let expectedTopics = TopicResponseItem.arrangeMultiple
@@ -32,7 +33,8 @@ struct AppLaunchServiceTests {
         let mockTopicsService = MockTopicsService()
         let sut = AppLaunchService(
             configService: mockConfigService,
-            topicService: mockTopicsService
+            topicService: mockTopicsService,
+            notificationService: MockNotificationService()
         )
         let expectedConfig = AppConfig.arrange
         mockConfigService._stubbedFetchAppConfigResult = .success(expectedConfig)

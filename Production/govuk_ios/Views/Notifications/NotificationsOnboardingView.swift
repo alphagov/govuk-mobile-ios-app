@@ -3,62 +3,6 @@ import SwiftUI
 import UIComponents
 import GOVKit
 
-class NotificationsOnboardingViewModel: ObservableObject {
-    let urlOpener: URLOpener
-    let analyticsService: AnalyticsServiceInterface
-    let completeAction: () -> Void
-    let dismissAction: () -> Void
-
-    init(urlOpener: URLOpener,
-         analyticsService: AnalyticsServiceInterface,
-         completeAction: @escaping () -> Void,
-         dismissAction: @escaping () -> Void) {
-        self.urlOpener = urlOpener
-        self.analyticsService = analyticsService
-        self.completeAction = completeAction
-        self.dismissAction = dismissAction
-    }
-
-    let title: String = String.notifications.localized(
-        "onboardingTitle"
-    )
-    let body: String = String.notifications.localized("onboardingBody")
-    let privacyPolicyLinkTitle: String = String.notifications.localized(
-        "onboardingPrivacyButtonTitle"
-    )
-
-    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        let title = String.notifications.localized("onboardingAcceptButtonTitle")
-        return .init(
-            localisedTitle: title,
-            action: { [weak self] in
-                self?.trackButtonActionEvent(title: title)
-                self?.completeAction()
-            }
-        )
-    }
-
-    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        let title = String.notifications.localized("onboardingSkipButtonTitle")
-        return .init(
-            localisedTitle: title,
-            action: { [weak self] in
-                self?.trackButtonActionEvent(title: title)
-                self?.dismissAction()
-            }
-        )
-    }
-
-    func openPrivacyPolicy() {
-        urlOpener.openPrivacyPolicy()
-    }
-
-    private func trackButtonActionEvent(title: String) {
-        let event = AppEvent.buttonNavigation(text: title, external: false)
-        analyticsService.track(event: event)
-    }
-}
-
 struct NotificationsOnboardingView: View {
     @StateObject private var viewModel: NotificationsOnboardingViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -119,7 +63,7 @@ struct NotificationsOnboardingView: View {
 
     private var scrollView: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 0) {
                 if verticalSizeClass == .regular {
                     Spacer(minLength: 32)
                 }
@@ -128,20 +72,21 @@ struct NotificationsOnboardingView: View {
                 }
                 Text(viewModel.title)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(Font(UIFont.govUK.largeTitleBold))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .accessibilityLabel(Text(viewModel.title))
-                    .padding(.top, verticalSizeClass == .compact ? 32 : 0)
+                    .padding(.top, verticalSizeClass == .compact ? 32 : 24)
                     .padding([.trailing, .leading], 16)
                     .accessibilityAddTraits(.isHeader)
                     .accessibilitySortPriority(1)
                 Text(viewModel.body)
+                    .font(Font(UIFont.govUK.body))
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                     .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(viewModel.body))
-                    .padding([.top, .leading, .trailing], 16)
+                    .padding([.leading, .trailing], 16)
+                    .padding(.top, 24)
                     .accessibilitySortPriority(0)
                 HStack(alignment: .center) {
                     Text(viewModel.privacyPolicyLinkTitle)
@@ -155,7 +100,7 @@ struct NotificationsOnboardingView: View {
                         .foregroundColor(Color(UIColor.govUK.text.link))
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 16)
+                .padding(.top, 24)
                 .onTapGesture {
                     viewModel.openPrivacyPolicy()
                 }

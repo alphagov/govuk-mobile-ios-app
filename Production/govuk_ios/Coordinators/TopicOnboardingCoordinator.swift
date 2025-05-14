@@ -35,7 +35,7 @@ class TopicOnboardingCoordinator: BaseCoordinator {
                 guard let self = self else { return }
                 let updatedTopics = self.topicsService.fetchAll()
 
-                guard !topics.isEmpty
+                guard !updatedTopics.isEmpty
                 else { return self.dismissAction() }
                 setViewController(topics: updatedTopics)
             }

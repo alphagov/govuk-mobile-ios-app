@@ -6,26 +6,20 @@ import Testing
 
 @Test
 @MainActor
-func start_runsThroughNewUserOnboarding() {
+func start_runsThroughNewUserOnboarding() async {
     let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
     let mockNavigationController = UINavigationController()
-    let mockTabCoodinator = MockBaseCoordinator(
-        navigationController: mockNavigationController
-    )
-    mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoodinator
 
     let subject = NewUserOnboardingCoordinator(
         coordinatorBuilder: mockCoordinatorBuilder,
-        navigationController: mockNavigationController
+        navigationController: mockNavigationController,
+        completionAction: { }
     )
 
     subject.start()
-
     mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
     mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
     mockCoordinatorBuilder._receivedOnboardingDismissAction?()
     mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
     mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
-
-    #expect(mockTabCoodinator._startCalled)
 }

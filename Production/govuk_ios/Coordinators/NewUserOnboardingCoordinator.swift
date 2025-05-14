@@ -3,10 +3,13 @@ import Foundation
 
 class NewUserOnboardingCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
+    private let completionAction: () -> Void
 
     init(coordinatorBuilder: CoordinatorBuilder,
-         navigationController: UINavigationController) {
+         navigationController: UINavigationController,
+         completionAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
+        self.completionAction = completionAction
         super.init(navigationController: navigationController)
     }
 
@@ -58,16 +61,9 @@ class NewUserOnboardingCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.notificationOnboarding(
             navigationController: root,
             completion: { [weak self] in
-                self?.startTabs(url: url)
+                self?.completionAction()
             }
         )
         start(coordinator)
-    }
-
-    private func startTabs(url: URL?) {
-        let coordinator = coordinatorBuilder.tab(
-            navigationController: root
-        )
-        start(coordinator, url: url)
     }
 }

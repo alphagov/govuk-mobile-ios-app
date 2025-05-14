@@ -19,7 +19,8 @@ class AuthenticationOnboardingCoordinatorTests {
             authenticationOnboardingService: mockAuthenticationOnboardingService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
-            completionAction: { }
+            completionAction: { },
+            newUserAction: nil
         )
         sut.start(url: nil)
 
@@ -42,7 +43,8 @@ class AuthenticationOnboardingCoordinatorTests {
                 authenticationOnboardingService: mockAuthenticationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 coordinatorBuilder: mockCoordinatorBuilder,
-                completionAction: { continuation.resume(returning: true) }
+                completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil
             )
             sut.start(url: nil)
         }
@@ -66,7 +68,8 @@ class AuthenticationOnboardingCoordinatorTests {
                 authenticationOnboardingService: mockAuthenticationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 coordinatorBuilder: mockCoordinatorBuilder,
-                completionAction: { continuation.resume(returning: true) }
+                completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil
             )
             sut.start(url: nil)
         }
@@ -89,7 +92,8 @@ class AuthenticationOnboardingCoordinatorTests {
             authenticationOnboardingService: mockAuthenticationOnboardingService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
-            completionAction: { }
+            completionAction: { },
+            newUserAction: nil
         )
 
         sut.showError(.genericError)
@@ -110,7 +114,8 @@ class AuthenticationOnboardingCoordinatorTests {
             authenticationOnboardingService: mockAuthenticationOnboardingService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
-            completionAction: { }
+            completionAction: { },
+            newUserAction: nil
         )
 
         sut.showError(.loginFlow(.userCancelled))
@@ -131,7 +136,8 @@ class AuthenticationOnboardingCoordinatorTests {
             authenticationOnboardingService: mockAuthenticationOnboardingService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
-            completionAction: { }
+            completionAction: { },
+            newUserAction: nil
         )
 
         sut.showError(.genericError)

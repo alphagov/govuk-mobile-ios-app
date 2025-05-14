@@ -26,8 +26,8 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -56,8 +56,8 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -86,8 +86,8 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -116,8 +116,38 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
+                handleError: { _ in }
+            )
+            sut.start(url: nil)
+        }
+
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
+        #expect(completion)
+    }
+
+    @Test @MainActor
+    func start_newUser_shouldntEncryptToken_callsNewUserAction() async {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: false)
+        )
+        let newWindow = UIWindow(frame: UIScreen.main.bounds)
+        newWindow.rootViewController = mockNavigationController
+        newWindow.makeKeyAndVisible()
+        let completion = await withCheckedContinuation { continuation in
+            let sut = AuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                completionAction: { },
+                newUserAction: { continuation.resume(returning: true) },
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -147,8 +177,8 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -178,8 +208,8 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { error in
                     authError = error
                     continuation.resume(returning: false)

@@ -5,20 +5,20 @@ import Authentication
 class AuthenticationCoordinator: BaseCoordinator {
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
-    private let coordinatorBuilder: CoordinatorBuilder
     private let completionAction: () -> Void
+    private let newUserAction: (() -> Void)?
     private let handleError: (AuthenticationError) -> Void
 
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
-         coordinatorBuilder: CoordinatorBuilder,
          completionAction: @escaping () -> Void,
+         newUserAction: (() -> Void)?,
          handleError: @escaping (AuthenticationError) -> Void) {
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
-        self.coordinatorBuilder = coordinatorBuilder
         self.completionAction = completionAction
+        self.newUserAction = newUserAction
         self.handleError = handleError
         super.init(navigationController: navigationController)
     }
@@ -46,10 +46,7 @@ class AuthenticationCoordinator: BaseCoordinator {
                 }
             } else {
                 DispatchQueue.main.async {
-                    let coordinator = self.coordinatorBuilder.newUserOnboardingCoordinator(
-                        navigationController: self.root
-                    )
-                    coordinator.start(url: nil)
+                    self.newUserAction?()
                 }
             }
         case .failure(let error):

@@ -27,22 +27,22 @@ class NotificationsOnboardingViewModel: ObservableObject {
     )
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        let title = String.notifications.localized("onboardingAcceptButtonTitle")
+        let localTitle = String.notifications.localized("onboardingAcceptButtonTitle")
         return .init(
-            localisedTitle: title,
+            localisedTitle: localTitle,
             action: { [weak self] in
-                self?.trackButtonActionEvent(title: title)
+                self?.trackButtonActionEvent(title: localTitle)
                 self?.completeAction()
             }
         )
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        let title = String.notifications.localized("onboardingSkipButtonTitle")
+        let localTitle = String.notifications.localized("onboardingSkipButtonTitle")
         return .init(
-            localisedTitle: title,
+            localisedTitle: localTitle,
             action: { [weak self] in
-                self?.trackButtonActionEvent(title: title)
+                self?.trackButtonActionEvent(title: localTitle)
                 self?.dismissAction()
             }
         )

@@ -7,29 +7,13 @@ import Testing
 @Suite
 class NotificationServiceTests {
 //    @Test
-//    func fetchSlides_returnsExpectedSlides() async throws {
-//        let sut = NotificationService(
-//            environmentService: MockAppEnvironmentService(),
-//            notificationCenter: MockUserNotificationCenter()
-//        )
-//        let result = await withCheckedContinuation { continuation in
-//            sut.fetchSlides(
-//                completion: {
-//                    continuation.resume(returning: $0)
-//                }
-//            )
-//        }
-//        let slides = try result.get()
-//        #expect(slides.count == 1)
-//    }
-
-//    @Test
 //    func shouldRequestPermissions_statusNotDetermined_returnsTrue() async {
 //        let mockUserNotificationCenter = MockUserNotificationCenter()
 //        mockUserNotificationCenter._stubbedAuthorizationStatus = .notDetermined
 //        let sut = NotificationService(
 //            environmentService: MockAppEnvironmentService(),
-//            notificationCenter: mockUserNotificationCenter
+//            notificationCenter: mockUserNotificationCenter,
+//            userDefaults: MockUserDefaults()
 //        )
 //        #expect(await sut.shouldRequestPermission)
 //    }

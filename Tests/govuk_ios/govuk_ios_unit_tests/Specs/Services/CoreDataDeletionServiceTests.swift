@@ -20,10 +20,10 @@ class CoreDataDeletionServiceTests {
         entity2.name = "TestEntity2"
         entity2.managedObjectClassName = NSStringFromClass(NSManagedObject.self)
         mockCoreDataRepository = MockCoreDataRepository(entities: [entity1, entity2])
-        let object1 = NSEntityDescription.insertNewObject(
+        NSEntityDescription.insertNewObject(
             forEntityName: "TestEntity1", into: mockCoreDataRepository.viewContext
         )
-        let object2 = NSEntityDescription.insertNewObject(
+        NSEntityDescription.insertNewObject(
             forEntityName: "TestEntity2", into: mockCoreDataRepository.viewContext
         )
         try mockCoreDataRepository.viewContext.save()

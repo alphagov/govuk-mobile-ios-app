@@ -43,9 +43,7 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
                     await self?.authenticateAction()
                 }
             },
-            dismissAction: { [weak self] in
-                self?.finishCoordination()
-            }
+            dismissAction: { }
         )
         set(
             onboardingModule.viewController,

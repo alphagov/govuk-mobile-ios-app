@@ -221,7 +221,7 @@ class CoordinatorBuilder {
         NotificationOnboardingCoordinator(
             navigationController: navigationController,
             notificationService: container.notificationService.resolve(),
-            analyticsService: container.onboardingAnalyticsService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
             completion: completion
         )
     }

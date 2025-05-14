@@ -49,7 +49,7 @@ extension Onboarding {
             slide: .init(
                 image: "onboarding_stay_updated",
                 title: String.notifications.localized("onboardingTitle"),
-                body: String.notifications.localized("onboardingBody"),
+                body: String.notifications.localized("onboardingSettingsBody"),
                 name: "NotificationsOnboardingScreen"
             ),
             primaryButtonTitle: String.notifications.localized("onboardingAcceptButtonTitle"),
@@ -57,12 +57,6 @@ extension Onboarding {
             secondaryButtonTitle: String.notifications.localized("onboardingSkipButtonTitle"),
             secondaryButtonAccessibilityHint: nil
         )
-    }
-
-    static var notificationSlides: [any OnboardingSlideViewModelInterface] {
-        [
-            notificationSlide
-        ]
     }
 
     static var authenticationSlide: OnboardingSlideImageViewModel {

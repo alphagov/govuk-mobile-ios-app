@@ -30,11 +30,18 @@ class TopicOnboardingCoordinator: BaseCoordinator {
         else { return dismissAction() }
 
         let topics = topicsService.fetchAll()
+        if topics.isEmpty {
+            topicsService.fetchRemoteList { [weak self] _ in
+                guard let self = self else { return }
+                let updatedTopics = self.topicsService.fetchAll()
 
-        guard !topics.isEmpty
-        else { return dismissAction() }
-
-        setViewController(topics: topics)
+                guard !topics.isEmpty
+                else { return self.dismissAction() }
+                setViewController(topics: updatedTopics)
+            }
+        } else {
+            setViewController(topics: topics)
+        }
     }
 
     private func setViewController(topics: [Topic]) {

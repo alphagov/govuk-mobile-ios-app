@@ -5,7 +5,7 @@ import Onboarding
 
 import OneSignalFramework
 
-protocol NotificationServiceInterface: OnboardingSlideProvider {
+protocol NotificationServiceInterface {
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     func requestPermissions(completion: (() -> Void)?)
     func addClickListener(onClickAction: @escaping (URL) -> Void)
@@ -101,12 +101,6 @@ class NotificationService: NSObject,
             self?.updateConsent(given: accepted)
             completion?()
         }, fallbackToSettings: false)
-    }
-
-    func fetchSlides(
-        completion: @escaping (Result<[any OnboardingSlideViewModelInterface], Error>) -> Void
-    ) {
-        completion(.success(Onboarding.notificationSlides))
     }
 
     func addClickListener(onClickAction: @escaping (URL) -> Void) {

@@ -14,7 +14,6 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationsAction: (() -> Void)? { get set }
     func updateNotificationPermissionState()
     var signoutAction: (() -> Void)? { get set }
-    func setEmail()
 }
 
 // swiftlint:disable:next type_body_length
@@ -99,15 +98,6 @@ class SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    func setEmail() {
-        Task {
-            let email = await self.authenticationService.userEmail
-            DispatchQueue.main.async {
-                self.userEmail = email
-            }
-        }
-    }
-
     private var hasAcceptedAnalytics: Bool {
         switch analyticsService.permissionState {
         case .denied, .unknown:
@@ -119,6 +109,12 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     var listContent: [GroupedListSection] {
         getGroupedList()
+    }
+
+    private func setEmail() {
+        Task {
+            userEmail = await self.authenticationService.userEmail
+        }
     }
 
     private func getGroupedList() -> [GroupedListSection] {

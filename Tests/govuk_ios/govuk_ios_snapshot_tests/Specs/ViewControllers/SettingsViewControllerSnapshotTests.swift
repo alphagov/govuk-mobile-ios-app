@@ -34,11 +34,13 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
-            viewController: hostingViewController,
-            mode: .light,
-            prefersLargeTitles: true
-        )
+        DispatchQueue.main.async {
+            self.VerifySnapshotInNavigationController(
+                viewController: hostingViewController,
+                mode: .light,
+                prefersLargeTitles: true
+            )
+        }
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
@@ -50,7 +52,6 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
         let authenticationService = MockAuthenticationService()
         authenticationService._stubbedIsSignedIn = true
         authenticationService._stubbedUserEmail = "test@example.com"
-
 
         let viewModel = SettingsViewModel(
             analyticsService: MockAnalyticsService(),
@@ -68,11 +69,13 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
-            viewController: hostingViewController,
-            mode: .dark,
-            prefersLargeTitles: true
-        )
+        DispatchQueue.main.async {
+            self.VerifySnapshotInNavigationController(
+                viewController: hostingViewController,
+                mode: .dark,
+                prefersLargeTitles: true
+            )
+        }
         // This is here to meet code coverage requirements
         viewModel.scrollToTop = true
     }
@@ -96,6 +99,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             notificationService: notificationService,
             notificationCenter: .default
         )
+
         let settingsContentView = SettingsView(
             viewModel: viewModel
         )
@@ -103,11 +107,13 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
-            viewController: hostingViewController,
-            mode: .light,
-            prefersLargeTitles: true
-        )
+        DispatchQueue.main.async {
+            self.VerifySnapshotInNavigationController(
+                viewController: hostingViewController,
+                mode: .light,
+                prefersLargeTitles: true
+            )
+        }
     }
 
     func test_loadInNavigationController_notificationsFeatureEnabled_dark_rendersCorrectly() {
@@ -137,11 +143,13 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             rootView: settingsContentView,
             statusBarStyle: .darkContent
         )
-        VerifySnapshotInNavigationController(
-            viewController: hostingViewController,
-            mode: .dark,
-            prefersLargeTitles: true
-        )
+        DispatchQueue.main.async {
+            self.VerifySnapshotInNavigationController(
+                viewController: hostingViewController,
+                mode: .dark,
+                prefersLargeTitles: true
+            )
+        }
     }
 
     func test_loadInNavigationController_preview_rendersCorrectly() {
@@ -170,6 +178,7 @@ class GroupedListViewModel: SettingsViewModelInterface {
     var title: String = "Settings"
     var listContent: [GroupedListSection] = GroupedListSection_Previews.previewContent.dropLast()
     var scrollToTop: Bool = false
+    func setEmail() { }
     func trackScreen(screen: any TrackableScreen) {
         // Do Nothing
     }

@@ -20,7 +20,7 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .light,
-            navBarHidden: true,
+            navBarHidden: true
         )
     }
 
@@ -37,7 +37,7 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         VerifySnapshotInNavigationController(
             viewController: viewController,
             mode: .dark,
-            navBarHidden: true,
+            navBarHidden: true
         )
     }
 }

@@ -40,6 +40,11 @@ class SettingsViewModelTests {
         #expect(sut.title == "Settings")
     }
 
+    @Test @MainActor
+    func userEmail_isCorrect() {
+        #expect(sut.userEmail == "test@example.com")
+    }
+
     @Test
     func listContent_isCorrect() throws {
         try #require(sut.listContent.count == 5)

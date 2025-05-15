@@ -17,7 +17,6 @@ struct NotificationsOnboardingView: View {
             buttonStack
         }
         .accessibilityElement(children: .contain)
-        .navigationBarHidden(true)
     }
 
     @ViewBuilder

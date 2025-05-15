@@ -95,7 +95,7 @@ struct ViewControllerBuilderTests {
             completeAction: {}
         )
 
-        #expect(result is HostingViewController<NotificationSettingsView>)
+        #expect(result is HostingViewController<NotificationsOnboardingView>)
     }
 
     @Test

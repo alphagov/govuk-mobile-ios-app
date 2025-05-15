@@ -10,6 +10,7 @@ class NotificationsOnboardingViewModel: ObservableObject {
 
     init(urlOpener: URLOpener,
          analyticsService: AnalyticsServiceInterface,
+         showImage: Bool,
          completeAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.urlOpener = urlOpener

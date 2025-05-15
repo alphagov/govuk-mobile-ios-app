@@ -4,6 +4,7 @@ import SwiftUI
 import Factory
 import GOVKit
 
+// swiftlint:disable:next type_body_length
 class ViewControllerBuilder {
     @MainActor
     func launch(analyticsService: AnalyticsServiceInterface,
@@ -36,7 +37,8 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
+    func home(dependencies: HomeDependencies,
+              actions: HomeActions) -> UIViewController {
         let viewModel = HomeViewModel(
             analyticsService: dependencies.analyticsService,
             configService: dependencies.configService,
@@ -120,18 +122,39 @@ class ViewControllerBuilder {
     func notificationSettings(analyticsService: AnalyticsServiceInterface,
                               notificationService: NotificationServiceInterface,
                               completeAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = NotificationSettingsViewModel(
-            notificationService: notificationService,
+        let viewModel = NotificationsOnboardingViewModel(
+            urlOpener: UIApplication.shared,
             analyticsService: analyticsService,
-            completeAction: completeAction
+            completeAction: { },
+            dismissAction: { }
         )
-        let view = NotificationSettingsView(
-            viewModel: viewModel,
-            analyticsService: analyticsService
+        let view = NotificationsOnboardingView(
+            viewModel: viewModel
         )
         let viewController = HostingViewController(rootView: view)
         viewController.navigationItem.largeTitleDisplayMode = .never
         viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+
+    @MainActor
+    func notificationOnboarding(analyticsService: AnalyticsServiceInterface,
+                                notificationService: NotificationServiceInterface,
+                                completeAction: @escaping () -> Void,
+                                dismissAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = NotificationsOnboardingViewModel(
+            urlOpener: UIApplication.shared,
+            analyticsService: analyticsService,
+            completeAction: completeAction,
+            dismissAction: dismissAction
+        )
+        let view = NotificationsOnboardingView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
         return viewController
     }
 

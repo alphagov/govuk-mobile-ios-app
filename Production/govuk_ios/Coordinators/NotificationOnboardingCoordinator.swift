@@ -32,17 +32,30 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     }
 
     private func setOnboarding() {
-        let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: UIApplication.shared,
+//        let viewModel = NotificationsOnboardingViewModel(
+//            urlOpener: UIApplication.shared,
+//            analyticsService: analyticsService,
+//            completeAction: { [weak self] in
+//                self?.request()
+//            }, dismissAction: { [weak self] in
+//                self?.finishCoordination()
+//            }
+//        )
+//        let view = NotificationsOnboardingView(viewModel: viewModel)
+//        let viewController = HostingViewController(
+//            rootView: view,
+//            navigationBarHidden: true
+//        )
+        let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: analyticsService,
+            notificationService: notificationService,
             completeAction: { [weak self] in
                 self?.request()
-            }, dismissAction: { [weak self] in
+            },
+            dismissAction: { [weak self] in
                 self?.finishCoordination()
             }
         )
-        let view = NotificationsOnboardingView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
         set(viewController)
     }
 

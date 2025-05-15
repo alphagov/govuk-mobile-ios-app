@@ -8,14 +8,12 @@ import GOVKit
 @MainActor
 class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: MockURLOpener(),
+        let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
+            notificationService: MockNotificationService(),
             completeAction: { },
             dismissAction: { }
         )
-        let view = NotificationsOnboardingView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
 
         VerifySnapshotInNavigationController(
             viewController: viewController,
@@ -25,14 +23,40 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: MockURLOpener(),
+        let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
+            notificationService: MockNotificationService(),
             completeAction: { },
             dismissAction: { }
         )
-        let view = NotificationsOnboardingView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .dark,
+            navBarHidden: true,
+        )
+    }
+
+    func test_notificationSettings_light_rendersCorrectly() {
+        let viewController = ViewControllerBuilder().notificationSettings(
+            analyticsService: MockAnalyticsService(),
+            notificationService: MockNotificationService(),
+            completeAction: { }
+        )
+
+        VerifySnapshotInNavigationController(
+            viewController: viewController,
+            mode: .light,
+            navBarHidden: true,
+        )
+    }
+
+    func test_notificationSettings_dark_rendersCorrectly() {
+        let viewController = ViewControllerBuilder().notificationSettings(
+            analyticsService: MockAnalyticsService(),
+            notificationService: MockNotificationService(),
+            completeAction: { }
+        )
 
         VerifySnapshotInNavigationController(
             viewController: viewController,

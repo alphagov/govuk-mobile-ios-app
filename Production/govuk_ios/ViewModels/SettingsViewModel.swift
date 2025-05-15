@@ -24,7 +24,6 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let versionProvider: AppVersionProvider
     private let deviceInformationProvider: DeviceInformationProviderInterface
     private let authenticationService: AuthenticationServiceInterface
-    @Published var userEmail: String?
     @Published var scrollToTop: Bool = false
     @Published var displayNotificationSettingsAlert: Bool = false
     @Published private(set) var notificationsPermissionState: NotificationPermissionState
@@ -36,6 +35,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         "notificationAlertPrimaryButtonTitle"
     )
     var signoutAction: (() -> Void)?
+    @Published var userEmail: String?
 
     init(analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener,

@@ -8,10 +8,11 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     @Published var localAuthorityAddressList: LocalAuthoritiesList?
     @Published var postCode: String = ""
     @Published var error: PostcodeError?
-    @Published var ambiguoseAuthorities: [LocalAuthority] = []
+    @Published var ambiguousAuthorities: [LocalAuthority] = []
     @Published var textFieldColour: UIColor = UIColor.govUK.strokes.listDivider
     private let analyticsService: AnalyticsServiceInterface
     let dismissAction: () -> Void
+    let resolveAmbiguityAction: ([LocalAuthority], String) -> Void
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
     )
@@ -22,7 +23,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         "localAuthorityPostcodeEntryViewTitle"
     )
     let postcodeEntryViewExampleText: String = String.localAuthority.localized(
-        "localAthorityPostcodeEntryViewExampleText"
+        "localAuthorityPostcodeEntryViewExampleText"
     )
     let postcodeEntryViewDescriptionTitle: String = String.localAuthority.localized(
         "localAuthorityPostcodeEntryViewDescriptionTitle"
@@ -36,9 +37,11 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
 
     init(service: LocalAuthorityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         resolveAmbiguityAction: @escaping ([LocalAuthority], String) -> Void,
          dismissAction: @escaping () -> Void) {
         self.service = service
         self.analyticsService = analyticsService
+        self.resolveAmbiguityAction = resolveAmbiguityAction
         self.dismissAction = dismissAction
     }
 
@@ -54,15 +57,14 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         }
     }
 
-    private func fetchAuthoritiesBySlug(slugs: [String]) {
-        for slug in slugs {
-            service.fetchAuthoritiesBySlug(slug: slug) {[weak self] result in
-                switch result {
-                case .success(let response as LocalAuthority):
-                    self?.ambiguoseAuthorities.append(response)
-                default:
-                    break
-                }
+    private func fetchAuthoritiesWithSlugs(slugs: [String]) {
+        service.fetchLocalAuthorities(slugs: slugs) { [weak self] result in
+            switch result {
+            case .success(let localAuthorities):
+                guard let self = self else { return }
+                self.resolveAmbiguityAction(localAuthorities, self.postCode)
+            case .failure(let error):
+                print("LOCAL AUTHORITY ERRRO: \(error)")
             }
         }
     }
@@ -80,11 +82,8 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     }
 
     private func filterSlugs(localAuthorities: [LocalAuthorityAddress]) -> [String] {
-        var slugs: [String] = []
-        for slug in localAuthorities {
-            slugs.append(slug.slug)
-        }
-        return Array(Set(slugs))
+        let uniqueSlugs = Set(localAuthorities.map { $0.slug })
+        return Array(uniqueSlugs)
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -131,7 +130,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
                 self?.localAuthorityAddressList = response
                 guard let uniqueSlugs = self?.filterSlugs(localAuthorities: response.addresses)
                 else { return }
-                self?.fetchAuthoritiesBySlug(slugs: uniqueSlugs)
+                self?.fetchAuthoritiesWithSlugs(slugs: uniqueSlugs)
             case .success(let response as LocalErrorMessage):
                 self?.populateErrorMessage(error: response)
             default:

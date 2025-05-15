@@ -3,7 +3,7 @@ import Testing
 @testable import govuk_ios
 
 @Suite
-struct LocalAuthorityExplainerViewTests {
+struct LocalAuthorityExplainerViewModelTests {
 
     @Test
     func explainerViewPrimaryButtonViewModel_action_trackNavigationEvent() async throws {

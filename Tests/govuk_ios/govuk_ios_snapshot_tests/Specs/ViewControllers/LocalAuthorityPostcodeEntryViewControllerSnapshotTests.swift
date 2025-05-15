@@ -28,6 +28,7 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         let viewModel = LocalAuthorityPostecodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         let view = LocalAuthorityPostcodeEntryView(
@@ -47,6 +48,7 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         let viewModel = LocalAuthorityPostecodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         let view = LocalAuthorityPostcodeEntryView(
@@ -65,6 +67,7 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
         let viewModel = LocalAuthorityPostecodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         let view = LocalAuthorityPostcodeEntryView(

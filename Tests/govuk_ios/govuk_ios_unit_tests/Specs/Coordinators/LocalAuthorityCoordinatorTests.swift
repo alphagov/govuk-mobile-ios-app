@@ -71,7 +71,7 @@ struct LocalAuthorityCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             dismissed: {}
         )
-        sut.navigateToPostcodeEntryView()
+        sut.start()
         #expect(navigationController.viewControllers.first == expectedViewController)
     }
 

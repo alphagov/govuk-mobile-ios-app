@@ -218,6 +218,9 @@ class AppCoordinator: BaseCoordinator {
         super.childDidFinish(child)
         if child is TabCoordinator {
             startSignedOutCoordinator(url: nil)
+            tabCoordinator = coordinatorBuilder.tab(
+                navigationController: root
+            )
         }
     }
 }

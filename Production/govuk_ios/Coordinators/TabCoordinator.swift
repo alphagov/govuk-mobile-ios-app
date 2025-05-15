@@ -84,8 +84,6 @@ class TabCoordinator: BaseCoordinator,
     private func showTabsIfRequired() {
         let viewControllers = tabController.viewControllers ?? []
         guard viewControllers.isEmpty else {
-            set([tabController], animated: true)
-            selectTabIndex(for: homeCoordinator.root)
             return
         }
 

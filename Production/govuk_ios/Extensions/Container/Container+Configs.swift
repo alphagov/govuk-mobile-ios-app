@@ -42,12 +42,10 @@ extension Container {
 
     var openSecureStoreConfiguration: Factory<SecureStorageConfiguration> {
         Factory(self) {
-            let accessControlLevel = SecureStorageConfiguration.AccessControlLevel.open
-            let config = SecureStorageConfiguration(
+            SecureStorageConfiguration(
                 id: "openSecureStorage",
-                accessControlLevel: accessControlLevel
+                accessControlLevel: SecureStorageConfiguration.AccessControlLevel.open
             )
-            return config
         }
     }
 }

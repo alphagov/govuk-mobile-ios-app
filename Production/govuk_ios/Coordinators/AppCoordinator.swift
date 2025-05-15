@@ -148,7 +148,8 @@ class AppCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
-    private func startAuthenticationOnboardingCoordinator(url: URL?, newUserAction: (() -> Void)?) {
+    private func startAuthenticationOnboardingCoordinator(url: URL?,
+                                                          newUserAction: (() -> Void)?) {
         let coordinator = coordinatorBuilder.authenticationOnboarding(
             navigationController: root,
             newUserAction: newUserAction,

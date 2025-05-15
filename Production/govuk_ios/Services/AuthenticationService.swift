@@ -75,10 +75,8 @@ class AuthenticationService: AuthenticationServiceInterface {
             idToken: idToken
         )
         switch returningUserResult {
-        case .success(true):
-            return .success(.init(returningUser: true))
-        case .success(false):
-            return .success(.init(returningUser: false))
+        case .success(let isReturning):
+            return .success(.init(returningUser: isReturning))
         case .failure(let error):
             setTokens()
             return .failure(.returningUserService(error))

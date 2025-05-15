@@ -27,11 +27,32 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.localAuthorityPostcodeEntryView(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
+            resolveAmbiguityAction: { [weak self] localAuthorities, postCode in
+                self?.navigateToAmbiguousAuthorityView(
+                    localAuthorities: localAuthorities,
+                    postCode: postCode
+                )
+            },
             dismissAction: { [weak self] in
                 self?.dismissModal()
             }
         )
         set(viewController, animated: true)
+    }
+
+    private func navigateToAmbiguousAuthorityView(localAuthorities: [LocalAuthority],
+                                                  postCode: String) {
+        let viewController = viewControllerBuilder.ambiguousAuthoritySelectionView(
+            analyticsService: analyticsService,
+            localAuthorityService: localAuthorityService,
+            localAuthorities: localAuthorities,
+            postCode: postCode,
+            selectAddressAction: { },
+            dismissAction: { [weak self] in
+                self?.dismissModal()
+            }
+        )
+        push(viewController, animated: true)
     }
 
     private func dismissModal() {

@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 import GOVKit
 
- class LocalAuthorityServiceCoordinator: BaseCoordinator {
+class LocalAuthorityServiceCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let localAuthorityService: LocalAuthorityServiceInterface
@@ -36,15 +36,12 @@ import GOVKit
         set(viewController, animated: true)
     }
 
-    func navigateToPostcodeEntryView() {
-        let viewController = viewControllerBuilder.localAuthorityPostcodeEntryView(
-            analyticsService: analyticsService,
-            localAuthorityService: localAuthorityService,
-            dismissAction: { [weak self] in
-                self?.dismissModal()
-            }
+    private func navigateToPostcodeEntryView() {
+        let coord = coordinatorBuilder.editLocalAuthority(
+            navigationController: self.root,
+            dismissAction: dismissed
         )
-        push(viewController, animated: true)
+        self.start(coord)
     }
 
     private func dismissModal() {
@@ -56,8 +53,8 @@ import GOVKit
         )
     }
 
-     override func finish() {
-         super.finish()
-         dismissed()
-     }
- }
+    override func finish() {
+        super.finish()
+        dismissed()
+    }
+}

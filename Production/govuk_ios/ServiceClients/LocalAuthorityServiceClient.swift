@@ -6,7 +6,14 @@ typealias FetchLocalAuthorityResult = Result<LocalAuthorityType, LocalAuthorityE
 protocol LocalAuthorityServiceClientInterface {
     func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion)
 
-    func fetchAuthoritiesBySlug(slug: String, completion: @escaping FetchLocalAuthorityCompletion)
+    func fetchLocalAuthority(
+        slug: String,
+        completion: @escaping FetchLocalAuthorityCompletion
+    )
+    func fetchLocalAuthorities(
+        slugs: [String],
+        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void
+    )
 }
 
 enum LocalAuthorityError: LocalizedError {
@@ -29,11 +36,41 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
         }
     }
 
-    func fetchAuthoritiesBySlug(slug: String,
-                                completion: @escaping FetchLocalAuthorityCompletion) {
+    func fetchLocalAuthority(
+        slug: String,
+        completion: @escaping FetchLocalAuthorityCompletion) {
         serviceClient.send(request: .localAuthoritySlug(slug: slug)) { result in
             completion(mapResult(result))
         }
+    }
+
+    func fetchLocalAuthorities(
+        slugs: [String],
+        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void) {
+            var results: [LocalAuthority?] = []
+            var localAuthError: LocalAuthorityError?
+            let group = DispatchGroup()
+
+            for slug in slugs {
+                group.enter()
+                fetchLocalAuthority(slug: slug) { result in
+                    switch result {
+                    case .success(let localAuthority):
+                        results.append(localAuthority as? LocalAuthority)
+                    case .failure(let error):
+                        localAuthError = error
+                    }
+                    group.leave()
+                }
+            }
+
+            group.notify(queue: .main) {
+                if let localAuthError {
+                    completion(.failure(localAuthError))
+                } else {
+                    completion(.success(results.compactMap { $0 }))
+                }
+            }
     }
 
     private func mapResult(

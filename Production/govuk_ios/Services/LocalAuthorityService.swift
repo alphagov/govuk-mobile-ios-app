@@ -3,7 +3,12 @@ import Foundation
 protocol LocalAuthorityServiceInterface {
     func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion)
     func fetchSavedLocalAuthority() -> [LocalAuthorityItem]
-    func fetchAuthoritiesBySlug(slug: String, completion: @escaping FetchLocalAuthorityCompletion)
+    func fetchLocalAuthority(slug: String, completion: @escaping FetchLocalAuthorityCompletion)
+    func fetchLocalAuthorities(
+        slugs: [String],
+        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void
+    )
+    func saveLocalAuthority(_ localAuthority: LocalAuthority)
 }
 
 class LocalAuthorityService: LocalAuthorityServiceInterface {
@@ -33,11 +38,26 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
         repository.fetchLocalAuthority()
     }
 
-    func fetchAuthoritiesBySlug(slug: String, completion: @escaping FetchLocalAuthorityCompletion) {
-        serviceClient.fetchAuthoritiesBySlug(slug: slug) { result in
+    func fetchLocalAuthority(slug: String,
+                             completion: @escaping FetchLocalAuthorityCompletion) {
+        serviceClient.fetchLocalAuthority(slug: slug) { result in
             switch result {
             case .success(let authority):
                 completion(.success(authority))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func fetchLocalAuthorities(
+        slugs: [String],
+        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void
+    ) {
+        serviceClient.fetchLocalAuthorities(slugs: slugs) { result in
+            switch result {
+            case .success(let authorities):
+                completion(.success(authorities))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -48,5 +68,9 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
         if let localAuthority = authorityType as? LocalAuthority {
             repository.save(localAuthority)
         }
+    }
+
+    func saveLocalAuthority(_ localAuthority: LocalAuthority) {
+        repository.save(localAuthority)
     }
 }

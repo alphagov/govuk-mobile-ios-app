@@ -84,12 +84,34 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Allow"
+            "value" : "Allow notifications"
           }
         }
       }
     },
     "onboardingBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find out about things like important dates and deadlines, services you might find useful and new features that have been added to the app.\n\nBy allowing notifications from the app, you also agree to share statistics about how you use the app.\n\nYou can change your preferences at any time in your phone’s notifications settings."
+          }
+        }
+      }
+    },
+    "onboardingPrivacyButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more about this in the privacy notice"
+          }
+        }
+      }
+    },
+    "onboardingSettingsBody" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

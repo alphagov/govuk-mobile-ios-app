@@ -17,8 +17,8 @@ class NotificationOnboardingCoordinatorTests {
         let sut = await NotificationOnboardingCoordinator(
             navigationController: mockNavigationController,
             notificationService: mockNotificationService,
-            analyticsService: MockAnalyticsService(),
             userDefaults: mockUserDefaults,
+            analyticsService: MockAnalyticsService(),
             completion: {}
         )
         mockNotificationService._stubbedShouldRequestPermission = true
@@ -59,8 +59,8 @@ class NotificationOnboardingCoordinatorTests {
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                analyticsService: MockAnalyticsService(),
                 userDefaults: mockUserDefaults,
+                analyticsService: MockAnalyticsService(),
                 completion: {
                     continuation.resume(returning: true)
                 }
@@ -82,8 +82,8 @@ class NotificationOnboardingCoordinatorTests {
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                analyticsService: MockAnalyticsService(),
                 userDefaults: mockUserDefaults,
+                analyticsService: MockAnalyticsService(),
                 completion: {
                     continuation.resume(returning: true)
                 }
@@ -94,5 +94,24 @@ class NotificationOnboardingCoordinatorTests {
         await #expect(mockNavigationController._setViewControllers == nil)
     }
 
-
+//    @Test
+//    func onboardingDismissed_setsOnboardingSeenAndCompletes() async {
+//        let mockNotificationService = MockNotificationService()
+//        let mockNavigationController = await MockNavigationController()
+//        let mockUserDefaults = MockUserDefaults()
+//        mockUserDefaults.set(bool: false, forKey: .notificationsOnboardingSeen)
+//
+//        mockNotificationService._stubbedShouldRequestPermission = true
+//
+//        let sut = await NotificationOnboardingCoordinator(
+//            navigationController: mockNavigationController,
+//            notificationService: mockNotificationService,
+//            userDefaults: mockUserDefaults,
+//            analyticsService: MockAnalyticsService(),
+//            completion: {}
+//        )
+//        await sut.start(url: nil)
+//        await sut.dismiss(animated: false)
+//        #expect(mockUserDefaults.bool(forKey: .notificationsOnboardingSeen) == true)
+//    }
 }

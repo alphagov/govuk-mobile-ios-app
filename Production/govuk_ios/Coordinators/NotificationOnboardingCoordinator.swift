@@ -6,14 +6,14 @@ import Onboarding
 
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
-    private let analyticsService: OnboardingAnalyticsService
+    private let analyticsService: AnalyticsServiceInterface
     private let completeAction: () -> Void
     private let userDefaults: UserDefaultsInterface
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
-         analyticsService: OnboardingAnalyticsService,
          userDefaults: UserDefaultsInterface = UserDefaults.standard,
+         analyticsService: AnalyticsServiceInterface,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
         self.analyticsService = analyticsService
@@ -38,17 +38,18 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     }
 
     private func setOnboarding() {
-        let onboardingModule = Onboarding(
-            slideProvider: notificationService,
+        let viewModel = NotificationsOnboardingViewModel(
+            urlOpener: UIApplication.shared,
             analyticsService: analyticsService,
             completeAction: { [weak self] in
                 self?.request()
-            },
-            dismissAction: { [weak self] in
+            }, dismissAction: { [weak self] in
                 self?.finishCoordination()
             }
         )
-        set(onboardingModule.viewController)
+        let view = NotificationsOnboardingView(viewModel: viewModel)
+        let viewController = HostingViewController(rootView: view)
+        set(viewController)
     }
 
     private func request() {

@@ -7,6 +7,7 @@ class NotificationsOnboardingViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     let completeAction: () -> Void
     let dismissAction: () -> Void
+    let showImage: Bool
 
     init(urlOpener: URLOpener,
          analyticsService: AnalyticsServiceInterface,
@@ -15,6 +16,7 @@ class NotificationsOnboardingViewModel: ObservableObject {
          dismissAction: @escaping () -> Void) {
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
+        self.showImage = showImage
         self.completeAction = completeAction
         self.dismissAction = dismissAction
     }

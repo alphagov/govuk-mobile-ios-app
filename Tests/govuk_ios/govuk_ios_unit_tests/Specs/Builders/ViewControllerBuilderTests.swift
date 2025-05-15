@@ -92,7 +92,8 @@ struct ViewControllerBuilderTests {
         let result = subject.notificationSettings(
             analyticsService: MockAnalyticsService(),
             notificationService: MockNotificationService(),
-            completeAction: {}
+            completeAction: { },
+            dismissAction: { }
         )
 
         #expect(result is HostingViewController<NotificationsOnboardingView>)

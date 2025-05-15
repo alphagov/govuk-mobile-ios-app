@@ -41,7 +41,8 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         let viewController = ViewControllerBuilder().notificationSettings(
             analyticsService: MockAnalyticsService(),
             notificationService: MockNotificationService(),
-            completeAction: { }
+            completeAction: { },
+            dismissAction: { }
         )
 
         VerifySnapshotInNavigationController(
@@ -55,7 +56,8 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         let viewController = ViewControllerBuilder().notificationSettings(
             analyticsService: MockAnalyticsService(),
             notificationService: MockNotificationService(),
-            completeAction: { }
+            completeAction: { },
+            dismissAction: { }
         )
 
         VerifySnapshotInNavigationController(

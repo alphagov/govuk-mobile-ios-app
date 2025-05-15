@@ -81,8 +81,6 @@
 		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
 		4E265D2E2DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */; };
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
-		4E3E57EB2D9ADC6F00402E8B /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E57EA2D9ADC6F00402E8B /* NotificationSettingsView.swift */; };
-		4E3E57EF2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */; };
 		4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
 		4E6663C52C736ABD0063E81C /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C42C736ABD0063E81C /* Feature.swift */; };
@@ -423,8 +421,6 @@
 		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
 		4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityErrorMessage.swift; sourceTree = "<group>"; };
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
-		4E3E57EA2D9ADC6F00402E8B /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
-		4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
 		4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocalAuthorityCoordinator.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		4E6663C42C736ABD0063E81C /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
@@ -677,7 +673,6 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
-				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationSettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationsOnboardingViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/RecentActivityListViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchHistoryViewControllerSnapshotTests.swift,
@@ -717,7 +712,6 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
-				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationSettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationsOnboardingViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/RecentActivityListViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SearchHistoryViewControllerSnapshotTests.swift,
@@ -904,7 +898,6 @@
 		4E3E57E72D9ADBB800402E8B /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				4E3E57EA2D9ADC6F00402E8B /* NotificationSettingsView.swift */,
 				5D49D4E82DD3D2940071826B /* NotificationsOnboardingView.swift */,
 			);
 			path = Notifications;
@@ -1037,7 +1030,6 @@
 				4EE5F3E12DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift */,
 				4E038AB82DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift */,
 				4E038AB62DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift */,
-				4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */,
 				5D0F199D2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift */,
 				5DD4CB192D95491E00459FB5 /* RecentActivityListViewModel.swift */,
 				168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */,
@@ -2028,13 +2020,11 @@
 				4E00EEF12CCB04FF007B61E8 /* TopicOnboardingCard.swift in Sources */,
 				5D9E67C82C5A2E1700DB7877 /* DividerView.swift in Sources */,
 				5DD4C7972D9547D600459FB5 /* AppEvent+RecentActivity.swift in Sources */,
-				4E3E57EB2D9ADC6F00402E8B /* NotificationSettingsView.swift in Sources */,
 				5D66D1862CBFC13100006723 /* AppEvent+Navigation.swift in Sources */,
 				D0D655E82D26A79000571841 /* UIApplication+URLOpener.swift in Sources */,
 				D00984F22D47BC9600D70FEE /* DeviceInformation+Convenience.swift in Sources */,
 				5DC250662C91D802009E9E7F /* FirebaseClient.swift in Sources */,
 				3D3378162CAAC113004BF83F /* AppUnavailableContainerViewModel.swift in Sources */,
-				4E3E57EF2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift in Sources */,
 				16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */,

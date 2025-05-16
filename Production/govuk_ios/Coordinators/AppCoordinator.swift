@@ -41,9 +41,7 @@ class AppCoordinator: BaseCoordinator {
     private func reLaunch(url: URL?) {
         let coordinator = coordinatorBuilder.relaunch(
             navigationController: root,
-            completion: { [weak self] in
-                self?.startTabs(url: url)
-            }
+            completion: { }
         )
         start(coordinator, url: url)
     }

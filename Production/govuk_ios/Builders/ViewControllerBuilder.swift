@@ -120,7 +120,6 @@ class ViewControllerBuilder {
 
     @MainActor
     func notificationSettings(analyticsService: AnalyticsServiceInterface,
-                              notificationService: NotificationServiceInterface,
                               completeAction: @escaping () -> Void,
                               dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = NotificationsOnboardingViewModel(
@@ -141,7 +140,6 @@ class ViewControllerBuilder {
 
     @MainActor
     func notificationOnboarding(analyticsService: AnalyticsServiceInterface,
-                                notificationService: NotificationServiceInterface,
                                 completeAction: @escaping () -> Void,
                                 dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = NotificationsOnboardingViewModel(

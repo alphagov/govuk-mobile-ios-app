@@ -26,7 +26,6 @@ class NotificationSettingsCoordinator: BaseCoordinator {
     override func start(url: URL?) {
         let viewController = viewControllerBuilder.notificationSettings(
             analyticsService: analyticsService,
-            notificationService: notificationService,
             completeAction: { [weak self] in
                 self?.requestPermission()
             },
@@ -36,6 +35,8 @@ class NotificationSettingsCoordinator: BaseCoordinator {
     }
 
     private func requestPermission() {
-        notificationService.requestPermissions(completion: completeAction)
+        notificationService.requestPermissions(
+            completion: completeAction
+        )
     }
 }

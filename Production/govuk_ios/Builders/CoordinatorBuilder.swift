@@ -222,6 +222,7 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             notificationService: container.notificationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
             completion: completion
         )
     }

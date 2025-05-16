@@ -10,7 +10,6 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
-            notificationService: MockNotificationService(),
             completeAction: { },
             dismissAction: { }
         )
@@ -25,7 +24,6 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
-            notificationService: MockNotificationService(),
             completeAction: { },
             dismissAction: { }
         )
@@ -40,7 +38,6 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     func test_notificationSettings_light_rendersCorrectly() {
         let viewController = ViewControllerBuilder().notificationSettings(
             analyticsService: MockAnalyticsService(),
-            notificationService: MockNotificationService(),
             completeAction: { },
             dismissAction: { }
         )
@@ -55,7 +52,6 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     func test_notificationSettings_dark_rendersCorrectly() {
         let viewController = ViewControllerBuilder().notificationSettings(
             analyticsService: MockAnalyticsService(),
-            notificationService: MockNotificationService(),
             completeAction: { },
             dismissAction: { }
         )

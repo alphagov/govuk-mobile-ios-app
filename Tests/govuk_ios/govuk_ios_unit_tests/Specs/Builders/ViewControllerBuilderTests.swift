@@ -91,7 +91,6 @@ struct ViewControllerBuilderTests {
         let subject = ViewControllerBuilder()
         let result = subject.notificationSettings(
             analyticsService: MockAnalyticsService(),
-            notificationService: MockNotificationService(),
             completeAction: { },
             dismissAction: { }
         )

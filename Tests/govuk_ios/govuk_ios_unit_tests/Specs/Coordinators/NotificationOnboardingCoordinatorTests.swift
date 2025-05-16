@@ -93,25 +93,4 @@ class NotificationOnboardingCoordinatorTests {
         #expect(completed)
         await #expect(mockNavigationController._setViewControllers == nil)
     }
-
-//    @Test
-//    func onboardingDismissed_setsOnboardingSeenAndCompletes() async {
-//        let mockNotificationService = MockNotificationService()
-//        let mockNavigationController = await MockNavigationController()
-//        let mockUserDefaults = MockUserDefaults()
-//        mockUserDefaults.set(bool: false, forKey: .notificationsOnboardingSeen)
-//
-//        mockNotificationService._stubbedShouldRequestPermission = true
-//
-//        let sut = await NotificationOnboardingCoordinator(
-//            navigationController: mockNavigationController,
-//            notificationService: mockNotificationService,
-//            userDefaults: mockUserDefaults,
-//            analyticsService: MockAnalyticsService(),
-//            completion: {}
-//        )
-//        await sut.start(url: nil)
-//        await sut.dismiss(animated: false)
-//        #expect(mockUserDefaults.bool(forKey: .notificationsOnboardingSeen) == true)
-//    }
 }

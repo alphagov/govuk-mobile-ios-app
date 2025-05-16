@@ -17,7 +17,6 @@ struct NotificationsOnboardingView: View {
             buttonStack
         }
         .accessibilityElement(children: .contain)
-        .navigationBarHidden(true)
     }
 
     @ViewBuilder
@@ -67,7 +66,7 @@ struct NotificationsOnboardingView: View {
                 if verticalSizeClass == .regular {
                     Spacer(minLength: 32)
                 }
-                if verticalSizeClass != .compact {
+                if viewModel.showImage && verticalSizeClass != .compact {
                     Image(decorative: "onboarding_notifications")
                 }
                 Text(viewModel.title)

@@ -7,14 +7,17 @@ import Onboarding
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let viewControllerBuilder: ViewControllerBuilder
     private let completeAction: () -> Void
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         viewControllerBuilder: ViewControllerBuilder,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
         self.analyticsService = analyticsService
+        self.viewControllerBuilder = viewControllerBuilder
         self.completeAction = completion
         super.init(navigationController: navigationController)
     }
@@ -32,17 +35,15 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     }
 
     private func setOnboarding() {
-        let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: UIApplication.shared,
+        let viewController = viewControllerBuilder.notificationOnboarding(
             analyticsService: analyticsService,
             completeAction: { [weak self] in
                 self?.request()
-            }, dismissAction: { [weak self] in
+            },
+            dismissAction: { [weak self] in
                 self?.finishCoordination()
             }
         )
-        let view = NotificationsOnboardingView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
         set(viewController)
     }
 

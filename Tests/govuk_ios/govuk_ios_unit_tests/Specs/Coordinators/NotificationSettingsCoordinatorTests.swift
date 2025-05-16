@@ -20,7 +20,8 @@ struct NotificationSettingsCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
             notificationService: MockNotificationService(),
-            completeAction: { }
+            completeAction: { },
+            dismissAction: { }
         )
         coordinator.start(url: nil)
         #expect(mockNavigationController._pushedViewController == expectedViewController)

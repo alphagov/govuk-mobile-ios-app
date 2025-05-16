@@ -41,7 +41,9 @@ class AppCoordinator: BaseCoordinator {
     private func reLaunch(url: URL?) {
         let coordinator = coordinatorBuilder.relaunch(
             navigationController: root,
-            completion: { }
+            completion: {
+                //  Removed actions here for now
+            }
         )
         start(coordinator, url: url)
     }

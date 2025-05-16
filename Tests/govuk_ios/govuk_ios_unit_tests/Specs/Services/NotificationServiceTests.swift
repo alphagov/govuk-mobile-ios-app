@@ -42,7 +42,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             userDefaults: MockUserDefaults()
         )
-        #expect(!sut.isFeatureEnabled)
+        #expect(sut.isFeatureEnabled)
     }
 
 

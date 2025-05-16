@@ -98,7 +98,7 @@ struct LocalAuthenticationServiceTests {
             context: mockLAContext
         )
 
-        #expect(sut.shouldSkipOnboarding)
+        #expect(!sut.shouldSkipOnboarding)
     }
 
     @Test

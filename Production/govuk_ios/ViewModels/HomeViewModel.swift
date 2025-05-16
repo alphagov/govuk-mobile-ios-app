@@ -30,8 +30,8 @@ struct HomeViewModel {
         get async {
             await [
                 localAuthorityWidget,
-                notificationsWidget,
-                //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
+                // notificationsWidget, Removed until dismissable cards introduced
+                // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
                 topicsWidget,
                 storedLocalAuthorityWidget

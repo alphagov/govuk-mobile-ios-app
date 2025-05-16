@@ -176,7 +176,7 @@ extension Container {
     var coreDataDeletionService: Factory<CoreDataDeletionService> {
         Factory(self) {
             CoreDataDeletionService(
-                coreDataRespository: self.coreDataRepository.resolve()
+                coreDataRepository: self.coreDataRepository.resolve()
             )
         }
     }

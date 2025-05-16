@@ -6,14 +6,14 @@ protocol CoreDataDeletionServiceInterface {
 }
 
 class CoreDataDeletionService: CoreDataDeletionServiceInterface {
-    private let coredDataRepository: CoreDataRepositoryInterface
+    private let coreDataRepository: CoreDataRepositoryInterface
 
-    init(coreDataRespository: CoreDataRepositoryInterface) {
-        self.coredDataRepository = coreDataRespository
+    init(coreDataRepository: CoreDataRepositoryInterface) {
+        self.coreDataRepository = coreDataRepository
     }
 
     func deleteAllObjects() throws {
-        let context = coredDataRepository.viewContext
+        let context = coreDataRepository.viewContext
         let entities = context.persistentStoreCoordinator?.managedObjectModel.entities ?? []
 
         try context.performAndWait {
@@ -25,7 +25,7 @@ class CoreDataDeletionService: CoreDataDeletionServiceInterface {
                 }
             } catch {
                 context.rollback()
-                throw CoreDataDeletetionError.failed
+                throw CoreDataDeletionError.failed
             }
         }
     }
@@ -41,6 +41,6 @@ class CoreDataDeletionService: CoreDataDeletionServiceInterface {
     }
 }
 
-enum CoreDataDeletetionError: Error {
+enum CoreDataDeletionError: Error {
     case failed
 }

@@ -37,7 +37,7 @@ class CoreDataDeletionServiceTests {
                 for: NSFetchRequest(entityName: "TestEntity2")
             )
         }
-        let sut = CoreDataDeletionService(coreDataRespository: mockCoreDataRepository)
+        let sut = CoreDataDeletionService(coreDataRepository: mockCoreDataRepository)
 
         #expect(entitiy1Count == 1)
         #expect(entitiy2Count == 1)

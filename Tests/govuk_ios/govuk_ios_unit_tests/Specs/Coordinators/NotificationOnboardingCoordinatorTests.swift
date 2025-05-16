@@ -49,9 +49,10 @@ class NotificationOnboardingCoordinatorTests {
     }
 
     @Test
+    @MainActor
     func start_whenPermissionNotRequiredAndOnboardingNotSeen_completesImmediately() async {
         let mockNotificationService = MockNotificationService()
-        let mockNavigationController = await MockNavigationController()
+        let mockNavigationController = MockNavigationController()
         let mockUserDefaults = MockUserDefaults()
         mockUserDefaults.set(bool: false, forKey: .notificationsOnboardingSeen)
         mockNotificationService._stubbedShouldRequestPermission = false
@@ -68,13 +69,14 @@ class NotificationOnboardingCoordinatorTests {
             sut.start(url: nil)
         }
         #expect(completed)
-        await #expect(mockNavigationController._setViewControllers == nil)
+        #expect(mockNavigationController._setViewControllers == nil)
     }
 
     @Test
+    @MainActor
     func start_whenPermissionNotRequiredAndOnboardingSeen_completesImmediately() async {
         let mockNotificationService = MockNotificationService()
-        let mockNavigationController = await MockNavigationController()
+        let mockNavigationController = MockNavigationController()
         let mockUserDefaults = MockUserDefaults()
         mockUserDefaults.set(bool: true, forKey: .notificationsOnboardingSeen)
         mockNotificationService._stubbedShouldRequestPermission = false
@@ -91,6 +93,6 @@ class NotificationOnboardingCoordinatorTests {
             sut.start(url: nil)
         }
         #expect(completed)
-        await #expect(mockNavigationController._setViewControllers == nil)
+        #expect(mockNavigationController._setViewControllers == nil)
     }
 }

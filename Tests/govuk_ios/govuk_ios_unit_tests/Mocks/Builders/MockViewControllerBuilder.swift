@@ -105,8 +105,8 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedNotificationSettingsViewController: UIViewController?
     override func notificationSettings(analyticsService: any AnalyticsServiceInterface,
-                                       notificationService: any NotificationServiceInterface,
-                                       completeAction: @escaping () -> Void) -> UIViewController {
+                                       completeAction: @escaping () -> Void,
+                                       dismissAction: @escaping () -> Void) -> UIViewController {
         _stubbedNotificationSettingsViewController ?? UIViewController()
     }
 

@@ -77,6 +77,9 @@ class SettingsCoordinator: TabItemCoordinator {
             navigationController: root,
             completionAction: { [weak self] in
                 self?.root.popToRootViewController(animated: true)
+            },
+            dismissAction: { [weak self] in
+                self?.root.popToRootViewController(animated: true)
             }
         )
         start(coordinator)

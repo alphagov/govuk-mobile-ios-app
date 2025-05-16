@@ -27,7 +27,7 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                     }.alert(isPresented: $viewModel.displayNotificationSettingsAlert) {
                         Alert(title: Text(viewModel.notificationSettingsAlertTitle),
                               message: Text(viewModel.notificationSettingsAlertBody),
-                              primaryButton: .destructive(
+                              primaryButton: .default(
                                 Text(viewModel.notificationAlertButtonTitle)) {
                             viewModel.handleNotificationAlertAction()
                         }, secondaryButton: .cancel())

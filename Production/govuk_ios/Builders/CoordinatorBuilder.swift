@@ -222,6 +222,7 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             notificationService: container.notificationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
             completion: completion
         )
     }
@@ -240,13 +241,15 @@ class CoordinatorBuilder {
     }
 
     func notificationSettings(navigationController: UINavigationController,
-                              completionAction: @escaping () -> Void) -> BaseCoordinator {
+                              completionAction: @escaping () -> Void,
+                              dismissAction: @escaping () -> Void) -> BaseCoordinator {
         NotificationSettingsCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
             notificationService: container.notificationService.resolve(),
-            completeAction: completionAction
+            completeAction: completionAction,
+            dismissAction: dismissAction
         )
     }
 

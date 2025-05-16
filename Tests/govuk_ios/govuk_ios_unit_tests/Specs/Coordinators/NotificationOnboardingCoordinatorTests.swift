@@ -16,6 +16,7 @@ class NotificationOnboardingCoordinatorTests {
             navigationController: mockNavigationController,
             notificationService: mockNotificationService,
             analyticsService: MockAnalyticsService(),
+            viewControllerBuilder: MockViewControllerBuilder(),
             completion: {}
         )
         mockNotificationService._stubbedShouldRequestPermission = true
@@ -35,6 +36,7 @@ class NotificationOnboardingCoordinatorTests {
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
                 analyticsService: MockAnalyticsService(),
+                viewControllerBuilder: MockViewControllerBuilder(),
                 completion: {
                     continuation.resume(returning: true)
                 }

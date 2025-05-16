@@ -16,9 +16,12 @@ struct RadioButtonView: View {
             HStack {
                 Image(systemName: selected ? "circle.fill" : "circle")
                 Text(title)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
             }
         }
-        .padding()
+        .padding(.vertical, 8)
     }
 }
 

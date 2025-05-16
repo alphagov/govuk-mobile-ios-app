@@ -12,7 +12,7 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
     @Published var selectedAuthority: LocalAuthority?
 
     private let selectAddressAction: () -> Void
-    private let dismissAction: () -> Void
+    let dismissAction: () -> Void
 
     let title = String.localAuthority.localized("ambiguousLocalAuthorityViewTitle")
 
@@ -20,6 +20,10 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
         let format = String.localAuthority.localized("ambiguousLocalAuthorityViewSubtitle")
         return String.localizedStringWithFormat(format, postCode)
     }()
+
+    let cancelButtonTitle: String = String.common.localized(
+        "cancel"
+    )
 
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,

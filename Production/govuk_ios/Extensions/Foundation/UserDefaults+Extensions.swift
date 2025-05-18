@@ -17,15 +17,6 @@ extension UserDefaults: UserDefaultsInterface {
         )
         synchronize()
     }
-
-    func setNotificationsOnboardingSeen() {
-        set(bool: true, forKey: .notificationsOnboardingSeen)
-        synchronize()
-    }
-
-    func isNotificationsOnboardingSeen() -> Bool {
-        bool(forKey: .notificationsOnboardingSeen)
-    }
 }
 
 enum UserDefaultsKeys: String {
@@ -46,6 +37,4 @@ protocol UserDefaultsInterface {
     func bool(forKey key: UserDefaultsKeys) -> Bool
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
-    func setNotificationsOnboardingSeen()
-    func isNotificationsOnboardingSeen() -> Bool
 }

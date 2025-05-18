@@ -19,14 +19,6 @@ class MockUserDefaults: UserDefaultsInterface {
         store[key.rawValue] = boolValue
     }
 
-    func setNotificationsOnboardingSeen() {
-        set(bool: true, forKey: .notificationsOnboardingSeen)
-    }
-
-    func isNotificationsOnboardingSeen() -> Bool {
-        bool(forKey: .notificationsOnboardingSeen)
-    }
-
     func _stub(value: Any?,
                key: String) {
         store[key] = value

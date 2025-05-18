@@ -52,22 +52,6 @@ struct NotificationSettingsViewModelTests {
     }
 
     @Test
-    func requestNotificationPermission_setsOnboardingSeen() {
-        let mockNotificationService = MockNotificationService()
-        let mockUserDefaults = MockUserDefaults()
-        let sut = NotificationSettingsViewModel(
-            notificationService: mockNotificationService,
-            analyticsService: MockAnalyticsService(),
-            userDefaults: mockUserDefaults,
-            completeAction: { }
-        )
-        mockUserDefaults.set(bool: false, forKey: .notificationsOnboardingSeen)
-        sut.primaryButtonViewModel.action()
-        mockNotificationService._receivedRequestPermissionsCompletion?()
-        #expect(mockUserDefaults.isNotificationsOnboardingSeen())
-    }
-
-    @Test
     func requestNotificationPermission_completionCalledAfterPermissionRequest() async {
         var completionCalled = false
         let mockNotificationService = MockNotificationService()

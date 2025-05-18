@@ -24,10 +24,9 @@ final class NotificationSettingsViewModel: ObservableObject {
     }
 
     private func requestNotificationPermission() {
-        notificationService.requestPermissions {
-            self.userDefaults.setNotificationsOnboardingSeen()
-            self.completeAction()
-        }
+        notificationService.requestPermissions(
+            completion: completeAction
+        )
     }
 
     func trackScreen(screen: TrackableScreen) {

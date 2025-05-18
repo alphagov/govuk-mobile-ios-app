@@ -6,18 +6,18 @@ import Onboarding
 
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
+    private let onboardingService: NotificationsOnboardingServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let completeAction: () -> Void
-    private let userDefaults: UserDefaultsInterface
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
-         userDefaults: UserDefaultsInterface = UserDefaults.standard,
+         onboardingService: NotificationsOnboardingServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
+        self.onboardingService = onboardingService
         self.analyticsService = analyticsService
-        self.userDefaults = userDefaults
         self.completeAction = completion
         super.init(navigationController: navigationController)
     }
@@ -30,8 +30,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func startNotifications() async {
         guard await notificationService.shouldRequestPermission,
-              !userDefaults.isNotificationsOnboardingSeen()
-        else {
+              !onboardingService.hasSeenNotificationsOnboarding else {
             return finishCoordination()
         }
         setOnboarding()
@@ -62,7 +61,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func finishCoordination() {
         DispatchQueue.main.async {
-            self.userDefaults.setNotificationsOnboardingSeen()
+            self.onboardingService.setHasSeenNotificationsOnboarding()
             self.completeAction()
         }
     }

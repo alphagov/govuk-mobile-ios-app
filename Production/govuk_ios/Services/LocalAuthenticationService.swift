@@ -66,7 +66,7 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     private var isFeatureEnabled: Bool {
-        false
+        true
     }
 
     private var hasSeenOnboarding: Bool {

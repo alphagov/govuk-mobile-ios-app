@@ -33,18 +33,28 @@ class ReauthenticationCoordinator: BaseCoordinator {
             completionAction()
             return
         }
+        guard !localAuthenticationService.biometricsHaveChanged else {
+            authenticationService.signOut()
+            handleReauthFailure()
+            return
+        }
+
         let refreshRequestResult = await authenticationService.tokenRefreshRequest()
 
         switch refreshRequestResult {
         case .success:
             completionAction()
         case .failure:
-            let coordinator = coordinatorBuilder.authenticationOnboarding(
-                navigationController: root,
-                newUserAction: newUserAction,
-                completionAction: completionAction
-            )
-            start(coordinator)
+            handleReauthFailure()
         }
+    }
+
+    private func handleReauthFailure() {
+        let coordinator = coordinatorBuilder.authenticationOnboarding(
+            navigationController: root,
+            newUserAction: newUserAction,
+            completionAction: completionAction
+        )
+        start(coordinator)
     }
 }

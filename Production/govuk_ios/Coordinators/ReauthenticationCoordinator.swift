@@ -46,18 +46,13 @@ class ReauthenticationCoordinator: BaseCoordinator {
             completionAction()
         case .failure:
             self.handleReauthFailure()
-            let coordinator = coordinatorBuilder.authenticationOnboarding(
-                navigationController: root,
-                newUserAction: newUserAction,
-                completionAction: completionAction
-            )
-            start(coordinator)
         }
     }
 
     private func handleReauthFailure() {
         let coordinator = coordinatorBuilder.authenticationOnboarding(
             navigationController: root,
+            newUserAction: newUserAction,
             completionAction: completionAction
         )
         start(coordinator)

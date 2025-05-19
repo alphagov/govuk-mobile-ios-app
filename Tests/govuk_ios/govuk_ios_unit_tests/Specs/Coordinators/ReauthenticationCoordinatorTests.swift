@@ -11,7 +11,6 @@ class ReauthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let tokenRefreshResponse = TokenRefreshResponse(
             accessToken: "access_token",
             idToken: "id_token"
@@ -81,7 +80,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { }
+                completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
         }

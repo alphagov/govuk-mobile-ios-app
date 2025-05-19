@@ -1,0 +1,28 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "localisedFallbackTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter Passcode"
+          }
+        }
+      }
+    },
+    "localizedReason" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter Passcode to access your saved data"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

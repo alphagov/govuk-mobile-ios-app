@@ -3,6 +3,7 @@ import Foundation
 protocol AppEnvironmentServiceInterface {
     var baseURL: URL { get }
     var oneSignalAppId: String { get }
+    var authenticationBaseURL: URL { get }
     var authenticationClientId: String { get }
     var authenticationAuthorizeURL: URL { get }
     var authenticationTokenURL: URL { get }
@@ -43,6 +44,10 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
         authenticationBaseURL.appendingPathComponent("oauth2/token")
     }
 
+    var revokeTokenURL: URL {
+        authenticationBaseURL.appendingPathComponent("oauth2/revoke")
+    }
+
     private func string(for key: AppEnvironmentKey) -> String {
         guard let value = config[key.rawValue] as? String else {
             preconditionFailure("No AppEnvironment value found for " + key.rawValue)
@@ -50,7 +55,7 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
         return value
     }
 
-    private var authenticationBaseURL: URL {
+    var authenticationBaseURL: URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = string(for: .authenticationBaseURL)

@@ -10,12 +10,15 @@ typealias TokenRefreshResult = Result<TokenRefreshResponse, TokenRefreshError>
 protocol AuthenticationServiceClientInterface {
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult
     func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult
+    func revokeToken(_ refreshToken: String?,
+                     completion: @escaping () -> Void)
 }
 
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let appAuthSession: AppAuthSessionWrapperInterface
     private let appEnvironmentService: AppEnvironmentServiceInterface
     private let oidAuthService: OIDAuthorizationServiceWrapperInterface
+    private let revokeTokenApi: APIServiceClientInterface
 
     init(appEnvironmentService: AppEnvironmentServiceInterface,
          appAuthSession: AppAuthSessionWrapperInterface,
@@ -23,6 +26,10 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         self.appEnvironmentService = appEnvironmentService
         self.appAuthSession = appAuthSession
         self.oidAuthService = oidAuthService
+        revokeTokenApi = APIServiceClient(
+            baseUrl: appEnvironmentService.authenticationBaseURL,
+            session: URLSession(configuration: .default),
+            requestBuilder: RequestBuilder())
     }
 
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
@@ -102,6 +109,27 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             codeVerifier: nil,
             additionalParameters: nil
         )
+    }
+
+    func revokeToken(_ refreshToken: String?,
+                     completion: @escaping () -> Void) {
+        guard let refreshToken else { return }
+        let request = GOVRequest(
+            urlPath: "/oauth2/revoke",
+            method: .post,
+            bodyParameters: ["token": refreshToken,
+                             "client_id": appEnvironmentService.authenticationClientId],
+            queryParameters: nil,
+            additionalHeaders: ["Content-Type": "application/x-www-form-urlencoded"]
+        )
+        revokeTokenApi.send(request: request) { result in
+            switch result {
+            case .success(let data):
+                completion()
+            case .failure(let error):
+                print("SIGNOUT ERROR = \(error)")
+            }
+        }
     }
 
     private func generateTokenRefreshResponse(

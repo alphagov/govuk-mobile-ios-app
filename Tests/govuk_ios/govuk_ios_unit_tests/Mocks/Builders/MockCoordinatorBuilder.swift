@@ -184,7 +184,8 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _receivedReauthenticationCompletion: (() -> Void)?
     var _stubbedReauthenticationCoordinator: MockBaseCoordinator?
     override func reauthentication(navigationController: UINavigationController,
-                                   completionAction: @escaping () -> Void) -> BaseCoordinator {
+                                   completionAction: @escaping () -> Void,
+                                   newUserAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedReauthenticationCompletion = completionAction
         return _stubbedReauthenticationCoordinator ?? MockBaseCoordinator()
     }

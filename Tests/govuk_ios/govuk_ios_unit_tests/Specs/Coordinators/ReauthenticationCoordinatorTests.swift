@@ -23,7 +23,8 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) }
+                completionAction: { continuation.resume(returning: true) },
+                newUserAction: { }
             )
             sut.start(url: nil)
         }
@@ -51,7 +52,8 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { }
+                completionAction: { },
+                newUserAction: { }
             )
             sut.start(url: nil)
         }
@@ -72,7 +74,8 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) }
+                completionAction: { continuation.resume(returning: true) },
+                newUserAction: { }
             )
             sut.start(url: nil)
         }

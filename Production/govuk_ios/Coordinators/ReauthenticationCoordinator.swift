@@ -6,16 +6,19 @@ class ReauthenticationCoordinator: BaseCoordinator {
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let completionAction: () -> Void
+    private let newUserAction: () -> Void
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
-         completionAction: @escaping () -> Void) {
+         completionAction: @escaping () -> Void,
+         newUserAction: @escaping () -> Void) {
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
         self.completionAction = completionAction
         self.coordinatorBuilder = coordinatorBuilder
+        self.newUserAction = newUserAction
         super.init(navigationController: navigationController)
     }
 
@@ -38,7 +41,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
         case .failure:
             let coordinator = coordinatorBuilder.authenticationOnboarding(
                 navigationController: root,
-                newUserAction: nil,
+                newUserAction: newUserAction,
                 completionAction: completionAction
             )
             start(coordinator)

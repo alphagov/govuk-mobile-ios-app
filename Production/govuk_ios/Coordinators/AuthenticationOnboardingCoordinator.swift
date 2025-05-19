@@ -9,19 +9,22 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
     private let analyticsService: OnboardingAnalyticsService
     private let coordinatorBuilder: CoordinatorBuilder
     private let completionAction: () -> Void
+    private let newUserAction: (() -> Void)?
 
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
          authenticationOnboardingService: AuthenticationOnboardingServiceInterface,
          analyticsService: OnboardingAnalyticsService,
          coordinatorBuilder: CoordinatorBuilder,
-         completionAction: @escaping () -> Void) {
+         completionAction: @escaping () -> Void,
+         newUserAction: (() -> Void)?) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
         self.authenticationOnboardingService = authenticationOnboardingService
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
         self.completionAction = completionAction
+        self.newUserAction = newUserAction
         super.init(navigationController: navigationController)
     }
 
@@ -43,9 +46,7 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
                     await self?.authenticateAction()
                 }
             },
-            dismissAction: { [weak self] in
-                self?.finishCoordination()
-            }
+            dismissAction: { }
         )
         set(
             onboardingModule.viewController,
@@ -63,6 +64,7 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
         let authenticationCoordinator = coordinatorBuilder.authentication(
             navigationController: navigationController,
             completionAction: completionAction,
+            newUserAction: newUserAction,
             handleError: showError
         )
         start(authenticationCoordinator)

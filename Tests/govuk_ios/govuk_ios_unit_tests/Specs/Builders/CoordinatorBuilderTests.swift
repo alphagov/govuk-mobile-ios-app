@@ -231,6 +231,7 @@ struct CoordinatorBuilderTests {
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.authenticationOnboarding(
             navigationController: mockNavigationController,
+            newUserAction: nil,
             completionAction: { }
         )
 
@@ -244,6 +245,7 @@ struct CoordinatorBuilderTests {
         let coordinator = subject.authentication(
             navigationController: mockNavigationController,
             completionAction: { },
+            newUserAction: nil,
             handleError: { _ in }
         )
 
@@ -336,5 +338,16 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is NotificationConsentCoordinator)
+    }
+
+    @Test
+    func newUserOnboardingCoordinator_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.newUserOnboardingCoordinator(
+            navigationController: MockNavigationController(),
+            completionAction: { }
+        )
+
+        #expect(coordinator is NewUserOnboardingCoordinator)
     }
 }

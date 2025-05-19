@@ -132,16 +132,35 @@ extension Container {
         Factory(self) {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
-                secureStoreService: self.secureStoreService.resolve(),
-                userDefaults: UserDefaults.standard
+                authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
+                returningUserService: self.returningUserService.resolve()
             )
         }.scope(.singleton)
     }
 
-    var secureStoreService: Factory<SecureStorable> {
+    var authenticatedSecureStoreService: Factory<SecureStorable> {
         Factory(self) {
             SecureStoreService(
-                configuration: self.secureStoreConfiguration.resolve()
+                configuration: self.authenticatedSecureStoreConfiguration.resolve()
+            )
+        }
+    }
+
+    var returningUserService: Factory<ReturningUserServiceInterface> {
+        Factory(self) {
+            ReturningUserService(
+                openSecureStoreService: self.openSecureStoreService.resolve(),
+                coreDataDeletionService: self.coreDataDeletionService.resolve(),
+                userDefaults: UserDefaults.standard,
+                localAuthenticationService: self.localAuthenticationService.resolve()
+            )
+        }
+    }
+
+    var openSecureStoreService: Factory<SecureStorable> {
+        Factory(self) {
+            SecureStoreService(
+                configuration: self.openSecureStoreConfiguration.resolve()
             )
         }
     }
@@ -150,6 +169,14 @@ extension Container {
         Factory(self) {
             LocalAuthenticationService(
                 userDefaults: UserDefaults.standard
+            )
+        }
+    }
+
+    var coreDataDeletionService: Factory<CoreDataDeletionService> {
+        Factory(self) {
+            CoreDataDeletionService(
+                coreDataRepository: self.coreDataRepository.resolve()
             )
         }
     }

@@ -17,9 +17,16 @@ extension UserDefaults: UserDefaultsInterface {
         )
         synchronize()
     }
+
+    func deleteAll() {
+        for key in UserDefaultsKeys.allCases {
+            removeObject(forKey: key.rawValue)
+        }
+        synchronize()
+    }
 }
 
-enum UserDefaultsKeys: String {
+enum UserDefaultsKeys: String, CaseIterable {
     case appOnboardingSeen = "govuk_app_onboarding_seen"
     case acceptedAnalytics = "govuk_app_analytics_accepted"
     case customisedTopics = "govuk_topics_customised"
@@ -27,7 +34,7 @@ enum UserDefaultsKeys: String {
     case authenticationOnboardingSeen = "govuk_authentication_onboarding_seen"
     case localAuthenticationOnboardingSeen = "govuk_local_authentication_onboarding_seen"
     case authenticationOnboardingFlowSeen = "govuk_authentication_onboarding_flow_seen"
-    case skipLocalAuthentication = "govuk_skip_local_authentication"
+    case localAuthenticationEnabled = "govuk_local_authentication_enabled"
     case notificationsConsentGranted = "govuk_notifications_consent_granted"
 }
 
@@ -36,4 +43,5 @@ protocol UserDefaultsInterface {
     func bool(forKey key: UserDefaultsKeys) -> Bool
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
+    func deleteAll()
 }

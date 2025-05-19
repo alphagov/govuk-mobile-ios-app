@@ -3,6 +3,9 @@ import Foundation
 @testable import govuk_ios
 
 class MockUserDefaults: UserDefaultsInterface {
+    func deleteAll() {
+        store = [:]
+    }
 
     private(set) var store: [String?: Any] = [:]
 

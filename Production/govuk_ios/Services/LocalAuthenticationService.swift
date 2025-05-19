@@ -10,9 +10,10 @@ enum LocalAuthenticationType {
 
 protocol LocalAuthenticationServiceInterface {
     var authType: LocalAuthenticationType { get }
-    var shouldSkipOnboarding: Bool { get }
+    var authenticationOnboardingFlowSeen: Bool { get }
+    var isLocalAuthenticationEnabled: Bool { get }
 
-    func setHasSeenOnboarding()
+    func setLocalAuthenticationEnabled(_ enabled: Bool)
     func canEvaluatePolicy(_ policy: LAPolicy) -> Bool
     func evaluatePolicy(_ policy: LAPolicy,
                         reason: String,
@@ -57,19 +58,19 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
         }
     }
 
-    func setHasSeenOnboarding() {
-        userDefaults.set(bool: true, forKey: .authenticationOnboardingFlowSeen)
+    func setLocalAuthenticationEnabled(_ enabled: Bool) {
+        userDefaults.set(bool: enabled, forKey: .localAuthenticationEnabled)
     }
 
-    var shouldSkipOnboarding: Bool {
-        hasSeenOnboarding || !isFeatureEnabled
+    var isLocalAuthenticationEnabled: Bool {
+        userDefaults.bool(forKey: .localAuthenticationEnabled)
+    }
+
+    var authenticationOnboardingFlowSeen: Bool {
+        userDefaults.value(forKey: .localAuthenticationEnabled) != nil || !isFeatureEnabled
     }
 
     private var isFeatureEnabled: Bool {
         true
-    }
-
-    private var hasSeenOnboarding: Bool {
-        userDefaults.bool(forKey: .authenticationOnboardingFlowSeen)
     }
 }

@@ -77,41 +77,54 @@ struct LocalAuthenticationServiceTests {
     }
 
     @Test
-    func setHasSeenOnboarding_storesValue() {
+    func authenticationOnboardingFlowSeen_setsLocalAuthenticationEnabled_returnsTrue() {
         let mockLAContext = MockLAContext()
         let mockUserDefaults = MockUserDefaults()
         let sut = LocalAuthenticationService(
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        sut.setHasSeenOnboarding()
-        #expect(mockUserDefaults.value(forKey: .authenticationOnboardingFlowSeen) != nil)
+        sut.setLocalAuthenticationEnabled(true)
+
+        #expect(sut.authenticationOnboardingFlowSeen)
     }
 
     @Test
-    func shouldSkipOnboarding_featureDisabledHasntSeenOnboarding_returnsTrue() {
+    func authenticationOnboardingFlowSeen_featureFlagDisabled_returnsTrue() {
         let mockLAContext = MockLAContext()
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.set(bool: false, forKey: .authenticationOnboardingFlowSeen)
         let sut = LocalAuthenticationService(
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
 
-        #expect(!sut.shouldSkipOnboarding)
+        #expect(!sut.authenticationOnboardingFlowSeen)
     }
 
     @Test
-    func shouldSkipOnboarding_featureDisabledHasSeenOnboarding_returnsTrue() {
+    func setLocalAuthenticationEnabled_setsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
         let mockUserDefaults = MockUserDefaults()
-        mockUserDefaults.set(bool: true, forKey: .authenticationOnboardingFlowSeen)
         let sut = LocalAuthenticationService(
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
+        sut.setLocalAuthenticationEnabled(true)
 
-        #expect(sut.shouldSkipOnboarding)
+        #expect(mockUserDefaults.bool(forKey: .localAuthenticationEnabled))
+    }
+
+    @Test
+    func isLocalAuthenticationEnabled_returnsValueInUserDefaults() {
+        let mockLAContext = MockLAContext()
+        let mockUserDefaults = MockUserDefaults()
+        let sut = LocalAuthenticationService(
+            userDefaults: mockUserDefaults,
+            context: mockLAContext
+        )
+        sut.setLocalAuthenticationEnabled(true)
+
+        #expect(sut.isLocalAuthenticationEnabled)
     }
 
     @Test

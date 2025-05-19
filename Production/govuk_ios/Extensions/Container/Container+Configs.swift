@@ -20,9 +20,15 @@ extension Container {
     var authenticatedSecureStoreConfiguration: Factory<SecureStorageConfiguration> {
         Factory(self) {
             let localAuthStrings = LocalAuthenticationLocalizedStrings(
-                localizedReason: String.localAuthentication.localized("localizedReason"),
-                localisedFallbackTitle: String.localAuthentication.localized("localisedFallbackTitle"),
-                localisedCancelTitle: String.common.localized("cancel")
+                localizedReason: String.localAuthentication.localized(
+                    "localizedReason"
+                ),
+                localisedFallbackTitle: String.localAuthentication.localized(
+                    "localisedFallbackTitle"
+                ),
+                localisedCancelTitle: String.common.localized(
+                    "cancel"
+                )
             )
             #if targetEnvironment(simulator)
             let accessControlLevel =

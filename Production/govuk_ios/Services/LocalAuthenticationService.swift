@@ -72,7 +72,7 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     private var isFeatureEnabled: Bool {
-        false
+        true
     }
 
     private var biometricsPolicyState: Data? {

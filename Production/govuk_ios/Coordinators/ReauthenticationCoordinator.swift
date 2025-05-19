@@ -45,7 +45,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
         case .success:
             completionAction()
         case .failure:
-            self.handleReauthFailure()
+            handleReauthFailure()
         }
     }
 

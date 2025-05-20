@@ -17,7 +17,7 @@ extension Container {
         }
     }
 
-    var secureStoreConfiguration: Factory<SecureStorageConfiguration> {
+    var authenticatedSecureStoreConfiguration: Factory<SecureStorageConfiguration> {
         Factory(self) {
             let localAuthStrings = LocalAuthenticationLocalizedStrings(
                 localizedReason: "Enter Passcode to access your saved data",
@@ -32,11 +32,20 @@ extension Container {
             SecureStorageConfiguration.AccessControlLevel.currentBiometricsOrPasscode
             #endif
             let config = SecureStorageConfiguration(
-                id: "GOVUK",
+                id: "protectedSecureStorage",
                 accessControlLevel: accessControlLevel,
                 localAuthStrings: localAuthStrings
             )
             return config
+        }
+    }
+
+    var openSecureStoreConfiguration: Factory<SecureStorageConfiguration> {
+        Factory(self) {
+            SecureStorageConfiguration(
+                id: "openSecureStorage",
+                accessControlLevel: SecureStorageConfiguration.AccessControlLevel.open
+            )
         }
     }
 }

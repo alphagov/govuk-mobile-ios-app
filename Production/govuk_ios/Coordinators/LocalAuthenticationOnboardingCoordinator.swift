@@ -27,7 +27,7 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard !localAuthenticationService.shouldSkipOnboarding else {
+        guard !localAuthenticationService.authenticationOnboardingFlowSeen else {
             finishCoordination()
             return
         }
@@ -36,10 +36,11 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
         case .faceID, .touchID:
             setLocalAuthenticationOnboardingViewController()
         case .passcodeOnly:
-            localAuthenticationService.setHasSeenOnboarding()
+            localAuthenticationService.setLocalAuthenticationEnabled(true)
             authenticationService.encryptRefreshToken()
             finishCoordination()
         default:
+            localAuthenticationService.setLocalAuthenticationEnabled(false)
             finishCoordination()
         }
     }

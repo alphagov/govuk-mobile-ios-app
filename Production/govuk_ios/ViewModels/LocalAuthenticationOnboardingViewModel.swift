@@ -35,11 +35,13 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
             ) { [weak self] success, error in
                 if success {
                     self?.authenticationService.encryptRefreshToken()
+                    self?.localAuthenticationService.setLocalAuthenticationEnabled(true)
                 } else if let laError = error as? LAError, laError.code == .userCancel {
-                    self?.userDefaults.set(bool: true, forKey: .skipLocalAuthentication)
+                    self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
+                } else {
+                    self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
                 }
 
-                self?.localAuthenticationService.setHasSeenOnboarding()
                 self?.trackEnrolEvent()
                 self?.completionAction()
             }
@@ -48,8 +50,7 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
 
     var skipButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(localisedTitle: "Skip") { [weak self] in
-            self?.localAuthenticationService.setHasSeenOnboarding()
-            self?.userDefaults.set(bool: true, forKey: .skipLocalAuthentication)
+            self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
             self?.trackSkipEvent()
             self?.completionAction()
         }

@@ -116,6 +116,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 
 enum AuthenticationError: Error, Equatable {
     case loginFlow(LoginError)
+    case returningUserService(ReturningUserServiceError)
     case genericError
 }
 

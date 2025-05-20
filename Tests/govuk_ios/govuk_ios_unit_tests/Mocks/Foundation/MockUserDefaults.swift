@@ -13,6 +13,10 @@ class MockUserDefaults: UserDefaultsInterface {
         store[key.rawValue]
     }
 
+    func set(_ value: Any?, forKey key: govuk_ios.UserDefaultsKeys) {
+        store[key.rawValue] = value
+    }
+
     func bool(forKey key: UserDefaultsKeys) -> Bool {
         (store[key.rawValue] as? Bool) ?? false
     }

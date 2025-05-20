@@ -5,6 +5,14 @@ extension UserDefaults: UserDefaultsInterface {
         value(forKey: key.rawValue)
     }
 
+    func set(_ value: Any?, forKey key: UserDefaultsKeys) {
+        set(
+            value,
+            forKey: key.rawValue
+        )
+        synchronize()
+    }
+
     func bool(forKey key: UserDefaultsKeys) -> Bool {
         bool(forKey: key.rawValue)
     }
@@ -36,10 +44,12 @@ enum UserDefaultsKeys: String, CaseIterable {
     case authenticationOnboardingFlowSeen = "govuk_authentication_onboarding_flow_seen"
     case localAuthenticationEnabled = "govuk_local_authentication_enabled"
     case notificationsConsentGranted = "govuk_notifications_consent_granted"
+    case biometricsPolicyState = "govuk_biometrics_policy_state"
 }
 
 protocol UserDefaultsInterface {
     func value(forKey key: UserDefaultsKeys) -> Any?
+    func set(_ value: Any?, forKey key: UserDefaultsKeys)
     func bool(forKey key: UserDefaultsKeys) -> Bool
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)

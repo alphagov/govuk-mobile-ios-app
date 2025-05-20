@@ -311,7 +311,8 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.reauthentication(
             navigationController: MockNavigationController(),
-            completionAction: { }
+            completionAction: { },
+            newUserAction: { }
         )
 
         #expect(coordinator is ReauthenticationCoordinator)

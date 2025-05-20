@@ -110,6 +110,9 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             completionAction: { [weak self] in
                 self?.startAnalyticsConsent(url: url)
+            },
+            newUserAction: { [weak self] in
+                self?.startNewUserOnboardingCoordinator(url: nil)
             }
         )
         start(coordinator, url: url)

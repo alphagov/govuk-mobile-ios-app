@@ -282,13 +282,15 @@ class CoordinatorBuilder {
     }
 
     func reauthentication(navigationController: UINavigationController,
-                          completionAction: @escaping () -> Void) -> BaseCoordinator {
+                          completionAction: @escaping () -> Void,
+                          newUserAction: @escaping () -> Void) -> BaseCoordinator {
         ReauthenticationCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
-            completionAction: completionAction
+            completionAction: completionAction,
+            newUserAction: newUserAction
         )
     }
 

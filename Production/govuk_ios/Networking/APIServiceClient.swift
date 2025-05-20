@@ -49,11 +49,6 @@ extension APIServiceClient {
         let task = session.dataTask(
             with: request,
             completionHandler: { data, response, error in
-                if let code = (response as? HTTPURLResponse)?.statusCode,
-                code > 300 {
-                    print("STATUS CODE: \(code)")
-                    print("Request = \(request)")
-                }
                 let result: NetworkResult<Data>
                 switch (data, error) {
                 case (_, .some(let error)):

@@ -70,6 +70,7 @@ struct Container_APIClientTests {
                 }
             )
         }
+        Container.shared.reset()
     }
 }
 

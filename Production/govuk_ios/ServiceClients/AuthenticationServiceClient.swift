@@ -86,12 +86,8 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             clientId: appEnvironmentService.authenticationClientId
         )
         revokeTokenService.send(request: request) { result in
-            switch result {
-            case .success:
+            if case .success = result {
                 completion?()
-            case .failure:
-                // Ignore API errors
-                break
             }
         }
     }

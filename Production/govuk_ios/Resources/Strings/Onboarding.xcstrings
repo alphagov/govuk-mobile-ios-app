@@ -128,7 +128,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can use your face to unlock the app.\n\nIf you do not want to use Face ID, you can unlock the app with your phone’s passcode, or with your email address and password.\n\nAnyone who can unlock your phone with their face or with your phone's passcode might be able to access your app."
+            "value" : "You can use your face to unlock the app.\n\nIf you do not want to use Face ID, you can unlock the app with your phone’s passcode, or with your email address and password."
           }
         }
       }
@@ -271,7 +271,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can use your fingerprint to unlock the app.\n\nIf you do not want to use Touch ID, you can unlock the app with your phone’s passcode, or with your email address and password.\n\nAnyone who can unlock your phone with their fingerprint or with your phone's passcode might be able to access your app."
+            "value" : "You can use your fingerprint to unlock the app.\n\nIf you do not want to use Touch ID, you can unlock the app with your phone’s passcode, or with your email address and password."
           }
         }
       }

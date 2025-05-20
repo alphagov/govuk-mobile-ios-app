@@ -5,6 +5,8 @@ internal protocol RequestBuilderInterface {
                  method: String,
                  headers: [String: String]?,
                  body: Data?) -> URLRequest
+    func data(from request: GOVRequest,
+              with url: URL) -> URLRequest
 }
 
 internal struct RequestBuilder: RequestBuilderInterface {}

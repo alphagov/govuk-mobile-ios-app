@@ -86,9 +86,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     func signOut() {
         do {
             try authenticatedSecureStoreService.delete()
-            authenticationServiceClient.revokeToken(refreshToken) {
-                print("revoke token attempt completed")
-            }
+            authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
             authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()

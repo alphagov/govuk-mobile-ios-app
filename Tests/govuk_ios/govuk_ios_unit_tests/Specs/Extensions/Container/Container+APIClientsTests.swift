@@ -38,5 +38,38 @@ struct Container_APIClientTests {
             )
         }
     }
+
+    @Test
+    func revokeTokenAPIClient_createsExpectedRequest() async throws {
+        Container.shared.reset()
+        Container.shared.urlSession.register { URLSession.mock }
+        Container.shared.appEnvironmentService.register {
+            MockAppEnvironmentService()
+        }
+        let sut = Container.shared.revokeTokenAPIClient()
+        return await withCheckedContinuation { continuation in
+            MockURLProtocol.requestHandlers["https://www.govuk-auth.com/oauth2/revoke"] = { request in
+                let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)
+                #expect(components?.scheme == "https")
+                #expect(components?.host   == "www.govuk-auth.com")
+                #expect(components?.path == "/oauth2/revoke")
+                #expect(request.httpMethod == "POST")
+                if let data = request.bodyStreamData {
+                    #expect(String(data: data, encoding: .utf8) == "token=token&client_id=clientId")
+                } else {
+                    Issue.record("Expected request body")
+                }
+                return (.arrangeSuccess, nil, nil)
+            }
+            let request = GOVRequest.revoke("token", clientId: "clientId")
+
+            sut.send(
+                request: request,
+                completion: { _ in
+                    continuation.resume(returning: Void())
+                }
+            )
+        }
+    }
 }
 

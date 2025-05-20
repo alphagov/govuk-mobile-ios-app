@@ -12,6 +12,7 @@ protocol LocalAuthenticationServiceInterface {
     var authType: LocalAuthenticationType { get }
     var authenticationOnboardingFlowSeen: Bool { get }
     var isLocalAuthenticationEnabled: Bool { get }
+    var biometricsHaveChanged: Bool { get }
 
     func setLocalAuthenticationEnabled(_ enabled: Bool)
     func canEvaluatePolicy(_ policy: LAPolicy) -> Bool
@@ -72,5 +73,28 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
 
     private var isFeatureEnabled: Bool {
         true
+    }
+
+    private var biometricsPolicyState: Data? {
+        get {
+            userDefaults.value(forKey: .biometricsPolicyState) as? Data
+        }
+        set {
+            userDefaults.set(newValue, forKey: .biometricsPolicyState)
+        }
+    }
+
+    var biometricsHaveChanged: Bool {
+        _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+        if biometricsPolicyState == nil {
+            biometricsPolicyState = context.evaluatedPolicyDomainState
+            return false
+        }
+        if let domainState = context.evaluatedPolicyDomainState,
+           domainState != biometricsPolicyState {
+            biometricsPolicyState = domainState
+            return true
+        }
+        return false
     }
 }

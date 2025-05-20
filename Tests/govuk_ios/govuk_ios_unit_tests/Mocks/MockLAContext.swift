@@ -26,4 +26,9 @@ class MockLAContext: LAContext {
     override var biometryType: LABiometryType {
         return _stubbedBiometryType
     }
+
+    var _stubbedEvaluatedPolicyDomainState: Data? = nil
+    override var evaluatedPolicyDomainState: Data? {
+        return _stubbedEvaluatedPolicyDomainState
+    }
 }

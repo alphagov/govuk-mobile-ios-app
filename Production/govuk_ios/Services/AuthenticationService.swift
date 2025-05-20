@@ -26,6 +26,7 @@ typealias AuthenticationServiceResult = Result<AuthenticationServiceResponse, Au
 class AuthenticationService: AuthenticationServiceInterface {
     private let container = Container.shared
     private var authenticatedSecureStoreService: SecureStorable
+    private let userDefaults: UserDefaultsInterface
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
     private(set) var refreshToken: String?
@@ -49,8 +50,10 @@ class AuthenticationService: AuthenticationServiceInterface {
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
+         userDefaults: UserDefaultsInterface,
          returningUserService: ReturningUserServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
+        self.userDefaults = userDefaults
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
     }
@@ -88,6 +91,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             try authenticatedSecureStoreService.delete()
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
+            userDefaults.set(nil, forKey: .biometricsPolicyState)
             setTokens()
             authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()
         } catch {

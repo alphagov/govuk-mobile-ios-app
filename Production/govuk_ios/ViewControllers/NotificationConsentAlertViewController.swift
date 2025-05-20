@@ -117,7 +117,8 @@ class NotificationConsentAlertViewController: BaseViewController {
         view.addSubview(footerView)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 48
             ),
             titleLabel.leftAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.leftAnchor
@@ -128,7 +129,7 @@ class NotificationConsentAlertViewController: BaseViewController {
 
             bodyLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
-                constant: 30
+                constant: 24
             ),
             bodyLabel.trailingAnchor.constraint(
                 equalTo: view.layoutMarginsGuide.trailingAnchor
@@ -141,7 +142,7 @@ class NotificationConsentAlertViewController: BaseViewController {
 
             privacyStackView.topAnchor.constraint(
                 equalTo: bodyLabel.bottomAnchor,
-                constant: 30
+                constant: 24
             ),
             privacyStackView.trailingAnchor.constraint(
                 lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor

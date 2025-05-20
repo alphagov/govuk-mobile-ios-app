@@ -47,7 +47,7 @@
 		</dict>
 	</dict>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Your FaceID is not shared with GOV.UK</string>
+	<string>Your Face ID will only be used to unlock the app. It’s not shared with GOV.UK.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

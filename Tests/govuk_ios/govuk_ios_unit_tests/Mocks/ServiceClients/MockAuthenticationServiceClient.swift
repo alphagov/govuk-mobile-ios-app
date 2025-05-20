@@ -14,4 +14,9 @@ class MockAuthenticationServiceClient: AuthenticationServiceClientInterface {
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
         _stubbedAuthenticationResult
     }
+
+    func revokeToken(_ refreshToken: String?, completion: (() -> Void)?) {
+        completion?()
+    }
+
 }

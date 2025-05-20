@@ -89,6 +89,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     func signOut() {
         do {
             try authenticatedSecureStoreService.delete()
+            authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             userDefaults.set(nil, forKey: .biometricsPolicyState)
             setTokens()

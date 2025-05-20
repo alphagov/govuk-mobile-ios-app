@@ -10,19 +10,24 @@ typealias TokenRefreshResult = Result<TokenRefreshResponse, TokenRefreshError>
 protocol AuthenticationServiceClientInterface {
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult
     func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult
+    func revokeToken(_ refreshToken: String?,
+                     completion: (() -> Void)?)
 }
 
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let appAuthSession: AppAuthSessionWrapperInterface
     private let appEnvironmentService: AppEnvironmentServiceInterface
     private let oidAuthService: OIDAuthorizationServiceWrapperInterface
+    private let revokeTokenService: APIServiceClientInterface
 
     init(appEnvironmentService: AppEnvironmentServiceInterface,
          appAuthSession: AppAuthSessionWrapperInterface,
-         oidAuthService: OIDAuthorizationServiceWrapperInterface) {
+         oidAuthService: OIDAuthorizationServiceWrapperInterface,
+         revokeTokenServiceClient: APIServiceClientInterface) {
         self.appEnvironmentService = appEnvironmentService
         self.appAuthSession = appAuthSession
         self.oidAuthService = oidAuthService
+        self.revokeTokenService = revokeTokenServiceClient
     }
 
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
@@ -68,6 +73,22 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             return .failure(error)
         } catch {
             return .failure(.genericError)
+        }
+    }
+
+    func revokeToken(_ refreshToken: String?,
+                     completion: (() -> Void)?) {
+        guard let refreshToken else {
+            return
+        }
+        let request = GOVRequest.revoke(
+            refreshToken,
+            clientId: appEnvironmentService.authenticationClientId
+        )
+        revokeTokenService.send(request: request) { result in
+            if case .success = result {
+                completion?()
+            }
         }
     }
 

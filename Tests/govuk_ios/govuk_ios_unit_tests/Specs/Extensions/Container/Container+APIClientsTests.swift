@@ -55,7 +55,11 @@ struct Container_APIClientTests {
                 #expect(components?.path == "/oauth2/revoke")
                 #expect(request.httpMethod == "POST")
                 if let data = request.bodyStreamData {
-                    #expect(String(data: data, encoding: .utf8) == "token=token&client_id=clientId")
+                    let query = String(data: data, encoding: .utf8)
+                    #expect(
+                        (query == "token=token&client_id=clientId") ||
+                        (query == "client_id=clientId&token=token")
+                    )
                 } else {
                     Issue.record("Expected request body")
                 }

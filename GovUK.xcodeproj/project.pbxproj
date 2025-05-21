@@ -293,6 +293,10 @@
 		D0E7923B2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E7923A2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift */; };
 		D0E855D42DDB85C1003B4D7A /* URLEncodedRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E855D32DDB85C1003B4D7A /* URLEncodedRequestBuilder.swift */; };
 		D0E855D62DDB910A003B4D7A /* GovRequest+Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E855D52DDB910A003B4D7A /* GovRequest+Authentication.swift */; };
+		D0E85A822DDCB266003B4D7A /* LocalAuthorityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E85A812DDCB266003B4D7A /* LocalAuthorityResponse.swift */; };
+		D0E85A842DDCD199003B4D7A /* AmbiguousAddressSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E85A832DDCD199003B4D7A /* AmbiguousAddressSelectionViewModel.swift */; };
+		D0E85A862DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */; };
+		D0E85A882DDCDBBC003B4D7A /* AmbiguousAuthorities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E85A872DDCDBBC003B4D7A /* AmbiguousAuthorities.swift */; };
 		D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */; };
 		D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */; };
 		D0EB04842D37F34200B310D8 /* GOV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0EB04812D37F34200B310D8 /* GOV.xcdatamodeld */; };
@@ -642,6 +646,10 @@
 		D0E7923A2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailViewModelInterface.swift; sourceTree = "<group>"; };
 		D0E855D32DDB85C1003B4D7A /* URLEncodedRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncodedRequestBuilder.swift; sourceTree = "<group>"; };
 		D0E855D52DDB910A003B4D7A /* GovRequest+Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GovRequest+Authentication.swift"; sourceTree = "<group>"; };
+		D0E85A812DDCB266003B4D7A /* LocalAuthorityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityResponse.swift; sourceTree = "<group>"; };
+		D0E85A832DDCD199003B4D7A /* AmbiguousAddressSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAddressSelectionViewModel.swift; sourceTree = "<group>"; };
+		D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAddressSelectionView.swift; sourceTree = "<group>"; };
+		D0E85A872DDCDBBC003B4D7A /* AmbiguousAuthorities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAuthorities.swift; sourceTree = "<group>"; };
 		D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentService.swift; sourceTree = "<group>"; };
 		D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
@@ -910,6 +918,8 @@
 				4E265D252DB0E6510089CF9E /* Authority.swift */,
 				4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */,
 				4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */,
+				D0E85A812DDCB266003B4D7A /* LocalAuthorityResponse.swift */,
+				D0E85A872DDCDBBC003B4D7A /* AmbiguousAuthorities.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -953,6 +963,7 @@
 				4EEC0F312DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift */,
 				4EEC0F332DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift */,
 				D0ECB3FD2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift */,
+				D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -1048,10 +1059,6 @@
 				168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */,
 				5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */,
 				169842D92DB0003C00E3EA66 /* LocalAuthenticationOnboardingViewModel.swift */,
-				4EE5F3E12DAFD327008C60ED /* LocalAuthorityExplainerViewModel.swift */,
-				4E038AB82DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift */,
-				4E038AB62DB8E567005DFA53 /* LocalAuthorityWidgetViewModel.swift */,
-				4E3E57EE2D9ADF5E00402E8B /* NotificationSettingsViewModel.swift */,
 				5D0F199D2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift */,
 				5DD4CB192D95491E00459FB5 /* RecentActivityListViewModel.swift */,
 				168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */,
@@ -1641,6 +1648,7 @@
 				D0F6813C2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift */,
 				D0F6813D2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift */,
 				D0ECB4002DCE0F6600A9707E /* AmbiguousAuthoritySelectionViewModel.swift */,
+				D0E85A832DDCD199003B4D7A /* AmbiguousAddressSelectionViewModel.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -1965,6 +1973,7 @@
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,
 				4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */,
 				3D15E7B02CB5627E0046CE64 /* AppRecommendUpdateCoordinator.swift in Sources */,
+				D0E85A862DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift in Sources */,
 				4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */,
 				16FCDE782DC4E39A000E870D /* TokenRefreshResponse.swift in Sources */,
 				5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */,
@@ -2162,6 +2171,7 @@
 				4E0043142D9BE25E00DDDA8A /* NotificationSettingsCoordinator.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,
 				5D6B90152DCB7F0000D36463 /* NotificationConsentAlertViewController.swift in Sources */,
+				D0E85A882DDCDBBC003B4D7A /* AmbiguousAuthorities.swift in Sources */,
 				D08A9A842DB92A3E002E9C78 /* SignOutConfirmationView.swift in Sources */,
 				4E6663C52C736ABD0063E81C /* Feature.swift in Sources */,
 				D0E855D62DDB910A003B4D7A /* GovRequest+Authentication.swift in Sources */,
@@ -2191,7 +2201,9 @@
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				D0EC94C52DCBA5F700A9707E /* AuthenticationInfoViewModelInterface.swift in Sources */,
 				168176A32DCE68D800A4B0E4 /* CoreDataDeletionService.swift in Sources */,
+				D0E85A822DDCB266003B4D7A /* LocalAuthorityResponse.swift in Sources */,
 				D0D9CFD72D3030640051EDDD /* SearchHistoryViewController.swift in Sources */,
+				D0E85A842DDCD199003B4D7A /* AmbiguousAddressSelectionViewModel.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */,
 				4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */,

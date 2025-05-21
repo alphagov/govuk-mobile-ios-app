@@ -40,14 +40,28 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
         set(viewController, animated: true)
     }
 
-    private func navigateToAmbiguousAuthorityView(localAuthorities: [LocalAuthority],
+    private func navigateToAmbiguousAuthorityView(localAuthorities: AmbiguousAuthorities,
                                                   postCode: String) {
         let viewController = viewControllerBuilder.ambiguousAuthoritySelectionView(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             localAuthorities: localAuthorities,
             postCode: postCode,
-            selectAddressAction: { },
+            selectAddressAction: { [weak self] in
+                self?.navigateToAddressView(localAuthorities: localAuthorities)
+            },
+            dismissAction: { [weak self] in
+                self?.dismissModal()
+            }
+        )
+        push(viewController, animated: true)
+    }
+
+    private func navigateToAddressView(localAuthorities: AmbiguousAuthorities) {
+        let viewController = viewControllerBuilder.ambiguousAddressSelectionView(
+            analyticsService: analyticsService,
+            localAuthorityService: localAuthorityService,
+            localAuthorities: localAuthorities,
             dismissAction: { [weak self] in
                 self?.dismissModal()
             }

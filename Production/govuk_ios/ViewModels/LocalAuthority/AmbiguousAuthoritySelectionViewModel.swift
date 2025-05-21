@@ -7,9 +7,9 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let localAuthorityService: LocalAuthorityServiceInterface
     private let postCode: String
-
-    @Published var localAuthorities: [LocalAuthority] = []
-    @Published var selectedAuthority: LocalAuthority?
+    private let ambiguousAuthorities: AmbiguousAuthorities
+    @Published var localAuthorities: [Authority] = []
+    @Published var selectedAuthority: Authority?
 
     private let selectAddressAction: () -> Void
     let dismissAction: () -> Void
@@ -27,14 +27,15 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
 
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
-         localAuthorities: [LocalAuthority],
+         ambiguousAuthorities: AmbiguousAuthorities,
          postCode: String,
          selectAddressAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void
     ) {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
-        self.localAuthorities = localAuthorities
+        self.ambiguousAuthorities = ambiguousAuthorities
+        self.localAuthorities = ambiguousAuthorities.authorities
         self.postCode = postCode
         self.selectAddressAction = selectAddressAction
         self.dismissAction = dismissAction
@@ -61,7 +62,8 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
                 "ambiguousLocalAuthoritySecondaryButtonTitle"
             ),
             action: { [weak self] in
-                self?.selectAddressAction()
+                guard let self = self else { return }
+                self.selectAddressAction()
             }
         )
     }

@@ -2,11 +2,11 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-struct AmbiguousAuthoritySelectionView: View {
-    @StateObject private var viewModel: AmbiguousAuthoritySelectionViewModel
+struct AmbiguousAddressSelectionView: View {
+    @StateObject private var viewModel: AmbiguousAddressSelectionViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    init(viewModel: AmbiguousAuthoritySelectionViewModel) {
+    init(viewModel: AmbiguousAddressSelectionViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -18,25 +18,14 @@ struct AmbiguousAuthoritySelectionView: View {
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
-            let buttonLayout = verticalSizeClass == .compact ?
-            AnyLayout(HStackLayout()) :
-            AnyLayout(VStackLayout())
-            buttonLayout {
-                SwiftUIButton(
-                    .primary,
-                    viewModel: viewModel.confirmButtonModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                .disabled(viewModel.selectedAuthority == nil)
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.selectAddressButtonModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-            }
-            .ignoresSafeArea()
-            .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
-        }.toolbar {
+            SwiftUIButton(
+                .primary,
+                viewModel: viewModel.confirmButtonModel
+            )
+            .frame(minHeight: 44, idealHeight: 44)
+            .disabled(viewModel.selectedAddress == nil)
+        }
+        .toolbar {
             cancelButton
         }
     }
@@ -56,18 +45,18 @@ struct AmbiguousAuthoritySelectionView: View {
 
     private var listView: some View {
         List(
-            viewModel.localAuthorities,
-            id: \.slug
-        ) { authority in
+            viewModel.addresses,
+            id: \.address
+        ) { address in
             RadioButtonView(
-                title: authority.name,
-                selected: isSelected(authority.slug)
+                title: address.address,
+                selected: isSelected(address.address)
             )
             .listRowSeparatorTint(Color(UIColor.govUK.strokes.listDivider))
             .listSectionSeparator(.hidden, edges: .bottom)
             .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
             .onTapGesture {
-                viewModel.selectedAuthority = authority
+                viewModel.selectedAddress = address
             }
         }
         .listStyle(.plain)
@@ -84,6 +73,6 @@ struct AmbiguousAuthoritySelectionView: View {
     }
 
     private func isSelected(_ slug: String) -> Binding<Bool> {
-        return .constant(slug == viewModel.selectedAuthority?.slug)
+        return .constant(slug == viewModel.selectedAddress?.address)
     }
 }

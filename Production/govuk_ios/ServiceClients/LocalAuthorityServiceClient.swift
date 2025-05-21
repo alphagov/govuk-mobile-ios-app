@@ -1,7 +1,7 @@
 import Foundation
 
 typealias FetchLocalAuthorityCompletion = (sending FetchLocalAuthorityResult) -> Void
-typealias FetchLocalAuthorityResult = Result<LocalAuthorityType, LocalAuthorityError>
+typealias FetchLocalAuthorityResult = Result<LocalAuthorityResponse, LocalAuthorityError>
 
 protocol LocalAuthorityServiceClientInterface {
     func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion)
@@ -12,7 +12,7 @@ protocol LocalAuthorityServiceClientInterface {
     )
     func fetchLocalAuthorities(
         slugs: [String],
-        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void
+        completion: @escaping (Result<[Authority], LocalAuthorityError>) -> Void
     )
 }
 
@@ -46,8 +46,8 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
 
     func fetchLocalAuthorities(
         slugs: [String],
-        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void) {
-            var results: [LocalAuthority?] = []
+        completion: @escaping (Result<[Authority], LocalAuthorityError>) -> Void) {
+            var results: [Authority?] = []
             var localAuthError: LocalAuthorityError?
             let group = DispatchGroup()
 
@@ -56,7 +56,7 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
                 fetchLocalAuthority(slug: slug) { result in
                     switch result {
                     case .success(let localAuthority):
-                        results.append(localAuthority as? LocalAuthority)
+                        results.append(localAuthority.localAuthority)
                     case .failure(let error):
                         localAuthError = error
                     }
@@ -74,7 +74,7 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
     }
 
     private func mapResult(
-        _ result: NetworkResult<Data>) -> Result<LocalAuthorityType, LocalAuthorityError> {
+        _ result: NetworkResult<Data>) -> Result<LocalAuthorityResponse, LocalAuthorityError> {
             return result.mapError { error in
                 let nsError = (error as NSError)
                 if nsError.code == NSURLErrorNotConnectedToInternet {
@@ -92,17 +92,8 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
             }
         }
 
-    private func decode(data: Data) -> LocalAuthorityType? {
-        if let localAuthority = try? JSONDecoder().decode(LocalAuthority.self, from: data) {
-            return localAuthority
-        }
-        if let addressList = try? JSONDecoder().decode(LocalAuthoritiesList.self, from: data) {
-            return addressList
-        }
-        if let errorMessage = try? JSONDecoder().decode(LocalErrorMessage.self, from: data) {
-            return errorMessage
-        }
-        return nil
+    private func decode(data: Data) -> LocalAuthorityResponse? {
+        try? JSONDecoder().decode(LocalAuthorityResponse.self, from: data)
     }
 }
 

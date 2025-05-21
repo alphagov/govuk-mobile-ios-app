@@ -9,7 +9,10 @@ struct AmbiguousLocalAuthorityViewModelTests {
         let sut = AmbiguousAuthoritySelectionViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityService: MockLocalAuthorityService(),
-            localAuthorities: [],
+            ambiguousAuthorities: AmbiguousAuthorities(
+                authorities: [],
+                addresses: []
+            ),
             postCode: "SW11 5EW",
             selectAddressAction: { },
             dismissAction: { }

@@ -1,6 +1,39 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "addressSelectionPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Address"
+          }
+        }
+      }
+    },
+    "addressSelectionViewSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We’ll use your address to find your local council"
+          }
+        }
+      }
+    },
+    "addressSelectionViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is your address?"
+          }
+        }
+      }
+    },
     "ambiguousLocalAuthorityPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

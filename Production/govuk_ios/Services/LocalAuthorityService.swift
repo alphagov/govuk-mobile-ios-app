@@ -6,9 +6,9 @@ protocol LocalAuthorityServiceInterface {
     func fetchLocalAuthority(slug: String, completion: @escaping FetchLocalAuthorityCompletion)
     func fetchLocalAuthorities(
         slugs: [String],
-        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void
+        completion: @escaping (Result<[Authority], LocalAuthorityError>) -> Void
     )
-    func saveLocalAuthority(_ localAuthority: LocalAuthority)
+    func saveLocalAuthority(_ localAuthority: Authority)
 }
 
 class LocalAuthorityService: LocalAuthorityServiceInterface {
@@ -25,9 +25,9 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
                              completion: @escaping FetchLocalAuthorityCompletion) {
         serviceClient.fetchLocalAuthority(postcode: postcode) { [weak self] result in
             switch result {
-            case .success(let authorityType):
-                self?.updateLocalAuthority(authorityType)
-                completion(.success(authorityType))
+            case .success(let response):
+                self?.updateLocalAuthority(response)
+                completion(.success(response))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -52,7 +52,7 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
 
     func fetchLocalAuthorities(
         slugs: [String],
-        completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void
+        completion: @escaping (Result<[Authority], LocalAuthorityError>) -> Void
     ) {
         serviceClient.fetchLocalAuthorities(slugs: slugs) { result in
             switch result {
@@ -64,13 +64,13 @@ class LocalAuthorityService: LocalAuthorityServiceInterface {
         }
     }
 
-    private func updateLocalAuthority(_ authorityType: LocalAuthorityType) {
-        if let localAuthority = authorityType as? LocalAuthority {
+    private func updateLocalAuthority(_ response: LocalAuthorityResponse) {
+        if let localAuthority = response.localAuthority {
             repository.save(localAuthority)
         }
     }
 
-    func saveLocalAuthority(_ localAuthority: LocalAuthority) {
+    func saveLocalAuthority(_ localAuthority: Authority) {
         repository.save(localAuthority)
     }
 }

@@ -19,7 +19,7 @@ class NotificationOnboardingCoordinatorTests {
         let sut = await NotificationOnboardingCoordinator(
             navigationController: mockNavigationController,
             notificationService: mockNotificationService,
-            onboardingService: mockOnboardingService,
+            notificationOnboardingService: mockOnboardingService,
             analyticsService: MockAnalyticsService(),
             viewControllerBuilder: MockViewControllerBuilder(),
             completion: {}
@@ -41,7 +41,7 @@ class NotificationOnboardingCoordinatorTests {
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                onboardingService: mockOnboardingService,
+                notificationOnboardingService: mockOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 completion: {
@@ -65,7 +65,7 @@ class NotificationOnboardingCoordinatorTests {
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                onboardingService: mockOnboardingService,
+                notificationOnboardingService: mockOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 completion: {
@@ -89,7 +89,7 @@ class NotificationOnboardingCoordinatorTests {
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                onboardingService: mockOnboardingService,
+                notificationOnboardingService: mockOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 completion: {

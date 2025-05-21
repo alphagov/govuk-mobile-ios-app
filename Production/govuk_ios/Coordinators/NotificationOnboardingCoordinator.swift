@@ -6,19 +6,19 @@ import Onboarding
 
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
-    private let onboardingService: NotificationsOnboardingServiceInterface
+    private let notificationOnboardingService: NotificationsOnboardingServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
     private let completeAction: () -> Void
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
-         onboardingService: NotificationsOnboardingServiceInterface,
+         notificationOnboardingService: NotificationsOnboardingServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          viewControllerBuilder: ViewControllerBuilder,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
-        self.onboardingService = onboardingService
+        self.notificationOnboardingService = notificationOnboardingService
         self.analyticsService = analyticsService
         self.viewControllerBuilder = viewControllerBuilder
         self.completeAction = completion
@@ -33,7 +33,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func startNotifications() async {
         guard await notificationService.shouldRequestPermission,
-              !onboardingService.hasSeenNotificationsOnboarding else {
+              !notificationOnboardingService.hasSeenNotificationsOnboarding else {
             return finishCoordination()
         }
         setOnboarding()
@@ -62,7 +62,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
 
     private func finishCoordination() {
         DispatchQueue.main.async {
-            self.onboardingService.setHasSeenNotificationsOnboarding()
+            self.notificationOnboardingService.setHasSeenNotificationsOnboarding()
             self.completeAction()
         }
     }

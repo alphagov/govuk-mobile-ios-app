@@ -44,7 +44,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
 
         var expectedAddresses = [LocalAuthorityAddress]()
         _ = await withCheckedContinuation { continuation in
-            let sut = LocalAuthorityPostecodeEntryViewModel(
+            let sut = LocalAuthorityPostcodeEntryViewModel(
                 service: mockService,
                 analyticsService: MockAnalyticsService(),
                 resolveAmbiguityAction: { authorities, postCode in
@@ -62,7 +62,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
 
     @Test
     func returnErrorMessage_emptyString_returnsExpectedResult() async throws {
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
@@ -81,7 +81,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalPostcodeResult = .success(expectedResult)
 
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
@@ -111,7 +111,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
         let mockService = MockLocalAuthorityService()
         mockService._stubbedFetchLocalPostcodeResult = .success(expectedResult)
 
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
@@ -134,7 +134,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
     @Test
     func primaryButtonViewModel_action_trackNavigationEvent() async throws {
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
             resolveAmbiguityAction: { _, _ in },

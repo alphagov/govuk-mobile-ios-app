@@ -25,7 +25,7 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
 
     func test_loadInNavigationController_error_light_rendersCorrectly() {
 
-        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+        let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
@@ -45,7 +45,7 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
 
     func test_loadInNavigationController_error_dark_rendersCorrectly() {
 
-        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+        let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
@@ -64,7 +64,7 @@ final class LocalAuthorityPostcodeEntryViewControllerSnapshotTests: SnapshotTest
     }
 
     private func viewController() -> UIViewController {
-        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+        let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },

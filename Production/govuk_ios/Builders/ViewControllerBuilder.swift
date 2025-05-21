@@ -110,7 +110,7 @@ class ViewControllerBuilder {
         resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
-        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+        let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
             resolveAmbiguityAction: resolveAmbiguityAction,

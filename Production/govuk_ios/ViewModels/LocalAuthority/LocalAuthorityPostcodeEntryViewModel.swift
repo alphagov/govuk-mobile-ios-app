@@ -3,7 +3,7 @@ import UIComponents
 import GOVKit
 import SwiftUI
 
-class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
+class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
     @Published var postCode: String = ""
     @Published var error: PostcodeError?

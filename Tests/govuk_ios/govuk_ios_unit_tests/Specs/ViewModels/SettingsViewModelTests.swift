@@ -7,7 +7,7 @@ import Combine
 @testable import GOVKit
 @testable import GOVKitTestUtilities
 
-@Suite
+@Suite(.serialized)
 class SettingsViewModelTests {
 
     let sut: SettingsViewModel

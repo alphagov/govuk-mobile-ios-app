@@ -40,6 +40,7 @@ struct LocalAuthorityPostcodeEntryView: View {
             PrimaryButtonView(
                 viewModel: viewModel.primaryButtonViewModel
             )
+            .disabled(viewModel.postCode.isEmpty)
         }.toolbar {
             cancelButton
         }

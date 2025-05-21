@@ -15,16 +15,8 @@ struct AmbiguousAddressSelectionView: View {
             headerView
             listView
             Spacer()
-            Divider()
-                .overlay(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea()
-            SwiftUIButton(
-                .primary,
-                viewModel: viewModel.confirmButtonModel
-            )
-            .frame(minHeight: 44, idealHeight: 44)
-            .disabled(viewModel.selectedAddress == nil)
-            .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
+            PrimaryButtonView(viewModel: viewModel.confirmButtonModel)
+                .disabled(viewModel.selectedAddress == nil)
         }
         .toolbar {
             cancelButton

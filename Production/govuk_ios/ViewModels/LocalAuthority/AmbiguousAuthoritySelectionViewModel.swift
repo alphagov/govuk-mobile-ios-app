@@ -8,7 +8,7 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
     private let localAuthorityService: LocalAuthorityServiceInterface
     private let postCode: String
     private let ambiguousAuthorities: AmbiguousAuthorities
-    @Published var localAuthorities: [Authority] = []
+    let localAuthorities: [Authority]
     @Published var selectedAuthority: Authority?
 
     private let selectAddressAction: () -> Void

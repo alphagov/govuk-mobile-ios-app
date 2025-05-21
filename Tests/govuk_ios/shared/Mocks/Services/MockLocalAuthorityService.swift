@@ -26,15 +26,15 @@ class MockLocalAuthorityService: LocalAuthorityServiceInterface {
         }
     }
 
-    var _stubbedLocalAuthoritiesResult: Result<[govuk_ios.LocalAuthority], govuk_ios.LocalAuthorityError>?
-    func fetchLocalAuthorities(slugs: [String], completion: @escaping (Result<[govuk_ios.LocalAuthority], govuk_ios.LocalAuthorityError>) -> Void) {
+    var _stubbedLocalAuthoritiesResult: Result<[Authority], govuk_ios.LocalAuthorityError>?
+    func fetchLocalAuthorities(slugs: [String], completion: @escaping (Result<[Authority], LocalAuthorityError>) -> Void) {
         if let result = _stubbedLocalAuthoritiesResult {
             completion(result)
         }
     }
 
     var _stubbedSaveLocalAuthorityCalled = false
-    func saveLocalAuthority(_ localAuthority: LocalAuthority) {
+    func saveLocalAuthority(_ localAuthority: Authority) {
         _stubbedSaveLocalAuthorityCalled = true
     }
 }

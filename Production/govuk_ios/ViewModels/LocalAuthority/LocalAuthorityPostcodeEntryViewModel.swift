@@ -7,7 +7,6 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
     @Published var postCode: String = ""
     @Published var error: PostcodeError?
-    private var ambiguousAuthorities: AmbiguousAuthorities?
     @Published var textFieldColour: UIColor = UIColor.govUK.strokes.listDivider
     private let analyticsService: AnalyticsServiceInterface
     let dismissAction: () -> Void
@@ -51,6 +50,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         case postCodeNotFound = "localAuthorityPostcodeNotFound"
         case textFieldEmpty = "localAuthorityEmptyTextField"
         case invalidPostcode = "localAuthorityInvalidPostcode"
+        case pageNotWorking = "localAuthorityPageNotWorking"
 
         var errorMessage: String {
             String.localAuthority.localized(
@@ -66,13 +66,13 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
             switch result {
             case .success(let localAuthorities):
                 guard let self = self else { return }
-                let ambigousAuthorities = AmbiguousAuthorities(
+                let ambiguousAuthorities = AmbiguousAuthorities(
                     authorities: localAuthorities,
                     addresses: addresses
                 )
-                self.resolveAmbiguityAction(ambigousAuthorities, self.postCode)
+                self.resolveAmbiguityAction(ambiguousAuthorities, self.postCode)
             case .failure(let error):
-                print("LOCAL AUTHORITY ERROR: \(error)")
+                self?.populateErrorMessage(error: error.localizedDescription)
             }
         }
     }
@@ -131,10 +131,10 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     func fetchLocalAuthority(postCode: String) {
         service.fetchLocalAuthority(postcode: postCode) { [weak self] results in
             if case let .success(response) = results {
-                switch response.flavor {
+                switch response.type {
                 case .authority:
                     self?.dismissAction()
-                case .addressList(let addresses):
+                case .addresses(let addresses):
                     self?.fetchAuthoritiesWithAddresses(addresses)
                 case .errorMessage:
                     self?.populateErrorMessage(
@@ -152,7 +152,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         case "Postcode not found":
             self.error = .postCodeNotFound
         default:
-            break
+            self.error = .pageNotWorking
         }
         setErrorTextFieldColour()
     }

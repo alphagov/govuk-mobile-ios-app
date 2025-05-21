@@ -78,10 +78,7 @@
 		4E00EEFB2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
 		4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D252DB0E6510089CF9E /* Authority.swift */; };
-		4E265D2B2DB0E6510089CF9E /* LocalAuthoritiesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */; };
-		4E265D2C2DB0E6510089CF9E /* LocalAuthority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D272DB0E6510089CF9E /* LocalAuthority.swift */; };
 		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
-		4E265D2E2DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */; };
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
 		4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
@@ -431,10 +428,7 @@
 		4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		4E265D252DB0E6510089CF9E /* Authority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
-		4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthoritiesList.swift; sourceTree = "<group>"; };
-		4E265D272DB0E6510089CF9E /* LocalAuthority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthority.swift; sourceTree = "<group>"; };
 		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
-		4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityErrorMessage.swift; sourceTree = "<group>"; };
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocalAuthorityCoordinator.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
@@ -911,10 +905,7 @@
 		4E265F142DB0E6B70089CF9E /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
-				4E265D292DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift */,
 				4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */,
-				4E265D272DB0E6510089CF9E /* LocalAuthority.swift */,
-				4E265D262DB0E6510089CF9E /* LocalAuthoritiesList.swift */,
 				4E265D252DB0E6510089CF9E /* Authority.swift */,
 				4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */,
 				4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */,
@@ -2207,10 +2198,7 @@
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */,
 				4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */,
-				4E265D2B2DB0E6510089CF9E /* LocalAuthoritiesList.swift in Sources */,
-				4E265D2C2DB0E6510089CF9E /* LocalAuthority.swift in Sources */,
 				4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */,
-				4E265D2E2DB0E6510089CF9E /* LocalAuthorityErrorMessage.swift in Sources */,
 				5D54F4752CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */,
 				5D962D652C29BD0B0038BC0A /* LaunchCoordinator.swift in Sources */,

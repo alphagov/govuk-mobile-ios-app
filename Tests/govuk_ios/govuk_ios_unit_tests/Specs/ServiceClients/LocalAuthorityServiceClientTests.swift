@@ -35,11 +35,11 @@ struct LocalAuthorityServiceClientTests {
                 }
         }
         let localResult = try? result.get()
-        let addressList = localResult as? LocalAuthoritiesList
-        #expect(addressList?.addresses.count == 2)
-        #expect(addressList?.addresses.first?.name == "Dorset County Council")
-        #expect(addressList?.addresses.last?.name == "Bournemouth, Christchurch, and Poole")
-        #expect(addressList?.addresses.first?.slug == "dorset")
+        let addressList = localResult?.localAuthorityAddresses
+        #expect(addressList?.count == 2)
+        #expect(addressList?.first?.name == "Dorset County Council")
+        #expect(addressList?.last?.name == "Bournemouth, Christchurch, and Poole")
+        #expect(addressList?.first?.slug == "dorset")
     }
 
     @Test
@@ -56,11 +56,11 @@ struct LocalAuthorityServiceClientTests {
             }
         }
         let localResult = try? result.get()
-        let localAuthority = localResult as? LocalAuthority
-        #expect(localAuthority?.localAuthority.homepageUrl == "https://www.towerhamlets.gov.uk")
-        #expect(localAuthority?.localAuthority.name == "London Borough of Tower Hamlets")
-        #expect(localAuthority?.localAuthority.tier == "unitary")
-        #expect(localAuthority?.localAuthority.slug == "tower-hamlets")
+        let localAuthority = localResult?.localAuthority
+        #expect(localAuthority?.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(localAuthority?.name == "London Borough of Tower Hamlets")
+        #expect(localAuthority?.tier == "unitary")
+        #expect(localAuthority?.slug == "tower-hamlets")
     }
 
     @Test
@@ -77,12 +77,12 @@ struct LocalAuthorityServiceClientTests {
             }
         }
         let localResult = try? result.get()
-        let localAuthority = localResult as? LocalAuthority
-        #expect(localAuthority?.localAuthority.homepageUrl == "https://www.derbyshiredales.gov.uk/")
-        #expect(localAuthority?.localAuthority.name == "Derbyshire Dales District Council")
-        #expect(localAuthority?.localAuthority.tier == "district")
-        #expect(localAuthority?.localAuthority.slug == "derbyshire-dales")
-        #expect(localAuthority?.localAuthority.parent?.name == "Derbyshire County Council")
+        let localAuthority = localResult?.localAuthority
+        #expect(localAuthority?.homepageUrl == "https://www.derbyshiredales.gov.uk/")
+        #expect(localAuthority?.name == "Derbyshire Dales District Council")
+        #expect(localAuthority?.tier == "district")
+        #expect(localAuthority?.slug == "derbyshire-dales")
+        #expect(localAuthority?.parent?.name == "Derbyshire County Council")
     }
 
     @Test
@@ -150,8 +150,8 @@ struct LocalAuthorityServiceClientTests {
                 }
         }
         let localResult = try? result.get()
-        let errormessage = localResult as? LocalErrorMessage
-        #expect(errormessage?.message == "Postcode not found")
+        let errormessage = localResult?.localAuthorityErrorMessage
+        #expect(errormessage == "Postcode not found")
     }
 }
 private extension LocalAuthorityServiceClientTests {

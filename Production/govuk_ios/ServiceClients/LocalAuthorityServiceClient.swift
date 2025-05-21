@@ -96,5 +96,3 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
         try? JSONDecoder().decode(LocalAuthorityResponse.self, from: data)
     }
 }
-
-protocol LocalAuthorityType { }

@@ -4,7 +4,7 @@ import Foundation
 
 class MockLocalServiceClient: LocalAuthorityServiceClientInterface {
     var _stubbedPostcode: String?
-    var _stubbedLocalPostcodeResult: Result<LocalAuthorityType, LocalAuthorityError>?
+    var _stubbedLocalPostcodeResult: Result<LocalAuthorityResponse, LocalAuthorityError>?
     var _receivedLocalCompletion: FetchLocalAuthorityCompletion?
     func fetchLocalAuthority(postcode: String, completion: @escaping FetchLocalAuthorityCompletion) {
         _stubbedPostcode = postcode
@@ -14,7 +14,7 @@ class MockLocalServiceClient: LocalAuthorityServiceClientInterface {
     }
 
     var _stubbedSlug: String?
-    var _stubbedLocalSlugResult: Result<LocalAuthorityType, LocalAuthorityError>?
+    var _stubbedLocalSlugResult: Result<LocalAuthorityResponse, LocalAuthorityError>?
     func fetchLocalAuthority(slug: String, completion: @escaping FetchLocalAuthorityCompletion) {
         _stubbedSlug = slug
         if let result = _stubbedLocalSlugResult {
@@ -23,9 +23,9 @@ class MockLocalServiceClient: LocalAuthorityServiceClientInterface {
     }
 
     var _stubbedSlugs: [String]?
-    var _stubbedLocalAuthoritiesResult: Result<[LocalAuthority], LocalAuthorityError>?
+    var _stubbedLocalAuthoritiesResult: Result<[Authority], LocalAuthorityError>?
     func fetchLocalAuthorities(slugs: [String],
-                               completion: @escaping (Result<[LocalAuthority], LocalAuthorityError>) -> Void) {
+                               completion: @escaping (Result<[Authority], LocalAuthorityError>) -> Void) {
         _stubbedSlugs = slugs
         if let result =  _stubbedLocalAuthoritiesResult {
             completion(result)

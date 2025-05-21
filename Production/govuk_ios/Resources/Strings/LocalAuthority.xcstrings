@@ -144,6 +144,17 @@
         }
       }
     },
+    "localAuthorityPageNotWorking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This page is not working. Try again later."
+          }
+        }
+      }
+    },
     "localAuthoritypostcodeEntryPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

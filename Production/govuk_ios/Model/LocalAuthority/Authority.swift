@@ -1,7 +1,6 @@
 import Foundation
 
-class Authority: Codable,
-                 LocalAuthorityType {
+class Authority: Codable {
     let name: String
     let homepageUrl: String
     let tier: String

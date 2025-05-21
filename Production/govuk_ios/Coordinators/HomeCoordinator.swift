@@ -72,7 +72,7 @@ class HomeCoordinator: TabItemCoordinator {
     }
 
     private func presentWebView(url: URL) {
-        let coordinator = SafariCoordinator(
+        let coordinator = coordinatorBuilder.safari(
             navigationController: root,
             url: url
         )

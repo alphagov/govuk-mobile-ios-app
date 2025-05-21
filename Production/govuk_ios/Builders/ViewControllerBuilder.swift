@@ -3,6 +3,7 @@ import UIKit
 import SwiftUI
 import Factory
 import GOVKit
+import SafariServices
 
 // swiftlint:disable:next type_body_length
 class ViewControllerBuilder {
@@ -297,5 +298,18 @@ class ViewControllerBuilder {
     @MainActor
     func webViewController(for url: URL) -> UIViewController {
         return WebViewController(url: url)
+    }
+
+    @MainActor
+    func safari(url: URL) -> UIViewController {
+        let config = SFSafariViewController.Configuration()
+        config.barCollapsingEnabled = true
+        let viewController = SFSafariViewController(
+            url: url,
+            configuration: config
+        )
+        viewController.modalPresentationStyle = .formSheet
+        viewController.isModalInPresentation = true
+        return viewController
     }
 }

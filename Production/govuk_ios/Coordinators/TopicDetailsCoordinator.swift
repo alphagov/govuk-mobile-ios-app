@@ -5,6 +5,7 @@ final class TopicDetailsCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let activityService: ActivityServiceInterface
+    private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let topic: Topic
 
@@ -12,9 +13,11 @@ final class TopicDetailsCoordinator: BaseCoordinator {
          analyticsService: AnalyticsServiceInterface,
          topicsService: TopicsServiceInterface,
          activityService: ActivityServiceInterface,
+         coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          topic: Topic) {
         self.analyticsService = analyticsService
+        self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.topicsService = topicsService
         self.activityService = activityService
@@ -59,7 +62,7 @@ final class TopicDetailsCoordinator: BaseCoordinator {
     }
 
     private func presentWebView(url: URL) {
-        let coordinator = SafariCoordinator(
+        let coordinator = coordinatorBuilder.safari(
             navigationController: root,
             url: url
         )

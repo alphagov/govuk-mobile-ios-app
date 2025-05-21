@@ -4,10 +4,13 @@ import SafariServices
 
 class SafariCoordinator: BaseCoordinator {
     private let url: URL
+    private let viewControllerBuilder: ViewControllerBuilder
 
     init(navigationController: UINavigationController,
+         viewControllerBuilder: ViewControllerBuilder,
          url: URL) {
         self.url = url
+        self.viewControllerBuilder = viewControllerBuilder
         super.init(navigationController: navigationController)
     }
 
@@ -16,19 +19,11 @@ class SafariCoordinator: BaseCoordinator {
     }
 
     private func presentViewController(url: URL) {
-        let config = SFSafariViewController.Configuration()
-        config.barCollapsingEnabled = true
-        let viewController = SFSafariViewController(
-            url: url,
-            configuration: config
-        )
-        viewController.modalPresentationStyle = .formSheet
-        viewController.isModalInPresentation = true
+        let viewController = viewControllerBuilder.safari(url: url)
         let navigationController = UINavigationController(
             rootViewController: viewController
         )
-        navigationController.presentationController?.delegate = self
-        root.present(navigationController, animated: true)
         navigationController.isNavigationBarHidden = true
+        root.present(navigationController, animated: true)
     }
 }

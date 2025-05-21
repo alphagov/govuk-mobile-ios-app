@@ -154,6 +154,7 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             topicsService: container.topicsService.resolve(),
             activityService: container.activityService.resolve(),
+            coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             topic: topic
         )
@@ -333,6 +334,15 @@ class CoordinatorBuilder {
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(
             navigationController: UINavigationController(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            url: url
+        )
+    }
+
+    func safari(navigationController: UINavigationController,
+                url: URL) -> BaseCoordinator {
+        SafariCoordinator(
+            navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             url: url
         )

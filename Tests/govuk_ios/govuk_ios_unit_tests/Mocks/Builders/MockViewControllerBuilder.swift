@@ -137,4 +137,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedSignInErrorViewController ?? UIViewController()
 
     }
+
+    var _receivedSafariUrl: URL?
+    var _stubbedSafariViewController: UIViewController?
+    override func safari(url: URL) -> UIViewController {
+        _receivedSafariUrl = url
+        return _stubbedSafariViewController ?? UIViewController()
+    }
 }

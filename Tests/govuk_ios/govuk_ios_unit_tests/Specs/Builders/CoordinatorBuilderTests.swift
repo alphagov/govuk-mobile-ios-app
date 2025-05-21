@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import Factory
+import UIKit
 
 @testable import govuk_ios
 
@@ -336,5 +337,16 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is NotificationConsentCoordinator)
+    }
+
+    @Test
+    func safari_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.safari(
+            navigationController: UINavigationController(),
+            url: URL.arrange
+        )
+
+        #expect(coordinator is SafariCoordinator)
     }
 }

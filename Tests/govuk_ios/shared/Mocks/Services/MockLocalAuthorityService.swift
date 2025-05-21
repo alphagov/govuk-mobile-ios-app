@@ -33,9 +33,9 @@ class MockLocalAuthorityService: LocalAuthorityServiceInterface {
         }
     }
 
-    var _stubbedSaveLocalAuthorityCalled = false
+    var _savedAuthority: Authority?
     func saveLocalAuthority(_ localAuthority: Authority) {
-        _stubbedSaveLocalAuthorityCalled = true
+        _savedAuthority = localAuthority
     }
 }
 

@@ -681,6 +681,8 @@
 				govuk_ios/govuk_ios_snapshot_tests/Helpers/SnapshotTestCase.swift,
 				govuk_ios/govuk_ios_snapshot_tests/ReferenceImages_64,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AllTopicsViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AmbiguousAddressSelectionViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AmbiguousAuthorityViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AnalyticsConsentViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AppForcedUpdateViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AppRecommendUpdateViewControllerSnapshotTests.swift,
@@ -720,6 +722,8 @@
 			membershipExceptions = (
 				govuk_ios/govuk_ios_snapshot_tests/Helpers/SnapshotTestCase.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AllTopicsViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AmbiguousAddressSelectionViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AmbiguousAuthorityViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AnalyticsConsentViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AppForcedUpdateViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/AppRecommendUpdateViewControllerSnapshotTests.swift,

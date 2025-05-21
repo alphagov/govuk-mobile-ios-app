@@ -154,7 +154,7 @@ class ViewControllerBuilder {
         let viewModel = AmbiguousAddressSelectionViewModel(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
-            authorities: localAuthorities,
+            ambiguousAuthorities: localAuthorities,
             dismissAction: dismissAction)
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel

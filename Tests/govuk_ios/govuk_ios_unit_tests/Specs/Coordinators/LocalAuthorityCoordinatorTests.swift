@@ -61,7 +61,7 @@ struct LocalAuthorityCoordinatorTests {
         let navigationController = UINavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
 
-        mockViewControllerBuilder._stubbedLocalAuthortiyPostcodeEntryViewController = expectedViewController
+        mockViewControllerBuilder._stubbedLocalAuthorityExplainerViewController = expectedViewController
 
         let sut = LocalAuthorityServiceCoordinator(
             navigationController: navigationController,

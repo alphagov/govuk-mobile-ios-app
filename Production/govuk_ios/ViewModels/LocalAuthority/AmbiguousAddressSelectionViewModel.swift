@@ -6,7 +6,7 @@ import SwiftUI
 class AmbiguousAddressSelectionViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let localAuthorityService: LocalAuthorityServiceInterface
-    private let authorities: AmbiguousAuthorities
+    private let ambiguousAuthorities: AmbiguousAuthorities
 
     @Published var addresses: [LocalAuthorityAddress]
     @Published var selectedAddress: LocalAuthorityAddress?
@@ -23,13 +23,13 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
 
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
-         authorities: AmbiguousAuthorities,
+         ambiguousAuthorities: AmbiguousAuthorities,
          dismissAction: @escaping () -> Void
     ) {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
-        self.authorities = authorities
-        self.addresses = authorities.addresses
+        self.ambiguousAuthorities = ambiguousAuthorities
+        self.addresses = ambiguousAuthorities.addresses
         self.dismissAction = dismissAction
     }
 
@@ -40,7 +40,7 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
             ),
             action: { [weak self] in
                 guard let selectedAddress = self?.selectedAddress,
-                      let selectedAuthority = self?.authorities.authorities.first(
+                      let selectedAuthority = self?.ambiguousAuthorities.authorities.first(
                         where: {
                             $0.slug == selectedAddress.slug
                         }

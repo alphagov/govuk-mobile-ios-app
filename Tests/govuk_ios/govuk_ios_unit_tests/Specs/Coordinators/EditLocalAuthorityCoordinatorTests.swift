@@ -14,7 +14,7 @@ struct EditLocalAuthorityCoordinatorTests {
         let expectedViewController = UIViewController()
         let navigationController = UINavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
-        mockViewControllerBuilder._stubbedLocalAuthortiyPostcodeEntryViewController = expectedViewController
+        mockViewControllerBuilder._stubbedLocalAuthorityPostcodeEntryViewController = expectedViewController
 
         let subject = EditLocalAuthorityCoordinator(
             navigationController: navigationController,
@@ -37,7 +37,7 @@ struct EditLocalAuthorityCoordinatorTests {
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockCoordinator = MockBaseCoordinator()
 
-        mockViewControllerBuilder._stubbedLocalAuthortiyPostcodeEntryViewController = expectedViewController
+        mockViewControllerBuilder._stubbedLocalAuthorityPostcodeEntryViewController = expectedViewController
         var sut: EditLocalAuthorityCoordinator!
         let dismissed = await  withCheckedContinuation { continuation in
               sut = EditLocalAuthorityCoordinator(
@@ -68,7 +68,7 @@ struct EditLocalAuthorityCoordinatorTests {
         let navigationController = UINavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockCoordinator = MockBaseCoordinator()
-        mockViewControllerBuilder._stubbedLocalAuthortiyPostcodeEntryViewController = expectedViewController
+        mockViewControllerBuilder._stubbedLocalAuthorityPostcodeEntryViewController = expectedViewController
 
         let dismissed = await withCheckedContinuation { continuation in
             let sut = EditLocalAuthorityCoordinator(

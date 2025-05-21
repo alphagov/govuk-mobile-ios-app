@@ -24,6 +24,7 @@ struct AmbiguousAddressSelectionView: View {
             )
             .frame(minHeight: 44, idealHeight: 44)
             .disabled(viewModel.selectedAddress == nil)
+            .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
         }
         .toolbar {
             cancelButton

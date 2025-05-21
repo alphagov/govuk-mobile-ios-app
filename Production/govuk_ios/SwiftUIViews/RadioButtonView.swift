@@ -14,7 +14,7 @@ struct RadioButtonView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: selected ? "circle.fill" : "circle")
+                Image(selected ? "selected_radio_button" : "unselected_radio_button")
                 Text(title)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                     .font(.body)

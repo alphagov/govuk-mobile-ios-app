@@ -12,14 +12,14 @@ class NotificationOnboardingCoordinatorTests {
     func start_shouldRequestPermission_startsOnboarding() async {
         let mockNotificationService = MockNotificationService()
         let mockNavigationController = await MockNavigationController()
-        let mockOnboardingService = MockNotificationsOnboardingService()
-        mockOnboardingService.hasSeenNotificationsOnboarding = false
+        let mockNotificationOnboardingService = MockNotificationsOnboardingService()
+        mockNotificationOnboardingService.hasSeenNotificationsOnboarding = false
         mockNotificationService._stubbedShouldRequestPermission = true
 
         let sut = await NotificationOnboardingCoordinator(
             navigationController: mockNavigationController,
             notificationService: mockNotificationService,
-            notificationOnboardingService: mockOnboardingService,
+            notificationOnboardingService: mockNotificationOnboardingService,
             analyticsService: MockAnalyticsService(),
             viewControllerBuilder: MockViewControllerBuilder(),
             completion: {}
@@ -35,13 +35,13 @@ class NotificationOnboardingCoordinatorTests {
     func start_shouldRequestPermissionFalse_completesCoordinator() async {
         let mockNotificationService = MockNotificationService()
         let mockNavigationController = MockNavigationController()
-        let mockOnboardingService = MockNotificationsOnboardingService()
+        let mockNotificationOnboardingService = MockNotificationsOnboardingService()
         mockNotificationService._stubbedShouldRequestPermission = false
         let completed = await withCheckedContinuation { continuation in
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                notificationOnboardingService: mockOnboardingService,
+                notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 completion: {
@@ -59,13 +59,13 @@ class NotificationOnboardingCoordinatorTests {
     func start_whenPermissionNotRequiredAndOnboardingNotSeen_completesImmediately() async {
         let mockNotificationService = MockNotificationService()
         let mockNavigationController = MockNavigationController()
-        let mockOnboardingService = MockNotificationsOnboardingService()
+        let mockNotificationOnboardingService = MockNotificationsOnboardingService()
         mockNotificationService._stubbedShouldRequestPermission = false
         let completed = await withCheckedContinuation { continuation in
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                notificationOnboardingService: mockOnboardingService,
+                notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 completion: {
@@ -83,13 +83,13 @@ class NotificationOnboardingCoordinatorTests {
     func start_whenPermissionNotRequiredAndOnboardingSeen_completesImmediately() async {
         let mockNotificationService = MockNotificationService()
         let mockNavigationController = MockNavigationController()
-        let mockOnboardingService = MockNotificationsOnboardingService()
+        let mockNotificationOnboardingService = MockNotificationsOnboardingService()
         mockNotificationService._stubbedShouldRequestPermission = false
         let completed = await withCheckedContinuation { continuation in
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 notificationService: mockNotificationService,
-                notificationOnboardingService: mockOnboardingService,
+                notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
                 completion: {

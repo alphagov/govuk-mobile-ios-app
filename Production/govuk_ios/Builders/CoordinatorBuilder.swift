@@ -11,9 +11,11 @@ class CoordinatorBuilder {
         self.container = container
     }
 
-    func app(navigationController: UINavigationController) -> BaseCoordinator {
+    func app(navigationController: UINavigationController,
+             inactivityService: InactivityServiceInterface) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
+            inactivityService: inactivityService,
             navigationController: navigationController
         )
     }
@@ -350,6 +352,16 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             navigationController: navigationController,
             completionAction: completionAction
+        )
+    }
+
+    func inactivityCoordinator(navigationController: UINavigationController,
+                               inactivityService: InactivityServiceInterface,
+                               inactiveAction: @escaping () -> Void) -> BaseCoordinator {
+        InactivityCoordinator(
+            navigationController: navigationController,
+            inactivityService: inactivityService,
+            inactiveAction: inactiveAction
         )
     }
 }

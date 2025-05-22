@@ -2,6 +2,7 @@ import UIKit
 import Foundation
 
 class AppCoordinator: BaseCoordinator {
+    private var inactivityCoordinator: BaseCoordinator?
     private let coordinatorBuilder: CoordinatorBuilder
     private let inactivityService: InactivityServiceInterface
     private var initialLaunch: Bool = true
@@ -20,11 +21,35 @@ class AppCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
+        startInactivityMonitoring()
         if initialLaunch {
             firstLaunch(url: url)
         } else {
             reLaunch(url: url)
         }
+    }
+
+    private func startInactivityMonitoring() {
+        let coordinator = coordinatorBuilder.inactivityCoordinator(
+            navigationController: root,
+            inactivityService: inactivityService,
+            inactiveAction: { [weak self] in
+                guard let self = self else { return }
+                root.dismiss(animated: true, completion: { })
+                tabCoordinator = coordinatorBuilder.tab(
+                    navigationController: root
+                )
+                startReauthentication(
+                    url: nil,
+                    completionAction: { [weak self] in
+                        self?.startTabs(url: nil)
+                    }
+                )
+            }
+        )
+        // ensures inactivity coordinator is retained
+        self.inactivityCoordinator = coordinator
+        coordinator.start()
     }
 
     private func firstLaunch(url: URL?) {
@@ -102,17 +127,23 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             launchResponse: launchResponse,
             dismissAction: { [weak self] in
-                self?.startReauthentication(url: url)
+                self?.startReauthentication(
+                    url: url,
+                    completionAction: { [weak self] in
+                        self?.startAnalyticsConsent(url: url)
+                    }
+                )
             }
         )
         start(coordinator)
     }
 
-    private func startReauthentication(url: URL?) {
+    private func startReauthentication(url: URL?,
+                                       completionAction: @escaping () -> Void) {
         let coordinator = coordinatorBuilder.reauthentication(
             navigationController: root,
-            completionAction: { [weak self] in
-                self?.startAnalyticsConsent(url: url)
+            completionAction: {
+                completionAction()
             },
             newUserAction: { [weak self] in
                 self?.startNewUserOnboardingCoordinator(url: nil)

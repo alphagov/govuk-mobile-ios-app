@@ -48,6 +48,7 @@
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
 		16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */; };
 		16D17D422CC01C7600E99794 /* TopicRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D17D412CC01C6A00E99794 /* TopicRowView.swift */; };
+		16D3605D2DDDDD500007C1CA /* InactivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3605C2DDDDD400007C1CA /* InactivityCoordinator.swift */; };
 		16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8644B2D28361300BCC0FC /* SearchSuggestions.swift */; };
 		16E912AF2DA72CE000CD2049 /* OIDAuthorizationServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E912AE2DA72CAD00CD2049 /* OIDAuthorizationServiceWrapper.swift */; };
 		16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A402C6F8968005E820F /* SearchViewController.swift */; };
@@ -396,6 +397,7 @@
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16D0D0422CC6818D00944D79 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
 		16D17D412CC01C6A00E99794 /* TopicRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRowView.swift; sourceTree = "<group>"; };
+		16D3605C2DDDDD400007C1CA /* InactivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactivityCoordinator.swift; sourceTree = "<group>"; };
 		16E8644B2D28361300BCC0FC /* SearchSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestions.swift; sourceTree = "<group>"; };
 		16E912AE2DA72CAD00CD2049 /* OIDAuthorizationServiceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDAuthorizationServiceWrapper.swift; sourceTree = "<group>"; };
 		16EE1A402C6F8968005E820F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -1247,6 +1249,7 @@
 				4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */,
 				D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */,
 				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
+				16D3605C2DDDDD400007C1CA /* InactivityCoordinator.swift */,
 				5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */,
 				169842D52DAEA5E100E3EA66 /* LocalAuthenticationOnboardingCoordinator.swift */,
 				4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */,
@@ -2061,6 +2064,7 @@
 				5D0F199E2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift in Sources */,
 				4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */,
 				5D8100872CEB3FD600EE7D15 /* AppLaunchService.swift in Sources */,
+				16D3605D2DDDDD500007C1CA /* InactivityCoordinator.swift in Sources */,
 				5D9E67C42C5A2C6E00DB7877 /* UITabBarItemAppearance+GOVUK.swift in Sources */,
 				5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */,
 				5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */,

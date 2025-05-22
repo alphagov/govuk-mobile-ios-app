@@ -21,6 +21,9 @@ struct AmbiguousAddressSelectionView: View {
         .toolbar {
             cancelButton
         }
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
 
     private var headerView: some View {
@@ -68,4 +71,9 @@ struct AmbiguousAddressSelectionView: View {
     private func isSelected(_ slug: String) -> Binding<Bool> {
         return .constant(slug == viewModel.selectedAddress?.address)
     }
+}
+
+extension AmbiguousAddressSelectionView: TrackableScreen {
+    var trackingTitle: String? { "What is your address" }
+    var trackingName: String { "What is your address" }
 }

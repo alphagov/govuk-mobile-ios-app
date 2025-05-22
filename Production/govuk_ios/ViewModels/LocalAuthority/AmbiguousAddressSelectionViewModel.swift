@@ -29,15 +29,16 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
         self.ambiguousAuthorities = ambiguousAuthorities
-        self.addresses = ambiguousAuthorities.addresses
         self.dismissAction = dismissAction
+        addresses = ambiguousAuthorities.addresses
     }
 
     var confirmButtonModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.localAuthority.localized(
-                "addressSelectionPrimaryButtonTitle"
-            ),
+        let buttonTitle = String.localAuthority.localized(
+            "addressSelectionPrimaryButtonTitle"
+        )
+        return GOVUKButton.ButtonViewModel(
+            localisedTitle: buttonTitle,
             action: { [weak self] in
                 guard let selectedAddress = self?.selectedAddress,
                       let selectedAuthority = self?.ambiguousAuthorities.authorities.first(
@@ -45,9 +46,22 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
                             $0.slug == selectedAddress.slug
                         }
                       ) else { return }
+                self?.trackNavigationEvent(buttonTitle)
                 self?.localAuthorityService.saveLocalAuthority(selectedAuthority)
                 self?.dismissAction()
             }
         )
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
+    private func trackNavigationEvent(_ title: String) {
+        let event = AppEvent.buttonNavigation(
+            text: title,
+            external: true
+        )
+        analyticsService.track(event: event)
     }
 }

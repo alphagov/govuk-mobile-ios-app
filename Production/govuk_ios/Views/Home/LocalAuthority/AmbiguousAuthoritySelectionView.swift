@@ -39,6 +39,9 @@ struct AmbiguousAuthoritySelectionView: View {
         }.toolbar {
             cancelButton
         }
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
 
     private var headerView: some View {
@@ -86,4 +89,9 @@ struct AmbiguousAuthoritySelectionView: View {
     private func isSelected(_ slug: String) -> Binding<Bool> {
         return .constant(slug == viewModel.selectedAuthority?.slug)
     }
+}
+
+extension AmbiguousAuthoritySelectionView: TrackableScreen {
+    var trackingTitle: String? { "What is your local council" }
+    var trackingName: String { "What is your local council" }
 }

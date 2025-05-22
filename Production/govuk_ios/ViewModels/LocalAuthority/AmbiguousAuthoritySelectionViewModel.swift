@@ -35,21 +35,23 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
         self.ambiguousAuthorities = ambiguousAuthorities
-        self.localAuthorities = ambiguousAuthorities.authorities
         self.postCode = postCode
         self.selectAddressAction = selectAddressAction
         self.dismissAction = dismissAction
+        localAuthorities = ambiguousAuthorities.authorities
     }
 
     var confirmButtonModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.localAuthority.localized(
-                "ambiguousLocalAuthorityPrimaryButtonTitle"
-            ),
+        let buttonTitle = String.localAuthority.localized(
+            "ambiguousLocalAuthorityPrimaryButtonTitle"
+        )
+        return GOVUKButton.ButtonViewModel(
+            localisedTitle: buttonTitle,
             action: { [weak self] in
                 guard let selectedAuthority = self?.selectedAuthority else {
                     return
                 }
+                self?.trackNavigationEvent(buttonTitle)
                 self?.localAuthorityService.saveLocalAuthority(selectedAuthority)
                 self?.dismissAction()
             }
@@ -57,14 +59,27 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
     }
 
     var selectAddressButtonModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.localAuthority.localized(
-                "ambiguousLocalAuthoritySecondaryButtonTitle"
-            ),
+        let buttonTitle = String.localAuthority.localized(
+            "ambiguousLocalAuthoritySecondaryButtonTitle"
+        )
+        return GOVUKButton.ButtonViewModel(
+            localisedTitle: buttonTitle,
             action: { [weak self] in
-                guard let self = self else { return }
-                self.selectAddressAction()
+                self?.trackNavigationEvent(buttonTitle)
+                self?.selectAddressAction()
             }
         )
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
+    private func trackNavigationEvent(_ title: String) {
+        let event = AppEvent.buttonNavigation(
+            text: title,
+            external: true
+        )
+        analyticsService.track(event: event)
     }
 }

@@ -18,14 +18,12 @@ struct LocalAuthorityRepositoryTests {
             tier: "county",
             slug: "derbyshire"
         )
-        let localAuthority = LocalAuthority(
-            localAuthority: Authority(
-                name: "Derbyshire Dales District Council",
-                homepageUrl: "https://www.derbyshiredales.gov.uk/",
-                tier: "district",
-                slug: "derbyshire-dales",
-                parent: parentAuthority
-            )
+        let localAuthority = Authority(
+            name: "Derbyshire Dales District Council",
+            homepageUrl: "https://www.derbyshiredales.gov.uk/",
+            tier: "district",
+            slug: "derbyshire-dales",
+            parent: parentAuthority
         )
 
         sut.save(localAuthority)
@@ -56,25 +54,21 @@ struct LocalAuthorityRepositoryTests {
             tier: "county",
             slug: "derbyshire-dales"
         )
-        let localAuthority = LocalAuthority(
-            localAuthority: Authority(
-                name: "Derbyshire Dales District Council",
-                homepageUrl: "https://www.derbyshiredales.gov.uk/",
-                tier: "district",
-                slug: "derbyshire-dales",
-                parent: parentAuthority
-            )
+        let localAuthority = Authority(
+            name: "Derbyshire Dales District Council",
+            homepageUrl: "https://www.derbyshiredales.gov.uk/",
+            tier: "district",
+            slug: "derbyshire-dales",
+            parent: parentAuthority
         )
 
         sut.save(localAuthority)
 
-        let newLocalAuthority = LocalAuthority(
-            localAuthority: Authority(
-                name: "London Borough of Tower Hamlets",
-                homepageUrl: "https://www.towerhamlets.gov.uk",
-                tier: "unitary",
-                slug: "tower-hamlets"
-            )
+        let newLocalAuthority = Authority(
+            name: "London Borough of Tower Hamlets",
+            homepageUrl: "https://www.towerhamlets.gov.uk",
+            tier: "unitary",
+            slug: "tower-hamlets"
         )
 
         sut.save(newLocalAuthority)

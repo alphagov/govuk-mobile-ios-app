@@ -63,6 +63,7 @@ struct AppCoordinatorTests {
             appVersionProvider: MockAppVersionProvider()
         )
         // This is in order of launch
+        mockCoordinatorBuilder._receivedInactiveAction?()
         mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
         mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
         mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
@@ -137,6 +138,7 @@ struct AppCoordinatorTests {
             appVersionProvider: MockAppVersionProvider()
         )
         // This is in order of launch
+        mockCoordinatorBuilder._receivedInactiveAction?()
         mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
         mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
         mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()

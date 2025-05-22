@@ -3,17 +3,17 @@ import Foundation
 @testable import govuk_ios
 
 class MockInactivityService: InactivityServiceInterface {
-    var startMonitoringHandler: (() -> Void)?
 
     var _stubbedInactive: Bool = false
     var inactive: Bool {
         return _stubbedInactive
     }
 
-    var _stubbedstartMonitoringCalled = false
+    var _stubbedStartMonitoringHandler: (() -> Void)?
+    var _stubbedStartMonitoringCalled = false
     func startMonitoring(inactivityHandler: @escaping () -> Void) {
-        _stubbedstartMonitoringCalled = true
-        startMonitoringHandler = inactivityHandler
+        _stubbedStartMonitoringCalled = true
+        _stubbedStartMonitoringHandler = inactivityHandler
     }
 
     var _resetTimerCalled = false
@@ -23,7 +23,7 @@ class MockInactivityService: InactivityServiceInterface {
 
     func simulateInactivity() {
         _stubbedInactive = true
-        startMonitoringHandler?()
+        _stubbedStartMonitoringHandler?()
     }
 
     func simulateActivity() {

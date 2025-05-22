@@ -44,7 +44,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             viewModel: .init(
                 activityService: mockActivityService,
                 analyticsService: MockAnalyticsService(),
-                urlopener: MockURLOpener()
+                selectedAction: { _ in }
             )
         )
         let navigationController = UINavigationController(rootViewController: viewController)
@@ -97,7 +97,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             viewModel: .init(
                 activityService: mockActivityService,
                 analyticsService: MockAnalyticsService(),
-                urlopener: MockURLOpener()
+                selectedAction: { _ in }
             )
         )
         let navigationController = UINavigationController(rootViewController: viewController)
@@ -150,7 +150,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             viewModel: .init(
                 activityService: mockActivityService,
                 analyticsService: MockAnalyticsService(),
-                urlopener: MockURLOpener()
+                selectedAction: { _ in }
             )
         )
         let navigationController = UINavigationController(rootViewController: viewController)
@@ -200,7 +200,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
             viewModel: .init(
                 activityService: mockActivityService,
                 analyticsService: MockAnalyticsService(),
-                urlopener: MockURLOpener()
+                selectedAction: { _ in }
             )
         )
         let navigationController = UINavigationController(rootViewController: viewController)

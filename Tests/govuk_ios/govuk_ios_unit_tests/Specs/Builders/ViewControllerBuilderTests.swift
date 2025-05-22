@@ -76,7 +76,8 @@ struct ViewControllerBuilderTests {
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
             analyticsService: MockAnalyticsService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            selectedAction: { _ in }
         ) as? TrackableScreen
 
         #expect(result?.trackingClass == String(describing: RecentActivityListViewController.self))

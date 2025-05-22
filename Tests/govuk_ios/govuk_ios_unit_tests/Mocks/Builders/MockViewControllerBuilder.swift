@@ -41,8 +41,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedRecentActivityViewController: UIViewController?
-    override func recentActivity(analyticsService: AnalyticsServiceInterface,
-                                 activityService: ActivityServiceInterface) -> UIViewController {
+    var _receivedRecentActivitySelectedAction: ((URL) -> Void)?
+    override func recentActivity(analyticsService: any AnalyticsServiceInterface,
+                                 activityService: any ActivityServiceInterface,
+                                 selectedAction: @escaping (URL) -> Void) -> UIViewController {
+        _receivedRecentActivitySelectedAction = selectedAction
         return _stubbedRecentActivityViewController ?? UIViewController()
     }
 

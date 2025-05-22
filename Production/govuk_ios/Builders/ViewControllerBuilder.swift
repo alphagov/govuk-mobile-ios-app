@@ -80,11 +80,12 @@ class ViewControllerBuilder {
 
     @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface,
-                        activityService: ActivityServiceInterface) -> UIViewController {
+                        activityService: ActivityServiceInterface,
+                        selectedAction: @escaping (URL) -> Void) -> UIViewController {
         let viewModel = RecentActivityListViewModel(
             activityService: activityService,
             analyticsService: analyticsService,
-            urlopener: UIApplication.shared
+            selectedAction: selectedAction
         )
         return RecentActivityListViewController(
             viewModel: viewModel

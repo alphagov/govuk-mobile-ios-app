@@ -143,7 +143,8 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
-            activityService: container.activityService.resolve()
+            activityService: container.activityService.resolve(),
+            coordinatorBuilder: self
         )
     }
 

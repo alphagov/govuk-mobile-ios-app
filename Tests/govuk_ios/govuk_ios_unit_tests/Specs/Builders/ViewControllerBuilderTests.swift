@@ -1,4 +1,5 @@
 import Foundation
+import SafariServices
 import Testing
 import SwiftUI
 import CoreData
@@ -219,5 +220,17 @@ struct ViewControllerBuilderTests {
         )
         let rootView = (result as? HostingViewController<AuthenticationInfoView>)?.rootView
         #expect(rootView != nil)
+    }
+
+    @Test
+    func safari_returnsExpectedResult() throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.safari(
+            url: .arrange
+        )
+
+        #expect(result is SFSafariViewController)
+        #expect(result.isModalInPresentation)
+        #expect(result.modalPresentationStyle == .formSheet)
     }
 }

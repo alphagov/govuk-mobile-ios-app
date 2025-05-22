@@ -19,13 +19,16 @@ struct APIServiceClient: APIServiceClientInterface {
     private let baseUrl: URL
     private let session: URLSession
     private let requestBuilder: RequestBuilderInterface
+    private let responseHandler: ResponseHandler?
 
     init(baseUrl: URL,
          session: URLSession,
-         requestBuilder: RequestBuilderInterface) {
+         requestBuilder: RequestBuilderInterface,
+         responseHandler: ResponseHandler? = nil) {
         self.baseUrl = baseUrl
         self.session = session
         self.requestBuilder = requestBuilder
+        self.responseHandler = responseHandler
     }
 }
 
@@ -49,8 +52,10 @@ extension APIServiceClient {
         let task = session.dataTask(
             with: request,
             completionHandler: { data, response, error in
+                let localError = responseHandler?.handleResponse(response,
+                                                                 error: error) ?? error
                 let result: NetworkResult<Data>
-                switch (data, error) {
+                switch (data, localError) {
                 case (_, .some(let error)):
                     result = .failure(error)
                 case (.some(let data), _):

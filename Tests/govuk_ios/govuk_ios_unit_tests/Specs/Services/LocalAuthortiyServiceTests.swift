@@ -284,27 +284,4 @@ struct LocalAuthorityServiceTests {
         #expect(result.getError() == .networkUnavailable)
         #expect(!mockRepository._didSaveLocalAuthority)
     }
-
-    @Test
-    func fetchLocalAuthority_localErrorMessage_returnsExpectedResult() async throws {
-        let mockServiceClient = MockLocalServiceClient()
-        let response = LocalAuthorityResponse(localAuthorityErrorMessage: "errorMessage")
-        mockServiceClient._stubbedLocalPostcodeResult = .success(response)
-
-        let mockRepository = MockLocalAuthorityRepository()
-        let sut = LocalAuthorityService(
-            serviceClient: mockServiceClient,
-            repository: mockRepository
-        )
-        let result = await withCheckedContinuation { continuation in
-            sut.fetchLocalAuthority(
-                postcode: "test") { result in
-                    continuation.resume(returning: result)
-                }
-        }
-        let localResult = try? result.get()
-        let errorMessage = localResult?.localAuthorityErrorMessage
-        #expect(errorMessage == "errorMessage")
-        #expect(!mockRepository._didSaveLocalAuthority)
-    }
 }

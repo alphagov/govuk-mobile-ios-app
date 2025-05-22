@@ -74,12 +74,8 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
 
     @Test
     func returnErrorMessage_invalidPostcode_returnsExpectedResult() async throws {
-        var cancellables = Set<AnyCancellable>()
-        let expectedResult = LocalAuthorityResponse(
-            localAuthorityErrorMessage: "Invalid postcode"
-        )
         let mockService = MockLocalAuthorityService()
-        mockService._stubbedFetchLocalPostcodeResult = .success(expectedResult)
+        mockService._stubbedFetchLocalPostcodeResult = .failure(.invalidPostcode)
 
         let sut = LocalAuthorityPostcodeEntryViewModel(
             service: mockService,
@@ -87,29 +83,17 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
-        let result = await withCheckedContinuation { continuation in
-            sut.$error
-                .dropFirst()
-                .receive(on: DispatchQueue.main)
-                .sink { errorMessage in
-                    continuation.resume(returning: errorMessage)
-                }
-                .store(in: &cancellables)
-            sut.postCode = "test"
-            sut.primaryButtonViewModel.action()
-        }
-        #expect(result?.errorMessage == "Enter a postcode in the correct format")
+
+        sut.postCode = "test"
+        sut.primaryButtonViewModel.action()
+        #expect(sut.error?.errorMessage == "Enter a postcode in the correct format")
     }
 
 
     @Test
     func returnErrorMessage_postcodeNotFound_returnsExpectedResult() async throws {
-        var cancellables = Set<AnyCancellable>()
-        let expectedResult = LocalAuthorityResponse(
-            localAuthorityErrorMessage: "Postcode not found"
-        )
         let mockService = MockLocalAuthorityService()
-        mockService._stubbedFetchLocalPostcodeResult = .success(expectedResult)
+        mockService._stubbedFetchLocalPostcodeResult = .failure(.unknownPostcode)
 
         let sut = LocalAuthorityPostcodeEntryViewModel(
             service: mockService,
@@ -117,18 +101,9 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
-        let result = await withCheckedContinuation { continuation in
-            sut.$error
-                .dropFirst()
-                .receive(on: DispatchQueue.main)
-                .sink { errorMessage in
-                    continuation.resume(returning: errorMessage)
-                }
-                .store(in: &cancellables)
-            sut.postCode = "test"
-            sut.primaryButtonViewModel.action()
-        }
-        #expect(result?.errorMessage == "We could not find a council for this postcode. Check the postcode and try again.")
+        sut.postCode = "test"
+        sut.primaryButtonViewModel.action()
+        #expect(sut.error?.errorMessage == "We could not find a council for this postcode. Check the postcode and try again.")
     }
 
     @Test

@@ -211,11 +211,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedSignInErrorCoordinator ?? MockBaseCoordinator()
     }
 
-    var _receivedSafariCoordinatoirURL: URL?
+    var _receivedSafariCoordinatorURL: URL?
     var _stubbedSafariCoordinator: MockBaseCoordinator?
     override func safari(navigationController: UINavigationController,
                          url: URL) -> BaseCoordinator {
-        _receivedSafariCoordinatoirURL = url
+        _receivedSafariCoordinatorURL = url
         return _stubbedSafariCoordinator ?? MockBaseCoordinator()
     }
 }

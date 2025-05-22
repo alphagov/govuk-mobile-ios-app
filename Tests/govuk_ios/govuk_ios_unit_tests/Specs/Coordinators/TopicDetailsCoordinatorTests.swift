@@ -54,7 +54,7 @@ struct TopicDetailsCoordinatorTests {
         let url = URL.arrange
         mockViewControllerBuilder._receivedTopicDetailOpenAction?(url)
 
-        #expect(mockCoordinatorBuilder._receivedSafariCoordinatoirURL == url)
+        #expect(mockCoordinatorBuilder._receivedSafariCoordinatorURL == url)
         #expect(mockSafariCoordinator._startCalled)
     }
 

@@ -303,6 +303,6 @@ struct HomeCoordinatorTests {
         mockViewControllerBuilder._receivedHomeSearchAction?(expectedSearchItem)
 
         #expect(mockSafariCoordinator._startCalled)
-        #expect(mockCoodinatorBuilder._receivedSafariCoordinatoirURL == expectedSearchItem.link)
+        #expect(mockCoodinatorBuilder._receivedSafariCoordinatorURL == expectedSearchItem.link)
     }
 }

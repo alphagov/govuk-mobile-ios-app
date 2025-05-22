@@ -59,9 +59,9 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         self.analyticsService = analyticsService
         self.activityService = activityService
         self.urlOpener = urlOpener
-        self.subtopicAction = actions.subtopicAction
-        self.stepByStepAction = actions.stepByStepAction
-        self.openAction = actions.openAction
+        subtopicAction = actions.subtopicAction
+        stepByStepAction = actions.stepByStepAction
+        openAction = actions.openAction
         fetchTopicDetails(topicRef: topic.ref)
     }
 

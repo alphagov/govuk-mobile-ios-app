@@ -13,7 +13,7 @@ extension GOVRequest {
     }
     static func localAuthoritySlug(slug: String) -> GOVRequest {
         GOVRequest(
-            urlPath: "\(Constants.API.localAuthoritySlugPath)\(slug).json",
+            urlPath: "\(Constants.API.localAuthorityPath)/\(slug)",
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,

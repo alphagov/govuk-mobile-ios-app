@@ -161,6 +161,7 @@ struct ViewControllerBuilderTests {
         let result = subject.localAuthorityPostcodeEntryView(
             analyticsService: MockAnalyticsService(),
             localAuthorityService: MockLocalAuthorityService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         let rootView = (result as? HostingViewController<LocalAuthorityPostcodeEntryView>)?.rootView

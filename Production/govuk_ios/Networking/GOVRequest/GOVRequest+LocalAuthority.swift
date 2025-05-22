@@ -11,4 +11,13 @@ extension GOVRequest {
             additionalHeaders: nil
         )
     }
+    static func localAuthoritySlug(slug: String) -> GOVRequest {
+        GOVRequest(
+            urlPath: "\(Constants.API.localAuthoritySlugPath)\(slug).json",
+            method: .get,
+            bodyParameters: nil,
+            queryParameters: nil,
+            additionalHeaders: nil
+        )
+    }
 }

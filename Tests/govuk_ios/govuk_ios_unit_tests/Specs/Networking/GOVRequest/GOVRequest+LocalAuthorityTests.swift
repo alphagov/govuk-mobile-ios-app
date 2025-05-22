@@ -21,4 +21,18 @@ struct GOVRequest_LocalAuthorityTests {
         #expect(request.additionalHeaders == nil)
 
     }
+
+    @Test
+    func localAuthoritySlug_returnsExpectedValues() async throws {
+        let expectedSlug = "dorset"
+        let request = GOVRequest.localAuthoritySlug(slug: expectedSlug)
+
+        #expect(request.urlPath == "/find-local-council/dorset.json")
+        #expect(request.method == .get)
+        #expect(request.signingKey == nil)
+        #expect(request.bodyParameters == nil)
+        #expect(request.queryParameters == nil)
+        #expect(request.additionalHeaders == nil)
+
+    }
 }

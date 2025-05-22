@@ -107,15 +107,59 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
-                                         localAuthorityService: LocalAuthorityServiceInterface,
-                                         dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = LocalAuthorityPostecodeEntryViewModel(
+    func localAuthorityPostcodeEntryView(
+        analyticsService: AnalyticsServiceInterface,
+        localAuthorityService: LocalAuthorityServiceInterface,
+        resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
+        dismissAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
+            resolveAmbiguityAction: resolveAmbiguityAction,
             dismissAction: dismissAction
         )
         let view = LocalAuthorityPostcodeEntryView(
+            viewModel: viewModel
+        )
+        return HostingViewController(rootView: view)
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func ambiguousAuthoritySelectionView(
+        analyticsService: AnalyticsServiceInterface,
+        localAuthorityService: LocalAuthorityServiceInterface,
+        localAuthorities: AmbiguousAuthorities,
+        postCode: String,
+        selectAddressAction: @escaping () -> Void,
+        dismissAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = AmbiguousAuthoritySelectionViewModel(
+            analyticsService: analyticsService,
+            localAuthorityService: localAuthorityService,
+            ambiguousAuthorities: localAuthorities,
+            postCode: postCode,
+            selectAddressAction: selectAddressAction,
+            dismissAction: dismissAction
+        )
+        let view = AmbiguousAuthoritySelectionView(
+            viewModel: viewModel
+        )
+        return HostingViewController(rootView: view)
+    }
+
+    func ambiguousAddressSelectionView(
+        analyticsService: AnalyticsServiceInterface,
+        localAuthorityService: LocalAuthorityServiceInterface,
+        localAuthorities: AmbiguousAuthorities,
+        dismissAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = AmbiguousAddressSelectionViewModel(
+            analyticsService: analyticsService,
+            localAuthorityService: localAuthorityService,
+            ambiguousAuthorities: localAuthorities,
+            dismissAction: dismissAction)
+        let view = AmbiguousAddressSelectionView(
             viewModel: viewModel
         )
         return HostingViewController(rootView: view)

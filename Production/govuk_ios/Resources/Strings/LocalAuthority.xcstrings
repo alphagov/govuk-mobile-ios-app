@@ -1,13 +1,79 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
-    "localAthorityPostcodeEntryViewExampleText" : {
+    "addressSelectionPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "For example SW1A 2AA"
+            "value" : "Confirm Address"
+          }
+        }
+      }
+    },
+    "addressSelectionViewSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We’ll use your address to find your local council"
+          }
+        }
+      }
+    },
+    "addressSelectionViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is your address?"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthorityPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm local council"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthoritySecondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select your address instead"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthorityViewSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your postcode %@ is shared by more than one local council"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthorityViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is your local council?"
           }
         }
       }
@@ -78,6 +144,17 @@
         }
       }
     },
+    "localAuthorityPageNotWorking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This page is not working. Try again later."
+          }
+        }
+      }
+    },
     "localAuthoritypostcodeEntryPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -107,6 +184,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "How we use this information?"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewExampleText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For example SW1A 2AA"
           }
         }
       }

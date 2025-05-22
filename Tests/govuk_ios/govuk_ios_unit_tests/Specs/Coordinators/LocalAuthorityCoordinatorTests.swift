@@ -61,7 +61,7 @@ struct LocalAuthorityCoordinatorTests {
         let navigationController = UINavigationController()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
 
-        mockViewControllerBuilder._stubbedLocalAuthortiyPostcodeEntryViewController = expectedViewController
+        mockViewControllerBuilder._stubbedLocalAuthorityExplainerViewController = expectedViewController
 
         let sut = LocalAuthorityServiceCoordinator(
             navigationController: navigationController,
@@ -71,7 +71,7 @@ struct LocalAuthorityCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             dismissed: {}
         )
-        sut.navigateToPostcodeEntryView()
+        sut.start()
         #expect(navigationController.viewControllers.first == expectedViewController)
     }
 

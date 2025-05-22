@@ -4,7 +4,7 @@ import Foundation
 
 final class MockLocalAuthorityRepository: LocalAuthorityRepositoryInterface {
     var _didSaveLocalAuthority = false
-    func save(_ localAuthority: LocalAuthority) {
+    func save(_ localAuthority: Authority) {
         _didSaveLocalAuthority = true
     }
 

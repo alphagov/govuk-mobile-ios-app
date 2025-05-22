@@ -9,7 +9,6 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
     
     @Test
     func fetchLocalAuthority_addressList_returnsExpectedResults() async throws {
-        var cancellables = Set<AnyCancellable>()
         let addresses:[LocalAuthorityAddress] = [
             LocalAuthorityAddress(
                 address: "address1",
@@ -22,35 +21,51 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
                 name: "name2"
             )
         ]
-        let expectedResult = LocalAuthoritiesList(addresses: addresses)
+
+        let authorities = [
+            Authority(
+                name: "name1",
+                homepageUrl: "https://authority1",
+                tier: "tier1",
+                slug: "slug1"
+            ),
+            Authority(
+                name: "name2",
+                homepageUrl: "https://authority2",
+                tier: "tier2",
+                slug: "slug2"
+            )
+        ]
+
+        let expectedAddressResponse = LocalAuthorityResponse(localAuthorityAddresses: addresses)
         let mockService = MockLocalAuthorityService()
-        mockService._stubbedFetchLocalResult = .success(expectedResult)
-        let sut = LocalAuthorityPostecodeEntryViewModel(
-            service: mockService,
-            analyticsService: MockAnalyticsService(),
-            dismissAction: {}
-        )
-        let result = await withCheckedContinuation { continuation in
-            sut.$localAuthorityAddressList
-                .dropFirst()
-                .receive(on: DispatchQueue.main)
-                .sink { address in
-                    continuation.resume(returning: address)
-                }.store(in: &cancellables)
+        mockService._stubbedFetchLocalPostcodeResult = .success(expectedAddressResponse)
+        mockService._stubbedLocalAuthoritiesResult = .success(authorities)
+
+        var expectedAddresses = [LocalAuthorityAddress]()
+        _ = await withCheckedContinuation { continuation in
+            let sut = LocalAuthorityPostcodeEntryViewModel(
+                service: mockService,
+                analyticsService: MockAnalyticsService(),
+                resolveAmbiguityAction: { authorities, postCode in
+                    expectedAddresses = authorities.addresses
+                    continuation.resume()
+                },
+                dismissAction: {}
+            )
             sut.postCode = "test"
             sut.primaryButtonViewModel.action()
         }
-        #expect(result?.addresses.count == 2)
-        #expect(result?.addresses.first?.name == "name1")
-        #expect(result?.addresses.last?.name == "name2")
-        #expect(result?.addresses.first?.slug == "slug1")
+        #expect(expectedAddresses.count == addresses.count)
+        #expect(expectedAddresses.first?.address == addresses.first?.address)
     }
 
     @Test
     func returnErrorMessage_emptyString_returnsExpectedResult() async throws {
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         sut.primaryButtonViewModel.action()
@@ -60,13 +75,16 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
     @Test
     func returnErrorMessage_invalidPostcode_returnsExpectedResult() async throws {
         var cancellables = Set<AnyCancellable>()
-        let expectedResult = LocalErrorMessage(message: "Invalid postcode")
+        let expectedResult = LocalAuthorityResponse(
+            localAuthorityErrorMessage: "Invalid postcode"
+        )
         let mockService = MockLocalAuthorityService()
-        mockService._stubbedFetchLocalResult = .success(expectedResult)
+        mockService._stubbedFetchLocalPostcodeResult = .success(expectedResult)
 
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         let result = await withCheckedContinuation { continuation in
@@ -87,13 +105,16 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
     @Test
     func returnErrorMessage_postcodeNotFound_returnsExpectedResult() async throws {
         var cancellables = Set<AnyCancellable>()
-        let expectedResult = LocalErrorMessage(message: "Postcode not found")
+        let expectedResult = LocalAuthorityResponse(
+            localAuthorityErrorMessage: "Postcode not found"
+        )
         let mockService = MockLocalAuthorityService()
-        mockService._stubbedFetchLocalResult = .success(expectedResult)
+        mockService._stubbedFetchLocalPostcodeResult = .success(expectedResult)
 
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: mockService,
             analyticsService: MockAnalyticsService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         let result = await withCheckedContinuation { continuation in
@@ -113,9 +134,10 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
     @Test
     func primaryButtonViewModel_action_trackNavigationEvent() async throws {
         let mockAnalyticsService = MockAnalyticsService()
-        let sut = LocalAuthorityPostecodeEntryViewModel(
+        let sut = LocalAuthorityPostcodeEntryViewModel(
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         sut.postCode = "SW1A 0AA"

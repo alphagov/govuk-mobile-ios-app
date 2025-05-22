@@ -749,6 +749,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicOnboardingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/WebViewControllerSnapshotTests.swift,
+				"govuk_ios/govuk_ios_unit_tests/Arrangers/Model/AmbiguousAuthorities+Arrangers.swift",
 				"govuk_ios/govuk_ios_unit_tests/Arrangers/Model/TopicResponseItem+Arrangers.swift",
 				govuk_ios/govuk_ios_unit_tests/Mocks/Foundation/MockUserDefaults.swift,
 				govuk_ios/govuk_ios_unit_tests/Mocks/Repositories/MockLocalAuthorityRepository.swift,

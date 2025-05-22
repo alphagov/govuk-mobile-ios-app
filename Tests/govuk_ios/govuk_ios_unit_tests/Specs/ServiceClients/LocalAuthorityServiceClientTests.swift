@@ -86,6 +86,47 @@ struct LocalAuthorityServiceClientTests {
     }
 
     @Test
+    func fetchLocalAuthority_slug_returnsExpectedResult() async throws {
+        let mockAPI = MockAPIServiceClient()
+        let sut = LocalAuthorityServiceClient(
+            serviceClient: mockAPI
+        )
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityTierOneData)
+
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchLocalAuthority(slug: "tower-hamlets") { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let localResult = try? result.get()
+        let localAuthority = localResult?.localAuthority
+        #expect(localAuthority?.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(localAuthority?.name == "London Borough of Tower Hamlets")
+        #expect(localAuthority?.tier == "unitary")
+        #expect(localAuthority?.slug == "tower-hamlets")
+    }
+
+    @Test
+    func fetchLocalAuthorities_returnsExpectedResult() async throws {
+        let mockAPI = MockAPIServiceClient()
+        let sut = LocalAuthorityServiceClient(
+            serviceClient: mockAPI
+        )
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityTierOneData)
+
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchLocalAuthorities(slugs: ["tower-hamlets"]) { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let authorities = try? result.get()
+        #expect(authorities?.first?.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(authorities?.first?.name == "London Borough of Tower Hamlets")
+        #expect(authorities?.first?.tier == "unitary")
+        #expect(authorities?.first?.slug == "tower-hamlets")
+    }
+
+    @Test
     func fetchLocalAuthority_apiUnavailable_returnsExpectedResult() async {
         let mockAPI = MockAPIServiceClient()
         let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)

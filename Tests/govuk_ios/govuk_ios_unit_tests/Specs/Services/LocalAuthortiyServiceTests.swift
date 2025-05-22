@@ -74,6 +74,80 @@ struct LocalAuthorityServiceTests {
     }
 
     @Test
+    func fetchLocalAuthority_slug_returnsExpectedResult() async throws {
+        let authority = Authority(
+            name: "name1",
+            homepageUrl: "homepageUrl",
+            tier: "tier1",
+            slug: "slug1",
+            parent: nil
+        )
+
+        let expectedResult = LocalAuthorityResponse(localAuthority: authority)
+        let mockServiceClient = MockLocalServiceClient()
+        mockServiceClient._stubbedLocalSlugResult = .success(expectedResult)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchLocalAuthority(
+                slug: "slug1") { result in
+                    continuation.resume(returning: result)
+                }
+        }
+        let localResult = try? result.get()
+        let authorityResult = localResult?.localAuthority
+        #expect(authorityResult?.name == "name1")
+        #expect(authorityResult?.homepageUrl == "homepageUrl")
+        #expect(authorityResult?.tier == "tier1")
+        #expect(authorityResult?.slug == "slug1")
+    }
+
+    @Test
+    func fetchLocalAuthorities_returnsExpectedResult() async throws {
+        let authorityOne = Authority(
+            name: "name1",
+            homepageUrl: "homepageUrl",
+            tier: "tier1",
+            slug: "slug1",
+            parent: nil
+        )
+        let authorityTwo = Authority(
+            name: "name2",
+            homepageUrl: "homepageUrl",
+            tier: "tier2",
+            slug: "slug2",
+            parent: nil
+        )
+
+        let expectedResult = [authorityOne, authorityTwo]
+        let mockServiceClient = MockLocalServiceClient()
+        mockServiceClient._stubbedLocalAuthoritiesResult = .success(expectedResult)
+        let mockRepository = MockLocalAuthorityRepository()
+        let sut = LocalAuthorityService(
+            serviceClient: mockServiceClient,
+            repository: mockRepository
+        )
+
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchLocalAuthorities(
+                slugs: ["slug1", "slug2"]) { result in
+                    continuation.resume(returning: result)
+                }
+        }
+        let authorities = try? result.get()
+        #expect(authorities?.count == 2)
+        #expect(authorities?.first?.name == "name1")
+        #expect(authorities?.last?.name == "name2")
+        #expect(authorities?.first?.slug == "slug1")
+        #expect(authorities?.last?.slug == "slug2")
+    }
+
+
+    @Test
     func fetchLocalAuthority_tierOnelocalAuthority_returnsExpectedResult() async throws {
         let authority = Authority(
             name: "name1",

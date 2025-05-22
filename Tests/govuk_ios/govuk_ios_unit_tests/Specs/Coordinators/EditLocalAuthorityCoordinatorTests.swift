@@ -87,4 +87,55 @@ struct EditLocalAuthorityCoordinatorTests {
         #expect(dismissed)
     }
 
+    @Test
+    func resolveAmbiguityAction_navigatesToAmbiguousAuhtorityView() async throws {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        let navigationController = UINavigationController()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockCoordinator = MockBaseCoordinator()
+        mockViewControllerBuilder._stubbedAmbiguousAuthoritySelectionViewController = expectedViewController
+
+        let sut = EditLocalAuthorityCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            analyticsService: MockAnalyticsService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            dismissed: { }
+        )
+        mockCoordinator.start(sut)
+        mockViewControllerBuilder._receivedResolveAmbiguityAction?(
+            AmbiguousAuthorities.arrange(),
+            "postcode"
+        )
+        #expect(navigationController.viewControllers.last == expectedViewController)
+    }
+
+    @Test
+    func selectAddressAction_navigatesToAmbiguousAddressView() async throws {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        let navigationController = UINavigationController()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockCoordinator = MockBaseCoordinator()
+        mockViewControllerBuilder._stubbedAmbiguousAddressSelectionViewController = expectedViewController
+
+        let sut = EditLocalAuthorityCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            analyticsService: MockAnalyticsService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            dismissed: { }
+        )
+        mockCoordinator.start(sut)
+        mockViewControllerBuilder._receivedResolveAmbiguityAction?(
+            AmbiguousAuthorities.arrange(),
+            "postcode"
+        )
+        mockViewControllerBuilder._receivedAmbiguousAuthoritySelectAddressAction?()
+
+        #expect(navigationController.viewControllers.last == expectedViewController)
+    }
 }

@@ -64,11 +64,13 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
     var _stubbedLocalAuthorityPostcodeEntryViewController: UIViewController?
     var _receivedLocalAuthorityDismissAction: (() -> Void)?
+    var _receivedResolveAmbiguityAction: ((AmbiguousAuthorities, String) -> Void)?
     override func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
                                                   localAuthorityService: LocalAuthorityServiceInterface,
                                                   resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
                                                   dismissAction: @escaping () -> Void) -> UIViewController {
         _receivedLocalAuthorityDismissAction = dismissAction
+        _receivedResolveAmbiguityAction = resolveAmbiguityAction
         return _stubbedLocalAuthorityPostcodeEntryViewController ?? UIViewController()
     }
 
@@ -81,6 +83,32 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedNavigateToPostCodeEntryViewAction = navigateToPostCodeEntryViewAction
         _receivedLocalAuthorityExplainerDismissAction = dismissAction
         return _stubbedLocalAuthorityExplainerViewController ?? UIViewController()
+    }
+
+    var _stubbedAmbiguousAuthoritySelectionViewController: UIViewController?
+    var _receivedAmbiguousAuthoritySelectAddressAction: (() -> Void)?
+    var _receivedAmbiguousAuthorityDismissAction: (() -> Void)?
+    override func ambiguousAuthoritySelectionView(analyticsService: AnalyticsServiceInterface,
+                                                  localAuthorityService: LocalAuthorityServiceInterface,
+                                                  localAuthorities: AmbiguousAuthorities,
+                                                  postCode: String,
+                                                  selectAddressAction: @escaping () -> Void,
+                                                  dismissAction: @escaping () -> Void
+    ) -> UIViewController {
+        _receivedAmbiguousAuthoritySelectAddressAction = selectAddressAction
+        _receivedAmbiguousAuthorityDismissAction = dismissAction
+        return _stubbedAmbiguousAuthoritySelectionViewController ?? UIViewController()
+    }
+
+    var _stubbedAmbiguousAddressSelectionViewController: UIViewController?
+    var _receivedAmbiguousAddressDismissAction: (() -> Void)?
+    override func ambiguousAddressSelectionView(analyticsService: AnalyticsServiceInterface,
+                                                localAuthorityService: LocalAuthorityServiceInterface,
+                                                localAuthorities: AmbiguousAuthorities,
+                                                dismissAction: @escaping () -> Void
+    ) -> UIViewController {
+        _receivedAmbiguousAddressDismissAction = dismissAction
+        return _stubbedAmbiguousAddressSelectionViewController ?? UIViewController()
     }
 
     var _stubbedAllTopicsViewController: UIViewController?

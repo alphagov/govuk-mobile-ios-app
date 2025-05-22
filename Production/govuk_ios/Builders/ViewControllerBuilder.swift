@@ -256,15 +256,18 @@ class ViewControllerBuilder {
                      stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
                      openAction: @escaping (URL) -> Void
     ) -> UIViewController {
+        let actions = TopicDetailViewModel.Actions(
+            subtopicAction: subtopicAction,
+            stepByStepAction: stepByStepAction,
+            openAction: openAction
+        )
         let viewModel = TopicDetailViewModel(
             topic: topic,
             topicsService: topicsService,
             analyticsService: analyticsService,
             activityService: activityService,
             urlOpener: UIApplication.shared,
-            subtopicAction: subtopicAction,
-            stepByStepAction: stepByStepAction,
-            openAction: openAction
+            actions: actions
         )
 
         let view = TopicDetailView(viewModel: viewModel)

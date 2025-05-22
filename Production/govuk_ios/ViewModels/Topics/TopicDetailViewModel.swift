@@ -53,17 +53,15 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
          analyticsService: AnalyticsServiceInterface,
          activityService: ActivityServiceInterface,
          urlOpener: URLOpener,
-         subtopicAction: @escaping (DisplayableTopic) -> Void,
-         stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
-         openAction: @escaping (URL) -> Void) {
+         actions: Actions) {
+        self.topic = topic
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.activityService = activityService
         self.urlOpener = urlOpener
-        self.subtopicAction = subtopicAction
-        self.stepByStepAction = stepByStepAction
-        self.topic = topic
-        self.openAction = openAction
+        self.subtopicAction = actions.subtopicAction
+        self.stepByStepAction = actions.stepByStepAction
+        self.openAction = actions.openAction
         fetchTopicDetails(topicRef: topic.ref)
     }
 
@@ -281,5 +279,13 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             locationId: nil
         )
         commerceItems.append(appEventItem)
+    }
+}
+
+extension TopicDetailViewModel {
+    struct Actions {
+        let subtopicAction: (DisplayableTopic) -> Void
+        let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+        let openAction: (URL) -> Void
     }
 }

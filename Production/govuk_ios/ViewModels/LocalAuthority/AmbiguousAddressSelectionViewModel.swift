@@ -12,11 +12,8 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
     @Published var selectedAddress: LocalAuthorityAddress?
 
     let dismissAction: () -> Void
-
     let title = String.localAuthority.localized("addressSelectionViewTitle")
-
     let subtitle = String.localAuthority.localized("addressSelectionViewSubtitle")
-
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
     )
@@ -24,8 +21,7 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
          ambiguousAuthorities: AmbiguousAuthorities,
-         dismissAction: @escaping () -> Void
-    ) {
+         dismissAction: @escaping () -> Void) {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
         self.ambiguousAuthorities = ambiguousAuthorities

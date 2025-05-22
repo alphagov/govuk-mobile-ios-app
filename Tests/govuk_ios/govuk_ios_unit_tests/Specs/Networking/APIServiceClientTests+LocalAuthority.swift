@@ -18,7 +18,7 @@ struct APIServiceClientTests_LocalAuthority {
         let expectedResponse = HTTPURLResponse.arrange(statusCode: 200)
         let expectedData = Data()
         MockURLProtocol.requestHandlers[
-            "https://www.google.com/find-local-council/query.json"
+            "https://www.google.com/api/local-authority"
         ] = { request in
             return (expectedResponse, expectedData, nil)
         }
@@ -56,7 +56,7 @@ struct APIServiceClientTests_LocalAuthority {
         let request = GOVRequest.localAuthority(postcode: "E18QS")
         let expectedResponse = HTTPURLResponse.arrange(statusCode: statusCode)
         MockURLProtocol.requestHandlers[
-            "https://www.google.com/find-local-council/query.json"
+            "https://www.google.com/api/local-authority"
         ] = { request in
             return (expectedResponse, nil, nil)
         }

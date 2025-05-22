@@ -11,6 +11,7 @@ struct AppCoordinatorTests {
     func start_firstLaunch_startsLaunchCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
         let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -18,6 +19,7 @@ struct AppCoordinatorTests {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
             navigationController: mockNavigationController
         )
 
@@ -32,6 +34,7 @@ struct AppCoordinatorTests {
     func start_secondLaunch_startsTabCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
         let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -43,6 +46,7 @@ struct AppCoordinatorTests {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
             navigationController: mockNavigationController
         )
 
@@ -92,6 +96,7 @@ struct AppCoordinatorTests {
     func successfulSignout_startsLoginCoordinator() throws {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
         let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -118,6 +123,7 @@ struct AppCoordinatorTests {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
             navigationController: mockNavigationController
         )
 

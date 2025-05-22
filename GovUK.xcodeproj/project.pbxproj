@@ -766,6 +766,7 @@
 				govuk_ios/shared/Mocks/Services/MockAppConfigService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppLaunchService.swift,
 				govuk_ios/shared/Mocks/Services/MockAuthenticationOnboardingService.swift,
+				govuk_ios/shared/Mocks/Services/MockInactivityService.swift,
 				govuk_ios/shared/Mocks/Services/MockLocalAuthorityService.swift,
 				govuk_ios/shared/Mocks/Services/MockNotificationService.swift,
 				govuk_ios/shared/Mocks/Services/MockReturningUserService.swift,

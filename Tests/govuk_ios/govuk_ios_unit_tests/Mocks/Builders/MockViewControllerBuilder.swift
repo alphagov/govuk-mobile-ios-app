@@ -46,6 +46,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedRecentActivityViewController ?? UIViewController()
     }
 
+    var _receivedTopicDetailOpenAction: ((URL) -> Void)?
     var _stubbedTopicDetailViewController: UIViewController?
     override func topicDetail(topic: any DisplayableTopic,
                               topicsService: any TopicsServiceInterface,
@@ -54,6 +55,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                               subtopicAction: @escaping (any DisplayableTopic) -> Void,
                               stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
                               openAction: @escaping (URL) -> Void) -> UIViewController {
+        _receivedTopicDetailOpenAction = openAction
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
 

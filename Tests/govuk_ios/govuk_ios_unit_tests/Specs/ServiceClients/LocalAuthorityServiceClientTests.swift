@@ -15,7 +15,7 @@ struct LocalAuthorityServiceClientTests {
         sut.fetchLocalAuthority(
             postcode: expectedPostcode) { _ in }
 
-        #expect(mockAPI._receivedSendRequest?.urlPath == "/find-local-council/query.json")
+        #expect(mockAPI._receivedSendRequest?.urlPath == "/api/local-authority")
         #expect(mockAPI._receivedSendRequest?.method == .get)
         #expect(mockAPI._receivedSendRequest?.queryParameters?["postcode"] as? String == expectedPostcode)
     }
@@ -26,7 +26,6 @@ struct LocalAuthorityServiceClientTests {
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
-
         mockAPI._stubbedSendResponse = .success(Self.localAuthorityListData)
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
@@ -216,13 +215,13 @@ private extension LocalAuthorityServiceClientTests {
         "addresses": [
             {
                 "address": "APPLETREE COTTAGE, BARRACK ROAD, WEST PARLEY, FERNDOWN, BH22 8UB",
-                "slug": "dorset",
-                "name": "Dorset County Council"
+                "local_authority_slug": "dorset",
+                "local_authority_name": "Dorset County Council"
             },
             {
                 "address": "LONGCROFT BRICK, BARRACK ROAD, FERNDOWN, DORSET, BH22 8UB",
-                "slug": "bournemouth-christchurch-poole",
-                "name": "Bournemouth, Christchurch, and Poole"
+                "local_authority_slug": "bournemouth-christchurch-poole",
+                "local_authority_name": "Bournemouth, Christchurch, and Poole"
             }
         ]
     }

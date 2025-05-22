@@ -12,7 +12,7 @@ struct GOVRequest_LocalAuthorityTests {
         let expectedPostcode = "SW1A 0AA"
         let request = GOVRequest.localAuthority(postcode: expectedPostcode)
 
-        #expect(request.urlPath == "/find-local-council/query.json")
+        #expect(request.urlPath == "/api/local-authority")
         #expect(request.method == .get)
         #expect(request.signingKey == nil)
         #expect(request.bodyParameters == nil)
@@ -27,7 +27,7 @@ struct GOVRequest_LocalAuthorityTests {
         let expectedSlug = "dorset"
         let request = GOVRequest.localAuthoritySlug(slug: expectedSlug)
 
-        #expect(request.urlPath == "/find-local-council/dorset.json")
+        #expect(request.urlPath == "/api/local-authority/dorset")
         #expect(request.method == .get)
         #expect(request.signingKey == nil)
         #expect(request.bodyParameters == nil)

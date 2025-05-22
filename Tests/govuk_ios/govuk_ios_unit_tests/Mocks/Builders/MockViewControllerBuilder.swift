@@ -20,13 +20,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedHomeViewController: UIViewController?
-    var _receivedHomeSearchAction: (() -> Void)?
+    var _receivedHomeSearchAction: ((SearchItem) -> Void)?
     var _receivedEditLocalAuthorityAction: (() -> Void)?
     var _receivedHomeRecentActivityAction: (() -> Void)?
     var _receivedTopicWidgetViewModel: TopicsWidgetViewModel?
-    override func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
+    override func home(dependencies: HomeDependencies,
+                       actions: HomeActions) -> UIViewController {
         _receivedEditLocalAuthorityAction = actions.editLocalAuthorityAction
         _receivedHomeRecentActivityAction = actions.recentActivityAction
+        _receivedHomeSearchAction = actions.openSearchAction
         _receivedTopicWidgetViewModel = dependencies.topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
     }

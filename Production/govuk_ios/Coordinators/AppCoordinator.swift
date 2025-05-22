@@ -3,6 +3,7 @@ import Foundation
 
 class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
+    private let inactivityService: InactivityServiceInterface
     private var initialLaunch: Bool = true
     private lazy var tabCoordinator: BaseCoordinator = {
         coordinatorBuilder.tab(
@@ -11,8 +12,10 @@ class AppCoordinator: BaseCoordinator {
     }()
 
     init(coordinatorBuilder: CoordinatorBuilder,
+         inactivityService: InactivityServiceInterface,
          navigationController: UINavigationController) {
         self.coordinatorBuilder = coordinatorBuilder
+        self.inactivityService = inactivityService
         super.init(navigationController: navigationController)
     }
 

@@ -38,10 +38,10 @@ class LocalAuthorityServiceCoordinator: BaseCoordinator {
 
     private func navigateToPostcodeEntryView() {
         let coord = coordinatorBuilder.editLocalAuthority(
-            navigationController: self.root,
+            navigationController: root,
             dismissAction: dismissed
         )
-        self.start(coord)
+        start(coord)
     }
 
     private func dismissModal() {

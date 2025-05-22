@@ -9,7 +9,7 @@ struct RadioButtonView: View {
     init(title: String,
          selected: Binding<Bool>) {
         self.title = title
-        self._selected = selected
+        _selected = selected
     }
     var body: some View {
         VStack(alignment: .leading) {

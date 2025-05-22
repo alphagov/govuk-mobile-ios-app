@@ -1,6 +1,7 @@
 import SwiftUI
 import GOVKit
 
+// swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?

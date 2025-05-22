@@ -191,13 +191,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             body: nil,
             action: {
                 self.openAction(content.url)
-//                if self.urlOpener.openIfPossible(content.url) {
-//                    self.activityService.save(topicContent: content)
-//                    self.trackLinkEvent(
-//                        content: content,
-//                        sectionTitle: sectionTitle
-//                    )
-//                }
+                self.activityService.save(topicContent: content)
+                self.trackLinkEvent(
+                    content: content,
+                    sectionTitle: sectionTitle
+                )
             }
         )
     }

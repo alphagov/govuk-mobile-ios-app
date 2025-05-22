@@ -65,7 +65,6 @@ class SearchViewModel {
     func selected(item: SearchItem) {
         activityService.save(searchItem: item)
         trackSearchItemSelection(item)
-//        urlOpener.openIfPossible(item.link)
         openAction(item)
     }
 

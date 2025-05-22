@@ -174,30 +174,30 @@ struct TopicDetailViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Driving")
     }
     
-//    @Test
-//    func tappingContent_doesFireLinkEvent() throws {
-//        mockTopicsService._stubbedFetchTopicDetailsResult = .success(
-//            .arrange(
-//                fileName: "UnpopularContent"
-//            )
-//        )
-//        let sut = TopicDetailViewModel(
-//            topic: MockDisplayableTopic(ref: "", title: ""),
-//            topicsService: mockTopicsService,
-//            analyticsService: mockAnalyticsService,
-//            activityService: mockActivityService,
-//            urlOpener: mockURLOpener,
-//            subtopicAction: { _ in },
-//            stepByStepAction: { _ in },
-//            openAction: { _ in }
-//        )
-//        
-//        try #require(sut.sections.count == 4)
-//        let contentRow = try #require(sut.sections[0].rows.first as? LinkRow)
-//        contentRow.action()
-//        #expect(mockAnalyticsService._trackedEvents.count == 2)
-//        #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.gov.uk/view-driving-licence")
-//    }
+    @Test
+    func tappingContent_doesFireLinkEvent() throws {
+        mockTopicsService._stubbedFetchTopicDetailsResult = .success(
+            .arrange(
+                fileName: "UnpopularContent"
+            )
+        )
+        let sut = TopicDetailViewModel(
+            topic: MockDisplayableTopic(ref: "", title: ""),
+            topicsService: mockTopicsService,
+            analyticsService: mockAnalyticsService,
+            activityService: mockActivityService,
+            urlOpener: mockURLOpener,
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in },
+            openAction: { _ in }
+        )
+        
+        try #require(sut.sections.count == 4)
+        let contentRow = try #require(sut.sections[0].rows.first as? LinkRow)
+        contentRow.action()
+        #expect(mockAnalyticsService._trackedEvents.count == 2)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.gov.uk/view-driving-licence")
+    }
 
     @Test
     func init_apiUnavailable_doesCreateCorrectErrorViewModel() throws {

@@ -2,7 +2,6 @@ import UIKit
 import Foundation
 
 class AppCoordinator: BaseCoordinator {
-    private var inactivityCoordinator: BaseCoordinator?
     private let coordinatorBuilder: CoordinatorBuilder
     private let inactivityService: InactivityServiceInterface
     private var initialLaunch: Bool = true
@@ -47,9 +46,7 @@ class AppCoordinator: BaseCoordinator {
                 )
             }
         )
-        // ensures inactivity coordinator is retained
-        self.inactivityCoordinator = coordinator
-        coordinator.start()
+        start(coordinator)
     }
 
     private func firstLaunch(url: URL?) {

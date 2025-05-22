@@ -8,14 +8,16 @@ import Authentication
 @Suite
 struct AuthenticationServiceTests {
     @Test
-    func authenticate_success_setsTokens() async {
-        let mockUserDefaults = MockUserDefaults()
+    func authenticate_success_returningUser_setsTokens() async {
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -30,18 +32,101 @@ struct AuthenticationServiceTests {
             "expiryDate": "\(expectedExpiryDate)"
         }
         """.data(using: .utf8)!
-
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedAuthenticationResult = AuthenticationResult.success(tokenResponse)
-
         let result = await sut.authenticate(window: UIApplication.shared.window!)
 
         await confirmation() { confirmation in
-            if case .success(_) = result {
+            if case .success(let serviceResult) = result {
                 #expect(sut.refreshToken == expectedRefreshToken)
                 #expect(sut.idToken == expectedIdToken)
                 #expect(sut.accessToken == expectedAccessToken)
                 #expect(sut.isSignedIn)
+                #expect(serviceResult.returningUser)
+                confirmation()
+            }
+        }
+    }
+
+    @Test
+    func authenticate_success_newUser_setsTokens() async {
+        let mockReturningUserService = MockReturningUserService()
+        mockReturningUserService._stubbedReturningUserResult = .success(false)
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
+        )
+        let expectedAccessToken = "access_token_value"
+        let expectedRefreshToken = "refresh_token_value"
+        let expectedIdToken = "id_token"
+        let expectedExpiryDate = "2099-01-01T00:00:00Z"
+        let jsonData = """
+        {
+            "accessToken": "\(expectedAccessToken)",
+            "refreshToken": "\(expectedRefreshToken)",
+            "idToken": "\(expectedIdToken)",
+            "tokenType": "id_token",
+            "expiryDate": "\(expectedExpiryDate)"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthClient._stubbedAuthenticationResult = AuthenticationResult.success(tokenResponse)
+        let result = await sut.authenticate(window: UIApplication.shared.window!)
+
+        await confirmation() { confirmation in
+            if case .success(let serviceResult) = result {
+                #expect(sut.refreshToken == expectedRefreshToken)
+                #expect(sut.idToken == expectedIdToken)
+                #expect(sut.accessToken == expectedAccessToken)
+                #expect(sut.isSignedIn)
+                #expect(!serviceResult.returningUser)
+                confirmation()
+            }
+        }
+    }
+
+    @Test
+    func authenticate_success_returningUserServiceError_returnsFailure() async {
+        let mockReturningUserService = MockReturningUserService()
+        mockReturningUserService._stubbedReturningUserResult = .failure(.coreDataDeletionError)
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
+        )
+        let expectedAccessToken = "access_token_value"
+        let expectedRefreshToken = "refresh_token_value"
+        let expectedIdToken = "id_token"
+        let expectedExpiryDate = "2099-01-01T00:00:00Z"
+        let jsonData = """
+        {
+            "accessToken": "\(expectedAccessToken)",
+            "refreshToken": "\(expectedRefreshToken)",
+            "idToken": "\(expectedIdToken)",
+            "tokenType": "id_token",
+            "expiryDate": "\(expectedExpiryDate)"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthClient._stubbedAuthenticationResult = AuthenticationResult.success(tokenResponse)
+        let result = await sut.authenticate(window: UIApplication.shared.window!)
+
+        await confirmation() { confirmation in
+            if case .failure(let error) = result {
+                #expect(error == .returningUserService(.coreDataDeletionError))
+                #expect(sut.refreshToken == nil)
+                #expect(sut.idToken == nil)
+                #expect(sut.accessToken == nil)
+                #expect(!sut.isSignedIn)
                 confirmation()
             }
         }
@@ -49,18 +134,20 @@ struct AuthenticationServiceTests {
 
     @Test
     func authenticate_serviceClientError_returnsFailure() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         mockAuthClient._stubbedAuthenticationResult = .failure(.loginFlow(.clientError))
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
+        let result = await sut.authenticate(window: UIApplication.shared.window!)
 
         await confirmation() { confirmation in
-            let result = await sut.authenticate(window: UIApplication.shared.window!)
             if case .failure(let error) = result {
                 #expect(error == .loginFlow(.clientError))
                 confirmation()
@@ -70,13 +157,15 @@ struct AuthenticationServiceTests {
 
     @Test
     func encryptRefreshToken_success_encryptsToken() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -101,13 +190,15 @@ struct AuthenticationServiceTests {
 
     @Test
     func encryptRefreshToken_blankRefreshTokenFailure_doesntEncrypt() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         sut.encryptRefreshToken()
 
@@ -116,14 +207,16 @@ struct AuthenticationServiceTests {
 
     @Test
     func encryptRefreshToken_failedEncrypt_doesntEncrypt() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         mockSecureStoreService._stubbedSaveItemResult = .failure(TestSecureStoreError.failedEncrypt)
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -140,18 +233,22 @@ struct AuthenticationServiceTests {
         """.data(using: .utf8)!
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedAuthenticationResult = .success(tokenResponse)
-        _ = await sut.authenticate(window: UIApplication.shared.window!)
+        sut.encryptRefreshToken()
+
+        #expect(mockSecureStoreService._savedItems["refreshToken"] == nil)
     }
 
     @Test
     func signOut_deletesRefreshToken() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -179,9 +276,10 @@ struct AuthenticationServiceTests {
 
     @Test
     func tokenRefreshRequest_successful_returnsSuccess() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         let idToken = UUID().uuidString
         let accessToken = UUID().uuidString
         let refreshToken = UUID().uuidString
@@ -189,13 +287,14 @@ struct AuthenticationServiceTests {
             accessToken: accessToken,
             idToken: idToken
         )
-        mockAuthClient._stubbedTokenRefreshResult = .success(tokenResponse)
-        mockSecureStoreService._stubbedReadItemResult = .success(refreshToken)
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
+        mockAuthClient._stubbedTokenRefreshResult = .success(tokenResponse)
+        mockSecureStoreService._stubbedReadItemResult = .success(refreshToken)
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
         await confirmation() { confirmation in
@@ -210,9 +309,10 @@ struct AuthenticationServiceTests {
 
     @Test
     func tokenRefreshRequest_decryptRefreshTokenError_returnsFailure() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         let idToken = UUID().uuidString
         let accessToken = UUID().uuidString
         let tokenResponse = TokenRefreshResponse(
@@ -223,8 +323,9 @@ struct AuthenticationServiceTests {
         mockSecureStoreService._stubbedReadItemResult = .failure(NSError())
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -240,15 +341,17 @@ struct AuthenticationServiceTests {
 
     @Test
     func tokenRefreshRequest_tokenResponseError_returnsFailure() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         mockAuthClient._stubbedTokenRefreshResult = .failure(.tokenResponseError)
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -264,13 +367,15 @@ struct AuthenticationServiceTests {
 
     @Test
     func userEmail_decryptedFromIDToken() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
-            secureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -287,8 +392,8 @@ struct AuthenticationServiceTests {
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedAuthenticationResult = .success(tokenResponse)
         _ = await sut.authenticate(window: UIApplication.shared.window!)
-
         let email = await sut.userEmail
+
         #expect(email == "josh.dubey1@digital.cabinet-office.gov.uk")
     }
 }

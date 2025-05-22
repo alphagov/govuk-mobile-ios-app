@@ -12,31 +12,22 @@ class AuthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
-        mockAuthenticationService.authenticationOnboardingFlowSeen = true
-        mockAuthenticationService.isLocalAuthenticationSkipped = false
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = true
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -51,31 +42,22 @@ class AuthenticationCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
-        mockAuthenticationService.authenticationOnboardingFlowSeen = false
-        mockAuthenticationService.isLocalAuthenticationSkipped = false
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -86,35 +68,26 @@ class AuthenticationCoordinatorTests {
     }
 
     @Test @MainActor
-    func start_skipsLocalAuthentication_biometricsEnrolled_shouldEncryptToken_callsCompletion() async {
+    func start_localAuthenticationEnabled_biometricsEnrolled_shouldEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
-        mockAuthenticationService.authenticationOnboardingFlowSeen = true
-        mockAuthenticationService.isLocalAuthenticationSkipped = true
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = true
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -125,35 +98,26 @@ class AuthenticationCoordinatorTests {
     }
 
     @Test @MainActor
-    func start_skipsLocalAuthentication_shouldntEncryptToken_callsCompletion() async {
+    func start_localAuthenticationDisabled_shouldntEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
-        mockAuthenticationService.authenticationOnboardingFlowSeen = false
-        mockAuthenticationService.isLocalAuthenticationSkipped = true
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -164,24 +128,46 @@ class AuthenticationCoordinatorTests {
     }
 
     @Test @MainActor
-    func start_passcodeEnrolled_localAuthNotSkipped_shouldEncryptToken_callsCompletion() async {
+    func start_newUser_shouldntEncryptToken_callsNewUserAction() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
-        let jsonData = """
-        {
-            "accessToken": "access_token",
-            "refreshToken": "refresh_token",
-            "idToken": "id_token",
-            "tokenType": "id_token",
-            "expiryDate": "2099-01-01T00:00:00Z"
-        }
-        """.data(using: .utf8)!
-        let tokenResponse = createTokenResponse(jsonData)
         mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
-        mockAuthenticationService.authenticationOnboardingFlowSeen = true
-        mockAuthenticationService.isLocalAuthenticationSkipped = false
-        mockAuthenticationService._stubbedAuthenticationResult = .success(tokenResponse)
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: false)
+        )
+        let newWindow = UIWindow(frame: UIScreen.main.bounds)
+        newWindow.rootViewController = mockNavigationController
+        newWindow.makeKeyAndVisible()
+        let completion = await withCheckedContinuation { continuation in
+            let sut = AuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                completionAction: { },
+                newUserAction: { continuation.resume(returning: true) },
+                handleError: { _ in }
+            )
+            sut.start(url: nil)
+        }
+
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
+        #expect(completion)
+    }
+
+    @Test @MainActor
+    func start_passcodeEnrolled_shouldEncryptToken_callsCompletion() async {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = true
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -191,8 +177,8 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { _ in }
             )
             sut.start(url: nil)
@@ -209,8 +195,8 @@ class AuthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
 
         mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
-        mockAuthenticationService.authenticationOnboardingFlowSeen = true
-        mockAuthenticationService.isLocalAuthenticationSkipped = false
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .failure(.genericError)
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
@@ -222,8 +208,8 @@ class AuthenticationCoordinatorTests {
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completionAction: { continuation.resume(returning: true) },
+                newUserAction: nil,
                 handleError: { error in
                     authError = error
                     continuation.resume(returning: false)

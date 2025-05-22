@@ -5,8 +5,6 @@ import Authentication
 @testable import govuk_ios
 
 class MockAuthenticationService: AuthenticationServiceInterface {
-    var isLocalAuthenticationSkipped: Bool = true
-    
     var _stubbedUserEmail: String?
     var userEmail: String? {
         _stubbedUserEmail
@@ -24,10 +22,9 @@ class MockAuthenticationService: AuthenticationServiceInterface {
     var refreshToken: String?
     var idToken: String?
     var accessToken: String?
-    var authenticationOnboardingFlowSeen: Bool = true
 
-    var _stubbedAuthenticationResult: AuthenticationResult = .failure(.loginFlow(.clientError))
-    func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationResult {
+    var _stubbedAuthenticationResult: AuthenticationServiceResult = .failure(.loginFlow(.clientError))
+    func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationServiceResult {
         _stubbedAuthenticationResult
     }
 

@@ -4,9 +4,26 @@ import LocalAuthentication
 @testable import govuk_ios
 
 class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
-    var _stubbedSkipOnboarding = false
-    var shouldSkipOnboarding: Bool {
-        _stubbedSkipOnboarding
+    var _stubbedAuthenticationOnboardingSeen: Bool = false
+    var authenticationOnboardingFlowSeen: Bool {
+        _stubbedAuthenticationOnboardingSeen
+    }
+
+    var _stubbedLocalAuthenticationEnabled = false
+    var isLocalAuthenticationEnabled: Bool {
+        _stubbedLocalAuthenticationEnabled
+    }
+
+    var _setLocalAuthenticationCalled = false
+    var _localAuthenticationEnabled: Bool?
+    func setLocalAuthenticationEnabled(_ enabled: Bool) {
+        _setLocalAuthenticationCalled = true
+        _localAuthenticationEnabled = enabled
+    }
+
+    var _stubbedBiometricsHaveChanged = false
+    var biometricsHaveChanged: Bool {
+        _stubbedBiometricsHaveChanged
     }
 
     var _stubbedCanEvaluateBiometricsPolicy: Bool = false
@@ -30,10 +47,5 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
     var _stubbedAuthType: LocalAuthenticationType = .none
     var authType: LocalAuthenticationType {
         return _stubbedAuthType
-    }
-
-    var _setHasSeenOnboardingCalled: Bool = false
-    func setHasSeenOnboarding() {
-        _setHasSeenOnboardingCalled = true
     }
 }

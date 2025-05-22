@@ -4,7 +4,7 @@ import Foundation
 class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private var initialLaunch: Bool = true
-    private lazy var tabCooordinator: BaseCoordinator = {
+    private lazy var tabCoordinator: BaseCoordinator = {
         coordinatorBuilder.tab(
             navigationController: root
         )
@@ -110,6 +110,9 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             completionAction: { [weak self] in
                 self?.startAnalyticsConsent(url: url)
+            },
+            newUserAction: { [weak self] in
+                self?.startNewUserOnboardingCoordinator(url: nil)
             }
         )
         start(coordinator, url: url)
@@ -129,7 +132,10 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.onboarding(
             navigationController: root,
             dismissAction: { [weak self] in
-                self?.startAuthenticationOnboardingCoordinator(url: url)
+                self?.startAuthenticationOnboardingCoordinator(
+                    url: url,
+                    newUserAction: nil
+                )
             }
         )
         start(coordinator)
@@ -145,9 +151,11 @@ class AppCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
-    private func startAuthenticationOnboardingCoordinator(url: URL?) {
+    private func startAuthenticationOnboardingCoordinator(url: URL?,
+                                                          newUserAction: (() -> Void)?) {
         let coordinator = coordinatorBuilder.authenticationOnboarding(
             navigationController: root,
+            newUserAction: newUserAction,
             completionAction: { [weak self] in
                 self?.startLocalAuthenticationOnboardingCoordinator(url: url)
             }
@@ -184,21 +192,39 @@ class AppCoordinator: BaseCoordinator {
                         url: URL(string: "govuk://settings/settings")
                     )
                 } else {
-                    self?.startAuthenticationOnboardingCoordinator(url: nil)
+                    self?.startAuthenticationOnboardingCoordinator(
+                        url: nil,
+                        newUserAction: { [weak self] in
+                            self?.startNewUserOnboardingCoordinator(url: nil)
+                        }
+                    )
                 }
             }
         )
         start(coordinator, url: url)
     }
 
+    private func startNewUserOnboardingCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.newUserOnboardingCoordinator(
+            navigationController: root,
+            completionAction: { [weak self] in
+                self?.startTabs(url: nil)
+            }
+        )
+        start(coordinator)
+    }
+
     private func startTabs(url: URL?) {
-        start(tabCooordinator, url: url)
+        start(tabCoordinator, url: url)
     }
 
     override func childDidFinish(_ child: BaseCoordinator) {
         super.childDidFinish(child)
         if child is TabCoordinator {
             startSignedOutCoordinator(url: nil)
+            tabCoordinator = coordinatorBuilder.tab(
+                navigationController: root
+            )
         }
     }
 }

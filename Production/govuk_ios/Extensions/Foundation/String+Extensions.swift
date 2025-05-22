@@ -77,6 +77,13 @@ extension String {
             bundle: .main
         )
     }
+
+    static var localAuthentication: LocalStringBuilder {
+        .init(
+            tableName: "LocalAuthentication",
+            bundle: .main
+        )
+    }
 }
 
 extension String {

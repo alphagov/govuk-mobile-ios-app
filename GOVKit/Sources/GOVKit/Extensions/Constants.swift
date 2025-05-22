@@ -51,10 +51,10 @@ public struct Constants {
         public static let authenticationCallbackUri: String = "govuk://govuk/login-auth-callback"
 
         public static var defaultLocalAuthorityURL: URL = URL(
-            string: "https://development-local-api-05fe62f9622c.herokuapp.com"
+            string: "https://www.gov.uk"
         )!
 
-        public static var localAuthorityPath: String = "/find-local-council/query.json"
+        public static var localAuthorityPath: String = "/api/local-authority"
 
         public static var manageAccountURL: URL = URL(
             string: "https://home.account.gov.uk/"

@@ -3,10 +3,10 @@ import GOVKit
 import UIComponents
 
 struct LocalAuthorityPostcodeEntryView: View {
-    @StateObject private var viewModel: LocalAuthorityPostecodeEntryViewModel
+    @StateObject private var viewModel: LocalAuthorityPostcodeEntryViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    init(viewModel: LocalAuthorityPostecodeEntryViewModel) {
+    init(viewModel: LocalAuthorityPostcodeEntryViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {
@@ -40,6 +40,7 @@ struct LocalAuthorityPostcodeEntryView: View {
             PrimaryButtonView(
                 viewModel: viewModel.primaryButtonViewModel
             )
+            .disabled(viewModel.postCode.isEmpty)
         }.toolbar {
             cancelButton
         }

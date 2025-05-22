@@ -354,9 +354,9 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func newUserOnboardingCoordinator_returnsExpectedResult() {
+    func newUserOnboarding_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.newUserOnboardingCoordinator(
+        let coordinator = subject.newUserOnboarding(
             navigationController: MockNavigationController(),
             completionAction: { }
         )

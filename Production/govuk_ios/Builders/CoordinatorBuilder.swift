@@ -354,8 +354,8 @@ class CoordinatorBuilder {
         )
     }
 
-    func newUserOnboardingCoordinator(navigationController: UINavigationController,
-                                      completionAction: @escaping () -> Void) -> BaseCoordinator {
+    func newUserOnboarding(navigationController: UINavigationController,
+                           completionAction: @escaping () -> Void) -> BaseCoordinator {
         NewUserOnboardingCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,

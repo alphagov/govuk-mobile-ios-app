@@ -89,7 +89,8 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
                     guard let response = decode(data: $0) else {
                         return .failure(LocalAuthorityError.decodingError)
                     }
-                    return .success(response)
+//                    return .success(response)
+                    return .failure(LocalAuthorityError.apiUnavailable)
                 }
             }
         }

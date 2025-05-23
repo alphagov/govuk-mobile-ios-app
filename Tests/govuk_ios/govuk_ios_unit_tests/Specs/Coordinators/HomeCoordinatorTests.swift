@@ -206,17 +206,17 @@ struct HomeCoordinatorTests {
         #expect(navigationEvent?.params?["type"] as? String == "Widget")
         #expect(navigationEvent?.name == "Navigation")
     }
-    
+
     @Test
     @MainActor
     func didReselectTab_resetsToDefaultState_whenOnHomeScreen() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
-        
+
         let homeViewController = MockHomeViewController()
         mockViewControllerBuilder._stubbedHomeViewController = homeViewController
-        
+
         let subject = HomeCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: mockCoodinatorBuilder,
@@ -231,23 +231,23 @@ struct HomeCoordinatorTests {
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService()
         )
-        
+
         subject.start()
         subject.didReselectTab()
-        
+
         #expect(homeViewController._hasResetState)
     }
-    
+
     @Test
     @MainActor
     func didReselectTab_doesNotResetToDefaultState_whenOnChildScreen() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
-        
+
         let homeViewController = MockHomeViewController()
         mockViewControllerBuilder._stubbedHomeViewController = homeViewController
-        
+
         let subject = HomeCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: mockCoodinatorBuilder,
@@ -262,11 +262,47 @@ struct HomeCoordinatorTests {
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService()
         )
-        
+
         subject.start()
         subject.start(MockBaseCoordinator())
         subject.didReselectTab()
-        
+
         #expect(homeViewController._hasResetState == false)
+    }
+
+    @Test
+    @MainActor
+    func openSearchAction_oresentsWebView() {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let navigationController = UINavigationController()
+
+        let homeViewController = MockHomeViewController()
+        mockViewControllerBuilder._stubbedHomeViewController = homeViewController
+
+        let subject = HomeCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoodinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
+            notificationService: MockNotificationService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService()
+        )
+
+        let mockSafariCoordinator = MockBaseCoordinator()
+        mockCoodinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
+
+        subject.start()
+        let expectedSearchItem = SearchItem.arrange
+        mockViewControllerBuilder._receivedHomeSearchAction?(expectedSearchItem)
+
+        #expect(mockSafariCoordinator._startCalled)
+        #expect(mockCoodinatorBuilder._receivedSafariCoordinatorURL == expectedSearchItem.link)
     }
 }

@@ -239,7 +239,7 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startNewUserOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.newUserOnboardingCoordinator(
+        let coordinator = coordinatorBuilder.newUserOnboarding(
             navigationController: root,
             completionAction: { [weak self] in
                 self?.startTabs(url: nil)

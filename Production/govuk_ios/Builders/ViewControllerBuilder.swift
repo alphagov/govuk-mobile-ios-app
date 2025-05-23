@@ -3,6 +3,7 @@ import UIKit
 import SwiftUI
 import Factory
 import GOVKit
+import SafariServices
 
 // swiftlint:disable:next type_body_length
 class ViewControllerBuilder {
@@ -34,6 +35,7 @@ class ViewControllerBuilder {
         let recentActivityAction: () -> Void
         let localAuthorityAction: () -> Void
         let editLocalAuthorityAction: () -> Void
+        let openSearchAction: (SearchItem) -> Void
     }
 
     @MainActor
@@ -49,6 +51,7 @@ class ViewControllerBuilder {
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
+            openAction: actions.openSearchAction,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService,
@@ -77,11 +80,12 @@ class ViewControllerBuilder {
 
     @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface,
-                        activityService: ActivityServiceInterface) -> UIViewController {
+                        activityService: ActivityServiceInterface,
+                        selectedAction: @escaping (URL) -> Void) -> UIViewController {
         let viewModel = RecentActivityListViewModel(
             activityService: activityService,
             analyticsService: analyticsService,
-            urlopener: UIApplication.shared
+            selectedAction: selectedAction
         )
         return RecentActivityListViewController(
             viewModel: viewModel
@@ -250,16 +254,21 @@ class ViewControllerBuilder {
                      analyticsService: AnalyticsServiceInterface,
                      activityService: ActivityServiceInterface,
                      subtopicAction: @escaping (DisplayableTopic) -> Void,
-                     stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void
+                     stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
+                     openAction: @escaping (URL) -> Void
     ) -> UIViewController {
+        let actions = TopicDetailViewModel.Actions(
+            subtopicAction: subtopicAction,
+            stepByStepAction: stepByStepAction,
+            openAction: openAction
+        )
         let viewModel = TopicDetailViewModel(
             topic: topic,
             topicsService: topicsService,
             analyticsService: analyticsService,
             activityService: activityService,
             urlOpener: UIApplication.shared,
-            subtopicAction: subtopicAction,
-            stepByStepAction: stepByStepAction
+            actions: actions
         )
 
         let view = TopicDetailView(viewModel: viewModel)
@@ -337,5 +346,18 @@ class ViewControllerBuilder {
     @MainActor
     func webViewController(for url: URL) -> UIViewController {
         return WebViewController(url: url)
+    }
+
+    @MainActor
+    func safari(url: URL) -> UIViewController {
+        let config = SFSafariViewController.Configuration()
+        config.barCollapsingEnabled = true
+        let viewController = SFSafariViewController(
+            url: url,
+            configuration: config
+        )
+        viewController.modalPresentationStyle = .formSheet
+        viewController.isModalInPresentation = true
+        return viewController
     }
 }

@@ -26,8 +26,7 @@ struct TopicDetailViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            actions: .empty
         )
 
         try #require(sut.sections.count == 3)
@@ -60,8 +59,7 @@ struct TopicDetailViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            actions: .empty
         )
         
         try #require(sut.sections.count == 3)
@@ -98,8 +96,7 @@ struct TopicDetailViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            actions: .empty
         )
         
         try #require(sut.sections.count == 4)
@@ -132,8 +129,7 @@ struct TopicDetailViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            actions: .empty
         )
 
         #expect(sut.sections[3].heading?.title == "Related")
@@ -149,16 +145,20 @@ struct TopicDetailViewModelTests {
                 fileName: "UnpopularContent"
             )
         )
+        let actions = TopicDetailViewModel.Actions(
+            subtopicAction: { _ in
+                didNavigate = true
+            },
+            stepByStepAction: { _ in },
+            openAction: { _ in }
+        )
         let sut = TopicDetailViewModel(
             topic: MockDisplayableTopic(ref: "", title: ""),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in
-                didNavigate = true
-            },
-            stepByStepAction: { _ in }
+            actions: actions
         )
         
         try #require(sut.sections.count == 4)
@@ -182,8 +182,7 @@ struct TopicDetailViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            actions: .empty
         )
         
         try #require(sut.sections.count == 4)
@@ -192,7 +191,7 @@ struct TopicDetailViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.gov.uk/view-driving-licence")
     }
-    
+
     @Test
     func init_apiUnavailable_doesCreateCorrectErrorViewModel() throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.apiUnavailable)
@@ -202,8 +201,7 @@ struct TopicDetailViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            actions: .empty
         )
         let errorViewModel = try #require(sut.errorViewModel)
         #expect(errorViewModel.title == String.common.localized("genericErrorTitle"))
@@ -226,8 +224,7 @@ struct TopicDetailViewModelTests {
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
             urlOpener: mockURLOpener,
-            subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            actions: .empty
         )
         let errorViewModel = try #require(sut.errorViewModel)
         #expect(errorViewModel.title == String.common.localized("networkUnavailableErrorTitle"))
@@ -238,5 +235,15 @@ struct TopicDetailViewModelTests {
         mockTopicsService._fetchDetailsCalled = false
         errorViewModel.action?()
         #expect(mockTopicsService._fetchDetailsCalled)
+    }
+}
+
+extension TopicDetailViewModel.Actions {
+    static var empty: TopicDetailViewModel.Actions {
+        .init(
+            subtopicAction: { _ in },
+            stepByStepAction: { _ in },
+            openAction: { _ in }
+        )
     }
 }

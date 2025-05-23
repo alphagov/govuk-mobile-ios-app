@@ -219,4 +219,12 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _receivedInactiveAction = inactiveAction
         return _stubbedInactivityCoordinator ?? MockBaseCoordinator()
     }
+
+    var _receivedSafariCoordinatorURL: URL?
+    var _stubbedSafariCoordinator: MockBaseCoordinator?
+    override func safari(navigationController: UINavigationController,
+                         url: URL) -> BaseCoordinator {
+        _receivedSafariCoordinatorURL = url
+        return _stubbedSafariCoordinator ?? MockBaseCoordinator()
+    }
 }

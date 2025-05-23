@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import Factory
+import UIKit
 
 @testable import govuk_ios
 
@@ -344,9 +345,20 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func newUserOnboardingCoordinator_returnsExpectedResult() {
+    func safari_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.newUserOnboardingCoordinator(
+        let coordinator = subject.safari(
+            navigationController: UINavigationController(),
+            url: URL.arrange
+        )
+
+        #expect(coordinator is SafariCoordinator)
+    }
+
+    @Test
+    func newUserOnboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.newUserOnboarding(
             navigationController: MockNavigationController(),
             completionAction: { }
         )

@@ -143,7 +143,8 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
-            activityService: container.activityService.resolve()
+            activityService: container.activityService.resolve(),
+            coordinatorBuilder: self
         )
     }
 
@@ -154,6 +155,7 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             topicsService: container.topicsService.resolve(),
             activityService: container.activityService.resolve(),
+            coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             topic: topic
         )
@@ -344,8 +346,17 @@ class CoordinatorBuilder {
         )
     }
 
-    func newUserOnboardingCoordinator(navigationController: UINavigationController,
-                                      completionAction: @escaping () -> Void) -> BaseCoordinator {
+    func safari(navigationController: UINavigationController,
+                url: URL) -> BaseCoordinator {
+        SafariCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            url: url
+        )
+    }
+
+    func newUserOnboarding(navigationController: UINavigationController,
+                           completionAction: @escaping () -> Void) -> BaseCoordinator {
         NewUserOnboardingCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,

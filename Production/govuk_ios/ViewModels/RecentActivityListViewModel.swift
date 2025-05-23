@@ -10,7 +10,6 @@ final class RecentActivityListViewModel: NSObject,
     )
     private let activityService: ActivityServiceInterface
     let analyticsService: AnalyticsServiceInterface
-    private let urlOpener: URLOpener
     private let recentActivityHeaderFormatter = DateFormatter.recentActivityHeader
     private var retainedResultsController: NSFetchedResultsController<ActivityItem>?
     private var selectedEditingItems: Set<NSManagedObjectID> = []
@@ -19,13 +18,14 @@ final class RecentActivityListViewModel: NSObject,
         currentMonthActivities: [],
         recentMonthActivities: [:]
     )
+    private let selectedAction: (URL) -> Void
 
     init(activityService: ActivityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         urlopener: URLOpener) {
+         selectedAction: @escaping (URL) -> Void) {
         self.activityService = activityService
         self.analyticsService = analyticsService
-        self.urlOpener = urlopener
+        self.selectedAction = selectedAction
     }
 
     @discardableResult
@@ -70,7 +70,7 @@ final class RecentActivityListViewModel: NSObject,
         else { return }
         item.date = Date()
         try? item.managedObjectContext?.save()
-        urlOpener.openIfPossible(url)
+        selectedAction(url)
         trackSelection(activity: item)
     }
 

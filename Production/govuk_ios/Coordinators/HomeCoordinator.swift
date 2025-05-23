@@ -58,7 +58,10 @@ class HomeCoordinator: TabItemCoordinator {
             notificationsAction: notificationsAction,
             recentActivityAction: startRecentActivityCoordinator,
             localAuthorityAction: presentLocalAuthorityCoordinator,
-            editLocalAuthorityAction: presentEditLocalAuthorityCoordinator
+            editLocalAuthorityAction: presentEditLocalAuthorityCoordinator,
+            openSearchAction: { [weak self] item in
+                self?.presentWebView(url: item.link)
+            }
         )
 
         let viewController = viewControllerBuilder.home(
@@ -66,6 +69,14 @@ class HomeCoordinator: TabItemCoordinator {
             actions: actions
         )
         set([viewController], animated: false)
+    }
+
+    private func presentWebView(url: URL) {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url
+        )
+        start(coordinator, url: url)
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {

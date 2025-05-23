@@ -210,4 +210,12 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _receivedSignInErrorCompletion = completion
         return _stubbedSignInErrorCoordinator ?? MockBaseCoordinator()
     }
+
+    var _receivedSafariCoordinatorURL: URL?
+    var _stubbedSafariCoordinator: MockBaseCoordinator?
+    override func safari(navigationController: UINavigationController,
+                         url: URL) -> BaseCoordinator {
+        _receivedSafariCoordinatorURL = url
+        return _stubbedSafariCoordinator ?? MockBaseCoordinator()
+    }
 }

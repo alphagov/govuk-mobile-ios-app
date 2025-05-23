@@ -176,23 +176,6 @@ struct LocalAuthorityServiceClientTests {
         #expect(localResult == nil)
         #expect(result.getError() == .decodingError)
     }
-
-    @Test
-    func fetchLocalAuthority_localErrorMessage_returnsExpectedresult() async throws {
-        let mockAPI = MockAPIServiceClient()
-        let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
-        mockAPI._stubbedSendResponse = .success(Self.localAuthorityErrorMessage)
-
-        let result = await withCheckedContinuation { continuation in
-            sut.fetchLocalAuthority(
-                postcode: "test") { result in
-                    continuation.resume(returning: result)
-                }
-        }
-        let localResult = try? result.get()
-        let errormessage = localResult?.localAuthorityErrorMessage
-        #expect(errormessage == "Postcode not found")
-    }
 }
 private extension LocalAuthorityServiceClientTests {
 

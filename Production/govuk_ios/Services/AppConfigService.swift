@@ -52,7 +52,7 @@ public final class AppConfigService: AppConfigServiceInterface {
 
     func isFeatureEnabled(key: Feature) -> Bool {
         if case .localServices = key {
-            return false
+            return true
         }
         return featureFlags[key.rawValue] ?? false
     }

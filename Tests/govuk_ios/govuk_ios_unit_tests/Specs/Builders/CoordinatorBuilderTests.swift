@@ -13,8 +13,10 @@ struct CoordinatorBuilderTests {
     func app_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
+        let mockInactivityService = MockInactivityService()
         let coordinator = subject.app(
-            navigationController: mockNavigationController
+            navigationController: mockNavigationController,
+            inactivityService: mockInactivityService
         )
 
         #expect(coordinator is AppCoordinator)

@@ -11,6 +11,7 @@ struct AppCoordinatorTests {
     func start_firstLaunch_startsLaunchCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
         let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -18,6 +19,7 @@ struct AppCoordinatorTests {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
             navigationController: mockNavigationController
         )
 
@@ -32,6 +34,7 @@ struct AppCoordinatorTests {
     func start_secondLaunch_startsTabCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
         let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -43,6 +46,7 @@ struct AppCoordinatorTests {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
             navigationController: mockNavigationController
         )
 
@@ -59,6 +63,7 @@ struct AppCoordinatorTests {
             appVersionProvider: MockAppVersionProvider()
         )
         // This is in order of launch
+        mockCoordinatorBuilder._receivedInactiveAction?()
         mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
         mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
         mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
@@ -92,6 +97,7 @@ struct AppCoordinatorTests {
     func successfulSignout_startsLoginCoordinator() throws {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
         let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -118,6 +124,7 @@ struct AppCoordinatorTests {
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
             navigationController: mockNavigationController
         )
 
@@ -131,6 +138,7 @@ struct AppCoordinatorTests {
             appVersionProvider: MockAppVersionProvider()
         )
         // This is in order of launch
+        mockCoordinatorBuilder._receivedInactiveAction?()
         mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
         mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
         mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()

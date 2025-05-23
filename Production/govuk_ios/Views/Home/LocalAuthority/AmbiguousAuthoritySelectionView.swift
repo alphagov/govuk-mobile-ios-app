@@ -12,9 +12,11 @@ struct AmbiguousAuthoritySelectionView: View {
 
     var body: some View {
         VStack {
-            headerView
-            listView
-            Spacer()
+            ScrollView {
+                headerView
+                listView
+                Spacer()
+            }
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
@@ -36,7 +38,9 @@ struct AmbiguousAuthoritySelectionView: View {
             }
             .ignoresSafeArea()
             .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
-        }.toolbar {
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
             cancelButton
         }
         .onAppear {
@@ -58,23 +62,20 @@ struct AmbiguousAuthoritySelectionView: View {
     }
 
     private var listView: some View {
-        List(
+        ForEach(
             viewModel.localAuthorities,
             id: \.slug
         ) { authority in
             RadioButtonView(
                 title: authority.name,
-                selected: isSelected(authority.slug)
+                selected: isSelected(authority.slug),
+                isLastRow: viewModel.localAuthorities.last?.slug == authority.slug
             )
-            .listRowSeparatorTint(Color(UIColor.govUK.strokes.listDivider))
-            .listSectionSeparator(.hidden, edges: .bottom)
-            .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
             .onTapGesture {
                 viewModel.selectedAuthority = authority
             }
         }
-        .listStyle(.plain)
-        .padding(.trailing, 16)
+        .padding(.horizontal, 16)
     }
 
     private var cancelButton: some ToolbarContent {

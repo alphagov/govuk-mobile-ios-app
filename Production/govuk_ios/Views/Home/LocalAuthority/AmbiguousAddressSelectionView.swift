@@ -12,12 +12,15 @@ struct AmbiguousAddressSelectionView: View {
 
     var body: some View {
         VStack {
-            headerView
-            listView
-            Spacer()
+            ScrollView {
+                headerView
+                listView
+                Spacer()
+            }
             PrimaryButtonView(viewModel: viewModel.confirmButtonModel)
                 .disabled(viewModel.selectedAddress == nil)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             cancelButton
         }
@@ -40,23 +43,20 @@ struct AmbiguousAddressSelectionView: View {
     }
 
     private var listView: some View {
-        List(
+        ForEach(
             viewModel.addresses,
             id: \.address
         ) { address in
             RadioButtonView(
                 title: address.address,
-                selected: isSelected(address.address)
+                selected: isSelected(address.address),
+                isLastRow: viewModel.addresses.last?.address == address.address
             )
-            .listRowSeparatorTint(Color(UIColor.govUK.strokes.listDivider))
-            .listSectionSeparator(.hidden, edges: .bottom)
-            .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
             .onTapGesture {
                 viewModel.selectedAddress = address
             }
         }
-        .listStyle(.plain)
-        .padding(.trailing, 16)
+        .padding(.horizontal, 16)
     }
 
     private var cancelButton: some ToolbarContent {
@@ -68,8 +68,8 @@ struct AmbiguousAddressSelectionView: View {
         }
     }
 
-    private func isSelected(_ slug: String) -> Binding<Bool> {
-        return .constant(slug == viewModel.selectedAddress?.address)
+    private func isSelected(_ address: String) -> Binding<Bool> {
+        return .constant(address == viewModel.selectedAddress?.address)
     }
 }
 

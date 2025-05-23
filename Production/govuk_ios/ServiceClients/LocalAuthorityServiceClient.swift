@@ -20,6 +20,8 @@ enum LocalAuthorityError: LocalizedError {
     case networkUnavailable
     case apiUnavailable
     case decodingError
+    case unknownPostcode
+    case invalidPostcode
 }
 
 struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
@@ -80,7 +82,7 @@ struct LocalAuthorityServiceClient: LocalAuthorityServiceClientInterface {
                 if nsError.code == NSURLErrorNotConnectedToInternet {
                     return LocalAuthorityError.networkUnavailable
                 } else {
-                    return LocalAuthorityError.apiUnavailable
+                    return (error as? LocalAuthorityError) ?? LocalAuthorityError.apiUnavailable
                 }
             }.flatMap {
                 do {

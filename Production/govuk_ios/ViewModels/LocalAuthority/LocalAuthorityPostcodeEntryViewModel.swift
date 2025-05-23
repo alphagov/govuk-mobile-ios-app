@@ -72,7 +72,7 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
                 )
                 self.resolveAmbiguityAction(ambiguousAuthorities, self.postCode)
             case .failure(let error):
-                self?.populateErrorMessage(error: error.localizedDescription)
+                self?.populateErrorMessage(error)
             }
         }
     }
@@ -130,26 +130,27 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
 
     func fetchLocalAuthority(postCode: String) {
         service.fetchLocalAuthority(postcode: postCode) { [weak self] results in
-            if case let .success(response) = results {
+            switch results {
+            case .success(let response):
                 switch response.type {
                 case .authority:
                     self?.dismissAction()
-                case .addresses(let addresses):
-                    self?.fetchAuthoritiesWithAddresses(addresses)
-                case .errorMessage:
-                    self?.populateErrorMessage(
-                        error: response.localAuthorityErrorMessage
-                    )
+                case .addresses(let addressess):
+                    self?.fetchAuthoritiesWithAddresses(addressess)
+                case .unknown:
+                    self?.populateErrorMessage(.apiUnavailable)
                 }
+            case .failure(let error):
+                self?.populateErrorMessage(error)
             }
         }
     }
 
-    private func populateErrorMessage(error: String?) {
+    private func populateErrorMessage(_ error: LocalAuthorityError) {
         switch error {
-        case "Invalid postcode":
-            self.error  = .invalidPostcode
-        case "Postcode not found":
+        case .invalidPostcode:
+            self.error = .invalidPostcode
+        case .unknownPostcode:
             self.error = .postCodeNotFound
         default:
             self.error = .pageNotWorking

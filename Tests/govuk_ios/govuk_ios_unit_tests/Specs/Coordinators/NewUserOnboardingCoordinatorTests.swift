@@ -19,7 +19,6 @@ func start_runsThroughNewUserOnboarding() async {
     subject.start()
     mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
     mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
-    mockCoordinatorBuilder._receivedOnboardingDismissAction?()
     mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
     mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
 }

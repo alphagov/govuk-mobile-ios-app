@@ -153,16 +153,6 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.analyticsConsent(
             navigationController: root,
             dismissAction: { [weak self] in
-                self?.startOnboarding(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startOnboarding(url: URL?) {
-        let coordinator = coordinatorBuilder.onboarding(
-            navigationController: root,
-            dismissAction: { [weak self] in
                 self?.startAuthenticationOnboardingCoordinator(
                     url: url,
                     newUserAction: nil

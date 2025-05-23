@@ -129,17 +129,6 @@ class CoordinatorBuilder {
         )
     }
 
-    func onboarding(navigationController: UINavigationController,
-                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
-        OnboardingCoordinator(
-            navigationController: navigationController,
-            onboardingService: container.onboardingService.resolve(),
-            analyticsService: container.onboardingAnalyticsService.resolve(),
-            appConfigService: container.appConfigService.resolve(),
-            dismissAction: dismissAction
-        )
-    }
-
     func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
         RecentActivityCoordinator(
             navigationController: navigationController,

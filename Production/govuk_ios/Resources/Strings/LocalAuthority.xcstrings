@@ -144,6 +144,17 @@
         }
       }
     },
+    "localAuthorityNetworkUnavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are not connected to the internet. Reconnect and try again."
+          }
+        }
+      }
+    },
     "localAuthorityPageNotWorking" : {
       "extractionState" : "manual",
       "localizations" : {

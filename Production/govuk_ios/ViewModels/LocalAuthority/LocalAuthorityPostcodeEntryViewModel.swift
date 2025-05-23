@@ -51,6 +51,7 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
         case textFieldEmpty = "localAuthorityEmptyTextField"
         case invalidPostcode = "localAuthorityInvalidPostcode"
         case pageNotWorking = "localAuthorityPageNotWorking"
+        case networkUnavailable = "localAuthorityNetworkUnavailable"
 
         var errorMessage: String {
             String.localAuthority.localized(
@@ -152,6 +153,10 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
             self.error = .invalidPostcode
         case .unknownPostcode:
             self.error = .postCodeNotFound
+        case .apiUnavailable:
+            self.error = .pageNotWorking
+        case .networkUnavailable:
+            self.error = .networkUnavailable
         default:
             self.error = .pageNotWorking
         }

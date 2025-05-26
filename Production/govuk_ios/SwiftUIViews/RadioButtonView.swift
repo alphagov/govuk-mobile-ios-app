@@ -24,6 +24,8 @@ struct RadioButtonView: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(title + (selected ? ", selected" : ""))
             Divider()
                 .opacity(isLastRow ? 0 : 1)
                 .padding(.top, 4)

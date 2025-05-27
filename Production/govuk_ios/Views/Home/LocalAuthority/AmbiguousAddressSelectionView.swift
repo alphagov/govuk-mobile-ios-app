@@ -13,7 +13,11 @@ struct AmbiguousAddressSelectionView: View {
     var body: some View {
         VStack {
             ScrollView {
-                headerView
+                HeaderView(
+                    title: viewModel.title,
+                    subheading: viewModel.subtitle
+                )
+                .padding()
                 listView
                 Spacer()
             }
@@ -27,19 +31,6 @@ struct AmbiguousAddressSelectionView: View {
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
-    }
-
-    private var headerView: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            Text(viewModel.title)
-                .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(.title)
-                .fontWeight(.bold)
-                .accessibilityAddTraits(.isHeader)
-            Text(viewModel.subtitle)
-                .foregroundColor(Color(UIColor.govUK.text.secondary))
-        }
-        .padding()
     }
 
     private var listView: some View {

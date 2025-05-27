@@ -14,12 +14,14 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
          analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
+         tintColor: UIColor = UIColor.govUK.text.link,
          dismissed: @escaping () -> Void) {
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
         self.localAuthorityService = localAuthorityService
         self.coordinatorBuilder = coordinatorBuilder
         self.dismissed = dismissed
+        navigationController.navigationBar.tintColor = tintColor
         super.init(navigationController: navigationController)
     }
 
@@ -27,11 +29,46 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.localAuthorityPostcodeEntryView(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
+            resolveAmbiguityAction: { [weak self] localAuthorities, postCode in
+                self?.navigateToAmbiguousAuthorityView(
+                    localAuthorities: localAuthorities,
+                    postCode: postCode
+                )
+            },
             dismissAction: { [weak self] in
                 self?.dismissModal()
             }
         )
         set(viewController, animated: true)
+    }
+
+    private func navigateToAmbiguousAuthorityView(localAuthorities: AmbiguousAuthorities,
+                                                  postCode: String) {
+        let viewController = viewControllerBuilder.ambiguousAuthoritySelectionView(
+            analyticsService: analyticsService,
+            localAuthorityService: localAuthorityService,
+            localAuthorities: localAuthorities,
+            postCode: postCode,
+            selectAddressAction: { [weak self] in
+                self?.navigateToAddressView(localAuthorities: localAuthorities)
+            },
+            dismissAction: { [weak self] in
+                self?.dismissModal()
+            }
+        )
+        push(viewController, animated: true)
+    }
+
+    private func navigateToAddressView(localAuthorities: AmbiguousAuthorities) {
+        let viewController = viewControllerBuilder.ambiguousAddressSelectionView(
+            analyticsService: analyticsService,
+            localAuthorityService: localAuthorityService,
+            localAuthorities: localAuthorities,
+            dismissAction: { [weak self] in
+                self?.dismissModal()
+            }
+        )
+        push(viewController, animated: true)
     }
 
     private func dismissModal() {

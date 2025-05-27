@@ -15,7 +15,7 @@ struct LocalAuthorityServiceClientTests {
         sut.fetchLocalAuthority(
             postcode: expectedPostcode) { _ in }
 
-        #expect(mockAPI._receivedSendRequest?.urlPath == "/find-local-council/query.json")
+        #expect(mockAPI._receivedSendRequest?.urlPath == "/api/local-authority")
         #expect(mockAPI._receivedSendRequest?.method == .get)
         #expect(mockAPI._receivedSendRequest?.queryParameters?["postcode"] as? String == expectedPostcode)
     }
@@ -26,7 +26,6 @@ struct LocalAuthorityServiceClientTests {
         let sut = LocalAuthorityServiceClient(
             serviceClient: mockAPI
         )
-
         mockAPI._stubbedSendResponse = .success(Self.localAuthorityListData)
         let result = await withCheckedContinuation { continuation in
             sut.fetchLocalAuthority(
@@ -35,11 +34,11 @@ struct LocalAuthorityServiceClientTests {
                 }
         }
         let localResult = try? result.get()
-        let addressList = localResult as? LocalAuthoritiesList
-        #expect(addressList?.addresses.count == 2)
-        #expect(addressList?.addresses.first?.name == "Dorset County Council")
-        #expect(addressList?.addresses.last?.name == "Bournemouth, Christchurch, and Poole")
-        #expect(addressList?.addresses.first?.slug == "dorset")
+        let addressList = localResult?.localAuthorityAddresses
+        #expect(addressList?.count == 2)
+        #expect(addressList?.first?.name == "Dorset County Council")
+        #expect(addressList?.last?.name == "Bournemouth, Christchurch, and Poole")
+        #expect(addressList?.first?.slug == "dorset")
     }
 
     @Test
@@ -56,11 +55,11 @@ struct LocalAuthorityServiceClientTests {
             }
         }
         let localResult = try? result.get()
-        let localAuthority = localResult as? LocalAuthority
-        #expect(localAuthority?.localAuthority.homepageUrl == "https://www.towerhamlets.gov.uk")
-        #expect(localAuthority?.localAuthority.name == "London Borough of Tower Hamlets")
-        #expect(localAuthority?.localAuthority.tier == "unitary")
-        #expect(localAuthority?.localAuthority.slug == "tower-hamlets")
+        let localAuthority = localResult?.localAuthority
+        #expect(localAuthority?.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(localAuthority?.name == "London Borough of Tower Hamlets")
+        #expect(localAuthority?.tier == "unitary")
+        #expect(localAuthority?.slug == "tower-hamlets")
     }
 
     @Test
@@ -77,12 +76,53 @@ struct LocalAuthorityServiceClientTests {
             }
         }
         let localResult = try? result.get()
-        let localAuthority = localResult as? LocalAuthority
-        #expect(localAuthority?.localAuthority.homepageUrl == "https://www.derbyshiredales.gov.uk/")
-        #expect(localAuthority?.localAuthority.name == "Derbyshire Dales District Council")
-        #expect(localAuthority?.localAuthority.tier == "district")
-        #expect(localAuthority?.localAuthority.slug == "derbyshire-dales")
-        #expect(localAuthority?.localAuthority.parent?.name == "Derbyshire County Council")
+        let localAuthority = localResult?.localAuthority
+        #expect(localAuthority?.homepageUrl == "https://www.derbyshiredales.gov.uk/")
+        #expect(localAuthority?.name == "Derbyshire Dales District Council")
+        #expect(localAuthority?.tier == "district")
+        #expect(localAuthority?.slug == "derbyshire-dales")
+        #expect(localAuthority?.parent?.name == "Derbyshire County Council")
+    }
+
+    @Test
+    func fetchLocalAuthority_slug_returnsExpectedResult() async throws {
+        let mockAPI = MockAPIServiceClient()
+        let sut = LocalAuthorityServiceClient(
+            serviceClient: mockAPI
+        )
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityTierOneData)
+
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchLocalAuthority(slug: "tower-hamlets") { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let localResult = try? result.get()
+        let localAuthority = localResult?.localAuthority
+        #expect(localAuthority?.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(localAuthority?.name == "London Borough of Tower Hamlets")
+        #expect(localAuthority?.tier == "unitary")
+        #expect(localAuthority?.slug == "tower-hamlets")
+    }
+
+    @Test
+    func fetchLocalAuthorities_returnsExpectedResult() async throws {
+        let mockAPI = MockAPIServiceClient()
+        let sut = LocalAuthorityServiceClient(
+            serviceClient: mockAPI
+        )
+        mockAPI._stubbedSendResponse = .success(Self.localAuthorityTierOneData)
+
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchLocalAuthorities(slugs: ["tower-hamlets"]) { result in
+                continuation.resume(returning: result)
+            }
+        }
+        let authorities = try? result.get()
+        #expect(authorities?.first?.homepageUrl == "https://www.towerhamlets.gov.uk")
+        #expect(authorities?.first?.name == "London Borough of Tower Hamlets")
+        #expect(authorities?.first?.tier == "unitary")
+        #expect(authorities?.first?.slug == "tower-hamlets")
     }
 
     @Test
@@ -136,23 +176,6 @@ struct LocalAuthorityServiceClientTests {
         #expect(localResult == nil)
         #expect(result.getError() == .decodingError)
     }
-
-    @Test
-    func fetchLocalAuthority_localErrorMessage_returnsExpectedresult() async throws {
-        let mockAPI = MockAPIServiceClient()
-        let sut = LocalAuthorityServiceClient(serviceClient: mockAPI)
-        mockAPI._stubbedSendResponse = .success(Self.localAuthorityErrorMessage)
-
-        let result = await withCheckedContinuation { continuation in
-            sut.fetchLocalAuthority(
-                postcode: "test") { result in
-                    continuation.resume(returning: result)
-                }
-        }
-        let localResult = try? result.get()
-        let errormessage = localResult as? LocalErrorMessage
-        #expect(errormessage?.message == "Postcode not found")
-    }
 }
 private extension LocalAuthorityServiceClientTests {
 
@@ -175,13 +198,13 @@ private extension LocalAuthorityServiceClientTests {
         "addresses": [
             {
                 "address": "APPLETREE COTTAGE, BARRACK ROAD, WEST PARLEY, FERNDOWN, BH22 8UB",
-                "slug": "dorset",
-                "name": "Dorset County Council"
+                "local_authority_slug": "dorset",
+                "local_authority_name": "Dorset County Council"
             },
             {
                 "address": "LONGCROFT BRICK, BARRACK ROAD, FERNDOWN, DORSET, BH22 8UB",
-                "slug": "bournemouth-christchurch-poole",
-                "name": "Bournemouth, Christchurch, and Poole"
+                "local_authority_slug": "bournemouth-christchurch-poole",
+                "local_authority_name": "Bournemouth, Christchurch, and Poole"
             }
         ]
     }

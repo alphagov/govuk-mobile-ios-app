@@ -20,13 +20,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedHomeViewController: UIViewController?
-    var _receivedHomeSearchAction: (() -> Void)?
+    var _receivedHomeSearchAction: ((SearchItem) -> Void)?
     var _receivedEditLocalAuthorityAction: (() -> Void)?
     var _receivedHomeRecentActivityAction: (() -> Void)?
     var _receivedTopicWidgetViewModel: TopicsWidgetViewModel?
-    override func home(dependencies: HomeDependencies, actions: HomeActions) -> UIViewController {
+    override func home(dependencies: HomeDependencies,
+                       actions: HomeActions) -> UIViewController {
         _receivedEditLocalAuthorityAction = actions.editLocalAuthorityAction
         _receivedHomeRecentActivityAction = actions.recentActivityAction
+        _receivedHomeSearchAction = actions.openSearchAction
         _receivedTopicWidgetViewModel = dependencies.topicWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
     }
@@ -39,18 +41,24 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedRecentActivityViewController: UIViewController?
-    override func recentActivity(analyticsService: AnalyticsServiceInterface,
-                                 activityService: ActivityServiceInterface) -> UIViewController {
+    var _receivedRecentActivitySelectedAction: ((URL) -> Void)?
+    override func recentActivity(analyticsService: any AnalyticsServiceInterface,
+                                 activityService: any ActivityServiceInterface,
+                                 selectedAction: @escaping (URL) -> Void) -> UIViewController {
+        _receivedRecentActivitySelectedAction = selectedAction
         return _stubbedRecentActivityViewController ?? UIViewController()
     }
 
+    var _receivedTopicDetailOpenAction: ((URL) -> Void)?
     var _stubbedTopicDetailViewController: UIViewController?
     override func topicDetail(topic: any DisplayableTopic,
                               topicsService: any TopicsServiceInterface,
                               analyticsService: any AnalyticsServiceInterface,
                               activityService: any ActivityServiceInterface,
                               subtopicAction: @escaping (any DisplayableTopic) -> Void,
-                              stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void) -> UIViewController {
+                              stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
+                              openAction: @escaping (URL) -> Void) -> UIViewController {
+        _receivedTopicDetailOpenAction = openAction
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
 
@@ -62,13 +70,16 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedDismissAction = dismissAction
         return _stubbedEditTopicsViewController ?? UIViewController()
     }
-    var _stubbedLocalAuthortiyPostcodeEntryViewController: UIViewController?
+    var _stubbedLocalAuthorityPostcodeEntryViewController: UIViewController?
     var _receivedLocalAuthorityDismissAction: (() -> Void)?
+    var _receivedResolveAmbiguityAction: ((AmbiguousAuthorities, String) -> Void)?
     override func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
                                                   localAuthorityService: LocalAuthorityServiceInterface,
+                                                  resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
                                                   dismissAction: @escaping () -> Void) -> UIViewController {
         _receivedLocalAuthorityDismissAction = dismissAction
-        return _stubbedLocalAuthortiyPostcodeEntryViewController ?? UIViewController()
+        _receivedResolveAmbiguityAction = resolveAmbiguityAction
+        return _stubbedLocalAuthorityPostcodeEntryViewController ?? UIViewController()
     }
 
     var _stubbedLocalAuthorityExplainerViewController: UIViewController?
@@ -80,6 +91,32 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedNavigateToPostCodeEntryViewAction = navigateToPostCodeEntryViewAction
         _receivedLocalAuthorityExplainerDismissAction = dismissAction
         return _stubbedLocalAuthorityExplainerViewController ?? UIViewController()
+    }
+
+    var _stubbedAmbiguousAuthoritySelectionViewController: UIViewController?
+    var _receivedAmbiguousAuthoritySelectAddressAction: (() -> Void)?
+    var _receivedAmbiguousAuthorityDismissAction: (() -> Void)?
+    override func ambiguousAuthoritySelectionView(analyticsService: AnalyticsServiceInterface,
+                                                  localAuthorityService: LocalAuthorityServiceInterface,
+                                                  localAuthorities: AmbiguousAuthorities,
+                                                  postCode: String,
+                                                  selectAddressAction: @escaping () -> Void,
+                                                  dismissAction: @escaping () -> Void
+    ) -> UIViewController {
+        _receivedAmbiguousAuthoritySelectAddressAction = selectAddressAction
+        _receivedAmbiguousAuthorityDismissAction = dismissAction
+        return _stubbedAmbiguousAuthoritySelectionViewController ?? UIViewController()
+    }
+
+    var _stubbedAmbiguousAddressSelectionViewController: UIViewController?
+    var _receivedAmbiguousAddressDismissAction: (() -> Void)?
+    override func ambiguousAddressSelectionView(analyticsService: AnalyticsServiceInterface,
+                                                localAuthorityService: LocalAuthorityServiceInterface,
+                                                localAuthorities: AmbiguousAuthorities,
+                                                dismissAction: @escaping () -> Void
+    ) -> UIViewController {
+        _receivedAmbiguousAddressDismissAction = dismissAction
+        return _stubbedAmbiguousAddressSelectionViewController ?? UIViewController()
     }
 
     var _stubbedAllTopicsViewController: UIViewController?
@@ -135,5 +172,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedSignInErrorCompletion = completion
         return _stubbedSignInErrorViewController ?? UIViewController()
 
+    }
+
+    var _receivedSafariUrl: URL?
+    var _stubbedSafariViewController: UIViewController?
+    override func safari(url: URL) -> UIViewController {
+        _receivedSafariUrl = url
+        return _stubbedSafariViewController ?? UIViewController()
     }
 }

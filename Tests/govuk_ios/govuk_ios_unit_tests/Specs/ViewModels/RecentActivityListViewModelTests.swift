@@ -14,7 +14,7 @@ struct RecentActivityListViewModelTests {
         let sut = RecentActivityListViewModel(
             activityService: MockActivityService(),
             analyticsService: MockAnalyticsService(),
-            urlopener: MockURLOpener()
+            selectedAction: { _ in }
         )
 
         #expect(
@@ -25,12 +25,14 @@ struct RecentActivityListViewModelTests {
     @Test
     func selectItem_validURL_performsExpectedActions() {
         let mockService = MockActivityService()
-        let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
+        var receivedURL: URL?
         let sut = RecentActivityListViewModel(
             activityService: mockService,
             analyticsService: mockAnalyticsService,
-            urlopener: mockURLOpener
+            selectedAction: { url in
+                receivedURL = url
+            }
         )
         let coreData = CoreDataRepository.arrangeAndLoad
         let item = ActivityItem.arrange(
@@ -40,7 +42,7 @@ struct RecentActivityListViewModelTests {
 
         sut.selected(item: item)
 
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == item.url)
+        #expect(receivedURL?.absoluteString == item.url)
         let expectedEvent = AppEvent.recentActivityNavigation(activity: item)
         #expect(mockAnalyticsService._trackedEvents.first?.name == expectedEvent.name)
         #expect(
@@ -51,12 +53,14 @@ struct RecentActivityListViewModelTests {
     @Test
     func selectItem_invalidURL_callsService() {
         let mockService = MockActivityService()
-        let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
+        var receivedURL: URL?
         let sut = RecentActivityListViewModel(
             activityService: mockService,
             analyticsService: mockAnalyticsService,
-            urlopener: mockURLOpener
+            selectedAction: { url in
+                receivedURL = url
+            }
         )
         let coreData = CoreDataRepository.arrangeAndLoad
         let item = ActivityItem.arrange(
@@ -66,19 +70,18 @@ struct RecentActivityListViewModelTests {
 
         sut.selected(item: item)
 
-        #expect(mockURLOpener._receivedOpenIfPossibleUrlString == nil)
+        #expect(receivedURL == nil)
         #expect(mockAnalyticsService._trackedEvents.isEmpty)
     }
 
     @Test
     func editItem_confirmDelete_removesExpectedItems() {
         let mockActivityService = MockActivityService()
-        let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = RecentActivityListViewModel(
             activityService: mockActivityService,
             analyticsService: mockAnalyticsService,
-            urlopener: mockURLOpener
+            selectedAction: { _ in }
         )
         let coreData = CoreDataRepository.arrangeAndLoad
         let item1 = ActivityItem.arrange(
@@ -106,12 +109,11 @@ struct RecentActivityListViewModelTests {
     @MainActor
     func editItem_endEditing_removesSelectedItems() {
         let mockActivityService = MockActivityService()
-        let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = RecentActivityListViewModel(
             activityService: mockActivityService,
             analyticsService: mockAnalyticsService,
-            urlopener: mockURLOpener
+            selectedAction: { _ in }
         )
         let coreData = CoreDataRepository.arrangeAndLoad
         let item1 = ActivityItem.arrange(
@@ -136,12 +138,11 @@ struct RecentActivityListViewModelTests {
     @MainActor
     func isEveryItemSelected_everyItemSelected_returnsTrue() {
         let mockActivityService = MockActivityService()
-        let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = RecentActivityListViewModel(
             activityService: mockActivityService,
             analyticsService: mockAnalyticsService,
-            urlopener: mockURLOpener
+            selectedAction: { _ in }
         )
 
         let coreData = CoreDataRepository.arrangeAndLoad
@@ -175,12 +176,11 @@ struct RecentActivityListViewModelTests {
     @MainActor
     func isEveryItemSelected_noItemsSelected_returnsFalse() {
         let mockActivityService = MockActivityService()
-        let mockURLOpener = MockURLOpener()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = RecentActivityListViewModel(
             activityService: mockActivityService,
             analyticsService: mockAnalyticsService,
-            urlopener: mockURLOpener
+            selectedAction: { _ in }
         )
 
         let coreData = CoreDataRepository.arrangeAndLoad

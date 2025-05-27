@@ -3,7 +3,7 @@ import CoreData
 import GOVKit
 
 protocol LocalAuthorityRepositoryInterface {
-    func save(_ localAuthority: LocalAuthority)
+    func save(_ authority: Authority)
     func fetchLocalAuthority() -> [LocalAuthorityItem]
 }
 
@@ -14,7 +14,7 @@ struct LocalAuthorityRepository: LocalAuthorityRepositoryInterface {
         self.coreData = coreData
     }
 
-    func save(_ localAuthority: LocalAuthority) {
+    func save(_ authority: Authority) {
         let context = coreData.backgroundContext
         var oldLocalAuthorityItems = [LocalAuthorityItem]()
 
@@ -26,7 +26,6 @@ struct LocalAuthorityRepository: LocalAuthorityRepositoryInterface {
         }
 
         let localAuthorityItem = LocalAuthorityItem(context: context)
-        let authority = localAuthority.localAuthority
         localAuthorityItem.update(with: authority)
 
         if let parentAuthority = authority.parent {

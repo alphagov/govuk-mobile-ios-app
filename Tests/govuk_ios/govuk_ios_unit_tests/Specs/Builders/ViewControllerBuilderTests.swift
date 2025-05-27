@@ -1,4 +1,5 @@
 import Foundation
+import SafariServices
 import Testing
 import SwiftUI
 import CoreData
@@ -37,7 +38,8 @@ struct ViewControllerBuilderTests {
             notificationsAction: {},
             recentActivityAction: {},
             localAuthorityAction: {},
-            editLocalAuthorityAction: {}
+            editLocalAuthorityAction: {},
+            openSearchAction: { _ in }
         )
 
         let result = subject.home(dependencies: dependencies, actions: actions)
@@ -74,7 +76,8 @@ struct ViewControllerBuilderTests {
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
             analyticsService: MockAnalyticsService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            selectedAction: { _ in }
         ) as? TrackableScreen
 
         #expect(result?.trackingClass == String(describing: RecentActivityListViewController.self))
@@ -107,7 +110,8 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
             subtopicAction: { _ in },
-            stepByStepAction: { _ in }
+            stepByStepAction: { _ in },
+            openAction: { _ in }
         )
 
         let rootView = (result as? HostingViewController<TopicDetailView<TopicDetailViewModel>>)?.rootView
@@ -158,6 +162,7 @@ struct ViewControllerBuilderTests {
         let result = subject.localAuthorityPostcodeEntryView(
             analyticsService: MockAnalyticsService(),
             localAuthorityService: MockLocalAuthorityService(),
+            resolveAmbiguityAction: { _, _ in },
             dismissAction: {}
         )
         let rootView = (result as? HostingViewController<LocalAuthorityPostcodeEntryView>)?.rootView
@@ -217,5 +222,17 @@ struct ViewControllerBuilderTests {
         )
         let rootView = (result as? HostingViewController<AuthenticationInfoView>)?.rootView
         #expect(rootView != nil)
+    }
+
+    @Test
+    func safari_returnsExpectedResult() throws {
+        let subject = ViewControllerBuilder()
+        let result = subject.safari(
+            url: .arrange
+        )
+
+        #expect(result is SFSafariViewController)
+        #expect(result.isModalInPresentation)
+        #expect(result.modalPresentationStyle == .formSheet)
     }
 }

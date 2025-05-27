@@ -34,7 +34,6 @@ class ReauthenticationCoordinator: BaseCoordinator {
             return
         }
         guard !localAuthenticationService.biometricsHaveChanged else {
-            authenticationService.signOut()
             handleReauthFailure()
             return
         }
@@ -50,6 +49,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
     }
 
     private func handleReauthFailure() {
+        authenticationService.signOut()
         let coordinator = coordinatorBuilder.authenticationOnboarding(
             navigationController: root,
             newUserAction: newUserAction,

@@ -53,7 +53,8 @@ extension Container {
             APIServiceClient(
                 baseUrl: Constants.API.defaultLocalAuthorityURL,
                 session: self.urlSession(),
-                requestBuilder: RequestBuilder()
+                requestBuilder: RequestBuilder(),
+                responseHandler: LocalAuthorityResponseHandler()
             )
         }
     }

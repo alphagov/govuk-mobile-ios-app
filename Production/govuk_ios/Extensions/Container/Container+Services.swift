@@ -189,4 +189,14 @@ extension Container {
             )
         }
     }
+
+    @MainActor
+    var inactivityService: Factory<InactivityServiceInterface> {
+        Factory(self) {
+            InactivityService(
+                authenticationService: self.authenticationService.resolve(),
+                timer: TimerWrapper()
+            )
+        }.scope(.singleton)
+    }
 }

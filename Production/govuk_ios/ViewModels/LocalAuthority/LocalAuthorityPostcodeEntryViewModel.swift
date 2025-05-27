@@ -3,14 +3,14 @@ import UIComponents
 import GOVKit
 import SwiftUI
 
-class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
+class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
     private let service: LocalAuthorityServiceInterface
-    @Published var localAuthorityAddressList: LocalAuthoritiesList?
     @Published var postCode: String = ""
     @Published var error: PostcodeError?
     @Published var textFieldColour: UIColor = UIColor.govUK.strokes.listDivider
     private let analyticsService: AnalyticsServiceInterface
     let dismissAction: () -> Void
+    let resolveAmbiguityAction: (AmbiguousAuthorities, String) -> Void
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
     )
@@ -21,7 +21,7 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         "localAuthorityPostcodeEntryViewTitle"
     )
     let postcodeEntryViewExampleText: String = String.localAuthority.localized(
-        "localAthorityPostcodeEntryViewExampleText"
+        "localAuthorityPostcodeEntryViewExampleText"
     )
     let postcodeEntryViewDescriptionTitle: String = String.localAuthority.localized(
         "localAuthorityPostcodeEntryViewDescriptionTitle"
@@ -33,11 +33,16 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         "localAuthoritypostcodeEntryPrimaryButtonTitle"
     )
 
+    private var authorityAddresses: [LocalAuthorityAddress] = []
+    private var authorities: [Authority] = []
+
     init(service: LocalAuthorityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
          dismissAction: @escaping () -> Void) {
         self.service = service
         self.analyticsService = analyticsService
+        self.resolveAmbiguityAction = resolveAmbiguityAction
         self.dismissAction = dismissAction
     }
 
@@ -45,11 +50,30 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
         case postCodeNotFound = "localAuthorityPostcodeNotFound"
         case textFieldEmpty = "localAuthorityEmptyTextField"
         case invalidPostcode = "localAuthorityInvalidPostcode"
+        case pageNotWorking = "localAuthorityPageNotWorking"
 
         var errorMessage: String {
             String.localAuthority.localized(
                 rawValue
             )
+        }
+    }
+
+    private func fetchAuthoritiesWithAddresses(_ addresses: [LocalAuthorityAddress]) {
+        let uniqueSlugs = filterSlugs(addresses: addresses)
+
+        service.fetchLocalAuthorities(slugs: uniqueSlugs) { [weak self] result in
+            switch result {
+            case .success(let localAuthorities):
+                guard let self = self else { return }
+                let ambiguousAuthorities = AmbiguousAuthorities(
+                    authorities: localAuthorities,
+                    addresses: addresses
+                )
+                self.resolveAmbiguityAction(ambiguousAuthorities, self.postCode)
+            case .failure(let error):
+                self?.populateErrorMessage(error)
+            }
         }
     }
 
@@ -63,6 +87,11 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
             external: true
         )
         analyticsService.track(event: event)
+    }
+
+    private func filterSlugs(addresses: [LocalAuthorityAddress]) -> [String] {
+        let uniqueSlugs = Set(addresses.map { $0.slug })
+        return Array(uniqueSlugs)
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -100,29 +129,31 @@ class LocalAuthorityPostecodeEntryViewModel: ObservableObject {
     }
 
     func fetchLocalAuthority(postCode: String) {
-        service.fetchLocalAuthority(postcode: postCode) { [weak self] results
-            in
+        service.fetchLocalAuthority(postcode: postCode) { [weak self] results in
             switch results {
-            case .success(_ as LocalAuthority):
-                self?.dismissAction()
-            case .success(let response as LocalAuthoritiesList):
-                self?.localAuthorityAddressList = response
-            case .success(let response as LocalErrorMessage):
-                self?.populateErrorMessage(error: response)
-            default:
-                break
+            case .success(let response):
+                switch response.type {
+                case .authority:
+                    self?.dismissAction()
+                case .addresses(let addressess):
+                    self?.fetchAuthoritiesWithAddresses(addressess)
+                case .unknown:
+                    self?.populateErrorMessage(.apiUnavailable)
+                }
+            case .failure(let error):
+                self?.populateErrorMessage(error)
             }
         }
     }
 
-    private func populateErrorMessage(error: LocalErrorMessage) {
-        switch error.message {
-        case "Invalid postcode":
-            self.error  = .invalidPostcode
-        case "Postcode not found":
+    private func populateErrorMessage(_ error: LocalAuthorityError) {
+        switch error {
+        case .invalidPostcode:
+            self.error = .invalidPostcode
+        case .unknownPostcode:
             self.error = .postCodeNotFound
         default:
-            break
+            self.error = .pageNotWorking
         }
         setErrorTextFieldColour()
     }

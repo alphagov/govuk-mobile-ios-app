@@ -13,6 +13,7 @@ struct HomeViewModel {
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
+    let openAction: (SearchItem) -> Void
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
@@ -23,7 +24,8 @@ struct HomeViewModel {
         analyticsService: analyticsService,
         searchService: searchService,
         activityService: activityService,
-        urlOpener: urlOpener
+        urlOpener: urlOpener,
+        openAction: openAction
     )
 
     var widgets: [WidgetView] {

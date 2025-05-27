@@ -14,11 +14,11 @@ class WebViewCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        setDeeplinkPage()
+        setViewController()
     }
 
     @MainActor
-    private func setDeeplinkPage() {
+    private func setViewController() {
         let viewController = viewControllerBuilder.webViewController(for: url)
         root.setViewControllers([viewController], animated: false)
     }

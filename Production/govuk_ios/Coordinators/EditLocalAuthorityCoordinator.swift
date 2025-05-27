@@ -14,12 +14,14 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
          analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
+         tintColor: UIColor = UIColor.govUK.text.link,
          dismissed: @escaping () -> Void) {
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
         self.localAuthorityService = localAuthorityService
         self.coordinatorBuilder = coordinatorBuilder
         self.dismissed = dismissed
+        navigationController.navigationBar.tintColor = tintColor
         super.init(navigationController: navigationController)
     }
 

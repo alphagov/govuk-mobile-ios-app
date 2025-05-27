@@ -121,6 +121,14 @@ extension Container {
         }
     }
 
+    var notificationsOnboardingService: Factory<NotificationsOnboardingServiceInterface> {
+        Factory(self) {
+            NotificationsOnboardingService(
+                userDefaults: UserDefaults.standard
+            )
+        }
+    }
+
     var authenticationOnboardingService: Factory<AuthenticationOnboardingServiceInterface> {
         Factory(self) {
             AuthenticationOnboardingService()

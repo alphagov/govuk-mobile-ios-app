@@ -246,14 +246,13 @@ class CoordinatorBuilder {
         )
     }
 
-    func authenticationOnboarding(navigationController: UINavigationController,
-                                  newUserAction: (() -> Void)?,
-                                  completionAction: @escaping () -> Void) -> BaseCoordinator {
-        AuthenticationOnboardingCoordinator(
+    func welcomeOnboarding(navigationController: UINavigationController,
+                           newUserAction: (() -> Void)?,
+                           completionAction: @escaping () -> Void) -> BaseCoordinator {
+        WelcomeOnboardingCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
-            authenticationOnboardingService: container.authenticationOnboardingService.resolve(),
-            analyticsService: container.onboardingAnalyticsService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
             completionAction: completionAction,
             newUserAction: newUserAction

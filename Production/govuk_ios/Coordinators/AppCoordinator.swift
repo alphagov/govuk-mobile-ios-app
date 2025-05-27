@@ -174,7 +174,7 @@ class AppCoordinator: BaseCoordinator {
 
     private func startAuthenticationOnboardingCoordinator(url: URL?,
                                                           newUserAction: (() -> Void)?) {
-        let coordinator = coordinatorBuilder.authenticationOnboarding(
+        let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
             newUserAction: newUserAction,
             completionAction: { [weak self] in

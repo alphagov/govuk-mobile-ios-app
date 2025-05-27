@@ -122,13 +122,13 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedNotificationSettingsCoordinator ?? MockBaseCoordinator()
     }
 
-    var _receivedAuthenticationOnboardingCompletion: (() -> Void)?
-    var _stubbedAuthenticationOnboardingCoordinator: MockBaseCoordinator?
-    override func authenticationOnboarding(navigationController: UINavigationController,
-                                           newUserAction: (() -> Void)?,
-                                           completionAction: @escaping () -> Void) -> BaseCoordinator {
-        _receivedAuthenticationOnboardingCompletion = completionAction
-        return _stubbedAuthenticationOnboardingCoordinator ?? MockBaseCoordinator()
+    var _receivedWelcomeOnboardingCompletion: (() -> Void)?
+    var _stubbedWelcomeOnboardingCoordinator: MockBaseCoordinator?
+    override func welcomeOnboarding(navigationController: UINavigationController,
+                                    newUserAction: (() -> Void)?,
+                                    completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedWelcomeOnboardingCompletion = completionAction
+        return _stubbedWelcomeOnboardingCoordinator ?? MockBaseCoordinator()
     }
 
     var _receivedAuthenticationCompletion: (() -> Void)?

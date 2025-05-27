@@ -20,6 +20,8 @@ struct LocalAuthorityResponseHandler: ResponseHandler {
             return LocalAuthorityError.invalidPostcode
         case 404:
             return LocalAuthorityError.unknownPostcode
+        case 429:
+            return LocalAuthorityError.apiUnavailable
         default:
             return LocalAuthorityError.apiUnavailable
         }

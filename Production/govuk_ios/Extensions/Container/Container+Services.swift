@@ -113,6 +113,14 @@ extension Container {
         }
     }
 
+    var notificationsOnboardingService: Factory<NotificationsOnboardingServiceInterface> {
+        Factory(self) {
+            NotificationsOnboardingService(
+                userDefaults: UserDefaults.standard
+            )
+        }
+    }
+
     @MainActor
     var authenticationService: Factory<AuthenticationServiceInterface> {
         Factory(self) {

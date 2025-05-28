@@ -241,6 +241,7 @@
 		B04C2E7E2DA913B100F0F63E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E7D2DA913B100F0F63E /* WebViewController.swift */; };
 		B04C2E802DA9141400F0F63E /* WebDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E7F2DA9141400F0F63E /* WebDeeplinkRoute.swift */; };
 		B04C2E822DA9339B00F0F63E /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */; };
+		B0AD6F202DDA86D80077849F /* NotificationsOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD6F1F2DDA86D80077849F /* NotificationsOnboardingService.swift */; };
 		D00984F22D47BC9600D70FEE /* DeviceInformation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */; };
 		D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF32CB4247100742620 /* TopicsRepository.swift */; };
 		D028CCF62CB9619B00742620 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF52CB9619B00742620 /* Topic.swift */; };
@@ -596,6 +597,7 @@
 		B04C2E7D2DA913B100F0F63E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B04C2E7F2DA9141400F0F63E /* WebDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDeeplinkRoute.swift; sourceTree = "<group>"; };
 		B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
+		B0AD6F1F2DDA86D80077849F /* NotificationsOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsOnboardingService.swift; sourceTree = "<group>"; };
 		D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceInformation+Convenience.swift"; sourceTree = "<group>"; };
 		D01005352CECA6420013CBD0 /* Alpha.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Alpha.xcconfig; sourceTree = "<group>"; };
 		D028CCF32CB4247100742620 /* TopicsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRepository.swift; sourceTree = "<group>"; };
@@ -964,6 +966,7 @@
 			children = (
 				5DCAFA742D4004E700C3F284 /* NotificationService.swift */,
 				4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */,
+				B0AD6F1F2DDA86D80077849F /* NotificationsOnboardingService.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -2223,6 +2226,8 @@
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
 				5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
+				B0AD6F202DDA86D80077849F /* NotificationsOnboardingService.swift in Sources */,
+				4E038AB92DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				D0EC94C52DCBA5F700A9707E /* AuthenticationInfoViewModelInterface.swift in Sources */,

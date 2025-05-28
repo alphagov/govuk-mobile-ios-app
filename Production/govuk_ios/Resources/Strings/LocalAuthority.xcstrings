@@ -7,7 +7,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Confirm Address"
+            "value" : "Confirm address"
           }
         }
       }
@@ -140,6 +140,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter a postcode in the correct format"
+          }
+        }
+      }
+    },
+    "localAuthorityNetworkUnavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are not connected to the internet. Reconnect and try again."
           }
         }
       }

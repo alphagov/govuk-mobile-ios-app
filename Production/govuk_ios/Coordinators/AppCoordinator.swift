@@ -135,6 +135,18 @@ class AppCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
+    private func startWelcomeOnboardingCoordinator(url: URL?,
+                                                   newUserAction: (() -> Void)?) {
+        let coordinator = coordinatorBuilder.welcomeOnboarding(
+            navigationController: root,
+            newUserAction: newUserAction,
+            completionAction: { [weak self] in
+                self?.startLocalAuthenticationOnboardingCoordinator(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
     private func startReauthentication(url: URL?,
                                        completionAction: @escaping () -> Void) {
         let coordinator = coordinatorBuilder.reauthentication(
@@ -153,7 +165,7 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.analyticsConsent(
             navigationController: root,
             dismissAction: { [weak self] in
-                self?.startAuthenticationOnboardingCoordinator(
+                self?.startWelcomeOnboardingCoordinator(
                     url: url,
                     newUserAction: nil
                 )
@@ -167,18 +179,6 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             didDismissAction: { [weak self] in
                 self?.startNotificationOnboardingCoordinator(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startAuthenticationOnboardingCoordinator(url: URL?,
-                                                          newUserAction: (() -> Void)?) {
-        let coordinator = coordinatorBuilder.welcomeOnboarding(
-            navigationController: root,
-            newUserAction: newUserAction,
-            completionAction: { [weak self] in
-                self?.startLocalAuthenticationOnboardingCoordinator(url: url)
             }
         )
         start(coordinator)
@@ -213,7 +213,7 @@ class AppCoordinator: BaseCoordinator {
                         url: URL(string: "govuk://settings/settings")
                     )
                 } else {
-                    self?.startAuthenticationOnboardingCoordinator(
+                    self?.startWelcomeOnboardingCoordinator(
                         url: nil,
                         newUserAction: { [weak self] in
                             self?.startNewUserOnboardingCoordinator(url: nil)

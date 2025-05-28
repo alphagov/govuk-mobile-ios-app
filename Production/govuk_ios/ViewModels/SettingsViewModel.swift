@@ -133,13 +133,13 @@ class SettingsViewModel: SettingsViewModelInterface {
         return GroupedListSection(
             heading: nil,
             rows: [
-                InformationRow(
+                GroupedListInformationRow(
                     id: "settings.email.row",
                     title: String.settings.localized("accountRowTitle"),
                     body: userEmail,
                     imageName: "account_icon",
                     detail: ""),
-                LinkRow(
+                GroupedListLinkRow(
                     id: "settings.account.row",
                     title: rowTitle,
                     action: { [weak self] in
@@ -159,7 +159,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         return GroupedListSection(
             heading: nil,
             rows: [
-                DetailRow(
+                GroupedListDetailRow(
                     id: "settings.signout.row",
                     title: String.settings.localized("signOutRowTitle"),
                     body: "",
@@ -177,7 +177,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         GroupedListSection(
             heading: nil,
             rows: [
-                InformationRow(
+                GroupedListInformationRow(
                     id: "settings.version.row",
                     title: String.settings.localized("appVersionTitle"),
                     body: nil,
@@ -212,7 +212,7 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func privacyPolicyRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("privacyPolicyRowTitle")
-        return LinkRow(
+        return GroupedListLinkRow(
             id: "settings.policy.row",
             title: rowTitle,
             body: nil,
@@ -226,7 +226,7 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func helpAndFeedbackRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("helpAndFeedbackSettingsTitle")
-        return LinkRow(
+        return GroupedListLinkRow(
             id: "settings.helpAndfeedback.row",
             title: rowTitle,
             body: nil,
@@ -244,7 +244,7 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func openSourceLicenceRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("openSourceLicenceRowTitle")
-        return LinkRow(
+        return GroupedListLinkRow(
             id: "settings.licence.row",
             title: rowTitle,
             body: nil,
@@ -265,7 +265,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         if notificationService.isFeatureEnabled {
             let rowTitle = String.settings.localized("notificationsTitle")
             let isAuthorized = notificationsPermissionState == .authorized
-            let notificationRow = DetailRow(
+            let notificationRow = GroupedListDetailRow(
                 id: "settings.notifications.row",
                 title: rowTitle,
                 body: isAuthorized ? String.common.localized("on") : String.common.localized("off"),
@@ -278,7 +278,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         }
 
         appOptionRows.append(
-            ToggleRow(
+            GroupedListToggleRow(
                 id: "settings.privacy.row",
                 title: String.settings.localized("appUsageTitle"),
                 isOn: hasAcceptedAnalytics,
@@ -316,7 +316,7 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func termsAndConditionsRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("termsAndConditionsRowTitle")
-        return LinkRow(
+        return GroupedListLinkRow(
             id: "settings.terms.row",
             title: rowTitle,
             body: nil,
@@ -331,7 +331,7 @@ class SettingsViewModel: SettingsViewModelInterface {
 
     private func accessibilityStatementRow() -> GroupedListRow {
         let rowTitle = String.settings.localized("accessibilityStatementRowTitle")
-        return LinkRow(
+        return GroupedListLinkRow(
             id: "settings.accessibility.row",
             title: rowTitle,
             body: nil,

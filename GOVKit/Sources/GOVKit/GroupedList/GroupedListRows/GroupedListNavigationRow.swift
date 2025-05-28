@@ -1,7 +1,7 @@
 import Foundation
 
-public struct NavigationRow: GroupedListRow,
-                             Identifiable {
+public struct GroupedListNavigationRow: GroupedListRow,
+                                        Identifiable {
     public let id: String
     public let title: String
     public let body: String?

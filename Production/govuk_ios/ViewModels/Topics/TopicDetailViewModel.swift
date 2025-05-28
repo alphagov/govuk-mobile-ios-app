@@ -127,7 +127,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
                 createContentRow($0, sectionTitle: sectionTitle)
             }
             let rowTitle = String.topics.localized("topicDetailSeeAllRowTitle")
-            let seeAllRow = NavigationRow(
+            let seeAllRow = GroupedListNavigationRow(
                 id: "topic.stepbystep.showall",
                 title: rowTitle,
                 body: nil,
@@ -182,9 +182,9 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func createContentRow(_ content: TopicDetailResponse.Content,
-                                  sectionTitle: String) -> LinkRow {
+                                  sectionTitle: String) -> GroupedListLinkRow {
         createCommerceItem(content, category: sectionTitle)
-        return LinkRow(
+        return GroupedListLinkRow(
             id: content.title,
             title: content.title,
             body: nil,
@@ -199,9 +199,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         )
     }
 
-    private func createSubtopicRow(_ content: TopicDetailResponse.Subtopic) -> NavigationRow {
+    private func createSubtopicRow(
+        _ content: TopicDetailResponse.Subtopic
+    ) -> GroupedListNavigationRow {
         createSubtopicCommerceItem(content, category: subtopicsHeading.title)
-        return NavigationRow(
+        return GroupedListNavigationRow(
             id: content.ref,
             title: content.title,
             body: nil,

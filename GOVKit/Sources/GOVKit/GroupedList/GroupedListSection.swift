@@ -25,13 +25,13 @@ public struct GroupedListSection_Previews: PreviewProvider {
             .init(
                 heading: GroupedListHeader(title: "Section 1", icon: nil),
                 rows: [
-                    InformationRow(
+                    GroupedListInformationRow(
                         id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
                         detail: "0.0.1"
                     ),
-                    LinkRow(
+                    GroupedListLinkRow(
                         id: UUID().uuidString,
                         title: "Link row",
                         body: "A really long description to test how multiline text wrapping works",
@@ -39,7 +39,7 @@ public struct GroupedListSection_Previews: PreviewProvider {
                             print("link row tapped")
                         }
                     ),
-                    NavigationRow(
+                    GroupedListNavigationRow(
                         id: UUID().uuidString,
                         title: "Nav row",
                         body: "Description",
@@ -47,7 +47,7 @@ public struct GroupedListSection_Previews: PreviewProvider {
                             print("nav row tapped")
                         }
                     ),
-                    ToggleRow(
+                    GroupedListToggleRow(
                         id: UUID().uuidString,
                         title: "Toggle",
                         isOn: false,
@@ -61,13 +61,13 @@ public struct GroupedListSection_Previews: PreviewProvider {
             .init(
                 heading: nil,
                 rows: [
-                    InformationRow(
+                    GroupedListInformationRow(
                         id: UUID().uuidString,
                         title: "Information row",
                         body: "Description",
                         detail: "1.0"
                     ),
-                    LinkRow(
+                    GroupedListLinkRow(
                         id: UUID().uuidString,
                         title: "External link row",
                         body: nil,
@@ -75,7 +75,7 @@ public struct GroupedListSection_Previews: PreviewProvider {
                             print("link row tapped")
                         }
                     ),
-                    NavigationRow(
+                    GroupedListNavigationRow(
                         id: UUID().uuidString,
                         title: "Navigation row",
                         body: "Description",
@@ -92,7 +92,7 @@ public struct GroupedListSection_Previews: PreviewProvider {
                     icon: UIImage(systemName: "house")
                 ),
                 rows: [
-                    InformationRow(
+                    GroupedListInformationRow(
                         id: UUID().uuidString,
                         title: "A really important piece of info",
                         body: nil,

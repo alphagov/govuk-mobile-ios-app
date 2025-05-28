@@ -52,12 +52,12 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
         analyticsService.track(event: eCommerceEvent)
     }
 
-    private func createContentRow(_ content: TopicDetailResponse.Content) -> LinkRow {
+    private func createContentRow(_ content: TopicDetailResponse.Content) -> GroupedListLinkRow {
         createCommerceItem(
             content,
             category: String.topics.localized("topicDetailStepByStepHeader")
         )
-        return LinkRow(
+        return GroupedListLinkRow(
             id: content.title,
             title: content.title,
             body: nil,

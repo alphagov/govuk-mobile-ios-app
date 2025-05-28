@@ -35,7 +35,7 @@ struct EditTopicsViewModelTests {
 
         try #require(sut.sections.count == 1)
         try #require(sut.sections[0].rows.count == 3)
-        let row = try #require(sut.sections[0].rows[0] as? ToggleRow)
+        let row = try #require(sut.sections[0].rows[0] as? GroupedListToggleRow)
         #expect(row.title == "title0")
         row.action(true)
         #expect(mockTopicService._saveCalled)

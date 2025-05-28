@@ -56,23 +56,23 @@ class SettingsViewModelTests {
         #expect(manageAccountSection.rows[1].title == "Manage your GOV.UK One Login")
 
         let signOutSection = sut.listContent[1]
-        let signOutRow = try #require(signOutSection.rows.first as? DetailRow)
+        let signOutRow = try #require(signOutSection.rows.first as? GroupedListDetailRow)
         #expect(signOutRow.title == "Sign out")
 
         let notificationsSection = sut.listContent[2]
         #expect(notificationsSection.heading?.title == nil)
-        let notificationRow = try #require(notificationsSection.rows.first as? DetailRow)
+        let notificationRow = try #require(notificationsSection.rows.first as? GroupedListDetailRow)
         #expect(notificationRow.title == "Notifications")
 
         let aboutSection = sut.listContent[3]
-        let helpAndFeedbackRow = try #require(aboutSection.rows.last as? LinkRow)
+        let helpAndFeedbackRow = try #require(aboutSection.rows.last as? GroupedListLinkRow)
         let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
         helpAndFeedbackRow.action()
         #expect(helpAndFeedbackRow.title == "Help and feedback")
         #expect(helpAndFeedbackRow.isWebLink == true)
         #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
 
-        let appBundleInformation = try #require(aboutSection.rows.first as? InformationRow)
+        let appBundleInformation = try #require(aboutSection.rows.first as? GroupedListInformationRow)
         #expect(appBundleInformation.title == "App version number")
         #expect(appBundleInformation.detail == "123 (456)")
 
@@ -87,7 +87,7 @@ class SettingsViewModelTests {
     func analytics_toggledOnThenOff_deniesPermissions() throws {
         mockAnalyticsService.setAcceptedAnalytics(accepted: true)
         let appOptionsSection = sut.listContent[2]
-        let toggleRow = try #require(appOptionsSection.rows.last as? ToggleRow)
+        let toggleRow = try #require(appOptionsSection.rows.last as? GroupedListToggleRow)
         #expect(toggleRow.isOn)
         toggleRow.isOn = false
         #expect(mockAnalyticsService.permissionState == .denied)
@@ -97,7 +97,7 @@ class SettingsViewModelTests {
     func analytics_toggledOffThenOn_acceptsPermissions() throws {
         mockAnalyticsService.setAcceptedAnalytics(accepted: false)
         let appOptionsSection = sut.listContent[2]
-        let toggleRow = try #require(appOptionsSection.rows.last as? ToggleRow)
+        let toggleRow = try #require(appOptionsSection.rows.last as? GroupedListToggleRow)
         #expect(toggleRow.isOn == false)
         toggleRow.isOn = true
         #expect(mockAnalyticsService.permissionState == .accepted)
@@ -106,7 +106,7 @@ class SettingsViewModelTests {
     @Test
     func privacyPolicy_action_tracksEvent() throws {
         let linkSection = sut.listContent[4]
-        let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
+        let privacyPolicyRow = try #require(linkSection.rows[0] as? GroupedListLinkRow)
         privacyPolicyRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.privacyPolicyUrl)
@@ -116,7 +116,7 @@ class SettingsViewModelTests {
     @Test
     func accessibilityStatement_action_tracksEvent() throws {
         let linkSection = sut.listContent[4]
-        let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
+        let accessibilityStatementRow = try #require(linkSection.rows[1] as? GroupedListLinkRow)
         accessibilityStatementRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.accessibilityStatementUrl)
@@ -126,7 +126,7 @@ class SettingsViewModelTests {
     @Test
     func openSourceLicences_action_tracksEvent() throws {
         let linkSection = sut.listContent[4]
-        let openSourceLicencesRow = try #require(linkSection.rows[2] as? LinkRow)
+        let openSourceLicencesRow = try #require(linkSection.rows[2] as? GroupedListLinkRow)
         openSourceLicencesRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(receivedTitle == openSourceLicencesRow.title)
@@ -135,7 +135,7 @@ class SettingsViewModelTests {
     @Test
     func termsAndConditions_action_tracksEvent() throws {
         let linkSection = sut.listContent[4]
-        let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
+        let termsAndConditionsRow = try #require(linkSection.rows[3] as? GroupedListLinkRow)
         termsAndConditionsRow.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.termsAndConditionsUrl)
@@ -145,7 +145,7 @@ class SettingsViewModelTests {
     @Test
     func helpAndFeedback_action_tracksEvent() throws {
         let aboutTheAppSection = sut.listContent[3]
-        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.last as? LinkRow)
+        let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.last as? GroupedListLinkRow)
 
         helpAndFeedbackRow.action()
 
@@ -158,7 +158,7 @@ class SettingsViewModelTests {
     @Test
     func manageYourAccount_action_tracksEvent() throws {
         let accountSection = sut.listContent[0]
-        let manageAccountRow = try #require(accountSection.rows.last as? LinkRow)
+        let manageAccountRow = try #require(accountSection.rows.last as? GroupedListLinkRow)
 
         manageAccountRow.action()
 
@@ -171,7 +171,7 @@ class SettingsViewModelTests {
     @Test
     func signOut_action_tracksEvent() throws {
         let signOutSection = sut.listContent[1]
-        let signOutRow = try #require(signOutSection.rows.last as? DetailRow)
+        let signOutRow = try #require(signOutSection.rows.last as? GroupedListDetailRow)
 
         signOutRow.action()
 

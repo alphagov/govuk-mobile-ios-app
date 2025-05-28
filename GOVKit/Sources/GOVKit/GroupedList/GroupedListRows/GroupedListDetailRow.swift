@@ -1,7 +1,7 @@
 import Foundation
 
-public class DetailRow: GroupedListRow,
-                        Identifiable {
+public class GroupedListDetailRow: GroupedListRow,
+                                   Identifiable {
     public let id: String
     public let title: String
     public let body: String

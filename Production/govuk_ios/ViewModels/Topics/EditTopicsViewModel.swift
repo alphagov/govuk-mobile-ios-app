@@ -40,8 +40,8 @@ final class EditTopicsViewModel: ObservableObject {
         ]
     }
 
-    private func topicRow(topic: Topic) -> ToggleRow {
-        ToggleRow(
+    private func topicRow(topic: Topic) -> GroupedListToggleRow {
+        GroupedListToggleRow(
             id: topic.ref,
             title: topic.title,
             isOn: topic.isFavourite,

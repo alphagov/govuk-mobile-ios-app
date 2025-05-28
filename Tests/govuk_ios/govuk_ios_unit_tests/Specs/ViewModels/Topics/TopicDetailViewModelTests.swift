@@ -39,9 +39,9 @@ struct TopicDetailViewModelTests {
         #expect(sut.sections[2].heading?.title == "Browse")
         #expect(sut.sections[2].heading?.icon == UIImage.topicBrowseIcon)
 
-        #expect(sut.sections[0].rows.first is LinkRow)
-        #expect(sut.sections[1].rows.last is LinkRow)
-        #expect(sut.sections[2].rows.first is NavigationRow)
+        #expect(sut.sections[0].rows.first is GroupedListLinkRow)
+        #expect(sut.sections[1].rows.last is GroupedListLinkRow)
+        #expect(sut.sections[2].rows.first is GroupedListNavigationRow)
         #expect(sut.shouldShowDescription)
     }
     
@@ -72,14 +72,14 @@ struct TopicDetailViewModelTests {
         #expect(sut.sections[2].heading?.title == "Browse")
         #expect(sut.sections[2].heading?.icon == UIImage.topicBrowseIcon)
 
-        #expect(sut.sections[0].rows.first is LinkRow)
-        
+        #expect(sut.sections[0].rows.first is GroupedListLinkRow)
+
         #expect(sut.sections[1].rows.count == 4)
-        #expect(sut.sections[1].rows.first is LinkRow)
-        #expect(sut.sections[1].rows.last is NavigationRow)
+        #expect(sut.sections[1].rows.first is GroupedListLinkRow)
+        #expect(sut.sections[1].rows.last is GroupedListNavigationRow)
         #expect(sut.sections[1].rows.last?.title == "See all")
         
-        #expect(sut.sections[2].rows.first is NavigationRow)
+        #expect(sut.sections[2].rows.first is GroupedListNavigationRow)
     }
     
     @Test
@@ -112,11 +112,11 @@ struct TopicDetailViewModelTests {
         #expect(sut.sections[3].heading?.title == "Browse")
         #expect(sut.sections[3].heading?.icon == UIImage.topicBrowseIcon)
 
-        #expect(sut.sections[0].rows.first is LinkRow)
-        #expect(sut.sections[1].rows.first is LinkRow)
-        #expect(sut.sections[2].rows.last is LinkRow)
+        #expect(sut.sections[0].rows.first is GroupedListLinkRow)
+        #expect(sut.sections[1].rows.first is GroupedListLinkRow)
+        #expect(sut.sections[2].rows.last is GroupedListLinkRow)
         #expect(sut.sections[2].rows.count == 3)
-        #expect(sut.sections[3].rows.first is NavigationRow)
+        #expect(sut.sections[3].rows.first is GroupedListNavigationRow)
     }
 
     @Test
@@ -162,7 +162,7 @@ struct TopicDetailViewModelTests {
         )
         
         try #require(sut.sections.count == 4)
-        let subTopicRow = try #require(sut.sections[3].rows.first as? NavigationRow)
+        let subTopicRow = try #require(sut.sections[3].rows.first as? GroupedListNavigationRow)
         subTopicRow.action()
         #expect(didNavigate)
         #expect(mockAnalyticsService._trackedEvents.count == 2)
@@ -186,7 +186,7 @@ struct TopicDetailViewModelTests {
         )
         
         try #require(sut.sections.count == 4)
-        let contentRow = try #require(sut.sections[0].rows.first as? LinkRow)
+        let contentRow = try #require(sut.sections[0].rows.first as? GroupedListLinkRow)
         contentRow.action()
         #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.gov.uk/view-driving-licence")

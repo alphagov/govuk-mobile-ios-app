@@ -1,7 +1,7 @@
 import Foundation
 
-public class ToggleRow: GroupedListRow,
-                        ObservableObject {
+public class GroupedListToggleRow: GroupedListRow,
+                                   ObservableObject {
     public var id: String
     public let title: String
     @Published var isOn: Bool {

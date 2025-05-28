@@ -1,0 +1,27 @@
+import Foundation
+import SwiftUI
+
+struct GroupedListLinkRowView: View {
+    let row: GroupedListLinkRow
+
+    var body: some View {
+        Button {
+            row.action()
+        } label: {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(row.title)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                }
+                .foregroundColor(Color(UIColor.govUK.text.link))
+
+                GroupedListRowDetailView(text: row.body)
+            }
+        }
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
+        .accessibilityHint(row.isWebLink ? String.common.localized("openWebLinkHint") : "")
+    }
+}

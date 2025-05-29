@@ -264,9 +264,12 @@
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
 		D06C2A4F2DDF2FCF0045C674 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C2A4E2DDF2FCF0045C674 /* ResponseHandler.swift */; };
 		D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C2A502DDF39C90045C674 /* LocalAuthorityResponseHandler.swift */; };
+		D06C56092DE70F4D0045C674 /* AppAttestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C56082DE70F4D0045C674 /* AppAttestService.swift */; };
+		D06C560B2DE711340045C674 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = D06C560A2DE711340045C674 /* FirebaseAppCheck */; };
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
 		D076F9192D3544F0000278D5 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D076F9182D3544F0000278D5 /* SearchHistoryCell.swift */; };
 		D07E7A582DAE662A00B92D40 /* LocalAuthorityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E7A572DAE662A00B92D40 /* LocalAuthorityRepository.swift */; };
+		D0839FD02DE7ABE800CA5C27 /* GovUKProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0839FCF2DE7ABE800CA5C27 /* GovUKProviderFactory.swift */; };
 		D08A9A802DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */; };
 		D08A9A842DB92A3E002E9C78 /* SignOutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A832DB92A3E002E9C78 /* SignOutConfirmationView.swift */; };
 		D08A9A862DB92F79002E9C78 /* SignOutConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */; };
@@ -623,9 +626,11 @@
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
 		D06C2A4E2DDF2FCF0045C674 /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
 		D06C2A502DDF39C90045C674 /* LocalAuthorityResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityResponseHandler.swift; sourceTree = "<group>"; };
+		D06C56082DE70F4D0045C674 /* AppAttestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAttestService.swift; sourceTree = "<group>"; };
 		D06EB96B2CA6F71E007EA081 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
 		D076F9182D3544F0000278D5 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		D07E7A572DAE662A00B92D40 /* LocalAuthorityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityRepository.swift; sourceTree = "<group>"; };
+		D0839FCF2DE7ABE800CA5C27 /* GovUKProviderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUKProviderFactory.swift; sourceTree = "<group>"; };
 		D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutConfirmationCoordinator.swift; sourceTree = "<group>"; };
 		D08A9A832DB92A3E002E9C78 /* SignOutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutConfirmationView.swift; sourceTree = "<group>"; };
 		D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutConfirmationViewModel.swift; sourceTree = "<group>"; };
@@ -832,6 +837,7 @@
 				5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */,
 				5DC250622C91D395009E9E7F /* FirebaseCrashlytics in Frameworks */,
 				160AEAC82DA038550072BA43 /* CryptoService in Frameworks */,
+				D06C560B2DE711340045C674 /* FirebaseAppCheck in Frameworks */,
 				5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1050,6 +1056,7 @@
 		5D26A75F2C92E054009902DD /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				D0839ADD2DE73E5F00CA5C27 /* AppAttestation */,
 				5D26A7602C92E069009902DD /* Analytics */,
 			);
 			path = Clients;
@@ -1105,6 +1112,7 @@
 		5D41DB612C0875560011E691 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D0839FCE2DE7ABAF00CA5C27 /* AppAttest */,
 				16624BAA2DDCDD4200E9B60D /* InactivityService.swift */,
 				168176A22DCE685900A4B0E4 /* CoreDataDeletionService.swift */,
 				16A788B12DCC288400CA64E2 /* ReturningUserService.swift */,
@@ -1631,6 +1639,22 @@
 			path = Topics;
 			sourceTree = "<group>";
 		};
+		D0839ADD2DE73E5F00CA5C27 /* AppAttestation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppAttestation;
+			sourceTree = "<group>";
+		};
+		D0839FCE2DE7ABAF00CA5C27 /* AppAttest */ = {
+			isa = PBXGroup;
+			children = (
+				D06C56082DE70F4D0045C674 /* AppAttestService.swift */,
+				D0839FCF2DE7ABE800CA5C27 /* GovUKProviderFactory.swift */,
+			);
+			path = AppAttest;
+			sourceTree = "<group>";
+		};
 		D08A9A812DB92A15002E9C78 /* SignOut */ = {
 			isa = PBXGroup;
 			children = (
@@ -1755,6 +1779,7 @@
 				5D5DB7F02DB0DD3200F6FEAE /* UIComponents */,
 				164024722DB8004100C762B8 /* Onboarding */,
 				D090467E2DBBC1ED0096EE66 /* JWTKit */,
+				D06C560A2DE711340045C674 /* FirebaseAppCheck */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -2112,6 +2137,7 @@
 				16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */,
+				D06C56092DE70F4D0045C674 /* AppAttestService.swift in Sources */,
 				D06C2A4F2DDF2FCF0045C674 /* ResponseHandler.swift in Sources */,
 				D08A9A802DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift in Sources */,
 				5D0F199E2D5F7DB70011976C /* OnboardingSlideAnimationViewModel.swift in Sources */,
@@ -2129,6 +2155,7 @@
 				4E6663CA2C737EF50063E81C /* Config.swift in Sources */,
 				3D3378142CAAC0E0004BF83F /* AppUnavailableContainerView.swift in Sources */,
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
+				D0839FD02DE7ABE800CA5C27 /* GovUKProviderFactory.swift in Sources */,
 				D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */,
 				4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */,
 				D056CE742D3A83F2005845E0 /* UserFeedbackViewModel.swift in Sources */,
@@ -2235,7 +2262,6 @@
 				5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
 				B0AD6F202DDA86D80077849F /* NotificationsOnboardingService.swift in Sources */,
-				4E038AB92DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				D0EC94C52DCBA5F700A9707E /* AuthenticationInfoViewModelInterface.swift in Sources */,
@@ -3077,6 +3103,11 @@
 		5DDB31CB2CEF84D100E49259 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
+		};
+		D06C560A2DE711340045C674 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DC2505E2C91D395009E9E7F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
 		};
 		D090467E2DBBC1ED0096EE66 /* JWTKit */ = {
 			isa = XCSwiftPackageProductDependency;

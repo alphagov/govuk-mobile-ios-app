@@ -7,6 +7,7 @@ import UserNotifications
 import SecureStore
 import Firebase
 import FirebaseCrashlytics
+import FirebaseAppCheck
 
 extension Container {
     var activityService: Factory<ActivityServiceInterface> {
@@ -53,7 +54,8 @@ extension Container {
                 clients: [
                     FirebaseClient(
                         firebaseApp: FirebaseApp.self,
-                        firebaseAnalytics: Analytics.self
+                        firebaseAnalytics: Analytics.self,
+                        appAttestService: self.appAttestService()
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
@@ -198,5 +200,20 @@ extension Container {
                 timer: TimerWrapper()
             )
         }.scope(.singleton)
+    }
+
+    var appAttestService: Factory<AppAttestServiceInterface> {
+        Factory(self) {
+            AppAttestService(
+                appCheckInterface: AppCheck.self,
+                providerFactory: self.govuKProviderFactory()
+            )
+        }.scope(.singleton)
+    }
+
+    var govuKProviderFactory: Factory<ProviderFactoryInterface> {
+        Factory(self) {
+            GovUKProviderFactory()
+        }
     }
 }

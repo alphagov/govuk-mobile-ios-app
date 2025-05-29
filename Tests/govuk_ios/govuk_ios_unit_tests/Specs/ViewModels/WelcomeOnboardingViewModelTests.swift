@@ -12,8 +12,8 @@ struct WelcomeOnboardingViewModelTests {
                 analyticsService: mockAnalyticsService,
                 completeAction: { continuation.resume(returning: true) }
             )
-            let enrolButtonViewModel = sut.primaryButtonViewModel
-            enrolButtonViewModel.action()
+            let buttonViewModel = sut.buttonViewModel
+            buttonViewModel.action()
         }
 
         #expect(completion)

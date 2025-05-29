@@ -47,6 +47,7 @@ struct InfoView: View {
             if verticalSizeClass == .regular || (verticalSizeClass == .compact &&
                                                  viewModel.showImageWhenCompact) {
                 viewModel.image
+                    .accessibilityHidden(true)
             }
 
             Text(viewModel.title)
@@ -79,7 +80,7 @@ struct InfoSystemImage: View {
     let imageName: String
 
     var body: some View {
-        Image(decorative: imageName)
+        Image(systemName: imageName)
             .font(.system(size: 107, weight: .light))
     }
 }

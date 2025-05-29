@@ -215,6 +215,7 @@
 		5DCAFA782D40088600C3F284 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 5DCAFA772D40088600C3F284 /* OneSignalExtension */; };
 		5DCAFA7A2D40088600C3F284 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 5DCAFA792D40088600C3F284 /* OneSignalFramework */; };
 		5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD09EC72C9ADB8500494550 /* SearchService.swift */; };
+		5DD2F6DA2DE749390021C992 /* InitialLaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2F6D92DE749390021C992 /* InitialLaunchCoordinator.swift */; };
 		5DD4C7972D9547D600459FB5 /* AppEvent+RecentActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4C7962D9547D600459FB5 /* AppEvent+RecentActivity.swift */; };
 		5DD4CB082D95483100459FB5 /* ActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4CB022D95483100459FB5 /* ActivityItem.swift */; };
 		5DD4CB092D95483100459FB5 /* MonthGroupKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4CB042D95483100459FB5 /* MonthGroupKey.swift */; };
@@ -576,6 +577,7 @@
 		5DCAFA742D4004E700C3F284 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5DCAFA7B2D400C1B00C3F284 /* govuk_ios_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_dev.entitlements; sourceTree = "<group>"; };
 		5DD09EC72C9ADB8500494550 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		5DD2F6D92DE749390021C992 /* InitialLaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLaunchCoordinator.swift; sourceTree = "<group>"; };
 		5DD4C7962D9547D600459FB5 /* AppEvent+RecentActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+RecentActivity.swift"; sourceTree = "<group>"; };
 		5DD4CB022D95483100459FB5 /* ActivityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItem.swift; sourceTree = "<group>"; };
 		5DD4CB032D95483100459FB5 /* ActivityItemCreateParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItemCreateParams.swift; sourceTree = "<group>"; };
@@ -1284,6 +1286,7 @@
 				D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */,
 				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
 				16D3605C2DDDDD400007C1CA /* InactivityCoordinator.swift */,
+				5DD2F6D92DE749390021C992 /* InitialLaunchCoordinator.swift */,
 				5D962D5A2C29BD0B0038BC0A /* LaunchCoordinator.swift */,
 				169842D52DAEA5E100E3EA66 /* LocalAuthenticationOnboardingCoordinator.swift */,
 				4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */,
@@ -1295,13 +1298,13 @@
 				16B62A102DC2E817008F7003 /* ReauthenticationCoordinator.swift */,
 				4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */,
 				5D6B90122DCB75A700D36463 /* ReLaunchCoordinator.swift */,
+				5D8EAC242DD746C2003089F5 /* SafariCoordinator.swift */,
 				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
 				D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */,
 				D0EC94C82DCBC65000A9707E /* SignInErrorCoordinator.swift */,
 				D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */,
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 				5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */,
-				5D8EAC242DD746C2003089F5 /* SafariCoordinator.swift */,
 				4E00EEFA2CCB0941007B61E8 /* TopicOnboardingCoordinator.swift */,
 				B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */,
 			);
@@ -2234,8 +2237,8 @@
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
 				5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,
+				5DD2F6DA2DE749390021C992 /* InitialLaunchCoordinator.swift in Sources */,
 				B0AD6F202DDA86D80077849F /* NotificationsOnboardingService.swift in Sources */,
-				4E038AB92DB8F502005DFA53 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */,
 				D0EC94C52DCBA5F700A9707E /* AuthenticationInfoViewModelInterface.swift in Sources */,

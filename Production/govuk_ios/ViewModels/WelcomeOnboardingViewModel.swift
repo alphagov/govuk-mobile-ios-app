@@ -1,10 +1,11 @@
 import Foundation
 import GOVKit
 import UIComponents
+import SwiftUI
 
-class WelcomeOnboardingViewModel: ObservableObject {
+final class WelcomeOnboardingViewModel: InfoViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
-    let completeAction: () -> Void
+    private let completeAction: () -> Void
 
     init(analyticsService: AnalyticsServiceInterface,
          completeAction: @escaping () -> Void) {
@@ -12,27 +13,53 @@ class WelcomeOnboardingViewModel: ObservableObject {
         self.completeAction = completeAction
     }
 
-    let title: String = String.onboarding.localized(
-        "welcomeTitle"
-    )
+    var title: String {
+        String.onboarding.localized("welcomeTitle")
+    }
 
-    let body: String = String.onboarding.localized(
-        "welcomeBody"
-    )
+    var subtitle: String {
+        String.onboarding.localized("welcomeBody")
+    }
 
-    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
+    var buttonTitle: String {
+        String.signOut.localized("signInRetryButtonTitle")
+    }
+
+    var buttonViewModel: GOVUKButton.ButtonViewModel {
         let localTitle = String.onboarding.localized("welcomeButtonTitle")
         return .init(
             localisedTitle: localTitle,
             action: { [weak self] in
-                self?.trackButtonActionEvent(title: localTitle)
+                self?.trackNavigationEvent(localTitle)
                 self?.completeAction()
             }
         )
     }
 
-    private func trackButtonActionEvent(title: String) {
-        let event = AppEvent.buttonNavigation(text: title, external: false)
+    var image: AnyView {
+        AnyView(
+            Image(decorative: "onboarding_welcome")
+                .padding(.bottom, 16)
+        )
+    }
+
+    var showImageWhenCompact: Bool {
+        false
+    }
+
+    var subtitleFont: Font {
+        Font.govUK.title1
+    }
+
+    var trackingName: String { "Welcome onboarding" }
+
+    var trackingTitle: String { title }
+
+    private func trackNavigationEvent(_ title: String) {
+        let event = AppEvent.buttonNavigation(
+            text: title,
+            external: false
+        )
         analyticsService.track(event: event)
     }
 }

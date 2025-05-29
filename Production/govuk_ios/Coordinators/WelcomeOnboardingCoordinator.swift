@@ -44,7 +44,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
                 }
             }
         )
-        let containerView = WelcomeOnboardingView(
+        let containerView = InfoView(
             viewModel: viewModel
         )
         let viewController = UIHostingController(

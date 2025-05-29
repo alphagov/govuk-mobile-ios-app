@@ -2,21 +2,27 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-struct AuthenticationInfoView: View {
+struct InfoView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    private var viewModel: AuthenticationInfoViewModelInterface
+    private var viewModel: any InfoViewModelInterface
 
-    init(viewModel: AuthenticationInfoViewModelInterface) {
+    init(viewModel: any InfoViewModelInterface) {
         self.viewModel = viewModel
     }
 
     var body: some View {
         VStack {
             GeometryReader { geometry in
-                ScrollView {
+                let scrollView = ScrollView {
                     infoView
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
+                }
+                if #available(iOS 16.4, *) {
+                    scrollView
+                        .scrollBounceBehavior(.basedOnSize)
+                } else {
+                    scrollView
                 }
             }
             Divider()
@@ -38,33 +44,42 @@ struct AuthenticationInfoView: View {
 
     private var infoView: some View {
         VStack {
-            if let image = viewModel.image {
-                image
-                    .font(Font.system(size: 107, weight: .light))
-                    .accessibilityHidden(true)
+            if verticalSizeClass == .regular || (verticalSizeClass == .compact &&
+                                                 viewModel.showImageWhenCompact) {
+                viewModel.image
             }
+
             Text(viewModel.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(Font.govUK.title1)
+                .font(Font.govUK.largeTitleBold)
                 .multilineTextAlignment(.center)
                 .accessibilityAddTraits(.isHeader)
                 .padding(.bottom, 16)
             Text(viewModel.subtitle)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(Font.govUK.body)
+                .font(viewModel.subtitleFont)
                 .multilineTextAlignment(.center)
         }
         .padding(.horizontal, 16)
     }
 }
 
-extension AuthenticationInfoView: TrackableScreen {
+extension InfoView: TrackableScreen {
     var trackingName: String {
         viewModel.trackingName
     }
 
     var trackingTitle: String? {
         viewModel.trackingTitle
+    }
+}
+
+struct InfoSystemImage: View {
+    let imageName: String
+
+    var body: some View {
+        Image(decorative: imageName)
+            .font(.system(size: 107, weight: .light))
     }
 }

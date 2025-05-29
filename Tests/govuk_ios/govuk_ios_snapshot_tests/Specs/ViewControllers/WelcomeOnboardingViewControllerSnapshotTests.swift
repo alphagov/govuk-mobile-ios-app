@@ -12,7 +12,7 @@ class WelcomeOnboardingViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             completeAction: { }
         )
-        let welcomeOnboardingView = WelcomeOnboardingView(viewModel: viewModel)
+        let welcomeOnboardingView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: welcomeOnboardingView,
             statusBarStyle: .darkContent
@@ -29,7 +29,7 @@ class WelcomeOnboardingViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             completeAction: { }
         )
-        let welcomeOnboardingView = WelcomeOnboardingView(viewModel: viewModel)
+        let welcomeOnboardingView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: welcomeOnboardingView,
             statusBarStyle: .darkContent

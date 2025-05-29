@@ -3,7 +3,7 @@ import GOVKit
 import UIComponents
 import SwiftUI
 
-final class SignInErrorViewModel: AuthenticationInfoViewModelInterface {
+final class SignInErrorViewModel: InfoViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
     private let completion: () -> Void
 
@@ -34,8 +34,18 @@ final class SignInErrorViewModel: AuthenticationInfoViewModelInterface {
             }
     }
 
-    var image: Image? {
-        Image(systemName: "exclamationmark.circle")
+    var image: AnyView {
+        AnyView(
+            InfoSystemImage(imageName: "exclamationmark.circle")
+        )
+    }
+
+    var showImageWhenCompact: Bool {
+        false
+    }
+
+    var subtitleFont: Font {
+        Font.govUK.body
     }
 
     var trackingName: String { "Sign In Error" }

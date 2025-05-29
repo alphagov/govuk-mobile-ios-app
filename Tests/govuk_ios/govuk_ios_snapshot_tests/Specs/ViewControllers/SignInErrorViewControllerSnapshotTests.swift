@@ -13,7 +13,7 @@ class SignInErrorViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = SignInErrorViewModel(
             analyticsService: MockAnalyticsService(),
             completion: { })
-        let signInErrorView = AuthenticationInfoView(viewModel: viewModel)
+        let signInErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signInErrorView,
             statusBarStyle: .darkContent
@@ -29,7 +29,7 @@ class SignInErrorViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = SignInErrorViewModel(
             analyticsService: MockAnalyticsService(),
             completion: { })
-        let signInErrorView = AuthenticationInfoView(viewModel: viewModel)
+        let signInErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signInErrorView,
             statusBarStyle: .darkContent

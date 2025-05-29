@@ -230,7 +230,7 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             completion: completion
         )
-        let view = AuthenticationInfoView(viewModel: viewModel)
+        let view = InfoView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
         return viewController
     }
@@ -242,7 +242,7 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             completion: completion
         )
-        let view = AuthenticationInfoView(viewModel: viewModel)
+        let view = InfoView(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
         return viewController
     }

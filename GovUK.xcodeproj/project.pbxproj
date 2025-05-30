@@ -2500,8 +2500,8 @@
 			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTHENTICATION_BASE_URL = "eu-west-2fij6f25zh.auth.eu-west-2.amazoncognito.com";
-				AUTHENTICATION_CLIENT_ID = 121f51j1s4kmk9i98um0b5mphh;
+				AUTHENTICATION_BASE_URL = "govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7qal023jms3dumkqd6173etleh;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -2533,6 +2533,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TOKEN_BASE_URL = "https://m0q9zbtrs2.execute-api.eu-west-2.amazonaws.com/staging";
 			};
 			name = Debug;
 		};
@@ -2576,6 +2577,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TOKEN_BASE_URL = "https://eu-west-2fij6f25zh.auth.eu-west-2.amazoncognito.com";
 			};
 			name = Release;
 		};
@@ -2803,8 +2805,8 @@
 			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTHENTICATION_BASE_URL = "eu-west-2fij6f25zh.auth.eu-west-2.amazoncognito.com";
-				AUTHENTICATION_CLIENT_ID = 121f51j1s4kmk9i98um0b5mphh;
+				AUTHENTICATION_BASE_URL = "govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7qal023jms3dumkqd6173etleh;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2839,6 +2841,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TOKEN_BASE_URL = "https://m0q9zbtrs2.execute-api.eu-west-2.amazonaws.com/staging";
 			};
 			name = Alpha;
 		};

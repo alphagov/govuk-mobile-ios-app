@@ -14,6 +14,7 @@ enum AppEnvironmentKey: String {
     case oneSignalAppId = "ONESIGNAL_APP_ID"
     case authenticationClientId = "AUTHENTICATION_CLIENT_ID"
     case authenticationBaseURL = "AUTHENTICATION_BASE_URL"
+    case tokenBaseURL = "TOKEN_BASE_URL"
 }
 
 struct AppEnvironmentService: AppEnvironmentServiceInterface {
@@ -41,7 +42,7 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
     }
 
     var authenticationTokenURL: URL {
-        authenticationBaseURL.appendingPathComponent("oauth2/token")
+        tokenBaseURL.appendingPathComponent("oauth2/token")
     }
 
     var revokeTokenURL: URL {
@@ -60,5 +61,10 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
         components.scheme = "https"
         components.host = string(for: .authenticationBaseURL)
         return components.url!
+    }
+
+    var tokenBaseURL: URL {
+        let urlString = string(for: .tokenBaseURL)
+        return URL(string: urlString)!
     }
 }

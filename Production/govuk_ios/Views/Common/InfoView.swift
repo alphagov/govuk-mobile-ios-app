@@ -13,17 +13,11 @@ struct InfoView: View {
     var body: some View {
         VStack {
             GeometryReader { geometry in
-                let scrollView = ScrollView {
+                ScrollView {
                     infoView
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
-                }
-                if #available(iOS 16.4, *) {
-                    scrollView
-                        .scrollBounceBehavior(.basedOnSize)
-                } else {
-                    scrollView
-                }
+                }.modifier(ScrollBounceBehaviorModifier())
             }
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.listDivider))

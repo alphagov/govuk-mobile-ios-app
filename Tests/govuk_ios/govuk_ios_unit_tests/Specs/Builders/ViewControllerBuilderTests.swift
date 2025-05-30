@@ -209,7 +209,7 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             completion: { }
         )
-        let rootView = (result as? HostingViewController<AuthenticationInfoView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -220,7 +220,7 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             completion: { }
         )
-        let rootView = (result as? HostingViewController<AuthenticationInfoView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 

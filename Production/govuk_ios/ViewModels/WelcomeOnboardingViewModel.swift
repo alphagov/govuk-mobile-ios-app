@@ -3,22 +3,22 @@ import GOVKit
 import UIComponents
 import SwiftUI
 
-final class SignInErrorViewModel: InfoViewModelInterface {
+final class WelcomeOnboardingViewModel: InfoViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
-    private let completion: () -> Void
+    private let completeAction: () -> Void
 
     init(analyticsService: AnalyticsServiceInterface,
-         completion: @escaping () -> Void) {
+         completeAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
-        self.completion = completion
+        self.completeAction = completeAction
     }
 
     var title: String {
-        String.signOut.localized("signInErrorTitle")
+        String.onboarding.localized("welcomeTitle")
     }
 
     var subtitle: String {
-        String.signOut.localized("signInErrorSubtitle")
+        String.onboarding.localized("welcomeBody")
     }
 
     var buttonTitle: String {
@@ -26,17 +26,20 @@ final class SignInErrorViewModel: InfoViewModelInterface {
     }
 
     var buttonViewModel: GOVUKButton.ButtonViewModel {
-        GOVUKButton.ButtonViewModel(
-            localisedTitle: buttonTitle) { [weak self] in
-                guard let self = self else { return }
-                self.trackNavigationEvent(self.buttonTitle)
-                self.completion()
+        let localTitle = String.onboarding.localized("welcomeButtonTitle")
+        return .init(
+            localisedTitle: localTitle,
+            action: { [weak self] in
+                self?.trackNavigationEvent(localTitle)
+                self?.completeAction()
             }
+        )
     }
 
     var image: AnyView {
         AnyView(
-            InfoSystemImage(imageName: "exclamationmark.circle")
+            Image(decorative: "onboarding_welcome")
+                .padding(.bottom, 16)
         )
     }
 
@@ -45,10 +48,11 @@ final class SignInErrorViewModel: InfoViewModelInterface {
     }
 
     var subtitleFont: Font {
-        Font.govUK.body
+        Font.govUK.title1
     }
 
-    var trackingName: String { "Sign In Error" }
+    var trackingName: String { "Welcome onboarding" }
+
     var trackingTitle: String { title }
 
     private func trackNavigationEvent(_ title: String) {

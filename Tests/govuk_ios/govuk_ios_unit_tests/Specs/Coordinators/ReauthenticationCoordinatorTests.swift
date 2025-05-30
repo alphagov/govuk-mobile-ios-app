@@ -41,7 +41,7 @@ class ReauthenticationCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
-        mockCoordinatorBuilder._stubbedAuthenticationOnboardingCoordinator =
+        mockCoordinatorBuilder._stubbedWelcomeOnboardingCoordinator =
         mockAuthenticationOnboardingCoordinator
         mockAuthenticationService._stubbedTokenRefreshRequest = .failure(.genericError)
         // Need too add continuation as starting coordinator is called after #expect
@@ -70,7 +70,7 @@ class ReauthenticationCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         mockLocalAuthenticationService._stubbedBiometricsHaveChanged = true
-        mockCoordinatorBuilder._stubbedAuthenticationOnboardingCoordinator =
+        mockCoordinatorBuilder._stubbedWelcomeOnboardingCoordinator =
         mockAuthenticationOnboardingCoordinator
         mockAuthenticationService._stubbedTokenRefreshRequest = .failure(.genericError)
         let authenticationOnboardingStartCalled = await withCheckedContinuation { continuation in

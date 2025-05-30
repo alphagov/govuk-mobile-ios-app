@@ -56,28 +56,6 @@
         }
       }
     },
-    "authenticationBody" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You’ll need to create a GOV.UK One Login if you do not already have one"
-          }
-        }
-      }
-    },
-    "authenticationTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sign in with GOV.UK One Login"
-          }
-        }
-      }
-    },
     "continueButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -283,6 +261,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unlock the app with Touch ID"
+          }
+        }
+      }
+    },
+    "welcomeBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Government information and services for you"
+          }
+        }
+      }
+    },
+    "welcomeButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get started"
+          }
+        }
+      }
+    },
+    "welcomeTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your GOV.UK app"
           }
         }
       }

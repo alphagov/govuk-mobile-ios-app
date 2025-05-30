@@ -71,8 +71,7 @@ struct AppCoordinatorTests {
         mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
         mockCoordinatorBuilder._receivedReauthenticationCompletion?()
         mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
-        mockCoordinatorBuilder._receivedOnboardingDismissAction?()
-        mockCoordinatorBuilder._receivedAuthenticationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedWelcomeOnboardingCompletion?()
         mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
         mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
@@ -113,14 +112,14 @@ struct AppCoordinatorTests {
             navigationController: mockNavigationController
         )
 
-        let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator(
+        let mockWelcomeOnboardingCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
 
         mockCoordinatorBuilder._stubbedTabCoordinator = tabCoordinator
         mockCoordinatorBuilder._stubbedSignedOutCoordinator = mockSignedOutCoordinator
         mockCoordinatorBuilder
-            ._stubbedAuthenticationOnboardingCoordinator = mockAuthenticationOnboardingCoordinator
+            ._stubbedWelcomeOnboardingCoordinator = mockWelcomeOnboardingCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -146,8 +145,7 @@ struct AppCoordinatorTests {
         mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
         mockCoordinatorBuilder._receivedReauthenticationCompletion?()
         mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
-        mockCoordinatorBuilder._receivedOnboardingDismissAction?()
-        mockCoordinatorBuilder._receivedAuthenticationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedWelcomeOnboardingCompletion?()
         mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
         mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
@@ -156,6 +154,6 @@ struct AppCoordinatorTests {
         #expect(mockSignedOutCoordinator._startCalled)
 
         mockCoordinatorBuilder._receivedSignedOutCompletion?(false)
-        #expect(mockAuthenticationOnboardingCoordinator._startCalled)
+        #expect(mockWelcomeOnboardingCoordinator._startCalled)
     }
 }

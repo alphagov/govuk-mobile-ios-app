@@ -2542,8 +2542,8 @@
 			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTHENTICATION_BASE_URL = "eu-west-2fij6f25zh.auth.eu-west-2.amazoncognito.com";
-				AUTHENTICATION_CLIENT_ID = 121f51j1s4kmk9i98um0b5mphh;
+				AUTHENTICATION_BASE_URL = "govukapp-integration.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 35vb4qv5kigloongjg4snabius;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -2577,7 +2577,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TOKEN_BASE_URL = "https://eu-west-2fij6f25zh.auth.eu-west-2.amazoncognito.com";
+				TOKEN_BASE_URL = "https://g0s70cfqng.execute-api.eu-west-2.amazonaws.com/integration";
 			};
 			name = Release;
 		};

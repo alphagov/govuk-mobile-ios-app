@@ -24,20 +24,16 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startInactivityMonitoring() {
-        let coordinator = coordinatorBuilder.inactivityCoordinator(
-            navigationController: root,
-            inactivityService: inactivityService,
-            inactiveAction: { [weak self] in
+        inactivityService.startMonitoring(
+            inactivityHandler: { [weak self] in
                 self?.root.dismiss(animated: true)
                 self?.startPeriAuthCoordinator()
             }
         )
-        start(coordinator)
     }
 
     private func startPreAuthCoordinator(url: URL?) {
-        let coordinator = PreAuthCoordinator(
-            coordinatorBuilder: coordinatorBuilder,
+        let coordinator = coordinatorBuilder.preauth(
             navigationController: root,
             completion: { [weak self] in
                 self?.initialLaunch = false
@@ -48,8 +44,7 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startPeriAuthCoordinator() {
-        let coordinator = PeriAuthCoordinator(
-            coordinatorBuilder: coordinatorBuilder,
+        let coordinator = coordinatorBuilder.periauth(
             navigationController: root,
             completion: { [weak self] in
                 self?.startPostAuthCoordinator()
@@ -59,8 +54,7 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startPostAuthCoordinator() {
-        let coordinator = PostAuthCoordinator(
-            coordinatorBuilder: coordinatorBuilder,
+        let coordinator = coordinatorBuilder.postauth(
             navigationController: root,
             completion: { [weak self] in
                 self?.startTabs(url: nil)

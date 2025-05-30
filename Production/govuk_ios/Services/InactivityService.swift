@@ -10,7 +10,7 @@ protocol InactivityServiceInterface {
 class InactivityService: InactivityServiceInterface {
     private let timer: TimerWrapperInterface
     private let authenticationService: AuthenticationServiceInterface
-    private let inactivityThreshold: TimeInterval = 1 * 60 // 15 minutes
+    private let inactivityThreshold: TimeInterval = 15 * 60 // 15 minutes
     private var inAppTimer: Timer?
     private var inactivityHandler: (() -> Void)?
     var backgroundedTime: Date = Date()

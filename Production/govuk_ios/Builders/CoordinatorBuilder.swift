@@ -20,6 +20,33 @@ class CoordinatorBuilder {
         )
     }
 
+    func preauth(navigationController: UINavigationController,
+                 completion: @escaping () -> Void) -> BaseCoordinator {
+        PreAuthCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            completion: completion
+        )
+    }
+
+    func periauth(navigationController: UINavigationController,
+                  completion: @escaping () -> Void) -> BaseCoordinator {
+        PeriAuthCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            completion: completion
+        )
+    }
+
+    func postauth(navigationController: UINavigationController,
+                  completion: @escaping () -> Void) -> BaseCoordinator {
+        PostAuthCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            completion: completion
+        )
+    }
+
     var home: TabItemCoordinator {
         let navigationController = UINavigationController.home
 
@@ -316,16 +343,16 @@ class CoordinatorBuilder {
         )
     }
 
-    func signedOut(navigationController: UINavigationController,
-                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-        SignedOutCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
-            authenticationService: container.authenticationService.resolve(),
-            analyticsService: container.analyticsService.resolve(),
-            completion: completion
-        )
-    }
+//    func signedOut(navigationController: UINavigationController,
+//                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
+//        SignedOutCoordinator(
+//            navigationController: navigationController,
+//            viewControllerBuilder: ViewControllerBuilder(),
+//            authenticationService: container.authenticationService.resolve(),
+//            analyticsService: container.analyticsService.resolve(),
+//            completion: completion
+//        )
+//    }
 
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(
@@ -341,16 +368,6 @@ class CoordinatorBuilder {
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             url: url
-        )
-    }
-
-    func inactivityCoordinator(navigationController: UINavigationController,
-                               inactivityService: InactivityServiceInterface,
-                               inactiveAction: @escaping () -> Void) -> BaseCoordinator {
-        InactivityCoordinator(
-            navigationController: navigationController,
-            inactivityService: inactivityService,
-            inactiveAction: inactiveAction
         )
     }
 }

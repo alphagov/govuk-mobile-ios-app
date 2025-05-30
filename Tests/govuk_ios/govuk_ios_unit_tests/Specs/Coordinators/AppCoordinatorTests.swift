@@ -12,10 +12,10 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
-        let mockLaunchCoordinator = MockBaseCoordinator(
+        let mockCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoordinator
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -25,8 +25,8 @@ struct AppCoordinatorTests {
 
         subject.start()
 
-        #expect(mockCoordinatorBuilder._receivedLaunchNavigationController == mockNavigationController)
-        #expect(mockLaunchCoordinator._startCalled)
+        #expect(mockCoordinatorBuilder._receivedPreAuthNavigationController == mockNavigationController)
+        #expect(mockCoordinator._startCalled)
     }
 
     @Test
@@ -35,13 +35,13 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
-        let mockLaunchCoordinator = MockBaseCoordinator(
+        let mockPreAuthCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
         let mockTabCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoordinator
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockPreAuthCoordinator
         mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoordinator
 
         let subject = AppCoordinator(
@@ -53,34 +53,16 @@ struct AppCoordinatorTests {
         //First launch
         subject.start()
 
-        #expect(mockLaunchCoordinator._startCalled)
+        #expect(mockPreAuthCoordinator._startCalled)
 
-        //Finish launch loading
-        let launchResult = AppLaunchResponse(
-            configResult: .success(.arrange),
-            topicResult: .success(TopicResponseItem.arrangeMultiple),
-            notificationConsentResult: .aligned,
-            appVersionProvider: MockAppVersionProvider()
-        )
-        // This is in order of launch
-        mockCoordinatorBuilder._receivedInactiveAction?()
-        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
-        mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
-        mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
-        mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedReauthenticationCompletion?()
-        mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
-        mockCoordinatorBuilder._receivedOnboardingDismissAction?()
-        mockCoordinatorBuilder._receivedAuthenticationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
-        mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedPreAuthCompletion?()
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        mockCoordinatorBuilder._receivedPostAuthCompletion?()
 
         #expect(mockTabCoordinator._startCalled)
 
         //Reset values for second launch
-        mockLaunchCoordinator._startCalled = false
+        mockPreAuthCoordinator._startCalled = false
         mockTabCoordinator._startCalled = false
 
         //Second launch
@@ -88,8 +70,7 @@ struct AppCoordinatorTests {
 
         mockCoordinatorBuilder._receivedRelaunchCompletion?()
 
-        #expect(!mockLaunchCoordinator._startCalled)
-//        #expect(mockTabCoordinator._startCalled) Needs looking at
+        #expect(!mockPreAuthCoordinator._startCalled)
     }
 
     @Test
@@ -109,18 +90,12 @@ struct AppCoordinatorTests {
             analyticsService: MockAnalyticsService()
         )
 
-        let mockSignedOutCoordinator = MockBaseCoordinator(
-            navigationController: mockNavigationController
-        )
-
-        let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator(
+        let periAuthCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
 
         mockCoordinatorBuilder._stubbedTabCoordinator = tabCoordinator
-        mockCoordinatorBuilder._stubbedSignedOutCoordinator = mockSignedOutCoordinator
-        mockCoordinatorBuilder
-            ._stubbedAuthenticationOnboardingCoordinator = mockAuthenticationOnboardingCoordinator
+        mockCoordinatorBuilder._stubbedPeriAuthCoordinator = periAuthCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -130,32 +105,12 @@ struct AppCoordinatorTests {
 
         //First launch
         subject.start()
-        //Finish launch loading
-        let launchResult = AppLaunchResponse(
-            configResult: .success(.arrange),
-            topicResult: .success(TopicResponseItem.arrangeMultiple),
-            notificationConsentResult: .aligned,
-            appVersionProvider: MockAppVersionProvider()
-        )
-        // This is in order of launch
-        mockCoordinatorBuilder._receivedInactiveAction?()
-        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
-        mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
-        mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
-        mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedReauthenticationCompletion?()
-        mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
-        mockCoordinatorBuilder._receivedOnboardingDismissAction?()
-        mockCoordinatorBuilder._receivedAuthenticationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
-        mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
+
+        mockCoordinatorBuilder._receivedPreAuthCompletion?()
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        mockCoordinatorBuilder._receivedPostAuthCompletion?()
 
         tabCoordinator.finish()
-        #expect(mockSignedOutCoordinator._startCalled)
-
-        mockCoordinatorBuilder._receivedSignedOutCompletion?(false)
-        #expect(mockAuthenticationOnboardingCoordinator._startCalled)
+        #expect(periAuthCoordinator._startCalled)
     }
 }

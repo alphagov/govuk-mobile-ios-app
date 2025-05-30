@@ -12,6 +12,32 @@ extension CoordinatorBuilder {
 
 class MockCoordinatorBuilder: CoordinatorBuilder {
 
+    var _stubbedPreAuthCoordinator: BaseCoordinator?
+    var _receivedPreAuthNavigationController: UINavigationController?
+    var _receivedPreAuthCompletion: (() -> Void)?
+    override func preauth(navigationController: UINavigationController,
+                          completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedPreAuthNavigationController = navigationController
+        _receivedPreAuthCompletion = completion
+        return _stubbedPreAuthCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedPeriAuthCoordinator: BaseCoordinator?
+    var _receivedPeriAuthCompletion: (() -> Void)?
+    override func periauth(navigationController: UINavigationController,
+                           completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedPeriAuthCompletion = completion
+        return _stubbedPeriAuthCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedPostAuthCoordinator: BaseCoordinator?
+    var _receivedPostAuthCompletion: (() -> Void)?
+    override func postauth(navigationController: UINavigationController,
+                           completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedPostAuthCompletion = completion
+        return _stubbedPostAuthCoordinator ?? MockBaseCoordinator()
+    }
+
     var _stubbedTabCoordinator: BaseCoordinator?
     var _receivedTabNavigationController: UINavigationController?
     override func tab(navigationController: UINavigationController) -> BaseCoordinator {
@@ -138,7 +164,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _receivedAuthenticationOnboardingCompletion: (() -> Void)?
     var _stubbedAuthenticationOnboardingCoordinator: MockBaseCoordinator?
     override func authenticationOnboarding(navigationController: UINavigationController,
-                                           newUserAction: (() -> Void)?,
                                            completionAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedAuthenticationOnboardingCompletion = completionAction
         return _stubbedAuthenticationOnboardingCoordinator ?? MockBaseCoordinator()
@@ -149,7 +174,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _stubbedAuthenticationCoordinator: MockBaseCoordinator?
     override func authentication(navigationController: UINavigationController,
                                  completionAction: @escaping () -> Void,
-                                 newUserAction: (() -> Void)?,
                                  handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         _receivedAuthenticationCompletion = completionAction
         _receivedAuthenticationHandleError = handleError
@@ -184,8 +208,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _receivedReauthenticationCompletion: (() -> Void)?
     var _stubbedReauthenticationCoordinator: MockBaseCoordinator?
     override func reauthentication(navigationController: UINavigationController,
-                                   completionAction: @escaping () -> Void,
-                                   newUserAction: @escaping () -> Void) -> BaseCoordinator {
+                                   completionAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedReauthenticationCompletion = completionAction
         return _stubbedReauthenticationCoordinator ?? MockBaseCoordinator()
     }
@@ -195,30 +218,30 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _stubbedSignOutConfirmationCoordinator ?? MockBaseCoordinator()
     }
 
-    var _receivedSignedOutCompletion: ((Bool) -> Void)?
-    var _stubbedSignedOutCoordinator: MockBaseCoordinator?
-    override func signedOut(navigationController: UINavigationController,
-                            completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-        _receivedSignedOutCompletion = completion
-        return _stubbedSignedOutCoordinator ?? MockBaseCoordinator()
-    }
+//    var _receivedSignedOutCompletion: ((Bool) -> Void)?
+//    var _stubbedSignedOutCoordinator: MockBaseCoordinator?
+//    override func signedOut(navigationController: UINavigationController,
+//                            completion: @escaping (Bool) -> Void) -> BaseCoordinator {
+//        _receivedSignedOutCompletion = completion
+//        return _stubbedSignedOutCoordinator ?? MockBaseCoordinator()
+//    }
 
-    var _receivedSignInErrorCompletion: (() -> Void)?
-    var _stubbedSignInErrorCoordinator: MockBaseCoordinator?
-    override func signInError(navigationController: UINavigationController,
-                              completion: @escaping () -> Void) -> BaseCoordinator {
-        _receivedSignInErrorCompletion = completion
-        return _stubbedSignInErrorCoordinator ?? MockBaseCoordinator()
-    }
+//    var _receivedSignInErrorCompletion: (() -> Void)?
+//    var _stubbedSignInErrorCoordinator: MockBaseCoordinator?
+//    override func signInError(navigationController: UINavigationController,
+//                              completion: @escaping () -> Void) -> BaseCoordinator {
+//        _receivedSignInErrorCompletion = completion
+//        return _stubbedSignInErrorCoordinator ?? MockBaseCoordinator()
+//    }
 
-    var _receivedInactiveAction: (() -> Void)?
-    var _stubbedInactivityCoordinator: MockBaseCoordinator?
-    override func inactivityCoordinator(navigationController: UINavigationController,
-                                        inactivityService: InactivityServiceInterface,
-                                        inactiveAction: @escaping () -> Void) -> BaseCoordinator {
-        _receivedInactiveAction = inactiveAction
-        return _stubbedInactivityCoordinator ?? MockBaseCoordinator()
-    }
+//    var _receivedInactiveAction: (() -> Void)?
+//    var _stubbedInactivityCoordinator: MockBaseCoordinator?
+//    override func inactivityCoordinator(navigationController: UINavigationController,
+//                                        inactivityService: InactivityServiceInterface,
+//                                        inactiveAction: @escaping () -> Void) -> BaseCoordinator {
+//        _receivedInactiveAction = inactiveAction
+//        return _stubbedInactivityCoordinator ?? MockBaseCoordinator()
+//    }
 
     var _receivedSafariCoordinatorURL: URL?
     var _stubbedSafariCoordinator: MockBaseCoordinator?

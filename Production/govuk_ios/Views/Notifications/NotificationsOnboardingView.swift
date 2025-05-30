@@ -13,7 +13,7 @@ struct NotificationsOnboardingView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            bouncableScrollView
+            scrollView
             buttonStack
         }
         .accessibilityElement(children: .contain)
@@ -48,15 +48,6 @@ struct NotificationsOnboardingView: View {
                 )
             }
             .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
-        }
-    }
-
-    private var bouncableScrollView: some View {
-        if #available(iOS 16.4, *) {
-            return scrollView
-                .scrollBounceBehavior(.basedOnSize)
-        } else {
-            return scrollView
         }
     }
 
@@ -109,6 +100,7 @@ struct NotificationsOnboardingView: View {
         }
         .padding(.top, verticalSizeClass == .compact ? 30 : 46)
         .padding(.horizontal, 16)
+        .modifier(ScrollBounceBehaviorModifier())
     }
 }
 

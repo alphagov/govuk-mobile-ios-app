@@ -16,7 +16,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: MockAPIServiceClient()
+            revokeTokenServiceClient: MockAPIServiceClient(),
+            appAttestService: MockAppAttestService()
         )
 
         await confirmation() { confirmation in
@@ -41,7 +42,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: MockAPIServiceClient()
+            revokeTokenServiceClient: MockAPIServiceClient(),
+            appAttestService: MockAppAttestService()
         )
 
         await confirmation() { confirmation in
@@ -62,7 +64,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: MockAPIServiceClient()
+            revokeTokenServiceClient: MockAPIServiceClient(),
+            appAttestService: MockAppAttestService()
         )
         let accessToken = UUID().uuidString
         let idToken = UUID().uuidString
@@ -88,7 +91,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: MockAPIServiceClient()
+            revokeTokenServiceClient: MockAPIServiceClient(),
+            appAttestService: MockAppAttestService()
         )
         mockOidAuthService._stubbedAccessToken = nil
 
@@ -110,7 +114,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: MockAPIServiceClient()
+            revokeTokenServiceClient: MockAPIServiceClient(),
+            appAttestService: MockAppAttestService()
         )
         mockOidAuthService._shouldReturnError = true
 
@@ -134,7 +139,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: mockRevokeTokenClient
+            revokeTokenServiceClient: mockRevokeTokenClient,
+            appAttestService: MockAppAttestService()
         )
 
         let result = await withCheckedContinuation { continuation in
@@ -157,7 +163,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: mockRevokeTokenClient
+            revokeTokenServiceClient: mockRevokeTokenClient,
+            appAttestService: MockAppAttestService()
         )
 
         var didCallCompletion: Bool = false
@@ -182,7 +189,8 @@ struct AuthenticationServiceClientTests {
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
-            revokeTokenServiceClient: mockRevokeTokenClient
+            revokeTokenServiceClient: mockRevokeTokenClient,
+            appAttestService: MockAppAttestService()
         )
 
         var didCallCompletion: Bool = false

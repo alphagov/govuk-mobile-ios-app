@@ -28,7 +28,7 @@ class PeriAuthCoordinator: BaseCoordinator {
     }
 
     private func startAuthenticationOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.authenticationOnboarding(
+        let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
             completionAction: { [weak self] in
                 self?.startLocalAuthenticationOnboardingCoordinator(url: url)

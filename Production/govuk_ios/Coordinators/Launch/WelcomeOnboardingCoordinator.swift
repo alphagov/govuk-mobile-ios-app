@@ -1,12 +1,12 @@
 import Foundation
 import UIKit
-import Onboarding
+import SwiftUI
 import GOVKit
+import Onboarding
 
-class AuthenticationOnboardingCoordinator: BaseCoordinator {
+class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     private let authenticationService: AuthenticationServiceInterface
-    private let authenticationOnboardingService: AuthenticationOnboardingServiceInterface
     private let onboardingAnalyticsService: OnboardingAnalyticsService
     private let analyticsService: AnalyticsServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
@@ -15,7 +15,6 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
 
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
-         authenticationOnboardingService: AuthenticationOnboardingServiceInterface,
          onboardingAnalyticsService: OnboardingAnalyticsService,
          analyticsService: AnalyticsServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
@@ -23,7 +22,6 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
-        self.authenticationOnboardingService = authenticationOnboardingService
         self.onboardingAnalyticsService = onboardingAnalyticsService
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
@@ -36,24 +34,25 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
         guard !shouldSkipOnboarding
         else { return completionAction() }
 
-        setOnboarding()
+        setWelcomeOnboardingViewController()
     }
 
-    private func setOnboarding(_ animated: Bool = true) {
-        let onboardingModule = Onboarding(
-            slideProvider: authenticationOnboardingService,
-            analyticsService: onboardingAnalyticsService,
+    private func setWelcomeOnboardingViewController(_ animated: Bool = true) {
+        let viewModel = WelcomeOnboardingViewModel(
+            analyticsService: analyticsService,
             completeAction: { [weak self] in
                 Task {
                     await self?.startAuthentication()
                 }
-            },
-            dismissAction: { }
+            }
         )
-        set(
-            onboardingModule.viewController,
-            animated: animated
+        let containerView = InfoView(
+            viewModel: viewModel
         )
+        let viewController = UIHostingController(
+            rootView: containerView
+        )
+        set(viewController)
     }
 
     private func startAuthentication() async {
@@ -76,14 +75,13 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.signInError(
             analyticsService: analyticsService,
             completion: { [weak self] in
-                self?.setOnboarding(false)
+                self?.setWelcomeOnboardingViewController(false)
             }
         )
         set(viewController, animated: false)
     }
 
     private var shouldSkipOnboarding: Bool {
-        !authenticationOnboardingService.isFeatureEnabled ||
         authenticationService.isSignedIn
     }
 }

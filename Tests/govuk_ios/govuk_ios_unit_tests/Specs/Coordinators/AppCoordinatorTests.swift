@@ -68,8 +68,6 @@ struct AppCoordinatorTests {
         //Second launch
         subject.start()
 
-        mockCoordinatorBuilder._receivedRelaunchCompletion?()
-
         #expect(!mockPreAuthCoordinator._startCalled)
     }
 

@@ -7,6 +7,7 @@ import UserNotifications
 import SecureStore
 import Firebase
 import FirebaseCrashlytics
+import FirebaseAppCheck
 
 extension Container {
     var activityService: Factory<ActivityServiceInterface> {
@@ -53,7 +54,8 @@ extension Container {
                 clients: [
                     FirebaseClient(
                         firebaseApp: FirebaseApp.self,
-                        firebaseAnalytics: Analytics.self
+                        firebaseAnalytics: Analytics.self,
+                        appAttestService: self.appAttestService()
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
@@ -79,14 +81,6 @@ extension Container {
                 appConfigServiceClient: self.appConfigServiceClient.resolve()
             )
         }.scope(.singleton)
-    }
-
-    var onboardingService: Factory<OnboardingServiceInterface> {
-        Factory(self) {
-            OnboardingService(
-                userDefaults: UserDefaults.standard
-            )
-        }
     }
 
     var topicsService: Factory<TopicsServiceInterface> {
@@ -126,12 +120,6 @@ extension Container {
             NotificationsOnboardingService(
                 userDefaults: UserDefaults.standard
             )
-        }
-    }
-
-    var authenticationOnboardingService: Factory<AuthenticationOnboardingServiceInterface> {
-        Factory(self) {
-            AuthenticationOnboardingService()
         }
     }
 
@@ -198,5 +186,20 @@ extension Container {
                 timer: TimerWrapper()
             )
         }.scope(.singleton)
+    }
+
+    var appAttestService: Factory<AppAttestServiceInterface> {
+        Factory(self) {
+            AppAttestService(
+                appCheckInterface: AppCheck.self,
+                providerFactory: self.govuKProviderFactory()
+            )
+        }.scope(.singleton)
+    }
+
+    var govuKProviderFactory: Factory<ProviderFactoryInterface> {
+        Factory(self) {
+            GovUKProviderFactory()
+        }
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-final class SignedOutViewModel: AuthenticationInfoViewModelInterface {
+final class SignedOutViewModel: InfoViewModelInterface {
     let analyticsService: AnalyticsServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private let completion: () -> Void
@@ -33,10 +33,16 @@ final class SignedOutViewModel: AuthenticationInfoViewModelInterface {
         String.signOut.localized("signedOutButtonTitle")
     }
 
-    var image: Image? {
-        authenticationService.isSignedIn ?
-        Image(systemName: "exclamationmark.circle") :
-        nil
+    var image: AnyView {
+        if authenticationService.isSignedIn {
+            AnyView(
+                InfoSystemImage(imageName: "exclamationmark.circle")
+            )
+        } else {
+            AnyView(
+                EmptyView()
+            )
+        }
     }
 
     var buttonViewModel: GOVUKButton.ButtonViewModel {
@@ -48,6 +54,14 @@ final class SignedOutViewModel: AuthenticationInfoViewModelInterface {
                 self.completion()
             }
         )
+    }
+
+    var showImageWhenCompact: Bool {
+        false
+    }
+
+    var subtitleFont: Font {
+        Font.govUK.body
     }
 
     var trackingName: String { "Signed Out" }

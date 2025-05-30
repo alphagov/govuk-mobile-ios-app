@@ -156,17 +156,6 @@ class CoordinatorBuilder {
         )
     }
 
-    func onboarding(navigationController: UINavigationController,
-                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
-        OnboardingCoordinator(
-            navigationController: navigationController,
-            onboardingService: container.onboardingService.resolve(),
-            analyticsService: container.onboardingAnalyticsService.resolve(),
-            appConfigService: container.appConfigService.resolve(),
-            dismissAction: dismissAction
-        )
-    }
-
     func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
         RecentActivityCoordinator(
             navigationController: navigationController,
@@ -285,12 +274,11 @@ class CoordinatorBuilder {
         )
     }
 
-    func authenticationOnboarding(navigationController: UINavigationController,
-                                  completionAction: @escaping () -> Void) -> BaseCoordinator {
-        AuthenticationOnboardingCoordinator(
+    func welcomeOnboarding(navigationController: UINavigationController,
+                           completionAction: @escaping () -> Void) -> BaseCoordinator {
+        WelcomeOnboardingCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
-            authenticationOnboardingService: container.authenticationOnboardingService.resolve(),
             onboardingAnalyticsService: container.onboardingAnalyticsService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,

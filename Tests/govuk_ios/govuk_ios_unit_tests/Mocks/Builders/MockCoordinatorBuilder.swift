@@ -90,19 +90,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         )
     }
 
-    var _stubbedOnboardingCoordinator: BaseCoordinator?
-    var _receivedOnboardingNavigationController: UINavigationController?
-    var _receivedOnboardingDismissAction: (() -> Void)?
-    override func onboarding(navigationController: UINavigationController,
-                             dismissAction: @escaping () -> Void) -> BaseCoordinator {
-        _receivedOnboardingNavigationController = navigationController
-        _receivedOnboardingDismissAction = dismissAction
-        return _stubbedOnboardingCoordinator ??
-        MockBaseCoordinator(
-            navigationController: .init()
-        )
-    }
-
     var _stubbedTopicCoordinator: MockBaseCoordinator?
     override func topicDetail(_ topic: Topic,
                               navigationController: UINavigationController) -> BaseCoordinator {
@@ -161,12 +148,12 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedNotificationSettingsCoordinator ?? MockBaseCoordinator()
     }
 
-    var _receivedAuthenticationOnboardingCompletion: (() -> Void)?
-    var _stubbedAuthenticationOnboardingCoordinator: MockBaseCoordinator?
-    override func authenticationOnboarding(navigationController: UINavigationController,
-                                           completionAction: @escaping () -> Void) -> BaseCoordinator {
-        _receivedAuthenticationOnboardingCompletion = completionAction
-        return _stubbedAuthenticationOnboardingCoordinator ?? MockBaseCoordinator()
+    var _receivedWelcomeOnboardingCompletion: (() -> Void)?
+    var _stubbedWelcomeOnboardingCoordinator: MockBaseCoordinator?
+    override func welcomeOnboarding(navigationController: UINavigationController,
+                                    completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedWelcomeOnboardingCompletion = completionAction
+        return _stubbedWelcomeOnboardingCoordinator ?? MockBaseCoordinator()
     }
 
     var _receivedAuthenticationCompletion: (() -> Void)?

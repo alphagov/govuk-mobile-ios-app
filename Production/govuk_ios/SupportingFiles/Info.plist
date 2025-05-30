@@ -6,6 +6,8 @@
 	<string>$(AUTHENTICATION_CLIENT_ID)</string>
 	<key>AUTHENTICATION_BASE_URL</key>
 	<string>$(AUTHENTICATION_BASE_URL)</string>
+	<key>TOKEN_BASE_URL</key>
+	<string>$(TOKEN_BASE_URL)</string>
 	<key>OneSignal_suppress_launch_urls</key>
 	<true/>
 	<key>BaseURL</key>

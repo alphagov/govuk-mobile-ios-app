@@ -3,18 +3,20 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-protocol AuthenticationInfoViewModelInterface {
+protocol InfoViewModelInterface {
     var analyticsService: AnalyticsServiceInterface { get }
     var title: String { get }
     var subtitle: String { get }
     var buttonTitle: String { get }
     var buttonViewModel: GOVUKButton.ButtonViewModel { get }
-    var image: Image? { get }
+    var image: AnyView { get }
     var trackingName: String { get }
     var trackingTitle: String { get }
+    var showImageWhenCompact: Bool { get }
+    var subtitleFont: Font { get }
 }
 
-extension AuthenticationInfoViewModelInterface {
+extension InfoViewModelInterface {
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }

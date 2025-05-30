@@ -6,14 +6,18 @@ import GOVKit
 struct FirebaseClient: AnalyticsClient {
     private let firebaseApp: FirebaseAppInterface.Type
     private let firebaseAnalytics: FirebaseAnalyticsInterface.Type
+    private let appAttestService: AppAttestServiceInterface
 
     init(firebaseApp: FirebaseAppInterface.Type,
-         firebaseAnalytics: FirebaseAnalyticsInterface.Type) {
+         firebaseAnalytics: FirebaseAnalyticsInterface.Type,
+         appAttestService: AppAttestServiceInterface) {
         self.firebaseApp = firebaseApp
         self.firebaseAnalytics = firebaseAnalytics
+        self.appAttestService = appAttestService
     }
 
     func launch() {
+        appAttestService.configure()
         firebaseApp.configure()
     }
 

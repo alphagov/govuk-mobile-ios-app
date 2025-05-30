@@ -3,6 +3,7 @@ import GOVKit
 import UIKit
 import AppAuth
 import Authentication
+import FirebaseAppCheck
 
 typealias AuthenticationResult = Result<Authentication.TokenResponse, AuthenticationError>
 typealias TokenRefreshResult = Result<TokenRefreshResponse, TokenRefreshError>
@@ -19,15 +20,18 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let appEnvironmentService: AppEnvironmentServiceInterface
     private let oidAuthService: OIDAuthorizationServiceWrapperInterface
     private let revokeTokenService: APIServiceClientInterface
+    private let appAttestService: AppAttestServiceInterface
 
     init(appEnvironmentService: AppEnvironmentServiceInterface,
          appAuthSession: AppAuthSessionWrapperInterface,
          oidAuthService: OIDAuthorizationServiceWrapperInterface,
-         revokeTokenServiceClient: APIServiceClientInterface) {
+         revokeTokenServiceClient: APIServiceClientInterface,
+         appAttestService: AppAttestServiceInterface) {
         self.appEnvironmentService = appEnvironmentService
         self.appAuthSession = appAuthSession
         self.oidAuthService = oidAuthService
         self.revokeTokenService = revokeTokenServiceClient
+        self.appAttestService = appAttestService
     }
 
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
@@ -45,10 +49,11 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 
     func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult {
+        let request = await tokenRequest(refreshToken: refreshToken)
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 oidAuthService.perform(
-                    tokenRequest(refreshToken: refreshToken)
+                    request
                 ) { [weak self] tokenResponse, _ in
                     guard let self = self else { return }
                     if let response = tokenResponse {
@@ -93,6 +98,8 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 
     private func loginSessionConfig() async -> LoginSessionConfiguration {
+        let token = (try? await appAttestService.token(forcingRefresh: false).token) ?? ""
+
         return await LoginSessionConfiguration(
             authorizationEndpoint: appEnvironmentService.authenticationAuthorizeURL,
             tokenEndpoint: appEnvironmentService.authenticationTokenURL,
@@ -101,15 +108,18 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             clientID: appEnvironmentService.authenticationClientId,
             prefersEphemeralWebSession: true,
             redirectURI: Constants.API.authenticationCallbackUri,
-            locale: .en
+            locale: .en,
+            tokenHeaders: ["x-attestation-token": token]
         )
     }
 
-    private func tokenRequest(refreshToken: String) -> OIDTokenRequest {
+    private func tokenRequest(refreshToken: String) async -> OIDTokenRequest {
         let oidServiceConfig = OIDServiceConfiguration(
             authorizationEndpoint: appEnvironmentService.authenticationAuthorizeURL,
             tokenEndpoint: appEnvironmentService.authenticationTokenURL
         )
+
+        let token = (try? await appAttestService.token(forcingRefresh: false).token) ?? ""
 
         return OIDTokenRequest(
             configuration: oidServiceConfig,
@@ -121,7 +131,8 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             scope: "openid email",
             refreshToken: refreshToken,
             codeVerifier: nil,
-            additionalParameters: nil
+            additionalParameters: nil,
+            additionalHeaders: ["x-attestation-token": token]
         )
     }
 

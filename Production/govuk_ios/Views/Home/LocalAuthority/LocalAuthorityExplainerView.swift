@@ -14,7 +14,7 @@ struct LocalAuthorityExplainerView: View {
             ScrollView {
                 VStack {
                     if verticalSizeClass != .compact {
-                        Image("onboarding_screen_1")
+                        Image("your_local_services")
                             .scaledToFit()
                             .frame(width: 290, height: 290)
                     }

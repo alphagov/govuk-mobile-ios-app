@@ -6,16 +6,15 @@ import GOVKit
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
 
-@MainActor
-class SignInErrorViewControllerSnapshotTests: SnapshotTestCase {
-
+class WelcomeOnboardingViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = SignInErrorViewModel(
+        let viewModel = WelcomeOnboardingViewModel(
             analyticsService: MockAnalyticsService(),
-            completion: { })
-        let signInErrorView = InfoView(viewModel: viewModel)
+            completeAction: { }
+        )
+        let welcomeOnboardingView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
-            rootView: signInErrorView,
+            rootView: welcomeOnboardingView,
             statusBarStyle: .darkContent
         )
         VerifySnapshotInNavigationController(
@@ -26,12 +25,13 @@ class SignInErrorViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = SignInErrorViewModel(
+        let viewModel = WelcomeOnboardingViewModel(
             analyticsService: MockAnalyticsService(),
-            completion: { })
-        let signInErrorView = InfoView(viewModel: viewModel)
+            completeAction: { }
+        )
+        let welcomeOnboardingView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
-            rootView: signInErrorView,
+            rootView: welcomeOnboardingView,
             statusBarStyle: .darkContent
         )
         VerifySnapshotInNavigationController(
@@ -40,5 +40,4 @@ class SignInErrorViewControllerSnapshotTests: SnapshotTestCase {
             prefersLargeTitles: true
         )
     }
-
 }

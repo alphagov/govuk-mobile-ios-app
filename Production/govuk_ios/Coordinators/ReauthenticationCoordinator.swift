@@ -50,7 +50,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
 
     private func handleReauthFailure() {
         authenticationService.signOut()
-        let coordinator = coordinatorBuilder.authenticationOnboarding(
+        let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
             newUserAction: newUserAction,
             completionAction: completionAction

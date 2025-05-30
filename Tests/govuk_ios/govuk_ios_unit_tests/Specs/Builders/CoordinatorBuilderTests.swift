@@ -112,18 +112,6 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func onboarding_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.onboarding(
-            navigationController: mockNavigationController,
-            dismissAction: { }
-        )
-
-        #expect(coordinator is OnboardingCoordinator)
-    }
-
-    @Test
     func recentActivity_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
@@ -229,16 +217,16 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func authenticationOnboarding_returnsExpectedResult() {
+    func welcomeOnboarding_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
-        let coordinator = subject.authenticationOnboarding(
+        let coordinator = subject.welcomeOnboarding(
             navigationController: mockNavigationController,
             newUserAction: nil,
             completionAction: { }
         )
 
-        #expect(coordinator is AuthenticationOnboardingCoordinator)
+        #expect(coordinator is WelcomeOnboardingCoordinator)
     }
 
     @Test

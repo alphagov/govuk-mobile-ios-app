@@ -81,14 +81,6 @@ extension Container {
         }.scope(.singleton)
     }
 
-    var onboardingService: Factory<OnboardingServiceInterface> {
-        Factory(self) {
-            OnboardingService(
-                userDefaults: UserDefaults.standard
-            )
-        }
-    }
-
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(
@@ -126,12 +118,6 @@ extension Container {
             NotificationsOnboardingService(
                 userDefaults: UserDefaults.standard
             )
-        }
-    }
-
-    var authenticationOnboardingService: Factory<AuthenticationOnboardingServiceInterface> {
-        Factory(self) {
-            AuthenticationOnboardingService()
         }
     }
 

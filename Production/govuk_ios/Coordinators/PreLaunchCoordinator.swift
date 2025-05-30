@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class InitialLaunchCoordinator: BaseCoordinator {
+class PreAuthCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let completion: () -> Void
 
@@ -21,7 +21,7 @@ class InitialLaunchCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
             completion: { [weak self] response in
-                self?.startConsentCheck(
+                self?.startNotificationConsentCheck(
                     url: url,
                     launchResponse: response
                 )
@@ -30,8 +30,8 @@ class InitialLaunchCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
-    private func startConsentCheck(url: URL?,
-                                   launchResponse: AppLaunchResponse) {
+    private func startNotificationConsentCheck(url: URL?,
+                                               launchResponse: AppLaunchResponse) {
         let coordinator = coordinatorBuilder.notificationConsent(
             navigationController: root,
             consentResult: launchResponse.notificationConsentResult,
@@ -81,78 +81,8 @@ class InitialLaunchCoordinator: BaseCoordinator {
             navigationController: root,
             launchResponse: launchResponse,
             dismissAction: { [weak self] in
-                self?.startAnalyticsConsent(url: url)
+                self?.completion()
             }
-        )
-        start(coordinator)
-    }
-
-    private func startAnalyticsConsent(url: URL?) {
-        let coordinator = coordinatorBuilder.analyticsConsent(
-            navigationController: root,
-            dismissAction: { [weak self] in
-                self?.startOnboarding(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startOnboarding(url: URL?) {
-        let coordinator = coordinatorBuilder.onboarding(
-            navigationController: root,
-            dismissAction: { [weak self] in
-                self?.startReauthentication(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startReauthentication(url: URL?) {
-        let coordinator = coordinatorBuilder.reauthentication(
-            navigationController: root,
-            completionAction: { [weak self] in
-                self?.startAuthenticationOnboardingCoordinator(url: url)
-            },
-            newUserAction: { }
-        )
-        start(coordinator, url: url)
-    }
-
-    private func startAuthenticationOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.authenticationOnboarding(
-            navigationController: root,
-            newUserAction: { },
-            completionAction: { [weak self] in
-                self?.startLocalAuthenticationOnboardingCoordinator(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startLocalAuthenticationOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.localAuthenticationOnboarding(
-            navigationController: root,
-            completionAction: { [weak self] in
-                self?.startTopicOnboardingCoordinator(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startTopicOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.topicOnboarding(
-            navigationController: root,
-            didDismissAction: { [weak self] in
-                self?.startNotificationOnboardingCoordinator(url: url)
-            }
-        )
-        start(coordinator)
-    }
-
-    private func startNotificationOnboardingCoordinator(url: URL?) {
-        let coordinator = coordinatorBuilder.notificationOnboarding(
-            navigationController: root,
-            completion: completion
         )
         start(coordinator)
     }

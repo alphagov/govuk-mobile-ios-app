@@ -1,38 +1,40 @@
 import Foundation
 import UIKit
 import Onboarding
+import GOVKit
 
 class AuthenticationOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     private let authenticationService: AuthenticationServiceInterface
     private let authenticationOnboardingService: AuthenticationOnboardingServiceInterface
-    private let analyticsService: OnboardingAnalyticsService
+    private let onboardingAnalyticsService: OnboardingAnalyticsService
+    private let analyticsService: AnalyticsServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
+    private let viewControllerBuilder: ViewControllerBuilder
     private let completionAction: () -> Void
-    private let newUserAction: (() -> Void)?
 
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
          authenticationOnboardingService: AuthenticationOnboardingServiceInterface,
-         analyticsService: OnboardingAnalyticsService,
+         onboardingAnalyticsService: OnboardingAnalyticsService,
+         analyticsService: AnalyticsServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
-         completionAction: @escaping () -> Void,
-         newUserAction: (() -> Void)?) {
+         viewControllerBuilder: ViewControllerBuilder,
+         completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
         self.authenticationOnboardingService = authenticationOnboardingService
+        self.onboardingAnalyticsService = onboardingAnalyticsService
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
+        self.viewControllerBuilder = viewControllerBuilder
         self.completionAction = completionAction
-        self.newUserAction = newUserAction
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        guard !shouldSkipOnboarding else {
-            finishCoordination()
-            return
-        }
+        guard !shouldSkipOnboarding
+        else { return completionAction() }
 
         setOnboarding()
     }
@@ -40,10 +42,10 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
     private func setOnboarding(_ animated: Bool = true) {
         let onboardingModule = Onboarding(
             slideProvider: authenticationOnboardingService,
-            analyticsService: analyticsService,
+            analyticsService: onboardingAnalyticsService,
             completeAction: { [weak self] in
                 Task {
-                    await self?.authenticateAction()
+                    await self?.startAuthentication()
                 }
             },
             dismissAction: { }
@@ -54,33 +56,30 @@ class AuthenticationOnboardingCoordinator: BaseCoordinator {
         )
     }
 
-    private func finishCoordination() {
-        DispatchQueue.main.async {
-            self.completionAction()
-        }
-    }
-
-    private func authenticateAction() async {
+    private func startAuthentication() async {
         let authenticationCoordinator = coordinatorBuilder.authentication(
             navigationController: navigationController,
             completionAction: completionAction,
-            newUserAction: newUserAction,
             handleError: showError
         )
         start(authenticationCoordinator)
     }
 
-    func showError(_ error: AuthenticationError) {
+    private func showError(_ error: AuthenticationError) {
         guard case .loginFlow(.userCancelled) = error else {
-            let errorCoordinator = coordinatorBuilder.signInError(
-                navigationController: root,
-                completion: { [weak self] in
-                    self?.setOnboarding(false)
-                }
-            )
-            start(errorCoordinator)
+            setSignInError()
             return
         }
+    }
+
+    private func setSignInError() {
+        let viewController = viewControllerBuilder.signInError(
+            analyticsService: analyticsService,
+            completion: { [weak self] in
+                self?.setOnboarding(false)
+            }
+        )
+        set(viewController, animated: false)
     }
 
     private var shouldSkipOnboarding: Bool {

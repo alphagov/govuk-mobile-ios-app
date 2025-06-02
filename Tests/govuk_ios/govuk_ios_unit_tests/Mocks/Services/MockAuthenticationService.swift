@@ -15,6 +15,11 @@ class MockAuthenticationService: AuthenticationServiceInterface {
         _stubbedIsSignedIn
     }
 
+    var _stubbedIsReauth: Bool = false
+    var isReauth: Bool {
+        _stubbedIsReauth
+    }
+
     func signOut() {
         _stubbedIsSignedIn = false
     }

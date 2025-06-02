@@ -21,9 +21,23 @@ class PreAuthCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.launch(
             navigationController: root,
             completion: { [weak self] response in
-                self?.startNotificationConsentCheck(
+                self?.startAnalyticsConsent(
                     url: url,
                     launchResponse: response
+                )
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startAnalyticsConsent(url: URL?,
+                                       launchResponse: AppLaunchResponse) {
+        let coordinator = coordinatorBuilder.analyticsConsent(
+            navigationController: root,
+            dismissAction: { [weak self] in
+                self?.startNotificationConsentCheck(
+                    url: url,
+                    launchResponse: launchResponse
                 )
             }
         )

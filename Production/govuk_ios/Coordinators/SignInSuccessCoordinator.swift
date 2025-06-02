@@ -18,7 +18,7 @@ final class SignInSuccessCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         guard !authenticationService.isReauth else {
-            self.completion()
+            completion()
             return
         }
         let viewModel = SignInSuccessViewModel(

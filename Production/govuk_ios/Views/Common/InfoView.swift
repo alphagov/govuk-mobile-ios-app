@@ -38,8 +38,7 @@ struct InfoView: View {
 
     private var infoView: some View {
         VStack {
-            if verticalSizeClass == .regular || (verticalSizeClass == .compact &&
-                                                 viewModel.showImageWhenCompact) {
+            if verticalSizeClass != .compact || viewModel.showImageWhenCompact {
                 viewModel.image
                     .accessibilityHidden(true)
             }

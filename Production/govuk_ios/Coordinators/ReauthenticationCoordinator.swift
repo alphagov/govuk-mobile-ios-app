@@ -53,6 +53,7 @@ class ReauthenticationCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
             newUserAction: newUserAction,
+            analyticsAction: { },
             completionAction: completionAction
         )
         start(coordinator)

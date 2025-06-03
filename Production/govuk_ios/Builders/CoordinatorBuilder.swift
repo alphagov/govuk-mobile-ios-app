@@ -113,10 +113,12 @@ class CoordinatorBuilder {
     }
 
     func analyticsConsent(navigationController: UINavigationController,
+                          displayInModal: Bool,
                           dismissAction: @escaping () -> Void) -> BaseCoordinator {
         AnalyticsConsentCoordinator(
             navigationController: navigationController,
             analyticsService: container.analyticsService.resolve(),
+            displayInModal: displayInModal,
             dismissAction: dismissAction
         )
     }
@@ -249,12 +251,14 @@ class CoordinatorBuilder {
 
     func welcomeOnboarding(navigationController: UINavigationController,
                            newUserAction: (() -> Void)?,
+                           analyticsAction: @escaping () -> Void,
                            completionAction: @escaping () -> Void) -> BaseCoordinator {
         WelcomeOnboardingCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
+            analyticsAction: analyticsAction,
             completionAction: completionAction,
             newUserAction: newUserAction
         )

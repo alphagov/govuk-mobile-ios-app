@@ -30,6 +30,7 @@ class NewUserOnboardingCoordinator: BaseCoordinator {
     private func startAnalyticsConsent(url: URL?) {
         let coordinator = coordinatorBuilder.analyticsConsent(
             navigationController: root,
+            displayInModal: false,
             dismissAction: { [weak self] in
                 self?.startTopicOnboardingCoordinator(url: url)
             }

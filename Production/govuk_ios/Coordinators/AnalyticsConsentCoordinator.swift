@@ -5,12 +5,15 @@ import GOVKit
 
 class AnalyticsConsentCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
+    private let displayInModal: Bool
     private let dismissAction: () -> Void
 
     init(navigationController: UINavigationController,
          analyticsService: AnalyticsServiceInterface,
+         displayInModal: Bool,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
+        self.displayInModal = displayInModal
         self.dismissAction = dismissAction
         super.init(navigationController: navigationController)
     }
@@ -22,9 +25,10 @@ class AnalyticsConsentCoordinator: BaseCoordinator {
     }
 
     private func setAnalyticsConsent() {
+        let dismissAction = dismissAction
         let viewModel = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
-            dismissAction: dismissAction
+            dismissAction: { dismissAction() }
         )
         let containerView = AnalyticsConsentContainerView(
             viewModel: viewModel
@@ -32,6 +36,11 @@ class AnalyticsConsentCoordinator: BaseCoordinator {
         let viewController = UIHostingController(
             rootView: containerView
         )
-        set(viewController)
+        if displayInModal {
+            viewController.isModalInPresentation = true
+            root.present(viewController, animated: true)
+        } else {
+            set(viewController)
+        }
     }
 }

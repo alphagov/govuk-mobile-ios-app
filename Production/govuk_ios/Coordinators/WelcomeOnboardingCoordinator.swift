@@ -8,6 +8,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let authenticationService: AuthenticationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
+    private let analyticsAction: () -> Void
     private let completionAction: () -> Void
     private let newUserAction: (() -> Void)?
 
@@ -15,12 +16,14 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
          authenticationService: AuthenticationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
+         analyticsAction: @escaping () -> Void,
          completionAction: @escaping () -> Void,
          newUserAction: (() -> Void)?) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
+        self.analyticsAction = analyticsAction
         self.completionAction = completionAction
         self.newUserAction = newUserAction
         super.init(navigationController: navigationController)
@@ -33,6 +36,11 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
         }
 
         setWelcomeOnboardingViewController()
+        presentAnalyticsConsentViewController()
+    }
+
+    private func presentAnalyticsConsentViewController() {
+        analyticsAction()
     }
 
     private func setWelcomeOnboardingViewController(_ animated: Bool = true) {

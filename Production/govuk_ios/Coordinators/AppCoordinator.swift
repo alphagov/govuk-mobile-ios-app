@@ -127,7 +127,12 @@ class AppCoordinator: BaseCoordinator {
                 self?.startReauthentication(
                     url: url,
                     completionAction: { [weak self] in
-                        self?.startAnalyticsConsent(url: url)
+                        self?.startWelcomeOnboardingCoordinator(
+                            url: url,
+                            newUserAction: { [weak self] in
+                                self?.startNewUserOnboardingCoordinator(url: nil)
+                            }
+                        )
                     }
                 )
             }
@@ -140,8 +145,23 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
             newUserAction: newUserAction,
+            analyticsAction: { [weak self] in
+                self?.startAnalyticsConsent(url: url)
+            },
             completionAction: { [weak self] in
                 self?.startLocalAuthenticationOnboardingCoordinator(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startAnalyticsConsent(url: URL?) {
+        let coordinator = coordinatorBuilder.analyticsConsent(
+            navigationController: root,
+            displayInModal: true,
+            dismissAction: { [weak self] in
+                self?.finish()
+                self?.root.dismiss(animated: true)
             }
         )
         start(coordinator)
@@ -159,19 +179,6 @@ class AppCoordinator: BaseCoordinator {
             }
         )
         start(coordinator, url: url)
-    }
-
-    private func startAnalyticsConsent(url: URL?) {
-        let coordinator = coordinatorBuilder.analyticsConsent(
-            navigationController: root,
-            dismissAction: { [weak self] in
-                self?.startWelcomeOnboardingCoordinator(
-                    url: url,
-                    newUserAction: nil
-                )
-            }
-        )
-        start(coordinator)
     }
 
     private func startTopicOnboardingCoordinator(url: URL?) {

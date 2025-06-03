@@ -55,6 +55,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _receivedAnalyticsConsentNavigationController: UINavigationController?
     var _receivedAnalyticsConsentDismissAction: (() -> Void)?
     override func analyticsConsent(navigationController: UINavigationController,
+                                   displayInModal: Bool,
                                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedAnalyticsConsentNavigationController = navigationController
         _receivedAnalyticsConsentDismissAction = dismissAction
@@ -126,6 +127,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _stubbedWelcomeOnboardingCoordinator: MockBaseCoordinator?
     override func welcomeOnboarding(navigationController: UINavigationController,
                                     newUserAction: (() -> Void)?,
+                                    analyticsAction: @escaping () -> Void,
                                     completionAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedWelcomeOnboardingCompletion = completionAction
         return _stubbedWelcomeOnboardingCoordinator ?? MockBaseCoordinator()

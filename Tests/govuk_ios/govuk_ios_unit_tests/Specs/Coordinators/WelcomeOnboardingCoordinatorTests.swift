@@ -16,6 +16,7 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
+            analyticsAction: { },
             completionAction: { },
             newUserAction: nil
         )
@@ -36,6 +37,7 @@ class WelcomeOnboardingCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 analyticsService: MockAnalyticsService(),
                 coordinatorBuilder: mockCoordinatorBuilder,
+                analyticsAction: { },
                 completionAction: { continuation.resume(returning: true) },
                 newUserAction: nil
             )
@@ -56,6 +58,7 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
+            analyticsAction: { },
             completionAction: { },
             newUserAction: nil
         )
@@ -74,6 +77,7 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
+            analyticsAction: { },
             completionAction: { },
             newUserAction: nil
         )
@@ -92,6 +96,7 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
+            analyticsAction: { },
             completionAction: { },
             newUserAction: nil
         )

@@ -31,7 +31,7 @@ struct SafariCoordinatorTests {
 
     @Test
     @MainActor
-    func start_showExpectedURL() throws {
+    func start_externalBrowserDisabled_presentsSafariViewController() throws {
         let expectedURL = URL.arrange
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let subject = SafariCoordinator(
@@ -48,7 +48,7 @@ struct SafariCoordinatorTests {
 
     @Test
     @MainActor
-    func start_openExpectedURL() throws {
+    func start_externalBrowserEnabled_opensURL() throws {
         let expectedURL = URL.arrange
         let mockConfigService = MockAppConfigService()
         mockConfigService.features = [.externalBrowser]

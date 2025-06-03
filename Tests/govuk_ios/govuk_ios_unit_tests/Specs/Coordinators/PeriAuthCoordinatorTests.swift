@@ -15,9 +15,7 @@ struct PeriAuthCoordinatorTests {
         let subject = PeriAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: MockNavigationController(),
-            completion: {
-
-            }
+            completion: { }
         )
 
         let stubbedReauthenticationCoordinator = MockBaseCoordinator()
@@ -33,9 +31,7 @@ struct PeriAuthCoordinatorTests {
         let subject = PeriAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: MockNavigationController(),
-            completion: {
-
-            }
+            completion: { }
         )
 
         let stubbedReauthenticationCoordinator = MockBaseCoordinator()
@@ -57,9 +53,7 @@ struct PeriAuthCoordinatorTests {
         let subject = PeriAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: MockNavigationController(),
-            completion: {
-
-            }
+            completion: { }
         )
 
         let stubbedReauthenticationCoordinator = MockBaseCoordinator()

@@ -14,10 +14,10 @@ class PostAuthCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        startTopicOnboardingCoordinator(url: url)
+        startTopicOnboarding(url: url)
     }
 
-    private func startTopicOnboardingCoordinator(url: URL?) {
+    private func startTopicOnboarding(url: URL?) {
         let coordinator = coordinatorBuilder.topicOnboarding(
             navigationController: root,
             didDismissAction: { [weak self] in

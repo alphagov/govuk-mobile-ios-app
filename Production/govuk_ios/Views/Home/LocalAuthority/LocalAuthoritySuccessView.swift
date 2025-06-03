@@ -11,10 +11,10 @@ struct LocalAuthoritySuccessView: View {
     var body: some View {
         VStack {
             ScrollView {
-                if let parentItem = viewModel.localAuthorityItem.parent {
-                    LocalAuthoritySuccessTwoTier(model: <#T##LocalAuthorityItem#>)
+                if viewModel.localAuthorityItem.parent != nil {
+                    LocalAuthoritySuccessTwoTier(model: viewModel.localAuthorityItem)
                 }
-
+                LocalAuthoritySuccessUnitaryView(model: viewModel.localAuthorityItem)
             }
             PrimaryButtonView(
                 viewModel: viewModel.primaryButtonViewModel
@@ -43,4 +43,3 @@ extension LocalAuthoritySuccessView: TrackableScreen {
     var trackingTitle: String? { "Ask Andrew" }
     var trackingName: String { "Ask Andrew" }
 }
-

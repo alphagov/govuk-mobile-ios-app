@@ -6,11 +6,11 @@ import UIComponents
 class LocalAuthoritySuccessViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     private let primaryButtonTitle = "completion"
-    let localAuthorityItem: LocalAuthorityItem
+    let localAuthorityItem: Authority
     let completion: () -> Void
 
     init(analyticsService: AnalyticsServiceInterface,
-         localAuthorityItem: LocalAuthorityItem,
+         localAuthorityItem: Authority,
          completion: @escaping () -> Void) {
         self.localAuthorityItem = localAuthorityItem
         self.analyticsService = analyticsService

@@ -10,7 +10,7 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
     private let ambiguousAuthorities: AmbiguousAuthorities
     let localAuthorities: [Authority]
     @Published var selectedAuthority: Authority?
-
+    private let navigateToSuccessView: (Authority) -> Void
     private let selectAddressAction: () -> Void
     let dismissAction: () -> Void
     let title = String.localAuthority.localized("ambiguousLocalAuthorityViewTitle")
@@ -26,12 +26,14 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
          localAuthorityService: LocalAuthorityServiceInterface,
          ambiguousAuthorities: AmbiguousAuthorities,
          postCode: String,
+         navigateToSuccessView: @escaping (Authority) -> Void,
          selectAddressAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
         self.ambiguousAuthorities = ambiguousAuthorities
         self.postCode = postCode
+        self.navigateToSuccessView = navigateToSuccessView
         self.selectAddressAction = selectAddressAction
         self.dismissAction = dismissAction
         localAuthorities = ambiguousAuthorities.authorities
@@ -49,7 +51,7 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
                 }
                 self?.trackNavigationEvent(buttonTitle)
                 self?.localAuthorityService.saveLocalAuthority(selectedAuthority)
-                self?.dismissAction()
+                self?.navigateToSuccessView(selectedAuthority)
             }
         )
     }

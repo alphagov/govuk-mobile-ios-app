@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LocalAuthoritySuccessTwoTier: View {
-    let model: LocalAuthorityItem
+    let model: Authority
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
             Text("Services in your area are provided by 2 local councils")
@@ -13,7 +13,7 @@ struct LocalAuthoritySuccessTwoTier: View {
             Text("Your local councils are:")
             Text("\(model.parent?.name)")
             Text("\(model.name)")
-            Text("You can now access your local councils’ websites from the bottom of the app home page")
+            Text("You can now access")
             Spacer()
         }.padding()
     }

@@ -132,6 +132,7 @@ class ViewControllerBuilder {
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
         postCode: String,
+        navigateToSuccessView: @escaping (Authority) -> Void,
         selectAddressAction: @escaping () -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
@@ -140,6 +141,7 @@ class ViewControllerBuilder {
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
             postCode: postCode,
+            navigateToSuccessView: navigateToSuccessView,
             selectAddressAction: selectAddressAction,
             dismissAction: dismissAction
         )
@@ -153,13 +155,16 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
+        navigateToSuccessView: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = AmbiguousAddressSelectionViewModel(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
-            dismissAction: dismissAction)
+            navigateToSuccessView: navigateToSuccessView,
+            dismissAction: dismissAction
+        )
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel
         )
@@ -250,9 +255,11 @@ class ViewControllerBuilder {
     @MainActor
     func localAuthoritySuccessScreen(
         analyticsService: AnalyticsServiceInterface,
+        localAuthorityItem: Authority,
         completion: @escaping () -> Void) -> UIViewController {
             let viewModel = LocalAuthoritySuccessViewModel(
                 analyticsService: analyticsService,
+                localAuthorityItem: localAuthorityItem,
                 completion: completion
             )
             let view = LocalAuthoritySuccessView(

@@ -14,13 +14,11 @@ struct SafariCoordinatorTests {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedSafariViewController = expectedViewController
-        let mockConfigService = MockAppConfigService()
-        mockConfigService.features = []
         let mockNavigationController = MockNavigationController()
         let subject = SafariCoordinator(
             navigationController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,
-            configService: mockConfigService,
+            configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
             url: .arrange
         )
@@ -36,12 +34,10 @@ struct SafariCoordinatorTests {
     func start_showExpectedURL() throws {
         let expectedURL = URL.arrange
         let mockViewControllerBuilder = MockViewControllerBuilder()
-        let mockConfigService = MockAppConfigService()
-        mockConfigService.features = []
         let subject = SafariCoordinator(
             navigationController: MockNavigationController(),
             viewControllerBuilder: mockViewControllerBuilder,
-            configService: mockConfigService,
+            configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
             url: expectedURL
         )

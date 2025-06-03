@@ -248,6 +248,23 @@ class ViewControllerBuilder {
     }
 
     @MainActor
+    func localAuthoritySuccessScreen(
+        analyticsService: AnalyticsServiceInterface,
+        completion: @escaping () -> Void) -> UIViewController {
+            let viewModel = LocalAuthoritySuccessViewModel(
+                analyticsService: analyticsService,
+                completion: completion
+            )
+            let view = LocalAuthoritySuccessView(
+                viewModel: viewModel
+            )
+            let viewController = HostingViewController(
+                rootView: view
+            )
+            return viewController
+        }
+
+    @MainActor
     // swiftlint:disable:next function_parameter_count
     func topicDetail(topic: DisplayableTopic,
                      topicsService: TopicsServiceInterface,

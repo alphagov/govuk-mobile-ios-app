@@ -53,7 +53,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
                 self?.navigateToAddressView(localAuthorities: localAuthorities)
             },
             dismissAction: { [weak self] in
-                self?.dismissModal()
+              //  self?.dismissModal()
             }
         )
         push(viewController, animated: true)
@@ -69,6 +69,15 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
             }
         )
         push(viewController, animated: true)
+    }
+
+    private func navigatoToConfirmationWindow(localAuthority: LocalAuthorityItem) {
+        let viewController = viewControllerBuilder.localAuthoritySuccessScreen(
+            analyticsService: analyticsService,
+            completion: { [weak self] in
+                print("self")
+            }
+        )
     }
 
     private func dismissModal() {

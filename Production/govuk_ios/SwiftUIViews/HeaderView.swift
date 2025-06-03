@@ -15,7 +15,7 @@ struct HeaderView: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(Font.govUK.title1)
+                .font(Font.govUK.largeTitleBold)
                 .multilineTextAlignment(.leading)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityLabel(Text(title))

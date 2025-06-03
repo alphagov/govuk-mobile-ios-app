@@ -21,13 +21,13 @@ class PeriAuthCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.reauthentication(
             navigationController: root,
             completionAction: { [weak self] in
-                self?.startAuthenticationOnboardingCoordinator(url: url)
+                self?.startWelcomeOnboarding(url: url)
             }
         )
         start(coordinator, url: url)
     }
 
-    private func startAuthenticationOnboardingCoordinator(url: URL?) {
+    private func startWelcomeOnboarding(url: URL?) {
         let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
             completionAction: { [weak self] in

@@ -32,6 +32,28 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
+    func periauth_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.periauth(
+            navigationController: MockNavigationController(),
+            completion: { }
+        )
+
+        #expect(coordinator is PeriAuthCoordinator)
+    }
+
+    @Test
+    func postauth_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.postauth(
+            navigationController: MockNavigationController(),
+            completion: { }
+        )
+
+        #expect(coordinator is PostAuthCoordinator)
+    }
+
+    @Test
     func settings_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.settings

@@ -292,6 +292,7 @@ class CoordinatorBuilder {
                         handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         AuthenticationCoordinator(
             navigationController: navigationController,
+            coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             completionAction: completionAction,
@@ -341,6 +342,17 @@ class CoordinatorBuilder {
 //            completion: completion
 //        )
 //    }
+
+    func signInSuccess(navigationController: UINavigationController,
+                       completion: @escaping () -> Void) -> BaseCoordinator {
+        SignInSuccessCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            authenticationService: container.authenticationService.resolve(),
+            completion: completion
+        )
+    }
+
 
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(

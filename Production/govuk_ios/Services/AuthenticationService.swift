@@ -10,6 +10,7 @@ protocol AuthenticationServiceInterface {
     var accessToken: String? { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
+    var isReauth: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult
     func signOut()
@@ -32,6 +33,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
+    private(set) var isReauth: Bool = false
 
     var userEmail: String? {
         get async {
@@ -62,6 +64,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         let result = await authenticationServiceClient.performAuthenticationFlow(window: window)
         switch result {
         case .success(let tokenResponse):
+            isReauth = false
             setTokens(
                 refreshToken: tokenResponse.refreshToken,
                 idToken: tokenResponse.idToken,
@@ -125,6 +128,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         )
         switch result {
         case .success(let tokenResponse):
+            isReauth = true
             setTokens(
                 refreshToken: decryptedRefreshToken,
                 idToken: tokenResponse.idToken,

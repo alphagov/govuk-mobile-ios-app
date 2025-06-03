@@ -4,6 +4,7 @@ import Testing
 import SafariServices
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @Suite
 struct SafariCoordinatorTests {
@@ -13,10 +14,14 @@ struct SafariCoordinatorTests {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedSafariViewController = expectedViewController
+        let mockConfigService = MockAppConfigService()
+        mockConfigService.features = []
         let mockNavigationController = MockNavigationController()
         let subject = SafariCoordinator(
             navigationController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,
+            configService: mockConfigService,
+            urlOpener: MockURLOpener(),
             url: .arrange
         )
         subject.start()
@@ -31,13 +36,37 @@ struct SafariCoordinatorTests {
     func start_showExpectedURL() throws {
         let expectedURL = URL.arrange
         let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockConfigService = MockAppConfigService()
+        mockConfigService.features = []
         let subject = SafariCoordinator(
             navigationController: MockNavigationController(),
             viewControllerBuilder: mockViewControllerBuilder,
+            configService: mockConfigService,
+            urlOpener: MockURLOpener(),
             url: expectedURL
         )
         subject.start()
 
         #expect(mockViewControllerBuilder._receivedSafariUrl == expectedURL)
+    }
+
+    @Test
+    @MainActor
+    func start_openExpectedURL() throws {
+        let expectedURL = URL.arrange
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockConfigService = MockAppConfigService()
+        mockConfigService.features = [.externalBrowser]
+        let mockURLOpener = MockURLOpener()
+        let subject = SafariCoordinator(
+            navigationController: MockNavigationController(),
+            viewControllerBuilder: mockViewControllerBuilder,
+            configService: mockConfigService,
+            urlOpener: mockURLOpener,
+            url: expectedURL
+        )
+        subject.start()
+
+        #expect(mockURLOpener._receivedOpenIfPossibleUrl == expectedURL)
     }
 }

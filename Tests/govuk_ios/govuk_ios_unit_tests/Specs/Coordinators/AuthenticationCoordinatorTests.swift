@@ -6,8 +6,9 @@ import Authentication
 @testable import govuk_ios
 
 @Suite
+@MainActor
 class AuthenticationCoordinatorTests {
-    @Test @MainActor
+    @Test
     func start_biometricsEnrolled_shouldEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -24,6 +25,7 @@ class AuthenticationCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) },
@@ -36,7 +38,7 @@ class AuthenticationCoordinatorTests {
         #expect(completion)
     }
 
-    @Test @MainActor
+    @Test
     func start_onboardingFlowNotSeen_shouldntEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -53,6 +55,7 @@ class AuthenticationCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) },
@@ -65,7 +68,7 @@ class AuthenticationCoordinatorTests {
         #expect(completion)
     }
 
-    @Test @MainActor
+    @Test
     func start_localAuthenticationEnabled_biometricsEnrolled_shouldEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -82,6 +85,7 @@ class AuthenticationCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) },
@@ -94,7 +98,7 @@ class AuthenticationCoordinatorTests {
         #expect(completion)
     }
 
-    @Test @MainActor
+    @Test
     func start_localAuthenticationDisabled_shouldntEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -111,6 +115,7 @@ class AuthenticationCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) },
@@ -123,7 +128,7 @@ class AuthenticationCoordinatorTests {
         #expect(completion)
     }
 
-    @Test @MainActor
+    @Test
     func start_passcodeEnrolled_shouldEncryptToken_callsCompletion() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -141,6 +146,7 @@ class AuthenticationCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) },
@@ -153,7 +159,7 @@ class AuthenticationCoordinatorTests {
         #expect(completion)
     }
 
-    @Test @MainActor
+    @Test
     func authenticationFailure_callsHandleError() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -171,6 +177,7 @@ class AuthenticationCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) },

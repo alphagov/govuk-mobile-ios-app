@@ -10,6 +10,7 @@ import Authentication
 class AuthenticationCoordinatorTests {
     @Test
     func start_biometricsEnrolled_shouldEncryptToken_callsCompletion() async {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
@@ -22,24 +23,64 @@ class AuthenticationCoordinatorTests {
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-        let completion = await withCheckedContinuation { continuation in
+        await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) },
+                completionAction: { },
                 handleError: { _ in }
             )
             sut.start(url: nil)
+            mockCoordinatorBuilder._signInSuccessCallAction = {
+                continuation.resume()
+            }
         }
 
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
-        #expect(completion)
     }
 
     @Test
-    func start_onboardingFlowNotSeen_shouldntEncryptToken_callsCompletion() async {
+    func start_signinSuccess_startsSignInSuccess() async {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockSignInSuccessCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: false)
+        )
+        let newWindow = UIWindow(frame: UIScreen.main.bounds)
+        newWindow.rootViewController = mockNavigationController
+        newWindow.makeKeyAndVisible()
+        await withCheckedContinuation { continuation in
+            let sut = AuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
+                authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                completionAction: { },
+                handleError: { _ in }
+            )
+            sut.start(url: nil)
+            mockCoordinatorBuilder._signInSuccessCallAction = {
+                continuation.resume()
+            }
+        }
+
+        #expect(mockSignInSuccessCoordinator._startCalled)
+    }
+
+    @Test
+    func signinSuccessCompletion_completesCoordinator() async {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockSignInCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInCoordinator
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
@@ -55,21 +96,24 @@ class AuthenticationCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 completionAction: { continuation.resume(returning: true) },
                 handleError: { _ in }
             )
             sut.start(url: nil)
+            mockCoordinatorBuilder._signInSuccessCallAction = {
+                mockCoordinatorBuilder._receivedSignInSuccessCompletion?()
+            }
         }
 
-        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(completion)
     }
 
     @Test
-    func start_localAuthenticationEnabled_biometricsEnrolled_shouldEncryptToken_callsCompletion() async {
+    func start_localAuthenticationEnabled_biometricsEnrolled_shouldEncryptToken_encryptsRefreshToken() async {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
@@ -82,28 +126,30 @@ class AuthenticationCoordinatorTests {
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-        let completion = await withCheckedContinuation { continuation in
+        await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) },
+                completionAction: { },
                 handleError: { _ in }
             )
             sut.start(url: nil)
+            mockCoordinatorBuilder._signInSuccessCallAction = {
+                continuation.resume()
+            }
         }
 
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
-        #expect(completion)
     }
 
     @Test
-    func start_localAuthenticationDisabled_shouldntEncryptToken_callsCompletion() async {
+    func start_localAuthenticationDisabled_shouldntEncryptToken_doesntEncryptRefreshToken() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController =  MockNavigationController()
-        mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(
@@ -112,51 +158,22 @@ class AuthenticationCoordinatorTests {
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
-        let completion = await withCheckedContinuation { continuation in
+        await withCheckedContinuation { continuation in
             let sut = AuthenticationCoordinator(
                 navigationController: mockNavigationController,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) },
+                completionAction: { },
                 handleError: { _ in }
             )
             sut.start(url: nil)
+            mockCoordinatorBuilder._signInSuccessCallAction = {
+                continuation.resume()
+            }
         }
 
         #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
-        #expect(completion)
-    }
-
-    @Test
-    func start_passcodeEnrolled_shouldEncryptToken_callsCompletion() async {
-        let mockAuthenticationService = MockAuthenticationService()
-        let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        let mockNavigationController =  MockNavigationController()
-        mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
-        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = true
-        mockAuthenticationService._stubbedAuthenticationResult = .success(
-            .init(returningUser: true)
-        )
-        let newWindow = UIWindow(frame: UIScreen.main.bounds)
-        newWindow.rootViewController = mockNavigationController
-        newWindow.makeKeyAndVisible()
-
-        let completion = await withCheckedContinuation { continuation in
-            let sut = AuthenticationCoordinator(
-                navigationController: mockNavigationController,
-                coordinatorBuilder: MockCoordinatorBuilder.mock,
-                authenticationService: mockAuthenticationService,
-                localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) },
-                handleError: { _ in }
-            )
-            sut.start(url: nil)
-        }
-
-        #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
-        #expect(completion)
     }
 
     @Test
@@ -165,7 +182,6 @@ class AuthenticationCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
 
-        mockLocalAuthenticationService._stubbedCanEvaluatePasscodePolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .failure(.genericError)
@@ -191,12 +207,5 @@ class AuthenticationCoordinatorTests {
 
         #expect(authError == .genericError)
         #expect(!completion)
-    }
-
-    private func createTokenResponse(_ jsonData: Data) -> TokenResponse {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        let tokenResponse = try? decoder.decode(TokenResponse.self, from: jsonData)
-        return tokenResponse!
     }
 }

@@ -40,7 +40,7 @@ class AuthenticationCoordinator: BaseCoordinator {
             if shouldEncryptRefreshToken {
                 authenticationService.encryptRefreshToken()
             }
-            handleSuccess()
+            startSignInSuccess()
         case .failure(let error):
             DispatchQueue.main.async {
                 self.handleError(error)
@@ -49,10 +49,12 @@ class AuthenticationCoordinator: BaseCoordinator {
     }
 
     @MainActor
-    private func handleSuccess() {
+    private func startSignInSuccess() {
         let coordinator = coordinatorBuilder.signInSuccess(
             navigationController: root,
-            completion: completionAction
+            completion: { [weak self] in
+                self?.completionAction()
+            }
         )
         start(coordinator)
     }

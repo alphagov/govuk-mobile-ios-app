@@ -145,7 +145,7 @@ class AppCoordinator: BaseCoordinator {
                 self?.startAnalyticsConsent(url: url)
             },
             completionAction: { [weak self] in
-                self?.startLocalAuthenticationOnboardingCoordinator(url: url)
+                self?.startSignInSuccessCoordinator(url: url)
             }
         )
         start(coordinator)
@@ -202,6 +202,16 @@ class AppCoordinator: BaseCoordinator {
             navigationController: root,
             completion: { [weak self] in
                 self?.startTabs(url: url)
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startSignInSuccessCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.signInSuccess(
+            navigationController: root,
+            completion: { [weak self] in
+                self?.startLocalAuthenticationOnboardingCoordinator(url: url)
             }
         )
         start(coordinator)

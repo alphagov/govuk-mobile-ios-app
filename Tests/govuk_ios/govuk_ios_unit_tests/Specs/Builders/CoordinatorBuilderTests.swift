@@ -291,6 +291,18 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
+    func signInSuccess_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let mockNavigationController = MockNavigationController()
+        let coordinator = subject.signInSuccess(
+            navigationController: mockNavigationController,
+            completion: { }
+        )
+
+        #expect(coordinator is SignInSuccessCoordinator)
+    }
+
+    @Test
     func webView_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let testURL = URL(string: "https://www.gov.uk")!

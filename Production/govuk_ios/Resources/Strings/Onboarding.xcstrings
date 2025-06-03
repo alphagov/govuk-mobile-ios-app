@@ -210,6 +210,17 @@
         }
       }
     },
+    "successfulSignInTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have successfully signed in"
+          }
+        }
+      }
+    },
     "tailoredToYouBody" : {
       "extractionState" : "manual",
       "localizations" : {

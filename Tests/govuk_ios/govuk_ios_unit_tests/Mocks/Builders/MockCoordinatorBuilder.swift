@@ -200,6 +200,14 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedSignInErrorCoordinator ?? MockBaseCoordinator()
     }
 
+    var _receivedSignInSuccessCompletion: (() -> Void)?
+    var _stubbedSignInSuccessCoordinator: MockBaseCoordinator?
+    override func signInSuccess(navigationController: UINavigationController,
+                                completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedSignInSuccessCompletion = completion
+        return _stubbedSignInSuccessCoordinator ?? MockBaseCoordinator()
+    }
+
     var _receivedInactiveAction: (() -> Void)?
     var _stubbedInactivityCoordinator: MockBaseCoordinator?
     override func inactivityCoordinator(navigationController: UINavigationController,

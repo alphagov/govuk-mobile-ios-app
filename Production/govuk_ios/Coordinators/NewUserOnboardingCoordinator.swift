@@ -14,7 +14,17 @@ class NewUserOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        startLocalAuthenticationOnboardingCoordinator(url: url)
+        startSignInSuccessCoordinator(url: url)
+    }
+
+    private func startSignInSuccessCoordinator(url: URL?) {
+        let coordinator = coordinatorBuilder.signInSuccess(
+            navigationController: root,
+            completion: { [weak self] in
+                self?.startLocalAuthenticationOnboardingCoordinator(url: url)
+            }
+        )
+        start(coordinator)
     }
 
     private func startLocalAuthenticationOnboardingCoordinator(url: URL?) {

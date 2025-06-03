@@ -276,17 +276,6 @@
         }
       }
     },
-    "welcomeButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get started"
-          }
-        }
-      }
-    },
     "welcomeTitle" : {
       "extractionState" : "manual",
       "localizations" : {

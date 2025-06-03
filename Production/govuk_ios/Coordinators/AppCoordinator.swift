@@ -127,12 +127,7 @@ class AppCoordinator: BaseCoordinator {
                 self?.startReauthentication(
                     url: url,
                     completionAction: { [weak self] in
-                        self?.startWelcomeOnboardingCoordinator(
-                            url: url,
-                            newUserAction: { [weak self] in
-                                self?.startNewUserOnboardingCoordinator(url: nil)
-                            }
-                        )
+                        self?.startWelcomeOnboardingCoordinator(url: url)
                     }
                 )
             }
@@ -140,11 +135,12 @@ class AppCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
-    private func startWelcomeOnboardingCoordinator(url: URL?,
-                                                   newUserAction: (() -> Void)?) {
+    private func startWelcomeOnboardingCoordinator(url: URL?) {
         let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
-            newUserAction: newUserAction,
+            newUserAction: { [weak self] in
+                self?.startNewUserOnboardingCoordinator(url: url)
+            },
             analyticsAction: { [weak self] in
                 self?.startAnalyticsConsent(url: url)
             },
@@ -220,12 +216,7 @@ class AppCoordinator: BaseCoordinator {
                         url: URL(string: "govuk://settings/settings")
                     )
                 } else {
-                    self?.startWelcomeOnboardingCoordinator(
-                        url: nil,
-                        newUserAction: { [weak self] in
-                            self?.startNewUserOnboardingCoordinator(url: nil)
-                        }
-                    )
+                    self?.startWelcomeOnboardingCoordinator(url: nil)
                 }
             }
         )

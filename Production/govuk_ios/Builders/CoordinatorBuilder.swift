@@ -329,6 +329,17 @@ class CoordinatorBuilder {
         )
     }
 
+    func signInSuccess(navigationController: UINavigationController,
+                       completion: @escaping () -> Void) -> BaseCoordinator {
+        SignInSuccessCoordinator(
+            navigationController: navigationController,
+            analyticsService: container.analyticsService.resolve(),
+            authenticationService: container.authenticationService.resolve(),
+            completion: completion
+        )
+    }
+
+
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(
             navigationController: UINavigationController(),

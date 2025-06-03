@@ -50,13 +50,12 @@ struct SafariCoordinatorTests {
     @MainActor
     func start_openExpectedURL() throws {
         let expectedURL = URL.arrange
-        let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockConfigService = MockAppConfigService()
         mockConfigService.features = [.externalBrowser]
         let mockURLOpener = MockURLOpener()
         let subject = SafariCoordinator(
             navigationController: MockNavigationController(),
-            viewControllerBuilder: mockViewControllerBuilder,
+            viewControllerBuilder: MockViewControllerBuilder(),
             configService: mockConfigService,
             urlOpener: mockURLOpener,
             url: expectedURL

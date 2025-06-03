@@ -79,11 +79,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedAnalyticsConsentCoordinator: BaseCoordinator?
     var _receivedAnalyticsConsentNavigationController: UINavigationController?
-    var _receivedAnalyticsConsentDismissAction: (() -> Void)?
+    var _receivedAnalyticsConsentCompletion: (() -> Void)?
     override func analyticsConsent(navigationController: UINavigationController,
-                                   dismissAction: @escaping () -> Void) -> BaseCoordinator {
+                                   completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedAnalyticsConsentNavigationController = navigationController
-        _receivedAnalyticsConsentDismissAction = dismissAction
+        _receivedAnalyticsConsentCompletion = completion
         return _stubbedAnalyticsConsentCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
@@ -104,29 +104,35 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedTopicOnboardingCoordinator ?? MockBaseCoordinator()
     }
 
+    var _receivedAppUnavailableLaunchResponse: AppLaunchResponse?
     var _receivedAppUnavailableDismissAction: (() -> Void)?
     var _stubbedAppUnavailableCoordinator: MockBaseCoordinator?
     override func appUnavailable(navigationController: UINavigationController,
                                  launchResponse: AppLaunchResponse,
                                  dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppUnavailableLaunchResponse = launchResponse
         _receivedAppUnavailableDismissAction = dismissAction
         return _stubbedAppUnavailableCoordinator ?? MockBaseCoordinator()
     }
 
     var _receivedAppForcedUpdateDismissAction: (() -> Void)?
+    var _receivedAppForcedUpdateLaunchResponse: AppLaunchResponse?
     var _stubbedAppForcedUpdateCoordinator: MockBaseCoordinator?
     override func appForcedUpdate(navigationController: UINavigationController,
                                   launchResponse: AppLaunchResponse,
                                   dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppForcedUpdateLaunchResponse = launchResponse
         _receivedAppForcedUpdateDismissAction = dismissAction
         return _stubbedAppForcedUpdateCoordinator ?? MockBaseCoordinator()
     }
 
+    var _receivedAppRecommendUpdateLaunchResponse: AppLaunchResponse?
     var _receivedAppRecommendUpdateDismissAction: (() -> Void)?
     var _stubbedAppRecommendUpdateCoordinator: MockBaseCoordinator?
     override func appRecommendUpdate(navigationController: UINavigationController,
                                      launchResponse: AppLaunchResponse,
                                      dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppRecommendUpdateLaunchResponse = launchResponse
         _receivedAppRecommendUpdateDismissAction = dismissAction
         return _stubbedAppRecommendUpdateCoordinator ?? MockBaseCoordinator()
     }
@@ -176,11 +182,13 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _receivedNotificationConsentCompletion: (() -> Void)?
+    var _receivedNotificationConsentResult: NotificationConsentResult?
     var _stubbedNotificationConsentCoordinator: MockBaseCoordinator?
     override func notificationConsent(navigationController: UINavigationController,
                                       consentResult: NotificationConsentResult,
                                       completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedNotificationConsentCompletion = completion
+        _receivedNotificationConsentResult = consentResult
         return _stubbedNotificationConsentCoordinator ?? MockBaseCoordinator()
     }
 

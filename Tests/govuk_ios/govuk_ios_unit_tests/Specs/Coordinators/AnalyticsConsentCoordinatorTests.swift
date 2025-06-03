@@ -17,7 +17,7 @@ struct AnalyticsConsentCoordinatorTests {
             let sut = AnalyticsConsentCoordinator(
                 navigationController: mockNavigationController,
                 analyticsService: mockAnalyticsService,
-                dismissAction: {
+                completion: {
                     continuation.resume(returning: true)
                 }
             )
@@ -35,7 +35,7 @@ struct AnalyticsConsentCoordinatorTests {
             let sut = AnalyticsConsentCoordinator(
                 navigationController: mockNavigationController,
                 analyticsService: mockAnalyticsService,
-                dismissAction: {
+                completion: {
                     continuation.resume(returning: true)
                 }
             )
@@ -52,7 +52,7 @@ struct AnalyticsConsentCoordinatorTests {
         let sut = AnalyticsConsentCoordinator(
             navigationController: mockNavigationController,
             analyticsService: mockAnalyticsService,
-            dismissAction: { }
+            completion: { }
         )
         sut.start()
 

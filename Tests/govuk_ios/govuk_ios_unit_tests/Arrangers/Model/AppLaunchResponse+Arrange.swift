@@ -44,3 +44,12 @@ extension AppLaunchResponse {
         )
     }
 }
+
+extension AppLaunchResponse: @retroactive Equatable {
+    public static func == (lhs: AppLaunchResponse, rhs: AppLaunchResponse) -> Bool {
+        lhs.configResult == rhs.configResult &&
+        lhs.topicResult == rhs.topicResult &&
+        lhs.notificationConsentResult == rhs.notificationConsentResult &&
+        lhs.appVersionProvider.fullBuildNumber == rhs.appVersionProvider.fullBuildNumber
+    }
+}

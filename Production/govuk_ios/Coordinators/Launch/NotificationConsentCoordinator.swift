@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import GOVKit
 
+@MainActor
 class NotificationConsentCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
@@ -40,7 +41,6 @@ class NotificationConsentCoordinator: BaseCoordinator {
         }
     }
 
-    @MainActor
     private func presentConsentViewController() {
         guard !isPresentingConsentAlert else { return }
         root.dismiss(animated: true)

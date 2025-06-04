@@ -6,4 +6,5 @@ enum Feature: String {
     case topics
     case recentActivity
     case localServices
+    case externalBrowser
 }

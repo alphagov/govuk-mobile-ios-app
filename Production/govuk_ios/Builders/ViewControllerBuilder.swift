@@ -360,4 +360,18 @@ class ViewControllerBuilder {
         viewController.isModalInPresentation = true
         return viewController
     }
+
+    func welcomeOnboarding(analyticsService: AnalyticsServiceInterface,
+                           completion: @escaping () -> Void) -> UIViewController {
+        let viewModel = WelcomeOnboardingViewModel(
+            analyticsService: analyticsService,
+            completeAction: completion
+        )
+        let containerView = InfoView(
+            viewModel: viewModel
+        )
+        return UIHostingController(
+            rootView: containerView
+        )
+    }
 }

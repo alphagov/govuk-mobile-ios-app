@@ -180,4 +180,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedSafariUrl = url
         return _stubbedSafariViewController ?? UIViewController()
     }
+
+    var _stubbedWelcomeOnboardingViewController: UIViewController?
+    var _receivedWelcomeOnboardingCompletion: (() -> Void)?
+    override func welcomeOnboarding(analyticsService: any AnalyticsServiceInterface,
+                                    completion: @escaping () -> Void) -> UIViewController {
+        _receivedWelcomeOnboardingCompletion = completion
+        return _stubbedWelcomeOnboardingViewController ?? UIViewController()
+    }
 }

@@ -38,24 +38,16 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     }
 
     private func setWelcomeOnboardingViewController(_ animated: Bool = true) {
-        let viewModel = WelcomeOnboardingViewModel(
+        let viewController = viewControllerBuilder.welcomeOnboarding(
             analyticsService: analyticsService,
-            completeAction: { [weak self] in
-                Task {
-                    await self?.startAuthentication()
-                }
+            completion: { [weak self] in
+                self?.startAuthentication()
             }
-        )
-        let containerView = InfoView(
-            viewModel: viewModel
-        )
-        let viewController = UIHostingController(
-            rootView: containerView
         )
         set(viewController)
     }
 
-    private func startAuthentication() async {
+    private func startAuthentication() {
         let authenticationCoordinator = coordinatorBuilder.authentication(
             navigationController: navigationController,
             completionAction: completionAction,

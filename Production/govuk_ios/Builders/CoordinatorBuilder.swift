@@ -353,6 +353,8 @@ class CoordinatorBuilder {
         SafariCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
+            configService: container.appConfigService.resolve(),
+            urlOpener: UIApplication.shared,
             url: url,
             fullScreen: fullScreen
         )

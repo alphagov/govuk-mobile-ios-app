@@ -8,16 +8,10 @@ class MockBaseViewController: BaseViewController,
     var trackingName: String { "test_mock_tracking_name" }
     var additionalParameters: [String : Any] { ["test_param": "test_value"] }
 
-    init() {
-        super.init(analyticsService: MockAnalyticsService())
-    }
-
-    override init(analyticsService: AnalyticsServiceInterface) {
-        super.init(analyticsService: analyticsService)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    static var mock: MockBaseViewController {
+        MockBaseViewController(
+            analyticsService: MockAnalyticsService()
+        )
     }
     
     var _receivedBeginAppearanceTransitionAnimated: Bool?

@@ -113,7 +113,7 @@ struct NotificationConsentCoordinatorTests {
         let mockNavigationController = MockNavigationController()
         let mockNotificationService = MockNotificationService()
         let mockViewControllerBuilder = MockViewControllerBuilder()
-        let mockNotificationConsentAlertViewController = MockBaseViewController()
+        let mockNotificationConsentAlertViewController = MockBaseViewController.mock
 
         mockViewControllerBuilder._stubbedNotificationConsentAlertViewController = mockNotificationConsentAlertViewController
 

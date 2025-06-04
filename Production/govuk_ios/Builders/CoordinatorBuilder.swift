@@ -349,11 +349,12 @@ class CoordinatorBuilder {
     }
 
     func safari(navigationController: UINavigationController,
-                url: URL) -> BaseCoordinator {
+                url: URL, fullScreen: Bool) -> BaseCoordinator {
         SafariCoordinator(
             navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
-            url: url
+            url: url,
+            fullScreen: fullScreen
         )
     }
 

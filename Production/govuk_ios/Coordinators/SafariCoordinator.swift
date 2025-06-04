@@ -5,12 +5,14 @@ import SafariServices
 class SafariCoordinator: BaseCoordinator {
     private let url: URL
     private let viewControllerBuilder: ViewControllerBuilder
+    private let fullScreen: Bool
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
-         url: URL) {
+         url: URL, fullScreen: Bool) {
         self.url = url
         self.viewControllerBuilder = viewControllerBuilder
+        self.fullScreen = fullScreen
         super.init(navigationController: navigationController)
     }
 
@@ -24,6 +26,8 @@ class SafariCoordinator: BaseCoordinator {
             rootViewController: viewController
         )
         navigationController.isNavigationBarHidden = true
-        root.present(navigationController, animated: true)
+        if fullScreen {
+            root.present(navigationController, animated: true)
+        }
     }
 }

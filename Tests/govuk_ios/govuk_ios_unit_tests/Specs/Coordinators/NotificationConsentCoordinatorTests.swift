@@ -19,6 +19,7 @@ struct NotificationConsentCoordinatorTests {
                 notificationService: mockNotificationService,
                 analyticsService: MockAnalyticsService(),
                 consentResult: .aligned,
+                viewControllerBuilder: MockViewControllerBuilder(),
                 urlOpener: MockURLOpener(),
                 completion: {
                     continuation.resume(returning: true)
@@ -43,6 +44,7 @@ struct NotificationConsentCoordinatorTests {
                 notificationService: mockNotificationService,
                 analyticsService: MockAnalyticsService(),
                 consentResult: .misaligned(.consentGrantedNotificationsOff),
+                viewControllerBuilder: MockViewControllerBuilder(),
                 urlOpener: MockURLOpener(),
                 completion: {
                     continuation.resume()
@@ -67,6 +69,7 @@ struct NotificationConsentCoordinatorTests {
             notificationService: mockNotificationService,
             analyticsService: MockAnalyticsService(),
             consentResult: .misaligned(.consentNotGrantedNotificationsOn),
+            viewControllerBuilder: MockViewControllerBuilder(),
             urlOpener: MockURLOpener(),
             completion: {
                 completionCalled = true
@@ -78,5 +81,61 @@ struct NotificationConsentCoordinatorTests {
         #expect(mockNavigationController._presentedViewController is NotificationConsentAlertViewController)
         #expect(!mockNotificationService._rejectConsentCalled)
         #expect(!completionCalled)
+    }
+
+    @Test
+    @MainActor
+    func grantConsent_acceptsConsent() async {
+        let mockNavigationController = MockNavigationController()
+        let mockNotificationService = MockNotificationService()
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+
+        let subject = NotificationConsentCoordinator(
+            navigationController: mockNavigationController,
+            notificationService: mockNotificationService,
+            analyticsService: MockAnalyticsService(),
+            consentResult: .misaligned(.consentNotGrantedNotificationsOn),
+            viewControllerBuilder: mockViewControllerBuilder,
+            urlOpener: MockURLOpener(),
+            completion: { }
+        )
+
+        subject.start()
+
+        mockViewControllerBuilder._receivedNotificationConsentAlertGrantConsentAction?()
+
+        #expect(mockNotificationService._acceptConsentCalled)
+    }
+
+    @Test
+    @MainActor
+    func openSettings_presentsAlert() async {
+        let mockNavigationController = MockNavigationController()
+        let mockNotificationService = MockNotificationService()
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockNotificationConsentAlertViewController = MockBaseViewController()
+
+        mockViewControllerBuilder._stubbedNotificationConsentAlertViewController = mockNotificationConsentAlertViewController
+
+        let subject = NotificationConsentCoordinator(
+            navigationController: mockNavigationController,
+            notificationService: mockNotificationService,
+            analyticsService: MockAnalyticsService(),
+            consentResult: .misaligned(.consentNotGrantedNotificationsOn),
+            viewControllerBuilder: mockViewControllerBuilder,
+            urlOpener: MockURLOpener(),
+            completion: { }
+        )
+
+        subject.start()
+
+        mockNavigationController.setViewControllers(
+            [mockNotificationConsentAlertViewController],
+            animated: false
+        )
+
+        mockViewControllerBuilder._receivedNotificationConsentAlertOpenSettingsAction?()
+        let alert = mockNotificationConsentAlertViewController._presentedViewController as? UIAlertController
+        #expect(alert != nil)
     }
 }

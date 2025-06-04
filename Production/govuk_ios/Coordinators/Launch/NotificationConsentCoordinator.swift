@@ -6,6 +6,7 @@ class NotificationConsentCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let consentResult: NotificationConsentResult
+    private let viewControllerBuilder: ViewControllerBuilder
     private let urlOpener: URLOpener
     private let completion: () -> Void
 
@@ -13,11 +14,13 @@ class NotificationConsentCoordinator: BaseCoordinator {
          notificationService: NotificationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          consentResult: NotificationConsentResult,
+         viewControllerBuilder: ViewControllerBuilder,
          urlOpener: URLOpener,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
         self.analyticsService = analyticsService
         self.consentResult = consentResult
+        self.viewControllerBuilder = viewControllerBuilder
         self.urlOpener = urlOpener
         self.completion = completion
         super.init(navigationController: navigationController)
@@ -41,23 +44,23 @@ class NotificationConsentCoordinator: BaseCoordinator {
     private func presentConsentViewController() {
         guard !isPresentingConsentAlert else { return }
         root.dismiss(animated: true)
-        let viewController = NotificationConsentAlertViewController(
-            analyticsService: analyticsService
+        let viewController = viewControllerBuilder.notificationConsentAlert(
+            analyticsService: analyticsService,
+            grantConsentAction: { [weak self] in
+                self?.notificationService.acceptConsent()
+                self?.root.dismiss(
+                    animated: true,
+                    completion: self?.completion
+                )
+            },
+            openSettingsAction: { [weak self] in
+                self?.presentSettingsAlert()
+            }
         )
-        viewController.grantConsentAction = { [weak self] in
-            self?.notificationService.acceptConsent()
-            self?.root.dismiss(
-                animated: true,
-                completion: self?.completion
-            )
-        }
-        viewController.openSettingsAction = { [weak self] in
-            self?.presentSettingsAlert(viewController: viewController)
-        }
         root.present(viewController, animated: true)
     }
 
-    private func presentSettingsAlert(viewController: UIViewController) {
+    private func presentSettingsAlert() {
         let alert = UIAlertController(
             title: String.notifications.localized("consentAlertSettingsAlertTitle"),
             message: String.notifications.localized("consentAlertSettingsAlertBody"),
@@ -71,7 +74,7 @@ class NotificationConsentCoordinator: BaseCoordinator {
                 }
             )
         )
-        viewController.present(alert, animated: true)
+        root.topViewController?.present(alert, animated: true)
     }
 
     private func dismissConsentViewControllerIfRequired() {

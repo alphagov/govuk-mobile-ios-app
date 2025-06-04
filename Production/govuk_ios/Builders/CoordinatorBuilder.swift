@@ -256,6 +256,7 @@ class CoordinatorBuilder {
             notificationService: container.notificationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             consentResult: consentResult,
+            viewControllerBuilder: ViewControllerBuilder(),
             urlOpener: UIApplication.shared,
             completion: completion
         )

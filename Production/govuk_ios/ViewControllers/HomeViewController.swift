@@ -199,6 +199,7 @@ extension HomeViewController: UISearchBarDelegate {
         removeController(homeContentViewController)
         displayController(searchViewController)
         setLogoHidden(true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         return true
     }
 

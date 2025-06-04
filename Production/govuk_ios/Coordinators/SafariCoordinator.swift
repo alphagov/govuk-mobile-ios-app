@@ -39,6 +39,8 @@ class SafariCoordinator: BaseCoordinator {
         )
         navigationController.isNavigationBarHidden = true
         if fullScreen {
+            root.pushViewController(viewController, animated: true)
+        } else {
             root.present(navigationController, animated: true)
         }
     }

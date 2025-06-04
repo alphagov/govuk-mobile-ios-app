@@ -65,7 +65,7 @@ final class TopicDetailsCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.safari(
             navigationController: root,
             url: url,
-            fullScreen: false
+            fullScreen: true
         )
         start(coordinator, url: url)
     }

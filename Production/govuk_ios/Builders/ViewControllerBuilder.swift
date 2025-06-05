@@ -328,7 +328,7 @@ class ViewControllerBuilder {
         return TopicOnboardingViewController(viewModel: viewModel)
     }
 
-    func webViewController(for url: URL) -> UIViewController {
+    func web(for url: URL) -> UIViewController {
         return WebViewController(url: url)
     }
 
@@ -353,7 +353,7 @@ class ViewControllerBuilder {
         let containerView = InfoView(
             viewModel: viewModel
         )
-        return UIHostingController(
+        return HostingViewController(
             rootView: containerView
         )
     }

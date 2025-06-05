@@ -87,9 +87,7 @@
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
 		4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */; };
 		4E5E79A62DEF011500CA9B4D /* LocalAuthoritySuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E79A52DEF011500CA9B4D /* LocalAuthoritySuccessViewModel.swift */; };
-		4E5E79A82DEF063800CA9B4D /* LocalAuthoritySuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E79A72DEF063800CA9B4D /* LocalAuthoritySuccessView.swift */; };
-		4E5E79AA2DEF132900CA9B4D /* LocalAuthoritySuccessUnitaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E79A92DEF132900CA9B4D /* LocalAuthoritySuccessUnitaryView.swift */; };
-		4E5E79AC2DEF150400CA9B4D /* LocalAuthoritySuccessTwoTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E79AB2DEF150400CA9B4D /* LocalAuthoritySuccessTwoTier.swift */; };
+		4E5E79A82DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E79A72DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
 		4E6663C52C736ABD0063E81C /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C42C736ABD0063E81C /* Feature.swift */; };
 		4E6663C82C7370750063E81C /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C72C7370750063E81C /* AppConfig.swift */; };
@@ -450,9 +448,7 @@
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocalAuthorityCoordinator.swift; sourceTree = "<group>"; };
 		4E5E79A52DEF011500CA9B4D /* LocalAuthoritySuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthoritySuccessViewModel.swift; sourceTree = "<group>"; };
-		4E5E79A72DEF063800CA9B4D /* LocalAuthoritySuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthoritySuccessView.swift; sourceTree = "<group>"; };
-		4E5E79A92DEF132900CA9B4D /* LocalAuthoritySuccessUnitaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthoritySuccessUnitaryView.swift; sourceTree = "<group>"; };
-		4E5E79AB2DEF150400CA9B4D /* LocalAuthoritySuccessTwoTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthoritySuccessTwoTier.swift; sourceTree = "<group>"; };
+		4E5E79A72DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityConfirmationView.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		4E6663C42C736ABD0063E81C /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		4E6663C72C7370750063E81C /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -717,6 +713,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/HostingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LaunchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthenticationOnboardingViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
@@ -759,6 +756,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/HostingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LaunchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthenticationOnboardingViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
@@ -1008,9 +1006,7 @@
 				4EEC0F332DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift */,
 				D0ECB3FD2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift */,
 				D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */,
-				4E5E79A72DEF063800CA9B4D /* LocalAuthoritySuccessView.swift */,
-				4E5E79A92DEF132900CA9B4D /* LocalAuthoritySuccessUnitaryView.swift */,
-				4E5E79AB2DEF150400CA9B4D /* LocalAuthoritySuccessTwoTier.swift */,
+				4E5E79A72DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -2107,7 +2103,6 @@
 				3D7E2D182C81FB1B0016BEEC /* AnalyticsConsentCoordinator.swift in Sources */,
 				4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */,
 				3D9C933E2CB0172400EFA337 /* AppForcedUpdateContainerView.swift in Sources */,
-				4E5E79AA2DEF132900CA9B4D /* LocalAuthoritySuccessUnitaryView.swift in Sources */,
 				1687F3172CB4110D005E1473 /* AllTopicsViewModel.swift in Sources */,
 				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
 				16A99D6B2D35F19300C72DEB /* SearchSuggestionsViewModel.swift in Sources */,
@@ -2143,7 +2138,6 @@
 				16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */,
-				4E5E79AC2DEF150400CA9B4D /* LocalAuthoritySuccessTwoTier.swift in Sources */,
 				D06C56092DE70F4D0045C674 /* AppAttestService.swift in Sources */,
 				D06C2A4F2DDF2FCF0045C674 /* ResponseHandler.swift in Sources */,
 				D08A9A802DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift in Sources */,
@@ -2164,7 +2158,7 @@
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				D0839FD02DE7ABE800CA5C27 /* GovUKProviderFactory.swift in Sources */,
 				D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */,
-				4E5E79A82DEF063800CA9B4D /* LocalAuthoritySuccessView.swift in Sources */,
+				4E5E79A82DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift in Sources */,
 				4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */,
 				D056CE742D3A83F2005845E0 /* UserFeedbackViewModel.swift in Sources */,
 				16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */,

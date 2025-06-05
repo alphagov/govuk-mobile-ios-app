@@ -112,14 +112,14 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
-        navigateToPostCodeEntryViewAction: @escaping (Authority) -> Void,
+        navigateToConfirmationView: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
             resolveAmbiguityAction: resolveAmbiguityAction,
-            navigateToConfirmationView: navigateToPostCodeEntryViewAction,
+            navigateToConfirmationView: navigateToConfirmationView,
             dismissAction: dismissAction
         )
         let view = LocalAuthorityPostcodeEntryView(
@@ -134,7 +134,7 @@ class ViewControllerBuilder {
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
         postCode: String,
-        navigateToSuccessView: @escaping (Authority) -> Void,
+        navigateToConfirmationView: @escaping (Authority) -> Void,
         selectAddressAction: @escaping () -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
@@ -143,7 +143,7 @@ class ViewControllerBuilder {
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
             postCode: postCode,
-            navigateToSuccessView: navigateToSuccessView,
+            navigateToConfirmationView: navigateToConfirmationView,
             selectAddressAction: selectAddressAction,
             dismissAction: dismissAction
         )
@@ -157,14 +157,14 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
-        navigateToSuccessView: @escaping (Authority) -> Void,
+        navigateToConfirmationView: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = AmbiguousAddressSelectionViewModel(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
-            navigateToSuccessView: navigateToSuccessView,
+            navigateToSuccessView: navigateToConfirmationView,
             dismissAction: dismissAction
         )
         let view = AmbiguousAddressSelectionView(
@@ -264,7 +264,7 @@ class ViewControllerBuilder {
                 localAuthorityItem: localAuthorityItem,
                 completion: completion
             )
-            let view = LocalAuthoritySuccessView(
+            let view = LocalAuthorityConfirmationView(
                 viewModel: viewModel
             )
             let viewController = HostingViewController(

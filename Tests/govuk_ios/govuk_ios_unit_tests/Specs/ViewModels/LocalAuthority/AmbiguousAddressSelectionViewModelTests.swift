@@ -38,6 +38,7 @@ struct AmbiguousAddressSelectionViewModelTests {
                 authorities: [authorityOne, authorityTwo],
                 addresses: [addressOne, addressTwo]
             ),
+            navigateToSuccessView: {_ in},
             dismissAction: {
                 dismissCalled = true
             }
@@ -82,6 +83,7 @@ struct AmbiguousAddressSelectionViewModelTests {
                 authorities: [authorityOne, authorityTwo],
                 addresses: [addressOne, addressTwo]
             ),
+            navigateToSuccessView: {_ in },
             dismissAction: { }
         )
         sut.selectedAddress = addressOne

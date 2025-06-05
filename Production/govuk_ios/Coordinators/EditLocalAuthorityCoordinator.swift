@@ -34,7 +34,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
                     localAuthorities: localAuthorities,
                     postCode: postCode
                 )
-            }, navigateToPostCodeEntryViewAction: { [weak self] authority in
+            }, navigateToConfirmationView: { [weak self] authority in
                 self?.navigatoToConfirmationWindow(localAuthority: authority)
             },
             dismissAction: { [weak self] in
@@ -51,7 +51,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
             localAuthorityService: localAuthorityService,
             localAuthorities: localAuthorities,
             postCode: postCode,
-            navigateToSuccessView: { [weak self] selectedAuthority in
+                    navigateToConfirmationView: { [weak self] selectedAuthority in
                 self?.navigatoToConfirmationWindow(
                     localAuthority: selectedAuthority
                 )
@@ -71,7 +71,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             localAuthorities: localAuthorities,
-            navigateToSuccessView: { [weak self] authority in
+            navigateToConfirmationView: { [weak self] authority in
                 self?.navigatoToConfirmationWindow(localAuthority: authority)
             },
             dismissAction: { [weak self] in

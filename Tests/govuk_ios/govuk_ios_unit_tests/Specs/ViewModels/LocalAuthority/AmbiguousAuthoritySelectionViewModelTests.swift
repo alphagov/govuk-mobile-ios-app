@@ -14,6 +14,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "BH22 8UB",
+            navigateToConfirmationView: {_ in},
             selectAddressAction: { },
             dismissAction: { }
         )
@@ -33,6 +34,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            navigateToConfirmationView: {_ in},
             selectAddressAction: { },
             dismissAction: {
                 dismissCalled = true
@@ -61,6 +63,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            navigateToConfirmationView: {_ in},
             selectAddressAction: { },
             dismissAction: { }
         )
@@ -88,6 +91,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            navigateToConfirmationView: {_ in},
             selectAddressAction: {
                 selectAddressCalled = true
             },
@@ -109,6 +113,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            navigateToConfirmationView: {_ in },
             selectAddressAction: { },
             dismissAction: { }
         )

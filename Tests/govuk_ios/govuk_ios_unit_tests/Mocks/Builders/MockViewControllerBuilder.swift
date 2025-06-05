@@ -76,6 +76,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     override func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
                                                   localAuthorityService: LocalAuthorityServiceInterface,
                                                   resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
+                                                  navigateToConfirmationView: @escaping (Authority) -> Void,
                                                   dismissAction: @escaping () -> Void) -> UIViewController {
         _receivedLocalAuthorityDismissAction = dismissAction
         _receivedResolveAmbiguityAction = resolveAmbiguityAction
@@ -100,6 +101,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                                                   localAuthorityService: LocalAuthorityServiceInterface,
                                                   localAuthorities: AmbiguousAuthorities,
                                                   postCode: String,
+                                                  navigateToConfirmationView: @escaping (Authority) -> Void,
                                                   selectAddressAction: @escaping () -> Void,
                                                   dismissAction: @escaping () -> Void
     ) -> UIViewController {
@@ -113,6 +115,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     override func ambiguousAddressSelectionView(analyticsService: AnalyticsServiceInterface,
                                                 localAuthorityService: LocalAuthorityServiceInterface,
                                                 localAuthorities: AmbiguousAuthorities,
+                                                navigateToConfirmationView: @escaping (Authority) -> Void,
                                                 dismissAction: @escaping () -> Void
     ) -> UIViewController {
         _receivedAmbiguousAddressDismissAction = dismissAction

@@ -5,9 +5,9 @@ import Testing
 struct AmbiguousAddressSelectionViewModelTests {
 
     @Test
-    func confirmButtonAction_savesLocalAuthority_andDismisses() {
+    func confirmButtonAction_savesLocalAuthority_andNavigateToSuccessView() {
         let mockLocalAuthorityService = MockLocalAuthorityService()
-        var dismissCalled = false
+        var navigatedToSuccesView = false
         let authorityOne = Authority(
             name: "name1",
             homepageUrl: "homepageURL1",
@@ -38,15 +38,15 @@ struct AmbiguousAddressSelectionViewModelTests {
                 authorities: [authorityOne, authorityTwo],
                 addresses: [addressOne, addressTwo]
             ),
-            navigateToSuccessView: {_ in},
-            dismissAction: {
-                dismissCalled = true
-            }
+            navigateToSuccessView: {_ in
+                navigatedToSuccesView = true
+            },
+            dismissAction: {}
         )
         sut.selectedAddress = addressOne
         sut.confirmButtonModel.action()
         #expect(mockLocalAuthorityService._savedAuthority?.slug == "slug1")
-        #expect(dismissCalled)
+        #expect(navigatedToSuccesView)
     }
 
     @Test

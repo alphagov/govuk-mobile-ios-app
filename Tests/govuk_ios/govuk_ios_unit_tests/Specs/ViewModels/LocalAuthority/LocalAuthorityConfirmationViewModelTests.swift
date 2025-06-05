@@ -23,4 +23,26 @@ struct LocalAuthorityConfirmationViewModelTests {
         #expect(receivedTitle == "Done")
     }
 
+    @Test
+    func primaryButtonViewModel_dismissesView() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let authority = Authority(
+            name: "Test",
+            homepageUrl: "Test",
+            tier: "unitary",
+            slug: "test slug",
+            parent: nil
+        )
+        var completed = false
+        let sut = LocalAuthorityConfirmationViewModel(
+            analyticsService: mockAnalyticsService,
+            localAuthorityItem: authority,
+            completion: {
+                completed = true
+            }
+        )
+        sut.primaryButtonViewModel.action()
+        #expect(completed)
+    }
+
 }

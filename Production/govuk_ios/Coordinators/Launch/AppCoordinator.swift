@@ -5,6 +5,8 @@ class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let inactivityService: InactivityServiceInterface
     private var initialLaunch: Bool = true
+    private var tabCoordinator: BaseCoordinator?
+    private var pendingDeeplink: URL?
 
     init(coordinatorBuilder: CoordinatorBuilder,
          inactivityService: InactivityServiceInterface,
@@ -16,10 +18,13 @@ class AppCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         startInactivityMonitoring()
+        if let url = url {
+            pendingDeeplink = url
+        }
         if initialLaunch {
-            startPreAuthCoordinator(url: url)
+            startPreAuthCoordinator()
         } else {
-            reLaunch(url: url)
+            reLaunch()
         }
     }
 
@@ -32,7 +37,7 @@ class AppCoordinator: BaseCoordinator {
         )
     }
 
-    private func startPreAuthCoordinator(url: URL?) {
+    private func startPreAuthCoordinator() {
         let coordinator = coordinatorBuilder.preauth(
             navigationController: root,
             completion: { [weak self] in
@@ -57,27 +62,36 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.postauth(
             navigationController: root,
             completion: { [weak self] in
-                self?.startTabs(url: nil)
+                self?.startTabs()
             }
         )
         start(coordinator)
     }
 
-    private func reLaunch(url: URL?) {
+    private func reLaunch() {
         let coordinator = coordinatorBuilder.relaunch(
             navigationController: root,
-            completion: {
-                //  Removed actions here for now
+            completion: { [weak self] in
+                self?.handlePendingDeeplink()
             }
         )
-        start(coordinator, url: url)
+        start(coordinator)
     }
 
-    private func startTabs(url: URL?) {
+    private func handlePendingDeeplink() {
+        if let tabCoordinator = self.tabCoordinator {
+            tabCoordinator.start(url: pendingDeeplink)
+            pendingDeeplink = nil
+        }
+    }
+
+    private func startTabs() {
         let coordinator = coordinatorBuilder.tab(
             navigationController: root
         )
-        start(coordinator, url: url)
+        tabCoordinator = coordinator
+        start(coordinator, url: pendingDeeplink)
+        pendingDeeplink = nil
     }
 
     override func childDidFinish(_ child: BaseCoordinator) {

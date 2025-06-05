@@ -44,6 +44,6 @@ class PeriAuthCoordinator: BaseCoordinator {
                 self?.completion()
             }
         )
-        start(coordinator)
+        start(coordinator, url: url)
     }
 }

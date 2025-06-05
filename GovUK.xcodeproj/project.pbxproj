@@ -245,6 +245,8 @@
 		B04C2E822DA9339B00F0F63E /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */; };
 		B0AD6F202DDA86D80077849F /* NotificationsOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD6F1F2DDA86D80077849F /* NotificationsOnboardingService.swift */; };
 		D00984F22D47BC9600D70FEE /* DeviceInformation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */; };
+		D02416452DEDB1C600F81C6D /* SignInSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02416442DEDB1C600F81C6D /* SignInSuccessViewModel.swift */; };
+		D02416472DEDC0C500F81C6D /* SignInSuccessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02416462DEDC0C500F81C6D /* SignInSuccessCoordinator.swift */; };
 		D028CCF42CB4247100742620 /* TopicsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF32CB4247100742620 /* TopicsRepository.swift */; };
 		D028CCF62CB9619B00742620 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CCF52CB9619B00742620 /* Topic.swift */; };
 		D028CD0C2CBEC8F400742620 /* TopicDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */; };
@@ -607,6 +609,8 @@
 		B0AD6F1F2DDA86D80077849F /* NotificationsOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsOnboardingService.swift; sourceTree = "<group>"; };
 		D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceInformation+Convenience.swift"; sourceTree = "<group>"; };
 		D01005352CECA6420013CBD0 /* Alpha.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Alpha.xcconfig; sourceTree = "<group>"; };
+		D02416442DEDB1C600F81C6D /* SignInSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSuccessViewModel.swift; sourceTree = "<group>"; };
+		D02416462DEDC0C500F81C6D /* SignInSuccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSuccessCoordinator.swift; sourceTree = "<group>"; };
 		D028CCF32CB4247100742620 /* TopicsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsRepository.swift; sourceTree = "<group>"; };
 		D028CCF52CB9619B00742620 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailResponse.swift; sourceTree = "<group>"; };
@@ -725,6 +729,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignedOutViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignInErrorViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignInSuccessViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignOutConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/StoredLocalAuthorityWidgetViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
@@ -768,6 +773,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignedOutViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignInErrorViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignInSuccessViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/SignOutConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/StoredLocalAuthorityWidgetViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/TopicDetailViewSnapshotTests.swift,
@@ -1111,6 +1117,7 @@
 				160EA7542C5B0401008F97AF /* SettingsViewModel.swift */,
 				D09046822DBFD9370096EE66 /* SignedOutViewModel.swift */,
 				D0EC94C62DCBAEE400A9707E /* SignInErrorViewModel.swift */,
+				D02416442DEDB1C600F81C6D /* SignInSuccessViewModel.swift */,
 				D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */,
 				4EEC0F2F2DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift */,
 				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
@@ -1317,6 +1324,7 @@
 				1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */,
 				D09046862DBFDF5D0096EE66 /* SignedOutCoordinator.swift */,
 				D0EC94C82DCBC65000A9707E /* SignInErrorCoordinator.swift */,
+				D02416462DEDC0C500F81C6D /* SignInSuccessCoordinator.swift */,
 				D08A9A7F2DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift */,
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 				5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */,
@@ -2037,6 +2045,7 @@
 				16FCDE782DC4E39A000E870D /* TokenRefreshResponse.swift in Sources */,
 				5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */,
 				4EF407562CE2796900D654FC /* UIButton+Extensions.swift in Sources */,
+				D02416472DEDC0C500F81C6D /* SignInSuccessCoordinator.swift in Sources */,
 				D0EC94C72DCBAEE400A9707E /* SignInErrorViewModel.swift in Sources */,
 				164091FA2DA3F4A600E3BE99 /* AuthenticationCoordinator.swift in Sources */,
 				5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */,
@@ -2232,6 +2241,7 @@
 				5D41DB702C088FEB0011E691 /* Container+ServiceClients.swift in Sources */,
 				D0EAB4FF2CDE5D5B007ACBCD /* AppEnvironmentService.swift in Sources */,
 				D056CE762D3A848A005845E0 /* InformationView.swift in Sources */,
+				D02416452DEDB1C600F81C6D /* SignInSuccessViewModel.swift in Sources */,
 				D0E855D42DDB85C1003B4D7A /* URLEncodedRequestBuilder.swift in Sources */,
 				4E0043142D9BE25E00DDDA8A /* NotificationSettingsCoordinator.swift in Sources */,
 				16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */,

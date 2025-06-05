@@ -112,12 +112,14 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
+        navigateToPostCodeEntryViewAction: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
             resolveAmbiguityAction: resolveAmbiguityAction,
+            navigateToConfirmationView: navigateToPostCodeEntryViewAction,
             dismissAction: dismissAction
         )
         let view = LocalAuthorityPostcodeEntryView(

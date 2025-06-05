@@ -34,6 +34,8 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
                     localAuthorities: localAuthorities,
                     postCode: postCode
                 )
+            }, navigateToPostCodeEntryViewAction: { [weak self] authority in
+                self?.navigatoToConfirmationWindow(localAuthority: authority)
             },
             dismissAction: { [weak self] in
                 self?.dismissModal()
@@ -55,7 +57,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
                 )
             },
             selectAddressAction: { [weak self] in
-                self?.navigateToAddressView(localAuthorities: localAuthorities)
+                self?.navigateToAddressView( localAuthorities: localAuthorities)
             },
             dismissAction: { [weak self] in
                 self?.dismissModal()

@@ -5,10 +5,28 @@ import UIComponents
 
 class LocalAuthoritySuccessViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
-    private let primaryButtonTitle = "completion"
+    private let primaryButtonTitle = "Done"
     let localAuthorityItem: Authority
     let completion: () -> Void
+    let unitarySuccessTitle: String = String.localAuthority.localized(
+        "localAuthoritySuccessUnitaryTitle"
+    )
+    let unitarySuccessDescription: String = String.localAuthority.localized(
+        "localAuthoritySuccessUnitaryDescription"
+    )
 
+    let twoTierSucessTitle: String = String.localAuthority.localized(
+        "localAuthoritySuccessTwoTierTitle"
+    )
+    let twoTierSuccessDescriptionOne: String = String.localAuthority.localized(
+        "localAuthoritySuccessTwoTierDescriptionOne"
+    )
+    let twoTierSuccessDescriptionTwo: String = String.localAuthority.localized(
+        "localAuthoritySuceessTwoTierDescriptionTwo"
+    )
+    let twoTierSuccessDescriptionThree: String = String.localAuthority.localized(
+        "localAuthoritySuccessTwoTierDescritionThree"
+    )
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityItem: Authority,
          completion: @escaping () -> Void) {

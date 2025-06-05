@@ -78,6 +78,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "localAuthorityCardWebsiteConstant" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -228,6 +231,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "We could not find a council for this postcode. Check the postcode and try again."
+          }
+        }
+      }
+    },
+    "localAuthoritySuccessTwoTierDescriptionOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Different local councils are responsible for different services."
+          }
+        }
+      }
+    },
+    "localAuthoritySuccessTwoTierDescritionThree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local councils’ websites from the bottom of the app home page."
+          }
+        }
+      }
+    },
+    "localAuthoritySuccessTwoTierTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services in your area are provided by 2 local councils"
+          }
+        }
+      }
+    },
+    "localAuthoritySuccessUnitaryDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local council's website from the bottom of the app home page."
+          }
+        }
+      }
+    },
+    "localAuthoritySuccessUnitaryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local council is"
+          }
+        }
+      }
+    },
+    "localAuthoritySuceessTwoTierDescriptionTwo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local councils are:"
           }
         }
       }

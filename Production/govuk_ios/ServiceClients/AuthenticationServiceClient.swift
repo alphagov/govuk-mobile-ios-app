@@ -109,6 +109,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             prefersEphemeralWebSession: true,
             redirectURI: Constants.API.authenticationCallbackUri,
             locale: .en,
+            tokenParameters: ["scope": "openid email"],
             tokenHeaders: ["x-attestation-token": token]
         )
     }

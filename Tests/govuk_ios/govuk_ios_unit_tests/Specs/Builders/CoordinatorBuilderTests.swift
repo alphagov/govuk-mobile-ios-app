@@ -34,7 +34,7 @@ struct CoordinatorBuilderTests {
     @Test
     func periauth_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.periauth(
+        let coordinator = subject.periAuth(
             navigationController: MockNavigationController(),
             completion: { }
         )
@@ -45,7 +45,7 @@ struct CoordinatorBuilderTests {
     @Test
     func postauth_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.postauth(
+        let coordinator = subject.postAuth(
             navigationController: MockNavigationController(),
             completion: { }
         )

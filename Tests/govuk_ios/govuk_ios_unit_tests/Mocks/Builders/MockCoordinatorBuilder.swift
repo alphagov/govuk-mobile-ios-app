@@ -15,7 +15,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _stubbedPreAuthCoordinator: BaseCoordinator?
     var _receivedPreAuthNavigationController: UINavigationController?
     var _receivedPreAuthCompletion: (() -> Void)?
-    override func preauth(navigationController: UINavigationController,
+    override func preAuth(navigationController: UINavigationController,
                           completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedPreAuthNavigationController = navigationController
         _receivedPreAuthCompletion = completion
@@ -24,7 +24,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedPeriAuthCoordinator: BaseCoordinator?
     var _receivedPeriAuthCompletion: (() -> Void)?
-    override func periauth(navigationController: UINavigationController,
+    override func periAuth(navigationController: UINavigationController,
                            completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedPeriAuthCompletion = completion
         return _stubbedPeriAuthCoordinator ?? MockBaseCoordinator()
@@ -32,7 +32,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedPostAuthCoordinator: BaseCoordinator?
     var _receivedPostAuthCompletion: (() -> Void)?
-    override func postauth(navigationController: UINavigationController,
+    override func postAuth(navigationController: UINavigationController,
                            completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedPostAuthCompletion = completion
         return _stubbedPostAuthCoordinator ?? MockBaseCoordinator()

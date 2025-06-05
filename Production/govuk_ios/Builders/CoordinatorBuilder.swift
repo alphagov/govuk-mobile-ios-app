@@ -20,7 +20,7 @@ class CoordinatorBuilder {
         )
     }
 
-    func preauth(navigationController: UINavigationController,
+    func preAuth(navigationController: UINavigationController,
                  completion: @escaping () -> Void) -> BaseCoordinator {
         PreAuthCoordinator(
             coordinatorBuilder: self,
@@ -29,7 +29,7 @@ class CoordinatorBuilder {
         )
     }
 
-    func periauth(navigationController: UINavigationController,
+    func periAuth(navigationController: UINavigationController,
                   completion: @escaping () -> Void) -> BaseCoordinator {
         PeriAuthCoordinator(
             coordinatorBuilder: self,
@@ -38,7 +38,7 @@ class CoordinatorBuilder {
         )
     }
 
-    func postauth(navigationController: UINavigationController,
+    func postAuth(navigationController: UINavigationController,
                   completion: @escaping () -> Void) -> BaseCoordinator {
         PostAuthCoordinator(
             coordinatorBuilder: self,

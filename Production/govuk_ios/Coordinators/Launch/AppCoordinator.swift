@@ -36,7 +36,7 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startPreAuthCoordinator() {
-        let coordinator = coordinatorBuilder.preauth(
+        let coordinator = coordinatorBuilder.preAuth(
             navigationController: root,
             completion: { [weak self] in
                 self?.initialLaunch = false
@@ -47,7 +47,7 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startPeriAuthCoordinator() {
-        let coordinator = coordinatorBuilder.periauth(
+        let coordinator = coordinatorBuilder.periAuth(
             navigationController: root,
             completion: { [weak self] in
                 self?.startPostAuthCoordinator()
@@ -57,7 +57,7 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func startPostAuthCoordinator() {
-        let coordinator = coordinatorBuilder.postauth(
+        let coordinator = coordinatorBuilder.postAuth(
             navigationController: root,
             completion: { [weak self] in
                 self?.startTabs()

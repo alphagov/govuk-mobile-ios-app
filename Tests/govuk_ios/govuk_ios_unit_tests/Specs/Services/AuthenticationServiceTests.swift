@@ -43,7 +43,6 @@ struct AuthenticationServiceTests {
                 #expect(sut.accessToken == expectedAccessToken)
                 #expect(sut.isSignedIn)
                 #expect(serviceResult.returningUser)
-                #expect(!sut.isReauth)
                 confirmation()
             }
         }
@@ -86,7 +85,6 @@ struct AuthenticationServiceTests {
                 #expect(sut.accessToken == expectedAccessToken)
                 #expect(sut.isSignedIn)
                 #expect(!serviceResult.returningUser)
-                #expect(!sut.isReauth)
                 confirmation()
             }
         }
@@ -304,7 +302,6 @@ struct AuthenticationServiceTests {
                 #expect(sut.refreshToken == refreshToken)
                 #expect(sut.accessToken == accessToken)
                 #expect(sut.idToken == idToken)
-                #expect(sut.isReauth)
                 confirmation()
             }
         }

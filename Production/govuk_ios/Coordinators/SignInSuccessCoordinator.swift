@@ -17,10 +17,6 @@ final class SignInSuccessCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard !authenticationService.isReauth else {
-            completion()
-            return
-        }
         let viewModel = SignInSuccessViewModel(
             analyticsService: analyticsService,
             completion: { [weak self] in

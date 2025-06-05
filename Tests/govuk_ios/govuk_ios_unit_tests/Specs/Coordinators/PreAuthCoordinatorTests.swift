@@ -9,7 +9,7 @@ import UIKit
 @MainActor
 struct PreAuthCoordinatorTests {
 
-    @Test()
+    @Test
     func start_startsLaunchCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let stubbedLaunchCoordinator = MockBaseCoordinator()
@@ -25,7 +25,7 @@ struct PreAuthCoordinatorTests {
         #expect(stubbedLaunchCoordinator._startCalled)
     }
 
-    @Test()
+    @Test
     func launchCompletion_startsAnalyticsConsent() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let stubbedLaunchCoordinator = MockBaseCoordinator()
@@ -45,7 +45,7 @@ struct PreAuthCoordinatorTests {
         #expect(stubbedAnalyticsConsentCoordinator._startCalled)
     }
 
-    @Test()
+    @Test
     func analyticsCompletion_startsNotificationConsentCheck() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let stubbedLaunchCoordinator = MockBaseCoordinator()
@@ -69,7 +69,7 @@ struct PreAuthCoordinatorTests {
         #expect(mockCoordinatorBuilder._receivedNotificationConsentResult == expectedLaunchResponse.notificationConsentResult)
     }
 
-    @Test()
+    @Test
     func notificationConsentCheckCompletion_startsAppForcedUpdate() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let stubbedLaunchCoordinator = MockBaseCoordinator()
@@ -98,7 +98,7 @@ struct PreAuthCoordinatorTests {
         #expect(mockCoordinatorBuilder._receivedAppForcedUpdateLaunchResponse == expectedLaunchResponse)
     }
 
-    @Test()
+    @Test
     func appForcedUpdateCompletion_startsAppUnavailable() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let stubbedLaunchCoordinator = MockBaseCoordinator()
@@ -130,7 +130,7 @@ struct PreAuthCoordinatorTests {
         #expect(mockCoordinatorBuilder._receivedAppUnavailableLaunchResponse == expectedLaunchResponse)
     }
 
-    @Test()
+    @Test
     func appUnavailableCompletion_startsAppRecommendUpdate() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let stubbedLaunchCoordinator = MockBaseCoordinator()
@@ -166,7 +166,7 @@ struct PreAuthCoordinatorTests {
     }
 
 
-    @Test()
+    @Test
     func appRecommendUpdateCompletion_completesCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let stubbedLaunchCoordinator = MockBaseCoordinator()

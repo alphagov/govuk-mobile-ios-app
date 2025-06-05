@@ -213,31 +213,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _stubbedSignOutConfirmationCoordinator ?? MockBaseCoordinator()
     }
 
-//    var _receivedSignedOutCompletion: ((Bool) -> Void)?
-//    var _stubbedSignedOutCoordinator: MockBaseCoordinator?
-//    override func signedOut(navigationController: UINavigationController,
-//                            completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-//        _receivedSignedOutCompletion = completion
-//        return _stubbedSignedOutCoordinator ?? MockBaseCoordinator()
-//    }
-
-//    var _receivedSignInErrorCompletion: (() -> Void)?
-//    var _stubbedSignInErrorCoordinator: MockBaseCoordinator?
-//    override func signInError(navigationController: UINavigationController,
-//                              completion: @escaping () -> Void) -> BaseCoordinator {
-//        _receivedSignInErrorCompletion = completion
-//        return _stubbedSignInErrorCoordinator ?? MockBaseCoordinator()
-//    }
-
-//    var _receivedInactiveAction: (() -> Void)?
-//    var _stubbedInactivityCoordinator: MockBaseCoordinator?
-//    override func inactivityCoordinator(navigationController: UINavigationController,
-//                                        inactivityService: InactivityServiceInterface,
-//                                        inactiveAction: @escaping () -> Void) -> BaseCoordinator {
-//        _receivedInactiveAction = inactiveAction
-//        return _stubbedInactivityCoordinator ?? MockBaseCoordinator()
-//    }
-
     var _receivedSignInSuccessCompletion: (() -> Void)?
     var _signInSuccessCallAction: (() -> Void)?
     var _stubbedSignInSuccessCoordinator: MockBaseCoordinator?

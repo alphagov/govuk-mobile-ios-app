@@ -235,7 +235,7 @@
 		5DFB48982DE9F7F600B41CDA /* AnalyticsConsentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB487A2DE9F7F600B41CDA /* AnalyticsConsentCoordinator.swift */; };
 		5DFB48992DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB488A2DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift */; };
 		5DFB489A2DE9F7F600B41CDA /* LocalAuthenticationOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB48812DE9F7F600B41CDA /* LocalAuthenticationOnboardingCoordinator.swift */; };
-		5DFB489B2DE9F7F600B41CDA /* ReauthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB48872DE9F7F600B41CDA /* ReauthenticationCoordinator.swift */; };
+		5DFB489B2DE9F7F600B41CDA /* ReAuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB48872DE9F7F600B41CDA /* ReAuthenticationCoordinator.swift */; };
 		5DFB489C2DE9F7F600B41CDA /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB48802DE9F7F600B41CDA /* LaunchCoordinator.swift */; };
 		5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFDEBF02CEE396D00F7A365 /* UserProperty+Convenience.swift */; };
 		5DFE5F1E2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFE5F1D2D6DE5900041E3B4 /* UNUserNotificationCenter+Interface.swift */; };
@@ -594,7 +594,7 @@
 		5DFB48842DE9F7F600B41CDA /* PeriAuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriAuthCoordinator.swift; sourceTree = "<group>"; };
 		5DFB48852DE9F7F600B41CDA /* PostAuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAuthCoordinator.swift; sourceTree = "<group>"; };
 		5DFB48862DE9F7F600B41CDA /* PreAuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAuthCoordinator.swift; sourceTree = "<group>"; };
-		5DFB48872DE9F7F600B41CDA /* ReauthenticationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReauthenticationCoordinator.swift; sourceTree = "<group>"; };
+		5DFB48872DE9F7F600B41CDA /* ReAuthenticationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReAuthenticationCoordinator.swift; sourceTree = "<group>"; };
 		5DFB48882DE9F7F600B41CDA /* ReLaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLaunchCoordinator.swift; sourceTree = "<group>"; };
 		5DFB48892DE9F7F600B41CDA /* TopicOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		5DFB488A2DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOnboardingCoordinator.swift; sourceTree = "<group>"; };
@@ -1565,7 +1565,7 @@
 				5DFB48842DE9F7F600B41CDA /* PeriAuthCoordinator.swift */,
 				5DFB48852DE9F7F600B41CDA /* PostAuthCoordinator.swift */,
 				5DFB48862DE9F7F600B41CDA /* PreAuthCoordinator.swift */,
-				5DFB48872DE9F7F600B41CDA /* ReauthenticationCoordinator.swift */,
+				5DFB48872DE9F7F600B41CDA /* ReAuthenticationCoordinator.swift */,
 				5DFB48882DE9F7F600B41CDA /* ReLaunchCoordinator.swift */,
 				5DFB48892DE9F7F600B41CDA /* TopicOnboardingCoordinator.swift */,
 				5DFB488A2DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift */,
@@ -2054,7 +2054,7 @@
 				5DFB48982DE9F7F600B41CDA /* AnalyticsConsentCoordinator.swift in Sources */,
 				5DFB48992DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift in Sources */,
 				5DFB489A2DE9F7F600B41CDA /* LocalAuthenticationOnboardingCoordinator.swift in Sources */,
-				5DFB489B2DE9F7F600B41CDA /* ReauthenticationCoordinator.swift in Sources */,
+				5DFB489B2DE9F7F600B41CDA /* ReAuthenticationCoordinator.swift in Sources */,
 				5DFB489C2DE9F7F600B41CDA /* LaunchCoordinator.swift in Sources */,
 				4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */,
 				16FCDE782DC4E39A000E870D /* TokenRefreshResponse.swift in Sources */,

@@ -32,7 +32,18 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func periauth_returnsExpectedResult() {
+    func preAuth_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.preAuth(
+            navigationController: MockNavigationController(),
+            completion: { }
+        )
+
+        #expect(coordinator is PreAuthCoordinator)
+    }
+
+    @Test
+    func periAuth_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.periAuth(
             navigationController: MockNavigationController(),
@@ -43,7 +54,7 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func postauth_returnsExpectedResult() {
+    func postAuth_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.postAuth(
             navigationController: MockNavigationController(),
@@ -325,7 +336,7 @@ struct CoordinatorBuilderTests {
             completionAction: { }
         )
 
-        #expect(coordinator is ReauthenticationCoordinator)
+        #expect(coordinator is ReAuthenticationCoordinator)
     }
 
     @Test

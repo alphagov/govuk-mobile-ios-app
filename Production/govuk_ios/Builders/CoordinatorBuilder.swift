@@ -303,7 +303,7 @@ class CoordinatorBuilder {
 
     func reauthentication(navigationController: UINavigationController,
                           completionAction: @escaping () -> Void) -> BaseCoordinator {
-        ReauthenticationCoordinator(
+        ReAuthenticationCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class ReauthenticationCoordinator: BaseCoordinator {
+class ReAuthenticationCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface

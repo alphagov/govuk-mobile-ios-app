@@ -18,9 +18,7 @@ class AppCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         startInactivityMonitoring()
-        if let url = url {
-            pendingDeeplink = url
-        }
+        pendingDeeplink = url ?? pendingDeeplink
         if initialLaunch {
             startPreAuthCoordinator()
         } else {
@@ -79,8 +77,9 @@ class AppCoordinator: BaseCoordinator {
     }
 
     private func handlePendingDeeplink() {
-        if let tabCoordinator = self.tabCoordinator {
-            tabCoordinator.start(url: pendingDeeplink)
+        if let tabCoordinator = self.tabCoordinator,
+           let url = pendingDeeplink {
+            tabCoordinator.start(url: url)
             pendingDeeplink = nil
         }
     }

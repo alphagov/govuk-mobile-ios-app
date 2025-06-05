@@ -16,7 +16,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
             slug: "test slug",
             parent: nil
         )
-        let viewModel = LocalAuthoritySuccessViewModel(
+        let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
             completion: {}
@@ -40,7 +40,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
             slug: "test slug",
             parent: nil
         )
-        let viewModel = LocalAuthoritySuccessViewModel(
+        let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
             completion: {}
@@ -70,7 +70,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
             slug: "test slug",
             parent: parentAuthority
         )
-        let viewModel = LocalAuthoritySuccessViewModel(
+        let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
             completion: {}
@@ -100,7 +100,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
             slug: "test slug",
             parent: parentAuthority
         )
-        let viewModel = LocalAuthoritySuccessViewModel(
+        let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
             completion: {}

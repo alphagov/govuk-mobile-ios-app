@@ -259,7 +259,7 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityItem: Authority,
         completion: @escaping () -> Void) -> UIViewController {
-            let viewModel = LocalAuthoritySuccessViewModel(
+            let viewModel = LocalAuthorityConfirmationViewModel(
                 analyticsService: analyticsService,
                 localAuthorityItem: localAuthorityItem,
                 completion: completion

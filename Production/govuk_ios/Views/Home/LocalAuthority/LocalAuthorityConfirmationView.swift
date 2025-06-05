@@ -2,9 +2,9 @@ import SwiftUI
 import GOVKit
 
 struct LocalAuthorityConfirmationView: View {
-    @StateObject var viewModel: LocalAuthoritySuccessViewModel
+    @StateObject var viewModel: LocalAuthorityConfirmationViewModel
 
-    init(viewModel: LocalAuthoritySuccessViewModel) {
+    init(viewModel: LocalAuthorityConfirmationViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -81,6 +81,6 @@ struct LocalAuthorityConfirmationView: View {
 
 
 extension LocalAuthorityConfirmationView: TrackableScreen {
-    var trackingTitle: String? { "Ask Andrew" }
-    var trackingName: String { "Ask Andrew" }
+    var trackingTitle: String? { "Your local council" }
+    var trackingName: String { "Your local council" }
 }

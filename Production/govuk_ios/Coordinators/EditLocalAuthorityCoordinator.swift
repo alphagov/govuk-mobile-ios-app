@@ -82,7 +82,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
     }
 
     private func navigatoToConfirmationWindow(localAuthority: Authority) {
-        let viewController = viewControllerBuilder.localAuthoritySuccessScreen(
+        let viewController = viewControllerBuilder.localAuthorityConfirmationScreen(
             analyticsService: analyticsService,
             localAuthorityItem: localAuthority,
             completion: { [weak self] in

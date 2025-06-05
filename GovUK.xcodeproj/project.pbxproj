@@ -1117,7 +1117,6 @@
 				164150AE2DE5DB6800798DF3 /* WelcomeOnboardingViewModel.swift */,
 				D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
-				4E5E79A52DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1701,6 +1700,7 @@
 		D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
+				4E5E79A52DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift */,
 				D0F6813B2DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift */,
 				D0F6813C2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift */,
 				D0F6813D2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift */,

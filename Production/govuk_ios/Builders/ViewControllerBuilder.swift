@@ -255,7 +255,7 @@ class ViewControllerBuilder {
     }
 
     @MainActor
-    func localAuthoritySuccessScreen(
+    func localAuthorityConfirmationScreen(
         analyticsService: AnalyticsServiceInterface,
         localAuthorityItem: Authority,
         completion: @escaping () -> Void) -> UIViewController {

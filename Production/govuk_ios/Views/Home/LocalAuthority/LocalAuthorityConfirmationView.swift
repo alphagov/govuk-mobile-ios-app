@@ -2,10 +2,10 @@ import SwiftUI
 import GOVKit
 
 struct LocalAuthorityConfirmationView: View {
-    @StateObject var viewModel: LocalAuthorityConfirmationViewModel
+    private let viewModel: LocalAuthorityConfirmationViewModel
 
     init(viewModel: LocalAuthorityConfirmationViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -60,6 +60,7 @@ struct LocalAuthorityConfirmationView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .accessibilityAddTraits(.isHeader)
+                .padding([.bottom], 16)
             Text(viewModel.twoTierSuccessDescriptionOne)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
             Text(viewModel.twoTierSuccessDescriptionTwo)

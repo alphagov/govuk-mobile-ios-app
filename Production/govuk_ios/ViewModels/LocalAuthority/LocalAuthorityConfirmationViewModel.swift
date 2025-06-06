@@ -3,7 +3,7 @@ import GOVKit
 import SwiftUI
 import UIComponents
 
-class LocalAuthorityConfirmationViewModel: ObservableObject {
+class LocalAuthorityConfirmationViewModel {
     let analyticsService: AnalyticsServiceInterface
     private let primaryButtonTitle = "Done"
     let localAuthorityItem: Authority

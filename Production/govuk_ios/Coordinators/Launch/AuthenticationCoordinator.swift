@@ -63,9 +63,7 @@ class AuthenticationCoordinator: BaseCoordinator {
     private func startSignInSuccess() {
         let coordinator = coordinatorBuilder.signInSuccess(
             navigationController: root,
-            completion: { [weak self] in
-                self?.completionAction()
-            }
+            completion: completionAction
         )
         start(coordinator)
     }

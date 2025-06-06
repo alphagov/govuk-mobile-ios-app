@@ -18,16 +18,15 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
     )
-
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
          ambiguousAuthorities: AmbiguousAuthorities,
-         navigateToSuccessView: @escaping (Authority) -> Void,
+         navigateToConfirmationView: @escaping (Authority) -> Void,
          dismissAction: @escaping () -> Void) {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
         self.ambiguousAuthorities = ambiguousAuthorities
-        self.navigateToConfirmationView = navigateToSuccessView
+        self.navigateToConfirmationView = navigateToConfirmationView
         self.dismissAction = dismissAction
         addresses = ambiguousAuthorities.addresses
     }

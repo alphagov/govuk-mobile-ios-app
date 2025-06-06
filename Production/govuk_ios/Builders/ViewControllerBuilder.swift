@@ -164,7 +164,7 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
-            navigateToSuccessView: navigateToConfirmationView,
+            navigateToConfirmationView: navigateToConfirmationView,
             dismissAction: dismissAction
         )
         let view = AmbiguousAddressSelectionView(

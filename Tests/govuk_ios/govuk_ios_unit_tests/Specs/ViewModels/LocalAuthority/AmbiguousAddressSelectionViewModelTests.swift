@@ -7,7 +7,7 @@ struct AmbiguousAddressSelectionViewModelTests {
     @Test
     func confirmButtonAction_savesLocalAuthority_andNavigateToSuccessView() {
         let mockLocalAuthorityService = MockLocalAuthorityService()
-        var navigatedToSuccesView = false
+        var navigatedToConfirmationView = false
         let authorityOne = Authority(
             name: "name1",
             homepageUrl: "homepageURL1",
@@ -38,15 +38,15 @@ struct AmbiguousAddressSelectionViewModelTests {
                 authorities: [authorityOne, authorityTwo],
                 addresses: [addressOne, addressTwo]
             ),
-            navigateToSuccessView: {_ in
-                navigatedToSuccesView = true
+            navigateToConfirmationView: {_ in
+                navigatedToConfirmationView = true
             },
             dismissAction: {}
         )
         sut.selectedAddress = addressOne
         sut.confirmButtonModel.action()
         #expect(mockLocalAuthorityService._savedAuthority?.slug == "slug1")
-        #expect(navigatedToSuccesView)
+        #expect(navigatedToConfirmationView)
     }
 
     @Test
@@ -83,7 +83,7 @@ struct AmbiguousAddressSelectionViewModelTests {
                 authorities: [authorityOne, authorityTwo],
                 addresses: [addressOne, addressTwo]
             ),
-            navigateToSuccessView: {_ in },
+            navigateToConfirmationView: {_ in },
             dismissAction: { }
         )
         sut.selectedAddress = addressOne

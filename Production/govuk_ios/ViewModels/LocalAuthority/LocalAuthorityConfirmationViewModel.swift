@@ -9,22 +9,22 @@ class LocalAuthorityConfirmationViewModel: ObservableObject {
     let localAuthorityItem: Authority
     let dismiss: () -> Void
     let unitarySuccessTitle: String = String.localAuthority.localized(
-        "localAuthoritySuccessUnitaryTitle"
+        "localAuthorityConfirmationUnitaryTitle"
     )
     let unitarySuccessDescription: String = String.localAuthority.localized(
-        "localAuthoritySuccessUnitaryDescription"
+        "localAuthorityConfirmationUnitaryDescription"
     )
     let twoTierSucessTitle: String = String.localAuthority.localized(
-        "localAuthoritySuccessTwoTierTitle"
+        "localAuthorityConfirmationTwoTierTitle"
     )
     let twoTierSuccessDescriptionOne: String = String.localAuthority.localized(
-        "localAuthoritySuccessTwoTierDescriptionOne"
+        "localAuthorityConfirmationTwoTierDescriptionOne"
     )
     let twoTierSuccessDescriptionTwo: String = String.localAuthority.localized(
-        "localAuthoritySuceessTwoTierDescriptionTwo"
+        "localAuthorityConfirmationTwoTierDescriptionTwo"
     )
     let twoTierSuccessDescriptionThree: String = String.localAuthority.localized(
-        "localAuthoritySuccessTwoTierDescritionThree"
+        "localAuthorityConfirmationTwoTierDescritionThree"
     )
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityItem: Authority,

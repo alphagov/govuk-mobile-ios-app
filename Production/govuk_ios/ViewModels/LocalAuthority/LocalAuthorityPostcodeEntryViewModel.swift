@@ -145,11 +145,7 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
 
     private func handleFetchLocalAuthorityResponse(_ response: LocalAuthorityResponse) {
         switch response.type {
-        case .authority:
-            guard let authority = response.localAuthority else {
-                populateErrorMessage(.decodingError)
-                return
-            }
+        case .authority(let authority):
             localAuthoritySelected(authority)
         case .addresses(let addressess):
             fetchAuthoritiesWithAddresses(addressess)

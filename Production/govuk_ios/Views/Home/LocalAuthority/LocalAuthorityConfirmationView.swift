@@ -31,14 +31,13 @@ struct LocalAuthorityConfirmationView: View {
 
     private var cancelButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
-            Button("cancel") {
+            Button(viewModel.cancelButtonTitle) {
                 viewModel.dismiss()
             }
             .foregroundColor(Color(UIColor.govUK.text.link))
         }
     }
 
-    @ViewBuilder
     var unitaryView: some View {
         VStack(alignment: .leading, spacing: 15) {
             Text("\(viewModel.unitarySuccessTitle) \(viewModel.localAuthorityItem.name)")
@@ -52,7 +51,6 @@ struct LocalAuthorityConfirmationView: View {
         }.padding()
     }
 
-    @ViewBuilder
     var twoTierView: some View {
         VStack(alignment: .leading, spacing: 15) {
             Text(viewModel.twoTierSucessTitle)

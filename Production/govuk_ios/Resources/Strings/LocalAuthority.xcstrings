@@ -81,6 +81,17 @@
     "Key" : {
       "extractionState" : "manual"
     },
+    "localAuthorityCancelButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cancel"
+          }
+        }
+      }
+    },
     "localAuthorityCardWebsiteConstant" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -88,6 +99,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "website"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationprimaryButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
           }
         }
       }

@@ -5,7 +5,12 @@ import UIComponents
 
 class LocalAuthorityConfirmationViewModel {
     let analyticsService: AnalyticsServiceInterface
-    private let primaryButtonTitle = "Done"
+    private let primaryButtonTitle = String.localAuthority.localized(
+        "localAuthorityConfirmationprimaryButton"
+    )
+     let cancelButtonTitle = String.localAuthority.localized(
+        "localAuthorityCancelButton"
+    )
     let localAuthorityItem: Authority
     let dismiss: () -> Void
     let unitarySuccessTitle: String = String.localAuthority.localized(

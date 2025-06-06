@@ -46,7 +46,7 @@ final class SignedOutViewModel: InfoViewModelInterface {
     }
 
     var buttonViewModel: GOVUKButton.ButtonViewModel {
-        return GOVUKButton.ButtonViewModel(
+        GOVUKButton.ButtonViewModel(
             localisedTitle: buttonTitle,
             action: { [weak self] in
                 guard let self = self else { return }

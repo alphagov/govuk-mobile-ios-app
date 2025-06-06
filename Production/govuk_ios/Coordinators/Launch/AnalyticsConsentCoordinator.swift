@@ -5,26 +5,26 @@ import GOVKit
 
 class AnalyticsConsentCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
-    private let dismissAction: () -> Void
+    private let completion: () -> Void
 
     init(navigationController: UINavigationController,
          analyticsService: AnalyticsServiceInterface,
-         dismissAction: @escaping () -> Void) {
+         completion: @escaping () -> Void) {
         self.analyticsService = analyticsService
-        self.dismissAction = dismissAction
+        self.completion = completion
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
         guard analyticsService.permissionState == .unknown
-        else { return dismissAction() }
+        else { return completion() }
         setAnalyticsConsent()
     }
 
     private func setAnalyticsConsent() {
         let viewModel = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
-            dismissAction: dismissAction
+            completion: completion
         )
         let containerView = AnalyticsConsentContainerView(
             viewModel: viewModel

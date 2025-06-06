@@ -10,7 +10,7 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
     @Published var textFieldColour: UIColor = UIColor.govUK.strokes.listDivider
     private let analyticsService: AnalyticsServiceInterface
     let dismissAction: () -> Void
-    private let navigateToConfirmationView: (Authority) -> Void
+    private let localAuthoritySelected: (Authority) -> Void
     let resolveAmbiguityAction: (AmbiguousAuthorities, String) -> Void
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
@@ -40,10 +40,10 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
     init(service: LocalAuthorityServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
-         navigateToConfirmationView: @escaping (Authority) -> Void,
+         localAuthoritySelected: @escaping (Authority) -> Void,
          dismissAction: @escaping () -> Void) {
         self.service = service
-        self.navigateToConfirmationView = navigateToConfirmationView
+        self.localAuthoritySelected = localAuthoritySelected
         self.analyticsService = analyticsService
         self.resolveAmbiguityAction = resolveAmbiguityAction
         self.dismissAction = dismissAction
@@ -133,24 +133,28 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
     }
 
     func fetchLocalAuthority(postCode: String) {
-        service.fetchLocalAuthority(postcode: postCode) { [weak self] results in
-            switch results {
+        service.fetchLocalAuthority(postcode: postCode) { [weak self] result in
+            switch result {
             case .success(let response):
-                switch response.type {
-                case .authority:
-                    guard let authority = response.localAuthority else {
-                        self?.populateErrorMessage(.decodingError)
-                        return
-                    }
-                    self?.navigateToConfirmationView(authority)
-                case .addresses(let addressess):
-                    self?.fetchAuthoritiesWithAddresses(addressess)
-                case .unknown:
-                    self?.populateErrorMessage(.apiUnavailable)
-                }
+                self?.handleFetchLocalAuthorityResponse(response)
             case .failure(let error):
                 self?.populateErrorMessage(error)
             }
+        }
+    }
+
+    private func handleFetchLocalAuthorityResponse(_ response: LocalAuthorityResponse) {
+        switch response.type {
+        case .authority:
+            guard let authority = response.localAuthority else {
+                populateErrorMessage(.decodingError)
+                return
+            }
+            localAuthoritySelected(authority)
+        case .addresses(let addressess):
+            fetchAuthoritiesWithAddresses(addressess)
+        case .unknown:
+            populateErrorMessage(.apiUnavailable)
         }
     }
 

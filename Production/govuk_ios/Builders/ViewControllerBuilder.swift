@@ -112,14 +112,14 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
-        navigateToConfirmationView: @escaping (Authority) -> Void,
+        localAuthoritySelected: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
             resolveAmbiguityAction: resolveAmbiguityAction,
-            navigateToConfirmationView: navigateToConfirmationView,
+            localAuthoritySelected: localAuthoritySelected,
             dismissAction: dismissAction
         )
         let view = LocalAuthorityPostcodeEntryView(
@@ -134,7 +134,7 @@ class ViewControllerBuilder {
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
         postCode: String,
-        navigateToConfirmationView: @escaping (Authority) -> Void,
+        localAuthoritySelected: @escaping (Authority) -> Void,
         selectAddressAction: @escaping () -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
@@ -143,7 +143,7 @@ class ViewControllerBuilder {
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
             postCode: postCode,
-            navigateToConfirmationView: navigateToConfirmationView,
+            localAuthoritySelected: localAuthoritySelected,
             selectAddressAction: selectAddressAction,
             dismissAction: dismissAction
         )
@@ -164,7 +164,7 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
-            navigateToConfirmationView: navigateToConfirmationView,
+            localAuthoritySelected: navigateToConfirmationView,
             dismissAction: dismissAction
         )
         let view = AmbiguousAddressSelectionView(

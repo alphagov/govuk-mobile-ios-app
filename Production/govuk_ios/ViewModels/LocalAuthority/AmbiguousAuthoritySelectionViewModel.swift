@@ -10,7 +10,7 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
     private let ambiguousAuthorities: AmbiguousAuthorities
     let localAuthorities: [Authority]
     @Published var selectedAuthority: Authority?
-    private let navigateToConfirmationView: (Authority) -> Void
+    private let localAuthoritySelected: (Authority) -> Void
     private let selectAddressAction: () -> Void
     let dismissAction: () -> Void
     let title = String.localAuthority.localized("ambiguousLocalAuthorityViewTitle")
@@ -26,14 +26,14 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
          localAuthorityService: LocalAuthorityServiceInterface,
          ambiguousAuthorities: AmbiguousAuthorities,
          postCode: String,
-         navigateToConfirmationView: @escaping (Authority) -> Void,
+         localAuthoritySelected: @escaping (Authority) -> Void,
          selectAddressAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
         self.ambiguousAuthorities = ambiguousAuthorities
         self.postCode = postCode
-        self.navigateToConfirmationView = navigateToConfirmationView
+        self.localAuthoritySelected = localAuthoritySelected
         self.selectAddressAction = selectAddressAction
         self.dismissAction = dismissAction
         localAuthorities = ambiguousAuthorities.authorities
@@ -51,7 +51,7 @@ class AmbiguousAuthoritySelectionViewModel: ObservableObject {
                 }
                 self?.trackNavigationEvent(buttonTitle)
                 self?.localAuthorityService.saveLocalAuthority(selectedAuthority)
-                self?.navigateToConfirmationView(selectedAuthority)
+                self?.localAuthoritySelected(selectedAuthority)
             }
         )
     }

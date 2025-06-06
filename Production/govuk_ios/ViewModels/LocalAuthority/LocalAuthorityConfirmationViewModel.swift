@@ -38,8 +38,7 @@ class LocalAuthorityConfirmationViewModel {
         .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
-                guard let title = self?.primaryButtonTitle else { return }
-                self?.trackNavigationEvent(title)
+                self?.trackNavigationEvent()
                 self?.dismiss()
             }
         )
@@ -49,9 +48,9 @@ class LocalAuthorityConfirmationViewModel {
         analyticsService.track(screen: screen)
     }
 
-    private func trackNavigationEvent(_ title: String) {
+    private func trackNavigationEvent() {
         let event = AppEvent.buttonNavigation(
-            text: title,
+            text: self.primaryButtonTitle,
             external: true
         )
         analyticsService.track(event: event)

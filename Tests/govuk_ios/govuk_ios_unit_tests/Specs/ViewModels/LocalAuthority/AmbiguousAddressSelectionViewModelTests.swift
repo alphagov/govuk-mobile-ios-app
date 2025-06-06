@@ -38,7 +38,7 @@ struct AmbiguousAddressSelectionViewModelTests {
                 authorities: [authorityOne, authorityTwo],
                 addresses: [addressOne, addressTwo]
             ),
-            navigateToConfirmationView: {_ in
+            localAuthoritySelected: {_ in
                 navigatedToConfirmationView = true
             },
             dismissAction: {}
@@ -83,7 +83,7 @@ struct AmbiguousAddressSelectionViewModelTests {
                 authorities: [authorityOne, authorityTwo],
                 addresses: [addressOne, addressTwo]
             ),
-            navigateToConfirmationView: {_ in },
+            localAuthoritySelected: {_ in },
             dismissAction: { }
         )
         sut.selectedAddress = addressOne

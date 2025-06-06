@@ -65,7 +65,7 @@ final class AmbiguousAddressViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             localAuthorityService: MockLocalAuthorityService(),
             ambiguousAuthorities: ambigiousAuthorities,
-            navigateToConfirmationView: {_ in},
+            localAuthoritySelected: {_ in},
             dismissAction: { }
         )
 

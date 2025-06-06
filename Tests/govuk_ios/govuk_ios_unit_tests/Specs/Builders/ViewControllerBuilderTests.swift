@@ -256,7 +256,7 @@ struct ViewControllerBuilderTests {
         let result = subject.notificationConsentAlert(
             analyticsService: MockAnalyticsService(),
             grantConsentAction: { },
-            openSettingsAction: { }
+            openSettingsAction: { _ in }
         )
 
         #expect(result is NotificationConsentAlertViewController)

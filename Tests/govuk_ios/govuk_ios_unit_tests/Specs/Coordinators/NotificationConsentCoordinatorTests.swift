@@ -133,8 +133,9 @@ struct NotificationConsentCoordinatorTests {
             animated: false
         )
 
-        mockViewControllerBuilder._receivedNotificationConsentAlertOpenSettingsAction?()
-        let alert = mockNotificationConsentAlertViewController._presentedViewController as? UIAlertController
+        let viewController = MockBaseViewController.mock
+        mockViewControllerBuilder._receivedNotificationConsentAlertOpenSettingsAction?(viewController)
+        let alert = viewController._presentedViewController as? UIAlertController
         #expect(alert != nil)
     }
 }

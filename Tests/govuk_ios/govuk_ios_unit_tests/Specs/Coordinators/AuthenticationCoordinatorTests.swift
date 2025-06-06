@@ -20,6 +20,7 @@ class AuthenticationCoordinatorTests {
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
+        let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -29,6 +30,7 @@ class AuthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -55,6 +57,7 @@ class AuthenticationCoordinatorTests {
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: false)
         )
+        let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -64,6 +67,7 @@ class AuthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -90,6 +94,7 @@ class AuthenticationCoordinatorTests {
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
+        let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -99,6 +104,7 @@ class AuthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) },
                 handleError: { _ in }
             )
@@ -123,6 +129,7 @@ class AuthenticationCoordinatorTests {
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
+        let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -132,6 +139,7 @@ class AuthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -155,6 +163,7 @@ class AuthenticationCoordinatorTests {
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
+        let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -164,6 +173,7 @@ class AuthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -185,6 +195,8 @@ class AuthenticationCoordinatorTests {
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .failure(.genericError)
+
+        let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
         newWindow.makeKeyAndVisible()
@@ -196,6 +208,7 @@ class AuthenticationCoordinatorTests {
                 coordinatorBuilder: MockCoordinatorBuilder.mock,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) },
                 handleError: { error in
                     authError = error

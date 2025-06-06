@@ -14,20 +14,30 @@ class PostAuthCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        startTopicOnboarding(url: url)
+        startAnalyicsOnboardingCoordinator()
     }
 
-    private func startTopicOnboarding(url: URL?) {
-        let coordinator = coordinatorBuilder.topicOnboarding(
+    private func startAnalyicsOnboardingCoordinator() {
+        let coordinator = coordinatorBuilder.analyticsConsent(
             navigationController: root,
-            didDismissAction: { [weak self] in
-                self?.startNotificationOnboardingCoordinator(url: url)
+            completion: { [weak self] in
+                self?.startTopicOnboarding()
             }
         )
         start(coordinator)
     }
 
-    private func startNotificationOnboardingCoordinator(url: URL?) {
+    private func startTopicOnboarding() {
+        let coordinator = coordinatorBuilder.topicOnboarding(
+            navigationController: root,
+            didDismissAction: { [weak self] in
+                self?.startNotificationOnboardingCoordinator()
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startNotificationOnboardingCoordinator() {
         let coordinator = coordinatorBuilder.notificationOnboarding(
             navigationController: root,
             completion: completion

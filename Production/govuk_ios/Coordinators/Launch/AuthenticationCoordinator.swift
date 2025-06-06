@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 import UIKit
 import Authentication
 
@@ -6,6 +7,7 @@ class AuthenticationCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let completionAction: () -> Void
     private let handleError: (AuthenticationError) -> Void
 
@@ -13,11 +15,13 @@ class AuthenticationCoordinator: BaseCoordinator {
          coordinatorBuilder: CoordinatorBuilder,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void,
          handleError: @escaping (AuthenticationError) -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
+        self.analyticsService = analyticsService
         self.completionAction = completionAction
         self.handleError = handleError
         super.init(navigationController: navigationController)
@@ -36,15 +40,24 @@ class AuthenticationCoordinator: BaseCoordinator {
 
         let result = await authenticationService.authenticate(window: window)
         switch result {
-        case .success:
+        case .success(let response):
             if shouldEncryptRefreshToken {
                 authenticationService.encryptRefreshToken()
             }
+            handleUserAuthChange(response: response)
             startSignInSuccess()
         case .failure(let error):
             DispatchQueue.main.async {
                 self.handleError(error)
             }
+        }
+    }
+
+    private func handleUserAuthChange(response: AuthenticationServiceResponse) {
+        if response.returningUser {
+            return
+        } else {
+            analyticsService.resetConsent()
         }
     }
 

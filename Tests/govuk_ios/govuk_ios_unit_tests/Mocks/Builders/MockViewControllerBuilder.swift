@@ -191,10 +191,10 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedNotificationConsentAlertViewController: UIViewController?
     var _receivedNotificationConsentAlertGrantConsentAction: (() -> Void)?
-    var _receivedNotificationConsentAlertOpenSettingsAction: (() -> Void)?
+    var _receivedNotificationConsentAlertOpenSettingsAction: ((UIViewController) -> Void)?
     override func notificationConsentAlert(analyticsService: any AnalyticsServiceInterface,
                                            grantConsentAction: @escaping () -> Void,
-                                           openSettingsAction: @escaping () -> Void) -> UIViewController {
+                                           openSettingsAction: @escaping (UIViewController) -> Void) -> UIViewController {
         _receivedNotificationConsentAlertGrantConsentAction = grantConsentAction
         _receivedNotificationConsentAlertOpenSettingsAction = openSettingsAction
         return _stubbedNotificationConsentAlertViewController ?? UIViewController()

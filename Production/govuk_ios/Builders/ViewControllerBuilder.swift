@@ -358,14 +358,18 @@ class ViewControllerBuilder {
         )
     }
 
-    func notificationConsentAlert(analyticsService: AnalyticsServiceInterface,
-                                  grantConsentAction: @escaping () -> Void,
-                                  openSettingsAction: @escaping () -> Void) -> UIViewController {
+    func notificationConsentAlert(
+        analyticsService: AnalyticsServiceInterface,
+        grantConsentAction: @escaping () -> Void,
+        openSettingsAction: @escaping (UIViewController) -> Void
+    ) -> UIViewController {
         let viewController = NotificationConsentAlertViewController(
             analyticsService: analyticsService
         )
         viewController.grantConsentAction = grantConsentAction
-        viewController.openSettingsAction = openSettingsAction
+        viewController.openSettingsAction = {
+            openSettingsAction(viewController)
+        }
         return viewController
     }
 }

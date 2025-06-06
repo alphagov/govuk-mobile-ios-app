@@ -296,6 +296,7 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
             completionAction: completionAction,
             handleError: handleError
         )

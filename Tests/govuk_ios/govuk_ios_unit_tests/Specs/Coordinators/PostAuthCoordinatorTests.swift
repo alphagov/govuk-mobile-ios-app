@@ -10,7 +10,7 @@ import UIKit
 struct PostAuthCoordinatorTests {
 
     @Test
-    func start_startsTopicOnboarding() {
+    func start_startsAnalyticsConsent() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let subject = PostAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -18,12 +18,31 @@ struct PostAuthCoordinatorTests {
             completion: { }
         )
 
-        let stubbedTopicOnboardingCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = stubbedTopicOnboardingCoordinator
+        let mockAnalyticsConsentCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedAnalyticsConsentCoordinator = mockAnalyticsConsentCoordinator
 
         subject.start(url: nil)
 
-        #expect(stubbedTopicOnboardingCoordinator._startCalled)
+        #expect(mockAnalyticsConsentCoordinator._startCalled)
+    }
+
+    @Test
+    func analyticsConsentCompletion_startsTopicOnboarding() {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let subject = PostAuthCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: MockNavigationController(),
+            completion: { }
+        )
+
+        let mockTopicOnboardingCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = mockTopicOnboardingCoordinator
+
+        subject.start(url: nil)
+
+        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
+
+        #expect(mockTopicOnboardingCoordinator._startCalled)
     }
 
     @Test
@@ -35,13 +54,14 @@ struct PostAuthCoordinatorTests {
             completion: { }
         )
 
-        let stubbedTopicOnboardingCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = stubbedTopicOnboardingCoordinator
+        let mockTopicOnboardingCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = mockTopicOnboardingCoordinator
 
         subject.start(url: nil)
+        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
 
-        #expect(stubbedTopicOnboardingCoordinator._startCalled)
+        #expect(mockTopicOnboardingCoordinator._startCalled)
     }
 
     @Test
@@ -56,10 +76,11 @@ struct PostAuthCoordinatorTests {
             }
         )
 
-        let stubbedTopicOnboardingCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = stubbedTopicOnboardingCoordinator
+        let mockTopicOnboardingCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedTopicOnboardingCoordinator = mockTopicOnboardingCoordinator
 
         subject.start(url: nil)
+        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
         mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
         mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
 

@@ -81,6 +81,80 @@ class AuthenticationCoordinatorTests {
     }
 
     @Test
+    func signinSuccess_newUser_resetsAnalyticsConsent() async {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockSignInSuccessCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: false)
+        )
+        let mockAnalyticsService = MockAnalyticsService()
+        let newWindow = UIWindow(frame: UIScreen.main.bounds)
+        newWindow.rootViewController = mockNavigationController
+        newWindow.makeKeyAndVisible()
+        await withCheckedContinuation { continuation in
+            let sut = AuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
+                authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
+                completionAction: { },
+                handleError: { _ in }
+            )
+            sut.start(url: nil)
+            mockCoordinatorBuilder._signInSuccessCallAction = {
+                continuation.resume()
+            }
+        }
+
+        #expect(mockAnalyticsService._resetConsentCalled)
+    }
+
+    @Test
+    func signinSuccess_returningUser_keepsAnalyticsConsent() async {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockSignInSuccessCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
+        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockAuthenticationService._stubbedAuthenticationResult = .success(
+            .init(returningUser: true)
+        )
+        let mockAnalyticsService = MockAnalyticsService()
+        let newWindow = UIWindow(frame: UIScreen.main.bounds)
+        newWindow.rootViewController = mockNavigationController
+        newWindow.makeKeyAndVisible()
+        await withCheckedContinuation { continuation in
+            let sut = AuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
+                authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
+                completionAction: { },
+                handleError: { _ in }
+            )
+            sut.start(url: nil)
+            mockCoordinatorBuilder._signInSuccessCallAction = {
+                continuation.resume()
+            }
+        }
+
+        #expect(!mockAnalyticsService._resetConsentCalled)
+    }
+
+    @Test
     func signinSuccessCompletion_completesCoordinator() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockSignInCoordinator = MockBaseCoordinator()

@@ -54,9 +54,7 @@ class AuthenticationCoordinator: BaseCoordinator {
     }
 
     private func handleUserAuthChange(response: AuthenticationServiceResponse) {
-        if response.returningUser {
-            return
-        } else {
+        if !response.returningUser {
             analyticsService.resetConsent()
         }
     }

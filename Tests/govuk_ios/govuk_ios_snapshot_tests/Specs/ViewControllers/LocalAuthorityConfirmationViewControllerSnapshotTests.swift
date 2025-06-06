@@ -19,7 +19,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
         let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
-            completion: {}
+            dismiss: {}
         )
         let view = LocalAuthorityConfirmationView(
             viewModel: viewModel
@@ -43,7 +43,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
         let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
-            completion: {}
+            dismiss: {}
         )
         let view = LocalAuthorityConfirmationView(
             viewModel: viewModel
@@ -73,7 +73,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
         let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
-            completion: {}
+            dismiss: {}
         )
         let view = LocalAuthorityConfirmationView(
             viewModel: viewModel
@@ -103,7 +103,7 @@ final class LocalAuthorityConfirmationViewControllerSnapshotTests: SnapshotTestC
         let viewModel = LocalAuthorityConfirmationViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityItem: authority,
-            completion: {}
+            dismiss: {}
         )
         let view = LocalAuthorityConfirmationView(
             viewModel: viewModel

@@ -32,7 +32,7 @@ struct LocalAuthorityConfirmationView: View {
     private var cancelButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button("cancel") {
-                viewModel.completion()
+                viewModel.dismiss()
             }
             .foregroundColor(Color(UIColor.govUK.text.link))
         }

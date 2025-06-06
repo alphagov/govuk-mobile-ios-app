@@ -85,7 +85,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.localAuthorityConfirmationScreen(
             analyticsService: analyticsService,
             localAuthorityItem: localAuthority,
-            completion: { [weak self] in
+            dismiss: { [weak self] in
                 self?.dismissModal()
             }
         )

@@ -258,11 +258,11 @@ class ViewControllerBuilder {
     func localAuthorityConfirmationScreen(
         analyticsService: AnalyticsServiceInterface,
         localAuthorityItem: Authority,
-        completion: @escaping () -> Void) -> UIViewController {
+        dismiss: @escaping () -> Void) -> UIViewController {
             let viewModel = LocalAuthorityConfirmationViewModel(
                 analyticsService: analyticsService,
                 localAuthorityItem: localAuthorityItem,
-                completion: completion
+                dismiss: dismiss
             )
             let view = LocalAuthorityConfirmationView(
                 viewModel: viewModel

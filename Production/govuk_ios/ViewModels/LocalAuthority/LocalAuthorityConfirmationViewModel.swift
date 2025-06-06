@@ -7,7 +7,7 @@ class LocalAuthorityConfirmationViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     private let primaryButtonTitle = "Done"
     let localAuthorityItem: Authority
-    let completion: () -> Void
+    let dismiss: () -> Void
     let unitarySuccessTitle: String = String.localAuthority.localized(
         "localAuthoritySuccessUnitaryTitle"
     )
@@ -28,10 +28,10 @@ class LocalAuthorityConfirmationViewModel: ObservableObject {
     )
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityItem: Authority,
-         completion: @escaping () -> Void) {
+         dismiss: @escaping () -> Void) {
         self.localAuthorityItem = localAuthorityItem
         self.analyticsService = analyticsService
-        self.completion = completion
+        self.dismiss = dismiss
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -40,7 +40,7 @@ class LocalAuthorityConfirmationViewModel: ObservableObject {
             action: { [weak self] in
                 guard let title = self?.primaryButtonTitle else { return }
                 self?.trackNavigationEvent(title)
-                self?.completion()
+                self?.dismiss()
             }
         )
     }

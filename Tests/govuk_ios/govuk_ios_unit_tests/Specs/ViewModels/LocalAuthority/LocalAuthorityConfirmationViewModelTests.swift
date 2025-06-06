@@ -1,6 +1,8 @@
 import Testing
 
 @testable import govuk_ios
+
+@Suite
 struct LocalAuthorityConfirmationViewModelTests {
 
     @Test
@@ -16,7 +18,7 @@ struct LocalAuthorityConfirmationViewModelTests {
         let sut = LocalAuthorityConfirmationViewModel(
             analyticsService: mockAnalyticsService,
             localAuthorityItem: authority,
-            completion: {}
+            dismiss: {}
         )
         sut.primaryButtonViewModel.action()
         let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
@@ -33,16 +35,16 @@ struct LocalAuthorityConfirmationViewModelTests {
             slug: "test slug",
             parent: nil
         )
-        var completed = false
+        var dismiss = false
         let sut = LocalAuthorityConfirmationViewModel(
             analyticsService: mockAnalyticsService,
             localAuthorityItem: authority,
-            completion: {
-                completed = true
+            dismiss: {
+                dismiss = true
             }
         )
         sut.primaryButtonViewModel.action()
-        #expect(completed)
+        #expect(dismiss)
     }
 
 }

@@ -14,7 +14,6 @@ class LocalAuthorityConfirmationViewModel: ObservableObject {
     let unitarySuccessDescription: String = String.localAuthority.localized(
         "localAuthoritySuccessUnitaryDescription"
     )
-
     let twoTierSucessTitle: String = String.localAuthority.localized(
         "localAuthoritySuccessTwoTierTitle"
     )

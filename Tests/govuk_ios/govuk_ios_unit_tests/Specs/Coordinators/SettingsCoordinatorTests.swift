@@ -121,14 +121,14 @@ struct SettingsCoordinatorTests {
         subject.start()
 
         let settingsViewController = try #require(subject.root.viewControllers.first as?
-        HostingViewController<SettingsView<SettingsViewModel>>)
+                                                  HostingViewController<SettingsView<SettingsViewModel>>)
         #expect(settingsViewController.rootView.viewModel.scrollToTop == false)
         subject.didReselectTab()
         #expect(settingsViewController.rootView.viewModel.scrollToTop == true)
     }
 
     @Test
-    func selecting_signOut_starts_signOutConfirmation() throws {
+    func selecting_signOut_starts_signOutConfirmation() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController

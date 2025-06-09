@@ -178,4 +178,20 @@ struct AnalyticsServiceTests {
         #expect(mockAnalyticsClient._trackSetUserPropertyReceivedProperty?.key == expectedKey)
         #expect(mockAnalyticsClient._trackSetUserPropertyReceivedProperty?.value == expectedValue)
     }
+
+    @Test
+    func resetConsent_removesConsent() {
+        let mockAnalyticsClient = MockAnalyticsClient()
+        let mockUserDefaults = MockUserDefaults()
+        let subject = AnalyticsService(
+            clients: [mockAnalyticsClient],
+            userDefaults: mockUserDefaults
+        )
+
+        mockUserDefaults._stub(value: true, key: UserDefaultsKeys.acceptedAnalytics.rawValue)
+
+        subject.resetConsent()
+
+        #expect(mockUserDefaults.value(forKey: .acceptedAnalytics) == nil)
+    }
 }

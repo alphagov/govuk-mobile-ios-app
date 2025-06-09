@@ -7,7 +7,6 @@ struct SignInSuccessCoordinatorTests {
     @Test
     @MainActor
     func start_newAuth_setsViewController() {
-        let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsReauth = false
@@ -27,7 +26,6 @@ struct SignInSuccessCoordinatorTests {
     }
 
     func start_reauth_callsCompletion() {
-        let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsReauth = true

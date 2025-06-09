@@ -20,6 +20,33 @@ class CoordinatorBuilder {
         )
     }
 
+    func preAuth(navigationController: UINavigationController,
+                 completion: @escaping () -> Void) -> BaseCoordinator {
+        PreAuthCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            completion: completion
+        )
+    }
+
+    func periAuth(navigationController: UINavigationController,
+                  completion: @escaping () -> Void) -> BaseCoordinator {
+        PeriAuthCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            completion: completion
+        )
+    }
+
+    func postAuth(navigationController: UINavigationController,
+                  completion: @escaping () -> Void) -> BaseCoordinator {
+        PostAuthCoordinator(
+            coordinatorBuilder: self,
+            navigationController: navigationController,
+            completion: completion
+        )
+    }
+
     var home: TabItemCoordinator {
         let navigationController = UINavigationController.home
 
@@ -113,11 +140,11 @@ class CoordinatorBuilder {
     }
 
     func analyticsConsent(navigationController: UINavigationController,
-                          dismissAction: @escaping () -> Void) -> BaseCoordinator {
+                          completion: @escaping () -> Void) -> BaseCoordinator {
         AnalyticsConsentCoordinator(
             navigationController: navigationController,
             analyticsService: container.analyticsService.resolve(),
-            dismissAction: dismissAction
+            completion: completion
         )
     }
 
@@ -229,6 +256,7 @@ class CoordinatorBuilder {
             notificationService: container.notificationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             consentResult: consentResult,
+            viewControllerBuilder: ViewControllerBuilder(),
             urlOpener: UIApplication.shared,
             completion: completion
         )
@@ -248,42 +276,40 @@ class CoordinatorBuilder {
     }
 
     func welcomeOnboarding(navigationController: UINavigationController,
-                           newUserAction: (() -> Void)?,
                            completionAction: @escaping () -> Void) -> BaseCoordinator {
         WelcomeOnboardingCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
+            onboardingAnalyticsService: container.onboardingAnalyticsService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
-            completionAction: completionAction,
-            newUserAction: newUserAction
+            viewControllerBuilder: ViewControllerBuilder(),
+            completionAction: completionAction
         )
     }
 
     func authentication(navigationController: UINavigationController,
                         completionAction: @escaping () -> Void,
-                        newUserAction: (() -> Void)?,
                         handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         AuthenticationCoordinator(
             navigationController: navigationController,
+            coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
             completionAction: completionAction,
-            newUserAction: newUserAction,
             handleError: handleError
         )
     }
 
     func reauthentication(navigationController: UINavigationController,
-                          completionAction: @escaping () -> Void,
-                          newUserAction: @escaping () -> Void) -> BaseCoordinator {
-        ReauthenticationCoordinator(
+                          completionAction: @escaping () -> Void) -> BaseCoordinator {
+        ReAuthenticationCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
-            completionAction: completionAction,
-            newUserAction: newUserAction
+            completionAction: completionAction
         )
     }
 
@@ -308,26 +334,16 @@ class CoordinatorBuilder {
         )
     }
 
-    func signedOut(navigationController: UINavigationController,
-                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-        SignedOutCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
-            authenticationService: container.authenticationService.resolve(),
-            analyticsService: container.analyticsService.resolve(),
-            completion: completion
-        )
-    }
-
-    func signInError(navigationController: UINavigationController,
-                     completion: @escaping () -> Void) -> BaseCoordinator {
-        SignInErrorCoordinator(
-            navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
-            analyticsService: container.analyticsService.resolve(),
-            completion: completion
-        )
-    }
+//    func signedOut(navigationController: UINavigationController,
+//                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
+//        SignedOutCoordinator(
+//            navigationController: navigationController,
+//            viewControllerBuilder: ViewControllerBuilder(),
+//            authenticationService: container.authenticationService.resolve(),
+//            analyticsService: container.analyticsService.resolve(),
+//            completion: completion
+//        )
+//    }
 
     func signInSuccess(navigationController: UINavigationController,
                        completion: @escaping () -> Void) -> BaseCoordinator {
@@ -356,25 +372,6 @@ class CoordinatorBuilder {
             configService: container.appConfigService.resolve(),
             urlOpener: UIApplication.shared,
             url: url
-        )
-    }
-
-    func newUserOnboarding(navigationController: UINavigationController,
-                           completionAction: @escaping () -> Void) -> BaseCoordinator {
-        NewUserOnboardingCoordinator(
-            coordinatorBuilder: self,
-            navigationController: navigationController,
-            completionAction: completionAction
-        )
-    }
-
-    func inactivityCoordinator(navigationController: UINavigationController,
-                               inactivityService: InactivityServiceInterface,
-                               inactiveAction: @escaping () -> Void) -> BaseCoordinator {
-        InactivityCoordinator(
-            navigationController: navigationController,
-            inactivityService: inactivityService,
-            inactiveAction: inactiveAction
         )
     }
 }

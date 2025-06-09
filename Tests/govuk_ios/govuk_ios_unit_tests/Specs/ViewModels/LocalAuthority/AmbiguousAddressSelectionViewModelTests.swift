@@ -48,7 +48,7 @@ struct AmbiguousAddressSelectionViewModelTests {
     @Test
     func confirmButtonAction_callsLocalAuthoritySelected() {
         let mockLocalAuthorityService = MockLocalAuthorityService()
-        var navigatedToConfirmationView = false
+        var localAuthoritySelectedCalled = false
         let authorityOne = Authority(
             name: "name1",
             homepageUrl: "homepageURL1",
@@ -80,13 +80,13 @@ struct AmbiguousAddressSelectionViewModelTests {
                 addresses: [addressOne, addressTwo]
             ),
             localAuthoritySelected: { _ in
-                navigatedToConfirmationView = true
+                localAuthoritySelectedCalled = true
             },
             dismissAction: {}
         )
         sut.selectedAddress = addressOne
         sut.confirmButtonModel.action()
-        #expect(navigatedToConfirmationView)
+        #expect(localAuthoritySelectedCalled)
     }
 
     @Test

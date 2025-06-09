@@ -55,7 +55,7 @@ class LocalAuthorityConfirmationViewModel {
 
     private func trackNavigationEvent() {
         let event = AppEvent.buttonNavigation(
-            text: self.primaryButtonTitle,
+            text: primaryButtonTitle,
             external: true
         )
         analyticsService.track(event: event)

@@ -5,17 +5,17 @@ import Testing
 @testable import govuk_ios
 
 @Suite
+@MainActor
 struct AppCoordinatorTests {
     @Test
-    @MainActor
     func start_firstLaunch_startsLaunchCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
-        let mockLaunchCoordinator = MockBaseCoordinator(
+        let mockCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoordinator
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -25,24 +25,27 @@ struct AppCoordinatorTests {
 
         subject.start()
 
-        #expect(mockCoordinatorBuilder._receivedLaunchNavigationController == mockNavigationController)
-        #expect(mockLaunchCoordinator._startCalled)
+        #expect(mockCoordinatorBuilder._receivedPreAuthNavigationController == mockNavigationController)
+        #expect(mockCoordinator._startCalled)
     }
 
     @Test
-    @MainActor
     func start_secondLaunch_startsTabCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
-        let mockLaunchCoordinator = MockBaseCoordinator(
+        let mockPreAuthCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
         let mockTabCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
-        mockCoordinatorBuilder._stubbedLaunchCoordinator = mockLaunchCoordinator
+        let mockRelaunchCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockPreAuthCoordinator
         mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoordinator
+        mockCoordinatorBuilder._stubbedRelaunchCoordinator = mockRelaunchCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -53,47 +56,129 @@ struct AppCoordinatorTests {
         //First launch
         subject.start()
 
-        #expect(mockLaunchCoordinator._startCalled)
+        #expect(mockPreAuthCoordinator._startCalled)
+        #expect(!mockRelaunchCoordinator._startCalled)
 
-        //Finish launch loading
-        let launchResult = AppLaunchResponse(
-            configResult: .success(.arrange),
-            topicResult: .success(TopicResponseItem.arrangeMultiple),
-            notificationConsentResult: .aligned,
-            appVersionProvider: MockAppVersionProvider()
-        )
-        // This is in order of launch
-        mockCoordinatorBuilder._receivedInactiveAction?()
-        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
-        mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
-        mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
-        mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedReauthenticationCompletion?()
-        mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
-        mockCoordinatorBuilder._receivedWelcomeOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedSignInSuccessCompletion?()
-        mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
-        mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
+        mockCoordinatorBuilder._receivedPreAuthCompletion?()
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        mockCoordinatorBuilder._receivedPostAuthCompletion?()
 
         #expect(mockTabCoordinator._startCalled)
 
         //Reset values for second launch
-        mockLaunchCoordinator._startCalled = false
+        mockPreAuthCoordinator._startCalled = false
         mockTabCoordinator._startCalled = false
 
         //Second launch
         subject.start()
 
-        mockCoordinatorBuilder._receivedRelaunchCompletion?()
-
-        #expect(!mockLaunchCoordinator._startCalled)
-//        #expect(mockTabCoordinator._startCalled) Needs looking at
+        #expect(!mockPreAuthCoordinator._startCalled)
+        #expect(mockRelaunchCoordinator._startCalled)
     }
 
     @Test
-    @MainActor
+    func relaunchCompletion_withTabCoordinator_withURL_startsTabCoordinator() {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockPreAuthCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        let mockTabCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        let mockRelaunchCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockPreAuthCoordinator
+        mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoordinator
+        mockCoordinatorBuilder._stubbedRelaunchCoordinator = mockRelaunchCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            navigationController: mockNavigationController
+        )
+
+        //First launch
+        subject.start()
+
+        #expect(mockPreAuthCoordinator._startCalled)
+        #expect(!mockRelaunchCoordinator._startCalled)
+
+        mockCoordinatorBuilder._receivedPreAuthCompletion?()
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        mockCoordinatorBuilder._receivedPostAuthCompletion?()
+
+        #expect(mockTabCoordinator._startCalled)
+
+        //Reset values for second launch
+        mockPreAuthCoordinator._startCalled = false
+        mockTabCoordinator._startCalled = false
+
+        //Second launch
+        let expectedURL = URL(string: "https://www.google.com")
+        subject.start(url: expectedURL)
+
+        #expect(mockRelaunchCoordinator._startCalled)
+
+        mockCoordinatorBuilder._receivedRelaunchCompletion?()
+
+        #expect(mockTabCoordinator._startCalled)
+        #expect(mockTabCoordinator._receivedStartURL == expectedURL)
+    }
+
+    @Test
+    func relaunchCompletion_withTabCoordinator_withNo_doesntStartTabCoordinator() {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockPreAuthCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        let mockTabCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        let mockRelaunchCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockPreAuthCoordinator
+        mockCoordinatorBuilder._stubbedTabCoordinator = mockTabCoordinator
+        mockCoordinatorBuilder._stubbedRelaunchCoordinator = mockRelaunchCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            navigationController: mockNavigationController
+        )
+
+        //First launch
+        subject.start()
+
+        #expect(mockPreAuthCoordinator._startCalled)
+        #expect(!mockRelaunchCoordinator._startCalled)
+
+        mockCoordinatorBuilder._receivedPreAuthCompletion?()
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        mockCoordinatorBuilder._receivedPostAuthCompletion?()
+
+        #expect(mockTabCoordinator._startCalled)
+
+        //Reset values for second launch
+        mockPreAuthCoordinator._startCalled = false
+        mockTabCoordinator._startCalled = false
+
+        //Second launch
+        subject.start(url: nil)
+
+        #expect(mockRelaunchCoordinator._startCalled)
+
+        mockCoordinatorBuilder._receivedRelaunchCompletion?()
+
+        #expect(!mockTabCoordinator._startCalled)
+    }
+
+    @Test
     func successfulSignout_startsLoginCoordinator() throws {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
@@ -109,18 +194,12 @@ struct AppCoordinatorTests {
             analyticsService: MockAnalyticsService()
         )
 
-        let mockSignedOutCoordinator = MockBaseCoordinator(
-            navigationController: mockNavigationController
-        )
-
-        let mockWelcomeOnboardingCoordinator = MockBaseCoordinator(
+        let periAuthCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
 
         mockCoordinatorBuilder._stubbedTabCoordinator = tabCoordinator
-        mockCoordinatorBuilder._stubbedSignedOutCoordinator = mockSignedOutCoordinator
-        mockCoordinatorBuilder
-            ._stubbedWelcomeOnboardingCoordinator = mockWelcomeOnboardingCoordinator
+        mockCoordinatorBuilder._stubbedPeriAuthCoordinator = periAuthCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -130,32 +209,34 @@ struct AppCoordinatorTests {
 
         //First launch
         subject.start()
-        //Finish launch loading
-        let launchResult = AppLaunchResponse(
-            configResult: .success(.arrange),
-            topicResult: .success(TopicResponseItem.arrangeMultiple),
-            notificationConsentResult: .aligned,
-            appVersionProvider: MockAppVersionProvider()
-        )
-        // This is in order of launch
-        mockCoordinatorBuilder._receivedInactiveAction?()
-        mockCoordinatorBuilder._receivedLaunchCompletion?(launchResult)
-        mockCoordinatorBuilder._receivedNotificationConsentCompletion?()
-        mockCoordinatorBuilder._receivedAppForcedUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedAppUnavailableDismissAction?()
-        mockCoordinatorBuilder._receivedAppRecommendUpdateDismissAction?()
-        mockCoordinatorBuilder._receivedReauthenticationCompletion?()
-        mockCoordinatorBuilder._receivedAnalyticsConsentDismissAction?()
-        mockCoordinatorBuilder._receivedWelcomeOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedSignInSuccessCompletion?()
-        mockCoordinatorBuilder._receivedLocalAuthenticationOnboardingCompletion?()
-        mockCoordinatorBuilder._receivedTopicOnboardingDidDismissAction?()
-        mockCoordinatorBuilder._receivedNotificationOnboardingCompletion?()
+
+        mockCoordinatorBuilder._receivedPreAuthCompletion?()
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        mockCoordinatorBuilder._receivedPostAuthCompletion?()
 
         tabCoordinator.finish()
-        #expect(mockSignedOutCoordinator._startCalled)
+        #expect(periAuthCoordinator._startCalled)
+    }
 
-        mockCoordinatorBuilder._receivedSignedOutCompletion?(false)
-        #expect(mockWelcomeOnboardingCoordinator._startCalled)
+
+    @Test
+    func inactivity_startsPeriAuth() {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+
+        let mockPeriAuthCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            navigationController: mockNavigationController
+        )
+
+        subject.start(url: nil)
+        mockInactivityService._receivedStartMonitoringInactivityHandler?()
+
+        #expect(mockPeriAuthCoordinator._startCalled)
     }
 }

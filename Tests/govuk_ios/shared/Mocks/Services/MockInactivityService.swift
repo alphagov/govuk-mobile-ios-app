@@ -9,11 +9,11 @@ class MockInactivityService: InactivityServiceInterface {
         return _stubbedInactive
     }
 
-    var _stubbedStartMonitoringHandler: (() -> Void)?
+    var _receivedStartMonitoringInactivityHandler: (() -> Void)?
     var _stubbedStartMonitoringCalled = false
     func startMonitoring(inactivityHandler: @escaping () -> Void) {
         _stubbedStartMonitoringCalled = true
-        _stubbedStartMonitoringHandler = inactivityHandler
+        _receivedStartMonitoringInactivityHandler = inactivityHandler
     }
 
     var _resetTimerCalled = false
@@ -23,7 +23,7 @@ class MockInactivityService: InactivityServiceInterface {
 
     func simulateInactivity() {
         _stubbedInactive = true
-        _stubbedStartMonitoringHandler?()
+        _receivedStartMonitoringInactivityHandler?()
     }
 
     func simulateActivity() {

@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder,
 
     private lazy var coordinatorBuilder = CoordinatorBuilder(container: .shared)
 
-    private lazy var coordinator = coordinatorBuilder.app(
+    private lazy var appCoordinator = coordinatorBuilder.app(
         navigationController: navigationController,
         inactivityService: inactivityService
     )
@@ -32,19 +32,21 @@ class SceneDelegate: UIResponder,
         window?.makeKeyAndVisible()
 
         let url = connectionOptions.urlContexts.first?.url
-        coordinator.start(url: url)
+        appCoordinator.start(url: url)
         let notificationService = Container.shared.notificationService.resolve()
-        notificationService.addClickListener { deeplink in self.coordinator.start(url: deeplink) }
+        notificationService.addClickListener { [weak self] deeplink in
+            self?.appCoordinator.start(url: deeplink)
+        }
     }
 
     func scene(_ scene: UIScene,
                openURLContexts urlContexts: Set<UIOpenURLContext>) {
         guard let path = urlContexts.first?.url
         else { return }
-        coordinator.start(url: path)
+        appCoordinator.start(url: path)
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        coordinator.start(url: nil)
+        appCoordinator.start(url: nil)
     }
 }

@@ -1,24 +1,21 @@
 import Foundation
 import UIKit
 
-class ReauthenticationCoordinator: BaseCoordinator {
+class ReAuthenticationCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let completionAction: () -> Void
-    private let newUserAction: () -> Void
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
-         completionAction: @escaping () -> Void,
-         newUserAction: @escaping () -> Void) {
+         completionAction: @escaping () -> Void) {
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
         self.completionAction = completionAction
         self.coordinatorBuilder = coordinatorBuilder
-        self.newUserAction = newUserAction
         super.init(navigationController: navigationController)
     }
 
@@ -52,7 +49,6 @@ class ReauthenticationCoordinator: BaseCoordinator {
         authenticationService.signOut()
         let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
-            newUserAction: newUserAction,
             completionAction: completionAction
         )
         start(coordinator)

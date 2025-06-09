@@ -5,9 +5,9 @@ import Factory
 import GOVKit
 import SafariServices
 
+@MainActor
 // swiftlint:disable:next type_body_length
 class ViewControllerBuilder {
-    @MainActor
     func launch(analyticsService: AnalyticsServiceInterface,
                 completion: @escaping () -> Void) -> UIViewController {
         let viewModel = LaunchViewModel(
@@ -38,7 +38,6 @@ class ViewControllerBuilder {
         let openSearchAction: (SearchItem) -> Void
     }
 
-    @MainActor
     func home(dependencies: HomeDependencies,
               actions: HomeActions) -> UIViewController {
         let viewModel = HomeViewModel(
@@ -62,7 +61,6 @@ class ViewControllerBuilder {
         )
     }
 
-    @MainActor
     func settings<T: SettingsViewModelInterface>(viewModel: T) -> UIViewController {
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -78,7 +76,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func recentActivity(analyticsService: AnalyticsServiceInterface,
                         activityService: ActivityServiceInterface,
                         selectedAction: @escaping (URL) -> Void) -> UIViewController {
@@ -92,7 +89,6 @@ class ViewControllerBuilder {
         )
     }
 
-    @MainActor
     func localAuthorityExplainerView(analyticsService: AnalyticsServiceInterface,
                                      navigateToPostCodeEntryViewAction: @escaping () -> Void,
                                      dismissAction: @escaping () -> Void) -> UIViewController {
@@ -107,7 +103,6 @@ class ViewControllerBuilder {
         return HostingViewController(rootView: view)
     }
 
-    @MainActor
     func localAuthorityPostcodeEntryView(
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
@@ -173,7 +168,6 @@ class ViewControllerBuilder {
         return HostingViewController(rootView: view)
     }
 
-    @MainActor
     func notificationSettings(analyticsService: AnalyticsServiceInterface,
                               completeAction: @escaping () -> Void,
                               dismissAction: @escaping () -> Void) -> UIViewController {
@@ -193,7 +187,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func notificationOnboarding(analyticsService: AnalyticsServiceInterface,
                                 completeAction: @escaping () -> Void,
                                 dismissAction: @escaping () -> Void) -> UIViewController {
@@ -214,7 +207,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func signOutConfirmation(authenticationService: AuthenticationServiceInterface,
                              analyticsService: AnalyticsServiceInterface,
                              completion: @escaping (Bool) -> Void) -> UIViewController {
@@ -228,7 +220,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func signedOut(authenticationService: AuthenticationServiceInterface,
                    analyticsService: AnalyticsServiceInterface,
                    completion: @escaping () -> Void) -> UIViewController {
@@ -242,7 +233,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func signInError(analyticsService: AnalyticsServiceInterface,
                      completion: @escaping () -> Void) -> UIViewController {
         let viewModel = SignInErrorViewModel(
@@ -253,7 +243,7 @@ class ViewControllerBuilder {
         let viewController = HostingViewController(rootView: view)
         return viewController
     }
-
+  
     @MainActor
     func localAuthorityConfirmationScreen(
         analyticsService: AnalyticsServiceInterface,
@@ -306,7 +296,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func stepByStep(content: [TopicDetailResponse.Content],
                     analyticsService: AnalyticsServiceInterface,
                     activityService: ActivityServiceInterface) -> UIViewController {
@@ -325,7 +314,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func allTopics(analyticsService: AnalyticsServiceInterface,
                    topicAction: @escaping (Topic) -> Void,
                    topicsService: TopicsServiceInterface) -> UIViewController {
@@ -339,7 +327,6 @@ class ViewControllerBuilder {
         )
     }
 
-    @MainActor
     func editTopics(analyticsService: AnalyticsServiceInterface,
                     topicsService: TopicsServiceInterface,
                     dismissAction: @escaping () -> Void) -> UIViewController {
@@ -355,7 +342,6 @@ class ViewControllerBuilder {
         return HostingViewController(rootView: view)
     }
 
-    @MainActor
     func topicOnboarding(topics: [Topic],
                          analyticsService: AnalyticsServiceInterface,
                          topicsService: TopicsServiceInterface,
@@ -369,12 +355,10 @@ class ViewControllerBuilder {
         return TopicOnboardingViewController(viewModel: viewModel)
     }
 
-    @MainActor
-    func webViewController(for url: URL) -> UIViewController {
+    func web(for url: URL) -> UIViewController {
         return WebViewController(url: url)
     }
 
-    @MainActor
     func safari(url: URL) -> UIViewController {
         let config = SFSafariViewController.Configuration()
         config.barCollapsingEnabled = true
@@ -384,6 +368,35 @@ class ViewControllerBuilder {
         )
         viewController.modalPresentationStyle = .formSheet
         viewController.isModalInPresentation = true
+        return viewController
+    }
+
+    func welcomeOnboarding(analyticsService: AnalyticsServiceInterface,
+                           completion: @escaping () -> Void) -> UIViewController {
+        let viewModel = WelcomeOnboardingViewModel(
+            analyticsService: analyticsService,
+            completeAction: completion
+        )
+        let containerView = InfoView(
+            viewModel: viewModel
+        )
+        return HostingViewController(
+            rootView: containerView
+        )
+    }
+
+    func notificationConsentAlert(
+        analyticsService: AnalyticsServiceInterface,
+        grantConsentAction: @escaping () -> Void,
+        openSettingsAction: @escaping (UIViewController) -> Void
+    ) -> UIViewController {
+        let viewController = NotificationConsentAlertViewController(
+            analyticsService: analyticsService
+        )
+        viewController.grantConsentAction = grantConsentAction
+        viewController.openSettingsAction = {
+            openSettingsAction(viewController)
+        }
         return viewController
     }
 }

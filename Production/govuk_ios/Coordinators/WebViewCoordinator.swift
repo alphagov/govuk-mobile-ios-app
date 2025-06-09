@@ -19,7 +19,7 @@ class WebViewCoordinator: BaseCoordinator {
 
     @MainActor
     private func setViewController() {
-        let viewController = viewControllerBuilder.webViewController(for: url)
+        let viewController = viewControllerBuilder.web(for: url)
         root.setViewControllers([viewController], animated: false)
     }
 }

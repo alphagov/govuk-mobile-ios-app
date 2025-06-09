@@ -44,6 +44,10 @@ class AnalyticsService: AnalyticsServiceInterface {
         }
     }
 
+    func resetConsent() {
+        userDefaults.set(nil, forKey: .acceptedAnalytics)
+    }
+
     func set(userProperty: UserProperty) {
         clients.forEach { $0.set(userProperty: userProperty) }
     }

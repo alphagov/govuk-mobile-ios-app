@@ -47,9 +47,9 @@ class MockNotificationService: NotificationServiceInterface {
         _onClickAction = onClickAction
     }
 
-    var _receivedAcceptConsent: Bool = false
+    var _acceptConsentCalled: Bool = false
     func acceptConsent() {
-        _receivedAcceptConsent = true
+        _acceptConsentCalled = true
     }
 
     var _rejectConsentCalled: Bool = false

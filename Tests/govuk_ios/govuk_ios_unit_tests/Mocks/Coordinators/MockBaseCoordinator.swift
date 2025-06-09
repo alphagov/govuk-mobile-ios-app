@@ -12,10 +12,12 @@ class MockBaseCoordinator: BaseCoordinator,
     }
 
     var _startCalled: Bool = false
+    var _receivedStartURL: URL?
     var _startCalledContinuation: CheckedContinuation<Bool, Never>?
     var _startCalledAction: (() -> Void)?
     override func start(url: URL?) {
         _startCalled = true
+        _receivedStartURL = url
         _startCalledAction?()
         _startCalledContinuation?.resume(returning: true)
     }

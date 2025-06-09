@@ -201,13 +201,15 @@ struct ViewControllerBuilderTests {
         let rootView = (result as? HostingViewController<LocalAuthorityExplainerView>)?.rootView
         #expect(rootView != nil)
 
-        func webViewController_returnsExpectedViewController() {
-            let subject = ViewControllerBuilder()
-            let testURL = URL(string: "https://www.gov.uk")!
-            let viewController = subject.webViewController(for: testURL)
+    }
 
-            #expect(viewController is WebViewController)
-        }
+    @Test
+    func webViewController_returnsExpectedViewController() {
+        let subject = ViewControllerBuilder()
+        let testURL = URL(string: "https://www.gov.uk")!
+        let viewController = subject.web(for: testURL)
+
+        #expect(viewController is WebViewController)
     }
 
     @Test
@@ -246,7 +248,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func safari_returnsExpectedResult() throws {
+    func safari_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.safari(
             url: .arrange
@@ -255,5 +257,29 @@ struct ViewControllerBuilderTests {
         #expect(result is SFSafariViewController)
         #expect(result.isModalInPresentation)
         #expect(result.modalPresentationStyle == .formSheet)
+    }
+
+    @Test
+    func welcomeOnboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.welcomeOnboarding(
+            analyticsService: MockAnalyticsService(),
+            completion: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func notificationConsentAlert_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.notificationConsentAlert(
+            analyticsService: MockAnalyticsService(),
+            grantConsentAction: { },
+            openSettingsAction: { _ in }
+        )
+
+        #expect(result is NotificationConsentAlertViewController)
     }
 }

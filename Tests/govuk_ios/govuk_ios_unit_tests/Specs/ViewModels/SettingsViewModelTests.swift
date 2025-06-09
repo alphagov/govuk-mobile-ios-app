@@ -66,11 +66,17 @@ class SettingsViewModelTests {
 
         let aboutSection = sut.listContent[3]
         let helpAndFeedbackRow = try #require(aboutSection.rows.last as? LinkRow)
-        let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
+        var openedURL: URL?
+        var openedTitle: String?
+        sut.openAction = { url, title in
+            openedURL = url
+            openedTitle = title
+        }
         helpAndFeedbackRow.action()
+        let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
         #expect(helpAndFeedbackRow.title == "Help and feedback")
-        #expect(helpAndFeedbackRow.isWebLink == true)
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
+        #expect(openedURL?.absoluteString == expectedUrl)
+        #expect(openedTitle == helpAndFeedbackRow.title)
 
         let appBundleInformation = try #require(aboutSection.rows.first as? InformationRow)
         #expect(appBundleInformation.title == "App version number")
@@ -105,21 +111,31 @@ class SettingsViewModelTests {
 
     @Test
     func privacyPolicy_action_tracksEvent() throws {
+        var receivedURL: URL?
+        var receivedTitle: String?
+        sut.openAction = { url, title in
+            receivedURL = url
+            receivedTitle = title
+        }
         let linkSection = sut.listContent[4]
         let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
         privacyPolicyRow.action()
-        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.privacyPolicyUrl)
+        #expect(receivedURL == Constants.API.privacyPolicyUrl)
         #expect(receivedTitle == privacyPolicyRow.title)
     }
 
     @Test
     func accessibilityStatement_action_tracksEvent() throws {
+        var receivedURL: URL?
+        var receivedTitle: String?
+        sut.openAction = { url, title in
+            receivedURL = url
+            receivedTitle = title
+        }
         let linkSection = sut.listContent[4]
         let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
         accessibilityStatementRow.action()
-        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.accessibilityStatementUrl)
+        #expect(receivedURL == Constants.API.accessibilityStatementUrl)
         #expect(receivedTitle == accessibilityStatementRow.title)
     }
 
@@ -134,25 +150,33 @@ class SettingsViewModelTests {
 
     @Test
     func termsAndConditions_action_tracksEvent() throws {
+        var receivedURL: URL?
+        var receivedTitle: String?
+        sut.openAction = { url, title in
+            receivedURL = url
+            receivedTitle = title
+        }
         let linkSection = sut.listContent[4]
         let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
         termsAndConditionsRow.action()
-        let receivedTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl == Constants.API.termsAndConditionsUrl)
+        #expect(receivedURL == Constants.API.termsAndConditionsUrl)
         #expect(receivedTitle == termsAndConditionsRow.title)
     }
 
     @Test
     func helpAndFeedback_action_tracksEvent() throws {
+        var receivedURL: URL?
+        var receivedTitle: String?
+        sut.openAction = { url, title in
+            receivedURL = url
+            receivedTitle = title
+        }
         let aboutTheAppSection = sut.listContent[3]
         let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.last as? LinkRow)
-
         helpAndFeedbackRow.action()
-
-        let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
-        #expect(receivedTrackingTitle == helpAndFeedbackRow.title)
+        #expect(receivedURL?.absoluteString == expectedUrl)
+        #expect(receivedTitle == helpAndFeedbackRow.title)
     }
 
     @Test

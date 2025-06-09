@@ -14,6 +14,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationsAction: (() -> Void)? { get set }
     func updateNotificationPermissionState()
     var signoutAction: (() -> Void)? { get set }
+    var openAction: ((URL, String) -> Void)? { get set }
 }
 
 // swiftlint:disable:next type_body_length
@@ -35,6 +36,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         "notificationAlertPrimaryButtonTitle"
     )
     var signoutAction: (() -> Void)?
+    var openAction: ((URL, String) -> Void)?
     @Published var userEmail: String?
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -217,9 +219,8 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                if self?.urlOpener.openIfPossible(Constants.API.privacyPolicyUrl) == true {
-                    self?.trackNavigationEvent(rowTitle, external: true)
-                }
+                guard let self else { return }
+                self.openAction?(Constants.API.privacyPolicyUrl, rowTitle)
             }
         )
     }
@@ -232,12 +233,8 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 guard let self else { return }
-                self.openURLIfPossible(
-                    url: self.deviceInformationProvider.helpAndFeedbackURL(
-                        versionProvider: self.versionProvider
-                    ),
-                    eventTitle: rowTitle
-                )
+                self.openAction?(self.deviceInformationProvider
+                    .helpAndFeedbackURL(versionProvider: self.versionProvider), rowTitle)
             }
         )
     }
@@ -321,10 +318,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                self?.openURLIfPossible(
-                    url: Constants.API.termsAndConditionsUrl,
-                    eventTitle: rowTitle
-                )
+                self?.openAction?(Constants.API.termsAndConditionsUrl, rowTitle)
             }
         )
     }
@@ -336,10 +330,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                self?.openURLIfPossible(
-                    url: Constants.API.accessibilityStatementUrl,
-                    eventTitle: rowTitle
-                )
+                self?.openAction?(Constants.API.accessibilityStatementUrl, rowTitle)
             }
         )
     }

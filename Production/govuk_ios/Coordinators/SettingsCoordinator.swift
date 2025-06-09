@@ -70,6 +70,9 @@ class SettingsCoordinator: TabItemCoordinator {
         settingsViewModel.signoutAction = { [weak self] in
             self?.startSignOut()
         }
+        settingsViewModel.openAction = { [weak self] url, _ in
+            self?.presentWebView(url: url)
+        }
     }
 
     private func startNotificationsSettings() {
@@ -83,6 +86,15 @@ class SettingsCoordinator: TabItemCoordinator {
             }
         )
         start(coordinator)
+    }
+
+    private func presentWebView(url: URL) {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url,
+            fullScreen: false
+        )
+        start(coordinator, url: url)
     }
 
     private func startSignOut() {

@@ -2,8 +2,8 @@ import XCTest
 
 @testable import GOVKit
 
-class MockAnalyticsService: AnalyticsServiceInterface
-{
+class MockAnalyticsService: AnalyticsServiceInterface {
+
     var _launchCalled: Bool = false
     func launch() {
         _launchCalled = true
@@ -22,6 +22,11 @@ class MockAnalyticsService: AnalyticsServiceInterface
     var _trackSetUserPropertyReceivedProperty: UserProperty?
     func set(userProperty: UserProperty) {
         _trackSetUserPropertyReceivedProperty = userProperty
+    }
+
+    var _resetConsentCalled: Bool = false
+    func resetConsent() {
+        _resetConsentCalled = true
     }
 
     var _setAcceptedAnalyticsAccepted: Bool = true

@@ -18,13 +18,12 @@ class ReauthenticationCoordinatorTests {
         mockAuthenticationService._stubbedTokenRefreshRequest = .success(tokenRefreshResponse)
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         let completion = await withCheckedContinuation { continuation in
-            let sut = ReauthenticationCoordinator(
+            let sut = ReAuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) },
-                newUserAction: { }
+                completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
         }
@@ -47,13 +46,12 @@ class ReauthenticationCoordinatorTests {
         // Need too add continuation as starting coordinator is called after #expect
         let authenticationOnboardingStartCalled = await withCheckedContinuation { continuation in
             mockAuthenticationOnboardingCoordinator._startCalledContinuation = continuation
-            let sut = ReauthenticationCoordinator(
+            let sut = ReAuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { },
-                newUserAction: { }
+                completionAction: { }
             )
             sut.start(url: nil)
         }
@@ -75,13 +73,12 @@ class ReauthenticationCoordinatorTests {
         mockAuthenticationService._stubbedTokenRefreshRequest = .failure(.genericError)
         let authenticationOnboardingStartCalled = await withCheckedContinuation { continuation in
             mockAuthenticationOnboardingCoordinator._startCalledContinuation = continuation
-            let sut = ReauthenticationCoordinator(
+            let sut = ReAuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) },
-                newUserAction: { }
+                completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
         }
@@ -97,13 +94,12 @@ class ReauthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
         let completion = await withCheckedContinuation { continuation in
-            let sut = ReauthenticationCoordinator(
+            let sut = ReAuthenticationCoordinator(
                 navigationController: mockNavigationController,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                completionAction: { continuation.resume(returning: true) },
-                newUserAction: { }
+                completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
         }

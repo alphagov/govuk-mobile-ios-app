@@ -1,24 +1,28 @@
 import Foundation
+import GOVKit
 import UIKit
 import Authentication
 
 class AuthenticationCoordinator: BaseCoordinator {
+    private let coordinatorBuilder: CoordinatorBuilder
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let completionAction: () -> Void
-    private let newUserAction: (() -> Void)?
     private let handleError: (AuthenticationError) -> Void
 
     init(navigationController: UINavigationController,
+         coordinatorBuilder: CoordinatorBuilder,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void,
-         newUserAction: (() -> Void)?,
          handleError: @escaping (AuthenticationError) -> Void) {
+        self.coordinatorBuilder = coordinatorBuilder
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
+        self.analyticsService = analyticsService
         self.completionAction = completionAction
-        self.newUserAction = newUserAction
         self.handleError = handleError
         super.init(navigationController: navigationController)
     }
@@ -40,15 +44,8 @@ class AuthenticationCoordinator: BaseCoordinator {
             if shouldEncryptRefreshToken {
                 authenticationService.encryptRefreshToken()
             }
-            if response.returningUser {
-                DispatchQueue.main.async {
-                    self.completionAction()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.newUserAction?()
-                }
-            }
+            handleUserAuthChange(response: response)
+            startSignInSuccess()
         case .failure(let error):
             DispatchQueue.main.async {
                 self.handleError(error)
@@ -56,10 +53,23 @@ class AuthenticationCoordinator: BaseCoordinator {
         }
     }
 
-    private var shouldEncryptRefreshToken: Bool {
-        let shouldLocalAuth = localAuthenticationService.isLocalAuthenticationEnabled
-        let onboardingFlowSeen = localAuthenticationService.authenticationOnboardingFlowSeen
+    private func handleUserAuthChange(response: AuthenticationServiceResponse) {
+        if !response.returningUser {
+            analyticsService.resetConsent()
+        }
+    }
 
-        return onboardingFlowSeen && shouldLocalAuth
+    @MainActor
+    private func startSignInSuccess() {
+        let coordinator = coordinatorBuilder.signInSuccess(
+            navigationController: root,
+            completion: completionAction
+        )
+        start(coordinator)
+    }
+
+    private var shouldEncryptRefreshToken: Bool {
+        localAuthenticationService.authenticationOnboardingFlowSeen &&
+        localAuthenticationService.isLocalAuthenticationEnabled
     }
 }

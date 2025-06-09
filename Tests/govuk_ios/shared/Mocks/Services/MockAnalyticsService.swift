@@ -26,6 +26,11 @@ class MockAnalyticsService: AnalyticsServiceInterface,
         _trackSetUserPropertyReceivedProperty = userProperty
     }
 
+    var _resetConsentCalled: Bool = false
+    func resetConsent() {
+        _resetConsentCalled = true
+    }
+
     var _setAcceptedAnalyticsAccepted: Bool = true
     func setAcceptedAnalytics(accepted: Bool) {
         _setAcceptedAnalyticsAccepted = accepted

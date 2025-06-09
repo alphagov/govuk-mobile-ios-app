@@ -117,7 +117,6 @@ class InactivityServiceTests {
     @Test
     func appWillEnterForeground_inactive_signedOut_doesntCallHandler() {
         let mockTimer = MockTimerWrapper()
-        let initialTimer = mockTimer.lastCreatedTimer
         let mockAuthService = MockAuthenticationService()
         mockAuthService._stubbedIsSignedIn = false
         let sut = InactivityService(authenticationService: mockAuthService,

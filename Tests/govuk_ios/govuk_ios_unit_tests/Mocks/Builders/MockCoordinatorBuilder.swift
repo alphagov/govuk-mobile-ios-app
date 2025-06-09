@@ -12,6 +12,32 @@ extension CoordinatorBuilder {
 
 class MockCoordinatorBuilder: CoordinatorBuilder {
 
+    var _stubbedPreAuthCoordinator: BaseCoordinator?
+    var _receivedPreAuthNavigationController: UINavigationController?
+    var _receivedPreAuthCompletion: (() -> Void)?
+    override func preAuth(navigationController: UINavigationController,
+                          completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedPreAuthNavigationController = navigationController
+        _receivedPreAuthCompletion = completion
+        return _stubbedPreAuthCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedPeriAuthCoordinator: BaseCoordinator?
+    var _receivedPeriAuthCompletion: (() -> Void)?
+    override func periAuth(navigationController: UINavigationController,
+                           completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedPeriAuthCompletion = completion
+        return _stubbedPeriAuthCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedPostAuthCoordinator: BaseCoordinator?
+    var _receivedPostAuthCompletion: (() -> Void)?
+    override func postAuth(navigationController: UINavigationController,
+                           completion: @escaping () -> Void) -> BaseCoordinator {
+        _receivedPostAuthCompletion = completion
+        return _stubbedPostAuthCoordinator ?? MockBaseCoordinator()
+    }
+
     var _stubbedTabCoordinator: BaseCoordinator?
     var _receivedTabNavigationController: UINavigationController?
     override func tab(navigationController: UINavigationController) -> BaseCoordinator {
@@ -53,11 +79,11 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
 
     var _stubbedAnalyticsConsentCoordinator: BaseCoordinator?
     var _receivedAnalyticsConsentNavigationController: UINavigationController?
-    var _receivedAnalyticsConsentDismissAction: (() -> Void)?
+    var _receivedAnalyticsConsentCompletion: (() -> Void)?
     override func analyticsConsent(navigationController: UINavigationController,
-                                   dismissAction: @escaping () -> Void) -> BaseCoordinator {
+                                   completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedAnalyticsConsentNavigationController = navigationController
-        _receivedAnalyticsConsentDismissAction = dismissAction
+        _receivedAnalyticsConsentCompletion = completion
         return _stubbedAnalyticsConsentCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
@@ -78,29 +104,35 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedTopicOnboardingCoordinator ?? MockBaseCoordinator()
     }
 
+    var _receivedAppUnavailableLaunchResponse: AppLaunchResponse?
     var _receivedAppUnavailableDismissAction: (() -> Void)?
     var _stubbedAppUnavailableCoordinator: MockBaseCoordinator?
     override func appUnavailable(navigationController: UINavigationController,
                                  launchResponse: AppLaunchResponse,
                                  dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppUnavailableLaunchResponse = launchResponse
         _receivedAppUnavailableDismissAction = dismissAction
         return _stubbedAppUnavailableCoordinator ?? MockBaseCoordinator()
     }
 
     var _receivedAppForcedUpdateDismissAction: (() -> Void)?
+    var _receivedAppForcedUpdateLaunchResponse: AppLaunchResponse?
     var _stubbedAppForcedUpdateCoordinator: MockBaseCoordinator?
     override func appForcedUpdate(navigationController: UINavigationController,
                                   launchResponse: AppLaunchResponse,
                                   dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppForcedUpdateLaunchResponse = launchResponse
         _receivedAppForcedUpdateDismissAction = dismissAction
         return _stubbedAppForcedUpdateCoordinator ?? MockBaseCoordinator()
     }
 
+    var _receivedAppRecommendUpdateLaunchResponse: AppLaunchResponse?
     var _receivedAppRecommendUpdateDismissAction: (() -> Void)?
     var _stubbedAppRecommendUpdateCoordinator: MockBaseCoordinator?
     override func appRecommendUpdate(navigationController: UINavigationController,
                                      launchResponse: AppLaunchResponse,
                                      dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedAppRecommendUpdateLaunchResponse = launchResponse
         _receivedAppRecommendUpdateDismissAction = dismissAction
         return _stubbedAppRecommendUpdateCoordinator ?? MockBaseCoordinator()
     }
@@ -125,7 +157,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _receivedWelcomeOnboardingCompletion: (() -> Void)?
     var _stubbedWelcomeOnboardingCoordinator: MockBaseCoordinator?
     override func welcomeOnboarding(navigationController: UINavigationController,
-                                    newUserAction: (() -> Void)?,
                                     completionAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedWelcomeOnboardingCompletion = completionAction
         return _stubbedWelcomeOnboardingCoordinator ?? MockBaseCoordinator()
@@ -136,7 +167,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _stubbedAuthenticationCoordinator: MockBaseCoordinator?
     override func authentication(navigationController: UINavigationController,
                                  completionAction: @escaping () -> Void,
-                                 newUserAction: (() -> Void)?,
                                  handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         _receivedAuthenticationCompletion = completionAction
         _receivedAuthenticationHandleError = handleError
@@ -152,11 +182,13 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _receivedNotificationConsentCompletion: (() -> Void)?
+    var _receivedNotificationConsentResult: NotificationConsentResult?
     var _stubbedNotificationConsentCoordinator: MockBaseCoordinator?
     override func notificationConsent(navigationController: UINavigationController,
                                       consentResult: NotificationConsentResult,
                                       completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedNotificationConsentCompletion = completion
+        _receivedNotificationConsentResult = consentResult
         return _stubbedNotificationConsentCoordinator ?? MockBaseCoordinator()
     }
 
@@ -171,8 +203,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     var _receivedReauthenticationCompletion: (() -> Void)?
     var _stubbedReauthenticationCoordinator: MockBaseCoordinator?
     override func reauthentication(navigationController: UINavigationController,
-                                   completionAction: @escaping () -> Void,
-                                   newUserAction: @escaping () -> Void) -> BaseCoordinator {
+                                   completionAction: @escaping () -> Void) -> BaseCoordinator {
         _receivedReauthenticationCompletion = completionAction
         return _stubbedReauthenticationCoordinator ?? MockBaseCoordinator()
     }
@@ -182,37 +213,14 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _stubbedSignOutConfirmationCoordinator ?? MockBaseCoordinator()
     }
 
-    var _receivedSignedOutCompletion: ((Bool) -> Void)?
-    var _stubbedSignedOutCoordinator: MockBaseCoordinator?
-    override func signedOut(navigationController: UINavigationController,
-                            completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-        _receivedSignedOutCompletion = completion
-        return _stubbedSignedOutCoordinator ?? MockBaseCoordinator()
-    }
-
-    var _receivedSignInErrorCompletion: (() -> Void)?
-    var _stubbedSignInErrorCoordinator: MockBaseCoordinator?
-    override func signInError(navigationController: UINavigationController,
-                              completion: @escaping () -> Void) -> BaseCoordinator {
-        _receivedSignInErrorCompletion = completion
-        return _stubbedSignInErrorCoordinator ?? MockBaseCoordinator()
-    }
-
     var _receivedSignInSuccessCompletion: (() -> Void)?
+    var _signInSuccessCallAction: (() -> Void)?
     var _stubbedSignInSuccessCoordinator: MockBaseCoordinator?
     override func signInSuccess(navigationController: UINavigationController,
                                 completion: @escaping () -> Void) -> BaseCoordinator {
         _receivedSignInSuccessCompletion = completion
+        _signInSuccessCallAction?()
         return _stubbedSignInSuccessCoordinator ?? MockBaseCoordinator()
-    }
-
-    var _receivedInactiveAction: (() -> Void)?
-    var _stubbedInactivityCoordinator: MockBaseCoordinator?
-    override func inactivityCoordinator(navigationController: UINavigationController,
-                                        inactivityService: InactivityServiceInterface,
-                                        inactiveAction: @escaping () -> Void) -> BaseCoordinator {
-        _receivedInactiveAction = inactiveAction
-        return _stubbedInactivityCoordinator ?? MockBaseCoordinator()
     }
 
     var _receivedSafariCoordinatorURL: URL?

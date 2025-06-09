@@ -6,7 +6,7 @@ import GOVKit
 class AnalyticsConsentContainerViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface?
     private let urlOpener: URLOpener
-    private let dismissAction: () -> Void
+    private let completion: () -> Void
 
     let title = String.onboarding.localized("analyticsConsentTitle")
     let descriptionTop = String.onboarding.localized("analyticsConsentDescriptionTop")
@@ -42,10 +42,10 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
 
     init(analyticsService: AnalyticsServiceInterface?,
          urlOpener: URLOpener = UIApplication.shared,
-         dismissAction: @escaping () -> Void) {
+         completion: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
-        self.dismissAction = dismissAction
+        self.completion = completion
     }
 
     func openPrivacyPolicy() {
@@ -53,6 +53,6 @@ class AnalyticsConsentContainerViewModel: ObservableObject {
     }
 
     private func finishAnalyticsConsent() {
-        dismissAction()
+        completion()
     }
 }

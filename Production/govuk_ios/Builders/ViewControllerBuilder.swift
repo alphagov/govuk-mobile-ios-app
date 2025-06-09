@@ -244,7 +244,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    @MainActor
     func localAuthorityConfirmationScreen(
         analyticsService: AnalyticsServiceInterface,
         localAuthorityItem: Authority,
@@ -254,12 +253,8 @@ class ViewControllerBuilder {
                 localAuthorityItem: localAuthorityItem,
                 dismiss: dismiss
             )
-            let view = LocalAuthorityConfirmationView(
-                viewModel: viewModel
-            )
-            let viewController = HostingViewController(
-                rootView: view
-            )
+            let view = LocalAuthorityConfirmationView(viewModel: viewModel)
+            let viewController = HostingViewController(rootView: view)
             return viewController
         }
 

@@ -50,7 +50,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
                 resolveAmbiguityAction: { authorities, postCode in
                     expectedAddresses = authorities.addresses
                     continuation.resume()
-                }, navigateToConfirmationView: {_ in },
+                }, localAuthoritySelected: {_ in },
                 dismissAction: {}
             )
             sut.postCode = "test"
@@ -66,7 +66,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             service: MockLocalAuthorityService(),
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
-            navigateToConfirmationView: {_ in },
+            localAuthoritySelected: {_ in },
             dismissAction: {}
         )
         sut.primaryButtonViewModel.action()
@@ -82,7 +82,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             service: mockService,
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
-            navigateToConfirmationView: {_ in },
+            localAuthoritySelected: {_ in },
             dismissAction: {}
         )
 
@@ -101,7 +101,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             service: mockService,
             analyticsService: MockAnalyticsService(),
             resolveAmbiguityAction: { _, _ in },
-            navigateToConfirmationView: {_ in},
+            localAuthoritySelected: {_ in},
             dismissAction: {}
         )
         sut.postCode = "test"
@@ -116,7 +116,7 @@ struct LocalAuthorityPostcodeEntryViewmodelTests {
             service: MockLocalAuthorityService(),
             analyticsService: mockAnalyticsService,
             resolveAmbiguityAction: { _, _ in },
-            navigateToConfirmationView: {_ in },
+            localAuthoritySelected: {_ in },
             dismissAction: {}
         )
         sut.postCode = "SW1A 0AA"

@@ -42,7 +42,7 @@ struct LocalAuthorityConfirmationView: View {
         VStack(alignment: .leading, spacing: 15) {
             Text("\(viewModel.unitarySuccessTitle) \(viewModel.localAuthorityItem.name)")
                 .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(.title)
+                .font(Font.govUK.largeTitleBold)
                 .fontWeight(.bold)
                 .accessibilityAddTraits(.isHeader)
             Text(viewModel.unitarySuccessDescription)
@@ -52,17 +52,19 @@ struct LocalAuthorityConfirmationView: View {
     }
 
     var twoTierView: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 18) {
             Text(viewModel.twoTierSucessTitle)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
-                .font(.title)
+                .font(Font.govUK.largeTitleBold)
                 .fontWeight(.bold)
                 .accessibilityAddTraits(.isHeader)
-                .padding([.bottom], 16)
+                .padding([.bottom], 10)
             Text(viewModel.twoTierSuccessDescriptionOne)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
+                .padding(.bottom, 4)
             Text(viewModel.twoTierSuccessDescriptionTwo)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
+                .padding(.bottom, 6)
             VStack(alignment: .leading, spacing: 0) {
                 if let parentAuthorityName = viewModel.localAuthorityItem.parent?.name {
                     Text("\u{2022} \(parentAuthorityName)")
@@ -70,7 +72,7 @@ struct LocalAuthorityConfirmationView: View {
                 }
                 Text("\u{2022} \(viewModel.localAuthorityItem.name)")
                     .foregroundColor(Color(UIColor.govUK.text.primary))
-            }
+            }.padding(.bottom, 8)
             Text(viewModel.twoTierSuccessDescriptionThree)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
             Spacer()

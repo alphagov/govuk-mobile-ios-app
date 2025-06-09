@@ -14,7 +14,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "BH22 8UB",
-            navigateToConfirmationView: {_ in},
+            localAuthoritySelected: {_ in},
             selectAddressAction: { },
             dismissAction: { }
         )
@@ -34,7 +34,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
-            navigateToConfirmationView: {_ in
+            localAuthoritySelected: {_ in
                 navigatedToSuccesView = true
             },
             selectAddressAction: { },
@@ -63,7 +63,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
-            navigateToConfirmationView: {_ in},
+            localAuthoritySelected: {_ in},
             selectAddressAction: { },
             dismissAction: { }
         )
@@ -91,7 +91,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
-            navigateToConfirmationView: {_ in},
+            localAuthoritySelected: {_ in},
             selectAddressAction: {
                 selectAddressCalled = true
             },
@@ -113,7 +113,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
-            navigateToConfirmationView: {_ in },
+            localAuthoritySelected: {_ in },
             selectAddressAction: { },
             dismissAction: { }
         )

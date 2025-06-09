@@ -243,7 +243,7 @@ class ViewControllerBuilder {
         let viewController = HostingViewController(rootView: view)
         return viewController
     }
-  
+
     @MainActor
     func localAuthorityConfirmationScreen(
         analyticsService: AnalyticsServiceInterface,

@@ -103,7 +103,7 @@
         }
       }
     },
-    "localAuthorityConfirmationprimaryButton" : {
+    "localAuthorityConfirmationPrimaryButton" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {

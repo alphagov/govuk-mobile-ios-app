@@ -72,7 +72,7 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             localAuthorities: localAuthorities,
-            navigateToConfirmationView: { [weak self] authority in
+            localAuthoritySelected: { [weak self] authority in
                 self?.navigateToConfirmationView(localAuthority: authority)
             },
             dismissAction: { [weak self] in

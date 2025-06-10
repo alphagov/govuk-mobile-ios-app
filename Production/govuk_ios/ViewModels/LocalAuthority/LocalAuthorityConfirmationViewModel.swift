@@ -6,7 +6,7 @@ import UIComponents
 class LocalAuthorityConfirmationViewModel {
     let analyticsService: AnalyticsServiceInterface
     private let primaryButtonTitle = String.localAuthority.localized(
-        "localAuthorityConfirmationprimaryButton"
+        "localAuthorityConfirmationPrimaryButton"
     )
      let cancelButtonTitle = String.localAuthority.localized(
         "localAuthorityCancelButton"

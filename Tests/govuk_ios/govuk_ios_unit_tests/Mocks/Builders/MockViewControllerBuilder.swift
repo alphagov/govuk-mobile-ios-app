@@ -101,7 +101,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                                                   localAuthorityService: LocalAuthorityServiceInterface,
                                                   localAuthorities: AmbiguousAuthorities,
                                                   postCode: String,
-                                                  localAuthoritySelected navigateToConfirmationView: @escaping (Authority) -> Void,
+                                                  localAuthoritySelected: @escaping (Authority) -> Void,
                                                   selectAddressAction: @escaping () -> Void,
                                                   dismissAction: @escaping () -> Void
     ) -> UIViewController {
@@ -115,7 +115,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     override func ambiguousAddressSelectionView(analyticsService: AnalyticsServiceInterface,
                                                 localAuthorityService: LocalAuthorityServiceInterface,
                                                 localAuthorities: AmbiguousAuthorities,
-                                                navigateToConfirmationView: @escaping (Authority) -> Void,
+                                                localAuthoritySelected: @escaping (Authority) -> Void,
                                                 dismissAction: @escaping () -> Void
     ) -> UIViewController {
         _receivedAmbiguousAddressDismissAction = dismissAction

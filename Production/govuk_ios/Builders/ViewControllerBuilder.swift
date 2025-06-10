@@ -152,14 +152,14 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
-        navigateToConfirmationView: @escaping (Authority) -> Void,
+        localAuthoritySelected: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = AmbiguousAddressSelectionViewModel(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
-            localAuthoritySelected: navigateToConfirmationView,
+            localAuthoritySelected: localAuthoritySelected,
             dismissAction: dismissAction
         )
         let view = AmbiguousAddressSelectionView(
@@ -247,7 +247,8 @@ class ViewControllerBuilder {
     func localAuthorityConfirmationScreen(
         analyticsService: AnalyticsServiceInterface,
         localAuthorityItem: Authority,
-        dismiss: @escaping () -> Void) -> UIViewController {
+        dismiss: @escaping () -> Void
+    ) -> UIViewController {
             let viewModel = LocalAuthorityConfirmationViewModel(
                 analyticsService: analyticsService,
                 localAuthorityItem: localAuthorityItem,

@@ -163,11 +163,32 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             localAuthorityService: MockLocalAuthorityService(),
             resolveAmbiguityAction: { _, _ in },
+            localAuthoritySelected: {_ in },
             dismissAction: {}
         )
         let rootView = (result as? HostingViewController<LocalAuthorityPostcodeEntryView>)?.rootView
         #expect(rootView != nil)
     }
+
+    @Test
+    func localAuthorityConfirmationView_returnsExpectedResult() {
+        let authority = Authority(
+            name: "Test",
+            homepageUrl: "Test",
+            tier: "unitary",
+            slug: "test slug",
+            parent: nil
+        )
+        let subject = ViewControllerBuilder()
+        let result = subject.localAuthorityConfirmationScreen(
+            analyticsService: MockAnalyticsService(),
+            localAuthorityItem: authority,
+            dismiss: {}
+        )
+        let rootView = (result as? HostingViewController<LocalAuthorityConfirmationView>)?.rootView
+        #expect(rootView != nil)
+    }
+
 
     @Test
     func localAuthorityExaplainerView_returnsExpectedResult() {

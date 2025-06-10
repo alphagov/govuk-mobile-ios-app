@@ -35,6 +35,9 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
                     postCode: postCode
                 )
             },
+            localAuthoritySelected: { [weak self] authority in
+                self?.navigateToConfirmationView(localAuthority: authority)
+            },
             dismissAction: { [weak self] in
                 self?.dismissModal()
             }
@@ -49,6 +52,11 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
             localAuthorityService: localAuthorityService,
             localAuthorities: localAuthorities,
             postCode: postCode,
+            localAuthoritySelected: { [weak self] selectedAuthority in
+                self?.navigateToConfirmationView(
+                    localAuthority: selectedAuthority
+                )
+            },
             selectAddressAction: { [weak self] in
                 self?.navigateToAddressView(localAuthorities: localAuthorities)
             },
@@ -64,7 +72,21 @@ class EditLocalAuthorityCoordinator: BaseCoordinator {
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             localAuthorities: localAuthorities,
+            localAuthoritySelected: { [weak self] authority in
+                self?.navigateToConfirmationView(localAuthority: authority)
+            },
             dismissAction: { [weak self] in
+                self?.dismissModal()
+            }
+        )
+        push(viewController, animated: true)
+    }
+
+    private func navigateToConfirmationView(localAuthority: Authority) {
+        let viewController = viewControllerBuilder.localAuthorityConfirmationScreen(
+            analyticsService: analyticsService,
+            localAuthorityItem: localAuthority,
+            dismiss: { [weak self] in
                 self?.dismissModal()
             }
         )

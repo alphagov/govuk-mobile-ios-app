@@ -14,6 +14,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "BH22 8UB",
+            localAuthoritySelected: {_ in},
             selectAddressAction: { },
             dismissAction: { }
         )
@@ -22,9 +23,9 @@ struct AmbiguousAuthoritySelectionViewModelTests {
     }
 
     @Test
-    func confirmButtonAction_savesLocalAuthority_andDismisses() {
+    func confirmButtonAction_savesLocalAuthority_andNavigatedToSuccesView() {
         let mockLocalAuthorityService = MockLocalAuthorityService()
-        var dismissCalled = false
+        var navigatedToSuccesView = false
         let sut = AmbiguousAuthoritySelectionViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorityService: mockLocalAuthorityService,
@@ -33,10 +34,11 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            localAuthoritySelected: {_ in
+                navigatedToSuccesView = true
+            },
             selectAddressAction: { },
-            dismissAction: {
-                dismissCalled = true
-            }
+            dismissAction: {}
         )
         sut.selectedAuthority = Authority(
             name: "name1",
@@ -46,7 +48,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
         )
         sut.confirmButtonModel.action()
         #expect(mockLocalAuthorityService._savedAuthority?.slug == "slug1")
-        #expect(dismissCalled)
+        #expect(navigatedToSuccesView)
     }
 
     @Test
@@ -61,6 +63,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            localAuthoritySelected: {_ in},
             selectAddressAction: { },
             dismissAction: { }
         )
@@ -88,6 +91,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            localAuthoritySelected: {_ in},
             selectAddressAction: {
                 selectAddressCalled = true
             },
@@ -109,6 +113,7 @@ struct AmbiguousAuthoritySelectionViewModelTests {
                 addresses: []
             ),
             postCode: "SW11 5EW",
+            localAuthoritySelected: {_ in },
             selectAddressAction: { },
             dismissAction: { }
         )

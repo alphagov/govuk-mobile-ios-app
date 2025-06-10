@@ -78,6 +78,20 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "localAuthorityCancelButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
     "localAuthorityCardWebsiteConstant" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -85,6 +99,83 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "website"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationPrimaryButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierDescriptionOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Different local councils are responsible for different services."
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierDescriptionTwo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local councils are:"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierDescritionThree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local councils’ websites from the bottom of the app home page."
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services in your area are provided by 2 local councils"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationUnitaryDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local council's website from the bottom of the app home page."
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationUnitaryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local council is"
           }
         }
       }

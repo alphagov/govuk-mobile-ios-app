@@ -12,19 +12,21 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
     @Published var selectedAddress: LocalAuthorityAddress?
 
     let dismissAction: () -> Void
+    let localAuthoritySelected: (Authority) -> Void
     let title = String.localAuthority.localized("addressSelectionViewTitle")
     let subtitle = String.localAuthority.localized("addressSelectionViewSubtitle")
     let cancelButtonTitle: String = String.common.localized(
         "cancel"
     )
-
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
          ambiguousAuthorities: AmbiguousAuthorities,
+         localAuthoritySelected: @escaping (Authority) -> Void,
          dismissAction: @escaping () -> Void) {
         self.localAuthorityService = localAuthorityService
         self.analyticsService = analyticsService
         self.ambiguousAuthorities = ambiguousAuthorities
+        self.localAuthoritySelected = localAuthoritySelected
         self.dismissAction = dismissAction
         addresses = ambiguousAuthorities.addresses
     }
@@ -44,7 +46,7 @@ class AmbiguousAddressSelectionViewModel: ObservableObject {
                       ) else { return }
                 self?.trackNavigationEvent(buttonTitle)
                 self?.localAuthorityService.saveLocalAuthority(selectedAuthority)
-                self?.dismissAction()
+                self?.localAuthoritySelected(selectedAuthority)
             }
         )
     }

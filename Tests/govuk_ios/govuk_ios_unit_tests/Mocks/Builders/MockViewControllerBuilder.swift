@@ -76,7 +76,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     override func localAuthorityPostcodeEntryView(analyticsService: AnalyticsServiceInterface,
                                                   localAuthorityService: LocalAuthorityServiceInterface,
                                                   resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
-                                                  localAuthoritySelected navigateToConfirmationView: @escaping (Authority) -> Void,
+                                                  localAuthoritySelected: @escaping (Authority) -> Void,
                                                   dismissAction: @escaping () -> Void) -> UIViewController {
         _receivedLocalAuthorityDismissAction = dismissAction
         _receivedResolveAmbiguityAction = resolveAmbiguityAction

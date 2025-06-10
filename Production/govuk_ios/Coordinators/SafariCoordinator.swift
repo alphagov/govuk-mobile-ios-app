@@ -39,9 +39,10 @@ class SafariCoordinator: BaseCoordinator {
         )
         navigationController.isNavigationBarHidden = true
         if fullScreen {
-            root.pushViewController(viewController, animated: true)
+            navigationController.modalPresentationStyle = .fullScreen
         } else {
-            root.present(navigationController, animated: true)
+            navigationController.modalPresentationStyle = .formSheet
         }
+        root.present(navigationController, animated: true)
     }
 }

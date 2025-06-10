@@ -94,7 +94,7 @@ class SettingsCoordinator: TabItemCoordinator {
             url: url,
             fullScreen: false
         )
-        start(coordinator, url: url)
+        start(coordinator)
     }
 
     private func startSignOut() {

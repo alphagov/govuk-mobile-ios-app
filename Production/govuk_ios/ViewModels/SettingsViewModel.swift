@@ -335,13 +335,6 @@ class SettingsViewModel: SettingsViewModelInterface {
         )
     }
 
-    private func openURLIfPossible(url: URL,
-                                   eventTitle: String) {
-        if urlOpener.openIfPossible(url) {
-            trackNavigationEvent(eventTitle, external: true)
-        }
-    }
-
     private func trackNavigationEvent(_ title: String,
                                       external: Bool) {
         let event = AppEvent.buttonNavigation(

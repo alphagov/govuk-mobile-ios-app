@@ -367,7 +367,8 @@ struct CoordinatorBuilderTests {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.safari(
             navigationController: UINavigationController(),
-            url: URL.arrange
+            url: URL.arrange,
+            fullScreen: true
         )
 
         #expect(coordinator is SafariCoordinator)

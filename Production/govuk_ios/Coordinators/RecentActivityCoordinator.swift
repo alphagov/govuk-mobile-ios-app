@@ -34,7 +34,8 @@ class RecentActivityCoordinator: BaseCoordinator {
     private func presentWebView(url: URL) {
         let coordinator = coordinatorBuilder.safari(
             navigationController: root,
-            url: url
+            url: url,
+            fullScreen: true
         )
         start(coordinator, url: url)
     }

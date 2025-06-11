@@ -20,7 +20,8 @@ struct SafariCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
-            url: .arrange
+            url: .arrange,
+            fullScreen: false
         )
         subject.start()
 
@@ -39,7 +40,8 @@ struct SafariCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
-            url: expectedURL
+            url: expectedURL,
+            fullScreen: true
         )
         subject.start()
 
@@ -58,7 +60,8 @@ struct SafariCoordinatorTests {
             viewControllerBuilder: MockViewControllerBuilder(),
             configService: mockConfigService,
             urlOpener: mockURLOpener,
-            url: expectedURL
+            url: expectedURL,
+            fullScreen: false
         )
         subject.start()
 

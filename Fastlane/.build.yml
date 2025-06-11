@@ -2,7 +2,6 @@
 default: &DEFAULTS
   app: &APP_DEFAULTS
     scheme: GovUK
-    display_name: Gov.UK - Dev
     output_directory: build_output
     project: GovUK.xcodeproj
     bundle_identifier: uk.gov.govuk
@@ -11,6 +10,7 @@ default: &DEFAULTS
       uk.gov.govuk.notification-service: "match AppStore uk.gov.govuk.notification-service"
     export_method: app-store
     build_configuration: Release
+    onesignal_app_id: %env:<ONESIGNAL_APP_ID>%
   scan:
     output_directory: test_output
     devices:
@@ -33,7 +33,6 @@ alpha:
   app:
     <<: *APP_DEFAULTS
     scheme: GovUKAlpha
-    display_name: Gov.UK - Alpha
     bundle_identifier: uk.gov.govuk.dev
     profile_specifiers:
       uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
@@ -48,7 +47,6 @@ beta:
   <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
-    display_name: Gov.UK - Beta
   match:
     <<: *MATCH_DEFAULTS
     method: "appstore"

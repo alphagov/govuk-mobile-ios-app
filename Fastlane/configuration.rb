@@ -17,10 +17,6 @@ class Configuration
     setting(:app, :output_directory)
   end
 
-  def app_display_name
-    setting(:app, :display_name)
-  end
-
   def app_project
     setting(:app, :project)
   end
@@ -29,8 +25,13 @@ class Configuration
     setting(:app, :bundle_identifier)
   end
 
+  def app_onesignal_app_id
+    ENV['ONESIGNAL_APP_ID']
+  end
+
   def app_args
     [
+      "ONESIGNAL_APP_ID=\"#{app_onesignal_app_id}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end

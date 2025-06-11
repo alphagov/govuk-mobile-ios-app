@@ -10,7 +10,6 @@ default: &DEFAULTS
       uk.gov.govuk.notification-service: "match AppStore uk.gov.govuk.notification-service"
     export_method: app-store
     build_configuration: Release
-    onesignal_app_id: %env:<ONESIGNAL_APP_ID>%
   scan:
     output_directory: test_output
     devices:
@@ -45,8 +44,6 @@ alpha:
 
 beta:
   <<: *DEFAULTS
-  app:
-    <<: *APP_DEFAULTS
   match:
     <<: *MATCH_DEFAULTS
     method: "appstore"

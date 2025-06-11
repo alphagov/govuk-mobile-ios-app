@@ -31,6 +31,7 @@ final class AmbiguousAuthorityViewControllerSnapshotTests: SnapshotTestCase {
             localAuthorityService: MockLocalAuthorityService(),
             ambiguousAuthorities: ambigiousAuthorities,
             postCode: "BH22 8UB",
+            localAuthoritySelected: {_ in },
             selectAddressAction: {},
             dismissAction: {})
 

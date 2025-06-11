@@ -65,7 +65,9 @@ final class AmbiguousAddressViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             localAuthorityService: MockLocalAuthorityService(),
             ambiguousAuthorities: ambigiousAuthorities,
-            dismissAction: { })
+            localAuthoritySelected: {_ in},
+            dismissAction: { }
+        )
 
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel

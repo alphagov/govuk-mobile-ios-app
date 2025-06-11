@@ -107,12 +107,14 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         resolveAmbiguityAction: @escaping (AmbiguousAuthorities, String) -> Void,
+        localAuthoritySelected: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = LocalAuthorityPostcodeEntryViewModel(
             service: localAuthorityService,
             analyticsService: analyticsService,
             resolveAmbiguityAction: resolveAmbiguityAction,
+            localAuthoritySelected: localAuthoritySelected,
             dismissAction: dismissAction
         )
         let view = LocalAuthorityPostcodeEntryView(
@@ -127,6 +129,7 @@ class ViewControllerBuilder {
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
         postCode: String,
+        localAuthoritySelected: @escaping (Authority) -> Void,
         selectAddressAction: @escaping () -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
@@ -135,6 +138,7 @@ class ViewControllerBuilder {
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
             postCode: postCode,
+            localAuthoritySelected: localAuthoritySelected,
             selectAddressAction: selectAddressAction,
             dismissAction: dismissAction
         )
@@ -148,13 +152,16 @@ class ViewControllerBuilder {
         analyticsService: AnalyticsServiceInterface,
         localAuthorityService: LocalAuthorityServiceInterface,
         localAuthorities: AmbiguousAuthorities,
+        localAuthoritySelected: @escaping (Authority) -> Void,
         dismissAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = AmbiguousAddressSelectionViewModel(
             analyticsService: analyticsService,
             localAuthorityService: localAuthorityService,
             ambiguousAuthorities: localAuthorities,
-            dismissAction: dismissAction)
+            localAuthoritySelected: localAuthoritySelected,
+            dismissAction: dismissAction
+        )
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel
         )
@@ -237,6 +244,22 @@ class ViewControllerBuilder {
         return viewController
     }
 
+    func localAuthorityConfirmationScreen(
+        analyticsService: AnalyticsServiceInterface,
+        localAuthorityItem: Authority,
+        dismiss: @escaping () -> Void
+    ) -> UIViewController {
+            let viewModel = LocalAuthorityConfirmationViewModel(
+                analyticsService: analyticsService,
+                localAuthorityItem: localAuthorityItem,
+                dismiss: dismiss
+            )
+            let view = LocalAuthorityConfirmationView(viewModel: viewModel)
+            let viewController = HostingViewController(rootView: view)
+            return viewController
+        }
+
+    @MainActor
     // swiftlint:disable:next function_parameter_count
     func topicDetail(topic: DisplayableTopic,
                      topicsService: TopicsServiceInterface,

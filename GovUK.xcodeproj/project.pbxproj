@@ -75,6 +75,8 @@
 		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
 		4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */; };
+		4E5E79A62DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E79A52DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift */; };
+		4E5E79A82DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5E79A72DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift */; };
 		4E5ED2012C6E06FB00750BDA /* AppConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */; };
 		4E6663C52C736ABD0063E81C /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C42C736ABD0063E81C /* Feature.swift */; };
 		4E6663C82C7370750063E81C /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C72C7370750063E81C /* AppConfig.swift */; };
@@ -436,6 +438,8 @@
 		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocalAuthorityCoordinator.swift; sourceTree = "<group>"; };
+		4E5E79A52DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityConfirmationViewModel.swift; sourceTree = "<group>"; };
+		4E5E79A72DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityConfirmationView.swift; sourceTree = "<group>"; };
 		4E5ED2002C6E06FB00750BDA /* AppConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigService.swift; sourceTree = "<group>"; };
 		4E6663C42C736ABD0063E81C /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		4E6663C72C7370750063E81C /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -713,6 +717,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/HostingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LaunchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthenticationOnboardingViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
@@ -756,6 +761,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/HostingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LaunchViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthenticationOnboardingViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityConfirmationViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityExplainerViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/LocalAuthorityPostcodeEntryViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/NotificationConsentAlertViewControllerSnapshotTests.swift,
@@ -1006,6 +1012,7 @@
 				4EEC0F332DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift */,
 				D0ECB3FD2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift */,
 				D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */,
+				4E5E79A72DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift */,
 			);
 			path = LocalAuthority;
 			sourceTree = "<group>";
@@ -1709,6 +1716,7 @@
 		D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
+				4E5E79A52DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift */,
 				D0F6813B2DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift */,
 				D0F6813C2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift */,
 				D0F6813D2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift */,
@@ -2177,6 +2185,7 @@
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				D0839FD02DE7ABE800CA5C27 /* GovUKProviderFactory.swift in Sources */,
 				D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */,
+				4E5E79A82DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift in Sources */,
 				4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */,
 				D056CE742D3A83F2005845E0 /* UserFeedbackViewModel.swift in Sources */,
 				16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */,
@@ -2205,6 +2214,7 @@
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				5D925B182CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift in Sources */,
+				4E5E79A62DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift in Sources */,
 				5DD4CB162D95490100459FB5 /* ActivityService.swift in Sources */,
 				D09046872DBFDF5D0096EE66 /* SignedOutCoordinator.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,

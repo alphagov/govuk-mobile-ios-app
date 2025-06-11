@@ -6,12 +6,19 @@ class NotificationConsentAlertViewController: BaseViewController {
     var grantConsentAction: (() -> Void)?
     var openSettingsAction: (() -> Void)?
 
+    private var scrollView: UIScrollView = {
+        let localView = UIScrollView()
+        localView.translatesAutoresizingMaskIntoConstraints = false
+        return localView
+    }()
+
     private var titleLabel: UILabel = {
         let localView = UILabel()
         localView.font = UIFont.govUK.largeTitleBold
         localView.textColor = UIColor.govUK.text.primary
         localView.text = String.notifications.localized("consentAlertTitle")
         localView.translatesAutoresizingMaskIntoConstraints = false
+        localView.accessibilityTraits = [.header]
         return localView
     }()
 
@@ -100,42 +107,51 @@ class NotificationConsentAlertViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureConstraints()
     }
 
     private func configureUI() {
         view.backgroundColor = UIColor.govUK.fills.surfaceBackground
-        view.addSubview(titleLabel)
-        view.addSubview(bodyLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(bodyLabel)
         privacyStackView.addArrangedSubview(privacyButton)
         privacyStackView.addArrangedSubview(linkImage)
-        view.addSubview(privacyStackView)
+        scrollView.addSubview(privacyStackView)
 
         footerView.addView(actionButton)
         actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         footerView.addView(settingsButton)
         settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(footerView)
+    }
+
+    private func configureConstraints() {
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor),
+
             titleLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                equalTo: scrollView.topAnchor,
                 constant: 48
             ),
-            titleLabel.leftAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leftAnchor
-            ),
-            titleLabel.rightAnchor.constraint(
-                equalTo: view.rightAnchor
-            ),
+            titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
 
             bodyLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
                 constant: 24
             ),
             bodyLabel.trailingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.trailingAnchor
+                equalTo: scrollView.trailingAnchor
             ),
             bodyLabel.leadingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leadingAnchor
+                equalTo: scrollView.leadingAnchor
+            ),
+            bodyLabel.widthAnchor.constraint(
+                equalTo: scrollView.widthAnchor
             ),
 
             linkImage.widthAnchor.constraint(equalToConstant: 17),
@@ -145,12 +161,15 @@ class NotificationConsentAlertViewController: BaseViewController {
                 constant: 24
             ),
             privacyStackView.trailingAnchor.constraint(
-                lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor
+                lessThanOrEqualTo: scrollView.trailingAnchor
             ),
-            privacyStackView.leadingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leadingAnchor
+            privacyStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            privacyStackView.bottomAnchor.constraint(
+                equalTo: scrollView.contentLayoutGuide.bottomAnchor
             ),
 
+            footerView.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            footerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             footerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerView.leftAnchor.constraint(equalTo: view.leftAnchor)

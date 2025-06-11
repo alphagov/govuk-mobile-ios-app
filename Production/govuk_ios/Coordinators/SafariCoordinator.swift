@@ -8,16 +8,19 @@ class SafariCoordinator: BaseCoordinator {
     private let configService: AppConfigServiceInterface
     private let urlOpener: URLOpener
     private let url: URL
+    private let fullScreen: Bool
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          configService: AppConfigServiceInterface,
          urlOpener: URLOpener,
-         url: URL) {
+         url: URL,
+         fullScreen: Bool) {
         self.viewControllerBuilder = viewControllerBuilder
         self.configService = configService
         self.urlOpener = urlOpener
         self.url = url
+        self.fullScreen = fullScreen
         super.init(navigationController: navigationController)
     }
 
@@ -35,6 +38,11 @@ class SafariCoordinator: BaseCoordinator {
             rootViewController: viewController
         )
         navigationController.isNavigationBarHidden = true
+        if fullScreen {
+            navigationController.modalPresentationStyle = .fullScreen
+        } else {
+            navigationController.modalPresentationStyle = .formSheet
+        }
         root.present(navigationController, animated: true)
     }
 }

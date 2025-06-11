@@ -105,6 +105,34 @@ struct SettingsCoordinatorTests {
     }
 
     @Test
+    func selectingOpenAction_presentsSafariViewController() throws {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSettingsViewController = expectedViewController
+
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockSafariCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
+
+        let navigationController = UINavigationController()
+        let subject = SettingsCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            authenticationService: MockAuthenticationService(),
+            notificationService: MockNotificationService()
+        )
+        subject.start()
+        let settingsViewModel = mockViewControllerBuilder._receivedSettingsViewModel!
+        settingsViewModel.openAction?(Constants.API.privacyPolicyUrl, "Privacy Policy")
+        #expect(mockSafariCoordinator._startCalled)
+        #expect(mockCoordinatorBuilder._receivedSafariCoordinatorURL == Constants.API.privacyPolicyUrl)
+    }
+
+    @Test
     func didReselectTab_updatesViewModel() throws {
         let viewControllerBuilder = ViewControllerBuilder()
         let navigationController = UINavigationController()

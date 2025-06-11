@@ -14,9 +14,12 @@ class NotificationConsentAlertViewController: BaseViewController {
 
     private var titleLabel: UILabel = {
         let localView = UILabel()
+        localView.adjustsFontForContentSizeCategory = true
         localView.font = UIFont.govUK.largeTitleBold
         localView.textColor = UIColor.govUK.text.primary
         localView.text = String.notifications.localized("consentAlertTitle")
+        localView.numberOfLines = 0
+        localView.lineBreakMode = .byWordWrapping
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.accessibilityTraits = [.header]
         return localView
@@ -24,6 +27,7 @@ class NotificationConsentAlertViewController: BaseViewController {
 
     private var bodyLabel: UILabel = {
         let localView = UILabel()
+        localView.adjustsFontForContentSizeCategory = true
         localView.font = UIFont.govUK.body
         localView.textColor = UIColor.govUK.text.primary
         localView.text = String.notifications.localized("consentAlertBody")
@@ -35,6 +39,7 @@ class NotificationConsentAlertViewController: BaseViewController {
 
     private lazy var privacyButton: UIButton = {
         let localView = UIButton()
+        localView.titleLabel?.adjustsFontForContentSizeCategory = true
         localView.titleLabel?.font = UIFont.govUK.body
         localView.titleLabel?.numberOfLines = 0
         localView.titleLabel?.lineBreakMode = .byWordWrapping
@@ -44,14 +49,12 @@ class NotificationConsentAlertViewController: BaseViewController {
             for: .normal
         )
         localView.contentHorizontalAlignment = .leading
-        localView.translatesAutoresizingMaskIntoConstraints = false
         localView.accessibilityHint = String.common.localized("openWebLinkHint")
         return localView
     }()
 
     private lazy var linkImage: UIImageView = {
         let localView = UIImageView()
-        localView.translatesAutoresizingMaskIntoConstraints = false
         localView.image = UIImage(systemName: "arrow.up.right")
         localView.tintColor = UIColor.govUK.text.link
         localView.isAccessibilityElement = false
@@ -160,16 +163,21 @@ class NotificationConsentAlertViewController: BaseViewController {
                 equalTo: bodyLabel.bottomAnchor,
                 constant: 24
             ),
+            privacyStackView.topAnchor.constraint(
+                lessThanOrEqualTo: privacyButton.topAnchor
+            ),
             privacyStackView.trailingAnchor.constraint(
                 lessThanOrEqualTo: scrollView.trailingAnchor
             ),
             privacyStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             privacyStackView.bottomAnchor.constraint(
-                equalTo: scrollView.contentLayoutGuide.bottomAnchor
+                equalTo: scrollView.bottomAnchor
+            ),
+            privacyStackView.bottomAnchor.constraint(
+                greaterThanOrEqualTo: privacyButton.bottomAnchor
             ),
 
             footerView.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            footerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             footerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerView.leftAnchor.constraint(equalTo: view.leftAnchor)
@@ -178,6 +186,9 @@ class NotificationConsentAlertViewController: BaseViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        privacyButton.accessibilityFrame = privacyStackView.frame
+        privacyButton.accessibilityFrame = scrollView.convert(
+            privacyStackView.frame,
+            to: view.coordinateSpace
+        )
     }
 }

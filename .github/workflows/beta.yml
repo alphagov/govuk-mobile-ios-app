@@ -24,7 +24,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
-    environment: production
+    environment: Beta
 
     steps:
       - name: Checkout
@@ -49,7 +49,7 @@ jobs:
           APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
           MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          ONESIGNAL_APP_ID: ${{ env.ONESIGNAL_APP_ID }}
+          ONESIGNAL_APP_ID: ${{ vars.ONESIGNAL_APP_ID }}
 
       - name: Save Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3

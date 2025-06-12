@@ -39,7 +39,7 @@ class NotificationConsentAlertViewController: BaseViewController {
     }()
 
     private lazy var privacyButton: UIButton = {
-        let localView = GOVUKButton(.test)
+        let localView = GOVUKButton(.text)
         localView.titleLabel?.adjustsFontForContentSizeCategory = true
         localView.titleLabel?.font = UIFont.govUK.body
         localView.titleLabel?.numberOfLines = 0
@@ -193,26 +193,6 @@ class NotificationConsentAlertViewController: BaseViewController {
         privacyButton.accessibilityFrame = scrollView.convert(
             privacyStackView.frame,
             to: view.coordinateSpace
-        )
-    }
-}
-
-extension GOVUKButton.ButtonConfiguration {
-    public static var test: GOVUKButton.ButtonConfiguration {
-        .init(
-            titleColorNormal: UIColor.govUK.text.buttonCompact,
-            titleColorHighlighted: UIColor.govUK.text.buttonCompactHighlight,
-            titleColorFocused: UIColor.govUK.text.buttonCompactFocussed,
-            titleColorDisabled: UIColor.govUK.text.buttonCompactDisabled,
-            titleFont: UIFont.govUK.body,
-            backgroundColorNormal: .clear,
-            backgroundColorHighlighted: .clear,
-            backgroundColorFocused: .clear,
-            backgroundColorDisabled: .clear,
-            cornerRadius: 0,
-            borderColorNormal: .clear,
-            borderColorHighlighted: .clear,
-            accessibilityButtonShapesColor: .blue
         )
     }
 }

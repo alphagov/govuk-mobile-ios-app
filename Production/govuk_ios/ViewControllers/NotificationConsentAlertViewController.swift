@@ -45,7 +45,7 @@ class NotificationConsentAlertViewController: BaseViewController {
         localView.titleLabel?.lineBreakMode = .byWordWrapping
         localView.setTitleColor(UIColor.govUK.text.link, for: .normal)
         localView.setTitle(
-            String.notifications.localized("consentAlertButtonTitle"),
+            String.notifications.localized("consentAlertPrivacyButtonTitle"),
             for: .normal
         )
         localView.contentHorizontalAlignment = .leading
@@ -123,9 +123,9 @@ class NotificationConsentAlertViewController: BaseViewController {
         scrollView.addSubview(privacyStackView)
 
         footerView.addView(actionButton)
-        actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        actionButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
         footerView.addView(settingsButton)
-        settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
         view.addSubview(footerView)
     }
 
@@ -134,24 +134,23 @@ class NotificationConsentAlertViewController: BaseViewController {
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            scrollView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor),
 
             titleLabel.topAnchor.constraint(
                 equalTo: scrollView.topAnchor,
                 constant: 48
             ),
-            titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            titleLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
 
             bodyLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
                 constant: 24
             ),
-            bodyLabel.trailingAnchor.constraint(
-                equalTo: scrollView.trailingAnchor
+            bodyLabel.rightAnchor.constraint(
+                equalTo: scrollView.rightAnchor
             ),
-            bodyLabel.leadingAnchor.constraint(
-                equalTo: scrollView.leadingAnchor
+            bodyLabel.leftAnchor.constraint(
+                equalTo: scrollView.leftAnchor
             ),
             bodyLabel.widthAnchor.constraint(
                 equalTo: scrollView.widthAnchor
@@ -163,18 +162,23 @@ class NotificationConsentAlertViewController: BaseViewController {
                 equalTo: bodyLabel.bottomAnchor,
                 constant: 24
             ),
-            privacyStackView.topAnchor.constraint(
-                lessThanOrEqualTo: privacyButton.topAnchor
+            privacyStackView.rightAnchor.constraint(
+                lessThanOrEqualTo: scrollView.rightAnchor
             ),
-            privacyStackView.trailingAnchor.constraint(
-                lessThanOrEqualTo: scrollView.trailingAnchor
-            ),
-            privacyStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            privacyStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             privacyStackView.bottomAnchor.constraint(
                 equalTo: scrollView.bottomAnchor
             ),
-            privacyStackView.bottomAnchor.constraint(
-                greaterThanOrEqualTo: privacyButton.bottomAnchor
+            privacyStackView.widthAnchor.constraint(
+                equalTo: scrollView.widthAnchor
+            ),
+
+
+            privacyButton.topAnchor.constraint(
+                equalTo: privacyStackView.topAnchor
+            ),
+            privacyButton.bottomAnchor.constraint(
+                equalTo: privacyStackView.bottomAnchor
             ),
 
             footerView.topAnchor.constraint(equalTo: scrollView.bottomAnchor),

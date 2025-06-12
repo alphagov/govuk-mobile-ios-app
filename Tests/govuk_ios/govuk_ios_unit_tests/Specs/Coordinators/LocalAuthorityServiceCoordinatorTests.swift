@@ -5,7 +5,7 @@ import UIKit
 
 @Suite
 @MainActor
-struct LocalAuthorityCoordinatorTests {
+struct LocalAuthorityServiceCoordinatorTests {
 
     @Test
     func start_setsLocalAuthorityExplainerView() throws {

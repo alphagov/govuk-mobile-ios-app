@@ -1,18 +1,19 @@
 import Foundation
 import UIKit
 import GOVKit
+import UIComponents
 
 class NotificationConsentAlertViewController: BaseViewController {
     var grantConsentAction: (() -> Void)?
     var openSettingsAction: (() -> Void)?
 
-    private var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let localView = UIScrollView()
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()
 
-    private var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let localView = UILabel()
         localView.adjustsFontForContentSizeCategory = true
         localView.font = UIFont.govUK.largeTitleBold
@@ -25,7 +26,7 @@ class NotificationConsentAlertViewController: BaseViewController {
         return localView
     }()
 
-    private var bodyLabel: UILabel = {
+    private lazy var bodyLabel: UILabel = {
         let localView = UILabel()
         localView.adjustsFontForContentSizeCategory = true
         localView.font = UIFont.govUK.body
@@ -38,7 +39,7 @@ class NotificationConsentAlertViewController: BaseViewController {
     }()
 
     private lazy var privacyButton: UIButton = {
-        let localView = UIButton()
+        let localView = GOVUKButton(.test)
         localView.titleLabel?.adjustsFontForContentSizeCategory = true
         localView.titleLabel?.font = UIFont.govUK.body
         localView.titleLabel?.numberOfLines = 0
@@ -61,7 +62,7 @@ class NotificationConsentAlertViewController: BaseViewController {
         return localView
     }()
 
-    private var privacyStackView: UIStackView = {
+    private lazy var privacyStackView: UIStackView = {
         let localView = UIStackView()
         localView.axis = .horizontal
         localView.distribution = .fillProportionally
@@ -165,14 +166,13 @@ class NotificationConsentAlertViewController: BaseViewController {
             privacyStackView.rightAnchor.constraint(
                 lessThanOrEqualTo: scrollView.rightAnchor
             ),
-            privacyStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             privacyStackView.bottomAnchor.constraint(
                 equalTo: scrollView.bottomAnchor
             ),
+            privacyStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             privacyStackView.widthAnchor.constraint(
                 equalTo: scrollView.widthAnchor
             ),
-
 
             privacyButton.topAnchor.constraint(
                 equalTo: privacyStackView.topAnchor
@@ -193,6 +193,26 @@ class NotificationConsentAlertViewController: BaseViewController {
         privacyButton.accessibilityFrame = scrollView.convert(
             privacyStackView.frame,
             to: view.coordinateSpace
+        )
+    }
+}
+
+extension GOVUKButton.ButtonConfiguration {
+    public static var test: GOVUKButton.ButtonConfiguration {
+        .init(
+            titleColorNormal: UIColor.govUK.text.buttonCompact,
+            titleColorHighlighted: UIColor.govUK.text.buttonCompactHighlight,
+            titleColorFocused: UIColor.govUK.text.buttonCompactFocussed,
+            titleColorDisabled: UIColor.govUK.text.buttonCompactDisabled,
+            titleFont: UIFont.govUK.body,
+            backgroundColorNormal: .clear,
+            backgroundColorHighlighted: .clear,
+            backgroundColorFocused: .clear,
+            backgroundColorDisabled: .clear,
+            cornerRadius: 0,
+            borderColorNormal: .clear,
+            borderColorHighlighted: .clear,
+            accessibilityButtonShapesColor: .blue
         )
     }
 }

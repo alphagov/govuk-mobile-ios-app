@@ -40,8 +40,6 @@ class NotificationConsentAlertViewController: BaseViewController {
 
     private lazy var privacyButton: UIButton = {
         let localView = GOVUKButton(.text)
-        localView.titleLabel?.adjustsFontForContentSizeCategory = true
-        localView.titleLabel?.font = UIFont.govUK.body
         localView.titleLabel?.numberOfLines = 0
         localView.titleLabel?.lineBreakMode = .byWordWrapping
         localView.setTitleColor(UIColor.govUK.text.link, for: .normal)
@@ -170,9 +168,6 @@ class NotificationConsentAlertViewController: BaseViewController {
                 equalTo: scrollView.bottomAnchor
             ),
             privacyStackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
-            privacyStackView.widthAnchor.constraint(
-                equalTo: scrollView.widthAnchor
-            ),
 
             privacyButton.topAnchor.constraint(
                 equalTo: privacyStackView.topAnchor

@@ -14,7 +14,7 @@ struct LocalAuthorityExplainerView: View {
             ScrollView {
                 VStack {
                     if verticalSizeClass != .compact {
-                        Image("your_local_services")
+                        Image(decorative: "your_local_services")
                             .scaledToFit()
                             .frame(width: 290, height: 290)
                     }
@@ -27,12 +27,10 @@ struct LocalAuthorityExplainerView: View {
                         .padding([.horizontal], 16)
                         .padding(.bottom, 4)
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilitySortPriority(1)
                     Text(viewModel.explainerViewDescription)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .padding([.horizontal], 16)
                         .multilineTextAlignment(.center)
-                        .accessibilitySortPriority(0)
                     Spacer()
                 }
                 .accessibilityElement(children: .contain)

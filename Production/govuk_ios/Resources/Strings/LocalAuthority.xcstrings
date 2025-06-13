@@ -389,6 +389,17 @@
         }
       }
     },
+    "postcodeEntryAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postcode entry field"
+          }
+        }
+      }
+    },
     "storedLocalAuthorityWidgetTwoTierDescription" : {
       "extractionState" : "manual",
       "localizations" : {

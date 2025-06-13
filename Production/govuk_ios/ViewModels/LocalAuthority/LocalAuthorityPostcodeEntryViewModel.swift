@@ -24,6 +24,9 @@ class LocalAuthorityPostcodeEntryViewModel: ObservableObject {
     let postcodeEntryViewExampleText: String = String.localAuthority.localized(
         "localAuthorityPostcodeEntryViewExampleText"
     )
+    let entryFieldAccessibilityLabel: String = String.localAuthority.localized(
+        "postcodeEntryAccessibilityLabel"
+    )
     let postcodeEntryViewDescriptionTitle: String = String.localAuthority.localized(
         "localAuthorityPostcodeEntryViewDescriptionTitle"
     )

@@ -55,7 +55,10 @@ final class TopicDetailsCoordinator: BaseCoordinator {
             let viewController = self.viewControllerBuilder.stepByStep(
                 content: localContent,
                 analyticsService: self.analyticsService,
-                activityService: self.activityService
+                activityService: self.activityService,
+                selectedAction: { [weak self] content in
+                    self?.presentWebView(url: content.url)
+                }
             )
             self.push(viewController, animated: true)
         }

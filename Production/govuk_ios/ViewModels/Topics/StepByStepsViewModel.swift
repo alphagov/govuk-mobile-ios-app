@@ -7,16 +7,16 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
     private let content: [TopicDetailResponse.Content]
     private let analyticsService: AnalyticsServiceInterface
     private let activityService: ActivityServiceInterface
-    private let urlOpener: URLOpener
+    private let selectedAction: (TopicDetailResponse.Content) -> Void
 
     init(content: [TopicDetailResponse.Content],
          analyticsService: AnalyticsServiceInterface,
          activityService: ActivityServiceInterface,
-         urlOpener: URLOpener) {
+         selectedAction: @escaping (TopicDetailResponse.Content) -> Void) {
         self.content = content
         self.activityService = activityService
         self.analyticsService = analyticsService
-        self.urlOpener = urlOpener
+        self.selectedAction = selectedAction
     }
 
     var isLoaded: Bool = true
@@ -68,10 +68,9 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
     }
 
     private func openContent(content: TopicDetailResponse.Content) {
-        if urlOpener.openIfPossible(content.url) {
-            activityService.save(topicContent: content)
-            trackLinkEvent(content)
-        }
+        selectedAction(content)
+        activityService.save(topicContent: content)
+        trackLinkEvent(content)
     }
 
     private func trackLinkEvent(_ content: TopicDetailResponse.Content) {

@@ -294,12 +294,14 @@ class ViewControllerBuilder {
 
     func stepByStep(content: [TopicDetailResponse.Content],
                     analyticsService: AnalyticsServiceInterface,
-                    activityService: ActivityServiceInterface) -> UIViewController {
+                    activityService: ActivityServiceInterface,
+                    selectedAction: @escaping (TopicDetailResponse.Content) -> Void
+    ) -> UIViewController {
         let viewModel = StepByStepsViewModel(
             content: content,
             analyticsService: analyticsService,
             activityService: activityService,
-            urlOpener: UIApplication.shared
+            selectedAction: selectedAction
         )
         let view = TopicDetailView(viewModel: viewModel)
         let viewController = HostingViewController(

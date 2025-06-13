@@ -48,6 +48,7 @@ class TopicsWidgetView: UIView {
             .secondary,
             viewModel: viewModel
         )
+        button.accessibilityLabel = String.home.localized("topicsWidgetEditButtonTitle")
         return button
     }()
 

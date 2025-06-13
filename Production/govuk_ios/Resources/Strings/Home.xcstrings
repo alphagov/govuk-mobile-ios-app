@@ -89,6 +89,17 @@
         }
       }
     },
+    "topicsWidgetEditButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Topics"
+          }
+        }
+      }
+    },
     "topicsWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {

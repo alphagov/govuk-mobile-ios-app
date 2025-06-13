@@ -14,14 +14,17 @@ struct LocalAuthorityWidgetView: View {
             HStack {
                 Text(viewModel.titleOne)
                     .font(Font.govUK.bodySemibold)
+                    .accessibilityAddTraits(.isHeader)
                 Spacer()
             }
-            Divider().overlay(Color(cgColor: UIColor.govUK.strokes.cardGreen.cgColor))
+            Divider()
+                .overlay(Color(cgColor: UIColor.govUK.strokes.cardGreen.cgColor))
             HStack {
-                Image("local_widget_icon")
+                Image(decorative: "local_widget_icon")
                 VStack(alignment: .leading) {
                     Text(viewModel.titleTwo)
                         .font(Font.govUK.bodySemibold)
+                        .accessibilityAddTraits(.isHeader)
                     Text(viewModel.description)
                         .font(Font.govUK.subheadline)
                         .foregroundColor(
@@ -32,14 +35,14 @@ struct LocalAuthorityWidgetView: View {
                 }
                 Spacer()
             }
+            .accessibilityElement(children: .combine)
+            .onTapGesture {
+                viewModel.tapAction()
+            }
         }
-        .accessibilityElement(children: .combine)
         .background {
             Color(uiColor: UIColor.govUK.fills.surfaceCardSelected)
                 .ignoresSafeArea()
-        }
-        .onTapGesture {
-            viewModel.tapAction()
         }
     }
 }

@@ -12,17 +12,6 @@
         }
       }
     },
-    "consentAlertButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Read more about this in the privacy notice"
-          }
-        }
-      }
-    },
     "consentAlertPrimaryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -30,6 +19,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Allow notifications"
+          }
+        }
+      }
+    },
+    "consentAlertPrivacyButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more about this in the privacy notice"
           }
         }
       }

@@ -133,6 +133,28 @@ struct ChatServiceClientTests {
         #expect(answer.id == nil)
         #expect (fetchAnswerResult.getError() == nil)
     }
+
+    @Test
+    func askQuestion_validationError_returnsExpectedError() async throws {
+        let mockAPI = MockAPIServiceClient()
+        let sut = ChatServiceClient(serviceClient: mockAPI)
+        mockAPI._stubbedSendResponse = .failure(ChatError.validationError)
+
+        let fetchAnswerResult = await withCheckedContinuation { continuation in
+            sut.fetchAnswer(
+                conversationId: "conversationId",
+                questionId: "questionId",
+                completion: {
+                    continuation.resume(returning: $0)
+                }
+            )
+        }
+
+        let answer = try? fetchAnswerResult.get()
+        let error = fetchAnswerResult.getError() as? ChatError
+        #expect(answer?.id == nil)
+        #expect (error == .validationError)
+    }
 }
 
 private extension ChatServiceClientTests {

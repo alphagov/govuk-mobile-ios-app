@@ -69,6 +69,17 @@ extension Container {
         }
     }
 
+    var chatAPIClient: Factory<APIServiceClientInterface> {
+        return Factory(self) {
+            APIServiceClient(
+                baseUrl: self.appEnvironmentService().chatBaseURL,
+                session: self.urlSession(),
+                requestBuilder: RequestBuilder(),
+                responseHandler: ChatResponseHandler()
+            )
+        }
+    }
+
     var urlSession: Factory<URLSession> {
         Factory(self) {
             URLSession(configuration: .default)

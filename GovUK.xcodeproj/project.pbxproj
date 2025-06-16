@@ -267,6 +267,14 @@
 		D04C542C2D7081CC0070EE79 /* TopicCommerceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C542B2D7081CC0070EE79 /* TopicCommerceItem.swift */; };
 		D04C542E2D7082000070EE79 /* ECommerceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C542D2D7082000070EE79 /* ECommerceItem.swift */; };
 		D04C54302D70821D0070EE79 /* HomeCommerceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C542F2D70821D0070EE79 /* HomeCommerceItem.swift */; };
+		D04DD32D2E0046DC002B5F19 /* PendingQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD32B2E0046DC002B5F19 /* PendingQuestion.swift */; };
+		D04DD32E2E0046DC002B5F19 /* AnsweredQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD3292E0046DC002B5F19 /* AnsweredQuestion.swift */; };
+		D04DD32F2E0046DC002B5F19 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD3282E0046DC002B5F19 /* Answer.swift */; };
+		D04DD3302E0046DC002B5F19 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD32A2E0046DC002B5F19 /* History.swift */; };
+		D04DD3322E0046FB002B5F19 /* GOVRequest+Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD3312E0046FB002B5F19 /* GOVRequest+Chat.swift */; };
+		D04DD3352E00471C002B5F19 /* ChatServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD3342E00471C002B5F19 /* ChatServiceClient.swift */; };
+		D04DD3362E00471C002B5F19 /* ChatResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD3332E00471C002B5F19 /* ChatResponseHandler.swift */; };
+		D04DD3382E004737002B5F19 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04DD3372E004737002B5F19 /* ChatService.swift */; };
 		D056CE742D3A83F2005845E0 /* UserFeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */; };
 		D056CE762D3A848A005845E0 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE752D3A847F005845E0 /* InformationView.swift */; };
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
@@ -637,6 +645,14 @@
 		D04C542B2D7081CC0070EE79 /* TopicCommerceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCommerceItem.swift; sourceTree = "<group>"; };
 		D04C542D2D7082000070EE79 /* ECommerceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECommerceItem.swift; sourceTree = "<group>"; };
 		D04C542F2D70821D0070EE79 /* HomeCommerceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCommerceItem.swift; sourceTree = "<group>"; };
+		D04DD3282E0046DC002B5F19 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		D04DD3292E0046DC002B5F19 /* AnsweredQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnsweredQuestion.swift; sourceTree = "<group>"; };
+		D04DD32A2E0046DC002B5F19 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		D04DD32B2E0046DC002B5F19 /* PendingQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingQuestion.swift; sourceTree = "<group>"; };
+		D04DD3312E0046FB002B5F19 /* GOVRequest+Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GOVRequest+Chat.swift"; sourceTree = "<group>"; };
+		D04DD3332E00471C002B5F19 /* ChatResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseHandler.swift; sourceTree = "<group>"; };
+		D04DD3342E00471C002B5F19 /* ChatServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceClient.swift; sourceTree = "<group>"; };
+		D04DD3372E004737002B5F19 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackViewModel.swift; sourceTree = "<group>"; };
 		D056CE752D3A847F005845E0 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
@@ -963,6 +979,8 @@
 		3D09A6D92C9DC78A005858D0 /* ServiceClients */ = {
 			isa = PBXGroup;
 			children = (
+				D04DD3332E00471C002B5F19 /* ChatResponseHandler.swift */,
+				D04DD3342E00471C002B5F19 /* ChatServiceClient.swift */,
 				164091FD2DA41C0700E3BE99 /* AuthenticationServiceClient.swift */,
 				3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */,
 				5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */,
@@ -1157,6 +1175,7 @@
 		5D41DB612C0875560011E691 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D04DD3372E004737002B5F19 /* ChatService.swift */,
 				D0839FCE2DE7ABAF00CA5C27 /* AppAttest */,
 				16624BAA2DDCDD4200E9B60D /* InactivityService.swift */,
 				168176A22DCE685900A4B0E4 /* CoreDataDeletionService.swift */,
@@ -1512,6 +1531,7 @@
 		5DC79FB32CA18AEA00014446 /* GOVRequest */ = {
 			isa = PBXGroup;
 			children = (
+				D04DD3312E0046FB002B5F19 /* GOVRequest+Chat.swift */,
 				D0E855D52DDB910A003B4D7A /* GovRequest+Authentication.swift */,
 				5DB6370C2D7736AD00A44E36 /* GOVRequest+App.swift */,
 				5DC79FB12CA18A9A00014446 /* GOVRequest+Search.swift */,
@@ -1558,6 +1578,7 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D04DD32C2E0046DC002B5F19 /* Chat */,
 				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
 				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
 				16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */,
@@ -1670,6 +1691,17 @@
 				D04C542B2D7081CC0070EE79 /* TopicCommerceItem.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		D04DD32C2E0046DC002B5F19 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D04DD3282E0046DC002B5F19 /* Answer.swift */,
+				D04DD3292E0046DC002B5F19 /* AnsweredQuestion.swift */,
+				D04DD32A2E0046DC002B5F19 /* History.swift */,
+				D04DD32B2E0046DC002B5F19 /* PendingQuestion.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		D05AF4DD2CAD3C5500F86DD0 /* Topics */ = {
@@ -2157,6 +2189,10 @@
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,
 				5D9E67C22C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift in Sources */,
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
+				D04DD32D2E0046DC002B5F19 /* PendingQuestion.swift in Sources */,
+				D04DD32E2E0046DC002B5F19 /* AnsweredQuestion.swift in Sources */,
+				D04DD32F2E0046DC002B5F19 /* Answer.swift in Sources */,
+				D04DD3302E0046DC002B5F19 /* History.swift in Sources */,
 				D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */,
 				D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */,
 				1677D4062E006B8000FB1E56 /* TouchIdSettingsView.swift in Sources */,
@@ -2170,6 +2206,8 @@
 				5D51C8352C5BB9A80011ABE9 /* UIScrollView+Extensions.swift in Sources */,
 				16A99D6B2D35F19300C72DEB /* SearchSuggestionsViewModel.swift in Sources */,
 				5DC79FB22CA18A9A00014446 /* GOVRequest+Search.swift in Sources */,
+				D04DD3352E00471C002B5F19 /* ChatServiceClient.swift in Sources */,
+				D04DD3362E00471C002B5F19 /* ChatResponseHandler.swift in Sources */,
 				4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */,
 				5D49D4EA2DD3D2940071826B /* NotificationsOnboardingView.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
@@ -2229,6 +2267,7 @@
 				16D17D422CC01C7600E99794 /* TopicRowView.swift in Sources */,
 				16624BAB2DDCDD4C00E9B60D /* InactivityService.swift in Sources */,
 				D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */,
+				D04DD3322E0046FB002B5F19 /* GOVRequest+Chat.swift in Sources */,
 				D0F5FF7E2D64D22400C3BF51 /* AppEvent+ECommerce.swift in Sources */,
 				D04C542C2D7081CC0070EE79 /* TopicCommerceItem.swift in Sources */,
 				5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */,
@@ -2331,6 +2370,7 @@
 				4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */,
 				5D54F4752CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */,
+				D04DD3382E004737002B5F19 /* ChatService.swift in Sources */,
 				4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */,
 				D0F6813E2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
 				D0F6813F2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift in Sources */,

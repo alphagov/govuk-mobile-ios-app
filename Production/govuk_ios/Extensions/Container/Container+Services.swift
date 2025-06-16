@@ -202,4 +202,12 @@ extension Container {
             GovUKProviderFactory()
         }
     }
+
+    var chatService: Factory<ChatServiceInterface> {
+        Factory(self) {
+            ChatService(
+                chatServiceClient: self.chatServiceClient.resolve()
+            )
+        }
+    }
 }

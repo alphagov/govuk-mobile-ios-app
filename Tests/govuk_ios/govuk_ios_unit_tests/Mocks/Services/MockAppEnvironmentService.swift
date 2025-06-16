@@ -9,4 +9,5 @@ class MockAppEnvironmentService: AppEnvironmentServiceInterface {
     var authenticationAuthorizeURL: URL = URL(string: "www.govuk-auth.com/oauth2/authorize")!
     var authenticationTokenURL: URL = URL(string: "www.govuk-auth.com/oauth2/token")!
     var authenticationBaseURL: URL = URL(string: "https://www.govuk-auth.com")!
+    var chatBaseURL: URL = URL(string: "https://www.govuk-chat.com")!
 }

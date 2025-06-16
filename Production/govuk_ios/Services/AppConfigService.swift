@@ -54,6 +54,9 @@ public final class AppConfigService: AppConfigServiceInterface {
         if case .localServices = key {
             return true
         }
+        if case .chatService = key {
+            return false
+        }
         return featureFlags[key.rawValue] ?? false
     }
 }

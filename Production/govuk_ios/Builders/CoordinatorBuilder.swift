@@ -143,6 +143,7 @@ class CoordinatorBuilder {
                           completion: @escaping () -> Void) -> BaseCoordinator {
         AnalyticsConsentCoordinator(
             navigationController: navigationController,
+            coordinatorBuilder: self,
             analyticsService: container.analyticsService.resolve(),
             completion: completion
         )
@@ -240,6 +241,7 @@ class CoordinatorBuilder {
                                 completion: @escaping () -> Void) -> BaseCoordinator {
         NotificationOnboardingCoordinator(
             navigationController: navigationController,
+            coordinatorBuilder: self,
             notificationService: container.notificationService.resolve(),
             notificationOnboardingService: container.notificationsOnboardingService.resolve(),
             analyticsService: container.analyticsService.resolve(),

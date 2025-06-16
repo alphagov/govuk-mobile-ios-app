@@ -5,6 +5,7 @@ import UIComponents
 import Onboarding
 
 class NotificationOnboardingCoordinator: BaseCoordinator {
+    private let coordinatorBuilder: CoordinatorBuilder
     private let notificationService: NotificationServiceInterface
     private let notificationOnboardingService: NotificationsOnboardingServiceInterface
     private let analyticsService: AnalyticsServiceInterface
@@ -12,12 +13,14 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     private let completeAction: () -> Void
 
     init(navigationController: UINavigationController,
+         coordinatorBuilder: CoordinatorBuilder,
          notificationService: NotificationServiceInterface,
          notificationOnboardingService: NotificationsOnboardingServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          viewControllerBuilder: ViewControllerBuilder,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
+        self.coordinatorBuilder = coordinatorBuilder
         self.notificationOnboardingService = notificationOnboardingService
         self.analyticsService = analyticsService
         self.viewControllerBuilder = viewControllerBuilder
@@ -42,6 +45,9 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     private func setOnboarding() {
         let viewController = viewControllerBuilder.notificationOnboarding(
             analyticsService: analyticsService,
+            openAction: { [weak self] url in
+                self?.presentWebView(url: url)
+            },
             completeAction: { [weak self] in
                 self?.request()
             },
@@ -50,6 +56,15 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
             }
         )
         set(viewController)
+    }
+
+    private func presentWebView(url: URL) {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url,
+            fullScreen: false
+        )
+        start(coordinator, url: url)
     }
 
     private func request() {

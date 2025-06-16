@@ -10,12 +10,14 @@ struct AnalyticsConsentCoordinatorTests {
     @Test
     func start_analyticsPermissionState_acceptedCallsDismiss() async {
         let mockAnalyticsService = MockAnalyticsService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
         mockAnalyticsService._stubbedPermissionState = .accepted
         let mockNavigationController = UINavigationController()
 
         let dismissed = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 analyticsService: mockAnalyticsService,
                 completion: {
                     continuation.resume(returning: true)
@@ -29,11 +31,13 @@ struct AnalyticsConsentCoordinatorTests {
     @Test
     func start_analyticsPermissionState_deniedCallsDismiss() async {
         let mockAnalyticsService = MockAnalyticsService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
         mockAnalyticsService._stubbedPermissionState = .denied
         let mockNavigationController = UINavigationController()
         let dismissed = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 analyticsService: mockAnalyticsService,
                 completion: {
                     continuation.resume(returning: true)
@@ -47,10 +51,12 @@ struct AnalyticsConsentCoordinatorTests {
     @Test
     func start_analyticsPermissionState_unknownDoesntCallDismiss() async {
         let mockAnalyticsService = MockAnalyticsService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
         mockAnalyticsService._stubbedPermissionState = .unknown
         let mockNavigationController = UINavigationController()
         let sut = AnalyticsConsentCoordinator(
             navigationController: mockNavigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
             analyticsService: mockAnalyticsService,
             completion: { }
         )

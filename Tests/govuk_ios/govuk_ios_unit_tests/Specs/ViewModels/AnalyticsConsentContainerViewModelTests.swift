@@ -10,6 +10,7 @@ struct AnalyticsConsentContainerViewModelTests {
     func init_hasCorrectInitialState() {
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
+            openAction: { _ in },
             completion: {}
         )
         #expect(sut.title == "Share statistics about how you use the GOV.UK app")
@@ -37,6 +38,7 @@ struct AnalyticsConsentContainerViewModelTests {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
+            openAction: { _ in },
             completion: {}
         )
         sut.allowButtonViewModel.action()
@@ -48,6 +50,7 @@ struct AnalyticsConsentContainerViewModelTests {
         let dismissCalled = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentContainerViewModel(
                 analyticsService: nil,
+                openAction: { _ in },
                 completion: {
                     continuation.resume(returning: true)
                 }
@@ -62,6 +65,7 @@ struct AnalyticsConsentContainerViewModelTests {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
+            openAction: { _ in },
             completion: {}
         )
         sut.dontAllowButtonViewModel.action()
@@ -73,6 +77,7 @@ struct AnalyticsConsentContainerViewModelTests {
         let dismissCalled = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentContainerViewModel(
                 analyticsService: nil,
+                openAction: { _ in },
                 completion: {
                     continuation.resume(returning: true)
                 }
@@ -84,13 +89,15 @@ struct AnalyticsConsentContainerViewModelTests {
 
     @Test
     func openPrivacyPolicy_opensURL() {
-        let urlOpener = MockURLOpener()
+        var receivedURL: URL?
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
-            urlOpener: urlOpener,
+            openAction: { url in
+                receivedURL = url
+            },
             completion: {}
         )
         sut.openPrivacyPolicy()
-        #expect(urlOpener._receivedOpenIfPossibleUrl == Constants.API.privacyPolicyUrl)
+        #expect(receivedURL == Constants.API.privacyPolicyUrl)
     }
 }

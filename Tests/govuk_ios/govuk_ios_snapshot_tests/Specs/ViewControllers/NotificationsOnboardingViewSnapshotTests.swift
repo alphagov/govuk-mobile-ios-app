@@ -10,6 +10,7 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
+            openAction: { _ in },
             completeAction: { },
             dismissAction: { }
         )
@@ -24,6 +25,7 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
+            openAction: { _ in },
             completeAction: { },
             dismissAction: { }
         )

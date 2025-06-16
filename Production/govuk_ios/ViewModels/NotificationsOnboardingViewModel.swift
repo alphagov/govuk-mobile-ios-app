@@ -1,22 +1,23 @@
 import Foundation
+import UIKit
 import GOVKit
 import UIComponents
 
 class NotificationsOnboardingViewModel: ObservableObject {
-    let urlOpener: URLOpener
     let analyticsService: AnalyticsServiceInterface
     let completeAction: () -> Void
+    let openAction: (URL) -> Void
     let dismissAction: () -> Void
     let showImage: Bool
 
-    init(urlOpener: URLOpener,
-         analyticsService: AnalyticsServiceInterface,
+    init(analyticsService: AnalyticsServiceInterface,
          showImage: Bool,
+         openAction: @escaping (URL) -> Void = { UIApplication.shared.open($0) },
          completeAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
-        self.urlOpener = urlOpener
         self.analyticsService = analyticsService
         self.showImage = showImage
+        self.openAction = openAction
         self.completeAction = completeAction
         self.dismissAction = dismissAction
     }
@@ -52,7 +53,7 @@ class NotificationsOnboardingViewModel: ObservableObject {
     }
 
     func openPrivacyPolicy() {
-        urlOpener.openPrivacyPolicy()
+        openAction(Constants.API.privacyPolicyUrl)
     }
 
     private func trackButtonActionEvent(title: String) {

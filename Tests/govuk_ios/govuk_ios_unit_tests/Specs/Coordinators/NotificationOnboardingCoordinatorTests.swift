@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import UIKit
+import Factory
 
 import Onboarding
 
@@ -11,6 +12,7 @@ class NotificationOnboardingCoordinatorTests {
     @Test
     func start_shouldRequestPermission_startsOnboarding() async {
         let mockNotificationService = MockNotificationService()
+        let mockCoordinatorBuilder = await CoordinatorBuilder.mock
         let mockNavigationController = await MockNavigationController()
         let mockNotificationOnboardingService = MockNotificationsOnboardingService()
         mockNotificationOnboardingService.hasSeenNotificationsOnboarding = false
@@ -18,6 +20,7 @@ class NotificationOnboardingCoordinatorTests {
 
         let sut = await NotificationOnboardingCoordinator(
             navigationController: mockNavigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
             notificationService: mockNotificationService,
             notificationOnboardingService: mockNotificationOnboardingService,
             analyticsService: MockAnalyticsService(),
@@ -34,12 +37,14 @@ class NotificationOnboardingCoordinatorTests {
     @MainActor
     func start_shouldRequestPermissionFalse_completesCoordinator() async {
         let mockNotificationService = MockNotificationService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockNavigationController = MockNavigationController()
         let mockNotificationOnboardingService = MockNotificationsOnboardingService()
         mockNotificationService._stubbedShouldRequestPermission = false
         let completed = await withCheckedContinuation { continuation in
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 notificationService: mockNotificationService,
                 notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
@@ -58,12 +63,14 @@ class NotificationOnboardingCoordinatorTests {
     @MainActor
     func start_whenPermissionNotRequiredAndOnboardingNotSeen_completesImmediately() async {
         let mockNotificationService = MockNotificationService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockNavigationController = MockNavigationController()
         let mockNotificationOnboardingService = MockNotificationsOnboardingService()
         mockNotificationService._stubbedShouldRequestPermission = false
         let completed = await withCheckedContinuation { continuation in
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 notificationService: mockNotificationService,
                 notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
@@ -82,12 +89,14 @@ class NotificationOnboardingCoordinatorTests {
     @MainActor
     func start_whenPermissionNotRequiredAndOnboardingSeen_completesImmediately() async {
         let mockNotificationService = MockNotificationService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockNavigationController = MockNavigationController()
         let mockNotificationOnboardingService = MockNotificationsOnboardingService()
         mockNotificationService._stubbedShouldRequestPermission = false
         let completed = await withCheckedContinuation { continuation in
             let sut = NotificationOnboardingCoordinator(
                 navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
                 notificationService: mockNotificationService,
                 notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),

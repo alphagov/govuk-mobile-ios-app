@@ -172,7 +172,6 @@ class ViewControllerBuilder {
                               completeAction: @escaping () -> Void,
                               dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: UIApplication.shared,
             analyticsService: analyticsService,
             showImage: false,
             completeAction: completeAction,
@@ -188,12 +187,13 @@ class ViewControllerBuilder {
     }
 
     func notificationOnboarding(analyticsService: AnalyticsServiceInterface,
+                                openAction: @escaping (URL) -> Void,
                                 completeAction: @escaping () -> Void,
                                 dismissAction: @escaping () -> Void) -> UIViewController {
         let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: UIApplication.shared,
             analyticsService: analyticsService,
             showImage: true,
+            openAction: openAction,
             completeAction: completeAction,
             dismissAction: dismissAction
         )

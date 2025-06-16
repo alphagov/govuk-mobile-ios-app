@@ -2,7 +2,7 @@ import Foundation
 
 protocol ChatServiceInterface {
     func askQuestion(_ question: String,
-                     completion: @escaping (Result<Answer, Error>) -> Void)
+                     completion: @escaping (ChatAnswerResult) -> Void)
     func chatHistory(conversationId: String?,
                      completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void)
 }
@@ -22,7 +22,7 @@ final class ChatService: ChatServiceInterface {
     }
 
     func askQuestion(_ question: String,
-                     completion: @escaping (Result<Answer, Error>) -> Void) {
+                     completion: @escaping (ChatAnswerResult) -> Void) {
         serviceClient.askQuestion(
             question,
             conversationId: currentConversationId,

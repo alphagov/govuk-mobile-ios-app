@@ -77,7 +77,6 @@ struct ChatServiceClient: ChatServiceClientInterface {
             let response = try decoder.decode(T.self, from: $0)
                 return .success(response)
             } catch {
-                print(error)
                 return .failure(ChatError.decodingError)
             }
         }

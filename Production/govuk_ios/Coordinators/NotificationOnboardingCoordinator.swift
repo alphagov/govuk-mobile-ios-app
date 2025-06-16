@@ -66,6 +66,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
         )
     }
 
+    @MainActor
     private func openPrivacy() {
         let coordinator = coordinatorBuilder.safari(
             presentingViewController: root.presentedViewController ?? root,
@@ -75,10 +76,9 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
+    @MainActor
     private func finishCoordination() {
-        DispatchQueue.main.async {
-            self.notificationOnboardingService.setHasSeenNotificationsOnboarding()
-            self.completeAction()
-        }
+        notificationOnboardingService.setHasSeenNotificationsOnboarding()
+        completeAction()
     }
 }

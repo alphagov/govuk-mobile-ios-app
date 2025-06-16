@@ -226,4 +226,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedNotificationConsentAlertOpenSettingsAction = openSettingsAction
         return _stubbedNotificationConsentAlertViewController ?? UIViewController()
     }
+
+    var _receivedNotificationOnboardingViewPrivacyAction: (() -> Void)?
+    var _stubbedNotificationOnboardingViewController: UIViewController?
+    override func notificationOnboarding(analyticsService: any AnalyticsServiceInterface,
+                                         completeAction: @escaping () -> Void,
+                                         dismissAction: @escaping () -> Void,
+                                         viewPrivacyAction: @escaping () -> Void
+    ) -> UIViewController {
+        _receivedNotificationOnboardingViewPrivacyAction = viewPrivacyAction
+        return _stubbedNotificationOnboardingViewController ?? UIViewController()
+    }
 }

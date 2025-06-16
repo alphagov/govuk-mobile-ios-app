@@ -51,9 +51,11 @@ class MockNavigationController: UINavigationController {
     }
 
     var _setViewControllers: [UIViewController]?
-    override func setViewControllers(_ viewControllers: [UIViewController], 
+    var _setViewControllersCalledAction: (() -> Void)?
+    override func setViewControllers(_ viewControllers: [UIViewController],
                                      animated: Bool) {
         _setViewControllers = viewControllers
         super.setViewControllers(viewControllers, animated: animated)
+        _setViewControllersCalledAction?()
     }
 }

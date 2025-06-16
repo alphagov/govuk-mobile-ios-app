@@ -180,7 +180,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _receivedStepByStepContent: [TopicDetailResponse.Content]?
-    var _receivedSelectedtepByStepContent: [TopicDetailResponse.Content]?
+    var _receivedStepByStepSelectedAction: ((TopicDetailResponse.Content) -> Void)?
     var _stubbedStepByStepViewController: UIViewController?
     override func stepByStep(content: [TopicDetailResponse.Content],
                              analyticsService: any AnalyticsServiceInterface,
@@ -188,6 +188,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                              selectedAction: @escaping (TopicDetailResponse.Content) -> Void
     ) -> UIViewController {
         _receivedStepByStepContent = content
+        _receivedStepByStepSelectedAction = selectedAction
         return _stubbedStepByStepViewController ?? UIViewController()
     }
 

@@ -50,6 +50,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _receivedTopicDetailOpenAction: ((URL) -> Void)?
+    var _receivedTopicDetailStepByStepAction: (([TopicDetailResponse.Content]) -> Void)?
     var _stubbedTopicDetailViewController: UIViewController?
     override func topicDetail(topic: any DisplayableTopic,
                               topicsService: any TopicsServiceInterface,
@@ -59,6 +60,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
                               stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void,
                               openAction: @escaping (URL) -> Void) -> UIViewController {
         _receivedTopicDetailOpenAction = openAction
+        _receivedTopicDetailStepByStepAction = stepByStepAction
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
 
@@ -175,6 +177,19 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedSignInErrorCompletion = completion
         return _stubbedSignInErrorViewController ?? UIViewController()
 
+    }
+
+    var _receivedStepByStepContent: [TopicDetailResponse.Content]?
+    var _receivedStepByStepSelectedAction: ((TopicDetailResponse.Content) -> Void)?
+    var _stubbedStepByStepViewController: UIViewController?
+    override func stepByStep(content: [TopicDetailResponse.Content],
+                             analyticsService: any AnalyticsServiceInterface,
+                             activityService: any ActivityServiceInterface,
+                             selectedAction: @escaping (TopicDetailResponse.Content) -> Void
+    ) -> UIViewController {
+        _receivedStepByStepContent = content
+        _receivedStepByStepSelectedAction = selectedAction
+        return _stubbedStepByStepViewController ?? UIViewController()
     }
 
     var _receivedSafariUrl: URL?

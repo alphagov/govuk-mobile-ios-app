@@ -19,7 +19,7 @@ struct Answer: Codable {
 }
 
 struct Source: Codable {
-    enum CodingKeys: String, CodingKey, CaseIterable {
+    enum CodingKeys: String, CodingKey {
         case title
         case url
     }

@@ -65,3 +65,4 @@ struct AnalyticsConsentCoordinatorTests {
         #expect(mockNavigationController.viewControllers.count == 1)
     }
 }
+

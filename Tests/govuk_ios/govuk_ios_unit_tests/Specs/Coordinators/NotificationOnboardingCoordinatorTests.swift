@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import UIKit
+import GOVKit
 import Factory
 
 import Onboarding
@@ -109,5 +110,41 @@ class NotificationOnboardingCoordinatorTests {
         }
         #expect(completed)
         #expect(mockNavigationController._setViewControllers == nil)
+    }
+
+    @Test
+    @MainActor
+    func openPrivacyPolicy_callsOpenActionWithCorrectURL() {
+        var receivedURL: URL?
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = NotificationsOnboardingViewModel(
+            analyticsService: mockAnalyticsService,
+            showImage: true,
+            openAction: { url in
+                receivedURL = url
+            },
+            completeAction: {},
+            dismissAction: {}
+        )
+        sut.openPrivacyPolicy()
+        #expect(receivedURL == Constants.API.privacyPolicyUrl)
+    }
+
+    @Test
+    @MainActor
+    func openPrivacyPolicy_callsOpenActionOnce() {
+        var openActionCallCount = 0
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = NotificationsOnboardingViewModel(
+            analyticsService: mockAnalyticsService,
+            showImage: true,
+            openAction: { _ in
+                openActionCallCount += 1
+            },
+            completeAction: {},
+            dismissAction: {}
+        )
+        sut.openPrivacyPolicy()
+        #expect(openActionCallCount == 1)
     }
 }

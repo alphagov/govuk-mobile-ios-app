@@ -7,6 +7,7 @@ class NotificationConsentCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let consentResult: NotificationConsentResult
+    private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let urlOpener: URLOpener
     private let completion: () -> Void
@@ -15,12 +16,14 @@ class NotificationConsentCoordinator: BaseCoordinator {
          notificationService: NotificationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          consentResult: NotificationConsentResult,
+         coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          urlOpener: URLOpener,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
         self.analyticsService = analyticsService
         self.consentResult = consentResult
+        self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.urlOpener = urlOpener
         self.completion = completion
@@ -46,6 +49,9 @@ class NotificationConsentCoordinator: BaseCoordinator {
         root.dismiss(animated: true)
         let viewController = viewControllerBuilder.notificationConsentAlert(
             analyticsService: analyticsService,
+            viewPrivacyAction: { [weak self] in
+                self?.openPrivacy()
+            },
             grantConsentAction: { [weak self] in
                 self?.notificationService.acceptConsent()
                 self?.root.dismiss(
@@ -89,6 +95,15 @@ class NotificationConsentCoordinator: BaseCoordinator {
         let presentedViewController = presentedNavigationController?.topViewController ??
         root.presentedViewController
         return presentedViewController is NotificationConsentAlertViewController
+    }
+
+    private func openPrivacy() {
+        let coordinator = coordinatorBuilder.safari(
+            presentingViewController: root.presentedViewController ?? root,
+            url: Constants.API.privacyPolicyUrl,
+            fullScreen: false
+        )
+        start(coordinator)
     }
 
     private func openSettings() {

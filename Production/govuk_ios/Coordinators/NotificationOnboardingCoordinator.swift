@@ -9,6 +9,7 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationOnboardingService: NotificationsOnboardingServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
+    private let coordinatorBuilder: CoordinatorBuilder
     private let completeAction: () -> Void
 
     init(navigationController: UINavigationController,
@@ -16,11 +17,13 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
          notificationOnboardingService: NotificationsOnboardingServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          viewControllerBuilder: ViewControllerBuilder,
+         coordinatorBuilder: CoordinatorBuilder,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
         self.notificationOnboardingService = notificationOnboardingService
         self.analyticsService = analyticsService
         self.viewControllerBuilder = viewControllerBuilder
+        self.coordinatorBuilder = coordinatorBuilder
         self.completeAction = completion
         super.init(navigationController: navigationController)
     }
@@ -47,6 +50,9 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
             },
             dismissAction: { [weak self] in
                 self?.finishCoordination()
+            },
+            viewPrivacyAction: { [weak self] in
+                self?.openPrivacy()
             }
         )
         set(viewController)
@@ -58,6 +64,15 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
                 self?.finishCoordination()
             }
         )
+    }
+
+    private func openPrivacy() {
+        let coordinator = coordinatorBuilder.safari(
+            presentingViewController: root.presentedViewController ?? root,
+            url: Constants.API.privacyPolicyUrl,
+            fullScreen: false
+        )
+        start(coordinator)
     }
 
     private func finishCoordination() {

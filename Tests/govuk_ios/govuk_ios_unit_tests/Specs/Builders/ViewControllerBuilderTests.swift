@@ -95,7 +95,8 @@ struct ViewControllerBuilderTests {
         let result = subject.notificationSettings(
             analyticsService: MockAnalyticsService(),
             completeAction: { },
-            dismissAction: { }
+            dismissAction: { },
+            viewPrivacyAction: { }
         )
 
         #expect(result is HostingViewController<NotificationsOnboardingView>)
@@ -274,8 +275,10 @@ struct ViewControllerBuilderTests {
     @Test
     func notificationConsentAlert_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
+
         let result = subject.notificationConsentAlert(
             analyticsService: MockAnalyticsService(),
+            viewPrivacyAction: { },
             grantConsentAction: { },
             openSettingsAction: { _ in }
         )

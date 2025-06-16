@@ -16,7 +16,7 @@ struct SafariCoordinatorTests {
         mockViewControllerBuilder._stubbedSafariViewController = expectedViewController
         let mockNavigationController = MockNavigationController()
         let subject = SafariCoordinator(
-            navigationController: mockNavigationController,
+            presentingViewController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,
             configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
@@ -36,7 +36,7 @@ struct SafariCoordinatorTests {
         let expectedURL = URL.arrange
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let subject = SafariCoordinator(
-            navigationController: MockNavigationController(),
+            presentingViewController: MockNavigationController(),
             viewControllerBuilder: mockViewControllerBuilder,
             configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
@@ -56,7 +56,7 @@ struct SafariCoordinatorTests {
         mockConfigService.features = [.externalBrowser]
         let mockURLOpener = MockURLOpener()
         let subject = SafariCoordinator(
-            navigationController: MockNavigationController(),
+            presentingViewController: MockNavigationController(),
             viewControllerBuilder: MockViewControllerBuilder(),
             configService: mockConfigService,
             urlOpener: mockURLOpener,

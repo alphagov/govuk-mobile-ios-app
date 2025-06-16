@@ -22,6 +22,7 @@ class NotificationOnboardingCoordinatorTests {
             notificationOnboardingService: mockNotificationOnboardingService,
             analyticsService: MockAnalyticsService(),
             viewControllerBuilder: MockViewControllerBuilder(),
+            coordinatorBuilder: MockCoordinatorBuilder.mock,
             completion: {}
         )
         mockNotificationService._stubbedShouldRequestPermission = true
@@ -44,6 +45,7 @@ class NotificationOnboardingCoordinatorTests {
                 notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completion: {
                     continuation.resume(returning: true)
                 }
@@ -68,6 +70,7 @@ class NotificationOnboardingCoordinatorTests {
                 notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completion: {
                     continuation.resume(returning: true)
                 }
@@ -92,6 +95,7 @@ class NotificationOnboardingCoordinatorTests {
                 notificationOnboardingService: mockNotificationOnboardingService,
                 analyticsService: MockAnalyticsService(),
                 viewControllerBuilder: MockViewControllerBuilder(),
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 completion: {
                     continuation.resume(returning: true)
                 }

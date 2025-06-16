@@ -73,7 +73,7 @@ class HomeCoordinator: TabItemCoordinator {
 
     private func presentWebView(url: URL) {
         let coordinator = coordinatorBuilder.safari(
-            navigationController: root,
+            presentingViewController: root,
             url: url,
             fullScreen: true
         )
@@ -199,7 +199,6 @@ class HomeCoordinator: TabItemCoordinator {
             present(coordinator)
         }
     }
-
 
     private lazy var topicWidgetViewModel: TopicsWidgetViewModel = {
         TopicsWidgetViewModel(

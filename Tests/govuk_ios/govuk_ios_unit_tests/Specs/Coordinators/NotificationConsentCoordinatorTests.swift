@@ -19,6 +19,7 @@ struct NotificationConsentCoordinatorTests {
                 notificationService: mockNotificationService,
                 analyticsService: MockAnalyticsService(),
                 consentResult: .aligned,
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 viewControllerBuilder: MockViewControllerBuilder(),
                 urlOpener: MockURLOpener(),
                 completion: {
@@ -43,6 +44,7 @@ struct NotificationConsentCoordinatorTests {
                 notificationService: mockNotificationService,
                 analyticsService: MockAnalyticsService(),
                 consentResult: .misaligned(.consentGrantedNotificationsOff),
+                coordinatorBuilder: MockCoordinatorBuilder.mock,
                 viewControllerBuilder: MockViewControllerBuilder(),
                 urlOpener: MockURLOpener(),
                 completion: {
@@ -70,6 +72,7 @@ struct NotificationConsentCoordinatorTests {
             notificationService: mockNotificationService,
             analyticsService: MockAnalyticsService(),
             consentResult: .misaligned(.consentNotGrantedNotificationsOn),
+            coordinatorBuilder: MockCoordinatorBuilder.mock,
             viewControllerBuilder: mockViewControllerBuilder,
             urlOpener: MockURLOpener(),
             completion: {
@@ -95,6 +98,7 @@ struct NotificationConsentCoordinatorTests {
             notificationService: mockNotificationService,
             analyticsService: MockAnalyticsService(),
             consentResult: .misaligned(.consentNotGrantedNotificationsOn),
+            coordinatorBuilder: MockCoordinatorBuilder.mock,
             viewControllerBuilder: mockViewControllerBuilder,
             urlOpener: MockURLOpener(),
             completion: { }
@@ -121,6 +125,7 @@ struct NotificationConsentCoordinatorTests {
             notificationService: mockNotificationService,
             analyticsService: MockAnalyticsService(),
             consentResult: .misaligned(.consentNotGrantedNotificationsOn),
+            coordinatorBuilder: MockCoordinatorBuilder.mock,
             viewControllerBuilder: mockViewControllerBuilder,
             urlOpener: MockURLOpener(),
             completion: { }

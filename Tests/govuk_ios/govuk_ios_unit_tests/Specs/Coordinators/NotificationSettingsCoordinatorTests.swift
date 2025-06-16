@@ -20,6 +20,7 @@ struct NotificationSettingsCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
             notificationService: MockNotificationService(),
+            coordinatorBuilder: MockCoordinatorBuilder.mock,
             completeAction: { },
             dismissAction: { }
         )

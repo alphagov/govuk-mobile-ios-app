@@ -143,4 +143,38 @@ struct NotificationConsentCoordinatorTests {
         let alert = viewController._presentedViewController as? UIAlertController
         #expect(alert != nil)
     }
+
+    @Test
+    func viewPrivacyAction_startsSafari() async {
+        let mockNavigationController = MockNavigationController()
+        let mockNotificationService = MockNotificationService()
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockNotificationConsentAlertViewController = MockBaseViewController.mock
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockSafariCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
+
+        mockViewControllerBuilder._stubbedNotificationConsentAlertViewController = mockNotificationConsentAlertViewController
+
+        let subject = NotificationConsentCoordinator(
+            navigationController: mockNavigationController,
+            notificationService: mockNotificationService,
+            analyticsService: MockAnalyticsService(),
+            consentResult: .misaligned(.consentNotGrantedNotificationsOn),
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            urlOpener: MockURLOpener(),
+            completion: { }
+        )
+
+        subject.start()
+
+        mockNavigationController.setViewControllers(
+            [mockNotificationConsentAlertViewController],
+            animated: false
+        )
+
+        mockViewControllerBuilder._receivedNotificationConsentAlertViewPrivacyAction?()
+        #expect(mockSafariCoordinator._startCalled)
+    }
 }

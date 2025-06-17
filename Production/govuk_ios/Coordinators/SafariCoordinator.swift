@@ -39,11 +39,7 @@ class SafariCoordinator: BaseCoordinator {
     private func presentViewController(url: URL) {
         let viewController = viewControllerBuilder.safari(url: url)
         root.setViewControllers([viewController], animated: false)
-        if fullScreen {
-            root.modalPresentationStyle = .fullScreen
-        } else {
-            root.modalPresentationStyle = .formSheet
-        }
+        root.modalPresentationStyle = fullScreen? .fullScreen ? .formSheet
         presentingViewController.present(root, animated: true)
     }
 }

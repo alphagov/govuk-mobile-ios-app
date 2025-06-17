@@ -169,6 +169,31 @@ class ViewControllerBuilder {
         return HostingViewController(rootView: view)
     }
 
+    func localAuthenticationSettings(
+        analyticsService: AnalyticsServiceInterface,
+        authenticationService: AuthenticationServiceInterface,
+        localAuthenticationService: LocalAuthenticationServiceInterface
+    ) -> UIViewController {
+        let viewModel = LocalAuthenticationSettingsViewModel(
+            urlOpener: UIApplication.shared,
+            authenticationService: authenticationService,
+            localAuthenticationService: localAuthenticationService,
+            analyticsService: analyticsService
+        )
+        let localAuthenticationSettingsView = LocalAuthenticationSettingsView(
+            viewModel: viewModel
+        )
+
+        let viewController = HostingViewController(
+            rootView: localAuthenticationSettingsView,
+            statusBarStyle: .darkContent
+        )
+        viewController.title = viewModel.title
+
+        viewController.navigationItem.largeTitleDisplayMode = .always
+        return viewController
+    }
+
     func notificationSettings(analyticsService: AnalyticsServiceInterface,
                               completeAction: @escaping () -> Void,
                               dismissAction: @escaping () -> Void,
@@ -403,3 +428,4 @@ class ViewControllerBuilder {
         return viewController
     }
 }
+// swiftlint:enable file_length

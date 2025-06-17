@@ -379,4 +379,16 @@ class CoordinatorBuilder {
             fullScreen: fullScreen
         )
     }
+
+    func localAuthenticationSettings(
+        navigationController: UINavigationController
+    ) -> BaseCoordinator {
+        LocalAuthenticationSettingsCoordinator(
+            navigationController: navigationController,
+            authenticationService: container.authenticationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder()
+        )
+    }
 }

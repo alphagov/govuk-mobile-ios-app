@@ -43,11 +43,6 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     var authType: LocalAuthenticationType {
-        guard canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics) else {
-            return canEvaluatePolicy(.deviceOwnerAuthentication) ?
-                .passcodeOnly : .none
-        }
-
         switch context.biometryType {
         case .faceID:
             return .faceID

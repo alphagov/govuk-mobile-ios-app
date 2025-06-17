@@ -67,6 +67,9 @@ class SettingsCoordinator: TabItemCoordinator {
         settingsViewModel.notificationsAction = { [weak self] in
             self?.startNotificationsSettings()
         }
+        settingsViewModel.localAuthenticationAction = { [weak self] in
+            self?.startLocalAuthenticationSettings()
+        }
         settingsViewModel.signoutAction = { [weak self] in
             self?.startSignOut()
         }
@@ -84,6 +87,13 @@ class SettingsCoordinator: TabItemCoordinator {
             dismissAction: { [weak self] in
                 self?.root.popToRootViewController(animated: true)
             }
+        )
+        start(coordinator)
+    }
+
+    private func startLocalAuthenticationSettings() {
+        let coordinator = coordinatorBuilder.localAuthenticationSettings(
+            navigationController: root
         )
         start(coordinator)
     }

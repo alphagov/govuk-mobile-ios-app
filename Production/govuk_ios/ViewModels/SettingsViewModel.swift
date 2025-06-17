@@ -12,6 +12,7 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationSettingsAlertBody: String { get }
     var notificationAlertButtonTitle: String { get }
     var notificationsAction: (() -> Void)? { get set }
+    var localAuthenticationAction: (() -> Void)? { get set }
     func updateNotificationPermissionState()
     var signoutAction: (() -> Void)? { get set }
     var openAction: ((URL, String) -> Void)? { get set }
@@ -32,6 +33,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let notificationService: NotificationServiceInterface
     private let notificationCenter: NotificationCenter
     var notificationsAction: (() -> Void)?
+    var localAuthenticationAction: (() -> Void)?
     var notificationAlertButtonTitle: String = String.settings.localized(
         "notificationAlertPrimaryButtonTitle"
     )
@@ -273,7 +275,16 @@ class SettingsViewModel: SettingsViewModelInterface {
             )
             appOptionRows.append(notificationRow)
         }
-
+        appOptionRows.append(
+            NavigationRow(
+                id: "settings.biometrics.row",
+                title: String.settings.localized("faceIdTitle"),
+                body: nil,
+                action: { [weak self] in
+                    self?.localAuthenticationAction?()
+                }
+            )
+        )
         appOptionRows.append(
             ToggleRow(
                 id: "settings.privacy.row",

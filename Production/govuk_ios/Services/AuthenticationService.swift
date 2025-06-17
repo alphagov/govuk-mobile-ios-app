@@ -15,6 +15,7 @@ protocol AuthenticationServiceInterface {
     func signOut()
     func encryptRefreshToken()
     func tokenRefreshRequest() async -> TokenRefreshResult
+    func checkKeyExists() -> Bool
 }
 
 struct AuthenticationServiceResponse {
@@ -134,6 +135,10 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .failure(let error):
             return .failure(error)
         }
+    }
+
+    func checkKeyExists() -> Bool {
+        authenticatedSecureStoreService.checkItemExists(itemName: "refreshToken")
     }
 
     private func decryptRefreshToken() throws -> String {

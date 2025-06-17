@@ -41,9 +41,9 @@ struct LocalAuthorityPostcodeEntryView: View {
                     Text(viewModel.postcodeEntryViewDescriptionBody)
                     Spacer()
                 }.padding()
-            }.onReceive(viewModel.$error) { focused in
+            }.onReceive(viewModel.$error) { error in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    if focused != nil {
+                    if error != nil {
                         isErrorFocused = true
                     }
                 }

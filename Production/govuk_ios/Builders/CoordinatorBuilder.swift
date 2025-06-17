@@ -244,6 +244,7 @@ class CoordinatorBuilder {
             notificationOnboardingService: container.notificationsOnboardingService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             viewControllerBuilder: ViewControllerBuilder(),
+            coordinatorBuilder: self,
             completion: completion
         )
     }
@@ -256,6 +257,7 @@ class CoordinatorBuilder {
             notificationService: container.notificationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             consentResult: consentResult,
+            coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             urlOpener: UIApplication.shared,
             completion: completion
@@ -270,6 +272,7 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
             notificationService: container.notificationService.resolve(),
+            coordinatorBuilder: self,
             completeAction: completionAction,
             dismissAction: dismissAction
         )
@@ -364,11 +367,11 @@ class CoordinatorBuilder {
         )
     }
 
-    func safari(navigationController: UINavigationController,
+    func safari(presentingViewController: UIViewController,
                 url: URL,
                 fullScreen: Bool) -> BaseCoordinator {
         SafariCoordinator(
-            navigationController: navigationController,
+            presentingViewController: presentingViewController,
             viewControllerBuilder: ViewControllerBuilder(),
             configService: container.appConfigService.resolve(),
             urlOpener: UIApplication.shared,

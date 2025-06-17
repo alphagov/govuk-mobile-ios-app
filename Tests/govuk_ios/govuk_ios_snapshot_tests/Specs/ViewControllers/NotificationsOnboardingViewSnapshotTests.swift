@@ -11,7 +11,8 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
             completeAction: { },
-            dismissAction: { }
+            dismissAction: { },
+            viewPrivacyAction: { }
         )
 
         VerifySnapshotInNavigationController(
@@ -25,7 +26,8 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         let viewController = ViewControllerBuilder().notificationOnboarding(
             analyticsService: MockAnalyticsService(),
             completeAction: { },
-            dismissAction: { }
+            dismissAction: { },
+            viewPrivacyAction: { }
         )
 
         VerifySnapshotInNavigationController(
@@ -39,7 +41,8 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         let viewController = ViewControllerBuilder().notificationSettings(
             analyticsService: MockAnalyticsService(),
             completeAction: { },
-            dismissAction: { }
+            dismissAction: { },
+            viewPrivacyAction: { }
         )
 
         VerifySnapshotInNavigationController(
@@ -53,7 +56,8 @@ class NotificationsOnboardingViewSnapshotTests: SnapshotTestCase {
         let viewController = ViewControllerBuilder().notificationSettings(
             analyticsService: MockAnalyticsService(),
             completeAction: { },
-            dismissAction: { }
+            dismissAction: { },
+            viewPrivacyAction: { }
         )
 
         VerifySnapshotInNavigationController(

@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import Foundation
 import UIKit
 import SwiftUI
@@ -170,13 +171,14 @@ class ViewControllerBuilder {
 
     func notificationSettings(analyticsService: AnalyticsServiceInterface,
                               completeAction: @escaping () -> Void,
-                              dismissAction: @escaping () -> Void) -> UIViewController {
+                              dismissAction: @escaping () -> Void,
+                              viewPrivacyAction: @escaping () -> Void) -> UIViewController {
         let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: UIApplication.shared,
             analyticsService: analyticsService,
             showImage: false,
             completeAction: completeAction,
-            dismissAction: dismissAction
+            dismissAction: dismissAction,
+            viewPrivacyAction: viewPrivacyAction
         )
         let view = NotificationsOnboardingView(
             viewModel: viewModel
@@ -189,13 +191,14 @@ class ViewControllerBuilder {
 
     func notificationOnboarding(analyticsService: AnalyticsServiceInterface,
                                 completeAction: @escaping () -> Void,
-                                dismissAction: @escaping () -> Void) -> UIViewController {
+                                dismissAction: @escaping () -> Void,
+                                viewPrivacyAction: @escaping () -> Void) -> UIViewController {
         let viewModel = NotificationsOnboardingViewModel(
-            urlOpener: UIApplication.shared,
             analyticsService: analyticsService,
             showImage: true,
             completeAction: completeAction,
-            dismissAction: dismissAction
+            dismissAction: dismissAction,
+            viewPrivacyAction: viewPrivacyAction
         )
         let view = NotificationsOnboardingView(
             viewModel: viewModel
@@ -385,12 +388,14 @@ class ViewControllerBuilder {
 
     func notificationConsentAlert(
         analyticsService: AnalyticsServiceInterface,
+        viewPrivacyAction: @escaping () -> Void,
         grantConsentAction: @escaping () -> Void,
         openSettingsAction: @escaping (UIViewController) -> Void
     ) -> UIViewController {
         let viewController = NotificationConsentAlertViewController(
             analyticsService: analyticsService
         )
+        viewController.viewPrivacyAction = viewPrivacyAction
         viewController.grantConsentAction = grantConsentAction
         viewController.openSettingsAction = {
             openSettingsAction(viewController)

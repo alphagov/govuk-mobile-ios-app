@@ -145,11 +145,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedTopicOnboardingViewController ?? UIViewController()
     }
 
+    var _receivedNotificationSettingsViewPrivacyAction: (() -> Void)?
     var _stubbedNotificationSettingsViewController: UIViewController?
     override func notificationSettings(analyticsService: any AnalyticsServiceInterface,
                                        completeAction: @escaping () -> Void,
-                                       dismissAction: @escaping () -> Void) -> UIViewController {
-        _stubbedNotificationSettingsViewController ?? UIViewController()
+                                       dismissAction: @escaping () -> Void,
+                                       viewPrivacyAction: @escaping () -> Void
+    ) -> UIViewController {
+        _receivedNotificationSettingsViewPrivacyAction = viewPrivacyAction
+        return _stubbedNotificationSettingsViewController ?? UIViewController()
     }
 
     var _stubbedSignOutConfirmationViewController: UIViewController?
@@ -207,14 +211,30 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedWelcomeOnboardingViewController ?? UIViewController()
     }
 
-    var _stubbedNotificationConsentAlertViewController: UIViewController?
     var _receivedNotificationConsentAlertGrantConsentAction: (() -> Void)?
+    var _receivedNotificationConsentAlertViewPrivacyAction: (() -> Void)?
     var _receivedNotificationConsentAlertOpenSettingsAction: ((UIViewController) -> Void)?
-    override func notificationConsentAlert(analyticsService: any AnalyticsServiceInterface,
-                                           grantConsentAction: @escaping () -> Void,
-                                           openSettingsAction: @escaping (UIViewController) -> Void) -> UIViewController {
+    var _stubbedNotificationConsentAlertViewController: UIViewController?
+    override func notificationConsentAlert(
+        analyticsService: any AnalyticsServiceInterface,
+        viewPrivacyAction: @escaping () -> Void,
+        grantConsentAction: @escaping () -> Void,
+        openSettingsAction: @escaping (UIViewController) -> Void
+    ) -> UIViewController {
+        _receivedNotificationConsentAlertViewPrivacyAction = viewPrivacyAction
         _receivedNotificationConsentAlertGrantConsentAction = grantConsentAction
         _receivedNotificationConsentAlertOpenSettingsAction = openSettingsAction
         return _stubbedNotificationConsentAlertViewController ?? UIViewController()
+    }
+
+    var _receivedNotificationOnboardingViewPrivacyAction: (() -> Void)?
+    var _stubbedNotificationOnboardingViewController: UIViewController?
+    override func notificationOnboarding(analyticsService: any AnalyticsServiceInterface,
+                                         completeAction: @escaping () -> Void,
+                                         dismissAction: @escaping () -> Void,
+                                         viewPrivacyAction: @escaping () -> Void
+    ) -> UIViewController {
+        _receivedNotificationOnboardingViewPrivacyAction = viewPrivacyAction
+        return _stubbedNotificationOnboardingViewController ?? UIViewController()
     }
 }

@@ -3,22 +3,22 @@ import GOVKit
 import UIComponents
 
 class NotificationsOnboardingViewModel: ObservableObject {
-    let urlOpener: URLOpener
     let analyticsService: AnalyticsServiceInterface
     let completeAction: () -> Void
     let dismissAction: () -> Void
+    let viewPrivacyAction: () -> Void
     let showImage: Bool
 
-    init(urlOpener: URLOpener,
-         analyticsService: AnalyticsServiceInterface,
+    init(analyticsService: AnalyticsServiceInterface,
          showImage: Bool,
          completeAction: @escaping () -> Void,
-         dismissAction: @escaping () -> Void) {
-        self.urlOpener = urlOpener
+         dismissAction: @escaping () -> Void,
+         viewPrivacyAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.showImage = showImage
         self.completeAction = completeAction
         self.dismissAction = dismissAction
+        self.viewPrivacyAction = viewPrivacyAction
     }
 
     let title: String = String.notifications.localized(
@@ -52,7 +52,7 @@ class NotificationsOnboardingViewModel: ObservableObject {
     }
 
     func openPrivacyPolicy() {
-        urlOpener.openPrivacyPolicy()
+        viewPrivacyAction()
     }
 
     private func trackButtonActionEvent(title: String) {

@@ -367,8 +367,6 @@ class ViewControllerBuilder {
             url: url,
             configuration: config
         )
-        viewController.modalPresentationStyle = .formSheet
-        viewController.isModalInPresentation = true
         return viewController
     }
 

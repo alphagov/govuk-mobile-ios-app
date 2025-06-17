@@ -59,6 +59,9 @@ class HomeCoordinator: TabItemCoordinator {
             recentActivityAction: startRecentActivityCoordinator,
             localAuthorityAction: presentLocalAuthorityCoordinator,
             editLocalAuthorityAction: presentEditLocalAuthorityCoordinator,
+            openURLAction: { [weak self] url in
+                self?.presentWebView(url: url)
+            },
             openSearchAction: { [weak self] item in
                 self?.presentWebView(url: item.link)
             }

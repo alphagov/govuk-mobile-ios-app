@@ -13,6 +13,7 @@ struct HomeViewModel {
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
+    let openURLAction: (URL) -> Void
     let openAction: (SearchItem) -> Void
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
@@ -126,7 +127,7 @@ struct HomeViewModel {
         let viewModel = StoredLocalAuthorityWidgetViewModel(
             analyticsService: analyticsService,
             localAuthorities: localAuthorities,
-            urlOpener: urlOpener,
+            openURLAction: openURLAction,
             openEditViewAction: editLocalAuthorityAction
         )
         let content = StoredLocalAuthorityWidgetView(

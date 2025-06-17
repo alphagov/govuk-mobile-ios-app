@@ -10,7 +10,7 @@ struct ChatServiceTests {
     func askQuestion_pollsForAnswer() async throws {
         let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
-            chatServiceClient: mockChatServiceClient,
+            serviceClient: mockChatServiceClient,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -37,7 +37,7 @@ struct ChatServiceTests {
     @Test func askQuestion_exceedsRetries_returnsExpectedError() async throws {
         let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
-            chatServiceClient: mockChatServiceClient,
+            serviceClient: mockChatServiceClient,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -68,7 +68,7 @@ struct ChatServiceTests {
     func ask_question_returnsExpectedError() async throws {
         let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
-            chatServiceClient: mockChatServiceClient,
+            serviceClient: mockChatServiceClient,
             maxRetryCount: 0,
             retryInterval: 0.2
         )
@@ -92,7 +92,7 @@ struct ChatServiceTests {
     func ask_question_polling_returnsExpectedError() async throws {
         let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
-            chatServiceClient: mockChatServiceClient,
+            serviceClient: mockChatServiceClient,
             maxRetryCount: 2,
             retryInterval: 0.2
         )
@@ -120,7 +120,7 @@ struct ChatServiceTests {
     func chatHistory_returnsExpectedResult() async throws {
         let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
-            chatServiceClient: mockChatServiceClient,
+            serviceClient: mockChatServiceClient,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -168,7 +168,7 @@ struct ChatServiceTests {
     func chatHistory_noConversationId_returnsEmptyArray() async throws {
         let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
-            chatServiceClient: mockChatServiceClient,
+            serviceClient: mockChatServiceClient,
             maxRetryCount: 3,
             retryInterval: 0.2
         )

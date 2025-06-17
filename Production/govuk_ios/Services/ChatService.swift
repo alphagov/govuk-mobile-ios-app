@@ -13,10 +13,10 @@ final class ChatService: ChatServiceInterface {
     private let retryInterval: TimeInterval
     private var currentConversationId: String?
 
-    init(chatServiceClient: ChatServiceClientInterface,
+    init(serviceClient: ChatServiceClientInterface,
          maxRetryCount: Int = 10,
          retryInterval: TimeInterval = 6.0) {
-        self.serviceClient = chatServiceClient
+        self.serviceClient = serviceClient
         self.maxRetryCount = maxRetryCount
         self.retryInterval = retryInterval
     }

@@ -206,7 +206,7 @@ extension Container {
     var chatService: Factory<ChatServiceInterface> {
         Factory(self) {
             ChatService(
-                chatServiceClient: self.chatServiceClient.resolve()
+                serviceClient: self.chatServiceClient.resolve()
             )
         }
     }

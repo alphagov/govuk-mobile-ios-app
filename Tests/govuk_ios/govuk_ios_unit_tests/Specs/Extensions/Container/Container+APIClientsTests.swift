@@ -75,5 +75,39 @@ struct Container_APIClientTests {
             )
         }
     }
+
+    @Test
+    func chatAPIClient_createsExpectedRequest() async throws {
+        let mockAppEnvironment = MockAppEnvironmentService()
+        Container.shared.reset()
+        Container.shared.urlSession.register { URLSession.mock }
+        Container.shared.appEnvironmentService.register {
+            mockAppEnvironment
+        }
+        let sut = Container.shared.chatAPIClient()
+
+        let responseData = await withCheckedContinuation { continuation in
+            var returnData: Data? = nil
+            MockURLProtocol.requestHandlers["https://www.govuk-chat.com/conversation/"] = { request in
+                #expect(request.httpMethod == "POST")
+                #expect(request.allHTTPHeaderFields?["Content-Type"] == "application/json")
+                #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer \(mockAppEnvironment.chatAuthToken)")
+                returnData = request.bodyStreamData
+                return (.arrangeSuccess, nil, nil)
+            }
+
+            let request = GOVRequest.askQuestion("What is your quest?")
+
+            sut.send(
+                request: request,
+                completion: { result in
+                    continuation.resume(returning: returnData)
+                }
+            )
+        }
+        let data = try #require(responseData)
+        let query = String(data: data, encoding: .utf8)
+        #expect(query == "{\n  \"user_question\" : \"What is your quest?\"\n}")
+    }
 }
 

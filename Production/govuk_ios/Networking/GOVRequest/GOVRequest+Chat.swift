@@ -2,13 +2,6 @@ import Foundation
 import GOVKit
 
 extension GOVRequest {
-    static let token = "<token>"
-    private static let additionalHeaders: [String: String] = {
-        [
-            "Content-Type": "application/json",
-            "authorization": "Bearer \(token)"
-        ]
-    }()
     static func askQuestion(_ question: String,
                             conversationId: String? = nil) -> GOVRequest {
         GOVRequest(

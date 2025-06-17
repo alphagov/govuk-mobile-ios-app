@@ -32,10 +32,9 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
             return
         }
 
-        switch localAuthenticationService.authType {
-        case .faceID, .touchID:
+        if localAuthenticationService.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics) {
             setLocalAuthenticationOnboardingViewController()
-        default:
+        } else {
             localAuthenticationService.setLocalAuthenticationOnboarded()
             finishCoordination()
         }

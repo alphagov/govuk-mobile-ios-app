@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 
 @testable import GOVKit
@@ -10,8 +11,6 @@ struct StoredLocalAuthorityWidgetViewModelTests {
 
     @Test
     func openURL_opensCorrectURL() async throws {
-        let mockURLOpener: MockURLOpener = MockURLOpener()
-
         let localAuthorityItem = LocalAuthorityItem(
             context: coreData.backgroundContext
         )
@@ -19,23 +18,26 @@ struct StoredLocalAuthorityWidgetViewModelTests {
         localAuthorityItem.slug = "slug"
         localAuthorityItem.homepageUrl = "https://www.gov.uk/some-url"
         localAuthorityItem.tier = "unitary"
-
-        let sut = StoredLocalAuthorityWidgetViewModel(
-            analyticsService: MockAnalyticsService(),
-            localAuthorities: [localAuthorityItem],
-            urlOpener: mockURLOpener,
-            openEditViewAction: {}
-        )
-
-        sut.openURL(url: "https://www.gov.uk/some-url", title: "")
-        let expectedUrl = "https://www.gov.uk/some-url"
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
+        var openedURL: URL?
+        let expectedItem = StoredLocalAuthorityCardModel.arrange
+        await withCheckedContinuation { continuation in
+            let sut = StoredLocalAuthorityWidgetViewModel(
+                analyticsService: MockAnalyticsService(),
+                localAuthorities: [localAuthorityItem],
+                openURLAction: { localUrl in
+                    openedURL = localUrl
+                    continuation.resume()
+                },
+                openEditViewAction: {}
+            )
+            sut.open(item: expectedItem)
+        }
+        #expect(openedURL?.absoluteString == expectedItem.homepageUrl)
     }
 
 
     @Test
-    func openURL_tracksEventCorrectly() async throws {
-        let mockURLOpener: MockURLOpener = MockURLOpener()
+    func openURL_tracksEventCorrectly() {
         let mockAnalyticsService: MockAnalyticsService = MockAnalyticsService()
         let localAuthorityItem = LocalAuthorityItem(
             context: coreData.backgroundContext
@@ -48,20 +50,18 @@ struct StoredLocalAuthorityWidgetViewModelTests {
         let sut = StoredLocalAuthorityWidgetViewModel(
             analyticsService: mockAnalyticsService,
             localAuthorities: [localAuthorityItem],
-            urlOpener: mockURLOpener,
+            openURLAction: { _ in },
             openEditViewAction: {}
         )
-        sut.openURL(
-            url: "https://www.gov.uk/some-url",
-            title: "test"
-        )
+        let item = StoredLocalAuthorityCardModel.arrange
+        sut.open(item: item)
         let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(receivedTrackingTitle == "test")
+        #expect(receivedTrackingTitle == item.name)
 
     }
 
     @Test
-    func convertModel_unitaryAuthority_returnsExpectedResult() async throws {
+    func convertModel_unitaryAuthority_returnsExpectedResult() {
         let mockAuthorityItem = LocalAuthorityItem(
             context: coreData.backgroundContext
         )
@@ -73,7 +73,7 @@ struct StoredLocalAuthorityWidgetViewModelTests {
         let sut = StoredLocalAuthorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorities: [mockAuthorityItem],
-            urlOpener: MockURLOpener(),
+            openURLAction: { _ in },
             openEditViewAction: {}
         )
 
@@ -84,8 +84,7 @@ struct StoredLocalAuthorityWidgetViewModelTests {
     }
 
     @Test
-    func convertModel_twoTier_returnsExpectedResult() async throws {
-
+    func convertModel_twoTier_returnsExpectedResult() {
         let parentAuthority = LocalAuthorityItem(
             context: coreData.backgroundContext
         )
@@ -110,7 +109,7 @@ struct StoredLocalAuthorityWidgetViewModelTests {
         let sut = StoredLocalAuthorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorities: authorityItems,
-            urlOpener: MockURLOpener(),
+            openURLAction: { _ in },
             openEditViewAction: {}
         )
 

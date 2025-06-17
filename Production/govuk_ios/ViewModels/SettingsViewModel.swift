@@ -158,6 +158,7 @@ class SettingsViewModel: SettingsViewModelInterface {
                                 fullScreen: true
                             )
                         )
+                        self?.trackNavigationEvent(rowTitle, external: true)
                     }
                 )
             ],

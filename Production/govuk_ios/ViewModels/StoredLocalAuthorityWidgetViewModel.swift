@@ -6,7 +6,8 @@ class StoredLocalAuthorityWidgetViewModel {
     private let analyticsService: AnalyticsServiceInterface
     let localAuthorities: [LocalAuthorityItem]
     let openEditViewAction: () -> Void
-    let openURLAction: (URL) -> Void
+    private let openURLAction: (URL) -> Void
+
     let twoTierAuthorityDescription: String = String.localAuthority.localized(
         "storedLocalAuthorityWidgetTwoTierDescription"
     )

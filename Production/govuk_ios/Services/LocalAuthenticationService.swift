@@ -9,12 +9,14 @@ enum LocalAuthenticationType {
 }
 
 protocol LocalAuthenticationServiceInterface {
-    var authType: LocalAuthenticationType { get }
+    var deviceCapableAuthType: LocalAuthenticationType { get }
+    var availableAuthType: LocalAuthenticationType { get }
     var authenticationOnboardingFlowSeen: Bool { get }
     var biometricsHaveChanged: Bool { get }
+    var biometricsPossible: Bool { get }
 
     func setLocalAuthenticationOnboarded()
-    func canEvaluatePolicy(_ policy: LAPolicy) -> Bool
+    func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?)
     func evaluatePolicy(_ policy: LAPolicy,
                         reason: String,
                         completion: @escaping (Bool, Error?) -> Void)
@@ -30,8 +32,15 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
         self.userDefaults = userDefaults
     }
 
-    func canEvaluatePolicy(_ policy: LAPolicy) -> Bool {
-        context.canEvaluatePolicy(policy, error: nil)
+    func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?) {
+        let context = LAContext()
+        var authError: NSError?
+        let canEvaluate = context.canEvaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics, error: &authError
+        )
+        let laError = authError as? LAError
+
+        return (canEvaluate, laError)
     }
 
     func evaluatePolicy(_ policy: LAPolicy,
@@ -42,7 +51,56 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
         }
     }
 
-    var authType: LocalAuthenticationType {
+    var biometricsPossible: Bool {
+        let evaluation = canEvaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics
+        )
+
+        if evaluation.canEvaluate {
+            // Device supports biometrics, app either enrolled or yet to decide on app enrolment
+            return true
+        } else {
+            guard let error = evaluation.error else {
+                // No error provided, assume biometrics are not available
+                return false
+            }
+
+            switch error.code {
+            case .biometryNotEnrolled:
+                // Biometrics is supported but not set up on the device
+                return false
+            case .biometryNotAvailable:
+                switch deviceCapableAuthType {
+                case .touchID, .faceID:
+                    // touchID, faceID setup but toggled off
+                    return true
+                default:
+                    // Biometrics is not available on this device
+                    return false
+                }
+            default:
+                return false
+            }
+        }
+    }
+
+    var deviceCapableAuthType: LocalAuthenticationType {
+        switch context.biometryType {
+        case .faceID:
+            return .faceID
+        case .touchID:
+            return .touchID
+        default:
+            return .none
+        }
+    }
+
+    var availableAuthType: LocalAuthenticationType {
+        guard canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics).canEvaluate else {
+            return canEvaluatePolicy(.deviceOwnerAuthentication).canEvaluate ?
+                .passcodeOnly : .none
+        }
+
         switch context.biometryType {
         case .faceID:
             return .faceID

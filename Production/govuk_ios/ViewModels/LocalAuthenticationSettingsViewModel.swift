@@ -24,7 +24,35 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
     }
 
     func buttonAction() {
-        if authenticationService.checkKeyExists() {
+        switch localAuthenticationService.deviceCapableAuthType {
+        case .faceID:
+            faceIDAction()
+        case .touchID:
+            print("something")
+        default:
+            print("default")
+        }
+    }
+
+    private func updateAuthType() {
+        let authType = localAuthenticationService.deviceCapableAuthType
+        switch localAuthenticationService.deviceCapableAuthType {
+        case .touchID:
+            title = String.settings.localized("localAuthenticationTouchIdTitle")
+            body = String.settings.localized("localAuthenticationTouchIdBody")
+            buttonTitle = String.settings.localized("localAuthenticationTouchIdButtonTitle")
+        case .faceID:
+            title = String.settings.localized("localAuthenticationFaceIdTitle")
+            body = String.settings.localized("localAuthenticationFaceIdButtonBody")
+            buttonTitle = String.settings.localized("localAuthenticationFaceIdButtonTitle")
+        default:
+            // should never happen as we only load view model if faceid or touchid enabled
+            fatalError("Incompatible auth type: \(authType)")
+        }
+    }
+
+    private func faceIDAction() {
+        if authenticationService.secureStoreRefreshToken {
             authenticationService.signOut()
             urlOpener.openSettings()
         } else {
@@ -38,23 +66,6 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
                     self?.urlOpener.openSettings()
                 }
             }
-        }
-    }
-
-    private func updateAuthType() {
-        let authType = localAuthenticationService.authType
-        switch localAuthenticationService.authType {
-        case .touchID:
-            title = String.settings.localized("localAuthenticationTouchIdTitle")
-            body = String.settings.localized("localAuthenticationTouchIdBody")
-            buttonTitle = String.settings.localized("localAuthenticationTouchIdButtonTitle")
-        case .faceID:
-            title = String.settings.localized("localAuthenticationFaceIdTitle")
-            body = String.settings.localized("localAuthenticationFaceIdButtonBody")
-            buttonTitle = String.settings.localized("localAuthenticationFaceIdButtonTitle")
-        default:
-            // should never happen as we only load view model if faceid or touchid enabled
-            fatalError("Incompatible auth type: \(authType)")
         }
     }
 }

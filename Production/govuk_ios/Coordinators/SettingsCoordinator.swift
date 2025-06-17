@@ -10,6 +10,7 @@ class SettingsCoordinator: TabItemCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     let authenticationService: AuthenticationServiceInterface
     private let notificationService: NotificationServiceInterface
+    private let localAuthenticationService: LocalAuthenticationServiceInterface
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
@@ -18,13 +19,15 @@ class SettingsCoordinator: TabItemCoordinator {
          coordinatorBuilder: CoordinatorBuilder,
          deviceInformationProvider: DeviceInformationProviderInterface,
          authenticationService: AuthenticationServiceInterface,
-         notificationService: NotificationServiceInterface) {
+         notificationService: NotificationServiceInterface,
+         localAuthenticationService: LocalAuthenticationServiceInterface) {
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
         self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
         self.authenticationService = authenticationService
         self.notificationService = notificationService
+        self.localAuthenticationService = localAuthenticationService
         self.settingsViewModel = SettingsViewModel(
             analyticsService: analyticsService,
             urlOpener: UIApplication.shared,
@@ -32,7 +35,8 @@ class SettingsCoordinator: TabItemCoordinator {
             deviceInformationProvider: deviceInformationProvider,
             authenticationService: authenticationService,
             notificationService: notificationService,
-            notificationCenter: .default
+            notificationCenter: .default,
+            localAuthenticationService: localAuthenticationService
         )
         super.init(navigationController: navigationController)
         setViewModelActions()

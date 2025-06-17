@@ -10,12 +10,12 @@ protocol AuthenticationServiceInterface {
     var accessToken: String? { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
+    var secureStoreRefreshToken: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult
     func signOut()
     func encryptRefreshToken()
     func tokenRefreshRequest() async -> TokenRefreshResult
-    func checkKeyExists() -> Bool
 }
 
 struct AuthenticationServiceResponse {
@@ -33,6 +33,10 @@ class AuthenticationService: AuthenticationServiceInterface {
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
+
+    var secureStoreRefreshToken: Bool {
+        authenticatedSecureStoreService.checkItemExists(itemName: "refreshToken")
+    }
 
     var userEmail: String? {
         get async {
@@ -135,10 +139,6 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .failure(let error):
             return .failure(error)
         }
-    }
-
-    func checkKeyExists() -> Bool {
-        authenticatedSecureStoreService.checkItemExists(itemName: "refreshToken")
     }
 
     private func decryptRefreshToken() throws -> String {

@@ -28,7 +28,7 @@ class ReAuthenticationCoordinator: BaseCoordinator {
     private func reauthenticate() async {
         guard localAuthenticationService.canEvaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics
-        ) else {
+        ).canEvaluate else {
             completionAction()
             return
         }

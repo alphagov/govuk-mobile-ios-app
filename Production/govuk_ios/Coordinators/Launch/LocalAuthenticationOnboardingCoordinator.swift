@@ -32,7 +32,9 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
             return
         }
 
-        if localAuthenticationService.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics) {
+        if localAuthenticationService.canEvaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics
+        ).canEvaluate {
             setLocalAuthenticationOnboardingViewController()
         } else {
             localAuthenticationService.setLocalAuthenticationOnboarded()

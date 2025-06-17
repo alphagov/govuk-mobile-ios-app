@@ -1,21 +1,23 @@
 import UIKit
 import GOVKit
+import LocalAuthentication
 
 protocol SettingsViewModelInterface: ObservableObject {
     var title: String { get }
     var listContent: [GroupedListSection] { get }
-    func trackScreen(screen: TrackableScreen)
     var scrollToTop: Bool { get set }
     var displayNotificationSettingsAlert: Bool { get set }
-    func handleNotificationAlertAction()
     var notificationSettingsAlertTitle: String { get }
     var notificationSettingsAlertBody: String { get }
     var notificationAlertButtonTitle: String { get }
     var notificationsAction: (() -> Void)? { get set }
     var localAuthenticationAction: (() -> Void)? { get set }
-    func updateNotificationPermissionState()
     var signoutAction: (() -> Void)? { get set }
     var openAction: ((URL, String) -> Void)? { get set }
+
+    func trackScreen(screen: TrackableScreen)
+    func handleNotificationAlertAction()
+    func updateNotificationPermissionState()
 }
 
 // swiftlint:disable:next type_body_length
@@ -26,6 +28,7 @@ class SettingsViewModel: SettingsViewModelInterface {
     private let versionProvider: AppVersionProvider
     private let deviceInformationProvider: DeviceInformationProviderInterface
     private let authenticationService: AuthenticationServiceInterface
+    private let localAuthenticationService: LocalAuthenticationServiceInterface
     @Published var scrollToTop: Bool = false
     @Published var displayNotificationSettingsAlert: Bool = false
     @Published private(set) var notificationsPermissionState: NotificationPermissionState
@@ -47,7 +50,8 @@ class SettingsViewModel: SettingsViewModelInterface {
          deviceInformationProvider: DeviceInformationProviderInterface,
          authenticationService: AuthenticationServiceInterface,
          notificationService: NotificationServiceInterface,
-         notificationCenter: NotificationCenter) {
+         notificationCenter: NotificationCenter,
+         localAuthenticationService: LocalAuthenticationServiceInterface) {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.versionProvider = versionProvider
@@ -55,6 +59,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         self.authenticationService = authenticationService
         self.notificationService = notificationService
         self.notificationCenter = notificationCenter
+        self.localAuthenticationService = localAuthenticationService
         updateNotificationPermissionState()
         observeAppMoveToForeground()
         setEmail()
@@ -275,16 +280,27 @@ class SettingsViewModel: SettingsViewModelInterface {
             )
             appOptionRows.append(notificationRow)
         }
-        appOptionRows.append(
-            NavigationRow(
-                id: "settings.biometrics.row",
-                title: String.settings.localized("faceIdTitle"),
-                body: nil,
-                action: { [weak self] in
-                    self?.localAuthenticationAction?()
-                }
+        if localAuthenticationService.biometricsPossible {
+            let title = switch localAuthenticationService.deviceCapableAuthType {
+            case .touchID:
+                String.settings.localized("touchIdTitle")
+            case .faceID:
+                String.settings.localized("faceIdTitle")
+            default:
+                ""
+            }
+
+            appOptionRows.append(
+                NavigationRow(
+                    id: "settings.biometrics.row",
+                    title: title,
+                    body: nil,
+                    action: { [weak self] in
+                        self?.localAuthenticationAction?()
+                    }
+                )
             )
-        )
+        }
         appOptionRows.append(
             ToggleRow(
                 id: "settings.privacy.row",

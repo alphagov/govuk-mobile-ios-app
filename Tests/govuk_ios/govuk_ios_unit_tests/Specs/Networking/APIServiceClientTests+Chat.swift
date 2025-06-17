@@ -5,6 +5,38 @@ import GOVKit
 
 @Suite(.serialized)
 struct APIServiceClientTests_Chat {
+
+    @Test
+    func send_chatRequest_passesExpectedValues() async {
+        let mockAppEnvironment = MockAppEnvironmentService()
+        let subject = APIServiceClient(
+            baseUrl: URL(string: "https://www.google.com")!,
+            session: URLSession.mock,
+            requestBuilder: ChatRequestBuilder(
+                authenticationToken: mockAppEnvironment.chatAuthToken
+            ),
+            responseHandler: ChatResponseHandler()
+
+        )
+        let request = GOVRequest.askQuestion("What is your quest?")
+
+        MockURLProtocol.requestHandlers["https://www.google.com/conversation/"] = { request in
+            #expect(request.httpMethod == "POST")
+            #expect(request.allHTTPHeaderFields?["Content-Type"] == "application/json")
+            #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer \(mockAppEnvironment.chatAuthToken)")
+            return (.arrangeSuccess, nil, nil)
+        }
+
+        return await withCheckedContinuation { continuation in
+            subject.send(
+                request: request,
+                completion: { result in
+                    continuation.resume(returning: Void())
+                }
+            )
+        }
+    }
+
     @Test
     func send_successResponse_returnsExpectedResult() async {
         let subject = APIServiceClient(

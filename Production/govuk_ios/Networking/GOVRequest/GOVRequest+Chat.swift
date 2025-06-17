@@ -3,6 +3,12 @@ import GOVKit
 
 extension GOVRequest {
     static let token = "<token>"
+    private static let additionalHeaders: [String: String] = {
+        [
+            "Content-Type": "application/json",
+            "authorization": "Bearer \(token)"
+        ]
+    }()
     static func askQuestion(_ question: String,
                             conversationId: String? = nil) -> GOVRequest {
         GOVRequest(
@@ -10,10 +16,7 @@ extension GOVRequest {
             method: conversationId != nil ? .put : .post,
             bodyParameters: ["user_question": question],
             queryParameters: nil,
-            additionalHeaders: [
-                "Content-Type": "application/json",
-                "authorization": "Bearer \(token)"
-            ]
+            additionalHeaders: nil
         )
     }
 
@@ -23,10 +26,7 @@ extension GOVRequest {
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
-            additionalHeaders: [
-                "Content-Type": "application/json",
-                "authorization": "Bearer \(token)"
-            ]
+            additionalHeaders: nil
         )
     }
 
@@ -37,10 +37,7 @@ extension GOVRequest {
             method: .get,
             bodyParameters: nil,
             queryParameters: nil,
-            additionalHeaders: [
-                "Content-Type": "application/json",
-                "authorization": "Bearer \(token)"
-            ]
+            additionalHeaders: nil
         )
     }
 }

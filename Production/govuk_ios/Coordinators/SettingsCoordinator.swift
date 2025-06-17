@@ -70,8 +70,11 @@ class SettingsCoordinator: TabItemCoordinator {
         settingsViewModel.signoutAction = { [weak self] in
             self?.startSignOut()
         }
-        settingsViewModel.openAction = { [weak self] url, _ in
-            self?.presentWebView(url: url)
+        settingsViewModel.openAction = { [weak self] params in
+            self?.presentWebView(
+                url: params.url,
+                fullScreen: params.fullScreen
+            )
         }
     }
 
@@ -88,11 +91,11 @@ class SettingsCoordinator: TabItemCoordinator {
         start(coordinator)
     }
 
-    private func presentWebView(url: URL) {
+    private func presentWebView(url: URL, fullScreen: Bool) {
         let coordinator = coordinatorBuilder.safari(
             navigationController: root,
             url: url,
-            fullScreen: false
+            fullScreen: fullScreen
         )
         start(coordinator)
     }

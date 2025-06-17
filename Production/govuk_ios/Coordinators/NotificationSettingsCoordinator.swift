@@ -6,6 +6,7 @@ class NotificationSettingsCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let notificationService: NotificationServiceInterface
+    private let coordinatorBuilder: CoordinatorBuilder
     private let completeAction: () -> Void
     private let dismissAction: () -> Void
 
@@ -13,11 +14,13 @@ class NotificationSettingsCoordinator: BaseCoordinator {
          viewControllerBuilder: ViewControllerBuilder,
          analyticsService: AnalyticsServiceInterface,
          notificationService: NotificationServiceInterface,
+         coordinatorBuilder: CoordinatorBuilder,
          completeAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
         self.notificationService = notificationService
+        self.coordinatorBuilder = coordinatorBuilder
         self.completeAction = completeAction
         self.dismissAction = dismissAction
         super.init(navigationController: navigationController)
@@ -29,9 +32,21 @@ class NotificationSettingsCoordinator: BaseCoordinator {
             completeAction: { [weak self] in
                 self?.requestPermission()
             },
-            dismissAction: dismissAction
+            dismissAction: dismissAction,
+            viewPrivacyAction: { [weak self] in
+                self?.openPrivacy()
+            }
         )
         push(viewController, animated: true)
+    }
+
+    private func openPrivacy() {
+        let coordinator = coordinatorBuilder.safari(
+            presentingViewController: root.presentedViewController ?? root,
+            url: Constants.API.privacyPolicyUrl,
+            fullScreen: false
+        )
+        start(coordinator)
     }
 
     private func requestPermission() {

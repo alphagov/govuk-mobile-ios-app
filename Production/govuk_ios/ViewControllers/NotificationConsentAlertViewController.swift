@@ -4,6 +4,7 @@ import GOVKit
 import UIComponents
 
 class NotificationConsentAlertViewController: BaseViewController {
+    var viewPrivacyAction: (() -> Void)?
     var grantConsentAction: (() -> Void)?
     var openSettingsAction: (() -> Void)?
 
@@ -43,12 +44,14 @@ class NotificationConsentAlertViewController: BaseViewController {
         localView.titleLabel?.numberOfLines = 0
         localView.titleLabel?.lineBreakMode = .byWordWrapping
         localView.setTitleColor(UIColor.govUK.text.link, for: .normal)
-        localView.setTitle(
-            String.notifications.localized("consentAlertPrivacyButtonTitle"),
-            for: .normal
-        )
         localView.contentHorizontalAlignment = .leading
         localView.accessibilityHint = String.common.localized("openWebLinkHint")
+        localView.viewModel = .init(
+            localisedTitle: String.notifications.localized("consentAlertPrivacyButtonTitle"),
+            action: { [weak self] in
+                self?.viewPrivacyAction?()
+            }
+        )
         return localView
     }()
 

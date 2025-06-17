@@ -66,7 +66,7 @@ final class TopicDetailsCoordinator: BaseCoordinator {
 
     private func presentWebView(url: URL) {
         let coordinator = coordinatorBuilder.safari(
-            presentingViewController: root,
+            navigationController: root,
             url: url,
             fullScreen: true
         )

@@ -367,11 +367,11 @@ class CoordinatorBuilder {
         )
     }
 
-    func safari(presentingViewController: UIViewController,
+    func safari(navigationController: UINavigationController,
                 url: URL,
                 fullScreen: Bool) -> BaseCoordinator {
         SafariCoordinator(
-            presentingViewController: presentingViewController,
+            navigationController: navigationController,
             viewControllerBuilder: ViewControllerBuilder(),
             configService: container.appConfigService.resolve(),
             urlOpener: UIApplication.shared,

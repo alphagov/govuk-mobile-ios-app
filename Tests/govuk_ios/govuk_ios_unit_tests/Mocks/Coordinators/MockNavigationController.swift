@@ -8,6 +8,11 @@ class MockNavigationController: UINavigationController {
         _stubbedPresentingViewController ?? super.presentingViewController
     }
 
+    var _stubbedPresentedViewController: UIViewController?
+    override var presentedViewController: UIViewController? {
+        _stubbedPresentedViewController ?? super.presentedViewController
+    }
+
     private(set) var _presentedViewController: UIViewController?
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,

@@ -42,10 +42,7 @@ struct StoredLocalAuthorityWidgetView: View {
         ForEach(viewModel.cardModels(), id: \.name) { item in
             StoredLocalAuthorityCardView(model: item)
                 .onTapGesture {
-                    viewModel.openURL(
-                        url: item.homepageUrl,
-                        title: item.name
-                    )
+                    viewModel.open(item: item)
                 }
                 .padding(.bottom, 16)
         }

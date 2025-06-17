@@ -131,8 +131,8 @@ final class StoredLocalAuthorityWidgetViewSnapshotTests: SnapshotTestCase {
         return StoredLocalAuthorityWidgetViewModel(
             analyticsService: MockAnalyticsService(),
             localAuthorities: localAuthorities,
-            urlOpener: MockURLOpener(),
-            openEditViewAction: {}
+            openURLAction: { _ in },
+            openEditViewAction: { }
         )
     }
 }

@@ -39,6 +39,7 @@ struct ViewControllerBuilderTests {
             recentActivityAction: {},
             localAuthorityAction: {},
             editLocalAuthorityAction: {},
+            openURLAction: { _ in },
             openSearchAction: { _ in }
         )
 
@@ -256,8 +257,6 @@ struct ViewControllerBuilderTests {
         )
 
         #expect(result is SFSafariViewController)
-        #expect(result.isModalInPresentation)
-        #expect(result.modalPresentationStyle == .formSheet)
     }
 
     @Test

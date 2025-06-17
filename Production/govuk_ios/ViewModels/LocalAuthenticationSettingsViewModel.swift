@@ -43,10 +43,10 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
             buttonTitle = String.settings.localized("localAuthenticationTouchIdButtonTitle")
         case .faceID:
             title = String.settings.localized("localAuthenticationFaceIdTitle")
-            body = String.settings.localized("localAuthenticationFaceIdButtonBody")
+            body = String.settings.localized("localAuthenticationFaceIdBody")
             buttonTitle = String.settings.localized("localAuthenticationFaceIdButtonTitle")
         default:
-            // should never happen as we only load view model if faceid or touchid enabled
+            // should never happen as we only load settings if faceid or touchid available
             fatalError("Incompatible auth type: \(authType)")
         }
     }

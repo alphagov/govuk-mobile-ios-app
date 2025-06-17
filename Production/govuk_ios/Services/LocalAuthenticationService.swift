@@ -57,8 +57,13 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
         )
 
         if evaluation.canEvaluate {
-            // Device supports biometrics, app either enrolled or yet to decide on app enrolment
-            return true
+            // Device supports biometrics, app either enrolled or yet to action app enrolement
+            switch availableAuthType {
+            case .touchID, .faceID:
+                return true
+            default:
+                return false
+            }
         } else {
             guard let error = evaluation.error else {
                 // No error provided, assume biometrics are not available

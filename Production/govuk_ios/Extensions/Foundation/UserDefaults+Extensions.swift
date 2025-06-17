@@ -43,7 +43,6 @@ enum UserDefaultsKeys: String, CaseIterable {
     case authenticationOnboardingSeen = "govuk_authentication_onboarding_seen"
     case localAuthenticationOnboardingSeen = "govuk_local_authentication_onboarding_seen"
     case authenticationOnboardingFlowSeen = "govuk_authentication_onboarding_flow_seen"
-    case localAuthenticationEnabled = "govuk_local_authentication_enabled"
     case notificationsConsentGranted = "govuk_notifications_consent_granted"
     case biometricsPolicyState = "govuk_biometrics_policy_state"
 }

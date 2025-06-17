@@ -15,8 +15,7 @@ class AuthenticationCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
-        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = true
+        mockLocalAuthenticationService.setLocalAuthenticationOnboarded()
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
@@ -53,7 +52,6 @@ class AuthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: false)
         )
@@ -90,7 +88,6 @@ class AuthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: false)
         )
@@ -127,7 +124,6 @@ class AuthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
@@ -164,7 +160,6 @@ class AuthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
@@ -192,14 +187,13 @@ class AuthenticationCoordinatorTests {
     }
 
     @Test
-    func start_localAuthenticationEnabled_biometricsEnrolled_shouldEncryptToken_encryptsRefreshToken() async {
+    func start_authenticationOnboardingSeen_biometricsEnrolled_shouldEncryptToken_encryptsRefreshToken() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = true
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
@@ -227,13 +221,12 @@ class AuthenticationCoordinatorTests {
     }
 
     @Test
-    func start_localAuthenticationDisabled_shouldntEncryptToken_doesntEncryptRefreshToken() async {
+    func start_authenticationOnboardingNotSeen_shouldntEncryptToken_doesntEncryptRefreshToken() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController =  MockNavigationController()
-        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
+        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: true)
         )
@@ -267,7 +260,6 @@ class AuthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
 
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
-        mockLocalAuthenticationService._stubbedLocalAuthenticationEnabled = false
         mockAuthenticationService._stubbedAuthenticationResult = .failure(.genericError)
 
         let mockAnalyticsService = MockAnalyticsService()

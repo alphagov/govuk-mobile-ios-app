@@ -68,7 +68,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         }
 
         #expect(completion)
-        #expect(mockLocalAuthenticationService._localAuthenticationEnabled!)
+        #expect(mockLocalAuthenticationService.authenticationOnboardingFlowSeen)
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
@@ -95,7 +95,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         }
 
         #expect(completion)
-        #expect(mockLocalAuthenticationService._localAuthenticationEnabled!)
+        #expect(mockLocalAuthenticationService.authenticationOnboardingFlowSeen)
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
@@ -123,7 +123,8 @@ struct LocalAuthenticationOnboardingViewModelTests {
         }
 
         #expect(completion)
-        #expect(!(mockLocalAuthenticationService._localAuthenticationEnabled!))
+        #expect(mockLocalAuthenticationService.authenticationOnboardingFlowSeen)
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["text"] as? String == "Allow Face ID")
@@ -150,7 +151,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
         #expect(completion)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(!(mockLocalAuthenticationService._localAuthenticationEnabled!))
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["text"] as? String == "Skip")
     }

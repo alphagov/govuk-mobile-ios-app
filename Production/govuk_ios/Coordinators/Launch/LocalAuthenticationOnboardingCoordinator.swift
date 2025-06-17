@@ -36,7 +36,7 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
         case .faceID, .touchID:
             setLocalAuthenticationOnboardingViewController()
         default:
-            localAuthenticationService.setLocalAuthenticationEnabled(false)
+            localAuthenticationService.setLocalAuthenticationOnboarded()
             finishCoordination()
         }
     }

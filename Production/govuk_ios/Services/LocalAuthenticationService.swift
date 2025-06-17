@@ -11,10 +11,9 @@ enum LocalAuthenticationType {
 protocol LocalAuthenticationServiceInterface {
     var authType: LocalAuthenticationType { get }
     var authenticationOnboardingFlowSeen: Bool { get }
-    var isLocalAuthenticationEnabled: Bool { get }
     var biometricsHaveChanged: Bool { get }
 
-    func setLocalAuthenticationEnabled(_ enabled: Bool)
+    func setLocalAuthenticationOnboarded()
     func canEvaluatePolicy(_ policy: LAPolicy) -> Bool
     func evaluatePolicy(_ policy: LAPolicy,
                         reason: String,
@@ -59,20 +58,12 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
         }
     }
 
-    func setLocalAuthenticationEnabled(_ enabled: Bool) {
-        userDefaults.set(bool: enabled, forKey: .localAuthenticationEnabled)
-    }
-
-    var isLocalAuthenticationEnabled: Bool {
-        userDefaults.bool(forKey: .localAuthenticationEnabled)
+    func setLocalAuthenticationOnboarded() {
+        userDefaults.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
     }
 
     var authenticationOnboardingFlowSeen: Bool {
-        userDefaults.value(forKey: .localAuthenticationEnabled) != nil || !isFeatureEnabled
-    }
-
-    private var isFeatureEnabled: Bool {
-        true
+        userDefaults.bool(forKey: .localAuthenticationOnboardingSeen)
     }
 
     private var biometricsPolicyState: Data? {

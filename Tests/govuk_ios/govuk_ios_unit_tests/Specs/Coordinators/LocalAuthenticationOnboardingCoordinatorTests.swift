@@ -88,7 +88,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         }
 
         #expect(completion)
-        #expect(!(mockLocalAuthenticationService._localAuthenticationEnabled!))
+        #expect(mockLocalAuthenticationService.authenticationOnboardingFlowSeen)
         #expect(mockNavigationController._setViewControllers == .none)
         #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
     }

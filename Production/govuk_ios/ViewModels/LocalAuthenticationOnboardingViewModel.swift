@@ -30,18 +30,14 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
     var enrolButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(localisedTitle: enrolButtonTitle) { [weak self] in
             self?.localAuthenticationService.evaluatePolicy(
-                .deviceOwnerAuthentication,
+                .deviceOwnerAuthenticationWithBiometrics,
                 reason: "Unlock to proceed"
-            ) { [weak self] success, error in
+            ) { [weak self] success, _ in
                 if success {
                     self?.authenticationService.encryptRefreshToken()
-                    self?.localAuthenticationService.setLocalAuthenticationEnabled(true)
-                } else if let laError = error as? LAError, laError.code == .userCancel {
-                    self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
-                } else {
-                    self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
                 }
 
+                self?.localAuthenticationService.setLocalAuthenticationOnboarded()
                 self?.trackEnrolEvent()
                 self?.completionAction()
             }
@@ -50,7 +46,7 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
 
     var skipButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(localisedTitle: "Skip") { [weak self] in
-            self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
+            self?.localAuthenticationService.setLocalAuthenticationOnboarded()
             self?.trackSkipEvent()
             self?.completionAction()
         }

@@ -9,16 +9,8 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
         _stubbedAuthenticationOnboardingSeen
     }
 
-    var _stubbedLocalAuthenticationEnabled = false
-    var isLocalAuthenticationEnabled: Bool {
-        _stubbedLocalAuthenticationEnabled
-    }
-
-    var _setLocalAuthenticationCalled = false
-    var _localAuthenticationEnabled: Bool?
-    func setLocalAuthenticationEnabled(_ enabled: Bool) {
-        _setLocalAuthenticationCalled = true
-        _localAuthenticationEnabled = enabled
+    func setLocalAuthenticationOnboarded() {
+        _stubbedAuthenticationOnboardingSeen = true
     }
 
     var _stubbedBiometricsHaveChanged = false

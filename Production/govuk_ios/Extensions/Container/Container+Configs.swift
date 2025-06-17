@@ -35,7 +35,7 @@ extension Container {
             SecureStorageConfiguration.AccessControlLevel.open
             #else
             let accessControlLevel =
-            SecureStorageConfiguration.AccessControlLevel.currentBiometricsOrPasscode
+            SecureStorageConfiguration.AccessControlLevel.currentBiometricsOnly
             #endif
             let config = SecureStorageConfiguration(
                 id: "protectedSecureStorage",

@@ -84,7 +84,7 @@ struct LocalAuthenticationServiceTests {
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        sut.setLocalAuthenticationEnabled(true)
+        sut.setLocalAuthenticationOnboarded()
 
         #expect(sut.authenticationOnboardingFlowSeen)
     }
@@ -102,29 +102,29 @@ struct LocalAuthenticationServiceTests {
     }
 
     @Test
-    func setLocalAuthenticationEnabled_setsValueInUserDefaults() {
+    func setLocalAuthenticationOnboarded_setsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
         let mockUserDefaults = MockUserDefaults()
         let sut = LocalAuthenticationService(
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        sut.setLocalAuthenticationEnabled(true)
+        sut.setLocalAuthenticationOnboarded()
 
-        #expect(mockUserDefaults.bool(forKey: .localAuthenticationEnabled))
+        #expect(mockUserDefaults.bool(forKey: .localAuthenticationOnboardingSeen))
     }
 
     @Test
-    func isLocalAuthenticationEnabled_returnsValueInUserDefaults() {
+    func authenticationOnboardingFlowSeen_returnsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
         let mockUserDefaults = MockUserDefaults()
         let sut = LocalAuthenticationService(
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        sut.setLocalAuthenticationEnabled(true)
+        sut.setLocalAuthenticationOnboarded()
 
-        #expect(sut.isLocalAuthenticationEnabled)
+        #expect(sut.authenticationOnboardingFlowSeen)
     }
 
     @Test

@@ -114,6 +114,37 @@ class NotificationOnboardingCoordinatorTests {
 
     @Test
     @MainActor
+    func openAction_startsSafariCoordinator() async {
+        let mockNotificationService = MockNotificationService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockNavigationController = MockNavigationController()
+        let mockNotificationOnboardingService = MockNotificationsOnboardingService()
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockSafariCoordinator = MockBaseCoordinator()
+        mockNotificationService._stubbedShouldRequestPermission = true
+        mockNotificationOnboardingService.hasSeenNotificationsOnboarding = false
+        mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
+        let sut = NotificationOnboardingCoordinator(
+            navigationController: mockNavigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            notificationService: mockNotificationService,
+            notificationOnboardingService: mockNotificationOnboardingService,
+            analyticsService: MockAnalyticsService(),
+            viewControllerBuilder: mockViewControllerBuilder,
+            completion: {}
+        )
+        sut.start(url: nil)
+        try? await Task.sleep(nanoseconds: 100_000_000)
+        let testURL = Constants.API.privacyPolicyUrl
+        mockViewControllerBuilder._receivedNotificationOnboardingOpenAction?(testURL)
+        #expect(mockCoordinatorBuilder._receivedSafariCoordinatorURL == testURL)
+        #expect(mockCoordinatorBuilder._receivedSafariCoordinatorFullScreen == false)
+        #expect(mockSafariCoordinator._startCalled)
+        #expect(mockSafariCoordinator._receivedStartURL == testURL)
+    }
+
+    @Test
+    @MainActor
     func openPrivacyPolicy_callsOpenActionWithCorrectURL() {
         var receivedURL: URL?
         let mockAnalyticsService = MockAnalyticsService()

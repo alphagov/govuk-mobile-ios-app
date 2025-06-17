@@ -1,6 +1,8 @@
 import Foundation
+import SwiftUI
 import UIKit
 import Testing
+import GOVKit
 
 @testable import govuk_ios
 
@@ -63,6 +65,31 @@ struct AnalyticsConsentCoordinatorTests {
         sut.start()
 
         #expect(mockNavigationController.viewControllers.count == 1)
+    }
+
+    @Test
+    @MainActor
+    func openAction_startsSafariCoordinator() async {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockSafariCoordinator = MockBaseCoordinator()
+        mockAnalyticsService._stubbedPermissionState = .unknown
+        mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
+        let mockNavigationController = UINavigationController()
+        var receivedURL: URL?
+        var safariCoordinatorStarted = false
+        let viewModel = AnalyticsConsentContainerViewModel(
+            analyticsService: mockAnalyticsService,
+            openAction: { url in
+                receivedURL = url
+                safariCoordinatorStarted = true
+            },
+            completion: {}
+        )
+        viewModel.openPrivacyPolicy()
+        let expectedURL = Constants.API.privacyPolicyUrl
+        #expect(receivedURL == expectedURL)
+        #expect(safariCoordinatorStarted)
     }
 }
 

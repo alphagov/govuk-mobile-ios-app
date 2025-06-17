@@ -152,6 +152,20 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _stubbedNotificationSettingsViewController ?? UIViewController()
     }
 
+    var _receivedNotificationOnboardingOpenAction: ((URL) -> Void)?
+    var _receivedNotificationOnboardingCompleteAction: (() -> Void)?
+    var _receivedNotificationOnboardingDismissAction: (() -> Void)?
+    var _stubbedNotificationOnboardingViewController: UIViewController?
+    override func notificationOnboarding(analyticsService: any AnalyticsServiceInterface,
+                                         openAction: @escaping (URL) -> Void,
+                                         completeAction: @escaping () -> Void,
+                                         dismissAction: @escaping () -> Void) -> UIViewController {
+        _receivedNotificationOnboardingOpenAction = openAction
+        _receivedNotificationOnboardingCompleteAction = completeAction
+        _receivedNotificationOnboardingDismissAction = dismissAction
+        return _stubbedNotificationOnboardingViewController ?? UIViewController()
+    }
+
     var _stubbedSignOutConfirmationViewController: UIViewController?
     var _receivedSignOutConfirmationCompletion: ((Bool) -> Void)?
     override func signOutConfirmation(authenticationService: any AuthenticationServiceInterface,

@@ -17,10 +17,10 @@ struct LocalAuthorityPostcodeEntryView: View {
                 VStack(alignment: .leading, spacing: 15) {
                     Text(viewModel.postcodeEntryViewTitle)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(Font.govUK.title1Bold)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewExampleText)
+                        .font(Font.govUK.body)
                         .foregroundColor(Color(UIColor.govUK.text.secondary))
                     if let errorCase = viewModel.error {
                         withAnimation {
@@ -39,6 +39,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                         .font(Font.govUK.bodySemibold)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewDescriptionBody)
+                        .font(Font.govUK.body)
                     Spacer()
                 }.padding()
             }.onReceive(viewModel.$error) { error in

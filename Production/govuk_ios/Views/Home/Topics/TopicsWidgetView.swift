@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 import UIComponents
 import GOVKit
 
@@ -92,19 +93,21 @@ class TopicsWidgetView: UIView {
         return stackView
     }()
 
-    private lazy var appErrorViewController: HostingViewController = {
-        let localController = HostingViewController(
+    private lazy var appErrorViewController: UIViewController = {
+        // Not using HostingViewController here because of auto voiceover focus issue
+        let localController = UIHostingController(
             rootView: AppErrorView(
                 viewModel: self.viewModel.topicErrorViewModel
             )
         )
         localController.view.backgroundColor = .clear
+        localController.view.isHidden = true
         return localController
     }()
 
-    private lazy var errorView: UIView = {
-        self.appErrorViewController.view
-    }()
+    private var errorView: UIView {
+        appErrorViewController.view
+    }
 
     init(viewModel: TopicsWidgetViewModel) {
         self.viewModel = viewModel
@@ -156,7 +159,6 @@ class TopicsWidgetView: UIView {
         stackView.addArrangedSubview(cardStackView)
         stackView.addArrangedSubview(allTopicsButton)
         stackView.addArrangedSubview(errorView)
-        errorView.isHidden = true
         addSubview(stackView)
     }
 

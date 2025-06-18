@@ -15,6 +15,7 @@ struct StoredLocalAuthorityWidgetView: View {
                     Text(viewModel.title)
                         .font(Font.govUK.title3Semibold)
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                        .accessibilityAddTraits(.isHeader)
                     Spacer()
                     Button {
                         viewModel.openEditViewAction()

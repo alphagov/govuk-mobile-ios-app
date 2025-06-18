@@ -7,31 +7,24 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var buttonTitle: String = ""
     @Published var body: String = ""
+    @Published var showSettingsAlert = false
+
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
-    private var biometryType: LocalAuthenticationType = .none
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
-    init(urlOpener: URLOpener,
-         authenticationService: AuthenticationServiceInterface,
+
+    private var biometryType: LocalAuthenticationType = .none
+
+    init(authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         urlOpener: URLOpener) {
         self.urlOpener = urlOpener
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
         self.analyticsService = analyticsService
         updateAuthType()
-    }
-
-    func buttonAction() {
-        switch localAuthenticationService.deviceCapableAuthType {
-        case .faceID:
-            faceIDAction()
-        case .touchID:
-            print("something")
-        default:
-            print("default")
-        }
     }
 
     private func updateAuthType() {
@@ -51,10 +44,9 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
         }
     }
 
-    private func faceIDAction() {
+    func faceIdButtonAction() {
         if authenticationService.secureStoreRefreshToken {
-            authenticationService.signOut()
-            urlOpener.openSettings()
+            showSettingsAlert = true
         } else {
             localAuthenticationService.evaluatePolicy(
                 .deviceOwnerAuthenticationWithBiometrics,
@@ -63,9 +55,14 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
                 if success {
                     self?.authenticationService.encryptRefreshToken()
                 } else {
-                    self?.urlOpener.openSettings()
+                    self?.showSettingsAlert = true
                 }
             }
         }
+    }
+
+    func openSettings() {
+        urlOpener.openSettings()
+        showSettingsAlert = false
     }
 }

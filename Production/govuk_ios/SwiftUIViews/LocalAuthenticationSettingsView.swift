@@ -13,7 +13,7 @@ struct LocalAuthenticationSettingsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Button {
-                        viewModel.buttonAction()
+                        viewModel.faceIdButtonAction()
                     } label: {
                         HStack {
                             Text(viewModel.buttonTitle)
@@ -39,6 +39,23 @@ struct LocalAuthenticationSettingsView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color(UIColor.govUK.strokes.cardBlue), lineWidth: 0.5)
+                        )
+                    }
+                    .alert(isPresented: $viewModel.showSettingsAlert) {
+                        Alert(
+                            title: Text(
+                                String.settings.localized("localAuthenticationSettingsAlertTitle")
+                            ),
+                            message: nil,
+                            primaryButton: .default(
+                                Text(
+                                    String.common.localized("continue")
+                                ),
+                                action: {
+                                    viewModel.openSettings()
+                                }
+                            ),
+                            secondaryButton: .cancel()
                         )
                     }
                     ForEach(viewModel.body.split(separator: "\n\n"), id: \.self) { paragraph in

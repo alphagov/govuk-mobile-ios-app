@@ -133,6 +133,17 @@
         }
       }
     },
+    "localAuthenticationSettingsAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone's Face ID settings"
+          }
+        }
+      }
+    },
     "localAuthenticationTouchIdBody" : {
       "extractionState" : "manual",
       "localizations" : {

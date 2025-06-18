@@ -172,13 +172,14 @@ class ViewControllerBuilder {
     func localAuthenticationSettings(
         analyticsService: AnalyticsServiceInterface,
         authenticationService: AuthenticationServiceInterface,
-        localAuthenticationService: LocalAuthenticationServiceInterface
+        localAuthenticationService: LocalAuthenticationServiceInterface,
+        urlOpener: URLOpener
     ) -> UIViewController {
         let viewModel = LocalAuthenticationSettingsViewModel(
-            urlOpener: UIApplication.shared,
             authenticationService: authenticationService,
             localAuthenticationService: localAuthenticationService,
-            analyticsService: analyticsService
+            analyticsService: analyticsService,
+            urlOpener: urlOpener
         )
         let localAuthenticationSettingsView = LocalAuthenticationSettingsView(
             viewModel: viewModel

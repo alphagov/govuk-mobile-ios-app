@@ -389,7 +389,8 @@ class CoordinatorBuilder {
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
-            viewControllerBuilder: ViewControllerBuilder()
+            viewControllerBuilder: ViewControllerBuilder(),
+            urlOpener: UIApplication.shared
         )
     }
 }

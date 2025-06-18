@@ -7,16 +7,19 @@ class LocalAuthenticationSettingsCoordinator: BaseCoordinator {
     private let authenticationService: AuthenticationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
+    private let urlOpener: URLOpener
 
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         viewControllerBuilder: ViewControllerBuilder) {
+         viewControllerBuilder: ViewControllerBuilder,
+         urlOpener: URLOpener) {
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
         self.analyticsService = analyticsService
         self.viewControllerBuilder = viewControllerBuilder
+        self.urlOpener = urlOpener
         super.init(navigationController: navigationController)
     }
 
@@ -24,7 +27,8 @@ class LocalAuthenticationSettingsCoordinator: BaseCoordinator {
         let viewController = viewControllerBuilder.localAuthenticationSettings(
             analyticsService: analyticsService,
             authenticationService: authenticationService,
-            localAuthenticationService: localAuthenticationService
+            localAuthenticationService: localAuthenticationService,
+            urlOpener: urlOpener
         )
         push(viewController, animated: true)
     }

@@ -36,6 +36,11 @@ class ReAuthenticationCoordinator: BaseCoordinator {
             handleReauthFailure()
             return
         }
+        guard localAuthenticationService.availableAuthType == .faceID ||
+                localAuthenticationService.touchIdEnabled else {
+            handleReauthFailure()
+            return
+        }
 
         let refreshRequestResult = await authenticationService.tokenRefreshRequest()
 

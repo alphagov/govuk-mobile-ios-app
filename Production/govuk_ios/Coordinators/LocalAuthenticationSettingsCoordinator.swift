@@ -24,7 +24,28 @@ class LocalAuthenticationSettingsCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        let viewController = viewControllerBuilder.localAuthenticationSettings(
+        switch localAuthenticationService.deviceCapableAuthType {
+        case .faceID:
+            faceIdSettings()
+        case .touchID:
+            touchIdSettings()
+        default:
+            fatalError("Should never happen")
+        }
+    }
+
+    private func faceIdSettings() {
+        let viewController = viewControllerBuilder.faceIdSettings(
+            analyticsService: analyticsService,
+            authenticationService: authenticationService,
+            localAuthenticationService: localAuthenticationService,
+            urlOpener: urlOpener
+        )
+        push(viewController, animated: true)
+    }
+
+    private func touchIdSettings() {
+        let viewController = viewControllerBuilder.touchIdSettings(
             analyticsService: analyticsService,
             authenticationService: authenticationService,
             localAuthenticationService: localAuthenticationService,

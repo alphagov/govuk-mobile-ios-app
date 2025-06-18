@@ -1,7 +1,7 @@
 import SwiftUI
 import UIComponents
 
-struct LocalAuthenticationSettingsView: View {
+struct FaceIdSettingsView: View {
     @StateObject var viewModel: LocalAuthenticationSettingsViewModel
 
     init(viewModel: LocalAuthenticationSettingsViewModel) {

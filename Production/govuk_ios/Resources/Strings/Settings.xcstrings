@@ -122,17 +122,6 @@
         }
       }
     },
-    "localAuthenticationFaceIdTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Face ID"
-          }
-        }
-      }
-    },
     "localAuthenticationSettingsAlertTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -162,17 +151,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unlock app with Touch ID"
-          }
-        }
-      }
-    },
-    "localAuthenticationTouchIdTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touch ID"
           }
         }
       }
@@ -327,6 +305,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terms and conditions"
+          }
+        }
+      }
+    },
+    "touchIdTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch ID"
           }
         }
       }

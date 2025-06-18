@@ -35,6 +35,7 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
             ) { [weak self] success, _ in
                 if success {
                     self?.authenticationService.encryptRefreshToken()
+                    self?.localAuthenticationService.setTouchId(enabled: true)
                 }
 
                 self?.localAuthenticationService.setLocalAuthenticationOnboarded()

@@ -45,6 +45,7 @@ enum UserDefaultsKeys: String, CaseIterable {
     case authenticationOnboardingFlowSeen = "govuk_authentication_onboarding_flow_seen"
     case notificationsConsentGranted = "govuk_notifications_consent_granted"
     case biometricsPolicyState = "govuk_biometrics_policy_state"
+    case touchIdEnabled = "govuk_touch_id_enabled"
 }
 
 protocol UserDefaultsInterface {

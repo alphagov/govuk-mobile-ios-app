@@ -99,7 +99,7 @@ class NotificationConsentCoordinator: BaseCoordinator {
 
     private func openPrivacy() {
         let coordinator = coordinatorBuilder.safari(
-            presentingViewController: root.presentedViewController ?? root,
+            navigationController: root,
             url: Constants.API.privacyPolicyUrl,
             fullScreen: false
         )

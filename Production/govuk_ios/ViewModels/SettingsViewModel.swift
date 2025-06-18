@@ -14,7 +14,13 @@ protocol SettingsViewModelInterface: ObservableObject {
     var notificationsAction: (() -> Void)? { get set }
     func updateNotificationPermissionState()
     var signoutAction: (() -> Void)? { get set }
-    var openAction: ((URL, String) -> Void)? { get set }
+    var openAction: ((SettingsViewModelURLParameters) -> Void)? { get set }
+}
+
+struct SettingsViewModelURLParameters {
+    let url: URL
+    let trackingTitle: String
+    let fullScreen: Bool
 }
 
 // swiftlint:disable:next type_body_length
@@ -36,7 +42,7 @@ class SettingsViewModel: SettingsViewModelInterface {
         "notificationAlertPrimaryButtonTitle"
     )
     var signoutAction: (() -> Void)?
-    var openAction: ((URL, String) -> Void)?
+    var openAction: ((SettingsViewModelURLParameters) -> Void)?
     @Published var userEmail: String?
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -145,11 +151,14 @@ class SettingsViewModel: SettingsViewModelInterface {
                     id: "settings.account.row",
                     title: rowTitle,
                     action: { [weak self] in
-                        if self?.urlOpener.openIfPossible(
-                            Constants.API.manageAccountURL
-                        ) == true {
-                            self?.trackNavigationEvent(rowTitle, external: true)
-                        }
+                        self?.openAction?(
+                            .init(
+                                url: Constants.API.manageAccountURL,
+                                trackingTitle: rowTitle,
+                                fullScreen: true
+                            )
+                        )
+                        self?.trackNavigationEvent(rowTitle, external: true)
                     }
                 )
             ],
@@ -219,8 +228,13 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                guard let self else { return }
-                self.openAction?(Constants.API.privacyPolicyUrl, rowTitle)
+                self?.openAction?(
+                    .init(
+                        url: Constants.API.privacyPolicyUrl,
+                        trackingTitle: rowTitle,
+                        fullScreen: false
+                    )
+                )
             }
         )
     }
@@ -233,8 +247,15 @@ class SettingsViewModel: SettingsViewModelInterface {
             body: nil,
             action: { [weak self] in
                 guard let self else { return }
-                self.openAction?(self.deviceInformationProvider
-                    .helpAndFeedbackURL(versionProvider: self.versionProvider), rowTitle)
+                let url = self.deviceInformationProvider
+                    .helpAndFeedbackURL(versionProvider: self.versionProvider)
+                self.openAction?(
+                    .init(
+                        url: url,
+                        trackingTitle: rowTitle,
+                        fullScreen: false
+                    )
+                )
             }
         )
     }
@@ -318,7 +339,13 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                self?.openAction?(Constants.API.termsAndConditionsUrl, rowTitle)
+                self?.openAction?(
+                    .init(
+                        url: Constants.API.termsAndConditionsUrl,
+                        trackingTitle: rowTitle,
+                        fullScreen: false
+                    )
+                )
             }
         )
     }
@@ -330,7 +357,13 @@ class SettingsViewModel: SettingsViewModelInterface {
             title: rowTitle,
             body: nil,
             action: { [weak self] in
-                self?.openAction?(Constants.API.accessibilityStatementUrl, rowTitle)
+                self?.openAction?(
+                    .init(
+                        url: Constants.API.accessibilityStatementUrl,
+                        trackingTitle: rowTitle,
+                        fullScreen: false
+                    )
+                )
             }
         )
     }

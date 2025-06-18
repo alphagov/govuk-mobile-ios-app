@@ -366,7 +366,7 @@ struct CoordinatorBuilderTests {
     func safari_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.safari(
-            presentingViewController: UINavigationController(),
+            navigationController: UINavigationController(),
             url: URL.arrange,
             fullScreen: true
         )

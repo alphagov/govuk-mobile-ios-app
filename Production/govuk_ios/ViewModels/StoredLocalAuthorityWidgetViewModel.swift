@@ -4,9 +4,10 @@ import SwiftUI
 
 class StoredLocalAuthorityWidgetViewModel {
     private let analyticsService: AnalyticsServiceInterface
-    private let urlOpener: URLOpener
     let localAuthorities: [LocalAuthorityItem]
     let openEditViewAction: () -> Void
+    private let openURLAction: (URL) -> Void
+
     let twoTierAuthorityDescription: String = String.localAuthority.localized(
         "storedLocalAuthorityWidgetTwoTierDescription"
     )
@@ -61,21 +62,18 @@ class StoredLocalAuthorityWidgetViewModel {
 
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorities: [LocalAuthorityItem],
-         urlOpener: URLOpener,
+         openURLAction: @escaping (URL) -> Void,
          openEditViewAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.localAuthorities = localAuthorities
-        self.urlOpener = urlOpener
+        self.openURLAction = openURLAction
         self.openEditViewAction = openEditViewAction
     }
 
-    func openURL(url: String, title: String) {
-        if let url = URL(string: url) {
-            openURLIfPossible(
-                url: url,
-                eventTitle: title
-            )
-        }
+    func open(item: StoredLocalAuthorityCardModel) {
+        guard let url = URL(string: item.homepageUrl) else { return }
+        openURLAction(url)
+        trackNavigationEvent(item.name, external: true)
     }
 
     func cardModels() -> [StoredLocalAuthorityCardModel] {
@@ -100,15 +98,5 @@ class StoredLocalAuthorityWidgetViewModel {
             external: external
         )
         analyticsService.track(event: event)
-    }
-
-    private func openURLIfPossible(url: URL,
-                                   eventTitle: String) {
-        if urlOpener.openIfPossible(url) {
-            trackNavigationEvent(
-                eventTitle,
-                external: true
-            )
-        }
     }
 }

@@ -1,7 +1,5 @@
 import SwiftUI
 import GOVKit
-import UIComponents
-import LocalAuthentication
 
 class LocalAuthenticationSettingsViewModel: ObservableObject {
     @Published var title: String = ""

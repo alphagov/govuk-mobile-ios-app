@@ -4,6 +4,41 @@ import LocalAuthentication
 @testable import govuk_ios
 
 class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
+    var _stubbedDeviceCapableAuthType = LocalAuthenticationType.faceID
+    var deviceCapableAuthType: LocalAuthenticationType {
+        _stubbedDeviceCapableAuthType
+    }
+
+    var _stubbedAvailableAuthType = LocalAuthenticationType.faceID
+    var availableAuthType: LocalAuthenticationType {
+        _stubbedAvailableAuthType
+    }
+
+    var _stubbedBiometricsPossible = true
+    var biometricsPossible: Bool {
+        _stubbedBiometricsPossible
+    }
+
+    var _stubbedTouchIdEnabled = true
+    var touchIdEnabled: Bool {
+        _stubbedTouchIdEnabled
+    }
+
+    func setTouchId(enabled: Bool) {
+        _stubbedTouchIdEnabled = enabled
+    }
+    
+    var _stubbedCanEvaluateBiometricsPolicy: Bool = false
+    var _stubbedCanEvaluateError: LAError? = nil
+    func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?) {
+        switch policy {
+        case .deviceOwnerAuthenticationWithBiometrics:
+            (canEvaluate: _stubbedCanEvaluateBiometricsPolicy, error: _stubbedCanEvaluateError)
+        default:
+            (canEvaluate: false, error: _stubbedCanEvaluateError)
+        }
+    }
+
     var _stubbedAuthenticationOnboardingSeen: Bool = false
     var authenticationOnboardingFlowSeen: Bool {
         _stubbedAuthenticationOnboardingSeen
@@ -18,26 +53,8 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
         _stubbedBiometricsHaveChanged
     }
 
-    var _stubbedCanEvaluateBiometricsPolicy: Bool = false
-    var _stubbedCanEvaluatePasscodePolicy: Bool = false
-    func canEvaluatePolicy(_ policy: LAPolicy) -> Bool {
-        switch policy {
-        case .deviceOwnerAuthenticationWithBiometrics:
-            _stubbedCanEvaluateBiometricsPolicy
-        case .deviceOwnerAuthentication:
-            _stubbedCanEvaluatePasscodePolicy
-        default:
-            false
-        }
-    }
-
     var _stubbedEvaluatePolicyResult: (Bool, Error?) = (true, nil)
     func evaluatePolicy(_ policy: LAPolicy, reason: String, completion: @escaping (Bool, Error?) -> Void) {
         completion(_stubbedEvaluatePolicyResult.0, _stubbedEvaluatePolicyResult.1)
-    }
-
-    var _stubbedAuthType: LocalAuthenticationType = .none
-    var authType: LocalAuthenticationType {
-        return _stubbedAuthType
     }
 }

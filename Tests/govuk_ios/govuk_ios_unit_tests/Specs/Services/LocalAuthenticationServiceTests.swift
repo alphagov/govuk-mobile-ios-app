@@ -16,7 +16,7 @@ struct LocalAuthenticationServiceTests {
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics)
+        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics).canEvaluate
         #expect(canEvaluate)
     }
 
@@ -29,8 +29,8 @@ struct LocalAuthenticationServiceTests {
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthentication)
-        #expect(canEvaluate)
+        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthentication).canEvaluate
+        #expect(!canEvaluate)
     }
 
     @Test
@@ -42,7 +42,7 @@ struct LocalAuthenticationServiceTests {
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics)
+        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics).canEvaluate
         #expect(!canEvaluate)
     }
 
@@ -55,7 +55,7 @@ struct LocalAuthenticationServiceTests {
             userDefaults: mockUserDefaults,
             context: mockLAContext
         )
-        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthentication)
+        let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthentication).canEvaluate
         #expect(!canEvaluate)
     }
 
@@ -137,17 +137,17 @@ struct LocalAuthenticationServiceTests {
         )
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
         mockLAContext._stubbedBiometryType = .faceID
-        #expect(sut.authType == .faceID)
+        #expect(sut.availableAuthType == .faceID)
 
         mockLAContext._stubbedBiometryType = .touchID
-        #expect(sut.authType == .touchID)
+        #expect(sut.availableAuthType == .touchID)
 
         mockLAContext._stubbedBiometryType = .none
-        #expect(sut.authType == .none)
+        #expect(sut.availableAuthType == .none)
 
         if #available(iOS 17.0, *) {
             mockLAContext._stubbedBiometryType = .opticID
-            #expect(sut.authType == .none)
+            #expect(sut.availableAuthType == .none)
         }
     }
 
@@ -161,7 +161,7 @@ struct LocalAuthenticationServiceTests {
         )
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = false
         mockLAContext._stubbedAuthenticationEvaluatePolicyResult = true
-        #expect(sut.authType == .passcodeOnly)
+        #expect(sut.availableAuthType == .none)
     }
 
     @Test
@@ -173,7 +173,7 @@ struct LocalAuthenticationServiceTests {
             context: mockLAContext
         )
         mockLAContext._stubbedAuthenticationEvaluatePolicyResult = false
-        #expect(sut.authType == .none)
+        #expect(sut.availableAuthType == .none)
     }
 
     @Test

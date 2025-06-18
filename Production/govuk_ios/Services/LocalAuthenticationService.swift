@@ -35,7 +35,6 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?) {
-        let context = LAContext()
         var authError: NSError?
         let canEvaluate = context.canEvaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics, error: &authError

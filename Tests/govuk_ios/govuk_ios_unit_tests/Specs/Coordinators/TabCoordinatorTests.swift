@@ -257,7 +257,8 @@ struct TabCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             deviceInformationProvider: MockDeviceInformationProvider(),
             authenticationService: mockAuthenticationService,
-            notificationService: MockNotificationService()
+            notificationService: MockNotificationService(),
+            localAuthenticationService: MockLocalAuthenticationService()
         )
         mockCoordinatorBuilder._stubbedSettingsCoordinator = settingsCoordinator
 

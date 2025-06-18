@@ -19,7 +19,8 @@ class LocalAuthenticationOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             completionAction: { }
         )
-        mockLocalAuthenticationService._stubbedAuthType = .faceID
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
+        mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         sut.start(url: nil)
 
         #expect(mockNavigationController._setViewControllers?.count == .some(1))
@@ -39,7 +40,8 @@ class LocalAuthenticationOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             completionAction: { }
         )
-        mockLocalAuthenticationService._stubbedAuthType = .touchID
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
+        mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         sut.start(url: nil)
 
         #expect(mockNavigationController._setViewControllers?.count == .some(1))
@@ -51,7 +53,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .passcodeOnly
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .passcodeOnly
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
@@ -74,7 +76,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .none
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .none
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
@@ -99,7 +101,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .touchID
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
@@ -116,26 +118,5 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         #expect(completion)
         #expect(mockNavigationController._setViewControllers == .none)
         #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
-    }
-
-    @Test @MainActor
-    func start_authenticationOnboardingSeen_false_setsOnboarding() async {
-        let mockUserDefaults = MockUserDefaults()
-        let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        let mockNavigationController = MockNavigationController()
-        let mockAuthenticationService = MockAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
-        mockLocalAuthenticationService._stubbedAuthType = .touchID
-        let sut = LocalAuthenticationOnboardingCoordinator(
-            navigationController: mockNavigationController,
-            userDefaults: mockUserDefaults,
-            analyticsService: MockAnalyticsService(),
-            localAuthenticationService: mockLocalAuthenticationService,
-            authenticationService: mockAuthenticationService,
-            completionAction: {}
-        )
-        sut.start(url: nil)
-
-        #expect(mockNavigationController._setViewControllers?.count == .some(1))
     }
 }

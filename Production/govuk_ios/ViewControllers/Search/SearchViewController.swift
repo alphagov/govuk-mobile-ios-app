@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 import UIComponents
 import GOVKit
 
@@ -25,9 +26,11 @@ class SearchViewController: BaseViewController,
         return localView
     }()
 
-    private lazy var appErrorViewController: HostingViewController = {
-        let localController = HostingViewController(
-            rootView: AppErrorView()
+    private lazy var appErrorView = AppErrorView()
+
+    private lazy var appErrorViewController: UIViewController = {
+        let localController = UIHostingController(
+            rootView: appErrorView
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .govUK.fills.surfaceModal
@@ -96,6 +99,7 @@ class SearchViewController: BaseViewController,
         self.viewModel = viewModel
         self.searchBar = searchBar
         super.init(analyticsService: viewModel.analyticsService)
+        self.shouldAutoFocusVoiceover = false
     }
 
     required init?(coder: NSCoder) {
@@ -272,7 +276,7 @@ class SearchViewController: BaseViewController,
         case .none:
             errorScrollView.isHidden = true
         }
-        appErrorViewController.rootView.viewModel = errorModel
+        appErrorView.viewModel = errorModel
         errorView.invalidateIntrinsicContentSize()
     }
 

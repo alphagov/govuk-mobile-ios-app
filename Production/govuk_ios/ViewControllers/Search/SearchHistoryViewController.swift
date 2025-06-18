@@ -6,7 +6,7 @@ private typealias DataSource =
     UITableViewDiffableDataSource<SearchHistorySection, SearchHistoryItem>
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchHistorySection, SearchHistoryItem>
 
-final class SearchHistoryViewController: BaseViewController {
+final class SearchHistoryViewController: UIViewController {
     private let viewModel: SearchHistoryViewModel
     private let selectionAction: ((String) -> Void)
 
@@ -124,7 +124,7 @@ final class SearchHistoryViewController: BaseViewController {
          selectionAction: @escaping ((String) -> Void)) {
         self.viewModel = viewModel
         self.selectionAction = selectionAction
-        super.init(analyticsService: viewModel.analyticsService)
+        super.init(nibName: nil, bundle: nil)
     }
 
     @MainActor required init?(coder: NSCoder) {

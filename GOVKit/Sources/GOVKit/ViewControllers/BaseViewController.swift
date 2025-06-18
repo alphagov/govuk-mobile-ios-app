@@ -4,6 +4,7 @@ import Foundation
 @MainActor
 open class BaseViewController: UIViewController {
     public let analyticsService: AnalyticsServiceInterface
+    public var shouldAutoFocusVoiceover: Bool = true
 
     public init(analyticsService: AnalyticsServiceInterface) {
         self.analyticsService = analyticsService
@@ -26,6 +27,7 @@ open class BaseViewController: UIViewController {
     }
 
     private func setVoiceoverFocus() {
+        guard shouldAutoFocusVoiceover else { return }
         UIAccessibility.post(
             notification: .screenChanged,
             argument: view

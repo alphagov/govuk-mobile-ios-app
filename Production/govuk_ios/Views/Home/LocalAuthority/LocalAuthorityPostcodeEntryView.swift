@@ -5,6 +5,8 @@ import UIComponents
 struct LocalAuthorityPostcodeEntryView: View {
     @StateObject private var viewModel: LocalAuthorityPostcodeEntryViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @AccessibilityFocusState(for: .voiceOver)
+    private var isErrorFocused: Bool
 
     init(viewModel: LocalAuthorityPostcodeEntryViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -15,14 +17,15 @@ struct LocalAuthorityPostcodeEntryView: View {
                 VStack(alignment: .leading, spacing: 15) {
                     Text(viewModel.postcodeEntryViewTitle)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(Font.govUK.title1Bold)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewExampleText)
+                        .font(Font.govUK.body)
                         .foregroundColor(Color(UIColor.govUK.text.secondary))
                     if let errorCase = viewModel.error {
                         withAnimation {
                             Text(errorCase.errorMessage)
+                                .accessibilityFocused($isErrorFocused)
                                 .foregroundColor(
                                     Color(uiColor: UIColor.govUK.text.buttonDestructive)
                                 )
@@ -36,8 +39,15 @@ struct LocalAuthorityPostcodeEntryView: View {
                         .font(Font.govUK.bodySemibold)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewDescriptionBody)
+                        .font(Font.govUK.body)
                     Spacer()
                 }.padding()
+            }.onReceive(viewModel.$error) { error in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if error != nil {
+                        isErrorFocused = true
+                    }
+                }
             }
             PrimaryButtonView(
                 viewModel: viewModel.primaryButtonViewModel

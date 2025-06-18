@@ -20,8 +20,7 @@ struct LocalAuthorityExplainerView: View {
                     }
                     Text(viewModel.explainerViewTitle)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(Font.govUK.largeTitleBold)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding([.horizontal], 16)

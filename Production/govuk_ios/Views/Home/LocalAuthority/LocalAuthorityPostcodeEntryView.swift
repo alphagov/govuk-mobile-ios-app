@@ -15,8 +15,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                 VStack(alignment: .leading, spacing: 15) {
                     Text(viewModel.postcodeEntryViewTitle)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(Font.govUK.largeTitleBold)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewExampleText)
                         .foregroundColor(Color(UIColor.govUK.text.secondary))

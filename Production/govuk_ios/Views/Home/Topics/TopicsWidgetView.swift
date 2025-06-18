@@ -94,14 +94,14 @@ class TopicsWidgetView: UIView {
     }()
 
     private lazy var appErrorViewController: UIViewController = {
-        // Not using HostingViewController here because of auto voiceover focus issue
-        let localController = UIHostingController(
+        let localController = HostingViewController(
             rootView: AppErrorView(
                 viewModel: self.viewModel.topicErrorViewModel
             )
         )
         localController.view.backgroundColor = .clear
         localController.view.isHidden = true
+        localController.shouldAutoFocusVoiceover = false
         return localController
     }()
 

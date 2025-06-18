@@ -26,14 +26,13 @@ class SearchViewController: BaseViewController,
         return localView
     }()
 
-    private lazy var appErrorView = AppErrorView()
-
-    private lazy var appErrorViewController: UIViewController = {
-        let localController = UIHostingController(
-            rootView: appErrorView
+    private lazy var appErrorViewController: HostingViewController = {
+        let localController = HostingViewController(
+            rootView: AppErrorView()
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .govUK.fills.surfaceModal
+        localController.shouldAutoFocusVoiceover = false
         return localController
     }()
 
@@ -276,7 +275,7 @@ class SearchViewController: BaseViewController,
         case .none:
             errorScrollView.isHidden = true
         }
-        appErrorView.viewModel = errorModel
+        appErrorViewController.rootView.viewModel = errorModel
         errorView.invalidateIntrinsicContentSize()
     }
 

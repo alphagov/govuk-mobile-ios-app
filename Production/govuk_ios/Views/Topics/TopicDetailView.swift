@@ -95,7 +95,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     private func descripitonView(description: String) -> some View {
         HStack {
             Text(description)
-                .font(.govUK.subheadline)
+                .font(.govUK.body)
                 .multilineTextAlignment(.leading)
                 .padding(.top, 16)
                 .padding(.horizontal, 18)

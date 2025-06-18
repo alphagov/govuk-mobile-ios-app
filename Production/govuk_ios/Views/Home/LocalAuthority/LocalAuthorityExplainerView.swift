@@ -27,6 +27,7 @@ struct LocalAuthorityExplainerView: View {
                         .padding(.bottom, 4)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.explainerViewDescription)
+                        .font(Font.govUK.body)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .padding([.horizontal], 16)
                         .multilineTextAlignment(.center)

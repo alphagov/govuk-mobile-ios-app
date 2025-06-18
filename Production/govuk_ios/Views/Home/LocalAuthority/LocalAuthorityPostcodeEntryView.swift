@@ -18,6 +18,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                         .font(Font.govUK.largeTitleBold)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewExampleText)
+                        .font(Font.govUK.body)
                         .foregroundColor(Color(UIColor.govUK.text.secondary))
                     if let errorCase = viewModel.error {
                         withAnimation {
@@ -35,6 +36,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                         .font(Font.govUK.bodySemibold)
                         .accessibilityAddTraits(.isHeader)
                     Text(viewModel.postcodeEntryViewDescriptionBody)
+                        .font(Font.govUK.body)
                     Spacer()
                 }.padding()
             }

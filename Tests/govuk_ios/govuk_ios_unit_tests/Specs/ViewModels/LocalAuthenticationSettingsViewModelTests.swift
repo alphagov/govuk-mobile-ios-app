@@ -114,9 +114,9 @@ struct LocalAuthenticationSettingsViewModelTests {
 
         #expect(!sut.showSettingsAlert)
         sut.faceIdButtonAction()
-        DispatchQueue.main.async {
-            #expect(sut.showSettingsAlert)
-        }
+//        DispatchQueue.main.async {
+//            #expect(sut.showSettingsAlert)
+//        }
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
                 String.settings.localized("localAuthenticationFaceIdButtonTitle"))

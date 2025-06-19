@@ -47,17 +47,17 @@ final class SearchHistoryViewController: UIViewController {
     }()
 
     private lazy var deleteAction: UIAction = {
-        .init(handler: { [weak self] _ in
-            self?.present(UIAlertController.destructiveAlert(
-                title: String.search.localized("clearHistoryAlertTitle"),
-                buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
-                message: String.search.localized("clearHistoryAlertMessage"),
-                handler: { [weak self] in
-                self?.hide()
-                self?.viewModel.clearSearchHistory()
-                self?.reloadSnapshot()
-            }), animated: true)
-        })
+        .init(
+            handler: { [unowned self] _ in
+                let viewController = UIAlertController.destructiveAlert(
+                    title: String.search.localized("clearHistoryAlertTitle"),
+                    buttonTitle: String.search.localized("clearHistoryAlertButtonTitle"),
+                    message: String.search.localized("clearHistoryAlertMessage"),
+                    handler: self.clearAllHistory
+                )
+                self.present(viewController, animated: true)
+            }
+        )
     }()
 
     private lazy var deleteButton: UIButton = {
@@ -106,19 +106,25 @@ final class SearchHistoryViewController: UIViewController {
     private lazy var dataSource: DataSource = {
         let localDataSource = DataSource(
             tableView: tableView,
-            cellProvider: { tableView, indexPath, item in
-                let cell: SearchHistoryCell = tableView.dequeue(indexPath: indexPath)
-                cell.searchText = item.searchText
-                cell.deleteAction = { [weak self] in
-                    self?.viewModel.delete(item)
-                    self?.reloadSnapshot()
-                }
-                return cell
+            cellProvider: { [weak self] in
+                self?.cellProviderAction(tableView: $0, indexPath: $1, item: $2)
             }
         )
         localDataSource.defaultRowAnimation = .fade
         return localDataSource
     }()
+
+    private func cellProviderAction(tableView: UITableView,
+                                    indexPath: IndexPath,
+                                    item: SearchHistoryItem) -> UITableViewCell {
+        let cell: SearchHistoryCell = tableView.dequeue(indexPath: indexPath)
+        cell.searchText = item.searchText
+        cell.deleteAction = { [weak self] in
+            self?.viewModel.delete(item)
+            self?.reloadSnapshot()
+        }
+        return cell
+    }
 
     init(viewModel: SearchHistoryViewModel,
          selectionAction: @escaping ((String) -> Void)) {
@@ -152,12 +158,12 @@ final class SearchHistoryViewController: UIViewController {
 
     func show() {
         if !viewModel.searchHistoryItems.isEmpty {
-            self.view.isHidden = false
+            view.isHidden = false
         }
     }
 
     func hide() {
-        self.view.isHidden = true
+        view.isHidden = true
     }
 
     private func configureUI() {
@@ -172,6 +178,14 @@ final class SearchHistoryViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+
+    private var clearAllHistory: () -> Void {
+        return { [weak self] in
+            self?.hide()
+            self?.viewModel.clearSearchHistory()
+            self?.reloadSnapshot()
+        }
     }
 }
 

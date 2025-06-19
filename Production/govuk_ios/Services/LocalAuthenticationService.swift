@@ -66,22 +66,14 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
                 return false
             }
         } else {
-            guard let error = evaluation.error else {
-                // No error provided, assume biometrics are not available
-                return false
-            }
-
-            switch error.code {
-            case .biometryNotEnrolled:
-                // Biometrics is supported but not set up on the device
-                return false
+            switch evaluation.error?.code {
             case .biometryNotAvailable:
                 switch deviceCapableAuthType {
                 case .touchID, .faceID:
                     // touchID, faceID setup but toggled off
                     return true
                 default:
-                    // Biometrics is not available on this device
+                    // Biometrics is not available on  device
                     return false
                 }
             default:
@@ -103,8 +95,7 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
 
     var availableAuthType: LocalAuthenticationType {
         guard canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics).canEvaluate else {
-            return canEvaluatePolicy(.deviceOwnerAuthentication).canEvaluate ?
-                .passcodeOnly : .none
+            return .none
         }
 
         switch context.biometryType {

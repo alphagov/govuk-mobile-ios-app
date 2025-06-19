@@ -6,7 +6,7 @@ import Authentication
 
 class MockAuthenticationService: AuthenticationServiceInterface {
     var _storedRefreshToken = true
-    var secureStoreRefreshToken: Bool {
+    var secureStoreRefreshTokenPresent: Bool {
         _storedRefreshToken
     }
 

@@ -30,7 +30,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
 
     func faceIdButtonAction() {
         trackNavigationEvent(buttonTitle, external: false)
-        if authenticationService.secureStoreRefreshToken {
+        if authenticationService.secureStoreRefreshTokenPresent {
             showSettingsAlert = true
         } else {
             localAuthenticationService.evaluatePolicy(
@@ -54,7 +54,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
 
     func touchIdToggleAction(enabled: Bool) {
         trackNavigationEvent(buttonTitle, external: false)
-        if authenticationService.secureStoreRefreshToken || enabled == false {
+        if authenticationService.secureStoreRefreshTokenPresent || enabled == false {
             localAuthenticationService.setTouchId(enabled: enabled)
             return
         }

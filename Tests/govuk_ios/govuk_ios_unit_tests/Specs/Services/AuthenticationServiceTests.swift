@@ -396,6 +396,40 @@ struct AuthenticationServiceTests {
 
         #expect(email == "josh.dubey1@digital.cabinet-office.gov.uk")
     }
+
+    @Test
+    func secureStoreRefreshTokenPresent_returnsTrue() {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
+        mockSecureStoreService._stubbedItemExistsResult = true
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
+        )
+
+        #expect(sut.secureStoreRefreshTokenPresent)
+    }
+
+    @Test
+    func secureStoreRefreshTokenPresent_returnsFalse() {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        let mockUserDefaults = MockUserDefaults()
+        mockSecureStoreService._stubbedItemExistsResult = false
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            userDefaults: mockUserDefaults,
+            returningUserService: mockReturningUserService
+        )
+
+        #expect(!sut.secureStoreRefreshTokenPresent)
+    }
 }
 
 private func createTokenResponse(_ jsonData: Data) -> TokenResponse {

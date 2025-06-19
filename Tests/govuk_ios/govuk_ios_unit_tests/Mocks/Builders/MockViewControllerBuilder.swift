@@ -237,4 +237,24 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedNotificationOnboardingViewPrivacyAction = viewPrivacyAction
         return _stubbedNotificationOnboardingViewController ?? UIViewController()
     }
+
+    var _stubbedFaceIdSettingsController: UIViewController?
+    override func faceIdSettings(
+        analyticsService: AnalyticsServiceInterface,
+        authenticationService: AuthenticationServiceInterface,
+        localAuthenticationService: LocalAuthenticationServiceInterface,
+        urlOpener: URLOpener
+    ) -> UIViewController {
+        return _stubbedFaceIdSettingsController ?? UIViewController()
+    }
+
+    var _stubbedTouchIdSettingsController: UIViewController?
+    override func touchIdSettings(
+        analyticsService: AnalyticsServiceInterface,
+        authenticationService: AuthenticationServiceInterface,
+        localAuthenticationService: LocalAuthenticationServiceInterface,
+        urlOpener: URLOpener
+    ) -> UIViewController {
+        return _stubbedTouchIdSettingsController ?? UIViewController()
+    }
 }

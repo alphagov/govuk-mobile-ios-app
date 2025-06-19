@@ -6,7 +6,13 @@ import LocalAuthentication
 class MockLAContext: LAContext {
     var _stubbedBiometricsEvaluatePolicyResult = false
     var _stubbedAuthenticationEvaluatePolicyResult = false
+    var _stubbedCanEvaluateError: LAError?
     override func canEvaluatePolicy(_ policy: LAPolicy, error: NSErrorPointer) -> Bool {
+        if let stubbedError = _stubbedCanEvaluateError {
+            error?.pointee = stubbedError as NSError
+        } else {
+            error?.pointee = nil
+        }
         switch policy {
         case .deviceOwnerAuthentication:
             return _stubbedAuthenticationEvaluatePolicyResult

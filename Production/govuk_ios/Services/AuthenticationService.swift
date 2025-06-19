@@ -10,7 +10,7 @@ protocol AuthenticationServiceInterface {
     var accessToken: String? { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
-    var secureStoreRefreshToken: Bool { get }
+    var secureStoreRefreshTokenPresent: Bool { get }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult
     func signOut()
@@ -34,7 +34,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private(set) var idToken: String?
     private(set) var accessToken: String?
 
-    var secureStoreRefreshToken: Bool {
+    var secureStoreRefreshTokenPresent: Bool {
         authenticatedSecureStoreService.checkItemExists(itemName: "refreshToken")
     }
 

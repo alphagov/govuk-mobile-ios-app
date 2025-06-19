@@ -286,4 +286,32 @@ struct ViewControllerBuilderTests {
 
         #expect(result is NotificationConsentAlertViewController)
     }
+
+    @Test
+    func faceIdSettings_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.faceIdSettings(
+            analyticsService: MockAnalyticsService(),
+            authenticationService: MockAuthenticationService(),
+            localAuthenticationService: MockLocalAuthenticationService(),
+            urlOpener: MockURLOpener()
+        )
+
+        let rootView = (result as? HostingViewController<FaceIdSettingsView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func touchIdSettings_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.touchIdSettings(
+            analyticsService: MockAnalyticsService(),
+            authenticationService: MockAuthenticationService(),
+            localAuthenticationService: MockLocalAuthenticationService(),
+            urlOpener: MockURLOpener()
+        )
+
+        let rootView = (result as? HostingViewController<TouchIdSettingsView>)?.rootView
+        #expect(rootView != nil)
+    }
 }

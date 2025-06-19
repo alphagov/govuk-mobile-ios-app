@@ -101,6 +101,7 @@ class SearchSuggestionsViewController: UIViewController {
         snapshot.appendSections([.suggestions])
         snapshot.appendItems(viewModel.suggestions, toSection: .suggestions)
         dataSource.apply(snapshot, animatingDifferences: true)
+        announceSuggestedSearches(count: viewModel.suggestions.count)
     }
 
     private func configureUI() {
@@ -122,6 +123,16 @@ class SearchSuggestionsViewController: UIViewController {
                 equalTo: view.safeAreaLayoutGuide.leadingAnchor
             )
         ])
+    }
+
+    private func announceSuggestedSearches(count: Int) {
+        guard count > 0 else { return }
+        var string = String.search.localized("searchSuggestionsAvailableAnnouncement")
+        if count > 1 {
+            string = String.search.localized("searchSuggestionsAvailableAnnouncementPlural")
+            string = "\(count) \(string)"
+        }
+        AccessibilityAnnouncerService().announce(string)
     }
 }
 

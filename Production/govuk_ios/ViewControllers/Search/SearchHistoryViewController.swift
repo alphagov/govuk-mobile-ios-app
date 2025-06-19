@@ -187,6 +187,17 @@ final class SearchHistoryViewController: UIViewController {
             self?.reloadSnapshot()
         }
     }
+
+    func announce() {
+        let count = viewModel.searchHistoryItems.count
+        guard count > 0 else { return }
+        var string = String.search.localized("previousSearchesAvailableAnnouncement")
+        if count > 1 {
+            string = String.search.localized("previousSearchesAvailableAnnouncementPlural")
+            string = "\(count) \(string)"
+        }
+        AccessibilityAnnouncerService().announce(string)
+    }
 }
 
 extension SearchHistoryViewController: UITableViewDelegate {

@@ -307,8 +307,13 @@ class SearchViewController: BaseViewController,
 }
 
 extension SearchViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchHistoryViewController.announce()
+    }
+
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         clearResults()
+        searchHistoryViewController.announce()
         return true
     }
 
@@ -325,6 +330,7 @@ extension SearchViewController: UITextFieldDelegate {
 
         guard !replacementText.isEmpty, replacementText.count >= 3
         else {
+            searchHistoryViewController.announce()
             clearResults()
             return true
         }

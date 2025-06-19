@@ -6,19 +6,19 @@ import GOVKit
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
 
-class FaceIdSettingsViewControllerSnapshotTests: SnapshotTestCase {
+class TouchIdSettingsViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedDeviceCapableAuthType = .faceID
+        mockLocalAuthenticationService._stubbedDeviceCapableAuthType = .touchID
         let viewModel = LocalAuthenticationSettingsViewModel(
             authenticationService: MockAuthenticationService(),
             localAuthenticationService: mockLocalAuthenticationService,
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener()
         )
-        let faceIdSettingsView = FaceIdSettingsView(viewModel: viewModel)
+        let touchIdSettingsView = TouchIdSettingsView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
-            rootView: faceIdSettingsView,
+            rootView: touchIdSettingsView,
             statusBarStyle: .darkContent
         )
         VerifySnapshotInNavigationController(
@@ -30,16 +30,16 @@ class FaceIdSettingsViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedDeviceCapableAuthType = .faceID
+        mockLocalAuthenticationService._stubbedDeviceCapableAuthType = .touchID
         let viewModel = LocalAuthenticationSettingsViewModel(
             authenticationService: MockAuthenticationService(),
             localAuthenticationService: mockLocalAuthenticationService,
             analyticsService: MockAnalyticsService(),
             urlOpener: MockURLOpener()
         )
-        let faceIdSettingsView = FaceIdSettingsView(viewModel: viewModel)
+        let touchIdSettingsView = TouchIdSettingsView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
-            rootView: faceIdSettingsView,
+            rootView: touchIdSettingsView,
             statusBarStyle: .darkContent
         )
         VerifySnapshotInNavigationController(
@@ -49,3 +49,4 @@ class FaceIdSettingsViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 }
+

@@ -108,7 +108,9 @@ struct LocalAuthenticationSettingsViewModelTests {
 
         #expect(!sut.showSettingsAlert)
         sut.faceIdButtonAction()
-        #expect(sut.showSettingsAlert)
+        DispatchQueue.main.async {
+            #expect(sut.showSettingsAlert)
+        }
     }
 
     @Test

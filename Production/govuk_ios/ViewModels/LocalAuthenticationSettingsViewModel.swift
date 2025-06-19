@@ -1,5 +1,6 @@
 import SwiftUI
 import GOVKit
+import LocalAuthentication
 
 class LocalAuthenticationSettingsViewModel: ObservableObject {
     @Published var title: String = ""
@@ -34,11 +35,16 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
             localAuthenticationService.evaluatePolicy(
                 .deviceOwnerAuthenticationWithBiometrics,
                 reason: "Unlock to proceed"
-            ) { [weak self] success, _ in
+            ) { [weak self] success, error in
                 if success {
                     self?.authenticationService.encryptRefreshToken()
                 } else {
-                    self?.showSettingsAlert = true
+                    // biometrics available but not app enrolled
+                    if let error = error as? LAError, error.code == .biometryNotAvailable {
+                        DispatchQueue.main.async {
+                            self?.showSettingsAlert = true
+                        }
+                    }
                 }
             }
         }

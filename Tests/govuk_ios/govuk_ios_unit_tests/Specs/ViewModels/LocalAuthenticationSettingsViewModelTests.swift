@@ -1,5 +1,7 @@
 import Testing
+import LocalAuthentication
 import UIKit
+import Combine
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
@@ -97,13 +99,13 @@ struct LocalAuthenticationSettingsViewModelTests {
     }
 
     @Test
-    func faceIdButtonAction_noStoredRefreshToken_evaluateError_setsShowSettingsAlert() {
+    func faceIdButtonAction_noStoredRefreshToken_evaluateError_setsShowSettingsAlert() async {
         let mockAuthService = MockAuthenticationService()
         let mockLocalAuthService = MockLocalAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let mockURLOpener = MockURLOpener()
         mockLocalAuthService._stubbedDeviceCapableAuthType = .faceID
-        mockLocalAuthService._stubbedEvaluatePolicyResult = (false, nil)
+        mockLocalAuthService._stubbedEvaluatePolicyResult = (false, LAError( .biometryNotAvailable))
         mockAuthService._storedRefreshToken = false
         let sut = LocalAuthenticationSettingsViewModel(
             authenticationService: mockAuthService,
@@ -113,10 +115,18 @@ struct LocalAuthenticationSettingsViewModelTests {
         )
 
         #expect(!sut.showSettingsAlert)
-        sut.faceIdButtonAction()
-//        DispatchQueue.main.async {
-//            #expect(sut.showSettingsAlert)
-//        }
+        var cancellables = Set<AnyCancellable>()
+        let result = await withCheckedContinuation { continuation in
+            sut.faceIdButtonAction()
+            let tester = LocalAuthSettingsViewModelTester(viewModel: sut)
+            tester.objectWillChange
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                    continuation.resume(returning: tester.viewModel)
+                    cancellables.removeAll()
+                }.store(in: &cancellables)
+        }
+        #expect(result.showSettingsAlert)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
                 String.settings.localized("localAuthenticationFaceIdButtonTitle"))
@@ -265,5 +275,21 @@ struct LocalAuthenticationSettingsViewModelTests {
         #expect(!sut.showSettingsAlert)
         #expect(mockURLOpener._receivedOpenIfPossibleUrlString ==
                 UIApplication.openSettingsURLString)
+    }
+}
+
+class LocalAuthSettingsViewModelTester: ObservableObject {
+    @Published var viewModel: LocalAuthenticationSettingsViewModel
+    private var cancellables: Set<AnyCancellable> = []
+
+    init(viewModel: LocalAuthenticationSettingsViewModel) {
+        self.viewModel = viewModel
+        observe()
+    }
+
+    private func observe() {
+        viewModel.objectWillChange
+            .sink(receiveValue: objectWillChange.send)
+            .store(in: &self.cancellables)
     }
 }

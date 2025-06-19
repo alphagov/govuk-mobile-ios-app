@@ -3,12 +3,23 @@ import UIKit
 import CoreData
 import GOVKit
 
-class SearchHistoryViewModel: NSObject {
+protocol SearchHistoryViewModelInterface {
+    var analyticsService: AnalyticsServiceInterface { get }
+    var searchHistoryItems: [SearchHistoryItem] { get }
+
+    func saveSearchHistoryItem(searchText: String,
+                               date: Date)
+    func clearSearchHistory()
+    func delete(_ item: SearchHistoryItem)
+}
+
+class SearchHistoryViewModel: NSObject,
+                              SearchHistoryViewModelInterface {
     private let searchService: SearchServiceInterface
     let analyticsService: AnalyticsServiceInterface
     var searchHistoryItems = [SearchHistoryItem]()
 
-    lazy var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? = {
+    private lazy var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? = {
         let localController = searchService.fetchedResultsController
         localController?.delegate = self
         return localController

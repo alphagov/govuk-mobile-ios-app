@@ -82,6 +82,7 @@ class SearchViewController: BaseViewController,
     private lazy var searchHistoryViewController: SearchHistoryViewController = {
         let localController = SearchHistoryViewController(
             viewModel: viewModel.searchHistoryViewModel,
+            accessibilityAnnouncer: AccessibilityAnnouncerService(),
             selectionAction: { searchText in
                 self.searchBar.text = searchText
                 self.didInvokeSearch(using: .history)

@@ -7,7 +7,7 @@ private typealias DataSource =
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchHistorySection, SearchHistoryItem>
 
 final class SearchHistoryViewController: UIViewController {
-    private let viewModel: SearchHistoryViewModel
+    private let viewModel: SearchHistoryViewModelInterface
     private let selectionAction: ((String) -> Void)
 
     private let tableView: UITableView = {
@@ -126,9 +126,13 @@ final class SearchHistoryViewController: UIViewController {
         return cell
     }
 
-    init(viewModel: SearchHistoryViewModel,
+    private let accessibilityAnnouncer: AccessibilityAnnouncerServiceInterface
+
+    init(viewModel: SearchHistoryViewModelInterface,
+         accessibilityAnnouncer: AccessibilityAnnouncerServiceInterface,
          selectionAction: @escaping ((String) -> Void)) {
         self.viewModel = viewModel
+        self.accessibilityAnnouncer = accessibilityAnnouncer
         self.selectionAction = selectionAction
         super.init(nibName: nil, bundle: nil)
     }
@@ -196,7 +200,7 @@ final class SearchHistoryViewController: UIViewController {
             string = String.search.localized("previousSearchesAvailableAnnouncementPlural")
             string = "\(count) \(string)"
         }
-        AccessibilityAnnouncerService().announce(string)
+        accessibilityAnnouncer.announce(string)
     }
 }
 

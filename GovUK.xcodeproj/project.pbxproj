@@ -804,6 +804,7 @@
 				govuk_ios/shared/Mocks/MockDeviceInformationProvider.swift,
 				govuk_ios/shared/Mocks/MockDisplayableTopic.swift,
 				govuk_ios/shared/Mocks/MockTimer.swift,
+				govuk_ios/shared/Mocks/Services/MockAccessibilityAnnouncerService.swift,
 				govuk_ios/shared/Mocks/Services/MockAnalyticsService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppConfigService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppLaunchService.swift,

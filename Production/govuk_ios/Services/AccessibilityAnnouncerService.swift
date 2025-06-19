@@ -1,7 +1,11 @@
 import Foundation
 import UIKit
 
-struct AccessibilityAnnouncerService {
+protocol AccessibilityAnnouncerServiceInterface {
+    func announce(_ value: String)
+}
+
+struct AccessibilityAnnouncerService: AccessibilityAnnouncerServiceInterface {
     func announce(_ value: String) {
         let message = NSAttributedString(
             string: value,

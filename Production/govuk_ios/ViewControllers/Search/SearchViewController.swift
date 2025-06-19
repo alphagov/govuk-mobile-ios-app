@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 import UIComponents
 import GOVKit
 
@@ -31,6 +32,7 @@ class SearchViewController: BaseViewController,
         )
         localController.view.translatesAutoresizingMaskIntoConstraints = false
         localController.view.backgroundColor = .govUK.fills.surfaceModal
+        localController.shouldAutoFocusVoiceover = false
         return localController
     }()
 
@@ -96,6 +98,7 @@ class SearchViewController: BaseViewController,
         self.viewModel = viewModel
         self.searchBar = searchBar
         super.init(analyticsService: viewModel.analyticsService)
+        shouldAutoFocusVoiceover = false
     }
 
     required init?(coder: NSCoder) {

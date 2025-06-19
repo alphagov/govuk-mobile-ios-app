@@ -1416,9 +1416,7 @@
 				166BDDB52C330D1C00437AE0 /* HomeViewController.swift */,
 				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
 				5DD4CB172D95491600459FB5 /* RecentActivityListViewController.swift */,
-				D0D9CFD62D3030640051EDDD /* SearchHistoryViewController.swift */,
-				16A99D6F2D36C60200C72DEB /* SearchSuggestionsViewController.swift */,
-				16EE1A402C6F8968005E820F /* SearchViewController.swift */,
+				5DE93E982E02CF63007E0DAE /* Search */,
 				4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */,
 				B04C2E7D2DA913B100F0F63E /* WebViewController.swift */,
 			);
@@ -1519,6 +1517,16 @@
 				5DD4CB062D95483100459FB5 /* RecentActivitySection.swift */,
 			);
 			path = RecentActivity;
+			sourceTree = "<group>";
+		};
+		5DE93E982E02CF63007E0DAE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D0D9CFD62D3030640051EDDD /* SearchHistoryViewController.swift */,
+				16A99D6F2D36C60200C72DEB /* SearchSuggestionsViewController.swift */,
+				16EE1A402C6F8968005E820F /* SearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		5DE970512C297637009D66C4 /* Model */ = {

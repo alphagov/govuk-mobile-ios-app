@@ -289,17 +289,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             default:
                 ""
             }
-
-            appOptionRows.append(
-                NavigationRow(
-                    id: "settings.biometrics.row",
-                    title: title,
-                    body: nil,
-                    action: { [weak self] in
-                        self?.localAuthenticationAction?()
-                    }
-                )
-            )
+            appOptionRows.append(biometricsRow())
         }
         appOptionRows.append(
             ToggleRow(
@@ -314,6 +304,22 @@ class SettingsViewModel: SettingsViewModelInterface {
             )
         )
         return appOptionRows
+    }
+
+    private func biometricsRow() -> GroupedListRow {
+        NavigationRow(
+            id: "settings.biometrics.row",
+            title: title,
+            body: nil,
+            action: { [weak self] in
+                guard let self = self else { return }
+                self.trackNavigationEvent(
+                    String.settings.localized(self.title),
+                    external: false
+                )
+                self.localAuthenticationAction?()
+            }
+        )
     }
 
     private func handleNotificationSettingsPressed(title: String) {

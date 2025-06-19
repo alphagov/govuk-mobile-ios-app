@@ -1,5 +1,5 @@
 import SwiftUI
-import UIComponents
+import GOVKit
 
 struct TouchIdSettingsView: View {
     @StateObject var viewModel: LocalAuthenticationSettingsViewModel
@@ -44,5 +44,13 @@ struct TouchIdSettingsView: View {
             }
             .accessibilityElement(children: .contain)
         }
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
+}
+
+extension TouchIdSettingsView: TrackableScreen {
+    var trackingTitle: String? { "Touch ID settings" }
+    var trackingName: String { "Touch ID settings" }
 }

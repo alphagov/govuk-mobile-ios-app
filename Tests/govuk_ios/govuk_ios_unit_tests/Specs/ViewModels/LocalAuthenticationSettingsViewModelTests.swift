@@ -67,6 +67,9 @@ struct LocalAuthenticationSettingsViewModelTests {
         #expect(!sut.showSettingsAlert)
         sut.faceIdButtonAction()
         #expect(sut.showSettingsAlert)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationFaceIdButtonTitle"))
     }
 
     @Test
@@ -88,6 +91,9 @@ struct LocalAuthenticationSettingsViewModelTests {
 
         #expect(!sut.showSettingsAlert)
         #expect(mockAuthService._encryptRefreshTokenCallSuccess)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationFaceIdButtonTitle"))
     }
 
     @Test
@@ -111,6 +117,9 @@ struct LocalAuthenticationSettingsViewModelTests {
         DispatchQueue.main.async {
             #expect(sut.showSettingsAlert)
         }
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationFaceIdButtonTitle"))
     }
 
     @Test
@@ -131,6 +140,9 @@ struct LocalAuthenticationSettingsViewModelTests {
         sut.touchIdToggleAction(enabled: false)
 
         #expect(!mockLocalAuthService._stubbedTouchIdEnabled)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationTouchIdButtonTitle"))
     }
 
     @Test
@@ -151,6 +163,9 @@ struct LocalAuthenticationSettingsViewModelTests {
         sut.touchIdToggleAction(enabled: true)
 
         #expect(mockLocalAuthService._stubbedTouchIdEnabled)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationTouchIdButtonTitle"))
     }
 
     @Test
@@ -171,6 +186,9 @@ struct LocalAuthenticationSettingsViewModelTests {
         sut.touchIdToggleAction(enabled: false)
 
         #expect(!mockLocalAuthService._stubbedTouchIdEnabled)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationTouchIdButtonTitle"))
     }
 
     @Test
@@ -196,6 +214,9 @@ struct LocalAuthenticationSettingsViewModelTests {
             #expect(sut.touchIdEnabled)
         }
         #expect(mockAuthService._encryptRefreshTokenCallSuccess)
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationTouchIdButtonTitle"))
     }
 
     @Test
@@ -220,6 +241,9 @@ struct LocalAuthenticationSettingsViewModelTests {
         DispatchQueue.main.async {
             #expect(!sut.touchIdEnabled)
         }
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
+                String.settings.localized("localAuthenticationTouchIdButtonTitle"))
     }
 
     @Test

@@ -29,6 +29,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
     }
 
     func faceIdButtonAction() {
+        trackNavigationEvent(buttonTitle, external: false)
         if authenticationService.secureStoreRefreshToken {
             showSettingsAlert = true
         } else {
@@ -36,13 +37,14 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
                 .deviceOwnerAuthenticationWithBiometrics,
                 reason: "Unlock to proceed"
             ) { [weak self] success, error in
+                guard let self = self else { return }
                 if success {
-                    self?.authenticationService.encryptRefreshToken()
+                    self.authenticationService.encryptRefreshToken()
                 } else {
                     // biometrics available but not app enrolled
                     if let error = error as? LAError, error.code == .biometryNotAvailable {
                         DispatchQueue.main.async {
-                            self?.showSettingsAlert = true
+                            self.showSettingsAlert = true
                         }
                     }
                 }
@@ -51,6 +53,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
     }
 
     func touchIdToggleAction(enabled: Bool) {
+        trackNavigationEvent(buttonTitle, external: false)
         if authenticationService.secureStoreRefreshToken || enabled == false {
             localAuthenticationService.setTouchId(enabled: enabled)
             return
@@ -80,6 +83,10 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
         showSettingsAlert = false
     }
 
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
     private func updateAuthType() {
         let authType = localAuthenticationService.deviceCapableAuthType
         switch localAuthenticationService.deviceCapableAuthType {
@@ -99,5 +106,14 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
 
     private func updateTouchIdEnabledStatus() {
         touchIdEnabled = localAuthenticationService.touchIdEnabled
+    }
+
+    private func trackNavigationEvent(_ title: String,
+                                      external: Bool) {
+        let event = AppEvent.buttonNavigation(
+            text: title,
+            external: external
+        )
+        analyticsService.track(event: event)
     }
 }

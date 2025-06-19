@@ -1,5 +1,5 @@
 import SwiftUI
-import UIComponents
+import GOVKit
 
 struct FaceIdSettingsView: View {
     @StateObject var viewModel: LocalAuthenticationSettingsViewModel
@@ -66,5 +66,13 @@ struct FaceIdSettingsView: View {
             }
             .accessibilityElement(children: .contain)
         }
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
+}
+
+extension FaceIdSettingsView: TrackableScreen {
+    var trackingTitle: String? { "Face ID settings" }
+    var trackingName: String { "Face ID settings" }
 }

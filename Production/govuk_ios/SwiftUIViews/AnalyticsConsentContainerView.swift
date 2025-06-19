@@ -70,13 +70,3 @@ struct AnalyticsConsentContainerView: View {
         }
     }
 }
-
-#Preview {
-    let viewModel = AnalyticsConsentContainerViewModel(
-        analyticsService: nil,
-        completion: {
-            // Do nothing
-        }
-    )
-    return AnalyticsConsentContainerView(viewModel: viewModel)
-}

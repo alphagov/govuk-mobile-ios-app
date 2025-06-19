@@ -80,6 +80,7 @@ struct LocalAuthenticationSettingsViewModelTests {
         let mockLocalAuthService = MockLocalAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let mockURLOpener = MockURLOpener()
+        mockLocalAuthService._stubbedFaceIdSkipped = true
         mockLocalAuthService._stubbedDeviceCapableAuthType = .faceID
         mockLocalAuthService._stubbedEvaluatePolicyResult = (true, nil)
         mockAuthService._storedRefreshToken = false
@@ -92,6 +93,7 @@ struct LocalAuthenticationSettingsViewModelTests {
         sut.faceIdButtonAction()
 
         #expect(!sut.showSettingsAlert)
+        #expect(!mockLocalAuthService.faceIdSkipped)
         #expect(mockAuthService._encryptRefreshTokenCallSuccess)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String ==
@@ -262,6 +264,7 @@ struct LocalAuthenticationSettingsViewModelTests {
         let mockLocalAuthService = MockLocalAuthenticationService()
         let mockAnalyticsService = MockAnalyticsService()
         let mockURLOpener = MockURLOpener()
+        mockLocalAuthService._stubbedFaceIdSkipped = true
         let sut = LocalAuthenticationSettingsViewModel(
             authenticationService: mockAuthService,
             localAuthenticationService: mockLocalAuthService,
@@ -272,6 +275,7 @@ struct LocalAuthenticationSettingsViewModelTests {
 
         #expect(sut.showSettingsAlert)
         sut.openSettings()
+        #expect(!mockLocalAuthService.faceIdSkipped)
         #expect(!sut.showSettingsAlert)
         #expect(mockURLOpener._receivedOpenIfPossibleUrlString ==
                 UIApplication.openSettingsURLString)

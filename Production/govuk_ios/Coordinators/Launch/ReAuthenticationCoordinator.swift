@@ -41,6 +41,10 @@ class ReAuthenticationCoordinator: BaseCoordinator {
             handleReauthFailure()
             return
         }
+        guard !localAuthenticationService.faceIdSkipped else {
+            handleReauthFailure()
+            return
+        }
 
         let refreshRequestResult = await authenticationService.tokenRefreshRequest()
 

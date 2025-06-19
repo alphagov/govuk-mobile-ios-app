@@ -383,4 +383,30 @@ struct LocalAuthenticationServiceTests {
 
         #expect(sut.biometricsPossible == false)
     }
+
+    @Test
+    func faceIdSkipped_returnsTrue() {
+        let mockLAContext = MockLAContext()
+        let mockUserDefaults = MockUserDefaults()
+        let sut = LocalAuthenticationService(
+            userDefaults: mockUserDefaults,
+            context: mockLAContext
+        )
+        sut.setFaceIdSkipped(true)
+
+        #expect(sut.faceIdSkipped)
+    }
+
+    @Test
+    func setFaceIdSkipped_setsValueInUserDefaults() {
+        let mockLAContext = MockLAContext()
+        let mockUserDefaults = MockUserDefaults()
+        let sut = LocalAuthenticationService(
+            userDefaults: mockUserDefaults,
+            context: mockLAContext
+        )
+        sut.setFaceIdSkipped(true)
+
+        #expect(mockUserDefaults.bool(forKey: .faceIdSkipped))
+    }
 }

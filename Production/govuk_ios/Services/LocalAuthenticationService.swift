@@ -15,7 +15,9 @@ protocol LocalAuthenticationServiceInterface {
     var biometricsHaveChanged: Bool { get }
     var biometricsPossible: Bool { get }
     var touchIdEnabled: Bool { get }
+    var faceIdSkipped: Bool { get }
 
+    func setFaceIdSkipped(_ skipped: Bool)
     func setTouchId(enabled: Bool)
     func setLocalAuthenticationOnboarded()
     func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?)
@@ -126,6 +128,14 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     var touchIdEnabled: Bool {
         availableAuthType == .touchID &&
         userDefaults.bool(forKey: .touchIdEnabled)
+    }
+
+    func setFaceIdSkipped(_ skipped: Bool) {
+        userDefaults.set(bool: skipped, forKey: .faceIdSkipped)
+    }
+
+    var faceIdSkipped: Bool {
+        userDefaults.bool(forKey: .faceIdSkipped)
     }
 
     private var biometricsPolicyState: Data? {

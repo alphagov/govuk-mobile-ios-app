@@ -4,6 +4,15 @@ import LocalAuthentication
 @testable import govuk_ios
 
 class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
+    var _stubbedFaceIdSkipped: Bool = false
+    var faceIdSkipped: Bool {
+        _stubbedFaceIdSkipped
+    }
+
+    func setFaceIdSkipped(_ skipped: Bool) {
+        _stubbedFaceIdSkipped = skipped
+    }
+    
     var _stubbedDeviceCapableAuthType = LocalAuthenticationType.faceID
     var deviceCapableAuthType: LocalAuthenticationType {
         _stubbedDeviceCapableAuthType

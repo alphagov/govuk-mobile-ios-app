@@ -164,4 +164,26 @@ class ReauthenticationCoordinatorTests {
         #expect(completion)
         #expect(mockNavigationController._setViewControllers?.count == .none)
     }
+
+    @Test @MainActor
+    func start_faceIdSkipped_callsCompletion() async {
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        mockLocalAuthenticationService._stubbedFaceIdSkipped = true
+        let completion = await withCheckedContinuation { continuation in
+            let sut = ReAuthenticationCoordinator(
+                navigationController: mockNavigationController,
+                coordinatorBuilder: mockCoordinatorBuilder,
+                authenticationService: mockAuthenticationService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            sut.start(url: nil)
+        }
+
+        #expect(completion)
+        #expect(mockNavigationController._setViewControllers?.count == .none)
+    }
 }

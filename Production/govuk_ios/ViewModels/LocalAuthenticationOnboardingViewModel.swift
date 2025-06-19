@@ -35,7 +35,9 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
             ) { [weak self] success, _ in
                 if success {
                     self?.authenticationService.encryptRefreshToken()
-                    self?.localAuthenticationService.setTouchId(enabled: true)
+                    if self?.localAuthenticationService.availableAuthType == .touchID {
+                        self?.localAuthenticationService.setTouchId(enabled: true)
+                    }
                 }
 
                 self?.localAuthenticationService.setLocalAuthenticationOnboarded()
@@ -47,6 +49,11 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
 
     var skipButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(localisedTitle: "Skip") { [weak self] in
+            if self?.localAuthenticationService.availableAuthType == .touchID {
+                self?.localAuthenticationService.setTouchId(enabled: false)
+            } else if self?.localAuthenticationService.availableAuthType == .faceID {
+                self?.localAuthenticationService.setFaceIdSkipped(true)
+            }
             self?.localAuthenticationService.setLocalAuthenticationOnboarded()
             self?.trackSkipEvent()
             self?.completionAction()

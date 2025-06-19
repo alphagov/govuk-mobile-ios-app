@@ -40,6 +40,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
                 guard let self = self else { return }
                 if success {
                     self.authenticationService.encryptRefreshToken()
+                    localAuthenticationService.setFaceIdSkipped(false)
                 } else {
                     // biometrics available but not app enrolled
                     if let error = error as? LAError, error.code == .biometryNotAvailable {
@@ -79,6 +80,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
     }
 
     func openSettings() {
+        localAuthenticationService.setFaceIdSkipped(false)
         urlOpener.openSettings()
         showSettingsAlert = false
     }

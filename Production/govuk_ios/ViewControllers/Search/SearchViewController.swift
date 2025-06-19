@@ -98,7 +98,7 @@ class SearchViewController: BaseViewController,
         self.viewModel = viewModel
         self.searchBar = searchBar
         super.init(analyticsService: viewModel.analyticsService)
-        self.shouldAutoFocusVoiceover = false
+        shouldAutoFocusVoiceover = false
     }
 
     required init?(coder: NSCoder) {

@@ -22,6 +22,7 @@ struct LocalAuthenticationOnboardingView: View {
                     .fontWeight(.thin)
                     .padding(.top, imageTopPadding)
                     .padding(.horizontal, 16)
+                    .accessibilityHidden(true)
                 Text(viewModel.title)
                     .multilineTextAlignment(.center)
                     .font(Font.govUK.largeTitleBold)

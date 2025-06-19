@@ -10,13 +10,13 @@ import SafariServices
 struct SafariCoordinatorTests {
     @Test
     @MainActor
-    func start_presentsSafariViewController() throws {
+    func start_presentsSafariViewController() {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedSafariViewController = expectedViewController
         let mockNavigationController = MockNavigationController()
         let subject = SafariCoordinator(
-            presentingViewController: mockNavigationController,
+            navigationController: mockNavigationController,
             viewControllerBuilder: mockViewControllerBuilder,
             configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
@@ -25,18 +25,16 @@ struct SafariCoordinatorTests {
         )
         subject.start()
 
-        let navigationController = mockNavigationController._presentedViewController as? UINavigationController
-        let unwrappedNavigationController = try #require(navigationController)
-        #expect(unwrappedNavigationController.topViewController === expectedViewController)
+        #expect(mockNavigationController._presentedViewController === expectedViewController)
     }
 
     @Test
     @MainActor
-    func start_externalBrowserDisabled_presentsSafariViewController() throws {
+    func start_externalBrowserDisabled_presentsSafariViewController() {
         let expectedURL = URL.arrange
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let subject = SafariCoordinator(
-            presentingViewController: MockNavigationController(),
+            navigationController: MockNavigationController(),
             viewControllerBuilder: mockViewControllerBuilder,
             configService: MockAppConfigService(),
             urlOpener: MockURLOpener(),
@@ -50,13 +48,13 @@ struct SafariCoordinatorTests {
 
     @Test
     @MainActor
-    func start_externalBrowserEnabled_opensURL() throws {
+    func start_externalBrowserEnabled_opensURL() {
         let expectedURL = URL.arrange
         let mockConfigService = MockAppConfigService()
         mockConfigService.features = [.externalBrowser]
         let mockURLOpener = MockURLOpener()
         let subject = SafariCoordinator(
-            presentingViewController: MockNavigationController(),
+            navigationController: MockNavigationController(),
             viewControllerBuilder: MockViewControllerBuilder(),
             configService: mockConfigService,
             urlOpener: mockURLOpener,
@@ -66,5 +64,67 @@ struct SafariCoordinatorTests {
         subject.start()
 
         #expect(mockURLOpener._receivedOpenIfPossibleUrl == expectedURL)
+    }
+
+    @Test
+    @MainActor
+    func start_fullScreen_configuresCorrectly() {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSafariViewController = expectedViewController
+        let subject = SafariCoordinator(
+            navigationController: MockNavigationController(),
+            viewControllerBuilder: mockViewControllerBuilder,
+            configService: MockAppConfigService(),
+            urlOpener: MockURLOpener(),
+            url: .arrange,
+            fullScreen: true
+        )
+        subject.start()
+
+        #expect(expectedViewController.isModalInPresentation == true)
+        #expect(expectedViewController.modalPresentationStyle == .fullScreen)
+    }
+
+    @Test
+    @MainActor
+    func start_notFullScreen_configuresCorrectly() {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSafariViewController = expectedViewController
+        let subject = SafariCoordinator(
+            navigationController: MockNavigationController(),
+            viewControllerBuilder: mockViewControllerBuilder,
+            configService: MockAppConfigService(),
+            urlOpener: MockURLOpener(),
+            url: .arrange,
+            fullScreen: false
+        )
+        subject.start()
+
+        #expect(expectedViewController.isModalInPresentation == true)
+        #expect(expectedViewController.modalPresentationStyle == .pageSheet)
+    }
+
+    @Test
+    @MainActor
+    func start_withPresentedViewController_presentsOnPresentedViewController() {
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSafariViewController = expectedViewController
+        let mockNavigationController = MockNavigationController()
+        let mockPresentedViewController = MockBaseViewController.mock
+        mockNavigationController._stubbedPresentedViewController = mockPresentedViewController
+        let subject = SafariCoordinator(
+            navigationController: mockNavigationController,
+            viewControllerBuilder: mockViewControllerBuilder,
+            configService: MockAppConfigService(),
+            urlOpener: MockURLOpener(),
+            url: .arrange,
+            fullScreen: false
+        )
+        subject.start()
+
+        #expect(mockPresentedViewController._presentedViewController == expectedViewController)
     }
 }

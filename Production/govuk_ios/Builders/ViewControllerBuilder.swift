@@ -36,6 +36,7 @@ class ViewControllerBuilder {
         let recentActivityAction: () -> Void
         let localAuthorityAction: () -> Void
         let editLocalAuthorityAction: () -> Void
+        let openURLAction: (URL) -> Void
         let openSearchAction: (SearchItem) -> Void
     }
 
@@ -51,6 +52,7 @@ class ViewControllerBuilder {
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
+            openURLAction: actions.openURLAction,
             openAction: actions.openSearchAction,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
@@ -262,6 +264,24 @@ class ViewControllerBuilder {
         return viewController
     }
 
+    func analyticsConsent(analyticsService: any AnalyticsServiceInterface,
+                          completion: @escaping () -> Void,
+                          viewPrivacyAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = AnalyticsConsentContainerViewModel(
+            analyticsService: analyticsService,
+            completion: completion,
+            viewPrivacyAction: viewPrivacyAction
+        )
+        let view = AnalyticsConsentContainerView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        return viewController
+    }
+
     func signOutConfirmation(authenticationService: AuthenticationServiceInterface,
                              analyticsService: AnalyticsServiceInterface,
                              completion: @escaping (Bool) -> Void) -> UIViewController {
@@ -419,8 +439,6 @@ class ViewControllerBuilder {
             url: url,
             configuration: config
         )
-        viewController.modalPresentationStyle = .formSheet
-        viewController.isModalInPresentation = true
         return viewController
     }
 

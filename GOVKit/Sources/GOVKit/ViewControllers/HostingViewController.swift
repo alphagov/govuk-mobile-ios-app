@@ -4,6 +4,7 @@ import SwiftUI
 public final class HostingViewController<T>: UIHostingController<T> where T: View {
     private let navigationBarHidden: Bool
     private let statusBarStyle: UIStatusBarStyle
+    public var shouldAutoFocusVoiceover: Bool = true
 
     public init(rootView: T,
                 navigationBarHidden: Bool = false,
@@ -34,6 +35,7 @@ public final class HostingViewController<T>: UIHostingController<T> where T: Vie
     }
 
     private func setVoiceoverFocus() {
+        guard shouldAutoFocusVoiceover else { return }
         UIAccessibility.post(
             notification: .screenChanged,
             argument: view

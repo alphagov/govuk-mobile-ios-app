@@ -132,9 +132,15 @@ struct SettingsCoordinatorTests {
         )
         subject.start()
         let settingsViewModel = mockViewControllerBuilder._receivedSettingsViewModel!
-        settingsViewModel.openAction?(Constants.API.privacyPolicyUrl, "Privacy Policy")
+        let params = SettingsViewModelURLParameters(
+            url: Constants.API.privacyPolicyUrl,
+            trackingTitle: "Privacy Policy",
+            fullScreen: false
+        )
+        settingsViewModel.openAction?(params)
         #expect(mockSafariCoordinator._startCalled)
         #expect(mockCoordinatorBuilder._receivedSafariCoordinatorURL == Constants.API.privacyPolicyUrl)
+        #expect(mockCoordinatorBuilder._receivedSafariCoordinatorFullScreen == .some(false))
     }
 
     @Test

@@ -224,11 +224,13 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _receivedSafariCoordinatorURL: URL?
+    var _receivedSafariCoordinatorFullScreen: Bool?
     var _stubbedSafariCoordinator: MockBaseCoordinator?
-    override func safari(presentingViewController: UIViewController,
+    override func safari(navigationController: UINavigationController,
                          url: URL,
                          fullScreen: Bool) -> BaseCoordinator {
         _receivedSafariCoordinatorURL = url
+        _receivedSafariCoordinatorFullScreen = fullScreen
         return _stubbedSafariCoordinator ?? MockBaseCoordinator()
     }
 }

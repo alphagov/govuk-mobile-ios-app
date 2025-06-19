@@ -4,14 +4,13 @@ import GOVKit
 import SafariServices
 
 class SafariCoordinator: BaseCoordinator {
-    private let presentingViewController: UIViewController
     private let viewControllerBuilder: ViewControllerBuilder
     private let configService: AppConfigServiceInterface
     private let urlOpener: URLOpener
     private let url: URL
     private let fullScreen: Bool
 
-    init(presentingViewController: UIViewController,
+    init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          configService: AppConfigServiceInterface,
          urlOpener: URLOpener,
@@ -22,9 +21,6 @@ class SafariCoordinator: BaseCoordinator {
         self.urlOpener = urlOpener
         self.url = url
         self.fullScreen = fullScreen
-        self.presentingViewController = presentingViewController
-        let navigationController = UINavigationController()
-        navigationController.isNavigationBarHidden = true
         super.init(navigationController: navigationController)
     }
 
@@ -38,12 +34,9 @@ class SafariCoordinator: BaseCoordinator {
 
     private func presentViewController(url: URL) {
         let viewController = viewControllerBuilder.safari(url: url)
-        root.setViewControllers([viewController], animated: false)
-        if fullScreen {
-            root.modalPresentationStyle = .fullScreen
-        } else {
-            root.modalPresentationStyle = .formSheet
-        }
-        presentingViewController.present(root, animated: true)
+        viewController.modalPresentationStyle = fullScreen ? .fullScreen : .pageSheet
+        viewController.isModalInPresentation = true
+        let presentedViewController = root.presentedViewController ?? root
+        presentedViewController.present(viewController, animated: true)
     }
 }

@@ -15,6 +15,7 @@ struct StoredLocalAuthorityWidgetView: View {
                     Text(viewModel.title)
                         .font(Font.govUK.title3Semibold)
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                        .accessibilityAddTraits(.isHeader)
                     Spacer()
                     Button {
                         viewModel.openEditViewAction()
@@ -42,10 +43,7 @@ struct StoredLocalAuthorityWidgetView: View {
         ForEach(viewModel.cardModels(), id: \.name) { item in
             StoredLocalAuthorityCardView(model: item)
                 .onTapGesture {
-                    viewModel.openURL(
-                        url: item.homepageUrl,
-                        title: item.name
-                    )
+                    viewModel.open(item: item)
                 }
                 .padding(.bottom, 16)
         }

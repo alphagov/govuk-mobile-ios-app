@@ -179,5 +179,5 @@ class GroupedListViewModel: SettingsViewModelInterface {
         // Do Nothing
     }
     var signoutAction: (() -> Void)?
-    var openAction: ((URL, String) -> Void)?
+    var openAction: ((SettingsViewModelURLParameters) -> Void)?
 }

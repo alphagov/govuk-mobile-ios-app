@@ -7,7 +7,7 @@ private typealias DataSource = UITableViewDiffableDataSource<SearchSuggestionsSe
 private typealias Snapshot = NSDiffableDataSourceSnapshot<SearchSuggestionsSection,
                                                           SearchSuggestion>
 
-class SearchSuggestionsViewController: BaseViewController {
+class SearchSuggestionsViewController: UIViewController {
     private let viewModel: SearchSuggestionsViewModel
     private let selectionAction: (String) -> Void
 
@@ -56,7 +56,7 @@ class SearchSuggestionsViewController: BaseViewController {
                 selectionAction: @escaping (String) -> Void) {
         self.viewModel = viewModel
         self.selectionAction = selectionAction
-        super.init(analyticsService: viewModel.analyticsService)
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
@@ -92,7 +92,7 @@ class SearchSuggestionsViewController: BaseViewController {
     }()
 
     func hide() {
-        self.view.isHidden = true
+        view.isHidden = true
     }
 
     func reloadSnapshot() {

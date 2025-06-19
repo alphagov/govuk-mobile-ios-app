@@ -70,9 +70,9 @@ class SettingsViewModelTests {
         let helpAndFeedbackRow = try #require(aboutSection.rows.last as? LinkRow)
         var openedURL: URL?
         var openedTitle: String?
-        sut.openAction = { url, title in
-            openedURL = url
-            openedTitle = title
+        sut.openAction = { params in
+            openedURL = params.url
+            openedTitle = params.trackingTitle
         }
         helpAndFeedbackRow.action()
         let expectedUrl = "https://www.gov.uk/contact/govuk-app?app_version=123%20(456)&phone=Apple%20iPhone16,2%2018.1"
@@ -115,9 +115,9 @@ class SettingsViewModelTests {
     func privacyPolicy_action_tracksEvent() throws {
         var receivedURL: URL?
         var receivedTitle: String?
-        sut.openAction = { url, title in
-            receivedURL = url
-            receivedTitle = title
+        sut.openAction = { params in
+            receivedURL = params.url
+            receivedTitle = params.trackingTitle
         }
         let linkSection = sut.listContent[4]
         let privacyPolicyRow = try #require(linkSection.rows[0] as? LinkRow)
@@ -130,9 +130,9 @@ class SettingsViewModelTests {
     func accessibilityStatement_action_tracksEvent() throws {
         var receivedURL: URL?
         var receivedTitle: String?
-        sut.openAction = { url, title in
-            receivedURL = url
-            receivedTitle = title
+        sut.openAction = { params in
+            receivedURL = params.url
+            receivedTitle = params.trackingTitle
         }
         let linkSection = sut.listContent[4]
         let accessibilityStatementRow = try #require(linkSection.rows[1] as? LinkRow)
@@ -154,9 +154,9 @@ class SettingsViewModelTests {
     func termsAndConditions_action_tracksEvent() throws {
         var receivedURL: URL?
         var receivedTitle: String?
-        sut.openAction = { url, title in
-            receivedURL = url
-            receivedTitle = title
+        sut.openAction = { params in
+            receivedURL = params.url
+            receivedTitle = params.trackingTitle
         }
         let linkSection = sut.listContent[4]
         let termsAndConditionsRow = try #require(linkSection.rows[3] as? LinkRow)
@@ -169,9 +169,9 @@ class SettingsViewModelTests {
     func helpAndFeedback_action_tracksEvent() throws {
         var receivedURL: URL?
         var receivedTitle: String?
-        sut.openAction = { url, title in
-            receivedURL = url
-            receivedTitle = title
+        sut.openAction = { params in
+            receivedURL = params.url
+            receivedTitle = params.trackingTitle
         }
         let aboutTheAppSection = sut.listContent[3]
         let helpAndFeedbackRow = try #require(aboutTheAppSection.rows.last as? LinkRow)
@@ -183,6 +183,10 @@ class SettingsViewModelTests {
 
     @Test
     func manageYourAccount_action_tracksEvent() throws {
+        var receivedURL: URL?
+        sut.openAction = { params in
+            receivedURL = params.url
+        }
         let accountSection = sut.listContent[0]
         let manageAccountRow = try #require(accountSection.rows.last as? LinkRow)
 
@@ -190,7 +194,7 @@ class SettingsViewModelTests {
 
         let receivedTrackingTitle = mockAnalyticsService._trackedEvents.first?.params?["text"] as? String
         let expectedUrl = "https://home.account.gov.uk/"
-        #expect(mockURLOpener._receivedOpenIfPossibleUrl?.absoluteString == expectedUrl)
+        #expect(receivedURL?.absoluteString == expectedUrl)
         #expect(receivedTrackingTitle == manageAccountRow.title)
     }
 

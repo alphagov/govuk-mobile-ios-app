@@ -74,11 +74,6 @@ class SearchSuggestionsViewController: UIViewController {
         reloadSnapshot()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("Test")
-    }
-
     private lazy var dataSource: DataSource = {
         let localDataSource = DataSource(
             tableView: tableView,

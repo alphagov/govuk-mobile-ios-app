@@ -212,6 +212,24 @@ class ViewControllerBuilder {
         return viewController
     }
 
+    func analyticsConsent(analyticsService: any AnalyticsServiceInterface,
+                          completion: @escaping () -> Void,
+                          viewPrivacyAction: @escaping () -> Void) -> UIViewController {
+        let viewModel = AnalyticsConsentContainerViewModel(
+            analyticsService: analyticsService,
+            completion: completion,
+            viewPrivacyAction: viewPrivacyAction
+        )
+        let view = AnalyticsConsentContainerView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        return viewController
+    }
+
     func signOutConfirmation(authenticationService: AuthenticationServiceInterface,
                              analyticsService: AnalyticsServiceInterface,
                              completion: @escaping (Bool) -> Void) -> UIViewController {

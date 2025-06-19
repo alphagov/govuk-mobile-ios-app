@@ -33,6 +33,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedHomeViewController ?? UIViewController()
     }
 
+    var _receivedAnalyticsConsentViewPrivacyAction: (() -> Void)?
+    var _stubbedAnalyticsConsentViewController: UIViewController?
+    override func analyticsConsent(analyticsService: any AnalyticsServiceInterface,
+                                   completion: @escaping () -> Void,
+                                   viewPrivacyAction: @escaping () -> Void) -> UIViewController {
+        _receivedAnalyticsConsentViewPrivacyAction = viewPrivacyAction
+        return _stubbedAnalyticsConsentViewController ?? UIViewController()
+    }
+
     var _stubbedSettingsViewController: UIViewController?
     var _receivedSettingsViewModel: (any SettingsViewModelInterface)?
     override func settings<T: SettingsViewModelInterface>(viewModel: T) -> UIViewController {

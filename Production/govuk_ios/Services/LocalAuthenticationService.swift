@@ -66,19 +66,22 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
                 return false
             }
         } else {
-            switch evaluation.error?.code {
-            case .biometryNotAvailable:
-                switch deviceCapableAuthType {
-                case .touchID, .faceID:
-                    // touchID, faceID setup but toggled off
-                    return true
-                default:
-                    // Biometrics is not available on  device
-                    return false
-                }
+            return isBiometrySetup(error: evaluation.error)
+        }
+    }
+
+    private func isBiometrySetup(error: LAError?) -> Bool {
+        if error?.code == .biometryNotAvailable {
+            switch deviceCapableAuthType {
+            case .touchID, .faceID:
+                // touchID, faceID setup but toggled off
+                return true
             default:
+                // Biometrics is not available on  device
                 return false
             }
+        } else {
+            return false
         }
     }
 

@@ -54,7 +54,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
 
     func touchIdToggleAction(enabled: Bool) {
         trackNavigationEvent(buttonTitle, external: false)
-        if authenticationService.secureStoreRefreshTokenPresent || enabled == false {
+        if authenticationService.secureStoreRefreshTokenPresent || !enabled {
             localAuthenticationService.setTouchId(enabled: enabled)
             return
         }
@@ -89,7 +89,7 @@ class LocalAuthenticationSettingsViewModel: ObservableObject {
 
     private func updateAuthType() {
         let authType = localAuthenticationService.deviceCapableAuthType
-        switch localAuthenticationService.deviceCapableAuthType {
+        switch authType {
         case .touchID:
             title = String.settings.localized("touchIdTitle")
             body = String.settings.localized("localAuthenticationTouchIdBody")

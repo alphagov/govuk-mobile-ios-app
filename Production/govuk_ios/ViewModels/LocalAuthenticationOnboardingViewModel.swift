@@ -71,7 +71,7 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
 
     private func updateAuthType() {
         let authType = localAuthenticationService.availableAuthType
-        switch localAuthenticationService.availableAuthType {
+        switch authType {
         case .touchID:
             iconName = "touchid"
             title = String.onboarding.localized("touchIdEnrolmentTitle")

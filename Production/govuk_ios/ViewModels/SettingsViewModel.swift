@@ -303,7 +303,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             appOptionRows.append(notificationRow)
         }
         if localAuthenticationService.biometricsPossible {
-            let title = switch localAuthenticationService.deviceCapableAuthType {
+            let biometricsTitle = switch localAuthenticationService.deviceCapableAuthType {
             case .touchID:
                 String.settings.localized("touchIdTitle")
             case .faceID:
@@ -311,7 +311,7 @@ class SettingsViewModel: SettingsViewModelInterface {
             default:
                 ""
             }
-            appOptionRows.append(biometricsRow(title: title))
+            appOptionRows.append(biometricsRow(title: biometricsTitle))
         }
         appOptionRows.append(
             ToggleRow(

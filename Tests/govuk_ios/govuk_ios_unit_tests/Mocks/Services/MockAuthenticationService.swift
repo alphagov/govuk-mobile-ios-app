@@ -5,6 +5,11 @@ import Authentication
 @testable import govuk_ios
 
 class MockAuthenticationService: AuthenticationServiceInterface {
+    var _storedRefreshToken = true
+    var secureStoreRefreshTokenPresent: Bool {
+        _storedRefreshToken
+    }
+
     var _stubbedUserEmail: String?
     var userEmail: String? {
         _stubbedUserEmail

@@ -8,7 +8,7 @@ import GOVKit
 class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_faceID_light_rendersCorrectly() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .faceID
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
@@ -31,7 +31,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
 
     func test_loadInNavigationController_faceID_dark_rendersCorrectly() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .faceID
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
@@ -54,7 +54,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
 
     func test_loadInNavigationController_touchID_light_rendersCorrectly() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .touchID
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let viewModel = LocalAuthenticationOnboardingViewModel(
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
@@ -77,7 +77,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
 
     func test_loadInNavigationController_touchID_dark_rendersCorrectly() {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        mockLocalAuthenticationService._stubbedAuthType = .touchID
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let viewModel = LocalAuthenticationOnboardingViewModel(
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,

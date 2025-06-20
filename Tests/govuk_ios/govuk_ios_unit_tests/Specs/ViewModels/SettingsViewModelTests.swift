@@ -17,6 +17,7 @@ class SettingsViewModelTests {
     let mockDeviceInformationProvider = MockDeviceInformationProvider()
     let mockNotificationsService = MockNotificationService()
     let mockAuthenticationService = MockAuthenticationService()
+    let mockLocalAuthenticationService = MockLocalAuthenticationService()
 
     init() {
         mockVersionProvider.versionNumber = "123"
@@ -31,7 +32,8 @@ class SettingsViewModelTests {
             deviceInformationProvider: mockDeviceInformationProvider,
             authenticationService: mockAuthenticationService,
             notificationService: mockNotificationsService,
-            notificationCenter: .default
+            notificationCenter: .default,
+            localAuthenticationService: mockLocalAuthenticationService
         )
     }
 
@@ -45,7 +47,7 @@ class SettingsViewModelTests {
         try #require(sut.listContent.count == 5)
         try #require(sut.listContent[0].rows.count == 2)
         try #require(sut.listContent[1].rows.count == 1)
-        try #require(sut.listContent[2].rows.count == 2)
+        try #require(sut.listContent[2].rows.count == 3)
         try #require(sut.listContent[3].rows.count == 2)
         try #require(sut.listContent[4].rows.count == 4)
 
@@ -224,7 +226,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: .init()
+                notificationCenter: .init(),
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             subscription = sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
@@ -259,7 +262,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: .init()
+                notificationCenter: .init(),
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             subscription = sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
@@ -294,7 +298,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: .init()
+                notificationCenter: .init(),
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             subscription = sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
@@ -327,7 +332,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: .init()
+                notificationCenter: .init(),
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
@@ -364,7 +370,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: .init()
+                notificationCenter: .init(),
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
@@ -401,7 +408,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: .init()
+                notificationCenter: .init(),
+                localAuthenticationService: MockLocalAuthenticationService()
              )
             sut.$notificationsPermissionState
                 .receive(on: DispatchQueue.main)
@@ -434,7 +442,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: mockNotifcationCenter
+                notificationCenter: mockNotifcationCenter,
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             let tester = SettingsViewModelTester(settingsViewModel: sut)
             let expectedPermission: NotificationPermissionState = .denied
@@ -472,7 +481,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: mockNotifcationCenter
+                notificationCenter: mockNotifcationCenter,
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             let tester = SettingsViewModelTester(settingsViewModel: sut)
             let expectedPermission: NotificationPermissionState = .denied
@@ -510,7 +520,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: mockNotifcationCenter
+                notificationCenter: mockNotifcationCenter,
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             let tester = SettingsViewModelTester(settingsViewModel: sut)
             let expectedPermission: NotificationPermissionState = .authorized
@@ -548,7 +559,8 @@ class SettingsViewModelTests {
                 deviceInformationProvider: MockDeviceInformationProvider(),
                 authenticationService: MockAuthenticationService(),
                 notificationService: mockNotificationService,
-                notificationCenter: mockNotifcationCenter
+                notificationCenter: mockNotifcationCenter,
+                localAuthenticationService: MockLocalAuthenticationService()
             )
             let tester = SettingsViewModelTester(settingsViewModel: sut)
             let expectedPermission: NotificationPermissionState = .authorized

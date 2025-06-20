@@ -69,7 +69,6 @@ class AuthenticationCoordinator: BaseCoordinator {
     }
 
     private var shouldEncryptRefreshToken: Bool {
-        localAuthenticationService.authenticationOnboardingFlowSeen &&
-        localAuthenticationService.isLocalAuthenticationEnabled
+        localAuthenticationService.authenticationOnboardingFlowSeen
     }
 }

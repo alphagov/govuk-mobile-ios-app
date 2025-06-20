@@ -19,6 +19,6 @@ struct WelcomeOnboardingViewModelTests {
         #expect(completion)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
-        #expect(event?.params?["text"] as? String == "Get started")
+        #expect(event?.params?["text"] as? String == "Continue")
     }
 }

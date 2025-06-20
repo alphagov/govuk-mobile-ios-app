@@ -78,6 +78,17 @@
         }
       }
     },
+    "faceIdTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID"
+          }
+        }
+      }
+    },
     "helpAndFeedbackSettingsTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -85,6 +96,61 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Help and feedback"
+          }
+        }
+      }
+    },
+    "localAuthenticationFaceIdBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens your phone’s settings app, where you can turn Face ID on or off for the app.\n\nIf you have Face ID turned on, you’ll be able to use your face to unlock the app within 30 days of entering your GOV.UK One Login details.\n\nIf you do not want to use Face ID, you can use your phone’s passcode instead.\n\nAnyone who can unlock your phone with their face or with your phone’s passcode might be able to access your app.\n\nYou can turn off Face ID at any time."
+          }
+        }
+      }
+    },
+    "localAuthenticationFaceIdButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Face ID settings"
+          }
+        }
+      }
+    },
+    "localAuthenticationSettingsAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone's Face ID settings"
+          }
+        }
+      }
+    },
+    "localAuthenticationTouchIdBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you have Touch ID turned on, you’ll be able to use your fingerprint to unlock the app within 30 days of entering your GOV.UK One Login details.\n\nIf you do not want to use Touch ID, you can use your phone’s passcode instead.\n\nAnyone who can unlock your phone with their fingerprint or with your phone’s passcode might be able to access your app.\n\nYou can turn off Touch ID at any time."
+          }
+        }
+      }
+    },
+    "localAuthenticationTouchIdButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock app with Touch ID"
           }
         }
       }
@@ -239,6 +305,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terms and conditions"
+          }
+        }
+      }
+    },
+    "touchIdTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch ID"
           }
         }
       }

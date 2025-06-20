@@ -30,18 +30,17 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
     var enrolButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(localisedTitle: enrolButtonTitle) { [weak self] in
             self?.localAuthenticationService.evaluatePolicy(
-                .deviceOwnerAuthentication,
+                .deviceOwnerAuthenticationWithBiometrics,
                 reason: "Unlock to proceed"
-            ) { [weak self] success, error in
+            ) { [weak self] success, _ in
                 if success {
                     self?.authenticationService.encryptRefreshToken()
-                    self?.localAuthenticationService.setLocalAuthenticationEnabled(true)
-                } else if let laError = error as? LAError, laError.code == .userCancel {
-                    self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
-                } else {
-                    self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
+                    if self?.localAuthenticationService.availableAuthType == .touchID {
+                        self?.localAuthenticationService.setTouchId(enabled: true)
+                    }
                 }
 
+                self?.localAuthenticationService.setLocalAuthenticationOnboarded()
                 self?.trackEnrolEvent()
                 self?.completionAction()
             }
@@ -50,7 +49,12 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
 
     var skipButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(localisedTitle: "Skip") { [weak self] in
-            self?.localAuthenticationService.setLocalAuthenticationEnabled(false)
+            if self?.localAuthenticationService.availableAuthType == .touchID {
+                self?.localAuthenticationService.setTouchId(enabled: false)
+            } else if self?.localAuthenticationService.availableAuthType == .faceID {
+                self?.localAuthenticationService.setFaceIdSkipped(true)
+            }
+            self?.localAuthenticationService.setLocalAuthenticationOnboarded()
             self?.trackSkipEvent()
             self?.completionAction()
         }
@@ -73,8 +77,8 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
     }
 
     private func updateAuthType() {
-        let authType = localAuthenticationService.authType
-        switch localAuthenticationService.authType {
+        let authType = localAuthenticationService.availableAuthType
+        switch authType {
         case .touchID:
             iconName = "touchid"
             title = String.onboarding.localized("touchIdEnrolmentTitle")

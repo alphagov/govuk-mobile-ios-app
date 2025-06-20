@@ -83,7 +83,8 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             deviceInformationProvider: DeviceInformationProvider(),
             authenticationService: container.authenticationService.resolve(),
-            notificationService: container.notificationService.resolve()
+            notificationService: container.notificationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve()
         )
     }
 
@@ -379,6 +380,19 @@ class CoordinatorBuilder {
             urlOpener: UIApplication.shared,
             url: url,
             fullScreen: fullScreen
+        )
+    }
+
+    func localAuthenticationSettings(
+        navigationController: UINavigationController
+    ) -> BaseCoordinator {
+        LocalAuthenticationSettingsCoordinator(
+            navigationController: navigationController,
+            authenticationService: container.authenticationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
+            viewControllerBuilder: ViewControllerBuilder(),
+            urlOpener: UIApplication.shared
         )
     }
 }

@@ -26,11 +26,22 @@ class ReAuthenticationCoordinator: BaseCoordinator {
     }
 
     private func reauthenticate() async {
-        guard localAuthenticationService.authenticationOnboardingFlowSeen else {
+        guard localAuthenticationService.canEvaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics
+        ).canEvaluate else {
             completionAction()
             return
         }
         guard !localAuthenticationService.biometricsHaveChanged else {
+            handleReauthFailure()
+            return
+        }
+        guard localAuthenticationService.availableAuthType == .faceID ||
+                localAuthenticationService.touchIdEnabled else {
+            handleReauthFailure()
+            return
+        }
+        guard !localAuthenticationService.faceIdSkipped else {
             handleReauthFailure()
             return
         }

@@ -25,7 +25,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             deviceInformationProvider: MockDeviceInformationProvider(),
             authenticationService: authenticationService,
             notificationService: notificationService,
-            notificationCenter: .default
+            notificationCenter: .default,
+            localAuthenticationService: MockLocalAuthenticationService()
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -59,7 +60,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             deviceInformationProvider: MockDeviceInformationProvider(),
             authenticationService: authenticationService,
             notificationService: notificationService,
-            notificationCenter: .default
+            notificationCenter: .default,
+            localAuthenticationService: MockLocalAuthenticationService()
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -94,7 +96,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             deviceInformationProvider: MockDeviceInformationProvider(),
             authenticationService: authenticationService,
             notificationService: notificationService,
-            notificationCenter: .default
+            notificationCenter: .default,
+            localAuthenticationService: MockLocalAuthenticationService()
         )
         let settingsContentView = SettingsView(
             viewModel: viewModel
@@ -127,7 +130,8 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
             deviceInformationProvider: MockDeviceInformationProvider(),
             authenticationService: authenticationService,
             notificationService: notificationService,
-            notificationCenter: .default
+            notificationCenter: .default,
+            localAuthenticationService: MockLocalAuthenticationService()
         )
         
         let settingsContentView = SettingsView(
@@ -160,6 +164,7 @@ class SettingsViewControllerSnapshotTests: SnapshotTestCase {
 }
 
 class GroupedListViewModel: SettingsViewModelInterface {
+    var localAuthenticationAction: (() -> Void)?
     func updateNotificationPermissionState() {}
     var notificationsAction: (() -> Void)?
     var displayNotificationSettingsAlert: Bool = false

@@ -17,17 +17,20 @@ protocol AuthenticationServiceClientInterface {
 
 class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let appAuthSession: AppAuthSessionWrapperInterface
+    private let configService: AppConfigServiceInterface
     private let appEnvironmentService: AppEnvironmentServiceInterface
     private let oidAuthService: OIDAuthorizationServiceWrapperInterface
     private let revokeTokenService: APIServiceClientInterface
     private let appAttestService: AppAttestServiceInterface
 
     init(appEnvironmentService: AppEnvironmentServiceInterface,
+         configService: AppConfigServiceInterface,
          appAuthSession: AppAuthSessionWrapperInterface,
          oidAuthService: OIDAuthorizationServiceWrapperInterface,
          revokeTokenServiceClient: APIServiceClientInterface,
          appAttestService: AppAttestServiceInterface) {
         self.appEnvironmentService = appEnvironmentService
+        self.configService = configService
         self.appAuthSession = appAuthSession
         self.oidAuthService = oidAuthService
         self.revokeTokenService = revokeTokenServiceClient

@@ -48,6 +48,10 @@ public struct Constants {
 
         public static var defaultSearchPath: String = "/v0_1/search.json"
 
+        public static var remoteAuthenticationURL: URL?
+
+        public static var remoteAuthenticationClientID: String?
+
         public static let authenticationCallbackUri: String = "govuk://govuk/login-auth-callback"
 
         public static var defaultLocalAuthorityURL: URL = URL(

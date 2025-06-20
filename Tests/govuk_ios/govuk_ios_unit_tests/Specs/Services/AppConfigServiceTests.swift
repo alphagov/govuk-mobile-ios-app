@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Testing
+import GOVKit
 
 @testable import govuk_ios
 
@@ -26,6 +27,40 @@ struct AppConfigServiceTests {
         }
 
         #expect(result.getError() == .invalidSignature)
+    }
+
+    @Test
+    func fetchAppConfig_containsAuthCreds_setsCreds() async throws {
+        Constants.API.remoteAuthenticationURL = nil
+        Constants.API.remoteAuthenticationClientID = nil
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            let result = Config.arrange(
+                authenticationIssuerBaseUrl: "https:/www.test.com",
+                authenticationIssuerClientId: "test123"
+            ).toResult()
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+        }
+
+        #expect(Constants.API.remoteAuthenticationURL?.absoluteString == "https:/www.test.com")
+        #expect(Constants.API.remoteAuthenticationClientID == "test123")
+    }
+
+    @Test
+    func fetchAppConfig_noAuthCreds_doesntSetCreds() async throws {
+        Constants.API.remoteAuthenticationURL = nil
+        Constants.API.remoteAuthenticationClientID = nil
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            let result = Config.arrange(
+                authenticationIssuerBaseUrl: nil,
+                authenticationIssuerClientId: nil
+            ).toResult()
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
+        }
+
+        #expect(Constants.API.remoteAuthenticationClientID == nil)
+        #expect(Constants.API.remoteAuthenticationURL == nil)
     }
 
     @Test

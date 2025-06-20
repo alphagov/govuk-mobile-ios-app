@@ -39,6 +39,7 @@ public final class AppConfigService: AppConfigServiceInterface {
             }
         )
         updateSearch(urlString: config.searchApiUrl)
+        updateAuth(config: config)
     }
 
     private func updateSearch(urlString: String?) {
@@ -50,10 +51,16 @@ public final class AppConfigService: AppConfigServiceInterface {
         Container.shared.reregisterSearchAPIClient(url: url)
     }
 
+    private func updateAuth(config: Config) {
+        guard let urlString = config.authenticationIssuerBaseUrl,
+              let url = URL(string: urlString),
+              let clientID = config.authenticationIssuerClientId
+        else { return }
+        Constants.API.remoteAuthenticationURL = url
+        Constants.API.remoteAuthenticationClientID = clientID
+    }
+
     func isFeatureEnabled(key: Feature) -> Bool {
-        if case .localServices = key {
-            return true
-        }
-        return featureFlags[key.rawValue] ?? false
+        featureFlags[key.rawValue] ?? false
     }
 }

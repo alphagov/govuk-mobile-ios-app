@@ -8,4 +8,5 @@ struct Config: Decodable {
     let lastUpdated: String
     let searchApiUrl: String?
     var authenticationIssuerBaseUrl: String?
+    let authenticationIssuerClientId: String?
 }

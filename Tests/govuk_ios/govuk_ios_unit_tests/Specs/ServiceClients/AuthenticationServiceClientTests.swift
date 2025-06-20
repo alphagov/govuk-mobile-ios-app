@@ -14,6 +14,7 @@ struct AuthenticationServiceClientTests {
         let mockAppEnvironmentService = MockAppEnvironmentService()
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
@@ -40,6 +41,7 @@ struct AuthenticationServiceClientTests {
         appAuthSessionWrapper._mockAuthenticationSession._shouldReturnError = true
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
@@ -62,6 +64,7 @@ struct AuthenticationServiceClientTests {
         let mockAppEnvironmentService = MockAppEnvironmentService()
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
@@ -89,6 +92,7 @@ struct AuthenticationServiceClientTests {
         let mockAppEnvironmentService = MockAppEnvironmentService()
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
@@ -112,6 +116,7 @@ struct AuthenticationServiceClientTests {
         let mockAppEnvironmentService = MockAppEnvironmentService()
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
@@ -137,6 +142,7 @@ struct AuthenticationServiceClientTests {
         mockRevokeTokenClient._stubbedSendResponse = .success(Data())
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: mockRevokeTokenClient,
@@ -161,6 +167,7 @@ struct AuthenticationServiceClientTests {
         mockRevokeTokenClient._stubbedSendResponse = .failure(TestError.fakeNetwork)
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: mockRevokeTokenClient,
@@ -187,6 +194,7 @@ struct AuthenticationServiceClientTests {
         mockRevokeTokenClient._stubbedSendResponse = .success(Data())
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
+            configService: MockAppConfigService(),
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: mockRevokeTokenClient,

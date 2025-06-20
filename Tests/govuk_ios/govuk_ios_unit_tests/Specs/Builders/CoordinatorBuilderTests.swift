@@ -373,4 +373,14 @@ struct CoordinatorBuilderTests {
 
         #expect(coordinator is SafariCoordinator)
     }
+
+    @Test
+    func localAuthenticationSettings_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.localAuthenticationSettings(
+            navigationController: UINavigationController()
+        )
+
+        #expect(coordinator is LocalAuthenticationSettingsCoordinator)
+    }
 }

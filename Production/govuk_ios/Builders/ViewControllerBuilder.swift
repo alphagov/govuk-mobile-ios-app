@@ -171,6 +171,58 @@ class ViewControllerBuilder {
         return HostingViewController(rootView: view)
     }
 
+    func faceIdSettings(
+        analyticsService: AnalyticsServiceInterface,
+        authenticationService: AuthenticationServiceInterface,
+        localAuthenticationService: LocalAuthenticationServiceInterface,
+        urlOpener: URLOpener
+    ) -> UIViewController {
+        let viewModel = LocalAuthenticationSettingsViewModel(
+            authenticationService: authenticationService,
+            localAuthenticationService: localAuthenticationService,
+            analyticsService: analyticsService,
+            urlOpener: urlOpener
+        )
+        let localAuthenticationSettingsView = FaceIdSettingsView(
+            viewModel: viewModel
+        )
+
+        let viewController = HostingViewController(
+            rootView: localAuthenticationSettingsView,
+            statusBarStyle: .darkContent
+        )
+        viewController.title = viewModel.title
+
+        viewController.navigationItem.largeTitleDisplayMode = .always
+        return viewController
+    }
+
+    func touchIdSettings(
+        analyticsService: AnalyticsServiceInterface,
+        authenticationService: AuthenticationServiceInterface,
+        localAuthenticationService: LocalAuthenticationServiceInterface,
+        urlOpener: URLOpener
+    ) -> UIViewController {
+        let viewModel = LocalAuthenticationSettingsViewModel(
+            authenticationService: authenticationService,
+            localAuthenticationService: localAuthenticationService,
+            analyticsService: analyticsService,
+            urlOpener: urlOpener
+        )
+        let touchIdSettingsView = TouchIdSettingsView(
+            viewModel: viewModel
+        )
+
+        let viewController = HostingViewController(
+            rootView: touchIdSettingsView,
+            statusBarStyle: .darkContent
+        )
+        viewController.title = viewModel.title
+
+        viewController.navigationItem.largeTitleDisplayMode = .always
+        return viewController
+    }
+
     func notificationSettings(analyticsService: AnalyticsServiceInterface,
                               completeAction: @escaping () -> Void,
                               dismissAction: @escaping () -> Void,
@@ -421,3 +473,4 @@ class ViewControllerBuilder {
         return viewController
     }
 }
+// swiftlint:enable file_length

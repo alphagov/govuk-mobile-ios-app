@@ -1078,7 +1078,6 @@
 		5D26A75F2C92E054009902DD /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				D0839ADD2DE73E5F00CA5C27 /* AppAttestation */,
 				5D26A7602C92E069009902DD /* Analytics */,
 			);
 			path = Clients;
@@ -1671,13 +1670,6 @@
 				D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */,
 			);
 			path = Topics;
-			sourceTree = "<group>";
-		};
-		D0839ADD2DE73E5F00CA5C27 /* AppAttestation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AppAttestation;
 			sourceTree = "<group>";
 		};
 		D0839FCE2DE7ABAF00CA5C27 /* AppAttest */ = {

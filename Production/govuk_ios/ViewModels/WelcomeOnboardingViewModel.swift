@@ -26,7 +26,7 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
     }
 
     var buttonViewModel: GOVUKButton.ButtonViewModel {
-        let localTitle = String.onboarding.localized("welcomeButtonTitle")
+        let localTitle = String.common.localized("continue")
         return .init(
             localisedTitle: localTitle,
             action: { [weak self] in

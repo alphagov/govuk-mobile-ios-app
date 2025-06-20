@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 
 protocol AppEnvironmentServiceInterface {
     var baseURL: URL { get }
@@ -34,6 +35,7 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
     }
 
     var authenticationClientId: String {
+        Constants.API.remoteAuthenticationClientID ??
         string(for: .authenticationClientId)
     }
 
@@ -57,6 +59,11 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
     }
 
     var authenticationBaseURL: URL {
+        Constants.API.remoteAuthenticationURL ??
+        localAuthenticationBaseURL
+    }
+
+    private var localAuthenticationBaseURL: URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = string(for: .authenticationBaseURL)

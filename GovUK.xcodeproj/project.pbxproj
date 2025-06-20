@@ -226,6 +226,7 @@
 		5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* APIServiceClient.swift */; };
 		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
 		5DE970572C297CFE009D66C4 /* AppEvent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */; };
+		5DF32E092E045F5F006C63E0 /* AccessibilityAnnouncerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF32E082E045F5F006C63E0 /* AccessibilityAnnouncerService.swift */; };
 		5DFA017B2D89651100EAC839 /* ActivityItemCreateParams+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFA01782D89651100EAC839 /* ActivityItemCreateParams+Extensions.swift */; };
 		5DFA017C2D89651100EAC839 /* ActivityService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFA01792D89651100EAC839 /* ActivityService+Extensions.swift */; };
 		5DFB488C2DE9F7F600B41CDA /* NotificationConsentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB48822DE9F7F600B41CDA /* NotificationConsentCoordinator.swift */; };
@@ -594,6 +595,7 @@
 		5DDD588A2D5A557D001C0B3E /* onboarding_stay_updated.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = onboarding_stay_updated.json; sourceTree = "<group>"; };
 		5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		5DE970562C297CFE009D66C4 /* AppEvent+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Convenience.swift"; sourceTree = "<group>"; };
+		5DF32E082E045F5F006C63E0 /* AccessibilityAnnouncerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityAnnouncerService.swift; sourceTree = "<group>"; };
 		5DFA01782D89651100EAC839 /* ActivityItemCreateParams+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityItemCreateParams+Extensions.swift"; sourceTree = "<group>"; };
 		5DFA01792D89651100EAC839 /* ActivityService+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityService+Extensions.swift"; sourceTree = "<group>"; };
 		5DFB487A2DE9F7F600B41CDA /* AnalyticsConsentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentCoordinator.swift; sourceTree = "<group>"; };
@@ -814,6 +816,7 @@
 				govuk_ios/shared/Mocks/MockDeviceInformationProvider.swift,
 				govuk_ios/shared/Mocks/MockDisplayableTopic.swift,
 				govuk_ios/shared/Mocks/MockTimer.swift,
+				govuk_ios/shared/Mocks/Services/MockAccessibilityAnnouncerService.swift,
 				govuk_ios/shared/Mocks/Services/MockAnalyticsService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppConfigService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppLaunchService.swift,
@@ -1170,6 +1173,7 @@
 				5DC2506B2C91DB13009E9E7F /* Analytics */,
 				4EA1E27F2D8C611D0062453D /* Notifications */,
 				4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */,
+				5DF32E082E045F5F006C63E0 /* AccessibilityAnnouncerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2339,6 +2343,7 @@
 				168F85532DE9AE4B0040E6AF /* ScrollBounceBehaviourModifier.swift in Sources */,
 				16E912AF2DA72CE000CD2049 /* OIDAuthorizationServiceWrapper.swift in Sources */,
 				164150AF2DE5DB6D00798DF3 /* WelcomeOnboardingViewModel.swift in Sources */,
+				5DF32E092E045F5F006C63E0 /* AccessibilityAnnouncerService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

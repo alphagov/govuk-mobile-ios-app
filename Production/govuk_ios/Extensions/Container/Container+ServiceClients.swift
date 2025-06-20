@@ -35,7 +35,6 @@ extension Container {
         Factory(self) {
             AuthenticationServiceClient(
                 appEnvironmentService: self.appEnvironmentService.resolve(),
-                configService: self.appConfigService.resolve(),
                 appAuthSession: AppAuthSessionWrapper(),
                 oidAuthService: OIDAuthorizationServiceWrapper(),
                 revokeTokenServiceClient: self.revokeTokenAPIClient(),

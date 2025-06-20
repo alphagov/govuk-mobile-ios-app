@@ -19,6 +19,7 @@ final class SearchHistoryViewControllerSnapshotTests: SnapshotTestCase {
         )
         let viewController = SearchHistoryViewController(
             viewModel: viewModel,
+            accessibilityAnnouncer: MockAccessibilityAnnouncerService(),
             selectionAction: { _ in }
         )
 
@@ -40,6 +41,7 @@ final class SearchHistoryViewControllerSnapshotTests: SnapshotTestCase {
         )
         let viewController = SearchHistoryViewController(
             viewModel: viewModel,
+            accessibilityAnnouncer: MockAccessibilityAnnouncerService(),
             selectionAction: { _ in }
         )
 
@@ -60,10 +62,12 @@ final class SearchHistoryViewControllerSnapshotTests: SnapshotTestCase {
         try! coreData.viewContext.save()
 
         let fetchRequest = SearchHistoryItem.fetchRequest()
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                    managedObjectContext: coreData.viewContext,
-                                                    sectionNameKeyPath: nil,
-                                                    cacheName: nil)
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: coreData.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
         try? controller.performFetch()
         service._stubbedFetchResultsController = controller
         return service

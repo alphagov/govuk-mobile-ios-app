@@ -78,6 +78,28 @@
         }
       }
     },
+    "previousSearchesAvailableAnnouncement" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "previous search available"
+          }
+        }
+      }
+    },
+    "previousSearchesAvailableAnnouncementPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "previous searches available"
+          }
+        }
+      }
+    },
     "removeSearchAccessibilityTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -118,6 +140,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search results"
+          }
+        }
+      }
+    },
+    "searchSuggestionsAvailableAnnouncement" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search suggestion available"
+          }
+        }
+      }
+    },
+    "searchSuggestionsAvailableAnnouncementPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "search suggestions available"
           }
         }
       }

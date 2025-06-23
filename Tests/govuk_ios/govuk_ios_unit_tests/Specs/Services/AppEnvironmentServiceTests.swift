@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import GOVKit
 
 @testable import govuk_ios
 
@@ -27,6 +28,9 @@ struct AppEnvironmentServiceTests {
 
     @Test
     func authenticationClientId_returnsExpectedValue() {
+        // Make sure this is nil to return fallback value
+        Constants.API.remoteAuthenticationClientID = nil
+
         let mockConfig = ["AUTHENTICATION_CLIENT_ID": "123456"]
         let sut = AppEnvironmentService(
             config: mockConfig
@@ -37,6 +41,9 @@ struct AppEnvironmentServiceTests {
 
     @Test
     func authenticationAuthorizeURL_returnsExpectedValue() {
+        // Make sure this is nil to return fallback value
+        Constants.API.remoteAuthenticationURL = nil
+
         let mockConfig = ["AUTHENTICATION_BASE_URL": "www.gov.uk"]
         let sut = AppEnvironmentService(
             config: mockConfig

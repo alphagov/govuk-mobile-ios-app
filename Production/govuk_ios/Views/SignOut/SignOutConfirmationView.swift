@@ -21,26 +21,11 @@ struct SignOutConfirmationView: View {
             }
             .padding(.horizontal, 16)
             Spacer()
-            Divider()
-                .overlay(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea()
-            let buttonLayout = verticalSizeClass == .compact ?
-            AnyLayout(HStackLayout()) :
-            AnyLayout(VStackLayout())
-            buttonLayout {
-                SwiftUIButton(
-                    .destructive,
-                    viewModel: viewModel.signOutButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.cancelButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-            }
-            .ignoresSafeArea()
-            .padding(16)
+            ButtonStackView(
+                primaryButtonViewModel: viewModel.signOutButtonViewModel,
+                primaryButtonConfiguration: .destructive,
+                secondaryButtonViewModel: viewModel.cancelButtonViewModel
+            )
         }
         .onAppear {
             viewModel.trackScreen(screen: self)

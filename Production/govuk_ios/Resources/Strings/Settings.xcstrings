@@ -106,7 +106,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opens your phone’s settings app, where you can turn Face ID on or off for the app.\n\nIf you have Face ID turned on, you’ll be able to use your face to unlock the app within 30 days of entering your GOV.UK One Login details.\n\nIf you do not want to use Face ID, you can use your phone’s passcode instead.\n\nAnyone who can unlock your phone with their face or with your phone’s passcode might be able to access your app.\n\nYou can turn off Face ID at any time."
+            "value" : "If you have Face ID turned on, you’ll be able to use your face to unlock the app within 30 days of entering your GOV.UK One Login details.\n\nIf you do not want to use Face ID, you can use your phone’s passcode instead.\n\nAnyone who can unlock your phone with their face or with your phone’s passcode might be able to access your app.\n\nYou can turn off Face ID at any time."
           }
         }
       }
@@ -117,7 +117,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open Face ID settings"
+            "value" : "Change Face ID settings"
           }
         }
       }

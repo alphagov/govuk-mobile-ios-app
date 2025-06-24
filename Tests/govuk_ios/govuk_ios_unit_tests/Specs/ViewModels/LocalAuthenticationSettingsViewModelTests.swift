@@ -24,7 +24,7 @@ struct LocalAuthenticationSettingsViewModelTests {
         )
 
         #expect(sut.title == "Face ID")
-        #expect(sut.buttonTitle == "Open Face ID settings")
+        #expect(sut.buttonTitle == "Change Face ID settings")
         #expect(!sut.body.isEmpty)
         #expect(!sut.showSettingsAlert)
         #expect(!sut.touchIdEnabled)

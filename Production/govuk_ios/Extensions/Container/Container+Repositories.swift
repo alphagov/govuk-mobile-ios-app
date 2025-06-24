@@ -28,4 +28,10 @@ extension Container {
             SearchHistoryRepository(coreData: self.coreDataRepository())
         }
     }
+
+    var chatRepository: Factory<ChatRepositoryInterface> {
+        Factory(self) {
+            ChatRepository(coreData: self.coreDataRepository())
+        }
+    }
 }

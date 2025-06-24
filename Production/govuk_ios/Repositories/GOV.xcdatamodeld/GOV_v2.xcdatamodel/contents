@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E248" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ActivityItem" representedClassName="ActivityItem" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="String"/>
@@ -11,12 +11,16 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="ChatItem" representedClassName="ChatItem" syncable="YES">
+        <attribute name="conversationId" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="LocalAuthorityItem" representedClassName="LocalAuthorityItem" syncable="YES">
         <attribute name="homepageUrl" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="slug" attributeType="String"/>
         <attribute name="tier" attributeType="String"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalAuthorityItem"/>
+        <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalAuthorityItem" inverseName="parent" inverseEntity="LocalAuthorityItem"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalAuthorityItem" inverseName="child" inverseEntity="LocalAuthorityItem"/>
     </entity>
     <entity name="SearchHistoryItem" representedClassName="SearchHistoryItem" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>

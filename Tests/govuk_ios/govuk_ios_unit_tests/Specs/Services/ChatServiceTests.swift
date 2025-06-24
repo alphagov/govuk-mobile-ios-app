@@ -4,13 +4,52 @@ import Testing
 @testable import govuk_ios
 
 @Suite
-struct ChatServiceTests {
+final class ChatServiceTests {
+
+    var mockChatServiceClient: MockChatServiceClient!
+    var mockChatRepository: MockChatRespository!
+
+    init() {
+        mockChatServiceClient = MockChatServiceClient()
+        mockChatRepository = MockChatRespository()
+    }
+
+    deinit {
+        mockChatServiceClient = nil
+        mockChatRepository = nil
+    }
+
+    @Test
+    func askQuestion_savesConversationId() async throws {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            maxRetryCount: 1,
+            retryInterval: 0.2
+        )
+
+        mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
+        mockChatServiceClient._stubbedFetchAnswerResults = [
+            .success(.pendingAnswer)
+        ]
+
+        await withCheckedContinuation { continuation in
+            sut.askQuestion(
+                "expectedQuestion",
+                completion: { result in
+                    continuation.resume()
+                }
+            )
+        }
+
+        #expect(sut.currentConversationId == PendingQuestion.pendingQuestion.conversationId)
+    }
 
     @Test
     func askQuestion_pollsForAnswer() async throws {
-        let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -35,9 +74,9 @@ struct ChatServiceTests {
     }
 
     @Test func askQuestion_exceedsRetries_returnsExpectedError() async throws {
-        let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -66,9 +105,9 @@ struct ChatServiceTests {
 
     @Test
     func ask_question_returnsExpectedError() async throws {
-        let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
             maxRetryCount: 0,
             retryInterval: 0.2
         )
@@ -90,9 +129,9 @@ struct ChatServiceTests {
 
     @Test
     func ask_question_polling_returnsExpectedError() async throws {
-        let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
             maxRetryCount: 2,
             retryInterval: 0.2
         )
@@ -118,38 +157,15 @@ struct ChatServiceTests {
 
     @Test
     func chatHistory_returnsExpectedResult() async throws {
-        let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
 
-        let expectedId = "eded40d9-2837-4d67-8a45-1ac42da5826d"
-        let history = History(
-            pendingQuestion: .pendingQuestion,
-            answeredQuestions: [
-                AnsweredQuestion(
-                    answer: .answeredAnswer,
-                    conversationId: "930634c7-d453-41cb-beda-ecec6f8601f4",
-                    createdAt: "2025-06-06T11:40:06+01:00",
-                    id: expectedId,
-                    message: "expectedQuestion")],
-            createdAt: "2025-06-06T11:40:06+01:00",
-            id: "930634c7-d453-41cb-beda-ecec6f8601f4")
+        mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
 
-        mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
-        mockChatServiceClient._stubbedFetchHistoryResult = .success(history)
-
-        // Ask question to create conversationId
-        await withCheckedContinuation { continuation in
-            sut.askQuestion(
-                "expectedQuestion",
-                completion: { result in
-                    continuation.resume()
-                }
-            )
-        }
         let result = await withCheckedContinuation { continuation in
             sut.chatHistory(
                 conversationId: "930634c7-d453-41cb-beda-ecec6f8601f4",
@@ -161,33 +177,19 @@ struct ChatServiceTests {
 
         let historyResult = try #require(try? result.get())
         #expect(historyResult.count == 1)
-        #expect(historyResult.first?.id == expectedId)
+        #expect(historyResult.first?.id == History.history.answeredQuestions.first?.id)
     }
 
     @Test
     func chatHistory_noConversationId_returnsEmptyArray() async throws {
-        let mockChatServiceClient = MockChatServiceClient()
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
-            maxRetryCount: 3,
+            chatRepository: mockChatRepository,
+            maxRetryCount: 1,
             retryInterval: 0.2
         )
 
-        let expectedId = "eded40d9-2837-4d67-8a45-1ac42da5826d"
-        let history = History(
-            pendingQuestion: .pendingQuestion,
-            answeredQuestions: [
-                AnsweredQuestion(
-                    answer: .answeredAnswer,
-                    conversationId: "930634c7-d453-41cb-beda-ecec6f8601f4",
-                    createdAt: "2025-06-06T11:40:06+01:00",
-                    id: expectedId,
-                    message: "expectedQuestion")],
-            createdAt: "2025-06-06T11:40:06+01:00",
-            id: "930634c7-d453-41cb-beda-ecec6f8601f4")
-
-        mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
-        mockChatServiceClient._stubbedFetchHistoryResult = .success(history)
+        mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
 
         let result = await withCheckedContinuation { continuation in
             sut.chatHistory(
@@ -200,6 +202,44 @@ struct ChatServiceTests {
 
         let historyResult = try #require(try? result.get())
         #expect(historyResult.count == 0)
+    }
+
+    @Test func chatHistory_returnsExpectedError() async throws {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            maxRetryCount: 1,
+            retryInterval: 0.2
+        )
+
+        mockChatServiceClient._stubbedFetchHistoryResult = .failure(ChatError.apiUnavailable)
+
+        let result = await withCheckedContinuation { continuation in
+            sut.chatHistory(
+                conversationId: "930634c7-d453-41cb-beda-ecec6f8601f4",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+
+        #expect((try? result.get()) == nil)
+        let error = try #require(result.getError() as? ChatError)
+        #expect(error == .apiUnavailable)
+    }
+
+    @Test
+    func clearHistory_setsConversationIdToNil() {
+        mockChatRepository._conversationId = "existing_id"
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            maxRetryCount: 1,
+            retryInterval: 0.2
+        )
+
+        sut.clearHistory()
+        #expect(mockChatRepository.fetchConversation() == nil)
     }
 }
 
@@ -222,5 +262,20 @@ private extension PendingQuestion {
         createdAt: "2025-06-06T11:40:06+01:00",
         id: "eded40d9-2837-4d67-8a45-1ac42da5826d",
         message: "expectedQuestion"
+    )
+}
+
+private extension History {
+    static let history = History(
+        pendingQuestion: .pendingQuestion,
+        answeredQuestions: [
+            AnsweredQuestion(
+                answer: .answeredAnswer,
+                conversationId: "930634c7-d453-41cb-beda-ecec6f8601f4",
+                createdAt: "2025-06-06T11:40:06+01:00",
+                id: "eded40d9-2837-4d67-8a45-1ac42da5826d",
+                message: "expectedQuestion")],
+        createdAt: "2025-06-06T11:40:06+01:00",
+        id: "930634c7-d453-41cb-beda-ecec6f8601f4"
     )
 }

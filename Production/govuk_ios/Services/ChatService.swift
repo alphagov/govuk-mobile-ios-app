@@ -5,18 +5,25 @@ protocol ChatServiceInterface {
                      completion: @escaping (ChatAnswerResult) -> Void)
     func chatHistory(conversationId: String?,
                      completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void)
+    func clearHistory()
+    var currentConversationId: String? { get }
 }
 
 final class ChatService: ChatServiceInterface {
     private let serviceClient: ChatServiceClientInterface
+    private let chatRepository: ChatRepositoryInterface
     private let maxRetryCount: Int
     private let retryInterval: TimeInterval
-    private var currentConversationId: String?
+    var currentConversationId: String? {
+        chatRepository.fetchConversation()
+    }
 
     init(serviceClient: ChatServiceClientInterface,
+         chatRepository: ChatRepositoryInterface,
          maxRetryCount: Int = 10,
          retryInterval: TimeInterval = 6.0) {
         self.serviceClient = serviceClient
+        self.chatRepository = chatRepository
         self.maxRetryCount = maxRetryCount
         self.retryInterval = retryInterval
     }
@@ -29,7 +36,7 @@ final class ChatService: ChatServiceInterface {
             completion: { [weak self] result in
                 switch result {
                 case .success(let pendingQuestion):
-                    self?.currentConversationId = pendingQuestion.conversationId
+                    self?.setConversationId(pendingQuestion.conversationId)
                     self?.pollForAnswer(pendingQuestion,
                                         retryCount: 0,
                                         completion: completion)
@@ -76,7 +83,7 @@ final class ChatService: ChatServiceInterface {
         guard let conversationId else {
             return completion(.success([]))
         }
-        currentConversationId = conversationId
+        setConversationId(conversationId)
         serviceClient.fetchHistory(
             conversationId: conversationId,
             completion: { result in
@@ -87,5 +94,14 @@ final class ChatService: ChatServiceInterface {
                     completion(.failure(error))
                 }
         })
+    }
+
+    func clearHistory() {
+        setConversationId(nil)
+    }
+
+    private func setConversationId(_ conversationId: String?) {
+        guard conversationId != currentConversationId else { return }
+        chatRepository.saveConversation(conversationId)
     }
 }

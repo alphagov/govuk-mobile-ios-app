@@ -70,7 +70,12 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
         return components.url!
     }
 
-    var tokenBaseURL: URL {
+    private var tokenBaseURL: URL {
+        Constants.API.remoteAuthenticationTokenURL ??
+        localTokenBaseURL
+    }
+
+    private var localTokenBaseURL: URL {
         let urlString = string(for: .tokenBaseURL)
         return URL(string: urlString)!
     }

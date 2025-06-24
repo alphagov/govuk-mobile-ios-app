@@ -52,6 +52,8 @@ public struct Constants {
 
         public static var remoteAuthenticationClientID: String?
 
+        public static var remoteAuthenticationTokenURL: URL?
+
         public static let authenticationCallbackUri: String = "govuk://govuk/login-auth-callback"
 
         public static var defaultLocalAuthorityURL: URL = URL(

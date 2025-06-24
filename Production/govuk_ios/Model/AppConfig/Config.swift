@@ -7,6 +7,7 @@ struct Config: Decodable {
     let releaseFlags: [String: Bool]
     let lastUpdated: String
     let searchApiUrl: String?
-    var authenticationIssuerBaseUrl: String?
+    let authenticationIssuerBaseUrl: String?
     let authenticationIssuerClientId: String?
+    let authenticationIssuerTokenUrl: String?
 }

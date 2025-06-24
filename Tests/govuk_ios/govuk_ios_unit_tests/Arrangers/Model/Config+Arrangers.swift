@@ -14,7 +14,8 @@ extension Config {
                         lastUpdated: String = "test",
                         searchApiUrl: String? = nil,
                         authenticationIssuerBaseUrl: String? = "https://test.com",
-                        authenticationIssuerClientId: String? = "tes123") -> Config {
+                        authenticationIssuerClientId: String? = "tes123",
+                        authenticationIssuerTokenUrl: String? = "https://test.com") -> Config {
         .init(
             available: available,
             minimumVersion: minimumVersion,
@@ -23,7 +24,8 @@ extension Config {
             lastUpdated: lastUpdated,
             searchApiUrl: searchApiUrl,
             authenticationIssuerBaseUrl: authenticationIssuerBaseUrl,
-            authenticationIssuerClientId: authenticationIssuerClientId
+            authenticationIssuerClientId: authenticationIssuerClientId,
+            authenticationIssuerTokenUrl: authenticationIssuerTokenUrl
         )
     }
 }

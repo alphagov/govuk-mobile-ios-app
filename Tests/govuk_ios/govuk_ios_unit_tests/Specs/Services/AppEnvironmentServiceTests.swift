@@ -27,7 +27,7 @@ struct AppEnvironmentServiceTests {
     }
 
     @Test
-    func authenticationClientId_returnsExpectedValue() {
+    func authenticationClientId_noRemoteValue_returnsExpectedValue() {
         // Make sure this is nil to return fallback value
         Constants.API.remoteAuthenticationClientID = nil
 
@@ -40,7 +40,7 @@ struct AppEnvironmentServiceTests {
     }
 
     @Test
-    func authenticationAuthorizeURL_returnsExpectedValue() {
+    func authenticationAuthorizeURL_noRemoteValue_returnsExpectedValue() {
         // Make sure this is nil to return fallback value
         Constants.API.remoteAuthenticationURL = nil
 
@@ -49,18 +49,23 @@ struct AppEnvironmentServiceTests {
             config: mockConfig
         )
 
-        #expect(sut.authenticationAuthorizeURL ==
-                URL(string: "https://www.gov.uk/oauth2/authorize")!)
+        #expect(
+            sut.authenticationAuthorizeURL == URL(string: "https://www.gov.uk/oauth2/authorize")!
+        )
     }
 
     @Test
-    func authenticationTokenURL_returnsExpectedValue() {
+    func authenticationTokenURL_noRemoteValue_returnsExpectedValue() {
+        // Make sure this is nil to return fallback value
+        Constants.API.remoteAuthenticationURL = nil
+
         let mockConfig = ["TOKEN_BASE_URL": "https://www.gov.uk"]
         let sut = AppEnvironmentService(
             config: mockConfig
         )
 
-        #expect(sut.authenticationTokenURL ==
-                URL(string: "https://www.gov.uk/oauth2/token")!)
+        #expect(
+            sut.authenticationTokenURL == URL(string: "https://www.gov.uk/oauth2/token")!
+        )
     }
 }

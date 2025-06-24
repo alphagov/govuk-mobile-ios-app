@@ -87,7 +87,6 @@ extension APIServiceClient {
         else {
             return true
         }
-
         guard let signatureBase64,
               let signatureData = Data(base64Encoded: signatureBase64)
         else {

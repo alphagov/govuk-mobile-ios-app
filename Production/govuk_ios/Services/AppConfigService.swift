@@ -54,10 +54,13 @@ public final class AppConfigService: AppConfigServiceInterface {
     private func updateAuth(config: Config) {
         guard let urlString = config.authenticationIssuerBaseUrl,
               let url = URL(string: urlString),
-              let clientID = config.authenticationIssuerClientId
+              let clientID = config.authenticationIssuerClientId,
+              let tokenUrlString = config.authenticationIssuerTokenUrl,
+              let tokenUrl = URL(string: tokenUrlString)
         else { return }
         Constants.API.remoteAuthenticationURL = url
         Constants.API.remoteAuthenticationClientID = clientID
+        Constants.API.remoteAuthenticationTokenURL = tokenUrl
     }
 
     func isFeatureEnabled(key: Feature) -> Bool {

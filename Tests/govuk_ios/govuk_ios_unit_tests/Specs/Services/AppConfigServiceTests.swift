@@ -37,24 +37,32 @@ struct AppConfigServiceTests {
             sut.fetchAppConfig(completion: continuation.resume)
             let result = Config.arrange(
                 authenticationIssuerBaseUrl: "https:/www.test.com",
-                authenticationIssuerClientId: "test123"
+                authenticationIssuerClientId: "test123",
+                authenticationIssuerTokenUrl: "https:/www.test.com"
             ).toResult()
             mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         }
 
-        #expect(Constants.API.remoteAuthenticationURL?.absoluteString == "https:/www.test.com")
+        #expect(
+            Constants.API.remoteAuthenticationURL?.absoluteString == "https:/www.test.com"
+        )
         #expect(Constants.API.remoteAuthenticationClientID == "test123")
+        #expect(
+            Constants.API.remoteAuthenticationTokenURL?.absoluteString == "https:/www.test.com"
+        )
     }
 
     @Test
     func fetchAppConfig_noAuthCreds_doesntSetCreds() async throws {
         Constants.API.remoteAuthenticationURL = nil
         Constants.API.remoteAuthenticationClientID = nil
+        Constants.API.remoteAuthenticationTokenURL = nil
         _ = await withCheckedContinuation { continuation in
             sut.fetchAppConfig(completion: continuation.resume)
             let result = Config.arrange(
                 authenticationIssuerBaseUrl: nil,
-                authenticationIssuerClientId: nil
+                authenticationIssuerClientId: nil,
+                authenticationIssuerTokenUrl: nil
             ).toResult()
             mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(result)
         }

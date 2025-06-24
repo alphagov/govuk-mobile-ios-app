@@ -3,7 +3,6 @@ import GOVKit
 import UIComponents
 
 struct SignOutConfirmationView: View {
-    @Environment(\.verticalSizeClass) var verticalSizeClass
     private var viewModel: SignOutConfirmationViewModel
 
     init(viewModel: SignOutConfirmationViewModel) {

@@ -7,15 +7,21 @@ public struct ButtonStackView: View {
     private let primaryButtonConfiguration: GOVUKButton.ButtonConfiguration
     private let secondaryButtonViewModel: GOVUKButton.ButtonViewModel
     private let secondaryButtonConfiguration: GOVUKButton.ButtonConfiguration
+    var primaryDisabled: Bool
+    var secondaryDisabled: Bool
 
     public init(primaryButtonViewModel: GOVUKButton.ButtonViewModel,
                 primaryButtonConfiguration: GOVUKButton.ButtonConfiguration = .primary,
+                primaryDisabled: Bool = false,
                 secondaryButtonViewModel: GOVUKButton.ButtonViewModel,
-                secondaryButtonConfiguration: GOVUKButton.ButtonConfiguration = .secondary,) {
+                secondaryButtonConfiguration: GOVUKButton.ButtonConfiguration = .secondary,
+                secondaryDisabled: Bool = false) {
         self.primaryButtonViewModel = primaryButtonViewModel
         self.primaryButtonConfiguration = primaryButtonConfiguration
         self.secondaryButtonViewModel = secondaryButtonViewModel
         self.secondaryButtonConfiguration = secondaryButtonConfiguration
+        self.primaryDisabled = primaryDisabled
+        self.secondaryDisabled = secondaryDisabled
     }
 
     public var body: some View {
@@ -33,11 +39,13 @@ public struct ButtonStackView: View {
                     viewModel: primaryButtonViewModel
                 )
                 .frame(minHeight: 44, idealHeight: 44)
+                .disabled(primaryDisabled)
                 SwiftUIButton(
                     secondaryButtonConfiguration,
                     viewModel: secondaryButtonViewModel
                 )
                 .frame(minHeight: 44, idealHeight: 44)
+                .disabled(secondaryDisabled)
             }
             buttonsStack
                 .padding(.horizontal, verticalSizeClass == .regular ? 16 : 0)

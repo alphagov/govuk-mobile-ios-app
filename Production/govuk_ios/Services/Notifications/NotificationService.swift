@@ -23,14 +23,17 @@ class NotificationService: NSObject,
                            OSNotificationClickListener {
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
+    private let configService: AppConfigServiceInterface
     private let userDefaults: UserDefaultsInterface
     var onClickAction: ((URL) -> Void)?
 
     init(environmentService: AppEnvironmentServiceInterface,
          notificationCenter: UserNotificationCenterInterface,
+         configService: AppConfigServiceInterface,
          userDefaults: UserDefaultsInterface) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
+        self.configService = configService
         self.userDefaults = userDefaults
     }
 
@@ -69,7 +72,7 @@ class NotificationService: NSObject,
     }
 
     var isFeatureEnabled: Bool {
-        true
+        configService.isFeatureEnabled(key: .notifications)
     }
 
     private var hasGivenConsent: Bool {

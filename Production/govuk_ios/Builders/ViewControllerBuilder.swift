@@ -439,6 +439,8 @@ class ViewControllerBuilder {
             url: url,
             configuration: config
         )
+        viewController.preferredControlTintColor = UIColor.govUK.text.link
+        viewController.preferredBarTintColor = UIColor.govUK.fills.surfaceBackground
         return viewController
     }
 

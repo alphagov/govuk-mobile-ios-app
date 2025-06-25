@@ -30,21 +30,38 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
         #expect(await !sut.shouldRequestPermission)
     }
 
     @Test
-    func isFeatureEnabled_returnsExpectedValue() async throws {
+    func isFeatureEnabled_enabled_returnsExpectedValue() async throws {
+        let mockConfig = MockAppConfigService()
+        mockConfig.features = [.notifications]
+
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: mockConfig,
             userDefaults: MockUserDefaults()
         )
         #expect(sut.isFeatureEnabled)
     }
 
+    @Test
+    func isFeatureEnabled_disabled_returnsExpectedValue() async throws {
+        let mockConfig = MockAppConfigService()
+        mockConfig.features = []
+        let sut = NotificationService(
+            environmentService: MockAppEnvironmentService(),
+            notificationCenter: MockUserNotificationCenter(),
+            configService: mockConfig,
+            userDefaults: MockUserDefaults()
+        )
+        #expect(!sut.isFeatureEnabled)
+    }
 
     @Test
     func authorizationStatus_whenAuthorizationStatusIsAuthorised_returnsCorrectAuthorizationStatus() async {
@@ -54,6 +71,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .authorized)
@@ -67,6 +85,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .denied)
@@ -80,6 +99,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .notDetermined)
@@ -93,6 +113,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .notDetermined)
@@ -106,6 +127,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
         #expect(await sut.permissionState == .notDetermined)
@@ -116,6 +138,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
         let onClickAction: ((URL) -> Void)? = { _ in }
@@ -130,6 +153,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
 
@@ -149,6 +173,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
 
@@ -168,6 +193,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
 
@@ -187,6 +213,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: MockUserDefaults()
         )
 
@@ -207,6 +234,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -221,6 +249,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -237,6 +266,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -253,6 +283,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -267,6 +298,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -283,6 +315,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -299,6 +332,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -315,6 +349,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -331,6 +366,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -345,6 +381,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -361,6 +398,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -377,6 +415,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -392,6 +431,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -411,6 +451,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 
@@ -430,6 +471,7 @@ class NotificationServiceTests {
         let sut = NotificationService(
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
+            configService: MockAppConfigService(),
             userDefaults: mockDefaults
         )
 

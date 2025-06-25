@@ -110,6 +110,7 @@ extension Container {
             NotificationService(
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current(),
+                configService: self.appConfigService.resolve(),
                 userDefaults: UserDefaults.standard
             )
         }

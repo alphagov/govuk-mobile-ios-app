@@ -10,11 +10,11 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     }
 
     var body: some View {
+        titleView
         VStack {
             if let errorViewModel = viewModel.errorViewModel {
                 ScrollView {
                     VStack {
-                        titleView
                         AppErrorView(viewModel: errorViewModel)
                             .padding(.top, 12)
                         Spacer()
@@ -24,7 +24,6 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             } else {
                 ScrollView {
                     VStack(spacing: 0) {
-                        titleView
                         topicDetails
                     }
                 }

@@ -16,7 +16,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: MockViewControllerBuilder(),
@@ -37,7 +36,6 @@ class WelcomeOnboardingCoordinatorTests {
             let sut = WelcomeOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
-                onboardingAnalyticsService: MockAnalyticsService(),
                 analyticsService: MockAnalyticsService(),
                 coordinatorBuilder: mockCoordinatorBuilder,
                 viewControllerBuilder: MockViewControllerBuilder(),
@@ -66,7 +64,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
@@ -97,7 +94,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
@@ -128,7 +124,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
             analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,

@@ -1,11 +1,9 @@
 import XCTest
-import Onboarding
 import GOVKit
 
 @testable import govuk_ios
 
-class MockAnalyticsService: AnalyticsServiceInterface,
-                            OnboardingAnalyticsService {
+class MockAnalyticsService: AnalyticsServiceInterface {
     var _launchCalled: Bool = false
     func launch() {
         _launchCalled = true
@@ -40,15 +38,5 @@ class MockAnalyticsService: AnalyticsServiceInterface,
     var _stubbedPermissionState: AnalyticsPermissionState = .accepted
     var permissionState: AnalyticsPermissionState {
         _stubbedPermissionState
-    }
-
-    var _trackOnboardingEventEvent: OnboardingEvent?
-    func trackOnboardingEvent(_ event: OnboardingEvent) {
-        _trackOnboardingEventEvent = event
-    }
-
-    var _trackOnboardingScreenScreen: OnboardingScreen?
-    func trackOnboardingScreen(_ screen: OnboardingScreen) {
-        _trackOnboardingScreenScreen = screen
     }
 }

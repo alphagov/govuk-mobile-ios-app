@@ -1,2 +1,5 @@
 BASE_URL = https:/$()/app.integration.publishing.service.gov.uk
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAlpha
+AUTHENTICATION_BASE_URL = govukapp-staging.auth.eu-west-2.amazoncognito.com
+AUTHENTICATION_CLIENT_ID = 7qal023jms3dumkqd6173etleh
+TOKEN_BASE_URL = https:/$()/m0q9zbtrs2.execute-api.eu-west-2.amazonaws.com/staging

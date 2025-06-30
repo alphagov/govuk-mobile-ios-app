@@ -11,6 +11,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
+    private var pendingAuthenticationCoordinator: BaseCoordinator?
     private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
@@ -48,15 +49,20 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     }
 
     private func startAuthentication() {
+        guard pendingAuthenticationCoordinator == nil else { return }
         let authenticationCoordinator = coordinatorBuilder.authentication(
             navigationController: navigationController,
             completionAction: completionAction,
-            handleError: showError
+            handleError: { [weak self] error in
+                self?.showError(error)
+            }
         )
         start(authenticationCoordinator)
+        pendingAuthenticationCoordinator = authenticationCoordinator
     }
 
     private func showError(_ error: AuthenticationError) {
+        pendingAuthenticationCoordinator = nil
         guard case .loginFlow(.userCancelled) = error else {
             setSignInError()
             return

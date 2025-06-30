@@ -8,4 +8,5 @@ enum Feature: String {
     case localServices
     case externalBrowser
     case chatService
+    case notifications
 }

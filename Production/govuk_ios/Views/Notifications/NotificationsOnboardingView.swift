@@ -14,41 +14,12 @@ struct NotificationsOnboardingView: View {
     var body: some View {
         VStack(spacing: 0) {
             scrollView
-            buttonStack
+            ButtonStackView(
+                primaryButtonViewModel: viewModel.primaryButtonViewModel,
+                secondaryButtonViewModel: viewModel.secondaryButtonViewModel
+            )
         }
         .accessibilityElement(children: .contain)
-    }
-
-    @ViewBuilder
-    private var buttonStack: some View {
-        let layout = verticalSizeClass == .compact ?
-        AnyLayout(HStackLayout()) :
-        AnyLayout(VStackLayout())
-        VStack(alignment: .center, spacing: 16) {
-            Divider()
-                .background(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea(edges: [.leading, .trailing])
-                .padding([.top], 0)
-            layout {
-                SwiftUIButton(
-                    .primary,
-                    viewModel: viewModel.primaryButtonViewModel
-                )
-                .frame(
-                    minHeight: 44,
-                    idealHeight: 44
-                )
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.secondaryButtonViewModel
-                )
-                .frame(
-                    minHeight: 44,
-                    idealHeight: 44
-                )
-            }
-            .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
-        }
     }
 
     private var scrollView: some View {

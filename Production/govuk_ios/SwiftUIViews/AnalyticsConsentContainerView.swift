@@ -1,4 +1,5 @@
 import SwiftUI
+import GOVKit
 import UIComponents
 
 struct AnalyticsConsentContainerView: View {
@@ -10,7 +11,7 @@ struct AnalyticsConsentContainerView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ScrollView {
                 HeaderView(title: viewModel.title,
                            subheading: viewModel.descriptionTop)
@@ -41,31 +42,15 @@ struct AnalyticsConsentContainerView: View {
                     .onTapGesture {
                         viewModel.openPrivacyPolicy()
                     }
-            }.padding(.top, verticalSizeClass == .compact ? 30 : 46)
+            }
+            .padding(.top, verticalSizeClass == .compact ? 30 : 46)
             .padding(.horizontal, 16)
             .accessibilityValue(" ")
             Spacer()
-            Divider()
-                .overlay(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea()
-            let buttonLayout = verticalSizeClass == .compact ?
-            AnyLayout(HStackLayout()) :
-            AnyLayout(VStackLayout())
-            buttonLayout {
-                SwiftUIButton(
-                    .primary,
-                    viewModel: viewModel.allowButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                .padding(.horizontal, 15)
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.dontAllowButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                .padding(.horizontal, 15)
-            }.padding(.top, 16)
-            .ignoresSafeArea()
+            ButtonStackView(
+                primaryButtonViewModel: viewModel.allowButtonViewModel,
+                secondaryButtonViewModel: viewModel.dontAllowButtonViewModel
+            )
             .navigationBarHidden(true)
         }
     }

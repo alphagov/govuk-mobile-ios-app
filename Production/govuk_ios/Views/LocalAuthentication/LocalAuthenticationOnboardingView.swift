@@ -1,4 +1,5 @@
 import SwiftUI
+import GOVKit
 import UIComponents
 
 struct LocalAuthenticationOnboardingView: View {
@@ -40,30 +41,12 @@ struct LocalAuthenticationOnboardingView: View {
                 }
             }
             .accessibilityElement(children: .contain)
-            let buttonLayout = verticalSizeClass == .compact ?
-            AnyLayout(HStackLayout()) :
-            AnyLayout(VStackLayout())
-            let buttonsStack = buttonLayout {
-                SwiftUIButton(
-                    .primary,
-                    viewModel: viewModel.enrolButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.skipButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-            }
-            VStack(alignment: .center, spacing: 16) {
-                Divider()
-                    .background(Color(UIColor.govUK.strokes.listDivider))
-                    .ignoresSafeArea(edges: [.leading, .trailing])
-                    .padding([.top], 0)
-            }
-            buttonsStack
-            .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
-            .navigationBarBackButtonHidden()
-        }.navigationBarHidden(true)
+            ButtonStackView(
+                primaryButtonViewModel: viewModel.enrolButtonViewModel,
+                secondaryButtonViewModel: viewModel.skipButtonViewModel
+            )
+        }
+        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
     }
 }

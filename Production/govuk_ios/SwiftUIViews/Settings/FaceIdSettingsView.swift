@@ -35,11 +35,7 @@ struct FaceIdSettingsView: View {
                         .padding(.horizontal, 16)
                         .padding(.vertical, 11)
                         .background(Color(UIColor.govUK.fills.surfaceList))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color(UIColor.govUK.strokes.cardBlue), lineWidth: 0.5)
-                        )
+                        .roundedBorder()
                     }
                     .alert(isPresented: $viewModel.showSettingsAlert) {
                         Alert(

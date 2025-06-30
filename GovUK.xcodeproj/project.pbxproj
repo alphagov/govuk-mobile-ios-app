@@ -253,6 +253,7 @@
 		D028CD0C2CBEC8F400742620 /* TopicDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */; };
 		D028CD0E2CBFEA4E00742620 /* TopicDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */; };
 		D028CD122CC14A0100742620 /* DisplayableTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD112CC149FA00742620 /* DisplayableTopic.swift */; };
+		D02ED24E2E12BC2F0091301B /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D02ED24D2E12BC2F0091301B /* UIComponents */; };
 		D04191782CA57A6F0034722A /* TopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191772CA57A6F0034722A /* TopicsService.swift */; };
 		D04191802CA595400034722A /* TopicResponseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D041917F2CA595400034722A /* TopicResponseItem.swift */; };
 		D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191852CA6A5910034722A /* TopicsServiceClient.swift */; };
@@ -865,6 +866,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02ED24E2E12BC2F0091301B /* UIComponents in Frameworks */,
 				160AEACA2DA038550072BA43 /* SecureStore in Frameworks */,
 				5D7F267E2C0F0EF000842090 /* Factory in Frameworks */,
 				160AEAC52DA038030072BA43 /* Authentication in Frameworks */,
@@ -1864,6 +1866,7 @@
 				160AEAC92DA038550072BA43 /* SecureStore */,
 				D090467E2DBBC1ED0096EE66 /* JWTKit */,
 				D06C560A2DE711340045C674 /* FirebaseAppCheck */,
+				D02ED24D2E12BC2F0091301B /* UIComponents */,
 			);
 			productName = GovUK;
 			productReference = 5DAD71742BD250DB0075F648 /* govuk_ios.app */;
@@ -3165,6 +3168,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5DCAFA762D40088600C3F284 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
 			productName = OneSignalFramework;
+		};
+		D02ED24D2E12BC2F0091301B /* UIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UIComponents;
 		};
 		D06C560A2DE711340045C674 /* FirebaseAppCheck */ = {
 			isa = XCSwiftPackageProductDependency;

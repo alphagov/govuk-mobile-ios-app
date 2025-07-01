@@ -9,7 +9,7 @@ final class MockDynamicLibrary: DynamicLibraryInterface {
     }
 
     var _stubbedImageName: String = ""
-    func dyldGetImageName(_ image_index: UInt32) -> UnsafePointer<CChar>! {
+    func dyldGetImageName(_ imageIndex: UInt32) -> UnsafePointer<CChar>! {
         _stubbedImageName.withCString { ptr in
             return ptr
         }

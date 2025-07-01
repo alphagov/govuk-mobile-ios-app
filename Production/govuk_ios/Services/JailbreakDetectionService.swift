@@ -72,10 +72,9 @@ final class JailbreakDetectionService: JailbreakDetectionServiceInterface {
 
     func checkURLSchemes() -> Bool {
         for urlScheme in Self.forbiddenURLSchemes {
-            if let url = URL(string: urlScheme) {
-                if urlOpener.canOpenURL(url) {
-                    return true
-                }
+            if let url = URL(string: urlScheme),
+               urlOpener.canOpenURL(url) {
+                return true
             }
         }
         return false

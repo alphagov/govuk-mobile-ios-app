@@ -14,6 +14,8 @@ struct GroupedListRowView: View {
                 InformationRowView(row: row)
             case let row as ToggleRow:
                 ToggleRowView(row: row)
+            case let row as DetailRow:
+                DetailRowView(row: row)
             default:
                 EmptyView()
             }
@@ -35,14 +37,23 @@ struct InformationRowView: View {
 
     var body: some View {
         HStack {
-            Text(row.title)
-            Spacer()
-            Text(row.detail)
-                .foregroundColor(
-                    Color(
-                        UIColor.govUK.text.secondary
-                    )
-                )
+            if let imageName = row.imageName {
+                Image(imageName)
+            }
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(row.title)
+                    Spacer()
+                    Text(row.detail)
+                        .foregroundColor(
+                            Color(
+                                UIColor.govUK.text.secondary
+                            )
+                        )
+                }
+                RowDetail(text: row.body)
+            }
+
         }.accessibilityElement(children: .combine)
     }
 }
@@ -69,6 +80,35 @@ struct LinkRowView: View {
         .accessibilityRemoveTraits(.isButton)
         .accessibilityAddTraits(row.isWebLink ? .isLink : .isButton)
         .accessibilityHint(row.isWebLink ? String.common.localized("openWebLinkHint") : "")
+    }
+}
+
+struct DetailRowView: View {
+    var row: DetailRow
+    
+    var body: some View {
+        Button {
+            row.action()
+        } label: {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(row.title)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(row.destructive ?
+                                         Color(UIColor.govUK.text.buttonDestructive) :
+                                            Color(UIColor.govUK.text.primary))
+                    Spacer()
+                    Text(row.body)
+                    .font(Font.govUK.body)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color(UIColor.govUK.text.link))
+                }
+                RowDetail(text: row.body)
+            }
+        }
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityHint(row.accessibilityHint)
     }
 }
 

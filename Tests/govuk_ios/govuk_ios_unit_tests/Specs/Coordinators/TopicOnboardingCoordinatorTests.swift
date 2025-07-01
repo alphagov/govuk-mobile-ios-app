@@ -44,7 +44,6 @@ struct TopicOnboardingCoordinatorTests {
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedTopicOnboardingViewController = expectedViewController
-        let navigationController = UINavigationController()
         let mockTopicsService = MockTopicsService()
         let mockCoreDataRepository = CoreDataRepository.arrangeAndLoad
         mockTopicsService._stubbedFetchAllTopics = Topic.arrangeMultiple(

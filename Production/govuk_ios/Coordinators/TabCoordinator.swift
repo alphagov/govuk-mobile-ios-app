@@ -37,10 +37,17 @@ class TabCoordinator: BaseCoordinator,
     }
 
     override func start(url: URL?) {
-        showTabs()
+        showTabsIfRequired()
         guard let url = url
         else { return }
         handleDeeplink(url: url)
+    }
+
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        if child is SettingsCoordinator {
+            finish()
+        }
     }
 
     private func handleDeeplink(url: URL) {
@@ -51,22 +58,35 @@ class TabCoordinator: BaseCoordinator,
             .compactMap { $0.route(for: url) }
             .first
 
+        let isDeeplinkFound: Bool
         if let route = route {
             selectTabIndex(for: route.parent.root)
             route.action()
+            isDeeplinkFound = true
         } else {
-            presentDeeplinkError()
+            presentDeeplinkNotFoundAlert()
+            isDeeplinkFound = false
         }
+        let event = AppEvent.deeplinkNavigation(
+            isDeeplinkFound: isDeeplinkFound,
+            url: url.absoluteString
+        )
+        analyticsService.track(event: event)
     }
 
-    private func presentDeeplinkError() {
+    private func presentDeeplinkNotFoundAlert() {
         tabController.present(
-            UIAlertController.unhandledDeeplinkAlert,
+            UIAlertController.deeplinkNotFoundAlert,
             animated: true
         )
     }
 
-    private func showTabs() {
+    private func showTabsIfRequired() {
+        let viewControllers = tabController.viewControllers ?? []
+        guard viewControllers.isEmpty else {
+            return
+        }
+
         tabController.viewControllers = coordinators.map { $0.root }
         set([tabController], animated: false)
         coordinators.forEach { start($0) }
@@ -75,6 +95,7 @@ class TabCoordinator: BaseCoordinator,
     private func selectTabIndex(for navigationController: UINavigationController) {
         let index = tabController.viewControllers?.firstIndex(of: navigationController)
         tabController.selectedIndex = index ?? 0
+        currentTabIndex = tabController.selectedIndex
     }
 
     func tabBarController(_ tabBarController: UITabBarController,

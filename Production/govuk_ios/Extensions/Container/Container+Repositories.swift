@@ -1,6 +1,5 @@
 import Foundation
 import Factory
-import RecentActivity
 
 extension Container {
     var activityRepository: Factory<ActivityRepositoryInterface> {
@@ -16,6 +15,13 @@ extension Container {
             TopicsRepository(coreData: self.coreDataRepository())
         }
     }
+
+    var localAuthorityRepository: Factory<LocalAuthorityRepositoryInterface> {
+        Factory(self) {
+            LocalAuthorityRepository(coreData: self.coreDataRepository())
+        }
+    }
+
 
     var searchHistoryRepository: Factory<SearchHistoryRepositoryInterface> {
         Factory(self) {

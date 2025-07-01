@@ -12,7 +12,6 @@ class HomeViewController: BaseViewController {
         uiImageView.isAccessibilityElement = true
         uiImageView.accessibilityLabel = String.home.localized("logoAccessibilityTitle")
         uiImageView.accessibilityTraits = .header
-
         return uiImageView
     }()
     private lazy var searchBar: UISearchBar = {
@@ -34,7 +33,6 @@ class HomeViewController: BaseViewController {
         localSearchBar.tintColor = UIColor.govUK.text.secondary
         colorSearchBarButton()
         localSearchBar.delegate = self
-
         return localSearchBar
     }()
 

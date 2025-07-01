@@ -3,6 +3,7 @@ import Foundation
 struct AppLaunchResponse {
     let configResult: FetchAppConfigResult
     let topicResult: FetchTopicsListResult
+    let notificationConsentResult: NotificationConsentResult
     let appVersionProvider: AppVersionProvider
 
     var isAppAvailable: Bool {

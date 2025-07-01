@@ -25,7 +25,8 @@ final class AnalyticsConsentViewControllerSnapshotTests: SnapshotTestCase {
     private var view: some View {
         let viewModel = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
-            dismissAction: {}
+            completion: { },
+            viewPrivacyAction: { }
         )
         return AnalyticsConsentContainerView(
             viewModel: viewModel

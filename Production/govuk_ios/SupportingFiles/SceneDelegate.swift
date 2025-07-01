@@ -1,8 +1,11 @@
 import Foundation
 import UIKit
+import Factory
 
 class SceneDelegate: UIResponder,
                      UIWindowSceneDelegate {
+    @Inject(\.inactivityService) private var inactivityService: InactivityServiceInterface
+
     var window: UIWindow?
 
     private lazy var navigationController: UINavigationController = {
@@ -14,8 +17,9 @@ class SceneDelegate: UIResponder,
 
     private lazy var coordinatorBuilder = CoordinatorBuilder(container: .shared)
 
-    private lazy var coordinator: BaseCoordinator? = coordinatorBuilder.app(
-        navigationController: navigationController
+    private lazy var appCoordinator = coordinatorBuilder.app(
+        navigationController: navigationController,
+        inactivityService: inactivityService
     )
 
     func scene(_ scene: UIScene,
@@ -23,18 +27,26 @@ class SceneDelegate: UIResponder,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene)
         else { return }
-        window = UIWindow(windowScene: windowScene)
+        window = GovUIWindow(windowScene: windowScene, inactivityService: inactivityService)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
         let url = connectionOptions.urlContexts.first?.url
-        coordinator?.start(url: url)
+        appCoordinator.start(url: url)
+        let notificationService = Container.shared.notificationService.resolve()
+        notificationService.addClickListener { [weak self] deeplink in
+            self?.appCoordinator.start(url: deeplink)
+        }
     }
 
     func scene(_ scene: UIScene,
                openURLContexts urlContexts: Set<UIOpenURLContext>) {
         guard let path = urlContexts.first?.url
         else { return }
-        coordinator?.start(url: path)
+        appCoordinator.start(url: path)
+    }
+
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        appCoordinator.start(url: nil)
     }
 }

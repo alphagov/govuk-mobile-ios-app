@@ -1,35 +1,43 @@
 import Foundation
 import UIKit
 import GOVKit
-import RecentActivity
+import UIComponents
 
 struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
     let topicWidgetViewModel: TopicsWidgetViewModel
+    let localAuthorityAction: () -> Void
+    let editLocalAuthorityAction: () -> Void
     let feedbackAction: () -> Void
     let notificationsAction: () -> Void
     let recentActivityAction: () -> Void
+    let openURLAction: (URL) -> Void
+    let openAction: (SearchItem) -> Void
     let urlOpener: URLOpener
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
+    let localAuthorityService: LocalAuthorityServiceInterface
 
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
         analyticsService: analyticsService,
         searchService: searchService,
         activityService: activityService,
-        urlOpener: urlOpener
+        urlOpener: urlOpener,
+        openAction: openAction
     )
 
     var widgets: [WidgetView] {
         get async {
             await [
-                notificationsWidget,
-                //            feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
+                localAuthorityWidget,
+                // notificationsWidget, Removed until dismissable cards introduced
+                // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
-                topicsWidget
+                topicsWidget,
+                storedLocalAuthorityWidget
             ].compactMap { $0 }
         }
     }
@@ -40,7 +48,7 @@ struct HomeViewModel {
             guard await notificationService.shouldRequestPermission
             else { return nil }
 
-            let title = String.home.localized("homeWidgetTitle")
+            let title = String.home.localized("notificationWidgetTitle")
             let viewModel = UserFeedbackViewModel(
                 title: title,
                 action: notificationsAction
@@ -84,6 +92,55 @@ struct HomeViewModel {
         )
         let widget = WidgetView(useContentAccessibilityInfo: true)
         widget.addContent(content)
+        return widget
+    }
+
+    @MainActor
+    private var localAuthorityWidget: WidgetView? {
+        guard featureEnabled(.localServices),
+              localAuthorityService.fetchSavedLocalAuthority().first == nil
+        else { return nil }
+        let viewModel = LocalAuthorityWidgetViewModel(
+            tapAction: localAuthorityAction
+        )
+        let content = LocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        let widget = WidgetView(
+            useContentAccessibilityInfo: false,
+            backgroundColor: UIColor.govUK.fills.surfaceCardSelected,
+            borderColor: UIColor.govUK.strokes.cardGreen.cgColor
+        )
+        widget.addContent(hostingViewController.view)
+        return widget
+    }
+
+    @MainActor
+    private var storedLocalAuthorityWidget: WidgetView? {
+        guard featureEnabled(.localServices) else { return nil }
+        let localAuthorities = localAuthorityService.fetchSavedLocalAuthority()
+        guard localAuthorities.count > 0 else { return nil }
+
+        let viewModel = StoredLocalAuthorityWidgetViewModel(
+            analyticsService: analyticsService,
+            localAuthorities: localAuthorities,
+            openURLAction: openURLAction,
+            openEditViewAction: editLocalAuthorityAction
+        )
+        let content = StoredLocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        let widget = WidgetView(
+            decorateView: false,
+            useContentAccessibilityInfo: false
+        )
+        widget.addContent(hostingViewController.view)
         return widget
     }
 

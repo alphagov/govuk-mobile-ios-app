@@ -18,7 +18,7 @@ struct AppRecommendUpdateContainerView: View {
             .padding(.horizontal, 16)
             Spacer()
             Divider()
-                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
             let buttonLayout = verticalSizeClass == .compact ?
             AnyLayout(HStackLayout()) :
@@ -47,6 +47,10 @@ struct AppRecommendUpdateContainerView: View {
 }
 
 #Preview {
-    let viewModel = AppRecommendUpdateContainerViewModel(dismissAction: {})
+    let viewModel = AppRecommendUpdateContainerViewModel(
+        dismissAction: {
+            // Do nothing
+        }
+    )
     return AppRecommendUpdateContainerView(viewModel: viewModel)
 }

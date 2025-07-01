@@ -2,10 +2,12 @@ import Foundation
 import Factory
 import Onboarding
 import GOVKit
-import RecentActivity
+import UserNotifications
 
+import SecureStore
 import Firebase
 import FirebaseCrashlytics
+import FirebaseAppCheck
 
 extension Container {
     var activityService: Factory<ActivityServiceInterface> {
@@ -37,13 +39,23 @@ extension Container {
         }
     }
 
+    var localAuthorityService: Factory<LocalAuthorityServiceInterface> {
+        Factory(self) {
+            LocalAuthorityService(
+                serviceClient: self.localAuthorityServiceClient(),
+                repository: self.localAuthorityRepository()
+            )
+        }
+    }
+
     var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
         Factory(self) {
             AnalyticsService(
                 clients: [
                     FirebaseClient(
                         firebaseApp: FirebaseApp.self,
-                        firebaseAnalytics: Analytics.self
+                        firebaseAnalytics: Analytics.self,
+                        appAttestService: self.appAttestService()
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
@@ -57,7 +69,8 @@ extension Container {
         Factory(self) {
             AppLaunchService(
                 configService: self.appConfigService.resolve(),
-                topicService: self.topicsService.resolve()
+                topicService: self.topicsService.resolve(),
+                notificationService: self.notificationService.resolve()
             )
         }.scope(.singleton)
     }
@@ -68,14 +81,6 @@ extension Container {
                 appConfigServiceClient: self.appConfigServiceClient.resolve()
             )
         }.scope(.singleton)
-    }
-
-    var onboardingService: Factory<OnboardingServiceInterface> {
-        Factory(self) {
-            OnboardingService(
-                userDefaults: UserDefaults.standard
-            )
-        }
     }
 
     var topicsService: Factory<TopicsServiceInterface> {
@@ -104,8 +109,98 @@ extension Container {
         Factory(self) {
             NotificationService(
                 environmentService: self.appEnvironmentService.resolve(),
-                notificationCenter: UNUserNotificationCenter.current()
+                notificationCenter: UNUserNotificationCenter.current(),
+                configService: self.appConfigService.resolve(),
+                userDefaults: UserDefaults.standard
             )
+        }
+    }
+
+    var notificationsOnboardingService: Factory<NotificationsOnboardingServiceInterface> {
+        Factory(self) {
+            NotificationsOnboardingService(
+                userDefaults: UserDefaults.standard
+            )
+        }
+    }
+
+    @MainActor
+    var authenticationService: Factory<AuthenticationServiceInterface> {
+        Factory(self) {
+            AuthenticationService(
+                authenticationServiceClient: self.authenticationServiceClient.resolve(),
+                authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
+                userDefaults: UserDefaults.standard,
+                returningUserService: self.returningUserService.resolve()
+            )
+        }.scope(.singleton)
+    }
+
+    var authenticatedSecureStoreService: Factory<SecureStorable> {
+        Factory(self) {
+            SecureStoreService(
+                configuration: self.authenticatedSecureStoreConfiguration.resolve()
+            )
+        }
+    }
+
+    var returningUserService: Factory<ReturningUserServiceInterface> {
+        Factory(self) {
+            ReturningUserService(
+                openSecureStoreService: self.openSecureStoreService.resolve(),
+                coreDataDeletionService: self.coreDataDeletionService.resolve(),
+                userDefaults: UserDefaults.standard,
+                localAuthenticationService: self.localAuthenticationService.resolve()
+            )
+        }
+    }
+
+    var openSecureStoreService: Factory<SecureStorable> {
+        Factory(self) {
+            SecureStoreService(
+                configuration: self.openSecureStoreConfiguration.resolve()
+            )
+        }
+    }
+
+    var localAuthenticationService: Factory<LocalAuthenticationServiceInterface> {
+        Factory(self) {
+            LocalAuthenticationService(
+                userDefaults: UserDefaults.standard
+            )
+        }
+    }
+
+    var coreDataDeletionService: Factory<CoreDataDeletionService> {
+        Factory(self) {
+            CoreDataDeletionService(
+                coreDataRepository: self.coreDataRepository.resolve()
+            )
+        }
+    }
+
+    @MainActor
+    var inactivityService: Factory<InactivityServiceInterface> {
+        Factory(self) {
+            InactivityService(
+                authenticationService: self.authenticationService.resolve(),
+                timer: TimerWrapper()
+            )
+        }.scope(.singleton)
+    }
+
+    var appAttestService: Factory<AppAttestServiceInterface> {
+        Factory(self) {
+            AppAttestService(
+                appCheckInterface: AppCheck.self,
+                providerFactory: self.govuKProviderFactory()
+            )
+        }.scope(.singleton)
+    }
+
+    var govuKProviderFactory: Factory<ProviderFactoryInterface> {
+        Factory(self) {
+            GovUKProviderFactory()
         }
     }
 }

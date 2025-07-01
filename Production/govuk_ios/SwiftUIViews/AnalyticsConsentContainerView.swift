@@ -46,7 +46,7 @@ struct AnalyticsConsentContainerView: View {
             .accessibilityValue(" ")
             Spacer()
             Divider()
-                .foregroundColor(Color(UIColor.govUK.strokes.listDivider))
+                .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
             let buttonLayout = verticalSizeClass == .compact ?
             AnyLayout(HStackLayout()) :
@@ -69,12 +69,4 @@ struct AnalyticsConsentContainerView: View {
             .navigationBarHidden(true)
         }
     }
-}
-
-#Preview {
-    let viewModel = AnalyticsConsentContainerViewModel(
-        analyticsService: nil,
-        dismissAction: {}
-    )
-    return AnalyticsConsentContainerView(viewModel: viewModel)
 }

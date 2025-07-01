@@ -89,6 +89,39 @@
         }
       }
     },
+    "faceIdEnrolmentButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Face ID"
+          }
+        }
+      }
+    },
+    "faceIdEnrolmentMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can use your face to unlock the app.\n\nIf you do not want to use Face ID, you can unlock the app with your phone’s passcode, or with your email address and password."
+          }
+        }
+      }
+    },
+    "faceIdEnrolmentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock the app with Face ID"
+          }
+        }
+      }
+    },
     "pagesYouveVisitedBody" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -177,6 +210,17 @@
         }
       }
     },
+    "successfulSignInTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have successfully signed in"
+          }
+        }
+      }
+    },
     "tailoredToYouBody" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -195,6 +239,61 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tailored to you"
+          }
+        }
+      }
+    },
+    "touchIdEnrolmentButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Touch ID"
+          }
+        }
+      }
+    },
+    "touchIdEnrolmentMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can use your fingerprint to unlock the app.\n\nIf you do not want to use Touch ID, you can unlock the app with your phone’s passcode, or with your email address and password."
+          }
+        }
+      }
+    },
+    "touchIdEnrolmentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock the app with Touch ID"
+          }
+        }
+      }
+    },
+    "welcomeBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Government information and services for you"
+          }
+        }
+      }
+    },
+    "welcomeTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your GOV.UK app"
           }
         }
       }

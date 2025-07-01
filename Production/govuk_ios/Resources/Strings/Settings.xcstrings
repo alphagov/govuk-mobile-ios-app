@@ -23,13 +23,35 @@
         }
       }
     },
+    "accountRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your GOV.UK One Login"
+          }
+        }
+      }
+    },
+    "accountSectionFooter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You might need to sign in again to manage your GOV.UK One Login details."
+          }
+        }
+      }
+    },
     "appUsageFooter" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. These statistics are anonymous and do not contain any of your personal information. Read more about this in the privacy notice."
+            "value" : "You can share statistics with the GOV.UK app team about how you use the app so they can make improvements to it. The team will not use these statistics to directly identify you. Read more about this in the privacy notice."
           }
         }
       }
@@ -56,6 +78,17 @@
         }
       }
     },
+    "faceIdTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID"
+          }
+        }
+      }
+    },
     "helpAndFeedbackSettingsTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -63,6 +96,149 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Help and feedback"
+          }
+        }
+      }
+    },
+    "localAuthenticationFaceIdBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you have Face ID turned on, you’ll be able to use your face to unlock the app.\n\nIf you do not want to use Face ID, you can use your phone’s passcode instead.\n\nAnyone who can unlock your phone with their face or with your phone’s passcode might be able to access your app.\n\nYou can turn off Face ID at any time."
+          }
+        }
+      }
+    },
+    "localAuthenticationFaceIdButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change Face ID settings"
+          }
+        }
+      }
+    },
+    "localAuthenticationSettingsAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone's Face ID settings"
+          }
+        }
+      }
+    },
+    "localAuthenticationTouchIdBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you have Touch ID turned on, you’ll be able to use your fingerprint to unlock the app.\n\nIf you do not want to use Touch ID, you can use your phone’s passcode instead.\n\nAnyone who can unlock your phone with their fingerprint or with your phone’s passcode might be able to access your app.\n\nYou can turn off Touch ID at any time."
+          }
+        }
+      }
+    },
+    "localAuthenticationTouchIdButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock app with Touch ID"
+          }
+        }
+      }
+    },
+    "manageAccountRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage your GOV.UK One Login"
+          }
+        }
+      }
+    },
+    "notificationAlertPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "notificationsAccessibilityHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select to change notification permissions"
+          }
+        }
+      }
+    },
+    "notificationsAlertBodyDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn on notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "notificationsAlertBodyEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to your phone’s notifications settings to turn off notifications from GOV.UK"
+          }
+        }
+      }
+    },
+    "notificationsAlertTitleDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on notifications"
+          }
+        }
+      }
+    },
+    "notificationsAlertTitleEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn off notifications"
+          }
+        }
+      }
+    },
+    "notificationsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
           }
         }
       }
@@ -111,6 +287,17 @@
         }
       }
     },
+    "signOutRowTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign out"
+          }
+        }
+      }
+    },
     "termsAndConditionsRowTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -118,6 +305,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terms and conditions"
+          }
+        }
+      }
+    },
+    "touchIdTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch ID"
           }
         }
       }

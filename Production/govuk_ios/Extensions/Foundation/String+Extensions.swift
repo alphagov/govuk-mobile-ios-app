@@ -8,6 +8,13 @@ extension String {
         )
     }
 
+    static var deeplinks: LocalStringBuilder {
+        .init(
+            tableName: "Deeplinks",
+            bundle: .main
+        )
+    }
+
     static var home: LocalStringBuilder {
         .init(
             tableName: "Home",
@@ -46,6 +53,34 @@ extension String {
     static var notifications: LocalStringBuilder {
         .init(
             tableName: "Notifications",
+            bundle: .main
+        )
+    }
+
+    static var recentActivity: LocalStringBuilder {
+        .init(
+            tableName: "RecentActivity",
+            bundle: .main
+        )
+    }
+
+    static var localAuthority: LocalStringBuilder {
+        .init(
+            tableName: "LocalAuthority",
+            bundle: .main
+        )
+    }
+
+    static var signOut: LocalStringBuilder {
+        .init(
+            tableName: "SignOut",
+            bundle: .main
+        )
+    }
+
+    static var localAuthentication: LocalStringBuilder {
+        .init(
+            tableName: "LocalAuthentication",
             bundle: .main
         )
     }

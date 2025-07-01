@@ -21,17 +21,22 @@ struct HomeViewModelTests {
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openURLAction: { _ in },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService()
         )
         let widgets = await subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 3)
+        #expect(widgets.count == 2)
     }
 
     @Test
@@ -54,12 +59,17 @@ struct HomeViewModelTests {
             configService: configService,
             notificationService: mockNotificationService,
             topicWidgetViewModel: topicsViewModel,
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openURLAction: { _ in },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService()
         )
         let widgets = await subject.widgets
 

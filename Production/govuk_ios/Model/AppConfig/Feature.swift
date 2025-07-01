@@ -5,4 +5,7 @@ enum Feature: String {
     case onboarding
     case topics
     case recentActivity
+    case localServices
+    case externalBrowser
+    case notifications
 }

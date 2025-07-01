@@ -1,5 +1,4 @@
 import Foundation
-import RecentActivity
 
 extension ActivityServiceInterface {
     func save(searchItem: SearchItem) {

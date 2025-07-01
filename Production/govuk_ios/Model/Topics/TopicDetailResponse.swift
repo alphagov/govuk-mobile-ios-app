@@ -1,5 +1,4 @@
 import Foundation
-import RecentActivity
 
 struct TopicDetailResponse: Decodable {
     let ref: String

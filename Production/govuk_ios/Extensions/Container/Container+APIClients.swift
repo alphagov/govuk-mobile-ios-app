@@ -48,6 +48,27 @@ extension Container {
         )
     }
 
+    var localAuthorityAPIClient: Factory<APIServiceClientInterface> {
+        Factory(self) {
+            APIServiceClient(
+                baseUrl: Constants.API.defaultLocalAuthorityURL,
+                session: self.urlSession(),
+                requestBuilder: RequestBuilder(),
+                responseHandler: LocalAuthorityResponseHandler()
+            )
+        }
+    }
+
+    var revokeTokenAPIClient: Factory<APIServiceClientInterface> {
+        Factory(self) {
+            APIServiceClient(
+                baseUrl: self.appEnvironmentService().authenticationBaseURL,
+                session: self.urlSession(),
+                requestBuilder: URLEncodedRequestBuilder()
+            )
+        }
+    }
+
     var urlSession: Factory<URLSession> {
         Factory(self) {
             URLSession(configuration: .default)

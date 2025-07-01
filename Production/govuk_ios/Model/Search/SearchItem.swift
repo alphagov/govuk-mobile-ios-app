@@ -1,6 +1,5 @@
 import Foundation
 import GOVKit
-import RecentActivity
 
 struct SearchItem: Codable,
                    Hashable {

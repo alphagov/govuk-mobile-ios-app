@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 import UIComponents
 import GOVKit
 
@@ -48,6 +49,7 @@ class TopicsWidgetView: UIView {
             .secondary,
             viewModel: viewModel
         )
+        button.accessibilityLabel = String.home.localized("topicsWidgetEditButtonTitle")
         return button
     }()
 
@@ -91,19 +93,21 @@ class TopicsWidgetView: UIView {
         return stackView
     }()
 
-    private lazy var appErrorViewController: HostingViewController = {
+    private lazy var appErrorViewController: UIViewController = {
         let localController = HostingViewController(
             rootView: AppErrorView(
                 viewModel: self.viewModel.topicErrorViewModel
             )
         )
         localController.view.backgroundColor = .clear
+        localController.view.isHidden = true
+        localController.shouldAutoFocusVoiceover = false
         return localController
     }()
 
-    private lazy var errorView: UIView = {
-        self.appErrorViewController.view
-    }()
+    private var errorView: UIView {
+        appErrorViewController.view
+    }
 
     init(viewModel: TopicsWidgetViewModel) {
         self.viewModel = viewModel
@@ -125,7 +129,7 @@ class TopicsWidgetView: UIView {
     private func topicsDidUpdate(notification: Notification) {
         DispatchQueue.main.async {
             self.updateTopics(self.viewModel.displayedTopics)
-            if self.viewModel.initialLoadComplete == false {
+            if !self.viewModel.initialLoadComplete {
                 self.viewModel.initialLoadComplete = true
                 self.viewModel.trackECommerce()
             }
@@ -155,7 +159,6 @@ class TopicsWidgetView: UIView {
         stackView.addArrangedSubview(cardStackView)
         stackView.addArrangedSubview(allTopicsButton)
         stackView.addArrangedSubview(errorView)
-        errorView.isHidden = true
         addSubview(stackView)
     }
 

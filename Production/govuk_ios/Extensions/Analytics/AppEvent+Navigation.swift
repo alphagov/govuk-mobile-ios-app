@@ -28,4 +28,13 @@ extension AppEvent {
             additionalParams: ["section": "Homepage"]
         )
     }
+
+    static func deeplinkNavigation(isDeeplinkFound: Bool, url: String) -> AppEvent {
+        navigation(
+            text: isDeeplinkFound ? "Opened" : "Failed",
+            type: "DeepLink",
+            external: false,
+            additionalParams: ["url": url]
+        )
+    }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import UIKit
 
 @testable import govuk_ios
 
@@ -12,7 +13,8 @@ struct DeeplinkDataStoreTests {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/test")
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "file://services")!
         let mockParent = MockBaseCoordinator()
@@ -29,7 +31,8 @@ struct DeeplinkDataStoreTests {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/wrong")
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https:app/services")!
         let mockParent = MockBaseCoordinator()
@@ -46,7 +49,8 @@ struct DeeplinkDataStoreTests {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/services")
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "govuk://services")!
         let mockParent = MockBaseCoordinator()
@@ -63,7 +67,8 @@ struct DeeplinkDataStoreTests {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/wrong")
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https://app.gov.uk/services")!
         let mockParent = MockBaseCoordinator()
@@ -80,7 +85,8 @@ struct DeeplinkDataStoreTests {
         let subject = DeeplinkDataStore(
             routes: [
                 MockDeeplinkRoute(pattern: "/test")
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https://app.gov.uk")!
         let mockParent = MockBaseCoordinator()
@@ -98,7 +104,8 @@ struct DeeplinkDataStoreTests {
             routes: [
                 MockDeeplinkRoute(pattern: "/one"),
                 MockDeeplinkRoute(pattern: "/one/two")
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https://app.gov.uk/one/two/three")!
         let mockParent = MockBaseCoordinator()
@@ -117,7 +124,8 @@ struct DeeplinkDataStoreTests {
                 MockDeeplinkRoute(pattern: "/one"),
                 MockDeeplinkRoute(pattern: "/services"),
                 MockDeeplinkRoute(pattern: "/one/two"),
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https://app.gov.uk/services")!
         let mockParent = MockBaseCoordinator()
@@ -137,7 +145,8 @@ struct DeeplinkDataStoreTests {
                 MockDeeplinkRoute(pattern: "/one"),
                 MockDeeplinkRoute(pattern: "/services/*/test"),
                 MockDeeplinkRoute(pattern: "/one/two"),
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https://app.gov.uk/services/hello/test")!
         let mockParent = MockBaseCoordinator()
@@ -157,7 +166,8 @@ struct DeeplinkDataStoreTests {
                 MockDeeplinkRoute(pattern: "/one"),
                 MockDeeplinkRoute(pattern: "/services/:service_id/test"),
                 MockDeeplinkRoute(pattern: "/one/two"),
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https://app.gov.uk/services/driving_service_id/test")!
         let mockParent = MockBaseCoordinator()
@@ -178,7 +188,8 @@ struct DeeplinkDataStoreTests {
                 MockDeeplinkRoute(pattern: "/one"),
                 MockDeeplinkRoute(pattern: "/services/:service_id/test"),
                 MockDeeplinkRoute(pattern: "/one/two"),
-            ]
+            ],
+            root: UIViewController()
         )
         let url = URL(string: "https://app.gov.uk/services/driving_service_id/test?service_id=override_service")!
         let mockParent = MockBaseCoordinator()

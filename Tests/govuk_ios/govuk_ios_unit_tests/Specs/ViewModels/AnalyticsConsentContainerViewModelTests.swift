@@ -7,10 +7,11 @@ import GOVKit
 @Suite
 struct AnalyticsConsentContainerViewModelTests {
     @Test
-    func init_hasCorrectInitialState() throws {
+    func init_hasCorrectInitialState() {
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
-            dismissAction: {}
+            completion: {},
+            viewPrivacyAction: {}
         )
         #expect(sut.title == "Share statistics about how you use the GOV.UK app")
         #expect(sut.descriptionTop == "You can help us improve this app by agreeing to share statistics about:")
@@ -33,24 +34,26 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func allowButtonAction_setsAcceptedAnalyticsToTrue() throws {
+    func allowButtonAction_setsAcceptedAnalyticsToTrue() {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
-            dismissAction: {}
+            completion: {},
+            viewPrivacyAction: {}
         )
         sut.allowButtonViewModel.action()
         #expect(analyticsService._setAcceptedAnalyticsAccepted == true)
     }
 
     @Test
-    func allowButtonAction_callsDismiss() async throws {
+    func allowButtonAction_callsDismiss() async {
         let dismissCalled = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentContainerViewModel(
                 analyticsService: nil,
-                dismissAction: {
+                completion: {
                     continuation.resume(returning: true)
-                }
+                },
+                viewPrivacyAction: {}
             )
             sut.dontAllowButtonViewModel.action()
         }
@@ -58,24 +61,26 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func dontAllowButtonAction_setsAcceptedAnalyticsToFalse() throws {
+    func dontAllowButtonAction_setsAcceptedAnalyticsToFalse() {
         let analyticsService = MockAnalyticsService()
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: analyticsService,
-            dismissAction: {}
+            completion: {},
+            viewPrivacyAction: {}
         )
         sut.dontAllowButtonViewModel.action()
         #expect(analyticsService._setAcceptedAnalyticsAccepted == false)
     }
 
     @Test
-    func dontAllowButtonAction_callsDismiss() async throws {
+    func dontAllowButtonAction_callsDismiss() async {
         let dismissCalled = await withCheckedContinuation { continuation in
             let sut = AnalyticsConsentContainerViewModel(
                 analyticsService: nil,
-                dismissAction: {
+                completion: {
                     continuation.resume(returning: true)
-                }
+                },
+                viewPrivacyAction: {}
             )
             sut.dontAllowButtonViewModel.action()
         }
@@ -83,14 +88,16 @@ struct AnalyticsConsentContainerViewModelTests {
     }
 
     @Test
-    func openPrivacyPolicy_opensURL() throws {
-        let urlOpener = MockURLOpener()
+    func openPrivacyPolicy_opensURL() {
+        var viewPrivacyActionCalled = false
         let sut = AnalyticsConsentContainerViewModel(
             analyticsService: nil,
-            urlOpener: urlOpener,
-            dismissAction: {}
+            completion: {},
+            viewPrivacyAction: {
+                viewPrivacyActionCalled = true
+            }
         )
         sut.openPrivacyPolicy()
-        #expect(urlOpener._receivedOpenIfPossibleUrl == Constants.API.privacyPolicyUrl)
+        #expect(viewPrivacyActionCalled == true)
     }
 }

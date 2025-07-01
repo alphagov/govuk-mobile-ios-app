@@ -6,10 +6,11 @@ import Testing
 @Suite
 struct AppLaunchResponseTests {
     @Test
-    func isAppAvailable_invalidSignature_returnsTrue() async {
+    func isAppAvailable_invalidSignature_returnsTrue() {
         let subject = AppLaunchResponse(
             configResult: .failure(.invalidSignature),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -17,10 +18,11 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isAppAvailable_unavailable_returnsTrue() async {
+    func isAppAvailable_unavailable_returnsTrue() {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: .arrange(available: false))),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -28,7 +30,7 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRequired_lowerCurrentVersion_returnsTrue() async {
+    func isUpdateRequired_lowerCurrentVersion_returnsTrue() {
         let currentVersion = "0.0.1"
         let config = Config.arrange(
             minimumVersion: "1.0.0"
@@ -38,6 +40,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -45,7 +48,7 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRequired_sameCurrentVersion_returnsFalse() async {
+    func isUpdateRequired_sameCurrentVersion_returnsFalse() {
         let currentVersion = "1.0.0"
         let config = Config.arrange(
             minimumVersion: "1.0.0"
@@ -55,6 +58,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -62,7 +66,7 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRequired_higherCurrentVersion_returnsFalse() async {
+    func isUpdateRequired_higherCurrentVersion_returnsFalse() {
         let currentVersion = "1.0.1"
         let config = Config.arrange(
             minimumVersion: "1.0.0",
@@ -73,6 +77,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -80,10 +85,11 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRequired_invalidSignature_returnsFalse() async {
+    func isUpdateRequired_invalidSignature_returnsFalse() {
         let subject = AppLaunchResponse(
             configResult: .failure(.invalidSignature),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -91,10 +97,11 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRequired_error_returnsFalse() async {
+    func isUpdateRequired_error_returnsFalse() {
         let subject = AppLaunchResponse(
             configResult: .failure(.remoteJson),
             topicResult: .failure(.apiUnavailable),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 
@@ -102,7 +109,7 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRecommended_lowerCurrentVersion_returnsTrue() async {
+    func isUpdateRecommended_lowerCurrentVersion_returnsTrue() {
         let currentVersion = "0.1.0"
         let config = Config.arrange(
             recommendedVersion: "1.0.0"
@@ -112,6 +119,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -119,7 +127,7 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRecommended_higherCurrentVersion_returnsFalse() async {
+    func isUpdateRecommended_higherCurrentVersion_returnsFalse() {
         let currentVersion = "1.0.0"
         let config = Config.arrange(
             recommendedVersion: "0.1.0"
@@ -129,6 +137,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -136,7 +145,7 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRecommended_sameCurrentVersion_returnsFalse() async {
+    func isUpdateRecommended_sameCurrentVersion_returnsFalse() {
         let currentVersion = "1.0.0"
         let config = Config.arrange(
             recommendedVersion: "1.0.0"
@@ -146,6 +155,7 @@ struct AppLaunchResponseTests {
         let subject = AppLaunchResponse(
             configResult: .success(.arrange(config: config)),
             topicResult: .success([]),
+            notificationConsentResult: .aligned,
             appVersionProvider: mockVersionProvider
         )
 
@@ -153,10 +163,11 @@ struct AppLaunchResponseTests {
     }
 
     @Test
-    func isUpdateRecommended_error_returnsFalse() async {
+    func isUpdateRecommended_error_returnsFalse() {
         let subject = AppLaunchResponse(
             configResult: .failure(.remoteJson),
             topicResult: .failure(.apiUnavailable),
+            notificationConsentResult: .aligned,
             appVersionProvider: MockAppVersionProvider()
         )
 

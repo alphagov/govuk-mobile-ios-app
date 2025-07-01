@@ -23,12 +23,17 @@ struct HomeContentViewControllerTests {
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
+            localAuthorityAction: { },
+            editLocalAuthorityAction: {},
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openURLAction: { _ in },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
 
@@ -50,12 +55,17 @@ struct HomeContentViewControllerTests {
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
+            localAuthorityAction: { },
+            editLocalAuthorityAction: {},
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openURLAction: { _ in },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
@@ -81,12 +91,17 @@ struct HomeContentViewControllerTests {
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
             feedbackAction: { },
             notificationsAction: { },
             recentActivityAction: { },
+            openURLAction: { _ in },
+            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
-            activityService: MockActivityService()
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         guard let scrollView: UIScrollView =

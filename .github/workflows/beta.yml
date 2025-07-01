@@ -24,7 +24,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
-    environment: production
+    environment: Beta
 
     steps:
       - name: Checkout
@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@a2bbe5b1b236842c1cb7dd11e8e3b51e0a616acc # pin@v1.202.0
+        uses: ruby/setup-ruby@a4effe49ee8ee5b8b5091268c473a4628afb5651 # pin@v1.245.0
         with:
           bundler-cache: true
 
@@ -47,10 +47,9 @@ jobs:
           APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
           APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
-          APP_STORE_USERNAME: ${{ secrets.APP_STORE_USERNAME }}
           MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          ONESIGNAL_APP_ID: ${{ env.ONESIGNAL_APP_ID }}
+          ONESIGNAL_APP_ID: ${{ vars.ONESIGNAL_APP_ID }}
 
       - name: Save Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3

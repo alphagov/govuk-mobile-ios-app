@@ -1,6 +1,5 @@
 import SwiftUI
 import GOVKit
-import RecentActivity
 
 // swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {
@@ -17,6 +16,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     private let urlOpener: URLOpener
     private let subtopicAction: (DisplayableTopic) -> Void
     private let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+    private let openAction: (URL) -> Void
 
     var isLoaded: Bool = false
 
@@ -53,16 +53,15 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
          analyticsService: AnalyticsServiceInterface,
          activityService: ActivityServiceInterface,
          urlOpener: URLOpener,
-         subtopicAction: @escaping (DisplayableTopic) -> Void,
-         stepByStepAction: @escaping ([TopicDetailResponse.Content]) -> Void) {
+         actions: Actions) {
+        self.topic = topic
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.activityService = activityService
         self.urlOpener = urlOpener
-        self.subtopicAction = subtopicAction
-        self.stepByStepAction = stepByStepAction
-        self.topic = topic
-
+        subtopicAction = actions.subtopicAction
+        stepByStepAction = actions.stepByStepAction
+        openAction = actions.openAction
         fetchTopicDetails(topicRef: topic.ref)
     }
 
@@ -190,13 +189,12 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             title: content.title,
             body: nil,
             action: {
-                if self.urlOpener.openIfPossible(content.url) {
-                    self.activityService.save(topicContent: content)
-                    self.trackLinkEvent(
-                        content: content,
-                        sectionTitle: sectionTitle
-                    )
-                }
+                self.openAction(content.url)
+                self.activityService.save(topicContent: content)
+                self.trackLinkEvent(
+                    content: content,
+                    sectionTitle: sectionTitle
+                )
             }
         )
     }
@@ -281,5 +279,13 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             locationId: nil
         )
         commerceItems.append(appEventItem)
+    }
+}
+
+extension TopicDetailViewModel {
+    struct Actions {
+        let subtopicAction: (DisplayableTopic) -> Void
+        let stepByStepAction: ([TopicDetailResponse.Content]) -> Void
+        let openAction: (URL) -> Void
     }
 }

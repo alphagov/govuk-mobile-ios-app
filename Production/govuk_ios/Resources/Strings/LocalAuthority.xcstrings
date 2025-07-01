@@ -1,0 +1,416 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "addressSelectionPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm address"
+          }
+        }
+      }
+    },
+    "addressSelectionViewSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We’ll use your address to find your local council"
+          }
+        }
+      }
+    },
+    "addressSelectionViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is your address?"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthorityPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm local council"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthoritySecondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select your address instead"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthorityViewSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your postcode %@ is shared by more than one local council"
+          }
+        }
+      }
+    },
+    "ambiguousLocalAuthorityViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is your local council?"
+          }
+        }
+      }
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "localAuthorityCancelButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "localAuthorityCardWebsiteConstant" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "website"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationPrimaryButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierDescriptionOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Different local councils are responsible for different services."
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierDescriptionTwo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local councils are:"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierDescritionThree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local councils’ websites from the bottom of the app home page."
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationTwoTierTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services in your area are provided by 2 local councils"
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationUnitaryDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local council's website from the bottom of the app home page."
+          }
+        }
+      }
+    },
+    "localAuthorityConfirmationUnitaryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local council is"
+          }
+        }
+      }
+    },
+    "localAuthorityEditButtonAltText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit your local council"
+          }
+        }
+      }
+    },
+    "localAuthorityEmptyTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your postcode"
+          }
+        }
+      }
+    },
+    "localAuthorityExplainerViewDesciption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We’ll use your postcode to add a link from the app home page to your local council's website"
+          }
+        }
+      }
+    },
+    "localAuthorityExplainerViewPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "localAuthorityInvalidPostcode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a postcode in the correct format"
+          }
+        }
+      }
+    },
+    "localAuthorityNetworkUnavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are not connected to the internet. Reconnect and try again."
+          }
+        }
+      }
+    },
+    "localAuthorityPageNotWorking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This page is not working. Try again later."
+          }
+        }
+      }
+    },
+    "localAuthoritypostcodeEntryPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm postcode"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewDescriptionBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local council is only kept on your phone. It’s not saved online or shared with any other organisations. You can update it at any time on the app home page."
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewDescriptionTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How we use this information?"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewExampleText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For example SW1A 2AA"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeEntryViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is your postcode?"
+          }
+        }
+      }
+    },
+    "localAuthorityPostcodeNotFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We could not find a council for this postcode. Check the postcode and try again."
+          }
+        }
+      }
+    },
+    "localAuthorityTwoTierChildDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services like rubbish and recycling collection, council tax and housing on the "
+          }
+        }
+      }
+    },
+    "localAuthorityTwoTierParentDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services like education, social care and transport on the "
+          }
+        }
+      }
+    },
+    "localAuthorityUnitaryCard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find services for your area on the"
+          }
+        }
+      }
+    },
+    "localAuthorityWidgetViewDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your postcode to see services for your area"
+          }
+        }
+      }
+    },
+    "localAuthorityWidgetViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For you"
+          }
+        }
+      }
+    },
+    "localServicesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local services"
+          }
+        }
+      }
+    },
+    "postcodeEntryAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postcode entry field"
+          }
+        }
+      }
+    },
+    "storedLocalAuthorityWidgetTwoTierDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services in your area are provided by 2 local councils"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

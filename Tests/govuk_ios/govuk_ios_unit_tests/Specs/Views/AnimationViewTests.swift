@@ -27,7 +27,7 @@ class AnimationViewTests {
     // This test isn't ideal, but there isn't much to assert against with Lottie
     @Test
     @MainActor
-    func animationsEnabled_callsPlay() async {
+    func animationsEnabled_callsPlay() {
         let subject = AnimationView(resourceName: "app_splash")
 
         mockAccessibilityManager.animationsEnabled = true

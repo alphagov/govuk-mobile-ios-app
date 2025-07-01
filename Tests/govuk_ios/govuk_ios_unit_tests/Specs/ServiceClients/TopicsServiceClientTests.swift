@@ -6,7 +6,6 @@ import Testing
 @Suite
 struct TopicsServiceClientTests {
     
-    
     var mockAPI: MockAPIServiceClient!
     var sut: TopicsServiceClient!
     
@@ -19,7 +18,7 @@ struct TopicsServiceClientTests {
 
     //MARK: - Fetch Topics List
     @Test
-    func fetchList_sendsExpectedRequest() async {
+    func fetchList_sendsExpectedRequest() {
         sut.fetchList() { _ in }
         #expect(mockAPI._receivedSendRequest?.urlPath == "/static/topics/list")
         #expect(mockAPI._receivedSendRequest?.method == .get)

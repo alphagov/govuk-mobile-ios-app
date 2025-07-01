@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import GOVKit
-import RecentActivity
 
 class HomeCoordinator: TabItemCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
@@ -15,6 +14,7 @@ class HomeCoordinator: TabItemCoordinator {
     private let deviceInformationProvider: DeviceInformationProviderInterface
     private let searchService: SearchServiceInterface
     private let activityService: ActivityServiceInterface
+    private let localAuthorityService: LocalAuthorityServiceInterface
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -26,7 +26,8 @@ class HomeCoordinator: TabItemCoordinator {
          notificationService: NotificationServiceInterface,
          deviceInformationProvider: DeviceInformationProviderInterface,
          searchService: SearchServiceInterface,
-         activityService: ActivityServiceInterface) {
+         activityService: ActivityServiceInterface,
+         localAuthorityService: LocalAuthorityServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
@@ -37,6 +38,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.deviceInformationProvider = deviceInformationProvider
         self.searchService = searchService
         self.activityService = activityService
+        self.localAuthorityService = localAuthorityService
         super.init(navigationController: navigationController)
     }
 
@@ -47,13 +49,22 @@ class HomeCoordinator: TabItemCoordinator {
             notificationService: notificationService,
             searchService: searchService,
             activityService: activityService,
-            topicWidgetViewModel: topicWidgetViewModel
+            topicWidgetViewModel: topicWidgetViewModel,
+            localAuthorityService: localAuthorityService
         )
 
         let actions = ViewControllerBuilder.HomeActions(
             feedbackAction: feedbackAction,
             notificationsAction: notificationsAction,
-            recentActivityAction: startRecentActivityCoordinator
+            recentActivityAction: startRecentActivityCoordinator,
+            localAuthorityAction: presentLocalAuthorityCoordinator,
+            editLocalAuthorityAction: presentEditLocalAuthorityCoordinator,
+            openURLAction: { [weak self] url in
+                self?.presentWebView(url: url)
+            },
+            openSearchAction: { [weak self] item in
+                self?.presentWebView(url: item.link)
+            }
         )
 
         let viewController = viewControllerBuilder.home(
@@ -61,6 +72,15 @@ class HomeCoordinator: TabItemCoordinator {
             actions: actions
         )
         set([viewController], animated: false)
+    }
+
+    private func presentWebView(url: URL) {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url,
+            fullScreen: true
+        )
+        start(coordinator, url: url)
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
@@ -82,9 +102,9 @@ class HomeCoordinator: TabItemCoordinator {
         return { [weak self] in
             guard let self = self else { return }
             self.trackWidgetNavigation(
-                text: String.home.localized("feedbackWidgetTitle")
+                text: String.home.localized("notificationWidgetTitle")
             )
-            self.notificationService.requestPermissions(completion: nil)
+            self.notificationService.requestPermissions { self.start(url: nil) }
         }
     }
 
@@ -150,6 +170,36 @@ class HomeCoordinator: TabItemCoordinator {
                 }
             )
             self.present(coordinator)
+        }
+    }
+
+    private var presentLocalAuthorityCoordinator: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "Your local services")
+            guard let self = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = self.coordinatorBuilder.localAuthority(
+                navigationController: navigationController,
+                dismissAction: {
+                    self.root.viewWillReAppear()
+                }
+            )
+            present(coordinator)
+        }
+    }
+
+    private var presentEditLocalAuthorityCoordinator: () -> Void {
+        return { [weak self] in
+            self?.trackWidgetNavigation(text: "Edit your local services")
+            guard let self = self else { return }
+            let navigationController = UINavigationController()
+            let coordinator = self.coordinatorBuilder.editLocalAuthority(
+                navigationController: navigationController,
+                dismissAction: {
+                    self.root.viewWillReAppear()
+                }
+            )
+            present(coordinator)
         }
     }
 

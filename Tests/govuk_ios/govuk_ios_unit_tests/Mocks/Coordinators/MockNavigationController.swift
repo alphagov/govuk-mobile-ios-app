@@ -8,12 +8,20 @@ class MockNavigationController: UINavigationController {
         _stubbedPresentingViewController ?? super.presentingViewController
     }
 
+    var _stubbedPresentedViewController: UIViewController?
+    override var presentedViewController: UIViewController? {
+        _stubbedPresentedViewController ?? super.presentedViewController
+    }
+
     private(set) var _presentedViewController: UIViewController?
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
                           completion: (() -> Void)? = nil) {
-        super.present(viewControllerToPresent, animated: flag,
-                      completion: completion)
+        super.present(
+            viewControllerToPresent,
+            animated: flag,
+            completion: completion
+        )
         _presentedViewController = viewControllerToPresent
     }
 
@@ -34,6 +42,12 @@ class MockNavigationController: UINavigationController {
         return super.popViewController(animated: animated)
     }
 
+    var _popToRootCalled: Bool = false
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        _popToRootCalled = true
+        return []
+    }
+
     var _pushedViewController: UIViewController?
     override func pushViewController(_ viewController: UIViewController, 
                                      animated: Bool) {
@@ -42,9 +56,11 @@ class MockNavigationController: UINavigationController {
     }
 
     var _setViewControllers: [UIViewController]?
-    override func setViewControllers(_ viewControllers: [UIViewController], 
+    var _setViewControllersCalledAction: (() -> Void)?
+    override func setViewControllers(_ viewControllers: [UIViewController],
                                      animated: Bool) {
         _setViewControllers = viewControllers
         super.setViewControllers(viewControllers, animated: animated)
+        _setViewControllersCalledAction?()
     }
 }

@@ -5,17 +5,23 @@ import UIComponents
 class WidgetView: UIView {
     private(set) lazy var contentView = UIView()
     private let decorateView: Bool
+    private let cardBackgroundColor: UIColor
+    private let borderColor: CGColor
     private lazy var padding: CGFloat = {
         decorateView ? 16 : 0
     }()
 
     init(decorateView: Bool = true,
-         useContentAccessibilityInfo: Bool = false) {
+         useContentAccessibilityInfo: Bool = false,
+         backgroundColor: UIColor = UIColor.govUK.fills.surfaceCardBlue,
+         borderColor: CGColor = UIColor.govUK.strokes.cardBlue.cgColor) {
         self.decorateView = decorateView
+        self.cardBackgroundColor = backgroundColor
+        self.borderColor = borderColor
         super.init(frame: .zero)
         self.backgroundColor = decorateView ?
-            UIColor.govUK.fills.surfaceCardBlue :
-            UIColor.govUK.fills.surfaceBackground
+        backgroundColor :
+        UIColor.govUK.fills.surfaceBackground
         self.isAccessibilityElement = useContentAccessibilityInfo
         configureUI()
         configureConstraints()
@@ -27,7 +33,7 @@ class WidgetView: UIView {
 
     private func updateBorderColor() {
         if decorateView {
-            layer.borderColor = UIColor.govUK.strokes.cardBlue.cgColor
+            layer.borderColor = borderColor
         }
     }
 

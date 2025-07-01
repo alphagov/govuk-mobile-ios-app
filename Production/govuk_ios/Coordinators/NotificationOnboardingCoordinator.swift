@@ -6,15 +6,24 @@ import Onboarding
 
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface
-    private let analyticsService: OnboardingAnalyticsService
+    private let notificationOnboardingService: NotificationsOnboardingServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
+    private let viewControllerBuilder: ViewControllerBuilder
+    private let coordinatorBuilder: CoordinatorBuilder
     private let completeAction: () -> Void
 
     init(navigationController: UINavigationController,
          notificationService: NotificationServiceInterface,
-         analyticsService: OnboardingAnalyticsService,
+         notificationOnboardingService: NotificationsOnboardingServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
+         viewControllerBuilder: ViewControllerBuilder,
+         coordinatorBuilder: CoordinatorBuilder,
          completion: @escaping () -> Void) {
         self.notificationService = notificationService
+        self.notificationOnboardingService = notificationOnboardingService
         self.analyticsService = analyticsService
+        self.viewControllerBuilder = viewControllerBuilder
+        self.coordinatorBuilder = coordinatorBuilder
         self.completeAction = completion
         super.init(navigationController: navigationController)
     }
@@ -26,23 +35,27 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
     }
 
     private func startNotifications() async {
-        guard await notificationService.shouldRequestPermission
-        else { return finishCoordination() }
+        guard await notificationService.shouldRequestPermission,
+              !notificationOnboardingService.hasSeenNotificationsOnboarding else {
+            return finishCoordination()
+        }
         setOnboarding()
     }
 
     private func setOnboarding() {
-        let onboardingModule = Onboarding(
-            slideProvider: notificationService,
+        let viewController = viewControllerBuilder.notificationOnboarding(
             analyticsService: analyticsService,
             completeAction: { [weak self] in
                 self?.request()
             },
             dismissAction: { [weak self] in
                 self?.finishCoordination()
+            },
+            viewPrivacyAction: { [weak self] in
+                self?.openPrivacy()
             }
         )
-        set(onboardingModule.viewController)
+        set(viewController)
     }
 
     private func request() {
@@ -53,9 +66,19 @@ class NotificationOnboardingCoordinator: BaseCoordinator {
         )
     }
 
+    @MainActor
+    private func openPrivacy() {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: Constants.API.privacyPolicyUrl,
+            fullScreen: false
+        )
+        start(coordinator)
+    }
+
+    @MainActor
     private func finishCoordination() {
-        DispatchQueue.main.async {
-            self.completeAction()
-        }
+        notificationOnboardingService.setHasSeenNotificationsOnboarding()
+        completeAction()
     }
 }

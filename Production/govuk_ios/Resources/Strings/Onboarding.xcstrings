@@ -56,6 +56,17 @@
         }
       }
     },
+    "appVersionText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App version number"
+          }
+        }
+      }
+    },
     "continueButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -14,9 +14,12 @@ struct InfoView: View {
         VStack {
             GeometryReader { geometry in
                 ScrollView {
-                    HStack {
-                        Spacer()
-                        Text(viewModel.versionNumber)
+                    if viewModel.versionNumber != "" {
+                        Text(viewModel.versionNumber).foregroundColor(
+                            Color(
+                                UIColor.govUK.text.secondary
+                            )
+                        )
                     }
                     infoView
                         .frame(width: geometry.size.width)

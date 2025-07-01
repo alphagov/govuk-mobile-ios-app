@@ -22,6 +22,8 @@ extension InfoViewModelInterface {
     }
 
     var versionNumber: String {
-        Bundle.main.versionNumber ?? ""
+        guard let versionNumber = Bundle.main.versionNumber
+        else { return "" }
+        return "\(String.onboarding.localized("appVersionText")) \(versionNumber)"
     }
 }

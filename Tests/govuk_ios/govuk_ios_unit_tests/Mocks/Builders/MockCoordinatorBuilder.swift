@@ -77,6 +77,17 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         )
     }
 
+    var _stubbedJailbreakCoordinator: BaseCoordinator?
+    var _receivedJailbreakDismissAction: (() -> Void)?
+    override func jailbreakDetector(navigationController: UINavigationController,
+                                    dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedJailbreakDismissAction = dismissAction
+        return _stubbedJailbreakCoordinator ??
+        MockBaseCoordinator(
+            navigationController: .init()
+        )
+    }
+
     var _stubbedAnalyticsConsentCoordinator: BaseCoordinator?
     var _receivedAnalyticsConsentNavigationController: UINavigationController?
     var _receivedAnalyticsConsentCompletion: (() -> Void)?

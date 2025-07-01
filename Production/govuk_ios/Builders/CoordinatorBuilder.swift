@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import UIKit
 import Foundation
 import Factory
@@ -106,6 +107,15 @@ class CoordinatorBuilder {
             notificationService: container.notificationService.resolve(),
             navigationController: navigationController,
             completion: completion
+        )
+    }
+
+    func jailbreakDetector(navigationController: UINavigationController,
+                           dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        JailbreakCoordinator(
+            navigationController: navigationController,
+            jailbreakDetectionService: container.jailbreakDetectionService.resolve(),
+            dismissAction: dismissAction
         )
     }
 

@@ -13,12 +13,10 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
         let sut = LocalAuthenticationOnboardingViewModel(
             userDefaults: mockUserDefaults,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
-            analyticsService: mockAnalyticsService,
             completionAction: { }
         )
         #expect(sut.iconName == "touchid")
@@ -33,12 +31,10 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
         let sut = LocalAuthenticationOnboardingViewModel(
             userDefaults: mockUserDefaults,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
-            analyticsService: mockAnalyticsService,
             completionAction: { }
         )
 
@@ -54,13 +50,11 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
-                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             let enrolButtonViewModel = sut.enrolButtonViewModel
@@ -70,9 +64,6 @@ struct LocalAuthenticationOnboardingViewModelTests {
         #expect(completion)
         #expect(mockLocalAuthenticationService.authenticationOnboardingFlowSeen)
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        let event = mockAnalyticsService._trackedEvents.first
-        #expect(event?.params?["text"] as? String == "Allow Face ID")
     }
 
     @Test
@@ -81,13 +72,11 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
-                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             let enrolButtonViewModel = sut.enrolButtonViewModel
@@ -97,9 +86,6 @@ struct LocalAuthenticationOnboardingViewModelTests {
         #expect(completion)
         #expect(mockLocalAuthenticationService.authenticationOnboardingFlowSeen)
         #expect(mockAuthenticationService._encryptRefreshTokenCallSuccess)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        let event = mockAnalyticsService._trackedEvents.first
-        #expect(event?.params?["text"] as? String == "Allow Touch ID")
     }
 
     @Test
@@ -108,14 +94,12 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
         mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (false, LAError(.userCancel))
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
-                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             let enrolButtonViewModel = sut.enrolButtonViewModel
@@ -125,9 +109,6 @@ struct LocalAuthenticationOnboardingViewModelTests {
         #expect(completion)
         #expect(mockLocalAuthenticationService.authenticationOnboardingFlowSeen)
         #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        let event = mockAnalyticsService._trackedEvents.first
-        #expect(event?.params?["text"] as? String == "Allow Face ID")
     }
 
     @Test
@@ -136,13 +117,11 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
-                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             let skipButtonViewModel = sut.skipButtonViewModel
@@ -150,11 +129,8 @@ struct LocalAuthenticationOnboardingViewModelTests {
         }
 
         #expect(completion)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(mockLocalAuthenticationService.faceIdSkipped)
-        let event = mockAnalyticsService._trackedEvents.first
-        #expect(event?.params?["text"] as? String == "Skip")
     }
 
     @Test
@@ -163,13 +139,11 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
-        let mockAnalyticsService = MockAnalyticsService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
                 userDefaults: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
-                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             let skipButtonViewModel = sut.skipButtonViewModel
@@ -177,11 +151,8 @@ struct LocalAuthenticationOnboardingViewModelTests {
         }
 
         #expect(completion)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
         #expect(!mockLocalAuthenticationService.touchIdEnabled)
-        let event = mockAnalyticsService._trackedEvents.first
-        #expect(event?.params?["text"] as? String == "Skip")
     }
 
 }

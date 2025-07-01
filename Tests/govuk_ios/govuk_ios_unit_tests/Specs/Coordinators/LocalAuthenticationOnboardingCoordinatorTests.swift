@@ -14,7 +14,6 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             userDefaults: mockUserDefaults,
-            analyticsService: MockAnalyticsService(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -35,7 +34,6 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             userDefaults: mockUserDefaults,
-            analyticsService: MockAnalyticsService(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -58,7 +56,6 @@ class LocalAuthenticationOnboardingCoordinatorTests {
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 userDefaults: mockUserDefaults,
-                analyticsService: MockAnalyticsService(),
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -81,7 +78,6 @@ class LocalAuthenticationOnboardingCoordinatorTests {
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 userDefaults: mockUserDefaults,
-                analyticsService: MockAnalyticsService(),
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -107,7 +103,6 @@ class LocalAuthenticationOnboardingCoordinatorTests {
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 userDefaults: mockUserDefaults,
-                analyticsService: MockAnalyticsService(),
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }

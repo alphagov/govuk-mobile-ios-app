@@ -16,8 +16,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
-            analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: MockViewControllerBuilder(),
             completionAction: { }
@@ -37,8 +35,6 @@ class WelcomeOnboardingCoordinatorTests {
             let sut = WelcomeOnboardingCoordinator(
                 navigationController: mockNavigationController,
                 authenticationService: mockAuthenticationService,
-                onboardingAnalyticsService: MockAnalyticsService(),
-                analyticsService: MockAnalyticsService(),
                 coordinatorBuilder: mockCoordinatorBuilder,
                 viewControllerBuilder: MockViewControllerBuilder(),
                 completionAction: { continuation.resume(returning: true) }
@@ -66,8 +62,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
-            analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             completionAction: { }
@@ -97,8 +91,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
-            analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             completionAction: { }
@@ -128,8 +120,6 @@ class WelcomeOnboardingCoordinatorTests {
         let sut = WelcomeOnboardingCoordinator(
             navigationController: mockNavigationController,
             authenticationService: mockAuthenticationService,
-            onboardingAnalyticsService: MockAnalyticsService(),
-            analyticsService: MockAnalyticsService(),
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             completionAction: { }

@@ -14,6 +14,10 @@ struct InfoView: View {
         VStack {
             GeometryReader { geometry in
                 ScrollView {
+                    HStack {
+                        Spacer()
+                        Text(viewModel.versionNumber)
+                    }
                     infoView
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)

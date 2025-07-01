@@ -20,4 +20,8 @@ extension InfoViewModelInterface {
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }
+
+    var versionNumber: String {
+        Bundle.main.versionNumber ?? ""
+    }
 }

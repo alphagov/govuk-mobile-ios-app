@@ -131,6 +131,10 @@ final class RecentActivityListViewController: BaseViewController {
         view.addSubview(tableView)
         view.addSubview(informationScrollView)
         view.addSubview(editingToolbar)
+        editButtonItem.setTitleTextAttributes(
+            [.font: UIFont.govUK.subheadlineSemibold],
+            for: .normal
+        )
         informationScrollView.addSubview(informationView)
         removeBarButtonItem.isEnabled = false
         configureToolbarItems()

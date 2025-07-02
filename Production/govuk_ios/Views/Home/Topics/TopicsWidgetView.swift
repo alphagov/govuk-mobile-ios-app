@@ -50,6 +50,7 @@ class TopicsWidgetView: UIView {
             viewModel: viewModel
         )
         button.accessibilityLabel = String.home.localized("topicsWidgetEditButtonTitle")
+        button.titleLabel?.font = UIFont.govUK.subheadlineSemibold
         return button
     }()
 
@@ -155,6 +156,7 @@ class TopicsWidgetView: UIView {
         headerStackView.addArrangedSubview(editButton)
         headerStackView.accessibilityElements = [titleLabel, editButton]
         stackView.addArrangedSubview(headerStackView)
+        stackView.setCustomSpacing(8, after: headerStackView)
         stackView.addArrangedSubview(noTopicsLabel)
         stackView.addArrangedSubview(cardStackView)
         stackView.addArrangedSubview(allTopicsButton)

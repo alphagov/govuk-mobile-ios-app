@@ -7,17 +7,24 @@ public class TopAlignedBarButtonItem: UIBarButtonItem {
                 tint: UIColor,
                 action: @escaping (UIAction) -> Void) {
         let configuration = UIButton.Configuration.plain()
+        let attributedTitle = NSAttributedString(
+            string: title,
+            attributes: [
+                .foregroundColor: tint,
+                .font: UIFont.govUK.subheadlineSemibold
+            ]
+        )
+
         actionButton = UIButton(
             configuration: configuration,
-            primaryAction: .init(
+            primaryAction: UIAction(
                 title: title,
                 handler: action
             )
         )
+
+        actionButton.setAttributedTitle(attributedTitle, for: .normal)
         actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.titleLabel?.font = UIFont.govUK.body
-        actionButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        actionButton.tintColor = tint
         super.init()
         self.customView = createCustomView()
         self.customView?.isUserInteractionEnabled = true
@@ -53,7 +60,6 @@ public class TopAlignedBarButtonItem: UIBarButtonItem {
         ])
         // Bar button items don't automatically respond to dynamic type changes,
         // so need to set the font again to reflect updates
-        actionButton.titleLabel?.font = .govUK.body
     }
 
     required init?(coder: NSCoder) {

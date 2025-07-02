@@ -2,18 +2,23 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-struct InfoView: View {
+struct WelcomeOnboardingView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    private var viewModel: any InfoViewModelInterface
+    @StateObject var viewModel: WelcomeOnboardingViewModel
 
-    init(viewModel: any InfoViewModelInterface) {
-        self.viewModel = viewModel
+    init(viewModel: WelcomeOnboardingViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
         VStack {
             GeometryReader { geometry in
                 ScrollView {
+                    if let versionNumber = viewModel.versionNumber {
+                        Text(versionNumber)
+                            .font(Font.govUK.caption1)
+                            .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    }
                     infoView
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
@@ -59,21 +64,12 @@ struct InfoView: View {
     }
 }
 
-extension InfoView: TrackableScreen {
+extension WelcomeOnboardingView: TrackableScreen {
     var trackingName: String {
         viewModel.trackingName
     }
 
     var trackingTitle: String? {
         viewModel.trackingTitle
-    }
-}
-
-struct InfoSystemImage: View {
-    let imageName: String
-
-    var body: some View {
-        Image(systemName: imageName)
-            .font(.system(size: 107, weight: .light))
     }
 }

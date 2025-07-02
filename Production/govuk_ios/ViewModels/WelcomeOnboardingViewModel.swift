@@ -3,14 +3,16 @@ import GOVKit
 import UIComponents
 import SwiftUI
 
-final class WelcomeOnboardingViewModel: InfoViewModelInterface {
+final class WelcomeOnboardingViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     private let completeAction: () -> Void
+    @Published var versionNumber: String?
 
     init(analyticsService: AnalyticsServiceInterface,
          completeAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.completeAction = completeAction
+        getVersionNumber()
     }
 
     var title: String {
@@ -34,6 +36,10 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
                 self?.completeAction()
             }
         )
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
     }
 
     var image: AnyView {
@@ -61,5 +67,11 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
             external: false
         )
         analyticsService.track(event: event)
+    }
+
+    private func getVersionNumber() {
+        guard let versionNumber = Bundle.main.versionNumber
+        else { return }
+        self.versionNumber = "\(String.onboarding.localized("appVersionText")) \(versionNumber)"
     }
 }

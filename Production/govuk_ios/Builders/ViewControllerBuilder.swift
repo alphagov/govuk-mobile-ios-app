@@ -448,7 +448,7 @@ class ViewControllerBuilder {
             analyticsService: analyticsService,
             completeAction: completion
         )
-        let containerView = InfoView(
+        let containerView = WelcomeOnboardingView(
             viewModel: viewModel
         )
         return HostingViewController(

@@ -15,11 +15,9 @@ struct InfoView: View {
             GeometryReader { geometry in
                 ScrollView {
                     if viewModel.versionNumber != "" {
-                        Text(viewModel.versionNumber).foregroundColor(
-                            Color(
-                                UIColor.govUK.text.secondary
-                            )
-                        )
+                        Text(viewModel.versionNumber)
+                            .font(Font.govUK.caption1)
+                            .foregroundColor(Color(UIColor.govUK.text.secondary))
                     }
                     infoView
                         .frame(width: geometry.size.width)

@@ -17,7 +17,7 @@ public class TopAlignedBarButtonItem: UIBarButtonItem {
 
         actionButton = UIButton(
             configuration: configuration,
-            primaryAction: UIAction(
+            primaryAction: .init(
                 title: title,
                 handler: action
             )

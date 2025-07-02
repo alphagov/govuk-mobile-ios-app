@@ -4,7 +4,7 @@ import Foundation
 
 final class MockJailbreakDetectionService: JailbreakDetectionServiceInterface {
     var _stubbedIsJailbroken: Bool = false
-    var isJailbroken: Bool {
+    func isJailbroken() -> Bool {
         return _stubbedIsJailbroken
     }
 }

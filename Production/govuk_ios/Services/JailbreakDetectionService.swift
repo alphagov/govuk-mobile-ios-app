@@ -3,7 +3,7 @@ import GOVKit
 import MachO
 
 protocol JailbreakDetectionServiceInterface {
-    var isJailbroken: Bool { get }
+    func isJailbroken() -> Bool
 }
 
 final class JailbreakDetectionService: JailbreakDetectionServiceInterface {
@@ -19,7 +19,8 @@ final class JailbreakDetectionService: JailbreakDetectionServiceInterface {
         self.urlOpener = urlOpener
     }
 
-    var isJailbroken: Bool {
+    @inline(__always)
+    func isJailbroken() -> Bool {
         #if targetEnvironment(simulator)
             return false
         #else

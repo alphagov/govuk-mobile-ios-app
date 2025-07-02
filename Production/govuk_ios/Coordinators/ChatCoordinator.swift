@@ -11,7 +11,7 @@ class ChatCoordinator: TabItemCoordinator {
     private let configService: AppConfigServiceInterface
 
     lazy var isEnabled: Bool = {
-        configService.isFeatureEnabled(key: .chatService)
+        configService.isFeatureEnabled(key: .chat)
     }()
 
     init(navigationController: UINavigationController,

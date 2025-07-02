@@ -54,7 +54,7 @@ class AuthenticationCoordinatorTests {
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = false
         mockAuthenticationService._stubbedAuthenticationResult = .success(
-            .init(returningUser: false)
+            .init(returningUser: true)
         )
         let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
@@ -77,6 +77,7 @@ class AuthenticationCoordinatorTests {
         }
 
         #expect(mockSignInSuccessCoordinator._startCalled)
+        #expect(mockAnalyticsService._setExistingConsentCalled)
     }
 
     @Test
@@ -113,6 +114,7 @@ class AuthenticationCoordinatorTests {
         }
 
         #expect(mockAnalyticsService._resetConsentCalled)
+        #expect(!mockAnalyticsService._setExistingConsentCalled)
     }
 
     @Test

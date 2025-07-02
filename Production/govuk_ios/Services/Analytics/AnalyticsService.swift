@@ -35,9 +35,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func setExistingConsent() {
-        let accepted = permissionState == .accepted || permissionState == .denied
-        if accepted {
-            userDefaults.set(bool: accepted, forKey: .acceptedAnalytics)
+        if let accepted = hasAcceptedAnalytics {
             clients.forEach { $0.setEnabled(enabled: accepted) }
         }
     }

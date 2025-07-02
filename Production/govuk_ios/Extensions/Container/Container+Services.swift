@@ -44,7 +44,7 @@ extension Container {
     }
 
     @MainActor
-    var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
+    var baseAnalyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             AnalyticsService(
                 clients: [

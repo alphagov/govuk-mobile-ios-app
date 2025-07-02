@@ -8,5 +8,6 @@ public protocol AnalyticsServiceInterface {
     func resetConsent()
 
     func setAcceptedAnalytics(accepted: Bool)
+    func setExistingConsent()
     var permissionState: AnalyticsPermissionState { get }
 }

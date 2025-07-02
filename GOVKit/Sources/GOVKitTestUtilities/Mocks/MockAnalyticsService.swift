@@ -3,6 +3,10 @@ import XCTest
 @testable import GOVKit
 
 class MockAnalyticsService: AnalyticsServiceInterface {
+    var _setExistingConsentCalled: Bool = false
+    func setExistingConsent() {
+        _setExistingConsentCalled = true
+    }
 
     var _launchCalled: Bool = false
     func launch() {

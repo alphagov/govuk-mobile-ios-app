@@ -1,21 +1,25 @@
 import Foundation
 import UIKit
+import GOVKit
 
 class ReAuthenticationCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
+         analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void) {
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
         self.completionAction = completionAction
         self.coordinatorBuilder = coordinatorBuilder
+        self.analyticsService = analyticsService
         super.init(navigationController: navigationController)
     }
 
@@ -50,6 +54,7 @@ class ReAuthenticationCoordinator: BaseCoordinator {
 
         switch refreshRequestResult {
         case .success:
+            analyticsService.setExistingConsent()
             completionAction()
         case .failure:
             handleReauthFailure()

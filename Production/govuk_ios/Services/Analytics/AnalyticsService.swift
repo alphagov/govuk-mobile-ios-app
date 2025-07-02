@@ -9,7 +9,7 @@ class AnalyticsService: AnalyticsServiceInterface {
          userDefaults: UserDefaultsInterface) {
         self.clients = clients
         self.userDefaults = userDefaults
-        configureEnabled()
+        configureDisabled()
     }
 
     func launch() {
@@ -33,6 +33,14 @@ class AnalyticsService: AnalyticsServiceInterface {
         clients.forEach { $0.setEnabled(enabled: accepted) }
     }
 
+    func setExistingConsent() {
+        let accepted = permissionState == .accepted || permissionState == .denied
+        if accepted {
+            userDefaults.set(bool: accepted, forKey: .acceptedAnalytics)
+            clients.forEach { $0.setEnabled(enabled: accepted) }
+        }
+    }
+
     var permissionState: AnalyticsPermissionState {
         switch hasAcceptedAnalytics {
         case .none:
@@ -52,9 +60,8 @@ class AnalyticsService: AnalyticsServiceInterface {
         clients.forEach { $0.set(userProperty: userProperty) }
     }
 
-    private func configureEnabled() {
-        let accepted = hasAcceptedAnalytics ?? false
-        clients.forEach { $0.setEnabled(enabled: accepted) }
+    private func configureDisabled() {
+        clients.forEach { $0.setEnabled(enabled: false) }
     }
 
     private var hasAcceptedAnalytics: Bool? {

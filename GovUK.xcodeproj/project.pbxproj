@@ -282,6 +282,7 @@
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
 		D06C2A4F2DDF2FCF0045C674 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C2A4E2DDF2FCF0045C674 /* ResponseHandler.swift */; };
 		D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C2A502DDF39C90045C674 /* LocalAuthorityResponseHandler.swift */; };
+		D06C49B62DE5D2510045C674 /* JailbreakDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C49B52DE5D2510045C674 /* JailbreakDetectionService.swift */; };
 		D06C56092DE70F4D0045C674 /* AppAttestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06C56082DE70F4D0045C674 /* AppAttestService.swift */; };
 		D06C560B2DE711340045C674 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = D06C560A2DE711340045C674 /* FirebaseAppCheck */; };
 		D06EB96C2CA6F71E007EA081 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06EB96B2CA6F71E007EA081 /* TopicCard.swift */; };
@@ -308,6 +309,8 @@
 		D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */; };
 		D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */; };
 		D0C1F1E62CA4434100DD3D61 /* TopicsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */; };
+		D0D2C6932E13F87300620DC2 /* DynamicLibraryWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */; };
+		D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2C6942E13FBE000620DC2 /* JailbreakCoordinator.swift */; };
 		D0D655E82D26A79000571841 /* UIApplication+URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */; };
 		D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D661A22D285D1B00571841 /* GOVKitTestUtilities */; };
 		D0D9B0942D2C240E0051EDDD /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */; };
@@ -663,6 +666,7 @@
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
 		D06C2A4E2DDF2FCF0045C674 /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
 		D06C2A502DDF39C90045C674 /* LocalAuthorityResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityResponseHandler.swift; sourceTree = "<group>"; };
+		D06C49B52DE5D2510045C674 /* JailbreakDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailbreakDetectionService.swift; sourceTree = "<group>"; };
 		D06C56082DE70F4D0045C674 /* AppAttestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAttestService.swift; sourceTree = "<group>"; };
 		D06EB96B2CA6F71E007EA081 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
 		D076F9182D3544F0000278D5 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
@@ -690,6 +694,8 @@
 		D0B3EC012CE227D900A8F321 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
+		D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryWrapper.swift; sourceTree = "<group>"; };
+		D0D2C6942E13FBE000620DC2 /* JailbreakCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailbreakCoordinator.swift; sourceTree = "<group>"; };
 		D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLOpener.swift"; sourceTree = "<group>"; };
 		D0D9CB8F2D3024C00051EDDD /* SearchHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryItem.swift; sourceTree = "<group>"; };
 		D0D9CB902D3024C00051EDDD /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
@@ -938,6 +944,7 @@
 		16A39A2F2DA9D71000C71F43 /* Wrappers */ = {
 			isa = PBXGroup;
 			children = (
+				D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */,
 				1658CA682DDF56FE00622BC3 /* TimerWrapper.swift */,
 				16A39A2D2DA9D04100C71F43 /* AppAuthSessionWrapper.swift */,
 				16E912AE2DA72CAD00CD2049 /* OIDAuthorizationServiceWrapper.swift */,
@@ -1197,6 +1204,7 @@
 				5DC2506B2C91DB13009E9E7F /* Analytics */,
 				4EA1E27F2D8C611D0062453D /* Notifications */,
 				4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */,
+				D06C49B52DE5D2510045C674 /* JailbreakDetectionService.swift */,
 				5DF32E082E045F5F006C63E0 /* AccessibilityAnnouncerService.swift */,
 			);
 			path = Services;
@@ -1640,6 +1648,7 @@
 				5DFB48882DE9F7F600B41CDA /* ReLaunchCoordinator.swift */,
 				5DFB48892DE9F7F600B41CDA /* TopicOnboardingCoordinator.swift */,
 				5DFB488A2DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift */,
+				D0D2C6942E13FBE000620DC2 /* JailbreakCoordinator.swift */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -2297,6 +2306,7 @@
 				5D7D255F2D141CEC00BDC217 /* Redactor+Convenience.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,
 				5DDD58892D5A556A001C0B3E /* NotificationOnboardingCoordinator.swift in Sources */,
+				D0D2C6932E13F87300620DC2 /* DynamicLibraryWrapper.swift in Sources */,
 				5DD4CB0F2D95485200459FB5 /* Date+Extensions.swift in Sources */,
 				D07E7A582DAE662A00B92D40 /* LocalAuthorityRepository.swift in Sources */,
 				5DD4CB102D95485200459FB5 /* DateFormatter+Convenience.swift in Sources */,
@@ -2385,6 +2395,7 @@
 				D0E85A842DDCD199003B4D7A /* AmbiguousAddressSelectionViewModel.swift in Sources */,
 				5DA6E5332C47BD2700D41263 /* DeeplinkRouteProvider.swift in Sources */,
 				5DFDEBF12CEE396D00F7A365 /* UserProperty+Convenience.swift in Sources */,
+				D06C49B62DE5D2510045C674 /* JailbreakDetectionService.swift in Sources */,
 				4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */,
 				D096BFF22E04124E00426C51 /* ChatItem.swift in Sources */,
 				4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */,
@@ -2397,6 +2408,7 @@
 				D0F681402DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift in Sources */,
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
 				D0ECB3FE2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift in Sources */,
+				D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
 				4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */,
 				4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */,
@@ -2625,8 +2637,6 @@
 			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTHENTICATION_BASE_URL = "govukapp-staging.auth.eu-west-2.amazoncognito.com";
-				AUTHENTICATION_CLIENT_ID = 7qal023jms3dumkqd6173etleh;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -2647,7 +2657,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2659,7 +2669,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TOKEN_BASE_URL = "https://m0q9zbtrs2.execute-api.eu-west-2.amazonaws.com/staging";
 			};
 			name = Debug;
 		};
@@ -2668,8 +2677,6 @@
 			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTHENTICATION_BASE_URL = "govukapp-integration.auth.eu-west-2.amazoncognito.com";
-				AUTHENTICATION_CLIENT_ID = 35vb4qv5kigloongjg4snabius;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -2691,7 +2698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2704,7 +2711,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TOKEN_BASE_URL = "https://g0s70cfqng.execute-api.eu-west-2.amazonaws.com/integration";
 			};
 			name = Release;
 		};
@@ -2775,7 +2781,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2809,7 +2815,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2844,7 +2850,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2932,8 +2938,6 @@
 			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTHENTICATION_BASE_URL = "govukapp-staging.auth.eu-west-2.amazoncognito.com";
-				AUTHENTICATION_CLIENT_ID = 7qal023jms3dumkqd6173etleh;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2956,7 +2960,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2969,7 +2973,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TOKEN_BASE_URL = "https://m0q9zbtrs2.execute-api.eu-west-2.amazonaws.com/staging";
 			};
 			name = Alpha;
 		};

@@ -6,6 +6,9 @@ public protocol URLOpener {
 
     @discardableResult
     func openIfPossible(_ urlString: String) -> Bool
+
+    @discardableResult
+    func canOpenURL(_ url: URL) -> Bool
 }
 
 extension URLOpener {

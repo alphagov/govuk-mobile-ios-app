@@ -110,6 +110,7 @@ extension Container {
             NotificationService(
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current(),
+                configService: self.appConfigService.resolve(),
                 userDefaults: UserDefaults.standard
             )
         }
@@ -208,6 +209,14 @@ extension Container {
             ChatService(
                 serviceClient: self.chatServiceClient.resolve(),
                 chatRepository: self.chatRepository.resolve()
+            )
+        }
+    }
+
+    var jailbreakDetectionService: Factory<JailbreakDetectionServiceInterface> {
+        Factory(self) {
+            JailbreakDetectionService(
+                urlOpener: UIApplication.shared
             )
         }
     }

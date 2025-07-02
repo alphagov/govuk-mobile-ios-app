@@ -89,6 +89,23 @@ class CoordinatorBuilder {
         )
     }
 
+    var chat: TabItemCoordinator {
+        let navigationController = UINavigationController.chat
+
+        return ChatCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            coordinatorBuilder: self,
+            deepLinkStore: DeeplinkDataStore.chat(
+                coordinatorBuilder: self,
+                root: navigationController
+            ),
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve(),
+            configService: container.appConfigService.resolve()
+        )
+    }
+
     func launch(navigationController: UINavigationController,
                 completion: @escaping (AppLaunchResponse) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
@@ -348,17 +365,6 @@ class CoordinatorBuilder {
         )
     }
 
-//    func signedOut(navigationController: UINavigationController,
-//                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-//        SignedOutCoordinator(
-//            navigationController: navigationController,
-//            viewControllerBuilder: ViewControllerBuilder(),
-//            authenticationService: container.authenticationService.resolve(),
-//            analyticsService: container.analyticsService.resolve(),
-//            completion: completion
-//        )
-//    }
-
     func signInSuccess(navigationController: UINavigationController,
                        completion: @escaping () -> Void) -> BaseCoordinator {
         SignInSuccessCoordinator(
@@ -368,7 +374,6 @@ class CoordinatorBuilder {
             completion: completion
         )
     }
-
 
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(

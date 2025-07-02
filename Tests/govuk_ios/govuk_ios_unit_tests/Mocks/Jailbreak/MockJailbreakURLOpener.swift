@@ -2,26 +2,25 @@ import UIKit
 
 @testable import GOVKit
 
-class MockURLOpener: URLOpener {
+class MockJailbreakURLOpener: URLOpener {
 
-    var _receivedCanOpennUrl: URL?
-    var _stubbedCanOpenResult: Bool = true
+    var _openableURLS: [String] = []
     func canOpenURL(_ url: URL) -> Bool {
-        _receivedCanOpennUrl = url
-        return _stubbedCanOpenResult
+        let urls = _openableURLS.compactMap { URL(string: $0) }
+        return urls.contains(url)
     }
 
     var _stubbedOpenResult: Bool = true
-    
     var _receivedOpenIfPossibleUrl: URL?
     func openIfPossible(_ url: URL) -> Bool {
         _receivedOpenIfPossibleUrl = url
         return _stubbedOpenResult
     }
-    
+
     var _receivedOpenIfPossibleUrlString: String?
     func openIfPossible(_ urlString: String) -> Bool {
         _receivedOpenIfPossibleUrlString = urlString
         return _stubbedOpenResult
     }
+
 }

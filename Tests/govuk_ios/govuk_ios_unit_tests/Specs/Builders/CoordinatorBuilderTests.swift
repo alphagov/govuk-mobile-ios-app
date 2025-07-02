@@ -86,6 +86,17 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
+    func jailbreak_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.jailbreakDetector(
+            navigationController: MockNavigationController(),
+            dismissAction: {}
+        )
+
+        #expect(coordinator is JailbreakCoordinator)
+    }
+    
+    @Test
     func appUnavailable_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.appUnavailable(

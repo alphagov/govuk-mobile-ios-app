@@ -212,4 +212,12 @@ extension Container {
             )
         }
     }
+
+    var jailbreakDetectionService: Factory<JailbreakDetectionServiceInterface> {
+        Factory(self) {
+            JailbreakDetectionService(
+                urlOpener: UIApplication.shared
+            )
+        }
+    }
 }

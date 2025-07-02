@@ -18,13 +18,8 @@ extension Container {
         }
     }
 
+    @MainActor
     var analyticsService: Factory<AnalyticsServiceInterface> {
-        Factory(self) {
-            self.baseAnalyticsService()
-        }
-    }
-
-    var onboardingAnalyticsService: Factory<OnboardingAnalyticsService> {
         Factory(self) {
             self.baseAnalyticsService()
         }
@@ -48,6 +43,7 @@ extension Container {
         }
     }
 
+    @MainActor
     var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
         Factory(self) {
             AnalyticsService(
@@ -59,12 +55,14 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaults: UserDefaults.standard
+                userDefaults: UserDefaults.standard,
+                authenticationService: self.authenticationService.resolve()
             )
         }
         .scope(.singleton)
     }
 
+    @MainActor
     var appLaunchService: Factory<AppLaunchServiceInterface> {
         Factory(self) {
             AppLaunchService(
@@ -83,6 +81,7 @@ extension Container {
         }.scope(.singleton)
     }
 
+    @MainActor
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(

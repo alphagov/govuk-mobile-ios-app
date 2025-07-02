@@ -3,6 +3,7 @@ import Foundation
 import Testing
 
 @testable import Onboarding
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

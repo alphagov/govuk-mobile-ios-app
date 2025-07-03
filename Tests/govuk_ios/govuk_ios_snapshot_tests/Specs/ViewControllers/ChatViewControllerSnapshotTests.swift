@@ -4,6 +4,7 @@ import SwiftUI
 
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 final class ChatViewControllerSnapshotTests: SnapshotTestCase {
 

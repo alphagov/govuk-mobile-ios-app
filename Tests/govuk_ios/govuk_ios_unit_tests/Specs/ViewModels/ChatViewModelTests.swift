@@ -3,6 +3,7 @@ import Testing
 import GOVKit
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @Suite
 struct ChatViewModelTests {

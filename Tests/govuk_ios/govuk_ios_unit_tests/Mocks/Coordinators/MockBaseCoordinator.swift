@@ -7,6 +7,12 @@ import Testing
 class MockBaseCoordinator: BaseCoordinator,
                            DeeplinkRouteProvider,
                            TabItemCoordinatorInterface {
+
+    var _stubbedIsEnabled = true
+    var isEnabled: Bool {
+        _stubbedIsEnabled
+    }
+
     convenience init() {
         self.init(navigationController: .init())
     }

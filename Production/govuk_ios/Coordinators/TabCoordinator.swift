@@ -7,6 +7,7 @@ typealias TabItemCoordinator = BaseCoordinator
 & TabItemCoordinatorInterface
 
 protocol TabItemCoordinatorInterface {
+    var isEnabled: Bool { get }
     func didReselectTab()
 }
 
@@ -14,13 +15,16 @@ class TabCoordinator: BaseCoordinator,
                       UITabBarControllerDelegate {
     private lazy var homeCoordinator = coordinatorBuilder.home
     private lazy var settingsCoordinator = coordinatorBuilder.settings
+    private lazy var chatCoordinator = coordinatorBuilder.chat
     private var currentTabIndex = 0
 
     private var coordinators: [TabItemCoordinator] {
         [
             homeCoordinator,
+            chatCoordinator,
             settingsCoordinator
         ]
+            .filter { $0.isEnabled }
     }
 
     private lazy var tabController = UITabBarController.govUK

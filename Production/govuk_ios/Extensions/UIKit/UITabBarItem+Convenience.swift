@@ -17,4 +17,12 @@ extension UITabBarItem {
             selectedImage: nil
         )
     }
+
+    static var chat: UITabBarItem {
+        .init(
+            title: "Chat",
+            image: UIImage(named: "chat_icon"),
+            selectedImage: UIImage(named: "chat_icon_selected")
+        )
+    }
 }

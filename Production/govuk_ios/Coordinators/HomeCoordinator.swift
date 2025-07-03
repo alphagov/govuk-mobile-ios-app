@@ -16,6 +16,10 @@ class HomeCoordinator: TabItemCoordinator {
     private let activityService: ActivityServiceInterface
     private let localAuthorityService: LocalAuthorityServiceInterface
 
+    var isEnabled: Bool {
+        true
+    }
+
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,

@@ -6,12 +6,10 @@ import Testing
 struct SignInErrorViewModelTests {
 
     @Test
-    func signInRetryButton_tracksNavigationEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
+    func signInRetryButton_callsCompletion() {
         var didCallCompletion = false
 
         let sut = SignInErrorViewModel(
-            analyticsService: mockAnalyticsService,
             completion: {
                 didCallCompletion = true
             }
@@ -20,7 +18,6 @@ struct SignInErrorViewModelTests {
         sut.buttonViewModel.action()
 
         #expect(didCallCompletion)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == String.signOut.localized("signInRetryButtonTitle"))
     }
 
 }

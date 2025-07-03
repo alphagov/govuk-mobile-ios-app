@@ -17,19 +17,6 @@ class PreAuthCoordinator: BaseCoordinator {
         startJailbreakDetection(url: url)
     }
 
-    private func startLaunch(url: URL?) {
-        let coordinator = coordinatorBuilder.launch(
-            navigationController: root,
-            completion: { [weak self] response in
-                self?.startAnalyticsConsent(
-                    url: url,
-                    launchResponse: response
-                )
-            }
-        )
-        start(coordinator)
-    }
-
     private func startJailbreakDetection(url: URL?) {
         let coordinator = coordinatorBuilder.jailbreakDetector(
             navigationController: root,
@@ -42,14 +29,13 @@ class PreAuthCoordinator: BaseCoordinator {
         start(coordinator)
     }
 
-    private func startAnalyticsConsent(url: URL?,
-                                       launchResponse: AppLaunchResponse) {
-        let coordinator = coordinatorBuilder.analyticsConsent(
+    private func startLaunch(url: URL?) {
+        let coordinator = coordinatorBuilder.launch(
             navigationController: root,
-            completion: { [weak self] in
+            completion: { [weak self] response in
                 self?.startNotificationConsentCheck(
                     url: url,
-                    launchResponse: launchResponse
+                    launchResponse: response
                 )
             }
         )

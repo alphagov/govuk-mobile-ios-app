@@ -4,12 +4,9 @@ import UIComponents
 import SwiftUI
 
 final class SignInSuccessViewModel: InfoViewModelInterface {
-    let analyticsService: AnalyticsServiceInterface
     private let completion: () -> Void
 
-    init(analyticsService: AnalyticsServiceInterface,
-         completion: @escaping () -> Void) {
-        self.analyticsService = analyticsService
+    init(completion: @escaping () -> Void) {
         self.completion = completion
     }
 
@@ -30,7 +27,6 @@ final class SignInSuccessViewModel: InfoViewModelInterface {
         return .init(
             localisedTitle: localTitle,
             action: { [weak self] in
-                self?.trackNavigationEvent(localTitle)
                 self?.completion()
             }
         )
@@ -49,17 +45,5 @@ final class SignInSuccessViewModel: InfoViewModelInterface {
 
     var subtitleFont: Font {
         Font.govUK.title1
-    }
-
-    var trackingName: String { "Sign in success" }
-
-    var trackingTitle: String { title }
-
-    private func trackNavigationEvent(_ title: String) {
-        let event = AppEvent.buttonNavigation(
-            text: title,
-            external: false
-        )
-        analyticsService.track(event: event)
     }
 }

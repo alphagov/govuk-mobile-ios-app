@@ -1,6 +1,7 @@
 import Testing
 import UIKit
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

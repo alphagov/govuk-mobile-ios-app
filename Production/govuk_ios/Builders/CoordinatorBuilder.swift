@@ -296,8 +296,6 @@ class CoordinatorBuilder {
         WelcomeOnboardingCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
-            onboardingAnalyticsService: container.onboardingAnalyticsService.resolve(),
-            analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             completionAction: completionAction
@@ -325,6 +323,7 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
             completionAction: completionAction
         )
     }
@@ -334,7 +333,6 @@ class CoordinatorBuilder {
         LocalAuthenticationOnboardingCoordinator(
             navigationController: navigationController,
             userDefaults: UserDefaults.standard,
-            analyticsService: container.analyticsService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction

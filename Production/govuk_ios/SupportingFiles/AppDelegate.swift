@@ -11,7 +11,6 @@ class AppDelegate: UIResponder,
                      didFinishLaunchingWithOptions
                      launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         analyticsService.launch()
-        analyticsService.track(event: AppEvent.appLoaded)
         notificationService.appDidFinishLaunching(launchOptions: launchOptions)
         return true
     }

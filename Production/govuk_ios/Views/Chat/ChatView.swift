@@ -50,6 +50,9 @@ struct ChatView: View {
                 }
             }
             .padding()
+            .onAppear {
+                viewModel.loadHistory()
+            }
         }
     }
 }

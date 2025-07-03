@@ -15,7 +15,6 @@ class ChatViewModel: ObservableObject {
          analyticsService: AnalyticsServiceInterface) {
         self.chatService = chatService
         self.analyticsService = analyticsService
-        loadHistory()
     }
 
     func askQuestion() {
@@ -32,7 +31,6 @@ class ChatViewModel: ObservableObject {
             self?.cellModels.removeLast()
             switch result {
             case .success(let answer):
-//                self?.conversationId = self?.chatService.currentConversationId
                 guard answer.message != nil else { return }
                 let cellModel = ChatCellViewModel(answer: answer)
                 self?.cellModels.append(cellModel)
@@ -50,7 +48,7 @@ class ChatViewModel: ObservableObject {
               action: askQuestion)
     }
 
-    private func loadHistory() {
+    func loadHistory() {
         chatService.chatHistory(
             conversationId: chatService.currentConversationId
         ) { [weak self] result in

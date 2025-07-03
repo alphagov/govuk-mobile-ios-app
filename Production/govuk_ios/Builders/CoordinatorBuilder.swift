@@ -94,7 +94,6 @@ class CoordinatorBuilder {
 
         return ChatCoordinator(
             navigationController: navigationController,
-            viewControllerBuilder: ViewControllerBuilder(),
             coordinatorBuilder: self,
             deepLinkStore: DeeplinkDataStore.chat(
                 coordinatorBuilder: self,

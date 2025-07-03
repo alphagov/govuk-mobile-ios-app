@@ -3,7 +3,6 @@ import UIKit
 import GOVKit
 
 class ChatCoordinator: TabItemCoordinator {
-    private let viewControllerBuilder: ViewControllerBuilder
     private let coordinatorBuilder: CoordinatorBuilder
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
@@ -15,13 +14,11 @@ class ChatCoordinator: TabItemCoordinator {
     }()
 
     init(navigationController: UINavigationController,
-         viewControllerBuilder: ViewControllerBuilder,
          coordinatorBuilder: CoordinatorBuilder,
          deepLinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
          chatService: ChatServiceInterface,
          configService: AppConfigServiceInterface) {
-        self.viewControllerBuilder = viewControllerBuilder
         self.coordinatorBuilder = coordinatorBuilder
         self.deeplinkStore = deepLinkStore
         self.analyticsService = analyticsService

@@ -1,6 +1,5 @@
 import Foundation
 import Factory
-import Onboarding
 import GOVKit
 import UserNotifications
 
@@ -24,12 +23,6 @@ extension Container {
         }
     }
 
-    var onboardingAnalyticsService: Factory<OnboardingAnalyticsService> {
-        Factory(self) {
-            self.baseAnalyticsService()
-        }
-    }
-
     var searchService: Factory<SearchServiceInterface> {
         Factory(self) {
             SearchService(
@@ -48,7 +41,7 @@ extension Container {
         }
     }
 
-    var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
+    var baseAnalyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             AnalyticsService(
                 clients: [

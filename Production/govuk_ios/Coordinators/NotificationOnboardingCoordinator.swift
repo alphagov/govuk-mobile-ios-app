@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import GOVKit
 import UIComponents
-import Onboarding
 
 class NotificationOnboardingCoordinator: BaseCoordinator {
     private let notificationService: NotificationServiceInterface

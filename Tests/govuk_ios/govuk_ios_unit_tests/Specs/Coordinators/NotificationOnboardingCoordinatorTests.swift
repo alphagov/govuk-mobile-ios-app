@@ -2,8 +2,6 @@ import Foundation
 import Testing
 import UIKit
 
-import Onboarding
-
 @testable import govuk_ios
 
 @Suite

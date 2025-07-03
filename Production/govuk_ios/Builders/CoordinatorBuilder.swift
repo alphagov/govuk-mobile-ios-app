@@ -296,7 +296,6 @@ class CoordinatorBuilder {
         WelcomeOnboardingCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
-            onboardingAnalyticsService: container.onboardingAnalyticsService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),

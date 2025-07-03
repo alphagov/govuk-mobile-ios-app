@@ -1,8 +1,6 @@
 import Foundation
 import UIKit
 
-import Onboarding
-
 @testable import govuk_ios
 
 class MockNotificationService: NotificationServiceInterface {
@@ -30,11 +28,6 @@ class MockNotificationService: NotificationServiceInterface {
     var _stubbedShouldRequestPermission: Bool = true
     var shouldRequestPermission: Bool {
         _stubbedShouldRequestPermission
-    }
-
-    var _receivedFetchSlidesCompletion: ((Result<[any OnboardingSlideViewModelInterface], any Error>) -> Void)?
-    func fetchSlides(completion: @escaping (Result<[any OnboardingSlideViewModelInterface], any Error>) -> Void) {
-        _receivedFetchSlidesCompletion = completion
     }
 
     var _stubbedIsFetureEnabled: Bool = true

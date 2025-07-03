@@ -17,6 +17,7 @@ class CoordinatorBuilder {
         AppCoordinator(
             coordinatorBuilder: self,
             inactivityService: inactivityService,
+            authenticationService: container.authenticationService.resolve(),
             navigationController: navigationController
         )
     }

@@ -77,7 +77,6 @@ class ReturningUserService: ReturningUserServiceInterface {
         } catch {
             return .failure(.coreDataDeletionError)
         }
-        userDefaults.deleteAll()
         return .success(false)
     }
 

@@ -28,41 +28,40 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"
         let createdAt = "\(Date())"
-        let answerOne = Answer(
+        let sources: [Source] = [
+            .init(
+                title: "source 1",
+                url: "http://www.source1.com"
+            ),
+            .init(
+                title: "source 2",
+                url: "http://www.source2.com"
+            )
+        ]
+
+        let answer = Answer(
             createdAt: createdAt,
             id: "12345",
-            message: "This is answer one",
-            sources: nil
-        )
-        let answerTwo = Answer(
-            createdAt: createdAt,
-            id: "67890",
-            message: "This is answer two",
-            sources: nil
+            message: "This is the answer",
+            sources: sources
         )
 
-        let aqOne = AnsweredQuestion(
-            answer: answerOne,
+        let answeredQuestion = AnsweredQuestion(
+            answer: answer,
             conversationId: conversationId,
             createdAt: createdAt,
             id: "1",
-            message: "First question"
+            message: "This is the question"
         )
 
-        let aqTwo = AnsweredQuestion(
-            answer: answerTwo,
-            conversationId: conversationId,
-            createdAt: createdAt,
-            id: "2",
-            message: "Next question"
-        )
-
-        mockChatService._stubbedHistoryResult = .success([aqOne, aqTwo])
+        mockChatService._stubbedHistoryResult = .success([answeredQuestion])
 
         let viewModel = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService()
         )
+
+        viewModel.cellModels.append(.placeHolder)
 
         return ChatView(viewModel: viewModel)
     }

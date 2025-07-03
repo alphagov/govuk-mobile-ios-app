@@ -4,7 +4,6 @@ import UIComponents
  import MarkdownUI
 
 struct ChatCellView: View {
-    @State private var showSources: Bool = false
     private let viewModel: ChatCellViewModel
 
     private let cornerRadius: CGFloat = 10

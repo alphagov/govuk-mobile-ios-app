@@ -73,6 +73,14 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
+    func chat_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chat
+
+        #expect(coordinator is ChatCoordinator)
+    }
+
+    @Test
     func launch_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()

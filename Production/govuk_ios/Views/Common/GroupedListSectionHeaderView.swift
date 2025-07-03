@@ -39,7 +39,7 @@ class GroupedListSectionHeaderView: UIView {
             ),
             titleLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -8
+                constant: -16
             ),
             titleLabel.leftAnchor.constraint(
                 equalTo: leftAnchor,

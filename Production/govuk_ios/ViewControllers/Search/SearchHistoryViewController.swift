@@ -61,14 +61,16 @@ final class SearchHistoryViewController: UIViewController {
     }()
 
     private lazy var deleteButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
+        var configuration = UIButton.Configuration.plain()
         configuration.contentInsets = .zero
         configuration.titleAlignment = .trailing
         configuration.baseForegroundColor = UIColor.govUK.text.link
-        configuration.baseBackgroundColor = .clear
+        var title = AttributedString(
+            String.search.localized("clearHistoryButtonTitle")
+        )
+        title.setAttributes(.init([.font: UIFont.govUK.subheadlineSemibold]))
+        configuration.attributedTitle = title
         let button = UIButton(configuration: configuration)
-        button.setTitle(String.search.localized("clearHistoryButtonTitle"), for: .normal)
-        button.titleLabel?.font = UIFont.govUK.body
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.addAction(deleteAction, for: .touchUpInside)
         button.accessibilityLabel = String.search.localized("clearHistoryButtonAccessibilityTitle")

@@ -16,7 +16,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
 
         mockAnalyticsClient._enabledReceived = true
-        AnalyticsService(
+        _ = AnalyticsService(
             clients: [mockAnalyticsClient],
             userDefaults: mockUserDefaults,
             authenticationService: mockAuthenticationService

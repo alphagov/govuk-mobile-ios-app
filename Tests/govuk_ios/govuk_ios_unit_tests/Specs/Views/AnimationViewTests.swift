@@ -57,4 +57,39 @@ class AnimationViewTests {
         }
         #expect(called == true)
     }
+
+    @Test
+    @MainActor
+    func hasAnimationBegun_animationStopped_returnsFalse() {
+        let subject = AnimationView(
+            resourceName: "app_splash",
+            reducedAnimationProgress: 0
+        )
+
+        #expect(!subject.hasAnimationBegun)
+    }
+
+    @Test
+    @MainActor
+    func hasAnimationBegun_updatedProgress_returnsFalse() {
+        let subject = AnimationView(
+            resourceName: "app_splash",
+            reducedAnimationProgress: 0.5
+        )
+
+        mockAccessibilityManager.animationsEnabled = false
+
+        subject.animateIfAvailable { /* Do nothing */ }
+
+        #expect(subject.hasAnimationBegun)
+    }
+
+    @Test
+    @MainActor
+    func hasAnimationBegun_animationStarted_returnsTrue() {
+        let subject = AnimationView(resourceName: "app_splash")
+        subject.animateIfAvailable { /* Do nothing */ }
+
+        #expect(subject.hasAnimationBegun)
+    }
 }

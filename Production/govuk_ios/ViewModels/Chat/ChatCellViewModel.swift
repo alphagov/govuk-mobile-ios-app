@@ -41,10 +41,10 @@ struct ChatCellViewModel {
     }
 
     init(error: Error) {
-        self.message = error.localizedDescription
-        self.id = UUID().uuidString
-        self.type = .error
-        self.sources = []
+        self.init(message: error.localizedDescription,
+                  id: UUID().uuidString,
+                  type: .error,
+                  sources: [])
     }
 
     var isAnswer: Bool {

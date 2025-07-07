@@ -46,11 +46,7 @@ struct ChatCellView: View {
                 .padding()
                 .font(Font.govUK.bodySemibold)
             HStack(alignment: .firstTextBaseline) {
-                Markdown(viewModel.message)
-                    .environment(\.openURL, OpenURLAction { url in
-                        print("OPENED URL: \(url)")
-                        return .handled
-                    })
+                markdownView
                 if viewModel.type == .pendingAnswer {
                     progressView
                 }
@@ -67,18 +63,7 @@ struct ChatCellView: View {
     private var sourceView: some View {
         VStack(alignment: .leading, spacing: 8) {
             DisclosureGroup {
-                ForEach(viewModel.sources, id: \.url) { source in
-                    Link(destination: URL(string: source.url)!) {
-                        HStack {
-                            Text(source.title)
-                                .multilineTextAlignment(.leading)
-                                .padding(.top, 4)
-                            Spacer()
-                        }
-                    }
-                    Divider()
-                        .opacity(source.url == viewModel.sources.last?.url ? 0 : 1)
-                }
+                sourceListView
             } label: {
                 Text("GOV.UK pages used in this answer")
                     .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -115,24 +100,51 @@ struct ChatCellView: View {
             ProgressView()
         }
     }
+
+    private var markdownView: some View {
+        Markdown(viewModel.message)
+            .environment(\.openURL, OpenURLAction { url in
+                print("OPENED URL: \(url)")
+                return .handled
+            })
+    }
+
+    private var sourceListView: some View {
+        ForEach(viewModel.sources, id: \.url) { source in
+            Link(destination: source.urlWithFallback) {
+                HStack {
+                    Text(source.title)
+                        .multilineTextAlignment(.leading)
+                        .padding(.top, 4)
+                    Spacer()
+                }
+            }
+            Divider()
+                .opacity(source.url == viewModel.sources.last?.url ? 0 : 1)
+        }
+    }
 }
 
 struct ChatDisclosure: DisclosureGroupStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack {
-            Button {
-                withAnimation {
-                    configuration.isExpanded.toggle()
-                }
-            } label: {
-                HStack(alignment: .firstTextBaseline) {
-                    configuration.label
-                    Spacer()
-                    Image(systemName: configuration.isExpanded ? "chevron.up" : "chevron.down")
-                }
-            }
+            disclosureButtonView(configuration: configuration)
             if configuration.isExpanded {
                 configuration.content
+            }
+        }
+    }
+
+    private func disclosureButtonView(configuration: Configuration) -> some View {
+        Button {
+            withAnimation {
+                configuration.isExpanded.toggle()
+            }
+        } label: {
+            HStack(alignment: .firstTextBaseline) {
+                configuration.label
+                Spacer()
+                Image(systemName: configuration.isExpanded ? "chevron.up" : "chevron.down")
             }
         }
     }

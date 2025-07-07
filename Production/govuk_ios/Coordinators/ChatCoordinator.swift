@@ -40,7 +40,7 @@ class ChatCoordinator: TabItemCoordinator {
             navigationBarHidden: true
         )
 
-        self.set(viewController)
+        set(viewController)
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {

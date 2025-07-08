@@ -7,23 +7,20 @@ class ChatCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
-    private let configService: AppConfigServiceInterface
 
-    lazy var isEnabled: Bool = {
-        configService.isFeatureEnabled(key: .chat)
-    }()
+    var isEnabled: Bool {
+        chatService.isEnabled
+    }
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
          deepLinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
-         chatService: ChatServiceInterface,
-         configService: AppConfigServiceInterface) {
+         chatService: ChatServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.deeplinkStore = deepLinkStore
         self.analyticsService = analyticsService
         self.chatService = chatService
-        self.configService = configService
         super.init(navigationController: navigationController)
     }
 

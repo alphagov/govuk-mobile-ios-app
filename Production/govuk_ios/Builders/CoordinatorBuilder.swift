@@ -100,8 +100,7 @@ class CoordinatorBuilder {
                 root: navigationController
             ),
             analyticsService: container.analyticsService.resolve(),
-            chatService: container.chatService.resolve(),
-            configService: container.appConfigService.resolve()
+            chatService: container.chatService.resolve()
         )
     }
 

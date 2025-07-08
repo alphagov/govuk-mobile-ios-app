@@ -22,8 +22,7 @@ struct ChatCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
-            chatService: MockChatService(),
-            configService: MockAppConfigService()
+            chatService: MockChatService()
         )
 
         sut.start()

@@ -23,8 +23,7 @@ class TabCoordinator: BaseCoordinator,
             homeCoordinator,
             chatCoordinator,
             settingsCoordinator
-        ]
-            .filter { $0.isEnabled }
+        ].filter { $0.isEnabled }
     }
 
     private lazy var tabController = UITabBarController.govUK

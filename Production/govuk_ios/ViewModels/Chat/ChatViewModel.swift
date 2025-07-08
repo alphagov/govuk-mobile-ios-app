@@ -6,9 +6,9 @@ class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
 
+    @Published private(set) var questionInProgress: Bool = false
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
-    @Published var questionInProgress: Bool = false
     @Published var scrollToBottom: Bool = false
 
     init(chatService: ChatServiceInterface,

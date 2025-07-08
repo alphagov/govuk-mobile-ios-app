@@ -112,15 +112,19 @@ struct ChatCellView: View {
     private var sourceListView: some View {
         ForEach(viewModel.sources, id: \.url) { source in
             Link(destination: source.urlWithFallback) {
-                HStack {
-                    Text(source.title)
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 4)
-                    Spacer()
-                }
+                sourceListItemTitleView(title: source.title)
             }
             Divider()
                 .opacity(source.url == viewModel.sources.last?.url ? 0 : 1)
+        }
+    }
+
+    private func sourceListItemTitleView(title: String) -> some View {
+        HStack {
+            Text(title)
+                .multilineTextAlignment(.leading)
+                .padding(.top, 4)
+            Spacer()
         }
     }
 }

@@ -1,0 +1,72 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "answerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat"
+          }
+        }
+      }
+    },
+    "gettingAnswerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting your answer"
+          }
+        }
+      }
+    },
+    "mistakesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat can make mistakes. Check GOV.UK pages for important information."
+          }
+        }
+      }
+    },
+    "sendButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        }
+      }
+    },
+    "sourceListTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK pages used in this answer"
+          }
+        }
+      }
+    },
+    "tabTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

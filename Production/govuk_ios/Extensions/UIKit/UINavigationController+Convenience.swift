@@ -19,4 +19,12 @@ extension UINavigationController {
         navigationController.navigationBar.setGovUKAppearance()
         return navigationController
     }
+
+    static var chat: UINavigationController {
+        let navigationController = UINavigationController()
+        navigationController.tabBarItem = .chat
+        navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.navigationBar.prefersLargeTitles = false
+        return navigationController
+    }
 }

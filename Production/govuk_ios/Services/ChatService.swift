@@ -6,24 +6,32 @@ protocol ChatServiceInterface {
     func chatHistory(conversationId: String?,
                      completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void)
     func clearHistory()
+
     var currentConversationId: String? { get }
+    var isEnabled: Bool { get }
 }
 
 final class ChatService: ChatServiceInterface {
     private let serviceClient: ChatServiceClientInterface
     private let chatRepository: ChatRepositoryInterface
+    private let configService: AppConfigServiceInterface
     private let maxRetryCount: Int
     private let retryInterval: TimeInterval
     var currentConversationId: String? {
         chatRepository.fetchConversation()
     }
+    var isEnabled: Bool {
+        configService.isFeatureEnabled(key: .chat)
+    }
 
     init(serviceClient: ChatServiceClientInterface,
          chatRepository: ChatRepositoryInterface,
+         configService: AppConfigServiceInterface,
          maxRetryCount: Int = 10,
          retryInterval: TimeInterval = 6.0) {
         self.serviceClient = serviceClient
         self.chatRepository = chatRepository
+        self.configService = configService
         self.maxRetryCount = maxRetryCount
         self.retryInterval = retryInterval
     }

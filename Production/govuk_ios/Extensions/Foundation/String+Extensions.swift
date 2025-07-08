@@ -84,6 +84,13 @@ extension String {
             bundle: .main
         )
     }
+
+    static var chat: LocalStringBuilder {
+        .init(
+            tableName: "Chat",
+            bundle: .main
+        )
+    }
 }
 
 extension String {

@@ -62,7 +62,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App version number"
+            "value" : "Version"
           }
         }
       }

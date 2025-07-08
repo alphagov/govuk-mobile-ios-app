@@ -14,15 +14,16 @@ struct WelcomeOnboardingView: View {
         VStack {
             GeometryReader { geometry in
                 ScrollView {
-                    if let versionNumber = viewModel.versionNumber {
-                        Text(versionNumber)
-                            .font(Font.govUK.caption1)
-                            .foregroundColor(Color(UIColor.govUK.text.secondary))
-                    }
                     infoView
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
                 }.modifier(ScrollBounceBehaviorModifier())
+            }
+            if let versionNumber = viewModel.versionNumber {
+                Text(versionNumber)
+                    .font(Font.govUK.caption1)
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    .padding(.bottom, 16)
             }
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.listDivider))

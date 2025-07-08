@@ -1,0 +1,15 @@
+{
+  "originHash" : "3886588be9518f0c73a83bd3955aca7fdff580d141c442be3ca957f8b58f3a50",
+  "pins" : [
+    {
+      "identity" : "govuk-mobile-ios-ui-components",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "d175de64091db5e2cd535fa379a30bf027eb1540"
+      }
+    }
+  ],
+  "version" : 3
+}

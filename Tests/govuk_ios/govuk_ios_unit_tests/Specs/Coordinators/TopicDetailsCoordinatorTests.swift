@@ -3,6 +3,7 @@ import Foundation
 import Testing
 import SafariServices
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

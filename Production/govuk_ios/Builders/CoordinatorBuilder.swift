@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import UIKit
 import Foundation
 import Factory
@@ -88,6 +89,21 @@ class CoordinatorBuilder {
         )
     }
 
+    var chat: TabItemCoordinator {
+        let navigationController = UINavigationController.chat
+
+        return ChatCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
+            deepLinkStore: DeeplinkDataStore.chat(
+                coordinatorBuilder: self,
+                root: navigationController
+            ),
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve()
+        )
+    }
+
     func launch(navigationController: UINavigationController,
                 completion: @escaping (AppLaunchResponse) -> Void) -> BaseCoordinator {
         LaunchCoordinator(
@@ -106,6 +122,15 @@ class CoordinatorBuilder {
             notificationService: container.notificationService.resolve(),
             navigationController: navigationController,
             completion: completion
+        )
+    }
+
+    func jailbreakDetector(navigationController: UINavigationController,
+                           dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        JailbreakCoordinator(
+            navigationController: navigationController,
+            jailbreakDetectionService: container.jailbreakDetectionService.resolve(),
+            dismissAction: dismissAction
         )
     }
 
@@ -286,8 +311,6 @@ class CoordinatorBuilder {
         WelcomeOnboardingCoordinator(
             navigationController: navigationController,
             authenticationService: container.authenticationService.resolve(),
-            onboardingAnalyticsService: container.onboardingAnalyticsService.resolve(),
-            analyticsService: container.analyticsService.resolve(),
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             completionAction: completionAction
@@ -315,6 +338,7 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
+            analyticsService: container.analyticsService.resolve(),
             completionAction: completionAction
         )
     }
@@ -324,7 +348,6 @@ class CoordinatorBuilder {
         LocalAuthenticationOnboardingCoordinator(
             navigationController: navigationController,
             userDefaults: UserDefaults.standard,
-            analyticsService: container.analyticsService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction
@@ -340,17 +363,6 @@ class CoordinatorBuilder {
         )
     }
 
-//    func signedOut(navigationController: UINavigationController,
-//                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-//        SignedOutCoordinator(
-//            navigationController: navigationController,
-//            viewControllerBuilder: ViewControllerBuilder(),
-//            authenticationService: container.authenticationService.resolve(),
-//            analyticsService: container.analyticsService.resolve(),
-//            completion: completion
-//        )
-//    }
-
     func signInSuccess(navigationController: UINavigationController,
                        completion: @escaping () -> Void) -> BaseCoordinator {
         SignInSuccessCoordinator(
@@ -360,7 +372,6 @@ class CoordinatorBuilder {
             completion: completion
         )
     }
-
 
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(

@@ -4,7 +4,7 @@ import GOVKit
 import UIComponents
 
 protocol InfoViewModelInterface {
-    var analyticsService: AnalyticsServiceInterface { get }
+    var analyticsService: AnalyticsServiceInterface? { get }
     var title: String { get }
     var subtitle: String { get }
     var buttonTitle: String { get }
@@ -17,7 +17,13 @@ protocol InfoViewModelInterface {
 }
 
 extension InfoViewModelInterface {
+    var analyticsService: AnalyticsServiceInterface? { nil }
+    var trackingName: String { "" }
+    var trackingTitle: String { "" }
+
     func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
+        if let analyticsService = analyticsService {
+            analyticsService.track(screen: screen)
+        }
     }
 }

@@ -12,17 +12,14 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private var biometryType: LocalAuthenticationType = .none
-    private let analyticsService: AnalyticsServiceInterface
     private let completionAction: (() -> Void)
     init(userDefaults: UserDefaultsInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
          authenticationService: AuthenticationServiceInterface,
-         analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void) {
         self.userDefaults = userDefaults
         self.localAuthenticationService = localAuthenticationService
         self.authenticationService = authenticationService
-        self.analyticsService = analyticsService
         self.completionAction = completionAction
         updateAuthType()
     }
@@ -41,7 +38,6 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
                 }
 
                 self?.localAuthenticationService.setLocalAuthenticationOnboarded()
-                self?.trackEnrolEvent()
                 self?.completionAction()
             }
         }
@@ -55,25 +51,8 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
                 self?.localAuthenticationService.setFaceIdSkipped(true)
             }
             self?.localAuthenticationService.setLocalAuthenticationOnboarded()
-            self?.trackSkipEvent()
             self?.completionAction()
         }
-    }
-
-    private func trackEnrolEvent() {
-        let event = AppEvent.buttonNavigation(
-            text: enrolButtonTitle,
-            external: false
-        )
-        analyticsService.track(event: event)
-    }
-
-    private func trackSkipEvent() {
-        let event = AppEvent.buttonNavigation(
-            text: "Skip",
-            external: false
-        )
-        analyticsService.track(event: event)
     }
 
     private func updateAuthType() {

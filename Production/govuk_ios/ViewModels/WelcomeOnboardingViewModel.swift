@@ -8,9 +8,7 @@ final class WelcomeOnboardingViewModel: ObservableObject {
     private let completeAction: () -> Void
     @Published var versionNumber: String?
 
-    init(analyticsService: AnalyticsServiceInterface,
-         completeAction: @escaping () -> Void) {
-        self.analyticsService = analyticsService
+    init(completeAction: @escaping () -> Void) {
         self.completeAction = completeAction
         getVersionNumber()
     }
@@ -32,7 +30,6 @@ final class WelcomeOnboardingViewModel: ObservableObject {
         return .init(
             localisedTitle: localTitle,
             action: { [weak self] in
-                self?.trackNavigationEvent(localTitle)
                 self?.completeAction()
             }
         )

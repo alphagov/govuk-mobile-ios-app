@@ -14,9 +14,12 @@ class AnimationView: UIView {
     )
 
     private let resourceName: String
+    private let reducedAnimationProgress: CGFloat
 
-    init(resourceName: String) {
+    init(resourceName: String,
+         reducedAnimationProgress: CGFloat = 0) {
         self.resourceName = resourceName
+        self.reducedAnimationProgress = reducedAnimationProgress
         super.init(frame: .zero)
         configureUI()
         configureConstraints()
@@ -46,6 +49,11 @@ class AnimationView: UIView {
         }
     }
 
+    var hasAnimationBegun: Bool {
+        internalAnimationView.isAnimationPlaying ||
+        internalAnimationView.currentProgress > 0
+    }
+
     private func beginAnimation(completion: @escaping () -> Void) {
         internalAnimationView.play(
             completion: { finished in
@@ -56,6 +64,7 @@ class AnimationView: UIView {
     }
 
     private func pauseTransition(completion: @escaping () -> Void) {
+        internalAnimationView.currentProgress = reducedAnimationProgress
         DispatchQueue.main
             .asyncAfter(deadline: .now() + 2) {
                 completion()

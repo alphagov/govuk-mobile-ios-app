@@ -3,6 +3,7 @@ import UIKit
 import Testing
 import GOVKit
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
@@ -14,6 +15,9 @@ struct TabCoordinatorTests {
 
         let mockHomeCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
+
+        let mockChatCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedChatCoordinator = mockChatCoordinator
 
         let mockSettingsCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSettingsCoordinator = mockSettingsCoordinator
@@ -29,9 +33,10 @@ struct TabCoordinatorTests {
 
         #expect(navigationController.viewControllers.count == 1)
         let tabController = navigationController.viewControllers.first as? UITabBarController
-        #expect(tabController?.viewControllers?.count == 2)
+        #expect(tabController?.viewControllers?.count == 3)
         let expectedCoordinators = [
             mockHomeCoordinator,
+            mockChatCoordinator,
             mockSettingsCoordinator
         ]
         expectedCoordinators.forEach {
@@ -46,6 +51,9 @@ struct TabCoordinatorTests {
 
         let mockHomeCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
+
+        let mockChatCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedChatCoordinator = mockChatCoordinator
 
         let mockSettingsCoordinator = MockBaseCoordinator()
         let mockRoute = MockDeeplinkRoute(pattern: "/test")
@@ -66,7 +74,7 @@ struct TabCoordinatorTests {
         subject.start(url: url)
         let tabController = navigationController.viewControllers.first as? UITabBarController
 
-        #expect(tabController?.selectedIndex == 1)
+        #expect(tabController?.selectedIndex == 2)
         #expect(mockRoute._actionCalled)
 
         #expect(mockAnalyticsService._trackedEvents.count == 1)
@@ -249,6 +257,9 @@ struct TabCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsSignedIn = false
 
+        let mockChatCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedChatCoordinator = mockChatCoordinator
+
         let settingsCoordinator = SettingsCoordinator(
             navigationController: MockNavigationController(),
             viewControllerBuilder: MockViewControllerBuilder(),
@@ -270,8 +281,8 @@ struct TabCoordinatorTests {
         )
 
         subject.start(url: nil)
-        #expect(subject.childCoordinators.count == 2)
+        #expect(subject.childCoordinators.count == 3)
         settingsCoordinator.finish()
-        #expect(subject.childCoordinators.count == 1)
+        #expect(subject.childCoordinators.count == 2)
     }
 }

@@ -295,23 +295,8 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func signedOut(authenticationService: AuthenticationServiceInterface,
-                   analyticsService: AnalyticsServiceInterface,
-                   completion: @escaping () -> Void) -> UIViewController {
-        let viewModel = SignedOutViewModel(
-            authenticationService: authenticationService,
-            analyticsService: analyticsService,
-            completion: completion
-        )
-        let view = InfoView(viewModel: viewModel)
-        let viewController = HostingViewController(rootView: view)
-        return viewController
-    }
-
-    func signInError(analyticsService: AnalyticsServiceInterface,
-                     completion: @escaping () -> Void) -> UIViewController {
+    func signInError(completion: @escaping () -> Void) -> UIViewController {
         let viewModel = SignInErrorViewModel(
-            analyticsService: analyticsService,
             completion: completion
         )
         let view = InfoView(viewModel: viewModel)
@@ -442,10 +427,8 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func welcomeOnboarding(analyticsService: AnalyticsServiceInterface,
-                           completion: @escaping () -> Void) -> UIViewController {
+    func welcomeOnboarding(completion: @escaping () -> Void) -> UIViewController {
         let viewModel = WelcomeOnboardingViewModel(
-            analyticsService: analyticsService,
             completeAction: completion
         )
         let containerView = WelcomeOnboardingView(

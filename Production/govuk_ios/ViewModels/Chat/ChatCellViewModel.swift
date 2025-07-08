@@ -70,7 +70,7 @@ struct ChatCellViewModel {
 
 extension ChatCellViewModel {
     static var placeHolder: ChatCellViewModel = .init(
-        message: "Getting your answer",
+        message: String.chat.localized("gettingAnswerTitle"),
         id: UUID().uuidString,
         type: .pendingAnswer
     )

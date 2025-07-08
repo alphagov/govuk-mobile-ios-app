@@ -44,7 +44,7 @@ class ChatViewModel: ObservableObject {
     }
 
     var sendButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(localisedTitle: "Send",
+        .init(localisedTitle: String.chat.localized("sendButtonTitle"),
               action: askQuestion)
     }
 

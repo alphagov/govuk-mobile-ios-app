@@ -42,7 +42,7 @@ struct ChatCellView: View {
 
     private var answerView: some View {
         VStack(alignment: .leading) {
-            Text("GOV.UK Chat")
+            Text(String.chat.localized("answerTitle"))
                 .padding()
                 .font(Font.govUK.bodySemibold)
             HStack(alignment: .firstTextBaseline) {
@@ -65,7 +65,7 @@ struct ChatCellView: View {
             DisclosureGroup {
                 sourceListView
             } label: {
-                Text("GOV.UK pages used in this answer")
+                Text(String.chat.localized("sourceListTitle"))
                     .foregroundColor(Color(UIColor.govUK.text.primary))
             }
         }
@@ -78,7 +78,7 @@ struct ChatCellView: View {
             Image(systemName: "exclamationmark.circle.fill")
                 .font(Font.govUK.bodySemibold)
                 .foregroundColor(Color(.govUK.text.trailingIcon))
-            Text("Chat can make mistakes. Check GOV.UK pages for important information.")
+            Text(String.chat.localized("mistakesTitle"))
                 .font(Font.govUK.bodySemibold)
         }
         .padding()

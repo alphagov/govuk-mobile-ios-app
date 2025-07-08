@@ -4,7 +4,7 @@ import Foundation
 extension UITabBarItem {
     static var home: UITabBarItem {
         .init(
-            title: "Home",
+            title: String.home.localized("pageTitle"),
             image: UIImage(systemName: "house"),
             selectedImage: nil
         )
@@ -12,7 +12,7 @@ extension UITabBarItem {
 
     static var settings: UITabBarItem {
         .init(
-            title: "Settings",
+            title: String.settings.localized("pageTitle"),
             image: UIImage(systemName: "gearshape"),
             selectedImage: nil
         )
@@ -20,7 +20,7 @@ extension UITabBarItem {
 
     static var chat: UITabBarItem {
         .init(
-            title: "Chat",
+            title: String.chat.localized("tabTitle"),
             image: UIImage(named: "chat_icon"),
             selectedImage: UIImage(named: "chat_icon_selected")
         )

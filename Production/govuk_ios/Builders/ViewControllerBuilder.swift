@@ -427,8 +427,10 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func welcomeOnboarding(completion: @escaping () -> Void) -> UIViewController {
+    func welcomeOnboarding(analyticsService: AnalyticsServiceInterface,
+                           completion: @escaping () -> Void) -> UIViewController {
         let viewModel = WelcomeOnboardingViewModel(
+            analyticsService: analyticsService,
             completeAction: completion
         )
         let containerView = WelcomeOnboardingView(

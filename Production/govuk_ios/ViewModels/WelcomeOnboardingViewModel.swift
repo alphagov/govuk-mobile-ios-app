@@ -8,8 +8,10 @@ final class WelcomeOnboardingViewModel: ObservableObject {
     private let completeAction: () -> Void
     @Published var versionNumber: String?
 
-    init(completeAction: @escaping () -> Void) {
+    init(analyticsService: AnalyticsServiceInterface,
+         completeAction: @escaping () -> Void) {
         self.completeAction = completeAction
+        self.analyticsService = analyticsService
         getVersionNumber()
     }
 

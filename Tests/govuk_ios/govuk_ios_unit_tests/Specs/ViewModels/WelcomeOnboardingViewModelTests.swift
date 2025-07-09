@@ -1,4 +1,5 @@
 import Foundation
+@testable import GOVKitTestUtilities
 import Testing
 
 @testable import govuk_ios
@@ -8,12 +9,12 @@ struct WelcomeOnboardingViewModelTests {
     func primaryButtonViewModel_action_completesAction() async {
         let completion = await withCheckedContinuation { continuation in
             let sut = WelcomeOnboardingViewModel(
+                analyticsService: MockAnalyticsService(),
                 completeAction: { continuation.resume(returning: true) }
             )
             let buttonViewModel = sut.buttonViewModel
             buttonViewModel.action()
         }
-
         #expect(completion)
     }
 }

@@ -60,14 +60,6 @@ final class WelcomeOnboardingViewModel: ObservableObject {
 
     var trackingTitle: String { title }
 
-    private func trackNavigationEvent(_ title: String) {
-        let event = AppEvent.buttonNavigation(
-            text: title,
-            external: false
-        )
-        analyticsService.track(event: event)
-    }
-
     private func getVersionNumber() {
         guard let versionNumber = Bundle.main.versionNumber
         else { return }

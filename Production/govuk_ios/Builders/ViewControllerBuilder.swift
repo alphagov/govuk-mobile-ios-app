@@ -431,7 +431,7 @@ class ViewControllerBuilder {
         let viewModel = WelcomeOnboardingViewModel(
             completeAction: completion
         )
-        let containerView = InfoView(
+        let containerView = WelcomeOnboardingView(
             viewModel: viewModel
         )
         return HostingViewController(

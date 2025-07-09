@@ -13,7 +13,6 @@ struct WelcomeOnboardingViewModelTests {
             let buttonViewModel = sut.buttonViewModel
             buttonViewModel.action()
         }
-
         #expect(completion)
     }
 }

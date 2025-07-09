@@ -254,7 +254,7 @@ struct ViewControllerBuilderTests {
             completion: { }
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView = (result as? HostingViewController<WelcomeOnboardingView>)?.rootView
         #expect(rootView != nil)
     }
 

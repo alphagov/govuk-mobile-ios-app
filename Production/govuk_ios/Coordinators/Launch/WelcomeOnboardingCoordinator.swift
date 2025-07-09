@@ -8,7 +8,6 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     private let authenticationService: AuthenticationServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
-    private let analyticsService: AnalyticsServiceInterface
     private let viewControllerBuilder: ViewControllerBuilder
     private var pendingAuthenticationCoordinator: BaseCoordinator?
     private let completionAction: () -> Void
@@ -17,13 +16,11 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
          authenticationService: AuthenticationServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
-         analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
-        self.analyticsService = analyticsService
         self.completionAction = completionAction
         super.init(navigationController: navigationController)
     }

@@ -19,7 +19,6 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: MockViewControllerBuilder(),
-            analyticsService: MockAnalyticsService(),
             completionAction: { }
         )
         sut.start(url: nil)
@@ -39,7 +38,6 @@ class WelcomeOnboardingCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 coordinatorBuilder: mockCoordinatorBuilder,
                 viewControllerBuilder: MockViewControllerBuilder(),
-                analyticsService: MockAnalyticsService(),
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -67,7 +65,6 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
-            analyticsService: MockAnalyticsService(),
             completionAction: { }
         )
 
@@ -97,7 +94,6 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
-            analyticsService: MockAnalyticsService(),
             completionAction: { }
         )
 
@@ -127,7 +123,6 @@ class WelcomeOnboardingCoordinatorTests {
             authenticationService: mockAuthenticationService,
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
-            analyticsService: MockAnalyticsService(),
             completionAction: { }
         )
 

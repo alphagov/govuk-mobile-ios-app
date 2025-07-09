@@ -251,7 +251,6 @@ struct ViewControllerBuilderTests {
     func welcomeOnboarding_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.welcomeOnboarding(
-            analyticsService: MockAnalyticsService(),
             completion: { }
         )
 

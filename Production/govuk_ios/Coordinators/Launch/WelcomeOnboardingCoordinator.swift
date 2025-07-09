@@ -37,7 +37,6 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     private func setWelcomeOnboardingViewController(_ animated: Bool = true) {
         let viewController = viewControllerBuilder.welcomeOnboarding(
-            analyticsService: analyticsService,
             completion: { [weak self] in
                 self?.startAuthentication()
             }

@@ -37,9 +37,6 @@ struct WelcomeOnboardingView: View {
             .ignoresSafeArea()
         }
         .navigationBarHidden(true)
-        .onAppear {
-            viewModel.trackScreen(screen: self)
-        }
     }
 
     private var infoView: some View {
@@ -62,15 +59,5 @@ struct WelcomeOnboardingView: View {
                 .multilineTextAlignment(.center)
         }
         .padding(.horizontal, 16)
-    }
-}
-
-extension WelcomeOnboardingView: TrackableScreen {
-    var trackingName: String {
-        viewModel.trackingName
-    }
-
-    var trackingTitle: String? {
-        viewModel.trackingTitle
     }
 }

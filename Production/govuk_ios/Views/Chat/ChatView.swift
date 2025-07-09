@@ -11,10 +11,10 @@ struct ChatView: View {
     }
     var body: some View {
         ZStack {
+            Color(UIColor.govUK.fills.surfaceChatBackground)
             VStack {
                 chatCellsScrollViewReaderView
                 Spacer()
-                Divider()
                 textFieldQuestionView
             }
             .padding()
@@ -60,15 +60,62 @@ struct ChatView: View {
 
     private var textFieldQuestionView: some View {
         HStack {
+            Menu {
+                Button(role: .destructive, action: clearChat) {
+                    Label("Clear chat", systemImage: "trash")
+                }
+                Button(action: showAbout) {
+                    Label("About", systemImage: "info.circle")
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundStyle(Color(UIColor.govUK.text.buttonSecondary))
+                }
+                .background(
+                    Circle()
+                        .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Circle()
+                                .stroke(
+                                    Color(UIColor.govUK.strokes.listDivider),
+                                    lineWidth: 1
+                                )
+                        )
+                )
+            }
+            .padding(16)
+
             TextField("", text: $viewModel.latestQuestion)
-                .textFieldStyle(.roundedBorder)
                 .disabled(viewModel.questionInProgress)
                 .layoutPriority(2.0)
+                .padding(.horizontal, 16)
+                .frame(height: 50)
+                .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .stroke(Color(UIColor.govUK.strokes.listDivider), lineWidth: 1)
+                        )
+                )
             SwiftUIButton(.compact,
                           viewModel: viewModel.sendButtonViewModel)
             .disabled(viewModel.questionInProgress || viewModel.latestQuestion.isEmpty)
             .layoutPriority(1.0)
             .frame(minWidth: 100)
         }
+    }
+
+    func showAbout() {
+        // Implement your about logic here
+        print("About tapped")
+    }
+
+    func clearChat() {
+        // Implement your about logic here
+        print("Clear chat")
     }
 }

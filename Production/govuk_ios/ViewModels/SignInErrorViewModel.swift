@@ -4,12 +4,9 @@ import UIComponents
 import SwiftUI
 
 final class SignInErrorViewModel: InfoViewModelInterface {
-    let analyticsService: AnalyticsServiceInterface
     private let completion: () -> Void
 
-    init(analyticsService: AnalyticsServiceInterface,
-         completion: @escaping () -> Void) {
-        self.analyticsService = analyticsService
+    init(completion: @escaping () -> Void) {
         self.completion = completion
     }
 
@@ -29,7 +26,6 @@ final class SignInErrorViewModel: InfoViewModelInterface {
         GOVUKButton.ButtonViewModel(
             localisedTitle: buttonTitle) { [weak self] in
                 guard let self = self else { return }
-                self.trackNavigationEvent(self.buttonTitle)
                 self.completion()
             }
     }
@@ -46,16 +42,5 @@ final class SignInErrorViewModel: InfoViewModelInterface {
 
     var subtitleFont: Font {
         Font.govUK.body
-    }
-
-    var trackingName: String { "Sign In Error" }
-    var trackingTitle: String { title }
-
-    private func trackNavigationEvent(_ title: String) {
-        let event = AppEvent.buttonNavigation(
-            text: title,
-            external: false
-        )
-        analyticsService.track(event: event)
     }
 }

@@ -13,7 +13,6 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
-            analyticsService: MockAnalyticsService(),
             completionAction: {}
         )
         let settingsContentView = LocalAuthenticationOnboardingView(
@@ -36,7 +35,6 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
-            analyticsService: MockAnalyticsService(),
             completionAction: {}
         )
         let settingsContentView = LocalAuthenticationOnboardingView(
@@ -59,7 +57,6 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
-            analyticsService: MockAnalyticsService(),
             completionAction: {}
         )
         let settingsContentView = LocalAuthenticationOnboardingView(
@@ -82,7 +79,6 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
             userDefaults: MockUserDefaults(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
-            analyticsService: MockAnalyticsService(),
             completionAction: {}
         )
         let settingsContentView = LocalAuthenticationOnboardingView(

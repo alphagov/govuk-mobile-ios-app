@@ -7,8 +7,6 @@ import Onboarding
 class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     private let authenticationService: AuthenticationServiceInterface
-    private let onboardingAnalyticsService: OnboardingAnalyticsService
-    private let analyticsService: AnalyticsServiceInterface
     private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private var pendingAuthenticationCoordinator: BaseCoordinator?
@@ -16,15 +14,11 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
-         onboardingAnalyticsService: OnboardingAnalyticsService,
-         analyticsService: AnalyticsServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
-        self.onboardingAnalyticsService = onboardingAnalyticsService
-        self.analyticsService = analyticsService
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.completionAction = completionAction
@@ -40,7 +34,6 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     private func setWelcomeOnboardingViewController(_ animated: Bool = true) {
         let viewController = viewControllerBuilder.welcomeOnboarding(
-            analyticsService: analyticsService,
             completion: { [weak self] in
                 self?.startAuthentication()
             }
@@ -71,7 +64,6 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     private func setSignInError() {
         let viewController = viewControllerBuilder.signInError(
-            analyticsService: analyticsService,
             completion: { [weak self] in
                 self?.setWelcomeOnboardingViewController(false)
             }

@@ -8,15 +8,18 @@ final class ChatServiceTests {
 
     var mockChatServiceClient: MockChatServiceClient!
     var mockChatRepository: MockChatRespository!
+    var mockConfigService: MockAppConfigService!
 
     init() {
         mockChatServiceClient = MockChatServiceClient()
         mockChatRepository = MockChatRespository()
+        mockConfigService = MockAppConfigService()
     }
 
     deinit {
         mockChatServiceClient = nil
         mockChatRepository = nil
+        mockConfigService = nil
     }
 
     @Test
@@ -24,6 +27,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 1,
             retryInterval: 0.2
         )
@@ -50,6 +54,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -77,6 +82,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -108,6 +114,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 0,
             retryInterval: 0.2
         )
@@ -132,6 +139,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 2,
             retryInterval: 0.2
         )
@@ -160,6 +168,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 3,
             retryInterval: 0.2
         )
@@ -185,6 +194,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 1,
             retryInterval: 0.2
         )
@@ -208,6 +218,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 1,
             retryInterval: 0.2
         )
@@ -234,12 +245,41 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
+            configService: mockConfigService,
             maxRetryCount: 1,
             retryInterval: 0.2
         )
 
         sut.clearHistory()
         #expect(mockChatRepository.fetchConversation() == nil)
+    }
+
+    @Test
+    func isEnabled_featureUnavailable_returnsFalse() {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            maxRetryCount: 1,
+            retryInterval: 0.2
+        )
+        mockConfigService.features = []
+
+        #expect(sut.isEnabled == false)
+    }
+
+    @Test
+    func isEnabled_featureAvailable_returnsTrue() async throws {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            maxRetryCount: 1,
+            retryInterval: 0.2
+        )
+        mockConfigService.features = [.chat]
+
+        #expect(sut.isEnabled == true)
     }
 }
 

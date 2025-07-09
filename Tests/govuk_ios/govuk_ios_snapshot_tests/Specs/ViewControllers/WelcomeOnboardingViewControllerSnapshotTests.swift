@@ -9,7 +9,6 @@ import GOVKit
 class WelcomeOnboardingViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = WelcomeOnboardingViewModel(
-            analyticsService: MockAnalyticsService(),
             completeAction: { }
         )
         let welcomeOnboardingView = WelcomeOnboardingView(viewModel: viewModel)
@@ -26,7 +25,6 @@ class WelcomeOnboardingViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = WelcomeOnboardingViewModel(
-            analyticsService: MockAnalyticsService(),
             completeAction: { }
         )
         let welcomeOnboardingView = WelcomeOnboardingView(viewModel: viewModel)

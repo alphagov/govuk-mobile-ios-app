@@ -1,6 +1,7 @@
 import Foundation
 import GOVKit
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 class MockSearchHistoryViewModel: SearchHistoryViewModelInterface {

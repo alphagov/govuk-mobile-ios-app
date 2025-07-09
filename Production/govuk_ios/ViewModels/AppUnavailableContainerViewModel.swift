@@ -5,7 +5,7 @@ import GOVKit
 
 class AppUnavailableContainerViewModel: ObservableObject {
     private let urlOpener: URLOpener
-    private let appLaunchService: AppLaunchServiceInterface
+    private let appLaunchService: AppLaunchServiceInterface?
     let error: AppConfigError?
     private let dismissAction: () -> Void
     @Published var showProgressView: Bool = false
@@ -31,7 +31,7 @@ class AppUnavailableContainerViewModel: ObservableObject {
     }
 
     init(urlOpener: URLOpener = UIApplication.shared,
-         appLaunchService: AppLaunchServiceInterface,
+         appLaunchService: AppLaunchServiceInterface?,
          error: AppConfigError? = nil,
          dismissAction: @escaping () -> Void) {
         self.urlOpener = urlOpener
@@ -56,7 +56,7 @@ class AppUnavailableContainerViewModel: ObservableObject {
 
     private func retry() {
         showProgressView = true
-        appLaunchService.fetch { [weak self] result in
+        appLaunchService?.fetch { [weak self] result in
             if case .success = result.configResult {
                 self?.dismissAction()
             }

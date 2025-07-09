@@ -44,7 +44,7 @@ class AuthenticationCoordinator: BaseCoordinator {
             if shouldEncryptRefreshToken {
                 authenticationService.encryptRefreshToken()
             }
-            handleUserAuthChange(response: response)
+            handleAnalyticsConsent(response: response)
             startSignInSuccess()
         case .failure(let error):
             DispatchQueue.main.async {
@@ -53,9 +53,11 @@ class AuthenticationCoordinator: BaseCoordinator {
         }
     }
 
-    private func handleUserAuthChange(response: AuthenticationServiceResponse) {
+    private func handleAnalyticsConsent(response: AuthenticationServiceResponse) {
         if !response.returningUser {
             analyticsService.resetConsent()
+        } else {
+            analyticsService.setExistingConsent()
         }
     }
 

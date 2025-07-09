@@ -73,6 +73,14 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
+    func chat_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chat
+
+        #expect(coordinator is ChatCoordinator)
+    }
+
+    @Test
     func launch_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()
@@ -85,6 +93,17 @@ struct CoordinatorBuilderTests {
         #expect(coordinator.root == mockNavigationController)
     }
 
+    @Test
+    func jailbreak_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.jailbreakDetector(
+            navigationController: MockNavigationController(),
+            dismissAction: {}
+        )
+
+        #expect(coordinator is JailbreakCoordinator)
+    }
+    
     @Test
     func appUnavailable_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
@@ -294,18 +313,6 @@ struct CoordinatorBuilderTests {
 
         #expect(coordinator is SignOutConfirmationCoordinator)
     }
-
-//    @Test
-//    func signedOut_returnsExpectedResult() {
-//        let subject = CoordinatorBuilder(container: Container())
-//        let mockNavigationController = MockNavigationController()
-//        let coordinator = subject.signedOut(
-//            navigationController: mockNavigationController,
-//            completion: { _ in }
-//        )
-//
-//        #expect(coordinator is SignedOutCoordinator)
-//    }
 
     @Test
     func signInSuccess_returnsExpectedResult() {

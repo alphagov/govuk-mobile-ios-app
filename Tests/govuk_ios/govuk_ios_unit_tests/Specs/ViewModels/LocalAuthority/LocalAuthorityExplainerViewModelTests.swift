@@ -1,6 +1,7 @@
 import Testing
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @Suite
 struct LocalAuthorityExplainerViewModelTests {

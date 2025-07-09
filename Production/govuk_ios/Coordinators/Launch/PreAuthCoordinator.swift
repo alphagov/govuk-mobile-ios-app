@@ -14,30 +14,28 @@ class PreAuthCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        startLaunch(url: url)
+        startJailbreakDetection(url: url)
     }
 
-    private func startLaunch(url: URL?) {
-        let coordinator = coordinatorBuilder.launch(
+    private func startJailbreakDetection(url: URL?) {
+        let coordinator = coordinatorBuilder.jailbreakDetector(
             navigationController: root,
-            completion: { [weak self] response in
-                self?.startAnalyticsConsent(
-                    url: url,
-                    launchResponse: response
+            dismissAction: { [weak self] in
+                self?.startLaunch(
+                    url: url
                 )
             }
         )
         start(coordinator)
     }
 
-    private func startAnalyticsConsent(url: URL?,
-                                       launchResponse: AppLaunchResponse) {
-        let coordinator = coordinatorBuilder.analyticsConsent(
+    private func startLaunch(url: URL?) {
+        let coordinator = coordinatorBuilder.launch(
             navigationController: root,
-            completion: { [weak self] in
+            completion: { [weak self] response in
                 self?.startNotificationConsentCheck(
                     url: url,
-                    launchResponse: launchResponse
+                    launchResponse: response
                 )
             }
         )

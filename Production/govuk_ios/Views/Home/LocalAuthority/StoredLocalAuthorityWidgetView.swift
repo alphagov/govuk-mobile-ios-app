@@ -11,7 +11,7 @@ struct StoredLocalAuthorityWidgetView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 6) {
-                HStack {
+                HStack(alignment: .firstTextBaseline) {
                     Text(viewModel.title)
                         .font(Font.govUK.title3Semibold)
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
@@ -21,11 +21,12 @@ struct StoredLocalAuthorityWidgetView: View {
                         viewModel.openEditViewAction()
                     } label: {
                         Text(viewModel.editButtonTitle)
-                            .font(.govUK.body)
+                            .font(.govUK.subheadlineSemibold)
                             .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
                     }
                     .accessibilityLabel(viewModel.editButtonAltText)
                 }
+                .padding(.bottom, 8)
                 if viewModel.localAuthorities.count == 2 {
                     HStack {
                         Text(viewModel.twoTierAuthorityDescription)

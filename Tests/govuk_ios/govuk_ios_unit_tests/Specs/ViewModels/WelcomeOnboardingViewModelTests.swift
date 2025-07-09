@@ -1,5 +1,4 @@
 import Foundation
-@testable import GOVKitTestUtilities
 import Testing
 
 @testable import govuk_ios

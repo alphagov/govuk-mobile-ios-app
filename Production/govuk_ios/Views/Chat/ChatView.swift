@@ -11,16 +11,22 @@ struct ChatView: View {
     }
     var body: some View {
         ZStack {
-            Color(UIColor.govUK.fills.surfaceChatBackground)
+            backgroundGradient
+                .edgesIgnoringSafeArea(.top)
+                .edgesIgnoringSafeArea(.horizontal)
+
+            chatCellsScrollViewReaderView
+                .frame(maxHeight: .infinity)
+
+            topAndBottomBlurGradientView
+
             VStack {
-                chatCellsScrollViewReaderView
                 Spacer()
                 textFieldQuestionView
             }
-            .padding()
-            .onAppear {
-                viewModel.loadHistory()
-            }
+        }
+        .onAppear {
+            viewModel.loadHistory()
         }
     }
 
@@ -40,6 +46,7 @@ struct ChatView: View {
         ScrollViewReader { proxy in
             chatCellsScrollView(proxy: proxy)
         }
+        .padding(.horizontal)
     }
 
     private func chatCellsScrollView(proxy: ScrollViewProxy) -> some View {
@@ -47,6 +54,9 @@ struct ChatView: View {
             chatCellsView
             Text("")
                 .id(bottomID)
+            Rectangle()
+                .fill(Color.clear)
+                .frame(height: 80)
         }
         .onChange(of: viewModel.scrollToBottom) { shouldScroll in
             if shouldScroll {
@@ -94,18 +104,84 @@ struct ChatView: View {
                 .padding(.horizontal, 16)
                 .frame(height: 50)
                 .background(
-                    RoundedRectangle(cornerRadius: 40)
-                        .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color(UIColor.govUK.strokes.listDivider), lineWidth: 1)
-                        )
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 40)
+                            .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 40)
+                                    .stroke(Color(UIColor.govUK.strokes.listDivider), lineWidth: 1)
+                            )
+                    }
                 )
             SwiftUIButton(.compact,
                           viewModel: viewModel.sendButtonViewModel)
             .disabled(viewModel.questionInProgress || viewModel.latestQuestion.isEmpty)
             .layoutPriority(1.0)
             .frame(minWidth: 100)
+        }
+        .padding()
+    }
+
+    private var backgroundGradient: LinearGradient {
+        let backgroundColor = Color(UIColor.govUK.fills.surfaceChatBackground)
+        return LinearGradient(
+            gradient: Gradient(stops: [
+                .init(color: Color.clear, location: 0),
+                .init(color: backgroundColor, location: 0.2),
+                .init(color: backgroundColor, location: 0.6),
+                .init(color: Color.clear, location: 1)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+    }
+
+    private var topAndBottomBlurGradientView: some View {
+        VStack {
+            let blurColor = Color(UIColor.govUK.fills.surfaceBackground)
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(
+                        color: blurColor.opacity(1),
+                        location: 0
+                    ),
+                    .init(
+                        color: blurColor.opacity(0.7),
+                        location: 0.8
+                    ),
+                    .init(
+                        color: blurColor.opacity(0),
+                        location: 1
+                    )
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea(.all)
+            .frame(height: 20)
+
+            Spacer()
+
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(
+                        color: blurColor.opacity(0),
+                        location: 0
+                    ),
+                    .init(
+                        color: blurColor.opacity(0.7),
+                        location: 0.2
+                    ),
+                    .init(
+                        color: blurColor.opacity(1),
+                        location: 1
+                    )
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea(edges: .horizontal)
+            .frame(height: 90)
         }
     }
 

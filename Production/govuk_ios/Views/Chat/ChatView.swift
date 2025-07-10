@@ -1,14 +1,22 @@
 import SwiftUI
 import GOVKit
 import UIComponents
+import UIKit
 
 struct ChatView: View {
     @StateObject private var viewModel: ChatViewModel
     @Namespace var bottomID
+    @FocusState private var textAreaFocused: Bool
+
+    @State private var initialFocusHeight: CGFloat = 0
+    @State private var textViewHeight: CGFloat = 50
+
+    @Environment(\.sizeCategory) var sizeCategory
 
     init(viewModel: ChatViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
+
     var body: some View {
         ZStack {
             backgroundGradient
@@ -20,10 +28,7 @@ struct ChatView: View {
 
             topAndBottomBlurGradientView
 
-            VStack {
-                Spacer()
-                textFieldQuestionView
-            }
+            textFieldQuestionView
         }
         .onAppear {
             viewModel.loadHistory()
@@ -69,57 +74,102 @@ struct ChatView: View {
     }
 
     private var textFieldQuestionView: some View {
-        HStack {
-            Menu {
-                Button(role: .destructive, action: clearChat) {
-                    Label("Clear chat", systemImage: "trash")
-                }
-                Button(action: showAbout) {
-                    Label("About", systemImage: "info.circle")
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "ellipsis")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundStyle(Color(UIColor.govUK.text.buttonSecondary))
-                }
-                .background(
-                    Circle()
-                        .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
-                        .frame(width: 50, height: 50)
-                        .overlay(
-                            Circle()
-                                .stroke(
-                                    Color(UIColor.govUK.strokes.listDivider),
-                                    lineWidth: 1
+        GeometryReader { geom in
+            let maxHeight = geom.size.height - geom.safeAreaInsets.top
+            VStack {
+                Spacer()
+                HStack(alignment: .bottom) {
+                    if !textAreaFocused {
+                        Menu {
+                            Button(role: .destructive, action: clearChat) {
+                                Label("Clear chat", systemImage: "trash")
+                            }
+                            Button(action: showAbout) {
+                                Label("About", systemImage: "info.circle")
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundStyle(Color(UIColor.govUK.text.buttonSecondary))
+                                .frame(width: 50, height: 50)
+                                .background(
+                                    Circle()
+                                        .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                                        .overlay(
+                                            Circle()
+                                                .stroke(
+                                                    Color(UIColor.govUK.strokes.listDivider),
+                                                    lineWidth: 1
+                                                )
+                                        )
                                 )
-                        )
-                )
-            }
-            .padding(16)
-
-            TextField("", text: $viewModel.latestQuestion)
-                .disabled(viewModel.questionInProgress)
-                .layoutPriority(2.0)
-                .padding(.horizontal, 16)
-                .frame(height: 50)
-                .background(
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 40)
-                            .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 40)
-                                    .stroke(Color(UIColor.govUK.strokes.listDivider), lineWidth: 1)
-                            )
+                        }
                     }
-                )
-            SwiftUIButton(.compact,
-                          viewModel: viewModel.sendButtonViewModel)
-            .disabled(viewModel.questionInProgress || viewModel.latestQuestion.isEmpty)
-            .layoutPriority(1.0)
-            .frame(minWidth: 100)
+
+                    ZStack(alignment: .bottom) {
+                        TextEditor(text: $viewModel.latestQuestion)
+                            .focused($textAreaFocused)
+                            .font(.body)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .frame(height: min(textViewHeight, maxHeight))
+                            .background(
+                                RoundedRectangle(cornerRadius: 25)
+                                    .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .stroke(
+                                                Color(UIColor.govUK.strokes.listDivider),
+                                                lineWidth: 1
+                                            )
+                                    )
+                            )
+                            .onChange(of: textAreaFocused) { focused in
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    if focused {
+                                        textViewHeight = initialFocusHeight
+                                    } else if viewModel.latestQuestion.isEmpty {
+                                        textViewHeight = 50
+                                    }
+                                }
+                            }
+
+                        Text(viewModel.latestQuestion.isEmpty ? "A" : viewModel.latestQuestion)
+                            .font(.body)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 8)
+                            .background(
+                                GeometryReader { geo in
+                                    Color.clear
+                                        .preference(key: TextHeightKey.self, value: geo.size.height)
+                                }
+                            )
+                            .onPreferenceChange(TextHeightKey.self) { newHeight in
+                                DispatchQueue.main.async {
+                                    let updatedHeight = calculateTextHeight(for: newHeight)
+                                    initialFocusHeight = updatedHeight
+                                    if textAreaFocused || !viewModel.latestQuestion.isEmpty {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            self.textViewHeight = updatedHeight
+                                        }
+                                    }
+                                }
+                            }
+                            .opacity(0)
+                    }
+                }
+                .padding()
+            }
+            .frame(height: geom.size.height, alignment: .bottom)
         }
-        .padding()
+    }
+
+    private func calculateTextHeight(for newHeight: CGFloat) -> CGFloat {
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        let lineHeight = font.lineHeight
+        let bufferHeight = 3 * lineHeight
+        return max(50, newHeight + bufferHeight)
     }
 
     private var backgroundGradient: LinearGradient {
@@ -186,12 +236,17 @@ struct ChatView: View {
     }
 
     func showAbout() {
-        // Implement your about logic here
         print("About tapped")
     }
 
     func clearChat() {
-        // Implement your about logic here
         print("Clear chat")
+    }
+}
+
+struct TextHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 50
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }

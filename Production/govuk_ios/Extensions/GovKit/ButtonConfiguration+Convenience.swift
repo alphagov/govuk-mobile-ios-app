@@ -18,7 +18,11 @@ extension GOVUKButton.ButtonConfiguration {
             cornerRadius: 0,
             borderColorNormal: .clear,
             borderColorHighlighted: .clear,
-            accessibilityButtonShapesColor: .blue
+            accessibilityButtonShapesColor: .blue,
+            shadowColor: UIColor.clear.cgColor,
+            shadowRadius: 0,
+            shadowHighLightedColor: UIColor.clear.cgColor,
+            shadowFocusedColor: UIColor.clear.cgColor
         )
     }
 }

@@ -78,68 +78,90 @@ struct ChatView: View {
             let maxTextEditorFrameHeight = geom.size.height - geom.safeAreaInsets.top
             VStack {
                 Spacer()
-                HStack(alignment: .center) {
-                    if !textAreaFocused {
-                        Menu {
-                            Button(role: .destructive, action: clearChat) {
-                                Label("Clear chat", systemImage: "trash")
+                ZStack(alignment: .bottomTrailing) {
+                    HStack(alignment: .bottom, spacing: 8) {
+                        if !textAreaFocused {
+                            Menu {
+                                Button(role: .destructive, action: clearChat) {
+                                    Label("Clear chat", systemImage: "trash")
+                                }
+                                Button(action: showAbout) {
+                                    Label("About", systemImage: "info.circle")
+                                }
+                            } label: {
+                                Image(systemName: "ellipsis")
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundStyle(Color(UIColor.govUK.text.buttonSecondary))
+                                    .frame(width: 50, height: 50)
+                                    .background(
+                                        Circle()
+                                            .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(
+                                                        Color(UIColor.govUK.strokes.listDivider),
+                                                        lineWidth: 1
+                                                    )
+                                            )
+                                    )
                             }
-                            Button(action: showAbout) {
-                                Label("About", systemImage: "info.circle")
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundStyle(Color(UIColor.govUK.text.buttonSecondary))
-                                .frame(width: 50, height: 50)
-                                .background(
-                                    Circle()
-                                        .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
-                                        .overlay(
-                                            Circle()
-                                                .stroke(
-                                                    Color(UIColor.govUK.strokes.listDivider),
-                                                    lineWidth: 1
-                                                )
-                                        )
-                                )
                         }
-                    }
 
-                    ZStack(alignment: .bottom) {
-                        DynamicTextEditor(
-                            text: $viewModel.latestQuestion, dynamicHeight: $textViewHeight
-                        )
-                        .focused($textAreaFocused)
-                        .font(.body)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 6)
-                        .frame(height: min(textEditorFrameHeight, maxTextEditorFrameHeight))
-                        .background(
-                            RoundedRectangle(cornerRadius: 25)
-                                .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .stroke(
-                                            Color(UIColor.govUK.strokes.listDivider),
+                        ZStack {
+                            DynamicTextEditor(
+                                text: $viewModel.latestQuestion, dynamicHeight: $textViewHeight
+                            )
+                            .focused($textAreaFocused)
+                            .font(.body)
+                            .padding(.leading, 16)
+                            .padding(.trailing, 66)
+                            .padding(.vertical, 6)
+                            .frame(
+                                height: min(textEditorFrameHeight, maxTextEditorFrameHeight)
+                            )
+                            .background(
+                                RoundedRectangle(cornerRadius: 25)
+                                    .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .stroke(
+                                                Color(UIColor.govUK.strokes.listDivider),
                                                 lineWidth: 1
                                             )
                                     )
                             )
+                        }
+                        .animation(.easeInOut(duration: 0.3), value: textViewHeight)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            self.textAreaFocused = true
+                        }
                     }
-                    .animation(.easeInOut(duration: 0.3), value: textViewHeight)
                     .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
+
+                    Button(action: viewModel.askQuestion) {
+                        Image(systemName: "arrow.up")
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(Color(UIColor.govUK.text.buttonPrimary))
+                            .background(
+                                Circle().fill(Color(UIColor.govUK.text.buttonSecondary))
+                            )
+                    }
+                    .padding(.bottom, 8)
+                    .padding(.trailing, 8)
+                    .opacity(textAreaFocused ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.2), value: textAreaFocused)
                 }
                 .padding()
+                .frame(height: geom.size.height, alignment: .bottom)
             }
-            .frame(height: geom.size.height, alignment: .bottom)
         }
     }
 
     private var textEditorFrameHeight: CGFloat {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
-        return textAreaFocused ? textViewHeight + (2 * lineHeight) : 50
+        return textAreaFocused ? textViewHeight + (2 * lineHeight) + 16 : 50
     }
 
     private var backgroundGradient: LinearGradient {

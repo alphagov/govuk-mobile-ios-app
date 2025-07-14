@@ -114,8 +114,9 @@ struct ChatView: View {
                             .focused($textAreaFocused)
                             .font(.body)
                             .padding(.leading, 16)
-                            .padding(.trailing, 66)
-                            .padding(.vertical, 6)
+                            .padding(.trailing, 16)
+                            .padding(.top, 8)
+                            .padding(.bottom, textAreaFocused ? 58 : 8)
                             .frame(
                                 height: min(textEditorFrameHeight, maxTextEditorFrameHeight)
                             )
@@ -139,21 +140,25 @@ struct ChatView: View {
                     }
                     .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
 
-                    Button(action: viewModel.askQuestion) {
-                        Image(systemName: "arrow.up")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 16, height: 16)
-                            .foregroundColor(Color(UIColor.govUK.text.buttonPrimary))
-                            .frame(width: 50, height: 50)
-                            .background(
-                                Circle().fill(Color(UIColor.govUK.text.buttonSecondary))
-                            )
+                    HStack {
+                        Spacer()
+
+                        Button(action: viewModel.askQuestion) {
+                            Image(systemName: "arrow.up")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 16, height: 16)
+                                .foregroundColor(Color(UIColor.govUK.text.buttonPrimary))
+                                .frame(width: 50, height: 50)
+                                .background(
+                                    Circle().fill(Color(UIColor.govUK.text.buttonSecondary))
+                                )
+                        }
+                        .padding(.bottom, 8)
+                        .padding(.trailing, 8)
+                        .opacity(textAreaFocused ? 1 : 0)
+                        .animation(.easeInOut(duration: 0.2), value: textAreaFocused)
                     }
-                    .padding(.bottom, 8)
-                    .padding(.trailing, 8)
-                    .opacity(textAreaFocused ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.2), value: textAreaFocused)
                 }
                 .padding()
                 .frame(height: geom.size.height, alignment: .bottom)
@@ -164,7 +169,8 @@ struct ChatView: View {
     private var textEditorFrameHeight: CGFloat {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
-        return textAreaFocused ? textViewHeight + (2 * lineHeight) + 16 : 50
+        return textAreaFocused ?
+        textViewHeight + max((2 * lineHeight), 75) : 50
     }
 
     private var backgroundGradient: LinearGradient {

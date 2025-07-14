@@ -3,13 +3,35 @@ import SwiftUI
 struct DynamicTextEditor: UIViewRepresentable {
     @Binding var text: String
     @Binding var dynamicHeight: CGFloat
+    var placeholderText: String
 
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.isScrollEnabled = true
         textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.backgroundColor = UIColor.govUK.fills.surfaceChatAnswer
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
+
+        let placeholderLabel = UILabel()
+        placeholderLabel.text = placeholderText
+        placeholderLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        placeholderLabel.textColor = UIColor.govUK.text.secondary
+        placeholderLabel.adjustsFontForContentSizeCategory = false
+
+        textView.addSubview(placeholderLabel)
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            placeholderLabel.leadingAnchor.constraint(
+                equalTo: textView.leadingAnchor
+            ),
+            placeholderLabel.centerYAnchor.constraint(
+                equalTo: textView.centerYAnchor
+            )
+        ])
+
+        context.coordinator.placeholderLabel = placeholderLabel
+
         return textView
     }
 
@@ -23,17 +45,27 @@ struct DynamicTextEditor: UIViewRepresentable {
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
-        var text: Binding<String>
-        var height: Binding<CGFloat>
+        @Binding var text: String
+        @Binding var height: CGFloat
+        weak var placeholderLabel: UILabel?
 
         init(text: Binding<String>, height: Binding<CGFloat>) {
-            self.text = text
-            self.height = height
+            self._text = text
+            self._height = height
         }
 
         func textViewDidChange(_ textView: UITextView) {
-            text.wrappedValue = textView.text
-            DynamicTextEditor.recalculateHeight(view: textView, result: height)
+            $text.wrappedValue = textView.text
+            DynamicTextEditor.recalculateHeight(view: textView, result: $height)
+        }
+
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            placeholderLabel?.isHidden = true
+        }
+
+        func textViewDidEndEditing(_ textView: UITextView) {
+            placeholderLabel?.isHidden =
+            textView.isFirstResponder || !textView.text.isEmpty
         }
     }
 

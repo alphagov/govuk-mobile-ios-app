@@ -109,7 +109,9 @@ struct ChatView: View {
 
                         ZStack {
                             DynamicTextEditor(
-                                text: $viewModel.latestQuestion, dynamicHeight: $textViewHeight
+                                text: $viewModel.latestQuestion,
+                                dynamicHeight: $textViewHeight,
+                                placeholderText: "Type your message here"
                             )
                             .focused($textAreaFocused)
                             .font(.body)

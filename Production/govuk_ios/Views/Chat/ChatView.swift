@@ -141,8 +141,11 @@ struct ChatView: View {
 
                     Button(action: viewModel.askQuestion) {
                         Image(systemName: "arrow.up")
-                            .frame(width: 50, height: 50)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 16, height: 16)
                             .foregroundColor(Color(UIColor.govUK.text.buttonPrimary))
+                            .frame(width: 50, height: 50)
                             .background(
                                 Circle().fill(Color(UIColor.govUK.text.buttonSecondary))
                             )

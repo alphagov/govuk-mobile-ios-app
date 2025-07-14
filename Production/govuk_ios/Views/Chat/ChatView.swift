@@ -29,6 +29,9 @@ struct ChatView: View {
         .onAppear {
             viewModel.loadHistory()
         }
+        .onTapGesture {
+            textAreaFocused = false
+        }
     }
 
     private var chatCellsView: some View {
@@ -59,6 +62,7 @@ struct ChatView: View {
                 .fill(Color.clear)
                 .frame(height: 80)
         }
+        .scrollIndicators(.hidden)
         .onChange(of: viewModel.scrollToBottom) { shouldScroll in
             if shouldScroll {
                 withAnimation {

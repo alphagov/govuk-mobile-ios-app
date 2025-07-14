@@ -283,6 +283,8 @@
 		D052CA362E0B08CF0048F98A /* ChatCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052CA352E0B08CF0048F98A /* ChatCellViewModel.swift */; };
 		D052CCE02E0B09AA0048F98A /* ChatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052CCDF2E0B09AA0048F98A /* ChatCellView.swift */; };
 		D052CCE22E0B09BE0048F98A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052CCE12E0B09BE0048F98A /* ChatView.swift */; };
+		D052D2302E0B0DC80048F98A /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052D22F2E0B0DC80048F98A /* ButtonStackView.swift */; };
+		D052D2322E0B0DE10048F98A /* RoundedBorderViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052D2312E0B0DE10048F98A /* RoundedBorderViewModifier.swift */; };
 		D056CE742D3A83F2005845E0 /* UserFeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */; };
 		D056CE762D3A848A005845E0 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE752D3A847F005845E0 /* InformationView.swift */; };
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
@@ -671,6 +673,8 @@
 		D052CA352E0B08CF0048F98A /* ChatCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellViewModel.swift; sourceTree = "<group>"; };
 		D052CCDF2E0B09AA0048F98A /* ChatCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellView.swift; sourceTree = "<group>"; };
 		D052CCE12E0B09BE0048F98A /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		D052D22F2E0B0DC80048F98A /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
+		D052D2312E0B0DE10048F98A /* RoundedBorderViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBorderViewModifier.swift; sourceTree = "<group>"; };
 		D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackViewModel.swift; sourceTree = "<group>"; };
 		D056CE752D3A847F005845E0 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
@@ -1690,9 +1694,11 @@
 				3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */,
 				3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */,
 				D08AA4232DB94A4E002E9C78 /* BulletView.swift */,
+				D052D22F2E0B0DC80048F98A /* ButtonStackView.swift */,
 				3D211B8E2CB6B4FE005D1472 /* HeaderView.swift */,
 				4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */,
 				D0ECAB032DCDF9EE00A9707E /* RadioButtonView.swift */,
+				D052D2312E0B0DE10048F98A /* RoundedBorderViewModifier.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -2419,6 +2425,7 @@
 				D093BA652CB04C68004F489B /* EditTopicsViewModel.swift in Sources */,
 				D0A8B3C42C9DD01200849304 /* Codable+Extensions.swift in Sources */,
 				D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */,
+				D052D2322E0B0DE10048F98A /* RoundedBorderViewModifier.swift in Sources */,
 				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
@@ -2447,6 +2454,7 @@
 				D04DD3382E004737002B5F19 /* ChatService.swift in Sources */,
 				4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */,
 				D0F6813E2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
+				D052D2302E0B0DC80048F98A /* ButtonStackView.swift in Sources */,
 				D0F6813F2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift in Sources */,
 				D0F681402DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift in Sources */,
 				D052CA332E0B06F70048F98A /* ChatCoordinator.swift in Sources */,

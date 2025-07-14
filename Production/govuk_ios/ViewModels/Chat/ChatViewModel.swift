@@ -49,6 +49,7 @@ class ChatViewModel: ObservableObject {
     }
 
     func loadHistory() {
+        cellModels.removeAll()
         chatService.chatHistory(
             conversationId: chatService.currentConversationId
         ) { [weak self] result in

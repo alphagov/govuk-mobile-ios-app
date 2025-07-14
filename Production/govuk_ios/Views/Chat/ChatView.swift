@@ -7,11 +7,7 @@ struct ChatView: View {
     @StateObject private var viewModel: ChatViewModel
     @Namespace var bottomID
     @FocusState private var textAreaFocused: Bool
-
-    @State private var initialFocusHeight: CGFloat = 0
-    @State private var textViewHeight: CGFloat = 50
-
-    @Environment(\.sizeCategory) var sizeCategory
+    @State private var textViewHeight: CGFloat = 50.0
 
     init(viewModel: ChatViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -75,10 +71,10 @@ struct ChatView: View {
 
     private var textFieldQuestionView: some View {
         GeometryReader { geom in
-            let maxHeight = geom.size.height - geom.safeAreaInsets.top
+            let maxTextEditorFrameHeight = geom.size.height - geom.safeAreaInsets.top
             VStack {
                 Spacer()
-                HStack(alignment: .bottom) {
+                HStack(alignment: .center) {
                     if !textAreaFocused {
                         Menu {
                             Button(role: .destructive, action: clearChat) {
@@ -107,57 +103,28 @@ struct ChatView: View {
                     }
 
                     ZStack(alignment: .bottom) {
-                        TextEditor(text: $viewModel.latestQuestion)
-                            .focused($textAreaFocused)
-                            .font(.body)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .frame(height: min(textViewHeight, maxHeight))
-                            .background(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .stroke(
-                                                Color(UIColor.govUK.strokes.listDivider),
+                        DynamicTextEditor(
+                            text: $viewModel.latestQuestion, dynamicHeight: $textViewHeight
+                        )
+                        .focused($textAreaFocused)
+                        .font(.body)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 6)
+                        .frame(height: min(textEditorFrameHeight, maxTextEditorFrameHeight))
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(
+                                            Color(UIColor.govUK.strokes.listDivider),
                                                 lineWidth: 1
                                             )
                                     )
                             )
-                            .onChange(of: textAreaFocused) { focused in
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    if focused {
-                                        textViewHeight = initialFocusHeight
-                                    } else if viewModel.latestQuestion.isEmpty {
-                                        textViewHeight = 50
-                                    }
-                                }
-                            }
-
-                        Text(viewModel.latestQuestion.isEmpty ? "A" : viewModel.latestQuestion)
-                            .font(.body)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 8)
-                            .background(
-                                GeometryReader { geo in
-                                    Color.clear
-                                        .preference(key: TextHeightKey.self, value: geo.size.height)
-                                }
-                            )
-                            .onPreferenceChange(TextHeightKey.self) { newHeight in
-                                DispatchQueue.main.async {
-                                    let updatedHeight = calculateTextHeight(for: newHeight)
-                                    initialFocusHeight = updatedHeight
-                                    if textAreaFocused || !viewModel.latestQuestion.isEmpty {
-                                        withAnimation(.easeInOut(duration: 0.2)) {
-                                            self.textViewHeight = updatedHeight
-                                        }
-                                    }
-                                }
-                            }
-                            .opacity(0)
                     }
+                    .animation(.easeInOut(duration: 0.3), value: textViewHeight)
+                    .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
                 }
                 .padding()
             }
@@ -165,11 +132,10 @@ struct ChatView: View {
         }
     }
 
-    private func calculateTextHeight(for newHeight: CGFloat) -> CGFloat {
+    private var textEditorFrameHeight: CGFloat {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
-        let bufferHeight = 3 * lineHeight
-        return max(50, newHeight + bufferHeight)
+        return textAreaFocused ? textViewHeight + (2 * lineHeight) : 50
     }
 
     private var backgroundGradient: LinearGradient {

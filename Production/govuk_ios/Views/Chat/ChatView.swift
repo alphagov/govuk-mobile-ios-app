@@ -123,10 +123,10 @@ struct ChatView: View {
                                 height: min(textEditorFrameHeight, maxTextEditorFrameHeight)
                             )
                             .background(
-                                RoundedRectangle(cornerRadius: 25)
+                                RoundedRectangle(cornerRadius: textEditorRadius)
                                     .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 25)
+                                        RoundedRectangle(cornerRadius: textEditorRadius)
                                             .stroke(
                                                 Color(UIColor.govUK.strokes.listDivider),
                                                 lineWidth: 1
@@ -166,6 +166,10 @@ struct ChatView: View {
                 .frame(height: geom.size.height, alignment: .bottom)
             }
         }
+    }
+
+    private var textEditorRadius: CGFloat {
+        textAreaFocused ? 25.0 : 40.0
     }
 
     private var textEditorFrameHeight: CGFloat {

@@ -22,6 +22,24 @@ struct ChatActionView: View {
         }
     }
 
+    private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
+        ZStack(alignment: .bottom) {
+            chatActionBlurGradient
+
+            HStack(alignment: .bottom, spacing: 8) {
+                if !textAreaFocused {
+                    menuView
+                }
+
+                textEditorView(maxFrameHeight: maxFrameHeight)
+            }
+            .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
+            .padding()
+
+            sendButtonView
+        }
+    }
+
     private var menuView: some View {
         return Menu {
             Button(role: .destructive, action: clearChat) {
@@ -76,8 +94,8 @@ struct ChatActionView: View {
                             )
                     )
             )
+            .animation(.easeInOut(duration: 0.3), value: textViewHeight)
         }
-        .animation(.easeInOut(duration: 0.3), value: textViewHeight)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true
@@ -118,21 +136,6 @@ struct ChatActionView: View {
             .opacity(textAreaFocused ? 1 : 0)
             .animation(.easeInOut(duration: 0.2), value: textAreaFocused)
         }
-    }
-
-    private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
-        ZStack(alignment: .bottom) {
-            HStack(alignment: .bottom, spacing: 8) {
-                if !textAreaFocused {
-                    menuView
-                }
-
-                textEditorView(maxFrameHeight: maxFrameHeight)
-            }
-            .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
-
-            sendButtonView
-        }
         .padding()
     }
 
@@ -152,11 +155,42 @@ struct ChatActionView: View {
         textViewHeight + max((2 * lineHeight), 75) : 50
     }
 
-    func showAbout() {
+    private var chatActionBlurGradient: some View {
+        VStack(spacing: 0) {
+            let blurColor = Color(UIColor.govUK.fills.surfaceChatBackground)
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(
+                        color: blurColor.opacity(1),
+                        location: 0
+                    ),
+                    .init(
+                        color: blurColor.opacity(0.6),
+                        location: 0.8
+                    ),
+                    .init(
+                        color: blurColor.opacity(0),
+                        location: 1
+                    )
+                ]),
+                startPoint: .bottom,
+                endPoint: .top
+            )
+            .frame(height: 60)
+            .ignoresSafeArea(.all)
+            .animation(.easeInOut(duration: 0.3), value: textViewHeight)
+
+            Color(UIColor.govUK.fills.surfaceChatBackground)
+                .frame(maxHeight: textEditorFrameHeight - 20, alignment: .bottom)
+                .ignoresSafeArea(.all)
+        }
+    }
+
+    private func showAbout() {
         print("About tapped")
     }
 
-    func clearChat() {
+    private func clearChat() {
         viewModel.newChat()
     }
 }

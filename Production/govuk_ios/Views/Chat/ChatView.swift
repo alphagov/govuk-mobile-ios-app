@@ -22,7 +22,7 @@ struct ChatView: View {
             chatCellsScrollViewReaderView
                 .frame(maxHeight: .infinity)
 
-            topAndBottomBlurGradientView
+            topBlurGradientView
 
             textFieldQuestionView
         }
@@ -212,7 +212,7 @@ struct ChatView: View {
         )
     }
 
-    private var topAndBottomBlurGradientView: some View {
+    private var topBlurGradientView: some View {
         VStack {
             let blurColor = Color(UIColor.govUK.fills.surfaceBackground)
             LinearGradient(
@@ -237,27 +237,6 @@ struct ChatView: View {
             .frame(height: 20)
 
             Spacer()
-
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(
-                        color: blurColor.opacity(0),
-                        location: 0
-                    ),
-                    .init(
-                        color: blurColor.opacity(0.7),
-                        location: 0.2
-                    ),
-                    .init(
-                        color: blurColor.opacity(1),
-                        location: 1
-                    )
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea(edges: .horizontal)
-            .frame(height: 90)
         }
     }
 

@@ -75,7 +75,7 @@ struct ChatView: View {
 
     private var textFieldQuestionView: some View {
         GeometryReader { geom in
-            let maxTextEditorFrameHeight = geom.size.height - geom.safeAreaInsets.top
+            let maxTextEditorFrameHeight = geom.size.height - 32
             VStack {
                 Spacer()
                 ZStack(alignment: .bottomTrailing) {
@@ -177,8 +177,8 @@ struct ChatView: View {
                     }
                 }
                 .padding()
-                .frame(height: geom.size.height, alignment: .bottom)
             }
+            .frame(maxHeight: geom.size.height, alignment: .bottom)
         }
     }
 

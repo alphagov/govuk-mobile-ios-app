@@ -29,13 +29,7 @@ struct StoredLocalAuthorityCardView: View {
                 }
             }
             .padding()
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                .stroke(
-                    Color(cgColor: UIColor.govUK.strokes.cardBlue.cgColor),
-                    lineWidth: 0.5
-                )
-            )
         }
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .roundedBorder()
     }
 }

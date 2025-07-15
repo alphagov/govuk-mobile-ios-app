@@ -43,11 +43,6 @@ class ChatViewModel: ObservableObject {
         latestQuestion = ""
     }
 
-    var sendButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(localisedTitle: String.chat.localized("sendButtonTitle"),
-              action: askQuestion)
-    }
-
     func loadHistory() {
         cellModels.removeAll()
         chatService.chatHistory(

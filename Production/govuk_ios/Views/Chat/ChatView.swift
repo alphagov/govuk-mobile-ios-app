@@ -145,17 +145,31 @@ struct ChatView: View {
                     HStack {
                         Spacer()
 
-                        Button(action: viewModel.askQuestion) {
+                        Button(action: askQuestion) {
                             Image(systemName: "arrow.up")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 16, height: 16)
-                                .foregroundColor(Color(UIColor.govUK.text.buttonPrimary))
+                                .foregroundColor(
+                                    viewModel.latestQuestion.isEmpty ?
+                                    Color(UIColor.govUK.text.buttonPrimaryDisabled) :
+                                    Color(UIColor.govUK.text.buttonPrimary)
+                                )
                                 .frame(width: 50, height: 50)
                                 .background(
-                                    Circle().fill(Color(UIColor.govUK.text.buttonSecondary))
+                                    Circle().fill(
+                                        viewModel.latestQuestion.isEmpty ?
+                                        Color(UIColor.govUK.fills.surfaceButtonPrimaryDisabled) :
+                                        Color(UIColor.govUK.text.buttonSecondary)
+                                    )
                                 )
                         }
+                        .disabled(viewModel.latestQuestion.isEmpty)
+                        .simultaneousGesture(TapGesture().onEnded {
+                            if viewModel.latestQuestion.isEmpty {
+                                self.textAreaFocused = true
+                            }
+                        })
                         .padding(.bottom, 8)
                         .padding(.trailing, 8)
                         .opacity(textAreaFocused ? 1 : 0)
@@ -166,6 +180,11 @@ struct ChatView: View {
                 .frame(height: geom.size.height, alignment: .bottom)
             }
         }
+    }
+
+    private func askQuestion() {
+        viewModel.askQuestion()
+        textAreaFocused = false
     }
 
     private var textEditorRadius: CGFloat {

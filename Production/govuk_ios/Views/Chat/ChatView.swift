@@ -15,9 +15,8 @@ struct ChatView: View {
         )
 
         ZStack {
-            backgroundGradient
-                .edgesIgnoringSafeArea(.top)
-                .edgesIgnoringSafeArea(.horizontal)
+            Color(UIColor.govUK.fills.surfaceChatBackground)
+                .edgesIgnoringSafeArea(.all)
 
             chatCellsScrollViewReaderView
                 .frame(maxHeight: .infinity)
@@ -73,19 +72,6 @@ struct ChatView: View {
         }
     }
 
-    private var backgroundGradient: LinearGradient {
-        let backgroundColor = Color(UIColor.govUK.fills.surfaceChatBackground)
-        return LinearGradient(
-            gradient: Gradient(stops: [
-                .init(color: Color.clear, location: 0),
-                .init(color: backgroundColor, location: 0.2),
-                .init(color: backgroundColor, location: 1)
-            ]),
-            startPoint: .top,
-            endPoint: .bottom
-        )
-    }
-
     private var topBlurGradientView: some View {
         VStack {
             let blurColor = Color(UIColor.govUK.fills.surfaceBackground)
@@ -96,8 +82,8 @@ struct ChatView: View {
                         location: 0
                     ),
                     .init(
-                        color: blurColor.opacity(0.7),
-                        location: 0.8
+                        color: blurColor.opacity(0.8),
+                        location: 0.7
                     ),
                     .init(
                         color: blurColor.opacity(0),

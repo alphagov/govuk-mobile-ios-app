@@ -75,7 +75,6 @@ struct ChatActionView: View {
                 placeholderText: "Type your message here"
             )
             .focused($textAreaFocused)
-            .font(.body)
             .padding(.leading, 16)
             .padding(.trailing, 16)
             .padding(.top, 8)

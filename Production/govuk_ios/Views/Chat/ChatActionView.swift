@@ -4,7 +4,6 @@ struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
     @State private var textViewHeight: CGFloat = 50.0
-    @State private var maxTextEditorFrameHeight: CGFloat = 0
 
     init(viewModel: ChatViewModel, textAreaFocused: FocusState<Bool>.Binding) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -43,10 +42,10 @@ struct ChatActionView: View {
     private var menuView: some View {
         return Menu {
             Button(role: .destructive, action: clearChat) {
-                Label("Clear chat", systemImage: "trash")
+                Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
             }
             Button(action: showAbout) {
-                Label("About", systemImage: "info.circle")
+                Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
             }
         } label: {
             Image(systemName: "ellipsis")
@@ -72,7 +71,7 @@ struct ChatActionView: View {
             DynamicTextEditor(
                 text: $viewModel.latestQuestion,
                 dynamicHeight: $textViewHeight,
-                placeholderText: "Type your message here"
+                placeholderText: String.chat.localized("textEditorPlaceholder")
             )
             .focused($textAreaFocused)
             .padding(.leading, 16)

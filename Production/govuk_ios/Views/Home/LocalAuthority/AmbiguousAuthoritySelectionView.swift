@@ -21,27 +21,10 @@ struct AmbiguousAuthoritySelectionView: View {
                 listView
                 Spacer()
             }
-            Divider()
-                .overlay(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea()
-            let buttonLayout = verticalSizeClass == .compact ?
-            AnyLayout(HStackLayout()) :
-            AnyLayout(VStackLayout())
-            buttonLayout {
-                SwiftUIButton(
-                    .primary,
-                    viewModel: viewModel.confirmButtonModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                .disabled(viewModel.selectedAuthority == nil)
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.selectAddressButtonModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-            }
-            .ignoresSafeArea()
-            .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
+            ButtonStackView(
+                primaryButtonViewModel: viewModel.confirmButtonModel,
+                primaryDisabled: viewModel.selectedAuthority == nil,
+                secondaryButtonViewModel: viewModel.selectAddressButtonModel)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

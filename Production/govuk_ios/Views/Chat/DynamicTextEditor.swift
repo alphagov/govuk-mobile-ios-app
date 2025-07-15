@@ -8,16 +8,15 @@ struct DynamicTextEditor: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.isScrollEnabled = true
-        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.font = UIFont.govUK.body
         textView.backgroundColor = UIColor.govUK.fills.surfaceChatAnswer
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
 
         let placeholderLabel = UILabel()
         placeholderLabel.text = placeholderText
-        placeholderLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        placeholderLabel.font = UIFont.govUK.body.withSize(17)
         placeholderLabel.textColor = UIColor.govUK.text.secondary
-        placeholderLabel.adjustsFontForContentSizeCategory = false
 
         textView.addSubview(placeholderLabel)
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false

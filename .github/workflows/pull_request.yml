@@ -3,7 +3,7 @@ name: Pull Request
 on:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, release/*, main ]
+    branches: [ develop, release/*, main, feature/brand-refresh ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-pr

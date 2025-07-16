@@ -7,6 +7,7 @@ class ChatViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
+    private let handleError: (Error) -> Void
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -15,10 +16,12 @@ class ChatViewModel: ObservableObject {
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         openURLAction: @escaping (URL) -> Void) {
+         openURLAction: @escaping (URL) -> Void,
+         handleError: @escaping (Error) -> Void) {
         self.chatService = chatService
         self.analyticsService = analyticsService
         self.openURLAction = openURLAction
+        self.handleError = handleError
     }
 
     func askQuestion() {
@@ -33,8 +36,7 @@ class ChatViewModel: ObservableObject {
                 self?.answeredQuestionID = question.id
                 self?.pollForAnswer(question)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                self?.handleError(error)
             }
         }
         latestQuestion = ""
@@ -67,8 +69,7 @@ class ChatViewModel: ObservableObject {
             case .success(let answers):
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                self?.handleError(error)
             }
             self?.scrollToBottom = true
         }

@@ -53,7 +53,7 @@ struct ChatCellViewModel {
 
     var backgroundColor: Color {
         isAnswer ?
-        Color(UIColor.govUK.fills.surfaceChatAnswer) :
+        Color(UIColor.govUK.fills.surfaceChatBlue) :
         Color(UIColor.govUK.fills.surfaceChatQuestion)
     }
 

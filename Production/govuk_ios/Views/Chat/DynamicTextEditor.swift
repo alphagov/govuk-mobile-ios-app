@@ -9,7 +9,7 @@ struct DynamicTextEditor: UIViewRepresentable {
         let textView = UITextView()
         textView.isScrollEnabled = true
         textView.font = UIFont.govUK.body
-        textView.backgroundColor = UIColor.govUK.fills.surfaceChatAnswer
+        textView.backgroundColor = UIColor.govUK.fills.surfaceChatBlue
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
 

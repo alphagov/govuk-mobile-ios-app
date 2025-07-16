@@ -54,7 +54,7 @@ struct ChatActionView: View {
                 .frame(width: 50, height: 50)
                 .background(
                     Circle()
-                        .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                        .fill(Color(UIColor.govUK.fills.surfaceChatBlue))
                         .overlay(
                             Circle()
                                 .stroke(
@@ -83,11 +83,13 @@ struct ChatActionView: View {
             )
             .background(
                 RoundedRectangle(cornerRadius: textEditorRadius)
-                    .fill(Color(UIColor.govUK.fills.surfaceChatAnswer))
+                    .fill(Color(UIColor.govUK.fills.surfaceChatBlue))
                     .overlay(
                         RoundedRectangle(cornerRadius: textEditorRadius)
                             .stroke(
-                                Color(UIColor.govUK.strokes.listDivider),
+                                textAreaFocused ?
+                                Color(UIColor.govUK.strokes.chatTextBox) :
+                                    Color(UIColor.govUK.strokes.listDivider),
                                 lineWidth: 1
                             )
                     )

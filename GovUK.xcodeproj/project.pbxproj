@@ -303,6 +303,7 @@
 		D08A9A862DB92F79002E9C78 /* SignOutConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */; };
 		D08AA4242DB94A4E002E9C78 /* BulletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AA4232DB94A4E002E9C78 /* BulletView.swift */; };
 		D08AA4262DB950F2002E9C78 /* SignOut.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */; };
+		D0900FA92E25309A00E3EB75 /* ChatErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0900FA82E25309A00E3EB75 /* ChatErrorViewModel.swift */; };
 		D090467A2DBBC1AC0096EE66 /* TokenExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */; };
 		D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */; };
 		D090467F2DBBC1ED0096EE66 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = D090467E2DBBC1ED0096EE66 /* JWTKit */; };
@@ -695,6 +696,7 @@
 		D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutConfirmationViewModel.swift; sourceTree = "<group>"; };
 		D08AA4232DB94A4E002E9C78 /* BulletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletView.swift; sourceTree = "<group>"; };
 		D08AA4252DB950F2002E9C78 /* SignOut.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = SignOut.xcstrings; sourceTree = "<group>"; };
+		D0900FA82E25309A00E3EB75 /* ChatErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatErrorViewModel.swift; sourceTree = "<group>"; };
 		D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenPayload.swift; sourceTree = "<group>"; };
 		D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenExtractor.swift; sourceTree = "<group>"; };
 		D09046802DBFD8480096EE66 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -1784,6 +1786,7 @@
 			children = (
 				D016F29A2E0C51B000659AC3 /* ChatViewModel.swift */,
 				D052CA352E0B08CF0048F98A /* ChatCellViewModel.swift */,
+				D0900FA82E25309A00E3EB75 /* ChatErrorViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2323,6 +2326,7 @@
 				D0D655E82D26A79000571841 /* UIApplication+URLOpener.swift in Sources */,
 				D00984F22D47BC9600D70FEE /* DeviceInformation+Convenience.swift in Sources */,
 				5DC250662C91D802009E9E7F /* FirebaseClient.swift in Sources */,
+				D0900FA92E25309A00E3EB75 /* ChatErrorViewModel.swift in Sources */,
 				3D3378162CAAC113004BF83F /* AppUnavailableContainerViewModel.swift in Sources */,
 				16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,

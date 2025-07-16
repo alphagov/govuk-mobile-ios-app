@@ -12,7 +12,8 @@ class ChatCoordinator: TabItemCoordinator {
         viewControllerBuilder.chat(
             analyticsService: analyticsService,
             chatService: chatService,
-            openURLAction: presentWebView)
+            openURLAction: presentWebView,
+            handleError: handleError)
     }()
 
     var isEnabled: Bool {
@@ -54,4 +55,31 @@ class ChatCoordinator: TabItemCoordinator {
     }
 
     func didReselectTab() { /* To be implemented */ }
+
+    private func handleError(_ error: Error) {
+        let viewController = viewControllerBuilder.chatError(
+            error: error,
+            action: { [weak self] in
+                guard let self else { return }
+                if error as? ChatError == ChatError.networkUnavailable {
+                    self.set(
+                        self.chatViewController,
+                        animated: false
+                    )
+                } else {
+                    self.openGovUK()
+                }
+            })
+
+        set(viewController, animated: false)
+    }
+
+    private func openGovUK() {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: Constants.API.govukBaseUrl,
+            fullScreen: false
+        )
+        start(coordinator)
+    }
 }

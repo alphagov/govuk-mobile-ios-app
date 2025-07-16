@@ -6,7 +6,6 @@ enum ChatCellType {
     case question
     case pendingAnswer
     case answer
-    case error
 }
 
 struct ChatCellViewModel {
@@ -38,13 +37,6 @@ struct ChatCellViewModel {
                   id: answeredQuestion.id,
                   type: .question,
                   sources: answeredQuestion.answer.sources ?? [])
-    }
-
-    init(error: Error) {
-        self.init(message: error.localizedDescription,
-                  id: UUID().uuidString,
-                  type: .error,
-                  sources: [])
     }
 
     var isAnswer: Bool {

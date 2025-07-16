@@ -5,6 +5,7 @@ import UIComponents
 class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let handleError: (Error) -> Void
 
     @Published private(set) var questionInProgress: Bool = false
     @Published var cellModels: [ChatCellViewModel] = []
@@ -13,9 +14,11 @@ class ChatViewModel: ObservableObject {
     @Published var answeredQuestionID: String = ""
 
     init(chatService: ChatServiceInterface,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         handleError: @escaping (Error) -> Void) {
         self.chatService = chatService
         self.analyticsService = analyticsService
+        self.handleError = handleError
     }
 
     func askQuestion() {
@@ -36,8 +39,7 @@ class ChatViewModel: ObservableObject {
                 let cellModel = ChatCellViewModel(answer: answer)
                 self?.cellModels.append(cellModel)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                self?.handleError(error)
             }
             self?.answeredQuestionID = questionModel.id
         }
@@ -53,8 +55,7 @@ class ChatViewModel: ObservableObject {
             case .success(let answers):
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                self?.handleError(error)
             }
             self?.scrollToBottom = true
         }

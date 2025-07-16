@@ -54,12 +54,15 @@ struct ChatView: View {
 
     private func chatCellsScrollView(proxy: ScrollViewProxy) -> some View {
         ScrollView {
+            Rectangle()
+                .fill(Color.clear)
+                .frame(height: 4)
             chatCellsView
             Text("")
                 .id(bottomID)
             Rectangle()
                 .fill(Color.clear)
-                .frame(height: 80)
+                .frame(height: 66)
         }
         .scrollIndicators(.hidden)
         .onChange(of: viewModel.scrollToBottom) { shouldScroll in

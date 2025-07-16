@@ -413,6 +413,38 @@ class ViewControllerBuilder {
         return TopicOnboardingViewController(viewModel: viewModel)
     }
 
+    func chat(analyticsService: AnalyticsServiceInterface,
+              chatService: ChatServiceInterface,
+              handleError: @escaping (Error) -> Void) -> UIViewController {
+        let viewModel = ChatViewModel(
+            chatService: chatService,
+            analyticsService: analyticsService,
+            handleError: handleError
+        )
+
+        let viewController = HostingViewController(
+            rootView: ChatView(
+                viewModel: viewModel
+            ),
+            navigationBarHidden: true
+        )
+        return viewController
+    }
+
+    func chatError(error: Error,
+                   action: @escaping () -> Void) -> UIViewController {
+        let viewModel = ChatErrorViewModel(
+            error: error,
+            action: action
+        )
+        let view = InfoView(viewModel: viewModel)
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        return viewController
+    }
+
     func web(for url: URL) -> UIViewController {
         return WebViewController(url: url)
     }

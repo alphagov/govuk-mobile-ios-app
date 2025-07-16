@@ -58,7 +58,7 @@ struct ChatActionView: View {
                         .overlay(
                             Circle()
                                 .stroke(
-                                    Color(UIColor.govUK.strokes.listDivider),
+                                    Color(UIColor.govUK.strokes.chatAction),
                                     lineWidth: 1
                                 )
                         )
@@ -88,8 +88,8 @@ struct ChatActionView: View {
                         RoundedRectangle(cornerRadius: textEditorRadius)
                             .stroke(
                                 textAreaFocused ?
-                                Color(UIColor.govUK.strokes.chatTextBox) :
-                                    Color(UIColor.govUK.strokes.listDivider),
+                                Color(UIColor.govUK.strokes.focusedChatTextBox) :
+                                    Color(UIColor.govUK.strokes.chatAction),
                                 lineWidth: 1
                             )
                     )

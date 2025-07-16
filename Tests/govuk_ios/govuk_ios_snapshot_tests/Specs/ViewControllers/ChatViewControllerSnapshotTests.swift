@@ -58,7 +58,8 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
 
         let viewModel = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            handleError: { _ in }
         )
 
         viewModel.cellModels.append(.placeHolder)

@@ -21,7 +21,8 @@ struct ChatViewModelTests {
         mockChatService._stubbedAnswerResult = .success(answer)
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            handleError: { _ in }
         )
         sut.latestQuestion = "This is the question"
 
@@ -33,20 +34,24 @@ struct ChatViewModelTests {
     }
 
     @Test
-    func askQuestion_failure_createsCorrectCellModels() {
+    func askQuestion_failure_callsHandleError() {
         let mockChatService = MockChatService()
         mockChatService._stubbedAnswerResult = .failure(ChatError.apiUnavailable)
+        var chatError: ChatError?
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            handleError: { error in
+                chatError = error as? ChatError
+            }
         )
         sut.latestQuestion = "This is the question"
 
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 2)
+        #expect(sut.cellModels.count == 1)
         #expect(sut.cellModels.first?.type == .question)
-        #expect(sut.cellModels.last?.type == .error)
+        #expect(chatError == .apiUnavailable)
     }
 
     @Test
@@ -87,7 +92,8 @@ struct ChatViewModelTests {
 
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            handleError: { _ in }
         )
 
         sut.loadHistory()
@@ -99,18 +105,21 @@ struct ChatViewModelTests {
     }
 
     @Test
-    func loadHistory_error_createsCorrectCellModels() {
+    func loadHistory_error_callsHandleError() {
         let mockChatService = MockChatService()
         mockChatService._stubbedHistoryResult = .failure(ChatError.apiUnavailable)
-
+        var chatError: ChatError?
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            handleError: { error in
+                chatError = error as? ChatError
+            }
         )
 
         sut.loadHistory()
-        #expect(sut.cellModels.count == 1)
-        #expect(sut.cellModels.first?.type == .error)
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == .apiUnavailable)
     }
 
     @Test
@@ -119,7 +128,8 @@ struct ChatViewModelTests {
 
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            handleError: { _ in }
         )
 
         sut.cellModels = [.placeHolder]

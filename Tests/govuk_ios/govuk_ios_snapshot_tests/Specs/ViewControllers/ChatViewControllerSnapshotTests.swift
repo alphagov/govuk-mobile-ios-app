@@ -59,7 +59,8 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in }
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
         viewModel.cellModels.append(.gettingAnswer)

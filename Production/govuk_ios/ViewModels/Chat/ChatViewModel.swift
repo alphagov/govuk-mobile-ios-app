@@ -56,6 +56,7 @@ class ChatViewModel: ObservableObject {
                 let cellModel = ChatCellViewModel(error: error)
                 self?.cellModels.append(cellModel)
             }
+            self?.scrollToBottom = true
         }
     }
 

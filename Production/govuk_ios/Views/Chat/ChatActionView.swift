@@ -6,7 +6,8 @@ struct ChatActionView: View {
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
 
-    init(viewModel: ChatViewModel, textAreaFocused: FocusState<Bool>.Binding) {
+    init(viewModel: ChatViewModel,
+         textAreaFocused: FocusState<Bool>.Binding) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _textAreaFocused = textAreaFocused
     }
@@ -82,25 +83,19 @@ struct ChatActionView: View {
                     placeholderText = String.chat.localized("textEditorPlaceholder")
                 }
             }
-            .padding(.leading, 16)
-            .padding(.trailing, 16)
+            .padding(.horizontal, 16)
             .padding(.top, 8)
             .padding(.bottom, textAreaFocused ? 58 : 8)
             .frame(
                 height: min(textEditorFrameHeight, maxFrameHeight)
             )
             .background(
-                RoundedRectangle(cornerRadius: textEditorRadius)
-                    .fill(Color(UIColor.govUK.fills.surfaceChatBlue))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: textEditorRadius)
-                            .stroke(
-                                textAreaFocused ?
-                                Color(UIColor.govUK.strokes.focusedChatTextBox) :
-                                    Color(UIColor.govUK.strokes.chatAction),
-                                lineWidth: 1
-                            )
-                    )
+                Color(UIColor.govUK.fills.surfaceChatBlue)
+                    .roundedBorder(cornerRadius: textEditorRadius,
+                                   borderColor: textAreaFocused ?
+                                   Color(UIColor.govUK.strokes.focusedChatTextBox) :
+                                   Color(UIColor.govUK.strokes.chatAction),
+                                   borderWidth: 1.0)
             )
             .animation(.easeInOut(duration: 0.3), value: textViewHeight)
         }
@@ -139,8 +134,7 @@ struct ChatActionView: View {
                     self.textAreaFocused = true
                 }
             })
-            .padding(.bottom, 8)
-            .padding(.trailing, 8)
+            .padding([.bottom, .trailing], 8)
             .opacity(textAreaFocused ? 1 : 0)
             .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
         }

@@ -39,7 +39,14 @@ class ChatViewModel: ObservableObject {
                 let cellModel = ChatCellViewModel(answer: answer)
                 self?.cellModels.append(cellModel)
             case .failure(let error):
-                self?.handleError(error)
+                if error == .pageNotFound &&
+                    self?.chatService.currentConversationId != nil {
+                    self?.chatService.clearHistory()
+                    self?.cellModels.removeLast()
+                    self?.askQuestion(question)
+                } else {
+                    self?.handleError(error)
+                }
             }
             self?.answeredQuestionID = questionModel.id
         }
@@ -65,7 +72,11 @@ class ChatViewModel: ObservableObject {
             case .success(let answers):
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
-                self?.handleError(error)
+                if error == .pageNotFound {
+                    self?.chatService.clearHistory()
+                } else {
+                    self?.handleError(error)
+                }
             }
             self?.scrollToBottom = true
         }

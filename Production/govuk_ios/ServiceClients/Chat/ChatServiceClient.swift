@@ -18,6 +18,7 @@ protocol ChatServiceClientInterface {
 
 enum ChatError: LocalizedError {
     case networkUnavailable
+    case pageNotFound
     case apiUnavailable
     case decodingError
     case validationError

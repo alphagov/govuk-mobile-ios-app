@@ -8,13 +8,18 @@ final class MockChatService: ChatServiceInterface {
         _stubbedIsEnabled
     }
 
-    var _stubbedAnswerResult: ChatAnswerResult?
+    var _stubbedAnswerResults: [ChatAnswerResult] = []
     func askQuestion(_ question: String,
                      completion: @escaping (ChatAnswerResult) -> Void) {
-        guard let result = _stubbedAnswerResult else {
+        guard let result = nextResult() else {
             return completion(.failure(ChatError.apiUnavailable))
         }
         completion(result)
+    }
+
+    private func nextResult() -> ChatAnswerResult? {
+        guard _stubbedAnswerResults.count > 0 else { return nil }
+        return _stubbedAnswerResults.removeFirst()
     }
 
     var _stubbedHistoryResult: ChatHistoryResult?
@@ -29,11 +34,11 @@ final class MockChatService: ChatServiceInterface {
     var _clearHistoryCalled = false
     func clearHistory() {
         _clearHistoryCalled = true
+        _stubbedConversationId = nil
     }
 
     var _stubbedConversationId: String?
-    var currentConversationId:String? {
+    var currentConversationId: String? {
         _stubbedConversationId
     }
-
 }

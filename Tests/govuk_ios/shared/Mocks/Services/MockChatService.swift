@@ -26,9 +26,9 @@ final class MockChatService: ChatServiceInterface {
         completion(result)
     }
 
-    var _stubbedHistoryResult: Result<[AnsweredQuestion], Error>?
-    func chatHistory(conversationId: String?,
-                     completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void) {
+    var _stubbedHistoryResult: ChatHistoryResult?
+    func chatHistory(conversationId: String,
+                     completion: @escaping (ChatHistoryResult) -> Void) {
         guard let result = _stubbedHistoryResult else {
             return completion(.failure(ChatError.apiUnavailable))
         }

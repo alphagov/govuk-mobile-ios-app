@@ -87,7 +87,22 @@ struct ChatViewModelTests {
             message: "Next question"
         )
 
-        mockChatService._stubbedHistoryResult = .success([aqOne, aqTwo])
+        let pendingQuestion = PendingQuestion(
+            answerUrl: "https://www.example.com",
+            conversationId: conversationId,
+            createdAt: createdAt,
+            id: "78910",
+            message: "This is the pending question"
+        )
+
+        let history = History(
+            pendingQuestion: pendingQuestion,
+            answeredQuestions: [aqOne, aqTwo],
+            createdAt: createdAt,
+            id: "4456")
+
+        mockChatService._stubbedConversationId = "12345"
+        mockChatService._stubbedHistoryResult = .success(history)
 
         let sut = ChatViewModel(
             chatService: mockChatService,
@@ -97,16 +112,18 @@ struct ChatViewModelTests {
         )
 
         sut.loadHistory()
-        try #require(sut.cellModels.count == 4)
+        try #require(sut.cellModels.count == 5)
         #expect(sut.cellModels[0].type == .question)
         #expect(sut.cellModels[1].type == .answer)
         #expect(sut.cellModels[2].type == .question)
         #expect(sut.cellModels[3].type == .answer)
+        #expect(sut.cellModels[4].type == .question)
     }
 
     @Test
     func loadHistory_error_callsHandleError() {
         let mockChatService = MockChatService()
+        mockChatService._stubbedConversationId = "12345"
         mockChatService._stubbedHistoryResult = .failure(ChatError.apiUnavailable)
         var chatError: ChatError?
         let sut = ChatViewModel(

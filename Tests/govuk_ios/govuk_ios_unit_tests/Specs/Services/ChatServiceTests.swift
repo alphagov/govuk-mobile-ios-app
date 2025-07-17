@@ -70,6 +70,63 @@ final class ChatServiceTests {
 
         let pendingQuestionResult = try #require(try? result.get())
         #expect(pendingQuestionResult.id == "expectedPendingQuestionId")
+    func askQuestion_pollsForAnswer() async throws {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            maxRetryCount: 3,
+            retryInterval: 0.2
+        )
+
+        mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
+        mockChatServiceClient._stubbedFetchAnswerResults = [
+            .success(.pendingAnswer),
+            .success(.answeredAnswer)
+        ]
+
+        let result = await withCheckedContinuation { continuation in
+            sut.askQuestion(
+                "expectedQuestion",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+
+        let answerResult = try #require(try? result.get())
+        #expect(answerResult.id == "166ddfa3-6698-43a5-ac7b-de1448dbc685")
+    }
+
+    @Test func askQuestion_exceedsRetries_returnsExpectedError() async throws {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            maxRetryCount: 3,
+            retryInterval: 0.2
+        )
+
+        mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
+        mockChatServiceClient._stubbedFetchAnswerResults = [
+            .success(.pendingAnswer),
+            .success(.pendingAnswer),
+            .success(.pendingAnswer),
+            .success(.answeredAnswer)
+        ]
+
+        let result = await withCheckedContinuation { continuation in
+            sut.askQuestion(
+                "expectedQuestion",
+                completion: { result in
+                    continuation.resume(returning: result)
+                }
+            )
+        }
+
+        #expect((try? result.get()) == nil)
+        let error = try #require(result.getError())
+        #expect(error == .maxRetriesExceeded)
     }
 
     @Test
@@ -92,7 +149,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .networkUnavailable)
     }
 
@@ -149,7 +206,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .apiUnavailable)
     }
 
@@ -175,33 +232,9 @@ final class ChatServiceTests {
         }
 
         let historyResult = try #require(try? result.get())
-        #expect(historyResult.count == 1)
-        #expect(historyResult.first?.id == History.history.answeredQuestions.first?.id)
-    }
-
-    @Test
-    func chatHistory_noConversationId_returnsEmptyArray() async throws {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
-        )
-
-        mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
-
-        let result = await withCheckedContinuation { continuation in
-            sut.chatHistory(
-                conversationId: nil,
-                completion: { result in
-                    continuation.resume(returning: result)
-                }
-            )
-        }
-
-        let historyResult = try #require(try? result.get())
-        #expect(historyResult.count == 0)
+        #expect(historyResult.answeredQuestions.count == 1)
+        #expect(historyResult.answeredQuestions.first?.id ==
+                History.history.answeredQuestions.first?.id)
     }
 
     @Test func chatHistory_returnsExpectedError() async throws {
@@ -225,7 +258,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .apiUnavailable)
     }
 

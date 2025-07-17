@@ -61,9 +61,12 @@ class ChatViewModel: ObservableObject {
     }
 
     func loadHistory() {
+        guard let conversationId = chatService.currentConversationId else {
+            return
+        }
         cellModels.removeAll()
         chatService.chatHistory(
-            conversationId: chatService.currentConversationId
+            conversationId: conversationId
         ) { [weak self] result in
             switch result {
             case .success(let answers):
@@ -84,7 +87,10 @@ class ChatViewModel: ObservableObject {
         (latestQuestion.count > maxCharacters)
     }
 
-    private func handleHistoryResponse(_ answers: [AnsweredQuestion]) {
+
+    private func handleHistoryResponse(_ history: History) {
+        cellModels.removeAll()
+        let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
             cellModels.append(question)
@@ -93,6 +99,9 @@ class ChatViewModel: ObservableObject {
                 openURLAction: openURLAction
             )
             cellModels.append(answer)
+        }
+        if let pendingQuestion = history.pendingQuestion {
+            askQuestion(pendingQuestion.message)
         }
     }
 

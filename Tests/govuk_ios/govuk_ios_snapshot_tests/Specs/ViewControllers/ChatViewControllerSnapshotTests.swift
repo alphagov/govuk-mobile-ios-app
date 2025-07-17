@@ -54,7 +54,22 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             message: "This is the question"
         )
 
-        mockChatService._stubbedHistoryResult = .success([answeredQuestion])
+        let pendingQuestion = PendingQuestion(
+            answerUrl: "https://www.example.com",
+            conversationId: conversationId,
+            createdAt: createdAt,
+            id: "78910",
+            message: "This is the pending question"
+        )
+
+        let history = History(
+            pendingQuestion: pendingQuestion,
+            answeredQuestions: [answeredQuestion],
+            createdAt: createdAt,
+            id: "4456")
+
+        mockChatService._stubbedConversationId = conversationId
+        mockChatService._stubbedHistoryResult = .success(history)
 
         let viewModel = ChatViewModel(
             chatService: mockChatService,

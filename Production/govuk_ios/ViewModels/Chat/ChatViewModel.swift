@@ -21,9 +21,9 @@ class ChatViewModel: ObservableObject {
         self.handleError = handleError
     }
 
-    func askQuestion() {
+    func askQuestion(_ question: String? = nil) {
         // show question in chat
-        let questionModel = ChatCellViewModel(message: latestQuestion,
+        let questionModel = ChatCellViewModel(message: question ?? latestQuestion,
                                               id: UUID().uuidString,
                                               type: .question)
         cellModels.append(questionModel)
@@ -46,10 +46,20 @@ class ChatViewModel: ObservableObject {
         latestQuestion = ""
     }
 
+    var sendButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(localisedTitle: String.chat.localized("sendButtonTitle"),
+              action: { [weak self] in
+            self?.askQuestion()
+        })
+    }
+
     func loadHistory() {
+        guard let conversationId = chatService.currentConversationId else {
+            return
+        }
         cellModels.removeAll()
         chatService.chatHistory(
-            conversationId: chatService.currentConversationId
+            conversationId: conversationId
         ) { [weak self] result in
             switch result {
             case .success(let answers):
@@ -61,12 +71,17 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-    private func handleHistoryResponse(_ answers: [AnsweredQuestion]) {
+    private func handleHistoryResponse(_ history: History) {
+        cellModels.removeAll()
+        let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
             cellModels.append(question)
             let answer = ChatCellViewModel(answer: answeredQuestion.answer)
             cellModels.append(answer)
+        }
+        if let pendingQuestion = history.pendingQuestion {
+            askQuestion(pendingQuestion.message)
         }
     }
 

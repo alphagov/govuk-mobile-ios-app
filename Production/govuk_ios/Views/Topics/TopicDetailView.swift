@@ -81,7 +81,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         VStack {
             if let description = viewModel.description {
                 descripitonView(description: description)
-                    .padding(.top, 2)
+                    .padding(.top, 2) // merge
             }
             GroupedList(
                 content: viewModel.sections,

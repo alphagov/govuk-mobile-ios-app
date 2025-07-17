@@ -3,7 +3,7 @@ import SwiftUI
 struct DynamicTextEditor: UIViewRepresentable {
     @Binding var text: String
     @Binding var dynamicHeight: CGFloat
-    var placeholderText: String
+    @Binding var placeholderText: String?
 
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
@@ -12,45 +12,37 @@ struct DynamicTextEditor: UIViewRepresentable {
         textView.backgroundColor = UIColor.govUK.fills.surfaceChatBlue
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
-
-        let placeholderLabel = UILabel()
-        placeholderLabel.text = placeholderText
-        placeholderLabel.font = UIFont.govUK.body.withSize(17)
-        placeholderLabel.textColor = UIColor.govUK.text.secondary
-
-        textView.addSubview(placeholderLabel)
-        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            placeholderLabel.leadingAnchor.constraint(
-                equalTo: textView.leadingAnchor
-            ),
-            placeholderLabel.centerYAnchor.constraint(
-                equalTo: textView.centerYAnchor
-            )
-        ])
-
-        context.coordinator.placeholderLabel = placeholderLabel
+        textView.text = placeholderText
+        textView.textColor = UIColor.govUK.text.secondary
+        textView.textContainerInset = UIEdgeInsets(top: 6, left: 0, bottom: 4, right: 0)
 
         return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
+        if placeholderText != nil {
+            uiView.text = placeholderText
+            uiView.textColor = UIColor.govUK.text.secondary
+        } else {
+            uiView.text = text
+            uiView.textColor = UIColor.govUK.text.primary
+        }
         DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(text: $text, height: $dynamicHeight)
+        Coordinator(text: $text, height: $dynamicHeight, placeholderText: $placeholderText)
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
         @Binding var text: String
         @Binding var height: CGFloat
-        weak var placeholderLabel: UILabel?
+        @Binding var placeholderText: String?
 
-        init(text: Binding<String>, height: Binding<CGFloat>) {
+        init(text: Binding<String>, height: Binding<CGFloat>, placeholderText: Binding<String?>) {
             self._text = text
             self._height = height
+            self._placeholderText = placeholderText
         }
 
         func textViewDidChange(_ textView: UITextView) {
@@ -59,12 +51,16 @@ struct DynamicTextEditor: UIViewRepresentable {
         }
 
         func textViewDidBeginEditing(_ textView: UITextView) {
-            placeholderLabel?.isHidden = true
+            placeholderText = nil
         }
 
         func textViewDidEndEditing(_ textView: UITextView) {
-            placeholderLabel?.isHidden =
-            textView.isFirstResponder || !textView.text.isEmpty
+            if textView.text.isEmpty {
+                textView.text = placeholderText
+                textView.textColor = UIColor.govUK.text.secondary
+            } else {
+                textView.textColor = UIColor.govUK.text.primary
+            }
         }
     }
 

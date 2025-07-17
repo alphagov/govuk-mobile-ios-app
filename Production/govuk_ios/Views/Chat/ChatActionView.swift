@@ -4,6 +4,7 @@ struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
     @State private var textViewHeight: CGFloat = 50.0
+    @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
 
     init(viewModel: ChatViewModel, textAreaFocused: FocusState<Bool>.Binding) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -25,7 +26,7 @@ struct ChatActionView: View {
         ZStack(alignment: .bottom) {
             chatActionBlurGradient
 
-            HStack(alignment: .bottom, spacing: 8) {
+            HStack(alignment: .center, spacing: 8) {
                 if !textAreaFocused {
                     menuView
                 }
@@ -71,9 +72,16 @@ struct ChatActionView: View {
             DynamicTextEditor(
                 text: $viewModel.latestQuestion,
                 dynamicHeight: $textViewHeight,
-                placeholderText: String.chat.localized("textEditorPlaceholder")
+                placeholderText: $placeholderText
             )
             .focused($textAreaFocused)
+            .onChange(of: textAreaFocused) { isFocused in
+                if isFocused || !viewModel.latestQuestion.isEmpty {
+                    placeholderText = nil
+                } else {
+                    placeholderText = String.chat.localized("textEditorPlaceholder")
+                }
+            }
             .padding(.leading, 16)
             .padding(.trailing, 16)
             .padding(.top, 8)
@@ -134,7 +142,7 @@ struct ChatActionView: View {
             .padding(.bottom, 8)
             .padding(.trailing, 8)
             .opacity(textAreaFocused ? 1 : 0)
-            .animation(.easeInOut(duration: 0.2), value: textAreaFocused)
+            .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
         }
         .padding()
     }
@@ -151,8 +159,13 @@ struct ChatActionView: View {
     private var textEditorFrameHeight: CGFloat {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
+        let unfocusedHeight = viewModel.latestQuestion.isEmpty ?
+        max(textViewHeight + 10, 50) :
+        max(lineHeight + 10, 50)
+
         return textAreaFocused ?
-        textViewHeight + max((2 * lineHeight), 75) : 50
+        textViewHeight + max((2 * lineHeight), 75) :
+        unfocusedHeight
     }
 
     private var chatActionBlurGradient: some View {
@@ -178,12 +191,12 @@ struct ChatActionView: View {
             )
             .frame(height: 60)
             .ignoresSafeArea(.all)
-            .animation(.easeInOut(duration: 0.3), value: textViewHeight)
 
             Color(UIColor.govUK.fills.surfaceChatBackground)
                 .frame(maxHeight: textEditorFrameHeight - 20, alignment: .bottom)
                 .ignoresSafeArea(.all)
         }
+        .animation(.easeInOut(duration: 0.3), value: textViewHeight)
     }
 
     private func showAbout() {

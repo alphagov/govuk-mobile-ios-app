@@ -14,6 +14,7 @@ struct ChatViewModelTests {
 
         mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
         mockChatService._stubbedAnswerResult = .success(.answeredAnswer)
+        mockChatService._stubbedAnswerResults = [.success(answer)]
         let sut = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
@@ -35,6 +36,7 @@ struct ChatViewModelTests {
         let mockChatService = MockChatService()
         mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
         mockChatService._stubbedAnswerResult = .failure(ChatError.apiUnavailable)
+        mockChatService._stubbedAnswerResults = [.failure(ChatError.apiUnavailable)]
         var chatError: ChatError?
         let sut = ChatViewModel(
             chatService: mockChatService,
@@ -51,6 +53,61 @@ struct ChatViewModelTests {
         #expect(sut.cellModels.count == 1)
         #expect(sut.cellModels.first?.type == .question)
         #expect(chatError == .apiUnavailable)
+    }
+
+    @Test
+    func askQuestion_pageNotFound_clearsConversation_andAsksAgain() {
+        let answer = Answer(
+            createdAt: "\(Date())",
+            id: "12345",
+            message: "This is the answer",
+            sources: nil
+        )
+        let mockChatService = MockChatService()
+        mockChatService._stubbedConversationId = "12345"
+        mockChatService._stubbedAnswerResults = [
+            .failure(ChatError.pageNotFound),
+            .success(answer)
+        ]
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            handleError: { error in
+                chatError = error as? ChatError
+            }
+        )
+        sut.latestQuestion = "This is the question"
+
+        #expect(mockChatService.currentConversationId == "12345")
+        sut.askQuestion()
+
+        #expect(sut.cellModels.count == 2)
+        #expect(sut.cellModels.first?.type == .question)
+        #expect(sut.cellModels.last?.type == .answer)
+        #expect(chatError == nil)
+        #expect(mockChatService.currentConversationId == nil)
+    }
+
+    @Test
+    func askQuestion_pageNotFoundOnNewConversation_callsHandleError() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedAnswerResults = [.failure(ChatError.pageNotFound)]
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            handleError: { error in
+                chatError = error as? ChatError
+            }
+        )
+        sut.latestQuestion = "This is the question"
+
+        sut.askQuestion()
+
+        #expect(sut.cellModels.count == 1)
+        #expect(sut.cellModels.first?.type == .question)
+        #expect(chatError == .pageNotFound)
     }
 
     @Test
@@ -138,6 +195,27 @@ struct ChatViewModelTests {
         sut.loadHistory()
         #expect(sut.cellModels.count == 0)
         #expect(chatError == .apiUnavailable)
+    }
+
+    @Test
+    func loadHistory_pageNotFoundError_clearsConversation() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedConversationId = "12345"
+        mockChatService._stubbedHistoryResult = .failure(ChatError.pageNotFound)
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            handleError: { error in
+                chatError = error as? ChatError
+            }
+        )
+
+        #expect(mockChatService.currentConversationId == "12345")
+        sut.loadHistory()
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == nil)
+        #expect(mockChatService.currentConversationId == nil)
     }
 
     @Test

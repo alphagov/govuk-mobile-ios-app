@@ -25,6 +25,7 @@ class LaunchViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        guard !animationView.hasAnimationBegun else { return }
         animationView.animateIfAvailable(
             completion: { [weak self] in
                 self?.viewModel.animationCompleted()

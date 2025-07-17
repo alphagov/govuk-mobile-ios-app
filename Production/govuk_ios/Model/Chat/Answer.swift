@@ -1,4 +1,5 @@
 import Foundation
+import GOVKit
 
 struct Answer: Codable {
     enum CodingKeys: String, CodingKey {
@@ -26,4 +27,7 @@ struct Source: Codable {
 
     let title: String
     let url: String
+    var urlWithFallback: URL {
+        URL(string: url) ?? Constants.API.govukBaseUrl
+    }
 }

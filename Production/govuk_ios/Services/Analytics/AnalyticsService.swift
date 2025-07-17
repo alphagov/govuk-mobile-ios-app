@@ -69,10 +69,6 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     private var shouldTrack: Bool {
-        if permissionState == .accepted && authenticationService.isSignedIn {
-            true
-        } else {
-            false
-        }
+        permissionState == .accepted && authenticationService.isSignedIn
     }
 }

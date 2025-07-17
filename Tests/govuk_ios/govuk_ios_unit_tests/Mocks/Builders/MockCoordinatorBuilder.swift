@@ -77,6 +77,14 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         )
     }
 
+    var _stubbedChatCoordinator: TabItemCoordinator?
+    override var chat: any TabItemCoordinator {
+        return _stubbedChatCoordinator ??
+        MockBaseCoordinator(
+            navigationController: .init()
+        )
+    }
+
     var _stubbedJailbreakCoordinator: BaseCoordinator?
     var _receivedJailbreakDismissAction: (() -> Void)?
     override func jailbreakDetector(navigationController: UINavigationController,

@@ -12,6 +12,10 @@ class SettingsCoordinator: TabItemCoordinator {
     private let notificationService: NotificationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
+    var isEnabled: Bool {
+        true
+    }
+
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,

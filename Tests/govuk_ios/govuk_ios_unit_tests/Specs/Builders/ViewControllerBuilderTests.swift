@@ -228,18 +228,6 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func signedOut_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.signedOut(
-            authenticationService:MockAuthenticationService(),
-            analyticsService: MockAnalyticsService(),
-            completion: { }
-        )
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
-        #expect(rootView != nil)
-    }
-
-    @Test
     func signInError_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.signInError(
@@ -266,7 +254,7 @@ struct ViewControllerBuilderTests {
             completion: { }
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView = (result as? HostingViewController<WelcomeOnboardingView>)?.rootView
         #expect(rootView != nil)
     }
 

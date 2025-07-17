@@ -58,11 +58,11 @@ struct ChatView: View {
                 .fill(Color.clear)
                 .frame(height: 4)
             chatCellsView
-            Text("")
-                .id(bottomID)
             Rectangle()
                 .fill(Color.clear)
                 .frame(height: 66)
+            Text("")
+                .id(bottomID)
         }
         .scrollIndicators(.hidden)
         .onChange(of: viewModel.scrollToBottom) { shouldScroll in
@@ -72,6 +72,12 @@ struct ChatView: View {
                 }
                 viewModel.scrollToBottom = false
             }
+        }
+        .onChange(of: viewModel.answeredQuestionID) { id in
+            withAnimation {
+                proxy.scrollTo(id, anchor: .top)
+            }
+            viewModel.answeredQuestionID = ""
         }
     }
 

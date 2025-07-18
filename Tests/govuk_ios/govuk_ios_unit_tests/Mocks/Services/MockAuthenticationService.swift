@@ -5,6 +5,7 @@ import Authentication
 @testable import govuk_ios
 
 class MockAuthenticationService: AuthenticationServiceInterface {
+
     var _storedRefreshToken = true
     var secureStoreRefreshTokenPresent: Bool {
         _storedRefreshToken
@@ -25,13 +26,14 @@ class MockAuthenticationService: AuthenticationServiceInterface {
         _stubbedIsReauth
     }
 
-    func signOut() {
+    func signOut(reason: SignoutReason) {
         _stubbedIsSignedIn = false
     }
 
     var refreshToken: String?
     var idToken: String?
     var accessToken: String?
+    var didSignOutAction: ((SignoutReason) -> Void)?
 
     var _stubbedAuthenticationResult: AuthenticationServiceResult = .failure(.loginFlow(.clientError))
     func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationServiceResult {

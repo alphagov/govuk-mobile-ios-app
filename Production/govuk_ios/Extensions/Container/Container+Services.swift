@@ -148,7 +148,6 @@ extension Container {
             ReturningUserService(
                 openSecureStoreService: self.openSecureStoreService.resolve(),
                 coreDataDeletionService: self.coreDataDeletionService.resolve(),
-                userDefaults: UserDefaults.standard,
                 localAuthenticationService: self.localAuthenticationService.resolve()
             )
         }

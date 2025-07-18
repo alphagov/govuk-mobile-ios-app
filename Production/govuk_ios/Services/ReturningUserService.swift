@@ -10,7 +10,6 @@ protocol ReturningUserServiceInterface {
 class ReturningUserService: ReturningUserServiceInterface {
     private let openSecureStoreService: SecureStorable
     private let coreDataDeletionService: CoreDataDeletionServiceInterface
-    private let userDefaults: UserDefaultsInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
     private var storedpersistentUserIdentifier: String? {
@@ -19,11 +18,9 @@ class ReturningUserService: ReturningUserServiceInterface {
 
     init(openSecureStoreService: SecureStorable,
          coreDataDeletionService: CoreDataDeletionServiceInterface,
-         userDefaults: UserDefaultsInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface) {
         self.openSecureStoreService = openSecureStoreService
         self.coreDataDeletionService = coreDataDeletionService
-        self.userDefaults = userDefaults
         self.localAuthenticationService = localAuthenticationService
     }
 
@@ -77,7 +74,6 @@ class ReturningUserService: ReturningUserServiceInterface {
         } catch {
             return .failure(.coreDataDeletionError)
         }
-        userDefaults.deleteAll()
         return .success(false)
     }
 

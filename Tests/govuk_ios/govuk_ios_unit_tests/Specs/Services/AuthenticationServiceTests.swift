@@ -269,7 +269,7 @@ struct AuthenticationServiceTests {
         sut.encryptRefreshToken()
         #expect(sut.refreshToken != nil)
         #expect(mockSecureStoreService._savedItems["refreshToken"] != nil)
-        sut.signOut()
+        sut.signOut(reason: .userSignout)
         #expect(sut.refreshToken == nil)
         #expect(mockSecureStoreService._savedItems["refreshToken"] == nil)
     }

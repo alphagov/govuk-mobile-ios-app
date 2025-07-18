@@ -25,13 +25,6 @@ extension UserDefaults: UserDefaultsInterface {
         )
         synchronize()
     }
-
-    func deleteAll() {
-        for key in UserDefaultsKeys.allCases {
-            removeObject(forKey: key.rawValue)
-        }
-        synchronize()
-    }
 }
 
 enum UserDefaultsKeys: String, CaseIterable {
@@ -55,5 +48,4 @@ protocol UserDefaultsInterface {
     func bool(forKey key: UserDefaultsKeys) -> Bool
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
-    func deleteAll()
 }

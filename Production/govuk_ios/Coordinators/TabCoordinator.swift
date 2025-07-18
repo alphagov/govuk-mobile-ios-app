@@ -46,13 +46,6 @@ class TabCoordinator: BaseCoordinator,
         handleDeeplink(url: url)
     }
 
-    override func childDidFinish(_ child: BaseCoordinator) {
-        super.childDidFinish(child)
-        if child is SettingsCoordinator {
-            finish()
-        }
-    }
-
     private func handleDeeplink(url: URL) {
         tabController.dismiss(animated: true)
 

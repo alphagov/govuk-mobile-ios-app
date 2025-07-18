@@ -38,6 +38,7 @@ struct StoredLocalAuthorityWidgetView: View {
                 cardView
             }
         }
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
     }
     @ViewBuilder
     var cardView: some View {

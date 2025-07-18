@@ -34,6 +34,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                     }
                     TextField("", text: $viewModel.postCode)
                         .textFieldStyle(.roundedBorder)
+                        .textContentType(.postalCode)
                         .accessibilityLabel(viewModel.entryFieldAccessibilityLabel)
                     Text(viewModel.postcodeEntryViewDescriptionTitle)
                         .font(Font.govUK.bodySemibold)

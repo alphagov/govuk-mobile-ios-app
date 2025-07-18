@@ -60,6 +60,7 @@ struct FaceIdSettingsView: View {
                 }
                 .padding(16)
             }
+            .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
             .accessibilityElement(children: .contain)
         }
         .onAppear {

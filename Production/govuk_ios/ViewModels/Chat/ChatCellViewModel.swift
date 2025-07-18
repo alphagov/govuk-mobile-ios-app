@@ -49,13 +49,6 @@ struct ChatCellViewModel {
                   sources: [])
     }
 
-    init(pendingQuestion: PendingQuestion) {
-        self.init(message: pendingQuestion.message,
-                  id: pendingQuestion.id,
-                  type: .question,
-                  sources: [])
-    }
-
     var isAnswer: Bool {
         type == .question ? false : true
     }

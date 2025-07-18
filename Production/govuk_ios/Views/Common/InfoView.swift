@@ -23,12 +23,13 @@ struct InfoView: View {
                 .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
             SwiftUIButton(
-                .primary,
+                viewModel.buttonConfiguration,
                 viewModel: viewModel.buttonViewModel
             )
             .frame(minHeight: 44, idealHeight: 44)
             .padding(16)
             .ignoresSafeArea()
+            .accessibilityLabel(viewModel.buttonAccessibilityTitle)
         }
         .navigationBarHidden(true)
         .onAppear {

@@ -5,6 +5,7 @@ import UIComponents
 class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let handleError: (Error) -> Void
 
     @Published private(set) var questionInProgress: Bool = false
     @Published var cellModels: [ChatCellViewModel] = []
@@ -13,14 +14,16 @@ class ChatViewModel: ObservableObject {
     @Published var answeredQuestionID: String = ""
 
     init(chatService: ChatServiceInterface,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         handleError: @escaping (Error) -> Void) {
         self.chatService = chatService
         self.analyticsService = analyticsService
+        self.handleError = handleError
     }
 
-    func askQuestion() {
+    func askQuestion(_ question: String? = nil) {
         // show question in chat
-        let questionModel = ChatCellViewModel(message: latestQuestion,
+        let questionModel = ChatCellViewModel(message: question ?? latestQuestion,
                                               id: UUID().uuidString,
                                               type: .question)
         cellModels.append(questionModel)
@@ -36,36 +39,60 @@ class ChatViewModel: ObservableObject {
                 let cellModel = ChatCellViewModel(answer: answer)
                 self?.cellModels.append(cellModel)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                if error == .pageNotFound &&
+                    self?.chatService.currentConversationId != nil {
+                    self?.chatService.clearHistory()
+                    self?.cellModels.removeLast()
+                    self?.askQuestion(question)
+                } else {
+                    self?.handleError(error)
+                }
             }
             self?.answeredQuestionID = questionModel.id
         }
         latestQuestion = ""
     }
 
+    var sendButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(localisedTitle: String.chat.localized("sendButtonTitle"),
+              action: { [weak self] in
+            self?.askQuestion()
+        })
+    }
+
     func loadHistory() {
+        guard let conversationId = chatService.currentConversationId else {
+            return
+        }
         cellModels.removeAll()
         chatService.chatHistory(
-            conversationId: chatService.currentConversationId
+            conversationId: conversationId
         ) { [weak self] result in
             switch result {
             case .success(let answers):
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                if error == .pageNotFound {
+                    self?.chatService.clearHistory()
+                } else {
+                    self?.handleError(error)
+                }
             }
             self?.scrollToBottom = true
         }
     }
 
-    private func handleHistoryResponse(_ answers: [AnsweredQuestion]) {
+    private func handleHistoryResponse(_ history: History) {
+        cellModels.removeAll()
+        let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
             cellModels.append(question)
             let answer = ChatCellViewModel(answer: answeredQuestion.answer)
             cellModels.append(answer)
+        }
+        if let pendingQuestion = history.pendingQuestion {
+            askQuestion(pendingQuestion.message)
         }
     }
 

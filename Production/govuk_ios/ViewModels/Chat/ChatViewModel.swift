@@ -10,6 +10,7 @@ class ChatViewModel: ObservableObject {
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
     @Published var scrollToBottom: Bool = false
+    @Published var answeredQuestionID: String = ""
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface) {
@@ -38,17 +39,13 @@ class ChatViewModel: ObservableObject {
                 let cellModel = ChatCellViewModel(error: error)
                 self?.cellModels.append(cellModel)
             }
-            self?.scrollToBottom = true
+            self?.answeredQuestionID = questionModel.id
         }
         latestQuestion = ""
     }
 
-    var sendButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(localisedTitle: String.chat.localized("sendButtonTitle"),
-              action: askQuestion)
-    }
-
     func loadHistory() {
+        cellModels.removeAll()
         chatService.chatHistory(
             conversationId: chatService.currentConversationId
         ) { [weak self] result in
@@ -59,6 +56,7 @@ class ChatViewModel: ObservableObject {
                 let cellModel = ChatCellViewModel(error: error)
                 self?.cellModels.append(cellModel)
             }
+            self?.scrollToBottom = true
         }
     }
 

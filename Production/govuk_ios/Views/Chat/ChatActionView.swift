@@ -32,7 +32,7 @@ struct ChatActionView: View {
         ZStack(alignment: .bottom) {
             chatActionBlurGradient
 
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 8) {
                 if !textAreaFocused {
                     menuView
                 }
@@ -71,7 +71,7 @@ struct ChatActionView: View {
                                 )
                         )
                 )
-        }
+        }.accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
     }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {

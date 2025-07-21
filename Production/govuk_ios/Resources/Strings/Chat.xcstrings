@@ -56,6 +56,17 @@
         }
       }
     },
+    "moreOptionsAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More options"
+          }
+        }
+      }
+    },
     "remainingCharactersTitle" : {
       "extractionState" : "manual",
       "localizations" : {

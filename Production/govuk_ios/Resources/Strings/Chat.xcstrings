@@ -34,13 +34,24 @@
         }
       }
     },
-    "gettingAnswerTitle" : {
+    "gettingAnswerMessage" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Getting your answer"
+            "value" : "Generating your answer…"
+          }
+        }
+      }
+    },
+    "loadingQuestionMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message loading…"
           }
         }
       }

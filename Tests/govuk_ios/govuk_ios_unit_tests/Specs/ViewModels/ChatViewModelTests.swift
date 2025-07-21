@@ -9,32 +9,29 @@ import GOVKit
 struct ChatViewModelTests {
 
     @Test
-    func askQuestion_success_createsCorrectCellModels() {
+    func askQuestion_success_createsCorrectCellModels() async {
         let mockChatService = MockChatService()
-        let answer = Answer(
-            createdAt: "\(Date())",
-            id: "12345",
-            message: "This is the answer",
-            sources: nil
-        )
 
-        mockChatService._stubbedAnswerResult = .success(answer)
+        mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
+        mockChatService._stubbedAnswerResult = .success(.answeredAnswer)
         let sut = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService()
         )
         sut.latestQuestion = "This is the question"
-
         sut.askQuestion()
 
+        print("Cell models = \(sut.cellModels)")
         #expect(sut.cellModels.count == 2)
         #expect(sut.cellModels.first?.type == .question)
         #expect(sut.cellModels.last?.type == .answer)
+        #expect(sut.latestQuestion == "")
     }
 
     @Test
     func askQuestion_failure_createsCorrectCellModels() {
         let mockChatService = MockChatService()
+        mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
         mockChatService._stubbedAnswerResult = .failure(ChatError.apiUnavailable)
         let sut = ChatViewModel(
             chatService: mockChatService,
@@ -122,7 +119,7 @@ struct ChatViewModelTests {
             analyticsService: MockAnalyticsService()
         )
 
-        sut.cellModels = [.placeHolder]
+        sut.cellModels = [.gettingAnswer]
 
         sut.newChat()
         #expect(sut.cellModels.isEmpty)

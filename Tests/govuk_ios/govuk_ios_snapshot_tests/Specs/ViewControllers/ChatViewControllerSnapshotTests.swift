@@ -61,7 +61,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService()
         )
 
-        viewModel.cellModels.append(.placeHolder)
+        viewModel.cellModels.append(.gettingAnswer)
 
         return ChatView(viewModel: viewModel)
     }

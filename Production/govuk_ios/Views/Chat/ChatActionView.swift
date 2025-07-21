@@ -5,6 +5,7 @@ struct ChatActionView: View {
     @FocusState.Binding var textAreaFocused: Bool
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
+    @State private var charactersCountHeight: CGFloat = 0
     private var animationDuration = 0.3
 
     init(viewModel: ChatViewModel,
@@ -21,6 +22,9 @@ struct ChatActionView: View {
                 chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
             }
             .frame(maxHeight: geometry.size.height, alignment: .bottom)
+        }
+        .onPreferenceChange(CharacterCountHeightKey.self) { height in
+            self.charactersCountHeight = height
         }
     }
 
@@ -87,7 +91,8 @@ struct ChatActionView: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 8)
-            .padding(.bottom, textAreaFocused ? 58 : 8)
+            .padding(.bottom,
+                     textAreaFocused ? (max(50, charactersCountHeight)) : 8)
             .frame(
                 height: min(textEditorFrameHeight, maxFrameHeight)
             )
@@ -108,8 +113,15 @@ struct ChatActionView: View {
         }
     }
 
+    private var remainingCharacters: Int {
+        let maxCharacters = 300
+        return abs(maxCharacters - viewModel.latestQuestion.count)
+    }
+
     private var sendButtonView: some View {
-        HStack {
+        HStack(alignment: .bottom) {
+            characterCountView
+
             Spacer()
 
             Button(action: askQuestion) {
@@ -120,14 +132,14 @@ struct ChatActionView: View {
                     .foregroundColor(
                         viewModel.latestQuestion.isEmpty ?
                         Color(UIColor.govUK.text.buttonPrimaryDisabled) :
-                        Color(UIColor.govUK.text.buttonPrimary)
+                            Color(UIColor.govUK.text.buttonPrimary)
                     )
                     .frame(width: 50, height: 50)
                     .background(
                         Circle().fill(
                             viewModel.latestQuestion.isEmpty ?
                             Color(UIColor.govUK.fills.surfaceButtonPrimaryDisabled) :
-                            Color(UIColor.govUK.text.buttonSecondary)
+                                Color(UIColor.govUK.text.buttonSecondary)
                         )
                     )
             }
@@ -143,6 +155,40 @@ struct ChatActionView: View {
                        value: textAreaFocused)
         }
         .padding()
+    }
+
+    private var characterCountView: some View {
+        if viewModel.latestQuestion.count > 300 {
+            return AnyView(
+                Text("\(remainingCharacters) characters too many")
+                    .font(Font(UIFont.govUK.subheadlineSemibold))
+                    .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
+                    .padding([.leading, .trailing], 16)
+                    .padding(.bottom, 24)
+                    .background(GeometryReader { textGeometry in
+                        Color.clear.preference(
+                            key: CharacterCountHeightKey.self,
+                            value: textGeometry.size.height
+                        )
+                    })
+            )
+        } else if viewModel.latestQuestion.count > 249 {
+            return AnyView(
+                Text("\(remainingCharacters) characters remaining")
+                    .font(Font(UIFont.govUK.subheadline))
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    .padding([.leading, .trailing], 16)
+                    .padding(.bottom, 24)
+                    .background(GeometryReader { textGeometry in
+                        Color.clear.preference(
+                            key: CharacterCountHeightKey.self,
+                            value: textGeometry.size.height
+                        )
+                    })
+            )
+        } else {
+            return AnyView(EmptyView())
+        }
     }
 
     private func askQuestion() {
@@ -204,5 +250,12 @@ struct ChatActionView: View {
 
     private func clearChat() {
         viewModel.newChat()
+    }
+}
+
+struct CharacterCountHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }

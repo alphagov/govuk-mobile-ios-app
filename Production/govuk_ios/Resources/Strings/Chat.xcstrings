@@ -56,6 +56,17 @@
         }
       }
     },
+    "remainingCharactersTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "characters remaining"
+          }
+        }
+      }
+    },
     "sendButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -96,6 +107,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Type your message here"
+          }
+        }
+      }
+    },
+    "tooManyCharactersTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "characters too many"
           }
         }
       }

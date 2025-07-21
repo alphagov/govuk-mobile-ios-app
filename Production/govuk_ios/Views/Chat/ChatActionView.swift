@@ -158,8 +158,9 @@ struct ChatActionView: View {
         }
 
         if viewModel.latestQuestion.count > viewModel.maxCharacters {
+            let tooManyText = String.chat.localized("tooManyCharactersTitle")
             return AnyView(
-                Text("\(viewModel.absoluteRemainingCharacters) characters too many")
+                Text("\(viewModel.absoluteRemainingCharacters) \(tooManyText)")
                     .font(Font(UIFont.govUK.subheadlineSemibold))
                     .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
                     .padding([.leading, .trailing], 16)
@@ -172,8 +173,9 @@ struct ChatActionView: View {
                     })
             )
         } else if viewModel.latestQuestion.count >= (viewModel.maxCharacters - 50) {
+            let remainingCharactersText = String.chat.localized("remainingCharactersTitle")
             return AnyView(
-                Text("\(viewModel.absoluteRemainingCharacters) characters remaining")
+                Text("\(viewModel.absoluteRemainingCharacters) \(remainingCharactersText)")
                     .font(Font(UIFont.govUK.subheadline))
                     .foregroundColor(Color(UIColor.govUK.text.secondary))
                     .padding([.leading, .trailing], 16)

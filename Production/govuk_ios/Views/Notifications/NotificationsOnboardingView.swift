@@ -73,7 +73,6 @@ struct NotificationsOnboardingView: View {
         .padding(.top, verticalSizeClass == .compact ? 30 : 46)
         .padding(.horizontal, 16)
         .modifier(ScrollBounceBehaviorModifier())
-        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
     }
 }
 

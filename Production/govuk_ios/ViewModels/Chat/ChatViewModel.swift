@@ -5,6 +5,7 @@ import UIComponents
 class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    let maxCharacters = 300
 
     @Published private(set) var questionInProgress: Bool = false
     @Published var cellModels: [ChatCellViewModel] = []
@@ -58,6 +59,15 @@ class ChatViewModel: ObservableObject {
             }
             self?.scrollToBottom = true
         }
+    }
+
+    var absoluteRemainingCharacters: Int {
+        abs(maxCharacters - latestQuestion.count)
+    }
+
+    var shouldDisableSend: Bool {
+        latestQuestion.isEmpty ||
+        (latestQuestion.count > maxCharacters)
     }
 
     private func handleHistoryResponse(_ answers: [AnsweredQuestion]) {

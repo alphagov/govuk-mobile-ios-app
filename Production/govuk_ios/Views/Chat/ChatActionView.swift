@@ -32,7 +32,7 @@ struct ChatActionView: View {
         ZStack(alignment: .bottom) {
             chatActionBlurGradient
 
-            HStack(alignment: .center, spacing: 8) {
+            HStack(alignment: .center) {
                 if !textAreaFocused {
                     menuView
                 }
@@ -89,7 +89,7 @@ struct ChatActionView: View {
                     placeholderText = String.chat.localized("textEditorPlaceholder")
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 12)
             .padding(.top, 8)
             .padding(.bottom,
                      textAreaFocused ? (max(50, charactersCountHeight)) : 8)
@@ -113,11 +113,6 @@ struct ChatActionView: View {
         }
     }
 
-    private var remainingCharacters: Int {
-        let maxCharacters = 300
-        return abs(maxCharacters - viewModel.latestQuestion.count)
-    }
-
     private var sendButtonView: some View {
         HStack(alignment: .bottom) {
             characterCountView
@@ -130,20 +125,20 @@ struct ChatActionView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
                     .foregroundColor(
-                        viewModel.latestQuestion.isEmpty ?
+                        viewModel.shouldDisableSend ?
                         Color(UIColor.govUK.text.buttonPrimaryDisabled) :
                             Color(UIColor.govUK.text.buttonPrimary)
                     )
                     .frame(width: 50, height: 50)
                     .background(
                         Circle().fill(
-                            viewModel.latestQuestion.isEmpty ?
+                            viewModel.shouldDisableSend ?
                             Color(UIColor.govUK.fills.surfaceButtonPrimaryDisabled) :
                                 Color(UIColor.govUK.text.buttonSecondary)
                         )
                     )
             }
-            .disabled(viewModel.latestQuestion.isEmpty)
+            .disabled(viewModel.shouldDisableSend)
             .simultaneousGesture(TapGesture().onEnded {
                 if viewModel.latestQuestion.isEmpty {
                     self.textAreaFocused = true
@@ -158,9 +153,13 @@ struct ChatActionView: View {
     }
 
     private var characterCountView: some View {
-        if viewModel.latestQuestion.count > 300 {
+        guard textAreaFocused else {
+            return AnyView(EmptyView())
+        }
+
+        if viewModel.latestQuestion.count > viewModel.maxCharacters {
             return AnyView(
-                Text("\(remainingCharacters) characters too many")
+                Text("\(viewModel.absoluteRemainingCharacters) characters too many")
                     .font(Font(UIFont.govUK.subheadlineSemibold))
                     .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
                     .padding([.leading, .trailing], 16)
@@ -172,9 +171,9 @@ struct ChatActionView: View {
                         )
                     })
             )
-        } else if viewModel.latestQuestion.count > 249 {
+        } else if viewModel.latestQuestion.count >= (viewModel.maxCharacters - 50) {
             return AnyView(
-                Text("\(remainingCharacters) characters remaining")
+                Text("\(viewModel.absoluteRemainingCharacters) characters remaining")
                     .font(Font(UIFont.govUK.subheadline))
                     .foregroundColor(Color(UIColor.govUK.text.secondary))
                     .padding([.leading, .trailing], 16)

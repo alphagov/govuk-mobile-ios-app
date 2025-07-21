@@ -5,6 +5,7 @@ struct ChatActionView: View {
     @FocusState.Binding var textAreaFocused: Bool
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
+    private var animationDuration = 0.3
 
     init(viewModel: ChatViewModel,
          textAreaFocused: FocusState<Bool>.Binding) {
@@ -34,7 +35,8 @@ struct ChatActionView: View {
 
                 textEditorView(maxFrameHeight: maxFrameHeight)
             }
-            .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
+            .animation(.easeInOut(duration: animationDuration),
+                       value: textAreaFocused)
             .padding()
 
             sendButtonView
@@ -97,7 +99,8 @@ struct ChatActionView: View {
                                    Color(UIColor.govUK.strokes.chatAction),
                                    borderWidth: 1.0)
             )
-            .animation(.easeInOut(duration: 0.3), value: textViewHeight)
+            .animation(.easeInOut(duration: animationDuration),
+                       value: textViewHeight)
         }
         .contentShape(Rectangle())
         .onTapGesture {
@@ -136,7 +139,8 @@ struct ChatActionView: View {
             })
             .padding([.bottom, .trailing], 8)
             .opacity(textAreaFocused ? 1 : 0)
-            .animation(.easeInOut(duration: 0.3), value: textAreaFocused)
+            .animation(.easeInOut(duration: animationDuration),
+                       value: textAreaFocused)
         }
         .padding()
     }
@@ -190,7 +194,8 @@ struct ChatActionView: View {
                 .frame(maxHeight: textEditorFrameHeight - 20, alignment: .bottom)
                 .ignoresSafeArea(.all)
         }
-        .animation(.easeInOut(duration: 0.3), value: textViewHeight)
+        .animation(.easeInOut(duration: animationDuration),
+                   value: textViewHeight)
     }
 
     private func showAbout() {

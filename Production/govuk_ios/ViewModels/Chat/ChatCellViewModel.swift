@@ -26,6 +26,12 @@ struct ChatCellViewModel {
         self.sources = sources
     }
 
+    init(question: PendingQuestion) {
+        self.init(message: question.message,
+                  id: question.id,
+                  type: .question)
+    }
+
     init(answer: Answer) {
         self.init(message: answer.message ?? "",
                   id: answer.id ?? UUID().uuidString,
@@ -52,15 +58,29 @@ struct ChatCellViewModel {
     }
 
     var backgroundColor: Color {
-        isAnswer ?
-        Color(UIColor.govUK.fills.surfaceChatBlue) :
-        Color(UIColor.govUK.fills.surfaceChatQuestion)
+        switch type {
+        case .question:
+            Color(UIColor.govUK.fills.surfaceChatQuestion)
+        case .pendingAnswer:
+            Color(UIColor.govUK.fills.surfaceBackground)
+        case .answer:
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+        case .error:
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+        }
     }
 
     var borderColor: Color {
-        isAnswer ?
-        Color(UIColor.govUK.strokes.chatDivider) :
-        Color(UIColor.govUK.strokes.chatQuestion)
+        switch type {
+        case .question:
+            Color(UIColor.govUK.strokes.chatQuestion)
+        case .pendingAnswer:
+            Color.clear
+        case .answer:
+            Color(UIColor.govUK.strokes.chatDivider)
+        case .error:
+            Color(UIColor.govUK.strokes.chatDivider)
+        }
     }
 
     var questionWidth: CGFloat {
@@ -69,8 +89,14 @@ struct ChatCellViewModel {
 }
 
 extension ChatCellViewModel {
-    static var placeHolder: ChatCellViewModel = .init(
-        message: String.chat.localized("gettingAnswerTitle"),
+    static var loadingQuestion: ChatCellViewModel = .init(
+        message: String.chat.localized("loadingQuestionMessage"),
+        id: UUID().uuidString,
+        type: .question
+    )
+
+    static var gettingAnswer: ChatCellViewModel = .init(
+        message: String.chat.localized("gettingAnswerMessage"),
         id: UUID().uuidString,
         type: .pendingAnswer
     )

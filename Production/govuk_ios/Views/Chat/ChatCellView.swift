@@ -14,22 +14,20 @@ struct ChatCellView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if viewModel.isAnswer {
-                answerView
-            } else {
+            switch viewModel.type {
+            case .question:
                 questionView
+            case .pendingAnswer:
+                pendingAnswerView
+            case .answer:
+                answerView
+            case .error:
+                answerView
             }
         }
         .background(viewModel.backgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-        .overlay(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .strokeBorder(
-                    viewModel.borderColor,
-                    lineWidth: 1,
-                    antialiased: true
-                )
-        )
+        .roundedBorder(borderColor: viewModel.borderColor,
+                       borderWidth: 1.0)
     }
 
     private var questionView: some View {
@@ -40,6 +38,15 @@ struct ChatCellView: View {
         }
     }
 
+    private var pendingAnswerView: some View {
+        HStack {
+            Image(systemName: "circle.fill")
+                .foregroundColor(Color(.govUK.text.link))
+            Text(viewModel.message)
+            Spacer()
+        }
+    }
+
     private var answerView: some View {
         VStack(alignment: .leading) {
             Text(String.chat.localized("answerTitle"))
@@ -47,9 +54,6 @@ struct ChatCellView: View {
                 .font(Font.govUK.bodySemibold)
             HStack(alignment: .firstTextBaseline) {
                 markdownView
-                if viewModel.type == .pendingAnswer {
-                    progressView
-                }
             }
             .padding(.horizontal)
             Divider()
@@ -176,7 +180,7 @@ struct ChatDisclosure: DisclosureGroupStyle {
                         Source(title: "Source 2", url: "https://www.other.com")
                     ])
             )
-            ChatCellView(viewModel: .placeHolder)
+            ChatCellView(viewModel: .gettingAnswer)
         }
         .padding()
     }

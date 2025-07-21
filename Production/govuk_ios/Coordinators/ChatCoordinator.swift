@@ -27,7 +27,11 @@ class ChatCoordinator: TabItemCoordinator {
     override func start(url: URL?) {
         let viewModel = ChatViewModel(
             chatService: chatService,
-            analyticsService: analyticsService
+            analyticsService: analyticsService,
+            openURLAction: { [weak self] url in
+                self?.presentWebView(url: url,
+                                    fullScreen: false)
+            }
         )
 
         let viewController = HostingViewController(
@@ -45,6 +49,15 @@ class ChatCoordinator: TabItemCoordinator {
             for: url,
             parent: self
         )
+    }
+
+    private func presentWebView(url: URL, fullScreen: Bool) {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url,
+            fullScreen: fullScreen
+        )
+        start(coordinator)
     }
 
     func didReselectTab() { /* To be implemented */ }

@@ -5,6 +5,7 @@ import UIComponents
 class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let openURLAction: (URL) -> Void
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -12,9 +13,11 @@ class ChatViewModel: ObservableObject {
     @Published var answeredQuestionID: String = ""
 
     init(chatService: ChatServiceInterface,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         openURLAction: @escaping (URL) -> Void) {
         self.chatService = chatService
         self.analyticsService = analyticsService
+        self.openURLAction = openURLAction
     }
 
     func askQuestion() {
@@ -42,7 +45,10 @@ class ChatViewModel: ObservableObject {
             self?.cellModels.removeLast()
             switch result {
             case .success(let answer):
-                let cellModel = ChatCellViewModel(answer: answer)
+                let cellModel = ChatCellViewModel(
+                    answer: answer,
+                    openURLAction: self?.openURLAction
+                )
                 self?.cellModels.append(cellModel)
             case .failure(let error):
                 let cellModel = ChatCellViewModel(error: error)
@@ -71,7 +77,10 @@ class ChatViewModel: ObservableObject {
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
             cellModels.append(question)
-            let answer = ChatCellViewModel(answer: answeredQuestion.answer)
+            let answer = ChatCellViewModel(
+                answer: answeredQuestion.answer,
+                openURLAction: openURLAction
+            )
             cellModels.append(answer)
         }
     }

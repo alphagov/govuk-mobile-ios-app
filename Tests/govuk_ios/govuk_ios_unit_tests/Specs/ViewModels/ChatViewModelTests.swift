@@ -16,7 +16,8 @@ struct ChatViewModelTests {
         mockChatService._stubbedAnswerResult = .success(.answeredAnswer)
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
         )
         sut.latestQuestion = "This is the question"
         sut.askQuestion()
@@ -35,7 +36,8 @@ struct ChatViewModelTests {
         mockChatService._stubbedAnswerResult = .failure(ChatError.apiUnavailable)
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
         )
         sut.latestQuestion = "This is the question"
 
@@ -84,7 +86,8 @@ struct ChatViewModelTests {
 
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
         )
 
         sut.loadHistory()
@@ -102,7 +105,8 @@ struct ChatViewModelTests {
 
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
         )
 
         sut.loadHistory()
@@ -116,7 +120,8 @@ struct ChatViewModelTests {
 
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
         )
 
         sut.cellModels = [.gettingAnswer]

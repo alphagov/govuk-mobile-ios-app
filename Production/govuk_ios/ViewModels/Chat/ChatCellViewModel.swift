@@ -10,20 +10,22 @@ enum ChatCellType {
 }
 
 struct ChatCellViewModel {
-    var message: String
+    let message: String
     let id: String
     let type: ChatCellType
     let sources: [Source]
-    var attrSting: AttributedString?
+    let openURLAction: ((URL) -> Void)?
 
     init(message: String,
          id: String,
          type: ChatCellType,
-         sources: [Source] = []) {
+         sources: [Source] = [],
+         openURLAction: ((URL) -> Void)? = nil) {
         self.message = message
         self.id = id
         self.type = type
         self.sources = sources
+        self.openURLAction = openURLAction
     }
 
     init(question: PendingQuestion) {
@@ -32,11 +34,13 @@ struct ChatCellViewModel {
                   type: .question)
     }
 
-    init(answer: Answer) {
+    init(answer: Answer,
+         openURLAction: ((URL) -> Void)? ) {
         self.init(message: answer.message ?? "",
                   id: answer.id ?? UUID().uuidString,
                   type: .answer,
-                  sources: answer.sources ?? [])
+                  sources: answer.sources ?? [],
+                  openURLAction: openURLAction)
     }
 
     init(answeredQuestion: AnsweredQuestion) {

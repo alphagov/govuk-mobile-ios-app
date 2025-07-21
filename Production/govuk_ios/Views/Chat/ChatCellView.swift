@@ -108,7 +108,7 @@ struct ChatCellView: View {
     private var markdownView: some View {
         Markdown(viewModel.message)
             .environment(\.openURL, OpenURLAction { url in
-                print("OPENED URL: \(url)")
+                viewModel.openURLAction?(url)
                 return .handled
             })
     }

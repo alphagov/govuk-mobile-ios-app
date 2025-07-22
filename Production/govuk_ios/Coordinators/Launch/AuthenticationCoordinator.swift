@@ -8,6 +8,7 @@ class AuthenticationCoordinator: BaseCoordinator {
     private let authenticationService: AuthenticationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
+    private let topicsService: TopicsServiceInterface
     private let completionAction: () -> Void
     private let handleError: (AuthenticationError) -> Void
 
@@ -16,12 +17,14 @@ class AuthenticationCoordinator: BaseCoordinator {
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
+         topicsService: TopicsServiceInterface,
          completionAction: @escaping () -> Void,
          handleError: @escaping (AuthenticationError) -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
         self.analyticsService = analyticsService
+        self.topicsService = topicsService
         self.completionAction = completionAction
         self.handleError = handleError
         super.init(navigationController: navigationController)
@@ -45,6 +48,7 @@ class AuthenticationCoordinator: BaseCoordinator {
                 authenticationService.encryptRefreshToken()
             }
             handleAnalyticsConsent(response: response)
+            handleTopicsViewed(response: response)
             startSignInSuccess()
         case .failure(let error):
             DispatchQueue.main.async {
@@ -58,6 +62,13 @@ class AuthenticationCoordinator: BaseCoordinator {
             analyticsService.resetConsent()
         } else {
             analyticsService.setExistingConsent()
+        }
+    }
+
+    private func handleTopicsViewed(response: AuthenticationServiceResponse) {
+        if !response.returningUser {
+            topicsService.resetOnboarding()
+            localAuthenticationService.resetLocalAuthenticationOnboardingSeen()
         }
     }
 

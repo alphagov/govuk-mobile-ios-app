@@ -17,6 +17,7 @@ protocol LocalAuthenticationServiceInterface {
     var touchIdEnabled: Bool { get }
     var faceIdSkipped: Bool { get }
 
+    func resetLocalAuthenticationOnboardingSeen()
     func setFaceIdSkipped(_ skipped: Bool)
     func setTouchId(enabled: Bool)
     func setLocalAuthenticationOnboarded()
@@ -119,6 +120,10 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
 
     var authenticationOnboardingFlowSeen: Bool {
         userDefaults.bool(forKey: .localAuthenticationOnboardingSeen)
+    }
+
+    func resetLocalAuthenticationOnboardingSeen() {
+        userDefaults.set(nil, forKey: .localAuthenticationOnboardingSeen)
     }
 
     func setTouchId(enabled: Bool) {

@@ -12,11 +12,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
@@ -54,11 +54,11 @@ struct AuthenticationServiceTests {
         mockReturningUserService._stubbedReturningUserResult = .success(false)
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
@@ -96,11 +96,11 @@ struct AuthenticationServiceTests {
         mockReturningUserService._stubbedReturningUserResult = .failure(.coreDataDeletionError)
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
@@ -137,12 +137,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockAuthClient._stubbedAuthenticationResult = .failure(.loginFlow(.clientError))
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let result = await sut.authenticate(window: UIApplication.shared.window!)
@@ -160,11 +160,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
@@ -193,11 +193,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         sut.encryptRefreshToken()
@@ -210,12 +210,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockSecureStoreService._stubbedSaveItemResult = .failure(TestSecureStoreError.failedEncrypt)
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
@@ -243,11 +243,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
@@ -275,11 +275,26 @@ struct AuthenticationServiceTests {
     }
 
     @Test
+    func signOut_clearsBiometrics() async {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            localAuthenticationService: mockLocalAuthenticationService,
+            returningUserService: mockReturningUserService
+        )
+        sut.signOut(reason: .userSignout)
+        #expect(mockLocalAuthenticationService._clearCalled)
+    }
+
+    @Test
     func tokenRefreshRequest_successful_returnsSuccess() async {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let idToken = UUID().uuidString
         let accessToken = UUID().uuidString
         let refreshToken = UUID().uuidString
@@ -287,10 +302,11 @@ struct AuthenticationServiceTests {
             accessToken: accessToken,
             idToken: idToken
         )
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         mockAuthClient._stubbedTokenRefreshResult = .success(tokenResponse)
@@ -312,7 +328,6 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let idToken = UUID().uuidString
         let accessToken = UUID().uuidString
         let tokenResponse = TokenRefreshResponse(
@@ -321,10 +336,11 @@ struct AuthenticationServiceTests {
         )
         mockAuthClient._stubbedTokenRefreshResult = .success(tokenResponse)
         mockSecureStoreService._stubbedReadItemResult = .failure(NSError())
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
@@ -344,13 +360,13 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockAuthClient._stubbedTokenRefreshResult = .failure(.tokenResponseError)
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
@@ -370,11 +386,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
         let expectedAccessToken = "access_token_value"
@@ -402,12 +418,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockSecureStoreService._stubbedItemExistsResult = true
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
 
@@ -419,12 +435,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockSecureStoreService._stubbedItemExistsResult = false
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
+            localAuthenticationService: mockLocalAuthenticationService,
             returningUserService: mockReturningUserService
         )
 

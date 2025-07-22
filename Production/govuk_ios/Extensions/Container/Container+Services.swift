@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import Factory
 import Onboarding
 import GOVKit
@@ -129,7 +130,7 @@ extension Container {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
-                userDefaults: UserDefaults.standard,
+                localAuthenticationService: self.localAuthenticationService.resolve(),
                 returningUserService: self.returningUserService.resolve()
             )
         }.scope(.singleton)

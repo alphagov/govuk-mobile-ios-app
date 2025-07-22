@@ -71,4 +71,9 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
     func resetLocalAuthenticationOnboardingSeen() {
         _resetLocalAuthenticationOnboardingSeenCalled = true
     }
+
+    var _clearCalled: Bool = false
+    func clear() {
+        _clearCalled = true
+    }
 }

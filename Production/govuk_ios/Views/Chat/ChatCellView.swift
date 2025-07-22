@@ -90,6 +90,7 @@ struct ChatCellView: View {
             Image(systemName: "exclamationmark.circle.fill")
                 .font(Font.govUK.bodySemibold)
                 .foregroundColor(Color(.govUK.text.trailingIcon))
+                .accessibilityHidden(true)
             Text(String.chat.localized("mistakesTitle"))
                 .font(Font.govUK.bodySemibold)
         }
@@ -109,6 +110,8 @@ struct ChatCellView: View {
             Link(destination: source.urlWithFallback) {
                 sourceListItemTitleView(title: source.title)
             }
+            .accessibilityHint(String.common.localized("openWebLinkHint"))
+            .accessibilityRemoveTraits(.isButton)
             .environment(\.openURL, OpenURLAction { url in
                 viewModel.openURLAction?(url)
                 return .handled

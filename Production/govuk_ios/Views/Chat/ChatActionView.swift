@@ -39,8 +39,8 @@ struct ChatActionView: View {
 
                 textEditorView(maxFrameHeight: maxFrameHeight)
             }
-            .animation(.easeInOut(duration: animationDuration),
-                       value: textAreaFocused)
+            .conditionalAnimation(.easeInOut(duration: animationDuration),
+                                  value: textAreaFocused)
             .accessibilityElement(children: .contain)
             .padding()
 
@@ -107,8 +107,8 @@ struct ChatActionView: View {
                                    Color(UIColor.govUK.strokes.chatAction),
                                    borderWidth: 1.0)
             )
-            .animation(.easeInOut(duration: animationDuration),
-                       value: textViewHeight)
+            .conditionalAnimation(.easeInOut(duration: animationDuration),
+                                  value: textViewHeight)
         }
         .contentShape(Rectangle())
         .onTapGesture {
@@ -151,8 +151,8 @@ struct ChatActionView: View {
             })
             .padding([.bottom, .trailing], 8)
             .opacity(textAreaFocused ? 1 : 0)
-            .animation(.easeInOut(duration: animationDuration),
-                       value: textAreaFocused)
+            .conditionalAnimation(.easeInOut(duration: animationDuration),
+                                  value: textAreaFocused)
         }
         .padding()
     }
@@ -246,8 +246,8 @@ struct ChatActionView: View {
                 .frame(maxHeight: textEditorFrameHeight - 20, alignment: .bottom)
                 .ignoresSafeArea(.all)
         }
-        .animation(.easeInOut(duration: animationDuration),
-                   value: textViewHeight)
+        .conditionalAnimation(.easeInOut(duration: animationDuration),
+                              value: textViewHeight)
     }
 
     private func showAbout() {

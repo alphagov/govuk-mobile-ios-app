@@ -11,7 +11,8 @@ struct ChatView: View {
 
     var body: some View {
         let chatActionView = ChatActionView(
-            viewModel: viewModel, textAreaFocused: $textAreaFocused
+            viewModel: viewModel,
+            textAreaFocused: $textAreaFocused
         )
 
         ZStack {

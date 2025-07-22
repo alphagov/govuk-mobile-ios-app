@@ -41,6 +41,7 @@ struct ChatActionView: View {
             }
             .animation(.easeInOut(duration: animationDuration),
                        value: textAreaFocused)
+            .accessibilityElement(children: .contain)
             .padding()
 
             sendButtonView
@@ -71,7 +72,9 @@ struct ChatActionView: View {
                                 )
                         )
                 )
-        }.accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
+        }
+        .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
+        .accessibilitySortPriority(0)
     }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
@@ -111,6 +114,7 @@ struct ChatActionView: View {
         .onTapGesture {
             self.textAreaFocused = true
         }
+        .accessibilitySortPriority(1)
     }
 
     private var sendButtonView: some View {
@@ -138,6 +142,7 @@ struct ChatActionView: View {
                         )
                     )
             }
+            .accessibilityLabel(String.chat.localized("sendButtonAccessibilityLabel"))
             .disabled(viewModel.shouldDisableSend)
             .simultaneousGesture(TapGesture().onEnded {
                 if viewModel.latestQuestion.isEmpty {

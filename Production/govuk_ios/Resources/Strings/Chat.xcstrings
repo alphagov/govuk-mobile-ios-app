@@ -78,6 +78,17 @@
         }
       }
     },
+    "sendButtonAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send message"
+          }
+        }
+      }
+    },
     "sendButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

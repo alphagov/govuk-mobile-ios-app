@@ -20,7 +20,7 @@ public struct RoundedBorder: ViewModifier {
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(
                     borderColor,
-                    lineWidth: 0.5
+                    lineWidth: borderWidth
                 )
             )
     }

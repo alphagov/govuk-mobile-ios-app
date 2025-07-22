@@ -67,11 +67,6 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
         completion(_stubbedEvaluatePolicyResult.0, _stubbedEvaluatePolicyResult.1)
     }
 
-    var _resetLocalAuthenticationOnboardingSeenCalled: Bool = false
-    func resetLocalAuthenticationOnboardingSeen() {
-        _resetLocalAuthenticationOnboardingSeenCalled = true
-    }
-
     var _clearCalled: Bool = false
     func clear() {
         _clearCalled = true

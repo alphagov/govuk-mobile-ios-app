@@ -130,7 +130,6 @@ extension Container {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
-                localAuthenticationService: self.localAuthenticationService.resolve(),
                 returningUserService: self.returningUserService.resolve()
             )
         }.scope(.singleton)

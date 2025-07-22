@@ -28,7 +28,6 @@ extension UserDefaults: UserDefaultsInterface {
 }
 
 enum UserDefaultsKeys: String, CaseIterable {
-    case appOnboardingSeen = "govuk_app_onboarding_seen"
     case acceptedAnalytics = "govuk_app_analytics_accepted"
     case customisedTopics = "govuk_topics_customised"
     case topicsOnboardingSeen = "govuk_topics_onboarding_seen"

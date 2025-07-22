@@ -48,7 +48,7 @@ class AuthenticationCoordinator: BaseCoordinator {
                 authenticationService.encryptRefreshToken()
             }
             handleAnalyticsConsent(response: response)
-            handleTopicsViewed(response: response)
+            handleOnboarding(response: response)
             startSignInSuccess()
         case .failure(let error):
             DispatchQueue.main.async {
@@ -65,11 +65,10 @@ class AuthenticationCoordinator: BaseCoordinator {
         }
     }
 
-    private func handleTopicsViewed(response: AuthenticationServiceResponse) {
-        if !response.returningUser {
-            topicsService.resetOnboarding()
-            localAuthenticationService.resetLocalAuthenticationOnboardingSeen()
-        }
+    private func handleOnboarding(response: AuthenticationServiceResponse) {
+        guard !response.returningUser else { return }
+        topicsService.resetOnboarding()
+        localAuthenticationService.clear()
     }
 
     @MainActor

@@ -4,9 +4,8 @@ import UIComponents
  import MarkdownUI
 
 struct ChatCellView: View {
+    @State private var scale = 1.0
     private let viewModel: ChatCellViewModel
-
-    private let cornerRadius: CGFloat = 10
 
     init(viewModel: ChatCellViewModel) {
         self.viewModel = viewModel
@@ -40,8 +39,17 @@ struct ChatCellView: View {
 
     private var pendingAnswerView: some View {
         HStack {
-            Image(systemName: "circle.fill")
-                .foregroundColor(Color(.govUK.text.link))
+            Circle()
+                .fill(Color(.govUK.text.link))
+                .frame(width: 24, height: 24)
+                .scaleEffect(scale)
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 1)
+                        .repeatForever(autoreverses: true)
+                    ) {
+                        scale = 0.75
+                    }
+                }
             Text(viewModel.message)
             Spacer()
         }
@@ -88,23 +96,6 @@ struct ChatCellView: View {
         .padding()
     }
 
-    @ViewBuilder
-    private var progressView: some View {
-        if #available(iOS 17, *) {
-            Image(systemName: "ellipsis")
-                .symbolEffect(
-                    .variableColor.iterative.dimInactiveLayers.nonReversing,
-                    options: .repeating
-                )
-                .alignmentGuide(.firstTextBaseline) { dimension in
-                    dimension[.bottom] - 2
-                }
-                .padding(.leading, -6)
-        } else {
-            ProgressView()
-        }
-    }
-
     private var markdownView: some View {
         Markdown(viewModel.message)
             .environment(\.openURL, OpenURLAction { url in
@@ -118,6 +109,10 @@ struct ChatCellView: View {
             Link(destination: source.urlWithFallback) {
                 sourceListItemTitleView(title: source.title)
             }
+            .environment(\.openURL, OpenURLAction { url in
+                viewModel.openURLAction?(url)
+                return .handled
+            })
             Divider()
                 .opacity(source.url == viewModel.sources.last?.url ? 0 : 1)
         }
@@ -151,6 +146,7 @@ struct ChatDisclosure: DisclosureGroupStyle {
         } label: {
             HStack(alignment: .firstTextBaseline) {
                 configuration.label
+                    .multilineTextAlignment(.leading)
                 Spacer()
                 Image(systemName: configuration.isExpanded ? "chevron.up" : "chevron.down")
             }

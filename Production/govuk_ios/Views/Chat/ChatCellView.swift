@@ -4,9 +4,8 @@ import UIComponents
  import MarkdownUI
 
 struct ChatCellView: View {
+    @State private var scale = 1.0
     private let viewModel: ChatCellViewModel
-
-    private let cornerRadius: CGFloat = 10
 
     init(viewModel: ChatCellViewModel) {
         self.viewModel = viewModel
@@ -14,22 +13,20 @@ struct ChatCellView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if viewModel.isAnswer {
-                answerView
-            } else {
+            switch viewModel.type {
+            case .question:
                 questionView
+            case .pendingAnswer:
+                pendingAnswerView
+            case .answer:
+                answerView
+            case .error:
+                answerView
             }
         }
         .background(viewModel.backgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-        .overlay(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .strokeBorder(
-                    viewModel.borderColor,
-                    lineWidth: 1,
-                    antialiased: true
-                )
-        )
+        .roundedBorder(borderColor: viewModel.borderColor,
+                       borderWidth: 1.0)
     }
 
     private var questionView: some View {
@@ -40,6 +37,24 @@ struct ChatCellView: View {
         }
     }
 
+    private var pendingAnswerView: some View {
+        HStack {
+            Circle()
+                .fill(Color(.govUK.text.link))
+                .frame(width: 24, height: 24)
+                .scaleEffect(scale)
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 1)
+                        .repeatForever(autoreverses: true)
+                    ) {
+                        scale = 0.75
+                    }
+                }
+            Text(viewModel.message)
+            Spacer()
+        }
+    }
+
     private var answerView: some View {
         VStack(alignment: .leading) {
             Text(String.chat.localized("answerTitle"))
@@ -47,9 +62,6 @@ struct ChatCellView: View {
                 .font(Font.govUK.bodySemibold)
             HStack(alignment: .firstTextBaseline) {
                 markdownView
-                if viewModel.type == .pendingAnswer {
-                    progressView
-                }
             }
             .padding(.horizontal)
             Divider()
@@ -78,33 +90,17 @@ struct ChatCellView: View {
             Image(systemName: "exclamationmark.circle.fill")
                 .font(Font.govUK.bodySemibold)
                 .foregroundColor(Color(.govUK.text.trailingIcon))
+                .accessibilityHidden(true)
             Text(String.chat.localized("mistakesTitle"))
                 .font(Font.govUK.bodySemibold)
         }
         .padding()
     }
 
-    @ViewBuilder
-    private var progressView: some View {
-        if #available(iOS 17, *) {
-            Image(systemName: "ellipsis")
-                .symbolEffect(
-                    .variableColor.iterative.dimInactiveLayers.nonReversing,
-                    options: .repeating
-                )
-                .alignmentGuide(.firstTextBaseline) { dimension in
-                    dimension[.bottom] - 2
-                }
-                .padding(.leading, -6)
-        } else {
-            ProgressView()
-        }
-    }
-
     private var markdownView: some View {
         Markdown(viewModel.message)
             .environment(\.openURL, OpenURLAction { url in
-                print("OPENED URL: \(url)")
+                viewModel.openURLAction?(url)
                 return .handled
             })
     }
@@ -114,6 +110,12 @@ struct ChatCellView: View {
             Link(destination: source.urlWithFallback) {
                 sourceListItemTitleView(title: source.title)
             }
+            .accessibilityHint(String.common.localized("openWebLinkHint"))
+            .accessibilityRemoveTraits(.isButton)
+            .environment(\.openURL, OpenURLAction { url in
+                viewModel.openURLAction?(url)
+                return .handled
+            })
             Divider()
                 .opacity(source.url == viewModel.sources.last?.url ? 0 : 1)
         }
@@ -147,6 +149,7 @@ struct ChatDisclosure: DisclosureGroupStyle {
         } label: {
             HStack(alignment: .firstTextBaseline) {
                 configuration.label
+                    .multilineTextAlignment(.leading)
                 Spacer()
                 Image(systemName: configuration.isExpanded ? "chevron.up" : "chevron.down")
             }
@@ -176,7 +179,7 @@ struct ChatDisclosure: DisclosureGroupStyle {
                         Source(title: "Source 2", url: "https://www.other.com")
                     ])
             )
-            ChatCellView(viewModel: .placeHolder)
+            ChatCellView(viewModel: .gettingAnswer)
         }
         .padding()
     }

@@ -43,7 +43,8 @@ struct RemainingCharactersTestView: View {
     var body: some View {
         let viewModel = ChatViewModel(
             chatService: MockChatService(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
         )
 
         ChatActionView(
@@ -70,7 +71,8 @@ struct TooManyCharactersTestView: View {
     var body: some View {
         let viewModel = ChatViewModel(
             chatService: MockChatService(),
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
         )
 
         ChatActionView(

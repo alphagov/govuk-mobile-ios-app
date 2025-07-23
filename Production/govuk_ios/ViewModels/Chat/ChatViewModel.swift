@@ -6,43 +6,56 @@ class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     let maxCharacters = 300
+    private let openURLAction: (URL) -> Void
 
-    @Published private(set) var questionInProgress: Bool = false
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
     @Published var scrollToBottom: Bool = false
     @Published var answeredQuestionID: String = ""
 
     init(chatService: ChatServiceInterface,
-         analyticsService: AnalyticsServiceInterface) {
+         analyticsService: AnalyticsServiceInterface,
+         openURLAction: @escaping (URL) -> Void) {
         self.chatService = chatService
         self.analyticsService = analyticsService
+        self.openURLAction = openURLAction
     }
 
     func askQuestion() {
-        // show question in chat
-        let questionModel = ChatCellViewModel(message: latestQuestion,
-                                              id: UUID().uuidString,
-                                              type: .question)
-        cellModels.append(questionModel)
-        questionInProgress = true
-        cellModels.append(.placeHolder)
+        cellModels.append(.loadingQuestion)
         scrollToBottom = true
         chatService.askQuestion(latestQuestion) { [weak self] result in
-            self?.questionInProgress = false
+            self?.cellModels.removeLast()
+            switch result {
+            case .success(let question):
+                let cellModel = ChatCellViewModel(question: question)
+                self?.cellModels.append(cellModel)
+                self?.answeredQuestionID = question.id
+                self?.pollForAnswer(question)
+            case .failure(let error):
+                let cellModel = ChatCellViewModel(error: error)
+                self?.cellModels.append(cellModel)
+            }
+        }
+        latestQuestion = ""
+    }
+
+    private func pollForAnswer(_ question: PendingQuestion) {
+        cellModels.append(.gettingAnswer)
+        chatService.pollForAnswer(question) { [weak self] result in
             self?.cellModels.removeLast()
             switch result {
             case .success(let answer):
-                guard answer.message != nil else { return }
-                let cellModel = ChatCellViewModel(answer: answer)
+                let cellModel = ChatCellViewModel(
+                    answer: answer,
+                    openURLAction: self?.openURLAction
+                )
                 self?.cellModels.append(cellModel)
             case .failure(let error):
                 let cellModel = ChatCellViewModel(error: error)
                 self?.cellModels.append(cellModel)
             }
-            self?.answeredQuestionID = questionModel.id
         }
-        latestQuestion = ""
     }
 
     func loadHistory() {
@@ -74,7 +87,10 @@ class ChatViewModel: ObservableObject {
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
             cellModels.append(question)
-            let answer = ChatCellViewModel(answer: answeredQuestion.answer)
+            let answer = ChatCellViewModel(
+                answer: answeredQuestion.answer,
+                openURLAction: openURLAction
+            )
             cellModels.append(answer)
         }
     }

@@ -119,7 +119,9 @@ struct ChatActionView: View {
 
     private var sendButtonView: some View {
         HStack(alignment: .bottom) {
-            characterCountView
+            if textAreaFocused {
+                characterCountView
+            }
 
             Spacer()
 
@@ -158,10 +160,6 @@ struct ChatActionView: View {
     }
 
     private var characterCountView: some View {
-        guard textAreaFocused else {
-            return AnyView(EmptyView())
-        }
-
         if viewModel.latestQuestion.count > viewModel.maxCharacters {
             let tooManyText = String.chat.localized("tooManyCharactersTitle")
             return AnyView(

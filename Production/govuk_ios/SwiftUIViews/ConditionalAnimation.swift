@@ -13,6 +13,6 @@ struct ConditionalAnimation<V: Equatable>: ViewModifier {
 
 extension View {
     func conditionalAnimation<V: Equatable>(_ animation: Animation?, value: V) -> some View {
-        self.modifier(ConditionalAnimation(animation: animation, value: value))
+        modifier(ConditionalAnimation(animation: animation, value: value))
     }
 }

@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import SwiftUI
 import GOVKit
-import Onboarding
 
 class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController

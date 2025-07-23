@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import UserNotifications
-import Onboarding
 
 import OneSignalFramework
 

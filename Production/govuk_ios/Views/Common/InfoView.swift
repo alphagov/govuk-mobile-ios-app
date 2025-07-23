@@ -22,6 +22,7 @@ struct InfoView: View {
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
+                .opacity(viewModel.showDivider ? 1.0 : 0.0)
             SwiftUIButton(
                 viewModel.buttonConfiguration,
                 viewModel: viewModel.buttonViewModel
@@ -29,12 +30,16 @@ struct InfoView: View {
             .frame(minHeight: 44, idealHeight: 44)
             .padding(16)
             .ignoresSafeArea()
-            .accessibilityLabel(viewModel.buttonAccessibilityTitle)
+            .opacity(viewModel.showActionButton ? 1.0 : 0.0)
         }
         .navigationBarHidden(true)
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
+        .environment(\.openURL, OpenURLAction { url in
+            viewModel.openURLAction?(url)
+            return .handled
+        })
     }
 
     private var infoView: some View {
@@ -51,7 +56,7 @@ struct InfoView: View {
                 .multilineTextAlignment(.center)
                 .accessibilityAddTraits(.isHeader)
                 .padding(.bottom, 16)
-            Text(viewModel.subtitle)
+            Text(LocalizedStringKey(viewModel.subtitle))
                 .foregroundColor(Color(UIColor.govUK.text.primary))
                 .font(viewModel.subtitleFont)
                 .multilineTextAlignment(.center)

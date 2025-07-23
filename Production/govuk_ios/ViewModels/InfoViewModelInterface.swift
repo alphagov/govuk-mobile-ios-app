@@ -16,6 +16,9 @@ protocol InfoViewModelInterface {
     var trackingTitle: String { get }
     var showImageWhenCompact: Bool { get }
     var subtitleFont: Font { get }
+    var showActionButton: Bool { get }
+    var showDivider: Bool { get }
+    var openURLAction: ((URL) -> Void)? { get }
 }
 
 extension InfoViewModelInterface {
@@ -29,6 +32,18 @@ extension InfoViewModelInterface {
 
     var buttonAccessibilityTitle: String {
         buttonTitle
+    }
+
+    var showActionButton: Bool {
+        true
+    }
+
+    var showDivider: Bool {
+        true
+    }
+
+    var openURLAction: ((URL) -> Void)? {
+        nil
     }
 
     func trackScreen(screen: TrackableScreen) {

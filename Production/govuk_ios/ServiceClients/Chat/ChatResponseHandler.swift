@@ -7,8 +7,6 @@ struct ChatResponseHandler: ResponseHandler {
             ChatError.pageNotFound
         case 422:
             ChatError.validationError
-        case 429:
-            ChatError.apiUnavailable
         default:
             ChatError.apiUnavailable
         }

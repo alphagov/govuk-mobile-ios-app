@@ -8,6 +8,7 @@ class ChatCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
+    private var isShowingError = false
     private lazy var chatViewController: UIViewController = {
         viewControllerBuilder.chat(
             analyticsService: analyticsService,
@@ -36,6 +37,7 @@ class ChatCoordinator: TabItemCoordinator {
 
     override func start(url: URL?) {
         set(chatViewController)
+        isShowingError = false
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
@@ -49,28 +51,49 @@ class ChatCoordinator: TabItemCoordinator {
         let coordinator = coordinatorBuilder.safari(
             navigationController: root,
             url: url,
-            fullScreen: true
+            fullScreen: false
         )
         start(coordinator)
     }
 
     func didReselectTab() { /* To be implemented */ }
+    func didSelectTab(_ selectedTabIndex: Int,
+                      previousTabIndex: Int) {
+        if selectedTabIndex != previousTabIndex &&
+            isShowingError {
+            set(chatViewController, animated: false)
+            isShowingError = false
+        }
+    }
 
-    private func handleError(_ error: Error) {
+    private func handleError(_ error: ChatError) {
         let viewController = viewControllerBuilder.chatError(
             error: error,
             action: { [weak self] in
                 guard let self else { return }
-                if error as? ChatError == ChatError.networkUnavailable {
+                switch error {
+                case .networkUnavailable:
                     self.set(
                         self.chatViewController,
                         animated: false
                     )
-                } else {
-                    self.presentWebView(url: Constants.API.govukBaseUrl)
+                case .pageNotFound:
+                    self.chatService.clearHistory()
+                    self.set(
+                        self.chatViewController,
+                        animated: false
+                    )
+                default:
+                    break
                 }
-            })
-
+            },
+            openURLAction: { [weak self] url in
+                self?.presentWebView(
+                    url: url
+                )
+            }
+        )
         set(viewController, animated: false)
+        isShowingError = true
     }
 }

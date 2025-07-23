@@ -306,19 +306,7 @@ struct ViewControllerBuilderTests {
         let result = subject.chat(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
-            openURLAction: { _ in }
-        )
-
-        let rootView = (result as? HostingViewController<ChatView>)?.rootView
-        #expect(rootView != nil)
-    }
-
-    @Test
-    func chat_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.chat(
-            analyticsService: MockAnalyticsService(),
-            chatService: MockChatService(),
+            openURLAction: { _ in },
             handleError: { _ in }
         )
 

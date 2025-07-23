@@ -67,19 +67,10 @@ class ChatCoordinator: TabItemCoordinator {
                         animated: false
                     )
                 } else {
-                    self.openGovUK()
+                    self.presentWebView(url: Constants.API.govukBaseUrl)
                 }
             })
 
         set(viewController, animated: false)
-    }
-
-    private func openGovUK() {
-        let coordinator = coordinatorBuilder.safari(
-            navigationController: root,
-            url: Constants.API.govukBaseUrl,
-            fullScreen: false
-        )
-        start(coordinator)
     }
 }

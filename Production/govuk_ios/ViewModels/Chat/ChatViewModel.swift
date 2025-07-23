@@ -24,32 +24,25 @@ class ChatViewModel: ObservableObject {
         self.handleError = handleError
     }
 
-    func askQuestion() {
+    func askQuestion(_ question: String? = nil) {
         cellModels.append(.loadingQuestion)
         scrollToBottom = true
-        chatService.askQuestion(latestQuestion) { [weak self] result in
+        chatService.askQuestion(question ?? latestQuestion) { [weak self] result in
             self?.cellModels.removeLast()
             switch result {
-            case .success(let question):
-                let cellModel = ChatCellViewModel(question: question)
+            case .success(let pendingQuestion):
+                let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
-                self?.answeredQuestionID = question.id
-                self?.pollForAnswer(question)
+                self?.answeredQuestionID = pendingQuestion.id
+                self?.pollForAnswer(pendingQuestion)
             case .failure(let error):
-                if error == .pageNotFound &&
-                    self?.chatService.currentConversationId != nil {
-                    self?.chatService.clearHistory()
-                    self?.cellModels.removeLast()
-                    self?.askQuestion(question)
-                } else {
-                    self?.handleError(error)
-                }
+                self?.handleError(error)
             }
         }
         latestQuestion = ""
     }
 
-    private func pollForAnswer(_ question: PendingQuestion) {
+    func pollForAnswer(_ question: PendingQuestion) {
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
             self?.cellModels.removeLast()
@@ -61,8 +54,7 @@ class ChatViewModel: ObservableObject {
                 )
                 self?.cellModels.append(cellModel)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                self?.handleError(error)
             }
         }
     }

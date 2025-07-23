@@ -70,6 +70,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
 
         mockChatService._stubbedConversationId = conversationId
         mockChatService._stubbedHistoryResult = .success(history)
+        mockChatService._stubbedQuestionResult = .success(pendingQuestion)
 
         let viewModel = ChatViewModel(
             chatService: mockChatService,

@@ -17,11 +17,9 @@ final class MockChatService: ChatServiceInterface {
         completion(result)
     }
 
-    var _stubbedAnswerResult: ChatAnswerResult?
+    var _stubbedAnswerResults: [ChatAnswerResult] = []
     func pollForAnswer(_ pendingQuestion: PendingQuestion,
                        completion: @escaping (ChatAnswerResult) -> Void) {
-        guard let result = _stubbedAnswerResult else {
-                     completion: @escaping (ChatAnswerResult) -> Void) {
         guard let result = nextResult() else {
             return completion(.failure(ChatError.apiUnavailable))
         }

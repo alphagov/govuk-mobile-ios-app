@@ -13,8 +13,7 @@ struct ChatViewModelTests {
         let mockChatService = MockChatService()
 
         mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
-        mockChatService._stubbedAnswerResult = .success(.answeredAnswer)
-        mockChatService._stubbedAnswerResults = [.success(answer)]
+        mockChatService._stubbedAnswerResults = [.success(.answeredAnswer)]
         let sut = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
@@ -32,10 +31,9 @@ struct ChatViewModelTests {
     }
 
     @Test
-    func askQuestion_failure_callsHandleError() {
+    func askQuestion_answer_failure_callsHandleError() {
         let mockChatService = MockChatService()
         mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
-        mockChatService._stubbedAnswerResult = .failure(ChatError.apiUnavailable)
         mockChatService._stubbedAnswerResults = [.failure(ChatError.apiUnavailable)]
         var chatError: ChatError?
         let sut = ChatViewModel(
@@ -56,47 +54,14 @@ struct ChatViewModelTests {
     }
 
     @Test
-    func askQuestion_pageNotFound_clearsConversation_andAsksAgain() {
-        let answer = Answer(
-            createdAt: "\(Date())",
-            id: "12345",
-            message: "This is the answer",
-            sources: nil
-        )
+    func askQuestion_question_failure_callsHandleError() {
         let mockChatService = MockChatService()
-        mockChatService._stubbedConversationId = "12345"
-        mockChatService._stubbedAnswerResults = [
-            .failure(ChatError.pageNotFound),
-            .success(answer)
-        ]
+        mockChatService._stubbedQuestionResult = .failure(ChatError.pageNotFound)
         var chatError: ChatError?
         let sut = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
-            handleError: { error in
-                chatError = error as? ChatError
-            }
-        )
-        sut.latestQuestion = "This is the question"
-
-        #expect(mockChatService.currentConversationId == "12345")
-        sut.askQuestion()
-
-        #expect(sut.cellModels.count == 2)
-        #expect(sut.cellModels.first?.type == .question)
-        #expect(sut.cellModels.last?.type == .answer)
-        #expect(chatError == nil)
-        #expect(mockChatService.currentConversationId == nil)
-    }
-
-    @Test
-    func askQuestion_pageNotFoundOnNewConversation_callsHandleError() {
-        let mockChatService = MockChatService()
-        mockChatService._stubbedAnswerResults = [.failure(ChatError.pageNotFound)]
-        var chatError: ChatError?
-        let sut = ChatViewModel(
-            chatService: mockChatService,
-            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
             handleError: { error in
                 chatError = error as? ChatError
             }
@@ -105,8 +70,7 @@ struct ChatViewModelTests {
 
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 1)
-        #expect(sut.cellModels.first?.type == .question)
+        #expect(sut.cellModels.count == 0)
         #expect(chatError == .pageNotFound)
     }
 
@@ -160,6 +124,7 @@ struct ChatViewModelTests {
 
         mockChatService._stubbedConversationId = "12345"
         mockChatService._stubbedHistoryResult = .success(history)
+        mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
 
         let sut = ChatViewModel(
             chatService: mockChatService,
@@ -169,6 +134,7 @@ struct ChatViewModelTests {
         )
 
         sut.loadHistory()
+        print(sut.cellModels.map { $0.message })
         try #require(sut.cellModels.count == 5)
         #expect(sut.cellModels[0].type == .question)
         #expect(sut.cellModels[1].type == .answer)
@@ -206,6 +172,7 @@ struct ChatViewModelTests {
         let sut = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
             handleError: { error in
                 chatError = error as? ChatError
             }

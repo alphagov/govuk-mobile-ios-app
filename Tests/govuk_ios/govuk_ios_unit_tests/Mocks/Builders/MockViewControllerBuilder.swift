@@ -258,22 +258,14 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedChatController: UIViewController?
     var _receivedChatOpenURLAction: ((URL) -> Void)?
-    override func chat(
-        analyticsService: AnalyticsServiceInterface,
-        chatService: ChatServiceInterface,
-        openURLAction: @escaping (URL) -> Void
-    ) -> UIViewController {
-        _receivedChatOpenURLAction = openURLAction
-        return _stubbedChatController ?? UIViewController()
-    }
-
-    var _stubbedChatController: UIViewController?
     var _receivedHandleChatError: ((Error) -> Void)?
     override func chat(
         analyticsService: AnalyticsServiceInterface,
         chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
         handleError: @escaping (Error) -> Void
     ) -> UIViewController {
+        _receivedChatOpenURLAction = openURLAction
         _receivedHandleChatError = handleError
         return _stubbedChatController ?? UIViewController()
     }

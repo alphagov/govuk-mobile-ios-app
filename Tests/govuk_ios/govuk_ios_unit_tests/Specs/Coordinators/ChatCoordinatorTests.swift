@@ -57,7 +57,6 @@ struct ChatCoordinatorTests {
         sut.start(url: nil)
         mockViewControllerBuilder._receivedChatOpenURLAction?(URL(string: "https://example.com")!)
         #expect(mockSafariCoordinator._startCalled)
-        #expect(firstViewController == expectedViewController)
     }
 
     @Test

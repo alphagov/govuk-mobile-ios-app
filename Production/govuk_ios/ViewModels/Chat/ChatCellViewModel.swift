@@ -61,8 +61,6 @@ struct ChatCellViewModel {
             Color(UIColor.govUK.fills.surfaceBackground)
         case .answer:
             Color(UIColor.govUK.fills.surfaceChatBlue)
-        case .error:
-            Color(UIColor.govUK.fills.surfaceChatBlue)
         }
     }
 
@@ -73,8 +71,6 @@ struct ChatCellViewModel {
         case .pendingAnswer:
             Color.clear
         case .answer:
-            Color(UIColor.govUK.strokes.chatDivider)
-        case .error:
             Color(UIColor.govUK.strokes.chatDivider)
         }
     }

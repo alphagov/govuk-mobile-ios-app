@@ -67,6 +67,51 @@
         }
       }
     },
+    "moreOptionsAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More options"
+          }
+        }
+      }
+    },
+    "remainingCharactersTitle.%lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character remaining"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters remaining"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sendButtonAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send message"
+          }
+        }
+      }
+    },
     "sendButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -107,6 +152,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Type your message here"
+          }
+        }
+      }
+    },
+    "tooManyCharactersTitle.%lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character too many"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters too many"
+                }
+              }
+            }
           }
         }
       }

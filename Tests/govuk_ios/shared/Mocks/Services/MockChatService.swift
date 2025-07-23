@@ -8,9 +8,18 @@ final class MockChatService: ChatServiceInterface {
         _stubbedIsEnabled
     }
 
-    var _stubbedAnswerResult: ChatAnswerResult?
+    var _stubbedQuestionResult: ChatQuestionResult?
     func askQuestion(_ question: String,
-                     completion: @escaping (ChatAnswerResult) -> Void) {
+                     completion: @escaping (ChatQuestionResult) -> Void) {
+        guard let result = _stubbedQuestionResult else {
+            return completion(.failure(ChatError.apiUnavailable))
+        }
+        completion(result)
+    }
+
+    var _stubbedAnswerResult: ChatAnswerResult?
+    func pollForAnswer(_ pendingQuestion: PendingQuestion,
+                       completion: @escaping (ChatAnswerResult) -> Void) {
         guard let result = _stubbedAnswerResult else {
             return completion(.failure(ChatError.apiUnavailable))
         }

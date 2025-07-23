@@ -35,10 +35,18 @@ final class ChatActionViewControllerSnapshotTests: SnapshotTestCase {
             mode: .dark
         )
     }
+
+    func test_clearChatAlert_loadInNavigationController_rendersCorrectly() {
+        VerifySnapshotWindowWithDelay(
+            view: ClearChatAlertTestView(),
+            mode: .light
+        )
+    }
 }
 
 struct RemainingCharactersTestView: View {
     @FocusState var textAreaFocused: Bool
+    @State var showClearChatAlert: Bool = false
 
     var body: some View {
         let viewModel = ChatViewModel(
@@ -49,17 +57,18 @@ struct RemainingCharactersTestView: View {
 
         ChatActionView(
             viewModel: viewModel,
-            textAreaFocused: $textAreaFocused
+            textAreaFocused: $textAreaFocused,
+            showClearChatAlert: $showClearChatAlert
         )
         .environment(\.isTesting, true)
         .onAppear {
             viewModel.latestQuestion = """
-              Lorem ipsum dolor sit amet consectetur adipiscing
-              elit quisque faucibus ex sapien vitae pellentesque 
-              sem placerat in id cursus mi pretium tellus duis 
-              convallis tempus leo eu aenean sed diam urna tempor 
-              pulvinar vivamus fringillsss lacus nec metus biben
-              """
+                Lorem ipsum dolor sit amet consectetur adipiscing
+                elit quisque faucibus ex sapien vitae pellentesque 
+                sem placerat in id cursus mi pretium tellus duis 
+                convallis tempus leo eu aenean sed diam urna tempor 
+                pulvinar vivamus fringillsss lacus nec metus biben
+                """
             textAreaFocused = true
         }
     }
@@ -67,6 +76,7 @@ struct RemainingCharactersTestView: View {
 
 struct TooManyCharactersTestView: View {
     @FocusState var textAreaFocused: Bool
+    @State var showClearChatAlert: Bool = false
 
     var body: some View {
         let viewModel = ChatViewModel(
@@ -77,20 +87,44 @@ struct TooManyCharactersTestView: View {
 
         ChatActionView(
             viewModel: viewModel,
-            textAreaFocused: $textAreaFocused
+            textAreaFocused: $textAreaFocused,
+            showClearChatAlert: $showClearChatAlert
         )
         .environment(\.isTesting, true)
         .onAppear {
             viewModel.latestQuestion = """
-                  Lorem ipsum dolor sit amet consectetur adipiscing
-                  elit quisque faucibus ex sapien vitae pellentesque 
-                  sem placerat in id cursus mi pretium tellus duis 
-                  convallis tempus leo eu aenean sed diam urna tempor 
-                  pulvinar vivamus fringillsss lacus nec metus biben
-                  pulvinar vivamus fringillsss lacus nec metus biben
-                  pulvinar vivamus fringillsss lacus nec metus biben
-                  """
+                Lorem ipsum dolor sit amet consectetur adipiscing
+                elit quisque faucibus ex sapien vitae pellentesque 
+                sem placerat in id cursus mi pretium tellus duis 
+                convallis tempus leo eu aenean sed diam urna tempor 
+                pulvinar vivamus fringillsss lacus nec metus biben
+                pulvinar vivamus fringillsss lacus nec metus biben
+                pulvinar vivamus fringillsss lacus nec metus biben
+                """
             textAreaFocused = true
+        }
+    }
+}
+
+struct ClearChatAlertTestView: View {
+    @FocusState var textAreaFocused: Bool
+    @State var showClearChatAlert: Bool = true
+
+    var body: some View {
+        let viewModel = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in }
+        )
+
+        ChatActionView(
+            viewModel: viewModel,
+            textAreaFocused: $textAreaFocused,
+            showClearChatAlert: $showClearChatAlert
+        )
+        .environment(\.isTesting, true)
+        .onAppear {
+            showClearChatAlert = true
         }
     }
 }

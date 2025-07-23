@@ -6,13 +6,15 @@ struct ChatActionView: View {
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
-    @State private var showClearChatAlert = false
+    @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
 
     init(viewModel: ChatViewModel,
-         textAreaFocused: FocusState<Bool>.Binding) {
+         textAreaFocused: FocusState<Bool>.Binding,
+         showClearChatAlert: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _textAreaFocused = textAreaFocused
+        _showClearChatAlert = showClearChatAlert
     }
 
     var body: some View {
@@ -26,6 +28,21 @@ struct ChatActionView: View {
         }
         .onPreferenceChange(CharacterCountHeightKey.self) { height in
             self.charactersCountHeight = height
+        }
+        .alert(isPresented: $showClearChatAlert) {
+            Alert(
+                title: Text(String.chat.localized("clearAlertTitle")),
+                message: Text(String.chat.localized("clearAlertBodyText")),
+                primaryButton: .destructive(
+                    Text(String.chat.localized("clearAlertConfirmTitle")),
+                    action: {
+                        viewModel.newChat()
+                    }
+                ),
+                secondaryButton: .cancel(
+                    Text(String.chat.localized("clearAlertDenyTitle"))
+                )
+            )
         }
     }
 
@@ -80,21 +97,6 @@ struct ChatActionView: View {
         }
         .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
         .accessibilitySortPriority(0)
-        .alert(isPresented: $showClearChatAlert) {
-            Alert(
-                title: Text(String.chat.localized("clearAlertTitle")),
-                message: Text(String.chat.localized("clearAlertBodyText")),
-                primaryButton: .destructive(
-                    Text(String.chat.localized("clearAlertConfirmTitle")),
-                    action: {
-                        viewModel.newChat()
-                    }
-                ),
-                secondaryButton: .cancel(
-                    Text(String.chat.localized("clearAlertDenyTitle"))
-                )
-            )
-        }
     }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {

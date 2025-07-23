@@ -255,4 +255,15 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     ) -> UIViewController {
         return _stubbedTouchIdSettingsController ?? UIViewController()
     }
+
+    var _stubbedChatController: UIViewController?
+    var _receivedChatOpenURLAction: ((URL) -> Void)?
+    override func chat(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void
+    ) -> UIViewController {
+        _receivedChatOpenURLAction = openURLAction
+        return _stubbedChatController ?? UIViewController()
+    }
 }

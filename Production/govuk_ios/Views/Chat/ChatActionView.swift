@@ -6,6 +6,7 @@ struct ChatActionView: View {
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
+    @State private var showClearChatAlert = false
     private var animationDuration = 0.3
 
     init(viewModel: ChatViewModel,
@@ -50,9 +51,13 @@ struct ChatActionView: View {
 
     private var menuView: some View {
         return Menu {
-            Button(role: .destructive, action: clearChat) {
-                Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
-            }
+            Button(
+                role: .destructive,
+                action: { showClearChatAlert = true },
+                label: {
+                    Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
+                }
+            )
             Button(action: showAbout) {
                 Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
             }
@@ -75,6 +80,21 @@ struct ChatActionView: View {
         }
         .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
         .accessibilitySortPriority(0)
+        .alert(isPresented: $showClearChatAlert) {
+            Alert(
+                title: Text(String.chat.localized("clearAlertTitle")),
+                message: Text(String.chat.localized("clearAlertBodyText")),
+                primaryButton: .destructive(
+                    Text(String.chat.localized("clearAlertConfirmTitle")),
+                    action: {
+                        viewModel.newChat()
+                    }
+                ),
+                secondaryButton: .cancel(
+                    Text(String.chat.localized("clearAlertDenyTitle"))
+                )
+            )
+        }
     }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
@@ -245,10 +265,6 @@ struct ChatActionView: View {
 
     private func showAbout() {
         print("About tapped")
-    }
-
-    private func clearChat() {
-        viewModel.newChat()
     }
 }
 

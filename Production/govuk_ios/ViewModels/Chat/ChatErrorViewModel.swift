@@ -5,36 +5,43 @@ import SwiftUI
 
 final class ChatErrorViewModel: InfoViewModelInterface {
     private let action: () -> Void
-    private let error: Error
+    private let error: ChatError
+    var openURLAction: ((URL) -> Void)?
 
-    init(error: Error,
-         action: @escaping () -> Void) {
+    init(error: ChatError,
+         action: @escaping () -> Void,
+         openURLAction: ((URL) -> Void)?) {
         self.error = error
         self.action = action
+        self.openURLAction = openURLAction
     }
 
     var title: String {
-        networkUnavailable ?
+        error  == .networkUnavailable ?
         String.common.localized("networkUnavailableErrorTitle") :
         String.common.localized("genericErrorTitle")
     }
 
     var subtitle: String {
-        networkUnavailable ?
-        String.common.localized("networkUnavailableErrorBody") :
-        String.common.localized("genericErrorBody")
+        switch error {
+        case .networkUnavailable:
+            String.common.localized("networkUnavailableErrorBody")
+        case .pageNotFound:
+            String.chat.localized("pageNotFoundErrorBody")
+        default:
+            String.chat.localized("genericErrorBody")
+        }
     }
 
     var buttonTitle: String {
-        networkUnavailable ?
-        String.common.localized("networkUnavailableButtonTitle") :
-        String.common.localized("genericErrorButtonTitle")
-    }
-
-    var buttonAccessibilityTitle: String {
-        networkUnavailable ?
-        String.common.localized("networkUnavailableButtonTitle") :
-        String.common.localized("genericErrorButtonTitleAccessibilityLabel")
+        switch error {
+        case .networkUnavailable:
+            String.common.localized("networkUnavailableButtonTitle")
+        case .pageNotFound:
+            String.chat.localized("pageNotFoundButtonTitle")
+        default:
+            ""
+        }
     }
 
     var buttonViewModel: GOVUKButton.ButtonViewModel {
@@ -46,12 +53,12 @@ final class ChatErrorViewModel: InfoViewModelInterface {
         )
     }
 
-    var buttonConfiguration: GOVUKButton.ButtonConfiguration {
-        if error as? ChatError == .networkUnavailable {
-            .primary
-        } else {
-            .secondary
-        }
+    var showActionButton: Bool {
+        error == .pageNotFound || error == .networkUnavailable
+    }
+
+    var showDivider: Bool {
+        false
     }
 
     var image: AnyView {
@@ -66,9 +73,5 @@ final class ChatErrorViewModel: InfoViewModelInterface {
 
     var subtitleFont: Font {
         Font.govUK.body
-    }
-
-    private var networkUnavailable: Bool {
-        error as? ChatError == .networkUnavailable
     }
 }

@@ -7,7 +7,7 @@ class ChatViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
-    private let handleError: (Error) -> Void
+    private let handleError: (ChatError) -> Void
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -17,7 +17,7 @@ class ChatViewModel: ObservableObject {
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          openURLAction: @escaping (URL) -> Void,
-         handleError: @escaping (Error) -> Void) {
+         handleError: @escaping (ChatError) -> Void) {
         self.chatService = chatService
         self.analyticsService = analyticsService
         self.openURLAction = openURLAction

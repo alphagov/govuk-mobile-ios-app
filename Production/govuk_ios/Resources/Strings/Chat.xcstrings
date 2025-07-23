@@ -133,13 +133,25 @@
         }
       }
     },
-    "tooManyCharactersTitle" : {
+    "tooManyCharactersTitle.%lld" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "characters too many"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character too many"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters too many"
+                }
+              }
+            }
           }
         }
       }

@@ -161,9 +161,8 @@ struct ChatActionView: View {
 
     private var characterCountView: some View {
         if viewModel.latestQuestion.count > viewModel.maxCharacters {
-            let tooManyText = String.chat.localized("tooManyCharactersTitle")
             return AnyView(
-                Text("\(viewModel.absoluteRemainingCharacters) \(tooManyText)")
+                Text(LocalizedStringKey("tooManyCharactersTitle.\(viewModel.absoluteRemainingCharacters)"), tableName: "Chat")
                     .font(Font(UIFont.govUK.subheadlineSemibold))
                     .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
                     .padding([.leading, .trailing], 16)

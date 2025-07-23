@@ -29,9 +29,6 @@ final class SignOutConfirmationCoordinator: BaseCoordinator {
     }
 
     private func dismiss(_ didAttemptSignOut: Bool) {
-        if didAttemptSignOut {
-            finish()
-        }
         root.dismiss(animated: true)
     }
 }

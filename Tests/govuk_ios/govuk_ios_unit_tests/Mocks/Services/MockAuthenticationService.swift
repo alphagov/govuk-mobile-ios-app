@@ -25,13 +25,14 @@ class MockAuthenticationService: AuthenticationServiceInterface {
         _stubbedIsReauth
     }
 
-    func signOut() {
+    func signOut(reason: SignoutReason) {
         _stubbedIsSignedIn = false
     }
 
     var refreshToken: String?
     var idToken: String?
     var accessToken: String?
+    var didSignOutAction: ((SignoutReason) -> Void)?
 
     var _stubbedAuthenticationResult: AuthenticationServiceResult = .failure(.loginFlow(.clientError))
     func authenticate(window: UIWindow) async -> govuk_ios.AuthenticationServiceResult {

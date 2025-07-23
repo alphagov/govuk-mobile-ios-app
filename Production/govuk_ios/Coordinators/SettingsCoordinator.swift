@@ -53,13 +53,6 @@ class SettingsCoordinator: TabItemCoordinator {
         set([viewController], animated: false)
     }
 
-    override func childDidFinish(_ child: BaseCoordinator) {
-        super.childDidFinish(child)
-        if child is SignOutConfirmationCoordinator {
-            finish()
-        }
-    }
-
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
         deeplinkStore.route(
             for: url,

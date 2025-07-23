@@ -4,16 +4,27 @@ import Foundation
 class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let inactivityService: InactivityServiceInterface
+    private let authenticationService: AuthenticationServiceInterface
     private var initialLaunch: Bool = true
     private var tabCoordinator: BaseCoordinator?
     private var pendingDeeplink: URL?
 
     init(coordinatorBuilder: CoordinatorBuilder,
          inactivityService: InactivityServiceInterface,
+         authenticationService: AuthenticationServiceInterface,
          navigationController: UINavigationController) {
         self.coordinatorBuilder = coordinatorBuilder
         self.inactivityService = inactivityService
+        self.authenticationService = authenticationService
         super.init(navigationController: navigationController)
+        configureObservers()
+    }
+
+    private func configureObservers() {
+        authenticationService.didSignOutAction = { [weak self] reason in
+            guard reason == .userSignout else { return }
+            self?.startPeriAuthCoordinator()
+        }
     }
 
     override func start(url: URL?) {
@@ -91,12 +102,5 @@ class AppCoordinator: BaseCoordinator {
         tabCoordinator = coordinator
         start(coordinator, url: pendingDeeplink)
         pendingDeeplink = nil
-    }
-
-    override func childDidFinish(_ child: BaseCoordinator) {
-        super.childDidFinish(child)
-        if child is TabCoordinator {
-            startPeriAuthCoordinator()
-        }
     }
 }

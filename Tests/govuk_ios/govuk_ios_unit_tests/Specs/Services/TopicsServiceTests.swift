@@ -166,4 +166,29 @@ struct TopicsServiceTests {
 
         #expect(sut.hasCustomisedTopics == expectedValue)
     }
+
+
+    @Test
+    func resetOnboaring_resetsPreferences() {
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults._stub(
+            value: true,
+            key: UserDefaultsKeys.topicsOnboardingSeen.rawValue
+        )
+        mockUserDefaults._stub(
+            value: true,
+            key: UserDefaultsKeys.customisedTopics.rawValue
+        )
+        let sut = TopicsService(
+            topicsServiceClient: MockTopicsServiceClient(),
+            topicsRepository: MockTopicsRepository(),
+            analyticsService: MockAnalyticsService(),
+            userDefaults: mockUserDefaults
+        )
+
+        sut.resetOnboarding()
+
+        #expect(mockUserDefaults.value(forKey: UserDefaultsKeys.topicsOnboardingSeen) == nil)
+        #expect(mockUserDefaults.value(forKey: UserDefaultsKeys.customisedTopics) == nil)
+    }
 }

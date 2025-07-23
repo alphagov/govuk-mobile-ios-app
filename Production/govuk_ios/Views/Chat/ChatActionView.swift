@@ -159,38 +159,34 @@ struct ChatActionView: View {
         .padding()
     }
 
+    @ViewBuilder
     private var characterCountView: some View {
         if viewModel.latestQuestion.count > viewModel.maxCharacters {
-            return AnyView(
-                Text(LocalizedStringKey("tooManyCharactersTitle.\(viewModel.absoluteRemainingCharacters)"), tableName: "Chat")
-                    .font(Font(UIFont.govUK.subheadlineSemibold))
-                    .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
-                    .padding([.leading, .trailing], 16)
-                    .padding(.bottom, 24)
-                    .background(GeometryReader { textGeometry in
-                        Color.clear.preference(
-                            key: CharacterCountHeightKey.self,
-                            value: textGeometry.size.height
-                        )
-                    })
-            )
+            Text(LocalizedStringKey("tooManyCharactersTitle.\(viewModel.absoluteRemainingCharacters)"),
+                 tableName: "Chat")
+            .font(Font(UIFont.govUK.subheadlineSemibold))
+            .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
+            .padding([.leading, .trailing], 16)
+            .padding(.bottom, 24)
+            .background(GeometryReader { textGeometry in
+                Color.clear.preference(
+                    key: CharacterCountHeightKey.self,
+                    value: textGeometry.size.height
+                )
+            })
         } else if viewModel.latestQuestion.count >= (viewModel.maxCharacters - 50) {
-            let remainingCharactersText = String.chat.localized("remainingCharactersTitle")
-            return AnyView(
-                Text("\(viewModel.absoluteRemainingCharacters) \(remainingCharactersText)")
-                    .font(Font(UIFont.govUK.subheadline))
-                    .foregroundColor(Color(UIColor.govUK.text.secondary))
-                    .padding([.leading, .trailing], 16)
-                    .padding(.bottom, 24)
-                    .background(GeometryReader { textGeometry in
-                        Color.clear.preference(
-                            key: CharacterCountHeightKey.self,
-                            value: textGeometry.size.height
-                        )
-                    })
-            )
-        } else {
-            return AnyView(EmptyView())
+            Text(LocalizedStringKey("remainingCharactersTitle.\(viewModel.absoluteRemainingCharacters)"),
+                 tableName: "Chat")
+            .font(Font(UIFont.govUK.subheadline))
+            .foregroundColor(Color(UIColor.govUK.text.secondary))
+            .padding([.leading, .trailing], 16)
+            .padding(.bottom, 24)
+            .background(GeometryReader { textGeometry in
+                Color.clear.preference(
+                    key: CharacterCountHeightKey.self,
+                    value: textGeometry.size.height
+                )
+            })
         }
     }
 

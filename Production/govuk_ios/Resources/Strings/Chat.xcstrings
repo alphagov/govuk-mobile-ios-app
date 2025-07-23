@@ -67,13 +67,25 @@
         }
       }
     },
-    "remainingCharactersTitle" : {
+    "remainingCharactersTitle.%lld" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "characters remaining"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character remaining"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters remaining"
+                }
+              }
+            }
           }
         }
       }

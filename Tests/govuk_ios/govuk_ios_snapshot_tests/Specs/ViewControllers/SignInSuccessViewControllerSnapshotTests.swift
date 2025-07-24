@@ -9,7 +9,6 @@ import GOVKit
 class SignInSuccessViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = SignInSuccessViewModel(
-            analyticsService: MockAnalyticsService(),
             completion: { }
         )
         let signInSuccessView = InfoView(viewModel: viewModel)
@@ -26,7 +25,6 @@ class SignInSuccessViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = SignInSuccessViewModel(
-            analyticsService: MockAnalyticsService(),
             completion: { }
         )
         let signInSuccessView = InfoView(viewModel: viewModel)

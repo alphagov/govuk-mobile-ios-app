@@ -10,8 +10,26 @@ import UIKit
 struct PreAuthCoordinatorTests {
 
     @Test
-    func start_startsLaunchCoordinator() {
+    func start_startsJailbreakCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let stubbedJailbreakCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedJailbreakCoordinator = stubbedJailbreakCoordinator
+        let subject = PreAuthCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: MockNavigationController(),
+            completion: { }
+        )
+
+        subject.start(url: nil)
+
+        #expect(stubbedJailbreakCoordinator._startCalled)
+    }
+
+    @Test
+    func jailbreakCompletion_startsLaunchCoordinator() async throws {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let stubbedJailbreakCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedJailbreakCoordinator = stubbedJailbreakCoordinator
         let stubbedLaunchCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedLaunchCoordinator = stubbedLaunchCoordinator
         let subject = PreAuthCoordinator(
@@ -21,37 +39,19 @@ struct PreAuthCoordinatorTests {
         )
 
         subject.start(url: nil)
+
+        mockCoordinatorBuilder._receivedJailbreakDismissAction?()
 
         #expect(stubbedLaunchCoordinator._startCalled)
     }
 
     @Test
-    func launchCompletion_startsAnalyticsConsent() {
+    func launchCompletion_startsNotificationConsentCheck() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let stubbedJailbreakCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedJailbreakCoordinator = stubbedJailbreakCoordinator
         let stubbedLaunchCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedLaunchCoordinator = stubbedLaunchCoordinator
-        let stubbedAnalyticsConsentCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedAnalyticsConsentCoordinator = stubbedAnalyticsConsentCoordinator
-        let subject = PreAuthCoordinator(
-            coordinatorBuilder: mockCoordinatorBuilder,
-            navigationController: MockNavigationController(),
-            completion: { }
-        )
-
-        subject.start(url: nil)
-
-        mockCoordinatorBuilder._receivedLaunchCompletion?(.arrangeAvailable)
-
-        #expect(stubbedAnalyticsConsentCoordinator._startCalled)
-    }
-
-    @Test
-    func analyticsCompletion_startsNotificationConsentCheck() {
-        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
-        let stubbedLaunchCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedLaunchCoordinator = stubbedLaunchCoordinator
-        let stubbedAnalyticsConsentCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedAnalyticsConsentCoordinator = stubbedAnalyticsConsentCoordinator
         let stubbedNotificationConsentCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedNotificationConsentCoordinator = stubbedNotificationConsentCoordinator
         let subject = PreAuthCoordinator(
@@ -61,9 +61,10 @@ struct PreAuthCoordinatorTests {
         )
 
         subject.start(url: nil)
+
+        mockCoordinatorBuilder._receivedJailbreakDismissAction?()
         let expectedLaunchResponse = AppLaunchResponse.arrangeAvailable
         mockCoordinatorBuilder._receivedLaunchCompletion?(expectedLaunchResponse)
-        mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
 
         #expect(stubbedNotificationConsentCoordinator._startCalled)
         #expect(mockCoordinatorBuilder._receivedNotificationConsentResult == expectedLaunchResponse.notificationConsentResult)
@@ -72,10 +73,10 @@ struct PreAuthCoordinatorTests {
     @Test
     func notificationConsentCheckCompletion_startsAppForcedUpdate() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let stubbedJailbreakCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedJailbreakCoordinator = stubbedJailbreakCoordinator
         let stubbedLaunchCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedLaunchCoordinator = stubbedLaunchCoordinator
-        let stubbedAnalyticsConsentCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedAnalyticsConsentCoordinator = stubbedAnalyticsConsentCoordinator
         let stubbedNotificationConsentCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedNotificationConsentCoordinator = stubbedNotificationConsentCoordinator
         let stubbedAppForceUpdateCoordinator = MockBaseCoordinator()
@@ -89,6 +90,7 @@ struct PreAuthCoordinatorTests {
 
         subject.start(url: nil)
 
+        mockCoordinatorBuilder._receivedJailbreakDismissAction?()
         let expectedLaunchResponse = AppLaunchResponse.arrangeAvailable
         mockCoordinatorBuilder._receivedLaunchCompletion?(expectedLaunchResponse)
         mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
@@ -101,10 +103,10 @@ struct PreAuthCoordinatorTests {
     @Test
     func appForcedUpdateCompletion_startsAppUnavailable() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let stubbedJailbreakCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedJailbreakCoordinator = stubbedJailbreakCoordinator
         let stubbedLaunchCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedLaunchCoordinator = stubbedLaunchCoordinator
-        let stubbedAnalyticsConsentCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedAnalyticsConsentCoordinator = stubbedAnalyticsConsentCoordinator
         let stubbedNotificationConsentCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedNotificationConsentCoordinator = stubbedNotificationConsentCoordinator
         let stubbedAppForceUpdateCoordinator = MockBaseCoordinator()
@@ -120,6 +122,7 @@ struct PreAuthCoordinatorTests {
 
         subject.start(url: nil)
 
+        mockCoordinatorBuilder._receivedJailbreakDismissAction?()
         let expectedLaunchResponse = AppLaunchResponse.arrangeAvailable
         mockCoordinatorBuilder._receivedLaunchCompletion?(expectedLaunchResponse)
         mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
@@ -133,10 +136,10 @@ struct PreAuthCoordinatorTests {
     @Test
     func appUnavailableCompletion_startsAppRecommendUpdate() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let stubbedJailbreakCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedJailbreakCoordinator = stubbedJailbreakCoordinator
         let stubbedLaunchCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedLaunchCoordinator = stubbedLaunchCoordinator
-        let stubbedAnalyticsConsentCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedAnalyticsConsentCoordinator = stubbedAnalyticsConsentCoordinator
         let stubbedNotificationConsentCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedNotificationConsentCoordinator = stubbedNotificationConsentCoordinator
         let stubbedAppForceUpdateCoordinator = MockBaseCoordinator()
@@ -154,6 +157,7 @@ struct PreAuthCoordinatorTests {
 
         subject.start(url: nil)
 
+        mockCoordinatorBuilder._receivedJailbreakDismissAction?()
         let expectedLaunchResponse = AppLaunchResponse.arrangeAvailable
         mockCoordinatorBuilder._receivedLaunchCompletion?(.arrangeAvailable)
         mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
@@ -169,10 +173,10 @@ struct PreAuthCoordinatorTests {
     @Test
     func appRecommendUpdateCompletion_completesCoordinator() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let stubbedJailbreakCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedJailbreakCoordinator = stubbedJailbreakCoordinator
         let stubbedLaunchCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedLaunchCoordinator = stubbedLaunchCoordinator
-        let stubbedAnalyticsConsentCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedAnalyticsConsentCoordinator = stubbedAnalyticsConsentCoordinator
         let stubbedNotificationConsentCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedNotificationConsentCoordinator = stubbedNotificationConsentCoordinator
         let stubbedAppForceUpdateCoordinator = MockBaseCoordinator()
@@ -193,6 +197,7 @@ struct PreAuthCoordinatorTests {
 
         subject.start(url: nil)
 
+        mockCoordinatorBuilder._receivedJailbreakDismissAction?()
         mockCoordinatorBuilder._receivedLaunchCompletion?(.arrangeAvailable)
         mockCoordinatorBuilder._receivedAnalyticsConsentCompletion?()
         mockCoordinatorBuilder._receivedNotificationConsentCompletion?()

@@ -50,4 +50,12 @@ extension Container {
             )
         }
     }
+
+    var chatServiceClient: Factory<ChatServiceClientInterface> {
+        Factory(self) {
+            ChatServiceClient(
+                serviceClient: self.chatAPIClient(),
+            )
+        }
+    }
 }

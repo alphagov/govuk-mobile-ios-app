@@ -4,6 +4,7 @@ import GOVKit
 import UIKit
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @MainActor
 final class AmbiguousAuthorityViewControllerSnapshotTests: SnapshotTestCase {

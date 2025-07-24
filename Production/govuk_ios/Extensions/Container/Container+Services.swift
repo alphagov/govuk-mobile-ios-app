@@ -18,13 +18,8 @@ extension Container {
         }
     }
 
+    @MainActor
     var analyticsService: Factory<AnalyticsServiceInterface> {
-        Factory(self) {
-            self.baseAnalyticsService()
-        }
-    }
-
-    var onboardingAnalyticsService: Factory<OnboardingAnalyticsService> {
         Factory(self) {
             self.baseAnalyticsService()
         }
@@ -48,7 +43,8 @@ extension Container {
         }
     }
 
-    var baseAnalyticsService: Factory<AnalyticsServiceInterface & OnboardingAnalyticsService> {
+    @MainActor
+    var baseAnalyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             AnalyticsService(
                 clients: [
@@ -59,12 +55,14 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaults: UserDefaults.standard
+                userDefaults: UserDefaults.standard,
+                authenticationService: self.authenticationService.resolve()
             )
         }
         .scope(.singleton)
     }
 
+    @MainActor
     var appLaunchService: Factory<AppLaunchServiceInterface> {
         Factory(self) {
             AppLaunchService(
@@ -83,6 +81,7 @@ extension Container {
         }.scope(.singleton)
     }
 
+    @MainActor
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(
@@ -201,6 +200,23 @@ extension Container {
     var govuKProviderFactory: Factory<ProviderFactoryInterface> {
         Factory(self) {
             GovUKProviderFactory()
+        }
+    }
+
+    var chatService: Factory<ChatServiceInterface> {
+        Factory(self) {
+            ChatService(
+                serviceClient: self.chatServiceClient.resolve(),
+                chatRepository: self.chatRepository.resolve()
+            )
+        }
+    }
+
+    var jailbreakDetectionService: Factory<JailbreakDetectionServiceInterface> {
+        Factory(self) {
+            JailbreakDetectionService(
+                urlOpener: UIApplication.shared
+            )
         }
     }
 }

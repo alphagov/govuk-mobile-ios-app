@@ -18,7 +18,6 @@ final class SignInSuccessCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         let viewModel = SignInSuccessViewModel(
-            analyticsService: analyticsService,
             completion: { [weak self] in
                 self?.completion()
             }

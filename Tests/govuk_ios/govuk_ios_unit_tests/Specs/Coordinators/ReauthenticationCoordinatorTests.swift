@@ -1,12 +1,14 @@
 import Foundation
 import Testing
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
 class ReauthenticationCoordinatorTests {
     @Test @MainActor
     func start_shouldReauthenticate_successfulTokenResponse_callsCompletion() async {
+        let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -24,6 +26,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -31,10 +34,12 @@ class ReauthenticationCoordinatorTests {
 
         #expect(completion)
         #expect(mockNavigationController._setViewControllers?.count == .none)
+        #expect(mockAnalyticsService._setExistingConsentCalled)
     }
 
     @Test @MainActor
     func start_shouldReauthenticate_unsuccessfulTokenResponse_startsAuthenticationLogin() async {
+        let mockAnalyticsService = MockAnalyticsService()
         let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
@@ -53,6 +58,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { }
             )
             sut.start(url: nil)
@@ -63,6 +69,7 @@ class ReauthenticationCoordinatorTests {
 
     @Test @MainActor
     func start_biometricsChanged_startsAuthenticationLogin() async {
+        let mockAnalyticsService = MockAnalyticsService()
         let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
@@ -80,6 +87,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -90,6 +98,7 @@ class ReauthenticationCoordinatorTests {
 
     @Test @MainActor
     func start_touchId_disabled_startsAuthenticationLogin() async {
+        let mockAnalyticsService = MockAnalyticsService()
         let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
@@ -107,6 +116,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -117,6 +127,7 @@ class ReauthenticationCoordinatorTests {
 
     @Test @MainActor
     func start_touchId_enabled_startsAuthenticationLogin() async {
+        let mockAnalyticsService = MockAnalyticsService()
         let mockAuthenticationOnboardingCoordinator = MockBaseCoordinator()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
@@ -134,6 +145,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -145,6 +157,7 @@ class ReauthenticationCoordinatorTests {
 
     @Test @MainActor
     func start_onboardingFlowNotSeen_callsCompletion() async {
+        let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -156,6 +169,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -167,6 +181,7 @@ class ReauthenticationCoordinatorTests {
 
     @Test @MainActor
     func start_faceIdSkipped_callsCompletion() async {
+        let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -178,6 +193,7 @@ class ReauthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
+                analyticsService: mockAnalyticsService,
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)

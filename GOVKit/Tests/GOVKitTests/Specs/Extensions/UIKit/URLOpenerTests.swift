@@ -29,4 +29,7 @@ struct TestURLOpener: URLOpener {
     func openIfPossible(_ url: URL) -> Bool {
         true
     }
+    func canOpenURL(_ url: URL) -> Bool {
+        true
+    }
 }

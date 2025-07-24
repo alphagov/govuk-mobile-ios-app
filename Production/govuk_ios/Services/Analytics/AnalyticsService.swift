@@ -4,12 +4,15 @@ import GOVKit
 class AnalyticsService: AnalyticsServiceInterface {
     private let clients: [AnalyticsClient]
     private var userDefaults: UserDefaultsInterface
+    private let authenticationService: AuthenticationServiceInterface
 
     init(clients: [AnalyticsClient],
-         userDefaults: UserDefaultsInterface) {
+         userDefaults: UserDefaultsInterface,
+         authenticationService: AuthenticationServiceInterface) {
         self.clients = clients
         self.userDefaults = userDefaults
-        configureEnabled()
+        self.authenticationService = authenticationService
+        configureDisabled()
     }
 
     func launch() {
@@ -17,20 +20,24 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func track(event: AppEvent) {
-        guard case .accepted = permissionState
-        else { return }
+        guard shouldTrack else { return }
         clients.forEach { $0.track(event: event) }
     }
 
     func track(screen: TrackableScreen) {
-        guard case .accepted = permissionState
-        else { return }
+        guard shouldTrack else { return }
         clients.forEach { $0.track(screen: screen) }
     }
 
     func setAcceptedAnalytics(accepted: Bool) {
         userDefaults.set(bool: accepted, forKey: .acceptedAnalytics)
         clients.forEach { $0.setEnabled(enabled: accepted) }
+    }
+
+    func setExistingConsent() {
+        if let accepted = hasAcceptedAnalytics {
+            clients.forEach { $0.setEnabled(enabled: accepted) }
+        }
     }
 
     var permissionState: AnalyticsPermissionState {
@@ -52,13 +59,16 @@ class AnalyticsService: AnalyticsServiceInterface {
         clients.forEach { $0.set(userProperty: userProperty) }
     }
 
-    private func configureEnabled() {
-        let accepted = hasAcceptedAnalytics ?? false
-        clients.forEach { $0.setEnabled(enabled: accepted) }
+    private func configureDisabled() {
+        clients.forEach { $0.setEnabled(enabled: false) }
     }
 
     private var hasAcceptedAnalytics: Bool? {
         // Do not use bool for key here because we need to have an unknown state (nil)
         userDefaults.value(forKey: .acceptedAnalytics) as? Bool
+    }
+
+    private var shouldTrack: Bool {
+        permissionState == .accepted && authenticationService.isSignedIn
     }
 }

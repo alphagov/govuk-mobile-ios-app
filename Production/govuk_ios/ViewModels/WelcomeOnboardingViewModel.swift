@@ -4,12 +4,9 @@ import UIComponents
 import SwiftUI
 
 final class WelcomeOnboardingViewModel: InfoViewModelInterface {
-    let analyticsService: AnalyticsServiceInterface
     private let completeAction: () -> Void
 
-    init(analyticsService: AnalyticsServiceInterface,
-         completeAction: @escaping () -> Void) {
-        self.analyticsService = analyticsService
+    init(completeAction: @escaping () -> Void) {
         self.completeAction = completeAction
     }
 
@@ -30,7 +27,6 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
         return .init(
             localisedTitle: localTitle,
             action: { [weak self] in
-                self?.trackNavigationEvent(localTitle)
                 self?.completeAction()
             }
         )
@@ -49,17 +45,5 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
 
     var subtitleFont: Font {
         Font.govUK.title1
-    }
-
-    var trackingName: String { "Welcome onboarding" }
-
-    var trackingTitle: String { title }
-
-    private func trackNavigationEvent(_ title: String) {
-        let event = AppEvent.buttonNavigation(
-            text: title,
-            external: false
-        )
-        analyticsService.track(event: event)
     }
 }

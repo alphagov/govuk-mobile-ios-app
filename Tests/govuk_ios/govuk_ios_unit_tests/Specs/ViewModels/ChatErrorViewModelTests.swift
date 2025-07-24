@@ -12,10 +12,11 @@ struct ChatErrorViewModelTests {
         var didCallCompletion = false
 
         let sut = ChatErrorViewModel(
-            error: ChatError.networkUnavailable,
+            error: .networkUnavailable,
             action: {
                 didCallCompletion = true
-            }
+            },
+            openURLAction: { _ in }
         )
 
         sut.buttonViewModel.action()
@@ -24,14 +25,15 @@ struct ChatErrorViewModelTests {
     }
 
     @Test(arguments: zip(
-        [ChatError.networkUnavailable, ChatError.apiUnavailable],
+        [ChatError.networkUnavailable, .apiUnavailable],
         [UIColor.govUK.text.buttonPrimary, UIColor.govUK.text.buttonSecondary]
     ))
     func button_hasCorrectConfiguration_forError(error: ChatError,
                                                  expectedTitleColor: UIColor) {
         let sut = ChatErrorViewModel(
             error: error,
-            action: { }
+            action: { },
+            openURLAction: { _ in }
         )
 
         #expect(sut.buttonConfiguration.titleColorNormal == expectedTitleColor)

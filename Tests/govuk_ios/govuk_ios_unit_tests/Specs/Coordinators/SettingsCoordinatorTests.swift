@@ -164,7 +164,7 @@ struct SettingsCoordinatorTests {
         let settingsViewController = try #require(subject.root.viewControllers.first as?
                                                   HostingViewController<SettingsView<SettingsViewModel>>)
         #expect(settingsViewController.rootView.viewModel.scrollToTop == false)
-        subject.didReselectTab()
+        subject.didSelectTab(0, previousTabIndex: 0)
         #expect(settingsViewController.rootView.viewModel.scrollToTop == true)
     }
 

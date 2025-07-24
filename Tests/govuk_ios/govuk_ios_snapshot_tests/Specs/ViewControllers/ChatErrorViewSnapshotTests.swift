@@ -9,8 +9,9 @@ import GOVKit
 @MainActor class ChatErrorViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = ChatErrorViewModel(
-            error: ChatError.apiUnavailable,
-            action: { }
+            error: .apiUnavailable,
+            action: { },
+            openURLAction: { _ in }
         )
         let chatErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
@@ -26,8 +27,9 @@ import GOVKit
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = ChatErrorViewModel(
-            error: ChatError.apiUnavailable,
-            action: { }
+            error: .apiUnavailable,
+            action: { },
+            openURLAction: { _ in }
         )
         let chatErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(

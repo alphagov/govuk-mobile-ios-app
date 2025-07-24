@@ -134,7 +134,7 @@ struct ChatCoordinatorTests {
         mockViewControllerBuilder._receivedHandleChatError?(ChatError.apiUnavailable)
         let firstViewController = navigationController.viewControllers.first
         #expect(firstViewController == expectedInfoViewController)
-        mockViewControllerBuilder._receivedChatErrorAction?()
+        mockViewControllerBuilder._receivedChatOpenURLAction?(URL(string: "https://www.gov.uk")!)
         #expect(mockSafariCoordinator._startCalled)
     }
 }

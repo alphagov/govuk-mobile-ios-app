@@ -41,7 +41,7 @@ struct ChatViewModelTests {
             analyticsService: MockAnalyticsService(),
             openURLAction: { _ in },
             handleError: { error in
-                chatError = error as? ChatError
+                chatError = error
             }
         )
         sut.latestQuestion = "This is the question"
@@ -63,7 +63,7 @@ struct ChatViewModelTests {
             analyticsService: MockAnalyticsService(),
             openURLAction: { _ in },
             handleError: { error in
-                chatError = error as? ChatError
+                chatError = error
             }
         )
         sut.latestQuestion = "This is the question"
@@ -154,7 +154,7 @@ struct ChatViewModelTests {
             analyticsService: MockAnalyticsService(),
             openURLAction: { _ in },
             handleError: { error in
-                chatError = error as? ChatError
+                chatError = error
             }
         )
 
@@ -174,7 +174,7 @@ struct ChatViewModelTests {
             analyticsService: MockAnalyticsService(),
             openURLAction: { _ in },
             handleError: { error in
-                chatError = error as? ChatError
+                chatError = error
             }
         )
 

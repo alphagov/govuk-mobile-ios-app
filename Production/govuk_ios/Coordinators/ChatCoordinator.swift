@@ -51,7 +51,7 @@ class ChatCoordinator: TabItemCoordinator {
         let coordinator = coordinatorBuilder.safari(
             navigationController: root,
             url: url,
-            fullScreen: false
+            fullScreen: true
         )
         start(coordinator)
     }

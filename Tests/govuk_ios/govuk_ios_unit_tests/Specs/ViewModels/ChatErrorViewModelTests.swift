@@ -24,18 +24,45 @@ struct ChatErrorViewModelTests {
         #expect(didCallCompletion)
     }
 
-    @Test(arguments: zip(
-        [ChatError.networkUnavailable, .apiUnavailable],
-        [UIColor.govUK.text.buttonPrimary, UIColor.govUK.text.buttonSecondary]
-    ))
-    func button_hasCorrectConfiguration_forError(error: ChatError,
-                                                 expectedTitleColor: UIColor) {
+    @Test
+    func hasCorrectStyle_forNetworkError() {
         let sut = ChatErrorViewModel(
-            error: error,
+            error: .networkUnavailable,
             action: { },
             openURLAction: { _ in }
         )
 
-        #expect(sut.buttonConfiguration.titleColorNormal == expectedTitleColor)
+        #expect(sut.title == String.common.localized("networkUnavailableErrorTitle"))
+        #expect(sut.subtitle == String.common.localized("networkUnavailableErrorBody"))
+        #expect(sut.buttonTitle == String.common.localized("networkUnavailableButtonTitle"))
+        #expect(sut.showActionButton)
+    }
+
+    @Test
+    func hasCorrectStyle_forPageNotFoundError() {
+        let sut = ChatErrorViewModel(
+            error: .pageNotFound,
+            action: { },
+            openURLAction: { _ in }
+        )
+
+        #expect(sut.title == String.common.localized("genericErrorTitle"))
+        #expect(sut.subtitle == String.chat.localized("pageNotFoundErrorBody"))
+        #expect(sut.buttonTitle == String.chat.localized("pageNotFoundButtonTitle"))
+        #expect(sut.showActionButton)
+    }
+
+    @Test
+    func hasCorrectStyle_forOtherError() {
+        let sut = ChatErrorViewModel(
+            error: .apiUnavailable,
+            action: { },
+            openURLAction: { _ in }
+        )
+
+        #expect(sut.title == String.common.localized("genericErrorTitle"))
+        #expect(sut.subtitle == String.chat.localized("genericErrorBody"))
+        #expect(sut.buttonTitle == "")
+        #expect(!sut.showActionButton)
     }
 }

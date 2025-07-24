@@ -72,6 +72,7 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
+            await saveExpiryDate()
             return await handleReturningUser()
         case .failure(let error):
             return AuthenticationServiceResult.failure(error)
@@ -135,6 +136,7 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
+            await saveExpiryDate()
             return .success(tokenResponse)
         case .failure(let error):
             return .failure(error)
@@ -153,6 +155,14 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.refreshToken = refreshToken
         self.idToken = idToken
         self.accessToken = accessToken
+    }
+
+    private func saveExpiryDate() async {
+        let extractor = JWTExtractor()
+        guard let refreshToken,
+              let payload: RefreshTokenPayload = try? await extractor.extract(jwt: refreshToken)
+        else { return }
+        print(payload.expiryDate)
     }
 }
 

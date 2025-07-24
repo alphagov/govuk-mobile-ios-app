@@ -37,6 +37,7 @@ enum UserDefaultsKeys: String {
     case biometricsPolicyState = "govuk_biometrics_policy_state"
     case touchIdEnabled = "govuk_touch_id_enabled"
     case faceIdSkipped = "govuk_face_id_skipped"
+    case refreshTokenExpiryDate = "govuk_refresh_token_expiry_date"
 }
 
 protocol UserDefaultsInterface {

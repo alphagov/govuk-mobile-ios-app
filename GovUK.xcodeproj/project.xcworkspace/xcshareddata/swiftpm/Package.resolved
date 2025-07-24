@@ -247,7 +247,7 @@
     {
       "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-cmark.git",
+      "location" : "https://github.com/swiftlang/swift-cmark",
       "state" : {
         "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
         "version" : "0.6.0"

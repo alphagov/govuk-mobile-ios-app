@@ -23,6 +23,50 @@
         }
       }
     },
+    "clearAlertBodyText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This will delete your chat history."
+          }
+        }
+      }
+    },
+    "clearAlertConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, clear chat"
+          }
+        }
+      }
+    },
+    "clearAlertDenyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No, not now"
+          }
+        }
+      }
+    },
+    "clearAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to clear your chat history?"
+          }
+        }
+      }
+    },
     "clearMenuTitle" : {
       "extractionState" : "manual",
       "localizations" : {

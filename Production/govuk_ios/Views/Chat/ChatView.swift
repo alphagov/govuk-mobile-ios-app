@@ -4,6 +4,7 @@ struct ChatView: View {
     @StateObject private var viewModel: ChatViewModel
     @Namespace var bottomID
     @FocusState private var textAreaFocused: Bool
+    @State var showClearChatAlert: Bool = false
 
     init(viewModel: ChatViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -12,7 +13,8 @@ struct ChatView: View {
     var body: some View {
         let chatActionView = ChatActionView(
             viewModel: viewModel,
-            textAreaFocused: $textAreaFocused
+            textAreaFocused: $textAreaFocused,
+            showClearChatAlert: $showClearChatAlert
         )
 
         ZStack {

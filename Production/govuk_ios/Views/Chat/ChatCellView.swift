@@ -65,6 +65,8 @@ struct ChatCellView: View {
             }
             .padding(.horizontal)
             Divider()
+                .overlay(Color(UIColor.govUK.strokes.chatDivider))
+                .padding(.horizontal)
             warningView
             if !viewModel.sources.isEmpty {
                 sourceView
@@ -99,6 +101,10 @@ struct ChatCellView: View {
 
     private var markdownView: some View {
         Markdown(viewModel.message)
+            .markdownTextStyle(\.link,
+                                textStyle: {
+                ForegroundColor(Color(UIColor.govUK.text.link))
+            })
             .environment(\.openURL, OpenURLAction { url in
                 viewModel.openURLAction?(url)
                 return .handled
@@ -117,6 +123,7 @@ struct ChatCellView: View {
                 return .handled
             })
             Divider()
+                .overlay(Color(UIColor.govUK.strokes.chatDivider))
                 .opacity(source.url == viewModel.sources.last?.url ? 0 : 1)
         }
     }
@@ -124,6 +131,7 @@ struct ChatCellView: View {
     private func sourceListItemTitleView(title: String) -> some View {
         HStack {
             Text(title)
+                .foregroundStyle(Color(UIColor.govUK.text.link))
                 .multilineTextAlignment(.leading)
                 .padding(.top, 4)
             Spacer()
@@ -152,6 +160,7 @@ struct ChatDisclosure: DisclosureGroupStyle {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 Image(systemName: configuration.isExpanded ? "chevron.up" : "chevron.down")
+                    .foregroundStyle(Color(UIColor.govUK.text.link))
             }
         }
     }

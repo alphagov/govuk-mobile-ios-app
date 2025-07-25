@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import GOVKit
+import SwiftUI
 
 class HomeViewController: BaseViewController {
     private var searchViewController: SearchViewController!
@@ -74,10 +75,16 @@ class HomeViewController: BaseViewController {
     }
 
     private func configureHomeContent() {
-        homeContentViewController = HomeContentViewController(
+//        homeContentViewController = HomeContentViewController(
+//            viewModel: viewModel
+//        )
+        let view = TopicsSwiftUIView(
             viewModel: viewModel
         )
-        displayController(homeContentViewController)
+        let controller = UIHostingController(
+            rootView: view
+        )
+        displayController(controller)
     }
 
     private func configureSearchBar() {

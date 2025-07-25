@@ -20,8 +20,6 @@ struct ChatCellView: View {
                 pendingAnswerView
             case .answer:
                 answerView
-            case .error:
-                answerView
             }
         }
         .background(viewModel.backgroundColor)

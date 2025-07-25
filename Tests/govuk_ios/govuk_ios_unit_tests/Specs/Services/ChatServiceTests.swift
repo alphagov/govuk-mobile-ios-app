@@ -92,7 +92,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .networkUnavailable)
     }
 
@@ -149,7 +149,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .apiUnavailable)
     }
 
@@ -175,33 +175,9 @@ final class ChatServiceTests {
         }
 
         let historyResult = try #require(try? result.get())
-        #expect(historyResult.count == 1)
-        #expect(historyResult.first?.id == History.history.answeredQuestions.first?.id)
-    }
-
-    @Test
-    func chatHistory_noConversationId_returnsEmptyArray() async throws {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
-        )
-
-        mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
-
-        let result = await withCheckedContinuation { continuation in
-            sut.chatHistory(
-                conversationId: nil,
-                completion: { result in
-                    continuation.resume(returning: result)
-                }
-            )
-        }
-
-        let historyResult = try #require(try? result.get())
-        #expect(historyResult.count == 0)
+        #expect(historyResult.answeredQuestions.count == 1)
+        #expect(historyResult.answeredQuestions.first?.id ==
+                History.history.answeredQuestions.first?.id)
     }
 
     @Test func chatHistory_returnsExpectedError() async throws {
@@ -225,7 +201,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .apiUnavailable)
     }
 

@@ -8,7 +8,8 @@ typealias TabItemCoordinator = BaseCoordinator
 
 protocol TabItemCoordinatorInterface {
     var isEnabled: Bool { get }
-    func didReselectTab()
+    func didSelectTab(_ selectedTabIndex: Int,
+                      previousTabIndex: Int)
 }
 
 class TabCoordinator: BaseCoordinator,
@@ -99,9 +100,10 @@ class TabCoordinator: BaseCoordinator,
         guard let title = viewController.tabBarItem.title else { return }
         let event = AppEvent.tabNavigation(text: title)
         analyticsService.track(event: event)
-        if currentTabIndex == tabBarController.selectedIndex {
-            coordinators[currentTabIndex].didReselectTab()
-        }
+        coordinators[tabBarController.selectedIndex].didSelectTab(
+            tabBarController.selectedIndex,
+            previousTabIndex: currentTabIndex
+        )
         currentTabIndex = tabBarController.selectedIndex
     }
 }

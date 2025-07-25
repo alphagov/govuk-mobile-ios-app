@@ -60,8 +60,11 @@ class SettingsCoordinator: TabItemCoordinator {
         )
     }
 
-    func didReselectTab() {
-        settingsViewModel.scrollToTop = true
+    func didSelectTab(_ selectedTabIndex: Int,
+                      previousTabIndex: Int) {
+        if selectedTabIndex == previousTabIndex {
+            settingsViewModel.scrollToTop = true
+        }
     }
 
     private func setViewModelActions() {

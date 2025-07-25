@@ -41,8 +41,11 @@ class MockBaseCoordinator: BaseCoordinator,
         _stubbedRoute
     }
     
-    var _didReselectTab = false
-    func didReselectTab() {
-        _didReselectTab = true
+    var _selectedTab: Int?
+    var _previousTab: Int?
+    func didSelectTab(_ selectedTabIndex: Int,
+                      previousTabIndex: Int) {
+        _selectedTab = selectedTabIndex
+        _previousTab = previousTabIndex
     }
 }

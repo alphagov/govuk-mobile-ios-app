@@ -1,9 +1,9 @@
 import Foundation
 import GOVKit
 
-typealias ChatQuestionResult = (Result<PendingQuestion, Error>)
-typealias ChatAnswerResult = (Result<Answer, Error>)
-typealias ChatHistoryResult = (Result<History, Error>)
+typealias ChatQuestionResult = (Result<PendingQuestion, ChatError>)
+typealias ChatAnswerResult = (Result<Answer, ChatError>)
+typealias ChatHistoryResult = (Result<History, ChatError>)
 
 protocol ChatServiceClientInterface {
     func askQuestion(_ question: String,
@@ -18,6 +18,7 @@ protocol ChatServiceClientInterface {
 
 enum ChatError: LocalizedError {
     case networkUnavailable
+    case pageNotFound
     case apiUnavailable
     case decodingError
     case validationError
@@ -63,7 +64,7 @@ struct ChatServiceClient: ChatServiceClientInterface {
         }
     }
 
-    private func mapResult<T: Decodable>(_ result: NetworkResult<Data>) -> Result<T, Error> {
+    private func mapResult<T: Decodable>(_ result: NetworkResult<Data>) -> Result<T, ChatError> {
         return result.mapError { error in
             let nsError = (error as NSError)
             if nsError.code == NSURLErrorNotConnectedToInternet {

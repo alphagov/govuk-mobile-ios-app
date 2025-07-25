@@ -306,10 +306,24 @@ struct ViewControllerBuilderTests {
         let result = subject.chat(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
-            openURLAction: { _ in }
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
         let rootView = (result as? HostingViewController<ChatView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatError_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatError(
+            error: ChatError.apiUnavailable,
+            action: { },
+            openURLAction: { _ in }
+        )
+        
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 }

@@ -78,6 +78,7 @@ class HomeViewController: BaseViewController {
 //        homeContentViewController = HomeContentViewController(
 //            viewModel: viewModel
 //        )
+        let viewModel = viewModel.topicWidgetViewModel
         let view = TopicsSwiftUIView(
             viewModel: viewModel
         )

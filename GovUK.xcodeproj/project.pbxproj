@@ -262,6 +262,9 @@
 		D028CD0C2CBEC8F400742620 /* TopicDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */; };
 		D028CD0E2CBFEA4E00742620 /* TopicDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */; };
 		D028CD122CC14A0100742620 /* DisplayableTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028CD112CC149FA00742620 /* DisplayableTopic.swift */; };
+		D03678C02E33A208009BCC32 /* RegexValidator+PII.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03678BF2E33A208009BCC32 /* RegexValidator+PII.swift */; };
+		D03678C62E33CD60009BCC32 /* CompoundRegexValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03678C52E33CD60009BCC32 /* CompoundRegexValidator.swift */; };
+		D03D52FB2E32A2C900CE6008 /* RegexValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03D52FA2E32A2C900CE6008 /* RegexValidator.swift */; };
 		D04191782CA57A6F0034722A /* TopicsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191772CA57A6F0034722A /* TopicsService.swift */; };
 		D04191802CA595400034722A /* TopicResponseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D041917F2CA595400034722A /* TopicResponseItem.swift */; };
 		D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04191852CA6A5910034722A /* TopicsServiceClient.swift */; };
@@ -656,6 +659,9 @@
 		D028CD0B2CBEC8DD00742620 /* TopicDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailResponse.swift; sourceTree = "<group>"; };
 		D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailViewModel.swift; sourceTree = "<group>"; };
 		D028CD112CC149FA00742620 /* DisplayableTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableTopic.swift; sourceTree = "<group>"; };
+		D03678BF2E33A208009BCC32 /* RegexValidator+PII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegexValidator+PII.swift"; sourceTree = "<group>"; };
+		D03678C52E33CD60009BCC32 /* CompoundRegexValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundRegexValidator.swift; sourceTree = "<group>"; };
+		D03D52FA2E32A2C900CE6008 /* RegexValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexValidator.swift; sourceTree = "<group>"; };
 		D04191772CA57A6F0034722A /* TopicsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsService.swift; sourceTree = "<group>"; };
 		D041917F2CA595400034722A /* TopicResponseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicResponseItem.swift; sourceTree = "<group>"; };
 		D04191852CA6A5910034722A /* TopicsServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsServiceClient.swift; sourceTree = "<group>"; };
@@ -1089,6 +1095,9 @@
 				4E996D2D2D11AAC7007F21A8 /* StringValidator.swift */,
 				4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */,
 				4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */,
+				D03D52FA2E32A2C900CE6008 /* RegexValidator.swift */,
+				D03678BF2E33A208009BCC32 /* RegexValidator+PII.swift */,
+				D03678C52E33CD60009BCC32 /* CompoundRegexValidator.swift */,
 				4EBE646C2D15AB05007A6E97 /* CharValidator.swift */,
 				D09046762DBBC1AC0096EE66 /* JWT */,
 			);
@@ -2250,6 +2259,7 @@
 				5D62DC0B2CE6373A0079D842 /* TopicSelectedView.swift in Sources */,
 				5DD4CB1A2D95491E00459FB5 /* RecentActivityListViewModel.swift in Sources */,
 				16A788B22DCC288800CA64E2 /* ReturningUserService.swift in Sources */,
+				D03D52FB2E32A2C900CE6008 /* RegexValidator.swift in Sources */,
 				4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */,
 				5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */,
 				5DFA017B2D89651100EAC839 /* ActivityItemCreateParams+Extensions.swift in Sources */,
@@ -2401,6 +2411,7 @@
 				5D899A222C946F8A0074C0AD /* UIBarButtonItem+Convenience.swift in Sources */,
 				5DBE08082C480CA700B58DBE /* UITabBarItem+Convenience.swift in Sources */,
 				1687F05D2CB035E3005E1473 /* AllTopicsViewController.swift in Sources */,
+				D03678C02E33A208009BCC32 /* RegexValidator+PII.swift in Sources */,
 				5DBE08052C480CA700B58DBE /* UIAlertAction+Convenience.swift in Sources */,
 				164091FE2DA41C1000E3BE99 /* AuthenticationServiceClient.swift in Sources */,
 				D04191862CA6A59D0034722A /* TopicsServiceClient.swift in Sources */,
@@ -2438,6 +2449,7 @@
 				5DA4FB072CCBAF2100804C8A /* SettingsView.swift in Sources */,
 				16161FD12E2FF97D00228028 /* EnvironmentValues+Extensions.swift in Sources */,
 				16F74EBE2E26976500CA8CCB /* ChatView.swift in Sources */,
+				D03678C62E33CD60009BCC32 /* CompoundRegexValidator.swift in Sources */,
 				B04C2E7E2DA913B100F0F63E /* WebViewController.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
 				5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */,

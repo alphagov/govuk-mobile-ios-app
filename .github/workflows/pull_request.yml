@@ -10,12 +10,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  get-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Secrets
+        uses: bitwarden/sm-action@14f92f1d294ae3c2b6a3845d389cd2c318b0dfd8 # pin@v2.2.0
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          base_url: https://vault.bitwarden.eu
+          secrets: |
+            74bca0cb-ffa4-4459-bb32-b32500f698b8 > SONAR_TOKENZ
+
   lint:
     uses: ./.github/workflows/lint.yml
   unit-test:
     uses: ./.github/workflows/unit_test.yml
+    needs: get-secrets    
   sonar-scan:
     uses: ./.github/workflows/sonar_scan_pr.yml
     needs: unit-test
     secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_TOKEN: $SONAR_TOKENZ

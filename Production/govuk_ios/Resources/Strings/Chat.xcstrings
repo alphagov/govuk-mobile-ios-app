@@ -133,6 +133,28 @@
         }
       }
     },
+    "pageNotFoundButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a new chat"
+          }
+        }
+      }
+    },
+    "pageNotFoundErrorBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your previous conversation is no longer available.\n\nTo continue using GOV.UK Chat, you need to start a new chat."
+          }
+        }
+      }
+    },
     "remainingCharactersTitle.%lld" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -163,28 +185,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send message"
-          }
-        }
-      }
-    },
-    "pageNotFoundButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start a new chat"
-          }
-        }
-      }
-    },
-    "pageNotFoundErrorBody" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your previous conversation is no longer available.\n\nTo continue using GOV.UK Chat, you need to start a new chat."
           }
         }
       }
@@ -252,6 +252,17 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "validationErrorText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal data has been detected in your question. Please remove it and try again."
           }
         }
       }

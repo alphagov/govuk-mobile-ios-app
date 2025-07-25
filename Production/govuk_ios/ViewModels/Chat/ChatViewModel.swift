@@ -8,11 +8,13 @@ class ChatViewModel: ObservableObject {
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
+    private var requestInFlight: Bool = false
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
     @Published var scrollToBottom: Bool = false
     @Published var answeredQuestionID: String = ""
+    @Published var errorText: String?
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -24,28 +26,48 @@ class ChatViewModel: ObservableObject {
         self.handleError = handleError
     }
 
-    func askQuestion(_ question: String? = nil) {
+    func askQuestion(_ question: String? = nil,
+                     completion: ((Bool) -> Void)? = nil) {
+        let localQuestion = question ?? latestQuestion
+        guard !containsPII(localQuestion) else {
+            errorText = String.chat.localized("validationErrorText")
+            completion?(false)
+            return
+        }
+        errorText = nil
         cellModels.append(.loadingQuestion)
         scrollToBottom = true
-        chatService.askQuestion(question ?? latestQuestion) { [weak self] result in
+        requestInFlight = true
+        chatService.askQuestion(localQuestion) { [weak self] result in
             self?.cellModels.removeLast()
+            self?.requestInFlight = false
             switch result {
             case .success(let pendingQuestion):
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
                 self?.answeredQuestionID = pendingQuestion.id
+                self?.latestQuestion = ""
                 self?.pollForAnswer(pendingQuestion)
+                completion?(true)
             case .failure(let error):
-                self?.handleError(error)
+                self?.requestInFlight = false
+                if error == .validationError {
+                    self?.errorText = String.chat.localized("validationErrorText")
+                } else {
+                    self?.handleError(error)
+                    self?.latestQuestion = ""
+                }
+                completion?(false)
             }
         }
-        latestQuestion = ""
     }
 
     func pollForAnswer(_ question: PendingQuestion) {
+        requestInFlight = true
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
             self?.cellModels.removeLast()
+            self?.requestInFlight = false
             switch result {
             case .success(let answer):
                 let cellModel = ChatCellViewModel(
@@ -64,9 +86,11 @@ class ChatViewModel: ObservableObject {
             return
         }
         cellModels.removeAll()
+        requestInFlight = true
         chatService.chatHistory(
             conversationId: conversationId
         ) { [weak self] result in
+            self?.requestInFlight = false
             switch result {
             case .success(let answers):
                 self?.handleHistoryResponse(answers)
@@ -87,7 +111,8 @@ class ChatViewModel: ObservableObject {
 
     var shouldDisableSend: Bool {
         latestQuestion.isEmpty ||
-        (latestQuestion.count > maxCharacters)
+        (latestQuestion.count > maxCharacters) ||
+        requestInFlight
     }
 
 
@@ -106,6 +131,10 @@ class ChatViewModel: ObservableObject {
         if let pendingQuestion = history.pendingQuestion {
             askQuestion(pendingQuestion.message)
         }
+    }
+
+    private func containsPII(_ input: String) -> Bool {
+        RegexValidator.pii.validate(input: input)
     }
 
     @objc

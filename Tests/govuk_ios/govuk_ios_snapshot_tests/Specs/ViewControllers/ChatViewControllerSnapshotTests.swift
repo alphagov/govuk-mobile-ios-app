@@ -10,7 +10,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: view,
+            view: view(),
             mode: .light,
             navBarHidden: true
         )
@@ -18,13 +18,29 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: view,
+            view: view(),
             mode: .dark,
             navBarHidden: true
         )
     }
 
-    private var view: some View {
+    func test_loadInNavigationController_showError_light_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            view: view(showError: true),
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_showError_dark_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            view: view(showError: true),
+            mode: .dark,
+            navBarHidden: true
+        )
+    }
+
+    private func view(showError: Bool = false) -> some View {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"
         let createdAt = "\(Date())"
@@ -59,7 +75,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             conversationId: conversationId,
             createdAt: createdAt,
             id: "78910",
-            message: "This is the pending question"
+            message: showError ? "steve@apple.com" : "This is the pending question"
         )
 
         let history = History(

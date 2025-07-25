@@ -75,6 +75,54 @@ struct ChatViewModelTests {
     }
 
     @Test
+    func askQuestionWithPII_generatesErrorText() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedQuestionResult = .failure(ChatError.pageNotFound)
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
+        )
+        sut.latestQuestion = "My e-mail is steve@apple.com"
+
+        #expect(sut.errorText == nil)
+        sut.askQuestion()
+
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == nil)
+        #expect(sut.errorText != nil)
+        #expect(!sut.latestQuestion.isEmpty)
+    }
+
+    @Test
+    func askQuestion_validationError_generatesErrorText() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedQuestionResult = .failure(ChatError.validationError)
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
+        )
+        sut.latestQuestion = "This is the question"
+
+        #expect(sut.errorText == nil)
+        sut.askQuestion()
+
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == nil)
+        #expect(sut.errorText != nil)
+        #expect(!sut.latestQuestion.isEmpty)
+    }
+
+    @Test
     func loadHistory_success_createsCorrectCellModels() throws {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"

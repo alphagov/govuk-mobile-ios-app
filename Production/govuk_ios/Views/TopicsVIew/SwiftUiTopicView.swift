@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TopicCardViewSwiftUI: View {
+struct TopicCardSwiftUI: View {
     let model: Topic
     @ScaledMetric var scale: CGFloat = 1
     var body: some View {
@@ -22,18 +22,5 @@ struct TopicCardViewSwiftUI: View {
                 }.padding([.bottom], 10)
             }.padding()
         }
-
-
-        let image = UIImage(systemName: "chevron.forward")
-        let config = UIImage.SymbolConfiguration(pointSize: 12)
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 16)
-//                .stroke(.red, lineWidth: 1)
-//        )
-//        .background {
-//            Color.teal.opacity(0.3)
-//                .ignoresSafeArea()
-//        }.cornerRadius(8)
-//            .stroke
     }
 }

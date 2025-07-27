@@ -29,10 +29,12 @@ struct TopicsSwiftUIView: View {
                                 borderWidth: 1
                             ).padding(2)
                             .onTapGesture {
+                                viewModel.topicAction(topic)
                             }
                     }
                 }
             }
-        }.padding()
+        }
+        .padding()
     }
 }

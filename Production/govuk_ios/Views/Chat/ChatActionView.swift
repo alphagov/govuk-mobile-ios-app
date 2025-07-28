@@ -4,6 +4,7 @@ import SwiftUI
 struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
+    @AccessibilityFocusState private var errorFocused: Bool
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
@@ -21,7 +22,8 @@ struct ChatActionView: View {
     var body: some View {
         GeometryReader { geometry in
             let maxTextEditorFrameHeight = geometry.size.height - 32
-            VStack(spacing: 0) {
+            errorFocused = shouldShowError
+            return VStack(spacing: 0) {
                 Spacer()
                 errorView
                     .opacity(shouldShowError ? 1.0 : 0.0)
@@ -29,6 +31,7 @@ struct ChatActionView: View {
                         .easeInOut(duration: animationDuration),
                         value: shouldShowError
                     )
+                    .accessibilityFocused($errorFocused)
                 chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
             }
             .frame(maxHeight: geometry.size.height, alignment: .bottom)

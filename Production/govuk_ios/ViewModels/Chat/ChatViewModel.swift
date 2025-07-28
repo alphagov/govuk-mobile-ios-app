@@ -93,6 +93,7 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let answers):
+                self?.appendIntroMessage()
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
                 if error == .pageNotFound {
@@ -115,6 +116,23 @@ class ChatViewModel: ObservableObject {
         requestInFlight
     }
 
+    private func appendIntroMessage() {
+        let firstIntroMessage = Intro(
+            title: String.chat.localized("answerTitle"),
+            message: String.chat.localized("introFirstMessage")
+        )
+        let secondIntroMessage = Intro(
+            title: nil,
+            message: String.chat.localized("introSecondMessage")
+        )
+        let thirdIntroMessage = Intro(
+            title: nil,
+            message: String.chat.localized("introThirdMessage")
+        )
+        cellModels.append(ChatCellViewModel(intro: firstIntroMessage))
+        cellModels.append(ChatCellViewModel(intro: secondIntroMessage))
+        cellModels.append(ChatCellViewModel(intro: thirdIntroMessage))
+    }
 
     private func handleHistoryResponse(_ history: History) {
         cellModels.removeAll()

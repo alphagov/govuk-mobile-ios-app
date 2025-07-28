@@ -20,6 +20,8 @@ struct ChatCellView: View {
                 pendingAnswerView
             case .answer:
                 answerView
+            case .intro:
+                introView
             }
         }
         .background(viewModel.backgroundColor)
@@ -53,23 +55,37 @@ struct ChatCellView: View {
         }
     }
 
+    private var introView: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if let title = viewModel.title {
+                Text(title)
+                    .font(Font.govUK.bodySemibold)
+            }
+            Text(viewModel.message)
+                .font(Font.govUK.body)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+    }
+
     private var answerView: some View {
-        VStack(alignment: .leading) {
-            Text(String.chat.localized("answerTitle"))
-                .padding()
-                .font(Font.govUK.bodySemibold)
+        VStack(alignment: .leading, spacing: 8) {
+            if let title = viewModel.title {
+                Text(title)
+                    .font(Font.govUK.bodySemibold)
+            }
             HStack(alignment: .firstTextBaseline) {
                 markdownView
             }
-            .padding(.horizontal)
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.chatDivider))
-                .padding(.horizontal)
+                .padding(.vertical, 8)
             warningView
             if !viewModel.sources.isEmpty {
                 sourceView
             }
         }
+        .padding()
     }
 
     private var sourceView: some View {
@@ -81,8 +97,8 @@ struct ChatCellView: View {
                     .foregroundColor(Color(UIColor.govUK.text.primary))
             }
         }
-        .padding()
         .disclosureGroupStyle(ChatDisclosure())
+        .padding(.top, 8)
     }
 
     private var warningView: some View {
@@ -94,7 +110,6 @@ struct ChatCellView: View {
             Text(String.chat.localized("mistakesTitle"))
                 .font(Font.govUK.bodySemibold)
         }
-        .padding()
     }
 
     private var markdownView: some View {

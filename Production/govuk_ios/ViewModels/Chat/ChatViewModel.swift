@@ -116,6 +116,10 @@ class ChatViewModel: ObservableObject {
         requestInFlight
     }
 
+    var currentConverationExists: Bool {
+        chatService.currentConversationId != nil
+    }
+
     private func appendIntroMessage() {
         let firstIntroMessage = Intro(
             title: String.chat.localized("answerTitle"),
@@ -161,5 +165,6 @@ class ChatViewModel: ObservableObject {
     func newChat() {
         cellModels.removeAll()
         chatService.clearHistory()
+        appendIntroMessage()
     }
 }

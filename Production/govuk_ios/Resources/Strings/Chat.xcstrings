@@ -144,6 +144,17 @@
         }
       }
     },
+    "messagesAvailableTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Messages will be available for 90 days"
+          }
+        }
+      }
+    },
     "mistakesTitle" : {
       "extractionState" : "manual",
       "localizations" : {

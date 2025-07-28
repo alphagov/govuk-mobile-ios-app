@@ -5,6 +5,7 @@ struct ChatView: View {
     @Namespace var bottomID
     @FocusState private var textAreaFocused: Bool
     @State var showClearChatAlert: Bool = false
+    @State private var appearedIntroCells: [String] = []
 
     init(viewModel: ChatViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -38,14 +39,31 @@ struct ChatView: View {
 
     private var chatCellsView: some View {
         ForEach(viewModel.cellModels, id: \.id) { cellModel in
-            HStack {
-                if !cellModel.isAnswer {
-                    Spacer(minLength: cellModel.questionWidth)
-                }
-                ChatCellView(viewModel: cellModel)
-                    .padding(.vertical, 4)
-            }
-        }
+             HStack {
+                 if !cellModel.isAnswer {
+                     Spacer(minLength: cellModel.questionWidth)
+                 }
+                 ChatCellView(viewModel: cellModel)
+                     .opacity(
+                        appearedIntroCells.contains(cellModel.id) ||
+                        viewModel.currentConverationExists ? 1 : 0
+                     )
+                     .animation(.easeIn(duration: 0.5), value: appearedIntroCells)
+                     .onAppear {
+                         if !viewModel.currentConverationExists {
+                             let index = viewModel.cellModels.firstIndex { $0.id == cellModel.id } ?? 0
+                             DispatchQueue.main.asyncAfter(
+                                deadline: .now() + Double(index) * 0.7
+                             ) {
+                                 withAnimation {
+                                     appearedIntroCells.insert(cellModel.id, at: index)
+                                 }
+                             }
+                         }
+                     }
+                     .padding(.vertical, 4)
+             }
+         }
     }
 
     private var chatCellsScrollViewReaderView: some View {
@@ -59,7 +77,11 @@ struct ChatView: View {
         ScrollView {
             Rectangle()
                 .fill(Color.clear)
-                .frame(height: 4)
+                .frame(height: 8)
+            Text(String.chat.localized("messagesAvailableTitle"))
+                .font(.subheadline)
+                .foregroundStyle(Color(UIColor.govUK.text.secondary))
+                .multilineTextAlignment(.center)
             chatCellsView
             Rectangle()
                 .fill(Color.clear)

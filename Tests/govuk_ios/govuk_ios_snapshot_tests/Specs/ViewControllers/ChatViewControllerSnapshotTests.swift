@@ -96,7 +96,8 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         )
 
         viewModel.cellModels.append(.gettingAnswer)
-
-        return ChatView(viewModel: viewModel)
+        let view = ChatView(viewModel: viewModel)
+            .environment(\.isTesting, true)
+        return view
     }
 }

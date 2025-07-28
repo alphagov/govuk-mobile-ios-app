@@ -23,9 +23,12 @@ struct ChatActionView: View {
             let maxTextEditorFrameHeight = geometry.size.height - 32
             VStack(spacing: 0) {
                 Spacer()
-                if shouldShowError {
-                    errorView
-                }
+                errorView
+                    .opacity(shouldShowError ? 1.0 : 0.0)
+                    .conditionalAnimation(
+                        .easeInOut(duration: animationDuration),
+                        value: shouldShowError
+                    )
                 chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
             }
             .frame(maxHeight: geometry.size.height, alignment: .bottom)

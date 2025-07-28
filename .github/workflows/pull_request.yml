@@ -10,10 +10,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  env: 
-    SONAR_TOKENZ:
   get-secrets:
     runs-on: ubuntu-latest
+    outputs:
+      sonar-token: ${{ steps.set-vars.outputs.SONAR_TOKENZ }}
     steps:
       - name: Get Secrets
         uses: bitwarden/sm-action@14f92f1d294ae3c2b6a3845d389cd2c318b0dfd8 # pin@v2.2.0
@@ -22,14 +22,17 @@ jobs:
           base_url: https://vault.bitwarden.eu
           secrets: |
             74bca0cb-ffa4-4459-bb32-b32500f698b8 > SONAR_TOKENZ
-
+      - name: Set vars
+        id: set-vars
+        run: |
+          echo "SONAR_TOKENZ=$SONAR_TOKENZ" >> $GITHUB_OUTPUT
   lint:
     uses: ./.github/workflows/lint.yml
   unit-test:
     uses: ./.github/workflows/unit_test.yml
-    needs: get-secrets    
+    needs: get-secrets
   sonar-scan:
     uses: ./.github/workflows/sonar_scan_pr.yml
     needs: unit-test
     secrets:
-      SONAR_TOKEN: ${{ env.SONAR_TOKENZ }}
+      SONAR_TOKEN: ${{ needs.get-secrets.outputs.sonar-token }}

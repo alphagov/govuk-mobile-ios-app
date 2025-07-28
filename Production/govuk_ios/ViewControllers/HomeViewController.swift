@@ -79,7 +79,7 @@ class HomeViewController: BaseViewController {
 //            viewModel: viewModel
 //        )
         let viewModel = viewModel.topicWidgetViewModel
-        let view = TopicsSwiftUIView(
+        let view = TopicCardSwiftUi(
             viewModel: viewModel
         )
         let controller = UIHostingController(

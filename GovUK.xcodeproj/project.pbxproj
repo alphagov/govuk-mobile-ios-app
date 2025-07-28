@@ -97,8 +97,8 @@
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */; };
-		4EAFE62D2E2FAB0600DC253F /* TopicsSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAFE62C2E2FAB0600DC253F /* TopicsSwiftUIView.swift */; };
-		4EAFE62F2E2FC04100DC253F /* SwiftUiTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAFE62E2E2FC04100DC253F /* SwiftUiTopicView.swift */; };
+		4EAFE62D2E2FAB0600DC253F /* TopicsSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAFE62C2E2FAB0600DC253F /* TopicsSwiftUI.swift */; };
+		4EAFE62F2E2FC04100DC253F /* TopicCardSwiftUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAFE62E2E2FC04100DC253F /* TopicCardSwiftUi.swift */; };
 		4EB7D8512DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */; };
 		4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */; };
 		4EBCA3292DAC546A0063A723 /* LocalAuthorityServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */; };
@@ -492,8 +492,8 @@
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityCardModel.swift; sourceTree = "<group>"; };
-		4EAFE62C2E2FAB0600DC253F /* TopicsSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsSwiftUIView.swift; sourceTree = "<group>"; };
-		4EAFE62E2E2FC04100DC253F /* SwiftUiTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUiTopicView.swift; sourceTree = "<group>"; };
+		4EAFE62C2E2FAB0600DC253F /* TopicsSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsSwiftUI.swift; sourceTree = "<group>"; };
+		4EAFE62E2E2FC04100DC253F /* TopicCardSwiftUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardSwiftUi.swift; sourceTree = "<group>"; };
 		4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceCoordinator.swift; sourceTree = "<group>"; };
 		4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityService.swift; sourceTree = "<group>"; };
 		4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceClient.swift; sourceTree = "<group>"; };
@@ -1078,8 +1078,8 @@
 		4EAFE62B2E2FAAE300DC253F /* TopicsVIew */ = {
 			isa = PBXGroup;
 			children = (
-				4EAFE62C2E2FAB0600DC253F /* TopicsSwiftUIView.swift */,
-				4EAFE62E2E2FC04100DC253F /* SwiftUiTopicView.swift */,
+				4EAFE62C2E2FAB0600DC253F /* TopicsSwiftUI.swift */,
+				4EAFE62E2E2FC04100DC253F /* TopicCardSwiftUi.swift */,
 			);
 			path = TopicsVIew;
 			sourceTree = "<group>";
@@ -2200,14 +2200,14 @@
 				16FC6F0D2DDFE300007879E7 /* GovUIWindow.swift in Sources */,
 				4E9F5D032DB78DBA0063FA78 /* LocalAuthorityItem.swift in Sources */,
 				D08A9A862DB92F79002E9C78 /* SignOutConfirmationViewModel.swift in Sources */,
-				4EAFE62F2E2FC04100DC253F /* SwiftUiTopicView.swift in Sources */,
+				4EAFE62F2E2FC04100DC253F /* TopicCardSwiftUi.swift in Sources */,
 				D0EB04842D37F34200B310D8 /* GOV.xcdatamodeld in Sources */,
 				D04191782CA57A6F0034722A /* TopicsService.swift in Sources */,
 				3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */,
 				4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */,
 				D0E85A862DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift in Sources */,
 				5DFB488C2DE9F7F600B41CDA /* NotificationConsentCoordinator.swift in Sources */,
-				4EAFE62D2E2FAB0600DC253F /* TopicsSwiftUIView.swift in Sources */,
+				4EAFE62D2E2FAB0600DC253F /* TopicsSwiftUI.swift in Sources */,
 				5DFB488D2DE9F7F600B41CDA /* AppForcedUpdateCoordinator.swift in Sources */,
 				5DFB488E2DE9F7F600B41CDA /* ReLaunchCoordinator.swift in Sources */,
 				5DFB488F2DE9F7F600B41CDA /* PeriAuthCoordinator.swift in Sources */,

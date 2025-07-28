@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TopicsSwiftUIView: View {
+struct TopicCardSwiftUi: View {
     let viewModel: TopicsWidgetViewModel
     private let columns = [
         GridItem(.flexible(), spacing: 2, alignment: .leading),
@@ -10,12 +10,12 @@ struct TopicsSwiftUIView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Topics")
+                Text(viewModel.widgetTitle)
                 Spacer()
                 Button {
-                    print("tapped")
+                    viewModel.editAction()
                 } label: {
-                    Text("Edit")
+                    Text(String.common.localized("editButtonTitle"))
                 }
             }
             ScrollView {

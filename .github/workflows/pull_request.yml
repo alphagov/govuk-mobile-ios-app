@@ -10,6 +10,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  env: 
+    SONAR_TOKENZ:
   get-secrets:
     runs-on: ubuntu-latest
     steps:
@@ -30,4 +32,4 @@ jobs:
     uses: ./.github/workflows/sonar_scan_pr.yml
     needs: unit-test
     secrets:
-      SONAR_TOKEN: $SONAR_TOKENZ
+      SONAR_TOKEN: ${{ env.SONAR_TOKENZ }}

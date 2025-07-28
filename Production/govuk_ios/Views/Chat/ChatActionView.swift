@@ -6,12 +6,15 @@ struct ChatActionView: View {
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
+    @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
 
     init(viewModel: ChatViewModel,
-         textAreaFocused: FocusState<Bool>.Binding) {
+         textAreaFocused: FocusState<Bool>.Binding,
+         showClearChatAlert: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _textAreaFocused = textAreaFocused
+        _showClearChatAlert = showClearChatAlert
     }
 
     var body: some View {
@@ -25,6 +28,21 @@ struct ChatActionView: View {
         }
         .onPreferenceChange(CharacterCountHeightKey.self) { height in
             self.charactersCountHeight = height
+        }
+        .alert(isPresented: $showClearChatAlert) {
+            Alert(
+                title: Text(String.chat.localized("clearAlertTitle")),
+                message: Text(String.chat.localized("clearAlertBodyText")),
+                primaryButton: .destructive(
+                    Text(String.chat.localized("clearAlertConfirmTitle")),
+                    action: {
+                        viewModel.newChat()
+                    }
+                ),
+                secondaryButton: .cancel(
+                    Text(String.chat.localized("clearAlertDenyTitle"))
+                )
+            )
         }
     }
 
@@ -50,9 +68,13 @@ struct ChatActionView: View {
 
     private var menuView: some View {
         return Menu {
-            Button(role: .destructive, action: clearChat) {
-                Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
-            }
+            Button(
+                role: .destructive,
+                action: { showClearChatAlert = true },
+                label: {
+                    Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
+                }
+            )
             Button(action: showAbout) {
                 Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
             }
@@ -245,10 +267,6 @@ struct ChatActionView: View {
 
     private func showAbout() {
         print("About tapped")
-    }
-
-    private func clearChat() {
-        viewModel.newChat()
     }
 }
 

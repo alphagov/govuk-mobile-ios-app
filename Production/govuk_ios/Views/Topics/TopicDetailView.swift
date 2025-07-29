@@ -74,8 +74,8 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 Spacer()
             }
             .padding(.leading, 16)
+            .padding(.bottom, viewModel.description == nil ? 8 : 0)
             .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
-            .padding(.bottom, viewModel.description == nil ? 12 : 0)
             if let description = viewModel.description {
                 descriptionView(description: description)
             }
@@ -96,13 +96,14 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     private func descriptionView(description: String) -> some View {
         HStack {
             Text(description)
-                .font(.govUK.body)
+                .font(.govUK.title3)
                 .foregroundColor(Color(UIColor.govUK.text.header))
                 .multilineTextAlignment(.leading)
             Spacer()
         }
         .padding(.horizontal, 18)
-        .padding(.bottom, 8)
+        .padding(.top, 8)
+        .padding(.bottom, 16)
         .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
     }
 }

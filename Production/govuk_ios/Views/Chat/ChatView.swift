@@ -46,11 +46,11 @@ struct ChatView: View {
                  ChatCellView(viewModel: cellModel)
                      .opacity(
                         appearedIntroCells.contains(cellModel.id) ||
-                        viewModel.currentConverationExists ? 1 : 0
+                        viewModel.currentConversationExists ? 1 : 0
                      )
                      .animation(.easeIn(duration: 0.5), value: appearedIntroCells)
                      .onAppear {
-                         if !viewModel.currentConverationExists {
+                         if !viewModel.currentConversationExists {
                              let index = viewModel.cellModels.firstIndex {
                                  $0.id == cellModel.id
                              } ?? 0

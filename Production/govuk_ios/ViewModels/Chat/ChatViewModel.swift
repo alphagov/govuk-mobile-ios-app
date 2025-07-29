@@ -116,7 +116,7 @@ class ChatViewModel: ObservableObject {
         requestInFlight
     }
 
-    var currentConverationExists: Bool {
+    var currentConversationExists: Bool {
         chatService.currentConversationId != nil
     }
 

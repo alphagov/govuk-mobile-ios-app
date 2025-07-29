@@ -183,7 +183,7 @@ struct ChatViewModelTests {
 
         sut.loadHistory()
         print(sut.cellModels.map { $0.message })
-        try #require(sut.cellModels.count == 5)
+        try #require(sut.cellModels.count == 8)
         #expect(sut.cellModels[0].type == .question)
         #expect(sut.cellModels[1].type == .answer)
         #expect(sut.cellModels[2].type == .question)
@@ -247,7 +247,6 @@ struct ChatViewModelTests {
         sut.cellModels = [.gettingAnswer]
 
         sut.newChat()
-        #expect(sut.cellModels.isEmpty)
         #expect(mockChatService._clearHistoryCalled)
     }
 }

@@ -78,6 +78,17 @@
         }
       }
     },
+    "genericErrorBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There's a problem with GOV.UK Chat. \n\nTry again later or return to the [GOV.UK app homepage](https://www.gov.uk) if you need information now."
+          }
+        }
+      }
+    },
     "gettingAnswerMessage" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -118,6 +129,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "More options"
+          }
+        }
+      }
+    },
+    "pageNotFoundButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a new chat"
+          }
+        }
+      }
+    },
+    "pageNotFoundErrorBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your previous conversation is no longer available.\n\nTo continue using GOV.UK Chat, you need to start a new chat."
           }
         }
       }
@@ -219,6 +252,17 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "validationErrorText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal data has been detected in your question. Please remove it and try again."
           }
         }
       }

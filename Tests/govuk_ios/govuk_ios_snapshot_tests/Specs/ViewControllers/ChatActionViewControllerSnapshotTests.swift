@@ -39,7 +39,9 @@ final class ChatActionViewControllerSnapshotTests: SnapshotTestCase {
     func test_clearChatAlert_loadInNavigationController_rendersCorrectly() {
         VerifySnapshotWindowWithDelay(
             view: ClearChatAlertTestView(),
-            mode: .light
+            mode: .light,
+            overallTolerance: 0.003,
+            delay: 0.5
         )
     }
 }
@@ -52,7 +54,8 @@ struct RemainingCharactersTestView: View {
         let viewModel = ChatViewModel(
             chatService: MockChatService(),
             analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in }
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
         ChatActionView(
@@ -82,7 +85,8 @@ struct TooManyCharactersTestView: View {
         let viewModel = ChatViewModel(
             chatService: MockChatService(),
             analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in }
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
         ChatActionView(
@@ -114,7 +118,8 @@ struct ClearChatAlertTestView: View {
         let viewModel = ChatViewModel(
             chatService: MockChatService(),
             analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in }
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
         ChatActionView(

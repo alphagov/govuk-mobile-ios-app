@@ -84,6 +84,7 @@ class ChatViewModel: ObservableObject {
     func loadHistory() {
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
+            appendIntroMessages()
             return
         }
         requestInFlight = true
@@ -93,7 +94,6 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let answers):
-                self?.appendIntroMessage()
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
                 if error == .pageNotFound {
@@ -120,7 +120,7 @@ class ChatViewModel: ObservableObject {
         chatService.currentConversationId != nil
     }
 
-    private func appendIntroMessage() {
+    private func appendIntroMessages() {
         let firstIntroMessage = Intro(
             title: String.chat.localized("answerTitle"),
             message: String.chat.localized("introFirstMessage")
@@ -140,6 +140,7 @@ class ChatViewModel: ObservableObject {
 
     private func handleHistoryResponse(_ history: History) {
         cellModels.removeAll()
+        appendIntroMessages()
         let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
@@ -165,6 +166,6 @@ class ChatViewModel: ObservableObject {
     func newChat() {
         cellModels.removeAll()
         chatService.clearHistory()
-        appendIntroMessage()
+        appendIntroMessages()
     }
 }

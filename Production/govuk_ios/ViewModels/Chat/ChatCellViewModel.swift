@@ -6,7 +6,6 @@ enum ChatCellType {
     case question
     case pendingAnswer
     case answer
-    case error
 }
 
 struct ChatCellViewModel {
@@ -47,13 +46,6 @@ struct ChatCellViewModel {
         self.init(message: answeredQuestion.message,
                   id: answeredQuestion.id,
                   type: .question,
-                  sources: answeredQuestion.answer.sources ?? [])
-    }
-
-    init(error: Error) {
-        self.init(message: error.localizedDescription,
-                  id: UUID().uuidString,
-                  type: .error,
                   sources: [])
     }
 
@@ -69,8 +61,6 @@ struct ChatCellViewModel {
             Color(UIColor.govUK.fills.surfaceBackground)
         case .answer:
             Color(UIColor.govUK.fills.surfaceChatBlue)
-        case .error:
-            Color(UIColor.govUK.fills.surfaceChatBlue)
         }
     }
 
@@ -81,8 +71,6 @@ struct ChatCellViewModel {
         case .pendingAnswer:
             Color.clear
         case .answer:
-            Color(UIColor.govUK.strokes.chatDivider)
-        case .error:
             Color(UIColor.govUK.strokes.chatDivider)
         }
     }

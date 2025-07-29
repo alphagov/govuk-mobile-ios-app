@@ -7,43 +7,67 @@ class ChatViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
+    private let handleError: (ChatError) -> Void
+    private var requestInFlight: Bool = false
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
     @Published var scrollToBottom: Bool = false
     @Published var answeredQuestionID: String = ""
+    @Published var errorText: String?
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
-         openURLAction: @escaping (URL) -> Void) {
+         openURLAction: @escaping (URL) -> Void,
+         handleError: @escaping (ChatError) -> Void) {
         self.chatService = chatService
         self.analyticsService = analyticsService
         self.openURLAction = openURLAction
+        self.handleError = handleError
     }
 
-    func askQuestion() {
+    func askQuestion(_ question: String? = nil,
+                     completion: ((Bool) -> Void)? = nil) {
+        let localQuestion = question ?? latestQuestion
+        guard !containsPII(localQuestion) else {
+            errorText = String.chat.localized("validationErrorText")
+            completion?(false)
+            return
+        }
+        errorText = nil
         cellModels.append(.loadingQuestion)
         scrollToBottom = true
-        chatService.askQuestion(latestQuestion) { [weak self] result in
+        requestInFlight = true
+        chatService.askQuestion(localQuestion) { [weak self] result in
             self?.cellModels.removeLast()
+            self?.requestInFlight = false
             switch result {
-            case .success(let question):
-                let cellModel = ChatCellViewModel(question: question)
+            case .success(let pendingQuestion):
+                let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
-                self?.answeredQuestionID = question.id
-                self?.pollForAnswer(question)
+                self?.answeredQuestionID = pendingQuestion.id
+                self?.latestQuestion = ""
+                self?.pollForAnswer(pendingQuestion)
+                completion?(true)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                self?.requestInFlight = false
+                if error == .validationError {
+                    self?.errorText = String.chat.localized("validationErrorText")
+                } else {
+                    self?.handleError(error)
+                    self?.latestQuestion = ""
+                }
+                completion?(false)
             }
         }
-        latestQuestion = ""
     }
 
-    private func pollForAnswer(_ question: PendingQuestion) {
+    func pollForAnswer(_ question: PendingQuestion) {
+        requestInFlight = true
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
             self?.cellModels.removeLast()
+            self?.requestInFlight = false
             switch result {
             case .success(let answer):
                 let cellModel = ChatCellViewModel(
@@ -52,23 +76,30 @@ class ChatViewModel: ObservableObject {
                 )
                 self?.cellModels.append(cellModel)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                self?.handleError(error)
             }
         }
     }
 
     func loadHistory() {
-        cellModels.removeAll()
+        guard let conversationId = chatService.currentConversationId else {
+            cellModels.removeAll()
+            return
+        }
+        requestInFlight = true
         chatService.chatHistory(
-            conversationId: chatService.currentConversationId
+            conversationId: conversationId
         ) { [weak self] result in
+            self?.requestInFlight = false
             switch result {
             case .success(let answers):
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
-                let cellModel = ChatCellViewModel(error: error)
-                self?.cellModels.append(cellModel)
+                if error == .pageNotFound {
+                    self?.chatService.clearHistory()
+                } else {
+                    self?.handleError(error)
+                }
             }
             self?.scrollToBottom = true
         }
@@ -80,10 +111,14 @@ class ChatViewModel: ObservableObject {
 
     var shouldDisableSend: Bool {
         latestQuestion.isEmpty ||
-        (latestQuestion.count > maxCharacters)
+        (latestQuestion.count > maxCharacters) ||
+        requestInFlight
     }
 
-    private func handleHistoryResponse(_ answers: [AnsweredQuestion]) {
+
+    private func handleHistoryResponse(_ history: History) {
+        cellModels.removeAll()
+        let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
             cellModels.append(question)
@@ -93,6 +128,15 @@ class ChatViewModel: ObservableObject {
             )
             cellModels.append(answer)
         }
+        if let pendingQuestion = history.pendingQuestion {
+            let question = ChatCellViewModel(question: pendingQuestion)
+            cellModels.append(question)
+            pollForAnswer(pendingQuestion)
+        }
+    }
+
+    private func containsPII(_ input: String) -> Bool {
+        RegexValidator.pii.validate(input: input)
     }
 
     @objc

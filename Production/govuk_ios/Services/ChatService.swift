@@ -5,8 +5,8 @@ protocol ChatServiceInterface {
                      completion: @escaping (ChatQuestionResult) -> Void)
     func pollForAnswer(_ pendingQuestion: PendingQuestion,
                        completion: @escaping (ChatAnswerResult) -> Void)
-    func chatHistory(conversationId: String?,
-                     completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void)
+    func chatHistory(conversationId: String,
+                     completion: @escaping (ChatHistoryResult) -> Void)
     func clearHistory()
 
     var currentConversationId: String? { get }
@@ -80,18 +80,15 @@ final class ChatService: ChatServiceInterface {
         )
     }
 
-    func chatHistory(conversationId: String?,
-                     completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void) {
-        guard let conversationId else {
-            return completion(.success([]))
-        }
+    func chatHistory(conversationId: String,
+                     completion: @escaping (ChatHistoryResult) -> Void) {
         setConversationId(conversationId)
         serviceClient.fetchHistory(
             conversationId: conversationId,
             completion: { result in
                 switch result {
                 case .success(let history):
-                    completion(.success(history.answeredQuestions))
+                    completion(.success(history))
                 case .failure(let error):
                     completion(.failure(error))
                 }

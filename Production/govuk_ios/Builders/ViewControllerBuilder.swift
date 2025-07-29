@@ -415,17 +415,35 @@ class ViewControllerBuilder {
 
     func chat(analyticsService: AnalyticsServiceInterface,
               chatService: ChatServiceInterface,
-              openURLAction: @escaping (URL) -> Void) -> UIViewController {
+              openURLAction: @escaping (URL) -> Void,
+              handleError: @escaping (ChatError) -> Void) -> UIViewController {
         let viewModel = ChatViewModel(
             chatService: chatService,
             analyticsService: analyticsService,
-            openURLAction: openURLAction
+            openURLAction: openURLAction,
+            handleError: handleError
         )
 
         let viewController = HostingViewController(
             rootView: ChatView(
                 viewModel: viewModel
             ),
+            navigationBarHidden: true
+        )
+        return viewController
+    }
+
+    func chatError(error: ChatError,
+                   action: @escaping () -> Void,
+                   openURLAction: ((URL) -> Void)?) -> UIViewController {
+        let viewModel = ChatErrorViewModel(
+            error: error,
+            action: action,
+            openURLAction: openURLAction
+        )
+        let view = InfoView(viewModel: viewModel)
+        let viewController = HostingViewController(
+            rootView: view,
             navigationBarHidden: true
         )
         return viewController

@@ -53,6 +53,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
 
     func VerifySnapshotWindowWithDelay(view: some View,
                                        mode: UIUserInterfaceStyle,
+                                       overallTolerance: CGFloat = 0.001,
                                        file: StaticString = #file,
                                        line: UInt = #line,
                                        delay: Double = 0.3) {
@@ -66,7 +67,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.VerifySnapshot(
                 window,
-                overallTolerance: 0.001,
+                overallTolerance: overallTolerance,
                 file: file,
                 line: line
             )

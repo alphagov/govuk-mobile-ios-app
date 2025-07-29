@@ -10,7 +10,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: view,
+            view: view(),
             mode: .light,
             navBarHidden: true
         )
@@ -18,13 +18,29 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: view,
+            view: view(),
             mode: .dark,
             navBarHidden: true
         )
     }
 
-    private var view: some View {
+    func test_loadInNavigationController_showError_light_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            view: view(showError: true),
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_showError_dark_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            view: view(showError: true),
+            mode: .dark,
+            navBarHidden: true
+        )
+    }
+
+    private func view(showError: Bool = false) -> some View {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"
         let createdAt = "\(Date())"
@@ -54,16 +70,38 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             message: "This is the question"
         )
 
-        mockChatService._stubbedHistoryResult = .success([answeredQuestion])
+        let pendingQuestion = PendingQuestion(
+            answerUrl: "https://www.example.com",
+            conversationId: conversationId,
+            createdAt: createdAt,
+            id: "78910",
+            message: "This is the pending question"
+        )
+
+        let history = History(
+            pendingQuestion: pendingQuestion,
+            answeredQuestions: [answeredQuestion],
+            createdAt: createdAt,
+            id: "4456")
+
+        mockChatService._stubbedConversationId = conversationId
+        mockChatService._stubbedHistoryResult = .success(history)
+        mockChatService._stubbedQuestionResult = .success(pendingQuestion)
 
         let viewModel = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in }
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
+        if showError {
+            viewModel.errorText = String.chat.localized("validationErrorText")
+        }
+        
         viewModel.cellModels.append(.gettingAnswer)
-
-        return ChatView(viewModel: viewModel)
+        let view = ChatView(viewModel: viewModel)
+            .environment(\.isTesting, true)
+        return view
     }
 }

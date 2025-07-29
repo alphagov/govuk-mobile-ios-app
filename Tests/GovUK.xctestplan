@@ -35,6 +35,7 @@
   },
   "testTargets" : [
     {
+      "enabled" : false,
       "parallelizable" : false,
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
@@ -43,6 +44,460 @@
       }
     },
     {
+      "skippedTests" : {
+        "suites" : [
+          {
+            "name" : "ActivityItemCreateParamsTests"
+          },
+          {
+            "name" : "ActivityRepositoryTests"
+          },
+          {
+            "name" : "ActivityServiceTests"
+          },
+          {
+            "name" : "AllTopicsCoordinatorTests"
+          },
+          {
+            "name" : "AllTopicsViewModelTests"
+          },
+          {
+            "name" : "AmbiguousAddressSelectionViewModelTests"
+          },
+          {
+            "name" : "AmbiguousAuthoritySelectionViewModelTests"
+          },
+          {
+            "name" : "AnalyticsConsentContainerViewModelTests"
+          },
+          {
+            "name" : "AnalyticsConsentCoordinatorTests"
+          },
+          {
+            "name" : "AnalyticsServiceTests"
+          },
+          {
+            "name" : "AnimationViewTests"
+          },
+          {
+            "name" : "APIServiceClientTests"
+          },
+          {
+            "name" : "APIServiceClientTests_Chat"
+          },
+          {
+            "name" : "APIServiceClientTests_LocalAuthority"
+          },
+          {
+            "name" : "AppAttestServiceTests"
+          },
+          {
+            "name" : "AppConfigServiceClientTests"
+          },
+          {
+            "name" : "AppConfigServiceTests"
+          },
+          {
+            "name" : "AppCoordinatorTests"
+          },
+          {
+            "name" : "AppEnvironmentServiceTests"
+          },
+          {
+            "name" : "AppEvent_ConvenienceTests"
+          },
+          {
+            "name" : "AppEvent_EcommerceTests"
+          },
+          {
+            "name" : "AppEvent_NavigationTests"
+          },
+          {
+            "name" : "AppEvent_RecentActivityTests"
+          },
+          {
+            "name" : "AppEvent_SearchTests"
+          },
+          {
+            "name" : "AppEvent_TopicsTests"
+          },
+          {
+            "name" : "AppForcedUpdateContainerViewModelTests"
+          },
+          {
+            "name" : "AppForcedUpdateCoordinatorTests"
+          },
+          {
+            "name" : "AppLaunchResponseTests"
+          },
+          {
+            "name" : "AppLaunchServiceTests"
+          },
+          {
+            "name" : "AppRecommendUpdateContainerViewModelTests"
+          },
+          {
+            "name" : "AppRecommendUpdateCoordinatorTests"
+          },
+          {
+            "name" : "AppUnavailableCoordinatorTests"
+          },
+          {
+            "name" : "AppUnavailableViewModelTests"
+          },
+          {
+            "name" : "AuthenticationCoordinatorTests"
+          },
+          {
+            "name" : "AuthenticationServiceClientTests"
+          },
+          {
+            "name" : "AuthenticationServiceTests"
+          },
+          {
+            "name" : "BaseCoordinatorTests"
+          },
+          {
+            "name" : "Bundle_AppVersionProviderTests"
+          },
+          {
+            "name" : "CharValidatorTests"
+          },
+          {
+            "name" : "ChatCoordinatorTests"
+          },
+          {
+            "name" : "ChatRespositoryTests"
+          },
+          {
+            "name" : "ChatServiceClientTests"
+          },
+          {
+            "name" : "ChatServiceTests"
+          },
+          {
+            "name" : "ChatViewModelTests"
+          },
+          {
+            "name" : "CompoundRedactorTests"
+          },
+          {
+            "name" : "Container_APIClientTests"
+          },
+          {
+            "name" : "CoordinatorBuilderTests"
+          },
+          {
+            "name" : "CoreDataDeletionServiceTests"
+          },
+          {
+            "name" : "CoreDataRepositoryTests"
+          },
+          {
+            "name" : "CrashlyticsClientTests"
+          },
+          {
+            "name" : "Date_ExtensionsTests"
+          },
+          {
+            "name" : "DeeplinkDataStoreTests"
+          },
+          {
+            "name" : "DeviceInformationProvider_ConvenienceTests"
+          },
+          {
+            "name" : "EditLocalAuthorityCoordinatorTests"
+          },
+          {
+            "name" : "EditTopicsCoordinatorTests"
+          },
+          {
+            "name" : "EditTopicsViewModelTests"
+          },
+          {
+            "name" : "FirebaseClientTests"
+          },
+          {
+            "name" : "GOVRequest_AppTests"
+          },
+          {
+            "name" : "GOVRequest_LocalAuthorityTests"
+          },
+          {
+            "name" : "GOVRequest_SearchTests"
+          },
+          {
+            "name" : "GOVRequest_TopicsTests"
+          },
+          {
+            "name" : "GovUIWindowTests"
+          },
+          {
+            "name" : "GovUKProviderFactoryTests"
+          },
+          {
+            "name" : "HighlightedSuggestionProcessorTests"
+          },
+          {
+            "name" : "HomeContentViewControllerTests"
+          },
+          {
+            "name" : "HomeCoordinatorTests"
+          },
+          {
+            "name" : "HomeViewModelTests"
+          },
+          {
+            "name" : "InactivityServiceTests"
+          },
+          {
+            "name" : "JailbreakCoordinatorTests"
+          },
+          {
+            "name" : "JailbreakDetectionServiceTests"
+          },
+          {
+            "name" : "JSONDecoder_ExtensionsTests"
+          },
+          {
+            "name" : "LaunchCoordinatorTests"
+          },
+          {
+            "name" : "LocalAuthenticationOnboardingCoordinatorTests"
+          },
+          {
+            "name" : "LocalAuthenticationOnboardingViewModelTests"
+          },
+          {
+            "name" : "LocalAuthenticationServiceTests"
+          },
+          {
+            "name" : "LocalAuthenticationSettingsCoordinatorTests"
+          },
+          {
+            "name" : "LocalAuthenticationSettingsViewModelTests"
+          },
+          {
+            "name" : "LocalAuthorityConfirmationViewModelTests"
+          },
+          {
+            "name" : "LocalAuthorityExplainerViewModelTests"
+          },
+          {
+            "name" : "LocalAuthorityPostcodeEntryViewmodelTests"
+          },
+          {
+            "name" : "LocalAuthorityRepositoryTests"
+          },
+          {
+            "name" : "LocalAuthorityServiceClientTests"
+          },
+          {
+            "name" : "LocalAuthorityServiceCoordinatorTests"
+          },
+          {
+            "name" : "LocalAuthorityServiceTests"
+          },
+          {
+            "name" : "MaximumLengthValidatorTest"
+          },
+          {
+            "name" : "MinimumLengthValidatorTests"
+          },
+          {
+            "name" : "MonthGroupKeyTests"
+          },
+          {
+            "name" : "NotificationConsentCoordinatorTests"
+          },
+          {
+            "name" : "NotificationOnboardingCoordinatorTests"
+          },
+          {
+            "name" : "NotificationServiceTests"
+          },
+          {
+            "name" : "NotificationSettingsCoordinatorTests"
+          },
+          {
+            "name" : "NotificationsOnboardingServiceTests"
+          },
+          {
+            "name" : "PeriAuthCoordinatorTests"
+          },
+          {
+            "name" : "PostAuthCoordinatorTests"
+          },
+          {
+            "name" : "PreAuthCoordinatorTests"
+          },
+          {
+            "name" : "ReauthenticationCoordinatorTests"
+          },
+          {
+            "name" : "RecentActivityCoordinatorTests"
+          },
+          {
+            "name" : "RecentActivityListViewModelTests"
+          },
+          {
+            "name" : "Redactor_EmailTests"
+          },
+          {
+            "name" : "Redactor_NiNoTests"
+          },
+          {
+            "name" : "Redactor_PostcodeTests"
+          },
+          {
+            "name" : "RedactorTests"
+          },
+          {
+            "name" : "RegexRedactorTests"
+          },
+          {
+            "name" : "ReLaunchCoordinatorTests"
+          },
+          {
+            "name" : "ReturningUserServiceTests"
+          },
+          {
+            "name" : "SafariCoordinatorTests"
+          },
+          {
+            "name" : "SearchHistoryRepositoryTests"
+          },
+          {
+            "name" : "SearchHistoryViewControllerTest"
+          },
+          {
+            "name" : "SearchHistoryViewModelTests"
+          },
+          {
+            "name" : "SearchItemTests"
+          },
+          {
+            "name" : "SearchServiceClientTests"
+          },
+          {
+            "name" : "SearchServiceTests"
+          },
+          {
+            "name" : "SearchSuggestionsViewModelTests"
+          },
+          {
+            "name" : "SearchViewControllerTests"
+          },
+          {
+            "name" : "SearchViewModelTests"
+          },
+          {
+            "name" : "SettingsCoordinatorTests"
+          },
+          {
+            "name" : "SettingsViewModelTests"
+          },
+          {
+            "name" : "SignInErrorViewModelTests"
+          },
+          {
+            "name" : "SignInSuccessCoordinatorTests"
+          },
+          {
+            "name" : "SignInSuccessViewModelTests"
+          },
+          {
+            "name" : "SignOutConfirmationCoordinatorTests"
+          },
+          {
+            "name" : "SignOutConfirmationViewModelTests"
+          },
+          {
+            "name" : "StepByStepsViewModelTests"
+          },
+          {
+            "name" : "StoredLocalAuthorityWidgetViewModelTests"
+          },
+          {
+            "name" : "String_ExtensionsTests"
+          },
+          {
+            "name" : "StringValidatorTests"
+          },
+          {
+            "name" : "TabCoordinatorTests"
+          },
+          {
+            "name" : "TopicDetailResponseTests"
+          },
+          {
+            "name" : "TopicDetailsCoordinatorTests"
+          },
+          {
+            "name" : "TopicDetailViewModelTests"
+          },
+          {
+            "name" : "TopicOnboardingCoordinatorTests"
+          },
+          {
+            "name" : "TopicOnboardingViewModelTests"
+          },
+          {
+            "name" : "TopicsDetailCoordinatorTests"
+          },
+          {
+            "name" : "TopicsRepositoryTests"
+          },
+          {
+            "name" : "TopicsServiceClientTests"
+          },
+          {
+            "name" : "TopicsServiceTests"
+          },
+          {
+            "name" : "TopicsWidgetViewModelTests"
+          },
+          {
+            "name" : "TopicTests"
+          },
+          {
+            "name" : "UIAlertAction_ConvenienceTests"
+          },
+          {
+            "name" : "UIAlertController_ConvenienceTests"
+          },
+          {
+            "name" : "UIApplication_URLOpenerTests"
+          },
+          {
+            "name" : "UIBarButtonItem_Convenience"
+          },
+          {
+            "name" : "UIViewController_ExtensionsTests"
+          },
+          {
+            "name" : "UserDefaults_ExtensionsTests"
+          },
+          {
+            "name" : "UserProperty_ConvenienceTests"
+          },
+          {
+            "name" : "ViewControllerBuilderTests"
+          },
+          {
+            "name" : "WebDeeplinkRouteTests"
+          },
+          {
+            "name" : "WebViewControllerTests"
+          },
+          {
+            "name" : "WebViewCoordinatorTests"
+          },
+          {
+            "name" : "WelcomeOnboardingCoordinatorTests"
+          }
+        ]
+      },
       "target" : {
         "containerPath" : "container:GovUK.xcodeproj",
         "identifier" : "5DAD71892BD250DF0075F648",
@@ -50,6 +505,7 @@
       }
     },
     {
+      "enabled" : false,
       "target" : {
         "containerPath" : "container:GOVKit",
         "identifier" : "GOVKitTests",

@@ -43,29 +43,34 @@ struct ChatView: View {
                  if !cellModel.isAnswer {
                      Spacer(minLength: cellModel.questionWidth)
                  }
-                 ChatCellView(viewModel: cellModel)
-                     .opacity(
-                        appearedIntroCells.contains(cellModel.id) ||
-                        viewModel.currentConversationExists ? 1 : 0
-                     )
-                     .animation(.easeIn(duration: 0.5), value: appearedIntroCells)
-                     .onAppear {
-                         if !viewModel.currentConversationExists {
-                             let index = viewModel.cellModels.firstIndex {
-                                 $0.id == cellModel.id
-                             } ?? 0
-                             DispatchQueue.main.asyncAfter(
-                                deadline: .now() + Double(index) * 0.7
-                             ) {
-                                 withAnimation {
-                                     appearedIntroCells.insert(cellModel.id, at: index)
-                                 }
-                             }
-                         }
-                     }
-                     .padding(.vertical, 4)
+                 chatCellView(cellModel: cellModel)
              }
          }
+    }
+
+    private func chatCellView(cellModel: ChatCellViewModel) -> some View {
+        ChatCellView(viewModel: cellModel)
+            .opacity(
+               appearedIntroCells.contains(cellModel.id) ||
+               viewModel.currentConversationExists ? 1 : 0
+            )
+            .animation(.easeIn(duration: 0.5), value: appearedIntroCells)
+            .onAppear {
+                guard !viewModel.currentConversationExists else {
+                    return
+                }
+                let index = viewModel.cellModels.firstIndex {
+                    $0.id == cellModel.id
+                } ?? 0
+                DispatchQueue.main.asyncAfter(
+                    deadline: .now() + Double(index) * 0.7
+                ) {
+                    withAnimation {
+                        appearedIntroCells.insert(cellModel.id, at: index)
+                    }
+                }
+            }
+            .padding(.vertical, 4)
     }
 
     private var chatCellsScrollViewReaderView: some View {

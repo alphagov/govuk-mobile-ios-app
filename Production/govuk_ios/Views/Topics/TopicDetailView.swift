@@ -74,6 +74,8 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 Spacer()
             }
             .padding(.leading, 16)
+            .padding(.bottom, viewModel.description == nil ? 8 : 0)
+            .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
             if let description = viewModel.description {
                 descriptionView(description: description)
             }

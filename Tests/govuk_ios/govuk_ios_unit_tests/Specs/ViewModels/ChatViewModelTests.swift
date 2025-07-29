@@ -184,11 +184,14 @@ struct ChatViewModelTests {
         sut.loadHistory()
         print(sut.cellModels.map { $0.message })
         try #require(sut.cellModels.count == 8)
-        #expect(sut.cellModels[0].type == .question)
-        #expect(sut.cellModels[1].type == .answer)
-        #expect(sut.cellModels[2].type == .question)
-        #expect(sut.cellModels[3].type == .answer)
-        #expect(sut.cellModels[4].type == .question)
+        #expect(sut.cellModels[0].type == .intro)
+        #expect(sut.cellModels[1].type == .intro)
+        #expect(sut.cellModels[2].type == .intro)
+        #expect(sut.cellModels[3].type == .question)
+        #expect(sut.cellModels[4].type == .answer)
+        #expect(sut.cellModels[5].type == .question)
+        #expect(sut.cellModels[6].type == .answer)
+        #expect(sut.cellModels[7].type == .question)
     }
 
     @Test

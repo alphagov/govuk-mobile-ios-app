@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import CoreData
 import GOVKit
+import UIComponents
 
 final class TopicsWidgetViewModel {
     private let topicsService: TopicsServiceInterface
@@ -45,6 +46,15 @@ final class TopicsWidgetViewModel {
         topicsService.hasCustomisedTopics ?
         topicsService.fetchFavourites() :
         topicsService.fetchAll()
+    }
+
+    var editButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(
+            localisedTitle: String.common.localized("editButtonTitle"),
+            action: {[weak self] in
+                self?.editAction()
+            }
+        )
     }
 
     lazy var topicErrorViewModel: AppErrorViewModel = {

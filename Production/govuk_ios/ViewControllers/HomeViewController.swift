@@ -75,11 +75,8 @@ class HomeViewController: BaseViewController {
     }
 
     private func configureHomeContent() {
-//        homeContentViewController = HomeContentViewController(
-//            viewModel: viewModel
-//        )
         let viewModel = viewModel.topicWidgetViewModel
-        let view = TopicCardSwiftUi(
+        let view = TopicsViewSwiftUI(
             viewModel: viewModel
         )
         let controller = UIHostingController(

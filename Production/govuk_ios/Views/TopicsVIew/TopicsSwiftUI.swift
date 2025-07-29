@@ -1,24 +1,26 @@
 import SwiftUI
+import UIComponents
 
-struct TopicCardSwiftUi: View {
+struct TopicsViewSwiftUI: View {
     let viewModel: TopicsWidgetViewModel
+    @ScaledMetric var scale: CGFloat = 1
     private let columns = [
         GridItem(.flexible(), spacing: 2, alignment: .leading),
         GridItem(.flexible(), spacing: 2, alignment: .leading)
     ]
 
     var body: some View {
-        VStack {
-            HStack {
-                Text(viewModel.widgetTitle)
-                Spacer()
-                Button {
-                    viewModel.editAction()
-                } label: {
-                    Text(String.common.localized("editButtonTitle"))
-                }
-            }
+        VStack(alignment: .leading, spacing: 2) {
             ScrollView {
+                HStack {
+                    Text(viewModel.widgetTitle)
+                        .font(Font.govUK.title3Semibold)
+                        .padding([.leading], 4)
+                    Spacer()
+                    SwiftUIButton(.secondary, viewModel: viewModel.editButtonViewModel)
+                        .frame(width: 70 * scale)
+                        .padding([.leading], 40)
+                }
                 LazyVGrid(columns: columns, alignment: .center) {
                     ForEach(viewModel.displayedTopics, id: \.self) { topic in
                         TopicCardSwiftUI(model: topic)

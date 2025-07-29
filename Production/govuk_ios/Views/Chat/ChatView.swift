@@ -51,7 +51,9 @@ struct ChatView: View {
                      .animation(.easeIn(duration: 0.5), value: appearedIntroCells)
                      .onAppear {
                          if !viewModel.currentConverationExists {
-                             let index = viewModel.cellModels.firstIndex { $0.id == cellModel.id } ?? 0
+                             let index = viewModel.cellModels.firstIndex {
+                                 $0.id == cellModel.id
+                             } ?? 0
                              DispatchQueue.main.asyncAfter(
                                 deadline: .now() + Double(index) * 0.7
                              ) {
@@ -80,7 +82,7 @@ struct ChatView: View {
                 .frame(height: 8)
             Text(String.chat.localized("messagesAvailableTitle"))
                 .font(.subheadline)
-                .foregroundStyle(Color(UIColor.govUK.text.secondary))
+                .foregroundStyle(Color(UIColor.govUK.text.chatBackground))
                 .multilineTextAlignment(.center)
             chatCellsView
             Rectangle()

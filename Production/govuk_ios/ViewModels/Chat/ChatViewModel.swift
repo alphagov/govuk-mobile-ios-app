@@ -83,9 +83,9 @@ class ChatViewModel: ObservableObject {
 
     func loadHistory() {
         guard let conversationId = chatService.currentConversationId else {
+            cellModels.removeAll()
             return
         }
-        cellModels.removeAll()
         requestInFlight = true
         chatService.chatHistory(
             conversationId: conversationId
@@ -129,7 +129,9 @@ class ChatViewModel: ObservableObject {
             cellModels.append(answer)
         }
         if let pendingQuestion = history.pendingQuestion {
-            askQuestion(pendingQuestion.message)
+            let question = ChatCellViewModel(question: pendingQuestion)
+            cellModels.append(question)
+            pollForAnswer(pendingQuestion)
         }
     }
 

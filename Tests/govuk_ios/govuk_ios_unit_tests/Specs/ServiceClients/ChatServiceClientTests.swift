@@ -151,7 +151,7 @@ struct ChatServiceClientTests {
         }
 
         let answer = try? fetchAnswerResult.get()
-        let error = fetchAnswerResult.getError() as? ChatError
+        let error = fetchAnswerResult.getError()
         #expect(answer?.id == nil)
         #expect (error == .validationError)
     }

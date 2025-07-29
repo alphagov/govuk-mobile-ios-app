@@ -26,7 +26,7 @@ final class SignOutConfirmationViewModel {
         return GOVUKButton.ButtonViewModel(
             localisedTitle: buttonTitle,
             action: { [weak self] in
-                self?.authenticationService.signOut()
+                self?.authenticationService.signOut(reason: .userSignout)
                 self?.trackNavigationEvent(buttonTitle)
                 self?.completion(true)
             }

@@ -9,44 +9,117 @@ import GOVKit
 struct ChatViewModelTests {
 
     @Test
-    func askQuestion_success_createsCorrectCellModels() {
+    func askQuestion_success_createsCorrectCellModels() async {
         let mockChatService = MockChatService()
-        let answer = Answer(
-            createdAt: "\(Date())",
-            id: "12345",
-            message: "This is the answer",
-            sources: nil
-        )
 
-        mockChatService._stubbedAnswerResult = .success(answer)
+        mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
+        mockChatService._stubbedAnswerResults = [.success(.answeredAnswer)]
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
         sut.latestQuestion = "This is the question"
-
         sut.askQuestion()
 
+        print("Cell models = \(sut.cellModels)")
         #expect(sut.cellModels.count == 2)
         #expect(sut.cellModels.first?.type == .question)
         #expect(sut.cellModels.last?.type == .answer)
+        #expect(sut.latestQuestion == "")
     }
 
     @Test
-    func askQuestion_failure_createsCorrectCellModels() {
+    func askQuestion_answer_failure_callsHandleError() {
         let mockChatService = MockChatService()
-        mockChatService._stubbedAnswerResult = .failure(ChatError.apiUnavailable)
+        mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
+        mockChatService._stubbedAnswerResults = [.failure(ChatError.apiUnavailable)]
+        var chatError: ChatError?
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
         )
         sut.latestQuestion = "This is the question"
 
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 2)
+        #expect(sut.cellModels.count == 1)
         #expect(sut.cellModels.first?.type == .question)
-        #expect(sut.cellModels.last?.type == .error)
+        #expect(chatError == .apiUnavailable)
+    }
+
+    @Test
+    func askQuestion_question_failure_callsHandleError() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedQuestionResult = .failure(ChatError.pageNotFound)
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
+        )
+        sut.latestQuestion = "This is the question"
+
+        sut.askQuestion()
+
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == .pageNotFound)
+    }
+
+    @Test
+    func askQuestionWithPII_generatesErrorText() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedQuestionResult = .failure(ChatError.pageNotFound)
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
+        )
+        sut.latestQuestion = "My e-mail is steve@apple.com"
+
+        #expect(sut.errorText == nil)
+        sut.askQuestion()
+
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == nil)
+        #expect(sut.errorText != nil)
+        #expect(!sut.latestQuestion.isEmpty)
+    }
+
+    @Test
+    func askQuestion_validationError_generatesErrorText() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedQuestionResult = .failure(ChatError.validationError)
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
+        )
+        sut.latestQuestion = "This is the question"
+
+        #expect(sut.errorText == nil)
+        sut.askQuestion()
+
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == nil)
+        #expect(sut.errorText != nil)
+        #expect(!sut.latestQuestion.isEmpty)
     }
 
     @Test
@@ -83,34 +156,81 @@ struct ChatViewModelTests {
             message: "Next question"
         )
 
-        mockChatService._stubbedHistoryResult = .success([aqOne, aqTwo])
+        let pendingQuestion = PendingQuestion(
+            answerUrl: "https://www.example.com",
+            conversationId: conversationId,
+            createdAt: createdAt,
+            id: "78910",
+            message: "This is the pending question"
+        )
+
+        let history = History(
+            pendingQuestion: pendingQuestion,
+            answeredQuestions: [aqOne, aqTwo],
+            createdAt: createdAt,
+            id: "4456")
+
+        mockChatService._stubbedConversationId = "12345"
+        mockChatService._stubbedHistoryResult = .success(history)
+        mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
 
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
         sut.loadHistory()
-        try #require(sut.cellModels.count == 4)
+        print(sut.cellModels.map { $0.message })
+        try #require(sut.cellModels.count == 5)
         #expect(sut.cellModels[0].type == .question)
         #expect(sut.cellModels[1].type == .answer)
         #expect(sut.cellModels[2].type == .question)
         #expect(sut.cellModels[3].type == .answer)
+        #expect(sut.cellModels[4].type == .question)
     }
 
     @Test
-    func loadHistory_error_createsCorrectCellModels() {
+    func loadHistory_error_callsHandleError() {
         let mockChatService = MockChatService()
+        mockChatService._stubbedConversationId = "12345"
         mockChatService._stubbedHistoryResult = .failure(ChatError.apiUnavailable)
-
+        var chatError: ChatError?
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
         )
 
         sut.loadHistory()
-        #expect(sut.cellModels.count == 1)
-        #expect(sut.cellModels.first?.type == .error)
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == .apiUnavailable)
+    }
+
+    @Test
+    func loadHistory_pageNotFoundError_clearsConversation() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedConversationId = "12345"
+        mockChatService._stubbedHistoryResult = .failure(ChatError.pageNotFound)
+        var chatError: ChatError?
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { error in
+                chatError = error
+            }
+        )
+
+        #expect(mockChatService.currentConversationId == "12345")
+        sut.loadHistory()
+        #expect(sut.cellModels.count == 0)
+        #expect(chatError == nil)
+        #expect(mockChatService.currentConversationId == nil)
     }
 
     @Test
@@ -119,10 +239,12 @@ struct ChatViewModelTests {
 
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService()
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { _ in }
         )
 
-        sut.cellModels = [.placeHolder]
+        sut.cellModels = [.gettingAnswer]
 
         sut.newChat()
         #expect(sut.cellModels.isEmpty)

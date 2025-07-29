@@ -8,18 +8,43 @@ protocol InfoViewModelInterface {
     var title: String { get }
     var subtitle: String { get }
     var buttonTitle: String { get }
+    var buttonAccessibilityTitle: String { get }
     var buttonViewModel: GOVUKButton.ButtonViewModel { get }
+    var buttonConfiguration: GOVUKButton.ButtonConfiguration { get }
     var image: AnyView { get }
     var trackingName: String { get }
     var trackingTitle: String { get }
     var showImageWhenCompact: Bool { get }
     var subtitleFont: Font { get }
+    var showActionButton: Bool { get }
+    var showDivider: Bool { get }
+    var openURLAction: ((URL) -> Void)? { get }
 }
 
 extension InfoViewModelInterface {
     var analyticsService: AnalyticsServiceInterface? { nil }
     var trackingName: String { "" }
     var trackingTitle: String { "" }
+
+    var buttonConfiguration: GOVUKButton.ButtonConfiguration {
+        .primary
+    }
+
+    var buttonAccessibilityTitle: String {
+        buttonTitle
+    }
+
+    var showActionButton: Bool {
+        true
+    }
+
+    var showDivider: Bool {
+        true
+    }
+
+    var openURLAction: ((URL) -> Void)? {
+        nil
+    }
 
     func trackScreen(screen: TrackableScreen) {
         if let analyticsService = analyticsService {

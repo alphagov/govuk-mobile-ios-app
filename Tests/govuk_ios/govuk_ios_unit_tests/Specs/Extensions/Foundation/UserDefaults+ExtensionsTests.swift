@@ -13,13 +13,4 @@ struct UserDefaults_ExtensionsTests {
 
         #expect(sut.value(forKey: .biometricsPolicyState) as? Data == expectedValue)
     }
-
-    @Test
-    func test_boolForKey_returnsBool() {
-        let sut: UserDefaultsInterface = UserDefaults.standard
-        let expectedValue = true
-        sut.set(bool: expectedValue, forKey: .appOnboardingSeen)
-
-        #expect(sut.bool(forKey: .appOnboardingSeen))
-    }
 }

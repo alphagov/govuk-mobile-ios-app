@@ -4,16 +4,17 @@ import Authentication
 import SecureStore
 import Factory
 
-protocol AuthenticationServiceInterface {
+protocol AuthenticationServiceInterface: AnyObject {
     var refreshToken: String? { get }
     var idToken: String? { get }
     var accessToken: String? { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
     var secureStoreRefreshTokenPresent: Bool { get }
+    var didSignOutAction: ((SignoutReason) -> Void)? { get set }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult
-    func signOut()
+    func signOut(reason: SignoutReason)
     func encryptRefreshToken()
     func tokenRefreshRequest() async -> TokenRefreshResult
 }
@@ -27,12 +28,13 @@ typealias AuthenticationServiceResult = Result<AuthenticationServiceResponse, Au
 class AuthenticationService: AuthenticationServiceInterface {
     private let container = Container.shared
     private var authenticatedSecureStoreService: SecureStorable
-    private let userDefaults: UserDefaultsInterface
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
+
+    var didSignOutAction: ((SignoutReason) -> Void)?
 
     var secureStoreRefreshTokenPresent: Bool {
         authenticatedSecureStoreService.checkItemExists(itemName: "refreshToken")
@@ -55,10 +57,8 @@ class AuthenticationService: AuthenticationServiceInterface {
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
-         userDefaults: UserDefaultsInterface,
          returningUserService: ReturningUserServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
-        self.userDefaults = userDefaults
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
     }
@@ -91,14 +91,14 @@ class AuthenticationService: AuthenticationServiceInterface {
         }
     }
 
-    func signOut() {
+    func signOut(reason: SignoutReason) {
         do {
             try authenticatedSecureStoreService.delete()
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
-            userDefaults.set(nil, forKey: .biometricsPolicyState)
             setTokens()
             authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()
+            didSignOutAction?(reason)
         } catch {
             #if targetEnvironment(simulator)
             // secure store deletion will always fail on simulator
@@ -154,4 +154,9 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.idToken = idToken
         self.accessToken = accessToken
     }
+}
+
+enum SignoutReason {
+    case reauthFailure
+    case userSignout
 }

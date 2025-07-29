@@ -255,4 +255,31 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     ) -> UIViewController {
         return _stubbedTouchIdSettingsController ?? UIViewController()
     }
+
+    var _stubbedChatController: UIViewController?
+    var _receivedChatOpenURLAction: ((URL) -> Void)?
+    var _receivedHandleChatError: ((ChatError) -> Void)?
+    override func chat(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        handleError: @escaping (ChatError) -> Void
+    ) -> UIViewController {
+        _receivedChatOpenURLAction = openURLAction
+        _receivedHandleChatError = handleError
+        return _stubbedChatController ?? UIViewController()
+    }
+
+    var _stubbedChatErrorController: UIViewController?
+    var _receivedChatErrorAction: (() -> Void)?
+    var _receivedChatErrorOpenURLAction: ((URL) -> Void)?
+    override func chatError(
+        error: ChatError,
+        action: @escaping () -> Void,
+        openURLAction: ((URL) -> Void)?
+    ) -> UIViewController {
+        _receivedChatErrorAction = action
+        _receivedChatErrorOpenURLAction = openURLAction
+        return _stubbedChatErrorController ?? UIViewController()
+    }
 }

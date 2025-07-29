@@ -1,5 +1,4 @@
 import Foundation
-import Onboarding
 
 @testable import govuk_ios
 

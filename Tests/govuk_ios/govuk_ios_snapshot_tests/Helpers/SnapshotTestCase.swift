@@ -51,6 +51,31 @@ class SnapshotTestCase: FBSnapshotTestCase {
         )
     }
 
+    func VerifySnapshotWindowWithDelay(view: some View,
+                                       mode: UIUserInterfaceStyle,
+                                       overallTolerance: CGFloat = 0.001,
+                                       file: StaticString = #file,
+                                       line: UInt = #line,
+                                       delay: Double = 0.3) {
+        let wrappedViewController = UIHostingController(rootView: view)
+        wrappedViewController.overrideUserInterfaceStyle = mode
+        let window = UIApplication.shared.window
+        guard let window = window else { return }
+        window.rootViewController = wrappedViewController
+
+        let expectation = XCTestExpectation(description: "Snapshot capture")
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.VerifySnapshot(
+                window,
+                overallTolerance: overallTolerance,
+                file: file,
+                line: line
+            )
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: delay * 2)
+    }
+
     func VerifySnapshotInWindow(_ viewController: UIViewController,
                                 perPixelTolerance: CGFloat = 0,
                                 overallTolerance: CGFloat = 0,
@@ -77,11 +102,13 @@ class SnapshotTestCase: FBSnapshotTestCase {
     }
 
     func VerifySnapshot(_ view: UIView, 
+                        overallTolerance: CGFloat = 0,
                         file: StaticString = #file,
                         line: UInt = #line) {
         view.sizeToFit()
         FBSnapshotVerifyView(
             view,
+            overallTolerance: overallTolerance,
             file: file,
             line: line
         )

@@ -13,6 +13,7 @@ class AuthenticationCoordinatorTests {
     func start_biometricsEnrolled_shouldEncryptToken_callsCompletion() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -30,7 +31,8 @@ class AuthenticationCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
-                analyticsService: mockAnalyticsService,
+                analyticsService: mockAnalyticsService, 
+                topicsService: mockTopicsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -49,6 +51,7 @@ class AuthenticationCoordinatorTests {
         let mockSignInSuccessCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -67,6 +70,7 @@ class AuthenticationCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
+                topicsService: mockTopicsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -81,11 +85,12 @@ class AuthenticationCoordinatorTests {
     }
 
     @Test
-    func signinSuccess_newUser_resetsAnalyticsConsent() async {
+    func signinSuccess_newUser_resetsConsentAndPreferences() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockSignInSuccessCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -104,6 +109,7 @@ class AuthenticationCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
+                topicsService: mockTopicsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -115,14 +121,16 @@ class AuthenticationCoordinatorTests {
 
         #expect(mockAnalyticsService._resetConsentCalled)
         #expect(!mockAnalyticsService._setExistingConsentCalled)
+        #expect(mockTopicsService._resetOnboardingCalled)
     }
 
     @Test
-    func signinSuccess_returningUser_keepsAnalyticsConsent() async {
+    func signinSuccess_returningUser_keepsConsentAndPreferences() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockSignInSuccessCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -141,6 +149,7 @@ class AuthenticationCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
+                topicsService: mockTopicsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -151,6 +160,7 @@ class AuthenticationCoordinatorTests {
         }
 
         #expect(!mockAnalyticsService._resetConsentCalled)
+        #expect(!mockTopicsService._resetOnboardingCalled)
     }
 
     @Test
@@ -159,6 +169,7 @@ class AuthenticationCoordinatorTests {
         let mockSignInCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInCoordinator
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -177,6 +188,7 @@ class AuthenticationCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
+                topicsService: mockTopicsService,
                 completionAction: { continuation.resume(returning: true) },
                 handleError: { _ in }
             )
@@ -193,6 +205,7 @@ class AuthenticationCoordinatorTests {
     func start_authenticationOnboardingSeen_biometricsEnrolled_shouldEncryptToken_encryptsRefreshToken() async {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -211,6 +224,7 @@ class AuthenticationCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
+                topicsService: mockTopicsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -226,6 +240,7 @@ class AuthenticationCoordinatorTests {
     @Test
     func start_authenticationOnboardingNotSeen_shouldntEncryptToken_doesntEncryptRefreshToken() async {
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController =  MockNavigationController()
@@ -244,6 +259,7 @@ class AuthenticationCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
+                topicsService: mockTopicsService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -259,6 +275,7 @@ class AuthenticationCoordinatorTests {
     @Test
     func authenticationFailure_callsHandleError() async {
         let mockAuthenticationService = MockAuthenticationService()
+        let mockTopicsService = MockTopicsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
 
@@ -278,6 +295,7 @@ class AuthenticationCoordinatorTests {
                 authenticationService: mockAuthenticationService,
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
+                topicsService: mockTopicsService,
                 completionAction: { continuation.resume(returning: true) },
                 handleError: { error in
                     authError = error

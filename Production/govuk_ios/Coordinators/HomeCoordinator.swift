@@ -94,13 +94,17 @@ class HomeCoordinator: TabItemCoordinator {
         )
     }
 
-    func didReselectTab() {
-        guard let homeViewController = root.viewControllers.first as? ResetsToDefault
-        else { return }
-        if childCoordinators.isEmpty {
-            homeViewController.resetState()
+    func didSelectTab(_ selectedTabIndex: Int,
+                      previousTabIndex: Int) {
+        if selectedTabIndex == previousTabIndex {
+            guard let homeViewController = root.viewControllers.first as? ResetsToDefault
+            else { return }
+            if childCoordinators.isEmpty {
+                homeViewController.resetState()
+            }
         }
     }
+
 
     private var notificationsAction: () -> Void {
         return { [weak self] in

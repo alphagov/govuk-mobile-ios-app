@@ -24,6 +24,7 @@ protocol LocalAuthenticationServiceInterface {
     func evaluatePolicy(_ policy: LAPolicy,
                         reason: String,
                         completion: @escaping (Bool, Error?) -> Void)
+    func clear()
 }
 
 final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
@@ -159,5 +160,10 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
             return true
         }
         return false
+    }
+
+    func clear() {
+        userDefaults.set(nil, forKey: .localAuthenticationOnboardingSeen)
+        userDefaults.set(nil, forKey: .biometricsPolicyState)
     }
 }

@@ -46,6 +46,9 @@ jobs:
           secrets: |
             4d6340bc-d8c4-4449-9c9c-b32500f0f282 > MATCH_PASSWORD
             9de05f7b-cdfe-485d-86a6-b32a00af5922 > MATCH_CERTIFICATE_TOKEN
+            0aed09d2-d4f7-4432-a099-b32a00e0521b > APP_STORE_KEY_ISSUER_ID
+            ba8cdcd5-7bbd-437e-bfc9-b32a00e07df8 > APP_STORE_KEY_ID
+            d0bc8f38-8ebe-4b1d-9e55-b32a00e1b064 > APP_STORE_KEY_CONTENT
 
       - name: Select xcode
         run: xcodes select
@@ -53,9 +56,6 @@ jobs:
       - name: Deploy
         run: bundle exec fastlane beta
         env:
-          APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
-          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
-          APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
           ONESIGNAL_APP_ID: ${{ vars.ONESIGNAL_APP_ID }}
 
       - name: Save Artifacts

@@ -13,7 +13,8 @@ extension Config {
                         releaseFlags: [String: Bool] = [:],
                         lastUpdated: String = "test",
                         searchApiUrl: String? = nil,
-                        authenticationIssuerBaseUrl: String = "https://test.com") -> Config {
+                        authenticationIssuerBaseUrl: String = "https://test.com",
+                        chatPollIntervalSeconds: Int? = 3) -> Config {
         .init(
             available: available,
             minimumVersion: minimumVersion,
@@ -21,7 +22,8 @@ extension Config {
             releaseFlags: releaseFlags,
             lastUpdated: lastUpdated,
             searchApiUrl: searchApiUrl,
-            authenticationIssuerBaseUrl: authenticationIssuerBaseUrl
+            authenticationIssuerBaseUrl: authenticationIssuerBaseUrl,
+            chatPollIntervalSeconds: chatPollIntervalSeconds
         )
     }
 }

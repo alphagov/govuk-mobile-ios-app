@@ -84,6 +84,7 @@ class ChatViewModel: ObservableObject {
     func loadHistory() {
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
+            appendIntroMessages()
             return
         }
         requestInFlight = true
@@ -115,9 +116,31 @@ class ChatViewModel: ObservableObject {
         requestInFlight
     }
 
+    var currentConversationExists: Bool {
+        chatService.currentConversationId != nil
+    }
+
+    private func appendIntroMessages() {
+        let firstIntroMessage = Intro(
+            title: String.chat.localized("answerTitle"),
+            message: String.chat.localized("introFirstMessage")
+        )
+        let secondIntroMessage = Intro(
+            title: nil,
+            message: String.chat.localized("introSecondMessage")
+        )
+        let thirdIntroMessage = Intro(
+            title: nil,
+            message: String.chat.localized("introThirdMessage")
+        )
+        cellModels.append(ChatCellViewModel(intro: firstIntroMessage))
+        cellModels.append(ChatCellViewModel(intro: secondIntroMessage))
+        cellModels.append(ChatCellViewModel(intro: thirdIntroMessage))
+    }
 
     private func handleHistoryResponse(_ history: History) {
         cellModels.removeAll()
+        appendIntroMessages()
         let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
@@ -143,5 +166,6 @@ class ChatViewModel: ObservableObject {
     func newChat() {
         cellModels.removeAll()
         chatService.clearHistory()
+        appendIntroMessages()
     }
 }

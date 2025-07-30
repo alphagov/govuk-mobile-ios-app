@@ -10,8 +10,7 @@ import GOVKit
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = ChatErrorViewModel(
             error: .apiUnavailable,
-            action: { },
-            openURLAction: { _ in }
+            action: { }
         )
         let chatErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
@@ -28,8 +27,7 @@ import GOVKit
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = ChatErrorViewModel(
             error: .apiUnavailable,
-            action: { },
-            openURLAction: { _ in }
+            action: { }
         )
         let chatErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(

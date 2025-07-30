@@ -86,11 +86,6 @@ class ChatCoordinator: TabItemCoordinator {
                 default:
                     break
                 }
-            },
-            openURLAction: { [weak self] url in
-                self?.presentWebView(
-                    url: url
-                )
             }
         )
         set(viewController, animated: false)

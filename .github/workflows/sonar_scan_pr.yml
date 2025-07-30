@@ -3,8 +3,8 @@ name: Sonar scan - PR
 on:
   workflow_call:
     secrets:
-      SONAR_TOKEN:
-        description: 'A token to be used to send sonar scan results'
+      BW_ACCESS_TOKEN:
+        description: 'A token to be used to fetch bit warden secrets'
         required: true
 
 concurrency:
@@ -19,6 +19,14 @@ jobs:
     steps:
       - name: Add path globally
         run: echo "/usr/local/bin" >> $GITHUB_PATH
+
+      - name: Get Secrets
+        uses: bitwarden/sm-action@14f92f1d294ae3c2b6a3845d389cd2c318b0dfd8 # pin@v2.2.0
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          base_url: https://vault.bitwarden.eu
+          secrets: |
+            74bca0cb-ffa4-4459-bb32-b32500f698b8 > SONAR_TOKEN
 
       - name: Checkout
         uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b # pin@v4.1.5
@@ -46,7 +54,6 @@ jobs:
             -Dsonar.pullrequest.base=${{github.base_ref}} \
             -Dsonar.projectVersion=$(./Scripts/app_version.sh)
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_SCANNER_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
           SONAR_SCANNER_JAVA_OPTS: -Dorg.bouncycastle.pkcs12.ignore_useless_passwd=true
@@ -55,5 +62,3 @@ jobs:
         uses: sonarsource/sonarqube-quality-gate-action@d304d050d930b02a896b0f85935344f023928496 # pin@v1.1.0
         # Force to fail step after specific time
         timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

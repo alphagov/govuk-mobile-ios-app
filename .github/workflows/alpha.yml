@@ -45,6 +45,7 @@ jobs:
           base_url: https://vault.bitwarden.eu
           secrets: |
             4d6340bc-d8c4-4449-9c9c-b32500f0f282 > MATCH_PASSWORD
+            9de05f7b-cdfe-485d-86a6-b32a00af5922 > MATCH_CERTIFICATE_TOKEN
             bf38895b-88b1-4469-849a-b32a009bffbd > FIREBASE_TOKEN
 
       - name: Select xcode
@@ -56,7 +57,6 @@ jobs:
           APP_STORE_KEY_CONTENT: ${{ secrets.APP_STORE_KEY_CONTENT }}
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
           APP_STORE_KEY_ISSUER_ID: ${{ secrets.APP_STORE_KEY_ISSUER_ID }}
-          MATCH_CERTIFICATE_TOKEN: ${{ secrets.MATCH_CERTIFICATE_TOKEN }}
           ONESIGNAL_APP_ID: ${{ vars.ONESIGNAL_APP_ID }}
 
       - name: Save Artifacts

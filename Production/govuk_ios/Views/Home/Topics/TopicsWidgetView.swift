@@ -121,8 +121,8 @@ class TopicsWidgetView: UIView {
             name: .NSManagedObjectContextDidSave,
             object: nil
         )
-        fetchTopics()
-        updateTopics(viewModel.displayedTopics)
+         fetchTopics()
+         updateTopics(viewModel.displayedTopics)
         showAllTopicsButton()
     }
 

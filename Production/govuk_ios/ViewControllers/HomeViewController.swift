@@ -77,7 +77,13 @@ class HomeViewController: BaseViewController {
         homeContentViewController = HomeContentViewController(
             viewModel: viewModel
         )
-        displayController(homeContentViewController)
+        let view = HomeContentView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: view
+        )
+        displayController(viewController)
     }
 
     private func configureSearchBar() {
@@ -188,7 +194,7 @@ class HomeViewController: BaseViewController {
         searchBar.text = ""
         searchViewController.clearResults()
         removeController(searchViewController)
-        displayController(homeContentViewController)
+     //   displayController(homeContentViewController)
         setLogoHidden(false)
     }
 }
@@ -196,7 +202,7 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
-        removeController(homeContentViewController)
+       // removeController(homeContentViewController)
         displayController(searchViewController)
         setLogoHidden(true)
         return true
@@ -212,6 +218,6 @@ extension HomeViewController: ResetsToDefault {
         if viewModel.searchEnabled {
             cancelSearch()
         }
-        homeContentViewController.scrollToTop()
+      //  homeContentViewController.scrollToTop()
     }
 }

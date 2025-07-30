@@ -7,7 +7,8 @@ struct HomeViewModel {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
-    let topicWidgetViewModel: TopicsWidgetViewModel
+  //  let topicWidgetViewModel: TopicsWidgetViewModel
+    let topicsWidgetViewModelSwiftUI: TopicsWidgetViewModelSwiftUI
     let localAuthorityAction: () -> Void
     let editLocalAuthorityAction: () -> Void
     let feedbackAction: () -> Void
@@ -36,7 +37,7 @@ struct HomeViewModel {
                 // notificationsWidget, Removed until dismissable cards introduced
                 // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
                 recentActivityWidget,
-                topicsWidget,
+             //   topicsWidget,
                 storedLocalAuthorityWidget
             ].compactMap { $0 }
         }
@@ -144,23 +145,23 @@ struct HomeViewModel {
         return widget
     }
 
-    @MainActor
-    private var topicsWidget: WidgetView? {
-        guard featureEnabled(.topics)
-        else { return nil }
-        let content = TopicsWidgetView(
-            viewModel: topicWidgetViewModel
-        )
-        let widget = WidgetView(decorateView: false)
-        widget.addContent(content)
-        return widget
-    }
+//    @MainActor
+//    private var topicsWidget: WidgetView? {
+//        guard featureEnabled(.topics)
+//        else { return nil }
+//        let content = TopicsWidgetView(
+//            viewModel: topicsWidgetViewModelSwiftUI
+//        )
+//        let widget = WidgetView(decorateView: false)
+//        widget.addContent(content)
+//        return widget
+//    }
 
     private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }
 
     func trackECommerce() {
-        topicWidgetViewModel.trackECommerce()
+        topicsWidgetViewModelSwiftUI.trackECommerce()
     }
 }

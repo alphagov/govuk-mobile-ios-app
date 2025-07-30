@@ -16,9 +16,9 @@ struct EditTopicsView: View {
             }
         }
         .navigationTitle(String.topics.localized("editTopicsTitle"))
-        .toolbar {
-            doneButton
-        }
+//        .toolbar {
+//            doneButton
+//        }
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
@@ -27,14 +27,14 @@ struct EditTopicsView: View {
         }
     }
 
-    private var doneButton: some ToolbarContent {
-        ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
-            Button(String.topics.localized("doneButtonTitle")) {
-                viewModel.dismissAction()
-            }
-            .foregroundColor(Color(UIColor.govUK.text.link))
-        }
-    }
+//    private var doneButton: some ToolbarContent {
+//        ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
+//            Button(String.topics.localized("doneButtonTitle")) {
+//                viewModel.dismissAction()
+//            }
+//            .foregroundColor(Color(UIColor.govUK.text.link))
+//        }
+//    }
 }
 
 extension EditTopicsView: TrackableScreen {

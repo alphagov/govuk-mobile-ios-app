@@ -319,8 +319,7 @@ struct ViewControllerBuilderTests {
         let subject = ViewControllerBuilder()
         let result = subject.chatError(
             error: ChatError.apiUnavailable,
-            action: { },
-            openURLAction: { _ in }
+            action: { }
         )
         
         let rootView = (result as? HostingViewController<InfoView>)?.rootView

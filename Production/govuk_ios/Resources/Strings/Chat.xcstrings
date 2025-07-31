@@ -84,7 +84,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There's a problem with GOV.UK Chat. \n\nTry again later or return to the [GOV.UK app homepage](https://www.gov.uk) if you need information now."
+            "value" : "GOV.UK Chat is not working. \n\nTry again later, or go to the app home page if you need information now."
           }
         }
       }

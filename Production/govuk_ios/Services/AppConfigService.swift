@@ -51,7 +51,7 @@ public final class AppConfigService: AppConfigServiceInterface {
               pollInterval > 0 else {
             return
         }
-        chatPollIntervalSeconds = TimeInterval((pollInterval))
+        chatPollIntervalSeconds = TimeInterval(pollInterval)
     }
 
     private func updateSearch(urlString: String?) {

@@ -26,7 +26,7 @@ class ViewControllerBuilder {
         let notificationService: NotificationServiceInterface
         let searchService: SearchServiceInterface
         let activityService: ActivityServiceInterface
-        let topicWidgetViewModelSwiftUI: TopicsWidgetViewModelSwiftUI
+        let topicsWidgetViewModel: TopicsWidgetViewModel
         let localAuthorityService: LocalAuthorityServiceInterface
     }
 
@@ -46,7 +46,7 @@ class ViewControllerBuilder {
             analyticsService: dependencies.analyticsService,
             configService: dependencies.configService,
             notificationService: dependencies.notificationService,
-            topicsWidgetViewModelSwiftUI: dependencies.topicWidgetViewModelSwiftUI,
+            topicsWidgetViewModel: dependencies.topicsWidgetViewModel,
             localAuthorityAction: actions.localAuthorityAction,
             editLocalAuthorityAction: actions.editLocalAuthorityAction,
             feedbackAction: actions.feedbackAction,
@@ -384,21 +384,6 @@ class ViewControllerBuilder {
             viewModel: viewModel
         )
     }
-//
-//    func editTopics(analyticsService: AnalyticsServiceInterface,
-//                    topicsService: TopicsServiceInterface,
-//                    dismissAction: @escaping () -> Void) -> UIViewController {
-//        let viewModel = EditTopicsViewModel(
-//            topicsService: topicsService,
-//            analyticsService: analyticsService,
-//            dismissAction: dismissAction
-//        )
-//
-//        let view = EditTopicsView(
-//            viewModel: viewModel
-//        )
-//        return HostingViewController(rootView: view)
-//    }
 
     func topicOnboarding(topics: [Topic],
                          analyticsService: AnalyticsServiceInterface,

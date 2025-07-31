@@ -15,14 +15,13 @@ struct HomeContentViewControllerTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
-            topicWidgetViewModel: topicsViewModel,
+            topicsWidgetViewModel: topicsViewModel,
             localAuthorityAction: { },
             editLocalAuthorityAction: {},
             feedbackAction: { },
@@ -47,14 +46,13 @@ struct HomeContentViewControllerTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
-            topicWidgetViewModel: topicsViewModel,
+            topicsWidgetViewModel: topicsViewModel,
             localAuthorityAction: { },
             editLocalAuthorityAction: {},
             feedbackAction: { },
@@ -83,14 +81,13 @@ struct HomeContentViewControllerTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
-            topicWidgetViewModel: topicsViewModel,
+            topicsWidgetViewModel: topicsViewModel,
             localAuthorityAction: { },
             editLocalAuthorityAction: { },
             feedbackAction: { },

@@ -4,36 +4,42 @@ import CoreData
 import GOVKit
 import UIComponents
 
-final class TopicsWidgetViewModel {
+
+final class TopicsWidgetViewModel: ObservableObject {
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
-    let editAction: () -> Void
-    var handleError: ((TopicsServiceError) -> Void)?
-    var fetchTopicsError: Bool = false
     var initialLoadComplete: Bool = false
-    var isEditing: Bool = false
+    @Published var error = false
+    @Published var showAllTopicsButton = false
+    @Published var topicsToBeDisplayed: [Topic] = []
+    let editTopicViewModel: EditTopicsViewModel
+    private let showAllButtonsTitle = String.topics.localized("seeAllTopicsButtonText")
+    @Published var showingEditScreen: Bool = false
+
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener = UIApplication.shared,
          topicAction: @escaping (Topic) -> Void,
-         editAction: @escaping () -> Void,
          allTopicsAction: @escaping () -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.topicAction = topicAction
-        self.editAction = editAction
         self.allTopicsAction = allTopicsAction
+        self.editTopicViewModel = EditTopicsViewModel(
+            topicsService: topicsService,
+            analyticsService: analyticsService
+        )
     }
 
-
-    var allTopicsButtonHidden: Bool {
-        (displayedTopics.count >= topicsService.fetchAll().count) ||
-        fetchTopicsError
+    func showAllTopicsButtonHidden() {
+        showAllTopicsButton =
+        (topicsToBeDisplayed.count >= topicsService.fetchAll().count) ||
+        error
     }
 
     var widgetTitle: String {
@@ -43,10 +49,47 @@ final class TopicsWidgetViewModel {
         return String.home.localized(key)
     }
 
-    var displayedTopics: [Topic] {
+    func fetchDisplayedTopics() {
+        topicsToBeDisplayed =
         topicsService.hasCustomisedTopics ?
         topicsService.fetchFavourites() :
         topicsService.fetchAll()
+    }
+
+    var showAllButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(
+            localisedTitle: showAllButtonsTitle,
+            action: { [weak self] in
+                self?.allTopicsAction()
+            }
+        )
+    }
+
+    var editButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(
+            localisedTitle: String.common.localized("editButtonTitle"),
+            action: { [weak self] in
+                self?.showingEditScreen.toggle()
+            }
+        )
+    }
+
+    func trackECommerce() {
+        if !showingEditScreen && initialLoadComplete {
+            let trackedTopics = topicsToBeDisplayed
+            var items = [HomeCommerceItem]()
+            trackedTopics.enumerated().forEach { index, topic in
+                let item = HomeCommerceItem(name: topic.title,
+                                            index: index + 1,
+                                            itemId: nil,
+                                            locationId: nil)
+                items.append(item)
+            }
+            let event = AppEvent.viewItemList(name: "Homepage",
+                                              id: "Homepage",
+                                              items: items)
+            analyticsService.track(event: event)
+        }
     }
 
     lazy var topicErrorViewModel: AppErrorViewModel = {
@@ -65,45 +108,20 @@ final class TopicsWidgetViewModel {
     }()
 
     func fetchTopics() {
-        topicsService.fetchRemoteList { [weak self] result in
-            if case .failure(let error) = result {
-                self?.handleError?(error)
-                self?.fetchTopicsError = true
-            } else {
-                self?.fetchTopicsError = false
+        topicsService.fetchRemoteList {[weak self] result in
+            switch result {
+            case .success:
+                break
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.error = true
+                }
             }
-        }
-    }
-
-    var editButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.common.localized("editButtonTitle"),
-            action: {[weak self] in
-                self?.editAction()
-            }
-        )
-    }
-
-    func trackECommerce() {
-        if !isEditing && initialLoadComplete {
-            let trackedTopics = displayedTopics
-            var items = [HomeCommerceItem]()
-            trackedTopics.enumerated().forEach { index, topic in
-                let item = HomeCommerceItem(name: topic.title,
-                                            index: index + 1,
-                                            itemId: nil,
-                                            locationId: nil)
-                items.append(item)
-            }
-            let event = AppEvent.viewItemList(name: "Homepage",
-                                              id: "Homepage",
-                                              items: items)
-            analyticsService.track(event: event)
         }
     }
 
     func trackECommerceSelection(_ name: String) {
-        let trackedTopics = displayedTopics
+        let trackedTopics = topicsToBeDisplayed
         guard let topic = trackedTopics.first(where: {$0.title == name}),
               let index = trackedTopics.firstIndex(of: topic) else {
             return
@@ -112,7 +130,6 @@ final class TopicsWidgetViewModel {
                                       index: index + 1,
                                       itemId: nil,
                                       locationId: nil)]
-
         let event = AppEvent.selectHomePageItem(
             results: trackedTopics.count,
             items: items)

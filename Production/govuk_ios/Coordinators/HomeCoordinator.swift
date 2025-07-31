@@ -53,7 +53,7 @@ class HomeCoordinator: TabItemCoordinator {
             notificationService: notificationService,
             searchService: searchService,
             activityService: activityService,
-            topicWidgetViewModelSwiftUI: topicWidgetViewModelSwiftUI,
+            topicsWidgetViewModel: topicWidgetViewModel,
             localAuthorityService: localAuthorityService
         )
 
@@ -211,8 +211,8 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private lazy var topicWidgetViewModelSwiftUI: TopicsWidgetViewModelSwiftUI = {
-        TopicsWidgetViewModelSwiftUI(
+    private lazy var topicWidgetViewModel: TopicsWidgetViewModel = {
+        TopicsWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
             topicAction: startTopicDetailCoordinator,

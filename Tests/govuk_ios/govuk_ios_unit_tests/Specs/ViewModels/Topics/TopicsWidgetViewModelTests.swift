@@ -20,7 +20,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         var didHandleError = false
@@ -39,7 +38,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         var didHandleError = false
@@ -64,28 +62,10 @@ struct TopicsWidgetViewModelTests {
             topicAction: { _ in
                 expectedValue = true
             },
-            editAction: { },
             allTopicsAction: { }
         )
 
         sut.topicAction(Topic(context: coreData.viewContext))
-        #expect(expectedValue == true)
-    }
-
-    @Test
-    func didTapEdit_invokesExpectedAction() {
-        var expectedValue = false
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in },
-            editAction: {
-                expectedValue = true
-            },
-            allTopicsAction: { }
-        )
-
-        sut.editAction()
         #expect(expectedValue == true)
     }
 
@@ -96,7 +76,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: {
                 expectedValue = true
             }
@@ -123,11 +102,10 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
-        let result = sut.displayedTopics
+        let result = sut.topicsToBeDisplayed
         #expect(result.count == 2)
         #expect(result.first == favouriteOne)
         #expect(result.last == favouriteTwo)
@@ -150,11 +128,10 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
-        let result = sut.displayedTopics
+        let result = sut.topicsToBeDisplayed
         #expect(result.count == 4)
         #expect(result == mockTopicService._stubbedFetchAllTopics)
         #expect(result.first == allOne)
@@ -175,7 +152,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
@@ -197,7 +173,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
@@ -221,7 +196,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
@@ -235,7 +209,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
@@ -249,7 +222,6 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
@@ -273,13 +245,12 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
         sut.initialLoadComplete = true
 
-        let trackedTopic = try #require(sut.displayedTopics.first?.title)
+        let trackedTopic = try #require(sut.topicsToBeDisplayed.first?.title)
         sut.trackECommerce()
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.name == "view_item_list")
@@ -312,11 +283,10 @@ struct TopicsWidgetViewModelTests {
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
 
-        let trackedTopic = try #require(sut.displayedTopics.first?.title)
+        let trackedTopic = try #require(sut.topicsToBeDisplayed.first?.title)
         sut.trackECommerceSelection(trackedTopic)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.name == "select_item")

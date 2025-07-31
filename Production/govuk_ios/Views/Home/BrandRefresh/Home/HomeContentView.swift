@@ -9,8 +9,8 @@ struct HomeContentView: View {
 
     var body: some View {
         ScrollView {
-            TopicsViewSwiftUI(
-                viewModel: viewModel.topicsWidgetViewModelSwiftUI
+            TopicsView(
+                viewModel: viewModel.topicsWidgetViewModel
             )
         }
     }

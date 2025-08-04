@@ -18,4 +18,4 @@ jobs:
     uses: ./.github/workflows/sonar_scan_pr.yml
     needs: unit-test
     secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      BW_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}

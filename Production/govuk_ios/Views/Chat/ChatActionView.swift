@@ -1,24 +1,37 @@
 import SwiftUI
 
+// swiftlint:disable:next type_body_length
 struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
+    @AccessibilityFocusState private var errorFocused: Bool
     @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
+    @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
 
     init(viewModel: ChatViewModel,
-         textAreaFocused: FocusState<Bool>.Binding) {
+         textAreaFocused: FocusState<Bool>.Binding,
+         showClearChatAlert: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _textAreaFocused = textAreaFocused
+        _showClearChatAlert = showClearChatAlert
     }
 
     var body: some View {
         GeometryReader { geometry in
             let maxTextEditorFrameHeight = geometry.size.height - 32
-            VStack {
+            errorFocused = shouldShowError
+            return VStack(spacing: 0) {
                 Spacer()
+                errorView
+                    .opacity(shouldShowError ? 1.0 : 0.0)
+                    .conditionalAnimation(
+                        .easeInOut(duration: animationDuration),
+                        value: shouldShowError
+                    )
+                    .accessibilityFocused($errorFocused)
                 chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
             }
             .frame(maxHeight: geometry.size.height, alignment: .bottom)
@@ -26,11 +39,29 @@ struct ChatActionView: View {
         .onPreferenceChange(CharacterCountHeightKey.self) { height in
             self.charactersCountHeight = height
         }
+        .onChange(of: viewModel.latestQuestion) { _ in
+            viewModel.errorText = nil
+        }
+        .alert(isPresented: $showClearChatAlert) {
+            Alert(
+                title: Text(String.chat.localized("clearAlertTitle")),
+                message: Text(String.chat.localized("clearAlertBodyText")),
+                primaryButton: .destructive(
+                    Text(String.chat.localized("clearAlertConfirmTitle")),
+                    action: {
+                        viewModel.newChat()
+                    }
+                ),
+                secondaryButton: .cancel(
+                    Text(String.chat.localized("clearAlertDenyTitle"))
+                )
+            )
+        }
     }
 
     private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
         ZStack(alignment: .bottom) {
-            chatActionBlurGradient
+            chatActionBackground
 
             HStack(alignment: .center, spacing: 8) {
                 if !textAreaFocused {
@@ -48,11 +79,33 @@ struct ChatActionView: View {
         }
     }
 
+    private var errorView: some View {
+        VStack(spacing: 0) {
+            blurGradient
+            Text(viewModel.errorText ?? "")
+                .fontWeight(.bold)
+                .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity)
+                .background(Color(UIColor.govUK.fills.surfaceChatBackground))
+                .ignoresSafeArea(edges: .horizontal)
+        }
+        .padding(.horizontal, 16)
+    }
+
+    private var shouldShowError: Bool {
+        viewModel.errorText != nil
+    }
+
     private var menuView: some View {
         return Menu {
-            Button(role: .destructive, action: clearChat) {
-                Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
-            }
+            Button(
+                role: .destructive,
+                action: { showClearChatAlert = true },
+                label: {
+                    Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
+                }
+            )
             Button(action: showAbout) {
                 Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
             }
@@ -102,9 +155,7 @@ struct ChatActionView: View {
             .background(
                 Color(UIColor.govUK.fills.surfaceChatBlue)
                     .roundedBorder(cornerRadius: textEditorRadius,
-                                   borderColor: textAreaFocused ?
-                                   Color(UIColor.govUK.strokes.focusedChatTextBox) :
-                                   Color(UIColor.govUK.strokes.chatAction),
+                                   borderColor: borderColor,
                                    borderWidth: 1.0)
             )
             .conditionalAnimation(.easeInOut(duration: animationDuration),
@@ -115,6 +166,18 @@ struct ChatActionView: View {
             self.textAreaFocused = true
         }
         .accessibilitySortPriority(1)
+    }
+
+    private var borderColor: Color {
+        if shouldShowError {
+            Color(UIColor.govUK.strokes.error)
+        } else {
+            if textAreaFocused {
+                Color(UIColor.govUK.strokes.focusedChatTextBox)
+            } else {
+                Color(UIColor.govUK.strokes.chatAction)
+            }
+        }
     }
 
     private var sendButtonView: some View {
@@ -191,8 +254,9 @@ struct ChatActionView: View {
     }
 
     private func askQuestion() {
-        viewModel.askQuestion()
-        textAreaFocused = false
+        viewModel.askQuestion { success in
+            textAreaFocused = !success
+        }
     }
 
     private var textEditorRadius: CGFloat {
@@ -211,44 +275,48 @@ struct ChatActionView: View {
         unfocusedHeight
     }
 
-    private var chatActionBlurGradient: some View {
+    private var chatActionBackground: some View {
         VStack(spacing: 0) {
-            let blurColor = Color(UIColor.govUK.fills.surfaceChatBackground)
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(
-                        color: blurColor.opacity(1),
-                        location: 0
-                    ),
-                    .init(
-                        color: blurColor.opacity(0.6),
-                        location: 0.8
-                    ),
-                    .init(
-                        color: blurColor.opacity(0),
-                        location: 1
-                    )
-                ]),
-                startPoint: .bottom,
-                endPoint: .top
-            )
-            .frame(height: 60)
-            .ignoresSafeArea(.all)
-
+            if !shouldShowError {
+                blurGradient
+            }
             Color(UIColor.govUK.fills.surfaceChatBackground)
-                .frame(maxHeight: textEditorFrameHeight - 20, alignment: .bottom)
+                .frame(
+                    maxHeight: textEditorFrameHeight + (shouldShowError ? 40 : -20),
+                    alignment: .bottom
+                )
                 .ignoresSafeArea(.all)
         }
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: textViewHeight)
     }
 
-    private func showAbout() {
-        print("About tapped")
+    private var blurGradient: some View {
+        let blurColor = Color(UIColor.govUK.fills.surfaceChatBackground)
+        return LinearGradient(
+            gradient: Gradient(stops: [
+                .init(
+                    color: blurColor.opacity(1),
+                    location: 0
+                ),
+                .init(
+                    color: blurColor.opacity(0.6),
+                    location: 0.8
+                ),
+                .init(
+                    color: blurColor.opacity(0),
+                    location: 1
+                )
+            ]),
+            startPoint: .bottom,
+            endPoint: .top
+        )
+        .frame(height: 60)
+        .ignoresSafeArea(.all)
     }
 
-    private func clearChat() {
-        viewModel.newChat()
+    private func showAbout() {
+        print("About tapped")
     }
 }
 

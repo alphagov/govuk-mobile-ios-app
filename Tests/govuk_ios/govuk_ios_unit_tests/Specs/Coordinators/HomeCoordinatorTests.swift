@@ -234,7 +234,7 @@ struct HomeCoordinatorTests {
         )
 
         subject.start()
-        subject.didReselectTab()
+        subject.didSelectTab(0, previousTabIndex: 0)
 
         #expect(homeViewController._hasResetState)
     }
@@ -266,7 +266,7 @@ struct HomeCoordinatorTests {
 
         subject.start()
         subject.start(MockBaseCoordinator())
-        subject.didReselectTab()
+        subject.didSelectTab(0, previousTabIndex: 0)
 
         #expect(homeViewController._hasResetState == false)
     }

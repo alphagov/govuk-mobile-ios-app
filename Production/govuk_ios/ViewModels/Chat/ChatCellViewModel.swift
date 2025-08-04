@@ -6,21 +6,24 @@ enum ChatCellType {
     case question
     case pendingAnswer
     case answer
-    case error
+    case intro
 }
 
 struct ChatCellViewModel {
+    let title: String?
     let message: String
     let id: String
     let type: ChatCellType
     let sources: [Source]
     let openURLAction: ((URL) -> Void)?
 
-    init(message: String,
+    init(title: String? = nil,
+         message: String,
          id: String,
          type: ChatCellType,
          sources: [Source] = [],
          openURLAction: ((URL) -> Void)? = nil) {
+        self.title = title
         self.message = message
         self.id = id
         self.type = type
@@ -36,7 +39,8 @@ struct ChatCellViewModel {
 
     init(answer: Answer,
          openURLAction: ((URL) -> Void)? ) {
-        self.init(message: answer.message ?? "",
+        self.init(title: String.chat.localized("answerTitle"),
+                  message: answer.message ?? "",
                   id: answer.id ?? UUID().uuidString,
                   type: .answer,
                   sources: answer.sources ?? [],
@@ -47,14 +51,14 @@ struct ChatCellViewModel {
         self.init(message: answeredQuestion.message,
                   id: answeredQuestion.id,
                   type: .question,
-                  sources: answeredQuestion.answer.sources ?? [])
+                  sources: [])
     }
 
-    init(error: Error) {
-        self.init(message: error.localizedDescription,
-                  id: UUID().uuidString,
-                  type: .error,
-                  sources: [])
+    init(intro: Intro) {
+        self.init(title: intro.title,
+                  message: intro.message,
+                  id: intro.id,
+                  type: .intro)
     }
 
     var isAnswer: Bool {
@@ -67,9 +71,7 @@ struct ChatCellViewModel {
             Color(UIColor.govUK.fills.surfaceChatQuestion)
         case .pendingAnswer:
             Color(UIColor.govUK.fills.surfaceBackground)
-        case .answer:
-            Color(UIColor.govUK.fills.surfaceChatBlue)
-        case .error:
+        case .answer, .intro:
             Color(UIColor.govUK.fills.surfaceChatBlue)
         }
     }
@@ -80,9 +82,7 @@ struct ChatCellViewModel {
             Color(UIColor.govUK.strokes.chatQuestion)
         case .pendingAnswer:
             Color.clear
-        case .answer:
-            Color(UIColor.govUK.strokes.chatDivider)
-        case .error:
+        case .answer, .intro:
             Color(UIColor.govUK.strokes.chatDivider)
         }
     }

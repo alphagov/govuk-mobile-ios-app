@@ -14,6 +14,7 @@ final class ChatServiceTests {
         mockChatServiceClient = MockChatServiceClient()
         mockChatRepository = MockChatRespository()
         mockConfigService = MockAppConfigService()
+        mockConfigService._stubbedChatPollIntervalSeconds = 0.2
     }
 
     deinit {
@@ -27,8 +28,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
@@ -53,8 +53,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
@@ -77,8 +76,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
         
         mockChatServiceClient._stubbedAskQuestionResult = .failure(ChatError.networkUnavailable)
@@ -92,7 +90,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .networkUnavailable)
     }
 
@@ -101,8 +99,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchAnswerResults = [
@@ -131,8 +128,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchAnswerResults = [
@@ -149,7 +145,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .apiUnavailable)
     }
 
@@ -158,9 +154,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 3,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
@@ -175,42 +169,16 @@ final class ChatServiceTests {
         }
 
         let historyResult = try #require(try? result.get())
-        #expect(historyResult.count == 1)
-        #expect(historyResult.first?.id == History.history.answeredQuestions.first?.id)
-    }
-
-    @Test
-    func chatHistory_noConversationId_returnsEmptyArray() async throws {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
-        )
-
-        mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
-
-        let result = await withCheckedContinuation { continuation in
-            sut.chatHistory(
-                conversationId: nil,
-                completion: { result in
-                    continuation.resume(returning: result)
-                }
-            )
-        }
-
-        let historyResult = try #require(try? result.get())
-        #expect(historyResult.count == 0)
+        #expect(historyResult.answeredQuestions.count == 1)
+        #expect(historyResult.answeredQuestions.first?.id ==
+                History.history.answeredQuestions.first?.id)
     }
 
     @Test func chatHistory_returnsExpectedError() async throws {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchHistoryResult = .failure(ChatError.apiUnavailable)
@@ -225,7 +193,7 @@ final class ChatServiceTests {
         }
 
         #expect((try? result.get()) == nil)
-        let error = try #require(result.getError() as? ChatError)
+        let error = try #require(result.getError())
         #expect(error == .apiUnavailable)
     }
 
@@ -235,9 +203,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         sut.clearHistory()
@@ -249,9 +215,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
         mockConfigService.features = []
 
@@ -263,9 +227,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
         mockConfigService.features = [.chat]
 

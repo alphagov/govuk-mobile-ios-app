@@ -4,6 +4,8 @@ struct ChatView: View {
     @StateObject private var viewModel: ChatViewModel
     @Namespace var bottomID
     @FocusState private var textAreaFocused: Bool
+    @State var showClearChatAlert: Bool = false
+    @State private var appearedIntroCells: [String] = []
 
     init(viewModel: ChatViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -12,7 +14,8 @@ struct ChatView: View {
     var body: some View {
         let chatActionView = ChatActionView(
             viewModel: viewModel,
-            textAreaFocused: $textAreaFocused
+            textAreaFocused: $textAreaFocused,
+            showClearChatAlert: $showClearChatAlert
         )
 
         ZStack {
@@ -36,14 +39,38 @@ struct ChatView: View {
 
     private var chatCellsView: some View {
         ForEach(viewModel.cellModels, id: \.id) { cellModel in
-            HStack {
-                if !cellModel.isAnswer {
-                    Spacer(minLength: cellModel.questionWidth)
+             HStack {
+                 if !cellModel.isAnswer {
+                     Spacer(minLength: cellModel.questionWidth)
+                 }
+                 chatCellView(cellModel: cellModel)
+             }
+         }
+    }
+
+    private func chatCellView(cellModel: ChatCellViewModel) -> some View {
+        ChatCellView(viewModel: cellModel)
+            .opacity(
+               appearedIntroCells.contains(cellModel.id) ||
+               viewModel.currentConversationExists ? 1 : 0
+            )
+            .animation(.easeIn(duration: 0.5), value: appearedIntroCells)
+            .onAppear {
+                guard !viewModel.currentConversationExists else {
+                    return
                 }
-                ChatCellView(viewModel: cellModel)
-                    .padding(.vertical, 4)
+                let index = viewModel.cellModels.firstIndex {
+                    $0.id == cellModel.id
+                } ?? 0
+                DispatchQueue.main.asyncAfter(
+                    deadline: .now() + Double(index) * 0.7
+                ) {
+                    withAnimation {
+                        appearedIntroCells.insert(cellModel.id, at: index)
+                    }
+                }
             }
-        }
+            .padding(.vertical, 4)
     }
 
     private var chatCellsScrollViewReaderView: some View {
@@ -57,7 +84,11 @@ struct ChatView: View {
         ScrollView {
             Rectangle()
                 .fill(Color.clear)
-                .frame(height: 4)
+                .frame(height: 8)
+            Text(String.chat.localized("messagesAvailableTitle"))
+                .font(.subheadline)
+                .foregroundStyle(Color(UIColor.govUK.text.chatBackground))
+                .multilineTextAlignment(.center)
             chatCellsView
             Rectangle()
                 .fill(Color.clear)

@@ -16,7 +16,9 @@ final class TopicsWidgetViewModel: ObservableObject {
     @Published var showAllTopicsButton = false
     @Published var topicsToBeDisplayed: [Topic] = []
     let editTopicViewModel: EditTopicsViewModel
-    private let showAllButtonsTitle = String.topics.localized("seeAllTopicsButtonText")
+    private let showAllButtonsTitle = String.topics.localized(
+        "seeAllTopicsButtonText"
+    )
     @Published var showingEditScreen: Bool = false
 
 
@@ -108,10 +110,11 @@ final class TopicsWidgetViewModel: ObservableObject {
     }()
 
     func fetchTopics() {
-        topicsService.fetchRemoteList {[weak self] result in
+        topicsService.fetchRemoteList { [weak self] result in
             switch result {
             case .success:
-                break
+                self?.error = false
+                print("success")
             case .failure:
                 DispatchQueue.main.async {
                     self?.error = true

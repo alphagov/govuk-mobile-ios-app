@@ -13,14 +13,13 @@ struct HomeViewModelTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
-            topicWidgetViewModel: topicsViewModel,
+            topicsWidgetViewModel: topicsViewModel,
             localAuthorityAction: { },
             editLocalAuthorityAction: { },
             feedbackAction: { },
@@ -51,14 +50,13 @@ struct HomeViewModelTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: configService,
             notificationService: mockNotificationService,
-            topicWidgetViewModel: topicsViewModel,
+            topicsWidgetViewModel: topicsViewModel,
             localAuthorityAction: { },
             editLocalAuthorityAction: { },
             feedbackAction: { },

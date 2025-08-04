@@ -168,4 +168,8 @@ class ChatViewModel: ObservableObject {
         chatService.clearHistory()
         appendIntroMessages()
     }
+
+    func openAboutURL() {
+        openURLAction(Constants.API.govukBaseUrl)
+    }
 }

@@ -106,7 +106,7 @@ struct ChatActionView: View {
                     Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
                 }
             )
-            Button(action: showAbout) {
+            Button(action: viewModel.openAboutURL) {
                 Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
             }
         } label: {
@@ -313,10 +313,6 @@ struct ChatActionView: View {
         )
         .frame(height: 60)
         .ignoresSafeArea(.all)
-    }
-
-    private func showAbout() {
-        print("About tapped")
     }
 }
 

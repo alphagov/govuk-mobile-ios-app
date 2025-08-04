@@ -217,7 +217,7 @@ struct ChatActionView: View {
             .conditionalAnimation(.easeInOut(duration: animationDuration),
                                   value: textAreaFocused)
         }
-        .padding([.trailing, .bottom])
+        .padding([.horizontal, .bottom])
     }
 
     @ViewBuilder

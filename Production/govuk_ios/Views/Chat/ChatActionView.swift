@@ -10,31 +10,29 @@ struct ChatActionView: View {
     @State private var charactersCountHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
+    private var maxTextEditorFrameHeight: CGFloat
 
     init(viewModel: ChatViewModel,
          textAreaFocused: FocusState<Bool>.Binding,
-         showClearChatAlert: Binding<Bool>) {
+         showClearChatAlert: Binding<Bool>,
+         maxTextEditorFrameHeight: CGFloat) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _textAreaFocused = textAreaFocused
         _showClearChatAlert = showClearChatAlert
+        self.maxTextEditorFrameHeight = maxTextEditorFrameHeight
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            let maxTextEditorFrameHeight = geometry.size.height - 32
-            errorFocused = shouldShowError
-            return VStack(spacing: 0) {
-                Spacer()
-                errorView
-                    .opacity(shouldShowError ? 1.0 : 0.0)
-                    .conditionalAnimation(
-                        .easeInOut(duration: animationDuration),
-                        value: shouldShowError
-                    )
-                    .accessibilityFocused($errorFocused)
-                chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
-            }
-            .frame(maxHeight: geometry.size.height, alignment: .bottom)
+        errorFocused = shouldShowError
+        return VStack(spacing: 0) {
+            errorView
+                .opacity(shouldShowError ? 1.0 : 0.0)
+                .conditionalAnimation(
+                    .easeInOut(duration: animationDuration),
+                    value: shouldShowError
+                )
+                .accessibilityFocused($errorFocused)
+            chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
         }
         .onPreferenceChange(CharacterCountHeightKey.self) { height in
             self.charactersCountHeight = height
@@ -61,8 +59,6 @@ struct ChatActionView: View {
 
     private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
         ZStack(alignment: .bottom) {
-            chatActionBackground
-
             HStack(alignment: .center, spacing: 8) {
                 if !textAreaFocused {
                     menuView
@@ -81,14 +77,16 @@ struct ChatActionView: View {
 
     private var errorView: some View {
         VStack(spacing: 0) {
-            blurGradient
-            Text(viewModel.errorText ?? "")
-                .fontWeight(.bold)
-                .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity)
-                .background(Color(UIColor.govUK.fills.surfaceChatBackground))
-                .ignoresSafeArea(edges: .horizontal)
+            if let error = viewModel.errorText {
+                Text(error)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(UIColor.govUK.fills.surfaceChatBackground))
+                    .ignoresSafeArea(edges: .horizontal)
+            }
         }
         .padding(.horizontal, 16)
     }
@@ -273,22 +271,6 @@ struct ChatActionView: View {
         return textAreaFocused ?
         textViewHeight + max((2 * lineHeight), 75) :
         unfocusedHeight
-    }
-
-    private var chatActionBackground: some View {
-        VStack(spacing: 0) {
-            if !shouldShowError {
-                blurGradient
-            }
-            Color(UIColor.govUK.fills.surfaceChatBackground)
-                .frame(
-                    maxHeight: textEditorFrameHeight + (shouldShowError ? 40 : -20),
-                    alignment: .bottom
-                )
-                .ignoresSafeArea(.all)
-        }
-        .conditionalAnimation(.easeInOut(duration: animationDuration),
-                              value: textViewHeight)
     }
 
     private var blurGradient: some View {

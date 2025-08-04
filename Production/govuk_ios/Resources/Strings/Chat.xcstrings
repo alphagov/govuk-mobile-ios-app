@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "aboutMenuAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About GOV.UK Chat"
+          }
+        }
+      }
+    },
     "aboutMenuTitle" : {
       "extractionState" : "manual",
       "localizations" : {

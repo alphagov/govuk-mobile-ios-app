@@ -106,9 +106,14 @@ struct ChatActionView: View {
                     Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
                 }
             )
-            Button(action: showAbout) {
-                Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
-            }
+            Button(
+                action: { viewModel.openAboutURL() },
+                label: {
+                    Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
+                        .accessibilityLabel(String.chat.localized("aboutMenuAccessibilityTitle"))
+                        .accessibilityHint(String.common.localized("openWebLinkHint"))
+                }
+            )
         } label: {
             Image(systemName: "ellipsis")
                 .font(.system(size: 18, weight: .bold))
@@ -313,10 +318,6 @@ struct ChatActionView: View {
         )
         .frame(height: 60)
         .ignoresSafeArea(.all)
-    }
-
-    private func showAbout() {
-        print("About tapped")
     }
 }
 

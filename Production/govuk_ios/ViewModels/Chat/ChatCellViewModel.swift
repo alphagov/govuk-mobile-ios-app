@@ -70,7 +70,7 @@ struct ChatCellViewModel {
         case .question:
             Color(UIColor.govUK.fills.surfaceChatQuestion)
         case .pendingAnswer:
-            Color(UIColor.govUK.fills.surfaceBackground)
+            Color(UIColor.clear)
         case .answer, .intro:
             Color(UIColor.govUK.fills.surfaceChatBlue)
         }

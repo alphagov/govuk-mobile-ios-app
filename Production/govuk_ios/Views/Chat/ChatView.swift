@@ -1,36 +1,57 @@
 import SwiftUI
 
 struct ChatView: View {
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @StateObject private var viewModel: ChatViewModel
     @Namespace var bottomID
     @FocusState private var textAreaFocused: Bool
     @State var showClearChatAlert: Bool = false
     @State private var appearedIntroCells: [String] = []
+    @State private var backgroundOpacity = 0.25
+    private let animationDuration = 0.5
 
     init(viewModel: ChatViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        let chatActionView = ChatActionView(
-            viewModel: viewModel,
-            textAreaFocused: $textAreaFocused,
-            showClearChatAlert: $showClearChatAlert
-        )
+        GeometryReader { geometry in
+            let chatActionView = ChatActionView(
+                viewModel: viewModel,
+                textAreaFocused: $textAreaFocused,
+                showClearChatAlert: $showClearChatAlert,
+                maxTextEditorFrameHeight: geometry.size.height - 32
+            )
 
-        ZStack {
-            Color(UIColor.govUK.fills.surfaceChatBackground)
-                .edgesIgnoringSafeArea(.all)
+            ZStack {
+                Color(UIColor.govUK.fills.surfaceChatBackground)
+                    .edgesIgnoringSafeArea(.all)
+                Image(verticalSizeClass == .compact ?
+                      "chat_background_landscape" : "chat_background")
+                .resizable()
+                .opacity(backgroundOpacity)
+                .ignoresSafeArea(edges: [.top, .leading, .trailing])
 
-            chatCellsScrollViewReaderView
-                .frame(maxHeight: .infinity)
-
-            topBlurGradientView
-
-            chatActionView
+                VStack(spacing: 0) {
+                    chatCellsScrollViewReaderView
+                        .frame(maxHeight: .infinity)
+                        .layoutPriority(1)
+                    chatActionView
+                }
+            }
         }
         .onAppear {
             viewModel.loadHistory()
+            withAnimation(
+                .easeIn(
+                    duration: viewModel.currentConversationExists ? 0.0 : animationDuration * 3
+                )
+            ) {
+                backgroundOpacity = 1.0
+            }
+        }
+        .onDisappear {
+            backgroundOpacity = 0.25
         }
         .onTapGesture {
             textAreaFocused = false
@@ -39,22 +60,22 @@ struct ChatView: View {
 
     private var chatCellsView: some View {
         ForEach(viewModel.cellModels, id: \.id) { cellModel in
-             HStack {
-                 if !cellModel.isAnswer {
-                     Spacer(minLength: cellModel.questionWidth)
-                 }
-                 chatCellView(cellModel: cellModel)
-             }
-         }
+            HStack {
+                if !cellModel.isAnswer {
+                    Spacer(minLength: cellModel.questionWidth)
+                }
+                chatCellView(cellModel: cellModel)
+            }
+        }
     }
 
     private func chatCellView(cellModel: ChatCellViewModel) -> some View {
         ChatCellView(viewModel: cellModel)
             .opacity(
-               appearedIntroCells.contains(cellModel.id) ||
-               viewModel.currentConversationExists ? 1 : 0
+                appearedIntroCells.contains(cellModel.id) ||
+                viewModel.currentConversationExists ? 1 : 0
             )
-            .animation(.easeIn(duration: 0.5), value: appearedIntroCells)
+            .animation(.easeIn(duration: animationDuration), value: appearedIntroCells)
             .onAppear {
                 guard !viewModel.currentConversationExists else {
                     return
@@ -90,12 +111,12 @@ struct ChatView: View {
                 .foregroundStyle(Color(UIColor.govUK.text.chatBackground))
                 .multilineTextAlignment(.center)
             chatCellsView
-            Rectangle()
-                .fill(Color.clear)
-                .frame(height: 66)
             Text("")
                 .id(bottomID)
         }
+        .mask(
+            gradientMask
+        )
         .scrollIndicators(.hidden)
         .onChange(of: viewModel.scrollToBottom) { shouldScroll in
             if shouldScroll {
@@ -113,31 +134,28 @@ struct ChatView: View {
         }
     }
 
-    private var topBlurGradientView: some View {
-        VStack {
-            let blurColor = Color(UIColor.govUK.fills.surfaceBackground)
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(
-                        color: blurColor.opacity(1),
-                        location: 0
-                    ),
-                    .init(
-                        color: blurColor.opacity(0.8),
-                        location: 0.7
-                    ),
-                    .init(
-                        color: blurColor.opacity(0),
-                        location: 1
-                    )
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea(.all)
-            .frame(height: 20)
-
-            Spacer()
-        }
+    var gradientMask: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                .init(
+                    color: Color(.black).opacity(0),
+                    location: 0
+                ),
+                .init(
+                    color: Color(.black).opacity(1),
+                    location: 0.03
+                ),
+                .init(
+                    color: Color(.black).opacity(1),
+                    location: 0.97
+                ),
+                .init(
+                    color: Color(.black).opacity(0),
+                    location: 1
+                )
+            ]),
+            startPoint: .bottom,
+            endPoint: .top
+        )
     }
 }

@@ -76,7 +76,9 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
-            await saveExpiryDate()
+            if let token = try? await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "") {
+                await saveExpiryDate(issueDate: token.iat)
+            }
             return await handleReturningUser()
         case .failure(let error):
             return AuthenticationServiceResult.failure(error)
@@ -120,7 +122,10 @@ class AuthenticationService: AuthenticationServiceInterface {
         guard let refreshToken = refreshToken else {
             return
         }
-        try? authenticatedSecureStoreService.saveItem(item: refreshToken, itemName: "refreshToken")
+        try? authenticatedSecureStoreService.saveItem(
+            item: refreshToken,
+            itemName: "refreshToken"
+        )
     }
 
     func tokenRefreshRequest() async -> TokenRefreshResult {
@@ -161,19 +166,17 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.accessToken = accessToken
     }
 
-    private func saveExpiryDate() async {
+    private func saveExpiryDate(issueDate: Date) async {
         let date = Calendar.current.date(
             byAdding: .second,
             value: 601_200,
-            to: .now
+            to: issueDate
         )
         userDefaults.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)
     }
 
     var shouldAttemptTokenRefresh: Bool {
-        guard let date = UserDefaults.standard.value(
-            forKey: UserDefaultsKeys.refreshTokenExpiryDate.rawValue
-        ) as? Date
+        guard let date = userDefaults.value(forKey: .refreshTokenExpiryDate) as? Date
         else { return true }
         return date > Date.now
     }

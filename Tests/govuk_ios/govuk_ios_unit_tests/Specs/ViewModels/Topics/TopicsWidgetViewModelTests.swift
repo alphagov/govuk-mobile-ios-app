@@ -25,7 +25,7 @@ struct TopicsWidgetViewModelTests {
                 topicAction: { _ in },
                 allTopicsAction: { }
             )
-            sut.$error
+            sut.$fetchTopicsError
                 .receive(on: DispatchQueue.main)
                 .dropFirst()
                 .sink(
@@ -52,7 +52,7 @@ struct TopicsWidgetViewModelTests {
             allTopicsAction: { }
         )
         let result = await withCheckedContinuation { continuation in
-            sut.$error
+            sut.$fetchTopicsError
                 .receive(on: DispatchQueue.main)
                 .dropFirst()
                 .sink(

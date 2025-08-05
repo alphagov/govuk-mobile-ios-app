@@ -33,7 +33,6 @@
 		1687F05D2CB035E3005E1473 /* AllTopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */; };
 		1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */; };
 		1687F3172CB4110D005E1473 /* AllTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */; };
-		168CB4382D77487B009BAA12 /* HomeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168CB4372D77487B009BAA12 /* HomeContentViewController.swift */; };
 		168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */; };
 		168F6FAA2C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */; };
 		168F85532DE9AE4B0040E6AF /* ScrollBounceBehaviourModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F85522DE9AE390040E6AF /* ScrollBounceBehaviourModifier.swift */; };
@@ -427,7 +426,6 @@
 		1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewController.swift; sourceTree = "<group>"; };
 		1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsCoordinator.swift; sourceTree = "<group>"; };
 		1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewModel.swift; sourceTree = "<group>"; };
-		168CB4372D77487B009BAA12 /* HomeContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentViewController.swift; sourceTree = "<group>"; };
 		168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidgetViewModel.swift; sourceTree = "<group>"; };
 		168F85522DE9AE390040E6AF /* ScrollBounceBehaviourModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollBounceBehaviourModifier.swift; sourceTree = "<group>"; };
@@ -1536,7 +1534,6 @@
 			children = (
 				1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */,
 				5D6B90142DCB7F0000D36463 /* NotificationConsentAlertViewController.swift */,
-				168CB4372D77487B009BAA12 /* HomeContentViewController.swift */,
 				166BDDB52C330D1C00437AE0 /* HomeViewController.swift */,
 				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
 				5DD4CB172D95491600459FB5 /* RecentActivityListViewController.swift */,
@@ -2480,7 +2477,6 @@
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,
 				4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */,
-				168CB4382D77487B009BAA12 /* HomeContentViewController.swift in Sources */,
 				5DABE8CF2CA41AD4003AB312 /* RecentActivtyWidget.swift in Sources */,
 				5DB637082D7732A800A44E36 /* GOVRequest+Topics.swift in Sources */,
 				5D66D1842CBFC12400006723 /* AppEvent+Function.swift in Sources */,

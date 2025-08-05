@@ -5,14 +5,14 @@ import GOVKit
 struct TopicsView: View {
     @StateObject var viewModel: TopicsWidgetViewModel
     @ScaledMetric var scale: CGFloat = 1
-    @State private var showingEditScreen: Bool = false
+    // @State private var showingEditScreen: Bool = false
     private let columns = [
         GridItem(.flexible(), spacing: 2, alignment: .leading),
         GridItem(.flexible(), spacing: 2, alignment: .leading)
     ]
 
     var body: some View {
-        if viewModel.error {
+        if viewModel.fetchTopicsError {
             VStack {
                 HStack {
                     Text(String.home.localized("topicsWidgetTitleCustomised"))

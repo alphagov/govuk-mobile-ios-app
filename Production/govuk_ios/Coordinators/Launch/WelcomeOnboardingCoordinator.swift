@@ -71,6 +71,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     }
 
     private var shouldSkipOnboarding: Bool {
-        authenticationService.isSignedIn
+//        authenticationService.isSignedIn
+        return true
     }
 }

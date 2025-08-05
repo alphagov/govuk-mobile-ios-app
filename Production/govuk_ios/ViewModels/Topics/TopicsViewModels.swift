@@ -12,7 +12,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
     var initialLoadComplete: Bool = false
-    @Published var error = false
+    @Published var fetchTopicsError = false
     @Published var showAllTopicsButton = false
     @Published var topicsToBeDisplayed: [Topic] = []
     let editTopicViewModel: EditTopicsViewModel
@@ -41,7 +41,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     func showAllTopicsButtonHidden() {
         showAllTopicsButton =
         (topicsToBeDisplayed.count >= topicsService.fetchAll().count) ||
-        error
+        fetchTopicsError
     }
 
     var widgetTitle: String {
@@ -113,11 +113,11 @@ final class TopicsWidgetViewModel: ObservableObject {
         topicsService.fetchRemoteList { [weak self] result in
             switch result {
             case .success:
-                self?.error = false
+                self?.fetchTopicsError = false
                 print("success")
             case .failure:
                 DispatchQueue.main.async {
-                    self?.error = true
+                    self?.fetchTopicsError = true
                 }
             }
         }

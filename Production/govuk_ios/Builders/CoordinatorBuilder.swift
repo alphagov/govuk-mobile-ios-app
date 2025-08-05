@@ -36,6 +36,7 @@ class CoordinatorBuilder {
         PeriAuthCoordinator(
             coordinatorBuilder: self,
             navigationController: navigationController,
+            authenticationService: container.authenticationService.resolve(),
             completion: completion
         )
     }

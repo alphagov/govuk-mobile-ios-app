@@ -53,4 +53,14 @@ class MockAuthenticationService: AuthenticationServiceInterface {
     func tokenRefreshRequest() async -> TokenRefreshResult {
         _stubbedTokenRefreshRequest
     }
+
+    var _shouldAttemptTokenRefresh: Bool = true
+    var shouldAttemptTokenRefresh: Bool {
+        _shouldAttemptTokenRefresh
+    }
+
+    var _clearTokensCalled: Bool = false
+    func clearTokens() {
+        _clearTokensCalled = true
+    }
 }

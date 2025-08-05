@@ -15,7 +15,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -55,7 +56,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -95,7 +97,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -135,7 +138,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let result = await sut.authenticate(window: UIApplication.shared.window!)
 
@@ -155,7 +159,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -186,7 +191,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         sut.encryptRefreshToken()
 
@@ -202,7 +208,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -232,7 +239,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -273,7 +281,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         mockAuthClient._stubbedTokenRefreshResult = .success(tokenResponse)
         mockSecureStoreService._stubbedReadItemResult = .success(refreshToken)
@@ -305,7 +314,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -329,7 +339,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -351,7 +362,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -382,7 +394,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
 
         #expect(sut.secureStoreRefreshTokenPresent)
@@ -397,7 +410,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaults: MockUserDefaults()
         )
 
         #expect(!sut.secureStoreRefreshTokenPresent)

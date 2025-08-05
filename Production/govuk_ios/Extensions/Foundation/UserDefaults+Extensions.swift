@@ -25,6 +25,10 @@ extension UserDefaults: UserDefaultsInterface {
         )
         synchronize()
     }
+
+    func remove(key: UserDefaultsKeys) {
+        removeObject(forKey: UserDefaultsKeys.refreshTokenExpiryDate.rawValue)
+    }
 }
 
 enum UserDefaultsKeys: String {
@@ -46,4 +50,5 @@ protocol UserDefaultsInterface {
     func bool(forKey key: UserDefaultsKeys) -> Bool
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
+    func remove(key: UserDefaultsKeys)
 }

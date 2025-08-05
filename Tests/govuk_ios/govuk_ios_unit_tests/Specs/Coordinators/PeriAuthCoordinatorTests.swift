@@ -10,14 +10,16 @@ import UIKit
 struct PeriAuthCoordinatorTests {
 
     @Test
-    func start_startsReauthentication() {
+    func start_shouldAttemptTokenRefresh_startsReauthentication() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockAuthenticationService = MockAuthenticationService()
         let subject = PeriAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: MockNavigationController(),
+            authenticationService: mockAuthenticationService,
             completion: { }
         )
-
+        mockAuthenticationService._shouldAttemptTokenRefresh = true
         let stubbedReauthenticationCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedReauthenticationCoordinator = stubbedReauthenticationCoordinator
         subject.start(url: nil)
@@ -26,11 +28,30 @@ struct PeriAuthCoordinatorTests {
     }
 
     @Test
+    func start_shouldNotAttemptTokenRefresh_startsReauthentication() {
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockAuthenticationService = MockAuthenticationService()
+        let subject = PeriAuthCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            navigationController: MockNavigationController(),
+            authenticationService: mockAuthenticationService,
+            completion: { }
+        )
+        mockAuthenticationService._shouldAttemptTokenRefresh = false
+        let stubbedReauthenticationCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedReauthenticationCoordinator = stubbedReauthenticationCoordinator
+        subject.start(url: nil)
+
+        #expect(!stubbedReauthenticationCoordinator._startCalled)
+    }
+
+    @Test
     func reauthenticationCompletion_startWelcomeOnboarding() {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let subject = PeriAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: MockNavigationController(),
+            authenticationService: MockAuthenticationService(),
             completion: { }
         )
 
@@ -53,6 +74,7 @@ struct PeriAuthCoordinatorTests {
         let subject = PeriAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: MockNavigationController(),
+            authenticationService: MockAuthenticationService(),
             completion: { }
         )
 
@@ -80,6 +102,7 @@ struct PeriAuthCoordinatorTests {
         let subject = PeriAuthCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             navigationController: MockNavigationController(),
+            authenticationService: MockAuthenticationService(),
             completion: {
                 completionCalled = true
             }

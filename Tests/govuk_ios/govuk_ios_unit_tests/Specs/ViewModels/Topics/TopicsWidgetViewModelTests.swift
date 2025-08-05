@@ -12,7 +12,7 @@ struct TopicsWidgetViewModelTests {
     let coreData = CoreDataRepository.arrangeAndLoad
     let mockTopicService = MockTopicsService()
     let mockAnalyticsService = MockAnalyticsService()
-    //
+
     @Test
     func fetchTopics_downloadSuccess_returnsExpectedData() async {
         var cancellables = Set<AnyCancellable>()

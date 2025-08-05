@@ -164,23 +164,6 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-//    private var presentEditTopicsCoordinator: () -> Void {
-//        return { [weak self] in
-//            self?.trackWidgetNavigation(text: "EditTopics")
-//            guard let self = self else { return }
-//            self.topicWidgetViewModelSwif.isEditing = true
-//            let navigationController = UINavigationController()
-//            let coordinator = self.coordinatorBuilder.editTopics(
-//                navigationController: navigationController,
-//                didDismissAction: {
-//                    self.topicWidgetViewModel.isEditing = false
-//                    self.root.viewWillReAppear()
-//                }
-//            )
-//            self.present(coordinator)
-//        }
-//    }
-
     private var presentLocalAuthorityCoordinator: () -> Void {
         return { [weak self] in
             self?.trackWidgetNavigation(text: "Your local services")

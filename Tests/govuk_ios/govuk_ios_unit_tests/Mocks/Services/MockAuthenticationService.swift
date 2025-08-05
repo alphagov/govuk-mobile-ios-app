@@ -25,7 +25,9 @@ class MockAuthenticationService: AuthenticationServiceInterface {
         _stubbedIsReauth
     }
 
+    var _receivedSignOutReason: SignoutReason?
     func signOut(reason: SignoutReason) {
+        _receivedSignOutReason = reason
         _stubbedIsSignedIn = false
     }
 
@@ -54,13 +56,8 @@ class MockAuthenticationService: AuthenticationServiceInterface {
         _stubbedTokenRefreshRequest
     }
 
-    var _shouldAttemptTokenRefresh: Bool = true
+    var _stubbedShouldAttemptTokenRefresh: Bool = true
     var shouldAttemptTokenRefresh: Bool {
-        _shouldAttemptTokenRefresh
-    }
-
-    var _clearTokensCalled: Bool = false
-    func clearTokens() {
-        _clearTokensCalled = true
+        _stubbedShouldAttemptTokenRefresh
     }
 }

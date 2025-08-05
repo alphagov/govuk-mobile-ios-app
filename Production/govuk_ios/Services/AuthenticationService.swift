@@ -16,7 +16,6 @@ protocol AuthenticationServiceInterface: AnyObject {
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult
     func signOut(reason: SignoutReason)
-    func clearTokens()
     func encryptRefreshToken()
     func tokenRefreshRequest() async -> TokenRefreshResult
 }
@@ -147,7 +146,6 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
-            await saveExpiryDate()
             return .success(tokenResponse)
         case .failure(let error):
             return .failure(error)

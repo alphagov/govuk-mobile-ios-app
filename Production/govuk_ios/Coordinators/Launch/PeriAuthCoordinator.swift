@@ -3,16 +3,13 @@ import UIKit
 
 class PeriAuthCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
-    private let authenticationService: AuthenticationServiceInterface
     private let completion: () -> Void
 
     init(coordinatorBuilder: CoordinatorBuilder,
          navigationController: UINavigationController,
-         authenticationService: AuthenticationServiceInterface,
          completion: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.completion = completion
-        self.authenticationService = authenticationService
         super.init(navigationController: navigationController)
     }
 
@@ -21,9 +18,6 @@ class PeriAuthCoordinator: BaseCoordinator {
     }
 
     private func startReauthentication(url: URL?) {
-        guard authenticationService.shouldAttemptTokenRefresh
-        else { return clearCurrentAuth(url: url) }
-
         let coordinator = coordinatorBuilder.reauthentication(
             navigationController: root,
             completionAction: { [weak self] in
@@ -31,11 +25,6 @@ class PeriAuthCoordinator: BaseCoordinator {
             }
         )
         start(coordinator, url: url)
-    }
-
-    private func clearCurrentAuth(url: URL?) {
-        authenticationService.clearTokens()
-        startWelcomeOnboarding(url: url)
     }
 
     private func startWelcomeOnboarding(url: URL?) {

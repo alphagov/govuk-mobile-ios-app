@@ -222,8 +222,6 @@
 		5DD4CB182D95491600459FB5 /* RecentActivityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4CB172D95491600459FB5 /* RecentActivityListViewController.swift */; };
 		5DD4CB1A2D95491E00459FB5 /* RecentActivityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4CB192D95491E00459FB5 /* RecentActivityListViewModel.swift */; };
 		5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */; };
-		5DD877182E312CAC004F344D /* RefreshTokenPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD877172E312CAC004F344D /* RefreshTokenPayload.swift */; };
-		5DDB31CC2CEF84D100E49259 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5DDB31CB2CEF84D100E49259 /* Onboarding */; };
 		5DDD58892D5A556A001C0B3E /* NotificationOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD58882D5A556A001C0B3E /* NotificationOnboardingCoordinator.swift */; };
 		5DDD588B2D5A557D001C0B3E /* onboarding_stay_updated.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DDD588A2D5A557D001C0B3E /* onboarding_stay_updated.json */; };
 		5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */; };
@@ -624,7 +622,6 @@
 		5DD4CB172D95491600459FB5 /* RecentActivityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityListViewController.swift; sourceTree = "<group>"; };
 		5DD4CB192D95491E00459FB5 /* RecentActivityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityListViewModel.swift; sourceTree = "<group>"; };
 		5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepByStepsViewModel.swift; sourceTree = "<group>"; };
-		5DD877172E312CAC004F344D /* RefreshTokenPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenPayload.swift; sourceTree = "<group>"; };
 		5DDD58882D5A556A001C0B3E /* NotificationOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		5DDD588A2D5A557D001C0B3E /* onboarding_stay_updated.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = onboarding_stay_updated.json; sourceTree = "<group>"; };
 		5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -1853,7 +1850,6 @@
 			isa = PBXGroup;
 			children = (
 				D09046702DBBC1AC0096EE66 /* IdTokenPayload.swift */,
-				5DD877172E312CAC004F344D /* RefreshTokenPayload.swift */,
 				D09046742DBBC1AC0096EE66 /* TokenExtractor.swift */,
 			);
 			path = JWT;
@@ -2203,7 +2199,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				169842DE2DB05F2900E3EA66 /* LocalAuthenticationOnboardingView.swift in Sources */,
-				5DD877182E312CAC004F344D /* RefreshTokenPayload.swift in Sources */,
 				5DD4CB122D9548DF00459FB5 /* ActivityRepository.swift in Sources */,
 				D052CCE22E0B09BE0048F98A /* ChatActionView.swift in Sources */,
 				1664A5642D36CF1200DB18A5 /* SearchSuggestionsViewController.swift in Sources */,

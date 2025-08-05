@@ -11,8 +11,4 @@ struct JWTExtractor: TokenExtractor {
     func extract(jwt: String) async throws -> IdTokenPayload {
         return try await signers.unverified(jwt)
     }
-
-    func extract<T: JWTPayload>(jwt: String) async throws -> T {
-        try await signers.unverified(jwt)
-    }
 }

@@ -99,6 +99,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     func signOut(reason: SignoutReason) {
         do {
             try authenticatedSecureStoreService.delete()
+            userDefaults.remove(key: UserDefaultsKeys.refreshTokenExpiryDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
@@ -113,12 +114,6 @@ class AuthenticationService: AuthenticationServiceInterface {
             #endif
             return
         }
-    }
-
-    func clearTokens() {
-        try? authenticatedSecureStoreService.delete()
-        authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
-        userDefaults.remove(key: UserDefaultsKeys.refreshTokenExpiryDate)
     }
 
     func encryptRefreshToken() {

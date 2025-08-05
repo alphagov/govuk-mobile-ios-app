@@ -47,18 +47,17 @@ class ViewControllerBuilder {
             configService: dependencies.configService,
             notificationService: dependencies.notificationService,
             topicsWidgetViewModel: dependencies.topicsWidgetViewModel,
+            urlOpener: UIApplication.shared,
+            searchService: dependencies.searchService,
+            activityService: dependencies.activityService,
+            localAuthorityService: dependencies.localAuthorityService,
             localAuthorityAction: actions.localAuthorityAction,
             editLocalAuthorityAction: actions.editLocalAuthorityAction,
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
             openURLAction: actions.openURLAction,
-            openAction: actions.openSearchAction,
-            urlOpener: UIApplication.shared,
-            searchService: dependencies.searchService,
-            activityService: dependencies.activityService,
-            localAuthorityService: dependencies.localAuthorityService
-        )
+            openAction: actions.openSearchAction)
         return HomeViewController(
             viewModel: viewModel
         )

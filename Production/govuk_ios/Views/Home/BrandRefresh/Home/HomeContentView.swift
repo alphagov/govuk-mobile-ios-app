@@ -1,17 +1,30 @@
 import SwiftUI
 
 struct HomeContentView: View {
-    let viewModel: HomeViewModel
+    @StateObject var viewModel: HomeViewModel
+    @Namespace var topID
 
     init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        ScrollView {
-            TopicsView(
-                viewModel: viewModel.topicsWidgetViewModel
-            )
+        ScrollViewReader { proxy in
+            ScrollView {
+                EmptyView()
+                    .id(topID)
+                TopicsView(
+                    viewModel: viewModel.topicsWidgetViewModel
+                )
+            }.onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in
+                print(shouldScroll)
+                if shouldScroll {
+                    withAnimation {
+                        proxy.scrollTo(topID, anchor: .top)
+                    }
+                    viewModel.homeContentScrollToTop = false
+                }
+            }
         }
     }
 }

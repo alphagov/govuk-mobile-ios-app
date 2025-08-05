@@ -70,11 +70,11 @@ class HomeViewController: BaseViewController {
         if viewModel.searchEnabled {
             configureSearchBar()
         }
-        configureHomeContent()
-        returnContentViewController()
+        configureContentViewController()
+        displayHomeContent()
     }
 
-    private func returnContentViewController() {
+    private func configureContentViewController() {
         let contentView = HomeContentView(
             viewModel: viewModel
         )
@@ -84,7 +84,7 @@ class HomeViewController: BaseViewController {
         self.homeContentViewController = contentViewController
     }
 
-    private func configureHomeContent() {
+    private func displayHomeContent() {
         displayController(homeContentViewController)
     }
 

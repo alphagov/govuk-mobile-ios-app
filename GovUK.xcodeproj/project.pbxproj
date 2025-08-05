@@ -101,6 +101,7 @@
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */; };
+		4EAFCE512E42AE0500125755 /* configureHomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAFCE502E42AE0400125755 /* configureHomeContent.swift */; };
 		4EB7D8512DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */; };
 		4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */; };
 		4EBCA3292DAC546A0063A723 /* LocalAuthorityServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */; };
@@ -496,6 +497,7 @@
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityCardModel.swift; sourceTree = "<group>"; };
+		4EAFCE502E42AE0400125755 /* configureHomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = configureHomeContent.swift; sourceTree = "<group>"; };
 		4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceCoordinator.swift; sourceTree = "<group>"; };
 		4EBCA3262DAC541B0063A723 /* LocalAuthorityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityService.swift; sourceTree = "<group>"; };
 		4EBCA3282DAC546A0063A723 /* LocalAuthorityServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityServiceClient.swift; sourceTree = "<group>"; };
@@ -1469,6 +1471,7 @@
 				5D30CF982C64A64600361C97 /* TestFlight */,
 				5DAD71752BD250DB0075F648 /* Products */,
 				5D1353A92BE0D75000414441 /* Frameworks */,
+				4EAFCE502E42AE0400125755 /* configureHomeContent.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2520,6 +2523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EAFCE512E42AE0500125755 /* configureHomeContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

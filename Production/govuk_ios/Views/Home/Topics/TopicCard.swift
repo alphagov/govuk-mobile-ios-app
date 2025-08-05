@@ -22,7 +22,7 @@ struct TopicCard: View {
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.trailingIcon))
                         .frame(width: 12 * scale, height: 12 * scale)
                         .padding([.bottom], 3)
-                }.padding([.bottom], 2)
+                }
             }.padding()
         }.accessibilityAddTraits(.isButton)
     }

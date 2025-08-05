@@ -7,8 +7,8 @@ struct TopicsView: View {
     @ScaledMetric var scale: CGFloat = 1
     // @State private var showingEditScreen: Bool = false
     private let columns = [
-        GridItem(.flexible(), spacing: 2, alignment: .leading),
-        GridItem(.flexible(), spacing: 2, alignment: .leading)
+        GridItem(.flexible(), spacing: nil, alignment: .leading),
+        GridItem(.flexible(), spacing: nil, alignment: .leading)
     ]
 
     var body: some View {
@@ -25,7 +25,7 @@ struct TopicsView: View {
                 Spacer()
             }.padding()
         } else {
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 0) {
                 ScrollView {
                     HStack {
                         Text(viewModel.widgetTitle)

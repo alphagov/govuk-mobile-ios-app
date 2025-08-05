@@ -44,7 +44,7 @@ struct ChatView: View {
             viewModel.loadHistory()
             withAnimation(
                 .easeIn(
-                    duration: viewModel.currentConversationExists ? 0.0 : animationDuration * 3
+                    duration: viewModel.currentConversationExists ? 0.0 : animationDuration * 4
                 )
             ) {
                 backgroundOpacity = 1.0

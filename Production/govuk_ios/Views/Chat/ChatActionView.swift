@@ -66,8 +66,6 @@ struct ChatActionView: View {
 
                 textEditorView(maxFrameHeight: maxFrameHeight)
             }
-            .conditionalAnimation(.easeInOut(duration: animationDuration),
-                                  value: textAreaFocused)
             .accessibilityElement(children: .contain)
             .padding([.horizontal, .bottom])
 
@@ -129,36 +127,34 @@ struct ChatActionView: View {
     }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
-        ZStack {
-            DynamicTextEditor(
-                text: $viewModel.latestQuestion,
-                dynamicHeight: $textViewHeight,
-                placeholderText: $placeholderText
-            )
-            .focused($textAreaFocused)
-            .onChange(of: textAreaFocused) { isFocused in
-                if isFocused || !viewModel.latestQuestion.isEmpty {
-                    placeholderText = nil
-                } else {
-                    placeholderText = String.chat.localized("textEditorPlaceholder")
-                }
+        DynamicTextEditor(
+            text: $viewModel.latestQuestion,
+            dynamicHeight: $textViewHeight,
+            placeholderText: $placeholderText
+        )
+        .focused($textAreaFocused)
+        .onChange(of: textAreaFocused) { isFocused in
+            if isFocused || !viewModel.latestQuestion.isEmpty {
+                placeholderText = nil
+            } else {
+                placeholderText = String.chat.localized("textEditorPlaceholder")
             }
-            .padding(.horizontal, 12)
-            .padding(.top, 8)
-            .padding(.bottom,
-                     textAreaFocused ? (max(50, charactersCountHeight)) : 8)
-            .frame(
-                height: min(textEditorFrameHeight, maxFrameHeight)
-            )
-            .background(
-                Color(UIColor.govUK.fills.surfaceChatBlue)
-                    .roundedBorder(cornerRadius: textEditorRadius,
-                                   borderColor: borderColor,
-                                   borderWidth: 1.0)
-            )
-            .conditionalAnimation(.easeInOut(duration: animationDuration),
-                                  value: textViewHeight)
         }
+        .padding(.horizontal, 12)
+        .padding(.top, 8)
+        .padding(.bottom,
+                 textAreaFocused ? (max(50, charactersCountHeight)) : 8)
+        .frame(
+            height: min(textEditorFrameHeight, maxFrameHeight)
+        )
+        .background(
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+                .roundedBorder(cornerRadius: textEditorRadius,
+                               borderColor: borderColor,
+                               borderWidth: 1.0)
+        )
+        .conditionalAnimation(.easeInOut(duration: animationDuration),
+                              value: textViewHeight)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true

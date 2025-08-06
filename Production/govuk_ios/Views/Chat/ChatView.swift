@@ -38,6 +38,8 @@ struct ChatView: View {
                         .layoutPriority(1)
                     chatActionView
                 }
+                .conditionalAnimation(.easeInOut(duration: animationDuration),
+                                      value: textAreaFocused)
             }
         }
         .onAppear {
@@ -143,11 +145,11 @@ struct ChatView: View {
                 ),
                 .init(
                     color: Color(.black).opacity(1),
-                    location: 0.03
+                    location: 0.09
                 ),
                 .init(
                     color: Color(.black).opacity(1),
-                    location: 0.97
+                    location: 0.94
                 ),
                 .init(
                     color: Color(.black).opacity(0),

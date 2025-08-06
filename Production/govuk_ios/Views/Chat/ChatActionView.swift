@@ -5,7 +5,6 @@ struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
     @AccessibilityFocusState private var errorFocused: Bool
-    @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
@@ -129,7 +128,7 @@ struct ChatActionView: View {
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
         DynamicTextEditor(
             text: $viewModel.latestQuestion,
-            dynamicHeight: $textViewHeight,
+            dynamicHeight: $viewModel.textViewHeight,
             placeholderText: $placeholderText
         )
         .focused($textAreaFocused)
@@ -154,7 +153,7 @@ struct ChatActionView: View {
                                borderWidth: 1.0)
         )
         .conditionalAnimation(.easeInOut(duration: animationDuration),
-                              value: textViewHeight)
+                              value: viewModel.textViewHeight)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true
@@ -262,11 +261,11 @@ struct ChatActionView: View {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
         let unfocusedHeight = viewModel.latestQuestion.isEmpty ?
-        max(textViewHeight + 10, 50) :
+        max(viewModel.textViewHeight + 10, 50) :
         max(lineHeight + 10, 50)
 
         return textAreaFocused ?
-        textViewHeight + max((2 * lineHeight), 75) :
+        viewModel.textViewHeight + max((2 * lineHeight), 75) :
         unfocusedHeight
     }
 

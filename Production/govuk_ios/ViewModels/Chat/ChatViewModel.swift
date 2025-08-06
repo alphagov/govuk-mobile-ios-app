@@ -16,6 +16,7 @@ class ChatViewModel: ObservableObject {
     @Published var scrollToTop: Bool = false
     @Published var latestQuestionID: String = ""
     @Published var errorText: String?
+    @Published var textViewHeight: CGFloat = 50.0
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,

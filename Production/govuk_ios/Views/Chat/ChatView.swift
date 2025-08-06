@@ -8,7 +8,8 @@ struct ChatView: View {
     @State var showClearChatAlert: Bool = false
     @State private var appearedIntroCells: [String] = []
     @State private var backgroundOpacity = 0.25
-    private let animationDuration = 0.5
+    private let introDuration = 0.5
+    private let transitionDuration = 0.3
 
     init(viewModel: ChatViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -16,13 +17,6 @@ struct ChatView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let chatActionView = ChatActionView(
-                viewModel: viewModel,
-                textAreaFocused: $textAreaFocused,
-                showClearChatAlert: $showClearChatAlert,
-                maxTextEditorFrameHeight: geometry.size.height - 32
-            )
-
             ZStack {
                 Color(UIColor.govUK.fills.surfaceChatBackground)
                     .edgesIgnoringSafeArea(.all)
@@ -32,21 +26,18 @@ struct ChatView: View {
                 .opacity(backgroundOpacity)
                 .ignoresSafeArea(edges: [.top, .leading, .trailing])
 
-                VStack(spacing: 0) {
-                    chatCellsScrollViewReaderView
-                        .frame(maxHeight: .infinity)
-                        .layoutPriority(1)
-                    chatActionView
-                }
-                .conditionalAnimation(.easeInOut(duration: animationDuration),
-                                      value: textAreaFocused)
+                chatContainerView(geometry.size.height - 32)
+                    .conditionalAnimation(.easeInOut(duration: transitionDuration),
+                                          value: textAreaFocused)
+                    .conditionalAnimation(.easeInOut(duration: transitionDuration),
+                                          value: viewModel.textViewHeight)
             }
         }
         .onAppear {
             viewModel.loadHistory()
             withAnimation(
                 .easeIn(
-                    duration: viewModel.currentConversationExists ? 0.0 : animationDuration * 4
+                    duration: viewModel.currentConversationExists ? 0.0 : introDuration * 4
                 )
             ) {
                 backgroundOpacity = 1.0
@@ -57,6 +48,22 @@ struct ChatView: View {
         }
         .onTapGesture {
             textAreaFocused = false
+        }
+    }
+
+    private func chatContainerView(_ frameHeight: CGFloat) -> some View {
+        let chatActionView = ChatActionView(
+            viewModel: viewModel,
+            textAreaFocused: $textAreaFocused,
+            showClearChatAlert: $showClearChatAlert,
+            maxTextEditorFrameHeight: frameHeight
+        )
+
+        return VStack(spacing: 0) {
+            chatCellsScrollViewReaderView
+                .frame(maxHeight: .infinity)
+                .layoutPriority(1)
+            chatActionView
         }
     }
 
@@ -77,7 +84,7 @@ struct ChatView: View {
                 appearedIntroCells.contains(cellModel.id) ||
                 viewModel.currentConversationExists ? 1 : 0
             )
-            .animation(.easeIn(duration: animationDuration), value: appearedIntroCells)
+            .animation(.easeIn(duration: introDuration), value: appearedIntroCells)
             .onAppear {
                 guard !viewModel.currentConversationExists else {
                     return

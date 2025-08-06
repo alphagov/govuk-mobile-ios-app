@@ -20,31 +20,32 @@ struct HomeViewModelTests {
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
             topicsWidgetViewModel: topicsViewModel,
-            urlOpener: { },
-            searchService: { },
-            activityService: { },
-            localAuthorityService: { },
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService(),
             localAuthorityAction: { },
-            editLocalAuthorityAction: { _ in },
-            feedbackAction: { _ in },
-            notificationsAction: MockURLOpener(),
-            recentActivityAction: MockSearchService(),
-            openURLAction: MockActivityService(),
-            openAction: MockLocalAuthorityService()
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
         )
-        let widgets = await subject.widgets
 
-        #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 2)
+        let widgets = subject.widgets
+
+        #expect((widgets as Any) is [HomepageWidget])
+        for item in widgets {
+            print(item)
+        }
+        #expect(widgets.count == 1)
     }
 
     @Test
     func widgets_featureDisabled_doesntReturnWidget() async {
         let configService = MockAppConfigService()
         configService.features = []
-
-        let mockNotificationService = MockNotificationService()
-        mockNotificationService._stubbedShouldRequestPermission = false
 
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
@@ -55,21 +56,21 @@ struct HomeViewModelTests {
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: configService,
-            notificationService: mockNotificationService,
+            notificationService: MockNotificationService(),
             topicsWidgetViewModel: topicsViewModel,
-            localAuthorityAction: { },
-            editLocalAuthorityAction: { },
-            feedbackAction: { },
-            notificationsAction: { },
-            recentActivityAction: { },
-            openURLAction: { _ in },
-            openAction: { _ in },
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
         )
-        let widgets = await subject.widgets
+        let widgets = subject.widgets
 
         #expect(widgets.count == 0)
     }

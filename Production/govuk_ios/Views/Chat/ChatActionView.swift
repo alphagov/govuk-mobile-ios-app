@@ -86,7 +86,7 @@ struct ChatActionView: View {
             }
         }
         .padding(.horizontal, 16)
-        .padding(.bottom, 8)
+        .padding(.vertical, viewModel.errorText != nil ? 8 : 0)
     }
 
     private var shouldShowError: Bool {
@@ -214,6 +214,7 @@ struct ChatActionView: View {
                                   value: textAreaFocused)
         }
         .padding([.horizontal, .bottom])
+        .padding(.top, -8)
     }
 
     @ViewBuilder

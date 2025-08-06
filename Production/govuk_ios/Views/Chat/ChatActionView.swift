@@ -69,7 +69,7 @@ struct ChatActionView: View {
             .conditionalAnimation(.easeInOut(duration: animationDuration),
                                   value: textAreaFocused)
             .accessibilityElement(children: .contain)
-            .padding()
+            .padding([.horizontal, .bottom])
 
             sendButtonView
         }
@@ -84,11 +84,11 @@ struct ChatActionView: View {
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
-                    .background(Color(UIColor.govUK.fills.surfaceChatBackground))
                     .ignoresSafeArea(edges: .horizontal)
             }
         }
         .padding(.horizontal, 16)
+        .padding(.bottom, 8)
     }
 
     private var shouldShowError: Bool {

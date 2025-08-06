@@ -168,7 +168,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private func saveExpiryDate(issueDate: Date?) {
         let date = Calendar.current.date(
             byAdding: .second,
-            value: 601_200,
+            value: 120,
             to: issueDate ?? .now
         )
         userDefaults.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)

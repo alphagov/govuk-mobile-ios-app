@@ -28,6 +28,7 @@ extension UserDefaults: UserDefaultsInterface {
 
     func remove(key: UserDefaultsKeys) {
         removeObject(forKey: UserDefaultsKeys.refreshTokenExpiryDate.rawValue)
+        synchronize()
     }
 }
 

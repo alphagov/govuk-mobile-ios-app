@@ -128,11 +128,13 @@ struct ChatView: View {
                 viewModel.scrollToBottom = false
             }
         }
-        .onChange(of: viewModel.answeredQuestionID) { id in
-            withAnimation {
-                proxy.scrollTo(id, anchor: .top)
+        .onChange(of: viewModel.scrollToTop) { shouldScroll in
+            if shouldScroll {
+                withAnimation {
+                    proxy.scrollTo(viewModel.latestQuestionID, anchor: .top)
+                }
             }
-            viewModel.answeredQuestionID = ""
+            viewModel.scrollToTop = false
         }
     }
 

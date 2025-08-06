@@ -13,9 +13,9 @@ struct HomeContentView: View {
             ScrollView {
                 EmptyView()
                     .id(topID)
-                TopicsView(
-                    viewModel: viewModel.topicsWidgetViewModel
-                )
+                ForEach(viewModel.widgets) { widget in
+                    widget
+                }
             }.onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in
                 print(shouldScroll)
                 if shouldScroll {

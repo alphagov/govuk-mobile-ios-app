@@ -3,6 +3,9 @@ import UIComponents
 import GOVKit
 
 struct TopicsView: View {
+    var id = "Topics view"
+    var name = "Topics View"
+
     @StateObject var viewModel: TopicsWidgetViewModel
     @ScaledMetric var scale: CGFloat = 1
     // @State private var showingEditScreen: Bool = false

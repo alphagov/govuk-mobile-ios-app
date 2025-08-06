@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import GOVKit
 import UIComponents
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
@@ -51,6 +52,21 @@ class HomeViewModel: ObservableObject {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
+    }
+
+    var widgets: [HomepageWidget] {
+        let array = [topicsView].compactMap { $0 }
+        return array
+    }
+
+    var topicsView: HomepageWidget? {
+        guard featureEnabled(.topics)
+        else { return nil }
+        return HomepageWidget(
+            content: TopicsView(
+            viewModel: self.topicsWidgetViewModel
+            )
+        )
     }
 
     lazy var searchEnabled = featureEnabled(.search)

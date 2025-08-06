@@ -20,17 +20,17 @@ struct HomeViewModelTests {
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
             topicsWidgetViewModel: topicsViewModel,
+            urlOpener: { },
+            searchService: { },
+            activityService: { },
+            localAuthorityService: { },
             localAuthorityAction: { },
-            editLocalAuthorityAction: { },
-            feedbackAction: { },
-            notificationsAction: { },
-            recentActivityAction: { },
-            openURLAction: { _ in },
-            openAction: { _ in },
-            urlOpener: MockURLOpener(),
-            searchService: MockSearchService(),
-            activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            editLocalAuthorityAction: { _ in },
+            feedbackAction: { _ in },
+            notificationsAction: MockURLOpener(),
+            recentActivityAction: MockSearchService(),
+            openURLAction: MockActivityService(),
+            openAction: MockLocalAuthorityService()
         )
         let widgets = await subject.widgets
 

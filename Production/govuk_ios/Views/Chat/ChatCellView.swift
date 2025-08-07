@@ -156,6 +156,7 @@ struct ChatCellView: View {
                                 textStyle: {
                 ForegroundColor(Color(UIColor.govUK.text.link))
             })
+            .fixedSize(horizontal: false, vertical: true)
             .environment(\.openURL, OpenURLAction { url in
                 viewModel.openURLAction?(url)
                 return .handled
@@ -167,6 +168,7 @@ struct ChatCellView: View {
             Link(destination: source.urlWithFallback) {
                 sourceListItemTitleView(title: source.title)
             }
+            .fixedSize(horizontal: false, vertical: true)
             .accessibilityHint(String.common.localized("openWebLinkHint"))
             .accessibilityRemoveTraits(.isButton)
             .environment(\.openURL, OpenURLAction { url in

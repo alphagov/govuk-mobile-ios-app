@@ -114,7 +114,7 @@ struct ChatView: View {
         ScrollView {
             Rectangle()
                 .fill(Color.clear)
-                .frame(height: 8)
+                .frame(height: 16)
             Text(String.chat.localized("messagesAvailableTitle"))
                 .font(.subheadline)
                 .foregroundStyle(Color(UIColor.govUK.text.chatBackground))
@@ -154,7 +154,7 @@ struct ChatView: View {
                 ),
                 .init(
                     color: Color(.black).opacity(1),
-                    location: 0.09
+                    location: 0.04
                 ),
                 .init(
                     color: Color(.black).opacity(1),
@@ -165,8 +165,8 @@ struct ChatView: View {
                     location: 1
                 )
             ]),
-            startPoint: .bottom,
-            endPoint: .top
+            startPoint: .top,
+            endPoint: .bottom
         )
     }
 }

@@ -26,8 +26,8 @@ extension UserDefaults: UserDefaultsInterface {
         synchronize()
     }
 
-    func remove(key: UserDefaultsKeys) {
-        removeObject(forKey: UserDefaultsKeys.refreshTokenExpiryDate.rawValue)
+    func removeObject(forKey key: UserDefaultsKeys) {
+        removeObject(forKey: key.rawValue)
         synchronize()
     }
 }
@@ -51,5 +51,5 @@ protocol UserDefaultsInterface {
     func bool(forKey key: UserDefaultsKeys) -> Bool
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
-    func remove(key: UserDefaultsKeys)
+    func removeObject(forKey key: UserDefaultsKeys)
 }

@@ -100,7 +100,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     func signOut(reason: SignoutReason) {
         do {
             try authenticatedSecureStoreService.delete()
-            userDefaults.remove(key: UserDefaultsKeys.refreshTokenExpiryDate)
+            userDefaults.removeObject(forKey: .refreshTokenExpiryDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()

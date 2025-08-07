@@ -31,7 +31,7 @@ class MockUserDefaults: UserDefaultsInterface {
         store[key] = value
     }
 
-    func remove(key: UserDefaultsKeys) {
+    func removeObject(forKey key: UserDefaultsKeys) {
         store[key.rawValue] = nil
     }
 }

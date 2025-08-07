@@ -85,4 +85,8 @@ class HomeViewModel: ObservableObject {
     func trackECommerce() {
         topicsWidgetViewModel.trackECommerce()
     }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
 }

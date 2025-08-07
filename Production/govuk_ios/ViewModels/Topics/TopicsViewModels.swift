@@ -114,7 +114,6 @@ final class TopicsWidgetViewModel: ObservableObject {
             switch result {
             case .success:
                 self?.fetchTopicsError = false
-                print("success")
             case .failure:
                 DispatchQueue.main.async {
                     self?.fetchTopicsError = true

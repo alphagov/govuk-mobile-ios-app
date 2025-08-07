@@ -1,4 +1,5 @@
 import SwiftUI
+import GOVKit
 
 struct HomeContentView: View {
     @StateObject var viewModel: HomeViewModel
@@ -17,7 +18,6 @@ struct HomeContentView: View {
                     widget
                 }
             }.onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in
-                print(shouldScroll)
                 if shouldScroll {
                     withAnimation {
                         proxy.scrollTo(topID, anchor: .top)
@@ -25,6 +25,13 @@ struct HomeContentView: View {
                     viewModel.homeContentScrollToTop = false
                 }
             }
+        }.onAppear {
+            viewModel.trackScreen(screen: self)
         }
     }
+}
+
+extension HomeContentView: TrackableScreen {
+    var trackingName: String { "Homepage" }
+    var trackingTitle: String? { "Homepage" }
 }

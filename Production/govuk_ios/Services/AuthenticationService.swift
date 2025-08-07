@@ -11,6 +11,7 @@ protocol AuthenticationServiceInterface: AnyObject {
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
     var secureStoreRefreshTokenPresent: Bool { get }
+    var shouldAttemptTokenRefresh: Bool { get }
     var didSignOutAction: ((SignoutReason) -> Void)? { get set }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult
@@ -30,6 +31,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private var authenticatedSecureStoreService: SecureStorable
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
+    private let userDefaults: UserDefaultsInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
@@ -57,10 +59,12 @@ class AuthenticationService: AuthenticationServiceInterface {
 
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
-         returningUserService: ReturningUserServiceInterface) {
+         returningUserService: ReturningUserServiceInterface,
+         userDefaults: UserDefaultsInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
+        self.userDefaults = userDefaults
     }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult {
@@ -72,6 +76,8 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
+            let token = try? await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "")
+            saveExpiryDate(issueDate: token?.iat)
             return await handleReturningUser()
         case .failure(let error):
             return AuthenticationServiceResult.failure(error)
@@ -94,6 +100,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     func signOut(reason: SignoutReason) {
         do {
             try authenticatedSecureStoreService.delete()
+            userDefaults.removeObject(forKey: .refreshTokenExpiryDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
@@ -114,7 +121,10 @@ class AuthenticationService: AuthenticationServiceInterface {
         guard let refreshToken = refreshToken else {
             return
         }
-        try? authenticatedSecureStoreService.saveItem(item: refreshToken, itemName: "refreshToken")
+        try? authenticatedSecureStoreService.saveItem(
+            item: refreshToken,
+            itemName: "refreshToken"
+        )
     }
 
     func tokenRefreshRequest() async -> TokenRefreshResult {
@@ -153,6 +163,21 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.refreshToken = refreshToken
         self.idToken = idToken
         self.accessToken = accessToken
+    }
+
+    private func saveExpiryDate(issueDate: Date?) {
+        let date = Calendar.current.date(
+            byAdding: .second,
+            value: 601_200,
+            to: issueDate ?? .now
+        )
+        userDefaults.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)
+    }
+
+    var shouldAttemptTokenRefresh: Bool {
+        guard let date = userDefaults.value(forKey: .refreshTokenExpiryDate) as? Date
+        else { return true }
+        return date > Date.now
     }
 }
 

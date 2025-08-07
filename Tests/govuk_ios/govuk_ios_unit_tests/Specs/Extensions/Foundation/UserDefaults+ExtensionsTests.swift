@@ -23,8 +23,6 @@ struct UserDefaults_ExtensionsTests {
 
         try #require(sut.value(forKey: .refreshTokenExpiryDate) as? String == expectedValue)
 
-//        try #require(sut.value(forKey: .biometricsPolicyState) as? String == expectedValue)
-
         sut.remove(key: .refreshTokenExpiryDate)
 
         let result = sut.value(forKey: .refreshTokenExpiryDate)

@@ -11,6 +11,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     let urlOpener: URLOpener
     let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
+    // investigate initial load
     var initialLoadComplete: Bool = false
     @Published var fetchTopicsError = false
     @Published var showAllTopicsButton = false
@@ -113,7 +114,9 @@ final class TopicsWidgetViewModel: ObservableObject {
         topicsService.fetchRemoteList { [weak self] result in
             switch result {
             case .success:
-                self?.fetchTopicsError = false
+                DispatchQueue.main.async {
+                    self?.fetchTopicsError = false
+                }
             case .failure:
                 DispatchQueue.main.async {
                     self?.fetchTopicsError = true

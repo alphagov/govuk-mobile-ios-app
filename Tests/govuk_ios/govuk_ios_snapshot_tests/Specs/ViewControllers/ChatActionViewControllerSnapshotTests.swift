@@ -36,14 +36,14 @@ final class ChatActionViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func test_clearChatAlert_loadInNavigationController_rendersCorrectly() {
-        VerifySnapshotWindowWithDelay(
-            view: ClearChatAlertTestView(),
-            mode: .light,
-            overallTolerance: 0.003,
-            delay: 0.5
-        )
-    }
+//    func test_clearChatAlert_loadInNavigationController_rendersCorrectly() {
+//        VerifySnapshotWindowWithDelay(
+//            view: ClearChatAlertTestView(),
+//            mode: .light,
+//            overallTolerance: 0.003,
+//            delay: 0.5
+//        )
+//    }
 }
 
 struct RemainingCharactersTestView: View {

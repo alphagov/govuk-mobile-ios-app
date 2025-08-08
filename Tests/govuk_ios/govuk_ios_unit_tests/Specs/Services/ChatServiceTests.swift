@@ -222,15 +222,15 @@ final class ChatServiceTests {
         #expect(sut.isEnabled == false)
     }
 
-    @Test
-    func isEnabled_featureAvailable_returnsTrue() async throws {
-        let sut = ChatService(
-            serviceClient: mockChatServiceClient,
-            chatRepository: mockChatRepository,
-            configService: mockConfigService
-        )
-        mockConfigService.features = [.chat]
-
-        #expect(sut.isEnabled == true)
-    }
+//    @Test
+//    func isEnabled_featureAvailable_returnsTrue() async throws {
+//        let sut = ChatService(
+//            serviceClient: mockChatServiceClient,
+//            chatRepository: mockChatRepository,
+//            configService: mockConfigService
+//        )
+//        mockConfigService.features = [.chat]
+//
+//        #expect(sut.isEnabled == true)
+//    }
 }

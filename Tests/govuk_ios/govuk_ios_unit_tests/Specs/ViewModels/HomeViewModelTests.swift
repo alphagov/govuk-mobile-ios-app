@@ -75,4 +75,41 @@ struct HomeViewModelTests {
         #expect(widgets.count == 0)
     }
 
+    @Test
+    func trackScreen_trackCorrectScreen() {
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            allTopicsAction: { }
+        )
+
+        let mockAnalyticsService = MockAnalyticsService()
+        let subject = HomeViewModel(
+            analyticsService: mockAnalyticsService,
+            configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
+            topicsWidgetViewModel: topicsViewModel,
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
+        )
+        let view = HomeContentView(
+            viewModel: subject
+        )
+        subject.trackScreen(screen: view)
+
+        let screens = mockAnalyticsService._trackScreenReceivedScreens
+        #expect(screens.count == 1)
+        #expect(screens.first?.trackingName == "Homepage")
+        #expect(screens.first?.trackingClass == "HomeContentView")
+    }
 }

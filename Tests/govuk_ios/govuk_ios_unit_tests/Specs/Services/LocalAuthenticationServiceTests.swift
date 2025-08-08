@@ -409,4 +409,21 @@ struct LocalAuthenticationServiceTests {
 
         #expect(mockUserDefaults.bool(forKey: .faceIdSkipped))
     }
+
+    @Test
+    func clear_clearsUserDefaults() {
+        let mockLAContext = MockLAContext()
+        let mockUserDefaults = MockUserDefaults()
+        mockUserDefaults._stub(value: true, key: UserDefaultsKeys.localAuthenticationOnboardingSeen.rawValue)
+        mockUserDefaults._stub(value: true, key: UserDefaultsKeys.biometricsPolicyState.rawValue)
+
+        let sut = LocalAuthenticationService(
+            userDefaults: mockUserDefaults,
+            context: mockLAContext
+        )
+        sut.clear()
+
+        #expect(mockUserDefaults.value(forKey: .localAuthenticationOnboardingSeen) == nil)
+        #expect(mockUserDefaults.value(forKey: .biometricsPolicyState) == nil)
+    }
 }

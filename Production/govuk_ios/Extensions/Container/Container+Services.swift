@@ -1,6 +1,6 @@
 import Foundation
+import UIKit
 import Factory
-import Onboarding
 import GOVKit
 import UserNotifications
 
@@ -129,8 +129,8 @@ extension Container {
             AuthenticationService(
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
-                userDefaults: UserDefaults.standard,
-                returningUserService: self.returningUserService.resolve()
+                returningUserService: self.returningUserService.resolve(),
+                userDefaults: UserDefaults.standard
             )
         }.scope(.singleton)
     }
@@ -148,7 +148,6 @@ extension Container {
             ReturningUserService(
                 openSecureStoreService: self.openSecureStoreService.resolve(),
                 coreDataDeletionService: self.coreDataDeletionService.resolve(),
-                userDefaults: UserDefaults.standard,
                 localAuthenticationService: self.localAuthenticationService.resolve()
             )
         }

@@ -17,6 +17,7 @@ class CoordinatorBuilder {
         AppCoordinator(
             coordinatorBuilder: self,
             inactivityService: inactivityService,
+            authenticationService: container.authenticationService.resolve(),
             navigationController: navigationController
         )
     }
@@ -95,6 +96,7 @@ class CoordinatorBuilder {
         return ChatCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
             deepLinkStore: DeeplinkDataStore.chat(
                 coordinatorBuilder: self,
                 root: navigationController
@@ -326,6 +328,7 @@ class CoordinatorBuilder {
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
+            topicsService: container.topicsService.resolve(),
             completionAction: completionAction,
             handleError: handleError
         )

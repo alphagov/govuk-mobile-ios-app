@@ -3,12 +3,11 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {
-
     var _setHasCustomisedTopicsCalled: Bool = false
     func setHasCustomisedTopics() {
         _setHasCustomisedTopicsCalled = true
     }
-    
+
     var _stubbedHasCustomisedTopics: Bool = false
     var hasCustomisedTopics: Bool {
         _stubbedHasCustomisedTopics
@@ -25,7 +24,7 @@ class MockTopicsService: TopicsServiceInterface {
     }
 
     let coreData = CoreDataRepository.arrangeAndLoad
-    
+
     var _stubbedFetchAllTopics: [Topic]?
     func fetchAll() -> [Topic] {
         _stubbedFetchAllTopics ?? []
@@ -40,7 +39,7 @@ class MockTopicsService: TopicsServiceInterface {
     func save() {
         _saveCalled = true
     }
-    
+
     var _stubbedFetchRemoteListResult: FetchTopicsListResult?
     func fetchRemoteList(completion: @escaping FetchTopicsListCompletion) {
         if let result = _stubbedFetchRemoteListResult {
@@ -49,7 +48,7 @@ class MockTopicsService: TopicsServiceInterface {
             completion(.failure(.apiUnavailable))
         }
     }
-    
+
     var _stubbedFetchTopicDetailsResult: Result<TopicDetailResponse, TopicsServiceError>?
     var _fetchDetailsCalled = false
     func fetchDetails(ref: String,
@@ -58,5 +57,10 @@ class MockTopicsService: TopicsServiceInterface {
             _fetchDetailsCalled = true
             completion(result)
         }
+    }
+
+    var _resetOnboardingCalled: Bool = false
+    func resetOnboarding() {
+        _resetOnboardingCalled = true
     }
 }

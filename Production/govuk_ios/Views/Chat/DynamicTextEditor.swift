@@ -31,15 +31,20 @@ struct DynamicTextEditor: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(text: $text, height: $dynamicHeight, placeholderText: $placeholderText)
+        Coordinator(
+            text: $text,
+            height: $dynamicHeight,
+            placeholderText: $placeholderText
+        )
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
         @Binding var text: String
         @Binding var height: CGFloat
         @Binding var placeholderText: String?
-
-        init(text: Binding<String>, height: Binding<CGFloat>, placeholderText: Binding<String?>) {
+        init(text: Binding<String>,
+             height: Binding<CGFloat>,
+             placeholderText: Binding<String?>) {
             self._text = text
             self._height = height
             self._placeholderText = placeholderText

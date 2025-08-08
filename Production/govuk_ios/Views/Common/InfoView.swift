@@ -22,13 +22,15 @@ struct InfoView: View {
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.listDivider))
                 .ignoresSafeArea()
+                .opacity(viewModel.showDivider ? 1.0 : 0.0)
             SwiftUIButton(
-                .primary,
+                viewModel.buttonConfiguration,
                 viewModel: viewModel.buttonViewModel
             )
             .frame(minHeight: 44, idealHeight: 44)
             .padding(16)
             .ignoresSafeArea()
+            .opacity(viewModel.showActionButton ? 1.0 : 0.0)
         }
         .navigationBarHidden(true)
         .onAppear {
@@ -50,7 +52,7 @@ struct InfoView: View {
                 .multilineTextAlignment(.center)
                 .accessibilityAddTraits(.isHeader)
                 .padding(.bottom, 16)
-            Text(viewModel.subtitle)
+            Text(LocalizedStringKey(viewModel.subtitle))
                 .foregroundColor(Color(UIColor.govUK.text.primary))
                 .font(viewModel.subtitleFont)
                 .multilineTextAlignment(.center)

@@ -212,13 +212,16 @@ struct TabCoordinatorTests {
         [0,1],
         [true, false]
     ))
-    func selectingTab_doesCall_didReselectTab_asNeeded(selectedIndex: Int,
-                                                       didReselectTab: Bool) throws {
+    func selectingTab_doesCall_didselectTab_asNeeded(selectedIndex: Int,
+                                                     didReselectTab: Bool) throws {
         let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
 
         let mockHomeCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedHomeCoordinator = mockHomeCoordinator
+
+        let mockChatCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedChatCoordinator = mockChatCoordinator
 
         let mockSettingsCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSettingsCoordinator = mockSettingsCoordinator
@@ -235,6 +238,17 @@ struct TabCoordinatorTests {
 
         let tabController = try #require(navigationController.viewControllers.first as? UITabBarController)
         tabController.selectedIndex = selectedIndex
+        var startingCoordinator: MockBaseCoordinator?
+        switch selectedIndex {
+            case 0:
+            startingCoordinator = mockHomeCoordinator
+        case 1:
+            startingCoordinator = mockChatCoordinator
+        case 2:
+            startingCoordinator = mockSettingsCoordinator
+        default:
+            Issue.record("selectedIndex \(selectedIndex) is out of bounds")
+        }
 
         let viewController = UIViewController()
         viewController.tabBarItem = .init(
@@ -243,8 +257,8 @@ struct TabCoordinatorTests {
             tag: 0
         )
         subject.tabBarController(tabController, didSelect: viewController)
-
-        #expect(mockHomeCoordinator._didReselectTab == didReselectTab)
+        let tabReselected = (startingCoordinator?._selectedTab == startingCoordinator?._previousTab)
+        #expect(tabReselected == didReselectTab)
     }
 
     @Test

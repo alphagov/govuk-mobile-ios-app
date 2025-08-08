@@ -11,7 +11,6 @@ final class TopicsWidgetViewModel: ObservableObject {
     let urlOpener: URLOpener
     let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
-    // investigate initial load
     var initialLoadComplete: Bool = false
     @Published var fetchTopicsError = false
     @Published var showAllTopicsButton = false

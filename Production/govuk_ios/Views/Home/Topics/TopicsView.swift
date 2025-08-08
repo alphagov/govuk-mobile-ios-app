@@ -78,7 +78,10 @@ struct TopicsView: View {
                 viewModel.fetchTopics()
                 viewModel.fetchDisplayedTopics()
                 viewModel.showAllTopicsButtonHidden()
-                viewModel.trackECommerce()
+                if !self.viewModel.initialLoadComplete {
+                    self.viewModel.initialLoadComplete = true
+                    self.viewModel.trackECommerce()
+                }
             }
             .padding()
         }

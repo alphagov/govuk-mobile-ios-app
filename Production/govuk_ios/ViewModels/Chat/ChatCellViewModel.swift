@@ -6,45 +6,59 @@ enum ChatCellType {
     case question
     case pendingAnswer
     case answer
-    case error
+    case intro
 }
 
 struct ChatCellViewModel {
-    var message: String
+    let title: String?
+    let message: String
     let id: String
     let type: ChatCellType
     let sources: [Source]
-    var attrSting: AttributedString?
+    let openURLAction: ((URL) -> Void)?
 
-    init(message: String,
+    init(title: String? = nil,
+         message: String,
          id: String,
          type: ChatCellType,
-         sources: [Source] = []) {
+         sources: [Source] = [],
+         openURLAction: ((URL) -> Void)? = nil) {
+        self.title = title
         self.message = message
         self.id = id
         self.type = type
         self.sources = sources
+        self.openURLAction = openURLAction
     }
 
-    init(answer: Answer) {
-        self.init(message: answer.message ?? "",
+    init(question: PendingQuestion) {
+        self.init(message: question.message,
+                  id: question.id,
+                  type: .question)
+    }
+
+    init(answer: Answer,
+         openURLAction: ((URL) -> Void)? ) {
+        self.init(title: String.chat.localized("answerTitle"),
+                  message: answer.message ?? "",
                   id: answer.id ?? UUID().uuidString,
                   type: .answer,
-                  sources: answer.sources ?? [])
+                  sources: answer.sources ?? [],
+                  openURLAction: openURLAction)
     }
 
     init(answeredQuestion: AnsweredQuestion) {
         self.init(message: answeredQuestion.message,
                   id: answeredQuestion.id,
                   type: .question,
-                  sources: answeredQuestion.answer.sources ?? [])
+                  sources: [])
     }
 
-    init(error: Error) {
-        self.init(message: error.localizedDescription,
-                  id: UUID().uuidString,
-                  type: .error,
-                  sources: [])
+    init(intro: Intro) {
+        self.init(title: intro.title,
+                  message: intro.message,
+                  id: intro.id,
+                  type: .intro)
     }
 
     var isAnswer: Bool {
@@ -52,15 +66,25 @@ struct ChatCellViewModel {
     }
 
     var backgroundColor: Color {
-        isAnswer ?
-        Color(UIColor.govUK.fills.surfaceChatBlue) :
-        Color(UIColor.govUK.fills.surfaceChatQuestion)
+        switch type {
+        case .question:
+            Color(UIColor.govUK.fills.surfaceChatQuestion)
+        case .pendingAnswer:
+            Color(UIColor.clear)
+        case .answer, .intro:
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+        }
     }
 
     var borderColor: Color {
-        isAnswer ?
-        Color(UIColor.govUK.strokes.chatDivider) :
-        Color(UIColor.govUK.strokes.chatQuestion)
+        switch type {
+        case .question:
+            Color(UIColor.govUK.strokes.chatQuestion)
+        case .pendingAnswer:
+            Color.clear
+        case .answer, .intro:
+            Color(UIColor.govUK.strokes.chatDivider)
+        }
     }
 
     var questionWidth: CGFloat {
@@ -69,8 +93,14 @@ struct ChatCellViewModel {
 }
 
 extension ChatCellViewModel {
-    static var placeHolder: ChatCellViewModel = .init(
-        message: String.chat.localized("gettingAnswerTitle"),
+    static var loadingQuestion: ChatCellViewModel = .init(
+        message: String.chat.localized("loadingQuestionMessage"),
+        id: UUID().uuidString,
+        type: .question
+    )
+
+    static var gettingAnswer: ChatCellViewModel = .init(
+        message: String.chat.localized("gettingAnswerMessage"),
         id: UUID().uuidString,
         type: .pendingAnswer
     )

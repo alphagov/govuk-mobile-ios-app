@@ -24,15 +24,18 @@ class ReAuthenticationCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
+        guard authenticationService.shouldAttemptTokenRefresh
+        else { return handleReauthFailure() }
         Task {
             await reauthenticate()
         }
     }
 
     private func reauthenticate() async {
-        guard localAuthenticationService.canEvaluatePolicy(
+        let policy = localAuthenticationService.canEvaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics
-        ).canEvaluate else {
+        )
+        guard policy.canEvaluate else {
             completionAction()
             return
         }
@@ -62,7 +65,7 @@ class ReAuthenticationCoordinator: BaseCoordinator {
     }
 
     private func handleReauthFailure() {
-        authenticationService.signOut()
+        authenticationService.signOut(reason: .reauthFailure)
         let coordinator = coordinatorBuilder.welcomeOnboarding(
             navigationController: root,
             completionAction: completionAction

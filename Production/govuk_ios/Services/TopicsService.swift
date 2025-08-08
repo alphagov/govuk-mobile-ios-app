@@ -14,6 +14,8 @@ protocol TopicsServiceInterface {
 
     var hasOnboardedTopics: Bool { get }
     func setHasOnboardedTopics()
+
+    func resetOnboarding()
 }
 
 struct TopicsService: TopicsServiceInterface {
@@ -64,6 +66,11 @@ struct TopicsService: TopicsServiceInterface {
 
     func save() {
         topicsRepository.save()
+    }
+
+    func resetOnboarding() {
+        userDefaults.set(nil, forKey: .topicsOnboardingSeen)
+        userDefaults.set(nil, forKey: .customisedTopics)
     }
 
     var hasOnboardedTopics: Bool {

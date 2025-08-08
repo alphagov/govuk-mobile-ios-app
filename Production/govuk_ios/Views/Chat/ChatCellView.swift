@@ -5,6 +5,7 @@ import UIComponents
 
 struct ChatCellView: View {
     @State private var scale = 1.0
+    @State private var gradientStopPoint: CGFloat = 0.01
     private let viewModel: ChatCellViewModel
 
     init(viewModel: ChatCellViewModel) {
@@ -51,8 +52,45 @@ struct ChatCellView: View {
                     }
                 }
             Text(viewModel.message)
+                .mask(gradientMask)
             Spacer()
         }
+    }
+
+    private let gradientTimer = Timer.publish(
+        every: 0.1,
+        on: .main,
+        in: .common
+    ).autoconnect()
+
+    private var gradientMask: some View {
+        LinearGradient(
+            gradient: Gradient(stops: [
+                .init(
+                    color: Color(.black).opacity(gradientStopPoint <= 0.01 ? 0 : 1),
+                    location: 0
+                ),
+                .init(
+                    color: Color(.black).opacity(0.1),
+                    location: gradientStopPoint
+                ),
+                .init(
+                    color: Color(.black).opacity(gradientStopPoint >= 0.99 ? 0 : 1),
+                    location: 1
+                )
+            ]),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+        .animation(.easeInOut(duration: 1), value: gradientStopPoint)
+        .onReceive(gradientTimer, perform: { _ in
+            if gradientStopPoint < 0.99 {
+                let newValue = gradientStopPoint + 0.1
+                gradientStopPoint = min(newValue, 0.99)
+            } else {
+                gradientStopPoint = 0.01
+            }
+        })
     }
 
     private var introView: some View {
@@ -118,6 +156,7 @@ struct ChatCellView: View {
                                 textStyle: {
                 ForegroundColor(Color(UIColor.govUK.text.link))
             })
+            .fixedSize(horizontal: false, vertical: true)
             .environment(\.openURL, OpenURLAction { url in
                 viewModel.openURLAction?(url)
                 return .handled
@@ -129,6 +168,7 @@ struct ChatCellView: View {
             Link(destination: source.urlWithFallback) {
                 sourceListItemTitleView(title: source.title)
             }
+            .fixedSize(horizontal: false, vertical: true)
             .accessibilityHint(String.common.localized("openWebLinkHint"))
             .accessibilityRemoveTraits(.isButton)
             .environment(\.openURL, OpenURLAction { url in

@@ -13,8 +13,10 @@ class ChatViewModel: ObservableObject {
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
     @Published var scrollToBottom: Bool = false
-    @Published var answeredQuestionID: String = ""
+    @Published var scrollToTop: Bool = false
+    @Published var latestQuestionID: String = ""
     @Published var errorText: String?
+    @Published var textViewHeight: CGFloat = 50.0
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -45,7 +47,7 @@ class ChatViewModel: ObservableObject {
             case .success(let pendingQuestion):
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
-                self?.answeredQuestionID = pendingQuestion.id
+                self?.latestQuestionID = pendingQuestion.id
                 self?.latestQuestion = ""
                 self?.pollForAnswer(pendingQuestion)
                 completion?(true)
@@ -74,6 +76,7 @@ class ChatViewModel: ObservableObject {
                     answer: answer,
                     openURLAction: self?.openURLAction
                 )
+                self?.scrollToTop = true
                 self?.cellModels.append(cellModel)
             case .failure(let error):
                 self?.handleError(error)

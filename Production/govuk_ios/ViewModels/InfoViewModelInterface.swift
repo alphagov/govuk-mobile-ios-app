@@ -18,7 +18,6 @@ protocol InfoViewModelInterface {
     var subtitleFont: Font { get }
     var showActionButton: Bool { get }
     var showDivider: Bool { get }
-    var openURLAction: ((URL) -> Void)? { get }
 }
 
 extension InfoViewModelInterface {
@@ -40,10 +39,6 @@ extension InfoViewModelInterface {
 
     var showDivider: Bool {
         true
-    }
-
-    var openURLAction: ((URL) -> Void)? {
-        nil
     }
 
     func trackScreen(screen: TrackableScreen) {

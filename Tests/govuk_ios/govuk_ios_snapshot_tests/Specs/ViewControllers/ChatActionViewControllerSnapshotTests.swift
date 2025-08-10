@@ -36,6 +36,7 @@ final class ChatActionViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
+// flakey needs re-write
 //    func test_clearChatAlert_loadInNavigationController_rendersCorrectly() {
 //        VerifySnapshotWindowWithDelay(
 //            view: ClearChatAlertTestView(),
@@ -61,7 +62,8 @@ struct RemainingCharactersTestView: View {
         ChatActionView(
             viewModel: viewModel,
             textAreaFocused: $textAreaFocused,
-            showClearChatAlert: $showClearChatAlert
+            showClearChatAlert: $showClearChatAlert,
+            maxTextEditorFrameHeight: 640
         )
         .environment(\.isTesting, true)
         .onAppear {
@@ -92,7 +94,8 @@ struct TooManyCharactersTestView: View {
         ChatActionView(
             viewModel: viewModel,
             textAreaFocused: $textAreaFocused,
-            showClearChatAlert: $showClearChatAlert
+            showClearChatAlert: $showClearChatAlert,
+            maxTextEditorFrameHeight: 640
         )
         .environment(\.isTesting, true)
         .onAppear {
@@ -125,7 +128,8 @@ struct ClearChatAlertTestView: View {
         ChatActionView(
             viewModel: viewModel,
             textAreaFocused: $textAreaFocused,
-            showClearChatAlert: $showClearChatAlert
+            showClearChatAlert: $showClearChatAlert,
+            maxTextEditorFrameHeight: 640
         )
         .environment(\.isTesting, true)
         .onAppear {

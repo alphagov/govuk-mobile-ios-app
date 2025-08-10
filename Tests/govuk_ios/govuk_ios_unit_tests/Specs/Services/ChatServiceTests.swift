@@ -14,6 +14,7 @@ final class ChatServiceTests {
         mockChatServiceClient = MockChatServiceClient()
         mockChatRepository = MockChatRespository()
         mockConfigService = MockAppConfigService()
+        mockConfigService._stubbedChatPollIntervalSeconds = 0.2
     }
 
     deinit {
@@ -27,8 +28,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
@@ -53,8 +53,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
@@ -77,8 +76,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
         
         mockChatServiceClient._stubbedAskQuestionResult = .failure(ChatError.networkUnavailable)
@@ -101,8 +99,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchAnswerResults = [
@@ -131,8 +128,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchAnswerResults = [
@@ -158,9 +154,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 3,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
@@ -184,9 +178,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         mockChatServiceClient._stubbedFetchHistoryResult = .failure(ChatError.apiUnavailable)
@@ -211,9 +203,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
 
         sut.clearHistory()
@@ -225,9 +215,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
         mockConfigService.features = []
 
@@ -239,9 +227,7 @@ final class ChatServiceTests {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
-            configService: mockConfigService,
-            maxRetryCount: 1,
-            retryInterval: 0.2
+            configService: mockConfigService
         )
         mockConfigService.features = [.chat]
 

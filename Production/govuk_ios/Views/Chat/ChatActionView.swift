@@ -5,36 +5,33 @@ struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
     @AccessibilityFocusState private var errorFocused: Bool
-    @State private var textViewHeight: CGFloat = 50.0
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
+    private var maxTextEditorFrameHeight: CGFloat
 
     init(viewModel: ChatViewModel,
          textAreaFocused: FocusState<Bool>.Binding,
-         showClearChatAlert: Binding<Bool>) {
+         showClearChatAlert: Binding<Bool>,
+         maxTextEditorFrameHeight: CGFloat) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _textAreaFocused = textAreaFocused
         _showClearChatAlert = showClearChatAlert
+        self.maxTextEditorFrameHeight = maxTextEditorFrameHeight
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            let maxTextEditorFrameHeight = geometry.size.height - 32
-            errorFocused = shouldShowError
-            return VStack(spacing: 0) {
-                Spacer()
-                errorView
-                    .opacity(shouldShowError ? 1.0 : 0.0)
-                    .conditionalAnimation(
-                        .easeInOut(duration: animationDuration),
-                        value: shouldShowError
-                    )
-                    .accessibilityFocused($errorFocused)
-                chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
-            }
-            .frame(maxHeight: geometry.size.height, alignment: .bottom)
+        errorFocused = shouldShowError
+        return VStack(spacing: 0) {
+            errorView
+                .opacity(shouldShowError ? 1.0 : 0.0)
+                .conditionalAnimation(
+                    .easeInOut(duration: animationDuration),
+                    value: shouldShowError
+                )
+                .accessibilityFocused($errorFocused)
+            chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
         }
         .onPreferenceChange(CharacterCountHeightKey.self) { height in
             self.charactersCountHeight = height
@@ -61,7 +58,6 @@ struct ChatActionView: View {
 
     private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
         ZStack(alignment: .bottom) {
-            chatActionBackground
             HStack(alignment: .center, spacing: 8) {
                 if !textAreaFocused {
                     menuView
@@ -69,25 +65,25 @@ struct ChatActionView: View {
 
                 textEditorView(maxFrameHeight: maxFrameHeight)
             }
-            .conditionalAnimation(.easeInOut(duration: animationDuration),
-                                  value: textAreaFocused)
             .accessibilityElement(children: .contain)
-            .padding()
+            .padding([.horizontal, .bottom])
             sendButtonView
         }
     }
     private var errorView: some View {
         VStack(spacing: 0) {
-            blurGradient
-            Text(viewModel.errorText ?? "")
-                .fontWeight(.bold)
-                .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity)
-                .background(Color(UIColor.govUK.fills.surfaceChatBackground))
-                .ignoresSafeArea(edges: .horizontal)
+            if let error = viewModel.errorText {
+                Text(error)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity)
+                    .ignoresSafeArea(edges: .horizontal)
+            }
         }
         .padding(.horizontal, 16)
+        .padding(.vertical, viewModel.errorText != nil ? 8 : 0)
     }
 
     private var shouldShowError: Bool {
@@ -103,9 +99,14 @@ struct ChatActionView: View {
                     Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
                 }
             )
-            Button(action: showAbout) {
-                Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
-            }
+            Button(
+                action: { viewModel.openAboutURL() },
+                label: {
+                    Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
+                        .accessibilityLabel(String.chat.localized("aboutMenuAccessibilityTitle"))
+                        .accessibilityHint(String.common.localized("openWebLinkHint"))
+                }
+            )
         } label: {
             Image(systemName: "ellipsis")
                 .font(.system(size: 18, weight: .bold))
@@ -128,36 +129,34 @@ struct ChatActionView: View {
     }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
-        ZStack {
-            DynamicTextEditor(
-                text: $viewModel.latestQuestion,
-                dynamicHeight: $textViewHeight,
-                placeholderText: $placeholderText
-            )
-            .focused($textAreaFocused)
-            .onChange(of: textAreaFocused) { isFocused in
-                if isFocused || !viewModel.latestQuestion.isEmpty {
-                    placeholderText = nil
-                } else {
-                    placeholderText = String.chat.localized("textEditorPlaceholder")
-                }
+        DynamicTextEditor(
+            text: $viewModel.latestQuestion,
+            dynamicHeight: $viewModel.textViewHeight,
+            placeholderText: $placeholderText
+        )
+        .focused($textAreaFocused)
+        .onChange(of: textAreaFocused) { isFocused in
+            if isFocused || !viewModel.latestQuestion.isEmpty {
+                placeholderText = nil
+            } else {
+                placeholderText = String.chat.localized("textEditorPlaceholder")
             }
-            .padding(.horizontal, 12)
-            .padding(.top, 8)
-            .padding(.bottom,
-                     textAreaFocused ? (max(50, charactersCountHeight)) : 8)
-            .frame(
-                height: min(textEditorFrameHeight, maxFrameHeight)
-            )
-            .background(
-                Color(UIColor.govUK.fills.surfaceChatBlue)
-                    .roundedBorder(cornerRadius: textEditorRadius,
-                                   borderColor: borderColor,
-                                   borderWidth: 1.0)
-            )
-            .conditionalAnimation(.easeInOut(duration: animationDuration),
-                                  value: textViewHeight)
         }
+        .padding(.horizontal, 12)
+        .padding(.top, 8)
+        .padding(.bottom,
+                 textAreaFocused ? (max(50, charactersCountHeight)) : 8)
+        .frame(
+            height: min(textEditorFrameHeight, maxFrameHeight)
+        )
+        .background(
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+                .roundedBorder(cornerRadius: textEditorRadius,
+                               borderColor: borderColor,
+                               borderWidth: 1.0)
+        )
+        .conditionalAnimation(.easeInOut(duration: animationDuration),
+                              value: viewModel.textViewHeight)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true
@@ -216,7 +215,8 @@ struct ChatActionView: View {
             .conditionalAnimation(.easeInOut(duration: animationDuration),
                                   value: textAreaFocused)
         }
-        .padding()
+        .padding([.horizontal, .bottom])
+        .padding(.top, -8)
     }
 
     @ViewBuilder
@@ -264,28 +264,12 @@ struct ChatActionView: View {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
         let unfocusedHeight = viewModel.latestQuestion.isEmpty ?
-        max(textViewHeight + 10, 50) :
+        max(viewModel.textViewHeight + 10, 50) :
         max(lineHeight + 10, 50)
 
         return textAreaFocused ?
-        textViewHeight + max((2 * lineHeight), 75) :
+        viewModel.textViewHeight + max((2 * lineHeight), 75) :
         unfocusedHeight
-    }
-
-    private var chatActionBackground: some View {
-        VStack(spacing: 0) {
-            if !shouldShowError {
-                blurGradient
-            }
-            Color(UIColor.govUK.fills.surfaceChatBackground)
-                .frame(
-                    maxHeight: textEditorFrameHeight + (shouldShowError ? 40 : -20),
-                    alignment: .bottom
-                )
-                .ignoresSafeArea(.all)
-        }
-        .conditionalAnimation(.easeInOut(duration: animationDuration),
-                              value: textViewHeight)
     }
 
     private var blurGradient: some View {
@@ -310,10 +294,6 @@ struct ChatActionView: View {
         )
         .frame(height: 60)
         .ignoresSafeArea(.all)
-    }
-
-    private func showAbout() {
-        print("About tapped")
     }
 }
 

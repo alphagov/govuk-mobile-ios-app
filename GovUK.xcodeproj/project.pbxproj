@@ -39,6 +39,7 @@
 		169842D82DAEAADC00E3EA66 /* LocalAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842D72DAEAAD500E3EA66 /* LocalAuthenticationService.swift */; };
 		169842DA2DB0004800E3EA66 /* LocalAuthenticationOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842D92DB0003C00E3EA66 /* LocalAuthenticationOnboardingViewModel.swift */; };
 		169842DE2DB05F2900E3EA66 /* LocalAuthenticationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169842DD2DB05F1C00E3EA66 /* LocalAuthenticationOnboardingView.swift */; };
+		16A31E782E37959900C984D6 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A31E772E37958E00C984D6 /* Intro.swift */; };
 		16A39A2E2DA9D05200C71F43 /* AppAuthSessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A39A2D2DA9D04100C71F43 /* AppAuthSessionWrapper.swift */; };
 		16A5E9D02E02D68C00D5FD0C /* FaceIdSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5E9CF2E02D67D00D5FD0C /* FaceIdSettingsView.swift */; };
 		16A788B22DCC288800CA64E2 /* ReturningUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A788B12DCC288400CA64E2 /* ReturningUserService.swift */; };
@@ -51,7 +52,6 @@
 		16E912AF2DA72CE000CD2049 /* OIDAuthorizationServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E912AE2DA72CAD00CD2049 /* OIDAuthorizationServiceWrapper.swift */; };
 		16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A402C6F8968005E820F /* SearchViewController.swift */; };
 		16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EE1A422C6F89D9005E820F /* SearchViewModel.swift */; };
-		16F74EBE2E26976500CA8CCB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F74EBD2E26975800CA8CCB /* ChatView.swift */; };
 		16F961A32C92FD15005CFB04 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F961A22C92FD15005CFB04 /* SearchResultCell.swift */; };
 		16FAB82C2E1D375C00B23440 /* Chat.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 16FAB82B2E1D375C00B23440 /* Chat.xcstrings */; };
 		16FB8CBF2E216E7500BBB970 /* DynamicTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FB8CBE2E216E6A00BBB970 /* DynamicTextEditor.swift */; };
@@ -228,6 +228,7 @@
 		5DD6F3322CC80486005BC5D3 /* StepByStepsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */; };
 		5DDD58892D5A556A001C0B3E /* NotificationOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDD58882D5A556A001C0B3E /* NotificationOnboardingCoordinator.swift */; };
 		5DDD588B2D5A557D001C0B3E /* onboarding_stay_updated.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DDD588A2D5A557D001C0B3E /* onboarding_stay_updated.json */; };
+		5DDE1AE32E4609EE0033EF88 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F74EBD2E26975800CA8CCB /* ChatView.swift */; };
 		5DE2BBBC2C982593003116B6 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2BBBB2C982593003116B6 /* Bundle+Extensions.swift */; };
 		5DE597B62C2EF422003613C8 /* APIServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB682C088C580011E691 /* APIServiceClient.swift */; };
 		5DE597B72C2EF44F003613C8 /* Container+DataStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D41DB6D2C088FE30011E691 /* Container+DataStores.swift */; };
@@ -434,6 +435,7 @@
 		169842D72DAEAAD500E3EA66 /* LocalAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationService.swift; sourceTree = "<group>"; };
 		169842D92DB0003C00E3EA66 /* LocalAuthenticationOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationOnboardingViewModel.swift; sourceTree = "<group>"; };
 		169842DD2DB05F1C00E3EA66 /* LocalAuthenticationOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationOnboardingView.swift; sourceTree = "<group>"; };
+		16A31E772E37958E00C984D6 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		16A39A2D2DA9D04100C71F43 /* AppAuthSessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAuthSessionWrapper.swift; sourceTree = "<group>"; };
 		16A5E9CF2E02D67D00D5FD0C /* FaceIdSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIdSettingsView.swift; sourceTree = "<group>"; };
 		16A788B12DCC288400CA64E2 /* ReturningUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturningUserService.swift; sourceTree = "<group>"; };
@@ -1781,6 +1783,7 @@
 		D04DD32C2E0046DC002B5F19 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				16A31E772E37958E00C984D6 /* Intro.swift */,
 				D04DD3282E0046DC002B5F19 /* Answer.swift */,
 				D04DD3292E0046DC002B5F19 /* AnsweredQuestion.swift */,
 				D04DD32A2E0046DC002B5F19 /* History.swift */,
@@ -2214,6 +2217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DDE1AE32E4609EE0033EF88 /* ChatView.swift in Sources */,
 				169842DE2DB05F2900E3EA66 /* LocalAuthenticationOnboardingView.swift in Sources */,
 				5DD4CB122D9548DF00459FB5 /* ActivityRepository.swift in Sources */,
 				D052CCE22E0B09BE0048F98A /* ChatActionView.swift in Sources */,
@@ -2469,7 +2473,6 @@
 				5DA4FB072CCBAF2100804C8A /* SettingsView.swift in Sources */,
 				16F74EBE2E26976500CA8CCB /* ChatView.swift in Sources */,
 				16161FD12E2FF97D00228028 /* EnvironmentValues+Extensions.swift in Sources */,
-				16F74EBE2E26976500CA8CCB /* ChatView.swift in Sources */,
 				D03678C62E33CD60009BCC32 /* CompoundRegexValidator.swift in Sources */,
 				B04C2E7E2DA913B100F0F63E /* WebViewController.swift in Sources */,
 				5D8683992C3431050024F2D8 /* ResolvedDeeplinkRoute.swift in Sources */,
@@ -2480,6 +2483,7 @@
 				D0EB02812D37F02400B310D8 /* CoreDataRepository.swift in Sources */,
 				D052D2322E0B0DE10048F98A /* RoundedBorderViewModifier.swift in Sources */,
 				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */,
+				16A31E782E37959900C984D6 /* Intro.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
 				166BDDB62C330D1C00437AE0 /* HomeViewController.swift in Sources */,

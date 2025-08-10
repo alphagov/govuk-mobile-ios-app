@@ -36,10 +36,6 @@ struct InfoView: View {
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
-        .environment(\.openURL, OpenURLAction { url in
-            viewModel.openURLAction?(url)
-            return .handled
-        })
     }
 
     private var infoView: some View {

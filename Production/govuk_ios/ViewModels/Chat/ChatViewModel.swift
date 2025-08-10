@@ -13,8 +13,10 @@ class ChatViewModel: ObservableObject {
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
     @Published var scrollToBottom: Bool = false
-    @Published var answeredQuestionID: String = ""
+    @Published var scrollToTop: Bool = false
+    @Published var latestQuestionID: String = ""
     @Published var errorText: String?
+    @Published var textViewHeight: CGFloat = 50.0
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -45,7 +47,7 @@ class ChatViewModel: ObservableObject {
             case .success(let pendingQuestion):
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
-                self?.answeredQuestionID = pendingQuestion.id
+                self?.latestQuestionID = pendingQuestion.id
                 self?.latestQuestion = ""
                 self?.pollForAnswer(pendingQuestion)
                 completion?(true)
@@ -74,6 +76,7 @@ class ChatViewModel: ObservableObject {
                     answer: answer,
                     openURLAction: self?.openURLAction
                 )
+                self?.scrollToTop = true
                 self?.cellModels.append(cellModel)
             case .failure(let error):
                 self?.handleError(error)
@@ -83,9 +86,10 @@ class ChatViewModel: ObservableObject {
 
     func loadHistory() {
         guard let conversationId = chatService.currentConversationId else {
+            cellModels.removeAll()
+            appendIntroMessages()
             return
         }
-        cellModels.removeAll()
         requestInFlight = true
         chatService.chatHistory(
             conversationId: conversationId
@@ -115,9 +119,31 @@ class ChatViewModel: ObservableObject {
         requestInFlight
     }
 
+    var currentConversationExists: Bool {
+        chatService.currentConversationId != nil
+    }
+
+    private func appendIntroMessages() {
+        let firstIntroMessage = Intro(
+            title: String.chat.localized("answerTitle"),
+            message: String.chat.localized("introFirstMessage")
+        )
+        let secondIntroMessage = Intro(
+            title: nil,
+            message: String.chat.localized("introSecondMessage")
+        )
+        let thirdIntroMessage = Intro(
+            title: nil,
+            message: String.chat.localized("introThirdMessage")
+        )
+        cellModels.append(ChatCellViewModel(intro: firstIntroMessage))
+        cellModels.append(ChatCellViewModel(intro: secondIntroMessage))
+        cellModels.append(ChatCellViewModel(intro: thirdIntroMessage))
+    }
 
     private func handleHistoryResponse(_ history: History) {
         cellModels.removeAll()
+        appendIntroMessages()
         let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
@@ -129,7 +155,9 @@ class ChatViewModel: ObservableObject {
             cellModels.append(answer)
         }
         if let pendingQuestion = history.pendingQuestion {
-            askQuestion(pendingQuestion.message)
+            let question = ChatCellViewModel(question: pendingQuestion)
+            cellModels.append(question)
+            pollForAnswer(pendingQuestion)
         }
     }
 
@@ -141,5 +169,10 @@ class ChatViewModel: ObservableObject {
     func newChat() {
         cellModels.removeAll()
         chatService.clearHistory()
+        appendIntroMessages()
+    }
+
+    func openAboutURL() {
+        openURLAction(Constants.API.govukBaseUrl)
     }
 }

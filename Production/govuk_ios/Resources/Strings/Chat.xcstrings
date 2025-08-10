@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "aboutMenuAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About GOV.UK Chat"
+          }
+        }
+      }
+    },
     "aboutMenuTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -84,7 +95,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There's a problem with GOV.UK Chat. \n\nTry again later or return to the [GOV.UK app homepage](https://www.gov.uk) if you need information now."
+            "value" : "GOV.UK Chat is not working. \n\nTry again later, or go to the app home page if you need information now."
           }
         }
       }
@@ -100,6 +111,39 @@
         }
       }
     },
+    "introFirstMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi 👋 I’m GOV.UK Chat."
+          }
+        }
+      }
+    },
+    "introSecondMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I’m an experimental AI tool. \n\nWhen you ask a question, I’ll find the most relevant information from GOV.UK and use it to create an answer."
+          }
+        }
+      }
+    },
+    "introThirdMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask a question to get started."
+          }
+        }
+      }
+    },
     "loadingQuestionMessage" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -107,6 +151,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Message loading…"
+          }
+        }
+      }
+    },
+    "messagesAvailableTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Messages will be available for 90 days"
           }
         }
       }

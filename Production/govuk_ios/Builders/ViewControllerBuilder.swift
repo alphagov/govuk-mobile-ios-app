@@ -418,12 +418,10 @@ class ViewControllerBuilder {
     }
 
     func chatError(error: ChatError,
-                   action: @escaping () -> Void,
-                   openURLAction: ((URL) -> Void)?) -> UIViewController {
+                   action: @escaping () -> Void) -> UIViewController {
         let viewModel = ChatErrorViewModel(
             error: error,
-            action: action,
-            openURLAction: openURLAction
+            action: action
         )
         let view = InfoView(viewModel: viewModel)
         let viewController = HostingViewController(

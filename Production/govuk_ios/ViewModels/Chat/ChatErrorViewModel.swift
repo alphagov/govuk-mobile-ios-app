@@ -6,14 +6,11 @@ import SwiftUI
 final class ChatErrorViewModel: InfoViewModelInterface {
     private let action: () -> Void
     private let error: ChatError
-    var openURLAction: ((URL) -> Void)?
 
     init(error: ChatError,
-         action: @escaping () -> Void,
-         openURLAction: ((URL) -> Void)?) {
+         action: @escaping () -> Void) {
         self.error = error
         self.action = action
-        self.openURLAction = openURLAction
     }
 
     var title: String {

@@ -15,8 +15,7 @@ struct ChatErrorViewModelTests {
             error: .networkUnavailable,
             action: {
                 didCallCompletion = true
-            },
-            openURLAction: { _ in }
+            }
         )
 
         sut.buttonViewModel.action()
@@ -28,8 +27,7 @@ struct ChatErrorViewModelTests {
     func hasCorrectStyle_forNetworkError() {
         let sut = ChatErrorViewModel(
             error: .networkUnavailable,
-            action: { },
-            openURLAction: { _ in }
+            action: { }
         )
 
         #expect(sut.title == String.common.localized("networkUnavailableErrorTitle"))
@@ -42,8 +40,7 @@ struct ChatErrorViewModelTests {
     func hasCorrectStyle_forPageNotFoundError() {
         let sut = ChatErrorViewModel(
             error: .pageNotFound,
-            action: { },
-            openURLAction: { _ in }
+            action: { }
         )
 
         #expect(sut.title == String.common.localized("genericErrorTitle"))
@@ -56,8 +53,7 @@ struct ChatErrorViewModelTests {
     func hasCorrectStyle_forOtherError() {
         let sut = ChatErrorViewModel(
             error: .apiUnavailable,
-            action: { },
-            openURLAction: { _ in }
+            action: { }
         )
 
         #expect(sut.title == String.common.localized("genericErrorTitle"))

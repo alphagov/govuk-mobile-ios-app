@@ -42,7 +42,6 @@ struct DynamicTextEditor: UIViewRepresentable {
         @Binding var text: String
         @Binding var height: CGFloat
         @Binding var placeholderText: String?
-
         init(text: Binding<String>,
              height: Binding<CGFloat>,
              placeholderText: Binding<String?>) {

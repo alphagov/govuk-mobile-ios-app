@@ -90,7 +90,7 @@ class Configuration
   end
 
   def firebase_app_id
-    setting(:app, :firebase_app_id)
+    ENV['FIREBASE_APP_ID']
   end
 
   def firebase_token

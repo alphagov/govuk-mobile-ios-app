@@ -75,7 +75,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             conversationId: conversationId,
             createdAt: createdAt,
             id: "78910",
-            message: showError ? "steve@apple.com" : "This is the pending question"
+            message: "This is the pending question"
         )
 
         let history = History(
@@ -95,6 +95,10 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             handleError: { _ in }
         )
 
+        if showError {
+            viewModel.errorText = String.chat.localized("validationErrorText")
+        }
+        
         viewModel.cellModels.append(.gettingAnswer)
         let view = ChatView(viewModel: viewModel)
             .environment(\.isTesting, true)

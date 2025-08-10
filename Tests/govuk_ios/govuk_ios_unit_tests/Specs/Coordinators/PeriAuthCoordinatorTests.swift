@@ -17,7 +17,6 @@ struct PeriAuthCoordinatorTests {
             navigationController: MockNavigationController(),
             completion: { }
         )
-
         let stubbedReauthenticationCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedReauthenticationCoordinator = stubbedReauthenticationCoordinator
         subject.start(url: nil)

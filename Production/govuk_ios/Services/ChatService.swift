@@ -17,25 +17,26 @@ final class ChatService: ChatServiceInterface {
     private let serviceClient: ChatServiceClientInterface
     private let chatRepository: ChatRepositoryInterface
     private let configService: AppConfigServiceInterface
-    private let maxRetryCount: Int
-    private let retryInterval: TimeInterval
+
+    private var pollingInterval: TimeInterval {
+        configService.chatPollIntervalSeconds
+    }
+
     var currentConversationId: String? {
         chatRepository.fetchConversation()
     }
+
     var isEnabled: Bool {
         configService.isFeatureEnabled(key: .chat)
     }
 
+
     init(serviceClient: ChatServiceClientInterface,
          chatRepository: ChatRepositoryInterface,
-         configService: AppConfigServiceInterface,
-         maxRetryCount: Int = 10,
-         retryInterval: TimeInterval = 6.0) {
+         configService: AppConfigServiceInterface) {
         self.serviceClient = serviceClient
         self.chatRepository = chatRepository
         self.configService = configService
-        self.maxRetryCount = maxRetryCount
-        self.retryInterval = retryInterval
     }
 
     func askQuestion(_ question: String,
@@ -61,14 +62,17 @@ final class ChatService: ChatServiceInterface {
             conversationId: pendingQuestion.conversationId,
             questionId: pendingQuestion.id,
             completion: { [weak self] result in
+                guard let self else {
+                    return
+                }
                 switch result {
                 case .success(let answer):
                     guard answer.answerAvailable else {
                         DispatchQueue.main.asyncAfter(
-                            deadline: .now() + (self?.retryInterval ?? 3.0)
+                            deadline: .now() + (self.pollingInterval)
                         ) {
-                            self?.pollForAnswer(pendingQuestion,
-                                                completion: completion)
+                            self.pollForAnswer(pendingQuestion,
+                                               completion: completion)
                         }
                         return
                     }

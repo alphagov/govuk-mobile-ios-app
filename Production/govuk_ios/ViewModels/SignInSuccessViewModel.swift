@@ -14,10 +14,6 @@ final class SignInSuccessViewModel: InfoViewModelInterface {
         String.onboarding.localized("successfulSignInTitle")
     }
 
-    var subtitle: String {
-        ""
-    }
-
     var buttonTitle: String {
         String.common.localized("continue")
     }

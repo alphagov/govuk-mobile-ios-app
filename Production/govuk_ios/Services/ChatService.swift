@@ -8,7 +8,9 @@ protocol ChatServiceInterface {
     func chatHistory(conversationId: String,
                      completion: @escaping (ChatHistoryResult) -> Void)
     func clearHistory()
+    func setChatOnboarded()
 
+    var chatOnboardingSeen: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
 }
@@ -17,6 +19,7 @@ final class ChatService: ChatServiceInterface {
     private let serviceClient: ChatServiceClientInterface
     private let chatRepository: ChatRepositoryInterface
     private let configService: AppConfigServiceInterface
+    private let userDefaults: UserDefaultsInterface
 
     private var pollingInterval: TimeInterval {
         configService.chatPollIntervalSeconds
@@ -30,13 +33,22 @@ final class ChatService: ChatServiceInterface {
         configService.isFeatureEnabled(key: .chat)
     }
 
+    var chatOnboardingSeen: Bool {
+        userDefaults.bool(forKey: .chatOnboardingSeen)
+    }
 
     init(serviceClient: ChatServiceClientInterface,
          chatRepository: ChatRepositoryInterface,
-         configService: AppConfigServiceInterface) {
+         configService: AppConfigServiceInterface,
+         userDefaults: UserDefaultsInterface) {
         self.serviceClient = serviceClient
         self.chatRepository = chatRepository
         self.configService = configService
+        self.userDefaults = userDefaults
+    }
+
+    func setChatOnboarded() {
+        userDefaults.set(bool: true, forKey: .chatOnboardingSeen)
     }
 
     func askQuestion(_ question: String,

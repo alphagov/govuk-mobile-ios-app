@@ -16,7 +16,13 @@ class TabCoordinator: BaseCoordinator,
                       UITabBarControllerDelegate {
     private lazy var homeCoordinator = coordinatorBuilder.home
     private lazy var settingsCoordinator = coordinatorBuilder.settings
-    private lazy var chatCoordinator = coordinatorBuilder.chat
+    private lazy var chatCoordinator = coordinatorBuilder.chat(
+        cancelOnboardingAction: { [weak self] in
+            self?.selectTabByIndex(index: self?.previousTabIndex ?? 0)
+        }
+    )
+
+    private var previousTabIndex = 0
     private var currentTabIndex = 0
 
     private var coordinators: [TabItemCoordinator] {
@@ -95,6 +101,12 @@ class TabCoordinator: BaseCoordinator,
         currentTabIndex = tabController.selectedIndex
     }
 
+    private func selectTabByIndex(index: Int) {
+        tabController.selectedIndex = index
+        previousTabIndex = currentTabIndex
+        currentTabIndex = tabController.selectedIndex
+    }
+
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
         guard let title = viewController.tabBarItem.title else { return }
@@ -104,6 +116,7 @@ class TabCoordinator: BaseCoordinator,
             tabBarController.selectedIndex,
             previousTabIndex: currentTabIndex
         )
+        previousTabIndex = currentTabIndex
         currentTabIndex = tabBarController.selectedIndex
     }
 }

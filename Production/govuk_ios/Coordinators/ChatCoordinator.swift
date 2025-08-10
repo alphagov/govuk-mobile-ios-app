@@ -8,13 +8,15 @@ class ChatCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
+    private let cancelOnboardingAction: () -> Void
     private var isShowingError = false
     private lazy var chatViewController: UIViewController = {
         viewControllerBuilder.chat(
             analyticsService: analyticsService,
             chatService: chatService,
             openURLAction: presentWebView,
-            handleError: handleError)
+            handleError: handleError
+        )
     }()
 
     var isEnabled: Bool {
@@ -26,12 +28,14 @@ class ChatCoordinator: TabItemCoordinator {
          viewControllerBuilder: ViewControllerBuilder,
          deepLinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
-         chatService: ChatServiceInterface) {
+         chatService: ChatServiceInterface,
+         cancelOnboardingAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deepLinkStore
         self.analyticsService = analyticsService
         self.chatService = chatService
+        self.cancelOnboardingAction = cancelOnboardingAction
         super.init(navigationController: navigationController)
     }
 
@@ -63,6 +67,17 @@ class ChatCoordinator: TabItemCoordinator {
             isShowingError {
             set(chatViewController, animated: false)
             isShowingError = false
+        } else if !chatService.chatOnboardingSeen {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.present(
+                    coordinatorBuilder.chatInfoOnboarding(
+                        cancelOnboardingAction: cancelOnboardingAction
+                    )
+                )
+            }
+        } else {
+            set(chatViewController, animated: false)
         }
     }
 

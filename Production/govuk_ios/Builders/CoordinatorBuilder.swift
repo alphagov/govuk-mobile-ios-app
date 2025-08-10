@@ -419,7 +419,23 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
-            cancelOnboardingAction: cancelOnboardingAction
+            cancelOnboardingAction: cancelOnboardingAction,
+        )
+    }
+
+    func chatConsentOnboarding(
+        navigationController: UINavigationController,
+        cancelOnboardingAction: @escaping () -> Void,
+        completionAction: @escaping () -> Void
+    ) -> BaseCoordinator {
+        ChatConsentOnboardingCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve(),
+            cancelOnboardingAction: cancelOnboardingAction,
+            completionAction: completionAction
         )
     }
 }

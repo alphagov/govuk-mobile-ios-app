@@ -510,5 +510,28 @@ class ViewControllerBuilder {
         viewController.isModalInPresentation = true
         return viewController
     }
+
+    func chatConsentOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        cancelOnboardingAction: @escaping () -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatConsentOnboardingViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            cancelOnboardingAction: cancelOnboardingAction,
+            completionAction: completionAction
+        )
+        let containerView = ChatConsentOnboardingView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: containerView
+        )
+        viewController.navigationItem.rightBarButtonItem = viewModel.rightBarButtonItem
+        viewController.isModalInPresentation = true
+        return viewController
+    }
 }
 // swiftlint:enable file_length

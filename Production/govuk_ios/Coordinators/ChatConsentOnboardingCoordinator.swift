@@ -2,31 +2,25 @@ import Foundation
 import UIKit
 import GOVKit
 
-class ChatInfoOnboardingCoordinator: BaseCoordinator {
+class ChatConsentOnboardingCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
+    private let chatService: ChatServiceInterface
     private let cancelOnboardingAction: () -> Void
-    private lazy var chatInfoOnboardingViewController: UIViewController = {
-        viewControllerBuilder.chatInfoOnboarding(
+    private let completionAction: () -> Void
+    private lazy var chatConsentOnboardingViewController: UIViewController = {
+        viewControllerBuilder.chatConsentOnboarding(
             analyticsService: analyticsService,
-            completionAction: { [weak self] in
-                guard let self = self else { return }
-                let coordinator = coordinatorBuilder.chatConsentOnboarding(
-                    navigationController: root,
-                    cancelOnboardingAction: { [weak self] in
-                        self?.cancelOnboardingAction()
-                        self?.finish()
-                    },
-                    completionAction: { [weak self] in
-                        self?.finish()
-                    }
-                )
-                start(coordinator)
-            },
+            chatService: chatService,
             cancelOnboardingAction: { [weak self] in
                 self?.dismiss(animated: true)
                 self?.cancelOnboardingAction()
+                self?.finish()
+            },
+            completionAction: { [weak self] in
+                self?.dismiss(animated: true)
+                self?.completionAction()
                 self?.finish()
             }
         )
@@ -36,15 +30,19 @@ class ChatInfoOnboardingCoordinator: BaseCoordinator {
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          analyticsService: AnalyticsServiceInterface,
-         cancelOnboardingAction: @escaping () -> Void) {
+         chatService: ChatServiceInterface,
+         cancelOnboardingAction: @escaping () -> Void,
+         completionAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
+        self.chatService = chatService
         self.cancelOnboardingAction = cancelOnboardingAction
+        self.completionAction = completionAction
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        set(chatInfoOnboardingViewController)
+        push(chatConsentOnboardingViewController)
     }
 }

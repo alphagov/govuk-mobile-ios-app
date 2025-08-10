@@ -40,6 +40,8 @@ class ChatCoordinator: TabItemCoordinator {
     }
 
     override func start(url: URL?) {
+        guard chatService.chatOnboardingSeen else { return }
+
         set(chatViewController)
         isShowingError = false
     }
@@ -70,14 +72,12 @@ class ChatCoordinator: TabItemCoordinator {
         } else if !chatService.chatOnboardingSeen {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.present(
+                present(
                     coordinatorBuilder.chatInfoOnboarding(
                         cancelOnboardingAction: cancelOnboardingAction
                     )
                 )
             }
-        } else {
-            set(chatViewController, animated: false)
         }
     }
 
@@ -105,5 +105,13 @@ class ChatCoordinator: TabItemCoordinator {
         )
         set(viewController, animated: false)
         isShowingError = true
+    }
+
+    override func childDidFinish(_ child: BaseCoordinator) {
+        super.childDidFinish(child)
+        if chatService.chatOnboardingSeen {
+            set(chatViewController)
+            isShowingError = false
+        }
     }
 }

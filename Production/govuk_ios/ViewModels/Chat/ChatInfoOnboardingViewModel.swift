@@ -17,7 +17,7 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
 
     var rightBarButtonItem: UIBarButtonItem {
         UIBarButtonItem(
-            title: "Cancel",
+            title: String.common.localized("cancel"),
             style: .plain,
             target: self,
             action: #selector(cancelOnboarding)
@@ -66,6 +66,14 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
 
     var navBarHidden: Bool {
         false
+    }
+
+    var trackingTitle: String {
+        title
+    }
+
+    var trackingName: String {
+        "First chat onboarding"
     }
 
     @objc

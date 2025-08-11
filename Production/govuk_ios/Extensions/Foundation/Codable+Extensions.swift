@@ -1,24 +1,24 @@
 import Foundation
 
 extension Decodable {
-    func extractDataSliceForKey(_ key: CodingKey,
-                                from jsonData: Data,
-                                removePrettyPrint: Bool = true) -> Data? {
-        guard let jsonString = String(data: jsonData, encoding: .utf8) else {
-            return nil
-        }
-
-        guard let sliceRange = jsonString.range(of: "\"\(key.stringValue)\":") else {
-            return nil
-        }
-
-        let endIndex = endBraceIndex(for: jsonString,
-                                     in: sliceRange)
-        let stringSlice = String(jsonString[sliceRange.upperBound..<endIndex])
-
-        return data(from: stringSlice,
-                    removePrettyPrint: removePrettyPrint)
-    }
+//    func extractDataSliceForKey(_ key: CodingKey,
+//                                from jsonData: Data,
+//                                removePrettyPrint: Bool = true) -> Data? {
+//        guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+//            return nil
+//        }
+//
+//        guard let sliceRange = jsonString.range(of: "\"\(key.stringValue)\":") else {
+//            return nil
+//        }
+//
+//        let endIndex = endBraceIndex(for: jsonString,
+//                                     in: sliceRange)
+//        let stringSlice = String(jsonString[sliceRange.upperBound..<endIndex])
+//
+//        return data(from: stringSlice,
+//                    removePrettyPrint: removePrettyPrint)
+//    }
 
     private func endBraceIndex(for jsonString: String,
                                in range: Range<String.Index>) -> String.Index {

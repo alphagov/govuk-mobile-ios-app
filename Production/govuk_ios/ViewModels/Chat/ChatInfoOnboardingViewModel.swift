@@ -16,12 +16,14 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
     }
 
     var rightBarButtonItem: UIBarButtonItem {
-        UIBarButtonItem(
+        let barButton = UIBarButtonItem(
             title: String.common.localized("cancel"),
             style: .plain,
             target: self,
             action: #selector(cancelOnboarding)
         )
+        barButton.tintColor = .govUK.text.link
+        return barButton
     }
 
     var title: String {

@@ -16,15 +16,15 @@ struct TopicsWidgetViewModelTests {
     @Test
     func fetchTopics_downloadSuccess_returnsExpectedData() async {
         var cancellables = Set<AnyCancellable>()
+        let mockTopicService = MockTopicsService()
+        mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            topicAction: { _ in },
+            allTopicsAction: { }
+        )
         let result = await withCheckedContinuation { continuation in
-            let mockTopicService = MockTopicsService()
-            mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
-            let sut = TopicsWidgetViewModel(
-                topicsService: mockTopicService,
-                analyticsService: mockAnalyticsService,
-                topicAction: { _ in },
-                allTopicsAction: { }
-            )
             sut.$fetchTopicsError
                 .receive(on: DispatchQueue.main)
                 .dropFirst()

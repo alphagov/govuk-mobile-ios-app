@@ -2725,6 +2725,7 @@
 			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CHAT_AUTH_TOKEN = KJXg9xvu6Gu3KgEj67NC3NctXTqz9MdLOuZhKYTpqf8;
 				CHAT_BASE_URL = chat.integration.publishing.service.gov.uk;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2766,6 +2767,7 @@
 			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CHAT_AUTH_TOKEN = KJXg9xvu6Gu3KgEj67NC3NctXTqz9MdLOuZhKYTpqf8;
 				CHAT_BASE_URL = chat.integration.publishing.service.gov.uk;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -3028,6 +3030,7 @@
 			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CHAT_AUTH_TOKEN = KJXg9xvu6Gu3KgEj67NC3NctXTqz9MdLOuZhKYTpqf8;
 				CHAT_BASE_URL = chat.integration.publishing.service.gov.uk;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";

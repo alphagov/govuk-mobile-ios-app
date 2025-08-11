@@ -75,7 +75,7 @@ struct CoordinatorBuilderTests {
     @Test
     func chat_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.chat
+        let coordinator = subject.chat(cancelOnboardingAction: { })
 
         #expect(coordinator is ChatCoordinator)
     }

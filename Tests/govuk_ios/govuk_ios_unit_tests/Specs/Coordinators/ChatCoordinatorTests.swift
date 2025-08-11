@@ -15,6 +15,8 @@ struct ChatCoordinatorTests {
 
     @Test
     func start_setsChatViewController() throws {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
@@ -26,7 +28,8 @@ struct ChatCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
-            chatService: MockChatService()
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
         )
 
         sut.start()
@@ -36,6 +39,8 @@ struct ChatCoordinatorTests {
 
     @Test
     func openChatURL_showsSafariWebView() throws {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockSafariCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
@@ -51,7 +56,8 @@ struct ChatCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
-            chatService: MockChatService()
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
         )
 
         sut.start(url: nil)
@@ -61,6 +67,8 @@ struct ChatCoordinatorTests {
 
     @Test
     func networkUnavailable_showsInfoView() throws {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
@@ -72,7 +80,8 @@ struct ChatCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
-            chatService: MockChatService()
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
         )
 
         sut.start(url: nil)
@@ -83,6 +92,8 @@ struct ChatCoordinatorTests {
 
     @Test
     func handleNetworkUnavailableError_showsChatView() throws {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedChatViewController = UIViewController()
@@ -96,7 +107,8 @@ struct ChatCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
-            chatService: MockChatService()
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
         )
 
         sut.start(url: nil)
@@ -110,6 +122,8 @@ struct ChatCoordinatorTests {
 
     @Test
     func handleApiUnavailable_showsWebView() throws {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockSafariCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
@@ -127,7 +141,8 @@ struct ChatCoordinatorTests {
             viewControllerBuilder: mockViewControllerBuilder,
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
-            chatService: MockChatService()
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
         )
 
         sut.start(url: nil)

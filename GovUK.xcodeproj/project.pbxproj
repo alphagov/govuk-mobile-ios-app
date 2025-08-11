@@ -1003,7 +1003,7 @@
 		16E5AD442C6E499B000B8B3A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				4E1534072E3985FB002DEDB9 /* BrandRefresh */,
+				4E15340A2E398647002DEDB9 /* HomeContentView.swift */,
 				4EE5F3E32DAFD350008C60ED /* LocalAuthority */,
 				D056CE752D3A847F005845E0 /* InformationView.swift */,
 				D06EB96A2CA6F6FA007EA081 /* Topics */,
@@ -1052,22 +1052,6 @@
 				4E6663C42C736ABD0063E81C /* Feature.swift */,
 			);
 			path = AppConfig;
-			sourceTree = "<group>";
-		};
-		4E1534072E3985FB002DEDB9 /* BrandRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				4E1534092E398625002DEDB9 /* Home */,
-			);
-			path = BrandRefresh;
-			sourceTree = "<group>";
-		};
-		4E1534092E398625002DEDB9 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				4E15340A2E398647002DEDB9 /* HomeContentView.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		4E265F142DB0E6B70089CF9E /* LocalAuthority */ = {

@@ -54,12 +54,12 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding(.bottom, 16)
-                .frame(width: 140, height: 130)
+                .frame(width: 150, height: 150)
         )
     }
 
     var showImageWhenCompact: Bool {
-        true
+        false
     }
 
     var subtitleFont: Font {

@@ -3,6 +3,7 @@ import GOVKit
 import UIComponents
 
 struct ChatConsentOnboardingView: View {
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     private var viewModel: ChatConsentOnboardingViewModel
 
     init(viewModel: ChatConsentOnboardingViewModel) {
@@ -35,12 +36,14 @@ struct ChatConsentOnboardingView: View {
 
     private var consentView: some View {
         VStack {
-            Image(decorative: "chat_onboarding_consent")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(.bottom, 16)
-                .frame(width: 120, height: 120)
-                .accessibilityHidden(true)
+            if verticalSizeClass != .compact {
+                Image(decorative: "chat_onboarding_consent")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.bottom, 16)
+                    .frame(width: 130, height: 130)
+                    .accessibilityHidden(true)
+            }
 
             Text(LocalizedStringKey("onboardingConsentTitle"),
                  tableName: "Chat")

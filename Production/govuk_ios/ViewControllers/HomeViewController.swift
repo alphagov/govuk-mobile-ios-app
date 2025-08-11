@@ -220,7 +220,6 @@ extension HomeViewController: ResetsToDefault {
         if viewModel.searchEnabled {
             cancelSearch()
         }
-        // implement scroll to the top
         viewModel.homeContentScrollToTop = true
     }
 }

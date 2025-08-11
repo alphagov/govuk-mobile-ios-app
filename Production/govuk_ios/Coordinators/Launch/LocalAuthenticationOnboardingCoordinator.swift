@@ -5,13 +5,13 @@ import GOVKit
 
 class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaults: UserDefaultsServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
-         userDefaults: UserDefaultsInterface,
+         userDefaults: UserDefaultsServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
          authenticationService: AuthenticationServiceInterface,
          completionAction: @escaping () -> Void) {

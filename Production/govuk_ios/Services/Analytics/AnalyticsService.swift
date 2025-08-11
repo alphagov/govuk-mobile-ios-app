@@ -3,11 +3,11 @@ import GOVKit
 
 class AnalyticsService: AnalyticsServiceInterface {
     private let clients: [AnalyticsClient]
-    private var userDefaults: UserDefaultsInterface
+    private var userDefaults: UserDefaultsServiceInterface
     private let authenticationService: AuthenticationServiceInterface
 
     init(clients: [AnalyticsClient],
-         userDefaults: UserDefaultsInterface,
+         userDefaults: UserDefaultsServiceInterface,
          authenticationService: AuthenticationServiceInterface) {
         self.clients = clients
         self.userDefaults = userDefaults

@@ -7,13 +7,13 @@ import Testing
 class LocalAuthenticationOnboardingCoordinatorTests {
     @Test @MainActor
     func start_faceIDEnrolled_setsOnboarding() {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaultsService = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
-            userDefaults: mockUserDefaults,
+            userDefaults: mockUserDefaultsService,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -27,7 +27,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
 
     @Test @MainActor
     func start_touchIDEnrolled_setsOnboarding() {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
@@ -47,7 +47,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
 
     @Test @MainActor
     func start_passcodeOnlyOption_callsCompletion() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
@@ -69,7 +69,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
 
     @Test @MainActor
     func start_noAuthEnrolled_callsCompletion() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
@@ -93,7 +93,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
 
     @Test @MainActor
     func start_authenticationOnboardingSeen_true_callsCompletion() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()

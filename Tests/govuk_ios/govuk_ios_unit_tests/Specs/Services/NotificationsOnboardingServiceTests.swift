@@ -10,7 +10,7 @@ struct NotificationsOnboardingServiceTests {
 
     @Test
     func hasSeenNotificationsOnboarding_returnsFalseByDefault() {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults.set(bool: false, forKey: .notificationsOnboardingSeen)
         let sut = NotificationsOnboardingService(userDefaults: mockUserDefaults)
 
@@ -19,7 +19,7 @@ struct NotificationsOnboardingServiceTests {
 
     @Test
     func setHasSeenNotificationsOnboarding_setsFlagToTrue() {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults.set(bool: false, forKey: .notificationsOnboardingSeen)
         let sut = NotificationsOnboardingService(userDefaults: mockUserDefaults)
 

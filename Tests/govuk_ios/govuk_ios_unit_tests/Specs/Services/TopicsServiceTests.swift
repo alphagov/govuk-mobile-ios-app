@@ -20,7 +20,7 @@ struct TopicsServiceTests {
             topicsServiceClient: mockTopicsServiceClient,
             topicsRepository: mockTopicsRepository,
             analyticsService: mockAnalyticsService,
-            userDefaults: MockUserDefaults()
+            userDefaults: MockUserDefaultsService()
         )
     }
 
@@ -93,7 +93,7 @@ struct TopicsServiceTests {
     @Test
     func setHasOnboardedTopics_setsOnboardingToTrue() {
 
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
 
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
@@ -113,7 +113,7 @@ struct TopicsServiceTests {
     @Test
     func setHasCustomisedTopics_setsHasEditedTopicsToTrue() {
 
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAnalyticsService = MockAnalyticsService()
         let sut = TopicsService(
             topicsServiceClient: MockTopicsServiceClient(),
@@ -136,7 +136,7 @@ struct TopicsServiceTests {
     @Test(.serialized, arguments: [true, false])
     func hasOnboardedTopics_returnsExpectedResult(expectedValue: Bool) {
 
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults.set(bool: expectedValue, forKey: .topicsOnboardingSeen)
 
         let sut = TopicsService(
@@ -151,7 +151,7 @@ struct TopicsServiceTests {
 
     @Test(.serialized, arguments: [true, false])
     func hasTopicsBeenEdited_returnsExpectedResult(expectedValue: Bool) {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults._stub(
             value: expectedValue,
             key: UserDefaultsKeys.customisedTopics.rawValue
@@ -170,7 +170,7 @@ struct TopicsServiceTests {
 
     @Test
     func resetOnboaring_resetsPreferences() {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults._stub(
             value: true,
             key: UserDefaultsKeys.topicsOnboardingSeen.rawValue

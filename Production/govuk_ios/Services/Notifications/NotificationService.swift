@@ -23,13 +23,13 @@ class NotificationService: NSObject,
     private var environmentService: AppEnvironmentServiceInterface
     private let notificationCenter: UserNotificationCenterInterface
     private let configService: AppConfigServiceInterface
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaults: UserDefaultsServiceInterface
     var onClickAction: ((URL) -> Void)?
 
     init(environmentService: AppEnvironmentServiceInterface,
          notificationCenter: UserNotificationCenterInterface,
          configService: AppConfigServiceInterface,
-         userDefaults: UserDefaultsInterface) {
+         userDefaults: UserDefaultsServiceInterface) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
         self.configService = configService

@@ -8,12 +8,12 @@ class LocalAuthenticationOnboardingViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var message: String = ""
     @Published var enrolButtonTitle: String = ""
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaults: UserDefaultsServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private var biometryType: LocalAuthenticationType = .none
     private let completionAction: (() -> Void)
-    init(userDefaults: UserDefaultsInterface,
+    init(userDefaults: UserDefaultsServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
          authenticationService: AuthenticationServiceInterface,
          completionAction: @escaping () -> Void) {

@@ -22,12 +22,12 @@ struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
     private let analyticsService: AnalyticsServiceInterface
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaults: UserDefaultsServiceInterface
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          topicsRepository: TopicsRepositoryInterface,
          analyticsService: AnalyticsServiceInterface,
-         userDefaults: UserDefaultsInterface) {
+         userDefaults: UserDefaultsServiceInterface) {
         self.topicsServiceClient = topicsServiceClient
         self.topicsRepository = topicsRepository
         self.analyticsService = analyticsService

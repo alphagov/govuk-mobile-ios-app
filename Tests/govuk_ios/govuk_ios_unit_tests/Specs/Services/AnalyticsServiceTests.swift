@@ -12,7 +12,7 @@ struct AnalyticsServiceTests {
     @Test
     func init_configuresDisabled() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
 
         mockAnalyticsClient._enabledReceived = true
@@ -28,7 +28,7 @@ struct AnalyticsServiceTests {
     @Test
     func permissionState_notSet_returnsUnknown() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -46,7 +46,7 @@ struct AnalyticsServiceTests {
     @Test
     func permissionState_accepted_returnsAccepted() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -64,7 +64,7 @@ struct AnalyticsServiceTests {
     @Test
     func permissionState_rejected_returnsDenied() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -82,12 +82,12 @@ struct AnalyticsServiceTests {
     @Test
     func trackEvent_rejectedPermissions_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaultsService = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaults: mockUserDefaultsService,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: false)
@@ -101,7 +101,7 @@ struct AnalyticsServiceTests {
     @MainActor
     func trackScreen_rejectedPermissions_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
@@ -122,7 +122,7 @@ struct AnalyticsServiceTests {
     @Test
     func trackEvent_signedOut_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsSignedIn = false
         let subject = AnalyticsService(
@@ -141,7 +141,7 @@ struct AnalyticsServiceTests {
     @MainActor
     func trackScreen_signedOut_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
@@ -162,7 +162,7 @@ struct AnalyticsServiceTests {
     @Test
     func trackEvent_tracksEvents() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
@@ -181,7 +181,7 @@ struct AnalyticsServiceTests {
     @MainActor
     func trackScreen_tracksScreen() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
@@ -209,7 +209,7 @@ struct AnalyticsServiceTests {
     @Test
     func setAcceptedAnalytics_true_grantsPermissions() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -225,7 +225,7 @@ struct AnalyticsServiceTests {
     @Test
     func setAcceptedAnalytics_false_denysPermission() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -242,7 +242,7 @@ struct AnalyticsServiceTests {
     @Test
     func setUserProperty_tracksProperty() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -263,7 +263,7 @@ struct AnalyticsServiceTests {
     @Test
     func resetConsent_removesConsent() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -281,7 +281,7 @@ struct AnalyticsServiceTests {
     @Test
     func setExistingConsent_accepted_grantsPermission() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -299,7 +299,7 @@ struct AnalyticsServiceTests {
     @Test
     func setExistingConsent_denied_denysPermission() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
@@ -317,7 +317,7 @@ struct AnalyticsServiceTests {
     @Test
     func setExistingConsent_unknown_doesntAlterPermission() {
         let mockAnalyticsClient = MockAnalyticsClient()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],

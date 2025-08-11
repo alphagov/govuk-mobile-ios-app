@@ -31,7 +31,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private var authenticatedSecureStoreService: SecureStorable
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaults: UserDefaultsServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
@@ -60,7 +60,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
          returningUserService: ReturningUserServiceInterface,
-         userDefaults: UserDefaultsInterface) {
+         userDefaults: UserDefaultsServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient

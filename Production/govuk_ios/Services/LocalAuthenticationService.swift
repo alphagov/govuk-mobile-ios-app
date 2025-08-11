@@ -29,9 +29,9 @@ protocol LocalAuthenticationServiceInterface {
 
 final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     private let context: LAContext
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaults: UserDefaultsServiceInterface
 
-    init(userDefaults: UserDefaultsInterface,
+    init(userDefaults: UserDefaultsServiceInterface,
          context: LAContext = LAContext()) {
         self.context = context
         self.userDefaults = userDefaults

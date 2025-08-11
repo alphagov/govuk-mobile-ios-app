@@ -7,9 +7,9 @@ protocol NotificationsOnboardingServiceInterface {
 }
 
 struct NotificationsOnboardingService: NotificationsOnboardingServiceInterface {
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaults: UserDefaultsServiceInterface
 
-    init(userDefaults: UserDefaultsInterface) {
+    init(userDefaults: UserDefaultsServiceInterface) {
         self.userDefaults = userDefaults
     }
 

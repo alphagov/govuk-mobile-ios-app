@@ -246,4 +246,18 @@ final class ChatServiceTests {
 
         #expect(sut.isEnabled == true)
     }
+
+    @Test
+    func setChatOnboarded_updatesChatOnboardingSeen_returnsTrue() {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaults: mockUserDefaults
+        )
+
+        #expect(!sut.chatOnboardingSeen)
+        sut.setChatOnboarded()
+        #expect(sut.chatOnboardingSeen)
+    }
 }

@@ -3,7 +3,6 @@ import UIKit
 import GOVKit
 
 class ChatConsentOnboardingCoordinator: BaseCoordinator {
-    private let coordinatorBuilder: CoordinatorBuilder
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
@@ -27,13 +26,11 @@ class ChatConsentOnboardingCoordinator: BaseCoordinator {
     }()
 
     init(navigationController: UINavigationController,
-         coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          analyticsService: AnalyticsServiceInterface,
          chatService: ChatServiceInterface,
          cancelOnboardingAction: @escaping () -> Void,
          completionAction: @escaping () -> Void) {
-        self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
         self.chatService = chatService

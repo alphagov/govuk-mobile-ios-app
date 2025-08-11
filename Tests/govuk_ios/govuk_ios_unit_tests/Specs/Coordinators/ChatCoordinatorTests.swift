@@ -38,6 +38,28 @@ struct ChatCoordinatorTests {
     }
 
     @Test
+    func start_onboardingNotSeen_setsChatViewController() throws {
+        let mockChatService = MockChatService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedChatController = expectedViewController
+        let navigationController = UINavigationController()
+        let sut = ChatCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+
+        sut.start()
+        #expect(navigationController.viewControllers.isEmpty)
+    }
+
+    @Test
     func openChatURL_showsSafariWebView() throws {
         let mockChatService = MockChatService()
         mockChatService.setChatOnboarded()

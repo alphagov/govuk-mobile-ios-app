@@ -11,18 +11,7 @@ class ChatInfoOnboardingCoordinator: BaseCoordinator {
         viewControllerBuilder.chatInfoOnboarding(
             analyticsService: analyticsService,
             completionAction: { [weak self] in
-                guard let self = self else { return }
-                let coordinator = coordinatorBuilder.chatConsentOnboarding(
-                    navigationController: root,
-                    cancelOnboardingAction: { [weak self] in
-                        self?.cancelOnboardingAction()
-                        self?.finish()
-                    },
-                    completionAction: { [weak self] in
-                        self?.finish()
-                    }
-                )
-                start(coordinator)
+                self?.startChatConsentOnboarding()
             },
             cancelOnboardingAction: { [weak self] in
                 self?.dismiss(animated: true)
@@ -46,5 +35,19 @@ class ChatInfoOnboardingCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         set(chatInfoOnboardingViewController)
+    }
+
+    private func startChatConsentOnboarding() {
+        let coordinator = coordinatorBuilder.chatConsentOnboarding(
+            navigationController: root,
+            cancelOnboardingAction: { [weak self] in
+                self?.cancelOnboardingAction()
+                self?.finish()
+            },
+            completionAction: { [weak self] in
+                self?.finish()
+            }
+        )
+        start(coordinator)
     }
 }

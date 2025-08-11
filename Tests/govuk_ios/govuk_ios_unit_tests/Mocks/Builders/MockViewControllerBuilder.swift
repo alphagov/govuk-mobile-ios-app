@@ -279,4 +279,23 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedChatErrorAction = action
         return _stubbedChatErrorController ?? UIViewController()
     }
+
+    var _stubbedChatInfoOnboardingController: UIViewController?
+    override func chatInfoOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        completionAction: @escaping () -> Void,
+        cancelOnboardingAction: @escaping () -> Void
+    ) -> UIViewController {
+        return _stubbedChatInfoOnboardingController ?? UIViewController()
+    }
+
+    var _stubbedChatConsentOnboardingController: UIViewController?
+    override func chatConsentOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        cancelOnboardingAction: @escaping () -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        return _stubbedChatConsentOnboardingController ?? UIViewController()
+    }
 }

@@ -430,7 +430,6 @@ class CoordinatorBuilder {
     ) -> BaseCoordinator {
         ChatConsentOnboardingCoordinator(
             navigationController: navigationController,
-            coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
             chatService: container.chatService.resolve(),

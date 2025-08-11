@@ -14,7 +14,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingViewModel(
-            userDefaults: mockUserDefaultsService,
+            userDefaultsService: mockUserDefaultsService,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -32,7 +32,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingViewModel(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -52,7 +52,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -74,7 +74,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -97,7 +97,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (false, LAError(.userCancel))
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -119,7 +119,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -141,7 +141,7 @@ struct LocalAuthenticationOnboardingViewModelTests {
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }

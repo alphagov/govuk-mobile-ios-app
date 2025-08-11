@@ -7,18 +7,18 @@ protocol NotificationsOnboardingServiceInterface {
 }
 
 struct NotificationsOnboardingService: NotificationsOnboardingServiceInterface {
-    private let userDefaults: UserDefaultsServiceInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
 
-    init(userDefaults: UserDefaultsServiceInterface) {
-        self.userDefaults = userDefaults
+    init(userDefaultsService: UserDefaultsServiceInterface) {
+        self.userDefaultsService = userDefaultsService
     }
 
     var hasSeenNotificationsOnboarding: Bool {
-        userDefaults.bool(forKey: .notificationsOnboardingSeen)
+        userDefaultsService.bool(forKey: .notificationsOnboardingSeen)
     }
 
     func setHasSeenNotificationsOnboarding() {
-        userDefaults.set(
+        userDefaultsService.set(
             bool: true,
             forKey: .notificationsOnboardingSeen
         )

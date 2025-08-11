@@ -3,10 +3,6 @@ import Foundation
 @testable import govuk_ios
 
 class MockUserDefaultsService: UserDefaultsServiceInterface {
-    func deleteAll() {
-        store = [:]
-    }
-
     private(set) var store: [String?: Any] = [:]
 
     func value(forKey key: UserDefaultsKeys) -> Any? {

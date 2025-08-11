@@ -3,14 +3,14 @@ import GOVKit
 
 class AnalyticsService: AnalyticsServiceInterface {
     private let clients: [AnalyticsClient]
-    private var userDefaults: UserDefaultsServiceInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
     private let authenticationService: AuthenticationServiceInterface
 
     init(clients: [AnalyticsClient],
-         userDefaults: UserDefaultsServiceInterface,
+         userDefaultsService: UserDefaultsServiceInterface,
          authenticationService: AuthenticationServiceInterface) {
         self.clients = clients
-        self.userDefaults = userDefaults
+        self.userDefaultsService = userDefaultsService
         self.authenticationService = authenticationService
         configureDisabled()
     }
@@ -30,7 +30,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func setAcceptedAnalytics(accepted: Bool) {
-        userDefaults.set(bool: accepted, forKey: .acceptedAnalytics)
+        userDefaultsService.set(bool: accepted, forKey: .acceptedAnalytics)
         clients.forEach { $0.setEnabled(enabled: accepted) }
     }
 
@@ -52,7 +52,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func resetConsent() {
-        userDefaults.set(nil, forKey: .acceptedAnalytics)
+        userDefaultsService.set(nil, forKey: .acceptedAnalytics)
         clients.forEach { $0.setEnabled(enabled: false) }
     }
 
@@ -66,7 +66,7 @@ class AnalyticsService: AnalyticsServiceInterface {
 
     private var hasAcceptedAnalytics: Bool? {
         // Do not use bool for key here because we need to have an unknown state (nil)
-        userDefaults.value(forKey: .acceptedAnalytics) as? Bool
+        userDefaultsService.value(forKey: .acceptedAnalytics) as? Bool
     }
 
     private var shouldTrack: Bool {

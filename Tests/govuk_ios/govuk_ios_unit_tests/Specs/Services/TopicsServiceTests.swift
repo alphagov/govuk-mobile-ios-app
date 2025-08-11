@@ -20,7 +20,7 @@ struct TopicsServiceTests {
             topicsServiceClient: mockTopicsServiceClient,
             topicsRepository: mockTopicsRepository,
             analyticsService: mockAnalyticsService,
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
     }
 
@@ -99,7 +99,7 @@ struct TopicsServiceTests {
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
             analyticsService: MockAnalyticsService(),
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaults
         )
 
         #expect(mockUserDefaults.bool(forKey: .topicsOnboardingSeen) == false)
@@ -119,7 +119,7 @@ struct TopicsServiceTests {
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
             analyticsService: mockAnalyticsService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaults
         )
 
         #expect(mockUserDefaults.bool(forKey: .customisedTopics) == false)
@@ -143,7 +143,7 @@ struct TopicsServiceTests {
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
             analyticsService: MockAnalyticsService(),
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaults
         )
 
         #expect(sut.hasOnboardedTopics == expectedValue)
@@ -161,7 +161,7 @@ struct TopicsServiceTests {
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
             analyticsService: MockAnalyticsService(),
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaults
         )
 
         #expect(sut.hasCustomisedTopics == expectedValue)
@@ -183,7 +183,7 @@ struct TopicsServiceTests {
             topicsServiceClient: MockTopicsServiceClient(),
             topicsRepository: MockTopicsRepository(),
             analyticsService: MockAnalyticsService(),
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaults
         )
 
         sut.resetOnboarding()
@@ -192,3 +192,4 @@ struct TopicsServiceTests {
         #expect(mockUserDefaults.value(forKey: UserDefaultsKeys.customisedTopics) == nil)
     }
 }
+

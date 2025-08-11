@@ -13,7 +13,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
-            userDefaults: mockUserDefaultsService,
+            userDefaultsService: mockUserDefaultsService,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -33,7 +33,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -55,7 +55,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -77,7 +77,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -102,7 +102,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }

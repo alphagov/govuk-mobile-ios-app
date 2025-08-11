@@ -18,7 +18,7 @@ struct AnalyticsServiceTests {
         mockAnalyticsClient._enabledReceived = true
         _ = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
 
@@ -32,7 +32,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         mockUserDefaults._stub(
@@ -50,7 +50,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         mockUserDefaults._stub(
@@ -68,7 +68,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         mockUserDefaults._stub(
@@ -87,7 +87,7 @@ struct AnalyticsServiceTests {
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaultsService,
+            userDefaultsService: mockUserDefaultsService,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: false)
@@ -106,7 +106,7 @@ struct AnalyticsServiceTests {
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: false)
@@ -127,7 +127,7 @@ struct AnalyticsServiceTests {
         mockAuthenticationService._stubbedIsSignedIn = false
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: true)
@@ -146,7 +146,7 @@ struct AnalyticsServiceTests {
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: true)
@@ -167,7 +167,7 @@ struct AnalyticsServiceTests {
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: true)
@@ -186,7 +186,7 @@ struct AnalyticsServiceTests {
         mockAuthenticationService._stubbedIsSignedIn = true
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: true)
@@ -213,7 +213,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
         subject.setAcceptedAnalytics(accepted: true)
@@ -229,7 +229,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
 
@@ -246,7 +246,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
 
@@ -267,7 +267,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
 
@@ -285,7 +285,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
 
@@ -303,7 +303,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
 
@@ -321,7 +321,7 @@ struct AnalyticsServiceTests {
         let mockAuthenticationService = MockAuthenticationService()
         let subject = AnalyticsService(
             clients: [mockAnalyticsClient],
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             authenticationService: mockAuthenticationService
         )
 

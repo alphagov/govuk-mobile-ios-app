@@ -6,17 +6,17 @@ import Testing
 
 @Suite
 class NotificationServiceTests {
-//    @Test
-//    func shouldRequestPermissions_statusNotDetermined_returnsTrue() async {
-//        let mockUserNotificationCenter = MockUserNotificationCenter()
-//        mockUserNotificationCenter._stubbedAuthorizationStatus = .notDetermined
-//        let sut = NotificationService(
-//            environmentService: MockAppEnvironmentService(),
-//            notificationCenter: mockUserNotificationCenter,
-//            userDefaults: MockUserDefaults()
-//        )
-//        #expect(await sut.shouldRequestPermission)
-//    }
+    //    @Test
+    //    func shouldRequestPermissions_statusNotDetermined_returnsTrue() async {
+    //        let mockUserNotificationCenter = MockUserNotificationCenter()
+    //        mockUserNotificationCenter._stubbedAuthorizationStatus = .notDetermined
+    //        let sut = NotificationService(
+    //            environmentService: MockAppEnvironmentService(),
+    //            notificationCenter: mockUserNotificationCenter,
+    //            userDefaults: MockUserDefaults()
+    //        )
+    //        #expect(await sut.shouldRequestPermission)
+    //    }
 
     @Test(arguments: [
         UNAuthorizationStatus.authorized,
@@ -31,7 +31,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(await !sut.shouldRequestPermission)
     }
@@ -45,7 +45,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: mockConfig,
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(sut.isFeatureEnabled)
     }
@@ -58,7 +58,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: mockConfig,
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(!sut.isFeatureEnabled)
     }
@@ -72,7 +72,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(await sut.permissionState == .authorized)
     }
@@ -86,7 +86,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(await sut.permissionState == .denied)
     }
@@ -100,7 +100,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -114,7 +114,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -128,7 +128,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -139,7 +139,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
         let onClickAction: ((URL) -> Void)? = { _ in }
         sut.addClickListener(
@@ -154,7 +154,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
 
         var didOnClickAction = false
@@ -174,7 +174,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
 
         var didOnClickAction = false
@@ -194,7 +194,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
 
         var didOnClickAction = false
@@ -214,7 +214,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: MockUserDefaultsService()
+            userDefaultsService: MockUserDefaultsService()
         )
 
         var result: URL?
@@ -235,7 +235,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         sut.acceptConsent()
@@ -250,7 +250,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -267,7 +267,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -284,7 +284,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         sut.rejectConsent()
@@ -299,7 +299,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -316,7 +316,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -333,7 +333,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -350,7 +350,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -367,7 +367,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         sut.toggleHasGivenConsent()
@@ -382,7 +382,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -399,7 +399,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -416,7 +416,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         sut.requestPermissions(completion: nil)
@@ -432,7 +432,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockUserNotificationCenter._stubbedAuthorizationStatus = .authorized
@@ -452,7 +452,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockUserNotificationCenter._stubbedAuthorizationStatus = .authorized
@@ -472,7 +472,7 @@ class NotificationServiceTests {
             environmentService: MockAppEnvironmentService(),
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
-            userDefaults: mockDefaults
+            userDefaultsService: mockDefaults
         )
 
         mockUserNotificationCenter._stubbedAuthorizationStatus = .denied
@@ -484,3 +484,4 @@ class NotificationServiceTests {
         #expect(alignment == .misaligned(.consentGrantedNotificationsOff))
     }
 }
+

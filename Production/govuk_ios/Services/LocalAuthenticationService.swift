@@ -29,12 +29,12 @@ protocol LocalAuthenticationServiceInterface {
 
 final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     private let context: LAContext
-    private let userDefaults: UserDefaultsServiceInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
 
-    init(userDefaults: UserDefaultsServiceInterface,
+    init(userDefaultsService: UserDefaultsServiceInterface,
          context: LAContext = LAContext()) {
         self.context = context
-        self.userDefaults = userDefaults
+        self.userDefaultsService = userDefaultsService
     }
 
     func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?) {
@@ -115,36 +115,36 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     func setLocalAuthenticationOnboarded() {
-        userDefaults.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
+        userDefaultsService.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
     }
 
     var authenticationOnboardingFlowSeen: Bool {
-        userDefaults.bool(forKey: .localAuthenticationOnboardingSeen)
+        userDefaultsService.bool(forKey: .localAuthenticationOnboardingSeen)
     }
 
     func setTouchId(enabled: Bool) {
-        userDefaults.set(bool: enabled, forKey: .touchIdEnabled)
+        userDefaultsService.set(bool: enabled, forKey: .touchIdEnabled)
     }
 
     var touchIdEnabled: Bool {
         availableAuthType == .touchID &&
-        userDefaults.bool(forKey: .touchIdEnabled)
+        userDefaultsService.bool(forKey: .touchIdEnabled)
     }
 
     func setFaceIdSkipped(_ skipped: Bool) {
-        userDefaults.set(bool: skipped, forKey: .faceIdSkipped)
+        userDefaultsService.set(bool: skipped, forKey: .faceIdSkipped)
     }
 
     var faceIdSkipped: Bool {
-        userDefaults.bool(forKey: .faceIdSkipped)
+        userDefaultsService.bool(forKey: .faceIdSkipped)
     }
 
     private var biometricsPolicyState: Data? {
         get {
-            userDefaults.value(forKey: .biometricsPolicyState) as? Data
+            userDefaultsService.value(forKey: .biometricsPolicyState) as? Data
         }
         set {
-            userDefaults.set(newValue, forKey: .biometricsPolicyState)
+            userDefaultsService.set(newValue, forKey: .biometricsPolicyState)
         }
     }
 
@@ -163,7 +163,7 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     func clear() {
-        userDefaults.set(nil, forKey: .localAuthenticationOnboardingSeen)
-        userDefaults.set(nil, forKey: .biometricsPolicyState)
+        userDefaultsService.set(nil, forKey: .localAuthenticationOnboardingSeen)
+        userDefaultsService.set(nil, forKey: .biometricsPolicyState)
     }
 }

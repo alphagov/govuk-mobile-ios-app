@@ -55,7 +55,7 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaults: self.userDefaultsService(),
+                userDefaultsService: self.userDefaultsService(),
                 authenticationService: self.authenticationService.resolve()
             )
         }
@@ -88,7 +88,7 @@ extension Container {
                 topicsServiceClient: self.topicsServiceClient(),
                 topicsRepository: self.topicsRepository(),
                 analyticsService: self.analyticsService(),
-                userDefaults: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService()
             )
         }
     }
@@ -110,7 +110,7 @@ extension Container {
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current(),
                 configService: self.appConfigService.resolve(),
-                userDefaults: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService()
             )
         }
     }
@@ -118,7 +118,7 @@ extension Container {
     var notificationsOnboardingService: Factory<NotificationsOnboardingServiceInterface> {
         Factory(self) {
             NotificationsOnboardingService(
-                userDefaults: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService()
             )
         }
     }
@@ -130,7 +130,7 @@ extension Container {
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
                 returningUserService: self.returningUserService.resolve(),
-                userDefaults: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService()
             )
         }.scope(.singleton)
     }
@@ -164,7 +164,7 @@ extension Container {
     var localAuthenticationService: Factory<LocalAuthenticationServiceInterface> {
         Factory(self) {
             LocalAuthenticationService(
-                userDefaults: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService()
             )
         }
     }

@@ -5,18 +5,18 @@ import GOVKit
 
 class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
-    private let userDefaults: UserDefaultsServiceInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let authenticationService: AuthenticationServiceInterface
     private let completionAction: () -> Void
 
     init(navigationController: UINavigationController,
-         userDefaults: UserDefaultsServiceInterface,
+         userDefaultsService: UserDefaultsServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
          authenticationService: AuthenticationServiceInterface,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
-        self.userDefaults = userDefaults
+        self.userDefaultsService = userDefaultsService
         self.localAuthenticationService = localAuthenticationService
         self.authenticationService = authenticationService
         self.completionAction = completionAction
@@ -47,7 +47,7 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
 
     private func setLocalAuthenticationOnboardingViewController() {
         let viewModel = LocalAuthenticationOnboardingViewModel(
-            userDefaults: userDefaults,
+            userDefaultsService: userDefaultsService,
             localAuthenticationService: localAuthenticationService,
             authenticationService: authenticationService,
             completionAction: finishCoordination

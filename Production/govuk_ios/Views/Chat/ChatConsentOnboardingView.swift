@@ -64,6 +64,7 @@ struct ChatConsentOnboardingView: View {
             HStack(alignment: .center, spacing: 16) {
                 Image(systemName: "info.circle")
                     .foregroundColor(Color(UIColor.govUK.text.trailingIcon))
+                    .accessibilityHidden(true)
                 Text(LocalizedStringKey("onboardingConsentFirstListItemText"),
                      tableName: "Chat")
                 .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -71,11 +72,16 @@ struct ChatConsentOnboardingView: View {
             }
             .padding([.top, .horizontal], 16)
 
-            Divider().background(Color.white)
+            Divider()
+                .background(
+                    Color(UIColor.govUK.strokes.chatOnboardingListDivider)
+                )
+                .padding(.horizontal, 16)
 
             HStack(alignment: .center, spacing: 16) {
-                Image(systemName: "doc.text")
+                Image(systemName: "filemenu.and.cursorarrow")
                     .foregroundColor(Color(UIColor.govUK.text.trailingIcon))
+                    .accessibilityHidden(true)
                 Text(LocalizedStringKey("onboardingConsentSecondListItemText"),
                      tableName: "Chat")
                 .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -83,7 +89,9 @@ struct ChatConsentOnboardingView: View {
             }
             .padding([.bottom, .horizontal], 16)
         }
-        //  .background(Color(UIColor.govUK.fills.surfaceChatOnboardingListBackground))
+        .background(
+            Color(UIColor.govUK.fills.surfaceChatOnboardingListBackground)
+        )
         .cornerRadius(10)
     }
 }

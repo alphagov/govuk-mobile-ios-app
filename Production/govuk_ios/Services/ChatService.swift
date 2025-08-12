@@ -30,7 +30,7 @@ final class ChatService: ChatServiceInterface {
     }
 
     var isEnabled: Bool {
-        configService.isFeatureEnabled(key: .chat)
+        false
     }
 
     var chatOnboardingSeen: Bool {

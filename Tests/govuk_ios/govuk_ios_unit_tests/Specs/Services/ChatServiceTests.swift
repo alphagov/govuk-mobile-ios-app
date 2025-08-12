@@ -9,21 +9,21 @@ final class ChatServiceTests {
     var mockChatServiceClient: MockChatServiceClient!
     var mockChatRepository: MockChatRespository!
     var mockConfigService: MockAppConfigService!
-    var mockUserDefaults: MockUserDefaults!
+    var mockUserDefaultsService: MockUserDefaultsService!
 
     init() {
         mockChatServiceClient = MockChatServiceClient()
         mockChatRepository = MockChatRespository()
         mockConfigService = MockAppConfigService()
         mockConfigService._stubbedChatPollIntervalSeconds = 0.2
-        mockUserDefaults = MockUserDefaults()
+        mockUserDefaultsService = MockUserDefaultsService()
     }
 
     deinit {
         mockChatServiceClient = nil
         mockChatRepository = nil
         mockConfigService = nil
-        mockUserDefaults = nil
+        mockUserDefaultsService = nil
     }
 
     @Test
@@ -32,7 +32,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
@@ -58,7 +58,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         mockChatServiceClient._stubbedAskQuestionResult = .success(.pendingQuestion)
@@ -82,9 +82,9 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
-        
+
         mockChatServiceClient._stubbedAskQuestionResult = .failure(ChatError.networkUnavailable)
         let result = await withCheckedContinuation { continuation in
             sut.askQuestion(
@@ -106,7 +106,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         mockChatServiceClient._stubbedFetchAnswerResults = [
@@ -136,7 +136,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         mockChatServiceClient._stubbedFetchAnswerResults = [
@@ -163,7 +163,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         mockChatServiceClient._stubbedFetchHistoryResult = .success(.history)
@@ -188,7 +188,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         mockChatServiceClient._stubbedFetchHistoryResult = .failure(ChatError.apiUnavailable)
@@ -214,7 +214,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         sut.clearHistory()
@@ -227,7 +227,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
         mockConfigService.features = []
 
@@ -240,7 +240,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
         mockConfigService.features = [.chat]
 
@@ -253,7 +253,7 @@ final class ChatServiceTests {
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
             configService: mockConfigService,
-            userDefaults: mockUserDefaults
+            userDefaultsService: mockUserDefaultsService
         )
 
         #expect(!sut.chatOnboardingSeen)

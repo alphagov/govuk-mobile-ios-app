@@ -19,7 +19,7 @@ final class ChatService: ChatServiceInterface {
     private let serviceClient: ChatServiceClientInterface
     private let chatRepository: ChatRepositoryInterface
     private let configService: AppConfigServiceInterface
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
 
     private var pollingInterval: TimeInterval {
         configService.chatPollIntervalSeconds
@@ -34,21 +34,21 @@ final class ChatService: ChatServiceInterface {
     }
 
     var chatOnboardingSeen: Bool {
-        userDefaults.bool(forKey: .chatOnboardingSeen)
+        userDefaultsService.bool(forKey: .chatOnboardingSeen)
     }
 
     init(serviceClient: ChatServiceClientInterface,
          chatRepository: ChatRepositoryInterface,
          configService: AppConfigServiceInterface,
-         userDefaults: UserDefaultsInterface) {
+         userDefaultsService: UserDefaultsServiceInterface) {
         self.serviceClient = serviceClient
         self.chatRepository = chatRepository
         self.configService = configService
-        self.userDefaults = userDefaults
+        self.userDefaultsService = userDefaultsService
     }
 
     func setChatOnboarded() {
-        userDefaults.set(bool: true, forKey: .chatOnboardingSeen)
+        userDefaultsService.set(bool: true, forKey: .chatOnboardingSeen)
     }
 
     func askQuestion(_ question: String,

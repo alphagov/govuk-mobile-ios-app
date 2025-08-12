@@ -208,7 +208,7 @@ extension Container {
                 serviceClient: self.chatServiceClient.resolve(),
                 chatRepository: self.chatRepository.resolve(),
                 configService: self.appConfigService.resolve(),
-                userDefaults: UserDefaults.standard
+                userDefaultsService: self.userDefaultsService.resolve()
             )
         }
     }

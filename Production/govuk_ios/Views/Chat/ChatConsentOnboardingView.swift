@@ -11,26 +11,24 @@ struct ChatConsentOnboardingView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack {
-                GeometryReader { geometry in
-                    ScrollView {
-                        consentView
-                            .frame(width: geometry.size.width)
-                            .frame(minHeight: geometry.size.height)
-                    }.modifier(ScrollBounceBehaviorModifier())
-                }
-                Divider()
-                    .overlay(Color(UIColor.govUK.strokes.listDivider))
-                    .ignoresSafeArea()
-                SwiftUIButton(
-                    .primary,
-                    viewModel: viewModel.buttonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                .padding(16)
-                .ignoresSafeArea()
+        VStack {
+            GeometryReader { geometry in
+                ScrollView {
+                    consentView
+                        .frame(width: geometry.size.width)
+                        .frame(minHeight: geometry.size.height)
+                }.modifier(ScrollBounceBehaviorModifier())
             }
+            Divider()
+                .overlay(Color(UIColor.govUK.strokes.listDivider))
+                .ignoresSafeArea()
+            SwiftUIButton(
+                .primary,
+                viewModel: viewModel.buttonViewModel
+            )
+            .frame(minHeight: 44, idealHeight: 44)
+            .padding(16)
+            .ignoresSafeArea()
         }
     }
 

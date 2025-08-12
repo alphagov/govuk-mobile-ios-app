@@ -82,10 +82,6 @@ class HomeViewModel: ObservableObject {
         configService.isFeatureEnabled(key: feature)
     }
 
-    func trackECommerce() {
-        topicsWidgetViewModel.trackECommerce()
-    }
-
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }

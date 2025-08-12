@@ -1,34 +1,49 @@
 import Foundation
 
-extension UserDefaults: UserDefaultsInterface {
+protocol UserDefaultsServiceInterface {
+    func value(forKey key: UserDefaultsKeys) -> Any?
+    func set(_ value: Any?, forKey key: UserDefaultsKeys)
+    func bool(forKey key: UserDefaultsKeys) -> Bool
+    func set(bool boolValue: Bool,
+             forKey key: UserDefaultsKeys)
+    func removeObject(forKey key: UserDefaultsKeys)
+}
+
+struct UserDefaultsService: UserDefaultsServiceInterface {
+    private let userDefaults: UserDefaults
+
+    init(userDefaults: UserDefaults) {
+        self.userDefaults = userDefaults
+    }
+
     func value(forKey key: UserDefaultsKeys) -> Any? {
-        value(forKey: key.rawValue)
+        userDefaults.value(forKey: key.rawValue)
     }
 
     func set(_ value: Any?, forKey key: UserDefaultsKeys) {
-        set(
+        userDefaults.set(
             value,
             forKey: key.rawValue
         )
-        synchronize()
+        userDefaults.synchronize()
     }
 
     func bool(forKey key: UserDefaultsKeys) -> Bool {
-        bool(forKey: key.rawValue)
+        userDefaults.bool(forKey: key.rawValue)
     }
 
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys) {
-        set(
+        userDefaults.set(
             boolValue,
             forKey: key.rawValue
         )
-        synchronize()
+        userDefaults.synchronize()
     }
 
     func removeObject(forKey key: UserDefaultsKeys) {
-        removeObject(forKey: key.rawValue)
-        synchronize()
+        userDefaults.removeObject(forKey: key.rawValue)
+        userDefaults.synchronize()
     }
 }
 
@@ -44,13 +59,4 @@ enum UserDefaultsKeys: String {
     case faceIdSkipped = "govuk_face_id_skipped"
     case refreshTokenExpiryDate = "govuk_refresh_token_expiry_date"
     case chatOnboardingSeen = "govuk_chat_onboarding_seen"
-}
-
-protocol UserDefaultsInterface {
-    func value(forKey key: UserDefaultsKeys) -> Any?
-    func set(_ value: Any?, forKey key: UserDefaultsKeys)
-    func bool(forKey key: UserDefaultsKeys) -> Bool
-    func set(bool boolValue: Bool,
-             forKey key: UserDefaultsKeys)
-    func removeObject(forKey key: UserDefaultsKeys)
 }

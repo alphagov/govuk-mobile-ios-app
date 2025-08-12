@@ -351,7 +351,7 @@ class CoordinatorBuilder {
                                        completionAction: @escaping () -> Void) -> BaseCoordinator {
         LocalAuthenticationOnboardingCoordinator(
             navigationController: navigationController,
-            userDefaults: UserDefaults.standard,
+            userDefaultsService: container.userDefaultsService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction

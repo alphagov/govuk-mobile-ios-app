@@ -2,36 +2,35 @@ import Foundation
 
 @testable import govuk_ios
 
-class MockUserDefaults: UserDefaultsInterface {
-    func deleteAll() {
-        store = [:]
+class MockUserDefaults: UserDefaults {
+    var _setValueCalled: Bool = false
+    var _receivedSetValueValue: Any?
+    var _receivedSetValueKey: String?
+    override func set(_ value: Any?,
+                      forKey defaultName: String) {
+        _setValueCalled = true
+        _receivedSetValueValue = value
+        _receivedSetValueKey = defaultName
     }
 
-    private(set) var store: [String?: Any] = [:]
-
-    func value(forKey key: UserDefaultsKeys) -> Any? {
-        store[key.rawValue]
+    var _synchronizeCalled: Bool = false
+    override func synchronize() -> Bool {
+        _synchronizeCalled = true
+        return true
     }
 
-    func set(_ value: Any?, forKey key: govuk_ios.UserDefaultsKeys) {
-        store[key.rawValue] = value
+    var _receivedRemoveObjectForKeyKey: String?
+    override func removeObject(forKey defaultName: String) {
+        _receivedRemoveObjectForKeyKey = defaultName
     }
 
-    func bool(forKey key: UserDefaultsKeys) -> Bool {
-        (store[key.rawValue] as? Bool) ?? false
+    var _stubbedBoolValues: [String: Bool]?
+    override func bool(forKey defaultName: String) -> Bool {
+        _stubbedBoolValues?[defaultName] ?? false
     }
 
-    func set(bool boolValue: Bool,
-             forKey key: UserDefaultsKeys) {
-        store[key.rawValue] = boolValue
-    }
-
-    func _stub(value: Any?,
-               key: String) {
-        store[key] = value
-    }
-
-    func removeObject(forKey key: UserDefaultsKeys) {
-        store[key.rawValue] = nil
+    var _stubbedValues: [String: Any?]?
+    override func value(forKey key: String) -> Any? {
+        _stubbedValues?[key] as Any?
     }
 }

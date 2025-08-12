@@ -31,7 +31,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private var authenticatedSecureStoreService: SecureStorable
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
@@ -60,11 +60,11 @@ class AuthenticationService: AuthenticationServiceInterface {
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
          returningUserService: ReturningUserServiceInterface,
-         userDefaults: UserDefaultsInterface) {
+         userDefaultsService: UserDefaultsServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
-        self.userDefaults = userDefaults
+        self.userDefaultsService = userDefaultsService
     }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult {
@@ -100,7 +100,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     func signOut(reason: SignoutReason) {
         do {
             try authenticatedSecureStoreService.delete()
-            userDefaults.removeObject(forKey: .refreshTokenExpiryDate)
+            userDefaultsService.removeObject(forKey: .refreshTokenExpiryDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
@@ -171,11 +171,11 @@ class AuthenticationService: AuthenticationServiceInterface {
             value: 601_200,
             to: issueDate ?? .now
         )
-        userDefaults.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)
+        userDefaultsService.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)
     }
 
     var shouldAttemptTokenRefresh: Bool {
-        guard let date = userDefaults.value(forKey: .refreshTokenExpiryDate) as? Date
+        guard let date = userDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date
         else { return true }
         return date > Date.now
     }

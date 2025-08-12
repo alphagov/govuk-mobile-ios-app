@@ -11,10 +11,10 @@ struct LocalAuthenticationServiceTests {
     @Test
     func canEvaluatePolicy_withBiometrics() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaultsService = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaultsService,
             context: mockLAContext
         )
         let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics).canEvaluate
@@ -24,10 +24,10 @@ struct LocalAuthenticationServiceTests {
     @Test
     func canEvaluatePolicy_withAuthentication() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedAuthenticationEvaluatePolicyResult = true
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthentication).canEvaluate
@@ -37,10 +37,10 @@ struct LocalAuthenticationServiceTests {
     @Test
     func canEvaluatePolicy_false_withBiometrics() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = false
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics).canEvaluate
@@ -50,10 +50,10 @@ struct LocalAuthenticationServiceTests {
     @Test
     func canEvaluatePolicy_false_withAuthentication() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedAuthenticationEvaluatePolicyResult = false
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         let canEvaluate = sut.canEvaluatePolicy(.deviceOwnerAuthentication).canEvaluate
@@ -63,9 +63,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func evaluatePolicy_succeeds() async {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         await confirmation("Evaluate policy should complete") { completion in
@@ -80,9 +80,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func authenticationOnboardingFlowSeen_set_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.setLocalAuthenticationOnboarded()
@@ -93,9 +93,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func authenticationOnboardingFlowSeen_notSet_returnsFalse() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
 
@@ -105,9 +105,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func setLocalAuthenticationOnboarded_setsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.setLocalAuthenticationOnboarded()
@@ -118,9 +118,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func authenticationOnboardingFlowSeen_returnsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.setLocalAuthenticationOnboarded()
@@ -131,9 +131,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func availableAuthType_biometricsAvailable_returnsCorrectResult() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
@@ -155,9 +155,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func availableAuthType_authenticationUnavailable_returnsCorrectResult() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = false
@@ -167,9 +167,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func deviceCapableAuthType_faceId_returnsCorrectResult() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         mockLAContext._stubbedBiometryType = .faceID
@@ -179,9 +179,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func deviceCapableAuthType_touchId_returnsCorrectResult() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         mockLAContext._stubbedBiometryType = .touchID
@@ -191,9 +191,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsHaveChanged_noExistingState_returnsFalse() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         #expect(!sut.biometricsHaveChanged)
@@ -202,11 +202,11 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsHaveChanged_changesState_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults.set("oldState".data(using: .utf8), forKey: .biometricsPolicyState)
         mockLAContext._stubbedEvaluatedPolicyDomainState = "newState".data(using: .utf8)
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         #expect(sut.biometricsHaveChanged)
@@ -215,11 +215,11 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsHaveChanged_unchangedState_returnsFalse() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults.set("sameState".data(using: .utf8), forKey: .biometricsPolicyState)
         mockLAContext._stubbedEvaluatedPolicyDomainState = "sameState".data(using: .utf8)
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         #expect(!sut.biometricsHaveChanged)
@@ -228,9 +228,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func touchIdEnabled_enabled_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
@@ -243,9 +243,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func touchIdEnabled_disabled_returnsFalse() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
@@ -258,9 +258,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func touchIdEnabled_enabled_faceIdBiometryType_returnsFalse() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
@@ -273,9 +273,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func setTouchId_true_setsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.setTouchId(enabled: true)
@@ -286,9 +286,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func setTouchId_false_setsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.setTouchId(enabled: false)
@@ -299,11 +299,11 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsPossible_faceId_canEvaluate_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
         mockLAContext._stubbedBiometryType = .faceID
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
 
@@ -313,11 +313,11 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsPossible_touchId_canEvaluate_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = true
         mockLAContext._stubbedBiometryType = .touchID
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
 
@@ -327,12 +327,12 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsPossible_faceId_notAvailable_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = false
         mockLAContext._stubbedCanEvaluateError = LAError(.biometryNotAvailable, userInfo: [:])
         mockLAContext._stubbedBiometryType = .faceID
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
 
@@ -342,12 +342,12 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsPossible_touchId_notAvailable_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = false
         mockLAContext._stubbedCanEvaluateError = LAError(.biometryNotAvailable, userInfo: [:])
         mockLAContext._stubbedBiometryType = .touchID
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
 
@@ -357,12 +357,12 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsPossible_none_notAvailable_returnsFalse() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = false
         mockLAContext._stubbedCanEvaluateError = LAError(.biometryNotAvailable, userInfo: [:])
         mockLAContext._stubbedBiometryType = .none
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
 
@@ -372,12 +372,12 @@ struct LocalAuthenticationServiceTests {
     @Test
     func biometricsPossible_faceId_notEnrolled_returnsFalse() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockLAContext._stubbedBiometricsEvaluatePolicyResult = false
         mockLAContext._stubbedCanEvaluateError = LAError(.biometryNotEnrolled, userInfo: [:])
         mockLAContext._stubbedBiometryType = .none
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
 
@@ -387,9 +387,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func faceIdSkipped_returnsTrue() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.setFaceIdSkipped(true)
@@ -400,9 +400,9 @@ struct LocalAuthenticationServiceTests {
     @Test
     func setFaceIdSkipped_setsValueInUserDefaults() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.setFaceIdSkipped(true)
@@ -413,12 +413,12 @@ struct LocalAuthenticationServiceTests {
     @Test
     func clear_clearsUserDefaults() {
         let mockLAContext = MockLAContext()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults._stub(value: true, key: UserDefaultsKeys.localAuthenticationOnboardingSeen.rawValue)
         mockUserDefaults._stub(value: true, key: UserDefaultsKeys.biometricsPolicyState.rawValue)
 
         let sut = LocalAuthenticationService(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             context: mockLAContext
         )
         sut.clear()

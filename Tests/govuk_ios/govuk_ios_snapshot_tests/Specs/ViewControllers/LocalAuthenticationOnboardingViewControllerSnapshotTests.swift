@@ -10,7 +10,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
-            userDefaults: MockUserDefaults(),
+            userDefaultsService: MockUserDefaultsService(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             completionAction: {}
@@ -32,7 +32,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let viewModel = LocalAuthenticationOnboardingViewModel(
-            userDefaults: MockUserDefaults(),
+            userDefaultsService: MockUserDefaultsService(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             completionAction: {}
@@ -54,7 +54,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let viewModel = LocalAuthenticationOnboardingViewModel(
-            userDefaults: MockUserDefaults(),
+            userDefaultsService: MockUserDefaultsService(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             completionAction: {}
@@ -76,7 +76,7 @@ class LocalAuthenticationOnboardingViewControllerSnapshotTests: SnapshotTestCase
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let viewModel = LocalAuthenticationOnboardingViewModel(
-            userDefaults: MockUserDefaults(),
+            userDefaultsService: MockUserDefaultsService(),
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: MockAuthenticationService(),
             completionAction: {}

@@ -9,7 +9,7 @@ class ChatCoordinator: TabItemCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
     private let cancelOnboardingAction: () -> Void
-    private var isShowingError = false
+    var isShowingError = false
     private lazy var chatViewController: UIViewController = {
         viewControllerBuilder.chat(
             analyticsService: analyticsService,
@@ -65,11 +65,7 @@ class ChatCoordinator: TabItemCoordinator {
     func didReselectTab() { /* To be implemented */ }
     func didSelectTab(_ selectedTabIndex: Int,
                       previousTabIndex: Int) {
-        if selectedTabIndex != previousTabIndex &&
-            isShowingError {
-            set(chatViewController, animated: false)
-            isShowingError = false
-        } else if !chatService.chatOnboardingSeen {
+        if !chatService.chatOnboardingSeen {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 present(
@@ -78,6 +74,9 @@ class ChatCoordinator: TabItemCoordinator {
                     )
                 )
             }
+        } else if selectedTabIndex != previousTabIndex && isShowingError {
+            set(chatViewController, animated: false)
+            isShowingError = false
         }
     }
 

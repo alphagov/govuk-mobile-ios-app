@@ -27,4 +27,26 @@ struct ChatInfoOnboardingViewModelTests {
 
         #expect((sut.rightBarButtonItem as Any) is UIBarButtonItem)
     }
+
+    @Test
+    func trackingTitle_returnsTitle() {
+        let sut = ChatInfoOnboardingViewModel(
+            analyticsService: MockAnalyticsService(),
+            completionAction: { },
+            cancelOnboardingAction: { }
+        )
+
+        #expect(sut.trackingTitle == "Get quick answers from GOV.UK Chat")
+    }
+
+    @Test
+    func trackingName_returnsCorrectValue() {
+        let sut = ChatInfoOnboardingViewModel(
+            analyticsService: MockAnalyticsService(),
+            completionAction: { },
+            cancelOnboardingAction: { }
+        )
+
+        #expect(sut.trackingName == "First chat onboarding")
+    }
 }

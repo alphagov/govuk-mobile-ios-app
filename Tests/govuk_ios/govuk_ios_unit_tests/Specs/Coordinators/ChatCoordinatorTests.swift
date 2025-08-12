@@ -174,4 +174,54 @@ struct ChatCoordinatorTests {
         mockViewControllerBuilder._receivedChatOpenURLAction?(URL(string: "https://www.gov.uk")!)
         #expect(mockSafariCoordinator._startCalled)
     }
+
+    @Test
+    func didSelectTab_isShowingError_setsChatViewController() {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedChatController = expectedViewController
+        let navigationController = UINavigationController()
+        let sut = ChatCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+        sut.isShowingError = true
+
+        sut.didSelectTab(1, previousTabIndex: 0)
+        let firstViewController = navigationController.viewControllers.first
+        #expect(firstViewController == expectedViewController)
+        #expect(!sut.isShowingError)
+    }
+
+    @Test
+    func childDidFinish_onboardingSeen_setsChatViewController() {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let expectedViewController = UIViewController()
+        mockViewControllerBuilder._stubbedChatController = expectedViewController
+        let navigationController = UINavigationController()
+        let sut = ChatCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+
+        sut.childDidFinish(MockBaseCoordinator())
+        let firstViewController = navigationController.viewControllers.first
+        #expect(firstViewController == expectedViewController)
+    }
 }

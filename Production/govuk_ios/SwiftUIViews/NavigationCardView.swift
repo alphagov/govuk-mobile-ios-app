@@ -48,11 +48,10 @@ struct VerticalNavigationCardView: View,
     let model: NavigationCardModel
     var body: some View {
         HStack {
-            VStack{
+            VStack {
                 Image(systemName: model.image)
-
             }
-            VStack{
+            VStack {
                 Text(model.title)
                 Text(model.primaryDescritpion)
                 Text(model.secondaryDescription)

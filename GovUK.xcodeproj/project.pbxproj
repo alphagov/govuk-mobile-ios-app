@@ -98,6 +98,8 @@
 		4E9AFCE32C99D43B00DBF66F /* AnalyticsConsentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */; };
 		4E9F5D032DB78DBA0063FA78 /* LocalAuthorityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */; };
 		4E9F5D072DB79D370063FA78 /* PrimaryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */; };
+		4E9FE8FA2E4B4B4500E3241E /* NavigationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FE8F92E4B4B4500E3241E /* NavigationCardView.swift */; };
+		4E9FE8FB2E4B4B4500E3241E /* NavigationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9FE8F92E4B4B4500E3241E /* NavigationCardView.swift */; };
 		4EA1E2812D8C61630062453D /* NotificationPermissionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */; };
 		4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */; };
 		4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */; };
@@ -496,6 +498,7 @@
 		4E9AFCE22C99D43B00DBF66F /* AnalyticsConsentContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerView.swift; sourceTree = "<group>"; };
 		4E9F5D022DB78DBA0063FA78 /* LocalAuthorityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityItem.swift; sourceTree = "<group>"; };
 		4E9F5D062DB79D370063FA78 /* PrimaryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonView.swift; sourceTree = "<group>"; };
+		4E9FE8F92E4B4B4500E3241E /* NavigationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCardView.swift; sourceTree = "<group>"; };
 		4EA1E2802D8C61630062453D /* NotificationPermissionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionState.swift; sourceTree = "<group>"; };
 		4EA3C34F2C91B8C4000D731C /* RecentActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityCoordinator.swift; sourceTree = "<group>"; };
 		4EA8357B2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredLocalAuthorityCardModel.swift; sourceTree = "<group>"; };
@@ -1730,6 +1733,7 @@
 				D0ECAB032DCDF9EE00A9707E /* RadioButtonView.swift */,
 				D052D2312E0B0DE10048F98A /* RoundedBorderViewModifier.swift */,
 				4EAFCE522E437D2B00125755 /* HomepageWidget.swift */,
+				4E9FE8F92E4B4B4500E3241E /* NavigationCardView.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -2195,6 +2199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E9FE8FB2E4B4B4500E3241E /* NavigationCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2488,6 +2493,7 @@
 				4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */,
 				D096BFF22E04124E00426C51 /* ChatItem.swift in Sources */,
 				4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */,
+				4E9FE8FA2E4B4B4500E3241E /* NavigationCardView.swift in Sources */,
 				5D54F4752CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift in Sources */,
 				5DAD717A2BD250DB0075F648 /* SceneDelegate.swift in Sources */,
 				D04DD3382E004737002B5F19 /* ChatService.swift in Sources */,

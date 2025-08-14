@@ -18,8 +18,8 @@ class ChatConsentOnboardingCoordinator: BaseCoordinator {
                 self?.finish()
             },
             completionAction: { [weak self] in
-                self?.dismiss(animated: true)
                 self?.completionAction()
+                self?.dismiss(animated: true)
                 self?.finish()
             }
         )

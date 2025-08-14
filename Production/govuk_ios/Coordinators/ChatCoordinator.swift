@@ -42,7 +42,7 @@ class ChatCoordinator: TabItemCoordinator {
     override func start(url: URL?) {
         guard chatService.chatOnboardingSeen else { return }
 
-        set(chatViewController)
+        setChatViewController()
         isShowingError = false
     }
 
@@ -71,12 +71,12 @@ class ChatCoordinator: TabItemCoordinator {
                 present(
                     coordinatorBuilder.chatInfoOnboarding(
                         cancelOnboardingAction: cancelOnboardingAction,
-                        setChatViewControllerAction: setChatViewControllerAction
+                        setChatViewControllerAction: setChatViewController
                     )
                 )
             }
         } else if selectedTabIndex != previousTabIndex && isShowingError {
-            set(chatViewController, animated: false)
+            setChatViewController()
             isShowingError = false
         }
     }
@@ -88,16 +88,10 @@ class ChatCoordinator: TabItemCoordinator {
                 guard let self else { return }
                 switch error {
                 case .networkUnavailable:
-                    self.set(
-                        self.chatViewController,
-                        animated: false
-                    )
+                    self.setChatViewController()
                 case .pageNotFound:
                     self.chatService.clearHistory()
-                    self.set(
-                        self.chatViewController,
-                        animated: false
-                    )
+                    self.setChatViewController()
                 default:
                     break
                 }
@@ -107,9 +101,7 @@ class ChatCoordinator: TabItemCoordinator {
         isShowingError = true
     }
 
-    private func setChatViewControllerAction() {
-        if chatService.chatOnboardingSeen {
-            set(chatViewController)
-        }
+    private func setChatViewController(animated: Bool = false) {
+        set(chatViewController, animated: animated)
     }
 }

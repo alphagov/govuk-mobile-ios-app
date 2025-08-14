@@ -21,7 +21,8 @@ struct ChatInfoOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
-            cancelOnboardingAction: { }
+            cancelOnboardingAction: { },
+            setChatViewControllerAction: { animated in }
         )
 
         sut.start()

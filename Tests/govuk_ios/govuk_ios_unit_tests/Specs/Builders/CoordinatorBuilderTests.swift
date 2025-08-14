@@ -395,7 +395,8 @@ struct CoordinatorBuilderTests {
     func chatInfoOnboarding_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let coordinator = subject.chatInfoOnboarding(
-            cancelOnboardingAction: { }
+            cancelOnboardingAction: { },
+            setChatViewControllerAction: { animated in }
         )
 
         #expect(coordinator is ChatInfoOnboardingCoordinator)

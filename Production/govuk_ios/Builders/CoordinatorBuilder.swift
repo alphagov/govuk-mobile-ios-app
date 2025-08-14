@@ -412,7 +412,8 @@ class CoordinatorBuilder {
     }
 
     func chatInfoOnboarding(
-        cancelOnboardingAction: @escaping () -> Void
+        cancelOnboardingAction: @escaping () -> Void,
+        setChatViewControllerAction: @escaping () -> Void
     ) -> BaseCoordinator {
         ChatInfoOnboardingCoordinator(
             navigationController: UINavigationController(),
@@ -420,6 +421,7 @@ class CoordinatorBuilder {
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
             cancelOnboardingAction: cancelOnboardingAction,
+            setChatViewControllerAction: setChatViewControllerAction
         )
     }
 

@@ -70,7 +70,8 @@ class ChatCoordinator: TabItemCoordinator {
                 guard let self = self else { return }
                 present(
                     coordinatorBuilder.chatInfoOnboarding(
-                        cancelOnboardingAction: cancelOnboardingAction
+                        cancelOnboardingAction: cancelOnboardingAction,
+                        setChatViewControllerAction: setChatViewControllerAction
                     )
                 )
             }
@@ -106,11 +107,9 @@ class ChatCoordinator: TabItemCoordinator {
         isShowingError = true
     }
 
-    override func childDidFinish(_ child: BaseCoordinator) {
-        super.childDidFinish(child)
+    private func setChatViewControllerAction() {
         if chatService.chatOnboardingSeen {
             set(chatViewController)
-            isShowingError = false
         }
     }
 }

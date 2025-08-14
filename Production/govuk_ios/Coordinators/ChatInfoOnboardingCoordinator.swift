@@ -7,6 +7,7 @@ class ChatInfoOnboardingCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let cancelOnboardingAction: () -> Void
+    private let setChatViewControllerAction: () -> Void
     private lazy var chatInfoOnboardingViewController: UIViewController = {
         viewControllerBuilder.chatInfoOnboarding(
             analyticsService: analyticsService,
@@ -25,11 +26,13 @@ class ChatInfoOnboardingCoordinator: BaseCoordinator {
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          analyticsService: AnalyticsServiceInterface,
-         cancelOnboardingAction: @escaping () -> Void) {
+         cancelOnboardingAction: @escaping () -> Void,
+         setChatViewControllerAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
         self.cancelOnboardingAction = cancelOnboardingAction
+        self.setChatViewControllerAction = setChatViewControllerAction
         super.init(navigationController: navigationController)
     }
 
@@ -45,6 +48,7 @@ class ChatInfoOnboardingCoordinator: BaseCoordinator {
                 self?.finish()
             },
             completionAction: { [weak self] in
+                self?.setChatViewControllerAction()
                 self?.finish()
             }
         )

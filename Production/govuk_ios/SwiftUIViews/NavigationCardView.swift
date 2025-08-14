@@ -24,6 +24,17 @@ struct LeftNavigationCardView: View,
         }
     }
 }
+#Preview {
+    LeftNavigationCardView(
+        model: NavigationCardModel(
+            dissmissAction: {},
+            image: "",
+            title: "",
+            primaryDescritpion: "primary",
+            secondaryDescription: "secondary",
+            link: "link")
+    )
+}
 
 struct RightNavigationCardView: View,
                                 NavigationCard {

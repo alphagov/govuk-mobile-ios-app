@@ -81,7 +81,7 @@ class HomeViewController: BaseViewController {
         let contentViewController = HostingViewController(
             rootView: contentView
         )
-        self.homeContentViewController = contentViewController
+        homeContentViewController = contentViewController
     }
 
     private func displayHomeContent() {

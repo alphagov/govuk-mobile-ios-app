@@ -32,7 +32,7 @@ final class TopicsWidgetViewModel: ObservableObject {
         self.urlOpener = urlOpener
         self.topicAction = topicAction
         self.allTopicsAction = allTopicsAction
-        self.editTopicViewModel = EditTopicsViewModel(
+        editTopicViewModel = EditTopicsViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService
         )
@@ -45,7 +45,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     }
 
     var widgetTitle: String {
-        let key = self.topicsService.hasCustomisedTopics ?
+        let key = topicsService.hasCustomisedTopics ?
         "topicsWidgetTitleCustomised" :
         "topicsWidgetTitle"
         return String.home.localized(key)

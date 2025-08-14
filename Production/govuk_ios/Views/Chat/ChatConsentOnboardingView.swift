@@ -13,11 +13,8 @@ struct ChatConsentOnboardingView: View {
     var body: some View {
         VStack {
             GeometryReader { geometry in
-                ScrollView {
-                    consentView
-                        .frame(width: geometry.size.width)
-                        .frame(minHeight: geometry.size.height)
-                }.modifier(ScrollBounceBehaviorModifier())
+                consentScrollView(geometry: geometry)
+                    .modifier(ScrollBounceBehaviorModifier())
             }
             Divider()
                 .overlay(Color(UIColor.govUK.strokes.listDivider))
@@ -32,19 +29,20 @@ struct ChatConsentOnboardingView: View {
         }
     }
 
-    private var consentView: some View {
-        VStack {
-            if verticalSizeClass != .compact {
-                Image(decorative: "chat_onboarding_consent")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(.bottom, 16)
-                    .frame(width: 130, height: 130)
-                    .accessibilityHidden(true)
-            }
+    private func consentScrollView(geometry: GeometryProxy) -> some View {
+        ScrollView {
+            VStack {
+                if verticalSizeClass != .compact {
+                    Image(decorative: "chat_onboarding_consent")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.bottom, 16)
+                        .frame(width: 130, height: 130)
+                        .accessibilityHidden(true)
+                }
 
-            Text(LocalizedStringKey("onboardingConsentTitle"),
-                 tableName: "Chat")
+                Text(LocalizedStringKey("onboardingConsentTitle"),
+                     tableName: "Chat")
                 .fontWeight(.bold)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
                 .font(Font.govUK.largeTitleBold)
@@ -52,9 +50,12 @@ struct ChatConsentOnboardingView: View {
                 .accessibilityAddTraits(.isHeader)
                 .padding(.bottom, 16)
 
-            listView
+                listView
+            }
+            .padding(.horizontal, 16)
+            .frame(width: geometry.size.width)
+            .frame(minHeight: geometry.size.height)
         }
-        .padding(.horizontal, 16)
     }
 
     private var listView: some View {

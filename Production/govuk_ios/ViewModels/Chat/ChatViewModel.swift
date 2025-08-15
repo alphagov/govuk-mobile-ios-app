@@ -175,4 +175,8 @@ class ChatViewModel: ObservableObject {
     func openAboutURL() {
         openURLAction(Constants.API.govukBaseUrl)
     }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
 }

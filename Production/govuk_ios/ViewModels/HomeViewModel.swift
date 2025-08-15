@@ -136,6 +136,7 @@ struct HomeViewModel {
         let hostingViewController = HostingViewController(
             rootView: content
         )
+        hostingViewController.view.backgroundColor = .clear
         let widget = WidgetView(
             decorateView: false,
             useContentAccessibilityInfo: false

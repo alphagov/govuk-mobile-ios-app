@@ -224,7 +224,7 @@ struct TopicsWidgetViewModelTests {
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
-            sut.showAllTopicsButtonHidden()
+            sut.updateShowAllButtonVisibility()
         }
         #expect(result == true)
     }
@@ -257,7 +257,7 @@ struct TopicsWidgetViewModelTests {
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
-            sut.showAllTopicsButtonHidden()
+            sut.updateShowAllButtonVisibility()
         }
 
         #expect(result)
@@ -294,7 +294,7 @@ struct TopicsWidgetViewModelTests {
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
-            sut.showAllTopicsButtonHidden()
+            sut.updateShowAllButtonVisibility()
         }
         #expect(result == false)
     }
@@ -376,7 +376,7 @@ struct TopicsWidgetViewModelTests {
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
-            sut.showAllTopicsButtonHidden()
+            sut.updateShowAllButtonVisibility()
         }
 
         let trackedTopic = try #require(result.first?.title)
@@ -421,7 +421,7 @@ struct TopicsWidgetViewModelTests {
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
-            sut.showAllTopicsButtonHidden()
+            sut.updateShowAllButtonVisibility()
         }
         guard let trackedTopic = result.first?.title else { return }
         sut.trackECommerceSelection(trackedTopic)

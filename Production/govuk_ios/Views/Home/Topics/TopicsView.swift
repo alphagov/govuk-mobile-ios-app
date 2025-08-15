@@ -67,7 +67,7 @@ struct TopicsView: View {
                     onDismiss: {
                 viewModel.fetchTopics()
                 viewModel.fetchDisplayedTopics()
-                viewModel.showAllTopicsButtonHidden()
+                viewModel.updateShowAllButtonVisibility()
                 viewModel.trackECommerce()
             }, content: {
                 EditTopicsView(
@@ -77,7 +77,7 @@ struct TopicsView: View {
             .onAppear {
                 viewModel.fetchTopics()
                 viewModel.fetchDisplayedTopics()
-                viewModel.showAllTopicsButtonHidden()
+                viewModel.updateShowAllButtonVisibility()
                 if !self.viewModel.initialLoadComplete {
                     self.viewModel.initialLoadComplete = true
                     self.viewModel.trackECommerce()

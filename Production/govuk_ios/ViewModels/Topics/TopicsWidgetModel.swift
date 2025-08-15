@@ -40,7 +40,7 @@ final class TopicsWidgetViewModel: ObservableObject {
         )
     }()
 
-    func showAllTopicsButtonHidden() {
+    func updateShowAllButtonVisibility() {
         showAllTopicsButton =
         (topicsToBeDisplayed.count >= topicsService.fetchAll().count) ||
         fetchTopicsError

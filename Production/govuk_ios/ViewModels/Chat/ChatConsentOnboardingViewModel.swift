@@ -20,10 +20,11 @@ class ChatConsentOnboardingViewModel {
 
     var buttonViewModel: GOVUKButton.ButtonViewModel {
         return .init(
-            localisedTitle: String.chat.localized("onboardingConsentButtonTitle"),
+            localisedTitle: buttonTitle,
             action: { [weak self] in
                 self?.chatService.setChatOnboarded()
                 self?.completionAction()
+                self?.trackCompletionAction()
             }
         )
     }
@@ -32,8 +33,33 @@ class ChatConsentOnboardingViewModel {
         .cancel(target: self, action: #selector(cancelOnboarding))
     }
 
+    private var buttonTitle: String {
+        return String.chat.localized("onboardingConsentButtonTitle")
+    }
+
     @objc
     func cancelOnboarding() {
         cancelOnboardingAction()
+        trackCancelAction()
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
+    private func trackCancelAction() {
+        let event = AppEvent.buttonNavigation(
+            text: String.common.localized("cancel"),
+            external: false
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackCompletionAction() {
+        let event = AppEvent.buttonNavigation(
+            text: buttonTitle,
+            external: false
+        )
+        analyticsService.track(event: event)
     }
 }

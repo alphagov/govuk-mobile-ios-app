@@ -64,7 +64,7 @@ class HomeViewModel: ObservableObject {
         else { return nil }
         return HomepageWidget(
             content: TopicsView(
-            viewModel: topicsWidgetViewModel
+                viewModel: self.topicsWidgetViewModel
             )
         )
     }

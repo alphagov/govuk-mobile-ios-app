@@ -38,7 +38,9 @@ struct StoredLocalAuthorityWidgetView: View {
                 cardView
             }
         }
+        .background(Color(UIColor.govUK.fills.surfaceBackground))
     }
+
     @ViewBuilder
     var cardView: some View {
         ForEach(viewModel.cardModels(), id: \.name) { item in

@@ -24,13 +24,11 @@ unit:
   <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
-    scheme: GovUKDev
 
 alpha:
   <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
-    scheme: GovUKAlpha
     bundle_identifier: uk.gov.govuk.dev
     profile_specifiers:
       uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"

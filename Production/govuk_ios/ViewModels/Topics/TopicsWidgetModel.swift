@@ -15,7 +15,6 @@ final class TopicsWidgetViewModel: ObservableObject {
     @Published var fetchTopicsError = false
     @Published var showAllTopicsButton = false
     @Published var topicsToBeDisplayed: [Topic] = []
-    let editTopicViewModel: EditTopicsViewModel
     private let showAllButtonsTitle = String.topics.localized(
         "seeAllTopicsButtonText"
     )
@@ -32,11 +31,14 @@ final class TopicsWidgetViewModel: ObservableObject {
         self.urlOpener = urlOpener
         self.topicAction = topicAction
         self.allTopicsAction = allTopicsAction
-        editTopicViewModel = EditTopicsViewModel(
+    }
+
+    lazy var editTopicViewModel: EditTopicsViewModel = {
+        EditTopicsViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService
         )
-    }
+    }()
 
     func showAllTopicsButtonHidden() {
         showAllTopicsButton =

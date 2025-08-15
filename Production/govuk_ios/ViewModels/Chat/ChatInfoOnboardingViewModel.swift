@@ -5,7 +5,7 @@ import UIComponents
 class ChatInfoOnboardingViewModel: InfoViewModelInterface {
     private let analyticsService: AnalyticsServiceInterface
     private let completionAction: () -> Void
-    let cancelOnboardingAction: () -> Void
+    private let cancelOnboardingAction: () -> Void
 
     init(analyticsService: AnalyticsServiceInterface,
          completionAction: @escaping () -> Void,
@@ -16,14 +16,7 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
     }
 
     var rightBarButtonItem: UIBarButtonItem {
-        let barButton = UIBarButtonItem(
-            title: String.common.localized("cancel"),
-            style: .plain,
-            target: self,
-            action: #selector(cancelOnboarding)
-        )
-        barButton.tintColor = .govUK.text.link
-        return barButton
+        .cancel(target: self, action: #selector(cancelOnboarding))
     }
 
     var title: String {

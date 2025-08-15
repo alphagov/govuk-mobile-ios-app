@@ -29,14 +29,7 @@ class ChatConsentOnboardingViewModel {
     }
 
     var rightBarButtonItem: UIBarButtonItem {
-        let barButton = UIBarButtonItem(
-            title: String.common.localized("cancel"),
-            style: .plain,
-            target: self,
-            action: #selector(cancelOnboarding)
-        )
-        barButton.tintColor = .govUK.text.link
-        return barButton
+        .cancel(target: self, action: #selector(cancelOnboarding))
     }
 
     @objc

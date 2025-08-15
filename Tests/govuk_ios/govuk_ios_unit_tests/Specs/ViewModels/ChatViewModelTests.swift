@@ -252,4 +252,79 @@ struct ChatViewModelTests {
         sut.newChat()
         #expect(mockChatService._clearHistoryCalled)
     }
+
+    @Test
+    func trackMenuTap_tracksEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+
+        sut.trackMenuTap()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "More options")
+    }
+
+    @Test
+    func trackMenuAboutTap_tracksEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+
+        sut.trackMenuAboutTap()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "About")
+    }
+
+    @Test
+    func trackMenuClearChatTap_tracksEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+
+        sut.trackMenuClearChatTap()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Clear chat")
+    }
+
+    @Test
+    func trackMenuClearChatConfirmTap_tracksEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+
+        sut.trackMenuClearChatConfirmTap()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Yes, clear chat")
+    }
+
+    @Test
+    func trackMenuClearChatDenyTap_tracksEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+
+        sut.trackMenuClearChatDenyTap()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "No, not now")
+    }
 }

@@ -47,10 +47,14 @@ struct ChatActionView: View {
                     Text(String.chat.localized("clearAlertConfirmTitle")),
                     action: {
                         viewModel.newChat()
+                        viewModel.trackMenuClearChatConfirmTap()
                     }
                 ),
                 secondaryButton: .cancel(
-                    Text(String.chat.localized("clearAlertDenyTitle"))
+                    Text(String.chat.localized("clearAlertDenyTitle")),
+                    action: {
+                        viewModel.trackMenuClearChatDenyTap()
+                    }
                 )
             )
         }
@@ -103,6 +107,9 @@ struct ChatActionView: View {
                     }
                 )
                 .disabled(viewModel.requestInFlight)
+                .onTapGesture {
+                    viewModel.trackMenuAboutTap()
+                }
             }
             Button(
                 action: { viewModel.openAboutURL() },
@@ -112,6 +119,9 @@ struct ChatActionView: View {
                         .accessibilityHint(String.common.localized("openWebLinkHint"))
                 }
             )
+            .onTapGesture {
+                viewModel.trackMenuClearChatTap()
+            }
         } label: {
             Image(systemName: "ellipsis")
                 .font(.system(size: 18, weight: .bold))
@@ -128,6 +138,9 @@ struct ChatActionView: View {
                                 )
                         )
                 )
+                .onTapGesture {
+                    viewModel.trackMenuTap()
+                }
         }
         .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
         .accessibilitySortPriority(0)

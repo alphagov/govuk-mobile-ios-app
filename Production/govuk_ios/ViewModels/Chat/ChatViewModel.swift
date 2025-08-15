@@ -179,4 +179,44 @@ class ChatViewModel: ObservableObject {
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }
+
+    func trackMenuTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("moreOptionsAccessibilityLabel"),
+            action: "Action Menu Opened"
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuAboutTap() {
+        let event = AppEvent.buttonNavigation(
+            text: String.chat.localized("aboutMenuTitle"),
+            external: true
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuClearChatTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearMenuTitle"),
+            action: "Clear Chat Opened"
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuClearChatConfirmTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearAlertConfirmTitle"),
+            action: "Clear Chat Yes Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuClearChatDenyTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearAlertDenyTitle"),
+            action: "Clear Chat No Tapped"
+        )
+        analyticsService.track(event: event)
+    }
 }

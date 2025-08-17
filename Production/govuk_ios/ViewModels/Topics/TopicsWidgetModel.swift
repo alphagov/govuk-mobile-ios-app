@@ -111,15 +111,14 @@ final class TopicsWidgetViewModel: ObservableObject {
         )
     }()
 
+    @MainActor
     func fetchTopics() {
         topicsService.fetchRemoteList { [weak self] result in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
+            Task { @MainActor in
+                switch result {
+                case .success:
                     self?.fetchTopicsError = false
-                }
-            case .failure:
-                DispatchQueue.main.async {
+                case .failure:
                     self?.fetchTopicsError = true
                 }
             }

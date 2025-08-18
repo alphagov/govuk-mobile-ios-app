@@ -31,6 +31,26 @@ struct ChatViewModelTests {
     }
 
     @Test
+    func askQuestion_tracksEvent() async {
+        let mockChatService = MockChatService()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        sut.latestQuestion = "This is the question"
+        sut.askQuestion()
+
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(
+            mockAnalyticsService
+                ._trackedEvents.first?.params?["text"] as? String == "This is the question"
+        )
+    }
+
+    @Test
     func askQuestion_answer_failure_callsHandleError() {
         let mockChatService = MockChatService()
         mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
@@ -77,11 +97,12 @@ struct ChatViewModelTests {
     @Test
     func askQuestionWithPII_generatesErrorText() {
         let mockChatService = MockChatService()
+        let mockAnalyticsService = MockAnalyticsService()
         mockChatService._stubbedQuestionResult = .failure(ChatError.pageNotFound)
         var chatError: ChatError?
         let sut = ChatViewModel(
             chatService: mockChatService,
-            analyticsService: MockAnalyticsService(),
+            analyticsService: mockAnalyticsService,
             openURLAction: { _ in },
             handleError: { error in
                 chatError = error
@@ -96,6 +117,7 @@ struct ChatViewModelTests {
         #expect(chatError == nil)
         #expect(sut.errorText != nil)
         #expect(!sut.latestQuestion.isEmpty)
+        #expect(mockAnalyticsService._trackedEvents.count == 0)
     }
 
     @Test

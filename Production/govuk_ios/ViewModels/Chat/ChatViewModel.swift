@@ -36,6 +36,7 @@ class ChatViewModel: ObservableObject {
             completion?(false)
             return
         }
+        trackAskQuestionSubmission()
         errorText = nil
         cellModels.append(.loadingQuestion)
         scrollToBottom = true
@@ -216,6 +217,13 @@ class ChatViewModel: ObservableObject {
         let event = AppEvent.chatActionButtonFunction(
             text: String.chat.localized("clearAlertDenyTitle"),
             action: "Clear Chat No Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackAskQuestionSubmission() {
+        let event = AppEvent.chatAskQuestion(
+            text: latestQuestion
         )
         analyticsService.track(event: event)
     }

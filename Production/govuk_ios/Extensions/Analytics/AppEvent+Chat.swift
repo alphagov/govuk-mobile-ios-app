@@ -10,4 +10,16 @@ extension AppEvent {
             action: action
         )
     }
+
+    static func chatAskQuestion(text: String,
+                                type: String = "typed") -> AppEvent {
+        .init(
+            name: "Chat",
+            params: [
+                "text": text,
+                "type": type,
+                "action": "Ask Question"
+            ]
+        )
+    }
 }

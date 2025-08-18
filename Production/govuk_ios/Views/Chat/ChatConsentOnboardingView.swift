@@ -37,7 +37,7 @@ struct ChatConsentOnboardingView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 16)
-                        .frame(width: 130, height: 130)
+                        .frame(width: 120, height: 120)
                         .accessibilityHidden(true)
                 }
 

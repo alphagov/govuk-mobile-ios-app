@@ -102,6 +102,7 @@ struct ChatActionView: View {
                         Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
                     }
                 )
+                .disabled(viewModel.requestInFlight)
             }
             Button(
                 action: { viewModel.openAboutURL() },

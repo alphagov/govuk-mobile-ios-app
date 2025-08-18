@@ -93,14 +93,16 @@ struct ChatActionView: View {
     }
 
     private var menuView: some View {
-        return Menu {
-            Button(
-                role: .destructive,
-                action: { showClearChatAlert = true },
-                label: {
-                    Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
-                }
-            )
+        Menu {
+            if viewModel.currentConversationExists {
+                Button(
+                    role: .destructive,
+                    action: { showClearChatAlert = true },
+                    label: {
+                        Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
+                    }
+                )
+            }
             Button(
                 action: { viewModel.openAboutURL() },
                 label: {

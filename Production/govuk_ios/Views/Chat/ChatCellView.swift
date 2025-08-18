@@ -135,8 +135,11 @@ struct ChatCellView: View {
                     .foregroundColor(Color(UIColor.govUK.text.primary))
             }
         }
-        .disclosureGroupStyle(ChatDisclosure())
-        .padding(.top, 8)
+        .disclosureGroupStyle(
+            ChatDisclosure(trackToggle: { isExpanded in
+                viewModel.trackSourceListToggle(isExpanded: isExpanded)
+            })
+        ).padding(.top, 8)
     }
 
     private var warningView: some View {
@@ -193,6 +196,8 @@ struct ChatCellView: View {
 }
 
 struct ChatDisclosure: DisclosureGroupStyle {
+    var trackToggle: (Bool) -> Void
+
     func makeBody(configuration: Configuration) -> some View {
         VStack {
             disclosureButtonView(configuration: configuration)
@@ -206,6 +211,7 @@ struct ChatDisclosure: DisclosureGroupStyle {
         Button {
             withAnimation {
                 configuration.isExpanded.toggle()
+                trackToggle(configuration.isExpanded)
             }
         } label: {
             HStack(alignment: .firstTextBaseline) {

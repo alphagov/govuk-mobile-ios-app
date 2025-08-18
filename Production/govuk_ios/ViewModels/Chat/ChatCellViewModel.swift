@@ -112,6 +112,17 @@ struct ChatCellViewModel {
         )
         analyticsService?.track(event: event)
     }
+
+    func trackSourceListToggle(isExpanded: Bool) {
+        guard isExpanded else { return }
+
+        let event = AppEvent.buttonFunction(
+            text: "Expanded",
+            section: "Source Links",
+            action: "Source Links Expanded"
+        )
+        analyticsService?.track(event: event)
+    }
 }
 
 extension ChatCellViewModel {

@@ -70,7 +70,7 @@ extension Container {
     }
 
     var chatAPIClient: Factory<APIServiceClientInterface> {
-        return Factory(self) {
+        Factory(self) {
             APIServiceClient(
                 baseUrl: self.appEnvironmentService().chatBaseURL,
                 session: self.urlSession(),

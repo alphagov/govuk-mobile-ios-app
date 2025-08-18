@@ -8,7 +8,7 @@ class ChatViewModel: ObservableObject {
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
-    private var requestInFlight: Bool = false
+    private(set) var requestInFlight: Bool = false
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""

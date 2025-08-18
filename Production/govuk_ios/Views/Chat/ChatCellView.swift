@@ -158,7 +158,7 @@ struct ChatCellView: View {
             })
             .fixedSize(horizontal: false, vertical: true)
             .environment(\.openURL, OpenURLAction { url in
-                viewModel.openURLAction?(url)
+                viewModel.openURL(url: url, type: .responseLink)
                 return .handled
             })
     }
@@ -172,7 +172,7 @@ struct ChatCellView: View {
             .accessibilityHint(String.common.localized("openWebLinkHint"))
             .accessibilityRemoveTraits(.isButton)
             .environment(\.openURL, OpenURLAction { url in
-                viewModel.openURLAction?(url)
+                viewModel.openURL(url: url, type: .sourceLink)
                 return .handled
             })
             Divider()

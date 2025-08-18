@@ -22,4 +22,16 @@ extension AppEvent {
             ]
         )
     }
+
+    static func chatLinkNavigation(text: String,
+                                   url: String) -> AppEvent {
+        navigation(
+            text: text,
+            type: "ChatMarkdownLink",
+            external: true,
+            additionalParams: [
+                "url": url
+            ]
+        )
+    }
 }

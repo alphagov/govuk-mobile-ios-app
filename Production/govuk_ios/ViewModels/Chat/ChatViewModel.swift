@@ -69,18 +69,20 @@ class ChatViewModel: ObservableObject {
         requestInFlight = true
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
-            self?.cellModels.removeLast()
-            self?.requestInFlight = false
+            guard let self else { return }
+            cellModels.removeLast()
+            requestInFlight = false
             switch result {
             case .success(let answer):
                 let cellModel = ChatCellViewModel(
                     answer: answer,
-                    openURLAction: self?.openURLAction
+                    openURLAction: openURLAction,
+                    analyticsService: analyticsService
                 )
-                self?.scrollToTop = true
-                self?.cellModels.append(cellModel)
+                scrollToTop = true
+                cellModels.append(cellModel)
             case .failure(let error):
-                self?.handleError(error)
+                handleError(error)
             }
         }
     }
@@ -151,7 +153,8 @@ class ChatViewModel: ObservableObject {
             cellModels.append(question)
             let answer = ChatCellViewModel(
                 answer: answeredQuestion.answer,
-                openURLAction: openURLAction
+                openURLAction: openURLAction,
+                analyticsService: analyticsService
             )
             cellModels.append(answer)
         }

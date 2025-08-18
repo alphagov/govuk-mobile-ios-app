@@ -20,7 +20,7 @@ struct WebDeeplinkRouteTests {
     
     @Test
     func pattern_returnsExpectedValue() {
-        let container = Container.shared
+        let container = Container()
         let coordinatorBuilder = CoordinatorBuilder(container: container)
         let subject = WebDeeplinkRoute(coordinatorBuilder: coordinatorBuilder)
         
@@ -29,7 +29,7 @@ struct WebDeeplinkRouteTests {
     
     @Test
     func action_withValidURL_presentsWebCoordinator() {
-        let container = Container.shared
+        let container = Container()
         let coordinatorBuilder = CoordinatorBuilder(container: container)
         let subject = WebDeeplinkRoute(coordinatorBuilder: coordinatorBuilder)
         let mockParentCoordinator = TestWebCoordinator()
@@ -44,7 +44,7 @@ struct WebDeeplinkRouteTests {
     
     @Test
     func action_withInvalidURL_doesNotPresentCoordinator() {
-        let container = Container.shared
+        let container = Container()
         let coordinatorBuilder = CoordinatorBuilder(container: container)
         let subject = WebDeeplinkRoute(coordinatorBuilder: coordinatorBuilder)
         let mockParentCoordinator = TestWebCoordinator()
@@ -57,7 +57,7 @@ struct WebDeeplinkRouteTests {
     
     @Test
     func action_withMissingURL_doesNotPresentCoordinator() {
-        let container = Container.shared
+        let container = Container()
         let coordinatorBuilder = CoordinatorBuilder(container: container)
         let subject = WebDeeplinkRoute(coordinatorBuilder: coordinatorBuilder)
         let mockParentCoordinator = TestWebCoordinator()

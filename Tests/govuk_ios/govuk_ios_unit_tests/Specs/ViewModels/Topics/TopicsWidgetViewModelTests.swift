@@ -102,7 +102,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func displayedTopics_topicsHaveBeenEdited_returnsFavourites() async {
+    func topicsToBeDisplayed_topicsHaveBeenEdited_returnsFavourites() async {
         var cancellables = Set<AnyCancellable>()
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -124,8 +124,8 @@ struct TopicsWidgetViewModelTests {
             sut.$topicsToBeDisplayed
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
@@ -149,8 +149,8 @@ struct TopicsWidgetViewModelTests {
             sut.$showingEditScreen
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.editButtonViewModel.action()
@@ -161,9 +161,8 @@ struct TopicsWidgetViewModelTests {
 
     }
 
-
     @Test
-    func displayedTopics_topicsHaveNotBeenEdited_returnsAllTopcis() async {
+    func topicsToBeDisplayed_topicsHaveNotBeenEdited_returnsAllTopcis() async {
         var cancellables = Set<AnyCancellable>()
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
         let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
@@ -186,8 +185,8 @@ struct TopicsWidgetViewModelTests {
             sut.$topicsToBeDisplayed
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
@@ -221,8 +220,8 @@ struct TopicsWidgetViewModelTests {
             sut.$showAllTopicsButton
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value )
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
@@ -254,8 +253,8 @@ struct TopicsWidgetViewModelTests {
             sut.$showAllTopicsButton
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
@@ -291,8 +290,8 @@ struct TopicsWidgetViewModelTests {
             sut.$showAllTopicsButton
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
@@ -373,8 +372,8 @@ struct TopicsWidgetViewModelTests {
             sut.$topicsToBeDisplayed
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()
@@ -418,8 +417,8 @@ struct TopicsWidgetViewModelTests {
             sut.$topicsToBeDisplayed
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
-                .sink { val in
-                    continuation.resume(returning: val)
+                .sink { value in
+                    continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
             sut.fetchDisplayedTopics()

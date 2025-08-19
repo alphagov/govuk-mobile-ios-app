@@ -14,6 +14,7 @@ struct TopicsWidgetViewModelTests {
     let mockAnalyticsService = MockAnalyticsService()
 
     @Test
+    @MainActor
     func fetchTopics_downloadSuccess_returnsExpectedData() async {
         var cancellables = Set<AnyCancellable>()
         let mockTopicService = MockTopicsService()
@@ -41,6 +42,7 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
+    @MainActor
     func fetchTopics_downloadFailure_returnsExpectedResult() async  {
         var cancellables = Set<AnyCancellable>()
         let mockTopicService = MockTopicsService()

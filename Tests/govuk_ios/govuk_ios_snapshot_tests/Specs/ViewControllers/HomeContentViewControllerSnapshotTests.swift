@@ -8,7 +8,7 @@ import SwiftUI
 @testable import govuk_ios
 
 @MainActor
-final class HomepageContentViewControllerSnapshotTests: SnapshotTestCase {
+final class HomeContentViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(

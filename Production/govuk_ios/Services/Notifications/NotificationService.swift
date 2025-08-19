@@ -24,23 +24,26 @@ class NotificationService: NSObject,
     private let notificationCenter: UserNotificationCenterInterface
     private let configService: AppConfigServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
+    private let oneSignalType: OneSignalInterface.Type
     var onClickAction: ((URL) -> Void)?
 
     init(environmentService: AppEnvironmentServiceInterface,
          notificationCenter: UserNotificationCenterInterface,
          configService: AppConfigServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface) {
+         userDefaultsService: UserDefaultsServiceInterface,
+         oneSignalInterface: OneSignalInterface.Type) {
         self.environmentService = environmentService
         self.notificationCenter = notificationCenter
         self.configService = configService
         self.userDefaultsService = userDefaultsService
+        self.oneSignalType = oneSignalInterface
     }
 
     func appDidFinishLaunching(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        OneSignal.setConsentRequired(true)
-        OneSignal.initialize(
-            environmentService.oneSignalAppId,
-            withLaunchOptions: launchOptions
+        oneSignalType.setConsentGiven(true)
+        oneSignalType.initialize(
+            appId: environmentService.oneSignalAppId,
+            launchOptions: launchOptions
         )
     }
 
@@ -94,19 +97,19 @@ class NotificationService: NSObject,
 
     private func updateConsent(given: Bool) {
         userDefaultsService.set(bool: given, forKey: .notificationsConsentGranted)
-        OneSignal.setConsentGiven(given)
+        oneSignalType.setConsentGiven(given)
     }
 
     func requestPermissions(completion: (() -> Void)?) {
         updateConsent(given: true)
-        OneSignal.Notifications.requestPermission({ [weak self] accepted in
+        oneSignalType.Notifications.requestPermission({ [weak self] accepted in
             self?.updateConsent(given: accepted)
             completion?()
         }, fallbackToSettings: false)
     }
 
     func addClickListener(onClickAction: @escaping (URL) -> Void) {
-        OneSignal.Notifications.addClickListener(self)
+        oneSignalType.Notifications.addClickListener(self)
         self.onClickAction = onClickAction
     }
 
@@ -143,4 +146,20 @@ enum NotificationConsentResult: Equatable {
 enum NotificationConsentMisalignment: Equatable {
     case consentNotGrantedNotificationsOn
     case consentGrantedNotificationsOff
+}
+
+protocol OneSignalInterface: AnyObject {
+    static func setConsentRequired(_ required: Bool)
+    static func initialize(appId: String,
+                           launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
+    static func setConsentGiven(_ given: Bool)
+
+    static var Notifications: any OSNotifications.Type { get }
+}
+
+extension OneSignal: OneSignalInterface {
+    static func initialize(appId: String,
+                           launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        initialize(appId, withLaunchOptions: launchOptions)
+    }
 }

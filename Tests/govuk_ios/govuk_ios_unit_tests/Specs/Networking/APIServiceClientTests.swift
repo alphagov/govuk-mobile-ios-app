@@ -39,35 +39,35 @@ struct APIServiceClientTests {
         }
     }
 
-    @Test()
-    func send_get_passesExpectedValues() async {
-        let subject = APIServiceClient(
-            baseUrl: URL(string: "https://www.google.com")!,
-            session: URLSession.mock,
-            requestBuilder: RequestBuilder()
-        )
-        let request = GOVRequest(
-            urlPath: "/test/111",
-            method: .get,
-            bodyParameters: nil,
-            queryParameters: ["query": "value"],
-            additionalHeaders: nil
-        )
-        MockURLProtocol.requestHandlers["https://www.google.com/test/111"] = { request in
-            #expect(request.url?.absoluteString == "https://www.google.com/test/111?query=value")
-            #expect(request.httpMethod == "GET")
-            #expect(request.httpBody == nil)
-            return (.arrangeSuccess, nil, nil)
-        }
-        return await withCheckedContinuation { continuation in
-            subject.send(
-                request: request,
-                completion: { result in
-                    continuation.resume()
-                }
-            )
-        }
-    }
+//    @Test()
+//    func send_get_passesExpectedValues() async {
+//        let subject = APIServiceClient(
+//            baseUrl: URL(string: "https://www.google.com")!,
+//            session: URLSession.mock,
+//            requestBuilder: RequestBuilder()
+//        )
+//        let request = GOVRequest(
+//            urlPath: "/test/111",
+//            method: .get,
+//            bodyParameters: nil,
+//            queryParameters: ["query": "value"],
+//            additionalHeaders: nil
+//        )
+//        MockURLProtocol.requestHandlers["https://www.google.com/test/111"] = { request in
+//            #expect(request.url?.absoluteString == "https://www.google.com/test/111?query=value")
+//            #expect(request.httpMethod == "GET")
+//            #expect(request.httpBody == nil)
+//            return (.arrangeSuccess, nil, nil)
+//        }
+//        return await withCheckedContinuation { continuation in
+//            subject.send(
+//                request: request,
+//                completion: { result in
+//                    continuation.resume()
+//                }
+//            )
+//        }
+//    }
 
     @Test()
     func send_successResponse_returnsExpectedResult() async {

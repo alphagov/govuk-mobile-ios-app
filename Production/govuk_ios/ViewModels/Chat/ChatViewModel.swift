@@ -177,6 +177,7 @@ class ChatViewModel: ObservableObject {
     }
 
     func openAboutURL() {
+        trackMenuAboutTap()
         openURLAction(Constants.API.govukBaseUrl)
     }
 
@@ -184,26 +185,10 @@ class ChatViewModel: ObservableObject {
         analyticsService.track(screen: screen)
     }
 
-    func trackMenuTap() {
-        let event = AppEvent.chatActionButtonFunction(
-            text: String.chat.localized("moreOptionsAccessibilityLabel"),
-            action: "Action Menu Opened"
-        )
-        analyticsService.track(event: event)
-    }
-
-    func trackMenuAboutTap() {
-        let event = AppEvent.buttonNavigation(
-            text: String.chat.localized("aboutMenuTitle"),
-            external: true
-        )
-        analyticsService.track(event: event)
-    }
-
     func trackMenuClearChatTap() {
         let event = AppEvent.chatActionButtonFunction(
             text: String.chat.localized("clearMenuTitle"),
-            action: "Clear Chat Opened"
+            action: "Clear Chat Tapped"
         )
         analyticsService.track(event: event)
     }
@@ -220,6 +205,14 @@ class ChatViewModel: ObservableObject {
         let event = AppEvent.chatActionButtonFunction(
             text: String.chat.localized("clearAlertDenyTitle"),
             action: "Clear Chat No Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackMenuAboutTap() {
+        let event = AppEvent.buttonNavigation(
+            text: String.chat.localized("aboutMenuTitle"),
+            external: true
         )
         analyticsService.track(event: event)
     }

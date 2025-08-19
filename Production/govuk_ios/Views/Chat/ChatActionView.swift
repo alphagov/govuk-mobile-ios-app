@@ -101,15 +101,15 @@ struct ChatActionView: View {
             if viewModel.currentConversationExists {
                 Button(
                     role: .destructive,
-                    action: { showClearChatAlert = true },
+                    action: {
+                        viewModel.trackMenuClearChatTap()
+                        showClearChatAlert = true
+                    },
                     label: {
                         Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
                     }
                 )
                 .disabled(viewModel.requestInFlight)
-                .onTapGesture {
-                    viewModel.trackMenuAboutTap()
-                }
             }
             Button(
                 action: { viewModel.openAboutURL() },
@@ -119,9 +119,6 @@ struct ChatActionView: View {
                         .accessibilityHint(String.common.localized("openWebLinkHint"))
                 }
             )
-            .onTapGesture {
-                viewModel.trackMenuClearChatTap()
-            }
         } label: {
             Image(systemName: "ellipsis")
                 .font(.system(size: 18, weight: .bold))
@@ -138,9 +135,6 @@ struct ChatActionView: View {
                                 )
                         )
                 )
-                .onTapGesture {
-                    viewModel.trackMenuTap()
-                }
         }
         .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
         .accessibilitySortPriority(0)

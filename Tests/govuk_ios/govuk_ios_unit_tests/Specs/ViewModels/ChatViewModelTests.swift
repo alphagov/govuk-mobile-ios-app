@@ -276,33 +276,20 @@ struct ChatViewModelTests {
     }
 
     @Test
-    func trackMenuTap_tracksEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let sut = ChatViewModel(
-            chatService: MockChatService(),
-            analyticsService: mockAnalyticsService,
-            openURLAction: { _ in },
-            handleError: { _ in }
-        )
+    func openAboutURL_opensURLAndtracksEvent() async {
+        await confirmation() { confirmation in
+            let mockAnalyticsService = MockAnalyticsService()
+            let sut = ChatViewModel(
+                chatService: MockChatService(),
+                analyticsService: mockAnalyticsService,
+                openURLAction: { _ in confirmation() },
+                handleError: { _ in }
+            )
 
-        sut.trackMenuTap()
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "More options")
-    }
-
-    @Test
-    func trackMenuAboutTap_tracksEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let sut = ChatViewModel(
-            chatService: MockChatService(),
-            analyticsService: mockAnalyticsService,
-            openURLAction: { _ in },
-            handleError: { _ in }
-        )
-
-        sut.trackMenuAboutTap()
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "About")
+            sut.openAboutURL()
+            #expect(mockAnalyticsService._trackedEvents.count == 1)
+            #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "About")
+        }
     }
 
     @Test

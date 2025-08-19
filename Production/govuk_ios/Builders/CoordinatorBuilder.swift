@@ -90,7 +90,7 @@ class CoordinatorBuilder {
         )
     }
 
-    var chat: TabItemCoordinator {
+    func chat(cancelOnboardingAction: @escaping () -> Void) -> TabItemCoordinator {
         let navigationController = UINavigationController.chat
 
         return ChatCoordinator(
@@ -102,7 +102,8 @@ class CoordinatorBuilder {
                 root: navigationController
             ),
             analyticsService: container.analyticsService.resolve(),
-            chatService: container.chatService.resolve()
+            chatService: container.chatService.resolve(),
+            cancelOnboardingAction: cancelOnboardingAction
         )
     }
 
@@ -407,6 +408,35 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             viewControllerBuilder: ViewControllerBuilder(),
             urlOpener: UIApplication.shared
+        )
+    }
+
+    func chatInfoOnboarding(
+        cancelOnboardingAction: @escaping () -> Void,
+        setChatViewControllerAction: @escaping (Bool) -> Void
+    ) -> BaseCoordinator {
+        ChatInfoOnboardingCoordinator(
+            navigationController: UINavigationController(),
+            coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            cancelOnboardingAction: cancelOnboardingAction,
+            setChatViewControllerAction: setChatViewControllerAction
+        )
+    }
+
+    func chatConsentOnboarding(
+        navigationController: UINavigationController,
+        cancelOnboardingAction: @escaping () -> Void,
+        completionAction: @escaping () -> Void
+    ) -> BaseCoordinator {
+        ChatConsentOnboardingCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve(),
+            cancelOnboardingAction: cancelOnboardingAction,
+            completionAction: completionAction
         )
     }
 }

@@ -75,7 +75,7 @@ struct CoordinatorBuilderTests {
     @Test
     func chat_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.chat
+        let coordinator = subject.chat(cancelOnboardingAction: { })
 
         #expect(coordinator is ChatCoordinator)
     }
@@ -389,5 +389,28 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is LocalAuthenticationSettingsCoordinator)
+    }
+
+    @Test
+    func chatInfoOnboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatInfoOnboarding(
+            cancelOnboardingAction: { },
+            setChatViewControllerAction: { animated in }
+        )
+
+        #expect(coordinator is ChatInfoOnboardingCoordinator)
+    }
+
+    @Test
+    func chatConsentOnboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatConsentOnboarding(
+            navigationController: UINavigationController(),
+            cancelOnboardingAction: { },
+            completionAction: { }
+        )
+
+        #expect(coordinator is ChatConsentOnboardingCoordinator)
     }
 }

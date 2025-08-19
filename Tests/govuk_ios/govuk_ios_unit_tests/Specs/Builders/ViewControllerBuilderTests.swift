@@ -325,4 +325,31 @@ struct ViewControllerBuilderTests {
         let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
+
+    @Test
+    func chatInfoOnboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatInfoOnboarding(
+            analyticsService: MockAnalyticsService(),
+            completionAction: { },
+            cancelOnboardingAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatConsentOnboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatConsentOnboarding(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            cancelOnboardingAction: { },
+            completionAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<ChatConsentOnboardingView>)?.rootView
+        #expect(rootView != nil)
+    }
 }

@@ -4,6 +4,7 @@ import GOVKit
 import UIComponents
 
 protocol InfoViewModelInterface {
+    var navBarHidden: Bool { get }
     var analyticsService: AnalyticsServiceInterface? { get }
     var title: String { get }
     var subtitle: String { get }
@@ -25,8 +26,16 @@ extension InfoViewModelInterface {
     var trackingName: String { "" }
     var trackingTitle: String { "" }
 
+    var navBarHidden: Bool {
+        true
+    }
+
     var buttonConfiguration: GOVUKButton.ButtonConfiguration {
         .primary
+    }
+
+    var subtitle: String {
+        ""
     }
 
     var buttonAccessibilityTitle: String {

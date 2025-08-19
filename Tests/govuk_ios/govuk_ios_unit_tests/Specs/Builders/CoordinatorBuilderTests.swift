@@ -187,18 +187,6 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func editTopics_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.editTopics(
-            navigationController: mockNavigationController,
-            didDismissAction: { }
-        )
-
-        #expect(coordinator is EditTopicsCoordinator)
-    }
-
-    @Test
     func localAuhority_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()

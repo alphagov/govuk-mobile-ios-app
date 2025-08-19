@@ -7,12 +7,9 @@ final class EditTopicsViewModel: ObservableObject {
     private var managedObjectContext: NSManagedObjectContext?
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
-    let dismissAction: () -> Void
 
     init(topicsService: TopicsServiceInterface,
-         analyticsService: AnalyticsServiceInterface,
-         dismissAction: @escaping () -> Void) {
-        self.dismissAction = dismissAction
+         analyticsService: AnalyticsServiceInterface) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         let topics = topicsService.fetchAll()

@@ -4,8 +4,8 @@ import GOVKit
 
 class HomeViewController: BaseViewController {
     private var searchViewController: SearchViewController!
-    private var homeContentViewController: HomeContentViewController!
     private var viewModel: HomeViewModel
+    private var homeContentViewController: UIViewController!
     private lazy var logoImageView: UIImageView = {
         let uiImageView = UIImageView(image: .homeLogo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,13 +70,21 @@ class HomeViewController: BaseViewController {
         if viewModel.searchEnabled {
             configureSearchBar()
         }
-        configureHomeContent()
+        configureContentViewController()
+        displayHomeContent()
     }
 
-    private func configureHomeContent() {
-        homeContentViewController = HomeContentViewController(
+    private func configureContentViewController() {
+        let contentView = HomeContentView(
             viewModel: viewModel
         )
+        let contentViewController = HostingViewController(
+            rootView: contentView
+        )
+        homeContentViewController = contentViewController
+    }
+
+    private func displayHomeContent() {
         displayController(homeContentViewController)
     }
 
@@ -212,6 +220,6 @@ extension HomeViewController: ResetsToDefault {
         if viewModel.searchEnabled {
             cancelSearch()
         }
-        homeContentViewController.scrollToTop()
+        viewModel.homeContentScrollToTop = true
     }
 }

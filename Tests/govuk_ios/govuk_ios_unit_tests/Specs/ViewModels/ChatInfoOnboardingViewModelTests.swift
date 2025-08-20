@@ -47,6 +47,36 @@ struct ChatInfoOnboardingViewModelTests {
             cancelOnboardingAction: { }
         )
 
-        #expect(sut.trackingName == "First chat onboarding")
+        #expect(sut.trackingName == "Chat Onboarding Screen One")
+    }
+
+    @Test
+    func buttonViewModel_action_tracksEvent() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatInfoOnboardingViewModel(
+            analyticsService: mockAnalyticsService,
+            completionAction: { },
+            cancelOnboardingAction: { }
+        )
+        sut.buttonViewModel.action()
+
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Continue")
+    }
+
+    @Test
+    func cancelOnboarding_callsActionAndTracksEvent() async {
+        await confirmation() { confirmation in
+            let mockAnalyticsService = MockAnalyticsService()
+            let sut = ChatInfoOnboardingViewModel(
+                analyticsService: mockAnalyticsService,
+                completionAction: { },
+                cancelOnboardingAction: { confirmation() }
+            )
+            sut.cancelOnboarding()
+
+            #expect(mockAnalyticsService._trackedEvents.count == 1)
+            #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Cancel")
+        }
     }
 }

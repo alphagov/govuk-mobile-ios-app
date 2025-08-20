@@ -3,7 +3,7 @@ import GOVKit
 import UIComponents
 
 class ChatInfoOnboardingViewModel: InfoViewModelInterface {
-    private let analyticsService: AnalyticsServiceInterface
+    var analyticsService: AnalyticsServiceInterface?
     private let completionAction: () -> Void
     private let cancelOnboardingAction: () -> Void
 
@@ -37,6 +37,7 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
             localisedTitle: localTitle,
             action: { [weak self] in
                 self?.completionAction()
+                self?.trackCompletionAction()
             }
         )
     }
@@ -68,11 +69,28 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
     }
 
     var trackingName: String {
-        "First chat onboarding"
+        "Chat Onboarding Screen One"
     }
 
     @objc
     func cancelOnboarding() {
         cancelOnboardingAction()
+        trackCancelAction()
+    }
+
+    private func trackCancelAction() {
+        let event = AppEvent.buttonNavigation(
+            text: String.common.localized("cancel"),
+            external: false
+        )
+        analyticsService?.track(event: event)
+    }
+
+    private func trackCompletionAction() {
+        let event = AppEvent.buttonNavigation(
+            text: buttonTitle,
+            external: false
+        )
+        analyticsService?.track(event: event)
     }
 }

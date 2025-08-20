@@ -27,6 +27,9 @@ struct ChatConsentOnboardingView: View {
             .padding(16)
             .ignoresSafeArea()
         }
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
 
     private func consentScrollView(geometry: GeometryProxy) -> some View {
@@ -97,10 +100,10 @@ struct ChatConsentOnboardingView: View {
 
 extension ChatConsentOnboardingView: TrackableScreen {
     var trackingName: String {
-        "Second chat onboarding"
+        "Chat Onboarding Screen Two"
     }
 
     var trackingTitle: String? {
-        "Double-check the answers"
+        String.chat.localized("onboardingConsentTitle")
     }
 }

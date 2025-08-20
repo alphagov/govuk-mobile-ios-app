@@ -116,6 +116,6 @@ struct StoredLocalAuthorityWidgetViewModelTests {
         let result = sut.cardModels()
         #expect(result.count == 2)
         #expect(result.first?.homepageUrl == "https://www.derbyshire.gov.uk/")
-        #expect(result.first?.description == "Find services like education, social care and transport on the Derbyshire County Council website")
+        #expect(result.first?.description == "County councils are usually responsible for services like education, social care and transport")
     }
 }

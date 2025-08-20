@@ -11,7 +11,7 @@ class WelcomeOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = WelcomeOnboardingViewModel(
             completeAction: { }
         )
-        let welcomeOnboardingView = InfoView(viewModel: viewModel)
+        let welcomeOnboardingView = WelcomeOnboardingView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: welcomeOnboardingView,
             statusBarStyle: .darkContent
@@ -27,7 +27,7 @@ class WelcomeOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = WelcomeOnboardingViewModel(
             completeAction: { }
         )
-        let welcomeOnboardingView = InfoView(viewModel: viewModel)
+        let welcomeOnboardingView = WelcomeOnboardingView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: welcomeOnboardingView,
             statusBarStyle: .darkContent

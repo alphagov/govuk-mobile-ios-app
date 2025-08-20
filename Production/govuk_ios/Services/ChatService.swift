@@ -2,34 +2,45 @@ import Foundation
 
 protocol ChatServiceInterface {
     func askQuestion(_ question: String,
-                     completion: @escaping (ChatAnswerResult) -> Void)
-    func chatHistory(conversationId: String?,
-                     completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void)
+                     completion: @escaping (ChatQuestionResult) -> Void)
+    func pollForAnswer(_ pendingQuestion: PendingQuestion,
+                       completion: @escaping (ChatAnswerResult) -> Void)
+    func chatHistory(conversationId: String,
+                     completion: @escaping (ChatHistoryResult) -> Void)
     func clearHistory()
+
     var currentConversationId: String? { get }
+    var isEnabled: Bool { get }
 }
 
 final class ChatService: ChatServiceInterface {
     private let serviceClient: ChatServiceClientInterface
     private let chatRepository: ChatRepositoryInterface
-    private let maxRetryCount: Int
-    private let retryInterval: TimeInterval
+    private let configService: AppConfigServiceInterface
+
+    private var pollingInterval: TimeInterval {
+        configService.chatPollIntervalSeconds
+    }
+
     var currentConversationId: String? {
         chatRepository.fetchConversation()
     }
 
+    var isEnabled: Bool {
+        false
+    }
+
+
     init(serviceClient: ChatServiceClientInterface,
          chatRepository: ChatRepositoryInterface,
-         maxRetryCount: Int = 10,
-         retryInterval: TimeInterval = 6.0) {
+         configService: AppConfigServiceInterface) {
         self.serviceClient = serviceClient
         self.chatRepository = chatRepository
-        self.maxRetryCount = maxRetryCount
-        self.retryInterval = retryInterval
+        self.configService = configService
     }
 
     func askQuestion(_ question: String,
-                     completion: @escaping (ChatAnswerResult) -> Void) {
+                     completion: @escaping (ChatQuestionResult) -> Void) {
         serviceClient.askQuestion(
             question,
             conversationId: currentConversationId,
@@ -37,9 +48,7 @@ final class ChatService: ChatServiceInterface {
                 switch result {
                 case .success(let pendingQuestion):
                     self?.setConversationId(pendingQuestion.conversationId)
-                    self?.pollForAnswer(pendingQuestion,
-                                        retryCount: 0,
-                                        completion: completion)
+                    completion(.success(pendingQuestion))
                 case .failure(let error):
                     completion(.failure(error))
                 }
@@ -47,26 +56,23 @@ final class ChatService: ChatServiceInterface {
         )
     }
 
-    private func pollForAnswer(_ pendingQuestion: PendingQuestion,
-                               retryCount: Int,
-                               completion: @escaping (Result<Answer, Error>) -> Void) {
-        guard retryCount < maxRetryCount else {
-            completion(.failure(ChatError.maxRetriesExceeded))
-            return
-        }
+    func pollForAnswer(_ pendingQuestion: PendingQuestion,
+                       completion: @escaping (ChatAnswerResult) -> Void) {
         serviceClient.fetchAnswer(
             conversationId: pendingQuestion.conversationId,
             questionId: pendingQuestion.id,
             completion: { [weak self] result in
+                guard let self else {
+                    return
+                }
                 switch result {
                 case .success(let answer):
                     guard answer.answerAvailable else {
                         DispatchQueue.main.asyncAfter(
-                            deadline: .now() + (self?.retryInterval ?? 3.0)
+                            deadline: .now() + (self.pollingInterval)
                         ) {
-                            self?.pollForAnswer(pendingQuestion,
-                                                retryCount: retryCount + 1,
-                                                completion: completion)
+                            self.pollForAnswer(pendingQuestion,
+                                               completion: completion)
                         }
                         return
                     }
@@ -78,22 +84,19 @@ final class ChatService: ChatServiceInterface {
         )
     }
 
-    func chatHistory(conversationId: String?,
-                     completion: @escaping (Result<[AnsweredQuestion], Error>) -> Void) {
-        guard let conversationId else {
-            return completion(.success([]))
-        }
+    func chatHistory(conversationId: String,
+                     completion: @escaping (ChatHistoryResult) -> Void) {
         setConversationId(conversationId)
         serviceClient.fetchHistory(
             conversationId: conversationId,
             completion: { result in
                 switch result {
                 case .success(let history):
-                    completion(.success(history.answeredQuestions))
+                    completion(.success(history))
                 case .failure(let error):
                     completion(.failure(error))
                 }
-        })
+            })
     }
 
     func clearHistory() {

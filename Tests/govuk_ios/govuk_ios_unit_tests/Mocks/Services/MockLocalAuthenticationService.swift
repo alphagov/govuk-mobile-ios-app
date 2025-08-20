@@ -12,7 +12,7 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
     func setFaceIdSkipped(_ skipped: Bool) {
         _stubbedFaceIdSkipped = skipped
     }
-    
+
     var _stubbedDeviceCapableAuthType = LocalAuthenticationType.faceID
     var deviceCapableAuthType: LocalAuthenticationType {
         _stubbedDeviceCapableAuthType
@@ -36,7 +36,7 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
     func setTouchId(enabled: Bool) {
         _stubbedTouchIdEnabled = enabled
     }
-    
+
     var _stubbedCanEvaluateBiometricsPolicy: Bool = false
     var _stubbedCanEvaluateError: LAError? = nil
     func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?) {
@@ -65,5 +65,10 @@ class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
     var _stubbedEvaluatePolicyResult: (Bool, Error?) = (true, nil)
     func evaluatePolicy(_ policy: LAPolicy, reason: String, completion: @escaping (Bool, Error?) -> Void) {
         completion(_stubbedEvaluatePolicyResult.0, _stubbedEvaluatePolicyResult.1)
+    }
+
+    var _clearCalled: Bool = false
+    func clear() {
+        _clearCalled = true
     }
 }

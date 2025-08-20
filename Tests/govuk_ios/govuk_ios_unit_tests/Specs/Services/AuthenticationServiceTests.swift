@@ -12,12 +12,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaultsService = MockUserDefaultsService()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: mockUserDefaultsService
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -43,6 +43,8 @@ struct AuthenticationServiceTests {
                 #expect(sut.accessToken == expectedAccessToken)
                 #expect(sut.isSignedIn)
                 #expect(serviceResult.returningUser)
+                let date = mockUserDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date
+                #expect(date != nil)
                 confirmation()
             }
         }
@@ -54,12 +56,11 @@ struct AuthenticationServiceTests {
         mockReturningUserService._stubbedReturningUserResult = .success(false)
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -96,12 +97,11 @@ struct AuthenticationServiceTests {
         mockReturningUserService._stubbedReturningUserResult = .failure(.coreDataDeletionError)
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -137,13 +137,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockAuthClient._stubbedAuthenticationResult = .failure(.loginFlow(.clientError))
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let result = await sut.authenticate(window: UIApplication.shared.window!)
 
@@ -160,12 +159,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -193,12 +191,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         sut.encryptRefreshToken()
 
@@ -210,13 +207,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockSecureStoreService._stubbedSaveItemResult = .failure(TestSecureStoreError.failedEncrypt)
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -243,12 +239,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -269,7 +264,7 @@ struct AuthenticationServiceTests {
         sut.encryptRefreshToken()
         #expect(sut.refreshToken != nil)
         #expect(mockSecureStoreService._savedItems["refreshToken"] != nil)
-        sut.signOut()
+        sut.signOut(reason: .userSignout)
         #expect(sut.refreshToken == nil)
         #expect(mockSecureStoreService._savedItems["refreshToken"] == nil)
     }
@@ -279,7 +274,6 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let idToken = UUID().uuidString
         let accessToken = UUID().uuidString
         let refreshToken = UUID().uuidString
@@ -290,8 +284,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         mockAuthClient._stubbedTokenRefreshResult = .success(tokenResponse)
         mockSecureStoreService._stubbedReadItemResult = .success(refreshToken)
@@ -312,7 +306,6 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let idToken = UUID().uuidString
         let accessToken = UUID().uuidString
         let tokenResponse = TokenRefreshResponse(
@@ -324,8 +317,8 @@ struct AuthenticationServiceTests {
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -344,14 +337,13 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockAuthClient._stubbedTokenRefreshResult = .failure(.tokenResponseError)
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -370,12 +362,11 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -402,13 +393,12 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockSecureStoreService._stubbedItemExistsResult = true
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
 
         #expect(sut.secureStoreRefreshTokenPresent)
@@ -419,16 +409,74 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        let mockUserDefaults = MockUserDefaults()
         mockSecureStoreService._stubbedItemExistsResult = false
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
-            userDefaults: mockUserDefaults,
-            returningUserService: mockReturningUserService
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService()
         )
 
         #expect(!sut.secureStoreRefreshTokenPresent)
+    }
+
+    @Test
+    func shouldAttemptTokenRefresh_noDate_returnsTrue() {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        mockSecureStoreService._stubbedItemExistsResult = false
+        let mockUserDefaults = MockUserDefaultsService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            returningUserService: mockReturningUserService,
+            userDefaultsService: mockUserDefaults
+        )
+
+        mockUserDefaults.set(nil, forKey: .refreshTokenExpiryDate)
+
+        #expect(sut.shouldAttemptTokenRefresh)
+    }
+
+    @Test
+    func shouldAttemptTokenRefresh_dateInPast_returnsFalse() {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        mockSecureStoreService._stubbedItemExistsResult = false
+        let mockUserDefaults = MockUserDefaultsService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            returningUserService: mockReturningUserService,
+            userDefaultsService: mockUserDefaults
+        )
+
+        let date = Calendar.current.date(byAdding: .second, value: -10, to: .now)!
+        mockUserDefaults.set(date, forKey: .refreshTokenExpiryDate)
+
+        #expect(sut.shouldAttemptTokenRefresh == false)
+    }
+
+    @Test
+    func shouldAttemptTokenRefresh_dateInFuture_returnsTrue() {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        mockSecureStoreService._stubbedItemExistsResult = false
+        let mockUserDefaults = MockUserDefaultsService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            returningUserService: mockReturningUserService,
+            userDefaultsService: mockUserDefaults
+        )
+
+        let date = Calendar.current.date(byAdding: .day, value: 1, to: .now)
+        mockUserDefaults.set(date, forKey: .refreshTokenExpiryDate)
+
+        #expect(sut.shouldAttemptTokenRefresh)
     }
 }
 
@@ -448,3 +496,4 @@ extension AuthenticationServiceTests {
         eyJraWQiOiIxQ2RxbjVRXC9cL2Fqd3kzQ3ZYZGhScnVMTkFhMHpvNXRiNjFiSVhMdWhrUG89IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiZkNJS1NTT2JYcVFKS3g4cUFBSXZhQSIsInN1YiI6Ijg2NDI0MmM0LWQwZDEtNzA1OC04OTgzLThiMzFhMjI4ZTM4MCIsImNvZ25pdG86Z3JvdXBzIjpbImV1LXdlc3QtMl9mSUo2RjI1Wmhfb25lbG9naW4iXSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtd2VzdC0yLmFtYXpvbmF3cy5jb21cL2V1LXdlc3QtMl9mSUo2RjI1WmgiLCJjb2duaXRvOnVzZXJuYW1lIjoib25lbG9naW5fdXJuOmZkYzpnb3YudWs6MjAyMjpmZnNjc3lzcDJvaWZnaGNsYWtpdy0ybXVubHR5cnBhYWJmOXdtYW50bDlrIiwibm9uY2UiOiIyWlVCaEliUGpucVRqd3ZGU2VDT3lJc2tPRDRCazREVXcyM3RUekVDWElnIiwib3JpZ2luX2p0aSI6IjcwMTA5YzIyLWZkMjUtNGY1Ny1iNjU2LWY3NjE2NjQ5NGIyNyIsImF1ZCI6IjEyMWY1MWoxczRrbWs5aTk4dW0wYjVtcGhoIiwiaWRlbnRpdGllcyI6W3siZGF0ZUNyZWF0ZWQiOiIxNzQyODI0MjgxMTkwIiwidXNlcklkIjoidXJuOmZkYzpnb3YudWs6MjAyMjpmRlNDU1lTUDJvSUZnaGNMYWtJVy0ybVVObHRZUlBhQWJmOVdNQW50TDlrIiwicHJvdmlkZXJOYW1lIjoib25lbG9naW4iLCJwcm92aWRlclR5cGUiOiJPSURDIiwiaXNzdWVyIjpudWxsLCJwcmltYXJ5IjoidHJ1ZSJ9XSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3NDU1NzYzMjEsImV4cCI6MTc0NTY2MjcyMSwiaWF0IjoxNzQ1NTc2MzIxLCJqdGkiOiIyMjM2YWRkNC0zZWM5LTQ0OWEtYTI0YS00MWRlZDcwOGQ3ZTEiLCJlbWFpbCI6Impvc2guZHViZXkxQGRpZ2l0YWwuY2FiaW5ldC1vZmZpY2UuZ292LnVrIn0.AchyWXMGUaNZz9NlYAKbzkH9LIiZmucLvQF8j3aLDlf6mQVM17i0ar4MKCsAt4sTeQQoyOCHUOXDT9TjCr2jOFKFG1Yn2uAMj-LNEehMmN4721qTVKiNrwD7zfr1bTB-Awwi15KSl3683vEA4s-gJMAttwLMB_IWJ7w3-fdg-fBehAJNaaJiWexpe4sjmmn5A5s7elxzKQcjXuyKWT28NbkxAJtm2FUX0Z2jI4szc0cBodbK-26Ic_136mTMmAolzRkl7SP83bzRfEKh5Lv_6ZMY-3YhPCJD2kTdqT4VTL5UGQ18QzRWjL2DEtV0_Vd4RJpZrr1xSMG6c9yA2XTBWQ
         """
 }
+

@@ -1,5 +1,5 @@
 {
-  "originHash" : "84d68a0be60f06cea8278ec805b18aaed52aba019bd2083e8f2f0bd562df0166",
+  "originHash" : "312eca0287c1cb2dcb7dddf471bcfd7859acdf088da9cb015227847afb14b059",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -92,21 +92,12 @@
       }
     },
     {
-      "identity" : "govuk-mobile-ios-onboarding",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/alphagov/govuk-mobile-ios-onboarding",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "01dc0dc26e970be0d4efd6f3126bc8b0e53ca6fd"
-      }
-    },
-    {
       "identity" : "govuk-mobile-ios-ui-components",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
         "branch" : "develop",
-        "revision" : "fcc5e4dce377428fc7dd4577defe7302aa0f5cf5"
+        "revision" : "a12d82ca1db9246268c83bb3a56887c1c13114b5"
       }
     },
     {
@@ -200,6 +191,15 @@
       }
     },
     {
+      "identity" : "networkimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/NetworkImage",
+      "state" : {
+        "revision" : "2849f5323265386e200484b0d0f896e73c3411b9",
+        "version" : "6.0.1"
+      }
+    },
+    {
       "identity" : "onesignal-xcframework",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OneSignal/OneSignal-XCFramework",
@@ -236,6 +236,15 @@
       }
     },
     {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-cmark",
+      "state" : {
+        "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
+        "version" : "0.6.0"
+      }
+    },
+    {
       "identity" : "swift-crypto",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-crypto.git",
@@ -251,6 +260,15 @@
       "state" : {
         "revision" : "3d8596ed08bd13520157f0355e35caed215ffbfa",
         "version" : "1.6.3"
+      }
+    },
+    {
+      "identity" : "swift-markdown-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gonzalezreal/swift-markdown-ui.git",
+      "state" : {
+        "revision" : "5f613358148239d0292c0cef674a3c2314737f9e",
+        "version" : "2.4.1"
       }
     },
     {

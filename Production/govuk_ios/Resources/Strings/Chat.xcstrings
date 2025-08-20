@@ -1,0 +1,327 @@
+{
+  "sourceLanguage" : "en-GB",
+  "strings" : {
+    "aboutMenuAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About GOV.UK Chat"
+          }
+        }
+      }
+    },
+    "aboutMenuTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "answerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat"
+          }
+        }
+      }
+    },
+    "clearAlertBodyText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This will delete your chat history."
+          }
+        }
+      }
+    },
+    "clearAlertConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, clear chat"
+          }
+        }
+      }
+    },
+    "clearAlertDenyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No, not now"
+          }
+        }
+      }
+    },
+    "clearAlertTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to clear your chat history?"
+          }
+        }
+      }
+    },
+    "clearMenuTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear chat"
+          }
+        }
+      }
+    },
+    "genericErrorBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat is not working. \n\nTry again later, or go to the app home page if you need information now."
+          }
+        }
+      }
+    },
+    "gettingAnswerMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generating your answer…"
+          }
+        }
+      }
+    },
+    "introFirstMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi 👋 I’m GOV.UK Chat."
+          }
+        }
+      }
+    },
+    "introSecondMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I’m an experimental AI tool. \n\nWhen you ask a question, I’ll find the most relevant information from GOV.UK and use it to create an answer."
+          }
+        }
+      }
+    },
+    "introThirdMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask a question to get started."
+          }
+        }
+      }
+    },
+    "loadingQuestionMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message loading…"
+          }
+        }
+      }
+    },
+    "messagesAvailableTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Messages will be available for 90 days"
+          }
+        }
+      }
+    },
+    "mistakesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat can make mistakes. Check GOV.UK pages for important information."
+          }
+        }
+      }
+    },
+    "moreOptionsAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More options"
+          }
+        }
+      }
+    },
+    "pageNotFoundButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a new chat"
+          }
+        }
+      }
+    },
+    "pageNotFoundErrorBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your previous conversation is no longer available.\n\nTo continue using GOV.UK Chat, you need to start a new chat."
+          }
+        }
+      }
+    },
+    "remainingCharactersTitle.%lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character remaining"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters remaining"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sendButtonAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send message"
+          }
+        }
+      }
+    },
+    "sendButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        }
+      }
+    },
+    "sourceListTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK pages used in this answer"
+          }
+        }
+      }
+    },
+    "tabTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        }
+      }
+    },
+    "textEditorPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type your message here"
+          }
+        }
+      }
+    },
+    "tooManyCharactersTitle.%lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character too many"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters too many"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "validationErrorText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal data has been detected in your question. Please remove it and try again."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

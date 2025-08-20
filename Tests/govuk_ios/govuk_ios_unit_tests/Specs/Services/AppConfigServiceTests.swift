@@ -29,6 +29,45 @@ struct AppConfigServiceTests {
     }
 
     @Test
+    func fetchAppConfig_updatesChatPollingInterval() async {
+        let configResult = Config.arrange(chatPollIntervalSeconds: 10).toResult()
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                configResult
+            )
+        }
+
+        #expect(sut.chatPollIntervalSeconds == 10.0)
+    }
+
+    @Test
+    func fetchAppConfig_missingPolligInterval_setsDefaultValue() async {
+        let configResult = Config.arrange(chatPollIntervalSeconds: nil).toResult()
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                configResult
+            )
+        }
+
+        #expect(sut.chatPollIntervalSeconds == 3.0)
+    }
+
+    @Test
+    func fetchAppConfig_zeroPolligInterval_setsDefaultValue() async {
+        let configResult = Config.arrange(chatPollIntervalSeconds: 0).toResult()
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                configResult
+            )
+        }
+
+        #expect(sut.chatPollIntervalSeconds == 3.0)
+    }
+
+    @Test
     func isFeatureEnabled_whenFeatureFlagIsSetToAvailable_returnsTrue() {
         let result = Config.arrange(releaseFlags: ["search": true]).toResult()
         sut.fetchAppConfig(completion: { _ in })

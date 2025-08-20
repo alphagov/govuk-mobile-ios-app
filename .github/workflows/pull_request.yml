@@ -3,7 +3,7 @@ name: Pull Request
 on:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, release/*, main ]
+    branches: [ develop, release/*, feature/*, main ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-pr
@@ -18,4 +18,4 @@ jobs:
     uses: ./.github/workflows/sonar_scan_pr.yml
     needs: unit-test
     secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      BW_ACCESS_TOKEN: ${{ secrets.BW_ACCESS_TOKEN }}

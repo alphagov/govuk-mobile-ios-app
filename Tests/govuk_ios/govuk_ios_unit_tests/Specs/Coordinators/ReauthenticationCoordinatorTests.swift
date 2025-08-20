@@ -7,11 +7,32 @@ import Testing
 @Suite
 class ReauthenticationCoordinatorTests {
     @Test @MainActor
+    func start_shouldNotAttemptTokenRefresh_callsCompletion() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController =  MockNavigationController()
+        mockAuthenticationService._stubbedShouldAttemptTokenRefresh = false
+        let sut = ReAuthenticationCoordinator(
+            navigationController: mockNavigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
+            analyticsService: mockAnalyticsService,
+            completionAction: { }
+        )
+        sut.start(url: nil)
+        #expect(mockAuthenticationService._receivedSignOutReason == .reauthFailure)
+    }
+
+    @Test @MainActor
     func start_shouldReauthenticate_successfulTokenResponse_callsCompletion() async {
         let mockAnalyticsService = MockAnalyticsService()
         let mockCoordinatorBuilder = CoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockAuthenticationService._stubbedShouldAttemptTokenRefresh = true
         let mockNavigationController =  MockNavigationController()
         let tokenRefreshResponse = TokenRefreshResponse(
             accessToken: "access_token",
@@ -33,6 +54,7 @@ class ReauthenticationCoordinatorTests {
         }
 
         #expect(completion)
+        #expect(mockAuthenticationService._receivedSignOutReason == nil)
         #expect(mockNavigationController._setViewControllers?.count == .none)
         #expect(mockAnalyticsService._setExistingConsentCalled)
     }

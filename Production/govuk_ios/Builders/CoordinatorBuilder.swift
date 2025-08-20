@@ -17,6 +17,7 @@ class CoordinatorBuilder {
         AppCoordinator(
             coordinatorBuilder: self,
             inactivityService: inactivityService,
+            authenticationService: container.authenticationService.resolve(),
             navigationController: navigationController
         )
     }
@@ -86,6 +87,22 @@ class CoordinatorBuilder {
             authenticationService: container.authenticationService.resolve(),
             notificationService: container.notificationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve()
+        )
+    }
+
+    var chat: TabItemCoordinator {
+        let navigationController = UINavigationController.chat
+
+        return ChatCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: self,
+            viewControllerBuilder: ViewControllerBuilder(),
+            deepLinkStore: DeeplinkDataStore.chat(
+                coordinatorBuilder: self,
+                root: navigationController
+            ),
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve()
         )
     }
 
@@ -311,6 +328,7 @@ class CoordinatorBuilder {
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
+            topicsService: container.topicsService.resolve(),
             completionAction: completionAction,
             handleError: handleError
         )
@@ -332,7 +350,7 @@ class CoordinatorBuilder {
                                        completionAction: @escaping () -> Void) -> BaseCoordinator {
         LocalAuthenticationOnboardingCoordinator(
             navigationController: navigationController,
-            userDefaults: UserDefaults.standard,
+            userDefaultsService: container.userDefaultsService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
             authenticationService: container.authenticationService.resolve(),
             completionAction: completionAction
@@ -348,17 +366,6 @@ class CoordinatorBuilder {
         )
     }
 
-//    func signedOut(navigationController: UINavigationController,
-//                   completion: @escaping (Bool) -> Void) -> BaseCoordinator {
-//        SignedOutCoordinator(
-//            navigationController: navigationController,
-//            viewControllerBuilder: ViewControllerBuilder(),
-//            authenticationService: container.authenticationService.resolve(),
-//            analyticsService: container.analyticsService.resolve(),
-//            completion: completion
-//        )
-//    }
-
     func signInSuccess(navigationController: UINavigationController,
                        completion: @escaping () -> Void) -> BaseCoordinator {
         SignInSuccessCoordinator(
@@ -368,7 +375,6 @@ class CoordinatorBuilder {
             completion: completion
         )
     }
-
 
     func webView(url: URL) -> BaseCoordinator {
         WebViewCoordinator(

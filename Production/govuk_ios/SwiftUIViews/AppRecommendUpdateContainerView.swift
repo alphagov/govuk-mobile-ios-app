@@ -1,4 +1,5 @@
 import SwiftUI
+import GOVKit
 import UIComponents
 
 struct AppRecommendUpdateContainerView: View {
@@ -11,36 +12,16 @@ struct AppRecommendUpdateContainerView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HeaderView(title: viewModel.title,
                        subheading: viewModel.subheading)
             .padding(.top, verticalSizeClass == .compact ? 30 : 46)
             .padding(.horizontal, 16)
             Spacer()
-            Divider()
-                .overlay(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea()
-            let buttonLayout = verticalSizeClass == .compact ?
-            AnyLayout(HStackLayout()) :
-            AnyLayout(VStackLayout())
-            buttonLayout {
-                SwiftUIButton(
-                    .primary,
-                    viewModel: viewModel.updateButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                .padding(.horizontal, 16)
-                .accessibilityLabel(Text(viewModel.updateButtonTitle))
-                SwiftUIButton(
-                    .secondary,
-                    viewModel: viewModel.skipButtonViewModel
-                )
-                .frame(minHeight: 44, idealHeight: 44)
-                .padding(.horizontal, 16)
-                .accessibilityLabel(Text(viewModel.skipButtonTitle))
-            }
-            .padding(.top, 16)
-            .ignoresSafeArea()
+            ButtonStackView(
+                primaryButtonViewModel: viewModel.updateButtonViewModel,
+                secondaryButtonViewModel: viewModel.skipButtonViewModel
+            )
         }
         .navigationBarHidden(true)
     }

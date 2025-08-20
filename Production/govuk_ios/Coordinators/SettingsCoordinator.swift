@@ -12,6 +12,10 @@ class SettingsCoordinator: TabItemCoordinator {
     private let notificationService: NotificationServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
+    var isEnabled: Bool {
+        true
+    }
+
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
          deeplinkStore: DeeplinkDataStore,
@@ -49,13 +53,6 @@ class SettingsCoordinator: TabItemCoordinator {
         set([viewController], animated: false)
     }
 
-    override func childDidFinish(_ child: BaseCoordinator) {
-        super.childDidFinish(child)
-        if child is SignOutConfirmationCoordinator {
-            finish()
-        }
-    }
-
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
         deeplinkStore.route(
             for: url,
@@ -63,8 +60,11 @@ class SettingsCoordinator: TabItemCoordinator {
         )
     }
 
-    func didReselectTab() {
-        settingsViewModel.scrollToTop = true
+    func didSelectTab(_ selectedTabIndex: Int,
+                      previousTabIndex: Int) {
+        if selectedTabIndex == previousTabIndex {
+            settingsViewModel.scrollToTop = true
+        }
     }
 
     private func setViewModelActions() {

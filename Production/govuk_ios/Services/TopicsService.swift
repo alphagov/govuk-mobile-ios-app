@@ -14,22 +14,24 @@ protocol TopicsServiceInterface {
 
     var hasOnboardedTopics: Bool { get }
     func setHasOnboardedTopics()
+
+    func resetOnboarding()
 }
 
 struct TopicsService: TopicsServiceInterface {
     private let topicsServiceClient: TopicsServiceClientInterface
     private let topicsRepository: TopicsRepositoryInterface
     private let analyticsService: AnalyticsServiceInterface
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
 
     init(topicsServiceClient: TopicsServiceClientInterface,
          topicsRepository: TopicsRepositoryInterface,
          analyticsService: AnalyticsServiceInterface,
-         userDefaults: UserDefaultsInterface) {
+         userDefaultsService: UserDefaultsServiceInterface) {
         self.topicsServiceClient = topicsServiceClient
         self.topicsRepository = topicsRepository
         self.analyticsService = analyticsService
-        self.userDefaults = userDefaults
+        self.userDefaultsService = userDefaultsService
     }
 
     func fetchRemoteList(completion: @escaping FetchTopicsListCompletion) {
@@ -66,19 +68,24 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.save()
     }
 
+    func resetOnboarding() {
+        userDefaultsService.set(nil, forKey: .topicsOnboardingSeen)
+        userDefaultsService.set(nil, forKey: .customisedTopics)
+    }
+
     var hasOnboardedTopics: Bool {
-        userDefaults.bool(forKey: .topicsOnboardingSeen)
+        userDefaultsService.bool(forKey: .topicsOnboardingSeen)
     }
 
     func setHasOnboardedTopics() {
-        userDefaults.set(
+        userDefaultsService.set(
             bool: true,
             forKey: .topicsOnboardingSeen
         )
     }
 
     func setHasCustomisedTopics() {
-        userDefaults.set(
+        userDefaultsService.set(
             bool: true,
             forKey: .customisedTopics
         )
@@ -88,6 +95,6 @@ struct TopicsService: TopicsServiceInterface {
     }
 
     var hasCustomisedTopics: Bool {
-        userDefaults.bool(forKey: .customisedTopics)
+        userDefaultsService.bool(forKey: .customisedTopics)
     }
 }

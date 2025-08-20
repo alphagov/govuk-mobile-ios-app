@@ -10,6 +10,7 @@ import Testing
 struct AppCoordinatorTests {
     @Test
     func start_firstLaunch_startsLaunchCoordinator() {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
@@ -21,6 +22,7 @@ struct AppCoordinatorTests {
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -28,10 +30,12 @@ struct AppCoordinatorTests {
 
         #expect(mockCoordinatorBuilder._receivedPreAuthNavigationController == mockNavigationController)
         #expect(mockCoordinator._startCalled)
+        #expect(mockAuthenticationService.didSignOutAction != nil)
     }
 
     @Test
     func start_secondLaunch_startsTabCoordinator() {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
@@ -51,6 +55,7 @@ struct AppCoordinatorTests {
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -79,6 +84,7 @@ struct AppCoordinatorTests {
 
     @Test
     func relaunchCompletion_withTabCoordinator_withURL_startsTabCoordinator() {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
@@ -98,6 +104,7 @@ struct AppCoordinatorTests {
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -131,6 +138,7 @@ struct AppCoordinatorTests {
 
     @Test
     func relaunchCompletion_withTabCoordinator_withNo_doesntStartTabCoordinator() {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
@@ -150,6 +158,7 @@ struct AppCoordinatorTests {
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -181,6 +190,7 @@ struct AppCoordinatorTests {
 
     @Test
     func successfulSignout_startsLoginCoordinator() throws {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
@@ -205,6 +215,7 @@ struct AppCoordinatorTests {
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -222,6 +233,7 @@ struct AppCoordinatorTests {
 
     @Test
     func inactivity_startsPeriAuth() {
+        let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
@@ -232,6 +244,7 @@ struct AppCoordinatorTests {
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -239,5 +252,61 @@ struct AppCoordinatorTests {
         mockInactivityService._receivedStartMonitoringInactivityHandler?()
 
         #expect(mockPeriAuthCoordinator._startCalled)
+    }
+
+    @Test
+    func start_didSignOutAction_userSignout_startsPeriAuthCoordinator() {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockCoordinator
+
+        let mockPeriAuthCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
+            navigationController: mockNavigationController
+        )
+
+        subject.start(url: nil)
+
+        mockAuthenticationService.didSignOutAction?(.userSignout)
+
+        #expect(mockPeriAuthCoordinator._startCalled)
+    }
+
+    @Test
+    func start_didSignOutAction_reauthFailed_startsPeriAuthCoordinator() {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockCoordinator = MockBaseCoordinator(
+            navigationController: mockNavigationController
+        )
+        mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockCoordinator
+
+        let mockPeriAuthCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
+            navigationController: mockNavigationController
+        )
+
+        subject.start(url: nil)
+
+        mockAuthenticationService.didSignOutAction?(.reauthFailure)
+
+        #expect(!mockPeriAuthCoordinator._startCalled)
     }
 }

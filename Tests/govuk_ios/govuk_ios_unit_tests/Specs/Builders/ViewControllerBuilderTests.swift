@@ -228,18 +228,6 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func signedOut_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.signedOut(
-            authenticationService:MockAuthenticationService(),
-            analyticsService: MockAnalyticsService(),
-            completion: { }
-        )
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
-        #expect(rootView != nil)
-    }
-
-    @Test
     func signInError_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.signInError(
@@ -266,7 +254,7 @@ struct ViewControllerBuilderTests {
             completion: { }
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView = (result as? HostingViewController<WelcomeOnboardingView>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -309,6 +297,32 @@ struct ViewControllerBuilderTests {
         )
 
         let rootView = (result as? HostingViewController<TouchIdSettingsView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chat_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chat(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+
+        let rootView = (result as? HostingViewController<ChatView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatError_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatError(
+            error: ChatError.apiUnavailable,
+            action: { }
+        )
+        
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 }

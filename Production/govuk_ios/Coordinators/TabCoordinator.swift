@@ -7,20 +7,24 @@ typealias TabItemCoordinator = BaseCoordinator
 & TabItemCoordinatorInterface
 
 protocol TabItemCoordinatorInterface {
-    func didReselectTab()
+    var isEnabled: Bool { get }
+    func didSelectTab(_ selectedTabIndex: Int,
+                      previousTabIndex: Int)
 }
 
 class TabCoordinator: BaseCoordinator,
                       UITabBarControllerDelegate {
     private lazy var homeCoordinator = coordinatorBuilder.home
     private lazy var settingsCoordinator = coordinatorBuilder.settings
+    private lazy var chatCoordinator = coordinatorBuilder.chat
     private var currentTabIndex = 0
 
     private var coordinators: [TabItemCoordinator] {
         [
             homeCoordinator,
+            chatCoordinator,
             settingsCoordinator
-        ]
+        ].filter { $0.isEnabled }
     }
 
     private lazy var tabController = UITabBarController.govUK
@@ -41,13 +45,6 @@ class TabCoordinator: BaseCoordinator,
         guard let url = url
         else { return }
         handleDeeplink(url: url)
-    }
-
-    override func childDidFinish(_ child: BaseCoordinator) {
-        super.childDidFinish(child)
-        if child is SettingsCoordinator {
-            finish()
-        }
     }
 
     private func handleDeeplink(url: URL) {
@@ -103,9 +100,10 @@ class TabCoordinator: BaseCoordinator,
         guard let title = viewController.tabBarItem.title else { return }
         let event = AppEvent.tabNavigation(text: title)
         analyticsService.track(event: event)
-        if currentTabIndex == tabBarController.selectedIndex {
-            coordinators[currentTabIndex].didReselectTab()
-        }
+        coordinators[tabBarController.selectedIndex].didSelectTab(
+            tabBarController.selectedIndex,
+            previousTabIndex: currentTabIndex
+        )
         currentTabIndex = tabBarController.selectedIndex
     }
 }

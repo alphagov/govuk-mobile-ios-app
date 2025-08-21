@@ -10,7 +10,9 @@ struct ChatServiceClientTests {
     @Test
     func askQuestion_newConversation_sendsExpectedRequest() {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         let expectedQuestion = "expected question?"
 
         sut.askQuestion(expectedQuestion,
@@ -25,7 +27,9 @@ struct ChatServiceClientTests {
     @Test
     func askQuestion_existingConversation_sendsExpectedRequest() {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         let expectedQuestion = "expected question?"
         let expectedConversationId = "conversationId"
 
@@ -41,7 +45,9 @@ struct ChatServiceClientTests {
     @Test
     func askQuestion_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         let expectedQuestion = "expected question?"
         mockAPI._stubbedSendResponse = .success(Self.startConversationResponse)
 
@@ -61,7 +67,9 @@ struct ChatServiceClientTests {
     @Test
     func fetchHistory_sendsExpectedRequest() {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         let expectedConversationId = "expected_conversation_id"
 
         sut.fetchHistory(conversationId: expectedConversationId,
@@ -73,7 +81,9 @@ struct ChatServiceClientTests {
     @Test
     func fetchHistory_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         mockAPI._stubbedSendResponse = .success(Self.historyResponse)
 
         let chatHistoryResult = await withCheckedContinuation { continuation in
@@ -95,7 +105,9 @@ struct ChatServiceClientTests {
     @Test
     func fetchAnswer_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         mockAPI._stubbedSendResponse = .success(Self.answerResponse)
 
         let fetchAnswerResult = await withCheckedContinuation { continuation in
@@ -116,7 +128,9 @@ struct ChatServiceClientTests {
     @Test
     func fetchAnswer_pending_returnsExpectedResult() async throws {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         mockAPI._stubbedSendResponse = .success(Self.emptyAnswerResponse)
 
         let fetchAnswerResult = await withCheckedContinuation { continuation in
@@ -137,7 +151,9 @@ struct ChatServiceClientTests {
     @Test
     func askQuestion_validationError_returnsExpectedError() async throws {
         let mockAPI = MockAPIServiceClient()
-        let sut = ChatServiceClient(serviceClient: mockAPI)
+        let mockAuthenticationService = MockAuthenticationService()
+        let sut = ChatServiceClient(serviceClient: mockAPI,
+                                    authenticationService: mockAuthenticationService)
         mockAPI._stubbedSendResponse = .failure(ChatError.validationError)
 
         let fetchAnswerResult = await withCheckedContinuation { continuation in

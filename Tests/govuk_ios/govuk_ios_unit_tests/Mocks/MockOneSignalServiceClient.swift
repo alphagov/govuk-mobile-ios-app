@@ -5,7 +5,7 @@ import OneSignalFramework
 
 @testable import govuk_ios
 
-class MockOneSignal: OneSignalInterface {
+class MockOneSignalServiceClient: OneSignalServiceClient {
     static func setConsentRequired(_ required: Bool) {
 
     }

@@ -112,7 +112,7 @@ extension Container {
                 notificationCenter: UNUserNotificationCenter.current(),
                 configService: self.appConfigService.resolve(),
                 userDefaultsService: self.userDefaultsService(),
-                oneSignalInterface: OneSignal.self
+                oneSignalServiceClient: OneSignal.self
             )
         }
     }

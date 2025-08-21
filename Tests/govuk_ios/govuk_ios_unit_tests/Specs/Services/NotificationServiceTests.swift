@@ -32,7 +32,7 @@ class NotificationServiceTests {
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(await !sut.shouldRequestPermission)
     }
@@ -47,7 +47,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: mockConfig,
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(sut.isFeatureEnabled)
     }
@@ -61,7 +61,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: mockConfig,
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(!sut.isFeatureEnabled)
     }
@@ -76,7 +76,7 @@ class NotificationServiceTests {
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(await sut.permissionState == .authorized)
     }
@@ -91,7 +91,7 @@ class NotificationServiceTests {
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(await sut.permissionState == .denied)
     }
@@ -106,7 +106,7 @@ class NotificationServiceTests {
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -121,7 +121,7 @@ class NotificationServiceTests {
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -136,7 +136,7 @@ class NotificationServiceTests {
             notificationCenter: notificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         #expect(await sut.permissionState == .notDetermined)
     }
@@ -148,7 +148,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
         let onClickAction: ((URL) -> Void)? = { _ in }
         sut.addClickListener(
@@ -164,7 +164,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         var didOnClickAction = false
@@ -185,7 +185,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         var didOnClickAction = false
@@ -206,7 +206,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         var didOnClickAction = false
@@ -227,7 +227,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: MockUserDefaultsService(),
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         var result: URL?
@@ -249,7 +249,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         sut.acceptConsent()
@@ -265,7 +265,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -283,7 +283,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -301,7 +301,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         sut.rejectConsent()
@@ -317,7 +317,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -335,7 +335,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -353,7 +353,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -371,7 +371,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -389,7 +389,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         sut.toggleHasGivenConsent()
@@ -405,7 +405,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: true, forKey: .notificationsConsentGranted)
@@ -423,7 +423,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockDefaults.set(bool: false, forKey: .notificationsConsentGranted)
@@ -441,7 +441,7 @@ class NotificationServiceTests {
             notificationCenter: MockUserNotificationCenter(),
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         sut.requestPermissions(completion: nil)
@@ -458,7 +458,7 @@ class NotificationServiceTests {
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockUserNotificationCenter._stubbedAuthorizationStatus = .authorized
@@ -479,7 +479,7 @@ class NotificationServiceTests {
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockUserNotificationCenter._stubbedAuthorizationStatus = .authorized
@@ -500,7 +500,7 @@ class NotificationServiceTests {
             notificationCenter: mockUserNotificationCenter,
             configService: MockAppConfigService(),
             userDefaultsService: mockDefaults,
-            oneSignalInterface: MockOneSignal.self
+            oneSignalServiceClient: MockOneSignalServiceClient.self
         )
 
         mockUserNotificationCenter._stubbedAuthorizationStatus = .denied

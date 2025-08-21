@@ -74,9 +74,7 @@ extension Container {
             APIServiceClient(
                 baseUrl: self.appEnvironmentService().chatBaseURL,
                 session: self.urlSession(),
-                requestBuilder: ChatRequestBuilder(
-                    authenticationToken: self.appEnvironmentService().chatAuthToken
-                ),
+                requestBuilder: RequestBuilder(),
                 responseHandler: ChatResponseHandler()
             )
         }

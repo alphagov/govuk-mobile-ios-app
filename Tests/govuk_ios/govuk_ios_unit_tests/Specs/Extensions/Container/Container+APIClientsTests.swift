@@ -9,9 +9,9 @@ import Factory
 struct Container_APIClientTests {
     @Test
     func searchAPIClient_createsExpectedRequest() async {
-        Container.shared.reset()
-        Container.shared.urlSession.register { URLSession.mock }
-        let sut = Container.shared.searchAPIClient()
+        let container = Container()
+        container.urlSession.register { URLSession.mock }
+        let sut = container.searchAPIClient()
         return await withCheckedContinuation { continuation in
             MockURLProtocol.requestHandlers["https://search.service.gov.uk/v0_1/search.json"] = { request in
                 let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)
@@ -41,12 +41,12 @@ struct Container_APIClientTests {
 
     @Test
     func revokeTokenAPIClient_createsExpectedRequest() async throws {
-        Container.shared.reset()
-        Container.shared.urlSession.register { URLSession.mock }
-        Container.shared.appEnvironmentService.register {
+        let container = Container()
+        container.urlSession.register { URLSession.mock }
+        container.appEnvironmentService.register {
             MockAppEnvironmentService()
         }
-        let sut = Container.shared.revokeTokenAPIClient()
+        let sut = container.revokeTokenAPIClient()
         return await withCheckedContinuation { continuation in
             MockURLProtocol.requestHandlers["https://www.govuk-auth.com/oauth2/revoke"] = { request in
                 let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)
@@ -79,12 +79,12 @@ struct Container_APIClientTests {
     @Test
     func chatAPIClient_createsExpectedRequest() async throws {
         let mockAppEnvironment = MockAppEnvironmentService()
-        Container.shared.reset()
-        Container.shared.urlSession.register { URLSession.mock }
-        Container.shared.appEnvironmentService.register {
+        let container = Container()
+        container.urlSession.register { URLSession.mock }
+        container.appEnvironmentService.register {
             mockAppEnvironment
         }
-        let sut = Container.shared.chatAPIClient()
+        let sut = container.chatAPIClient()
 
         let responseData = await withCheckedContinuation { continuation in
             var returnData: Data? = nil
@@ -110,4 +110,3 @@ struct Container_APIClientTests {
         #expect(query == "{\n  \"user_question\" : \"What is your quest?\"\n}")
     }
 }
-

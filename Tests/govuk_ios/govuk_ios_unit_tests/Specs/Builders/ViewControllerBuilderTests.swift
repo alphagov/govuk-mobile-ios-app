@@ -71,10 +71,6 @@ struct ViewControllerBuilderTests {
 
     @Test
     func recentActivity_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        Container.shared.coreDataRepository.register {
-            coreData
-        }
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
             analyticsService: MockAnalyticsService(),
@@ -89,10 +85,6 @@ struct ViewControllerBuilderTests {
 
     @Test
     func notificationSettings_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        Container.shared.coreDataRepository.register {
-            coreData
-        }
         let subject = ViewControllerBuilder()
         let result = subject.notificationSettings(
             analyticsService: MockAnalyticsService(),

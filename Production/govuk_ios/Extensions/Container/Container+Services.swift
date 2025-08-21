@@ -8,6 +8,7 @@ import SecureStore
 import Firebase
 import FirebaseCrashlytics
 import FirebaseAppCheck
+import OneSignalFramework
 
 extension Container {
     var activityService: Factory<ActivityServiceInterface> {
@@ -110,7 +111,8 @@ extension Container {
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current(),
                 configService: self.appConfigService.resolve(),
-                userDefaultsService: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService(),
+                oneSignalServiceClient: OneSignal.self
             )
         }
     }

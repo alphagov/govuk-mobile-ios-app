@@ -204,6 +204,7 @@ extension Container {
         }
     }
 
+    @MainActor
     var chatService: Factory<ChatServiceInterface> {
         Factory(self) {
             ChatService(

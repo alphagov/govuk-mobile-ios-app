@@ -53,11 +53,12 @@ class SceneDelegate: UIResponder,
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
+        let appBackgrounded = "App Backgrounded"
         let appEvent = AppEvent.function(
-            text: "App Backgrounded",
+            text: appBackgrounded,
             type: "AppBackgrounded",
-            section: "App Backgrounded",
-            action: "App Backgrounded"
+            section: appBackgrounded,
+            action: appBackgrounded
         )
         analyticsService.track(event: appEvent)
     }

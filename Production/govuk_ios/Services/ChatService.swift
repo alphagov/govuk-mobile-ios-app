@@ -20,6 +20,9 @@ final class ChatService: ChatServiceInterface {
     private let chatRepository: ChatRepositoryInterface
     private let configService: AppConfigServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
+    private let authenticationService: AuthenticationServiceInterface
+    private let maxAuthRetryCount = 1
+    private var authRetryCount = 0
 
     private var pollingInterval: TimeInterval {
         configService.chatPollIntervalSeconds
@@ -40,11 +43,13 @@ final class ChatService: ChatServiceInterface {
     init(serviceClient: ChatServiceClientInterface,
          chatRepository: ChatRepositoryInterface,
          configService: AppConfigServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface) {
+         userDefaultsService: UserDefaultsServiceInterface,
+         authenticationService: AuthenticationServiceInterface) {
         self.serviceClient = serviceClient
         self.chatRepository = chatRepository
         self.configService = configService
         self.userDefaultsService = userDefaultsService
+        self.authenticationService = authenticationService
     }
 
     func setChatOnboarded() {
@@ -62,6 +67,18 @@ final class ChatService: ChatServiceInterface {
                     self?.setConversationId(pendingQuestion.conversationId)
                     completion(.success(pendingQuestion))
                 case .failure(let error):
+                    if case .authenticationError = error {
+                        Task { [weak self] in
+                            guard let self = self else { return }
+                            await self.refreshAndRetry(
+                                {
+                                    self.askQuestion(question,
+                                                     completion: completion)
+                                },
+                                completion: completion
+                            )
+                        }
+                    }
                     completion(.failure(error))
                 }
             }
@@ -90,6 +107,19 @@ final class ChatService: ChatServiceInterface {
                     }
                     completion(.success(answer))
                 case .failure(let error):
+                    if case .authenticationError = error {
+                        Task { [weak self] in
+                            guard let self = self else { return }
+                            await self.refreshAndRetry(
+                                {
+                                    self.pollForAnswer(pendingQuestion,
+                                                       completion: completion)
+                                },
+                                completion: completion
+                            )
+                        }
+                        return
+                    }
                     completion(.failure(error))
                 }
             }
@@ -106,6 +136,19 @@ final class ChatService: ChatServiceInterface {
                 case .success(let history):
                     completion(.success(history))
                 case .failure(let error):
+                    if case .authenticationError = error {
+                        Task { [weak self] in
+                            guard let self = self else { return }
+                            await self.refreshAndRetry(
+                                {
+                                    self.chatHistory(conversationId: conversationId,
+                                                     completion: completion)
+                                },
+                                completion: completion
+                            )
+                        }
+                        return
+                    }
                     completion(.failure(error))
                 }
             })
@@ -118,5 +161,27 @@ final class ChatService: ChatServiceInterface {
     private func setConversationId(_ conversationId: String?) {
         guard conversationId != currentConversationId else { return }
         chatRepository.saveConversation(conversationId)
+    }
+
+    private func refreshAndRetry<T: Codable>(
+        _ retryRequest: (() -> Void),
+        completion: @escaping (Result<T, ChatError>
+        ) -> Void) async {
+        guard authRetryCount < maxAuthRetryCount else {
+            Task { @MainActor in
+                completion(.failure(.apiUnavailable))
+            }
+            return
+        }
+        let refreshResult = await authenticationService.tokenRefreshRequest()
+        switch refreshResult {
+        case .success:
+            retryRequest()
+        case .failure:
+            Task { @MainActor in
+                completion(.failure(.apiUnavailable))
+            }
+        }
+        authRetryCount += 1
     }
 }

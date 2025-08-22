@@ -960,6 +960,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		161D84D22E5886C800391FBC /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D052CA322E0B06F00048F98A /* ChatCoordinator.swift */,
+				16D186A72E462D86006ACC7A /* ChatConsentOnboardingCoordinator.swift */,
+				16D186A52E461DBB006ACC7A /* ChatInfoOnboardingCoordinator.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		163800FD2C99DAB900C3DDD1 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1426,14 +1436,10 @@
 		5D962D5E2C29BD0B0038BC0A /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				16D186A72E462D86006ACC7A /* ChatConsentOnboardingCoordinator.swift */,
-				16D186A52E461DBB006ACC7A /* ChatInfoOnboardingCoordinator.swift */,
 				1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */,
 				5D962D572C29BD0B0038BC0A /* BaseCoordinator.swift */,
-				D052CA322E0B06F00048F98A /* ChatCoordinator.swift */,
 				4E4089872DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift */,
 				D093BA662CB3CBEC004F489B /* EditTopicsCoordinator.swift */,
-				5DFB488B2DE9F7F600B41CDA /* Launch */,
 				166248232C4AC91E009F7E58 /* HomeCoordinator.swift */,
 				1677D4012E00643000FB1E56 /* LocalAuthenticationSettingsCoordinator.swift */,
 				4EB7D8502DB85A33002B6765 /* LocalAuthorityServiceCoordinator.swift */,
@@ -1447,6 +1453,8 @@
 				5D962D5D2C29BD0B0038BC0A /* TabCoordinator.swift */,
 				5D54F4742CC84A5B00A3B6A7 /* TopicDetailsCoordinator.swift */,
 				B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */,
+				161D84D22E5886C800391FBC /* Chat */,
+				5DFB488B2DE9F7F600B41CDA /* Launch */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";

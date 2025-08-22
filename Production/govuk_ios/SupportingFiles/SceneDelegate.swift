@@ -1,10 +1,12 @@
 import Foundation
 import UIKit
 import Factory
+import GOVKit
 
 class SceneDelegate: UIResponder,
                      UIWindowSceneDelegate {
     @Inject(\.inactivityService) private var inactivityService: InactivityServiceInterface
+    @Inject(\.analyticsService) private var analyticsService: AnalyticsServiceInterface
 
     var window: UIWindow?
 
@@ -48,5 +50,16 @@ class SceneDelegate: UIResponder,
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         appCoordinator.start(url: nil)
+    }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        let appBackgrounded = "App Backgrounded"
+        let appEvent = AppEvent.function(
+            text: appBackgrounded,
+            type: "AppBackgrounded",
+            section: appBackgrounded,
+            action: appBackgrounded
+        )
+        analyticsService.track(event: appEvent)
     }
 }

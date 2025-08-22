@@ -11,7 +11,6 @@ struct ChatViewModelTests {
     @Test
     func askQuestion_success_createsCorrectCellModels() async {
         let mockChatService = MockChatService()
-
         mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
         mockChatService._stubbedAnswerResults = [.success(.answeredAnswer)]
         let sut = ChatViewModel(
@@ -31,9 +30,11 @@ struct ChatViewModelTests {
     }
 
     @Test
-    func askQuestion_tracksEvent() async {
+    func askQuestion_tracksAskAndResponseEvents() async {
         let mockChatService = MockChatService()
         let mockAnalyticsService = MockAnalyticsService()
+        mockChatService._stubbedQuestionResult = .success(.pendingQuestion)
+        mockChatService._stubbedAnswerResults = [.success(.answeredAnswer)]
         let sut = ChatViewModel(
             chatService: mockChatService,
             analyticsService: mockAnalyticsService,
@@ -43,10 +44,14 @@ struct ChatViewModelTests {
         sut.latestQuestion = "This is the question"
         sut.askQuestion()
 
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(
             mockAnalyticsService
                 ._trackedEvents.first?.params?["text"] as? String == "This is the question"
+        )
+        #expect(
+            mockAnalyticsService
+                ._trackedEvents.last?.params?["text"] as? String == "Chat Question Answer Returned"
         )
     }
 
@@ -323,7 +328,7 @@ struct ChatViewModelTests {
     }
 
     @Test
-    func trackMenuClearChatDenyTap_tracksEvent() {
+    func trackChatViewDisappeared_tracksEvent() {
         let mockAnalyticsService = MockAnalyticsService()
         let sut = ChatViewModel(
             chatService: MockChatService(),
@@ -332,8 +337,8 @@ struct ChatViewModelTests {
             handleError: { _ in }
         )
 
-        sut.trackMenuClearChatDenyTap()
+        sut.trackChatViewDisappeared()
         #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "No, not now")
+        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Chat Disappeared")
     }
 }

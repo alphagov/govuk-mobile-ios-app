@@ -32,6 +32,7 @@ struct HomeViewModel {
     var widgets: [WidgetView] {
         get async {
             await [
+                alertBanner,
                 localAuthorityWidget,
                 // notificationsWidget, Removed until dismissable cards introduced
                 // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
@@ -40,6 +41,31 @@ struct HomeViewModel {
                 storedLocalAuthorityWidget
             ].compactMap { $0 }
         }
+    }
+
+    @MainActor
+    private var alertBanner: WidgetView? {
+        guard let alert = configService.alertBanner,
+              UserDefaults.standard.value(forKey: alert.id) == nil
+        else { return nil }
+
+        let viewModel = AlertBannerWidgetViewModel(
+            alert: alert,
+            dismiss: {
+                UserDefaults.standard.set(Date.now, forKey: alert.id)
+                UserDefaults.standard.synchronize()
+            }
+        )
+        let content = AlertBannerWidgetView(
+            viewModel: viewModel
+        )
+        let widget = WidgetView(useContentAccessibilityInfo: true)
+        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        widget.addContent(hostingViewController.view)
+        return widget
     }
 
     @MainActor

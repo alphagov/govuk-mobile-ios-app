@@ -6,6 +6,7 @@ protocol AppConfigServiceInterface {
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion)
     func isFeatureEnabled(key: Feature) -> Bool
     var chatPollIntervalSeconds: TimeInterval { get }
+    var alertBanner: AlertBanner? { get }
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
@@ -15,6 +16,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     private var retryInterval: Int?
 
     var chatPollIntervalSeconds: TimeInterval = 3.0
+    var alertBanner: AlertBanner? = .init(id: "sdfs", body: "sdfsdf", link: nil)
 
     init(appConfigServiceClient: AppConfigServiceClientInterface) {
         self.appConfigServiceClient = appConfigServiceClient

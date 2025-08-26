@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import GOVKit
+import SwiftUI
 
 class HomeViewController: BaseViewController {
     private var searchViewController: SearchViewController!
@@ -77,7 +78,17 @@ class HomeViewController: BaseViewController {
         homeContentViewController = HomeContentViewController(
             viewModel: viewModel
         )
-        displayController(homeContentViewController)
+        let navModel = NavigationCardModel(
+            dissmissAction: {},
+            image: "",
+            title: "title",
+            primaryDescritpion: "description",
+            secondaryDescription: "secondDescription",
+            link: ""
+        )
+        let navCard = NavigationCard(type: .leftImageCard, model: navModel)
+        let hosting = UIHostingController(rootView: navCard)
+        displayController(hosting)
     }
 
     private func configureSearchBar() {

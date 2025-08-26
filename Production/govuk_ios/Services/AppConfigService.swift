@@ -16,7 +16,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     private var retryInterval: Int?
 
     var chatPollIntervalSeconds: TimeInterval = 3.0
-    var alertBanner: AlertBanner? = .init(id: "sdfs", body: "sdfsdf", link: nil)
+    var alertBanner: AlertBanner?
 
     init(appConfigServiceClient: AppConfigServiceClientInterface) {
         self.appConfigServiceClient = appConfigServiceClient
@@ -46,6 +46,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         )
         updateSearch(urlString: config.searchApiUrl)
         updateChatPollInterval(config.chatPollIntervalSeconds)
+        alertBanner = config.alertBanner
     }
 
     private func updateChatPollInterval(_ interval: Int?) {

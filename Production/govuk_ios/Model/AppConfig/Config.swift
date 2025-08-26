@@ -9,7 +9,7 @@ struct Config: Decodable {
     let searchApiUrl: String?
     var authenticationIssuerBaseUrl: String?
     let chatPollIntervalSeconds: Int?
-    let emergencyAlert: AlertBanner?
+    let alertBanner: AlertBanner?
 }
 
 struct AlertBanner: Decodable {

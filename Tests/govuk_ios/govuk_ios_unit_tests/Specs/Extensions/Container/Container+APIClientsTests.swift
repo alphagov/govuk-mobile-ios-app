@@ -78,11 +78,10 @@ struct Container_APIClientTests {
 
     @Test
     func chatAPIClient_createsExpectedRequest() async throws {
-        let mockAppEnvironment = MockAppEnvironmentService()
         let container = Container()
         container.urlSession.register { URLSession.mock }
         container.appEnvironmentService.register {
-            mockAppEnvironment
+            MockAppEnvironmentService()
         }
         let sut = container.chatAPIClient()
 
@@ -91,12 +90,13 @@ struct Container_APIClientTests {
             MockURLProtocol.requestHandlers["https://www.govuk-chat.com/conversation/"] = { request in
                 #expect(request.httpMethod == "POST")
                 #expect(request.allHTTPHeaderFields?["Content-Type"] == "application/json")
-                #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer \(mockAppEnvironment.chatAuthToken)")
+                #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer testToken")
                 returnData = request.bodyStreamData
                 return (.arrangeSuccess, nil, nil)
             }
 
-            let request = GOVRequest.askQuestion("What is your quest?")
+            let request = GOVRequest.askQuestion("What is your quest?",
+                                                 accessToken: "testToken")
 
             sut.send(
                 request: request,

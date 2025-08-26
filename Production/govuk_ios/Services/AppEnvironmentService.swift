@@ -8,7 +8,6 @@ protocol AppEnvironmentServiceInterface {
     var authenticationAuthorizeURL: URL { get }
     var authenticationTokenURL: URL { get }
     var chatBaseURL: URL { get }
-    var chatAuthToken: String { get }
 }
 
 enum AppEnvironmentKey: String {
@@ -18,7 +17,6 @@ enum AppEnvironmentKey: String {
     case authenticationBaseURL = "AUTHENTICATION_BASE_URL"
     case tokenBaseURL = "TOKEN_BASE_URL"
     case chatBaseURL = "CHAT_BASE_URL"
-    case chatAuthToken = "CHAT_AUTH_TOKEN"
 }
 
 struct AppEnvironmentService: AppEnvironmentServiceInterface {
@@ -73,14 +71,7 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
     }
 
     var chatBaseURL: URL {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = string(for: .chatBaseURL)
-        components.path = "/api/v0"
-        return components.url!
-    }
-
-    var chatAuthToken: String {
-        string(for: .chatAuthToken)
+        let urlString = string(for: .chatBaseURL)
+        return URL(string: urlString)!
     }
 }

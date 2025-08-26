@@ -8,22 +8,20 @@ struct APIServiceClientTests_Chat {
 
     @Test
     func send_chatRequest_passesExpectedValues() async {
-        let mockAppEnvironment = MockAppEnvironmentService()
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
             session: URLSession.mock,
-            requestBuilder: ChatRequestBuilder(
-                authenticationToken: mockAppEnvironment.chatAuthToken
-            ),
+            requestBuilder: RequestBuilder(),
             responseHandler: ChatResponseHandler()
 
         )
-        let request = GOVRequest.askQuestion("What is your quest?")
+        let request = GOVRequest.askQuestion("What is your quest?",
+                                             accessToken: "testToken")
 
         MockURLProtocol.requestHandlers["https://www.google.com/conversation/"] = { request in
             #expect(request.httpMethod == "POST")
             #expect(request.allHTTPHeaderFields?["Content-Type"] == "application/json")
-            #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer \(mockAppEnvironment.chatAuthToken)")
+            #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer testToken")
             return (.arrangeSuccess, nil, nil)
         }
 

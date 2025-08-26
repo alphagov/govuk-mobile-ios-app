@@ -17,6 +17,11 @@ final class MockChatService: ChatServiceInterface {
         _stubbedIsEnabled
     }
 
+    var _stubbedRetryAction: (() -> Void)?
+    var retryAction: (() -> Void)? {
+        _stubbedRetryAction
+    }
+
     var _stubbedQuestionResult: ChatQuestionResult?
     func askQuestion(_ question: String,
                      completion: @escaping (ChatQuestionResult) -> Void) {

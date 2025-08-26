@@ -32,7 +32,7 @@ struct AlertBannerWidgetView: View {
     let viewModel: AlertBannerWidgetViewModel
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .top) {
                 Text(viewModel.body)
                     .font(.govUK.body)
                     .foregroundColor(Color(UIColor.govUK.text.primary))

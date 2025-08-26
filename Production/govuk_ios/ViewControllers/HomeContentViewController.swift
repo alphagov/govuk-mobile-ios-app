@@ -2,10 +2,12 @@ import Foundation
 import UIKit
 import UIComponents
 import GOVKit
+import Combine
 
 class HomeContentViewController: BaseViewController,
                                  UIScrollViewDelegate {
     private let viewModel: HomeViewModel
+    private var cancellables = Set<AnyCancellable>()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -45,6 +47,17 @@ class HomeContentViewController: BaseViewController,
         configureUI()
         configureConstraints()
         scrollView.delegate = self
+        viewModel.$widgets.sink { _ in
+            DispatchQueue.main.async {
+                self.updateWidgets()
+            }
+        }
+        receiveValue: { _ in
+            DispatchQueue.main.async {
+                self.updateWidgets()
+            }
+        }
+        .store(in: &cancellables)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -80,16 +93,18 @@ class HomeContentViewController: BaseViewController,
 
     private func reloadWidgets() {
         Task {
-            self.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            let widgets = await viewModel.widgets
-            DispatchQueue.main.async {
-                widgets.lazy.forEach(self.stackView.addArrangedSubview)
-                if let lastWidget = self.stackView.arrangedSubviews.last {
-                    self.stackView.setCustomSpacing(32, after: lastWidget)
-                }
-                self.stackView.addArrangedSubview(self.crownLogoImageView)
-            }
+            await viewModel.reloadWidgets()
         }
+    }
+
+    private func updateWidgets() {
+        self.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        let widgets = viewModel.widgets
+        widgets.lazy.forEach(self.stackView.addArrangedSubview)
+        if let lastWidget = self.stackView.arrangedSubviews.last {
+            self.stackView.setCustomSpacing(32, after: lastWidget)
+        }
+        self.stackView.addArrangedSubview(self.crownLogoImageView)
     }
 
     func scrollToTop() {

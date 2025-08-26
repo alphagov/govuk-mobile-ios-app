@@ -65,7 +65,7 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-    func pollForAnswer(_ question: PendingQuestion) {
+    private func pollForAnswer(_ question: PendingQuestion) {
         requestInFlight = true
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
@@ -84,6 +84,7 @@ class ChatViewModel: ObservableObject {
             case .failure(let error):
                 handleError(error)
             }
+            trackAnswerResponse()
         }
     }
 
@@ -209,6 +210,16 @@ class ChatViewModel: ObservableObject {
         analyticsService.track(event: event)
     }
 
+    func trackChatViewDisappeared() {
+        let event = AppEvent.function(
+            text: "Chat Disappeared",
+            type: "ChatDisappeared",
+            section: "Chat",
+            action: "Chat Disappeared"
+        )
+        analyticsService.track(event: event)
+    }
+
     private func trackMenuAboutTap() {
         let event = AppEvent.buttonNavigation(
             text: String.chat.localized("aboutMenuTitle"),
@@ -220,6 +231,16 @@ class ChatViewModel: ObservableObject {
     private func trackAskQuestionSubmission() {
         let event = AppEvent.chatAskQuestion(
             text: latestQuestion
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackAnswerResponse() {
+        let event = AppEvent.function(
+            text: "Chat Question Answer Returned",
+            type: "ChatQuestionAnswerReturned",
+            section: "Chat",
+            action: "Chat Question Answer Returned"
         )
         analyticsService.track(event: event)
     }

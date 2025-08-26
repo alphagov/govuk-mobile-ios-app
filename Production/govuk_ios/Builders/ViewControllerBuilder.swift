@@ -534,5 +534,23 @@ class ViewControllerBuilder {
         viewController.isModalInPresentation = true
         return viewController
     }
+
+    func chatOptIn(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatOptInViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            completionAction: completionAction
+        )
+        let containerView = ChatOptInView(
+            viewModel: viewModel
+        )
+        return HostingViewController(
+            rootView: containerView
+        )
+    }
 }
 // swiftlint:enable file_length

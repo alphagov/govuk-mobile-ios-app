@@ -10,6 +10,7 @@ protocol ChatServiceInterface {
     func clearHistory()
     func setChatOnboarded()
 
+    var retryAction: (() -> Void)? { get }
     var chatOnboardingSeen: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
@@ -20,9 +21,8 @@ final class ChatService: ChatServiceInterface {
     private let chatRepository: ChatRepositoryInterface
     private let configService: AppConfigServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
-    private let authenticationService: AuthenticationServiceInterface
-    private let maxAuthRetryCount = 1
-    private var authRetryCount = 0
+
+    private(set) var retryAction: (() -> Void)?
 
     private var pollingInterval: TimeInterval {
         configService.chatPollIntervalSeconds
@@ -43,13 +43,11 @@ final class ChatService: ChatServiceInterface {
     init(serviceClient: ChatServiceClientInterface,
          chatRepository: ChatRepositoryInterface,
          configService: AppConfigServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface,
-         authenticationService: AuthenticationServiceInterface) {
+         userDefaultsService: UserDefaultsServiceInterface) {
         self.serviceClient = serviceClient
         self.chatRepository = chatRepository
         self.configService = configService
         self.userDefaultsService = userDefaultsService
-        self.authenticationService = authenticationService
     }
 
     func setChatOnboarded() {
@@ -58,6 +56,10 @@ final class ChatService: ChatServiceInterface {
 
     func askQuestion(_ question: String,
                      completion: @escaping (ChatQuestionResult) -> Void) {
+        retryAction = {
+            self.askQuestion(question,
+                             completion: completion)
+        }
         serviceClient.askQuestion(
             question,
             conversationId: currentConversationId,
@@ -67,18 +69,6 @@ final class ChatService: ChatServiceInterface {
                     self?.setConversationId(pendingQuestion.conversationId)
                     completion(.success(pendingQuestion))
                 case .failure(let error):
-                    if case .authenticationError = error {
-                        Task { [weak self] in
-                            guard let self = self else { return }
-                            await self.refreshAndRetry(
-                                {
-                                    self.askQuestion(question,
-                                                     completion: completion)
-                                },
-                                completion: completion
-                            )
-                        }
-                    }
                     completion(.failure(error))
                 }
             }
@@ -87,6 +77,10 @@ final class ChatService: ChatServiceInterface {
 
     func pollForAnswer(_ pendingQuestion: PendingQuestion,
                        completion: @escaping (ChatAnswerResult) -> Void) {
+        retryAction = {
+            self.pollForAnswer(pendingQuestion,
+                             completion: completion)
+        }
         serviceClient.fetchAnswer(
             conversationId: pendingQuestion.conversationId,
             questionId: pendingQuestion.id,
@@ -107,19 +101,6 @@ final class ChatService: ChatServiceInterface {
                     }
                     completion(.success(answer))
                 case .failure(let error):
-                    if case .authenticationError = error {
-                        Task { [weak self] in
-                            guard let self = self else { return }
-                            await self.refreshAndRetry(
-                                {
-                                    self.pollForAnswer(pendingQuestion,
-                                                       completion: completion)
-                                },
-                                completion: completion
-                            )
-                        }
-                        return
-                    }
                     completion(.failure(error))
                 }
             }
@@ -129,6 +110,10 @@ final class ChatService: ChatServiceInterface {
     func chatHistory(conversationId: String,
                      completion: @escaping (ChatHistoryResult) -> Void) {
         setConversationId(conversationId)
+        retryAction = {
+            self.chatHistory(conversationId: conversationId,
+                             completion: completion)
+        }
         serviceClient.fetchHistory(
             conversationId: conversationId,
             completion: { result in
@@ -136,19 +121,6 @@ final class ChatService: ChatServiceInterface {
                 case .success(let history):
                     completion(.success(history))
                 case .failure(let error):
-                    if case .authenticationError = error {
-                        Task { [weak self] in
-                            guard let self = self else { return }
-                            await self.refreshAndRetry(
-                                {
-                                    self.chatHistory(conversationId: conversationId,
-                                                     completion: completion)
-                                },
-                                completion: completion
-                            )
-                        }
-                        return
-                    }
                     completion(.failure(error))
                 }
             })
@@ -161,27 +133,5 @@ final class ChatService: ChatServiceInterface {
     private func setConversationId(_ conversationId: String?) {
         guard conversationId != currentConversationId else { return }
         chatRepository.saveConversation(conversationId)
-    }
-
-    private func refreshAndRetry<T: Codable>(
-        _ retryRequest: (() -> Void),
-        completion: @escaping (Result<T, ChatError>
-        ) -> Void) async {
-        guard authRetryCount < maxAuthRetryCount else {
-            Task { @MainActor in
-                completion(.failure(.apiUnavailable))
-            }
-            return
-        }
-        let refreshResult = await authenticationService.tokenRefreshRequest()
-        switch refreshResult {
-        case .success:
-            retryRequest()
-        case .failure:
-            Task { @MainActor in
-                completion(.failure(.apiUnavailable))
-            }
-        }
-        authRetryCount += 1
     }
 }

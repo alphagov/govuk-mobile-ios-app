@@ -42,10 +42,10 @@ class ChatViewModel: ObservableObject {
         scrollToBottom = true
         requestInFlight = true
         chatService.askQuestion(localQuestion) { [weak self] result in
-            self?.cellModels.removeLast()
             self?.requestInFlight = false
             switch result {
             case .success(let pendingQuestion):
+                self?.cellModels.removeLast()
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
                 self?.latestQuestionID = pendingQuestion.id

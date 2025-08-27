@@ -9,7 +9,6 @@ class ChatCoordinator: TabItemCoordinator {
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
     private let cancelOnboardingAction: () -> Void
-    private var lastErrorWasAuthError = false
     var isShowingError = false
     private lazy var chatViewController: UIViewController = {
         viewControllerBuilder.chat(
@@ -92,9 +91,8 @@ class ChatCoordinator: TabItemCoordinator {
 
     private func handleError(_ error: ChatError) {
         if error == .authenticationError &&
-            !lastErrorWasAuthError {
-            lastErrorWasAuthError = true
-            self.reauthenticate()
+            !chatService.isRetryAction {
+            reauthenticate()
         } else {
             let viewController = viewControllerBuilder.chatError(
                 error: error,
@@ -113,7 +111,6 @@ class ChatCoordinator: TabItemCoordinator {
             )
             set(viewController, animated: false)
             isShowingError = true
-            lastErrorWasAuthError = false
         }
     }
 

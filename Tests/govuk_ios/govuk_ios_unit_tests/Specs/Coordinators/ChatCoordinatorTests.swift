@@ -225,15 +225,16 @@ struct ChatCoordinatorTests {
             cancelOnboardingAction: { }
         )
 
-        var didRetry = false
-        mockChatService._stubbedRetryAction = { didRetry = true }
+        mockChatService._stubbedRetryAction = {
+            mockChatService._stubbedIsRetryAction = true
+        }
         sut.start(url: nil)
         mockViewControllerBuilder._receivedHandleChatError?(ChatError.authenticationError)
         mockCoordinatorBuilder._receivedPeriAuthCompletion?()
-        #expect(didRetry)
         #expect(mockPeriAuthCoordinator._startCalled)
         mockViewControllerBuilder._receivedHandleChatError?(ChatError.authenticationError)
         let firstViewController = navigationController.viewControllers.first
+        #expect(mockChatService.isRetryAction)
         #expect(firstViewController == expectedInfoViewController)
     }
 

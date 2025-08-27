@@ -10,6 +10,8 @@ protocol ChatServiceInterface {
     func clearHistory()
     func setChatOnboarded()
 
+    var retryAction: (() -> Void)? { get }
+    var isRetryAction: Bool { get }
     var chatOnboardingSeen: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
@@ -21,6 +23,8 @@ final class ChatService: ChatServiceInterface {
     private let configService: AppConfigServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
 
+    private(set) var retryAction: (() -> Void)?
+    private(set) var isRetryAction: Bool = false
     private var pollingInterval: TimeInterval {
         configService.chatPollIntervalSeconds
     }
@@ -53,12 +57,18 @@ final class ChatService: ChatServiceInterface {
 
     func askQuestion(_ question: String,
                      completion: @escaping (ChatQuestionResult) -> Void) {
+        retryAction = {
+            self.isRetryAction = true
+            self.askQuestion(question,
+                             completion: completion)
+        }
         serviceClient.askQuestion(
             question,
             conversationId: currentConversationId,
             completion: { [weak self] result in
                 switch result {
                 case .success(let pendingQuestion):
+                    self?.isRetryAction = false
                     self?.setConversationId(pendingQuestion.conversationId)
                     completion(.success(pendingQuestion))
                 case .failure(let error):
@@ -70,6 +80,11 @@ final class ChatService: ChatServiceInterface {
 
     func pollForAnswer(_ pendingQuestion: PendingQuestion,
                        completion: @escaping (ChatAnswerResult) -> Void) {
+        retryAction = {
+            self.isRetryAction = true
+            self.pollForAnswer(pendingQuestion,
+                             completion: completion)
+        }
         serviceClient.fetchAnswer(
             conversationId: pendingQuestion.conversationId,
             questionId: pendingQuestion.id,
@@ -79,6 +94,7 @@ final class ChatService: ChatServiceInterface {
                 }
                 switch result {
                 case .success(let answer):
+                    isRetryAction = false
                     guard answer.answerAvailable else {
                         DispatchQueue.main.asyncAfter(
                             deadline: .now() + (self.pollingInterval)
@@ -99,11 +115,17 @@ final class ChatService: ChatServiceInterface {
     func chatHistory(conversationId: String,
                      completion: @escaping (ChatHistoryResult) -> Void) {
         setConversationId(conversationId)
+        retryAction = {
+            self.isRetryAction = true
+            self.chatHistory(conversationId: conversationId,
+                             completion: completion)
+        }
         serviceClient.fetchHistory(
             conversationId: conversationId,
-            completion: { result in
+            completion: { [weak self] result in
                 switch result {
                 case .success(let history):
+                    self?.isRetryAction = false
                     completion(.success(history))
                 case .failure(let error):
                     completion(.failure(error))

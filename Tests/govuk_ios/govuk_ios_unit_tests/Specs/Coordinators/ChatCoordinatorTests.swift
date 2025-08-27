@@ -143,17 +143,75 @@ struct ChatCoordinatorTests {
     }
 
     @Test
-    func handleApiUnavailable_showsWebView() throws {
+    func handlePageNotFoundError_clearsHistory_and_showsChatView() throws {
         let mockChatService = MockChatService()
         mockChatService.setChatOnboarded()
+        mockChatService._clearHistoryCalled = false
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
-        let mockSafariCoordinator = MockBaseCoordinator()
-        mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
-
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedChatViewController = UIViewController()
         let expectedInfoViewController = UIViewController()
         mockViewControllerBuilder._stubbedChatController = expectedChatViewController
+        mockViewControllerBuilder._stubbedChatErrorController = expectedInfoViewController
+        let navigationController = UINavigationController()
+        let sut = ChatCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+
+        sut.start(url: nil)
+        mockViewControllerBuilder._receivedHandleChatError?(ChatError.pageNotFound)
+        let firstViewController = navigationController.viewControllers.first
+        #expect(firstViewController == expectedInfoViewController)
+        mockViewControllerBuilder._receivedChatErrorAction?()
+        let nextViewController = navigationController.viewControllers.first
+        #expect(nextViewController == expectedChatViewController)
+        #expect(mockChatService._clearHistoryCalled)
+    }
+
+    @Test
+    func authenticationError_retriesRequest() throws {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockPeriAuthCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
+        let navigationController = UINavigationController()
+        let sut = ChatCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+
+        var didRetry = false
+        mockChatService._stubbedRetryAction = { didRetry = true }
+        sut.start(url: nil)
+        mockViewControllerBuilder._receivedHandleChatError?(ChatError.authenticationError)
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        #expect(didRetry)
+        #expect(mockPeriAuthCoordinator._startCalled)
+    }
+
+    @Test
+    func second_authenticationError_showsInfoView() throws {
+        let mockChatService = MockChatService()
+        mockChatService.setChatOnboarded()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        let mockPeriAuthCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
+
+        let expectedInfoViewController = UIViewController()
         mockViewControllerBuilder._stubbedChatErrorController = expectedInfoViewController
 
         let navigationController = UINavigationController()
@@ -167,13 +225,19 @@ struct ChatCoordinatorTests {
             cancelOnboardingAction: { }
         )
 
+        mockChatService._stubbedRetryAction = {
+            mockChatService._stubbedIsRetryAction = true
+        }
         sut.start(url: nil)
-        mockViewControllerBuilder._receivedHandleChatError?(ChatError.apiUnavailable)
+        mockViewControllerBuilder._receivedHandleChatError?(ChatError.authenticationError)
+        mockCoordinatorBuilder._receivedPeriAuthCompletion?()
+        #expect(mockPeriAuthCoordinator._startCalled)
+        mockViewControllerBuilder._receivedHandleChatError?(ChatError.authenticationError)
         let firstViewController = navigationController.viewControllers.first
+        #expect(mockChatService.isRetryAction)
         #expect(firstViewController == expectedInfoViewController)
-        mockViewControllerBuilder._receivedChatOpenURLAction?(URL(string: "https://www.gov.uk")!)
-        #expect(mockSafariCoordinator._startCalled)
     }
+
 
     @Test
     func didSelectTab_isShowingError_setsChatViewController() {

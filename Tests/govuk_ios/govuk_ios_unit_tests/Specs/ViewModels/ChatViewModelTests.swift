@@ -95,7 +95,7 @@ struct ChatViewModelTests {
 
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 0)
+        #expect(sut.cellModels.count == 1)
         #expect(chatError == .pageNotFound)
     }
 
@@ -143,7 +143,7 @@ struct ChatViewModelTests {
         #expect(sut.errorText == nil)
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 0)
+        #expect(sut.cellModels.count == 1)
         #expect(chatError == nil)
         #expect(sut.errorText != nil)
         #expect(!sut.latestQuestion.isEmpty)

@@ -22,6 +22,7 @@ enum ChatError: LocalizedError {
     case apiUnavailable
     case decodingError
     case validationError
+    case authenticationError
 }
 
 struct ChatServiceClient: ChatServiceClientInterface {

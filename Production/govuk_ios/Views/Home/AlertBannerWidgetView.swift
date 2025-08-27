@@ -37,7 +37,7 @@ struct AlertBannerWidgetView: View {
                     .font(.govUK.body)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                 Spacer()
-                Image(systemName: "x.circle")
+                Image(systemName: "xmark")
                     .onTapGesture {
                         viewModel.dismiss()
                     }

@@ -31,9 +31,12 @@ struct HomeViewModelTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
-        let widgets = await subject.widgets
+
+        await subject.reloadWidgets()
+        let widgets = subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
         #expect(widgets.count == 2)
@@ -69,9 +72,10 @@ struct HomeViewModelTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
-        let widgets = await subject.widgets
+        let widgets = subject.widgets
 
         #expect(widgets.count == 0)
     }

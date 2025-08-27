@@ -30,7 +30,8 @@ struct ViewControllerBuilderTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             topicWidgetViewModel: viewModel,
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
 
         let actions = ViewControllerBuilder.HomeActions(

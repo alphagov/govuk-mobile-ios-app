@@ -19,6 +19,7 @@ class HomeViewModel: ObservableObject {
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
     let localAuthorityService: LocalAuthorityServiceInterface
+    let userDefaultService: UserDefaultsServiceInterface
     @Published var widgets: [WidgetView] = []
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -35,7 +36,8 @@ class HomeViewModel: ObservableObject {
          urlOpener: URLOpener,
          searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface,
-         localAuthorityService: LocalAuthorityServiceInterface) {
+         localAuthorityService: LocalAuthorityServiceInterface,
+         userDefaultService: UserDefaultsServiceInterface) {
         self.analyticsService = analyticsService
         self.configService = configService
         self.notificationService = notificationService
@@ -51,6 +53,7 @@ class HomeViewModel: ObservableObject {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
+        self.userDefaultService = userDefaultService
     }
 
 
@@ -79,14 +82,13 @@ class HomeViewModel: ObservableObject {
     @MainActor
     private var alertBanner: WidgetView? {
         guard let alert = configService.alertBanner,
-              UserDefaults.standard.value(forKey: alert.id) == nil
+              userDefaultService.hasSeen(banner: alert) == false
         else { return nil }
 
         let viewModel = AlertBannerWidgetViewModel(
             alert: alert,
             dismiss: {
-                UserDefaults.standard.set(Date.now, forKey: alert.id)
-                UserDefaults.standard.synchronize()
+                self.userDefaultService.markSeen(banner: alert)
                 Task {
                     await self.reloadWidgets()
                 }

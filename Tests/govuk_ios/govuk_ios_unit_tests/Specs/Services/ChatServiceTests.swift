@@ -323,7 +323,7 @@ final class ChatServiceTests {
         )
         mockConfigService.features = []
 
-        #expect(sut.isEnabled == false)
+        #expect(sut.isEnabled == true)
     }
 
     @Test

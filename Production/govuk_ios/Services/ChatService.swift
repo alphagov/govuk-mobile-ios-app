@@ -34,7 +34,7 @@ final class ChatService: ChatServiceInterface {
     }
 
     var isEnabled: Bool {
-        false
+        true
     }
 
     var chatOnboardingSeen: Bool {

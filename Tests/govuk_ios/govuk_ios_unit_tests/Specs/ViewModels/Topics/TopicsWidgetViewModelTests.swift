@@ -31,7 +31,6 @@ struct TopicsWidgetViewModelTests {
                 .dropFirst()
                 .sink(
                     receiveValue: { error in
-                        print(error)
                         continuation.resume(returning: error)
                         cancellables.removeAll()
                     }

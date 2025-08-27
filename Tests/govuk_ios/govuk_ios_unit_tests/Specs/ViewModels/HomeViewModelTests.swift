@@ -36,9 +36,6 @@ struct HomeViewModelTests {
         let widgets = subject.widgets
 
         #expect((widgets as Any) is [HomepageWidget])
-        for item in widgets {
-            print(item)
-        }
         #expect(widgets.count == 1)
     }
 

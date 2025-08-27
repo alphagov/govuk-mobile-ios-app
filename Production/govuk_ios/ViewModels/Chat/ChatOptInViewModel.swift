@@ -3,15 +3,19 @@ import GOVKit
 import UIComponents
 
 class ChatOptInViewModel {
-    private var analyticsService: AnalyticsServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
     private let completionAction: () -> Void
 
+    let openURLAction: (URL) -> Void
+
     init(analyticsService: AnalyticsServiceInterface,
          chatService: ChatServiceInterface,
+         openURLAction: @escaping (URL) -> Void,
          completionAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.chatService = chatService
+        self.openURLAction = openURLAction
         self.completionAction = completionAction
     }
 

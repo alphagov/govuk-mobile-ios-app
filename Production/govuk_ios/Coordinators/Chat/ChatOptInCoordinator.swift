@@ -4,6 +4,7 @@ import GOVKit
 
 class ChatOptInCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
+    private let coordinatorBuilder: CoordinatorBuilder
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
     private let completionAction: () -> Void
@@ -11,16 +12,19 @@ class ChatOptInCoordinator: BaseCoordinator {
         viewControllerBuilder.chatOptIn(
             analyticsService: analyticsService,
             chatService: chatService,
+            openURLAction: presentWebView,
             completionAction: completionAction
         )
     }()
 
     init(navigationController: UINavigationController,
          viewControllerBuilder: ViewControllerBuilder,
+         coordinatorBuilder: CoordinatorBuilder,
          analyticsService: AnalyticsServiceInterface,
          chatService: ChatServiceInterface,
          completionAction: @escaping () -> Void) {
         self.viewControllerBuilder = viewControllerBuilder
+        self.coordinatorBuilder = coordinatorBuilder
         self.analyticsService = analyticsService
         self.chatService = chatService
         self.completionAction = completionAction
@@ -33,5 +37,14 @@ class ChatOptInCoordinator: BaseCoordinator {
             return
         }
         set(chatOptInViewController)
+    }
+
+    private func presentWebView(url: URL) {
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url,
+            fullScreen: true
+        )
+        start(coordinator)
     }
 }

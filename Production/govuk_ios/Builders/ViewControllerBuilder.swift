@@ -538,11 +538,13 @@ class ViewControllerBuilder {
     func chatOptIn(
         analyticsService: AnalyticsServiceInterface,
         chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
         completionAction: @escaping () -> Void
     ) -> UIViewController {
         let viewModel = ChatOptInViewModel(
             analyticsService: analyticsService,
             chatService: chatService,
+            openURLAction: openURLAction,
             completionAction: completionAction
         )
         let containerView = ChatOptInView(

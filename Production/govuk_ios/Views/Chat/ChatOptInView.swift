@@ -64,33 +64,40 @@ struct ChatOptInView: View {
                 .foregroundColor(Color(UIColor.govUK.text.primary))
                 .font(Font.govUK.body)
                 .multilineTextAlignment(.center)
-            VStack(alignment: .center, spacing: 22) {
-                HStack {
-                    Spacer()
-                    Text(String.chat.localized("optInPrivacyLinkTitle"))
-                        .foregroundColor(Color(UIColor.govUK.text.link))
-                        .font(Font.govUK.body)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .foregroundColor(Color(UIColor.govUK.text.link))
-                        .fontWeight(.semibold)
-                }
-                HStack(alignment: .center) {
-                    Spacer()
-                    Text(String.chat.localized("optInTermsLinkTitle"))
-                        .foregroundColor(Color(UIColor.govUK.text.link))
-                        .font(Font.govUK.body)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .foregroundColor(Color(UIColor.govUK.text.link))
-                        .fontWeight(.semibold)
-                }
-            }
-            .padding(.top, 16)
+            linksStackView
+                .padding(.top, 16)
         }
         .padding(16)
+    }
+
+    private var linksStackView: some View {
+        VStack(alignment: .center, spacing: 22) {
+            linkView(
+                text: String.chat.localized("optInPrivacyLinkTitle"),
+                link: Constants.API.govukBaseUrl
+            )
+            linkView(
+                text: String.chat.localized("optInTermsLinkTitle"),
+                link: Constants.API.govukBaseUrl
+            )
+        }
+    }
+
+    private func linkView(text: String, link: URL) -> some View {
+        Button(
+            action: { viewModel.openURLAction(link) },
+            label: {
+                Spacer()
+                Text(text)
+                    .foregroundColor(Color(UIColor.govUK.text.link))
+                    .font(Font.govUK.body)
+                    .multilineTextAlignment(.center)
+                Spacer()
+                Image(systemName: "arrow.up.right")
+                    .foregroundColor(Color(UIColor.govUK.text.link))
+                    .fontWeight(.semibold)
+            }
+        )
     }
 }
 

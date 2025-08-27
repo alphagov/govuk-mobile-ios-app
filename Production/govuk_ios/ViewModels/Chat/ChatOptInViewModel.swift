@@ -24,19 +24,21 @@ class ChatOptInViewModel {
         return .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
-                self?.completionAction()
+                self?.chatService.setChatOptedIn(true)
                 self?.trackAction(primaryButtonTitle)
+                self?.completionAction()
             }
         )
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        var secondaryButtonTitle = String.chat.localized("optInSecondaryButtonTitle")
+        let secondaryButtonTitle = String.chat.localized("optInSecondaryButtonTitle")
         return .init(
             localisedTitle: secondaryButtonTitle,
             action: { [weak self] in
-                self?.completionAction()
+                self?.chatService.setChatOptedIn(false)
                 self?.trackAction(secondaryButtonTitle)
+                self?.completionAction()
             }
         )
     }

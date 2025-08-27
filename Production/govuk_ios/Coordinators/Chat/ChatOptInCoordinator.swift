@@ -28,6 +28,10 @@ class ChatOptInCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
+        guard chatService.chatOptedIn == nil else {
+            completionAction()
+            return
+        }
         set(chatOptInViewController)
     }
 }

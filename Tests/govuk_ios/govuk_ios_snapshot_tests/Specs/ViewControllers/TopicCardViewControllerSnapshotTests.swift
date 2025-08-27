@@ -27,7 +27,6 @@ final class TopicCardSnapshotTestst: SnapshotTestCase {
     }
 
     private func viewController() -> UIViewController {
-
         let model = Topic(context: coreData.viewContext)
         model.title = "test"
         model.topicDescription = "test description"

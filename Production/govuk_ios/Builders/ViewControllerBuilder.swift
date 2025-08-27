@@ -57,7 +57,8 @@ class ViewControllerBuilder {
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
             openURLAction: actions.openURLAction,
-            openAction: actions.openSearchAction)
+            openAction: actions.openSearchAction
+        )
         return HomeViewController(
             viewModel: viewModel
         )

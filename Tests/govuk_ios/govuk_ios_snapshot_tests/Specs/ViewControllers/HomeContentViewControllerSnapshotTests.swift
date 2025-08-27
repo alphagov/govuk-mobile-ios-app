@@ -2,7 +2,6 @@ import Foundation
 import XCTest
 import GOVKit
 import UIKit
-import SwiftUI
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios

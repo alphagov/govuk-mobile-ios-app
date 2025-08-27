@@ -45,6 +45,7 @@ struct VerticalNavigationCard: View,
                     .background(Color.blue)
             }.overlay(alignment: .topTrailing) {
                 Image(systemName: "xmark")
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
                     .padding(4)
             }
             VStack(alignment: .leading) {
@@ -56,17 +57,13 @@ struct VerticalNavigationCard: View,
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                 Text(model.secondaryDescription)
                     .font(Font.govUK.body)
-                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
                 Text(model.link)
                     .font(Font.govUK.body)
                     .foregroundColor(Color(UIColor.govUK.text.link))
             }
-        }.background(Color(uiColor: UIColor.green))
-            .roundedBorder(
-                cornerRadius: 10,
-                borderColor: Color(uiColor: .blue),
-                borderWidth: 1
-            )
+        }.background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+            .roundedBorder()
             .padding()
     }
 }
@@ -85,23 +82,22 @@ struct PlainNavigationCard: View,
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                 Text(model.secondaryDescription)
                     .font(Font.govUK.body)
-                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
                 Text(model.link)
                     .font(Font.govUK.body)
                     .foregroundColor(Color(UIColor.govUK.text.link))
             }
-            Button(action: {}, label: {
+            Button(action: {
+                model.dismissAction()
+            }, label: {
                 VStack {
                     Image(systemName: "xmark")
+                        .foregroundColor(Color(UIColor.govUK.text.secondary))
                 }.padding()
             })
         }.padding()
-            .background(Color(uiColor: UIColor.green))
-            .roundedBorder(
-                cornerRadius: 10,
-                borderColor: Color(uiColor: .blue),
-                borderWidth: 1
-            )
+            .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+            .roundedBorder(borderColor: .clear)
             .padding()
     }
 }
@@ -115,11 +111,10 @@ struct LeftNavigationCard: View,
                 Image(model.image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 210)
-                    .background(Color.blue)
+                    .frame(width: 100, height: 188)
                 VStack(alignment: .leading) {
                     HStack(alignment: .firstTextBaseline) {
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 6) {
                             Text(model.title)
                                 .font(Font.govUK.bodySemibold)
                                 .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -127,27 +122,26 @@ struct LeftNavigationCard: View,
                                 .font(Font.govUK.body)
                                 .foregroundColor(Color(UIColor.govUK.text.primary))
                             Text(model.secondaryDescription)
-                                .foregroundColor(Color(UIColor.govUK.text.primary))
+                                .foregroundColor(Color(UIColor.govUK.text.secondary))
                                 .font(Font.govUK.body)
                             Text(model.link)
                                 .font(Font.govUK.body)
                                 .foregroundColor(Color(UIColor.govUK.text.link))
                         }
-                        Button(action: {}, label: {
+                        Button(action: {
+                            model.dismissAction()
+                        }, label: {
                             VStack {
                                 Image(systemName: "xmark")
+                                    .foregroundColor(Color(UIColor.govUK.text.secondary))
                             }.padding()
                         })
                     }.padding(2)
                 }
             }
         }
-        .background(Color(uiColor: UIColor.green))
-        .roundedBorder(
-            cornerRadius: 10,
-            borderColor: Color(uiColor: .blue),
-            borderWidth: 1
-        )
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+        .roundedBorder(borderColor: .clear)
         .padding()
     }
 }
@@ -166,7 +160,7 @@ struct RightNavigationCard: View,
                         .font(Font.govUK.body)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                     Text(model.secondaryDescription)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
+                        .foregroundColor(Color(UIColor.govUK.text.secondary))
                         .font(Font.govUK.body)
                     Text(model.link)
                         .font(Font.govUK.body)
@@ -179,27 +173,25 @@ struct RightNavigationCard: View,
                         .frame(width: 100, height: 210)
                         .background(Color.blue)
                 }.overlay(alignment: .topTrailing) {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        model.dismissAction()
+                    }, label: {
                         VStack {
                             Image(systemName: "xmark")
+                                .foregroundColor(Color(UIColor.govUK.text.secondary))
                         }.padding()
                     })
                     }
                 }
             }
-
-        .background(Color(uiColor: UIColor.green))
-        .roundedBorder(
-            cornerRadius: 10,
-            borderColor: Color(uiColor: .blue),
-            borderWidth: 1
-        )
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+        .roundedBorder(borderColor: .clear)
         .padding()
     }
 }
 
 struct NavigationCardModel {
-    let dissmissAction: () -> Void
+    let dismissAction: () -> Void
     let image: String
     let title: String
     let primaryDescritpion: String

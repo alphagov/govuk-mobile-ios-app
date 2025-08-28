@@ -87,6 +87,7 @@ class HomeViewModel: ObservableObject {
 
         let viewModel = AlertBannerWidgetViewModel(
             alert: alert,
+            urlOpener: urlOpener,
             dismiss: {
                 self.userDefaultService.markSeen(banner: alert)
                 Task {

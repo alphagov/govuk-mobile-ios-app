@@ -14,7 +14,7 @@ protocol ChatServiceInterface {
     var retryAction: (() -> Void)? { get }
     var isRetryAction: Bool { get }
     var chatOnboardingSeen: Bool { get }
-    var chatOptedIn: Any? { get }
+    var chatOptedIn: Bool? { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
 }
@@ -43,8 +43,8 @@ final class ChatService: ChatServiceInterface {
         userDefaultsService.bool(forKey: .chatOnboardingSeen)
     }
 
-    var chatOptedIn: Any? {
-        userDefaultsService.value(forKey: .chatOptedIn)
+    var chatOptedIn: Bool? {
+        userDefaultsService.value(forKey: .chatOptedIn) as? Bool
     }
 
     init(serviceClient: ChatServiceClientInterface,

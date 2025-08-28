@@ -344,4 +344,18 @@ struct ViewControllerBuilderTests {
         let rootView = (result as? HostingViewController<ChatConsentOnboardingView>)?.rootView
         #expect(rootView != nil)
     }
+
+    @Test
+    func chatOptIn_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatOptIn(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            openURLAction: { _ in },
+            completionAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<ChatOptInView>)?.rootView
+        #expect(rootView != nil)
+    }
 }

@@ -210,16 +210,6 @@ class ChatViewModel: ObservableObject {
         analyticsService.track(event: event)
     }
 
-    func trackChatViewDisappeared() {
-        let event = AppEvent.function(
-            text: "Chat Disappeared",
-            type: "ChatDisappeared",
-            section: "Chat",
-            action: "Chat Disappeared"
-        )
-        analyticsService.track(event: event)
-    }
-
     private func trackMenuAboutTap() {
         let event = AppEvent.buttonNavigation(
             text: String.chat.localized("aboutMenuTitle"),

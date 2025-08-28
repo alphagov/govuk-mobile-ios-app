@@ -47,7 +47,6 @@ struct ChatView: View {
         }
         .onDisappear {
             backgroundOpacity = 0.25
-            viewModel.trackChatViewDisappeared()
         }
         .onTapGesture {
             textAreaFocused = false

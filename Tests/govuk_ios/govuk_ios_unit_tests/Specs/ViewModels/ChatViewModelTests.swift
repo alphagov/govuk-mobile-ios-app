@@ -326,19 +326,4 @@ struct ChatViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Yes, clear chat")
     }
-
-    @Test
-    func trackChatViewDisappeared_tracksEvent() {
-        let mockAnalyticsService = MockAnalyticsService()
-        let sut = ChatViewModel(
-            chatService: MockChatService(),
-            analyticsService: mockAnalyticsService,
-            openURLAction: { _ in },
-            handleError: { _ in }
-        )
-
-        sut.trackChatViewDisappeared()
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Chat Disappeared")
-    }
 }

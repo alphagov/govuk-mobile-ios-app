@@ -67,11 +67,9 @@ struct ChatActionView: View {
             }
             .accessibilityElement(children: .contain)
             .padding([.horizontal, .bottom])
-
             sendButtonView
         }
     }
-
     private var errorView: some View {
         VStack(spacing: 0) {
             if let error = viewModel.errorText {

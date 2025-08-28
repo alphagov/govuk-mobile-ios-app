@@ -13,30 +13,30 @@ struct HomeViewModelTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
-            topicWidgetViewModel: topicsViewModel,
-            localAuthorityAction: { },
-            editLocalAuthorityAction: { },
-            feedbackAction: { },
-            notificationsAction: { },
-            recentActivityAction: { },
-            openURLAction: { _ in },
-            openAction: { _ in },
+            topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
         )
-        let widgets = await subject.widgets
 
-        #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 2)
+        let widgets = subject.widgets
+
+        #expect((widgets as Any) is [HomepageWidget])
+        #expect(widgets.count == 1)
     }
 
     @Test
@@ -44,36 +44,69 @@ struct HomeViewModelTests {
         let configService = MockAppConfigService()
         configService.features = []
 
-        let mockNotificationService = MockNotificationService()
-        mockNotificationService._stubbedShouldRequestPermission = false
-
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
             allTopicsAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: configService,
-            notificationService: mockNotificationService,
-            topicWidgetViewModel: topicsViewModel,
-            localAuthorityAction: { },
-            editLocalAuthorityAction: { },
-            feedbackAction: { },
-            notificationsAction: { },
-            recentActivityAction: { },
-            openURLAction: { _ in },
-            openAction: { _ in },
+            notificationService: MockNotificationService(),
+            topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
         )
-        let widgets = await subject.widgets
+        let widgets = subject.widgets
 
         #expect(widgets.count == 0)
     }
 
+    @Test
+    func trackScreen_trackCorrectScreen() {
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            allTopicsAction: { }
+        )
+
+        let mockAnalyticsService = MockAnalyticsService()
+        let subject = HomeViewModel(
+            analyticsService: mockAnalyticsService,
+            configService: MockAppConfigService(),
+            notificationService: MockNotificationService(),
+            topicsWidgetViewModel: topicsViewModel,
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
+        )
+        let view = HomeContentView(
+            viewModel: subject
+        )
+        subject.trackScreen(screen: view)
+
+        let screens = mockAnalyticsService._trackScreenReceivedScreens
+        #expect(screens.count == 1)
+        #expect(screens.first?.trackingName == "Homepage")
+        #expect(screens.first?.trackingClass == "HomeContentView")
+    }
 }

@@ -89,6 +89,7 @@ class ChatViewModel: ObservableObject {
     }
 
     func loadHistory() {
+        guard cellModels.isEmpty else { return }
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
             appendIntroMessages()

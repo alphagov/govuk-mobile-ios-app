@@ -15,10 +15,11 @@ class JailbreakCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard jailbreakDetectionService.isJailbroken() else {
-            return dismissAction()
-        }
-        setJailbreakDetectedViewController()
+        dismissAction()
+//        guard jailbreakDetectionService.isJailbroken() else {
+//            return dismissAction()
+//        }
+//        setJailbreakDetectedViewController()
     }
 
     private func setJailbreakDetectedViewController() {

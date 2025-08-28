@@ -64,6 +64,10 @@ struct VerticalNavigationCard: View,
             }
         }.background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
             .roundedBorder()
+            .shadow(
+                color: Color(uiColor: UIColor.govUK.fills.surfaceBackground),
+                radius: 0, x: 0, y: 3
+            )
             .padding()
     }
 }
@@ -98,6 +102,12 @@ struct PlainNavigationCard: View,
         }.padding()
             .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
             .roundedBorder(borderColor: .clear)
+            .shadow(
+                color: Color(
+                    uiColor: UIColor.govUK.fills.surfaceBackground
+                ),
+                radius: 0, x: 0, y: 3
+            )
             .padding()
     }
 }
@@ -111,7 +121,7 @@ struct LeftNavigationCard: View,
                 Image(model.image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 188)
+//                    .frame(width: 100, height: 188)
                 VStack(alignment: .leading) {
                     HStack(alignment: .firstTextBaseline) {
                         VStack(alignment: .leading, spacing: 6) {
@@ -142,6 +152,7 @@ struct LeftNavigationCard: View,
         }
         .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
         .roundedBorder(borderColor: .clear)
+        .shadow(color: Color(uiColor: UIColor.green), radius: 0, x: 0, y: 3)
         .padding()
     }
 }
@@ -152,7 +163,7 @@ struct RightNavigationCard: View,
     var body: some View {
         VStack {
             HStack(alignment: .top) {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 6) {
                     Text(model.title)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .font(Font.govUK.bodySemibold)
@@ -171,7 +182,6 @@ struct RightNavigationCard: View,
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 210)
-                        .background(Color.blue)
                 }.overlay(alignment: .topTrailing) {
                     Button(action: {
                         model.dismissAction()
@@ -186,6 +196,7 @@ struct RightNavigationCard: View,
             }
         .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
         .roundedBorder(borderColor: .clear)
+        .shadow(color: Color(uiColor: UIColor.green), radius: 0, x: 0, y: 3)
         .padding()
     }
 }

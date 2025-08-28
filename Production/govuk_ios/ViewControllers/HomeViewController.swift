@@ -79,14 +79,14 @@ class HomeViewController: BaseViewController {
             viewModel: viewModel
         )
         let navModel = NavigationCardModel(
-            dissmissAction: {},
+            dismissAction: {},
             image: "",
             title: "Card title",
             primaryDescritpion: "Card description that may go over multiple lines.",
             secondaryDescription: "Card secondary text that may go over multiple lines.",
             link: "Call to action text"
         )
-        let navCard = NavigationCard(type: .leftImageCard, model: navModel)
+        let navCard = NavigationCard(type: .rightImageCard, model: navModel)
         let hosting = UIHostingController(rootView: navCard)
         displayController(hosting)
     }

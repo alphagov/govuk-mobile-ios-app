@@ -98,7 +98,7 @@ class HomeViewModel: ObservableObject {
         let content = AlertBannerWidgetView(
             viewModel: viewModel
         )
-        let widget = WidgetView(useContentAccessibilityInfo: true)
+        let widget = WidgetView()
         widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
         let hostingViewController = HostingViewController(
             rootView: content

@@ -10,31 +10,47 @@ struct AlertBannerWidgetView: View {
                 Text(viewModel.body)
                     .font(.govUK.body)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .accessibilitySortPriority(100)
                 Spacer()
-                Image(systemName: "xmark")
-                    .onTapGesture {
-                        viewModel.dismiss()
-                    }
+                Button {
+                    viewModel.dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                }
+                .accessibilityLabel(
+                    String.home.localized("dismissAlertBannerAccessibilityLabel")
+                )
+                .foregroundColor(Color(UIColor.govUK.text.secondary))
+                .accessibilitySortPriority(0)
             }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(viewModel.body)
-            .accessibilityAddTraits(.isLink)
-            .accessibilityHint(String.common.localized("openWebLinkHint"))
-            .padding(.bottom, 4)
+            Divider()
+                .overlay(Color(cgColor: UIColor.govUK.strokes.cardBlue.cgColor))
+                .padding(.vertical, 6)
             if let titlelinkTitle = viewModel.linkTitle,
                !titlelinkTitle.isEmpty {
                 HStack {
-                    Text(titlelinkTitle)
-                        .font(.govUK.body)
-                        .foregroundColor(Color(UIColor.govUK.text.link))
-                        .multilineTextAlignment(.leading)
+                    linkButton(title: titlelinkTitle)
                     Spacer()
                 }
             }
         }
         .background(Color(UIColor.govUK.fills.surfaceCardBlue))
-        .onTapGesture {
-            self.viewModel.open()
-        }
+    }
+
+    @ViewBuilder
+    private func linkButton(title: String) -> some View {
+        Button(
+            action: {
+                self.viewModel.open()
+            }, label: {
+                Text(title)
+                    .font(.govUK.body)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color(UIColor.govUK.text.link))
+            }
+        )
+        .accessibilityAddTraits(.isLink)
+        .accessibilityHint(String.common.localized("openWebLinkHint"))
+        .accessibilitySortPriority(50)
     }
 }

@@ -99,7 +99,6 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             viewModel.errorText = String.chat.localized("validationErrorText")
         }
         
-        viewModel.cellModels.append(.gettingAnswer)
         let view = ChatView(viewModel: viewModel)
             .environment(\.isTesting, true)
         return view

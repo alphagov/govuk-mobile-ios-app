@@ -82,7 +82,7 @@ class HomeViewModel: ObservableObject {
     @MainActor
     private var alertBanner: WidgetView? {
         guard let alert = configService.alertBanner,
-              userDefaultService.hasSeen(banner: alert) == false
+              !userDefaultService.hasSeen(banner: alert)
         else { return nil }
 
         let viewModel = AlertBannerWidgetViewModel(

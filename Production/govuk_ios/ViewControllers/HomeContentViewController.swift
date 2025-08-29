@@ -52,11 +52,6 @@ class HomeContentViewController: BaseViewController,
                 self.updateWidgets()
             }
         }
-        receiveValue: { _ in
-            DispatchQueue.main.async {
-                self.updateWidgets()
-            }
-        }
         .store(in: &cancellables)
     }
 
@@ -98,13 +93,13 @@ class HomeContentViewController: BaseViewController,
     }
 
     private func updateWidgets() {
-        self.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         let widgets = viewModel.widgets
-        widgets.lazy.forEach(self.stackView.addArrangedSubview)
-        if let lastWidget = self.stackView.arrangedSubviews.last {
-            self.stackView.setCustomSpacing(32, after: lastWidget)
+        widgets.lazy.forEach(stackView.addArrangedSubview)
+        if let lastWidget = stackView.arrangedSubviews.last {
+            stackView.setCustomSpacing(32, after: lastWidget)
         }
-        self.stackView.addArrangedSubview(self.crownLogoImageView)
+        stackView.addArrangedSubview(crownLogoImageView)
     }
 
     func scrollToTop() {

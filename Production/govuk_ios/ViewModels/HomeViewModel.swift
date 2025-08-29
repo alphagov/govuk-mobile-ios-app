@@ -3,7 +3,7 @@ import UIKit
 import GOVKit
 import UIComponents
 
-struct HomeViewModel {
+class HomeViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
@@ -19,6 +19,43 @@ struct HomeViewModel {
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
     let localAuthorityService: LocalAuthorityServiceInterface
+    let userDefaultService: UserDefaultsServiceInterface
+    @Published var widgets: [WidgetView] = []
+
+    init(analyticsService: AnalyticsServiceInterface,
+         configService: AppConfigServiceInterface,
+         notificationService: NotificationServiceInterface,
+         topicWidgetViewModel: TopicsWidgetViewModel,
+         localAuthorityAction: @escaping () -> Void,
+         editLocalAuthorityAction: @escaping () -> Void,
+         feedbackAction: @escaping () -> Void,
+         notificationsAction: @escaping () -> Void,
+         recentActivityAction: @escaping () -> Void,
+         openURLAction: @escaping (URL) -> Void,
+         openAction: @escaping (SearchItem) -> Void,
+         urlOpener: URLOpener,
+         searchService: SearchServiceInterface,
+         activityService: ActivityServiceInterface,
+         localAuthorityService: LocalAuthorityServiceInterface,
+         userDefaultService: UserDefaultsServiceInterface) {
+        self.analyticsService = analyticsService
+        self.configService = configService
+        self.notificationService = notificationService
+        self.topicWidgetViewModel = topicWidgetViewModel
+        self.localAuthorityAction = localAuthorityAction
+        self.editLocalAuthorityAction = editLocalAuthorityAction
+        self.feedbackAction = feedbackAction
+        self.notificationsAction = notificationsAction
+        self.recentActivityAction = recentActivityAction
+        self.openURLAction = openURLAction
+        self.openAction = openAction
+        self.urlOpener = urlOpener
+        self.searchService = searchService
+        self.activityService = activityService
+        self.localAuthorityService = localAuthorityService
+        self.userDefaultService = userDefaultService
+    }
+
 
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
@@ -29,17 +66,45 @@ struct HomeViewModel {
         openAction: openAction
     )
 
-    var widgets: [WidgetView] {
-        get async {
-            await [
-                localAuthorityWidget,
-                // notificationsWidget, Removed until dismissable cards introduced
-                // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
-                recentActivityWidget,
-                topicsWidget,
-                storedLocalAuthorityWidget
-            ].compactMap { $0 }
-        }
+    func reloadWidgets() async {
+        widgets =
+        await [
+            alertBanner,
+            localAuthorityWidget,
+            // notificationsWidget, Removed until dismissable cards introduced
+            // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
+            recentActivityWidget,
+            topicsWidget,
+            storedLocalAuthorityWidget
+        ].compactMap { $0 }
+    }
+
+    @MainActor
+    private var alertBanner: WidgetView? {
+        guard let alert = configService.alertBanner,
+              !userDefaultService.hasSeen(banner: alert)
+        else { return nil }
+
+        let viewModel = AlertBannerWidgetViewModel(
+            alert: alert,
+            urlOpener: urlOpener,
+            dismiss: {
+                self.userDefaultService.markSeen(banner: alert)
+                Task {
+                    await self.reloadWidgets()
+                }
+            }
+        )
+        let content = AlertBannerWidgetView(
+            viewModel: viewModel
+        )
+        let widget = WidgetView()
+        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        widget.addContent(hostingViewController.view)
+        return widget
     }
 
     @MainActor

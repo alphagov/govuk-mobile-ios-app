@@ -28,6 +28,7 @@ class ViewControllerBuilder {
         let activityService: ActivityServiceInterface
         let topicWidgetViewModel: TopicsWidgetViewModel
         let localAuthorityService: LocalAuthorityServiceInterface
+        let userDefaultService: UserDefaultsServiceInterface
     }
 
     struct HomeActions {
@@ -57,7 +58,8 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService,
-            localAuthorityService: dependencies.localAuthorityService
+            localAuthorityService: dependencies.localAuthorityService,
+            userDefaultService: dependencies.userDefaultService
         )
         return HomeViewController(
             viewModel: viewModel

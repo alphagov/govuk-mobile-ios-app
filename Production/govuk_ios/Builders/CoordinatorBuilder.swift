@@ -67,7 +67,8 @@ class CoordinatorBuilder {
             deviceInformationProvider: DeviceInformationProvider(),
             searchService: container.searchService.resolve(),
             activityService: container.activityService.resolve(),
-            localAuthorityService: container.localAuthorityService.resolve()
+            localAuthorityService: container.localAuthorityService.resolve(),
+            userDefaultService: container.userDefaultsService.resolve()
         )
     }
 

@@ -47,7 +47,7 @@ struct ChatViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(
             mockAnalyticsService
-                ._trackedEvents.first?.params?["text"] as? String == "This is the question"
+                ._trackedEvents.first?.params?["text"] as? String == ""
         )
         #expect(
             mockAnalyticsService

@@ -224,9 +224,7 @@ class ChatViewModel: ObservableObject {
     }
 
     private func trackAskQuestionSubmission() {
-        let event = AppEvent.chatAskQuestion(
-            text: latestQuestion
-        )
+        let event = AppEvent.chatAskQuestion()
         analyticsService.track(event: event)
     }
 

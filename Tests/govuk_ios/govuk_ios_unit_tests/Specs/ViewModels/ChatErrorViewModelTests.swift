@@ -3,6 +3,7 @@ import UIKit
 
 @testable import govuk_ios
 @testable import GOVKit
+@testable import GOVKitTestUtilities
 @testable import UIComponents
 
 struct ChatErrorViewModelTests {
@@ -12,6 +13,7 @@ struct ChatErrorViewModelTests {
         var didCallCompletion = false
 
         let sut = ChatErrorViewModel(
+            analyticsService: MockAnalyticsService(),
             error: .networkUnavailable,
             action: {
                 didCallCompletion = true
@@ -26,6 +28,7 @@ struct ChatErrorViewModelTests {
     @Test
     func hasCorrectStyle_forNetworkError() {
         let sut = ChatErrorViewModel(
+            analyticsService: MockAnalyticsService(),
             error: .networkUnavailable,
             action: { }
         )
@@ -39,6 +42,7 @@ struct ChatErrorViewModelTests {
     @Test
     func hasCorrectStyle_forPageNotFoundError() {
         let sut = ChatErrorViewModel(
+            analyticsService: MockAnalyticsService(),
             error: .pageNotFound,
             action: { }
         )
@@ -52,6 +56,7 @@ struct ChatErrorViewModelTests {
     @Test
     func hasCorrectStyle_forOtherError() {
         let sut = ChatErrorViewModel(
+            analyticsService: MockAnalyticsService(),
             error: .apiUnavailable,
             action: { }
         )

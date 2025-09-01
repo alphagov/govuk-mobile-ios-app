@@ -6,9 +6,12 @@ import SwiftUI
 final class ChatErrorViewModel: InfoViewModelInterface {
     private let action: () -> Void
     private let error: ChatError
+    var analyticsService: AnalyticsServiceInterface?
 
-    init(error: ChatError,
+    init(analyticsService: AnalyticsServiceInterface,
+         error: ChatError,
          action: @escaping () -> Void) {
+        self.analyticsService = analyticsService
         self.error = error
         self.action = action
     }
@@ -70,5 +73,13 @@ final class ChatErrorViewModel: InfoViewModelInterface {
 
     var subtitleFont: Font {
         Font.govUK.body
+    }
+
+    var trackingTitle: String {
+        title
+    }
+
+    var trackingName: String {
+        "Chat Error"
     }
 }

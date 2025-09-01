@@ -95,6 +95,7 @@ class ChatCoordinator: TabItemCoordinator {
             reauthenticate()
         } else {
             let viewController = viewControllerBuilder.chatError(
+                analyticsService: analyticsService,
                 error: error,
                 action: { [weak self] in
                     guard let self else { return }

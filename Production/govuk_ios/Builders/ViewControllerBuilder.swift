@@ -435,9 +435,11 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func chatError(error: ChatError,
+    func chatError(analyticsService: AnalyticsServiceInterface,
+                   error: ChatError,
                    action: @escaping () -> Void) -> UIViewController {
         let viewModel = ChatErrorViewModel(
+            analyticsService: analyticsService,
             error: error,
             action: action
         )

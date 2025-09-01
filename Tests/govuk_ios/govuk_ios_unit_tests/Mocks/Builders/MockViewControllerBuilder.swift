@@ -273,6 +273,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _stubbedChatErrorController: UIViewController?
     var _receivedChatErrorAction: (() -> Void)?
     override func chatError(
+        analyticsService: AnalyticsServiceInterface,
         error: ChatError,
         action: @escaping () -> Void
     ) -> UIViewController {

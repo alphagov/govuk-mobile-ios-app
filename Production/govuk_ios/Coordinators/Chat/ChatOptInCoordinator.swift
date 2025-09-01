@@ -32,7 +32,7 @@ class ChatOptInCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
-        guard chatService.chatOptedIn == nil else {
+        guard optInAvailable else {
             completionAction()
             return
         }
@@ -46,5 +46,11 @@ class ChatOptInCoordinator: BaseCoordinator {
             fullScreen: true
         )
         start(coordinator)
+    }
+
+    private var optInAvailable: Bool {
+        chatService.isEnabled &&
+        chatService.chatOptInAvailable &&
+        chatService.chatOptedIn == nil
     }
 }

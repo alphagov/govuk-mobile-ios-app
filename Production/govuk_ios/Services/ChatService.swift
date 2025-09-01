@@ -15,6 +15,7 @@ protocol ChatServiceInterface {
     var isRetryAction: Bool { get }
     var chatOnboardingSeen: Bool { get }
     var chatOptedIn: Bool? { get }
+    var chatOptInAvailable: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
 }
@@ -30,13 +31,16 @@ final class ChatService: ChatServiceInterface {
     private var pollingInterval: TimeInterval {
         configService.chatPollIntervalSeconds
     }
+    private var chatTestActive: Bool {
+        configService.isFeatureEnabled(key: .chatTestActive) == true
+    }
 
     var currentConversationId: String? {
         chatRepository.fetchConversation()
     }
 
     var isEnabled: Bool {
-        false
+        configService.isFeatureEnabled(key: .chat) && chatTestActive == true
     }
 
     var chatOnboardingSeen: Bool {
@@ -45,6 +49,10 @@ final class ChatService: ChatServiceInterface {
 
     var chatOptedIn: Bool? {
         userDefaultsService.value(forKey: .chatOptedIn) as? Bool
+    }
+
+    var chatOptInAvailable: Bool {
+        configService.isFeatureEnabled(key: .chatOptIn) == true
     }
 
     init(serviceClient: ChatServiceClientInterface,

@@ -42,6 +42,22 @@ public struct Constants {
             return components.url!
         }()
 
+        public static let chatPrivacyPolicyUrl: URL = {
+            var components = govukBaseComponents
+            components.path = """
+            /government/publications/govuk-chat-privacy-notice
+            """
+            return components.url!
+        }()
+
+        public static let chatTermsUrl: URL = {
+            var components = govukBaseComponents
+            components.path = """
+            /guidance/govuk-chat-terms-and-conditions
+            """
+            return components.url!
+        }()
+
         public static let defaultSearchUrl: URL = URL(string: "https://search.service.gov.uk")!
 
         public static var searchSuggestionsPath: String = "/api/search/autocomplete.json"

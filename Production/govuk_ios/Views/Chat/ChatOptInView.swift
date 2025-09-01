@@ -103,7 +103,7 @@ struct ChatOptInView: View {
 
 extension ChatOptInView: TrackableScreen {
     var trackingName: String {
-        "Opt in"
+        "Chat opt-in"
     }
 
     var trackingTitle: String? {

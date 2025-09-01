@@ -264,4 +264,58 @@ struct ChatCoordinatorTests {
         #expect(firstViewController == expectedViewController)
         #expect(!sut.isShowingError)
     }
+
+    @Test
+    func isEnabled_featureUnavailableOptedIn_returnsFalse() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedIsEnabled = false
+        mockChatService._stubbedChatOptedIn = true
+        let sut = ChatCoordinator(
+            navigationController: UINavigationController(),
+            coordinatorBuilder: MockCoordinatorBuilder(container: .init()),
+            viewControllerBuilder: MockViewControllerBuilder(),
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+
+        #expect(sut.isEnabled == false)
+    }
+
+    @Test
+    func isEnabled_featureAvailableOptedIn_returnsTrue() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedIsEnabled = true
+        mockChatService._stubbedChatOptedIn = true
+        let sut = ChatCoordinator(
+            navigationController: UINavigationController(),
+            coordinatorBuilder: MockCoordinatorBuilder(container: .init()),
+            viewControllerBuilder: MockViewControllerBuilder(),
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+
+        #expect(sut.isEnabled == true)
+    }
+
+    @Test
+    func isEnabled_featureAvailableOptedOut_returnsTrue() {
+        let mockChatService = MockChatService()
+        mockChatService._stubbedIsEnabled = true
+        mockChatService._stubbedChatOptedIn = false
+        let sut = ChatCoordinator(
+            navigationController: UINavigationController(),
+            coordinatorBuilder: MockCoordinatorBuilder(container: .init()),
+            viewControllerBuilder: MockViewControllerBuilder(),
+            deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: MockAnalyticsService(),
+            chatService: mockChatService,
+            cancelOnboardingAction: { }
+        )
+
+        #expect(sut.isEnabled == false)
+    }
 }

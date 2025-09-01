@@ -12,6 +12,7 @@ struct ChatOptInCoordinatorTests {
     @Test
     func start_setsChatOptInCoordinatorViewController() {
         let mockChatService = MockChatService()
+        mockChatService._stubbedChatOptInAvailable = true
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedChatOptInController = expectedViewController
@@ -33,6 +34,7 @@ struct ChatOptInCoordinatorTests {
     @Test
     func start_optedIn_callsCompletion() async {
         let mockChatService = MockChatService()
+        mockChatService._stubbedChatOptInAvailable = true
         mockChatService._stubbedChatOptedIn = true
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()

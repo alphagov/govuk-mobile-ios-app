@@ -9,6 +9,7 @@ class ChatViewModel: ObservableObject {
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
     private(set) var requestInFlight: Bool = false
+    private var didLoadHistory: Bool = false
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -45,7 +46,7 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let pendingQuestion):
-                self?.cellModels.removeLast()
+                self?.cellModels.removeAll(where: { $0.id == ChatCellViewModel.loadingQuestion.id })
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
                 self?.latestQuestionID = pendingQuestion.id
@@ -70,7 +71,7 @@ class ChatViewModel: ObservableObject {
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
             guard let self else { return }
-            cellModels.removeLast()
+            cellModels.removeAll(where: { $0.id == ChatCellViewModel.gettingAnswer.id })
             requestInFlight = false
             switch result {
             case .success(let answer):
@@ -89,6 +90,9 @@ class ChatViewModel: ObservableObject {
     }
 
     func loadHistory() {
+        guard !didLoadHistory else {
+            return
+        }
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
             appendIntroMessages()
@@ -101,6 +105,7 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let answers):
+                self?.didLoadHistory = true
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
                 if error == .pageNotFound {

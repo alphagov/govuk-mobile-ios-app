@@ -13,6 +13,8 @@ protocol ChatServiceInterface {
     var retryAction: (() -> Void)? { get }
     var isRetryAction: Bool { get }
     var chatOnboardingSeen: Bool { get }
+    var chatOptedIn: Bool? { get set }
+    var chatOptInAvailable: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
 }
@@ -28,17 +30,34 @@ final class ChatService: ChatServiceInterface {
     private var pollingInterval: TimeInterval {
         configService.chatPollIntervalSeconds
     }
+    private var chatTestActive: Bool {
+        configService.isFeatureEnabled(key: .testIntegrationChatTestActive)
+    }
 
     var currentConversationId: String? {
         chatRepository.fetchConversation()
     }
 
     var isEnabled: Bool {
-        false
+        configService.isFeatureEnabled(key: .testIntegrationChat) && chatTestActive
     }
 
     var chatOnboardingSeen: Bool {
         userDefaultsService.bool(forKey: .chatOnboardingSeen)
+    }
+
+    var chatOptedIn: Bool? {
+        get {
+            userDefaultsService.value(forKey: .chatOptedIn) as? Bool
+        } set {
+            if let newValue = newValue {
+                userDefaultsService.set(bool: newValue, forKey: .chatOptedIn)
+            }
+        }
+    }
+
+    var chatOptInAvailable: Bool {
+        configService.isFeatureEnabled(key: .testIntegrationChatOptIn)
     }
 
     init(serviceClient: ChatServiceClientInterface,
@@ -53,6 +72,10 @@ final class ChatService: ChatServiceInterface {
 
     func setChatOnboarded() {
         userDefaultsService.set(bool: true, forKey: .chatOnboardingSeen)
+    }
+
+    func setChatOptedIn(_ optedIn: Bool) {
+        userDefaultsService.set(bool: optedIn, forKey: .chatOptedIn)
     }
 
     func askQuestion(_ question: String,

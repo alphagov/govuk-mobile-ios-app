@@ -440,4 +440,18 @@ class CoordinatorBuilder {
             completionAction: completionAction
         )
     }
+
+    func chatOptIn(
+        navigationController: UINavigationController,
+        completionAction: @escaping () -> Void
+    ) -> BaseCoordinator {
+        ChatOptInCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            coordinatorBuilder: self,
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve(),
+            completionAction: completionAction
+        )
+    }
 }

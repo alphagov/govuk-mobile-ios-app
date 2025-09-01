@@ -4,7 +4,7 @@ import UIComponents
 
 class ChatOptInViewModel {
     private let analyticsService: AnalyticsServiceInterface
-    private let chatService: ChatServiceInterface
+    private var chatService: ChatServiceInterface
     private let completionAction: () -> Void
 
     let openURLAction: (URL) -> Void
@@ -28,7 +28,7 @@ class ChatOptInViewModel {
         return .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
-                self?.chatService.setChatOptedIn(true)
+                self?.chatService.chatOptedIn = true
                 self?.trackAction(primaryButtonTitle)
                 self?.completionAction()
             }
@@ -40,7 +40,7 @@ class ChatOptInViewModel {
         return .init(
             localisedTitle: secondaryButtonTitle,
             action: { [weak self] in
-                self?.chatService.setChatOptedIn(false)
+                self?.chatService.chatOptedIn = false
                 self?.trackAction(secondaryButtonTitle)
                 self?.completionAction()
             }

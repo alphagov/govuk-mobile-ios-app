@@ -380,7 +380,7 @@ final class ChatServiceTests {
     }
 
     @Test
-    func setChatOptedIn_updatesChatOptedIn_returnsTrue() {
+    func chatOptedIn_updatesChatOptedIn_returnsTrue() {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
@@ -389,12 +389,12 @@ final class ChatServiceTests {
         )
 
         #expect(sut.chatOptedIn == nil)
-        sut.setChatOptedIn(true)
+        sut.chatOptedIn = true
         #expect(sut.chatOptedIn!)
     }
 
     @Test
-    func setChatOptedIn_updatesChatOptedIn_returnsFalse() {
+    func chatOptedIn_updatesChatOptedIn_returnsFalse() {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
@@ -403,7 +403,7 @@ final class ChatServiceTests {
         )
 
         #expect(sut.chatOptedIn == nil)
-        sut.setChatOptedIn(false)
+        sut.chatOptedIn = false
         #expect(!sut.chatOptedIn!)
     }
 

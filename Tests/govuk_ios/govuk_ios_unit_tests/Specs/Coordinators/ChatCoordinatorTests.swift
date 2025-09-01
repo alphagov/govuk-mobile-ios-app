@@ -269,7 +269,7 @@ struct ChatCoordinatorTests {
     func isEnabled_featureUnavailableOptedIn_returnsFalse() {
         let mockChatService = MockChatService()
         mockChatService._stubbedIsEnabled = false
-        mockChatService._stubbedChatOptedIn = true
+        mockChatService.chatOptedIn = true
         let sut = ChatCoordinator(
             navigationController: UINavigationController(),
             coordinatorBuilder: MockCoordinatorBuilder(container: .init()),
@@ -287,7 +287,7 @@ struct ChatCoordinatorTests {
     func isEnabled_featureAvailableOptedIn_returnsTrue() {
         let mockChatService = MockChatService()
         mockChatService._stubbedIsEnabled = true
-        mockChatService._stubbedChatOptedIn = true
+        mockChatService.chatOptedIn = true
         let sut = ChatCoordinator(
             navigationController: UINavigationController(),
             coordinatorBuilder: MockCoordinatorBuilder(container: .init()),
@@ -305,7 +305,7 @@ struct ChatCoordinatorTests {
     func isEnabled_featureAvailableOptedOut_returnsTrue() {
         let mockChatService = MockChatService()
         mockChatService._stubbedIsEnabled = true
-        mockChatService._stubbedChatOptedIn = false
+        mockChatService.chatOptedIn = false
         let sut = ChatCoordinator(
             navigationController: UINavigationController(),
             coordinatorBuilder: MockCoordinatorBuilder(container: .init()),

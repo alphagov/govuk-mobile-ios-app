@@ -9,12 +9,11 @@ protocol ChatServiceInterface {
                      completion: @escaping (ChatHistoryResult) -> Void)
     func clearHistory()
     func setChatOnboarded()
-    func setChatOptedIn(_ optedIn: Bool)
 
     var retryAction: (() -> Void)? { get }
     var isRetryAction: Bool { get }
     var chatOnboardingSeen: Bool { get }
-    var chatOptedIn: Bool? { get }
+    var chatOptedIn: Bool? { get set }
     var chatOptInAvailable: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
@@ -48,7 +47,13 @@ final class ChatService: ChatServiceInterface {
     }
 
     var chatOptedIn: Bool? {
-        userDefaultsService.value(forKey: .chatOptedIn) as? Bool
+        get {
+            userDefaultsService.value(forKey: .chatOptedIn) as? Bool
+        } set {
+            if let newValue = newValue {
+                userDefaultsService.set(bool: newValue, forKey: .chatOptedIn)
+            }
+        }
     }
 
     var chatOptInAvailable: Bool {

@@ -4,7 +4,7 @@ import Foundation
 @testable import govuk_ios
 
 final class ChatConsentOnboardingViewControllerSnapshotTests: SnapshotTestCase {
-    func test_remainingCharacters_loadInNavigationController_light_rendersCorrectly() {
+    func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = ChatConsentOnboardingViewModel(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
@@ -19,7 +19,7 @@ final class ChatConsentOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func test_remainingCharacters_loadInNavigationController_dark_rendersCorrectly() {
+    func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = ChatConsentOnboardingViewModel(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),

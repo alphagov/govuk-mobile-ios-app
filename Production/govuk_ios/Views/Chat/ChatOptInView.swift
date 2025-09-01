@@ -19,22 +19,10 @@ struct ChatOptInView: View {
                         .frame(minHeight: geometry.size.height)
                 }.modifier(ScrollBounceBehaviorModifier())
             }
-            Divider()
-                .overlay(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea()
-            SwiftUIButton(
-                .primary,
-                viewModel: viewModel.primaryButtonViewModel
+            ButtonStackView(
+                primaryButtonViewModel: viewModel.primaryButtonViewModel,
+                secondaryButtonViewModel: viewModel.secondaryButtonViewModel
             )
-            .frame(minHeight: 44, idealHeight: 44)
-            .padding(16)
-            SwiftUIButton(
-                .secondary,
-                viewModel: viewModel.secondaryButtonViewModel
-            )
-            .frame(minHeight: 44, idealHeight: 44)
-            .padding(.horizontal, 16)
-            .ignoresSafeArea()
         }
         .navigationBarHidden(true)
         .onAppear {

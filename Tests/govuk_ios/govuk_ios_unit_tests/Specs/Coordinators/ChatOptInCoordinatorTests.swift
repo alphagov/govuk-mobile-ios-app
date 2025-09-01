@@ -35,7 +35,7 @@ struct ChatOptInCoordinatorTests {
     func start_optedIn_callsCompletion() async {
         let mockChatService = MockChatService()
         mockChatService._stubbedChatOptInAvailable = true
-        mockChatService._stubbedChatOptedIn = true
+        mockChatService.chatOptedIn = true
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedChatOptInController = expectedViewController

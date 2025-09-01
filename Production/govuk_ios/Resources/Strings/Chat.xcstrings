@@ -106,7 +106,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Generating your answer…"
+            "value" : "Generating your answer"
           }
         }
       }
@@ -161,7 +161,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Messages will be available for 90 days"
+            "value" : "Messages will be available until the end of the GOV.UK Chat trial"
           }
         }
       }

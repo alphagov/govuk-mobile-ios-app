@@ -32,7 +32,7 @@ final class ChatService: ChatServiceInterface {
         configService.chatPollIntervalSeconds
     }
     private var chatTestActive: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChatTestActive) == true
+        configService.isFeatureEnabled(key: .testIntegrationChatTestActive)
     }
 
     var currentConversationId: String? {
@@ -40,7 +40,7 @@ final class ChatService: ChatServiceInterface {
     }
 
     var isEnabled: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChat) && chatTestActive == true
+        configService.isFeatureEnabled(key: .testIntegrationChat) && chatTestActive
     }
 
     var chatOnboardingSeen: Bool {
@@ -52,7 +52,7 @@ final class ChatService: ChatServiceInterface {
     }
 
     var chatOptInAvailable: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChatOptIn) == true
+        configService.isFeatureEnabled(key: .testIntegrationChatOptIn)
     }
 
     init(serviceClient: ChatServiceClientInterface,

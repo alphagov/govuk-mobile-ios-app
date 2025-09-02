@@ -74,10 +74,21 @@ class HomeViewController: BaseViewController {
     }
 
     private func configureHomeContent() {
+        let model = ChatCardModel(
+            action: {},
+            image: "chat_onboarding_info",
+            title: "title",
+            primaryDescritpion: "description",
+            secondaryDescription: "second description",
+            link: "ask a question"
+        )
+        let card = ChatCard(model: model)
+        let hosting = HostingViewController(rootView: card)
+
         homeContentViewController = HomeContentViewController(
             viewModel: viewModel
         )
-        displayController(homeContentViewController)
+        displayController(hosting)
     }
 
     private func configureSearchBar() {

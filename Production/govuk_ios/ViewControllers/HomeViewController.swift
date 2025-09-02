@@ -77,10 +77,10 @@ class HomeViewController: BaseViewController {
         let model = ChatCardModel(
             action: {},
             image: "chat_onboarding_info",
-            title: "title",
-            primaryDescritpion: "description",
+            title: "Get quick answers from GOV.UK Chat",
+            primaryDescritpion: "Use GOV.UK’s experimental AI tool to find out more about topics, services and information on GOV.UK.",
             secondaryDescription: "second description",
-            link: "ask a question"
+            link: "Ask a question"
         )
         let card = ChatCard(model: model)
         let hosting = HostingViewController(rootView: card)

@@ -34,6 +34,39 @@
         }
       }
     },
+    "cardDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use GOV.UK’s experimental AI tool to find out more about topics, services and information on GOV.UK."
+          }
+        }
+      }
+    },
+    "cardsLinkText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask a question"
+          }
+        }
+      }
+    },
+    "cardTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get quick answers from GOV.UK Chat"
+          }
+        }
+      }
+    },
     "clearAlertBodyText" : {
       "extractionState" : "manual",
       "localizations" : {

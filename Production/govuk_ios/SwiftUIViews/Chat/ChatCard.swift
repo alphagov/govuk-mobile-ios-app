@@ -5,8 +5,8 @@ struct ChatCard: View {
     let model: ChatCardModel
     var body: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline) {
+                VStack(alignment: .leading) {
                         Text(model.title)
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .font(Font.govUK.bodySemibold)
@@ -22,7 +22,9 @@ struct ChatCard: View {
                         .foregroundColor(Color(UIColor.govUK.text.link))
                 }
                 Spacer()
-                VStack(spacing: 6) {
+                VStack {
+                    HStack {
+                        Spacer()
                         Button(action: {
                             model.action()
                         }, label: {
@@ -30,13 +32,18 @@ struct ChatCard: View {
                                 Image(systemName: "xmark")
                                     .foregroundColor(Color(UIColor.govUK.text.secondary))
                             }
-                        }).frame(alignment: .leading)
-                        .padding(.leading)
-                    Image(model.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 72, height: 69)
-                        .padding(.bottom)
+                        }).frame(alignment: .trailing)
+                            .padding(.leading)
+                    }
+                    HStack {
+                        Spacer()
+                        Image(model.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 72, height: 69)
+                            .frame(alignment: .leading)
+                            .padding(.trailing, 30)
+                    }
 //                    .frame(alignment: .topLeading)
 //                    Spacer()
                 }
@@ -51,6 +58,16 @@ struct ChatCard: View {
 //                    })
 //                }
             }.padding()
+//                .overlay(alignment: .topTrailing) {
+//                    Button(action: {
+//                        //   model.dismissAction()
+//                    }, label: {
+//                        VStack {
+//                            Image(systemName: "xmark")
+//                                .foregroundColor(Color(UIColor.govUK.text.secondary))
+//                        }.padding()
+//                    })
+//                }
         }
         .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
         .roundedBorder(borderColor: .clear)

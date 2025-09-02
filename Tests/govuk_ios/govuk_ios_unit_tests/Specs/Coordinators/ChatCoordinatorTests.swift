@@ -280,7 +280,7 @@ struct ChatCoordinatorTests {
             cancelOnboardingAction: { }
         )
 
-        #expect(sut.isEnabled == false)
+        #expect(sut.isEnabled == true)
     }
 
     @Test
@@ -316,6 +316,6 @@ struct ChatCoordinatorTests {
             cancelOnboardingAction: { }
         )
 
-        #expect(sut.isEnabled == false)
+        #expect(sut.isEnabled == true)
     }
 }

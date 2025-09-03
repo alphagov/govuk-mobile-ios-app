@@ -298,6 +298,40 @@ struct ChatViewModelTests {
     }
 
     @Test
+    func openFeedbackURL_opensURLAndtracksEvent() async {
+        await confirmation() { confirmation in
+            let mockAnalyticsService = MockAnalyticsService()
+            let sut = ChatViewModel(
+                chatService: MockChatService(),
+                analyticsService: mockAnalyticsService,
+                openURLAction: { _ in confirmation() },
+                handleError: { _ in }
+            )
+
+            sut.openFeedbackURL()
+            #expect(mockAnalyticsService._trackedEvents.count == 1)
+            #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Give feedback")
+        }
+    }
+
+    @Test
+    func openPrivacyURL_opensURLAndtracksEvent() async {
+        await confirmation() { confirmation in
+            let mockAnalyticsService = MockAnalyticsService()
+            let sut = ChatViewModel(
+                chatService: MockChatService(),
+                analyticsService: mockAnalyticsService,
+                openURLAction: { _ in confirmation() },
+                handleError: { _ in }
+            )
+
+            sut.openPrivacyURL()
+            #expect(mockAnalyticsService._trackedEvents.count == 1)
+            #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Privacy notice")
+        }
+    }
+
+    @Test
     func trackMenuClearChatTap_tracksEvent() {
         let mockAnalyticsService = MockAnalyticsService()
         let sut = ChatViewModel(

@@ -432,4 +432,26 @@ final class ChatServiceTests {
 
         #expect(sut.chatOptInAvailable == false)
     }
+
+    @Test
+    func chatUrls_returnExpectedValues() {
+        mockConfigService._stubbedChatUrls = .init(
+            termsAndConditions: URL(string: "https://example.com/termsAndConditions")!,
+            privacyNotice: URL(string: "https://example.com/privacy")!,
+            about: URL(string: "https://example.com/about")!,
+            feedback: URL(string: "https://example.com/feedback")!
+        )
+        
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+        
+        #expect(sut.about == mockConfigService.chatUrls?.about)
+        #expect(sut.termsAndConditions == mockConfigService.chatUrls?.termsAndConditions)
+        #expect(sut.privacyPolicy == mockConfigService.chatUrls?.privacyNotice)
+        #expect(sut.feedback == mockConfigService.chatUrls?.feedback)
+    }
 }

@@ -11,6 +11,7 @@ struct Config: Decodable {
     let chatPollIntervalSeconds: Int?
     let alertBanner: AlertBanner?
     let userFeedbackBanner: UserFeedbackBanner?
+    let chatUrls: ChatURLs?
 }
 
 struct AlertBanner: Decodable {
@@ -36,4 +37,11 @@ extension UserFeedbackBanner {
         let title: String
         let url: URL
     }
+}
+
+struct ChatURLs: Decodable {
+    let termsAndConditions: URL?
+    let privacyNotice: URL?
+    let about: URL?
+    let feedback: URL?
 }

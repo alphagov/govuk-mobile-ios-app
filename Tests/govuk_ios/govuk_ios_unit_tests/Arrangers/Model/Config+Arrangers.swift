@@ -30,6 +30,12 @@ extension Config {
                                         title: "test",
                                         url: URL(string: "https://test.com")!)
                                      )
+            chatUrls: ChatURLs(
+                termsAndConditions: URL(string: "https://example.com"),
+                privacyNotice: URL(string: "https://example.com"),
+                about: URL(string: "https://example.com"),
+                feedback: URL(string: "https://example.com")
+            )
         )
     }
 }

@@ -1,6 +1,5 @@
 import SwiftUI
 
-// swiftlint:disable:next type_body_length
 struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
@@ -64,7 +63,11 @@ struct ChatActionView: View {
         ZStack(alignment: .bottom) {
             HStack(alignment: .center, spacing: 8) {
                 if !textAreaFocused {
-                    menuView
+                    ChatMenuView(
+                        viewModel: viewModel,
+                        showClearChatAlert: $showClearChatAlert,
+                        disableClearChat: $viewModel.requestInFlight
+                    )
                 }
 
                 textEditorView(maxFrameHeight: maxFrameHeight)
@@ -96,49 +99,6 @@ struct ChatActionView: View {
         viewModel.errorText != nil
     }
 
-    private var menuView: some View {
-        Menu {
-            if viewModel.currentConversationExists {
-                Button(
-                    role: .destructive,
-                    action: {
-                        viewModel.trackMenuClearChatTap()
-                        showClearChatAlert = true
-                    },
-                    label: {
-                        Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
-                    }
-                )
-                .disabled(viewModel.requestInFlight)
-            }
-            Button(
-                action: { viewModel.openAboutURL() },
-                label: {
-                    Label(String.chat.localized("aboutMenuTitle"), systemImage: "info.circle")
-                        .accessibilityLabel(String.chat.localized("aboutMenuAccessibilityTitle"))
-                        .accessibilityHint(String.common.localized("openWebLinkHint"))
-                }
-            )
-        } label: {
-            Image(systemName: "ellipsis")
-                .font(.system(size: 18, weight: .bold))
-                .foregroundStyle(Color(UIColor.govUK.text.buttonSecondary))
-                .frame(width: 50, height: 50)
-                .background(
-                    Circle()
-                        .fill(Color(UIColor.govUK.fills.surfaceChatBlue))
-                        .overlay(
-                            Circle()
-                                .stroke(
-                                    Color(UIColor.govUK.strokes.chatAction),
-                                    lineWidth: 1
-                                )
-                        )
-                )
-        }
-        .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))
-        .accessibilitySortPriority(0)
-    }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
         DynamicTextEditor(
@@ -282,30 +242,6 @@ struct ChatActionView: View {
         return textAreaFocused ?
         viewModel.textViewHeight + max((2 * lineHeight), 75) :
         unfocusedHeight
-    }
-
-    private var blurGradient: some View {
-        let blurColor = Color(UIColor.govUK.fills.surfaceChatBackground)
-        return LinearGradient(
-            gradient: Gradient(stops: [
-                .init(
-                    color: blurColor.opacity(1),
-                    location: 0
-                ),
-                .init(
-                    color: blurColor.opacity(0.6),
-                    location: 0.8
-                ),
-                .init(
-                    color: blurColor.opacity(0),
-                    location: 1
-                )
-            ]),
-            startPoint: .bottom,
-            endPoint: .top
-        )
-        .frame(height: 60)
-        .ignoresSafeArea(.all)
     }
 }
 

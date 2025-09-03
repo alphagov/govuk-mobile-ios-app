@@ -47,6 +47,14 @@ class ChatOptInViewModel {
         )
     }
 
+    var privacyPolicyUrl: URL {
+        chatService.privacyPolicy
+    }
+
+    var termsURL: URL {
+        chatService.termsAndConditions
+    }
+
     func trackScreen(screen: TrackableScreen) {
         analyticsService.track(screen: screen)
     }

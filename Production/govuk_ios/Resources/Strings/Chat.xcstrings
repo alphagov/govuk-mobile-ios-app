@@ -89,6 +89,28 @@
         }
       }
     },
+    "feedbackMenuAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give feedback on GOV.UK Chat"
+          }
+        }
+      }
+    },
+    "feedbackMenuTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give feedback"
+          }
+        }
+      }
+    },
     "genericErrorBody" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -338,6 +360,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your previous conversation is no longer available.\n\nTo continue using GOV.UK Chat, you need to start a new chat."
+          }
+        }
+      }
+    },
+    "privacyMenuTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy notice"
           }
         }
       }

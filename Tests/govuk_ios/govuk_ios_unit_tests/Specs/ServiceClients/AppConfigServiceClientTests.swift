@@ -36,8 +36,12 @@ struct AppConfigServiceClientTests {
             mockServiceClient._receivedSendCompletion?(.success(mockJsonData))
         }
         let unwrappedResult = try result.get()
-        #expect(unwrappedResult.config.releaseFlags.count == 2)
+        #expect(unwrappedResult.config.releaseFlags.count == 9)
         #expect(unwrappedResult.config.releaseFlags["search"] == true)
+        #expect(unwrappedResult.config.chatUrls?.termsAndConditions != nil)
+        #expect(unwrappedResult.config.alertBanner?.id  == "govuk_alert_emergency_notification_2025")
+        #expect(unwrappedResult.config.alertBanner?.link?.title
+                == "About emergency alerts")
     }
 
     @Test

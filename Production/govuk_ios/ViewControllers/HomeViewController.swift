@@ -74,15 +74,7 @@ class HomeViewController: BaseViewController {
     }
 
     private func configureHomeContent() {
-        let model = ChatCardModel(
-            action: {},
-            image: "chat_onboarding_info",
-            title: "Get quick answers from GOV.UK Chat",
-            primaryDescritpion: "Use GOV.UK’s experimental AI tool to find out more about topics, services and information on GOV.UK.",
-            secondaryDescription: "second description",
-            link: "Ask a question"
-        )
-        let card = ChatCard(model: model)
+        let card = ChatCard(action: {})
         let hosting = HostingViewController(rootView: card)
 
         homeContentViewController = HomeContentViewController(

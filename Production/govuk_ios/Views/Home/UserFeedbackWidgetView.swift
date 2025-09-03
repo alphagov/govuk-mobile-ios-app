@@ -5,13 +5,12 @@ struct UserFeedbackWidgetView: View {
     let viewModel: UserFeedbackWidgetViewModel
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
             Text(viewModel.body)
                 .font(.govUK.body)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
                 .accessibilitySortPriority(100)
-            Spacer()
             linkButton(title: viewModel.linkTitle)
         }
     }
@@ -26,6 +25,7 @@ struct UserFeedbackWidgetView: View {
                     .font(.govUK.body)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color(UIColor.govUK.text.link))
+                    .frame(width: 343, height: 54)
             }
         )
         .accessibilityAddTraits(.isLink)

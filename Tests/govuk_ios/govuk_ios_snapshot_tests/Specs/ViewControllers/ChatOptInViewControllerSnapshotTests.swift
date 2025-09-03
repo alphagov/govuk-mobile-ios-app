@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
@@ -8,10 +9,23 @@ final class ChatOptInViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = ChatOptInViewModel(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
-            openURLAction: { _ in },
             completionAction: { }
         )
-        let chatOptInView = ChatOptInView(viewModel: viewModel)
+        let chatOptInView = InfoView(viewModel: viewModel) {
+            AnyView(InfoLinksView(
+                linkList: [
+                    LinkListItem(
+                        text: "Test link",
+                        url: URL(string: "www.gov.uk")!
+                    ),
+                    LinkListItem(
+                        text: "Test link two",
+                        url: URL(string: "www.gov.uk")!
+                    )
+                ],
+                openURLAction: { _ in }
+            ))
+        }
 
         VerifySnapshotInNavigationController(
             view: chatOptInView,
@@ -23,10 +37,23 @@ final class ChatOptInViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = ChatOptInViewModel(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
-            openURLAction: { _ in },
             completionAction: { }
         )
-        let chatOptInView = ChatOptInView(viewModel: viewModel)
+        let chatOptInView = InfoView(viewModel: viewModel) {
+            AnyView(InfoLinksView(
+                linkList: [
+                    LinkListItem(
+                        text: "Test link",
+                        url: URL(string: "www.gov.uk")!
+                    ),
+                    LinkListItem(
+                        text: "Test link two",
+                        url: URL(string: "www.gov.uk")!
+                    )
+                ],
+                openURLAction: { _ in }
+            ))
+        }
 
         VerifySnapshotInNavigationController(
             view: chatOptInView,

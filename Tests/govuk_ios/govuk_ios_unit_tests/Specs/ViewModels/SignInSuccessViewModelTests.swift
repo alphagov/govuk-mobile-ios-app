@@ -15,7 +15,7 @@ struct SignInSuccessViewModelTests {
             }
         )
 
-        sut.buttonViewModel.action()
+        sut.primaryButtonViewModel.action()
 
         #expect(didCallCompletion)
     }

@@ -554,11 +554,11 @@ class ViewControllerBuilder {
             linkList: [
                 LinkListItem(
                     text: String.chat.localized("optInPrivacyLinkTitle"),
-                    url: Constants.API.chatPrivacyPolicyUrl
+                    url: chatService.privacyPolicy
                 ),
                 LinkListItem(
                     text: String.chat.localized("optInTermsLinkTitle"),
-                    url: Constants.API.chatTermsUrl
+                    url: chatService.termsAndConditions
                 )
             ],
             openURLAction: openURLAction

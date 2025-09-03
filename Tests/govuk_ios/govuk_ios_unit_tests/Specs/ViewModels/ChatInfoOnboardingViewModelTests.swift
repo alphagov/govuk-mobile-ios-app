@@ -13,7 +13,7 @@ struct ChatInfoOnboardingViewModelTests {
                 completionAction: { confirmation() },
                 cancelOnboardingAction: { }
             )
-            sut.buttonViewModel.action()
+            sut.primaryButtonViewModel.action()
         }
     }
 
@@ -58,7 +58,7 @@ struct ChatInfoOnboardingViewModelTests {
             completionAction: { },
             cancelOnboardingAction: { }
         )
-        sut.buttonViewModel.action()
+        sut.primaryButtonViewModel.action()
 
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Continue")

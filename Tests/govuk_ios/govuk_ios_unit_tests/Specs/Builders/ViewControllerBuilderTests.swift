@@ -357,7 +357,7 @@ struct ViewControllerBuilderTests {
             completionAction: { }
         )
 
-        let rootView = (result as? HostingViewController<ChatOptInView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 }

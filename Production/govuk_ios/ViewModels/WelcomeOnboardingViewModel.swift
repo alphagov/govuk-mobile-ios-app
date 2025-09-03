@@ -41,10 +41,6 @@ final class WelcomeOnboardingViewModel: ObservableObject {
         )
     }
 
-    var showImageWhenCompact: Bool {
-        false
-    }
-
     var subtitleFont: Font {
         Font.govUK.title1
     }

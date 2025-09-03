@@ -41,7 +41,7 @@ struct WelcomeOnboardingView: View {
 
     private var infoView: some View {
         VStack {
-            if verticalSizeClass != .compact || viewModel.showImageWhenCompact {
+            if verticalSizeClass != .compact {
                 viewModel.image
                     .accessibilityHidden(true)
             }

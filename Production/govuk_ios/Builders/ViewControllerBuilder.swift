@@ -548,11 +548,24 @@ class ViewControllerBuilder {
         let viewModel = ChatOptInViewModel(
             analyticsService: analyticsService,
             chatService: chatService,
-            openURLAction: openURLAction,
             completionAction: completionAction
         )
-        let containerView = ChatOptInView(
-            viewModel: viewModel
+        let linksView = InfoLinksView(
+            linkList: [
+                LinkListItem(
+                    text: String.chat.localized("optInPrivacyLinkTitle"),
+                    url: Constants.API.chatPrivacyPolicyUrl
+                ),
+                LinkListItem(
+                    text: String.chat.localized("optInTermsLinkTitle"),
+                    url: Constants.API.chatTermsUrl
+                )
+            ],
+            openURLAction: openURLAction
+        )
+        let containerView = InfoView(
+            viewModel: viewModel,
+            customView: { AnyView(linksView) }
         )
         return HostingViewController(
             rootView: containerView

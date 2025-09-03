@@ -18,13 +18,13 @@ final class SignInErrorViewModel: InfoViewModelInterface {
         String.signOut.localized("signInErrorSubtitle")
     }
 
-    var buttonTitle: String {
+    var primaryButtonTitle: String {
         String.signOut.localized("signInRetryButtonTitle")
     }
 
-    var buttonViewModel: GOVUKButton.ButtonViewModel {
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         GOVUKButton.ButtonViewModel(
-            localisedTitle: buttonTitle) { [weak self] in
+            localisedTitle: primaryButtonTitle) { [weak self] in
                 guard let self = self else { return }
                 self.completion()
             }
@@ -34,13 +34,5 @@ final class SignInErrorViewModel: InfoViewModelInterface {
         AnyView(
             InfoSystemImage(imageName: "exclamationmark.circle")
         )
-    }
-
-    var showImageWhenCompact: Bool {
-        false
-    }
-
-    var subtitleFont: Font {
-        Font.govUK.body
     }
 }

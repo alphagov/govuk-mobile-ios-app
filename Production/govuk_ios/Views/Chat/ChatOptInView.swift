@@ -62,11 +62,11 @@ struct ChatOptInView: View {
         VStack(alignment: .center, spacing: 22) {
             linkView(
                 text: String.chat.localized("optInPrivacyLinkTitle"),
-                link: Constants.API.chatPrivacyPolicyUrl
+                link: viewModel.privacyPolicyUrl
             )
             linkView(
                 text: String.chat.localized("optInTermsLinkTitle"),
-                link: Constants.API.chatTermsUrl
+                link: viewModel.termsURL
             )
         }
     }

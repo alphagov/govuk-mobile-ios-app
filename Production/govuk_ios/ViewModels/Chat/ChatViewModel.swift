@@ -8,7 +8,6 @@ class ChatViewModel: ObservableObject {
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
-    private(set) var requestInFlight: Bool = false
     private var didLoadHistory: Bool = false
 
     @Published var cellModels: [ChatCellViewModel] = []
@@ -18,6 +17,7 @@ class ChatViewModel: ObservableObject {
     @Published var latestQuestionID: String = ""
     @Published var errorText: String?
     @Published var textViewHeight: CGFloat = 50.0
+    @Published var requestInFlight: Bool = false
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -183,8 +183,18 @@ class ChatViewModel: ObservableObject {
     }
 
     func openAboutURL() {
-        trackMenuAboutTap()
-        openURLAction(Constants.API.govukBaseUrl)
+        trackMenuTap(String.chat.localized("aboutMenuTitle"))
+        openURLAction(chatService.about)
+    }
+
+    func openPrivacyURL() {
+        trackMenuTap(String.chat.localized("privacyMenuTitle"))
+        openURLAction(chatService.privacyPolicy)
+    }
+
+    func openFeedbackURL() {
+        trackMenuTap(String.chat.localized("feedbackMenuTitle"))
+        openURLAction(chatService.feedback)
     }
 
     func trackScreen(screen: TrackableScreen) {
@@ -215,9 +225,9 @@ class ChatViewModel: ObservableObject {
         analyticsService.track(event: event)
     }
 
-    private func trackMenuAboutTap() {
+    private func trackMenuTap(_ itemTitle: String) {
         let event = AppEvent.buttonNavigation(
-            text: String.chat.localized("aboutMenuTitle"),
+            text: itemTitle,
             external: true
         )
         analyticsService.track(event: event)

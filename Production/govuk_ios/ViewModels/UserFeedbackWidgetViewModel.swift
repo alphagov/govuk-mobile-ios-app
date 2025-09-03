@@ -10,9 +10,9 @@ struct UserFeedbackWidgetViewModel {
 
     init(userFeedback: UserFeedbackBanner,
          urlOpener: URLOpener) {
-        self.body = userFeedback.body
-        self.linkUrl = userFeedback.link.url
-        self.linkTitle = userFeedback.link.title
+        body = userFeedback.body
+        linkUrl = userFeedback.link.url
+        linkTitle = userFeedback.link.title
         self.urlOpener = urlOpener
     }
 

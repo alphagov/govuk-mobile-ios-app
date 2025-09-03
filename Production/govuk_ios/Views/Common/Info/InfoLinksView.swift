@@ -3,7 +3,7 @@ import GOVKit
 import UIComponents
 
 struct InfoLinksView: View {
-    let linkList: [LinkListItem]
+    let linkList: [InfoLinkListItem]
     let openURLAction: (URL) -> Void
 
     var body: some View {
@@ -36,7 +36,7 @@ struct InfoLinksView: View {
     }
 }
 
-struct LinkListItem {
+struct InfoLinkListItem {
     let text: String
     let url: URL
 }

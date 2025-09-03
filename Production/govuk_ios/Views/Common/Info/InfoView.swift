@@ -22,6 +22,12 @@ struct InfoView: View {
                         .frame(minHeight: geometry.size.height)
                 }.modifier(ScrollBounceBehaviorModifier())
             }
+            if let bottomContentText = viewModel.bottomContentText {
+                Text(bottomContentText)
+                    .font(Font.govUK.caption1)
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    .padding(.bottom, 16)
+            }
             if let secondaryButtonViewModel = viewModel.secondaryButtonViewModel {
                 ButtonStackView(
                     primaryButtonViewModel: viewModel.primaryButtonViewModel,

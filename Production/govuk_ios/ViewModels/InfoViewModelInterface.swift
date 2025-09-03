@@ -16,6 +16,8 @@ protocol InfoViewModelInterface {
     var subtitle: String { get }
     var subtitleFont: Font { get }
 
+    var bottomContentText: String? { get }
+
     var showPrimaryButton: Bool { get }
     var primaryButtonTitle: String { get }
     var primaryButtonAccessibilityTitle: String { get }
@@ -37,6 +39,8 @@ extension InfoViewModelInterface {
 
     var subtitle: String { "" }
     var subtitleFont: Font { Font.govUK.body }
+
+    var bottomContentText: String? { nil }
 
     var showPrimaryButton: Bool { true }
     var primaryButtonConfiguration: GOVUKButton.ButtonConfiguration { .primary }

@@ -3,13 +3,11 @@ import GOVKit
 import UIComponents
 import SwiftUI
 
-final class WelcomeOnboardingViewModel: ObservableObject {
+final class WelcomeOnboardingViewModel: InfoViewModelInterface {
     private let completeAction: () -> Void
-    @Published var versionNumber: String?
 
     init(completeAction: @escaping () -> Void) {
         self.completeAction = completeAction
-        getVersionNumber()
     }
 
     var title: String {
@@ -20,11 +18,11 @@ final class WelcomeOnboardingViewModel: ObservableObject {
         String.onboarding.localized("welcomeBody")
     }
 
-    var buttonTitle: String {
+    var primaryButtonTitle: String {
         String.signOut.localized("signInRetryButtonTitle")
     }
 
-    var buttonViewModel: GOVUKButton.ButtonViewModel {
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         let localTitle = String.common.localized("continue")
         return .init(
             localisedTitle: localTitle,
@@ -45,9 +43,9 @@ final class WelcomeOnboardingViewModel: ObservableObject {
         Font.govUK.title1
     }
 
-    private func getVersionNumber() {
+    var bottomContentText: String? {
         guard let versionNumber = Bundle.main.versionNumber
-        else { return }
-        self.versionNumber = "\(String.onboarding.localized("appVersionText")) \(versionNumber)"
+        else { return "" }
+        return "\(String.onboarding.localized("appVersionText")) \(versionNumber)"
     }
 }

@@ -469,7 +469,7 @@ class ViewControllerBuilder {
         let viewModel = WelcomeOnboardingViewModel(
             completeAction: completion
         )
-        let containerView = WelcomeOnboardingView(
+        let containerView = InfoView(
             viewModel: viewModel
         )
         return HostingViewController(
@@ -552,11 +552,11 @@ class ViewControllerBuilder {
         )
         let linksView = InfoLinksView(
             linkList: [
-                LinkListItem(
+                InfoLinkListItem(
                     text: String.chat.localized("optInPrivacyLinkTitle"),
                     url: chatService.privacyPolicy
                 ),
-                LinkListItem(
+                InfoLinkListItem(
                     text: String.chat.localized("optInTermsLinkTitle"),
                     url: chatService.termsAndConditions
                 )

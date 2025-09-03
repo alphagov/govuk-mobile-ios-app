@@ -311,6 +311,7 @@ struct ViewControllerBuilderTests {
     func chatError_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.chatError(
+            analyticsService: MockAnalyticsService(),
             error: ChatError.apiUnavailable,
             action: { }
         )

@@ -10,6 +10,7 @@ struct Config: Decodable {
     var authenticationIssuerBaseUrl: String?
     let chatPollIntervalSeconds: Int?
     let alertBanner: AlertBanner?
+    let userFeedbackBanner: UserFeedbackBanner?
 }
 
 struct AlertBanner: Decodable {
@@ -19,6 +20,18 @@ struct AlertBanner: Decodable {
 }
 
 extension AlertBanner {
+    struct Link: Decodable {
+        let title: String
+        let url: URL
+    }
+}
+
+struct UserFeedbackBanner: Decodable {
+    let body: String
+    let link: Link
+}
+
+extension UserFeedbackBanner {
     struct Link: Decodable {
         let title: String
         let url: URL

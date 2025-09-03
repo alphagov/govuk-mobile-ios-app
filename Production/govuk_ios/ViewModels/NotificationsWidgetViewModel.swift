@@ -1,7 +1,7 @@
 import Foundation
 import UIComponents
 
-struct UserFeedbackViewModel {
+struct NotificationsWidgetViewModel {
     let title: String
     let action: () -> Void
 }

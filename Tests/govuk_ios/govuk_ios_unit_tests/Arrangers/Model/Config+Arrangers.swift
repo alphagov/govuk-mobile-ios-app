@@ -24,7 +24,12 @@ extension Config {
             searchApiUrl: searchApiUrl,
             authenticationIssuerBaseUrl: authenticationIssuerBaseUrl,
             chatPollIntervalSeconds: chatPollIntervalSeconds,
-            alertBanner: .init(id: "1234", body: "test", link: nil)
+            alertBanner: .init(id: "1234", body: "test", link: nil),
+            userFeedbackBanner: .init(body: "test",
+                                      link: UserFeedbackBanner.Link(
+                                        title: "test",
+                                        url: URL(string: "https://test.com")!)
+                                     )
         )
     }
 }

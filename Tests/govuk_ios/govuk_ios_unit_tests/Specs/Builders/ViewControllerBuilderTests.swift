@@ -360,4 +360,18 @@ struct ViewControllerBuilderTests {
         let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
+
+    @Test
+    func chatOffboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatOffboarding(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            openURLAction: { _ in },
+            completionAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
 }

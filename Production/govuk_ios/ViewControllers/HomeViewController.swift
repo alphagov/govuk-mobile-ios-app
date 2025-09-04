@@ -74,13 +74,10 @@ class HomeViewController: BaseViewController {
     }
 
     private func configureHomeContent() {
-        let card = ChatUpsellCard(action: {})
-        let hosting = HostingViewController(rootView: card)
-
         homeContentViewController = HomeContentViewController(
             viewModel: viewModel
         )
-        displayController(hosting)
+        displayController(homeContentViewController)
     }
 
     private func configureSearchBar() {

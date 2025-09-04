@@ -31,6 +31,9 @@ struct InfoLinksView: View {
                     .fontWeight(.semibold)
             }
         )
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(.isLink)
+        .accessibilityHint(String.common.localized("openWebLinkHint"))
     }
 }
 

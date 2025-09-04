@@ -9,6 +9,7 @@ struct UserFeedbackWidgetView: View {
             Spacer()
             Text(viewModel.body)
                 .font(.govUK.body)
+                .multilineTextAlignment(.center)
                 .foregroundColor(Color(UIColor.govUK.text.primary))
                 .accessibilitySortPriority(100)
             linkButton(title: viewModel.linkTitle)
@@ -23,7 +24,7 @@ struct UserFeedbackWidgetView: View {
             }, label: {
                 Text(title)
                     .font(.govUK.body)
-                    .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.center)
                     .foregroundColor(Color(UIColor.govUK.text.link))
                     .frame(width: 343, height: 54)
             }

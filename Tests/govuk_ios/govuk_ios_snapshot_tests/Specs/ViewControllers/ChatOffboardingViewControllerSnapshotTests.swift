@@ -3,11 +3,11 @@ import Foundation
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
 
-final class ChatOptInViewControllerSnapshotTests: SnapshotTestCase {
+final class ChatOffboardingViewControllerSnapshotTests: SnapshotTestCase {
     let viewControllerBuilder = ViewControllerBuilder()
 
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let chatOptInViewController = viewControllerBuilder.chatOptIn(
+        let chatOffboardingViewController = viewControllerBuilder.chatOffboarding(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
             openURLAction: { _ in },
@@ -15,13 +15,13 @@ final class ChatOptInViewControllerSnapshotTests: SnapshotTestCase {
         )
 
         VerifySnapshotInNavigationController(
-            viewController: chatOptInViewController,
+            viewController: chatOffboardingViewController,
             mode: .light
         )
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let chatOptInViewController = viewControllerBuilder.chatOptIn(
+        let chatOffboardingViewController = viewControllerBuilder.chatOffboarding(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
             openURLAction: { _ in },
@@ -29,7 +29,7 @@ final class ChatOptInViewControllerSnapshotTests: SnapshotTestCase {
         )
 
         VerifySnapshotInNavigationController(
-            viewController: chatOptInViewController,
+            viewController: chatOffboardingViewController,
             mode: .dark
         )
     }

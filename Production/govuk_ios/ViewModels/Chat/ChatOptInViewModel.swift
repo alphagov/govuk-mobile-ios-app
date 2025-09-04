@@ -3,7 +3,7 @@ import GOVKit
 import UIComponents
 
 class ChatOptInViewModel: InfoViewModelInterface {
-    private let analyticsService: AnalyticsServiceInterface
+    var analyticsService: AnalyticsServiceInterface?
     private var chatService: ChatServiceInterface
     private let completionAction: () -> Void
 
@@ -65,8 +65,12 @@ class ChatOptInViewModel: InfoViewModelInterface {
         )
     }
 
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
+    var trackingTitle: String {
+        title
+    }
+
+    var trackingName: String {
+        "Chat opt-in"
     }
 
     private func trackAction(_ text: String) {
@@ -74,6 +78,6 @@ class ChatOptInViewModel: InfoViewModelInterface {
             text: text,
             external: false
         )
-        analyticsService.track(event: event)
+        analyticsService?.track(event: event)
     }
 }

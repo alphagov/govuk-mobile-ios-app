@@ -51,6 +51,14 @@ class ChatConsentOnboardingViewModel: InfoViewModelInterface {
         return String.chat.localized("onboardingConsentButtonTitle")
     }
 
+    var trackingTitle: String {
+        title
+    }
+
+    var trackingName: String {
+        "Chat Onboarding Screen Two"
+    }
+
     @objc
     func cancelOnboarding() {
         cancelOnboardingAction()

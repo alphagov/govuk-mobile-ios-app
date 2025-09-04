@@ -17,6 +17,7 @@ protocol ChatServiceInterface {
     var chatOnboardingSeen: Bool { get }
     var chatOptedIn: Bool? { get set }
     var chatOptInAvailable: Bool { get }
+    var chatTestActive: Bool { get }
     var currentConversationId: String? { get }
     var isEnabled: Bool { get }
     var privacyPolicy: URL { get }
@@ -148,7 +149,7 @@ extension ChatService {
         configService.isFeatureEnabled(key: .testIntegrationChatOptIn)
     }
 
-    private var chatTestActive: Bool {
+    var chatTestActive: Bool {
         configService.isFeatureEnabled(key: .testIntegrationChatTestActive)
     }
 

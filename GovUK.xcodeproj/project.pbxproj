@@ -15,6 +15,8 @@
 		16161FD12E2FF97D00228028 /* EnvironmentValues+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16289DE62E2FEF9A00200CF7 /* EnvironmentValues+Extensions.swift */; };
 		16161FD32E2FFB2300228028 /* ConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16161FD22E2FFAD800228028 /* ConditionalAnimation.swift */; };
 		161D84D42E58872B00391FBC /* ChatOptInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161D84D32E58871800391FBC /* ChatOptInCoordinator.swift */; };
+		161E1FB62E69D8EA00201794 /* ChatOffboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161E1FB52E69D8D800201794 /* ChatOffboardingViewModel.swift */; };
+		161E1FB82E69D9FF00201794 /* ChatOffboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161E1FB72E69D9F900201794 /* ChatOffboardingCoordinator.swift */; };
 		162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */; };
 		162EC84D2DDB54E3000A7224 /* LocalAuthentication.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 162EC84C2DDB54E3000A7224 /* LocalAuthentication.xcstrings */; };
 		1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */; };
@@ -421,6 +423,8 @@
 		160EA7542C5B0401008F97AF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		16161FD22E2FFAD800228028 /* ConditionalAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalAnimation.swift; sourceTree = "<group>"; };
 		161D84D32E58871800391FBC /* ChatOptInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOptInCoordinator.swift; sourceTree = "<group>"; };
+		161E1FB52E69D8D800201794 /* ChatOffboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOffboardingViewModel.swift; sourceTree = "<group>"; };
+		161E1FB72E69D9F900201794 /* ChatOffboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOffboardingCoordinator.swift; sourceTree = "<group>"; };
 		16289DE62E2FEF9A00200CF7 /* EnvironmentValues+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+Extensions.swift"; sourceTree = "<group>"; };
 		162DD75A2C247ACE00FA482D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		162EC84C2DDB54E3000A7224 /* LocalAuthentication.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LocalAuthentication.xcstrings; sourceTree = "<group>"; };
@@ -975,6 +979,7 @@
 		161D84D22E5886C800391FBC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				161E1FB72E69D9F900201794 /* ChatOffboardingCoordinator.swift */,
 				161D84D32E58871800391FBC /* ChatOptInCoordinator.swift */,
 				D052CA322E0B06F00048F98A /* ChatCoordinator.swift */,
 				16D186A72E462D86006ACC7A /* ChatConsentOnboardingCoordinator.swift */,
@@ -1842,6 +1847,7 @@
 		D052CA342E0B08B80048F98A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				161E1FB52E69D8D800201794 /* ChatOffboardingViewModel.swift */,
 				16CCFD8A2E5E07F100A06288 /* ChatOptInViewModel.swift */,
 				16D186AB2E462F06006ACC7A /* ChatConsentOnboardingViewModel.swift */,
 				1607E7BE2E439473006E599A /* ChatInfoOnboardingViewModel.swift */,
@@ -2395,10 +2401,12 @@
 				5DC250662C91D802009E9E7F /* FirebaseClient.swift in Sources */,
 				D0900FA92E25309A00E3EB75 /* ChatErrorViewModel.swift in Sources */,
 				3D3378162CAAC113004BF83F /* AppUnavailableContainerViewModel.swift in Sources */,
+				161E1FB62E69D8EA00201794 /* ChatOffboardingViewModel.swift in Sources */,
 				16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */,
 				1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */,
 				5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */,
 				D06C56092DE70F4D0045C674 /* AppAttestService.swift in Sources */,
+				161E1FB82E69D9FF00201794 /* ChatOffboardingCoordinator.swift in Sources */,
 				D06C2A4F2DDF2FCF0045C674 /* ResponseHandler.swift in Sources */,
 				D08A9A802DB9286D002E9C78 /* SignOutConfirmationCoordinator.swift in Sources */,
 				4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */,

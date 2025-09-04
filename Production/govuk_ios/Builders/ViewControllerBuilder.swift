@@ -585,5 +585,34 @@ class ViewControllerBuilder {
             rootView: containerView
         )
     }
+
+    func chatOffboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatOffboardingViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            completionAction: completionAction
+        )
+        let linksView = InfoLinksView(
+            linkList: [
+                InfoLinkListItem(
+                    text: String.chat.localized("feedbackMenuAccessibilityTitle"),
+                    url: chatService.feedback
+                )
+            ],
+            openURLAction: openURLAction
+        )
+        let containerView = InfoView(
+            viewModel: viewModel,
+            customView: { AnyView(linksView) }
+        )
+        return HostingViewController(
+            rootView: containerView
+        )
+    }
 }
 // swiftlint:enable file_length

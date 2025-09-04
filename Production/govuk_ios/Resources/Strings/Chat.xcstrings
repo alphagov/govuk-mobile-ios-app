@@ -210,6 +210,28 @@
         }
       }
     },
+    "offboardingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Early access to GOV.UK Chat has now ended. GOV.UK Chat and your conversations are no longer available.\n\nWe’re working on improving this feature and it may return soon."
+          }
+        }
+      }
+    },
+    "offboardingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat early access has ended"
+          }
+        }
+      }
+    },
     "onboardingConsentButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

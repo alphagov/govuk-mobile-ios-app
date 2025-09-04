@@ -27,7 +27,6 @@ struct ChatUpsellCard: View {
                             .frame(width: 72, height: 69)
                         Spacer()
                     }
-                   // .padding(.bottom, returnImagePadding())
                     VStack {
                         Button(action: {
                             action()

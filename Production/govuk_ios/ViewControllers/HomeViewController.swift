@@ -74,7 +74,7 @@ class HomeViewController: BaseViewController {
     }
 
     private func configureHomeContent() {
-        let card = ChatCard(action: {})
+        let card = ChatUpsellCard(action: {})
         let hosting = HostingViewController(rootView: card)
 
         homeContentViewController = HomeContentViewController(

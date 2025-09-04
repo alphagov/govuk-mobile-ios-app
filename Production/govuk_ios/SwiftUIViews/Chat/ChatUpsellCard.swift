@@ -3,10 +3,8 @@ import UIComponents
 
 struct ChatUpsellCard: View {
     let action: () -> Void
-    @Environment(\.sizeCategory) var sizeCategory
-    @Environment(\.verticalSizeClass) var verticalSizeClass
     var body: some View {
-        ScrollView(showsIndicators: sizeCategory > .accessibilityLarge) {
+        ScrollView(showsIndicators: false) {
             VStack {
                 HStack(alignment: .top, spacing: 4) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -15,7 +13,6 @@ struct ChatUpsellCard: View {
                             .font(Font.govUK.bodySemibold)
                         Text(String.chat.localized("upsellCardDescription"))
                             .font(Font.govUK.body)
-                            //   .multilineTextAlignment(.leading)
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                         Text(String.chat.localized("upsellCardLinkText"))
                             .font(Font.govUK.body)
@@ -23,14 +20,14 @@ struct ChatUpsellCard: View {
                     }
                     .padding(.trailing, 16)
                     VStack {
-                        Spacer()
+                       Spacer()
                         Image(decorative: "chat_onboarding_info")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 72, height: 69)
                         Spacer()
                     }
-                    .padding(.bottom, returnImagePadding())
+                   // .padding(.bottom, returnImagePadding())
                     VStack {
                         Button(action: {
                             action()
@@ -55,9 +52,6 @@ struct ChatUpsellCard: View {
                     radius: 0, x: 0, y: 3
             )
             .padding()
-        }
-    }
-    private func returnImagePadding() -> CGFloat {
-        return sizeCategory < .accessibilityLarge && verticalSizeClass == .regular ? 44 : 0
+       }
     }
 }

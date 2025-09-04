@@ -527,8 +527,22 @@ class ViewControllerBuilder {
             cancelOnboardingAction: cancelOnboardingAction,
             completionAction: completionAction
         )
-        let containerView = ChatConsentOnboardingView(
-            viewModel: viewModel
+        let containerView = InfoView(
+            viewModel: viewModel,
+            customView: {
+                AnyView(InfoIconListView(
+                    list: [
+                        InfoIconListItem(
+                            text: String.chat.localized("onboardingConsentFirstListItemText"),
+                            iconName: "info.circle"
+                        ),
+                        InfoIconListItem(
+                            text: String.chat.localized("onboardingConsentSecondListItemText"),
+                            iconName: "filemenu.and.cursorarrow"
+                        )
+                    ]
+                ))
+            }
         )
         let viewController = HostingViewController(
             rootView: containerView,

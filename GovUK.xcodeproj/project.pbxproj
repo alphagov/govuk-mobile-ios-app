@@ -50,6 +50,7 @@
 		16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A98EA42D30333A00C72DEB /* SuggestionCell.swift */; };
 		16A99D6B2D35F19300C72DEB /* SearchSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A99D6A2D35F18700C72DEB /* SearchSuggestionsViewModel.swift */; };
 		16AE517A2E670C28002BCFD7 /* InfoLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE51792E670C19002BCFD7 /* InfoLinksView.swift */; };
+		16AE517F2E6886D3002BCFD7 /* InfoIconListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AE517E2E6886CA002BCFD7 /* InfoIconListView.swift */; };
 		16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */; };
 		16C34B452C4954910031AD32 /* SettingsDeepLinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */; };
 		16CCFD8B2E5E07F700A06288 /* ChatOptInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CCFD8A2E5E07F100A06288 /* ChatOptInViewModel.swift */; };
@@ -57,7 +58,6 @@
 		16D17D422CC01C7600E99794 /* TopicRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D17D412CC01C6A00E99794 /* TopicRowView.swift */; };
 		16D186A62E461DC5006ACC7A /* ChatInfoOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D186A52E461DBB006ACC7A /* ChatInfoOnboardingCoordinator.swift */; };
 		16D186A82E462D94006ACC7A /* ChatConsentOnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D186A72E462D86006ACC7A /* ChatConsentOnboardingCoordinator.swift */; };
-		16D186AA2E462E34006ACC7A /* ChatConsentOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D186A92E462E1F006ACC7A /* ChatConsentOnboardingView.swift */; };
 		16D186AC2E462F14006ACC7A /* ChatConsentOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D186AB2E462F06006ACC7A /* ChatConsentOnboardingViewModel.swift */; };
 		16E8644C2D28362000BCC0FC /* SearchSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E8644B2D28361300BCC0FC /* SearchSuggestions.swift */; };
 		16E912AF2DA72CE000CD2049 /* OIDAuthorizationServiceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E912AE2DA72CAD00CD2049 /* OIDAuthorizationServiceWrapper.swift */; };
@@ -457,6 +457,7 @@
 		16A99D6A2D35F18700C72DEB /* SearchSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsViewModel.swift; sourceTree = "<group>"; };
 		16A99D6F2D36C60200C72DEB /* SearchSuggestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsViewController.swift; sourceTree = "<group>"; };
 		16AE51792E670C19002BCFD7 /* InfoLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLinksView.swift; sourceTree = "<group>"; };
+		16AE517E2E6886CA002BCFD7 /* InfoIconListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoIconListView.swift; sourceTree = "<group>"; };
 		16C34B422C492FF90031AD32 /* HomeDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16C34B442C4954910031AD32 /* SettingsDeepLinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDeepLinkRoute.swift; sourceTree = "<group>"; };
 		16CCFD8A2E5E07F100A06288 /* ChatOptInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOptInViewModel.swift; sourceTree = "<group>"; };
@@ -464,7 +465,6 @@
 		16D17D412CC01C6A00E99794 /* TopicRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRowView.swift; sourceTree = "<group>"; };
 		16D186A52E461DBB006ACC7A /* ChatInfoOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInfoOnboardingCoordinator.swift; sourceTree = "<group>"; };
 		16D186A72E462D86006ACC7A /* ChatConsentOnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConsentOnboardingCoordinator.swift; sourceTree = "<group>"; };
-		16D186A92E462E1F006ACC7A /* ChatConsentOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConsentOnboardingView.swift; sourceTree = "<group>"; };
 		16D186AB2E462F06006ACC7A /* ChatConsentOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConsentOnboardingViewModel.swift; sourceTree = "<group>"; };
 		16E8644B2D28361300BCC0FC /* SearchSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestions.swift; sourceTree = "<group>"; };
 		16E912AE2DA72CAD00CD2049 /* OIDAuthorizationServiceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDAuthorizationServiceWrapper.swift; sourceTree = "<group>"; };
@@ -1032,6 +1032,7 @@
 		16AE517B2E6859D8002BCFD7 /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				16AE517E2E6886CA002BCFD7 /* InfoIconListView.swift */,
 				D09046802DBFD8480096EE66 /* InfoView.swift */,
 				16AE51792E670C19002BCFD7 /* InfoLinksView.swift */,
 			);
@@ -1829,7 +1830,6 @@
 		D052CA312E0B04800048F98A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				16D186A92E462E1F006ACC7A /* ChatConsentOnboardingView.swift */,
 				16F74EBD2E26975800CA8CCB /* ChatView.swift */,
 				16FB8CBE2E216E6A00BBB970 /* DynamicTextEditor.swift */,
 				D052CCE12E0B09BE0048F98A /* ChatActionView.swift */,
@@ -2516,7 +2516,6 @@
 				D052D2322E0B0DE10048F98A /* RoundedBorderViewModifier.swift in Sources */,
 				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */,
 				16A31E782E37959900C984D6 /* Intro.swift in Sources */,
-				16D186AA2E462E34006ACC7A /* ChatConsentOnboardingView.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				16AE517A2E670C28002BCFD7 /* InfoLinksView.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
@@ -2556,6 +2555,7 @@
 				D0ECB3FE2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift in Sources */,
 				D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
+				16AE517F2E6886D3002BCFD7 /* InfoIconListView.swift in Sources */,
 				4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */,
 				4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */,
 				168F85532DE9AE4B0040E6AF /* ScrollBounceBehaviourModifier.swift in Sources */,

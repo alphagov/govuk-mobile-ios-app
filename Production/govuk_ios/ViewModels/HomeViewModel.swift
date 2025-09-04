@@ -132,6 +132,7 @@ class HomeViewModel: ObservableObject {
         else { return nil }
         let viewModel = UserFeedbackWidgetViewModel(
             userFeedback: userFeedback,
+            analyticsService: analyticsService,
             urlOpener: urlOpener
         )
         let widget = WidgetView(

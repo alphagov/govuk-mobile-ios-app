@@ -27,7 +27,7 @@ struct UserFeedbackWidgetView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(UIColor.govUK.text.link))
                     .frame(width: 343)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, 18)
             }
         )
         .accessibilityAddTraits(.isLink)

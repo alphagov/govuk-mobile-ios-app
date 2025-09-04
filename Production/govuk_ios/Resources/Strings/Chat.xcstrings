@@ -389,7 +389,15 @@
       }
     },
     "upsellCardDismissButtonLabel" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss"
+          }
+        }
+      }
     },
     "upsellCardLinkText" : {
       "extractionState" : "manual",

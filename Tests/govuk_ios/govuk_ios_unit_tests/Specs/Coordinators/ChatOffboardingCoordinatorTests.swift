@@ -30,6 +30,7 @@ struct ChatOffboardingCoordinatorTests {
         sut.start()
         let firstViewController = navigationController.viewControllers.first
         #expect(firstViewController == expectedViewController)
+        #expect(mockChatService.chatOptedIn == true)
     }
 
     @Test
@@ -53,6 +54,7 @@ struct ChatOffboardingCoordinatorTests {
 
             sut.start()
             #expect(navigationController.viewControllers.count == 0)
+            #expect(mockChatService.chatOptedIn == false)
         }
     }
 
@@ -77,6 +79,7 @@ struct ChatOffboardingCoordinatorTests {
 
             sut.start()
             #expect(navigationController.viewControllers.count == 0)
+            #expect(mockChatService.chatOptedIn == nil)
         }
     }
 }

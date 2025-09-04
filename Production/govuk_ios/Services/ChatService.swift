@@ -167,6 +167,8 @@ extension ChatService {
         } set {
             if let newValue = newValue {
                 userDefaultsService.set(bool: newValue, forKey: .chatOptedIn)
+            } else {
+                userDefaultsService.removeObject(forKey: .chatOptedIn)
             }
         }
     }

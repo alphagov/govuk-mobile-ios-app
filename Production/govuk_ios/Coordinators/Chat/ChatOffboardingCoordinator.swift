@@ -6,7 +6,7 @@ class ChatOffboardingCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let coordinatorBuilder: CoordinatorBuilder
     private let analyticsService: AnalyticsServiceInterface
-    private let chatService: ChatServiceInterface
+    private var chatService: ChatServiceInterface
     private let completionAction: () -> Void
     private lazy var chatOffboardingViewController: UIViewController = {
         viewControllerBuilder.chatOffboarding(
@@ -33,6 +33,7 @@ class ChatOffboardingCoordinator: BaseCoordinator {
 
     override func start(url: URL?) {
         guard shouldOffboardChat else {
+            removeOptedInStatus()
             completionAction()
             return
         }
@@ -50,5 +51,11 @@ class ChatOffboardingCoordinator: BaseCoordinator {
 
     private var shouldOffboardChat: Bool {
         !chatService.chatTestActive && chatService.chatOptedIn == true
+    }
+
+    private func removeOptedInStatus() {
+        if !chatService.chatTestActive {
+            chatService.chatOptedIn = nil
+        }
     }
 }

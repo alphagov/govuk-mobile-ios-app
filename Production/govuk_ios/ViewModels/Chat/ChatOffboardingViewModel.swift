@@ -42,7 +42,7 @@ class ChatOffboardingViewModel: InfoViewModelInterface {
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 guard let self else { return }
-                chatService.chatOptedIn = true
+                chatService.chatOptedIn = nil
                 trackAction(primaryButtonTitle)
                 completionAction()
             }

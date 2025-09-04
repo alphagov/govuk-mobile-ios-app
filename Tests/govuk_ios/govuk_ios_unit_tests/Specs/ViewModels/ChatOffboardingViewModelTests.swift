@@ -9,6 +9,7 @@ struct ChatOffboardingViewModelTests {
     func primaryButtonViewModel_action_callsCompletion() async {
         await confirmation { confirmation in
             let mockChatService = MockChatService()
+            mockChatService.chatOptedIn = true
             let sut = ChatOffboardingViewModel(
                 analyticsService: MockAnalyticsService(),
                 chatService: mockChatService,
@@ -16,6 +17,7 @@ struct ChatOffboardingViewModelTests {
             )
 
             sut.primaryButtonViewModel.action()
+            #expect(mockChatService.chatOptedIn == nil)
         }
     }
 

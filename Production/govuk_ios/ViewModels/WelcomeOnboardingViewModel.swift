@@ -10,6 +10,10 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
         self.completeAction = completeAction
     }
 
+    var analyticsService: AnalyticsServiceInterface? { nil }
+    var trackingName: String { "" }
+    var trackingTitle: String { "" }
+
     var title: String {
         String.onboarding.localized("welcomeTitle")
     }

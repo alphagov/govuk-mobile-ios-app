@@ -10,6 +10,10 @@ final class SignInSuccessViewModel: InfoViewModelInterface {
         self.completion = completion
     }
 
+    var analyticsService: AnalyticsServiceInterface? { nil }
+    var trackingName: String { "" }
+    var trackingTitle: String { "" }
+
     var title: String {
         String.onboarding.localized("successfulSignInTitle")
     }

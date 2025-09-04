@@ -10,6 +10,10 @@ final class SignInErrorViewModel: InfoViewModelInterface {
         self.completion = completion
     }
 
+    var analyticsService: AnalyticsServiceInterface? { nil }
+    var trackingName: String { "" }
+    var trackingTitle: String { "" }
+
     var title: String {
         String.signOut.localized("signInErrorTitle")
     }

@@ -31,10 +31,6 @@ protocol InfoViewModelInterface {
 }
 
 extension InfoViewModelInterface {
-    var analyticsService: AnalyticsServiceInterface? { nil }
-    var trackingName: String { "" }
-    var trackingTitle: String { "" }
-
     var navBarHidden: Bool { true }
 
     var subtitle: String { "" }

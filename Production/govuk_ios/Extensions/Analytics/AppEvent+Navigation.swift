@@ -20,12 +20,17 @@ extension AppEvent {
     }
 
     static func widgetNavigation(text: String,
-                                 external: Bool = false) -> AppEvent {
-        navigation(
+                                 external: Bool = false,
+                                 params: [String: String]? = nil) -> AppEvent {
+        var mergedParams = ["section": "Homepage"]
+        if let params = params {
+            mergedParams.merge(params) { (_, new) in new }
+        }
+        return navigation(
             text: text,
             type: "Widget",
             external: external,
-            additionalParams: ["section": "Homepage"]
+            additionalParams: mergedParams
         )
     }
 

@@ -72,10 +72,10 @@ class HomeViewModel: ObservableObject {
             alertBanner,
             localAuthorityWidget,
             // notificationsWidget, Removed until dismissable cards introduced
-            // feedbackWidget,  // see https://govukverify.atlassian.net/browse/GOVUKAPP-1220
             recentActivityWidget,
             topicsWidget,
-            storedLocalAuthorityWidget
+            storedLocalAuthorityWidget,
+            userFeedbackWidget
         ].compactMap { $0 }
     }
 
@@ -114,7 +114,7 @@ class HomeViewModel: ObservableObject {
             else { return nil }
 
             let title = String.home.localized("notificationWidgetTitle")
-            let viewModel = UserFeedbackViewModel(
+            let viewModel = NotificationsWidgetViewModel(
                 title: title,
                 action: notificationsAction
             )
@@ -127,16 +127,28 @@ class HomeViewModel: ObservableObject {
     }
 
     @MainActor
-    private var feedbackWidget: WidgetView {
-        let title = String.home.localized("feedbackWidgetTitle")
-        let viewModel = UserFeedbackViewModel(
-            title: title,
-            action: feedbackAction
+    private var userFeedbackWidget: WidgetView? {
+        guard let userFeedback = configService.userFeedbackBanner
+        else { return nil }
+        let viewModel = UserFeedbackWidgetViewModel(
+            userFeedback: userFeedback,
+            analyticsService: analyticsService,
+            urlOpener: urlOpener
         )
-        let content = InformationView(viewModel: viewModel, shouldHideChevron: false)
-        let widget = WidgetView(useContentAccessibilityInfo: true)
-        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
-        widget.addContent(content)
+        let widget = WidgetView(
+            decorateView: false,
+            useContentAccessibilityInfo: false,
+            backgroundColor: .clear,
+            borderColor: UIColor.clear.cgColor
+        )
+        let content = UserFeedbackWidgetView(
+            viewModel: viewModel
+        )
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        hostingViewController.view.backgroundColor = .clear
+        widget.addContent(hostingViewController.view)
         return widget
     }
 

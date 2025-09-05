@@ -22,6 +22,10 @@ struct HomeViewModelTests {
             body: "test",
             link: nil
         )
+        mockConfigService._stubbedUserFeedbackBanner = .init(
+            body: "test",
+            link: mockConfigService._stubbedUserFeedbackBannerLink
+        )
 
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
@@ -46,7 +50,7 @@ struct HomeViewModelTests {
         let widgets = subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 3)
+        #expect(widgets.count == 4)
     }
 
     @Test

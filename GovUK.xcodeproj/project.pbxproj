@@ -78,6 +78,8 @@
 		3D3378142CAAC0E0004BF83F /* AppUnavailableContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */; };
 		3D3378162CAAC113004BF83F /* AppUnavailableContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3378152CAAC113004BF83F /* AppUnavailableContainerViewModel.swift */; };
 		3D3956A92DA6C32000673D3A /* Deeplinks.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3D3956A82DA6C32000673D3A /* Deeplinks.xcstrings */; };
+		3D4A9E602E672975003ABE53 /* UserFeedbackWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4A9E5F2E672975003ABE53 /* UserFeedbackWidgetView.swift */; };
+		3D4A9E622E6735B0003ABE53 /* UserFeedbackWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4A9E612E6735B0003ABE53 /* UserFeedbackWidgetViewModel.swift */; };
 		3D7E2D142C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */; };
 		3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C933B2CB0155300EFA337 /* Bundle+AppVersionProvider.swift */; };
 		3D9C933E2CB0172400EFA337 /* AppForcedUpdateContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C933D2CB0172400EFA337 /* AppForcedUpdateContainerView.swift */; };
@@ -300,7 +302,7 @@
 		D052CCE22E0B09BE0048F98A /* ChatActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052CCE12E0B09BE0048F98A /* ChatActionView.swift */; };
 		D052D2302E0B0DC80048F98A /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052D22F2E0B0DC80048F98A /* ButtonStackView.swift */; };
 		D052D2322E0B0DE10048F98A /* RoundedBorderViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D052D2312E0B0DE10048F98A /* RoundedBorderViewModifier.swift */; };
-		D056CE742D3A83F2005845E0 /* UserFeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */; };
+		D056CE742D3A83F2005845E0 /* NotificationsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE732D3A83F2005845E0 /* NotificationsWidgetViewModel.swift */; };
 		D056CE762D3A848A005845E0 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056CE752D3A847F005845E0 /* InformationView.swift */; };
 		D05AF4DA2CAD3C2900F86DD0 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */; };
 		D05AF4DC2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */; };
@@ -486,6 +488,8 @@
 		3D3378132CAAC0E0004BF83F /* AppUnavailableContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUnavailableContainerView.swift; sourceTree = "<group>"; };
 		3D3378152CAAC113004BF83F /* AppUnavailableContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUnavailableContainerViewModel.swift; sourceTree = "<group>"; };
 		3D3956A82DA6C32000673D3A /* Deeplinks.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Deeplinks.xcstrings; sourceTree = "<group>"; };
+		3D4A9E5F2E672975003ABE53 /* UserFeedbackWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackWidgetView.swift; sourceTree = "<group>"; };
+		3D4A9E612E6735B0003ABE53 /* UserFeedbackWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackWidgetViewModel.swift; sourceTree = "<group>"; };
 		3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentContainerViewModel.swift; sourceTree = "<group>"; };
 		3D9C933B2CB0155300EFA337 /* Bundle+AppVersionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppVersionProvider.swift"; sourceTree = "<group>"; };
 		3D9C933D2CB0172400EFA337 /* AppForcedUpdateContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppForcedUpdateContainerView.swift; sourceTree = "<group>"; };
@@ -710,7 +714,7 @@
 		D052CCE12E0B09BE0048F98A /* ChatActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatActionView.swift; sourceTree = "<group>"; };
 		D052D22F2E0B0DC80048F98A /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		D052D2312E0B0DE10048F98A /* RoundedBorderViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBorderViewModifier.swift; sourceTree = "<group>"; };
-		D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackViewModel.swift; sourceTree = "<group>"; };
+		D056CE732D3A83F2005845E0 /* NotificationsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsWidgetViewModel.swift; sourceTree = "<group>"; };
 		D056CE752D3A847F005845E0 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		D05AF4DB2CAD3C4E00F86DD0 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
@@ -1048,6 +1052,7 @@
 				5DABE8CE2CA41AD4003AB312 /* RecentActivtyWidget.swift */,
 				5D51C8372C5BBF600011ABE9 /* WidgetView.swift */,
 				5DC0DB402E57ADDA002C91E3 /* AlertBannerWidgetView.swift */,
+				3D4A9E5F2E672975003ABE53 /* UserFeedbackWidgetView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1259,6 +1264,7 @@
 				1677D4032E00694B00FB1E56 /* LocalAuthenticationSettingsViewModel.swift */,
 				D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */,
 				5DA8ADDE2DD4968100ECEB6B /* NotificationsOnboardingViewModel.swift */,
+				D056CE732D3A83F2005845E0 /* NotificationsWidgetViewModel.swift */,
 				5DD4CB192D95491E00459FB5 /* RecentActivityListViewModel.swift */,
 				168F6FA92C4FC56B00A0D7F7 /* RecentActivityWidgetViewModel.swift */,
 				D0D9CFD82D30309D0051EDDD /* SearchHistoryViewModel.swift */,
@@ -1270,7 +1276,7 @@
 				D08A9A852DB92F6F002E9C78 /* SignOutConfirmationViewModel.swift */,
 				4EEC0F2F2DBB7B9100D745F2 /* StoredLocalAuthorityWidgetViewModel.swift */,
 				D05AF4DD2CAD3C5500F86DD0 /* Topics */,
-				D056CE732D3A83F2005845E0 /* UserFeedbackViewModel.swift */,
+				3D4A9E612E6735B0003ABE53 /* UserFeedbackWidgetViewModel.swift */,
 				164150AE2DE5DB6800798DF3 /* WelcomeOnboardingViewModel.swift */,
 			);
 			path = ViewModels;
@@ -2422,7 +2428,8 @@
 				D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */,
 				4E5E79A82DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift in Sources */,
 				4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */,
-				D056CE742D3A83F2005845E0 /* UserFeedbackViewModel.swift in Sources */,
+				3D4A9E622E6735B0003ABE53 /* UserFeedbackWidgetViewModel.swift in Sources */,
+				D056CE742D3A83F2005845E0 /* NotificationsWidgetViewModel.swift in Sources */,
 				16EE1A412C6F8968005E820F /* SearchViewController.swift in Sources */,
 				4EA3C3502C91B8C4000D731C /* RecentActivityCoordinator.swift in Sources */,
 				5D8683952C340F1B0024F2D8 /* DeeplinkRoute.swift in Sources */,
@@ -2451,6 +2458,7 @@
 				D0D9CB942D3024C00051EDDD /* SearchItem.swift in Sources */,
 				D0D9CB952D3024C00051EDDD /* SearchHistoryItem.swift in Sources */,
 				5D41DB5D2C0870020011E691 /* Container+Aliases.swift in Sources */,
+				3D4A9E602E672975003ABE53 /* UserFeedbackWidgetView.swift in Sources */,
 				5DBE08042C480CA700B58DBE /* AnimationView+Convenience.swift in Sources */,
 				5D925B182CB7CDEE00A1E241 /* GroupedListSectionHeaderView.swift in Sources */,
 				4E5E79A62DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift in Sources */,

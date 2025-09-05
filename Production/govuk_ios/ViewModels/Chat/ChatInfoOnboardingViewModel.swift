@@ -27,14 +27,13 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
         String.chat.localized("onboardingInfoDescription")
     }
 
-    var buttonTitle: String {
+    var primaryButtonTitle: String {
         String.common.localized("continue")
     }
 
-    var buttonViewModel: GOVUKButton.ButtonViewModel {
-        let localTitle = buttonTitle
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         return .init(
-            localisedTitle: localTitle,
+            localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 self?.completionAction()
                 self?.trackCompletionAction()
@@ -50,14 +49,6 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
                 .padding(.bottom, 16)
                 .frame(width: 140, height: 140)
         )
-    }
-
-    var showImageWhenCompact: Bool {
-        false
-    }
-
-    var subtitleFont: Font {
-        Font.govUK.body
     }
 
     var navBarHidden: Bool {
@@ -88,7 +79,7 @@ class ChatInfoOnboardingViewModel: InfoViewModelInterface {
 
     private func trackCompletionAction() {
         let event = AppEvent.buttonNavigation(
-            text: buttonTitle,
+            text: primaryButtonTitle,
             external: false
         )
         analyticsService?.track(event: event)

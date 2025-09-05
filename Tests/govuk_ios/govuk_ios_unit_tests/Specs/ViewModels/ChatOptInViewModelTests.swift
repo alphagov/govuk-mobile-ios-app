@@ -12,7 +12,6 @@ struct ChatOptInViewModelTests {
             let sut = ChatOptInViewModel(
                 analyticsService: MockAnalyticsService(),
                 chatService: mockChatService,
-                openURLAction: { _ in },
                 completionAction: { confirmation() }
             )
 
@@ -28,7 +27,6 @@ struct ChatOptInViewModelTests {
         let sut = ChatOptInViewModel(
             analyticsService: mockAnalyticsService,
             chatService: MockChatService(),
-            openURLAction: { _ in },
             completionAction: { }
         )
 
@@ -46,12 +44,11 @@ struct ChatOptInViewModelTests {
             let sut = ChatOptInViewModel(
                 analyticsService: MockAnalyticsService(),
                 chatService: mockChatService,
-                openURLAction: { _ in },
                 completionAction: { confirmation() }
             )
 
             #expect(mockChatService.chatOptedIn == nil)
-            sut.secondaryButtonViewModel.action()
+            sut.secondaryButtonViewModel?.action()
             #expect(!mockChatService.chatOptedIn!)
         }
     }
@@ -62,11 +59,10 @@ struct ChatOptInViewModelTests {
         let sut = ChatOptInViewModel(
             analyticsService: mockAnalyticsService,
             chatService: MockChatService(),
-            openURLAction: { _ in },
             completionAction: { }
         )
 
-        sut.secondaryButtonViewModel.action()
+        sut.secondaryButtonViewModel?.action()
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(
             mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Do not add GOV.UK Chat"

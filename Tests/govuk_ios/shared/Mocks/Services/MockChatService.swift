@@ -3,6 +3,11 @@ import Foundation
 @testable import govuk_ios
 
 final class MockChatService: ChatServiceInterface {
+    var _stubbedChatTestActive = false
+    var chatTestActive: Bool {
+        _stubbedChatTestActive
+    }
+
     var chatOptedIn: Bool?
 
     var _stubbedChatOptInAvailable: Bool = false

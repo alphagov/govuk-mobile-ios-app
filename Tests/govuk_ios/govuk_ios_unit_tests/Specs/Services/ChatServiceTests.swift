@@ -421,6 +421,32 @@ final class ChatServiceTests {
     }
 
     @Test
+    func chatTestActive_featureUnavailable_returnFalse() {
+        mockConfigService.features = []
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        #expect(sut.chatTestActive == false)
+    }
+
+    @Test
+    func chatTestActive_featureAvailable_returnsTrue() {
+        mockConfigService.features = [.testIntegrationChatTestActive]
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        #expect(sut.chatTestActive == true)
+    }
+
+    @Test
     func chatOptInAvailable_featureUnavailable_returnFalse() {
         mockConfigService.features = []
         let sut = ChatService(

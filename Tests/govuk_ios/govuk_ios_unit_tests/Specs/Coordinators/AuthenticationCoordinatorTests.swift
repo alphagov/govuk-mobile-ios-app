@@ -14,6 +14,7 @@ class AuthenticationCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -33,6 +34,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService, 
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -52,6 +54,7 @@ class AuthenticationCoordinatorTests {
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -71,6 +74,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -91,6 +95,7 @@ class AuthenticationCoordinatorTests {
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -98,6 +103,7 @@ class AuthenticationCoordinatorTests {
         mockAuthenticationService._stubbedAuthenticationResult = .success(
             .init(returningUser: false)
         )
+        mockChatService.chatOptedIn = true
         let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
         newWindow.rootViewController = mockNavigationController
@@ -110,6 +116,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -122,6 +129,7 @@ class AuthenticationCoordinatorTests {
         #expect(mockAnalyticsService._resetConsentCalled)
         #expect(!mockAnalyticsService._setExistingConsentCalled)
         #expect(mockTopicsService._resetOnboardingCalled)
+        #expect(mockChatService.chatOptedIn == nil)
     }
 
     @Test
@@ -131,6 +139,7 @@ class AuthenticationCoordinatorTests {
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInSuccessCoordinator
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -150,6 +159,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -170,6 +180,7 @@ class AuthenticationCoordinatorTests {
         mockCoordinatorBuilder._stubbedSignInSuccessCoordinator = mockSignInCoordinator
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -189,6 +200,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { continuation.resume(returning: true) },
                 handleError: { _ in }
             )
@@ -206,6 +218,7 @@ class AuthenticationCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
         mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
@@ -225,6 +238,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -241,6 +255,7 @@ class AuthenticationCoordinatorTests {
     func start_authenticationOnboardingNotSeen_shouldntEncryptToken_doesntEncryptRefreshToken() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController =  MockNavigationController()
@@ -260,6 +275,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { },
                 handleError: { _ in }
             )
@@ -276,6 +292,7 @@ class AuthenticationCoordinatorTests {
     func authenticationFailure_callsHandleError() async {
         let mockAuthenticationService = MockAuthenticationService()
         let mockTopicsService = MockTopicsService()
+        let mockChatService = MockChatService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController =  MockNavigationController()
 
@@ -296,6 +313,7 @@ class AuthenticationCoordinatorTests {
                 localAuthenticationService: mockLocalAuthenticationService,
                 analyticsService: mockAnalyticsService,
                 topicsService: mockTopicsService,
+                chatService: mockChatService,
                 completionAction: { continuation.resume(returning: true) },
                 handleError: { error in
                     authError = error

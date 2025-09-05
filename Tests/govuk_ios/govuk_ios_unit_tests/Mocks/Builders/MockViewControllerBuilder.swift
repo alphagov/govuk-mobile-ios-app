@@ -309,4 +309,14 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     ) -> UIViewController {
         return _stubbedChatOptInController ?? UIViewController()
     }
+
+    var _stubbedChatOffboardingController: UIViewController?
+    override func chatOffboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        return _stubbedChatOffboardingController ?? UIViewController()
+    }
 }

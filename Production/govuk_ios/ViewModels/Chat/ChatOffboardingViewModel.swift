@@ -2,7 +2,7 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-class ChatOptInViewModel: InfoViewModelInterface {
+class ChatOffboardingViewModel: InfoViewModelInterface {
     var analyticsService: AnalyticsServiceInterface?
     private var chatService: ChatServiceInterface
     private let completionAction: () -> Void
@@ -15,26 +15,16 @@ class ChatOptInViewModel: InfoViewModelInterface {
         self.completionAction = completionAction
     }
 
-    var image: AnyView {
-        AnyView(
-            Image.chatOnboardingImage
-        )
-    }
-
     var title: String {
-        String.chat.localized("optInTitle")
+        String.chat.localized("offboardingTitle")
     }
 
     var subtitle: String {
-        String.chat.localized("optInDescription")
+        String.chat.localized("offboardingDescription")
     }
 
     var primaryButtonTitle: String {
-        String.chat.localized("optInPrimaryButtonTitle")
-    }
-
-    var secondaryButtonTitle: String {
-        String.chat.localized("optInSecondaryButtonTitle")
+        String.common.localized("continue")
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -42,22 +32,16 @@ class ChatOptInViewModel: InfoViewModelInterface {
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 guard let self else { return }
-                chatService.chatOptedIn = true
+                chatService.chatOptedIn = nil
                 trackAction(primaryButtonTitle)
                 completionAction()
             }
         )
     }
 
-    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel? {
-        return .init(
-            localisedTitle: secondaryButtonTitle,
-            action: { [weak self] in
-                guard let self else { return }
-                chatService.chatOptedIn = false
-                trackAction(secondaryButtonTitle)
-                completionAction()
-            }
+    var image: AnyView {
+        AnyView(
+            Image.chatOnboardingImage
         )
     }
 
@@ -66,7 +50,7 @@ class ChatOptInViewModel: InfoViewModelInterface {
     }
 
     var trackingName: String {
-        "Chat opt-in"
+        "Chat offboarding"
     }
 
     private func trackAction(_ text: String) {

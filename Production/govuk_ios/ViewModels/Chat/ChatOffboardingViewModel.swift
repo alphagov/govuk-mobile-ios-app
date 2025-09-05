@@ -15,16 +15,6 @@ class ChatOffboardingViewModel: InfoViewModelInterface {
         self.completionAction = completionAction
     }
 
-    var image: AnyView {
-        AnyView(
-            Image(decorative: "chat_onboarding_info")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 140, height: 140)
-                .padding(.bottom, 16)
-        )
-    }
-
     var title: String {
         String.chat.localized("offboardingTitle")
     }
@@ -46,6 +36,12 @@ class ChatOffboardingViewModel: InfoViewModelInterface {
                 trackAction(primaryButtonTitle)
                 completionAction()
             }
+        )
+    }
+
+    var image: AnyView {
+        AnyView(
+            Image.chatOnboardingImage
         )
     }
 

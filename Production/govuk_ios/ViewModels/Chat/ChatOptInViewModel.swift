@@ -17,11 +17,7 @@ class ChatOptInViewModel: InfoViewModelInterface {
 
     var image: AnyView {
         AnyView(
-            Image(decorative: "chat_onboarding_info")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 140, height: 140)
-                .padding(.bottom, 16)
+            Image.chatOnboardingImage
         )
     }
 

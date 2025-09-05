@@ -19,11 +19,10 @@ struct UserFeedbackWidgetViewModel {
     }
 
     func open() {
-        let event = AppEvent.navigation(
+        let event = AppEvent.widgetNavigation(
             text: linkTitle,
-            type: "Widget",
             external: true,
-            additionalParams: ["section": "Homepage", "url": linkUrl.absoluteString]
+            params: ["url": linkUrl.absoluteString]
         )
         analyticsService.track(event: event)
         urlOpener.openIfPossible(linkUrl)

@@ -8,7 +8,7 @@ class ChatViewModel: ObservableObject {
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
-    private var didLoadHistory: Bool = false
+    private var shouldLoadHistory: Bool = true
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -18,6 +18,20 @@ class ChatViewModel: ObservableObject {
     @Published var errorText: String?
     @Published var textViewHeight: CGFloat = 50.0
     @Published var requestInFlight: Bool = false
+
+    var absoluteRemainingCharacters: Int {
+        abs(maxCharacters - latestQuestion.count)
+    }
+
+    var shouldDisableSend: Bool {
+        latestQuestion.isEmpty ||
+        (latestQuestion.count > maxCharacters) ||
+        requestInFlight
+    }
+
+    var currentConversationExists: Bool {
+        chatService.currentConversationId != nil
+    }
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -58,7 +72,7 @@ class ChatViewModel: ObservableObject {
                 if error == .validationError {
                     self?.errorText = String.chat.localized("validationErrorText")
                 } else {
-                    self?.handleError(error)
+                    self?.processError(error)
                     self?.latestQuestion = ""
                 }
                 completion?(false)
@@ -83,14 +97,14 @@ class ChatViewModel: ObservableObject {
                 scrollToTop = true
                 cellModels.append(cellModel)
             case .failure(let error):
-                handleError(error)
+                processError(error)
             }
             trackAnswerResponse()
         }
     }
 
     func loadHistory() {
-        guard !didLoadHistory else {
+        guard shouldLoadHistory else {
             return
         }
         guard let conversationId = chatService.currentConversationId else {
@@ -105,31 +119,22 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let answers):
-                self?.didLoadHistory = true
+                self?.shouldLoadHistory = false
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
                 if error == .pageNotFound {
                     self?.chatService.clearHistory()
                 } else {
-                    self?.handleError(error)
+                    self?.processError(error)
                 }
             }
             self?.scrollToBottom = true
         }
     }
 
-    var absoluteRemainingCharacters: Int {
-        abs(maxCharacters - latestQuestion.count)
-    }
-
-    var shouldDisableSend: Bool {
-        latestQuestion.isEmpty ||
-        (latestQuestion.count > maxCharacters) ||
-        requestInFlight
-    }
-
-    var currentConversationExists: Bool {
-        chatService.currentConversationId != nil
+    private func processError(_ error: ChatError) {
+        shouldLoadHistory = error != .authenticationError
+        handleError(error)
     }
 
     private func appendIntroMessages() {

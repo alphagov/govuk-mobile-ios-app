@@ -435,9 +435,11 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func chatError(error: ChatError,
+    func chatError(analyticsService: AnalyticsServiceInterface,
+                   error: ChatError,
                    action: @escaping () -> Void) -> UIViewController {
         let viewModel = ChatErrorViewModel(
+            analyticsService: analyticsService,
             error: error,
             action: action
         )
@@ -535,6 +537,26 @@ class ViewControllerBuilder {
         viewController.navigationItem.rightBarButtonItem = viewModel.rightBarButtonItem
         viewController.isModalInPresentation = true
         return viewController
+    }
+
+    func chatOptIn(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatOptInViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            openURLAction: openURLAction,
+            completionAction: completionAction
+        )
+        let containerView = ChatOptInView(
+            viewModel: viewModel
+        )
+        return HostingViewController(
+            rootView: containerView
+        )
     }
 }
 // swiftlint:enable file_length

@@ -8,7 +8,7 @@ class ChatViewModel: ObservableObject {
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
-    private(set) var requestInFlight: Bool = false
+    private var didLoadHistory: Bool = false
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -17,6 +17,7 @@ class ChatViewModel: ObservableObject {
     @Published var latestQuestionID: String = ""
     @Published var errorText: String?
     @Published var textViewHeight: CGFloat = 50.0
+    @Published var requestInFlight: Bool = false
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -45,7 +46,7 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let pendingQuestion):
-                self?.cellModels.removeLast()
+                self?.cellModels.removeAll(where: { $0.id == ChatCellViewModel.loadingQuestion.id })
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
                 self?.latestQuestionID = pendingQuestion.id
@@ -70,7 +71,7 @@ class ChatViewModel: ObservableObject {
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
             guard let self else { return }
-            cellModels.removeLast()
+            cellModels.removeAll(where: { $0.id == ChatCellViewModel.gettingAnswer.id })
             requestInFlight = false
             switch result {
             case .success(let answer):
@@ -89,6 +90,9 @@ class ChatViewModel: ObservableObject {
     }
 
     func loadHistory() {
+        guard !didLoadHistory else {
+            return
+        }
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
             appendIntroMessages()
@@ -101,6 +105,7 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let answers):
+                self?.didLoadHistory = true
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
                 if error == .pageNotFound {
@@ -178,8 +183,18 @@ class ChatViewModel: ObservableObject {
     }
 
     func openAboutURL() {
-        trackMenuAboutTap()
-        openURLAction(Constants.API.govukBaseUrl)
+        trackMenuTap(String.chat.localized("aboutMenuTitle"))
+        openURLAction(chatService.about)
+    }
+
+    func openPrivacyURL() {
+        trackMenuTap(String.chat.localized("privacyMenuTitle"))
+        openURLAction(chatService.privacyPolicy)
+    }
+
+    func openFeedbackURL() {
+        trackMenuTap(String.chat.localized("feedbackMenuTitle"))
+        openURLAction(chatService.feedback)
     }
 
     func trackScreen(screen: TrackableScreen) {
@@ -210,18 +225,16 @@ class ChatViewModel: ObservableObject {
         analyticsService.track(event: event)
     }
 
-    private func trackMenuAboutTap() {
+    private func trackMenuTap(_ itemTitle: String) {
         let event = AppEvent.buttonNavigation(
-            text: String.chat.localized("aboutMenuTitle"),
+            text: itemTitle,
             external: true
         )
         analyticsService.track(event: event)
     }
 
     private func trackAskQuestionSubmission() {
-        let event = AppEvent.chatAskQuestion(
-            text: latestQuestion
-        )
+        let event = AppEvent.chatAskQuestion()
         analyticsService.track(event: event)
     }
 

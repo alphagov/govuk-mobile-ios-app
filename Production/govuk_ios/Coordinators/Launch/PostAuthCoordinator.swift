@@ -40,7 +40,17 @@ class PostAuthCoordinator: BaseCoordinator {
     private func startNotificationOnboardingCoordinator() {
         let coordinator = coordinatorBuilder.notificationOnboarding(
             navigationController: root,
-            completion: completion
+            completion: { [weak self] in
+                self?.startChatOptInCoordinator()
+            }
+        )
+        start(coordinator)
+    }
+
+    private func startChatOptInCoordinator() {
+        let coordinator = coordinatorBuilder.chatOptIn(
+            navigationController: root,
+            completionAction: completion
         )
         start(coordinator)
     }

@@ -20,7 +20,7 @@ class ChatCoordinator: TabItemCoordinator {
     }()
 
     var isEnabled: Bool {
-        chatService.isEnabled
+        chatService.isEnabled && chatService.chatOptedIn == true
     }
 
     init(navigationController: UINavigationController,
@@ -95,6 +95,7 @@ class ChatCoordinator: TabItemCoordinator {
             reauthenticate()
         } else {
             let viewController = viewControllerBuilder.chatError(
+                analyticsService: analyticsService,
                 error: error,
                 action: { [weak self] in
                     guard let self else { return }

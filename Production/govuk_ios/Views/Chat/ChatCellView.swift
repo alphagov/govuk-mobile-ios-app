@@ -52,45 +52,8 @@ struct ChatCellView: View {
                     }
                 }
             Text(viewModel.message)
-                .mask(gradientMask)
             Spacer()
         }
-    }
-
-    private let gradientTimer = Timer.publish(
-        every: 0.1,
-        on: .main,
-        in: .common
-    ).autoconnect()
-
-    private var gradientMask: some View {
-        LinearGradient(
-            gradient: Gradient(stops: [
-                .init(
-                    color: Color(.black).opacity(gradientStopPoint <= 0.01 ? 0 : 1),
-                    location: 0
-                ),
-                .init(
-                    color: Color(.black).opacity(0.1),
-                    location: gradientStopPoint
-                ),
-                .init(
-                    color: Color(.black).opacity(gradientStopPoint >= 0.99 ? 0 : 1),
-                    location: 1
-                )
-            ]),
-            startPoint: .leading,
-            endPoint: .trailing
-        )
-        .animation(.easeInOut(duration: 1), value: gradientStopPoint)
-        .onReceive(gradientTimer, perform: { _ in
-            if gradientStopPoint < 0.99 {
-                let newValue = gradientStopPoint + 0.1
-                gradientStopPoint = min(newValue, 0.99)
-            } else {
-                gradientStopPoint = 0.01
-            }
-        })
     }
 
     private var introView: some View {

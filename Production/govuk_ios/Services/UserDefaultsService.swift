@@ -69,4 +69,5 @@ enum UserDefaultsKeys: String {
     case faceIdSkipped = "govuk_face_id_skipped"
     case refreshTokenExpiryDate = "govuk_refresh_token_expiry_date"
     case chatOnboardingSeen = "govuk_chat_onboarding_seen"
+    case chatOptedIn = "govuk_chat_opted_in"
 }

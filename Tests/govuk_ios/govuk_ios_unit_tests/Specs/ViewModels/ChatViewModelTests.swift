@@ -47,7 +47,7 @@ struct ChatViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 2)
         #expect(
             mockAnalyticsService
-                ._trackedEvents.first?.params?["text"] as? String == "This is the question"
+                ._trackedEvents.first?.params?["text"] as? String == ""
         )
         #expect(
             mockAnalyticsService
@@ -294,6 +294,40 @@ struct ChatViewModelTests {
             sut.openAboutURL()
             #expect(mockAnalyticsService._trackedEvents.count == 1)
             #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "About")
+        }
+    }
+
+    @Test
+    func openFeedbackURL_opensURLAndtracksEvent() async {
+        await confirmation() { confirmation in
+            let mockAnalyticsService = MockAnalyticsService()
+            let sut = ChatViewModel(
+                chatService: MockChatService(),
+                analyticsService: mockAnalyticsService,
+                openURLAction: { _ in confirmation() },
+                handleError: { _ in }
+            )
+
+            sut.openFeedbackURL()
+            #expect(mockAnalyticsService._trackedEvents.count == 1)
+            #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Give feedback")
+        }
+    }
+
+    @Test
+    func openPrivacyURL_opensURLAndtracksEvent() async {
+        await confirmation() { confirmation in
+            let mockAnalyticsService = MockAnalyticsService()
+            let sut = ChatViewModel(
+                chatService: MockChatService(),
+                analyticsService: mockAnalyticsService,
+                openURLAction: { _ in confirmation() },
+                handleError: { _ in }
+            )
+
+            sut.openPrivacyURL()
+            #expect(mockAnalyticsService._trackedEvents.count == 1)
+            #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Privacy notice")
         }
     }
 

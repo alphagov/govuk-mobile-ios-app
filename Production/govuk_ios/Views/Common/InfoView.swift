@@ -32,7 +32,7 @@ struct InfoView: View {
             .ignoresSafeArea()
             .opacity(viewModel.showActionButton ? 1.0 : 0.0)
         }
-        .navigationBarHidden(true)
+        .navigationBarHidden(viewModel.navBarHidden)
         .onAppear {
             viewModel.trackScreen(screen: self)
         }

@@ -7,6 +7,8 @@ protocol UserDefaultsServiceInterface {
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
     func removeObject(forKey key: UserDefaultsKeys)
+    func markSeen(banner: AlertBanner)
+    func hasSeen(banner: AlertBanner) -> Bool
 }
 
 struct UserDefaultsService: UserDefaultsServiceInterface {
@@ -45,6 +47,14 @@ struct UserDefaultsService: UserDefaultsServiceInterface {
         userDefaults.removeObject(forKey: key.rawValue)
         userDefaults.synchronize()
     }
+
+    func markSeen(banner: AlertBanner) {
+        userDefaults.set(Date.now, forKey: banner.id)
+    }
+
+    func hasSeen(banner: AlertBanner) -> Bool {
+        userDefaults.value(forKey: banner.id) != nil
+    }
 }
 
 enum UserDefaultsKeys: String {
@@ -58,4 +68,5 @@ enum UserDefaultsKeys: String {
     case touchIdEnabled = "govuk_touch_id_enabled"
     case faceIdSkipped = "govuk_face_id_skipped"
     case refreshTokenExpiryDate = "govuk_refresh_token_expiry_date"
+    case chatOnboardingSeen = "govuk_chat_onboarding_seen"
 }

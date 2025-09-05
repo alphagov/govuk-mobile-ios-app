@@ -78,7 +78,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedChatCoordinator: TabItemCoordinator?
-    override var chat: any TabItemCoordinator {
+    override func chat(cancelOnboardingAction: @escaping () -> Void) -> TabItemCoordinator {
         return _stubbedChatCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()

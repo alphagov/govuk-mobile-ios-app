@@ -47,10 +47,14 @@ struct ChatActionView: View {
                     Text(String.chat.localized("clearAlertConfirmTitle")),
                     action: {
                         viewModel.newChat()
+                        viewModel.trackMenuClearChatConfirmTap()
                     }
                 ),
                 secondaryButton: .cancel(
-                    Text(String.chat.localized("clearAlertDenyTitle"))
+                    Text(String.chat.localized("clearAlertDenyTitle")),
+                    action: {
+                        viewModel.trackMenuClearChatDenyTap()
+                    }
                 )
             )
         }
@@ -93,14 +97,20 @@ struct ChatActionView: View {
     }
 
     private var menuView: some View {
-        return Menu {
-            Button(
-                role: .destructive,
-                action: { showClearChatAlert = true },
-                label: {
-                    Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
-                }
-            )
+        Menu {
+            if viewModel.currentConversationExists {
+                Button(
+                    role: .destructive,
+                    action: {
+                        viewModel.trackMenuClearChatTap()
+                        showClearChatAlert = true
+                    },
+                    label: {
+                        Label(String.chat.localized("clearMenuTitle"), systemImage: "trash")
+                    }
+                )
+                .disabled(viewModel.requestInFlight)
+            }
             Button(
                 action: { viewModel.openAboutURL() },
                 label: {

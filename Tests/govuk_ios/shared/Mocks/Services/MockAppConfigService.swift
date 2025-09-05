@@ -16,6 +16,11 @@ class MockAppConfigService: AppConfigServiceInterface {
 
     var features: [Feature] = [.onboarding, .search, .topics, .recentActivity]
 
+    var _stubbedAlertBanner: AlertBanner?
+    var alertBanner: AlertBanner? {
+        _stubbedAlertBanner
+    }
+
     var _receivedFetchAppConfigCompletion: FetchAppConfigCompletion?
     var _stubbedFetchAppConfigResult: FetchAppConfigResult?
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {

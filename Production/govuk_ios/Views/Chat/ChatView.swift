@@ -1,4 +1,5 @@
 import SwiftUI
+import GOVKit
 
 struct ChatView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -35,6 +36,7 @@ struct ChatView: View {
         }
         .onAppear {
             viewModel.loadHistory()
+            viewModel.trackScreen(screen: self)
             withAnimation(
                 .easeIn(
                     duration: viewModel.currentConversationExists ? 0.0 : introDuration * 4
@@ -168,5 +170,15 @@ struct ChatView: View {
             startPoint: .top,
             endPoint: .bottom
         )
+    }
+}
+
+extension ChatView: TrackableScreen {
+    var trackingName: String {
+        "Chat Screen"
+    }
+
+    var trackingTitle: String? {
+        "Chat Screen"
     }
 }

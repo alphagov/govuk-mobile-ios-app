@@ -30,4 +30,12 @@ class MockUserDefaultsService: UserDefaultsServiceInterface {
     func removeObject(forKey key: UserDefaultsKeys) {
         store[key.rawValue] = nil
     }
+
+    func markSeen(banner: AlertBanner) {
+
+    }
+
+    func hasSeen(banner: AlertBanner) -> Bool {
+        false
+    }
 }

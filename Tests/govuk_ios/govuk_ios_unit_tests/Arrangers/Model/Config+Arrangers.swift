@@ -23,7 +23,8 @@ extension Config {
             lastUpdated: lastUpdated,
             searchApiUrl: searchApiUrl,
             authenticationIssuerBaseUrl: authenticationIssuerBaseUrl,
-            chatPollIntervalSeconds: chatPollIntervalSeconds
+            chatPollIntervalSeconds: chatPollIntervalSeconds,
+            alertBanner: .init(id: "1234", body: "test", link: nil)
         )
     }
 }

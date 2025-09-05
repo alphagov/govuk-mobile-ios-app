@@ -8,7 +8,7 @@ class ChatViewModel: ObservableObject {
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
-    private var requestInFlight: Bool = false
+    private(set) var requestInFlight: Bool = false
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -36,15 +36,16 @@ class ChatViewModel: ObservableObject {
             completion?(false)
             return
         }
+        trackAskQuestionSubmission()
         errorText = nil
         cellModels.append(.loadingQuestion)
         scrollToBottom = true
         requestInFlight = true
         chatService.askQuestion(localQuestion) { [weak self] result in
-            self?.cellModels.removeLast()
             self?.requestInFlight = false
             switch result {
             case .success(let pendingQuestion):
+                self?.cellModels.removeLast()
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
                 self?.latestQuestionID = pendingQuestion.id
@@ -64,23 +65,26 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-    func pollForAnswer(_ question: PendingQuestion) {
+    private func pollForAnswer(_ question: PendingQuestion) {
         requestInFlight = true
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
-            self?.cellModels.removeLast()
-            self?.requestInFlight = false
+            guard let self else { return }
+            cellModels.removeLast()
+            requestInFlight = false
             switch result {
             case .success(let answer):
                 let cellModel = ChatCellViewModel(
                     answer: answer,
-                    openURLAction: self?.openURLAction
+                    openURLAction: openURLAction,
+                    analyticsService: analyticsService
                 )
-                self?.scrollToTop = true
-                self?.cellModels.append(cellModel)
+                scrollToTop = true
+                cellModels.append(cellModel)
             case .failure(let error):
-                self?.handleError(error)
+                handleError(error)
             }
+            trackAnswerResponse()
         }
     }
 
@@ -150,7 +154,8 @@ class ChatViewModel: ObservableObject {
             cellModels.append(question)
             let answer = ChatCellViewModel(
                 answer: answeredQuestion.answer,
-                openURLAction: openURLAction
+                openURLAction: openURLAction,
+                analyticsService: analyticsService
             )
             cellModels.append(answer)
         }
@@ -173,6 +178,60 @@ class ChatViewModel: ObservableObject {
     }
 
     func openAboutURL() {
+        trackMenuAboutTap()
         openURLAction(Constants.API.govukBaseUrl)
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
+    func trackMenuClearChatTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearMenuTitle"),
+            action: "Clear Chat Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuClearChatConfirmTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearAlertConfirmTitle"),
+            action: "Clear Chat Yes Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuClearChatDenyTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearAlertDenyTitle"),
+            action: "Clear Chat No Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackMenuAboutTap() {
+        let event = AppEvent.buttonNavigation(
+            text: String.chat.localized("aboutMenuTitle"),
+            external: true
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackAskQuestionSubmission() {
+        let event = AppEvent.chatAskQuestion(
+            text: latestQuestion
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackAnswerResponse() {
+        let event = AppEvent.function(
+            text: "Chat Question Answer Returned",
+            type: "ChatQuestionAnswerReturned",
+            section: "Chat",
+            action: "Chat Question Answer Returned"
+        )
+        analyticsService.track(event: event)
     }
 }

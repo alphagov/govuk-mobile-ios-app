@@ -28,6 +28,7 @@ class ViewControllerBuilder {
         let activityService: ActivityServiceInterface
         let topicWidgetViewModel: TopicsWidgetViewModel
         let localAuthorityService: LocalAuthorityServiceInterface
+        let userDefaultService: UserDefaultsServiceInterface
     }
 
     struct HomeActions {
@@ -57,7 +58,8 @@ class ViewControllerBuilder {
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
             activityService: dependencies.activityService,
-            localAuthorityService: dependencies.localAuthorityService
+            localAuthorityService: dependencies.localAuthorityService,
+            userDefaultService: dependencies.userDefaultService
         )
         return HomeViewController(
             viewModel: viewModel
@@ -487,6 +489,51 @@ class ViewControllerBuilder {
         viewController.openSettingsAction = {
             openSettingsAction(viewController)
         }
+        return viewController
+    }
+
+    func chatInfoOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        completionAction: @escaping () -> Void,
+        cancelOnboardingAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatInfoOnboardingViewModel(
+            analyticsService: analyticsService,
+            completionAction: completionAction,
+            cancelOnboardingAction: cancelOnboardingAction
+        )
+        let containerView = InfoView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: containerView
+        )
+        viewController.navigationItem.rightBarButtonItem = viewModel.rightBarButtonItem
+        viewController.isModalInPresentation = true
+        return viewController
+    }
+
+    func chatConsentOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        cancelOnboardingAction: @escaping () -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatConsentOnboardingViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            cancelOnboardingAction: cancelOnboardingAction,
+            completionAction: completionAction
+        )
+        let containerView = ChatConsentOnboardingView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: containerView,
+            navigationBarTintColor: .govUK.text.link
+        )
+        viewController.navigationItem.rightBarButtonItem = viewModel.rightBarButtonItem
+        viewController.isModalInPresentation = true
         return viewController
     }
 }

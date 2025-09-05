@@ -70,4 +70,37 @@ struct UserDefaultsServiceTests {
         #expect(mockUserDefaults._receivedRemoveObjectForKeyKey == UserDefaultsKeys.biometricsPolicyState.rawValue)
         #expect(mockUserDefaults._synchronizeCalled)
     }
+
+    @Test
+    func markSeen_setsExpectedValue() throws {
+        let mockUserDefaults = MockUserDefaults()
+        let sut = UserDefaultsService(userDefaults: mockUserDefaults)
+
+        let expectedValue = UUID().uuidString
+        let alert = AlertBanner(id: expectedValue, body: "test body", link: nil)
+
+        sut.markSeen(banner: alert)
+
+        let date = try #require(mockUserDefaults._receivedSetValueValue as? Date)
+        #expect(Calendar.current.isDate(date, equalTo: .now, toGranularity: .minute))
+    }
+
+    @Test
+    func hasSeen_returnsExpectedValues() throws {
+        let mockUserDefaults = MockUserDefaults()
+        let sut = UserDefaultsService(userDefaults: mockUserDefaults)
+
+        let expectedSeenValue = UUID().uuidString
+        let seenAlert = AlertBanner(id: expectedSeenValue, body: "test body", link: nil)
+        mockUserDefaults._stubbedValues = [
+            expectedSeenValue: Date.now
+        ]
+
+        let expectedUnseenValue = UUID().uuidString
+        let unseenAlert = AlertBanner(id: expectedUnseenValue, body: "test body 2", link: nil)
+
+        #expect(sut.hasSeen(banner: seenAlert))
+
+        #expect(sut.hasSeen(banner: unseenAlert) == false)
+    }
 }

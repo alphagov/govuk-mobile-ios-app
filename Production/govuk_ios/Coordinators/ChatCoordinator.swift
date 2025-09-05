@@ -8,13 +8,15 @@ class ChatCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
-    private var isShowingError = false
+    private let cancelOnboardingAction: () -> Void
+    var isShowingError = false
     private lazy var chatViewController: UIViewController = {
         viewControllerBuilder.chat(
             analyticsService: analyticsService,
             chatService: chatService,
             openURLAction: presentWebView,
-            handleError: handleError)
+            handleError: handleError
+        )
     }()
 
     var isEnabled: Bool {
@@ -26,17 +28,21 @@ class ChatCoordinator: TabItemCoordinator {
          viewControllerBuilder: ViewControllerBuilder,
          deepLinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
-         chatService: ChatServiceInterface) {
+         chatService: ChatServiceInterface,
+         cancelOnboardingAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deepLinkStore
         self.analyticsService = analyticsService
         self.chatService = chatService
+        self.cancelOnboardingAction = cancelOnboardingAction
         super.init(navigationController: navigationController)
     }
 
     override func start(url: URL?) {
-        set(chatViewController)
+        guard chatService.chatOnboardingSeen else { return }
+
+        setChatViewController()
         isShowingError = false
     }
 
@@ -56,39 +62,59 @@ class ChatCoordinator: TabItemCoordinator {
         start(coordinator)
     }
 
+    private func reauthenticate() {
+        let coordinator = coordinatorBuilder.periAuth(navigationController: root) {
+            self.start()
+            self.chatService.retryAction?()
+        }
+        start(coordinator)
+    }
+
     func didReselectTab() { /* To be implemented */ }
     func didSelectTab(_ selectedTabIndex: Int,
                       previousTabIndex: Int) {
-        if selectedTabIndex != previousTabIndex &&
-            isShowingError {
-            set(chatViewController, animated: false)
+        if !chatService.chatOnboardingSeen {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                present(
+                    coordinatorBuilder.chatInfoOnboarding(
+                        cancelOnboardingAction: cancelOnboardingAction,
+                        setChatViewControllerAction: setChatViewController
+                    )
+                )
+            }
+        } else if selectedTabIndex != previousTabIndex && isShowingError {
+            setChatViewController()
             isShowingError = false
         }
     }
 
     private func handleError(_ error: ChatError) {
-        let viewController = viewControllerBuilder.chatError(
-            error: error,
-            action: { [weak self] in
-                guard let self else { return }
-                switch error {
-                case .networkUnavailable:
-                    self.set(
-                        self.chatViewController,
-                        animated: false
-                    )
-                case .pageNotFound:
-                    self.chatService.clearHistory()
-                    self.set(
-                        self.chatViewController,
-                        animated: false
-                    )
-                default:
-                    break
+        if error == .authenticationError &&
+            !chatService.isRetryAction {
+            reauthenticate()
+        } else {
+            let viewController = viewControllerBuilder.chatError(
+                error: error,
+                action: { [weak self] in
+                    guard let self else { return }
+                    switch error {
+                    case .networkUnavailable:
+                        self.setChatViewController()
+                    case .pageNotFound:
+                        self.chatService.clearHistory()
+                        self.setChatViewController()
+                    default:
+                        break
+                    }
                 }
-            }
-        )
-        set(viewController, animated: false)
-        isShowingError = true
+            )
+            set(viewController, animated: false)
+            isShowingError = true
+        }
+    }
+
+    private func setChatViewController(animated: Bool = false) {
+        set(chatViewController, animated: animated)
     }
 }

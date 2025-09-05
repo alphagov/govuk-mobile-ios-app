@@ -92,17 +92,6 @@
         }
       }
     },
-    "localAuthorityCardWebsiteConstant" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "website"
-          }
-        }
-      }
-    },
     "localAuthorityConfirmationPrimaryButton" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -329,7 +318,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Find services like rubbish and recycling collection, council tax and housing on the "
+            "value" : "District, borough and city councils are usually responsible for services like rubbish, council tax and housing"
           }
         }
       }
@@ -340,7 +329,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Find services like education, social care and transport on the "
+            "value" : "County councils are usually responsible for services like education, social care and transport"
           }
         }
       }
@@ -351,7 +340,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Find services for your area on the"
+            "value" : "Find services for your area on the %@ website"
           }
         }
       }

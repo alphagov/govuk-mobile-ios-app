@@ -16,9 +16,16 @@ struct HomeViewModelTests {
             editAction: { },
             allTopicsAction: { }
         )
+        let mockConfigService = MockAppConfigService()
+        mockConfigService._stubbedAlertBanner = .init(
+            id: "test",
+            body: "test",
+            link: nil
+        )
+
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
-            configService: MockAppConfigService(),
+            configService: mockConfigService,
             notificationService: MockNotificationService(),
             topicWidgetViewModel: topicsViewModel,
             localAuthorityAction: { },
@@ -31,12 +38,15 @@ struct HomeViewModelTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
-        let widgets = await subject.widgets
+
+        await subject.reloadWidgets()
+        let widgets = subject.widgets
 
         #expect((widgets as Any) is [WidgetView])
-        #expect(widgets.count == 2)
+        #expect(widgets.count == 3)
     }
 
     @Test
@@ -69,11 +79,11 @@ struct HomeViewModelTests {
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
-        let widgets = await subject.widgets
+        let widgets = subject.widgets
 
         #expect(widgets.count == 0)
     }
-
 }

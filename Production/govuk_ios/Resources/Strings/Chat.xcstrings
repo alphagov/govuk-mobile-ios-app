@@ -188,6 +188,72 @@
         }
       }
     },
+    "onboardingConsentButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I understand"
+          }
+        }
+      }
+    },
+    "onboardingConsentFirstListItemText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat is an AI tool and can sometimes make mistakes."
+          }
+        }
+      }
+    },
+    "onboardingConsentSecondListItemText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It’s simple to double-check information. Use the links provided with each answer."
+          }
+        }
+      }
+    },
+    "onboardingConsentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-check the answers"
+          }
+        }
+      }
+    },
+    "onboardingInfoDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An easy way to find answers about topics, services and information on GOV.UK."
+          }
+        }
+      }
+    },
+    "onboardingInfoTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get quick answers from GOV.UK Chat"
+          }
+        }
+      }
+    },
     "pageNotFoundButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {

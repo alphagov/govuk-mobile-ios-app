@@ -30,7 +30,8 @@ struct ViewControllerBuilderTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             topicWidgetViewModel: viewModel,
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
 
         let actions = ViewControllerBuilder.HomeActions(
@@ -71,10 +72,6 @@ struct ViewControllerBuilderTests {
 
     @Test
     func recentActivity_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        Container.shared.coreDataRepository.register {
-            coreData
-        }
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
             analyticsService: MockAnalyticsService(),
@@ -89,10 +86,6 @@ struct ViewControllerBuilderTests {
 
     @Test
     func notificationSettings_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        Container.shared.coreDataRepository.register {
-            coreData
-        }
         let subject = ViewControllerBuilder()
         let result = subject.notificationSettings(
             analyticsService: MockAnalyticsService(),
@@ -323,6 +316,33 @@ struct ViewControllerBuilderTests {
         )
         
         let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatInfoOnboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatInfoOnboarding(
+            analyticsService: MockAnalyticsService(),
+            completionAction: { },
+            cancelOnboardingAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatConsentOnboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatConsentOnboarding(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            cancelOnboardingAction: { },
+            completionAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<ChatConsentOnboardingView>)?.rootView
         #expect(rootView != nil)
     }
 }

@@ -331,6 +331,7 @@ class CoordinatorBuilder {
             localAuthenticationService: container.localAuthenticationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             topicsService: container.topicsService.resolve(),
+            chatService: container.chatService.resolve(),
             completionAction: completionAction,
             handleError: handleError
         )

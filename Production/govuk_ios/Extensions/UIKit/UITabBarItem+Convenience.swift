@@ -21,8 +21,8 @@ extension UITabBarItem {
     static var chat: UITabBarItem {
         .init(
             title: String.chat.localized("tabTitle"),
-            image: UIImage(named: "chat_icon"),
-            selectedImage: UIImage(named: "chat_icon_selected")
+            image: UIImage(named: "chat_tabbar_unselected"),
+            selectedImage: UIImage(named: "chat_tabbar_selected")
         )
     }
 }

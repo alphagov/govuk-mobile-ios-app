@@ -24,7 +24,7 @@ final class ChatUpsellCardViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController() -> UIViewController {
-        let view = ChatUpsellCard(action: {})
+        let view = ChatUpsellCard(dismissAction: {}, linkAction: {})
         return HostingViewController(rootView: view)
     }
 }

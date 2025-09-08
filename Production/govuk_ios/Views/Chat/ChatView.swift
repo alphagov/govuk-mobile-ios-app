@@ -119,7 +119,7 @@ struct ChatView: View {
                 .frame(height: 16)
             Text(String.chat.localized("messagesAvailableTitle"))
                 .font(.subheadline)
-                .foregroundStyle(Color(UIColor.govUK.text.chatBackground))
+                .foregroundStyle(Color(UIColor.govUK.text.secondary))
                 .multilineTextAlignment(.center)
             chatCellsView
             Text("")

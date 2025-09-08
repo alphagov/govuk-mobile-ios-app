@@ -26,8 +26,7 @@ struct ChatCellView: View {
             }
         }
         .background(viewModel.backgroundColor)
-        .roundedBorder(borderColor: viewModel.borderColor,
-                       borderWidth: 1.0)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
     private var questionView: some View {

@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-let klass: AnyClass = NSClassFromString("govuk_ios_unit_tests.TestAppDelegate") ??
+let klass: AnyClass = NSClassFromString("TestAppDelegate") ??
                       AppDelegate.self
 
 let classString = NSStringFromClass(klass)

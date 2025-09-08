@@ -15,7 +15,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func start_setsHomeViewController() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedHomeViewController = expectedViewController
@@ -43,7 +43,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func startRecentActivity_startsCoordinatorAndTrackEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -77,7 +77,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func startEditLocalAuthority_startsCoordinatorAndTrackEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -111,7 +111,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func topicAction_startsCoordinatorAndTracksEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -149,7 +149,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func editTopicAction_startsCoordinatorAndTracksEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -183,7 +183,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func allTopicAction_startsCoordinatorAndTracksEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -217,7 +217,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func didReselectTab_resetsToDefaultState_whenOnHomeScreen() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
 
@@ -249,7 +249,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func didReselectTab_doesNotResetToDefaultState_whenOnChildScreen() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
 

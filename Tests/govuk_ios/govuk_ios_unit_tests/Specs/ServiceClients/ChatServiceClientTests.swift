@@ -19,7 +19,7 @@ struct ChatServiceClientTests {
                         conversationId: nil,
                         completion: { _ in } )
 
-        #expect(mockAPI._receivedSendRequest?.urlPath == "/conversation/")
+        #expect(mockAPI._receivedSendRequest?.urlPath == "/conversation")
         #expect(mockAPI._receivedSendRequest?.method == .post)
         #expect(mockAPI._receivedSendRequest?.bodyParameters as? [String: AnyHashable] == ["user_question": expectedQuestion])
     }

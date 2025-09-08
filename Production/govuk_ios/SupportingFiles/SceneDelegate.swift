@@ -29,7 +29,10 @@ class SceneDelegate: UIResponder,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene)
         else { return }
-        window = GovUIWindow(windowScene: windowScene, inactivityService: inactivityService)
+        window = GovUIWindow(
+            windowScene: windowScene,
+            inactivityService: inactivityService
+        )
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 

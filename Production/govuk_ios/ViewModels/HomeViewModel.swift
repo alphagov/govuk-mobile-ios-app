@@ -55,7 +55,7 @@ class HomeViewModel: ObservableObject {
     }
 
     var widgets: [HomepageWidget] {
-        let array = [topicsView].compactMap { $0 }
+        let array = [topicsView, localServicesView].compactMap { $0 }
         return array
     }
 
@@ -66,6 +66,17 @@ class HomeViewModel: ObservableObject {
             content: TopicsView(
                 viewModel: self.topicsWidgetViewModel
             )
+        )
+    }
+
+    var localServicesView: HomepageWidget? {
+        guard featureEnabled(.localServices)
+        else { return nil }
+        let view = LocalAuthorityWidgetView {
+            self.localAuthorityAction()
+        }
+        return HomepageWidget(
+            content: view
         )
     }
 

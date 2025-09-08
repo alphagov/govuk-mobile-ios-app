@@ -352,7 +352,6 @@
 		D0ECB4012DCE0F6600A9707E /* AmbiguousAuthoritySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ECB4002DCE0F6600A9707E /* AmbiguousAuthoritySelectionViewModel.swift */; };
 		D0F5FF7E2D64D22400C3BF51 /* AppEvent+ECommerce.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F5FF7D2D64D22400C3BF51 /* AppEvent+ECommerce.swift */; };
 		D0F6813E2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F6813C2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift */; };
-		D0F6813F2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F6813D2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift */; };
 		D0F681402DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F6813B2DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -751,7 +750,6 @@
 		D0F5FF7D2D64D22400C3BF51 /* AppEvent+ECommerce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+ECommerce.swift"; sourceTree = "<group>"; };
 		D0F6813B2DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityExplainerViewModel.swift; sourceTree = "<group>"; };
 		D0F6813C2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityPostcodeEntryViewModel.swift; sourceTree = "<group>"; };
-		D0F6813D2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityWidgetViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -1887,7 +1885,6 @@
 				4E5E79A52DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift */,
 				D0F6813B2DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift */,
 				D0F6813C2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift */,
-				D0F6813D2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift */,
 				D0ECB4002DCE0F6600A9707E /* AmbiguousAuthoritySelectionViewModel.swift */,
 				D0E85A832DDCD199003B4D7A /* AmbiguousAddressSelectionViewModel.swift */,
 			);
@@ -2494,7 +2491,6 @@
 				4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */,
 				D0F6813E2DD4CF8E004421C0 /* LocalAuthorityPostcodeEntryViewModel.swift in Sources */,
 				D052D2302E0B0DC80048F98A /* ButtonStackView.swift in Sources */,
-				D0F6813F2DD4CF8E004421C0 /* LocalAuthorityWidgetViewModel.swift in Sources */,
 				D0F681402DD4CF8E004421C0 /* LocalAuthorityExplainerViewModel.swift in Sources */,
 				D052CA332E0B06F70048F98A /* ChatCoordinator.swift in Sources */,
 				4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */,

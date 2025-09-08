@@ -9,7 +9,7 @@ struct ChatUpsellCard: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                HStack(alignment: .top, spacing: 6) {
+                HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(String.chat.localized("upsellCardTitle"))
                             .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -23,13 +23,18 @@ struct ChatUpsellCard: View {
                                 linkAction()
                             }
                     }
-                    .padding(.trailing, 8)
+                    .padding(.trailing, 4)
                     VStack {
                        Spacer()
-                        Image(decorative: "chat_onboarding_info")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 72, height: 69)
+                        Button(action: {
+                            linkAction()
+                        },
+                        label: {
+                            Image(decorative: "chat_onboarding_info")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 72, height: 69)
+                        })
                         Spacer()
                     }
                     VStack {
@@ -44,7 +49,6 @@ struct ChatUpsellCard: View {
                         .accessibilityLabel(
                             String.chat.localized("upsellCardDismissButtonLabel")
                         )
-                        .frame(alignment: .trailing)
                     }
                 }.padding()
             }

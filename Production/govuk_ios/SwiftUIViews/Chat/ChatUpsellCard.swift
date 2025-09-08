@@ -2,11 +2,14 @@ import SwiftUI
 import UIComponents
 
 struct ChatUpsellCard: View {
-    let action: () -> Void
+    let dismissAction: () -> Void
+    let linkAction: () -> Void
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                HStack(alignment: .top, spacing: 4) {
+                HStack(alignment: .top, spacing: 6) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(String.chat.localized("upsellCardTitle"))
                             .foregroundColor(Color(UIColor.govUK.text.primary))
@@ -16,9 +19,11 @@ struct ChatUpsellCard: View {
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                         Text(String.chat.localized("upsellCardLinkText"))
                             .font(Font.govUK.body)
-                            .foregroundColor(Color(UIColor.govUK.text.link))
+                            .foregroundColor(Color(UIColor.govUK.text.link)).onTapGesture {
+                                linkAction()
+                            }
                     }
-                    .padding(.trailing, 16)
+                    .padding(.trailing, 8)
                     VStack {
                        Spacer()
                         Image(decorative: "chat_onboarding_info")
@@ -29,7 +34,7 @@ struct ChatUpsellCard: View {
                     }
                     VStack {
                         Button(action: {
-                            action()
+                            dismissAction()
                         }, label: {
                             VStack {
                                 Image(systemName: "xmark")
@@ -43,7 +48,8 @@ struct ChatUpsellCard: View {
                     }
                 }.padding()
             }
-            .background(Image(decorative: "chat_card_gradient")
+            .background(Image(decorative: verticalSizeClass == .compact ?
+                              "chat_card_landscape" : "chat_card_portrait")
                 .resizable()
             )
             .roundedBorder(borderColor: .clear)

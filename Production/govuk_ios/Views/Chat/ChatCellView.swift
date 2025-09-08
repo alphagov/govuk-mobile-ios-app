@@ -32,6 +32,7 @@ struct ChatCellView: View {
     private var questionView: some View {
         HStack(alignment: .top, spacing: 8) {
             Text(viewModel.message)
+                .font(Font.govUK.body)
                 .multilineTextAlignment(.leading)
                 .padding()
         }
@@ -41,7 +42,8 @@ struct ChatCellView: View {
         HStack(spacing: 4) {
             AnimatedAPNGImageView(imageName: "generating-your-answer")
                 .frame(width: 24, height: 24)
-            Text(viewModel.message)
+            ChatEllipsesView(viewModel.message)
+                .font(Font.govUK.body)
             Spacer()
         }
     }

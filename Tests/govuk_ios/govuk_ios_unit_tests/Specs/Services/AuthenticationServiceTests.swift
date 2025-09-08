@@ -478,6 +478,44 @@ struct AuthenticationServiceTests {
 
         #expect(sut.shouldAttemptTokenRefresh)
     }
+
+    @Test
+    func clearRefreshToken_setsRefreshTokenToNil() async {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        mockSecureStoreService._stubbedItemExistsResult = false
+        let mockUserDefaults = MockUserDefaultsService()
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            returningUserService: mockReturningUserService,
+            userDefaultsService: mockUserDefaults
+        )
+
+        let expectedAccessToken = "access_token_value"
+        let expectedRefreshToken = "refresh_token_value"
+        let expectedIdToken = "id_token"
+        let expectedExpiryDate = "2099-01-01T00:00:00Z"
+        let jsonData = """
+        {
+            "accessToken": "\(expectedAccessToken)",
+            "refreshToken": "\(expectedRefreshToken)",
+            "idToken": "\(expectedIdToken)",
+            "tokenType": "id_token",
+            "expiryDate": "\(expectedExpiryDate)"
+        }
+        """.data(using: .utf8)!
+        let tokenResponse = createTokenResponse(jsonData)
+        mockAuthClient._stubbedAuthenticationResult = .success(tokenResponse)
+        _ = await sut.authenticate(window: UIApplication.shared.window!)
+
+        #expect(sut.refreshToken != nil)
+
+        sut.clearRefreshToken()
+
+        #expect(sut.refreshToken == nil)
+    }
 }
 
 private func createTokenResponse(_ jsonData: Data) -> TokenResponse {

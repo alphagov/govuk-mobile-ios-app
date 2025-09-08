@@ -41,6 +41,7 @@ class AppCoordinator: BaseCoordinator {
         inactivityService.startMonitoring(
             inactivityHandler: { [weak self] in
                 self?.root.dismiss(animated: true)
+                self?.authenticationService.clearRefreshToken()
                 self?.startPeriAuthCoordinator()
             }
         )

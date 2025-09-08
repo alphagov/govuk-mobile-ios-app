@@ -5,6 +5,7 @@ import Authentication
 @testable import govuk_ios
 
 class MockAuthenticationService: AuthenticationServiceInterface {
+
     var _storedRefreshToken = true
     var secureStoreRefreshTokenPresent: Bool {
         _storedRefreshToken
@@ -59,5 +60,9 @@ class MockAuthenticationService: AuthenticationServiceInterface {
     var _stubbedShouldAttemptTokenRefresh: Bool = true
     var shouldAttemptTokenRefresh: Bool {
         _stubbedShouldAttemptTokenRefresh
+    }
+
+    func clearRefreshToken() {
+        refreshToken = nil
     }
 }

@@ -10,31 +10,29 @@ struct ChatUpsellCard: View {
         ScrollView(showsIndicators: false) {
             VStack {
                 HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 10) {
                         Text(String.chat.localized("upsellCardTitle"))
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                             .font(Font.govUK.bodySemibold)
                         Text(String.chat.localized("upsellCardDescription"))
                             .font(Font.govUK.body)
                             .foregroundColor(Color(UIColor.govUK.text.primary))
-                        Text(String.chat.localized("upsellCardLinkText"))
-                            .font(Font.govUK.body)
-                            .foregroundColor(Color(UIColor.govUK.text.link)).onTapGesture {
-                                linkAction()
-                            }
+
+                        Button {
+                            linkAction()
+                        } label: {
+                            Text(String.chat.localized("upsellCardLinkText"))
+                                .font(Font.govUK.body)
+                                .foregroundColor(Color(UIColor.govUK.text.link))
+                        }
                     }
                     .padding(.trailing, 4)
                     VStack {
                        Spacer()
-                        Button(action: {
-                            linkAction()
-                        },
-                        label: {
-                            Image(decorative: "chat_onboarding_info")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 72, height: 69)
-                        })
+                        Image(decorative: "chat_onboarding_info")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 72, height: 69)
                         Spacer()
                     }
                     VStack {

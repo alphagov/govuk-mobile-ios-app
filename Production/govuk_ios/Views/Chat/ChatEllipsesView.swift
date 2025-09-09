@@ -4,7 +4,7 @@ struct ChatEllipsesView: View {
     @State private var dots = ""
     private let baseText: String
 
-    private var ellipsesTimer = Timer.publish(every: 1.0,
+    private var ellipsesTimer = Timer.publish(every: 1.1,
                                               on: .main,
                                               in: .common)
         .autoconnect()

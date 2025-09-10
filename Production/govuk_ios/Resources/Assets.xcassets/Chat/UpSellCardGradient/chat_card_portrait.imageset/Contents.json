@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "chat_card_portrait_x1.png",
+      "filename" : "chat_card_portrait@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,12 +12,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "chat_card_darkMode_portrait_x1.png",
+      "filename" : "chat_card_darkMode_portrait@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "chat_card_portrait_x2.png",
+      "filename" : "chat_card_portrait@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "chat_card_darkMode_portrait_x2.png",
+      "filename" : "chat_card_darkMode_portrait@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "chat_card_portrait_x3 1.png",
+      "filename" : "chat_card_portrait@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "chat_card_darkMode_portrait_x3.png",
+      "filename" : "chat_card_darkMode_portrait@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

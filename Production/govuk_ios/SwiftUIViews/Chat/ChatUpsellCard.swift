@@ -17,7 +17,6 @@ struct ChatUpsellCard: View {
                         Text(String.chat.localized("upsellCardDescription"))
                             .font(Font.govUK.body)
                             .foregroundColor(Color(UIColor.govUK.text.primary))
-
                         Button {
                             linkAction()
                         } label: {

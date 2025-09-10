@@ -1,20 +1,18 @@
 import SwiftUI
 
 struct NonTappableCardView: View {
-    var model: NonTappableCard
-    var body: some View {
-        HStack {
-            Text(model.text)
-
-        }
-    }
-}
-
-#Preview {
-    let model = NonTappableCard(text: "This card is to present text")
-    NonTappableCardView(model: model)
-}
-
-struct NonTappableCard {
     var text: String
+    var body: some View {
+        VStack {
+            Text(text)
+                .font(Font.govUK.body)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(
+                    Color(UIColor.govUK.text.secondary)
+                )
+        }.padding()
+            .background(Color(uiColor: .cyan))
+            .roundedBorder(borderColor: .clear)
+            .padding()
+    }
 }

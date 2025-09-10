@@ -481,7 +481,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type your message here"
+            "value" : "Ask a question..."
           }
         }
       }

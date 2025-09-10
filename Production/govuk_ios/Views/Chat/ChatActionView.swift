@@ -62,6 +62,8 @@ struct ChatActionView: View {
     private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
         ZStack(alignment: .bottom) {
             HStack(alignment: .center, spacing: 8) {
+                textEditorView(maxFrameHeight: maxFrameHeight)
+
                 if !textAreaFocused {
                     ChatMenuView(
                         viewModel: viewModel,
@@ -69,13 +71,13 @@ struct ChatActionView: View {
                         disableClearChat: $viewModel.requestInFlight
                     )
                 }
-
-                textEditorView(maxFrameHeight: maxFrameHeight)
             }
             .accessibilityElement(children: .contain)
             .padding([.horizontal, .bottom])
 
             sendButtonView
+                .padding(.trailing, 22)
+                .padding(.bottom, 16)
         }
     }
 
@@ -114,21 +116,21 @@ struct ChatActionView: View {
                 placeholderText = String.chat.localized("textEditorPlaceholder")
             }
         }
-        .padding(.horizontal, 12)
+        .padding(.leading, 10)
+        .padding(.trailing, 44)
         .padding(.top, 8)
-        .padding(.bottom,
-                 textAreaFocused ? (max(50, charactersCountHeight)) : 8)
+        .padding(.bottom, charactersCountHeight == 0 ? 8 : charactersCountHeight)
         .frame(
             height: min(textEditorFrameHeight, maxFrameHeight)
         )
         .background(
             Color(UIColor.govUK.fills.surfaceChatBlue)
-                .roundedBorder(cornerRadius: textEditorRadius,
-                               borderColor: borderColor,
-                               borderWidth: 1.0)
+                .clipShape(RoundedRectangle(cornerRadius: 25))
         )
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: viewModel.textViewHeight)
+        .conditionalAnimation(.easeInOut(duration: animationDuration),
+                              value: charactersCountHeight)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true
@@ -166,7 +168,7 @@ struct ChatActionView: View {
                         Color(UIColor.govUK.text.buttonPrimaryDisabled) :
                             Color(UIColor.govUK.text.buttonPrimary)
                     )
-                    .frame(width: 50, height: 50)
+                    .frame(width: 36, height: 48)
                     .background(
                         Circle().fill(
                             viewModel.shouldDisableSend ?
@@ -182,13 +184,11 @@ struct ChatActionView: View {
                     self.textAreaFocused = true
                 }
             })
-            .padding([.bottom, .trailing], 8)
             .opacity(textAreaFocused ? 1 : 0)
             .conditionalAnimation(.easeInOut(duration: animationDuration),
                                   value: textAreaFocused)
         }
-        .padding([.horizontal, .bottom])
-        .padding(.top, -8)
+        .padding(.leading, 16)
     }
 
     @ViewBuilder
@@ -228,20 +228,17 @@ struct ChatActionView: View {
         }
     }
 
-    private var textEditorRadius: CGFloat {
-        textAreaFocused ? 25.0 : 40.0
-    }
-
     private var textEditorFrameHeight: CGFloat {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
-        let unfocusedHeight = viewModel.latestQuestion.isEmpty ?
-        max(viewModel.textViewHeight + 10, 50) :
-        max(lineHeight + 10, 50)
-
-        return textAreaFocused ?
-        viewModel.textViewHeight + max((2 * lineHeight), 75) :
-        unfocusedHeight
+        if !textAreaFocused && !viewModel.latestQuestion.isEmpty {
+            return max(lineHeight + 10, 48)
+        }
+        if charactersCountHeight > 0 {
+            return max(viewModel.textViewHeight + 10 + charactersCountHeight, 48)
+        } else {
+            return max(viewModel.textViewHeight + 10, 48)
+        }
     }
 }
 

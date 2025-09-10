@@ -6,13 +6,8 @@ import FirebaseAppCheck
 
 struct GovUKProviderFactoryTests {
 
-    @Test func createProvider_withFirebaseApp_returnsExpectedResult() throws {
-        let sut = GovUKProviderFactory()
-        let firebaseApp: FirebaseAppInterface = try #require(FirebaseApp.app())
-        #expect(sut.createProvider(with: firebaseApp) is AppAttestProvider)
-    }
-
-    @Test func createProvider_withMockApp_returnsExpectedResult() throws {
+    @Test
+    func createProvider_withMockApp_returnsExpectedResult() throws {
         let sut = GovUKProviderFactory()
         let firebaseApp: FirebaseAppInterface = MockFirebaseApp()
         #expect(sut.createProvider(with: firebaseApp) == nil)

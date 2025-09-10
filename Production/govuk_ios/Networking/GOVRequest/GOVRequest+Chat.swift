@@ -5,8 +5,12 @@ extension GOVRequest {
     static func askQuestion(_ question: String,
                             conversationId: String? = nil,
                             accessToken: String? = nil) -> GOVRequest {
-        GOVRequest(
-            urlPath: "/conversation/\(conversationId ?? "")",
+        var path = "/conversation"
+        if let conversationId = conversationId {
+            path += "/\(conversationId)"
+        }
+        return GOVRequest(
+            urlPath: path,
             method: conversationId != nil ? .put : .post,
             bodyParameters: ["user_question": question],
             queryParameters: nil,

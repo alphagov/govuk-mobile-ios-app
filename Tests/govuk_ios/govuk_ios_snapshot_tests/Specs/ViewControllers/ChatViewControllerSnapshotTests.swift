@@ -48,7 +48,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         // view appearance
         mockChatService._stubbedQuestionResult = .failure(.authenticationError)
 
-        var viewModel = ChatViewModel(
+        let viewModel = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
             openURLAction: { _ in },
@@ -75,7 +75,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         mockChatService._stubbedConversationId = conversationId
         mockChatService._stubbedQuestionResult = .failure(.authenticationError)
 
-        var viewModel = ChatViewModel(
+        let viewModel = ChatViewModel(
             chatService: mockChatService,
             analyticsService: MockAnalyticsService(),
             openURLAction: { _ in },

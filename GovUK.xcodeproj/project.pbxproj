@@ -168,6 +168,7 @@
 		5D66D1862CBFC13100006723 /* AppEvent+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1852CBFC13100006723 /* AppEvent+Navigation.swift */; };
 		5D66D1882CBFC15000006723 /* AppEvent+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1872CBFC15000006723 /* AppEvent+Search.swift */; };
 		5D66D19A2CBFF51100006723 /* AppEvent+Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D66D1952CBFF3D600006723 /* AppEvent+Topics.swift */; };
+		5D68CEF52E6EC7F00087FB1B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D68CEF42E6EC7F00087FB1B /* main.swift */; };
 		5D69911A2DFAD8360050689E /* ButtonConfiguration+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6991192DFAD8360050689E /* ButtonConfiguration+Convenience.swift */; };
 		5D6B90152DCB7F0000D36463 /* NotificationConsentAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B90142DCB7F0000D36463 /* NotificationConsentAlertViewController.swift */; };
 		5D6E8F0D2D40F43600761AB6 /* NotificationExtensionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6E8F0C2D40F43600761AB6 /* NotificationExtensionClient.swift */; };
@@ -584,6 +585,7 @@
 		5D66D1852CBFC13100006723 /* AppEvent+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Navigation.swift"; sourceTree = "<group>"; };
 		5D66D1872CBFC15000006723 /* AppEvent+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Search.swift"; sourceTree = "<group>"; };
 		5D66D1952CBFF3D600006723 /* AppEvent+Topics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+Topics.swift"; sourceTree = "<group>"; };
+		5D68CEF42E6EC7F00087FB1B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5D6991192DFAD8360050689E /* ButtonConfiguration+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonConfiguration+Convenience.swift"; sourceTree = "<group>"; };
 		5D6B90142DCB7F0000D36463 /* NotificationConsentAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationConsentAlertViewController.swift; sourceTree = "<group>"; };
 		5D6E8F0C2D40F43600761AB6 /* NotificationExtensionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensionClient.swift; sourceTree = "<group>"; };
@@ -932,6 +934,8 @@
 				govuk_ios/shared/Mocks/Services/MockSearchService.swift,
 				govuk_ios/shared/Mocks/Services/MockTopicsService.swift,
 				govuk_ios/shared/Mocks/Services/RecentActivity/MockActivityService.swift,
+				govuk_ios/shared/SupportingFiles/TestAppDelegate.swift,
+				govuk_ios/shared/SupportingFiles/TestSceneDelegate.swift,
 			);
 			target = 5D4B9D332C074207005F126A /* govuk_ios_snapshot_tests */;
 		};
@@ -1580,6 +1584,7 @@
 				5D51D15F2C245A1B008AC8E4 /* PrivacyInfo.xcprivacy */,
 				5DAD71792BD250DB0075F648 /* SceneDelegate.swift */,
 				5D41DB7B2C09BF340011E691 /* Settings.bundle */,
+				5D68CEF42E6EC7F00087FB1B /* main.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -2325,6 +2330,7 @@
 				5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */,
 				D0C1F1E42CA440F200DD3D61 /* TopicCardModel.swift in Sources */,
 				D0EBFBD22D11C0E7000A3151 /* AnalyticsService.swift in Sources */,
+				5D68CEF52E6EC7F00087FB1B /* main.swift in Sources */,
 				5D69911A2DFAD8360050689E /* ButtonConfiguration+Convenience.swift in Sources */,
 				16EE1A432C6F89D9005E820F /* SearchViewModel.swift in Sources */,
 				D093BA672CB3CBEC004F489B /* EditTopicsCoordinator.swift in Sources */,

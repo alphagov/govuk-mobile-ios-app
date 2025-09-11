@@ -498,6 +498,50 @@
         }
       }
     },
+    "upsellCardDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use GOV.UK’s experimental AI tool to find out more about topics, services and information on GOV.UK."
+          }
+        }
+      }
+    },
+    "upsellCardDismissButtonLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss GOV.UK Chat notice"
+          }
+        }
+      }
+    },
+    "upsellCardLinkText" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask a question"
+          }
+        }
+      }
+    },
+    "upsellCardTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get quick answers from GOV.UK Chat"
+          }
+        }
+      }
+    },
     "validationErrorText" : {
       "extractionState" : "manual",
       "localizations" : {

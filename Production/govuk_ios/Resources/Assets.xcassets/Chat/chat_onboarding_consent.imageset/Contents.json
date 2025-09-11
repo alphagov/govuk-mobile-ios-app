@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "chat_onboarding_consent_1x.png",
+      "filename" : "chat_onboarding_consent@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "chat_onboarding_consent_2x.png",
+      "filename" : "chat_onboarding_consent@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "chat_onboarding_consent_3x.png",
+      "filename" : "chat_onboarding_consent@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

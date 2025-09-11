@@ -20,7 +20,7 @@ struct ChatErrorViewModelTests {
             }
         )
 
-        sut.buttonViewModel.action()
+        sut.primaryButtonViewModel.action()
 
         #expect(didCallCompletion)
     }
@@ -35,9 +35,8 @@ struct ChatErrorViewModelTests {
 
         #expect(sut.title == String.common.localized("networkUnavailableErrorTitle"))
         #expect(sut.subtitle == String.common.localized("networkUnavailableErrorBody"))
-        #expect(sut.buttonTitle == String.common.localized("networkUnavailableButtonTitle"))
-        #expect(sut.showActionButton)
-        #expect(!sut.showImageWhenCompact)
+        #expect(sut.primaryButtonTitle == String.common.localized("networkUnavailableButtonTitle"))
+        #expect(sut.showPrimaryButton)
     }
 
     @Test
@@ -50,9 +49,8 @@ struct ChatErrorViewModelTests {
 
         #expect(sut.title == String.common.localized("genericErrorTitle"))
         #expect(sut.subtitle == String.chat.localized("pageNotFoundErrorBody"))
-        #expect(sut.buttonTitle == String.chat.localized("pageNotFoundButtonTitle"))
-        #expect(sut.showActionButton)
-        #expect(!sut.showImageWhenCompact)
+        #expect(sut.primaryButtonTitle == String.chat.localized("pageNotFoundButtonTitle"))
+        #expect(sut.showPrimaryButton)
     }
 
     @Test
@@ -65,9 +63,8 @@ struct ChatErrorViewModelTests {
 
         #expect(sut.title == String.common.localized("genericErrorTitle"))
         #expect(sut.subtitle == String.chat.localized("genericErrorBody"))
-        #expect(sut.buttonTitle == "")
-        #expect(!sut.showActionButton)
-        #expect(!sut.showImageWhenCompact)
+        #expect(sut.primaryButtonTitle == "")
+        #expect(!sut.showPrimaryButton)
     }
 
     @Test

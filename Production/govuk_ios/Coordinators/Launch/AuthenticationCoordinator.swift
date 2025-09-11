@@ -9,6 +9,7 @@ class AuthenticationCoordinator: BaseCoordinator {
     private let localAuthenticationService: LocalAuthenticationServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
+    private var chatService: ChatServiceInterface
     private let completionAction: () -> Void
     private let handleError: (AuthenticationError) -> Void
 
@@ -18,6 +19,7 @@ class AuthenticationCoordinator: BaseCoordinator {
          localAuthenticationService: LocalAuthenticationServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          topicsService: TopicsServiceInterface,
+         chatService: ChatServiceInterface,
          completionAction: @escaping () -> Void,
          handleError: @escaping (AuthenticationError) -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
@@ -25,6 +27,7 @@ class AuthenticationCoordinator: BaseCoordinator {
         self.localAuthenticationService = localAuthenticationService
         self.analyticsService = analyticsService
         self.topicsService = topicsService
+        self.chatService = chatService
         self.completionAction = completionAction
         self.handleError = handleError
         super.init(navigationController: navigationController)
@@ -67,6 +70,7 @@ class AuthenticationCoordinator: BaseCoordinator {
 
     private func handleOnboarding(response: AuthenticationServiceResponse) {
         guard !response.returningUser else { return }
+        chatService.chatOptedIn = nil
         topicsService.resetOnboarding()
         localAuthenticationService.clear()
     }

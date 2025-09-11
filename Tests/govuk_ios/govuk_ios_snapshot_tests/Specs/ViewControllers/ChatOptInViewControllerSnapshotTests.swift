@@ -4,32 +4,32 @@ import Foundation
 @testable import govuk_ios
 
 final class ChatOptInViewControllerSnapshotTests: SnapshotTestCase {
+    let viewControllerBuilder = ViewControllerBuilder()
+
     func test_loadInNavigationController_light_rendersCorrectly() {
-        let viewModel = ChatOptInViewModel(
+        let chatOptInViewController = viewControllerBuilder.chatOptIn(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
             openURLAction: { _ in },
             completionAction: { }
         )
-        let chatOptInView = ChatOptInView(viewModel: viewModel)
 
         VerifySnapshotInNavigationController(
-            view: chatOptInView,
+            viewController: chatOptInViewController,
             mode: .light
         )
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
-        let viewModel = ChatOptInViewModel(
+        let chatOptInViewController = viewControllerBuilder.chatOptIn(
             analyticsService: MockAnalyticsService(),
             chatService: MockChatService(),
             openURLAction: { _ in },
             completionAction: { }
         )
-        let chatOptInView = ChatOptInView(viewModel: viewModel)
 
         VerifySnapshotInNavigationController(
-            view: chatOptInView,
+            viewController: chatOptInViewController,
             mode: .dark
         )
     }

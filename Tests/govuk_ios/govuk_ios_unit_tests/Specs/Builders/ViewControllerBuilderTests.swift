@@ -247,7 +247,7 @@ struct ViewControllerBuilderTests {
             completion: { }
         )
 
-        let rootView = (result as? HostingViewController<WelcomeOnboardingView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -343,7 +343,7 @@ struct ViewControllerBuilderTests {
             completionAction: { }
         )
 
-        let rootView = (result as? HostingViewController<ChatConsentOnboardingView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -357,7 +357,21 @@ struct ViewControllerBuilderTests {
             completionAction: { }
         )
 
-        let rootView = (result as? HostingViewController<ChatOptInView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatOffboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatOffboarding(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            openURLAction: { _ in },
+            completionAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 }

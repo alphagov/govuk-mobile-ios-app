@@ -87,6 +87,24 @@ struct AppEvent_NavigationTests {
     }
 
     @Test
+    func widgetNavigation_withParams_returnsExpectedResult() {
+        let expectedText = UUID().uuidString
+        let result = AppEvent.widgetNavigation(
+            text: expectedText,
+            params: ["url": "https://www.test.com"]
+        )
+
+        #expect(result.name == "Navigation")
+        #expect(result.params?.count == 6)
+        #expect(result.params?["text"] as? String == expectedText)
+        #expect(result.params?["type"] as? String == "Widget")
+        #expect(result.params?["external"] as? Bool == false)
+        #expect(result.params?["language"] as? String == "en")
+        #expect(result.params?["section"] as? String == "Homepage")
+        #expect(result.params?["url"] as? String == "https://www.test.com")
+    }
+
+    @Test
     func deeplinkNavigation_deeplinkFound_returnsExpectedResult() {
         let result = AppEvent.deeplinkNavigation(
             isDeeplinkFound: true,

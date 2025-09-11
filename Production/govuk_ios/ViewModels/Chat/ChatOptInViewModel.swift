@@ -2,61 +2,71 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-class ChatOptInViewModel {
-    private let analyticsService: AnalyticsServiceInterface
+class ChatOptInViewModel: InfoViewModelInterface {
+    var analyticsService: AnalyticsServiceInterface?
     private var chatService: ChatServiceInterface
     private let completionAction: () -> Void
 
-    let openURLAction: (URL) -> Void
-
     init(analyticsService: AnalyticsServiceInterface,
          chatService: ChatServiceInterface,
-         openURLAction: @escaping (URL) -> Void,
          completionAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.chatService = chatService
-        self.openURLAction = openURLAction
         self.completionAction = completionAction
+    }
+
+    var image: AnyView {
+        AnyView(
+            Image.chatOnboardingImage
+        )
     }
 
     var title: String {
         String.chat.localized("optInTitle")
     }
 
+    var subtitle: String {
+        String.chat.localized("optInDescription")
+    }
+
+    var primaryButtonTitle: String {
+        String.chat.localized("optInPrimaryButtonTitle")
+    }
+
+    var secondaryButtonTitle: String {
+        String.chat.localized("optInSecondaryButtonTitle")
+    }
+
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        let primaryButtonTitle = String.chat.localized("optInPrimaryButtonTitle")
         return .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
-                self?.chatService.chatOptedIn = true
-                self?.trackAction(primaryButtonTitle)
-                self?.completionAction()
+                guard let self else { return }
+                chatService.chatOptedIn = true
+                trackAction(primaryButtonTitle)
+                completionAction()
             }
         )
     }
 
-    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        let secondaryButtonTitle = String.chat.localized("optInSecondaryButtonTitle")
+    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel? {
         return .init(
             localisedTitle: secondaryButtonTitle,
             action: { [weak self] in
-                self?.chatService.chatOptedIn = false
-                self?.trackAction(secondaryButtonTitle)
-                self?.completionAction()
+                guard let self else { return }
+                chatService.chatOptedIn = false
+                trackAction(secondaryButtonTitle)
+                completionAction()
             }
         )
     }
 
-    var privacyPolicyUrl: URL {
-        chatService.privacyPolicy
+    var trackingTitle: String {
+        title
     }
 
-    var termsURL: URL {
-        chatService.termsAndConditions
-    }
-
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
+    var trackingName: String {
+        "Chat opt-in"
     }
 
     private func trackAction(_ text: String) {
@@ -64,6 +74,6 @@ class ChatOptInViewModel {
             text: text,
             external: false
         )
-        analyticsService.track(event: event)
+        analyticsService?.track(event: event)
     }
 }

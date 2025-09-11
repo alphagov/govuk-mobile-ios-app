@@ -1,7 +1,6 @@
 import UIKit
 import GOVKit
 
-@main
 class AppDelegate: UIResponder,
                    UIApplicationDelegate {
     @Inject(\.analyticsService) private var analyticsService: AnalyticsServiceInterface
@@ -13,5 +12,18 @@ class AppDelegate: UIResponder,
         analyticsService.launch()
         notificationService.appDidFinishLaunching(launchOptions: launchOptions)
         return true
+    }
+
+    func application(_ application: UIApplication,
+                     configurationForConnecting connectingSceneSession: UISceneSession,
+                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let sceneConfiguration = UISceneConfiguration(
+            name: "Default Configuration",
+            sessionRole: connectingSceneSession.role
+        )
+        sceneConfiguration.delegateClass = SceneDelegate.self
+        sceneConfiguration.storyboard = nil
+
+        return sceneConfiguration
     }
 }

@@ -10,7 +10,7 @@ struct WelcomeOnboardingViewModelTests {
             let sut = WelcomeOnboardingViewModel(
                 completeAction: { continuation.resume(returning: true) }
             )
-            let buttonViewModel = sut.buttonViewModel
+            let buttonViewModel = sut.primaryButtonViewModel
             buttonViewModel.action()
         }
         #expect(completion)

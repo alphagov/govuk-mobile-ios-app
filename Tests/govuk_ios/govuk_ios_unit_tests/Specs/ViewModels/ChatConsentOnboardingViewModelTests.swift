@@ -28,7 +28,7 @@ struct ChatConsentOnboardingViewModelTests {
             )
 
             #expect(!mockChatService.chatOnboardingSeen)
-            sut.buttonViewModel.action()
+            sut.primaryButtonViewModel.action()
             #expect(mockChatService.chatOnboardingSeen)
         }
     }
@@ -43,7 +43,7 @@ struct ChatConsentOnboardingViewModelTests {
             completionAction: { }
         )
 
-        sut.buttonViewModel.action()
+        sut.primaryButtonViewModel.action()
 
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "I understand")

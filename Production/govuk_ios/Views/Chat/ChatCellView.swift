@@ -26,8 +26,7 @@ struct ChatCellView: View {
             }
         }
         .background(viewModel.backgroundColor)
-        .roundedBorder(borderColor: viewModel.borderColor,
-                       borderWidth: 1.0)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
     private var questionView: some View {
@@ -39,18 +38,9 @@ struct ChatCellView: View {
     }
 
     private var pendingAnswerView: some View {
-        HStack {
-            Circle()
-                .fill(Color(.govUK.text.link))
+        HStack(spacing: 4) {
+            AnimatedAPNGImageView(imageName: "generating-your-answer")
                 .frame(width: 24, height: 24)
-                .scaleEffect(scale)
-                .onAppear {
-                    withAnimation(.easeInOut(duration: 1)
-                        .repeatForever(autoreverses: true)
-                    ) {
-                        scale = 0.75
-                    }
-                }
             Text(viewModel.message)
             Spacer()
         }

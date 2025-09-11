@@ -87,7 +87,7 @@ struct Container_APIClientTests {
 
         let responseData = await withCheckedContinuation { continuation in
             var returnData: Data? = nil
-            MockURLProtocol.requestHandlers["https://www.govuk-chat.com/conversation/"] = { request in
+            MockURLProtocol.requestHandlers["https://www.govuk-chat.com/conversation"] = { request in
                 #expect(request.httpMethod == "POST")
                 #expect(request.allHTTPHeaderFields?["Content-Type"] == "application/json")
                 #expect(request.allHTTPHeaderFields?["Authorization"] == "Bearer testToken")

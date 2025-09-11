@@ -11,7 +11,9 @@ struct NonTappableCardView: View {
                     Color(UIColor.govUK.text.secondary)
                 )
         }.padding()
-            .background(Color(uiColor: .cyan))
+            .background(
+                Color(uiColor: UIColor.govUK.fills.surfaceCardNonTappable)
+            )
             .roundedBorder(borderColor: .clear)
             .padding()
     }

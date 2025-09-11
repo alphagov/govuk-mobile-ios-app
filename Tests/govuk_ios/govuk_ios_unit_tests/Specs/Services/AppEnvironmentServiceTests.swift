@@ -59,22 +59,11 @@ struct AppEnvironmentServiceTests {
 
     @Test
     func chatURL_returnsExpectedValue() {
-        let mockConfig = ["CHAT_BASE_URL": "www.gov.uk"]
+        let mockConfig = ["CHAT_BASE_URL": "https://www.gov.uk/"]
         let sut = AppEnvironmentService(
             config: mockConfig
         )
 
-        #expect(sut.chatBaseURL ==
-                URL(string: "https://www.gov.uk/api/v0")!)
-    }
-
-    @Test
-    func chatAuthToken_returnsExpectedValue() {
-        let mockConfig = ["CHAT_AUTH_TOKEN": "123456"]
-        let sut = AppEnvironmentService(
-            config: mockConfig
-        )
-
-        #expect(sut.chatAuthToken == "123456")
+        #expect(sut.chatBaseURL.absoluteString == "https://www.gov.uk/")
     }
 }

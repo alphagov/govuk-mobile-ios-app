@@ -9,6 +9,7 @@ import GOVKit
 @MainActor class ChatErrorViewSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = ChatErrorViewModel(
+            analyticsService: MockAnalyticsService(),
             error: .apiUnavailable,
             action: { }
         )
@@ -26,6 +27,7 @@ import GOVKit
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = ChatErrorViewModel(
+            analyticsService: MockAnalyticsService(),
             error: .apiUnavailable,
             action: { }
         )

@@ -97,7 +97,7 @@
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
         "branch" : "develop",
-        "revision" : "d74e7c23d41cbfa12ae83de33b5074ef427f59e0"
+        "revision" : "e0150f3ac5d5f2e9063956adb2fd41eea840a380"
       }
     },
     {
@@ -238,7 +238,7 @@
     {
       "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-cmark",
+      "location" : "https://github.com/swiftlang/swift-cmark.git",
       "state" : {
         "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
         "version" : "0.6.0"

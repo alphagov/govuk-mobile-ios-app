@@ -28,8 +28,9 @@ struct ViewControllerBuilderTests {
             notificationService: MockNotificationService(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            topicsWidgetViewModel: viewModel,
-            localAuthorityService: MockLocalAuthorityService()
+            topicWidgetViewModel: viewModel,
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
 
         let actions = ViewControllerBuilder.HomeActions(
@@ -70,10 +71,6 @@ struct ViewControllerBuilderTests {
 
     @Test
     func recentActivity_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        Container.shared.coreDataRepository.register {
-            coreData
-        }
         let subject = ViewControllerBuilder()
         let result = subject.recentActivity(
             analyticsService: MockAnalyticsService(),
@@ -88,10 +85,6 @@ struct ViewControllerBuilderTests {
 
     @Test
     func notificationSettings_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-        Container.shared.coreDataRepository.register {
-            coreData
-        }
         let subject = ViewControllerBuilder()
         let result = subject.notificationSettings(
             analyticsService: MockAnalyticsService(),
@@ -240,7 +233,7 @@ struct ViewControllerBuilderTests {
             completion: { }
         )
 
-        let rootView = (result as? HostingViewController<WelcomeOnboardingView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -304,10 +297,66 @@ struct ViewControllerBuilderTests {
     func chatError_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.chatError(
+            analyticsService: MockAnalyticsService(),
             error: ChatError.apiUnavailable,
             action: { }
         )
         
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatInfoOnboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatInfoOnboarding(
+            analyticsService: MockAnalyticsService(),
+            completionAction: { },
+            cancelOnboardingAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatConsentOnboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatConsentOnboarding(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            cancelOnboardingAction: { },
+            completionAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatOptIn_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatOptIn(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            openURLAction: { _ in },
+            completionAction: { }
+        )
+
+        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        #expect(rootView != nil)
+    }
+
+    @Test
+    func chatOffboarding_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.chatOffboarding(
+            analyticsService: MockAnalyticsService(),
+            chatService: MockChatService(),
+            openURLAction: { _ in },
+            completionAction: { }
+        )
+
         let rootView = (result as? HostingViewController<InfoView>)?.rootView
         #expect(rootView != nil)
     }

@@ -3,7 +3,7 @@ import UIKit
 import UIComponents
 
 final class InformationView: UIControl {
-    private let viewModel: UserFeedbackViewModel
+    private let viewModel: NotificationsWidgetViewModel
     private let shouldHideChevron: Bool
 
     private let stackView: UIStackView = {
@@ -42,7 +42,7 @@ final class InformationView: UIControl {
         return UITapGestureRecognizer(target: self, action: #selector(handleTap))
     }()
 
-    init(viewModel: UserFeedbackViewModel, shouldHideChevron: Bool = false) {
+    init(viewModel: NotificationsWidgetViewModel, shouldHideChevron: Bool = false) {
         self.viewModel = viewModel
         self.shouldHideChevron = shouldHideChevron
         super.init(frame: .zero)

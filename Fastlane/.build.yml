@@ -17,9 +17,8 @@ default: &DEFAULTS
   match: &MATCH_DEFAULTS
     method: "adhoc"
   deliver: &DELIVER_DEFAULTS
-    groups: 
+    groups:
       - GOV.UK APP
-      - GOV.UK OTHER
 
 unit:
   <<: *DEFAULTS

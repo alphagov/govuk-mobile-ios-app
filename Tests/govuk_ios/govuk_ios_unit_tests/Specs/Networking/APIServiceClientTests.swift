@@ -63,7 +63,7 @@ struct APIServiceClientTests {
             subject.send(
                 request: request,
                 completion: { result in
-                    continuation.resume(returning: Void())
+                    continuation.resume()
                 }
             )
         }

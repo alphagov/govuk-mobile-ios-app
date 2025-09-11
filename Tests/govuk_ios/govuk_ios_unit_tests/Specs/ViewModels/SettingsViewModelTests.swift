@@ -209,9 +209,15 @@ class SettingsViewModelTests {
         #expect(receivedTrackingTitle == signOutRow.title)
     }
 
-    @Test(.serialized, arguments: [NotificationPermissionState.authorized,
-                      .denied,
-                      .notDetermined])
+    @MainActor
+    @Test(
+        .serialized,
+        arguments: [
+            NotificationPermissionState.authorized,
+            .denied,
+            .notDetermined
+        ]
+    )
     func notificationPermissionStates_returnCorrectState(
         _ expectedPermission: NotificationPermissionState
     ) async {
@@ -241,11 +247,12 @@ class SettingsViewModelTests {
         #expect(result == expectedPermission)
     }
 
-    @Test(arguments: zip([NotificationPermissionState.authorized,
-                          .denied],
-                         [String.settings.localized("notificationsAlertTitleEnabled"),
-                          String.settings.localized("notificationsAlertTitleDisabled")
-                         ])
+    @Test(arguments:
+            zip([NotificationPermissionState.authorized,
+                 .denied],
+                [String.settings.localized("notificationsAlertTitleEnabled"),
+                 String.settings.localized("notificationsAlertTitleDisabled")
+                ])
     )
     func notificationSettingsAlertTitles_returnCorrectText(
         _ expectedPermission: NotificationPermissionState,
@@ -466,6 +473,7 @@ class SettingsViewModelTests {
         )
     }
 
+    @MainActor
     @Test
     func notificationSettingsAlertBody_whenAppComesIntoForegroundAfterAuthorisationDenied_returnsCorrectText() async {
         var cancellables = Set<AnyCancellable>()

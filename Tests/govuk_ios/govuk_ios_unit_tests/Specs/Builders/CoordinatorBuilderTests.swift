@@ -75,7 +75,7 @@ struct CoordinatorBuilderTests {
     @Test
     func chat_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.chat
+        let coordinator = subject.chat(cancelOnboardingAction: { })
 
         #expect(coordinator is ChatCoordinator)
     }
@@ -258,7 +258,11 @@ struct CoordinatorBuilderTests {
 
     @Test
     func welcomeOnboarding_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.authenticationService.register(
+            factory: { MockAuthenticationService() }
+        )
+        let subject = CoordinatorBuilder(container: container)
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.welcomeOnboarding(
             navigationController: mockNavigationController,
@@ -377,5 +381,50 @@ struct CoordinatorBuilderTests {
         )
 
         #expect(coordinator is LocalAuthenticationSettingsCoordinator)
+    }
+
+    @Test
+    func chatInfoOnboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatInfoOnboarding(
+            cancelOnboardingAction: { },
+            setChatViewControllerAction: { animated in }
+        )
+
+        #expect(coordinator is ChatInfoOnboardingCoordinator)
+    }
+
+    @Test
+    func chatConsentOnboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatConsentOnboarding(
+            navigationController: UINavigationController(),
+            cancelOnboardingAction: { },
+            completionAction: { }
+        )
+
+        #expect(coordinator is ChatConsentOnboardingCoordinator)
+    }
+
+    @Test
+    func chatOptIn_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatOptIn(
+            navigationController: UINavigationController(),
+            completionAction: { }
+        )
+
+        #expect(coordinator is ChatOptInCoordinator)
+    }
+
+    @Test
+    func chatOffboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatOffboarding(
+            navigationController: UINavigationController(),
+            completionAction: { }
+        )
+
+        #expect(coordinator is ChatOffboardingCoordinator)
     }
 }

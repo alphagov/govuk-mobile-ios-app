@@ -18,6 +18,7 @@ protocol AuthenticationServiceInterface: AnyObject {
     func signOut(reason: SignoutReason)
     func encryptRefreshToken()
     func tokenRefreshRequest() async -> TokenRefreshResult
+    func clearRefreshToken()
 }
 
 struct AuthenticationServiceResponse {
@@ -31,7 +32,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private var authenticatedSecureStoreService: SecureStorable
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
-    private let userDefaults: UserDefaultsInterface
+    private let userDefaultsService: UserDefaultsServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
@@ -60,11 +61,11 @@ class AuthenticationService: AuthenticationServiceInterface {
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
          returningUserService: ReturningUserServiceInterface,
-         userDefaults: UserDefaultsInterface) {
+         userDefaultsService: UserDefaultsServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
-        self.userDefaults = userDefaults
+        self.userDefaultsService = userDefaultsService
     }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult {
@@ -84,23 +85,10 @@ class AuthenticationService: AuthenticationServiceInterface {
         }
     }
 
-    private func handleReturningUser() async -> AuthenticationServiceResult {
-        let returningUserResult = await returningUserService.process(
-            idToken: idToken
-        )
-        switch returningUserResult {
-        case .success(let isReturning):
-            return .success(.init(returningUser: isReturning))
-        case .failure(let error):
-            setTokens()
-            return .failure(.returningUserService(error))
-        }
-    }
-
     func signOut(reason: SignoutReason) {
         do {
             try authenticatedSecureStoreService.delete()
-            userDefaults.removeObject(forKey: .refreshTokenExpiryDate)
+            userDefaultsService.removeObject(forKey: .refreshTokenExpiryDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
@@ -130,7 +118,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     func tokenRefreshRequest() async -> TokenRefreshResult {
         var decryptedRefreshToken: String
         do {
-            decryptedRefreshToken = try decryptRefreshToken()
+            decryptedRefreshToken = try decryptRefreshTokenIfRequired()
         } catch {
             return .failure(.decryptRefreshTokenError)
         }
@@ -151,10 +139,30 @@ class AuthenticationService: AuthenticationServiceInterface {
         }
     }
 
-    private func decryptRefreshToken() throws -> String {
-        let fetchedRefreshToken =
-        try authenticatedSecureStoreService.readItem(itemName: "refreshToken")
-        return fetchedRefreshToken
+    func clearRefreshToken() {
+        refreshToken = nil
+    }
+
+    private func handleReturningUser() async -> AuthenticationServiceResult {
+        let returningUserResult = await returningUserService.process(
+            idToken: idToken
+        )
+        switch returningUserResult {
+        case .success(let isReturning):
+            return .success(.init(returningUser: isReturning))
+        case .failure(let error):
+            setTokens()
+            return .failure(.returningUserService(error))
+        }
+    }
+
+    private func decryptRefreshTokenIfRequired() throws -> String {
+        guard let token = refreshToken else {
+            let fetchedRefreshToken =
+            try authenticatedSecureStoreService.readItem(itemName: "refreshToken")
+            return fetchedRefreshToken
+        }
+        return token
     }
 
     private func setTokens(refreshToken: String? = nil,
@@ -171,11 +179,11 @@ class AuthenticationService: AuthenticationServiceInterface {
             value: 601_200,
             to: issueDate ?? .now
         )
-        userDefaults.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)
+        userDefaultsService.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)
     }
 
     var shouldAttemptTokenRefresh: Bool {
-        guard let date = userDefaults.value(forKey: .refreshTokenExpiryDate) as? Date
+        guard let date = userDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date
         else { return true }
         return date > Date.now
     }

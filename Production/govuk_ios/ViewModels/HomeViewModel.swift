@@ -77,7 +77,6 @@ class HomeViewModel: ObservableObject {
         urlOpener: urlOpener,
         openAction: openAction
     )
-
     private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }

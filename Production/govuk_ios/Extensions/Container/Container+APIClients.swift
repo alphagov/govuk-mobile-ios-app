@@ -70,13 +70,11 @@ extension Container {
     }
 
     var chatAPIClient: Factory<APIServiceClientInterface> {
-        return Factory(self) {
+        Factory(self) {
             APIServiceClient(
                 baseUrl: self.appEnvironmentService().chatBaseURL,
                 session: self.urlSession(),
-                requestBuilder: ChatRequestBuilder(
-                    authenticationToken: self.appEnvironmentService().chatAuthToken
-                ),
+                requestBuilder: RequestBuilder(),
                 responseHandler: ChatResponseHandler()
             )
         }

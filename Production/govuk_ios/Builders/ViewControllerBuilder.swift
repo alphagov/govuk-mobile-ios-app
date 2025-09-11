@@ -418,9 +418,11 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func chatError(error: ChatError,
+    func chatError(analyticsService: AnalyticsServiceInterface,
+                   error: ChatError,
                    action: @escaping () -> Void) -> UIViewController {
         let viewModel = ChatErrorViewModel(
+            analyticsService: analyticsService,
             error: error,
             action: action
         )
@@ -450,7 +452,7 @@ class ViewControllerBuilder {
         let viewModel = WelcomeOnboardingViewModel(
             completeAction: completion
         )
-        let containerView = WelcomeOnboardingView(
+        let containerView = InfoView(
             viewModel: viewModel
         )
         return HostingViewController(
@@ -473,6 +475,127 @@ class ViewControllerBuilder {
             openSettingsAction(viewController)
         }
         return viewController
+    }
+
+    func chatInfoOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        completionAction: @escaping () -> Void,
+        cancelOnboardingAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatInfoOnboardingViewModel(
+            analyticsService: analyticsService,
+            completionAction: completionAction,
+            cancelOnboardingAction: cancelOnboardingAction
+        )
+        let containerView = InfoView(
+            viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: containerView
+        )
+        viewController.navigationItem.rightBarButtonItem = viewModel.rightBarButtonItem
+        viewController.isModalInPresentation = true
+        return viewController
+    }
+
+    func chatConsentOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        cancelOnboardingAction: @escaping () -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatConsentOnboardingViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            cancelOnboardingAction: cancelOnboardingAction,
+            completionAction: completionAction
+        )
+        let containerView = InfoView(
+            viewModel: viewModel,
+            customView: {
+                AnyView(InfoIconListView(
+                    list: [
+                        InfoIconListItem(
+                            text: String.chat.localized("onboardingConsentFirstListItemText"),
+                            iconName: "info.circle"
+                        ),
+                        InfoIconListItem(
+                            text: String.chat.localized("onboardingConsentSecondListItemText"),
+                            iconName: "filemenu.and.cursorarrow"
+                        )
+                    ]
+                ))
+            }
+        )
+        let viewController = HostingViewController(
+            rootView: containerView,
+            navigationBarTintColor: .govUK.text.link
+        )
+        viewController.navigationItem.rightBarButtonItem = viewModel.rightBarButtonItem
+        viewController.isModalInPresentation = true
+        return viewController
+    }
+
+    func chatOptIn(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatOptInViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            completionAction: completionAction
+        )
+        let linksView = InfoLinksView(
+            linkList: [
+                InfoLinkListItem(
+                    text: String.chat.localized("optInPrivacyLinkTitle"),
+                    url: chatService.privacyPolicy
+                ),
+                InfoLinkListItem(
+                    text: String.chat.localized("optInTermsLinkTitle"),
+                    url: chatService.termsAndConditions
+                )
+            ],
+            openURLAction: openURLAction
+        )
+        let containerView = InfoView(
+            viewModel: viewModel,
+            customView: { AnyView(linksView) }
+        )
+        return HostingViewController(
+            rootView: containerView
+        )
+    }
+
+    func chatOffboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        let viewModel = ChatOffboardingViewModel(
+            analyticsService: analyticsService,
+            chatService: chatService,
+            completionAction: completionAction
+        )
+        let linksView = InfoLinksView(
+            linkList: [
+                InfoLinkListItem(
+                    text: String.chat.localized("feedbackMenuAccessibilityTitle"),
+                    url: chatService.feedback
+                )
+            ],
+            openURLAction: openURLAction
+        )
+        let containerView = InfoView(
+            viewModel: viewModel,
+            customView: { AnyView(linksView) }
+        )
+        return HostingViewController(
+            rootView: containerView
+        )
     }
 }
 // swiftlint:enable file_length

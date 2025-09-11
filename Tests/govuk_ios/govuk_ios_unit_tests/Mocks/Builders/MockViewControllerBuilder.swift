@@ -265,10 +265,50 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     var _stubbedChatErrorController: UIViewController?
     var _receivedChatErrorAction: (() -> Void)?
     override func chatError(
+        analyticsService: AnalyticsServiceInterface,
         error: ChatError,
         action: @escaping () -> Void
     ) -> UIViewController {
         _receivedChatErrorAction = action
         return _stubbedChatErrorController ?? UIViewController()
+    }
+
+    var _stubbedChatInfoOnboardingController: UIViewController?
+    override func chatInfoOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        completionAction: @escaping () -> Void,
+        cancelOnboardingAction: @escaping () -> Void
+    ) -> UIViewController {
+        return _stubbedChatInfoOnboardingController ?? UIViewController()
+    }
+
+    var _stubbedChatConsentOnboardingController: UIViewController?
+    override func chatConsentOnboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        cancelOnboardingAction: @escaping () -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        return _stubbedChatConsentOnboardingController ?? UIViewController()
+    }
+
+    var _stubbedChatOptInController: UIViewController?
+    override func chatOptIn(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        return _stubbedChatOptInController ?? UIViewController()
+    }
+
+    var _stubbedChatOffboardingController: UIViewController?
+    override func chatOffboarding(
+        analyticsService: AnalyticsServiceInterface,
+        chatService: ChatServiceInterface,
+        openURLAction: @escaping (URL) -> Void,
+        completionAction: @escaping () -> Void
+    ) -> UIViewController {
+        return _stubbedChatOffboardingController ?? UIViewController()
     }
 }

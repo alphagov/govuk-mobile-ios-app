@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en-GB",
   "strings" : {
+    "dismissAlertBannerAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss banner"
+          }
+        }
+      }
+    },
     "feedbackWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {

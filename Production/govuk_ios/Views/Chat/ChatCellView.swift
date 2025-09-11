@@ -26,8 +26,7 @@ struct ChatCellView: View {
             }
         }
         .background(viewModel.backgroundColor)
-        .roundedBorder(borderColor: viewModel.borderColor,
-                       borderWidth: 1.0)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
     private var questionView: some View {
@@ -39,58 +38,12 @@ struct ChatCellView: View {
     }
 
     private var pendingAnswerView: some View {
-        HStack {
-            Circle()
-                .fill(Color(.govUK.text.link))
+        HStack(spacing: 4) {
+            AnimatedAPNGImageView(imageName: "generating-your-answer")
                 .frame(width: 24, height: 24)
-                .scaleEffect(scale)
-                .onAppear {
-                    withAnimation(.easeInOut(duration: 1)
-                        .repeatForever(autoreverses: true)
-                    ) {
-                        scale = 0.75
-                    }
-                }
             Text(viewModel.message)
-                .mask(gradientMask)
             Spacer()
         }
-    }
-
-    private let gradientTimer = Timer.publish(
-        every: 0.1,
-        on: .main,
-        in: .common
-    ).autoconnect()
-
-    private var gradientMask: some View {
-        LinearGradient(
-            gradient: Gradient(stops: [
-                .init(
-                    color: Color(.black).opacity(gradientStopPoint <= 0.01 ? 0 : 1),
-                    location: 0
-                ),
-                .init(
-                    color: Color(.black).opacity(0.1),
-                    location: gradientStopPoint
-                ),
-                .init(
-                    color: Color(.black).opacity(gradientStopPoint >= 0.99 ? 0 : 1),
-                    location: 1
-                )
-            ]),
-            startPoint: .leading,
-            endPoint: .trailing
-        )
-        .animation(.easeInOut(duration: 1), value: gradientStopPoint)
-        .onReceive(gradientTimer, perform: { _ in
-            if gradientStopPoint < 0.99 {
-                let newValue = gradientStopPoint + 0.1
-                gradientStopPoint = min(newValue, 0.99)
-            } else {
-                gradientStopPoint = 0.01
-            }
-        })
     }
 
     private var introView: some View {
@@ -135,8 +88,11 @@ struct ChatCellView: View {
                     .foregroundColor(Color(UIColor.govUK.text.primary))
             }
         }
-        .disclosureGroupStyle(ChatDisclosure())
-        .padding(.top, 8)
+        .disclosureGroupStyle(
+            ChatDisclosure(trackToggle: { isExpanded in
+                viewModel.trackSourceListToggle(isExpanded: isExpanded)
+            })
+        ).padding(.top, 8)
     }
 
     private var warningView: some View {
@@ -158,7 +114,7 @@ struct ChatCellView: View {
             })
             .fixedSize(horizontal: false, vertical: true)
             .environment(\.openURL, OpenURLAction { url in
-                viewModel.openURLAction?(url)
+                viewModel.openURL(url: url, type: .responseLink)
                 return .handled
             })
     }
@@ -172,7 +128,7 @@ struct ChatCellView: View {
             .accessibilityHint(String.common.localized("openWebLinkHint"))
             .accessibilityRemoveTraits(.isButton)
             .environment(\.openURL, OpenURLAction { url in
-                viewModel.openURLAction?(url)
+                viewModel.openURL(url: url, type: .sourceLink)
                 return .handled
             })
             Divider()
@@ -193,6 +149,8 @@ struct ChatCellView: View {
 }
 
 struct ChatDisclosure: DisclosureGroupStyle {
+    var trackToggle: (Bool) -> Void
+
     func makeBody(configuration: Configuration) -> some View {
         VStack {
             disclosureButtonView(configuration: configuration)
@@ -206,6 +164,7 @@ struct ChatDisclosure: DisclosureGroupStyle {
         Button {
             withAnimation {
                 configuration.isExpanded.toggle()
+                trackToggle(configuration.isExpanded)
             }
         } label: {
             HStack(alignment: .firstTextBaseline) {

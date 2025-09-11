@@ -15,7 +15,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func start_setsHomeViewController() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
         mockViewControllerBuilder._stubbedHomeViewController = expectedViewController
@@ -32,7 +32,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
         subject.start()
 
@@ -42,7 +43,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func startRecentActivity_startsCoordinatorAndTrackEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -59,7 +60,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
         subject.start()
 
@@ -75,7 +77,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func startEditLocalAuthority_startsCoordinatorAndTrackEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -92,7 +94,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
         subject.start()
 
@@ -108,7 +111,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func topicAction_startsCoordinatorAndTracksEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -125,7 +128,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
         subject.start()
 
@@ -145,7 +149,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func allTopicAction_startsCoordinatorAndTracksEvent() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
         let mockAnalyticsService = MockAnalyticsService()
@@ -162,7 +166,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
         subject.start()
 
@@ -178,7 +183,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func didReselectTab_resetsToDefaultState_whenOnHomeScreen() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
 
@@ -197,7 +202,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
 
         subject.start()
@@ -209,7 +215,7 @@ struct HomeCoordinatorTests {
     @Test
     @MainActor
     func didReselectTab_doesNotResetToDefaultState_whenOnChildScreen() {
-        let mockCoodinatorBuilder = MockCoordinatorBuilder(container: .init())
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let navigationController = UINavigationController()
 
@@ -228,7 +234,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
 
         subject.start()
@@ -260,7 +267,8 @@ struct HomeCoordinatorTests {
             deviceInformationProvider: MockDeviceInformationProvider(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService()
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService()
         )
 
         let mockSafariCoordinator = MockBaseCoordinator()

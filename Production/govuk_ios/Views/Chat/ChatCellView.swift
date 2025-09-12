@@ -1,15 +1,13 @@
 import SwiftUI
 import GOVKit
 import UIComponents
- import MarkdownUI
+import MarkdownUI
 
 struct ChatCellView: View {
-    @State private var scale = 1.0
-    @State private var gradientStopPoint: CGFloat = 0.01
-    private let viewModel: ChatCellViewModel
+    @StateObject private var viewModel: ChatCellViewModel
 
     init(viewModel: ChatCellViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
@@ -23,25 +21,68 @@ struct ChatCellView: View {
                 answerView
             case .intro:
                 introView
+            case .loading:
+                questionView
             }
         }
         .background(viewModel.backgroundColor)
+        .opacity(viewModel.isVisible ? 1 : 0)
+        .scaleEffect(viewModel.isVisible ? 1 : scale, anchor: anchor)
+        .animation(.easeIn(duration: duration).delay(delay),
+                   value: viewModel.isVisible)
         .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+
+    private var anchor: UnitPoint {
+        switch viewModel.type {
+        case .intro:
+                .center
+        case .question, .loading:
+                .bottomTrailing
+        case .pendingAnswer, .answer:
+                .bottomLeading
+        }
+    }
+
+    private var scale: CGFloat {
+        if viewModel.type == .pendingAnswer {
+            1.0
+        } else {
+            0.90
+        }
+    }
+
+    private var duration: CGFloat {
+        if viewModel.type == .intro {
+            0.5
+        } else {
+            0.25
+        }
+    }
+
+    private var delay: CGFloat {
+        if viewModel.type == .loading {
+            0.4
+        } else {
+            0.0
+        }
     }
 
     private var questionView: some View {
         HStack(alignment: .top, spacing: 8) {
             Text(viewModel.message)
+                .font(Font.govUK.body)
                 .multilineTextAlignment(.leading)
                 .padding()
         }
     }
 
     private var pendingAnswerView: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 5) {
             AnimatedAPNGImageView(imageName: "generating-your-answer")
                 .frame(width: 24, height: 24)
-            Text(viewModel.message)
+            ChatEllipsesView(viewModel.message)
+                .font(Font.govUK.body)
             Spacer()
         }
     }

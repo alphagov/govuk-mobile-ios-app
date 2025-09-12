@@ -53,16 +53,14 @@ class ChatViewModel: ObservableObject {
         }
         trackAskQuestionSubmission()
         errorText = nil
-        cellModels.append(.loadingQuestion)
+        addCellModels([.loadingQuestion])
         scrollToBottom = true
         requestInFlight = true
         chatService.askQuestion(localQuestion) { [weak self] result in
             self?.requestInFlight = false
+            self?.removeCellModel(.loadingQuestion)
             switch result {
             case .success(let pendingQuestion):
-                self?.cellModels.removeAll(where: { $0.id == ChatCellViewModel.loadingQuestion.id })
-                let cellModel = ChatCellViewModel(question: pendingQuestion)
-                self?.cellModels.append(cellModel)
                 self?.latestQuestionID = pendingQuestion.id
                 self?.latestQuestion = ""
                 self?.pollForAnswer(pendingQuestion)
@@ -82,10 +80,10 @@ class ChatViewModel: ObservableObject {
 
     private func pollForAnswer(_ question: PendingQuestion) {
         requestInFlight = true
-        cellModels.append(.gettingAnswer)
+        addCellModels([ChatCellViewModel(question: question), .gettingAnswer])
         chatService.pollForAnswer(question) { [weak self] result in
             guard let self else { return }
-            cellModels.removeAll(where: { $0.id == ChatCellViewModel.gettingAnswer.id })
+            removeCellModel(.gettingAnswer)
             requestInFlight = false
             switch result {
             case .success(let answer):
@@ -95,7 +93,7 @@ class ChatViewModel: ObservableObject {
                     analyticsService: analyticsService
                 )
                 scrollToTop = true
-                cellModels.append(cellModel)
+                addCellModels([cellModel])
             case .failure(let error):
                 processError(error)
             }
@@ -109,7 +107,7 @@ class ChatViewModel: ObservableObject {
         }
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
-            appendIntroMessages()
+            appendIntroMessages(animate: true)
             return
         }
         requestInFlight = true
@@ -137,7 +135,7 @@ class ChatViewModel: ObservableObject {
         handleError(error)
     }
 
-    private func appendIntroMessages() {
+    private func appendIntroMessages(animate: Bool) {
         let firstIntroMessage = Intro(
             title: String.chat.localized("answerTitle"),
             message: String.chat.localized("introFirstMessage")
@@ -150,28 +148,52 @@ class ChatViewModel: ObservableObject {
             title: nil,
             message: String.chat.localized("introThirdMessage")
         )
-        cellModels.append(ChatCellViewModel(intro: firstIntroMessage))
-        cellModels.append(ChatCellViewModel(intro: secondIntroMessage))
-        cellModels.append(ChatCellViewModel(intro: thirdIntroMessage))
+        let models = [
+            ChatCellViewModel(intro: firstIntroMessage),
+            ChatCellViewModel(intro: secondIntroMessage),
+            ChatCellViewModel(intro: thirdIntroMessage)
+        ]
+        if animate {
+            addCellModels(models)
+        } else {
+            models.forEach { $0.isVisible = true }
+            cellModels.append(contentsOf: models)
+        }
+    }
+
+    private func addCellModels(_ models: [ChatCellViewModel]) {
+        var delayOffset = 0.0
+        cellModels.append(contentsOf: models)
+        for model in models {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delayOffset) {
+                model.isVisible = true
+            }
+            delayOffset += 0.7
+        }
+    }
+
+    private func removeCellModel(_ model: ChatCellViewModel) {
+        model.isVisible = false
+        cellModels.removeAll(where: { $0.id == model.id })
     }
 
     private func handleHistoryResponse(_ history: History) {
         cellModels.removeAll()
-        appendIntroMessages()
+        appendIntroMessages(animate: false)
         let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
             let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
+            question.isVisible = true
             cellModels.append(question)
             let answer = ChatCellViewModel(
                 answer: answeredQuestion.answer,
                 openURLAction: openURLAction,
                 analyticsService: analyticsService
             )
+            answer.isVisible = true
             cellModels.append(answer)
         }
         if let pendingQuestion = history.pendingQuestion {
-            let question = ChatCellViewModel(question: pendingQuestion)
-            cellModels.append(question)
             pollForAnswer(pendingQuestion)
         }
     }
@@ -184,7 +206,7 @@ class ChatViewModel: ObservableObject {
     func newChat() {
         cellModels.removeAll()
         chatService.clearHistory()
-        appendIntroMessages()
+        appendIntroMessages(animate: true)
     }
 
     func openAboutURL() {

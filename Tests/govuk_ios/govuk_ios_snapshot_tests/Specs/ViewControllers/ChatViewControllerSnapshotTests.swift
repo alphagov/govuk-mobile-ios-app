@@ -57,6 +57,8 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         viewModel.askQuestion()
         // With no history loading to create cellModels, modify the array
         // directly
+        let model = ChatCellViewModel.gettingAnswer
+        model.isVisible = true
         viewModel.cellModels = [ChatCellViewModel.gettingAnswer]
 
         let view = ChatView(viewModel: viewModel)
@@ -82,6 +84,9 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             handleError: { _ in }
         )
         viewModel.askQuestion()
+
+        let model = ChatCellViewModel.gettingAnswer
+        model.isVisible = true
         viewModel.cellModels = [ChatCellViewModel.gettingAnswer]
 
         let view = ChatView(viewModel: viewModel)

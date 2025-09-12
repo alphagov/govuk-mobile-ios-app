@@ -45,28 +45,25 @@ struct ChatCellView: View {
     }
 
     private var scale: CGFloat {
-        switch viewModel.type {
-        case .pendingAnswer:
+        if viewModel.type == .pendingAnswer {
             1.0
-        default:
+        } else {
             0.90
         }
     }
 
     private var duration: CGFloat {
-        switch viewModel.type {
-        case .intro:
+        if viewModel.type == .intro {
             0.5
-        default:
+        } else {
             0.25
         }
     }
 
     private var delay: CGFloat {
-        switch viewModel.type {
-        case .loading:
+        if viewModel.type == .loading {
             0.4
-        default:
+        } else {
             0.0
         }
     }

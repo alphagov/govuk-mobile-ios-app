@@ -36,7 +36,11 @@ class ReAuthenticationCoordinator: BaseCoordinator {
             .deviceOwnerAuthenticationWithBiometrics
         )
         guard policy.canEvaluate else {
-            completionAction()
+            if authenticationService.isSignedIn {
+                await sendRefreshRequest()
+            } else {
+                completionAction()
+            }
             return
         }
         guard !localAuthenticationService.biometricsHaveChanged else {
@@ -53,6 +57,10 @@ class ReAuthenticationCoordinator: BaseCoordinator {
             return
         }
 
+        await sendRefreshRequest()
+    }
+
+    private func sendRefreshRequest() async {
         let refreshRequestResult = await authenticationService.tokenRefreshRequest()
 
         switch refreshRequestResult {

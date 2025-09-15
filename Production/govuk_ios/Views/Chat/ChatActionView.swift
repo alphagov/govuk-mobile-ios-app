@@ -64,7 +64,7 @@ struct ChatActionView: View {
             HStack(alignment: .center, spacing: 8) {
                 textEditorView(maxFrameHeight: maxFrameHeight)
 
-                if !textAreaFocused {
+                if viewModel.latestQuestion.isEmpty || !textAreaFocused {
                     ChatMenuView(
                         viewModel: viewModel,
                         showClearChatAlert: $showClearChatAlert,
@@ -117,8 +117,8 @@ struct ChatActionView: View {
             }
         }
         .padding(.leading, 10)
-        .padding(.trailing, 44)
-        .padding(.top, 8)
+        .padding(.trailing, (viewModel.latestQuestion.isEmpty || !textAreaFocused) ? 10 : 44)
+        .padding(.top, 4)
         .padding(.bottom, charactersCountHeight == 0 ? 8 : charactersCountHeight)
         .frame(
             height: min(textEditorFrameHeight, maxFrameHeight)
@@ -131,23 +131,13 @@ struct ChatActionView: View {
                               value: viewModel.textViewHeight)
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: charactersCountHeight)
+        .conditionalAnimation(.easeInOut(duration: animationDuration),
+                              value: viewModel.latestQuestion)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true
         }
         .accessibilitySortPriority(1)
-    }
-
-    private var borderColor: Color {
-        if shouldShowError {
-            Color(UIColor.govUK.strokes.error)
-        } else {
-            if textAreaFocused {
-                Color(UIColor.govUK.strokes.focusedChatTextBox)
-            } else {
-                Color(UIColor.govUK.strokes.chatAction)
-            }
-        }
     }
 
     private var sendButtonView: some View {
@@ -164,18 +154,19 @@ struct ChatActionView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
                     .foregroundColor(
-                        viewModel.shouldDisableSend ?
-                        Color(UIColor.govUK.text.buttonPrimaryDisabled) :
-                            Color(UIColor.govUK.text.buttonPrimary)
+//                        viewModel.shouldDisableSend ?
+//                        Color(UIColor.govUK.text.buttonPrimaryDisabled) :
+                        Color(UIColor.govUK.text.buttonPrimary)
                     )
                     .frame(width: 36, height: 48)
                     .background(
                         Circle().fill(
-                            viewModel.shouldDisableSend ?
-                            Color(UIColor.govUK.fills.surfaceButtonPrimaryDisabled) :
-                                Color(UIColor.govUK.text.buttonSecondary)
+//                            viewModel.shouldDisableSend ?
+//                            Color(UIColor.govUK.fills.surfaceButtonPrimaryDisabled) :
+                            Color(UIColor.govUK.text.buttonSecondary)
                         )
                     )
+                    .opacity(viewModel.shouldDisableSend ? 0 : 1)
             }
             .accessibilityLabel(String.chat.localized("sendButtonAccessibilityLabel"))
             .disabled(viewModel.shouldDisableSend)
@@ -232,7 +223,7 @@ struct ChatActionView: View {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
         if !textAreaFocused && !viewModel.latestQuestion.isEmpty {
-            return max(lineHeight + 10, 48)
+            return max(lineHeight + 26, 48)
         }
         if charactersCountHeight > 0 {
             return max(viewModel.textViewHeight + 10 + charactersCountHeight, 48)

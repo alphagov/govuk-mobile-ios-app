@@ -8,64 +8,80 @@ struct DynamicTextEditor: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.isScrollEnabled = true
-        textView.font = UIFont.govUK.body
         textView.backgroundColor = UIColor.govUK.fills.surfaceChatBlue
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
-        textView.text = placeholderText
-        textView.textColor = UIColor.govUK.text.secondary
-        textView.textContainerInset = UIEdgeInsets(top: 6, left: 0, bottom: 4, right: 0)
+        textView.font = .govUK.body
+        textView.adjustsFontForContentSizeCategory = true
+
+        let placeholderLabel = UILabel()
+        placeholderLabel.adjustsFontForContentSizeCategory = true
+        placeholderLabel.text = placeholderText
+        placeholderLabel.font = .govUK.body
+        placeholderLabel.textColor = UIColor.govUK.text.secondary
+        placeholderLabel.tag = 100
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        textView.addSubview(placeholderLabel)
+
+        NSLayoutConstraint.activate([
+            placeholderLabel.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 5),
+            placeholderLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 8)
+        ])
+
+        placeholderLabel.isHidden = !text.isEmpty
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification,
+                                               object: nil,
+                                               queue: .main) { _ in
+            DynamicTextEditor.recalculateHeight(view: textView, result: self.$dynamicHeight)
+        }
 
         return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        if placeholderText != nil {
-            uiView.text = placeholderText
-            uiView.textColor = UIColor.govUK.text.secondary
-        } else {
-            uiView.text = text
-            uiView.textColor = UIColor.govUK.text.primary
+        uiView.text = text
+        if let placeholderLabel = uiView.viewWithTag(100) as? UILabel {
+            placeholderLabel.isHidden = !text.isEmpty
         }
         DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
     }
 
-    func makeCoordinator() -> Coordinator {
-        Coordinator(
-            text: $text,
-            height: $dynamicHeight,
-            placeholderText: $placeholderText
+    func dismantleUIView(_ uiView: UITextView, coordinator: Coordinator) {
+        NotificationCenter.default.removeObserver(
+            uiView,
+            name: UIContentSizeCategory.didChangeNotification,
+            object: nil
         )
     }
 
-    class Coordinator: NSObject, UITextViewDelegate {
-        @Binding var text: String
-        @Binding var height: CGFloat
-        @Binding var placeholderText: String?
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
 
-        init(text: Binding<String>,
-             height: Binding<CGFloat>,
-             placeholderText: Binding<String?>) {
-            self._text = text
-            self._height = height
-            self._placeholderText = placeholderText
+    class Coordinator: NSObject, UITextViewDelegate {
+        var parent: DynamicTextEditor
+
+        init(_ parent: DynamicTextEditor) {
+            self.parent = parent
         }
 
         func textViewDidChange(_ textView: UITextView) {
-            $text.wrappedValue = textView.text
-            DynamicTextEditor.recalculateHeight(view: textView, result: $height)
+            parent.text = textView.text
+            if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+                placeholderLabel.isHidden = !textView.text.isEmpty
+            }
+            DynamicTextEditor.recalculateHeight(view: textView, result: parent.$dynamicHeight)
         }
 
         func textViewDidBeginEditing(_ textView: UITextView) {
-            placeholderText = nil
+            if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+                placeholderLabel.isHidden = true
+            }
         }
 
         func textViewDidEndEditing(_ textView: UITextView) {
-            if textView.text.isEmpty {
-                textView.text = placeholderText
-                textView.textColor = UIColor.govUK.text.secondary
-            } else {
-                textView.textColor = UIColor.govUK.text.primary
+            if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+                placeholderLabel.isHidden = !textView.text.isEmpty
             }
         }
     }

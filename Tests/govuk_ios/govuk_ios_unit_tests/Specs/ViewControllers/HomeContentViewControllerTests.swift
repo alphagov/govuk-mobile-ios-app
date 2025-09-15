@@ -41,8 +41,14 @@ struct HomeContentViewControllerTests {
         #expect(subject.title == "Home")
     }
 
-    @Test
-    func viewDidAppear_tracksScreen() {
+    @Test(arguments: zip(
+        [true, false],
+        ["chatOptIn", "chatOptOut"]
+    ))
+    func viewDidAppear_tracksScreen(chatOptedIn: Bool,
+                                    expectedValue: String) {
+        let mockUserDefaultsService = MockUserDefaultsService()
+        mockUserDefaultsService.set(bool: chatOptedIn, forKey: .chatOptedIn)
         let mockAnalyticsService = MockAnalyticsService()
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
@@ -67,7 +73,7 @@ struct HomeContentViewControllerTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: mockUserDefaultsService
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
@@ -76,7 +82,8 @@ struct HomeContentViewControllerTests {
         #expect(screens.count == 1)
         #expect(screens.first?.trackingName == subject.trackingName)
         #expect(screens.first?.trackingClass == subject.trackingClass)
-        #expect(screens.first?.additionalParameters.count == 0)
+        #expect(screens.first?.additionalParameters.count == 1)
+        #expect((screens.first?.additionalParameters["type"] as? String) == expectedValue)
     }
     
     @Test

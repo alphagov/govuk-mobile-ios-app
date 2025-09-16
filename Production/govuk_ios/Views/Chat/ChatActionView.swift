@@ -24,21 +24,15 @@ struct ChatActionView: View {
         errorFocused = shouldShowError
         warningFocused = shouldShowWarning
         return VStack(spacing: 0) {
-            if shouldShowError {
-                errorView
-                    .conditionalAnimation(
-                        .easeInOut(duration: animationDuration),
-                        value: shouldShowError
-                    )
-                    .accessibilityFocused($errorFocused)
-            } else if shouldShowWarning {
-                warningView
-                    .conditionalAnimation(
-                        .easeInOut(duration: animationDuration),
-                        value: shouldShowWarning
-                    )
-                    .accessibilityFocused($errorFocused)
-            }
+            errorView
+                .opacity(shouldShowError ? 1 : 0)
+                .frame(height: shouldShowError ? nil : 0)
+                .accessibilityFocused($errorFocused)
+            warningView
+                .opacity(shouldShowWarning ? 1 : 0)
+                .frame(height: shouldShowWarning ? nil : 0)
+                .accessibilityFocused($warningFocused)
+
             chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
         }
         .onChange(of: viewModel.latestQuestion) { _ in
@@ -57,6 +51,14 @@ struct ChatActionView: View {
                 viewModel.warningText = nil
             }
         }
+        .conditionalAnimation(
+            .easeInOut(duration: animationDuration),
+            value: shouldShowError
+        )
+        .conditionalAnimation(
+            .easeInOut(duration: animationDuration),
+            value: shouldShowWarning
+        )
         .alert(isPresented: $showClearChatAlert) {
             Alert(
                 title: Text(String.chat.localized("clearAlertTitle")),

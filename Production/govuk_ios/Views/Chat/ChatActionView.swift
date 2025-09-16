@@ -142,11 +142,13 @@ struct ChatActionView: View {
     }
 
     private var shouldShowError: Bool {
-        viewModel.errorText != nil
+        viewModel.errorText != nil && textAreaFocused
     }
 
     private var shouldShowWarning: Bool {
-        viewModel.errorText == nil && viewModel.warningText != nil
+        viewModel.errorText == nil &&
+        viewModel.warningText != nil &&
+        textAreaFocused
     }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {

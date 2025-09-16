@@ -28,8 +28,6 @@ struct ChatView: View {
 
                 chatContainerView(geometry.size.height - 32)
                     .conditionalAnimation(.easeInOut(duration: transitionDuration),
-                                          value: textAreaFocused)
-                    .conditionalAnimation(.easeInOut(duration: transitionDuration),
                                           value: viewModel.textViewHeight)
             }
         }

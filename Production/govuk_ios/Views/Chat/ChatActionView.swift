@@ -88,10 +88,6 @@ struct ChatActionView: View {
                     Circle().frame(width: 36, height: 36).opacity(0)
                 }
             }
-            .overlay(alignment: .bottomTrailing) {
-                sendButtonView
-                    .padding(.trailing, 6)
-            }
             .overlay(alignment: .center) {
                 HStack {
                     Spacer()
@@ -103,6 +99,10 @@ struct ChatActionView: View {
                         )
                     }
                 }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                sendButtonView
+                    .padding(.trailing, 6)
             }
         }
         .accessibilityElement(children: .contain)
@@ -178,6 +178,8 @@ struct ChatActionView: View {
                               value: viewModel.textViewHeight)
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: viewModel.latestQuestion)
+        .conditionalAnimation(.easeInOut(duration: animationDuration),
+                              value: textAreaFocused)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true
@@ -212,9 +214,10 @@ struct ChatActionView: View {
                     self.textAreaFocused = true
                 }
             })
-            .opacity(textAreaFocused && !viewModel.latestQuestion.isEmpty ? 1 : 0)
-            .conditionalAnimation(.easeInOut(duration: animationDuration),
-                                  value: textAreaFocused)
+            .scaleEffect(shouldShowSendButton ? 1 : 0.5)
+            .opacity(shouldShowSendButton ? 1 : 0)
+            .conditionalAnimation(shouldShowSendButton ? .easeInOut(duration: 0.7) : .none,
+                                  value: shouldShowSendButton)
         }
         .padding(.leading, 16)
     }
@@ -236,5 +239,9 @@ struct ChatActionView: View {
 
     private var shouldShowMenu: Bool {
         viewModel.latestQuestion.isEmpty || !textAreaFocused
+    }
+
+    private var shouldShowSendButton: Bool {
+        textAreaFocused && !viewModel.latestQuestion.isEmpty
     }
 }

@@ -55,7 +55,7 @@ class HomeViewModel: ObservableObject {
     }
 
     var widgets: [HomepageWidget] {
-        let array = [topicsView].compactMap { $0 }
+        let array = [topicsView, recentActivityWidget].compactMap { $0 }
         return array
     }
 
@@ -66,6 +66,20 @@ class HomeViewModel: ObservableObject {
             content: TopicsView(
                 viewModel: self.topicsWidgetViewModel
             )
+        )
+    }
+
+    var recentActivityWidget: HomepageWidget? {
+        guard featureEnabled(.topics)
+        else { return nil }
+        let viewModel = RecentActivtyWidgetViewModel(
+            urlOpener: urlOpener,
+            analyticsService: analyticsService,
+            activityService: activityService
+        )
+        let view = RecentActivityWidget(viewModel: viewModel)
+        return HomepageWidget(
+            content: view
         )
     }
 

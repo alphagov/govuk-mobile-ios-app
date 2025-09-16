@@ -146,15 +146,15 @@ extension ChatService {
     }
 
     var chatOptInAvailable: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChatOptIn)
+        configService.isFeatureEnabled(key: .chatOptIn)
     }
 
     var chatTestActive: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChatTestActive)
+        configService.isFeatureEnabled(key: .chatTestActive)
     }
 
     var isEnabled: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChat) && chatTestActive
+        configService.isFeatureEnabled(key: .chat) && chatTestActive
     }
 
     var chatOnboardingSeen: Bool {

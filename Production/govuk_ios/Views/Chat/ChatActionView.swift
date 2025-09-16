@@ -60,25 +60,34 @@ struct ChatActionView: View {
     }
 
     private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
-        ZStack(alignment: .bottom) {
+        ZStack {
             HStack(alignment: .center, spacing: 8) {
                 textEditorView(maxFrameHeight: maxFrameHeight)
-
-                if viewModel.latestQuestion.isEmpty || !textAreaFocused {
-                    ChatMenuView(
-                        viewModel: viewModel,
-                        showClearChatAlert: $showClearChatAlert,
-                        disableClearChat: $viewModel.requestInFlight
-                    )
+                // UITextView absorbs all taps if focused in HStack, moves ChatMenuView to its
+                // own HStack and copies dimensions to an invisible circle
+                if shouldShowMenu {
+                    Circle().frame(width: 36, height: 36).opacity(0)
                 }
             }
-            .accessibilityElement(children: .contain)
-            .padding([.horizontal, .bottom])
-
-            sendButtonView
-                .padding(.trailing, 22)
-                .padding(.bottom, 16)
+            .overlay(alignment: .bottomTrailing) {
+                sendButtonView
+                    .padding(.trailing, 6)
+            }
+            .overlay(alignment: .center) {
+                HStack {
+                    Spacer()
+                    if shouldShowMenu {
+                        ChatMenuView(
+                            viewModel: viewModel,
+                            showClearChatAlert: $showClearChatAlert,
+                            disableClearChat: $viewModel.requestInFlight
+                        )
+                    }
+                }
+            }
         }
+        .accessibilityElement(children: .contain)
+        .padding([.horizontal, .bottom])
     }
 
     private var errorView: some View {
@@ -230,6 +239,10 @@ struct ChatActionView: View {
         } else {
             return max(viewModel.textViewHeight + 10, 48)
         }
+    }
+
+    private var shouldShowMenu: Bool {
+        viewModel.latestQuestion.isEmpty || !textAreaFocused
     }
 }
 

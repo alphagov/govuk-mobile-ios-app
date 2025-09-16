@@ -23,6 +23,10 @@ class MockAnalyticsService: AnalyticsServiceInterface {
         _trackScreenReceivedScreens.append(screen)
     }
 
+    func track(error: any Error) {
+        // No-op
+    }
+
     var _trackSetUserPropertyReceivedProperty: UserProperty?
     func set(userProperty: UserProperty) {
         _trackSetUserPropertyReceivedProperty = userProperty

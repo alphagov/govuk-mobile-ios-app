@@ -15,6 +15,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
 
     private let appConfigServiceClient: AppConfigServiceClientInterface
+    private let analyticsService: AnalyticsServiceInterface
     private var retryInterval: Int?
 
     var chatPollIntervalSeconds: TimeInterval = 3.0
@@ -22,8 +23,10 @@ public final class AppConfigService: AppConfigServiceInterface {
     var userFeedbackBanner: UserFeedbackBanner?
     private(set) var chatUrls: ChatURLs?
 
-    init(appConfigServiceClient: AppConfigServiceClientInterface) {
+    init(appConfigServiceClient: AppConfigServiceClientInterface,
+         analyticsService: AnalyticsServiceInterface) {
         self.appConfigServiceClient = appConfigServiceClient
+        self.analyticsService = analyticsService
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {
@@ -36,9 +39,12 @@ public final class AppConfigService: AppConfigServiceInterface {
     }
 
     private func handleResult(_ result: FetchAppConfigResult) {
-        guard case .success(let appConfig) = result
-        else { return }
-        setConfig(appConfig.config)
+        switch result {
+        case .success(let appConfig):
+            setConfig(appConfig.config)
+        case .failure(let error):
+            analyticsService.track(error: error)
+        }
     }
 
     private func setConfig(_ config: Config) {

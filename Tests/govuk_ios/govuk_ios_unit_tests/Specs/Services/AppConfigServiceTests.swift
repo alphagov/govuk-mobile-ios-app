@@ -3,16 +3,20 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
+@testable import GOVKitTestUtilities
 
 @Suite
 struct AppConfigServiceTests {
     private var sut: AppConfigService!
     private var mockAppConfigServiceClient: MockAppConfigServiceClient!
+    private var mockAnalyticsService: MockAnalyticsService!
 
     init() {
         mockAppConfigServiceClient = MockAppConfigServiceClient()
+        mockAnalyticsService = MockAnalyticsService()
         sut = AppConfigService(
-            appConfigServiceClient: mockAppConfigServiceClient
+            appConfigServiceClient: mockAppConfigServiceClient,
+            analyticsService: mockAnalyticsService
         )
     }
 

@@ -90,4 +90,8 @@ class MockCrashlytics: CrashlyticsInterface {
     func setCrashlyticsCollectionEnabled(_ newValue: Bool) {
         _setCrashlyticsCollectionEnabledReceivedEnabled = newValue
     }
+
+    func record(error: any Error) {
+
+    }
 }

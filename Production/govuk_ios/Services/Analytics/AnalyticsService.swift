@@ -29,6 +29,10 @@ class AnalyticsService: AnalyticsServiceInterface {
         clients.forEach { $0.track(screen: screen) }
     }
 
+    func track(error: Error) {
+        clients.forEach { $0.track(error: error) }
+    }
+
     func setAcceptedAnalytics(accepted: Bool) {
         userDefaultsService.set(bool: accepted, forKey: .acceptedAnalytics)
         clients.forEach { $0.setEnabled(enabled: accepted) }

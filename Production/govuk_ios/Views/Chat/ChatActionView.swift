@@ -6,7 +6,6 @@ struct ChatActionView: View {
     @AccessibilityFocusState private var errorFocused: Bool
     @AccessibilityFocusState private var warningFocused: Bool
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
-    @State private var charactersCountHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
     private var maxTextEditorFrameHeight: CGFloat
@@ -167,7 +166,7 @@ struct ChatActionView: View {
         .padding(.leading, 10)
         .padding(.trailing, (viewModel.latestQuestion.isEmpty || !textAreaFocused) ? 10 : 44)
         .padding(.top, 4)
-        .padding(.bottom, charactersCountHeight == 0 ? 8 : charactersCountHeight)
+        .padding(.bottom, 8)
         .frame(
             height: min(textEditorFrameHeight, maxFrameHeight)
         )
@@ -177,8 +176,6 @@ struct ChatActionView: View {
         )
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: viewModel.textViewHeight)
-        .conditionalAnimation(.easeInOut(duration: animationDuration),
-                              value: charactersCountHeight)
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: viewModel.latestQuestion)
         .contentShape(Rectangle())

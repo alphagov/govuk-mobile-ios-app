@@ -15,7 +15,8 @@ class ChatViewModel: ObservableObject {
     @Published var scrollToBottom: Bool = false
     @Published var scrollToTop: Bool = false
     @Published var latestQuestionID: String = ""
-    @Published var errorText: String?
+    @Published var errorText: LocalizedStringKey?
+    @Published var warningText: LocalizedStringKey?
     @Published var textViewHeight: CGFloat = 50.0
     @Published var requestInFlight: Bool = false
 
@@ -24,7 +25,6 @@ class ChatViewModel: ObservableObject {
     }
 
     var shouldDisableSend: Bool {
-        latestQuestion.isEmpty ||
         (latestQuestion.count > maxCharacters) ||
         requestInFlight
     }
@@ -47,7 +47,7 @@ class ChatViewModel: ObservableObject {
                      completion: ((Bool) -> Void)? = nil) {
         let localQuestion = question ?? latestQuestion
         guard !containsPII(localQuestion) else {
-            errorText = String.chat.localized("validationErrorText")
+            errorText = LocalizedStringKey("validationErrorText")
             completion?(false)
             return
         }
@@ -68,7 +68,7 @@ class ChatViewModel: ObservableObject {
             case .failure(let error):
                 self?.requestInFlight = false
                 if error == .validationError {
-                    self?.errorText = String.chat.localized("validationErrorText")
+                    self?.errorText = LocalizedStringKey("validationErrorText")
                 } else {
                     self?.processError(error)
                     self?.latestQuestion = ""

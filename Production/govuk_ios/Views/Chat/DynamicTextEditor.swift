@@ -12,7 +12,6 @@ struct DynamicTextEditor: UIViewRepresentable {
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
         textView.font = .govUK.body
-        textView.adjustsFontForContentSizeCategory = true
 
         let placeholderLabel = UILabel()
         placeholderLabel.adjustsFontForContentSizeCategory = true

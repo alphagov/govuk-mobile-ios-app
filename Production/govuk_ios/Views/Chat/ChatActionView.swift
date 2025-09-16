@@ -4,6 +4,7 @@ struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
     @AccessibilityFocusState private var errorFocused: Bool
+    @AccessibilityFocusState private var warningFocused: Bool
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var charactersCountHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
@@ -22,21 +23,40 @@ struct ChatActionView: View {
 
     var body: some View {
         errorFocused = shouldShowError
+        warningFocused = shouldShowWarning
         return VStack(spacing: 0) {
-            errorView
-                .opacity(shouldShowError ? 1.0 : 0.0)
-                .conditionalAnimation(
-                    .easeInOut(duration: animationDuration),
-                    value: shouldShowError
-                )
-                .accessibilityFocused($errorFocused)
+            if shouldShowError {
+                errorView
+                    .conditionalAnimation(
+                        .easeInOut(duration: animationDuration),
+                        value: shouldShowError
+                    )
+                    .accessibilityFocused($errorFocused)
+            } else if shouldShowWarning {
+                warningView
+                    .conditionalAnimation(
+                        .easeInOut(duration: animationDuration),
+                        value: shouldShowWarning
+                    )
+                    .accessibilityFocused($errorFocused)
+            }
             chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
         }
-        .onPreferenceChange(CharacterCountHeightKey.self) { height in
-            self.charactersCountHeight = height
-        }
         .onChange(of: viewModel.latestQuestion) { _ in
-            viewModel.errorText = nil
+            if viewModel.latestQuestion.count > viewModel.maxCharacters {
+                viewModel.errorText = LocalizedStringKey(
+                    "tooManyCharactersTitle.\(viewModel.absoluteRemainingCharacters)"
+                )
+                viewModel.warningText = nil
+            } else if viewModel.latestQuestion.count >= (viewModel.maxCharacters - 50) {
+                viewModel.warningText = LocalizedStringKey(
+                    "remainingCharactersTitle.\(viewModel.absoluteRemainingCharacters)"
+                )
+                viewModel.errorText = nil
+            } else {
+                viewModel.errorText = nil
+                viewModel.warningText = nil
+            }
         }
         .alert(isPresented: $showClearChatAlert) {
             Alert(
@@ -93,23 +113,42 @@ struct ChatActionView: View {
     private var errorView: some View {
         VStack(spacing: 0) {
             if let error = viewModel.errorText {
-                Text(error)
+                Text(error, tableName: "Chat")
                     .fontWeight(.bold)
                     .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .ignoresSafeArea(edges: .horizontal)
             }
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 32)
         .padding(.vertical, viewModel.errorText != nil ? 8 : 0)
+    }
+
+    private var warningView: some View {
+        VStack(spacing: 0) {
+            if let warning = viewModel.warningText {
+                Text(warning, tableName: "Chat")
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color(UIColor.govUK.text.secondary))
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .ignoresSafeArea(edges: .horizontal)
+            }
+        }
+        .padding(.horizontal, 32)
+        .padding(.vertical, viewModel.warningText != nil ? 8 : 0)
     }
 
     private var shouldShowError: Bool {
         viewModel.errorText != nil
     }
 
+    private var shouldShowWarning: Bool {
+        viewModel.errorText == nil && viewModel.warningText != nil
+    }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
         DynamicTextEditor(
@@ -151,10 +190,6 @@ struct ChatActionView: View {
 
     private var sendButtonView: some View {
         HStack(alignment: .bottom) {
-            if textAreaFocused {
-                characterCountView
-            }
-
             Spacer()
 
             Button(action: askQuestion) {
@@ -163,63 +198,28 @@ struct ChatActionView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
                     .foregroundColor(
-//                        viewModel.shouldDisableSend ?
-//                        Color(UIColor.govUK.text.buttonPrimaryDisabled) :
                         Color(UIColor.govUK.text.buttonPrimary)
                     )
                     .frame(width: 36, height: 48)
                     .background(
                         Circle().fill(
-//                            viewModel.shouldDisableSend ?
-//                            Color(UIColor.govUK.fills.surfaceButtonPrimaryDisabled) :
                             Color(UIColor.govUK.text.buttonSecondary)
                         )
                     )
-                    .opacity(viewModel.shouldDisableSend ? 0 : 1)
+                    .opacity(viewModel.shouldDisableSend ? 0.4 : 1)
             }
             .accessibilityLabel(String.chat.localized("sendButtonAccessibilityLabel"))
             .disabled(viewModel.shouldDisableSend)
             .simultaneousGesture(TapGesture().onEnded {
-                if viewModel.latestQuestion.isEmpty {
+                if viewModel.shouldDisableSend {
                     self.textAreaFocused = true
                 }
             })
-            .opacity(textAreaFocused ? 1 : 0)
+            .opacity(textAreaFocused && !viewModel.latestQuestion.isEmpty ? 1 : 0)
             .conditionalAnimation(.easeInOut(duration: animationDuration),
                                   value: textAreaFocused)
         }
         .padding(.leading, 16)
-    }
-
-    @ViewBuilder
-    private var characterCountView: some View {
-        if viewModel.latestQuestion.count > viewModel.maxCharacters {
-            Text(LocalizedStringKey("tooManyCharactersTitle.\(viewModel.absoluteRemainingCharacters)"),
-                 tableName: "Chat")
-            .font(Font(UIFont.govUK.subheadlineSemibold))
-            .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
-            .padding([.leading, .trailing], 16)
-            .padding(.bottom, 24)
-            .background(GeometryReader { textGeometry in
-                Color.clear.preference(
-                    key: CharacterCountHeightKey.self,
-                    value: textGeometry.size.height
-                )
-            })
-        } else if viewModel.latestQuestion.count >= (viewModel.maxCharacters - 50) {
-            Text(LocalizedStringKey("remainingCharactersTitle.\(viewModel.absoluteRemainingCharacters)"),
-                 tableName: "Chat")
-            .font(Font(UIFont.govUK.subheadline))
-            .foregroundColor(Color(UIColor.govUK.text.secondary))
-            .padding([.leading, .trailing], 16)
-            .padding(.bottom, 24)
-            .background(GeometryReader { textGeometry in
-                Color.clear.preference(
-                    key: CharacterCountHeightKey.self,
-                    value: textGeometry.size.height
-                )
-            })
-        }
     }
 
     private func askQuestion() {
@@ -234,21 +234,10 @@ struct ChatActionView: View {
         if !textAreaFocused && !viewModel.latestQuestion.isEmpty {
             return max(lineHeight + 26, 48)
         }
-        if charactersCountHeight > 0 {
-            return max(viewModel.textViewHeight + 10 + charactersCountHeight, 48)
-        } else {
-            return max(viewModel.textViewHeight + 10, 48)
-        }
+        return max(viewModel.textViewHeight + 10, 48)
     }
 
     private var shouldShowMenu: Bool {
         viewModel.latestQuestion.isEmpty || !textAreaFocused
-    }
-}
-
-struct CharacterCountHeightKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
     }
 }

@@ -24,6 +24,22 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
+    func test_loadInNavigationController_noSources_light_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            view: view(includeSources: false),
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_noSources_dark_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            view: view(includeSources: false),
+            mode: .dark,
+            navBarHidden: true
+        )
+    }
+
     func test_loadInNavigationController_showError_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             view: view(showError: true),
@@ -99,7 +115,8 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    private func view(showError: Bool = false) -> some View {
+    private func view(showError: Bool = false,
+                      includeSources: Bool = true) -> some View {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"
         let createdAt = "\(Date())"
@@ -118,7 +135,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             createdAt: createdAt,
             id: "12345",
             message: "This is the answer",
-            sources: sources
+            sources: includeSources ? sources : nil
         )
 
         let answeredQuestion = AnsweredQuestion(

@@ -109,14 +109,15 @@ struct ChatCellView: View {
             HStack(alignment: .firstTextBaseline) {
                 markdownView
             }
-            Divider()
-                .overlay(Color(UIColor.govUK.strokes.chatDivider))
-                .padding(.vertical, 8)
-            warningView
             if !viewModel.sources.isEmpty {
+                Divider()
+                    .overlay(Color(UIColor.govUK.strokes.chatDivider))
+                    .padding(.vertical, 8)
+                warningView
                 sourceView
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
     }
 

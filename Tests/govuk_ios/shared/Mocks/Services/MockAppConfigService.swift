@@ -21,6 +21,19 @@ class MockAppConfigService: AppConfigServiceInterface {
         _stubbedAlertBanner
     }
 
+    var _stubbedChatBanner: ChatBanner?
+    var chatBanner: ChatBanner? {
+        _stubbedChatBanner
+    }
+
+    var _stubbedChatBannerLink: ChatBanner.Link = .init(
+        title: "test",
+        url: URL(string: "https://test.com")!
+    )
+    var userChatBannerLink: ChatBanner.Link {
+        _stubbedChatBannerLink
+    }
+
     var _stubbedUserFeedbackBanner: UserFeedbackBanner?
     var userFeedbackBanner: UserFeedbackBanner? {
         _stubbedUserFeedbackBanner

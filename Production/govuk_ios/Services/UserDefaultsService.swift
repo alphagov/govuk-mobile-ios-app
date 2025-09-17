@@ -7,8 +7,8 @@ protocol UserDefaultsServiceInterface {
     func set(bool boolValue: Bool,
              forKey key: UserDefaultsKeys)
     func removeObject(forKey key: UserDefaultsKeys)
-    func markSeen(banner: AlertBanner)
-    func hasSeen(banner: AlertBanner) -> Bool
+    func markSeen(banner: DismissibleBanner)
+    func hasSeen(banner: DismissibleBanner) -> Bool
 }
 
 struct UserDefaultsService: UserDefaultsServiceInterface {
@@ -48,11 +48,11 @@ struct UserDefaultsService: UserDefaultsServiceInterface {
         userDefaults.synchronize()
     }
 
-    func markSeen(banner: AlertBanner) {
+    func markSeen(banner: DismissibleBanner) {
         userDefaults.set(Date.now, forKey: banner.id)
     }
 
-    func hasSeen(banner: AlertBanner) -> Bool {
+    func hasSeen(banner: DismissibleBanner) -> Bool {
         userDefaults.value(forKey: banner.id) != nil
     }
 }

@@ -47,7 +47,18 @@ class ChatCoordinator: TabItemCoordinator {
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
-        deeplinkStore.route(
+        if !chatService.chatOnboardingSeen {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                present(
+                    coordinatorBuilder.chatInfoOnboarding(
+                        cancelOnboardingAction: cancelOnboardingAction,
+                        setChatViewControllerAction: setChatViewController
+                    )
+                )
+            }
+        }
+        return deeplinkStore.route(
             for: url,
             parent: self
         )

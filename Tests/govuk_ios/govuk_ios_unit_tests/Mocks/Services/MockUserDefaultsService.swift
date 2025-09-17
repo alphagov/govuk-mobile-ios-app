@@ -31,11 +31,11 @@ class MockUserDefaultsService: UserDefaultsServiceInterface {
         store[key.rawValue] = nil
     }
 
-    func markSeen(banner: AlertBanner) {
+    func markSeen(banner: DismissibleBanner) {
 
     }
 
-    func hasSeen(banner: AlertBanner) -> Bool {
+    func hasSeen(banner: DismissibleBanner) -> Bool {
         false
     }
 }

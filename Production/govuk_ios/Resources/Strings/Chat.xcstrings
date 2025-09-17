@@ -89,6 +89,17 @@
         }
       }
     },
+    "copyToClipboardTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard"
+          }
+        }
+      }
+    },
     "feedbackMenuAccessibilityTitle" : {
       "extractionState" : "manual",
       "localizations" : {

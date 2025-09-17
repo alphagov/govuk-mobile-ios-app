@@ -6,6 +6,7 @@ struct ChatActionView: View {
     @AccessibilityFocusState private var errorFocused: Bool
     @AccessibilityFocusState private var warningFocused: Bool
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
+    @State private var warningErrorHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
     private var maxTextEditorFrameHeight: CGFloat
@@ -28,12 +29,30 @@ struct ChatActionView: View {
                 .opacity(shouldShowError ? 1 : 0)
                 .frame(height: shouldShowError ? nil : 0)
                 .accessibilityFocused($errorFocused)
+                .background(
+                    GeometryReader { geo in
+                        Color.clear
+                            .preference(key: HeightPreferenceKey.self, value: geo.size.height)
+                    }
+                )
+                .onPreferenceChange(HeightPreferenceKey.self) { height in
+                    warningErrorHeight = height
+                }
             warningView
                 .opacity(shouldShowWarning ? 1 : 0)
                 .frame(height: shouldShowWarning ? nil : 0)
                 .accessibilityFocused($warningFocused)
+                .background(
+                    GeometryReader { geo in
+                        Color.clear
+                            .preference(key: HeightPreferenceKey.self, value: geo.size.height)
+                    }
+                )
+                .onPreferenceChange(HeightPreferenceKey.self) { height in
+                    warningErrorHeight = height
+                }
 
-            chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
+            chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight - warningErrorHeight)
         }
         .onChange(of: viewModel.latestQuestion) { _ in
             if viewModel.latestQuestion.count > viewModel.maxCharacters {
@@ -247,5 +266,12 @@ struct ChatActionView: View {
 
     private var shouldShowSendButton: Bool {
         textAreaFocused && !viewModel.latestQuestion.isEmpty
+    }
+}
+
+struct HeightPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }

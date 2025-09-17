@@ -33,14 +33,12 @@ struct DynamicTextEditor: UIViewRepresentable {
             ),
             placeholderLabel.bottomAnchor.constraint(
                 equalTo: textView.bottomAnchor
+            ),
+            placeholderLabel.widthAnchor.constraint(
+                lessThanOrEqualToConstant: textView.frame.width
             )
         ])
 
-        let widthConstraint = placeholderLabel.widthAnchor.constraint(
-            lessThanOrEqualToConstant: 300
-        )
-        widthConstraint.identifier = "widthConstraint"
-        widthConstraint.isActive = true
         placeholderLabel.isHidden = !text.isEmpty
         NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification,
                                                object: nil,
@@ -51,26 +49,22 @@ struct DynamicTextEditor: UIViewRepresentable {
         return textView
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
-        if let placeholderLabel = uiView.viewWithTag(100) as? UILabel {
-            placeholderLabel.isHidden = !text.isEmpty
-            if !placeholderLabel.isHidden {
-                let widthConstraint =
-                placeholderLabel.constraints.first { $0.identifier == "widthConstraint" }
-                widthConstraint?.constant = uiView.frame.width
-                DynamicTextEditor.recalculateHeight(view: placeholderLabel, result: $dynamicHeight)
-            } else {
-                DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
-            }
-        } else {
-            DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
+    func updateUIView(_ textView: UITextView, context: Context) {
+        guard textView.text.isEmpty else {
+            DynamicTextEditor.recalculateHeight(view: textView, result: $dynamicHeight)
+            return
+        }
+        if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+            placeholderLabel.isHidden = false
+            placeholderLabel.widthAnchor.constraint(equalTo: textView.widthAnchor).isActive = true
+            let view = placeholderLabel.numberOfLinesUsed > 1 ? placeholderLabel : textView
+            DynamicTextEditor.recalculateHeight(view: view, result: $dynamicHeight)
         }
     }
 
-    func dismantleUIView(_ uiView: UITextView, coordinator: Coordinator) {
+    func dismantleUIView(_ textView: UITextView, coordinator: Coordinator) {
         NotificationCenter.default.removeObserver(
-            uiView,
+            textView,
             name: UIContentSizeCategory.didChangeNotification,
             object: nil
         )
@@ -112,8 +106,35 @@ struct DynamicTextEditor: UIViewRepresentable {
         let newSize = view.sizeThatFits(
             CGSize(width: view.bounds.width, height: .greatestFiniteMagnitude)
         )
+        if let placeholderLabel = view.viewWithTag(100) as? UILabel {
+            let multipleLinePlaceholder =
+            placeholderLabel.isHidden == false && placeholderLabel.numberOfLinesUsed > 1
+            let newPlaceholderHeight = multipleLinePlaceholder ?
+            newSize.height + 16 : newSize.height
+            DispatchQueue.main.async {
+                result.wrappedValue = newPlaceholderHeight
+            }
+            return
+        }
         DispatchQueue.main.async {
             result.wrappedValue = newSize.height
         }
+    }
+}
+
+extension UILabel {
+    var numberOfLinesUsed: Int {
+        guard let text = self.text, let font = self.font else { return 0 }
+
+        let maxSize = CGSize(width: self.bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let rect = NSString(string: text).boundingRect(
+            with: maxSize,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [.font: font],
+            context: nil
+        )
+        let lineHeight = font.lineHeight
+        let lines = Int(floor((rect.height / lineHeight) + 0.2))
+        return lines
     }
 }

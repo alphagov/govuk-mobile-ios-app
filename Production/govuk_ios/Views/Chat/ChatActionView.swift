@@ -188,8 +188,8 @@ struct ChatActionView: View {
         }
         .padding(.leading, 10)
         .padding(.trailing, (viewModel.latestQuestion.isEmpty || !textAreaFocused) ? 10 : 44)
-        .padding(.top, 4)
-        .padding(.bottom, 8)
+        .padding(.top, 6)
+        .padding(.bottom, 4)
         .frame(
             height: min(textEditorFrameHeight, maxFrameHeight)
         )

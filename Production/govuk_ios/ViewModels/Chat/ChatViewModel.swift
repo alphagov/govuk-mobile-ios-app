@@ -17,7 +17,7 @@ class ChatViewModel: ObservableObject {
     @Published var latestQuestionID: String = ""
     @Published var errorText: LocalizedStringKey?
     @Published var warningText: LocalizedStringKey?
-    @Published var textViewHeight: CGFloat = 50.0
+    @Published var textViewHeight: CGFloat = 48.0
     @Published var requestInFlight: Bool = false
 
     var absoluteRemainingCharacters: Int {

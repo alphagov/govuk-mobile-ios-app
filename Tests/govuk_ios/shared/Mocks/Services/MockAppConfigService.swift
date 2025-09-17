@@ -14,7 +14,7 @@ class MockAppConfigService: AppConfigServiceInterface {
 
     var isAppRecommendUpdate: Bool = false
 
-    var features: [Feature] = [.onboarding, .search, .topics, .recentActivity]
+    var features: [Feature] = [.onboarding, .search, .topics, .recentActivity, .chatOptIn]
 
     var _stubbedAlertBanner: AlertBanner?
     var alertBanner: AlertBanner? {
@@ -30,7 +30,7 @@ class MockAppConfigService: AppConfigServiceInterface {
         title: "test",
         url: URL(string: "https://test.com")!
     )
-    var userChatBannerLink: ChatBanner.Link {
+    var chatBannerLink: ChatBanner.Link {
         _stubbedChatBannerLink
     }
 

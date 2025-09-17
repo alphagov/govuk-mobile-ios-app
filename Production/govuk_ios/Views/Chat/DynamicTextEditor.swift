@@ -20,13 +20,27 @@ struct DynamicTextEditor: UIViewRepresentable {
         placeholderLabel.textColor = UIColor.govUK.text.secondary
         placeholderLabel.tag = 100
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        placeholderLabel.numberOfLines = 0
+        placeholderLabel.lineBreakMode = .byWordWrapping
         textView.addSubview(placeholderLabel)
 
         NSLayoutConstraint.activate([
-            placeholderLabel.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 5),
-            placeholderLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 8)
+            placeholderLabel.leadingAnchor.constraint(
+                equalTo: textView.leadingAnchor, constant: 5
+            ),
+            placeholderLabel.topAnchor.constraint(
+                equalTo: textView.topAnchor, constant: 8
+            ),
+            placeholderLabel.bottomAnchor.constraint(
+                equalTo: textView.bottomAnchor
+            )
         ])
 
+        let widthConstraint = placeholderLabel.widthAnchor.constraint(
+            lessThanOrEqualToConstant: 300
+        )
+        widthConstraint.identifier = "widthConstraint"
+        widthConstraint.isActive = true
         placeholderLabel.isHidden = !text.isEmpty
         NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification,
                                                object: nil,
@@ -41,8 +55,17 @@ struct DynamicTextEditor: UIViewRepresentable {
         uiView.text = text
         if let placeholderLabel = uiView.viewWithTag(100) as? UILabel {
             placeholderLabel.isHidden = !text.isEmpty
+            if !placeholderLabel.isHidden {
+                let widthConstraint =
+                placeholderLabel.constraints.first { $0.identifier == "widthConstraint" }
+                widthConstraint?.constant = uiView.frame.width
+                DynamicTextEditor.recalculateHeight(view: placeholderLabel, result: $dynamicHeight)
+            } else {
+                DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
+            }
+        } else {
+            DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
         }
-        DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
     }
 
     func dismantleUIView(_ uiView: UITextView, coordinator: Coordinator) {

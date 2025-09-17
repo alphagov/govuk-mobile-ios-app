@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import UIComponents
 import GOVKit
+import MarkdownUI
 
 enum ChatLinkType: String {
     case sourceLink = "Source Link"
@@ -93,6 +94,17 @@ class ChatCellViewModel: ObservableObject {
 
     var questionWidth: CGFloat {
         UIScreen.main.bounds.width * 0.2
+    }
+
+    func copyToClipboard() {
+        var textToCopy = MarkdownContent(message).renderPlainText()
+        if !sources.isEmpty {
+            textToCopy.append("\n\n" + String.chat.localized("mistakesTitle"))
+            sources.forEach { source in
+                textToCopy.append("\n\n" + source.url)
+            }
+        }
+        UIPasteboard.general.string = textToCopy
     }
 
     func openURL(url: URL, type: ChatLinkType) {

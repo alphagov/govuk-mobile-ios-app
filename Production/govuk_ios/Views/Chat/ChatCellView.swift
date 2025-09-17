@@ -31,6 +31,14 @@ struct ChatCellView: View {
         .animation(.easeIn(duration: duration).delay(delay),
                    value: viewModel.isVisible)
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .contextMenu {
+            Button(action: {
+                viewModel.copyToClipboard()
+            }, label: {
+                Text(String.chat.localized("copyToClipboardTitle"))
+                Image(systemName: "doc.on.doc.fill")
+            })
+        }
     }
 
     private var anchor: UnitPoint {

@@ -24,8 +24,9 @@ class MockAnalyticsClient: AnalyticsClient {
         _trackEventReceivedEvents.append(event)
     }
 
+    var _trackErrorReceivedErrors: [Error] = []
     func track(error: any Error) {
-
+        _trackErrorReceivedErrors.append(error)
     }
 
     var _trackSetUserPropertyReceivedProperty: UserProperty?

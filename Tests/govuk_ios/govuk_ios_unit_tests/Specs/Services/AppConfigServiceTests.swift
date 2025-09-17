@@ -30,6 +30,28 @@ struct AppConfigServiceTests {
         }
 
         #expect(result.getError() == .invalidSignature)
+        #expect(mockAnalyticsService._trackErrorReceivedErrors.count == 1)
+    }
+
+    @Test
+    func fetchAppConfig_existingConfigValue_replacesValue() async {
+        let configResult = Config.arrange(releaseFlags: [Feature.search.rawValue: false])
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                configResult.toResult()
+            )
+        }
+
+        let updatedConfigResult = Config.arrange(releaseFlags: [Feature.search.rawValue: true])
+        _ = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                updatedConfigResult.toResult()
+            )
+        }
+
+        #expect(sut.isFeatureEnabled(key: .search))
     }
 
     @Test
@@ -46,7 +68,7 @@ struct AppConfigServiceTests {
     }
 
     @Test
-    func fetchAppConfig_missingPolligInterval_setsDefaultValue() async {
+    func fetchAppConfig_missingPollingInterval_setsDefaultValue() async {
         let configResult = Config.arrange(chatPollIntervalSeconds: nil).toResult()
         _ = await withCheckedContinuation { continuation in
             sut.fetchAppConfig(completion: continuation.resume)
@@ -59,7 +81,7 @@ struct AppConfigServiceTests {
     }
 
     @Test
-    func fetchAppConfig_zeroPolligInterval_setsDefaultValue() async {
+    func fetchAppConfig_zeroPollingInterval_setsDefaultValue() async {
         let configResult = Config.arrange(chatPollIntervalSeconds: 0).toResult()
         _ = await withCheckedContinuation { continuation in
             sut.fetchAppConfig(completion: continuation.resume)

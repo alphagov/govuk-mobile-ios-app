@@ -70,7 +70,7 @@ class HomeViewModel: ObservableObject {
         widgets =
         await [
             alertBanner,
-            chatBannerWidget,
+            chatWidget,
             localAuthorityWidget,
             recentActivityWidget,
             topicsWidget,
@@ -108,13 +108,13 @@ class HomeViewModel: ObservableObject {
     }
 
     @MainActor
-    private var chatBannerWidget: WidgetView? {
+    private var chatWidget: WidgetView? {
         guard let chat = configService.chatBanner,
               configService.isFeatureEnabled(key: .chatOptIn),
               !userDefaultService.hasSeen(banner: chat)
         else { return nil }
 
-        let viewModel = ChatBannerWidgetViewModel(
+        let viewModel = ChatWidgetViewModel(
             chat: chat,
             urlOpener: urlOpener,
             dismiss: {
@@ -124,7 +124,7 @@ class HomeViewModel: ObservableObject {
                 }
             }
         )
-        let content = ChatBannerWidgetView(
+        let content = ChatWidgetView(
             viewModel: viewModel
         )
         let widget = WidgetView(

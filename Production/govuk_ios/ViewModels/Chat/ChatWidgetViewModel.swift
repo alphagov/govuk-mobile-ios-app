@@ -2,7 +2,7 @@ import Foundation
 
 import GOVKit
 
-struct ChatBannerWidgetViewModel {
+struct ChatWidgetViewModel {
     let id: String
     let title: String
     let body: String
@@ -14,11 +14,11 @@ struct ChatBannerWidgetViewModel {
     init(chat: ChatBanner,
          urlOpener: URLOpener,
          dismiss: @escaping () -> Void) {
-        self.id = chat.id
-        self.title = chat.title
-        self.body = chat.body
-        self.linkUrl = chat.link.url
-        self.linkTitle = chat.link.title
+        id = chat.id
+        title = chat.title
+        body = chat.body
+        linkUrl = chat.link.url
+        linkTitle = chat.link.title
         self.urlOpener = urlOpener
         self.dismiss = dismiss
     }

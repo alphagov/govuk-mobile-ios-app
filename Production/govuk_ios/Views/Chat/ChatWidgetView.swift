@@ -1,8 +1,8 @@
 import SwiftUI
 import UIComponents
 
-struct ChatBannerWidgetView: View {
-    let viewModel: ChatBannerWidgetViewModel
+struct ChatWidgetView: View {
+    let viewModel: ChatWidgetViewModel
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
 

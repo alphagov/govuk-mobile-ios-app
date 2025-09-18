@@ -88,7 +88,7 @@
 		3D9C933E2CB0172400EFA337 /* AppForcedUpdateContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C933D2CB0172400EFA337 /* AppForcedUpdateContainerView.swift */; };
 		3D9C93402CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C933F2CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift */; };
 		3D9D06D12E7AA36100D1FC4A /* Banners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9D06D02E7AA36100D1FC4A /* Banners.swift */; };
-		3D9FD4BA2E799C9900928E92 /* ChatBannerWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FD4B92E799C9900928E92 /* ChatBannerWidgetViewModel.swift */; };
+		3D9FD4BA2E799C9900928E92 /* ChatWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FD4B92E799C9900928E92 /* ChatWidgetViewModel.swift */; };
 		3D9FD4BE2E79C37B00928E92 /* ChatDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FD4BD2E79C37B00928E92 /* ChatDeeplinkRoute.swift */; };
 		4E0043142D9BE25E00DDDA8A /* NotificationSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0043132D9BE25D00DDDA8A /* NotificationSettingsCoordinator.swift */; };
 		4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */; };
@@ -97,7 +97,7 @@
 		4E00EEF72CCB0788007B61E8 /* TopicOnboardingCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF62CCB0788007B61E8 /* TopicOnboardingCardModel.swift */; };
 		4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
-		4E19C85E2E65109900D56C33 /* ChatBannerWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19C85D2E65109900D56C33 /* ChatBannerWidgetView.swift */; };
+		4E19C85E2E65109900D56C33 /* ChatWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */; };
 		4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D252DB0E6510089CF9E /* Authority.swift */; };
 		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
@@ -510,7 +510,7 @@
 		3D9C933D2CB0172400EFA337 /* AppForcedUpdateContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppForcedUpdateContainerView.swift; sourceTree = "<group>"; };
 		3D9C933F2CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppForcedUpdateContainerViewModel.swift; sourceTree = "<group>"; };
 		3D9D06D02E7AA36100D1FC4A /* Banners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banners.swift; sourceTree = "<group>"; };
-		3D9FD4B92E799C9900928E92 /* ChatBannerWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBannerWidgetViewModel.swift; sourceTree = "<group>"; };
+		3D9FD4B92E799C9900928E92 /* ChatWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWidgetViewModel.swift; sourceTree = "<group>"; };
 		3D9FD4BD2E79C37B00928E92 /* ChatDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDeeplinkRoute.swift; sourceTree = "<group>"; };
 		4E0043132D9BE25D00DDDA8A /* NotificationSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsCoordinator.swift; sourceTree = "<group>"; };
 		4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -519,7 +519,7 @@
 		4E00EEF62CCB0788007B61E8 /* TopicOnboardingCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCardModel.swift; sourceTree = "<group>"; };
 		4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		4E19C85D2E65109900D56C33 /* ChatBannerWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBannerWidgetView.swift; sourceTree = "<group>"; };
+		4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWidgetView.swift; sourceTree = "<group>"; };
 		4E265D252DB0E6510089CF9E /* Authority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
 		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
@@ -1885,7 +1885,7 @@
 				D052CCDF2E0B09AA0048F98A /* ChatCellView.swift */,
 				D08F157B2E67527000133121 /* ChatMenuView.swift */,
 				D0A346D02E6F3038007D3D27 /* ChatEllipsesView.swift */,
-				4E19C85D2E65109900D56C33 /* ChatBannerWidgetView.swift */,
+				4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1900,7 +1900,7 @@
 				D016F29A2E0C51B000659AC3 /* ChatViewModel.swift */,
 				D052CA352E0B08CF0048F98A /* ChatCellViewModel.swift */,
 				D0900FA82E25309A00E3EB75 /* ChatErrorViewModel.swift */,
-				3D9FD4B92E799C9900928E92 /* ChatBannerWidgetViewModel.swift */,
+				3D9FD4B92E799C9900928E92 /* ChatWidgetViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2377,7 +2377,7 @@
 				16A3C2C92E6AF40A009CFF06 /* Image+Extensions.swift in Sources */,
 				4E9F5D072DB79D370063FA78 /* PrimaryButtonView.swift in Sources */,
 				16C34B432C492FF90031AD32 /* HomeDeepLinkRoute.swift in Sources */,
-				4E19C85E2E65109900D56C33 /* ChatBannerWidgetView.swift in Sources */,
+				4E19C85E2E65109900D56C33 /* ChatWidgetView.swift in Sources */,
 				D0E7923B2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift in Sources */,
 				5DC70CBD2CD52BCA00083544 /* UIEdgeInsets+Convenience.swift in Sources */,
 				D0ECAB042DCDF9EE00A9707E /* RadioButtonView.swift in Sources */,
@@ -2542,7 +2542,7 @@
 				5DC0DB412E57ADDA002C91E3 /* AlertBannerWidgetView.swift in Sources */,
 				5D899A202C946F540074C0AD /* UIViewController+Extensions.swift in Sources */,
 				4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */,
-				3D9FD4BA2E799C9900928E92 /* ChatBannerWidgetViewModel.swift in Sources */,
+				3D9FD4BA2E799C9900928E92 /* ChatWidgetViewModel.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
 				4E00EEF32CCB0523007B61E8 /* TopicOnboardingListView.swift in Sources */,
 				4EE5F3E92DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift in Sources */,

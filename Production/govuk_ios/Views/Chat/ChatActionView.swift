@@ -26,10 +26,10 @@ struct ChatActionView: View {
         errorFocused = shouldShowError
         warningFocused = shouldShowWarning
         return VStack(spacing: 0) {
-            errorView
-                .opacity(shouldShowError ? 1 : 0)
-                .frame(height: shouldShowError ? nil : 0)
-                .accessibilityFocused($errorFocused)
+            warningView
+                .opacity(shouldShowWarning ? 1 : 0)
+                .frame(height: shouldShowWarning ? nil : 0)
+                .accessibilityFocused($warningFocused)
                 .background(
                     GeometryReader { geo in
                         Color.clear
@@ -37,12 +37,14 @@ struct ChatActionView: View {
                     }
                 )
                 .onPreferenceChange(HeightPreferenceKey.self) { height in
-                    warningErrorHeight = height
+                    if viewModel.errorText == nil {
+                        warningErrorHeight = height
+                    }
                 }
-            warningView
-                .opacity(shouldShowWarning ? 1 : 0)
-                .frame(height: shouldShowWarning ? nil : 0)
-                .accessibilityFocused($warningFocused)
+            errorView
+                .opacity(shouldShowError ? 1 : 0)
+                .frame(height: shouldShowError ? nil : 0)
+                .accessibilityFocused($errorFocused)
                 .background(
                     GeometryReader { geo in
                         Color.clear

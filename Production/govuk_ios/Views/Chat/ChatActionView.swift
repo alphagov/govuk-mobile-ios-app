@@ -1,6 +1,5 @@
 import SwiftUI
 
-// swiftlint:disable:next type_body_length
 struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
@@ -58,20 +57,7 @@ struct ChatActionView: View {
             chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight - warningErrorHeight)
         }
         .onChange(of: viewModel.latestQuestion) { _ in
-            if viewModel.latestQuestion.count > viewModel.maxCharacters {
-                viewModel.errorText = LocalizedStringKey(
-                    "tooManyCharactersTitle.\(viewModel.absoluteRemainingCharacters)"
-                )
-                viewModel.warningText = nil
-            } else if viewModel.latestQuestion.count >= (viewModel.maxCharacters - 50) {
-                viewModel.warningText = LocalizedStringKey(
-                    "remainingCharactersTitle.\(viewModel.absoluteRemainingCharacters)"
-                )
-                viewModel.errorText = nil
-            } else {
-                viewModel.errorText = nil
-                viewModel.warningText = nil
-            }
+            viewModel.updateCharacterCount()
         }
         .conditionalAnimation(
             .easeInOut(duration: animationDuration),

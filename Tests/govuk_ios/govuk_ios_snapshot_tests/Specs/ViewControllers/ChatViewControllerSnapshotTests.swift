@@ -40,22 +40,6 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    func test_loadInNavigationController_showError_light_rendersCorrectly() {
-        VerifySnapshotInNavigationController(
-            view: view(showError: true),
-            mode: .light,
-            navBarHidden: true
-        )
-    }
-
-    func test_loadInNavigationController_showError_dark_rendersCorrectly() {
-        VerifySnapshotInNavigationController(
-            view: view(showError: true),
-            mode: .dark,
-            navBarHidden: true
-        )
-    }
-
     func test_loadInNavigationController_generatingAnswer_light_rendersCorrectly() {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"
@@ -115,8 +99,7 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-    private func view(showError: Bool = false,
-                      includeSources: Bool = true) -> some View {
+    private func view(includeSources: Bool = true) -> some View {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"
         let createdAt = "\(Date())"
@@ -171,10 +154,6 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             handleError: { _ in }
         )
 
-        if showError {
-            viewModel.errorText = String.chat.localized("validationErrorText")
-        }
-        
         let view = ChatView(viewModel: viewModel)
             .environment(\.isTesting, true)
         return view

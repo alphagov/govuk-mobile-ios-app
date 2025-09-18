@@ -2,6 +2,7 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
+// swiftlint:disable:next type_body_length
 class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
@@ -251,6 +252,23 @@ class ChatViewModel: ObservableObject {
             action: "Clear Chat No Tapped"
         )
         analyticsService.track(event: event)
+    }
+
+    func updateCharacterCount() {
+        if latestQuestion.count > maxCharacters {
+            errorText = LocalizedStringKey(
+                "tooManyCharactersTitle.\(absoluteRemainingCharacters)"
+            )
+            warningText = nil
+        } else if latestQuestion.count >= (maxCharacters - 50) {
+            warningText = LocalizedStringKey(
+                "remainingCharactersTitle.\(absoluteRemainingCharacters)"
+            )
+            errorText = nil
+        } else {
+            errorText = nil
+            warningText = nil
+        }
     }
 
     private func trackMenuTap(_ itemTitle: String) {

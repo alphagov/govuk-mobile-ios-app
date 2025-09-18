@@ -11,6 +11,7 @@ struct DynamicTextEditor: UIViewRepresentable {
         textView.backgroundColor = UIColor.govUK.fills.surfaceChatBlue
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
+        textView.accessibilityLabel = placeholderText
         textView.font = .govUK.body
 
         let placeholderLabel = UILabel()
@@ -22,6 +23,7 @@ struct DynamicTextEditor: UIViewRepresentable {
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         placeholderLabel.numberOfLines = 0
         placeholderLabel.lineBreakMode = .byWordWrapping
+        placeholderLabel.isAccessibilityElement = false
         textView.addSubview(placeholderLabel)
 
         NSLayoutConstraint.activate([

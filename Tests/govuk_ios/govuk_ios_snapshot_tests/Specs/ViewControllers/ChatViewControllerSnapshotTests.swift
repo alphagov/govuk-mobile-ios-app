@@ -40,6 +40,60 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
+    func test_loadInNavigationController_generatingAnswer_light_rendersCorrectly() {
+        let mockChatService = MockChatService()
+        let conversationId = "conversationId"
+        mockChatService._stubbedConversationId = conversationId
+        // An authenticationError will prevent the history from loading on
+        // view appearance
+        mockChatService._stubbedQuestionResult = .failure(.authenticationError)
+
+        var viewModel = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        viewModel.askQuestion()
+        // With no history loading to create cellModels, modify the array
+        // directly
+        viewModel.cellModels = [ChatCellViewModel.gettingAnswer]
+
+        let view = ChatView(viewModel: viewModel)
+            .environment(\.isTesting, true)
+
+        VerifySnapshotInNavigationController(
+            view: view,
+            mode: .light,
+            navBarHidden: true
+        )
+    }
+
+    func test_loadInNavigationController_generatingAnswer_dark_rendersCorrectly() {
+        let mockChatService = MockChatService()
+        let conversationId = "conversationId"
+        mockChatService._stubbedConversationId = conversationId
+        mockChatService._stubbedQuestionResult = .failure(.authenticationError)
+
+        var viewModel = ChatViewModel(
+            chatService: mockChatService,
+            analyticsService: MockAnalyticsService(),
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        viewModel.askQuestion()
+        viewModel.cellModels = [ChatCellViewModel.gettingAnswer]
+
+        let view = ChatView(viewModel: viewModel)
+            .environment(\.isTesting, true)
+
+        VerifySnapshotInNavigationController(
+            view: view,
+            mode: .dark,
+            navBarHidden: true
+        )
+    }
+
     private func view(showError: Bool = false) -> some View {
         let mockChatService = MockChatService()
         let conversationId = "conversationId"
@@ -99,7 +153,6 @@ final class ChatViewControllerSnapshotTests: SnapshotTestCase {
             viewModel.errorText = String.chat.localized("validationErrorText")
         }
         
-        viewModel.cellModels.append(.gettingAnswer)
         let view = ChatView(viewModel: viewModel)
             .environment(\.isTesting, true)
         return view

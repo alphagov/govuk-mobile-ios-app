@@ -15,7 +15,7 @@ struct SignInErrorViewModelTests {
             }
         )
 
-        sut.buttonViewModel.action()
+        sut.primaryButtonViewModel.action()
 
         #expect(didCallCompletion)
     }

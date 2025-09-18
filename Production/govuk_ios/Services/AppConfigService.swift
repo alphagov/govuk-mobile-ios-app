@@ -7,6 +7,8 @@ protocol AppConfigServiceInterface {
     func isFeatureEnabled(key: Feature) -> Bool
     var chatPollIntervalSeconds: TimeInterval { get }
     var alertBanner: AlertBanner? { get }
+    var userFeedbackBanner: UserFeedbackBanner? { get }
+    var chatUrls: ChatURLs? { get }
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
@@ -17,6 +19,8 @@ public final class AppConfigService: AppConfigServiceInterface {
 
     var chatPollIntervalSeconds: TimeInterval = 3.0
     var alertBanner: AlertBanner?
+    var userFeedbackBanner: UserFeedbackBanner?
+    private(set) var chatUrls: ChatURLs?
 
     init(appConfigServiceClient: AppConfigServiceClientInterface) {
         self.appConfigServiceClient = appConfigServiceClient
@@ -47,6 +51,8 @@ public final class AppConfigService: AppConfigServiceInterface {
         updateSearch(urlString: config.searchApiUrl)
         updateChatPollInterval(config.chatPollIntervalSeconds)
         alertBanner = config.alertBanner
+        userFeedbackBanner = config.userFeedbackBanner
+        chatUrls = config.chatUrls
     }
 
     private func updateChatPollInterval(_ interval: Int?) {

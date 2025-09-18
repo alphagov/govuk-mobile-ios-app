@@ -3,11 +3,22 @@ import Foundation
 @testable import govuk_ios
 
 final class MockChatService: ChatServiceInterface {
-    
+    var _stubbedChatTestActive = false
+    var chatTestActive: Bool {
+        _stubbedChatTestActive
+    }
+
+    var chatOptedIn: Bool?
+
+    var _stubbedChatOptInAvailable: Bool = false
+    var chatOptInAvailable: Bool {
+        _stubbedChatOptInAvailable
+    }
+
     func setChatOnboarded() {
         _stubbedChatOnboardingSeen = true
     }
-    
+
     var _stubbedChatOnboardingSeen = false
     var chatOnboardingSeen: Bool {
         _stubbedChatOnboardingSeen
@@ -69,5 +80,25 @@ final class MockChatService: ChatServiceInterface {
     var _stubbedConversationId: String?
     var currentConversationId: String? {
         _stubbedConversationId
+    }
+
+    var _stubbedPrivacyPolicy: URL = URL(string: "https://example.com/privacy")!
+    var privacyPolicy: URL {
+        _stubbedPrivacyPolicy
+    }
+
+    var _stubbedTermsAndConditions: URL = URL(string: "https://example.com/termsAndConditions")!
+    var termsAndConditions: URL {
+        _stubbedTermsAndConditions
+    }
+
+    var _stubbedAbout: URL = URL(string: "https://example.com/about")!
+    var about: URL {
+        _stubbedAbout
+    }
+
+    var _stubbedFeedback: URL = URL(string: "https://example.com/feedback")!
+    var feedback: URL {
+        _stubbedFeedback
     }
 }

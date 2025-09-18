@@ -21,6 +21,24 @@ class MockAppConfigService: AppConfigServiceInterface {
         _stubbedAlertBanner
     }
 
+    var _stubbedUserFeedbackBanner: UserFeedbackBanner?
+    var userFeedbackBanner: UserFeedbackBanner? {
+        _stubbedUserFeedbackBanner
+    }
+
+    var _stubbedUserFeedbackBannerLink: UserFeedbackBanner.Link = .init(
+        title: "test",
+        url: URL(string: "https://test.com")!
+    )
+    var userFeedbackBannerLink: UserFeedbackBanner.Link {
+        _stubbedUserFeedbackBannerLink
+    }
+
+    var _stubbedChatUrls: ChatURLs?
+    var chatUrls: ChatURLs? {
+        _stubbedChatUrls
+    }
+
     var _receivedFetchAppConfigCompletion: FetchAppConfigCompletion?
     var _stubbedFetchAppConfigResult: FetchAppConfigResult?
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {

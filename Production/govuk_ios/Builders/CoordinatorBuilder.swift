@@ -331,6 +331,7 @@ class CoordinatorBuilder {
             localAuthenticationService: container.localAuthenticationService.resolve(),
             analyticsService: container.analyticsService.resolve(),
             topicsService: container.topicsService.resolve(),
+            chatService: container.chatService.resolve(),
             completionAction: completionAction,
             handleError: handleError
         )
@@ -437,6 +438,34 @@ class CoordinatorBuilder {
             analyticsService: container.analyticsService.resolve(),
             chatService: container.chatService.resolve(),
             cancelOnboardingAction: cancelOnboardingAction,
+            completionAction: completionAction
+        )
+    }
+
+    func chatOptIn(
+        navigationController: UINavigationController,
+        completionAction: @escaping () -> Void
+    ) -> BaseCoordinator {
+        ChatOptInCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            coordinatorBuilder: self,
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve(),
+            completionAction: completionAction
+        )
+    }
+
+    func chatOffboarding(
+        navigationController: UINavigationController,
+        completionAction: @escaping () -> Void
+    ) -> BaseCoordinator {
+        ChatOffboardingCoordinator(
+            navigationController: navigationController,
+            viewControllerBuilder: ViewControllerBuilder(),
+            coordinatorBuilder: self,
+            analyticsService: container.analyticsService.resolve(),
+            chatService: container.chatService.resolve(),
             completionAction: completionAction
         )
     }

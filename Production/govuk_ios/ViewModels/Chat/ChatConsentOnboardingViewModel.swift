@@ -2,8 +2,8 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-class ChatConsentOnboardingViewModel {
-    private let analyticsService: AnalyticsServiceInterface
+class ChatConsentOnboardingViewModel: InfoViewModelInterface {
+    var analyticsService: AnalyticsServiceInterface?
     private let chatService: ChatServiceInterface
     private let cancelOnboardingAction: () -> Void
     private let completionAction: () -> Void
@@ -18,9 +18,23 @@ class ChatConsentOnboardingViewModel {
         self.completionAction = completionAction
     }
 
-    var buttonViewModel: GOVUKButton.ButtonViewModel {
+    var image: AnyView {
+        AnyView(
+            Image(decorative: "chat_onboarding_consent")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding(.bottom, 16)
+                .frame(width: 120, height: 120)
+        )
+    }
+
+    var title: String {
+        String.chat.localized("onboardingConsentTitle")
+    }
+
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         return .init(
-            localisedTitle: buttonTitle,
+            localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 self?.chatService.setChatOnboarded()
                 self?.completionAction()
@@ -33,8 +47,16 @@ class ChatConsentOnboardingViewModel {
         .cancel(target: self, action: #selector(cancelOnboarding))
     }
 
-    private var buttonTitle: String {
+    var primaryButtonTitle: String {
         return String.chat.localized("onboardingConsentButtonTitle")
+    }
+
+    var trackingTitle: String {
+        title
+    }
+
+    var trackingName: String {
+        "Chat Onboarding Screen Two"
     }
 
     @objc
@@ -43,23 +65,19 @@ class ChatConsentOnboardingViewModel {
         trackCancelAction()
     }
 
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
-    }
-
     private func trackCancelAction() {
         let event = AppEvent.buttonNavigation(
             text: String.common.localized("cancel"),
             external: false
         )
-        analyticsService.track(event: event)
+        analyticsService?.track(event: event)
     }
 
     private func trackCompletionAction() {
         let event = AppEvent.buttonNavigation(
-            text: buttonTitle,
+            text: primaryButtonTitle,
             external: false
         )
-        analyticsService.track(event: event)
+        analyticsService?.track(event: event)
     }
 }

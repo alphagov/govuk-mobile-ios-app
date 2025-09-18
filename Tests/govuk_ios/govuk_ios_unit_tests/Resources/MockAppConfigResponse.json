@@ -4,14 +4,35 @@
     "available": true,
     "minimumVersion": "0.0.1",
     "recommendedVersion": "0.0.1",
-    "authenticationIssuerBaseUrl": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_fIJ6F25Zh",
-    "releaseFlags": {
-      "onboarding": true,
-      "search": true
+    "searchApiUrl": "https://search.publishing.service.gov.uk/v0_1/search.json",
+    "chatPollIntervalSeconds": 3,
+    "alertBanner": {
+      "id": "govuk_alert_emergency_notification_2025",
+      "body": "We are testing the UK’s Emergency Alerts system on Sunday 7 September at 3pm",
+      "link": {
+        "title": "About emergency alerts",
+        "url": "govuk://gov.uk/web?url=https://www.gov.uk/alerts"
+      }
     },
-    "version": "0.0.1",
-    "lastUpdated": "2024-09-10T08:01:25.878Z"
-  },
-  "signature": "MEUCIFQ/F8gi4XdGdmh/J7pEP9jz6a4+9ztFEaKqM5MGGF3UAiEA/JyzbvDYd4BezGchRt1R6Ba4jppjokiCHKqsthh5F7Q="
+    "chatUrls": {
+      "termsAndConditions": "https://www.gov.uk/guidance/govuk-chat-terms-and-conditions",
+      "privacyNotice": "https://www.gov.uk/government/publications/govuk-chat-privacy-notice",
+      "about": "http://www.gov.uk/guidance/about-govuk-chat",
+      "feedback": "https://surveys.publishing.service.gov.uk/s/SUIEH2/"
+    },
+    "releaseFlags": {
+      "chat": false,
+      "chatOptIn": false,
+      "chatTestActive": false,
+      "localServices": true,
+      "notifications": true,
+      "onboarding": true,
+      "recentActivity": true,
+      "search": true,
+      "topics": true
+    },
+    "version": "0.0.18",
+    "lastUpdated": "2025-09-02T11:27:52.495Z"
+  }
 }
 

@@ -89,6 +89,28 @@
         }
       }
     },
+    "feedbackMenuAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give feedback on GOV.UK Chat"
+          }
+        }
+      }
+    },
+    "feedbackMenuTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give feedback"
+          }
+        }
+      }
+    },
     "genericErrorBody" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -106,7 +128,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Generating your answer…"
+            "value" : "Generating your answer"
           }
         }
       }
@@ -161,7 +183,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Messages will be available for 90 days"
+            "value" : "Messages will be available until the end of the GOV.UK Chat trial"
           }
         }
       }
@@ -184,6 +206,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "More options"
+          }
+        }
+      }
+    },
+    "offboardingDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Early access to GOV.UK Chat has now ended. GOV.UK Chat and your conversations are no longer available.\n\nWe’re working on improving this feature and it may return soon."
+          }
+        }
+      }
+    },
+    "offboardingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat early access has ended"
           }
         }
       }
@@ -254,6 +298,72 @@
         }
       }
     },
+    "optInDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat is a new AI tool that uses GOV.UK pages to answer your questions. You can try it out for a limited time.\n\nBy trying out GOV.UK Chat, you agree to share statistics about how you use it.\n\nYou can ask us to delete these statistics at any time. Read the privacy notice to find out how."
+          }
+        }
+      }
+    },
+    "optInPrimaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add GOV.UK Chat to the app"
+          }
+        }
+      }
+    },
+    "optInPrivacyLinkTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat privacy notice"
+          }
+        }
+      }
+    },
+    "optInSecondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do not add GOV.UK Chat"
+          }
+        }
+      }
+    },
+    "optInTermsLinkTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GOV.UK Chat terms and conditions"
+          }
+        }
+      }
+    },
+    "optInTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get early access to GOV.UK Chat?"
+          }
+        }
+      }
+    },
     "pageNotFoundButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -272,6 +382,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your previous conversation is no longer available.\n\nTo continue using GOV.UK Chat, you need to start a new chat."
+          }
+        }
+      }
+    },
+    "privacyMenuTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy notice"
           }
         }
       }

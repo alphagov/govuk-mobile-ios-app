@@ -89,17 +89,6 @@ struct ChatCellViewModel {
         }
     }
 
-    var borderColor: Color {
-        switch type {
-        case .question:
-            Color(UIColor.govUK.strokes.chatQuestion)
-        case .pendingAnswer:
-            Color.clear
-        case .answer, .intro:
-            Color(UIColor.govUK.strokes.chatDivider)
-        }
-    }
-
     var questionWidth: CGFloat {
         UIScreen.main.bounds.width * 0.2
     }

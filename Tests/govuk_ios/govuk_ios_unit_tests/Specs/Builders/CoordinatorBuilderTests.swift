@@ -413,4 +413,26 @@ struct CoordinatorBuilderTests {
 
         #expect(coordinator is ChatConsentOnboardingCoordinator)
     }
+
+    @Test
+    func chatOptIn_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatOptIn(
+            navigationController: UINavigationController(),
+            completionAction: { }
+        )
+
+        #expect(coordinator is ChatOptInCoordinator)
+    }
+
+    @Test
+    func chatOffboarding_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.chatOffboarding(
+            navigationController: UINavigationController(),
+            completionAction: { }
+        )
+
+        #expect(coordinator is ChatOffboardingCoordinator)
+    }
 }

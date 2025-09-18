@@ -23,6 +23,11 @@ class MockAnalyticsService: AnalyticsServiceInterface {
         _trackScreenReceivedScreens.append(screen)
     }
 
+    var _trackErrorReceivedErrors: [Error] = []
+    func track(error: any Error) {
+        _trackErrorReceivedErrors.append(error)
+    }
+
     var _trackSetUserPropertyReceivedProperty: UserProperty?
     func set(userProperty: UserProperty) {
         _trackSetUserPropertyReceivedProperty = userProperty

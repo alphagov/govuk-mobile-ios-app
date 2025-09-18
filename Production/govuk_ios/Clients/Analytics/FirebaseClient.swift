@@ -56,6 +56,8 @@ struct FirebaseClient: AnalyticsClient {
             forName: userProperty.key
         )
     }
+
+    func track(error: Error) { /* Do Nothing */ }
 }
 
 protocol FirebaseAppInterface {

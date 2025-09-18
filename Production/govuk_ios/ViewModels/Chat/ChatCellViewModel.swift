@@ -81,21 +81,6 @@ class ChatCellViewModel: ObservableObject {
         (type == .question || type ==  .loading) ? false : true
     }
 
-    var backgroundColor: Color {
-        switch type {
-        case .question, .loading:
-            Color(UIColor.govUK.fills.surfaceChatQuestion)
-        case .pendingAnswer:
-            Color(UIColor.clear)
-        case .answer, .intro:
-            Color(UIColor.govUK.fills.surfaceChatBlue)
-        }
-    }
-
-    var questionWidth: CGFloat {
-        UIScreen.main.bounds.width * 0.2
-    }
-
     func copyToClipboard() {
         var textToCopy = MarkdownContent(message).renderPlainText()
         if !sources.isEmpty {
@@ -128,6 +113,69 @@ class ChatCellViewModel: ObservableObject {
     }
 }
 
+// MARK: Layout and animation
+extension ChatCellViewModel {
+    var backgroundColor: Color {
+        switch type {
+        case .question, .loading:
+            Color(UIColor.govUK.fills.surfaceChatQuestion)
+        case .pendingAnswer:
+            Color(UIColor.clear)
+        case .answer, .intro:
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+        }
+    }
+
+    var questionWidth: CGFloat {
+        UIScreen.main.bounds.width * 0.2
+    }
+
+    var anchor: UnitPoint {
+        switch type {
+        case .intro:
+                .center
+        case .question, .loading:
+                .bottomTrailing
+        case .pendingAnswer, .answer:
+                .bottomLeading
+        }
+    }
+
+    var scale: CGFloat {
+        let localScale = if type == .pendingAnswer {
+            1.0
+        } else {
+            0.90
+        }
+        return isVisible ? 1 : localScale
+    }
+
+    var duration: CGFloat {
+        if type == .intro {
+            0.5
+        } else {
+            0.25
+        }
+    }
+
+    var delay: CGFloat {
+        if type == .loading {
+            0.4
+        } else {
+            0.0
+        }
+    }
+
+    var topPadding: CGFloat {
+        if type == .intro {
+            0.0
+        } else {
+            8.0
+        }
+    }
+}
+
+// MARK: - Convenience
 extension ChatCellViewModel {
     static var loadingQuestion: ChatCellViewModel = .init(
         message: String.chat.localized("loadingQuestionMessage"),

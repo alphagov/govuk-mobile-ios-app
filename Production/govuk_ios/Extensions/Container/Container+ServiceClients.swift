@@ -30,7 +30,6 @@ extension Container {
         }
     }
 
-    @MainActor
     var authenticationServiceClient: Factory<AuthenticationServiceClient> {
         Factory(self) {
             AuthenticationServiceClient(

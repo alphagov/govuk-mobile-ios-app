@@ -20,11 +20,16 @@ struct CrashlyticsClient: AnalyticsClient {
 
     func track(event: AppEvent) { /*Do nothing*/ }
 
+    func track(error: any Error) {
+        crashlytics.record(error: error)
+    }
+
     func set(userProperty: UserProperty) { /*Do nothing*/ }
 }
 
 protocol CrashlyticsInterface {
     func setCrashlyticsCollectionEnabled(_ newValue: Bool)
+    func record(error: Error)
 }
 
 extension Crashlytics: CrashlyticsInterface { }

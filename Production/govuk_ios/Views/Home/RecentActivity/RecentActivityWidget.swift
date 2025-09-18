@@ -3,22 +3,22 @@ import CoreData
 import GOVKit
 
 struct RecentActivityWidget: View {
-    @StateObject var viewModel: RecentActivtyWidgetViewModel
+    @ObservedObject var viewModel: RecentActivtyWidgetViewModel
     var body: some View {
         if viewModel.recentActivities.isEmpty {
             VStack(alignment: .leading) {
-                Text("Pages youve visited")
+                Text(viewModel.title)
                     .font(Font.govUK.title3Semibold)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                     .padding(.horizontal)
                 NonTappableCardView(
-                    text: "You have not used the app to visit any GOV.UK pages"
+                    text: viewModel.emptyActivityStateTitle
                 )
             }
         } else {
             VStack {
                 HStack {
-                    Text("Pages youve visited")
+                    Text(viewModel.title)
                         .font(Font.govUK.title3Semibold)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                     Spacer()
@@ -26,7 +26,7 @@ struct RecentActivityWidget: View {
                         action: {
                             viewModel.seeAllAction()
                         }, label: {
-                            Text("See All")
+                            Text(viewModel.seeAllButtonTitle)
                                 .foregroundColor(Color(UIColor.govUK.text.link))
                                 .font(Font.govUK.subheadlineSemibold)
                         }
@@ -36,14 +36,18 @@ struct RecentActivityWidget: View {
                     ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
                         RecentActivityItemCard(
                             model: viewModel.recentActivities[index],
-                            postitionInList: index
-                        ).padding([.horizontal, .top])
+                            postitionInList: index,
+                            isLastItemInList: viewModel.isLastActivityInList(
+                                index: index
+                            )
+                        ).padding([.horizontal])
+                            .padding([.top], index == 0 ? 8: 0)
                     }
                 }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
-                    .roundedBorder()
+                    .roundedBorder(borderColor: .clear)
                     .padding(.horizontal)
                     .padding(.top, 8)
-            }.padding(.bottom, 8)
+            }
         }
     }
 }
@@ -51,28 +55,29 @@ struct RecentActivityWidget: View {
 struct RecentActivityItemCard: View {
     let model: RecentActivityHomepageCell
     let postitionInList: Int
+    let isLastItemInList: Bool
+
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(model.title)
-                    .font(Font.govUK.body)
-                    .foregroundColor(Color(UIColor.govUK.text.link))
-                    .multilineTextAlignment(.leading)
-                Text(model.lastVisitedString)
-                    .font(Font.govUK.subheadline)
-                    .foregroundColor(Color(UIColor.govUK.text.secondary))
-                    .multilineTextAlignment(.leading)
-                    .padding([.bottom], postitionInList >= 2 ? 12 : 0)
-                if postitionInList < 2 {
-                    Divider().overlay(Color.cyan)
-                }
+        VStack {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(model.title)
+                        .font(Font.govUK.body)
+                        .foregroundColor(Color(UIColor.govUK.text.link))
+                        .multilineTextAlignment(.leading)
+                    Text(model.lastVisitedString)
+                        .font(Font.govUK.subheadline)
+                        .foregroundColor(Color(UIColor.govUK.text.secondary))
+                        .multilineTextAlignment(.leading)
+                }.padding(.bottom, isLastItemInList ? 12: 0)
+                Spacer()
+            }.padding(.vertical, 8)
+            if !isLastItemInList {
+                Divider().overlay(Color.cyan)
             }
-            Spacer()
         }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
     }
 }
-
-
 class RecentActivtyWidgetViewModel: NSObject,
                                     ObservableObject,
                                     NSFetchedResultsControllerDelegate {
@@ -95,11 +100,24 @@ class RecentActivtyWidgetViewModel: NSObject,
         self.setupFetchResultsController()
     }
 
+    let title: String = String.recentActivity.localized(
+        "recentActivityNavigationTitle"
+    )
+    let emptyActivityStateTitle: String = String.recentActivity.localized(
+        "emptyActivityStateTitle"
+    )
+    let seeAllButtonTitle: String = String.recentActivity.localized(
+        "recentActivitySeeAllButtonTitle"
+    )
     private func setupFetchResultsController() {
         fetchActivities.delegate = self
         try? fetchActivities.performFetch()
         let activities = fetchActivities.fetchedObjects ?? []
         self.recentActivities = mapRecentActivities(activities: activities)
+    }
+
+    func isLastActivityInList(index: Int) -> Bool {
+        return index == recentActivities.count - 1
     }
 
     private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {

@@ -93,6 +93,7 @@ struct ChatCellView: View {
                 .font(Font.govUK.body)
             Spacer()
         }
+        .padding(.bottom)
     }
 
     private var introView: some View {

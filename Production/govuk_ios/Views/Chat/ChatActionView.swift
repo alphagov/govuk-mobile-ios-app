@@ -180,7 +180,7 @@ struct ChatActionView: View {
         )
         .focused($textAreaFocused)
         .onChange(of: textAreaFocused) { isFocused in
-            if isFocused || !viewModel.latestQuestion.isEmpty {
+            if (isFocused || !viewModel.latestQuestion.isEmpty) || shouldShowError {
                 placeholderText = nil
             } else {
                 placeholderText = String.chat.localized("textEditorPlaceholder")

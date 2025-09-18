@@ -53,6 +53,7 @@ class ChatViewModel: ObservableObject {
         }
         trackAskQuestionSubmission()
         errorText = nil
+        warningText = nil
         addCellModels([.loadingQuestion])
         scrollToBottom = true
         requestInFlight = true

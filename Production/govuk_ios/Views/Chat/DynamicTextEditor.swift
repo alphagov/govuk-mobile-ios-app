@@ -52,11 +52,13 @@ struct DynamicTextEditor: UIViewRepresentable {
     }
 
     func updateUIView(_ textView: UITextView, context: Context) {
-        guard textView.text.isEmpty else {
+        if placeholderText == nil {
             DynamicTextEditor.recalculateHeight(view: textView, result: $dynamicHeight)
             return
         }
+
         if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+            textView.text = nil
             placeholderLabel.isHidden = false
             placeholderLabel.widthAnchor.constraint(equalTo: textView.widthAnchor).isActive = true
             let view = placeholderLabel.numberOfLinesUsed > 1 ? placeholderLabel : textView
@@ -89,12 +91,6 @@ struct DynamicTextEditor: UIViewRepresentable {
                 placeholderLabel.isHidden = !textView.text.isEmpty
             }
             DynamicTextEditor.recalculateHeight(view: textView, result: parent.$dynamicHeight)
-        }
-
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
-                placeholderLabel.isHidden = true
-            }
         }
 
         func textViewDidEndEditing(_ textView: UITextView) {

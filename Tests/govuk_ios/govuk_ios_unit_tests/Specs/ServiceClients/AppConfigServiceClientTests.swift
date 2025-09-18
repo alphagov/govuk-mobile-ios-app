@@ -42,6 +42,10 @@ struct AppConfigServiceClientTests {
         #expect(unwrappedResult.config.alertBanner?.id  == "govuk_alert_emergency_notification_2025")
         #expect(unwrappedResult.config.alertBanner?.link?.title
                 == "About emergency alerts")
+        #expect(unwrappedResult.config.chatBanner?.id  == "govuk_chat_banner_09_2025")
+        #expect(unwrappedResult.config.chatBanner?.link.title
+                == "Ask a question")
+        #expect(unwrappedResult.config.userFeedbackBanner?.link.title  == "Give feedback")
     }
 
     @Test

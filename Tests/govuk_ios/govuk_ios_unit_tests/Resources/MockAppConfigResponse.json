@@ -14,6 +14,22 @@
         "url": "govuk://gov.uk/web?url=https://www.gov.uk/alerts"
       }
     },
+    "chatBanner": {
+        "id": "govuk_chat_banner_09_2025",
+        "title": "Get quick answers from GOV.UK Chat",
+        "body": "Use GOV.UK’s experimental AI tool to find out more about topics, services and information on GOV.UK.",
+        "link": {
+            "title": "Ask a question",
+            "url": "govuk://gov.uk/chat"
+        }
+    },
+    "userFeedbackBanner": {
+        "body": "Tell us what you think about the app",
+        "link": {
+            "title": "Give feedback",
+            "url": "https://www.gov.uk/contact/govuk-app"
+        }
+    },
     "chatUrls": {
       "termsAndConditions": "https://www.gov.uk/guidance/govuk-chat-terms-and-conditions",
       "privacyNotice": "https://www.gov.uk/government/publications/govuk-chat-privacy-notice",

@@ -70,8 +70,8 @@ class HomeViewModel: ObservableObject {
         widgets =
         await [
             alertBanner,
+            chatWidget,
             localAuthorityWidget,
-            // notificationsWidget, Removed until dismissable cards introduced
             recentActivityWidget,
             topicsWidget,
             storedLocalAuthorityWidget,
@@ -108,22 +108,37 @@ class HomeViewModel: ObservableObject {
     }
 
     @MainActor
-    private var notificationsWidget: WidgetView? {
-        get async {
-            guard await notificationService.shouldRequestPermission
-            else { return nil }
+    private var chatWidget: WidgetView? {
+        guard let chat = configService.chatBanner,
+              configService.isFeatureEnabled(key: .chatOptIn),
+              !userDefaultService.hasSeen(banner: chat)
+        else { return nil }
 
-            let title = String.home.localized("notificationWidgetTitle")
-            let viewModel = NotificationsWidgetViewModel(
-                title: title,
-                action: notificationsAction
-            )
-            let content = InformationView(viewModel: viewModel, shouldHideChevron: true)
-            let widget = WidgetView(useContentAccessibilityInfo: true)
-            widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
-            widget.addContent(content)
-            return widget
-        }
+        let viewModel = ChatWidgetViewModel(
+            chat: chat,
+            urlOpener: urlOpener,
+            dismiss: {
+                self.userDefaultService.markSeen(banner: chat)
+                Task {
+                    await self.reloadWidgets()
+                }
+            }
+        )
+        let content = ChatWidgetView(
+            viewModel: viewModel
+        )
+        let widget = WidgetView(
+            decorateView: false,
+            useContentAccessibilityInfo: false,
+            backgroundColor: .clear,
+            borderColor: UIColor.clear.cgColor
+        )
+        let hostingViewController = HostingViewController(
+            rootView: content
+        )
+        hostingViewController.view.backgroundColor = .clear
+        widget.addContent(hostingViewController.view)
+        return widget
     }
 
     @MainActor

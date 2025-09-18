@@ -19,7 +19,6 @@ extension Container {
         }
     }
 
-    @MainActor
     var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             self.baseAnalyticsService()
@@ -44,8 +43,7 @@ extension Container {
         }
     }
 
-    @MainActor
-    var baseAnalyticsService: Factory<AnalyticsServiceInterface> {
+    private var baseAnalyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
             AnalyticsService(
                 clients: [
@@ -77,7 +75,8 @@ extension Container {
     var appConfigService: Factory<AppConfigServiceInterface> {
         Factory(self) {
             AppConfigService(
-                appConfigServiceClient: self.appConfigServiceClient.resolve()
+                appConfigServiceClient: self.appConfigServiceClient.resolve(),
+                analyticsService: self.analyticsService.resolve()
             )
         }.scope(.singleton)
     }
@@ -125,7 +124,6 @@ extension Container {
         }
     }
 
-    @MainActor
     var authenticationService: Factory<AuthenticationServiceInterface> {
         Factory(self) {
             AuthenticationService(

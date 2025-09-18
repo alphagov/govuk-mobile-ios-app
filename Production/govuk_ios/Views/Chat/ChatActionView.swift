@@ -239,7 +239,7 @@ struct ChatActionView: View {
             })
             .scaleEffect(shouldShowSendButton ? 1 : 0.5)
             .opacity(shouldShowSendButton ? 1 : 0)
-            .conditionalAnimation(shouldShowSendButton ? .easeInOut(duration: 0.7) : .none,
+            .conditionalAnimation(shouldShowSendButton ? .easeInOut(duration: 0.3) : .none,
                                   value: shouldShowSendButton)
         }
         .padding(.leading, 16)

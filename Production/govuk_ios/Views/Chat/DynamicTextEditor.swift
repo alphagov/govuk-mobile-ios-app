@@ -86,9 +86,12 @@ struct DynamicTextEditor: UIViewRepresentable {
         }
 
         func textViewDidChange(_ textView: UITextView) {
-            parent.text = textView.text
+            DispatchQueue.main.async {
+                self.parent.text = textView.text
+            }
             if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
                 placeholderLabel.isHidden = !textView.text.isEmpty
+                parent.placeholderText = textView.text.isEmpty ? parent.placeholderText : nil
             }
             DynamicTextEditor.recalculateHeight(view: textView, result: parent.$dynamicHeight)
         }

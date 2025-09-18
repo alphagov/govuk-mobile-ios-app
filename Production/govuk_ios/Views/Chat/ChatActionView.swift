@@ -1,5 +1,6 @@
 import SwiftUI
 
+// swiftlint:disable:next type_body_length
 struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
@@ -179,11 +180,18 @@ struct ChatActionView: View {
             placeholderText: $placeholderText
         )
         .focused($textAreaFocused)
-        .onChange(of: textAreaFocused) { isFocused in
-            if (isFocused || !viewModel.latestQuestion.isEmpty) || shouldShowError {
+        .onChange(of: textAreaFocused) { _ in
+            if shouldShowError || !viewModel.latestQuestion.isEmpty {
                 placeholderText = nil
             } else {
                 placeholderText = String.chat.localized("textEditorPlaceholder")
+            }
+        }
+        .onChange(of: viewModel.latestQuestion) { question in
+            if question.isEmpty {
+                placeholderText = String.chat.localized("textEditorPlaceholder")
+            } else {
+                placeholderText = nil
             }
         }
         .padding(.leading, 10)
@@ -199,9 +207,9 @@ struct ChatActionView: View {
         )
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: viewModel.textViewHeight)
-        .conditionalAnimation(.easeInOut(duration: animationDuration),
+        .conditionalAnimation(.easeInOut(duration: 0.1),
                               value: viewModel.latestQuestion)
-        .conditionalAnimation(.easeInOut(duration: animationDuration),
+        .conditionalAnimation(.easeInOut(duration: 0.2),
                               value: textAreaFocused)
         .contentShape(Rectangle())
         .onTapGesture {

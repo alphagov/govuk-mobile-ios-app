@@ -142,12 +142,12 @@ extension ChatCellViewModel {
     }
 
     var scale: CGFloat {
-        let scale = if type == .pendingAnswer {
+        let localScale = if type == .pendingAnswer {
             1.0
         } else {
             0.90
         }
-        return isVisible ? 1 : scale
+        return isVisible ? 1 : localScale
     }
 
     var duration: CGFloat {

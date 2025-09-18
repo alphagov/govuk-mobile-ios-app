@@ -5,42 +5,70 @@ import GOVKit
 struct RecentActivityWidget: View {
     @StateObject var viewModel: RecentActivtyWidgetViewModel
     var body: some View {
-        VStack {
-        HStack {
-            Text("Pages youve visited")
-            Spacer()
-            Text("See All")
-        }.padding(.horizontal)
-        VStack {
-            ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
-                RecentActivityItemCard(
-                    model: viewModel.recentActivities[index],
-                    postitionInList: index
-                ).padding([.horizontal, .top])
+        if viewModel.recentActivities.isEmpty {
+            VStack(alignment: .leading) {
+                Text("Pages youve visited")
+                    .font(Font.govUK.title3Semibold)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .padding(.horizontal)
+                NonTappableCardView(
+                    text: "You have not used the app to visit any GOV.UK pages"
+                )
             }
-        }.roundedBorder(borderColor: .cyan)
-            .padding(.horizontal)
-            .padding(.top, 8)
-        }.padding(.bottom, 8)
+        } else {
+            VStack {
+                HStack {
+                    Text("Pages youve visited")
+                        .font(Font.govUK.title3Semibold)
+                        .foregroundColor(Color(UIColor.govUK.text.primary))
+                    Spacer()
+                    Button(
+                        action: {
+                            viewModel.seeAllAction()
+                        }, label: {
+                            Text("See All")
+                                .foregroundColor(Color(UIColor.govUK.text.link))
+                                .font(Font.govUK.subheadlineSemibold)
+                        }
+                    )
+                }.padding(.horizontal)
+                VStack {
+                    ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
+                        RecentActivityItemCard(
+                            model: viewModel.recentActivities[index],
+                            postitionInList: index
+                        ).padding([.horizontal, .top])
+                    }
+                }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
+                    .roundedBorder()
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+            }.padding(.bottom, 8)
+        }
     }
 }
 
 struct RecentActivityItemCard: View {
-    let model: CardModels
+    let model: RecentActivityHomepageCell
     let postitionInList: Int
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(model.title)
+                    .font(Font.govUK.body)
+                    .foregroundColor(Color(UIColor.govUK.text.link))
                     .multilineTextAlignment(.leading)
                 Text(model.lastVisitedString)
+                    .font(Font.govUK.subheadline)
+                    .foregroundColor(Color(UIColor.govUK.text.secondary))
+                    .multilineTextAlignment(.leading)
                     .padding([.bottom], postitionInList >= 2 ? 12 : 0)
                 if postitionInList < 2 {
-                    Divider()
+                    Divider().overlay(Color.cyan)
                 }
             }
             Spacer()
-        }
+        }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
     }
 }
 
@@ -48,18 +76,21 @@ struct RecentActivityItemCard: View {
 class RecentActivtyWidgetViewModel: NSObject,
                                     ObservableObject,
                                     NSFetchedResultsControllerDelegate {
-    @Published var recentActivities: [CardModels] = []
+    @Published var recentActivities: [RecentActivityHomepageCell] = []
     private let activityService: ActivityServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
+    let seeAllAction: () -> Void
 
     init(urlOpener: URLOpener,
          analyticsService: AnalyticsServiceInterface,
-         activityService: ActivityServiceInterface) {
+         activityService: ActivityServiceInterface,
+         seeAllAction: @escaping () -> Void) {
         self.urlOpener = urlOpener
         self.analyticsService = analyticsService
         self.activityService = activityService
+        self.seeAllAction = seeAllAction
         super.init()
         self.setupFetchResultsController()
     }
@@ -69,12 +100,14 @@ class RecentActivtyWidgetViewModel: NSObject,
         try? fetchActivities.performFetch()
         let activities = fetchActivities.fetchedObjects ?? []
         self.recentActivities = mapRecentActivities(activities: activities)
-        print(recentActivities.count)
     }
 
-    private func mapRecentActivities(activities: [ActivityItem]) -> [CardModels] {
+    private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {
         var recentActivities = activities.map {
-            CardModels(title: $0.title, lastVisitedString: lastVisitedString(activity: $0))
+            RecentActivityHomepageCell(
+                title: $0.title,
+                lastVisitedString: lastVisitedString(activity: $0)
+            )
         }
         for (index, value) in recentActivities.enumerated() where index > 2 {
             recentActivities.remove(at: index)
@@ -106,7 +139,7 @@ class RecentActivtyWidgetViewModel: NSObject,
             self.recentActivities = mapRecentActivities(activities: activities)
         }
 }
-struct CardModels {
+struct RecentActivityHomepageCell {
     let title: String
     let lastVisitedString: String
 }

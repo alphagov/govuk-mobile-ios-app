@@ -75,7 +75,10 @@ class HomeViewModel: ObservableObject {
         let viewModel = RecentActivtyWidgetViewModel(
             urlOpener: urlOpener,
             analyticsService: analyticsService,
-            activityService: activityService
+            activityService: activityService,
+            seeAllAction: { [weak self] in
+                self?.recentActivityAction()
+            }
         )
         let view = RecentActivityWidget(viewModel: viewModel)
         return HomepageWidget(

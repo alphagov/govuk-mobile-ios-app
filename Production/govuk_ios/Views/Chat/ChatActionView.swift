@@ -4,7 +4,6 @@ struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
     @AccessibilityFocusState private var errorFocused: Bool
-    @AccessibilityFocusState private var warningFocused: Bool
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
     @State private var warningErrorHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
@@ -23,12 +22,10 @@ struct ChatActionView: View {
 
     var body: some View {
         errorFocused = shouldShowError
-        warningFocused = shouldShowWarning
         return VStack(spacing: 0) {
             warningView
                 .opacity(shouldShowWarning ? 1 : 0)
                 .frame(height: shouldShowWarning ? nil : 0)
-                .accessibilityFocused($warningFocused)
                 .background(
                     GeometryReader { geo in
                         Color.clear

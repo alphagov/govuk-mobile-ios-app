@@ -109,7 +109,7 @@ struct DynamicTextEditor: UIViewRepresentable {
         )
         if let placeholderLabel = view.viewWithTag(100) as? UILabel {
             let multipleLinePlaceholder =
-            placeholderLabel.isHidden == false && placeholderLabel.numberOfLinesUsed > 1
+            !placeholderLabel.isHidden && placeholderLabel.numberOfLinesUsed > 1
             let newPlaceholderHeight = multipleLinePlaceholder ?
             newSize.height + 16 : newSize.height
             DispatchQueue.main.async {
@@ -127,7 +127,7 @@ extension UILabel {
     var numberOfLinesUsed: Int {
         guard let text = self.text, let font = self.font else { return 0 }
 
-        let maxSize = CGSize(width: self.bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let maxSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
         let rect = NSString(string: text).boundingRect(
             with: maxSize,
             options: [.usesLineFragmentOrigin, .usesFontLeading],

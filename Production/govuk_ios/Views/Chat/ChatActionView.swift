@@ -178,10 +178,13 @@ struct ChatActionView: View {
             Color(UIColor.govUK.fills.surfaceChatBlue)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
         )
+        // animate on text growing multiple lines
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: viewModel.textViewHeight)
+        // animate on question first being typed (expanding text editor)
         .conditionalAnimation(.easeInOut(duration: 0.1),
                               value: viewModel.latestQuestion)
+        // animate on focus (if question already exists)
         .conditionalAnimation(.easeInOut(duration: 0.2),
                               value: textAreaFocused)
         .contentShape(Rectangle())

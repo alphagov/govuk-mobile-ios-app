@@ -247,8 +247,7 @@ struct ViewControllerBuilderTests {
         let result = subject.welcomeOnboarding(
             viewModel: WelcomeOnboardingViewModel(
                 completeAction: { }
-            ),
-            completion: { }
+            )
         )
 
         let rootView = (result as? HostingViewController<InfoView<WelcomeOnboardingViewModel>>)?.rootView

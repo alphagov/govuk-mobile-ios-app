@@ -465,8 +465,7 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func welcomeOnboarding(viewModel: WelcomeOnboardingViewModel,
-                           completion: @escaping () -> Void) -> UIViewController {
+    func welcomeOnboarding(viewModel: WelcomeOnboardingViewModel) -> UIViewController {
         let containerView = InfoView(
             viewModel: viewModel
         )

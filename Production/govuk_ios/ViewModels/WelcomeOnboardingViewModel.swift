@@ -5,7 +5,7 @@ import SwiftUI
 
 final class WelcomeOnboardingViewModel: InfoViewModelInterface,
                                         ProgressIndicating {
-    private let completeAction: () -> Void
+    let completeAction: () -> Void
 
     @Published var showProgressView: Bool = false
 

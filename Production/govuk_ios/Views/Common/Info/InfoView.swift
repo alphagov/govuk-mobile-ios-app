@@ -9,7 +9,7 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
 
     init(viewModel: Model,
          customView: (() -> AnyView)? = nil) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = StateObject(wrappedValue: viewModel)
         self.customView = customView
     }
 

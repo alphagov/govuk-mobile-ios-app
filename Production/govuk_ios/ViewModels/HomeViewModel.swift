@@ -72,7 +72,7 @@ class HomeViewModel: ObservableObject {
     var recentActivityWidget: HomepageWidget? {
         guard featureEnabled(.topics)
         else { return nil }
-        let viewModel = RecentActivtyWidgetViewModel(
+        let viewModel = RecentActivtyHomepageWidgetViewModel(
             urlOpener: urlOpener,
             analyticsService: analyticsService,
             activityService: activityService,

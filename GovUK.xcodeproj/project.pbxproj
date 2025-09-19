@@ -106,6 +106,9 @@
 		4E6663C82C7370750063E81C /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C72C7370750063E81C /* AppConfig.swift */; };
 		4E6663CA2C737EF50063E81C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663C92C737EF50063E81C /* Config.swift */; };
 		4E6663CF2C73F3220063E81C /* AppConfigError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6663CE2C73F3220063E81C /* AppConfigError.swift */; };
+		4E837E252E7D8C8600B3CC5A /* RecentActivityHomepageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E837E242E7D8C8600B3CC5A /* RecentActivityHomepageViewModel.swift */; };
+		4E837E282E7D8D3200B3CC5A /* RecentActivtityHompageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E837E272E7D8D3200B3CC5A /* RecentActivtityHompageCell.swift */; };
+		4E837E2A2E7D8D9600B3CC5A /* RecentActivityItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E837E292E7D8D9600B3CC5A /* RecentActivityItemCard.swift */; };
 		4E89BBB12E3BD779009E0471 /* TopicRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89BBB02E3BD779009E0471 /* TopicRowView.swift */; };
 		4E8A2A962E74979100BD14A9 /* RecentActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A2A952E74979100BD14A9 /* RecentActivityWidget.swift */; };
 		4E996D302D11AB00007F21A8 /* ValidatorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E996D2F2D11AB00007F21A8 /* ValidatorProvider.swift */; };
@@ -524,6 +527,9 @@
 		4E6663C72C7370750063E81C /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		4E6663C92C737EF50063E81C /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		4E6663CE2C73F3220063E81C /* AppConfigError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigError.swift; sourceTree = "<group>"; };
+		4E837E242E7D8C8600B3CC5A /* RecentActivityHomepageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityHomepageViewModel.swift; sourceTree = "<group>"; };
+		4E837E272E7D8D3200B3CC5A /* RecentActivtityHompageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivtityHompageCell.swift; sourceTree = "<group>"; };
+		4E837E292E7D8D9600B3CC5A /* RecentActivityItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityItemCard.swift; sourceTree = "<group>"; };
 		4E89BBB02E3BD779009E0471 /* TopicRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRowView.swift; sourceTree = "<group>"; };
 		4E8A2A952E74979100BD14A9 /* RecentActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityWidget.swift; sourceTree = "<group>"; };
 		4E996D2D2D11AAC7007F21A8 /* StringValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringValidator.swift; sourceTree = "<group>"; };
@@ -1167,10 +1173,27 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
+		4E837E232E7D8C5500B3CC5A /* RecentActivityViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4E837E242E7D8C8600B3CC5A /* RecentActivityHomepageViewModel.swift */,
+			);
+			path = RecentActivityViewModel;
+			sourceTree = "<group>";
+		};
+		4E837E262E7D8D1000B3CC5A /* RecentActivity */ = {
+			isa = PBXGroup;
+			children = (
+				4E837E272E7D8D3200B3CC5A /* RecentActivtityHompageCell.swift */,
+			);
+			path = RecentActivity;
+			sourceTree = "<group>";
+		};
 		4E8A2A942E74976700BD14A9 /* RecentActivity */ = {
 			isa = PBXGroup;
 			children = (
 				4E8A2A952E74979100BD14A9 /* RecentActivityWidget.swift */,
+				4E837E292E7D8D9600B3CC5A /* RecentActivityItemCard.swift */,
 			);
 			path = RecentActivity;
 			sourceTree = "<group>";
@@ -1306,6 +1329,7 @@
 		5D41DB5E2C0875460011E691 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				4E837E232E7D8C5500B3CC5A /* RecentActivityViewModel */,
 				5D3B457E2E6097EF0026936A /* AlertBannerWidgetViewModel.swift */,
 				3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */,
 				3D9C933F2CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift */,
@@ -1746,6 +1770,7 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E837E262E7D8D1000B3CC5A /* RecentActivity */,
 				D04DD32C2E0046DC002B5F19 /* Chat */,
 				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
 				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
@@ -2356,6 +2381,7 @@
 				4EEC0F342DBB7CDA00D745F2 /* StoredLocalAuthorityCardView.swift in Sources */,
 				160EA7552C5B0401008F97AF /* SettingsViewModel.swift in Sources */,
 				5DC04B902C2D71440036EF2B /* ViewControllerBuilder.swift in Sources */,
+				4E837E2A2E7D8D9600B3CC5A /* RecentActivityItemCard.swift in Sources */,
 				5D3123862C85AEE20088B931 /* Container+Repositories.swift in Sources */,
 				16FB8CBF2E216E7500BBB970 /* DynamicTextEditor.swift in Sources */,
 				5D62ABC32C32F49F0072BE6C /* Container+Configs.swift in Sources */,
@@ -2487,10 +2513,12 @@
 				4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */,
 				16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
+				4E837E252E7D8C8600B3CC5A /* RecentActivityHomepageViewModel.swift in Sources */,
 				D0D9B87B2D2D547D0051EDDD /* StringValidator.swift in Sources */,
 				4E6663CA2C737EF50063E81C /* Config.swift in Sources */,
 				3D3378142CAAC0E0004BF83F /* AppUnavailableContainerView.swift in Sources */,
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
+				4E837E282E7D8D3200B3CC5A /* RecentActivtityHompageCell.swift in Sources */,
 				D0839FD02DE7ABE800CA5C27 /* GovUKProviderFactory.swift in Sources */,
 				D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */,
 				4E5E79A82DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift in Sources */,

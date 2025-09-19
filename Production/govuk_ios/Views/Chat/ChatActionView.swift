@@ -33,11 +33,7 @@ struct ChatActionView: View {
         }
         .conditionalAnimation(
             .easeInOut(duration: animationDuration),
-            value: shouldShowError
-        )
-        .conditionalAnimation(
-            .easeInOut(duration: animationDuration),
-            value: shouldShowWarning
+            value: shouldShowError || shouldShowWarning
         )
         .alert(isPresented: $showClearChatAlert) {
             Alert(
@@ -164,13 +160,6 @@ struct ChatActionView: View {
             placeholderText: $placeholderText
         )
         .focused($textAreaFocused)
-        .onChange(of: textAreaFocused) { _ in
-            if shouldShowError || !viewModel.latestQuestion.isEmpty {
-                placeholderText = nil
-            } else {
-                placeholderText = String.chat.localized("textEditorPlaceholder")
-            }
-        }
         .onChange(of: viewModel.latestQuestion) { question in
             if question.isEmpty {
                 placeholderText = String.chat.localized("textEditorPlaceholder")

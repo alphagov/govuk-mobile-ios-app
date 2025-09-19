@@ -26,7 +26,9 @@ extension DeeplinkDataStore {
     static func chat(coordinatorBuilder: CoordinatorBuilder,
                      root: UIViewController) -> DeeplinkDataStore {
         DeeplinkDataStore(
-            routes: [],
+            routes: [
+                ChatDeeplinkRoute(coordinatorBuilder: coordinatorBuilder)
+            ],
             root: root
         )
     }

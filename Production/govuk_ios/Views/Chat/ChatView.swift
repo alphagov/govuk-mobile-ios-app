@@ -73,7 +73,6 @@ struct ChatView: View {
                     Spacer(minLength: cellModel.questionWidth)
                 }
                 ChatCellView(viewModel: cellModel)
-                    .padding(.vertical, 4)
             }
         }
     }
@@ -94,6 +93,7 @@ struct ChatView: View {
                 .font(.subheadline)
                 .foregroundStyle(Color(UIColor.govUK.text.secondary))
                 .multilineTextAlignment(.center)
+                .padding(.bottom, 4.0)
             chatCellsView
             Text("")
                 .id(bottomID)

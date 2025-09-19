@@ -1,5 +1,6 @@
 import SwiftUI
 
+// swiftlint:disable:next type_body_length
 struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
@@ -9,6 +10,7 @@ struct ChatActionView: View {
     @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
     private var maxTextEditorFrameHeight: CGFloat
+    private var menuDimensions: CGSize = CGSize(width: 36, height: 36)
 
     init(viewModel: ChatViewModel,
          textAreaFocused: FocusState<Bool>.Binding,
@@ -87,12 +89,18 @@ struct ChatActionView: View {
 
     private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
         ZStack {
-            HStack(alignment: .center, spacing: 8) {
+            let buttonTrailingPadding: CGFloat = 6
+            HStack(alignment: .center, spacing: 6) {
                 textEditorView(maxFrameHeight: maxFrameHeight)
                 // UITextView absorbs all taps if focused in HStack, moves ChatMenuView to its
                 // own HStack and copies dimensions to an invisible circle
                 if shouldShowMenu {
-                    Circle().frame(width: 36, height: 36).opacity(0)
+                    Circle().frame(
+                        width: menuDimensions.width,
+                        height: menuDimensions.height
+                    )
+                    .opacity(0)
+                    .padding(.trailing, buttonTrailingPadding)
                 }
             }
             .overlay(alignment: .center) {
@@ -101,15 +109,17 @@ struct ChatActionView: View {
                     if shouldShowMenu {
                         ChatMenuView(
                             viewModel: viewModel,
+                            menuDimensions: menuDimensions,
                             showClearChatAlert: $showClearChatAlert,
                             disableClearChat: $viewModel.requestInFlight
                         )
+                        .padding(.trailing, buttonTrailingPadding)
                     }
                 }
             }
             .overlay(alignment: .bottomTrailing) {
                 sendButtonView
-                    .padding(.trailing, 6)
+                    .padding(.trailing, buttonTrailingPadding)
             }
         }
         .accessibilityElement(children: .contain)

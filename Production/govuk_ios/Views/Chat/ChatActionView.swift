@@ -1,6 +1,5 @@
 import SwiftUI
 
-// swiftlint:disable:next type_body_length
 struct ChatActionView: View {
     @StateObject private var viewModel: ChatViewModel
     @FocusState.Binding var textAreaFocused: Bool
@@ -25,33 +24,7 @@ struct ChatActionView: View {
     var body: some View {
         errorFocused = shouldShowError
         return VStack(spacing: 0) {
-            warningView
-                .opacity(shouldShowWarning ? 1 : 0)
-                .frame(height: shouldShowWarning ? nil : 0)
-                .background(
-                    GeometryReader { geo in
-                        Color.clear
-                            .preference(key: HeightPreferenceKey.self, value: geo.size.height)
-                    }
-                )
-                .onPreferenceChange(HeightPreferenceKey.self) { height in
-                    if viewModel.errorText == nil {
-                        warningErrorHeight = height
-                    }
-                }
-            errorView
-                .opacity(shouldShowError ? 1 : 0)
-                .frame(height: shouldShowError ? nil : 0)
-                .accessibilityFocused($errorFocused)
-                .background(
-                    GeometryReader { geo in
-                        Color.clear
-                            .preference(key: HeightPreferenceKey.self, value: geo.size.height)
-                    }
-                )
-                .onPreferenceChange(HeightPreferenceKey.self) { height in
-                    warningErrorHeight = height
-                }
+            messageView(warningErrorMessage)
 
             chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight - warningErrorHeight)
         }
@@ -126,28 +99,32 @@ struct ChatActionView: View {
         .padding([.horizontal, .bottom])
     }
 
-    private var errorView: some View {
-        VStack(spacing: 0) {
-            if let error = viewModel.errorText {
-                Text(error, tableName: "Chat")
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .ignoresSafeArea(edges: .horizontal)
-            }
+    private var warningErrorMessage: WarningErrorMessage? {
+        if shouldShowError {
+            return WarningErrorMessage(
+                text: viewModel.errorText,
+                type: .error
+            )
+        } else if shouldShowWarning {
+            return WarningErrorMessage(
+                text: viewModel.warningText,
+                type: .warning
+            )
         }
-        .padding(.horizontal, 32)
-        .padding(.vertical, viewModel.errorText != nil ? 8 : 0)
+        return nil
     }
 
-    private var warningView: some View {
+    private func messageView(_ warningErrorMessage: WarningErrorMessage?) -> some View {
         VStack(spacing: 0) {
-            if let warning = viewModel.warningText {
-                Text(warning, tableName: "Chat")
+            if let warningErrorMessage = warningErrorMessage,
+               let message = warningErrorMessage.text {
+                Text(message, tableName: "Chat")
                     .fontWeight(.bold)
-                    .foregroundStyle(Color(UIColor.govUK.text.secondary))
+                    .foregroundStyle(
+                        warningErrorMessage.type == .warning ?
+                        Color(UIColor.govUK.text.secondary) :
+                            Color(UIColor.govUK.fills.surfaceButtonDestructive)
+                    )
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -155,7 +132,19 @@ struct ChatActionView: View {
             }
         }
         .padding(.horizontal, 32)
-        .padding(.vertical, viewModel.warningText != nil ? 8 : 0)
+        .padding(.vertical, warningErrorMessage?.text != nil ? 8 : 0)
+        .opacity(shouldShowWarning || shouldShowError ? 1 : 0)
+        .frame(height: shouldShowWarning || shouldShowError ? nil : 0)
+        .accessibilityFocused($errorFocused)
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .preference(key: HeightPreferenceKey.self, value: geo.size.height)
+            }
+        )
+        .onPreferenceChange(HeightPreferenceKey.self) { height in
+            warningErrorHeight = height
+        }
     }
 
     private var shouldShowError: Bool {
@@ -276,5 +265,14 @@ struct HeightPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = max(value, nextValue())
+    }
+}
+
+struct WarningErrorMessage {
+    var text: LocalizedStringKey?
+    var type: MessageType
+
+    enum MessageType {
+        case warning, error
     }
 }

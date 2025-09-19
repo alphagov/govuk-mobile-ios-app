@@ -57,11 +57,11 @@ class Configuration
     [
       "BASE_URL=\"#{app_base_url}\"",
       "ONESIGNAL_APP_ID=\"#{app_onesignal_app_id}\"",
-      "ASSETCATALOG_COMPILER_APPICON_NAME"=\"#{app_assetcatalog_compiler_appicon_name}\"",
-      "AUTHENTICATION_BASE_URL"=\"#{app_authentication_base_url}\"",
-      "AUTHENTICATION_CLIENT_ID"=\"#{app_authentication_client_id}\"",
-      "CHAT_BASE_URL"=\"#{app_chat_base_url}\"",
-      "TOKEN_BASE_URL"=\"#{app_token_base_url}\"",
+      "ASSETCATALOG_COMPILER_APPICON_NAME=\"#{app_assetcatalog_compiler_appicon_name}\"",
+      "AUTHENTICATION_BASE_URL=\"#{app_authentication_base_url}\"",
+      "AUTHENTICATION_CLIENT_ID=\"#{app_authentication_client_id}\"",
+      "CHAT_BASE_URL=\"#{app_chat_base_url}\"",
+      "TOKEN_BASE_URL=\"#{app_token_base_url}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end

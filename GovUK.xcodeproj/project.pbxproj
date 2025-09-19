@@ -772,7 +772,6 @@
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		D0B3EBFD2CE226AC00A8F321 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		D0B3EBFE2CE226AC00A8F321 /* GoogleService-Info-Live.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Live.plist"; sourceTree = "<group>"; };
-		D0B3EC012CE227D900A8F321 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
 		D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryWrapper.swift; sourceTree = "<group>"; };
@@ -792,7 +791,6 @@
 		D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAddressSelectionView.swift; sourceTree = "<group>"; };
 		D0E85A872DDCDBBC003B4D7A /* AmbiguousAuthorities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAuthorities.swift; sourceTree = "<group>"; };
 		D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentService.swift; sourceTree = "<group>"; };
-		D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		D0EB04822D37F34200B310D8 /* GOV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV.xcdatamodel; sourceTree = "<group>"; };
 		D0EB04832D37F34200B310D8 /* GOV_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV_v2.xcdatamodel; sourceTree = "<group>"; };
@@ -1632,7 +1630,6 @@
 			children = (
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
-				D0EAB5002CDE6513007ACBCD /* Config */,
 				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D742BD32C99781300E7B87A /* Strings */,
 			);
@@ -1970,15 +1967,6 @@
 				D0D9CB912D3024C00051EDDD /* SearchResult.swift */,
 			);
 			path = Search;
-			sourceTree = "<group>";
-		};
-		D0EAB5002CDE6513007ACBCD /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */,
-				D0B3EC012CE227D900A8F321 /* Release.xcconfig */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 		D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */ = {
@@ -2678,7 +2666,6 @@
 /* Begin XCBuildConfiguration section */
 		5D4B9D3A2C074207005F126A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2702,7 +2689,6 @@
 		};
 		5D4B9D3B2C074207005F126A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2726,10 +2712,12 @@
 		};
 		5DAD719C2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				BASE_URL = "https://app.integration.publishing.service.gov.uk";
+				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2788,15 +2776,18 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TOKEN_BASE_URL = "https://4y369hyvja.execute-api.eu-west-2.amazonaws.com/staging";
 			};
 			name = Debug;
 		};
 		5DAD719D2BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				BASE_URL = "https://app.integration.publishing.service.gov.uk";
+				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2848,13 +2839,13 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				TOKEN_BASE_URL = "https://4y369hyvja.execute-api.eu-west-2.amazonaws.com/staging";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		5DAD719F2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
@@ -2894,7 +2885,6 @@
 		};
 		5DAD71A02BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
@@ -2936,7 +2926,6 @@
 		};
 		5DAD71A22BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2960,7 +2949,6 @@
 		};
 		5DAD71A32BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

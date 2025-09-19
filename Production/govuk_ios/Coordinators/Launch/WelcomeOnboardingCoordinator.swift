@@ -12,6 +12,15 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private var pendingAuthenticationCoordinator: BaseCoordinator?
     private let completionAction: () -> Void
 
+    private lazy var welcomeOnboardingViewModel: WelcomeOnboardingViewModel = {
+        let viewModel = WelcomeOnboardingViewModel(
+            completeAction: { [weak self] in
+                self?.startAuthentication()
+            }
+        )
+        return viewModel
+    }()
+
     init(navigationController: UINavigationController,
          authenticationService: AuthenticationServiceInterface,
          coordinatorBuilder: CoordinatorBuilder,
@@ -36,9 +45,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     private func setWelcomeOnboardingViewController(_ animated: Bool = true) {
         let viewController = viewControllerBuilder.welcomeOnboarding(
-            completion: { [weak self] in
-                self?.startAuthentication()
-            }
+            viewModel: welcomeOnboardingViewModel
         )
         set(viewController)
     }
@@ -58,6 +65,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     private func showError(_ error: AuthenticationError) {
         pendingAuthenticationCoordinator = nil
+        welcomeOnboardingViewModel.showProgressView = false
         guard case .loginFlow(.userCancelled) = error else {
             analyticsService.track(error: error)
             setSignInError()

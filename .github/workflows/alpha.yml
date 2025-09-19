@@ -10,7 +10,6 @@ on:
         options:
           - Staging
           - Integration
-          - Production
   push:
     branches:
       - develop

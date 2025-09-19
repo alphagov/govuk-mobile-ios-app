@@ -3,7 +3,7 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-protocol InfoViewModelInterface {
+protocol InfoViewModelInterface: ObservableObject {
     var analyticsService: AnalyticsServiceInterface? { get }
     var trackingName: String { get }
     var trackingTitle: String { get }
@@ -28,6 +28,11 @@ protocol InfoViewModelInterface {
     var secondaryButtonAccessibilityTitle: String { get }
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel? { get }
     var secondaryButtonConfiguration: GOVUKButton.ButtonConfiguration { get }
+}
+
+protocol ProgressIndicating {
+    var showProgressView: Bool { get set }
+    var animationDelay: TimeInterval { get }
 }
 
 extension InfoViewModelInterface {

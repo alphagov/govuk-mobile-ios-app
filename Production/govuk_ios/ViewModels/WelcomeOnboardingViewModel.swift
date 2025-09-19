@@ -3,8 +3,11 @@ import GOVKit
 import UIComponents
 import SwiftUI
 
-final class WelcomeOnboardingViewModel: InfoViewModelInterface {
+final class WelcomeOnboardingViewModel: InfoViewModelInterface,
+                                        ProgressIndicating {
     private let completeAction: () -> Void
+
+    @Published var showProgressView: Bool = false
 
     init(completeAction: @escaping () -> Void) {
         self.completeAction = completeAction
@@ -31,6 +34,7 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
         return .init(
             localisedTitle: localTitle,
             action: { [weak self] in
+                self?.showProgressView = true
                 self?.completeAction()
             }
         )
@@ -51,5 +55,9 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface {
         guard let versionNumber = Bundle.main.versionNumber
         else { return "" }
         return "\(String.onboarding.localized("appVersionText")) \(versionNumber)"
+    }
+
+    var animationDelay: TimeInterval {
+        showProgressView ? 1.0 : 0.0
     }
 }

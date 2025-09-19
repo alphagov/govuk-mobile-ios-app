@@ -2,14 +2,14 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
-struct InfoView: View {
+struct InfoView<Model>: View where Model: InfoViewModelInterface {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    private var viewModel: any InfoViewModelInterface
+    @StateObject private var viewModel: Model
     private let customView: (() -> AnyView)?
 
-    init(viewModel: any InfoViewModelInterface,
+    init(viewModel: Model,
          customView: (() -> AnyView)? = nil) {
-        self.viewModel = viewModel
+        self._viewModel = StateObject(wrappedValue: viewModel)
         self.customView = customView
     }
 
@@ -44,10 +44,34 @@ struct InfoView: View {
                 .padding(16)
             }
         }
+        .overlay(content: {
+            ZStack {
+                Color(UIColor(light: .white, dark: .black))
+                ProgressView()
+            }
+            .opacity(progressOpacity)
+            .animation(.easeOut.delay(delay),
+                       value: progressOpacity)
+            .ignoresSafeArea()
+        })
         .navigationBarHidden(viewModel.navBarHidden)
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
+    }
+
+    private var progressOpacity: CGFloat {
+        guard let model = viewModel as? ProgressIndicating else {
+            return 0.0
+        }
+        return model.showProgressView ? 1.0 : 0.0
+    }
+
+    private var delay: TimeInterval {
+        guard let model = viewModel as? ProgressIndicating else {
+            return 0.0
+        }
+        return model.animationDelay
     }
 
     private var infoView: some View {

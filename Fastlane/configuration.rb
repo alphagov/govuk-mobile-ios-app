@@ -25,13 +25,43 @@ class Configuration
     setting(:app, :bundle_identifier)
   end
 
+  def app_base_url
+    ENV['BASE_URL']
+  end
+
+  def app_assetcatalog_compiler_appicon_name
+    ENV['ASSETCATALOG_COMPILER_APPICON_NAME']
+  end
+
+  def app_authentication_base_url
+    ENV['AUTHENTICATION_BASE_URL']
+  end
+
+  def app_authentication_client_id
+    ENV['AUTHENTICATION_CLIENT_ID']
+  end
+
+  def app_chat_base_url
+    ENV['CHAT_BASE_URL']
+  end
+
+  def app_token_base_url
+    ENV['TOKEN_BASE_URL']
+  end
+
   def app_onesignal_app_id
     ENV['ONESIGNAL_APP_ID']
   end
 
   def app_args
     [
+      "BASE_URL=\"#{app_base_url}\"",
       "ONESIGNAL_APP_ID=\"#{app_onesignal_app_id}\"",
+      "ASSETCATALOG_COMPILER_APPICON_NAME"=\"#{app_assetcatalog_compiler_appicon_name}\"",
+      "AUTHENTICATION_BASE_URL"=\"#{app_authentication_base_url}\"",
+      "AUTHENTICATION_CLIENT_ID"=\"#{app_authentication_client_id}\"",
+      "CHAT_BASE_URL"=\"#{app_chat_base_url}\"",
+      "TOKEN_BASE_URL"=\"#{app_token_base_url}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end

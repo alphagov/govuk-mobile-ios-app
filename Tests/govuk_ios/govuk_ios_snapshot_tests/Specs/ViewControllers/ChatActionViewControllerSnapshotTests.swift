@@ -6,134 +6,85 @@ import SwiftUI
 @testable import govuk_ios
 
 final class ChatActionViewControllerSnapshotTests: SnapshotTestCase {
-    @FocusState var textAreaFocused: Bool
-
-    func test_remainingCharacters_loadInNavigationController_light_rendersCorrectly() {
+    func test_warningText_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: RemainingCharactersTestView(),
+            view: WarningTestView(),
             mode: .light
         )
     }
 
-    func test_remainingCharacters_loadInNavigationController_dark_rendersCorrectly() {
+    func test_warningText_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: RemainingCharactersTestView(),
+            view: WarningTestView(),
             mode: .dark
         )
     }
 
-    func test_tooManyCharacters_loadInNavigationController_light_rendersCorrectly() {
+    func test_errorText_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: TooManyCharactersTestView(),
+            view: ErrorTestView(),
             mode: .light
         )
     }
 
-    func test_tooManyCharacters_loadInNavigationController_dark_rendersCorrectly() {
+    func test_errorText_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            view: TooManyCharactersTestView(),
+            view: ErrorTestView(),
             mode: .dark
         )
     }
 
-// flakey needs re-write
-//    func test_clearChatAlert_loadInNavigationController_rendersCorrectly() {
-//        VerifySnapshotWindowWithDelay(
-//            view: ClearChatAlertTestView(),
-//            mode: .light,
-//            overallTolerance: 0.003,
-//            delay: 0.5
-//        )
-//    }
-}
+    struct WarningTestView: View {
+        @FocusState var textAreaFocused: Bool
+        @State var showClearChatAlert: Bool = false
 
-struct RemainingCharactersTestView: View {
-    @FocusState var textAreaFocused: Bool
-    @State var showClearChatAlert: Bool = false
-
-    var body: some View {
-        let viewModel = ChatViewModel(
-            chatService: MockChatService(),
-            analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in },
-            handleError: { _ in }
-        )
-
-        ChatActionView(
-            viewModel: viewModel,
-            textAreaFocused: $textAreaFocused,
-            showClearChatAlert: $showClearChatAlert,
-            maxTextEditorFrameHeight: 640
-        )
-        .environment(\.isTesting, true)
-        .onAppear {
-            viewModel.latestQuestion = """
-                Lorem ipsum dolor sit amet consectetur adipiscing
-                elit quisque faucibus ex sapien vitae pellentesque 
-                sem placerat in id cursus mi pretium tellus duis 
-                convallis tempus leo eu aenean sed diam urna tempor 
-                pulvinar vivamus fringillsss lacus nec metus biben
-                """
-            textAreaFocused = true
+        var body: some View {
+            let viewModel = ChatViewModel(
+                chatService: MockChatService(),
+                analyticsService: MockAnalyticsService(),
+                openURLAction: { _ in },
+                handleError: { _ in }
+            )
+            return ChatActionView(
+                viewModel: viewModel,
+                textAreaFocused: $textAreaFocused,
+                showClearChatAlert: $showClearChatAlert,
+                maxTextEditorFrameHeight: 640
+            )
+            .environment(\.isTesting, true)
+            .onAppear {
+                viewModel.warningText = LocalizedStringKey(
+                    "Warning message"
+                )
+                textAreaFocused = true
+            }
         }
     }
-}
 
-struct TooManyCharactersTestView: View {
-    @FocusState var textAreaFocused: Bool
-    @State var showClearChatAlert: Bool = false
+    struct ErrorTestView: View {
+        @FocusState var textAreaFocused: Bool
+        @State var showClearChatAlert: Bool = false
 
-    var body: some View {
-        let viewModel = ChatViewModel(
-            chatService: MockChatService(),
-            analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in },
-            handleError: { _ in }
-        )
-
-        ChatActionView(
-            viewModel: viewModel,
-            textAreaFocused: $textAreaFocused,
-            showClearChatAlert: $showClearChatAlert,
-            maxTextEditorFrameHeight: 640
-        )
-        .environment(\.isTesting, true)
-        .onAppear {
-            viewModel.latestQuestion = """
-                Lorem ipsum dolor sit amet consectetur adipiscing
-                elit quisque faucibus ex sapien vitae pellentesque 
-                sem placerat in id cursus mi pretium tellus duis 
-                convallis tempus leo eu aenean sed diam urna tempor 
-                pulvinar vivamus fringillsss lacus nec metus biben
-                pulvinar vivamus fringillsss lacus nec metus biben
-                pulvinar vivamus fringillsss lacus nec metus biben
-                """
-            textAreaFocused = true
-        }
-    }
-}
-
-struct ClearChatAlertTestView: View {
-    @FocusState var textAreaFocused: Bool
-    @State var showClearChatAlert: Bool = true
-
-    var body: some View {
-        let viewModel = ChatViewModel(
-            chatService: MockChatService(),
-            analyticsService: MockAnalyticsService(),
-            openURLAction: { _ in },
-            handleError: { _ in }
-        )
-
-        ChatActionView(
-            viewModel: viewModel,
-            textAreaFocused: $textAreaFocused,
-            showClearChatAlert: $showClearChatAlert,
-            maxTextEditorFrameHeight: 640
-        )
-        .environment(\.isTesting, true)
-        .onAppear {
-            showClearChatAlert = true
+        var body: some View {
+            let viewModel = ChatViewModel(
+                chatService: MockChatService(),
+                analyticsService: MockAnalyticsService(),
+                openURLAction: { _ in },
+                handleError: { _ in }
+            )
+            return ChatActionView(
+                viewModel: viewModel,
+                textAreaFocused: $textAreaFocused,
+                showClearChatAlert: $showClearChatAlert,
+                maxTextEditorFrameHeight: 640
+            )
+            .environment(\.isTesting, true)
+            .onAppear {
+                viewModel.errorText = LocalizedStringKey(
+                    String.chat.localized("validationErrorText")
+                )
+                textAreaFocused = true
+            }
         }
     }
 }

@@ -60,17 +60,10 @@ struct ChatMenuView: View {
             Image(systemName: "ellipsis")
                 .font(.system(size: 18, weight: .bold))
                 .foregroundStyle(Color(UIColor.govUK.text.buttonSecondary))
-                .frame(width: 50, height: 50)
+                .frame(width: 36, height: 36)
                 .background(
                     Circle()
                         .fill(Color(UIColor.govUK.fills.surfaceChatBlue))
-                        .overlay(
-                            Circle()
-                                .stroke(
-                                    Color(UIColor.govUK.strokes.chatAction),
-                                    lineWidth: 1
-                                )
-                        )
                 )
         }
         .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))

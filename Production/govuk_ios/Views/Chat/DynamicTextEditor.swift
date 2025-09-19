@@ -8,64 +8,97 @@ struct DynamicTextEditor: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.isScrollEnabled = true
-        textView.font = UIFont.govUK.body
         textView.backgroundColor = UIColor.govUK.fills.surfaceChatBlue
         textView.adjustsFontForContentSizeCategory = true
         textView.delegate = context.coordinator
-        textView.text = placeholderText
-        textView.textColor = UIColor.govUK.text.secondary
-        textView.textContainerInset = UIEdgeInsets(top: 6, left: 0, bottom: 4, right: 0)
+        textView.accessibilityLabel = placeholderText
+        textView.font = .govUK.body
+
+        let placeholderLabel = UILabel()
+        placeholderLabel.adjustsFontForContentSizeCategory = true
+        placeholderLabel.text = placeholderText
+        placeholderLabel.font = .govUK.body
+        placeholderLabel.textColor = UIColor.govUK.text.secondary
+        placeholderLabel.tag = 100
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        placeholderLabel.numberOfLines = 0
+        placeholderLabel.lineBreakMode = .byWordWrapping
+        placeholderLabel.isAccessibilityElement = false
+        textView.addSubview(placeholderLabel)
+
+        NSLayoutConstraint.activate([
+            placeholderLabel.leadingAnchor.constraint(
+                equalTo: textView.leadingAnchor, constant: 5
+            ),
+            placeholderLabel.topAnchor.constraint(
+                equalTo: textView.topAnchor, constant: 8
+            ),
+            placeholderLabel.bottomAnchor.constraint(
+                equalTo: textView.bottomAnchor
+            ),
+            placeholderLabel.widthAnchor.constraint(
+                lessThanOrEqualToConstant: textView.frame.width
+            )
+        ])
+
+        placeholderLabel.isHidden = !text.isEmpty
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification,
+                                               object: nil,
+                                               queue: .main) { _ in
+            DynamicTextEditor.recalculateHeight(view: textView, result: self.$dynamicHeight)
+        }
 
         return textView
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {
-        if placeholderText != nil {
-            uiView.text = placeholderText
-            uiView.textColor = UIColor.govUK.text.secondary
-        } else {
-            uiView.text = text
-            uiView.textColor = UIColor.govUK.text.primary
+    func updateUIView(_ textView: UITextView, context: Context) {
+        if placeholderText == nil {
+            DynamicTextEditor.recalculateHeight(view: textView, result: $dynamicHeight)
+            return
         }
-        DynamicTextEditor.recalculateHeight(view: uiView, result: $dynamicHeight)
+
+        if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+            textView.text = nil
+            placeholderLabel.isHidden = false
+            placeholderLabel.widthAnchor.constraint(equalTo: textView.widthAnchor).isActive = true
+            let view = placeholderLabel.numberOfLinesUsed > 1 ? placeholderLabel : textView
+            DynamicTextEditor.recalculateHeight(view: view, result: $dynamicHeight)
+        }
     }
 
-    func makeCoordinator() -> Coordinator {
-        Coordinator(
-            text: $text,
-            height: $dynamicHeight,
-            placeholderText: $placeholderText
+    func dismantleUIView(_ textView: UITextView, coordinator: Coordinator) {
+        NotificationCenter.default.removeObserver(
+            textView,
+            name: UIContentSizeCategory.didChangeNotification,
+            object: nil
         )
     }
 
-    class Coordinator: NSObject, UITextViewDelegate {
-        @Binding var text: String
-        @Binding var height: CGFloat
-        @Binding var placeholderText: String?
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
 
-        init(text: Binding<String>,
-             height: Binding<CGFloat>,
-             placeholderText: Binding<String?>) {
-            self._text = text
-            self._height = height
-            self._placeholderText = placeholderText
+    class Coordinator: NSObject, UITextViewDelegate {
+        var parent: DynamicTextEditor
+
+        init(_ parent: DynamicTextEditor) {
+            self.parent = parent
         }
 
         func textViewDidChange(_ textView: UITextView) {
-            $text.wrappedValue = textView.text
-            DynamicTextEditor.recalculateHeight(view: textView, result: $height)
-        }
-
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            placeholderText = nil
+            DispatchQueue.main.async {
+                self.parent.text = textView.text
+            }
+            if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+                placeholderLabel.isHidden = !textView.text.isEmpty
+                parent.placeholderText = textView.text.isEmpty ? parent.placeholderText : nil
+            }
+            DynamicTextEditor.recalculateHeight(view: textView, result: parent.$dynamicHeight)
         }
 
         func textViewDidEndEditing(_ textView: UITextView) {
-            if textView.text.isEmpty {
-                textView.text = placeholderText
-                textView.textColor = UIColor.govUK.text.secondary
-            } else {
-                textView.textColor = UIColor.govUK.text.primary
+            if let placeholderLabel = textView.viewWithTag(100) as? UILabel {
+                placeholderLabel.isHidden = !textView.text.isEmpty
             }
         }
     }
@@ -74,8 +107,35 @@ struct DynamicTextEditor: UIViewRepresentable {
         let newSize = view.sizeThatFits(
             CGSize(width: view.bounds.width, height: .greatestFiniteMagnitude)
         )
+        if let placeholderLabel = view.viewWithTag(100) as? UILabel {
+            let multipleLinePlaceholder =
+            placeholderLabel.isHidden == false && placeholderLabel.numberOfLinesUsed > 1
+            let newPlaceholderHeight = multipleLinePlaceholder ?
+            newSize.height + 16 : newSize.height
+            DispatchQueue.main.async {
+                result.wrappedValue = newPlaceholderHeight
+            }
+            return
+        }
         DispatchQueue.main.async {
             result.wrappedValue = newSize.height
         }
+    }
+}
+
+extension UILabel {
+    var numberOfLinesUsed: Int {
+        guard let text = self.text, let font = self.font else { return 0 }
+
+        let maxSize = CGSize(width: self.bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let rect = NSString(string: text).boundingRect(
+            with: maxSize,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [.font: font],
+            context: nil
+        )
+        let lineHeight = font.lineHeight
+        let lines = Int(floor((rect.height / lineHeight) + 0.2))
+        return lines
     }
 }

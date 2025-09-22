@@ -59,6 +59,10 @@ class ChatConsentOnboardingViewModel: InfoViewModelInterface {
         "Chat Onboarding Screen Two"
     }
 
+    var navBarHidden: Bool {
+        false
+    }
+
     @objc
     func cancelOnboarding() {
         cancelOnboardingAction()

@@ -73,7 +73,7 @@ class WelcomeOnboardingCoordinatorTests {
 
         sut.start(url: nil)
 
-        mockViewControllerBuilder._receivedWelcomeOnboardingCompletion?()
+        mockViewControllerBuilder._stubbedWelcomeOnboardingViewModel?.completeAction()
         mockCoordinatorBuilder._receivedAuthenticationHandleError?(.loginFlow(.accessDenied))
 
         #expect(mockNavigationController._setViewControllers?.first == stubbedSignInErrorViewController)
@@ -105,7 +105,7 @@ class WelcomeOnboardingCoordinatorTests {
         sut.start(url: nil)
 
         let expectedError = AuthenticationError.loginFlow(.accessDenied)
-        mockViewControllerBuilder._receivedWelcomeOnboardingCompletion?()
+        mockViewControllerBuilder._stubbedWelcomeOnboardingViewModel?.completeAction()
         mockCoordinatorBuilder._receivedAuthenticationHandleError?(expectedError)
 
         #expect((mockAnalyticsService._trackErrorReceivedErrors.first as? AuthenticationError) == expectedError)
@@ -135,7 +135,6 @@ class WelcomeOnboardingCoordinatorTests {
 
         sut.start(url: nil)
 
-        mockViewControllerBuilder._receivedWelcomeOnboardingCompletion?()
         mockCoordinatorBuilder._receivedAuthenticationHandleError?(.loginFlow(.userCancelled))
 
         #expect(mockNavigationController._setViewControllers?.first == stubbedWelcomeOnboardingViewController)
@@ -165,7 +164,6 @@ class WelcomeOnboardingCoordinatorTests {
 
         sut.start(url: nil)
 
-        mockViewControllerBuilder._receivedWelcomeOnboardingCompletion?()
         mockCoordinatorBuilder._receivedAuthenticationHandleError?(.loginFlow(.accessDenied))
         mockViewControllerBuilder._receivedSignInErrorCompletion?()
 

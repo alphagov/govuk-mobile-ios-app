@@ -48,6 +48,7 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
             ZStack {
                 Color(UIColor(light: .white, dark: .black))
                 ProgressView()
+                    .accessibilityLabel(loadingAccessibilityLabel)
             }
             .opacity(progressOpacity)
             .animation(.easeOut.delay(delay),
@@ -72,6 +73,13 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
             return 0.0
         }
         return model.animationDelay
+    }
+
+    private var loadingAccessibilityLabel: Text {
+        guard let model = viewModel as? ProgressIndicating else {
+            return Text("")
+        }
+        return Text(model.accessibilityLabel)
     }
 
     private var infoView: some View {

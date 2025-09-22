@@ -17,7 +17,10 @@ struct RecentActivityItemCard: View {
                         .font(Font.govUK.subheadline)
                         .foregroundColor(Color(UIColor.govUK.text.secondary))
                         .multilineTextAlignment(.leading)
-                }.padding(.bottom, isLastItemInList ? 12: 0)
+                }.padding(
+                    .bottom,
+                     isLastItemInList ? 12: 0
+                )
                 Spacer()
             }.padding(.vertical, 8)
             if !isLastItemInList {

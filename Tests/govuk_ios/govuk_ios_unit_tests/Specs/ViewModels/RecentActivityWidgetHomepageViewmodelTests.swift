@@ -7,67 +7,82 @@ import GOVKit
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
 struct RecentActivityWidgetHomepageViewmodelTests {
- //   private var cancellables = Set<AnyCancellable>()
 
-    @Test func ___() async throws {
+    @Test func recentActivities_count_isLessOrEqualToThree() async throws {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockActivityService = MockActivityService()
-
             let sut = RecentActivtyHomepageWidgetViewModel(
                 urlOpener: MockURLOpener(),
                 analyticsService: MockAnalyticsService(),
                 activityService: mockActivityService,
                 seeAllAction: {}
             )
-            let coreData = CoreDataRepository.arrangeAndLoad
+
+            let context = mockActivityService.returnContext()
             _ = ActivityItem.arrange(
-                context: coreData.viewContext
+                context: context
             )
 
             _ = ActivityItem.arrange(
-                context: coreData.viewContext
+                context: context
             )
 
-            try? coreData.viewContext.save()
-
-        
-            let request = ActivityItem.homepagefetchRequest()
-            let resultsController = NSFetchedResultsController<ActivityItem>(
-                fetchRequest: request,
-                managedObjectContext: coreData.viewContext,
-                sectionNameKeyPath: nil,
-                cacheName: nil
+            _ = ActivityItem.arrange(
+                context: context
             )
-            try? resultsController.performFetch()
-            mockActivityService._stubbedFetchResultsController = resultsController
+
+            _ = ActivityItem.arrange(
+                context: context
+            )
+
+            try? mockActivityService.returnContext().save()
 
             sut.$recentActivities
                 .receive(on: DispatchQueue.main)
-                .dropFirst()
                 .sink { value in
                     continuation.resume(returning: value)
                 }.store(in: &cancellables)
         }
-            #expect(result.count == 2)
-        }
-
-    @Test func noActivityTitle_returnsExpectedResult() async throws {
-        let sut = RecentActivtyHomepageWidgetViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService(),
-            activityService: MockActivityService(),
-            seeAllAction: {}
-        )
+        #expect(result.count == 3)
     }
 
-    @Test func recentActivities_hasEqualOrLessThan3Activities() async throws {
-        let sut = RecentActivtyHomepageWidgetViewModel(
-            urlOpener: MockURLOpener(),
-            analyticsService: MockAnalyticsService(),
-            activityService: MockActivityService(),
-            seeAllAction: {}
-        )
+
+    @Test func isLastActivityInList_returnsExpectedResult() async throws {
+        var cancellables = Set<AnyCancellable>()
+        let result = await withCheckedContinuation { continuation in
+            let mockActivityService = MockActivityService()
+            let sut = RecentActivtyHomepageWidgetViewModel(
+                urlOpener: MockURLOpener(),
+                analyticsService: MockAnalyticsService(),
+                activityService: mockActivityService,
+                seeAllAction: {}
+            )
+
+            let context = mockActivityService.returnContext()
+            _ = ActivityItem.arrange(
+                context: context
+            )
+
+            _ = ActivityItem.arrange(
+                context: context
+            )
+
+            _ = ActivityItem.arrange(
+                context: context
+            )
+
+            try? mockActivityService.returnContext().save()
+
+            sut.$recentActivities
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                    let isLastActivity = sut.isLastActivityInList(index: 2)
+
+                    continuation.resume(returning: isLastActivity)
+                }.store(in: &cancellables)
+        }
+        #expect(result == true)
     }
 }
 

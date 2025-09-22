@@ -66,7 +66,7 @@ class Configuration
       "AUTHENTICATION_CLIENT_ID=\"#{app_authentication_client_id}\"",
       "CHAT_BASE_URL=\"#{app_chat_base_url}\"",
       "TOKEN_BASE_URL=\"#{app_token_base_url}\"",
-      "GOOGLE_SERVICES_FILE=\"#{app_google_services_file}\""
+      "GOOGLE_SERVICES_FILE=\"#{app_google_services_file}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end

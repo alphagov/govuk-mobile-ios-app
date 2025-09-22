@@ -2714,8 +2714,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAlpha;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7r88bunbmdsvihr2cdb43lasun;
 				BASE_URL = "https://app.integration.publishing.service.gov.uk";
 				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -2786,8 +2788,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAlpha;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7r88bunbmdsvihr2cdb43lasun;
 				BASE_URL = "https://app.integration.publishing.service.gov.uk";
 				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -2873,7 +2877,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.10;
-				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2913,7 +2916,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.10;
-				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore uk.gov.govuk";

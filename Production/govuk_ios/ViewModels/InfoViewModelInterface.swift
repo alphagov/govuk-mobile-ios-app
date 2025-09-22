@@ -32,6 +32,7 @@ protocol InfoViewModelInterface: ObservableObject {
 
 protocol ProgressIndicating {
     var showProgressView: Bool { get set }
+    var accessibilityLabel: String { get }
     var animationDelay: TimeInterval { get }
 }
 

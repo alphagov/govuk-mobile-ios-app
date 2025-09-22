@@ -60,4 +60,8 @@ final class WelcomeOnboardingViewModel: InfoViewModelInterface,
     var animationDelay: TimeInterval {
         showProgressView ? 1.0 : 0.0
     }
+
+    var accessibilityLabel: String {
+        String.onboarding.localized("loadingIndicatorAccessibilityTitle")
+    }
 }

@@ -110,7 +110,7 @@ class HomeViewModel: ObservableObject {
     @MainActor
     private var chatWidget: WidgetView? {
         guard let chat = configService.chatBanner,
-              configService.isFeatureEnabled(key: .chatOptIn),
+              featureEnabled(.chatOptIn),
               !userDefaultService.hasSeen(banner: chat)
         else { return nil }
 

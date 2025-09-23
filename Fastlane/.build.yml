@@ -18,7 +18,7 @@ default: &DEFAULTS
     method: "adhoc"
   deliver: &DELIVER_DEFAULTS
     groups:
-      - GOV.UK APP
+      - GOV.UK DEBUG
 
 unit:
   <<: *DEFAULTS

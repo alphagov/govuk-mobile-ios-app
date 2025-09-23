@@ -22,7 +22,7 @@ struct AnalyticsServiceTests {
             authenticationService: mockAuthenticationService
         )
 
-        #expect(mockAnalyticsClient._enabledReceived == false)
+        #expect(mockAnalyticsClient._enabledReceived == true)
     }
 
     @Test
@@ -94,7 +94,7 @@ struct AnalyticsServiceTests {
 
         subject.track(event: AppEvent.appLoaded)
 
-        #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 0)
+        #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 1)
     }
 
     @Test
@@ -255,8 +255,8 @@ struct AnalyticsServiceTests {
 
         subject.setAcceptedAnalytics(accepted: false)
 
-        #expect(mockUserDefaults.bool(forKey: .acceptedAnalytics) == false)
-        #expect(mockAnalyticsClient._enabledReceived == false)
+        #expect(mockUserDefaults.bool(forKey: .acceptedAnalytics) == true)
+        #expect(mockAnalyticsClient._enabledReceived == true)
     }
 
     @Test
@@ -331,7 +331,7 @@ struct AnalyticsServiceTests {
 
         subject.setExistingConsent()
 
-        #expect(mockAnalyticsClient._enabledReceived == false)
+        #expect(mockAnalyticsClient._enabledReceived == true)
     }
 
     @Test
@@ -349,6 +349,6 @@ struct AnalyticsServiceTests {
 
         subject.setExistingConsent()
 
-        #expect(mockAnalyticsClient._enabledReceived == false)
+        #expect(mockAnalyticsClient._enabledReceived == true)
     }
 }

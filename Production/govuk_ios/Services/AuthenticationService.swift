@@ -84,7 +84,8 @@ class AuthenticationService: AuthenticationServiceInterface {
                 return await handleReturningUser()
             } catch {
                 Crashlytics.crashlytics().record(error: error)
-                return AuthenticationServiceResult.failure(.genericError)
+                return await handleReturningUser()
+//                return AuthenticationServiceResult.failure(.genericError)
             }
         case .failure(let error):
             Crashlytics.crashlytics().record(error: error)

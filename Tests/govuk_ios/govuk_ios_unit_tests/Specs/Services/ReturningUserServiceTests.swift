@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 struct ReturningUserServiceTests {
@@ -13,6 +14,7 @@ struct ReturningUserServiceTests {
         mockSecureStoreService._stubbedSaveItemResult = .success(())
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
+            analyticsService: MockAnalyticsService(),
             coreDataDeletionService: mockCoreDataDeletionService,
             localAuthenticationService: mockLocalAuthenticationService
         )
@@ -38,6 +40,7 @@ struct ReturningUserServiceTests {
         )
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
+            analyticsService: MockAnalyticsService(),
             coreDataDeletionService: mockCoreDataDeletionService,
             localAuthenticationService: mockLocalAuthenticationService
         )
@@ -60,6 +63,7 @@ struct ReturningUserServiceTests {
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
+            analyticsService: MockAnalyticsService(),
             coreDataDeletionService: mockCoreDataDeletionService,
             localAuthenticationService: mockLocalAuthenticationService
         )
@@ -87,6 +91,7 @@ struct ReturningUserServiceTests {
         mockCoreDataDeletionService._deleteAllObjectsError = NSError()
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
+            analyticsService: MockAnalyticsService(),
             coreDataDeletionService: mockCoreDataDeletionService,
             localAuthenticationService: mockLocalAuthenticationService
         )
@@ -108,6 +113,7 @@ struct ReturningUserServiceTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
+            analyticsService: MockAnalyticsService(),
             coreDataDeletionService: mockCoreDataDeletionService,
             localAuthenticationService: mockLocalAuthenticationService
         )
@@ -130,6 +136,7 @@ struct ReturningUserServiceTests {
         mockSecureStoreService._stubbedReadItemResult = .failure(NSError())
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
+            analyticsService: MockAnalyticsService(),
             coreDataDeletionService: mockCoreDataDeletionService,
             localAuthenticationService: mockLocalAuthenticationService
         )
@@ -153,6 +160,7 @@ struct ReturningUserServiceTests {
         mockSecureStoreService._stubbedReadItemResult = .success(UUID().uuidString)
         let sut = ReturningUserService(
             openSecureStoreService: mockSecureStoreService,
+            analyticsService: MockAnalyticsService(),
             coreDataDeletionService: mockCoreDataDeletionService,
             localAuthenticationService: mockLocalAuthenticationService
         )

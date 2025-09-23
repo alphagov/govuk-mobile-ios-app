@@ -1,6 +1,6 @@
 import Foundation
 import SecureStore
-import FirebaseCrashlytics
+import GOVKit
 
 typealias ReturningUserResult = Result<Bool, ReturningUserServiceError>
 
@@ -10,6 +10,7 @@ protocol ReturningUserServiceInterface {
 
 class ReturningUserService: ReturningUserServiceInterface {
     private let openSecureStoreService: SecureStorable
+    private let analyticsService: AnalyticsServiceInterface
     private let coreDataDeletionService: CoreDataDeletionServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
@@ -18,9 +19,11 @@ class ReturningUserService: ReturningUserServiceInterface {
     }
 
     init(openSecureStoreService: SecureStorable,
+         analyticsService: AnalyticsServiceInterface,
          coreDataDeletionService: CoreDataDeletionServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface) {
         self.openSecureStoreService = openSecureStoreService
+        self.analyticsService = analyticsService
         self.coreDataDeletionService = coreDataDeletionService
         self.localAuthenticationService = localAuthenticationService
     }
@@ -73,7 +76,8 @@ class ReturningUserService: ReturningUserServiceInterface {
         do {
             try coreDataDeletionService.deleteAllObjects()
         } catch {
-            Crashlytics.crashlytics().record(error: error)
+            analyticsService.track(error: error)
+//            Crashlytics.crashlytics().record(error: error)
             return .failure(.coreDataDeletionError)
         }
         return .success(false)
@@ -88,7 +92,8 @@ class ReturningUserService: ReturningUserServiceInterface {
             )
             return .success(isReturningUser)
         } catch {
-            Crashlytics.crashlytics().record(error: error)
+            analyticsService.track(error: error)
+//            Crashlytics.crashlytics().record(error: error)
             return .failure(.saveIdentifierError)
         }
     }

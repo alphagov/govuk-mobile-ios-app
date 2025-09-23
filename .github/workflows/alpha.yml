@@ -2,6 +2,14 @@ name: Alpha
 
 on:
   workflow_dispatch:
+    environment:
+        description: 'Environment'
+        required: true
+        default: 'Staging'
+        type: choice
+        options:
+          - Staging
+          - Integration
   push:
     branches:
       - develop
@@ -24,7 +32,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
-    environment: Alpha
+    environment: ${{ inputs.environment }}
 
     steps:
       - name: Checkout

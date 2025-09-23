@@ -70,9 +70,9 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             code: code,
             userInfo: [
                 "accessTokenEmpty": accessToken.isEmpty,
-                "refreshTokenExists": refreshToken == nil,
+                "refreshTokenExists": refreshToken != nil,
                 "refreshTokenEmpty": refreshToken?.isEmpty == true,
-                "idTokenExists": idToken == nil,
+                "idTokenExists": idToken != nil,
                 "idTokenEmpty": idToken?.isEmpty == true,
                 "expiryDate": expiry
             ]

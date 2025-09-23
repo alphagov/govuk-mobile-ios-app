@@ -43,10 +43,12 @@ class ChatCellViewModel: ObservableObject {
         self.analyticsService = analyticsService
     }
 
-    convenience init(question: PendingQuestion) {
+    convenience init(question: PendingQuestion,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(message: question.message,
                   id: question.id,
-                  type: .question)
+                  type: .question,
+                  analyticsService: analyticsService)
     }
 
     convenience init(answer: Answer,
@@ -63,18 +65,22 @@ class ChatCellViewModel: ObservableObject {
         )
     }
 
-    convenience init(answeredQuestion: AnsweredQuestion) {
+    convenience init(answeredQuestion: AnsweredQuestion,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(message: answeredQuestion.message,
                   id: answeredQuestion.id,
                   type: .question,
-                  sources: [])
+                  sources: [],
+                  analyticsService: analyticsService)
     }
 
-    convenience init(intro: Intro) {
+    convenience init(intro: Intro,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(title: intro.title,
                   message: intro.message,
                   id: intro.id,
-                  type: .intro)
+                  type: .intro,
+                  analyticsService: analyticsService)
     }
 
     var isAnswer: Bool {
@@ -90,6 +96,7 @@ class ChatCellViewModel: ObservableObject {
             }
         }
         UIPasteboard.general.string = textToCopy
+        trackCopyToClipboard()
     }
 
     func openURL(url: URL, type: ChatLinkType) {
@@ -108,6 +115,15 @@ class ChatCellViewModel: ObservableObject {
             text: "Expanded",
             section: "Source Links",
             action: "Source Links Expanded"
+        )
+        analyticsService?.track(event: event)
+    }
+
+    func trackCopyToClipboard() {
+        let event = AppEvent.buttonFunction(
+            text: "Copy to clipboard",
+            section: "Chat \(isAnswer ? "Answer" : "Question")",
+            action: "Copy"
         )
         analyticsService?.track(event: event)
     }

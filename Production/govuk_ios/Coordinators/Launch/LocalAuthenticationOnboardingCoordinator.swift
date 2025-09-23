@@ -24,6 +24,10 @@ class LocalAuthenticationOnboardingCoordinator: BaseCoordinator {
     }
 
     override func start(url: URL?) {
+        guard localAuthenticationService.isEnabled else {
+            finishCoordination()
+            return
+        }
         guard !localAuthenticationService.authenticationOnboardingFlowSeen else {
             finishCoordination()
             return

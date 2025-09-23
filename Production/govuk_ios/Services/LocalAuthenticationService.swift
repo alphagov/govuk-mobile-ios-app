@@ -16,6 +16,7 @@ protocol LocalAuthenticationServiceInterface {
     var biometricsPossible: Bool { get }
     var touchIdEnabled: Bool { get }
     var faceIdSkipped: Bool { get }
+    var isEnabled: Bool { get }
 
     func setFaceIdSkipped(_ skipped: Bool)
     func setTouchId(enabled: Bool)
@@ -28,16 +29,22 @@ protocol LocalAuthenticationServiceInterface {
 }
 
 final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
-    private let context: LAContext
     private let userDefaultsService: UserDefaultsServiceInterface
+    private let configService: AppConfigServiceInterface
+    private let context: LAContext
 
     init(userDefaultsService: UserDefaultsServiceInterface,
+         configService: AppConfigServiceInterface,
          context: LAContext = LAContext()) {
         self.context = context
         self.userDefaultsService = userDefaultsService
+        self.configService = configService
     }
 
     func canEvaluatePolicy(_ policy: LAPolicy) -> (canEvaluate: Bool, error: LAError?) {
+        guard isEnabled else {
+            return (false, nil)
+        }
         var authError: NSError?
         let canEvaluate = context.canEvaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics, error: &authError
@@ -56,6 +63,9 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     }
 
     var biometricsPossible: Bool {
+        guard isEnabled else {
+            return false
+        }
         let evaluation = canEvaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics
         )
@@ -114,31 +124,6 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
         }
     }
 
-    func setLocalAuthenticationOnboarded() {
-        userDefaultsService.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
-    }
-
-    var authenticationOnboardingFlowSeen: Bool {
-        userDefaultsService.bool(forKey: .localAuthenticationOnboardingSeen)
-    }
-
-    func setTouchId(enabled: Bool) {
-        userDefaultsService.set(bool: enabled, forKey: .touchIdEnabled)
-    }
-
-    var touchIdEnabled: Bool {
-        availableAuthType == .touchID &&
-        userDefaultsService.bool(forKey: .touchIdEnabled)
-    }
-
-    func setFaceIdSkipped(_ skipped: Bool) {
-        userDefaultsService.set(bool: skipped, forKey: .faceIdSkipped)
-    }
-
-    var faceIdSkipped: Bool {
-        userDefaultsService.bool(forKey: .faceIdSkipped)
-    }
-
     private var biometricsPolicyState: Data? {
         get {
             userDefaultsService.value(forKey: .biometricsPolicyState) as? Data
@@ -165,5 +150,37 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     func clear() {
         userDefaultsService.set(nil, forKey: .localAuthenticationOnboardingSeen)
         userDefaultsService.set(nil, forKey: .biometricsPolicyState)
+    }
+}
+
+// MARK: - Configuration
+extension LocalAuthenticationService {
+    var isEnabled: Bool {
+        configService.isFeatureEnabled(key: .localAuthentication)
+    }
+
+    func setLocalAuthenticationOnboarded() {
+        userDefaultsService.set(bool: true, forKey: .localAuthenticationOnboardingSeen)
+    }
+
+    var authenticationOnboardingFlowSeen: Bool {
+        userDefaultsService.bool(forKey: .localAuthenticationOnboardingSeen)
+    }
+
+    func setTouchId(enabled: Bool) {
+        userDefaultsService.set(bool: enabled, forKey: .touchIdEnabled)
+    }
+
+    var touchIdEnabled: Bool {
+        availableAuthType == .touchID &&
+        userDefaultsService.bool(forKey: .touchIdEnabled)
+    }
+
+    func setFaceIdSkipped(_ skipped: Bool) {
+        userDefaultsService.set(bool: skipped, forKey: .faceIdSkipped)
+    }
+
+    var faceIdSkipped: Bool {
+        userDefaultsService.bool(forKey: .faceIdSkipped)
     }
 }

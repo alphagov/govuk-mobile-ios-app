@@ -40,6 +40,9 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             let tokenResponse = try await session.performLoginFlow(
                 configuration: loginSessionConfig()
             )
+//            if tokenResponse.refreshToken == nil {
+//
+//            }
             return .success(tokenResponse)
         } catch let error as LoginError {
             return .failure(.loginFlow(error))

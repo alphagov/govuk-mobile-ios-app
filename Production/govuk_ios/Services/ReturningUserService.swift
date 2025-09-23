@@ -31,12 +31,28 @@ class ReturningUserService: ReturningUserServiceInterface {
     func process(idToken: String?) async -> ReturningUserResult {
         guard let currentIdentifier = await currentPersistentUserIdentifier(idToken: idToken)
         else {
+            let error = NSError(
+                domain: "uk.gov.govuk",
+                code: 1,
+                userInfo: [
+                    "token": idToken ?? "-"
+                ]
+            )
+            analyticsService.track(error: error)
             return .failure(.missingIdentifierError)
         }
 
         if localAuthenticationService.authenticationOnboardingFlowSeen {
             guard let storedIdentifier = storedpersistentUserIdentifier
             else {
+                let error = NSError(
+                    domain: "uk.gov.govuk",
+                    code: 2,
+                    userInfo: [
+                        "token": idToken ?? "-"
+                    ]
+                )
+                analyticsService.track(error: error)
                 return .failure(.missingIdentifierError)
             }
             return await handleUserIdentifiers(

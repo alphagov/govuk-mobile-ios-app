@@ -24,7 +24,7 @@ struct RecentActivityItemCard: View {
                 Spacer()
             }.padding(.vertical, 8)
             if !isLastItemInList {
-                Divider().overlay(Color.cyan)
+                Divider().overlay(Color(UIColor.govUK.strokes.listDivider))
             }
         }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
     }

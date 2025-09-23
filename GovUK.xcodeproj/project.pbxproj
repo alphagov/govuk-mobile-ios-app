@@ -3360,7 +3360,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alphagov/govuk-mobile-ios-ui-components";
 			requirement = {
-				branch = develop;
+				branch = "feature/brand-refresh";
 				kind = branch;
 			};
 		};

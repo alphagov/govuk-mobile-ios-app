@@ -82,7 +82,11 @@ class ChatViewModel: ObservableObject {
 
     private func pollForAnswer(_ question: PendingQuestion) {
         requestInFlight = true
-        addCellModels([ChatCellViewModel(question: question), .gettingAnswer])
+        addCellModels(
+            [ChatCellViewModel(question: question,
+                               analyticsService: analyticsService),
+             .gettingAnswer]
+        )
         chatService.pollForAnswer(question) { [weak self] result in
             guard let self else { return }
             removeCellModel(.gettingAnswer)
@@ -151,9 +155,12 @@ class ChatViewModel: ObservableObject {
             message: String.chat.localized("introThirdMessage")
         )
         let models = [
-            ChatCellViewModel(intro: firstIntroMessage),
-            ChatCellViewModel(intro: secondIntroMessage),
-            ChatCellViewModel(intro: thirdIntroMessage)
+            ChatCellViewModel(intro: firstIntroMessage,
+                              analyticsService: analyticsService),
+            ChatCellViewModel(intro: secondIntroMessage,
+                              analyticsService: analyticsService),
+            ChatCellViewModel(intro: thirdIntroMessage,
+                              analyticsService: analyticsService)
         ]
         if animate {
             addCellModels(models)
@@ -184,7 +191,8 @@ class ChatViewModel: ObservableObject {
         appendIntroMessages(animate: false)
         let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
-            let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
+            let question = ChatCellViewModel(answeredQuestion: answeredQuestion,
+                                             analyticsService: analyticsService)
             question.isVisible = true
             cellModels.append(question)
             let answer = ChatCellViewModel(

@@ -109,7 +109,6 @@ class ReturningUserService: ReturningUserServiceInterface {
             try coreDataDeletionService.deleteAllObjects()
         } catch {
             analyticsService.track(error: error)
-//            Crashlytics.crashlytics().record(error: error)
             return .failure(.coreDataDeletionError)
         }
         return .success(false)
@@ -126,7 +125,6 @@ class ReturningUserService: ReturningUserServiceInterface {
             return .success(isReturningUser)
         } catch {
             analyticsService.track(error: error)
-//            Crashlytics.crashlytics().record(error: error)
             return .failure(.saveIdentifierError)
         }
     }

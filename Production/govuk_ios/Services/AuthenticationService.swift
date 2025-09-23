@@ -73,13 +73,16 @@ class AuthenticationService: AuthenticationServiceInterface {
         let result = await authenticationServiceClient.performAuthenticationFlow(window: window)
         switch result {
         case .success(let tokenResponse):
+            Crashlytics.crashlytics().log("authenticate success")
             setTokens(
                 refreshToken: tokenResponse.refreshToken,
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
             do {
+                Crashlytics.crashlytics().log("extract jwt")
                 let token = try await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "")
+                Crashlytics.crashlytics().log("save expiry")
                 saveExpiryDate(issueDate: token.iat)
                 return await handleReturningUser()
             } catch {
@@ -88,6 +91,7 @@ class AuthenticationService: AuthenticationServiceInterface {
 //                return AuthenticationServiceResult.failure(.genericError)
             }
         case .failure(let error):
+            Crashlytics.crashlytics().log("authenticate failure")
             Crashlytics.crashlytics().record(error: error)
             return AuthenticationServiceResult.failure(error)
         }
@@ -159,6 +163,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         )
         switch returningUserResult {
         case .success(let isReturning):
+            Crashlytics.crashlytics().log("handleReturningUser success")
             return .success(.init(returningUser: isReturning))
         case .failure(let error):
             Crashlytics.crashlytics().record(error: error)

@@ -94,6 +94,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     func signOut(reason: SignoutReason) {
+        Crashlytics.crashlytics().log("signout")
         do {
             try authenticatedSecureStoreService.delete()
             userDefaultsService.removeObject(forKey: .refreshTokenExpiryDate)
@@ -152,6 +153,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     private func handleReturningUser() async -> AuthenticationServiceResult {
+        Crashlytics.crashlytics().log("handleReturningUser")
         let returningUserResult = await returningUserService.process(
             idToken: idToken
         )
@@ -177,6 +179,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private func setTokens(refreshToken: String? = nil,
                            idToken: String? = nil,
                            accessToken: String? = nil) {
+        Crashlytics.crashlytics().log("token set")
         self.refreshToken = refreshToken
         self.idToken = idToken
         self.accessToken = accessToken

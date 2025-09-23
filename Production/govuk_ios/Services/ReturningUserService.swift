@@ -1,6 +1,7 @@
 import Foundation
 import SecureStore
 import GOVKit
+import FirebaseCrashlytics
 
 typealias ReturningUserResult = Result<Bool, ReturningUserServiceError>
 
@@ -29,6 +30,7 @@ class ReturningUserService: ReturningUserServiceInterface {
     }
 
     func process(idToken: String?) async -> ReturningUserResult {
+        Crashlytics.crashlytics().log("ReturningUserService.process called")
         guard let currentIdentifier = await currentPersistentUserIdentifier(idToken: idToken)
         else {
             let error = NSError(
@@ -65,9 +67,21 @@ class ReturningUserService: ReturningUserServiceInterface {
     }
 
     private func currentPersistentUserIdentifier(idToken: String?) async -> String? {
-        guard let idToken = idToken,
-              let payload = try? await JWTExtractor().extract(jwt: idToken)
-        else {
+        Crashlytics.crashlytics().log("ReturningUserService.currentPersistentUserIdentifier called")
+        guard let idToken = idToken else {
+            let error = NSError(
+                domain: "uk.gov.govuk",
+                code: 3
+            )
+            analyticsService.track(error: error)
+            return nil
+        }
+        guard let payload = try? await JWTExtractor().extract(jwt: idToken) else {
+            let error = NSError(
+                domain: "uk.gov.govuk",
+                code: 4
+            )
+            analyticsService.track(error: error)
             return nil
         }
         return payload.sub
@@ -75,6 +89,7 @@ class ReturningUserService: ReturningUserServiceInterface {
 
     private func handleUserIdentifiers(currentIdentifier: String,
                                        storedIdentifier: String) async -> ReturningUserResult {
+        Crashlytics.crashlytics().log("ReturningUserService.handleUserIdentifiers called")
         if currentIdentifier == storedIdentifier {
             return .success(true)
         } else {
@@ -83,6 +98,7 @@ class ReturningUserService: ReturningUserServiceInterface {
     }
 
     private func handleNewUser(currentIdentifier: String) -> ReturningUserResult {
+        Crashlytics.crashlytics().log("ReturningUserService.handleNewUser called")
         let saveResult = saveIdentifier(
             currentIdentifier: currentIdentifier, isReturningUser: false
         )
@@ -101,6 +117,7 @@ class ReturningUserService: ReturningUserServiceInterface {
 
     private func saveIdentifier(currentIdentifier: String,
                                 isReturningUser: Bool) -> ReturningUserResult {
+        Crashlytics.crashlytics().log("ReturningUserService.saveIdentifier called")
         do {
             try openSecureStoreService.saveItem(
                 item: currentIdentifier,

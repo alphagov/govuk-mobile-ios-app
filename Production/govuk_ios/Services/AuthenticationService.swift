@@ -3,6 +3,7 @@ import UIKit
 import Authentication
 import SecureStore
 import Factory
+import FirebaseCrashlytics
 
 protocol AuthenticationServiceInterface: AnyObject {
     var refreshToken: String? { get }
@@ -77,10 +78,16 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
-            let token = try? await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "")
-            saveExpiryDate(issueDate: token?.iat)
-            return await handleReturningUser()
+            do {
+                let token = try await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "")
+                saveExpiryDate(issueDate: token.iat)
+                return await handleReturningUser()
+            } catch {
+                Crashlytics.crashlytics().record(error: error)
+                return AuthenticationServiceResult.failure(.genericError)
+            }
         case .failure(let error):
+            Crashlytics.crashlytics().record(error: error)
             return AuthenticationServiceResult.failure(error)
         }
     }
@@ -151,6 +158,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .success(let isReturning):
             return .success(.init(returningUser: isReturning))
         case .failure(let error):
+            Crashlytics.crashlytics().record(error: error)
             setTokens()
             return .failure(.returningUserService(error))
         }

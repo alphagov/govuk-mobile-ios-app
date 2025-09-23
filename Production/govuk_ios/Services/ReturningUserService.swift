@@ -1,5 +1,6 @@
 import Foundation
 import SecureStore
+import FirebaseCrashlytics
 
 typealias ReturningUserResult = Result<Bool, ReturningUserServiceError>
 
@@ -72,6 +73,7 @@ class ReturningUserService: ReturningUserServiceInterface {
         do {
             try coreDataDeletionService.deleteAllObjects()
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             return .failure(.coreDataDeletionError)
         }
         return .success(false)
@@ -86,6 +88,7 @@ class ReturningUserService: ReturningUserServiceInterface {
             )
             return .success(isReturningUser)
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             return .failure(.saveIdentifierError)
         }
     }

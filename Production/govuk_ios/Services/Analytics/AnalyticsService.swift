@@ -54,7 +54,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func resetConsent() {
-        userDefaultsService.set(nil, forKey: .acceptedAnalytics)
+        userDefaultsService.set(true, forKey: .acceptedAnalytics)
         clients.forEach { $0.setEnabled(enabled: true) }
     }
 

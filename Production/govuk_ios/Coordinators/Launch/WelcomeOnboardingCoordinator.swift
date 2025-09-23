@@ -57,6 +57,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     }
 
     private func showError(_ error: AuthenticationError) {
+        analyticsService.track(error: error)
         pendingAuthenticationCoordinator = nil
         guard case .loginFlow(.userCancelled) = error else {
             analyticsService.track(error: error)

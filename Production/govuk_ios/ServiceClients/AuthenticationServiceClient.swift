@@ -4,6 +4,7 @@ import UIKit
 import AppAuth
 import Authentication
 import FirebaseAppCheck
+import FirebaseCrashlytics
 
 typealias AuthenticationResult = Result<Authentication.TokenResponse, AuthenticationError>
 typealias TokenRefreshResult = Result<TokenRefreshResponse, TokenRefreshError>
@@ -40,9 +41,13 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             let tokenResponse = try await session.performLoginFlow(
                 configuration: loginSessionConfig()
             )
-//            if tokenResponse.refreshToken == nil {
-//
-//            }
+            logResponse(
+                code: 111,
+                accessToken: tokenResponse.accessToken,
+                refreshToken: tokenResponse.refreshToken,
+                idToken: tokenResponse.idToken,
+                expiryDate: tokenResponse.expiryDate
+            )
             return .success(tokenResponse)
         } catch let error as LoginError {
             return .failure(.loginFlow(error))
@@ -51,26 +56,65 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         }
     }
 
+    private func logResponse(code: Int,
+                             accessToken: String,
+                             refreshToken: String?,
+                             idToken: String?,
+                             expiryDate: Date) {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .long
+        formatter.dateStyle = .medium
+        let expiry = formatter.string(from: expiryDate)
+        let error = NSError(
+            domain: "uk.gov.govuk",
+            code: code,
+            userInfo: [
+                "accessTokenEmpty": accessToken.isEmpty,
+                "refreshTokenExists": refreshToken == nil,
+                "refreshTokenEmpty": refreshToken?.isEmpty == true,
+                "idTokenExists": idToken == nil,
+                "idTokenEmpty": idToken?.isEmpty == true,
+                "expiryDate": expiry
+            ]
+        )
+        Crashlytics.crashlytics().record(error: error)
+    }
+
     func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult {
         let request = await tokenRequest(refreshToken: refreshToken)
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 oidAuthService.perform(
                     request
-                ) { [weak self] tokenResponse, _ in
+                ) { [weak self] tokenResponse, error in
+                    if let error = error {
+                        Crashlytics.crashlytics().record(error: error)
+                    }
                     guard let self = self else { return }
                     if let response = tokenResponse {
+                        let defaultDate = Date(timeIntervalSince1970: 0)
+                        logResponse(
+                            code: 222,
+                            accessToken: response.accessToken ?? "No token",
+                            refreshToken: response.refreshToken,
+                            idToken: response.idToken,
+                            expiryDate: response.accessTokenExpirationDate ?? defaultDate
+                        )
                         do {
                             let tokenRefreshRespnse = try generateTokenRefreshResponse(response)
                             continuation.resume(
                                 returning: .success(tokenRefreshRespnse)
                             )
                         } catch {
+                            Crashlytics.crashlytics().record(error: error)
                             continuation.resume(
                                 throwing: error
                             )
                         }
                     } else {
+                        Crashlytics.crashlytics().record(
+                            error: TokenRefreshError.tokenResponseError
+                        )
                         continuation.resume(
                             throwing: TokenRefreshError.tokenResponseError
                         )
@@ -78,8 +122,10 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
                 }
             }
         } catch let error as TokenRefreshError {
+            Crashlytics.crashlytics().record(error: error)
             return .failure(error)
         } catch {
+            Crashlytics.crashlytics().record(error: error)
             return .failure(.genericError)
         }
     }

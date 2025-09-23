@@ -18,16 +18,19 @@ struct ChatWidgetView: View {
                                 .foregroundColor(Color(UIColor.govUK.text.primary))
                                 .font(Font.govUK.bodySemibold)
                                 .multilineTextAlignment(.leading)
+                                .accessibilitySortPriority(4)
                             Spacer(minLength: 10)
                             Text(viewModel.body)
                                 .font(Font.govUK.body)
                                 .foregroundColor(Color(UIColor.govUK.text.primary))
                                 .multilineTextAlignment(.leading)
+                                .accessibilitySortPriority(3)
                             Spacer(minLength: 10)
                             Text(viewModel.linkTitle)
                                 .font(Font.govUK.body)
                                 .foregroundColor(Color(UIColor.govUK.text.link))
                                 .multilineTextAlignment(.leading)
+                                .accessibilitySortPriority(2)
                         }
                         .padding(.trailing, 4)
                         Spacer()
@@ -46,6 +49,7 @@ struct ChatWidgetView: View {
                                 VStack {
                                     Image(systemName: "xmark")
                                         .foregroundColor(Color(UIColor.govUK.text.secondary))
+                                        .accessibilitySortPriority(1)
                                 }
                             })
                             .accessibilityLabel(
@@ -54,7 +58,7 @@ struct ChatWidgetView: View {
                         }
                     }.padding()
                     .frame(maxWidth: .infinity)
-                }
+                }.accessibilityElement(children: .contain)
                 .background(Image(decorative: verticalSizeClass == .compact ?
                                   "chat_card_landscape" : "chat_card_portrait")
                     .resizable()

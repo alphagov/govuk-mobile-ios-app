@@ -34,14 +34,12 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func setAcceptedAnalytics(accepted: Bool) {
-        userDefaultsService.set(bool: accepted, forKey: .acceptedAnalytics)
-        clients.forEach { $0.setEnabled(enabled: accepted) }
+        userDefaultsService.set(bool: true, forKey: .acceptedAnalytics)
+        clients.forEach { $0.setEnabled(enabled: true) }
     }
 
     func setExistingConsent() {
-        if let accepted = hasAcceptedAnalytics {
-            clients.forEach { $0.setEnabled(enabled: accepted) }
-        }
+        clients.forEach { $0.setEnabled(enabled: true) }
     }
 
     var permissionState: AnalyticsPermissionState {
@@ -57,7 +55,7 @@ class AnalyticsService: AnalyticsServiceInterface {
 
     func resetConsent() {
         userDefaultsService.set(nil, forKey: .acceptedAnalytics)
-        clients.forEach { $0.setEnabled(enabled: false) }
+        clients.forEach { $0.setEnabled(enabled: true) }
     }
 
     func set(userProperty: UserProperty) {
@@ -65,7 +63,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     private func configureDisabled() {
-        clients.forEach { $0.setEnabled(enabled: false) }
+        clients.forEach { $0.setEnabled(enabled: true) }
     }
 
     private var hasAcceptedAnalytics: Bool? {

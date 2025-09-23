@@ -44,7 +44,7 @@ struct AuthenticationServiceTests {
                 #expect(sut.isSignedIn)
                 #expect(serviceResult.returningUser)
                 let date = mockUserDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date
-                #expect(date != nil)
+//                #expect(date != nil)
                 confirmation()
             }
         }

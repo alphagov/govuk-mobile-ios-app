@@ -54,6 +54,7 @@ class AuthenticationCoordinator: BaseCoordinator {
             handleOnboarding(response: response)
             startSignInSuccess()
         case .failure(let error):
+            analyticsService.track(error: error)
             DispatchQueue.main.async {
                 self.handleError(error)
             }

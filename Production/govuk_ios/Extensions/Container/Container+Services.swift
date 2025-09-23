@@ -54,8 +54,7 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaultsService: self.userDefaultsService(),
-                authenticationService: self.authenticationService.resolve()
+                userDefaultsService: self.userDefaultsService()
             )
         }
         .scope(.singleton)
@@ -147,6 +146,7 @@ extension Container {
         Factory(self) {
             ReturningUserService(
                 openSecureStoreService: self.openSecureStoreService.resolve(),
+                analyticsService: self.analyticsService.resolve(),
                 coreDataDeletionService: self.coreDataDeletionService.resolve(),
                 localAuthenticationService: self.localAuthenticationService.resolve()
             )

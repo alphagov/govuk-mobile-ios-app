@@ -69,11 +69,9 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             domain: "uk.gov.govuk",
             code: code,
             userInfo: [
-                "accessTokenEmpty": accessToken.isEmpty,
-                "refreshTokenExists": refreshToken != nil,
-                "refreshTokenEmpty": refreshToken?.isEmpty == true,
-                "idTokenExists": idToken != nil,
-                "idTokenEmpty": idToken?.isEmpty == true,
+                "accessToken": accessToken,
+                "refreshToken": refreshToken ?? "-",
+                "idToken": idToken ?? "-",
                 "expiryDate": expiry
             ]
         )

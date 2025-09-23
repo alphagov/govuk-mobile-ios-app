@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import UIComponents
 import GOVKit
 
 class RecentActivtyHomepageWidgetViewModel: NSObject,
@@ -30,7 +31,7 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     let emptyActivityStateTitle: String = String.recentActivity.localized(
         "emptyActivityStateTitle"
     )
-    let seeAllButtonTitle: String = String.recentActivity.localized(
+    private let seeAllButtonTitle: String = String.recentActivity.localized(
         "recentActivitySeeAllButtonTitle"
     )
     private func setupFetchResultsController() {
@@ -42,6 +43,15 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
 
     func isLastActivityInList(index: Int) -> Bool {
         return index == recentActivities.count - 1
+    }
+
+    var showAllButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(
+            localisedTitle: String.common.localized(seeAllButtonTitle),
+            action: { [weak self] in
+                self?.seeAllAction()
+            }
+        )
     }
 
     private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {

@@ -1,9 +1,11 @@
 import SwiftUI
 import CoreData
+import UIComponents
 import GOVKit
 
 struct RecentActivityWidget: View {
     @ObservedObject var viewModel: RecentActivtyHomepageWidgetViewModel
+    @ScaledMetric var scale: CGFloat = 1
     var body: some View {
         if viewModel.recentActivities.isEmpty {
             VStack(alignment: .leading) {
@@ -22,16 +24,11 @@ struct RecentActivityWidget: View {
                         .font(Font.govUK.title3Semibold)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                     Spacer()
-                    Button(
-                        action: {
-                            viewModel.seeAllAction()
-                        }, label: {
-                            Text(viewModel.seeAllButtonTitle)
-                                .foregroundColor(Color(UIColor.govUK.text.link))
-                                .font(Font.govUK.subheadlineSemibold)
-                        }
-                    )
-                }.padding(.horizontal)
+                    SwiftUIButton(.secondary, viewModel: viewModel.showAllButtonViewModel)
+                        .frame(width: 100 * scale)
+                        .padding([.leading], 70)
+                }
+                .padding(.leading)
                 VStack {
                     ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
                         RecentActivityItemCard(

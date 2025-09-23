@@ -54,8 +54,7 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaultsService: self.userDefaultsService(),
-                authenticationService: self.authenticationService.resolve()
+                userDefaultsService: self.userDefaultsService()
             )
         }
         .scope(.singleton)

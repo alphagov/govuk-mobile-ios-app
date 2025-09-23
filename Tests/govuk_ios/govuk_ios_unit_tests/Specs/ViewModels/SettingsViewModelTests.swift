@@ -61,10 +61,14 @@ class SettingsViewModelTests {
         let signOutRow = try #require(signOutSection.rows.first as? DetailRow)
         #expect(signOutRow.title == "Sign out")
 
-        let notificationsSection = sut.listContent[2]
-        #expect(notificationsSection.heading?.title == nil)
-        let notificationRow = try #require(notificationsSection.rows.first as? DetailRow)
+        let optionsSection = sut.listContent[2]
+        #expect(optionsSection.heading?.title == nil)
+        let notificationRow = try #require(optionsSection.rows.first as? DetailRow)
         #expect(notificationRow.title == "Notifications")
+        let biometricsRow = try #require(optionsSection.rows[1] as? NavigationRow)
+        #expect(biometricsRow.title == "Face ID")
+        let analyticsRow = try #require(optionsSection.rows[2] as? ToggleRow)
+        #expect(analyticsRow.title == "Share app usage statistics")
 
         let aboutSection = sut.listContent[3]
         let helpAndFeedbackRow = try #require(aboutSection.rows.last as? LinkRow)
@@ -89,6 +93,16 @@ class SettingsViewModelTests {
         #expect(privacyAndLegalSection.rows[1].title == "Accessibility statement")
         #expect(privacyAndLegalSection.rows[2].title == "Open source licences")
         #expect(privacyAndLegalSection.rows[3].title == "Terms and conditions")
+    }
+
+    @Test
+    func biometrics_disabled_removesBiometricsRow() {
+        mockLocalAuthenticationService._stubbedBiometricsPossible = false
+        let appOptionsSection = sut.listContent[2]
+        let faceIDRowExists = appOptionsSection.rows.contains { row in
+            row.title == "Face ID"
+        }
+        #expect(!faceIDRowExists)
     }
 
     @Test

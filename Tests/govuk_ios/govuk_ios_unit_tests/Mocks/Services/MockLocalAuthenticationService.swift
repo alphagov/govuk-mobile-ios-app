@@ -4,6 +4,11 @@ import LocalAuthentication
 @testable import govuk_ios
 
 class MockLocalAuthenticationService: LocalAuthenticationServiceInterface {
+    var _stubbedIsEnabled: Bool = false
+    var isEnabled: Bool {
+        _stubbedIsEnabled
+    }
+
     var _stubbedFaceIdSkipped: Bool = false
     var faceIdSkipped: Bool {
         _stubbedFaceIdSkipped

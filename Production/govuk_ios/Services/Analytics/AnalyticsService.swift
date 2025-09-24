@@ -27,6 +27,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func track(error: Error) {
+        guard shouldTrack else { return }
         clients.forEach { $0.track(error: error) }
     }
 
@@ -51,7 +52,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func resetConsent() {
-        userDefaultsService.set(true, forKey: .acceptedAnalytics)
+        userDefaultsService.set(nil, forKey: .acceptedAnalytics)
         clients.forEach { $0.setEnabled(enabled: true) }
     }
 

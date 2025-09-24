@@ -20,6 +20,7 @@ class ReturningUserService: ReturningUserServiceInterface {
         do {
             return try openSecureStoreService.readItem(itemName: "persistentUserIdentifier")
         } catch {
+            Crashlytics.crashlytics().log(error.localizedDescription)
             analyticsService.track(error: error)
             return nil
         }

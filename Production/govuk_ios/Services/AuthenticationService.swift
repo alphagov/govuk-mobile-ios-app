@@ -92,6 +92,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             }
         case .failure(let error):
             Crashlytics.crashlytics().log("authenticate failure")
+            Crashlytics.crashlytics().log(error.localizedDescription)
             Crashlytics.crashlytics().record(error: error)
             return AuthenticationServiceResult.failure(error)
         }

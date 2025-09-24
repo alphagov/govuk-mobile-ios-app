@@ -23,13 +23,21 @@ struct RecentActivityWidget: View {
                     Text(viewModel.title)
                         .font(Font.govUK.title3Semibold)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
+                        .frame(alignment: .leading)
                     Spacer()
-                    SwiftUIButton(.secondary, viewModel: viewModel.showAllButtonViewModel)
-                        .frame(width: 100 * scale)
-                        .padding([.leading], 70)
+                    Button(
+                        action: {
+                            viewModel.seeAllAction()
+                        }, label: {
+                            Text(viewModel.seeAllButtonTitle)
+                                .foregroundColor(Color(UIColor.govUK.text.link))
+                                .font(Font.govUK.subheadlineSemibold)
+                        }
+                    )
                 }
-                .padding(.leading)
-                VStack {
+            }.padding(.top)
+            .padding(.horizontal)
+            VStack {
                     ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
                         RecentActivityItemCard(
                             model: viewModel.recentActivities[index],
@@ -37,8 +45,8 @@ struct RecentActivityWidget: View {
                             isLastItemInList: viewModel.isLastActivityInList(
                                 index: index
                             )
-                        ).padding([.horizontal])
-                            .padding([.top], index == 0 ? 8: 0)
+                        )
+                        .padding([.top], index == 0 ? 8: 0)
                     }
                 }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
                     .roundedBorder(borderColor: .clear)
@@ -47,4 +55,3 @@ struct RecentActivityWidget: View {
             }
         }
     }
-}

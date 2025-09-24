@@ -4,6 +4,7 @@ import GOVKit
 
 struct TopicsView: View {
     @StateObject var viewModel: TopicsWidgetViewModel
+    @State var showingEditScreen: Bool = false
     @ScaledMetric var scale: CGFloat = 1
     private let columns = [
         GridItem(.flexible(), spacing: nil, alignment: .leading),
@@ -24,18 +25,26 @@ struct TopicsView: View {
                 Spacer()
             }.padding()
         } else {
-            VStack(alignment: .leading, spacing: 0) {
-                ScrollView {
-                    HStack {
-                        Text(viewModel.widgetTitle)
-                            .font(Font.govUK.title3Semibold)
-                            .foregroundColor(Color(UIColor.govUK.text.primary))
-                            .padding([.leading], 4)
-                        Spacer()
-                        SwiftUIButton(.secondary, viewModel: viewModel.editButtonViewModel)
-                            .frame(width: 70 * scale)
-                            .padding([.leading], 40)
-                    }
+            VStack {
+            VStack(alignment: .leading) {
+                // ScrollView {
+                HStack {
+                    Text(viewModel.widgetTitle)
+                        .font(Font.govUK.title3Semibold)
+                        .foregroundColor(Color(UIColor.govUK.text.primary))
+                        .padding([.leading], 4)
+                    Spacer()
+                    Button(
+                        action: {
+                            showingEditScreen.toggle()
+                        }, label: {
+                            Text("Edit")
+                                .foregroundColor(Color(UIColor.govUK.text.link))
+                                .font(Font.govUK.subheadlineSemibold)
+                        }
+                    )
+                }
+            }.padding(.horizontal)
                     LazyVGrid(columns: columns, alignment: .center) {
                         ForEach(viewModel.topicsToBeDisplayed, id: \.self) { topic in
                             TopicCard(model: topic)
@@ -50,8 +59,8 @@ struct TopicsView: View {
                                     viewModel.topicAction(topic)
                                 }
                         }
-                    }
-                }
+                    }.padding(.horizontal)
+               // }
                 if !viewModel.showAllTopicsButton {
                     HStack {
                         Spacer()
@@ -63,7 +72,7 @@ struct TopicsView: View {
                     }
                     .padding()
                 }
-            }.sheet(isPresented: $viewModel.showingEditScreen,
+            }.sheet(isPresented: $showingEditScreen,
                     onDismiss: {
                 viewModel.fetchTopics()
                 viewModel.fetchDisplayedTopics()
@@ -83,7 +92,7 @@ struct TopicsView: View {
                     self.viewModel.trackECommerce()
                 }
             }
-            .padding()
+         //   .padding(.horizontal)
         }
     }
 }

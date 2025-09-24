@@ -17,7 +17,8 @@ struct HomeContentView: View {
                 ForEach(viewModel.widgets) { widget in
                     widget
                 }
-            }.onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in
+            }
+            .onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in
                 if shouldScroll {
                     withAnimation {
                         proxy.scrollTo(topID, anchor: .top)
@@ -28,6 +29,7 @@ struct HomeContentView: View {
         }.onAppear {
             viewModel.trackScreen(screen: self)
         }
+        .background(Color.gray)
     }
 }
 

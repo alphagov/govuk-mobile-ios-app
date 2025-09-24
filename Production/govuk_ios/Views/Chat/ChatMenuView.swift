@@ -63,7 +63,7 @@ struct ChatMenuView: View {
                 .frame(width: menuDimensions.width, height: menuDimensions.height)
                 .background(
                     Circle()
-                        .fill(Color(UIColor.govUK.fills.surfaceChatBlue))
+                        .fill(Color(UIColor.govUK.fills.surfaceChatAction))
                 )
         }
         .accessibilityLabel(String.chat.localized("moreOptionsAccessibilityLabel"))

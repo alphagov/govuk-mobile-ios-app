@@ -16,7 +16,13 @@ class ReturningUserService: ReturningUserServiceInterface {
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
     private var storedpersistentUserIdentifier: String? {
-        try? openSecureStoreService.readItem(itemName: "persistentUserIdentifier")
+        Crashlytics.crashlytics().log("get storedpersistentUserIdentifier")
+        do {
+            return try openSecureStoreService.readItem(itemName: "persistentUserIdentifier")
+        } catch {
+            analyticsService.track(error: error)
+            return nil
+        }
     }
 
     init(openSecureStoreService: SecureStorable,

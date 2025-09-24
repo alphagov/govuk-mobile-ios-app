@@ -29,7 +29,7 @@ struct HomeContentView: View {
         }.onAppear {
             viewModel.trackScreen(screen: self)
         }
-        .background(Color.gray)
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
     }
 }
 

@@ -31,7 +31,7 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     let emptyActivityStateTitle: String = String.recentActivity.localized(
         "emptyActivityStateTitle"
     )
-    private let seeAllButtonTitle: String = String.recentActivity.localized(
+    let seeAllButtonTitle: String = String.recentActivity.localized(
         "recentActivitySeeAllButtonTitle"
     )
     private func setupFetchResultsController() {

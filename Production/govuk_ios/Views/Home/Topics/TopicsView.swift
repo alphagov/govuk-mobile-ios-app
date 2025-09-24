@@ -26,8 +26,7 @@ struct TopicsView: View {
             }.padding()
         } else {
             VStack {
-            VStack(alignment: .leading) {
-                // ScrollView {
+                VStack(alignment: .leading) {
                 HStack {
                     Text(viewModel.widgetTitle)
                         .font(Font.govUK.title3Semibold)
@@ -38,7 +37,7 @@ struct TopicsView: View {
                         action: {
                             showingEditScreen.toggle()
                         }, label: {
-                            Text("Edit")
+                            Text(viewModel.showAllButtonsTitle)
                                 .foregroundColor(Color(UIColor.govUK.text.link))
                                 .font(Font.govUK.subheadlineSemibold)
                         }
@@ -60,14 +59,14 @@ struct TopicsView: View {
                                 }
                         }
                     }.padding(.horizontal)
-               // }
                 if !viewModel.showAllTopicsButton {
                     HStack {
                         Spacer()
-                    SwiftUIButton(
-                        .compact,
-                        viewModel: viewModel.showAllButtonViewModel
-                    ).frame(width: 150 * scale)
+                        SwiftUIButton(
+                            .compact,
+                            viewModel: viewModel.showAllButtonViewModel
+                        )
+                        .frame(width: 150 * scale)
                         Spacer()
                     }
                     .padding()
@@ -92,7 +91,6 @@ struct TopicsView: View {
                     self.viewModel.trackECommerce()
                 }
             }
-         //   .padding(.horizontal)
         }
     }
 }

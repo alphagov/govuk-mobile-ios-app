@@ -1,11 +1,11 @@
 import SwiftUI
 import CoreData
-import UIComponents
 import GOVKit
 
 struct RecentActivityWidget: View {
+    @AccessibilityFocusState
+    private var isEditFocused: Bool
     @ObservedObject var viewModel: RecentActivtyHomepageWidgetViewModel
-    @ScaledMetric var scale: CGFloat = 1
     var body: some View {
         if viewModel.recentActivities.isEmpty {
             VStack(alignment: .leading) {
@@ -35,10 +35,11 @@ struct RecentActivityWidget: View {
                         }
                     )
                 }
-            }.padding(.top)
+            }
+            .padding(.top)
             .padding(.horizontal)
             VStack {
-                    ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
+                ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
                         RecentActivityItemCard(
                             model: viewModel.recentActivities[index],
                             postitionInList: index,
@@ -49,9 +50,9 @@ struct RecentActivityWidget: View {
                         .padding([.top], index == 0 ? 8: 0)
                     }
                 }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
-                    .roundedBorder(borderColor: .clear)
-                    .padding(.horizontal)
-                    .padding(.top, 8)
+                .roundedBorder(borderColor: .clear)
+                .padding(.horizontal)
+                .padding(.top, 8)
             }
         }
     }

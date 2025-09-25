@@ -165,5 +165,7 @@ final class LocalAuthenticationService: LocalAuthenticationServiceInterface {
     func clear() {
         userDefaultsService.set(nil, forKey: .localAuthenticationOnboardingSeen)
         userDefaultsService.set(nil, forKey: .biometricsPolicyState)
+        userDefaultsService.set(nil, forKey: .touchIdEnabled)
+        userDefaultsService.set(nil, forKey: .faceIdSkipped)
     }
 }

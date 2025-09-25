@@ -14,7 +14,6 @@ protocol ChatServiceInterface {
     func clearHistory()
 
     // MARK: - Configuration
-    var chatOnboardingSeen: Bool { get }
     var chatOptedIn: Bool? { get set }
     var chatOptInAvailable: Bool { get }
     var chatTestActive: Bool { get }
@@ -24,7 +23,7 @@ protocol ChatServiceInterface {
     var termsAndConditions: URL { get }
     var about: URL { get }
     var feedback: URL { get }
-    func setChatOnboarded()
+    var chatOnboarded: Bool { get set }
 }
 
 // MARK: - Service
@@ -158,8 +157,16 @@ extension ChatService {
         false
     }
 
-    var chatOnboardingSeen: Bool {
-        userDefaultsService.bool(forKey: .chatOnboardingSeen)
+    var chatOnboarded: Bool {
+        get {
+            userDefaultsService.bool(forKey: .chatOnboardingSeen)
+        } set {
+            if newValue {
+                userDefaultsService.set(bool: newValue, forKey: .chatOnboardingSeen)
+            } else {
+                userDefaultsService.removeObject(forKey: .chatOnboardingSeen)
+            }
+        }
     }
 
     var chatOptedIn: Bool? {
@@ -188,9 +195,5 @@ extension ChatService {
 
     var feedback: URL {
         configService.chatUrls?.feedback ?? Constants.API.defaultChatFeedbackUrl
-    }
-
-    func setChatOnboarded() {
-        userDefaultsService.set(bool: true, forKey: .chatOnboardingSeen)
     }
 }

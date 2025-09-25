@@ -3,6 +3,8 @@ import Foundation
 @testable import govuk_ios
 
 final class MockChatService: ChatServiceInterface {
+    var chatOnboarded = false
+
     var _stubbedChatTestActive = false
     var chatTestActive: Bool {
         _stubbedChatTestActive
@@ -13,15 +15,6 @@ final class MockChatService: ChatServiceInterface {
     var _stubbedChatOptInAvailable: Bool = false
     var chatOptInAvailable: Bool {
         _stubbedChatOptInAvailable
-    }
-
-    func setChatOnboarded() {
-        _stubbedChatOnboardingSeen = true
-    }
-
-    var _stubbedChatOnboardingSeen = false
-    var chatOnboardingSeen: Bool {
-        _stubbedChatOnboardingSeen
     }
 
     var _stubbedIsEnabled = true

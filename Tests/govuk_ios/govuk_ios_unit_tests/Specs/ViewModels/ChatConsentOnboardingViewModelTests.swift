@@ -27,9 +27,9 @@ struct ChatConsentOnboardingViewModelTests {
                 completionAction: { confirmation() }
             )
 
-            #expect(!mockChatService.chatOnboardingSeen)
+            #expect(!mockChatService.chatOnboarded)
             sut.primaryButtonViewModel.action()
-            #expect(mockChatService.chatOnboardingSeen)
+            #expect(mockChatService.chatOnboarded)
         }
     }
 

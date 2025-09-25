@@ -40,14 +40,14 @@ class ChatCoordinator: TabItemCoordinator {
     }
 
     override func start(url: URL?) {
-        guard chatService.chatOnboardingSeen else { return }
+        guard chatService.chatOnboarded else { return }
 
         setChatViewController()
         isShowingError = false
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
-        if !chatService.chatOnboardingSeen {
+        if !chatService.chatOnboarded {
             showChatOnboarding()
         }
         return deeplinkStore.route(
@@ -76,7 +76,7 @@ class ChatCoordinator: TabItemCoordinator {
     func didReselectTab() { /* To be implemented */ }
     func didSelectTab(_ selectedTabIndex: Int,
                       previousTabIndex: Int) {
-        if !chatService.chatOnboardingSeen {
+        if !chatService.chatOnboarded {
             showChatOnboarding()
         } else if selectedTabIndex != previousTabIndex && isShowingError {
             setChatViewController()

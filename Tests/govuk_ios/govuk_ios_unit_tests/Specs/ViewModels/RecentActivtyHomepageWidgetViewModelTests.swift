@@ -6,9 +6,10 @@ import GOVKit
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
-struct RecentActivityWidgetHomepageViewmodelTests {
+struct RecentActivtyHomepageWidgetViewModelTests {
 
-    @Test func recentActivities_count_isLessOrEqualToThree() async throws {
+    @Test
+    func recentActivities_count_isLessOrEqualToThree() async throws {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockActivityService = MockActivityService()
@@ -48,7 +49,8 @@ struct RecentActivityWidgetHomepageViewmodelTests {
     }
 
 
-    @Test func isLastActivityInList_returnsExpectedResult() async throws {
+    @Test
+    func isLastActivityInList_returnsExpectedResult() async throws {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockActivityService = MockActivityService()

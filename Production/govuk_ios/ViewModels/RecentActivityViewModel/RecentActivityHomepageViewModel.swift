@@ -4,14 +4,26 @@ import UIComponents
 import GOVKit
 
 class RecentActivtyHomepageWidgetViewModel: NSObject,
-                                    ObservableObject,
-                                    NSFetchedResultsControllerDelegate {
+                                            ObservableObject,
+                                            NSFetchedResultsControllerDelegate {
     @Published var recentActivities: [RecentActivityHomepageCell] = []
     private let activityService: ActivityServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     let seeAllAction: () -> Void
+
+    private let fetchRequest = ActivityItem.homepagefetchRequest()
+    private lazy var activitiesFetchResultsController: NSFetchedResultsController = {
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: self.activityService.returnContext(),
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        controller.delegate = self
+        return controller
+    }()
 
     init(urlOpener: URLOpener,
          analyticsService: AnalyticsServiceInterface,
@@ -35,27 +47,24 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
         "recentActivitySeeAllButtonTitle"
     )
     private func setupFetchResultsController() {
-        fetchActivities.delegate = self
-        try? fetchActivities.performFetch()
-        let activities = fetchActivities.fetchedObjects ?? []
+        try? activitiesFetchResultsController.performFetch()
+        let activities = activitiesFetchResultsController.fetchedObjects ?? []
         recentActivities = mapRecentActivities(activities: activities)
     }
 
     func isLastActivityInList(index: Int) -> Bool {
-        return index == recentActivities.count - 1
+        index == recentActivities.count - 1
     }
 
     private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {
-        var mappedActivities = activities.map {
-            RecentActivityHomepageCell(
-                title: $0.title,
-                lastVisitedString: lastVisitedString(activity: $0)
-            )
-        }
-        for (index, value) in mappedActivities.enumerated() where index > 2 {
-            mappedActivities.remove(at: index)
-        }
-        return mappedActivities
+        activities
+            .prefix(fetchRequest.fetchLimit)
+            .map {
+                RecentActivityHomepageCell(
+                    title: $0.title,
+                    lastVisitedString: lastVisitedString(activity: $0)
+                )
+            }
     }
 
     private func lastVisitedString(activity: ActivityItem) -> String {
@@ -66,19 +75,9 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
         return "\(copy) \(formattedDateString)"
     }
 
-    lazy var fetchActivities: NSFetchedResultsController = {
-        let controller = NSFetchedResultsController(
-            fetchRequest: ActivityItem.homepagefetchRequest(),
-            managedObjectContext: self.activityService.returnContext(),
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-        return controller
-    }()
-
     func controllerDidChangeContent(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            let activities =  fetchActivities.fetchedObjects ?? []
+            let activities =  activitiesFetchResultsController.fetchedObjects ?? []
             recentActivities = mapRecentActivities(activities: activities)
         }
 }

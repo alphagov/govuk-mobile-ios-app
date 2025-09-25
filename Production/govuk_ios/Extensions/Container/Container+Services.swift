@@ -76,7 +76,9 @@ extension Container {
         Factory(self) {
             AppConfigService(
                 appConfigServiceClient: self.appConfigServiceClient.resolve(),
-                analyticsService: self.analyticsService.resolve()
+                trackError: { error in
+                    self.analyticsService.resolve().track(error: error)
+                }
             )
         }.scope(.singleton)
     }
@@ -164,7 +166,8 @@ extension Container {
     var localAuthenticationService: Factory<LocalAuthenticationServiceInterface> {
         Factory(self) {
             LocalAuthenticationService(
-                userDefaultsService: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService.resolve(),
+                configService: self.appConfigService.resolve()
             )
         }
     }

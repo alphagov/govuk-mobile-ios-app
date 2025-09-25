@@ -16,7 +16,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
 
     private let appConfigServiceClient: AppConfigServiceClientInterface
-    private let analyticsService: AnalyticsServiceInterface
+    private let trackError: (Error) -> Void
     private var retryInterval: Int?
 
     var chatPollIntervalSeconds: TimeInterval = 3.0
@@ -26,9 +26,9 @@ public final class AppConfigService: AppConfigServiceInterface {
     private(set) var chatUrls: ChatURLs?
 
     init(appConfigServiceClient: AppConfigServiceClientInterface,
-         analyticsService: AnalyticsServiceInterface) {
+         trackError: @escaping (Error) -> Void) {
         self.appConfigServiceClient = appConfigServiceClient
-        self.analyticsService = analyticsService
+        self.trackError = trackError
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {
@@ -45,7 +45,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         case .success(let appConfig):
             setConfig(appConfig.config)
         case .failure(let error):
-            analyticsService.track(error: error)
+            trackError(error)
         }
     }
 

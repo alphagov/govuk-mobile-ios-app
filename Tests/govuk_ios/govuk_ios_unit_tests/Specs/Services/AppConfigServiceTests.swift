@@ -6,7 +6,7 @@ import Testing
 @testable import GOVKitTestUtilities
 
 @Suite
-struct AppConfigServiceTests {
+class AppConfigServiceTests {
     private var sut: AppConfigService!
     private var mockAppConfigServiceClient: MockAppConfigServiceClient!
     private var mockAnalyticsService: MockAnalyticsService!
@@ -16,7 +16,9 @@ struct AppConfigServiceTests {
         mockAnalyticsService = MockAnalyticsService()
         sut = AppConfigService(
             appConfigServiceClient: mockAppConfigServiceClient,
-            analyticsService: mockAnalyticsService
+            trackError: { error in
+                self.mockAnalyticsService._trackErrorReceivedErrors = [error]
+            }
         )
     }
 

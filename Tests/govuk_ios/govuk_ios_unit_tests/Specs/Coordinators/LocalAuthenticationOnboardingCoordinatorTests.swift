@@ -11,6 +11,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
+        mockLocalAuthenticationService._stubbedIsEnabled = true
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             userDefaultsService: mockUserDefaultsService,
@@ -26,11 +27,36 @@ class LocalAuthenticationOnboardingCoordinatorTests {
     }
 
     @Test @MainActor
+    func start_featureDisabled_callsCompletion() async {
+        let mockUserDefaultsService = MockUserDefaultsService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        let mockNavigationController = MockNavigationController()
+        let mockAuthenticationService = MockAuthenticationService()
+        mockLocalAuthenticationService._stubbedIsEnabled = false
+        let completion = await withCheckedContinuation { continuation in
+            let sut = LocalAuthenticationOnboardingCoordinator(
+                navigationController: mockNavigationController,
+                userDefaultsService: mockUserDefaultsService,
+                localAuthenticationService: mockLocalAuthenticationService,
+                authenticationService: mockAuthenticationService,
+                completionAction: { continuation.resume(returning: true) }
+            )
+            mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
+            mockLocalAuthenticationService._stubbedCanEvaluateBiometricsPolicy = true
+            sut.start(url: nil)
+        }
+
+        #expect(completion)
+        #expect(!mockAuthenticationService._encryptRefreshTokenCallSuccess)
+    }
+
+    @Test @MainActor
     func start_touchIDEnrolled_setsOnboarding() {
         let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
+        mockLocalAuthenticationService._stubbedIsEnabled = true
         let sut = LocalAuthenticationOnboardingCoordinator(
             navigationController: mockNavigationController,
             userDefaultsService: mockUserDefaults,
@@ -52,6 +78,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .passcodeOnly
+        mockLocalAuthenticationService._stubbedIsEnabled = true
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
@@ -74,6 +101,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockNavigationController = MockNavigationController()
         let mockAuthenticationService = MockAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .none
+        mockLocalAuthenticationService._stubbedIsEnabled = true
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,
@@ -99,6 +127,7 @@ class LocalAuthenticationOnboardingCoordinatorTests {
         let mockAuthenticationService = MockAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
+        mockLocalAuthenticationService._stubbedIsEnabled = true
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingCoordinator(
                 navigationController: mockNavigationController,

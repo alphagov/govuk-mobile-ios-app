@@ -11,4 +11,5 @@ enum Feature: String {
     case chat
     case chatOptIn
     case chatTestActive
+    case localAuthentication
 }

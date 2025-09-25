@@ -1,5 +1,4 @@
 import SwiftUI
-import CoreData
 import GOVKit
 
 struct RecentActivityWidget: View {

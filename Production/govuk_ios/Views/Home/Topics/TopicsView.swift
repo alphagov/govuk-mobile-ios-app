@@ -37,7 +37,7 @@ struct TopicsView: View {
                         action: {
                             showingEditScreen.toggle()
                         }, label: {
-                            Text(viewModel.showAllButtonsTitle)
+                            Text(viewModel.editButtonTitle)
                                 .foregroundColor(Color(UIColor.govUK.text.link))
                                 .font(Font.govUK.subheadlineSemibold)
                         }

@@ -47,7 +47,7 @@ struct HomeViewModelTests {
         let widgets = subject.widgets
 
         #expect((widgets as Any) is [HomepageWidget])
-        #expect(widgets.count == 1)
+        #expect(widgets.count == 2)
     }
 
     @Test

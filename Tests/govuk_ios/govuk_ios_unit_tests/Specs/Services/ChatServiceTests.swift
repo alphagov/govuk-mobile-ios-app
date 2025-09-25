@@ -381,7 +381,7 @@ final class ChatServiceTests {
     }
 
     @Test
-    func chatOnboarded_setFalse_returnsTrue() {
+    func chatOnboarded_setFalse_returnsFalse() {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,

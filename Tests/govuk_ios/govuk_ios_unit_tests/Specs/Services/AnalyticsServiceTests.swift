@@ -258,7 +258,7 @@ struct AnalyticsServiceTests {
 
         subject.resetConsent()
 
-        #expect(mockUserDefaults.value(forKey: .acceptedAnalytics) != nil)
+        #expect(mockUserDefaults.value(forKey: .acceptedAnalytics) == nil)
     }
 
     @Test

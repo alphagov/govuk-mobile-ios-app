@@ -3,7 +3,6 @@ import SwiftUI
 
 struct RecentActivityItemCard: View {
     let model: RecentActivityHomepageCell
-    let postitionInList: Int
     let isLastItemInList: Bool
     var body: some View {
         VStack {

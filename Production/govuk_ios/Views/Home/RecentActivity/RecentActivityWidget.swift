@@ -1,5 +1,4 @@
 import SwiftUI
-import GOVKit
 
 struct RecentActivityWidget: View {
     @ObservedObject var viewModel: RecentActivtyHomepageWidgetViewModel

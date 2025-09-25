@@ -367,7 +367,7 @@ final class ChatServiceTests {
     }
 
     @Test
-    func setChatOnboarded_updatesChatOnboardingSeen_returnsTrue() {
+    func chatOnboarded_setTrue_returnsTrue() {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
@@ -375,9 +375,40 @@ final class ChatServiceTests {
             userDefaultsService: mockUserDefaultsService
         )
 
-        #expect(!sut.chatOnboardingSeen)
-        sut.setChatOnboarded()
-        #expect(sut.chatOnboardingSeen)
+        #expect(!sut.chatOnboarded)
+        sut.chatOnboarded = true
+        #expect(sut.chatOnboarded)
+    }
+
+    @Test
+    func chatOnboarded_setFalse_returnsFalse() {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        sut.chatOnboarded = true
+        #expect(sut.chatOnboarded)
+        sut.chatOnboarded = false
+        #expect(!sut.chatOnboarded)
+    }
+
+    @Test
+    func clear_resetsChatValues() {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        sut.chatOnboarded = true
+        sut.chatOptedIn = true
+        sut.clear()
+        #expect(!sut.chatOnboarded)
+        #expect(sut.chatOptedIn == nil)
     }
 
     @Test

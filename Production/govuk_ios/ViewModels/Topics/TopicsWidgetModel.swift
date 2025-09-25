@@ -15,10 +15,11 @@ final class TopicsWidgetViewModel: ObservableObject {
     @Published var fetchTopicsError = false
     @Published var showAllTopicsButton = false
     @Published var topicsToBeDisplayed: [Topic] = []
-    private let showAllButtonsTitle = String.topics.localized(
+    let showAllButtonsTitle = String.topics.localized(
         "seeAllTopicsButtonText"
     )
     @Published var showingEditScreen: Bool = false
+    let editButtonTitle = String.common.localized("editButtonTitle")
 
 
     init(topicsService: TopicsServiceInterface,
@@ -65,15 +66,6 @@ final class TopicsWidgetViewModel: ObservableObject {
             localisedTitle: showAllButtonsTitle,
             action: { [weak self] in
                 self?.allTopicsAction()
-            }
-        )
-    }
-
-    var editButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.common.localized("editButtonTitle"),
-            action: { [weak self] in
-                self?.showingEditScreen.toggle()
             }
         )
     }

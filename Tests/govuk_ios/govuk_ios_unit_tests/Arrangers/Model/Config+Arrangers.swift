@@ -23,7 +23,19 @@ extension Config {
             lastUpdated: lastUpdated,
             searchApiUrl: searchApiUrl,
             authenticationIssuerBaseUrl: authenticationIssuerBaseUrl,
-            chatPollIntervalSeconds: chatPollIntervalSeconds
+            chatPollIntervalSeconds: chatPollIntervalSeconds,
+            alertBanner: .init(id: "1234", body: "test", link: nil),
+            userFeedbackBanner: .init(body: "test",
+                                      link: UserFeedbackBanner.Link(
+                                        title: "test",
+                                        url: URL(string: "https://test.com")!)
+                                     ),
+            chatUrls: ChatURLs(
+                termsAndConditions: URL(string: "https://example.com"),
+                privacyNotice: URL(string: "https://example.com"),
+                about: URL(string: "https://example.com"),
+                feedback: URL(string: "https://example.com")
+            )
         )
     }
 }

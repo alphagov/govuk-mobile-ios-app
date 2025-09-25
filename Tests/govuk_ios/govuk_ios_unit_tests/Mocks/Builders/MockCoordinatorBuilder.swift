@@ -78,7 +78,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedChatCoordinator: TabItemCoordinator?
-    override var chat: any TabItemCoordinator {
+    override func chat(cancelOnboardingAction: @escaping () -> Void) -> TabItemCoordinator {
         return _stubbedChatCoordinator ??
         MockBaseCoordinator(
             navigationController: .init()
@@ -251,5 +251,59 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         _receivedSafariCoordinatorURL = url
         _receivedSafariCoordinatorFullScreen = fullScreen
         return _stubbedSafariCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedEditLocalAuthorityCoordinator: MockBaseCoordinator?
+    override func editLocalAuthority(navigationController: UINavigationController,
+                                     dismissAction: @escaping () -> Void) -> BaseCoordinator {
+        return _stubbedEditLocalAuthorityCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedRecentActivityCoordinator: MockBaseCoordinator?
+    override func recentActivity(navigationController: UINavigationController) -> BaseCoordinator {
+        return _stubbedRecentActivityCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedAllTopicsCoordinator: MockBaseCoordinator?
+    override func allTopics(navigationController: UINavigationController) -> BaseCoordinator {
+        return _stubbedAllTopicsCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedChatOffboardingCompletion: (() -> Void)?
+    var _stubbedChatOffboardingCoordinator: MockBaseCoordinator?
+    override func chatOffboarding(navigationController: UINavigationController,
+                                  completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedChatOffboardingCompletion = completionAction
+        return _stubbedChatOffboardingCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedChatOptInCompletion: (() -> Void)?
+    var _stubbedChatOptInCoordinator: MockBaseCoordinator?
+    override func chatOptIn(navigationController: UINavigationController,
+                            completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedChatOptInCompletion = completionAction
+        return _stubbedChatOptInCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedChatInfoOnboardingCompletion: ((Bool) -> Void)?
+    var _stubbedChatInfoOnboardingCoordinator: MockBaseCoordinator?
+    override func chatInfoOnboarding(cancelOnboardingAction: @escaping () -> Void,
+                                     setChatViewControllerAction: @escaping (Bool) -> Void) -> BaseCoordinator {
+        _receivedChatInfoOnboardingCompletion = setChatViewControllerAction
+        return _stubbedChatInfoOnboardingCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _receivedChatConsentOnboardingCompletion: (() -> Void)?
+    var _stubbedChatConsentOnboardingCoordinator: MockBaseCoordinator?
+    override func chatConsentOnboarding(navigationController: UINavigationController,
+                                        cancelOnboardingAction: @escaping () -> Void,
+                                        completionAction: @escaping () -> Void) -> BaseCoordinator {
+        _receivedChatConsentOnboardingCompletion = completionAction
+        return _stubbedChatConsentOnboardingCoordinator ?? MockBaseCoordinator()
+    }
+
+    var _stubbedWebViewCoordinator: MockBaseCoordinator?
+    override func webView(url: URL) -> BaseCoordinator {
+        _stubbedWebViewCoordinator ?? MockBaseCoordinator()
     }
 }

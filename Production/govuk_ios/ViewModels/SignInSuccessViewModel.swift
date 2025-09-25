@@ -10,20 +10,20 @@ final class SignInSuccessViewModel: InfoViewModelInterface {
         self.completion = completion
     }
 
+    var analyticsService: AnalyticsServiceInterface? { nil }
+    var trackingName: String { "" }
+    var trackingTitle: String { "" }
+
     var title: String {
         String.onboarding.localized("successfulSignInTitle")
     }
 
-    var subtitle: String {
-        ""
-    }
-
-    var buttonTitle: String {
+    var primaryButtonTitle: String {
         String.common.localized("continue")
     }
 
-    var buttonViewModel: GOVUKButton.ButtonViewModel {
-        let localTitle = buttonTitle
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
+        let localTitle = primaryButtonTitle
         return .init(
             localisedTitle: localTitle,
             action: { [weak self] in
@@ -37,10 +37,6 @@ final class SignInSuccessViewModel: InfoViewModelInterface {
             Image(decorative: "sign_in_success")
                 .padding(.bottom, 16)
         )
-    }
-
-    var showImageWhenCompact: Bool {
-        false
     }
 
     var subtitleFont: Font {

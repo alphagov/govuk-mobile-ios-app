@@ -5,7 +5,11 @@ import GOVKit
 @testable import govuk_ios
 
 class MockActivityService: ActivityServiceInterface {
-    
+    let coreData = CoreDataRepository.arrangeAndLoad
+    func returnContext() -> NSManagedObjectContext {
+        return coreData.viewContext
+    }
+
     var _receivedSaveActivity: ActivityItemCreateParams?
     func save(activity: ActivityItemCreateParams) {
         _receivedSaveActivity = activity

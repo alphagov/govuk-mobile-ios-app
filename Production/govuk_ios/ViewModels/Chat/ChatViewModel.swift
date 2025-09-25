@@ -8,7 +8,7 @@ class ChatViewModel: ObservableObject {
     let maxCharacters = 300
     private let openURLAction: (URL) -> Void
     private let handleError: (ChatError) -> Void
-    private var requestInFlight: Bool = false
+    private var shouldLoadHistory: Bool = true
 
     @Published var cellModels: [ChatCellViewModel] = []
     @Published var latestQuestion: String = ""
@@ -17,6 +17,21 @@ class ChatViewModel: ObservableObject {
     @Published var latestQuestionID: String = ""
     @Published var errorText: String?
     @Published var textViewHeight: CGFloat = 50.0
+    @Published var requestInFlight: Bool = false
+
+    var absoluteRemainingCharacters: Int {
+        abs(maxCharacters - latestQuestion.count)
+    }
+
+    var shouldDisableSend: Bool {
+        latestQuestion.isEmpty ||
+        (latestQuestion.count > maxCharacters) ||
+        requestInFlight
+    }
+
+    var currentConversationExists: Bool {
+        chatService.currentConversationId != nil
+    }
 
     init(chatService: ChatServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -36,15 +51,16 @@ class ChatViewModel: ObservableObject {
             completion?(false)
             return
         }
+        trackAskQuestionSubmission()
         errorText = nil
         cellModels.append(.loadingQuestion)
         scrollToBottom = true
         requestInFlight = true
         chatService.askQuestion(localQuestion) { [weak self] result in
-            self?.cellModels.removeLast()
             self?.requestInFlight = false
             switch result {
             case .success(let pendingQuestion):
+                self?.cellModels.removeAll(where: { $0.id == ChatCellViewModel.loadingQuestion.id })
                 let cellModel = ChatCellViewModel(question: pendingQuestion)
                 self?.cellModels.append(cellModel)
                 self?.latestQuestionID = pendingQuestion.id
@@ -56,7 +72,7 @@ class ChatViewModel: ObservableObject {
                 if error == .validationError {
                     self?.errorText = String.chat.localized("validationErrorText")
                 } else {
-                    self?.handleError(error)
+                    self?.processError(error)
                     self?.latestQuestion = ""
                 }
                 completion?(false)
@@ -64,27 +80,33 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-    func pollForAnswer(_ question: PendingQuestion) {
+    private func pollForAnswer(_ question: PendingQuestion) {
         requestInFlight = true
         cellModels.append(.gettingAnswer)
         chatService.pollForAnswer(question) { [weak self] result in
-            self?.cellModels.removeLast()
-            self?.requestInFlight = false
+            guard let self else { return }
+            cellModels.removeAll(where: { $0.id == ChatCellViewModel.gettingAnswer.id })
+            requestInFlight = false
             switch result {
             case .success(let answer):
                 let cellModel = ChatCellViewModel(
                     answer: answer,
-                    openURLAction: self?.openURLAction
+                    openURLAction: openURLAction,
+                    analyticsService: analyticsService
                 )
-                self?.scrollToTop = true
-                self?.cellModels.append(cellModel)
+                scrollToTop = true
+                cellModels.append(cellModel)
             case .failure(let error):
-                self?.handleError(error)
+                processError(error)
             }
+            trackAnswerResponse()
         }
     }
 
     func loadHistory() {
+        guard shouldLoadHistory else {
+            return
+        }
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
             appendIntroMessages()
@@ -97,30 +119,22 @@ class ChatViewModel: ObservableObject {
             self?.requestInFlight = false
             switch result {
             case .success(let answers):
+                self?.shouldLoadHistory = false
                 self?.handleHistoryResponse(answers)
             case .failure(let error):
                 if error == .pageNotFound {
                     self?.chatService.clearHistory()
                 } else {
-                    self?.handleError(error)
+                    self?.processError(error)
                 }
             }
             self?.scrollToBottom = true
         }
     }
 
-    var absoluteRemainingCharacters: Int {
-        abs(maxCharacters - latestQuestion.count)
-    }
-
-    var shouldDisableSend: Bool {
-        latestQuestion.isEmpty ||
-        (latestQuestion.count > maxCharacters) ||
-        requestInFlight
-    }
-
-    var currentConversationExists: Bool {
-        chatService.currentConversationId != nil
+    private func processError(_ error: ChatError) {
+        shouldLoadHistory = error != .authenticationError
+        handleError(error)
     }
 
     private func appendIntroMessages() {
@@ -150,7 +164,8 @@ class ChatViewModel: ObservableObject {
             cellModels.append(question)
             let answer = ChatCellViewModel(
                 answer: answeredQuestion.answer,
-                openURLAction: openURLAction
+                openURLAction: openURLAction,
+                analyticsService: analyticsService
             )
             cellModels.append(answer)
         }
@@ -173,6 +188,68 @@ class ChatViewModel: ObservableObject {
     }
 
     func openAboutURL() {
-        openURLAction(Constants.API.govukBaseUrl)
+        trackMenuTap(String.chat.localized("aboutMenuTitle"))
+        openURLAction(chatService.about)
+    }
+
+    func openPrivacyURL() {
+        trackMenuTap(String.chat.localized("privacyMenuTitle"))
+        openURLAction(chatService.privacyPolicy)
+    }
+
+    func openFeedbackURL() {
+        trackMenuTap(String.chat.localized("feedbackMenuTitle"))
+        openURLAction(chatService.feedback)
+    }
+
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
+    func trackMenuClearChatTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearMenuTitle"),
+            action: "Clear Chat Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuClearChatConfirmTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearAlertConfirmTitle"),
+            action: "Clear Chat Yes Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    func trackMenuClearChatDenyTap() {
+        let event = AppEvent.chatActionButtonFunction(
+            text: String.chat.localized("clearAlertDenyTitle"),
+            action: "Clear Chat No Tapped"
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackMenuTap(_ itemTitle: String) {
+        let event = AppEvent.buttonNavigation(
+            text: itemTitle,
+            external: true
+        )
+        analyticsService.track(event: event)
+    }
+
+    private func trackAskQuestionSubmission() {
+        let event = AppEvent.chatAskQuestion()
+        analyticsService.track(event: event)
+    }
+
+    private func trackAnswerResponse() {
+        let event = AppEvent.function(
+            text: "Chat Question Answer Returned",
+            type: "ChatQuestionAnswerReturned",
+            section: "Chat",
+            action: "Chat Question Answer Returned"
+        )
+        analyticsService.track(event: event)
     }
 }

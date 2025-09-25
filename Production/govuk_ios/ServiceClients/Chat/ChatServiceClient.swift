@@ -22,13 +22,17 @@ enum ChatError: LocalizedError {
     case apiUnavailable
     case decodingError
     case validationError
+    case authenticationError
 }
 
 struct ChatServiceClient: ChatServiceClientInterface {
     private let serviceClient: APIServiceClientInterface
+    private let authenticationService: AuthenticationServiceInterface
 
-    init(serviceClient: APIServiceClientInterface) {
+    init(serviceClient: APIServiceClientInterface,
+         authenticationService: AuthenticationServiceInterface) {
         self.serviceClient = serviceClient
+        self.authenticationService = authenticationService
     }
 
     func askQuestion(_ question: String,
@@ -36,7 +40,8 @@ struct ChatServiceClient: ChatServiceClientInterface {
                      completion: @escaping (ChatQuestionResult) -> Void) {
         let request = GOVRequest.askQuestion(
             question,
-            conversationId: conversationId
+            conversationId: conversationId,
+            accessToken: authenticationService.accessToken
         )
         serviceClient.send(request: request) {
             completion(mapResult($0))
@@ -48,7 +53,8 @@ struct ChatServiceClient: ChatServiceClientInterface {
                      completion: @escaping (ChatAnswerResult) -> Void) {
         let request = GOVRequest.getAnswer(
             conversationId: conversationId,
-            questionId: questionId
+            questionId: questionId,
+            accessToken: authenticationService.accessToken
         )
         serviceClient.send(request: request) {
             completion(mapResult($0))
@@ -57,7 +63,10 @@ struct ChatServiceClient: ChatServiceClientInterface {
 
     func fetchHistory(conversationId: String,
                       completion: @escaping (ChatHistoryResult) -> Void) {
-        let request = GOVRequest.getChatHistory(conversationId: conversationId)
+        let request = GOVRequest.getChatHistory(
+            conversationId: conversationId,
+            accessToken: authenticationService.accessToken
+        )
         serviceClient.send(request: request) {
             completion(mapResult($0))
         }

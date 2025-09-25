@@ -9,12 +9,12 @@ import LocalAuthentication
 struct LocalAuthenticationOnboardingViewModelTests {
     @Test
     func updateBiometryType_forTouchID_setsCorrectValues() {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaultsService = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingViewModel(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaultsService,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -27,12 +27,12 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func updateBiometryType_forFaceID_setsCorrectValues() {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let sut = LocalAuthenticationOnboardingViewModel(
-            userDefaults: mockUserDefaults,
+            userDefaultsService: mockUserDefaults,
             localAuthenticationService: mockLocalAuthenticationService,
             authenticationService: mockAuthenticationService,
             completionAction: { }
@@ -46,13 +46,13 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func enrolButtonViewModel_faceID_action_completesEnrolment() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -68,13 +68,13 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func enrolButtonViewModel_touchID_action_completesEnrolment() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -90,14 +90,14 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func enrolButtonViewModel_userCancels_action_setsNoLocalAuth() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         mockLocalAuthenticationService._stubbedEvaluatePolicyResult = (false, LAError(.userCancel))
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -113,13 +113,13 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func skipButtonViewModel_faceId_action_callsCompletion() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }
@@ -135,13 +135,13 @@ struct LocalAuthenticationOnboardingViewModelTests {
 
     @Test
     func skipButtonViewModel_touchId_action_callsCompletion() async {
-        let mockUserDefaults = MockUserDefaults()
+        let mockUserDefaults = MockUserDefaultsService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .touchID
         let mockAuthenticationService = MockAuthenticationService()
         let completion = await withCheckedContinuation { continuation in
             let sut = LocalAuthenticationOnboardingViewModel(
-                userDefaults: mockUserDefaults,
+                userDefaultsService: mockUserDefaults,
                 localAuthenticationService: mockLocalAuthenticationService,
                 authenticationService: mockAuthenticationService,
                 completionAction: { continuation.resume(returning: true) }

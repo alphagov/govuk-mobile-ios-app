@@ -8,6 +8,7 @@ import SecureStore
 import Firebase
 import FirebaseCrashlytics
 import FirebaseAppCheck
+import OneSignalFramework
 
 extension Container {
     var activityService: Factory<ActivityServiceInterface> {
@@ -55,7 +56,7 @@ extension Container {
                     ),
                     CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
                 ],
-                userDefaults: UserDefaults.standard,
+                userDefaultsService: self.userDefaultsService(),
                 authenticationService: self.authenticationService.resolve()
             )
         }
@@ -88,7 +89,7 @@ extension Container {
                 topicsServiceClient: self.topicsServiceClient(),
                 topicsRepository: self.topicsRepository(),
                 analyticsService: self.analyticsService(),
-                userDefaults: UserDefaults.standard
+                userDefaultsService: self.userDefaultsService()
             )
         }
     }
@@ -110,7 +111,8 @@ extension Container {
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current(),
                 configService: self.appConfigService.resolve(),
-                userDefaults: UserDefaults.standard
+                userDefaultsService: self.userDefaultsService(),
+                oneSignalServiceClient: OneSignal.self
             )
         }
     }
@@ -118,7 +120,7 @@ extension Container {
     var notificationsOnboardingService: Factory<NotificationsOnboardingServiceInterface> {
         Factory(self) {
             NotificationsOnboardingService(
-                userDefaults: UserDefaults.standard
+                userDefaultsService: self.userDefaultsService()
             )
         }
     }
@@ -130,7 +132,7 @@ extension Container {
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
                 returningUserService: self.returningUserService.resolve(),
-                userDefaults: UserDefaults.standard
+                userDefaultsService: self.userDefaultsService()
             )
         }.scope(.singleton)
     }
@@ -164,7 +166,7 @@ extension Container {
     var localAuthenticationService: Factory<LocalAuthenticationServiceInterface> {
         Factory(self) {
             LocalAuthenticationService(
-                userDefaults: UserDefaults.standard
+                userDefaultsService: self.userDefaultsService()
             )
         }
     }
@@ -202,12 +204,14 @@ extension Container {
         }
     }
 
+    @MainActor
     var chatService: Factory<ChatServiceInterface> {
         Factory(self) {
             ChatService(
                 serviceClient: self.chatServiceClient.resolve(),
                 chatRepository: self.chatRepository.resolve(),
-                configService: self.appConfigService.resolve()
+                configService: self.appConfigService.resolve(),
+                userDefaultsService: self.userDefaultsService.resolve()
             )
         }
     }
@@ -218,5 +222,11 @@ extension Container {
                 urlOpener: UIApplication.shared
             )
         }
+    }
+
+    var userDefaultsService: Factory<UserDefaultsServiceInterface> {
+        Factory(self) {
+            UserDefaultsService(userDefaults: .standard)
+        }.scope(.singleton)
     }
 }

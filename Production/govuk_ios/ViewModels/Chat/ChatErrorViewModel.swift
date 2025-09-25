@@ -6,9 +6,12 @@ import SwiftUI
 final class ChatErrorViewModel: InfoViewModelInterface {
     private let action: () -> Void
     private let error: ChatError
+    var analyticsService: AnalyticsServiceInterface?
 
-    init(error: ChatError,
+    init(analyticsService: AnalyticsServiceInterface,
+         error: ChatError,
          action: @escaping () -> Void) {
+        self.analyticsService = analyticsService
         self.error = error
         self.action = action
     }
@@ -30,7 +33,7 @@ final class ChatErrorViewModel: InfoViewModelInterface {
         }
     }
 
-    var buttonTitle: String {
+    var primaryButtonTitle: String {
         switch error {
         case .networkUnavailable:
             String.common.localized("networkUnavailableButtonTitle")
@@ -41,21 +44,17 @@ final class ChatErrorViewModel: InfoViewModelInterface {
         }
     }
 
-    var buttonViewModel: GOVUKButton.ButtonViewModel {
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         GOVUKButton.ButtonViewModel(
-            localisedTitle: buttonTitle,
+            localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 self?.action()
             }
         )
     }
 
-    var showActionButton: Bool {
+    var showPrimaryButton: Bool {
         error == .pageNotFound || error == .networkUnavailable
-    }
-
-    var showDivider: Bool {
-        false
     }
 
     var image: AnyView {
@@ -64,11 +63,11 @@ final class ChatErrorViewModel: InfoViewModelInterface {
         )
     }
 
-    var showImageWhenCompact: Bool {
-        false
+    var trackingTitle: String {
+        title
     }
 
-    var subtitleFont: Font {
-        Font.govUK.body
+    var trackingName: String {
+        "Chat Error"
     }
 }

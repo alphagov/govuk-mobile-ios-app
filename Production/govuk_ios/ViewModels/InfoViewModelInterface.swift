@@ -5,41 +5,47 @@ import UIComponents
 
 protocol InfoViewModelInterface {
     var analyticsService: AnalyticsServiceInterface? { get }
-    var title: String { get }
-    var subtitle: String { get }
-    var buttonTitle: String { get }
-    var buttonAccessibilityTitle: String { get }
-    var buttonViewModel: GOVUKButton.ButtonViewModel { get }
-    var buttonConfiguration: GOVUKButton.ButtonConfiguration { get }
-    var image: AnyView { get }
     var trackingName: String { get }
     var trackingTitle: String { get }
-    var showImageWhenCompact: Bool { get }
+
+    var navBarHidden: Bool { get }
+
+    var image: AnyView { get }
+
+    var title: String { get }
+    var subtitle: String { get }
     var subtitleFont: Font { get }
-    var showActionButton: Bool { get }
-    var showDivider: Bool { get }
+
+    var bottomContentText: String? { get }
+
+    var showPrimaryButton: Bool { get }
+    var primaryButtonTitle: String { get }
+    var primaryButtonAccessibilityTitle: String { get }
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel { get }
+    var primaryButtonConfiguration: GOVUKButton.ButtonConfiguration { get }
+
+    var secondaryButtonTitle: String { get }
+    var secondaryButtonAccessibilityTitle: String { get }
+    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel? { get }
+    var secondaryButtonConfiguration: GOVUKButton.ButtonConfiguration { get }
 }
 
 extension InfoViewModelInterface {
-    var analyticsService: AnalyticsServiceInterface? { nil }
-    var trackingName: String { "" }
-    var trackingTitle: String { "" }
+    var navBarHidden: Bool { true }
 
-    var buttonConfiguration: GOVUKButton.ButtonConfiguration {
-        .primary
-    }
+    var subtitle: String { "" }
+    var subtitleFont: Font { Font.govUK.body }
 
-    var buttonAccessibilityTitle: String {
-        buttonTitle
-    }
+    var bottomContentText: String? { nil }
 
-    var showActionButton: Bool {
-        true
-    }
+    var showPrimaryButton: Bool { true }
+    var primaryButtonConfiguration: GOVUKButton.ButtonConfiguration { .primary }
+    var primaryButtonAccessibilityTitle: String { primaryButtonTitle }
 
-    var showDivider: Bool {
-        true
-    }
+    var secondaryButtonTitle: String { "" }
+    var secondaryButtonAccessibilityTitle: String { secondaryButtonTitle }
+    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel? { nil }
+    var secondaryButtonConfiguration: GOVUKButton.ButtonConfiguration { .secondary }
 
     func trackScreen(screen: TrackableScreen) {
         if let analyticsService = analyticsService {

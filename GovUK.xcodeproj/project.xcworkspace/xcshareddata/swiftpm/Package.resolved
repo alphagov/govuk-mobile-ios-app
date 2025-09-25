@@ -1,5 +1,5 @@
 {
-  "originHash" : "312eca0287c1cb2dcb7dddf471bcfd7859acdf088da9cb015227847afb14b059",
+  "originHash" : "82f65e5bd63da663f1a352fd1a5c2261768cc1ce0559e1c42eb48e666f938e29",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
-        "branch" : "develop",
-        "revision" : "d74e7c23d41cbfa12ae83de33b5074ef427f59e0"
+        "branch" : "feature/brand-refresh",
+        "revision" : "7613fe650561d8da238fd73f64394767c9d58a0b"
       }
     },
     {
@@ -238,7 +238,7 @@
     {
       "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-cmark",
+      "location" : "https://github.com/swiftlang/swift-cmark.git",
       "state" : {
         "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
         "version" : "0.6.0"

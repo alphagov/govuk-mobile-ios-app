@@ -42,6 +42,33 @@ public struct Constants {
             return components.url!
         }()
 
+        public static let defaultChatPrivacyPolicyUrl: URL = {
+            var components = govukBaseComponents
+            components.path = """
+            /government/publications/govuk-chat-privacy-notice
+            """
+            return components.url!
+        }()
+
+        public static let defaultChatTermsUrl: URL = {
+            var components = govukBaseComponents
+            components.path = """
+            /guidance/govuk-chat-terms-and-conditions
+            """
+            return components.url!
+        }()
+
+        public static let defaultChatAboutUrl: URL = {
+            var components = govukBaseComponents
+            components.path = """
+            /guidance/about-govuk-chat
+            """
+            return components.url!
+        }()
+
+        public static let defaultChatFeedbackUrl: URL =
+        URL(string: "https://surveys.publishing.service.gov.uk/s/SUIEH2/")!
+
         public static let defaultSearchUrl: URL = URL(string: "https://search.service.gov.uk")!
 
         public static var searchSuggestionsPath: String = "/api/search/autocomplete.json"

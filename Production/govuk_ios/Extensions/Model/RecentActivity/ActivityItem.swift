@@ -19,6 +19,20 @@ public class ActivityItem: NSManagedObject,
         return request
     }
 
+    @nonobjc public class func homepagefetchRequest() -> NSFetchRequest<ActivityItem> {
+        let request: NSFetchRequest<ActivityItem> = .init(
+            entityName: "ActivityItem"
+        )
+        request.sortDescriptors = [
+            NSSortDescriptor(
+                keyPath: \ActivityItem.date,
+                ascending: false
+            )
+        ]
+        request.fetchLimit = 3
+        return request
+    }
+
     @NSManaged public var id: String
     @NSManaged public var title: String
     @NSManaged public var date: Date

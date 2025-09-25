@@ -34,6 +34,17 @@
         }
       }
     },
+    "emptyActivityStateTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have not used the app to visit any GOV.UK pages"
+          }
+        }
+      }
+    },
     "recentActivitiesTodaysListTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -96,6 +107,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No pages"
+          }
+        }
+      }
+    },
+    "recentActivitySeeAllButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See All"
           }
         }
       }

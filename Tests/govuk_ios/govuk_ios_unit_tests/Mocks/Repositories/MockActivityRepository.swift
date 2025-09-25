@@ -4,6 +4,11 @@ import CoreData
 @testable import govuk_ios
 
 class MockActivityRepository: ActivityRepositoryInterface {
+    func returnContext() -> NSManagedObjectContext {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        return coreData.viewContext
+    }
+    
 
     var _receivedSaveParams: ActivityItemCreateParams?
     func save(params: ActivityItemCreateParams) {

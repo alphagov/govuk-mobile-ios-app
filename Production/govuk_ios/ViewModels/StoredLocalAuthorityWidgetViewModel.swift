@@ -8,57 +8,24 @@ class StoredLocalAuthorityWidgetViewModel {
     let openEditViewAction: () -> Void
     private let openURLAction: (URL) -> Void
 
-    let twoTierAuthorityDescription: String = String.localAuthority.localized(
-        "storedLocalAuthorityWidgetTwoTierDescription"
+    let title = String.localAuthority.localized(
+        "localServicesTitle"
     )
     let editButtonTitle = String.common.localized(
         "editButtonTitle"
     )
-    let title = String.localAuthority.localized(
-        "localServicesTitle"
-    )
-    let unitaryCardDescription = String.localAuthority.localized(
-        "localAuthorityUnitaryCard"
-    )
-    let localAuthorityCardWebsiteConstant = String.localAuthority.localized(
-        "localAuthorityCardWebsiteConstant"
-    )
-    let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
-        "localAuthorityTwoTierParentDescription"
-    )
-    let localAuthorityTwoTierChildDescription = String.localAuthority.localized(
-        "localAuthorityTwoTierChildDescription"
-    )
-
     let editButtonAltText = String.localAuthority.localized(
         "localAuthorityEditButtonAltText"
     )
-
-    private func returnCardDescription(authority: LocalAuthorityItem) -> String {
-        if authority.parent != nil {
-            return localAuthorityTwoTierChildDescription(
-                councilName: authority.name
-            )
-        } else {
-            return localAuthorityTwoTierParentDescription(
-                councilName: authority.name
-            )
-        }
-    }
-    private func unitaryCardDescription(councilName: String) -> String {
-        return "\(unitaryCardDescription) " +
-        councilName + " \(localAuthorityCardWebsiteConstant)"
-    }
-
-    private func localAuthorityTwoTierParentDescription(councilName: String) -> String {
-        localAuthorityTwoTierParentDescription + councilName +
-        " \(localAuthorityCardWebsiteConstant)"
-    }
-
-    private func localAuthorityTwoTierChildDescription(councilName: String) -> String {
-        localAuthorityTwoTierChildDescription + councilName +
-        " \(localAuthorityCardWebsiteConstant)"
-    }
+    let twoTierAuthorityDescription: String = String.localAuthority.localized(
+        "storedLocalAuthorityWidgetTwoTierDescription"
+    )
+    private let localAuthorityTwoTierParentDescription = String.localAuthority.localized(
+        "localAuthorityTwoTierParentDescription"
+    )
+    private let localAuthorityTwoTierChildDescription = String.localAuthority.localized(
+        "localAuthorityTwoTierChildDescription"
+    )
 
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorities: [LocalAuthorityItem],
@@ -77,18 +44,28 @@ class StoredLocalAuthorityWidgetViewModel {
     }
 
     func cardModels() -> [StoredLocalAuthorityCardModel] {
-        var cardArray: [StoredLocalAuthorityCardModel] = []
-        for localAuthority in localAuthorities {
+        localAuthorities.reduce(into: []) { partialResult, localAuthority in
+            let localAuthorityDescription = localAuthorities.count > 1 ?
+            returnCardDescription(authority: localAuthority) :
+            unitaryCardDescription(authorityName: localAuthority.name)
             let card = StoredLocalAuthorityCardModel(
                 name: localAuthority.name,
                 homepageUrl: localAuthority.homepageUrl,
-                description: localAuthorities.count > 1 ?
-                returnCardDescription(authority: localAuthority) :
-                    unitaryCardDescription(councilName: localAuthority.name)
+                description: localAuthorityDescription
             )
-            cardArray.append(card)
+            partialResult.append(card)
         }
-        return cardArray
+    }
+
+    private func returnCardDescription(authority: LocalAuthorityItem) -> String {
+        authority.parent != nil ?
+        localAuthorityTwoTierChildDescription :
+        localAuthorityTwoTierParentDescription
+    }
+
+    private func unitaryCardDescription(authorityName: String) -> String {
+        let format = String.localAuthority.localized("localAuthorityUnitaryCard")
+        return String.localizedStringWithFormat(format, authorityName)
     }
 
     private func trackNavigationEvent(_ title: String,

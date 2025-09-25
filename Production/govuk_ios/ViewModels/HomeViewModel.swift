@@ -55,7 +55,7 @@ class HomeViewModel: ObservableObject {
     }
 
     var widgets: [HomepageWidget] {
-        let array = [topicsView].compactMap { $0 }
+        let array = [topicsView, recentActivityWidget].compactMap { $0 }
         return array
     }
 
@@ -69,6 +69,23 @@ class HomeViewModel: ObservableObject {
         )
     }
 
+    var recentActivityWidget: HomepageWidget? {
+        guard featureEnabled(.topics)
+        else { return nil }
+        let viewModel = RecentActivtyHomepageWidgetViewModel(
+            urlOpener: urlOpener,
+            analyticsService: analyticsService,
+            activityService: activityService,
+            seeAllAction: { [weak self] in
+                self?.recentActivityAction()
+            }
+        )
+        let view = RecentActivityWidget(viewModel: viewModel)
+        return HomepageWidget(
+            content: view
+        )
+    }
+
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
         analyticsService: analyticsService,
@@ -77,7 +94,6 @@ class HomeViewModel: ObservableObject {
         urlOpener: urlOpener,
         openAction: openAction
     )
-
     private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }

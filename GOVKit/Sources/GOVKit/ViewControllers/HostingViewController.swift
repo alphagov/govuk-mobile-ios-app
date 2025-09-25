@@ -3,14 +3,17 @@ import SwiftUI
 
 public final class HostingViewController<T>: UIHostingController<T> where T: View {
     private let navigationBarHidden: Bool
+    private let navigationBarTintColor: UIColor?
     private let statusBarStyle: UIStatusBarStyle
     public var shouldAutoFocusVoiceover: Bool = true
 
     public init(rootView: T,
                 navigationBarHidden: Bool = false,
+                navigationBarTintColor: UIColor? = nil,
                 statusBarStyle: UIStatusBarStyle = .default) {
         self.navigationBarHidden = navigationBarHidden
         self.statusBarStyle = statusBarStyle
+        self.navigationBarTintColor = navigationBarTintColor
         super.init(rootView: rootView)
     }
 
@@ -23,6 +26,9 @@ public final class HostingViewController<T>: UIHostingController<T> where T: Vie
         super.viewWillAppear(animated)
         guard let navigationController = navigationController else { return }
 
+        if let tintColor = navigationBarTintColor {
+            navigationController.navigationBar.tintColor = tintColor
+        }
         navigationController.setNavigationBarHidden(
             navigationBarHidden,
             animated: animated

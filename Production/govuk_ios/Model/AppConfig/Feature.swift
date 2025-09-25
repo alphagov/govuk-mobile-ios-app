@@ -7,6 +7,8 @@ enum Feature: String {
     case recentActivity
     case localServices
     case externalBrowser
-    case chat
     case notifications
+    case testIntegrationChat
+    case testIntegrationChatOptIn
+    case testIntegrationChatTestActive
 }

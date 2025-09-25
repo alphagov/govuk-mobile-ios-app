@@ -135,32 +135,6 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
-    func editViewModelAction_setsShowingEditScreenToTrue() async {
-        var cancellables = Set<AnyCancellable>()
-        let result = await withCheckedContinuation { continuation in
-            let sut = TopicsWidgetViewModel(
-                topicsService: mockTopicService,
-                analyticsService: MockAnalyticsService(),
-                topicAction: { _ in },
-                allTopicsAction: { }
-            )
-
-            sut.$showingEditScreen
-                .dropFirst()
-                .receive(on: DispatchQueue.main)
-                .sink { value in
-                    continuation.resume(returning: value)
-                    cancellables.removeAll()
-                }.store(in: &cancellables)
-            sut.editButtonViewModel.action()
-        }
-        #expect(result == true)
-
-
-
-    }
-
-    @Test
     func topicsToBeDisplayed_topicsHaveNotBeenEdited_returnsAllTopcis() async {
         var cancellables = Set<AnyCancellable>()
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)

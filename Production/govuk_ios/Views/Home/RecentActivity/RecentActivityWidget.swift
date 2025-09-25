@@ -3,8 +3,6 @@ import CoreData
 import GOVKit
 
 struct RecentActivityWidget: View {
-    @AccessibilityFocusState
-    private var isEditFocused: Bool
     @ObservedObject var viewModel: RecentActivtyHomepageWidgetViewModel
     var body: some View {
         if viewModel.recentActivities.isEmpty {

@@ -13,9 +13,10 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     let seeAllAction: () -> Void
 
+    private let fetchRequest = ActivityItem.homepagefetchRequest()
     private lazy var activitiesFetchResultsController: NSFetchedResultsController = {
         let controller = NSFetchedResultsController(
-            fetchRequest: ActivityItem.homepagefetchRequest(),
+            fetchRequest: fetchRequest,
             managedObjectContext: self.activityService.returnContext(),
             sectionNameKeyPath: nil,
             cacheName: nil
@@ -57,7 +58,7 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
 
     private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {
         activities
-            .prefix(3)
+            .prefix(fetchRequest.fetchLimit)
             .map {
                 RecentActivityHomepageCell(
                     title: $0.title,

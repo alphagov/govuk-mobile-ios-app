@@ -6,7 +6,7 @@ import GOVKit
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
-struct RecentActivityWidgetHomepageViewmodelTests {
+struct RecentActivtyHomepageWidgetViewModelTests {
 
     @Test
     func recentActivities_count_isLessOrEqualToThree() async throws {

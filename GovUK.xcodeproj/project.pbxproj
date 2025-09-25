@@ -1226,13 +1226,6 @@
 			path = Validators;
 			sourceTree = "<group>";
 		};
-		4EE462CA2E734CB50093D380 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		4EE5F3E32DAFD350008C60ED /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
@@ -1586,7 +1579,6 @@
 				5D30CF982C64A64600361C97 /* TestFlight */,
 				5DAD71752BD250DB0075F648 /* Products */,
 				5D1353A92BE0D75000414441 /* Frameworks */,
-				4EE462CA2E734CB50093D380 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};

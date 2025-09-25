@@ -26,9 +26,8 @@ class ViewControllerBuilder {
         let notificationService: NotificationServiceInterface
         let searchService: SearchServiceInterface
         let activityService: ActivityServiceInterface
-        let topicWidgetViewModel: TopicsWidgetViewModel
+        let topicsWidgetViewModel: TopicsWidgetViewModel
         let localAuthorityService: LocalAuthorityServiceInterface
-        let userDefaultService: UserDefaultsServiceInterface
     }
 
     struct HomeActions {
@@ -47,19 +46,18 @@ class ViewControllerBuilder {
             analyticsService: dependencies.analyticsService,
             configService: dependencies.configService,
             notificationService: dependencies.notificationService,
-            topicWidgetViewModel: dependencies.topicWidgetViewModel,
+            topicsWidgetViewModel: dependencies.topicsWidgetViewModel,
+            urlOpener: UIApplication.shared,
+            searchService: dependencies.searchService,
+            activityService: dependencies.activityService,
+            localAuthorityService: dependencies.localAuthorityService,
             localAuthorityAction: actions.localAuthorityAction,
             editLocalAuthorityAction: actions.editLocalAuthorityAction,
             feedbackAction: actions.feedbackAction,
             notificationsAction: actions.notificationsAction,
             recentActivityAction: actions.recentActivityAction,
             openURLAction: actions.openURLAction,
-            openAction: actions.openSearchAction,
-            urlOpener: UIApplication.shared,
-            searchService: dependencies.searchService,
-            activityService: dependencies.activityService,
-            localAuthorityService: dependencies.localAuthorityService,
-            userDefaultService: dependencies.userDefaultService
+            openAction: actions.openSearchAction
         )
         return HomeViewController(
             viewModel: viewModel
@@ -385,21 +383,6 @@ class ViewControllerBuilder {
         return AllTopicsViewController(
             viewModel: viewModel
         )
-    }
-
-    func editTopics(analyticsService: AnalyticsServiceInterface,
-                    topicsService: TopicsServiceInterface,
-                    dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = EditTopicsViewModel(
-            topicsService: topicsService,
-            analyticsService: analyticsService,
-            dismissAction: dismissAction
-        )
-
-        let view = EditTopicsView(
-            viewModel: viewModel
-        )
-        return HostingViewController(rootView: view)
     }
 
     func topicOnboarding(topics: [Topic],

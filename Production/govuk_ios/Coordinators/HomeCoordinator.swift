@@ -56,9 +56,8 @@ class HomeCoordinator: TabItemCoordinator {
             notificationService: notificationService,
             searchService: searchService,
             activityService: activityService,
-            topicWidgetViewModel: topicWidgetViewModel,
-            localAuthorityService: localAuthorityService,
-            userDefaultService: userDefaultService
+            topicsWidgetViewModel: topicWidgetViewModel,
+            localAuthorityService: localAuthorityService
         )
 
         let actions = ViewControllerBuilder.HomeActions(
@@ -168,23 +167,6 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var presentEditTopicsCoordinator: () -> Void {
-        return { [weak self] in
-            self?.trackWidgetNavigation(text: "EditTopics")
-            guard let self = self else { return }
-            self.topicWidgetViewModel.isEditing = true
-            let navigationController = UINavigationController()
-            let coordinator = self.coordinatorBuilder.editTopics(
-                navigationController: navigationController,
-                didDismissAction: {
-                    self.topicWidgetViewModel.isEditing = false
-                    self.root.viewWillReAppear()
-                }
-            )
-            self.present(coordinator)
-        }
-    }
-
     private var presentLocalAuthorityCoordinator: () -> Void {
         return { [weak self] in
             self?.trackWidgetNavigation(text: "Your local services")
@@ -220,7 +202,6 @@ class HomeCoordinator: TabItemCoordinator {
             topicsService: topicsService,
             analyticsService: analyticsService,
             topicAction: startTopicDetailCoordinator,
-            editAction: presentEditTopicsCoordinator,
             allTopicsAction: startAllTopicsCoordinator
         )
     }()

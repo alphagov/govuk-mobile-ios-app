@@ -6,6 +6,7 @@ protocol ActivityRepositoryInterface {
     func fetch() -> NSFetchedResultsController<ActivityItem>
     func save(params: ActivityItemCreateParams)
     func delete(objectIds: [NSManagedObjectID])
+    func returnContext() -> NSManagedObjectContext
 }
 
 struct ActivityRepository: ActivityRepositoryInterface {
@@ -20,6 +21,10 @@ struct ActivityRepository: ActivityRepositoryInterface {
             predicate: nil,
             context: coreData.viewContext
         )
+    }
+
+    func returnContext() -> NSManagedObjectContext {
+        return coreData.backgroundContext
     }
 
     func save(params: ActivityItemCreateParams) {

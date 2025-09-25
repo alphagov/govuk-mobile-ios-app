@@ -11,27 +11,11 @@ struct EditTopicsViewModelTests {
     let mockAnalyticsService = MockAnalyticsService()
 
     @Test
-    func dismissAction_callsDismiss() throws {
-        var dismissActionCalled = false
-        let sut = EditTopicsViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: {
-                dismissActionCalled = true
-            }
-        )
-
-        sut.dismissAction()
-        #expect(dismissActionCalled)
-    }
-
-    @Test
     func init_withTopics_createsSectionsCorrectly() throws {
         mockTopicService._stubbedFetchAllTopics = createTopics()
         let sut = EditTopicsViewModel(
             topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: { }
+            analyticsService: mockAnalyticsService
         )
 
         try #require(sut.sections.count == 1)
@@ -55,8 +39,7 @@ struct EditTopicsViewModelTests {
         mockTopicService._stubbedHasCustomisedTopics = false
         let sut = EditTopicsViewModel(
             topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: { }
+            analyticsService: mockAnalyticsService
         )
         try #require(topics.first?.isFavourite == true)
 
@@ -78,8 +61,7 @@ struct EditTopicsViewModelTests {
         mockTopicService._stubbedHasCustomisedTopics = false
         var sut: EditTopicsViewModel? = EditTopicsViewModel(
             topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            dismissAction: { }
+            analyticsService: mockAnalyticsService
         )
 
         try #require(topics.first?.isFavourite == true)

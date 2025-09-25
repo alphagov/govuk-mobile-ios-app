@@ -253,12 +253,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedSafariCoordinator ?? MockBaseCoordinator()
     }
 
-    var _stubbedEditTopicsCoordinator: MockBaseCoordinator?
-    override func editTopics(navigationController: UINavigationController,
-                             didDismissAction: @escaping () -> Void) -> BaseCoordinator {
-        return _stubbedEditTopicsCoordinator ?? MockBaseCoordinator()
-    }
-
     var _stubbedEditLocalAuthorityCoordinator: MockBaseCoordinator?
     override func editLocalAuthority(navigationController: UINavigationController,
                                      dismissAction: @escaping () -> Void) -> BaseCoordinator {

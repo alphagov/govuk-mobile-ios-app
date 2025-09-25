@@ -64,25 +64,26 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     }
 
     private var titleView: some View {
-        HStack {
-            Text(viewModel.title)
-                .font(.govUK.largeTitleBold)
-                .multilineTextAlignment(.leading)
-                .accessibility(addTraits: .isHeader)
-                .foregroundColor(Color(UIColor.govUK.text.header))
-            Spacer()
+        VStack(spacing: 0) {
+            HStack {
+                Text(viewModel.title)
+                    .font(.govUK.largeTitleBold)
+                    .multilineTextAlignment(.leading)
+                    .accessibility(addTraits: .isHeader)
+                    .foregroundColor(Color(UIColor.govUK.text.header))
+                Spacer()
+            }
+            .padding(.leading, 16)
+            .padding(.bottom, viewModel.description == nil ? 8 : 0)
+            .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
+            if let description = viewModel.description {
+                descriptionView(description: description)
+            }
         }
-        .padding(.leading, 16)
-        .padding(.bottom, 12)
-        .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
     }
 
     private var topicDetails: some View {
         VStack {
-            if let description = viewModel.description {
-                descripitonView(description: description)
-                    .padding(.top, 2)
-            }
             GroupedList(
                 content: viewModel.sections,
                 backgroundColor: UIColor.govUK.fills.surfaceBackground
@@ -92,15 +93,18 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         .background(Color(UIColor.govUK.fills.surfaceBackground))
     }
 
-    private func descripitonView(description: String) -> some View {
+    private func descriptionView(description: String) -> some View {
         HStack {
             Text(description)
-                .font(.govUK.body)
+                .font(.govUK.title3)
+                .foregroundColor(Color(UIColor.govUK.text.header))
                 .multilineTextAlignment(.leading)
-                .padding(.top, 16)
-                .padding(.horizontal, 18)
             Spacer()
         }
+        .padding(.horizontal, 18)
+        .padding(.top, 8)
+        .padding(.bottom, 16)
+        .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
     }
 }
 

@@ -5,6 +5,11 @@ import Foundation
 final class MockChatService: ChatServiceInterface {
     var chatOnboarded = false
 
+    func clear() {
+        chatOnboarded = false
+        chatOptedIn = nil
+    }
+
     var _stubbedChatTestActive = false
     var chatTestActive: Bool {
         _stubbedChatTestActive

@@ -12,6 +12,7 @@ protocol ChatServiceInterface {
     func chatHistory(conversationId: String,
                      completion: @escaping (ChatHistoryResult) -> Void)
     func clearHistory()
+    func clear()
 
     // MARK: - Configuration
     var chatOptedIn: Bool? { get set }
@@ -130,6 +131,11 @@ final class ChatService: ChatServiceInterface {
 
     func clearHistory() {
         setConversationId(nil)
+    }
+
+    func clear() {
+        chatOptedIn = nil
+        chatOnboarded = false
     }
 
     private func setConversationId(_ conversationId: String?) {

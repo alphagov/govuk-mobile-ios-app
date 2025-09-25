@@ -70,9 +70,9 @@ class AuthenticationCoordinator: BaseCoordinator {
 
     private func handleOnboarding(response: AuthenticationServiceResponse) {
         guard !response.returningUser else { return }
-        chatService.chatOptedIn = nil
         topicsService.resetOnboarding()
         localAuthenticationService.clear()
+        chatService.clear()
     }
 
     @MainActor

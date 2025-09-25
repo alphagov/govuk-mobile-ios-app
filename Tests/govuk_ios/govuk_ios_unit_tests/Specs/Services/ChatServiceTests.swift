@@ -396,6 +396,22 @@ final class ChatServiceTests {
     }
 
     @Test
+    func clear_resetsChatValues() {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        sut.chatOnboarded = true
+        sut.chatOptedIn = true
+        sut.clear()
+        #expect(!sut.chatOnboarded)
+        #expect(sut.chatOptedIn == nil)
+    }
+
+    @Test
     func chatOptedIn_updatesChatOptedIn_returnsTrue() {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,

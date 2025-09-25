@@ -20,7 +20,7 @@ struct ChatView: View {
             ZStack {
                 Color(UIColor.govUK.fills.surfaceChatBackground)
                     .edgesIgnoringSafeArea(.all)
-                Image(verticalSizeClass == .compact ?
+                Image(decorative: verticalSizeClass == .compact ?
                       "chat_background_landscape" : "chat_background")
                 .resizable()
                 .opacity(backgroundOpacity)

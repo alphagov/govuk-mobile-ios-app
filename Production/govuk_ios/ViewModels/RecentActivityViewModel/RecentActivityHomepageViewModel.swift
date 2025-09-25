@@ -45,15 +45,6 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
         return index == recentActivities.count - 1
     }
 
-    var showAllButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: String.common.localized(seeAllButtonTitle),
-            action: { [weak self] in
-                self?.seeAllAction()
-            }
-        )
-    }
-
     private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {
         var recentActivities = activities.map {
             RecentActivityHomepageCell(

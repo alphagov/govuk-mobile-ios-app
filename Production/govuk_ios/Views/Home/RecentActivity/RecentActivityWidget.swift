@@ -38,7 +38,6 @@ struct RecentActivityWidget: View {
                 ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
                         RecentActivityItemCard(
                             model: viewModel.recentActivities[index],
-                            postitionInList: index,
                             isLastItemInList: viewModel.isLastActivityInList(
                                 index: index
                             )

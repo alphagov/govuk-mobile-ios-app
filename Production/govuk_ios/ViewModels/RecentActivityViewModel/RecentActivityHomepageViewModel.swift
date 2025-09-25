@@ -38,7 +38,7 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
         fetchActivities.delegate = self
         try? fetchActivities.performFetch()
         let activities = fetchActivities.fetchedObjects ?? []
-        self.recentActivities = mapRecentActivities(activities: activities)
+        recentActivities = mapRecentActivities(activities: activities)
     }
 
     func isLastActivityInList(index: Int) -> Bool {
@@ -46,16 +46,16 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     }
 
     private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {
-        var recentActivities = activities.map {
+        var mappedActivities = activities.map {
             RecentActivityHomepageCell(
                 title: $0.title,
                 lastVisitedString: lastVisitedString(activity: $0)
             )
         }
-        for (index, value) in recentActivities.enumerated() where index > 2 {
-            recentActivities.remove(at: index)
+        for (index, value) in mappedActivities.enumerated() where index > 2 {
+            mappedActivities.remove(at: index)
         }
-        return recentActivities
+        return mappedActivities
     }
 
     private func lastVisitedString(activity: ActivityItem) -> String {
@@ -67,7 +67,7 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     }
 
     lazy var fetchActivities: NSFetchedResultsController = {
-        var controller = NSFetchedResultsController(
+        let controller = NSFetchedResultsController(
             fetchRequest: ActivityItem.homepagefetchRequest(),
             managedObjectContext: self.activityService.returnContext(),
             sectionNameKeyPath: nil,
@@ -79,6 +79,6 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     func controllerDidChangeContent(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             let activities =  fetchActivities.fetchedObjects ?? []
-            self.recentActivities = mapRecentActivities(activities: activities)
+            recentActivities = mapRecentActivities(activities: activities)
         }
 }

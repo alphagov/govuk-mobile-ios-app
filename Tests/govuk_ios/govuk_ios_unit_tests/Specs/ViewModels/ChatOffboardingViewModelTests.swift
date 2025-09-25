@@ -10,7 +10,7 @@ struct ChatOffboardingViewModelTests {
         await confirmation { confirmation in
             let mockChatService = MockChatService()
             mockChatService.chatOptedIn = true
-            mockChatService.chatOnboarded = true
+            mockChatService.chatOnboardingSeen = true
             let sut = ChatOffboardingViewModel(
                 analyticsService: MockAnalyticsService(),
                 chatService: mockChatService,
@@ -19,7 +19,7 @@ struct ChatOffboardingViewModelTests {
 
             sut.primaryButtonViewModel.action()
             #expect(mockChatService.chatOptedIn == nil)
-            #expect(!mockChatService.chatOnboarded)
+            #expect(!mockChatService.chatOnboardingSeen)
         }
     }
 

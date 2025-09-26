@@ -21,7 +21,33 @@ extension Container {
 
     var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
-            self.baseAnalyticsService()
+            AnalyticsService(
+                clients: [
+                    self.firebaseClient.resolve(),
+                    self.crashlyticsClient.resolve()
+                ],
+                userDefaultsService: self.userDefaultsService.resolve(),
+                isSignedIn: {
+                    self.authenticationService.resolve().isSignedIn
+                }
+            )
+        }
+        .scope(.singleton)
+    }
+
+    var firebaseClient: Factory<AnalyticsClient> {
+        Factory(self) {
+            FirebaseClient(
+                firebaseApp: FirebaseApp.self,
+                firebaseAnalytics: Analytics.self,
+                appAttestService: self.appAttestService.resolve()
+            )
+        }
+    }
+
+    var crashlyticsClient: Factory<AnalyticsClient> {
+        Factory(self) {
+            CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
         }
     }
 
@@ -41,26 +67,6 @@ extension Container {
                 repository: self.localAuthorityRepository()
             )
         }
-    }
-
-    private var baseAnalyticsService: Factory<AnalyticsServiceInterface> {
-        Factory(self) {
-            AnalyticsService(
-                clients: [
-                    FirebaseClient(
-                        firebaseApp: FirebaseApp.self,
-                        firebaseAnalytics: Analytics.self,
-                        appAttestService: self.appAttestService()
-                    ),
-                    CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
-                ],
-                userDefaultsService: self.userDefaultsService.resolve(),
-                isSignedIn: {
-                    self.authenticationService.resolve().isSignedIn
-                }
-            )
-        }
-        .scope(.singleton)
     }
 
     @MainActor

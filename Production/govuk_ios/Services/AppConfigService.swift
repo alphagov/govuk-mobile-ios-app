@@ -60,6 +60,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         )
         updateSearch(urlString: config.searchApiUrl)
         updateChatPollInterval(config.chatPollIntervalSeconds)
+        updateTokenExpirySeconds(config.refreshTokenExpirySeconds)
         alertBanner = config.alertBanner
         chatBanner = config.chatBanner
         userFeedbackBanner = config.userFeedbackBanner
@@ -75,11 +76,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     }
 
     private func updateTokenExpirySeconds(_ expiry: Int?) {
-        guard let localExpiry = expiry,
-              localExpiry > 0 else {
-            return
-        }
-        refreshTokenExpirySeconds = localExpiry
+        refreshTokenExpirySeconds = expiry
     }
 
     private func updateSearch(urlString: String?) {

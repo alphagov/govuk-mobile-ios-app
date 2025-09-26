@@ -81,6 +81,48 @@ struct AppConfigServiceTests {
     }
 
     @Test
+    func fetchAppConfig_updatesRefreshTokenExpiry() async throws {
+        let stubbedResult = Config.arrange(refreshTokenExpirySeconds: 5)
+        let result = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                stubbedResult.toResult()
+            )
+        }
+        #expect(try result.get().config.refreshTokenExpirySeconds == stubbedResult.refreshTokenExpirySeconds)
+
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion = nil
+        let stubbedResultTwo = Config.arrange(refreshTokenExpirySeconds: nil)
+        let resultTwo = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                stubbedResultTwo.toResult()
+            )
+        }
+        #expect(try resultTwo.get().config.refreshTokenExpirySeconds == stubbedResultTwo.refreshTokenExpirySeconds)
+
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion = nil
+        let stubbedResultThree = Config.arrange(refreshTokenExpirySeconds: 10)
+        let resultThree = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                stubbedResultThree.toResult()
+            )
+        }
+        #expect(try resultThree.get().config.refreshTokenExpirySeconds == stubbedResultThree.refreshTokenExpirySeconds)
+
+        mockAppConfigServiceClient._receivedFetchAppConfigCompletion = nil
+        let stubbedResultFour = Config.arrange(refreshTokenExpirySeconds: 15)
+        let resultFour = await withCheckedContinuation { continuation in
+            sut.fetchAppConfig(completion: continuation.resume)
+            mockAppConfigServiceClient._receivedFetchAppConfigCompletion?(
+                stubbedResultFour.toResult()
+            )
+        }
+        #expect(try resultFour.get().config.refreshTokenExpirySeconds == stubbedResultFour.refreshTokenExpirySeconds)
+    }
+
+    @Test
     func fetchAppConfig_zeroPollingInterval_setsDefaultValue() async {
         let configResult = Config.arrange(chatPollIntervalSeconds: 0).toResult()
         _ = await withCheckedContinuation { continuation in

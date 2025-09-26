@@ -33,6 +33,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
+    private let appConfigService: AppConfigServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
@@ -61,11 +62,13 @@ class AuthenticationService: AuthenticationServiceInterface {
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
          returningUserService: ReturningUserServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface) {
+         userDefaultsService: UserDefaultsServiceInterface,
+         appConfigService: AppConfigServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
         self.userDefaultsService = userDefaultsService
+        self.appConfigService = appConfigService
     }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult {
@@ -174,9 +177,11 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     private func saveExpiryDate(issueDate: Date?) {
+        guard let expiry = appConfigService.refreshTokenExpirySeconds
+        else { return }
         let date = Calendar.current.date(
             byAdding: .second,
-            value: 601_200,
+            value: expiry,
             to: issueDate ?? .now
         )
         userDefaultsService.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)

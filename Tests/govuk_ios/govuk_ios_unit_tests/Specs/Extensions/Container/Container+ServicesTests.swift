@@ -26,4 +26,18 @@ struct Container_ServicesTests {
         #expect(mockFirebaseClient._trackEventReceivedEvents.count == 0)
     }
 
+    @Test
+    func firebaseClient_returnsExpectedValue() async {
+        let container = Container()
+        container.appAttestService.register { MockAppAttestService() }
+        let client = container.firebaseClient.resolve()
+        #expect(client is FirebaseClient)
+    }
+
+    @Test
+    func crashlyticsClient_returnsExpectedValue() async {
+        let container = Container()
+        let client = container.crashlyticsClient.resolve()
+        #expect(client is CrashlyticsClient)
+    }
 }

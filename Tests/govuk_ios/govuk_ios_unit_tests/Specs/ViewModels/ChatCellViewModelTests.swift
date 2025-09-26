@@ -6,7 +6,7 @@ import GOVKit
 @testable import govuk_ios
 @testable import GOVKitTestUtilities
 
-@Suite
+@Suite(.serialized)
 struct ChatCellViewModelTests {
     @Test
     func openURL_responseLink_opensURLAndTracksEvent() async {

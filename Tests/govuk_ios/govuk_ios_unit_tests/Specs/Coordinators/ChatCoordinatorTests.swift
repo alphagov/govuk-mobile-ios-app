@@ -16,7 +16,7 @@ struct ChatCoordinatorTests {
     @Test
     func start_setsChatViewController() throws {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
@@ -62,7 +62,7 @@ struct ChatCoordinatorTests {
     @Test
     func openChatURL_showsSafariWebView() throws {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockSafariCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
@@ -90,7 +90,7 @@ struct ChatCoordinatorTests {
     @Test
     func networkUnavailable_showsInfoView() throws {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()
@@ -115,7 +115,7 @@ struct ChatCoordinatorTests {
     @Test
     func handleNetworkUnavailableError_showsChatView() throws {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedChatViewController = UIViewController()
@@ -145,7 +145,7 @@ struct ChatCoordinatorTests {
     @Test
     func handlePageNotFoundError_clearsHistory_and_showsChatView() throws {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         mockChatService._clearHistoryCalled = false
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
@@ -177,7 +177,7 @@ struct ChatCoordinatorTests {
     @Test
     func authenticationError_retriesRequest() throws {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockPeriAuthCoordinator = MockBaseCoordinator()
@@ -205,7 +205,7 @@ struct ChatCoordinatorTests {
     @Test
     func second_authenticationError_showsInfoView() throws {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let mockPeriAuthCoordinator = MockBaseCoordinator()
@@ -242,7 +242,7 @@ struct ChatCoordinatorTests {
     @Test
     func didSelectTab_isShowingError_setsChatViewController() {
         let mockChatService = MockChatService()
-        mockChatService.setChatOnboarded()
+        mockChatService.chatOnboardingSeen = true
         let mockCoordinatorBuilder = MockCoordinatorBuilder(container: .init())
         let mockViewControllerBuilder = MockViewControllerBuilder()
         let expectedViewController = UIViewController()

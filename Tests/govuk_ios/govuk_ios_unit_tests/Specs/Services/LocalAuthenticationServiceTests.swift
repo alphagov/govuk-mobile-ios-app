@@ -416,6 +416,8 @@ struct LocalAuthenticationServiceTests {
         let mockUserDefaults = MockUserDefaultsService()
         mockUserDefaults._stub(value: true, key: UserDefaultsKeys.localAuthenticationOnboardingSeen.rawValue)
         mockUserDefaults._stub(value: true, key: UserDefaultsKeys.biometricsPolicyState.rawValue)
+        mockUserDefaults._stub(value: true, key: UserDefaultsKeys.faceIdSkipped.rawValue)
+        mockUserDefaults._stub(value: true, key: UserDefaultsKeys.touchIdEnabled.rawValue)
 
         let sut = LocalAuthenticationService(
             userDefaultsService: mockUserDefaults,
@@ -425,5 +427,7 @@ struct LocalAuthenticationServiceTests {
 
         #expect(mockUserDefaults.value(forKey: .localAuthenticationOnboardingSeen) == nil)
         #expect(mockUserDefaults.value(forKey: .biometricsPolicyState) == nil)
+        #expect(mockUserDefaults.value(forKey: .faceIdSkipped) == nil)
+        #expect(mockUserDefaults.value(forKey: .touchIdEnabled) == nil)
     }
 }

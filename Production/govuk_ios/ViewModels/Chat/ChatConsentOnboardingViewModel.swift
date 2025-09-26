@@ -4,7 +4,7 @@ import UIComponents
 
 class ChatConsentOnboardingViewModel: InfoViewModelInterface {
     var analyticsService: AnalyticsServiceInterface?
-    private let chatService: ChatServiceInterface
+    private var chatService: ChatServiceInterface
     private let cancelOnboardingAction: () -> Void
     private let completionAction: () -> Void
 
@@ -36,7 +36,7 @@ class ChatConsentOnboardingViewModel: InfoViewModelInterface {
         return .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
-                self?.chatService.setChatOnboarded()
+                self?.chatService.chatOnboardingSeen = true
                 self?.completionAction()
                 self?.trackCompletionAction()
             }

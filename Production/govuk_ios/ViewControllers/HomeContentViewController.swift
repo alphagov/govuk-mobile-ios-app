@@ -9,6 +9,8 @@ class HomeContentViewController: BaseViewController,
     private let viewModel: HomeViewModel
     private var cancellables = Set<AnyCancellable>()
 
+    private let threadSafeChatOptedIn: Bool
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +35,7 @@ class HomeContentViewController: BaseViewController,
 
     public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
+        threadSafeChatOptedIn = viewModel.userDefaultService.bool(forKey: .chatOptedIn)
         super.init(analyticsService: viewModel.analyticsService)
         title = String.home.localized("pageTitle")
     }
@@ -113,6 +116,12 @@ class HomeContentViewController: BaseViewController,
 }
 
 extension HomeContentViewController: TrackableScreen {
+    nonisolated var isChatOptedIn: String {
+        threadSafeChatOptedIn ? "chatOptIn" : "chatOptOut"
+    }
     var trackingName: String { "Homepage" }
     var trackingTitle: String? { "Homepage" }
+    var additionalParameters: [String: Any] {
+        ["type": isChatOptedIn]
+    }
 }

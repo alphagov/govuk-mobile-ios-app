@@ -4,6 +4,7 @@ public protocol AnalyticsServiceInterface {
     func launch()
     func track(event: AppEvent)
     func track(screen: TrackableScreen)
+    func track(error: Error)
     func set(userProperty: UserProperty)
     func resetConsent()
 

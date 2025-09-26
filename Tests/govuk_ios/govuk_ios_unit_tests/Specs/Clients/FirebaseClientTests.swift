@@ -155,12 +155,37 @@ struct FirebaseClientTests {
         #expect(mockAnalytics._setUserPropertyReveivedName == expectedName)
         #expect(mockAnalytics._setUserPropertyReveivedValue == expectedValue)
     }
+
+    @Test
+    func trackError_doesNothing() {
+        let mockApp = MockFirebaseApp.self
+        mockApp._clearValues()
+        let mockAnalytics = MockFirebaseAnalytics.self
+        mockAnalytics.clearValues()
+
+        let sut = FirebaseClient(
+            firebaseApp: mockApp,
+            firebaseAnalytics: mockAnalytics,
+            appAttestService: MockAppAttestService()
+        )
+        let error = NSError(domain: "test", code: 1)
+        sut.track(error: error)
+
+        #expect(mockApp._configureCalled == false)
+        #expect(mockAnalytics._setUserPropertyReveivedName == nil)
+        #expect(mockAnalytics._setUserPropertyReveivedValue == nil)
+    }
+
 }
 
 class MockFirebaseApp: FirebaseAppInterface {
     static var _configureCalled: Bool = false
     static func configure() {
         _configureCalled = true
+    }
+
+    static func _clearValues() {
+        _configureCalled = false
     }
 }
 
@@ -169,6 +194,8 @@ class MockFirebaseAnalytics: FirebaseAnalyticsInterface {
         _setAnalyticsCollectionEnabledReveivedEnabled = nil
         _logEventReceivedEventName = nil
         _logEventReceivedEventParameters = nil
+        _setUserPropertyReveivedName = nil
+        _setUserPropertyReveivedValue = nil
     }
 
     static var _setAnalyticsCollectionEnabledReveivedEnabled: Bool?

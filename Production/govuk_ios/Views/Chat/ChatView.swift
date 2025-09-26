@@ -7,7 +7,6 @@ struct ChatView: View {
     @Namespace var bottomID
     @FocusState private var textAreaFocused: Bool
     @State var showClearChatAlert: Bool = false
-    @State private var appearedIntroCells: [String] = []
     @State private var backgroundOpacity = 0.25
     private let introDuration = 0.5
     private let transitionDuration = 0.3
@@ -21,15 +20,13 @@ struct ChatView: View {
             ZStack {
                 Color(UIColor.govUK.fills.surfaceChatBackground)
                     .edgesIgnoringSafeArea(.all)
-                Image(verticalSizeClass == .compact ?
+                Image(decorative: verticalSizeClass == .compact ?
                       "chat_background_landscape" : "chat_background")
                 .resizable()
                 .opacity(backgroundOpacity)
                 .ignoresSafeArea(edges: [.top, .leading, .trailing])
 
                 chatContainerView(geometry.size.height - 32)
-                    .conditionalAnimation(.easeInOut(duration: transitionDuration),
-                                          value: textAreaFocused)
                     .conditionalAnimation(.easeInOut(duration: transitionDuration),
                                           value: viewModel.textViewHeight)
             }
@@ -75,34 +72,9 @@ struct ChatView: View {
                 if !cellModel.isAnswer {
                     Spacer(minLength: cellModel.questionWidth)
                 }
-                chatCellView(cellModel: cellModel)
+                ChatCellView(viewModel: cellModel)
             }
         }
-    }
-
-    private func chatCellView(cellModel: ChatCellViewModel) -> some View {
-        ChatCellView(viewModel: cellModel)
-            .opacity(
-                appearedIntroCells.contains(cellModel.id) ||
-                viewModel.currentConversationExists ? 1 : 0
-            )
-            .animation(.easeIn(duration: introDuration), value: appearedIntroCells)
-            .onAppear {
-                guard !viewModel.currentConversationExists else {
-                    return
-                }
-                let index = viewModel.cellModels.firstIndex {
-                    $0.id == cellModel.id
-                } ?? 0
-                DispatchQueue.main.asyncAfter(
-                    deadline: .now() + Double(index) * 0.7
-                ) {
-                    withAnimation {
-                        appearedIntroCells.insert(cellModel.id, at: index)
-                    }
-                }
-            }
-            .padding(.vertical, 4)
     }
 
     private var chatCellsScrollViewReaderView: some View {
@@ -121,6 +93,7 @@ struct ChatView: View {
                 .font(.subheadline)
                 .foregroundStyle(Color(UIColor.govUK.text.secondary))
                 .multilineTextAlignment(.center)
+                .padding(.bottom, 4.0)
             chatCellsView
             Text("")
                 .id(bottomID)

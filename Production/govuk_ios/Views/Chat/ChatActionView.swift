@@ -5,10 +5,11 @@ struct ChatActionView: View {
     @FocusState.Binding var textAreaFocused: Bool
     @AccessibilityFocusState private var errorFocused: Bool
     @State private var placeholderText: String? = String.chat.localized("textEditorPlaceholder")
-    @State private var charactersCountHeight: CGFloat = 0
+    @State private var warningErrorHeight: CGFloat = 0
     @Binding var showClearChatAlert: Bool
     private var animationDuration = 0.3
     private var maxTextEditorFrameHeight: CGFloat
+    private var menuDimensions: CGSize = CGSize(width: 36, height: 36)
 
     init(viewModel: ChatViewModel,
          textAreaFocused: FocusState<Bool>.Binding,
@@ -23,21 +24,17 @@ struct ChatActionView: View {
     var body: some View {
         errorFocused = shouldShowError
         return VStack(spacing: 0) {
-            errorView
-                .opacity(shouldShowError ? 1.0 : 0.0)
-                .conditionalAnimation(
-                    .easeInOut(duration: animationDuration),
-                    value: shouldShowError
-                )
-                .accessibilityFocused($errorFocused)
-            chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight)
-        }
-        .onPreferenceChange(CharacterCountHeightKey.self) { height in
-            self.charactersCountHeight = height
+            messageView(warningErrorMessage)
+
+            chatActionComponentsView(maxFrameHeight: maxTextEditorFrameHeight - warningErrorHeight)
         }
         .onChange(of: viewModel.latestQuestion) { _ in
-            viewModel.errorText = nil
+            viewModel.updateCharacterCount()
         }
+        .conditionalAnimation(
+            .easeInOut(duration: animationDuration),
+            value: shouldShowError || shouldShowWarning
+        )
         .alert(isPresented: $showClearChatAlert) {
             Alert(
                 title: Text(String.chat.localized("clearAlertTitle")),
@@ -60,43 +57,101 @@ struct ChatActionView: View {
     }
 
     private func chatActionComponentsView(maxFrameHeight: CGFloat) -> some View {
-        ZStack(alignment: .bottom) {
-            HStack(alignment: .center, spacing: 8) {
-                if !textAreaFocused {
-                    ChatMenuView(
-                        viewModel: viewModel,
-                        showClearChatAlert: $showClearChatAlert,
-                        disableClearChat: $viewModel.requestInFlight
-                    )
-                }
-
+        ZStack {
+            let buttonTrailingPadding: CGFloat = 6
+            HStack(alignment: .center, spacing: 6) {
                 textEditorView(maxFrameHeight: maxFrameHeight)
+                // UITextView absorbs all taps if focused in HStack, moves ChatMenuView to its
+                // own HStack and copies dimensions to an invisible circle
+                if shouldShowMenu {
+                    Circle().frame(
+                        width: menuDimensions.width,
+                        height: menuDimensions.height
+                    )
+                    .opacity(0)
+                    .padding(.trailing, buttonTrailingPadding)
+                }
             }
-            .accessibilityElement(children: .contain)
-            .padding([.horizontal, .bottom])
-            sendButtonView
+            .overlay(alignment: .center) {
+                HStack {
+                    Spacer()
+                    if shouldShowMenu {
+                        ChatMenuView(
+                            viewModel: viewModel,
+                            menuDimensions: menuDimensions,
+                            showClearChatAlert: $showClearChatAlert,
+                            disableClearChat: $viewModel.requestInFlight
+                        )
+                        .padding(.trailing, buttonTrailingPadding)
+                    }
+                }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                sendButtonView
+                    .padding(.trailing, buttonTrailingPadding)
+            }
         }
+        .accessibilityElement(children: .contain)
+        .padding([.horizontal, .bottom])
     }
-    private var errorView: some View {
+
+    private var warningErrorMessage: WarningErrorMessage? {
+        if shouldShowError {
+            return WarningErrorMessage(
+                text: viewModel.errorText,
+                type: .error
+            )
+        } else if shouldShowWarning {
+            return WarningErrorMessage(
+                text: viewModel.warningText,
+                type: .warning
+            )
+        }
+        return nil
+    }
+
+    private func messageView(_ warningErrorMessage: WarningErrorMessage?) -> some View {
         VStack(spacing: 0) {
-            if let error = viewModel.errorText {
-                Text(error)
+            if let warningErrorMessage = warningErrorMessage,
+               let message = warningErrorMessage.text {
+                Text(message, tableName: "Chat")
                     .fontWeight(.bold)
-                    .foregroundStyle(Color(UIColor.govUK.fills.surfaceButtonDestructive))
+                    .foregroundStyle(
+                        warningErrorMessage.type == .warning ?
+                        Color(UIColor.govUK.text.secondary) :
+                            Color(UIColor.govUK.fills.surfaceButtonDestructive)
+                    )
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .ignoresSafeArea(edges: .horizontal)
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, viewModel.errorText != nil ? 8 : 0)
+        .padding(.horizontal, 32)
+        .padding(.vertical, warningErrorMessage?.text != nil ? 8 : 0)
+        .opacity(shouldShowWarning || shouldShowError ? 1 : 0)
+        .frame(height: shouldShowWarning || shouldShowError ? nil : 0)
+        .accessibilityFocused($errorFocused)
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .preference(key: HeightPreferenceKey.self, value: geo.size.height)
+            }
+        )
+        .onPreferenceChange(HeightPreferenceKey.self) { height in
+            warningErrorHeight = height
+        }
     }
 
     private var shouldShowError: Bool {
-        viewModel.errorText != nil
+        viewModel.errorText != nil && textAreaFocused
     }
 
+    private var shouldShowWarning: Bool {
+        viewModel.errorText == nil &&
+        viewModel.warningText != nil &&
+        textAreaFocused
+    }
 
     private func textEditorView(maxFrameHeight: CGFloat) -> some View {
         DynamicTextEditor(
@@ -105,28 +160,33 @@ struct ChatActionView: View {
             placeholderText: $placeholderText
         )
         .focused($textAreaFocused)
-        .onChange(of: textAreaFocused) { isFocused in
-            if isFocused || !viewModel.latestQuestion.isEmpty {
-                placeholderText = nil
-            } else {
+        .onChange(of: viewModel.latestQuestion) { question in
+            if question.isEmpty {
                 placeholderText = String.chat.localized("textEditorPlaceholder")
+            } else {
+                placeholderText = nil
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.top, 8)
-        .padding(.bottom,
-                 textAreaFocused ? (max(50, charactersCountHeight)) : 8)
+        .padding(.leading, 10)
+        .padding(.trailing, (viewModel.latestQuestion.isEmpty || !textAreaFocused) ? 10 : 44)
+        .padding(.top, 6)
+        .padding(.bottom, 4)
         .frame(
             height: min(textEditorFrameHeight, maxFrameHeight)
         )
         .background(
-            Color(UIColor.govUK.fills.surfaceChatBlue)
-                .roundedBorder(cornerRadius: textEditorRadius,
-                               borderColor: borderColor,
-                               borderWidth: 1.0)
+            Color(UIColor.govUK.fills.surfaceChatAction)
+                .clipShape(RoundedRectangle(cornerRadius: 25))
         )
+        // animate on text growing multiple lines
         .conditionalAnimation(.easeInOut(duration: animationDuration),
                               value: viewModel.textViewHeight)
+        // animate on question first being typed (expanding text editor)
+        .conditionalAnimation(.easeInOut(duration: 0.1),
+                              value: viewModel.latestQuestion)
+        // animate on focus (if question already exists)
+        .conditionalAnimation(.easeInOut(duration: 0.2),
+                              value: textAreaFocused)
         .contentShape(Rectangle())
         .onTapGesture {
             self.textAreaFocused = true
@@ -134,24 +194,8 @@ struct ChatActionView: View {
         .accessibilitySortPriority(1)
     }
 
-    private var borderColor: Color {
-        if shouldShowError {
-            Color(UIColor.govUK.strokes.error)
-        } else {
-            if textAreaFocused {
-                Color(UIColor.govUK.strokes.focusedChatTextBox)
-            } else {
-                Color(UIColor.govUK.strokes.chatAction)
-            }
-        }
-    }
-
     private var sendButtonView: some View {
         HStack(alignment: .bottom) {
-            if textAreaFocused {
-                characterCountView
-            }
-
             Spacer()
 
             Button(action: askQuestion) {
@@ -160,64 +204,29 @@ struct ChatActionView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
                     .foregroundColor(
-                        viewModel.shouldDisableSend ?
-                        Color(UIColor.govUK.text.buttonPrimaryDisabled) :
-                            Color(UIColor.govUK.text.buttonPrimary)
+                        Color(UIColor.govUK.text.buttonPrimary)
                     )
-                    .frame(width: 50, height: 50)
+                    .frame(width: 36, height: 48)
                     .background(
                         Circle().fill(
-                            viewModel.shouldDisableSend ?
-                            Color(UIColor.govUK.fills.surfaceButtonPrimaryDisabled) :
-                                Color(UIColor.govUK.text.buttonSecondary)
+                            Color(UIColor.govUK.text.buttonSecondary)
                         )
                     )
+                    .opacity(viewModel.shouldDisableSend ? 0.4 : 1)
             }
             .accessibilityLabel(String.chat.localized("sendButtonAccessibilityLabel"))
             .disabled(viewModel.shouldDisableSend)
             .simultaneousGesture(TapGesture().onEnded {
-                if viewModel.latestQuestion.isEmpty {
+                if viewModel.shouldDisableSend {
                     self.textAreaFocused = true
                 }
             })
-            .padding([.bottom, .trailing], 8)
-            .opacity(textAreaFocused ? 1 : 0)
-            .conditionalAnimation(.easeInOut(duration: animationDuration),
-                                  value: textAreaFocused)
+            .scaleEffect(shouldShowSendButton ? 1 : 0.5)
+            .opacity(shouldShowSendButton ? 1 : 0)
+            .conditionalAnimation(shouldShowSendButton ? .easeInOut(duration: 0.3) : .none,
+                                  value: shouldShowSendButton)
         }
-        .padding([.horizontal, .bottom])
-        .padding(.top, -8)
-    }
-
-    @ViewBuilder
-    private var characterCountView: some View {
-        if viewModel.latestQuestion.count > viewModel.maxCharacters {
-            Text(LocalizedStringKey("tooManyCharactersTitle.\(viewModel.absoluteRemainingCharacters)"),
-                 tableName: "Chat")
-            .font(Font(UIFont.govUK.subheadlineSemibold))
-            .foregroundColor(Color(UIColor.govUK.text.buttonDestructive))
-            .padding([.leading, .trailing], 16)
-            .padding(.bottom, 24)
-            .background(GeometryReader { textGeometry in
-                Color.clear.preference(
-                    key: CharacterCountHeightKey.self,
-                    value: textGeometry.size.height
-                )
-            })
-        } else if viewModel.latestQuestion.count >= (viewModel.maxCharacters - 50) {
-            Text(LocalizedStringKey("remainingCharactersTitle.\(viewModel.absoluteRemainingCharacters)"),
-                 tableName: "Chat")
-            .font(Font(UIFont.govUK.subheadline))
-            .foregroundColor(Color(UIColor.govUK.text.secondary))
-            .padding([.leading, .trailing], 16)
-            .padding(.bottom, 24)
-            .background(GeometryReader { textGeometry in
-                Color.clear.preference(
-                    key: CharacterCountHeightKey.self,
-                    value: textGeometry.size.height
-                )
-            })
-        }
+        .padding(.leading, 16)
     }
 
     private func askQuestion() {
@@ -226,26 +235,36 @@ struct ChatActionView: View {
         }
     }
 
-    private var textEditorRadius: CGFloat {
-        textAreaFocused ? 25.0 : 40.0
-    }
-
     private var textEditorFrameHeight: CGFloat {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let lineHeight = font.lineHeight
-        let unfocusedHeight = viewModel.latestQuestion.isEmpty ?
-        max(viewModel.textViewHeight + 10, 50) :
-        max(lineHeight + 10, 50)
+        if !textAreaFocused && !viewModel.latestQuestion.isEmpty {
+            return max(lineHeight + 26, 48)
+        }
+        return max(viewModel.textViewHeight + 10, 48)
+    }
 
-        return textAreaFocused ?
-        viewModel.textViewHeight + max((2 * lineHeight), 75) :
-        unfocusedHeight
+    private var shouldShowMenu: Bool {
+        viewModel.latestQuestion.isEmpty || !textAreaFocused
+    }
+
+    private var shouldShowSendButton: Bool {
+        textAreaFocused && !viewModel.latestQuestion.isEmpty
     }
 }
 
-struct CharacterCountHeightKey: PreferenceKey {
+struct HeightPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = max(value, nextValue())
+    }
+}
+
+struct WarningErrorMessage {
+    var text: LocalizedStringKey?
+    var type: MessageType
+
+    enum MessageType {
+        case warning, error
     }
 }

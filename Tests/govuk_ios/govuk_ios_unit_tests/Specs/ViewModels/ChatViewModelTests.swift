@@ -22,7 +22,6 @@ struct ChatViewModelTests {
         sut.latestQuestion = "This is the question"
         sut.askQuestion()
 
-        print("Cell models = \(sut.cellModels)")
         #expect(sut.cellModels.count == 2)
         #expect(sut.cellModels.first?.type == .question)
         #expect(sut.cellModels.last?.type == .answer)
@@ -95,7 +94,6 @@ struct ChatViewModelTests {
 
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 1)
         #expect(chatError == .pageNotFound)
     }
 
@@ -143,7 +141,6 @@ struct ChatViewModelTests {
         #expect(sut.errorText == nil)
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 1)
         #expect(chatError == nil)
         #expect(sut.errorText != nil)
         #expect(!sut.latestQuestion.isEmpty)
@@ -209,7 +206,6 @@ struct ChatViewModelTests {
         )
 
         sut.loadHistory()
-        print(sut.cellModels.map { $0.message })
         try #require(sut.cellModels.count == 8)
         #expect(sut.cellModels[0].type == .intro)
         #expect(sut.cellModels[1].type == .intro)
@@ -359,5 +355,69 @@ struct ChatViewModelTests {
         sut.trackMenuClearChatConfirmTap()
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Yes, clear chat")
+    }
+
+    @Test
+    func updateCharacterCount_remainingCharacter_updatesWarningText() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        sut.latestQuestion = """
+            Lorem ipsum dolor sit amet consectetur adipiscing
+            elit quisque faucibus ex sapien vitae pellentesque
+            sem placerat in id cursus mi pretium tellus duis
+            convallis tempus leo eu aenean sed diam urna tempor
+            pulvinar vivamus fringillsss lacus nec metus biben
+        """
+
+        #expect(sut.warningText == nil)
+        sut.updateCharacterCount()
+        #expect(sut.warningText != nil)
+        #expect(sut.errorText == nil)
+    }
+
+    @Test
+    func updateCharacterCount_tooManyCharacter_updatesErrorText() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        sut.latestQuestion = """
+            Lorem ipsum dolor sit amet consectetur adipiscing
+            elit quisque faucibus ex sapien vitae pellentesque
+            sem placerat in id cursus mi pretium tellus duis
+            convallis tempus leo eu aenean sed diam urna tempor
+            pulvinar vivamus fringillsss lacus nec metus biben
+            pulvinar vivamus fringillsss lacus nec metus biben
+            pulvinar vivamus fringillsss lacus nec metus biben
+        """
+
+        #expect(sut.errorText == nil)
+        sut.updateCharacterCount()
+        #expect(sut.errorText != nil)
+        #expect(sut.warningText == nil)
+    }
+
+    @Test
+    func updateCharacterCount_setsWarningAndErrorTextToNil() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        sut.latestQuestion = "Lorem ipsum dolor sit amet consectetur adipiscing"
+
+        sut.updateCharacterCount()
+        #expect(sut.errorText == nil)
+        #expect(sut.warningText == nil)
     }
 }

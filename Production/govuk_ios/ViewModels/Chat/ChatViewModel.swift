@@ -2,6 +2,7 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
+// swiftlint:disable:next type_body_length
 class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
@@ -15,8 +16,9 @@ class ChatViewModel: ObservableObject {
     @Published var scrollToBottom: Bool = false
     @Published var scrollToTop: Bool = false
     @Published var latestQuestionID: String = ""
-    @Published var errorText: String?
-    @Published var textViewHeight: CGFloat = 50.0
+    @Published var errorText: LocalizedStringKey?
+    @Published var warningText: LocalizedStringKey?
+    @Published var textViewHeight: CGFloat = 48.0
     @Published var requestInFlight: Bool = false
 
     var absoluteRemainingCharacters: Int {
@@ -24,7 +26,6 @@ class ChatViewModel: ObservableObject {
     }
 
     var shouldDisableSend: Bool {
-        latestQuestion.isEmpty ||
         (latestQuestion.count > maxCharacters) ||
         requestInFlight
     }
@@ -47,22 +48,21 @@ class ChatViewModel: ObservableObject {
                      completion: ((Bool) -> Void)? = nil) {
         let localQuestion = question ?? latestQuestion
         guard !containsPII(localQuestion) else {
-            errorText = String.chat.localized("validationErrorText")
+            errorText = LocalizedStringKey("validationErrorText")
             completion?(false)
             return
         }
         trackAskQuestionSubmission()
         errorText = nil
-        cellModels.append(.loadingQuestion)
+        warningText = nil
+        addCellModels([.loadingQuestion])
         scrollToBottom = true
         requestInFlight = true
         chatService.askQuestion(localQuestion) { [weak self] result in
             self?.requestInFlight = false
+            self?.removeCellModel(.loadingQuestion)
             switch result {
             case .success(let pendingQuestion):
-                self?.cellModels.removeAll(where: { $0.id == ChatCellViewModel.loadingQuestion.id })
-                let cellModel = ChatCellViewModel(question: pendingQuestion)
-                self?.cellModels.append(cellModel)
                 self?.latestQuestionID = pendingQuestion.id
                 self?.latestQuestion = ""
                 self?.pollForAnswer(pendingQuestion)
@@ -70,7 +70,7 @@ class ChatViewModel: ObservableObject {
             case .failure(let error):
                 self?.requestInFlight = false
                 if error == .validationError {
-                    self?.errorText = String.chat.localized("validationErrorText")
+                    self?.errorText = LocalizedStringKey("validationErrorText")
                 } else {
                     self?.processError(error)
                     self?.latestQuestion = ""
@@ -82,10 +82,14 @@ class ChatViewModel: ObservableObject {
 
     private func pollForAnswer(_ question: PendingQuestion) {
         requestInFlight = true
-        cellModels.append(.gettingAnswer)
+        addCellModels(
+            [ChatCellViewModel(question: question,
+                               analyticsService: analyticsService),
+             .gettingAnswer]
+        )
         chatService.pollForAnswer(question) { [weak self] result in
             guard let self else { return }
-            cellModels.removeAll(where: { $0.id == ChatCellViewModel.gettingAnswer.id })
+            removeCellModel(.gettingAnswer)
             requestInFlight = false
             switch result {
             case .success(let answer):
@@ -95,7 +99,7 @@ class ChatViewModel: ObservableObject {
                     analyticsService: analyticsService
                 )
                 scrollToTop = true
-                cellModels.append(cellModel)
+                addCellModels([cellModel])
             case .failure(let error):
                 processError(error)
             }
@@ -109,7 +113,7 @@ class ChatViewModel: ObservableObject {
         }
         guard let conversationId = chatService.currentConversationId else {
             cellModels.removeAll()
-            appendIntroMessages()
+            appendIntroMessages(animate: true)
             return
         }
         requestInFlight = true
@@ -137,7 +141,7 @@ class ChatViewModel: ObservableObject {
         handleError(error)
     }
 
-    private func appendIntroMessages() {
+    private func appendIntroMessages(animate: Bool) {
         let firstIntroMessage = Intro(
             title: String.chat.localized("answerTitle"),
             message: String.chat.localized("introFirstMessage")
@@ -150,28 +154,56 @@ class ChatViewModel: ObservableObject {
             title: nil,
             message: String.chat.localized("introThirdMessage")
         )
-        cellModels.append(ChatCellViewModel(intro: firstIntroMessage))
-        cellModels.append(ChatCellViewModel(intro: secondIntroMessage))
-        cellModels.append(ChatCellViewModel(intro: thirdIntroMessage))
+        let models = [
+            ChatCellViewModel(intro: firstIntroMessage,
+                              analyticsService: analyticsService),
+            ChatCellViewModel(intro: secondIntroMessage,
+                              analyticsService: analyticsService),
+            ChatCellViewModel(intro: thirdIntroMessage,
+                              analyticsService: analyticsService)
+        ]
+        if animate {
+            addCellModels(models)
+        } else {
+            models.forEach { $0.isVisible = true }
+            cellModels.append(contentsOf: models)
+        }
+    }
+
+    private func addCellModels(_ models: [ChatCellViewModel]) {
+        var delayOffset = 0.0
+        cellModels.append(contentsOf: models)
+        for model in models {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delayOffset) {
+                model.isVisible = true
+            }
+            delayOffset += 0.7
+        }
+    }
+
+    private func removeCellModel(_ model: ChatCellViewModel) {
+        model.isVisible = false
+        cellModels.removeAll(where: { $0.id == model.id })
     }
 
     private func handleHistoryResponse(_ history: History) {
         cellModels.removeAll()
-        appendIntroMessages()
+        appendIntroMessages(animate: false)
         let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
-            let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
+            let question = ChatCellViewModel(answeredQuestion: answeredQuestion,
+                                             analyticsService: analyticsService)
+            question.isVisible = true
             cellModels.append(question)
             let answer = ChatCellViewModel(
                 answer: answeredQuestion.answer,
                 openURLAction: openURLAction,
                 analyticsService: analyticsService
             )
+            answer.isVisible = true
             cellModels.append(answer)
         }
         if let pendingQuestion = history.pendingQuestion {
-            let question = ChatCellViewModel(question: pendingQuestion)
-            cellModels.append(question)
             pollForAnswer(pendingQuestion)
         }
     }
@@ -184,7 +216,7 @@ class ChatViewModel: ObservableObject {
     func newChat() {
         cellModels.removeAll()
         chatService.clearHistory()
-        appendIntroMessages()
+        appendIntroMessages(animate: true)
     }
 
     func openAboutURL() {
@@ -228,6 +260,23 @@ class ChatViewModel: ObservableObject {
             action: "Clear Chat No Tapped"
         )
         analyticsService.track(event: event)
+    }
+
+    func updateCharacterCount() {
+        if latestQuestion.count > maxCharacters {
+            errorText = LocalizedStringKey(
+                "tooManyCharactersTitle.\(absoluteRemainingCharacters)"
+            )
+            warningText = nil
+        } else if latestQuestion.count >= (maxCharacters - 50) {
+            warningText = LocalizedStringKey(
+                "remainingCharactersTitle.\(absoluteRemainingCharacters)"
+            )
+            errorText = nil
+        } else {
+            errorText = nil
+            warningText = nil
+        }
     }
 
     private func trackMenuTap(_ itemTitle: String) {

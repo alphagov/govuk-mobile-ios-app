@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import UIComponents
 import GOVKit
+import MarkdownUI
 
 enum ChatLinkType: String {
     case sourceLink = "Source Link"
@@ -13,9 +14,10 @@ enum ChatCellType {
     case pendingAnswer
     case answer
     case intro
+    case loading
 }
 
-struct ChatCellViewModel {
+class ChatCellViewModel: ObservableObject {
     let title: String?
     let message: String
     let id: String
@@ -23,6 +25,7 @@ struct ChatCellViewModel {
     let sources: [Source]
     let openURLAction: ((URL) -> Void)?
     let analyticsService: AnalyticsServiceInterface?
+    @Published var isVisible: Bool = false
 
     init(title: String? = nil,
          message: String,
@@ -40,15 +43,17 @@ struct ChatCellViewModel {
         self.analyticsService = analyticsService
     }
 
-    init(question: PendingQuestion) {
+    convenience init(question: PendingQuestion,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(message: question.message,
                   id: question.id,
-                  type: .question)
+                  type: .question,
+                  analyticsService: analyticsService)
     }
 
-    init(answer: Answer,
-         openURLAction: @escaping (URL) -> Void,
-         analyticsService: AnalyticsServiceInterface) {
+    convenience init(answer: Answer,
+                     openURLAction: @escaping (URL) -> Void,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(
             title: String.chat.localized("answerTitle"),
             message: answer.message ?? "",
@@ -60,37 +65,38 @@ struct ChatCellViewModel {
         )
     }
 
-    init(answeredQuestion: AnsweredQuestion) {
+    convenience init(answeredQuestion: AnsweredQuestion,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(message: answeredQuestion.message,
                   id: answeredQuestion.id,
                   type: .question,
-                  sources: [])
+                  sources: [],
+                  analyticsService: analyticsService)
     }
 
-    init(intro: Intro) {
+    convenience init(intro: Intro,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(title: intro.title,
                   message: intro.message,
                   id: intro.id,
-                  type: .intro)
+                  type: .intro,
+                  analyticsService: analyticsService)
     }
 
     var isAnswer: Bool {
-        type == .question ? false : true
+        (type == .question || type ==  .loading) ? false : true
     }
 
-    var backgroundColor: Color {
-        switch type {
-        case .question:
-            Color(UIColor.govUK.fills.surfaceChatQuestion)
-        case .pendingAnswer:
-            Color(UIColor.clear)
-        case .answer, .intro:
-            Color(UIColor.govUK.fills.surfaceChatBlue)
+    func copyToClipboard() {
+        var textToCopy = MarkdownContent(message).renderPlainText()
+        if !sources.isEmpty {
+            textToCopy.append("\n\n" + String.chat.localized("mistakesTitle"))
+            sources.forEach { source in
+                textToCopy.append("\n\n" + source.url)
+            }
         }
-    }
-
-    var questionWidth: CGFloat {
-        UIScreen.main.bounds.width * 0.2
+        UIPasteboard.general.string = textToCopy
+        trackCopyToClipboard()
     }
 
     func openURL(url: URL, type: ChatLinkType) {
@@ -112,13 +118,85 @@ struct ChatCellViewModel {
         )
         analyticsService?.track(event: event)
     }
+
+    func trackCopyToClipboard() {
+        let event = AppEvent.buttonFunction(
+            text: "Copy to clipboard",
+            section: "Chat \(isAnswer ? "Answer" : "Question")",
+            action: "Copy"
+        )
+        analyticsService?.track(event: event)
+    }
 }
 
+// MARK: Layout and animation
+extension ChatCellViewModel {
+    var backgroundColor: Color {
+        switch type {
+        case .question, .loading:
+            Color(UIColor.govUK.fills.surfaceChatQuestion)
+        case .pendingAnswer:
+            Color(UIColor.clear)
+        case .answer, .intro:
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+        }
+    }
+
+    var questionWidth: CGFloat {
+        UIScreen.main.bounds.width * 0.2
+    }
+
+    var anchor: UnitPoint {
+        switch type {
+        case .intro:
+                .center
+        case .question, .loading:
+                .bottomTrailing
+        case .pendingAnswer, .answer:
+                .bottomLeading
+        }
+    }
+
+    var scale: CGFloat {
+        let localScale = if type == .pendingAnswer {
+            1.0
+        } else {
+            0.90
+        }
+        return isVisible ? 1 : localScale
+    }
+
+    var duration: CGFloat {
+        if type == .intro {
+            0.5
+        } else {
+            0.25
+        }
+    }
+
+    var delay: CGFloat {
+        if type == .loading {
+            0.4
+        } else {
+            0.0
+        }
+    }
+
+    var topPadding: CGFloat {
+        if type == .intro {
+            0.0
+        } else {
+            8.0
+        }
+    }
+}
+
+// MARK: - Convenience
 extension ChatCellViewModel {
     static var loadingQuestion: ChatCellViewModel = .init(
         message: String.chat.localized("loadingQuestionMessage"),
         id: UUID().uuidString,
-        type: .question
+        type: .loading
     )
 
     static var gettingAnswer: ChatCellViewModel = .init(

@@ -24,7 +24,7 @@ protocol ChatServiceInterface {
     var termsAndConditions: URL { get }
     var about: URL { get }
     var feedback: URL { get }
-    var chatOnboarded: Bool { get set }
+    var chatOnboardingSeen: Bool { get set }
 }
 
 // MARK: - Service
@@ -135,7 +135,7 @@ final class ChatService: ChatServiceInterface {
 
     func clear() {
         chatOptedIn = nil
-        chatOnboarded = false
+        chatOnboardingSeen = false
     }
 
     private func setConversationId(_ conversationId: String?) {
@@ -163,7 +163,7 @@ extension ChatService {
         false
     }
 
-    var chatOnboarded: Bool {
+    var chatOnboardingSeen: Bool {
         get {
             userDefaultsService.bool(forKey: .chatOnboardingSeen)
         } set {

@@ -375,9 +375,9 @@ final class ChatServiceTests {
             userDefaultsService: mockUserDefaultsService
         )
 
-        #expect(!sut.chatOnboarded)
-        sut.chatOnboarded = true
-        #expect(sut.chatOnboarded)
+        #expect(!sut.chatOnboardingSeen)
+        sut.chatOnboardingSeen = true
+        #expect(sut.chatOnboardingSeen)
     }
 
     @Test
@@ -389,10 +389,10 @@ final class ChatServiceTests {
             userDefaultsService: mockUserDefaultsService
         )
 
-        sut.chatOnboarded = true
-        #expect(sut.chatOnboarded)
-        sut.chatOnboarded = false
-        #expect(!sut.chatOnboarded)
+        sut.chatOnboardingSeen = true
+        #expect(sut.chatOnboardingSeen)
+        sut.chatOnboardingSeen = false
+        #expect(!sut.chatOnboardingSeen)
     }
 
     @Test
@@ -404,10 +404,10 @@ final class ChatServiceTests {
             userDefaultsService: mockUserDefaultsService
         )
 
-        sut.chatOnboarded = true
+        sut.chatOnboardingSeen = true
         sut.chatOptedIn = true
         sut.clear()
-        #expect(!sut.chatOnboarded)
+        #expect(!sut.chatOnboardingSeen)
         #expect(sut.chatOptedIn == nil)
     }
 

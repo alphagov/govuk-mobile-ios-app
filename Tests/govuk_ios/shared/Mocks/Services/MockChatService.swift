@@ -3,10 +3,10 @@ import Foundation
 @testable import govuk_ios
 
 final class MockChatService: ChatServiceInterface {
-    var chatOnboarded = false
+    var chatOnboardingSeen = false
 
     func clear() {
-        chatOnboarded = false
+        chatOnboardingSeen = false
         chatOptedIn = nil
     }
 

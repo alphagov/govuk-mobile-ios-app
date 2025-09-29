@@ -180,6 +180,17 @@
         }
       }
     },
+    "localAuthorityEditButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
     "localAuthorityEmptyTextField" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -351,7 +362,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter your postcode to see services for your area"
+            "value" : "Add a link to your local councils website"
           }
         }
       }

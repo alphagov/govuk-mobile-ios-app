@@ -54,7 +54,7 @@ class HomeViewModel: ObservableObject {
         self.localAuthorityService = localAuthorityService
     }
     var widgets: [HomepageWidget] {
-        let array = [topicsView, recentActivityWidget].compactMap { $0 }
+        let array = [topicsView, recentActivityWidget, localServicesWidget].compactMap { $0 }
         return array
     }
 
@@ -62,7 +62,7 @@ class HomeViewModel: ObservableObject {
         guard featureEnabled(.topics)
         else { return nil }
         return HomepageWidget(
-            content: TopicsView(
+            content: TopicsWidget(
                 viewModel: self.topicsWidgetViewModel
             )
         )
@@ -80,6 +80,22 @@ class HomeViewModel: ObservableObject {
             }
         )
         let view = RecentActivityWidget(viewModel: viewModel)
+        return HomepageWidget(
+            content: view
+        )
+    }
+
+    var localServicesWidget: HomepageWidget? {
+        guard featureEnabled(.localServices)
+        else { return nil }
+        let viewModel = LocalAuthorityWidgetViewModel { [weak self] in
+            self?.localAuthorityAction()
+        } editAction: { [weak self] in
+            self?.editLocalAuthorityAction()
+        }
+        let view = LocalAuthorityWidget(
+            viewModel: viewModel
+        )
         return HomepageWidget(
             content: view
         )

@@ -93,11 +93,11 @@
 		4E00EEF72CCB0788007B61E8 /* TopicOnboardingCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF62CCB0788007B61E8 /* TopicOnboardingCardModel.swift */; };
 		4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
-		4E19C85E2E65109900D56C33 /* ChatWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */; };
-		4E1534032E398073002DEDB9 /* TopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534022E398073002DEDB9 /* TopicsView.swift */; };
+		4E1534032E398073002DEDB9 /* TopicsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534022E398073002DEDB9 /* TopicsWidget.swift */; };
 		4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534042E3982E7002DEDB9 /* TopicCard.swift */; };
 		4E15340B2E398647002DEDB9 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340A2E398647002DEDB9 /* HomeContentView.swift */; };
 		4E15340D2E3A248E002DEDB9 /* TopicsWidgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340C2E3A248E002DEDB9 /* TopicsWidgetModel.swift */; };
+		4E19C85E2E65109900D56C33 /* ChatWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */; };
 		4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D252DB0E6510089CF9E /* Authority.swift */; };
 		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
 		4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */; };
@@ -130,7 +130,7 @@
 		4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */; };
 		4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646C2D15AB05007A6E97 /* CharValidator.swift */; };
 		4EE44BAD2E70332C0093D380 /* NonTappableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE44BAC2E70332C0093D380 /* NonTappableCardView.swift */; };
-		4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */; };
+		4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidget.swift */; };
 		4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */; };
 		4EE5F3E92DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */; };
 		4EE5F3F02DAFDB80008C60ED /* LocalAuthority.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */; };
@@ -519,11 +519,11 @@
 		4E00EEF62CCB0788007B61E8 /* TopicOnboardingCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCardModel.swift; sourceTree = "<group>"; };
 		4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWidgetView.swift; sourceTree = "<group>"; };
-		4E1534022E398073002DEDB9 /* TopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsView.swift; sourceTree = "<group>"; };
+		4E1534022E398073002DEDB9 /* TopicsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidget.swift; sourceTree = "<group>"; };
 		4E1534042E3982E7002DEDB9 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
 		4E15340A2E398647002DEDB9 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
 		4E15340C2E3A248E002DEDB9 /* TopicsWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetModel.swift; sourceTree = "<group>"; };
+		4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWidgetView.swift; sourceTree = "<group>"; };
 		4E265D252DB0E6510089CF9E /* Authority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
 		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
 		4E2A875C2D48FC40002A01D7 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
@@ -557,7 +557,7 @@
 		4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646C2D15AB05007A6E97 /* CharValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharValidator.swift; sourceTree = "<group>"; };
 		4EE44BAC2E70332C0093D380 /* NonTappableCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonTappableCardView.swift; sourceTree = "<group>"; };
-		4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityWidgetView.swift; sourceTree = "<group>"; };
+		4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityWidget.swift; sourceTree = "<group>"; };
 		4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityExplainerView.swift; sourceTree = "<group>"; };
 		4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityPostcodeEntryView.swift; sourceTree = "<group>"; };
 		4EE5F3EF2DAFDB80008C60ED /* LocalAuthority.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = LocalAuthority.xcstrings; sourceTree = "<group>"; };
@@ -1107,7 +1107,6 @@
 				4EE5F3E32DAFD350008C60ED /* LocalAuthority */,
 				D056CE752D3A847F005845E0 /* InformationView.swift */,
 				D06EB96A2CA6F6FA007EA081 /* Topics */,
-				5DABE8CE2CA41AD4003AB312 /* RecentActivtyWidget.swift */,
 				5DC0DB402E57ADDA002C91E3 /* AlertBannerWidgetView.swift */,
 				3D4A9E5F2E672975003ABE53 /* UserFeedbackWidgetView.swift */,
 				5D51C8372C5BBF600011ABE9 /* WidgetView.swift */,
@@ -1233,7 +1232,7 @@
 		4EE5F3E32DAFD350008C60ED /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
-				4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidgetView.swift */,
+				4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidget.swift */,
 				4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */,
 				4EE5F3E82DAFD463008C60ED /* LocalAuthorityPostcodeEntryView.swift */,
 				4EEC0F312DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift */,
@@ -1964,7 +1963,7 @@
 			isa = PBXGroup;
 			children = (
 				4E1534042E3982E7002DEDB9 /* TopicCard.swift */,
-				4E1534022E398073002DEDB9 /* TopicsView.swift */,
+				4E1534022E398073002DEDB9 /* TopicsWidget.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -2358,7 +2357,7 @@
 				5DFB488D2DE9F7F600B41CDA /* AppForcedUpdateCoordinator.swift in Sources */,
 				5DFB488E2DE9F7F600B41CDA /* ReLaunchCoordinator.swift in Sources */,
 				5DFB488F2DE9F7F600B41CDA /* PeriAuthCoordinator.swift in Sources */,
-				4E1534032E398073002DEDB9 /* TopicsView.swift in Sources */,
+				4E1534032E398073002DEDB9 /* TopicsWidget.swift in Sources */,
 				5DFB48902DE9F7F600B41CDA /* AuthenticationCoordinator.swift in Sources */,
 				5DFB48912DE9F7F600B41CDA /* TopicOnboardingCoordinator.swift in Sources */,
 				5DFB48922DE9F7F600B41CDA /* PostAuthCoordinator.swift in Sources */,
@@ -2543,7 +2542,7 @@
 				4EFE22A52D0CD0D500136D56 /* RegexRedactor.swift in Sources */,
 				169842DA2DB0004800E3EA66 /* LocalAuthenticationOnboardingViewModel.swift in Sources */,
 				D028CCF62CB9619B00742620 /* Topic.swift in Sources */,
-				4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidgetView.swift in Sources */,
+				4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidget.swift in Sources */,
 				4EE44BAD2E70332C0093D380 /* NonTappableCardView.swift in Sources */,
 				5D7D255F2D141CEC00BDC217 /* Redactor+Convenience.swift in Sources */,
 				5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */,

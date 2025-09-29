@@ -2,7 +2,7 @@ import SwiftUI
 import UIComponents
 import GOVKit
 
-struct TopicsView: View {
+struct TopicsWidget: View {
     @StateObject var viewModel: TopicsWidgetViewModel
     @State var showingEditScreen: Bool = false
     @ScaledMetric var scale: CGFloat = 1

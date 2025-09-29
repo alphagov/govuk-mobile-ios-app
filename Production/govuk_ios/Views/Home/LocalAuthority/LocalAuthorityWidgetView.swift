@@ -2,7 +2,7 @@ import SwiftUI
 import Foundation
 import UIComponents
 
-struct LocalAuthorityWidgetView: View {
+struct LocalAuthorityWidget: View {
     private var viewModel: LocalAuthorityWidgetViewModel
 
     init(viewModel: LocalAuthorityWidgetViewModel) {
@@ -12,37 +12,49 @@ struct LocalAuthorityWidgetView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(viewModel.titleOne)
-                    .font(Font.govUK.bodySemibold)
-                    .accessibilityAddTraits(.isHeader)
+                Text(viewModel.title)
+                    .font(Font.govUK.title3Semibold)
+                    .foregroundColor(
+                        Color(UIColor.govUK.text.primary
+                             )
+                    )
                 Spacer()
+                Button(
+                    action: {
+                        viewModel.tapAction()
+                    }, label: {
+                        Text(viewModel.editButtonTitle)
+                            .foregroundColor(Color(UIColor.govUK.text.link))
+                            .font(Font.govUK.subheadlineSemibold)
+                    }
+                )
             }
-            Divider()
-                .overlay(Color(cgColor: UIColor.govUK.strokes.cardGreen.cgColor))
-            HStack {
-                Image(decorative: "local_widget_icon")
-                VStack(alignment: .leading) {
-                    Text(viewModel.titleTwo)
-                        .font(Font.govUK.bodySemibold)
-                        .accessibilityAddTraits(.isHeader)
-                    Text(viewModel.description)
-                        .font(Font.govUK.subheadline)
-                        .foregroundColor(
-                            Color(
-                                UIColor.govUK.text.secondary
-                            )
-                        )
-                }
-                Spacer()
+            .padding(.horizontal)
+            .padding(.bottom, 12)
+            VStack(alignment: .center) {
+                Image(systemName: "plus.circle")
+                    .padding(.bottom, 6)
+                    .padding(.top, 20)
+                    .padding(.horizontal)
+                    .font(.title2)
+                Text(viewModel.description)
+                    .font(Font.govUK.body)
+                    .padding(.horizontal)
+                    .foregroundColor(
+                        Color(UIColor.govUK.text.primary
+                             ))
+                    .padding(.bottom, 20)
             }
-            .accessibilityElement(children: .combine)
-            .onTapGesture {
-                viewModel.tapAction()
+            .background {
+                Color(uiColor: UIColor.govUK.fills.surfaceList)
             }
-        }
-        .background {
-            Color(uiColor: UIColor.govUK.fills.surfaceCardSelected)
-                .ignoresSafeArea()
-        }
+            .roundedBorder(borderColor: .clear)
+            .shadow(
+                color: Color(
+                    uiColor: UIColor.govUK.strokes.cardDefault
+                ), radius: 0, x: 0, y: 3
+            )
+            .padding([.horizontal])
+        }.padding(.top, 8)
     }
 }

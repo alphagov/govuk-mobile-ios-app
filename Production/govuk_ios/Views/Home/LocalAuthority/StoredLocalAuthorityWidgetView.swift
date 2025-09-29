@@ -34,14 +34,26 @@ struct StoredLocalAuthorityWidgetView: View {
                             .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
                         Spacer()
                     }.padding(.bottom, 8)
+                    VStack {
+                        Text(viewModel.cardModels().first?.name ?? "")
+                            .font(.govUK.title2Bold)
+                            .foregroundColor(Color(uiColor: UIColor.govUK.text.link))
+                    }
+                    .roundedBorder(borderColor: .clear)
+                    .shadow(
+                        color: Color(
+                            uiColor: UIColor.govUK.strokes.cardDefault
+                        ), radius: 0, x: 0, y: 3
+                    )
+                } else {
+                    twoTierView
                 }
-                cardView
             }
         }
         .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
     }
     @ViewBuilder
-    var cardView: some View {
+    var twoTierView: some View {
         ForEach(viewModel.cardModels(), id: \.name) { item in
             StoredLocalAuthorityCardView(model: item)
                 .onTapGesture {

@@ -9,7 +9,7 @@ struct StoredLocalAuthorityWidgetView: View {
     }
 
     var body: some View {
-        ScrollView {
+      //  ScrollView {
             VStack(spacing: 6) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(viewModel.title)
@@ -27,13 +27,7 @@ struct StoredLocalAuthorityWidgetView: View {
                     .accessibilityLabel(viewModel.editButtonAltText)
                 }
                 .padding(.bottom, 8)
-                if viewModel.localAuthorities.count == 2 {
-                    HStack {
-                        Text(viewModel.twoTierAuthorityDescription)
-                            .font(.govUK.body)
-                            .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
-                        Spacer()
-                    }.padding(.bottom, 8)
+                if viewModel.localAuthorities.count == 1 {
                     VStack {
                         Text(viewModel.cardModels().first?.name ?? "")
                             .font(.govUK.title2Bold)
@@ -48,9 +42,9 @@ struct StoredLocalAuthorityWidgetView: View {
                 } else {
                     twoTierView
                 }
-            }
-        }
-        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+            }.padding()
+//        }
+//        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
     }
     @ViewBuilder
     var twoTierView: some View {

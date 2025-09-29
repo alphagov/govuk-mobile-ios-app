@@ -3,6 +3,7 @@ import UIKit
 import GOVKit
 import UIComponents
 import SwiftUI
+import Combine
 
 class HomeViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
@@ -21,6 +22,8 @@ class HomeViewModel: ObservableObject {
     let activityService: ActivityServiceInterface
     let localAuthorityService: LocalAuthorityServiceInterface
     @Published var homeContentScrollToTop: Bool = false
+    @Published var widgets: [HomepageWidget] = []
+    private var cancellables = Set<AnyCancellable>()
 
     init(analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
@@ -52,10 +55,17 @@ class HomeViewModel: ObservableObject {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
+        fetchWidgets()
     }
-    var widgets: [HomepageWidget] {
-        let array = [topicsView, recentActivityWidget, localServicesWidget].compactMap { $0 }
-        return array
+
+    func fetchWidgets() {
+        let array = [
+            topicsView,
+            recentActivityWidget,
+            localServicesWidget,
+            storedLocalAuthorityWidget
+        ].compactMap { $0 }
+        widgets = array
     }
 
     var topicsView: HomepageWidget? {
@@ -65,6 +75,25 @@ class HomeViewModel: ObservableObject {
             content: TopicsWidget(
                 viewModel: self.topicsWidgetViewModel
             )
+        )
+    }
+
+    private var storedLocalAuthorityWidget: HomepageWidget? {
+        guard featureEnabled(.localServices) else { return nil }
+        let localAuthorities = localAuthorityService.fetchSavedLocalAuthority()
+        guard localAuthorities.count > 0 else { return nil }
+
+        let viewModel = StoredLocalAuthorityWidgetViewModel(
+            analyticsService: analyticsService,
+            localAuthorities: localAuthorities,
+            openURLAction: openURLAction,
+            openEditViewAction: editLocalAuthorityAction
+        )
+        let view = StoredLocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        return HomepageWidget(
+            content: view
         )
     }
 
@@ -86,7 +115,8 @@ class HomeViewModel: ObservableObject {
     }
 
     var localServicesWidget: HomepageWidget? {
-        guard featureEnabled(.localServices)
+        guard featureEnabled(.localServices),
+              localAuthorityService.fetchSavedLocalAuthority().first == nil
         else { return nil }
         let viewModel = LocalAuthorityWidgetViewModel { [weak self] in
             self?.localAuthorityAction()

@@ -24,9 +24,9 @@ struct AuthenticationServiceTests {
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
-        let expectedIdToken = "id_token"
+        let expectedIdToken = Self.idToken
         let expectedExpiryDate = "2099-01-01T00:00:00Z"
-        let jsonData = """
+        let jsonString = """
         {
             "accessToken": "\(expectedAccessToken)",
             "refreshToken": "\(expectedRefreshToken)",
@@ -34,7 +34,8 @@ struct AuthenticationServiceTests {
             "tokenType": "id_token",
             "expiryDate": "\(expectedExpiryDate)"
         }
-        """.data(using: .utf8)!
+        """
+        let jsonData = jsonString.data(using: .utf8)!
         let tokenResponse = createTokenResponse(jsonData)
         mockAuthClient._stubbedAuthenticationResult = AuthenticationResult.success(tokenResponse)
         let result = await sut.authenticate(window: UIApplication.shared.window!)
@@ -47,7 +48,7 @@ struct AuthenticationServiceTests {
                 #expect(sut.isSignedIn)
                 #expect(serviceResult.returningUser)
 
-                let date = mockUserDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date
+                let date = mockUserDefaultsService.value(forKey: .refreshTokenIssuedAtDate) as? Date
                 #expect(date != nil)
                 confirmation()
             }
@@ -55,7 +56,7 @@ struct AuthenticationServiceTests {
     }
 
     @Test
-    func authenticate_success_noExpiryDate_doesntSetTokenExpiry() async {
+    func authenticate_success_noExpiryDate_doesntSetTokenIssueDate() async {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
@@ -88,7 +89,7 @@ struct AuthenticationServiceTests {
 
         await confirmation() { confirmation in
             if case .success = result {
-                let date = mockUserDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date
+                let date = mockUserDefaultsService.value(forKey: .refreshTokenIssuedAtDate) as? Date
                 #expect(date == nil)
                 confirmation()
             }
@@ -494,12 +495,13 @@ struct AuthenticationServiceTests {
         )
 
         mockUserDefaults.set(nil, forKey: .refreshTokenExpiryDate)
+        mockUserDefaults.set(nil, forKey: .refreshTokenIssuedAtDate)
 
         #expect(sut.shouldAttemptTokenRefresh)
     }
 
     @Test
-    func shouldAttemptTokenRefresh_dateInPast_returnsFalse() {
+    func shouldAttemptTokenRefresh_noIssuedAtDate_expiryDateInPast_returnsFalse() {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
@@ -515,12 +517,13 @@ struct AuthenticationServiceTests {
 
         let date = Calendar.current.date(byAdding: .second, value: -10, to: .now)!
         mockUserDefaults.set(date, forKey: .refreshTokenExpiryDate)
+        mockUserDefaults.set(nil, forKey: .refreshTokenIssuedAtDate)
 
         #expect(sut.shouldAttemptTokenRefresh == false)
     }
 
     @Test
-    func shouldAttemptTokenRefresh_dateInFuture_returnsTrue() {
+    func shouldAttemptTokenRefresh_noIssuedAtDate_expiryDateInFuture_returnsTrue() {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
@@ -536,6 +539,55 @@ struct AuthenticationServiceTests {
 
         let date = Calendar.current.date(byAdding: .day, value: 1, to: .now)
         mockUserDefaults.set(date, forKey: .refreshTokenExpiryDate)
+        mockUserDefaults.set(nil, forKey: .refreshTokenIssuedAtDate)
+
+        #expect(sut.shouldAttemptTokenRefresh)
+    }
+
+    @Test
+    func shouldAttemptTokenRefresh_issuedAtDateInFuture_noExpiryDate_returnsTrue() {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        mockSecureStoreService._stubbedItemExistsResult = false
+        let mockUserDefaults = MockUserDefaultsService()
+        let mockConfigService = MockAppConfigService()
+        mockConfigService.refreshTokenExpirySeconds = 3600
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            returningUserService: mockReturningUserService,
+            userDefaultsService: mockUserDefaults,
+            appConfigService: mockConfigService
+        )
+
+        let date = Calendar.current.date(byAdding: .day, value: 1, to: .now)
+        mockUserDefaults.set(nil, forKey: .refreshTokenExpiryDate)
+        mockUserDefaults.set(date, forKey: .refreshTokenIssuedAtDate)
+
+        #expect(sut.shouldAttemptTokenRefresh)
+    }
+
+    @Test
+    func shouldAttemptTokenRefresh_issuedAtDateExpired_noExpiryDate_returnsFalse() {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        mockSecureStoreService._stubbedItemExistsResult = false
+        let mockUserDefaults = MockUserDefaultsService()
+        let mockConfigService = MockAppConfigService()
+        mockConfigService.refreshTokenExpirySeconds = 1000
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            returningUserService: mockReturningUserService,
+            userDefaultsService: mockUserDefaults,
+            appConfigService: mockConfigService
+        )
+
+        let date = Calendar.current.date(byAdding: .second, value: -100, to: .now)
+        mockUserDefaults.set(nil, forKey: .refreshTokenExpiryDate)
+        mockUserDefaults.set(date, forKey: .refreshTokenIssuedAtDate)
 
         #expect(sut.shouldAttemptTokenRefresh)
     }
@@ -583,8 +635,11 @@ struct AuthenticationServiceTests {
 private func createTokenResponse(_ jsonData: Data) -> TokenResponse {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
-    let tokenResponse = try? decoder.decode(TokenResponse.self, from: jsonData)
-    return tokenResponse!
+    do {
+        return try decoder.decode(TokenResponse.self, from: jsonData)
+    } catch {
+        fatalError("Failed to decode TokenResponse: \(error)")
+    }
 }
 
 enum TestSecureStoreError: Error {

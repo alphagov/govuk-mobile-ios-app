@@ -47,6 +47,7 @@ struct StoredLocalAuthorityWidgetView: View {
                     Text(viewModel.twoTierAuthorityDescription)
                         .font(.govUK.body)
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                        .padding(.bottom, 4)
                     Spacer()
                 }
                 twoTierView

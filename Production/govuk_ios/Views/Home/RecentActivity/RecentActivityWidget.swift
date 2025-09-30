@@ -30,22 +30,18 @@ struct RecentActivityWidget: View {
                         }
                     )
                 }
-            }
-            .padding(.top)
-          //  .padding(.horizontal)
-            VStack {
-                ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
+                VStack {
+                    ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
                         RecentActivityItemCard(
                             model: viewModel.recentActivities[index],
                             isLastItemInList: viewModel.isLastActivityInList(
                                 index: index
                             )
-                        )
-                        .padding([.top], index == 0 ? 8: 0)
+                        ).padding([.top], index == 0 ? 8: 0)
                     }
                 }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
-                .roundedBorder(borderColor: .clear)
-                .padding(.top, 8)
+                    .roundedBorder(borderColor: .clear)
+            }
             }
         }
     }

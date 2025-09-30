@@ -120,8 +120,6 @@ class HomeViewModel: ObservableObject {
         else { return nil }
         let viewModel = LocalAuthorityWidgetViewModel { [weak self] in
             self?.localAuthorityAction()
-        } editAction: { [weak self] in
-            self?.editLocalAuthorityAction()
         }
         let view = LocalAuthorityWidget(
             viewModel: viewModel

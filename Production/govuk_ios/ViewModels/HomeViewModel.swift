@@ -61,9 +61,9 @@ class HomeViewModel: ObservableObject {
     func fetchWidgets() {
         let array = [
             topicsView,
-            recentActivityWidget,
             localServicesWidget,
-            storedLocalAuthorityWidget
+            storedLocalAuthorityWidget,
+            recentActivityWidget
         ].compactMap { $0 }
         widgets = array
     }

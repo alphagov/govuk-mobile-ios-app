@@ -9,42 +9,49 @@ struct StoredLocalAuthorityWidgetView: View {
     }
 
     var body: some View {
-      //  ScrollView {
-            VStack(spacing: 6) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text(viewModel.title)
-                        .font(Font.govUK.title3Semibold)
-                        .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
-                        .accessibilityAddTraits(.isHeader)
+        VStack {
+            HStack {
+                Text(viewModel.title)
+                    .font(Font.govUK.title3Semibold)
+                    .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                    .accessibilityAddTraits(.isHeader)
+                Spacer()
+                Button {
+                    viewModel.openEditViewAction()
+                } label: {
+                    Text(viewModel.editButtonTitle)
+                        .font(.govUK.subheadlineSemibold)
+                        .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
+                }
+                .accessibilityLabel(viewModel.editButtonAltText)
+            }
+            .padding(.bottom, 8)
+            if viewModel.localAuthorities.count == 1 {
+                HStack {
+                    Text(viewModel.cardModels().first?.name ?? "")
+                        .font(.govUK.title2Bold)
+                        .foregroundColor(Color(uiColor: UIColor.govUK.text.link))
+                        .padding()
                     Spacer()
-                    Button {
-                        viewModel.openEditViewAction()
-                    } label: {
-                        Text(viewModel.editButtonTitle)
-                            .font(.govUK.subheadlineSemibold)
-                            .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
-                    }
-                    .accessibilityLabel(viewModel.editButtonAltText)
+                }.background {
+                    Color(uiColor: UIColor.govUK.fills.surfaceList)
                 }
-                .padding(.bottom, 8)
-                if viewModel.localAuthorities.count == 1 {
-                    VStack {
-                        Text(viewModel.cardModels().first?.name ?? "")
-                            .font(.govUK.title2Bold)
-                            .foregroundColor(Color(uiColor: UIColor.govUK.text.link))
-                    }
-                    .roundedBorder(borderColor: .clear)
-                    .shadow(
-                        color: Color(
-                            uiColor: UIColor.govUK.strokes.cardDefault
-                        ), radius: 0, x: 0, y: 3
-                    )
-                } else {
-                    twoTierView
+                .roundedBorder(borderColor: .clear)
+                .shadow(
+                    color: Color(
+                        uiColor: UIColor.govUK.strokes.cardDefault
+                    ), radius: 0, x: 0, y: 3
+                )
+            } else {
+                HStack {
+                    Text(viewModel.twoTierAuthorityDescription)
+                        .font(.govUK.body)
+                        .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                    Spacer()
                 }
-            }.padding()
-//        }
-//        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+                twoTierView
+            }
+        }
     }
     @ViewBuilder
     var twoTierView: some View {
@@ -53,7 +60,7 @@ struct StoredLocalAuthorityWidgetView: View {
                 .onTapGesture {
                     viewModel.open(item: item)
                 }
-                .padding(.bottom, 16)
+                .padding(.bottom, 2)
         }
     }
 }

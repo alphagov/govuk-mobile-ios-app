@@ -28,17 +28,17 @@ struct LocalAuthorityWidget: View {
                     }
                 )
             }
-            .padding(.horizontal)
+          //  .padding(.horizontal)
             .padding(.bottom, 12)
             VStack(alignment: .center) {
                 Image(systemName: "plus.circle")
                     .padding(.bottom, 6)
                     .padding(.top, 20)
-                    .padding(.horizontal)
+                  //  .padding(.horizontal)
                     .font(.title2)
                 Text(viewModel.description)
                     .font(Font.govUK.body)
-                    .padding(.horizontal)
+                   // .padding(.horizontal)
                     .foregroundColor(
                         Color(UIColor.govUK.text.primary
                              ))
@@ -53,7 +53,8 @@ struct LocalAuthorityWidget: View {
                     uiColor: UIColor.govUK.strokes.cardDefault
                 ), radius: 0, x: 0, y: 3
             )
-            .padding([.horizontal])
-        }.padding()
+          //  .padding([.horizontal])
+        }
+      //  .padding()
     }
 }

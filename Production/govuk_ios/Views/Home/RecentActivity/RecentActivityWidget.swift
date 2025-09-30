@@ -8,7 +8,7 @@ struct RecentActivityWidget: View {
                 Text(viewModel.title)
                     .font(Font.govUK.title3Semibold)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
-                    .padding(.horizontal)
+               //     .padding(.horizontal)
                 NonTappableCardView(
                     text: viewModel.emptyActivityStateTitle
                 )
@@ -33,7 +33,7 @@ struct RecentActivityWidget: View {
                 }
             }
             .padding(.top)
-            .padding(.horizontal)
+          //  .padding(.horizontal)
             VStack {
                 ForEach(0..<viewModel.recentActivities.count, id: \.self) { index in
                         RecentActivityItemCard(
@@ -46,7 +46,7 @@ struct RecentActivityWidget: View {
                     }
                 }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
                 .roundedBorder(borderColor: .clear)
-                .padding(.horizontal)
+              //  .padding(.horizontal)
                 .padding(.top, 8)
             }
         }

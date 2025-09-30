@@ -16,6 +16,7 @@ struct HomeContentView: View {
                     .id(topID)
                 ForEach(viewModel.widgets) { widget in
                     widget
+                        .padding(.horizontal)
                 }
             }
             .onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in

@@ -23,7 +23,8 @@ struct TopicsWidget: View {
                     viewModel: self.viewModel.topicErrorViewModel
                 )
                 Spacer()
-            }.padding()
+            }
+            // .padding()
         } else {
             VStack {
                 VStack(alignment: .leading) {
@@ -43,7 +44,8 @@ struct TopicsWidget: View {
                         }
                     )
                 }
-            }.padding(.horizontal)
+            }
+                // .padding(.horizontal)
                     LazyVGrid(columns: columns, alignment: .center) {
                         ForEach(viewModel.topicsToBeDisplayed, id: \.self) { topic in
                             TopicCard(model: topic)
@@ -52,13 +54,15 @@ struct TopicsWidget: View {
                                     cornerRadius: 10,
                                     borderColor: Color(uiColor: UIColor.govUK.strokes.cardBlue),
                                     borderWidth: 1
-                                ).padding(2)
+                                )
+                                // .padding(2)
                                 .onTapGesture {
                                     viewModel.trackECommerceSelection(topic.title)
                                     viewModel.topicAction(topic)
                                 }
                         }
-                    }.padding(.horizontal)
+                    }
+                    // .padding(.horizontal)
                 if !viewModel.showAllTopicsButton {
                     HStack {
                         Spacer()
@@ -69,7 +73,7 @@ struct TopicsWidget: View {
                         .frame(width: 150 * scale)
                         Spacer()
                     }
-                    .padding()
+                    .padding(.top)
                 }
             }.sheet(isPresented: $showingEditScreen,
                     onDismiss: {

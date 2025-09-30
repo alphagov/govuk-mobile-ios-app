@@ -20,7 +20,7 @@ struct RecentActivityItemCard: View {
                     .bottom,
                      isLastItemInList ? 12: 0
                 )
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 16)
                 Spacer()
             }.padding(.vertical, 8)
             if !isLastItemInList {

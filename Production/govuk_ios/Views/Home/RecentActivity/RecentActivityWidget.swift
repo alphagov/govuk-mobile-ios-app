@@ -37,11 +37,41 @@ struct RecentActivityWidget: View {
                             isLastItemInList: viewModel.isLastActivityInList(
                                 index: index
                             )
-                        ).padding([.top], index == 0 ? 8: 0)
+                        ).padding(
+                            [.top],
+                            calculatePaddingForTop(
+                            index: index,
+                            count: viewModel.recentActivities.count
+                            )
+                        )
+                        .padding(
+                            [.bottom],
+                            calculatePaddingForBottom(
+                                index: index,
+                                count: viewModel.recentActivities.count
+                            )
+                        )
+                        .padding(.horizontal, 6)
                     }
                 }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
                     .roundedBorder(borderColor: .clear)
             }
-            }
         }
     }
+
+    private func calculatePaddingForTop(index: Int, count: Int) -> CGFloat {
+        if index == 0 && count > 1 {
+            return 8
+        } else {
+            return 0
+        }
+    }
+
+    private func calculatePaddingForBottom(index: Int, count: Int) -> CGFloat {
+        if index == viewModel.recentActivities.count - 1 && count > 1 {
+            return 8
+        } else {
+            return 0
+        }
+    }
+}

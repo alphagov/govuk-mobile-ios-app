@@ -18,31 +18,24 @@ struct LocalAuthorityWidget: View {
                         Color(UIColor.govUK.text.primary)
                     )
                 Spacer()
-                Button(
-                    action: {
-                        viewModel.editAction()
-                    }, label: {
-                        Text(viewModel.editButtonTitle)
-                            .foregroundColor(Color(UIColor.govUK.text.link))
-                            .font(Font.govUK.subheadlineSemibold)
-                    }
-                )
             }
-          //  .padding(.horizontal)
             .padding(.bottom, 12)
-            VStack(alignment: .center) {
-                Image(systemName: "plus.circle")
-                    .padding(.bottom, 6)
-                    .padding(.top, 20)
-                  //  .padding(.horizontal)
-                    .font(.title2)
-                Text(viewModel.description)
-                    .font(Font.govUK.body)
-                   // .padding(.horizontal)
-                    .foregroundColor(
-                        Color(UIColor.govUK.text.primary
-                             ))
-                    .padding(.bottom, 20)
+            HStack(alignment: .center) {
+                Spacer()
+                VStack(alignment: .center) {
+                    Spacer()
+                    Image(systemName: "plus.circle")
+                        .padding(.bottom, 6)
+                        .font(.title)
+                    Text(viewModel.description)
+                        .font(Font.govUK.body)
+                        .foregroundColor(
+                            Color(UIColor.govUK.text.primary
+                                 ))
+                    Spacer()
+                }
+                .padding()
+                Spacer()
             }
             .background {
                 Color(uiColor: UIColor.govUK.fills.surfaceList)
@@ -53,8 +46,6 @@ struct LocalAuthorityWidget: View {
                     uiColor: UIColor.govUK.strokes.cardDefault
                 ), radius: 0, x: 0, y: 3
             )
-          //  .padding([.horizontal])
         }
-      //  .padding()
     }
 }

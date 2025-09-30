@@ -6,9 +6,6 @@ struct NonTappableCardView: View {
     var body: some View {
         VStack {
             HStack {
-                if verticalSizeClass != .compact {
-                    Spacer()
-                }
                 Text(text)
                     .font(Font.govUK.body)
                     .multilineTextAlignment(.leading)
@@ -16,12 +13,11 @@ struct NonTappableCardView: View {
                         Color(UIColor.govUK.text.secondary)
                     )
                 Spacer()
-            }
-        }.padding()
-            .background(
+            }.padding()
+        }
+        .background(
                 Color(uiColor: UIColor.govUK.fills.surfaceCardNonTappable)
             )
             .roundedBorder(borderColor: .clear)
-           // .padding([.horizontal])
     }
 }

@@ -138,7 +138,6 @@
 		4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A02D0CD08900136D56 /* Redactor.swift */; };
 		4EFE22A52D0CD0D500136D56 /* RegexRedactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE22A42D0CD0D500136D56 /* RegexRedactor.swift */; };
 		5D0278372C29CB5800F2A4EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5D0278362C29CB5800F2A4EB /* Lottie */; };
-		5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D0278392C29CBC000F2A4EB /* app_splash.json */; };
 		5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */; };
 		5D056C242E5706EF00D28DAE /* OneSignalServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D056C232E5706EF00D28DAE /* OneSignalServiceClient.swift */; };
 		5D08A9002C9AFABB0049D798 /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D08A8FF2C9AFABB0049D798 /* Result+Extensions.swift */; };
@@ -563,7 +562,6 @@
 		4EF407552CE2796900D654FC /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		4EFE22A02D0CD08900136D56 /* Redactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redactor.swift; sourceTree = "<group>"; };
 		4EFE22A42D0CD0D500136D56 /* RegexRedactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexRedactor.swift; sourceTree = "<group>"; };
-		5D0278392C29CBC000F2A4EB /* app_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_splash.json; sourceTree = "<group>"; };
 		5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		5D056C232E5706EF00D28DAE /* OneSignalServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSignalServiceClient.swift; sourceTree = "<group>"; };
 		5D08A8FF2C9AFABB0049D798 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
@@ -1227,7 +1225,6 @@
 			isa = PBXGroup;
 			children = (
 				D08F2C812E6B1CB100133121 /* generating-your-answer.png */,
-				5D0278392C29CBC000F2A4EB /* app_splash.json */,
 				164F41DD2E8AA80B0095299F /* app_crown_splash.json */,
 				164F41DF2E8AA83C0095299F /* app_wordmark_splash.json */,
 				5DDD588A2D5A557D001C0B3E /* onboarding_stay_updated.json */,
@@ -2211,7 +2208,6 @@
 				162DD75B2C247ACE00FA482D /* GoogleService-Info.plist in Resources */,
 				3D3378122CAAC0A0004BF83F /* AppAvailability.xcstrings in Resources */,
 				5D742BDC2C99799000E7B87A /* Search.xcstrings in Resources */,
-				5D02783A2C29CBC000F2A4EB /* app_splash.json in Resources */,
 				5D09C6EC2D5C8D5900805D8F /* Notifications.xcstrings in Resources */,
 				D08AA4262DB950F2002E9C78 /* SignOut.xcstrings in Resources */,
 			);

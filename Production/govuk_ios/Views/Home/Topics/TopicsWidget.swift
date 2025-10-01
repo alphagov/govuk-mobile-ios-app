@@ -27,40 +27,40 @@ struct TopicsWidget: View {
         } else {
             VStack {
                 VStack(alignment: .leading) {
-                HStack {
-                    Text(viewModel.widgetTitle)
-                        .font(Font.govUK.title3Semibold)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .padding([.leading], 4)
-                    Spacer()
-                    Button(
-                        action: {
-                            showingEditScreen.toggle()
-                        }, label: {
-                            Text(viewModel.editButtonTitle)
-                                .foregroundColor(
-                                    Color(UIColor.govUK.text.buttonSecondary)
-                                )
-                                .font(Font.govUK.subheadlineSemibold)
-                        }
-                    )
-                }
-            }
-                    LazyVGrid(columns: columns, alignment: .center) {
-                        ForEach(viewModel.topicsToBeDisplayed, id: \.self) { topic in
-                            TopicCard(model: topic)
-                                .background(Color(uiColor: UIColor.govUK.fills.surfaceCardBlue))
-                                .roundedBorder(
-                                    cornerRadius: 10,
-                                    borderColor: Color(uiColor: UIColor.govUK.strokes.cardBlue),
-                                    borderWidth: 1
-                                )
-                                .onTapGesture {
-                                    viewModel.trackECommerceSelection(topic.title)
-                                    viewModel.topicAction(topic)
-                                }
-                        }
+                    HStack {
+                        Text(viewModel.widgetTitle)
+                            .font(Font.govUK.title3Semibold)
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
+                            .padding([.leading], 4)
+                        Spacer()
+                        Button(
+                            action: {
+                                showingEditScreen.toggle()
+                            }, label: {
+                                Text(viewModel.editButtonTitle)
+                                    .foregroundColor(
+                                        Color(UIColor.govUK.text.buttonSecondary)
+                                    )
+                                    .font(Font.govUK.subheadlineSemibold)
+                            }
+                        )
                     }
+                }
+                LazyVGrid(columns: columns, alignment: .center) {
+                    ForEach(viewModel.topicsToBeDisplayed, id: \.self) { topic in
+                        TopicCard(model: topic)
+                            .background(Color(uiColor: UIColor.govUK.fills.surfaceCardBlue))
+                            .roundedBorder(
+                                cornerRadius: 10,
+                                borderColor: Color(uiColor: UIColor.govUK.strokes.cardBlue),
+                                borderWidth: 1
+                            )
+                            .onTapGesture {
+                                viewModel.trackECommerceSelection(topic.title)
+                                viewModel.topicAction(topic)
+                            }
+                    }
+                }
                 if !viewModel.showAllTopicsButton {
                     HStack {
                         Spacer()

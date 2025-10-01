@@ -25,7 +25,9 @@ struct RecentActivityWidget: View {
                             viewModel.seeAllAction()
                         }, label: {
                             Text(viewModel.seeAllButtonTitle)
-                                .foregroundColor(Color(UIColor.govUK.text.link))
+                                .foregroundColor(
+                                    Color(UIColor.govUK.text.buttonSecondary)
+                                )
                                 .font(Font.govUK.subheadlineSemibold)
                         }
                     )

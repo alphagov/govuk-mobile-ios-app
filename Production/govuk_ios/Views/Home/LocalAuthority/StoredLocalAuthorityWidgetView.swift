@@ -21,7 +21,10 @@ struct StoredLocalAuthorityWidgetView: View {
                 } label: {
                     Text(viewModel.editButtonTitle)
                         .font(.govUK.subheadlineSemibold)
-                        .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
+                        .foregroundColor(
+                            Color(uiColor: UIColor.govUK.text.buttonSecondary
+                                 )
+                        )
                 }
                 .accessibilityLabel(viewModel.editButtonAltText)
             }
@@ -33,7 +36,10 @@ struct StoredLocalAuthorityWidgetView: View {
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.link))
                         .padding()
                     Spacer()
-                }.background {
+                }.onTapGesture {
+                    viewModel.open(item: viewModel.cardModels()[0])
+                }
+                .background {
                     Color(uiColor: UIColor.govUK.fills.surfaceList)
                 }
                 .roundedBorder(borderColor: .clear)
@@ -42,6 +48,9 @@ struct StoredLocalAuthorityWidgetView: View {
                         uiColor: UIColor.govUK.strokes.cardDefault
                     ), radius: 0, x: 0, y: 3
                 )
+                .accessibilityLabel(viewModel.cardModels().first?.name ?? "")
+                .accessibilityAddTraits(.isLink)
+                .accessibilityHint(String.common.localized("openWebLinkHint"))
             } else {
                 HStack {
                     Text(viewModel.twoTierAuthorityDescription)

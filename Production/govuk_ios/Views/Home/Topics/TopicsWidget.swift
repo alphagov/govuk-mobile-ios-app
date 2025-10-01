@@ -38,7 +38,9 @@ struct TopicsWidget: View {
                             showingEditScreen.toggle()
                         }, label: {
                             Text(viewModel.editButtonTitle)
-                                .foregroundColor(Color(UIColor.govUK.text.link))
+                                .foregroundColor(
+                                    Color(UIColor.govUK.text.buttonSecondary)
+                                )
                                 .font(Font.govUK.subheadlineSemibold)
                         }
                     )

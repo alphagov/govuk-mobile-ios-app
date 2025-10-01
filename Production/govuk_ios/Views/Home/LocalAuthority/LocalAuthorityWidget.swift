@@ -31,6 +31,7 @@ struct LocalAuthorityWidget: View {
                             .padding(.bottom, 6)
                             .font(.title)
                         Text(viewModel.description)
+                            .multilineTextAlignment(.center)
                             .font(Font.govUK.body)
                             .foregroundColor(
                                 Color(UIColor.govUK.text.primary

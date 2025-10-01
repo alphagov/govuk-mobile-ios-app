@@ -11,7 +11,6 @@ extension AnimationView {
     static var wordmarkSplash: AnimationView {
         .init(
             resourceName: "app_wordmark_splash",
-//            resourceName: "app_splash",
             reducedAnimationProgress: 1
         )
     }

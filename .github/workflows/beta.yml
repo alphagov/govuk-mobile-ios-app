@@ -24,7 +24,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
-    environment: Beta
+    environment: Production
 
     steps:
       - name: Checkout

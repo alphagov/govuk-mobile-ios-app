@@ -60,18 +60,10 @@ struct RecentActivityWidget: View {
     }
 
     private func calculatePaddingForTop(index: Int, count: Int) -> CGFloat {
-        if index == 0 && count > 1 {
-            return 8
-        } else {
-            return 0
-        }
+        index == 0 && count > 1 ? 8 : 0
     }
 
     private func calculatePaddingForBottom(index: Int, count: Int) -> CGFloat {
-        if index == viewModel.recentActivities.count - 1 && count > 1 {
-            return 8
-        } else {
-            return 0
-        }
+        index == viewModel.recentActivities.count - 1 && count > 1 ? 8 : 0
     }
 }

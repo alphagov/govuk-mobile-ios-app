@@ -3,7 +3,6 @@ import UIKit
 import GOVKit
 import UIComponents
 import SwiftUI
-import Combine
 
 class HomeViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
@@ -23,7 +22,6 @@ class HomeViewModel: ObservableObject {
     let localAuthorityService: LocalAuthorityServiceInterface
     @Published var homeContentScrollToTop: Bool = false
     @Published var widgets: [HomepageWidget] = []
-    private var cancellables = Set<AnyCancellable>()
 
     init(analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,

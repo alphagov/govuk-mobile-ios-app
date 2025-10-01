@@ -311,4 +311,51 @@ struct AppCoordinatorTests {
 
         #expect(!mockPeriAuthCoordinator._startCalled)
     }
+
+    @Test
+    func showPrivacyScreen_presentsPrivacyViewController() {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockPrivacyCoordinator = MockBaseCoordinator(
+            navigationController: UINavigationController()
+        )
+        mockCoordinatorBuilder._stubbedPrivacyCoordinator = mockPrivacyCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
+            navigationController: mockNavigationController
+        )
+        
+        subject.showPrivacyScreen()
+
+        #expect(mockPrivacyCoordinator._startCalled)
+    }
+
+    @Test
+    func hidePrivacyScreen_hidesPrivacyViewController() {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockPrivacyCoordinator = MockBaseCoordinator(
+            navigationController: UINavigationController()
+        )
+        mockCoordinatorBuilder._stubbedPrivacyCoordinator = mockPrivacyCoordinator
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
+            navigationController: mockNavigationController
+        )
+
+        subject.showPrivacyScreen()
+        #expect(subject.childCoordinators.first(where: { $0 == mockPrivacyCoordinator } ) != nil)
+        subject.hidePrivacyScreen()
+        #expect(subject.childCoordinators.count == 0)
+    }
 }

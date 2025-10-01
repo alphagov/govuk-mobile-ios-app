@@ -21,6 +21,7 @@ class HomeViewModel: ObservableObject {
     let activityService: ActivityServiceInterface
     let localAuthorityService: LocalAuthorityServiceInterface
     @Published var homeContentScrollToTop: Bool = false
+    @Published var widgets: [HomepageWidget] = []
 
     init(analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
@@ -52,19 +53,45 @@ class HomeViewModel: ObservableObject {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
+        fetchWidgets()
     }
-    var widgets: [HomepageWidget] {
-        let array = [topicsView, recentActivityWidget].compactMap { $0 }
-        return array
+
+    func fetchWidgets() {
+        let array = [
+            topicsView,
+            localServicesWidget,
+            storedLocalAuthorityWidget,
+            recentActivityWidget
+        ].compactMap { $0 }
+        widgets = array
     }
 
     var topicsView: HomepageWidget? {
         guard featureEnabled(.topics)
         else { return nil }
         return HomepageWidget(
-            content: TopicsView(
+            content: TopicsWidget(
                 viewModel: self.topicsWidgetViewModel
             )
+        )
+    }
+
+    private var storedLocalAuthorityWidget: HomepageWidget? {
+        guard featureEnabled(.localServices) else { return nil }
+        let localAuthorities = localAuthorityService.fetchSavedLocalAuthority()
+        guard localAuthorities.count > 0 else { return nil }
+
+        let viewModel = StoredLocalAuthorityWidgetViewModel(
+            analyticsService: analyticsService,
+            localAuthorities: localAuthorities,
+            openURLAction: openURLAction,
+            openEditViewAction: editLocalAuthorityAction
+        )
+        let view = StoredLocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        return HomepageWidget(
+            content: view
         )
     }
 
@@ -80,6 +107,21 @@ class HomeViewModel: ObservableObject {
             }
         )
         let view = RecentActivityWidget(viewModel: viewModel)
+        return HomepageWidget(
+            content: view
+        )
+    }
+
+    var localServicesWidget: HomepageWidget? {
+        guard featureEnabled(.localServices),
+              localAuthorityService.fetchSavedLocalAuthority().first == nil
+        else { return nil }
+        let viewModel = LocalAuthorityWidgetViewModel { [weak self] in
+            self?.localAuthorityAction()
+        }
+        let view = LocalAuthorityWidget(
+            viewModel: viewModel
+        )
         return HomepageWidget(
             content: view
         )

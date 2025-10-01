@@ -48,7 +48,7 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
     }
 
     var revokeTokenURL: URL {
-        authenticationBaseURL.appendingPathComponent("oauth2/revoke")
+        tokenBaseURL.appendingPathComponent("oauth2/revoke")
     }
 
     private func string(for key: AppEnvironmentKey) -> String {

@@ -6,12 +6,6 @@ class LaunchViewController: BaseViewController {
     private let viewModel: LaunchViewModel
     private lazy var crownAnimationView = AnimationView.crownSplash
     private lazy var wordmarkAnimationView = AnimationView.wordmarkSplash
-    private var crownPaddingConstraint: NSLayoutConstraint {
-        crownAnimationView.topAnchor.constraint(
-            equalTo: wordmarkAnimationView.bottomAnchor,
-            constant: traitCollection.verticalSizeClass == .compact ? 25 : 150
-        )
-    }
 
     init(viewModel: LaunchViewModel,
          analyticsService: AnalyticsServiceInterface) {
@@ -78,8 +72,10 @@ class LaunchViewController: BaseViewController {
             crownAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             crownAnimationView.widthAnchor.constraint(equalToConstant: 75),
             crownAnimationView.heightAnchor.constraint(equalToConstant: 75),
-            crownPaddingConstraint,
-            crownAnimationView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor)
+            crownAnimationView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -50
+            )
         ])
     }
 }

@@ -29,11 +29,8 @@ class LaunchViewController: BaseViewController {
         wordmarkAnimationView.animateIfAvailable(
             completion: { [weak self] in
                 DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.viewModel.wordmarkAnimationCompleted = true
-                    if self.viewModel.animationsCompleted {
-                        self.viewModel.animationsCompletedAction()
-                    }
+                    self?.viewModel.wordmarkAnimationCompleted = true
+                    self?.viewModel.animationsCompleted()
                 }
             }
         )
@@ -41,11 +38,8 @@ class LaunchViewController: BaseViewController {
         crownAnimationView.animateIfAvailable(
             completion: { [weak self] in
                 DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.viewModel.crownAnimationCompleted = true
-                    if self.viewModel.animationsCompleted {
-                        self.viewModel.animationsCompletedAction()
-                    }
+                    self?.viewModel.crownAnimationCompleted = true
+                    self?.viewModel.animationsCompleted()
                 }
             }
         )

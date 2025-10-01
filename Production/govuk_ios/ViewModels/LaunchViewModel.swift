@@ -1,7 +1,7 @@
 import Foundation
 
 class LaunchViewModel {
-    let animationsCompletedAction: () -> Void
+    private let animationsCompletedAction: () -> Void
     var crownAnimationCompleted = false
     var wordmarkAnimationCompleted = false
 
@@ -9,7 +9,9 @@ class LaunchViewModel {
         self.animationsCompletedAction = animationsCompletedAction
     }
 
-    var animationsCompleted: Bool {
-        crownAnimationCompleted && wordmarkAnimationCompleted
+    func animationsCompleted() {
+        if crownAnimationCompleted && wordmarkAnimationCompleted {
+            animationsCompletedAction()
+        }
     }
 }

@@ -67,12 +67,12 @@ public final class AppConfigService: AppConfigServiceInterface {
         chatUrls = config.chatUrls
     }
 
-    private func updateChatPollInterval(_ interval: Int?) {
+    private func updateChatPollInterval(_ interval: TimeInterval?) {
         guard let pollInterval = interval,
               pollInterval > 0 else {
             return
         }
-        chatPollIntervalSeconds = TimeInterval(pollInterval)
+        chatPollIntervalSeconds = pollInterval
     }
 
     private func updateTokenExpirySeconds(_ expiry: Int?) {

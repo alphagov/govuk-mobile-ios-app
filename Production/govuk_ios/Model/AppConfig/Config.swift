@@ -8,7 +8,7 @@ struct Config: Decodable {
     let lastUpdated: String
     let searchApiUrl: String?
     var authenticationIssuerBaseUrl: String?
-    let chatPollIntervalSeconds: Int?
+    let chatPollIntervalSeconds: TimeInterval?
     let refreshTokenExpirySeconds: Int?
     let alertBanner: AlertBanner?
     let chatBanner: ChatBanner?

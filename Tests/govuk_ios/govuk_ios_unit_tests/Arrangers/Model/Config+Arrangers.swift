@@ -14,7 +14,7 @@ extension Config {
                         lastUpdated: String = "test",
                         searchApiUrl: String? = nil,
                         authenticationIssuerBaseUrl: String = "https://test.com",
-                        chatPollIntervalSeconds: Int? = 3,
+                        chatPollIntervalSeconds: TimeInterval? = 3,
                         refreshTokenExpirySeconds: Int? = 3600) -> Config {
         .init(
             available: available,

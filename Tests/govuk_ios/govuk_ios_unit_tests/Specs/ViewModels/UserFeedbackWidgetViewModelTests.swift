@@ -25,4 +25,19 @@ struct UserFeedbackWidgetViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.first?.params?["section"] as? String == "Homepage")
         #expect(mockAnalyticsService._trackedEvents.first?.params?["url"] as? String == "https://www.test.com")
     }
+
+    @Test
+    func open_receivesExpectedUrl() throws {
+        let link = UserFeedbackBanner.Link(title: "Title", url: URL(string: "https://www.test.com")!)
+        let userFeedback = UserFeedbackBanner(body: "Body", link: link)
+        let mockUrlOpener = MockURLOpener()
+        let sut = UserFeedbackWidgetViewModel(
+            userFeedback: userFeedback,
+            analyticsService: MockAnalyticsService(),
+            urlOpener: mockUrlOpener
+        )
+        sut.open()
+
+        #expect(mockUrlOpener._receivedOpenIfPossibleUrl == URL(string: "https://www.test.com")!)
+    }
 }

@@ -58,7 +58,7 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
             category: String.topics.localized("topicDetailStepByStepHeader")
         )
         return LinkRow(
-            id: content.title,
+            id: UUID().uuidString,
             title: content.title,
             body: nil,
             action: { [weak self] in

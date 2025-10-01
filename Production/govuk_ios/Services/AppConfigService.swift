@@ -7,6 +7,7 @@ protocol AppConfigServiceInterface {
     func isFeatureEnabled(key: Feature) -> Bool
     var chatPollIntervalSeconds: TimeInterval { get }
     var alertBanner: AlertBanner? { get }
+    var chatBanner: ChatBanner? { get }
     var userFeedbackBanner: UserFeedbackBanner? { get }
     var chatUrls: ChatURLs? { get }
 }
@@ -15,15 +16,19 @@ public final class AppConfigService: AppConfigServiceInterface {
     private var featureFlags: [String: Bool] = [:]
 
     private let appConfigServiceClient: AppConfigServiceClientInterface
+    private let analyticsService: AnalyticsServiceInterface
     private var retryInterval: Int?
 
     var chatPollIntervalSeconds: TimeInterval = 3.0
     var alertBanner: AlertBanner?
+    var chatBanner: ChatBanner?
     var userFeedbackBanner: UserFeedbackBanner?
     private(set) var chatUrls: ChatURLs?
 
-    init(appConfigServiceClient: AppConfigServiceClientInterface) {
+    init(appConfigServiceClient: AppConfigServiceClientInterface,
+         analyticsService: AnalyticsServiceInterface) {
         self.appConfigServiceClient = appConfigServiceClient
+        self.analyticsService = analyticsService
     }
 
     func fetchAppConfig(completion: @escaping FetchAppConfigCompletion) {
@@ -36,9 +41,12 @@ public final class AppConfigService: AppConfigServiceInterface {
     }
 
     private func handleResult(_ result: FetchAppConfigResult) {
-        guard case .success(let appConfig) = result
-        else { return }
-        setConfig(appConfig.config)
+        switch result {
+        case .success(let appConfig):
+            setConfig(appConfig.config)
+        case .failure(let error):
+            analyticsService.track(error: error)
+        }
     }
 
     private func setConfig(_ config: Config) {
@@ -51,6 +59,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         updateSearch(urlString: config.searchApiUrl)
         updateChatPollInterval(config.chatPollIntervalSeconds)
         alertBanner = config.alertBanner
+        chatBanner = config.chatBanner
         userFeedbackBanner = config.userFeedbackBanner
         chatUrls = config.chatUrls
     }

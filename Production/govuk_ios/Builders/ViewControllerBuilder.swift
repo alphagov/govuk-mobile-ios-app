@@ -299,7 +299,7 @@ class ViewControllerBuilder {
         let viewModel = SignInErrorViewModel(
             completion: completion
         )
-        let view = InfoView(viewModel: viewModel)
+        let view = InfoView<SignInErrorViewModel>(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)
         return viewController
     }
@@ -426,7 +426,7 @@ class ViewControllerBuilder {
             error: error,
             action: action
         )
-        let view = InfoView(viewModel: viewModel)
+        let view = InfoView<ChatErrorViewModel>(viewModel: viewModel)
         let viewController = HostingViewController(
             rootView: view,
             navigationBarHidden: true
@@ -448,10 +448,7 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func welcomeOnboarding(completion: @escaping () -> Void) -> UIViewController {
-        let viewModel = WelcomeOnboardingViewModel(
-            completeAction: completion
-        )
+    func welcomeOnboarding(viewModel: WelcomeOnboardingViewModel) -> UIViewController {
         let containerView = InfoView(
             viewModel: viewModel
         )
@@ -487,7 +484,7 @@ class ViewControllerBuilder {
             completionAction: completionAction,
             cancelOnboardingAction: cancelOnboardingAction
         )
-        let containerView = InfoView(
+        let containerView = InfoView<ChatInfoOnboardingViewModel>(
             viewModel: viewModel
         )
         let viewController = HostingViewController(
@@ -510,7 +507,7 @@ class ViewControllerBuilder {
             cancelOnboardingAction: cancelOnboardingAction,
             completionAction: completionAction
         )
-        let containerView = InfoView(
+        let containerView = InfoView<ChatConsentOnboardingViewModel>(
             viewModel: viewModel,
             customView: {
                 AnyView(InfoIconListView(
@@ -560,7 +557,7 @@ class ViewControllerBuilder {
             ],
             openURLAction: openURLAction
         )
-        let containerView = InfoView(
+        let containerView = InfoView<ChatOptInViewModel>(
             viewModel: viewModel,
             customView: { AnyView(linksView) }
         )
@@ -589,7 +586,7 @@ class ViewControllerBuilder {
             ],
             openURLAction: openURLAction
         )
-        let containerView = InfoView(
+        let containerView = InfoView<ChatOffboardingViewModel>(
             viewModel: viewModel,
             customView: { AnyView(linksView) }
         )

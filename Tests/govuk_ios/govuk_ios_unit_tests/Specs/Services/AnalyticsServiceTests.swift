@@ -178,6 +178,26 @@ struct AnalyticsServiceTests {
     }
 
     @Test
+    func trackError_tracksError() {
+        let mockAnalyticsClient = MockAnalyticsClient()
+        let mockUserDefaults = MockUserDefaultsService()
+        let mockAuthenticationService = MockAuthenticationService()
+        mockAuthenticationService._stubbedIsSignedIn = true
+        let subject = AnalyticsService(
+            clients: [mockAnalyticsClient],
+            userDefaultsService: mockUserDefaults,
+            authenticationService: mockAuthenticationService
+        )
+        subject.setAcceptedAnalytics(accepted: true)
+
+        let error = NSError(domain: "test", code: 1)
+        subject.track(error: error)
+
+        #expect(mockAnalyticsClient._trackErrorReceivedErrors.count == 1)
+        #expect(mockAnalyticsClient._trackErrorReceivedErrors.contains(where: { $0 as NSError == error }) == true)
+    }
+
+    @Test
     @MainActor
     func trackScreen_tracksScreen() {
         let mockAnalyticsClient = MockAnalyticsClient()

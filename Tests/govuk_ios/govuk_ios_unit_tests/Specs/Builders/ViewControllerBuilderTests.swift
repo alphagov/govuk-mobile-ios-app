@@ -211,7 +211,8 @@ struct ViewControllerBuilderTests {
         let result = subject.signInError(
             completion: { }
         )
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView =
+        (result as? HostingViewController<InfoView<SignInErrorViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -229,10 +230,12 @@ struct ViewControllerBuilderTests {
     func welcomeOnboarding_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.welcomeOnboarding(
-            completion: { }
+            viewModel: WelcomeOnboardingViewModel(
+                completeAction: { }
+            )
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView<WelcomeOnboardingViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -301,7 +304,7 @@ struct ViewControllerBuilderTests {
             action: { }
         )
         
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView = (result as? HostingViewController<InfoView<ChatErrorViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -314,7 +317,8 @@ struct ViewControllerBuilderTests {
             cancelOnboardingAction: { }
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView =
+        (result as? HostingViewController<InfoView<ChatInfoOnboardingViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -328,7 +332,8 @@ struct ViewControllerBuilderTests {
             completionAction: { }
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView =
+        (result as? HostingViewController<InfoView<ChatConsentOnboardingViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -342,7 +347,8 @@ struct ViewControllerBuilderTests {
             completionAction: { }
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView =
+        (result as? HostingViewController<InfoView<ChatOptInViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 
@@ -356,7 +362,8 @@ struct ViewControllerBuilderTests {
             completionAction: { }
         )
 
-        let rootView = (result as? HostingViewController<InfoView>)?.rootView
+        let rootView =
+        (result as? HostingViewController<InfoView<ChatOffboardingViewModel>>)?.rootView
         #expect(rootView != nil)
     }
 }

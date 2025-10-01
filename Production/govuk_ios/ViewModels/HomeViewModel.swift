@@ -53,7 +53,6 @@ class HomeViewModel: ObservableObject {
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
     }
-
     var widgets: [HomepageWidget] {
         let array = [topicsView, recentActivityWidget].compactMap { $0 }
         return array

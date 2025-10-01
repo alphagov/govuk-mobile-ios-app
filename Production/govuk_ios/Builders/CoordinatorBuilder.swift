@@ -306,6 +306,7 @@ class CoordinatorBuilder {
             authenticationService: container.authenticationService.resolve(),
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
+            analyticsService: container.analyticsService.resolve(),
             completionAction: completionAction
         )
     }

@@ -21,6 +21,12 @@ struct HomeViewModelTests {
             body: "test",
             link: nil
         )
+        mockConfigService._stubbedChatBanner = .init(
+            id: "test",
+            title: "test",
+            body: "test",
+            link: mockConfigService._stubbedChatBannerLink
+        )
         mockConfigService._stubbedUserFeedbackBanner = .init(
             body: "test",
             link: mockConfigService._stubbedUserFeedbackBannerLink
@@ -45,7 +51,7 @@ struct HomeViewModelTests {
         )
 
         let widgets = subject.widgets
-
+      
         #expect((widgets as Any) is [HomepageWidget])
         #expect(widgets.count == 2)
     }

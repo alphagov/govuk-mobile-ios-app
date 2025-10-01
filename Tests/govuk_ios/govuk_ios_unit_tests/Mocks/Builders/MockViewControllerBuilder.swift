@@ -195,9 +195,11 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _stubbedWelcomeOnboardingViewController: UIViewController?
-    var _receivedWelcomeOnboardingCompletion: (() -> Void)?
-    override func welcomeOnboarding(completion: @escaping () -> Void) -> UIViewController {
-        _receivedWelcomeOnboardingCompletion = completion
+    var _stubbedWelcomeOnboardingViewModel: WelcomeOnboardingViewModel?
+    override func welcomeOnboarding(
+        viewModel: WelcomeOnboardingViewModel
+    ) -> UIViewController {
+        _stubbedWelcomeOnboardingViewModel = viewModel
         return _stubbedWelcomeOnboardingViewController ?? UIViewController()
     }
 

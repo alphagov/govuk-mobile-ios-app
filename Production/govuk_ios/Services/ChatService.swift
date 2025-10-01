@@ -12,9 +12,9 @@ protocol ChatServiceInterface {
     func chatHistory(conversationId: String,
                      completion: @escaping (ChatHistoryResult) -> Void)
     func clearHistory()
+    func clear()
 
     // MARK: - Configuration
-    var chatOnboardingSeen: Bool { get }
     var chatOptedIn: Bool? { get set }
     var chatOptInAvailable: Bool { get }
     var chatTestActive: Bool { get }
@@ -24,7 +24,7 @@ protocol ChatServiceInterface {
     var termsAndConditions: URL { get }
     var about: URL { get }
     var feedback: URL { get }
-    func setChatOnboarded()
+    var chatOnboardingSeen: Bool { get set }
 }
 
 // MARK: - Service
@@ -133,6 +133,11 @@ final class ChatService: ChatServiceInterface {
         setConversationId(nil)
     }
 
+    func clear() {
+        chatOptedIn = nil
+        chatOnboardingSeen = false
+    }
+
     private func setConversationId(_ conversationId: String?) {
         guard conversationId != currentConversationId else { return }
         chatRepository.saveConversation(conversationId)
@@ -146,19 +151,28 @@ extension ChatService {
     }
 
     var chatOptInAvailable: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChatOptIn)
+        configService.isFeatureEnabled(key: .chatOptIn)
     }
 
     var chatTestActive: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChatTestActive)
+        configService.isFeatureEnabled(key: .chatTestActive)
     }
 
     var isEnabled: Bool {
-        configService.isFeatureEnabled(key: .testIntegrationChat) && chatTestActive
+//        configService.isFeatureEnabled(key: .chat) && chatTestActive
+        false
     }
 
     var chatOnboardingSeen: Bool {
-        userDefaultsService.bool(forKey: .chatOnboardingSeen)
+        get {
+            userDefaultsService.bool(forKey: .chatOnboardingSeen)
+        } set {
+            if newValue {
+                userDefaultsService.set(bool: newValue, forKey: .chatOnboardingSeen)
+            } else {
+                userDefaultsService.removeObject(forKey: .chatOnboardingSeen)
+            }
+        }
     }
 
     var chatOptedIn: Bool? {
@@ -187,9 +201,5 @@ extension ChatService {
 
     var feedback: URL {
         configService.chatUrls?.feedback ?? Constants.API.defaultChatFeedbackUrl
-    }
-
-    func setChatOnboarded() {
-        userDefaultsService.set(bool: true, forKey: .chatOnboardingSeen)
     }
 }

@@ -334,7 +334,7 @@ final class ChatServiceTests {
             configService: mockConfigService,
             userDefaultsService: mockUserDefaultsService
         )
-        mockConfigService.features = [.testIntegrationChat]
+        mockConfigService.features = [.chat]
 
         #expect(sut.isEnabled == false)
     }
@@ -347,7 +347,7 @@ final class ChatServiceTests {
             configService: mockConfigService,
             userDefaultsService: mockUserDefaultsService
         )
-        mockConfigService.features = [.testIntegrationChatTestActive]
+        mockConfigService.features = [.chatTestActive]
 
         #expect(sut.isEnabled == false)
     }
@@ -360,13 +360,14 @@ final class ChatServiceTests {
             configService: mockConfigService,
             userDefaultsService: mockUserDefaultsService
         )
-        mockConfigService.features = [.testIntegrationChat, .testIntegrationChatTestActive]
+        mockConfigService.features = [.chat, .chatTestActive]
 
-        #expect(sut.isEnabled == true)
+//        #expect(sut.isEnabled == true)
+        #expect(sut.isEnabled == false)
     }
 
     @Test
-    func setChatOnboarded_updatesChatOnboardingSeen_returnsTrue() {
+    func chatOnboarded_setTrue_returnsTrue() {
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
@@ -375,8 +376,39 @@ final class ChatServiceTests {
         )
 
         #expect(!sut.chatOnboardingSeen)
-        sut.setChatOnboarded()
+        sut.chatOnboardingSeen = true
         #expect(sut.chatOnboardingSeen)
+    }
+
+    @Test
+    func chatOnboarded_setFalse_returnsFalse() {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        sut.chatOnboardingSeen = true
+        #expect(sut.chatOnboardingSeen)
+        sut.chatOnboardingSeen = false
+        #expect(!sut.chatOnboardingSeen)
+    }
+
+    @Test
+    func clear_resetsChatValues() {
+        let sut = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        sut.chatOnboardingSeen = true
+        sut.chatOptedIn = true
+        sut.clear()
+        #expect(!sut.chatOnboardingSeen)
+        #expect(sut.chatOptedIn == nil)
     }
 
     @Test
@@ -409,7 +441,7 @@ final class ChatServiceTests {
 
     @Test
     func chatOptInAvailable_featureAvailable_returnsTrue() {
-        mockConfigService.features = [.testIntegrationChatOptIn]
+        mockConfigService.features = [.chatOptIn]
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,
@@ -435,7 +467,7 @@ final class ChatServiceTests {
 
     @Test
     func chatTestActive_featureAvailable_returnsTrue() {
-        mockConfigService.features = [.testIntegrationChatTestActive]
+        mockConfigService.features = [.chatTestActive]
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,

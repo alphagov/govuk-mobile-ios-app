@@ -17,9 +17,7 @@ struct LocalAuthorityWidget: View {
                 HStack {
                     Text(viewModel.title)
                         .font(Font.govUK.title3Semibold)
-                        .foregroundColor(
-                            Color(UIColor.govUK.text.primary)
-                        )
+                        .foregroundColor(Color(UIColor.govUK.text.primary))
                     Spacer()
                 }
                 .padding(.bottom, 12)
@@ -33,9 +31,7 @@ struct LocalAuthorityWidget: View {
                         Text(viewModel.description)
                             .multilineTextAlignment(.center)
                             .font(Font.govUK.body)
-                            .foregroundColor(
-                                Color(UIColor.govUK.text.primary
-                                     ))
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
                         Spacer()
                     }
                     .padding()

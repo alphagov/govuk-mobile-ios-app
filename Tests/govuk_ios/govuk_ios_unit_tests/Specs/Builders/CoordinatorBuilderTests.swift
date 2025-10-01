@@ -439,4 +439,12 @@ struct CoordinatorBuilderTests {
 
         #expect(coordinator is ChatOffboardingCoordinator)
     }
+
+    @Test
+    func privacy_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.privacy()
+
+        #expect(coordinator is PrivacyCoordinator)
+    }
 }

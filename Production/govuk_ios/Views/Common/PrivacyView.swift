@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct PrivacyView: View {
-    @Environment(\.verticalSizeClass) private var verticalSizeClass
-
     var body: some View {
         ZStack {
             Color(.splashScreenBlue)
@@ -10,7 +8,7 @@ struct PrivacyView: View {
             VStack {
                 Spacer()
                 Image(decorative: "splash_crown")
-                    .padding(.bottom, verticalSizeClass == .compact ? 37 : 81)
+                    .padding(.bottom, 50)
             }
         }
         .ignoresSafeArea()

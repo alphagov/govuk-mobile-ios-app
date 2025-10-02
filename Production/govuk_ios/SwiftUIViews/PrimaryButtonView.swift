@@ -12,7 +12,7 @@ struct PrimaryButtonView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
             Divider()
-                .background(Color(UIColor.govUK.strokes.listDivider))
+                .background(Color(UIColor.govUK.strokes.fixedContainer))
                 .ignoresSafeArea(edges: [.leading, .trailing])
                 .padding([.top], 0)
                 SwiftUIButton(

@@ -27,7 +27,7 @@ public struct ButtonStackView: View {
     public var body: some View {
         VStack(spacing: 0) {
             Divider()
-                .overlay(Color(UIColor.govUK.strokes.listDivider))
+                .overlay(Color(UIColor.govUK.strokes.fixedContainer))
                 .ignoresSafeArea()
                 .padding(.bottom, 16)
             let buttonLayout = verticalSizeClass == .compact ?

@@ -73,7 +73,7 @@ class AnimationViewTests {
     @MainActor
     func hasAnimationBegun_updatedProgress_returnsFalse() {
         let subject = AnimationView(
-            resourceName: "app_splash",
+            resourceName: "app_crown_splash",
             reducedAnimationProgress: 0.5
         )
 
@@ -87,7 +87,7 @@ class AnimationViewTests {
     @Test
     @MainActor
     func hasAnimationBegun_animationStarted_returnsTrue() {
-        let subject = AnimationView(resourceName: "app_splash")
+        let subject = AnimationView(resourceName: "app_crown_splash")
         subject.animateIfAvailable { /* Do nothing */ }
 
         #expect(subject.hasAnimationBegun)

@@ -12,7 +12,7 @@ class ViewControllerBuilder {
     func launch(analyticsService: AnalyticsServiceInterface,
                 completion: @escaping () -> Void) -> UIViewController {
         let viewModel = LaunchViewModel(
-            animationCompleted: completion
+            animationsCompletedAction: completion
         )
         return LaunchViewController(
             viewModel: viewModel,

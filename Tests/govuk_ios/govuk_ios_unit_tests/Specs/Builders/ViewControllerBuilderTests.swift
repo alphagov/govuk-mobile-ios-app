@@ -12,6 +12,16 @@ import GOVKit
 @MainActor
 @Suite
 struct ViewControllerBuilderTests {
+    @Test
+    func launch_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.launch(
+            analyticsService: MockAnalyticsService(),
+            completion: { }
+        )
+
+        #expect(result is LaunchViewController)
+    }
 
     @Test
     func home_returnsExpectedResult() {

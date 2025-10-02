@@ -25,7 +25,7 @@ class LaunchViewControllerSnapshotTests: SnapshotTestCase {
         mockAccessibilityManager.animationsEnabled = false
 
         let viewModel = LaunchViewModel(
-            animationCompleted: { }
+            animationsCompletedAction: { }
         )
         let subject = LaunchViewController(
             viewModel: viewModel,

@@ -327,7 +327,7 @@ struct AppCoordinatorTests {
             authenticationService: mockAuthenticationService,
             navigationController: mockNavigationController
         )
-        
+        mockAuthenticationService._stubbedIsSignedIn = true
         subject.showPrivacyScreen()
 
         #expect(mockPrivacyCoordinator._startCalled)
@@ -351,6 +351,7 @@ struct AppCoordinatorTests {
             navigationController: mockNavigationController
         )
 
+        mockAuthenticationService._stubbedIsSignedIn = true
         subject.showPrivacyScreen()
         #expect(subject.childCoordinators.first(where: { $0 == mockPrivacyCoordinator } ) != nil)
         subject.hidePrivacyScreen()

@@ -16,6 +16,7 @@ struct HomeContentView: View {
                     .id(topID)
                 ForEach(viewModel.widgets) { widget in
                     widget
+                        .padding(12)
                 }
             }
             .onChange(of: viewModel.homeContentScrollToTop) { shouldScroll in
@@ -27,6 +28,7 @@ struct HomeContentView: View {
                 }
             }
         }.onAppear {
+            viewModel.fetchWidgets()
             viewModel.trackScreen(screen: self)
         }
         .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))

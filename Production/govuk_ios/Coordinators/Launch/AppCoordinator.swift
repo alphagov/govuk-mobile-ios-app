@@ -8,7 +8,6 @@ class AppCoordinator: BaseCoordinator {
     private var initialLaunch: Bool = true
     private var tabCoordinator: BaseCoordinator?
     private var pendingDeeplink: URL?
-    private var lastPresentedViewController: UIViewController?
 
     init(coordinatorBuilder: CoordinatorBuilder,
          inactivityService: InactivityServiceInterface,
@@ -41,7 +40,7 @@ class AppCoordinator: BaseCoordinator {
     private func startInactivityMonitoring() {
         inactivityService.startMonitoring(
             inactivityHandler: { [weak self] in
-                self?.root.dismiss(animated: false)
+                self?.showPrivacyScreen()
                 self?.authenticationService.clearRefreshToken()
                 self?.startPeriAuthCoordinator()
             }
@@ -63,6 +62,7 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.periAuth(
             navigationController: root,
             completion: { [weak self] in
+                self?.hidePrivacyScreen()
                 self?.startPostAuthCoordinator()
             }
         )
@@ -109,23 +109,20 @@ class AppCoordinator: BaseCoordinator {
 
 extension AppCoordinator: PrivacyPresenting {
     func showPrivacyScreen() {
-        let coordinator = coordinatorBuilder.privacy()
-        if root.presentedViewController != nil {
-            lastPresentedViewController = root.presentedViewController
-            root.presentedViewController?.dismiss(animated: false)
+        if privacyCoordinator == nil,
+           authenticationService.isSignedIn {
+            root.dismiss(animated: false)
+            let coordinator = coordinatorBuilder.privacy()
+            present(coordinator, animated: false)
         }
-        present(coordinator, animated: false)
     }
 
     func hidePrivacyScreen() {
-        if let privacyCoordinaor = childCoordinators.first(where: { $0 is PrivacyProviding }) {
-            privacyCoordinaor.dismiss(animated: false)
-            privacyCoordinaor.finish()
-            if let vcToPresent = lastPresentedViewController {
-                root.present(vcToPresent, animated: false) { [weak self] in
-                    self?.lastPresentedViewController = nil
-                }
-            }
-        }
+        privacyCoordinator?.dismiss(animated: false)
+        privacyCoordinator?.finish()
+    }
+
+    private var privacyCoordinator: BaseCoordinator? {
+        childCoordinators.first(where: { $0 is PrivacyProviding })
     }
 }

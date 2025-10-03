@@ -40,7 +40,7 @@ class AppCoordinator: BaseCoordinator {
     private func startInactivityMonitoring() {
         inactivityService.startMonitoring(
             inactivityHandler: { [weak self] in
-                self?.root.dismiss(animated: true)
+                self?.showPrivacyScreen()
                 self?.authenticationService.clearRefreshToken()
                 self?.startPeriAuthCoordinator()
             }
@@ -62,6 +62,7 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.periAuth(
             navigationController: root,
             completion: { [weak self] in
+                self?.hidePrivacyScreen()
                 self?.startPostAuthCoordinator()
             }
         )
@@ -103,5 +104,25 @@ class AppCoordinator: BaseCoordinator {
         tabCoordinator = coordinator
         start(coordinator, url: pendingDeeplink)
         pendingDeeplink = nil
+    }
+}
+
+extension AppCoordinator: PrivacyPresenting {
+    func showPrivacyScreen() {
+        if privacyCoordinator == nil,
+           authenticationService.isSignedIn {
+            root.dismiss(animated: false)
+            let coordinator = coordinatorBuilder.privacy()
+            present(coordinator, animated: false)
+        }
+    }
+
+    func hidePrivacyScreen() {
+        privacyCoordinator?.dismiss(animated: false)
+        privacyCoordinator?.finish()
+    }
+
+    private var privacyCoordinator: BaseCoordinator? {
+        childCoordinators.first(where: { $0 is PrivacyProviding })
     }
 }

@@ -12,10 +12,8 @@ class CoordinatorBuilder {
         self.container = container
     }
 
-    func app(
-        navigationController: UINavigationController,
-        inactivityService: InactivityServiceInterface
-    ) -> BaseCoordinator & PrivacyPresenting {
+    func app(navigationController: UINavigationController,
+             inactivityService: InactivityServiceInterface) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
             inactivityService: inactivityService,
@@ -471,9 +469,5 @@ class CoordinatorBuilder {
             chatService: container.chatService.resolve(),
             completionAction: completionAction
         )
-    }
-
-    func privacy() -> BaseCoordinator & PrivacyProviding {
-        PrivacyCoordinator()
     }
 }

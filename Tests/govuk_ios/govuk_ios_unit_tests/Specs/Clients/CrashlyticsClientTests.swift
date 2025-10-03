@@ -60,7 +60,6 @@ struct CrashlyticsClientTests {
     }
 
     @Test
-    @MainActor
     func trackEvent_exists_doesNothing() {
         let mockCrashlytics = MockCrashlytics()
         let sut = CrashlyticsClient(
@@ -70,6 +69,18 @@ struct CrashlyticsClientTests {
         sut.track(event: .init(name: "test", params: nil))
 
         #expect(mockCrashlytics._setCrashlyticsCollectionEnabledReceivedEnabled == nil)
+    }
+
+    @Test
+    func trackError_recordsError() {
+        let mockCrashlytics = MockCrashlytics()
+        let sut = CrashlyticsClient(
+            crashlytics: mockCrashlytics
+        )
+        let error = NSError(domain: "test", code: 1)
+        sut.track(error: error)
+
+        #expect(mockCrashlytics._recordErrorReceivedError as NSError? == error)
     }
 
     @Test
@@ -89,5 +100,10 @@ class MockCrashlytics: CrashlyticsInterface {
     var _setCrashlyticsCollectionEnabledReceivedEnabled: Bool?
     func setCrashlyticsCollectionEnabled(_ newValue: Bool) {
         _setCrashlyticsCollectionEnabledReceivedEnabled = newValue
+    }
+
+    var _recordErrorReceivedError: Error?
+    func record(error: any Error) {
+        _recordErrorReceivedError = error
     }
 }

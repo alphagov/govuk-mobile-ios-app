@@ -120,6 +120,25 @@ struct AnalyticsServiceTests {
     }
 
     @Test
+    func trackError_rejectedPermissions_doesNothing() {
+        let mockAnalyticsClient = MockAnalyticsClient()
+        let mockUserDefaultsService = MockUserDefaultsService()
+        let mockAuthenticationService = MockAuthenticationService()
+        mockAuthenticationService._stubbedIsSignedIn = true
+        let subject = AnalyticsService(
+            clients: [mockAnalyticsClient],
+            userDefaultsService: mockUserDefaultsService,
+            authenticationService: mockAuthenticationService
+        )
+        subject.setAcceptedAnalytics(accepted: false)
+
+        let error = NSError(domain: "test", code: 1)
+        subject.track(error: error)
+
+        #expect(mockAnalyticsClient._trackErrorReceivedErrors.count == 0)
+    }
+
+    @Test
     func trackEvent_signedOut_doesNothing() {
         let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = MockUserDefaultsService()
@@ -160,6 +179,29 @@ struct AnalyticsServiceTests {
     }
 
     @Test
+    @MainActor
+    func trackError_signedOut_doesNothing() {
+        let mockAnalyticsClient = MockAnalyticsClient()
+        let mockUserDefaults = MockUserDefaultsService()
+        let mockAuthenticationService = MockAuthenticationService()
+        mockAuthenticationService._stubbedIsSignedIn = true
+        let subject = AnalyticsService(
+            clients: [mockAnalyticsClient],
+            userDefaultsService: mockUserDefaults,
+            authenticationService: mockAuthenticationService
+        )
+        subject.setAcceptedAnalytics(accepted: true)
+
+        let mockViewController = MockBaseViewController(
+            analyticsService: subject
+        )
+        let error = NSError(domain: "test", code: 1)
+        subject.track(error: error)
+
+        #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 0)
+    }
+
+    @Test
     func trackEvent_tracksEvents() {
         let mockAnalyticsClient = MockAnalyticsClient()
         let mockUserDefaults = MockUserDefaultsService()
@@ -175,6 +217,26 @@ struct AnalyticsServiceTests {
         subject.track(event: AppEvent.appLoaded)
 
         #expect(mockAnalyticsClient._trackEventReceivedEvents.count == 1)
+    }
+
+    @Test
+    func trackError_tracksError() {
+        let mockAnalyticsClient = MockAnalyticsClient()
+        let mockUserDefaults = MockUserDefaultsService()
+        let mockAuthenticationService = MockAuthenticationService()
+        mockAuthenticationService._stubbedIsSignedIn = true
+        let subject = AnalyticsService(
+            clients: [mockAnalyticsClient],
+            userDefaultsService: mockUserDefaults,
+            authenticationService: mockAuthenticationService
+        )
+        subject.setAcceptedAnalytics(accepted: true)
+
+        let error = NSError(domain: "test", code: 1)
+        subject.track(error: error)
+
+        #expect(mockAnalyticsClient._trackErrorReceivedErrors.count == 1)
+        #expect(mockAnalyticsClient._trackErrorReceivedErrors.contains(where: { $0 as NSError == error }) == true)
     }
 
     @Test

@@ -185,7 +185,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
                                   sectionTitle: String) -> LinkRow {
         createCommerceItem(content, category: sectionTitle)
         return LinkRow(
-            id: content.title,
+            id: UUID().uuidString,
             title: content.title,
             body: nil,
             action: {

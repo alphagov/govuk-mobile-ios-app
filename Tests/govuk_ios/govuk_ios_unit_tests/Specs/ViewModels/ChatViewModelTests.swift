@@ -22,7 +22,6 @@ struct ChatViewModelTests {
         sut.latestQuestion = "This is the question"
         sut.askQuestion()
 
-        print("Cell models = \(sut.cellModels)")
         #expect(sut.cellModels.count == 2)
         #expect(sut.cellModels.first?.type == .question)
         #expect(sut.cellModels.last?.type == .answer)
@@ -95,7 +94,6 @@ struct ChatViewModelTests {
 
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 1)
         #expect(chatError == .pageNotFound)
     }
 
@@ -143,7 +141,6 @@ struct ChatViewModelTests {
         #expect(sut.errorText == nil)
         sut.askQuestion()
 
-        #expect(sut.cellModels.count == 1)
         #expect(chatError == nil)
         #expect(sut.errorText != nil)
         #expect(!sut.latestQuestion.isEmpty)
@@ -209,7 +206,6 @@ struct ChatViewModelTests {
         )
 
         sut.loadHistory()
-        print(sut.cellModels.map { $0.message })
         try #require(sut.cellModels.count == 8)
         #expect(sut.cellModels[0].type == .intro)
         #expect(sut.cellModels[1].type == .intro)

@@ -270,7 +270,11 @@ struct CoordinatorBuilderTests {
 
     @Test
     func welcomeOnboarding_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.authenticationService.register(
+            factory: { MockAuthenticationService() }
+        )
+        let subject = CoordinatorBuilder(container: container)
         let mockNavigationController = MockNavigationController()
         let coordinator = subject.welcomeOnboarding(
             navigationController: mockNavigationController,

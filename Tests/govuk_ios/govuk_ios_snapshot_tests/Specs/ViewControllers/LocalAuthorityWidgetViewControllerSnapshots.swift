@@ -10,7 +10,7 @@ import UIKit
 @testable import govuk_ios
 
 @MainActor
-final class LocalAuthorityWidgetViewControllerSnapshots: SnapshotTestCase {
+final class LocalAuthorityWidgetControllerSnapshots: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
@@ -32,7 +32,7 @@ final class LocalAuthorityWidgetViewControllerSnapshots: SnapshotTestCase {
         let viewModel = LocalAuthorityWidgetViewModel(
             tapAction: {}
         )
-        let view = LocalAuthorityWidgetView(
+        let view = LocalAuthorityWidget(
             viewModel: viewModel
         )
         return HostingViewController(rootView: view)

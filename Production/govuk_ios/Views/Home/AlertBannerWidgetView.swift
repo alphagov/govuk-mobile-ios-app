@@ -24,7 +24,7 @@ struct AlertBannerWidgetView: View {
                 .accessibilitySortPriority(0)
             }
             Divider()
-                .overlay(Color(cgColor: UIColor.govUK.strokes.cardBlue.cgColor))
+                .overlay(Color(UIColor.govUK.strokes.cardBlue))
                 .padding(.vertical, 6)
             if let titlelinkTitle = viewModel.linkTitle,
                !titlelinkTitle.isEmpty {

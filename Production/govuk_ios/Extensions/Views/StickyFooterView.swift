@@ -13,7 +13,7 @@ class StickyFooterView: UIView {
 
     private lazy var divider: UIView = {
         let localView = UIView()
-        localView.backgroundColor = UIColor.govUK.strokes.listDivider
+        localView.backgroundColor = UIColor.govUK.strokes.fixedContainer
         localView.translatesAutoresizingMaskIntoConstraints = false
         return localView
     }()

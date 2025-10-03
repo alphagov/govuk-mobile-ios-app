@@ -20,7 +20,8 @@ struct RecentActivityItemCard: View {
                 Spacer()
             }.padding(8)
             if !isLastItemInList {
-                Divider().overlay(Color(UIColor.govUK.strokes.listDivider))
+                Divider()
+                    .overlay(Color(UIColor.govUK.strokes.listDivider))
             }
         }.background(Color(uiColor: UIColor.govUK.fills.surfaceList))
     }

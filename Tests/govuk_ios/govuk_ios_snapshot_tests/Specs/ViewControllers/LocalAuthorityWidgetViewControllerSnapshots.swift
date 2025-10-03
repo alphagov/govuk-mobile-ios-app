@@ -1,0 +1,40 @@
+//
+
+
+import Foundation
+import XCTest
+import GOVKit
+import UIKit
+
+@testable import GOVKitTestUtilities
+@testable import govuk_ios
+
+@MainActor
+final class LocalAuthorityWidgetViewControllerSnapshots: SnapshotTestCase {
+
+    func test_loadInNavigationController_light_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            viewController: viewController(),
+            mode: .light,
+            prefersLargeTitles: true
+        )
+    }
+
+
+    func test_loadInNavigationController_dark_rendersCorrectly() {
+        VerifySnapshotInNavigationController(
+            viewController: viewController(),
+            mode: .dark,
+            prefersLargeTitles: true
+        )
+    }
+    private func viewController() -> UIViewController {
+        let viewModel = LocalAuthorityWidgetViewModel(
+            tapAction: {}
+        )
+        let view = LocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        return HostingViewController(rootView: view)
+    }
+}

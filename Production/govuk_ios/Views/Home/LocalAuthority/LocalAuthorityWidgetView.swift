@@ -18,7 +18,7 @@ struct LocalAuthorityWidgetView: View {
                 Spacer()
             }
             Divider()
-                .overlay(Color(cgColor: UIColor.govUK.strokes.cardGreen.cgColor))
+                .overlay(Color(UIColor.govUK.strokes.cardGreen))
             HStack {
                 Image(decorative: "local_widget_icon")
                 VStack(alignment: .leading) {

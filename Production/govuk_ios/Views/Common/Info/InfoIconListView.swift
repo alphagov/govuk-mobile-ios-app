@@ -11,7 +11,7 @@ struct InfoIconListView: View {
                     .padding(paddingEdges(for: index))
                 if index < list.count - 1 {
                     Divider()
-                        .background(Color(UIColor.govUK.strokes.chatOnboardingListDivider))
+                        .overlay(Color(UIColor.govUK.strokes.chatOnboardingListDivider))
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
                 }

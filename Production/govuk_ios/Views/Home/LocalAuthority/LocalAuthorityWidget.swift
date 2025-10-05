@@ -26,16 +26,16 @@ struct LocalAuthorityWidget: View {
                     VStack(alignment: .center) {
                         Spacer()
                         Image(systemName: "plus.circle")
-                            .padding(.bottom, 6)
-                            .font(.title)
-                        Text(viewModel.description)
-                            .multilineTextAlignment(.center)
-                            .font(Font.govUK.body)
                             .foregroundColor(
                                 Color(
                                     UIColor.govUK.text.iconTertiary
                                 )
                             )
+                            .padding(.bottom, 6)
+                            .font(.title)
+                        Text(viewModel.description)
+                            .multilineTextAlignment(.center)
+                            .font(Font.govUK.body)
                             .foregroundColor(Color(UIColor.govUK.text.primary))
                         Spacer()
                     }

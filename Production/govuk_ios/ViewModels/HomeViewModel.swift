@@ -20,6 +20,7 @@ class HomeViewModel: ObservableObject {
     let activityService: ActivityServiceInterface
     let localAuthorityService: LocalAuthorityServiceInterface
     let userDefaultService: UserDefaultsServiceInterface
+    let chatService: ChatServiceInterface
     @Published var widgets: [WidgetView] = []
 
     init(analyticsService: AnalyticsServiceInterface,
@@ -37,7 +38,8 @@ class HomeViewModel: ObservableObject {
          searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
-         userDefaultService: UserDefaultsServiceInterface) {
+         userDefaultService: UserDefaultsServiceInterface,
+         chatService: ChatServiceInterface) {
         self.analyticsService = analyticsService
         self.configService = configService
         self.notificationService = notificationService
@@ -54,6 +56,7 @@ class HomeViewModel: ObservableObject {
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
         self.userDefaultService = userDefaultService
+        self.chatService = chatService
     }
 
 
@@ -110,8 +113,10 @@ class HomeViewModel: ObservableObject {
     @MainActor
     private var chatWidget: WidgetView? {
         guard let chat = configService.chatBanner,
+              chatService.isEnabled,
               featureEnabled(.chatOptIn),
-              !userDefaultService.hasSeen(banner: chat)
+              !userDefaultService.hasSeen(banner: chat),
+              chatService.chatOptedIn == true
         else { return nil }
 
         let viewModel = ChatWidgetViewModel(

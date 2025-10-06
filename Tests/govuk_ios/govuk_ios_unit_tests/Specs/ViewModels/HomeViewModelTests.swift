@@ -33,6 +33,10 @@ struct HomeViewModelTests {
             link: mockConfigService._stubbedUserFeedbackBannerLink
         )
 
+        let mockChatService = MockChatService()
+        mockChatService._stubbedIsEnabled = true
+        mockChatService.chatOptedIn = true
+
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: mockConfigService,
@@ -49,7 +53,8 @@ struct HomeViewModelTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: mockChatService
         )
 
         await subject.reloadWidgets()
@@ -90,7 +95,8 @@ struct HomeViewModelTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
         let widgets = subject.widgets
 

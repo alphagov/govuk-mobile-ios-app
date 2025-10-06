@@ -35,6 +35,7 @@ struct HomeViewModelTests {
 
         let mockChatService = MockChatService()
         mockChatService._stubbedIsEnabled = true
+        mockChatService._stubbedChatOptInAvailable = true
         mockChatService.chatOptedIn = true
 
         let subject = HomeViewModel(

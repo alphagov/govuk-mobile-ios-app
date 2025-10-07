@@ -114,7 +114,6 @@ class HomeViewModel: ObservableObject {
     private var chatWidget: WidgetView? {
         guard let chat = configService.chatBanner,
               chatService.isEnabled,
-              chatService.chatOptInAvailable,
               chatService.chatOptedIn == true,
               !userDefaultService.hasSeen(banner: chat)
         else { return nil }

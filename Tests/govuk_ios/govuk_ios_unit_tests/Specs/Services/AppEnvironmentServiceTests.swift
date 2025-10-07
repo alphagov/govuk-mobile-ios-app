@@ -58,16 +58,6 @@ struct AppEnvironmentServiceTests {
     }
 
     @Test
-    func revokeTokenURL_returnsExpectedValue() {
-        let mockConfig = ["TOKEN_BASE_URL": "https://www.gov.uk/"]
-        let sut = AppEnvironmentService(
-            config: mockConfig
-        )
-
-        #expect(sut.revokeTokenURL.absoluteString == "https://www.gov.uk/oauth2/revoke")
-    }
-
-    @Test
     func chatURL_returnsExpectedValue() {
         let mockConfig = ["CHAT_BASE_URL": "https://www.gov.uk/"]
         let sut = AppEnvironmentService(

@@ -56,7 +56,7 @@ class SceneDelegate: UIResponder,
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        appCoordinator.showPrivacyScreen()
+        appCoordinator.showPrivacyScreen(appDidTimeout: false)
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {

@@ -3,7 +3,7 @@ import Foundation
 import GOVKit
 
 protocol PrivacyPresenting {
-    func showPrivacyScreen()
+    func showPrivacyScreen(appDidTimeout: Bool)
     func hidePrivacyScreen()
 }
 

@@ -20,6 +20,7 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             inactivityService: inactivityService,
             authenticationService: container.authenticationService.resolve(),
+            localAuthenticationService: container.localAuthenticationService.resolve(),
             navigationController: navigationController
         )
     }

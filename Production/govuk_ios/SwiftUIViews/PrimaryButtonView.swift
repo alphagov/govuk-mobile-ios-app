@@ -12,8 +12,8 @@ struct PrimaryButtonView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
             Divider()
-                .background(Color(UIColor.govUK.strokes.listDivider))
-                .ignoresSafeArea(edges: [.leading, .trailing])
+                .overlay(Color(UIColor.govUK.strokes.fixedContainer))
+                .ignoresSafeArea()
                 .padding([.top], 0)
                 SwiftUIButton(
                     .primary,

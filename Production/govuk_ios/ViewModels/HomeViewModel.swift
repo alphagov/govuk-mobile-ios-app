@@ -2,12 +2,13 @@ import Foundation
 import UIKit
 import GOVKit
 import UIComponents
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
-    let topicWidgetViewModel: TopicsWidgetViewModel
+    let topicsWidgetViewModel: TopicsWidgetViewModel
     let localAuthorityAction: () -> Void
     let editLocalAuthorityAction: () -> Void
     let feedbackAction: () -> Void
@@ -19,29 +20,27 @@ class HomeViewModel: ObservableObject {
     let searchService: SearchServiceInterface
     let activityService: ActivityServiceInterface
     let localAuthorityService: LocalAuthorityServiceInterface
-    let userDefaultService: UserDefaultsServiceInterface
-    @Published var widgets: [WidgetView] = []
+    @Published var homeContentScrollToTop: Bool = false
 
     init(analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
          notificationService: NotificationServiceInterface,
-         topicWidgetViewModel: TopicsWidgetViewModel,
+         topicsWidgetViewModel: TopicsWidgetViewModel,
+         urlOpener: URLOpener,
+         searchService: SearchServiceInterface,
+         activityService: ActivityServiceInterface,
+         localAuthorityService: LocalAuthorityServiceInterface,
          localAuthorityAction: @escaping () -> Void,
          editLocalAuthorityAction: @escaping () -> Void,
          feedbackAction: @escaping () -> Void,
          notificationsAction: @escaping () -> Void,
          recentActivityAction: @escaping () -> Void,
          openURLAction: @escaping (URL) -> Void,
-         openAction: @escaping (SearchItem) -> Void,
-         urlOpener: URLOpener,
-         searchService: SearchServiceInterface,
-         activityService: ActivityServiceInterface,
-         localAuthorityService: LocalAuthorityServiceInterface,
-         userDefaultService: UserDefaultsServiceInterface) {
+         openAction: @escaping (SearchItem) -> Void) {
         self.analyticsService = analyticsService
         self.configService = configService
         self.notificationService = notificationService
-        self.topicWidgetViewModel = topicWidgetViewModel
+        self.topicsWidgetViewModel = topicsWidgetViewModel
         self.localAuthorityAction = localAuthorityAction
         self.editLocalAuthorityAction = editLocalAuthorityAction
         self.feedbackAction = feedbackAction
@@ -53,9 +52,38 @@ class HomeViewModel: ObservableObject {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
-        self.userDefaultService = userDefaultService
+    }
+    var widgets: [HomepageWidget] {
+        let array = [topicsView, recentActivityWidget].compactMap { $0 }
+        return array
     }
 
+    var topicsView: HomepageWidget? {
+        guard featureEnabled(.topics)
+        else { return nil }
+        return HomepageWidget(
+            content: TopicsView(
+                viewModel: self.topicsWidgetViewModel
+            )
+        )
+    }
+
+    var recentActivityWidget: HomepageWidget? {
+        guard featureEnabled(.topics)
+        else { return nil }
+        let viewModel = RecentActivtyHomepageWidgetViewModel(
+            urlOpener: urlOpener,
+            analyticsService: analyticsService,
+            activityService: activityService,
+            seeAllAction: { [weak self] in
+                self?.recentActivityAction()
+            }
+        )
+        let view = RecentActivityWidget(viewModel: viewModel)
+        return HomepageWidget(
+            content: view
+        )
+    }
 
     lazy var searchEnabled = featureEnabled(.search)
     lazy var searchViewModel: SearchViewModel = SearchViewModel(
@@ -65,195 +93,11 @@ class HomeViewModel: ObservableObject {
         urlOpener: urlOpener,
         openAction: openAction
     )
-
-    func reloadWidgets() async {
-        widgets =
-        await [
-            alertBanner,
-            chatWidget,
-            localAuthorityWidget,
-            recentActivityWidget,
-            topicsWidget,
-            storedLocalAuthorityWidget,
-            userFeedbackWidget
-        ].compactMap { $0 }
-    }
-
-    @MainActor
-    private var alertBanner: WidgetView? {
-        guard let alert = configService.alertBanner,
-              !userDefaultService.hasSeen(banner: alert)
-        else { return nil }
-
-        let viewModel = AlertBannerWidgetViewModel(
-            alert: alert,
-            urlOpener: urlOpener,
-            dismiss: {
-                self.userDefaultService.markSeen(banner: alert)
-                Task {
-                    await self.reloadWidgets()
-                }
-            }
-        )
-        let content = AlertBannerWidgetView(
-            viewModel: viewModel
-        )
-        let widget = WidgetView()
-        widget.backgroundColor = UIColor.govUK.fills.surfaceCardBlue
-        let hostingViewController = HostingViewController(
-            rootView: content
-        )
-        widget.addContent(hostingViewController.view)
-        return widget
-    }
-
-    @MainActor
-    private var chatWidget: WidgetView? {
-        guard let chat = configService.chatBanner,
-              featureEnabled(.chatOptIn),
-              !userDefaultService.hasSeen(banner: chat)
-        else { return nil }
-
-        let viewModel = ChatWidgetViewModel(
-            chat: chat,
-            urlOpener: urlOpener,
-            dismiss: {
-                self.userDefaultService.markSeen(banner: chat)
-                Task {
-                    await self.reloadWidgets()
-                }
-            }
-        )
-        let content = ChatWidgetView(
-            viewModel: viewModel
-        )
-        let widget = WidgetView(
-            decorateView: false,
-            useContentAccessibilityInfo: false,
-            backgroundColor: .clear,
-            borderColor: UIColor.clear.cgColor
-        )
-        let hostingViewController = HostingViewController(
-            rootView: content
-        )
-        hostingViewController.view.backgroundColor = .clear
-        widget.addContent(hostingViewController.view)
-        return widget
-    }
-
-    @MainActor
-    private var userFeedbackWidget: WidgetView? {
-        guard let userFeedback = configService.userFeedbackBanner
-        else { return nil }
-        let viewModel = UserFeedbackWidgetViewModel(
-            userFeedback: userFeedback,
-            analyticsService: analyticsService,
-            urlOpener: urlOpener
-        )
-        let widget = WidgetView(
-            decorateView: false,
-            useContentAccessibilityInfo: false,
-            backgroundColor: .clear,
-            borderColor: UIColor.clear.cgColor
-        )
-        let content = UserFeedbackWidgetView(
-            viewModel: viewModel
-        )
-        let hostingViewController = HostingViewController(
-            rootView: content
-        )
-        hostingViewController.view.backgroundColor = .clear
-        widget.addContent(hostingViewController.view)
-        return widget
-    }
-
-    @MainActor
-    private var recentActivityWidget: WidgetView? {
-        guard featureEnabled(.recentActivity)
-        else { return nil }
-        let title = String.home.localized(
-            "recentActivityWidgetTitle"
-        )
-
-        let viewModel = RecentActivityWidgetViewModel(
-            title: title,
-            action: recentActivityAction
-        )
-        let content = RecentActivtyWidget(
-            viewModel: viewModel
-        )
-        let widget = WidgetView(useContentAccessibilityInfo: true)
-        widget.addContent(content)
-        return widget
-    }
-
-    @MainActor
-    private var localAuthorityWidget: WidgetView? {
-        guard featureEnabled(.localServices),
-              localAuthorityService.fetchSavedLocalAuthority().first == nil
-        else { return nil }
-        let viewModel = LocalAuthorityWidgetViewModel(
-            tapAction: localAuthorityAction
-        )
-        let content = LocalAuthorityWidgetView(
-            viewModel: viewModel
-        )
-        let hostingViewController = HostingViewController(
-            rootView: content
-        )
-        let widget = WidgetView(
-            useContentAccessibilityInfo: false,
-            backgroundColor: UIColor.govUK.fills.surfaceCardSelected,
-            borderColor: UIColor.govUK.strokes.cardGreen.cgColor
-        )
-        widget.addContent(hostingViewController.view)
-        return widget
-    }
-
-    @MainActor
-    private var storedLocalAuthorityWidget: WidgetView? {
-        guard featureEnabled(.localServices) else { return nil }
-        let localAuthorities = localAuthorityService.fetchSavedLocalAuthority()
-        guard localAuthorities.count > 0 else { return nil }
-
-        let viewModel = StoredLocalAuthorityWidgetViewModel(
-            analyticsService: analyticsService,
-            localAuthorities: localAuthorities,
-            openURLAction: openURLAction,
-            openEditViewAction: editLocalAuthorityAction
-        )
-        let content = StoredLocalAuthorityWidgetView(
-            viewModel: viewModel
-        )
-        let hostingViewController = HostingViewController(
-            rootView: content
-        )
-        hostingViewController.view.backgroundColor = .clear
-        let widget = WidgetView(
-            decorateView: false,
-            useContentAccessibilityInfo: false
-        )
-        widget.addContent(hostingViewController.view)
-        return widget
-    }
-
-    @MainActor
-    private var topicsWidget: WidgetView? {
-        guard featureEnabled(.topics)
-        else { return nil }
-        let content = TopicsWidgetView(
-            viewModel: topicWidgetViewModel
-        )
-        let widget = WidgetView(decorateView: false)
-        widget.addContent(content)
-        return widget
-    }
-
     private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }
 
-    func trackECommerce() {
-        topicWidgetViewModel.trackECommerce()
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
     }
 }

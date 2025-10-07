@@ -5,6 +5,7 @@ class AppCoordinator: BaseCoordinator {
     private let coordinatorBuilder: CoordinatorBuilder
     private let inactivityService: InactivityServiceInterface
     private let authenticationService: AuthenticationServiceInterface
+    private let localAuthenticationService: LocalAuthenticationServiceInterface
     private var initialLaunch: Bool = true
     private var tabCoordinator: BaseCoordinator?
     private var pendingDeeplink: URL?
@@ -12,10 +13,12 @@ class AppCoordinator: BaseCoordinator {
     init(coordinatorBuilder: CoordinatorBuilder,
          inactivityService: InactivityServiceInterface,
          authenticationService: AuthenticationServiceInterface,
+         localAuthenticationService: LocalAuthenticationServiceInterface,
          navigationController: UINavigationController) {
         self.coordinatorBuilder = coordinatorBuilder
         self.inactivityService = inactivityService
         self.authenticationService = authenticationService
+        self.localAuthenticationService = localAuthenticationService
         super.init(navigationController: navigationController)
         configureObservers()
     }
@@ -40,8 +43,8 @@ class AppCoordinator: BaseCoordinator {
     private func startInactivityMonitoring() {
         inactivityService.startMonitoring(
             inactivityHandler: { [weak self] in
-                self?.root.dismiss(animated: true)
                 self?.authenticationService.clearRefreshToken()
+                self?.showPrivacyScreen(appDidTimeout: true)
                 self?.startPeriAuthCoordinator()
             }
         )
@@ -62,6 +65,7 @@ class AppCoordinator: BaseCoordinator {
         let coordinator = coordinatorBuilder.periAuth(
             navigationController: root,
             completion: { [weak self] in
+                self?.hidePrivacyScreen()
                 self?.startPostAuthCoordinator()
             }
         )
@@ -103,5 +107,34 @@ class AppCoordinator: BaseCoordinator {
         tabCoordinator = coordinator
         start(coordinator, url: pendingDeeplink)
         pendingDeeplink = nil
+    }
+}
+
+extension AppCoordinator: PrivacyPresenting {
+    func showPrivacyScreen(appDidTimeout: Bool) {
+        guard privacyCoordinator == nil,
+        shouldShowPrivacyScreen(appDidTimeout) else { return }
+
+        root.dismiss(animated: false)
+        let coordinator = coordinatorBuilder.privacy()
+        present(coordinator, animated: false)
+    }
+
+    func hidePrivacyScreen() {
+        privacyCoordinator?.dismiss(animated: false)
+        privacyCoordinator?.finish()
+    }
+
+    private func shouldShowPrivacyScreen(_ appDidTimeout: Bool) -> Bool {
+        if appDidTimeout {
+            localAuthenticationService.availableAuthType == .faceID ||
+            localAuthenticationService.touchIdEnabled
+        } else {
+            authenticationService.isSignedIn
+        }
+    }
+
+    private var privacyCoordinator: BaseCoordinator? {
+        childCoordinators.first(where: { $0 is PrivacyProviding })
     }
 }

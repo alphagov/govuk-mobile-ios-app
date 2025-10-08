@@ -4,6 +4,7 @@ import GOVKit
 struct EditTopicsView: View {
     @StateObject var viewModel: EditTopicsViewModel
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationView {
@@ -22,6 +23,7 @@ struct EditTopicsView: View {
             .toolbar {
                 doneButton
             }
+            .toolbarBackground(.background, for: .navigationBar)
             .onAppear {
                 viewModel.trackScreen(screen: self)
             }
@@ -29,13 +31,15 @@ struct EditTopicsView: View {
                 viewModel.undoChanges()
             }
         }
+        .id(colorScheme)
     }
+
     private var doneButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button(String.topics.localized("doneButtonTitle")) {
                 dismiss()
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
+            .foregroundColor(Color(UIColor.govUK.text.buttonSecondary))
             .fontWeight(.medium)
         }
     }

@@ -12,6 +12,16 @@ import GOVKit
 @MainActor
 @Suite
 struct ViewControllerBuilderTests {
+    @Test
+    func launch_returnsExpectedResult() {
+        let subject = ViewControllerBuilder()
+        let result = subject.launch(
+            analyticsService: MockAnalyticsService(),
+            completion: { }
+        )
+
+        #expect(result is LaunchViewController)
+    }
 
     @Test
     func home_returnsExpectedResult() {
@@ -31,7 +41,8 @@ struct ViewControllerBuilderTests {
             activityService: MockActivityService(),
             topicWidgetViewModel: viewModel,
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
 
         let actions = ViewControllerBuilder.HomeActions(

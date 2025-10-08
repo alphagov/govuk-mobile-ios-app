@@ -34,7 +34,8 @@ struct HomeContentViewControllerTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
 
@@ -73,7 +74,8 @@ struct HomeContentViewControllerTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: mockUserDefaultsService
+            userDefaultService: mockUserDefaultsService,
+            chatService: MockChatService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         subject.viewDidAppear(false)
@@ -85,7 +87,7 @@ struct HomeContentViewControllerTests {
         #expect(screens.first?.additionalParameters.count == 1)
         #expect((screens.first?.additionalParameters["type"] as? String) == expectedValue)
     }
-    
+
     @Test
     func scrollToTop_scrollsContentToTop() {
         let topicsViewModel = TopicsWidgetViewModel(
@@ -111,7 +113,8 @@ struct HomeContentViewControllerTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
         let subject = HomeContentViewController(viewModel: viewModel)
         guard let scrollView: UIScrollView =

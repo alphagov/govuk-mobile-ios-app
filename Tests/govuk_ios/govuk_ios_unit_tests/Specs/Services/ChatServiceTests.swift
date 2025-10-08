@@ -362,8 +362,7 @@ final class ChatServiceTests {
         )
         mockConfigService.features = [.chat, .chatTestActive]
 
-//        #expect(sut.isEnabled == true)
-        #expect(sut.isEnabled == false)
+        #expect(sut.isEnabled == true)
     }
 
     @Test
@@ -441,7 +440,7 @@ final class ChatServiceTests {
 
     @Test
     func chatOptInAvailable_featureAvailable_returnsTrue() {
-        mockConfigService.features = [.chatOptIn]
+        mockConfigService.features = [.chatOptInV2]
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,

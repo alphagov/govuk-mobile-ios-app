@@ -12,7 +12,7 @@ class ViewControllerBuilder {
     func launch(analyticsService: AnalyticsServiceInterface,
                 completion: @escaping () -> Void) -> UIViewController {
         let viewModel = LaunchViewModel(
-            animationCompleted: completion
+            animationsCompletedAction: completion
         )
         return LaunchViewController(
             viewModel: viewModel,
@@ -29,6 +29,7 @@ class ViewControllerBuilder {
         let topicWidgetViewModel: TopicsWidgetViewModel
         let localAuthorityService: LocalAuthorityServiceInterface
         let userDefaultService: UserDefaultsServiceInterface
+        let chatService: ChatServiceInterface
     }
 
     struct HomeActions {
@@ -59,7 +60,8 @@ class ViewControllerBuilder {
             searchService: dependencies.searchService,
             activityService: dependencies.activityService,
             localAuthorityService: dependencies.localAuthorityService,
-            userDefaultService: dependencies.userDefaultService
+            userDefaultService: dependencies.userDefaultService,
+            chatService: dependencies.chatService
         )
         return HomeViewController(
             viewModel: viewModel

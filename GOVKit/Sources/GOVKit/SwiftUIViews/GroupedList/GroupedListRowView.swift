@@ -69,12 +69,12 @@ struct LinkRowView: View {
                 HStack {
                     Text(row.title)
                         .multilineTextAlignment(.leading)
+                        .foregroundColor(Color(UIColor.govUK.text.link))
                     Spacer()
                     Image(systemName: "arrow.up.right")
                         .opacity(row.showLinkImage ? 1 : 0)
+                        .foregroundColor(Color(UIColor.govUK.text.iconTertiary))
                 }
-                .foregroundColor(Color(UIColor.govUK.text.iconTertiary))
-
                 RowDetail(text: row.body)
             }
         }

@@ -4,14 +4,14 @@ import GOVKit
 class AnalyticsService: AnalyticsServiceInterface {
     private let clients: [AnalyticsClient]
     private let userDefaultsService: UserDefaultsServiceInterface
-    private let authenticationService: AuthenticationServiceInterface
+    private let isSignedIn: () -> Bool
 
     init(clients: [AnalyticsClient],
          userDefaultsService: UserDefaultsServiceInterface,
-         authenticationService: AuthenticationServiceInterface) {
+         isSignedIn: @escaping () -> Bool) {
         self.clients = clients
         self.userDefaultsService = userDefaultsService
-        self.authenticationService = authenticationService
+        self.isSignedIn = isSignedIn
         configureDisabled()
     }
 
@@ -75,6 +75,6 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     private var shouldTrack: Bool {
-        permissionState == .accepted && authenticationService.isSignedIn
+        permissionState == .accepted && isSignedIn()
     }
 }

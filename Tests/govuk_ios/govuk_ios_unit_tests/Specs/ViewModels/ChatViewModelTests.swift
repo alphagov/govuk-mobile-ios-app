@@ -356,4 +356,68 @@ struct ChatViewModelTests {
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         #expect(mockAnalyticsService._trackedEvents.first?.params?["text"] as? String == "Yes, clear chat")
     }
+
+    @Test
+    func updateCharacterCount_remainingCharacter_updatesWarningText() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        sut.latestQuestion = """
+            Lorem ipsum dolor sit amet consectetur adipiscing
+            elit quisque faucibus ex sapien vitae pellentesque
+            sem placerat in id cursus mi pretium tellus duis
+            convallis tempus leo eu aenean sed diam urna tempor
+            pulvinar vivamus fringillsss lacus nec metus biben
+        """
+
+        #expect(sut.warningText == nil)
+        sut.updateCharacterCount()
+        #expect(sut.warningText != nil)
+        #expect(sut.errorText == nil)
+    }
+
+    @Test
+    func updateCharacterCount_tooManyCharacter_updatesErrorText() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        sut.latestQuestion = """
+            Lorem ipsum dolor sit amet consectetur adipiscing
+            elit quisque faucibus ex sapien vitae pellentesque
+            sem placerat in id cursus mi pretium tellus duis
+            convallis tempus leo eu aenean sed diam urna tempor
+            pulvinar vivamus fringillsss lacus nec metus biben
+            pulvinar vivamus fringillsss lacus nec metus biben
+            pulvinar vivamus fringillsss lacus nec metus biben
+        """
+
+        #expect(sut.errorText == nil)
+        sut.updateCharacterCount()
+        #expect(sut.errorText != nil)
+        #expect(sut.warningText == nil)
+    }
+
+    @Test
+    func updateCharacterCount_setsWarningAndErrorTextToNil() {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatViewModel(
+            chatService: MockChatService(),
+            analyticsService: mockAnalyticsService,
+            openURLAction: { _ in },
+            handleError: { _ in }
+        )
+        sut.latestQuestion = "Lorem ipsum dolor sit amet consectetur adipiscing"
+
+        sut.updateCharacterCount()
+        #expect(sut.errorText == nil)
+        #expect(sut.warningText == nil)
+    }
 }

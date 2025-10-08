@@ -20,15 +20,13 @@ struct ChatView: View {
             ZStack {
                 Color(UIColor.govUK.fills.surfaceChatBackground)
                     .edgesIgnoringSafeArea(.all)
-                Image(verticalSizeClass == .compact ?
+                Image(decorative: verticalSizeClass == .compact ?
                       "chat_background_landscape" : "chat_background")
                 .resizable()
                 .opacity(backgroundOpacity)
                 .ignoresSafeArea(edges: [.top, .leading, .trailing])
 
                 chatContainerView(geometry.size.height - 32)
-                    .conditionalAnimation(.easeInOut(duration: transitionDuration),
-                                          value: textAreaFocused)
                     .conditionalAnimation(.easeInOut(duration: transitionDuration),
                                           value: viewModel.textViewHeight)
             }
@@ -75,7 +73,6 @@ struct ChatView: View {
                     Spacer(minLength: cellModel.questionWidth)
                 }
                 ChatCellView(viewModel: cellModel)
-                    .padding(.vertical, 4)
             }
         }
     }
@@ -96,6 +93,7 @@ struct ChatView: View {
                 .font(.subheadline)
                 .foregroundStyle(Color(UIColor.govUK.text.secondary))
                 .multilineTextAlignment(.center)
+                .padding(.bottom, 4.0)
             chatCellsView
             Text("")
                 .id(bottomID)

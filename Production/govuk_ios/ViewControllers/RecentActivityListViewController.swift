@@ -208,7 +208,8 @@ final class RecentActivityListViewController: BaseViewController {
 
     private func configureToolbarConstraints() {
         toolbarHeightConstraint = editingToolbar.heightAnchor.constraint(
-            equalToConstant: tabBarHeight)
+            equalToConstant: tabBarHeight
+        )
         toolbarHeightConstraint?.isActive = true
         NSLayoutConstraint.activate([
             editingToolbar.trailingAnchor.constraint(

@@ -47,7 +47,10 @@ class ChatCoordinator: TabItemCoordinator {
     }
 
     func route(for url: URL) -> ResolvedDeeplinkRoute? {
-        deeplinkStore.route(
+        if !chatService.chatOnboardingSeen {
+            showChatOnboarding()
+        }
+        return deeplinkStore.route(
             for: url,
             parent: self
         )
@@ -74,18 +77,22 @@ class ChatCoordinator: TabItemCoordinator {
     func didSelectTab(_ selectedTabIndex: Int,
                       previousTabIndex: Int) {
         if !chatService.chatOnboardingSeen {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                present(
-                    coordinatorBuilder.chatInfoOnboarding(
-                        cancelOnboardingAction: cancelOnboardingAction,
-                        setChatViewControllerAction: setChatViewController
-                    )
-                )
-            }
+            showChatOnboarding()
         } else if selectedTabIndex != previousTabIndex && isShowingError {
             setChatViewController()
             isShowingError = false
+        }
+    }
+
+    private func showChatOnboarding() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            present(
+                coordinatorBuilder.chatInfoOnboarding(
+                    cancelOnboardingAction: cancelOnboardingAction,
+                    setChatViewControllerAction: setChatViewController
+                )
+            )
         }
     }
 

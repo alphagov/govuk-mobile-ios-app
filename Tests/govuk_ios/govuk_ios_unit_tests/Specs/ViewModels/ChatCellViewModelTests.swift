@@ -6,7 +6,7 @@ import GOVKit
 @testable import govuk_ios
 @testable import GOVKitTestUtilities
 
-@Suite
+@Suite(.serialized)
 struct ChatCellViewModelTests {
     @Test
     func openURL_responseLink_opensURLAndTracksEvent() async {
@@ -129,5 +129,41 @@ struct ChatCellViewModelTests {
             """
 
         #expect(UIPasteboard.general.string ?? "" == expectedText)
+    }
+
+    @Test(arguments: zip(
+        [
+            ChatCellType.question,
+            ChatCellType.answer,
+        ],
+        [
+            "Chat Question",
+            "Chat Answer"
+        ]
+    ))
+    func copytoClipboard_question_tracksEvent(type: ChatCellType, section: String) async {
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = ChatCellViewModel(
+            message: "Question",
+            id: UUID().uuidString,
+            type: type,
+            sources: [],
+            openURLAction: { _ in },
+            analyticsService: mockAnalyticsService
+        )
+        sut.copyToClipboard()
+        #expect(mockAnalyticsService._trackedEvents.count == 1)
+        #expect(
+            mockAnalyticsService
+                ._trackedEvents.first?.params?["text"] as? String == "Copy to clipboard"
+        )
+        #expect(
+            mockAnalyticsService
+                ._trackedEvents.first?.params?["section"] as? String == section
+        )
+        #expect(
+            mockAnalyticsService
+                ._trackedEvents.first?.params?["action"] as? String == "Copy"
+        )
     }
 }

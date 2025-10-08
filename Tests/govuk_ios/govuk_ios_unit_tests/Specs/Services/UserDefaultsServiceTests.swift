@@ -72,7 +72,7 @@ struct UserDefaultsServiceTests {
     }
 
     @Test
-    func markSeen_setsExpectedValue() throws {
+    func markSeen_alertBanner_setsExpectedValue() throws {
         let mockUserDefaults = MockUserDefaults()
         let sut = UserDefaultsService(userDefaults: mockUserDefaults)
 
@@ -86,7 +86,7 @@ struct UserDefaultsServiceTests {
     }
 
     @Test
-    func hasSeen_returnsExpectedValues() throws {
+    func hasSeen_alertBanner_returnsExpectedValues() throws {
         let mockUserDefaults = MockUserDefaults()
         let sut = UserDefaultsService(userDefaults: mockUserDefaults)
 
@@ -102,5 +102,53 @@ struct UserDefaultsServiceTests {
         #expect(sut.hasSeen(banner: seenAlert))
 
         #expect(sut.hasSeen(banner: unseenAlert) == false)
+    }
+
+    @Test
+    func markSeen_chatBanner_setsExpectedValue() throws {
+        let mockUserDefaults = MockUserDefaults()
+        let sut = UserDefaultsService(userDefaults: mockUserDefaults)
+
+        let expectedValue = UUID().uuidString
+        let chatBanner = ChatBanner(
+            id: expectedValue,
+            title: "test title",
+            body: "test body",
+            link: ChatBanner.Link(title: "test title", url: URL(string: "www.test.com")!)
+        )
+
+        sut.markSeen(banner: chatBanner)
+
+        let date = try #require(mockUserDefaults._receivedSetValueValue as? Date)
+        #expect(Calendar.current.isDate(date, equalTo: .now, toGranularity: .minute))
+    }
+
+    @Test
+    func hasSeen_chatBanner_returnsExpectedValues() throws {
+        let mockUserDefaults = MockUserDefaults()
+        let sut = UserDefaultsService(userDefaults: mockUserDefaults)
+
+        let expectedSeenValue = UUID().uuidString
+        let seenChat = ChatBanner(
+            id: expectedSeenValue,
+            title: "test title",
+            body: "test body",
+            link: ChatBanner.Link(title: "test title", url: URL(string: "www.test.com")!)
+        )
+        mockUserDefaults._stubbedValues = [
+            expectedSeenValue: Date.now
+        ]
+
+        let expectedUnseenValue = UUID().uuidString
+        let unseenChat = ChatBanner(
+            id: expectedUnseenValue,
+            title: "test title 2",
+            body: "test body 2",
+            link: ChatBanner.Link(title: "test title 2", url: URL(string: "www.test2.com")!)
+        )
+
+        #expect(sut.hasSeen(banner: seenChat))
+
+        #expect(sut.hasSeen(banner: unseenChat) == false)
     }
 }

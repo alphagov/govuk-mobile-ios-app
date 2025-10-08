@@ -2,6 +2,7 @@ import SwiftUI
 import GOVKit
 import UIComponents
 
+// swiftlint:disable:next type_body_length
 class ChatViewModel: ObservableObject {
     private let chatService: ChatServiceInterface
     private let analyticsService: AnalyticsServiceInterface
@@ -15,8 +16,9 @@ class ChatViewModel: ObservableObject {
     @Published var scrollToBottom: Bool = false
     @Published var scrollToTop: Bool = false
     @Published var latestQuestionID: String = ""
-    @Published var errorText: String?
-    @Published var textViewHeight: CGFloat = 50.0
+    @Published var errorText: LocalizedStringKey?
+    @Published var warningText: LocalizedStringKey?
+    @Published var textViewHeight: CGFloat = 48.0
     @Published var requestInFlight: Bool = false
 
     var absoluteRemainingCharacters: Int {
@@ -24,7 +26,6 @@ class ChatViewModel: ObservableObject {
     }
 
     var shouldDisableSend: Bool {
-        latestQuestion.isEmpty ||
         (latestQuestion.count > maxCharacters) ||
         requestInFlight
     }
@@ -47,12 +48,13 @@ class ChatViewModel: ObservableObject {
                      completion: ((Bool) -> Void)? = nil) {
         let localQuestion = question ?? latestQuestion
         guard !containsPII(localQuestion) else {
-            errorText = String.chat.localized("validationErrorText")
+            errorText = LocalizedStringKey("validationErrorText")
             completion?(false)
             return
         }
         trackAskQuestionSubmission()
         errorText = nil
+        warningText = nil
         addCellModels([.loadingQuestion])
         scrollToBottom = true
         requestInFlight = true
@@ -68,7 +70,7 @@ class ChatViewModel: ObservableObject {
             case .failure(let error):
                 self?.requestInFlight = false
                 if error == .validationError {
-                    self?.errorText = String.chat.localized("validationErrorText")
+                    self?.errorText = LocalizedStringKey("validationErrorText")
                 } else {
                     self?.processError(error)
                     self?.latestQuestion = ""
@@ -80,7 +82,11 @@ class ChatViewModel: ObservableObject {
 
     private func pollForAnswer(_ question: PendingQuestion) {
         requestInFlight = true
-        addCellModels([ChatCellViewModel(question: question), .gettingAnswer])
+        addCellModels(
+            [ChatCellViewModel(question: question,
+                               analyticsService: analyticsService),
+             .gettingAnswer]
+        )
         chatService.pollForAnswer(question) { [weak self] result in
             guard let self else { return }
             removeCellModel(.gettingAnswer)
@@ -149,9 +155,12 @@ class ChatViewModel: ObservableObject {
             message: String.chat.localized("introThirdMessage")
         )
         let models = [
-            ChatCellViewModel(intro: firstIntroMessage),
-            ChatCellViewModel(intro: secondIntroMessage),
-            ChatCellViewModel(intro: thirdIntroMessage)
+            ChatCellViewModel(intro: firstIntroMessage,
+                              analyticsService: analyticsService),
+            ChatCellViewModel(intro: secondIntroMessage,
+                              analyticsService: analyticsService),
+            ChatCellViewModel(intro: thirdIntroMessage,
+                              analyticsService: analyticsService)
         ]
         if animate {
             addCellModels(models)
@@ -182,7 +191,8 @@ class ChatViewModel: ObservableObject {
         appendIntroMessages(animate: false)
         let answers = history.answeredQuestions
         answers.forEach { answeredQuestion in
-            let question = ChatCellViewModel(answeredQuestion: answeredQuestion)
+            let question = ChatCellViewModel(answeredQuestion: answeredQuestion,
+                                             analyticsService: analyticsService)
             question.isVisible = true
             cellModels.append(question)
             let answer = ChatCellViewModel(
@@ -250,6 +260,23 @@ class ChatViewModel: ObservableObject {
             action: "Clear Chat No Tapped"
         )
         analyticsService.track(event: event)
+    }
+
+    func updateCharacterCount() {
+        if latestQuestion.count > maxCharacters {
+            errorText = LocalizedStringKey(
+                "tooManyCharactersTitle.\(absoluteRemainingCharacters)"
+            )
+            warningText = nil
+        } else if latestQuestion.count >= (maxCharacters - 50) {
+            warningText = LocalizedStringKey(
+                "remainingCharactersTitle.\(absoluteRemainingCharacters)"
+            )
+            errorText = nil
+        } else {
+            errorText = nil
+            warningText = nil
+        }
     }
 
     private func trackMenuTap(_ itemTitle: String) {

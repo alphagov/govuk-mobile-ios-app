@@ -23,7 +23,7 @@ final class SignInSuccessCoordinator: BaseCoordinator {
             }
         )
 
-        let containerView = InfoView(
+        let containerView = InfoView<SignInSuccessViewModel>(
             viewModel: viewModel
         )
         let viewController = UIHostingController(

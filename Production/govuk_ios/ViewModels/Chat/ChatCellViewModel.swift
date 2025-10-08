@@ -43,10 +43,12 @@ class ChatCellViewModel: ObservableObject {
         self.analyticsService = analyticsService
     }
 
-    convenience init(question: PendingQuestion) {
+    convenience init(question: PendingQuestion,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(message: question.message,
                   id: question.id,
-                  type: .question)
+                  type: .question,
+                  analyticsService: analyticsService)
     }
 
     convenience init(answer: Answer,
@@ -63,37 +65,26 @@ class ChatCellViewModel: ObservableObject {
         )
     }
 
-    convenience init(answeredQuestion: AnsweredQuestion) {
+    convenience init(answeredQuestion: AnsweredQuestion,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(message: answeredQuestion.message,
                   id: answeredQuestion.id,
                   type: .question,
-                  sources: [])
+                  sources: [],
+                  analyticsService: analyticsService)
     }
 
-    convenience init(intro: Intro) {
+    convenience init(intro: Intro,
+                     analyticsService: AnalyticsServiceInterface) {
         self.init(title: intro.title,
                   message: intro.message,
                   id: intro.id,
-                  type: .intro)
+                  type: .intro,
+                  analyticsService: analyticsService)
     }
 
     var isAnswer: Bool {
         (type == .question || type ==  .loading) ? false : true
-    }
-
-    var backgroundColor: Color {
-        switch type {
-        case .question, .loading:
-            Color(UIColor.govUK.fills.surfaceChatQuestion)
-        case .pendingAnswer:
-            Color(UIColor.clear)
-        case .answer, .intro:
-            Color(UIColor.govUK.fills.surfaceChatBlue)
-        }
-    }
-
-    var questionWidth: CGFloat {
-        UIScreen.main.bounds.width * 0.2
     }
 
     func copyToClipboard() {
@@ -105,6 +96,7 @@ class ChatCellViewModel: ObservableObject {
             }
         }
         UIPasteboard.general.string = textToCopy
+        trackCopyToClipboard()
     }
 
     func openURL(url: URL, type: ChatLinkType) {
@@ -126,8 +118,80 @@ class ChatCellViewModel: ObservableObject {
         )
         analyticsService?.track(event: event)
     }
+
+    func trackCopyToClipboard() {
+        let event = AppEvent.buttonFunction(
+            text: "Copy to clipboard",
+            section: "Chat \(isAnswer ? "Answer" : "Question")",
+            action: "Copy"
+        )
+        analyticsService?.track(event: event)
+    }
 }
 
+// MARK: Layout and animation
+extension ChatCellViewModel {
+    var backgroundColor: Color {
+        switch type {
+        case .question, .loading:
+            Color(UIColor.govUK.fills.surfaceChatQuestion)
+        case .pendingAnswer:
+            Color(UIColor.clear)
+        case .answer, .intro:
+            Color(UIColor.govUK.fills.surfaceChatBlue)
+        }
+    }
+
+    var questionWidth: CGFloat {
+        UIScreen.main.bounds.width * 0.2
+    }
+
+    var anchor: UnitPoint {
+        switch type {
+        case .intro:
+                .center
+        case .question, .loading:
+                .bottomTrailing
+        case .pendingAnswer, .answer:
+                .bottomLeading
+        }
+    }
+
+    var scale: CGFloat {
+        let localScale = if type == .pendingAnswer {
+            1.0
+        } else {
+            0.90
+        }
+        return isVisible ? 1 : localScale
+    }
+
+    var duration: CGFloat {
+        if type == .intro {
+            0.5
+        } else {
+            0.25
+        }
+    }
+
+    var delay: CGFloat {
+        if type == .loading {
+            0.4
+        } else {
+            0.0
+        }
+    }
+
+    var topPadding: CGFloat {
+        if type == .intro {
+            0.0
+        } else {
+            8.0
+        }
+    }
+}
+
+// MARK: - Convenience
 extension ChatCellViewModel {
     static var loadingQuestion: ChatCellViewModel = .init(
         message: String.chat.localized("loadingQuestionMessage"),

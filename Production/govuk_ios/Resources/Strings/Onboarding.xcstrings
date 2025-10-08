@@ -133,6 +133,17 @@
         }
       }
     },
+    "loadingIndicatorAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing you in"
+          }
+        }
+      }
+    },
     "pagesYouveVisitedBody" : {
       "extractionState" : "manual",
       "localizations" : {

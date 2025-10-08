@@ -33,6 +33,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
+    private let appConfigService: AppConfigServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
     private(set) var accessToken: String?
@@ -61,11 +62,13 @@ class AuthenticationService: AuthenticationServiceInterface {
     init(authenticationServiceClient: AuthenticationServiceClientInterface,
          authenticatedSecureStoreService: SecureStorable,
          returningUserService: ReturningUserServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface) {
+         userDefaultsService: UserDefaultsServiceInterface,
+         appConfigService: AppConfigServiceInterface) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
         self.userDefaultsService = userDefaultsService
+        self.appConfigService = appConfigService
     }
 
     func authenticate(window: UIWindow) async -> AuthenticationServiceResult {
@@ -78,7 +81,7 @@ class AuthenticationService: AuthenticationServiceInterface {
                 accessToken: tokenResponse.accessToken
             )
             let token = try? await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "")
-            saveExpiryDate(issueDate: token?.iat)
+            saveTokenIssueDate(iat: token?.iat)
             return await handleReturningUser()
         case .failure(let error):
             return AuthenticationServiceResult.failure(error)
@@ -89,6 +92,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         do {
             try authenticatedSecureStoreService.delete()
             userDefaultsService.removeObject(forKey: .refreshTokenExpiryDate)
+            userDefaultsService.removeObject(forKey: .refreshTokenIssuedAtDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
             setTokens()
@@ -173,19 +177,25 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.accessToken = accessToken
     }
 
-    private func saveExpiryDate(issueDate: Date?) {
-        let date = Calendar.current.date(
-            byAdding: .second,
-            value: 601_200,
-            to: issueDate ?? .now
-        )
-        userDefaultsService.set(date, forKey: UserDefaultsKeys.refreshTokenExpiryDate)
+    private func saveTokenIssueDate(iat: Date?) {
+        userDefaultsService.set(iat, forKey: .refreshTokenIssuedAtDate)
     }
 
     var shouldAttemptTokenRefresh: Bool {
-        guard let date = userDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date
+        guard let date = tokenExpiryDate
         else { return true }
         return date > Date.now
+    }
+
+    private var tokenExpiryDate: Date? {
+        guard let iat = userDefaultsService.value(forKey: .refreshTokenIssuedAtDate) as? Date,
+              let seconds = appConfigService.refreshTokenExpirySeconds
+        else { return userDefaultsService.value(forKey: .refreshTokenExpiryDate) as? Date }
+        return Calendar.current.date(
+            byAdding: .second,
+            value: seconds,
+            to: iat
+        )
     }
 }
 

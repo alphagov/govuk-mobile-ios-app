@@ -7,7 +7,7 @@ import GOVKit
 @testable import GOVKitTestUtilities
 
 @MainActor
-final class ChatUpsellCardViewControllerSnapshotTests: SnapshotTestCase {
+final class ChatWidgetViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
@@ -24,7 +24,18 @@ final class ChatUpsellCardViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController() -> UIViewController {
-        let view = ChatUpsellCard(dismissAction: {}, linkAction: {})
+        let mockAppConfigService = MockAppConfigService()
+        mockAppConfigService._stubbedChatBanner = .init(
+            id: "1234",
+            title: "title",
+            body: "body",
+            link: ChatBanner.Link(title: "link", url: URL(string: "www.test.com")!)
+        )
+        let viewModel = ChatWidgetViewModel(chat: mockAppConfigService._stubbedChatBanner!,
+                                                  urlOpener: MockURLOpener(),
+                                                  dismiss: {}
+        )
+        let view = ChatWidgetView(viewModel: viewModel)
         return HostingViewController(rootView: view)
     }
 }

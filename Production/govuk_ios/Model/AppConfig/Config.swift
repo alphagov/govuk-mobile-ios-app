@@ -8,35 +8,12 @@ struct Config: Decodable {
     let lastUpdated: String
     let searchApiUrl: String?
     var authenticationIssuerBaseUrl: String?
-    let chatPollIntervalSeconds: Int?
+    let chatPollIntervalSeconds: TimeInterval?
+    let refreshTokenExpirySeconds: Int?
     let alertBanner: AlertBanner?
+    let chatBanner: ChatBanner?
     let userFeedbackBanner: UserFeedbackBanner?
     let chatUrls: ChatURLs?
-}
-
-struct AlertBanner: Decodable {
-    let id: String
-    let body: String
-    let link: Link?
-}
-
-extension AlertBanner {
-    struct Link: Decodable {
-        let title: String
-        let url: URL
-    }
-}
-
-struct UserFeedbackBanner: Decodable {
-    let body: String
-    let link: Link
-}
-
-extension UserFeedbackBanner {
-    struct Link: Decodable {
-        let title: String
-        let url: URL
-    }
 }
 
 struct ChatURLs: Decodable {

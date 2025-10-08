@@ -3,7 +3,8 @@ import FirebaseAppCheck
 
 @testable import govuk_ios
 
-class MockAppAttestService: NSObject, AppAttestServiceInterface {
+class MockAppAttestService: NSObject,
+                            AppAttestServiceInterface {
 
     var _stubbedAppCheckToken: AppCheckToken?
     var _stubbedTokenFetchError: TestError = .fakeNetwork

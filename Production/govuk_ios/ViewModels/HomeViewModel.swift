@@ -53,7 +53,6 @@ class HomeViewModel: ObservableObject {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
-        fetchWidgets()
     }
 
     func fetchWidgets() {

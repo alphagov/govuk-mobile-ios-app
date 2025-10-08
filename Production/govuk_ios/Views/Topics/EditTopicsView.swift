@@ -18,7 +18,7 @@ struct EditTopicsView: View {
                 }
             }
             .navigationTitle(String.topics.localized("editTopicsTitle"))
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 doneButton
             }
@@ -36,6 +36,7 @@ struct EditTopicsView: View {
                 dismiss()
             }
             .foregroundColor(Color(UIColor.govUK.text.link))
+            .fontWeight(.medium)
         }
     }
 }

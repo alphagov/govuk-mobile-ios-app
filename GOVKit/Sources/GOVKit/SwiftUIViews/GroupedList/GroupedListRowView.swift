@@ -72,7 +72,7 @@ struct LinkRowView: View {
                     Spacer()
                     Image(systemName: "arrow.up.right")
                 }
-                .foregroundColor(Color(UIColor.govUK.text.link))
+                .foregroundColor(Color(UIColor.govUK.text.iconTertiary))
 
                 RowDetail(text: row.body)
             }
@@ -132,7 +132,7 @@ struct NavigationRowView: View {
                     Image(systemName: "chevron.right")
                         .foregroundColor(
                             Color(
-                                UIColor.govUK.text.trailingIcon
+                                UIColor.govUK.text.iconTertiary
                             )
                         )
                         .font(Font.govUK.bodySemibold)

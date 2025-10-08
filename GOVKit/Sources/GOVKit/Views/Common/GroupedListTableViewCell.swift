@@ -14,6 +14,7 @@ public class GroupedListTableViewCell: UITableViewCell {
     private lazy var verticalStackView: UIStackView = {
         let localView = UIStackView()
         localView.axis = .vertical
+        localView.spacing = 4
         return localView
     }()
 
@@ -38,16 +39,8 @@ public class GroupedListTableViewCell: UITableViewCell {
     private lazy var iconImageView: UIImageView = {
         let localView = UIImageView()
         localView.image = UIImage(systemName: "arrow.up.right")
-        localView.tintColor = UIColor.govUK.text.link
+        localView.tintColor = UIColor.govUK.text.iconTertiary
         return localView
-    }()
-
-    private lazy var borderLayer: CAShapeLayer = {
-        let localLayer = CAShapeLayer()
-        localLayer.lineWidth = borderWidth
-        localLayer.strokeColor = UIColor.govUK.strokes.listDivider.cgColor
-        localLayer.fillColor = UIColor.govUK.fills.surfaceList.cgColor
-        return localLayer
     }()
 
     private lazy var separatorView: DividerView = {
@@ -72,11 +65,11 @@ public class GroupedListTableViewCell: UITableViewCell {
     }
 
     private func configureUI() {
-        layer.addSublayer(borderLayer)
         layer.masksToBounds = true
         layer.cornerRadius = 10
         clipsToBounds = true
 
+        contentView.backgroundColor = UIColor.govUK.fills.surfaceList
         contentView.addSubview(horizontalStackView)
         contentView.addSubview(separatorView)
 
@@ -100,7 +93,7 @@ public class GroupedListTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             horizontalStackView.topAnchor.constraint(
                 equalTo: contentView.topAnchor,
-                constant: 11
+                constant: 16
             ),
             horizontalStackView.rightAnchor.constraint(
                 equalTo: contentView.rightAnchor,
@@ -108,7 +101,7 @@ public class GroupedListTableViewCell: UITableViewCell {
             ),
             horizontalStackView.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
-                constant: -11
+                constant: -16
             ),
             horizontalStackView.leftAnchor.constraint(
                 equalTo: contentView.leftAnchor,
@@ -121,7 +114,8 @@ public class GroupedListTableViewCell: UITableViewCell {
                 equalToConstant: 17
             ),
             separatorView.rightAnchor.constraint(
-                equalTo: contentView.rightAnchor
+                equalTo: contentView.rightAnchor,
+                constant: -16
             ),
             separatorView.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor
@@ -174,35 +168,11 @@ public class GroupedListTableViewCell: UITableViewCell {
 
     private func updateMask() {
         layer.maskedCorners = maskedCorners()
-        borderLayer.path = UIBezierPath(
-            roundedRect: borderFrame(),
-            byRoundingCorners: roundedCorners(),
-            cornerRadii: CGSize(width: 10, height: 10)
-        ).cgPath
     }
 
     public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         // This is overridden to prevent the checkmark flickering when scrolling
         super.setHighlighted(false, animated: false)
-    }
-
-    private func borderFrame() -> CGRect {
-        var newFrame = bounds
-        newFrame.size.height -= borderWidth
-        newFrame.size.width -= borderWidth
-
-        let originDelta: CGFloat = borderWidth / 2
-        newFrame.origin = .init(x: originDelta, y: originDelta)
-
-        guard !isOnlyCell else { return newFrame }
-        newFrame.size.height = bounds.height + borderWidth
-
-        if isBottom {
-            newFrame.origin.y = -borderWidth
-        } else if isMiddleCell {
-            newFrame.origin.y = -originDelta
-        }
-        return newFrame
     }
 
     private var isOnlyCell: Bool {

@@ -23,23 +23,15 @@ struct GroupedListSectionView: View {
                         if index > 0 {
                             Divider()
                                 .overlay(Color(UIColor.govUK.strokes.listDivider))
-                                .padding(.leading, 16)
+                                .padding(.horizontal, 16)
                         }
                         GroupedListRowView(row: row)
                             .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
+                            .padding(.vertical, 16)
                     }
                 }
             }
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            .overlay(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(
-                        Color(UIColor.govUK.strokes.listDivider),
-                        lineWidth: SinglePixelLineHelper.pixelSize,
-                        antialiased: true
-                    )
-            )
 
             if let footer = section.footer {
                 Text(footer)

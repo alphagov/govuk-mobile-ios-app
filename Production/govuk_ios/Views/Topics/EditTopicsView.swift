@@ -2,9 +2,10 @@ import SwiftUI
 import GOVKit
 
 struct EditTopicsView: View {
-    @StateObject var viewModel: EditTopicsViewModel
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
+
+    var viewModel: EditTopicsViewModel
 
     var body: some View {
         NavigationView {
@@ -14,8 +15,8 @@ struct EditTopicsView: View {
                         .multilineTextAlignment(.leading)
                         .padding(.horizontal, 12)
                         .padding(.top, 10)
-                    GroupedList(content: viewModel.sections)
-                        .padding(.top, 16)
+                    topicsList
+                        .padding([.top, .horizontal], 16)
                 }
             }
             .navigationTitle(String.topics.localized("editTopicsTitle"))
@@ -41,6 +42,39 @@ struct EditTopicsView: View {
             }
             .foregroundColor(Color(UIColor.govUK.text.buttonSecondary))
             .fontWeight(.medium)
+        }
+    }
+
+
+    private var topicsList: some View {
+        VStack(spacing: 16) {
+            ForEach(viewModel.sections) { topicRow in
+                TopicListRowView(topicRow: topicRow)
+            }
+        }
+    }
+}
+
+struct TopicListRowView: View {
+    @ObservedObject var topicRow: TopicRow
+
+    var body: some View {
+        HStack(spacing: 16) {
+            ZStack {
+                let image = topicRow.isOn ? Image("topic_selected") : Image(uiImage: topicRow.icon)
+                image
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+            }
+            Text(topicRow.title)
+                .font(.govUK.bodySemibold)
+            Spacer()
+        }
+        .padding(16)
+        .background(Color(UIColor.govUK.fills.surfaceCardSelected))
+        .roundedBorder(borderColor: .clear)
+        .onTapGesture {
+            topicRow.isOn.toggle()
         }
     }
 }

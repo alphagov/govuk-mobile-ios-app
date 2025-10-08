@@ -1,9 +1,10 @@
 import Foundation
 import CoreData
 import GOVKit
+import UIKit
 
-final class EditTopicsViewModel: ObservableObject {
-    @Published private(set) var sections: [GroupedListSection] = []
+final class EditTopicsViewModel {
+    private(set) var sections: [TopicRow] = []
     private var managedObjectContext: NSManagedObjectContext?
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
@@ -24,23 +25,17 @@ final class EditTopicsViewModel: ObservableObject {
     }
 
     private func loadSections(topics: [Topic]) {
-        let rows = topics.compactMap { [weak self, topicsService] topic in
+        sections = topics.compactMap { [weak self, topicsService] topic in
             topic.isFavourite = topicsService.hasCustomisedTopics ? topic.isFavourite : true
             return self?.topicRow(topic: topic)
         }
-        self.sections = [
-            GroupedListSection(
-                heading: nil,
-                rows: rows,
-                footer: nil
-            )
-        ]
     }
 
-    private func topicRow(topic: Topic) -> ToggleRow {
-        ToggleRow(
+    private func topicRow(topic: Topic) -> TopicRow {
+        TopicRow(
             id: topic.ref,
             title: topic.title,
+            icon: topic.icon,
             isOn: topic.isFavourite,
             action: { [weak self] value in
                 topic.isFavourite = value
@@ -65,5 +60,30 @@ final class EditTopicsViewModel: ObservableObject {
 
     deinit {
         undoChanges()
+    }
+}
+
+class TopicRow: Identifiable,
+                ObservableObject {
+    let id: String
+    let title: String
+    let icon: UIImage
+    @Published var isOn: Bool {
+        didSet {
+            self.action(isOn)
+        }
+    }
+    private let action: (Bool) -> Void
+
+    public init(id: String,
+                title: String,
+                icon: UIImage,
+                isOn: Bool,
+                action: @escaping (Bool) -> Void) {
+        self.id = id
+        self.title = title
+        self.icon = icon
+        self.isOn = isOn
+        self.action = action
     }
 }

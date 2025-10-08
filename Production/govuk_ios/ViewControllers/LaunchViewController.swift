@@ -3,9 +3,9 @@ import Foundation
 import GOVKit
 
 class LaunchViewController: BaseViewController {
-    private lazy var animationView = AnimationView.launch
-
     private let viewModel: LaunchViewModel
+    private lazy var crownAnimationView = AnimationView.crownSplash
+    private lazy var wordmarkAnimationView = AnimationView.wordmarkSplash
 
     init(viewModel: LaunchViewModel,
          analyticsService: AnalyticsServiceInterface) {
@@ -25,10 +25,22 @@ class LaunchViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard !animationView.hasAnimationBegun else { return }
-        animationView.animateIfAvailable(
+        guard !wordmarkAnimationView.hasAnimationBegun else { return }
+        wordmarkAnimationView.animateIfAvailable(
             completion: { [weak self] in
-                self?.viewModel.animationCompleted()
+                DispatchQueue.main.async {
+                    self?.viewModel.wordmarkAnimationCompleted = true
+                    self?.viewModel.animationsCompleted()
+                }
+            }
+        )
+        guard !crownAnimationView.hasAnimationBegun else { return }
+        crownAnimationView.animateIfAvailable(
+            completion: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.viewModel.crownAnimationCompleted = true
+                    self?.viewModel.animationsCompleted()
+                }
             }
         )
     }
@@ -37,20 +49,27 @@ class LaunchViewController: BaseViewController {
         view.isAccessibilityElement = true
         view.accessibilityLabel = String.common.localized("splashScreenAccessibilityTitle")
         view.backgroundColor = .splashScreenBlue
-        view.addSubview(animationView)
+        view.addSubview(wordmarkAnimationView)
+        view.addSubview(crownAnimationView)
     }
 
     private func configureConstraints() {
-        animationView.translatesAutoresizingMaskIntoConstraints = false
+        crownAnimationView.translatesAutoresizingMaskIntoConstraints = false
+        wordmarkAnimationView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
-            animationView.rightAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.rightAnchor
-            ),
-            animationView.leftAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leftAnchor
-            ),
-            animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            wordmarkAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            wordmarkAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            wordmarkAnimationView.widthAnchor.constraint(equalToConstant: 244),
+            wordmarkAnimationView.heightAnchor.constraint(equalToConstant: 84),
+
+            crownAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            crownAnimationView.widthAnchor.constraint(equalToConstant: 75),
+            crownAnimationView.heightAnchor.constraint(equalToConstant: 75),
+            crownAnimationView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -50
+            )
         ])
     }
 }

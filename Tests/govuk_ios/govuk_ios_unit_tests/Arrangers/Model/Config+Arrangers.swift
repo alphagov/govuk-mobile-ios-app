@@ -14,7 +14,8 @@ extension Config {
                         lastUpdated: String = "test",
                         searchApiUrl: String? = nil,
                         authenticationIssuerBaseUrl: String = "https://test.com",
-                        chatPollIntervalSeconds: Int? = 3) -> Config {
+                        chatPollIntervalSeconds: TimeInterval? = 3,
+                        refreshTokenExpirySeconds: Int? = 3600) -> Config {
         .init(
             available: available,
             minimumVersion: minimumVersion,
@@ -24,6 +25,7 @@ extension Config {
             searchApiUrl: searchApiUrl,
             authenticationIssuerBaseUrl: authenticationIssuerBaseUrl,
             chatPollIntervalSeconds: chatPollIntervalSeconds,
+            refreshTokenExpirySeconds: refreshTokenExpirySeconds,
             alertBanner: .init(id: "1234", body: "test", link: nil),
             chatBanner: .init(
                 id: "1234",

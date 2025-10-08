@@ -3,15 +3,15 @@ import CoreData
 import UIComponents
 import GOVKit
 
-class RecentActivtyHomepageWidgetViewModel: NSObject,
+class RecentActivityHomepageWidgetViewModel: NSObject,
                                             ObservableObject,
                                             NSFetchedResultsControllerDelegate {
-    @Published var recentActivities: [RecentActivityHomepageCell] = []
+    @Published private(set) var sections = [GroupedListSection]()
     private let activityService: ActivityServiceInterface
     private let analyticsService: AnalyticsServiceInterface
-    private let urlOpener: URLOpener
     private let lastVisitedFormatter = DateFormatter.recentActivityLastVisited
     let seeAllAction: () -> Void
+    let openURLAction: (URL) -> Void
 
     private let fetchRequest = ActivityItem.homepagefetchRequest()
     private lazy var activitiesFetchResultsController: NSFetchedResultsController = {
@@ -25,14 +25,14 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
         return controller
     }()
 
-    init(urlOpener: URLOpener,
-         analyticsService: AnalyticsServiceInterface,
+    init(analyticsService: AnalyticsServiceInterface,
          activityService: ActivityServiceInterface,
-         seeAllAction: @escaping () -> Void) {
-        self.urlOpener = urlOpener
+         seeAllAction: @escaping () -> Void,
+         openURLAction: @escaping (URL) -> Void) {
         self.analyticsService = analyticsService
         self.activityService = activityService
         self.seeAllAction = seeAllAction
+        self.openURLAction = openURLAction
         super.init()
         self.setupFetchResultsController()
     }
@@ -49,22 +49,33 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     private func setupFetchResultsController() {
         try? activitiesFetchResultsController.performFetch()
         let activities = activitiesFetchResultsController.fetchedObjects ?? []
-        recentActivities = mapRecentActivities(activities: activities)
+        sections = createSections(activities: activities)
     }
 
-    func isLastActivityInList(index: Int) -> Bool {
-        index == recentActivities.count - 1
-    }
+    private func createSections(activities: [ActivityItem]) -> [GroupedListSection] {
+        guard activities.count > 0 else {
+            return []
+        }
 
-    private func mapRecentActivities(activities: [ActivityItem]) -> [RecentActivityHomepageCell] {
-        activities
-            .prefix(fetchRequest.fetchLimit)
-            .map {
-                RecentActivityHomepageCell(
-                    title: $0.title,
-                    lastVisitedString: lastVisitedString(activity: $0)
-                )
-            }
+        return [
+            GroupedListSection(
+                heading: nil,
+                rows: activities
+                    .prefix(fetchRequest.fetchLimit).map { activity in
+                        LinkRow(
+                            id: UUID().uuidString,
+                            title: activity.title,
+                            body: lastVisitedString(activity: activity),
+                            action: { [weak self] in
+                                guard let url = URL(string: activity.url) else {
+                                    return
+                                }
+                                self?.openURLAction(url)
+                            }
+                        )
+                    },
+                footer: nil)
+        ]
     }
 
     private func lastVisitedString(activity: ActivityItem) -> String {
@@ -78,6 +89,6 @@ class RecentActivtyHomepageWidgetViewModel: NSObject,
     func controllerDidChangeContent(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
             let activities =  activitiesFetchResultsController.fetchedObjects ?? []
-            recentActivities = mapRecentActivities(activities: activities)
+            sections = createSections(activities: activities)
         }
 }

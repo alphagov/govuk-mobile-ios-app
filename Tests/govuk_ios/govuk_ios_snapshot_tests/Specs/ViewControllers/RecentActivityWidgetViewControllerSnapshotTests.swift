@@ -25,11 +25,11 @@ final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {
 
 
     private func viewController() -> UIViewController {
-        let viewModel = RecentActivtyHomepageWidgetViewModel(
-            urlOpener: MockURLOpener(),
+        let viewModel = RecentActivityHomepageWidgetViewModel(
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
-            seeAllAction: {}
+            seeAllAction: {},
+            openURLAction: { _ in }
         )
         let view = RecentActivityWidget(viewModel: viewModel)
         return HostingViewController(rootView: view)

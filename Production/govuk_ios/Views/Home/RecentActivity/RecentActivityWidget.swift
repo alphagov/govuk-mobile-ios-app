@@ -7,6 +7,7 @@ struct RecentActivityWidget: View {
         if viewModel.sections.isEmpty {
             VStack(alignment: .leading) {
                 titleView
+                    .padding(.horizontal)
                 NonTappableCardView(
                     text: viewModel.emptyActivityStateTitle
                 )
@@ -42,6 +43,5 @@ struct RecentActivityWidget: View {
         Text(viewModel.title)
             .font(Font.govUK.title3Semibold)
             .foregroundColor(Color(UIColor.govUK.text.primary))
-            .padding(.horizontal)
     }
 }

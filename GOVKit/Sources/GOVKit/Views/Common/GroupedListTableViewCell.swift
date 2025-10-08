@@ -126,15 +126,19 @@ public class GroupedListTableViewCell: UITableViewCell {
         ])
     }
 
-    public func configure(title: String,
-                   description: String?,
-                   top: Bool,
-                   bottom: Bool) {
+    public func configure(
+        title: String,
+        description: String?,
+        top: Bool,
+        bottom: Bool,
+        showIconImage: Bool = true
+    ) {
         self.isTop = top
         self.isBottom = bottom
         titleLabel.text = title
         bodyLabel.text = description
         separatorView.isHidden = bottom
+        iconImageView.isHidden = !showIconImage
         updateMask()
         accessibilityHint = String.common.localized("openWebLinkHint")
     }

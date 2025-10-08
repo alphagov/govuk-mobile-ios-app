@@ -66,6 +66,7 @@ class RecentActivityHomepageWidgetViewModel: NSObject,
                             id: UUID().uuidString,
                             title: activity.title,
                             body: lastVisitedString(activity: activity),
+                            showLinkImage: false,
                             action: { [weak self] in
                                 guard let url = URL(string: activity.url) else {
                                     return

@@ -71,6 +71,7 @@ struct LinkRowView: View {
                         .multilineTextAlignment(.leading)
                     Spacer()
                     Image(systemName: "arrow.up.right")
+                        .opacity(row.showLinkImage ? 1 : 0)
                 }
                 .foregroundColor(Color(UIColor.govUK.text.iconTertiary))
 

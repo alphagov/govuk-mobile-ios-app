@@ -44,17 +44,20 @@ public struct LinkRow: GroupedListRow,
     public let title: String
     public let body: String?
     public var isWebLink: Bool = true
+    public let showLinkImage: Bool
     public let action: () -> Void
     
     public init(id: String,
                 title: String,
                 body: String? = nil,
                 isWebLink: Bool = true,
+                showLinkImage: Bool = true,
                 action: @escaping () -> Void) {
         self.id = id
         self.title = title
         self.body = body
         self.isWebLink = isWebLink
+        self.showLinkImage = showLinkImage
         self.action = action
     }
 }
@@ -165,6 +168,15 @@ public struct GroupedListSection_Previews: PreviewProvider {
                         id: UUID().uuidString,
                         title: "Link row",
                         body: "A really long description to test how multiline text wrapping works",
+                        action: {
+                            print("link row tapped")
+                        }
+                    ),
+                    LinkRow(
+                        id: UUID().uuidString,
+                        title: "Link row without link icon",
+                        body: "This row does not have a link icon",
+                        showLinkImage: false,
                         action: {
                             print("link row tapped")
                         }

@@ -17,11 +17,12 @@ struct NonTappableCardView: View {
                     )
                 Spacer()
             }
-        }.padding()
-            .background(
-                Color(uiColor: UIColor.govUK.fills.surfaceCardNonTappable)
-            )
-            .roundedBorder(borderColor: .clear)
-            .padding([.horizontal])
+        }
+        .padding()
+        .background(
+            Color(uiColor: UIColor.govUK.fills.surfaceCardNonTappable)
+        )
+        .roundedBorder(borderColor: .clear)
+        .padding([.horizontal])
     }
 }

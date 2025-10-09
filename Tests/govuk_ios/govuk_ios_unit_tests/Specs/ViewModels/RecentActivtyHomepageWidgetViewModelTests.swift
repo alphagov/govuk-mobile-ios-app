@@ -2,7 +2,7 @@ import Foundation
 import Testing
 import Combine
 import CoreData
-import GOVKit
+@testable import GOVKit
 
 @testable import GOVKitTestUtilities
 @testable import govuk_ios
@@ -13,11 +13,11 @@ struct RecentActivtyHomepageWidgetViewModelTests {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in
             let mockActivityService = MockActivityService()
-            let sut = RecentActivtyHomepageWidgetViewModel(
-                urlOpener: MockURLOpener(),
+            let sut = RecentActivityHomepageWidgetViewModel(
                 analyticsService: MockAnalyticsService(),
                 activityService: mockActivityService,
-                seeAllAction: {}
+                seeAllAction: {},
+                openURLAction: { _ in }
             )
 
             let context = mockActivityService.returnContext()
@@ -39,52 +39,13 @@ struct RecentActivtyHomepageWidgetViewModelTests {
 
             try? mockActivityService.returnContext().save()
 
-            sut.$recentActivities
+            sut.$sections
                 .receive(on: DispatchQueue.main)
                 .sink { value in
                     continuation.resume(returning: value)
                 }.store(in: &cancellables)
         }
-        #expect(result.count == 3)
-    }
-
-
-    @Test
-    func isLastActivityInList_returnsExpectedResult() async throws {
-        var cancellables = Set<AnyCancellable>()
-        let result = await withCheckedContinuation { continuation in
-            let mockActivityService = MockActivityService()
-            let sut = RecentActivtyHomepageWidgetViewModel(
-                urlOpener: MockURLOpener(),
-                analyticsService: MockAnalyticsService(),
-                activityService: mockActivityService,
-                seeAllAction: {}
-            )
-
-            let context = mockActivityService.returnContext()
-            _ = ActivityItem.arrange(
-                context: context
-            )
-
-            _ = ActivityItem.arrange(
-                context: context
-            )
-
-            _ = ActivityItem.arrange(
-                context: context
-            )
-
-            try? mockActivityService.returnContext().save()
-
-            sut.$recentActivities
-                .receive(on: DispatchQueue.main)
-                .sink { _ in
-                    let isLastActivity = sut.isLastActivityInList(index: 2)
-
-                    continuation.resume(returning: isLastActivity)
-                }.store(in: &cancellables)
-        }
-        #expect(result == true)
+        #expect(result[0].rows.count == 3)
     }
 }
 

@@ -16,15 +16,10 @@ public struct GroupedList: View {
                 Color(backgroundColor ?? .clear)
                 VStack {
                     ForEach(content, id: \.rows.first?.id) { section in
-                        if section.heading?.icon != nil {
-                            GroupedListSectionIconView(
-                                section: section
-                            )
-                        } else {
-                            GroupedListSectionView(
-                                section: section
-                            )
-                        }
+                        GroupedListSectionView(
+                            section: section,
+                            style: section.heading?.icon != nil ? .icon : .titled
+                        )
                     }
                 }
                 .frame(idealWidth: UIScreen.main.bounds.width)

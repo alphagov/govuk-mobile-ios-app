@@ -3,6 +3,16 @@
     {
       "filename" : "topic_money_icon.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "topic_money_icon_dark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

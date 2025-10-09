@@ -3,6 +3,16 @@
     {
       "filename" : "topic_care_icon.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "topic_care_icon_dark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

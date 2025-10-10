@@ -75,7 +75,7 @@ class Topic: NSManagedObject,
         case "travel-abroad":
             return "travel"
         default:
-            return ".topicDefaultIcon"
+            return "default"
         }
     }
 

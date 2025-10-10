@@ -3,13 +3,13 @@ import GOVKit
 import UIComponents
 
 struct TopicListItemView: View {
-    private var viewModel: TopicCardModel
-    init(viewModel: TopicCardModel) {
+    private var viewModel: TopicListItemViewModel
+    init(viewModel: TopicListItemViewModel) {
         self.viewModel = viewModel
     }
     var body: some View {
         HStack(alignment: .center, spacing: 16) {
-            Image(viewModel.iconName!)
+            Image(viewModel.iconName)
                 .resizable()
                 .foregroundColor(Color(uiColor: UIColor.govUK.text.iconTertiary))
                 .frame(width: 40, height: 40)
@@ -20,20 +20,27 @@ struct TopicListItemView: View {
                 .foregroundColor(Color(uiColor: UIColor.govUK.text.iconTertiary))
         }
         .font(Font.govUK.bodySemibold)
-        .padding(16)
-        .background(Color(uiColor: UIColor.govUK.fills.surfaceList))
+        .padding()
+        .background(viewModel.backgroundColor)
+        .onTapGesture {
+            viewModel.tapAction()
+        }
     }
 }
 
 #Preview {
-    let model = TopicCardModel(title: "Benefits",
-                               icon: UIImage(systemName: "sterlingsign.circle.fill")!,
-                               tapAction: { },
+    let model1 = TopicListItemViewModel(title: "Benefits",
+                               tapAction: { print("tap 1") },
                                iconName: "benefits")
+    let model2 = TopicListItemViewModel(title: "Care",
+                                tapAction: { print("tap 2") },
+                                iconName: "care",
+                                backgroundColor: Color(UIColor.govUK.fills.surfaceCardBlue))
     ZStack {
         Color(UIColor.govUK.fills.surfaceBackground)
         VStack {
-            TopicListItemView(viewModel: model)
+            TopicListItemView(viewModel: model1)
+            TopicListItemView(viewModel: model2)
         }
     }
 }

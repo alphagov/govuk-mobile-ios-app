@@ -37,7 +37,7 @@ struct TopicTests {
             UIImage.topicDefaultIcon,
         ]
     ))
-    func topic_iconName_returnsCorrectValue(ref: String,
+    func topic_iconImage_returnsCorrectValue(ref: String,
                                             icon: UIImage) {
         let coreData = CoreDataRepository.arrange
         
@@ -47,4 +47,46 @@ struct TopicTests {
 
         #expect(topic.icon.pngData() == icon.pngData())
     }
+
+    @Test(arguments: zip(
+        [
+            "driving-transport",
+            "employment",
+            "benefits",
+            "care",
+            "business",
+            "health-disability",
+            "money-tax",
+            "parenting-guardianship",
+            "retirement",
+            "studying-training",
+            "travel-abroad",
+            "unknown"
+        ],
+        [
+            "driving",
+            "employment",
+            "benefits",
+            "care",
+            "business",
+            "health",
+            "money",
+            "parenting",
+            "retirement",
+            "studying",
+            "travel",
+            "default"
+        ]
+    ))
+    func topic_iconName_returnsCorrectValue(ref: String,
+                                            iconName: String) {
+        let coreData = CoreDataRepository.arrange
+
+        let topic = Topic(context: coreData.viewContext)
+        topic.ref = ref
+        topic.title = "Title"
+
+        #expect(topic.iconName == iconName)
+    }
+
 }

@@ -50,6 +50,35 @@ class Topic: NSManagedObject,
         }
     }
 
+    var iconName: String {
+        switch self.ref {
+        case "benefits":
+            return "benefits"
+        case "business":
+            return "business"
+        case "care":
+            return "care"
+        case "driving-transport":
+            return "driving"
+        case "employment":
+            return "employment"
+        case "health-disability":
+            return "health"
+        case "money-tax":
+            return "money"
+        case "parenting-guardianship":
+            return "parenting"
+        case "retirement":
+            return "retirement"
+        case "studying-training":
+            return "studying"
+        case "travel-abroad":
+            return "travel"
+        default:
+            return ".topicDefaultIcon"
+        }
+    }
+
     func update(item: TopicResponseItem) {
         self.ref = item.ref
         self.title = item.title

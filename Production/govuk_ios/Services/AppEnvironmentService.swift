@@ -8,6 +8,7 @@ protocol AppEnvironmentServiceInterface {
     var authenticationAuthorizeURL: URL { get }
     var authenticationTokenURL: URL { get }
     var chatBaseURL: URL { get }
+    var tokenBaseURL: URL { get }
 }
 
 enum AppEnvironmentKey: String {
@@ -45,10 +46,6 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
 
     var authenticationTokenURL: URL {
         tokenBaseURL.appendingPathComponent("oauth2/token")
-    }
-
-    var revokeTokenURL: URL {
-        authenticationBaseURL.appendingPathComponent("oauth2/revoke")
     }
 
     private func string(for key: AppEnvironmentKey) -> String {

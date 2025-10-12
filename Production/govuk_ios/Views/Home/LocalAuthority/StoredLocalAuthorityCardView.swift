@@ -6,10 +6,12 @@ struct StoredLocalAuthorityCardView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(model.description)
-                    .frame(maxHeight: .infinity)
-                    .font(.govUK.body)
-                    .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                if let description = model.description {
+                    Text(description)
+                        .frame(maxHeight: .infinity)
+                        .font(.govUK.body)
+                        .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                }
                 Text(model.name)
                     .frame(maxHeight: .infinity)
                     .font(.govUK.title2Bold)

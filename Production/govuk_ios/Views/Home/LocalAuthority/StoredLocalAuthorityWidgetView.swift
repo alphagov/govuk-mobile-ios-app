@@ -30,27 +30,7 @@ struct StoredLocalAuthorityWidgetView: View {
             }
             .padding(.bottom, 8)
             if viewModel.localAuthorities.count == 1 {
-                HStack {
-                    Text(viewModel.cardModels().first?.name ?? "")
-                        .font(.govUK.title2Bold)
-                        .foregroundColor(Color(uiColor: UIColor.govUK.text.link))
-                        .padding()
-                    Spacer()
-                }.onTapGesture {
-                    viewModel.open(item: viewModel.cardModels()[0])
-                }
-                .background {
-                    Color(uiColor: UIColor.govUK.fills.surfaceList)
-                }
-                .roundedBorder(borderColor: .clear)
-                .shadow(
-                    color: Color(
-                        uiColor: UIColor.govUK.strokes.cardDefault
-                    ), radius: 0, x: 0, y: 3
-                )
-                .accessibilityLabel(viewModel.cardModels().first?.name ?? "")
-                .accessibilityAddTraits(.isLink)
-                .accessibilityHint(String.common.localized("openWebLinkHint"))
+                StoredLocalAuthorityCardView(model: viewModel.cardModels()[0])
             } else {
                 HStack {
                     Text(viewModel.twoTierAuthorityDescription)

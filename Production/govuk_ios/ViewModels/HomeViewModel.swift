@@ -53,10 +53,10 @@ class HomeViewModel: ObservableObject {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
-        fetchWidgets()
+        updateWidgets()
     }
 
-    func fetchWidgets() {
+    func updateWidgets() {
         let array = [
             topicsView,
             localServicesWidget,
@@ -114,7 +114,7 @@ class HomeViewModel: ObservableObject {
 
     var localServicesWidget: HomepageWidget? {
         guard featureEnabled(.localServices),
-              localAuthorityService.fetchSavedLocalAuthority().first == nil
+              localAuthorityService.fetchSavedLocalAuthority().isEmpty
         else { return nil }
         let viewModel = LocalAuthorityWidgetViewModel { [weak self] in
             self?.localAuthorityAction()

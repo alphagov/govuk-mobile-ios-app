@@ -28,7 +28,7 @@ struct HomeContentView: View {
                 }
             }
         }.onAppear {
-            viewModel.fetchWidgets()
+            viewModel.updateWidgets()
             viewModel.trackScreen(screen: self)
         }
         .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))

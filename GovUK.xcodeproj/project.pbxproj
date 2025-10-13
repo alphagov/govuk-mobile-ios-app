@@ -36,6 +36,8 @@
 		1677D4042E00695500FB1E56 /* LocalAuthenticationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677D4032E00694B00FB1E56 /* LocalAuthenticationSettingsViewModel.swift */; };
 		1677D4062E006B8000FB1E56 /* TouchIdSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677D4052E006B7700FB1E56 /* TouchIdSettingsView.swift */; };
 		1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */; };
+		167D0DC32E9D40FE0064A39E /* TopicSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D0DC22E9D40FC0064A39E /* TopicSelectionCardView.swift */; };
+		167D0DC52E9D41340064A39E /* TopicSelectionCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */; };
 		168176A32DCE68D800A4B0E4 /* CoreDataDeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168176A22DCE685900A4B0E4 /* CoreDataDeletionService.swift */; };
 		1687F05D2CB035E3005E1473 /* AllTopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */; };
 		1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */; };
@@ -460,6 +462,8 @@
 		1677D4032E00694B00FB1E56 /* LocalAuthenticationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationSettingsViewModel.swift; sourceTree = "<group>"; };
 		1677D4052E006B7700FB1E56 /* TouchIdSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIdSettingsView.swift; sourceTree = "<group>"; };
 		1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		167D0DC22E9D40FC0064A39E /* TopicSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSelectionCardView.swift; sourceTree = "<group>"; };
+		167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSelectionCardViewModel.swift; sourceTree = "<group>"; };
 		168176A22DCE685900A4B0E4 /* CoreDataDeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDeletionService.swift; sourceTree = "<group>"; };
 		1687F05C2CB035D5005E1473 /* AllTopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsViewController.swift; sourceTree = "<group>"; };
 		1687F3142CB40F81005E1473 /* AllTopicsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTopicsCoordinator.swift; sourceTree = "<group>"; };
@@ -1943,6 +1947,7 @@
 		D05AF4DD2CAD3C5500F86DD0 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */,
 				4E15340C2E3A248E002DEDB9 /* TopicsWidgetModel.swift */,
 				1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */,
 				D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */,
@@ -2036,6 +2041,7 @@
 		D0F86E1F2CAC3BE000FF2D9E /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				167D0DC22E9D40FC0064A39E /* TopicSelectionCardView.swift */,
 				4E89BBB02E3BD779009E0471 /* TopicRowView.swift */,
 				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
 				D05AF4D92CAD3C2900F86DD0 /* TopicDetailView.swift */,
@@ -2366,6 +2372,7 @@
 				5DFB48902DE9F7F600B41CDA /* AuthenticationCoordinator.swift in Sources */,
 				5DFB48912DE9F7F600B41CDA /* TopicOnboardingCoordinator.swift in Sources */,
 				5DFB48922DE9F7F600B41CDA /* PostAuthCoordinator.swift in Sources */,
+				167D0DC32E9D40FE0064A39E /* TopicSelectionCardView.swift in Sources */,
 				5DFB48932DE9F7F600B41CDA /* AppRecommendUpdateCoordinator.swift in Sources */,
 				5DFB48952DE9F7F600B41CDA /* PreAuthCoordinator.swift in Sources */,
 				5DFB48962DE9F7F600B41CDA /* AppUnavailableCoordinator.swift in Sources */,
@@ -2458,6 +2465,7 @@
 				D090467C2DBBC1AC0096EE66 /* IdTokenPayload.swift in Sources */,
 				1677D4062E006B8000FB1E56 /* TouchIdSettingsView.swift in Sources */,
 				5D54A82E2BFCAA4E003D0C21 /* LaunchViewController.swift in Sources */,
+				167D0DC52E9D41340064A39E /* TopicSelectionCardViewModel.swift in Sources */,
 				5D8100892CEB3FE600EE7D15 /* AppLaunchResponse.swift in Sources */,
 				4EEC0F322DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift in Sources */,
 				D04C54302D70821D0070EE79 /* HomeCommerceItem.swift in Sources */,

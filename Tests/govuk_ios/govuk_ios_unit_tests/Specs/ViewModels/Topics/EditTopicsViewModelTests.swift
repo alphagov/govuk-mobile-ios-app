@@ -18,7 +18,7 @@ struct EditTopicsViewModelTests {
             analyticsService: mockAnalyticsService
         )
 
-        try #require(sut.sections.count == 1)
+        try #require(sut.topicSelectionCards.count == 1)
         try #require(sut.sections[0].rows.count == 3)
         let row = try #require(sut.sections[0].rows[0] as? ToggleRow)
         #expect(row.title == "title0")
@@ -65,7 +65,7 @@ struct EditTopicsViewModelTests {
         )
 
         try #require(topics.first?.isFavourite == true)
-        try #require(sut?.sections.count == 1)
+        try #require(sut?.topicSelectionCards.count == 1)
 
         sut = nil
 

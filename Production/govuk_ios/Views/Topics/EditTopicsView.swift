@@ -28,9 +28,6 @@ struct EditTopicsView: View {
             .onAppear {
                 viewModel.trackScreen(screen: self)
             }
-            .onDisappear {
-                viewModel.undoChanges()
-            }
         }
         .id(colorScheme)
     }
@@ -48,33 +45,9 @@ struct EditTopicsView: View {
 
     private var topicsList: some View {
         VStack(spacing: 16) {
-            ForEach(viewModel.sections) { topicRow in
-                TopicListRowView(topicRow: topicRow)
+            ForEach(viewModel.topicSelectionCards) { topicSelectionCard in
+                TopicSelectionCardView(viewModel: topicSelectionCard)
             }
-        }
-    }
-}
-
-struct TopicListRowView: View {
-    @ObservedObject var topicRow: TopicRow
-
-    var body: some View {
-        HStack(spacing: 16) {
-            ZStack {
-                let image = topicRow.isOn ? Image("topic_selected") : Image(uiImage: topicRow.icon)
-                image
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
-            }
-            Text(topicRow.title)
-                .font(.govUK.bodySemibold)
-            Spacer()
-        }
-        .padding(16)
-        .background(Color(UIColor.govUK.fills.surfaceCardSelected))
-        .roundedBorder(borderColor: .clear)
-        .onTapGesture {
-            topicRow.isOn.toggle()
         }
     }
 }

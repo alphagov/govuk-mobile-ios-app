@@ -24,6 +24,7 @@ struct TopicsWidget: View {
                 )
                 Spacer()
             }
+            .padding(.horizontal)
         } else {
             VStack {
                 VStack(alignment: .leading) {
@@ -73,7 +74,9 @@ struct TopicsWidget: View {
                     }
                     .padding(.top)
                 }
-            }.sheet(isPresented: $showingEditScreen,
+            }
+            .padding(.horizontal)
+            .sheet(isPresented: $showingEditScreen,
                     onDismiss: {
                 viewModel.fetchTopics()
                 viewModel.fetchDisplayedTopics()

@@ -20,7 +20,7 @@ struct LocalAuthorityWidget: View {
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                     Spacer()
                 }
-                .padding(.bottom, 12)
+                .padding(.bottom, 8)
                 HStack(alignment: .center) {
                     Spacer()
                     VStack(alignment: .center) {
@@ -54,6 +54,7 @@ struct LocalAuthorityWidget: View {
                     ), radius: 0, x: 0, y: 3
                 )
             }
+            .padding(.horizontal)
         }
     }
 }

@@ -11,7 +11,9 @@ struct RecentActivityWidget: View {
                 NonTappableCardView(
                     text: viewModel.emptyActivityStateTitle
                 )
+                .padding(.horizontal)
             }
+            .padding(.top, 8)
         } else {
             VStack {
                 HStack {

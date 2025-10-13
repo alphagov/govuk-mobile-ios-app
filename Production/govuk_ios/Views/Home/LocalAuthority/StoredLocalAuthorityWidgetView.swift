@@ -42,6 +42,7 @@ struct StoredLocalAuthorityWidgetView: View {
                 twoTierView
             }
         }
+        .padding(.horizontal)
     }
     @ViewBuilder
     var twoTierView: some View {

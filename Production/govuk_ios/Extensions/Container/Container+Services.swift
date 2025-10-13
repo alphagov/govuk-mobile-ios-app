@@ -21,7 +21,33 @@ extension Container {
 
     var analyticsService: Factory<AnalyticsServiceInterface> {
         Factory(self) {
-            self.baseAnalyticsService()
+            AnalyticsService(
+                clients: [
+                    self.firebaseClient.resolve(),
+                    self.crashlyticsClient.resolve()
+                ],
+                userDefaultsService: self.userDefaultsService.resolve(),
+                isSignedIn: {
+                    self.authenticationService.resolve().isSignedIn
+                }
+            )
+        }
+        .scope(.singleton)
+    }
+
+    var firebaseClient: Factory<AnalyticsClient> {
+        Factory(self) {
+            FirebaseClient(
+                firebaseApp: FirebaseApp.self,
+                firebaseAnalytics: Analytics.self,
+                appAttestService: self.appAttestService.resolve()
+            )
+        }
+    }
+
+    var crashlyticsClient: Factory<AnalyticsClient> {
+        Factory(self) {
+            CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
         }
     }
 
@@ -41,24 +67,6 @@ extension Container {
                 repository: self.localAuthorityRepository()
             )
         }
-    }
-
-    private var baseAnalyticsService: Factory<AnalyticsServiceInterface> {
-        Factory(self) {
-            AnalyticsService(
-                clients: [
-                    FirebaseClient(
-                        firebaseApp: FirebaseApp.self,
-                        firebaseAnalytics: Analytics.self,
-                        appAttestService: self.appAttestService()
-                    ),
-                    CrashlyticsClient(crashlytics: Crashlytics.crashlytics())
-                ],
-                userDefaultsService: self.userDefaultsService(),
-                authenticationService: self.authenticationService.resolve()
-            )
-        }
-        .scope(.singleton)
     }
 
     @MainActor
@@ -88,7 +96,7 @@ extension Container {
                 topicsServiceClient: self.topicsServiceClient(),
                 topicsRepository: self.topicsRepository(),
                 analyticsService: self.analyticsService(),
-                userDefaultsService: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService.resolve()
             )
         }
     }
@@ -110,7 +118,7 @@ extension Container {
                 environmentService: self.appEnvironmentService.resolve(),
                 notificationCenter: UNUserNotificationCenter.current(),
                 configService: self.appConfigService.resolve(),
-                userDefaultsService: self.userDefaultsService(),
+                userDefaultsService: self.userDefaultsService.resolve(),
                 oneSignalServiceClient: OneSignal.self
             )
         }
@@ -119,7 +127,7 @@ extension Container {
     var notificationsOnboardingService: Factory<NotificationsOnboardingServiceInterface> {
         Factory(self) {
             NotificationsOnboardingService(
-                userDefaultsService: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService.resolve()
             )
         }
     }
@@ -130,7 +138,8 @@ extension Container {
                 authenticationServiceClient: self.authenticationServiceClient.resolve(),
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
                 returningUserService: self.returningUserService.resolve(),
-                userDefaultsService: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService.resolve(),
+                appConfigService: self.appConfigService.resolve()
             )
         }.scope(.singleton)
     }
@@ -164,7 +173,7 @@ extension Container {
     var localAuthenticationService: Factory<LocalAuthenticationServiceInterface> {
         Factory(self) {
             LocalAuthenticationService(
-                userDefaultsService: self.userDefaultsService()
+                userDefaultsService: self.userDefaultsService.resolve()
             )
         }
     }

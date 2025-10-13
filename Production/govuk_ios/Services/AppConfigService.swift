@@ -10,6 +10,7 @@ protocol AppConfigServiceInterface {
     var chatBanner: ChatBanner? { get }
     var userFeedbackBanner: UserFeedbackBanner? { get }
     var chatUrls: ChatURLs? { get }
+    var refreshTokenExpirySeconds: Int? { get }
 }
 
 public final class AppConfigService: AppConfigServiceInterface {
@@ -24,6 +25,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     var chatBanner: ChatBanner?
     var userFeedbackBanner: UserFeedbackBanner?
     private(set) var chatUrls: ChatURLs?
+    private(set) var refreshTokenExpirySeconds: Int?
 
     init(appConfigServiceClient: AppConfigServiceClientInterface,
          analyticsService: AnalyticsServiceInterface) {
@@ -58,18 +60,23 @@ public final class AppConfigService: AppConfigServiceInterface {
         )
         updateSearch(urlString: config.searchApiUrl)
         updateChatPollInterval(config.chatPollIntervalSeconds)
+        updateTokenExpirySeconds(config.refreshTokenExpirySeconds)
         alertBanner = config.alertBanner
         chatBanner = config.chatBanner
         userFeedbackBanner = config.userFeedbackBanner
         chatUrls = config.chatUrls
     }
 
-    private func updateChatPollInterval(_ interval: Int?) {
+    private func updateChatPollInterval(_ interval: TimeInterval?) {
         guard let pollInterval = interval,
               pollInterval > 0 else {
             return
         }
-        chatPollIntervalSeconds = TimeInterval(pollInterval)
+        chatPollIntervalSeconds = pollInterval
+    }
+
+    private func updateTokenExpirySeconds(_ expiry: Int?) {
+        refreshTokenExpirySeconds = expiry
     }
 
     private func updateSearch(urlString: String?) {

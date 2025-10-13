@@ -20,7 +20,6 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                         Spacer()
                     }
                 }
-                .padding(.bottom, 16)
             } else {
                 ScrollView {
                     VStack(spacing: 0) {
@@ -28,7 +27,6 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                         topicDetails
                     }
                 }
-                .padding(.bottom, 16)
                 .background(
                     Gradient(stops: [
                         .init(

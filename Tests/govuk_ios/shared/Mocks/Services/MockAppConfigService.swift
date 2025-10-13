@@ -3,6 +3,9 @@ import Foundation
 @testable import govuk_ios
 
 class MockAppConfigService: AppConfigServiceInterface {
+
+    var refreshTokenExpirySeconds: Int?
+
     var _stubbedChatPollIntervalSeconds: TimeInterval = 3.0
     var chatPollIntervalSeconds: TimeInterval {
         _stubbedChatPollIntervalSeconds

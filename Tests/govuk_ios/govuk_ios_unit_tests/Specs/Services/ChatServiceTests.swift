@@ -362,8 +362,7 @@ final class ChatServiceTests {
         )
         mockConfigService.features = [.chat, .chatTestActive]
 
-//        #expect(sut.isEnabled == true)
-        #expect(sut.isEnabled == false)
+        #expect(sut.isEnabled == true)
     }
 
     @Test

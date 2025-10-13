@@ -7,7 +7,8 @@ import UIKit
 @testable import govuk_ios
 
 @MainActor
-final class RecentActivityItemCardViewControllerSnapshotTests: SnapshotTestCase {
+final class TopicListItemViewSnapshotTests: SnapshotTestCase {
+    let coreData = CoreDataRepository.arrangeAndLoad
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
@@ -17,7 +18,6 @@ final class RecentActivityItemCardViewControllerSnapshotTests: SnapshotTestCase 
         )
     }
 
-
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
@@ -25,15 +25,17 @@ final class RecentActivityItemCardViewControllerSnapshotTests: SnapshotTestCase 
             prefersLargeTitles: true
         )
     }
+
     private func viewController() -> UIViewController {
-        let model = RecentActivityHomepageCell(
-            title: "Test",
-            lastVisitedString: ""
+        let topic = Topic(context: coreData.viewContext)
+        topic.title = "Benefits"
+        topic.ref = "benefits"
+        topic.topicDescription = "test description"
+        let model = TopicListItemViewModel(
+            topic: topic,
+            tapAction: { }
         )
-        let view = RecentActivityItemCard(
-            model: model,
-            isLastItemInList: false
-        )
+        let view = TopicListItemView(viewModel: model)
         return HostingViewController(rootView: view)
     }
 }

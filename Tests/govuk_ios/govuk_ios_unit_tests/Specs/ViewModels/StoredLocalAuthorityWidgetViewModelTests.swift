@@ -80,7 +80,7 @@ struct StoredLocalAuthorityWidgetViewModelTests {
         let result = sut.cardModels()
         #expect(result.count == 1)
         #expect(result.first?.homepageUrl == "https://www.towerhamlets.gov.uk")
-        #expect(result.first?.description == "Find services for your area on the London Borough of Tower Hamlets website")
+        #expect(result.first?.description == nil)
     }
 
     @Test

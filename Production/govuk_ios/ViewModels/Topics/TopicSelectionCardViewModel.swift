@@ -30,8 +30,14 @@ class TopicSelectionCardViewModel: Identifiable,
 
     var backgroundColor: Color {
         topic.isFavourite ?
-        Color(UIColor.govUK.fills.surfaceList) :
-        Color(UIColor.blue)
+        Color(UIColor.govUK.fills.surfaceListSelected) :
+        Color(UIColor.govUK.fills.surfaceListUnselected)
+    }
+
+    var titleColor: Color {
+        topic.isFavourite ?
+        Color(UIColor.govUK.text.listSelected) :
+        Color(UIColor.govUK.text.listUnselected)
     }
 
     var id: String {

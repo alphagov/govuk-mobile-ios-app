@@ -12,6 +12,7 @@ struct TopicSelectionCardView: View {
             }
             Text(viewModel.title)
                 .font(.govUK.bodySemibold)
+                .foregroundStyle(viewModel.titleColor)
             Spacer()
         }
         .padding(16)

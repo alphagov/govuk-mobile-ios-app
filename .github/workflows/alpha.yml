@@ -2,7 +2,8 @@ name: Alpha
 
 on:
   workflow_dispatch:
-    environment:
+    inputs:
+      environment:
         description: 'Environment'
         required: true
         default: 'Staging'

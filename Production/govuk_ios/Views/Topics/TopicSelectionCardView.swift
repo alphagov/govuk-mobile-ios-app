@@ -20,5 +20,9 @@ struct TopicSelectionCardView: View {
         .onTapGesture {
             viewModel.isOn.toggle()
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(viewModel.title)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityHint(viewModel.accessibilityHint)
     }
 }

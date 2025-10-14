@@ -37,4 +37,10 @@ class TopicSelectionCardViewModel: Identifiable,
     var id: String {
         topic.ref
     }
+
+    var accessibilityHint: String {
+        topic.isFavourite ?
+        String.topics.localized("topicSelected") :
+        String.topics.localized("topicUnselected")
+    }
 }

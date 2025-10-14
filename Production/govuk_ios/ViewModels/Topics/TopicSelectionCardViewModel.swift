@@ -3,7 +3,7 @@ import SwiftUI
 class TopicSelectionCardViewModel: Identifiable,
                                    ObservableObject {
     private let topic: Topic
-    private let tapAction: (Bool) -> Void
+    let tapAction: (Bool) -> Void
 
     public init(topic: Topic,
                 tapAction: @escaping (Bool) -> Void) {
@@ -28,25 +28,21 @@ class TopicSelectionCardViewModel: Identifiable,
         topic.iconName
     }
 
-    var backgroundColor: Color {
+    var backgroundColor: UIColor {
         topic.isFavourite ?
-        Color(UIColor.govUK.fills.surfaceListSelected) :
-        Color(UIColor.govUK.fills.surfaceListUnselected)
+        .govUK.fills.surfaceListSelected :
+        .govUK.fills.surfaceListUnselected
     }
 
-    var titleColor: Color {
+    var titleColor: UIColor {
         topic.isFavourite ?
-        Color(UIColor.govUK.text.listSelected) :
-        Color(UIColor.govUK.text.listUnselected)
-    }
-
-    var id: String {
-        topic.ref
+        .govUK.text.listSelected :
+        .govUK.text.listUnselected
     }
 
     var accessibilityHint: String {
         topic.isFavourite ?
-        String.topics.localized("topicSelected") :
-        String.topics.localized("topicUnselected")
+        .topics.localized("topicSelected") :
+        .topics.localized("topicUnselected")
     }
 }

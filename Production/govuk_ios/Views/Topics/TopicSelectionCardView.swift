@@ -12,11 +12,11 @@ struct TopicSelectionCardView: View {
             }
             Text(viewModel.title)
                 .font(.govUK.bodySemibold)
-                .foregroundStyle(viewModel.titleColor)
+                .foregroundStyle(Color(viewModel.titleColor))
             Spacer()
         }
         .padding(16)
-        .background(Color(UIColor(viewModel.backgroundColor)))
+        .background(Color(viewModel.backgroundColor))
         .roundedBorder(borderColor: .clear)
         .onTapGesture {
             viewModel.isOn.toggle()

@@ -48,10 +48,10 @@ struct Container_APIClientTests {
         }
         let sut = container.revokeTokenAPIClient()
         return await withCheckedContinuation { continuation in
-            MockURLProtocol.requestHandlers["https://www.govuk-auth.com/oauth2/revoke"] = { request in
+            MockURLProtocol.requestHandlers["https://www.govuk-token.com/oauth2/revoke"] = { request in
                 let components = URLComponents(url: request.url!, resolvingAgainstBaseURL: true)
                 #expect(components?.scheme == "https")
-                #expect(components?.host   == "www.govuk-auth.com")
+                #expect(components?.host   == "www.govuk-token.com")
                 #expect(components?.path == "/oauth2/revoke")
                 #expect(request.httpMethod == "POST")
                 if let data = request.bodyStreamData {
@@ -65,7 +65,10 @@ struct Container_APIClientTests {
                 }
                 return (.arrangeSuccess, nil, nil)
             }
-            let request = GOVRequest.revoke("token", clientId: "clientId")
+            let request = GOVRequest.revoke(
+                token: "token",
+                clientId: "clientId"
+            )
 
             sut.send(
                 request: request,

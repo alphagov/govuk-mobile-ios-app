@@ -30,6 +30,7 @@ class AnalyticsService: AnalyticsServiceInterface {
     }
 
     func track(error: Error) {
+        guard shouldTrack else { return }
         clients.forEach { $0.track(error: error) }
     }
 

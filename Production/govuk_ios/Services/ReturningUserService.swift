@@ -12,7 +12,7 @@ class ReturningUserService: ReturningUserServiceInterface {
     private let coreDataDeletionService: CoreDataDeletionServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
-    private var storedpersistentUserIdentifier: String? {
+    private var storedPersistentUserIdentifier: String? {
         try? openSecureStoreService.readItem(itemName: "persistentUserIdentifier")
     }
 
@@ -30,26 +30,24 @@ class ReturningUserService: ReturningUserServiceInterface {
             return .failure(.missingIdentifierError)
         }
 
-        if localAuthenticationService.authenticationOnboardingFlowSeen {
-            guard let storedIdentifier = storedpersistentUserIdentifier
-            else {
-                return .failure(.missingIdentifierError)
-            }
+        if localAuthenticationService.authenticationOnboardingFlowSeen,
+           let storedIdentifier = storedPersistentUserIdentifier {
             return await handleUserIdentifiers(
                 currentIdentifier: currentIdentifier,
                 storedIdentifier: storedIdentifier
             )
         } else {
-            return saveIdentifier(currentIdentifier: currentIdentifier, isReturningUser: true)
+            return saveIdentifier(
+                currentIdentifier: currentIdentifier,
+                isReturningUser: false
+            )
         }
     }
 
     private func currentPersistentUserIdentifier(idToken: String?) async -> String? {
         guard let idToken = idToken,
               let payload = try? await JWTExtractor().extract(jwt: idToken)
-        else {
-            return nil
-        }
+        else { return nil }
         return payload.sub
     }
 

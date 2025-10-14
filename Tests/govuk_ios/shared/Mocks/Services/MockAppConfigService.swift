@@ -17,7 +17,13 @@ class MockAppConfigService: AppConfigServiceInterface {
 
     var isAppRecommendUpdate: Bool = false
 
-    var features: [Feature] = [.onboarding, .search, .topics, .recentActivity, .chatOptIn]
+    var features: [Feature] = [
+        .onboarding,
+        .search,
+        .topics,
+        .recentActivity,
+        .chatOptInV2
+    ]
 
     var _stubbedAlertBanner: AlertBanner?
     var alertBanner: AlertBanner? {

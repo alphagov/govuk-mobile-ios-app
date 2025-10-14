@@ -16,6 +16,7 @@ class HomeCoordinator: TabItemCoordinator {
     private let activityService: ActivityServiceInterface
     private let localAuthorityService: LocalAuthorityServiceInterface
     private let userDefaultService: UserDefaultsServiceInterface
+    private let chatService: ChatServiceInterface
 
     var isEnabled: Bool {
         true
@@ -33,7 +34,8 @@ class HomeCoordinator: TabItemCoordinator {
          searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
-         userDefaultService: UserDefaultsServiceInterface) {
+         userDefaultService: UserDefaultsServiceInterface,
+         chatService: ChatServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deeplinkStore
@@ -46,6 +48,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
         self.userDefaultService = userDefaultService
+        self.chatService = chatService
         super.init(navigationController: navigationController)
     }
 
@@ -58,7 +61,8 @@ class HomeCoordinator: TabItemCoordinator {
             activityService: activityService,
             topicWidgetViewModel: topicWidgetViewModel,
             localAuthorityService: localAuthorityService,
-            userDefaultService: userDefaultService
+            userDefaultService: userDefaultService,
+            chatService: chatService
         )
 
         let actions = ViewControllerBuilder.HomeActions(

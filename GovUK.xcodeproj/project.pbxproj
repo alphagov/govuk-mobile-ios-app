@@ -705,7 +705,6 @@
 		B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
 		B0AD6F1F2DDA86D80077849F /* NotificationsOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsOnboardingService.swift; sourceTree = "<group>"; };
 		D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceInformation+Convenience.swift"; sourceTree = "<group>"; };
-		D01005352CECA6420013CBD0 /* Alpha.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Alpha.xcconfig; sourceTree = "<group>"; };
 		D016F29A2E0C51B000659AC3 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		D02416442DEDB1C600F81C6D /* SignInSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSuccessViewModel.swift; sourceTree = "<group>"; };
 		D02416462DEDC0C500F81C6D /* SignInSuccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSuccessCoordinator.swift; sourceTree = "<group>"; };
@@ -775,7 +774,6 @@
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		D0B3EBFD2CE226AC00A8F321 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		D0B3EBFE2CE226AC00A8F321 /* GoogleService-Info-Live.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Live.plist"; sourceTree = "<group>"; };
-		D0B3EC012CE227D900A8F321 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D0C1F1E32CA440F200DD3D61 /* TopicCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCardModel.swift; sourceTree = "<group>"; };
 		D0C1F1E52CA4432F00DD3D61 /* TopicsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetView.swift; sourceTree = "<group>"; };
 		D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryWrapper.swift; sourceTree = "<group>"; };
@@ -795,7 +793,6 @@
 		D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAddressSelectionView.swift; sourceTree = "<group>"; };
 		D0E85A872DDCDBBC003B4D7A /* AmbiguousAuthorities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAuthorities.swift; sourceTree = "<group>"; };
 		D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentService.swift; sourceTree = "<group>"; };
-		D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		D0EB04822D37F34200B310D8 /* GOV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV.xcdatamodel; sourceTree = "<group>"; };
 		D0EB04832D37F34200B310D8 /* GOV_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV_v2.xcdatamodel; sourceTree = "<group>"; };
@@ -1635,7 +1632,6 @@
 			children = (
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
-				D0EAB5002CDE6513007ACBCD /* Config */,
 				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D742BD32C99781300E7B87A /* Strings */,
 				5D86EB532E55ED3900C4274A /* app_icon.icon */,
@@ -1976,16 +1972,6 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		D0EAB5002CDE6513007ACBCD /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */,
-				D0B3EC012CE227D900A8F321 /* Release.xcconfig */,
-				D01005352CECA6420013CBD0 /* Alpha.xcconfig */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
@@ -2294,7 +2280,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Release\" ]; then\n  cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/GoogleService-Info-Live.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nelse\n  cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/GoogleService-Info-Dev.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/${GOOGLE_SERVICES_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2684,7 +2670,6 @@
 /* Begin XCBuildConfiguration section */
 		5D4B9D3A2C074207005F126A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2708,7 +2693,6 @@
 		};
 		5D4B9D3B2C074207005F126A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2732,10 +2716,14 @@
 		};
 		5DAD719C2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAlpha;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7r88bunbmdsvihr2cdb43lasun;
+				BASE_URL = "https://app.integration.publishing.service.gov.uk";
+				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2784,25 +2772,32 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GOOGLE_SERVICES_FILE = "GoogleService-Info-Dev.plist";
 				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TOKEN_BASE_URL = "https://4y369hyvja.execute-api.eu-west-2.amazonaws.com/staging";
 			};
 			name = Debug;
 		};
 		5DAD719D2BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAlpha;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7r88bunbmdsvihr2cdb43lasun;
+				BASE_URL = "https://app.integration.publishing.service.gov.uk";
+				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2845,22 +2840,24 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GOOGLE_SERVICES_FILE = "GoogleService-Info-Dev.plist";
 				INFOPLIST_FILE = "";
 				"INFOPLIST_FILE[sdk=*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				TOKEN_BASE_URL = "https://4y369hyvja.execute-api.eu-west-2.amazonaws.com/staging";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		5DAD719F2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = app_icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2884,8 +2881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
-				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2901,7 +2897,6 @@
 		};
 		5DAD71A02BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconRelease;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2926,8 +2921,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
-				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore uk.gov.govuk";
@@ -2944,7 +2938,6 @@
 		};
 		5DAD71A22BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2968,7 +2961,6 @@
 		};
 		5DAD71A32BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3009,7 +3001,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3022,42 +3014,6 @@
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
-		};
-		5DCAFA6B2D3FE0E800C3F284 /* Alpha */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service_dev.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N8W395F695;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Production/govuk_ios_notification_service/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = govuk_ios_notification_service;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc uk.gov.govuk.dev.notification-service";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Alpha;
 		};
 		5DCAFA6C2D3FE0E800C3F284 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3078,7 +3034,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3094,6 +3050,7 @@
 			};
 			name = Release;
 		};
+<<<<<<< HEAD
 		D01005302CEC9FCE0013CBD0 /* Alpha */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
@@ -3253,6 +3210,8 @@
 			};
 			name = Alpha;
 		};
+=======
+>>>>>>> develop
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3260,7 +3219,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5D4B9D3A2C074207005F126A /* Debug */,
-				D01005332CEC9FCE0013CBD0 /* Alpha */,
 				5D4B9D3B2C074207005F126A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3270,7 +3228,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DAD719C2BD250DF0075F648 /* Debug */,
-				D01005302CEC9FCE0013CBD0 /* Alpha */,
 				5DAD719D2BD250DF0075F648 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3280,7 +3237,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DAD719F2BD250DF0075F648 /* Debug */,
-				D01005312CEC9FCE0013CBD0 /* Alpha */,
 				5DAD71A02BD250DF0075F648 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3290,7 +3246,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DAD71A22BD250DF0075F648 /* Debug */,
-				D01005322CEC9FCE0013CBD0 /* Alpha */,
 				5DAD71A32BD250DF0075F648 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3300,7 +3255,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DCAFA6A2D3FE0E800C3F284 /* Debug */,
-				5DCAFA6B2D3FE0E800C3F284 /* Alpha */,
 				5DCAFA6C2D3FE0E800C3F284 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

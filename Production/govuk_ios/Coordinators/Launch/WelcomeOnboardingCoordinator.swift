@@ -55,7 +55,7 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
         let authenticationCoordinator = coordinatorBuilder.authentication(
             navigationController: navigationController,
             completionAction: completionAction,
-            handleError: { [weak self] error in
+            errorAction: { [weak self] error in
                 self?.showError(error)
             }
         )
@@ -69,13 +69,14 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
         guard case .loginFlow(let loginError) = error,
               loginError.reason == .userCancelled else {
             analyticsService.track(error: error)
-            setSignInError()
+            setSignInError(error)
             return
         }
     }
 
-    private func setSignInError() {
+    private func setSignInError(_ error: AuthenticationError) {
         let viewController = viewControllerBuilder.signInError(
+            error: error,
             completion: { [weak self] in
                 self?.setWelcomeOnboardingViewController(false)
             }

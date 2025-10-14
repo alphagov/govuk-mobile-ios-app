@@ -4,15 +4,28 @@ import UIComponents
 import SwiftUI
 
 final class SignInErrorViewModel: InfoViewModelInterface {
+    private let error: AuthenticationError
     private let completion: () -> Void
 
-    init(completion: @escaping () -> Void) {
+    init(error: AuthenticationError,
+         completion: @escaping () -> Void) {
+        self.error = error
         self.completion = completion
     }
 
     var analyticsService: AnalyticsServiceInterface? { nil }
     var trackingName: String { "" }
     var trackingTitle: String { "" }
+    var errorCode: String {
+        switch error {
+        case .loginFlow(let loginErrorV2):
+            return loginErrorV2.govukErrorCode
+        case .returningUserService(let returningUserServiceError):
+            return returningUserServiceError.govukErrorCode
+        case .genericError:
+            return "1"
+        }
+    }
 
     var title: String {
         String.signOut.localized("signInErrorTitle")
@@ -38,5 +51,18 @@ final class SignInErrorViewModel: InfoViewModelInterface {
         AnyView(
             InfoSystemImage(imageName: "exclamationmark.circle")
         )
+    }
+}
+
+import Authentication
+
+extension LoginErrorV2 {
+    var govukErrorCode: String {
+        switch reason {
+        case .authorizationAccessDenied:
+            return "3"
+        default:
+            return "4"
+        }
     }
 }

@@ -9,45 +9,49 @@ struct StoredLocalAuthorityWidgetView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 6) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text(viewModel.title)
-                        .font(Font.govUK.title3Semibold)
+        VStack {
+            HStack {
+                Text(viewModel.title)
+                    .font(Font.govUK.title3Semibold)
+                    .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                    .accessibilityAddTraits(.isHeader)
+                Spacer()
+                Button {
+                    viewModel.openEditViewAction()
+                } label: {
+                    Text(viewModel.editButtonTitle)
+                        .font(.govUK.subheadlineSemibold)
+                        .foregroundColor(
+                            Color(uiColor: UIColor.govUK.text.buttonSecondary
+                                 )
+                        )
+                }
+                .accessibilityLabel(viewModel.editButtonAltText)
+            }
+            .padding(.bottom, 8)
+            if viewModel.localAuthorities.count == 1 {
+                StoredLocalAuthorityCardView(model: viewModel.cardModels()[0])
+            } else {
+                HStack {
+                    Text(viewModel.twoTierAuthorityDescription)
+                        .font(.govUK.body)
                         .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
-                        .accessibilityAddTraits(.isHeader)
+                        .padding(.bottom, 4)
                     Spacer()
-                    Button {
-                        viewModel.openEditViewAction()
-                    } label: {
-                        Text(viewModel.editButtonTitle)
-                            .font(.govUK.subheadlineSemibold)
-                            .foregroundColor(Color(uiColor: UIColor.govUK.text.buttonSecondary))
-                    }
-                    .accessibilityLabel(viewModel.editButtonAltText)
                 }
-                .padding(.bottom, 8)
-                if viewModel.localAuthorities.count == 2 {
-                    HStack {
-                        Text(viewModel.twoTierAuthorityDescription)
-                            .font(.govUK.body)
-                            .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
-                        Spacer()
-                    }.padding(.bottom, 8)
-                }
-                cardView
+                twoTierView
             }
         }
-        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+        .padding(.horizontal)
     }
     @ViewBuilder
-    var cardView: some View {
+    var twoTierView: some View {
         ForEach(viewModel.cardModels(), id: \.name) { item in
             StoredLocalAuthorityCardView(model: item)
                 .onTapGesture {
                     viewModel.open(item: item)
                 }
-                .padding(.bottom, 16)
+                .padding(.bottom, 2)
         }
     }
 }

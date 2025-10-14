@@ -2,7 +2,7 @@ import SwiftUI
 import UIComponents
 import GOVKit
 
-struct TopicsView: View {
+struct TopicsWidget: View {
     @StateObject var viewModel: TopicsWidgetViewModel
     @State var showingEditScreen: Bool = false
     @ScaledMetric var scale: CGFloat = 1
@@ -23,42 +23,45 @@ struct TopicsView: View {
                     viewModel: self.viewModel.topicErrorViewModel
                 )
                 Spacer()
-            }.padding()
+            }
+            .padding(.horizontal)
         } else {
             VStack {
                 VStack(alignment: .leading) {
-                HStack {
-                    Text(viewModel.widgetTitle)
-                        .font(Font.govUK.title3Semibold)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .padding([.leading], 4)
-                    Spacer()
-                    Button(
-                        action: {
-                            showingEditScreen.toggle()
-                        }, label: {
-                            Text(viewModel.editButtonTitle)
-                                .foregroundColor(Color(UIColor.govUK.text.link))
-                                .font(Font.govUK.subheadlineSemibold)
-                        }
-                    )
+                    HStack {
+                        Text(viewModel.widgetTitle)
+                            .font(Font.govUK.title3Semibold)
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
+                            .padding([.leading], 4)
+                        Spacer()
+                        Button(
+                            action: {
+                                showingEditScreen.toggle()
+                            }, label: {
+                                Text(viewModel.editButtonTitle)
+                                    .foregroundColor(
+                                        Color(UIColor.govUK.text.buttonSecondary)
+                                    )
+                                    .font(Font.govUK.subheadlineSemibold)
+                            }
+                        )
+                    }
                 }
-            }.padding(.horizontal)
-                    LazyVGrid(columns: columns, alignment: .center) {
-                        ForEach(viewModel.topicsToBeDisplayed, id: \.self) { topic in
-                            TopicCard(model: topic)
-                                .background(Color(uiColor: UIColor.govUK.fills.surfaceCardBlue))
-                                .roundedBorder(
-                                    cornerRadius: 10,
-                                    borderColor: Color(uiColor: UIColor.govUK.strokes.cardBlue),
-                                    borderWidth: 1
-                                ).padding(2)
-                                .onTapGesture {
-                                    viewModel.trackECommerceSelection(topic.title)
-                                    viewModel.topicAction(topic)
-                                }
-                        }
-                    }.padding(.horizontal)
+                LazyVGrid(columns: columns, alignment: .center) {
+                    ForEach(viewModel.topicsToBeDisplayed, id: \.self) { topic in
+                        TopicCard(model: topic)
+                            .background(Color(uiColor: UIColor.govUK.fills.surfaceCardBlue))
+                            .roundedBorder(
+                                cornerRadius: 10,
+                                borderColor: Color(uiColor: UIColor.govUK.strokes.cardBlue),
+                                borderWidth: 1
+                            )
+                            .onTapGesture {
+                                viewModel.trackECommerceSelection(topic.title)
+                                viewModel.topicAction(topic)
+                            }
+                    }
+                }
                 if !viewModel.showAllTopicsButton {
                     HStack {
                         Spacer()
@@ -69,9 +72,11 @@ struct TopicsView: View {
                         .frame(width: 150 * scale)
                         Spacer()
                     }
-                    .padding()
+                    .padding(.top)
                 }
-            }.sheet(isPresented: $showingEditScreen,
+            }
+            .padding(.horizontal)
+            .sheet(isPresented: $showingEditScreen,
                     onDismiss: {
                 viewModel.fetchTopics()
                 viewModel.fetchDisplayedTopics()

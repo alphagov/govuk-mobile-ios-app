@@ -56,6 +56,7 @@ class HomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.updateWidgets()
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 

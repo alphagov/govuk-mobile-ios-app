@@ -32,7 +32,7 @@ final class HomepageWidgetViewControllerSnapshotTests: SnapshotTestCase {
             topicAction: {_ in},
             allTopicsAction: {}
         )
-        let view = HomepageWidget(content: TopicsView(viewModel: viewModel))
+        let view = HomepageWidget(content: TopicsWidget(viewModel: viewModel))
         return HostingViewController(rootView: view)
     }
 }

@@ -11,7 +11,9 @@ struct RecentActivityWidget: View {
                 NonTappableCardView(
                     text: viewModel.emptyActivityStateTitle
                 )
+                .padding(.horizontal)
             }
+            .padding(.top, 8)
         } else {
             VStack {
                 HStack {
@@ -22,7 +24,9 @@ struct RecentActivityWidget: View {
                             viewModel.seeAllAction()
                         }, label: {
                             Text(viewModel.seeAllButtonTitle)
-                                .foregroundColor(Color(UIColor.govUK.text.link))
+                                .foregroundColor(
+                                    Color(UIColor.govUK.text.buttonSecondary)
+                                )
                                 .font(Font.govUK.subheadlineSemibold)
                         }
                     )

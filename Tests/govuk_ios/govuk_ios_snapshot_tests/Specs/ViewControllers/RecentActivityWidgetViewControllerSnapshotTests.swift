@@ -38,7 +38,6 @@ final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 
-
     private func viewController(_ loadActivities: Bool) -> UIViewController {
         let mockActivityService = MockActivityService()
 

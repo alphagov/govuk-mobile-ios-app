@@ -25,6 +25,10 @@ class Configuration
     setting(:app, :bundle_identifier)
   end
 
+  def app_bundle_identifier_notification_service
+    "#{app_bundle_identifier}.notification-service"
+  end
+
   def app_base_url
     ENV['BASE_URL']
   end
@@ -67,6 +71,8 @@ class Configuration
       "CHAT_BASE_URL=\"#{app_chat_base_url}\"",
       "TOKEN_BASE_URL=\"#{app_token_base_url}\"",
       "GOOGLE_SERVICES_FILE=\"#{app_google_services_file}\"",
+      "PROFILE_SPECIFIER_APP=\"#{app_profile_specifiers[app_bundle_identifier]}\"",
+      "PROFILE_SPECIFIER_NOTIFICATION_SERVICE=\"#{app_profile_specifiers[app_bundle_identifier_notification_service]}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end
@@ -116,7 +122,7 @@ class Configuration
   def match_identifiers
     [
       app_bundle_identifier,
-      "#{app_bundle_identifier}.notification-service"
+      app_bundle_identifier_notification_service
     ]
   end
 

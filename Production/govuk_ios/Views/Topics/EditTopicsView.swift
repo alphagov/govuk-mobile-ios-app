@@ -3,33 +3,29 @@ import GOVKit
 
 struct EditTopicsView: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(\.colorScheme) var colorScheme
 
     var viewModel: EditTopicsViewModel
 
     var body: some View {
-        NavigationView {
-            VStack {
-                ScrollView {
-                    Text(String.topics.localized("editTopicsSubtitle"))
-                        .multilineTextAlignment(.leading)
-                        .padding(.horizontal, 12)
-                        .padding(.top, 10)
-                    topicsList
-                        .padding([.top, .horizontal], 16)
-                }
-            }
-            .navigationTitle(String.topics.localized("editTopicsTitle"))
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                doneButton
-            }
-            .toolbarBackground(.background, for: .navigationBar)
-            .onAppear {
-                viewModel.trackScreen(screen: self)
+        VStack {
+            ScrollView {
+                Text(String.topics.localized("editTopicsSubtitle"))
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 12)
+                    .padding(.top, 10)
+                topicsList
+                    .padding([.top, .horizontal], 16)
             }
         }
-        .id(colorScheme)
+        .navigationTitle(String.topics.localized("editTopicsTitle"))
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            doneButton
+        }
+        .toolbarBackground(.background, for: .navigationBar)
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
 
     private var doneButton: some ToolbarContent {

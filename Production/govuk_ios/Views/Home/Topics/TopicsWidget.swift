@@ -3,6 +3,7 @@ import UIComponents
 import GOVKit
 
 struct TopicsWidget: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: TopicsWidgetViewModel
     @State var showingEditScreen: Bool = false
     @ScaledMetric var scale: CGFloat = 1
@@ -83,9 +84,12 @@ struct TopicsWidget: View {
                 viewModel.updateShowAllButtonVisibility()
                 viewModel.trackECommerce()
             }, content: {
-                EditTopicsView(
-                    viewModel: viewModel.editTopicViewModel
-                )
+                NavigationView {
+                    EditTopicsView(
+                        viewModel: viewModel.editTopicViewModel
+                    )
+                }
+                .id(colorScheme)
             })
             .onAppear {
                 viewModel.fetchTopics()

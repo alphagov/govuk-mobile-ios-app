@@ -24,6 +24,7 @@ public struct AppErrorView: View {
             .frame(width: 31, height: 31)
             .foregroundColor(Color(uiColor: .govUK.text.iconTertiary))
             .fontWeight(.light)
+            .accessibilityHidden(true)
     }
 
     private var errorTitle: some View {

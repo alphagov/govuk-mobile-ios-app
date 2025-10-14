@@ -1,4 +1,5 @@
-import SwiftUI
+import Foundation
+import UIKit
 
 class TopicSelectionCardViewModel: Identifiable,
                                    ObservableObject {
@@ -9,12 +10,12 @@ class TopicSelectionCardViewModel: Identifiable,
                 tapAction: @escaping (Bool) -> Void) {
         self.topic = topic
         self.tapAction = tapAction
-        self.isOn = topic.isFavourite
+        isOn = topic.isFavourite
     }
 
     @Published var isOn: Bool {
         didSet {
-            self.tapAction(isOn)
+            tapAction(isOn)
         }
     }
 

@@ -41,7 +41,7 @@ final class EditTopicsViewModel {
     }
 
     private func trackSelection(topic: Topic) {
-        let event = AppEvent.toggleTopic(
+        let event = AppEvent.topicSelection(
             title: topic.title,
             isFavourite: topic.isFavourite
         )

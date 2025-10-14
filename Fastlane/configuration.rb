@@ -73,6 +73,8 @@ class Configuration
       "GOOGLE_SERVICES_FILE=\"#{app_google_services_file}\"",
       "PRODUCT_BUNDLE_IDENTIFIER_APP=\"#{app_bundle_identifier}\"",
       "PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE=\"#{app_bundle_identifier_notification_service}\"",
+      "PROFILE_SPECIFIER_APP=\"#{app_profile_specifiers[app_bundle_identifier]}\"",
+      "PROFILE_SPECIFIER_NOTIFICATION_SERVICE=\"#{app_profile_specifiers[app_bundle_identifier_notification_service]}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end

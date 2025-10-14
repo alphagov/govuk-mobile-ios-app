@@ -75,6 +75,8 @@ jobs:
           CHAT_BASE_URL: ${{ vars.CHAT_BASE_URL }}
           TOKEN_BASE_URL: ${{ vars.TOKEN_BASE_URL }}
           GOOGLE_SERVICES_FILE: ${{ vars.GOOGLE_SERVICES_FILE }}
+          PROFILE_SPECIFIER_APP: ${{ vars.PROFILE_SPECIFIER_APP }}
+          PROFILE_SPECIFIER_NOTIFICATION_SERVICE: ${{ vars.PROFILE_SPECIFIER_NOTIFICATION_SERVICE }}
 
       - name: Save Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3

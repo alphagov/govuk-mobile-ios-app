@@ -71,8 +71,8 @@ class Configuration
       "CHAT_BASE_URL=\"#{app_chat_base_url}\"",
       "TOKEN_BASE_URL=\"#{app_token_base_url}\"",
       "GOOGLE_SERVICES_FILE=\"#{app_google_services_file}\"",
-      "PRODUCT_BUNDLE_IDENTIFIER_APP=\"#{app_profile_specifiers[app_bundle_identifier]}\"",
-      "PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE=\"#{app_profile_specifiers[app_bundle_identifier_notification_service]}\"",
+      "PRODUCT_BUNDLE_IDENTIFIER_APP=\"#{app_bundle_identifier}\"",
+      "PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE=\"#{app_bundle_identifier_notification_service}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end

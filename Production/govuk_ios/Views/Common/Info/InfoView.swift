@@ -102,11 +102,6 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
                 .multilineTextAlignment(.center)
 
             customView?()
-            if let model = viewModel as? SignInErrorViewModel {
-                Text(model.errorCode)
-                    .foregroundColor(Color(UIColor.govUK.text.primary))
-                    .font(viewModel.subtitleFont)
-            }
         }
         .padding(.horizontal, 16)
     }

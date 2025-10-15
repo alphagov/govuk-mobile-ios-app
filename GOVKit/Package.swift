@@ -11,10 +11,6 @@ let package = Package(
         .library(
             name: "GOVKit",
             targets: ["GOVKit"]
-        ),
-        .library(
-            name: "GOVKitTestUtilities",
-            targets: ["GOVKitTestUtilities"]
         )
     ],
     dependencies: [
@@ -32,13 +28,9 @@ let package = Package(
                 .process("Resources")
             ]
         ),
-        .target(
-            name: "GOVKitTestUtilities",
-            dependencies: ["GOVKit"]
-        ),
         .testTarget(
             name: "GOVKitTests",
-            dependencies: ["GOVKit", "GOVKitTestUtilities"]
+            dependencies: ["GOVKit"]
         ),
     ]
 )

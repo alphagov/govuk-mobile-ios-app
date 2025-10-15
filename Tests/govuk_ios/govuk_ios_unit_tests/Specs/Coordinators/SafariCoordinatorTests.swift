@@ -4,7 +4,6 @@ import Testing
 import SafariServices
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
 
 @Suite
 struct SafariCoordinatorTests {

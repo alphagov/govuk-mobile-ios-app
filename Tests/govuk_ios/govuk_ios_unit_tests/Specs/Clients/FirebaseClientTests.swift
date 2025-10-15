@@ -5,7 +5,6 @@ import Testing
 import FirebaseAnalytics
 import GOVKit
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite(.serialized)

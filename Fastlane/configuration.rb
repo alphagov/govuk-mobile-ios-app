@@ -75,6 +75,8 @@ class Configuration
       "PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE=\"#{app_bundle_identifier_notification_service}\"",
       "PROFILE_SPECIFIER_APP=\"#{app_profile_specifiers[app_bundle_identifier]}\"",
       "PROFILE_SPECIFIER_NOTIFICATION_SERVICE=\"#{app_profile_specifiers[app_bundle_identifier_notification_service]}\"",
+      "CODE_SIGN_ENTITLEMENTS_APP=\"#{app_entitlements[app_bundle_identifier]}\"",
+      "CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE=\"#{app_entitlements[app_bundle_identifier_notification_service]}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end
@@ -146,6 +148,10 @@ class Configuration
 
   def app_profile_specifiers
     setting(:app, :profile_specifiers)
+  end
+
+  def app_entitlements
+    setting(:app, :entitlements)
   end
 
   def setting(prefix, key)

@@ -10,6 +10,9 @@ default: &DEFAULTS
       uk.gov.govuk.dev.notification-service: "match AdHoc uk.gov.govuk.dev.notification-service"
     export_method: ad-hoc
     build_configuration: Debug
+    entitlements:
+      uk.gov.govuk.dev: "govuk_ios_dev.entitlements"
+      uk.gov.govuk.dev.notification-service: "govuk_ios_notification_service_dev.entitlements"
   scan:
     output_directory: test_output
     devices:

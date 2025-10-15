@@ -2749,6 +2749,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS_APP = govuk_ios_dev.entitlements;
+				CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE = govuk_ios_notification_service_dev.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2827,6 +2829,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS_APP = govuk_ios_dev.entitlements;
+				CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE = govuk_ios_notification_service_dev.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2864,7 +2868,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
@@ -2901,7 +2905,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2985,7 +2989,7 @@
 		5DCAFA6A2D3FE0E800C3F284 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service_dev.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios_notification_service/$(CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3017,7 +3021,7 @@
 		5DCAFA6C2D3FE0E800C3F284 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios_notification_service/$(CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

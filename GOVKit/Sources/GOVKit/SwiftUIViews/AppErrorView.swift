@@ -45,7 +45,7 @@ public struct AppErrorView: View {
         Button(viewModel?.buttonTitle ?? "") {
             viewModel?.action?()
         }
-        .foregroundColor(Color(UIColor.govUK.text.link))
+        .foregroundColor(Color(UIColor.govUK.text.buttonSecondary))
         .accessibilityLabel(
             Text(viewModel?.buttonAccessibilityLabel
                  ?? viewModel?.buttonTitle

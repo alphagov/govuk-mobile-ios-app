@@ -17,7 +17,7 @@ class MockAuthenticationSession: LoginSession {
     var _tokenResponse: TokenResponse = tokenResponse
     func performLoginFlow(configuration: LoginSessionConfiguration) async throws -> TokenResponse {
         if _shouldReturnError {
-            throw LoginError.userCancelled
+            throw LoginErrorV2(reason: .userCancelled)
         }
         
         return MockAuthenticationSession.tokenResponse

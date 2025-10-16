@@ -48,8 +48,8 @@ struct AuthenticationServiceClientTests {
 
         await confirmation() { confirmation in
             let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
-            if case .failure(let error) = result {
-                #expect(error == .loginFlow(.userCancelled))
+            if case .failure(.loginFlow(let error)) = result {
+                #expect(error.reason == .userCancelled)
                 confirmation()
             }
         }

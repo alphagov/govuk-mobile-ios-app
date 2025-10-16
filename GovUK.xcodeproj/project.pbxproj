@@ -231,6 +231,7 @@
 		5DCAFA782D40088600C3F284 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 5DCAFA772D40088600C3F284 /* OneSignalExtension */; };
 		5DCAFA7A2D40088600C3F284 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 5DCAFA792D40088600C3F284 /* OneSignalFramework */; };
 		5DCCCBB92EA0DC300097430C /* LoginErrorV2+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCCBB82EA0DC300097430C /* LoginErrorV2+Extensions.swift */; };
+		5DCCCBBE2EA0F5690097430C /* ReturningUserServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCCBBC2EA0F5690097430C /* ReturningUserServiceError.swift */; };
 		5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD09EC72C9ADB8500494550 /* SearchService.swift */; };
 		5DD4C7972D9547D600459FB5 /* AppEvent+RecentActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4C7962D9547D600459FB5 /* AppEvent+RecentActivity.swift */; };
 		5DD4CB082D95483100459FB5 /* ActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4CB022D95483100459FB5 /* ActivityItem.swift */; };
@@ -660,6 +661,7 @@
 		5DCAFA742D4004E700C3F284 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5DCAFA7B2D400C1B00C3F284 /* govuk_ios_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_dev.entitlements; sourceTree = "<group>"; };
 		5DCCCBB82EA0DC300097430C /* LoginErrorV2+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginErrorV2+Extensions.swift"; sourceTree = "<group>"; };
+		5DCCCBBC2EA0F5690097430C /* ReturningUserServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturningUserServiceError.swift; sourceTree = "<group>"; };
 		5DD09EC72C9ADB8500494550 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		5DD4C7962D9547D600459FB5 /* AppEvent+RecentActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+RecentActivity.swift"; sourceTree = "<group>"; };
 		5DD4CB022D95483100459FB5 /* ActivityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItem.swift; sourceTree = "<group>"; };
@@ -1744,14 +1746,15 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D04DD32C2E0046DC002B5F19 /* Chat */,
-				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
-				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
-				16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */,
 				D04C542A2D7081C00070EE79 /* Analytics */,
 				4E003E7D2C75F497008FCBF2 /* AppConfig */,
+				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
+				D04DD32C2E0046DC002B5F19 /* Chat */,
+				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
 				4E265F142DB0E6B70089CF9E /* LocalAuthority */,
+				5DCCCBBC2EA0F5690097430C /* ReturningUserServiceError.swift */,
 				D0D9CB922D3024C00051EDDD /* Search */,
+				16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */,
 				D041917C2CA57B3D0034722A /* Topics */,
 			);
 			path = Model;
@@ -2627,6 +2630,7 @@
 				D052CA332E0B06F70048F98A /* ChatCoordinator.swift in Sources */,
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
 				D0ECB3FE2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift in Sources */,
+				5DCCCBBE2EA0F5690097430C /* ReturningUserServiceError.swift in Sources */,
 				D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
 				16AE517F2E6886D3002BCFD7 /* InfoIconListView.swift in Sources */,

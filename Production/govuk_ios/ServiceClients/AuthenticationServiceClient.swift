@@ -19,7 +19,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let appAuthSession: AppAuthSessionWrapperInterface
     private let appEnvironmentService: AppEnvironmentServiceInterface
     private let oidAuthService: OIDAuthorizationServiceWrapperInterface
-    private let revokeTokenService: APIServiceClientInterface
+    private let revokeTokenServiceClient: APIServiceClientInterface
     private let appAttestService: AppAttestServiceInterface
 
     init(appEnvironmentService: AppEnvironmentServiceInterface,
@@ -30,7 +30,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         self.appEnvironmentService = appEnvironmentService
         self.appAuthSession = appAuthSession
         self.oidAuthService = oidAuthService
-        self.revokeTokenService = revokeTokenServiceClient
+        self.revokeTokenServiceClient = revokeTokenServiceClient
         self.appAttestService = appAttestService
     }
 
@@ -87,14 +87,17 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             return
         }
         let request = GOVRequest.revoke(
-            refreshToken,
+            token: refreshToken,
             clientId: appEnvironmentService.authenticationClientId
         )
-        revokeTokenService.send(request: request) { result in
-            if case .success = result {
-                completion?()
+        revokeTokenServiceClient.send(
+            request: request,
+            completion: { result in
+                if case .success = result {
+                    completion?()
+                }
             }
-        }
+        )
     }
 
     private func loginSessionConfig() async -> LoginSessionConfiguration {

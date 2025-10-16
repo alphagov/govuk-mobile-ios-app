@@ -4,12 +4,15 @@ default: &DEFAULTS
     scheme: GovUK
     output_directory: build_output
     project: GovUK.xcodeproj
-    bundle_identifier: uk.gov.govuk
+    bundle_identifier: uk.gov.govuk.dev
     profile_specifiers:
-      uk.gov.govuk: "match AppStore uk.gov.govuk"
-      uk.gov.govuk.notification-service: "match AppStore uk.gov.govuk.notification-service"
-    export_method: app-store
-    build_configuration: Release
+      uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
+      uk.gov.govuk.dev.notification-service: "match AdHoc uk.gov.govuk.dev.notification-service"
+    export_method: ad-hoc
+    build_configuration: Debug
+    entitlements:
+      uk.gov.govuk.dev: "govuk_ios_dev.entitlements"
+      uk.gov.govuk.dev.notification-service: "govuk_ios_notification_service_dev.entitlements"
   scan:
     output_directory: test_output
     devices:
@@ -29,17 +32,20 @@ alpha:
   <<: *DEFAULTS
   app:
     <<: *APP_DEFAULTS
-    bundle_identifier: uk.gov.govuk.dev
-    profile_specifiers:
-      uk.gov.govuk.dev: "match AdHoc uk.gov.govuk.dev"
-      uk.gov.govuk.dev.notification-service: "match AdHoc uk.gov.govuk.dev.notification-service"
-    export_method: ad-hoc
-    build_configuration: Alpha
+    build_configuration: Release
   match:
     <<: *MATCH_DEFAULTS
 
 beta:
   <<: *DEFAULTS
+  app:
+    <<: *APP_DEFAULTS
+    bundle_identifier: uk.gov.govuk
+    profile_specifiers:
+      uk.gov.govuk: "match AppStore uk.gov.govuk"
+      uk.gov.govuk.notification-service: "match AppStore uk.gov.govuk.notification-service"
+    export_method: app-store
+    build_configuration: Release
   match:
     <<: *MATCH_DEFAULTS
     method: "appstore"

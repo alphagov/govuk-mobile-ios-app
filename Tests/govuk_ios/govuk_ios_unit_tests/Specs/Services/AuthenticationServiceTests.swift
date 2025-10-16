@@ -185,7 +185,7 @@ struct AuthenticationServiceTests {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()
         let mockSecureStoreService = MockSecureStoreService()
-        mockAuthClient._stubbedAuthenticationResult = .failure(.loginFlow(.clientError))
+        mockAuthClient._stubbedAuthenticationResult = .failure(.loginFlow(.init(reason: .tokenClientError)))
         let sut = AuthenticationService(
             authenticationServiceClient: mockAuthClient,
             authenticatedSecureStoreService: mockSecureStoreService,
@@ -197,7 +197,7 @@ struct AuthenticationServiceTests {
 
         await confirmation() { confirmation in
             if case .failure(let error) = result {
-                #expect(error == .loginFlow(.clientError))
+                #expect(error == .loginFlow(.init(reason: .tokenClientError)))
                 confirmation()
             }
         }

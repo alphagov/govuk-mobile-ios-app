@@ -10,6 +10,7 @@ struct SignInErrorViewModelTests {
         var didCallCompletion = false
 
         let sut = SignInErrorViewModel(
+            error: .genericError,
             completion: {
                 didCallCompletion = true
             }

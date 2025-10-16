@@ -11,7 +11,7 @@ class AuthenticationCoordinator: BaseCoordinator {
     private let topicsService: TopicsServiceInterface
     private var chatService: ChatServiceInterface
     private let completionAction: () -> Void
-    private let handleError: (AuthenticationError) -> Void
+    private let errorAction: (AuthenticationError) -> Void
 
     init(navigationController: UINavigationController,
          coordinatorBuilder: CoordinatorBuilder,
@@ -21,7 +21,7 @@ class AuthenticationCoordinator: BaseCoordinator {
          topicsService: TopicsServiceInterface,
          chatService: ChatServiceInterface,
          completionAction: @escaping () -> Void,
-         handleError: @escaping (AuthenticationError) -> Void) {
+         errorAction: @escaping (AuthenticationError) -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
@@ -29,7 +29,7 @@ class AuthenticationCoordinator: BaseCoordinator {
         self.topicsService = topicsService
         self.chatService = chatService
         self.completionAction = completionAction
-        self.handleError = handleError
+        self.errorAction = errorAction
         super.init(navigationController: navigationController)
     }
 
@@ -55,7 +55,7 @@ class AuthenticationCoordinator: BaseCoordinator {
             startSignInSuccess()
         case .failure(let error):
             DispatchQueue.main.async {
-                self.handleError(error)
+                self.errorAction(error)
             }
         }
     }

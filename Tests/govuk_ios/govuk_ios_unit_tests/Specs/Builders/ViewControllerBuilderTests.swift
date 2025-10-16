@@ -235,6 +235,7 @@ struct ViewControllerBuilderTests {
     func signInError_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.signInError(
+            error: .genericError,
             completion: { }
         )
         let rootView =

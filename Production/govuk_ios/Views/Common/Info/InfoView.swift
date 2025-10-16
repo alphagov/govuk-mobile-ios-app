@@ -22,6 +22,16 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
                         .frame(minHeight: geometry.size.height)
                 }.modifier(ScrollBounceBehaviorModifier())
             }
+            if let model = viewModel as? SignInErrorViewModel {
+                HStack {
+                    Spacer()
+                    Text(model.errorCode)
+                        .foregroundColor(Color(UIColor.govUK.text.primary.withAlphaComponent(0.5)))
+                        .font(Font.govUK.caption2)
+                        .accessibilityHidden(true)
+                        .padding(.trailing, 16)
+                }
+            }
             if let bottomContentText = viewModel.bottomContentText {
                 Text(bottomContentText)
                     .font(Font.govUK.caption1)

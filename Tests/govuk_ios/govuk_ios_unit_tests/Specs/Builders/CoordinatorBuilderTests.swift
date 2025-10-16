@@ -291,7 +291,7 @@ struct CoordinatorBuilderTests {
         let coordinator = subject.authentication(
             navigationController: mockNavigationController,
             completionAction: { },
-            handleError: { _ in }
+            errorAction: { _ in }
         )
 
         #expect(coordinator is AuthenticationCoordinator)

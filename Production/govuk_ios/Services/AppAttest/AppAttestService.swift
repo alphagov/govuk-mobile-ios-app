@@ -1,4 +1,5 @@
 import Foundation
+import Firebase
 import FirebaseCore
 import FirebaseAppCheck
 
@@ -23,15 +24,19 @@ class AppAttestService: NSObject, AppAttestServiceInterface {
         // the simulator with attestation by following directions here:
         // https://firebase.google.com/docs/app-check/ios/debug-provider?_gl=1*1xyxcyq*_up*MQ..*_ga*MzA4NzA0NTY5LjE3NDg1MDYxMDc.*_ga_CW55HF8NVT*czE3NDg1MDYxMDYkbzEkZzAkdDE3NDg1MDYxMDYkajYwJGwwJGgw
         #if targetEnvironment(simulator)
-        let debugFactory = AppCheckDebugProviderFactory()
-        appCheckInterface.setAppCheckProviderFactory(debugFactory)
+//        let debugFactory = AppCheckDebugProviderFactory()
+//        appCheckInterface.setAppCheckProviderFactory(debugFactory)
         #else
         appCheckInterface.setAppCheckProviderFactory(providerFactory)
         #endif
     }
 
     func token(forcingRefresh: Bool) async throws -> AppCheckToken {
+        #if targetEnvironment(simulator)
+        .init(token: "", expirationDate: .now)
+        #else
         try await appCheckInterface.appCheck().token(forcingRefresh: forcingRefresh)
+        #endif
     }
 }
 

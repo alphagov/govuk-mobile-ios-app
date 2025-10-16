@@ -15,6 +15,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     @Published var fetchTopicsError = false
     @Published var showAllTopicsButton = false
     @Published var topicsToBeDisplayed: [Topic] = []
+    @Published var allTopics: [Topic] = []
     let showAllButtonsTitle = String.topics.localized(
         "seeAllTopicsButtonText"
     )
@@ -32,6 +33,7 @@ final class TopicsWidgetViewModel: ObservableObject {
         self.urlOpener = urlOpener
         self.topicAction = topicAction
         self.allTopicsAction = allTopicsAction
+        fetchAllTopics()
     }
 
     lazy var editTopicViewModel: EditTopicsViewModel = {
@@ -59,6 +61,11 @@ final class TopicsWidgetViewModel: ObservableObject {
         topicsService.hasCustomisedTopics ?
         topicsService.fetchFavourites() :
         topicsService.fetchAll()
+    }
+
+    func fetchAllTopics() {
+        allTopics = topicsService.fetchAll()
+        print(allTopics)
     }
 
     var showAllButtonViewModel: GOVUKButton.ButtonViewModel {

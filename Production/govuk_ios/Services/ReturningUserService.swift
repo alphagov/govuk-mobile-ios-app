@@ -98,12 +98,12 @@ enum ReturningUserServiceError: Error {
 extension ReturningUserServiceError {
     var govukErrorCode: String {
         switch self {
-        case .coreDataDeletionError:
-            return "2"
-        case .saveIdentifierError:
-            return "5"
         case .missingIdentifierError:
-            return "3"
+            return "3.0.1"
+        case .coreDataDeletionError:
+            return "3.0.2"
+        case .saveIdentifierError:
+            return "3.0.3"
         }
     }
 }

@@ -54,16 +54,3 @@ final class SignInErrorViewModel: InfoViewModelInterface {
         )
     }
 }
-
-import Authentication
-
-extension LoginErrorV2 {
-    var govukErrorCode: String {
-        switch reason {
-        case .authorizationAccessDenied:
-            return "3"
-        default:
-            return "4"
-        }
-    }
-}

@@ -1,5 +1,6 @@
 import Foundation
 
+import FirebaseCore
 import Firebase
 import GOVKit
 

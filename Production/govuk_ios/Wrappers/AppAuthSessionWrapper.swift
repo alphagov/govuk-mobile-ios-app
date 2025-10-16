@@ -10,6 +10,6 @@ protocol AppAuthSessionWrapperInterface {
 class AppAuthSessionWrapper: AppAuthSessionWrapperInterface {
     @MainActor
     func session(window: UIWindow) -> LoginSession {
-        AppAuthSession(window: window)
+        AppAuthSessionV2(window: window)
     }
 }

@@ -36,7 +36,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { },
-                handleError: { _ in }
+                errorAction: { _ in }
             )
             sut.start(url: nil)
             mockCoordinatorBuilder._signInSuccessCallAction = {
@@ -76,7 +76,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { },
-                handleError: { _ in }
+                errorAction: { _ in }
             )
             sut.start(url: nil)
             mockCoordinatorBuilder._signInSuccessCallAction = {
@@ -118,7 +118,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { },
-                handleError: { _ in }
+                errorAction: { _ in }
             )
             sut.start(url: nil)
             mockCoordinatorBuilder._signInSuccessCallAction = {
@@ -161,7 +161,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { },
-                handleError: { _ in }
+                errorAction: { _ in }
             )
             sut.start(url: nil)
             mockCoordinatorBuilder._signInSuccessCallAction = {
@@ -202,7 +202,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { continuation.resume(returning: true) },
-                handleError: { _ in }
+                errorAction: { _ in }
             )
             sut.start(url: nil)
             mockCoordinatorBuilder._signInSuccessCallAction = {
@@ -240,7 +240,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { },
-                handleError: { _ in }
+                errorAction: { _ in }
             )
             sut.start(url: nil)
             mockCoordinatorBuilder._signInSuccessCallAction = {
@@ -277,7 +277,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { },
-                handleError: { _ in }
+                errorAction: { _ in }
             )
             sut.start(url: nil)
             mockCoordinatorBuilder._signInSuccessCallAction = {
@@ -315,7 +315,7 @@ class AuthenticationCoordinatorTests {
                 topicsService: mockTopicsService,
                 chatService: mockChatService,
                 completionAction: { continuation.resume(returning: true) },
-                handleError: { error in
+                errorAction: { error in
                     authError = error
                     continuation.resume(returning: false)
                 }

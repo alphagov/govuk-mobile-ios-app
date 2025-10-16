@@ -16,6 +16,7 @@ final class SignInErrorViewModel: InfoViewModelInterface {
     var analyticsService: AnalyticsServiceInterface? { nil }
     var trackingName: String { "" }
     var trackingTitle: String { "" }
+
     var errorCode: String {
         switch error {
         case .loginFlow(let loginErrorV2):

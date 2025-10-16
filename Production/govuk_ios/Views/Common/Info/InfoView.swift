@@ -28,6 +28,7 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
                     Text(model.errorCode)
                         .foregroundColor(Color(UIColor.govUK.text.primary.withAlphaComponent(0.5)))
                         .font(Font.govUK.caption1)
+                        .accessibilityHidden(true)
                         .padding(.trailing, 16)
                 }
             }

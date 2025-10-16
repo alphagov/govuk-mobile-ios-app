@@ -88,9 +88,3 @@ class ReturningUserService: ReturningUserServiceInterface {
         }
     }
 }
-
-enum ReturningUserServiceError: Error {
-    case missingIdentifierError
-    case coreDataDeletionError
-    case saveIdentifierError
-}

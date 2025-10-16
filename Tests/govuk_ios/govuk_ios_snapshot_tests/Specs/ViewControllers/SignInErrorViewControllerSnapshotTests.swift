@@ -10,7 +10,9 @@ class SignInErrorViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         let viewModel = SignInErrorViewModel(
-            completion: { })
+            error: .loginFlow(.init(reason: .authorizationAccessDenied)),
+            completion: { }
+        )
         let signInErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signInErrorView,
@@ -25,7 +27,9 @@ class SignInErrorViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         let viewModel = SignInErrorViewModel(
-            completion: { })
+            error: .loginFlow(.init(reason: .authorizationAccessDenied)),
+            completion: { }
+        )
         let signInErrorView = InfoView(viewModel: viewModel)
         let hostingViewController =  HostingViewController(
             rootView: signInErrorView,

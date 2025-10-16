@@ -28,7 +28,8 @@ struct GroupedListSectionView: View {
                         if index > 0 {
                             Divider()
                                 .overlay(Color(UIColor.govUK.strokes.listDivider))
-                                .padding(.horizontal, 16)
+                                .padding(.leading, row.imageName == nil ? 16 : 72)
+                                .padding(.trailing, 16)
                         }
                         GroupedListRowView(row: row)
                             .padding(.horizontal, 16)
@@ -52,11 +53,23 @@ struct GroupedListSectionView: View {
     @ViewBuilder
     private var titleView: some View {
         if let title = section.heading?.title {
-            Text(title)
-                .font(Font.govUK.title3.bold())
-                .foregroundColor(Color(UIColor.govUK.text.primary))
-                .padding(.horizontal, 16)
-                .accessibilityAddTraits(.isHeader)
+            HStack {
+                Text(title)
+                    .font(Font.govUK.title3.bold())
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .accessibilityAddTraits(.isHeader)
+                Spacer()
+                Button(action: {
+                    section.heading?.action?()
+                }, label: {
+                    Text(section.heading?.actionTitle ?? "")
+                        .foregroundColor(
+                            Color(UIColor.govUK.text.buttonSecondary)
+                        )
+                        .font(Font.govUK.subheadlineSemibold)
+                })
+                .opacity(section.heading?.actionTitle == nil ? 0.0 : 1.0)
+            }
         } else {
             EmptyView()
         }

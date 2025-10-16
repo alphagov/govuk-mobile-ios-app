@@ -174,9 +174,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedSignOutConfirmationViewController ?? UIViewController()
     }
 
+    var _receivedSignInErrorError: AuthenticationError?
     var _receivedSignInErrorCompletion: (() -> Void)?
     var _stubbedSignInErrorViewController: UIViewController?
-    override func signInError(completion: @escaping () -> Void) -> UIViewController {
+    override func signInError(error: AuthenticationError,
+                              completion: @escaping () -> Void) -> UIViewController {
+        _receivedSignInErrorError = error
         _receivedSignInErrorCompletion = completion
         return _stubbedSignInErrorViewController ?? UIViewController()
 

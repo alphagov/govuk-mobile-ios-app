@@ -38,7 +38,9 @@ extension Container {
 
     var firebaseClient: Factory<AnalyticsClient> {
         Factory(self) {
-            FirebaseClient(
+            // Required here because it needs to be set before configure is called
+            AppCheck.setAppCheckProviderFactory(self.govuKProviderFactory.resolve())
+            return FirebaseClient(
                 firebaseApp: FirebaseApp.self,
                 firebaseAnalytics: Analytics.self,
             )
@@ -199,18 +201,17 @@ extension Container {
 
     var appAttestService: Factory<AppAttestServiceInterface> {
         Factory(self) {
-            AppCheck.setAppCheckProviderFactory(GovUKProviderFactory())
-            return AppAttestService(
+            AppAttestService(
                 appCheckInterface: AppCheck.appCheck(),
             )
         }.scope(.singleton)
     }
 
-//    var govuKProviderFactory: Factory<AppCheckProviderFactory> {
-//        Factory(self) {
-//            GovUKProviderFactory()
-//        }
-//    }
+    var govuKProviderFactory: Factory<AppCheckProviderFactory> {
+        Factory(self) {
+            GovUKProviderFactory()
+        }
+    }
 
     @MainActor
     var chatService: Factory<ChatServiceInterface> {

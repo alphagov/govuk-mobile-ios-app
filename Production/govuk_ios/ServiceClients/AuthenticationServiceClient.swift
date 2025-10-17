@@ -101,7 +101,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 
     private func loginSessionConfig() async throws -> LoginSessionConfiguration {
-        let token = try await appAttestService.token(forcingRefresh: false).token
+        let token = try await appAttestService.token().token
 
         return await LoginSessionConfiguration(
             authorizationEndpoint: appEnvironmentService.authenticationAuthorizeURL,
@@ -123,7 +123,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             tokenEndpoint: appEnvironmentService.authenticationTokenURL
         )
 
-        let token = try await appAttestService.token(forcingRefresh: false).token
+        let token = try await appAttestService.token().token
 
         return OIDTokenRequest(
             configuration: oidServiceConfig,

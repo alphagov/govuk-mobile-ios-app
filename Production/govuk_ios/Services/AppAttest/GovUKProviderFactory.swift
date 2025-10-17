@@ -3,19 +3,13 @@ import Firebase
 import FirebaseCore
 import FirebaseAppCheck
 
-protocol ProviderFactoryInterface {
-    func createProvider(with app: any FirebaseAppInterface) -> AppCheckProvider?
-}
-
-class GovUKProviderFactory: NSObject, AppCheckProviderFactory, ProviderFactoryInterface {
-    func createProvider(with app: any FirebaseAppInterface) -> (any AppCheckProvider)? {
-        if let firebaseApp = app as? FirebaseApp {
-            return createProvider(with: firebaseApp)
-        }
-        return nil
-    }
-
-    func createProvider(with app: FirebaseApp) -> AppCheckProvider? {
+class GovUKProviderFactory: NSObject,
+                            AppCheckProviderFactory {
+    func createProvider(with app: FirebaseApp) -> (any AppCheckProvider)? {
+        return AppCheckDebugProvider(app: app)
+        #if DEBUG
+        #else
         return AppAttestProvider(app: app)
+        #endif
     }
 }

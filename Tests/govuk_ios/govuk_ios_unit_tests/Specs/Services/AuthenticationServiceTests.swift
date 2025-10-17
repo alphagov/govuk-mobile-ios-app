@@ -3,6 +3,7 @@ import UIKit
 import Testing
 import Authentication
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
@@ -20,7 +21,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaultsService,
-            appConfigService: mockAppConfigService
+            analyticsService: MockAnalyticsService(),
+            appConfigService: mockAppConfigService,
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -68,7 +70,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaultsService,
-            appConfigService: mockAppConfigService
+            analyticsService: MockAnalyticsService(),
+            appConfigService: mockAppConfigService,
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -107,7 +110,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -149,7 +153,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -191,7 +196,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let result = await sut.authenticate(window: UIApplication.shared.window!)
 
@@ -213,7 +219,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -246,7 +253,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         sut.encryptRefreshToken()
 
@@ -264,7 +272,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -296,7 +305,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -339,7 +349,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         mockAuthClient._stubbedTokenRefreshResult = .success(tokenResponse)
         mockSecureStoreService._stubbedReadItemResult = .success(refreshToken)
@@ -373,7 +384,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -399,7 +411,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let tokenRefreshResult = await sut.tokenRefreshRequest()
 
@@ -423,7 +436,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
         let expectedAccessToken = "access_token_value"
         let expectedRefreshToken = "refresh_token_value"
@@ -456,7 +470,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         #expect(sut.secureStoreRefreshTokenPresent)
@@ -473,7 +488,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: MockUserDefaultsService(),
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         #expect(!sut.secureStoreRefreshTokenPresent)
@@ -491,7 +507,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaults,
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         mockUserDefaults.set(nil, forKey: .refreshTokenExpiryDate)
@@ -512,7 +529,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaults,
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         let date = Calendar.current.date(byAdding: .second, value: -10, to: .now)!
@@ -534,7 +552,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaults,
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         let date = Calendar.current.date(byAdding: .day, value: 1, to: .now)
@@ -558,7 +577,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaults,
-            appConfigService: mockConfigService
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         let date = Calendar.current.date(byAdding: .day, value: 1, to: .now)
@@ -582,7 +602,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaults,
-            appConfigService: mockConfigService
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         let date = Calendar.current.date(byAdding: .second, value: -100, to: .now)
@@ -604,7 +625,8 @@ struct AuthenticationServiceTests {
             authenticatedSecureStoreService: mockSecureStoreService,
             returningUserService: mockReturningUserService,
             userDefaultsService: mockUserDefaults,
-            appConfigService: MockAppConfigService()
+            analyticsService: MockAnalyticsService(),
+            appConfigService: MockAppConfigService(),
         )
 
         let expectedAccessToken = "access_token_value"

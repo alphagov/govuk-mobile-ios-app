@@ -219,32 +219,3 @@ class MockFirebaseAnalytics: FirebaseAnalyticsInterface {
         _setUserPropertyReveivedName = name
     }
 }
-
-class MockAppCheck: AppCheckInterface {
-    static var _stubbedProviderFactory: ProviderFactoryInterface?
-    static func setAppCheckProviderFactory(_ factory: ProviderFactoryInterface?) {
-        _stubbedProviderFactory = factory
-    }
-
-    private static var needsInit = true
-    private static var shared: MockAppCheck = MockAppCheck()
-
-    required init() {}
-
-    static func appCheck() -> Self {
-        print(shared)
-        return (shared as! Self)
-    }
-
-    var _stubbedAppCheckToken: AppCheckToken?
-    func token(forcingRefresh: Bool) async throws -> AppCheckToken {
-        guard let token = _stubbedAppCheckToken else {
-            throw AppCheckError.tokenRefreshFailed
-        }
-        return token
-    }
-
-    enum AppCheckError: Error {
-        case tokenRefreshFailed
-    }
-}

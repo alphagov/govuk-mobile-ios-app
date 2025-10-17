@@ -1,11 +1,14 @@
 import Testing
+
+import Firebase
 import FirebaseAppCheck
 
 @testable import govuk_ios
 
 struct AppAttestServiceTests {
 
-    @Test func token_returns_expected_result() async throws {
+    @Test
+    func token_returns_expected_result() async throws {
         MockAppCheck.appCheck()._stubbedAppCheckToken = AppCheckToken(token: "Token", expirationDate: Date())
         let mockProviderFactory = MockProviderFactory()
         let mockProvider = MockAppCheckProvider()

@@ -6,6 +6,7 @@ import UserNotifications
 
 import SecureStore
 import Firebase
+import FirebaseAnalytics
 import FirebaseCrashlytics
 import FirebaseAppCheck
 import OneSignalFramework
@@ -40,7 +41,6 @@ extension Container {
             FirebaseClient(
                 firebaseApp: FirebaseApp.self,
                 firebaseAnalytics: Analytics.self,
-                appAttestService: self.appAttestService.resolve()
             )
         }
     }
@@ -139,7 +139,8 @@ extension Container {
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
                 returningUserService: self.returningUserService.resolve(),
                 userDefaultsService: self.userDefaultsService.resolve(),
-                appConfigService: self.appConfigService.resolve()
+                analyticsService: self.analyticsService.resolve(),
+                appConfigService: self.appConfigService.resolve(),
             )
         }.scope(.singleton)
     }
@@ -198,18 +199,18 @@ extension Container {
 
     var appAttestService: Factory<AppAttestServiceInterface> {
         Factory(self) {
-            AppAttestService(
-                appCheckInterface: AppCheck.self,
-                providerFactory: self.govuKProviderFactory()
+            AppCheck.setAppCheckProviderFactory(GovUKProviderFactory())
+            return AppAttestService(
+                appCheckInterface: AppCheck.appCheck(),
             )
         }.scope(.singleton)
     }
 
-    var govuKProviderFactory: Factory<ProviderFactoryInterface> {
-        Factory(self) {
-            GovUKProviderFactory()
-        }
-    }
+//    var govuKProviderFactory: Factory<AppCheckProviderFactory> {
+//        Factory(self) {
+//            GovUKProviderFactory()
+//        }
+//    }
 
     @MainActor
     var chatService: Factory<ChatServiceInterface> {

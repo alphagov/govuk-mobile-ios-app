@@ -37,7 +37,7 @@ extension Container {
                 appAuthSession: AppAuthSessionWrapper(),
                 oidAuthService: OIDAuthorizationServiceWrapper(),
                 revokeTokenServiceClient: self.revokeTokenAPIClient(),
-                appAttestService: self.appAttestService()
+                appAttestService: self.appAttestService.resolve(),
             )
         }
     }

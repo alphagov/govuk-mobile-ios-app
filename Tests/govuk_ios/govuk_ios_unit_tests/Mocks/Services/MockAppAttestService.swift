@@ -1,4 +1,6 @@
 import Foundation
+
+import Firebase
 import FirebaseAppCheck
 
 @testable import govuk_ios

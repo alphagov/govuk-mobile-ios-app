@@ -4,7 +4,6 @@ import UIKit
 import GOVKit
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
 
 @MainActor
 final class ChatWidgetViewControllerSnapshotTests: SnapshotTestCase {

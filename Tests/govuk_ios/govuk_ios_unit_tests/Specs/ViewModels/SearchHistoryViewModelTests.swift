@@ -3,7 +3,6 @@ import Foundation
 import UIKit
 import CoreData
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor

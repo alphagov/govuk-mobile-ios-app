@@ -1,7 +1,7 @@
 import Testing
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
+
 
 struct AmbiguousAddressSelectionViewModelTests {
 

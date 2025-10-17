@@ -3,7 +3,6 @@ import UIKit
 
 @testable import govuk_ios
 @testable import GOVKit
-@testable import GOVKitTestUtilities
 @testable import UIComponents
 
 struct ChatErrorViewModelTests {

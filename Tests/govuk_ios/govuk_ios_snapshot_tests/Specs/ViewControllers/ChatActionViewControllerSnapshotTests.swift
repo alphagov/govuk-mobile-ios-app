@@ -2,7 +2,6 @@ import Foundation
 import XCTest
 import SwiftUI
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 final class ChatActionViewControllerSnapshotTests: SnapshotTestCase {

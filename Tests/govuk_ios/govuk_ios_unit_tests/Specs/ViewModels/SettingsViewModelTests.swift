@@ -5,7 +5,6 @@ import Combine
 
 @testable import govuk_ios
 @testable import GOVKit
-@testable import GOVKitTestUtilities
 
 @Suite(.serialized)
 class SettingsViewModelTests {

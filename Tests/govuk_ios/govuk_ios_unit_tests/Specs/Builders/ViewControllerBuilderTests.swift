@@ -6,7 +6,6 @@ import CoreData
 import Factory
 import GOVKit
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor

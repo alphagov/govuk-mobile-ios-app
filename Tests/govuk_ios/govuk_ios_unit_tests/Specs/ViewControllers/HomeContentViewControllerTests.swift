@@ -5,7 +5,7 @@ import Testing
 import Factory
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
+
 
 @MainActor
 struct HomeContentViewControllerTests {

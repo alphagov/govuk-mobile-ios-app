@@ -11,7 +11,7 @@ struct TopicDetailResponseTests {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
-            description: "description",
+            topicDescription: "description",
             content: [
                 .init(
                     title: "test_title",
@@ -31,7 +31,7 @@ struct TopicDetailResponseTests {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
-            description: "description",
+            topicDescription: "description",
             content: [],
             subtopics: []
         )
@@ -43,7 +43,7 @@ struct TopicDetailResponseTests {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
-            description: "description",
+            topicDescription: "description",
             content: [],
             subtopics: []
         )
@@ -55,7 +55,7 @@ struct TopicDetailResponseTests {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
-            description: "description",
+            topicDescription: "description",
             content: [
                 .init(
                     title: "test_title",
@@ -76,7 +76,7 @@ struct TopicDetailResponseTests {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
-            description: "description",
+            topicDescription: "description",
             content: [
                 .init(
                     title: "test_title",
@@ -97,7 +97,7 @@ struct TopicDetailResponseTests {
         let sut = TopicDetailResponse(
             ref: "1234",
             title: "title",
-            description: "description",
+            topicDescription: "description",
             content: [
                 .init(
                     title: "test_title",

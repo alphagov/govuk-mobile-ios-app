@@ -14,7 +14,7 @@ extension TopicDetailResponse {
         .init(
             ref: "response_ref",
             title: "response_title",
-            description: "response_description",
+            topicDescription: "response_description",
             content: [
                 .arrange(title: "content_1", description: "content_1_popular", isStepByStep: false, popular: true),
                 .arrange(title: "content_2", description: "content_2_sbs", isStepByStep: true, popular: false),
@@ -34,7 +34,7 @@ extension TopicDetailResponse {
         .init(
             ref: "response_ref",
             title: "response_title",
-            description: "response_description",
+            topicDescription: "response_description",
             content: [
                 .arrange(title: "content_1", description: "content_1_popular", popular: true),
                 .arrange(title: "content_2", description: "content_2_sbs", isStepByStep: true),
@@ -58,7 +58,7 @@ extension TopicDetailResponse {
         .init(
             ref: "response_ref",
             title: "response_title",
-            description: "response_description",
+            topicDescription: "response_description",
             content: [],
             subtopics: [
                 .arrange(title: "subtopic_title_1", description: "subtopic_desciption_1"),
@@ -84,7 +84,7 @@ extension TopicDetailResponse.Subtopic {
         .init(
             ref: ref,
             title: title,
-            description: description
+            topicDescription: description
         )
     }
 

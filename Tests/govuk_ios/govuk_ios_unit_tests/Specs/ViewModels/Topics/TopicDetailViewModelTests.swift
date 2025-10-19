@@ -124,7 +124,7 @@ struct TopicDetailViewModelTests {
         let expectedContent = TopicDetailResponse.arrange()
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(expectedContent)
         let sut = TopicDetailViewModel(
-            topic: TopicDetailResponse.Subtopic(ref: "test", title: "test", description: "description"),
+            topic: TopicDetailResponse.Subtopic(ref: "test", title: "test", topicDescription: "description"),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -153,7 +153,7 @@ struct TopicDetailViewModelTests {
             openAction: { _ in }
         )
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -177,7 +177,7 @@ struct TopicDetailViewModelTests {
             )
         )
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -196,7 +196,7 @@ struct TopicDetailViewModelTests {
     func init_apiUnavailable_doesCreateCorrectErrorViewModel() throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.apiUnavailable)
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,
@@ -205,7 +205,7 @@ struct TopicDetailViewModelTests {
         )
         let errorViewModel = try #require(sut.errorViewModel)
         #expect(errorViewModel.title == String.common.localized("genericErrorTitle"))
-        #expect(errorViewModel.body == String.common.localized("genericErrorBody"))
+        #expect(errorViewModel.body == String.topics.localized("topicFetchErrorSubtitle"))
         #expect(errorViewModel.buttonTitle == String.common.localized("genericErrorButtonTitle"))
         #expect(errorViewModel.buttonAccessibilityLabel
                 == String.common.localized("genericErrorButtonTitleAccessibilityLabel")
@@ -219,7 +219,7 @@ struct TopicDetailViewModelTests {
     func init_networkUnavailable_doesCreateCorrectErrorViewModel() throws {
         mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.networkUnavailable)
         let sut = TopicDetailViewModel(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: mockTopicsService,
             analyticsService: mockAnalyticsService,
             activityService: mockActivityService,

@@ -109,7 +109,7 @@ struct ViewControllerBuilderTests {
     func topicDetail_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicDetail(
-            topic: MockDisplayableTopic(ref: "", title: ""),
+            topic: MockDisplayableTopic(ref: "", title: "", topicDescription: nil),
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),

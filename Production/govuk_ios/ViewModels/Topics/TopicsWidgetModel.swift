@@ -43,11 +43,11 @@ final class TopicsWidgetViewModel: ObservableObject {
         )
     }()
 
-    func updateShowAllButtonVisibility() {
-        showAllTopicsButton =
-        (topicsToBeDisplayed.count >= topicsService.fetchAll().count) ||
-        fetchTopicsError
-    }
+//    func updateShowAllButtonVisibility() {
+//        showAllTopicsButton =
+//        (topicsToBeDisplayed.count >= topicsService.fetchAll().count) ||
+//        fetchTopicsError
+//    }
 
     var widgetTitle: String {
         let key = topicsService.hasCustomisedTopics ?

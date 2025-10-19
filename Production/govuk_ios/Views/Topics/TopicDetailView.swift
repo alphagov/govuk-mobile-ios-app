@@ -36,13 +36,18 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
 
     @ViewBuilder
     private func showErrorView(with errorViewModel: AppErrorViewModel) -> some View {
-        ScrollView {
-            VStack {
-                titleView
-                AppErrorView(viewModel: errorViewModel)
-                    .padding(.top, 12)
-                Spacer()
+        GeometryReader { geometry in
+            ScrollView {
+                VStack {
+                    titleView
+                    Spacer()
+                    AppErrorView(viewModel: errorViewModel)
+                    Spacer()
+                }
+                .background(Color(UIColor.govUK.fills.surfaceBackground))
+                .frame(minHeight: geometry.size.height)
             }
+            .background(gradient)
         }
     }
 
@@ -54,22 +59,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 topicDetails
             }
         }
-        .background(
-            Gradient(stops: [
-                .init(
-                    color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
-                    location: 0),
-                .init(
-                    color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
-                    location: 0.33),
-                .init(
-                    color: .clear,
-                    location: 0.33),
-                .init(
-                    color: .clear,
-                    location: 1)
-            ])
-        )
+        .background(gradient)
     }
 
     @ViewBuilder
@@ -126,6 +116,23 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         .padding(.top, 8)
         .padding(.bottom, 16)
         .background(Color(UIColor.govUK.fills.surfaceHomeHeaderBackground))
+    }
+
+    private var gradient: Gradient {
+        Gradient(stops: [
+            .init(
+                color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                location: 0),
+            .init(
+                color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                location: 0.33),
+            .init(
+                color: .clear,
+                location: 0.33),
+            .init(
+                color: .clear,
+                location: 1)
+        ])
     }
 }
 

@@ -100,7 +100,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
                 self.fetchTopicDetails(topicRef: self.topic.ref)
             }
         default:
-            errorViewModel = AppErrorViewModel.genericError(urlOpener: urlOpener)
+            errorViewModel = topicErrorViewModel
         }
     }
 
@@ -279,6 +279,21 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             locationId: nil
         )
         commerceItems.append(appEventItem)
+    }
+
+    private var topicErrorViewModel: AppErrorViewModel {
+        AppErrorViewModel(
+            title: String.common.localized("genericErrorTitle"),
+            body: String.topics.localized("topicFetchErrorSubtitle"),
+            buttonTitle: String.common.localized("genericErrorButtonTitle"),
+            buttonAccessibilityLabel: String.common.localized(
+                "genericErrorButtonTitleAccessibilityLabel"
+            ),
+            isWebLink: true,
+            action: {
+                self.urlOpener.openIfPossible(Constants.API.govukBaseUrl)
+            }
+        )
     }
 }
 

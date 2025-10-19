@@ -27,7 +27,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     var description: String? {
         guard shouldShowDescription
         else { return nil }
-        return topicDetail?.description
+        return topic.topicDescription
     }
 
     var shouldShowDescription: Bool {

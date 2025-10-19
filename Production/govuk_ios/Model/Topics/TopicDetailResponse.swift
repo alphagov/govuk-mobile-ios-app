@@ -3,14 +3,14 @@ import Foundation
 struct TopicDetailResponse: Decodable {
     let ref: String
     let title: String
-    let description: String?
+    let topicDescription: String?
     let content: [Content]
     let subtopics: [Subtopic]
 
     struct Subtopic: Decodable {
         let ref: String
         let title: String
-        let description: String?
+        let topicDescription: String?
     }
 
     struct Content: Decodable {

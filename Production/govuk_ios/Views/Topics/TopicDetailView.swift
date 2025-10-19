@@ -12,38 +12,11 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     var body: some View {
         VStack {
             if let errorViewModel = viewModel.errorViewModel {
-                ScrollView {
-                    VStack {
-                        titleView
-                        AppErrorView(viewModel: errorViewModel)
-                            .padding(.top, 12)
-                        Spacer()
-                    }
-                }
+                showErrorView(with: errorViewModel)
+            } else if viewModel.isLoaded {
+                showLoadedContent()
             } else {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        titleView
-                        topicDetails
-                    }
-                }
-                .background(
-                    Gradient(stops: [
-                        .init(
-                            color: viewModel.isLoaded ?
-                            Color(UIColor.govUK.fills.surfaceHomeHeaderBackground) : .clear,
-                            location: 0),
-                        .init(
-                            color: viewModel.isLoaded ?
-                            Color(UIColor.govUK.fills.surfaceHomeHeaderBackground) : .clear,
-                            location: 0.33),
-                        .init(
-                            color: .clear,
-                            location: 0.33),
-                        .init(
-                            color: .clear,
-                            location: 1)])
-                )
+                showLoadingView()
             }
         }
         .onAppear {
@@ -57,6 +30,56 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         .onChange(of: viewModel.isLoaded) { isLoaded in
             if isLoaded {
                 viewModel.trackEcommerce()
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func showErrorView(with errorViewModel: AppErrorViewModel) -> some View {
+        ScrollView {
+            VStack {
+                titleView
+                AppErrorView(viewModel: errorViewModel)
+                    .padding(.top, 12)
+                Spacer()
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func showLoadedContent() -> some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                titleView
+                topicDetails
+            }
+        }
+        .background(
+            Gradient(stops: [
+                .init(
+                    color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                    location: 0),
+                .init(
+                    color: Color(UIColor.govUK.fills.surfaceHomeHeaderBackground),
+                    location: 0.33),
+                .init(
+                    color: .clear,
+                    location: 0.33),
+                .init(
+                    color: .clear,
+                    location: 1)
+            ])
+        )
+    }
+
+    @ViewBuilder
+    private func showLoadingView() -> some View {
+        VStack(spacing: 0) {
+            titleView
+            ZStack {
+                Color(UIColor.govUK.fills.surfaceBackground)
+                ProgressView()
+                    .accessibilityLabel(String.topics.localized("loading"))
             }
         }
     }

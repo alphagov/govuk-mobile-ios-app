@@ -45,6 +45,17 @@
         }
       }
     },
+    "loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading topic"
+          }
+        }
+      }
+    },
     "seeAllTopicsButtonText" : {
       "extractionState" : "manual",
       "localizations" : {

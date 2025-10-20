@@ -61,6 +61,7 @@ class StepByStepsViewModel: TopicDetailViewModelInterface {
             id: UUID().uuidString,
             title: content.title,
             body: nil,
+            showLinkImage: false,
             action: { [weak self] in
                 self?.openContent(content: content)
             }

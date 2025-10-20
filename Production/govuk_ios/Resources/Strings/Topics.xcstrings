@@ -89,7 +89,7 @@
         }
       }
     },
-    "topicDetailSeeAllRowTitle" : {
+    "topicDetailSeeAllButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -100,13 +100,24 @@
         }
       }
     },
+    "topicDetailSeeAllStepByStepAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See all step by step guides"
+          }
+        }
+      }
+    },
     "topicDetailStepByStepHeader" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Step by step guides"
+            "value" : "Step-by-step guides"
           }
         }
       }

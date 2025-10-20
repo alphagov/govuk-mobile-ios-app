@@ -5,6 +5,7 @@ import GOVKit
 class TopicDetailViewModel: TopicDetailViewModelInterface {
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?
+    @Published private(set) var subtopicCards = [ListCardViewModel]()
     var commerceItems = [TopicCommerceItem]()
 
     private var topicDetail: TopicDetailResponse?
@@ -34,19 +35,6 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         !(topic is TopicDetailResponse.Subtopic)
     }
 
-    private var subtopicsHeading: GroupedListHeader {
-        if topic is TopicDetailResponse.Subtopic && topicDetail?.content.isEmpty == false {
-            return GroupedListHeader(
-                title: String.topics.localized("subtopicDetailSubtopicsHeader"),
-                icon: UIImage.topicRelatedIcon
-            )
-        } else {
-            return GroupedListHeader(
-                title: String.topics.localized("topicDetailSubtopicsHeader"),
-                icon: UIImage.topicBrowseIcon
-            )
-        }
-    }
 
     init(topic: DisplayableTopic,
          topicsService: TopicsServiceInterface,
@@ -73,6 +61,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
                 if case let .success(detail) = result {
                     self.topicDetail = detail
                     self.configureSections()
+                    self.createSubtopicCards()
                     self.isLoaded = true
                 }
                 self.handleError(result.getError())
@@ -85,7 +74,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             createPopularContentSection(),
             createStepByStepSection(),
             createOtherContentSection(),
-            createSubtopicsSection()
+            createRelatedSubtopicsSection()
         ].compactMap { $0 }
     }
 
@@ -109,8 +98,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         let sectionTitle = String.topics.localized("topicDetailPopularPagesHeader")
         return GroupedListSection(
             heading: GroupedListHeader(
-                title: sectionTitle,
-                icon: UIImage.topicPopularPagesIcon
+                title: sectionTitle
             ),
             rows: content.map { createContentRow($0, sectionTitle: sectionTitle) },
             footer: nil
@@ -122,50 +110,78 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         else { return nil }
         var rows = [GroupedListRow]()
         let sectionTitle = String.topics.localized("topicDetailStepByStepHeader")
-        if stepBySteps.count > 3 {
             rows = Array(stepBySteps.prefix(3)).map {
-                createContentRow($0, sectionTitle: sectionTitle)
+                createContentRow($0,
+                                 sectionTitle: sectionTitle,
+                                 imageName: "step_by_step")
             }
-            let rowTitle = String.topics.localized("topicDetailSeeAllRowTitle")
-            let seeAllRow = NavigationRow(
-                id: "topic.stepbystep.showall",
-                title: rowTitle,
-                body: nil,
-                action: { [weak self] in
-                    self?.trackLinkEvent(
-                        contentTitle: rowTitle,
-                        sectionTitle: sectionTitle,
-                        external: false
-                    )
-                    self?.stepByStepAction(stepBySteps)
-                }
-            )
-            createSeeAllCommerceItem(rowTitle, category: sectionTitle)
-            rows.append(seeAllRow)
-        } else {
-            rows = stepBySteps.map { createContentRow($0, sectionTitle: sectionTitle) }
+
+        var action: (() -> Void)?
+        var actionTitle: String?
+        var accessibilityActionTitle: String?
+        if stepBySteps.count > 3 {
+            actionTitle = String.topics.localized("topicDetailSeeAllButtonTitle")
+            accessibilityActionTitle =
+            String.topics.localized("topicDetailSeeAllStepByStepAccessibilityTitle")
+            action = { [weak self] in
+                self?.trackLinkEvent(
+                    contentTitle: actionTitle!,
+                    sectionTitle: sectionTitle,
+                    external: false
+                )
+                self?.stepByStepAction(stepBySteps)
+            }
         }
 
         return GroupedListSection(
             heading: GroupedListHeader(
                 title: sectionTitle,
-                icon: UIImage.topicStepByStepIcon
+                actionTitle: actionTitle,
+                accessibilityActionTitle: accessibilityActionTitle,
+                action: action
             ),
             rows: rows,
             footer: nil
         )
     }
 
-    private func createSubtopicsSection() -> GroupedListSection? {
-        guard let subtopics = topicDetail?.subtopics,
-              subtopics.count > 0
+    private func createSubtopicCards() {
+        guard let detail = topicDetail,
+              detail.subtopics.count > 0,
+              !isRelatedContent
+        else { return }
+        subtopicCards = detail.subtopics.map { content in
+            createSubtopicCommerceItem(
+                content,
+                category: String.topics.localized("subtopicDetailSubtopicsHeader"))
+            return ListCardViewModel(
+                title: content.title,
+                action: { [weak self] in
+                    self?.trackSubtopicNavigationEvent(content)
+                    self?.subtopicAction(content)
+                }
+            )
+        }
+    }
+
+    private func createRelatedSubtopicsSection() -> GroupedListSection? {
+        guard let detail = topicDetail,
+              detail.subtopics.count > 0,
+              isRelatedContent
         else { return nil }
         return GroupedListSection(
-            heading: subtopicsHeading,
-            rows: subtopics.map { createSubtopicRow($0) },
+            heading: GroupedListHeader(
+                title: String.topics.localized("subtopicDetailSubtopicsHeader")
+            ),
+            rows: detail.subtopics.map { createSubtopicRow($0) },
             footer: nil
         )
     }
+
+    private var isRelatedContent: Bool {
+        topic is TopicDetailResponse.Subtopic && topicDetail?.content.isEmpty == false
+    }
+
 
     private func createOtherContentSection() -> GroupedListSection? {
         guard let content = topicDetail?.otherContent
@@ -173,8 +189,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         let sectionTitle = String.topics.localized("topicDetailOtherContentHeader")
         return GroupedListSection(
             heading: GroupedListHeader(
-                title: sectionTitle,
-                icon: UIImage.topicServicesIcon
+                title: sectionTitle
             ),
             rows: content.map { createContentRow($0, sectionTitle: sectionTitle) },
             footer: nil
@@ -182,12 +197,15 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func createContentRow(_ content: TopicDetailResponse.Content,
-                                  sectionTitle: String) -> LinkRow {
+                                  sectionTitle: String,
+                                  imageName: String? = nil) -> LinkRow {
         createCommerceItem(content, category: sectionTitle)
         return LinkRow(
             id: UUID().uuidString,
             title: content.title,
             body: nil,
+            imageName: imageName,
+            showLinkImage: false,
             action: {
                 self.openAction(content.url)
                 self.activityService.save(topicContent: content)
@@ -200,7 +218,10 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func createSubtopicRow(_ content: TopicDetailResponse.Subtopic) -> NavigationRow {
-        createSubtopicCommerceItem(content, category: subtopicsHeading.title)
+        createSubtopicCommerceItem(
+            content,
+            category: String.topics.localized("subtopicDetailSubtopicsHeader")
+        )
         return NavigationRow(
             id: content.ref,
             title: content.title,

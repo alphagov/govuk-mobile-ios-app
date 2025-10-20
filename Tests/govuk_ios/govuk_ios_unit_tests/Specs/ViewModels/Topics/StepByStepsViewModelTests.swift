@@ -20,7 +20,7 @@ struct StepByStepsViewModelTests {
             selectedAction: { _ in }
         )
 
-        #expect(sut.title == "Step by step guides")
+        #expect(sut.title == "Step-by-step guides")
         #expect(sut.description == nil)
         #expect(sut.sections.count == 1)
         #expect(sut.sections.first?.rows.count == 2)

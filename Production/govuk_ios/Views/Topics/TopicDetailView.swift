@@ -19,6 +19,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 showLoadingView()
             }
         }
+        .background(Color(UIColor.govUK.fills.surfaceBackground))
         .onAppear {
             viewModel.trackScreen(screen: self)
             // isLoaded == true on back navigation, otherwise e-commerce
@@ -55,6 +56,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             VStack(spacing: 0) {
                 titleView
                 topicDetails
+                subtopics
             }
         }
         .background(gradient)
@@ -96,9 +98,26 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 content: viewModel.sections,
                 backgroundColor: UIColor.govUK.fills.surfaceBackground
             )
-            .padding(.top, 16)
         }
+    }
+
+    private var subtopics: some View {
+        VStack(spacing: 8) {
+            HStack {
+                Text(LocalizedStringResource("topicDetailSubtopicsHeader", table: "Topics"))
+                    .font(.govUK.title3Semibold)
+                    .foregroundStyle(Color(UIColor.govUK.text.primary))
+                    .accessibilityAddTraits(.isHeader)
+                Spacer()
+            }
+            .padding(.vertical, 8)
+            ForEach(viewModel.subtopicCards) { cardModel in
+                ListCardView(viewModel: cardModel)
+            }
+        }
+        .padding()
         .background(Color(UIColor.govUK.fills.surfaceBackground))
+        .opacity(viewModel.subtopicCards.isEmpty ? 0 : 1)
     }
 
     private func descriptionView(description: String) -> some View {

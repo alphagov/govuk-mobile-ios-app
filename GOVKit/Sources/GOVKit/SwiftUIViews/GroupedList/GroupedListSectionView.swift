@@ -47,7 +47,7 @@ struct GroupedListSectionView: View {
             }
         }
         .padding(.horizontal)
-        .padding(.bottom)
+        .padding(.top)
     }
 
     @ViewBuilder
@@ -70,6 +70,7 @@ struct GroupedListSectionView: View {
                 })
                 .opacity(section.heading?.actionTitle == nil ? 0.0 : 1.0)
             }
+            .padding(.bottom, 8)
         } else {
             EmptyView()
         }

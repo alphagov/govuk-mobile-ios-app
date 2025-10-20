@@ -8,7 +8,6 @@ import Factory
 
 @Suite
 struct Container_ServicesTests {
-
     @Test
     func analyticsService_returnsExpectedValue() async {
         let container = Container()
@@ -25,6 +24,7 @@ struct Container_ServicesTests {
         let sut = container.analyticsService.resolve()
         sut.track(event: .init(name: "test", params: nil))
         #expect(mockFirebaseClient._trackEventReceivedEvents.count == 0)
+        container.authenticationService.reset()
     }
 
     @Test

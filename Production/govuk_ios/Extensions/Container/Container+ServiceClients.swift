@@ -30,7 +30,7 @@ extension Container {
         }
     }
 
-    var authenticationServiceClient: Factory<AuthenticationServiceClient> {
+    var authenticationServiceClient: Factory<AuthenticationServiceClientInterface> {
         Factory(self) {
             AuthenticationServiceClient(
                 appEnvironmentService: self.appEnvironmentService.resolve(),

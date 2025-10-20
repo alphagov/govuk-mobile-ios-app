@@ -69,6 +69,7 @@ struct GroupedListSectionView: View {
                         .font(Font.govUK.subheadlineSemibold)
                 })
                 .opacity(section.heading?.actionTitle == nil ? 0.0 : 1.0)
+                .accessibilityLabel(section.heading?.accessibilityActionTitle ?? "")
             }
             .padding(.bottom, 8)
         } else {

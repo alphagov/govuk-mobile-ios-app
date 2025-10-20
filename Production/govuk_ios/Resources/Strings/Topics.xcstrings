@@ -89,13 +89,24 @@
         }
       }
     },
-    "topicDetailSeeAllRowTitle" : {
+    "topicDetailSeeAllButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "See all"
+          }
+        }
+      }
+    },
+    "topicDetailSeeAllStepByStepAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See all step by step guides"
           }
         }
       }

@@ -118,8 +118,11 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
 
         var action: (() -> Void)?
         var actionTitle: String?
+        var accessibilityActionTitle: String?
         if stepBySteps.count > 3 {
-            actionTitle = String.topics.localized("topicDetailSeeAllRowTitle")
+            actionTitle = String.topics.localized("topicDetailSeeAllButtonTitle")
+            accessibilityActionTitle =
+            String.topics.localized("topicDetailSeeAllStepByStepAccessibilityTitle")
             action = { [weak self] in
                 self?.trackLinkEvent(
                     contentTitle: actionTitle!,
@@ -134,6 +137,7 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
             heading: GroupedListHeader(
                 title: sectionTitle,
                 actionTitle: actionTitle,
+                accessibilityActionTitle: accessibilityActionTitle,
                 action: action
             ),
             rows: rows,

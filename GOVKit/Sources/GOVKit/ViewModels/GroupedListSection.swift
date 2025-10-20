@@ -19,15 +19,18 @@ public struct GroupedListHeader {
     public let title: String
     let icon: UIImage?
     let actionTitle: String?
+    let accessibilityActionTitle: String?
     let action: (() -> Void)?
 
     public init(title: String,
                 icon: UIImage? = nil,
                 actionTitle: String? = nil,
+                accessibilityActionTitle: String? = nil,
                 action: (()->Void)? = nil) {
         self.title = title
         self.icon = icon
         self.actionTitle = actionTitle
+        self.accessibilityActionTitle = accessibilityActionTitle ?? actionTitle
         self.action = action
     }
 }

@@ -97,6 +97,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 Text(LocalizedStringResource("topicDetailSubtopicsHeader", table: "Topics"))
                     .font(.govUK.title3Semibold)
                     .foregroundStyle(Color(UIColor.govUK.text.primary))
+                    .accessibilityAddTraits(.isHeader)
                 Spacer()
             }
             .padding(.vertical, 8)

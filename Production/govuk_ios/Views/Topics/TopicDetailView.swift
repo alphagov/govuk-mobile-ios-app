@@ -34,7 +34,6 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
     }
 
-    @ViewBuilder
     private func showErrorView(with errorViewModel: AppErrorViewModel) -> some View {
         GeometryReader { geometry in
             ScrollView {
@@ -51,7 +50,6 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
     }
 
-    @ViewBuilder
     private func showLoadedContent() -> some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -62,7 +60,6 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         .background(gradient)
     }
 
-    @ViewBuilder
     private func showLoadingView() -> some View {
         VStack(spacing: 0) {
             titleView

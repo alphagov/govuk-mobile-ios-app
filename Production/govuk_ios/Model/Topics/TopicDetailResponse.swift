@@ -7,10 +7,24 @@ struct TopicDetailResponse: Decodable {
     let content: [Content]
     let subtopics: [Subtopic]
 
+    enum CodingKeys: String, CodingKey {
+        case ref
+        case title
+        case topicDescription = "description"
+        case content
+        case subtopics
+    }
+
     struct Subtopic: Decodable {
         let ref: String
         let title: String
         let topicDescription: String?
+
+        enum CodingKeys: String, CodingKey {
+            case ref
+            case title
+            case topicDescription = "description"
+        }
     }
 
     struct Content: Decodable {

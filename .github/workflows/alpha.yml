@@ -33,7 +33,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.environment == '' && 'Staging' || inputs.environment }}
 
     steps:
       - name: Checkout

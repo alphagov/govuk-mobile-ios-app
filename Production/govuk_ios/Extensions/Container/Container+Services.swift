@@ -6,6 +6,7 @@ import UserNotifications
 
 import SecureStore
 import Firebase
+import FirebaseAnalytics
 import FirebaseCrashlytics
 import FirebaseAppCheck
 import OneSignalFramework
@@ -37,10 +38,11 @@ extension Container {
 
     var firebaseClient: Factory<AnalyticsClient> {
         Factory(self) {
-            FirebaseClient(
+            // Required here because it needs to be set before configure is called
+            AppCheck.setAppCheckProviderFactory(self.govuKProviderFactory.resolve())
+            return FirebaseClient(
                 firebaseApp: FirebaseApp.self,
                 firebaseAnalytics: Analytics.self,
-                appAttestService: self.appAttestService.resolve()
             )
         }
     }
@@ -139,7 +141,8 @@ extension Container {
                 authenticatedSecureStoreService: self.authenticatedSecureStoreService.resolve(),
                 returningUserService: self.returningUserService.resolve(),
                 userDefaultsService: self.userDefaultsService.resolve(),
-                appConfigService: self.appConfigService.resolve()
+                analyticsService: self.analyticsService.resolve(),
+                appConfigService: self.appConfigService.resolve(),
             )
         }.scope(.singleton)
     }
@@ -199,13 +202,12 @@ extension Container {
     var appAttestService: Factory<AppAttestServiceInterface> {
         Factory(self) {
             AppAttestService(
-                appCheckInterface: AppCheck.self,
-                providerFactory: self.govuKProviderFactory()
+                appCheckInterface: AppCheck.appCheck(),
             )
         }.scope(.singleton)
     }
 
-    var govuKProviderFactory: Factory<ProviderFactoryInterface> {
+    var govuKProviderFactory: Factory<AppCheckProviderFactory> {
         Factory(self) {
             GovUKProviderFactory()
         }

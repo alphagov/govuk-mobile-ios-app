@@ -13,6 +13,8 @@ default: &DEFAULTS
     entitlements:
       uk.gov.govuk.dev: "govuk_ios_dev.entitlements"
       uk.gov.govuk.dev.notification-service: "govuk_ios_notification_service_dev.entitlements"
+    additional_swift_flags:
+      - -DSTAGING
   scan:
     output_directory: test_output
     devices:
@@ -46,6 +48,8 @@ beta:
       uk.gov.govuk.notification-service: "match AppStore uk.gov.govuk.notification-service"
     export_method: app-store
     build_configuration: Release
+    additional_swift_flags:
+      - -DPRODUCTION
   match:
     <<: *MATCH_DEFAULTS
     method: "appstore"

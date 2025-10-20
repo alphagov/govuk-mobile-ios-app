@@ -29,19 +29,16 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
 
-        try #require(sut.sections.count == 3)
+        try #require(sut.sections.count == 2)
         #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
         #expect(sut.sections[0].heading?.icon == nil)
 
         #expect(sut.sections[1].heading?.title == "Step-by-step guides")
         #expect(sut.sections[1].heading?.icon == nil)
 
-        #expect(sut.sections[2].heading?.title == "Browse")
-        #expect(sut.sections[2].heading?.icon == nil)
-
         #expect(sut.sections[0].rows.first is LinkRow)
         #expect(sut.sections[1].rows.last is LinkRow)
-        #expect(sut.sections[2].rows.first is NavigationRow)
+        #expect(sut.subtopicCards.count == 7)
         #expect(sut.shouldShowDescription)
     }
     
@@ -62,7 +59,7 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
         
-        try #require(sut.sections.count == 3)
+        try #require(sut.sections.count == 2)
         #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
         #expect(sut.sections[0].heading?.icon == nil)
 
@@ -70,16 +67,13 @@ struct TopicDetailViewModelTests {
         #expect(sut.sections[1].heading?.icon == nil)
         #expect(sut.sections[1].heading?.actionTitle == "See all")
 
-        #expect(sut.sections[2].heading?.title == "Browse")
-        #expect(sut.sections[2].heading?.icon == nil)
+        #expect(sut.subtopicCards.count == 7)
 
         #expect(sut.sections[0].rows.first is LinkRow)
         
         #expect(sut.sections[1].rows.count == 3)
         #expect(sut.sections[1].rows.first is LinkRow)
         #expect(sut.sections[1].rows.last is LinkRow)
-
-        #expect(sut.sections[2].rows.first is NavigationRow)
     }
     
     @Test
@@ -99,7 +93,7 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
         
-        try #require(sut.sections.count == 4)
+        try #require(sut.sections.count == 3)
         #expect(sut.sections[0].heading?.title == "Popular pages in this topic")
         #expect(sut.sections[0].heading?.icon == nil)
 
@@ -109,14 +103,12 @@ struct TopicDetailViewModelTests {
         #expect(sut.sections[2].heading?.title == "Services and information")
         #expect(sut.sections[2].heading?.icon == nil)
 
-        #expect(sut.sections[3].heading?.title == "Browse")
-        #expect(sut.sections[3].heading?.icon == nil)
+        #expect(sut.subtopicCards.count == 7)
 
         #expect(sut.sections[0].rows.first is LinkRow)
         #expect(sut.sections[1].rows.first is LinkRow)
         #expect(sut.sections[2].rows.last is LinkRow)
         #expect(sut.sections[2].rows.count == 3)
-        #expect(sut.sections[3].rows.first is NavigationRow)
     }
 
     @Test
@@ -161,8 +153,8 @@ struct TopicDetailViewModelTests {
             actions: actions
         )
         
-        try #require(sut.sections.count == 4)
-        let subTopicRow = try #require(sut.sections[3].rows.first as? NavigationRow)
+        try #require(sut.sections.count == 3)
+        let subTopicRow = try #require(sut.subtopicCards.first)
         subTopicRow.action()
         #expect(didNavigate)
         #expect(mockAnalyticsService._trackedEvents.count == 2)
@@ -185,7 +177,7 @@ struct TopicDetailViewModelTests {
             actions: .empty
         )
         
-        try #require(sut.sections.count == 4)
+        try #require(sut.sections.count == 3)
         let contentRow = try #require(sut.sections[0].rows.first as? LinkRow)
         contentRow.action()
         #expect(mockAnalyticsService._trackedEvents.count == 2)

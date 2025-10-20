@@ -296,6 +296,26 @@ struct AuthenticationServiceTests {
     }
 
     @Test
+    func signOut_error_tracksError() async {
+        let mockReturningUserService = MockReturningUserService()
+        let mockAuthClient = MockAuthenticationServiceClient()
+        let mockSecureStoreService = MockSecureStoreService()
+        let mockAnalyticsService = MockAnalyticsService()
+        mockSecureStoreService._stubbedDeleteFailure = true
+        let sut = AuthenticationService(
+            authenticationServiceClient: mockAuthClient,
+            authenticatedSecureStoreService: mockSecureStoreService,
+            returningUserService: mockReturningUserService,
+            userDefaultsService: MockUserDefaultsService(),
+            analyticsService: mockAnalyticsService,
+            appConfigService: MockAppConfigService(),
+        )
+        sut.signOut(reason: .userSignout)
+
+        #expect(mockAnalyticsService._trackErrorReceivedErrors.count == 1)
+    }
+
+    @Test
     func signOut_deletesRefreshToken() async {
         let mockReturningUserService = MockReturningUserService()
         let mockAuthClient = MockAuthenticationServiceClient()

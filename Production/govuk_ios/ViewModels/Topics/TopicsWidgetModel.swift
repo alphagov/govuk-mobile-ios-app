@@ -19,8 +19,9 @@ final class TopicsWidgetViewModel: ObservableObject {
     let showAllButtonsTitle = String.topics.localized(
         "seeAllTopicsButtonText"
     )
-    @Published var showingEditScreen: Bool = false
+ //   @Published var showingEditScreen: Bool = false
     let editButtonTitle = String.common.localized("editButtonTitle")
+    @Published var topicsScreen: Int = 0
 
 
     init(topicsService: TopicsServiceInterface,
@@ -34,6 +35,7 @@ final class TopicsWidgetViewModel: ObservableObject {
         self.topicAction = topicAction
         self.allTopicsAction = allTopicsAction
         fetchAllTopics()
+        setTopicsScreen()
     }
 
     lazy var editTopicViewModel: EditTopicsViewModel = {
@@ -42,12 +44,6 @@ final class TopicsWidgetViewModel: ObservableObject {
             analyticsService: analyticsService
         )
     }()
-
-//    func updateShowAllButtonVisibility() {
-//        showAllTopicsButton =
-//        (topicsToBeDisplayed.count >= topicsService.fetchAll().count) ||
-//        fetchTopicsError
-//    }
 
     var widgetTitle: String {
         let key = topicsService.hasCustomisedTopics ?
@@ -63,9 +59,22 @@ final class TopicsWidgetViewModel: ObservableObject {
         topicsService.fetchAll()
     }
 
+    // make a fetch
+    // return a feth controller
+    // register a delegate
+    // when values change the delegate it notified
+    // fetch results controller and keep it in the delegate
+
     func fetchAllTopics() {
         allTopics = topicsService.fetchAll()
-        print(allTopics)
+    }
+
+    func setTopicsScreen() {
+        topicsScreen = topicsService.hasCustomisedTopics ? 0 : 1
+    }
+
+    var isThereFavouritedTopics: Bool {
+        topicsService.fetchFavourites() != []
     }
 
     var showAllButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -77,23 +86,23 @@ final class TopicsWidgetViewModel: ObservableObject {
         )
     }
 
-    func trackECommerce() {
-        if !showingEditScreen && initialLoadComplete {
-            let trackedTopics = topicsToBeDisplayed
-            var items = [HomeCommerceItem]()
-            trackedTopics.enumerated().forEach { index, topic in
-                let item = HomeCommerceItem(name: topic.title,
-                                            index: index + 1,
-                                            itemId: nil,
-                                            locationId: nil)
-                items.append(item)
-            }
-            let event = AppEvent.viewItemList(name: "Homepage",
-                                              id: "Homepage",
-                                              items: items)
-            analyticsService.track(event: event)
-        }
-    }
+//    func trackECommerce() {
+//        if !showingEditScreen && initialLoadComplete {
+//            let trackedTopics = topicsToBeDisplayed
+//            var items = [HomeCommerceItem]()
+//            trackedTopics.enumerated().forEach { index, topic in
+//                let item = HomeCommerceItem(name: topic.title,
+//                                            index: index + 1,
+//                                            itemId: nil,
+//                                            locationId: nil)
+//                items.append(item)
+//            }
+//            let event = AppEvent.viewItemList(name: "Homepage",
+//                                              id: "Homepage",
+//                                              items: items)
+//            analyticsService.track(event: event)
+//        }
+//    }
 
     lazy var topicErrorViewModel: AppErrorViewModel = {
         AppErrorViewModel(

@@ -4,7 +4,6 @@ import GOVKit
 
 struct TopicsWidget: View {
     @StateObject var viewModel: TopicsWidgetViewModel
-    @State private var topicsView = 0
     @State var showingEditScreen: Bool = false
 
     var body: some View {
@@ -31,6 +30,7 @@ struct TopicsWidget: View {
                         Spacer()
                         Button(
                             action: {
+                                showingEditScreen.toggle()
                             }, label: {
                                 Text(viewModel.editButtonTitle)
                                     .foregroundColor(
@@ -43,23 +43,41 @@ struct TopicsWidget: View {
                     VStack {
                         VStack {
                             Picker(
-                                selection: $topicsView,
-                                label: Text("Authentication Path")) {
-                                    Text("Topics")
-                                        .tag(0)
-                                    Text("All topics")
-                                        .tag(1)
-                                }.pickerStyle(SegmentedPickerStyle())
-                                .padding(.top)
-                            if topicsView == 0 {
-                                yourTopicsView
-                                    .transition(
-                                        AnyTransition.move(
-                                            edge: .leading
+                                selection: $viewModel.topicsScreen,
+                                label: Text("Topics view")) {
+                                    Text("Your topics")
+                                        .foregroundColor(
+                                            Color(
+                                                UIColor.govUK.text.primary
+                                            )
                                         )
-                                )
+                                        .tag(0)
+
+
+                                    Text("All topics")
+                                        .foregroundColor(
+                                            Color(
+                                                UIColor.govUK.text.primary
+                                            )
+                                        )
+                                        .tag(1)
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                                .padding(.top)
+                            if  viewModel.topicsScreen == 0 {
+                                switch viewModel.isThereFavouritedTopics {
+                                case true:
+                                    yourTopicsView
+                                        .transition(
+                                            AnyTransition.move(
+                                                edge: .leading
+                                            )
+                                        )
+                                case false:
+                                    Text("error")
+                                }
                             }
-                            if topicsView == 1 {
+                            if viewModel.topicsScreen == 1 {
                                 allTopicsView
                                     .transition(
                                         AnyTransition.move(
@@ -78,16 +96,17 @@ struct TopicsWidget: View {
             viewModel.fetchTopics()
             viewModel.fetchDisplayedTopics()
             viewModel.fetchAllTopics()
-            viewModel.trackECommerce()
+           // viewModel.trackECommerce()
+            viewModel.setTopicsScreen()
         }
         .sheet(isPresented: $showingEditScreen,
                onDismiss: {
-            viewModel.fetchAllTopics()
+           viewModel.fetchAllTopics()
             viewModel.fetchTopics()
             viewModel.fetchDisplayedTopics()
             if !self.viewModel.initialLoadComplete {
                 self.viewModel.initialLoadComplete = true
-                self.viewModel.trackECommerce()
+            //    self.viewModel.trackECommerce()
             }
         }, content: {
             NavigationView {

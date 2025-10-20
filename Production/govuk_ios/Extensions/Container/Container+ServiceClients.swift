@@ -30,14 +30,14 @@ extension Container {
         }
     }
 
-    var authenticationServiceClient: Factory<AuthenticationServiceClient> {
+    var authenticationServiceClient: Factory<AuthenticationServiceClientInterface> {
         Factory(self) {
             AuthenticationServiceClient(
                 appEnvironmentService: self.appEnvironmentService.resolve(),
                 appAuthSession: AppAuthSessionWrapper(),
                 oidAuthService: OIDAuthorizationServiceWrapper(),
                 revokeTokenServiceClient: self.revokeTokenAPIClient(),
-                appAttestService: self.appAttestService()
+                appAttestService: self.appAttestService.resolve(),
             )
         }
     }

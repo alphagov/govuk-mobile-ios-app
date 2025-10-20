@@ -272,6 +272,7 @@ struct APIServiceClientTests {
 enum TestError: Error {
     case fakeNetwork
     case unexpectedMethodCalled
+    case anyError
 }
 
 private extension APIServiceClientTests {

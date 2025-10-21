@@ -66,10 +66,13 @@ class ChatCoordinator: TabItemCoordinator {
     }
 
     private func reauthenticate() {
-        let coordinator = coordinatorBuilder.periAuth(navigationController: root) {
-            self.start()
-            self.chatService.retryAction?()
-        }
+        let coordinator = coordinatorBuilder.periAuth(
+            navigationController: root,
+            completion: {
+                self.start()
+                self.chatService.retryAction?()
+            }
+        )
         start(coordinator)
     }
 
@@ -101,25 +104,29 @@ class ChatCoordinator: TabItemCoordinator {
             !chatService.isRetryAction {
             reauthenticate()
         } else {
-            let viewController = viewControllerBuilder.chatError(
-                analyticsService: analyticsService,
-                error: error,
-                action: { [weak self] in
-                    guard let self else { return }
-                    switch error {
-                    case .networkUnavailable:
-                        self.setChatViewController()
-                    case .pageNotFound:
-                        self.chatService.clearHistory()
-                        self.setChatViewController()
-                    default:
-                        break
-                    }
-                }
-            )
-            set(viewController, animated: false)
-            isShowingError = true
+            setChatError(error)
         }
+    }
+
+    private func setChatError(_ error: ChatError) {
+        let viewController = viewControllerBuilder.chatError(
+            analyticsService: analyticsService,
+            error: error,
+            action: { [weak self] in
+                guard let self else { return }
+                switch error {
+                case .networkUnavailable:
+                    self.setChatViewController()
+                case .pageNotFound:
+                    self.chatService.clearHistory()
+                    self.setChatViewController()
+                default:
+                    break
+                }
+            }
+        )
+        set(viewController, animated: false)
+        isShowingError = true
     }
 
     private func setChatViewController(animated: Bool = false) {

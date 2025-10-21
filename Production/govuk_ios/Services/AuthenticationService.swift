@@ -131,7 +131,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     func tokenRefreshRequest() async -> TokenRefreshResult {
-        var decryptedRefreshToken: String
+        let decryptedRefreshToken: String
         do {
             decryptedRefreshToken = try decryptRefreshTokenIfRequired()
         } catch {

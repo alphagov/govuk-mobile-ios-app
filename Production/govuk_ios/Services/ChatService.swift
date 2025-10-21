@@ -55,8 +55,10 @@ final class ChatService: ChatServiceInterface {
                      completion: @escaping (ChatQuestionResult) -> Void) {
         retryAction = {
             self.isRetryAction = true
-            self.askQuestion(question,
-                             completion: completion)
+            self.askQuestion(
+                question,
+                completion: completion
+            )
         }
         serviceClient.askQuestion(
             question,
@@ -78,8 +80,10 @@ final class ChatService: ChatServiceInterface {
                        completion: @escaping (ChatAnswerResult) -> Void) {
         retryAction = {
             self.isRetryAction = true
-            self.pollForAnswer(pendingQuestion,
-                             completion: completion)
+            self.pollForAnswer(
+                pendingQuestion,
+                completion: completion
+            )
         }
         serviceClient.fetchAnswer(
             conversationId: pendingQuestion.conversationId,
@@ -95,8 +99,10 @@ final class ChatService: ChatServiceInterface {
                         DispatchQueue.main.asyncAfter(
                             deadline: .now() + (self.pollingInterval)
                         ) {
-                            self.pollForAnswer(pendingQuestion,
-                                               completion: completion)
+                            self.pollForAnswer(
+                                pendingQuestion,
+                                completion: completion
+                            )
                         }
                         return
                     }
@@ -113,8 +119,10 @@ final class ChatService: ChatServiceInterface {
         setConversationId(conversationId)
         retryAction = {
             self.isRetryAction = true
-            self.chatHistory(conversationId: conversationId,
-                             completion: completion)
+            self.chatHistory(
+                conversationId: conversationId,
+                completion: completion
+            )
         }
         serviceClient.fetchHistory(
             conversationId: conversationId,
@@ -126,7 +134,8 @@ final class ChatService: ChatServiceInterface {
                 case .failure(let error):
                     completion(.failure(error))
                 }
-            })
+            }
+        )
     }
 
     func clearHistory() {

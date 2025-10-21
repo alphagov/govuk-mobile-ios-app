@@ -315,7 +315,9 @@ struct CoordinatorBuilderTests {
 
     @Test
     func signOutConfirmation_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.authenticationService.register { MockAuthenticationService() }
+        let subject = CoordinatorBuilder(container: container)
         let coordinator = subject.signOutConfirmation()
 
         #expect(coordinator is SignOutConfirmationCoordinator)

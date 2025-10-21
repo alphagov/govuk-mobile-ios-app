@@ -6,7 +6,7 @@ import GOVKit
 @Suite(.serialized)
 struct APIServiceClientTests {
 
-    @Test()
+    @Test
     func send_post_withParameters_passesExpectedValues() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
@@ -39,7 +39,7 @@ struct APIServiceClientTests {
         }
     }
 
-    @Test()
+    @Test
     func send_get_passesExpectedValues() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
@@ -69,7 +69,7 @@ struct APIServiceClientTests {
         }
     }
 
-    @Test()
+    @Test
     func send_successResponse_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
@@ -100,7 +100,7 @@ struct APIServiceClientTests {
         #expect(resultData == expectedData)
     }
 
-    @Test()
+    @Test
     func send_successResponse_noData_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
@@ -131,7 +131,7 @@ struct APIServiceClientTests {
         #expect(resultData != nil)
     }
     
-    @Test()
+    @Test
     func send_signatureVerificationSuccess_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
@@ -166,7 +166,7 @@ struct APIServiceClientTests {
     }
 
 
-    @Test()
+    @Test
     func send_failureResponse_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
@@ -196,7 +196,7 @@ struct APIServiceClientTests {
         }
     }
     
-    @Test()
+    @Test
     func send_signatureVerificationFailure_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,
@@ -232,7 +232,7 @@ struct APIServiceClientTests {
         #expect(error as? SigningError == SigningError.invalidSignature)
     }
     
-    @Test()
+    @Test
     func send_invalidSignature_returnsExpectedResult() async {
         let subject = APIServiceClient(
             baseUrl: URL(string: "https://www.google.com")!,

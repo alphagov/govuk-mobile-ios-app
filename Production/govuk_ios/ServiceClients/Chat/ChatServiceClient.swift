@@ -43,9 +43,12 @@ struct ChatServiceClient: ChatServiceClientInterface {
             conversationId: conversationId,
             accessToken: authenticationService.accessToken
         )
-        serviceClient.send(request: request) {
-            completion(mapResult($0))
-        }
+        serviceClient.send(
+            request: request,
+            completion: {
+                completion(mapResult($0))
+            }
+        )
     }
 
     func fetchAnswer(conversationId: String,
@@ -56,9 +59,12 @@ struct ChatServiceClient: ChatServiceClientInterface {
             questionId: questionId,
             accessToken: authenticationService.accessToken
         )
-        serviceClient.send(request: request) {
-            completion(mapResult($0))
-        }
+        serviceClient.send(
+            request: request,
+            completion: {
+                completion(mapResult($0))
+            }
+        )
     }
 
     func fetchHistory(conversationId: String,
@@ -67,9 +73,12 @@ struct ChatServiceClient: ChatServiceClientInterface {
             conversationId: conversationId,
             accessToken: authenticationService.accessToken
         )
-        serviceClient.send(request: request) {
-            completion(mapResult($0))
-        }
+        serviceClient.send(
+            request: request,
+            completion: {
+                completion(mapResult($0))
+            }
+        )
     }
 
     private func mapResult<T: Decodable>(_ result: NetworkResult<Data>) -> Result<T, ChatError> {

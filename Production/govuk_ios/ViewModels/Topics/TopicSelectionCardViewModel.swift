@@ -41,7 +41,7 @@ class TopicSelectionCardViewModel: Identifiable,
         .govUK.text.listUnselected
     }
 
-    var accessibilityHint: String {
+    var accessibilitySelectedState: String {
         topic.isFavourite ?
         .topics.localized("topicSelected") :
         .topics.localized("topicUnselected")

@@ -5,11 +5,9 @@ struct TopicSelectionCardView: View {
 
     var body: some View {
         HStack(spacing: 16) {
-            ZStack {
-                Image(viewModel.iconName)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
-            }
+            Image(viewModel.iconName)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
             Text(viewModel.title)
                 .font(.govUK.bodySemibold)
                 .foregroundStyle(Color(viewModel.titleColor))
@@ -22,8 +20,7 @@ struct TopicSelectionCardView: View {
             viewModel.isOn.toggle()
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(viewModel.title)
+        .accessibilityLabel("\(viewModel.title) - \(viewModel.accessibilitySelectedState)")
         .accessibilityAddTraits(.isButton)
-        .accessibilityHint(viewModel.accessibilityHint)
     }
 }

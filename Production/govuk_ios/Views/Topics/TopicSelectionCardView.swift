@@ -22,8 +22,7 @@ struct TopicSelectionCardView: View {
             viewModel.isOn.toggle()
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(viewModel.title)
+        .accessibilityLabel("\(viewModel.title) - \(viewModel.accessibilitySelectedState)")
         .accessibilityAddTraits(.isButton)
-        .accessibilityHint(viewModel.accessibilityHint)
     }
 }

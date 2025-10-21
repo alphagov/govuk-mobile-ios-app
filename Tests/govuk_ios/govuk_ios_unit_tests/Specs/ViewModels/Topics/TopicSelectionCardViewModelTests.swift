@@ -105,7 +105,7 @@ struct TopicSelectionCardViewModelTests {
             topic: topic,
             tapAction: { _ in }
         )
-        #expect(sut.accessibilityHint == "Unselected")
+        #expect(sut.accessibilitySelectedState == "Unselected")
     }
 
     @Test
@@ -116,6 +116,6 @@ struct TopicSelectionCardViewModelTests {
             topic: topic,
             tapAction: { _ in }
         )
-        #expect(sut.accessibilityHint == "Selected")
+        #expect(sut.accessibilitySelectedState == "Selected")
     }
 }

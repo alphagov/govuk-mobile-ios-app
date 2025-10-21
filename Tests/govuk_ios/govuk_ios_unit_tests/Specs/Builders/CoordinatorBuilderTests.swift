@@ -3,6 +3,7 @@ import Testing
 import Factory
 import UIKit
 
+@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
@@ -11,7 +12,9 @@ struct CoordinatorBuilderTests {
 
     @Test
     func app_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.authenticationService.register { MockAuthenticationService() }
+        let subject = CoordinatorBuilder(container: container)
         let mockNavigationController = MockNavigationController()
         let mockInactivityService = MockInactivityService()
         let coordinator = subject.app(
@@ -431,7 +434,10 @@ struct CoordinatorBuilderTests {
 
     @Test
     func chatOffboarding_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.chatService.register { MockChatService() }
+        container.analyticsService.register { MockAnalyticsService() }
+        let subject = CoordinatorBuilder(container: container)
         let coordinator = subject.chatOffboarding(
             navigationController: UINavigationController(),
             completionAction: { }

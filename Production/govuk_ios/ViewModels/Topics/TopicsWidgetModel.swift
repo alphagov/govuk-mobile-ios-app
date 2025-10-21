@@ -9,31 +9,29 @@ final class TopicsWidgetViewModel: ObservableObject {
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
-    let allTopicsAction: () -> Void
     let topicAction: (Topic) -> Void
     var initialLoadComplete: Bool = false
     @Published var fetchTopicsError = false
-    @Published var showAllTopicsButton = false
     @Published var topicsToBeDisplayed: [Topic] = []
     @Published var allTopics: [Topic] = []
+    var topicsLinkAction() -> Void 
     let showAllButtonsTitle = String.topics.localized(
         "seeAllTopicsButtonText"
     )
  //   @Published var showingEditScreen: Bool = false
     let editButtonTitle = String.common.localized("editButtonTitle")
+    let errorDescription = String.topics.localized("topicWidgetErrorDescrption")
     @Published var topicsScreen: Int = 0
 
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener = UIApplication.shared,
-         topicAction: @escaping (Topic) -> Void,
-         allTopicsAction: @escaping () -> Void) {
+         topicAction: @escaping (Topic) -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.topicAction = topicAction
-        self.allTopicsAction = allTopicsAction
         fetchAllTopics()
         setTopicsScreen()
     }
@@ -75,15 +73,6 @@ final class TopicsWidgetViewModel: ObservableObject {
 
     var isThereFavouritedTopics: Bool {
         topicsService.fetchFavourites() != []
-    }
-
-    var showAllButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: showAllButtonsTitle,
-            action: { [weak self] in
-                self?.allTopicsAction()
-            }
-        )
     }
 
 //    func trackECommerce() {

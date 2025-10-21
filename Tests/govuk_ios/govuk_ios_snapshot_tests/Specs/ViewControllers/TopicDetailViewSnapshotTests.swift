@@ -10,7 +10,7 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
     func test_topicDetail_light_fetching_rendersCorrectly() {
         let viewControllerBuilder = ViewControllerBuilder()
         let sut = viewControllerBuilder.topicDetail(
-            topic: MockDisplayableTopic(ref: "test_ref", title: "test_title"),
+            topic: MockDisplayableTopic(ref: "test_ref", title: "test_title", topicDescription: nil),
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -30,7 +30,9 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(.arrange())
         let sut = viewControllerBuilder.topicDetail(
-            topic: MockDisplayableTopic(ref: "test_ref", title: "test_title"),
+            topic: MockDisplayableTopic(
+                ref: "test_ref", title: "test_title", topicDescription: "test_description"
+            ),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -50,7 +52,9 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(.arrangeLotsOfStepBySteps())
         let sut = viewControllerBuilder.topicDetail(
-            topic: MockDisplayableTopic(ref: "test_ref", title: "test_title"),
+            topic: MockDisplayableTopic(
+                ref: "test_ref", title: "test_title", topicDescription: "test_description"
+            ),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -70,7 +74,9 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(.arrangeLotsOfStepBySteps())
         let sut = viewControllerBuilder.topicDetail(
-            topic: MockDisplayableTopic(ref: "test_ref", title: "test_title"),
+            topic: MockDisplayableTopic(
+                ref: "test_ref", title: "test_title", topicDescription: "test_description"
+            ),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -90,7 +96,7 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchTopicDetailsResult = .success(.arrangeOnlySubTopics())
         let sut = viewControllerBuilder.topicDetail(
-            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", description: "test_description"),
+            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", topicDescription: "test_description"),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -110,7 +116,7 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.networkUnavailable)
         let sut = viewControllerBuilder.topicDetail(
-            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", description: "test_description"),
+            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", topicDescription: "test_description"),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),
@@ -129,7 +135,7 @@ class TopicDetailViewSnapshotTests: SnapshotTestCase {
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchTopicDetailsResult = .failure(.apiUnavailable)
         let sut = viewControllerBuilder.topicDetail(
-            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", description: "test_description"),
+            topic: TopicDetailResponse.Subtopic(ref: "test_ref", title: "test_title", topicDescription: "test_description"),
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
             activityService: MockActivityService(),

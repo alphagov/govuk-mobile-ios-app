@@ -45,6 +45,17 @@
         }
       }
     },
+    "loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading topic"
+          }
+        }
+      }
+    },
     "seeAllTopicsButtonText" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -89,7 +100,7 @@
         }
       }
     },
-    "topicDetailSeeAllRowTitle" : {
+    "topicDetailSeeAllButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -100,13 +111,24 @@
         }
       }
     },
+    "topicDetailSeeAllStepByStepAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See all step by step guides"
+          }
+        }
+      }
+    },
     "topicDetailStepByStepHeader" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Step by step guides"
+            "value" : "Step-by-step guides"
           }
         }
       }
@@ -195,6 +217,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skip"
+          }
+        }
+      }
+    },
+    "topicSelected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected"
+          }
+        }
+      }
+    },
+    "topicUnselected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unselected"
           }
         }
       }

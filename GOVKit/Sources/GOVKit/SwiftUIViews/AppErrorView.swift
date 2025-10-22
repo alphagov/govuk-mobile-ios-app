@@ -10,11 +10,21 @@ public struct AppErrorView: View {
 
     public var body: some View {
             VStack(spacing: 8) {
+                warningImage
                 errorTitle
                 errorBody
                 actionButton
             }
         .padding()
+    }
+
+    private var warningImage: some View {
+        Image(systemName: "exclamationmark.circle")
+            .resizable()
+            .frame(width: 31, height: 31)
+            .foregroundColor(Color(uiColor: .govUK.text.iconTertiary))
+            .fontWeight(.light)
+            .accessibilityHidden(true)
     }
 
     private var errorTitle: some View {
@@ -35,7 +45,7 @@ public struct AppErrorView: View {
         Button(viewModel?.buttonTitle ?? "") {
             viewModel?.action?()
         }
-        .foregroundColor(Color(UIColor.govUK.text.link))
+        .foregroundColor(Color(UIColor.govUK.text.buttonSecondary))
         .accessibilityLabel(
             Text(viewModel?.buttonAccessibilityLabel
                  ?? viewModel?.buttonTitle

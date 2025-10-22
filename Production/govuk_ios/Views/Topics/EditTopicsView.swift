@@ -2,40 +2,48 @@ import SwiftUI
 import GOVKit
 
 struct EditTopicsView: View {
-    @StateObject var viewModel: EditTopicsViewModel
     @Environment(\.dismiss) var dismiss
 
+    var viewModel: EditTopicsViewModel
+
     var body: some View {
-        NavigationView {
-            VStack {
-                ScrollView {
-                    Text(String.topics.localized("editTopicsSubtitle"))
-                        .multilineTextAlignment(.leading)
-                        .padding(.horizontal, 12)
-                        .padding(.top, 10)
-                    GroupedList(content: viewModel.sections)
-                        .padding(.top, 16)
-                }
-            }
-            .navigationTitle(String.topics.localized("editTopicsTitle"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                doneButton
-            }
-            .onAppear {
-                viewModel.trackScreen(screen: self)
-            }
-            .onDisappear {
-                viewModel.undoChanges()
+        VStack {
+            ScrollView {
+                Text(String.topics.localized("editTopicsSubtitle"))
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 12)
+                    .padding(.top, 10)
+                topicsList
+                    .padding([.top, .horizontal], 16)
             }
         }
+        .navigationTitle(String.topics.localized("editTopicsTitle"))
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            doneButton
+        }
+        .toolbarBackground(.background, for: .navigationBar)
+        .onAppear {
+            viewModel.trackScreen(screen: self)
+        }
     }
+
     private var doneButton: some ToolbarContent {
         ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
             Button(String.topics.localized("doneButtonTitle")) {
                 dismiss()
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
+            .foregroundColor(Color(UIColor.govUK.text.buttonSecondary))
+            .fontWeight(.medium)
+        }
+    }
+
+
+    private var topicsList: some View {
+        VStack(spacing: 16) {
+            ForEach(viewModel.topicSelectionCards) { topicSelectionCard in
+                TopicSelectionCardView(viewModel: topicSelectionCard)
+            }
         }
     }
 }

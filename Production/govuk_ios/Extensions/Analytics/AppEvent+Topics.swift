@@ -2,12 +2,12 @@ import Foundation
 import GOVKit
 
 extension AppEvent {
-    static func toggleTopic(title: String,
-                            isFavourite: Bool) -> AppEvent {
-        toggle(
+    static func topicSelection(title: String,
+                               isFavourite: Bool) -> AppEvent {
+        buttonFunction(
             text: title,
-            section: "Topics",
-            isOn: isFavourite
+            section: "Edit topics",
+            action: isFavourite ? "Selected" : "Unselected"
         )
     }
 

@@ -7,6 +7,7 @@ protocol TopicDetailViewModelInterface: ObservableObject {
     var isLoaded: Bool { get }
     var description: String? { get }
     var sections: [GroupedListSection] { get }
+    var subtopicCards: [ListCardViewModel] { get }
     var errorViewModel: AppErrorViewModel? { get }
     var commerceItems: [TopicCommerceItem] { get set }
     func trackScreen(screen: TrackableScreen)
@@ -14,6 +15,10 @@ protocol TopicDetailViewModelInterface: ObservableObject {
 }
 
 extension TopicDetailViewModelInterface {
+    var subtopicCards: [ListCardViewModel] {
+        []
+    }
+
     func createCommerceEvent(_ name: String) -> AppEvent? {
         guard let commerceItem = commerceItems.first(where: { $0.name == name}) else {
             return nil

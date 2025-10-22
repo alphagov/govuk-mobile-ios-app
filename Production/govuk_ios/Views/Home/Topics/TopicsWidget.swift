@@ -53,25 +53,7 @@ struct TopicsWidget: View {
                     .roundedBorder(borderColor: .clear)
                 }
             } else {
-                HStack {
-                    Text(viewModel.widgetTitle)
-                        .font(Font.govUK.title3Semibold)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                    Spacer()
-                    Button(
-                        action: {
-                            showingEditScreen.toggle()
-                        }, label: {
-                            Text(viewModel.editButtonTitle)
-                                .foregroundColor(
-                                    Color(
-                                        UIColor.govUK.text.buttonSecondary
-                                    )
-                                )
-                                .font(Font.govUK.subheadlineSemibold)
-                        }
-                    )
-                }
+                titleView
                 VStack {
                     VStack {
                         Picker(
@@ -95,7 +77,7 @@ struct TopicsWidget: View {
                             .pickerStyle(SegmentedPickerStyle())
                             .padding(.top)
                         if  viewModel.topicsScreen == 0 {
-                            switch viewModel.isThereFavouritedTopics {
+                            switch viewModel.hasFavouritedTopics {
                             case true:
                                 yourTopicsView
                                     .transition(
@@ -212,6 +194,28 @@ struct TopicsWidget: View {
                     )
             }
             .padding(.vertical, 14)
+        }
+    }
+
+    var titleView: some View {
+        HStack {
+            Text(viewModel.widgetTitle)
+                .font(Font.govUK.title3Semibold)
+                .foregroundColor(Color(UIColor.govUK.text.primary))
+            Spacer()
+            Button(
+                action: {
+                    showingEditScreen.toggle()
+                }, label: {
+                    Text(viewModel.editButtonTitle)
+                        .foregroundColor(
+                            Color(
+                                UIColor.govUK.text.buttonSecondary
+                            )
+                        )
+                        .font(Font.govUK.subheadlineSemibold)
+                }
+            )
         }
     }
 }

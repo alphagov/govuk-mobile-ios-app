@@ -72,10 +72,10 @@ final class TopicsWidgetViewModel: ObservableObject {
     }
 
     func setTopicsScreen() {
-        topicsScreen = isThereFavouritedTopics ? 0 : 1
+        topicsScreen = hasFavouritedTopics ? 0 : 1
     }
 
-    var isThereFavouritedTopics: Bool {
+    var hasFavouritedTopics: Bool {
         topicsService.fetchFavourites() != []
     }
 

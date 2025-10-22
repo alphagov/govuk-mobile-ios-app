@@ -109,6 +109,26 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
+    func isThereFavouritedTopics_returnsCorrectValue() {
+        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
+        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
+        mockTopicService._stubbedHasCustomisedTopics = true
+
+        let allOne = Topic.arrange(context: coreData.backgroundContext)
+        let allTwo = Topic.arrange(context: coreData.backgroundContext)
+
+        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
+        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
+
+        let sut = TopicsWidgetViewModel(
+            topicsService: mockTopicService,
+            analyticsService: mockAnalyticsService,
+            topicAction: { _ in }
+        )
+        #expect(sut.isThereFavouritedTopics == true)
+    }
+
+    @Test
     func setTopicsScreen_setTheCorrectSegmentedScreen() async {
         var cancellables = Set<AnyCancellable>()
         let result = await withCheckedContinuation { continuation in

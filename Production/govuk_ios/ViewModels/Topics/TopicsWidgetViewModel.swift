@@ -77,7 +77,7 @@ final class TopicsWidgetViewModel: ObservableObject {
     }
 
     func openErrorURL() {
-        self.urlOpener.openIfPossible(Constants.API.govukBaseUrl)
+        urlOpener.openIfPossible(Constants.API.govukBaseUrl)
     }
 
     @MainActor

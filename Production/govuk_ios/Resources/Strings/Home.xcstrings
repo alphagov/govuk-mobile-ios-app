@@ -84,7 +84,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your topics\n"
+            "value" : "Your topics"
           }
         }
       }
@@ -151,17 +151,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Topics"
-          }
-        }
-      }
-    },
-    "topicsWidgetTitleCustomised" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your topics"
           }
         }
       }

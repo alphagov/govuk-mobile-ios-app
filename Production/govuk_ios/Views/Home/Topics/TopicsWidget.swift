@@ -23,11 +23,16 @@ struct TopicsWidget: View {
                                 .font(.title)
                             Text(viewModel.errorTitle)
                                 .foregroundColor(
-                                    Color(uiColor: UIColor.govUK.text.primary
-                                         ))
+                                    Color(
+                                        uiColor: UIColor.govUK.text.primary
+                                    )
+                                )
                                 .font(Font.govUK.bodySemibold)
                             Text(viewModel.errorDescription)
-                                .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                                .foregroundColor(
+                                    Color(uiColor: UIColor.govUK.text.primary
+                                         )
+                                )
                                 .font(Font.govUK.body)
                                 .multilineTextAlignment(.center)
                             Button(

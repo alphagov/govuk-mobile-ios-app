@@ -53,12 +53,9 @@ final class TopicsWidgetViewModel: ObservableObject {
         )
     }()
 
-    var widgetTitle: String {
-        let key = topicsService.hasCustomisedTopics ?
-        "topicsWidgetTitleCustomised" :
+    let widgetTitle = String.home.localized(
         "topicsWidgetTitle"
-        return String.home.localized(key)
-    }
+    )
 
     func fetchDisplayedTopics() {
         topicsToBeDisplayed =

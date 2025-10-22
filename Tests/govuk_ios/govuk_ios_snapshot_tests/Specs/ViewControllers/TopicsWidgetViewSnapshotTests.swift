@@ -7,7 +7,7 @@ import UIKit
 @testable import govuk_ios
 
 @MainActor
-final class TopicWidgetViewControllerSnapshotTests: SnapshotTestCase {
+final class TopicWidgetViewSnapshotTests: SnapshotTestCase {
     let coreData = CoreDataRepository.arrangeAndLoad
 
     func test_loadInNavigationController_populated_light_rendersCorrectly() {

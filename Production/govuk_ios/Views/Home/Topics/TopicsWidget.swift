@@ -76,7 +76,7 @@ struct TopicsWidget: View {
                     VStack {
                         Picker(
                             selection: $viewModel.topicsScreen,
-                            label: Text("Topics view")) {
+                            label: Text(viewModel.widgetTitle)) {
                                 Text(viewModel.personalisedTopicsPickerTitle)
                                     .foregroundColor(
                                         Color(

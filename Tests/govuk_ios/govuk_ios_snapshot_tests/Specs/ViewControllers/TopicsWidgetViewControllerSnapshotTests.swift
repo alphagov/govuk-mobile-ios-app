@@ -10,18 +10,15 @@ import UIKit
 final class TopicWidgetViewControllerSnapshotTests: SnapshotTestCase {
     let coreData = CoreDataRepository.arrangeAndLoad
 
-    func test_loadInNavigationController_light_rendersCorrectly() {
-        let sut = viewController()
-        sut.beginAppearanceTransition(true, animated: false)
-        sut.endAppearanceTransition()
+    func test_loadInNavigationController_populated_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: sut,
+            viewController: viewController(),
             mode: .light,
             prefersLargeTitles: true
         )
     }
 
-    func test_loadInNavigationController_dark_rendersCorrectly() {
+    func test_loadInNavigationController_populated_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .dark,
@@ -30,15 +27,23 @@ final class TopicWidgetViewControllerSnapshotTests: SnapshotTestCase {
     }
 
     private func viewController() -> UIViewController {
-        let topic = Topic(context: coreData.viewContext)
-        topic.title = "Benefits"
-        topic.ref = "benefits"
-        topic.topicDescription = "test description"
+
+        let mockTopicService = MockTopicsService()
+        let favouriteOne = Topic.arrange(
+            context: coreData.backgroundContext
+        )
+        mockTopicService._stubbedHasCustomisedTopics = true
+        let allOne = Topic.arrange(context: coreData.backgroundContext)
+        let allTwo = Topic.arrange(context: coreData.backgroundContext)
+
+        mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne]
+        mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne]
+
         let viewModel = TopicsWidgetViewModel(
-            topicsService: MockTopicsService(), analyticsService: MockAnalyticsService(),
+            topicsService: mockTopicService,
+            analyticsService: MockAnalyticsService(),
             topicAction: { _ in }
         )
-        viewModel.topicsToBeDisplayed = [topic]
         let view = TopicsWidget(
             viewModel: viewModel
         )

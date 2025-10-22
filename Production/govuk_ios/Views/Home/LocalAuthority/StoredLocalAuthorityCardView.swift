@@ -10,7 +10,7 @@ struct StoredLocalAuthorityCardView: View {
                     Text(description)
                         .frame(maxHeight: .infinity)
                         .font(.govUK.body)
-                        .foregroundColor(Color(uiColor: UIColor.govUK.text.primary))
+                        .foregroundColor(Color(uiColor: UIColor.govUK.text.secondary))
                 }
                 Text(model.name)
                     .frame(maxHeight: .infinity)

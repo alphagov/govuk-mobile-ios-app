@@ -3,7 +3,6 @@ import UIComponents
 import GOVKit
 
 struct TopicsWidget: View {
-    @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: TopicsWidgetViewModel
     @State var showingEditScreen: Bool = false
 

@@ -23,22 +23,15 @@ struct TopicsWidget: View {
                                 .font(.title)
                             Text(viewModel.errorTitle)
                                 .foregroundColor(
-                                    Color(
-                                        uiColor: UIColor.govUK.text.primary
-                                    )
-                                )
+                                    Color(uiColor: UIColor.govUK.text.primary))
                                 .font(Font.govUK.bodySemibold)
                             Text(viewModel.errorDescription)
                                 .foregroundColor(
-                                    Color(uiColor: UIColor.govUK.text.primary
-                                         )
-                                )
+                                    Color(uiColor: UIColor.govUK.text.primary))
                                 .font(Font.govUK.body)
                                 .multilineTextAlignment(.center)
                             Button(
-                                action: {
-                                    viewModel.openErrorURL()
-                                },
+                                action: {viewModel.openErrorURL()},
                                 label: {
                                     Text(viewModel.errorLink)
                                         .foregroundColor(
@@ -66,22 +59,18 @@ struct TopicsWidget: View {
                             label: Text(viewModel.widgetTitle)) {
                                 Text(viewModel.personalisedTopicsPickerTitle)
                                     .foregroundColor(
-                                        Color(
-                                            UIColor.govUK.text.primary
-                                        )
+                                        Color(UIColor.govUK.text.primary)
                                     )
                                     .tag(0)
                                 Text(viewModel.allTopicsPickerTitle)
                                     .foregroundColor(
-                                        Color(
-                                            UIColor.govUK.text.primary
-                                        )
+                                        Color(UIColor.govUK.text.primary)
                                     )
                                     .tag(1)
                             }
                             .pickerStyle(SegmentedPickerStyle())
                             .padding(.top)
-                        if  viewModel.topicsScreen == 0 {
+                        if viewModel.topicsScreen == 0 {
                             switch viewModel.hasFavouritedTopics {
                             case true:
                                 yourTopicsView
@@ -216,9 +205,7 @@ struct TopicsWidget: View {
                 }, label: {
                     Text(viewModel.editButtonTitle)
                         .foregroundColor(
-                            Color(
-                                UIColor.govUK.text.buttonSecondary
-                            )
+                            Color(UIColor.govUK.text.buttonSecondary)
                         )
                         .font(Font.govUK.subheadlineSemibold)
                 }

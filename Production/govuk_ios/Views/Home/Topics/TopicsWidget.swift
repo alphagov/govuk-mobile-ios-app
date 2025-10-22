@@ -132,12 +132,29 @@ struct TopicsWidget: View {
                             }
                         }
                         if viewModel.topicsScreen == 1 {
-                            allTopicsView
-                                .transition(
-                                    AnyTransition.move(
-                                        edge: .leading
+                            ForEach(Array(viewModel.allTopics.enumerated()),
+                                id: \.offset) { index, topic in
+                                VStack {
+                                    TopicListItemView(
+                                        viewModel: .init(
+                                            title: topic.title,
+                                            tapAction: { viewModel.topicAction(topic) },
+                                            iconName: topic.iconName
+                                        )
                                     )
+                                    if index != viewModel.allTopics.count - 1 {
+                                        Divider()
+                                            .overlay(Color(UIColor.govUK.strokes.listDivider))
+                                            .padding(.leading, 70)
+                                            .padding(.trailing, 20)
+                                    }
+                                }
+                            }
+                            .transition(
+                                AnyTransition.move(
+                                    edge: .leading
                                 )
+                            )
                         }
                     }
                     .padding([.horizontal, .bottom])
@@ -179,27 +196,6 @@ struct TopicsWidget: View {
                 )
                 if viewModel.topicsToBeDisplayed.count > 1
                     && index != viewModel.topicsToBeDisplayed.count - 1 {
-                    Divider()
-                        .overlay(Color(UIColor.govUK.strokes.listDivider))
-                        .padding(.leading, 70)
-                        .padding(.trailing, 20)
-                }
-            }
-        }
-    }
-
-
-    private var allTopicsView: some View {
-        ForEach(Array(viewModel.allTopics.enumerated()), id: \.offset) { index, topic in
-            VStack {
-                TopicListItemView(
-                    viewModel: .init(
-                        title: topic.title,
-                        tapAction: { viewModel.topicAction(topic) },
-                        iconName: topic.iconName
-                    )
-                )
-                if index != viewModel.allTopics.count - 1 {
                     Divider()
                         .overlay(Color(UIColor.govUK.strokes.listDivider))
                         .padding(.leading, 70)

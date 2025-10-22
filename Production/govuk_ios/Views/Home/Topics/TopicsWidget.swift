@@ -127,7 +127,7 @@ struct TopicsWidget: View {
                                                 )
                                             )
                                     }
-                                    .padding(.vertical, 20)
+                                    .padding(.vertical, 14)
                                 }
                             }
                         }

@@ -97,80 +97,20 @@ struct TopicsWidget: View {
                         if  viewModel.topicsScreen == 0 {
                             switch viewModel.isThereFavouritedTopics {
                             case true:
-                                ForEach(Array(viewModel.topicsToBeDisplayed.enumerated()),
-                                        id: \.offset
-                                ) { index, topic in
-                                    VStack {
-                                        TopicListItemView(
-                                            viewModel: .init(
-                                                title: topic.title,
-                                                tapAction: { viewModel.topicAction(topic) },
-                                                iconName: topic.iconName
-                                            )
-                                        )
-                                        if viewModel.topicsToBeDisplayed.count > 1
-                                            && index != viewModel.topicsToBeDisplayed.count - 1 {
-                                            Divider()
-                                                .overlay(Color(UIColor.govUK.strokes.listDivider))
-                                                .padding(.leading, 70)
-                                                .padding(.trailing, 20)
-                                        }
-                                    }
-                                }
-                                .transition(
-                                    AnyTransition.move(
+                                yourTopicsView
+                                    .transition(
+                                        AnyTransition.move(
                                         edge: .leading
                                     )
                                 )
                             case false:
-                                Button {
-                                    showingEditScreen.toggle()
-                                } label: {
-                                    VStack {
-                                        Spacer()
-                                        Image(systemName: "plus.circle")
-                                            .foregroundColor(
-                                                Color(
-                                                    UIColor.govUK.text.iconTertiary
-                                                )
-                                            )
-                                            .padding(.bottom, 6)
-                                            .font(.title)
-                                        Spacer()
-                                        Text(viewModel.emptyStateTitle)
-                                            .multilineTextAlignment(.center)
-                                            .font(Font.govUK.body)
-                                            .foregroundColor(
-                                                Color(
-                                                    UIColor.govUK.text.primary
-                                                )
-                                            )
-                                    }
-                                    .padding(.vertical, 14)
-                                }
+                                emptyStateView
                             }
                         }
                         if viewModel.topicsScreen == 1 {
-                            ForEach(Array(viewModel.allTopics.enumerated()),
-                                    id: \.offset) { index, topic in
-                                VStack {
-                                    TopicListItemView(
-                                        viewModel: .init(
-                                            title: topic.title,
-                                            tapAction: { viewModel.topicAction(topic) },
-                                            iconName: topic.iconName
-                                        )
-                                    )
-                                    if index != viewModel.allTopics.count - 1 {
-                                        Divider()
-                                            .overlay(Color(UIColor.govUK.strokes.listDivider))
-                                            .padding(.leading, 70)
-                                            .padding(.trailing, 20)
-                                    }
-                                }
-                            }
-                            .transition(
-                                AnyTransition.move(
+                            allTopicsView
+                                .transition(
+                                    AnyTransition.move(
                                     edge: .leading
                                 )
                             )
@@ -201,5 +141,77 @@ struct TopicsWidget: View {
                 viewModel: viewModel.editTopicViewModel
             )
         })
+    }
+
+    var allTopicsView: some View {
+        ForEach(Array(viewModel.allTopics.enumerated()),
+                id: \.offset) { index, topic in
+            VStack {
+                TopicListItemView(
+                    viewModel: .init(
+                        title: topic.title,
+                        tapAction: { viewModel.topicAction(topic) },
+                        iconName: topic.iconName
+                    )
+                )
+                if index != viewModel.allTopics.count - 1 {
+                    Divider()
+                        .overlay(Color(UIColor.govUK.strokes.listDivider))
+                        .padding(.leading, 70)
+                        .padding(.trailing, 20)
+                }
+            }
+        }
+    }
+
+    var yourTopicsView: some View {
+        ForEach(Array(viewModel.topicsToBeDisplayed.enumerated()),
+                id: \.offset
+        ) { index, topic in
+            VStack {
+                TopicListItemView(
+                    viewModel: .init(
+                        title: topic.title,
+                        tapAction: { viewModel.topicAction(topic) },
+                        iconName: topic.iconName
+                    )
+                )
+                if viewModel.topicsToBeDisplayed.count > 1
+                    && index != viewModel.topicsToBeDisplayed.count - 1 {
+                    Divider()
+                        .overlay(Color(UIColor.govUK.strokes.listDivider))
+                        .padding(.leading, 70)
+                        .padding(.trailing, 20)
+                }
+            }
+        }
+    }
+
+    var emptyStateView: some View {
+        Button {
+            showingEditScreen.toggle()
+        } label: {
+            VStack {
+                Spacer()
+                Image(systemName: "plus.circle")
+                    .foregroundColor(
+                        Color(
+                            UIColor.govUK.text.iconTertiary
+                        )
+                    )
+                    .padding(.bottom, 6)
+                    .font(.title)
+                Spacer()
+                Text(viewModel.emptyStateTitle)
+                    .multilineTextAlignment(.center)
+                    .font(Font.govUK.body)
+                    .foregroundColor(
+                        Color(
+                            UIColor.govUK.text.primary
+                        )
+                    )
+            }
+            .padding(.vertical, 14)
+        }
     }
 }

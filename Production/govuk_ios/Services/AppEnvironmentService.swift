@@ -56,10 +56,8 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
     }
 
     var authenticationBaseURL: URL {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = string(for: .authenticationBaseURL)
-        return components.url!
+        let urlString = string(for: .authenticationBaseURL)
+        return URL(string: urlString)!
     }
 
     var tokenBaseURL: URL {

@@ -12,8 +12,7 @@ struct HomeViewModelTests {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in },
-            allTopicsAction: { }
+            topicAction: { _ in }
         )
         let mockConfigService = MockAppConfigService()
         mockConfigService._stubbedAlertBanner = .init(
@@ -64,8 +63,7 @@ struct HomeViewModelTests {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in },
-            allTopicsAction: { }
+            topicAction: { _ in }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
@@ -94,8 +92,7 @@ struct HomeViewModelTests {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in },
-            allTopicsAction: { }
+            topicAction: { _ in }
         )
 
         let mockAnalyticsService = MockAnalyticsService()

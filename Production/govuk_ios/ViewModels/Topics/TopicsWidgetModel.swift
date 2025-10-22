@@ -10,19 +10,31 @@ final class TopicsWidgetViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     let urlOpener: URLOpener
     let topicAction: (Topic) -> Void
-    var initialLoadComplete: Bool = false
     @Published var fetchTopicsError = false
     @Published var topicsToBeDisplayed: [Topic] = []
     @Published var allTopics: [Topic] = []
-    var topicsLinkAction() -> Void 
-    let showAllButtonsTitle = String.topics.localized(
-        "seeAllTopicsButtonText"
+    let editButtonTitle = String.common.localized(
+        "editButtonTitle"
     )
- //   @Published var showingEditScreen: Bool = false
-    let editButtonTitle = String.common.localized("editButtonTitle")
-    let errorDescription = String.topics.localized("topicWidgetErrorDescrption")
+    let errorDescription = String.home.localized(
+        "topicWidgetErrorDescription"
+    )
     @Published var topicsScreen: Int = 0
-
+    let errorTitle = String.home.localized(
+        "topicWidgetErrorTitle"
+    )
+    let errorLink = String.home.localized(
+        "topicWidgetErrorLink"
+    )
+    let personalisedTopicsPickerTitle = String.home.localized(
+        "personalisedTopicsPickerTitle"
+    )
+    let allTopicsPickerTitle = String.home.localized(
+        "allTopicsPickerTitle"
+    )
+    let emptyStateTitle = String.home.localized(
+        "topicsEmptyStateTitle"
+    )
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
@@ -57,56 +69,21 @@ final class TopicsWidgetViewModel: ObservableObject {
         topicsService.fetchAll()
     }
 
-    // make a fetch
-    // return a feth controller
-    // register a delegate
-    // when values change the delegate it notified
-    // fetch results controller and keep it in the delegate
-
     func fetchAllTopics() {
         allTopics = topicsService.fetchAll()
     }
 
     func setTopicsScreen() {
-        topicsScreen = topicsService.hasCustomisedTopics ? 0 : 1
+        topicsScreen = isThereFavouritedTopics ? 0 : 1
     }
 
     var isThereFavouritedTopics: Bool {
         topicsService.fetchFavourites() != []
     }
 
-//    func trackECommerce() {
-//        if !showingEditScreen && initialLoadComplete {
-//            let trackedTopics = topicsToBeDisplayed
-//            var items = [HomeCommerceItem]()
-//            trackedTopics.enumerated().forEach { index, topic in
-//                let item = HomeCommerceItem(name: topic.title,
-//                                            index: index + 1,
-//                                            itemId: nil,
-//                                            locationId: nil)
-//                items.append(item)
-//            }
-//            let event = AppEvent.viewItemList(name: "Homepage",
-//                                              id: "Homepage",
-//                                              items: items)
-//            analyticsService.track(event: event)
-//        }
-//    }
-
-    lazy var topicErrorViewModel: AppErrorViewModel = {
-        AppErrorViewModel(
-            title: String.common.localized("genericErrorTitle"),
-            body: String.topics.localized("topicFetchErrorSubtitle"),
-            buttonTitle: String.common.localized("genericErrorButtonTitle"),
-            buttonAccessibilityLabel: String.common.localized(
-                "genericErrorButtonTitleAccessibilityLabel"
-            ),
-            isWebLink: true,
-            action: {
-                self.urlOpener.openIfPossible(Constants.API.govukBaseUrl)
-            }
-        )
-    }()
+    func openErrorURL() {
+        self.urlOpener.openIfPossible(Constants.API.govukBaseUrl)
+    }
 
     @MainActor
     func fetchTopics() {
@@ -120,21 +97,5 @@ final class TopicsWidgetViewModel: ObservableObject {
                 }
             }
         }
-    }
-
-    func trackECommerceSelection(_ name: String) {
-        let trackedTopics = topicsToBeDisplayed
-        guard let topic = trackedTopics.first(where: {$0.title == name}),
-              let index = trackedTopics.firstIndex(of: topic) else {
-            return
-        }
-        let items = [HomeCommerceItem(name: topic.title,
-                                      index: index + 1,
-                                      itemId: nil,
-                                      locationId: nil)]
-        let event = AppEvent.selectHomePageItem(
-            results: trackedTopics.count,
-            items: items)
-        analyticsService.track(event: event)
     }
 }

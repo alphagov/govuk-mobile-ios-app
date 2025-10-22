@@ -222,21 +222,8 @@ struct TopicsWidgetViewModelTests {
         #expect(result.last == favouriteTwo)
     }
 
-
     @Test
-    func widgetTitle_customisedTopics_returnsExpectedResult() {
-        mockTopicService._stubbedHasCustomisedTopics = true
-        let sut = TopicsWidgetViewModel(
-            topicsService: mockTopicService,
-            analyticsService: mockAnalyticsService,
-            topicAction: { _ in }
-        )
-
-        #expect(sut.widgetTitle == "Your topics")
-    }
-
-    @Test
-    func widgetTitle_notCustomisedTopics_returnsExpectedResult() {
+    func widgetTitle_returnsExpectedResult() {
         mockTopicService._stubbedHasCustomisedTopics = false
         let sut = TopicsWidgetViewModel(
             topicsService: mockTopicService,

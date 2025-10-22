@@ -93,12 +93,11 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
     }
 
     private var topicDetails: some View {
-        VStack {
             GroupedList(
                 content: viewModel.sections,
                 backgroundColor: UIColor.govUK.fills.surfaceBackground
             )
-        }
+            .background(Color(UIColor.govUK.fills.surfaceBackground))
     }
 
     private var subtopics: some View {

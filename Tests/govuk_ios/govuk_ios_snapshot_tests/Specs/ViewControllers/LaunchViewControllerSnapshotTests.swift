@@ -9,20 +9,11 @@ import Factory
 
 @MainActor
 class LaunchViewControllerSnapshotTests: SnapshotTestCase {
-    private var mockAccessibilityManager: MockAccessibilityManager!
-
-    override func setUp() {
-        super.setUp()
-        mockAccessibilityManager = MockAccessibilityManager()
-        Container.shared.accessibilityManager.register(
-            factory: {
-                self.mockAccessibilityManager
-            }
-        )
-    }
-
     func test_loadInNavigationController_rendersCorrectly() {
+        let mockAccessibilityManager = MockAccessibilityManager()
         mockAccessibilityManager.animationsEnabled = false
+        let container = Container.shared
+        container.accessibilityManager.register { mockAccessibilityManager }
 
         let viewModel = LaunchViewModel(
             animationsCompletedAction: { }

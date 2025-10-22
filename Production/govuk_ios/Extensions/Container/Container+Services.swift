@@ -91,7 +91,6 @@ extension Container {
         }.scope(.singleton)
     }
 
-    @MainActor
     var topicsService: Factory<TopicsServiceInterface> {
         Factory(self) {
             TopicsService(
@@ -226,9 +225,10 @@ extension Container {
     }
 
     var jailbreakDetectionService: Factory<JailbreakDetectionServiceInterface> {
-        Factory(self) {
+        let application = UIApplication.shared
+        return Factory(self) {
             JailbreakDetectionService(
-                urlOpener: UIApplication.shared
+                urlOpener: application
             )
         }
     }

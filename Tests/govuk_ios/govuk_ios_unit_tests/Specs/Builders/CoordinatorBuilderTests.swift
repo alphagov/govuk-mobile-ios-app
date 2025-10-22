@@ -413,7 +413,10 @@ struct CoordinatorBuilderTests {
 
     @Test
     func chatConsentOnboarding_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
+        let container = Container()
+        container.analyticsService.register { MockAnalyticsService() }
+        container.chatService.register { MockChatService() }
+        let subject = CoordinatorBuilder(container: container)
         let coordinator = subject.chatConsentOnboarding(
             navigationController: UINavigationController(),
             cancelOnboardingAction: { },

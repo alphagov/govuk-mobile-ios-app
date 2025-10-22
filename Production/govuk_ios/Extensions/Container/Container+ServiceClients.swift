@@ -50,7 +50,6 @@ extension Container {
         }
     }
 
-    @MainActor
     var chatServiceClient: Factory<ChatServiceClientInterface> {
         Factory(self) {
             ChatServiceClient(

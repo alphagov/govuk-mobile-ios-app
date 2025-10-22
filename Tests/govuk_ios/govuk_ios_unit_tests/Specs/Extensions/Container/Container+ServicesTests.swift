@@ -27,19 +27,19 @@ struct Container_ServicesTests {
         container.authenticationService.reset()
     }
 
-//    @Test
-//    func authenticationService_returnsExpectedValue() {
-//        let container = Container()
-//        container.authenticationServiceClient.register { MockAuthenticationServiceClient() }
-//        container.authenticatedSecureStoreService.register { MockSecureStoreService() }
-//        container.returningUserService.register { MockReturningUserService() }
-//        container.userDefaultsService.register { MockUserDefaultsService() }
-//        container.analyticsService.register { MockAnalyticsService() }
-//        container.appConfigService.register { MockAppConfigService() }
-//
-//        let sut = container.authenticationService.resolve()
-//        #expect(sut is AuthenticationService)
-//    }
+    @Test
+    func authenticationService_returnsExpectedValue() {
+        let container = Container()
+        container.authenticationServiceClient.register { MockAuthenticationServiceClient() }
+        container.authenticatedSecureStoreService.register { MockSecureStoreService() }
+        container.returningUserService.register { MockReturningUserService() }
+        container.userDefaultsService.register { MockUserDefaultsService() }
+        container.analyticsService.register { MockAnalyticsService() }
+        container.appConfigService.register { MockAppConfigService() }
+
+        let sut = container.authenticationService.resolve()
+        #expect(sut is AuthenticationService)
+    }
 
     @Test
     func firebaseClient_returnsExpectedValue() async {

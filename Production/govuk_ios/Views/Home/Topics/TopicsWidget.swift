@@ -97,7 +97,9 @@ struct TopicsWidget: View {
                         if  viewModel.topicsScreen == 0 {
                             switch viewModel.isThereFavouritedTopics {
                             case true:
-                                ForEach(Array(viewModel.topicsToBeDisplayed.enumerated()), id: \.offset) { index, topic in
+                                ForEach(Array(viewModel.topicsToBeDisplayed.enumerated()),
+                                        id: \.offset
+                                ) { index, topic in
                                     VStack {
                                         TopicListItemView(
                                             viewModel: .init(
@@ -201,4 +203,3 @@ struct TopicsWidget: View {
         })
     }
 }
-

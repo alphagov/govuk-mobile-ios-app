@@ -82,6 +82,59 @@ struct TopicsWidgetViewModelTests {
     }
 
     @Test
+    func fetchAllTopics_returnsCorrectCount() async {
+        var cancellables = Set<AnyCancellable>()
+        let result = await withCheckedContinuation { continuation in
+
+            let allOne = Topic.arrange(context: coreData.backgroundContext)
+            let allTwo = Topic.arrange(context: coreData.backgroundContext)
+
+            mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
+
+            let sut = TopicsWidgetViewModel(
+                topicsService: mockTopicService,
+                analyticsService: mockAnalyticsService,
+                topicAction: { _ in }
+            )
+            sut.$allTopics
+                .dropFirst()
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    continuation.resume(returning: value)
+                    cancellables.removeAll()
+                }.store(in: &cancellables)
+            sut.fetchAllTopics()
+        }
+        #expect(result.count == 2)
+    }
+
+    @Test
+    func setTopicsScreen_setTheCorrectSegmentedScreen() async {
+        var cancellables = Set<AnyCancellable>()
+        let result = await withCheckedContinuation { continuation in
+            let allOne = Topic.arrange(context: coreData.backgroundContext)
+            let allTwo = Topic.arrange(context: coreData.backgroundContext)
+
+            mockTopicService._stubbedFetchAllTopics = [allOne, allTwo]
+
+            let sut = TopicsWidgetViewModel(
+                topicsService: mockTopicService,
+                analyticsService: mockAnalyticsService,
+                topicAction: { _ in }
+            )
+            sut.$topicsScreen
+                .dropFirst()
+                .receive(on: DispatchQueue.main)
+                .sink { value in
+                    continuation.resume(returning: value)
+                    cancellables.removeAll()
+                }.store(in: &cancellables)
+            sut.setTopicsScreen()
+        }
+        #expect(result == 1)
+    }
+
+    @Test
     func topicsToBeDisplayed_topicsHaveBeenEdited_returnsFavourites() async {
         var cancellables = Set<AnyCancellable>()
         let favouriteOne = Topic.arrange(context: coreData.backgroundContext)

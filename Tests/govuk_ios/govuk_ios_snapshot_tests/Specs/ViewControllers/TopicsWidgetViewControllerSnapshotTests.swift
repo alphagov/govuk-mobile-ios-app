@@ -11,8 +11,11 @@ final class TopicWidgetViewControllerSnapshotTests: SnapshotTestCase {
     let coreData = CoreDataRepository.arrangeAndLoad
 
     func test_loadInNavigationController_light_rendersCorrectly() {
+        let sut = viewController()
+        sut.beginAppearanceTransition(true, animated: false)
+        sut.endAppearanceTransition()
         VerifySnapshotInNavigationController(
-            viewController: viewController(),
+            viewController: sut,
             mode: .light,
             prefersLargeTitles: true
         )

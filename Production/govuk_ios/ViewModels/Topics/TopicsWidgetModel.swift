@@ -44,8 +44,6 @@ final class TopicsWidgetViewModel: ObservableObject {
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.topicAction = topicAction
-        fetchAllTopics()
-        setTopicsScreen()
     }
 
     lazy var editTopicViewModel: EditTopicsViewModel = {

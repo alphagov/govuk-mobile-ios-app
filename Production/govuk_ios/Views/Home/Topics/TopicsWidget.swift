@@ -97,12 +97,29 @@ struct TopicsWidget: View {
                         if  viewModel.topicsScreen == 0 {
                             switch viewModel.isThereFavouritedTopics {
                             case true:
-                                yourTopicsView
-                                    .transition(
-                                        AnyTransition.move(
-                                            edge: .leading
+                                ForEach(Array(viewModel.topicsToBeDisplayed.enumerated()), id: \.offset) { index, topic in
+                                    VStack {
+                                        TopicListItemView(
+                                            viewModel: .init(
+                                                title: topic.title,
+                                                tapAction: { viewModel.topicAction(topic) },
+                                                iconName: topic.iconName
+                                            )
                                         )
+                                        if viewModel.topicsToBeDisplayed.count > 1
+                                            && index != viewModel.topicsToBeDisplayed.count - 1 {
+                                            Divider()
+                                                .overlay(Color(UIColor.govUK.strokes.listDivider))
+                                                .padding(.leading, 70)
+                                                .padding(.trailing, 20)
+                                        }
+                                    }
+                                }
+                                .transition(
+                                    AnyTransition.move(
+                                        edge: .leading
                                     )
+                                )
                             case false:
                                 Button {
                                     showingEditScreen.toggle()
@@ -133,7 +150,7 @@ struct TopicsWidget: View {
                         }
                         if viewModel.topicsScreen == 1 {
                             ForEach(Array(viewModel.allTopics.enumerated()),
-                                id: \.offset) { index, topic in
+                                    id: \.offset) { index, topic in
                                 VStack {
                                     TopicListItemView(
                                         viewModel: .init(
@@ -183,25 +200,5 @@ struct TopicsWidget: View {
             )
         })
     }
-
-    private var yourTopicsView: some View {
-        ForEach(Array(viewModel.topicsToBeDisplayed.enumerated()), id: \.offset) { index, topic in
-            VStack {
-                TopicListItemView(
-                    viewModel: .init(
-                        title: topic.title,
-                        tapAction: { viewModel.topicAction(topic) },
-                        iconName: topic.iconName
-                    )
-                )
-                if viewModel.topicsToBeDisplayed.count > 1
-                    && index != viewModel.topicsToBeDisplayed.count - 1 {
-                    Divider()
-                        .overlay(Color(UIColor.govUK.strokes.listDivider))
-                        .padding(.leading, 70)
-                        .padding(.trailing, 20)
-                }
-            }
-        }
-    }
 }
+

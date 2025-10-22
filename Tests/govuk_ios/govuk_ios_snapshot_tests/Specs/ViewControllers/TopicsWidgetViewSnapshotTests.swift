@@ -32,6 +32,7 @@ final class TopicWidgetViewSnapshotTests: SnapshotTestCase {
         let favouriteOne = Topic.arrange(
             context: coreData.backgroundContext
         )
+        favouriteOne.title = "test"
         mockTopicService._stubbedHasCustomisedTopics = true
         let allOne = Topic.arrange(context: coreData.backgroundContext)
         let allTwo = Topic.arrange(context: coreData.backgroundContext)

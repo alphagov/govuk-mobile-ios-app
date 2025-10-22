@@ -82,9 +82,9 @@ struct TopicsWidget: View {
                                 yourTopicsView
                                     .transition(
                                         AnyTransition.move(
-                                        edge: .leading
+                                            edge: .leading
+                                        )
                                     )
-                                )
                             case false:
                                 emptyStateView
                             }
@@ -93,9 +93,9 @@ struct TopicsWidget: View {
                             allTopicsView
                                 .transition(
                                     AnyTransition.move(
-                                    edge: .leading
+                                        edge: .leading
+                                    )
                                 )
-                            )
                         }
                     }
                     .padding([.horizontal, .bottom])
@@ -119,9 +119,11 @@ struct TopicsWidget: View {
             viewModel.fetchDisplayedTopics()
             viewModel.setTopicsScreen()
         }, content: {
-            EditTopicsView(
-                viewModel: viewModel.editTopicViewModel
-            )
+            NavigationView {
+                EditTopicsView(
+                    viewModel: viewModel.editTopicViewModel
+                )
+            }
         })
     }
 

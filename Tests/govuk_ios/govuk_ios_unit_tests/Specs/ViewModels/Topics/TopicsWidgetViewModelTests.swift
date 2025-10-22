@@ -125,7 +125,7 @@ struct TopicsWidgetViewModelTests {
             analyticsService: mockAnalyticsService,
             topicAction: { _ in }
         )
-        #expect(sut.isThereFavouritedTopics == true)
+        #expect(sut.hasFavouritedTopics == true)
     }
 
     @Test

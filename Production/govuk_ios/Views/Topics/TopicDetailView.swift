@@ -68,8 +68,8 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
             ZStack {
                 Color(UIColor.govUK.fills.surfaceBackground)
                 ProgressView()
-                    .accessibilityLabel(String.topics.localized("loading"))
             }
+            .accessibilityLabel(String.topics.localized("loading"))
         }
     }
 

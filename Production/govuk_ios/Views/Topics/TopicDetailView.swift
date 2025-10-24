@@ -92,12 +92,17 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
         }
     }
 
+    @ViewBuilder
     private var topicDetails: some View {
-            GroupedList(
-                content: viewModel.sections,
-                backgroundColor: UIColor.govUK.fills.surfaceBackground
-            )
-            .background(Color(UIColor.govUK.fills.surfaceBackground))
+        if let popularContent = viewModel.popularContent {
+            CarouselView(carouselCardGroup: popularContent)
+                .background(Color(UIColor.govUK.fills.surfaceBackground))
+        }
+        GroupedList(
+            content: viewModel.sections,
+            backgroundColor: UIColor.govUK.fills.surfaceBackground
+        )
+        .background(Color(UIColor.govUK.fills.surfaceBackground))
     }
 
     private var subtopics: some View {

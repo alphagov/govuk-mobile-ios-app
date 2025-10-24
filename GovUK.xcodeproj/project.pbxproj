@@ -36,6 +36,9 @@
 		1677D4042E00695500FB1E56 /* LocalAuthenticationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677D4032E00694B00FB1E56 /* LocalAuthenticationSettingsViewModel.swift */; };
 		1677D4062E006B8000FB1E56 /* TouchIdSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677D4052E006B7700FB1E56 /* TouchIdSettingsView.swift */; };
 		1679D5752C3F5E6900AA2EB0 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */; };
+		167BAE9C2EABA74D00D4D765 /* CarouselCardViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167BAE9B2EABA73E00D4D765 /* CarouselCardViewRepresentable.swift */; };
+		167BAE9E2EABAC4000D4D765 /* CarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167BAE9D2EABABF900D4D765 /* CarouselCard.swift */; };
+		167BAEA02EABC7CA00D4D765 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167BAE9F2EABC7BE00D4D765 /* CarouselView.swift */; };
 		167D0DC32E9D40FE0064A39E /* TopicSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D0DC22E9D40FC0064A39E /* TopicSelectionCardView.swift */; };
 		167D0DC52E9D41340064A39E /* TopicSelectionCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */; };
 		168176A32DCE68D800A4B0E4 /* CoreDataDeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168176A22DCE685900A4B0E4 /* CoreDataDeletionService.swift */; };
@@ -464,6 +467,9 @@
 		1677D4032E00694B00FB1E56 /* LocalAuthenticationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationSettingsViewModel.swift; sourceTree = "<group>"; };
 		1677D4052E006B7700FB1E56 /* TouchIdSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIdSettingsView.swift; sourceTree = "<group>"; };
 		1679D5742C3F5E6900AA2EB0 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		167BAE9B2EABA73E00D4D765 /* CarouselCardViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardViewRepresentable.swift; sourceTree = "<group>"; };
+		167BAE9D2EABABF900D4D765 /* CarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCard.swift; sourceTree = "<group>"; };
+		167BAE9F2EABC7BE00D4D765 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		167D0DC22E9D40FC0064A39E /* TopicSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSelectionCardView.swift; sourceTree = "<group>"; };
 		167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSelectionCardViewModel.swift; sourceTree = "<group>"; };
 		168176A22DCE685900A4B0E4 /* CoreDataDeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDeletionService.swift; sourceTree = "<group>"; };
@@ -1955,6 +1961,7 @@
 		D05AF4DD2CAD3C5500F86DD0 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				167BAE9D2EABABF900D4D765 /* CarouselCard.swift */,
 				167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */,
 				4E15340C2E3A248E002DEDB9 /* TopicsWidgetModel.swift */,
 				1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */,
@@ -2049,6 +2056,8 @@
 		D0F86E1F2CAC3BE000FF2D9E /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				167BAE9F2EABC7BE00D4D765 /* CarouselView.swift */,
+				167BAE9B2EABA73E00D4D765 /* CarouselCardViewRepresentable.swift */,
 				167D0DC22E9D40FC0064A39E /* TopicSelectionCardView.swift */,
 				4E89BBB02E3BD779009E0471 /* TopicRowView.swift */,
 				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
@@ -2544,6 +2553,7 @@
 				3D3378142CAAC0E0004BF83F /* AppUnavailableContainerView.swift in Sources */,
 				166248242C4AC91E009F7E58 /* HomeCoordinator.swift in Sources */,
 				D0839FD02DE7ABE800CA5C27 /* GovUKProviderFactory.swift in Sources */,
+				167BAE9E2EABAC4000D4D765 /* CarouselCard.swift in Sources */,
 				D06C2A512DDF39C90045C674 /* LocalAuthorityResponseHandler.swift in Sources */,
 				4E5E79A82DEF063800CA9B4D /* LocalAuthorityConfirmationView.swift in Sources */,
 				4EFE22A12D0CD08900136D56 /* Redactor.swift in Sources */,
@@ -2607,6 +2617,7 @@
 				5DAD71782BD250DB0075F648 /* AppDelegate.swift in Sources */,
 				5DC0DB412E57ADDA002C91E3 /* AlertBannerWidgetView.swift in Sources */,
 				5D899A202C946F540074C0AD /* UIViewController+Extensions.swift in Sources */,
+				167BAE9C2EABA74D00D4D765 /* CarouselCardViewRepresentable.swift in Sources */,
 				4E2A875D2D48FC41002A01D7 /* UIApplication+Window.swift in Sources */,
 				3D9FD4BA2E799C9900928E92 /* ChatWidgetViewModel.swift in Sources */,
 				5D962D682C29BD0B0038BC0A /* TabCoordinator.swift in Sources */,
@@ -2685,6 +2696,7 @@
 				4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */,
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
 				D0ECB3FE2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift in Sources */,
+				167BAEA02EABC7CA00D4D765 /* CarouselView.swift in Sources */,
 				D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
 				16AE517F2E6886D3002BCFD7 /* InfoIconListView.swift in Sources */,

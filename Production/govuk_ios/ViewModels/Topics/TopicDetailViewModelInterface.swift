@@ -6,6 +6,7 @@ protocol TopicDetailViewModelInterface: ObservableObject {
     var title: String { get }
     var isLoaded: Bool { get }
     var description: String? { get }
+    var popularContent: CarouselCardGroup? { get }
     var sections: [GroupedListSection] { get }
     var subtopicCards: [ListCardViewModel] { get }
     var errorViewModel: AppErrorViewModel? { get }
@@ -17,6 +18,10 @@ protocol TopicDetailViewModelInterface: ObservableObject {
 extension TopicDetailViewModelInterface {
     var subtopicCards: [ListCardViewModel] {
         []
+    }
+
+    var popularContent: CarouselCardGroup? {
+        nil
     }
 
     func createCommerceEvent(_ name: String) -> AppEvent? {

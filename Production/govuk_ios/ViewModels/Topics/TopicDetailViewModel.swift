@@ -3,6 +3,7 @@ import GOVKit
 
 // swiftlint:disable:next type_body_length
 class TopicDetailViewModel: TopicDetailViewModelInterface {
+    @Published private(set) var popularContent: CarouselCardGroup?
     @Published private(set) var sections = [GroupedListSection]()
     @Published private(set) var errorViewModel: AppErrorViewModel?
     @Published private(set) var subtopicCards = [ListCardViewModel]()
@@ -70,8 +71,8 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private func configureSections() {
+        popularContent = createPopularContent()
         sections = [
-            createPopularContentSection(),
             createStepByStepSection(),
             createOtherContentSection(),
             createRelatedSubtopicsSection()
@@ -93,15 +94,17 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
         }
     }
 
-    private func createPopularContentSection() -> GroupedListSection? {
+    private func createPopularContent() -> CarouselCardGroup? {
         guard let content = topicDetail?.popularContent else { return nil }
-        let sectionTitle = String.topics.localized("topicDetailPopularPagesHeader")
-        return GroupedListSection(
-            heading: GroupedListHeader(
-                title: sectionTitle
-            ),
-            rows: content.map { createContentRow($0, sectionTitle: sectionTitle) },
-            footer: nil
+        let cards = content.map { item in
+            CarouselCard(
+                title: item.title,
+                action: { self.openAction(item.url) }
+            )
+        }
+        return CarouselCardGroup(
+            title: String.topics.localized("topicDetailPopularPagesHeader"),
+            cards: cards
         )
     }
 

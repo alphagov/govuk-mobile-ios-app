@@ -6,8 +6,6 @@ import Factory
 import GOVKit
 
 protocol AuthenticationServiceInterface: AnyObject {
-    var refreshToken: String? { get }
-    var idToken: String? { get }
     var accessToken: String? { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }

@@ -43,7 +43,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     var didSignOutAction: ((SignoutReason) -> Void)?
 
     var secureStoreRefreshTokenPresent: Bool {
-        authenticatedSecureStoreService.checkItemExists(itemName: "refreshToken")
+        authenticatedSecureStoreService.hasRefreshToken
     }
 
     var userEmail: String? {
@@ -101,7 +101,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             userDefaultsService.removeObject(forKey: .refreshTokenExpiryDate)
             userDefaultsService.removeObject(forKey: .refreshTokenIssuedAtDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
-            authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
+            authenticatedSecureStoreService.deleteRefreshToken()
             setTokens()
             authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()
             didSignOutAction?(reason)
@@ -110,7 +110,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             #if targetEnvironment(simulator)
             // secure store deletion will always fail on simulator
             // as secure enclave unavailable.
-            authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
+            authenticatedSecureStoreService.deleteRefreshToken()
             setTokens()
             #endif
             return
@@ -121,17 +121,14 @@ class AuthenticationService: AuthenticationServiceInterface {
         guard let refreshToken = refreshToken
         else { return }
         do {
-            try authenticatedSecureStoreService.saveItem(
-                item: refreshToken,
-                itemName: "refreshToken"
-            )
+            try authenticatedSecureStoreService.saveRefreshToken(refreshToken)
         } catch {
             analyticsService.track(error: error)
         }
     }
 
     func tokenRefreshRequest() async -> TokenRefreshResult {
-        var decryptedRefreshToken: String
+        let decryptedRefreshToken: String
         do {
             decryptedRefreshToken = try decryptRefreshTokenIfRequired()
         } catch {
@@ -175,12 +172,8 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     private func decryptRefreshTokenIfRequired() throws -> String {
-        guard let token = refreshToken else {
-            let fetchedRefreshToken =
-            try authenticatedSecureStoreService.readItem(itemName: "refreshToken")
-            return fetchedRefreshToken
-        }
-        return token
+        try refreshToken ??
+        authenticatedSecureStoreService.getRefreshToken()
     }
 
     private func setTokens(refreshToken: String? = nil,
@@ -216,4 +209,25 @@ class AuthenticationService: AuthenticationServiceInterface {
 enum SignoutReason {
     case reauthFailure
     case userSignout
+}
+
+extension SecureStorable {
+    var hasRefreshToken: Bool {
+        checkItemExists(itemName: "refreshToken")
+    }
+
+    func getRefreshToken() throws -> String {
+        try readItem(itemName: "refreshToken")
+    }
+
+    func saveRefreshToken(_ token: String) throws {
+        try saveItem(
+            item: token,
+            itemName: "refreshToken"
+        )
+    }
+
+    func deleteRefreshToken() {
+        deleteItem(itemName: "refreshToken")
+    }
 }

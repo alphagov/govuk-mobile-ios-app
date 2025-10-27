@@ -8,6 +8,7 @@ class ChatCoordinator: TabItemCoordinator {
     private let deeplinkStore: DeeplinkDataStore
     private let analyticsService: AnalyticsServiceInterface
     private let chatService: ChatServiceInterface
+    private let authenticationService: AuthenticationServiceInterface
     private let cancelOnboardingAction: () -> Void
     var isShowingError = false
     private lazy var chatViewController: UIViewController = {
@@ -29,12 +30,14 @@ class ChatCoordinator: TabItemCoordinator {
          deepLinkStore: DeeplinkDataStore,
          analyticsService: AnalyticsServiceInterface,
          chatService: ChatServiceInterface,
+         authenticationService: AuthenticationServiceInterface,
          cancelOnboardingAction: @escaping () -> Void) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.deeplinkStore = deepLinkStore
         self.analyticsService = analyticsService
         self.chatService = chatService
+        self.authenticationService = authenticationService
         self.cancelOnboardingAction = cancelOnboardingAction
         super.init(navigationController: navigationController)
     }
@@ -66,14 +69,15 @@ class ChatCoordinator: TabItemCoordinator {
     }
 
     private func reauthenticate() {
-        let coordinator = coordinatorBuilder.periAuth(
-            navigationController: root,
-            completion: {
-                self.start()
+        Task {
+            let result = await authenticationService.tokenRefreshRequest()
+            switch result {
+            case .success:
                 self.chatService.retryAction?()
+            case .failure:
+                self.authenticationService.signOut(reason: .tokenRefreshFailure)
             }
-        )
-        start(coordinator)
+        }
     }
 
     func didReselectTab() { /* To be implemented */ }

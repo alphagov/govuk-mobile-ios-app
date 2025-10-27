@@ -29,6 +29,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -52,6 +53,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -79,6 +81,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -103,6 +106,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -130,6 +134,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -161,6 +166,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -190,6 +196,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -222,6 +229,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -255,6 +263,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
         sut.isShowingError = true
@@ -277,6 +286,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -295,6 +305,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 
@@ -313,6 +324,7 @@ struct ChatCoordinatorTests {
             deepLinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
             analyticsService: MockAnalyticsService(),
             chatService: mockChatService,
+            authenticationService: MockAuthenticationService(),
             cancelOnboardingAction: { }
         )
 

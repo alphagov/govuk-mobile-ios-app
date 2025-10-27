@@ -206,6 +206,7 @@ class AuthenticationService: AuthenticationServiceInterface {
 
 enum SignoutReason {
     case reauthFailure
+    case tokenRefreshFailure
     case userSignout
 }
 

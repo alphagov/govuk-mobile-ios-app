@@ -1,13 +1,13 @@
 import Foundation
 import SecureStore
 
-//MARK: - Constants
+// MARK: - Constants
 enum SecureStoreableConstant: String {
     case persistentUserIdentifier
     case refreshToken
 }
 
-//MARK: - Refresh Token
+// MARK: - Refresh Token
 extension SecureStorable {
     var hasRefreshToken: Bool {
         checkItemExists(
@@ -35,7 +35,7 @@ extension SecureStorable {
     }
 }
 
-//MARK: - User Identifier
+// MARK: - User Identifier
 extension SecureStorable {
     func getUserIdenitifier() -> String? {
         try? readItem(

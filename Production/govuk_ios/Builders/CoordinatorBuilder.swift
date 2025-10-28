@@ -105,7 +105,8 @@ class CoordinatorBuilder {
             ),
             analyticsService: container.analyticsService.resolve(),
             chatService: container.chatService.resolve(),
-            cancelOnboardingAction: cancelOnboardingAction
+            authenticationService: container.authenticationService(),
+            cancelOnboardingAction: cancelOnboardingAction,
         )
     }
 

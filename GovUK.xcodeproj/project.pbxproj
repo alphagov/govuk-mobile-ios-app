@@ -145,7 +145,7 @@
 		5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */; };
 		5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */; };
 		5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */; };
-		5D14B1FE2EB0BA65003C151F /* SecureStoreable+RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14B1FD2EB0BA65003C151F /* SecureStoreable+RefreshToken.swift */; };
+		5D14B1FE2EB0BA65003C151F /* SecureStoreable+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14B1FD2EB0BA65003C151F /* SecureStoreable+Convenience.swift */; };
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
 		5D18E83E2CCFB68900F20419 /* Container+APIClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */; };
 		5D3123862C85AEE20088B931 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123852C85AEE20088B931 /* Container+Repositories.swift */; };
@@ -572,7 +572,7 @@
 		5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClient.swift; sourceTree = "<group>"; };
 		5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStore.swift; sourceTree = "<group>"; };
-		5D14B1FD2EB0BA65003C151F /* SecureStoreable+RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SecureStoreable+RefreshToken.swift"; sourceTree = "<group>"; };
+		5D14B1FD2EB0BA65003C151F /* SecureStoreable+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SecureStoreable+Convenience.swift"; sourceTree = "<group>"; };
 		5D15A8E72C6A47770050C780 /* GOVRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GOVRequest.swift; sourceTree = "<group>"; };
 		5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+APIClients.swift"; sourceTree = "<group>"; };
 		5D30CF972C64A64600361C97 /* WhatToTest.en-GB.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WhatToTest.en-GB.txt"; sourceTree = "<group>"; };
@@ -1274,7 +1274,7 @@
 		5D14B1FC2EB0BA53003C151F /* SecureStore */ = {
 			isa = PBXGroup;
 			children = (
-				5D14B1FD2EB0BA65003C151F /* SecureStoreable+RefreshToken.swift */,
+				5D14B1FD2EB0BA65003C151F /* SecureStoreable+Convenience.swift */,
 			);
 			path = SecureStore;
 			sourceTree = "<group>";
@@ -2604,7 +2604,7 @@
 				D052D2322E0B0DE10048F98A /* RoundedBorderViewModifier.swift in Sources */,
 				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */,
 				16A31E782E37959900C984D6 /* Intro.swift in Sources */,
-				5D14B1FE2EB0BA65003C151F /* SecureStoreable+RefreshToken.swift in Sources */,
+				5D14B1FE2EB0BA65003C151F /* SecureStoreable+Convenience.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				16AE517A2E670C28002BCFD7 /* InfoLinksView.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,

@@ -13,7 +13,7 @@ class ReturningUserService: ReturningUserServiceInterface {
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
     private var storedPersistentUserIdentifier: String? {
-        try? openSecureStoreService.readItem(itemName: "persistentUserIdentifier")
+        openSecureStoreService.getUserIdenitifier()
     }
 
     init(openSecureStoreService: SecureStorable,
@@ -78,10 +78,7 @@ class ReturningUserService: ReturningUserServiceInterface {
     private func saveIdentifier(currentIdentifier: String,
                                 isReturningUser: Bool) -> ReturningUserResult {
         do {
-            try openSecureStoreService.saveItem(
-                item: currentIdentifier,
-                itemName: "persistentUserIdentifier"
-            )
+            try openSecureStoreService.saveUserIdenitifier(currentIdentifier)
             return .success(isReturningUser)
         } catch {
             return .failure(.saveIdentifierError)

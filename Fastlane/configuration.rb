@@ -61,6 +61,10 @@ class Configuration
     ENV['GOOGLE_SERVICES_FILE']
   end
 
+  def app_additional_swift_flags
+    setting(:app, :additional_swift_flags)
+  end
+
   def app_args
     [
       "BASE_URL=\"#{app_base_url}\"",
@@ -77,6 +81,7 @@ class Configuration
       "PROFILE_SPECIFIER_NOTIFICATION_SERVICE=\"#{app_profile_specifiers[app_bundle_identifier_notification_service]}\"",
       "CODE_SIGN_ENTITLEMENTS_APP=\"#{app_entitlements[app_bundle_identifier]}\"",
       "CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE=\"#{app_entitlements[app_bundle_identifier_notification_service]}\"",
+      "ADDITIONAL_SWIFT_FLAGS=\"#{app_additional_swift_flags.join(' ')}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end

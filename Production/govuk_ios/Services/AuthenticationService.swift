@@ -3,10 +3,9 @@ import UIKit
 import Authentication
 import SecureStore
 import Factory
+import GOVKit
 
 protocol AuthenticationServiceInterface: AnyObject {
-    var refreshToken: String? { get }
-    var idToken: String? { get }
     var accessToken: String? { get }
     var userEmail: String? { get async }
     var isSignedIn: Bool { get }
@@ -33,6 +32,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     private let authenticationServiceClient: AuthenticationServiceClientInterface
     private let returningUserService: ReturningUserServiceInterface
     private let userDefaultsService: UserDefaultsServiceInterface
+    private let analyticsService: AnalyticsServiceInterface
     private let appConfigService: AppConfigServiceInterface
     private(set) var refreshToken: String?
     private(set) var idToken: String?
@@ -41,7 +41,7 @@ class AuthenticationService: AuthenticationServiceInterface {
     var didSignOutAction: ((SignoutReason) -> Void)?
 
     var secureStoreRefreshTokenPresent: Bool {
-        authenticatedSecureStoreService.checkItemExists(itemName: "refreshToken")
+        authenticatedSecureStoreService.hasRefreshToken
     }
 
     var userEmail: String? {
@@ -59,15 +59,19 @@ class AuthenticationService: AuthenticationServiceInterface {
         refreshToken != nil
     }
 
-    init(authenticationServiceClient: AuthenticationServiceClientInterface,
-         authenticatedSecureStoreService: SecureStorable,
-         returningUserService: ReturningUserServiceInterface,
-         userDefaultsService: UserDefaultsServiceInterface,
-         appConfigService: AppConfigServiceInterface) {
+    init(
+        authenticationServiceClient: AuthenticationServiceClientInterface,
+        authenticatedSecureStoreService: SecureStorable,
+        returningUserService: ReturningUserServiceInterface,
+        userDefaultsService: UserDefaultsServiceInterface,
+        analyticsService: AnalyticsServiceInterface,
+        appConfigService: AppConfigServiceInterface,
+    ) {
         self.authenticatedSecureStoreService = authenticatedSecureStoreService
         self.returningUserService = returningUserService
         self.authenticationServiceClient = authenticationServiceClient
         self.userDefaultsService = userDefaultsService
+        self.analyticsService = analyticsService
         self.appConfigService = appConfigService
     }
 
@@ -84,6 +88,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             saveTokenIssueDate(iat: token?.iat)
             return await handleReturningUser()
         case .failure(let error):
+            analyticsService.track(error: error)
             return AuthenticationServiceResult.failure(error)
         }
     }
@@ -94,15 +99,16 @@ class AuthenticationService: AuthenticationServiceInterface {
             userDefaultsService.removeObject(forKey: .refreshTokenExpiryDate)
             userDefaultsService.removeObject(forKey: .refreshTokenIssuedAtDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
-            authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
+            authenticatedSecureStoreService.deleteRefreshToken()
             setTokens()
             authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()
             didSignOutAction?(reason)
         } catch {
+            analyticsService.track(error: error)
             #if targetEnvironment(simulator)
             // secure store deletion will always fail on simulator
             // as secure enclave unavailable.
-            authenticatedSecureStoreService.deleteItem(itemName: "refreshToken")
+            authenticatedSecureStoreService.deleteRefreshToken()
             setTokens()
             #endif
             return
@@ -110,20 +116,21 @@ class AuthenticationService: AuthenticationServiceInterface {
     }
 
     func encryptRefreshToken() {
-        guard let refreshToken = refreshToken else {
-            return
+        guard let refreshToken = refreshToken
+        else { return }
+        do {
+            try authenticatedSecureStoreService.saveRefreshToken(refreshToken)
+        } catch {
+            analyticsService.track(error: error)
         }
-        try? authenticatedSecureStoreService.saveItem(
-            item: refreshToken,
-            itemName: "refreshToken"
-        )
     }
 
     func tokenRefreshRequest() async -> TokenRefreshResult {
-        var decryptedRefreshToken: String
+        let decryptedRefreshToken: String
         do {
             decryptedRefreshToken = try decryptRefreshTokenIfRequired()
         } catch {
+            analyticsService.track(error: error)
             return .failure(.decryptRefreshTokenError)
         }
 
@@ -139,6 +146,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             )
             return .success(tokenResponse)
         case .failure(let error):
+            analyticsService.track(error: error)
             return .failure(error)
         }
     }
@@ -155,18 +163,15 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .success(let isReturning):
             return .success(.init(returningUser: isReturning))
         case .failure(let error):
+            analyticsService.track(error: error)
             setTokens()
             return .failure(.returningUserService(error))
         }
     }
 
     private func decryptRefreshTokenIfRequired() throws -> String {
-        guard let token = refreshToken else {
-            let fetchedRefreshToken =
-            try authenticatedSecureStoreService.readItem(itemName: "refreshToken")
-            return fetchedRefreshToken
-        }
-        return token
+        try refreshToken ??
+        authenticatedSecureStoreService.getRefreshToken()
     }
 
     private func setTokens(refreshToken: String? = nil,
@@ -201,5 +206,27 @@ class AuthenticationService: AuthenticationServiceInterface {
 
 enum SignoutReason {
     case reauthFailure
+    case tokenRefreshFailure
     case userSignout
+}
+
+extension SecureStorable {
+    var hasRefreshToken: Bool {
+        checkItemExists(itemName: "refreshToken")
+    }
+
+    func getRefreshToken() throws -> String {
+        try readItem(itemName: "refreshToken")
+    }
+
+    func saveRefreshToken(_ token: String) throws {
+        try saveItem(
+            item: token,
+            itemName: "refreshToken"
+        )
+    }
+
+    func deleteRefreshToken() {
+        deleteItem(itemName: "refreshToken")
+    }
 }

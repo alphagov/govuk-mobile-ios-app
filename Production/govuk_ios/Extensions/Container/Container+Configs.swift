@@ -23,9 +23,7 @@ extension Container {
                 localizedReason: String.localAuthentication.localized(
                     "localizedReason"
                 ),
-                localisedFallbackTitle: String.localAuthentication.localized(
-                    "localisedFallbackTitle"
-                ),
+                localisedFallbackTitle: "",
                 localisedCancelTitle: String.common.localized(
                     "cancel"
                 )

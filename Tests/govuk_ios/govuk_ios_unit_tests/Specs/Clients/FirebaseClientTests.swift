@@ -14,18 +14,15 @@ struct FirebaseClientTests {
     func launch_configuresFirebaseApp() {
         let mockApp = MockFirebaseApp.self
         let mockAnalytics = MockFirebaseAnalytics.self
-        let mockAppAttest = MockAppAttestService()
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: mockAppAttest
         )
 
         MockFirebaseApp._configureCalled = false
         sut.launch()
 
         #expect(mockApp._configureCalled)
-        #expect(mockAppAttest._configureCalled)
     }
 
     @Test
@@ -35,7 +32,6 @@ struct FirebaseClientTests {
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: MockAppAttestService()
         )
 
         mockAnalytics.clearValues()
@@ -51,7 +47,6 @@ struct FirebaseClientTests {
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: MockAppAttestService()
         )
 
         mockAnalytics.clearValues()
@@ -67,7 +62,6 @@ struct FirebaseClientTests {
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: MockAppAttestService()
         )
         let expectedName = UUID().uuidString
         let expectedEvent = AppEvent(
@@ -87,7 +81,6 @@ struct FirebaseClientTests {
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: MockAppAttestService()
         )
         let expectedName = UUID().uuidString
         let expectedValue = UUID().uuidString
@@ -116,7 +109,6 @@ struct FirebaseClientTests {
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: MockAppAttestService()
         )
         let expectedScreen = MockBaseViewController(analyticsService: MockAnalyticsService())
         let expectedTitle = UUID().uuidString
@@ -143,7 +135,6 @@ struct FirebaseClientTests {
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: MockAppAttestService()
         )
         let expectedName = UUID().uuidString
         let expectedValue = UUID().uuidString
@@ -165,7 +156,6 @@ struct FirebaseClientTests {
         let sut = FirebaseClient(
             firebaseApp: mockApp,
             firebaseAnalytics: mockAnalytics,
-            appAttestService: MockAppAttestService()
         )
         let error = NSError(domain: "test", code: 1)
         sut.track(error: error)
@@ -216,34 +206,5 @@ class MockFirebaseAnalytics: FirebaseAnalyticsInterface {
                                 forName name: String) {
         _setUserPropertyReveivedValue = value
         _setUserPropertyReveivedName = name
-    }
-}
-
-class MockAppCheck: AppCheckInterface {
-    static var _stubbedProviderFactory: ProviderFactoryInterface?
-    static func setAppCheckProviderFactory(_ factory: ProviderFactoryInterface?) {
-        _stubbedProviderFactory = factory
-    }
-
-    private static var needsInit = true
-    private static var shared: MockAppCheck = MockAppCheck()
-
-    required init() {}
-
-    static func appCheck() -> Self {
-        print(shared)
-        return (shared as! Self)
-    }
-
-    var _stubbedAppCheckToken: AppCheckToken?
-    func token(forcingRefresh: Bool) async throws -> AppCheckToken {
-        guard let token = _stubbedAppCheckToken else {
-            throw AppCheckError.tokenRefreshFailed
-        }
-        return token
-    }
-
-    enum AppCheckError: Error {
-        case tokenRefreshFailed
     }
 }

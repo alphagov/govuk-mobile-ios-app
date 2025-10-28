@@ -103,7 +103,7 @@ struct TopicsWidgetViewModelTests {
                     continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
-            sut.fetchAllTopics()
+            sut.updateAllTopics()
         }
         #expect(result.count == 2)
     }
@@ -151,7 +151,7 @@ struct TopicsWidgetViewModelTests {
                 }.store(in: &cancellables)
             sut.setTopicsScreen()
         }
-        #expect(result == 1)
+        #expect(result == .all)
     }
 
     @Test
@@ -173,53 +173,18 @@ struct TopicsWidgetViewModelTests {
                 analyticsService: mockAnalyticsService,
                 topicAction: { _ in }
             )
-            sut.$topicsToBeDisplayed
+            sut.$favouriteTopics
                 .dropFirst()
                 .receive(on: DispatchQueue.main)
                 .sink { value in
                     continuation.resume(returning: value)
                     cancellables.removeAll()
                 }.store(in: &cancellables)
-            sut.fetchDisplayedTopics()
+            sut.updateFavouriteTopics()
         }
         #expect(result.count == 2)
         #expect(result.first ==  favouriteOne)
         #expect(result.last ==  favouriteTwo)
-    }
-
-    @Test
-    func topicsToBeDisplayed_topicsHaveNotBeenEdited_returnsAllTopcis() async {
-        var cancellables = Set<AnyCancellable>()
-        let favouriteOne = Topic.arrange(context: coreData.backgroundContext)
-        let favouriteTwo = Topic.arrange(context: coreData.backgroundContext)
-        let allOne = Topic.arrange(context: coreData.backgroundContext)
-        let allTwo = Topic.arrange(context: coreData.backgroundContext)
-
-        let result = await withCheckedContinuation { continuation in
-            mockTopicService._stubbedHasCustomisedTopics = false
-
-            mockTopicService._stubbedFetchFavouriteTopics = [favouriteOne, favouriteTwo]
-            mockTopicService._stubbedFetchAllTopics = [allOne, allTwo, favouriteOne, favouriteTwo]
-
-            let sut = TopicsWidgetViewModel(
-                topicsService: mockTopicService,
-                analyticsService: MockAnalyticsService(),
-                topicAction: { _ in }
-            )
-
-            sut.$topicsToBeDisplayed
-                .dropFirst()
-                .receive(on: DispatchQueue.main)
-                .sink { value in
-                    continuation.resume(returning: value)
-                    cancellables.removeAll()
-                }.store(in: &cancellables)
-            sut.fetchDisplayedTopics()
-        }
-        #expect(result.count == 4)
-        #expect(result == mockTopicService._stubbedFetchAllTopics)
-        #expect(result.first == allOne)
-        #expect(result.last == favouriteTwo)
     }
 
     @Test

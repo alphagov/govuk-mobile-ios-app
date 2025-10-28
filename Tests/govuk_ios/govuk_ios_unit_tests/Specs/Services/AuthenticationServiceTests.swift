@@ -3,7 +3,6 @@ import UIKit
 import Testing
 import Authentication
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

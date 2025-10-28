@@ -53,8 +53,10 @@ class MockAuthenticationService: AuthenticationServiceInterface {
     }
 
     var _stubbedTokenRefreshRequest = TokenRefreshResult.failure(.decryptRefreshTokenError)
+    var _tokenRefreshRequestCalled = false
     func tokenRefreshRequest() async -> TokenRefreshResult {
-        _stubbedTokenRefreshRequest
+        _tokenRefreshRequestCalled = true
+        return _stubbedTokenRefreshRequest
     }
 
     var _stubbedShouldAttemptTokenRefresh: Bool = true

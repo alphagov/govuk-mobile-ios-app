@@ -254,8 +254,11 @@ struct AppCoordinatorTests {
         #expect(mockPeriAuthCoordinator._startCalled)
     }
 
-    @Test
-    func start_didSignOutAction_userSignout_startsPeriAuthCoordinator() {
+    @Test(arguments: [
+        SignoutReason.tokenRefreshFailure,
+        SignoutReason.userSignout,
+    ])
+    func start_didSignOutAction_userSignout_startsPeriAuthCoordinator(reason: SignoutReason) {
         let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
@@ -277,7 +280,7 @@ struct AppCoordinatorTests {
 
         subject.start(url: nil)
 
-        mockAuthenticationService.didSignOutAction?(.userSignout)
+        mockAuthenticationService.didSignOutAction?(reason)
 
         #expect(mockPeriAuthCoordinator._startCalled)
     }

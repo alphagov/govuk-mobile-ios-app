@@ -37,13 +37,13 @@ extension SecureStorable {
 
 // MARK: - User Identifier
 extension SecureStorable {
-    func getUserIdenitifier() -> String? {
+    func getUserIdentifier() -> String? {
         try? readItem(
             itemName: SecureStoreableConstant.persistentUserIdentifier.rawValue
         )
     }
 
-    func saveUserIdenitifier(_ identifier: String) throws {
+    func saveUserIdentifier(_ identifier: String) throws {
         try saveItem(
             item: identifier,
             itemName: SecureStoreableConstant.persistentUserIdentifier.rawValue

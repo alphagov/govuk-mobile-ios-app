@@ -4,28 +4,35 @@ import CoreData
 import GOVKit
 import UIComponents
 
+enum TopicSegment {
+    case favorite
+    case all
+}
 
 final class TopicsWidgetViewModel: ObservableObject {
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
-    let urlOpener: URLOpener
+    private let urlOpener: URLOpener
     let topicAction: (Topic) -> Void
     @Published var fetchTopicsError = false
-    @Published var topicsToBeDisplayed: [Topic] = []
+    @Published var favouriteTopics: [Topic] = []
     @Published var allTopics: [Topic] = []
+    @Published var topicsScreen: TopicSegment = .favorite
+
+    var errorViewModel: AppErrorViewModel {
+        .topicErrorWithAction { [weak self] in
+            self?.openErrorURL()
+        }
+    }
+
     let editButtonTitle = String.common.localized(
         "editButtonTitle"
     )
-    let errorDescription = String.home.localized(
-        "topicWidgetErrorDescription"
+
+    let editButtonAccessibilityLabel = String.home.localized(
+        "editTopicsAccessibilityLabel"
     )
-    @Published var topicsScreen: Int = 0
-    let errorTitle = String.home.localized(
-        "topicWidgetErrorTitle"
-    )
-    let errorLink = String.home.localized(
-        "topicWidgetErrorLink"
-    )
+
     let personalisedTopicsPickerTitle = String.home.localized(
         "personalisedTopicsPickerTitle"
     )
@@ -34,6 +41,9 @@ final class TopicsWidgetViewModel: ObservableObject {
     )
     let emptyStateTitle = String.home.localized(
         "topicsEmptyStateTitle"
+    )
+    let widgetTitle = String.home.localized(
+        "topicsWidgetTitle"
     )
 
     init(topicsService: TopicsServiceInterface,
@@ -53,28 +63,30 @@ final class TopicsWidgetViewModel: ObservableObject {
         )
     }()
 
-    let widgetTitle = String.home.localized(
-        "topicsWidgetTitle"
-    )
-
-    func fetchDisplayedTopics() {
-        topicsToBeDisplayed =
-        topicsService.hasCustomisedTopics ?
-        topicsService.fetchFavourites() :
-        topicsService.fetchAll()
+    var hasFavouritedTopics: Bool {
+        topicsService.fetchFavourites() != []
     }
 
-    func fetchAllTopics() {
+    func updateFavouriteTopics() {
+        favouriteTopics = topicsService.fetchFavourites()
+    }
+
+    func updateAllTopics() {
         allTopics = topicsService.fetchAll()
     }
 
     func setTopicsScreen() {
-        topicsScreen = hasFavouritedTopics ? 0 : 1
+        topicsScreen = hasFavouritedTopics ? .favorite : .all
     }
 
-    var hasFavouritedTopics: Bool {
-        topicsService.fetchFavourites() != []
+    @MainActor
+    func refreshTopics() {
+        fetchTopics()
+        updateFavouriteTopics()
+        updateAllTopics()
+        setTopicsScreen()
     }
+
 
     func openErrorURL() {
         urlOpener.openIfPossible(Constants.API.govukBaseUrl)

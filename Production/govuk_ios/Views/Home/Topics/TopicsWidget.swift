@@ -8,110 +8,38 @@ struct TopicsWidget: View {
 
     var body: some View {
         VStack {
+            titleView
             if viewModel.fetchTopicsError {
-                VStack {
-                    HStack {
-                        Text(viewModel.widgetTitle)
-                            .font(Font.govUK.title3Semibold)
-                            .foregroundColor(Color(UIColor.govUK.text.primary))
-                        Spacer()
-                    }
-                    VStack {
-                        VStack(spacing: 8) {
-                            Image(systemName: "exclamationmark.circle")
-                                .foregroundColor(Color(UIColor.govUK.text.iconTertiary))
-                                .font(.title)
-                            Text(viewModel.errorTitle)
-                                .foregroundColor(
-                                    Color(uiColor: UIColor.govUK.text.primary))
-                                .font(Font.govUK.bodySemibold)
-                            Text(viewModel.errorDescription)
-                                .foregroundColor(
-                                    Color(uiColor: UIColor.govUK.text.primary))
-                                .font(Font.govUK.body)
-                                .multilineTextAlignment(.center)
-                            Button(
-                                action: {viewModel.openErrorURL()},
-                                label: {
-                                    Text(viewModel.errorLink)
-                                        .foregroundColor(
-                                            Color(
-                                                uiColor: UIColor.govUK.text.buttonSecondary
-                                            )
-                                        )
-                                        .font(Font.govUK.body)
-                                }
-                            )
-                            .padding(.top)
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 22)
-                    }
+                AppErrorView(viewModel: viewModel.errorViewModel)
+                    .padding(.vertical, 8)
                     .background(Color(UIColor.govUK.fills.surfaceList))
                     .roundedBorder(borderColor: .clear)
-                }
             } else {
-                titleView
-                VStack {
-                    VStack {
-                        Picker(
-                            selection: $viewModel.topicsScreen,
-                            label: Text(viewModel.widgetTitle)) {
-                                Text(viewModel.personalisedTopicsPickerTitle)
-                                    .foregroundColor(
-                                        Color(UIColor.govUK.text.primary)
-                                    )
-                                    .tag(0)
-                                Text(viewModel.allTopicsPickerTitle)
-                                    .foregroundColor(
-                                        Color(UIColor.govUK.text.primary)
-                                    )
-                                    .tag(1)
-                            }
-                            .pickerStyle(SegmentedPickerStyle())
-                            .padding(.top)
-                        if viewModel.topicsScreen == 0 {
-                            switch viewModel.hasFavouritedTopics {
-                            case true:
-                                yourTopicsView
-                                    .transition(
-                                        AnyTransition.move(
-                                            edge: .leading
-                                        )
-                                    )
-                            case false:
-                                emptyStateView
-                            }
+                VStack(spacing: 0) {
+                    topicPicker
+                    switch viewModel.topicsScreen {
+                    case .favorite:
+                        if viewModel.hasFavouritedTopics {
+                            topicsListViewFor(topics: viewModel.favouriteTopics)
+                        } else {
+                            emptyStateView
                         }
-                        if viewModel.topicsScreen == 1 {
-                            allTopicsView
-                                .transition(
-                                    AnyTransition.move(
-                                        edge: .leading
-                                    )
-                                )
-                        }
+                    case .all:
+                        topicsListViewFor(topics: viewModel.allTopics)
                     }
-                    .padding([.horizontal, .bottom])
-                    .padding(.top, 4)
                 }
+                .padding(.top, 4)
                 .background(Color(UIColor.govUK.fills.surfaceList))
                 .roundedBorder(borderColor: .clear)
             }
         }
         .padding()
         .onAppear {
-            viewModel.fetchTopics()
-            viewModel.fetchDisplayedTopics()
-            viewModel.fetchAllTopics()
-            viewModel.setTopicsScreen()
+            viewModel.refreshTopics()
         }
         .sheet(isPresented: $showingEditScreen,
                onDismiss: {
-            viewModel.fetchAllTopics()
-            viewModel.fetchTopics()
-            viewModel.fetchDisplayedTopics()
-            viewModel.setTopicsScreen()
+            viewModel.refreshTopics()
         }, content: {
             NavigationView {
                 EditTopicsView(
@@ -121,32 +49,30 @@ struct TopicsWidget: View {
         })
     }
 
-    var allTopicsView: some View {
-        ForEach(Array(viewModel.allTopics.enumerated()),
-                id: \.offset) { index, topic in
-            VStack {
-                TopicListItemView(
-                    viewModel: .init(
-                        title: topic.title,
-                        tapAction: { viewModel.topicAction(topic) },
-                        iconName: topic.iconName
+    private var topicPicker: some View {
+        Picker(
+            selection: $viewModel.topicsScreen,
+            label: Text(viewModel.widgetTitle)) {
+                Text(viewModel.personalisedTopicsPickerTitle)
+                    .foregroundColor(
+                        Color(UIColor.govUK.text.primary)
                     )
-                )
-                if index != viewModel.allTopics.count - 1 {
-                    Divider()
-                        .overlay(Color(UIColor.govUK.strokes.listDivider))
-                        .padding(.leading, 70)
-                        .padding(.trailing, 20)
-                }
+                    .tag(TopicSegment.favorite)
+                Text(viewModel.allTopicsPickerTitle)
+                    .foregroundColor(
+                        Color(UIColor.govUK.text.primary)
+                    )
+                    .tag(TopicSegment.all)
             }
-        }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding([.horizontal, .top])
     }
 
-    var yourTopicsView: some View {
-        ForEach(Array(viewModel.topicsToBeDisplayed.enumerated()),
+    func topicsListViewFor(topics: [Topic]) -> some View {
+        ForEach(Array(topics.enumerated()),
                 id: \.offset
         ) { index, topic in
-            VStack {
+            VStack(spacing: 0) {
                 TopicListItemView(
                     viewModel: .init(
                         title: topic.title,
@@ -154,8 +80,7 @@ struct TopicsWidget: View {
                         iconName: topic.iconName
                     )
                 )
-                if viewModel.topicsToBeDisplayed.count > 1
-                    && index != viewModel.topicsToBeDisplayed.count - 1 {
+                if index < topics.count - 1 {
                     Divider()
                         .overlay(Color(UIColor.govUK.strokes.listDivider))
                         .padding(.leading, 70)
@@ -163,6 +88,11 @@ struct TopicsWidget: View {
                 }
             }
         }
+        .transition(
+            AnyTransition.move(
+                edge: .leading
+            )
+        )
     }
 
     var emptyStateView: some View {
@@ -208,8 +138,10 @@ struct TopicsWidget: View {
                             Color(UIColor.govUK.text.buttonSecondary)
                         )
                         .font(Font.govUK.subheadlineSemibold)
+                        .accessibilityLabel(viewModel.editButtonAccessibilityLabel)
                 }
             )
+            .opacity(viewModel.fetchTopicsError ? 0 : 1)
         }
     }
 }

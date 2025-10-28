@@ -23,6 +23,17 @@
         }
       }
     },
+    "editTopicsAccessibilityLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit your topics"
+          }
+        }
+      }
+    },
     "feedbackWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -133,17 +144,6 @@
         }
       }
     },
-    "topicsWidgetEditButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit your topics"
-          }
-        }
-      }
-    },
     "topicsWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -151,39 +151,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Topics"
-          }
-        }
-      }
-    },
-    "topicWidgetErrorDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Topics are not working at the moment. Try again later, or go to the GOV.UK website to find the page you're looking for."
-          }
-        }
-      }
-    },
-    "topicWidgetErrorLink" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to the GOV.UK website"
-          }
-        }
-      }
-    },
-    "topicWidgetErrorTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There’s a problem"
           }
         }
       }

@@ -303,18 +303,9 @@ class TopicDetailViewModel: TopicDetailViewModelInterface {
     }
 
     private var topicErrorViewModel: AppErrorViewModel {
-        AppErrorViewModel(
-            title: String.common.localized("genericErrorTitle"),
-            body: String.topics.localized("topicFetchErrorSubtitle"),
-            buttonTitle: String.common.localized("genericErrorButtonTitle"),
-            buttonAccessibilityLabel: String.common.localized(
-                "genericErrorButtonTitleAccessibilityLabel"
-            ),
-            isWebLink: true,
-            action: {
-                self.urlOpener.openIfPossible(Constants.API.govukBaseUrl)
-            }
-        )
+        .topicErrorWithAction { [weak self] in
+            self?.urlOpener.openIfPossible(Constants.API.govukBaseUrl)
+        }
     }
 }
 

@@ -15,7 +15,7 @@ public struct AppErrorView: View {
                 errorBody
                 actionButton
             }
-        .padding()
+            .padding(.vertical, 16)
     }
 
     private var warningImage: some View {
@@ -34,11 +34,10 @@ public struct AppErrorView: View {
     }
 
     private var errorBody: some View {
-        VStack {
-            Text(viewModel?.body ?? "")
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 16)
-        }
+        Text(viewModel?.body ?? "")
+            .multilineTextAlignment(.center)
+            .padding(.bottom, 16)
+            .padding(.horizontal, 20)
     }
 
     private var actionButton: some View {

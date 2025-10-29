@@ -19,6 +19,9 @@ struct TopicListItemView: View {
             Image(systemName: "chevron.right")
                 .foregroundColor(Color(uiColor: UIColor.govUK.text.iconTertiary))
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityLabel(viewModel.title)
         .font(Font.govUK.bodySemibold)
         .padding()
         .background(viewModel.backgroundColor)

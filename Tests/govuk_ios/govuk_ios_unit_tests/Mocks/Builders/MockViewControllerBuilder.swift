@@ -166,9 +166,12 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedSignOutConfirmationViewController ?? UIViewController()
     }
 
+    var _receivedSignInErrorError: AuthenticationError?
     var _receivedSignInErrorCompletion: (() -> Void)?
     var _stubbedSignInErrorViewController: UIViewController?
-    override func signInError(completion: @escaping () -> Void) -> UIViewController {
+    override func signInError(error: AuthenticationError,
+                              completion: @escaping () -> Void) -> UIViewController {
+        _receivedSignInErrorError = error
         _receivedSignInErrorCompletion = completion
         return _stubbedSignInErrorViewController ?? UIViewController()
 
@@ -252,7 +255,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _stubbedChatController: UIViewController?
     var _receivedChatOpenURLAction: ((URL) -> Void)?
-    var _receivedHandleChatError: ((ChatError) -> Void)?
+    var _receivedChatHandleError: ((ChatError) -> Void)?
     override func chat(
         analyticsService: AnalyticsServiceInterface,
         chatService: ChatServiceInterface,
@@ -260,7 +263,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         handleError: @escaping (ChatError) -> Void
     ) -> UIViewController {
         _receivedChatOpenURLAction = openURLAction
-        _receivedHandleChatError = handleError
+        _receivedChatHandleError = handleError
         return _stubbedChatController ?? UIViewController()
     }
 

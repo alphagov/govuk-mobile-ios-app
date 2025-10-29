@@ -25,13 +25,63 @@ class Configuration
     setting(:app, :bundle_identifier)
   end
 
+  def app_bundle_identifier_notification_service
+    "#{app_bundle_identifier}.notification-service"
+  end
+
+  def app_base_url
+    ENV['BASE_URL']
+  end
+
+  def app_assetcatalog_compiler_appicon_name
+    ENV['ASSETCATALOG_COMPILER_APPICON_NAME']
+  end
+
+  def app_authentication_base_url
+    ENV['AUTHENTICATION_BASE_URL']
+  end
+
+  def app_authentication_client_id
+    ENV['AUTHENTICATION_CLIENT_ID']
+  end
+
+  def app_chat_base_url
+    ENV['CHAT_BASE_URL']
+  end
+
+  def app_token_base_url
+    ENV['TOKEN_BASE_URL']
+  end
+
   def app_onesignal_app_id
     ENV['ONESIGNAL_APP_ID']
   end
 
+  def app_google_services_file
+    ENV['GOOGLE_SERVICES_FILE']
+  end
+
+  def app_additional_swift_flags
+    setting(:app, :additional_swift_flags)
+  end
+
   def app_args
     [
+      "BASE_URL=\"#{app_base_url}\"",
       "ONESIGNAL_APP_ID=\"#{app_onesignal_app_id}\"",
+      "ASSETCATALOG_COMPILER_APPICON_NAME=\"#{app_assetcatalog_compiler_appicon_name}\"",
+      "AUTHENTICATION_BASE_URL=\"#{app_authentication_base_url}\"",
+      "AUTHENTICATION_CLIENT_ID=\"#{app_authentication_client_id}\"",
+      "CHAT_BASE_URL=\"#{app_chat_base_url}\"",
+      "TOKEN_BASE_URL=\"#{app_token_base_url}\"",
+      "GOOGLE_SERVICES_FILE=\"#{app_google_services_file}\"",
+      "PRODUCT_BUNDLE_IDENTIFIER_APP=\"#{app_bundle_identifier}\"",
+      "PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE=\"#{app_bundle_identifier_notification_service}\"",
+      "PROFILE_SPECIFIER_APP=\"#{app_profile_specifiers[app_bundle_identifier]}\"",
+      "PROFILE_SPECIFIER_NOTIFICATION_SERVICE=\"#{app_profile_specifiers[app_bundle_identifier_notification_service]}\"",
+      "CODE_SIGN_ENTITLEMENTS_APP=\"#{app_entitlements[app_bundle_identifier]}\"",
+      "CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE=\"#{app_entitlements[app_bundle_identifier_notification_service]}\"",
+      "ADDITIONAL_SWIFT_FLAGS=\"#{app_additional_swift_flags.join(' ')}\"",
       '-allowProvisioningUpdates'
     ].join(' ')
   end
@@ -81,7 +131,7 @@ class Configuration
   def match_identifiers
     [
       app_bundle_identifier,
-      "#{app_bundle_identifier}.notification-service"
+      app_bundle_identifier_notification_service
     ]
   end
 
@@ -103,6 +153,10 @@ class Configuration
 
   def app_profile_specifiers
     setting(:app, :profile_specifiers)
+  end
+
+  def app_entitlements
+    setting(:app, :entitlements)
   end
 
   def setting(prefix, key)

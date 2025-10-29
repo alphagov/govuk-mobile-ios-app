@@ -20,8 +20,8 @@ struct ReturningUserServiceTests {
 
         await confirmation() { confirmation in
             if case let .success(isReturningUser) = result {
-                #expect(isReturningUser)
-                #expect(mockSecureStoreService._savedItems["persistentUserIdentifier"] != nil)
+                #expect(isReturningUser == false)
+                #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.persistentUserIdentifier.rawValue] != nil)
                 confirmation()
             }
         }
@@ -71,7 +71,7 @@ struct ReturningUserServiceTests {
                 #expect(!isReturningUser)
                 #expect(mockCoreDataDeletionService._deleteAllObjectsCalled)
                 let tokenIdentifier = await userIdentifier(idToken: Self.idToken)
-                #expect(mockSecureStoreService._savedItems["persistentUserIdentifier"] == tokenIdentifier)
+                #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.persistentUserIdentifier.rawValue] == tokenIdentifier)
                 confirmation()
             }
         }
@@ -122,7 +122,7 @@ struct ReturningUserServiceTests {
     }
 
     @Test
-    func process_missingStoredIdentifier_returnsFailure() async {
+    func process_missingStoredIdentifier_setsIsReturningUserFalse() async {
         let mockSecureStoreService = MockSecureStoreService()
         let mockCoreDataDeletionService = MockCoreDataDeletionService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
@@ -136,8 +136,9 @@ struct ReturningUserServiceTests {
         let result = await sut.process(idToken: Self.idToken)
 
         await confirmation() { confirmation in
-            if case let .failure(error) = result {
-                #expect(error == .missingIdentifierError)
+            if case let .success(isReturningUser) = result {
+                #expect(isReturningUser == false)
+                #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.persistentUserIdentifier.rawValue] != nil)
                 confirmation()
             }
         }

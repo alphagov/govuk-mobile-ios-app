@@ -3,7 +3,6 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
 
 @Suite
 struct HomeViewModelTests {
@@ -31,6 +30,11 @@ struct HomeViewModelTests {
             link: mockConfigService._stubbedUserFeedbackBannerLink
         )
 
+        let mockChatService = MockChatService()
+        mockChatService._stubbedIsEnabled = true
+        mockChatService._stubbedChatOptInAvailable = true
+        mockChatService.chatOptedIn = true
+
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: mockConfigService,
@@ -40,6 +44,7 @@ struct HomeViewModelTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
+<<<<<<< HEAD
             localAuthorityAction: { },
             editLocalAuthorityAction: { },
             feedbackAction: { },
@@ -47,6 +52,10 @@ struct HomeViewModelTests {
             recentActivityAction: { } ,
             openURLAction: {_ in } ,
             openAction: {_ in }
+=======
+            userDefaultService: MockUserDefaultsService(),
+            chatService: mockChatService
+>>>>>>> develop
         )
 
         let widgets = subject.widgets
@@ -74,6 +83,7 @@ struct HomeViewModelTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
+<<<<<<< HEAD
             localAuthorityAction: { },
             editLocalAuthorityAction: { },
             feedbackAction: { },
@@ -81,6 +91,10 @@ struct HomeViewModelTests {
             recentActivityAction: { } ,
             openURLAction: {_ in } ,
             openAction: {_ in }
+=======
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
+>>>>>>> develop
         )
         let widgets = subject.widgets
 

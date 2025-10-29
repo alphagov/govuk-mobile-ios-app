@@ -22,7 +22,7 @@ class AppCoordinator: BaseCoordinator {
 
     private func configureObservers() {
         authenticationService.didSignOutAction = { [weak self] reason in
-            guard reason == .userSignout else { return }
+            guard reason != .reauthFailure else { return }
             self?.startPeriAuthCoordinator()
         }
     }

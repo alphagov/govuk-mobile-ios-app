@@ -6,7 +6,6 @@ import CoreData
 import Factory
 import GOVKit
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor
@@ -37,8 +36,15 @@ struct ViewControllerBuilderTests {
             notificationService: MockNotificationService(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
+<<<<<<< HEAD
             topicsWidgetViewModel: viewModel,
             localAuthorityService: MockLocalAuthorityService()
+=======
+            topicWidgetViewModel: viewModel,
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
+>>>>>>> develop
         )
 
         let actions = ViewControllerBuilder.HomeActions(
@@ -218,6 +224,7 @@ struct ViewControllerBuilderTests {
     func signInError_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.signInError(
+            error: .genericError,
             completion: { }
         )
         let rootView =

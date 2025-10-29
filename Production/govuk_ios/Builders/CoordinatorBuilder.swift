@@ -68,7 +68,8 @@ class CoordinatorBuilder {
             searchService: container.searchService.resolve(),
             activityService: container.activityService.resolve(),
             localAuthorityService: container.localAuthorityService.resolve(),
-            userDefaultService: container.userDefaultsService.resolve()
+            userDefaultService: container.userDefaultsService.resolve(),
+            chatService: container.chatService.resolve()
         )
     }
 
@@ -104,7 +105,8 @@ class CoordinatorBuilder {
             ),
             analyticsService: container.analyticsService.resolve(),
             chatService: container.chatService.resolve(),
-            cancelOnboardingAction: cancelOnboardingAction
+            authenticationService: container.authenticationService(),
+            cancelOnboardingAction: cancelOnboardingAction,
         )
     }
 
@@ -313,7 +315,7 @@ class CoordinatorBuilder {
 
     func authentication(navigationController: UINavigationController,
                         completionAction: @escaping () -> Void,
-                        handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
+                        errorAction: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         AuthenticationCoordinator(
             navigationController: navigationController,
             coordinatorBuilder: self,
@@ -323,7 +325,7 @@ class CoordinatorBuilder {
             topicsService: container.topicsService.resolve(),
             chatService: container.chatService.resolve(),
             completionAction: completionAction,
-            handleError: handleError
+            errorAction: errorAction
         )
     }
 

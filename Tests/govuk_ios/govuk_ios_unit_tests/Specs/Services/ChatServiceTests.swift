@@ -440,7 +440,7 @@ final class ChatServiceTests {
 
     @Test
     func chatOptInAvailable_featureAvailable_returnsTrue() {
-        mockConfigService.features = [.chatOptIn]
+        mockConfigService.features = [.chatOptInV2]
         let sut = ChatService(
             serviceClient: mockChatServiceClient,
             chatRepository: mockChatRepository,

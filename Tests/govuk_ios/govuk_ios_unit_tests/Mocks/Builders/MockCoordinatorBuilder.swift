@@ -182,13 +182,13 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _receivedAuthenticationCompletion: (() -> Void)?
-    var _receivedAuthenticationHandleError: ((AuthenticationError) -> Void)?
+    var _receivedAuthenticationErrorAction: ((AuthenticationError) -> Void)?
     var _stubbedAuthenticationCoordinator: MockBaseCoordinator?
     override func authentication(navigationController: UINavigationController,
                                  completionAction: @escaping () -> Void,
-                                 handleError: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
+                                 errorAction: @escaping (AuthenticationError) -> Void) -> BaseCoordinator {
         _receivedAuthenticationCompletion = completionAction
-        _receivedAuthenticationHandleError = handleError
+        _receivedAuthenticationErrorAction = errorAction
         return _stubbedAuthenticationCoordinator ?? MockBaseCoordinator()
     }
 

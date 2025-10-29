@@ -3,7 +3,6 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
 
 @Suite
 @MainActor
@@ -33,7 +32,8 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
         subject.start()
 
@@ -61,7 +61,8 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
         subject.start()
 
@@ -95,7 +96,8 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
         subject.start()
 
@@ -129,7 +131,8 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
         subject.start()
 
@@ -148,6 +151,79 @@ struct HomeCoordinatorTests {
 
     @Test
     @MainActor
+<<<<<<< HEAD
+=======
+    func editTopicAction_startsCoordinatorAndTracksEvent() {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
+        let mockAnalyticsService = MockAnalyticsService()
+        let navigationController = UINavigationController()
+        let subject = HomeCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoodinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: mockAnalyticsService,
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
+            notificationService: MockNotificationService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
+        )
+        subject.start()
+
+        mockViewControllerBuilder._receivedTopicWidgetViewModel?.editAction()
+
+        let navigationEvent = mockAnalyticsService._trackedEvents.first
+
+        #expect(navigationEvent?.params?["text"] as? String == "EditTopics")
+        #expect(navigationEvent?.params?["type"] as? String == "Widget")
+        #expect(navigationEvent?.name == "Navigation")
+    }
+
+    @Test
+    @MainActor
+    func allTopicAction_startsCoordinatorAndTracksEvent() {
+        let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+        mockViewControllerBuilder._stubbedHomeViewController = UIViewController()
+        let mockAnalyticsService = MockAnalyticsService()
+        let navigationController = UINavigationController()
+        let subject = HomeCoordinator(
+            navigationController: navigationController,
+            coordinatorBuilder: mockCoodinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            deeplinkStore: DeeplinkDataStore(routes: [], root: UIViewController()),
+            analyticsService: mockAnalyticsService,
+            configService: MockAppConfigService(),
+            topicsService: MockTopicsService(),
+            notificationService: MockNotificationService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
+        )
+        subject.start()
+
+        mockViewControllerBuilder._receivedTopicWidgetViewModel?.allTopicsAction()
+
+        let navigationEvent = mockAnalyticsService._trackedEvents.first
+
+        #expect(navigationEvent?.params?["text"] as? String == "See all topics")
+        #expect(navigationEvent?.params?["type"] as? String == "Widget")
+        #expect(navigationEvent?.name == "Navigation")
+    }
+
+    @Test
+    @MainActor
+>>>>>>> develop
     func didReselectTab_resetsToDefaultState_whenOnHomeScreen() {
         let mockCoodinatorBuilder = MockCoordinatorBuilder.mock
         let mockViewControllerBuilder = MockViewControllerBuilder()
@@ -169,7 +245,8 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
 
         subject.start()
@@ -201,7 +278,8 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
 
         subject.start()
@@ -234,7 +312,8 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService()
+            userDefaultService: MockUserDefaultsService(),
+            chatService: MockChatService()
         )
 
         let mockSafariCoordinator = MockBaseCoordinator()

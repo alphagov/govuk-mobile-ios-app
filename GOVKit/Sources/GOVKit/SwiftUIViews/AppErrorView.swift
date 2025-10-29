@@ -22,7 +22,7 @@ public struct AppErrorView: View {
         Image(systemName: "exclamationmark.circle")
             .resizable()
             .frame(width: 31, height: 31)
-            .foregroundColor(Color(uiColor: .govUK.text.iconTertiary))
+            .foregroundColor(Color(uiColor: .govUK.text.trailingIcon))
             .fontWeight(.light)
             .accessibilityHidden(true)
     }

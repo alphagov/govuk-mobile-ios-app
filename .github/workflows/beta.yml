@@ -24,7 +24,7 @@ jobs:
     name: Deploy
     needs: sonar-scan
     runs-on: macos-15
-    environment: Beta
+    environment: Production
 
     steps:
       - name: Checkout
@@ -56,7 +56,18 @@ jobs:
       - name: Deploy
         run: bundle exec fastlane beta
         env:
+          BASE_URL: ${{ vars.BASE_URL }}
           ONESIGNAL_APP_ID: ${{ vars.ONESIGNAL_APP_ID }}
+          ASSETCATALOG_COMPILER_APPICON_NAME: ${{ vars.ASSETCATALOG_COMPILER_APPICON_NAME }}
+          AUTHENTICATION_BASE_URL: ${{ vars.AUTHENTICATION_BASE_URL }}
+          AUTHENTICATION_CLIENT_ID: ${{ vars.AUTHENTICATION_CLIENT_ID }}
+          CHAT_BASE_URL: ${{ vars.CHAT_BASE_URL }}
+          TOKEN_BASE_URL: ${{ vars.TOKEN_BASE_URL }}
+          GOOGLE_SERVICES_FILE: ${{ vars.GOOGLE_SERVICES_FILE }}
+          PROFILE_SPECIFIER_APP: ${{ vars.PROFILE_SPECIFIER_APP }}
+          PROFILE_SPECIFIER_NOTIFICATION_SERVICE: ${{ vars.PROFILE_SPECIFIER_NOTIFICATION_SERVICE }}
+          CODE_SIGN_ENTITLEMENTS_APP: ${{ vars.CODE_SIGN_ENTITLEMENTS_APP }}
+          CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE: ${{ vars.CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE }}
 
       - name: Save Artifacts
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # pin@v4.3.3

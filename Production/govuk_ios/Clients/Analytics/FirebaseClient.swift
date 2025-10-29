@@ -1,23 +1,23 @@
 import Foundation
 
-import Firebase
 import GOVKit
+import Firebase
+import FirebaseCore
+import FirebaseAnalytics
 
 struct FirebaseClient: AnalyticsClient {
     private let firebaseApp: FirebaseAppInterface.Type
     private let firebaseAnalytics: FirebaseAnalyticsInterface.Type
-    private let appAttestService: AppAttestServiceInterface
 
-    init(firebaseApp: FirebaseAppInterface.Type,
-         firebaseAnalytics: FirebaseAnalyticsInterface.Type,
-         appAttestService: AppAttestServiceInterface) {
+    init(
+        firebaseApp: FirebaseAppInterface.Type,
+        firebaseAnalytics: FirebaseAnalyticsInterface.Type,
+    ) {
         self.firebaseApp = firebaseApp
         self.firebaseAnalytics = firebaseAnalytics
-        self.appAttestService = appAttestService
     }
 
     func launch() {
-        appAttestService.configure()
         firebaseApp.configure()
     }
 

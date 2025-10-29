@@ -12,12 +12,17 @@ struct AuthenticationServiceClientTests {
         let appAuthSessionWrapper = MockAuthenticationSessionWrapper()
         let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
+        let mockAttestService = MockAppAttestService()
+        mockAttestService._stubbedAppCheckToken = .init(
+            token: "test123",
+            expirationDate: .init(timeIntervalSinceNow: 1000)
+        )
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
-            appAttestService: MockAppAttestService()
+            appAttestService: mockAttestService,
         )
 
         await confirmation() { confirmation in
@@ -38,18 +43,23 @@ struct AuthenticationServiceClientTests {
         let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
         appAuthSessionWrapper._mockAuthenticationSession._shouldReturnError = true
+        let mockAttestService = MockAppAttestService()
+        mockAttestService._stubbedAppCheckToken = .init(
+            token: "test123",
+            expirationDate: .init(timeIntervalSinceNow: 1000)
+        )
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
-            appAttestService: MockAppAttestService()
+            appAttestService: mockAttestService,
         )
 
         await confirmation() { confirmation in
             let result = await sut.performAuthenticationFlow(window: UIApplication.shared.window!)
-            if case .failure(let error) = result {
-                #expect(error == .loginFlow(.userCancelled))
+            if case .failure(.loginFlow(let error)) = result {
+                #expect(error.reason == .userCancelled)
                 confirmation()
             }
         }
@@ -60,12 +70,17 @@ struct AuthenticationServiceClientTests {
         let appAuthSessionWrapper = await MockAuthenticationSessionWrapper()
         let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
+        let mockAttestService = MockAppAttestService()
+        mockAttestService._stubbedAppCheckToken = .init(
+            token: "test123",
+            expirationDate: .init(timeIntervalSinceNow: 1000)
+        )
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
-            appAttestService: MockAppAttestService()
+            appAttestService: mockAttestService,
         )
         let accessToken = UUID().uuidString
         let idToken = UUID().uuidString
@@ -87,12 +102,17 @@ struct AuthenticationServiceClientTests {
         let appAuthSessionWrapper = await MockAuthenticationSessionWrapper()
         let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
+        let mockAttestService = MockAppAttestService()
+        mockAttestService._stubbedAppCheckToken = .init(
+            token: "test123",
+            expirationDate: .init(timeIntervalSinceNow: 1000)
+        )
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
-            appAttestService: MockAppAttestService()
+            appAttestService: mockAttestService,
         )
         mockOidAuthService._stubbedAccessToken = nil
 
@@ -110,12 +130,17 @@ struct AuthenticationServiceClientTests {
         let appAuthSessionWrapper = await MockAuthenticationSessionWrapper()
         let mockOidAuthService = MockOIDAuthService()
         let mockAppEnvironmentService = MockAppEnvironmentService()
+        let mockAttestService = MockAppAttestService()
+        mockAttestService._stubbedAppCheckToken = .init(
+            token: "test123",
+            expirationDate: .init(timeIntervalSinceNow: 1000)
+        )
         let sut = AuthenticationServiceClient(
             appEnvironmentService: mockAppEnvironmentService,
             appAuthSession: appAuthSessionWrapper,
             oidAuthService: mockOidAuthService,
             revokeTokenServiceClient: MockAPIServiceClient(),
-            appAttestService: MockAppAttestService()
+            appAttestService: mockAttestService,
         )
         mockOidAuthService._shouldReturnError = true
 

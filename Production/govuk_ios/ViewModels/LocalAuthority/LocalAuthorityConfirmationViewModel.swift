@@ -29,7 +29,7 @@ class LocalAuthorityConfirmationViewModel {
         "localAuthorityConfirmationTwoTierDescriptionTwo"
     )
     let twoTierSuccessDescriptionThree: String = String.localAuthority.localized(
-        "localAuthorityConfirmationTwoTierDescritionThree"
+        "localAuthorityConfirmationTwoTierDescriptionThree"
     )
     init(analyticsService: AnalyticsServiceInterface,
          localAuthorityItem: Authority,

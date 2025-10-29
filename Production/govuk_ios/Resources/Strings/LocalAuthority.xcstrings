@@ -114,6 +114,17 @@
         }
       }
     },
+    "localAuthorityConfirmationTwoTierDescriptionThree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can now access your local councils’ websites from the bottom of the app home page."
+          }
+        }
+      }
+    },
     "localAuthorityConfirmationTwoTierDescriptionTwo" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -121,17 +132,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your local councils are:"
-          }
-        }
-      }
-    },
-    "localAuthorityConfirmationTwoTierDescritionThree" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can now access your local councils’ websites from the bottom of the app home page."
           }
         }
       }
@@ -340,7 +340,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a link to your local councils website"
+            "value" : "Add a link to your local council’s website"
           }
         }
       }

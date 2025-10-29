@@ -29,8 +29,12 @@ struct StoredLocalAuthorityWidgetView: View {
                 .accessibilityLabel(viewModel.editButtonAltText)
             }
             .padding(.bottom, 8)
-            if viewModel.localAuthorities.count == 1 {
-                StoredLocalAuthorityCardView(model: viewModel.cardModels()[0])
+            if viewModel.localAuthorities.count == 1,
+               let item = viewModel.cardModels().first {
+                StoredLocalAuthorityCardView(model: item)
+                    .onTapGesture {
+                        viewModel.open(item: item)
+                    }
             } else {
                 HStack {
                     Text(viewModel.twoTierAuthorityDescription)

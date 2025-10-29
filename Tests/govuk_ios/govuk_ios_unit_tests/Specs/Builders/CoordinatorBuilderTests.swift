@@ -3,7 +3,6 @@ import Testing
 import Factory
 import UIKit
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

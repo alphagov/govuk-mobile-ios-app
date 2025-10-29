@@ -355,8 +355,6 @@
 		D0D2C6932E13F87300620DC2 /* DynamicLibraryWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */; };
 		D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2C6942E13FBE000620DC2 /* JailbreakCoordinator.swift */; };
 		D0D655E82D26A79000571841 /* UIApplication+URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */; };
-		D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D661A22D285D1B00571841 /* GOVKitTestUtilities */; };
-		D0D9B0942D2C240E0051EDDD /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */; };
 		D0D9B87B2D2D547D0051EDDD /* StringValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E996D2D2D11AAC7007F21A8 /* StringValidator.swift */; };
 		D0D9CB932D3024C00051EDDD /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9CB912D3024C00051EDDD /* SearchResult.swift */; };
 		D0D9CB942D3024C00051EDDD /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9CB902D3024C00051EDDD /* SearchItem.swift */; };
@@ -932,6 +930,7 @@
 				govuk_ios/govuk_ios_unit_tests/Mocks/Services/MockAuthenticationService.swift,
 				govuk_ios/govuk_ios_unit_tests/Mocks/Services/MockLocalAuthenticationService.swift,
 				govuk_ios/govuk_ios_unit_tests/Mocks/Services/MockUserDefaultsService.swift,
+				"govuk_ios/shared/Arrangers/Foundation/Date+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Foundation/URL+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Model/Chat+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Model/RecentActivity/ActivityItem+Arrangers.swift",
@@ -945,8 +944,11 @@
 				govuk_ios/shared/Mocks/MockAppVersionProvider.swift,
 				govuk_ios/shared/Mocks/MockDeviceInformationProvider.swift,
 				govuk_ios/shared/Mocks/MockDisplayableTopic.swift,
+				govuk_ios/shared/Mocks/MockNotificationCenter.swift,
 				govuk_ios/shared/Mocks/MockTimer.swift,
+				govuk_ios/shared/Mocks/MockURLOpener.swift,
 				govuk_ios/shared/Mocks/Services/MockAccessibilityAnnouncerService.swift,
+				govuk_ios/shared/Mocks/Services/MockAnalyticsService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppConfigService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppLaunchService.swift,
 				govuk_ios/shared/Mocks/Services/MockChatService.swift,
@@ -974,7 +976,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */,
-				D0D9B0942D2C240E0051EDDD /* GOVKitTestUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,7 +1003,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2041,7 +2041,6 @@
 			name = govuk_ios_snapshot_tests;
 			packageProductDependencies = (
 				5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */,
-				D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */,
 			);
 			productName = govuk_ios_snapshot_tests;
 			productReference = 5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */;
@@ -2102,7 +2101,6 @@
 			);
 			name = govuk_ios_unit_tests;
 			packageProductDependencies = (
-				D0D661A22D285D1B00571841 /* GOVKitTestUtilities */,
 			);
 			productName = GovUKTests;
 			productReference = 5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */;
@@ -2897,6 +2895,7 @@
 			buildSettings = {
 				ADDITIONAL_SWIFT_FLAGS = "-DSTAGING";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "https://app.publishing.service.gov.uk";
 				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2938,6 +2937,7 @@
 			buildSettings = {
 				ADDITIONAL_SWIFT_FLAGS = "-DSTAGING";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "https://app.publishing.service.gov.uk";
 				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -3291,14 +3291,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */;
 			productName = JWTKit;
-		};
-		D0D661A22D285D1B00571841 /* GOVKitTestUtilities */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GOVKitTestUtilities;
-		};
-		D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GOVKitTestUtilities;
 		};
 		D0EBFBCD2D109B51000A3151 /* GOVKit */ = {
 			isa = XCSwiftPackageProductDependency;

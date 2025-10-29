@@ -3,7 +3,6 @@ import Testing
 
 import Factory
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
@@ -30,6 +29,7 @@ struct Container_ServicesTests {
     @Test
     func authenticationService_returnsExpectedValue() {
         let container = Container()
+        container.authenticationService.reset()
         container.authenticationServiceClient.register { MockAuthenticationServiceClient() }
         container.authenticatedSecureStoreService.register { MockSecureStoreService() }
         container.returningUserService.register { MockReturningUserService() }

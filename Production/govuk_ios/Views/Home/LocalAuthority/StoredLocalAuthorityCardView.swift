@@ -16,14 +16,13 @@ struct StoredLocalAuthorityCardView: View {
                     .frame(maxHeight: .infinity)
                     .font(.govUK.title2Bold)
                     .foregroundColor(Color(uiColor: UIColor.govUK.text.link))
+                    .accessibilityAddTraits(.isLink)
+                    .accessibilityHint(String.common.localized("openWebLinkHint"))
             }
             .padding()
             .fixedSize(horizontal: false, vertical: true)
             Spacer()
         }
-        .accessibilityLabel(model.name)
-        .accessibilityAddTraits(.isLink)
-        .accessibilityHint(String.common.localized("openWebLinkHint"))
         .background {
             Color(uiColor: UIColor.govUK.fills.surfaceList)
         }

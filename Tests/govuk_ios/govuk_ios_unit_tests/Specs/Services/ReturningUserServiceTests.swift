@@ -21,7 +21,7 @@ struct ReturningUserServiceTests {
         await confirmation() { confirmation in
             if case let .success(isReturningUser) = result {
                 #expect(isReturningUser == false)
-                #expect(mockSecureStoreService._savedItems["persistentUserIdentifier"] != nil)
+                #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.persistentUserIdentifier.rawValue] != nil)
                 confirmation()
             }
         }
@@ -71,7 +71,7 @@ struct ReturningUserServiceTests {
                 #expect(!isReturningUser)
                 #expect(mockCoreDataDeletionService._deleteAllObjectsCalled)
                 let tokenIdentifier = await userIdentifier(idToken: Self.idToken)
-                #expect(mockSecureStoreService._savedItems["persistentUserIdentifier"] == tokenIdentifier)
+                #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.persistentUserIdentifier.rawValue] == tokenIdentifier)
                 confirmation()
             }
         }
@@ -138,7 +138,7 @@ struct ReturningUserServiceTests {
         await confirmation() { confirmation in
             if case let .success(isReturningUser) = result {
                 #expect(isReturningUser == false)
-                #expect(mockSecureStoreService._savedItems["persistentUserIdentifier"] != nil)
+                #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.persistentUserIdentifier.rawValue] != nil)
                 confirmation()
             }
         }

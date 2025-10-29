@@ -201,8 +201,7 @@ class HomeCoordinator: TabItemCoordinator {
         TopicsWidgetViewModel(
             topicsService: topicsService,
             analyticsService: analyticsService,
-            topicAction: startTopicDetailCoordinator,
-            allTopicsAction: startAllTopicsCoordinator
+            topicAction: startTopicDetailCoordinator
         )
     }()
 

@@ -29,8 +29,7 @@ final class HomepageWidgetViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: {_ in},
-            allTopicsAction: {}
+            topicAction: {_ in}
         )
         let view = HomepageWidget(content: TopicsWidget(viewModel: viewModel))
         return HostingViewController(rootView: view)

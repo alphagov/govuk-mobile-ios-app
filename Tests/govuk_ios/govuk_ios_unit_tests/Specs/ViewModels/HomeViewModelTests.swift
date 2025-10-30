@@ -44,7 +44,6 @@ struct HomeViewModelTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-<<<<<<< HEAD
             localAuthorityAction: { },
             editLocalAuthorityAction: { },
             feedbackAction: { },
@@ -52,10 +51,6 @@ struct HomeViewModelTests {
             recentActivityAction: { } ,
             openURLAction: {_ in } ,
             openAction: {_ in }
-=======
-            userDefaultService: MockUserDefaultsService(),
-            chatService: mockChatService
->>>>>>> develop
         )
 
         let widgets = subject.widgets
@@ -83,7 +78,6 @@ struct HomeViewModelTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-<<<<<<< HEAD
             localAuthorityAction: { },
             editLocalAuthorityAction: { },
             feedbackAction: { },
@@ -91,10 +85,6 @@ struct HomeViewModelTests {
             recentActivityAction: { } ,
             openURLAction: {_ in } ,
             openAction: {_ in }
-=======
-            userDefaultService: MockUserDefaultsService(),
-            chatService: MockChatService()
->>>>>>> develop
         )
         let widgets = subject.widgets
 

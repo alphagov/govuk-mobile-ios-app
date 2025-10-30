@@ -4,7 +4,6 @@ import Combine
 import CoreData
 @testable import GOVKit
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 struct RecentActivtyHomepageWidgetViewModelTests {
 

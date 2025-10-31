@@ -175,14 +175,14 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     }
 
     var _receivedSignInErrorError: AuthenticationError?
-    var _receivedSignInErrorCompletion: (() -> Void)?
+    var _receivedSignInErrorRetryAction: (() -> Void)?
     var _stubbedSignInErrorViewController: UIViewController?
     override func signInError(error: AuthenticationError,
-                              completion: @escaping () -> Void) -> UIViewController {
+                              feedbackAction: @escaping (AuthenticationError) -> Void,
+                              retryAction: @escaping () -> Void) -> UIViewController {
         _receivedSignInErrorError = error
-        _receivedSignInErrorCompletion = completion
+        _receivedSignInErrorRetryAction = retryAction
         return _stubbedSignInErrorViewController ?? UIViewController()
-
     }
 
     var _receivedStepByStepContent: [TopicDetailResponse.Content]?

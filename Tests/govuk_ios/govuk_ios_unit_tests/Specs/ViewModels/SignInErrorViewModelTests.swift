@@ -6,19 +6,32 @@ import Testing
 struct SignInErrorViewModelTests {
 
     @Test
-    func signInRetryButton_callsCompletion() {
-        var didCallCompletion = false
-
-        let sut = SignInErrorViewModel(
-            error: .genericError,
-            completion: {
-                didCallCompletion = true
-            }
-        )
-
-        sut.primaryButtonViewModel.action()
-
-        #expect(didCallCompletion)
+    func signInRetryButton_noneGeneric_callsCompletion() async {
+        await confirmation() { confirmation in
+            let sut = SignInErrorViewModel(
+                error: .attestation(.tokenGeneration),
+                feedbackAction: { _ in },
+                retryAction: {
+                    #expect(true)
+                    confirmation()
+                }
+            )
+            sut.primaryButtonViewModel.action()
+        }
     }
 
+    @Test
+    func signInRetryButton_generic_callsCompletion() async {
+        await confirmation() { confirmation in
+            let sut = SignInErrorViewModel(
+                error: .genericError,
+                feedbackAction: { error in
+                    #expect(error == .genericError)
+                    confirmation()
+                },
+                retryAction: { }
+            )
+            sut.primaryButtonViewModel.action()
+        }
+    }
 }

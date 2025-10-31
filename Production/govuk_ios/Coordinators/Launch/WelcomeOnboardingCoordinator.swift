@@ -10,6 +10,8 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private var pendingAuthenticationCoordinator: BaseCoordinator?
+    private let deviceInformationProvider: DeviceInformationProviderInterface
+    private let versionProvider: AppVersionProvider
     private let completionAction: () -> Void
 
     private lazy var welcomeOnboardingViewModel: WelcomeOnboardingViewModel = {
@@ -26,12 +28,16 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          analyticsService: AnalyticsServiceInterface,
+         deviceInformationProvider: DeviceInformationProviderInterface,
+         versionProvider: AppVersionProvider,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
+        self.deviceInformationProvider = deviceInformationProvider
+        self.versionProvider = versionProvider
         self.completionAction = completionAction
         super.init(navigationController: navigationController)
     }
@@ -77,7 +83,11 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private func setSignInError(_ error: AuthenticationError) {
         let viewController = viewControllerBuilder.signInError(
             error: error,
-            completion: { [weak self] in
+            feedbackAction: { [weak self] error in
+                self?.openFeedback(error: error)
+                self?.setWelcomeOnboardingViewController(false)
+            },
+            retryAction: { [weak self] in
                 self?.setWelcomeOnboardingViewController(false)
             }
         )
@@ -86,5 +96,16 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     private var shouldSkipOnboarding: Bool {
         authenticationService.isSignedIn
+    }
+
+    private func openFeedback(error: AuthenticationError) {
+        let url = self.deviceInformationProvider
+            .helpAndFeedbackURL(versionProvider: self.versionProvider)
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url,
+            fullScreen: false
+        )
+        start(coordinator)
     }
 }

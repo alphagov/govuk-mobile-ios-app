@@ -19,6 +19,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: MockViewControllerBuilder(),
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
         sut.start(url: nil)
@@ -39,6 +41,8 @@ class WelcomeOnboardingCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 viewControllerBuilder: MockViewControllerBuilder(),
                 analyticsService: MockAnalyticsService(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                versionProvider: MockAppVersionProvider(),
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -67,6 +71,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
@@ -98,6 +104,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: mockAnalyticsService,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
@@ -129,6 +137,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
@@ -158,13 +168,15 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
         sut.start(url: nil)
 
         mockCoordinatorBuilder._receivedAuthenticationErrorAction?(.loginFlow(.init(reason: .authorizationAccessDenied)))
-        mockViewControllerBuilder._receivedSignInErrorCompletion?()
+        mockViewControllerBuilder._receivedSignInErrorRetryAction?()
 
         #expect(mockNavigationController._setViewControllers?.first == stubbedWelcomeOnboardingViewController)
     }

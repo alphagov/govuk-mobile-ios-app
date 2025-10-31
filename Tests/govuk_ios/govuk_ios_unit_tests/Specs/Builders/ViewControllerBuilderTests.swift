@@ -235,7 +235,8 @@ struct ViewControllerBuilderTests {
         let subject = ViewControllerBuilder()
         let result = subject.signInError(
             error: .genericError,
-            completion: { }
+            feedbackAction: { _ in },
+            retryAction: { }
         )
         let rootView =
         (result as? HostingViewController<InfoView<SignInErrorViewModel>>)?.rootView

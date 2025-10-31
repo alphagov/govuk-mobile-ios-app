@@ -19,7 +19,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     private let appAuthSession: AppAuthSessionWrapperInterface
     private let appEnvironmentService: AppEnvironmentServiceInterface
     private let oidAuthService: OIDAuthorizationServiceWrapperInterface
-    private let revokeTokenService: APIServiceClientInterface
+    private let revokeTokenServiceClient: APIServiceClientInterface
     private let appAttestService: AppAttestServiceInterface
 
     init(appEnvironmentService: AppEnvironmentServiceInterface,
@@ -30,7 +30,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         self.appEnvironmentService = appEnvironmentService
         self.appAuthSession = appAuthSession
         self.oidAuthService = oidAuthService
-        self.revokeTokenService = revokeTokenServiceClient
+        self.revokeTokenServiceClient = revokeTokenServiceClient
         self.appAttestService = appAttestService
     }
 
@@ -41,7 +41,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
                 configuration: loginSessionConfig()
             )
             return .success(tokenResponse)
-        } catch let error as LoginError {
+        } catch let error as LoginErrorV2 {
             return .failure(.loginFlow(error))
         } catch {
             return .failure(.genericError)
@@ -49,8 +49,8 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 
     func performTokenRefresh(refreshToken: String) async -> TokenRefreshResult {
-        let request = await tokenRequest(refreshToken: refreshToken)
         do {
+            let request = try await tokenRequest(refreshToken: refreshToken)
             return try await withCheckedThrowingContinuation { continuation in
                 oidAuthService.perform(
                     request
@@ -87,18 +87,21 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
             return
         }
         let request = GOVRequest.revoke(
-            refreshToken,
+            token: refreshToken,
             clientId: appEnvironmentService.authenticationClientId
         )
-        revokeTokenService.send(request: request) { result in
-            if case .success = result {
-                completion?()
+        revokeTokenServiceClient.send(
+            request: request,
+            completion: { result in
+                if case .success = result {
+                    completion?()
+                }
             }
-        }
+        )
     }
 
-    private func loginSessionConfig() async -> LoginSessionConfiguration {
-        let token = (try? await appAttestService.token(forcingRefresh: false).token) ?? ""
+    private func loginSessionConfig() async throws -> LoginSessionConfiguration {
+        let token = try await appAttestService.token().token
 
         return await LoginSessionConfiguration(
             authorizationEndpoint: appEnvironmentService.authenticationAuthorizeURL,
@@ -114,13 +117,13 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         )
     }
 
-    private func tokenRequest(refreshToken: String) async -> OIDTokenRequest {
+    private func tokenRequest(refreshToken: String) async throws -> OIDTokenRequest {
         let oidServiceConfig = OIDServiceConfiguration(
             authorizationEndpoint: appEnvironmentService.authenticationAuthorizeURL,
             tokenEndpoint: appEnvironmentService.authenticationTokenURL
         )
 
-        let token = (try? await appAttestService.token(forcingRefresh: false).token) ?? ""
+        let token = try await appAttestService.token().token
 
         return OIDTokenRequest(
             configuration: oidServiceConfig,
@@ -147,8 +150,9 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 }
 
-enum AuthenticationError: Error, Equatable {
-    case loginFlow(LoginError)
+enum AuthenticationError: Error,
+                          Equatable {
+    case loginFlow(LoginErrorV2)
     case returningUserService(ReturningUserServiceError)
     case genericError
 }

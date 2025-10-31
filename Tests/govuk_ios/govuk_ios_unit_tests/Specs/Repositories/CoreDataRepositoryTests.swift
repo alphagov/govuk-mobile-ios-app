@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 import Testing
 
-@testable import GOVKitTestUtilities
+
 @testable import govuk_ios
 
 @Suite

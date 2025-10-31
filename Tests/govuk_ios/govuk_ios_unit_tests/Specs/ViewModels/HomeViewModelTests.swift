@@ -3,7 +3,6 @@ import UIKit
 import Testing
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
 
 @Suite
 struct HomeViewModelTests {
@@ -30,6 +29,11 @@ struct HomeViewModelTests {
             body: "test",
             link: mockConfigService._stubbedUserFeedbackBannerLink
         )
+
+        let mockChatService = MockChatService()
+        mockChatService._stubbedIsEnabled = true
+        mockChatService._stubbedChatOptInAvailable = true
+        mockChatService.chatOptedIn = true
 
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),

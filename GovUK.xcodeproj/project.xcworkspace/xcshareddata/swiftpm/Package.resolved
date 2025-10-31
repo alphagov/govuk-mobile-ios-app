@@ -1,5 +1,5 @@
 {
-  "originHash" : "82f65e5bd63da663f1a352fd1a5c2261768cc1ce0559e1c42eb48e666f938e29",
+  "originHash" : "2848ae3e33ffb0ede7841944a36e934f0a18a123164155730d0a27f17fa687a9",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -168,8 +168,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/govuk-one-login/mobile-ios-authentication",
       "state" : {
-        "revision" : "deb92df19f1ac9640a03ef4bf0a9121847be357e",
-        "version" : "2.2.2"
+        "revision" : "f68210cfad0683bb8333993dda7f520c6dbe1043",
+        "version" : "2.3.1"
       }
     },
     {

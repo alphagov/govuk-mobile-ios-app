@@ -12,8 +12,8 @@ class ReturningUserService: ReturningUserServiceInterface {
     private let coreDataDeletionService: CoreDataDeletionServiceInterface
     private let localAuthenticationService: LocalAuthenticationServiceInterface
 
-    private var storedpersistentUserIdentifier: String? {
-        try? openSecureStoreService.readItem(itemName: "persistentUserIdentifier")
+    private var storedPersistentUserIdentifier: String? {
+        openSecureStoreService.getUserIdentifier()
     }
 
     init(openSecureStoreService: SecureStorable,
@@ -30,26 +30,24 @@ class ReturningUserService: ReturningUserServiceInterface {
             return .failure(.missingIdentifierError)
         }
 
-        if localAuthenticationService.authenticationOnboardingFlowSeen {
-            guard let storedIdentifier = storedpersistentUserIdentifier
-            else {
-                return .failure(.missingIdentifierError)
-            }
+        if localAuthenticationService.authenticationOnboardingFlowSeen,
+           let storedIdentifier = storedPersistentUserIdentifier {
             return await handleUserIdentifiers(
                 currentIdentifier: currentIdentifier,
                 storedIdentifier: storedIdentifier
             )
         } else {
-            return saveIdentifier(currentIdentifier: currentIdentifier, isReturningUser: true)
+            return saveIdentifier(
+                currentIdentifier: currentIdentifier,
+                isReturningUser: false
+            )
         }
     }
 
     private func currentPersistentUserIdentifier(idToken: String?) async -> String? {
         guard let idToken = idToken,
               let payload = try? await JWTExtractor().extract(jwt: idToken)
-        else {
-            return nil
-        }
+        else { return nil }
         return payload.sub
     }
 
@@ -80,19 +78,10 @@ class ReturningUserService: ReturningUserServiceInterface {
     private func saveIdentifier(currentIdentifier: String,
                                 isReturningUser: Bool) -> ReturningUserResult {
         do {
-            try openSecureStoreService.saveItem(
-                item: currentIdentifier,
-                itemName: "persistentUserIdentifier"
-            )
+            try openSecureStoreService.saveUserIdentifier(currentIdentifier)
             return .success(isReturningUser)
         } catch {
             return .failure(.saveIdentifierError)
         }
     }
-}
-
-enum ReturningUserServiceError: Error {
-    case missingIdentifierError
-    case coreDataDeletionError
-    case saveIdentifierError
 }

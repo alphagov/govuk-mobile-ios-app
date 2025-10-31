@@ -3,7 +3,6 @@ import Combine
 import Foundation
 import Factory
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

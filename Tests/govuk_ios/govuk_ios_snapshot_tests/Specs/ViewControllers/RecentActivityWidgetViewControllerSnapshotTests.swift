@@ -5,7 +5,6 @@ import GOVKit
 import CoreData
 
 @testable import govuk_ios
-@testable import GOVKitTestUtilities
 
 @MainActor
 final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {

@@ -151,6 +151,7 @@
 		5D0BD4592C9B1BBA00220625 /* SearchServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */; };
 		5D0BD45B2C9B206F00220625 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */; };
 		5D0CFAA72C33E72C00B3DEFD /* DeeplinkDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */; };
+		5D14B1FE2EB0BA65003C151F /* SecureStoreable+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14B1FD2EB0BA65003C151F /* SecureStoreable+Convenience.swift */; };
 		5D15A8E82C6A47770050C780 /* GOVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D15A8E72C6A47770050C780 /* GOVRequest.swift */; };
 		5D18E83E2CCFB68900F20419 /* Container+APIClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */; };
 		5D3123862C85AEE20088B931 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3123852C85AEE20088B931 /* Container+Repositories.swift */; };
@@ -163,6 +164,7 @@
 		5D41DB7C2C09BF340011E691 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5D41DB7B2C09BF340011E691 /* Settings.bundle */; };
 		5D49D4EA2DD3D2940071826B /* NotificationsOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D49D4E82DD3D2940071826B /* NotificationsOnboardingView.swift */; };
 		5D49D4ED2DD479410071826B /* URLOpener+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D49D4EC2DD479410071826B /* URLOpener+Extensions.swift */; };
+		5D4AEA032EB27A8C0004F6F0 /* TopicListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4AEA022EB27A8B0004F6F0 /* TopicListItemViewModel.swift */; };
 		5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */; };
 		5D4B9D3F2C074227005F126A /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5D4F97EB2BFF7725002CBDDE /* CoordinatorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */; };
@@ -235,6 +237,8 @@
 		5DCAFA752D4004E700C3F284 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCAFA742D4004E700C3F284 /* NotificationService.swift */; };
 		5DCAFA782D40088600C3F284 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 5DCAFA772D40088600C3F284 /* OneSignalExtension */; };
 		5DCAFA7A2D40088600C3F284 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 5DCAFA792D40088600C3F284 /* OneSignalFramework */; };
+		5DCCCBB92EA0DC300097430C /* LoginErrorV2+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCCBB82EA0DC300097430C /* LoginErrorV2+Extensions.swift */; };
+		5DCCCBBE2EA0F5690097430C /* ReturningUserServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCCBBC2EA0F5690097430C /* ReturningUserServiceError.swift */; };
 		5DD09EC82C9ADB8500494550 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD09EC72C9ADB8500494550 /* SearchService.swift */; };
 		5DD4C7972D9547D600459FB5 /* AppEvent+RecentActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4C7962D9547D600459FB5 /* AppEvent+RecentActivity.swift */; };
 		5DD4CB082D95483100459FB5 /* ActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4CB022D95483100459FB5 /* ActivityItem.swift */; };
@@ -354,12 +358,9 @@
 		D0B929F62EA63C0E001E6FDC /* ListCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B929F52EA63C0E001E6FDC /* ListCardViewModel.swift */; };
 		D0B985192EB11818001E6FDC /* AppErrorViewModel+Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B985182EB11808001E6FDC /* AppErrorViewModel+Topic.swift */; };
 		D0C1C1A22E9807C400651F1B /* TopicListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1C1A12E9807C400651F1B /* TopicListItemView.swift */; };
-		D0C1F1E42CA440F200DD3D61 /* TopicListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C1F1E32CA440F200DD3D61 /* TopicListItemViewModel.swift */; };
 		D0D2C6932E13F87300620DC2 /* DynamicLibraryWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */; };
 		D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D2C6942E13FBE000620DC2 /* JailbreakCoordinator.swift */; };
 		D0D655E82D26A79000571841 /* UIApplication+URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */; };
-		D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D661A22D285D1B00571841 /* GOVKitTestUtilities */; };
-		D0D9B0942D2C240E0051EDDD /* GOVKitTestUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */; };
 		D0D9B87B2D2D547D0051EDDD /* StringValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E996D2D2D11AAC7007F21A8 /* StringValidator.swift */; };
 		D0D9CB932D3024C00051EDDD /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9CB912D3024C00051EDDD /* SearchResult.swift */; };
 		D0D9CB942D3024C00051EDDD /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9CB902D3024C00051EDDD /* SearchItem.swift */; };
@@ -582,6 +583,7 @@
 		5D0BD4582C9B1BBA00220625 /* SearchServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceClient.swift; sourceTree = "<group>"; };
 		5D0BD45A2C9B206F00220625 /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		5D0CFAA62C33E72C00B3DEFD /* DeeplinkDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkDataStore.swift; sourceTree = "<group>"; };
+		5D14B1FD2EB0BA65003C151F /* SecureStoreable+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SecureStoreable+Convenience.swift"; sourceTree = "<group>"; };
 		5D15A8E72C6A47770050C780 /* GOVRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GOVRequest.swift; sourceTree = "<group>"; };
 		5D18E83D2CCFB68900F20419 /* Container+APIClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+APIClients.swift"; sourceTree = "<group>"; };
 		5D30CF972C64A64600361C97 /* WhatToTest.en-GB.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WhatToTest.en-GB.txt"; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 		5D41DB7B2C09BF340011E691 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D49D4E82DD3D2940071826B /* NotificationsOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsOnboardingView.swift; sourceTree = "<group>"; };
 		5D49D4EC2DD479410071826B /* URLOpener+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLOpener+Extensions.swift"; sourceTree = "<group>"; };
+		5D4AEA022EB27A8B0004F6F0 /* TopicListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicListItemViewModel.swift; sourceTree = "<group>"; };
 		5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_ios_snapshot_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D4F97EA2BFF7725002CBDDE /* CoordinatorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorBuilder.swift; sourceTree = "<group>"; };
 		5D51C8342C5BB9A80011ABE9 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
@@ -670,6 +673,8 @@
 		5DCAFA702D3FFB5600C3F284 /* NotificationServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceExtension.swift; sourceTree = "<group>"; };
 		5DCAFA742D4004E700C3F284 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5DCAFA7B2D400C1B00C3F284 /* govuk_ios_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = govuk_ios_dev.entitlements; sourceTree = "<group>"; };
+		5DCCCBB82EA0DC300097430C /* LoginErrorV2+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginErrorV2+Extensions.swift"; sourceTree = "<group>"; };
+		5DCCCBBC2EA0F5690097430C /* ReturningUserServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturningUserServiceError.swift; sourceTree = "<group>"; };
 		5DD09EC72C9ADB8500494550 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		5DD4C7962D9547D600459FB5 /* AppEvent+RecentActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEvent+RecentActivity.swift"; sourceTree = "<group>"; };
 		5DD4CB022D95483100459FB5 /* ActivityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItem.swift; sourceTree = "<group>"; };
@@ -715,7 +720,6 @@
 		B04C2E812DA9339B00F0F63E /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
 		B0AD6F1F2DDA86D80077849F /* NotificationsOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsOnboardingService.swift; sourceTree = "<group>"; };
 		D00984F12D47BC9600D70FEE /* DeviceInformation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceInformation+Convenience.swift"; sourceTree = "<group>"; };
-		D01005352CECA6420013CBD0 /* Alpha.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Alpha.xcconfig; sourceTree = "<group>"; };
 		D016F29A2E0C51B000659AC3 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		D02416442DEDB1C600F81C6D /* SignInSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSuccessViewModel.swift; sourceTree = "<group>"; };
 		D02416462DEDC0C500F81C6D /* SignInSuccessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSuccessCoordinator.swift; sourceTree = "<group>"; };
@@ -782,12 +786,10 @@
 		D0A8B3C32C9DD01200849304 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
 		D0B3EBFD2CE226AC00A8F321 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		D0B3EBFE2CE226AC00A8F321 /* GoogleService-Info-Live.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Live.plist"; sourceTree = "<group>"; };
-		D0B3EC012CE227D900A8F321 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D0B920C62EA637B7001E6FDC /* ListCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCardView.swift; sourceTree = "<group>"; };
 		D0B929F52EA63C0E001E6FDC /* ListCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCardViewModel.swift; sourceTree = "<group>"; };
 		D0B985182EB11808001E6FDC /* AppErrorViewModel+Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppErrorViewModel+Topic.swift"; sourceTree = "<group>"; };
 		D0C1C1A12E9807C400651F1B /* TopicListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicListItemView.swift; sourceTree = "<group>"; };
-		D0C1F1E32CA440F200DD3D61 /* TopicListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicListItemViewModel.swift; sourceTree = "<group>"; };
 		D0D2C6922E13F85B00620DC2 /* DynamicLibraryWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLibraryWrapper.swift; sourceTree = "<group>"; };
 		D0D2C6942E13FBE000620DC2 /* JailbreakCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailbreakCoordinator.swift; sourceTree = "<group>"; };
 		D0D655E72D26A79000571841 /* UIApplication+URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+URLOpener.swift"; sourceTree = "<group>"; };
@@ -805,7 +807,6 @@
 		D0E85A852DDCD51D003B4D7A /* AmbiguousAddressSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAddressSelectionView.swift; sourceTree = "<group>"; };
 		D0E85A872DDCDBBC003B4D7A /* AmbiguousAuthorities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbiguousAuthorities.swift; sourceTree = "<group>"; };
 		D0EAB4FE2CDE5D5B007ACBCD /* AppEnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentService.swift; sourceTree = "<group>"; };
-		D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D0EB02802D37F02400B310D8 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		D0EB04822D37F34200B310D8 /* GOV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV.xcdatamodel; sourceTree = "<group>"; };
 		D0EB04832D37F34200B310D8 /* GOV_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOV_v2.xcdatamodel; sourceTree = "<group>"; };
@@ -854,6 +855,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/ChatOffboardingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/ChatOptInViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/ChatViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/EditTopicsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/EditTopicsViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/FaceIdSettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/HomeContentViewControllerSnapshotTests.swift,
@@ -915,6 +917,7 @@
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/ChatOffboardingViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/ChatOptInViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/ChatViewControllerSnapshotTests.swift,
+				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/EditTopicsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/EditTopicsViewSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/FaceIdSettingsViewControllerSnapshotTests.swift,
 				govuk_ios/govuk_ios_snapshot_tests/Specs/ViewControllers/HomeContentViewControllerSnapshotTests.swift,
@@ -955,6 +958,7 @@
 				govuk_ios/govuk_ios_unit_tests/Mocks/Services/MockAuthenticationService.swift,
 				govuk_ios/govuk_ios_unit_tests/Mocks/Services/MockLocalAuthenticationService.swift,
 				govuk_ios/govuk_ios_unit_tests/Mocks/Services/MockUserDefaultsService.swift,
+				"govuk_ios/shared/Arrangers/Foundation/Date+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Foundation/URL+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Model/Chat+Arrangers.swift",
 				"govuk_ios/shared/Arrangers/Model/RecentActivity/ActivityItem+Arrangers.swift",
@@ -968,8 +972,11 @@
 				govuk_ios/shared/Mocks/MockAppVersionProvider.swift,
 				govuk_ios/shared/Mocks/MockDeviceInformationProvider.swift,
 				govuk_ios/shared/Mocks/MockDisplayableTopic.swift,
+				govuk_ios/shared/Mocks/MockNotificationCenter.swift,
 				govuk_ios/shared/Mocks/MockTimer.swift,
+				govuk_ios/shared/Mocks/MockURLOpener.swift,
 				govuk_ios/shared/Mocks/Services/MockAccessibilityAnnouncerService.swift,
+				govuk_ios/shared/Mocks/Services/MockAnalyticsService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppConfigService.swift,
 				govuk_ios/shared/Mocks/Services/MockAppLaunchService.swift,
 				govuk_ios/shared/Mocks/Services/MockChatService.swift,
@@ -997,7 +1004,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D4B9D3E2C074227005F126A /* iOSSnapshotTestCase in Frameworks */,
-				D0D9B0942D2C240E0051EDDD /* GOVKitTestUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,7 +1031,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0D661A32D285D1B00571841 /* GOVKitTestUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,20 +1299,30 @@
 		5D1353AE2BE0D9A700414441 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				16AE551D2E2FF7FB00A004AF /* SwiftUI */,
 				5DE970552C297CF3009D66C4 /* Analytics */,
+				5DCCCBB72EA0DC240097430C /* Authentication */,
 				5D41DB662C087C520011E691 /* Container */,
 				5D9CF3962C38492500317B70 /* Deeplinking */,
 				5D51C8362C5BB9E80011ABE9 /* Foundation */,
 				5D49D4EB2DD479360071826B /* GovKit */,
 				D00984F02D47BC7900D70FEE /* Model */,
 				5DFA017A2D89651100EAC839 /* RecentActivity */,
+				5D14B1FC2EB0BA53003C151F /* SecureStore */,
 				5D08A8FE2C9AFAAD0049D798 /* Swift */,
+				16AE551D2E2FF7FB00A004AF /* SwiftUI */,
 				5DBE08032C480CA700B58DBE /* UIKit */,
 				5DFE5F1C2D6DE5830041E3B4 /* UserNotifications */,
 				5DBE07FE2C480CA700B58DBE /* Views */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5D14B1FC2EB0BA53003C151F /* SecureStore */ = {
+			isa = PBXGroup;
+			children = (
+				5D14B1FD2EB0BA65003C151F /* SecureStoreable+Convenience.swift */,
+			);
+			path = SecureStore;
 			sourceTree = "<group>";
 		};
 		5D26A75F2C92E054009902DD /* Clients */ = {
@@ -1338,7 +1353,6 @@
 		5D41DB5E2C0875460011E691 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				4E837E232E7D8C5500B3CC5A /* RecentActivityViewModel */,
 				5D3B457E2E6097EF0026936A /* AlertBannerWidgetViewModel.swift */,
 				3D7E2D132C81DB2D0016BEEC /* AnalyticsConsentContainerViewModel.swift */,
 				3D9C933F2CB0176A00EFA337 /* AppForcedUpdateContainerViewModel.swift */,
@@ -1347,14 +1361,15 @@
 				D052CA342E0B08B80048F98A /* Chat */,
 				168F6FA72C4FC1D200A0D7F7 /* HomeViewModel.swift */,
 				D0EC94C42DCBA5E000A9707E /* InfoViewModelInterface.swift */,
-				D0B929F52EA63C0E001E6FDC /* ListCardViewModel.swift */,
 				5D02783B2C29D9BB00F2A4EB /* LaunchViewModel.swift */,
+				D0B929F52EA63C0E001E6FDC /* ListCardViewModel.swift */,
 				169842D92DB0003C00E3EA66 /* LocalAuthenticationOnboardingViewModel.swift */,
 				1677D4032E00694B00FB1E56 /* LocalAuthenticationSettingsViewModel.swift */,
 				D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */,
 				5DA8ADDE2DD4968100ECEB6B /* NotificationsOnboardingViewModel.swift */,
 				D056CE732D3A83F2005845E0 /* NotificationsWidgetViewModel.swift */,
 				5DD4CB192D95491E00459FB5 /* RecentActivityListViewModel.swift */,
+				4E837E232E7D8C5500B3CC5A /* RecentActivityViewModel */,
 				D0D9CFD82D30309D0051EDDD /* SearchHistoryViewModel.swift */,
 				16A99D6A2D35F18700C72DEB /* SearchSuggestionsViewModel.swift */,
 				16EE1A422C6F89D9005E820F /* SearchViewModel.swift */,
@@ -1676,7 +1691,6 @@
 			children = (
 				5D0278382C29CBB600F2A4EB /* Animations */,
 				5DAD71802BD250DE0075F648 /* Assets.xcassets */,
-				D0EAB5002CDE6513007ACBCD /* Config */,
 				D0A8B3C12C9DC66E00849304 /* integration_pubkey.der */,
 				5D742BD32C99781300E7B87A /* Strings */,
 			);
@@ -1755,6 +1769,14 @@
 			path = govuk_ios_notification_service;
 			sourceTree = "<group>";
 		};
+		5DCCCBB72EA0DC240097430C /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5DCCCBB82EA0DC300097430C /* LoginErrorV2+Extensions.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		5DD4CB072D95483100459FB5 /* RecentActivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1780,14 +1802,15 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D04DD32C2E0046DC002B5F19 /* Chat */,
-				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
-				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
-				16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */,
 				D04C542A2D7081C00070EE79 /* Analytics */,
 				4E003E7D2C75F497008FCBF2 /* AppConfig */,
+				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
+				D04DD32C2E0046DC002B5F19 /* Chat */,
+				1631DE982C2B0D020050CB9D /* DeviceInformationProvider.swift */,
 				4E265F142DB0E6B70089CF9E /* LocalAuthority */,
+				5DCCCBBC2EA0F5690097430C /* ReturningUserServiceError.swift */,
 				D0D9CB922D3024C00051EDDD /* Search */,
+				16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */,
 				D041917C2CA57B3D0034722A /* Topics */,
 			);
 			path = Model;
@@ -1959,16 +1982,16 @@
 		D05AF4DD2CAD3C5500F86DD0 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
-				D0B985182EB11808001E6FDC /* AppErrorViewModel+Topic.swift */,
-				167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */,
-				4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */,
 				1687F3162CB41107005E1473 /* AllTopicsViewModel.swift */,
+				D0B985182EB11808001E6FDC /* AppErrorViewModel+Topic.swift */,
 				D093BA642CB04C68004F489B /* EditTopicsViewModel.swift */,
 				5DD6F3312CC80486005BC5D3 /* StepByStepsViewModel.swift */,
-				D0C1F1E32CA440F200DD3D61 /* TopicListItemViewModel.swift */,
 				D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */,
 				D0E7923A2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift */,
+				5D4AEA022EB27A8B0004F6F0 /* TopicListItemViewModel.swift */,
 				4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */,
+				167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */,
+				4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -2028,16 +2051,6 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		D0EAB5002CDE6513007ACBCD /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */,
-				D0B3EC012CE227D900A8F321 /* Release.xcconfig */,
-				D01005352CECA6420013CBD0 /* Alpha.xcconfig */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		D0ECB3FF2DCE0F2000A9707E /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
@@ -2086,7 +2099,6 @@
 			name = govuk_ios_snapshot_tests;
 			packageProductDependencies = (
 				5D4B9D3D2C074227005F126A /* iOSSnapshotTestCase */,
-				D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */,
 			);
 			productName = govuk_ios_snapshot_tests;
 			productReference = 5D4B9D342C074207005F126A /* govuk_ios_snapshot_tests.xctest */;
@@ -2147,7 +2159,6 @@
 			);
 			name = govuk_ios_unit_tests;
 			packageProductDependencies = (
-				D0D661A22D285D1B00571841 /* GOVKitTestUtilities */,
 			);
 			productName = GovUKTests;
 			productReference = 5DAD718A2BD250DF0075F648 /* govuk_ios_unit_tests.xctest */;
@@ -2181,7 +2192,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1630;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					5D4B9D332C074207005F126A = {
 						CreatedOnToolsVersion = 15.4;
@@ -2346,7 +2357,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Release\" ]; then\n  cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/GoogleService-Info-Live.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nelse\n  cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/GoogleService-Info-Dev.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "cp \"${PROJECT_DIR}/Production/govuk_ios/SupportingFiles/${GOOGLE_SERVICES_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2419,7 +2430,6 @@
 				1650769D2D3DAC0D0034C4F1 /* SearchSuggestion.swift in Sources */,
 				5D02783C2C29D9BB00F2A4EB /* LaunchViewModel.swift in Sources */,
 				5DC069ED2C3BFD6400A81AAE /* AccessibilityManager.swift in Sources */,
-				D0C1F1E42CA440F200DD3D61 /* TopicListItemViewModel.swift in Sources */,
 				D0EBFBD22D11C0E7000A3151 /* AnalyticsService.swift in Sources */,
 				5D68CEF52E6EC7F00087FB1B /* main.swift in Sources */,
 				5D69911A2DFAD8360050689E /* ButtonConfiguration+Convenience.swift in Sources */,
@@ -2482,6 +2492,7 @@
 				167D0DC52E9D41340064A39E /* TopicSelectionCardViewModel.swift in Sources */,
 				5D8100892CEB3FE600EE7D15 /* AppLaunchResponse.swift in Sources */,
 				4EEC0F322DBB7C6E00D745F2 /* StoredLocalAuthorityWidgetView.swift in Sources */,
+				5DCCCBB92EA0DC300097430C /* LoginErrorV2+Extensions.swift in Sources */,
 				D04C54302D70821D0070EE79 /* HomeCommerceItem.swift in Sources */,
 				4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */,
 				3D9C933E2CB0172400EFA337 /* AppForcedUpdateContainerView.swift in Sources */,
@@ -2588,6 +2599,7 @@
 				4E5E79A62DEF011500CA9B4D /* LocalAuthorityConfirmationViewModel.swift in Sources */,
 				5DD4CB162D95490100459FB5 /* ActivityService.swift in Sources */,
 				5D9CF3982C38493B00317B70 /* DeeplinkDataStore+Convenience.swift in Sources */,
+				5D4AEA032EB27A8C0004F6F0 /* TopicListItemViewModel.swift in Sources */,
 				164091FC2DA41B3000E3BE99 /* AuthenticationService.swift in Sources */,
 				D0ECB4012DCE0F6600A9707E /* AmbiguousAuthoritySelectionViewModel.swift in Sources */,
 				3D15E7B22CB562E40046CE64 /* AppRecommendUpdateContainerView.swift in Sources */,
@@ -2656,6 +2668,7 @@
 				D052D2322E0B0DE10048F98A /* RoundedBorderViewModifier.swift in Sources */,
 				4EA8357C2DBBBE13000AFB8A /* StoredLocalAuthorityCardModel.swift in Sources */,
 				16A31E782E37959900C984D6 /* Intro.swift in Sources */,
+				5D14B1FE2EB0BA65003C151F /* SecureStoreable+Convenience.swift in Sources */,
 				1631DE992C2B0D020050CB9D /* DeviceInformationProvider.swift in Sources */,
 				16AE517A2E670C28002BCFD7 /* InfoLinksView.swift in Sources */,
 				5D51C8382C5BBF600011ABE9 /* WidgetView.swift in Sources */,
@@ -2691,6 +2704,7 @@
 				4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */,
 				3D9C933C2CB0155300EFA337 /* Bundle+AppVersionProvider.swift in Sources */,
 				D0ECB3FE2DCE0F0F00A9707E /* AmbiguousAuthoritySelectionView.swift in Sources */,
+				5DCCCBBE2EA0F5690097430C /* ReturningUserServiceError.swift in Sources */,
 				D0D2C6952E13FBE000620DC2 /* JailbreakCoordinator.swift in Sources */,
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
 				16AE517F2E6886D3002BCFD7 /* InfoIconListView.swift in Sources */,
@@ -2742,7 +2756,6 @@
 /* Begin XCBuildConfiguration section */
 		5D4B9D3A2C074207005F126A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2766,7 +2779,6 @@
 		};
 		5D4B9D3B2C074207005F126A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -2790,10 +2802,14 @@
 		};
 		5DAD719C2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAlpha;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7r88bunbmdsvihr2cdb43lasun;
+				BASE_URL = "https://app.integration.publishing.service.gov.uk";
+				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2823,6 +2839,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS_APP = govuk_ios_dev.entitlements;
+				CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE = govuk_ios_notification_service_dev.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2842,25 +2860,37 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GOOGLE_SERVICES_FILE = "GoogleService-Info-Dev.plist";
 				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER_APP = uk.gov.govuk.dev;
+				PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE = "$(PRODUCT_BUNDLE_IDENTIFIER_APP).notification-service";
+				PROFILE_SPECIFIER_APP = "match AppStore uk.gov.govuk";
+				PROFILE_SPECIFIER_NOTIFICATION_SERVICE = "match AppStore uk.gov.govuk.notification-service";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TOKEN_BASE_URL = "https://4y369hyvja.execute-api.eu-west-2.amazonaws.com/staging";
 			};
 			name = Debug;
 		};
 		5DAD719D2BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAlpha;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				AUTHENTICATION_BASE_URL = "https://govukapp-staging.auth.eu-west-2.amazoncognito.com";
+				AUTHENTICATION_CLIENT_ID = 7r88bunbmdsvihr2cdb43lasun;
+				BASE_URL = "https://app.integration.publishing.service.gov.uk";
+				CHAT_BASE_URL = "https://t4l83ued82.execute-api.eu-west-2.amazonaws.com/staging";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2890,6 +2920,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS_APP = govuk_ios_dev.entitlements;
+				CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE = govuk_ios_notification_service_dev.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2903,26 +2935,34 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GOOGLE_SERVICES_FILE = "GoogleService-Info-Dev.plist";
 				INFOPLIST_FILE = "";
 				"INFOPLIST_FILE[sdk=*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
+				PRODUCT_BUNDLE_IDENTIFIER_APP = uk.gov.govuk;
+				PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE = "$(PRODUCT_BUNDLE_IDENTIFIER_APP).notification-service";
+				PROFILE_SPECIFIER_APP = "match AppStore uk.gov.govuk";
+				PROFILE_SPECIFIER_NOTIFICATION_SERVICE = "match AppStore uk.gov.govuk.notification-service";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				TOKEN_BASE_URL = "https://4y369hyvja.execute-api.eu-west-2.amazonaws.com/staging";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		5DAD719F2BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
+				ADDITIONAL_SWIFT_FLAGS = "-DSTAGING";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				BASE_URL = "https://app.publishing.service.gov.uk";
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
@@ -2930,7 +2970,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GOV.UK;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Your Face ID will only be used to unlock the app. It’s not shared with GOV.UK.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -2941,9 +2983,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
-				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
+				MARKETING_VERSION = 1.0.13;
+				OTHER_SWIFT_FLAGS = "$(ADDITIONAL_SWIFT_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_APP)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2958,20 +3000,23 @@
 		};
 		5DAD71A02BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
+				ADDITIONAL_SWIFT_FLAGS = "-DSTAGING";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios.entitlements;
+				BASE_URL = "https://app.publishing.service.gov.uk";
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N8W395F695;
+				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N8W395F695;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GOV.UK;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Your Face ID will only be used to unlock the app. It’s not shared with GOV.UK.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -2982,12 +3027,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
-				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk;
+				MARKETING_VERSION = 1.0.13;
+				OTHER_SWIFT_FLAGS = "$(ADDITIONAL_SWIFT_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_APP)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore uk.gov.govuk";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore uk.gov.govuk";
+				PROVISIONING_PROFILE_SPECIFIER = "$(PROFILE_SPECIFIER_APP)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3000,7 +3044,6 @@
 		};
 		5DAD71A22BD250DF0075F648 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EAB5022CDE65CF007ACBCD /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3024,7 +3067,6 @@
 		};
 		5DAD71A32BD250DF0075F648 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0B3EC012CE227D900A8F321 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3049,8 +3091,7 @@
 		5DCAFA6A2D3FE0E800C3F284 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service_dev.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios_notification_service/$(CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3065,8 +3106,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
+				MARKETING_VERSION = 1.0.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -3079,46 +3120,10 @@
 			};
 			name = Debug;
 		};
-		5DCAFA6B2D3FE0E800C3F284 /* Alpha */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service_dev.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N8W395F695;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Production/govuk_ios_notification_service/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = govuk_ios_notification_service;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.dev.notification-service";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc uk.gov.govuk.dev.notification-service";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Alpha;
-		};
 		5DCAFA6C2D3FE0E800C3F284 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios_notification_service/govuk_ios_notification_service.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios_notification_service/$(CODE_SIGN_ENTITLEMENTS_NOTIFICATION_SERVICE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3134,11 +3139,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.gov.govuk.notification-service";
+				MARKETING_VERSION = 1.0.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_NOTIFICATION_SERVICE)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore uk.gov.govuk.notification-service";
+				PROVISIONING_PROFILE_SPECIFIER = "$(PROFILE_SPECIFIER_NOTIFICATION_SERVICE)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -3150,164 +3154,6 @@
 			};
 			name = Release;
 		};
-		D01005302CEC9FCE0013CBD0 /* Alpha */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Alpha;
-		};
-		D01005312CEC9FCE0013CBD0 /* Alpha */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Production/govuk_ios/SupportingFiles/govuk_ios_dev.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N8W395F695;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Production/govuk_ios/SupportingFiles/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = GOV.UK;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
-				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0.9;
-				ONESIGNAL_APP_ID = "4c235189-5c5f-4a71-8385-2549fc36419f";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.dev;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AdHoc uk.gov.govuk.dev";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Alpha;
-		};
-		D01005322CEC9FCE0013CBD0 /* Alpha */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N8W395F695;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.unit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/govuk_ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/govuk_ios";
-			};
-			name = Alpha;
-		};
-		D01005332CEC9FCE0013CBD0 /* Alpha */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D01005352CECA6420013CBD0 /* Alpha.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N8W395F695;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.govuk.snapshot;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/govuk_ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/govuk_ios";
-			};
-			name = Alpha;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3315,7 +3161,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5D4B9D3A2C074207005F126A /* Debug */,
-				D01005332CEC9FCE0013CBD0 /* Alpha */,
 				5D4B9D3B2C074207005F126A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3325,7 +3170,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DAD719C2BD250DF0075F648 /* Debug */,
-				D01005302CEC9FCE0013CBD0 /* Alpha */,
 				5DAD719D2BD250DF0075F648 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3335,7 +3179,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DAD719F2BD250DF0075F648 /* Debug */,
-				D01005312CEC9FCE0013CBD0 /* Alpha */,
 				5DAD71A02BD250DF0075F648 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3345,7 +3188,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DAD71A22BD250DF0075F648 /* Debug */,
-				D01005322CEC9FCE0013CBD0 /* Alpha */,
 				5DAD71A32BD250DF0075F648 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3355,7 +3197,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DCAFA6A2D3FE0E800C3F284 /* Debug */,
-				5DCAFA6B2D3FE0E800C3F284 /* Alpha */,
 				5DCAFA6C2D3FE0E800C3F284 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3516,14 +3357,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D090467D2DBBC1ED0096EE66 /* XCRemoteSwiftPackageReference "jwt-kit" */;
 			productName = JWTKit;
-		};
-		D0D661A22D285D1B00571841 /* GOVKitTestUtilities */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GOVKitTestUtilities;
-		};
-		D0D9B0932D2C240E0051EDDD /* GOVKitTestUtilities */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GOVKitTestUtilities;
 		};
 		D0EBFBCD2D109B51000A3151 /* GOVKit */ = {
 			isa = XCSwiftPackageProductDependency;

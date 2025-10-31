@@ -37,7 +37,7 @@ struct AppEnvironmentServiceTests {
 
     @Test
     func authenticationAuthorizeURL_returnsExpectedValue() {
-        let mockConfig = ["AUTHENTICATION_BASE_URL": "www.gov.uk"]
+        let mockConfig = ["AUTHENTICATION_BASE_URL": "https://www.gov.uk"]
         let sut = AppEnvironmentService(
             config: mockConfig
         )

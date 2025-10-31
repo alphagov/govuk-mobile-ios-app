@@ -3,7 +3,6 @@ import LocalAuthentication
 import UIKit
 import Combine
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite

@@ -2,7 +2,6 @@ import Foundation
 import XCTest
 import CoreData
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor
@@ -12,7 +11,7 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
         let coreData = CoreDataRepository.arrangeAndLoad
         _ = ActivityItem.arrange(
             title: "Test 1",
-            date: .arrange("01/10/2023"),
+            date: .arrange("01/10/2023"), 
             context: coreData.viewContext
         )
         _ = ActivityItem.arrange(

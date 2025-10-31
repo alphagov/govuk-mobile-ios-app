@@ -8,6 +8,7 @@ protocol AppEnvironmentServiceInterface {
     var authenticationAuthorizeURL: URL { get }
     var authenticationTokenURL: URL { get }
     var chatBaseURL: URL { get }
+    var tokenBaseURL: URL { get }
 }
 
 enum AppEnvironmentKey: String {
@@ -47,10 +48,6 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
         tokenBaseURL.appendingPathComponent("oauth2/token")
     }
 
-    var revokeTokenURL: URL {
-        authenticationBaseURL.appendingPathComponent("oauth2/revoke")
-    }
-
     private func string(for key: AppEnvironmentKey) -> String {
         guard let value = config[key.rawValue] as? String else {
             preconditionFailure("No AppEnvironment value found for " + key.rawValue)
@@ -59,10 +56,8 @@ struct AppEnvironmentService: AppEnvironmentServiceInterface {
     }
 
     var authenticationBaseURL: URL {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = string(for: .authenticationBaseURL)
-        return components.url!
+        let urlString = string(for: .authenticationBaseURL)
+        return URL(string: urlString)!
     }
 
     var tokenBaseURL: URL {

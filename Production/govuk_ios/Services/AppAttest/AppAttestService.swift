@@ -2,6 +2,7 @@ import Foundation
 import Firebase
 import FirebaseCore
 import FirebaseAppCheck
+import GOVKit
 
 protocol AppAttestServiceInterface {
     func token() async throws -> AppCheckToken
@@ -10,15 +11,23 @@ protocol AppAttestServiceInterface {
 class AppAttestService: NSObject,
                         AppAttestServiceInterface {
     private let appCheckInterface: AppCheckInterface
+    private let analyticsService: AnalyticsServiceInterface
 
     init(
         appCheckInterface: AppCheckInterface,
+        analyticsService: AnalyticsServiceInterface,
     ) {
         self.appCheckInterface = appCheckInterface
+        self.analyticsService = analyticsService
     }
 
     func token() async throws -> AppCheckToken {
-        try await appCheckInterface.token(forcingRefresh: false)
+        do {
+            return try await appCheckInterface.token(forcingRefresh: false)
+        } catch {
+            analyticsService.track(error: error)
+            throw AppAttestError.tokenGeneration
+        }
     }
 }
 
@@ -28,4 +37,17 @@ protocol AppCheckInterface {
 
 extension AppCheck: AppCheckInterface {
     // No Imp
+}
+
+enum AppAttestError: Error {
+    case tokenGeneration
+}
+
+extension AppAttestError {
+    var govukErrorCode: String {
+        switch self {
+        case .tokenGeneration:
+            return "4.0.1"
+        }
+    }
 }

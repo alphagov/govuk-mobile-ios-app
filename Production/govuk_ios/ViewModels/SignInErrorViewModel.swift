@@ -23,6 +23,8 @@ final class SignInErrorViewModel: InfoViewModelInterface {
             return loginErrorV2.govukErrorCode
         case .returningUserService(let returningUserServiceError):
             return returningUserServiceError.govukErrorCode
+        case .attestation(let error):
+            return error.govukErrorCode
         case .genericError:
             return "1"
         }

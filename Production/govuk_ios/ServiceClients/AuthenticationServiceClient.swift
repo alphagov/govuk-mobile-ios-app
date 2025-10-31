@@ -47,7 +47,7 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
         } catch let error as LoginErrorV2 {
             return .failure(.loginFlow(error))
         } catch {
-            return .failure(.genericError)
+            return .failure(.unknown(error))
         }
     }
 
@@ -152,12 +152,11 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 }
 
-enum AuthenticationError: Error,
-                          Equatable {
+enum AuthenticationError: Error {
     case loginFlow(LoginErrorV2)
     case returningUserService(ReturningUserServiceError)
     case attestation(AppAttestError)
-    case genericError
+    case unknown(Error)
 }
 
 enum TokenRefreshError: Error {

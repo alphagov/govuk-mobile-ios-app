@@ -21,12 +21,13 @@ struct SignInErrorViewModelTests {
     }
 
     @Test
-    func signInRetryButton_generic_callsCompletion() async {
+    func signInRetryButton_unknown_callsCompletion() async {
         await confirmation() { confirmation in
+            let expectedError = AuthenticationError.unknown(TestError.anyError)
             let sut = SignInErrorViewModel(
-                error: .genericError,
+                error: expectedError,
                 feedbackAction: { error in
-                    #expect(error == .genericError)
+                    #expect(error == expectedError)
                     confirmation()
                 },
                 retryAction: { }

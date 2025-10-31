@@ -28,7 +28,7 @@ final class SignInErrorViewModel: InfoViewModelInterface {
             return returningUserServiceError.govukErrorCode
         case .attestation(let error):
             return error.govukErrorCode
-        case .genericError:
+        case .unknown:
             return "1"
         }
     }
@@ -55,7 +55,7 @@ final class SignInErrorViewModel: InfoViewModelInterface {
     }
 
     private func primaryButtonAction() {
-        if case .genericError = error {
+        if case .unknown = error {
             feedbackAction(error)
         } else {
             retryAction()

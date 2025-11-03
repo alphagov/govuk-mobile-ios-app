@@ -89,6 +89,35 @@ struct DeviceInformationProvider_ConvenienceTests {
     }
 
     @Test
+    func reportProblem_withError_returnsExpectedValue() throws {
+        let sut = MockDeviceInformationProvider(
+            systemVersion: "18.2",
+            model: "iPhone16"
+        )
+        let mockVersionProvider = MockAppVersionProvider()
+        mockVersionProvider.versionNumber = "1.2.3"
+        mockVersionProvider.buildNumber = "456"
+
+        let error = TestError.anyError
+
+        let expectedURL = try #require(
+            URL(
+                string:
+            """
+            https://www.gov.uk/contact/govuk-app/report-problem?app_version=1.2.3%20(456)&phone=Apple%20iPhone16%2018.2&what_happened=\(String(describing: error))
+            """
+            )?.absoluteString
+        )
+
+        let result = sut.reportProblem(
+            versionProvider: mockVersionProvider,
+            error: error
+        ).absoluteString
+
+        #expect(result == expectedURL)
+    }
+
+    @Test
     func reportProblem_noWhatHappened_returnsExpectedValue() throws {
         let sut = MockDeviceInformationProvider(
             systemVersion: "18.2",

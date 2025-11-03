@@ -100,7 +100,10 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
 
     private func openFeedback(error: AuthenticationError) {
         let url = self.deviceInformationProvider
-            .helpAndFeedbackURL(versionProvider: self.versionProvider)
+            .reportProblem(
+                versionProvider: self.versionProvider,
+                error: error,
+            )
         let coordinator = coordinatorBuilder.safari(
             navigationController: root,
             url: url,

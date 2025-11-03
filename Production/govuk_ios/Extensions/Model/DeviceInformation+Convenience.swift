@@ -12,6 +12,20 @@ extension DeviceInformationProviderInterface {
 
     func reportProblem(
         versionProvider: AppVersionProvider,
+        error: Error?,
+    ) -> URL {
+        var whatHappened: String?
+        if let error = error {
+            whatHappened = String(describing: error)
+        }
+        return reportProblem(
+            versionProvider: versionProvider,
+            whatHappened: whatHappened,
+        )
+    }
+
+    func reportProblem(
+        versionProvider: AppVersionProvider,
         whatHappened: String?,
     ) -> URL {
         let url = Constants.API.reportProblemUrl

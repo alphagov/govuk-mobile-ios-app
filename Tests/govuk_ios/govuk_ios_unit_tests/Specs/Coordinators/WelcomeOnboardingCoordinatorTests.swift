@@ -81,7 +81,7 @@ class WelcomeOnboardingCoordinatorTests {
         mockViewControllerBuilder._stubbedWelcomeOnboardingViewModel?.completeAction()
         mockCoordinatorBuilder._receivedAuthenticationErrorAction?(.loginFlow(.init(reason: .authorizationAccessDenied)))
 
-        #expect(mockNavigationController._setViewControllers?.first == stubbedSignInErrorViewController)
+        #expect(mockNavigationController._pushedViewController == stubbedSignInErrorViewController)
     }
 
     @Test

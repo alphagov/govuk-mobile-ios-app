@@ -38,11 +38,21 @@ final class SignInErrorViewModel: InfoViewModelInterface {
     }
 
     var subtitle: String {
-        String.signOut.localized("signInErrorSubtitle")
+        switch error {
+        case .unknown:
+            return String.signOut.localized("signInErrorUnknownSubtitle")
+        default:
+            return String.signOut.localized("signInErrorSubtitle")
+        }
     }
 
     var primaryButtonTitle: String {
-        String.signOut.localized("signInRetryButtonTitle")
+        switch error {
+        case .unknown:
+            return String.signOut.localized("signInReportButtonTitle")
+        default:
+            return String.signOut.localized("signInRetryButtonTitle")
+        }
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -50,6 +60,17 @@ final class SignInErrorViewModel: InfoViewModelInterface {
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
                 self?.primaryButtonAction()
+            }
+        )
+    }
+
+    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel? {
+        guard case .unknown = error
+        else { return nil }
+        return GOVUKButton.ButtonViewModel(
+            localisedTitle: String.signOut.localized("signInSecondaryButtonTitle"),
+            action: { [weak self] in
+                self?.retryAction()
             }
         )
     }

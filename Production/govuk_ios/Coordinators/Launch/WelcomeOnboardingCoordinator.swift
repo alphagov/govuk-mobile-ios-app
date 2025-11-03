@@ -83,15 +83,15 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private func setSignInError(_ error: AuthenticationError) {
         let viewController = viewControllerBuilder.signInError(
             error: error,
-            feedbackAction: { [weak self] error in
+            feedbackAction: { [weak self, root] error in
                 self?.openFeedback(error: error)
-                self?.setWelcomeOnboardingViewController(false)
+                root.popToRootViewController(animated: true)
             },
-            retryAction: { [weak self] in
-                self?.setWelcomeOnboardingViewController(false)
+            retryAction: { [root] in
+                root.popToRootViewController(animated: true)
             }
         )
-        set(viewController, animated: false)
+        push(viewController)
     }
 
     private var shouldSkipOnboarding: Bool {

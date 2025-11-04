@@ -84,8 +84,7 @@ class AuthenticationService: AuthenticationServiceInterface {
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
-            let token = try? await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "")
-            saveTokenIssueDate(iat: token?.iat)
+            await saveTokenIssueDate(jwt: tokenResponse.idToken)
             return await handleReturningUser()
         case .failure(let error):
             analyticsService.track(error: error)
@@ -180,6 +179,16 @@ class AuthenticationService: AuthenticationServiceInterface {
         self.refreshToken = refreshToken
         self.idToken = idToken
         self.accessToken = accessToken
+    }
+
+    private func saveTokenIssueDate(jwt: String?) async {
+        guard let jwt = jwt else { return }
+        do {
+            let token = try await JWTExtractor().extract(jwt: jwt)
+            saveTokenIssueDate(iat: token.iat)
+        } catch {
+            analyticsService.track(error: error)
+        }
     }
 
     private func saveTokenIssueDate(iat: Date?) {

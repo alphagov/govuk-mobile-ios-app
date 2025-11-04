@@ -176,12 +176,14 @@ class MockViewControllerBuilder: ViewControllerBuilder {
 
     var _receivedSignInErrorError: AuthenticationError?
     var _receivedSignInErrorRetryAction: (() -> Void)?
+    var _receivedSignInErrorFeedbackAction: ((AuthenticationError) -> Void)?
     var _stubbedSignInErrorViewController: UIViewController?
     override func signInError(error: AuthenticationError,
                               feedbackAction: @escaping (AuthenticationError) -> Void,
                               retryAction: @escaping () -> Void) -> UIViewController {
         _receivedSignInErrorError = error
         _receivedSignInErrorRetryAction = retryAction
+        _receivedSignInErrorFeedbackAction = feedbackAction
         return _stubbedSignInErrorViewController ?? UIViewController()
     }
 

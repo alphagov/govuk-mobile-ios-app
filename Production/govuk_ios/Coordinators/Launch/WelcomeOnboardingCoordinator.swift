@@ -15,12 +15,11 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let completionAction: () -> Void
 
     private lazy var welcomeOnboardingViewModel: WelcomeOnboardingViewModel = {
-        let viewModel = WelcomeOnboardingViewModel(
+        WelcomeOnboardingViewModel(
             completeAction: { [weak self] in
                 self?.startAuthentication()
             }
         )
-        return viewModel
     }()
 
     init(navigationController: UINavigationController,

@@ -6,6 +6,7 @@ import FirebaseAppCheck
 @testable import GOVKit
 @testable import govuk_ios
 
+@Suite
 struct AppAttestServiceTests {
 
     @Test
@@ -40,6 +41,22 @@ struct AppAttestServiceTests {
         await #expect(throws: AppAttestError.tokenGeneration) {
             try await sut.token()
         }
+    }
+}
+
+@Suite
+struct AppAttestErrorTests {
+    @Test(arguments: zip(
+        [
+            AppAttestError.tokenGeneration
+        ],
+        [
+            "4.0.1"
+        ]
+    ))
+    func govukErrorCode_returnsExpectedValue(error: AppAttestError,
+                                             expectedCode: String) {
+        #expect(error.govukErrorCode == expectedCode)
     }
 }
 

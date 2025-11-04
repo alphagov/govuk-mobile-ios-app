@@ -8,7 +8,7 @@ import FirebaseAppCheck
 class MockAppAttestService: NSObject,
                             AppAttestServiceInterface {
     var _stubbedAppCheckToken: AppCheckToken?
-    var _stubbedTokenFetchError: TestError = .fakeNetwork
+    var _stubbedTokenFetchError: Error = AppAttestError.tokenGeneration
     func token() async throws -> AppCheckToken {
         if let token = _stubbedAppCheckToken {
             return token

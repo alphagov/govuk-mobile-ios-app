@@ -20,6 +20,12 @@ public struct Constants {
             return components.url!
         }()
 
+        public static let reportProblemUrl: URL = {
+            var components = govukBaseComponents
+            components.path = "/contact/govuk-app/report-problem"
+            return components.url!
+        }()
+
         public static let termsAndConditionsUrl: URL = {
             var components = govukBaseComponents
             components.path = "/government/publications/govuk-app-terms-and-conditions"

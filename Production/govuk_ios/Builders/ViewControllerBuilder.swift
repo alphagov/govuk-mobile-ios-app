@@ -299,11 +299,15 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func signInError(error: AuthenticationError,
-                     completion: @escaping () -> Void) -> UIViewController {
+    func signInError(
+        error: AuthenticationError,
+        feedbackAction: @escaping (AuthenticationError) -> Void,
+        retryAction: @escaping () -> Void
+    ) -> UIViewController {
         let viewModel = SignInErrorViewModel(
             error: error,
-            completion: completion
+            feedbackAction: feedbackAction,
+            retryAction: retryAction
         )
         let view = InfoView<SignInErrorViewModel>(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)

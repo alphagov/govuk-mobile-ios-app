@@ -89,6 +89,28 @@
         }
       }
     },
+    "signInErrorUnknownSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tell us about this problem to help us fix it"
+          }
+        }
+      }
+    },
+    "signInReportButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report this problem"
+          }
+        }
+      }
+    },
     "signInRetryButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -96,6 +118,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Go back and try again"
+          }
+        }
+      }
+    },
+    "signInSecondaryButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go back to the sign in page"
           }
         }
       }

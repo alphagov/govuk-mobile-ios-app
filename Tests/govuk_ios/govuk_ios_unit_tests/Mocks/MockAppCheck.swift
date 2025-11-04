@@ -7,14 +7,15 @@ import FirebaseAppCheck
 
 class MockAppCheck: AppCheckInterface {
     var _stubbedToken: AppCheckToken?
+    var _stubbedTokenError: AppAttestError?
     func token(forcingRefresh: Bool) async throws -> AppCheckToken {
-        guard let token = _stubbedToken else {
-            throw AppCheckError.tokenRefreshFailed
+        if let error = _stubbedTokenError {
+            throw error
         }
-        return token
-    }
-
-    enum AppCheckError: Error {
-        case tokenRefreshFailed
+        if let token = _stubbedToken {
+            return token
+        } else {
+            fatalError("Error in test setup: either token or error must be stubbed")
+        }
     }
 }

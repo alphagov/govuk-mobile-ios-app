@@ -36,15 +36,18 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 
     func performAuthenticationFlow(window: UIWindow) async -> AuthenticationResult {
         do {
+            let config = try await loginSessionConfig()
             let session = await appAuthSession.session(window: window)
             let tokenResponse = try await session.performLoginFlow(
-                configuration: loginSessionConfig()
+                configuration: config
             )
             return .success(tokenResponse)
+        } catch let error as AppAttestError {
+            return .failure(.attestation(error))
         } catch let error as LoginErrorV2 {
             return .failure(.loginFlow(error))
         } catch {
-            return .failure(.genericError)
+            return .failure(.unknown(error))
         }
     }
 
@@ -102,7 +105,6 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
 
     private func loginSessionConfig() async throws -> LoginSessionConfiguration {
         let token = try await appAttestService.token().token
-
         return await LoginSessionConfiguration(
             authorizationEndpoint: appEnvironmentService.authenticationAuthorizeURL,
             tokenEndpoint: appEnvironmentService.authenticationTokenURL,
@@ -150,11 +152,11 @@ class AuthenticationServiceClient: AuthenticationServiceClientInterface {
     }
 }
 
-enum AuthenticationError: Error,
-                          Equatable {
+enum AuthenticationError: Error {
     case loginFlow(LoginErrorV2)
     case returningUserService(ReturningUserServiceError)
-    case genericError
+    case attestation(AppAttestError)
+    case unknown(Error)
 }
 
 enum TokenRefreshError: Error {

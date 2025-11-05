@@ -30,6 +30,8 @@ final class SignInErrorViewModel: InfoViewModelInterface {
             return error.govukErrorCode
         case .unknown:
             return "1"
+        case .missingIdToken, .missingRefreshToken:
+            return "-"
         }
     }
 

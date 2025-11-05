@@ -156,6 +156,8 @@ enum AuthenticationError: Error {
     case loginFlow(LoginErrorV2)
     case returningUserService(ReturningUserServiceError)
     case attestation(AppAttestError)
+    case missingIdToken
+    case missingRefreshToken
     case unknown(Error)
 }
 

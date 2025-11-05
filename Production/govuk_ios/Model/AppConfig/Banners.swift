@@ -42,3 +42,26 @@ extension UserFeedbackBanner {
         let url: URL
     }
 }
+
+enum EmergencyBannerType: String {
+    case notableDeath = "notable-death"
+    case nationalEmergency = "national-emergency"
+    case localEmergency = "local-emergency"
+    case information
+}
+
+struct EmergencyBanner: DismissibleBanner, Decodable {
+    let id: String
+    let title: String?
+    let body: String
+    let link: Link?
+    let type: String?
+    let allowsDismissal: Bool?
+}
+
+extension EmergencyBanner {
+    struct Link: Decodable {
+        let title: String
+        let url: URL
+    }
+}

@@ -46,6 +46,12 @@ struct AppConfigServiceClientTests {
         #expect(unwrappedResult.config.chatBanner?.link.title
                 == "Ask a question")
         #expect(unwrappedResult.config.userFeedbackBanner?.link.title  == "Give feedback")
+        #expect(unwrappedResult.config.emergencyBanners?.count == 2)
+        #expect(unwrappedResult.config.emergencyBanners?.first?.id == "national_emergency_one")
+        #expect(unwrappedResult.config.emergencyBanners?.first?.title == "National Emergency")
+        #expect(unwrappedResult.config.emergencyBanners?.first?.type == "national-emergency")
+        #expect(unwrappedResult.config.emergencyBanners?.last?.link?.title == "More Information")
+        #expect(unwrappedResult.config.emergencyBanners?.last?.allowsDismissal == false)
     }
 
     @Test

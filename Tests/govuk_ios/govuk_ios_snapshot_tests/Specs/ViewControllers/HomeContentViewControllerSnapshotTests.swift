@@ -34,6 +34,7 @@ final class HomeContentViewControllerSnapshotTests: SnapshotTestCase {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
             topicsWidgetViewModel: topicsWidgetViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),

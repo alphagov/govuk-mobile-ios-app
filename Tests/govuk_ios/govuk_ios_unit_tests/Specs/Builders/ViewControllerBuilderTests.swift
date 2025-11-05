@@ -34,6 +34,7 @@ struct ViewControllerBuilderTests {
             analyticsService: MockAnalyticsService(),
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             topicsWidgetViewModel: viewModel,

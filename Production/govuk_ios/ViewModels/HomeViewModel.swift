@@ -8,6 +8,7 @@ class HomeViewModel: ObservableObject {
     let analyticsService: AnalyticsServiceInterface
     let configService: AppConfigServiceInterface
     let notificationService: NotificationServiceInterface
+    let userDefaultsService: UserDefaultsServiceInterface
     let topicsWidgetViewModel: TopicsWidgetViewModel
     let localAuthorityAction: () -> Void
     let editLocalAuthorityAction: () -> Void
@@ -26,6 +27,7 @@ class HomeViewModel: ObservableObject {
     init(analyticsService: AnalyticsServiceInterface,
          configService: AppConfigServiceInterface,
          notificationService: NotificationServiceInterface,
+         userDefaultsService: UserDefaultsServiceInterface,
          topicsWidgetViewModel: TopicsWidgetViewModel,
          urlOpener: URLOpener,
          searchService: SearchServiceInterface,
@@ -41,6 +43,7 @@ class HomeViewModel: ObservableObject {
         self.analyticsService = analyticsService
         self.configService = configService
         self.notificationService = notificationService
+        self.userDefaultsService = userDefaultsService
         self.topicsWidgetViewModel = topicsWidgetViewModel
         self.localAuthorityAction = localAuthorityAction
         self.editLocalAuthorityAction = editLocalAuthorityAction
@@ -58,15 +61,41 @@ class HomeViewModel: ObservableObject {
 
     func updateWidgets() {
         let array = [
-            topicsView,
-            localServicesWidget,
+            topicsWidget,
+            addLocalAuthorityWidget,
             storedLocalAuthorityWidget,
             recentActivityWidget
         ].compactMap { $0 }
-        widgets = array
+        widgets = bannerWidgets + array
     }
 
-    var topicsView: HomepageWidget? {
+    private var bannerWidgets: [HomepageWidget] {
+        guard let banners = configService.emergencyBanners else {
+            return []
+        }
+
+        let visibleBanners = banners.filter { !userDefaultsService.hasSeen(banner: $0) }
+
+        return visibleBanners.enumerated().map { iterator in
+            let viewModel = EmergencyBannerWidgetViewModel(
+                banner: iterator.element,
+                sortPriority: (visibleBanners.count - iterator.offset),
+                openURLAction: openURLAction,
+                dismiss: {
+                    self.userDefaultsService.markSeen(banner: iterator.element)
+                    self.updateWidgets()
+                }
+            )
+
+            return HomepageWidget(
+                content: EmergencyBannerWidgetView(
+                    viewModel: viewModel
+                )
+            )
+        }
+    }
+
+    private var topicsWidget: HomepageWidget? {
         guard featureEnabled(.topics)
         else { return nil }
         return HomepageWidget(
@@ -95,8 +124,8 @@ class HomeViewModel: ObservableObject {
         )
     }
 
-    var recentActivityWidget: HomepageWidget? {
-        guard featureEnabled(.topics)
+    private var recentActivityWidget: HomepageWidget? {
+        guard featureEnabled(.recentActivity)
         else { return nil }
         let viewModel = RecentActivityHomepageWidgetViewModel(
             analyticsService: analyticsService,
@@ -112,7 +141,7 @@ class HomeViewModel: ObservableObject {
         )
     }
 
-    var localServicesWidget: HomepageWidget? {
+    private var addLocalAuthorityWidget: HomepageWidget? {
         guard featureEnabled(.localServices),
               localAuthorityService.fetchSavedLocalAuthority().isEmpty
         else { return nil }

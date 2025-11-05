@@ -24,6 +24,7 @@ class ViewControllerBuilder {
         let analyticsService: AnalyticsServiceInterface
         let configService: AppConfigServiceInterface
         let notificationService: NotificationServiceInterface
+        let userDefaultsService: UserDefaultsServiceInterface
         let searchService: SearchServiceInterface
         let activityService: ActivityServiceInterface
         let topicsWidgetViewModel: TopicsWidgetViewModel
@@ -46,6 +47,7 @@ class ViewControllerBuilder {
             analyticsService: dependencies.analyticsService,
             configService: dependencies.configService,
             notificationService: dependencies.notificationService,
+            userDefaultsService: dependencies.userDefaultsService,
             topicsWidgetViewModel: dependencies.topicsWidgetViewModel,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,

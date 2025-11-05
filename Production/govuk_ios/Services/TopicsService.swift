@@ -8,9 +8,7 @@ protocol TopicsServiceInterface {
     func fetchAll() -> [Topic]
     func fetchFavourites() -> [Topic]
     func save()
-
-    func setHasCustomisedTopics()
-    var hasCustomisedTopics: Bool { get }
+    func rollback()
 
     var hasOnboardedTopics: Bool { get }
     func setHasOnboardedTopics()
@@ -68,6 +66,10 @@ struct TopicsService: TopicsServiceInterface {
         topicsRepository.save()
     }
 
+    func rollback() {
+        topicsRepository.rollback()
+    }
+
     func resetOnboarding() {
         userDefaultsService.set(nil, forKey: .topicsOnboardingSeen)
         userDefaultsService.set(nil, forKey: .customisedTopics)
@@ -82,19 +84,5 @@ struct TopicsService: TopicsServiceInterface {
             bool: true,
             forKey: .topicsOnboardingSeen
         )
-    }
-
-    func setHasCustomisedTopics() {
-        userDefaultsService.set(
-            bool: true,
-            forKey: .customisedTopics
-        )
-        analyticsService.set(
-            userProperty: .topicsCustomised
-        )
-    }
-
-    var hasCustomisedTopics: Bool {
-        userDefaultsService.bool(forKey: .customisedTopics)
     }
 }

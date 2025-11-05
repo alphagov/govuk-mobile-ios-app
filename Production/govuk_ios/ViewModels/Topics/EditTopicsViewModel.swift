@@ -34,7 +34,6 @@ final class EditTopicsViewModel {
             tapAction: { [weak self] value in
                 topic.isFavourite = value
                 self?.topicsService.save()
-                self?.topicsService.setHasCustomisedTopics()
                 self?.trackSelection(topic: topic)
             }
         )

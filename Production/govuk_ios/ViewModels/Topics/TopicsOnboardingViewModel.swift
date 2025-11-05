@@ -1,14 +1,15 @@
 import Foundation
+import SwiftUI
+
 import UIComponents
 import GOVKit
 
-class TopicOnboardingViewModel: ObservableObject {
-    let topics: [Topic]
-    let analyticsService: AnalyticsServiceInterface
+class TopicsOnboardingViewModel: ObservableObject {
+    @Published private(set) var topicSelectionCards: [TopicSelectionCardViewModel] = []
+    @Published private(set) var isTopicSelected: Bool = false
+    private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let dismissAction: () -> Void
-    @Published private(set) var isTopicSelected: Bool = false
-    private var selectedTopics: Set<Topic> = []
 
     let title = String.topics.localized(
         "topicOnboardingPageTitle"
@@ -30,41 +31,10 @@ class TopicOnboardingViewModel: ObservableObject {
          analyticsService: AnalyticsServiceInterface,
          topicsService: TopicsServiceInterface,
          dismissAction: @escaping () -> Void) {
-        self.topics = topics
         self.analyticsService = analyticsService
         self.topicsService = topicsService
         self.dismissAction = dismissAction
-    }
-
-    func topicSelected(topic: Topic) {
-        topic.isFavourite.toggle()
-        let action: String
-        if topic.isFavourite {
-            action = "add"
-            selectedTopics.insert(topic)
-        } else {
-            action = "remove"
-            selectedTopics.remove(topic)
-        }
-        trackTopicSelection(
-            title: topic.title,
-            action: action
-        )
-        setIsTopicSelected()
-    }
-
-    private func trackTopicSelection(title: String,
-                                     action: String) {
-        let event = AppEvent.buttonFunction(
-            text: title,
-            section: "Topic selection",
-            action: action
-        )
-        analyticsService.track(event: event)
-    }
-
-    private func setIsTopicSelected() {
-        isTopicSelected = !selectedTopics.isEmpty
+        loadTopicCards(topics: topics)
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -85,22 +55,46 @@ class TopicOnboardingViewModel: ObservableObject {
         )
     }
 
+    func trackScreen(screen: TrackableScreen) {
+        analyticsService.track(screen: screen)
+    }
+
+    private func loadTopicCards(topics: [Topic]) {
+        topicSelectionCards = topics.map { topic in
+            topicSelectionCard(topic: topic)
+        }
+    }
+
+    private func topicSelectionCard(topic: Topic) -> TopicSelectionCardViewModel {
+        TopicSelectionCardViewModel(
+            topic: topic,
+            tapAction: { [weak self] value in
+                guard let self else { return }
+                topic.isFavourite = value
+                isTopicSelected = topicSelectionCards.contains(where: { $0.isOn })
+                trackSelection(topic: topic)
+            }
+        )
+    }
+
+    private func trackSelection(topic: Topic) {
+        let event = AppEvent.topicSelection(
+            title: topic.title,
+            isFavourite: topic.isFavourite
+        )
+        analyticsService.track(event: event)
+    }
+
     private func primaryAction() {
-        saveFavouriteTopics()
+        topicsService.save()
         trackPrimaryEvent()
-        topicsService.setHasCustomisedTopics()
         dismissAction()
     }
 
     private func secondaryAction() {
-        topics.first?.managedObjectContext?.rollback()
+        topicsService.rollback()
         trackSecondaryEvent()
         dismissAction()
-    }
-
-    private func saveFavouriteTopics() {
-        selectedTopics.forEach { $0.isFavourite = true }
-        topicsService.save()
     }
 
     private func trackPrimaryEvent() {

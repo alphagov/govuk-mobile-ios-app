@@ -391,13 +391,19 @@ class ViewControllerBuilder {
                          analyticsService: AnalyticsServiceInterface,
                          topicsService: TopicsServiceInterface,
                          dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = TopicOnboardingViewModel(
+        let viewModel = TopicsOnboardingViewModel(
             topics: topics,
             analyticsService: analyticsService,
             topicsService: topicsService,
             dismissAction: dismissAction
         )
-        return TopicOnboardingViewController(viewModel: viewModel)
+        let viewController = HostingViewController(
+            rootView: TopicsOnboardingView(
+                viewModel: viewModel
+            )
+//            navigationBarHidden: true
+        )
+        return viewController
     }
 
     func chat(analyticsService: AnalyticsServiceInterface,

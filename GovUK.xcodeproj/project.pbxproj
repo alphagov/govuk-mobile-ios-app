@@ -73,6 +73,7 @@
 		16FC6F0D2DDFE300007879E7 /* GovUIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FC6F0C2DDFE2FB007879E7 /* GovUIWindow.swift */; };
 		16FCDE782DC4E39A000E870D /* TokenRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */; };
 		16FD684A2D39AEB5002F1597 /* SuggestionHighlighterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FD68482D39AEAE002F1597 /* SuggestionHighlighterProcessor.swift */; };
+		16FE77672EBB72A7009D02B1 /* TopicsOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE77662EBB7290009D02B1 /* TopicsOnboardingView.swift */; };
 		3D09A6DB2C9DC877005858D0 /* AppConfigServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */; };
 		3D15E7B22CB562E40046CE64 /* AppRecommendUpdateContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */; };
 		3D15E7B42CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15E7B32CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift */; };
@@ -91,11 +92,10 @@
 		3D9FD4BA2E799C9900928E92 /* ChatWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FD4B92E799C9900928E92 /* ChatWidgetViewModel.swift */; };
 		3D9FD4BE2E79C37B00928E92 /* ChatDeeplinkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FD4BD2E79C37B00928E92 /* ChatDeeplinkRoute.swift */; };
 		4E0043142D9BE25E00DDDA8A /* NotificationSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0043132D9BE25D00DDDA8A /* NotificationSettingsCoordinator.swift */; };
-		4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */; };
+		4E00EEEF2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEEE2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift */; };
 		4E00EEF12CCB04FF007B61E8 /* TopicOnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF02CCB04FF007B61E8 /* TopicOnboardingCard.swift */; };
 		4E00EEF32CCB0523007B61E8 /* TopicOnboardingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF22CCB0523007B61E8 /* TopicOnboardingListView.swift */; };
 		4E00EEF72CCB0788007B61E8 /* TopicOnboardingCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF62CCB0788007B61E8 /* TopicOnboardingCardModel.swift */; };
-		4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */; };
 		4E00EF072CCB12CD007B61E8 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */; };
 		4E1534032E398073002DEDB9 /* TopicsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534022E398073002DEDB9 /* TopicsWidget.swift */; };
 		4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534042E3982E7002DEDB9 /* TopicCard.swift */; };
@@ -505,6 +505,7 @@
 		16FC6F0C2DDFE2FB007879E7 /* GovUIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovUIWindow.swift; sourceTree = "<group>"; };
 		16FCDE772DC4E38F000E870D /* TokenRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshResponse.swift; sourceTree = "<group>"; };
 		16FD68482D39AEAE002F1597 /* SuggestionHighlighterProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionHighlighterProcessor.swift; sourceTree = "<group>"; };
+		16FE77662EBB7290009D02B1 /* TopicsOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsOnboardingView.swift; sourceTree = "<group>"; };
 		3D09A6DA2C9DC873005858D0 /* AppConfigServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigServiceClient.swift; sourceTree = "<group>"; };
 		3D15E7B12CB562E40046CE64 /* AppRecommendUpdateContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateContainerView.swift; sourceTree = "<group>"; };
 		3D15E7B32CB5630D0046CE64 /* AppRecommendUpdateContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommendUpdateContainerViewModel.swift; sourceTree = "<group>"; };
@@ -523,11 +524,10 @@
 		3D9FD4B92E799C9900928E92 /* ChatWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWidgetViewModel.swift; sourceTree = "<group>"; };
 		3D9FD4BD2E79C37B00928E92 /* ChatDeeplinkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDeeplinkRoute.swift; sourceTree = "<group>"; };
 		4E0043132D9BE25D00DDDA8A /* NotificationSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsCoordinator.swift; sourceTree = "<group>"; };
-		4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewModel.swift; sourceTree = "<group>"; };
+		4E00EEEE2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsOnboardingViewModel.swift; sourceTree = "<group>"; };
 		4E00EEF02CCB04FF007B61E8 /* TopicOnboardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCard.swift; sourceTree = "<group>"; };
 		4E00EEF22CCB0523007B61E8 /* TopicOnboardingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingListView.swift; sourceTree = "<group>"; };
 		4E00EEF62CCB0788007B61E8 /* TopicOnboardingCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingCardModel.swift; sourceTree = "<group>"; };
-		4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicOnboardingViewController.swift; sourceTree = "<group>"; };
 		4E00EF062CCB12CD007B61E8 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		4E1534022E398073002DEDB9 /* TopicsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidget.swift; sourceTree = "<group>"; };
 		4E1534042E3982E7002DEDB9 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
@@ -1680,7 +1680,6 @@
 				5D54A82D2BFCAA4E003D0C21 /* LaunchViewController.swift */,
 				5DD4CB172D95491600459FB5 /* RecentActivityListViewController.swift */,
 				5DE93E982E02CF63007E0DAE /* Search */,
-				4E00EEF82CCB0859007B61E8 /* TopicOnboardingViewController.swift */,
 				B04C2E7D2DA913B100F0F63E /* WebViewController.swift */,
 			);
 			path = ViewControllers;
@@ -1989,7 +1988,7 @@
 				D028CD0D2CBFEA4E00742620 /* TopicDetailViewModel.swift */,
 				D0E7923A2D6CD66600EAB81F /* TopicDetailViewModelInterface.swift */,
 				5D4AEA022EB27A8B0004F6F0 /* TopicListItemViewModel.swift */,
-				4E00EEEE2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift */,
+				4E00EEEE2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift */,
 				167D0DC42E9D41310064A39E /* TopicSelectionCardViewModel.swift */,
 				4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */,
 			);
@@ -2067,6 +2066,7 @@
 		D0F86E1F2CAC3BE000FF2D9E /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				16FE77662EBB7290009D02B1 /* TopicsOnboardingView.swift */,
 				167D0DC22E9D40FC0064A39E /* TopicSelectionCardView.swift */,
 				4E89BBB02E3BD779009E0471 /* TopicRowView.swift */,
 				D093BA622CB0499A004F489B /* EditTopicsView.swift */,
@@ -2478,6 +2478,7 @@
 				1658CA692DDF570300622BC3 /* TimerWrapper.swift in Sources */,
 				5D056C242E5706EF00D28DAE /* OneSignalServiceClient.swift in Sources */,
 				D046511D2C933FE600F47C66 /* String+Extensions.swift in Sources */,
+				16FE77672EBB72A7009D02B1 /* TopicsOnboardingView.swift in Sources */,
 				5D9E67C22C5A2C5C00DB7877 /* UITabBarAppearance+GOVUK.swift in Sources */,
 				168F6FA82C4FC1D200A0D7F7 /* HomeViewModel.swift in Sources */,
 				D04DD32D2E0046DC002B5F19 /* PendingQuestion.swift in Sources */,
@@ -2504,7 +2505,6 @@
 				D04DD3352E00471C002B5F19 /* ChatServiceClient.swift in Sources */,
 				D04DD3362E00471C002B5F19 /* ChatResponseHandler.swift in Sources */,
 				4E89BBB12E3BD779009E0471 /* TopicRowView.swift in Sources */,
-				4E00EEF92CCB0859007B61E8 /* TopicOnboardingViewController.swift in Sources */,
 				5D49D4EA2DD3D2940071826B /* NotificationsOnboardingView.swift in Sources */,
 				5DBE08072C480CA700B58DBE /* UINavigationController+Convenience.swift in Sources */,
 				5DA8ADE02DD4968100ECEB6B /* NotificationsOnboardingViewModel.swift in Sources */,
@@ -2709,7 +2709,7 @@
 				1687F3152CB40F8B005E1473 /* AllTopicsCoordinator.swift in Sources */,
 				16AE517F2E6886D3002BCFD7 /* InfoIconListView.swift in Sources */,
 				4E4089882DBBEF78003ECB3B /* EditLocalAuthorityCoordinator.swift in Sources */,
-				4E00EEEF2CCB04B0007B61E8 /* TopicOnboardingViewModel.swift in Sources */,
+				4E00EEEF2CCB04B0007B61E8 /* TopicsOnboardingViewModel.swift in Sources */,
 				168F85532DE9AE4B0040E6AF /* ScrollBounceBehaviourModifier.swift in Sources */,
 				16E912AF2DA72CE000CD2049 /* OIDAuthorizationServiceWrapper.swift in Sources */,
 				164150AF2DE5DB6D00798DF3 /* WelcomeOnboardingViewModel.swift in Sources */,

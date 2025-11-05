@@ -32,7 +32,7 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         let topics = Topic.arrangeMultiple(context: coreData.viewContext)
         mockTopicService._stubbedFetchAllTopics = topics
 
-        let viewModel = TopicOnboardingViewModel(
+        let viewModel = TopicsOnboardingViewModel(
             topics: topics,
             analyticsService: analyticsService,
             topicsService: mockTopicService,

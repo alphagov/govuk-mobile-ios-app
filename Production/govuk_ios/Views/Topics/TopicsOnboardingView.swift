@@ -23,12 +23,13 @@ struct TopicsOnboardingView: View {
                 primaryDisabled: !viewModel.isTopicSelected,
                 secondaryButtonViewModel: viewModel.secondaryButtonViewModel
             )
+            .background(Color(UIColor.govUK.fills.surfaceFixedContainer))
         }
-        .background(Color(UIColor.govUK.fills.surfaceFixedContainer))
+        .background(Color(UIColor.govUK.fills.surfaceFullScreen))
         .navigationTitle(viewModel.title)
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(
-            Color(UIColor.govUK.fills.surfaceFixedContainer),
+            Color(UIColor.govUK.fills.surfaceFullScreen),
             for: .navigationBar
         )
         .onAppear {

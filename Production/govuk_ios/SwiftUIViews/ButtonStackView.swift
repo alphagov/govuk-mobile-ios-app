@@ -50,7 +50,6 @@ public struct ButtonStackView: View {
             buttonsStack
                 .padding(.horizontal, verticalSizeClass == .regular ? 16 : 0)
         }
-        .background(Color(UIColor.govUK.fills.surfaceFixedContainer))
     }
 }
 

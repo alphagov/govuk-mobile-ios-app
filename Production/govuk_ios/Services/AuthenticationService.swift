@@ -198,7 +198,6 @@ class AuthenticationService: AuthenticationServiceInterface {
         )
     }
 
-
     private func setTokens(refreshToken: String?,
                            idToken: String?,
                            accessToken: String?) {

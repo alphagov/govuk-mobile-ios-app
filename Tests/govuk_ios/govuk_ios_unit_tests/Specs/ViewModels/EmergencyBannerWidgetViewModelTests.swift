@@ -20,10 +20,12 @@ struct EmergencyBannerWidgetViewModelTests {
                 type: "national-emergency",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { url in
                 expectedURL = url
-            }, dismiss: { }
+            },
+            dismissAction: { }
         )
 
         sut.open()

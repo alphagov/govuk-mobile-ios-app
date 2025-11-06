@@ -18,9 +18,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "notable-death",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(
@@ -48,9 +49,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "notable-death",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(
@@ -78,9 +80,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "national-emergency",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(
@@ -108,9 +111,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "national-emergency",
                 allowsDismissal: false
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(
@@ -138,9 +142,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "local-emergency",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(
@@ -168,9 +173,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "information",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(
@@ -198,9 +204,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "information",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(
@@ -228,9 +235,10 @@ class EmergencyBannerSnapshotTests: SnapshotTestCase {
                 type: "information",
                 allowsDismissal: true
             ),
+            analyticsService: MockAnalyticsService(),
             sortPriority: 1,
             openURLAction: { _ in },
-            dismiss: { }
+            dismissAction: { }
         )
         let view = EmergencyBannerWidgetView(viewModel: model)
         let viewController = HostingViewController(

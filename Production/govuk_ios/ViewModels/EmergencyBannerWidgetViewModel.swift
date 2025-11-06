@@ -8,30 +8,32 @@ struct EmergencyBannerWidgetViewModel {
     let id: String
     let title: String?
     let body: String
-    let linkUrl: URL?
-    let linkTitle: String?
+    let link: EmergencyBanner.Link?
     let type: EmergencyBannerType
     let allowsDismissal: Bool
     let openURLAction: (URL) -> Void
-    let dismiss: () -> Void
+    let dismissAction: () -> Void
     let sortPriority: Double
 
+    private let analyticsService: AnalyticsServiceInterface
+
     init(banner: EmergencyBanner,
+         analyticsService: AnalyticsServiceInterface,
          sortPriority: Int,
          openURLAction: @escaping (URL) -> Void,
-         dismiss: @escaping () -> Void) {
+         dismissAction: @escaping () -> Void) {
+        self.analyticsService = analyticsService
+        self.sortPriority = Double(sortPriority) * 10
+        self.openURLAction = openURLAction
+        self.dismissAction = dismissAction
         self.id = banner.id
         self.title = banner.title
         self.body = banner.body
-        self.linkUrl = banner.link?.url
-        self.linkTitle = banner.link?.title
-        self.openURLAction = openURLAction
-        self.dismiss = dismiss
+        self.link = banner.link
         self.type = EmergencyBannerType(
             rawValue: (banner.type ?? "information")
         ) ?? .information
         self.allowsDismissal = banner.allowsDismissal ?? true
-        self.sortPriority = Double(sortPriority) * 10
     }
 
     var backgroundColor: Color {
@@ -83,8 +85,23 @@ struct EmergencyBannerWidgetViewModel {
     }
 
     func open() {
-        guard let localUrl = linkUrl
+        guard let link = self.link
         else { return }
-        openURLAction(localUrl)
+        let event = AppEvent.widgetNavigation(
+            text: link.title,
+            external: true,
+            params: ["url": link.url.absoluteString]
+        )
+        analyticsService.track(event: event)
+        openURLAction(link.url)
+    }
+
+    func dismiss() {
+        let event = AppEvent.buttonFunction(
+            text: "Dismiss",
+            section: "Banner",
+            action: "dismiss")
+        analyticsService.track(event: event)
+        self.dismissAction()
     }
 }

@@ -13,7 +13,7 @@ struct EmergencyBannerWidgetView: View {
                 Spacer()
                 dismissButton
             }
-            if let titlelinkTitle = viewModel.linkTitle,
+            if let titlelinkTitle = viewModel.link?.title,
                !titlelinkTitle.isEmpty {
                 divider
                 HStack {
@@ -100,26 +100,4 @@ struct EmergencyBannerWidgetView: View {
         .accessibilityHint(String.common.localized("openWebLinkHint"))
         .accessibilitySortPriority(viewModel.sortPriority - 2)
     }
-}
-
-#Preview {
-    let model = EmergencyBannerWidgetViewModel(
-        banner: EmergencyBanner(
-            id: UUID().uuidString,
-            title: nil,
-            body: "We are testing the UK’s Emergency Alerts system on Sunday 7 September at 3pm.",
-            link: EmergencyBanner.Link(
-                title: "More info",
-                url: URL(string: "https://example.com")!,
-            ),
-            type: "information",
-            allowsDismissal: true
-        ),
-        sortPriority: 10,
-        openURLAction: { url in print("URL \(url)") },
-        dismiss: { print("dismissed") })
-    HomepageWidget(
-        content: EmergencyBannerWidgetView(viewModel: model)
-        )
-    .padding()
 }

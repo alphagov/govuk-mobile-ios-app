@@ -79,9 +79,10 @@ class HomeViewModel: ObservableObject {
         return visibleBanners.enumerated().map { iterator in
             let viewModel = EmergencyBannerWidgetViewModel(
                 banner: iterator.element,
+                analyticsService: analyticsService,
                 sortPriority: (visibleBanners.count - iterator.offset),
                 openURLAction: openURLAction,
-                dismiss: {
+                dismissAction: {
                     self.userDefaultsService.markSeen(banner: iterator.element)
                     self.updateWidgets()
                 }

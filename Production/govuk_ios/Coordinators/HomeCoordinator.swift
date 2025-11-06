@@ -34,7 +34,7 @@ class HomeCoordinator: TabItemCoordinator {
          searchService: SearchServiceInterface,
          activityService: ActivityServiceInterface,
          localAuthorityService: LocalAuthorityServiceInterface,
-         userDefaultService: UserDefaultsServiceInterface,
+         userDefaultsService: UserDefaultsServiceInterface,
          chatService: ChatServiceInterface) {
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
@@ -47,7 +47,7 @@ class HomeCoordinator: TabItemCoordinator {
         self.searchService = searchService
         self.activityService = activityService
         self.localAuthorityService = localAuthorityService
-        self.userDefaultsService = userDefaultService
+        self.userDefaultsService = userDefaultsService
         self.chatService = chatService
         super.init(navigationController: navigationController)
     }

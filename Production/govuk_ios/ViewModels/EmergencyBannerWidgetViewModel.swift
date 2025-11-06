@@ -26,26 +26,26 @@ struct EmergencyBannerWidgetViewModel {
         self.sortPriority = Double(sortPriority) * 10
         self.openURLAction = openURLAction
         self.dismissAction = dismissAction
-        self.id = banner.id
-        self.title = banner.title
-        self.body = banner.body
-        self.link = banner.link
-        self.type = EmergencyBannerType(
+        id = banner.id
+        title = banner.title
+        body = banner.body
+        link = banner.link
+        type = EmergencyBannerType(
             rawValue: (banner.type ?? "information")
         ) ?? .information
-        self.allowsDismissal = banner.allowsDismissal ?? true
+        allowsDismissal = banner.allowsDismissal ?? true
     }
 
     var backgroundColor: Color {
         switch type {
         case .notableDeath:
-            return Color(.govUK.fills.surfaceCardEmergencyNotableDeath)
+            Color(.govUK.fills.surfaceCardEmergencyNotableDeath)
         case .nationalEmergency:
-            return Color(.govUK.fills.surfaceCardEmergencyNational)
+            Color(.govUK.fills.surfaceCardEmergencyNational)
         case .localEmergency:
-            return Color(.govUK.fills.surfaceCardEmergencyLocal)
+            Color(.govUK.fills.surfaceCardEmergencyLocal)
         case .information:
-            return Color(.govUK.fills.surfaceCardEmergencyInfo)
+            Color(.govUK.fills.surfaceCardEmergencyInfo)
         }
     }
 
@@ -102,6 +102,6 @@ struct EmergencyBannerWidgetViewModel {
             section: "Banner",
             action: "dismiss")
         analyticsService.track(event: event)
-        self.dismissAction()
+        dismissAction()
     }
 }

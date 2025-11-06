@@ -213,16 +213,6 @@ class CoordinatorBuilder {
         )
     }
 
-    func allTopics(navigationController: UINavigationController) -> BaseCoordinator {
-        AllTopicsCoordinator(
-            navigationController: navigationController,
-            analyticsService: container.analyticsService.resolve(),
-            viewControllerBuilder: ViewControllerBuilder(),
-            coordinatorBuilder: self,
-            topicsService: container.topicsService.resolve()
-        )
-    }
-
     func localAuthority(navigationController: UINavigationController,
                         dismissAction: @escaping () -> Void) -> BaseCoordinator {
         LocalAuthorityServiceCoordinator(

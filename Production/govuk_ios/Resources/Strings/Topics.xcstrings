@@ -56,17 +56,6 @@
         }
       }
     },
-    "seeAllTopicsButtonText" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "See all topics"
-          }
-        }
-      }
-    },
     "subtopicDetailSubtopicsHeader" : {
       "extractionState" : "manual",
       "localizations" : {

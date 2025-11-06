@@ -121,18 +121,6 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func allTopics_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.allTopics(
-            analyticsService: MockAnalyticsService(),
-            topicAction: { _ in },
-            topicsService: MockTopicsService()
-        )
-
-        #expect(result is AllTopicsViewController)
-    }
-
-    @Test
     func topicsOnboardingView_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicOnboarding(

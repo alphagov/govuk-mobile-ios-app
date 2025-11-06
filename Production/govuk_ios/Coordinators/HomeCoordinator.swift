@@ -159,17 +159,6 @@ class HomeCoordinator: TabItemCoordinator {
         }
     }
 
-    private var startAllTopicsCoordinator: () -> Void {
-        return { [weak self] in
-            self?.trackWidgetNavigation(text: "See all topics")
-            guard let self = self else { return }
-            let coordinator = self.coordinatorBuilder.allTopics(
-                navigationController: self.root
-            )
-            start(coordinator)
-        }
-    }
-
     private var presentLocalAuthorityCoordinator: () -> Void {
         return { [weak self] in
             self?.trackWidgetNavigation(text: "Your local services")

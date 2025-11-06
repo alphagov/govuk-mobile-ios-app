@@ -374,19 +374,6 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func allTopics(analyticsService: AnalyticsServiceInterface,
-                   topicAction: @escaping (Topic) -> Void,
-                   topicsService: TopicsServiceInterface) -> UIViewController {
-        let viewModel = AllTopicsViewModel(
-            analyticsService: analyticsService,
-            topicAction: topicAction,
-            topicsService: topicsService
-        )
-        return AllTopicsViewController(
-            viewModel: viewModel
-        )
-    }
-
     func topicOnboarding(topics: [Topic],
                          analyticsService: AnalyticsServiceInterface,
                          topicsService: TopicsServiceInterface,
@@ -401,7 +388,6 @@ class ViewControllerBuilder {
             rootView: TopicsOnboardingView(
                 viewModel: viewModel
             )
-//            navigationBarHidden: true
         )
         return viewController
     }

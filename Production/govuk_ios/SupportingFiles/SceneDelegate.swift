@@ -55,15 +55,12 @@ class SceneDelegate: UIResponder,
         appCoordinator.start(url: nil)
     }
 
-    func sceneWillResignActive(_ scene: UIScene) {
-        appCoordinator.showPrivacyScreen(appDidTimeout: false)
-    }
-
     func sceneDidBecomeActive(_ scene: UIScene) {
         appCoordinator.hidePrivacyScreen()
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
+        appCoordinator.showPrivacyScreen(appDidTimeout: false)
         let appBackgrounded = "App Backgrounded"
         let appEvent = AppEvent.function(
             text: appBackgrounded,

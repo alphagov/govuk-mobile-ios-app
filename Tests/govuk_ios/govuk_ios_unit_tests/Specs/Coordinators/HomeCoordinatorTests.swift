@@ -32,7 +32,7 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
+            userDefaultsService: MockUserDefaultsService(),
             chatService: MockChatService()
         )
         subject.start()
@@ -61,7 +61,7 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
+            userDefaultsService: MockUserDefaultsService(),
             chatService: MockChatService()
         )
         subject.start()
@@ -96,7 +96,7 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
+            userDefaultsService: MockUserDefaultsService(),
             chatService: MockChatService()
         )
         subject.start()
@@ -131,7 +131,7 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
+            userDefaultsService: MockUserDefaultsService(),
             chatService: MockChatService()
         )
         subject.start()
@@ -172,7 +172,7 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
+            userDefaultsService: MockUserDefaultsService(),
             chatService: MockChatService()
         )
 
@@ -205,7 +205,7 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
+            userDefaultsService: MockUserDefaultsService(),
             chatService: MockChatService()
         )
 
@@ -239,7 +239,7 @@ struct HomeCoordinatorTests {
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
+            userDefaultsService: MockUserDefaultsService(),
             chatService: MockChatService()
         )
 

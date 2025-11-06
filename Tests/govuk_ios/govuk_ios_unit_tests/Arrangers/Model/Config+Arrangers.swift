@@ -41,6 +41,16 @@ extension Config {
                     title: "test",
                     url: URL(string: "https://test.com")!)
             ),
+            emergencyBanners: [
+                .init(
+                    id: "4321",
+                    title: "emergency title",
+                    body: "emergency body",
+                    link: nil,
+                    type: "notable-death",
+                    allowsDismissal: nil
+                ),
+            ],
             chatUrls: ChatURLs(
                 termsAndConditions: URL(string: "https://example.com"),
                 privacyNotice: URL(string: "https://example.com"),

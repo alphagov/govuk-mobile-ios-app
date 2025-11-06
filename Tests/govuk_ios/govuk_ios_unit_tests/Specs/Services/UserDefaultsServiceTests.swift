@@ -151,4 +151,59 @@ struct UserDefaultsServiceTests {
 
         #expect(sut.hasSeen(banner: unseenChat) == false)
     }
+
+    @Test
+    func markSeen_emergencyBanner_setsExpectedValue() throws {
+        let mockUserDefaults = MockUserDefaults()
+        let sut = UserDefaultsService(userDefaults: mockUserDefaults)
+
+        let expectedValue = UUID().uuidString
+        let emergencyBanner = EmergencyBanner(
+            id: expectedValue,
+            title: "test title",
+            body: "test body",
+            link: EmergencyBanner.Link(title: "test title", url: URL(string: "www.test.com")!),
+            type: "notable-death",
+            allowsDismissal: nil,
+        )
+
+        sut.markSeen(banner: emergencyBanner)
+
+        let date = try #require(mockUserDefaults._receivedSetValueValue as? Date)
+        #expect(Calendar.current.isDate(date, equalTo: .now, toGranularity: .minute))
+    }
+
+    @Test
+    func hasSeen_emergencyBanner_returnsExpectedValues() throws {
+        let mockUserDefaults = MockUserDefaults()
+        let sut = UserDefaultsService(userDefaults: mockUserDefaults)
+
+        let expectedSeenValue = UUID().uuidString
+        let seenEmergency = EmergencyBanner(
+            id: expectedSeenValue,
+            title: "test title",
+            body: "test body",
+            link: EmergencyBanner.Link(title: "test title", url: URL(string: "www.test.com")!),
+            type: "notable-death",
+            allowsDismissal: nil,
+        )
+        mockUserDefaults._stubbedValues = [
+            expectedSeenValue: Date.now
+        ]
+
+        let expectedUnseenValue = UUID().uuidString
+        let unseenEmergency = EmergencyBanner(
+            id: expectedUnseenValue,
+            title: "test title 2",
+            body: "test body 2",
+            link: EmergencyBanner.Link(title: "test title 2", url: URL(string: "www.test.com")!),
+            type: "notable-death",
+            allowsDismissal: nil,
+        )
+
+        #expect(sut.hasSeen(banner: seenEmergency))
+
+        #expect(sut.hasSeen(banner: unseenEmergency) == false)
+    }
+
 }

@@ -14,21 +14,25 @@ struct HomeViewModelTests {
             topicAction: { _ in }
         )
         let mockConfigService = MockAppConfigService()
-        mockConfigService._stubbedAlertBanner = .init(
-            id: "test",
-            body: "test",
-            link: nil
-        )
-        mockConfigService._stubbedChatBanner = .init(
-            id: "test",
-            title: "test",
-            body: "test",
-            link: mockConfigService._stubbedChatBannerLink
-        )
-        mockConfigService._stubbedUserFeedbackBanner = .init(
-            body: "test",
-            link: mockConfigService._stubbedUserFeedbackBannerLink
-        )
+        mockConfigService._stubbedEmergencyBanners =
+        [
+            .init(
+                id: "emergency",
+                title: "National Emergency",
+                body: "This is a Level 1 emergency",
+                link: nil,
+                type: "national-emergency",
+                allowsDismissal: true
+            ),
+            .init(
+                id: "bridges",
+                title: "His Majesty King Henry VIII",
+                body: "1621 - 1854",
+                link: nil,
+                type: "notable-death",
+                allowsDismissal: false
+            )
+        ]
 
         let mockChatService = MockChatService()
         mockChatService._stubbedIsEnabled = true
@@ -39,6 +43,7 @@ struct HomeViewModelTests {
             analyticsService: MockAnalyticsService(),
             configService: mockConfigService,
             notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
             topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
@@ -56,7 +61,7 @@ struct HomeViewModelTests {
         let widgets = subject.widgets
       
         #expect((widgets as Any) is [HomepageWidget])
-        #expect(widgets.count == 3)
+        #expect(widgets.count == 5)
     }
 
     @Test
@@ -73,6 +78,7 @@ struct HomeViewModelTests {
             analyticsService: MockAnalyticsService(),
             configService: configService,
             notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
             topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
@@ -104,6 +110,7 @@ struct HomeViewModelTests {
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
             notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
             topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
@@ -126,5 +133,62 @@ struct HomeViewModelTests {
         #expect(screens.count == 1)
         #expect(screens.first?.trackingName == "Homepage")
         #expect(screens.first?.trackingClass == "HomeContentView")
+    }
+
+    @Test
+    func emergencyBanners_have_correct_sort_priority() throws {
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in }
+        )
+
+        let mockConfigService = MockAppConfigService()
+        mockConfigService._stubbedEmergencyBanners =
+        [
+            .init(
+                id: "emergency",
+                title: "National Emergency",
+                body: "This is a Level 1 emergency",
+                link: nil,
+                type: "national-emergency",
+                allowsDismissal: true
+            ),
+            .init(
+                id: "bridges",
+                title: "His Majesty King Henry VIII",
+                body: "1621 - 1854",
+                link: nil,
+                type: "notable-death",
+                allowsDismissal: false
+            )
+        ]
+
+        let mockAnalyticsService = MockAnalyticsService()
+        let subject = HomeViewModel(
+            analyticsService: mockAnalyticsService,
+            configService: mockConfigService,
+            notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
+            topicsWidgetViewModel: topicsViewModel,
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
+        )
+
+        let widgets = subject.widgets
+        try #require(widgets.count >= 2)
+        let bannerOne = try #require(widgets[0].content as? EmergencyBannerWidgetView)
+        #expect(bannerOne.viewModel.sortPriority == 20)
+        let bannerTwo = try #require(widgets[1].content as? EmergencyBannerWidgetView)
+        #expect(bannerTwo.viewModel.sortPriority == 10)
     }
 }

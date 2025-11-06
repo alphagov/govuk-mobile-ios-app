@@ -10,15 +10,16 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private let viewControllerBuilder: ViewControllerBuilder
     private let analyticsService: AnalyticsServiceInterface
     private var pendingAuthenticationCoordinator: BaseCoordinator?
+    private let deviceInformationProvider: DeviceInformationProviderInterface
+    private let versionProvider: AppVersionProvider
     private let completionAction: () -> Void
 
     private lazy var welcomeOnboardingViewModel: WelcomeOnboardingViewModel = {
-        let viewModel = WelcomeOnboardingViewModel(
+        WelcomeOnboardingViewModel(
             completeAction: { [weak self] in
                 self?.startAuthentication()
             }
         )
-        return viewModel
     }()
 
     init(navigationController: UINavigationController,
@@ -26,12 +27,16 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
          coordinatorBuilder: CoordinatorBuilder,
          viewControllerBuilder: ViewControllerBuilder,
          analyticsService: AnalyticsServiceInterface,
+         deviceInformationProvider: DeviceInformationProviderInterface,
+         versionProvider: AppVersionProvider,
          completionAction: @escaping () -> Void) {
         self.navigationController = navigationController
         self.authenticationService = authenticationService
         self.coordinatorBuilder = coordinatorBuilder
         self.viewControllerBuilder = viewControllerBuilder
         self.analyticsService = analyticsService
+        self.deviceInformationProvider = deviceInformationProvider
+        self.versionProvider = versionProvider
         self.completionAction = completionAction
         super.init(navigationController: navigationController)
     }
@@ -77,14 +82,32 @@ class WelcomeOnboardingCoordinator: BaseCoordinator {
     private func setSignInError(_ error: AuthenticationError) {
         let viewController = viewControllerBuilder.signInError(
             error: error,
-            completion: { [weak self] in
-                self?.setWelcomeOnboardingViewController(false)
+            feedbackAction: { [weak self, root] error in
+                self?.openFeedback(error: error)
+                root.popToRootViewController(animated: true)
+            },
+            retryAction: { [root] in
+                root.popToRootViewController(animated: true)
             }
         )
-        set(viewController, animated: false)
+        push(viewController)
     }
 
     private var shouldSkipOnboarding: Bool {
         authenticationService.isSignedIn
+    }
+
+    private func openFeedback(error: AuthenticationError) {
+        let url = self.deviceInformationProvider
+            .reportProblem(
+                versionProvider: self.versionProvider,
+                error: error,
+            )
+        let coordinator = coordinatorBuilder.safari(
+            navigationController: root,
+            url: url,
+            fullScreen: false
+        )
+        start(coordinator)
     }
 }

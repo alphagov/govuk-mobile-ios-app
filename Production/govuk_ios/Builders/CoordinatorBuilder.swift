@@ -309,6 +309,8 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
+            deviceInformationProvider: DeviceInformationProvider(),
+            versionProvider: Bundle.main,
             completionAction: completionAction
         )
     }

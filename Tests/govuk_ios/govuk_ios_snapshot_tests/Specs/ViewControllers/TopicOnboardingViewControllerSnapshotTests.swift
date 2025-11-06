@@ -12,21 +12,19 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
 
     func test_loadInNavigationController_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController(),
-            mode: .light,
-            prefersLargeTitles: true
+            view: view,
+            mode: .light
         )
     }
 
     func test_loadInNavigationController_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
-            viewController: viewController(),
-            mode: .dark,
-            prefersLargeTitles: true
+            view: view,
+            mode: .dark
         )
     }
 
-    private func viewController() -> UIViewController {
+    private var view: TopicsOnboardingView {
         let analyticsService = MockAnalyticsService()
         let mockTopicService = MockTopicsService()
         let topics = Topic.arrangeMultiple(context: coreData.viewContext)
@@ -38,11 +36,9 @@ final class TopicOnboardingViewControllerSnapshotTests: SnapshotTestCase {
             topicsService: mockTopicService,
             dismissAction: {}
         )
-        let viewController = TopicOnboardingViewController(
+        let view = TopicsOnboardingView(
             viewModel: viewModel
         )
-        viewController.beginAppearanceTransition(true, animated: false)
-        viewController.endAppearanceTransition()
-        return viewController
+        return view
     }
 }

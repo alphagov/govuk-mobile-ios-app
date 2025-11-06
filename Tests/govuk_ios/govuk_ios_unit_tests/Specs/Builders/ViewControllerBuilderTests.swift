@@ -133,7 +133,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func topicOnboarding_returnsExpectedResult() {
+    func topicsOnboardingView_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicOnboarding(
             topics: [],
@@ -142,7 +142,8 @@ struct ViewControllerBuilderTests {
             dismissAction: { }
         )
 
-        #expect(result is TopicOnboardingViewController)
+        let rootView = (result as? HostingViewController<TopicsOnboardingView>)?.rootView
+        #expect(rootView != nil)
     }
 
     @Test

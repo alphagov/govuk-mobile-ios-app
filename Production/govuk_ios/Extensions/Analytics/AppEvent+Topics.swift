@@ -3,11 +3,12 @@ import GOVKit
 
 extension AppEvent {
     static func topicSelection(title: String,
+                               section: String,
                                isFavourite: Bool) -> AppEvent {
         buttonFunction(
             text: title,
-            section: "Edit topics",
-            action: isFavourite ? "Selected" : "Unselected"
+            section: section,
+            action: isFavourite ? "add" : "remove"
         )
     }
 

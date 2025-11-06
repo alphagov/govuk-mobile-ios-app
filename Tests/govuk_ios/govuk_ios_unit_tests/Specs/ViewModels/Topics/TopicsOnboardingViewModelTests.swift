@@ -4,23 +4,34 @@ import Testing
 @testable import govuk_ios
 
 @Suite
-struct TopicOnboardingViewModelTests {
+struct TopicsOnboardingViewModelTests {
+    @Test
+    func init_loadsTopicSelectionCards() {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let topicOne = Topic.arrange(context: coreData.backgroundContext)
+        let sut = TopicsOnboardingViewModel(
+            topics: [topicOne],
+            analyticsService: MockAnalyticsService(),
+            topicsService: MockTopicsService(),
+            dismissAction: { }
+        )
+
+        #expect(sut.topicSelectionCards.count == 1)
+    }
 
     @Test
-    func selectTopic_isSelected_tracksPress() {
+    func topicSelectionCard_tapAction_tracksPress() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topic = Topic.arrange(context: coreData.backgroundContext)
-        try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
-
         let sut = TopicsOnboardingViewModel(
-            topics: [],
+            topics: [topic],
             analyticsService: mockAnalyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topic)
+        sut.topicSelectionCards.first?.tapAction(true)
         #expect(mockAnalyticsService._trackedEvents.count == 1)
         let event = mockAnalyticsService._trackedEvents.first
         #expect(event?.params?["action"] as? String == "add")
@@ -30,33 +41,55 @@ struct TopicOnboardingViewModelTests {
     }
 
     @Test
-    func selectTopic_isFavourite_tracksPress() {
+    func topicSelectionCard_tapAction_true_setsFavourite() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topic = Topic.arrange(context: coreData.backgroundContext)
-        topic.isFavourite = true
-        try? coreData.backgroundContext.save()
-        let mockAnalyticsService = MockAnalyticsService()
-
+        topic.isFavourite = false
         let sut = TopicsOnboardingViewModel(
-            topics: [],
-            analyticsService: mockAnalyticsService,
+            topics: [topic],
+            analyticsService: MockAnalyticsService(),
             topicsService: MockTopicsService(),
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topic)
-        #expect(mockAnalyticsService._trackedEvents.count == 1)
-        let event = mockAnalyticsService._trackedEvents.first
-        #expect(event?.params?["action"] as? String == "remove")
-        #expect(event?.params?["type"] as? String == "Button")
-        #expect(event?.params?["section"] as? String == "Topic selection")
-        #expect(event?.params?["text"] as? String == topic.title)
+        sut.topicSelectionCards.first?.tapAction(true)
+        #expect(topic.isFavourite == true)
+    }
+
+    @Test
+    func topicSelectionCard_tapAction_false_unsetsFavourite() {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let topic = Topic.arrange(context: coreData.backgroundContext)
+        topic.isFavourite = true
+        let sut = TopicsOnboardingViewModel(
+            topics: [topic],
+            analyticsService: MockAnalyticsService(),
+            topicsService: MockTopicsService(),
+            dismissAction: { }
+        )
+
+        sut.topicSelectionCards.first?.tapAction(false)
+        #expect(topic.isFavourite == false)
+    }
+
+    @Test
+    func topicSelectionCard_tapAction_true_setsIsTopicSelected() {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let topic = Topic.arrange(context: coreData.backgroundContext)
+        let sut = TopicsOnboardingViewModel(
+            topics: [topic],
+            analyticsService: MockAnalyticsService(),
+            topicsService: MockTopicsService(),
+            dismissAction: { }
+        )
+
+        sut.topicSelectionCards.first?.tapAction(true)
+        #expect(sut.isTopicSelected == true)
     }
 
     @Test
     func primaryAction_tracksEvent() {
         let mockAnalyticsService = MockAnalyticsService()
-
         let sut = TopicsOnboardingViewModel(
             topics: [],
             analyticsService: mockAnalyticsService,
@@ -71,29 +104,22 @@ struct TopicOnboardingViewModelTests {
     }
 
     @Test
-    func selectTopics_thenSave_savedSelectedFavourites() {
+    func primaryAction_savesSelectedFavourites() {
         let coreData = CoreDataRepository.arrangeAndLoad
         let topicOne = Topic.arrange(context: coreData.backgroundContext)
-        topicOne.isFavourite = true
         let topicTwo = Topic.arrange(context: coreData.backgroundContext)
-        topicTwo.isFavourite = false
         let topicThree = Topic.arrange(context: coreData.backgroundContext)
-        topicThree.isFavourite = true
-        _ = Topic.arrange(context: coreData.backgroundContext)
-        try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
-
         let sut = TopicsOnboardingViewModel(
-            topics: [],
+            topics: [topicOne, topicTwo, topicThree],
             analyticsService: mockAnalyticsService,
             topicsService: MockTopicsService(),
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topicOne)
-        sut.topicSelected(topic: topicOne)
-        sut.topicSelected(topic: topicTwo)
-        sut.topicSelected(topic: topicThree)
+        sut.topicSelectionCards[0].tapAction(true)
+        sut.topicSelectionCards[1].tapAction(true)
+        sut.topicSelectionCards[2].tapAction(false)
 
         sut.primaryButtonViewModel.action()
         let request = Topic.fetchRequest()
@@ -108,7 +134,6 @@ struct TopicOnboardingViewModelTests {
     @Test
     func secondaryAction_tracksEvent() {
         let mockAnalyticsService = MockAnalyticsService()
-
         let sut = TopicsOnboardingViewModel(
             topics: [],
             analyticsService: mockAnalyticsService,
@@ -130,18 +155,17 @@ struct TopicOnboardingViewModelTests {
             context: coreData.viewContext,
             isFavourite: false
         )
-        try? coreData.backgroundContext.save()
         let mockAnalyticsService = MockAnalyticsService()
         let mockTopicsService = MockTopicsService()
         mockTopicsService._stubbedFetchAllTopics = [topicOne]
         let sut = TopicsOnboardingViewModel(
-            topics: [],
+            topics: [topicOne],
             analyticsService: mockAnalyticsService,
             topicsService: mockTopicsService,
             dismissAction: { }
         )
 
-        sut.topicSelected(topic: topicOne)
+        sut.topicSelectionCards[0].tapAction(true)
 
         sut.secondaryButtonViewModel.action()
         let request = Topic.fetchRequest()
@@ -149,55 +173,5 @@ struct TopicOnboardingViewModelTests {
         let favourites = try? coreData.backgroundContext.fetch(request)
 
         #expect(favourites?.count == 0)
-    }
-
-    @Test
-    func primaryActionButton_action_tracksEvent() {
-        let analyticsService = MockAnalyticsService()
-        let sut = TopicsOnboardingViewModel(
-            topics: [],
-            analyticsService: analyticsService,
-            topicsService: MockTopicsService(),
-            dismissAction: { }
-        )
-
-        sut.primaryButtonViewModel.action()
-
-        let receivedTilte = analyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(analyticsService._trackedEvents.count == 1)
-        #expect(receivedTilte == "Done")
-    }
-
-    @Test
-    func secondaryActionButton_action_tracksEvent() {
-
-        let analyticsService = MockAnalyticsService()
-        let sut = TopicsOnboardingViewModel(
-            topics: [],
-            analyticsService: analyticsService,
-            topicsService: MockTopicsService(),
-            dismissAction: {}
-        )
-        sut.secondaryButtonViewModel.action()
-        let receivedTilte = analyticsService._trackedEvents.first?.params?["text"] as? String
-        #expect(analyticsService._trackedEvents.count == 1)
-        #expect(receivedTilte == "Skip")
-
-    }
-
-    @Test
-    func topics_returnsExpectedResult() {
-        let coreData = CoreDataRepository.arrangeAndLoad
-
-        let mockTopicsService = MockTopicsService()
-        let expectedTopics = Topic.arrangeMultiple(context: coreData.viewContext)
-        let sut = TopicsOnboardingViewModel(
-            topics: expectedTopics,
-            analyticsService: MockAnalyticsService(),
-            topicsService: mockTopicsService,
-            dismissAction: {}
-        )
-
-        #expect(sut.topics.count == expectedTopics.count)
     }
 }

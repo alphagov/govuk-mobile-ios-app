@@ -42,6 +42,7 @@ final class EditTopicsViewModel {
     private func trackSelection(topic: Topic) {
         let event = AppEvent.topicSelection(
             title: topic.title,
+            section: "Edit topics",
             isFavourite: topic.isFavourite
         )
         analyticsService.track(event: event)

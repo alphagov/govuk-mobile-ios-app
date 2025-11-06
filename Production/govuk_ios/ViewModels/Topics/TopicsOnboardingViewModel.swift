@@ -7,6 +7,7 @@ import GOVKit
 class TopicsOnboardingViewModel: ObservableObject {
     @Published private(set) var topicSelectionCards: [TopicSelectionCardViewModel] = []
     @Published private(set) var isTopicSelected: Bool = false
+    private let topics: [Topic]
     private let analyticsService: AnalyticsServiceInterface
     private let topicsService: TopicsServiceInterface
     private let dismissAction: () -> Void
@@ -31,6 +32,7 @@ class TopicsOnboardingViewModel: ObservableObject {
          analyticsService: AnalyticsServiceInterface,
          topicsService: TopicsServiceInterface,
          dismissAction: @escaping () -> Void) {
+        self.topics = topics
         self.analyticsService = analyticsService
         self.topicsService = topicsService
         self.dismissAction = dismissAction
@@ -71,7 +73,7 @@ class TopicsOnboardingViewModel: ObservableObject {
             tapAction: { [weak self] value in
                 guard let self else { return }
                 topic.isFavourite = value
-                isTopicSelected = topicSelectionCards.contains(where: { $0.isOn })
+                isTopicSelected = topics.contains(where: { $0.isFavourite })
                 trackSelection(topic: topic)
             }
         )
@@ -80,6 +82,7 @@ class TopicsOnboardingViewModel: ObservableObject {
     private func trackSelection(topic: Topic) {
         let event = AppEvent.topicSelection(
             title: topic.title,
+            section: "Topic selection",
             isFavourite: topic.isFavourite
         )
         analyticsService.track(event: event)

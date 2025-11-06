@@ -155,28 +155,6 @@
         }
       }
     },
-    "topicOnboardingCardSelected" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selected"
-          }
-        }
-      }
-    },
-    "topicOnboardingCardUnselected" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select"
-          }
-        }
-      }
-    },
     "topicOnboardingPageSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {

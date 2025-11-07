@@ -22,6 +22,11 @@ struct ConstantsTests {
     }
 
     @Test
+    func reportProblemUrl_returnsExpectedResult() {
+        #expect(Constants.API.reportProblemUrl.absoluteString == "https://www.gov.uk/contact/govuk-app/report-problem")
+    }
+
+    @Test
     func termsAndConditionsUrl_returnsExpectedResult() {
         #expect(Constants.API.termsAndConditionsUrl.absoluteString == "https://www.gov.uk/government/publications/govuk-app-terms-and-conditions")
     }

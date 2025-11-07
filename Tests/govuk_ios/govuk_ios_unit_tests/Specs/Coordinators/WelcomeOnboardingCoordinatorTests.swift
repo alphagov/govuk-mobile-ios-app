@@ -19,6 +19,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: MockViewControllerBuilder(),
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
         sut.start(url: nil)
@@ -39,6 +41,8 @@ class WelcomeOnboardingCoordinatorTests {
                 coordinatorBuilder: mockCoordinatorBuilder,
                 viewControllerBuilder: MockViewControllerBuilder(),
                 analyticsService: MockAnalyticsService(),
+                deviceInformationProvider: MockDeviceInformationProvider(),
+                versionProvider: MockAppVersionProvider(),
                 completionAction: { continuation.resume(returning: true) }
             )
             sut.start(url: nil)
@@ -67,6 +71,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
@@ -75,7 +81,7 @@ class WelcomeOnboardingCoordinatorTests {
         mockViewControllerBuilder._stubbedWelcomeOnboardingViewModel?.completeAction()
         mockCoordinatorBuilder._receivedAuthenticationErrorAction?(.loginFlow(.init(reason: .authorizationAccessDenied)))
 
-        #expect(mockNavigationController._setViewControllers?.first == stubbedSignInErrorViewController)
+        #expect(mockNavigationController._pushedViewController == stubbedSignInErrorViewController)
     }
 
     @Test
@@ -98,6 +104,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: mockAnalyticsService,
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
@@ -129,6 +137,8 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
@@ -158,14 +168,54 @@ class WelcomeOnboardingCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             viewControllerBuilder: mockViewControllerBuilder,
             analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
             completionAction: { }
         )
 
         sut.start(url: nil)
 
         mockCoordinatorBuilder._receivedAuthenticationErrorAction?(.loginFlow(.init(reason: .authorizationAccessDenied)))
-        mockViewControllerBuilder._receivedSignInErrorCompletion?()
+        mockViewControllerBuilder._receivedSignInErrorRetryAction?()
 
         #expect(mockNavigationController._setViewControllers?.first == stubbedWelcomeOnboardingViewController)
+    }
+
+    @Test
+    func signInErrorCompletion_feedbackAction_setsWelcomOnboarding() {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockNavigationController = MockNavigationController()
+        let mockCoordinatorBuilder = CoordinatorBuilder.mock
+        let mockViewControllerBuilder = MockViewControllerBuilder()
+
+        let mockSafariCoordinator = MockBaseCoordinator()
+        mockCoordinatorBuilder._stubbedSafariCoordinator = mockSafariCoordinator
+
+        let stubbedWelcomeOnboardingViewController = UIViewController()
+        mockViewControllerBuilder._stubbedWelcomeOnboardingViewController = stubbedWelcomeOnboardingViewController
+
+        let stubbedSignInErrorViewController = UIViewController()
+        mockViewControllerBuilder._stubbedSignInErrorViewController = stubbedSignInErrorViewController
+
+        let sut = WelcomeOnboardingCoordinator(
+            navigationController: mockNavigationController,
+            authenticationService: mockAuthenticationService,
+            coordinatorBuilder: mockCoordinatorBuilder,
+            viewControllerBuilder: mockViewControllerBuilder,
+            analyticsService: MockAnalyticsService(),
+            deviceInformationProvider: MockDeviceInformationProvider(),
+            versionProvider: MockAppVersionProvider(),
+            completionAction: { }
+        )
+
+        sut.start(url: nil)
+
+        let expectedError = AuthenticationError.unknown(TestError.anyError)
+        mockViewControllerBuilder._stubbedWelcomeOnboardingViewModel?.completeAction()
+        mockCoordinatorBuilder._receivedAuthenticationErrorAction?(expectedError)
+        mockViewControllerBuilder._receivedSignInErrorFeedbackAction?(expectedError)
+
+        #expect(mockNavigationController._setViewControllers?.first == stubbedWelcomeOnboardingViewController)
+        #expect(mockSafariCoordinator._startCalled)
     }
 }

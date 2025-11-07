@@ -3,8 +3,10 @@ import Testing
 import Firebase
 import FirebaseAppCheck
 
+@testable import GOVKit
 @testable import govuk_ios
 
+@Suite
 struct AppAttestServiceTests {
 
     @Test
@@ -15,12 +17,46 @@ struct AppAttestServiceTests {
             expirationDate: .distantFuture
         )
 
+        let mockAnalyticsService = MockAnalyticsService()
         let sut = AppAttestService(
-            appCheckInterface: mockAppCheckProvider
+            appCheckInterface: mockAppCheckProvider,
+            analyticsService: mockAnalyticsService
         )
 
         let token = try? await sut.token()
         #expect(token?.token == "Token")
+    }
+
+    @Test
+    func token_throwing_tracksError() async throws {
+        let mockAppCheckProvider = MockAppCheck()
+        mockAppCheckProvider._stubbedTokenError = AppAttestError.tokenGeneration
+
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = AppAttestService(
+            appCheckInterface: mockAppCheckProvider,
+            analyticsService: mockAnalyticsService
+        )
+
+        await #expect(throws: AppAttestError.tokenGeneration) {
+            try await sut.token()
+        }
+    }
+}
+
+@Suite
+struct AppAttestErrorTests {
+    @Test(arguments: zip(
+        [
+            AppAttestError.tokenGeneration
+        ],
+        [
+            "4.0.1"
+        ]
+    ))
+    func govukErrorCode_returnsExpectedValue(error: AppAttestError,
+                                             expectedCode: String) {
+        #expect(error.govukErrorCode == expectedCode)
     }
 }
 

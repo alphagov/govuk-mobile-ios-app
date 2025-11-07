@@ -13,6 +13,7 @@ struct Config: Decodable {
     let alertBanner: AlertBanner?
     let chatBanner: ChatBanner?
     let userFeedbackBanner: UserFeedbackBanner?
+    let emergencyBanners: [EmergencyBanner]?
     let chatUrls: ChatURLs?
 }
 

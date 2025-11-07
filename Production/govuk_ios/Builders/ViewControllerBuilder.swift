@@ -24,6 +24,7 @@ class ViewControllerBuilder {
         let analyticsService: AnalyticsServiceInterface
         let configService: AppConfigServiceInterface
         let notificationService: NotificationServiceInterface
+        let userDefaultsService: UserDefaultsServiceInterface
         let searchService: SearchServiceInterface
         let activityService: ActivityServiceInterface
         let topicsWidgetViewModel: TopicsWidgetViewModel
@@ -46,6 +47,7 @@ class ViewControllerBuilder {
             analyticsService: dependencies.analyticsService,
             configService: dependencies.configService,
             notificationService: dependencies.notificationService,
+            userDefaultsService: dependencies.userDefaultsService,
             topicsWidgetViewModel: dependencies.topicsWidgetViewModel,
             urlOpener: UIApplication.shared,
             searchService: dependencies.searchService,
@@ -295,11 +297,15 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func signInError(error: AuthenticationError,
-                     completion: @escaping () -> Void) -> UIViewController {
+    func signInError(
+        error: AuthenticationError,
+        feedbackAction: @escaping (AuthenticationError) -> Void,
+        retryAction: @escaping () -> Void
+    ) -> UIViewController {
         let viewModel = SignInErrorViewModel(
             error: error,
-            completion: completion
+            feedbackAction: feedbackAction,
+            retryAction: retryAction
         )
         let view = InfoView<SignInErrorViewModel>(viewModel: viewModel)
         let viewController = HostingViewController(rootView: view)

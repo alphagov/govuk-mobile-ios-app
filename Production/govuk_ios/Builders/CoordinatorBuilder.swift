@@ -68,7 +68,7 @@ class CoordinatorBuilder {
             searchService: container.searchService.resolve(),
             activityService: container.activityService.resolve(),
             localAuthorityService: container.localAuthorityService.resolve(),
-            userDefaultService: container.userDefaultsService.resolve(),
+            userDefaultsService: container.userDefaultsService.resolve(),
             chatService: container.chatService.resolve()
         )
     }
@@ -299,6 +299,8 @@ class CoordinatorBuilder {
             coordinatorBuilder: self,
             viewControllerBuilder: ViewControllerBuilder(),
             analyticsService: container.analyticsService.resolve(),
+            deviceInformationProvider: DeviceInformationProvider(),
+            versionProvider: Bundle.main,
             completionAction: completionAction
         )
     }

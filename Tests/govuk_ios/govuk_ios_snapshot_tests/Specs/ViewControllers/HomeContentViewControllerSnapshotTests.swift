@@ -54,6 +54,3 @@ final class HomeContentViewControllerSnapshotTests: SnapshotTestCase {
         return HostingViewController(rootView: view)
     }
 }
-
-
-

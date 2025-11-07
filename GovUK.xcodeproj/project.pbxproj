@@ -101,7 +101,8 @@
 		4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534042E3982E7002DEDB9 /* TopicCard.swift */; };
 		4E15340B2E398647002DEDB9 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340A2E398647002DEDB9 /* HomeContentView.swift */; };
 		4E15340D2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */; };
-		4E18BCB52EBD7D8B00C0867F /* CentreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18BCB42EBD7D8B00C0867F /* CentreCard.swift */; };
+		4E18BCB52EBD7D8B00C0867F /* CentreCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18BCB42EBD7D8B00C0867F /* CentreCardView.swift */; };
+		4E18BCBA2EBD8AF400C0867F /* CentreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18BCB92EBD8AF400C0867F /* CentreCard.swift */; };
 		4E19C85E2E65109900D56C33 /* ChatWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */; };
 		4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D252DB0E6510089CF9E /* Authority.swift */; };
 		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
@@ -535,7 +536,8 @@
 		4E1534042E3982E7002DEDB9 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
 		4E15340A2E398647002DEDB9 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
 		4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
-		4E18BCB42EBD7D8B00C0867F /* CentreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreCard.swift; sourceTree = "<group>"; };
+		4E18BCB42EBD7D8B00C0867F /* CentreCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreCardView.swift; sourceTree = "<group>"; };
+		4E18BCB92EBD8AF400C0867F /* CentreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreCard.swift; sourceTree = "<group>"; };
 		4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWidgetView.swift; sourceTree = "<group>"; };
 		4E265D252DB0E6510089CF9E /* Authority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
 		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
@@ -1187,6 +1189,14 @@
 			path = AppConfig;
 			sourceTree = "<group>";
 		};
+		4E18BCB82EBD8AD700C0867F /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				4E18BCB92EBD8AF400C0867F /* CentreCard.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		4E265F142DB0E6B70089CF9E /* LocalAuthority */ = {
 			isa = PBXGroup;
 			children = (
@@ -1809,6 +1819,7 @@
 		5DE970512C297637009D66C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E18BCB82EBD8AD700C0867F /* SwiftUI */,
 				D04C542A2D7081C00070EE79 /* Analytics */,
 				4E003E7D2C75F497008FCBF2 /* AppConfig */,
 				5D8100882CEB3FE600EE7D15 /* AppLaunchResponse.swift */,
@@ -1899,7 +1910,7 @@
 				D0ECAB032DCDF9EE00A9707E /* RadioButtonView.swift */,
 				4EAFCE522E437D2B00125755 /* HomepageWidget.swift */,
 				4EE44BAC2E70332C0093D380 /* NonTappableCardView.swift */,
-				4E18BCB42EBD7D8B00C0867F /* CentreCard.swift */,
+				4E18BCB42EBD7D8B00C0867F /* CentreCardView.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -2564,7 +2575,7 @@
 				4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */,
 				16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
-				4E18BCB52EBD7D8B00C0867F /* CentreCard.swift in Sources */,
+				4E18BCB52EBD7D8B00C0867F /* CentreCardView.swift in Sources */,
 				4E837E252E7D8C8600B3CC5A /* RecentActivityHomepageViewModel.swift in Sources */,
 				D0D9B87B2D2D547D0051EDDD /* StringValidator.swift in Sources */,
 				4E6663CA2C737EF50063E81C /* Config.swift in Sources */,
@@ -2691,6 +2702,7 @@
 				16D186AC2E462F14006ACC7A /* ChatConsentOnboardingViewModel.swift in Sources */,
 				16D0D0432CC6819C00944D79 /* TopicTableViewCell.swift in Sources */,
 				D0EC94C52DCBA5F700A9707E /* InfoViewModelInterface.swift in Sources */,
+				4E18BCBA2EBD8AF400C0867F /* CentreCard.swift in Sources */,
 				168176A32DCE68D800A4B0E4 /* CoreDataDeletionService.swift in Sources */,
 				D0E85A822DDCB266003B4D7A /* LocalAuthorityResponse.swift in Sources */,
 				5D60E6AD2E4A46E20046C1A1 /* UserDefaultsService.swift in Sources */,

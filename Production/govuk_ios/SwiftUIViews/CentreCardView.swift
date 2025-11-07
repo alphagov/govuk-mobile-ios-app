@@ -30,6 +30,7 @@ struct CentreCard: View {
                             .font(Font.govUK.body)
                             .foregroundColor(
                                 Color(UIColor.govUK.text.secondary))
+                            .padding(.horizontal)
                     }
                     Spacer()
                 }
@@ -48,13 +49,4 @@ struct CentreCard: View {
         }
         .padding(.horizontal)
     }
-}
-
-struct CentreCardModel {
-    init(primaryText: String? = nil, secondaryText: String? = nil) {
-        self.primaryText = primaryText
-        self.secondaryText = secondaryText
-    }
-    let primaryText: String?
-    let secondaryText: String?
 }

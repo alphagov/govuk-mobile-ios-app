@@ -101,6 +101,7 @@
 		4E1534052E3982E7002DEDB9 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1534042E3982E7002DEDB9 /* TopicCard.swift */; };
 		4E15340B2E398647002DEDB9 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340A2E398647002DEDB9 /* HomeContentView.swift */; };
 		4E15340D2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */; };
+		4E18BCB52EBD7D8B00C0867F /* CentreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E18BCB42EBD7D8B00C0867F /* CentreCard.swift */; };
 		4E19C85E2E65109900D56C33 /* ChatWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */; };
 		4E265D2A2DB0E6510089CF9E /* Authority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D252DB0E6510089CF9E /* Authority.swift */; };
 		4E265D2D2DB0E6510089CF9E /* LocalAuthorityAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */; };
@@ -534,6 +535,7 @@
 		4E1534042E3982E7002DEDB9 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
 		4E15340A2E398647002DEDB9 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
 		4E15340C2E3A248E002DEDB9 /* TopicsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsWidgetViewModel.swift; sourceTree = "<group>"; };
+		4E18BCB42EBD7D8B00C0867F /* CentreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentreCard.swift; sourceTree = "<group>"; };
 		4E19C85D2E65109900D56C33 /* ChatWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWidgetView.swift; sourceTree = "<group>"; };
 		4E265D252DB0E6510089CF9E /* Authority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authority.swift; sourceTree = "<group>"; };
 		4E265D282DB0E6510089CF9E /* LocalAuthorityAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityAddress.swift; sourceTree = "<group>"; };
@@ -1897,6 +1899,7 @@
 				D0ECAB032DCDF9EE00A9707E /* RadioButtonView.swift */,
 				4EAFCE522E437D2B00125755 /* HomepageWidget.swift */,
 				4EE44BAC2E70332C0093D380 /* NonTappableCardView.swift */,
+				4E18BCB42EBD7D8B00C0867F /* CentreCard.swift */,
 			);
 			path = SwiftUIViews;
 			sourceTree = "<group>";
@@ -2561,6 +2564,7 @@
 				4EBCA3272DAC541B0063A723 /* LocalAuthorityService.swift in Sources */,
 				16A98EA52D30333F00C72DEB /* SuggestionCell.swift in Sources */,
 				4E6663C82C7370750063E81C /* AppConfig.swift in Sources */,
+				4E18BCB52EBD7D8B00C0867F /* CentreCard.swift in Sources */,
 				4E837E252E7D8C8600B3CC5A /* RecentActivityHomepageViewModel.swift in Sources */,
 				D0D9B87B2D2D547D0051EDDD /* StringValidator.swift in Sources */,
 				4E6663CA2C737EF50063E81C /* Config.swift in Sources */,

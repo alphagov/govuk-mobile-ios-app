@@ -6,7 +6,7 @@ struct CentreCardView: View {
         VStack {
             HStack(alignment: .center) {
                 Spacer()
-                VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 8) {
                     Spacer()
                     Image(systemName: "plus.circle")
                         .foregroundColor(
@@ -14,7 +14,7 @@ struct CentreCardView: View {
                                 UIColor.govUK.text.iconTertiary
                             )
                         )
-                        .padding(.bottom, 6)
+                       .padding(.bottom, 2)
                         .font(.title)
                     if let title = model.primaryText {
                         Text(title)

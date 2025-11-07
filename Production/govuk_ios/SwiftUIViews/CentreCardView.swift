@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct CentreCard: View {
-    let model: CentreCardModel
+struct CentreCardView: View {
+    let model: CentreCard
     var body: some View {
         VStack {
             HStack(alignment: .center) {

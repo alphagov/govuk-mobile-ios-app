@@ -1,6 +1,6 @@
 import Foundation
 
-struct CentreCardModel {
+struct CentreCard {
     let primaryText: String?
     let secondaryText: String?
 

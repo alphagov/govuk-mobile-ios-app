@@ -9,6 +9,7 @@ class SceneDelegate: UIResponder,
     @Inject(\.analyticsService) private var analyticsService: AnalyticsServiceInterface
 
     var window: UIWindow?
+    var privacyWindow: UIWindow?
 
     private lazy var navigationController: UINavigationController = {
         let controller = UINavigationController()
@@ -17,6 +18,14 @@ class SceneDelegate: UIResponder,
         return controller
     }()
 
+    private lazy var privacyNavigationController: UINavigationController = {
+        let controller = UINavigationController()
+        controller.setNavigationBarHidden(true, animated: false)
+        controller.navigationBar.prefersLargeTitles = true
+        return controller
+    }()
+
+
     private lazy var coordinatorBuilder = CoordinatorBuilder(container: .shared)
 
     private lazy var appCoordinator = coordinatorBuilder.app(
@@ -24,11 +33,21 @@ class SceneDelegate: UIResponder,
         inactivityService: inactivityService
     )
 
+    private lazy var privacyCoordinator = coordinatorBuilder.privacy(
+        navigationController: privacyNavigationController
+    )
+
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene)
         else { return }
+
+        privacyWindow = UIWindow(
+            windowScene: windowScene
+        )
+        privacyWindow?.rootViewController = privacyNavigationController
+
         window = GovUIWindow(
             windowScene: windowScene,
             inactivityService: inactivityService
@@ -52,15 +71,14 @@ class SceneDelegate: UIResponder,
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
+        window?.makeKeyAndVisible()
         appCoordinator.start(url: nil)
     }
 
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        appCoordinator.hidePrivacyScreen()
-    }
-
     func sceneDidEnterBackground(_ scene: UIScene) {
-        appCoordinator.showPrivacyScreen(appDidTimeout: false)
+        privacyWindow?.makeKeyAndVisible()
+        privacyCoordinator.start()
+
         let appBackgrounded = "App Backgrounded"
         let appEvent = AppEvent.function(
             text: appBackgrounded,

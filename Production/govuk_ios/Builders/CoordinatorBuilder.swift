@@ -457,7 +457,11 @@ class CoordinatorBuilder {
         )
     }
 
-    func privacy() -> BaseCoordinator & PrivacyProviding {
-        PrivacyCoordinator()
+    func privacy(
+        navigationController: UINavigationController
+    ) -> BaseCoordinator & PrivacyProviding {
+        PrivacyCoordinator(
+            navigationController: navigationController
+        )
     }
 }

@@ -10,8 +10,7 @@ protocol PrivacyPresenting {
 protocol PrivacyProviding { }
 
 class PrivacyCoordinator: BaseCoordinator {
-    init() {
-        let navigationController = UINavigationController()
+    override init(navigationController: UINavigationController) {
         navigationController.modalPresentationStyle = .fullScreen
         super.init(navigationController: navigationController)
     }

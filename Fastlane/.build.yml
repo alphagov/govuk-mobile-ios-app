@@ -18,7 +18,7 @@ default: &DEFAULTS
   scan:
     output_directory: test_output
     devices:
-      - iPhone 17 Pro (26.0)
+      - iPhone 17 Pro (26.1)
   match: &MATCH_DEFAULTS
     method: "adhoc"
   deliver: &DELIVER_DEFAULTS

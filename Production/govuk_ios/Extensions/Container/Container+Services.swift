@@ -239,4 +239,10 @@ extension Container {
             UserDefaultsService(userDefaults: .standard)
         }.scope(.singleton)
     }
+
+    var privacyService: Factory<PrivacyPresenting?> {
+        Factory(self) {
+            UIApplication.shared.connectedScenes.first?.delegate as? PrivacyPresenting
+        }
+    }
 }

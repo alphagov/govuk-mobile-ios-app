@@ -55,4 +55,12 @@ struct Container_ServicesTests {
         let client = container.crashlyticsClient.resolve()
         #expect(client is CrashlyticsClient)
     }
+
+    @Test
+    @MainActor
+    func privacyService_returnsExpectedValue() async {
+        let container = Container()
+        let client = container.privacyService.resolve()
+        #expect(client != nil)
+    }
 }

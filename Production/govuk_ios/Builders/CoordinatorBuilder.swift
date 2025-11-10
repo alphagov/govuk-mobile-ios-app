@@ -15,12 +15,13 @@ class CoordinatorBuilder {
     func app(
         navigationController: UINavigationController,
         inactivityService: InactivityServiceInterface
-    ) -> BaseCoordinator & PrivacyPresenting {
+    ) -> BaseCoordinator {
         AppCoordinator(
             coordinatorBuilder: self,
             inactivityService: inactivityService,
             authenticationService: container.authenticationService.resolve(),
             localAuthenticationService: container.localAuthenticationService.resolve(),
+            privacyPresenter: container.privacyService.resolve(),
             navigationController: navigationController
         )
     }

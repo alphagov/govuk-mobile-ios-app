@@ -303,7 +303,7 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     }
 
     var _stubbedPrivacyCoordinator: MockBaseCoordinator?
-    override func privacy() -> BaseCoordinator & PrivacyProviding {
+    override func privacy(navigationController: UINavigationController) -> BaseCoordinator & PrivacyProviding {
         _stubbedPrivacyCoordinator ?? MockBaseCoordinator()
     }
 }

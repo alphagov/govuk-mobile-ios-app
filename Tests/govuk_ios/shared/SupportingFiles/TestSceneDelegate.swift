@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 
+@testable import govuk_ios
+
 class TestSceneDelegate: UIResponder,
                          UIWindowSceneDelegate {
     var window: UIWindow?
@@ -11,6 +13,16 @@ class TestSceneDelegate: UIResponder,
         guard let windowScene = (scene as? UIWindowScene)
         else { return }
         window = UIWindow(windowScene: windowScene)
+        window?.makeKeyAndVisible()
+    }
+}
+
+extension TestSceneDelegate: PrivacyPresenting {
+    func showPrivacyScreen() {
+        window?.isHidden = true
+    }
+    
+    func hidePrivacyScreen() {
         window?.makeKeyAndVisible()
     }
 }

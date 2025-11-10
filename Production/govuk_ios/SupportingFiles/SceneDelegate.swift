@@ -88,9 +88,14 @@ class SceneDelegate: UIResponder,
     }
 }
 
-extension SceneDelegate {
+extension SceneDelegate: PrivacyPresenting {
     func showPrivacyScreen() {
         privacyWindow?.makeKeyAndVisible()
         privacyCoordinator.start()
+    }
+
+    func hidePrivacyScreen() {
+        window?.makeKeyAndVisible()
+        privacyCoordinator.finish()
     }
 }

@@ -14,19 +14,19 @@ class AppCoordinator: BaseCoordinator {
         return coordinator
     }()
     private var pendingDeeplink: URL?
-    private var sceneDelegate: SceneDelegate? {
-        UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-    }
+    private var privacyPresenter: PrivacyPresenting?
 
     init(coordinatorBuilder: CoordinatorBuilder,
          inactivityService: InactivityServiceInterface,
          authenticationService: AuthenticationServiceInterface,
          localAuthenticationService: LocalAuthenticationServiceInterface,
+         privacyPresenter: PrivacyPresenting? = nil,
          navigationController: UINavigationController) {
         self.coordinatorBuilder = coordinatorBuilder
         self.inactivityService = inactivityService
         self.authenticationService = authenticationService
         self.localAuthenticationService = localAuthenticationService
+        self.privacyPresenter = privacyPresenter
         super.init(navigationController: navigationController)
         configureObservers()
     }
@@ -39,9 +39,6 @@ class AppCoordinator: BaseCoordinator {
                 self?.root.dismiss(animated: false)
                 self?.hidePrivacyScreen()
                 return
-            }
-            if reason == .userSignout {
-                self?.pendingDeeplink = URL(string: "/home")
             }
             self?.startPeriAuthCoordinator()
         }
@@ -123,19 +120,15 @@ class AppCoordinator: BaseCoordinator {
     }
 }
 
-extension AppCoordinator: PrivacyPresenting {
-    private var privacyCoordinator: BaseCoordinator? {
-        childCoordinators.first(where: { $0 is PrivacyProviding })
+extension AppCoordinator {
+    private func showPrivacyScreen() {
+        if shouldShowPrivacyScreen {
+            privacyPresenter?.showPrivacyScreen()
+        }
     }
 
-    func showPrivacyScreen() {
-        guard privacyCoordinator == nil,
-              shouldShowPrivacyScreen else { return }
-        sceneDelegate?.showPrivacyScreen()
-    }
-
-    func hidePrivacyScreen() {
-        sceneDelegate?.window?.makeKeyAndVisible()
+    private func hidePrivacyScreen() {
+        privacyPresenter?.hidePrivacyScreen()
     }
 
     private var shouldShowPrivacyScreen: Bool {

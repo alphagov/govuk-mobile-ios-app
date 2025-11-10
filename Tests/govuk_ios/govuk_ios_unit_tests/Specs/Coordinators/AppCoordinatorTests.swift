@@ -250,6 +250,7 @@ struct AppCoordinatorTests {
 
         let mockPeriAuthCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
+        mockAuthenticationService._stubbedIsSignedIn = true
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -311,6 +312,7 @@ struct AppCoordinatorTests {
         mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockCoordinator
 
         let mockPeriAuthCoordinator = MockBaseCoordinator()
+        let mockPrivacyService = MockPrivacyService()
         mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
 
         let subject = AppCoordinator(
@@ -318,6 +320,7 @@ struct AppCoordinatorTests {
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
             localAuthenticationService: mockLocalAuthenticationService,
+            privacyPresenter: mockPrivacyService,
             navigationController: mockNavigationController
         )
 
@@ -326,92 +329,36 @@ struct AppCoordinatorTests {
         mockAuthenticationService.didSignOutAction?(.reauthFailure)
 
         #expect(!mockPeriAuthCoordinator._startCalled)
-    }
-
-    @Test(arguments: zip(
-        [true, false],
-        [true, false]
-    ))
-    func showPrivacyScreen_presentsPrivacyViewController_ifSignedIn(isSignedIn: Bool,
-                                                                    startCalled: Bool) {
-        let mockAuthenticationService = MockAuthenticationService()
-        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
-        let mockNavigationController = UINavigationController()
-        let mockInactivityService = MockInactivityService()
-        let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        let mockPrivacyCoordinator = MockBaseCoordinator(
-            navigationController: UINavigationController()
-        )
-        mockCoordinatorBuilder._stubbedPrivacyCoordinator = mockPrivacyCoordinator
-
-        let subject = AppCoordinator(
-            coordinatorBuilder: mockCoordinatorBuilder,
-            inactivityService: mockInactivityService,
-            authenticationService: mockAuthenticationService,
-            localAuthenticationService: mockLocalAuthenticationService,
-            navigationController: mockNavigationController
-        )
-        mockAuthenticationService._stubbedIsSignedIn = isSignedIn
-        subject.showPrivacyScreen(appDidTimeout: false)
-
-        #expect(mockPrivacyCoordinator._startCalled == startCalled)
+        #expect(mockPrivacyService._didHidePrivacyScreen)
     }
 
     @Test
-    func hidePrivacyScreen_hidesPrivacyViewController() {
-        let mockAuthenticationService = MockAuthenticationService()
-        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
-        let mockNavigationController = UINavigationController()
-        let mockInactivityService = MockInactivityService()
-        let mockLocalAuthenticationService = MockLocalAuthenticationService()
-        let mockPrivacyCoordinator = MockBaseCoordinator(
-            navigationController: UINavigationController()
-        )
-        mockCoordinatorBuilder._stubbedPrivacyCoordinator = mockPrivacyCoordinator
-
-        let subject = AppCoordinator(
-            coordinatorBuilder: mockCoordinatorBuilder,
-            inactivityService: mockInactivityService,
-            authenticationService: mockAuthenticationService,
-            localAuthenticationService: mockLocalAuthenticationService,
-            navigationController: mockNavigationController
-        )
-
-        mockAuthenticationService._stubbedIsSignedIn = true
-        subject.showPrivacyScreen(appDidTimeout: false)
-        #expect(subject.childCoordinators.first(where: { $0 == mockPrivacyCoordinator } ) != nil)
-        subject.hidePrivacyScreen()
-        #expect(subject.childCoordinators.count == 0)
-    }
-
-    @Test
-    func showPrivacyScreen_inactivityWithBiometrics_presentsPrivacyViewController() {
+    func inactivityWithBiometrics_presentsPrivacyScreen() {
         let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
-        let mockPrivacyCoordinator = MockBaseCoordinator(
-            navigationController: UINavigationController()
-        )
-        mockCoordinatorBuilder._stubbedPrivacyCoordinator = mockPrivacyCoordinator
+        let mockPrivacyService = MockPrivacyService()
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
             localAuthenticationService: mockLocalAuthenticationService,
+            privacyPresenter: mockPrivacyService,
             navigationController: mockNavigationController
         )
-        mockAuthenticationService._stubbedIsSignedIn = false
-        subject.showPrivacyScreen(appDidTimeout: true)
+        mockAuthenticationService._stubbedIsSignedIn = true
+        subject.start()
+        mockInactivityService._receivedStartMonitoringInactivityHandler?()
 
-        #expect(mockPrivacyCoordinator._startCalled)
+        #expect(mockPrivacyService._didShowPrivacyScreen)
     }
 
     @Test
-    func showPrivacyScreen_inactivityWithoutBiometrics_doesntPresentsPrivacyViewController() {
+    func inactivityWithoutBiometrics_doesntPresentsPrivacyScreen() {
         let mockAuthenticationService = MockAuthenticationService()
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
@@ -419,10 +366,7 @@ struct AppCoordinatorTests {
         let mockLocalAuthenticationService = MockLocalAuthenticationService()
         mockLocalAuthenticationService._stubbedAvailableAuthType = .none
         mockLocalAuthenticationService._stubbedTouchIdEnabled = false
-        let mockPrivacyCoordinator = MockBaseCoordinator(
-            navigationController: UINavigationController()
-        )
-        mockCoordinatorBuilder._stubbedPrivacyCoordinator = mockPrivacyCoordinator
+        let mockPrivacyService = MockPrivacyService()
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
@@ -431,9 +375,10 @@ struct AppCoordinatorTests {
             localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
-        mockAuthenticationService._stubbedIsSignedIn = false
-        subject.showPrivacyScreen(appDidTimeout: true)
+        mockAuthenticationService._stubbedIsSignedIn = true
+        subject.start()
+        mockInactivityService._receivedStartMonitoringInactivityHandler?()
 
-        #expect(!mockPrivacyCoordinator._startCalled)
+        #expect(!mockPrivacyService._didShowPrivacyScreen)
     }
 }

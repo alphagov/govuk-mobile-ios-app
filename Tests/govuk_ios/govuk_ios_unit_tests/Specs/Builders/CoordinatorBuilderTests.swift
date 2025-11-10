@@ -425,7 +425,9 @@ struct CoordinatorBuilderTests {
     @Test
     func privacy_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
-        let coordinator = subject.privacy()
+        let coordinator = subject.privacy(
+            navigationController: UINavigationController()
+        )
 
         #expect(coordinator is PrivacyCoordinator)
     }

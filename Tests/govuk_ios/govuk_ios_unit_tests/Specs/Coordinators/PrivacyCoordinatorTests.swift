@@ -10,7 +10,9 @@ import GOVKit
 class PrivacyCoordinatorTests {
     @Test
     func privacyCoordinator_start_setsPrivacyView() {
-        let sut = PrivacyCoordinator()
+        let sut = PrivacyCoordinator(
+            navigationController: UINavigationController()
+        )
         sut.start()
 
         #expect(sut.root.topViewController is HostingViewController<PrivacyView>)

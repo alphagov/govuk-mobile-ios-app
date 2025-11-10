@@ -76,9 +76,7 @@ class SceneDelegate: UIResponder,
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        privacyWindow?.makeKeyAndVisible()
-        privacyCoordinator.start()
-
+        showPrivacyScreen()
         let appBackgrounded = "App Backgrounded"
         let appEvent = AppEvent.function(
             text: appBackgrounded,
@@ -87,5 +85,12 @@ class SceneDelegate: UIResponder,
             action: appBackgrounded
         )
         analyticsService.track(event: appEvent)
+    }
+}
+
+extension SceneDelegate {
+    func showPrivacyScreen() {
+        privacyWindow?.makeKeyAndVisible()
+        privacyCoordinator.start()
     }
 }

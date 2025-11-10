@@ -14,7 +14,9 @@ class AppCoordinator: BaseCoordinator {
         return coordinator
     }()
     private var pendingDeeplink: URL?
-    private var lastPresentedViewController: UIViewController?
+    private var sceneDelegate: SceneDelegate? {
+        UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+    }
 
     init(coordinatorBuilder: CoordinatorBuilder,
          inactivityService: InactivityServiceInterface,
@@ -31,10 +33,15 @@ class AppCoordinator: BaseCoordinator {
 
     private func configureObservers() {
         authenticationService.didSignOutAction = { [weak self] reason in
-            guard reason != .reauthFailure else {
-                self?.privacyCoordinator?.dismiss(animated: false)
-                self?.privacyCoordinator?.finish()
+            if reason == .reauthFailure {
+                // Any presented modals need to be dismissed or they
+                // will be on top of the sign in flow
+                self?.root.dismiss(animated: false)
+                self?.hidePrivacyScreen()
                 return
+            }
+            if reason == .userSignout {
+                self?.pendingDeeplink = URL(string: "/home")
             }
             self?.startPeriAuthCoordinator()
         }
@@ -124,27 +131,11 @@ extension AppCoordinator: PrivacyPresenting {
     func showPrivacyScreen() {
         guard privacyCoordinator == nil,
               shouldShowPrivacyScreen else { return }
-        if let presentedViewController = root.presentedViewController {
-            lastPresentedViewController = presentedViewController
-            presentedViewController.dismiss(animated: false)
-        }
-        let coordinator = coordinatorBuilder.privacy(
-            navigationController: UINavigationController()
-        )
-        present(coordinator, animated: false)
+        sceneDelegate?.showPrivacyScreen()
     }
 
     func hidePrivacyScreen() {
-        privacyCoordinator?.dismiss(animated: false)
-        privacyCoordinator?.finish()
-        if let lastPresentedViewController {
-            root.present(
-                lastPresentedViewController,
-                animated: false
-            ) { [weak self] in
-                self?.lastPresentedViewController = nil
-            }
-        }
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 
     private var shouldShowPrivacyScreen: Bool {

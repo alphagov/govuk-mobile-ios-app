@@ -40,7 +40,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You have not used the app to visit any GOV.UK pages"
+            "value" : "Pages you visit in the app will appear here"
           }
         }
       }

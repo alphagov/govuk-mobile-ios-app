@@ -380,30 +380,22 @@ class ViewControllerBuilder {
         return viewController
     }
 
-    func allTopics(analyticsService: AnalyticsServiceInterface,
-                   topicAction: @escaping (Topic) -> Void,
-                   topicsService: TopicsServiceInterface) -> UIViewController {
-        let viewModel = AllTopicsViewModel(
-            analyticsService: analyticsService,
-            topicAction: topicAction,
-            topicsService: topicsService
-        )
-        return AllTopicsViewController(
-            viewModel: viewModel
-        )
-    }
-
     func topicOnboarding(topics: [Topic],
                          analyticsService: AnalyticsServiceInterface,
                          topicsService: TopicsServiceInterface,
                          dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = TopicOnboardingViewModel(
+        let viewModel = TopicsOnboardingViewModel(
             topics: topics,
             analyticsService: analyticsService,
             topicsService: topicsService,
             dismissAction: dismissAction
         )
-        return TopicOnboardingViewController(viewModel: viewModel)
+        let viewController = HostingViewController(
+            rootView: TopicsOnboardingView(
+                viewModel: viewModel
+            )
+        )
+        return viewController
     }
 
     func chat(analyticsService: AnalyticsServiceInterface,

@@ -34,7 +34,6 @@ final class EditTopicsViewModel {
             tapAction: { [weak self] value in
                 topic.isFavourite = value
                 self?.topicsService.save()
-                self?.topicsService.setHasCustomisedTopics()
                 self?.trackSelection(topic: topic)
             }
         )
@@ -43,6 +42,7 @@ final class EditTopicsViewModel {
     private func trackSelection(topic: Topic) {
         let event = AppEvent.topicSelection(
             title: topic.title,
+            section: "Edit topics",
             isFavourite: topic.isFavourite
         )
         analyticsService.track(event: event)

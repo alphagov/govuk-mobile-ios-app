@@ -34,7 +34,7 @@ struct EditTopicsViewModelTests {
         #expect(trackedEvent?.params?["text"] as? String == topicCard.title)
         #expect(trackedEvent?.params?["type"] as? String == "Button")
         #expect(trackedEvent?.params?["section"] as? String == "Edit topics")
-        #expect(trackedEvent?.params?["action"] as? String == "Selected")
+        #expect(trackedEvent?.params?["action"] as? String == "add")
     }
 }
 

@@ -109,30 +109,6 @@ struct TopicsServiceTests {
         #expect(mockUserDefaults.bool(forKey: .topicsOnboardingSeen))
     }
 
-
-    @Test
-    func setHasCustomisedTopics_setsHasEditedTopicsToTrue() {
-
-        let mockUserDefaults = MockUserDefaultsService()
-        let mockAnalyticsService = MockAnalyticsService()
-        let sut = TopicsService(
-            topicsServiceClient: MockTopicsServiceClient(),
-            topicsRepository: MockTopicsRepository(),
-            analyticsService: mockAnalyticsService,
-            userDefaultsService: mockUserDefaults
-        )
-
-        #expect(mockUserDefaults.bool(forKey: .customisedTopics) == false)
-        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty == nil)
-
-        sut.setHasCustomisedTopics()
-
-        #expect(mockUserDefaults.bool(forKey: .customisedTopics))
-        #expect(mockUserDefaults.bool(forKey: .customisedTopics))
-        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.key == UserProperty.topicsCustomised.key)
-        #expect(mockAnalyticsService._trackSetUserPropertyReceivedProperty?.value == UserProperty.topicsCustomised.value)
-    }
-
     @Test(.serialized, arguments: [true, false])
     func hasOnboardedTopics_returnsExpectedResult(expectedValue: Bool) {
 
@@ -148,25 +124,6 @@ struct TopicsServiceTests {
 
         #expect(sut.hasOnboardedTopics == expectedValue)
     }
-
-    @Test(.serialized, arguments: [true, false])
-    func hasTopicsBeenEdited_returnsExpectedResult(expectedValue: Bool) {
-        let mockUserDefaults = MockUserDefaultsService()
-        mockUserDefaults._stub(
-            value: expectedValue,
-            key: UserDefaultsKeys.customisedTopics.rawValue
-        )
-
-        let sut = TopicsService(
-            topicsServiceClient: MockTopicsServiceClient(),
-            topicsRepository: MockTopicsRepository(),
-            analyticsService: MockAnalyticsService(),
-            userDefaultsService: mockUserDefaults
-        )
-
-        #expect(sut.hasCustomisedTopics == expectedValue)
-    }
-
 
     @Test
     func resetOnboaring_resetsPreferences() {

@@ -122,19 +122,7 @@ struct ViewControllerBuilderTests {
     }
 
     @Test
-    func allTopics_returnsExpectedResult() {
-        let subject = ViewControllerBuilder()
-        let result = subject.allTopics(
-            analyticsService: MockAnalyticsService(),
-            topicAction: { _ in },
-            topicsService: MockTopicsService()
-        )
-
-        #expect(result is AllTopicsViewController)
-    }
-
-    @Test
-    func topicOnboarding_returnsExpectedResult() {
+    func topicsOnboardingView_returnsExpectedResult() {
         let subject = ViewControllerBuilder()
         let result = subject.topicOnboarding(
             topics: [],
@@ -143,7 +131,8 @@ struct ViewControllerBuilderTests {
             dismissAction: { }
         )
 
-        #expect(result is TopicOnboardingViewController)
+        let rootView = (result as? HostingViewController<TopicsOnboardingView>)?.rootView
+        #expect(rootView != nil)
     }
 
     @Test

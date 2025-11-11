@@ -211,17 +211,6 @@ struct CoordinatorBuilderTests {
     }
 
     @Test
-    func allTopics_returnsExpectedResult() {
-        let subject = CoordinatorBuilder(container: Container())
-        let mockNavigationController = MockNavigationController()
-        let coordinator = subject.allTopics(
-            navigationController: mockNavigationController
-        )
-
-        #expect(coordinator is AllTopicsCoordinator)
-    }
-
-    @Test
     func topicOnboarding_returnsExpectedResult() {
         let subject = CoordinatorBuilder(container: Container())
         let mockNavigationController = MockNavigationController()

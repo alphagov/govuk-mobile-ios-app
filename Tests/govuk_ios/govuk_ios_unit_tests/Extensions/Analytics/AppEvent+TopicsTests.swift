@@ -12,9 +12,10 @@ struct AppEvent_TopicsTests {
     ])
     func topicSelection_returnsExpectedResult(isFavourite: Bool) {
         let expectedTitle = UUID().uuidString
-        let expectedValue = isFavourite ? "Selected" : "Unselected"
+        let expectedValue = isFavourite ? "add" : "remove"
         let result = AppEvent.topicSelection(
             title: expectedTitle,
+            section: "Edit topics",
             isFavourite: isFavourite
         )
         #expect(result.name == "Function")

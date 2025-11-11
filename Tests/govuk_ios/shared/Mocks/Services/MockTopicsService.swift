@@ -3,6 +3,10 @@ import Foundation
 @testable import govuk_ios
 
 class MockTopicsService: TopicsServiceInterface {
+    var _didCallRollback = false
+    func rollback() {
+        _didCallRollback = true
+    }
     var _setHasCustomisedTopicsCalled: Bool = false
     func setHasCustomisedTopics() {
         _setHasCustomisedTopicsCalled = true

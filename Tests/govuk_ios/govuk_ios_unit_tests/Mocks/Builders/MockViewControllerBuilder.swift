@@ -125,15 +125,6 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedAmbiguousAddressSelectionViewController ?? UIViewController()
     }
 
-    var _stubbedAllTopicsViewController: UIViewController?
-    var _receivedTopicAction: ((Topic) -> Void)?
-    override func allTopics(analyticsService: AnalyticsServiceInterface,
-                            topicAction: @escaping (Topic) -> Void,
-                            topicsService topicService: TopicsServiceInterface) -> UIViewController {
-        _receivedTopicAction = topicAction
-        return _stubbedAllTopicsViewController ?? UIViewController()
-    }
-
     var _receivedTopicOnboardingDismissAction: (() -> Void)?
     var _receivedTopicOnboardingTopics: [Topic]?
     var _stubbedTopicOnboardingViewController: UIViewController?

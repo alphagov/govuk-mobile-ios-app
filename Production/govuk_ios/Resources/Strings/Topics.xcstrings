@@ -56,17 +56,6 @@
         }
       }
     },
-    "seeAllTopicsButtonText" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "See all topics"
-          }
-        }
-      }
-    },
     "subtopicDetailSubtopicsHeader" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -151,28 +140,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Topics are not working at the moment. Try again later, or go to the GOV.UK website to find the page you're looking for."
-          }
-        }
-      }
-    },
-    "topicOnboardingCardSelected" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selected"
-          }
-        }
-      }
-    },
-    "topicOnboardingCardUnselected" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select"
           }
         }
       }

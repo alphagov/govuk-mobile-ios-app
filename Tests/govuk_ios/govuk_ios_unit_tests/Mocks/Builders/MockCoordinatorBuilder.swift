@@ -264,11 +264,6 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
         return _stubbedRecentActivityCoordinator ?? MockBaseCoordinator()
     }
 
-    var _stubbedAllTopicsCoordinator: MockBaseCoordinator?
-    override func allTopics(navigationController: UINavigationController) -> BaseCoordinator {
-        return _stubbedAllTopicsCoordinator ?? MockBaseCoordinator()
-    }
-
     var _receivedChatOffboardingCompletion: (() -> Void)?
     var _stubbedChatOffboardingCoordinator: MockBaseCoordinator?
     override func chatOffboarding(navigationController: UINavigationController,

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIComponents
 
 struct NonTappableCardView: View {
     var text: String

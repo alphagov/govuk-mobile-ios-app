@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 struct StoredLocalAuthorityCardView: View {
     let model: StoredLocalAuthorityCardModel

@@ -29,4 +29,3 @@ final class NotificationConsentAlertViewControllerSnapshotTests: SnapshotTestCas
         )
     }
 }
-

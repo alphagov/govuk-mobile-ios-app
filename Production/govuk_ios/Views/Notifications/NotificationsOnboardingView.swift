@@ -19,7 +19,7 @@ struct NotificationsOnboardingView: View {
                 secondaryButtonViewModel: viewModel.secondaryButtonViewModel
             )
         }
-        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceFullScreen))
         .accessibilityElement(children: .contain)
     }
 

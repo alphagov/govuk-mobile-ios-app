@@ -198,6 +198,7 @@ class HomeViewController: BaseViewController {
         searchViewController.clearResults()
         removeController(searchViewController)
         displayController(homeContentViewController)
+        viewWillReAppear()
         setLogoHidden(false)
     }
 }
@@ -223,4 +224,9 @@ extension HomeViewController: ResetsToDefault {
         }
         viewModel.homeContentScrollToTop = true
     }
+}
+
+extension HomeViewController: TrackableScreen {
+    var trackingName: String { "Homepage" }
+    var trackingTitle: String? { "Homepage" }
 }

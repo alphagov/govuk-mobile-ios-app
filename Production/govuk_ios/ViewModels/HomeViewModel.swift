@@ -168,8 +168,4 @@ class HomeViewModel: ObservableObject {
     private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }
-
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
-    }
 }

@@ -28,13 +28,7 @@ struct HomeContentView: View {
             }
         }.onAppear {
             viewModel.updateWidgets()
-            viewModel.trackScreen(screen: self)
         }
         .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
     }
-}
-
-extension HomeContentView: TrackableScreen {
-    var trackingName: String { "Homepage" }
-    var trackingTitle: String? { "Homepage" }
 }

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct NonTappableCardView: View {
-    @Environment(\.verticalSizeClass) var verticalSizeClass
     var text: String
     var body: some View {
         VStack {

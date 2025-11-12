@@ -1,4 +1,5 @@
 import SwiftUI
+import UIComponents
 
 struct TopicSelectionCardView: View {
     @ObservedObject var viewModel: TopicSelectionCardViewModel

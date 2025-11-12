@@ -1,4 +1,5 @@
 import SwiftUI
+import UIComponents
 
 struct EmergencyBannerWidgetView: View {
     let viewModel: EmergencyBannerWidgetViewModel

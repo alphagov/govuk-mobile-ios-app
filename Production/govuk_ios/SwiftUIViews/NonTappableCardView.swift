@@ -1,4 +1,5 @@
 import SwiftUI
+import UIComponents
 
 struct NonTappableCardView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass

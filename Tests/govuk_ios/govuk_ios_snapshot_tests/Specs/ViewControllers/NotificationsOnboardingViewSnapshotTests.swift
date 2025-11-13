@@ -2,7 +2,6 @@ import Foundation
 import XCTest
 import GOVKit
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor

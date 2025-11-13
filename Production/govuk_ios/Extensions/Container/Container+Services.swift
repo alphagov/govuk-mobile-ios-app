@@ -203,6 +203,7 @@ extension Container {
         Factory(self) {
             AppAttestService(
                 appCheckInterface: AppCheck.appCheck(),
+                analyticsService: self.analyticsService.resolve()
             )
         }.scope(.singleton)
     }

@@ -1,6 +1,5 @@
 import Foundation
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 final class ChatOptInViewControllerSnapshotTests: SnapshotTestCase {

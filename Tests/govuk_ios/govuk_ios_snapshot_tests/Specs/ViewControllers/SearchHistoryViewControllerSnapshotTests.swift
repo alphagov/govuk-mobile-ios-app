@@ -3,7 +3,6 @@ import XCTest
 import CoreData
 import UIComponents
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @MainActor

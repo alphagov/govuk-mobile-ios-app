@@ -3,7 +3,6 @@ import Testing
 import UIKit
 import Authentication
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
@@ -297,7 +296,7 @@ class AuthenticationCoordinatorTests {
         let mockNavigationController =  MockNavigationController()
 
         mockLocalAuthenticationService._stubbedAuthenticationOnboardingSeen = true
-        mockAuthenticationService._stubbedAuthenticationResult = .failure(.genericError)
+        mockAuthenticationService._stubbedAuthenticationResult = .failure(.unknown(TestError.anyError))
 
         let mockAnalyticsService = MockAnalyticsService()
         let newWindow = UIWindow(frame: UIScreen.main.bounds)
@@ -323,7 +322,7 @@ class AuthenticationCoordinatorTests {
             sut.start(url: nil)
         }
 
-        #expect(authError == .genericError)
+        #expect(authError == .unknown(TestError.anyError))
         #expect(!completion)
     }
 }

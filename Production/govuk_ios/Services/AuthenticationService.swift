@@ -79,13 +79,13 @@ class AuthenticationService: AuthenticationServiceInterface {
         let result = await authenticationServiceClient.performAuthenticationFlow(window: window)
         switch result {
         case .success(let tokenResponse):
+            trackTokenResponseErrors(tokenResponse: tokenResponse)
             setTokens(
                 refreshToken: tokenResponse.refreshToken,
                 idToken: tokenResponse.idToken,
                 accessToken: tokenResponse.accessToken
             )
-            let token = try? await JWTExtractor().extract(jwt: tokenResponse.idToken ?? "")
-            saveTokenIssueDate(iat: token?.iat)
+            await saveTokenIssueDate(jwt: tokenResponse.idToken)
             return await handleReturningUser()
         case .failure(let error):
             analyticsService.track(error: error)
@@ -100,7 +100,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             userDefaultsService.removeObject(forKey: .refreshTokenIssuedAtDate)
             authenticationServiceClient.revokeToken(refreshToken, completion: nil)
             authenticatedSecureStoreService.deleteRefreshToken()
-            setTokens()
+            clearTokens()
             authenticatedSecureStoreService = container.authenticatedSecureStoreService.resolve()
             didSignOutAction?(reason)
         } catch {
@@ -109,7 +109,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             // secure store deletion will always fail on simulator
             // as secure enclave unavailable.
             authenticatedSecureStoreService.deleteRefreshToken()
-            setTokens()
+            clearTokens()
             #endif
             return
         }
@@ -139,6 +139,7 @@ class AuthenticationService: AuthenticationServiceInterface {
         )
         switch result {
         case .success(let tokenResponse):
+            trackTokenResponseErrors(tokenResponse: tokenResponse)
             setTokens(
                 refreshToken: decryptedRefreshToken,
                 idToken: tokenResponse.idToken,
@@ -148,6 +149,21 @@ class AuthenticationService: AuthenticationServiceInterface {
         case .failure(let error):
             analyticsService.track(error: error)
             return .failure(error)
+        }
+    }
+
+    private func trackTokenResponseErrors(tokenResponse: TokenRefreshResponse) {
+        if tokenResponse.idToken == nil {
+            analyticsService.track(error: AuthenticationError.missingIdToken)
+        }
+    }
+
+    private func trackTokenResponseErrors(tokenResponse: TokenResponse) {
+        if tokenResponse.idToken == nil {
+            analyticsService.track(error: AuthenticationError.missingIdToken)
+        }
+        if tokenResponse.refreshToken == nil {
+            analyticsService.track(error: AuthenticationError.missingRefreshToken)
         }
     }
 
@@ -164,7 +180,7 @@ class AuthenticationService: AuthenticationServiceInterface {
             return .success(.init(returningUser: isReturning))
         case .failure(let error):
             analyticsService.track(error: error)
-            setTokens()
+            clearTokens()
             return .failure(.returningUserService(error))
         }
     }
@@ -174,12 +190,30 @@ class AuthenticationService: AuthenticationServiceInterface {
         authenticatedSecureStoreService.getRefreshToken()
     }
 
-    private func setTokens(refreshToken: String? = nil,
-                           idToken: String? = nil,
-                           accessToken: String? = nil) {
+    private func clearTokens() {
+        setTokens(
+            refreshToken: nil,
+            idToken: nil,
+            accessToken: nil
+        )
+    }
+
+    private func setTokens(refreshToken: String?,
+                           idToken: String?,
+                           accessToken: String?) {
         self.refreshToken = refreshToken
         self.idToken = idToken
         self.accessToken = accessToken
+    }
+
+    private func saveTokenIssueDate(jwt: String?) async {
+        guard let jwt = jwt else { return }
+        do {
+            let token = try await JWTExtractor().extract(jwt: jwt)
+            saveTokenIssueDate(iat: token.iat)
+        } catch {
+            analyticsService.track(error: error)
+        }
     }
 
     private func saveTokenIssueDate(iat: Date?) {
@@ -208,25 +242,4 @@ enum SignoutReason {
     case reauthFailure
     case tokenRefreshFailure
     case userSignout
-}
-
-extension SecureStorable {
-    var hasRefreshToken: Bool {
-        checkItemExists(itemName: "refreshToken")
-    }
-
-    func getRefreshToken() throws -> String {
-        try readItem(itemName: "refreshToken")
-    }
-
-    func saveRefreshToken(_ token: String) throws {
-        try saveItem(
-            item: token,
-            itemName: "refreshToken"
-        )
-    }
-
-    func deleteRefreshToken() {
-        deleteItem(itemName: "refreshToken")
-    }
 }

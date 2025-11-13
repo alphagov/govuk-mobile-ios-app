@@ -3,7 +3,6 @@ import UIKit
 import Testing
 import Authentication
 
-@testable import GOVKitTestUtilities
 @testable import govuk_ios
 
 @Suite
@@ -346,10 +345,10 @@ struct AuthenticationServiceTests {
         _ = await sut.authenticate(window: UIApplication.shared.window!)
         sut.encryptRefreshToken()
         #expect(sut.refreshToken != nil)
-        #expect(mockSecureStoreService._savedItems["refreshToken"] != nil)
+        #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.refreshToken.rawValue] != nil)
         sut.signOut(reason: .userSignout)
         #expect(sut.refreshToken == nil)
-        #expect(mockSecureStoreService._savedItems["refreshToken"] == nil)
+        #expect(mockSecureStoreService._savedItems[SecureStoreableConstant.refreshToken.rawValue] == nil)
     }
 
     @Test

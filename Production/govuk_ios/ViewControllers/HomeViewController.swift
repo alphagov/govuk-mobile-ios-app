@@ -22,6 +22,10 @@ class HomeViewController: BaseViewController {
         localSearchBar.barTintColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
         localSearchBar.layer.borderColor = UIColor.govUK.fills.surfaceHomeHeaderBackground.cgColor
         localSearchBar.layer.borderWidth = 1
+        localSearchBar.searchTextField.defaultTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.govUK.text.primary,
+            NSAttributedString.Key.font: UIFont.govUK.body,
+        ]
         localSearchBar.searchTextField.attributedPlaceholder = NSAttributedString(
             string: String.search.localized("searchBarPlaceholder"),
             attributes: [
@@ -30,6 +34,7 @@ class HomeViewController: BaseViewController {
             ]
         )
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
+        localSearchBar.searchTextField.rightView?.tintColor = UIColor.govUK.text.secondary
         localSearchBar.tintColor = UIColor.govUK.text.secondary
         colorSearchBarButton()
         localSearchBar.delegate = self

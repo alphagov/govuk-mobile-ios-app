@@ -54,12 +54,6 @@ class HomeViewController: BaseViewController {
         super.init(analyticsService: viewModel.analyticsService)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.updateWidgets()
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -73,6 +67,17 @@ class HomeViewController: BaseViewController {
         }
         configureContentViewController()
         displayHomeContent()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateWidgets()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.trackECommerce()
     }
 
     private func configureContentViewController() {

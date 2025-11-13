@@ -16,7 +16,7 @@ class HomeViewController: BaseViewController {
     }()
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
-        localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceSearch
         localSearchBar.enablesReturnKeyAutomatically = false
         localSearchBar.translatesAutoresizingMaskIntoConstraints = false
         localSearchBar.barTintColor = UIColor.govUK.fills.surfaceHomeHeaderBackground

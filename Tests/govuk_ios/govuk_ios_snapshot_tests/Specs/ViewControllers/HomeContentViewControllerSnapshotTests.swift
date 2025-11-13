@@ -28,7 +28,8 @@ final class HomeContentViewControllerSnapshotTests: SnapshotTestCase {
         let topicsWidgetViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: {_ in }
+            topicAction: {_ in },
+            dismissEditAction: { }
         )
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),

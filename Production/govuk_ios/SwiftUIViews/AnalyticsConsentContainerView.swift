@@ -53,5 +53,6 @@ struct AnalyticsConsentContainerView: View {
             )
             .navigationBarHidden(true)
         }
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceFullscreen))
     }
 }

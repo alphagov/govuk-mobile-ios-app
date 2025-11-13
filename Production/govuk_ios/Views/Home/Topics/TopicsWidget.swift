@@ -36,10 +36,12 @@ struct TopicsWidget: View {
         .padding()
         .onAppear {
             viewModel.refreshTopics()
+            viewModel.initialLoadComplete = true
         }
         .sheet(isPresented: $showingEditScreen,
                onDismiss: {
             viewModel.refreshTopics()
+            viewModel.didDismissEdit()
         }, content: {
             NavigationView {
                 EditTopicsView(
@@ -76,7 +78,10 @@ struct TopicsWidget: View {
                 TopicListItemView(
                     viewModel: .init(
                         title: topic.title,
-                        tapAction: { viewModel.topicAction(topic) },
+                        tapAction: {
+                            viewModel.topicAction(topic)
+                            viewModel.trackECommerceSelection(topic.title)
+                        },
                         iconName: topic.iconName
                     )
                 )

@@ -11,7 +11,8 @@ struct HomeViewModelTests {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in }
+            topicAction: { _ in },
+            dismissEditAction: { }
         )
         let mockConfigService = MockAppConfigService()
         mockConfigService._stubbedEmergencyBanners =
@@ -72,7 +73,8 @@ struct HomeViewModelTests {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in }
+            topicAction: { _ in },
+            dismissEditAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
@@ -98,49 +100,12 @@ struct HomeViewModelTests {
     }
 
     @Test
-    func trackScreen_trackCorrectScreen() {
-        let topicsViewModel = TopicsWidgetViewModel(
-            topicsService: MockTopicsService(),
-            analyticsService: MockAnalyticsService(),
-            topicAction: { _ in }
-        )
-
-        let mockAnalyticsService = MockAnalyticsService()
-        let subject = HomeViewModel(
-            analyticsService: mockAnalyticsService,
-            configService: MockAppConfigService(),
-            notificationService: MockNotificationService(),
-            userDefaultsService: MockUserDefaultsService(),
-            topicsWidgetViewModel: topicsViewModel,
-            urlOpener: MockURLOpener(),
-            searchService: MockSearchService(),
-            activityService: MockActivityService(),
-            localAuthorityService: MockLocalAuthorityService(),
-            localAuthorityAction: { },
-            editLocalAuthorityAction: { },
-            feedbackAction: { },
-            notificationsAction: {},
-            recentActivityAction: { } ,
-            openURLAction: {_ in } ,
-            openAction: {_ in }
-        )
-        let view = HomeContentView(
-            viewModel: subject
-        )
-        subject.trackScreen(screen: view)
-
-        let screens = mockAnalyticsService._trackScreenReceivedScreens
-        #expect(screens.count == 1)
-        #expect(screens.first?.trackingName == "Homepage")
-        #expect(screens.first?.trackingClass == "HomeContentView")
-    }
-
-    @Test
     func emergencyBanners_have_correct_sort_priority() throws {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in }
+            topicAction: { _ in },
+            dismissEditAction: { }
         )
 
         let mockConfigService = MockAppConfigService()

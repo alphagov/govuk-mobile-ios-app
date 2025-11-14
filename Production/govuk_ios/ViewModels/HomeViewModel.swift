@@ -127,6 +127,8 @@ class HomeViewModel: ObservableObject {
     }
 
     private var feedbackWidget: HomepageWidget? {
+        guard let userFeedback = configService.userFeedbackBanner
+        else { return nil }
         let view = FeedbackWidget { [weak self] in
             self?.feedbackAction()
         }

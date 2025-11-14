@@ -31,5 +31,3 @@ final class ChatInfoOnboardingViewControllerSnapshotTests: SnapshotTestCase {
         )
     }
 }
-
-

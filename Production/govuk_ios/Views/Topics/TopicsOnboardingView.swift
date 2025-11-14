@@ -25,11 +25,11 @@ struct TopicsOnboardingView: View {
             )
             .background(Color(UIColor.govUK.fills.surfaceFixedContainer))
         }
-        .background(Color(UIColor.govUK.fills.surfaceFullScreen))
+        .background(Color(UIColor.govUK.fills.surfaceFullscreen))
         .navigationTitle(viewModel.title)
         .navigationBarTitleDisplayMode(.large)
         .toolbarBackground(
-            Color(UIColor.govUK.fills.surfaceFullScreen),
+            Color(UIColor.govUK.fills.surfaceFullscreen),
             for: .navigationBar
         )
         .onAppear {

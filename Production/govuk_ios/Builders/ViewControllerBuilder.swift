@@ -150,7 +150,10 @@ class ViewControllerBuilder {
         let view = AmbiguousAuthoritySelectionView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        return HostingViewController(
+            rootView: view,
+            navigationBarTintColor: .govUK.text.linkSecondary
+        )
     }
 
     func ambiguousAddressSelectionView(
@@ -170,7 +173,10 @@ class ViewControllerBuilder {
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        return HostingViewController(
+            rootView: view,
+            navigationBarTintColor: .govUK.text.linkSecondary
+        )
     }
 
     func faceIdSettings(
@@ -323,7 +329,10 @@ class ViewControllerBuilder {
                 dismiss: dismiss
             )
             let view = LocalAuthorityConfirmationView(viewModel: viewModel)
-            let viewController = HostingViewController(rootView: view)
+            let viewController = HostingViewController(
+                rootView: view,
+                navigationBarTintColor: .govUK.text.linkSecondary
+            )
             return viewController
         }
 

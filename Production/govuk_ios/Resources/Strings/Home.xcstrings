@@ -34,13 +34,24 @@
         }
       }
     },
+    "feedbackButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give feedback"
+          }
+        }
+      }
+    },
     "feedbackWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Give feedback to help improve this app"
+            "value" : "Tell us what you think about the app"
           }
         }
       }

@@ -64,7 +64,8 @@ class HomeViewModel: ObservableObject {
             topicsWidget,
             addLocalAuthorityWidget,
             storedLocalAuthorityWidget,
-            recentActivityWidget
+            recentActivityWidget,
+            feedbackWidget
         ].compactMap { $0 }
         widgets = bannerWidgets + array
     }
@@ -120,6 +121,15 @@ class HomeViewModel: ObservableObject {
         let view = StoredLocalAuthorityWidgetView(
             viewModel: viewModel
         )
+        return HomepageWidget(
+            content: view
+        )
+    }
+
+    private var feedbackWidget: HomepageWidget? {
+        let view = FeedbackWidget { [weak self] in
+            self?.feedbackAction()
+        }
         return HomepageWidget(
             content: view
         )

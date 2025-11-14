@@ -48,6 +48,6 @@ struct LocalAuthenticationOnboardingView: View {
         }
         .navigationBarBackButtonHidden()
         .navigationBarHidden(true)
-        .background(Color(uiColor: UIColor.govUK.fills.surfaceBackground))
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceFullscreen))
     }
 }

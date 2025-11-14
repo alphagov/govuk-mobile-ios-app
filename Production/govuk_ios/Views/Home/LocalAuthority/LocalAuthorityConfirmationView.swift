@@ -9,24 +9,32 @@ struct LocalAuthorityConfirmationView: View {
     }
 
     var body: some View {
-        VStack {
-            ScrollView {
-                if viewModel.localAuthorityItem.parent != nil {
-                    twoTierView
-                } else {
-                    unitaryView
+        ZStack {
+            Color(uiColor: .govUK.fills.surfaceModal)
+            VStack {
+                ScrollView {
+                    if viewModel.localAuthorityItem.parent != nil {
+                        twoTierView
+                    } else {
+                        unitaryView
+                    }
                 }
+                PrimaryButtonView(
+                    viewModel: viewModel.primaryButtonViewModel
+                )
+                .padding(.bottom, 16)
+            }.onAppear {
+                viewModel.trackScreen(screen: self)
             }
-            PrimaryButtonView(
-                viewModel: viewModel.primaryButtonViewModel
+            .toolbar {
+                cancelButton
+            }
+            .toolbarBackground(
+                Color(uiColor: .govUK.fills.surfaceModal),
             )
-        }.onAppear {
-            viewModel.trackScreen(screen: self)
+            .toolbarBackground(.visible)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .toolbar {
-            cancelButton
-        }
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private var cancelButton: some ToolbarContent {
@@ -34,7 +42,7 @@ struct LocalAuthorityConfirmationView: View {
             Button(viewModel.cancelButtonTitle) {
                 viewModel.dismiss()
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
+            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
         }
     }
 

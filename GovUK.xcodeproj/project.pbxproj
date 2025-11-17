@@ -123,7 +123,6 @@
 		4EBE64692D15AABA007A6E97 /* MaximumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */; };
 		4EBE646B2D15AAD6007A6E97 /* MinimumLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */; };
 		4EBE646D2D15AB05007A6E97 /* CharValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE646C2D15AB05007A6E97 /* CharValidator.swift */; };
-		4EE0F2382EC602AC000EE020 /* FeedbackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F2372EC602AC000EE020 /* FeedbackWidget.swift */; };
 		4EE44BAD2E70332C0093D380 /* NonTappableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE44BAC2E70332C0093D380 /* NonTappableCardView.swift */; };
 		4EE5F3E52DAFD36B008C60ED /* LocalAuthorityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidget.swift */; };
 		4EE5F3E72DAFD42A008C60ED /* LocalAuthorityExplainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */; };
@@ -548,7 +547,6 @@
 		4EBE64682D15AABA007A6E97 /* MaximumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646A2D15AAD6007A6E97 /* MinimumLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthValidator.swift; sourceTree = "<group>"; };
 		4EBE646C2D15AB05007A6E97 /* CharValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharValidator.swift; sourceTree = "<group>"; };
-		4EE0F2372EC602AC000EE020 /* FeedbackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackWidget.swift; sourceTree = "<group>"; };
 		4EE44BAC2E70332C0093D380 /* NonTappableCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonTappableCardView.swift; sourceTree = "<group>"; };
 		4EE5F3E42DAFD36B008C60ED /* LocalAuthorityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityWidget.swift; sourceTree = "<group>"; };
 		4EE5F3E62DAFD42A008C60ED /* LocalAuthorityExplainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorityExplainerView.swift; sourceTree = "<group>"; };
@@ -1109,7 +1107,6 @@
 		16E5AD442C6E499B000B8B3A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				4EE0F2362EC6027F000EE020 /* Feedback */,
 				4E8A2A942E74976700BD14A9 /* RecentActivity */,
 				4E15340A2E398647002DEDB9 /* HomeContentView.swift */,
 				4EE5F3E32DAFD350008C60ED /* LocalAuthority */,
@@ -1226,14 +1223,6 @@
 				D09046762DBBC1AC0096EE66 /* JWT */,
 			);
 			path = Validators;
-			sourceTree = "<group>";
-		};
-		4EE0F2362EC6027F000EE020 /* Feedback */ = {
-			isa = PBXGroup;
-			children = (
-				4EE0F2372EC602AC000EE020 /* FeedbackWidget.swift */,
-			);
-			path = Feedback;
 			sourceTree = "<group>";
 		};
 		4EE5F3E32DAFD350008C60ED /* LocalAuthority */ = {
@@ -2386,7 +2375,6 @@
 				5DFB48952DE9F7F600B41CDA /* PreAuthCoordinator.swift in Sources */,
 				5DFB48962DE9F7F600B41CDA /* AppUnavailableCoordinator.swift in Sources */,
 				5DFB48972DE9F7F600B41CDA /* AppCoordinator.swift in Sources */,
-				4EE0F2382EC602AC000EE020 /* FeedbackWidget.swift in Sources */,
 				5DFB48982DE9F7F600B41CDA /* AnalyticsConsentCoordinator.swift in Sources */,
 				5DFB48992DE9F7F600B41CDA /* WelcomeOnboardingCoordinator.swift in Sources */,
 				5DFB489A2DE9F7F600B41CDA /* LocalAuthenticationOnboardingCoordinator.swift in Sources */,

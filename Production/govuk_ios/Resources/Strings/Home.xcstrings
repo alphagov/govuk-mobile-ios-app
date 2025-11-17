@@ -34,17 +34,6 @@
         }
       }
     },
-    "feedbackButtonTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Give feedback"
-          }
-        }
-      }
-    },
     "feedbackWidgetTitle" : {
       "extractionState" : "manual",
       "localizations" : {

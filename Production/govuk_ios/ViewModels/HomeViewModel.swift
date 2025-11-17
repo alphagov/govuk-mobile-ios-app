@@ -127,11 +127,18 @@ class HomeViewModel: ObservableObject {
     }
 
     private var feedbackWidget: HomepageWidget? {
-        guard let userFeedback = configService.userFeedbackBanner
+        guard let userFeedbackBanner = configService.userFeedbackBanner
         else { return nil }
-        let view = FeedbackWidget { [weak self] in
-            self?.feedbackAction()
-        }
+
+        let viewModel = UserFeedbackWidgetViewModel(
+            userFeedback: userFeedbackBanner,
+            analyticsService: analyticsService,
+            urlOpener: urlOpener
+        )
+
+        let view = UserFeedbackWidgetView(
+            viewModel: viewModel
+        )
         return HomepageWidget(
             content: view
         )

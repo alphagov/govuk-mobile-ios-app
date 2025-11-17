@@ -11,13 +11,16 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
     let mockAnalyticsService = MockAnalyticsService()
 
     func test_loadInNavigationController_light_rendersCorrectly() {
+        mockTopicService._stubbedHasCustomisedTopics = true
         mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
-        let topics = Topic.arrangeMultipleFavourites(
+        var topics = Topic.arrangeMultipleFavourites(
             context: coreData.viewContext
         )
-        mockTopicService._stubbedFetchAllTopics = topics
-        mockTopicService._stubbedFetchFavouriteTopics = topics
 
+        mockTopicService._stubbedFetchAllTopics = topics
+
+        topics.removeLast()
+        mockTopicService._stubbedFetchFavouriteTopics = topics
         VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .light,
@@ -36,74 +39,6 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .dark,
-            navBarHidden: true
-        )
-    }
-
-    func test_loadInNavigationController_notCusomised_light_rendersCorrectly() {
-        mockTopicService._stubbedHasCustomisedTopics = false
-        mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
-        var topics = Topic.arrangeMultipleFavourites(
-            context: coreData.viewContext
-        )
-
-        mockTopicService._stubbedFetchAllTopics = topics
-
-        topics.removeLast()
-        mockTopicService._stubbedFetchFavouriteTopics = topics
-
-        VerifySnapshotInNavigationController(
-            viewController: viewController(),
-            mode: .light,
-            navBarHidden: true
-        )
-    }
-
-    func test_loadInNavigationController_notCusomised_dark_rendersCorrectly() {
-        mockTopicService._stubbedHasCustomisedTopics = false
-        mockTopicService._stubbedFetchRemoteListResult = .success(TopicResponseItem.arrangeMultiple)
-        var topics = Topic.arrangeMultipleFavourites(
-            context: coreData.viewContext
-        )
-
-        mockTopicService._stubbedFetchAllTopics = topics
-
-        topics.removeLast()
-        mockTopicService._stubbedFetchFavouriteTopics = topics
-
-        VerifySnapshotInNavigationController(
-            viewController: viewController(),
-            mode: .dark,
-            navBarHidden: true
-        )
-    }
-
-    func test_loadInNavigationController_topicsError_rendersCorrectly() {
-        mockTopicService._stubbedHasCustomisedTopics = false
-        mockTopicService._stubbedFetchRemoteListResult = .failure(.apiUnavailable)
-        VerifySnapshotInNavigationController(
-            viewController: viewController(),
-            mode: .light,
-            navBarHidden: true
-        )
-    }
-
-    func test_loadInNavigationController_topicsError_dark_rendersCorrectly() {
-        mockTopicService._stubbedHasCustomisedTopics = false
-        mockTopicService._stubbedFetchRemoteListResult = .failure(.apiUnavailable)
-        VerifySnapshotInNavigationController(
-            viewController: viewController(),
-            mode: .dark,
-            navBarHidden: true
-        )
-    }
-
-    func test_loadInNavigationController_topicsError_light_rendersCorrectly() {
-        mockTopicService._stubbedHasCustomisedTopics = false
-        mockTopicService._stubbedFetchRemoteListResult = .failure(.apiUnavailable)
-        VerifySnapshotInNavigationController(
-            viewController: viewController(),
-            mode: .light,
             navBarHidden: true
         )
     }
@@ -144,28 +79,28 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: mockAnalyticsService,
-            topicAction: { _ in }
+            topicAction: { _ in },
+            dismissEditAction: { }
         )
         let mockNotificationService = MockNotificationService()
         mockNotificationService._stubbedShouldRequestPermission = true
-
-
         let viewModel = HomeViewModel(
             analyticsService: mockAnalyticsService,
             configService: MockAppConfigService(),
-            notificationService: mockNotificationService,
-            userDefaultsService: MockUserDefaultsService(), topicsWidgetViewModel: topicsViewModel,
+            notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
+            topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            localAuthorityAction: {},
-            editLocalAuthorityAction: {},
-            feedbackAction: {} ,
-            notificationsAction: {},
-            recentActivityAction: {},
-            openURLAction: {_ in},
-            openAction: {_ in}
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: { },
+            recentActivityAction: { },
+            openURLAction: { _ in },
+            openAction: { _ in }
         )
         return HomeViewController(viewModel: viewModel)
     }

@@ -42,7 +42,8 @@ final class TopicWidgetViewSnapshotTests: SnapshotTestCase {
         let viewModel = TopicsWidgetViewModel(
             topicsService: mockTopicService,
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in }
+            topicAction: { _ in },
+            dismissEditAction: { }
         )
         let view = TopicsWidget(
             viewModel: viewModel

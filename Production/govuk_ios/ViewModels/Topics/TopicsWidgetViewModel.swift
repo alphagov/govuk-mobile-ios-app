@@ -14,10 +14,22 @@ final class TopicsWidgetViewModel: ObservableObject {
     private let analyticsService: AnalyticsServiceInterface
     private let urlOpener: URLOpener
     let topicAction: (Topic) -> Void
+    private let dismissEditAction: () -> Void
     @Published var fetchTopicsError = false
     @Published var favouriteTopics: [Topic] = []
     @Published var allTopics: [Topic] = []
-    @Published var topicsScreen: TopicSegment = .favorite
+    @Published var topicsScreen: TopicSegment = .favorite {
+        didSet {
+            if oldValue != topicsScreen &&
+                initialLoadComplete &&
+                !isEditInProgress {
+                trackECommerce()
+            }
+        }
+    }
+
+    @Published var initialLoadComplete = false
+    private var isEditInProgress = false
 
     var errorViewModel: AppErrorViewModel {
         .topicErrorWithAction { [weak self] in
@@ -49,11 +61,13 @@ final class TopicsWidgetViewModel: ObservableObject {
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener = UIApplication.shared,
-         topicAction: @escaping (Topic) -> Void) {
+         topicAction: @escaping (Topic) -> Void,
+         dismissEditAction: @escaping () -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.topicAction = topicAction
+        self.dismissEditAction = dismissEditAction
     }
 
     lazy var editTopicViewModel: EditTopicsViewModel = {
@@ -87,9 +101,13 @@ final class TopicsWidgetViewModel: ObservableObject {
         setTopicsScreen()
     }
 
-
     func openErrorURL() {
         urlOpener.openIfPossible(Constants.API.govukBaseUrl)
+    }
+
+    func didDismissEdit() {
+        isEditInProgress = true
+        dismissEditAction()
     }
 
     @MainActor
@@ -104,5 +122,49 @@ final class TopicsWidgetViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    private var listName: String {
+        topicsScreen == .favorite ? "Your topics" : "All topics"
+    }
+
+    func trackECommerce() {
+        let trackedTopics = topicsScreen == .favorite ? favouriteTopics : allTopics
+        var items = [HomeCommerceItem]()
+        trackedTopics.enumerated().forEach { index, topic in
+            let item = HomeCommerceItem(
+                name: topic.title,
+                listName: listName,
+                index: index + 1,
+                itemId: nil,
+                locationId: nil
+            )
+            items.append(item)
+        }
+        let event = AppEvent.viewItemList(name: listName,
+                                          id: listName,
+                                          items: items)
+        analyticsService.track(event: event)
+        isEditInProgress = false
+    }
+
+    func trackECommerceSelection(_ name: String) {
+        let trackedTopics = topicsScreen == .favorite ? favouriteTopics : allTopics
+        guard let topic = trackedTopics.first(where: {$0.title == name}),
+              let index = trackedTopics.firstIndex(of: topic) else {
+            return
+        }
+        let items = [HomeCommerceItem(name: topic.title,
+                                      listName: listName,
+                                      index: index + 1,
+                                      itemId: nil,
+                                      locationId: nil)]
+
+        let event = AppEvent.selectItem(
+            listName: listName,
+            listId: listName,
+            results: trackedTopics.count,
+            items: items)
+        analyticsService.track(event: event)
     }
 }

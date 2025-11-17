@@ -54,6 +54,7 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
                 .padding(16)
             }
         }
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceFullscreen))
         .overlay(content: {
             ZStack {
                 Color(UIColor(light: .white, dark: .black))

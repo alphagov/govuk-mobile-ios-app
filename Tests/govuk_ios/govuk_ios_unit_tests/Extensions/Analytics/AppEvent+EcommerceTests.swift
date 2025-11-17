@@ -126,6 +126,7 @@ extension TopicCommerceItem {
 extension HomeCommerceItem {
     static func arrange(index: Int) -> HomeCommerceItem {
         HomeCommerceItem(name: "name \(index)",
+                         listName: "listName \(index)",
                          index: index,
                          itemId: "item_id \(index)",
                          locationId: "location_id \(index)")

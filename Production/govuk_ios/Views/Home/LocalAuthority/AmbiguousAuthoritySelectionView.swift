@@ -11,27 +11,35 @@ struct AmbiguousAuthoritySelectionView: View {
     }
 
     var body: some View {
-        VStack {
-            ScrollView {
-                HeaderView(
-                    title: viewModel.title,
-                    subheading: viewModel.subtitle
-                )
-                .padding()
-                listView
-                Spacer()
+        ZStack {
+            Color(uiColor: .govUK.fills.surfaceModal)
+            VStack {
+                ScrollView {
+                    HeaderView(
+                        title: viewModel.title,
+                        subheading: viewModel.subtitle
+                    )
+                    .padding()
+                    listView
+                    Spacer()
+                }
+                ButtonStackView(
+                    primaryButtonViewModel: viewModel.confirmButtonModel,
+                    primaryDisabled: viewModel.selectedAuthority == nil,
+                    secondaryButtonViewModel: viewModel.selectAddressButtonModel)
+                .padding(.bottom, 16)
             }
-            ButtonStackView(
-                primaryButtonViewModel: viewModel.confirmButtonModel,
-                primaryDisabled: viewModel.selectedAuthority == nil,
-                secondaryButtonViewModel: viewModel.selectAddressButtonModel)
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            cancelButton
-        }
-        .onAppear {
-            viewModel.trackScreen(screen: self)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                cancelButton
+            }
+            .toolbarBackground(
+                Color(uiColor: .govUK.fills.surfaceModal),
+            )
+            .toolbarBackground(.visible)
+            .onAppear {
+                viewModel.trackScreen(screen: self)
+            }
         }
     }
 
@@ -57,7 +65,7 @@ struct AmbiguousAuthoritySelectionView: View {
             Button(viewModel.cancelButtonTitle) {
                 viewModel.dismissAction()
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
+            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
         }
     }
 

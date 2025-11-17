@@ -184,11 +184,12 @@ class HomeViewModel: ObservableObject {
         urlOpener: urlOpener,
         openAction: openAction
     )
+
     private func featureEnabled(_ feature: Feature) -> Bool {
         configService.isFeatureEnabled(key: feature)
     }
 
-    func trackScreen(screen: TrackableScreen) {
-        analyticsService.track(screen: screen)
+    func trackECommerce() {
+        topicsWidgetViewModel.trackECommerce()
     }
 }

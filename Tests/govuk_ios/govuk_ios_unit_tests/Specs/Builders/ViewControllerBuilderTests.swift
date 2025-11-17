@@ -28,7 +28,8 @@ struct ViewControllerBuilderTests {
         let viewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
-            topicAction: { _ in }
+            topicAction: { _ in },
+            dismissEditAction: { }
         )
         let dependencies = ViewControllerBuilder.HomeDependencies(
             analyticsService: MockAnalyticsService(),

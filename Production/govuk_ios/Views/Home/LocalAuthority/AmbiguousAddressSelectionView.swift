@@ -11,25 +11,33 @@ struct AmbiguousAddressSelectionView: View {
     }
 
     var body: some View {
-        VStack {
-            ScrollView {
-                HeaderView(
-                    title: viewModel.title,
-                    subheading: viewModel.subtitle
-                )
-                .padding()
-                listView
-                Spacer()
+        ZStack {
+            Color(uiColor: .govUK.fills.surfaceModal)
+            VStack {
+                ScrollView {
+                    HeaderView(
+                        title: viewModel.title,
+                        subheading: viewModel.subtitle
+                    )
+                    .padding()
+                    listView
+                    Spacer()
+                }
+                PrimaryButtonView(viewModel: viewModel.confirmButtonModel)
+                    .disabled(viewModel.selectedAddress == nil)
+                    .padding(.bottom, 16)
             }
-            PrimaryButtonView(viewModel: viewModel.confirmButtonModel)
-                .disabled(viewModel.selectedAddress == nil)
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            cancelButton
-        }
-        .onAppear {
-            viewModel.trackScreen(screen: self)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                cancelButton
+            }
+            .toolbarBackground(
+                Color(uiColor: .govUK.fills.surfaceModal),
+            )
+            .toolbarBackground(.visible)
+            .onAppear {
+                viewModel.trackScreen(screen: self)
+            }
         }
     }
 
@@ -55,7 +63,7 @@ struct AmbiguousAddressSelectionView: View {
             Button(viewModel.cancelButtonTitle) {
                 viewModel.dismissAction()
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
+            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
         }
     }
 

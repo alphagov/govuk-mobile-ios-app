@@ -2928,7 +2928,6 @@
 			buildSettings = {
 				ADDITIONAL_SWIFT_FLAGS = "-DSTAGING";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				BASE_URL = "https://app.publishing.service.gov.uk";
 				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2970,7 +2969,6 @@
 			buildSettings = {
 				ADDITIONAL_SWIFT_FLAGS = "-DSTAGING";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				BASE_URL = "https://app.publishing.service.gov.uk";
 				CODE_SIGN_ENTITLEMENTS = "Production/govuk_ios/SupportingFiles/$(CODE_SIGN_ENTITLEMENTS_APP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;

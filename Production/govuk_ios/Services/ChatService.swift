@@ -49,6 +49,7 @@ final class ChatService: ChatServiceInterface {
         self.chatRepository = chatRepository
         self.configService = configService
         self.userDefaultsService = userDefaultsService
+        self.removeChatData() // See method documentation
     }
 
     func askQuestion(_ question: String,
@@ -212,5 +213,16 @@ extension ChatService {
 
     var feedback: URL {
         configService.chatUrls?.feedback ?? Constants.API.defaultChatFeedbackUrl
+    }
+
+    // https://govukverify.atlassian.net/browse/GOVUKAPP-2788
+    // This should be removed once chat goes live.  Check for enablement
+    // on the off chance it doesn't get removed.
+    private func removeChatData() {
+        if !isEnabled {
+            userDefaultsService.removeObject(forKey: .chatOnboardingSeen)
+            userDefaultsService.removeObject(forKey: .chatOptedIn)
+            clearHistory()
+        }
     }
 }

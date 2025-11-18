@@ -511,4 +511,24 @@ final class ChatServiceTests {
         #expect(sut.privacyPolicy == mockConfigService.chatUrls?.privacyNotice)
         #expect(sut.feedback == mockConfigService.chatUrls?.feedback)
     }
+
+    // https://govukverify.atlassian.net/browse/GOVUKAPP-2788
+    // This should be removed once chat goes live.
+    @Test
+    func chatInit_removesChatData() {
+        mockChatRepository._conversationId = "test_id"
+        mockUserDefaultsService.set(true, forKey: .chatOptedIn)
+        mockUserDefaultsService.set(true, forKey: .chatOnboardingSeen)
+
+        _ = ChatService(
+            serviceClient: mockChatServiceClient,
+            chatRepository: mockChatRepository,
+            configService: mockConfigService,
+            userDefaultsService: mockUserDefaultsService
+        )
+
+        #expect(mockChatRepository._conversationId == nil)
+        #expect(mockUserDefaultsService.value(forKey: .chatOptedIn) == nil)
+        #expect(mockUserDefaultsService.value(forKey: .chatOptedIn) == nil)
+    }
 }

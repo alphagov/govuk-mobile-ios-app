@@ -45,7 +45,7 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
                 )
             } else if viewModel.showPrimaryButton {
                 Divider()
-                    .overlay(Color(UIColor.govUK.strokes.listDivider))
+                    .overlay(Color(UIColor.govUK.strokes.fixedContainer))
                 SwiftUIButton(
                     viewModel.primaryButtonConfiguration,
                     viewModel: viewModel.primaryButtonViewModel
@@ -54,6 +54,7 @@ struct InfoView<Model>: View where Model: InfoViewModelInterface {
                 .padding(16)
             }
         }
+        .background(Color(uiColor: UIColor.govUK.fills.surfaceFullscreen))
         .overlay(content: {
             ZStack {
                 Color(UIColor(light: .white, dark: .black))

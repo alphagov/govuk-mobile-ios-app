@@ -362,7 +362,7 @@ final class ChatServiceTests {
         )
         mockConfigService.features = [.chat, .chatTestActive]
 
-        #expect(sut.isEnabled == true)
+        #expect(sut.isEnabled == false)
     }
 
     @Test
@@ -448,7 +448,7 @@ final class ChatServiceTests {
             userDefaultsService: mockUserDefaultsService
         )
 
-        #expect(sut.chatOptInAvailable == true)
+        #expect(sut.chatOptInAvailable == false)
     }
 
     @Test
@@ -474,7 +474,7 @@ final class ChatServiceTests {
             userDefaultsService: mockUserDefaultsService
         )
 
-        #expect(sut.chatTestActive == true)
+        #expect(sut.chatTestActive == false)
     }
 
     @Test

@@ -105,7 +105,6 @@ final class EditTopicsViewControllerSnapshotTests: SnapshotTestCase {
         let viewModel = EditTopicsViewModel(
             topicsService: mockTopicsService,
             analyticsService: MockAnalyticsService(),
-            dismissAction: { }
         )
         let view = EditTopicsView(
             viewModel: viewModel

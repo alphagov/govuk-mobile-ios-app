@@ -29,7 +29,7 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         _receivedEditLocalAuthorityAction = actions.editLocalAuthorityAction
         _receivedHomeRecentActivityAction = actions.recentActivityAction
         _receivedHomeSearchAction = actions.openSearchAction
-        _receivedTopicWidgetViewModel = dependencies.topicWidgetViewModel
+        _receivedTopicWidgetViewModel = dependencies.topicsWidgetViewModel
         return _stubbedHomeViewController ?? UIViewController()
     }
 
@@ -73,14 +73,6 @@ class MockViewControllerBuilder: ViewControllerBuilder {
         return _stubbedTopicDetailViewController ?? UIViewController()
     }
 
-    var _stubbedEditTopicsViewController: UIViewController?
-    var _receivedDismissAction: (() -> Void)?
-    override func editTopics(analyticsService: any AnalyticsServiceInterface,
-                             topicsService: any TopicsServiceInterface,
-                             dismissAction: @escaping () -> Void) -> UIViewController {
-        _receivedDismissAction = dismissAction
-        return _stubbedEditTopicsViewController ?? UIViewController()
-    }
     var _stubbedLocalAuthorityPostcodeEntryViewController: UIViewController?
     var _receivedLocalAuthorityDismissAction: (() -> Void)?
     var _receivedResolveAmbiguityAction: ((AmbiguousAuthorities, String) -> Void)?
@@ -131,15 +123,6 @@ class MockViewControllerBuilder: ViewControllerBuilder {
     ) -> UIViewController {
         _receivedAmbiguousAddressDismissAction = dismissAction
         return _stubbedAmbiguousAddressSelectionViewController ?? UIViewController()
-    }
-
-    var _stubbedAllTopicsViewController: UIViewController?
-    var _receivedTopicAction: ((Topic) -> Void)?
-    override func allTopics(analyticsService: AnalyticsServiceInterface,
-                            topicAction: @escaping (Topic) -> Void,
-                            topicsService topicService: TopicsServiceInterface) -> UIViewController {
-        _receivedTopicAction = topicAction
-        return _stubbedAllTopicsViewController ?? UIViewController()
     }
 
     var _receivedTopicOnboardingDismissAction: (() -> Void)?

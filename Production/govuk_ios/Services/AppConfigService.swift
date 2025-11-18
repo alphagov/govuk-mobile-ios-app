@@ -9,6 +9,7 @@ protocol AppConfigServiceInterface {
     var alertBanner: AlertBanner? { get }
     var chatBanner: ChatBanner? { get }
     var userFeedbackBanner: UserFeedbackBanner? { get }
+    var emergencyBanners: [EmergencyBanner]? { get }
     var chatUrls: ChatURLs? { get }
     var refreshTokenExpirySeconds: Int? { get }
 }
@@ -24,6 +25,7 @@ public final class AppConfigService: AppConfigServiceInterface {
     var alertBanner: AlertBanner?
     var chatBanner: ChatBanner?
     var userFeedbackBanner: UserFeedbackBanner?
+    var emergencyBanners: [EmergencyBanner]?
     private(set) var chatUrls: ChatURLs?
     private(set) var refreshTokenExpirySeconds: Int?
 
@@ -61,7 +63,7 @@ public final class AppConfigService: AppConfigServiceInterface {
         updateSearch(urlString: config.searchApiUrl)
         updateChatPollInterval(config.chatPollIntervalSeconds)
         updateTokenExpirySeconds(config.refreshTokenExpirySeconds)
-        alertBanner = config.alertBanner
+        emergencyBanners = config.emergencyBanners
         chatBanner = config.chatBanner
         userFeedbackBanner = config.userFeedbackBanner
         chatUrls = config.chatUrls

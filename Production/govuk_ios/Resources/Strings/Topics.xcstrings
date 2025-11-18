@@ -45,13 +45,13 @@
         }
       }
     },
-    "seeAllTopicsButtonText" : {
+    "loading" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "See all topics"
+            "value" : "Loading topic"
           }
         }
       }
@@ -89,7 +89,7 @@
         }
       }
     },
-    "topicDetailSeeAllRowTitle" : {
+    "topicDetailSeeAllButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
@@ -100,13 +100,24 @@
         }
       }
     },
+    "topicDetailSeeAllStepByStepAccessibilityTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See all step by step guides"
+          }
+        }
+      }
+    },
     "topicDetailStepByStepHeader" : {
       "extractionState" : "manual",
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Step by step guides"
+            "value" : "Step-by-step guides"
           }
         }
       }
@@ -129,28 +140,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Topics are not working at the moment. Try again later, or go to the GOV.UK website to find the page you're looking for."
-          }
-        }
-      }
-    },
-    "topicOnboardingCardSelected" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selected"
-          }
-        }
-      }
-    },
-    "topicOnboardingCardUnselected" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select"
           }
         }
       }
@@ -195,6 +184,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skip"
+          }
+        }
+      }
+    },
+    "topicSelected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected"
+          }
+        }
+      }
+    },
+    "topicUnselected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unselected"
           }
         }
       }

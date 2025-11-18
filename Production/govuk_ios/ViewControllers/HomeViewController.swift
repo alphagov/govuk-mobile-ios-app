@@ -4,8 +4,8 @@ import GOVKit
 
 class HomeViewController: BaseViewController {
     private var searchViewController: SearchViewController!
-    private var homeContentViewController: HomeContentViewController!
     private var viewModel: HomeViewModel
+    private var homeContentViewController: UIViewController!
     private lazy var logoImageView: UIImageView = {
         let uiImageView = UIImageView(image: .homeLogo)
         uiImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -16,12 +16,16 @@ class HomeViewController: BaseViewController {
     }()
     private lazy var searchBar: UISearchBar = {
         let localSearchBar = UISearchBar()
-        localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        localSearchBar.searchTextField.backgroundColor = UIColor.govUK.fills.surfaceSearch
         localSearchBar.enablesReturnKeyAutomatically = false
         localSearchBar.translatesAutoresizingMaskIntoConstraints = false
         localSearchBar.barTintColor = UIColor.govUK.fills.surfaceHomeHeaderBackground
         localSearchBar.layer.borderColor = UIColor.govUK.fills.surfaceHomeHeaderBackground.cgColor
         localSearchBar.layer.borderWidth = 1
+        localSearchBar.searchTextField.defaultTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.govUK.text.primary,
+            NSAttributedString.Key.font: UIFont.govUK.body,
+        ]
         localSearchBar.searchTextField.attributedPlaceholder = NSAttributedString(
             string: String.search.localized("searchBarPlaceholder"),
             attributes: [
@@ -30,6 +34,7 @@ class HomeViewController: BaseViewController {
             ]
         )
         localSearchBar.searchTextField.leftView?.tintColor = UIColor.govUK.text.secondary
+        localSearchBar.searchTextField.rightView?.tintColor = UIColor.govUK.text.secondary
         localSearchBar.tintColor = UIColor.govUK.text.secondary
         colorSearchBarButton()
         localSearchBar.delegate = self
@@ -54,11 +59,6 @@ class HomeViewController: BaseViewController {
         super.init(analyticsService: viewModel.analyticsService)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -70,13 +70,33 @@ class HomeViewController: BaseViewController {
         if viewModel.searchEnabled {
             configureSearchBar()
         }
-        configureHomeContent()
+        configureContentViewController()
+        displayHomeContent()
     }
 
-    private func configureHomeContent() {
-        homeContentViewController = HomeContentViewController(
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateWidgets()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.trackECommerce()
+    }
+
+    private func configureContentViewController() {
+        let contentView = HomeContentView(
             viewModel: viewModel
         )
+        let contentViewController = HostingViewController(
+            rootView: contentView,
+            navigationBarHidden: true
+        )
+        homeContentViewController = contentViewController
+    }
+
+    private func displayHomeContent() {
         displayController(homeContentViewController)
     }
 
@@ -189,6 +209,7 @@ class HomeViewController: BaseViewController {
         searchViewController.clearResults()
         removeController(searchViewController)
         displayController(homeContentViewController)
+        viewWillReAppear()
         setLogoHidden(false)
     }
 }
@@ -212,6 +233,11 @@ extension HomeViewController: ResetsToDefault {
         if viewModel.searchEnabled {
             cancelSearch()
         }
-        homeContentViewController.scrollToTop()
+        viewModel.homeContentScrollToTop = true
     }
+}
+
+extension HomeViewController: TrackableScreen {
+    var trackingName: String { "Homepage" }
+    var trackingTitle: String? { "Homepage" }
 }

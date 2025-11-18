@@ -29,6 +29,7 @@ struct GroupedListRowView: View {
         GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[1])
         GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[2])
         GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[3])
+        GroupedListRowView(row: GroupedListSection_Previews.previewContent.first!.rows[4])
     }
 }
 
@@ -66,14 +67,18 @@ struct LinkRowView: View {
             row.action()
         } label: {
             VStack(alignment: .leading) {
-                HStack {
+                HStack(spacing: 16) {
+                    if let imageName = row.imageName {
+                        Image(imageName)
+                    }
                     Text(row.title)
                         .multilineTextAlignment(.leading)
+                        .foregroundColor(Color(UIColor.govUK.text.link))
                     Spacer()
                     Image(systemName: "arrow.up.right")
+                        .opacity(row.showLinkImage ? 1 : 0)
+                        .foregroundColor(Color(UIColor.govUK.text.iconTertiary))
                 }
-                .foregroundColor(Color(UIColor.govUK.text.link))
-
                 RowDetail(text: row.body)
             }
         }
@@ -132,7 +137,7 @@ struct NavigationRowView: View {
                     Image(systemName: "chevron.right")
                         .foregroundColor(
                             Color(
-                                UIColor.govUK.text.trailingIcon
+                                UIColor.govUK.text.iconTertiary
                             )
                         )
                         .font(Font.govUK.bodySemibold)

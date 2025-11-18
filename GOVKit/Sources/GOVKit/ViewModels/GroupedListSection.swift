@@ -18,11 +18,20 @@ public struct GroupedListSection {
 public struct GroupedListHeader {
     public let title: String
     let icon: UIImage?
-    
+    let actionTitle: String?
+    let accessibilityActionTitle: String?
+    let action: (() -> Void)?
+
     public init(title: String,
-                icon: UIImage?) {
+                icon: UIImage? = nil,
+                actionTitle: String? = nil,
+                accessibilityActionTitle: String? = nil,
+                action: (()->Void)? = nil) {
         self.title = title
         self.icon = icon
+        self.actionTitle = actionTitle
+        self.accessibilityActionTitle = accessibilityActionTitle ?? actionTitle
+        self.action = action
     }
 }
 
@@ -30,10 +39,14 @@ public protocol GroupedListRow {
     var id: String { get }
     var title: String { get }
     var body: String? { get }
+    var imageName: String? { get }
 }
 
 public extension GroupedListRow {
     var body: String? {
+        nil
+    }
+    var imageName: String? {
         nil
     }
 }
@@ -44,17 +57,23 @@ public struct LinkRow: GroupedListRow,
     public let title: String
     public let body: String?
     public var isWebLink: Bool = true
+    public let imageName: String?
+    public let showLinkImage: Bool
     public let action: () -> Void
     
     public init(id: String,
                 title: String,
                 body: String? = nil,
+                imageName: String? = nil,
                 isWebLink: Bool = true,
+                showLinkImage: Bool = true,
                 action: @escaping () -> Void) {
         self.id = id
         self.title = title
         self.body = body
+        self.imageName = imageName
         self.isWebLink = isWebLink
+        self.showLinkImage = showLinkImage
         self.action = action
     }
 }
@@ -153,7 +172,10 @@ public struct GroupedListSection_Previews: PreviewProvider {
     public static var previewContent: [GroupedListSection] {
         [
             .init(
-                heading: GroupedListHeader(title: "Section 1", icon: nil),
+                heading: GroupedListHeader(title: "Section 1",
+                                           icon: nil,
+                                           actionTitle: "See all",
+                                           action: { print("tap") }),
                 rows: [
                     InformationRow(
                         id: UUID().uuidString,
@@ -165,6 +187,16 @@ public struct GroupedListSection_Previews: PreviewProvider {
                         id: UUID().uuidString,
                         title: "Link row",
                         body: "A really long description to test how multiline text wrapping works",
+                        action: {
+                            print("link row tapped")
+                        }
+                    ),
+                    LinkRow(
+                        id: UUID().uuidString,
+                        title: "Link row with leading icon",
+                        body: nil,
+                        imageName: "step_by_step",
+                        showLinkImage: false,
                         action: {
                             print("link row tapped")
                         }

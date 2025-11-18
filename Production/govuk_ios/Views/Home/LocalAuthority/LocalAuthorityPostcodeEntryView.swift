@@ -12,54 +12,67 @@ struct LocalAuthorityPostcodeEntryView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 15) {
-                    Text(viewModel.postcodeEntryViewTitle)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(Font.govUK.title1Bold)
-                        .accessibilityAddTraits(.isHeader)
-                    Text(viewModel.postcodeEntryViewExampleText)
-                        .font(Font.govUK.body)
-                        .foregroundColor(Color(UIColor.govUK.text.secondary))
-                    if let errorCase = viewModel.error {
-                        withAnimation {
-                            Text(errorCase.errorMessage)
-                                .accessibilityFocused($isErrorFocused)
-                                .foregroundColor(
-                                    Color(uiColor: UIColor.govUK.text.buttonDestructive)
-                                )
-                                .font(Font.govUK.body)
+        ZStack {
+            Color(uiColor: .govUK.fills.surfaceModal)
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text(viewModel.postcodeEntryViewTitle)
+                            .foregroundColor(Color(UIColor.govUK.text.primary))
+                            .font(Font.govUK.title1Bold)
+                            .accessibilityAddTraits(.isHeader)
+                        Text(viewModel.postcodeEntryViewExampleText)
+                            .font(Font.govUK.body)
+                            .foregroundColor(Color(UIColor.govUK.text.secondary))
+                        if let errorCase = viewModel.error {
+                            withAnimation {
+                                Text(errorCase.errorMessage)
+                                    .accessibilityFocused($isErrorFocused)
+                                    .foregroundColor(
+                                        Color(uiColor: UIColor.govUK.text.buttonDestructive)
+                                    )
+                                    .font(Font.govUK.body)
+                            }
+                        }
+                        TextField("", text: $viewModel.postCode)
+                            .textContentType(.postalCode)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 10)
+                            .background(Color(UIColor.govUK.fills.surfaceSearch))
+                            .roundedBorder(
+                                cornerRadius: 4,
+                                borderColor: Color(UIColor.govUK.strokes.listDivider))
+                            .accessibilityLabel(viewModel.entryFieldAccessibilityLabel)
+                        Text(viewModel.postcodeEntryViewDescriptionTitle)
+                            .font(Font.govUK.bodySemibold)
+                            .accessibilityAddTraits(.isHeader)
+                        Text(viewModel.postcodeEntryViewDescriptionBody)
+                            .font(Font.govUK.body)
+                        Spacer()
+                    }.padding()
+                }.onReceive(viewModel.$error) { error in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if error != nil {
+                            isErrorFocused = true
                         }
                     }
-                    TextField("", text: $viewModel.postCode)
-                        .textFieldStyle(.roundedBorder)
-                        .textContentType(.postalCode)
-                        .accessibilityLabel(viewModel.entryFieldAccessibilityLabel)
-                    Text(viewModel.postcodeEntryViewDescriptionTitle)
-                        .font(Font.govUK.bodySemibold)
-                        .accessibilityAddTraits(.isHeader)
-                    Text(viewModel.postcodeEntryViewDescriptionBody)
-                        .font(Font.govUK.body)
-                    Spacer()
-                }.padding()
-            }.onReceive(viewModel.$error) { error in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    if error != nil {
-                        isErrorFocused = true
-                    }
                 }
+                PrimaryButtonView(
+                    viewModel: viewModel.primaryButtonViewModel
+                )
+                .disabled(viewModel.postCode.isEmpty)
+                .padding(.bottom, 16)
+            }.toolbar {
+                cancelButton
             }
-            PrimaryButtonView(
-                viewModel: viewModel.primaryButtonViewModel
+            .toolbarBackground(
+                Color(uiColor: .govUK.fills.surfaceModal),
             )
-            .disabled(viewModel.postCode.isEmpty)
-        }.toolbar {
-            cancelButton
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            viewModel.trackScreen(screen: self)
+            .toolbarBackground(.visible)
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                viewModel.trackScreen(screen: self)
+            }
         }
     }
 
@@ -68,7 +81,7 @@ struct LocalAuthorityPostcodeEntryView: View {
             Button(viewModel.cancelButtonTitle) {
                 viewModel.dismissAction()
             }
-            .foregroundColor(Color(UIColor.govUK.text.link))
+            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
         }
     }
 }

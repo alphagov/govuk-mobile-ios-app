@@ -12,25 +12,28 @@ struct HomeViewModelTests {
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
         let mockConfigService = MockAppConfigService()
-        mockConfigService._stubbedAlertBanner = .init(
-            id: "test",
-            body: "test",
-            link: nil
-        )
-        mockConfigService._stubbedChatBanner = .init(
-            id: "test",
-            title: "test",
-            body: "test",
-            link: mockConfigService._stubbedChatBannerLink
-        )
-        mockConfigService._stubbedUserFeedbackBanner = .init(
-            body: "test",
-            link: mockConfigService._stubbedUserFeedbackBannerLink
-        )
+        mockConfigService._stubbedEmergencyBanners =
+        [
+            .init(
+                id: "emergency",
+                title: "National Emergency",
+                body: "This is a Level 1 emergency",
+                link: nil,
+                type: "national-emergency",
+                allowsDismissal: true
+            ),
+            .init(
+                id: "bridges",
+                title: "His Majesty King Henry VIII",
+                body: "1621 - 1854",
+                link: nil,
+                type: "notable-death",
+                allowsDismissal: false
+            )
+        ]
 
         let mockChatService = MockChatService()
         mockChatService._stubbedIsEnabled = true
@@ -41,26 +44,24 @@ struct HomeViewModelTests {
             analyticsService: MockAnalyticsService(),
             configService: mockConfigService,
             notificationService: MockNotificationService(),
-            topicWidgetViewModel: topicsViewModel,
-            localAuthorityAction: { },
-            editLocalAuthorityAction: { },
-            feedbackAction: { },
-            notificationsAction: { },
-            recentActivityAction: { },
-            openURLAction: { _ in },
-            openAction: { _ in },
+            userDefaultsService: MockUserDefaultsService(),
+            topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
-            chatService: mockChatService
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
         )
 
-        await subject.reloadWidgets()
         let widgets = subject.widgets
-
-        #expect((widgets as Any) is [WidgetView])
+      
+        #expect((widgets as Any) is [HomepageWidget])
         #expect(widgets.count == 5)
     }
 
@@ -69,37 +70,90 @@ struct HomeViewModelTests {
         let configService = MockAppConfigService()
         configService.features = []
 
-        let mockNotificationService = MockNotificationService()
-        mockNotificationService._stubbedShouldRequestPermission = false
-
         let topicsViewModel = TopicsWidgetViewModel(
             topicsService: MockTopicsService(),
             analyticsService: MockAnalyticsService(),
             topicAction: { _ in },
-            editAction: { },
-            allTopicsAction: { }
+            dismissEditAction: { }
         )
         let subject = HomeViewModel(
             analyticsService: MockAnalyticsService(),
             configService: configService,
-            notificationService: mockNotificationService,
-            topicWidgetViewModel: topicsViewModel,
-            localAuthorityAction: { },
-            editLocalAuthorityAction: { },
-            feedbackAction: { },
-            notificationsAction: { },
-            recentActivityAction: { },
-            openURLAction: { _ in },
-            openAction: { _ in },
+            notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
+            topicsWidgetViewModel: topicsViewModel,
             urlOpener: MockURLOpener(),
             searchService: MockSearchService(),
             activityService: MockActivityService(),
             localAuthorityService: MockLocalAuthorityService(),
-            userDefaultService: MockUserDefaultsService(),
-            chatService: MockChatService()
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
         )
         let widgets = subject.widgets
 
         #expect(widgets.count == 0)
+    }
+
+    @Test
+    func emergencyBanners_have_correct_sort_priority() throws {
+        let topicsViewModel = TopicsWidgetViewModel(
+            topicsService: MockTopicsService(),
+            analyticsService: MockAnalyticsService(),
+            topicAction: { _ in },
+            dismissEditAction: { }
+        )
+
+        let mockConfigService = MockAppConfigService()
+        mockConfigService._stubbedEmergencyBanners =
+        [
+            .init(
+                id: "emergency",
+                title: "National Emergency",
+                body: "This is a Level 1 emergency",
+                link: nil,
+                type: "national-emergency",
+                allowsDismissal: true
+            ),
+            .init(
+                id: "bridges",
+                title: "His Majesty King Henry VIII",
+                body: "1621 - 1854",
+                link: nil,
+                type: "notable-death",
+                allowsDismissal: false
+            )
+        ]
+
+        let mockAnalyticsService = MockAnalyticsService()
+        let subject = HomeViewModel(
+            analyticsService: mockAnalyticsService,
+            configService: mockConfigService,
+            notificationService: MockNotificationService(),
+            userDefaultsService: MockUserDefaultsService(),
+            topicsWidgetViewModel: topicsViewModel,
+            urlOpener: MockURLOpener(),
+            searchService: MockSearchService(),
+            activityService: MockActivityService(),
+            localAuthorityService: MockLocalAuthorityService(),
+            localAuthorityAction: { },
+            editLocalAuthorityAction: { },
+            feedbackAction: { },
+            notificationsAction: {},
+            recentActivityAction: { } ,
+            openURLAction: {_ in } ,
+            openAction: {_ in }
+        )
+
+        let widgets = subject.widgets
+        try #require(widgets.count >= 2)
+        let bannerOne = try #require(widgets[0].content as? EmergencyBannerWidgetView)
+        #expect(bannerOne.viewModel.sortPriority == 20)
+        let bannerTwo = try #require(widgets[1].content as? EmergencyBannerWidgetView)
+        #expect(bannerTwo.viewModel.sortPriority == 10)
     }
 }

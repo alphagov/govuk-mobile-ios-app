@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
-        "branch" : "develop",
-        "revision" : "372a73939d17c4e5d7bd27547fda957a439fa41d"
+        "branch" : "feature/brand-refresh",
+        "revision" : "e87b06d595dbdefc1ee910ec9744e921f6616e7f"
       }
     },
     {

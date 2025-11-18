@@ -2,107 +2,167 @@ import Foundation
 import UIKit
 import CoreData
 import GOVKit
+import UIComponents
 
-final class TopicsWidgetViewModel {
+enum TopicSegment {
+    case favorite
+    case all
+}
+
+final class TopicsWidgetViewModel: ObservableObject {
     private let topicsService: TopicsServiceInterface
     private let analyticsService: AnalyticsServiceInterface
-    let urlOpener: URLOpener
-    let allTopicsAction: () -> Void
+    private let urlOpener: URLOpener
     let topicAction: (Topic) -> Void
-    let editAction: () -> Void
-    var handleError: ((TopicsServiceError) -> Void)?
-    var fetchTopicsError: Bool = false
-    var initialLoadComplete: Bool = false
-    var isEditing: Bool = false
+    private let dismissEditAction: () -> Void
+    @Published var fetchTopicsError = false
+    @Published var favouriteTopics: [Topic] = []
+    @Published var allTopics: [Topic] = []
+    @Published var topicsScreen: TopicSegment = .favorite {
+        didSet {
+            if oldValue != topicsScreen &&
+                initialLoadComplete &&
+                !isEditInProgress {
+                trackECommerce()
+            }
+        }
+    }
+
+    @Published var initialLoadComplete = false
+    private var isEditInProgress = false
+
+    var errorViewModel: AppErrorViewModel {
+        .topicErrorWithAction { [weak self] in
+            self?.openErrorURL()
+        }
+    }
+
+    let editButtonTitle = String.common.localized(
+        "editButtonTitle"
+    )
+
+    let editButtonAccessibilityLabel = String.home.localized(
+        "editTopicsAccessibilityLabel"
+    )
+
+    let personalisedTopicsPickerTitle = String.home.localized(
+        "personalisedTopicsPickerTitle"
+    )
+    let allTopicsPickerTitle = String.home.localized(
+        "allTopicsPickerTitle"
+    )
+    let emptyStateTitle = String.home.localized(
+        "topicsEmptyStateTitle"
+    )
+    let widgetTitle = String.home.localized(
+        "topicsWidgetTitle"
+    )
 
     init(topicsService: TopicsServiceInterface,
          analyticsService: AnalyticsServiceInterface,
          urlOpener: URLOpener = UIApplication.shared,
          topicAction: @escaping (Topic) -> Void,
-         editAction: @escaping () -> Void,
-         allTopicsAction: @escaping () -> Void) {
+         dismissEditAction: @escaping () -> Void) {
         self.topicsService = topicsService
         self.analyticsService = analyticsService
         self.urlOpener = urlOpener
         self.topicAction = topicAction
-        self.editAction = editAction
-        self.allTopicsAction = allTopicsAction
+        self.dismissEditAction = dismissEditAction
     }
 
-    var allTopicsButtonHidden: Bool {
-        (displayedTopics.count >= topicsService.fetchAll().count) ||
-        fetchTopicsError
-    }
-
-    var widgetTitle: String {
-        let key = self.topicsService.hasCustomisedTopics ?
-        "topicsWidgetTitleCustomised" :
-        "topicsWidgetTitle"
-        return String.home.localized(key)
-    }
-
-    var displayedTopics: [Topic] {
-        topicsService.hasCustomisedTopics ?
-        topicsService.fetchFavourites() :
-        topicsService.fetchAll()
-    }
-
-    lazy var topicErrorViewModel: AppErrorViewModel = {
-        AppErrorViewModel(
-            title: String.common.localized("genericErrorTitle"),
-            body: String.topics.localized("topicFetchErrorSubtitle"),
-            buttonTitle: String.common.localized("genericErrorButtonTitle"),
-            buttonAccessibilityLabel: String.common.localized(
-                "genericErrorButtonTitleAccessibilityLabel"
-            ),
-            isWebLink: true,
-            action: {
-                self.urlOpener.openIfPossible(Constants.API.govukBaseUrl)
-            }
+    lazy var editTopicViewModel: EditTopicsViewModel = {
+        EditTopicsViewModel(
+            topicsService: topicsService,
+            analyticsService: analyticsService
         )
     }()
 
+    var hasFavouritedTopics: Bool {
+        topicsService.fetchFavourites() != []
+    }
+
+    func updateFavouriteTopics() {
+        favouriteTopics = topicsService.fetchFavourites()
+    }
+
+    func updateAllTopics() {
+        allTopics = topicsService.fetchAll()
+    }
+
+    func setTopicsScreen() {
+        topicsScreen = hasFavouritedTopics ? .favorite : .all
+    }
+
+    @MainActor
+    func refreshTopics() {
+        fetchTopics()
+        updateFavouriteTopics()
+        updateAllTopics()
+        setTopicsScreen()
+    }
+
+    func openErrorURL() {
+        urlOpener.openIfPossible(Constants.API.govukBaseUrl)
+    }
+
+    func didDismissEdit() {
+        isEditInProgress = true
+        dismissEditAction()
+    }
+
+    @MainActor
     func fetchTopics() {
         topicsService.fetchRemoteList { [weak self] result in
-            if case .failure(let error) = result {
-                self?.handleError?(error)
-                self?.fetchTopicsError = true
-            } else {
-                self?.fetchTopicsError = false
+            Task { @MainActor in
+                switch result {
+                case .success:
+                    self?.fetchTopicsError = false
+                case .failure:
+                    self?.fetchTopicsError = true
+                }
             }
         }
+    }
+
+    private var listName: String {
+        topicsScreen == .favorite ? "Your topics" : "All topics"
     }
 
     func trackECommerce() {
-        if !isEditing && initialLoadComplete {
-            let trackedTopics = displayedTopics
-            var items = [HomeCommerceItem]()
-            trackedTopics.enumerated().forEach { index, topic in
-                let item = HomeCommerceItem(name: topic.title,
-                                            index: index + 1,
-                                            itemId: nil,
-                                            locationId: nil)
-                items.append(item)
-            }
-            let event = AppEvent.viewItemList(name: "Homepage",
-                                              id: "Homepage",
-                                              items: items)
-            analyticsService.track(event: event)
+        let trackedTopics = topicsScreen == .favorite ? favouriteTopics : allTopics
+        var items = [HomeCommerceItem]()
+        trackedTopics.enumerated().forEach { index, topic in
+            let item = HomeCommerceItem(
+                name: topic.title,
+                listName: listName,
+                index: index + 1,
+                itemId: nil,
+                locationId: nil
+            )
+            items.append(item)
         }
+        let event = AppEvent.viewItemList(name: listName,
+                                          id: listName,
+                                          items: items)
+        analyticsService.track(event: event)
+        isEditInProgress = false
     }
 
     func trackECommerceSelection(_ name: String) {
-        let trackedTopics = displayedTopics
+        let trackedTopics = topicsScreen == .favorite ? favouriteTopics : allTopics
         guard let topic = trackedTopics.first(where: {$0.title == name}),
               let index = trackedTopics.firstIndex(of: topic) else {
             return
         }
         let items = [HomeCommerceItem(name: topic.title,
+                                      listName: listName,
                                       index: index + 1,
                                       itemId: nil,
                                       locationId: nil)]
 
-        let event = AppEvent.selectHomePageItem(
+        let event = AppEvent.selectItem(
+            listName: listName,
+            listId: listName,
             results: trackedTopics.count,
             items: items)
         analyticsService.track(event: event)

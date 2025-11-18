@@ -22,7 +22,8 @@ class MockAppConfigService: AppConfigServiceInterface {
         .search,
         .topics,
         .recentActivity,
-        .chatOptInV2
+        .chatOptInV2,
+        .localServices
     ]
 
     var _stubbedAlertBanner: AlertBanner?
@@ -55,6 +56,16 @@ class MockAppConfigService: AppConfigServiceInterface {
     var userFeedbackBannerLink: UserFeedbackBanner.Link {
         _stubbedUserFeedbackBannerLink
     }
+
+    var _stubbedEmergencyBanners: [EmergencyBanner]?
+    var emergencyBanners: [EmergencyBanner]? {
+        _stubbedEmergencyBanners
+    }
+
+    var _stubbedEmergencyBannerLink: EmergencyBanner.Link = .init(
+        title: "test",
+        url: URL(string: "https://test.com")!
+    )
 
     var _stubbedChatUrls: ChatURLs?
     var chatUrls: ChatURLs? {

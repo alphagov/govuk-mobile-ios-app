@@ -116,7 +116,7 @@ class NotificationConsentAlertViewController: BaseViewController {
     }
 
     private func configureUI() {
-        view.backgroundColor = UIColor.govUK.fills.surfaceBackground
+        view.backgroundColor = UIColor.govUK.fills.surfaceFullscreen
         view.addSubview(scrollView)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(bodyLabel)

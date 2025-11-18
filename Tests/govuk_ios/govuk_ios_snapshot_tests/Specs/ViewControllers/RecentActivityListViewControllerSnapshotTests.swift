@@ -5,10 +5,15 @@ import CoreData
 @testable import govuk_ios
 
 @MainActor
-final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
+final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase { 
     func test_loadInNavigationController_light_rendersCorrectly() {
         let mockActivityService = MockActivityService()
         let coreData = CoreDataRepository.arrangeAndLoad
+        _ = ActivityItem.arrange(
+            title: "Test 1",
+            date: .arrange("18/11/2025"),
+            context: coreData.viewContext
+        )
         _ = ActivityItem.arrange(
             title: "Test 1",
             date: .arrange("01/10/2023"), 

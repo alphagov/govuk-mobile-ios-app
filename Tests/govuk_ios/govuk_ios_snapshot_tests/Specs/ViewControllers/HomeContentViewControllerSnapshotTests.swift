@@ -31,9 +31,17 @@ final class HomeContentViewControllerSnapshotTests: SnapshotTestCase {
             topicAction: {_ in },
             dismissEditAction: { }
         )
+        let configService = MockAppConfigService()
+        configService._stubbedUserFeedbackBanner = UserFeedbackBanner(
+            body: "",
+            link: .init(
+                title: "testUrl",
+                url: URL(string: "https://www.gov.uk/")!)
+        )
+
         let viewModel = HomeViewModel(
             analyticsService: MockAnalyticsService(),
-            configService: MockAppConfigService(),
+            configService: configService,
             notificationService: MockNotificationService(),
             userDefaultsService: MockUserDefaultsService(),
             topicsWidgetViewModel: topicsWidgetViewModel,

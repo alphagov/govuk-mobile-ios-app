@@ -21,7 +21,6 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
 
         topics.removeLast()
         mockTopicService._stubbedFetchFavouriteTopics = topics
-
         VerifySnapshotInNavigationController(
             viewController: viewController(),
             mode: .light,
@@ -103,7 +102,6 @@ class HomeViewControllerSnapshotTests: SnapshotTestCase {
             openURLAction: { _ in },
             openAction: { _ in }
         )
-
         return HomeViewController(viewModel: viewModel)
     }
 }

@@ -64,7 +64,8 @@ class HomeViewModel: ObservableObject {
             topicsWidget,
             addLocalAuthorityWidget,
             storedLocalAuthorityWidget,
-            recentActivityWidget
+            recentActivityWidget,
+            feedbackWidget
         ].compactMap { $0 }
         widgets = bannerWidgets + array
     }
@@ -118,6 +119,24 @@ class HomeViewModel: ObservableObject {
             openEditViewAction: editLocalAuthorityAction
         )
         let view = StoredLocalAuthorityWidgetView(
+            viewModel: viewModel
+        )
+        return HomepageWidget(
+            content: view
+        )
+    }
+
+    private var feedbackWidget: HomepageWidget? {
+        guard let userFeedbackBanner = configService.userFeedbackBanner
+        else { return nil }
+
+        let viewModel = UserFeedbackWidgetViewModel(
+            userFeedback: userFeedbackBanner,
+            analyticsService: analyticsService,
+            urlOpener: urlOpener
+        )
+
+        let view = UserFeedbackWidgetView(
             viewModel: viewModel
         )
         return HomepageWidget(

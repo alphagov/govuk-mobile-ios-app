@@ -11,7 +11,7 @@ struct TopicsWidget: View {
             titleView
             if viewModel.fetchTopicsError {
                 AppErrorView(viewModel: viewModel.errorViewModel)
-                    .padding(.vertical, 8)
+                    .padding(.vertical)
                     .background(Color(UIColor.govUK.fills.surfaceList))
                     .roundedBorder(borderColor: .clear)
             } else {
@@ -28,7 +28,7 @@ struct TopicsWidget: View {
                         topicsListViewFor(topics: viewModel.allTopics)
                     }
                 }
-                .padding(.top, 4)
+                .padding(.top)
                 .background(Color(UIColor.govUK.fills.surfaceList))
                 .roundedBorder(borderColor: .clear)
             }

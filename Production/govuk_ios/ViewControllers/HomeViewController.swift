@@ -90,7 +90,8 @@ class HomeViewController: BaseViewController {
             viewModel: viewModel
         )
         let contentViewController = HostingViewController(
-            rootView: contentView
+            rootView: contentView,
+            navigationBarHidden: true
         )
         homeContentViewController = contentViewController
     }

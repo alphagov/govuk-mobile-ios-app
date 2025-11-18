@@ -13,7 +13,7 @@ struct RecentActivityWidget: View {
                 )
                 .padding(.horizontal)
             }
-            .padding(.top, 8)
+            .padding(.top)
         } else {
             VStack {
                 HStack {

@@ -32,18 +32,18 @@ class GroupedListSectionHeaderView: UIView {
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
-                equalTo: topAnchor
+                equalTo: topAnchor,
+                constant: 8
             ),
             titleLabel.rightAnchor.constraint(
                 equalTo: rightAnchor
             ),
             titleLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -16
+                constant: -10
             ),
             titleLabel.leftAnchor.constraint(
                 equalTo: leftAnchor,
-                constant: 16
             )
         ])
     }

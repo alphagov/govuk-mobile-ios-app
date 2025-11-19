@@ -313,7 +313,8 @@ final class RecentActivityListViewController: BaseViewController {
                     title: item.title,
                     description: self?.lastVisitedString(activity: item),
                     top: indexPath.row == 0,
-                    bottom: item == section.items.last
+                    bottom: item == section.items.last,
+                    showIconImage: false
                 )
             }
             return cell

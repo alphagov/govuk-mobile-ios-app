@@ -11,11 +11,6 @@ final class RecentActivityListViewControllerSnapshotTests: SnapshotTestCase {
         let coreData = CoreDataRepository.arrangeAndLoad
         _ = ActivityItem.arrange(
             title: "Test 1",
-            date: .arrange("18/11/2025"),
-            context: coreData.viewContext
-        )
-        _ = ActivityItem.arrange(
-            title: "Test 1",
             date: .arrange("01/10/2023"), 
             context: coreData.viewContext
         )

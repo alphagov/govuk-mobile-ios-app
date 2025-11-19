@@ -7,11 +7,13 @@ struct RecentActivityWidget: View {
         if viewModel.sections.isEmpty {
             VStack(alignment: .leading) {
                 titleView
+                    .padding(.top)
                     .padding(.horizontal)
                 NonTappableCardView(
                     text: viewModel.emptyActivityStateTitle
                 )
                 .padding(.horizontal)
+                .padding(.top, 4)
             }
             .padding(.top)
         } else {
@@ -30,7 +32,7 @@ struct RecentActivityWidget: View {
                                 .font(Font.govUK.subheadlineSemibold)
                         }
                     )
-                }
+                }.padding(.top)
             }
             .padding(.top)
             .padding(.horizontal)
@@ -38,7 +40,7 @@ struct RecentActivityWidget: View {
                 GroupedList(
                     content: viewModel.sections,
                     backgroundColor: UIColor.govUK.fills.surfaceBackground
-                )
+                ).padding(.top, -10)
             }
         }
     }

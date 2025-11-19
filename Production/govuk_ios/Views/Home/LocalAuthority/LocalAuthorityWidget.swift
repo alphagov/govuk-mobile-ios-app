@@ -19,6 +19,7 @@ struct LocalAuthorityWidget: View {
             }
             .padding(.horizontal)
             .padding(.bottom, 8)
+            .padding(.top)
             Button {
                 viewModel.tapAction()
             } label: {

@@ -13,6 +13,7 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -22,6 +23,7 @@ struct AppCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -38,6 +40,7 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockPreAuthCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -55,6 +58,7 @@ struct AppCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -87,6 +91,7 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockPreAuthCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -104,6 +109,7 @@ struct AppCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -141,6 +147,7 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockPreAuthCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -158,6 +165,7 @@ struct AppCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -193,6 +201,7 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockLaunchCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -215,6 +224,7 @@ struct AppCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -236,14 +246,17 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
 
         let mockPeriAuthCoordinator = MockBaseCoordinator()
         mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
+        mockAuthenticationService._stubbedIsSignedIn = true
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -262,6 +275,7 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
@@ -274,6 +288,7 @@ struct AppCoordinatorTests {
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
             navigationController: mockNavigationController
         )
 
@@ -290,18 +305,22 @@ struct AppCoordinatorTests {
         let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
         let mockNavigationController = UINavigationController()
         let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
         let mockCoordinator = MockBaseCoordinator(
             navigationController: mockNavigationController
         )
         mockCoordinatorBuilder._stubbedPreAuthCoordinator = mockCoordinator
 
         let mockPeriAuthCoordinator = MockBaseCoordinator()
+        let mockPrivacyService = MockPrivacyService()
         mockCoordinatorBuilder._stubbedPeriAuthCoordinator = mockPeriAuthCoordinator
 
         let subject = AppCoordinator(
             coordinatorBuilder: mockCoordinatorBuilder,
             inactivityService: mockInactivityService,
             authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
+            privacyPresenter: mockPrivacyService,
             navigationController: mockNavigationController
         )
 
@@ -310,5 +329,56 @@ struct AppCoordinatorTests {
         mockAuthenticationService.didSignOutAction?(.reauthFailure)
 
         #expect(!mockPeriAuthCoordinator._startCalled)
+        #expect(mockPrivacyService._didHidePrivacyScreen)
+    }
+
+    @Test
+    func inactivityWithBiometrics_presentsPrivacyScreen() {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .faceID
+        let mockPrivacyService = MockPrivacyService()
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
+            privacyPresenter: mockPrivacyService,
+            navigationController: mockNavigationController
+        )
+        mockAuthenticationService._stubbedIsSignedIn = true
+        subject.start()
+        mockInactivityService._receivedStartMonitoringInactivityHandler?()
+
+        #expect(mockPrivacyService._didShowPrivacyScreen)
+    }
+
+    @Test
+    func inactivityWithoutBiometrics_doesntPresentsPrivacyScreen() {
+        let mockAuthenticationService = MockAuthenticationService()
+        let mockCoordinatorBuilder = MockCoordinatorBuilder.mock
+        let mockNavigationController = UINavigationController()
+        let mockInactivityService = MockInactivityService()
+        let mockLocalAuthenticationService = MockLocalAuthenticationService()
+        mockLocalAuthenticationService._stubbedAvailableAuthType = .none
+        mockLocalAuthenticationService._stubbedTouchIdEnabled = false
+        let mockPrivacyService = MockPrivacyService()
+
+        let subject = AppCoordinator(
+            coordinatorBuilder: mockCoordinatorBuilder,
+            inactivityService: mockInactivityService,
+            authenticationService: mockAuthenticationService,
+            localAuthenticationService: mockLocalAuthenticationService,
+            navigationController: mockNavigationController
+        )
+        mockAuthenticationService._stubbedIsSignedIn = true
+        subject.start()
+        mockInactivityService._receivedStartMonitoringInactivityHandler?()
+
+        #expect(!mockPrivacyService._didShowPrivacyScreen)
     }
 }

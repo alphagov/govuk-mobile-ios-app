@@ -421,4 +421,14 @@ struct CoordinatorBuilderTests {
 
         #expect(coordinator is ChatOffboardingCoordinator)
     }
+
+    @Test
+    func privacy_returnsExpectedResult() {
+        let subject = CoordinatorBuilder(container: Container())
+        let coordinator = subject.privacy(
+            navigationController: UINavigationController()
+        )
+
+        #expect(coordinator is PrivacyCoordinator)
+    }
 }

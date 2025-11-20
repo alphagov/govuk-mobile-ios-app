@@ -6,7 +6,8 @@ import Testing
 
 class MockBaseCoordinator: BaseCoordinator,
                            DeeplinkRouteProvider,
-                           TabItemCoordinatorInterface {
+                           TabItemCoordinatorInterface,
+                           PrivacyProviding {
 
     var _stubbedIsEnabled = true
     var isEnabled: Bool {

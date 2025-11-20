@@ -301,4 +301,9 @@ class MockCoordinatorBuilder: CoordinatorBuilder {
     override func webView(url: URL) -> BaseCoordinator {
         _stubbedWebViewCoordinator ?? MockBaseCoordinator()
     }
+
+    var _stubbedPrivacyCoordinator: MockBaseCoordinator?
+    override func privacy(navigationController: UINavigationController) -> BaseCoordinator & PrivacyProviding {
+        _stubbedPrivacyCoordinator ?? MockBaseCoordinator()
+    }
 }

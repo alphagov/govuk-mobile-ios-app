@@ -9,7 +9,7 @@ struct TopicsWidget: View {
     var body: some View {
         VStack {
             titleView
-                .padding(.top)
+                .padding(.top, 16)
             if viewModel.fetchTopicsError {
                 AppErrorView(viewModel: viewModel.errorViewModel)
                     .padding(.vertical)

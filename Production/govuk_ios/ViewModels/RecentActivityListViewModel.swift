@@ -39,21 +39,21 @@ final class RecentActivityListViewModel: NSObject,
     }
 
     private func sortActivites(activities: [ActivityItem]) -> RecentActivitiesViewStructure {
-        var todaysActivities: [ActivityItem] = []
-        var currentMonthActivities: [ActivityItem] = []
-        var recentMonthsActivities: [MonthGroupKey: [ActivityItem]] = [:]
+        var todaysActivities: [NSManagedObjectID] = []
+        var currentMonthActivities: [NSManagedObjectID] = []
+        var recentMonthsActivities: [MonthGroupKey: [NSManagedObjectID]] = [:]
         for recentActivity in activities {
             if recentActivity.date.isToday() {
-                todaysActivities.append(recentActivity)
+                todaysActivities.append(recentActivity.objectID)
             } else if recentActivity.date.isThisMonth() {
-                currentMonthActivities.append(recentActivity)
+                currentMonthActivities.append(recentActivity.objectID)
             } else {
                 let key = MonthGroupKey(
                     date: recentActivity.date,
                     formatter: recentActivityHeaderFormatter
                 )
                 var items = recentMonthsActivities[key] ?? []
-                items.append(recentActivity)
+                items.append(recentActivity.objectID)
                 recentMonthsActivities[key] = items
             }
         }
@@ -111,5 +111,9 @@ final class RecentActivityListViewModel: NSObject,
                     snapshot: NSDiffableDataSourceSnapshotReference) {
         let items = retainedResultsController?.fetchedObjects ?? []
         structure = sortActivites(activities: items)
+    }
+
+    func activityItem(for objectId: NSManagedObjectID) -> ActivityItem? {
+        activityService.activityItem(for: objectId)
     }
 }

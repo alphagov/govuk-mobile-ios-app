@@ -8,6 +8,7 @@ protocol SearchHistoryRepositoryInterface {
     func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? { get }
+    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem?
 }
 
 struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
@@ -51,6 +52,10 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
                                                     cacheName: nil)
         try? controller.performFetch()
         return controller
+    }
+
+    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem? {
+        try? coreData.viewContext.existingObject(with: objectId) as? SearchHistoryItem
     }
 
     private func pruneSearchHistoryItems(_ context: NSManagedObjectContext) {

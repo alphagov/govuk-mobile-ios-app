@@ -26,5 +26,10 @@ class MockSearchHistoryRepository: SearchHistoryRepositoryInterface {
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? {
         _stubbedFetchResultsController
     }
-    
+
+    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem? {
+        try? _stubbedFetchResultsController?
+            .managedObjectContext
+            .existingObject(with: objectId) as? SearchHistoryItem
+    }
 }

@@ -69,6 +69,7 @@ public class GroupedListTableViewCell: UITableViewCell {
         layer.cornerRadius = 10
         clipsToBounds = true
 
+        backgroundColor = UIColor.govUK.fills.surfaceList
         contentView.backgroundColor = UIColor.govUK.fills.surfaceList
         contentView.addSubview(horizontalStackView)
         contentView.addSubview(separatorView)

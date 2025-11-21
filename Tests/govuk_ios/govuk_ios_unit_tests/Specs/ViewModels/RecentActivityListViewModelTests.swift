@@ -205,4 +205,37 @@ struct RecentActivityListViewModelTests {
 
         #expect(sut.isEveryItemSelected() == false)
     }
+
+    @Test
+    @MainActor
+    func activityItemForObjectId_notFound_logsError() {
+        let mockActivityService = MockActivityService()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = RecentActivityListViewModel(
+            activityService: mockActivityService,
+            analyticsService: mockAnalyticsService,
+            selectedAction: { _ in }
+        )
+
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let request = ActivityItem.fetchRequest()
+        let item = ActivityItem.arrange(
+            context: coreData.viewContext
+        )
+        let expectedId: NSManagedObjectID = item.objectID.copy() as! NSManagedObjectID
+        coreData.viewContext.delete(item)
+        try? coreData.viewContext.save()
+
+        let resultsController = NSFetchedResultsController<ActivityItem>(
+            fetchRequest: request,
+            managedObjectContext: coreData.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        mockActivityService._stubbedFetchResultsController = resultsController
+
+        let foundItem = sut.activityItem(for: expectedId)
+        #expect(foundItem == nil)
+        #expect(mockAnalyticsService._trackErrorReceivedErrors.count == 1)
+    }
 }

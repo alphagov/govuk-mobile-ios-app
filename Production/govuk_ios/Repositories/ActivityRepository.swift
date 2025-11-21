@@ -7,7 +7,7 @@ protocol ActivityRepositoryInterface {
     func save(params: ActivityItemCreateParams)
     func delete(objectIds: [NSManagedObjectID])
     func returnContext() -> NSManagedObjectContext
-    func activityItem(for objectId: NSManagedObjectID) -> ActivityItem?
+    func activityItem(for objectId: NSManagedObjectID) throws -> ActivityItem?
 }
 
 struct ActivityRepository: ActivityRepositoryInterface {
@@ -70,7 +70,7 @@ struct ActivityRepository: ActivityRepositoryInterface {
         try? coreData.backgroundContext.save()
     }
 
-    func activityItem(for objectId: NSManagedObjectID) -> ActivityItem? {
-        try? coreData.viewContext.existingObject(with: objectId) as? ActivityItem
+    func activityItem(for objectId: NSManagedObjectID) throws -> ActivityItem? {
+        try coreData.viewContext.existingObject(with: objectId) as? ActivityItem
     }
 }

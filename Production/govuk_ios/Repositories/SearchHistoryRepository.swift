@@ -8,7 +8,7 @@ protocol SearchHistoryRepositoryInterface {
     func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? { get }
-    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem?
+    func historyItem(for objectId: NSManagedObjectID) throws -> SearchHistoryItem?
 }
 
 struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
@@ -59,8 +59,8 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
         return controller
     }
 
-    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem? {
-        try? coreData.viewContext.existingObject(with: objectId) as? SearchHistoryItem
+    func historyItem(for objectId: NSManagedObjectID) throws -> SearchHistoryItem? {
+        try coreData.viewContext.existingObject(with: objectId) as? SearchHistoryItem
     }
 
     private func pruneSearchHistoryItems(_ context: NSManagedObjectContext) {

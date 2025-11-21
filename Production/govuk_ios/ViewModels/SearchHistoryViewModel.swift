@@ -51,7 +51,12 @@ class SearchHistoryViewModel: NSObject,
     }
 
     func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem? {
-        searchService.historyItem(for: objectId)
+        do {
+            return try searchService.historyItem(for: objectId)
+        } catch {
+            analyticsService.track(error: error)
+            return nil
+        }
     }
 }
 

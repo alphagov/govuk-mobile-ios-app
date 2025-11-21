@@ -132,7 +132,7 @@ struct ActivityRepositoryTests {
     }
 
     @Test
-    func activityItemForId_returnsExpectedItem() {
+    func activityItemForId_returnsExpectedItem() throws {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = ActivityRepository(
             coreData: coreData
@@ -153,8 +153,7 @@ struct ActivityRepositoryTests {
             try? context.save()
         }
 
-        let item = sut.activityItem(for: activityItem.objectID)
-        #expect(item != nil)
-        #expect(item?.title == "title")
+        let item = try #require(try sut.activityItem(for: activityItem.objectID))
+        #expect(item.title == "title")
     }
 }

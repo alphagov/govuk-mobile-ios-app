@@ -80,5 +80,35 @@ struct SearchHistoryViewModelTests {
         #expect(mockSearchService._didCallDeleteSearchHistoryItem)
     }
 
+    @Test
+    @MainActor
+    func historyItemForObjectId_notFound_logsError() {
+        let mockSearchService = MockSearchService()
+        let mockAnalyticsService = MockAnalyticsService()
+        let sut = SearchHistoryViewModel(
+            searchService: mockSearchService,
+            analyticsService: mockAnalyticsService
+        )
+
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let item = SearchHistoryItem(context: coreData.viewContext)
+        let expectedId: NSManagedObjectID = item.objectID.copy() as! NSManagedObjectID
+
+        coreData.viewContext.delete(item)
+        try? coreData.viewContext.save()
+
+        let request = SearchHistoryItem.fetchRequest()
+        let resultsController = NSFetchedResultsController<SearchHistoryItem>(
+            fetchRequest: request,
+            managedObjectContext: coreData.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        mockSearchService._stubbedFetchResultsController = resultsController
+
+        let foundItem = sut.historyItem(for: expectedId)
+        #expect(foundItem == nil)
+        #expect(mockAnalyticsService._trackErrorReceivedErrors.count == 1)
+    }
 }
 

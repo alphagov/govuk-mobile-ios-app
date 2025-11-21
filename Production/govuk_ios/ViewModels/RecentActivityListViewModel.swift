@@ -114,6 +114,11 @@ final class RecentActivityListViewModel: NSObject,
     }
 
     func activityItem(for objectId: NSManagedObjectID) -> ActivityItem? {
-        activityService.activityItem(for: objectId)
+        do {
+            return try activityService.activityItem(for: objectId)
+        } catch {
+            analyticsService.track(error: error)
+            return nil
+        }
     }
 }

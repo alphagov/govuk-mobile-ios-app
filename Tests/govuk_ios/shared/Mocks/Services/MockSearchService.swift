@@ -48,8 +48,8 @@ class MockSearchService: SearchServiceInterface {
         }
     }
 
-    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem? {
-        try? _stubbedFetchResultsController?
+    func historyItem(for objectId: NSManagedObjectID) throws -> SearchHistoryItem? {
+        try _stubbedFetchResultsController?
             .managedObjectContext
             .existingObject(with: objectId) as? SearchHistoryItem
     }

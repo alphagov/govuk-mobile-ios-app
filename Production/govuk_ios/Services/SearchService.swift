@@ -10,7 +10,7 @@ protocol SearchServiceInterface {
     func delete(_ item: SearchHistoryItem)
     func clearSearchHistory()
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? { get }
-    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem?
+    func historyItem(for objectId: NSManagedObjectID) throws -> SearchHistoryItem?
 }
 
 class SearchService: SearchServiceInterface {
@@ -70,7 +70,7 @@ class SearchService: SearchServiceInterface {
         repository.delete(item)
     }
 
-    func historyItem(for objectId: NSManagedObjectID) -> SearchHistoryItem? {
-        repository.historyItem(for: objectId)
+    func historyItem(for objectId: NSManagedObjectID) throws -> SearchHistoryItem? {
+        try repository.historyItem(for: objectId)
     }
 }

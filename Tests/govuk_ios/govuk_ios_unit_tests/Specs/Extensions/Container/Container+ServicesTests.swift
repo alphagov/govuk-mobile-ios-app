@@ -5,7 +5,7 @@ import Factory
 
 @testable import govuk_ios
 
-@Suite
+@Suite(.serialized)
 struct Container_ServicesTests {
     @Test
     func analyticsService_returnsExpectedValue() async {

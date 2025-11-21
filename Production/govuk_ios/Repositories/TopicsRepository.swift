@@ -19,9 +19,11 @@ struct TopicsRepository: TopicsRepositoryInterface {
 
     func save(topics: [TopicResponseItem]) {
         let context = coreData.backgroundContext
-        deleteOldObjects(topics: topics, context: context)
-        createOrUpdateTopics(topics: topics, context: context)
-        try? context.save()
+        context.performAndWait {
+            deleteOldObjects(topics: topics, context: context)
+            createOrUpdateTopics(topics: topics, context: context)
+            try? context.save()
+        }
     }
 
     private func deleteOldObjects(topics: [TopicResponseItem],

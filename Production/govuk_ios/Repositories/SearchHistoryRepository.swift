@@ -21,14 +21,16 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
     func save(searchText: String,
               date: Date) {
         let context = coreData.backgroundContext
-        let searchHistoryItem = fetch(
-            predicate: .init(format: "searchText = %@", searchText),
-            context: context
-        ).first ?? SearchHistoryItem(context: context)
-        searchHistoryItem.searchText = searchText
-        searchHistoryItem.date = date
-        pruneSearchHistoryItems(context)
-        try? context.save()
+        context.performAndWait {
+            let searchHistoryItem = fetch(
+                predicate: .init(format: "searchText = %@", searchText),
+                context: context
+            ).first ?? SearchHistoryItem(context: context)
+            searchHistoryItem.searchText = searchText
+            searchHistoryItem.date = date
+            pruneSearchHistoryItems(context)
+            try? context.save()
+        }
     }
 
     func delete(_ item: SearchHistoryItem) {
@@ -38,10 +40,13 @@ struct SearchHistoryRepository: SearchHistoryRepositoryInterface {
     }
 
     func clearSearchHistory() {
-        fetch(context: coreData.backgroundContext).forEach {
-            coreData.backgroundContext.delete($0)
+        let context = coreData.backgroundContext
+        context.performAndWait {
+            fetch(context: coreData.backgroundContext).forEach {
+                coreData.backgroundContext.delete($0)
+            }
+            try? coreData.backgroundContext.save()
         }
-        try? coreData.backgroundContext.save()
     }
 
     var fetchedResultsController: NSFetchedResultsController<SearchHistoryItem>? {

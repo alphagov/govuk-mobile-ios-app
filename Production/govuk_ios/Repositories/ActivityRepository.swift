@@ -30,10 +30,12 @@ struct ActivityRepository: ActivityRepositoryInterface {
 
     func save(params: ActivityItemCreateParams) {
         let localContext = coreData.backgroundContext
-        let local = get(id: params.id, context: localContext) ??
-        ActivityItem(context: localContext)
-        local.update(params)
-        try? localContext.save()
+        localContext.performAndWait {
+            let local = get(id: params.id, context: localContext) ??
+            ActivityItem(context: localContext)
+            local.update(params)
+            try? localContext.save()
+        }
     }
 
     private func get(id: String,

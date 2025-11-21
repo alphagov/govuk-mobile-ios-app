@@ -94,19 +94,25 @@ class ViewControllerBuilder {
         )
     }
 
-    func localAuthorityExplainerView(analyticsService: AnalyticsServiceInterface,
-                                     navigateToPostCodeEntryViewAction: @escaping () -> Void,
-                                     dismissAction: @escaping () -> Void) -> UIViewController {
-        let viewModel = LocalAuthorityExplainerViewModel(
-            analyticsService: analyticsService,
-            navigateToPostcodeEntry: navigateToPostCodeEntryViewAction,
-            dismissAction: dismissAction
-        )
-        let view = LocalAuthorityExplainerView(
-            viewModel: viewModel
-        )
-        return HostingViewController(rootView: view)
-    }
+    func localAuthorityExplainerView(
+        analyticsService: AnalyticsServiceInterface,
+        navigateToPostCodeEntryViewAction: @escaping () -> Void,
+        dismissAction: @escaping () -> Void) -> UIViewController {
+            let viewModel = LocalAuthorityExplainerViewModel(
+                analyticsService: analyticsService,
+                navigateToPostcodeEntry: navigateToPostCodeEntryViewAction,
+                dismissAction: dismissAction
+            )
+            let view = LocalAuthorityExplainerView(
+                viewModel: viewModel
+            )
+            let hosting = HostingViewController(
+                rootView: view,
+                navigationBarHidden: true
+            )
+            hosting.view.backgroundColor = .govUK.fills.surfaceModal
+            return hosting
+        }
 
     func localAuthorityPostcodeEntryView(
         analyticsService: AnalyticsServiceInterface,
@@ -125,7 +131,12 @@ class ViewControllerBuilder {
         let view = LocalAuthorityPostcodeEntryView(
             viewModel: viewModel
         )
-        return HostingViewController(rootView: view)
+        let hosting = HostingViewController(
+            rootView: view,
+            navigationBarHidden: true
+        )
+        hosting.view.backgroundColor = .govUK.fills.surfaceModal
+        return hosting
     }
 
     // swiftlint:disable:next function_parameter_count

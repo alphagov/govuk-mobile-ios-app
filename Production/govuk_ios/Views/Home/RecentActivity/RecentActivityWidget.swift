@@ -7,6 +7,7 @@ struct RecentActivityWidget: View {
         if viewModel.sections.isEmpty {
             VStack(alignment: .leading) {
                 titleView
+                    .padding(.top, 16)
                     .padding(.horizontal)
                 NonTappableCardView(
                     text: viewModel.emptyActivityStateTitle
@@ -31,6 +32,7 @@ struct RecentActivityWidget: View {
                         }
                     )
                 }
+                .padding(.top, 16)
             }
             .padding(.top)
             .padding(.horizontal)

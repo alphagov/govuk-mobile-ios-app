@@ -74,7 +74,9 @@ struct SearchHistoryViewModelTests {
             analyticsService: mockAnalyticsService
         )
 
-        sut.delete(SearchHistoryItem())
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let item = SearchHistoryItem(context: coreData.viewContext)
+        sut.delete(item)
         #expect(mockSearchService._didCallDeleteSearchHistoryItem)
     }
 

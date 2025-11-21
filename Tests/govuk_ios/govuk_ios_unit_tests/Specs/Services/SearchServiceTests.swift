@@ -223,4 +223,31 @@ struct SearchServiceTests {
         sut.delete(SearchHistoryItem())
         #expect(mockRepository._didDeleteSearchHistoryItem)
     }
+
+    @Test
+    func historyItemForId_returnsExpectedItem() {
+        let coreData = CoreDataRepository.arrangeAndLoad
+        let repostory = SearchHistoryRepository(
+            coreData: coreData
+        )
+
+        let context = coreData.backgroundContext
+
+        let searchHistoryItem = SearchHistoryItem(context: context)
+        searchHistoryItem.searchText = "test"
+        searchHistoryItem.date = Date()
+        context.performAndWait {
+            try? context.save()
+        }
+
+        let sut = SearchService(
+            serviceClient: MockSearchServiceClient(),
+            repository: repostory
+        )
+
+        let item = sut.historyItem(for: searchHistoryItem.objectID)
+        #expect(item != nil)
+        #expect(item?.searchText == "test")
+    }
+
 }

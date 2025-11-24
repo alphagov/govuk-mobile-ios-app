@@ -13,6 +13,21 @@ struct LocalAuthorityExplainerView: View {
         ZStack {
             Color(uiColor: .govUK.fills.surfaceModal)
             VStack {
+                HStack {
+                    Spacer()
+                    Button(
+                        action: {
+                            viewModel.dismissAction()
+                        }, label: {
+                            Text(String.common.localized("cancel"))
+                                .foregroundColor(
+                                    Color(UIColor.govUK.text.linkSecondary)
+                                )
+                                .font(Font.govUK.subheadlineSemibold)
+                        }
+                    )
+                }
+                .padding()
                 ScrollView {
                     VStack {
                         if verticalSizeClass != .compact {
@@ -41,25 +56,10 @@ struct LocalAuthorityExplainerView: View {
                     viewModel: viewModel.primaryButtonViewModel
                 )
                 .padding(.bottom, 16)
-            }.toolbar {
-                cancelButton
             }
-            .toolbarBackground(
-                Color(uiColor: .govUK.fills.surfaceModal),
-            )
-            .toolbarBackground(.visible)
             .onAppear {
                 viewModel.trackScreen(screen: self)
             }
-        }
-    }
-
-    private var cancelButton: some ToolbarContent {
-        ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
-            Button(viewModel.cancelButtonTitle) {
-                viewModel.dismissAction()
-            }
-            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
         }
     }
 }

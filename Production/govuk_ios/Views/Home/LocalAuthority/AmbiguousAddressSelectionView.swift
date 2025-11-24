@@ -14,6 +14,20 @@ struct AmbiguousAddressSelectionView: View {
         ZStack {
             Color(uiColor: .govUK.fills.surfaceModal)
             VStack {
+                HStack {
+                    Spacer()
+                    Button(
+                        action: {
+                            viewModel.dismissAction()
+                        }, label: {
+                            Text(String.common.localized("cancel"))
+                                .foregroundColor(
+                                    Color(UIColor.govUK.text.linkSecondary)
+                                )
+                                .font(Font.govUK.subheadlineSemibold)
+                        }
+                    )
+                }
                 ScrollView {
                     HeaderView(
                         title: viewModel.title,
@@ -28,13 +42,6 @@ struct AmbiguousAddressSelectionView: View {
                     .padding(.bottom, 16)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                cancelButton
-            }
-            .toolbarBackground(
-                Color(uiColor: .govUK.fills.surfaceModal),
-            )
-            .toolbarBackground(.visible)
             .onAppear {
                 viewModel.trackScreen(screen: self)
             }
@@ -56,15 +63,6 @@ struct AmbiguousAddressSelectionView: View {
             }
         }
         .padding(.horizontal, 16)
-    }
-
-    private var cancelButton: some ToolbarContent {
-        ToolbarItem(placement: ToolbarItemPlacement.confirmationAction) {
-            Button(viewModel.cancelButtonTitle) {
-                viewModel.dismissAction()
-            }
-            .foregroundColor(Color(UIColor.govUK.text.linkSecondary))
-        }
     }
 
     private func isSelected(_ address: String) -> Binding<Bool> {

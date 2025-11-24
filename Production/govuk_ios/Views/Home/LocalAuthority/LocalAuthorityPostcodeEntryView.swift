@@ -15,6 +15,21 @@ struct LocalAuthorityPostcodeEntryView: View {
         ZStack {
             Color(uiColor: .govUK.fills.surfaceModal)
             VStack {
+                HStack {
+                    Spacer()
+                    Button(
+                        action: {
+                            viewModel.dismissAction()
+                        }, label: {
+                            Text(String.common.localized("cancel"))
+                                .foregroundColor(
+                                    Color(UIColor.govUK.text.linkSecondary)
+                                )
+                                .font(Font.govUK.subheadlineSemibold)
+                        }
+                    )
+                }
+                .padding()
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
                         Text(viewModel.postcodeEntryViewTitle)
@@ -62,13 +77,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                 )
                 .disabled(viewModel.postCode.isEmpty)
                 .padding(.bottom, 16)
-            }.toolbar {
-                cancelButton
             }
-            .toolbarBackground(
-                Color(uiColor: .govUK.fills.surfaceModal),
-            )
-            .toolbarBackground(.visible)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 viewModel.trackScreen(screen: self)

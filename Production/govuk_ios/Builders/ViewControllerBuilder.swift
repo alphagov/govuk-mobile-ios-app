@@ -161,10 +161,12 @@ class ViewControllerBuilder {
         let view = AmbiguousAuthoritySelectionView(
             viewModel: viewModel
         )
-        return HostingViewController(
+        let viewController = HostingViewController(
             rootView: view,
             navigationBarTintColor: .govUK.text.linkSecondary
         )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 
     func ambiguousAddressSelectionView(
@@ -183,6 +185,10 @@ class ViewControllerBuilder {
         )
         let view = AmbiguousAddressSelectionView(
             viewModel: viewModel
+        )
+        let viewController = HostingViewController(
+            rootView: view,
+            navigationBarTintColor: .govUK.text.linkSecondary
         )
         return HostingViewController(
             rootView: view,

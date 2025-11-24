@@ -190,10 +190,8 @@ class ViewControllerBuilder {
             rootView: view,
             navigationBarTintColor: .govUK.text.linkSecondary
         )
-        return HostingViewController(
-            rootView: view,
-            navigationBarTintColor: .govUK.text.linkSecondary
-        )
+        viewController.view.backgroundColor = .govUK.fills.surfaceModal
+        return viewController
     }
 
     func faceIdSettings(

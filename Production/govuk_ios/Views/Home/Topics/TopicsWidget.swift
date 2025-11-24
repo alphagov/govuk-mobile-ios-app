@@ -29,7 +29,7 @@ struct TopicsWidget: View {
                         topicsListViewFor(topics: viewModel.allTopics)
                     }
                 }
-                .padding(.top)
+                .padding(.top, 16)
                 .background(Color(UIColor.govUK.fills.surfaceList))
                 .roundedBorder(borderColor: .clear)
             }
@@ -68,7 +68,7 @@ struct TopicsWidget: View {
                     .tag(TopicSegment.all)
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding([.horizontal, .top])
+            .padding(.horizontal, 16)
     }
 
     func topicsListViewFor(topics: [Topic]) -> some View {

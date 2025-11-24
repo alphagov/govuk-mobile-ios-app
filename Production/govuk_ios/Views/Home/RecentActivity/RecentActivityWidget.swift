@@ -13,6 +13,7 @@ struct RecentActivityWidget: View {
                     text: viewModel.emptyActivityStateTitle
                 )
                 .padding(.horizontal)
+                .padding(.top, 4)
             }
             .padding(.top)
         } else {
@@ -41,6 +42,7 @@ struct RecentActivityWidget: View {
                     content: viewModel.sections,
                     backgroundColor: UIColor.govUK.fills.surfaceBackground
                 )
+                .padding(.top, -10)
             }
         }
     }

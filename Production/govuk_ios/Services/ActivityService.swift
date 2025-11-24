@@ -6,6 +6,7 @@ protocol ActivityServiceInterface {
     func save(activity: ActivityItemCreateParams)
     func delete(objectIds: [NSManagedObjectID])
     func returnContext() -> NSManagedObjectContext
+    func activityItem(for objectId: NSManagedObjectID) throws -> ActivityItem?
 }
 
 struct ActivityService: ActivityServiceInterface {
@@ -29,5 +30,9 @@ struct ActivityService: ActivityServiceInterface {
 
     func delete(objectIds: [NSManagedObjectID]) {
         repository.delete(objectIds: objectIds)
+    }
+
+    func activityItem(for objectId: NSManagedObjectID) throws -> ActivityItem? {
+        try repository.activityItem(for: objectId)
     }
 }

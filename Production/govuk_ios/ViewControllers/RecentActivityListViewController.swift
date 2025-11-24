@@ -1,10 +1,13 @@
 import Foundation
 import UIKit
+import CoreData
 import UIComponents
 import GOVKit
 
-private typealias DataSource = UITableViewDiffableDataSource<RecentActivitySection, ActivityItem>
-private typealias Snapshot = NSDiffableDataSourceSnapshot<RecentActivitySection, ActivityItem>
+private typealias DataSource =
+UITableViewDiffableDataSource<RecentActivitySection, NSManagedObjectID>
+private typealias Snapshot =
+NSDiffableDataSourceSnapshot<RecentActivitySection, NSManagedObjectID>
 
 // swiftlint:disable:next type_body_length
 final class RecentActivityListViewController: BaseViewController {
@@ -305,15 +308,16 @@ final class RecentActivityListViewController: BaseViewController {
         navigationItem.setRightBarButton(rightNavBarButton, animated: true)
     }
 
-    private var loadCell: (UITableView, IndexPath, ActivityItem) -> GroupedListTableViewCell {
-        return { [weak self] tableView, indexPath, item in
+    private var loadCell: (UITableView, IndexPath, NSManagedObjectID) -> GroupedListTableViewCell {
+        return { [weak self] tableView, indexPath, itemId in
             let cell: GroupedListTableViewCell = tableView.dequeue(indexPath: indexPath)
-            if let section = self?.viewModel.structure.sections[indexPath.section] {
+            if let section = self?.viewModel.structure.sections[indexPath.section],
+               let activityItem = self?.viewModel.activityItem(for: itemId) {
                 cell.configure(
-                    title: item.title,
-                    description: self?.lastVisitedString(activity: item),
+                    title: activityItem.title,
+                    description: self?.lastVisitedString(activity: activityItem),
                     top: indexPath.row == 0,
-                    bottom: item == section.items.last,
+                    bottom: itemId == section.items.last,
                     showIconImage: false
                 )
             }
@@ -357,7 +361,8 @@ extension RecentActivityListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
-        guard let item = dataSource.itemIdentifier(for: indexPath)
+        guard let itemId = dataSource.itemIdentifier(for: indexPath),
+              let item = viewModel.activityItem(for: itemId)
         else { return }
         if tableView.isEditing {
             viewModel.edit(item: item)
@@ -371,7 +376,8 @@ extension RecentActivityListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didDeselectRowAt indexPath: IndexPath) {
         removeBarButtonItem.isEnabled = tableView.indexPathForSelectedRow?.isEmpty == false
-        guard let item = dataSource.itemIdentifier(for: indexPath)
+        guard let itemId = dataSource.itemIdentifier(for: indexPath),
+              let item = viewModel.activityItem(for: itemId)
         else { return }
         viewModel.removeEdit(item: item)
         configureToolbarItems()

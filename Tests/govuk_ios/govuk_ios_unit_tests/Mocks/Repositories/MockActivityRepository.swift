@@ -4,11 +4,11 @@ import CoreData
 @testable import govuk_ios
 
 class MockActivityRepository: ActivityRepositoryInterface {
+    let coreData = CoreDataRepository.arrangeAndLoad
+
     func returnContext() -> NSManagedObjectContext {
-        let coreData = CoreDataRepository.arrangeAndLoad
         return coreData.viewContext
     }
-    
 
     var _receivedSaveParams: ActivityItemCreateParams?
     func save(params: ActivityItemCreateParams) {
@@ -28,5 +28,9 @@ class MockActivityRepository: ActivityRepositoryInterface {
     var _receivedDeleteAll: Bool = false
     func deleteAll() {
         _receivedDeleteAll = true
+    }
+
+    func activityItem(for objectId: NSManagedObjectID) -> ActivityItem? {
+        try? coreData.viewContext.existingObject(with: objectId) as? ActivityItem
     }
 }

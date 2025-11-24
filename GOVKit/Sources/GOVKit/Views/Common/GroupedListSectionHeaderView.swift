@@ -7,6 +7,7 @@ public class GroupedListSectionHeaderView: UIView {
         localView.translatesAutoresizingMaskIntoConstraints = false
         localView.font = UIFont.govUK.title3Semibold
         localView.textColor = UIColor.govUK.text.primary
+        localView.accessibilityTraits = .header
         return localView
     }()
 
@@ -32,18 +33,18 @@ public class GroupedListSectionHeaderView: UIView {
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
-                equalTo: topAnchor
+                equalTo: topAnchor,
+                constant: 8
             ),
             titleLabel.rightAnchor.constraint(
                 equalTo: rightAnchor
             ),
             titleLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -8
+                constant: -10
             ),
             titleLabel.leftAnchor.constraint(
                 equalTo: leftAnchor,
-                constant: 16
             )
         ])
     }

@@ -12,7 +12,6 @@ struct RecentActivityWidget: View {
                 Spacer()
                 seeAllButton
             }
-            .padding(.top, 32)
             .padding(.horizontal, 16)
             GroupedList(
                 content: viewModel.sections,
@@ -31,7 +30,6 @@ struct RecentActivityWidget: View {
     private var emptyStateView: some View {
         VStack(alignment: .leading) {
             titleView
-                .padding(.top, 16)
                 .padding(.horizontal, 16)
             NonTappableCardView(
                 text: viewModel.emptyActivityStateTitle
@@ -39,7 +37,6 @@ struct RecentActivityWidget: View {
             .padding(.horizontal, 16)
             .padding(.top, 4)
         }
-        .padding(.top, 16)
     }
 
     private var seeAllButton: some View {

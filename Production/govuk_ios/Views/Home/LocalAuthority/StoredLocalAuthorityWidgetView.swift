@@ -29,6 +29,7 @@ struct StoredLocalAuthorityWidgetView: View {
                 .accessibilityLabel(viewModel.editButtonAltText)
             }
             .padding(.bottom, 8)
+            .padding(.top, 16)
             if viewModel.localAuthorities.count == 1,
                let item = viewModel.cardModels().first {
                 StoredLocalAuthorityCardView(model: item)

@@ -3,6 +3,7 @@ import XCTest
 import UIKit
 import GOVKit
 import CoreData
+import SwiftUI
 
 @testable import govuk_ios
 
@@ -12,28 +13,32 @@ final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {
     func test_loadInNavigationController_activities_light_renderCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(true),
-            mode: .light
+            mode: .light,
+            navBarHidden: true
         )
     }
 
     func test_loadInNavigationController_activities_dark_renderCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(true),
-            mode: .dark
+            mode: .dark,
+            navBarHidden: true
         )
     }
 
     func test_loadInNavigationController_emptyActivities_light_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(false),
-            mode: .light
+            mode: .light,
+            navBarHidden: true
         )
     }
 
     func test_loadInNavigationController_emptyActivities_dark_rendersCorrectly() {
         VerifySnapshotInNavigationController(
             viewController: viewController(false),
-            mode: .dark
+            mode: .dark,
+            navBarHidden: true
         )
     }
 
@@ -65,7 +70,7 @@ final class RecentActivityWidgetViewControllerSnapshotTests: SnapshotTestCase {
             openURLAction: { _ in }
         )
         let view = RecentActivityWidget(viewModel: viewModel)
-        return HostingViewController(rootView: view)
+        return UIHostingController(rootView: view)
     }
 }
 

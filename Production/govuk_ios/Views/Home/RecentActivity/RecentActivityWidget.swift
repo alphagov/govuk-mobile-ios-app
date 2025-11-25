@@ -7,17 +7,22 @@ struct RecentActivityWidget: View {
         if viewModel.sections.isEmpty {
             emptyStateView
         } else {
-            HStack {
-                titleView
-                Spacer()
-                seeAllButton
-            }
-            .padding(.horizontal, 16)
-            GroupedList(
-                content: viewModel.sections,
-                backgroundColor: UIColor.govUK.fills.surfaceBackground
+            VStack(
+                alignment: .leading,
+                spacing: .zero,
+                content: {
+                    HStack {
+                        titleView
+                        Spacer()
+                        seeAllButton
+                    }
+                    .padding(.horizontal, 16)
+                    GroupedList(
+                        content: viewModel.sections
+                    )
+                    .padding(.top, 16)
+                }
             )
-            .padding(.top, -10)
         }
     }
 
@@ -28,15 +33,19 @@ struct RecentActivityWidget: View {
     }
 
     private var emptyStateView: some View {
-        VStack(alignment: .leading) {
-            titleView
+        VStack(
+            alignment: .leading,
+            spacing: .zero,
+            content: {
+                titleView
+                    .padding(.horizontal, 16)
+                NonTappableCardView(
+                    text: viewModel.emptyActivityStateTitle
+                )
                 .padding(.horizontal, 16)
-            NonTappableCardView(
-                text: viewModel.emptyActivityStateTitle
-            )
-            .padding(.horizontal, 16)
-            .padding(.top, 4)
-        }
+                .padding(.top, 16)
+            }
+        )
     }
 
     private var seeAllButton: some View {

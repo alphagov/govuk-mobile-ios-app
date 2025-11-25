@@ -14,7 +14,7 @@ public struct GroupedList: View {
         if content.count >= 1 {
             ZStack {
                 Color(backgroundColor ?? .clear)
-                VStack {
+                VStack(spacing: 16) {
                     ForEach(content, id: \.rows.first?.id) { section in
                         GroupedListSectionView(
                             section: section,

@@ -97,6 +97,7 @@ struct TopicDetailView<T: TopicDetailViewModelInterface>: View {
                 content: viewModel.sections,
                 backgroundColor: UIColor.govUK.fills.surfaceBackground
             )
+            .padding(.top, 16)
             .background(Color(UIColor.govUK.fills.surfaceBackground))
     }
 

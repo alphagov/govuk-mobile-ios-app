@@ -13,7 +13,6 @@ struct UserFeedbackWidgetView: View {
                 .foregroundColor(
                     Color(UIColor.govUK.text.primary)
                 )
-                .accessibilitySortPriority(100)
             linkButton(title: viewModel.linkTitle)
         }
         .padding(.top)
@@ -40,6 +39,5 @@ struct UserFeedbackWidgetView: View {
         .accessibilityHint(
             String.common.localized("openWebLinkHint")
         )
-        .accessibilitySortPriority(50)
     }
 }

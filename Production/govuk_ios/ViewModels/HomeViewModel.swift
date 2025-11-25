@@ -156,6 +156,7 @@ class HomeViewModel: ObservableObject {
             openURLAction: openURLAction
         )
         let view = RecentActivityWidget(viewModel: viewModel)
+            .padding(.top, 32)
         return HomepageWidget(
             content: view
         )

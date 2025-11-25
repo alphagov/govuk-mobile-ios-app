@@ -29,7 +29,7 @@ struct LocalAuthorityPostcodeEntryView: View {
                         }
                     )
                 }
-                .padding()
+                .padding(16)
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
                         Text(viewModel.postcodeEntryViewTitle)

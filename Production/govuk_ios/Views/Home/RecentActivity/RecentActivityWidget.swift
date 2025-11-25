@@ -7,15 +7,12 @@ struct RecentActivityWidget: View {
         if viewModel.sections.isEmpty {
             emptyStateView
         } else {
-            VStack {
-                HStack {
-                    titleView
-                    Spacer()
-                    seeAllButton
-                }
-                .padding(.top, 16)
+            HStack {
+                titleView
+                Spacer()
+                seeAllButton
             }
-            .padding(.top, 16)
+            .padding(.top, 32)
             .padding(.horizontal, 16)
             GroupedList(
                 content: viewModel.sections,

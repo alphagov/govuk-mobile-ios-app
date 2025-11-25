@@ -27,7 +27,7 @@ struct LocalAuthorityExplainerView: View {
                         }
                     )
                 }
-                .padding()
+                .padding(16)
                 ScrollView {
                     VStack {
                         if verticalSizeClass != .compact {

@@ -72,8 +72,6 @@ struct TopicsRepositoryTests {
         let topics = sut.fetchAll()
         #expect(topics.count == 3)
 
-
-
         let first = try #require(topics.first(where: { $0.ref == "test_1" }))
         #expect(first.title == "first titlez")
         #expect(first.topicDescription == nil)
@@ -142,13 +140,22 @@ struct TopicsRepositoryTests {
     func save_persistsDataAsExpected() throws {
         let coreData = CoreDataRepository.arrangeAndLoad
         let sut = TopicsRepository(coreData: coreData)
-        Topic.arrangeMultiple(context: coreData.viewContext)
-
-        sut.save()
+        Topic.arrange(context: coreData.viewContext)
 
         let request = Topic.fetchRequest()
         let context = coreData.backgroundContext
-        let topics = try #require(try? context.fetch(request))
-        #expect(topics.count == 4)
+        var topics: [Topic]?
+
+        context.performAndWait {
+            topics = try? context.fetch(request)
+        }
+        #expect(topics?.count == 0)
+
+        sut.save()
+
+        context.performAndWait {
+            topics = try? context.fetch(request)
+        }
+        #expect(topics?.count == 1)
     }
 }

@@ -30,4 +30,9 @@ class MockActivityService: ActivityServiceInterface {
         _receivedDeleteAll = true
     }
 
+    func activityItem(for objectId: NSManagedObjectID) throws -> ActivityItem? {
+        try _stubbedFetchResultsController
+            .managedObjectContext
+            .existingObject(with: objectId) as? ActivityItem
+    }
 }

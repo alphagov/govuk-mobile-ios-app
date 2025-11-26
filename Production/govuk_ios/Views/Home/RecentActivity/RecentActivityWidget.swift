@@ -5,43 +5,24 @@ struct RecentActivityWidget: View {
     @ObservedObject var viewModel: RecentActivityHomepageWidgetViewModel
     var body: some View {
         if viewModel.sections.isEmpty {
-            VStack(alignment: .leading) {
-                titleView
-                    .padding(.top, 16)
-                    .padding(.horizontal)
-                NonTappableCardView(
-                    text: viewModel.emptyActivityStateTitle
-                )
-                .padding(.horizontal)
-            }
-            .padding(.top)
+            emptyStateView
         } else {
-            VStack {
-                HStack {
-                    titleView
-                    Spacer()
-                    Button(
-                        action: {
-                            viewModel.seeAllAction()
-                        }, label: {
-                            Text(viewModel.seeAllButtonTitle)
-                                .foregroundColor(
-                                    Color(UIColor.govUK.text.buttonSecondary)
-                                )
-                                .font(Font.govUK.subheadlineSemibold)
-                        }
+            VStack(
+                alignment: .leading,
+                spacing: .zero,
+                content: {
+                    HStack {
+                        titleView
+                        Spacer()
+                        seeAllButton
+                    }
+                    .padding(.horizontal, 16)
+                    GroupedList(
+                        content: viewModel.sections
                     )
+                    .padding(.top, 16)
                 }
-                .padding(.top, 16)
-            }
-            .padding(.top)
-            .padding(.horizontal)
-            VStack {
-                GroupedList(
-                    content: viewModel.sections,
-                    backgroundColor: UIColor.govUK.fills.surfaceBackground
-                )
-            }
+            )
         }
     }
 
@@ -49,5 +30,36 @@ struct RecentActivityWidget: View {
         Text(viewModel.title)
             .font(Font.govUK.title3Semibold)
             .foregroundColor(Color(UIColor.govUK.text.primary))
+            .accessibility(addTraits: .isHeader)
+    }
+
+    private var emptyStateView: some View {
+        VStack(
+            alignment: .leading,
+            spacing: .zero,
+            content: {
+                titleView
+                    .padding(.horizontal, 16)
+                NonTappableCardView(
+                    text: viewModel.emptyActivityStateTitle
+                )
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+            }
+        )
+    }
+
+    private var seeAllButton: some View {
+        Button(
+            action: {
+                viewModel.seeAllAction()
+            }, label: {
+                Text(viewModel.seeAllButtonTitle)
+                    .foregroundColor(
+                        Color(UIColor.govUK.text.buttonSecondary)
+                    )
+                    .font(Font.govUK.subheadlineSemibold)
+            }
+        )
     }
 }

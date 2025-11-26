@@ -26,6 +26,7 @@ struct EditTopicsView: View {
         .onAppear {
             viewModel.trackScreen(screen: self)
         }
+        .background(Color(.govUK.fills.surfaceModal))
     }
 
     private var doneButton: some ToolbarContent {

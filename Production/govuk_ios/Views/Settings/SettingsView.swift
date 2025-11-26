@@ -23,7 +23,7 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                             content: viewModel.listContent,
                             backgroundColor: UIColor.govUK.fills.surfaceBackground
                         )
-                        .padding(.top, 24)
+                        .padding([.top, .bottom], 24)
                     }
                     .alert(isPresented: $viewModel.displayNotificationSettingsAlert) {
                         Alert(title: Text(viewModel.notificationSettingsAlertTitle),
@@ -43,7 +43,6 @@ struct SettingsView<T: SettingsViewModelInterface>: View {
                     }
                 }
             }
-            .padding(.top, 12)
         }
         .onAppear {
             viewModel.trackScreen(screen: self)
